@@ -37,7 +37,7 @@ You can also use Plotly and IPython to make interactive graphs.
 - [Plotly graphs in the Washington Post, embedded as an iframe](www.washingtonpost.com/blogs/wonkblog/wp/2013/06/14/do-low-taxes-on-the-rich-leave-the-middle-class-with-lower-wages/)
 
 Use cases
-_________ 
+------------
 
 - Stats, physics, and sciences, for stats, fits, and functions [beta distribution](https://plot.ly/~jackp/705/)
 
