@@ -5,7 +5,7 @@ def readme():
 		return f.read()
 
 setup(name='plotly',
-      version='0.5.1',
+      version='0.5.3',
       description='',
       url='https://plot.ly/api/python',
       author='Chris P',
