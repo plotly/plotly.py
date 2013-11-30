@@ -12,7 +12,7 @@ def signup(un, email):
 	:un: <string> username
 	:email: <string> email address
 	'''
-	payload = {'version': '0.4', 'un': un, 'email': email, 'platform':'Python'}
+	payload = {'version': '0.5.2', 'un': un, 'email': email, 'platform':'Python'}
 	r = requests.post('https://plot.ly/apimkacct', data=payload)
 	r = json.loads(r.text)
 	if 'error' in r.keys():
@@ -34,10 +34,11 @@ class plotly:
 		self.__filename = None
 		self.__fileopt = None
 		self.verbose = verbose
+		self.open = False
 
 	def iplot(self, *args, **kwargs):
 		''' for use in ipython notebooks '''
-		res = self.plot(*args, **kwargs)
+		res = self.__callplot(*args, **kwargs)
 		width = kwargs.get('width', 600)
 		height = kwargs.get('height', 600)
 		s = '<iframe height="'+str(height+50)+'" id="igraph" scrolling="no" seamless="seamless" src="'+res['url']+'/'+str(width)+'/'+str(height)+'" width="'+str(width+50)+'"></iframe>'
@@ -48,6 +49,13 @@ class plotly:
 			return s
 
 	def plot(self, *args, **kwargs):
+		res = self.__callplot(*args, **kwargs)
+		if res['error'] == '' and self.open:
+			from webbrowser import open as wbopen
+			wbopen(res['url'])
+		return res
+
+	def __callplot(self, *args, **kwargs):
 		''' Make a plot in plotly.
 		Two interfaces:
 			1 - ploty.plot(x1, y1[,x2,y2,...],**kwargs)
@@ -131,27 +139,58 @@ class plotly:
 		r = self.__makecall(args, un, key, origin, kwargs)
 		return r
 
-	def __makecall(self, args, un, key, origin, kwargs):
-		version = '0.5'
-		platform = 'Python'
-		
-		class NumpyAwareJSONEncoder(json.JSONEncoder):
-			def default(self, obj):
-				try:
-					import numpy
-					if isinstance(obj, numpy.ndarray) and obj.ndim == 1:
-						return [x for x in obj]
-					return json.JSONEncoder.default(self, obj)
-				except:
-					return json.JSONEncoder.default(self, obj)
+	class __plotlyJSONEncoder(json.JSONEncoder):
+		def numpyJSONEncoder(self, obj):
+			try:
+				import numpy
+				if type(obj).__module__ == numpy.__name__:
+					l = obj.tolist()
+					d = self.datetimeJSONEncoder(l) 
+					return d if d else l
+			except:
+				pass
+			return None
+		def datetimeJSONEncoder(self, obj):
+			# if datetime or iterable of datetimes, convert to a string that plotly understands
+			import datetime
+			try:
+				if isinstance(obj,(datetime.datetime, datetime.date)):
+					return obj.strftime('%Y-%m-%d %H:%M:%S')
+				elif isinstance(obj[0],(datetime.datetime, datetime.date)):
+					return [o.strftime('%Y-%m-%d %H:%M:%S') for o in obj]
+			except:
+				pass
+			return None
+		def pandasJSONEncoder(self, obj):
+			try:
+				import pandas
+				if isinstance(obj, pandas.DataFrame):
+					return obj.to_json()
+			except:
+				pass
+			return None
+		def default(self, obj):
+			try:
+				return json.dumps(obj)
+			except TypeError as e:
+				encoders = (self.datetimeJSONEncoder, self.numpyJSONEncoder, self.pandasJSONEncoder)
+				for encoder in encoders:
+					s = encoder(obj)
+					if s:
+						return s
+				raise e
+			return json.JSONEncoder.default(self,obj)
 
-		args = json.dumps(args, cls=NumpyAwareJSONEncoder)
-		kwargs = json.dumps(kwargs, cls=NumpyAwareJSONEncoder)
+	def __makecall(self, args, un, key, origin, kwargs):
+		version = '0.5.2'
+		platform = 'Python'
+
+		args = json.dumps(args, cls=self.__plotlyJSONEncoder)
+		kwargs = json.dumps(kwargs, cls=self.__plotlyJSONEncoder)
 		url = 'https://plot.ly/clientresp'
 		payload = {'platform': platform, 'version': version, 'args': args, 'un': un, 'key': key, 'origin': origin, 'kwargs': kwargs}
 		r = requests.post(url, data=payload)
 		r = json.loads(r.text)
-
 		if 'error' in r.keys():
 			print(r['error'])
 		if 'warning' in r.keys():
