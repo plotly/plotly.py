@@ -37,7 +37,7 @@ Use cases
 ------------
 
 - Stats, physics, and sciences, for stats, fits, and functions [beta distribution](https://plot.ly/~jackp/705/)
-
+<a href="https://plot.ly/~jackp/705/" target="_blank"></a>
 - Algebra, geometry, and calculus [Bessel Functions](https://plot.ly/~jackp/914/)
 
 - Finance and business [Tesla and Apple Stock](https://plot.ly/~jackp/903/)
