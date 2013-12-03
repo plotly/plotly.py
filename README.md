@@ -7,7 +7,7 @@ in your browser. Plotly's online graphing tools can interface with your desktop 
 Gallery Examples
 -------------
 
-Find these examples and the code used to create them [here](https://plot.ly/api)
+Find these examples and the code used to create them [here](https://plot.ly/api).
 
 
   ![](https://f.cloud.github.com/assets/5034604/1587845/c6098d92-5242-11e3-816e-10d96a545efa.png "Example plots")
@@ -36,23 +36,23 @@ IPython-Plotly Notebooks on NBViewer
 Use cases
 ------------
 
-- Stats, physics, and sciences, for stats, fits, and functions [beta distribution](https://plot.ly/~jackp/705/)
-<a href="https://plot.ly/~jackp/705/" target="_blank"></a>
-- Algebra, geometry, and calculus [Bessel Functions](https://plot.ly/~jackp/914/)
+- Stats, physics, and sciences, for stats, fits, and functions [beta distribution](https://plot.ly/~jackp/705/).
 
-- Finance and business [Tesla and Apple Stock](https://plot.ly/~jackp/903/)
+- Algebra, geometry, and calculus [Bessel Functions](https://plot.ly/~jackp/914/).
 
-- Stock Data [Bitcoin Prices](https://plot.ly/~jackp/992/)
+- Finance and business [Tesla and Apple Stock](https://plot.ly/~jackp/903/).
 
-- Design [Barnsley Fern](https://plot.ly/~chris/403/)
+- Stock Data [Bitcoin Prices](https://plot.ly/~jackp/992/).
 
-- Makers [Stream and graph data from Arduino and Raspberry PI](https://plot.ly/~flann321/9/)
+- Design [Barnsley Fern](https://plot.ly/~chris/403/).
 
-- Engineering [System Latency](https://plot.ly/~carmeloosh/84/)
+- Makers [Stream and graph data from Arduino and Raspberry PI](https://plot.ly/~flann321/9/).
 
-- Academia and Journalism [City of New York & Boroughs Population](https://plot.ly/~Dreamshot/113/)
+- Engineering [System Latency](https://plot.ly/~carmeloosh/84/).
 
-- Sports Journalism [Score Distribution Stats for NFL, NHL, MLB, and NBA](https://plot.ly/sdqlheatmaps)
+- Academia and Journalism [City of New York & Boroughs Population](https://plot.ly/~Dreamshot/113/).
+
+- Sports Journalism [Score Distribution Stats for NFL, NHL, MLB, and NBA](https://plot.ly/sdqlheatmaps).
 
 
 Feedback
