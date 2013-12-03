@@ -36,23 +36,23 @@ IPython-Plotly Notebooks on NBViewer
 Use cases
 ------------
 
-- Stats, physics, and sciences, for stats, fits, and functions [beta distribution](https://plot.ly/~jackp/705/).
+- Stats, physics, and sciences, for stats, fits, and functions: [beta distribution](https://plot.ly/~jackp/705/).
 
-- Algebra, geometry, and calculus [Bessel Functions](https://plot.ly/~jackp/914/).
+- Algebra, geometry, and calculus: [Bessel Functions](https://plot.ly/~jackp/914/).
 
-- Finance and business [Tesla and Apple Stock](https://plot.ly/~jackp/903/).
+- Finance and business: [Tesla and Apple Stock](https://plot.ly/~jackp/903/).
 
-- Stock Data [Bitcoin Prices](https://plot.ly/~jackp/992/).
+- Stock Data: [Bitcoin Prices](https://plot.ly/~jackp/992/).
 
-- Design [Barnsley Fern](https://plot.ly/~chris/403/).
+- Design: [Barnsley Fern](https://plot.ly/~chris/403/).
 
-- Makers [Stream and graph data from Arduino and Raspberry PI](https://plot.ly/~flann321/9/).
+- Makers: [Stream and graph data from Arduino and Raspberry PI](https://plot.ly/~flann321/9/).
 
-- Engineering [System Latency](https://plot.ly/~carmeloosh/84/).
+- Engineering: [System Latency](https://plot.ly/~carmeloosh/84/).
 
-- Academia and Journalism [City of New York & Boroughs Population](https://plot.ly/~Dreamshot/113/).
+- Academia and Journalism: [City of New York & Boroughs Population](https://plot.ly/~Dreamshot/113/).
 
-- Sports Journalism [Score Distribution Stats for NFL, NHL, MLB, and NBA](https://plot.ly/sdqlheatmaps).
+- Sports Journalism: [Score Distribution Stats for NFL, NHL, MLB, and NBA](https://plot.ly/sdqlheatmaps).
 
 
 Feedback
