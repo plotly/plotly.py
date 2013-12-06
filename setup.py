@@ -1,11 +1,11 @@
 from setuptools import setup
-
+exec(open('plotly/version.py').read())
 def readme():
 	with open('README.txt') as f:
 		return f.read()
 
 setup(name='plotly',
-      version='0.5.3',
+      version=__version__,
       description='',
       url='https://plot.ly/api/python',
       author='Chris P',

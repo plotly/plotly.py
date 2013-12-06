@@ -1,6 +1,6 @@
 import requests
 import json
-
+from .version import __version__
 
 def signup(un, email):
 	''' Remote signup to plot.ly and plot.ly API
@@ -12,7 +12,7 @@ def signup(un, email):
 	:un: <string> username
 	:email: <string> email address
 	'''
-	payload = {'version': '0.5.3', 'un': un, 'email': email, 'platform':'Python'}
+	payload = {'version': __version__, 'un': un, 'email': email, 'platform':'Python'}
 	r = requests.post('https://plot.ly/apimkacct', data=payload)
 	r = json.loads(r.text)
 	if 'error' in r.keys():
@@ -139,56 +139,55 @@ class plotly:
 		r = self.__makecall(args, un, key, origin, kwargs)
 		return r
 
-		class __plotlyJSONEncoder(json.JSONEncoder):
-			def numpyJSONEncoder(self, obj):
-				try:
-					import numpy
-					if type(obj).__module__.split('.')[0] == numpy.__name__:
-						l = obj.tolist()
-						d = self.datetimeJSONEncoder(l) 
-						return d if d else l
-				except:
-					pass
-				return None
-			def datetimeJSONEncoder(self, obj):
-				# if datetime or iterable of datetimes, convert to a string that plotly understands
-				import datetime
-				try:
-					if isinstance(obj,(datetime.datetime, datetime.date)):
-						return obj.strftime('%Y-%m-%d %H:%M:%S')
-					elif isinstance(obj[0],(datetime.datetime, datetime.date)):
-						return [o.strftime('%Y-%m-%d %H:%M:%S') for o in obj]
-				except:
-					pass
-				return None
-			def pandasJSONEncoder(self, obj):
-				try:
-					import pandas
-					if isinstance(obj, pandas.DataFrame):
-						return obj.to_json()
-				except:
-					pass
-				return None
-			def default(self, obj):
-				try:
-					return json.dumps(obj)
-				except TypeError as e:
-					encoders = (self.datetimeJSONEncoder, self.numpyJSONEncoder, self.pandasJSONEncoder)
-					for encoder in encoders:
-						s = encoder(obj)
-						if s:
-							return s
-					raise e
-				return json.JSONEncoder.default(self,obj)
+	class __plotlyJSONEncoder(json.JSONEncoder):
+		def numpyJSONEncoder(self, obj):
+			try:
+				import numpy
+				if type(obj).__module__.split('.')[0] == numpy.__name__:
+					l = obj.tolist()
+					d = self.datetimeJSONEncoder(l) 
+					return d if d is not None else l
+			except:
+				pass
+			return None
+		def datetimeJSONEncoder(self, obj):
+			# if datetime or iterable of datetimes, convert to a string that plotly understands
+			import datetime
+			try:
+				if isinstance(obj,(datetime.datetime, datetime.date)):
+					return obj.strftime('%Y-%m-%d %H:%M:%S')
+				elif isinstance(obj[0],(datetime.datetime, datetime.date)):
+					return [o.strftime('%Y-%m-%d %H:%M:%S') for o in obj]
+			except:
+				pass
+			return None
+		def pandasJSONEncoder(self, obj):
+			try:
+				import pandas
+				if isinstance(obj, pandas.DataFrame):
+					return obj.to_json()
+			except:
+				pass
+			return None
+		def default(self, obj):
+			try:
+				return json.dumps(obj)
+			except TypeError as e:
+				encoders = (self.datetimeJSONEncoder, self.numpyJSONEncoder, self.pandasJSONEncoder)
+				for encoder in encoders:
+					s = encoder(obj)
+					if s is not None:
+						return s
+				raise e
+			return json.JSONEncoder.default(self,obj)
 
 	def __makecall(self, args, un, key, origin, kwargs):
-		version = '0.5.3'
 		platform = 'Python'
 
 		args = json.dumps(args, cls=self.__plotlyJSONEncoder)
 		kwargs = json.dumps(kwargs, cls=self.__plotlyJSONEncoder)
 		url = 'https://plot.ly/clientresp'
-		payload = {'platform': platform, 'version': version, 'args': args, 'un': un, 'key': key, 'origin': origin, 'kwargs': kwargs}
+		payload = {'platform': platform, 'version': __version__, 'args': args, 'un': un, 'key': key, 'origin': origin, 'kwargs': kwargs}
 		r = requests.post(url, data=payload)
 		r = json.loads(r.text)
 		if 'error' in r.keys():
