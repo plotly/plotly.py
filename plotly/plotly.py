@@ -164,8 +164,8 @@ class plotly:
 		def pandasJSONEncoder(self, obj):
 			try:
 				import pandas
-				if isinstance(obj, pandas.DataFrame):
-					return obj.to_json()
+				if isinstance(obj, pandas.Series):
+					return obj.tolist()
 			except:
 				pass
 			return None
