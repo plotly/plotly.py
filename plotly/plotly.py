@@ -1,5 +1,7 @@
 import requests
 import json
+import warnings
+
 from .version import __version__
 
 def signup(un, email):
@@ -190,15 +192,14 @@ class plotly:
 		payload = {'platform': platform, 'version': __version__, 'args': args, 'un': un, 'key': key, 'origin': origin, 'kwargs': kwargs}
 		r = requests.post(url, data=payload)
 		r = json.loads(r.text)
-		if 'error' in r.keys():
+		if 'error' in r and r['error'] != '':
 			print(r['error'])
-		if 'warning' in r.keys():
-			print(r['warning'])
-		if 'message' in r.keys():
-			if self.verbose:
-				print(r['message'])
+		if 'warning' in r and r['warning'] != '':
+			warnings.warn(r['warning'])
+		if 'message' in r and r['message'] != '' and self.verbose:
+			print(r['message'])
 			
-		if 'filename' in r.keys():
+		if 'filename' in r:
 			self.__filename = r['filename']
 		return r
 
