@@ -43,7 +43,14 @@ class plotly:
 		res = self.__callplot(*args, **kwargs)
 		width = kwargs.get('width', 600)
 		height = kwargs.get('height', 600)
-		s = '<iframe height="'+str(height+50)+'" id="igraph" scrolling="no" seamless="seamless" src="'+res['url']+'/'+str(width)+'/'+str(height)+'" width="'+str(width+50)+'"></iframe>'
+		s = '<iframe height="%s" id="igraph" scrolling="no" seamless="seamless" src="%s" width="%s"></iframe>' %\
+			(height+50, "/".join(map(str, [res['url'], width, height])), width+50)
+		try:
+			# see, if we are in the SageMath Cloud
+			from sage_salvus import html
+			return html(s, hide=False)
+		except:
+			pass
 		try:
 			from IPython.display import HTML
 			return HTML(s)
@@ -171,11 +178,21 @@ class plotly:
 			except:
 				pass
 			return None
+		def sageJSONEncoder(self, obj):
+			try:
+				from sage.all import RR, ZZ
+				if obj in RR:
+					return float(obj)
+				elif obj in ZZ:
+					return int(obj)
+			except:
+				pass
+			return None
 		def default(self, obj):
 			try:
 				return json.dumps(obj)
 			except TypeError as e:
-				encoders = (self.datetimeJSONEncoder, self.numpyJSONEncoder, self.pandasJSONEncoder)
+				encoders = (self.datetimeJSONEncoder, self.numpyJSONEncoder, self.pandasJSONEncoder, self.sageJSONEncoder)
 				for encoder in encoders:
 					s = encoder(obj)
 					if s is not None:
