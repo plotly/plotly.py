@@ -28,10 +28,10 @@ def signup(un, email):
 	return r
 
 class plotly:
-	def __init__(self, username=None, key=None,verbose=True):
-		''' plotly constructor. Supply username and api key.
+	def __init__(self, username_or_email=None, key=None,verbose=True):
+		''' plotly constructor. Supply username or email and api key.
 		'''
-		self.un = username
+		self.un = username_or_email
 		self.key = key
 		self.__filename = None
 		self.__fileopt = None
