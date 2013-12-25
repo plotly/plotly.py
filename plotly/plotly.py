@@ -16,13 +16,13 @@ def signup(un, email):
 	'''
 	payload = {'version': __version__, 'un': un, 'email': email, 'platform':'Python'}
 	r = requests.post('https://plot.ly/apimkacct', data=payload)
+	r.raise_for_status()
 	r = json.loads(r.text)
-	if 'error' in r.keys():
-		if not r['error'] == '':
-			print(r['error'])
-	if 'warning' in r.keys():
-		print(r['warning'])
-	if 'message' in r.keys():
+	if 'error' in r and r['error'] != '':
+		print(r['error'])
+	if 'warning' in r and r['warning'] != '':
+		warnings.warn(r['warning'])
+	if 'message' in r and r['message'] != '':
 		print(r['message'])
 
 	return r
@@ -36,13 +36,18 @@ class plotly:
 		self.__filename = None
 		self.__fileopt = None
 		self.verbose = verbose
+		self.open = True
+
+	def ion(self):
+		self.open = True
+	def ioff(self):
 		self.open = False
 
 	def iplot(self, *args, **kwargs):
 		''' for use in ipython notebooks '''
 		res = self.__callplot(*args, **kwargs)
 		width = kwargs.get('width', 600)
-		height = kwargs.get('height', 600)
+		height = kwargs.get('height', 450)
 		s = '<iframe height="%s" id="igraph" scrolling="no" seamless="seamless" src="%s" width="%s"></iframe>' %\
 			(height+50, "/".join(map(str, [res['url'], width, height])), width+50)
 		try:
@@ -59,7 +64,7 @@ class plotly:
 
 	def plot(self, *args, **kwargs):
 		res = self.__callplot(*args, **kwargs)
-		if res['error'] == '' and self.open:
+		if 'error' in res and res['error'] == '' and self.open:
 			from webbrowser import open as wbopen
 			wbopen(res['url'])
 		return res
@@ -69,7 +74,7 @@ class plotly:
 		Two interfaces:
 			1 - ploty.plot(x1, y1[,x2,y2,...],**kwargs)
 			where x1, y1, .... are lists, numpy arrays
-			2 - plot.plot([data1, ...], **kwargs)
+			2 - plot.plot([data1[, data2, ...], **kwargs)
 			where data1 is a dict that is at least
 			{'x': x1, 'y': y1} but can contain more styling and sharing options.
 			kwargs accepts:
@@ -83,14 +88,14 @@ class plotly:
 			:param r['filename']: The filename of the plot in your plotly account.
 		'''
 
-		un = kwargs['un'] if 'un' in kwargs.keys() else self.un
-		key = kwargs['key'] if 'key' in kwargs.keys() else self.key
+		un = kwargs['un'] if 'un' in kwargs else self.un
+		key = kwargs['key'] if 'key' in kwargs else self.key
 		if not un or not key:
 			raise Exception('Not Signed in')
 
-		if not 'filename' in kwargs.keys():
+		if not 'filename' in kwargs:
 			kwargs['filename'] = self.__filename
-		if not 'fileopt' in kwargs.keys():
+		if not 'fileopt' in kwargs:
 			kwargs['fileopt'] = self.__fileopt
 	
 		origin = 'plot'
@@ -208,6 +213,7 @@ class plotly:
 		url = 'https://plot.ly/clientresp'
 		payload = {'platform': platform, 'version': __version__, 'args': args, 'un': un, 'key': key, 'origin': origin, 'kwargs': kwargs}
 		r = requests.post(url, data=payload)
+		r.raise_for_status()
 		r = json.loads(r.text)
 		if 'error' in r and r['error'] != '':
 			print(r['error'])
