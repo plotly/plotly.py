@@ -222,8 +222,6 @@ class plotly:
 		if 'message' in r and r['message'] != '' and self.verbose:
 			print(r['message'])
 			
-		if 'filename' in r:
-			self.__filename = r['filename']
 		return r
 
 
