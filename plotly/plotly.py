@@ -166,12 +166,21 @@ class plotly:
 			return None
 		def datetimeJSONEncoder(self, obj):
 			# if datetime or iterable of datetimes, convert to a string that plotly understands
+			# format as %Y-%m-%d %H:%M:%S.%f, %Y-%m-%d %H:%M:%S, or %Y-%m-%d depending on what non-zero resolution was provided
 			import datetime
 			try:
 				if isinstance(obj,(datetime.datetime, datetime.date)):
-					return obj.strftime('%Y-%m-%d %H:%M:%S')
+					if obj.microsecond != 0:
+						return obj.strftime('%Y-%m-%d %H:%M:%S.%f')
+					elif obj.second != 0 or obj.minute != 0 or obj.hour != 0:
+						return obj.strftime('%Y-%m-%d %H:%M:%S')
+					else:
+						return obj.strftime('%Y-%m-%d')
 				elif isinstance(obj[0],(datetime.datetime, datetime.date)):
-					return [o.strftime('%Y-%m-%d %H:%M:%S') for o in obj]
+					return [o.strftime('%Y-%m-%d %H:%M:%S.%f') if o.microsecond != 0 else
+						o.strftime('%Y-%m-%d %H:%M:%S') if o.second != 0 or o.minute != 0 or o.hour != 0 else
+						o.strftime('%Y-%m-%d')
+						for o in obj]
 			except:
 				pass
 			return None
