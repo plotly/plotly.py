@@ -1,7 +1,7 @@
 from setuptools import setup
 exec(open('plotly/version.py').read())
 def readme():
-	with open('README.txt') as f:
+	with open('plotly/pypi_description.txt') as f:
 		return f.read()
 
 setup(name='plotly',

@@ -1,0 +1,39 @@
+Metadata-Version: 1.1
+Name: plotly
+Version: 0.5.8
+Summary: Python plotting library for collaborative, interactive, web-based, publication-quality graphs.
+Home-page: https://plot.ly/api/python
+Author: Chris P
+Author-email: chris@plot.ly
+License: MIT
+Description: The Plotly Python Plotting Library lets you make collaborative, interactive, publication-quality graphs. 
+        
+        Main features for plotting are: 
+        
+        - Complete control over every aspect or your graph, including colors, size, font, layout, and styling.
+        - Plotly can make line charts, scatter plots, histograms, 2D histograms, box plots, heatmaps, and error bars. Plotly also supports log axes, and date axes.
+        - Data and graphs are always together.
+        - Easily add data to plots, or stream your data in from elsewhere--the web or your Raspberry Pi.
+        - A styling GUI. It is convenient to start off by making your graph with Python code, then style it how you want in the GUI. Thus, if you want to explore a different layout, graph type, or edit something, you can do so with the GUI instead editing code. The means it’s fast and easy to find out “how would this look if it were a [graph type]”? 
+        - Save custom themes from graphs, then apply themes to new data. That way, you won’t need to re-make graphs with a similar styling again and again. 
+        
+        That means no more emailing data and spreadsheets around, having to download graphs or take static screenshots and put them in a deck or email you can’t access anymore. You can simply send a Plotly URL to your team, or share your project with them so you can edit together.
+        
+        Plotly also has a deep Python Integration:
+        
+        - Works with IPython (see https://github.com/plotly/IPython-plotly). 
+        - Interactivity with Python shell (NumPy supported) on https://plot.ly.
+        
+        Extensive options for sharing and collaboration:
+        
+        - API graphing returns a URL that can easily be shared (e.g., https://plot.ly/~bchartoff/344/), and all graphs can be downloaded, exported, embedded, and shared for collaboration. 
+        - Keep graphs private, share publicly with a URL, or share with your team. 
+        - Invite others to collaborate with you and edit together.
+        - Plotly sharing supports comments, so others can both comment on the graph and graph right where it lives
+        - Embed graphs as an iframe--here’s an example in the Washington Post (wapo.st/10i6mhs)--or download graphs for articles, and include the URL in your graph. That way, others can go online to access your interactive graph and data.
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Topic :: Scientific/Engineering :: Visualization
