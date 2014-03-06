@@ -27,6 +27,30 @@ def signup(un, email):
 
 	return r
 
+def embed(url, width="100%", height=525):
+	return display(url, width, height, notebook=False)
+
+def display(url, width="100%", height=525, notebook=True):
+	if isinstance( width, ( int, long ) ):
+		s = '<iframe height="%s" id="igraph" scrolling="no" seamless="seamless" src="%s" width="%s"></iframe>' %\
+        	(height+25, "/".join(map(str,[url, width, height])), width+25)
+	else:
+		s = '<iframe height="%s" id="igraph" scrolling="no" seamless="seamless" src="%s" width="%s"></iframe>' %\
+		(height+25, url, width)
+	if not notebook:
+		return s
+	try:
+		# see, if we are in the SageMath Cloud
+		from sage_salvus import html
+		return html(s, hide=False)
+	except:
+		pass
+	try:
+		from IPython.display import HTML
+		return HTML(s)
+	except:
+		return s
+
 class plotly:
 	def __init__(self, username_or_email=None, key=None,verbose=True):
 		''' plotly constructor. Supply username or email and api key.
@@ -37,6 +61,8 @@ class plotly:
 		self.__fileopt = None
 		self.verbose = verbose
 		self.open = True
+		self.width = '100%'
+		self.height = 525
 
 	def ion(self):
 		self.open = True
@@ -46,27 +72,18 @@ class plotly:
 	def iplot(self, *args, **kwargs):
 		''' for use in ipython notebooks '''
 		res = self.__callplot(*args, **kwargs)
-		width = kwargs.get('width', 600)
-		height = kwargs.get('height', 450)
-		s = '<iframe height="%s" id="igraph" scrolling="no" seamless="seamless" src="%s" width="%s"></iframe>' %\
-			(height+50, "/".join(map(str, [res['url'], width, height])), width+50)
-		try:
-			# see, if we are in the SageMath Cloud
-			from sage_salvus import html
-			return html(s, hide=False)
-		except:
-			pass
-		try:
-			from IPython.display import HTML
-			return HTML(s)
-		except:
-			return s
+		width = kwargs.get('width', self.width)
+		height = kwargs.get('height', self.height)
+		return display(res['url'], width, height)
 
 	def plot(self, *args, **kwargs):
 		res = self.__callplot(*args, **kwargs)
 		if 'error' in res and res['error'] == '' and self.open:
-			from webbrowser import open as wbopen
-			wbopen(res['url'])
+			try:
+				from webbrowser import open as wbopen
+				wbopen(res['url'])
+			except:
+				pass
 		return res
 
 	def __callplot(self, *args, **kwargs):
