@@ -1,6 +1,7 @@
 import requests
 import json
 import warnings
+import httplib
 
 from .version import __version__
 
@@ -250,5 +251,53 @@ class plotly:
 			
 		return r
 
+class stream:
+	def __init__(self, token):
+		''' plotly stream constructor
+		token found at https://plot.ly/settings
+		'''
+		self.token = token
+		self.connected = False
 
+	def init(self):
+		''' Initialize a streaming connection to plotly        
+		'''
+		self.conn = httplib.HTTPConnection('stream.plot.ly', 80)
+		self.conn.putrequest('POST', '/')
+		self.conn.putheader('Host', 'stream.plot.ly')
+		self.conn.putheader('User-Agent', 'Python-Plotly')
+		self.conn.putheader('Transfer-Encoding', 'chunked')
+		self.conn.putheader('Connection', 'close')
+		self.conn.putheader('plotly-streamtoken', self.token)
+		self.conn.endheaders()
+		self.connected=True
 
+	def write(self, data):
+		''' Write data to plotly's streaming servers
+
+		data is a plotly formatted data dict
+		with data keys 'x', 'y', 'text', 'z', 'marker', 'line'
+		'x', 'y', 'text', and 'z' can have values of strings, numbers, or lists
+		'marker', and 'line' have dicts as values with keys 'size', 'color', 'symbol'
+
+		Examples:
+		{'x': 1, 'y': 2}
+		{'x': [1, 2, 3], 'y': [10, 20, 30]}
+		{'x': 1, 'y': 3, 'text': 'hover text'}
+		{'x': 1, 'y': 3, 'marker': {'color': 'blue'}}
+		{'z': [[1,2,3], [4,5,6]]}
+		'''
+		if not self.connected:
+			self.init()
+		# plotly's streaming API takes new-line separated json objects
+		msg = json.dumps(data)+'\n'
+		msglen = format(len(msg), 'x')
+		# chunked encoding requests contain the messege length in hex, \r\n, and then the message
+		self.conn.send('{msglen}\r\n{msg}\r\n'.format(msglen=msglen, msg=msg))
+
+	def close(self):
+		''' Close connection to plotly's streaming servers
+		'''
+		self.conn.send('0\r\n\r\n')
+		self.conn.close()
+		self.connected=False
