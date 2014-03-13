@@ -87,7 +87,7 @@ class plotly:
 				pass
 		return res
 
-	def fig_to_plotly(self, fig, **kwargs):
+	def mplfig_to_plotly(self, fig, **kwargs):
 		try:
 			import matplotlylib
 		except as e:
