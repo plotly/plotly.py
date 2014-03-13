@@ -87,13 +87,13 @@ class plotly:
 				pass
 		return res
 
-	def fig2plotly(self, fig):
+	def fig2plotly(self, fig, **kwargs):
 		try:
 			import matplotlylib
 		except as e:
-			print("Uh oh! matplotlylib not installed. Install with pip (depends on matplotlib):\n$ sudo pip install matplotlylib")
+			print("Aw, snap! matplotlylib not installed. Install with pip (depends on matplotlib):\n$ sudo pip install matplotlylib")
 			raise e
-		matplotlylib.fig2plotly(fig, username=self.username, key=self.api_key)
+		matplotlylib.fig2plotly(fig, username=self.un, api_key=self.key, **kwargs)
 
 	def __callplot(self, *args, **kwargs):
 		''' Make a plot in plotly.
