@@ -6,7 +6,7 @@ Main features for plotting are:
 - Plotly can make line charts, scatter plots, histograms, 2D histograms, box plots, heatmaps, and error bars. Plotly also supports log axes, and date axes.
 - Data and graphs are always together.
 - Easily add data to plots, or stream your data in from elsewhere--the web or your Raspberry Pi.
-- A styling GUI. It is convenient to start off by making your graph with Python code, then style it how you want in the GUI. Thus, if you want to explore a different layout, graph type, or edit something, you can do so with the GUI instead editing code. The means it’s fast and easy to find out “how would this look if it were a [graph type]”? 
+- A styling GUI. It is convenient to start off by making your graph with Python code, then style it how you want in the GUI. Thus, if you want to explore a different layout, graph type, or edit something, you can do so with the GUI instead editing code. The means it’s fast and easy to find out "how would this look if it were a [graph type]"? 
 - Save custom themes from graphs, then apply themes to new data. That way, you won’t need to re-make graphs with a similar styling again and again. 
 
 That means no more emailing data and spreadsheets around, having to download graphs or take static screenshots and put them in a deck or email you can’t access anymore. You can simply send a Plotly URL to your team, or share your project with them so you can edit together.
