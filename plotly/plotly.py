@@ -87,14 +87,6 @@ class plotly:
 				pass
 		return res
 
-	def mplfig_to_plotly(self, fig, **kwargs):
-		try:
-			import matplotlylib
-		except as e:
-			print("Aw, snap! matplotlylib not installed. Install with pip (depends on matplotlib):\n$ sudo pip install matplotlylib")
-			raise e
-		return matplotlylib.fig_to_plotly(fig, username=self.un, api_key=self.key, **kwargs)
-
 	def __callplot(self, *args, **kwargs):
 		''' Make a plot in plotly.
 		Two interfaces:
