@@ -3,7 +3,7 @@ graph_objs_meta
 ============
 
 A module that contains language data for plotly. There is not meant to be
-functionality here, only some definitions for use with the graph_objs module.
+functionality here, only definitions for use with the graph_objs module.
 
 """
 
@@ -11,39 +11,24 @@ functionality here, only some definitions for use with the graph_objs module.
 
 INFO = dict(
 
-    base=dict(
-        kind='base',
-        doc="""A base class for all objects that style a figure in plotly.
+    plotlylist=dict(),
 
-        A PlotlyDict can be instantiated like any dict object. This class
-        offers some useful recursive methods that can be used by higher-level
-        subclasses and containers so long as all plot objects are instantiated
-        as a subclass of PlotlyDict. Each PlotlyDict should be instantiated
-        with a `kind` keyword argument. This defines the special _info
-        dictionary for the object.
+    data=dict(),
 
-        Any available methods that hold for a dict hold for a PlotlyDict.
+    annotations=dict(),
 
-        """,
-        safe=[],
-        valid=[],
-        repair_vals=dict(),
-        repair_keys=dict()
-    ),
+    plotlydict=dict(),
 
-    data=dict(
-        kind='data',
-        doc="""A general data class for plotly.
+    trace=dict(),
 
-        This class is meant to hold any type of allowable plotly data.
+    heatmap=dict(),
 
-        """,
+    scatter=dict(
         safe=['name',
               'mode',
               'y',
               'x',
               'type',
-              'bardir',
               'xaxis',
               'yaxis'],
         valid=['textfont',
@@ -56,7 +41,6 @@ INFO = dict(
                'type',
                'error_y',
                'opacity',
-               'bardir',
                'showlegend',
                'xaxis',
                'yaxis'],
@@ -71,7 +55,6 @@ INFO = dict(
             type="the type of plot this data represents, e.g., 'scatter'",
             error_y="an Error_Y instance, PlotlyDict(kind='error_y')",
             opacity="the degree to which you can see through the plot object",
-            bardir="if type is 'bar', bardir describes bar orientation",
             showlegend="toggle whether or not data will show up in legend",
             xaxis="the xaxis this data belongs to, e.g., 'x2'",
             yaxis="the yaxis this data belongs to, e.g., 'y3'"
@@ -87,7 +70,6 @@ INFO = dict(
             error_y="dict, PlotlyDict, Error_Y",
             type="str",
             opacity="float in [0,1]",
-            bardir="str, 'h' or 'v'",
             showlegend="bool",
             xaxis="str",
             yaxis="str"
@@ -98,12 +80,6 @@ INFO = dict(
     ),
 
     layout=dict(
-        kind='layout',
-        doc="""doc for layout.
-
-        ain't it good to ya.
-
-        """,
         safe=['title',
               'width',
               'height',
@@ -188,10 +164,6 @@ INFO = dict(
     ),
 
     xaxis=dict(
-        kind='xaxis',
-        doc="""XAxis doc.
-
-        """,
         safe=['range',
               'type',
               'showticklabels',
@@ -303,10 +275,6 @@ INFO = dict(
     ),
 
     yaxis=dict(
-        kind='yaxis',
-        doc="""YAxis doc.
-
-        """,
         safe=['range',
               'type',
               'showticklabels',
@@ -418,10 +386,6 @@ INFO = dict(
     ),
 
     marker=dict(
-        kind='marker',
-        doc="""Marker doc.
-
-        """,
         safe=['symbol',
               'size'],
         valid=['symbol',
@@ -446,10 +410,6 @@ INFO = dict(
     ),
 
     legend=dict(
-        kind='legend',
-        doc="""Legend doc.
-
-        """,
         safe=['traceorder'],
         valid=['bgcolor',
                'bordercolor',
@@ -470,10 +430,6 @@ INFO = dict(
     ),
 
     line=dict(
-        kind='line',
-        doc="""Line doc.
-
-        """,
         safe=['dash'],
         valid=['dash',
                'color',
@@ -494,10 +450,6 @@ INFO = dict(
     ),
 
     margin=dict(
-        kind='margin',
-        doc="""Margin doc.
-
-        """,
         safe=['l',
                'r',
                'b',
@@ -519,10 +471,6 @@ INFO = dict(
     ),
 
     font=dict(
-        kind='font',
-        doc="""Font doc.
-
-        """,
         safe=[],
         valid=['color',
                'size',
@@ -540,10 +488,6 @@ INFO = dict(
     ),
 
     annotation=dict(
-        kind='annotation',
-        doc="""Annotation doc.
-
-        """,
         safe=['text',
               'xref',
               'yref',
@@ -626,7 +570,10 @@ INFO = dict(
         repair_vals=dict(xref=['x1', 'x'],
                          yref=['y1', 'y']),
         repair_keys=dict()
-    )
+    ),
 
+    error_y=dict(),
+
+    error_x=dict()
 )
 
