@@ -1,3 +1,11 @@
+"""
+plotly
+======
+
+A module that contains the plotly class, a liaison between the user
+and ploty's servers.
+
+"""
 import requests
 import json
 import warnings

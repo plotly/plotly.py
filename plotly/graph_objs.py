@@ -1,16 +1,62 @@
 """
 graph_objs
-===========
+==========
 
 A module that understands plotly language and can manage the json
-structures. This module defines two classes: PlotlyList and PlotlyDict. The
-former is a generic container inheriting from `list` and the latter inherits
-from `dict` and is used to contain all information for each part of a plotly
-figure.
+structures. This module defines two base classes: PlotlyList and PlotlyDict.
+The former is a generic container inheriting from `list` and the latter
+inherits from `dict` and is used to contain all information for each part of
+a plotly figure.
+
+Development rules:
+
+* A dict/list with the same entries as a PlotlyDict/PlotlyList should look
+exactly the same once a call is made to plot.
+
+* Only mutate object structure when users ASK for it.
+
+* It should always be possible to get a dict/list JSON representation from a
+graph_objs object and it should always be possible to make a graph_objs object
+from a dict/list JSON representation.
 
 """
-
 from . graph_objs_meta import INFO
+from . exceptions import InvalidListItemError, InvalidKeyError
+
+# TODO: BIG ONE, how should exceptions bubble up in this inheritance scheme?
+    # TODO: related, WHAT exceptions should bubble up?
+# TODO: slap users on the wrist if they instantiate PlotlyDict/List or PlotlyTrace?
+# TODO: add subplot functionality to Figure. FORCE EMPTY FIGURE!!!
+# TODO: take out repair_vals / repair_keys
+# TODO: hide base modules in some way? _PlotlyList, _PlotlyDict, _PlotlyTrace?
+# TODO: map NO_TRACE_KEY to Scatter type by default in Data
+# TODO: add update method to base objs.
+# TODO: hard wrap LONG __doc__ lines, help looks bad right now.
+
+
+class DictMeta(type):
+    """A meta class for PlotlyDict class creation.
+
+    The sole purpose of this meta class is to properly create the __doc__
+    attribute so that running help(*), where * is a subclass of PlotlyDict,
+    will return information about key-value pairs for that object.
+
+    """
+    def __new__(mcs, name, bases, attrs):
+        class_name = name.lower()
+        doc = "\n".join([line.lstrip()
+                         for line in attrs['__doc__'].splitlines()])
+        if len(INFO[class_name]):
+            doc += "Valid keys:\n\n"
+            for key in INFO[class_name]:
+                try:  # TODO: remove this catch ASAP!
+                    val_types = INFO[class_name][key]['val_types']
+                    descr = INFO[class_name][key]['description']
+                    doc += "\t{} ({}): \n\t\t{}\n".format(key, val_types, descr)
+                except KeyError:
+                    pass
+        attrs['__doc__'] = doc.expandtabs(4)
+        return super(DictMeta, mcs).__new__(mcs, name, bases, attrs)
 
 
 class PlotlyList(list):
@@ -26,125 +72,67 @@ class PlotlyList(list):
 
     Any available methods that hold for a list object hold for a PlotlyList.
 
+    Validation checking is preformed upon instantiation.
+
     """
     def __init__(self, *args):
-        """Initialize PlotlyList.
+        super(PlotlyList, self).__init__(*args)
+        self.to_graph_objs()
+        self.validate()  # TODO: IF this checks for missing, this is wrong here!
 
-        Differs from list initialization only in that it forces all new items
-        to be added through the `append`.
+    def _get_class_name(self):
+        return self.__class__.__name__.lower()
 
-        Positional arguments:
-        args -- a list of positional arguments of any length
-
-        """
-        super(PlotlyList, self).__init__(self)
-        for arg in args:
-            self.append(arg)
-
-    def __setitem__(self, key, value):
-        if not isinstance(value, PlotlyDict):
-            raise ValueError("Only PlotlyDict or subclasses thereof can "
-                             "populate a PlotlyList.")
-        super(PlotlyList, self).__setitem__(key, value)
-
-    def append(self, arg):
-        if not isinstance(arg, PlotlyDict):
-            raise ValueError("Only PlotlyDict or subclasses thereof can "
-                             "populate a PlotlyList.")
-        super(PlotlyList, self).append(arg)
-
-    def get_json(self):
-        """Return a json structure representation for the PlotlyList."""
-        l = list()
-        for pd in self:
-            l.append(pd.get_json())
-        return l
+    def to_graph_objs(self):  # TODO: PlotlyList([{}]) == PlotlyList([PlotlyTrace()])?
+        for index, entry in enumerate(self):
+            if isinstance(entry, PlotlyDict):
+                entry.to_graph_objs()
+            elif isinstance(entry, dict):
+                try:
+                    obj_type = entry['type']
+                    try:
+                        _class = STRING_TO_CLASS[obj_type]
+                        self[index] = _class(**entry)
+                        # TODO: explicitly call for a new to_graphs?
+                    except KeyError:
+                        raise InvalidListItemError("Entry had invalid 'type'")
+                except KeyError:
+                    raise InvalidListItemError("Entry didn't have key: 'type'")
+            else:
+                raise InvalidListItemError("Invalid entry, {}".format(entry))
 
     def strip_style(self):
-        """Strip style information from each of the PlotlyList's entries."""
-        for pd in self:
-            pd.strip_style()
+        self.to_graph_objs()
+        for plotly_dict in self:
+            plotly_dict.strip_style()
 
-    def clean(self):
-        """Remove any entries that are NoneType from PlotlyLists's entries."""
-        for item in self:
-            item.clean()
-
-    def check(self):
-        """Check each entry in the PlotlyList for invalid keys."""
-        for item in self:
-            item.check()
-
-    def repair_vals(self):
-        """Some unfortunately placed functionality for use with mplexporter."""
-        for item in self:
-            item.repair_vals()
-
-    def repair_keys(self):
-        """Some unfortunately placed functionality for use with mplexporter."""
-        for item in self:
-            item.repair_keys()
+    def validate(self):  # TODO: should this check for MISSING, required stuff?
+        self.to_graph_objs()  # change everything to PlotlyList/Dict objects...
+        for plotly_dict in self:
+            plotly_dict.validate()  # recursively check the rest of the obj
 
 
 class PlotlyDict(dict):
-    """A base class for all objects that style a figure in plotly.
-    
+    """A base dict class for all objects that style a figure in plotly.
+
     A PlotlyDict can be instantiated like any dict object. This class
     offers some useful recursive methods that can be used by higher-level
     subclasses and containers so long as all plot objects are instantiated
     as a subclass of PlotlyDict. Each PlotlyDict should be instantiated
     with a `kind` keyword argument. This defines the special _info
     dictionary for the object.
-    
+
     Any available methods that hold for a dict hold for a PlotlyDict.
-    
 
     """
+    __metaclass__ = DictMeta
 
-    def __init__(self, kind=None, **kwargs):
-        if kind is not None:
-            kwargs['_info'] = INFO[kind]
-        else:
-            kwargs['_info'] = INFO['base']
+    def __init__(self, **kwargs):
         super(PlotlyDict, self).__init__(**kwargs)
+        self.validate()
 
-    def __str__(self):
-        return str(self.get_json())
-
-    def _pop_info(self):
-        """Remove `private` info from PlotlyDict.
-
-        This is only temporary and should be used only by the PlotlyDict class.
-
-        """
-        return self.pop('_info')
-
-    def _push_info(self, _info):
-        """Add `private` info back to PlotlyDict.
-
-        This is only temporary and should be used only by the PlotlyDict class.
-
-        """
-        self['_info'] = _info
-
-    def get_json(self):
-        """Get a JSON representation for the PlotlyDict.
-
-        This function changes all of the internal PlotlyDicts and PlotlyLists
-        into normal lists and dicts. Though duck-typing should allow
-        PlotlyLists and PlotlyDicts to be sent to plotly directly, this is a
-        safer approach for compatibility.
-
-        """
-        d = dict()
-        _info = self._pop_info()
-        for key, val in self.items():
-            try:
-                d[key] = val.get_json()
-            except AttributeError:
-                d[key] = val
-        self._push_info(_info)
-        return d
+    def _get_class_name(self):
+        return self.__class__.__name__.lower()
 
     def strip_style(self):
         """Strip style from the current representation of the plotly figure.
@@ -152,263 +140,273 @@ class PlotlyDict(dict):
         All PlotlyDicts and PlotlyLists are guaranteed to survive the
         stripping process, though they made be left empty. This is allowable.
         The other attributes that will not be deleted are stored in the
-        graph_objs_meta module under INFO['*']['safe'] for each `kind` of plotly
-        object.
+        graph_objs_meta.py module under INFO['*']['safe'] for each `kind` of
+        plotly object.
 
         """
-        _info = self._pop_info()
+        class_name = self._get_class_name()
         keys = self.keys()
         for key in keys:
             try:
                 self[key].strip_style()
             except AttributeError:
-                if key not in _info['safe']:
+                if INFO[class_name][key]['type'] == 'style':
                     del self[key]
-        self._push_info(_info)
 
-    def clean(self):
-        """Recursively rid PlotlyDict of `None` entries.
+    def to_graph_objs(self):
+        """Walk obj, convert dicts and lists to plotly graph objs.
 
-        This only rids a PlotlyDict of `None` entries, not empty dictionaries or
-        lists.
+        For each key in the object, if it corresponds to a special key that
+        should be associated with a graph object, the ordinary dict or list
+        will be reinitialized as a special PlotlyDict or PlotlyList of the
+        appropriate `kind`.
 
         """
-        del_keys = [key for key in self if self[key] is None]
-        for key in del_keys:
-            del self[key]
-        for val in self.values():
-            try:
-                val.clean()
-            except AttributeError:
-                pass
+        keys = self.keys()
+        for key in keys:
+            if key in INFO:
+                _class = STRING_TO_CLASS[key]  # gets class constructor
+                obj = _class(**self.pop(key))
+                obj.to_graph_objs()
+                self[key] = obj
 
-    def check(self):
+    def validate(self):  # TODO: validate values too?
         """Recursively check the validity of the keys in a PlotlyDict.
 
         The valid keys are stored in plotly_word.py under INFO['*']['valid']
         for each `kind` of plotly object.
 
         """
-        _info = self._pop_info()
+        self.to_graph_objs()  # change everything to 'checkable' objs
+        class_name = self._get_class_name()
         for key, val in self.items():
             try:
-                val.check()
+                val.validate()
             except AttributeError:
-                if key not in _info['valid']:
-                    raise KeyError("Invalid key, '{}', for PlotlyDict kind, "
-                                   "'{}'".format(key, _info['kind']))
-        self._push_info(_info)
-
-    def repair_vals(self):
-        """Repair known common value problems.
-
-        Plotly objects that require this functionality define a
-        non-trivial INFO['*']['repair_vals'] `dict` in graph_objs_meta.py. The
-        structure of these dictionaries are as follows:
-
-        INFO['*']['repair_vals'] =
-            dict(key_1=[suspect_val_1, correct_val_1], ...)
-
-        """
-        _info = self._pop_info()
-        for key in self:
-            try:
-                self[key].repair_vals()
-            except AttributeError:
-                try:
-                    if self[key] == _info['repair_vals'][key][0]:
-                        self[key] = _info['repair_vals'][key][1]
-                except KeyError:
-                    pass
-        self._push_info(_info)
-        self.clean()
-
-    def repair_keys(self):
-        """Repair known common key problems.
-
-        Plotly objects that require this functionality define a private
-        non-trivial INFO['*']['repair_keys'] `dict` in graph_objs_meta.py. The
-        structure of these dictionaries are as follows:
-
-        INFO['*']['repair_keys'] = dict(suspect_key_1=correct_key_1, ...)
-
-        """
-        _info = self._pop_info()
-        for key in self:
-            if key in _info['repair_keys']:
-                self[_info['repair_keys'][key]] = self.pop(key)
-        for key in self:
-            try:
-                self[key].repair_keys()
-            except AttributeError:
-                pass
-        self._push_info(_info)
-        self.clean()
+                if key not in INFO[class_name]:
+                    raise InvalidKeyError("Invalid key, '{}', for class, '{}'".
+                                          format(key, self.__class__))
 
 
-class Data(PlotlyDict):
+# TODO: complete Data, Annotations,
+
+class Data(PlotlyList):
+    """Data doc.
+
+    """
+    def validate(self):  # TODO: should this check for MISSING, required stuff?
+        self.to_graph_objs()  # change everything to PlotlyList/Dict objects...
+        for plotlytrace in self:
+            if not issubclass(plotlytrace.__class__, PlotlyTrace):
+                raise InvalidListItemError("PlotlyTrace Only!")
+            plotlytrace.validate()  # recursively check the rest of the obj
+
+
+class Annotations(PlotlyList):
+    """Annotations doc.
+
+    """
+    def validate(self):  # TODO: should this check for MISSING, required stuff?
+        self.to_graph_objs()  # change everything to PlotlyList/Dict objects...
+        for annotation in self:
+            if not issubclass(annotation.__class__, Annotation):
+                raise InvalidListItemError("Annotation Only!")
+            annotation.validate()  # recursively check the rest of the obj
+
+
+class PlotlyTrace(PlotlyDict):
     """A general data class for plotly.
-    
-    This class is meant to hold any type of allowable plotly data.
-    
-    Valid keys:
-    
-        textfont (dict, PlotlyDict, Font): 
-            a Font instance, PlotlyDict(kind='font')
-        name (str): 
-            label for the data, this shows up in legend, etc.
-        marker (dict, PlotlyDict, Marker): 
-            a Marker instance, PlotlyDict(kind='marker')
-        mode (str): 
-            style of data, e.g. 'lines+markers'
-        y (int, float, etc.): 
-            the y data
-        x (int, float, etc.): 
-            the x data
-        line (dict, PlotlyDict, Line): 
-            a Line instance, PlotlyDict(kind='line')
-        type (str): 
-            the type of plot this data represents, e.g., 'scatter'
-        error_y (dict, PlotlyDict, Error_Y): 
-            an Error_Y instance, PlotlyDict(kind='error_y')
-        opacity (float in [0,1]): 
-            the degree to which you can see through the plot object
-        bardir (str, 'h' or 'v'): 
-            if type is 'bar', bardir describes bar orientation
-        showlegend (bool): 
-            toggle whether or not data will show up in legend
-        xaxis (str): 
-            the xaxis this data belongs to, e.g., 'x2'
-        yaxis (str): 
-            the yaxis this data belongs to, e.g., 'y3'
+
+    """
+    pass
+
+
+class Bar(PlotlyTrace):
+    """A bar chart dictionary.
 
     """
     def __init__(self, **kwargs):
-        super(Data, self).__init__(kind='data', **kwargs)
+        kwargs['type'] = 'bar'  # TODO: should this happen now or later?
+        super(Bar, self).__init__(**kwargs)
 
-class Layout(PlotlyDict):
-    """doc for layout.
-    
-    ain't it good to ya.
-    
-    Valid keys:
-    
-        title (blah): 
-            blah
-        xaxis (blah): 
-            blah
-        yaxis (blah): 
-            blah
-        legend (blah): 
-            blah
-        width (blah): 
-            blah
-        height (blah): 
-            blah
-        autosize (blah): 
-            blah
-        margin (blah): 
-            blah
-        paper_bgcolor (blah): 
-            blah
-        plot_bgcolor (blah): 
-            blah
-        barmode (blah): 
-            blah
-        bargap (blah): 
-            blah
-        bargroupgap (blah): 
-            blah
-        boxmode (blah): 
-            blah
-        boxgap (blah): 
-            blah
-        boxgroupgap (blah): 
-            blah
-        font (blah): 
-            blah
-        titlefont (blah): 
-            blah
-        dragmode (blah): 
-            blah
-        hovermode (blah): 
-            blah
-        separators (blah): 
-            blah
-        hidesources (blah): 
-            blah
-        showlegend (blah): 
-            blah
-        annotations (blah): 
-            blah
+
+class Box(PlotlyTrace):
+    """A box plot dictionary.
 
     """
     def __init__(self, **kwargs):
-        super(Layout, self).__init__(kind='layout', **kwargs)
+        kwargs['type'] = 'box'  # TODO: should this happen now or later?
+        super(Box, self).__init__(**kwargs)
+
+
+class Contour(PlotlyTrace):
+    """A contour plot dictionary.
+
+    """
+    def __init__(self, **kwargs):
+        kwargs['type'] = 'contour'  # TODO: should this happen now or later?
+        super(Contour, self).__init__(**kwargs)
+
+
+class Heatmap(PlotlyTrace):
+    """A heatmap dictionary.
+
+    """
+    def __init__(self, **kwargs):
+        kwargs['type'] = 'heatmap'  # TODO: should this happen now or later?
+        super(Heatmap, self).__init__(**kwargs)
+
+
+class Histogramx(PlotlyTrace):
+    """A histogramx dictionary.
+
+    """
+    def __init__(self, **kwargs):
+        kwargs['type'] = 'histogramx'  # TODO: should this happen now or later?
+        super(Histogramx, self).__init__(**kwargs)
+
+
+class Histogramy(PlotlyTrace):
+    """A histgramy dictionary.
+
+    """
+    def __init__(self, **kwargs):
+        kwargs['type'] = 'histogramy'  # TODO: should this happen now or later?
+        super(Histogramy, self).__init__(**kwargs)
+
+
+class Histogram2d(PlotlyTrace):
+    """A histogram2d dictionary.
+
+    """
+    def __init__(self, **kwargs):
+        kwargs['type'] = 'histogram2d'  # TODO: should this happen now or later?
+        super(Histogram2d, self).__init__(**kwargs)
+
+
+class Scatter(PlotlyTrace):
+    """A scatter plot dictionary.
+
+    """
+    def __init__(self, **kwargs):
+        kwargs['type'] = 'scatter'  # TODO: should this happen now or later?
+        super(Scatter, self).__init__(**kwargs)
+
+
+class Annotation(PlotlyDict):
+    """Annotation doc.
+
+    """
+    pass
+
+
+class ErrorX(PlotlyDict):
+    """ErrorX doc.
+
+    """
+    pass
+
+
+class ErrorY(PlotlyDict):
+    """ErrorY doc.
+
+    """
+    pass
+
+
+class Figure(PlotlyDict):
+    """Documentation for Figure.
+
+    """
+    pass
+
 
 class Font(PlotlyDict):
     """Font doc.
-    
-    Valid keys:
-    
-        color (blah): 
-            blah
-        size (blah): 
-            blah
-        family (blah): 
-            blah
 
     """
-    def __init__(self, **kwargs):
-        super(Font, self).__init__(kind='font', **kwargs)
+    pass
+
+
+class Layout(PlotlyDict):
+    """Documentation for Layout.
+
+    """
+    pass
+
+
+class Legend(PlotlyDict):
+    """Legend doc.
+
+    """
+    pass
+
 
 class Line(PlotlyDict):
     """Line doc.
-    
-    Valid keys:
-    
-        dash (blah): 
-            blah
-        color (blah): 
-            blah
-        width (blah): 
-            blah
-        opacity (blah): 
-            blah
 
     """
-    def __init__(self, **kwargs):
-        super(Line, self).__init__(kind='line', **kwargs)
+    pass
+
 
 class Marker(PlotlyDict):
     """Marker doc.
-    
-    Valid keys:
-    
-        symbol (blah): 
-            blah
-        line (blah): 
-            blah
-        size (blah): 
-            blah
-        color (blah): 
-            blah
-        opacity (blah): 
-            blah
 
     """
-    def __init__(self, **kwargs):
-        super(Marker, self).__init__(kind='marker', **kwargs)
-
-"""
-Classes inheriting from PlotlyDict:
+    pass
 
 
-ErrorY
-ErrorX
+class Margin(PlotlyDict):
+    """Margin doc.
+
+    """
+    pass
 
 
-Classes inheriting from PlotlyList:
-AnnotationList
-DataList
-"""
+class TitleFont(PlotlyDict):
+    """TitleFont doc.
+
+    """
+    pass
+
+
+class XAxis(PlotlyDict):
+    """XAxis doc.
+
+    """
+    pass
+
+
+class YAxis(PlotlyDict):
+    """YAxis doc.
+
+    """
+    pass
+
+
+STRING_TO_CLASS = dict(
+    plotlylist=PlotlyList,
+    data=Data,
+    annotations=Annotations,
+    plotlydict=PlotlyDict,
+    plotlytrace=PlotlyTrace,
+    bar=Bar,
+    box=Box,
+    contour=Contour,
+    heatmap=Heatmap,
+    hisogram2d=Histogram2d,
+    hisogramx=Histogramx,
+    hisogramy=Histogramy,
+    scatter=Scatter,
+    annotation=Annotation,
+    figure=Figure,
+    font=Font,
+    layout=Layout,
+    legend=Legend,
+    line=Line,
+    margin=Margin,
+    marker=Marker,
+    titlefont=TitleFont,
+    xaxis=XAxis,
+    yaxis=YAxis
+)
