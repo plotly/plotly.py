@@ -5,9 +5,18 @@ graph_objs_meta
 A module that contains language data for plotly. There is not meant to be
 functionality here, only definitions for use with the graph_objs module.
 
+The formatting of the INFO keys is VERY specific. Each key is exactly:
+
+graph_obj.Obj.__class__.__name__.lower()
+
+Where Obj is a class subclassing from list or dict in the graph_objs module.
+This must by strictly followed.
+
 """
 
-# TODO: match valid KEY TYPES with valid VALUE TYPES!!
+# TODO: fill in all 'valid' keys
+# TODO: match all 'valid' keys to appropriate 'types' dict
+# TODO: match all 'valid' keys to appropriate 'descriptors' dict
 
 INFO = dict(
 
@@ -17,11 +26,27 @@ INFO = dict(
 
     annotations=dict(),
 
-    plotlydict=dict(),
+    plotlydict=dict(
+        valid=[] # this forces non-trivial PlotlyDict objs to fail validation.
+    ),
 
-    trace=dict(),
+    trace=dict(
+        valid=[] # this forces non-trivial Trace objs to fail validation.
+    ),
+
+    bar=dict(),
+
+    box=dict(),
+
+    contour=dict(),
 
     heatmap=dict(),
+
+    histogram2d=dict(),
+
+    histogramx=dict(),
+
+    histogramy=dict(),
 
     scatter=dict(
         safe=['name',
@@ -58,7 +83,7 @@ INFO = dict(
             showlegend="toggle whether or not data will show up in legend",
             xaxis="the xaxis this data belongs to, e.g., 'x2'",
             yaxis="the yaxis this data belongs to, e.g., 'y3'"
-            ),
+        ),
         types=dict(
             textfont="dict, PlotlyDict, Font",
             name="str",
@@ -73,9 +98,113 @@ INFO = dict(
             showlegend="bool",
             xaxis="str",
             yaxis="str"
-            ),
+        ),
         repair_vals=dict(xaxis=['x1', None],
                          yaxis=['y1', None]),
+        repair_keys=dict()
+    ),
+
+    annotation=dict(
+        safe=['text',
+              'xref',
+              'yref',
+              'showarrow',
+              'align',
+              'xanchor',
+              'yanchor',
+              'ay',
+              'ax',
+              'y',
+              'x'],
+        valid=['text',
+               'bordercolor',
+               'borderwidth',
+               'borderpad',
+               'bgcolor',
+               'xref',
+               'yref',
+               'showarrow',
+               'arrowwidth',
+               'arrowcolor',
+               'arrowhead',
+               'arrowsize',
+               'tag',
+               'font',
+               'opacity',
+               'align',
+               'xanchor',
+               'yanchor',
+               'ay',
+               'ax',
+               'y',
+               'x'],
+        types=dict(
+            text='blah',
+            bordercolor='blah',
+            borderwidth='blah',
+            borderpad='blah',
+            bgcolor='blah',
+            xref='blah',
+            yref='blah',
+            showarrow='blah',
+            arrowwidth='blah',
+            arrowcolor='blah',
+            arrowhead='blah',
+            arrowsize='blah',
+            tag='blah',
+            font='blah',
+            opacity='blah',
+            align='blah',
+            xanchor='blah',
+            yanchor='blah',
+            ay='blah',
+            ax='blah',
+            y='blah',
+            x='blah'),
+        descriptors=dict(
+            text='blah',
+            bordercolor='blah',
+            borderwidth='blah',
+            borderpad='blah',
+            bgcolor='blah',
+            xref='blah',
+            yref='blah',
+            showarrow='blah',
+            arrowwidth='blah',
+            arrowcolor='blah',
+            arrowhead='blah',
+            arrowsize='blah',
+            tag='blah',
+            font='blah',
+            opacity='blah',
+            align='blah',
+            xanchor='blah',
+            yanchor='blah',
+            ay='blah',
+            ax='blah',
+            y='blah',
+            x='blah'),
+        repair_vals=dict(xref=['x1', 'x'],
+                         yref=['y1', 'y']),
+        repair_keys=dict()
+    ),
+
+    figure=dict(),
+
+    font=dict(
+        safe=[],
+        valid=['color',
+               'size',
+               'family'],
+        types=dict(
+            color='blah',
+            size='blah',
+            family='blah'),
+        descriptors=dict(
+            color='blah',
+            size='blah',
+            family='blah'),
+        repair_vals=dict(),
         repair_keys=dict()
     ),
 
@@ -163,6 +292,92 @@ INFO = dict(
                          yaxis1='yaxis')
     ),
 
+    legend=dict(
+        safe=['traceorder'],
+        valid=['bgcolor',
+               'bordercolor',
+               'font',
+               'traceorder'],
+        types=dict(
+            bgcolor='blah',
+            bordercolor='blah',
+            font='blah',
+            traceorder='blah'),
+        descriptors=dict(
+            bgcolor='blah',
+            bordercolor='blah',
+            font='blah',
+            traceorder='blah'),
+        repair_vals=dict(),
+        repair_keys=dict()
+    ),
+
+    line=dict(
+        safe=['dash'],
+        valid=['dash',
+               'color',
+               'width',
+               'opacity'],
+        types=dict(
+            dash='blah',
+            color='blah',
+            width='blah',
+            opacity='blah'),
+        descriptors=dict(
+            dash='blah',
+            color='blah',
+            width='blah',
+            opacity='blah'),
+        repair_vals=dict(),
+        repair_keys=dict()
+    ),
+
+    margin=dict(
+        safe=['l',
+              'r',
+              'b',
+              't',
+              'pad'],
+        # valid=['l',
+        #        'r',
+        #        'b',
+        #        't',
+        #        'pad'],
+        # types=dict(
+        #     l='blah',
+        #     r='blah',
+        #     b='blah',
+        #     t='blah',
+        #     pad='blah'),
+        repair_vals=dict(),
+        repair_keys=dict()
+    ),
+
+
+    marker=dict(
+        safe=['symbol',
+              'size'],
+        valid=['symbol',
+               'line',
+               'size',
+               'color',
+               'opacity'],
+        types=dict(
+            symbol='blah',
+            line='blah',
+            size='blah',
+            color='blah',
+            opacity='blah'),
+        descriptors=dict(
+            symbol='blah',
+            line='blah',
+            size='blah',
+            color='blah',
+            opacity='blah'),
+        repair_vals=dict(),
+        repair_keys=dict()
+    ),
+
     xaxis=dict(
         safe=['range',
               'type',
@@ -194,7 +409,7 @@ INFO = dict(
                'gridcolor',
                'gridwidth',
                'autorange',
-               'rangemode',
+               # 'rangemode',
                'autotick',
                'zeroline',
                'zerolinecolor',
@@ -305,7 +520,7 @@ INFO = dict(
                'gridcolor',
                'gridwidth',
                'autorange',
-               'rangemode',
+               # 'rangemode',
                'autotick',
                'zeroline',
                'zerolinecolor',
@@ -385,195 +600,9 @@ INFO = dict(
         repair_keys=dict()
     ),
 
-    marker=dict(
-        safe=['symbol',
-              'size'],
-        valid=['symbol',
-               'line',
-               'size',
-               'color',
-               'opacity'],
-        types=dict(
-            symbol='blah',
-            line='blah',
-            size='blah',
-            color='blah',
-            opacity='blah'),
-        descriptors=dict(
-            symbol='blah',
-            line='blah',
-            size='blah',
-            color='blah',
-            opacity='blah'),
-        repair_vals=dict(),
-        repair_keys=dict()
-    ),
+    errorx=dict(),
 
-    legend=dict(
-        safe=['traceorder'],
-        valid=['bgcolor',
-               'bordercolor',
-               'font',
-               'traceorder'],
-        types=dict(
-            bgcolor='blah',
-            bordercolor='blah',
-            font='blah',
-            traceorder='blah'),
-        descriptors=dict(
-            bgcolor='blah',
-            bordercolor='blah',
-            font='blah',
-            traceorder='blah'),
-        repair_vals=dict(),
-        repair_keys=dict()
-    ),
+    errory=dict(),
 
-    line=dict(
-        safe=['dash'],
-        valid=['dash',
-               'color',
-               'width',
-               'opacity'],
-        types=dict(
-            dash='blah',
-            color='blah',
-            width='blah',
-            opacity='blah'),
-        descriptors=dict(
-            dash='blah',
-            color='blah',
-            width='blah',
-            opacity='blah'),
-        repair_vals=dict(),
-        repair_keys=dict()
-    ),
-
-    margin=dict(
-        safe=['l',
-               'r',
-               'b',
-               't',
-               'pad'],
-        valid=['l',
-               'r',
-               'b',
-               't',
-               'pad'],
-        types=dict(
-            l='blah',
-            r='blah',
-            b='blah',
-            t='blah',
-            pad='blah'),
-        repair_vals=dict(),
-        repair_keys=dict()
-    ),
-
-    font=dict(
-        safe=[],
-        valid=['color',
-               'size',
-               'family'],
-        types=dict(
-            color='blah',
-            size='blah',
-            family='blah'),
-        descriptors=dict(
-            color='blah',
-            size='blah',
-            family='blah'),
-        repair_vals=dict(),
-        repair_keys=dict()
-    ),
-
-    annotation=dict(
-        safe=['text',
-              'xref',
-              'yref',
-              'showarrow',
-              'align',
-              'xanchor',
-              'yanchor',
-              'ay',
-              'ax',
-              'y',
-              'x'],
-        valid=['text',
-               'bordercolor',
-               'borderwidth',
-               'borderpad',
-               'bgcolor',
-               'xref',
-               'yref',
-               'showarrow',
-               'arrowwidth',
-               'arrowcolor',
-               'arrowhead',
-               'arrowsize',
-               'tag',
-               'font',
-               'opacity',
-               'align',
-               'xanchor',
-               'yanchor',
-               'ay',
-               'ax',
-               'y',
-               'x'],
-        types=dict(
-            text='blah',
-            bordercolor='blah',
-            borderwidth='blah',
-            borderpad='blah',
-            bgcolor='blah',
-            xref='blah',
-            yref='blah',
-            showarrow='blah',
-            arrowwidth='blah',
-            arrowcolor='blah',
-            arrowhead='blah',
-            arrowsize='blah',
-            tag='blah',
-            font='blah',
-            opacity='blah',
-            align='blah',
-            xanchor='blah',
-            yanchor='blah',
-            ay='blah',
-            ax='blah',
-            y='blah',
-            x='blah'),
-        descriptors=dict(
-            text='blah',
-            bordercolor='blah',
-            borderwidth='blah',
-            borderpad='blah',
-            bgcolor='blah',
-            xref='blah',
-            yref='blah',
-            showarrow='blah',
-            arrowwidth='blah',
-            arrowcolor='blah',
-            arrowhead='blah',
-            arrowsize='blah',
-            tag='blah',
-            font='blah',
-            opacity='blah',
-            align='blah',
-            xanchor='blah',
-            yanchor='blah',
-            ay='blah',
-            ax='blah',
-            y='blah',
-            x='blah'),
-        repair_vals=dict(xref=['x1', 'x'],
-                         yref=['y1', 'y']),
-        repair_keys=dict()
-    ),
-
-    error_y=dict(),
-
-    error_x=dict()
+    titlefont=dict()
 )
-

@@ -7,25 +7,29 @@ A module that contains plotly's exception heirarchy.
 """
 
 
-def PlotlyError(Exception):
+class PlotlyError(Exception):
     pass
 
 
-def InvalidKeyError(PlotlyError):
+class InvalidKeyError(PlotlyError):
     pass
 
 
-def ConnectionError(PlotlyError):
+class InvalidListItemError(PlotlyError):
     pass
 
 
-def CredentialError(PlotlyError):
+class ConnectionError(PlotlyError):
     pass
 
 
-def  AccountError(PlotlyError):
+class CredentialError(PlotlyError):
     pass
 
 
-def RateLimitError(PlotlyError):
+class AccountError(PlotlyError):
+    pass
+
+
+class RateLimitError(PlotlyError):
     pass
