@@ -24,8 +24,14 @@ from . graph_objs_meta import INFO
 from . exceptions import InvalidListItemError, InvalidKeyError
 
 # TODO: BIG ONE, how should exceptions bubble up in this inheritance scheme?
-# TODO: related, WHAT exceptions should bubble up?
-# TODO: slap users on the wrist if they instantiate PlotlyDict/List or Trace?
+    # TODO: related, WHAT exceptions should bubble up?
+# TODO: slap users on the wrist if they instantiate PlotlyDict/List or PlotlyTrace?
+# TODO: add subplot functionality to Figure. FORCE EMPTY FIGURE!!!
+# TODO: take out repair_vals / repair_keys
+# TODO: hide base modules in some way? _PlotlyList, _PlotlyDict, _PlotlyTrace?
+# TODO: map NO_TRACE_KEY to Scatter type by default in Data
+# TODO: add update method to base objs.
+# TODO: hard wrap LONG __doc__ lines, help looks bad right now.
 
 
 class DictMeta(type):
@@ -37,18 +43,18 @@ class DictMeta(type):
 
     """
     def __new__(mcs, name, bases, attrs):
-        kind = name.lower()
+        class_name = name.lower()
         doc = "\n".join([line.lstrip()
                          for line in attrs['__doc__'].splitlines()])
-        if 'valid' in INFO[kind]:
-            if len(INFO[kind]['valid']):
-                doc += "Valid keys:\n\n"
-                for key in INFO[kind]['valid']:
-                    types = INFO[kind]['types'][key]
-                    descriptor = INFO[kind]['descriptors'][key]
-                    doc += "\t{} ({}): \n\t\t{}\n".format(key,
-                                                          types,
-                                                          descriptor)
+        if len(INFO[class_name]):
+            doc += "Valid keys:\n\n"
+            for key in INFO[class_name]:
+                try:  # TODO: remove this catch ASAP!
+                    val_types = INFO[class_name][key]['val_types']
+                    descr = INFO[class_name][key]['description']
+                    doc += "\t{} ({}): \n\t\t{}\n".format(key, val_types, descr)
+                except KeyError:
+                    pass
         attrs['__doc__'] = doc.expandtabs(4)
         return super(DictMeta, mcs).__new__(mcs, name, bases, attrs)
 
@@ -77,20 +83,7 @@ class PlotlyList(list):
     def _get_class_name(self):
         return self.__class__.__name__.lower()
 
-    def clean(self):  # TODO: is this a bit too dangerous for users?
-        del_indicies = [index for index, entry in self
-                        if not isinstance(entry, PlotlyDict)]
-        for index in del_indicies:
-            del self[index]
-        for plotly_dict in self:
-            plotly_dict.clean()
-
-    def get_json(self):
-        self.to_graph_objs()
-        l = [plotly_dict.get_json() for plotly_dict in self]
-        return l
-
-    def to_graph_objs(self):  # TODO: PlotlyList([{}]) == PlotlyList([Trace()])?
+    def to_graph_objs(self):  # TODO: PlotlyList([{}]) == PlotlyList([PlotlyTrace()])?
         for index, entry in enumerate(self):
             if isinstance(entry, PlotlyDict):
                 entry.to_graph_objs()
@@ -98,7 +91,7 @@ class PlotlyList(list):
                 try:
                     obj_type = entry['type']
                     try:
-                        _class = TYPE_TO_CLASS[obj_type]
+                        _class = STRING_TO_CLASS[obj_type]
                         self[index] = _class(**entry)
                         # TODO: explicitly call for a new to_graphs?
                     except KeyError:
@@ -141,41 +134,6 @@ class PlotlyDict(dict):
     def _get_class_name(self):
         return self.__class__.__name__.lower()
 
-    def clean(self):  # TODO: make this remove invalid *values* too!
-        """Recursively rid PlotlyDict of `None` entries and invalid keys.
-
-        CAREFUL! This will remove all inconsistencies quitely. If you want
-        to know about invalid entries, try using the validate() method.
-
-        """
-        class_name = self._get_class_name()
-        none_keys = set([key for key in self if self[key] is None])
-        invalid_keys = set([key for key in self
-                            if key not in INFO[class_name]['valid']])
-        del_keys = set().union(none_keys, invalid_keys)
-        for key in del_keys:
-            del self[key]
-        for val in self.values():
-            try:
-                val.clean()
-            except AttributeError:
-                pass
-
-    def get_json(self):
-        """Get a JSON representation for the PlotlyDict.
-
-        This function changes all of the internal PlotlyDicts and PlotlyLists
-        into normal lists and dicts.
-
-        """
-        d = dict()
-        for key, val in self.items():
-            try:
-                d[key] = val.get_json()
-            except AttributeError:
-                d[key] = val
-        return d
-
     def strip_style(self):
         """Strip style from the current representation of the plotly figure.
 
@@ -192,7 +150,7 @@ class PlotlyDict(dict):
             try:
                 self[key].strip_style()
             except AttributeError:
-                if key not in INFO[class_name]['safe']:
+                if INFO[class_name][key]['type'] == 'style':
                     del self[key]
 
     def to_graph_objs(self):
@@ -207,7 +165,7 @@ class PlotlyDict(dict):
         keys = self.keys()
         for key in keys:
             if key in INFO:
-                _class = TYPE_TO_CLASS[key]  # gets class constructor
+                _class = STRING_TO_CLASS[key]  # gets class constructor
                 obj = _class(**self.pop(key))
                 obj.to_graph_objs()
                 self[key] = obj
@@ -225,13 +183,9 @@ class PlotlyDict(dict):
             try:
                 val.validate()
             except AttributeError:
-                try:
-                    if key not in INFO[class_name]['valid']:
-                        raise InvalidKeyError("Invalid key, '{}', for class, "
-                                       "'{}'".format(key, self.__class__))
-                except KeyError:
-                    pass    # TODO: this *ignores* empty listings in INFO!!
-                            # TODO: mostly for inital development...
+                if key not in INFO[class_name]:
+                    raise InvalidKeyError("Invalid key, '{}', for class, '{}'".
+                                          format(key, self.__class__))
 
 
 # TODO: complete Data, Annotations,
@@ -242,10 +196,10 @@ class Data(PlotlyList):
     """
     def validate(self):  # TODO: should this check for MISSING, required stuff?
         self.to_graph_objs()  # change everything to PlotlyList/Dict objects...
-        for trace in self:
-            if not issubclass(trace.__class__, Trace):
-                raise InvalidListItemError("Trace Only!")
-            trace.validate()  # recursively check the rest of the obj
+        for plotlytrace in self:
+            if not issubclass(plotlytrace.__class__, PlotlyTrace):
+                raise InvalidListItemError("PlotlyTrace Only!")
+            plotlytrace.validate()  # recursively check the rest of the obj
 
 
 class Annotations(PlotlyList):
@@ -260,14 +214,14 @@ class Annotations(PlotlyList):
             annotation.validate()  # recursively check the rest of the obj
 
 
-class Trace(PlotlyDict):
+class PlotlyTrace(PlotlyDict):
     """A general data class for plotly.
 
     """
     pass
 
 
-class Bar(Trace):
+class Bar(PlotlyTrace):
     """A bar chart dictionary.
 
     """
@@ -276,7 +230,7 @@ class Bar(Trace):
         super(Bar, self).__init__(**kwargs)
 
 
-class Box(Trace):
+class Box(PlotlyTrace):
     """A box plot dictionary.
 
     """
@@ -285,7 +239,7 @@ class Box(Trace):
         super(Box, self).__init__(**kwargs)
 
 
-class Contour(Trace):
+class Contour(PlotlyTrace):
     """A contour plot dictionary.
 
     """
@@ -294,7 +248,7 @@ class Contour(Trace):
         super(Contour, self).__init__(**kwargs)
 
 
-class Heatmap(Trace):
+class Heatmap(PlotlyTrace):
     """A heatmap dictionary.
 
     """
@@ -303,7 +257,7 @@ class Heatmap(Trace):
         super(Heatmap, self).__init__(**kwargs)
 
 
-class Histogramx(Trace):
+class Histogramx(PlotlyTrace):
     """A histogramx dictionary.
 
     """
@@ -312,7 +266,7 @@ class Histogramx(Trace):
         super(Histogramx, self).__init__(**kwargs)
 
 
-class Histogramy(Trace):
+class Histogramy(PlotlyTrace):
     """A histgramy dictionary.
 
     """
@@ -321,7 +275,7 @@ class Histogramy(Trace):
         super(Histogramy, self).__init__(**kwargs)
 
 
-class Histogram2d(Trace):
+class Histogram2d(PlotlyTrace):
     """A histogram2d dictionary.
 
     """
@@ -330,7 +284,7 @@ class Histogram2d(Trace):
         super(Histogram2d, self).__init__(**kwargs)
 
 
-class Scatter(Trace):
+class Scatter(PlotlyTrace):
     """A scatter plot dictionary.
 
     """
@@ -430,28 +384,29 @@ class YAxis(PlotlyDict):
     pass
 
 
-TYPE_TO_CLASS = dict(plotlylist=PlotlyList,
-                     data=Data,
-                     annotations=Annotations,
-                     plotlydict=PlotlyDict,
-                     trace=Trace,
-                     bar=Bar,
-                     box=Box,
-                     contour=Contour,
-                     heatmap=Heatmap,
-                     hisogram2d=Histogram2d,
-                     hisogramx=Histogramx,
-                     hisogramy=Histogramy,
-                     scatter=Scatter,
-                     annotation=Annotation,
-                     figure=Figure,
-                     font=Font,
-                     layout=Layout,
-                     legend=Legend,
-                     line=Line,
-                     margin=Margin,
-                     marker=Marker,
-                     titlefont=TitleFont,
-                     xaxis=XAxis,
-                     yaxis=YAxis
-                     )
+STRING_TO_CLASS = dict(
+    plotlylist=PlotlyList,
+    data=Data,
+    annotations=Annotations,
+    plotlydict=PlotlyDict,
+    plotlytrace=PlotlyTrace,
+    bar=Bar,
+    box=Box,
+    contour=Contour,
+    heatmap=Heatmap,
+    hisogram2d=Histogram2d,
+    hisogramx=Histogramx,
+    hisogramy=Histogramy,
+    scatter=Scatter,
+    annotation=Annotation,
+    figure=Figure,
+    font=Font,
+    layout=Layout,
+    legend=Legend,
+    line=Line,
+    margin=Margin,
+    marker=Marker,
+    titlefont=TitleFont,
+    xaxis=XAxis,
+    yaxis=YAxis
+)
