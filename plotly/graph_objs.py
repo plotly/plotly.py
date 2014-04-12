@@ -603,22 +603,12 @@ class PlotlyTrace(PlotlyDict):
 class Bar(PlotlyTrace):
     """A dictionary-like object for representing a bar chart in plotly.
 
-    This object is validated upon instantiation, therefore, you may see
-    exceptions getting thrown. These are intended to help users find the
-    origin of errors faster. The errors will usually contain information that
-    can be used to remedy the problem.
-
     """
     pass
 
 
 class Box(PlotlyTrace):
     """A dictionary-like object for representing a box plot in plotly.
-
-    This object is validated upon instantiation, therefore, you may see
-    exceptions getting thrown. These are intended to help users find the
-    origin of errors faster. The errors will usually contain information that
-    can be used to remedy the problem.
 
     """
     pass
@@ -627,22 +617,12 @@ class Box(PlotlyTrace):
 class Contour(PlotlyTrace):
     """A dictionary-like object for representing a contour plot in plotly.
 
-    This object is validated upon instantiation, therefore, you may see
-    exceptions getting thrown. These are intended to help users find the
-    origin of errors faster. The errors will usually contain information that
-    can be used to remedy the problem.
-
     """
     pass
 
 
 class Heatmap(PlotlyTrace):
     """A dictionary-like object for representing a heatmap in plotly.
-
-    This object is validated upon instantiation, therefore, you may see
-    exceptions getting thrown. These are intended to help users find the
-    origin of errors faster. The errors will usually contain information that
-    can be used to remedy the problem.
 
     """
     pass
@@ -651,22 +631,12 @@ class Heatmap(PlotlyTrace):
 class Histogramx(PlotlyTrace):
     """A dictionary-like object for representing a histogramx plot in plotly.
 
-    This object is validated upon instantiation, therefore, you may see
-    exceptions getting thrown. These are intended to help users find the
-    origin of errors faster. The errors will usually contain information that
-    can be used to remedy the problem.
-
     """
     pass
 
 
 class Histogramy(PlotlyTrace):
     """A dictionary-like object for representing a histogramy plot in plotly.
-
-    This object is validated upon instantiation, therefore, you may see
-    exceptions getting thrown. These are intended to help users find the
-    origin of errors faster. The errors will usually contain information that
-    can be used to remedy the problem.
 
     """
     pass
@@ -675,22 +645,12 @@ class Histogramy(PlotlyTrace):
 class Histogram2d(PlotlyTrace):
     """A dictionary-like object for representing a histogram2d plot in plotly.
 
-    This object is validated upon instantiation, therefore, you may see
-    exceptions getting thrown. These are intended to help users find the
-    origin of errors faster. The errors will usually contain information that
-    can be used to remedy the problem.
-
     """
     pass
 
 
 class Scatter(PlotlyTrace):
     """A dictionary-like object for representing a scatter plot in plotly.
-
-    This object is validated upon instantiation, therefore, you may see
-    exceptions getting thrown. These are intended to help users find the
-    origin of errors faster. The errors will usually contain information that
-    can be used to remedy the problem.
 
     """
     pass
@@ -716,22 +676,12 @@ class Annotation(PlotlyDict):
 class ColorBar(PlotlyDict):  # TODO: ?
     """ColorBar doc.
 
-    This object is validated upon instantiation, therefore, you may see
-    exceptions getting thrown. These are intended to help users find the
-    origin of errors faster. The errors will usually contain information that
-    can be used to remedy the problem.
-
     """
     pass
 
 
 class Error_Y(PlotlyDict):
     """Error_Y doc.
-
-    This object is validated upon instantiation, therefore, you may see
-    exceptions getting thrown. These are intended to help users find the
-    origin of errors faster. The errors will usually contain information that
-    can be used to remedy the problem.
 
     """
     pass
@@ -743,11 +693,6 @@ class Figure(PlotlyDict):
     For help with setting up subplots, run:
     `help(plotly.tools.get_subplots)`
 
-    This object is validated upon instantiation, therefore, you may see
-    exceptions getting thrown. These are intended to help users find the
-    origin of errors faster. The errors will usually contain information that
-    can be used to remedy the problem.
-
     """
     pass
 
@@ -755,22 +700,12 @@ class Figure(PlotlyDict):
 class Font(PlotlyDict):
     """A dictionary-like object representing details about font style.
 
-    This object is validated upon instantiation, therefore, you may see
-    exceptions getting thrown. These are intended to help users find the
-    origin of errors faster. The errors will usually contain information that
-    can be used to remedy the problem.
-
     """
     pass
 
 
 class Layout(PlotlyDict):
     """A dictionary-like object holding plot settings for plotly figures.
-
-    This object is validated upon instantiation, therefore, you may see
-    exceptions getting thrown. These are intended to help users find the
-    origin of errors faster. The errors will usually contain information that
-    can be used to remedy the problem.
 
     """
     def __init__(self, *args, **kwargs):
@@ -837,22 +772,12 @@ class Layout(PlotlyDict):
 class Legend(PlotlyDict):
     """A dictionary-like object representing the legend options for a figure.
 
-    This object is validated upon instantiation, therefore, you may see
-    exceptions getting thrown. These are intended to help users find the
-    origin of errors faster. The errors will usually contain information that
-    can be used to remedy the problem.
-
     """
     pass
 
 
 class Line(PlotlyDict):
     """A dictionary-like object representing the style of a line in plotly.
-
-    This object is validated upon instantiation, therefore, you may see
-    exceptions getting thrown. These are intended to help users find the
-    origin of errors faster. The errors will usually contain information that
-    can be used to remedy the problem.
 
     """
     pass
@@ -861,22 +786,12 @@ class Line(PlotlyDict):
 class Marker(PlotlyDict):
     """A dictionary-like object representing marker(s) style in plotly.
 
-    This object is validated upon instantiation, therefore, you may see
-    exceptions getting thrown. These are intended to help users find the
-    origin of errors faster. The errors will usually contain information that
-    can be used to remedy the problem.
-
     """
     pass
 
 
 class Margin(PlotlyDict):
     """A dictionary-like object holding plot margin information.
-
-    This object is validated upon instantiation, therefore, you may see
-    exceptions getting thrown. These are intended to help users find the
-    origin of errors faster. The errors will usually contain information that
-    can be used to remedy the problem.
 
     """
     pass
@@ -892,22 +807,12 @@ class Stream(PlotlyDict):
 class XAxis(PlotlyDict):
     """A dictionary-like object representing an xaxis in plotly.
 
-    This object is validated upon instantiation, therefore, you may see
-    exceptions getting thrown. These are intended to help users find the
-    origin of errors faster. The errors will usually contain information that
-    can be used to remedy the problem.
-
     """
     pass
 
 
 class XBins(PlotlyDict):
     """A dictionary-like object representing bin information for a histogram.
-
-    This object is validated upon instantiation, therefore, you may see
-    exceptions getting thrown. These are intended to help users find the
-    origin of errors faster. The errors will usually contain information that
-    can be used to remedy the problem.
 
     """
     pass
@@ -916,22 +821,12 @@ class XBins(PlotlyDict):
 class YAxis(PlotlyDict):
     """A dictionary-like object representing a yaxis in plotly.
 
-    This object is validated upon instantiation, therefore, you may see
-    exceptions getting thrown. These are intended to help users find the
-    origin of errors faster. The errors will usually contain information that
-    can be used to remedy the problem.
-
     """
     pass
 
 
 class YBins(PlotlyDict):
     """A dictionary-like object representing bin information for a histogram.
-
-    This object is validated upon instantiation, therefore, you may see
-    exceptions getting thrown. These are intended to help users find the
-    origin of errors faster. The errors will usually contain information that
-    can be used to remedy the problem.
 
     """
     pass
