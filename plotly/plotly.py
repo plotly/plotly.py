@@ -128,7 +128,8 @@ def plot_mpl(fig, resize=True, **plot_options):
 
 
 def get_figure(file_owner, file_id):
-    server = "http://ec2-54-196-84-85.compute-1.amazonaws.com"
+    # server = "http://ec2-54-196-84-85.compute-1.amazonaws.com"
+    server = "https://plot.ly"
     resource = "/apigetfile/{username}/{file_id}".format(username=file_owner,
                                                          file_id=file_id)
     (username, api_key) = _validation_key_logic()

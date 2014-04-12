@@ -34,7 +34,6 @@ def save_json(filename, json_obj):
 
 
 ### Custom JSON encoders ###
-
 class _plotlyJSONEncoder(json.JSONEncoder):
     def numpyJSONEncoder(self, obj):
         try:
@@ -68,6 +67,39 @@ class _plotlyJSONEncoder(json.JSONEncoder):
         except:
             pass
         return None
+
+    def pandasJSONEncoder(self, obj):
+        try:
+            import pandas
+            if isinstance(obj, pandas.Series):
+                return obj.tolist()
+        except:
+            pass
+        return None
+
+    def sageJSONEncoder(self, obj):
+        try:
+            from sage.all import RR, ZZ
+            if obj in RR:
+                return float(obj)
+            elif obj in ZZ:
+                return int(obj)
+        except:
+            pass
+        return None
+
+    def default(self, obj):
+        try:
+            return json.dumps(obj)
+        except TypeError as e:
+            encoders = (self.datetimeJSONEncoder, self.numpyJSONEncoder,
+                        self.pandasJSONEncoder, self.sageJSONEncoder)
+            for encoder in encoders:
+                s = encoder(obj)
+                if s is not None:
+                    return s
+            raise e
+        return json.JSONEncoder.default(self, obj)
 
 
 ### unicode stuff ###

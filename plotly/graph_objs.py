@@ -603,12 +603,20 @@ class PlotlyTrace(PlotlyDict):
 class Bar(PlotlyTrace):
     """A dictionary-like object for representing a bar chart in plotly.
 
+    Example:
+
+    Bar(name='my bar', x=['yesterday', 'today', 'tomorrow'], y=[5, 4, 10])
+
     """
     pass
 
 
 class Box(PlotlyTrace):
     """A dictionary-like object for representing a box plot in plotly.
+
+    Example:
+
+    Box(name='boxy', y=[1,3,9,2,4,2,3,5,2])
 
     """
     pass
@@ -651,6 +659,10 @@ class Histogram2d(PlotlyTrace):
 
 class Scatter(PlotlyTrace):
     """A dictionary-like object for representing a scatter plot in plotly.
+
+    Example:
+
+    Scatter(name='tacters', x=[1,4,2,3], y=[1,6,2,1])
 
     """
     pass
@@ -727,7 +739,7 @@ class Layout(PlotlyDict):
                     try:
                         test_if_int = int(key[5:])
                         obj = XAxis()
-                        for k, v in self.pop(key):
+                        for k, v in self.pop(key).items():
                             obj[k] = v
                         obj.to_graph_objs()
                         self[key] = obj
@@ -737,7 +749,7 @@ class Layout(PlotlyDict):
                     try:
                         test_if_int = int(key[5:])
                         obj = YAxis()
-                        for k, v in self.pop(key):
+                        for k, v in self.pop(key).items():
                             obj[k] = v
                         obj.to_graph_objs()
                         self[key] = obj
@@ -750,10 +762,9 @@ class Layout(PlotlyDict):
         self.to_graph_objs()
         del_keys = [key for key in self if str(key) not in INFO[class_name]]
         for key in del_keys:
-            if (key[1:5] == 'xaxis') or (key[1:5] == 'yaxis'):
+            if (key[:5] == 'xaxis') or (key[:5] == 'yaxis'):
                 try:
                     test = int(key[5:])
-                    pass
                 except ValueError:
                     del self[key]
             else:
