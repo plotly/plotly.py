@@ -189,7 +189,7 @@ class Stream:
         self.connected = False
 
     def open(self):
-        """Open a streaming connection to plotly.
+        """Open and return the streaming connection to plotly.
 
         For more help, see: `help(plotly.plotly.Stream)`
         or see examples here:
@@ -204,6 +204,7 @@ class Stream:
         self.conn.putheader('plotly-streamtoken', self.stream_id)
         self.conn.endheaders()
         self.connected = True
+        return self
 
     def reopen(self):
         """ Not Implemented
