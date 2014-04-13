@@ -249,10 +249,13 @@ class PlotlyList(list):
         self.to_graph_objs()
         l = list()
         for plotlydict in self:
-            l.append(plotlydict.get_data())
-        for index, entry in enumerate(l):
-            if len(entry) == 0:
-                del l[index]
+            l += [plotlydict.get_data()]
+        del_indicies = [index for index, item in enumerate(self)
+                        if len(item) == 0]
+        del_ct = 0
+        for index in del_indicies:
+            del self[index - del_ct]
+            del_ct += 1
         return l
 
     def validate(self):
@@ -398,10 +401,6 @@ class PlotlyDict(dict):
         self.to_graph_objs()
         class_name = self._get_class_name()
         d = STRING_TO_CLASS[class_name]()
-        try:
-            del d['type']  # if this is any Trace, it will have 'type'
-        except KeyError:
-            pass
         for key, val in self.items():
             try:
                 d[key] = val.get_data()
@@ -411,7 +410,11 @@ class PlotlyDict(dict):
                         d[key] = val
                 except KeyError:
                     pass
-        d.force_clean()
+        keys = self.keys()
+        for key in keys:
+            if isinstance(self[key], (dict, list)):
+                if len(self[key]) == 0:
+                    del self[key]
         if len(d) == 1:
             d = d.values()[0]
         return d
