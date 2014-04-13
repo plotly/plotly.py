@@ -236,11 +236,10 @@ class Stream:
         if not self.connected:
             self.init()
         # plotly's streaming API takes new-line separated json objects
-        msg = json.dumps(data, cls=tools._plotlyJSONEncoder) + '\n'
+        msg = json.dumps(data, cls=utils._plotlyJSONEncoder) + '\n'
         msglen = format(len(msg), 'x')
         # chunked encoding requests contain the messege length in hex,
         # \r\n, and then the message
-        print '{msglen}\r\n{msg}\r\n'.format(msglen=msglen, msg=msg)
         self.conn.send('{msglen}\r\n{msg}\r\n'.format(msglen=msglen, msg=msg))
 
     def close(self):
