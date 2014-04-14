@@ -1,9 +1,12 @@
 from setuptools import setup
-exec(open('plotly/version.py').read())
+
+exec (open('plotly/version.py').read())
+
 
 def readme():
-	with open('README.txt') as f:
-		return f.read()
+    with open('README.txt') as f:
+        return f.read()
+
 
 setup(name='plotly',
       version=__version__,
@@ -13,17 +16,19 @@ setup(name='plotly',
       maintainer='Chris P',
       maintainer_email='chris@plot.ly',
       url='https://plot.ly/api/python',
-      description='Python plotting library for collaborative, interactive, web-based, publication-quality graphs.', 
+      description='Python plotting library for collaborative, interactive, web-based, publication-quality graphs.',
       long_description=readme(),
       classifiers=[
-            'Development Status :: 4 - Beta',
-            'Programming Language :: Python :: 2.7',
-            'Programming Language :: Python :: 3.3',      
-            'Topic :: Scientific/Engineering :: Visualization',
-	],
-      license='MIT',
-      packages=['plotly'],
-      install_requires=[
-      	'requests'
+          'Development Status :: 4 - Beta',
+          'Programming Language :: Python :: 2.7',
+          'Programming Language :: Python :: 3.3',
+          'Topic :: Scientific/Engineering :: Visualization',
       ],
+      license='MIT',
+      packages=['plotly',
+                'plotly/matplotlylib',
+                'plotly/matplotlylib/mplexporter',
+                'plotly/matplotlylib/mplexporter/renderers'],
+      package_data={'plotly': ['graph_reference/*.json']},
+      install_requires=['requests'],
       zip_safe=False)
