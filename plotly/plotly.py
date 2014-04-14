@@ -127,7 +127,7 @@ def plot_mpl(fig, resize=True, **plot_options):
     return plot(fig, **plot_options)
 
 
-def get_figure(file_owner, file_id):
+def get_figure(file_owner, file_id, raw=False):
     # server = "http://ec2-54-196-84-85.compute-1.amazonaws.com"
     server = "https://plot.ly"
     resource = "/apigetfile/{username}/{file_id}".format(username=file_owner,
@@ -145,7 +145,10 @@ def get_figure(file_owner, file_id):
         response_payload = content['payload']
         figure = response_payload['figure']
         utils.decode_unicode(figure)
-        return tools.get_valid_graph_obj(figure, obj_type='figure')
+        if raw:
+            return figure
+        else:
+            return tools.get_valid_graph_obj(figure, obj_type='Figure')
     else:
         try:
             content = json.loads(response.content)
