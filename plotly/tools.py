@@ -145,7 +145,8 @@ def show_credentials_file(*args):
 def get_embed(username, plot_id, width="100%", height=525):
     padding = 25
     if isinstance(width, (int, long)):
-        s = ("<iframe id=\"igraph\" scrolling=\"no\" seamless=\"seamless\" "
+        s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\""
+             "seamless=\"seamless\" "
              "src=\"https://plot.ly/"
              "~{username}/{plot_id}/{plot_width}/{plot_height}\" "
              "height=\"{iframe_height}\" width=\"{iframe_width}\">"
@@ -154,7 +155,8 @@ def get_embed(username, plot_id, width="100%", height=525):
             plot_width=width-padding, plot_height=height-padding,
             iframe_height=height, iframe_width=width)
     else:
-        s = ("<iframe id=\"igraph\" scrolling=\"no\" seamless=\"seamless\" "
+        s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\""
+             "seamless=\"seamless\" "
              "src=\"https://plot.ly/"
              "~{username}/{plot_id}\" "
              "height=\"{iframe_height}\" width=\"{iframe_width}\">"
