@@ -317,7 +317,5 @@ def get_valid_graph_obj(obj, obj_type=None):
     else:
         for key, val in obj.items():
             new_obj[key] = val
-    print new_obj.__class__.__name__
-    print new_obj.keys()
     new_obj.force_clean()
     return new_obj

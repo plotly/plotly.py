@@ -44,9 +44,9 @@ INFO = utils.decode_unicode(INFO)
 KEY_TO_NAME = dict(
     plotlylist='PlotlyList',
     data='Data',
-    angularAxis='AngularAxis',
+    # angularAxis='AngularAxis',
     annotations='Annotations',
-    area='Area',
+    # area='Area',
     plotlydict='PlotlyDict',
     plotlytrace='PlotlyTrace',
     bar='Bar',
@@ -68,7 +68,7 @@ KEY_TO_NAME = dict(
     line='Line',
     margin='Margin',
     marker='Marker',
-    radialAxis='RadialAxis',
+    # radialAxis='RadialAxis',
     stream='Stream',
     trace='Trace',
     textfont='Font',
@@ -85,11 +85,11 @@ KEY_TO_NAME = dict(
 NAME_TO_KEY = dict(
     PlotlyList='plotlylist',
     Data='data',
-    AngularAxis='angularAxis',
+    # AngularAxis='angularAxis',
     Annotations='annotations',
     PlotlyDict='plotlydict',
     PlotlyTrace='plotlytrace',
-    Area='area',
+    # Area='area',
     Bar='bar',
     Box='box',
     Contour='contour',
@@ -109,7 +109,7 @@ NAME_TO_KEY = dict(
     Line='line',
     Margin='margin',
     Marker='marker',
-    RadialAxis='radialAxis',
+    # RadialAxis='radialAxis',
     Stream='stream',
     Trace='trace',
     XAxis='xaxis',
@@ -479,7 +479,7 @@ class PlotlyDict(dict):
                     obj = NAME_TO_CLASS[class_name]()  # gets constructor
                     obj += self.pop(key)
                     obj.to_graph_objs()
-                    self['data'] = obj
+                    self[key] = obj
             except KeyError:
                 try:
                     self[key].to_graph_objs()
@@ -671,11 +671,11 @@ class Trace(PlotlyTrace):
     pass
 
 
-class Area(PlotlyTrace):
-    """A dictionary-like object for representing an area chart in plotly.
-
-    """
-    pass
+# class Area(PlotlyTrace):
+#     """A dictionary-like object for representing an area chart in plotly.
+#
+#     """
+#     pass
 
 
 class Bar(PlotlyTrace):
@@ -746,18 +746,18 @@ class Scatter(PlotlyTrace):
     pass
 
 
-class AngularAxis(PlotlyDict):
-    """A  dictionary-like object for representing an angular axis in plotly.
-
-    """
-    pass
-
-
-class RadialAxis(PlotlyDict):
-    """A  dictionary-like object for representing an angular axis in plotly.
-
-    """
-    pass
+# class AngularAxis(PlotlyDict):
+#     """A  dictionary-like object for representing an angular axis in plotly.
+#
+#     """
+#     pass
+#
+#
+# class RadialAxis(PlotlyDict):
+#     """A  dictionary-like object for representing an angular axis in plotly.
+#
+#     """
+#     pass
 
 
 class Annotation(PlotlyDict):
@@ -948,7 +948,7 @@ NAME_TO_CLASS = dict(
     Annotations=Annotations,
     PlotlyDict=PlotlyDict,
     PlotlyTrace=PlotlyTrace,
-    Area=Area,
+    # Area=Area,
     Bar=Bar,
     Box=Box,
     Contour=Contour,
@@ -957,7 +957,7 @@ NAME_TO_CLASS = dict(
     Histogramx=Histogramx,
     Histogramy=Histogramy,
     Scatter=Scatter,
-    AngularAxis=AngularAxis,
+    # AngularAxis=AngularAxis,
     Annotation=Annotation,
     ColorBar=ColorBar,
     Contours=Contours,
@@ -969,7 +969,7 @@ NAME_TO_CLASS = dict(
     Line=Line,
     Margin=Margin,
     Marker=Marker,
-    RadialAxis=RadialAxis,
+    # RadialAxis=RadialAxis,
     Stream=Stream,
     Trace=Trace,
     XAxis=XAxis,
