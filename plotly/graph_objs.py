@@ -44,13 +44,13 @@ print _INFO
 # define how to map from keys in _INFO to a class
 # mapping: (n->m, m < n)
 _KEY_TO_NAME = dict(
-    _plotlylist='_PlotlyList',
+    plotlylist='_PlotlyList',
     data='Data',
     # angularAxis='AngularAxis',
     annotations='Annotations',
     # area='Area',
-    _plotlydict='_PlotlyDict',
-    _plotlytrace='_PlotlyTrace',
+    plotlydict='_PlotlyDict',
+    plotlytrace='_PlotlyTrace',
     bar='Bar',
     box='Box',
     contour='Contour',
@@ -85,12 +85,12 @@ _KEY_TO_NAME = dict(
 # define how to map from a class name to a key name in _INFO
 # mapping: (n->n)
 _NAME_TO_KEY = dict(
-    _PlotlyList='_plotlylist',
+    _PlotlyList='plotlylist',
     Data='data',
     # AngularAxis='angularAxis',
     Annotations='annotations',
-    _PlotlyDict='_plotlydict',
-    _PlotlyTrace='_plotlytrace',
+    _PlotlyDict='plotlydict',
+    _PlotlyTrace='plotlytrace',
     # Area='area',
     Bar='bar',
     Box='box',
