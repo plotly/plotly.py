@@ -131,8 +131,6 @@ class _ListMeta(type):
     def __new__(mcs, name, bases, attrs):
         obj_key = _NAME_TO_KEY[name]
         doc = attrs['__doc__']
-        obj_info = _INFO[obj_key]
-        line_size = 76
         tab_size = 4
         min_indent = min([len(a) - len(b)
                           for a, b in zip(doc.splitlines(),
