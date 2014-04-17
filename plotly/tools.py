@@ -15,20 +15,14 @@ from . import exceptions
 
 PLOTLY_DIR = os.path.join(os.path.expanduser("~"), ".plotly")
 CREDENTIALS_FILE = os.path.join(PLOTLY_DIR, ".credentials")
-PLOT_OPTIONS_FILE = os.path.join(PLOTLY_DIR, ".plot_options")
-THEMES_FILE = os.path.join(PLOTLY_DIR, ".themes")
-
-_DEFAULT_PLOT_OPTIONS = dict(
-    filename="plot from API",
-    fileopt="new",
-    world_readable=True,
-    auto_open=True)
+# PLOT_OPTIONS_FILE = os.path.join(PLOTLY_DIR, ".plot_options")
+# THEMES_FILE = os.path.join(PLOTLY_DIR, ".themes")
 
 
 def ensure_local_plotly_files_exist():
     if not os.path.isdir(PLOTLY_DIR):
         os.mkdir(PLOTLY_DIR)
-    for filename in [CREDENTIALS_FILE, PLOT_OPTIONS_FILE, THEMES_FILE]:
+    for filename in [CREDENTIALS_FILE]:  # , PLOT_OPTIONS_FILE, THEMES_FILE]:
         if not os.path.exists(filename):
             f = open(filename, "w")
             f.close()
@@ -36,60 +30,60 @@ def ensure_local_plotly_files_exist():
 
 ### config tools ###
 
-def save_plot_options_file(filename="", fileopt="",
-                      world_readable=None, auto_open=None):
-    """Set the keyword-value pairs in `~/.plotly_plot_options`.
-        TODO: the kwarg defaults are confusing - maybe should be left as a kwargs
-        TODO: should this be hiddenz?
-    """
-    ensure_local_plotly_files_exist()
-    plot_options = get_plot_options_file()
-    if (not plot_options and
-        (filename or fileopt or world_readable is not None or
-         auto_open is not None)):
-        plot_options = {}
-    if filename:
-        plot_options['filename'] = filename
-    if fileopt:
-        plot_options['fileopt'] = fileopt
-    if world_readable is not None:
-        plot_options['world_readable'] = world_readable
-    if auto_open is not None:
-        plot_options['auto_open'] = auto_open
-    utils.save_json(PLOT_OPTIONS_FILE, plot_options)
-
-
-def get_plot_options_file(*args):
-    """Return specified args from `~/.plotly_plot_options`. as dict.
-
-    Returns all if no arguments are specified.
-
-    Example:
-        get_plot_options_file('username', 'api_key')
-
-    """
-    ensure_local_plotly_files_exist()
-    options = utils.load_json(PLOT_OPTIONS_FILE, *args)
-    if len(options):
-        return {str(key): val for key, val in options.items()}
-    else:
-        return {}
-
-
-def show_plot_options_file(*args):
-    """Print specified kwargs from `~/.plotly_plot_options`.
-
-    Prints all if no keyword arguments are specified.
-
-    """
-    ensure_local_plotly_files_exist()
-    plot_options = get_plot_options_file(*args)
-    if len(args):
-        print "The specified keys from your plot options file:\n"
-    else:
-        print "Your plot options file:\n"
-    for key, val in plot_options.items():
-        print "\t{}: {}".format(key, val).expandtabs()
+# def save_plot_options_file(filename="", fileopt="",
+#                       world_readable=None, auto_open=None):
+#     """Set the keyword-value pairs in `~/.plotly_plot_options`.
+#         TODO: the kwarg defaults are confusing - maybe should be left as a kwargs
+#         TODO: should this be hiddenz?
+#     """
+#     ensure_local_plotly_files_exist()
+#     plot_options = get_plot_options_file()
+#     if (not plot_options and
+#         (filename or fileopt or world_readable is not None or
+#          auto_open is not None)):
+#         plot_options = {}
+#     if filename:
+#         plot_options['filename'] = filename
+#     if fileopt:
+#         plot_options['fileopt'] = fileopt
+#     if world_readable is not None:
+#         plot_options['world_readable'] = world_readable
+#     if auto_open is not None:
+#         plot_options['auto_open'] = auto_open
+#     utils.save_json(PLOT_OPTIONS_FILE, plot_options)
+#
+#
+# def get_plot_options_file(*args):
+#     """Return specified args from `~/.plotly_plot_options`. as dict.
+#
+#     Returns all if no arguments are specified.
+#
+#     Example:
+#         get_plot_options_file('username', 'api_key')
+#
+#     """
+#     ensure_local_plotly_files_exist()
+#     options = utils.load_json(PLOT_OPTIONS_FILE, *args)
+#     if len(options):
+#         return {str(key): val for key, val in options.items()}
+#     else:
+#         return {}
+#
+#
+# def show_plot_options_file(*args):
+#     """Print specified kwargs from `~/.plotly_plot_options`.
+#
+#     Prints all if no keyword arguments are specified.
+#
+#     """
+#     ensure_local_plotly_files_exist()
+#     plot_options = get_plot_options_file(*args)
+#     if len(args):
+#         print "The specified keys from your plot options file:\n"
+#     else:
+#         print "Your plot options file:\n"
+#     for key, val in plot_options.items():
+#         print "\t{}: {}".format(key, val).expandtabs()
 
 
 ### credentials tools ###

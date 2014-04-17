@@ -26,6 +26,12 @@ from . import exceptions
 
 from .version import __version__
 
+_DEFAULT_PLOT_OPTIONS = dict(
+    filename="plot from API",
+    fileopt="new",
+    world_readable=True,
+    auto_open=True)
+
 _credentials = dict()
 
 _plot_options = dict()
@@ -81,7 +87,7 @@ def iplot(figure_or_data, **plot_options):
     if 'auto_open' not in plot_options:
         plot_options['auto_open'] = False
     res = plot(figure_or_data, **plot_options)
-    urlsplit = res['url'].split('/')
+    urlsplit = res.split('/')
     username, plot_id = urlsplit[-2][1:], urlsplit[-1]  # TODO: HACKY!
 
     embed_options = dict()
@@ -91,6 +97,16 @@ def iplot(figure_or_data, **plot_options):
         embed_options['height'] = plot_options['height']
 
     return tools.embed(username, plot_id, **embed_options)
+
+
+def _plot_option_logic(plot_options):
+    options = dict()
+    options.update(_DEFAULT_PLOT_OPTIONS)
+    options.update(_plot_options)
+    options.update(plot_options)
+    if 'filename' in plot_options:
+        options['fileopt'] = 'overwrite'
+    return options
 
 
 def plot(figure_or_data, **plot_options):
@@ -105,16 +121,18 @@ def plot(figure_or_data, **plot_options):
         raise exceptions.PlotlyError("The `figure_or_data` positional argument "
                                      "must be either `dict`-like or "
                                      "`list`-like.")
-
+    plot_options = _plot_option_logic(plot_options)
     res = _send_to_plotly(figure, **plot_options)
-    if ('error' in res) and ('auto_open' in plot_options):  # TODO: OK?
-        if (res['error'] == '') and plot_options['auto_open']:
+    if res['error'] == '':
+        if plot_options['auto_open']:
             try:
                 from webbrowser import open as wbopen
                 wbopen(res['url'])
             except:  # TODO: what should we except here? this is dangerous
                 pass
-    return res
+        return res['url']
+    else:
+        raise exceptions.PlotlyAccountError(res['error'])
 
 
 def iplot_mpl(fig, resize=True, **plot_options):
@@ -267,13 +285,9 @@ class Stream:
         raise NotImplementedError
 
 
-def _send_to_plotly(figure, **supplied_plot_options):
+def _send_to_plotly(figure, **plot_options):
     """
     """
-    plot_options = dict()
-    plot_options.update(tools._DEFAULT_PLOT_OPTIONS)
-    plot_options.update(_plot_options)
-    plot_options.update(supplied_plot_options)
 
     data = json.dumps(figure['data'] if 'data' in figure else [],
                       cls=utils._plotlyJSONEncoder)
