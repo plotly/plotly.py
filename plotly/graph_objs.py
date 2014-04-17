@@ -39,6 +39,8 @@ _INFO = _json.loads(_resource_string('plotly',
 
 _INFO = _utils.decode_unicode(_INFO)
 
+print _INFO
+
 # define how to map from keys in _INFO to a class
 # mapping: (n->m, m < n)
 _KEY_TO_NAME = dict(
