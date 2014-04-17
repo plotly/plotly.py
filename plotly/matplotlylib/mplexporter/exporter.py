@@ -237,7 +237,16 @@ class Exporter(object):
 
         processed_paths = [(tr.transform(path[0]), path[1])
                            for path in processed_paths]
+
         path_transforms = collection.get_transforms()
+        try:
+            # matplotlib 1.3: path_transforms are transform objects.
+            # Convert them to numpy arrays.
+            path_transforms = [t.get_matrix() for t in path_transforms]
+        except AttributeError:
+            # matplotlib 1.4: path transforms are already numpy arrays.
+            pass
+
         styles = {'linewidth': collection.get_linewidths(),
                   'facecolor': collection.get_facecolors(),
                   'edgecolor': collection.get_edgecolors(),
