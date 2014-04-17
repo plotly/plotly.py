@@ -486,7 +486,8 @@ class PlotlyDict(dict):
                         del self[key]
                 except KeyError:  # TODO: Update the JSON
                     # print "'type' not in {} for {}".format(obj_key, key)
-                    del self[key]
+                    pass
+                    # del self[key]
 
     def get_data(self):
         """Returns the JSON for the plot with non-data elements stripped."""
@@ -943,7 +944,18 @@ class Figure(PlotlyDict):
     `help(plotly.tools.get_subplots)`
 
     """
-    pass
+    def __init__(self, *args, **kwargs):
+        if len(args):
+            if ('data' not in kwargs) and ('data' not in args[0]):
+                kwargs['data'] = Data()
+            if ('layout' not in kwargs) and ('layout' not in args[0]):
+                kwargs['layout'] = Layout()
+        else:
+            if ('data' not in kwargs):
+                kwargs['data'] = Data()
+            if ('layout' not in kwargs):
+                kwargs['layout'] = Layout()
+        super(Figure, self).__init__(*args, **kwargs)
 
 
 class Font(PlotlyDict):

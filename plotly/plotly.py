@@ -50,19 +50,19 @@ def sign_in(username, api_key):
 
 ### _plot_options stuff ###
 
-def load_plot_options():
-    """ Import the plot_options from file into the module-level _plot_options.
-    """
-    global _plot_options
-    _plot_options = _plot_options.update(tools.get_plot_options_file())
-
-
-def save_plot_options(**kwargs):
-    """ Save the module-level _plot_options to file for later access
-    """
-    global _plot_options
-    update_plot_options(**kwargs)
-    tools.save_plot_options_file(**_plot_options)
+# def load_plot_options():
+#     """ Import the plot_options from file into the module-level _plot_options.
+#     """
+#     global _plot_options
+#     _plot_options = _plot_options.update(tools.get_plot_options_file())
+#
+#
+# def save_plot_options(**kwargs):
+#     """ Save the module-level _plot_options to file for later access
+#     """
+#     global _plot_options
+#     update_plot_options(**kwargs)
+#     tools.save_plot_options_file(**_plot_options)
 
 
 def update_plot_options(**kwargs):
@@ -78,6 +78,16 @@ def get_plot_options():
     """
     global _plot_options
     return copy(_plot_options)
+
+
+def get_credentials():
+    """ Returns a copy of the user supplied credentials.
+    """
+    global _credentials
+    if ('username' in _credentials) and ('api_key' in _credentials):
+        return copy(_credentials)
+    else:
+        return tools.get_credentials_file()
 
 
 ### plot stuff ###
@@ -170,9 +180,9 @@ def get_figure(file_owner, file_id, raw=False):
     else:
         try:
             content = json.loads(response.content)
-            print content['error']
         except:
             raise("There was an error retrieving this file")
+        raise exceptions.PlotlyError(s)
 
 
 class Stream:
