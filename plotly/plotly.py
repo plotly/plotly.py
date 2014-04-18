@@ -19,6 +19,7 @@ import json
 import warnings
 import httplib
 from copy import copy
+import base64
 from . import utils
 
 import tools
@@ -293,6 +294,62 @@ class Stream:
         http://nbviewer.ipython.org/github/plotly/Streaming-Demos
         """
         raise NotImplementedError
+
+
+class image:
+    ''' Helper functions wrapped around plotly's static image generation api.
+    '''
+
+    @staticmethod
+    def get(figure):
+        """ Return a static image of the plot described by `figure`.
+        """
+        (username, api_key) = _validation_key_logic()
+        headers = {'plotly-username': username,
+                   'plotly-apikey': api_key,
+                   'plotly-version': '2.0',
+                   'plotly-platform': 'python'}
+
+        server = "https://plot.ly/apigenimage/"
+        res = requests.post(server,
+                            data=json.dumps(figure,
+                                            cls=utils._plotlyJSONEncoder),
+                            headers=headers)
+
+        if res.status_code == 200:
+            return_data = json.loads(res.content)
+            return return_data['payload']
+        else:
+            try:
+                return_data = json.loads(res.content)
+            except:
+                raise exceptions.PlotlyError("The response "
+                                             "from plotly could "
+                                             "not be translated.")
+            raise exceptions.PlotlyError(return_data['error'])
+
+    @classmethod
+    def ishow(cls, figure):
+        """ Display a static image of the plot described by `figure`
+        in an IPython Notebook.
+        """
+        img = cls.get(figure)
+        from IPython.display import display, Image
+        display(Image(img))
+
+    @classmethod
+    def save_as(cls, figure, filename):
+        """ Save a static image of the plot described by `figure`
+        locally as `filename`.
+        """
+        img = cls.get(figure)
+        (base, ext) = os.path.splitext(filename)
+        if not ext:
+            filename += '.png'
+        f = open(filename, 'w')
+        img = base64.b64decode(img)
+        f.write(img)
+        f.close()
 
 
 def _send_to_plotly(figure, **plot_options):

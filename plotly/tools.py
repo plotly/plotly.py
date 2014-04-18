@@ -170,10 +170,10 @@ def embed(username, plot_id, width="100%", height=525):
     except:
         pass
     try:
-        from IPython.display import HTML
-        return HTML(s)
+        from IPython.display import HTML, display
+        display(HTML(s))
     except:
-        return s
+        pass
 
 
 ### mpl-related tools ###
