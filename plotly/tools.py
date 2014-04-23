@@ -8,10 +8,16 @@ Functions that USERS will possibly want access to.
 
 """
 import os.path
+import warnings
 from . graph_objs import graph_objs
-from . import matplotlylib
 from . import utils
 from . import exceptions
+
+try:
+    from . import matplotlylib
+    _matplotlylib_imported = True
+except ImportError:
+    _matplotlylib_imported = False
 
 PLOTLY_DIR = os.path.join(os.path.expanduser("~"), ".plotly")
 CREDENTIALS_FILE = os.path.join(PLOTLY_DIR, ".credentials")
@@ -226,15 +232,22 @@ def mpl_to_plotly(fig, resize=False, strip_style=False, verbose=False):
     https://plot.ly/api/python/getting-started
 
     """
-    renderer = matplotlylib.PlotlyRenderer()
-    matplotlylib.Exporter(renderer).run(fig)
-    if resize:
-        renderer.resize()
-    if strip_style:
-        renderer.strip_style()
-    if verbose:
-        print renderer.msg
-    return renderer.plotly_fig
+    if _matplotlylib_imported:
+        renderer = matplotlylib.PlotlyRenderer()
+        matplotlylib.Exporter(renderer).run(fig)
+        if resize:
+            renderer.resize()
+        if strip_style:
+            renderer.strip_style()
+        if verbose:
+            print renderer.msg
+        return renderer.plotly_fig
+    else:
+        warnings.warn(
+            "To use Plotly's matplotlylib functionality, you'll need to have "
+            "matplotlib successfully installed with all of its dependencies. "
+            "You're getting this error because matplotlib or one of its "
+            "dependencies doesn't seem to be installed correctly.")
 
 
 ### graph_objs related tools ###
