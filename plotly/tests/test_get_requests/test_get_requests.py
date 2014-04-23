@@ -1,104 +1,136 @@
 """
-This file demonstrates writing tests using the unittest module. These will pass
-when you run "manage.py test".
+test_get_requests:
+==================
 
-Replace this with more appropriate tests for your application.
+A module intended for use with Nose.
+
 """
 
 import requests
-from copy import copy
+import copy
 import json
-
 
 default_headers = {'plotly-username': '',
                    'plotly-apikey': '',
                    'plotly-version': '2.0',
                    'plotly-platform': 'pythonz'}
 
+server = "https://plot.ly"
 
-def get_figure(file_owner='get_test_user', file_id=0,
-               headers=default_headers):
+# username = "get_test_user"
+# password = "password"
+# api_key = "vgs6e0cnoi" (currently...)
 
-    server = "http://ec2-54-196-84-85.compute-1.amazonaws.com"
-    resource = "/apigetfile/"\
-    "{username}/{file_id}/"\
-        .format(username=file_owner, file_id=file_id)
 
-    print server+resource
+def test_user_does_not_exist():
+    username = 'user_does_not_exist'
+    api_key = 'invalid-apikey'
+    file_owner = 'get_test_user'
+    file_id = 0
+    hd = copy.copy(default_headers)
+    hd['plotly-username'] = username
+    hd['plotly-apikey'] = api_key
+    resource = "/apigetfile/{}/{}/".format(file_owner, file_id)
+    response = requests.get(server + resource, headers=hd)
+    content = json.loads(response.content)
+    print response.status_code
+    print content
+    assert response.status_code == 404
+    assert (content['error'] == "Aw, snap! We don't have an account for {}. "
+                                "Want to try again? Sign in is not case "
+                                "sensitive.".format(username))
 
-    response = requests.get(server + resource, headers=headers)
 
-    return response
+def test_file_does_not_exist():
+    username = 'plotlyimagetest'
+    api_key = '786r5mecv0'
+    file_owner = 'get_test_user'
+    file_id = 1000
+    hd = copy.copy(default_headers)
+    hd['plotly-username'] = username
+    hd['plotly-apikey'] = api_key
+    resource = "/apigetfile/{}/{}/".format(file_owner, file_id)
+    response = requests.get(server + resource, headers=hd)
+    content = json.loads(response.content)
+    print response.status_code
+    print content
+    assert response.status_code == 404
+    assert (content['error'] == "Aw, snap! It looks like this file does not "
+                                "exist. Want to try again?")
 
-# User Does Not Exist
-def test_RequestorDoesNotExist():
-    hd = copy(default_headers)
-    hd['plotly-username'] = 'this_username_doesnt_exist'
-    res = get_figure(headers=hd)
-    if res.status_code != 404:
-        print 'ERROR'
 
-    return res
+def test_wrong_api_key():  # TODO: does this test the right thing?
+    username = 'plotlyimagetest'
+    api_key = 'invalid-apikey'
+    file_owner = 'get_test_user'
+    file_id = 0
+    hd = copy.copy(default_headers)
+    hd['plotly-username'] = username
+    hd['plotly-apikey'] = api_key
+    resource = "/apigetfile/{}/{}/".format(file_owner, file_id)
+    response = requests.get(server + resource, headers=hd)
+    content = json.loads(response.content)
+    print response.status_code
+    print content
+    assert response.status_code == 401
+    # TODO: check error message?
 
-# File Does Not Exist
-def test_FileDoesNotExist():
-    res = get_figure('this_username_doesnt_exist', 0, default_headers)
-    if res.status_code != 404:
-        print 'ERROR'
-
-    return res
-
-# Wrong API Key
-def test_WrongAPIKey():
-    hd = copy(default_headers)
-    hd['plotly-apikey'] = 'this_is_the_wrong_api_key'
-    res = get_figure(headers=hd)
-    if res.status_code != 401:
-        print 'ERROR'
-
-    return res
 
 # Locked File
 # TODO
 
-# Private File
-def test_PrivatePermissionDefined():
+def test_private_permission_defined():
+    username = 'plotlyimagetest'
+    api_key = '786r5mecv0'
     file_owner = 'get_test_user'
-    file_id = 1
-    res = get_figure(file_owner, file_id)
-    if res.status_code != 403:
-        print 'ERROR'
-    return res
+    file_id = 1  # 1 is a private file
+    hd = copy.copy(default_headers)
+    hd['plotly-username'] = username
+    hd['plotly-apikey'] = api_key
+    resource = "/apigetfile/{}/{}/".format(file_owner, file_id)
+    response = requests.get(server + resource, headers=hd)
+    content = json.loads(response.content)
+    print response.status_code
+    print content
+    assert response.status_code == 403
 
 # Private File that is shared
 # TODO
 
-# Missing Headers
-def test_MissingHeaders():
-    hd = copy(default_headers)
-    del hd['plotly-apikey']
-    res = get_figure(headers=hd)
-    if res.status_code != 422:
-        print 'ERROR'
 
-    return res
+def test_missing_headers():
+    file_owner = 'get_test_user'
+    file_id = 0
+    resource = "/apigetfile/{}/{}/".format(file_owner, file_id)
+    headers = default_headers.keys()
+    for header in headers:
+        hd = copy.copy(default_headers)
+        del hd[header]
+        response = requests.get(server + resource, headers=hd)
+        content = json.loads(response.content)
+        print response.status_code
+        print content
+        assert response.status_code == 422
 
-# Valid Retrieval - Self
-def test_ValidRetrieval():
-    res = get_figure()
-    if res.status_code != 200:
-        print 'ERROR'
-        return res
-    content = json.loads(res.content)
-    response_payload = content['payload']
-    figure = response_payload['figure']
-    if figure['data'][0]['x'] != [u'1', u'2', u'3']:
-        print 'ERROR'
-    return res
 
-test_RequestorDoesNotExist()
-test_FileDoesNotExist()
-test_WrongAPIKey()
-test_PrivatePermissionDefined()
-test_MissingHeaders()
-test_ValidRetrieval()
+def test_valid_request():
+    username = 'plotlyimagetest'
+    api_key = '786r5mecv0'
+    file_owner = 'get_test_user'
+    file_id = 0
+    hd = copy.copy(default_headers)
+    hd['plotly-username'] = username
+    hd['plotly-apikey'] = api_key
+    resource = "/apigetfile/{}/{}/".format(file_owner, file_id)
+    response = requests.get(server + resource, headers=hd)
+    content = json.loads(response.content)
+    print response.status_code
+    print content
+    assert response.status_code == 200
+    # content = json.loads(res.content)
+    # response_payload = content['payload']
+    # figure = response_payload['figure']
+    # if figure['data'][0]['x'] != [u'1', u'2', u'3']:
+    #     print 'ERROR'
+    # return res
+

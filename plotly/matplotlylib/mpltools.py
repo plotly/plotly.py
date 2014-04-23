@@ -70,7 +70,10 @@ def clean_dict(node, parent=None, node_key=None):
 
 def convert_affine_trans(dpi=None, aff=None):
     if aff is not None and dpi is not None:
-        return aff.to_values()[0]*72/dpi
+        try:
+            return aff.to_values()[0]*72/dpi
+        except AttributeError:
+            return aff[0][0]*72/dpi
     else:
         return None
 

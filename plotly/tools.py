@@ -8,7 +8,7 @@ Functions that USERS will possibly want access to.
 
 """
 import os.path
-from . import graph_objs
+from . graph_objs import graph_objs
 from . import matplotlylib
 from . import utils
 from . import exceptions
@@ -300,10 +300,10 @@ def get_subplots(rows=1, columns=1, horizontal_spacing=0.1,
 
 def get_valid_graph_obj(obj, obj_type=None):
     try:
-        new_obj = graph_objs._NAME_TO_CLASS[obj.__class__.__name__]()
+        new_obj = graph_objs.NAME_TO_CLASS[obj.__class__.__name__]()
     except KeyError:
         try:
-            new_obj = graph_objs._NAME_TO_CLASS[obj_type]()
+            new_obj = graph_objs.NAME_TO_CLASS[obj_type]()
         except KeyError:
             raise exceptions.PlotlyError(
                 "'{}' nor '{}' are recognizable graph_objs.".

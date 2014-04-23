@@ -5,10 +5,10 @@ test_get_figure:
 A module intended for use with Nose.
 
 """
-from nose.tools import raises
-from ... import graph_objs
-from ... exceptions import PlotlyError
-from copy import copy
+from ... graph_objs import graph_objs
+from ... plotly import plotly as py
+from ... import exceptions
+
 
 # username for tests: 'plotlyimagetest'
 # password for account: 'password'
@@ -88,45 +88,14 @@ def is_trivial(obj):
         return False
 
 
-# def test_trace():
-#     polar_plots = [6, 7, 8]
-#     skip = range(0)
-#     import plotly.plotly as py
-#     py.sign_in('plotlyimagetest', '786r5mecv0')
-#     file_id = 0
-#     while True:
-#         while (file_id in polar_plots) or (file_id in skip):
-#             print "    skipping file number: {}".format(file_id)
-#             file_id += 1
-#         try:
-#             print "testing file numer: {}".format(file_id)
-#             print "######################\n\n"
-#             fig_raw = py.get_figure('plotlyimagetest', str(file_id), raw=True)
-#         except:
-#             pass
-#         if fig_raw is None:
-#             print "    couldn't find file number: {}".format(file_id)
-#         try:
-#             for entry in fig_raw['data']:
-#                 for key in entry:
-#                     if key not in graph_objs.INFO['trace']:
-#                         print "ADD THIS KEY TO TRACE! -> {}".format(key)
-#                         raise PlotlyError
-#         except KeyError:
-#             pass
-#         file_id += 1
-#         if file_id > 1:
-#             break
-
-
 def test_all():
+    end_file = 2
     polar_plots = [6, 7, 8]
     skip = range(0)
-    import pprint
-    import plotly.plotly as py
     py.sign_in('plotlyimagetest', '786r5mecv0')
     file_id = 0
     while True:
+        fig, fig_raw = None, None
         while (file_id in polar_plots) or (file_id in skip):
             print "    skipping file number: {}".format(file_id)
             file_id += 1
@@ -135,28 +104,17 @@ def test_all():
             print "######################\n\n"
             fig = py.get_figure('plotlyimagetest', str(file_id))
             fig_raw = py.get_figure('plotlyimagetest', str(file_id), raw=True)
-        except:
+        except exceptions.PlotlyError:
             pass
         if (fig is None) and (fig_raw is None):
             print "    couldn't find file number: {}".format(file_id)
         else:
             compare_with_raw(fig, fig_raw, parents=['figure'])
-            # for entry, entry_raw in zip(fig['data'], fig_raw['data']):
-            #     if entry.__class__.__name__ == 'Trace':
-            #         print 'file number {} had this graph_obj:\n'.format(file_id)
-            #         pp = pprint.PrettyPrinter(indent=4)
-            #         pp.pprint(entry)
-            #         print "\n\n#########################################\n\n"
-            #         print 'file number {} had this raw_obj:\n'.format(file_id)
-            #         pp.pprint(entry_raw)
-            #         missing = [key for key in entry
-            #                    if key not in graph_objs.INFO[entry['type']]]
-            #         print 'missing keys from type: {}\n {}'.format(
-            #             entry['type'], missing)
-            #         raise PlotlyError
         file_id += 1
-        if file_id > 46:
+        if file_id > end_file:
             break
-    raise PlotlyError("see above print out...")
+    raise exceptions.PlotlyError("This error was generated to see the "
+                                 "above print out...")
+
 
 

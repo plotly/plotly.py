@@ -6,7 +6,7 @@ A module intended for use with Nose. Check that items in graph_objs_meta.json
 are properly defined in both graph_objs.py and included in the mapping dicts.
 
 """
-from ... import graph_objs
+from ... graph_objs import graph_objs
 
 
 def test_info_keys_in_key_to_name():
