@@ -1,6 +1,8 @@
 Python-API: Scientific Graphing Library 
 ======
 
+Checkout our notebook [here](http://htmlpreview.github.com/?https://github.com/plotly/python-api/blob/1.0/notebooks/Plotly%20and%20Python.html).
+
 Plotly's scientific graphing libraries let you make and share interactive, publication-quality graphs
 in your browser. Plotly's online graphing tools can interface with your desktop environment, allowing you to import or stream data. Then, style beautiful graphs with code and Plotly's online interface. Easily share your data and graphs publicly with a URL or privately with your team.
 
