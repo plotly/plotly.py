@@ -1,10 +1,32 @@
-Python-API: Scientific Graphing Library 
-======
+Plotly's Python-API:
+====================
 
-Checkout our notebook [here](http://htmlpreview.github.com/?https://github.com/plotly/python-api/blob/1.0/notebooks/Plotly%20and%20Python.html).
+Analyze and visualize data, together... (from Python).
+------------------------------------------------------
 
-Plotly's scientific graphing libraries let you make and share interactive, publication-quality graphs
-in your browser. Plotly's online graphing tools can interface with your desktop environment, allowing you to import or stream data. Then, style beautiful graphs with code and Plotly's online interface. Easily share your data and graphs publicly with a URL or privately with your team.
+Nutshell:
+---------
+
+Plotly. It's all about the graphs.
+
+What we're about:
+
+* a platform for sharing open data
+
+* interactive, publication-quality graphs in your browser
+
+* an easy-to-use online interface
+
+Checkout these guides to get you going:
+
+* [Quickstart](http://htmlpreview.github.com/?https://github.com/plotly/python-api/blob/1.0/notebooks/Quickstart.html)
+
+* [Plotly and Python](http://htmlpreview.github.com/?https://github.com/plotly/python-api/blob/1.0/notebooks/Plotly%20and%20Python.html)
+
+* [Plotly and matplotlib](http://htmlpreview.github.com/?https://github.com/plotly/python-api/blob/1.0/notebooks/Plotly%20and%20mpld3.html)
+
+* [The *in-depth* guidebook]()
+
 
 Gallery Examples
 -------------

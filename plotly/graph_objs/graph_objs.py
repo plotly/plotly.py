@@ -190,10 +190,12 @@ class DictMeta(type):
                     required = str(obj_info[key]['required'])
                 except KeyError:
                     required = undocumented
+
                 try:
                     typ = str(obj_info[key]['type'])
                 except KeyError:
                     typ = undocumented
+
                 try:
                     val_types = str(obj_info[key]['val_types'])
                     if typ == 'object':
@@ -223,6 +225,11 @@ class DictMeta(type):
                         textwrap.wrap(str(obj_info[key]['examples']),
                                       width=width3)) + "\n"
                     doc += ex
+                if 'code' in obj_info[key]:
+                    code = "\n\t\tCode snippet:"
+                    code += "\n\t\t\t>>>".join(
+                        str(obj_info[key]['code']).split('>>>')) + "\n"
+                    doc += code
                 doc += '\n'
         attrs['__doc__'] = doc.expandtabs(tab_size)
         return super(DictMeta, mcs).__new__(mcs, name, bases, attrs)
@@ -409,35 +416,35 @@ class PlotlyDict(dict):
                           "a user interface.")
 
     def update(self, dict1=None, **dict2):
-        """Update current dict with changed_dict.
+        """Update current dict with dict1 and then dict2.
 
         This recursively updates the structure of the original dictionary-like
-        object with the new entries in the second object. This allows users
-        to update with large, nested structures.
+        object with the new entries in the second and third objects. This
+        allows users to update with large, nested structures.
 
-        Example:
+        Note, because the dict2 packs up all the keyword arguments, you can
+        specify the changes as a list of keyword agruments.
+
+        Examples:
+        # update with dict
         obj = Layout(title='my title', xaxis=XAxis(range=[0,1], domain=[0,1]))
-        obj.update(dict(title='new title', xaxis=dict(domain=[0,.8])))
+        update_dict = dict(title='new title', xaxis=dict(domain=[0,.8]))
+        obj.update(update_dict)
         obj
         {'title': 'new title', 'xaxis': {'range': [0,1], 'domain': [0,.8]}}
 
-        This `somewhat` supports duck-typing. It will accept the standard
-        call to `update` like any dict object, however, it only supports
-        updating from ONE new dictionary, a second dictionary will simply be
-        ignored and the user will be warned.
+        # update with list of keyword arguments
+        obj = Layout(title='my title', xaxis=XAxis(range=[0,1], domain=[0,1]))
+        obj.update(title='new title', xaxis=dict(domain=[0,.8]))
+        obj
+        {'title': 'new title', 'xaxis': {'range': [0,1], 'domain': [0,.8]}}
+
+        This 'fully' supports duck-typing in that the call signature is
+        identical, however this differs slightly from the normal update
+        method provided by Python's dictionaries.
 
         """
-        # try:
-        #     dict1 = NAME_TO_CLASS[self.__class__.__name__](dict1)
-        #     dict2 = NAME_TO_CLASS[self.__class__.__name__](dict2)
-        # except exceptions.PlotlyError:
-        #     raise exceptions.PlotlyInstantiationError(
-        #         "A dictionary to be used as an update cannot be instantiated "
-        #         "as a graph_obj. Make sure it is of the same form as the "
-        #         "graph_obj you are trying to update it with.")
         self.to_graph_objs()
-        # if len(dict2):
-        #     dict2.update(dict1)
 
         if dict1 is not None:
             for key, val in dict1.items():
