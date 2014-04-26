@@ -1,0 +1,194 @@
+<style>
+    /*body {
+        background-color: #F5F5F5;
+    }*/
+    div.cell{
+        width: 850px;
+        margin-left: 10% !important;
+        margin-right: auto;
+    }
+    h1 {
+        font-family: 'Open sans',verdana,arial,sans-serif;
+    }
+    .text_cell_render h1 {
+        font-weight: 200;
+        font-size: 40pt;
+        line-height: 100%;
+        color:#447adb;
+        margin-bottom: 0em;
+        margin-top: 0em;
+        display: block;
+        white-space: nowrap;
+    }
+    h2 {
+        font-family: 'Open sans',verdana,arial,sans-serif;
+        text-indent:1em;
+    }
+    .text_cell_render h2 {
+        font-weight: 200;
+        font-size: 20pt;
+        font-style: italic;
+        line-height: 100%;
+        color:#447adb;
+        margin-bottom: 1.5em;
+        margin-top: 0.5em;
+        display: block;
+        white-space: nowrap;
+    }
+    h3 {
+        font-family: 'Open sans',verdana,arial,sans-serif;
+     /*   text-indent:0.5em; */
+    }
+    .text_cell_render h3 {
+        font-weight: 300;
+        font-size: 18pt;
+        /* font-style: italic; */
+        line-height: 100%;
+        /* color: #1d3b84; */
+        color:#447adb;
+        margin-bottom: 0.5em;
+        margin-top: 2em;
+        display: block;
+        white-space: nowrap;
+    }
+    h4 {
+        font-family: 'Open sans',verdana,arial,sans-serif;
+    }
+    .text_cell_render h4 {
+        font-weight: 300;
+        font-size: 16pt;
+        color:#447adb;
+        margin-bottom: 0.5em;
+        margin-top: 0.5em;
+        display: block;
+        white-space: nowrap;
+    }
+    h5 {
+        font-family: 'Open sans',verdana,arial,sans-serif;
+    }
+    .text_cell_render h5 {
+        font-weight: 300;
+        font-style: normal;
+        color: #1d3b84;
+        font-size: 16pt;
+        margin-bottom: 0em;
+        margin-top: 1.5em;
+        display: block;
+        white-space: nowrap;
+    }
+    div.text_cell_render{
+        font-family: 'Open sans',verdana,arial,sans-serif;
+        line-height: 135%;
+        font-size: 125%;
+        width:750px;
+        margin-left:auto;
+        margin-right:auto;
+        text-align:justify;
+        text-justify:inter-word;
+    }
+    div.output_area pre{
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-box-align: stretch;
+        display: -moz-box;
+        -moz-box-orient: vertical;
+        -moz-box-align: stretch;
+        display: box;
+        box-orient: vertical;
+        box-align: stretch;
+        width: 100%;
+        -webkit-box-flex: 1;
+        -moz-box-flex: 1;
+        box-flex: 1;
+        overflow: auto;
+        overflow-x: auto;
+        overflow-y: auto;
+    }
+    code{
+      /* font-family: "Source Code Pro"; */
+      font-size: 78%;
+    }
+    ul{
+        /* color:#447adb; */  // colors text too
+        margin: 2em;
+    }
+    ul li{
+        padding-left: 0.5em;
+        margin-bottom: 0.5em;
+        margin-top: 0.5em;
+    }
+    ul li li{
+        padding-left: 0.2em;
+        margin-bottom: 0.2em;
+        margin-top: 0.2em;
+    }
+    /*.prompt{
+        display: None;
+    } */
+    a:link{
+       text-decoration: none; // does not work in nbviewer
+       font-weight: bold;
+       color:#447adb;
+    }
+    ul li{
+        padding-left: 0.5em;
+        margin-bottom: 0.5em;
+        margin-top: 0.2em;
+    }
+    a:visited{
+       text-decoration: none; // does not work in nbviewer
+       font-weight: bold;
+       color: #1d3b84;
+    }
+    a:hover{
+       text-decoration: none; // does not work in nbviewer
+       font-weight: bold;
+       color: #1d3b84;
+    }
+    a:focus{
+       text-decoration: none; // does not work in nbviewer
+       font-weight: bold;
+       color:#447adb;
+    }
+    a:active{
+       text-decoration: none; // does not work in nbviewer
+       font-weight: bold;
+       color:#447adb;
+    }
+    .warning{
+        color: rgb( 240, 20, 20 )
+        }
+    hr {
+      color: #f3f3f3;
+      background-color: #f3f3f3;
+      height: 1px;
+    }
+    blockquote{
+      display:block;
+      background: #f3f3f3;
+      font-family: 'Open sans',verdana,arial,sans-serif;
+      line-height: 135%;
+      font-size: 125%;
+      width:610px;
+      padding: 15px 15px 15px 15px;
+      text-align:justify;
+      text-justify:inter-word;
+      }
+    element.style {
+    }
+</style>
+<script>
+    MathJax.Hub.Config({
+                        TeX: {
+                           extensions: ["AMSmath.js"]
+                           },
+                tex2jax: {
+                    inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                    displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+                },
+                displayAlign: 'center', // Change this to 'center' to center equations.
+                "HTML-CSS": {
+                    styles: {'.MathJax_Display': {"margin": 4}}
+                }
+        });
+</script>
