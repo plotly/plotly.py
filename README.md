@@ -1,7 +1,8 @@
 Plotly's Python-API
 ===================
 
-Interactive, publication-quality plots in your web browser.
+#### Interactive, publication-quality plots in your web browser.
+
 
 * [Quickstart IPython Notebook](http://htmlpreview.github.com/?https://github.com/plotly/python-api/blob/1.0/notebooks/Quickstart.html)
 
