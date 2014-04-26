@@ -2,6 +2,10 @@
     /*body {
         background-color: #F5F5F5;
     }*/
+    div.output_subarea{
+        max-height:600px;
+        overflow:scroll;
+    }
     div.cell{
         width: 850px;
         margin-left: 10% !important;
