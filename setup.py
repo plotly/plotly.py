@@ -4,7 +4,7 @@ exec (open('plotly/version.py').read())
 
 
 def readme():
-    with open('README.txt') as f:
+    with open('README.rst') as f:
         return f.read()
 
 
@@ -16,7 +16,8 @@ setup(name='plotly',
       maintainer='Chris P',
       maintainer_email='chris@plot.ly',
       url='https://plot.ly/api/python',
-      description='Python plotting library for collaborative, interactive, web-based, publication-quality graphs.',
+      description="Python plotting library for collaborative, "
+                  "interactive, publication-quality graphs.",
       long_description=readme(),
       classifiers=[
           'Development Status :: 4 - Beta',
@@ -26,6 +27,8 @@ setup(name='plotly',
       ],
       license='MIT',
       packages=['plotly',
+                'plotly/plotly',
+                'plotly/graph_objs',
                 'plotly/matplotlylib',
                 'plotly/matplotlylib/mplexporter',
                 'plotly/matplotlylib/mplexporter/renderers'],

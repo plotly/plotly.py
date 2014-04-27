@@ -18,14 +18,17 @@ import requests
 import json
 import warnings
 import httplib
-from copy import copy
+import copy
 import base64
-from . import utils
+import os
+from .. import utils
+from .. import tools
+from .. import exceptions
+from .. import version
 
-import tools
-from . import exceptions
-
-from .version import __version__
+__all__ = ["sign_in", "update_plot_options", "get_plot_options",
+           "get_credentials", "iplot", "plot", "iplot_mpl", "plot_mpl",
+           "get_figure", "Stream"]
 
 _DEFAULT_PLOT_OPTIONS = dict(
     filename="plot from API",
@@ -78,7 +81,7 @@ def get_plot_options():
     Use `update_plot_options()` to change.
     """
     global _plot_options
-    return copy(_plot_options)
+    return copy.copy(_plot_options)
 
 
 def get_credentials():
@@ -86,7 +89,7 @@ def get_credentials():
     """
     global _credentials
     if ('username' in _credentials) and ('api_key' in _credentials):
-        return copy(_credentials)
+        return copy.copy(_credentials)
     else:
         return tools.get_credentials_file()
 
@@ -168,6 +171,21 @@ def get_figure(file_owner, file_id, raw=False):
                'plotly-version': '2.0',
                'plotly-platform': 'pythonz'}
 
+    try:
+        test_if_int = int(file_id)
+    except ValueError:
+        raise exceptions.PlotlyError(
+            "The 'file_id' argument was not able to be converted into an "
+            "integer number. Make sure that the positional 'file_id' argument "
+            "is a number that can be converted into an integer or a string "
+            "that can be converted into an integer."
+        )
+
+    if int(file_id) < 0:
+        raise exceptions.PlotlyError(
+            "The 'file_id' argument must be a non-negative number."
+        )
+
     response = requests.get(server + resource, headers=headers)
     if response.status_code == 200:
         content = json.loads(response.content)
@@ -181,9 +199,10 @@ def get_figure(file_owner, file_id, raw=False):
     else:
         try:
             content = json.loads(response.content)
+            raise exceptions.PlotlyError(content)
         except:
-            raise("There was an error retrieving this file")
-        raise exceptions.PlotlyError(s)
+            raise exceptions.PlotlyError(
+                "There was an error retrieving this file")
 
 
 class Stream:
@@ -377,7 +396,7 @@ def _send_to_plotly(figure, **plot_options):
 
 
     payload = dict(platform='python', # TODO: It'd be cool to expose the platform for RaspPi and others
-                   version=__version__,
+                   version=version.__version__,
                    args=data,
                    un=username,
                    key=api_key,

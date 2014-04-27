@@ -6,7 +6,7 @@ A module intended for use with Nose.
 
 """
 from nose.tools import raises
-from ...graph_objs import *
+from ...graph_objs.graph_objs import *
 from ...exceptions import PlotlyError
 
 
