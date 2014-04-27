@@ -4,3 +4,6 @@
 [submodule "plotly/graph_reference"]
 	path = plotly/graph_reference
 	url = https://github.com/plotly/graph_reference.git
+[submodule "plotly/chunked-requests"]
+	path = plotly/chunked-requests
+	url = git://github.com/chriddyp/chunked-requests.git
