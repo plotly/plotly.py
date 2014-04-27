@@ -142,15 +142,20 @@ class PlotlyRenderer(Renderer):
             domain=mpltools.convert_x_domain(props['bounds'],
                                              self.mpl_x_bounds),
             anchor='y{}'.format(self.axis_ct),
-            zeroline= False)
+            zeroline=False,
+            showline=True,
+            mirror=True,
+            ticks='inside')
         yaxis = YAxis(
             range=props['ylim'],
             showgrid=props['axes'][0]['grid']['gridOn'],
             domain=mpltools.convert_y_domain(props['bounds'],
                                              self.mpl_y_bounds),
             anchor='x{}'.format(self.axis_ct),
-            zeroline=False
-        )
+            zeroline=False,
+            showline=True,
+            mirror=True,
+            ticks='inside')
         self.plotly_fig['layout']['xaxis{}'.format(self.axis_ct)] = xaxis
         self.plotly_fig['layout']['yaxis{}'.format(self.axis_ct)] = yaxis
 

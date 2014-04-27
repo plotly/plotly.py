@@ -149,13 +149,13 @@ def plot(figure_or_data, **plot_options):
         raise exceptions.PlotlyAccountError(res['error'])
 
 
-def iplot_mpl(fig, resize=True, **plot_options):
-    fig = tools.mpl_to_plotly(fig, resize=resize)
+def iplot_mpl(fig, resize=True, strip_style=False, **plot_options):
+    fig = tools.mpl_to_plotly(fig, resize=resize, strip_style=strip_style)
     return iplot(fig, **plot_options)
 
 
-def plot_mpl(fig, resize=True, **plot_options):
-    fig = tools.mpl_to_plotly(fig, resize=resize)
+def plot_mpl(fig, resize=True, strip_style=False, **plot_options):
+    fig = tools.mpl_to_plotly(fig, resize=resize, strip_style=strip_style)
     return plot(fig, **plot_options)
 
 
