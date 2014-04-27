@@ -55,7 +55,7 @@ class PlotlyRenderer(Renderer):
         mouse around a figure in plotly, it's set to show the 'closest' point.
 
         Positional agurments:
-        fig -- an matplotlib.figure.Figure object.
+        fig -- a matplotlib.figure.Figure object.
         props.keys(): [
             'figwidth',
             'figheight',

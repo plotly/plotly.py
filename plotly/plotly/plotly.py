@@ -97,7 +97,18 @@ def get_credentials():
 ### plot stuff ###
 
 def iplot(figure_or_data, **plot_options):
-    """for use in ipython notebooks"""
+    """Create a unique url for this plot in Plotly and open in IPython.
+
+    plot_options keyword agruments:
+    filename (string) -- the name that will be associated with this figure
+    fileopt ('new' | 'overwrite' | 'extend' | 'append') -- 'new' creates a
+        'new': create a new, unique url for this plot
+        'overwrite': overwrite the file associated with `filename` with this
+        'extend': add additional numbers (data) to existing traces
+        'append': add additional traces to existing data lists
+    world_readable (default=True) -- make this figure private/public
+
+    """
     if 'auto_open' not in plot_options:
         plot_options['auto_open'] = False
     res = plot(figure_or_data, **plot_options)
@@ -114,6 +125,7 @@ def iplot(figure_or_data, **plot_options):
 
 
 def _plot_option_logic(plot_options):
+    """Sets plot_options via a precedence hierarchy."""
     options = dict()
     options.update(_DEFAULT_PLOT_OPTIONS)
     options.update(_plot_options)
@@ -124,8 +136,20 @@ def _plot_option_logic(plot_options):
 
 
 def plot(figure_or_data, **plot_options):
-    """returns a url with the graph
-        opens the graph in the browser if plot_options['auto_open'] is True
+    """Create a unique url for this plot in Plotly and optionally open url.
+
+    plot_options keyword agruments:
+    filename (string) -- the name that will be associated with this figure
+    fileopt ('new' | 'overwrite' | 'extend' | 'append') -- 'new' creates a
+        'new': create a new, unique url for this plot
+        'overwrite': overwrite the file associated with `filename` with this
+        'extend': add additional numbers (data) to existing traces
+        'append': add additional traces to existing data lists
+    world_readable (default=True) -- make this figure private/public
+    auto_open (default=True) -- Toggle browser options
+        True: open this plot in a new browser tab
+        False: do not open plot in the browser, but do return the unique url
+
     """
     if isinstance(figure_or_data, dict):
         figure = figure_or_data
@@ -150,16 +174,70 @@ def plot(figure_or_data, **plot_options):
 
 
 def iplot_mpl(fig, resize=True, strip_style=False, **plot_options):
+    """Replot a matplotlib figure with plotly in IPython.
+
+    This function:
+    1. converts the mpl figure into JSON (run help(plolty.tools.mpl_to_plotly))
+    2. makes a request to Plotly to save this figure in your account
+    3. displays the image in your IPython output cell
+
+    Positional agruments:
+    fig -- a figure object from matplotlib
+
+    Keyword arguments:
+    resize (default=True) -- allow plotly to choose the figure size
+    strip_style (default=False) -- allow plotly to choose style options
+
+    Additional keyword arguments:
+    plot_options -- run help(plotly.plotly.iplot)
+
+    """
     fig = tools.mpl_to_plotly(fig, resize=resize, strip_style=strip_style)
     return iplot(fig, **plot_options)
 
 
 def plot_mpl(fig, resize=True, strip_style=False, **plot_options):
+    """Replot a matplotlib figure with plotly.
+
+    This function:
+    1. converts the mpl figure into JSON (run help(plolty.tools.mpl_to_plotly))
+    2. makes a request to Plotly to save this figure in your account
+    3. opens your figure in a browser tab OR returns the unique figure url
+
+    Positional agruments:
+    fig -- a figure object from matplotlib
+
+    Keyword arguments:
+    resize (default=True) -- allow plotly to choose the figure size
+    strip_style (default=False) -- allow plotly to choose style options
+
+    Additional keyword arguments:
+    plot_options -- run help(plotly.plotly.plot)
+
+    """
     fig = tools.mpl_to_plotly(fig, resize=resize, strip_style=strip_style)
     return plot(fig, **plot_options)
 
 
 def get_figure(file_owner, file_id, raw=False):
+    """Returns a JSON figure representation for the specified file_owner/_id
+
+    Plotly uniquely identifies figures with a 'file_owner'/'file_id' pair.
+
+    Positional arguments:
+    file_owner (string) -- a valid plotly username
+    file_id ("int") -- an int or string that can be converted to int
+
+    Keyword arguments:
+    raw (default=False) -- if true, return unicode JSON string verbatim**
+
+    **by default, plotly will return a Figure object (run help(plotly
+    .graph_objs.Figure)). This representation decodes the keys and values from
+    unicode (if possible), removes information irrelevant to the figure
+    representation, and converts the JSON dictionary objects to plotly
+    `graph objects`.
+
+    """
     # server = "http://ec2-54-196-84-85.compute-1.amazonaws.com"
     server = "https://plot.ly"
     resource = "/apigetfile/{username}/{file_id}".format(username=file_owner,
