@@ -25,12 +25,18 @@ SIMPLE_SCATTER = {
                          'domain': [0.0, 1.0],
                          'range': (0.0, 9.0),
                          'showgrid': False,
-                         'zeroline': False},
+                         'zeroline': False,
+                         'showline': True,
+                         'mirror': True,
+                         'ticks': 'inside'},
                'yaxis': {'anchor': 'x',
                          'domain': [0.0, 1.0],
                          'range': (1.0, 10.0),
                          'showgrid': False,
-                         'zeroline': False}}}
+                         'zeroline': False,
+                         'showline': True,
+                         'mirror': True,
+                         'ticks': 'inside'}}}
 
 DOUBLE_SCATTER = {
     'data': [{'marker': {'color': 'rgb(255,0,0)',
@@ -75,9 +81,15 @@ DOUBLE_SCATTER = {
                          'domain': [0.0, 1.0],
                          'range': (-2.0, 10.0),
                          'showgrid': False,
-                         'zeroline': False},
+                         'zeroline': False,
+                         'showline': True,
+                         'mirror': True,
+                         'ticks': 'inside'},
                'yaxis': {'anchor': 'x',
                          'domain': [0.0, 1.0],
                          'range': (-2.0, 10.0),
                          'showgrid': False,
-                         'zeroline': False}}}
+                         'zeroline': False,
+                         'showline': True,
+                         'mirror': True,
+                         'ticks': 'inside'}}}

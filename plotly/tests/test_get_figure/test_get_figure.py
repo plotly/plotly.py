@@ -89,9 +89,9 @@ def is_trivial(obj):
 
 
 def test_all():
-    end_file = 2
-    polar_plots = [6, 7, 8]
-    skip = range(0)
+    end_file = 8
+    polar_plots = [] # [6, 7, 8]
+    skip = range(6)
     py.sign_in('plotlyimagetest', '786r5mecv0')
     file_id = 0
     while True:
