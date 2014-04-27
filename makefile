@@ -9,7 +9,7 @@ sync_chunked_requests : plotly/chunked_requests
 install : sync_mplexporter sync_chunked_requests
 	python setup.py install
 
-pull_subs : plotly/mplexporter plotly/graph_reference plotly/chunked_requests
+pull_subs : plotly/mplexporter plotly/graph_reference chriddyp/chunked_requests
 	git submodule foreach 'git pull origin master'
 
 html_nbs : notebooks
