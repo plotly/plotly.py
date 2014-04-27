@@ -17,8 +17,8 @@ html_nbs : notebooks
 		ipython nbconvert 'Plotly and Python.ipynb'; \
 		python add_some_css.py 'Plotly and Python.html'
 	cd notebooks; \
-		ipython nbconvert 'Plotly and mpld3.ipynb'; \
-		python add_some_css.py 'Plotly and mpld3.html'
+		ipython nbconvert 'Plotly and matplotlib and mpld3.ipynb'; \
+		python add_some_css.py 'Plotly and matplotlib and mpld3.html'
 	cd notebooks; \
 		ipython nbconvert Quickstart.ipynb; \
 		python add_some_css.py Quickstart.html
