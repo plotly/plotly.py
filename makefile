@@ -4,9 +4,9 @@ sync_mplexporter : plotly/mplexporter
 	rsync -r plotly/mplexporter/mplexporter plotly/matplotlylib/
 
 sync_chunked_requests : plotly/chunked_requests
-	rsync -r plotly/chunked_requests/chunked_requests plotly/chunked_requests
+	rsync -r plotly/chunked_requests/chunked_requests plotly/plotly/
 
-install : sync_mplexporter
+install : sync_mplexporter sync_chunked_requests
 	python setup.py install
 
 pull_subs : plotly/mplexporter plotly/graph_reference plotly/chunked_requests
