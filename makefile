@@ -3,10 +3,13 @@ all : pull_subs install
 sync_mplexporter : plotly/mplexporter
 	rsync -r plotly/mplexporter/mplexporter plotly/matplotlylib/
 
+sync_chunked_requests : plotly/chunked_requests
+	rsync -r plotly/chunked_requests/chunked_requests plotly/chunked_requests
+
 install : sync_mplexporter
 	python setup.py install
 
-pull_subs : plotly/mplexporter plotly/graph_reference
+pull_subs : plotly/mplexporter plotly/graph_reference plotly/chunked_requests
 	git submodule foreach 'git pull origin master'
 
 html_nbs : notebooks
