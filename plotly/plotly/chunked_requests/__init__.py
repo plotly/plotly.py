@@ -1,1 +1,1 @@
-from chunked_requests.chunked_request import Stream
+from chunked_request import Stream
