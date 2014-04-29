@@ -61,8 +61,6 @@ KEY_TO_NAME = dict(
     heatmap='Heatmap',
     histogram='Histogram',
     histogram2d='Histogram2d',
-    histogramx='Histogramx',
-    histogramy='Histogramy',
     scatter='Scatter',
     annotation='Annotation',
     colorbar='ColorBar',
@@ -103,8 +101,6 @@ NAME_TO_KEY = dict(
     Heatmap='heatmap',
     Histogram='histogram',
     Histogram2d='histogram2d',
-    Histogramx='histogramx',
-    Histogramy='histogramy',
     Scatter='scatter',
     Annotation='annotation',
     ColorBar='colorbar',
@@ -858,28 +854,6 @@ class Histogram(PlotlyTrace):
     """
 
 
-class Histogramx(PlotlyTrace):
-    """A dictionary-like object for representing a histogramx plot in plotly.
-
-    Example:
-
-        py.plot([Histogramx(x=[1,1,2,3,2,3,3,3,4,4,5,1,3,4])])
-
-    """
-    pass
-
-
-class Histogramy(PlotlyTrace):
-    """A dictionary-like object for representing a histogramy plot in plotly.
-
-    Example:
-
-        py.plot([Histogramy(bardir='h', y=[1,1,2,3,2,3,3,3,4,4,5,1,3,4])])
-
-    """
-    pass
-
-
 class Histogram2d(PlotlyTrace):
     """A dictionary-like object for representing a histogram2d plot in plotly.
 
@@ -1153,8 +1127,6 @@ NAME_TO_CLASS = dict(
     Heatmap=Heatmap,
     Histogram=Histogram,
     Histogram2d=Histogram2d,
-    Histogramx=Histogramx,
-    Histogramy=Histogramy,
     Scatter=Scatter,
     AngularAxis=AngularAxis,
     Annotation=Annotation,
