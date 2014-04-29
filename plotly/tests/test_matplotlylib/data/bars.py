@@ -65,12 +65,18 @@ HORIZONTAL_BAR = {
                          'domain': [0.0, 1.0],
                          'range': (0.0, 140.0),
                          'showgrid': False,
-                         'zeroline': False},
+                         'zeroline': False,
+                         'showline': True,
+                         'mirror': True,
+                         'ticks': 'inside'},
                'yaxis': {'anchor': 'x',
                          'domain': [0.0, 1.0],
                          'range': (0.0, 7.0),
                          'showgrid': False,
-                         'zeroline': False}}}
+                         'zeroline': False,
+                         'showline': True,
+                         'mirror': True,
+                         'ticks': 'inside'}}}
 
 H_AND_V_BARS = {
     'data': [{'bardir': 'v',
@@ -97,11 +103,17 @@ H_AND_V_BARS = {
                          'domain': [0.0, 1.0],
                          'range': (0.0, 60.0),
                          'showgrid': False,
-                         'zeroline': False},
+                         'zeroline': False,
+                         'showline': True,
+                         'mirror': True,
+                         'ticks': 'inside'},
                'yaxis': {'anchor': 'x',
                          'domain': [0.0, 1.0],
                          'range': (0.0, 100.0),
                          'showgrid': False,
-                         'zeroline': False}}}
+                         'zeroline': False,
+                         'showline': True,
+                         'mirror': True,
+                         'ticks': 'inside'}}}
 
 

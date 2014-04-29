@@ -26,12 +26,18 @@ SIMPLE_LINE = {
                   'zeroline': False,
                   'domain': [0.0, 1.0],
                   'range': (0.0, 5.0),
-                  'showgrid': False},
+                  'showgrid': False,
+                  'showline': True,
+                  'mirror': True,
+                  'ticks': 'inside'},
         'yaxis': {'anchor': 'x',
                   'zeroline': False,
                   'domain': [0.0, 1.0],
                   'range': (0.0, 200.0),
-                  'showgrid': False}}}
+                  'showgrid': False,
+                  'showline': True,
+                  'mirror': True,
+                  'ticks': 'inside'}}}
 
 COMPLICATED_LINE = {
     'data': [{'marker': {'color': '#FF0000',
@@ -82,9 +88,15 @@ COMPLICATED_LINE = {
                          'zeroline': False,
                          'domain': [0.0, 1.0],
                          'range': (0.0, 6.0),
-                         'showgrid': False},
+                         'showgrid': False,
+                         'showline': True,
+                         'mirror': True,
+                         'ticks': 'inside'},
                'yaxis': {'anchor': 'x',
                          'zeroline': False,
                          'domain': [0.0, 1.0],
                          'range': (0.0, 200.0),
-                         'showgrid': False}}}
+                         'showgrid': False,
+                         'showline': True,
+                         'mirror': True,
+                         'ticks': 'inside'}}}
