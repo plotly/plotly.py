@@ -30,7 +30,7 @@ from .. import exceptions
 from .. import utils
 
 __all__ = ["Data", "Annotations", "Bar", "Box", "Contour", "Heatmap",
-           "Histogramx", "Histogramy", "Histogram2d", "Scatter", "Annotation",
+           "Histogram", "Histogram2d", "Scatter", "Annotation",
            "ColorBar", "Contours", "ErrorY", "Figure", "Font", "Layout",
            "Legend", "Line", "Margin", "Marker", "Stream", "Trace", "XAxis",
            "XBins", "YAxis", "YBins"]
@@ -59,6 +59,7 @@ KEY_TO_NAME = dict(
     box='Box',
     contour='Contour',
     heatmap='Heatmap',
+    histogram='Histogram',
     histogram2d='Histogram2d',
     histogramx='Histogramx',
     histogramy='Histogramy',
@@ -100,6 +101,7 @@ NAME_TO_KEY = dict(
     Box='box',
     Contour='contour',
     Heatmap='heatmap',
+    Histogram='histogram',
     Histogram2d='histogram2d',
     Histogramx='histogramx',
     Histogramy='histogramy',
@@ -843,6 +845,19 @@ class Heatmap(PlotlyTrace):
     pass
 
 
+class Histogram(PlotlyTrace):
+    """A dictionary-like object for representing a histogram plot in plotly.
+
+    Example:
+        # make a histogram along xaxis...
+        py.plot([Histogram(x=[1,1,2,3,2,3,3,3,4,4,5,1,3,4])])
+
+        # make a histogram along yaxis...
+        py.plot([Histogram(y=[1,1,2,3,2,3,3,3,4,4,5,1,3,4])])
+
+    """
+
+
 class Histogramx(PlotlyTrace):
     """A dictionary-like object for representing a histogramx plot in plotly.
 
@@ -1136,6 +1151,7 @@ NAME_TO_CLASS = dict(
     Box=Box,
     Contour=Contour,
     Heatmap=Heatmap,
+    Histogram=Histogram,
     Histogram2d=Histogram2d,
     Histogramx=Histogramx,
     Histogramy=Histogramy,

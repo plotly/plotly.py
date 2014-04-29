@@ -89,32 +89,36 @@ def is_trivial(obj):
 
 
 def test_all():
-    end_file = 8
-    polar_plots = [] # [6, 7, 8]
-    skip = range(6)
-    py.sign_in('plotlyimagetest', '786r5mecv0')
-    file_id = 0
-    while True:
-        fig, fig_raw = None, None
-        while (file_id in polar_plots) or (file_id in skip):
-            print "    skipping file number: {}".format(file_id)
+    run_test = True
+    end_file = 20
+    polar_plots = [6, 7, 8]
+    skip = range(0)
+    if run_test:
+        py.sign_in('plotlyimagetest', '786r5mecv0')
+        file_id = 0
+        while True:
+            fig, fig_raw = None, None
+            while (file_id in polar_plots) or (file_id in skip):
+                print "    skipping file number: {}".format(file_id)
+                file_id += 1
+            try:
+                print "testing file numer: {}".format(file_id)
+                print "######################\n\n"
+                fig = py.get_figure('plotlyimagetest', str(file_id))
+                fig_raw = py.get_figure('plotlyimagetest',
+                                        str(file_id),
+                                        raw=True)
+            except exceptions.PlotlyError:
+                pass
+            if (fig is None) and (fig_raw is None):
+                print "    couldn't find file number: {}".format(file_id)
+            else:
+                compare_with_raw(fig, fig_raw, parents=['figure'])
             file_id += 1
-        try:
-            print "testing file numer: {}".format(file_id)
-            print "######################\n\n"
-            fig = py.get_figure('plotlyimagetest', str(file_id))
-            fig_raw = py.get_figure('plotlyimagetest', str(file_id), raw=True)
-        except exceptions.PlotlyError:
-            pass
-        if (fig is None) and (fig_raw is None):
-            print "    couldn't find file number: {}".format(file_id)
-        else:
-            compare_with_raw(fig, fig_raw, parents=['figure'])
-        file_id += 1
-        if file_id > end_file:
-            break
-    raise exceptions.PlotlyError("This error was generated to see the "
-                                 "above print out...")
+            if file_id > end_file:
+                break
+        raise exceptions.PlotlyError("This error was generated to see the "
+                                     "above print out...")
 
 
 
