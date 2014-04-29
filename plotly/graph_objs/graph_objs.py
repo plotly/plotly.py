@@ -846,10 +846,10 @@ class Histogram(PlotlyTrace):
 
     Example:
         # make a histogram along xaxis...
-        py.plot([Histogram(x=[1,1,2,3,2,3,3,3,4,4,5,1,3,4])])
+        py.plot([Histogram(x=[1,1,2,3,2,3,3])])
 
         # make a histogram along yaxis...
-        py.plot([Histogram(y=[1,1,2,3,2,3,3,3,4,4,5,1,3,4])])
+        py.plot([Histogram(y=[1,1,2,3,2,3,3], orientation='h')])
 
     """
 
