@@ -1,5 +1,6 @@
 import time
 import httplib
+import StringIO
 
 
 class Stream:
@@ -11,7 +12,6 @@ class Stream:
         self._tries = 0
         self._delay = 1
         self._closed = False
-        self.response = None
         self._server = server
         self._port = port
         self._headers = headers
@@ -64,30 +64,57 @@ class Stream:
         self._reset_retries()
 
     def close(self):
-        ''' Close the connection to server and return the
-        response if available. If the connection has already
-        been closed, then return None.
+        ''' Close the connection to server.
 
-        Closing the connection involves
-        sending the Transfer-Encoding terminating bytes
-        and then closing the socket.
+        If available, return a httplib.HTTPResponse object.
+
+        Closing the connection involves sending the
+        Transfer-Encoding terminating bytes.
         '''
         self._reset_retries()
+        self._closed = True
 
-        if self._isconnected():
-            self._conn.send('0\r\n\r\n')
-            self._conn.close()
-            self._closed = True
+        # Chunked-encoded posts are terminated with '0\r\n\r\n'
+        # For some reason, either Python or node.js seems to
+        # require an extra \r\n.
+        try:
+            self._conn.send('\r\n0\r\n\r\n')
+        except httplib.socket.error:
+            # In case the socket has already been closed
+            return ''
 
-            # Wait for a response
-            self._conn.sock.setblocking(True)
-            # Parse the response
-            response = self._conn.sock.recv(500)
-            # Set recv to be non-blocking again
-            self._conn.sock.setblocking(False)
-            return response
-        else:
-            return None
+        # Wait for a response
+        self._conn.sock.setblocking(True)
+        # Parse the response
+        response = ''
+        while True:
+            try:
+                bytes = self._conn.sock.recv(1)
+            except httplib.socket.error:
+                # For error 54: Connection reset by peer
+                # (and perhaps others)
+                return ''
+            if bytes == '':
+                break
+            else:
+                response += bytes
+        # Set recv to be non-blocking again
+        self._conn.sock.setblocking(False)
+
+        # Convert the response string to a httplib.HTTPResponse
+        # object with a bit of a hack
+        if response != '':
+            # Taken from
+            # http://pythonwise.blogspot.ca/2010/02/parse-http-response.html
+            try:
+                response = httplib.HTTPResponse(_FakeSocket(response))
+                response.begin()
+            except:
+                # Bad headers ... etc.
+                # Whatever. the important part is that we closed
+                # the socket.
+                response = ''
+        return response
 
     def _isconnected(self):
         ''' Return True if the socket is still connected
@@ -112,9 +139,7 @@ class Stream:
 
         try:
             # 3 - Check if the server has returned any data.
-            response = self._conn.sock.recv(500)
-            # Save the response
-            self.response = response
+            self._bytes = self._conn.sock.recv(1)
             return False
         except httplib.socket.error as e:
             # Check if recv failed because there was nothing to receive,
@@ -158,3 +183,11 @@ class Stream:
         '''
         self._tries = 0
         self._delay = 1
+
+
+class _FakeSocket(StringIO.StringIO):
+    # Used to construct a httplib.HTTPResponse object
+    # from a string.
+    # Thx to: http://pythonwise.blogspot.ca/2010/02/parse-http-response.html
+    def makefile(self, *args, **kwargs):
+        return self

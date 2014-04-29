@@ -206,13 +206,15 @@ def get_figure(file_owner, file_id, raw=False):
 
 
 class Stream:
-    """ Plotly's real-time graphing interface. Initialize 
-    a Stream object with a stream_id found in https://plot.ly/settings.
-    Real-time graphs are initialized with a call to `plot` that embeds 
+    """ Interface to Plotly's real-time graphing API.
+
+    Initialize a Stream object with a stream_id
+    found in https://plot.ly/settings.
+    Real-time graphs are initialized with a call to `plot` that embeds
     your unique `stream_id`s in each of the graph's traces. The `Stream`
     interface plots data to these traces, as identified with the unique
-    stream_id, in real-time. Every viewer of the graph sees the same 
-    data at the same time.
+    stream_id, in real-time.
+    Every viewer of the graph sees the same data at the same time.
 
     View examples here: nbviewer.ipython.org/github/plotly/Streaming-Demos
 
@@ -228,6 +230,7 @@ class Stream:
     >>> stream.open() # Open the stream
     >>> stream.write(dict(x=1, y=1)) # Plot (1, 1) in your graph
     """
+
     def __init__(self, stream_id):
         """ Initialize a Stream object with your unique stream_id.
         Find your stream_id at https://plot.ly/settings.
