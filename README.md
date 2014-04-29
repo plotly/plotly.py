@@ -3,12 +3,15 @@ Plotly's Python-API
 
 #### Interactive, publication-quality plots in your web browser.
 
+Nutshell
+--------
 
-* [Quickstart IPython Notebook](http://htmlpreview.github.com/?https://github.com/plotly/python-api/blob/1.0/notebooks/Quickstart.html)
+Now you can download, design, and upload Plotly figures--all from Python.
 
-* [In-Depth Guide](http://htmlpreview.github.com/?https://github.com/plotly/python-api/blob/1.0/notebooks/Plotly%20and%20Python.html)
+Where to go from here
+---------------------
 
-* [Plotly and matplotlib](http://htmlpreview.github.com/?https://github.com/plotly/python-api/blob/1.0/notebooks/Plotly%20and%20matplotlib%20and%20mpld3.html)
+* [Get started with our guide book!](http://nbviewer.ipython.org/github/etpinard/plotly-python-doc/blob/1.0/s0_getting-started/s0_getting-started.ipynb)
 
 * Official docs: [https://plot.ly/python](https://plot.ly/python)
 
