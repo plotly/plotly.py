@@ -312,6 +312,7 @@ def get_subplots(rows=1, columns=1, horizontal_spacing=0.1,
 
 
 def get_valid_graph_obj(obj, obj_type=None):
+    _filter(obj)
     try:
         new_obj = graph_objs.NAME_TO_CLASS[obj.__class__.__name__]()
     except KeyError:
@@ -328,3 +329,31 @@ def get_valid_graph_obj(obj, obj_type=None):
             new_obj[key] = val
     new_obj.force_clean()
     return new_obj
+
+
+def _filter(obj):
+    if isinstance(obj, dict):
+        keys = obj.keys()
+        for key in keys:
+            if key in _FILTER_MAP:
+                val = obj.pop(key)
+                key = _FILTER_MAP[key]
+                obj[key] = val
+            if isinstance(obj[key], str):
+                if obj[key] in _FILTER_MAP:
+                    obj[key] = _FILTER_MAP[obj[key]]
+            if isinstance(obj[key], (dict, list)):
+                _filter(obj[key])
+    elif isinstance(obj, list):
+        for index, entry in enumerate(obj):
+            if isinstance(entry, dict):
+                _filter(obj[index])
+    else:
+        pass
+
+_FILTER_MAP = dict(
+    bardir='orientation',
+    histogramx='histogram',
+    histogramy='histogram'
+)
+
