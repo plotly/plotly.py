@@ -144,7 +144,8 @@ class ListMeta(type):
         doc += "Quick method reference:\n\n"
         doc += "\t{}.".format(name) + "\n\t{}.".format(name).join(
             ["update(changes)", "strip_style()", "get_data()",
-             "to_graph_objs()", "validate()", "force_clean()"]) + "\n\n"
+             "to_graph_objs()", "validate()", "to_string()",
+             "force_clean()"]) + "\n\n"
         attrs['__doc__'] = doc.expandtabs(tab_size)
         return super(ListMeta, mcs).__new__(mcs, name, bases, attrs)
 
@@ -172,8 +173,9 @@ class DictMeta(type):
         # Add section header for method list...
         doc += "Quick method reference:\n\n"
         doc += "\t{}.".format(name) + "\n\t{}.".format(name).join(
-            ["update(dict1, **dict2)", "strip_style()", "get_data()",
-             "to_graph_objs()", "validate()", "force_clean()"]) + "\n\n"
+            ["update(changes)", "strip_style()", "get_data()",
+             "to_graph_objs()", "validate()", "to_string()",
+             "force_clean()"]) + "\n\n"
         # Add section header
         if len(obj_info):
             doc += "Valid keys:\n\n"
@@ -363,7 +365,7 @@ class PlotlyList(list):
                     "Plotly list-type objects can only contain plotly "
                     "dict-like objects.")
 
-    def to_string(self, level=0, indent=4, eol='\n'):
+    def to_string(self, level=0, indent=4, eol='\n', pretty=True):
         """Returns a formatted string showing graph_obj declarations.
 
         Example:
@@ -377,7 +379,10 @@ class PlotlyList(list):
             eol=eol,
             indent=' ' * indent * (level + 1))
         for index, entry in enumerate(self):
-            string += entry.to_string(level=level+1, indent=indent, eol=eol)
+            string += entry.to_string(level=level+1,
+                                      indent=indent,
+                                      eol=eol,
+                                      pretty=pretty)
             if index < len(self) - 1:
                 string += ",{eol}{indent}".format(
                     eol=eol,
@@ -612,7 +617,7 @@ class PlotlyDict(dict):
                         msg += "Couldn't find uses for key: {}\n\n".format(key)
                     raise exceptions.PlotlyInvalidKeyError(msg)
 
-    def to_string(self, level=0, indent=4, eol='\n'):
+    def to_string(self, level=0, indent=4, eol='\n', pretty=True):
         """Returns a formatted string showing graph_obj declarations.
 
         Example:
@@ -633,9 +638,17 @@ class PlotlyDict(dict):
                 try:
                     string += self[key].to_string(level=level+1,
                                                   indent=indent,
-                                                  eol=eol)
+                                                  eol=eol,
+                                                  pretty=pretty)
                 except AttributeError:
-                    string += str(repr(self[key]))
+                    val = self[key]
+                    try:
+                        if pretty and (len(self[key]) > 6):
+                            if not isinstance(self[key], str):
+                                val = self[key][:4] + ['...'] + [self[key][-1]]
+                    except TypeError:
+                        pass
+                    string += str(repr(val))
                 if index < len(self) - 1:
                     string += ","
                 index += 1
@@ -809,7 +822,7 @@ class PlotlyTrace(PlotlyDict):
                           "dictionary-like plot types.\nIt is not meant to be "
                           "a user interface.")
 
-    def to_string(self, level=0, indent=4, eol='\n'):
+    def to_string(self, level=0, indent=4, eol='\n', pretty=True):
         """Returns a formatted string showing graph_obj declarations.
 
         Example:
@@ -822,12 +835,14 @@ class PlotlyTrace(PlotlyDict):
             trace_type = self.pop('type')
             string = super(PlotlyTrace, self).to_string(level=level,
                                                         indent=indent,
-                                                        eol=eol)
+                                                        eol=eol,
+                                                        pretty=pretty)
             self['type'] = trace_type
         else:
             string = super(PlotlyTrace, self).to_string(level=level,
                                                         indent=indent,
-                                                        eol=eol)
+                                                        eol=eol,
+                                                        pretty=pretty)
         return string
 
 
@@ -1083,7 +1098,7 @@ class Layout(PlotlyDict):
                         pass
         super(Layout, self).to_graph_objs()
 
-    def to_string(self, level=0, indent=4, eol='\n'):  # TODO: can't call super
+    def to_string(self, level=0, indent=4, eol='\n', pretty=True):
         """Returns a formatted string showing graph_obj declarations.
 
         Example:
@@ -1091,6 +1106,7 @@ class Layout(PlotlyDict):
             print obj.to_string()
 
         """
+        # TODO: can't call super
         self.to_graph_objs()
         string = "{name}(".format(name=self.__class__.__name__)
         index = 0
@@ -1104,9 +1120,17 @@ class Layout(PlotlyDict):
                 try:
                     string += self[key].to_string(level=level+1,
                                                   indent=indent,
-                                                  eol=eol)
+                                                  eol=eol,
+                                                  pretty=pretty)
                 except AttributeError:
-                    string += str(repr(self[key]))
+                    val = self[key]
+                    try:
+                        if pretty and (len(self[key]) > 6):
+                            if not isinstance(self[key], str):
+                                val = self[key][:4] + ['...'] + [self[key][-1]]
+                    except TypeError:
+                        pass
+                    string += str(repr(val))
                 if index < len(self) - 1:
                     string += ","
                 index += 1
@@ -1122,7 +1146,8 @@ class Layout(PlotlyDict):
             try:
                 string += self[key].to_string(level=level + 1,
                                               indent=indent,
-                                              eol=eol)
+                                              eol=eol,
+                                              pretty=pretty)
             except AttributeError:
                 string += str(repr(self[key]))
             if index < len(self) - 1:
