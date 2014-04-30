@@ -363,6 +363,29 @@ class PlotlyList(list):
                     "Plotly list-type objects can only contain plotly "
                     "dict-like objects.")
 
+    def to_string(self, level=0, indent=4, eol='\n'):
+        """Returns a formatted string showing graph_obj declarations.
+
+        Example:
+
+            print obj.to_string()
+
+        """
+        self.to_graph_objs()
+        string = "{name}([{eol}{indent}".format(
+            name=self.__class__.__name__,
+            eol=eol,
+            indent=' ' * indent * (level + 1))
+        for index, entry in enumerate(self):
+            string += entry.to_string(level=level+1, indent=indent, eol=eol)
+            if index < len(self) - 1:
+                string += ",{eol}{indent}".format(
+                    eol=eol,
+                    indent=' ' * indent * (level + 1))
+        string += "{eol}{indent}])".format(eol=eol,
+                                           indent=' ' * indent * level)
+        return string
+
     def force_clean(self):
         """Attempts to convert to graph_objs and calls force_clean() on entries.
 
@@ -589,6 +612,38 @@ class PlotlyDict(dict):
                         msg += "Couldn't find uses for key: {}\n\n".format(key)
                     raise exceptions.PlotlyInvalidKeyError(msg)
 
+    def to_string(self, level=0, indent=4, eol='\n'):
+        """Returns a formatted string showing graph_obj declarations.
+
+        Example:
+
+            print obj.to_string()
+
+        """
+        self.to_graph_objs()
+        string = "{name}(".format(name=self.__class__.__name__)
+        index = 0
+        obj_key = NAME_TO_KEY[self.__class__.__name__]
+        for key in INFO[obj_key]:
+            if key in self:
+                string += "{eol}{indent}{key}=".format(
+                    eol=eol,
+                    indent=' ' * indent * (level+1),
+                    key=key)
+                try:
+                    string += self[key].to_string(level=level+1,
+                                                  indent=indent,
+                                                  eol=eol)
+                except AttributeError:
+                    string += str(repr(self[key]))
+                if index < len(self) - 1:
+                    string += ","
+                index += 1
+                if index == len(self):
+                    break
+        string += "{eol}{indent})".format(eol=eol, indent=' ' * indent * level)
+        return string
+
     def force_clean(self):
         """Attempts to convert to graph_objs and call force_clean() on values.
 
@@ -754,6 +809,27 @@ class PlotlyTrace(PlotlyDict):
                           "dictionary-like plot types.\nIt is not meant to be "
                           "a user interface.")
 
+    def to_string(self, level=0, indent=4, eol='\n'):
+        """Returns a formatted string showing graph_obj declarations.
+
+        Example:
+
+            print obj.to_string()
+
+        """
+        self.to_graph_objs()
+        if self.__class__.__name__ != "Trace":
+            trace_type = self.pop('type')
+            string = super(PlotlyTrace, self).to_string(level=level,
+                                                        indent=indent,
+                                                        eol=eol)
+            self['type'] = trace_type
+        else:
+            string = super(PlotlyTrace, self).to_string(level=level,
+                                                        indent=indent,
+                                                        eol=eol)
+        return string
+
 
 class Trace(PlotlyTrace):
     """A general data class for plotly. Never validated...
@@ -773,12 +849,6 @@ class Trace(PlotlyTrace):
     """
     pass
 
-
-# class Area(PlotlyTrace):
-#     """A dictionary-like object for representing an area chart in plotly.
-#
-#     """
-#     pass
 
 class Area(PlotlyTrace):
     """A dictionary-like object for representing an area chart in plotly.
@@ -1012,6 +1082,54 @@ class Layout(PlotlyDict):
                     except ValueError:
                         pass
         super(Layout, self).to_graph_objs()
+
+    def to_string(self, level=0, indent=4, eol='\n'):  # TODO: can't call super
+        """Returns a formatted string showing graph_obj declarations.
+
+        Example:
+
+            print obj.to_string()
+
+        """
+        self.to_graph_objs()
+        string = "{name}(".format(name=self.__class__.__name__)
+        index = 0
+        obj_key = NAME_TO_KEY[self.__class__.__name__]
+        for key in INFO[obj_key]:
+            if key in self:
+                string += "{eol}{indent}{key}=".format(
+                    eol=eol,
+                    indent=' ' * indent * (level+1),
+                    key=key)
+                try:
+                    string += self[key].to_string(level=level+1,
+                                                  indent=indent,
+                                                  eol=eol)
+                except AttributeError:
+                    string += str(repr(self[key]))
+                if index < len(self) - 1:
+                    string += ","
+                index += 1
+                if index == len(self):
+                    break
+        left_over_keys = [key for key in self if key not in INFO[obj_key]]
+        left_over_keys.sort()
+        for key in left_over_keys:
+            string += "{eol}{indent}{key}=".format(
+                eol=eol,
+                indent=' ' * indent * (level+1),
+                key=key)
+            try:
+                string += self[key].to_string(level=level + 1,
+                                              indent=indent,
+                                              eol=eol)
+            except AttributeError:
+                string += str(repr(self[key]))
+            if index < len(self) - 1:
+                string += ","
+            index += 1
+        string += "{eol}{indent})".format(eol=eol, indent=' ' * indent * level)
+        return string
 
     def force_clean(self):  # TODO: can't make call to super...
         """Attempts to convert to graph_objs and call force_clean() on values.
