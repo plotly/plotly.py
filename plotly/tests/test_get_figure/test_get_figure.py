@@ -89,7 +89,7 @@ def is_trivial(obj):
 
 
 def test_all():
-    run_test = True
+    run_test = False
     end_file = 20
     polar_plots = [6, 7, 8]
     skip = range(0)

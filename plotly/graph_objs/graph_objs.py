@@ -366,7 +366,7 @@ class PlotlyList(list):
                     "dict-like objects.")
 
     def to_string(self, level=0, indent=4, eol='\n', pretty=True):
-        """Returns a formatted string showing graph_obj declarations.
+        """Returns a formatted string showing graph_obj constructors.
 
         Example:
 
@@ -618,7 +618,7 @@ class PlotlyDict(dict):
                     raise exceptions.PlotlyInvalidKeyError(msg)
 
     def to_string(self, level=0, indent=4, eol='\n', pretty=True):
-        """Returns a formatted string showing graph_obj declarations.
+        """Returns a formatted string showing graph_obj constructors.
 
         Example:
 
@@ -823,7 +823,7 @@ class PlotlyTrace(PlotlyDict):
                           "a user interface.")
 
     def to_string(self, level=0, indent=4, eol='\n', pretty=True):
-        """Returns a formatted string showing graph_obj declarations.
+        """Returns a formatted string showing graph_obj constructors.
 
         Example:
 
@@ -1099,7 +1099,7 @@ class Layout(PlotlyDict):
         super(Layout, self).to_graph_objs()
 
     def to_string(self, level=0, indent=4, eol='\n', pretty=True):
-        """Returns a formatted string showing graph_obj declarations.
+        """Returns a formatted string showing graph_obj constructors.
 
         Example:
 
