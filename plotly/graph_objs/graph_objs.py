@@ -372,6 +372,12 @@ class PlotlyList(list):
 
             print obj.to_string()
 
+        Keyword arguments:
+        level (default = 0) -- set number of indentations to start with
+        indent (default = 4) -- set indentation amount
+        eol (default = '\n') -- set end of line character(s)
+        pretty (default = True) -- curtail long list output with a '...'
+
         """
         self.to_graph_objs()
         string = "{name}([{eol}{indent}".format(
@@ -624,6 +630,12 @@ class PlotlyDict(dict):
 
             print obj.to_string()
 
+        Keyword arguments:
+        level (default = 0) -- set number of indentations to start with
+        indent (default = 4) -- set indentation amount
+        eol (default = '\n') -- set end of line character(s)
+        pretty (default = True) -- curtail long list output with a '...'
+
         """
         self.to_graph_objs()
         string = "{name}(".format(name=self.__class__.__name__)
@@ -828,6 +840,12 @@ class PlotlyTrace(PlotlyDict):
         Example:
 
             print obj.to_string()
+
+        Keyword arguments:
+        level (default = 0) -- set number of indentations to start with
+        indent (default = 4) -- set indentation amount
+        eol (default = '\n') -- set end of line character(s)
+        pretty (default = True) -- curtail long list output with a '...'
 
         """
         self.to_graph_objs()
@@ -1104,6 +1122,12 @@ class Layout(PlotlyDict):
         Example:
 
             print obj.to_string()
+
+        Keyword arguments:
+        level (default = 0) -- set number of indentations to start with
+        indent (default = 4) -- set indentation amount
+        eol (default = '\n') -- set end of line character(s)
+        pretty (default = True) -- curtail long list output with a '...'
 
         """
         # TODO: can't call super
