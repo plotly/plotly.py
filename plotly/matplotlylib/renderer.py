@@ -189,8 +189,8 @@ class PlotlyRenderer(Renderer):
         patch_coll -- a collection of patches to be drawn as a bar chart.
 
         """
-        bardir = patch_coll[0]['bardir']
-        if bardir == 'v':
+        orientation = patch_coll[0]['orientation']
+        if orientation == 'v':
             self.msg += "    Attempting to draw a vertical bar chart\n"
             patch_coll.sort(key=lambda b: b['x0'])
             x = [bar['x0']+(bar['x1']-bar['x0'])/2 for bar in patch_coll]
@@ -200,7 +200,7 @@ class PlotlyRenderer(Renderer):
             patch_coll.sort(key=lambda b: b['y0'])
             x = [bar['y0']+(bar['y1']-bar['y0'])/2 for bar in patch_coll]
             y = [bar['x1'] for bar in patch_coll]
-        bar = Bar(bardir=bardir,
+        bar = Bar(orientation=orientation,
                   x=x,
                   y=y,
                   xaxis='x{}'.format(self.axis_ct),
@@ -406,11 +406,11 @@ class PlotlyRenderer(Renderer):
         is_barh = mpltools.is_barh(**props)
         if is_bar:  # if we think it's a bar, add it!
             self.msg += "      Assuming path is a vertical bar\n"
-            bar = mpltools.make_bar(bardir='v', **props)
+            bar = mpltools.make_bar(orientation='v', **props)
             self.file_bar(bar)
         if is_barh:  # perhaps a horizontal bar?
             self.msg += "      Assuming path is a horizontal bar\n"
-            bar = mpltools.make_bar(bardir='h', **props)
+            bar = mpltools.make_bar(orientation='h', **props)
             self.file_bar(bar)
         if not (is_bar or is_barh):
             self.msg += "    This path isn't a bar, not drawing\n"
@@ -428,7 +428,7 @@ class PlotlyRenderer(Renderer):
 
         bar.keys() -- [
         'bar',          (mpl path object)
-        'bardir',       (bar direction, 'v' or 'h' for horizontal or vertical)
+        'orientation',  (bar direction, 'v' or 'h' for horizontal or vertical)
         'x0',           ([x0, y0] = bottom-left corner of rectangle)
         'y0',
         'x1',           ([x1, y1] = top-right corner of rectangle):

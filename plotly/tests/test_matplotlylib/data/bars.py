@@ -10,7 +10,7 @@ D = dict(
 )
 
 VERTICAL_BAR = {
-    'data': [{'bardir': 'v',
+    'data': [{'orientation': 'v',
               'marker': {'color': '#0000FF', 'line': {'width': 1.0}},
               'opacity': 1,
               'type': 'bar',
@@ -33,15 +33,21 @@ VERTICAL_BAR = {
                          'domain': [0.0, 1.0],
                          'range': (0.0, 6.0),
                          'showgrid': False,
-                         'zeroline': False},
+                         'zeroline': False,
+                         'showline': True,
+                         'mirror': True,
+                         'ticks': 'inside'},
                'yaxis': {'anchor': 'x',
                          'domain': [0.0, 1.0],
                          'range': (0.0, 200.0),
                          'showgrid': False,
-                         'zeroline': False}}}
+                         'zeroline': False,
+                         'showline': True,
+                         'mirror': True,
+                         'ticks': 'inside'}}}
 
 HORIZONTAL_BAR = {
-    'data': [{'bardir': 'h',
+    'data': [{'orientation': 'h',
               'marker': {'color': '#0000FF', 'line': {'width': 1.0}},
               'opacity': 1,
               'type': 'bar',
@@ -79,7 +85,7 @@ HORIZONTAL_BAR = {
                          'ticks': 'inside'}}}
 
 H_AND_V_BARS = {
-    'data': [{'bardir': 'v',
+    'data': [{'orientation': 'v',
               'marker': {'color': '#008000', 'line': {'width': 1.0}},
               'opacity': 0.5,
               'type': 'bar',
@@ -87,7 +93,7 @@ H_AND_V_BARS = {
               'yaxis': {},
               'x': [5.0, 15.0, 25.0, 35.0, 45.0, 55.0],
               'y': [1.0, 4.0, 8.0, 16.0, 32.0, 64.0]},
-             {'bardir': 'h',
+             {'orientation': 'h',
               'marker': {'color': '#FF0000', 'line': {'width': 1.0}},
               'opacity': 0.5,
               'type': 'bar',

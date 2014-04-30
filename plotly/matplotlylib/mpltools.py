@@ -15,14 +15,14 @@ def check_bar_match(old_bar, new_bar):
 
     """
     tests = []
-    tests += new_bar['bardir'] == old_bar['bardir'],
+    tests += new_bar['orientation'] == old_bar['orientation'],
     tests += new_bar['facecolor'] == old_bar['facecolor'],
-    if new_bar['bardir'] == 'v':
+    if new_bar['orientation'] == 'v':
         new_width = new_bar['x1'] - new_bar['x0']
         old_width = old_bar['x1'] - old_bar['x0']
         tests += new_width - old_width < 0.000001,
         tests += new_bar['y0'] == old_bar['y0'],
-    elif new_bar['bardir'] == 'h':
+    elif new_bar['orientation'] == 'h':
         new_height = new_bar['y1'] - new_bar['y0']
         old_height = old_bar['y1'] - old_bar['y0']
         tests += new_height - old_height < 0.000001,
@@ -280,7 +280,7 @@ def make_bar(**props):
     """
     return {
         'bar': props['mplobj'],
-        'bardir': props['bardir'],
+        'orientation': props['orientation'],
         'x0': get_rect_xmin(props['data']),
         'y0': get_rect_ymin(props['data']),
         'x1': get_rect_xmax(props['data']),
