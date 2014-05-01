@@ -365,7 +365,7 @@ class PlotlyList(list):
                     "Plotly list-type objects can only contain plotly "
                     "dict-like objects.")
 
-    def to_string(self, level=0, indent=4, eol='\n', pretty=True):
+    def to_string(self, level=0, indent=4, eol='\n', pretty=True, max_chars=80):
         """Returns a formatted string showing graph_obj constructors.
 
         Example:
@@ -377,6 +377,7 @@ class PlotlyList(list):
         indent (default = 4) -- set indentation amount
         eol (default = '\n') -- set end of line character(s)
         pretty (default = True) -- curtail long list output with a '...'
+        max_chars (default = 80) -- set max characters per line
 
         """
         self.to_graph_objs()
@@ -388,7 +389,8 @@ class PlotlyList(list):
             string += entry.to_string(level=level+1,
                                       indent=indent,
                                       eol=eol,
-                                      pretty=pretty)
+                                      pretty=pretty,
+                                      max_chars=max_chars)
             if index < len(self) - 1:
                 string += ",{eol}{indent}".format(
                     eol=eol,
@@ -623,7 +625,7 @@ class PlotlyDict(dict):
                         msg += "Couldn't find uses for key: {}\n\n".format(key)
                     raise exceptions.PlotlyInvalidKeyError(msg)
 
-    def to_string(self, level=0, indent=4, eol='\n', pretty=True):
+    def to_string(self, level=0, indent=4, eol='\n', pretty=True, max_chars=80):
         """Returns a formatted string showing graph_obj constructors.
 
         Example:
@@ -635,6 +637,7 @@ class PlotlyDict(dict):
         indent (default = 4) -- set indentation amount
         eol (default = '\n') -- set end of line character(s)
         pretty (default = True) -- curtail long list output with a '...'
+        max_chars (default = 80) -- set max characters per line
 
         """
         self.to_graph_objs()
@@ -651,16 +654,15 @@ class PlotlyDict(dict):
                     string += self[key].to_string(level=level+1,
                                                   indent=indent,
                                                   eol=eol,
-                                                  pretty=pretty)
+                                                  pretty=pretty,
+                                                  max_chars=max_chars)
                 except AttributeError:
-                    val = self[key]
-                    try:
-                        if pretty and (len(self[key]) > 6):
-                            if not isinstance(self[key], str):
-                                val = self[key][:4] + ['...'] + [self[key][-1]]
-                    except TypeError:
-                        pass
-                    string += str(repr(val))
+                    val = repr(self[key])
+                    val_chars = max_chars - (indent*(level+1)) - (len(key)+1)
+                    if pretty and (len(val) > val_chars):
+                        string += val[:val_chars - 5] + '...' + val[-1]
+                    else:
+                        string += val
                 if index < len(self) - 1:
                     string += ","
                 index += 1
@@ -834,7 +836,7 @@ class PlotlyTrace(PlotlyDict):
                           "dictionary-like plot types.\nIt is not meant to be "
                           "a user interface.")
 
-    def to_string(self, level=0, indent=4, eol='\n', pretty=True):
+    def to_string(self, level=0, indent=4, eol='\n', pretty=True, max_chars=80):
         """Returns a formatted string showing graph_obj constructors.
 
         Example:
@@ -846,6 +848,7 @@ class PlotlyTrace(PlotlyDict):
         indent (default = 4) -- set indentation amount
         eol (default = '\n') -- set end of line character(s)
         pretty (default = True) -- curtail long list output with a '...'
+        max_chars (default = 80) -- set max characters per line
 
         """
         self.to_graph_objs()
@@ -854,13 +857,15 @@ class PlotlyTrace(PlotlyDict):
             string = super(PlotlyTrace, self).to_string(level=level,
                                                         indent=indent,
                                                         eol=eol,
-                                                        pretty=pretty)
+                                                        pretty=pretty,
+                                                        max_chars=max_chars)
             self['type'] = trace_type
         else:
             string = super(PlotlyTrace, self).to_string(level=level,
                                                         indent=indent,
                                                         eol=eol,
-                                                        pretty=pretty)
+                                                        pretty=pretty,
+                                                        max_chars=max_chars)
         return string
 
 
@@ -1116,7 +1121,7 @@ class Layout(PlotlyDict):
                         pass
         super(Layout, self).to_graph_objs()
 
-    def to_string(self, level=0, indent=4, eol='\n', pretty=True):
+    def to_string(self, level=0, indent=4, eol='\n', pretty=True, max_chars=80):
         """Returns a formatted string showing graph_obj constructors.
 
         Example:
@@ -1128,6 +1133,7 @@ class Layout(PlotlyDict):
         indent (default = 4) -- set indentation amount
         eol (default = '\n') -- set end of line character(s)
         pretty (default = True) -- curtail long list output with a '...'
+        max_chars (default = 80) -- set max characters per line
 
         """
         # TODO: can't call super
@@ -1145,16 +1151,15 @@ class Layout(PlotlyDict):
                     string += self[key].to_string(level=level+1,
                                                   indent=indent,
                                                   eol=eol,
-                                                  pretty=pretty)
+                                                  pretty=pretty,
+                                                  max_chars=max_chars)
                 except AttributeError:
-                    val = self[key]
-                    try:
-                        if pretty and (len(self[key]) > 6):
-                            if not isinstance(self[key], str):
-                                val = self[key][:4] + ['...'] + [self[key][-1]]
-                    except TypeError:
-                        pass
-                    string += str(repr(val))
+                    val = repr(self[key])
+                    val_chars = max_chars - (indent*(level+1)) - (len(key)+1)
+                    if pretty and (len(val) > val_chars):
+                        string += val[:val_chars - 5] + '...' + val[-1]
+                    else:
+                        string += val
                 if index < len(self) - 1:
                     string += ","
                 index += 1
@@ -1171,7 +1176,8 @@ class Layout(PlotlyDict):
                 string += self[key].to_string(level=level + 1,
                                               indent=indent,
                                               eol=eol,
-                                              pretty=pretty)
+                                              pretty=pretty,
+                                              max_chars=max_chars)
             except AttributeError:
                 string += str(repr(self[key]))
             if index < len(self) - 1:

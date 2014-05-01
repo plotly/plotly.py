@@ -4,10 +4,12 @@
 
 *.gz
 
-Untitled0.ipynb
-
 *.ipynb
 
 build
 
 dist
+
+debug_script.py
+
+test_output.txt
