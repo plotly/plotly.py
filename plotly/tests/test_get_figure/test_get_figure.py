@@ -90,8 +90,8 @@ def is_trivial(obj):
 
 def test_all():
     run_test = False
-    end_file = 20
-    polar_plots = [6, 7, 8]
+    end_file = 49
+    polar_plots = [], #[6, 7, 8]
     skip = range(0)
     if run_test:
         py.sign_in('plotlyimagetest', '786r5mecv0')
@@ -102,7 +102,7 @@ def test_all():
                 print "    skipping file number: {}".format(file_id)
                 file_id += 1
             try:
-                print "testing file numer: {}".format(file_id)
+                print "testing file number: {}".format(file_id)
                 print "######################\n\n"
                 fig = py.get_figure('plotlyimagetest', str(file_id))
                 fig_raw = py.get_figure('plotlyimagetest',
@@ -117,8 +117,8 @@ def test_all():
             file_id += 1
             if file_id > end_file:
                 break
-        raise exceptions.PlotlyError("This error was generated to see the "
-                                     "above print out...")
+        raise exceptions.PlotlyError("This error was generated so that the "
+                                     "following output is produced...")
 
 
 
