@@ -61,6 +61,7 @@ KEY_TO_NAME = dict(
     heatmap='Heatmap',
     histogram='Histogram',
     histogram2d='Histogram2d',
+    histogram2dcontour='Histogram2dContour',
     scatter='Scatter',
     annotation='Annotation',
     colorbar='ColorBar',
@@ -101,6 +102,7 @@ NAME_TO_KEY = dict(
     Heatmap='heatmap',
     Histogram='histogram',
     Histogram2d='histogram2d',
+    Histogram2dContour='histogram2dcontour',
     Scatter='scatter',
     Annotation='annotation',
     ColorBar='colorbar',
@@ -974,6 +976,20 @@ class Histogram2d(PlotlyTrace):
 
     """
     pass
+
+class Histogram2dCountour(PlotlyTrace):
+    """A dictionary-like object for representing a histogram2d-countour plot in plotly.
+
+    Example:
+
+        import numpy as np
+        x = np.random.randn(500)
+        y = np.random.randn(500)+1
+        py.iplot([Histogram2dcountour(x=x, y=y)])
+
+    """
+    pass
+
 
 
 class Scatter(PlotlyTrace):
