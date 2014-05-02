@@ -977,8 +977,8 @@ class Histogram2d(PlotlyTrace):
     """
     pass
 
-class Histogram2dCountour(PlotlyTrace):
-    """A dictionary-like object for representing a histogram2d-countour plot in plotly.
+class Histogram2dContour(PlotlyTrace):
+    """A dictionary-like object for representing a histogram2d-contour plot in plotly.
 
     Example:
 
