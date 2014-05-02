@@ -30,10 +30,10 @@ from .. import exceptions
 from .. import utils
 
 __all__ = ["Data", "Annotations", "Bar", "Box", "Contour", "Heatmap",
-           "Histogram", "Histogram2d", "Scatter", "Annotation",
-           "ColorBar", "Contours", "ErrorY", "Figure", "Font", "Layout",
-           "Legend", "Line", "Margin", "Marker", "Stream", "Trace", "XAxis",
-           "XBins", "YAxis", "YBins"]
+           "Histogram", "Histogram2d", "Histogram2dContour", "Scatter",
+           "Annotation", "ColorBar", "Contours", "ErrorY", "Figure", "Font",
+           "Layout", "Legend", "Line", "Margin", "Marker", "Stream", "Trace",
+           "XAxis", "XBins", "YAxis", "YBins"]
 
 # TODO: BIG ONE, how should exceptions bubble up in this inheritance scheme?
     # TODO: related, WHAT exceptions should bubble up?
@@ -977,8 +977,9 @@ class Histogram2d(PlotlyTrace):
     """
     pass
 
+
 class Histogram2dContour(PlotlyTrace):
-    """A dictionary-like object for representing a histogram2d-contour plot in plotly.
+    """A dict-like object for representing a histogram2d-contour plot in plotly.
 
     Example:
 
@@ -989,7 +990,6 @@ class Histogram2dContour(PlotlyTrace):
 
     """
     pass
-
 
 
 class Scatter(PlotlyTrace):
@@ -1316,6 +1316,7 @@ NAME_TO_CLASS = dict(
     Heatmap=Heatmap,
     Histogram=Histogram,
     Histogram2d=Histogram2d,
+    Histogram2dContour=Histogram2dContour,
     Scatter=Scatter,
     AngularAxis=AngularAxis,
     Annotation=Annotation,
