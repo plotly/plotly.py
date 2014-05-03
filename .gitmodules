@@ -3,7 +3,7 @@
 	url = git://github.com/mpld3/mplexporter.git
 [submodule "plotly/graph_reference"]
 	path = plotly/graph_reference
-	url = https://github.com/plotly/graph_reference.git
+	url = git://github.com/plotly/graph_reference.git
 [submodule "plotly/chunked_requests"]
 	path = plotly/chunked_requests
 	url = git://github.com/chriddyp/chunked_requests.git
