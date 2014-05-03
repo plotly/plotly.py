@@ -9,7 +9,7 @@ import io
 from . import utils
 
 import matplotlib
-from matplotlib import transforms
+from matplotlib import transforms, collections
 
 
 class Exporter(object):
@@ -167,6 +167,9 @@ class Exporter(object):
                         self.draw_text(ax, child, force_trans=ax.transAxes)
                 elif isinstance(child, matplotlib.lines.Line2D):
                     self.draw_line(ax, child, force_trans=ax.transAxes)
+                elif isinstance(child, matplotlib.collections.Collection):
+                    self.draw_collection(ax, child,
+                                         force_pathtrans=ax.transAxes)
                 else:
                     warnings.warn("Legend element %s not impemented" % child)
             except NotImplementedError:
@@ -230,12 +233,12 @@ class Exporter(object):
 
         offset_coords, offsets = self.process_transform(
             transOffset, ax, offsets, force_trans=force_offsettrans)
+        path_coords = self.process_transform(
+            transform, ax, force_trans=force_pathtrans)
 
         processed_paths = [utils.SVG_path(path) for path in paths]
-        path_coords, tr = self.process_transform(
-            transform, ax, return_trans=True, force_trans=force_pathtrans)
-
-        processed_paths = [(tr.transform(path[0]), path[1])
+        processed_paths = [(self.process_transform(
+            transform, ax, path[0], force_trans=force_pathtrans)[1], path[1])
                            for path in processed_paths]
 
         path_transforms = collection.get_transforms()
