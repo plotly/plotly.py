@@ -2,7 +2,7 @@ __version__ = '1.0.1'
 
 import requests
 
-_plotly_pypi_url = "https://testpypi.python.org/pypi/plotly"
+_plotly_pypi_url = "https://pypi.python.org/pypi/plotly"
 
 
 def check_version():
