@@ -39,9 +39,9 @@ __all__ = ["Data", "Annotations", "Bar", "Box", "Contour", "Heatmap",
     # TODO: related, WHAT exceptions should bubble up?
 
 from pkg_resources import resource_string
-INFO = json.loads(resource_string('plotly',
-                                  'graph_reference/graph_objs_meta.json'),
-                  object_pairs_hook=collections.OrderedDict)
+s = resource_string('plotly',
+                    'graph_reference/graph_objs_meta.json').decode('utf-8')
+INFO = json.loads(s, object_pairs_hook=collections.OrderedDict)
 
 INFO = utils.decode_unicode(INFO)
 
