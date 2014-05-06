@@ -1,7 +1,7 @@
 Plotly's Python-API
 ===================
 
-#### Interactive, publication-quality plots in your web browser.
+#### Shareable, interactive, publication-quality plots in your web browser.
 
 ###Nutshell
 
