@@ -15,6 +15,7 @@ and ploty's servers.
 
 """
 import requests
+import chunked_requests
 import json
 import warnings
 import httplib
@@ -238,7 +239,6 @@ def get_figure(file_owner, file_id, raw=False):
     `graph objects`.
 
     """
-    # server = "http://ec2-54-196-84-85.compute-1.amazonaws.com"
     server = "https://plot.ly"
     resource = "/apigetfile/{username}/{file_id}".format(username=file_owner,
                                                          file_id=file_id)
@@ -294,7 +294,8 @@ class Stream:
     stream_id, in real-time.
     Every viewer of the graph sees the same data at the same time.
 
-    View examples here: nbviewer.ipython.org/github/plotly/Streaming-Demos
+    View examples and tutorials here:
+    http://nbviewer.ipython.org/github/plotly/python-user-guide/blob/master/s7_streaming/s7_streaming.ipynb
 
     Stream example:
     # Initialize a streaming graph
@@ -314,40 +315,26 @@ class Stream:
         Find your stream_id at https://plot.ly/settings.
 
         For more help, see: `help(plotly.plotly.Stream)`
-        or see examples here:
-        http://nbviewer.ipython.org/github/plotly/Streaming-Demos
+        or see examples and tutorials here:
+        http://nbviewer.ipython.org/github/plotly/python-user-guide/blob/master/s7_streaming/s7_streaming.ipynb
         """
         self.stream_id = stream_id
         self.connected = False
 
     def open(self):
-        """Open and return the streaming connection to plotly.
+        """Open streaming connection to plotly.
 
         For more help, see: `help(plotly.plotly.Stream)`
-        or see examples here:
-        http://nbviewer.ipython.org/github/plotly/Streaming-Demos
+        or see examples and tutorials here:
+        http://nbviewer.ipython.org/github/plotly/python-user-guide/blob/master/s7_streaming/s7_streaming.ipynb
         """
-        self.conn = httplib.HTTPConnection('stream.plot.ly', 80)
-        self.conn.putrequest('POST', '/')
-        self.conn.putheader('Host', 'stream.plot.ly')
-        self.conn.putheader('User-Agent', 'Python-Plotly')
-        self.conn.putheader('Transfer-Encoding', 'chunked')
-        self.conn.putheader('Connection', 'close')
-        self.conn.putheader('plotly-streamtoken', self.stream_id)
-        self.conn.endheaders()
-        self.connected = True
-        return self
+        self._stream = chunked_requests.Stream('stream.plot.ly',
+                                               80,
+                                               {'Host': 'stream.plot.ly',
+                                                'plotly-streamtoken': self.stream_id})
 
-    def reopen(self):
-        """ Not Implemented
 
-        For more help, see: `help(plotly.plotly.Stream)`
-        or see examples here:
-        http://nbviewer.ipython.org/github/plotly/Streaming-Demos
-        """
-        raise NotImplementedError
-
-    def write(self, data):
+    def write(self, data, reconnect_on=(200, '', 408)):
         """ Write `data` to your stream. This will plot the
         `data` in your graph in real-time.
 
@@ -362,38 +349,37 @@ class Stream:
         >>> write(dict(x = 1, y = 3, marker = dict(color = 'blue')))
         >>> write(dict(z = [[1,2,3], [4,5,6]]))
 
+        The connection to plotly's servers is checked before writing
+        and reconnected if disconnected and if the response status code
+        is in `reconnect_on`.
+
         For more help, see: `help(plotly.plotly.Stream)`
-        or see examples here:
-        http://nbviewer.ipython.org/github/plotly/Streaming-Demos
+        or see examples and tutorials here:
+        http://nbviewer.ipython.org/github/plotly/python-user-guide/blob/master/s7_streaming/s7_streaming.ipynb
         """
-        if not self.connected:
-            self.init()
-        # plotly's streaming API takes new-line separated json objects
-        msg = json.dumps(data, cls=utils._plotlyJSONEncoder) + '\n'
-        msglen = format(len(msg), 'x')
-        # chunked encoding requests contain the messege length in hex,
-        # \r\n, and then the message
-        self.conn.send('{msglen}\r\n{msg}\r\n'.format(msglen=msglen, msg=msg))
+
+        # TODO: Verify the data
+        jdata = json.dumps(data, cls=utils._plotlyJSONEncoder)
+        jdata += "\n"
+
+        try:
+            self._stream.write(jdata, reconnect_on=reconnect_on)
+        except AttributeError:
+            raise exceptions.PlotlyError("Stream has not been opened yet, "
+                                         "cannot write to a closed connection."
+                                         "Call `open()` on the stream to open the stream.")
 
     def close(self):
         """ Close the stream connection to plotly's streaming servers.
 
         For more help, see: `help(plotly.plotly.Stream)`
-        or see examples here:
-        http://nbviewer.ipython.org/github/plotly/Streaming-Demos
+        or see examples and tutorials here:
+        http://nbviewer.ipython.org/github/plotly/python-user-guide/blob/master/s7_streaming/s7_streaming.ipynb
         """
-        self.conn.send('0\r\n\r\n')
-        self.conn.close()
-        self.connected = False
-
-    def is_connected(self):
-        """ Not Implemented
-
-        For more help, see: `help(plotly.plotly.Stream)`
-        or see examples here:
-        http://nbviewer.ipython.org/github/plotly/Streaming-Demos
-        """
-        raise NotImplementedError
+        try:
+            self._stream.close()
+        except AttributeError:
+            raise exceptions.PlotlyError("Stream has not been opened yet.")
 
 
 class image:
