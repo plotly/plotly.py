@@ -17,30 +17,54 @@ class Stream:
         self._headers = headers
         self._connect()
 
-    def write(self, data, reconnect=True):
+    def write(self, data, reconnect_on=('', 200, )):
         ''' Send `data` to the server in chunk-encoded form.
-        If `reconnect` is `True`, check the connection to the server before
-        writing, and reconnect if disconnected.
+        Check the connection before writing and reconnect
+        if disconnected and if the response status code is in `reconnect_on`.
+
+        The response may either be an HTTPResponse object or an empty string.
         '''
 
         if not self._isconnected():
-            if reconnect:
+
+            # Attempt to get the response.
+            response = self._getresponse()
+
+            # Reconnect depending on the status code.
+            if ((response == '' and '' in reconnect_on()) or
+                (response and isinstance(response, httplib.HTTPResponse) and
+                 response.status in reconnect_on)):
                 self._reconnect()
-            else:
-                raise Exception("Socket is closed, "
-                                "cannot write to a closed socket.")
+
+            elif response and isinstance(response, httplib.HTTPResponse):
+                # If an HTTPResponse was recieved then
+                # make the users aware instead of
+                # auto-reconnecting in case the
+                # server is responding with an important
+                # message that might prevent
+                # future requests from going through,
+                # like Invalid Credentials.
+                # This allows the user to determine when
+                # to reconnect.
+                raise Exception("Server responded with "
+                                "status code: {status_code}\n"
+                                "and message: {msg}."
+                                .format(status_code=response.status,
+                                        msg=response.read()))
+
+            elif response == '':
+                raise Exception("Attempted to write but socket "
+                                "was not connected.")
+
         try:
             msg = data
             msglen = format(len(msg), 'x')  # msg length in hex
             # Send the message in chunk-encoded form
             self._conn.send('{msglen}\r\n{msg}\r\n'
                             .format(msglen=msglen, msg=msg))
-        except httplib.socket.error as e:
-            if reconnect:
-                self._reconnect()
-                self.write(data)
-            else:
-                raise e
+        except httplib.socket.error:
+            self._reconnect()
+            self.write(data)
 
     def _connect(self):
         ''' Initialize an HTTP connection with chunked Transfer-Encoding
@@ -60,8 +84,9 @@ class Stream:
         # Set blocking to False prevents recv
         # from blocking while waiting for a response.
         self._conn.sock.setblocking(False)
-
+        self._bytes = ''
         self._reset_retries()
+        time.sleep(0.5)
 
     def close(self):
         ''' Close the connection to server.
@@ -83,10 +108,19 @@ class Stream:
             # In case the socket has already been closed
             return ''
 
+        return self._getresponse()
+
+    def _getresponse(self):
+        ''' Read from recv and return a HTTPResponse object if possible.
+        Either
+        1 - The client has succesfully closed the connection: Return ''
+        2 - The server has already closed the connection: Return the response
+            if possible.
+        '''
         # Wait for a response
         self._conn.sock.setblocking(True)
         # Parse the response
-        response = ''
+        response = self._bytes
         while True:
             try:
                 bytes = self._conn.sock.recv(1)
@@ -111,8 +145,6 @@ class Stream:
                 response.begin()
             except:
                 # Bad headers ... etc.
-                # Whatever. the important part is that we closed
-                # the socket.
                 response = ''
         return response
 
@@ -139,15 +171,24 @@ class Stream:
 
         try:
             # 3 - Check if the server has returned any data.
+            # If they have, then start to store the response
+            # in _bytes.
+            self._bytes = ''
             self._bytes = self._conn.sock.recv(1)
             return False
         except httplib.socket.error as e:
-            # Check if recv failed because there was nothing to receive,
-            # this is the "Resource temporarily unavailable" error
+            # Check why recv failed
             if e.errno == 35:
-                # The server hasn't yet returned a response, so assume that
-                # the connection is still open.
+                # This is the "Resource temporarily unavailable" error
+                # which is thrown cuz there was nothing to receive, i.e.
+                # the server hasn't returned a response yet.
+                # So, assume that the connection is still open.
                 return True
+            elif e.errno == 54:
+                # This is the "Connection reset by peer" error
+                # which is thrown cuz the server reset the
+                # socket, so the connection is closed.
+                return False
             else:
                 # Unknown scenario
                 raise e
