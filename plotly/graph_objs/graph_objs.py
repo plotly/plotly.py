@@ -609,7 +609,17 @@ class PlotlyDict(dict):
             try:
                 val.validate()
             except AttributeError:
-                if key not in INFO[obj_key]:
+                if key in INFO[obj_key]:
+                    if INFO[obj_key][key]['type'] == 'object':
+                        msg = ("Class '{cls}' for key '{key}' in '{obj}' "
+                               "graph object is invalid. Valid types for this "
+                               "key are '{types}'.".format(
+                               cls=val.__class__.__name__,
+                               key=key,
+                               obj=self.__class__.__name__,
+                               types=INFO[obj_key][key]['val_types']))
+                        raise exceptions.PlotlyError(msg)
+                else:
                     matching_objects = [obj for obj in INFO if key in INFO[obj]]
                     msg = "Invalid key, '{}', " \
                           "for class, '{}'\n\n".format(key, self.__class__)
