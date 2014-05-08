@@ -35,7 +35,8 @@ _DEFAULT_PLOT_OPTIONS = dict(
     filename="plot from API",
     fileopt="new",
     world_readable=True,
-    auto_open=True)
+    auto_open=True,
+    validate=True)
 
 _credentials = dict()
 
@@ -136,7 +137,7 @@ def _plot_option_logic(plot_options):
     return options
 
 
-def plot(figure_or_data, **plot_options):
+def plot(figure_or_data, validate=True, **plot_options):
     """Create a unique url for this plot in Plotly and optionally open url.
 
     plot_options keyword agruments:
@@ -160,6 +161,18 @@ def plot(figure_or_data, **plot_options):
         raise exceptions.PlotlyError("The `figure_or_data` positional argument "
                                      "must be either `dict`-like or "
                                      "`list`-like.")
+    if validate:
+        try:
+            tools.validate(figure, obj_type='Figure')
+        except exceptions.PlotlyError as err:
+            raise exceptions.PlotlyError("Invalid 'figure_or_data' argument. "
+                                         "Plotly will not be able to properly "
+                                         "parse the resulting JSON. If you "
+                                         "want to send this 'figure_or_data' "
+                                         "to Plotly anyway (not recommended), "
+                                         "you can set 'validate=False' as a "
+                                         "plot option.\nHere's why you're "
+                                         "seeing this error:\n\n{}".format(err))
     for entry in figure['data']:
         for key, val in entry.items():
             try:
