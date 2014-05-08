@@ -189,6 +189,16 @@ class Stream:
                 # which is thrown cuz the server reset the
                 # socket, so the connection is closed.
                 return False
+            elif e.errno == 11:
+                # This is the "Resource temporarily unavailable" error
+                # which happens because the "operation would have blocked
+                # but nonblocking operation was requested".
+                # We require non-blocking reading of this socket because
+                # we don't want to wait around for a response, we just
+                # want to see if a response is currently available. So
+                # let's just assume that we're still connected and
+                # hopefully recieve some data on the next try.
+                return True
             else:
                 # Unknown scenario
                 raise e
