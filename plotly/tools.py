@@ -329,3 +329,11 @@ def get_valid_graph_obj(obj, obj_type=None):
     new_obj.force_clean()
     return new_obj
 
+
+def validate(obj, obj_type):
+    try:
+        test_obj = graph_objs.NAME_TO_CLASS[obj_type](obj)
+    except KeyError:
+        raise exceptions.PlotlyError(
+            "'{}' is not a recognizable graph_obj.".
+            format(obj_type))
