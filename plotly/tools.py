@@ -257,6 +257,16 @@ def get_subplots(rows=1, columns=1, horizontal_spacing=0.1,
                  vertical_spacing=0.15, print_grid=False):
     """Return a dictionary instance with the subplots set in 'layout'.
 
+    Example 1:
+        # stack two subplots vertically
+        fig = tools.get_subplots(rows=2)
+        fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x1', yaxis='y1')]
+        fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x2', yaxis='y2')]
+
+    Example 2:
+        # print out string showing the subplot grid you've put in the layout
+        fig = tools.get_subplots(rows=3, columns=2, print_grid=True)
+
     key (types, default=default):
         description.
 
