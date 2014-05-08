@@ -322,6 +322,11 @@ def get_subplots(rows=1, columns=1, horizontal_spacing=0.1,
 
 
 def get_valid_graph_obj(obj, obj_type=None):
+    """Returns a new graph object that is guaranteed to pass validate().
+
+    CAREFUL: this will *silently* strip out invalid pieces of the object.
+
+    """
     try:
         new_obj = graph_objs.NAME_TO_CLASS[obj.__class__.__name__]()
     except KeyError:
@@ -341,6 +346,13 @@ def get_valid_graph_obj(obj, obj_type=None):
 
 
 def validate(obj, obj_type):
+    """Validate a dictionary, list, or graph object as 'obj_type'.
+
+    This will not alter the 'obj' referenced in the call signature. It will
+    raise an error if the 'obj' reference could not be instantiated as a
+    valid 'obj_type' graph object.
+
+    """
     try:
         test_obj = graph_objs.NAME_TO_CLASS[obj_type](obj)
     except KeyError:
