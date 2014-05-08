@@ -92,14 +92,7 @@ class PlotlyRenderer(Renderer):
         fig -- a matplotlib.figure.Figure object.
 
         """
-        mpltools.repair_data(self.plotly_fig['data'])
-        mpltools.repair_layout(self.plotly_fig['layout'])
-        for data_dict in self.plotly_fig['data']:
-            mpltools.clean_dict(data_dict)
-        if 'annotations' in self.plotly_fig['layout']:
-            for annotation_dict in self.plotly_fig['layout']['annotations']:
-                mpltools.clean_dict(annotation_dict)
-        mpltools.clean_dict(self.plotly_fig['layout'])
+        # self.plotly_fig.force_clean()
         self.plotly_fig['layout']['showlegend'] = False
         self.msg += "Closing figure\n"
 
@@ -198,8 +191,8 @@ class PlotlyRenderer(Renderer):
         else:
             self.msg += "    Attempting to draw a horizontal bar chart\n"
             patch_coll.sort(key=lambda b: b['y0'])
-            x = [bar['y0']+(bar['y1']-bar['y0'])/2 for bar in patch_coll]
-            y = [bar['x1'] for bar in patch_coll]
+            x = [bar['x1'] for bar in patch_coll]
+            y = [bar['y0']+(bar['y1']-bar['y0'])/2 for bar in patch_coll]
         bar = Bar(orientation=orientation,
                   x=x,
                   y=y,
@@ -251,7 +244,7 @@ class PlotlyRenderer(Renderer):
 
         """
         self.msg += "    Attempting to draw a line "
-        line, marker = None, None
+        line, marker = {}, {}
         if props['linestyle'] and props['markerstyle']:
             self.msg += "... with both lines+markers\n"
             mode = "lines+markers"
