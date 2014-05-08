@@ -308,7 +308,10 @@ class PlotlyList(list):
             changes = [changes]
         self.to_graph_objs()
         for index in range(len(self)):
-            self[index].update(changes[index % len(changes)])
+            try:
+                self[index].update(changes[index % len(changes)])
+            except ZeroDivisionError:
+                pass
 
     def strip_style(self):
         """Strip style from the current representation.
