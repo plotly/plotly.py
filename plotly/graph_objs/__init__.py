@@ -22,6 +22,7 @@ Defined Objects:
         Data
         Annotations
         Annotation
+        AngularAxis
         ColorBar
         Contours
         ErrorY
@@ -32,6 +33,7 @@ Defined Objects:
         Line
         Margin
         Marker
+        RadialAxis
         Stream
         Trace
         XAxis
@@ -42,8 +44,32 @@ Defined Objects:
 """
 from graph_objs import *
 
-__all__ = ["Data", "Annotations", "Bar", "Box", "Contour", "Heatmap",
-           "Histogram", "Histogram2d", "Histogram2dContour",
-           "Scatter", "Annotation", "ColorBar", "Contours", "ErrorY", "Figure",
-           "Font", "Layout", "Legend", "Line", "Margin", "Marker", "Stream",
-           "Trace", "XAxis", "XBins", "YAxis", "YBins"]
+__all__ = ["Data",
+           "Annotations",
+           "Bar",
+           "Box",
+           "Contour",
+           "Heatmap",
+           "Histogram",
+           "Histogram2d",
+           "Histogram2dContour",
+           "Scatter",
+           "Annotation",
+           "AngularAxis",
+           "ColorBar",
+           "Contours",
+           "ErrorY",
+           "Figure",
+           "Font",
+           "Layout",
+           "Legend",
+           "Line",
+           "Margin",
+           "Marker",
+           "RadialAxis",
+           "Stream",
+           "Trace",
+           "XAxis",
+           "XBins",
+           "YAxis",
+           "YBins"]
