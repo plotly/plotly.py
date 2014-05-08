@@ -711,6 +711,8 @@ class PlotlyDict(dict):
             if isinstance(self[key], (dict, list)):
                 if len(self[key]) == 0:
                     del self[key]  # clears empty collections!
+            elif self[key] is None:
+                del self[key]
 
 
 class Data(PlotlyList):
@@ -1251,6 +1253,8 @@ class Layout(PlotlyDict):
             if isinstance(self[key], (dict, list)):
                 if len(self[key]) == 0:
                     del self[key]  # clears empty collections!
+            elif self[key] is None:
+                del self[key]
 
 
 class Legend(PlotlyDict):

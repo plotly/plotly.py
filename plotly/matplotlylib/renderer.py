@@ -92,7 +92,7 @@ class PlotlyRenderer(Renderer):
         fig -- a matplotlib.figure.Figure object.
 
         """
-        # self.plotly_fig.force_clean()
+        self.plotly_fig.force_clean()
         self.plotly_fig['layout']['showlegend'] = False
         self.msg += "Closing figure\n"
 
