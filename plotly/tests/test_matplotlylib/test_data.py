@@ -52,6 +52,6 @@ def test_bars_data():
     for yi, yf in zip(renderer.plotly_fig['data'][0]['y'], D['y1']):
         assert yi == yf, str(
             renderer.plotly_fig['data'][0]['y']) + ' is not ' + str(D['y1'])
-    for yi, yf in zip(renderer.plotly_fig['data'][1]['y'], D['y2']):
-        assert yi == yf, str(
-            renderer.plotly_fig['data'][1]['y']) + ' is not ' + str(D['y2'])
+    for xi, yf in zip(renderer.plotly_fig['data'][1]['x'], D['y2']):
+        assert xi == yf, str(
+            renderer.plotly_fig['data'][1]['x']) + ' is not ' + str(D['y2'])
