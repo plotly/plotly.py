@@ -613,16 +613,20 @@ class PlotlyDict(dict):
                     if INFO[obj_key][key]['type'] == 'object':
                         msg = ("Class '{cls}' for key '{key}' in '{obj}' "
                                "graph object is invalid. Valid types for this "
-                               "key are '{types}'.".format(
-                               cls=val.__class__.__name__,
-                               key=key,
-                               obj=self.__class__.__name__,
-                               types=INFO[obj_key][key]['val_types']))
+                               "key are '{types}'.\n\nRun 'help(plotly"
+                               ".graph_objs.{obj})' for more information."
+                               "".format(cls=val.__class__.__name__,
+                                         key=key,
+                                         obj=self.__class__.__name__,
+                                         types=INFO[obj_key][key]['val_types']))
                         raise exceptions.PlotlyError(msg)
                 else:
                     matching_objects = [obj for obj in INFO if key in INFO[obj]]
-                    msg = "Invalid key, '{}', " \
-                          "for class, '{}'\n\n".format(key, self.__class__)
+                    msg = ("Invalid key, '{key}', for class, '{obj}'\n\nRun "
+                           "'help(plotly.graph_objs.{obj})' for more "
+                           "information.\n\n".format(
+                           key=key,
+                           obj=self.__class__.__name__))
                     if len(matching_objects):
                         msg += "That key is valid only in these objects:\n\n"
                         for obj in matching_objects:
