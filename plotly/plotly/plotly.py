@@ -42,7 +42,9 @@ _credentials = dict()
 
 _plot_options = dict()
 
-_plotly_url = 'https://plot.ly/clientresp'
+_plotly_url = 'https://ec2-54-234-194-240.compute-1.amazonaws.com'
+
+# 'https://plot.ly/clientresp'
 
 
 ### _credentials stuff ###
@@ -272,7 +274,8 @@ def get_figure(file_owner, file_id, raw=False):
     `graph objects`.
 
     """
-    server = "https://plot.ly"
+    # server = "https://plot.ly"
+    server = _plotly_url
     resource = "/apigetfile/{username}/{file_id}".format(username=file_owner,
                                                          file_id=file_id)
     (username, api_key) = _validation_key_logic()
