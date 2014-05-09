@@ -257,6 +257,16 @@ def get_subplots(rows=1, columns=1, horizontal_spacing=0.1,
                  vertical_spacing=0.15, print_grid=False):
     """Return a dictionary instance with the subplots set in 'layout'.
 
+    Example 1:
+        # stack two subplots vertically
+        fig = tools.get_subplots(rows=2)
+        fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x1', yaxis='y1')]
+        fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x2', yaxis='y2')]
+
+    Example 2:
+        # print out string showing the subplot grid you've put in the layout
+        fig = tools.get_subplots(rows=3, columns=2, print_grid=True)
+
     key (types, default=default):
         description.
 
@@ -312,6 +322,11 @@ def get_subplots(rows=1, columns=1, horizontal_spacing=0.1,
 
 
 def get_valid_graph_obj(obj, obj_type=None):
+    """Returns a new graph object that is guaranteed to pass validate().
+
+    CAREFUL: this will *silently* strip out invalid pieces of the object.
+
+    """
     try:
         new_obj = graph_objs.NAME_TO_CLASS[obj.__class__.__name__]()
     except KeyError:
@@ -329,3 +344,19 @@ def get_valid_graph_obj(obj, obj_type=None):
     new_obj.force_clean()
     return new_obj
 
+
+def validate(obj, obj_type):
+    """Validate a dictionary, list, or graph object as 'obj_type'.
+
+    This will not alter the 'obj' referenced in the call signature. It will
+    raise an error if the 'obj' reference could not be instantiated as a
+    valid 'obj_type' graph object.
+
+    """
+    try:
+        cls = graph_objs.NAME_TO_CLASS[obj_type]
+    except KeyError:
+        raise exceptions.PlotlyError(
+            "'{}' is not a recognizable graph_obj.".
+            format(obj_type))
+    test_obj = graph_objs.NAME_TO_CLASS[obj_type](obj)
