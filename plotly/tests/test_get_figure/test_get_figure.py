@@ -92,8 +92,8 @@ def is_trivial(obj):
 def test_all():
     un = 'plotlyimagetest'
     ak = '786r5mecv0'
-    run_test = True
-    end_file = 49
+    run_test = False
+    end_file = 2
     polar_plots = [], #[6, 7, 8]
     skip = range(0)
     if run_test:

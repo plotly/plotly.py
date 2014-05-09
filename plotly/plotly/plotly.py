@@ -42,9 +42,7 @@ _credentials = dict()
 
 _plot_options = dict()
 
-_plotly_url = 'https://ec2-54-234-194-240.compute-1.amazonaws.com'
-
-# 'https://plot.ly/clientresp'
+_plotly_url = "https://plot.ly"  # do not append final '/' here for url!
 
 
 ### _credentials stuff ###
@@ -274,7 +272,6 @@ def get_figure(file_owner, file_id, raw=False):
     `graph objects`.
 
     """
-    # server = "https://plot.ly"
     server = _plotly_url
     resource = "/apigetfile/{username}/{file_id}".format(username=file_owner,
                                                          file_id=file_id)
@@ -506,7 +503,8 @@ def _send_to_plotly(figure, **plot_options):
                    origin='plot',
                    kwargs=kwargs)
 
-    url = _plotly_url
+    # TODO: this doesn't work yet for ppl's individual servers for testing...
+    url = _plotly_url + "/clientresp"
 
     r = requests.post(url, data=payload)
     r.raise_for_status()
