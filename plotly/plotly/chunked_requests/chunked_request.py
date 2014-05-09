@@ -178,13 +178,18 @@ class Stream:
             return False
         except httplib.socket.error as e:
             # Check why recv failed
-            if e.errno == 35:
+            # Windows machines are the error codes
+            # that start with 1
+            # (http://msdn.microsoft.com/en-ca/library/windows/desktop/ms740668(v=vs.85).aspx)
+            if e.errno == 35 or e.errno == 10035:
                 # This is the "Resource temporarily unavailable" error
                 # which is thrown cuz there was nothing to receive, i.e.
                 # the server hasn't returned a response yet.
+                # This is a non-fatal error and the operation
+                # should be tried again.
                 # So, assume that the connection is still open.
                 return True
-            elif e.errno == 54:
+            elif e.errno == 54 or e.errno == 10054:
                 # This is the "Connection reset by peer" error
                 # which is thrown cuz the server reset the
                 # socket, so the connection is closed.
@@ -212,7 +217,7 @@ class Stream:
                 self._connect()
             except httplib.socket.error as e:
                 # Attempt to reconnect if the connection was refused
-                if e.errno == 61:
+                if e.errno == 61 or e.errno == 10061:
                     # errno 61 is the "Connection Refused" error
                     time.sleep(self._delay)
                     self._delay += self._delay  # fibonacii delays
