@@ -31,7 +31,7 @@ class Stream:
             response = self._getresponse()
 
             # Reconnect depending on the status code.
-            if ((response == '' and '' in reconnect_on()) or
+            if ((response == '' and '' in reconnect_on) or
                 (response and isinstance(response, httplib.HTTPResponse) and
                  response.status in reconnect_on)):
                 self._reconnect()
