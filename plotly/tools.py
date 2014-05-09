@@ -354,8 +354,9 @@ def validate(obj, obj_type):
 
     """
     try:
-        test_obj = graph_objs.NAME_TO_CLASS[obj_type](obj)
+        cls = graph_objs.NAME_TO_CLASS[obj_type]
     except KeyError:
         raise exceptions.PlotlyError(
             "'{}' is not a recognizable graph_obj.".
             format(obj_type))
+    test_obj = graph_objs.NAME_TO_CLASS[obj_type](obj)
