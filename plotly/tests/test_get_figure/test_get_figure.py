@@ -11,7 +11,6 @@ from ... import exceptions
 
 
 # username for tests: 'plotlyimagetest'
-# password for account: 'password'
 # api_key for account: '786r5mecv0'
 
 
@@ -84,26 +83,31 @@ def is_trivial(obj):
                 return False
         else:
             return True
+    elif obj is None:
+        return True
     else:
         return False
 
 
 def test_all():
+    un = 'plotlyimagetest'
+    ak = '786r5mecv0'
     run_test = True
     end_file = 49
     polar_plots = [], #[6, 7, 8]
     skip = range(0)
     if run_test:
-        py.sign_in('plotlyimagetest', '786r5mecv0')
+        py.sign_in(un, ak)
         file_id = 0
         while True:
             fig, fig_raw = None, None
             while (file_id in polar_plots) or (file_id in skip):
-                print "    skipping file number: {}".format(file_id)
+                print "    skipping: https://plot.ly/{}/{}".format(un, file_id)
                 file_id += 1
+            print "\n"
             try:
-                print "testing file number: {}".format(file_id)
-                print "######################\n\n"
+                print "testing: https://plot.ly/{}/{}".format(un, file_id)
+                print "###########################################\n\n"
                 fig = py.get_figure('plotlyimagetest', str(file_id))
                 fig_raw = py.get_figure('plotlyimagetest',
                                         str(file_id),
@@ -111,7 +115,8 @@ def test_all():
             except exceptions.PlotlyError:
                 pass
             if (fig is None) and (fig_raw is None):
-                print "    couldn't find file number: {}".format(file_id)
+                print "    couldn't find: https://plot.ly/{}/{}".format(un,
+                                                                        file_id)
             else:
                 compare_with_raw(fig, fig_raw, parents=['figure'])
             file_id += 1
