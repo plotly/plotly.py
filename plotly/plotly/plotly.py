@@ -366,7 +366,7 @@ class Stream:
             self._stream.write(jdata, reconnect_on=reconnect_on)
         except AttributeError:
             raise exceptions.PlotlyError("Stream has not been opened yet, "
-                                         "cannot write to a closed connection."
+                                         "cannot write to a closed connection. "
                                          "Call `open()` on the stream to open the stream.")
 
     def close(self):
