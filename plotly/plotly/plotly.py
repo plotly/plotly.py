@@ -42,8 +42,7 @@ _credentials = dict()
 
 _plot_options = dict()
 
-_plotly_url = "https://plot.ly"  # do not append final '/' here for url!
-
+_plotly_url = "https://plot.ly"  #  do not append final '/' here for url!
 
 ### _credentials stuff ###
 
@@ -504,7 +503,8 @@ def _send_to_plotly(figure, **plot_options):
                    kwargs=kwargs)
 
     # TODO: this doesn't work yet for ppl's individual servers for testing...
-    url = _plotly_url + "/clientresp"
+    # url = _plotly_url + "/clientresp"
+    url = "https://plot.ly/clientresp"
 
     r = requests.post(url, data=payload)
     r.raise_for_status()
