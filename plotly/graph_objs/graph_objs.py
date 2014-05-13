@@ -1139,7 +1139,9 @@ class Layout(PlotlyDict):
             if isinstance(self[key], dict):
                 if key[:5] == 'xaxis':  # allows appended integers!
                     try:
-                        test_if_int = int(key[5:])
+                        axis_int = int(key[5:])
+                        if axis_int == 0:
+                            continue
                         obj = XAxis()
                         for k, v in self.pop(key).items():
                             obj[k] = v
@@ -1149,7 +1151,9 @@ class Layout(PlotlyDict):
                         pass
                 elif key[:5] == 'yaxis':  # allows appended integers!
                     try:
-                        test_if_int = int(key[5:])
+                        axis_int = int(key[5:])
+                        if axis_int == 0:
+                            continue
                         obj = YAxis()
                         for k, v in self.pop(key).items():
                             obj[k] = v
