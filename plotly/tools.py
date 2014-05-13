@@ -354,6 +354,10 @@ def validate(obj, obj_type):
 
     """
     try:
+        obj_type = graph_objs.KEY_TO_NAME[obj_type]
+    except KeyError:
+        pass
+    try:
         test_obj = graph_objs.NAME_TO_CLASS[obj_type](obj)
     except KeyError:
         raise exceptions.PlotlyError(
@@ -362,6 +366,15 @@ def validate(obj, obj_type):
 
 
 def validate_stream(obj, obj_type):
+    """Validate a data dictionary (only) for use with streaming.
+
+    An error is raised if a key within (or nested within) is not streamable.
+    
+    """
+    try:
+        obj_type = graph_objs.KEY_TO_NAME[obj_type]
+    except KeyError:
+        pass
     info = graph_objs.INFO[graph_objs.NAME_TO_KEY[obj_type]]
     for key, val in obj.items():
         if key == 'type':
