@@ -368,7 +368,8 @@ class Stream:
                                                 'plotly-streamtoken': self.stream_id})
 
 
-    def write(self, data, reconnect_on=(200, '', 408)):
+    def write(self, data, layout=None, validate=True,
+              reconnect_on=(200, '', 408)):
         """ Write `data` to your stream. This will plot the
         `data` in your graph in real-time.
 
@@ -392,7 +393,41 @@ class Stream:
         http://nbviewer.ipython.org/github/plotly/python-user-guide/blob/master/s7_streaming/s7_streaming.ipynb
         """
 
-        # TODO: Verify the data
+        if 'type' not in data:
+            data['type'] = 'scatter'
+        if validate:
+            try:
+                tools.validate(data, data['type'])
+            except exceptions.PlotlyError as err:
+                raise exceptions.PlotlyError(
+                    "Part of the data object with type, '{}', is invalid. This "
+                    "will default to 'scatter' if you do not supply a 'type'. "
+                    "If you do not want to validate your data objects when "
+                    "streaming, you can set 'validate=False' in the call to "
+                    "'your_stream.write()'. Here's why the object is "
+                    "invalid:\n\n{}".format(data['type'], err)
+                )
+            try:
+                tools.validate_stream(data, data['type'])
+            except exceptions.PlotlyError as err:
+                raise exceptions.PlotlyError(
+                    "Part of the data object with type, '{}', cannot yet be "
+                    "streamed into Plotly. If you do not want to validate your "
+                    "data objects when streaming, you can set 'validate=False' "
+                    "in the call to 'your_stream.write()'. Here's why the "
+                    "object cannot be streamed:\n\n{}".format(data['type'], err)
+                )
+            if layout is not None:
+                try:
+                    tools.validate(layout, 'Layout')
+                except exceptions.PlotlyError as err:
+                    raise exceptions.PlotlyError(
+                        "Your layout kwarg was invalid. "
+                        "Here's why:\n\n{}".format(err)
+                    )
+        del data['type']
+
+        # TODO: allow string version of this?
         jdata = json.dumps(data, cls=utils._plotlyJSONEncoder)
         jdata += "\n"
 
