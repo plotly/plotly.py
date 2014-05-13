@@ -131,7 +131,9 @@ def _plot_option_logic(plot_options):
     options.update(_DEFAULT_PLOT_OPTIONS)
     options.update(_plot_options)
     options.update(plot_options)
-    if 'filename' in plot_options:
+    if ('filename' in plot_options
+       and 'fileopt' not in _plot_options
+       and 'fileopt' not in plot_options):
         options['fileopt'] = 'overwrite'
     return options
 
@@ -279,7 +281,7 @@ def get_figure(file_owner, file_id, raw=False):
     headers = {'plotly-username': username,
                'plotly-apikey': api_key,
                'plotly-version': '2.0',
-               'plotly-platform': 'pythonz'}
+               'plotly-platform': 'python'}
 
     try:
         test_if_int = int(file_id)
@@ -398,7 +400,7 @@ class Stream:
             self._stream.write(jdata, reconnect_on=reconnect_on)
         except AttributeError:
             raise exceptions.PlotlyError("Stream has not been opened yet, "
-                                         "cannot write to a closed connection."
+                                         "cannot write to a closed connection. "
                                          "Call `open()` on the stream to open the stream.")
 
     def close(self):
