@@ -359,3 +359,28 @@ def validate(obj, obj_type):
         raise exceptions.PlotlyError(
             "'{}' is not a recognizable graph_obj.".
             format(obj_type))
+
+
+def validate_stream(obj, obj_type):
+    info = graph_objs.INFO[graph_objs.NAME_TO_KEY[obj_type]]
+    for key, val in obj.items():
+        if key == 'type':
+            continue
+        if 'streamable' in info[key]:
+            if not info[key]['streamable']:
+                raise exceptions.PlotlyError(
+                    "The '{}' key is not streamable in the '{}' object".format(
+                        key, obj_type
+                    )
+                )
+        else:
+            raise exceptions.PlotlyError(
+                "The '{}' key is not streamable in the '{}' object".format(
+                    key, obj_type
+                )
+            )
+        try:
+            sub_obj_type = graph_objs.KEY_TO_NAME[key]
+            validate_stream(val, sub_obj_type)
+        except KeyError:
+            pass

@@ -367,7 +367,8 @@ class Stream:
                                                 'plotly-streamtoken': self.stream_id})
 
 
-    def write(self, data, reconnect_on=(200, '', 408)):
+    def write(self, data, layout=None, validate=True,
+              reconnect_on=(200, '', 408)):
         """ Write `data` to your stream. This will plot the
         `data` in your graph in real-time.
 
@@ -392,6 +393,15 @@ class Stream:
         """
 
         # TODO: Verify the data
+        if validate:
+            if 'type' not in data:
+                data['type'] = 'scatter'
+            tools.validate(data, data['type'])  # todo: add error message
+            tools.validate_stream(data, data['type'])  # todo: add error message
+            if layout is not None:
+                tools.validate(layout, 'Layout')  # todo: add error message
+
+        # TODO: allow string version of this?
         jdata = json.dumps(data, cls=utils._plotlyJSONEncoder)
         jdata += "\n"
 
