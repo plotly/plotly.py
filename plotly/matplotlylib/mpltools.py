@@ -5,6 +5,8 @@ A module for converting from mpl language to plotly language.
 
 """
 
+import math
+import warnings
 
 def check_bar_match(old_bar, new_bar):
     """Check if two bars belong in the same collection (bar chart).
@@ -257,6 +259,92 @@ def make_bar(**props):
         'dasharray': props['style']['dasharray'],
         'zorder': props['style']['zorder']
     }
+
+
+def prep_x_ticks(ax, props):
+    axis = dict()
+    scale = props['axes'][0]['scale']
+    if scale == 'linear':
+        try:
+            axis['tick0'] = props['axes'][0]['tickvalues'][0]
+            axis['dtick'] = props['axes'][0]['tickvalues'][1] - \
+                            props['axes'][0]['tickvalues'][0]
+            axis['autotick'] = False
+        except (IndexError, TypeError):
+            axis = dict(nticks=props['axes'][0]['nticks'])
+        return axis
+    elif scale == 'log':
+        try:
+            axis['tick0'] = props['axes'][0]['tickvalues'][0]
+            axis['dtick'] = props['axes'][0]['tickvalues'][1] - \
+                            props['axes'][0]['tickvalues'][0]
+            axis['autotick'] = False
+        except (IndexError, TypeError):
+            axis = dict(nticks=props['axes'][0]['nticks'])
+        base = ax.get_xaxis().get_transform().base
+        if base == 10:
+            axis['range'] = [math.log10(props['xlim'][0]),
+                             math.log10(props['xlim'][1])]
+        else:
+            axis = dict(range=None, type='linear')
+            warnings.warn("Converted non-base10 x-axis log scale to 'linear'")
+        return axis
+    else:
+        return dict()
+
+
+def prep_y_ticks(ax, props):
+    axis = dict()
+    scale = props['axes'][1]['scale']
+    if scale == 'linear':
+        try:
+            axis['tick0'] = props['axes'][1]['tickvalues'][0]
+            axis['dtick'] = props['axes'][1]['tickvalues'][1] - \
+                            props['axes'][1]['tickvalues'][0]
+            axis['autotick'] = False
+        except (IndexError, TypeError):
+            axis = dict(nticks=props['axes'][1]['nticks'])
+        return axis
+    elif scale == 'log':
+        try:
+            axis['tick0'] = props['axes'][1]['tickvalues'][0]
+            axis['dtick'] = props['axes'][1]['tickvalues'][1] - \
+                            props['axes'][1]['tickvalues'][0]
+            axis['autotick'] = False
+        except (IndexError, TypeError):
+            axis = dict(nticks=props['axes'][1]['nticks'])
+        base = ax.get_yaxis().get_transform().base
+        if base == 10:
+            axis['range'] = [math.log10(props['ylim'][0]),
+                             math.log10(props['ylim'][1])]
+        else:
+            axis = dict(range=None, type='linear')
+            warnings.warn("Converted non-base10 y-axis log scale to 'linear'")
+        return axis
+    else:
+        return dict()
+
+
+def prep_xy_axis(ax, props, x_bounds, y_bounds):
+    xaxis = dict(
+        type=props['axes'][0]['scale'],
+        range=props['xlim'],
+        showgrid=props['axes'][0]['grid']['gridOn'],
+        domain=convert_x_domain(props['bounds'], x_bounds),
+        side=props['axes'][0]['position'],
+        tickfont=dict(size=props['axes'][0]['fontsize'])
+    )
+    xaxis.update(prep_x_ticks(ax, props))
+    yaxis = dict(
+        type=props['axes'][1]['scale'],
+        range=props['ylim'],
+        showgrid=props['axes'][1]['grid']['gridOn'],
+        domain=convert_y_domain(props['bounds'], y_bounds),
+        side=props['axes'][1]['position'],
+        tickfont=dict(size=props['axes'][1]['fontsize'])
+    )
+    yaxis.update(prep_y_ticks(ax, props))
+    return xaxis, yaxis
 
 
 DASH_MAP = {

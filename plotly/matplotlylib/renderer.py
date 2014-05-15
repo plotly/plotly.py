@@ -129,26 +129,27 @@ class PlotlyRenderer(Renderer):
         """
         self.msg += "  Opening axes\n"
         self.axis_ct += 1
+        # set defaults in axes
         xaxis = XAxis(
-            range=props['xlim'],
-            showgrid=props['axes'][1]['grid']['gridOn'],
-            domain=mpltools.convert_x_domain(props['bounds'],
-                                             self.mpl_x_bounds),
             anchor='y{}'.format(self.axis_ct),
             zeroline=False,
             showline=True,
-            mirror=True,
+            mirror='ticks',
             ticks='inside')
         yaxis = YAxis(
-            range=props['ylim'],
-            showgrid=props['axes'][0]['grid']['gridOn'],
-            domain=mpltools.convert_y_domain(props['bounds'],
-                                             self.mpl_y_bounds),
             anchor='x{}'.format(self.axis_ct),
             zeroline=False,
             showline=True,
-            mirror=True,
+            mirror='ticks',
             ticks='inside')
+        # update defaults with things set in mpl
+        mpl_xaxis, mpl_yaxis = mpltools.prep_xy_axis(ax=ax,
+                                                     props=props,
+                                                     x_bounds=self.mpl_x_bounds,
+                                                     y_bounds=self.mpl_y_bounds)
+        xaxis.update(mpl_xaxis)
+        yaxis.update(mpl_yaxis)
+        # put axes in our figure
         self.plotly_fig['layout']['xaxis{}'.format(self.axis_ct)] = xaxis
         self.plotly_fig['layout']['yaxis{}'.format(self.axis_ct)] = yaxis
 
