@@ -266,9 +266,17 @@ def prep_x_ticks(ax, props):
     scale = props['axes'][0]['scale']
     if scale == 'linear':
         try:
-            axis['tick0'] = props['axes'][0]['tickvalues'][0]
-            axis['dtick'] = props['axes'][0]['tickvalues'][1] - \
-                            props['axes'][0]['tickvalues'][0]
+            tickvalues = props['axes'][0]['tickvalues']
+            axis['tick0'] = tickvalues[0]
+            dticks = [round(tickvalues[i]-tickvalues[i-1], 12)
+                      for i in range(1, len(tickvalues) - 1)]
+            if all([dticks[i] == dticks[i-1]
+                    for i in range(1, len(dticks) - 1)]):
+                axis['dtick'] = tickvalues[1] - tickvalues[0]
+            else:
+                warnings.warn("'linear' x-axis tick spacing not even, "
+                              "ignoring mpl tick formatting.")
+                raise TypeError
             axis['autotick'] = False
         except (IndexError, TypeError):
             axis = dict(nticks=props['axes'][0]['nticks'])
@@ -298,9 +306,17 @@ def prep_y_ticks(ax, props):
     scale = props['axes'][1]['scale']
     if scale == 'linear':
         try:
-            axis['tick0'] = props['axes'][1]['tickvalues'][0]
-            axis['dtick'] = props['axes'][1]['tickvalues'][1] - \
-                            props['axes'][1]['tickvalues'][0]
+            tickvalues = props['axes'][1]['tickvalues']
+            axis['tick0'] = tickvalues[0]
+            dticks = [round(tickvalues[i]-tickvalues[i-1], 12)
+                      for i in range(1, len(tickvalues) - 1)]
+            if all([dticks[i] == dticks[i-1]
+                    for i in range(1, len(dticks) - 1)]):
+                axis['dtick'] = tickvalues[1] - tickvalues[0]
+            else:
+                warnings.warn("'linear' y-axis tick spacing not even, "
+                              "ignoring mpl tick formatting.")
+                raise TypeError
             axis['autotick'] = False
         except (IndexError, TypeError):
             axis = dict(nticks=props['axes'][1]['nticks'])
@@ -328,7 +344,7 @@ def prep_y_ticks(ax, props):
 def prep_xy_axis(ax, props, x_bounds, y_bounds):
     xaxis = dict(
         type=props['axes'][0]['scale'],
-        range=props['xlim'],
+        range=list(props['xlim']),
         showgrid=props['axes'][0]['grid']['gridOn'],
         domain=convert_x_domain(props['bounds'], x_bounds),
         side=props['axes'][0]['position'],
@@ -337,7 +353,7 @@ def prep_xy_axis(ax, props, x_bounds, y_bounds):
     xaxis.update(prep_x_ticks(ax, props))
     yaxis = dict(
         type=props['axes'][1]['scale'],
-        range=props['ylim'],
+        range=list(props['ylim']),
         showgrid=props['axes'][1]['grid']['gridOn'],
         domain=convert_y_domain(props['bounds'], y_bounds),
         side=props['axes'][1]['position'],
