@@ -280,23 +280,29 @@ class PlotlyList(list):
             elif isinstance(entry, dict):
                 try:
                     obj_name = KEY_TO_NAME[entry['type']]
-                    try:
-                        _class = NAME_TO_CLASS[obj_name]
-                        self[index] = _class()
-                        for key, val in entry.items():
-                            self[index][key] = val
-                        self[index].to_graph_objs()
-                    except KeyError:
-                        # TODO: should this default to Scatter?
-                        raise exceptions.PlotlyInvalidListItemError(
-                            "Entry had invalid 'type'")
                 except KeyError:
-                    raise exceptions.PlotlyInvalidListItemError(
-                        "Entry didn't have key: 'type'")
+                    raise exceptions.PlotlyDictKeyError(
+                        message="Entry didn't have key: 'type'",
+                        info=dict(
+                            graph_ref_name=NAME_TO_KEY[self.__class__.__name__],
+                            obj=self,
+                            errors=dict(missing_key='type'))
+                    )
+                _class = NAME_TO_CLASS[obj_name]  # don't hide if KeyError!!!
+                self[index] = _class()
+                for key, val in entry.items():
+                    self[index][key] = val
+                self[index].to_graph_objs()
             else:
-                raise exceptions.PlotlyInvalidListItemError(
-                    "Invalid entry, {}. PlotlyList entries must be dict-like."
-                    "".format(entry))
+                raise exceptions.PlotlyListItemError(
+                    message="Invalid entry of type, '{}', in list index, {}. "
+                            "PlotlyList entries must be dict-like."
+                            "".format(entry.__class__.__name__, index),
+                    info=dict(
+                        ref_name=NAME_TO_KEY[self.__class__.__name__],
+                        obj=self,
+                    )
+                    )
 
     def update(self, changes):
         """Update current list with changed_list, which must be iterable.
