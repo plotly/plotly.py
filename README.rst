@@ -105,11 +105,11 @@ Created by: Plotly_, `@plotlygraphs`_, `feedback@plot.ly`_
 License: MIT
 
 .. _Plotly: https://plot.ly
-.. _Quickstart: https://plot.ly
+.. _Quickstart: https://plot.ly/python
 .. _GitHub repo: https://github.com/plotly/python-api
-.. _Plotly and mpld3: http://nbviewer.ipython.org/github/plotly/python-api/blob/1.0/notebooks/Plotly%20and%20mpld3.ipynb
-.. _Plotly and Python: http://nbviewer.ipython.org/github/plotly/python-api/blob/1.0/notebooks/Plotly%20and%20Python.ipynb
-.. _set of notebooks: https://plot.ly
+.. _Plotly and mpld3: http://nbviewer.ipython.org/github/plotly/python-user-guide/blob/master/s6_matplotlylib/s6_matplotlylib.ipynb
+.. _Plotly and Python: http://nbviewer.ipython.org/github/plotly/python-user-guide/blob/master/s0_getting-started/s0_getting-started.ipynb
+.. _set of notebooks: http://nbviewer.ipython.org/github/plotly/python-user-guide/blob/master/s00_homepage/s00_homepage.ipynb
 .. _plotly profile: https://plot.ly/~mpld3/
 .. _@plotlygraphs: https://twitter.com/plotlygraphs
 .. _feedback@plot.ly: feedback@plot.ly
