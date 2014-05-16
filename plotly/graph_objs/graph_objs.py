@@ -266,7 +266,7 @@ class PlotlyList(list):
                           "list-like graph_objs.\nIt is not meant to be a "
                           "user interface.")
 
-    def to_graph_objs(self):
+    def to_graph_objs(self, caller=True):
         """Change any nested collections to subclasses of PlotlyDict/List.
 
         Procedure:
@@ -276,33 +276,17 @@ class PlotlyList(list):
         """
         for index, entry in enumerate(self):
             if isinstance(entry, PlotlyDict):
-                entry.to_graph_objs()
-            elif isinstance(entry, dict):
                 try:
-                    obj_name = KEY_TO_NAME[entry['type']]
-                except KeyError:
-                    raise exceptions.PlotlyDictKeyError(
-                        message="Entry didn't have key: 'type'",
-                        info=dict(
-                            graph_ref_name=NAME_TO_KEY[self.__class__.__name__],
-                            obj=self,
-                            errors=dict(missing_key='type'))
-                    )
-                _class = NAME_TO_CLASS[obj_name]  # don't hide if KeyError!!!
-                self[index] = _class()
-                for key, val in entry.items():
-                    self[index][key] = val
-                self[index].to_graph_objs()
+                    entry.to_graph_objs(caller=False)
+                except (exceptions.PlotlyGraphObjectError) as err:
+                    err.add_to_error_path(index)
+                    err.prepare()
+                    raise  # re-raise current exception
             else:
-                raise exceptions.PlotlyListItemError(
-                    message="Invalid entry of type, '{}', in list index, {}. "
-                            "PlotlyList entries must be dict-like."
-                            "".format(entry.__class__.__name__, index),
-                    info=dict(
-                        ref_name=NAME_TO_KEY[self.__class__.__name__],
-                        obj=self,
-                    )
-                    )
+                raise exceptions.PlotlyListEntryError(obj=self,
+                                                      index=index,
+                                                      entry=entry)
+
 
     def update(self, changes):
         """Update current list with changed_list, which must be iterable.
@@ -355,7 +339,7 @@ class PlotlyList(list):
             del_ct += 1
         return l
 
-    def validate(self):
+    def validate(self, caller=True):
         """Recursively check the validity of the entries in a PlotlyList.
 
         PlotlyList may only contain suclasses of PlotlyDict, or dictionary-like
@@ -367,14 +351,26 @@ class PlotlyList(list):
         until the entire list has been validated.
 
         """
-        self.to_graph_objs()  # change everything to PlotlyList/Dict objects...
-        for plotly_dict in self:
+        if caller:  # change everything to PlotlyList/Dict objects
             try:
-                plotly_dict.validate()  # recursively check the rest of the obj
-            except AttributeError:
-                raise exceptions.PlotlyInvalidListItemError(
-                    "Plotly list-type objects can only contain plotly "
-                    "dict-like objects.")
+                self.to_graph_objs()
+            except exceptions.PlotlyGraphObjectError as err:
+                err.prepare()
+                raise
+        for index, entry in enumerate(self):
+            if isinstance(entry, PlotlyDict):
+                try:
+                    entry.validate(caller=False)
+                except exceptions.PlotlyGraphObjectError as err:
+                    err.add_to_error_path(index)
+                    err.prepare()
+                    raise
+            else:
+                raise exceptions.PlotlyGraphObjectError(  # TODO!!!
+                    message="uh-oh, this error shouldn't have happenend.",
+                    plain_message="uh-oh, this error shouldn't have happenend.",
+                    path=[index],
+                )
 
     def to_string(self, level=0, indent=4, eol='\n', pretty=True, max_chars=80):
         """Returns a formatted string showing graph_obj constructors.
@@ -410,7 +406,7 @@ class PlotlyList(list):
                                            indent=' ' * indent * level)
         return string
 
-    def force_clean(self):
+    def force_clean(self, caller=True):
         """Attempts to convert to graph_objs and calls force_clean() on entries.
 
         Calling force_clean() on a PlotlyList will ensure that the object is
@@ -422,9 +418,10 @@ class PlotlyList(list):
         Careful! This will delete any invalid entries *silently*.
 
         """
-        self.to_graph_objs()
+        if caller:
+            self.to_graph_objs()  # TODO add error handling here!
         for entry in self:
-            entry.force_clean()
+            entry.force_clean(caller=False)
         del_indicies = [index for index, item in enumerate(self)
                         if len(item) == 0]
         del_ct = 0
@@ -534,13 +531,11 @@ class PlotlyDict(dict):
         obj_key = NAME_TO_KEY[self.__class__.__name__]
         keys = self.keys()
         for key in keys:
-            try:
+            if isinstance(self[key], (PlotlyDict, PlotlyList)):
                 self[key].strip_style()
-            except AttributeError:
+            else:
                 try:
-                    if INFO[obj_key][key]['type'] != 'style':
-                        pass
-                    else:
+                    if INFO[obj_key][key]['type'] == 'style':
                         del self[key]
                 except KeyError:  # TODO: Update the JSON
                     # print "'type' not in {} for {}".format(obj_key, key)
@@ -553,11 +548,11 @@ class PlotlyDict(dict):
         obj_key = NAME_TO_KEY[class_name]
         d = dict()
         for key, val in self.items():
-            try:
+            if isinstance(val, (PlotlyDict, PlotlyList)):
                 d[key] = val.get_data()
-            except AttributeError:
+            else:
                 try:
-                    if INFO[obj_key][key]['type'] == 'data':
+                    if INFO[obj_key][key]['type'] == 'data':  # TODO: Update the JSON
                         d[key] = val
                 except KeyError:
                     pass
@@ -570,7 +565,7 @@ class PlotlyDict(dict):
             d = d.values()[0]
         return d
 
-    def to_graph_objs(self):
+    def to_graph_objs(self, caller=True):
         """Walk obj, convert dicts and lists to plotly graph objs.
 
         For each key in the object, if it corresponds to a special key that
@@ -579,28 +574,52 @@ class PlotlyDict(dict):
         appropriate `kind`.
 
         """
+        info_key = NAME_TO_KEY[self.__class__.__name__]
         keys = self.keys()
         for key in keys:
-            try:
-                class_name = KEY_TO_NAME[key]
-                if isinstance(self[key], dict):
-                    obj = NAME_TO_CLASS[class_name]()  # gets constructor
-                    for k, v in self.pop(key).items():
-                        obj[k] = v
-                    obj.to_graph_objs()
-                    self[key] = obj
-                elif isinstance(self[key], list):
-                    obj = NAME_TO_CLASS[class_name]()  # gets constructor
-                    obj += self.pop(key)
-                    obj.to_graph_objs()
-                    self[key] = obj
-            except KeyError:
+            if isinstance(self[key], (PlotlyDict, PlotlyList)):
                 try:
-                    self[key].to_graph_objs()
-                except AttributeError:
-                    pass  # TODO: this means you don't get errors here...
+                    self[key].to_graph_objs(caller=False)
+                except exceptions.PlotlyGraphObjectError as err:
+                    err.add_to_error_path(key)
+                    err.prepare()
+                    raise
+            elif key in INFO[info_key] and 'type' in INFO[info_key][key]:
+                if INFO[info_key][key]['type'] == 'object':
+                    class_name = KEY_TO_NAME[key]
+                    obj = NAME_TO_CLASS[class_name]()  # gets constructor
+                    if isinstance(obj, PlotlyDict):
+                        if not isinstance(self[key], dict):
+                            info_key = NAME_TO_KEY[self.__class__.__name__]
+                            raise exceptions.PlotlyDictValueError(
+                                obj=self,
+                                key=key,
+                                value=self[key],
+                                val_types=INFO[info_key][key]['val_types'],
+                                notes="value needs to be dictionary-like"
+                            )
+                        for k, v in self.pop(key).items():
+                            obj[k] = v  # finish up momentarily...
+                    else:  # if not PlotlyDict, it MUST be a PlotlyList
+                        if not isinstance(self[key], list):
+                            info_key = NAME_TO_KEY[self.__class__.__name__]
+                            raise exceptions.PlotlyDictValueError(  # TODO!!!
+                                obj=self,
+                                key=key,
+                                value=self[key],
+                                val_types=INFO[info_key][key]['val_types'],
+                                notes="value needs to be list-like"
+                            )
+                        obj += self.pop(key)
+                    try:
+                        obj.to_graph_objs(caller=False)
+                    except exceptions.PlotlyGraphObjectError as err:
+                        err.add_to_error_path(key)
+                        err.prepare()
+                        raise
+                    self[key] = obj  # whew! made it!
 
-    def validate(self):  # TODO: validate values too?
+    def validate(self, caller=True):  # TODO: validate values too?
         """Recursively check the validity of the keys in a PlotlyDict.
 
         The valid keys constitute the entries in each object
@@ -612,46 +631,51 @@ class PlotlyDict(dict):
         until the entire object has been validated.
 
         """
-        self.to_graph_objs()  # change everything to 'checkable' objs
+        if caller:  # change everything to 'checkable' objs
+            try:
+                self.to_graph_objs(caller=False)
+            except exceptions.PlotlyGraphObjectError as err:
+                err.prepare()
+                raise
         obj_key = NAME_TO_KEY[self.__class__.__name__]
         for key, val in self.items():
-            try:
-                val.validate()
-            except AttributeError:
+            if isinstance(val, (PlotlyDict, PlotlyList)):
+                try:
+                    val.validate(caller=False)
+                except exceptions.PlotlyGraphObjectError as err:
+                    err.add_to_error_path(key)
+                    err.prepare()
+                    raise
+            else:
                 if key in INFO[obj_key]:
-                    try:  # TODO: eventually this should be removed...
-                        if INFO[obj_key][key]['type'] == 'object':
-                            msg = ("Class '{cls}' for key '{key}' in '{obj}' "
-                                   "graph object is invalid. Valid types for this "
-                                   "key are '{types}'.\n\nRun 'help(plotly"
-                                   ".graph_objs.{obj})' for more information."
-                                   "".format(cls=val.__class__.__name__,
-                                             key=key,
-                                             obj=self.__class__.__name__,
-                                             types=INFO[obj_key][key]['val_types']))
-                            raise exceptions.PlotlyError(msg)
-                    except KeyError:
-                        pass
+                    if 'type' not in INFO[obj_key][key]:
+                        continue  # TODO: 'type' may not be documented yet!
+                    if INFO[obj_key][key]['type'] == 'object':
+                        raise exceptions.PlotlyDictValueError(
+                            obj=self,
+                            key=key,
+                            value=val,
+                            val_types=INFO[obj_key][key]['val_types']
+                        )
                 else:
                     matching_objects = [obj for obj in INFO if key in INFO[obj]]
-                    msg = ("Invalid key, '{key}', for class, '{obj}'\n\nRun "
-                           "'help(plotly.graph_objs.{obj})' for more "
-                           "information.\n\n".format(
-                           key=key,
-                           obj=self.__class__.__name__))
+                    notes = ''
                     if len(matching_objects):
-                        msg += "That key is valid only in these objects:\n\n"
+                        notes += "That key is valid only in these objects:\n\n"
                         for obj in matching_objects:
-                            msg += "\t{}".format(KEY_TO_NAME[obj])
+                            notes += "\t{}".format(KEY_TO_NAME[obj])
                             try:
-                                msg += "({}='{}')\n".format(
-                                    key, INFO[obj][key]['val_types'])
+                                notes += '({}="{}")\n'.format(
+                                    repr(key), INFO[obj][key]['val_types'])
                             except KeyError:
-                                msg += "({}='..')\n".format(key)
-                        msg.expandtabs()
+                                notes += '({}="..")\n'.format(repr(key))
+                        notes.expandtabs()
                     else:
-                        msg += "Couldn't find uses for key: {}\n\n".format(key)
-                    raise exceptions.PlotlyInvalidKeyError(msg)
+                        notes += ("Couldn't find uses for key: {}\n\n"
+                                  "".format(repr(key)))
+                    raise exceptions.PlotlyDictKeyError(obj=self,
+                                                        key=key,
+                                                        notes=notes)
 
     def to_string(self, level=0, indent=4, eol='\n', pretty=True, max_chars=80):
         """Returns a formatted string showing graph_obj constructors.
@@ -668,7 +692,7 @@ class PlotlyDict(dict):
         max_chars (default = 80) -- set max characters per line
 
         """
-        self.to_graph_objs()
+        self.to_graph_objs()  # todo, consider catching and re-raising?
         string = "{name}(".format(name=self.__class__.__name__)
         index = 0
         obj_key = NAME_TO_KEY[self.__class__.__name__]
@@ -699,7 +723,7 @@ class PlotlyDict(dict):
         string += "{eol}{indent})".format(eol=eol, indent=' ' * indent * level)
         return string
 
-    def force_clean(self):
+    def force_clean(self, caller=True):
         """Attempts to convert to graph_objs and call force_clean() on values.
 
         Calling force_clean() on a PlotlyDict will ensure that the object is
@@ -710,14 +734,15 @@ class PlotlyDict(dict):
 
         """
         obj_key = NAME_TO_KEY[self.__class__.__name__]
-        self.to_graph_objs()
+        if caller:
+            self.to_graph_objs(caller=False)
         del_keys = [key for key in self if str(key) not in INFO[obj_key]]
         for key in del_keys:
             del self[key]
         keys = self.keys()
         for key in keys:
             try:
-                self[key].force_clean()
+                self[key].force_clean(caller=False)  # TODO: add error handling
             except AttributeError:
                 pass
             if isinstance(self[key], (dict, list)):
@@ -738,27 +763,7 @@ class Data(PlotlyList):
     Valid entry types: (dict or any subclass of Trace, i.e., Scatter, Box, etc.)
 
     """
-    def validate(self):
-        """Recursively check the validity of the entries in a Data.
-
-        Data may only contain suclasses of PlotlyTrace, or dictionary-like
-        objects that can be re-instantiated as subclasses of PlotlyTrace.
-
-        The validation process first requires that all nested collections be
-        converted to the appropriate subclass of PlotlyDict/PlotlyList. Then,
-        each of these objects call `validate` and so on, recursively,
-        until the entire data list has been validated.
-
-        """
-        self.to_graph_objs()  # change everything to PlotlyList/Dict objects...
-        for _plotlytrace in self:
-            if not issubclass(_plotlytrace.__class__, PlotlyTrace):
-                raise exceptions.PlotlyInvalidListItemError(
-                    "Subclasses of PlotlyTrace only in Data, e.g. Scatter, "
-                    "Box, Heatmap, etc.")
-        super(Data, self).validate()
-
-    def to_graph_objs(self):  # TODO: figure out where errors from here go.
+    def to_graph_objs(self, caller=True):  # TODO TODO TODO! check logic!
         """Change any nested collections to subclasses of PlotlyDict/List.
 
         Procedure:
@@ -766,31 +771,31 @@ class Data(PlotlyList):
             2. Call `to_graph_objects` on each of these entries.
 
         """
-        for no, entry in enumerate(self):
-            if isinstance(entry, Trace):
-                pass
+        for index, entry in enumerate(self):
+            if isinstance(entry, PlotlyDict):
+                self[index] = NAME_TO_CLASS[entry.__class__.__name__](entry)
             elif isinstance(entry, dict):
-                if 'type' not in entry:
+                if 'type' not in entry:  # assume 'scatter' if not given
                     entry['type'] = 'scatter'
                 try:
-                    obj_type = entry['type']
-                    type_info = INFO[obj_type]
-                    use_trace = False
-                    for key in entry:
-                        if (key not in type_info) and (key in INFO['trace']):
-                            pass
-                            # use_trace = True
-                    if use_trace:
-                        self[no] = Trace(entry)
-                        warnings.warn(
-                            "converting object '{}' with type '{}' to object "
-                            "'Trace'. Everything will work upon upload to "
-                            "plotly, howevever some of the keys specified "
-                            "won't be functional.".format(
-                                KEY_TO_NAME['obj_type'], obj_type))
+                    obj_name = KEY_TO_NAME[entry['type']]
                 except KeyError:
-                    pass  # TODO: no error will happen here, get's caught later.
-        super(Data, self).to_graph_objs()
+                    raise exceptions.PlotlyDataTypeError(
+                        obj=self,
+                        index=index
+                    )
+                obj = NAME_TO_CLASS[obj_name]()  # don't hide if KeyError!
+                for k, v in entry.items():
+                    obj[k] = v
+                self[index] = obj
+            if not isinstance(self[index], PlotlyTrace):  # Trace ONLY!!!
+                raise exceptions.PlotlyListEntryError(
+                    obj=self,
+                    index=index,
+                    notes="The entry could not be converted into a PlotlyTrace "
+                          "object (e.g., Scatter, Heatmap, Bar, etc).",
+                )
+        super(Data, self).to_graph_objs(caller=caller)
 
 
 class Annotations(PlotlyList):
@@ -810,26 +815,7 @@ class Annotations(PlotlyList):
     For help on Annotation, run `help(plotly.graph_objs.Annotation)`
 
     """
-    def validate(self):
-        """Recursively check the validity of the entries in a Annotations.
-
-        Annotations may only contain Annotation objects or dictionary-like
-        objects that can be re-instantiated as an Annotation.
-
-        The validation process first requires that all nested collections be
-        converted to the appropriate subclass of PlotlyDict/PlotlyList. Then,
-        each of these objects call `validate` and so on, recursively,
-        until the entire data list has been validated.
-
-        """
-        self.to_graph_objs()  # change everything to PlotlyList/Dict objects...
-        for annotation in self:
-            if not issubclass(annotation.__class__, Annotation):
-                raise exceptions.PlotlyInvalidListItemError(
-                    "Annotation objects only in Annotations.")
-        super(Annotations, self).validate()
-
-    def to_graph_objs(self):
+    def to_graph_objs(self, caller=True):
         """Change any nested collections to subclasses of PlotlyDict/List.
 
         Procedure:
@@ -838,11 +824,19 @@ class Annotations(PlotlyList):
 
         """
         for index, entry in enumerate(self):
-            obj = Annotation()
-            for k, v in entry.items():
-                obj[k] = v
-            self[index] = obj
-        super(Annotations, self).to_graph_objs()
+            if isinstance(entry, dict):
+                obj = Annotation()
+                for k, v in entry.items():
+                    obj[k] = v
+                self[index] = obj
+            else:
+                raise exceptions.PlotlyListEntryError(
+                    obj=self,
+                    index=index,
+                    notes="The entry could not be converted into an Annotation "
+                          "object because it was not a dictionary.",
+                )
+        super(Annotations, self).to_graph_objs(caller=caller)
 
 
 class PlotlyTrace(PlotlyDict):
@@ -1131,7 +1125,7 @@ class Layout(PlotlyDict):
     def __init__(self, *args, **kwargs):
         super(Layout, self).__init__(*args, **kwargs)
 
-    def to_graph_objs(self):
+    def to_graph_objs(self, caller=True):
         """Walk obj, convert dicts and lists to plotly graph objs.
 
         For each key in the object, if it corresponds to a special key that
@@ -1142,32 +1136,22 @@ class Layout(PlotlyDict):
         """
         keys = self.keys()
         for key in keys:
-            if isinstance(self[key], dict):
-                if key[:5] == 'xaxis':  # allows appended integers!
-                    try:
-                        axis_int = int(key[5:])
-                        if axis_int == 0:
-                            continue
+            if key[:5] in ['xaxis', 'yaxis']:  # allows appended integers!
+                try:
+                    axis_int = int(key[5:])  # may raise ValueError
+                    if axis_int == 0:
+                        continue  # xaxis0 and yaxis0 are not valid keys...
+                except ValueError:
+                    continue  # not an XAxis or YAxis object after all
+                if isinstance(self[key], dict):
+                    if key[:5] == 'xaxis':
                         obj = XAxis()
-                        for k, v in self.pop(key).items():
-                            obj[k] = v
-                        obj.to_graph_objs()
-                        self[key] = obj
-                    except ValueError:
-                        pass
-                elif key[:5] == 'yaxis':  # allows appended integers!
-                    try:
-                        axis_int = int(key[5:])
-                        if axis_int == 0:
-                            continue
+                    else:
                         obj = YAxis()
-                        for k, v in self.pop(key).items():
-                            obj[k] = v
-                        obj.to_graph_objs()
-                        self[key] = obj
-                    except ValueError:
-                        pass
-        super(Layout, self).to_graph_objs()
+                    for k, v in self.pop(key).items():
+                        obj[k] = v
+                    self[key] = obj  # call to super will call 'to_graph_objs'
+        super(Layout, self).to_graph_objs(caller=caller)
 
     def to_string(self, level=0, indent=4, eol='\n', pretty=True, max_chars=80):
         """Returns a formatted string showing graph_obj constructors.
@@ -1234,7 +1218,7 @@ class Layout(PlotlyDict):
         string += "{eol}{indent})".format(eol=eol, indent=' ' * indent * level)
         return string
 
-    def force_clean(self):  # TODO: can't make call to super...
+    def force_clean(self, caller=True):  # TODO: can't make call to super...
         """Attempts to convert to graph_objs and call force_clean() on values.
 
         Calling force_clean() on a Layout will ensure that the object is
@@ -1250,7 +1234,8 @@ class Layout(PlotlyDict):
 
         """
         obj_key = NAME_TO_KEY[self.__class__.__name__]
-        self.to_graph_objs()
+        if caller:
+            self.to_graph_objs(caller=False)
         del_keys = [key for key in self if str(key) not in INFO[obj_key]]
         for key in del_keys:
             if (key[:5] == 'xaxis') or (key[:5] == 'yaxis'):
@@ -1263,7 +1248,7 @@ class Layout(PlotlyDict):
         keys = self.keys()
         for key in keys:
             try:
-                self[key].force_clean()
+                self[key].force_clean(caller=False)  # TODO error handling??
             except AttributeError:
                 pass
             if isinstance(self[key], (dict, list)):
