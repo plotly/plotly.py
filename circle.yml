@@ -6,7 +6,10 @@ checkout:
     - git submodule sync
     - git submodule update --init # use submodules
 
-## Customize dependencies (pass)
+## Customize dependencies
+dependencies:
+  post:
+    - pip install matplotlib
 
 ## Customize database setup (pass)
 
