@@ -1,5 +1,5 @@
 """
-test_data:
+test_annotations:
 ==========
 
 A module intended for use with Nose.
@@ -17,68 +17,59 @@ def setup():
 
 
 def test_trivial():
-    assert Data() == list()
+    assert Annotations() == list()
 
 
 def test_weird_instantiation():  # Python allows this...
-    assert Data({}) == list({})
-
-
-def test_default_scatter():
-    assert Data([{}]) == list([{'type': 'scatter'}])
+    assert Annotations({}) == list({})
 
 
 def test_dict_instantiation():
-    Data([{'type': 'scatter'}])
+    Annotations([{'text': 'annotation text'}])
 
 
 @raises(PlotlyDictKeyError)
 def test_dict_instantiation_key_error():
-    print Data([{'not-a-key': 'anything'}])
+    print Annotations([{'not-a-key': 'anything'}])
 
 
 @raises(PlotlyDictValueError)
 def test_dict_instantiation_key_error():
-    print Data([{'marker': 'not-a-dict'}])
-
-
-@raises(PlotlyDataTypeError)
-def test_dict_instantiation_type_error():
-    Data([{'type': 'invalid_type'}])
+    print Annotations([{'font': 'not-a-dict'}])
 
 
 @raises(PlotlyListEntryError)
 def test_dict_instantiation_graph_obj_error_0():
-    Data([Data()])
+    Annotations([Data()])
 
 
 @raises(PlotlyListEntryError)
 def test_dict_instantiation_graph_obj_error_1():
-    Data([Figure()])
+    Annotations([Figure()])
 
 
 @raises(PlotlyListEntryError)
 def test_dict_instantiation_graph_obj_error_2():
-    Data([Annotations()])
+    Annotations([Annotations()])
 
 
 @raises(PlotlyListEntryError)
 def test_dict_instantiation_graph_obj_error_3():
-    Data([Layout()])
+    Annotations([Layout()])
 
 
 def test_validate():
-    data = Data()
-    data.validate()
-    data += [{'type': 'scatter'}]
-    data.validate()
-    data += [{},{},{}]
-    data.validate()
+    annotations = Annotations()
+    annotations.validate()
+    annotations += [{'text': 'some text'}]
+    annotations.validate()
+    annotations += [{},{},{}]
+    annotations.validate()
 
 
 @raises(PlotlyDictKeyError)
 def test_validate_error():
-    data = Data()
-    data.append({'not-a-key': 'anything'})
-    data.validate()
+    annotations = Annotations()
+    annotations.append({'not-a-key': 'anything'})
+    annotations.validate()
 
