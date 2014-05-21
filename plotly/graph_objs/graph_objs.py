@@ -29,11 +29,35 @@ import textwrap
 from .. import exceptions
 from .. import utils
 
-__all__ = ["Data", "Annotations", "Bar", "Box", "Contour", "Heatmap",
-           "Histogram", "Histogram2d", "Histogram2dContour", "Scatter",
-           "Annotation", "ColorBar", "Contours", "ErrorY", "Figure", "Font",
-           "Layout", "Legend", "Line", "Margin", "Marker", "Stream", "Trace",
-           "XAxis", "XBins", "YAxis", "YBins"]
+__all__ = ["Data",
+           "Annotations",
+           "Bar",
+           "Box",
+           "Contour",
+           "Heatmap",
+           "Histogram",
+           "Histogram2d",
+           "Histogram2dContour",
+           "Scatter",
+           "Annotation",
+           "AngularAxis",
+           "ColorBar",
+           "Contours",
+           "ErrorY",
+           "Figure",
+           "Font",
+           "Layout",
+           "Legend",
+           "Line",
+           "Margin",
+           "Marker",
+           "RadialAxis",
+           "Stream",
+           "Trace",
+           "XAxis",
+           "XBins",
+           "YAxis",
+           "YBins"]
 
 # TODO: BIG ONE, how should exceptions bubble up in this inheritance scheme?
     # TODO: related, WHAT exceptions should bubble up?
@@ -50,7 +74,7 @@ INFO = utils.decode_unicode(INFO)
 KEY_TO_NAME = dict(
     plotlylist='PlotlyList',
     data='Data',
-    angularAxis='AngularAxis',
+    angularaxis='AngularAxis',
     annotations='Annotations',
     area='Area',
     plotlydict='PlotlyDict',
@@ -74,7 +98,7 @@ KEY_TO_NAME = dict(
     line='Line',
     margin='Margin',
     marker='Marker',
-    radialAxis='RadialAxis',
+    radialaxis='RadialAxis',
     stream='Stream',
     trace='Trace',
     textfont='Font',
@@ -91,7 +115,7 @@ KEY_TO_NAME = dict(
 NAME_TO_KEY = dict(
     PlotlyList='plotlylist',
     Data='data',
-    AngularAxis='angularAxis',
+    AngularAxis='angularaxis',
     Annotations='annotations',
     PlotlyDict='plotlydict',
     PlotlyTrace='plotlytrace',
@@ -115,7 +139,7 @@ NAME_TO_KEY = dict(
     Line='line',
     Margin='margin',
     Marker='marker',
-    RadialAxis='radialAxis',
+    RadialAxis='radialaxis',
     Stream='stream',
     Trace='trace',
     XAxis='xaxis',
