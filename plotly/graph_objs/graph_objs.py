@@ -824,7 +824,16 @@ class Annotations(PlotlyList):
 
         """
         for index, entry in enumerate(self):
-            if isinstance(entry, dict):
+            if isinstance(entry, (PlotlyDict, PlotlyList)):
+                if not isinstance(entry, Annotation):
+                    raise exceptions.PlotlyListEntryError(
+                        obj=self,
+                        index=index,
+                        notes="The entry could not be converted into an "
+                              "Annotation object because it was already a "
+                              "different kind of graph object.",
+                    )
+            elif isinstance(entry, dict):
                 obj = Annotation()
                 for k, v in entry.items():
                     obj[k] = v
