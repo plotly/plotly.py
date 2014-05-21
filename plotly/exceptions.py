@@ -152,7 +152,7 @@ class PlotlyLocalCredentialsError(PlotlyLocalError):
             "run:\n"
             ">>> import plotly.plotly as py\n"
             ">>> py.sign_in('username', 'api_key')\n\n"
-            "Even better, save your credentials permatently using the 'tools' "
+            "Even better, save your credentials permanently using the 'tools' "
             "module:\n"
             ">>> import plotly.tools as tls\n"
             ">>> tls.set_credentials_file(username='username', api_key='api-key')\n\n"
