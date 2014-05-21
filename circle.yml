@@ -1,0 +1,25 @@
+## Customize the test machine (pass)
+
+## Customize checkout
+checkout:
+  post:
+    - git submodule sync
+    - git submodule update --init # use submodules
+
+## Customize dependencies
+dependencies:
+  post:
+    - pip install matplotlib
+    - pip install -I .
+    - cd ~ && python -c "import plotly"
+
+## Customize database setup (pass)
+
+## Customize test commands
+test:
+  post:
+    - nosetests -w plotly/tests
+
+## Customize deployment commands (pass)
+
+## Custom notifications (pass)
