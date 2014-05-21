@@ -43,6 +43,7 @@ __all__ = ["Data",
            "AngularAxis",
            "ColorBar",
            "Contours",
+           "ErrorX",
            "ErrorY",
            "Figure",
            "Font",
@@ -90,6 +91,7 @@ KEY_TO_NAME = dict(
     annotation='Annotation',
     colorbar='ColorBar',
     contours='Contours',
+    error_x='ErrorX',
     error_y='ErrorY',
     figure='Figure',
     font='Font',
@@ -131,6 +133,7 @@ NAME_TO_KEY = dict(
     Annotation='annotation',
     ColorBar='colorbar',
     Contours='contours',
+    ErrorX='error_x',
     ErrorY='error_y',
     Figure='figure',
     Font='font',
@@ -1113,6 +1116,12 @@ class Contours(PlotlyDict):  # TODO: ?
 
     """
 
+class ErrorX(PlotlyDict):
+    """A dictionary-like object for representing a set of errorx bars in plotly.
+
+    """
+    pass
+
 
 class ErrorY(PlotlyDict):
     """A dictionary-like object for representing a set of errory bars in plotly.
@@ -1374,6 +1383,7 @@ NAME_TO_CLASS = dict(
     Annotation=Annotation,
     ColorBar=ColorBar,
     Contours=Contours,
+    ErrorX=ErrorX,
     ErrorY=ErrorY,
     Figure=Figure,
     Font=Font,

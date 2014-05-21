@@ -25,6 +25,7 @@ Defined Objects:
         AngularAxis
         ColorBar
         Contours
+        ErrorX
         ErrorY
         Figure
         Font
@@ -58,6 +59,7 @@ __all__ = ["Data",
            "AngularAxis",
            "ColorBar",
            "Contours",
+           "ErrorX",
            "ErrorY",
            "Figure",
            "Font",
