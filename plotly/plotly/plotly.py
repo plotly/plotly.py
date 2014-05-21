@@ -427,6 +427,9 @@ class Stream:
                     )
         del data['type']
 
+        if layout is not None:
+            data.update(dict(layout=layout))
+
         # TODO: allow string version of this?
         jdata = json.dumps(data, cls=utils._plotlyJSONEncoder)
         jdata += "\n"
