@@ -23,7 +23,6 @@ class PlotlyError(Exception):
     pass
 
 
-
 ## Graph Objects Errors ##
 
 class PlotlyGraphObjectError(PlotlyError):
@@ -137,6 +136,38 @@ class PlotlyDataTypeError(PlotlyGraphObjectError):
                                                   plain_message=plain_message,
                                                   path=[index],
                                                   **kwargs)
+
+
+## Local Config Errors ##
+
+class PlotlyLocalError(PlotlyError):
+    pass
+
+
+class PlotlyLocalCredentialsError(PlotlyLocalError):
+    def __init__(self):
+        message = ("\n"
+            "Couldn't find a 'username', 'api-key' pair for you on your local "
+            "machine. To sign in temporarily (until you stop running Python), "
+            "run:\n"
+            ">>> import plotly.plotly as py\n"
+            ">>> py.sign_in('username', 'api_key')\n\n"
+            "Even better, save your credentials permatently using the 'tools' "
+            "module:\n"
+            ">>> import plotly.tools as tls\n"
+            ">>> tls.set_credentials_file(username='username', api_key='api-key')\n\n"
+            "Note that 'username' should be a string containing YOUR Plotly "
+            "username and 'api-key' should be a string containing YOUR Plotly "
+            "api-key. To view your api-key:\n"
+            "1. Visit our website: https://plot.ly/\n"
+            "2. Sign-in using your Plotly username and password (different "
+            "from api-key)\n"
+            "3. Click the drop-down menu in the upper-right corner that says "
+            "your username.\n"
+            "4. Select 'settings' from this list.\n"
+            "5. Under the 'profile' tab in the settings list, you will find "
+            "your 'API Key'.\n")
+        super(PlotlyLocalCredentialsError, self).__init__(message)
 
 
 ## Server Errors ##

@@ -520,8 +520,7 @@ def _send_to_plotly(figure, **plot_options):
         (username, api_key) = (file_credentials['username'],
                                file_credentials['api_key'])
     else:
-        raise exceptions.PlotlyAccountError("Couldn't find a username, "
-                                            "api_key pair.")
+        raise exceptions.PlotlyLocalCredentialsError()
 
     kwargs = json.dumps(dict(filename=plot_options['filename'],
                              fileopt=plot_options['fileopt'],
@@ -563,15 +562,14 @@ def _validation_key_logic():
     elif 'username' in creds_on_file:
         username = creds_on_file['username']
     else:
-        raise exceptions.PlotlyAccountError("Not signed in or no username "
-                                            "saved in config file") # TODO: a message that doesn't suck
-
+        username = None
     if 'api_key' in _credentials:
         api_key = _credentials['api_key']
     elif 'api_key' in creds_on_file:
         api_key = creds_on_file['api_key']
     else:
-        raise exceptions.PlotlyAccountError("Not signed in or no api_key saved "
-                                            "in config file") # TODO: a message that doesn't suck
+        api_key = None
+    if username is None or api_key is None:
+        raise exceptions.PlotlyLocalCredentialsError()
     return (username, api_key)
 
