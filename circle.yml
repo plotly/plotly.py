@@ -11,7 +11,7 @@ dependencies:
   post:
     - pip install matplotlib
     - pip install -I .
-    - cd ~ && python -c "import plotlyy"
+    - cd ~ && python -c "import plotly"
 
 ## Customize database setup (pass)
 
