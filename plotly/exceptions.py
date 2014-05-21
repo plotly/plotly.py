@@ -156,17 +156,7 @@ class PlotlyLocalCredentialsError(PlotlyLocalError):
             "module:\n"
             ">>> import plotly.tools as tls\n"
             ">>> tls.set_credentials_file(username='username', api_key='api-key')\n\n"
-            "Note that 'username' should be a string containing YOUR Plotly "
-            "username and 'api-key' should be a string containing YOUR Plotly "
-            "api-key. To view your api-key:\n"
-            "1. Visit our website: https://plot.ly/\n"
-            "2. Sign-in using your Plotly username and password (different "
-            "from api-key)\n"
-            "3. Click the drop-down menu in the upper-right corner that says "
-            "your username.\n"
-            "4. Select 'settings' from this list.\n"
-            "5. Under the 'profile' tab in the settings list, you will find "
-            "your 'API Key'.\n")
+            "For more help, see https://plot.ly/python.\n")
         super(PlotlyLocalCredentialsError, self).__init__(message)
 
 
