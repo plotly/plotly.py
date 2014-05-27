@@ -415,6 +415,8 @@ class PlotlyList(list):
 
         """
         self.to_graph_objs()
+        if not len(self):
+            return "{name}()".format(name=self.__class__.__name__)
         string = "{name}([{eol}{indent}".format(
             name=self.__class__.__name__,
             eol=eol,
@@ -429,8 +431,7 @@ class PlotlyList(list):
                 string += ",{eol}{indent}".format(
                     eol=eol,
                     indent=' ' * indent * (level + 1))
-        string += "{eol}{indent}])".format(eol=eol,
-                                           indent=' ' * indent * level)
+        string += "{eol}{indent}])".format(eol=eol, indent=' ' * indent * level)
         return string
 
     def force_clean(self, caller=True):
@@ -720,10 +721,12 @@ class PlotlyDict(dict):
 
         """
         self.to_graph_objs()  # todo, consider catching and re-raising?
+        if not len(self):
+            return "{name}()".format(name=self.__class__.__name__)
         string = "{name}(".format(name=self.__class__.__name__)
         index = 0
         obj_key = NAME_TO_KEY[self.__class__.__name__]
-        for key in INFO[obj_key]:
+        for key in INFO[obj_key]:  # this sets the order of the keys! nice.
             if key in self:
                 string += "{eol}{indent}{key}=".format(
                     eol=eol,
@@ -1212,6 +1215,8 @@ class Layout(PlotlyDict):
         """
         # TODO: can't call super
         self.to_graph_objs()
+        if not len(self):
+            return "{name}()".format(name=self.__class__.__name__)
         string = "{name}(".format(name=self.__class__.__name__)
         index = 0
         obj_key = NAME_TO_KEY[self.__class__.__name__]
