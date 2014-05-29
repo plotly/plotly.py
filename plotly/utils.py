@@ -103,7 +103,6 @@ class _plotlyJSONEncoder(json.JSONEncoder):
 
 
 ### unicode stuff ###
-
 def decode_unicode(coll):
     if isinstance(coll, list):
         for no, entry in enumerate(coll):
@@ -127,3 +126,12 @@ def decode_unicode(coll):
                     pass
             coll[str(key)] = coll.pop(key)
     return coll
+
+
+### docstring templating ###
+def template_doc(**kwargs):
+    def _decorator(func):
+        if func.__doc__ is not None:
+            func.__doc__ = func.__doc__.format(**kwargs)
+        return func
+    return _decorator

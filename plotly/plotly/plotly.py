@@ -316,11 +316,12 @@ def get_figure(file_owner, file_id, raw=False):
                 "There was an error retrieving this file")
 
 
+@utils.template_doc(plotly_domain=tools._get_plotly_urls(forgiving=True)[0])
 class Stream:
     """ Interface to Plotly's real-time graphing API.
 
     Initialize a Stream object with a stream_id
-    found in https://plot.ly/settings.
+    found in {plotly_domain}/settings.
     Real-time graphs are initialized with a call to `plot` that embeds
     your unique `stream_id`s in each of the graph's traces. The `Stream`
     interface plots data to these traces, as identified with the unique
@@ -333,7 +334,7 @@ class Stream:
     Stream example:
     # Initialize a streaming graph
     # by embedding stream_id's in the graph's traces
-    >>> stream_id = "your_stream_id" # See https://plot.ly/settings
+    >>> stream_id = "your_stream_id" # See {plotly_domain}/settings
     >>> py.plot(Data([Scatter(x=[],
                               y=[],
                               stream=dict(token=stream_id, maxpoints=100))])
@@ -343,9 +344,10 @@ class Stream:
     >>> stream.write(dict(x=1, y=1)) # Plot (1, 1) in your graph
     """
 
+    @utils.template_doc(plotly_domain=tools._get_plotly_urls(forgiving=True)[0])
     def __init__(self, stream_id):
         """ Initialize a Stream object with your unique stream_id.
-        Find your stream_id at https://plot.ly/settings.
+        Find your stream_id at {plotly_domain}/settings.
 
         For more help, see: `help(plotly.plotly.Stream)`
         or see examples and tutorials here:
@@ -362,7 +364,7 @@ class Stream:
         http://nbviewer.ipython.org/github/plotly/python-user-guide/blob/master/s7_streaming/s7_streaming.ipynb
         """
 
-        plotly_streaming_url = tools._get_plotly_urls()[1]
+        plotly_streaming_url = tools._get_plotly_urls(forgiving=True)[1]
         self._stream = chunked_requests.Stream(plotly_streaming_url,
                                                80,
                                                {'Host': plotly_streaming_url,

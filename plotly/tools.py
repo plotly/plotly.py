@@ -186,8 +186,38 @@ def embed(username, plot_id, width="100%", height=525):
         pass
 
 
-### mpl-related tools ###
+def _get_plotly_urls(forgiving=False):
+    ''' Return url endpoints for Plotly services.
+        These endpoints are configurable, and are
+        retrieved from ~/.plotly/.credentials as:
+        {
+            'plotly_rest_url': '...',
+            'plotly_streaming_url': '...'
+        }
+    '''
+    if forgiving:
+        try:
+            config_on_file = get_credentials_file()
+        except:
+            config_on_file = {}
+    else:
+        config_on_file = get_credentials_file()
 
+    if 'plotly_rest_url' in config_on_file:
+        plotly_rest_url = config_on_file['plotly_rest_url']
+    else:
+        plotly_rest_url = 'https://plot.ly'
+
+    if 'plotly_streaming_url' in config_on_file:
+        plotly_streaming_url = config_on_file['plotly_streaming_url']
+    else:
+        plotly_streaming_url = 'stream.plot.ly'
+
+    return (plotly_rest_url, plotly_streaming_url)
+
+
+### mpl-related tools ###
+@utils.template_doc(plotly_domain=_get_plotly_urls(forgiving=True)[0])
 def mpl_to_plotly(fig, resize=False, strip_style=False, verbose=False):
     """Convert a matplotlib figure to plotly dictionary and send.
 
@@ -230,10 +260,10 @@ def mpl_to_plotly(fig, resize=False, strip_style=False, verbose=False):
     notebook -- an option for use with an IPython notebook
 
     ** Don't have a username/api_key? Try looking here:
-    https://plot.ly/plot
+    {plotly_domain}/plot
 
     ** Forgot your api_key? Try signing in and looking here:
-    https://plot.ly/api/python/getting-started
+    {plotly_domain}/api/python/getting-started
 
     """
     if _matplotlylib_imported:
@@ -401,26 +431,3 @@ def validate_stream(obj, obj_type):
             validate_stream(val, sub_obj_type)
         except KeyError:
             pass
-
-def _get_plotly_urls():
-    ''' Return url endpoints for Plotly services.
-        These endpoints are configurable, and are
-        retrieved from ~/.plotly/.credentials as:
-        {
-            'plotly_rest_url': '...',
-            'plotly_streaming_url': '...'
-        }
-    '''
-    config_on_file = get_credentials_file()
-
-    if 'plotly_rest_url' in config_on_file:
-        plotly_rest_url = config_on_file['plotly_rest_url']
-    else:
-        plotly_rest_url = 'https://plot.ly'
-
-    if 'plotly_streaming_url' in config_on_file:
-        plotly_streaming_url = config_on_file['plotly_streaming_url']
-    else:
-        plotly_streaming_url = 'stream.plot.ly'
-
-    return (plotly_rest_url, plotly_streaming_url)
