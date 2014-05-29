@@ -434,6 +434,21 @@ class PlotlyList(list):
         string += "{eol}{indent}])".format(eol=eol, indent=' ' * indent * level)
         return string
 
+    def get_ordered(self, caller=True):
+        if caller:
+            try:
+                self.to_graph_objs(caller=False)
+            except exceptions.PlotlyGraphObjectError as err:
+                err.add_note("Could not order list because it could not be "
+                             "converted to a valid graph object.")
+                err.prepare()
+                raise
+        ordered_list = []
+        for index, entry in enumerate(self):
+            ordered_list += [entry.get_ordered()]
+        return ordered_list
+
+
     def force_clean(self, caller=True):
         """Attempts to convert to graph_objs and calls force_clean() on entries.
 
@@ -752,6 +767,34 @@ class PlotlyDict(dict):
                     break
         string += "{eol}{indent})".format(eol=eol, indent=' ' * indent * level)
         return string
+
+    def get_ordered(self, caller=True):
+        if caller:  # change everything to 'order-able' objs
+            try:
+                self.to_graph_objs(caller=False)
+            except exceptions.PlotlyGraphObjectError as err:
+                err.add_note("dictionary could not be ordered because it "
+                             "could not be converted to a valid plotly graph "
+                             "object.")
+                err.prepare()
+                raise
+        obj_type = NAME_TO_KEY[self.__class__.__name__]
+        ordered_dict = collections.OrderedDict()
+        # grab keys like xaxis1, xaxis2, etc...
+        unordered_keys = [key for key in self if key not in INFO[obj_type]]
+        for key in INFO[obj_type]:
+            if key in self:
+                if isinstance(self[key], (PlotlyDict, PlotlyList)):
+                    ordered_dict[key] = self[key].get_ordered(caller=False)
+                else:
+                    ordered_dict[key] = self[key]
+        for key in unordered_keys:
+            if isinstance(self[key], (PlotlyDict, PlotlyList)):
+                ordered_dict[key] = self[key].get_ordered(caller=False)
+            else:
+                ordered_dict[key] = self[key]
+        return ordered_dict
+
 
     def force_clean(self, caller=True):
         """Attempts to convert to graph_objs and call force_clean() on values.
