@@ -392,12 +392,13 @@ class Stream:
         or see examples and tutorials here:
         http://nbviewer.ipython.org/github/plotly/python-user-guide/blob/master/s7_streaming/s7_streaming.ipynb
         """
-
-        if 'type' not in data:
-            data['type'] = 'scatter'
+        stream_object = dict()
+        stream_object.update(data)
+        if 'type' not in stream_object:
+            stream_object['type'] = 'scatter'
         if validate:
             try:
-                tools.validate(data, data['type'])
+                tools.validate(stream_object, stream_object['type'])
             except exceptions.PlotlyError as err:
                 raise exceptions.PlotlyError(
                     "Part of the data object with type, '{}', is invalid. This "
@@ -405,17 +406,18 @@ class Stream:
                     "If you do not want to validate your data objects when "
                     "streaming, you can set 'validate=False' in the call to "
                     "'your_stream.write()'. Here's why the object is "
-                    "invalid:\n\n{}".format(data['type'], err)
+                    "invalid:\n\n{}".format(stream_object['type'], err)
                 )
             try:
-                tools.validate_stream(data, data['type'])
+                tools.validate_stream(stream_object, stream_object['type'])
             except exceptions.PlotlyError as err:
                 raise exceptions.PlotlyError(
                     "Part of the data object with type, '{}', cannot yet be "
                     "streamed into Plotly. If you do not want to validate your "
                     "data objects when streaming, you can set 'validate=False' "
                     "in the call to 'your_stream.write()'. Here's why the "
-                    "object cannot be streamed:\n\n{}".format(data['type'], err)
+                    "object cannot be streamed:\n\n{}"
+                    "".format(stream_object['type'], err)
                 )
             if layout is not None:
                 try:
@@ -425,13 +427,13 @@ class Stream:
                         "Your layout kwarg was invalid. "
                         "Here's why:\n\n{}".format(err)
                     )
-        del data['type']
+        del stream_object['type']
 
         if layout is not None:
-            data.update(dict(layout=layout))
+            stream_object.update(dict(layout=layout))
 
         # TODO: allow string version of this?
-        jdata = json.dumps(data, cls=utils._plotlyJSONEncoder)
+        jdata = json.dumps(stream_object, cls=utils._plotlyJSONEncoder)
         jdata += "\n"
 
         try:
