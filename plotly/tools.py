@@ -94,7 +94,7 @@ def ensure_local_plotly_files_exist():
 
 ### credentials tools ###
 
-def set_credentials_file(username="", api_key="", stream_ids=()):
+def set_credentials_file(username="", api_key="", stream_ids=(), **extra):
     """Set the keyword-value pairs in `~/.plotly_credentials`.
 
     """
@@ -108,6 +108,7 @@ def set_credentials_file(username="", api_key="", stream_ids=()):
         credentials['api_key'] = api_key
     if stream_ids:
         credentials['stream_ids'] = stream_ids
+    credentials.update(extra)
     utils.save_json(CREDENTIALS_FILE, credentials)
 
 
@@ -144,23 +145,26 @@ def show_credentials_file(*args):
 
 def get_embed(username, plot_id, width="100%", height=525):
     padding = 25
+    plotly_rest_url = _get_plotly_urls()[0]
     if isinstance(width, (int, long)):
         s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\""
              "seamless=\"seamless\" "
-             "src=\"https://plot.ly/"
+             "src=\"{plotly_rest_url}/"
              "~{username}/{plot_id}/{plot_width}/{plot_height}\" "
              "height=\"{iframe_height}\" width=\"{iframe_width}\">"
              "</iframe>").format(
+            plotly_rest_url=plotly_rest_url,
             username=username, plot_id=plot_id,
             plot_width=width-padding, plot_height=height-padding,
             iframe_height=height, iframe_width=width)
     else:
         s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\""
              "seamless=\"seamless\" "
-             "src=\"https://plot.ly/"
+             "src=\"{plotly_rest_url}/"
              "~{username}/{plot_id}\" "
              "height=\"{iframe_height}\" width=\"{iframe_width}\">"
              "</iframe>").format(
+            plotly_rest_url=plotly_rest_url,
             username=username, plot_id=plot_id,
             iframe_height=height, iframe_width=width)
 
@@ -369,7 +373,7 @@ def validate_stream(obj, obj_type):
     """Validate a data dictionary (only) for use with streaming.
 
     An error is raised if a key within (or nested within) is not streamable.
-    
+
     """
     try:
         obj_type = graph_objs.KEY_TO_NAME[obj_type]
@@ -397,3 +401,26 @@ def validate_stream(obj, obj_type):
             validate_stream(val, sub_obj_type)
         except KeyError:
             pass
+
+def _get_plotly_urls():
+    ''' Return url endpoints for Plotly services.
+        These endpoints are configurable, and are
+        retrieved from ~/.plotly/.credentials as:
+        {
+            'plotly_rest_url': '...',
+            'plotly_streaming_url': '...'
+        }
+    '''
+    config_on_file = get_credentials_file()
+
+    if 'plotly_rest_url' in config_on_file:
+        plotly_rest_url = config_on_file['plotly_rest_url']
+    else:
+        plotly_rest_url = 'https://plot.ly'
+
+    if 'plotly_streaming_url' in config_on_file:
+        plotly_streaming_url = config_on_file['plotly_streaming_url']
+    else:
+        plotly_streaming_url = 'stream.plot.ly'
+
+    return (plotly_rest_url, plotly_streaming_url)

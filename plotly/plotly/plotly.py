@@ -42,8 +42,6 @@ _credentials = dict()
 
 _plot_options = dict()
 
-_plotly_url = "https://plot.ly"  #  do not append final '/' here for url!
-
 ### _credentials stuff ###
 
 def sign_in(username, api_key):
@@ -273,7 +271,8 @@ def get_figure(file_owner, file_id, raw=False):
     `graph objects`.
 
     """
-    server = _plotly_url
+
+    plotly_rest_url = tools._get_plotly_urls()[0]
     resource = "/apigetfile/{username}/{file_id}".format(username=file_owner,
                                                          file_id=file_id)
     (username, api_key) = _validation_key_logic()
@@ -298,7 +297,7 @@ def get_figure(file_owner, file_id, raw=False):
             "The 'file_id' argument must be a non-negative number."
         )
 
-    response = requests.get(server + resource, headers=headers)
+    response = requests.get(plotly_rest_url + resource, headers=headers)
     if response.status_code == 200:
         content = json.loads(response.content)
         response_payload = content['payload']
@@ -362,9 +361,11 @@ class Stream:
         or see examples and tutorials here:
         http://nbviewer.ipython.org/github/plotly/python-user-guide/blob/master/s7_streaming/s7_streaming.ipynb
         """
-        self._stream = chunked_requests.Stream('stream.plot.ly',
+
+        plotly_streaming_url = tools._get_plotly_urls()[1]
+        self._stream = chunked_requests.Stream(plotly_streaming_url,
                                                80,
-                                               {'Host': 'stream.plot.ly',
+                                               {'Host': plotly_streaming_url,
                                                 'plotly-streamtoken': self.stream_id})
 
 
@@ -470,8 +471,8 @@ class image:
                    'plotly-version': '2.0',
                    'plotly-platform': 'python'}
 
-        server = "https://plot.ly/apigenimage/"
-        res = requests.post(server,
+        url = tools._get_plotly_urls()[0] + "/apigenimage/"
+        res = requests.post(url,
                             data=json.dumps(figure,
                                             cls=utils._plotlyJSONEncoder),
                             headers=headers)
@@ -543,9 +544,7 @@ def _send_to_plotly(figure, **plot_options):
                    origin='plot',
                    kwargs=kwargs)
 
-    # TODO: this doesn't work yet for ppl's individual servers for testing...
-    # url = _plotly_url + "/clientresp"
-    url = "https://plot.ly/clientresp"
+    url = tools._get_plotly_urls()[0] + "/clientresp"
 
     r = requests.post(url, data=payload)
     r.raise_for_status()
@@ -577,4 +576,3 @@ def _validation_key_logic():
     if username is None or api_key is None:
         raise exceptions.PlotlyLocalCredentialsError()
     return (username, api_key)
-
