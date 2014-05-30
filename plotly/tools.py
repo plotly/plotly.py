@@ -76,6 +76,9 @@ def set_credentials_file(username=None, api_key=None, stream_ids=None):
     """Set the keyword-value pairs in `~/.plotly_credentials`.
 
     """
+    if not _file_permissions:
+        raise exceptions.PlotlyError("You don't have proper file permissions "
+                                     "to run this function.")
     ensure_local_plotly_files()  # make sure what's there is OK
     credentials = get_credentials_file()
     if isinstance(username, (str, unicode)):
@@ -133,6 +136,9 @@ def set_config_file(plotly_domain=None, plotly_stremaing_domain=None):
     """Set the keyword-value pairs in `~/.plotly/.config`.
 
     """
+    if not _file_permissions:
+        raise exceptions.PlotlyError("You don't have proper file permissions "
+                                     "to run this function.")
     ensure_local_plotly_files()  # make sure what's there is OK
     settings = get_config_file()
     if isinstance(plotly_domain, (str, unicode)):
