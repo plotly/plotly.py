@@ -22,7 +22,7 @@ import httplib
 import copy
 import base64
 import os
-from .. import utils
+from .. import utils  # TODO make non-relative
 from .. import tools
 from .. import exceptions
 from .. import version
@@ -42,7 +42,11 @@ _credentials = dict()
 
 _plot_options = dict()
 
+### test file permissions and make sure nothing is corrupted ###
+tools.ensure_local_plotly_files()
+
 ### _credentials stuff ###
+
 
 def sign_in(username, api_key):
     """Set module-scoped _credentials for session. Verify with plotly."""
@@ -51,22 +55,7 @@ def sign_in(username, api_key):
     # TODO: verify these _credentials with plotly
 
 
-### _plot_options stuff ###
-
-# def load_plot_options():
-#     """ Import the plot_options from file into the module-level _plot_options.
-#     """
-#     global _plot_options
-#     _plot_options = _plot_options.update(tools.get_plot_options_file())
-#
-#
-# def save_plot_options(**kwargs):
-#     """ Save the module-level _plot_options to file for later access
-#     """
-#     global _plot_options
-#     update_plot_options(**kwargs)
-#     tools.save_plot_options_file(**_plot_options)
-
+### plot options stuff ###
 
 def update_plot_options(**kwargs):
     """ Update the module-level _plot_options
@@ -316,7 +305,7 @@ def get_figure(file_owner, file_id, raw=False):
                 "There was an error retrieving this file")
 
 
-@utils.template_doc(plotly_domain=tools._get_plotly_urls(forgiving=True)[0])
+@utils.template_doc(**tools.get_config_file())
 class Stream:
     """ Interface to Plotly's real-time graphing API.
 
@@ -344,7 +333,7 @@ class Stream:
     >>> stream.write(dict(x=1, y=1)) # Plot (1, 1) in your graph
     """
 
-    @utils.template_doc(plotly_domain=tools._get_plotly_urls(forgiving=True)[0])
+    @utils.template_doc(**tools.get_config_file())
     def __init__(self, stream_id):
         """ Initialize a Stream object with your unique stream_id.
         Find your stream_id at {plotly_domain}/settings.
@@ -364,12 +353,11 @@ class Stream:
         http://nbviewer.ipython.org/github/plotly/python-user-guide/blob/master/s7_streaming/s7_streaming.ipynb
         """
 
-        plotly_streaming_url = tools._get_plotly_urls(forgiving=True)[1]
-        self._stream = chunked_requests.Stream(plotly_streaming_url,
+        streaming_url = tools.get_config_file()['plotly_streaming_domain']
+        self._stream = chunked_requests.Stream(streaming_url,
                                                80,
-                                               {'Host': plotly_streaming_url,
+                                               {'Host': streaming_url,
                                                 'plotly-streamtoken': self.stream_id})
-
 
     def write(self, data, layout=None, validate=True,
               reconnect_on=(200, '', 408)):
@@ -473,7 +461,7 @@ class image:
                    'plotly-version': '2.0',
                    'plotly-platform': 'python'}
 
-        url = tools._get_plotly_urls()[0] + "/apigenimage/"
+        url = tools.get_config_file()['plotly_domain'] + "/apigenimage/"
         res = requests.post(url,
                             data=json.dumps(figure,
                                             cls=utils._plotlyJSONEncoder),
@@ -546,7 +534,7 @@ def _send_to_plotly(figure, **plot_options):
                    origin='plot',
                    kwargs=kwargs)
 
-    url = tools._get_plotly_urls()[0] + "/clientresp"
+    url = tools.get_config_file()['plotly_domain'] + "/clientresp"
 
     r = requests.post(url, data=payload)
     r.raise_for_status()
