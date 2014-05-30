@@ -7,6 +7,7 @@ tools
 Functions that USERS will possibly want access to.
 
 """
+import os
 import os.path
 import warnings
 from . graph_objs import graph_objs
@@ -21,95 +22,70 @@ except ImportError:
 
 PLOTLY_DIR = os.path.join(os.path.expanduser("~"), ".plotly")
 CREDENTIALS_FILE = os.path.join(PLOTLY_DIR, ".credentials")
-# PLOT_OPTIONS_FILE = os.path.join(PLOTLY_DIR, ".plot_options")
-# THEMES_FILE = os.path.join(PLOTLY_DIR, ".themes")
+CONFIG_FILE = os.path.join(PLOTLY_DIR, ".config")
+TEST_FILE = os.path.join(PLOTLY_DIR, ".permission_test")
 
+# this sets both the DEFAULTS and the TYPES for these items
+_FILE_CONTENT = {CREDENTIALS_FILE: {'username': u'',
+                                    'api_key': u'',
+                                    'stream_ids': []},
+                 CONFIG_FILE: {'plotly_domain': u'https://plot.ly',
+                               'plotly_streaming_domain': u'stream.plot.ly'}}
 
-def ensure_local_plotly_files_exist():
-    if not os.path.isdir(PLOTLY_DIR):
+try:
+    if not os.path.exists(PLOTLY_DIR):
         os.mkdir(PLOTLY_DIR)
-    for filename in [CREDENTIALS_FILE]:  # , PLOT_OPTIONS_FILE, THEMES_FILE]:
-        if not os.path.exists(filename):
-            f = open(filename, "w")
-            f.close()
+    f = open(TEST_FILE, 'w')
+    f.write('testing\n')
+    f.close()
+    os.remove(TEST_FILE)
+    _file_permissions = True
+except:
+    _file_permissions = False
 
 
-### config tools ###
+def check_file_permissions():
+    return _file_permissions
 
-# def save_plot_options_file(filename="", fileopt="",
-#                       world_readable=None, auto_open=None):
-#     """Set the keyword-value pairs in `~/.plotly_plot_options`.
-#         TODO: the kwarg defaults are confusing - maybe should be left as a kwargs
-#         TODO: should this be hiddenz?
-#     """
-#     ensure_local_plotly_files_exist()
-#     plot_options = get_plot_options_file()
-#     if (not plot_options and
-#         (filename or fileopt or world_readable is not None or
-#          auto_open is not None)):
-#         plot_options = {}
-#     if filename:
-#         plot_options['filename'] = filename
-#     if fileopt:
-#         plot_options['fileopt'] = fileopt
-#     if world_readable is not None:
-#         plot_options['world_readable'] = world_readable
-#     if auto_open is not None:
-#         plot_options['auto_open'] = auto_open
-#     utils.save_json(PLOT_OPTIONS_FILE, plot_options)
-#
-#
-# def get_plot_options_file(*args):
-#     """Return specified args from `~/.plotly_plot_options`. as dict.
-#
-#     Returns all if no arguments are specified.
-#
-#     Example:
-#         get_plot_options_file('username', 'api_key')
-#
-#     """
-#     ensure_local_plotly_files_exist()
-#     options = utils.load_json(PLOT_OPTIONS_FILE, *args)
-#     if len(options):
-#         return {str(key): val for key, val in options.items()}
-#     else:
-#         return {}
-#
-#
-# def show_plot_options_file(*args):
-#     """Print specified kwargs from `~/.plotly_plot_options`.
-#
-#     Prints all if no keyword arguments are specified.
-#
-#     """
-#     ensure_local_plotly_files_exist()
-#     plot_options = get_plot_options_file(*args)
-#     if len(args):
-#         print "The specified keys from your plot options file:\n"
-#     else:
-#         print "Your plot options file:\n"
-#     for key, val in plot_options.items():
-#         print "\t{}: {}".format(key, val).expandtabs()
+
+def ensure_local_plotly_files():
+    """Ensure that filesystem is setup/filled out in a valid way"""
+    if _file_permissions:
+        if not os.path.isdir(PLOTLY_DIR):
+            os.mkdir(PLOTLY_DIR)
+        for fn in [CREDENTIALS_FILE, CONFIG_FILE]:
+            contents = utils.load_json_dict(fn)
+            for key, val in _FILE_CONTENT[fn].items():
+                if key not in contents or not isinstance(contents[key], type(val)):
+                    contents[key] = val
+            contents_keys = contents.keys()
+            for key in contents_keys:
+                if key not in _FILE_CONTENT[fn]:
+                    del contents[key]
+            utils.save_json_dict(fn, contents)
+    else:
+        warnings.warn("Looks like you don't have 'write' permission. That "
+                      "means, plotly's python api can't setup local "
+                      "configuration files. No problem though! You'll just "
+                      "have to sign-in using 'plotly.sign_in'.")
 
 
 ### credentials tools ###
 
-def set_credentials_file(username="", api_key="", stream_ids=(), **extra):
+def set_credentials_file(username=None, api_key=None, stream_ids=None):
     """Set the keyword-value pairs in `~/.plotly_credentials`.
 
     """
-    ensure_local_plotly_files_exist()
+    ensure_local_plotly_files()  # make sure what's there is OK
     credentials = get_credentials_file()
-    if not credentials and (username or api_key or stream_ids):
-        credentials = {}
-    if username:
+    if isinstance(username, (str, unicode)):
         credentials['username'] = username
-    if api_key:
+    if isinstance(api_key, (str, unicode)):
         credentials['api_key'] = api_key
-    if stream_ids:
+    if isinstance(stream_ids, (list, tuple)):
         credentials['stream_ids'] = stream_ids
-    credentials.update(extra)
-    utils.save_json(CREDENTIALS_FILE, credentials)
+    utils.save_json_dict(CREDENTIALS_FILE, credentials)
+    ensure_local_plotly_files()  # make sure what we just put there is OK
 
 
 def get_credentials_file(*args):
@@ -121,31 +97,80 @@ def get_credentials_file(*args):
         get_credentials_file('username')
 
     """
-    ensure_local_plotly_files_exist()
-    return utils.load_json(CREDENTIALS_FILE, *args)
+    if _file_permissions:
+        ensure_local_plotly_files()  # make sure what's there is OK
+        return utils.load_json_dict(CREDENTIALS_FILE, *args)
+    else:
+        return _FILE_CONTENT[CREDENTIALS_FILE]
 
 
-def show_credentials_file(*args):
-    """Print specified kwargs from `~/.plotly_credentials`.
+def reset_credentials_file():
+    ensure_local_plotly_files()  # make sure what's there is OK
+    f = open(CREDENTIALS_FILE, 'w')
+    f.close()
+    ensure_local_plotly_files()  # put the defaults back
 
-    Prints all if no keyword arguments are specified.
+
+# def show_credentials_file(*args):  # TODO, can we lose this?
+#     """Print specified kwargs from `~/.plotly_credentials`.
+#
+#     Prints all if no keyword arguments are specified.
+#
+#     """
+#     ensure_local_plotly_files() # make sure what's there is OK
+#     credentials = get_credentials_file(*args)
+#     if len(args):
+#         print "The specified keys from your credentials file:\n"
+#     else:
+#         print "Your credentials file:\n"
+#     for key, val in credentials.items():
+#         print "\t{}: {}".format(key, val).expandtabs()
+
+
+### config tools ###
+
+def set_config_file(plotly_domain=None, plotly_stremaing_domain=None):
+    """Set the keyword-value pairs in `~/.plotly/.config`.
 
     """
-    ensure_local_plotly_files_exist()
-    credentials = get_credentials_file(*args)
-    if len(args):
-        print "The specified keys from your credentials file:\n"
+    ensure_local_plotly_files()  # make sure what's there is OK
+    settings = get_config_file()
+    if isinstance(plotly_domain, (str, unicode)):
+        settings['plotly_domain'] = plotly_domain
+    if isinstance(plotly_stremaing_domain, (str, unicode)):
+        settings['plotly_streaming_domain'] = plotly_stremaing_domain
+    utils.save_json_dict(CONFIG_FILE, settings)
+    ensure_local_plotly_files()  # make sure what we just put there is OK
+
+
+def get_config_file(*args):
+    """Return specified args from `~/.plotly_credentials`. as dict.
+
+    Returns all if no arguments are specified.
+
+    Example:
+        get_credentials_file('username')
+
+    """
+    if _file_permissions:
+        ensure_local_plotly_files()  # make sure what's there is OK
+        return utils.load_json_dict(CONFIG_FILE, *args)
     else:
-        print "Your credentials file:\n"
-    for key, val in credentials.items():
-        print "\t{}: {}".format(key, val).expandtabs()
+        return _FILE_CONTENT[CONFIG_FILE]
+
+
+def reset_config_file():
+    ensure_local_plotly_files()  # make sure what's there is OK
+    f = open(CONFIG_FILE, 'w')
+    f.close()
+    ensure_local_plotly_files()  # put the defaults back
 
 
 ### embed tools ###
 
 def get_embed(username, plot_id, width="100%", height=525):
     padding = 25
-    plotly_rest_url = _get_plotly_urls()[0]
+    plotly_rest_url = get_config_file()['plotly_domain']
     if isinstance(width, (int, long)):
         s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\""
              "seamless=\"seamless\" "
@@ -186,38 +211,8 @@ def embed(username, plot_id, width="100%", height=525):
         pass
 
 
-def _get_plotly_urls(forgiving=False):
-    ''' Return url endpoints for Plotly services.
-        These endpoints are configurable, and are
-        retrieved from ~/.plotly/.credentials as:
-        {
-            'plotly_rest_url': '...',
-            'plotly_streaming_url': '...'
-        }
-    '''
-    if forgiving:
-        try:
-            config_on_file = get_credentials_file()
-        except:
-            config_on_file = {}
-    else:
-        config_on_file = get_credentials_file()
-
-    if 'plotly_rest_url' in config_on_file:
-        plotly_rest_url = config_on_file['plotly_rest_url']
-    else:
-        plotly_rest_url = 'https://plot.ly'
-
-    if 'plotly_streaming_url' in config_on_file:
-        plotly_streaming_url = config_on_file['plotly_streaming_url']
-    else:
-        plotly_streaming_url = 'stream.plot.ly'
-
-    return (plotly_rest_url, plotly_streaming_url)
-
-
 ### mpl-related tools ###
-@utils.template_doc(plotly_domain=_get_plotly_urls(forgiving=True)[0])
+@utils.template_doc(**get_config_file())
 def mpl_to_plotly(fig, resize=False, strip_style=False, verbose=False):
     """Convert a matplotlib figure to plotly dictionary and send.
 
