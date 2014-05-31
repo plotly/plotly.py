@@ -261,7 +261,7 @@ def get_figure(file_owner, file_id, raw=False):
 
     """
 
-    plotly_rest_url = tools._get_plotly_urls()[0]
+    plotly_rest_url = tools.get_config_file()['plotly_domain']
     resource = "/apigetfile/{username}/{file_id}".format(username=file_owner,
                                                          file_id=file_id)
     (username, api_key) = _validation_key_logic()
