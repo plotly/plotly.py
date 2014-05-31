@@ -89,6 +89,17 @@ def is_trivial(obj):
         return False
 
 
+def test_get_figure():
+    un = 'plotlyimagetest'
+    ak = '786r5mecv0'
+    run_test = False
+    file_id = 2
+    py.sign_in(un, ak)
+    print "getting: https://plot.ly/{}/{}".format(un, file_id)
+    print "###########################################\n\n"
+    fig = py.get_figure('plotlyimagetest', str(file_id))
+
+
 def test_all():
     un = 'plotlyimagetest'
     ak = '786r5mecv0'
