@@ -12,6 +12,7 @@ dependencies:
     - pip install matplotlib
     - pip install -I .
     - cd ~ && python -c "import plotly"
+    - sudo chmod 400 ~/.plotly && python -c "import plotly"
 
 ## Customize database setup (pass)
 
