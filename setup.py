@@ -2,6 +2,7 @@ from setuptools import setup
 
 exec (open('plotly/version.py').read())
 
+1/0
 
 def readme():
     with open('README.rst') as f:
