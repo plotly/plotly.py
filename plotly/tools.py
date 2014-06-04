@@ -23,6 +23,7 @@ except ImportError:
 PLOTLY_DIR = os.path.join(os.path.expanduser("~"), ".plotly")
 CREDENTIALS_FILE = os.path.join(PLOTLY_DIR, ".credentials")
 CONFIG_FILE = os.path.join(PLOTLY_DIR, ".config")
+TEST_DIR = os.path.join(os.path.expanduser("~"), ".test")
 TEST_FILE = os.path.join(PLOTLY_DIR, ".permission_test")
 
 # this sets both the DEFAULTS and the TYPES for these items
@@ -33,6 +34,8 @@ _FILE_CONTENT = {CREDENTIALS_FILE: {'username': u'',
                                'plotly_streaming_domain': u'stream.plot.ly'}}
 
 try:
+    os.mkdir(TEST_DIR)
+    os.rmdir(TEST_DIR)
     if not os.path.exists(PLOTLY_DIR):
         os.mkdir(PLOTLY_DIR)
     f = open(TEST_FILE, 'w')
@@ -64,10 +67,13 @@ def ensure_local_plotly_files():
                     del contents[key]
             utils.save_json_dict(fn, contents)
     else:
-        warnings.warn("Looks like you don't have 'write' permission. That "
-                      "means, plotly's python api can't setup local "
-                      "configuration files. No problem though! You'll just "
-                      "have to sign-in using 'plotly.sign_in'.")
+        warnings.warn("Looks like you don't have 'read-write' permission to "
+                      "your 'home' ('~') directory or to our '~/.plotly' "
+                      "directory. That means plotly's python api can't setup "
+                      "local configuration files. No problem though! You'll "
+                      "just have to sign-in using 'plotly.sign_in()'. For help "
+                      "with that: 'help(plotly.sign_in)'."
+                      "\nQuestions? support@plot.ly")
 
 
 ### credentials tools ###
