@@ -22,7 +22,7 @@ import httplib
 import copy
 import base64
 import os
-from .. import utils
+from .. import utils  # TODO make non-relative
 from .. import tools
 from .. import exceptions
 from .. import version
@@ -42,9 +42,11 @@ _credentials = dict()
 
 _plot_options = dict()
 
-_plotly_url = "https://plot.ly"  #  do not append final '/' here for url!
+### test file permissions and make sure nothing is corrupted ###
+tools.ensure_local_plotly_files()
 
 ### _credentials stuff ###
+
 
 def sign_in(username, api_key):
     """Set module-scoped _credentials for session. Verify with plotly."""
@@ -53,22 +55,7 @@ def sign_in(username, api_key):
     # TODO: verify these _credentials with plotly
 
 
-### _plot_options stuff ###
-
-# def load_plot_options():
-#     """ Import the plot_options from file into the module-level _plot_options.
-#     """
-#     global _plot_options
-#     _plot_options = _plot_options.update(tools.get_plot_options_file())
-#
-#
-# def save_plot_options(**kwargs):
-#     """ Save the module-level _plot_options to file for later access
-#     """
-#     global _plot_options
-#     update_plot_options(**kwargs)
-#     tools.save_plot_options_file(**_plot_options)
-
+### plot options stuff ###
 
 def update_plot_options(**kwargs):
     """ Update the module-level _plot_options
@@ -273,7 +260,8 @@ def get_figure(file_owner, file_id, raw=False):
     `graph objects`.
 
     """
-    server = _plotly_url
+
+    plotly_rest_url = tools.get_config_file()['plotly_domain']
     resource = "/apigetfile/{username}/{file_id}".format(username=file_owner,
                                                          file_id=file_id)
     (username, api_key) = _validation_key_logic()
@@ -298,7 +286,7 @@ def get_figure(file_owner, file_id, raw=False):
             "The 'file_id' argument must be a non-negative number."
         )
 
-    response = requests.get(server + resource, headers=headers)
+    response = requests.get(plotly_rest_url + resource, headers=headers)
     if response.status_code == 200:
         content = json.loads(response.content)
         response_payload = content['payload']
@@ -317,11 +305,12 @@ def get_figure(file_owner, file_id, raw=False):
                 "There was an error retrieving this file")
 
 
+@utils.template_doc(**tools.get_config_file())
 class Stream:
     """ Interface to Plotly's real-time graphing API.
 
     Initialize a Stream object with a stream_id
-    found in https://plot.ly/settings.
+    found in {plotly_domain}/settings.
     Real-time graphs are initialized with a call to `plot` that embeds
     your unique `stream_id`s in each of the graph's traces. The `Stream`
     interface plots data to these traces, as identified with the unique
@@ -334,7 +323,7 @@ class Stream:
     Stream example:
     # Initialize a streaming graph
     # by embedding stream_id's in the graph's traces
-    >>> stream_id = "your_stream_id" # See https://plot.ly/settings
+    >>> stream_id = "your_stream_id" # See {plotly_domain}/settings
     >>> py.plot(Data([Scatter(x=[],
                               y=[],
                               stream=dict(token=stream_id, maxpoints=100))])
@@ -344,9 +333,10 @@ class Stream:
     >>> stream.write(dict(x=1, y=1)) # Plot (1, 1) in your graph
     """
 
+    @utils.template_doc(**tools.get_config_file())
     def __init__(self, stream_id):
         """ Initialize a Stream object with your unique stream_id.
-        Find your stream_id at https://plot.ly/settings.
+        Find your stream_id at {plotly_domain}/settings.
 
         For more help, see: `help(plotly.plotly.Stream)`
         or see examples and tutorials here:
@@ -362,11 +352,12 @@ class Stream:
         or see examples and tutorials here:
         http://nbviewer.ipython.org/github/plotly/python-user-guide/blob/master/s7_streaming/s7_streaming.ipynb
         """
-        self._stream = chunked_requests.Stream('stream.plot.ly',
-                                               80,
-                                               {'Host': 'stream.plot.ly',
-                                                'plotly-streamtoken': self.stream_id})
 
+        streaming_url = tools.get_config_file()['plotly_streaming_domain']
+        self._stream = chunked_requests.Stream(streaming_url,
+                                               80,
+                                               {'Host': streaming_url,
+                                                'plotly-streamtoken': self.stream_id})
 
     def write(self, data, layout=None, validate=True,
               reconnect_on=(200, '', 408)):
@@ -470,8 +461,8 @@ class image:
                    'plotly-version': '2.0',
                    'plotly-platform': 'python'}
 
-        server = "https://plot.ly/apigenimage/"
-        res = requests.post(server,
+        url = tools.get_config_file()['plotly_domain'] + "/apigenimage/"
+        res = requests.post(url,
                             data=json.dumps(figure,
                                             cls=utils._plotlyJSONEncoder),
                             headers=headers)
@@ -543,9 +534,7 @@ def _send_to_plotly(figure, **plot_options):
                    origin='plot',
                    kwargs=kwargs)
 
-    # TODO: this doesn't work yet for ppl's individual servers for testing...
-    # url = _plotly_url + "/clientresp"
-    url = "https://plot.ly/clientresp"
+    url = tools.get_config_file()['plotly_domain'] + "/clientresp"
 
     r = requests.post(url, data=payload)
     r.raise_for_status()
@@ -577,4 +566,3 @@ def _validation_key_logic():
     if username is None or api_key is None:
         raise exceptions.PlotlyLocalCredentialsError()
     return (username, api_key)
-

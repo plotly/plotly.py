@@ -12,25 +12,30 @@ import os.path
 
 ### general file setup tools ###
 
-def load_json(filename, *args):
-    if os.path.getsize(filename) > 0:
+def load_json_dict(filename, *args):
+    """Checks if file exists. Returns {} if something fails."""
+    data = {}
+    if os.path.exists(filename):
         with open(filename, "r") as f:
             try:
                 data = json.load(f)
+                if not isinstance(data, dict):
+                    data = {}
             except:
-                # TODO: issue a warning and bubble it up
-                data = ""
-    else:
-        data = ""
-    if len(args) and data:
-        return {key: data[key] for key in args}
-    else:
-        return data
+                pass # TODO: issue a warning and bubble it up
+        if args:
+            return {key: data[key] for key in args if key in data}
+    return data
 
 
-def save_json(filename, json_obj):
-    with open(filename, "w") as f:
-        f.write(json.dumps(json_obj, indent=4))
+def save_json_dict(filename, json_dict):
+    """Will error if filename is not appropriate, but it's checked elsewhere.
+    """
+    if isinstance(json_dict, dict):
+        with open(filename, "w") as f:
+            f.write(json.dumps(json_dict, indent=4))
+    else:
+        raise TypeError("json_dict was not a dictionay. couldn't save.")
 
 
 ### Custom JSON encoders ###
@@ -103,7 +108,6 @@ class _plotlyJSONEncoder(json.JSONEncoder):
 
 
 ### unicode stuff ###
-
 def decode_unicode(coll):
     if isinstance(coll, list):
         for no, entry in enumerate(coll):
@@ -127,3 +131,12 @@ def decode_unicode(coll):
                     pass
             coll[str(key)] = coll.pop(key)
     return coll
+
+
+### docstring templating ###
+def template_doc(**names):
+    def _decorator(func):
+        if func.__doc__ is not None:
+            func.__doc__ = func.__doc__.format(**names)
+        return func
+    return _decorator
