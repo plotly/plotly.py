@@ -47,6 +47,7 @@ from graph_objs import *
 
 __all__ = ["Data",
            "Annotations",
+           "Area",
            "Bar",
            "Box",
            "Contour",
