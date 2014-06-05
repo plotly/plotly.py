@@ -31,6 +31,7 @@ from .. import utils
 
 __all__ = ["Data",
            "Annotations",
+           "Area",
            "Bar",
            "Box",
            "Contour",
