@@ -138,7 +138,7 @@ def reset_credentials_file():
 
 ### config tools ###
 
-def set_config_file(plotly_domain=None, plotly_stremaing_domain=None):
+def set_config_file(plotly_domain=None, plotly_streaming_domain=None):
     """Set the keyword-value pairs in `~/.plotly/.config`.
 
     """
@@ -149,8 +149,8 @@ def set_config_file(plotly_domain=None, plotly_stremaing_domain=None):
     settings = get_config_file()
     if isinstance(plotly_domain, (str, unicode)):
         settings['plotly_domain'] = plotly_domain
-    if isinstance(plotly_stremaing_domain, (str, unicode)):
-        settings['plotly_streaming_domain'] = plotly_stremaing_domain
+    if isinstance(plotly_streaming_domain, (str, unicode)):
+        settings['plotly_streaming_domain'] = plotly_streaming_domain
     utils.save_json_dict(CONFIG_FILE, settings)
     ensure_local_plotly_files()  # make sure what we just put there is OK
 
