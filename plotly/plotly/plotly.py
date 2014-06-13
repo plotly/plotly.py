@@ -195,7 +195,7 @@ def plot(figure_or_data, validate=True, **plot_options):
         raise exceptions.PlotlyAccountError(res['error'])
 
 
-def iplot_mpl(fig, resize=True, strip_style=False, **plot_options):
+def iplot_mpl(fig, resize=True, strip_style=False, update=None, **plot_options):
     """Replot a matplotlib figure with plotly in IPython.
 
     This function:
@@ -215,10 +215,13 @@ def iplot_mpl(fig, resize=True, strip_style=False, **plot_options):
 
     """
     fig = tools.mpl_to_plotly(fig, resize=resize, strip_style=strip_style)
+    if update:
+        update_fig = tools.get_valid_graph_obj(update, 'Figure')
+        fig.update(update_fig)
     return iplot(fig, **plot_options)
 
 
-def plot_mpl(fig, resize=True, strip_style=False, **plot_options):
+def plot_mpl(fig, resize=True, strip_style=False, update=None, **plot_options):
     """Replot a matplotlib figure with plotly.
 
     This function:
@@ -238,6 +241,9 @@ def plot_mpl(fig, resize=True, strip_style=False, **plot_options):
 
     """
     fig = tools.mpl_to_plotly(fig, resize=resize, strip_style=strip_style)
+    if update:
+        update_fig = tools.get_valid_graph_obj(update, 'Figure')
+        fig.update(update_fig)
     return plot(fig, **plot_options)
 
 
