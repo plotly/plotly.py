@@ -209,6 +209,8 @@ def iplot_mpl(fig, resize=True, strip_style=False, update=None, **plot_options):
     Keyword arguments:
     resize (default=True) -- allow plotly to choose the figure size
     strip_style (default=False) -- allow plotly to choose style options
+    update (default=None) -- update the resulting figure with an 'update'
+        dictionary-like object resembling a plotly 'Figure' object
 
     Additional keyword arguments:
     plot_options -- run help(plotly.plotly.iplot)
@@ -216,8 +218,15 @@ def iplot_mpl(fig, resize=True, strip_style=False, update=None, **plot_options):
     """
     fig = tools.mpl_to_plotly(fig, resize=resize, strip_style=strip_style)
     if update:
-        update_fig = tools.get_valid_graph_obj(update, 'Figure')
-        fig.update(update_fig)
+        try:
+            update_fig = tools.get_valid_graph_obj(update, 'Figure')
+        except exceptions.PlotlyGraphObjectError as err:
+            err.add_note("Your update figure could not be properly converted "
+                         "into a plotly 'Figure' graph object.")
+            err.prepare()
+            raise
+        else:
+            fig.update(update_fig)
     return iplot(fig, **plot_options)
 
 
@@ -235,6 +244,8 @@ def plot_mpl(fig, resize=True, strip_style=False, update=None, **plot_options):
     Keyword arguments:
     resize (default=True) -- allow plotly to choose the figure size
     strip_style (default=False) -- allow plotly to choose style options
+    update (default=None) -- update the resulting figure with an 'update'
+        dictionary-like object resembling a plotly 'Figure' object
 
     Additional keyword arguments:
     plot_options -- run help(plotly.plotly.plot)
@@ -242,8 +253,15 @@ def plot_mpl(fig, resize=True, strip_style=False, update=None, **plot_options):
     """
     fig = tools.mpl_to_plotly(fig, resize=resize, strip_style=strip_style)
     if update:
-        update_fig = tools.get_valid_graph_obj(update, 'Figure')
-        fig.update(update_fig)
+        try:
+            update_fig = tools.get_valid_graph_obj(update, 'Figure')
+        except exceptions.PlotlyGraphObjectError as err:
+            err.add_note("Your update figure could not be properly converted "
+                         "into a plotly 'Figure' graph object.")
+            err.prepare()
+            raise
+        else:
+            fig.update(update_fig)
     return plot(fig, **plot_options)
 
 
