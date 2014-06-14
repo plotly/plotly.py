@@ -217,16 +217,19 @@ def iplot_mpl(fig, resize=True, strip_style=False, update=None, **plot_options):
 
     """
     fig = tools.mpl_to_plotly(fig, resize=resize, strip_style=strip_style)
-    if update:
+    if update and isinstance(update, dict):
         try:
-            update_fig = tools.get_valid_graph_obj(update, 'Figure')
+            fig.update(update)
+            fig.validate()
         except exceptions.PlotlyGraphObjectError as err:
-            err.add_note("Your update figure could not be properly converted "
-                         "into a plotly 'Figure' graph object.")
+            err.add_note("Your updated figure could not be properly validated.")
             err.prepare()
             raise
-        else:
-            fig.update(update_fig)
+    elif update:
+        raise exceptions.PlotlyGraphObjectError(
+            "'update' must be dictionary-like and a valid plotly Figure "
+            "object. Run 'help(plotly.graph_objs.Figure)' for more info."
+        )
     return iplot(fig, **plot_options)
 
 
@@ -252,16 +255,19 @@ def plot_mpl(fig, resize=True, strip_style=False, update=None, **plot_options):
 
     """
     fig = tools.mpl_to_plotly(fig, resize=resize, strip_style=strip_style)
-    if update:
+    if update and isinstance(update, dict):
         try:
-            update_fig = tools.get_valid_graph_obj(update, 'Figure')
+            fig.update(update)
+            fig.validate()
         except exceptions.PlotlyGraphObjectError as err:
-            err.add_note("Your update figure could not be properly converted "
-                         "into a plotly 'Figure' graph object.")
+            err.add_note("Your updated figure could not be properly validated.")
             err.prepare()
             raise
-        else:
-            fig.update(update_fig)
+    elif update:
+        raise exceptions.PlotlyGraphObjectError(
+            "'update' must be dictionary-like and a valid plotly Figure "
+            "object. Run 'help(plotly.graph_objs.Figure)' for more info."
+        )
     return plot(fig, **plot_options)
 
 
