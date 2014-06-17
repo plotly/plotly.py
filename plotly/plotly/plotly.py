@@ -195,7 +195,7 @@ def plot(figure_or_data, validate=True, **plot_options):
         raise exceptions.PlotlyAccountError(res['error'])
 
 
-def iplot_mpl(fig, resize=True, strip_style=False, **plot_options):
+def iplot_mpl(fig, resize=True, strip_style=False, update=None, **plot_options):
     """Replot a matplotlib figure with plotly in IPython.
 
     This function:
@@ -209,16 +209,31 @@ def iplot_mpl(fig, resize=True, strip_style=False, **plot_options):
     Keyword arguments:
     resize (default=True) -- allow plotly to choose the figure size
     strip_style (default=False) -- allow plotly to choose style options
+    update (default=None) -- update the resulting figure with an 'update'
+        dictionary-like object resembling a plotly 'Figure' object
 
     Additional keyword arguments:
     plot_options -- run help(plotly.plotly.iplot)
 
     """
     fig = tools.mpl_to_plotly(fig, resize=resize, strip_style=strip_style)
+    if update and isinstance(update, dict):
+        try:
+            fig.update(update)
+            fig.validate()
+        except exceptions.PlotlyGraphObjectError as err:
+            err.add_note("Your updated figure could not be properly validated.")
+            err.prepare()
+            raise
+    elif update:
+        raise exceptions.PlotlyGraphObjectError(
+            "'update' must be dictionary-like and a valid plotly Figure "
+            "object. Run 'help(plotly.graph_objs.Figure)' for more info."
+        )
     return iplot(fig, **plot_options)
 
 
-def plot_mpl(fig, resize=True, strip_style=False, **plot_options):
+def plot_mpl(fig, resize=True, strip_style=False, update=None, **plot_options):
     """Replot a matplotlib figure with plotly.
 
     This function:
@@ -232,12 +247,27 @@ def plot_mpl(fig, resize=True, strip_style=False, **plot_options):
     Keyword arguments:
     resize (default=True) -- allow plotly to choose the figure size
     strip_style (default=False) -- allow plotly to choose style options
+    update (default=None) -- update the resulting figure with an 'update'
+        dictionary-like object resembling a plotly 'Figure' object
 
     Additional keyword arguments:
     plot_options -- run help(plotly.plotly.plot)
 
     """
     fig = tools.mpl_to_plotly(fig, resize=resize, strip_style=strip_style)
+    if update and isinstance(update, dict):
+        try:
+            fig.update(update)
+            fig.validate()
+        except exceptions.PlotlyGraphObjectError as err:
+            err.add_note("Your updated figure could not be properly validated.")
+            err.prepare()
+            raise
+    elif update:
+        raise exceptions.PlotlyGraphObjectError(
+            "'update' must be dictionary-like and a valid plotly Figure "
+            "object. Run 'help(plotly.graph_objs.Figure)' for more info."
+        )
     return plot(fig, **plot_options)
 
 
