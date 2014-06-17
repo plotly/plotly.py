@@ -634,24 +634,30 @@ class PlotlyDict(dict):
                     obj = NAME_TO_CLASS[class_name]()  # gets constructor
                     if isinstance(obj, PlotlyDict):
                         if not isinstance(self[key], dict):
-                            info_key = NAME_TO_KEY[self.__class__.__name__]
+                            try:
+                                val_types = INFO[info_key][key]['val_types']
+                            except KeyError:
+                                val_types = 'undocumented'
                             raise exceptions.PlotlyDictValueError(
                                 obj=self,
                                 key=key,
                                 value=self[key],
-                                val_types=INFO[info_key][key]['val_types'],
+                                val_types=val_types,
                                 notes="value needs to be dictionary-like"
                             )
                         for k, v in self.pop(key).items():
                             obj[k] = v  # finish up momentarily...
                     else:  # if not PlotlyDict, it MUST be a PlotlyList
                         if not isinstance(self[key], list):
-                            info_key = NAME_TO_KEY[self.__class__.__name__]
+                            try:
+                                val_types = INFO[info_key][key]['val_types']
+                            except KeyError:
+                                val_types = 'undocumented'
                             raise exceptions.PlotlyDictValueError(  # TODO!!!
                                 obj=self,
                                 key=key,
                                 value=self[key],
-                                val_types=INFO[info_key][key]['val_types'],
+                                val_types=val_types,
                                 notes="value needs to be list-like"
                             )
                         obj += self.pop(key)
@@ -695,11 +701,15 @@ class PlotlyDict(dict):
                     if 'type' not in INFO[obj_key][key]:
                         continue  # TODO: 'type' may not be documented yet!
                     if INFO[obj_key][key]['type'] == 'object':
+                        try:
+                            val_types = INFO[obj_key][key]['val_types']
+                        except KeyError:
+                            val_types = 'undocumented'
                         raise exceptions.PlotlyDictValueError(
                             obj=self,
                             key=key,
                             value=val,
-                            val_types=INFO[obj_key][key]['val_types']
+                            val_types=val_types
                         )
                 else:
                     matching_objects = [obj for obj in INFO if key in INFO[obj]]
