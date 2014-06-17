@@ -225,7 +225,7 @@ def iplot_mpl(fig, resize=True, strip_style=False, update=None, **plot_options):
             err.add_note("Your updated figure could not be properly validated.")
             err.prepare()
             raise
-    elif update:
+    elif update is not None:
         raise exceptions.PlotlyGraphObjectError(
             "'update' must be dictionary-like and a valid plotly Figure "
             "object. Run 'help(plotly.graph_objs.Figure)' for more info."
@@ -263,7 +263,7 @@ def plot_mpl(fig, resize=True, strip_style=False, update=None, **plot_options):
             err.add_note("Your updated figure could not be properly validated.")
             err.prepare()
             raise
-    elif update:
+    elif update is not None:
         raise exceptions.PlotlyGraphObjectError(
             "'update' must be dictionary-like and a valid plotly Figure "
             "object. Run 'help(plotly.graph_objs.Figure)' for more info."
