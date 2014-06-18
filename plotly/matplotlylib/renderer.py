@@ -189,11 +189,15 @@ class PlotlyRenderer(Renderer):
             patch_coll.sort(key=lambda b: b['x0'])
             x = [bar['x0']+(bar['x1']-bar['x0'])/2 for bar in patch_coll]
             y = [bar['y1'] for bar in patch_coll]
+            bar_gap = mpltools.get_bar_gap([bar['x0'] for bar in patch_coll],
+                                           [bar['x1'] for bar in patch_coll])
         else:
             self.msg += "    Attempting to draw a horizontal bar chart\n"
             patch_coll.sort(key=lambda b: b['y0'])
             x = [bar['x1'] for bar in patch_coll]
             y = [bar['y0']+(bar['y1']-bar['y0'])/2 for bar in patch_coll]
+            bar_gap = mpltools.get_bar_gap([bar['y0'] for bar in patch_coll],
+                                           [bar['y1'] for bar in patch_coll])
         bar = Bar(orientation=orientation,
                   x=x,
                   y=y,
@@ -206,6 +210,8 @@ class PlotlyRenderer(Renderer):
         if len(bar['x']) > 1:
             self.msg += "    Heck yeah, I drew that bar chart\n"
             self.plotly_fig['data'] += bar,
+            if bar_gap is not None:
+                self.plotly_fig['layout']['bargap'] = bar_gap
         else:
             self.msg += "    Bar chart not drawn\n"
             warnings.warn('found box chart data with length <= 1, '
