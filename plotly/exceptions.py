@@ -79,7 +79,8 @@ class PlotlyDictKeyError(PlotlyGraphObjectError):
             "'help(plotly.graph_objs.{obj_name})' for more information."
             "".format(key=key, obj_name=obj.__class__.__name__)
         )
-        plain_message="invalid key, '{}', in dictionary".format(key)
+        plain_message="invalid key, '{}', in '{}' dictionary" \
+                      "".format(key, obj.__class__.__name__)
         super(PlotlyDictKeyError, self).__init__(message=message,
                                                  path=[key],
                                                  plain_message=plain_message,
@@ -98,7 +99,7 @@ class PlotlyDictValueError(PlotlyGraphObjectError):
                                            obj_name=obj.__class__.__name__)
         )
         plain_message = ("invalid value associated with key, '{}', in "
-                         "dictionary".format(key))
+                         "'{}' dictionary".format(key, obj.__class__.__name__))
         super(PlotlyDictValueError, self).__init__(message=message,
                                                    plain_message=plain_message,
                                                    path=[key],
@@ -112,8 +113,8 @@ class PlotlyListEntryError(PlotlyGraphObjectError):
             "".format(index, obj.__class__.__name__)
         )
         plain_message = (
-            "The entry at index, '{}', is invalid."
-            "".format(index)
+            "The entry at index, '{}', in '{}' list is invalid."
+            "".format(index, obj.__class__.__name__)
         )
         super(PlotlyListEntryError, self).__init__(message=message,
                                                    plain_message=plain_message,
@@ -129,9 +130,9 @@ class PlotlyDataTypeError(PlotlyGraphObjectError):
                 "'{}' lists.".format(index, obj.__class__.__name__)
         )
         plain_message = (
-                "The entry at index, '{}', is invalid because it does not "
-                "contain a valid 'type' key-value. This is required for "
-                "valid data lists.".format(index))
+                "The 'data' entry at index, '{}', is invalid because it does "
+                "not contain a valid 'type' key-value. This is required for "
+                "valid 'data' lists.".format(index))
         super(PlotlyDataTypeError, self).__init__(message=message,
                                                   plain_message=plain_message,
                                                   path=[index],
