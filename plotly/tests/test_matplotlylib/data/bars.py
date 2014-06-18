@@ -41,6 +41,7 @@ VERTICAL_BAR = Figure(
         ),
         hovermode='closest',
         showlegend=False,
+        bargap=0.2,
         xaxis1=XAxis(
             domain=[0.0, 1.0],
             range=[0.0, 6.0],
@@ -106,6 +107,7 @@ HORIZONTAL_BAR = Figure(
         ),
         hovermode='closest',
         showlegend=False,
+        bargap=0.2,
         xaxis1=XAxis(
             domain=[0.0, 1.0],
             range=[0.0, 140.0],
@@ -185,6 +187,7 @@ H_AND_V_BARS = Figure(
         ),
         hovermode='closest',
         showlegend=False,
+        bargap=5,
         xaxis1=XAxis(
             domain=[0.0, 1.0],
             range=[0.0, 60.0],
