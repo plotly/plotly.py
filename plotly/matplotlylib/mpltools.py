@@ -194,6 +194,17 @@ def get_axes_bounds(fig):
     return (x_min, x_max), (y_min, y_max)
 
 
+def get_bar_gap(bar_starts, bar_ends, tol=1e-10):
+    if len(bar_starts) == len(bar_ends) and len(bar_starts) > 1:
+        sides1 = bar_starts[1:]
+        sides2 = bar_ends[:-1]
+        gaps = [s2-s1 for s2, s1 in zip(sides1, sides2)]
+        gap0 = gaps[0]
+        uniform = all([abs(gap0-gap) < tol for gap in gaps])
+        if uniform:
+            return gap0
+
+
 def get_rect_xmin(data):
     """Find minimum x value from four (x,y) vertices."""
     return min(data[0][0], data[1][0], data[2][0], data[3][0])
