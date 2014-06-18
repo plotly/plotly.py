@@ -79,8 +79,8 @@ class PlotlyDictKeyError(PlotlyGraphObjectError):
             "'help(plotly.graph_objs.{obj_name})' for more information."
             "".format(key=key, obj_name=obj.__class__.__name__)
         )
-        plain_message="invalid key, '{}', for '{}' object" \
-                      "".format(key, obj.__class__.__name__)
+        plain_message = ("Invalid key, '{key}', found in '{obj}' object"
+                         "".format(key=key, obj=obj.__class__.__name__))
         super(PlotlyDictKeyError, self).__init__(message=message,
                                                  path=[key],
                                                  plain_message=plain_message,
@@ -98,8 +98,8 @@ class PlotlyDictValueError(PlotlyGraphObjectError):
                                            val_types=val_types,
                                            obj_name=obj.__class__.__name__)
         )
-        plain_message = ("invalid value associated with key, '{}', for "
-                         "'{}' object".format(key, obj.__class__.__name__))
+        plain_message = ("Invalid value found in '{obj}' associated with key, "
+                         "'{key}'".format(key=key, obj=obj.__class__.__name__))
         super(PlotlyDictValueError, self).__init__(message=message,
                                                    plain_message=plain_message,
                                                    path=[key],
@@ -113,8 +113,8 @@ class PlotlyListEntryError(PlotlyGraphObjectError):
             "".format(index, obj.__class__.__name__)
         )
         plain_message = (
-            "The entry at index, '{}', in '{}' object is invalid."
-            "".format(index, obj.__class__.__name__)
+            "Invalid entry found in '{obj}' object at index, '{index}'."
+            "".format(obj=obj.__class__.__name__, index=index)
         )
         super(PlotlyListEntryError, self).__init__(message=message,
                                                    plain_message=plain_message,
@@ -130,9 +130,9 @@ class PlotlyDataTypeError(PlotlyGraphObjectError):
                 "'{}' lists.".format(index, obj.__class__.__name__)
         )
         plain_message = (
-                "The 'data' entry at index, '{}', is invalid because it does "
-                "not contain a valid 'type' key. This is required for "
-                "valid 'data' lists.".format(index))
+                "Invalid entry found in 'data' object at index, '{}'. It does "
+                "not contain a valid 'type' key, required for 'data' lists."
+                "".format(index))
         super(PlotlyDataTypeError, self).__init__(message=message,
                                                   plain_message=plain_message,
                                                   path=[index],
