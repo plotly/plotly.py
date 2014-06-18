@@ -79,7 +79,7 @@ class PlotlyDictKeyError(PlotlyGraphObjectError):
             "'help(plotly.graph_objs.{obj_name})' for more information."
             "".format(key=key, obj_name=obj.__class__.__name__)
         )
-        plain_message="invalid key, '{}', in '{}' dictionary" \
+        plain_message="invalid key, '{}', for '{}' object" \
                       "".format(key, obj.__class__.__name__)
         super(PlotlyDictKeyError, self).__init__(message=message,
                                                  path=[key],
@@ -98,8 +98,8 @@ class PlotlyDictValueError(PlotlyGraphObjectError):
                                            val_types=val_types,
                                            obj_name=obj.__class__.__name__)
         )
-        plain_message = ("invalid value associated with key, '{}', in "
-                         "'{}' dictionary".format(key, obj.__class__.__name__))
+        plain_message = ("invalid value associated with key, '{}', for "
+                         "'{}' object".format(key, obj.__class__.__name__))
         super(PlotlyDictValueError, self).__init__(message=message,
                                                    plain_message=plain_message,
                                                    path=[key],
@@ -113,7 +113,7 @@ class PlotlyListEntryError(PlotlyGraphObjectError):
             "".format(index, obj.__class__.__name__)
         )
         plain_message = (
-            "The entry at index, '{}', in '{}' list is invalid."
+            "The entry at index, '{}', in '{}' object is invalid."
             "".format(index, obj.__class__.__name__)
         )
         super(PlotlyListEntryError, self).__init__(message=message,
@@ -131,7 +131,7 @@ class PlotlyDataTypeError(PlotlyGraphObjectError):
         )
         plain_message = (
                 "The 'data' entry at index, '{}', is invalid because it does "
-                "not contain a valid 'type' key-value. This is required for "
+                "not contain a valid 'type' key. This is required for "
                 "valid 'data' lists.".format(index))
         super(PlotlyDataTypeError, self).__init__(message=message,
                                                   plain_message=plain_message,
