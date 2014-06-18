@@ -29,7 +29,7 @@ from .. import version
 
 __all__ = ["sign_in", "update_plot_options", "get_plot_options",
            "get_credentials", "iplot", "plot", "iplot_mpl", "plot_mpl",
-           "get_figure", "Stream", "image"]
+           "get_figure", "url_to_figure", "Stream", "image"]
 
 _DEFAULT_PLOT_OPTIONS = dict(
     filename="plot from API",
@@ -269,6 +269,16 @@ def plot_mpl(fig, resize=True, strip_style=False, update=None, **plot_options):
             "object. Run 'help(plotly.graph_objs.Figure)' for more info."
         )
     return plot(fig, **plot_options)
+
+
+def url_to_figure(url, raw=False):
+    """Input a plotly url and output a figure object.
+    """
+    plotly_rest_url = tools.get_config_file()['plotly_domain']
+    head = plotly_rest_url + "/~"
+    username = url.replace(head, "").split('/')[0]
+    fid = url.replace(head, "").split('/')[1]
+    return get_figure(username, fid, raw=raw)
 
 
 def get_figure(file_owner, file_id, raw=False):
