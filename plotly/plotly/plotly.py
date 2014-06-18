@@ -275,6 +275,11 @@ def url_to_figure(url, raw=False):
     """Input a plotly url and output a figure object.
     """
     plotly_rest_url = tools.get_config_file()['plotly_domain']
+    if url[:len(plotly_rest_url)] != plotly_rest_url:
+        raise exceptions.PlotlyError(
+            "You supplied the url, '{}', we expected it to start with '{}'."
+            "".format(url, plotly_rest_url)
+        )
     head = plotly_rest_url + "/~"
     username = url.replace(head, "").split('/')[0]
     fid = url.replace(head, "").split('/')[1]
