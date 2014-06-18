@@ -271,16 +271,24 @@ def plot_mpl(fig, resize=True, strip_style=False, update=None, **plot_options):
     return plot(fig, **plot_options)
 
 
-def get_figure(file_owner, file_id, raw=False):
-    """Returns a JSON figure representation for the specified file_owner/_id
+def get_figure(file_owner_or_url, file_id=None, raw=False):
+    """Returns a JSON figure representation for the specified file
 
     Plotly uniquely identifies figures with a 'file_owner'/'file_id' pair.
+    Since each file is given a corresponding unique url, you may also simply
+    pass a valid plotly url as the first argument.
+
+    Note, if you're using a file_owner string as the first argument, you MUST
+    specity a `file_id` keyword argument. Else, if you're using a url string
+    as the first argument, you MUST NOT specify a `file_id` keyword argument, or
+    file_id must be set to Python's None value.
 
     Positional arguments:
-    file_owner (string) -- a valid plotly username
-    file_id ("int") -- an int or string that can be converted to int
+    file_owner_or_url (string) -- a valid plotly username OR a valid plotly url
 
     Keyword arguments:
+    file_id (defualt=None) -- an int or string that can be converted to int
+                              if you're using a url, don't fill this in!
     raw (default=False) -- if true, return unicode JSON string verbatim**
 
     **by default, plotly will return a Figure object (run help(plotly
@@ -290,17 +298,28 @@ def get_figure(file_owner, file_id, raw=False):
     `graph objects`.
 
     """
-
     plotly_rest_url = tools.get_config_file()['plotly_domain']
+    if file_id is None:  # assume we're using a url
+        url = file_owner_or_url
+        if url[:len(plotly_rest_url)] != plotly_rest_url:
+            raise exceptions.PlotlyError(
+                "Because you didn't supply a 'file_id' in the call, "
+                "we're assuming you're trying to snag a figure from a url. "
+                "You supplied the url, '{}', we expected it to start with '{}'."
+                "\nRun help on this function for more information."
+                "".format(url, plotly_rest_url))
+        head = plotly_rest_url + "/~"
+        file_owner = url.replace(head, "").split('/')[0]
+        file_id = url.replace(head, "").split('/')[1]
+    else:
+        file_owner = file_owner_or_url
     resource = "/apigetfile/{username}/{file_id}".format(username=file_owner,
                                                          file_id=file_id)
     (username, api_key) = _validation_key_logic()
-
     headers = {'plotly-username': username,
                'plotly-apikey': api_key,
                'plotly-version': '2.0',
                'plotly-platform': 'python'}
-
     try:
         test_if_int = int(file_id)
     except ValueError:
@@ -310,12 +329,10 @@ def get_figure(file_owner, file_id, raw=False):
             "is a number that can be converted into an integer or a string "
             "that can be converted into an integer."
         )
-
     if int(file_id) < 0:
         raise exceptions.PlotlyError(
             "The 'file_id' argument must be a non-negative number."
         )
-
     response = requests.get(plotly_rest_url + resource, headers=headers)
     if response.status_code == 200:
         content = json.loads(response.content)
