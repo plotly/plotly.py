@@ -259,6 +259,8 @@ def get_axes_properties(ax):
              'axesbgalpha': ax.patch.get_alpha(),
              'bounds': ax.get_position().bounds,
              'dynamic': ax.get_navigate(),
+             'axison': ax.axison,
+             'frame_on': ax.get_frame_on(),
              'axes': [get_axis_properties(ax.xaxis),
                       get_axis_properties(ax.yaxis)]}
 
