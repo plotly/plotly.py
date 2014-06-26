@@ -1,0 +1,9 @@
+[submodule "submodules/mplexporter"]
+	path = submodules/mplexporter
+	url = git://github.com/mpld3/mplexporter.git
+[submodule "submodules/graph_reference"]
+	path = submodules/graph_reference
+	url = git://github.com/plotly/graph_reference.git
+[submodule "submodules/chunked_requests"]
+	path = submodules/chunked_requests
+	url = git://github.com/chriddyp/chunked_requests.git
