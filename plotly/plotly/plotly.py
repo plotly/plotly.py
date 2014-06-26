@@ -406,21 +406,35 @@ class Stream:
                                                {'Host': streaming_url,
                                                 'plotly-streamtoken': self.stream_id})
 
-    def write(self, data, layout=None, validate=True,
+    def write(self, trace, layout=None, validate=True,
               reconnect_on=(200, '', 408)):
-        """ Write `data` to your stream. This will plot the
-        `data` in your graph in real-time.
+        """Write to an open stream.
 
-        `data` is a plotly formatted dict.
-        Valid keys:
+        Once you've instantiated a 'Stream' object with a 'stream_id',
+        you can 'write' to it in real time.
+
+        positional arguments:
+        trace - A valid plotly trace object (e.g., Scatter, Heatmap, etc.).
+                Not all keys in these are `stremable` run help(Obj) on the type
+                of trace your trying to stream, for each valid key, if the key
+                is streamable, it will say 'streamable = True'. Trace objects
+                must be dictionary-like.
+
+        keyword arguments:
+        layout (default=None) - A valid Layout object
+                                Run help(plotly.graph_objs.Layout)
+        validate (default = True) - Validate this stream before sending?
+                                    This will catch local errors if set to True.
+
+        Some valid keys for trace dictionaries:
             'x', 'y', 'text', 'z', 'marker', 'line'
 
         Examples:
-        >>> write(dict(x = 1, y = 2))
-        >>> write(dict(x = [1, 2, 3], y = [10, 20, 30]))
-        >>> write(dict(x = 1, y = 2, text = 'scatter text'))
-        >>> write(dict(x = 1, y = 3, marker = dict(color = 'blue')))
-        >>> write(dict(z = [[1,2,3], [4,5,6]]))
+        >>> write(dict(x=1, y=2))  # assumes 'scatter' type
+        >>> write(Bar(x=[1, 2, 3], y=[10, 20, 30]))
+        >>> write(Scatter(x=1, y=2, text='scatter text'))
+        >>> write(Scatter(x=1, y=3, marker=Marker(color='blue')))
+        >>> write(Heatmap(z=[[1, 2, 3], [4, 5, 6]]))
 
         The connection to plotly's servers is checked before writing
         and reconnected if disconnected and if the response status code
@@ -431,7 +445,7 @@ class Stream:
         http://nbviewer.ipython.org/github/plotly/python-user-guide/blob/master/s7_streaming/s7_streaming.ipynb
         """
         stream_object = dict()
-        stream_object.update(data)
+        stream_object.update(trace)
         if 'type' not in stream_object:
             stream_object['type'] = 'scatter'
         if validate:
