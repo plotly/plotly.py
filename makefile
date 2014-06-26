@@ -35,15 +35,15 @@ sync_refs : submodules/graph_reference
 pull_refs : submodules/graph_reference
 	@echo ""
 	@echo "Pulling down updates from graph_reference"
-	cd plotly/graph_reference; git pull origin master
+	cd submodules/graph_reference; git pull origin master
 
 pull_mpl : submodules/mplexporter
 	@echo ""
 	@echo "Pulling down updates from mplexporter"
-	cd plotly/mplexporter; git pull origin master
+	cd submodules/mplexporter; git pull origin master
 
 pull_chunked : submodules/chunked_requests
 	@echo ""
 	@echo "Pulling down updates from chunked_requests"
-	cd plotly/chunked_requests; git pull origin master
+	cd submodules/chunked_requests; git pull origin master
 	
