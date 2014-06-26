@@ -279,7 +279,7 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
     pass a valid plotly url as the first argument.
 
     Note, if you're using a file_owner string as the first argument, you MUST
-    specity a `file_id` keyword argument. Else, if you're using a url string
+    specify a `file_id` keyword argument. Else, if you're using a url string
     as the first argument, you MUST NOT specify a `file_id` keyword argument, or
     file_id must be set to Python's None value.
 
@@ -287,7 +287,7 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
     file_owner_or_url (string) -- a valid plotly username OR a valid plotly url
 
     Keyword arguments:
-    file_id (defualt=None) -- an int or string that can be converted to int
+    file_id (default=None) -- an int or string that can be converted to int
                               if you're using a url, don't fill this in!
     raw (default=False) -- if true, return unicode JSON string verbatim**
 

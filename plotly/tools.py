@@ -33,6 +33,8 @@ _FILE_CONTENT = {CREDENTIALS_FILE: {'username': u'',
                  CONFIG_FILE: {'plotly_domain': u'https://plot.ly',
                                'plotly_streaming_domain': u'stream.plot.ly'}}
 
+_credentials = dict()
+
 try:
     os.mkdir(TEST_DIR)
     os.rmdir(TEST_DIR)
@@ -180,36 +182,107 @@ def reset_config_file():
 
 ### embed tools ###
 
-def get_embed(username, plot_id, width="100%", height=525):
+def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
+    """Returns HTML code to embed figure on a webpage as an <iframe>
+    
+    Plotly uniquely identifies figures with a 'file_owner'/'file_id' pair.
+    Since each file is given a corresponding unique url, you may also simply
+    pass a valid plotly url as the first argument.
+
+    Note, if you're using a file_owner string as the first argument, you MUST
+    specify a `file_id` keyword argument. Else, if you're using a url string
+    as the first argument, you MUST NOT specify a `file_id` keyword argument, or
+    file_id must be set to Python's None value.
+
+    Positional arguments:
+    file_owner_or_url (string) -- a valid plotly username OR a valid plotly url
+
+    Keyword arguments:
+    file_id (default=None) -- an int or string that can be converted to int
+                              if you're using a url, don't fill this in!
+    width (default="100%") -- an int or string corresp. to width of the figure
+    height (default="525") -- same as width but corresp. to the height of the figure
+
+    """
     padding = 25
     plotly_rest_url = get_config_file()['plotly_domain']
+    if file_id is None:  # assume we're using a url
+        url = file_owner_or_url
+        if url[:len(plotly_rest_url)] != plotly_rest_url:
+            raise exceptions.PlotlyError(
+                "Because you didn't supply a 'file_id' in the call, "
+                "we're assuming you're trying to snag a figure from a url. "
+                "You supplied the url, '{}', we expected it to start with '{}'."
+                "\nRun help on this function for more information."
+                "".format(url, plotly_rest_url))
+        head = plotly_rest_url + "/~"
+        file_owner = url.replace(head, "").split('/')[0]
+        file_id = url.replace(head, "").split('/')[1]
+    else:
+        file_owner = file_owner_or_url
+    resource = "/apigetfile/{file_owner}/{file_id}".format(file_owner=file_owner,
+                                                           file_id=file_id)
+    try:
+        test_if_int = int(file_id)
+    except ValueError:
+        raise exceptions.PlotlyError(
+            "The 'file_id' argument was not able to be converted into an "
+            "integer number. Make sure that the positional 'file_id' argument "
+            "is a number that can be converted into an integer or a string "
+            "that can be converted into an integer."
+        )
+    if int(file_id) < 0:
+        raise exceptions.PlotlyError(
+            "The 'file_id' argument must be a non-negative number."
+        )
     if isinstance(width, (int, long)):
         s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\""
              "seamless=\"seamless\" "
              "src=\"{plotly_rest_url}/"
-             "~{username}/{plot_id}/{plot_width}/{plot_height}\" "
+             "~{file_owner}/{file_id}/{plot_width}/{plot_height}\" "
              "height=\"{iframe_height}\" width=\"{iframe_width}\">"
              "</iframe>").format(
             plotly_rest_url=plotly_rest_url,
-            username=username, plot_id=plot_id,
+            file_owner=file_owner, file_id=file_id,
             plot_width=width-padding, plot_height=height-padding,
             iframe_height=height, iframe_width=width)
     else:
         s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\""
              "seamless=\"seamless\" "
              "src=\"{plotly_rest_url}/"
-             "~{username}/{plot_id}\" "
+             "~{file_owner}/{file_id}\" "
              "height=\"{iframe_height}\" width=\"{iframe_width}\">"
              "</iframe>").format(
             plotly_rest_url=plotly_rest_url,
-            username=username, plot_id=plot_id,
+            file_owner=file_owner, file_id=file_id,
             iframe_height=height, iframe_width=width)
 
     return s
 
 
-def embed(username, plot_id, width="100%", height=525):
-    s = get_embed(username, plot_id, width, height)
+def embed(file_owner_or_url, file_id=None, width="100%", height=525):
+    """Embeds existing Plotly figure in IPython Notebook
+    
+    Plotly uniquely identifies figures with a 'file_owner'/'file_id' pair.
+    Since each file is given a corresponding unique url, you may also simply
+    pass a valid plotly url as the first argument.
+
+    Note, if you're using a file_owner string as the first argument, you MUST
+    specify a `file_id` keyword argument. Else, if you're using a url string
+    as the first argument, you MUST NOT specify a `file_id` keyword argument, or
+    file_id must be set to Python's None value.
+
+    Positional arguments:
+    file_owner_or_url (string) -- a valid plotly username OR a valid plotly url
+
+    Keyword arguments:
+    file_id (default=None) -- an int or string that can be converted to int
+                              if you're using a url, don't fill this in!
+    width (default="100%") -- an int or string corresp. to width of the figure
+    height (default="525") -- same as width but corresp. to the height of the figure
+
+    """
+    s = get_embed(file_owner_or_url, file_id, width, height)
     try:
         # see if we are in the SageMath Cloud
         from sage_salvus import html
