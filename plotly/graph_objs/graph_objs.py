@@ -237,8 +237,11 @@ class DictMeta(type):
                     descr = str(obj_info[key]['description'])
                 except KeyError:
                     descr = undocumented
-                str_1 = "{} [required={}] (value={}):\n".format(key, required,
-                                                                val_types)
+                str_1 = "{} [required={}] (value={})".format(
+                    key, required, val_types)
+                if "streamable" in obj_info[key] and obj_info[key]["streamable"]:
+                    str_1 += " (streamable)"
+                str_1 += ":\n"
                 str_1 = "\t" + "\n\t".join(textwrap.wrap(str_1,
                                                          width=width1)) + "\n"
                 str_2 = "\t\t" + "\n\t\t".join(textwrap.wrap(descr,
