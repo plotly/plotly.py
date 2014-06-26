@@ -33,8 +33,6 @@ _FILE_CONTENT = {CREDENTIALS_FILE: {'username': u'',
                  CONFIG_FILE: {'plotly_domain': u'https://plot.ly',
                                'plotly_streaming_domain': u'stream.plot.ly'}}
 
-_credentials = dict()
-
 try:
     os.mkdir(TEST_DIR)
     os.rmdir(TEST_DIR)
