@@ -2,7 +2,7 @@ all : readme
 
 readme :
 	@echo ""
-	@cat make_instructions.txt
+	@less make_instructions.txt
 
 install : sync_subs
 	@echo ""
