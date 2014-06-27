@@ -4,11 +4,18 @@ readme :
 	@echo ""
 	@less make_instructions.txt
 
-setup_subs : 
+setup_subs :
+	@echo "Deleting old submodule locations, if they exist"
+	rm -rf plotly/graph_reference
+	rm -rf plotly/mplexporter
+	rm -rf plotly/chunked_requests
+	rm -rf plotly/plotly/chunked_requests
+	rm -rf plotly/matplotlylib/mplexporter
 	@echo "Initializing submodules listed in project"
 	git submodule init
 	@echo "Updating submodules to their respective commits"
 	git submodule update
+	make sync_subs
 
 install : sync_subs
 	@echo ""
