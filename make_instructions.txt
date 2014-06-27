@@ -2,9 +2,21 @@
 MAKE INSTRUCTIONS
 #################
 
+Contents:
+
+    Availble targets
+
+    Getting setup
+
+    Pulling in changes from subprojects
+
+    Why this is worthwhile
+
+################################################################################
+
 Available targets (i.e. $ make target):
 
-    readme -> `cat` this file
+    readme -> `less` this file
 
     setup_subs -> delete old submodule locations, init, update, and sync new
 
@@ -26,15 +38,21 @@ Available targets (i.e. $ make target):
 
     pull_refs -> pull in graph_reference *master* branch
 
+################################################################################
+
 Getting setup:
 
     1. run `$ make setup_subs`
     2. if that doesn't work, DELETE your local repo, re-clone, try again.
 
+################################################################################
+
 Pulling in changes from subprojects:
 
     1. Only pull submodules that you require (e.g., $ make pull_refs)
     2. Make sure to sync these changes (e.g., $ make sync_refs)
+
+################################################################################
 
 Why this is worthwhile:
 

@@ -15,6 +15,13 @@ Now you can download, design, and upload Plotly figures--all from Python.
 
 * Official docs: [https://plot.ly/python](https://plot.ly/python)
 
+###Contributing?
+
+This project uses git submodules! After forking and cloning, in your terminal 
+run `make` from inside your local `python-api/` repository. That will spit out 
+the `make_instructions.txt` file. Checkout the *Getting started* section in 
+there for more info.
+
 ###Get in touch
 
 - <feedback@plot.ly>
