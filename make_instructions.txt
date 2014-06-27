@@ -6,6 +6,8 @@ Available targets (i.e. $ make target):
 
     readme -> `cat` this file
 
+    setup_subs -> delete old submodule locations, init, update, and sync new
+
     install -> 1. sync submodules 2. install plotly with setup.py
 
     sync_subs -> sync all submodules
@@ -24,7 +26,12 @@ Available targets (i.e. $ make target):
 
     pull_refs -> pull in graph_reference *master* branch
 
-What you need to do:
+Getting setup:
+
+    1. run `$ make setup_subs`
+    2. if that doesn't work, DELETE your local repo, re-clone, try again.
+
+Pulling in changes from subprojects:
 
     1. Only pull submodules that you require (e.g., $ make pull_refs)
     2. Make sure to sync these changes (e.g., $ make sync_refs)
