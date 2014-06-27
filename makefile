@@ -4,6 +4,12 @@ readme :
 	@echo ""
 	@less make_instructions.txt
 
+setup_subs : 
+	@echo "Initializing submodules listed in project"
+	git submodule init
+	@echo "Updating submodules to their respective commits"
+	git submodule update
+
 install : sync_subs
 	@echo ""
 	@echo "Installing Python API with make"
