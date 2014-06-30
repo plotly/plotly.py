@@ -17,10 +17,8 @@ Now you can download, design, and upload Plotly figures--all from Python.
 
 ###Contributing?
 
-This project uses git submodules! After forking and cloning, in your terminal 
-run `make` from inside your local `python-api/` repository. That will spit out 
-the `make_instructions.txt` file. Checkout the *Getting started* section in 
-there for more info.
+Heck yeah! We've got suggestions. We've got guides!
+-> checkout `contributing.md`
 
 ###Get in touch
 
