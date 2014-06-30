@@ -318,7 +318,7 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
     (username, api_key) = _validation_key_logic()
     headers = {'plotly-username': username,
                'plotly-apikey': api_key,
-               'plotly-version': '2.0',
+               'plotly-version': version.__version__,
                'plotly-platform': 'python'}
     try:
         test_if_int = int(file_id)
@@ -513,53 +513,112 @@ class image:
     '''
 
     @staticmethod
-    def get(figure):
+    def get(figure_or_data, format='png', width=None, height=None):
         """ Return a static image of the plot described by `figure`.
+
+        Valid formats: 'png', 'svg', 'jpeg', 'pdf'
         """
+        if isinstance(figure_or_data, dict):
+            figure = figure_or_data
+        elif isinstance(figure_or_data, list):
+            figure = {'data': figure_or_data}
+
+        if format not in ['png', 'svg', 'jpeg', 'pdf']:
+            raise exceptions.PlotlyError("Invalid format. "
+                                         "This version of your Plotly-Python "
+                                         "package currently only supports "
+                                         "png, svg, jpeg, and pdf. "
+                                         "Learn more about image exporting, "
+                                         "and the currently supported file "
+                                         "types here: "
+                                         "https://plot.ly/python/static-image-export/")
+
         (username, api_key) = _validation_key_logic()
         headers = {'plotly-username': username,
                    'plotly-apikey': api_key,
-                   'plotly-version': '2.0',
+                   'plotly-version': version.__version__,
                    'plotly-platform': 'python'}
+
+        payload = {
+            'figure': figure,
+            'format': format
+        }
+
+        if width is not None:
+            payload['width'] = width
+        if height is not None:
+            payload['height'] = height
 
         url = tools.get_config_file()['plotly_domain'] + "/apigenimage/"
         res = requests.post(url,
-                            data=json.dumps(figure,
+                            data=json.dumps(payload,
                                             cls=utils._plotlyJSONEncoder),
                             headers=headers)
 
+        headers = res.headers
+
         if res.status_code == 200:
-            return_data = json.loads(res.content)
-            return return_data['payload']
+            if ('content-type' in headers and
+                headers['content-type'] in ['image/png', 'image/jpeg',
+                                            'application/pdf',
+                                            'image/svg+xml']):
+                return res.content
+
+            elif ('content-type' in headers and
+                  'json' in headers['content-type']):
+                return_data = json.loads(res.content)
+                return return_data['image']
         else:
             try:
-                return_data = json.loads(res.content)
+                if ('content-type' in headers and
+                    'json' in headers['content-type']):
+                    return_data = json.loads(res.content)
+                else:
+                    return_data = {'error': res.content}
             except:
                 raise exceptions.PlotlyError("The response "
                                              "from plotly could "
                                              "not be translated.")
             raise exceptions.PlotlyError(return_data['error'])
 
+
     @classmethod
-    def ishow(cls, figure):
+    def ishow(cls, figure_or_data, format='png', width=None, height=None):
         """ Display a static image of the plot described by `figure`
         in an IPython Notebook.
         """
-        img = cls.get(figure)
-        from IPython.display import display, Image
-        display(Image(img))
+        if format == 'pdf':
+            raise exceptions.PlotlyError("Aw, snap! "
+                "It's not currently possible to embed a pdf into "
+                "an IPython notebook. You can save the pdf "
+                "with the `image.save_as` or you can "
+                "embed an png, jpeg, or svg.")
+        img = cls.get(figure_or_data, format, width, height)
+        from IPython.display import display, Image, SVG
+        if format == 'svg':
+            display(SVG(img))
+        else:
+            display(Image(img))
 
     @classmethod
-    def save_as(cls, figure, filename):
-        """ Save a static image of the plot described by `figure`
-        locally as `filename`.
+    def save_as(cls, figure_or_data, filename, format=None, width=None, height=None):
+        """ Save a static image of the plot described by `figure` locally as `filename`.
+            Valid image formats are 'png', 'svg', 'jpeg', and 'pdf'.
+            The format is taken as the extension of the filename or as the supplied format.
         """
-        img = cls.get(figure)
         (base, ext) = os.path.splitext(filename)
-        if not ext:
+        if not ext and not format:
             filename += '.png'
+        elif ext and not format:
+            format = ext[1:]
+        elif not ext and format:
+            filename += '.'+format
+        else:
+            filename += '.'+format
+
+        img = cls.get(figure_or_data, format, width, height)
+
         f = open(filename, 'w')
-        img = base64.b64decode(img)
         f.write(img)
         f.close()
 
