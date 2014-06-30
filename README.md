@@ -17,8 +17,9 @@ Now you can download, design, and upload Plotly figures--all from Python.
 
 ###Contributing?
 
-Heck yeah! We've got suggestions. We've got guides!
--> checkout `contributing.md`
+Heck yeah! We've got suggestions! We've got guides!
+
+Checkout [`contributing.md`](https://github.com/plotly/python-api/blob/master/contributing.md).
 
 ###Get in touch
 
