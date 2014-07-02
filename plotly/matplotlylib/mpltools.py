@@ -281,48 +281,62 @@ def prep_ticks(ax, index, ax_type, props):
     props - an mplexporter poperties dictionary
 
     """
-    axis = dict()
+    axis_dict = dict()
+    if ax_type == 'x':
+        axis = ax.get_xaxis()
+    elif ax_type == 'y':
+        axis = ax.get_yaxis()
+    else:
+        return dict() # whoops!
+
     scale = props['axes'][index]['scale']
     if scale == 'linear':
+        # get tick location information
         try:
             tickvalues = props['axes'][index]['tickvalues']
-            axis['tick0'] = tickvalues[0]
+            tick0 = tickvalues[0]
             dticks = [round(tickvalues[i]-tickvalues[i-1], 12)
                       for i in range(1, len(tickvalues) - 1)]
             if all([dticks[i] == dticks[i-1]
                     for i in range(1, len(dticks) - 1)]):
-                axis['dtick'] = tickvalues[1] - tickvalues[0]
+                dtick = tickvalues[1] - tickvalues[0]
             else:
                 warnings.warn("'linear' {}-axis tick spacing not even, "
                               "ignoring mpl tick formatting.".format(ax_type))
                 raise TypeError
-            axis['autotick'] = False
         except (IndexError, TypeError):
-            axis = dict(nticks=props['axes'][index]['nticks'])
-        return axis
+            axis_dict['nticks'] = props['axes'][index]['nticks']
+        else:
+            axis_dict['tick0'] = tick0
+            axis_dict['dtick'] = dtick
+            axis_dict['autotick'] = False
     elif scale == 'log':
         try:
-            axis['tick0'] = props['axes'][index]['tickvalues'][0]
-            axis['dtick'] = props['axes'][index]['tickvalues'][1] - \
+            axis_dict['tick0'] = props['axes'][index]['tickvalues'][0]
+            axis_dict['dtick'] = props['axes'][index]['tickvalues'][1] - \
                             props['axes'][index]['tickvalues'][0]
-            axis['autotick'] = False
+            axis_dict['autotick'] = False
         except (IndexError, TypeError):
-            axis = dict(nticks=props['axes'][index]['nticks'])
-        base = ax.get_xaxis().get_transform().base
+            axis_dict = dict(nticks=props['axes'][index]['nticks'])
+        base = axis.get_transform().base
         if base == 10:
             if ax_type == 'x':
-                axis['range'] = [math.log10(props['xlim'][0]),
+                axis_dict['range'] = [math.log10(props['xlim'][0]),
                                  math.log10(props['xlim'][1])]
             elif ax_type == 'y':
-                axis['range'] = [math.log10(props['ylim'][0]),
+                axis_dict['range'] = [math.log10(props['ylim'][0]),
                                  math.log10(props['ylim'][1])]
         else:
-            axis = dict(range=None, type='linear')
+            axis_dict = dict(range=None, type='linear')
             warnings.warn("Converted non-base10 {}-axis log scale to 'linear'"
                           "".format(ax_type))
-        return axis
     else:
         return dict()
+    # get tick label formatting information
+    formatter = axis.get_major_formatter().__class__.__name__
+    if formatter == 'LogFormatterMathtext':
+        axis_dict['exponentformat'] = 'e'
+    return axis_dict
 
 
 def prep_xy_axis(ax, props, x_bounds, y_bounds):
