@@ -626,8 +626,8 @@ class image:
 def _send_to_plotly(figure, **plot_options):
     """
     """
-
-    data = json.dumps(figure['data'] if 'data' in figure else [],
+    fig = tools.replace_newline(figure)  # does not mutate figure
+    data = json.dumps(fig['data'] if 'data' in fig else [],
                       cls=utils._plotlyJSONEncoder)
     file_credentials = tools.get_credentials_file()
     if ('username' in _credentials) and ('api_key' in _credentials):
@@ -641,7 +641,7 @@ def _send_to_plotly(figure, **plot_options):
     kwargs = json.dumps(dict(filename=plot_options['filename'],
                              fileopt=plot_options['fileopt'],
                              world_readable=plot_options['world_readable'],
-                             layout=figure['layout'] if 'layout' in figure
+                             layout=fig['layout'] if 'layout' in fig
                              else {}),
                         cls=utils._plotlyJSONEncoder)
 

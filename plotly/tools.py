@@ -509,3 +509,22 @@ def validate_stream(obj, obj_type):
             validate_stream(val, sub_obj_type)
         except KeyError:
             pass
+
+
+def replace_newline(obj):
+    """Replaces '\n' with '<br>' for all strings in a collection."""
+    if isinstance(obj, dict):
+        d = dict()
+        for key, val in obj.items():
+            d[key] = replace_newline(val)
+        return d
+    elif isinstance(obj, list):
+        l = list()
+        for index, entry in enumerate(obj):
+            l += [replace_newline(entry)]
+        return l
+    elif isinstance(obj, (str, unicode)):
+        s = obj.replace('\n', '<br>')
+        return s
+    else:
+        return obj  # we return the actual reference... but DON'T mutate.
