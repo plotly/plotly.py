@@ -525,8 +525,8 @@ class PlotlyRenderer(Renderer):
                 x, y = props['position']
                 xref = 'x{}'.format(self.axis_ct)
                 yref = 'y{}'.format(self.axis_ct)
-                xanchor = 'center'
-                yanchor = 'middle'
+                xanchor = props['style']['halign']  # no difference here!
+                yanchor = mpltools.convert_va(props['style']['valign'])
             annotation = Annotation(
                 text=props['text'],
                 opacity=props['style']['alpha'],
