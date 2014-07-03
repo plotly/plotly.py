@@ -511,20 +511,26 @@ def validate_stream(obj, obj_type):
             pass
 
 
-def replace_newline(obj):
+def _replace_newline(obj):
     """Replaces '\n' with '<br>' for all strings in a collection."""
     if isinstance(obj, dict):
         d = dict()
         for key, val in obj.items():
-            d[key] = replace_newline(val)
+            d[key] = _replace_newline(val)
         return d
     elif isinstance(obj, list):
         l = list()
         for index, entry in enumerate(obj):
-            l += [replace_newline(entry)]
+            l += [_replace_newline(entry)]
         return l
     elif isinstance(obj, (str, unicode)):
         s = obj.replace('\n', '<br>')
+        if s != obj:
+            warnings.warn("Looks like you used a newline character: '\\n'.\n"
+                          "Plotly uses a subset of HTML escape characters "
+                          "to do things like newline, bold, italics, etc.\n"
+                          "Your newline characters have been converted to "
+                          "'<br>' so they'll show up right!")
         return s
     else:
         return obj  # we return the actual reference... but DON'T mutate.

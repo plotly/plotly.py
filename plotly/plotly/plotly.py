@@ -626,7 +626,7 @@ class image:
 def _send_to_plotly(figure, **plot_options):
     """
     """
-    fig = tools.replace_newline(figure)  # does not mutate figure
+    fig = tools._replace_newline(figure)  # does not mutate figure
     data = json.dumps(fig['data'] if 'data' in fig else [],
                       cls=utils._plotlyJSONEncoder)
     file_credentials = tools.get_credentials_file()
