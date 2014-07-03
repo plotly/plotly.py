@@ -525,6 +525,12 @@ def _replace_newline(obj):
         return l
     elif isinstance(obj, (str, unicode)):
         s = obj.replace('\n', '<br>')
+        if s != obj:
+            warnings.warn("Looks like you used a newline character: '\\n'.\n"
+                          "Plotly uses a subset of HTML escape characters "
+                          "to do things like newline, bold, italics, etc.\n"
+                          "Your newline characters have been converted to "
+                          "'<br>' so they'll show up right!")
         return s
     else:
         return obj  # we return the actual reference... but DON'T mutate.
