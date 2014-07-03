@@ -10,7 +10,6 @@ Functions that USERS will possibly want access to.
 import os
 import os.path
 import warnings
-import re
 from . graph_objs import graph_objs
 from . import utils
 from . import exceptions
