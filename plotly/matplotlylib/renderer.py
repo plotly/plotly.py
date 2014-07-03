@@ -492,6 +492,9 @@ class PlotlyRenderer(Renderer):
 
         """
         self.msg += "    Attempting to draw an mpl text object\n"
+        align = props['mplobj']._multialignment
+        if not align:
+            align = 'center'  # mpl default
         if 'annotations' not in self.plotly_fig['layout']:
             self.plotly_fig['layout']['annotations'] = Annotations()
         if props['text_type'] == 'xlabel':
@@ -531,6 +534,7 @@ class PlotlyRenderer(Renderer):
                 y=y,
                 xref=xref,
                 yref=yref,
+                align=align,
                 xanchor=xanchor,
                 yanchor=yanchor,
                 showarrow=False,  # change this later?
