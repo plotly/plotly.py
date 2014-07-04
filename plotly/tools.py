@@ -16,7 +16,7 @@ from . import exceptions
 
 # Warning format
 def warning_on_one_line(message, category, filename, lineno, file=None, line=None):
-    return ' %s:%s: %s:\n%s\n' % (filename, lineno, category.__name__, message)
+    return '%s:%s: %s:\n\n%s\n\n' % (filename, lineno, category.__name__, message)
 warnings.formatwarning = warning_on_one_line
 
 try:
@@ -531,12 +531,12 @@ def _replace_newline(obj):
     elif isinstance(obj, (str, unicode)):
         s = obj.replace('\n', '<br>')
         if s != obj:
-            warnings.warn("Looks like you used a newline character: '\\n'.\n"
-                          "Plotly uses a subset of HTML escape characters "
-                          "to do things like newline, bold, italics, etc.\n"
-                          "Your newline characters have been converted to "
-                          "'<br>' so they will show up right on your Plotly "
-                          "figure!")
+            warnings.warn("Looks like you used a newline character: '\\n'.\n\n"
+                          "Plotly uses a subset of HTML escape characters\n"
+                          "to do things like newline (<br>), bold (<b></b>),\n"
+                          "italics (<i></i>), etc. Your newline characters \n"
+                          "have been converted to '<br>' so they will show \n"
+                          "up right on your Plotly figure!")
         return s
     else:
         return obj  # we return the actual reference... but DON'T mutate.

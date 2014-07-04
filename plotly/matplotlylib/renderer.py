@@ -13,7 +13,7 @@ from .. graph_objs import *
 
 # Warning format
 def warning_on_one_line(message, category, filename, lineno, file=None, line=None):
-    return ' %s:%s: %s:\n%s\n' % (filename, lineno, category.__name__, message)
+    return '%s:%s: %s:\n\n%s\n\n' % (filename, lineno, category.__name__, message)
 warnings.formatwarning = warning_on_one_line
 
 class PlotlyRenderer(Renderer):
@@ -503,14 +503,13 @@ class PlotlyRenderer(Renderer):
         """
         self.msg += "    Attempting to draw an mpl text object\n"
         if not mpltools.check_corners(props['mplobj'], self.mpl_fig):
-            warnings.warn("Looks like the annotation(s) you are trying " 
-                          "to draw lies/lay outside the given figure size.\n"
-                          "Therefore, the resulting Plotly figure may not be "
-                          "large enough to view the full text.\n"
-                          "To adjust the size of the figure, use the "
-                          "'width' and 'height' keys in the Layout object. "
-                          "Alternatively, use the Margin object to adjust the "
-                          "figure's margins.")
+            warnings.warn("Looks like the annotation(s) you are trying \n" 
+                          "to draw lies/lay outside the given figure size.\n\n"
+                          "Therefore, the resulting Plotly figure may not be \n"
+                          "large enough to view the full text. To adjust \n"
+                          "the size of the figure, use the 'width' and \n"
+                          "'height' keys in the Layout object. Alternatively,\n"
+                          "use the Margin object to adjust the figure's margins.")
         align = props['mplobj']._multialignment
         if not align:
             align = props['style']['halign'] # mpl default
