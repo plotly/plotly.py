@@ -194,6 +194,17 @@ def get_axes_bounds(fig):
     return (x_min, x_max), (y_min, y_max)
 
 
+def get_axis_mirror(main_spine, mirror_spine):
+    if main_spine and mirror_spine:
+        return 'ticks'
+    elif main_spine and not mirror_spine:
+        return False
+    elif not main_spine and mirror_spine:
+        return False  # can't handle this case yet!
+    else:
+        return False  # nuttin'!
+
+
 def get_bar_gap(bar_starts, bar_ends, tol=1e-10):
     if len(bar_starts) == len(bar_ends) and len(bar_starts) > 1:
         sides1 = bar_starts[1:]
@@ -223,6 +234,24 @@ def get_rect_ymin(data):
 def get_rect_ymax(data):
     """Find maximum y value from four (x,y) vertices."""
     return max(data[0][1], data[1][1], data[2][1], data[3][1])
+
+def get_spine_visible(ax, spine_key):
+    """Return some spine parameters for the spine, `spine_key`."""
+    spine = ax.spines[spine_key]
+    ax_frame_on = ax.get_frame_on()
+    spine_frame_like = spine.is_frame_like()
+    if not spine.get_visible():
+        return False
+    elif not spine._edgecolor[-1]:  # user's may have set edgecolor alpha==0
+        return False
+    elif not ax_frame_on and spine_frame_like:
+        return False
+    elif ax_frame_on and spine_frame_like:
+        return True
+    elif not ax_frame_on and not spine_frame_like:
+        return True  # we've already checked for that it's visible.
+    else:
+        return False # oh man, and i thought we exhausted the options...
 
 
 def is_bar(**props):
