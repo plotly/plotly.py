@@ -643,10 +643,10 @@ def make_showlegend(trace=False, layout=False):
 # $shortcut-axis | $shortcut-xaxis | $shortcut-yaxis
 def make_axis(x_or_y, trace=False, layout=False):
     _required=False
-    _type='plot_info'
     S={'x':['x','horizontal','X'], 'y':['y','vertical','Y']}
     s=S[x_or_y]
     if trace:
+        _type='plot_info'
         _val_types="'{S0}1' | '{S0}2' | '{S0}3' | etc.".format(S0=s[0])
         _description=''.join(["This key determines which {S0}-axis ",
                               "the {S0}-coordinates of this trace will ",
@@ -658,6 +658,7 @@ def make_axis(x_or_y, trace=False, layout=False):
                               "they are the same."
                              ]).format(S0=s[0])
     elif layout:
+        _type='object'
         _val_types=val_types['object']
         _description=''.join(["A dictionary-like object describing an ",
                               "{S0}-axis (i.e. an {S1} axis). ",

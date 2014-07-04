@@ -3082,13 +3082,13 @@
         "xaxis": {
             "val_types": "dictionary-like", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "object", 
             "description": "A dictionary-like object describing an x-axis (i.e. an horizontal axis). The first XAxis object can be entered into layout by linking it to 'xaxis' OR 'xaxis1', both keys are identical to Plotly.   To create references other x-axes, you need to define them in the layout dictionary-like object using keys 'xaxis2', 'xaxis3' and so on."
         }, 
         "yaxis": {
             "val_types": "dictionary-like", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "object", 
             "description": "A dictionary-like object describing an y-axis (i.e. an vertical axis). The first YAxis object can be entered into layout by linking it to 'yaxis' OR 'yaxis1', both keys are identical to Plotly.   To create references other y-axes, you need to define them in the layout dictionary-like object using keys 'yaxis2', 'yaxis3' and so on."
         }, 
         "legend": {
