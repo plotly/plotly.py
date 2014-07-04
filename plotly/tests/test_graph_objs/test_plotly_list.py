@@ -14,8 +14,9 @@ def test_trivial():
     assert PlotlyList() == list()
 
 
+@raises(PlotlyError)
 def test_weird_instantiation():
-    assert PlotlyList({}) == list({})
+    print PlotlyList({})
 
 
 @raises(PlotlyError)

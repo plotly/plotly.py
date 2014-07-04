@@ -7,7 +7,9 @@ A module intended for use with Nose.
 """
 from nose.tools import raises
 from ...graph_objs.graph_objs import *
-from ...exceptions import (PlotlyDictKeyError, PlotlyDictValueError,
+from ...exceptions import (PlotlyError,
+                           PlotlyDictKeyError,
+                           PlotlyDictValueError,
                            PlotlyDataTypeError, PlotlyListEntryError)
 
 
@@ -20,8 +22,9 @@ def test_trivial():
     assert Annotations() == list()
 
 
-def test_weird_instantiation():  # Python allows this...
-    assert Annotations({}) == list({})
+@raises(PlotlyError)
+def test_weird_instantiation():  # Python allows this, but nonsensical for us.
+    print Annotations({})
 
 
 def test_dict_instantiation():
