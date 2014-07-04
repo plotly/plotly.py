@@ -498,6 +498,12 @@ class PlotlyRenderer(Renderer):
 
         """
         self.msg += "    Attempting to draw an mpl text object\n"
+        if not mpltools.check_corners(props['mplobj'], self.mpl_fig):
+            warnings.warn("\n"
+                          "The annotation you're trying to draw lies outside "
+                          "the given figure size. Therefore, the resulting "
+                          "Plotly figure may not be large enough to view the "
+                          "full text.")
         align = props['mplobj']._multialignment
         if not align:
             align = props['style']['halign'] # mpl default
