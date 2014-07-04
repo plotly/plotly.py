@@ -14,6 +14,11 @@ from . graph_objs import graph_objs
 from . import utils
 from . import exceptions
 
+# Warning format
+def warning_on_one_line(message, category, filename, lineno, file=None, line=None):
+    return ' %s:%s: %s:\n%s\n' % (filename, lineno, category.__name__, message)
+warnings.formatwarning = warning_on_one_line
+
 try:
     from . import matplotlylib
     _matplotlylib_imported = True
@@ -530,7 +535,8 @@ def _replace_newline(obj):
                           "Plotly uses a subset of HTML escape characters "
                           "to do things like newline, bold, italics, etc.\n"
                           "Your newline characters have been converted to "
-                          "'<br>' so they'll show up right!")
+                          "'<br>' so they will show up right on your Plotly "
+                          "figure!")
         return s
     else:
         return obj  # we return the actual reference... but DON'T mutate.
