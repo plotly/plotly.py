@@ -133,14 +133,10 @@ class PlotlyRenderer(Renderer):
         xaxis = XAxis(
             anchor='y{}'.format(self.axis_ct),
             zeroline=False,
-            showline=True,
-            mirror='ticks',
             ticks='inside')
         yaxis = YAxis(
             anchor='x{}'.format(self.axis_ct),
             zeroline=False,
-            showline=True,
-            mirror='ticks',
             ticks='inside')
         # update defaults with things set in mpl
         mpl_xaxis, mpl_yaxis = mpltools.prep_xy_axis(ax=ax,
@@ -149,6 +145,16 @@ class PlotlyRenderer(Renderer):
                                                      y_bounds=self.mpl_y_bounds)
         xaxis.update(mpl_xaxis)
         yaxis.update(mpl_yaxis)
+        bottom_spine = mpltools.get_spine_visible(ax, 'bottom')
+        top_spine = mpltools.get_spine_visible(ax, 'top')
+        left_spine = mpltools.get_spine_visible(ax, 'left')
+        right_spine = mpltools.get_spine_visible(ax, 'right')
+        xaxis['mirror'] = mpltools.get_axis_mirror(bottom_spine, top_spine)
+        yaxis['mirror'] = mpltools.get_axis_mirror(left_spine, right_spine)
+        xaxis['showline'] = bottom_spine
+        yaxis['showline'] = top_spine
+
+
         # put axes in our figure
         self.plotly_fig['layout']['xaxis{}'.format(self.axis_ct)] = xaxis
         self.plotly_fig['layout']['yaxis{}'.format(self.axis_ct)] = yaxis
