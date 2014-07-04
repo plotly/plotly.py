@@ -241,6 +241,7 @@
         "orientation", 
         "showlegend", 
         "stream", 
+        "text", 
         "type", 
         "visible", 
         "x", 

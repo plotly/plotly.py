@@ -41,10 +41,10 @@
             "description": "The label associated with this trace. This name will appear in the legend, on hover and in the column header in the online spreadsheet."
         }, 
         "text": {
-            "val_types": "array-like of numbers, strings, datetimes", 
+            "val_types": "array-like of strings", 
             "required": false, 
             "type": "data", 
-            "description": "The text elements associated with every (x,y) pair on the scatter plot. If the scatter 'mode' doesn't include 'text' then text will appear on hover only. If 'text' is included in 'mode', the entries in 'text' will be rendered on the plot at the locations specified by their corresponding coordinate pair.", 
+            "description": "The text elements associated with each (x,y) pair in this scatter trace. If the scatter 'mode' does not include 'text' then text elements will appear on hover only. In contrast, if 'text' is included in 'mode', the entries in 'text' will be rendered on the plot at the locations specified in part by their corresponding (x,y) coordinate pair and the 'textposition' key.", 
             "streamable": true
         }, 
         "error_y": {
@@ -74,6 +74,18 @@
             "type": "object", 
             "description": "A dictionary-like object containing line style parameters for this scatter trace. Has an effect only if 'mode' contains 'lines'.", 
             "streamable": true
+        }, 
+        "textposition": {
+            "val_types": "'top left' | 'top' (or 'top center')| 'top right' | 'left' (or 'middle left') | '' (or 'middle center') |'right' (or 'middle right') |'bottom left' | 'bottom' (or 'bottom center') |'bottom right'", 
+            "required": false, 
+            "type": "style", 
+            "description": "Sets the position of the text elements in the 'text' key with respect to the data points. By default, the text elements are plotted directly at the (x,y) coordinates."
+        }, 
+        "textfont": {
+            "val_types": "dictionary-like", 
+            "required": false, 
+            "type": "object", 
+            "description": "A dictionary-like object describing the font style of this scatter trace's text elements. Has only an effect if 'mode' is set and includes 'text'."
         }, 
         "connectgaps": {
             "val_types": "boolean: True | False", 
@@ -105,18 +117,6 @@
             "required": false, 
             "type": "style", 
             "description": "Sets the opacity, or transparency, of the entire object, also known as the alpha channel of colors. If the object's color is given in terms of 'rgba' color model, 'opacity' is redundant."
-        }, 
-        "textfont": {
-            "val_types": "dictionary-like", 
-            "required": false, 
-            "type": "object", 
-            "description": "A dictionary-like object describing the font style of this scatter trace's text elements. This only has an effect if 'text' is an array of strings and 'mode' is set to include 'text'."
-        }, 
-        "textposition": {
-            "val_types": "'top left' | 'top' (or 'top center')| 'top right' | 'left' (or 'middle left') | '' (or 'middle center') |'right' (or 'middle right') |'bottom left' | 'bottom' (or 'bottom center') |'bottom right'", 
-            "required": false, 
-            "type": "style", 
-            "description": "Sets the position of the text elements in the 'text' key with respect to the data points. By default, the text elements are plotted directly at the (x,y) coordinates."
         }, 
         "xaxis": {
             "val_types": "'x1' | 'x2' | 'x3' | etc.", 
@@ -197,10 +197,10 @@
             "description": "This defines the direction of the bars. If set to 'v', the length of each bar will run vertically. If set to 'h', the length of each bar will run horizontally"
         }, 
         "text": {
-            "val_types": "array-like of numbers, strings, datetimes", 
+            "val_types": "array-like of strings", 
             "required": false, 
             "type": "data", 
-            "description": "The text elements associated with every bar in this trace The entries in 'text' will be rendered on the plot at the at the top of the bars in this trace.", 
+            "description": "The text elements associated with each bar in this trace. The entries in 'text' will appear on hover only, in a text box located at the top of each bar.", 
             "streamable": true
         }, 
         "error_y": {
@@ -342,6 +342,13 @@
             "required": false, 
             "type": "object", 
             "description": "A dictionary-like object defining the parameters of y-axis bins of this trace, for example, the bin width and the bins' starting and  ending value. Has an effect only if 'autobiny'=False."
+        }, 
+        "text": {
+            "val_types": "array-like of strings", 
+            "required": false, 
+            "type": "data", 
+            "description": "The text elements associated with each bar in this trace. The entries in 'text' will appear on hover only, in a text box located at the top of each bar.", 
+            "streamable": true
         }, 
         "error_y": {
             "val_types": "dictionary-like", 
@@ -606,46 +613,12 @@
                         "rgb(0,0,0)"
                     ], 
                     [
-                        1, 
-                        "rgb(255,255,255)"
-                    ]
-                ], 
-                [
-                    [
-                        0, 
-                        "rgb(8, 29, 88)"
-                    ], 
-                    [
-                        0.125, 
-                        "rgb(37, 52, 148)"
-                    ], 
-                    [
-                        0.25, 
-                        "rgb(34, 94, 168)"
-                    ], 
-                    [
-                        0.375, 
-                        "rgb(29, 145, 192)"
-                    ], 
-                    [
                         0.5, 
                         "rgb(65, 182, 196)"
                     ], 
                     [
-                        0.625, 
-                        "rgb(127, 205, 187)"
-                    ], 
-                    [
-                        0.75, 
-                        "rgb(199, 233, 180)"
-                    ], 
-                    [
-                        0.875, 
-                        "rgb(237, 248, 217)"
-                    ], 
-                    [
                         1, 
-                        "rgb(255, 255, 217)"
+                        "rgb(255,255,255)"
                     ]
                 ]
             ], 
@@ -841,46 +814,12 @@
                         "rgb(0,0,0)"
                     ], 
                     [
-                        1, 
-                        "rgb(255,255,255)"
-                    ]
-                ], 
-                [
-                    [
-                        0, 
-                        "rgb(8, 29, 88)"
-                    ], 
-                    [
-                        0.125, 
-                        "rgb(37, 52, 148)"
-                    ], 
-                    [
-                        0.25, 
-                        "rgb(34, 94, 168)"
-                    ], 
-                    [
-                        0.375, 
-                        "rgb(29, 145, 192)"
-                    ], 
-                    [
                         0.5, 
                         "rgb(65, 182, 196)"
                     ], 
                     [
-                        0.625, 
-                        "rgb(127, 205, 187)"
-                    ], 
-                    [
-                        0.75, 
-                        "rgb(199, 233, 180)"
-                    ], 
-                    [
-                        0.875, 
-                        "rgb(237, 248, 217)"
-                    ], 
-                    [
                         1, 
-                        "rgb(255, 255, 217)"
+                        "rgb(255,255,255)"
                     ]
                 ]
             ], 
@@ -1062,46 +1001,12 @@
                         "rgb(0,0,0)"
                     ], 
                     [
-                        1, 
-                        "rgb(255,255,255)"
-                    ]
-                ], 
-                [
-                    [
-                        0, 
-                        "rgb(8, 29, 88)"
-                    ], 
-                    [
-                        0.125, 
-                        "rgb(37, 52, 148)"
-                    ], 
-                    [
-                        0.25, 
-                        "rgb(34, 94, 168)"
-                    ], 
-                    [
-                        0.375, 
-                        "rgb(29, 145, 192)"
-                    ], 
-                    [
                         0.5, 
                         "rgb(65, 182, 196)"
                     ], 
                     [
-                        0.625, 
-                        "rgb(127, 205, 187)"
-                    ], 
-                    [
-                        0.75, 
-                        "rgb(199, 233, 180)"
-                    ], 
-                    [
-                        0.875, 
-                        "rgb(237, 248, 217)"
-                    ], 
-                    [
                         1, 
-                        "rgb(255, 255, 217)"
+                        "rgb(255,255,255)"
                     ]
                 ]
             ], 
@@ -1292,46 +1197,12 @@
                         "rgb(0,0,0)"
                     ], 
                     [
-                        1, 
-                        "rgb(255,255,255)"
-                    ]
-                ], 
-                [
-                    [
-                        0, 
-                        "rgb(8, 29, 88)"
-                    ], 
-                    [
-                        0.125, 
-                        "rgb(37, 52, 148)"
-                    ], 
-                    [
-                        0.25, 
-                        "rgb(34, 94, 168)"
-                    ], 
-                    [
-                        0.375, 
-                        "rgb(29, 145, 192)"
-                    ], 
-                    [
                         0.5, 
                         "rgb(65, 182, 196)"
                     ], 
                     [
-                        0.625, 
-                        "rgb(127, 205, 187)"
-                    ], 
-                    [
-                        0.75, 
-                        "rgb(199, 233, 180)"
-                    ], 
-                    [
-                        0.875, 
-                        "rgb(237, 248, 217)"
-                    ], 
-                    [
                         1, 
-                        "rgb(255, 255, 217)"
+                        "rgb(255,255,255)"
                     ]
                 ]
             ], 
@@ -1854,10 +1725,10 @@
     }, 
     "font": {
         "family": {
-            "val_types": " 'Courier New, monospace' |  'Balto, sans-serif' |  'Droid Sans, sans-serif' |  'Droid Serif, serif' |  'Droid Sans Mono, sans-serif' |  'Georgia, serif' |  'Gravitas One, cursive' |  'Impact, Charcoal, sans-serif' |  'Lucida Console, Monaco, monospace' |  'Old Standard TT, serif' |  'Open Sans, sans-serif' |  'PT Sans Narrow, sans-serif' |  'Raleway, sans-serif' |  'Times New Roman, Times, serif' |  'Verdana, sans-serif'", 
+            "val_types": " 'Arial, sans-serif' |  'Balto, sans-serif' |  'Courier New, monospace' |  'Droid Sans, sans-serif' |  'Droid Serif, serif' |  'Droid Sans Mono, sans-serif' |  'Georgia, serif' |  'Gravitas One, cursive' |  'Old Standard TT, serif' |  'Open Sans, sans-serif' or ('')|  'PT Sans Narrow, sans-serif' |  'Raleway, sans-serif' |  'Times New Roman, Times, serif' |", 
             "required": false, 
             "type": "style", 
-            "description": "Sets the font family. If linked in the first level of the layout object,  set the color of the global font."
+            "description": "Sets the font family. If linked in the first level of the layout object,  set the color of the global font. The default font in Plotly is 'Open Sans, sans-serif'."
         }, 
         "size": {
             "val_types": "number: x > 0", 
@@ -2892,7 +2763,12 @@
             "val_types": "string", 
             "required": false, 
             "type": "plot_info", 
-            "description": "The text associated with this annotation."
+            "examples": [
+                "regular text", 
+                "an annotation<br>spanning two lines", 
+                "<b>bold text</b>"
+            ], 
+            "description": "The text associated with this annotation. Plotly uses a subset of HTML escape characters to do things like newline (<br>), bold (<b></b>), italics (<i></i>), etc."
         }, 
         "font": {
             "val_types": "dictionary-like", 

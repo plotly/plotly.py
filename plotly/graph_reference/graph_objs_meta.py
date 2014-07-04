@@ -427,17 +427,19 @@ def make_xytype(obj, x_or_y):
 def make_text(obj):
     _required=False
     _type='data'
-    _val_types=val_types['data_array']
+    _val_types=val_types['string_array']
     _description=dict(
-        scatter="The text elements associated with every (x,y) pair on "
-                "the scatter plot. If the scatter 'mode' doesn't "
-                "include 'text' then text will appear on hover only. If "
-                "'text' is included in 'mode', the entries in 'text' "
+        scatter="The text elements associated with each (x,y) pair in "
+                "this scatter trace. If the scatter 'mode' does not "
+                "include 'text' then text elements will appear on hover only. "
+                "In contrast, if 'text' is included in 'mode', "
+                "the entries in 'text' "
                 "will be rendered on the plot at the locations "
-                "specified by their corresponding coordinate pair.",
-        bar="The text elements associated with every bar in this trace "
-            "The entries in 'text' will be rendered on the plot at the "
-            "at the top of the bars in this trace."
+                "specified in part by their corresponding (x,y) coordinate pair "
+                "and the 'textposition' key.",
+        bar="The text elements associated with each bar in this trace. "
+            "The entries in 'text' will appear on hover only, in a text "
+            "box located at the top of each bar."
     )
     _description['histogram']=_description['bar']
     _streamable=True
@@ -568,9 +570,8 @@ def make_textfont(obj):
     _val_types=val_types['object']
     _description=dict(
         scatter="A dictionary-like object describing the font style "
-                "of this scatter trace's text elements. This only has "
-                "an effect if 'text' is an array of strings and "
-                "'mode' is set to include 'text'.",
+                "of this scatter trace's text elements. Has only "
+                "an effect if 'mode' is set and includes 'text'.",
         bar="Not currently supported, has no effect."
     )
     _description['histogram']= _description['bar']
@@ -806,12 +807,11 @@ drop_scl=dict(
                 "corresponds to a normalized value of z from 0-1, "
                 "i.e. (z-zmin)/ (zmax-zmin), and the second element of pair "
                 "corresponds to a color.",
-    examples=["Greys", [[0, "rgb(0,0,0)"], [1, "rgb(255,255,255)"]],
-              [[0, "rgb(8, 29, 88)"], [0.125, "rgb(37, 52, 148)"],
-               [0.25, "rgb(34, 94, 168)"], [0.375, "rgb(29, 145, 192)"],
-               [0.5, "rgb(65, 182, 196)"], [0.625, "rgb(127, 205, 187)"],
-               [0.75, "rgb(199, 233, 180)"], [0.875, "rgb(237, 248, 217)"],
-               [1, "rgb(255, 255, 217)"]]]
+    examples=["Greys", 
+              [[0, "rgb(0,0,0)"], 
+               [0.5, "rgb(65, 182, 196)"],
+               [1, "rgb(255,255,255)"]]
+             ]
 )
 
 # $shortcut-zauto
@@ -1288,6 +1288,22 @@ META += [('scatter', OrderedDict([
 
     ('line', make_line('scatter')),
 
+    ('textposition', dict(
+        required=False,
+        type='style',
+        val_types="'top left' | 'top' (or 'top center')| 'top right' | "
+                  "'left' (or 'middle left') | '' (or 'middle center') |"
+                  "'right' (or 'middle right') |"
+                  "'bottom left' | 'bottom' (or 'bottom center') |"
+                  "'bottom right'",
+        description="Sets the position of the text elements "
+                    "in the 'text' key with respect to the data points. "
+                    "By default, the text elements are plotted directly "
+                    "at the (x,y) coordinates."
+    )),
+
+    ('textfont', make_textfont('scatter')),
+
     ('connectgaps', dict(
         required=False,
         type='plot_info',
@@ -1311,22 +1327,6 @@ META += [('scatter', OrderedDict([
     ('fillcolor', make_fillcolor('scatter')),
 
     ('opacity', make_opacity()),
-
-    ('textfont', make_textfont('scatter')),
-
-    ('textposition', dict(
-        required=False,
-        type='style',
-        val_types="'top left' | 'top' (or 'top center')| 'top right' | "
-                  "'left' (or 'middle left') | '' (or 'middle center') |"
-                  "'right' (or 'middle right') |"
-                  "'bottom left' | 'bottom' (or 'bottom center') |"
-                  "'bottom right'",
-        description="Sets the position of the text elements "
-                    "in the 'text' key with respect to the data points. "
-                    "By default, the text elements are plotted directly "
-                    "at the (x,y) coordinates."
-    )),
 
     ('xaxis', make_axis('x',trace=True)),
 
@@ -1407,6 +1407,8 @@ META += [('histogram', OrderedDict([
     ('nbinsy', make_nbins('y')),
 
     ('ybins', make_bins('y')),
+
+    ('text', make_text('histogram')),
 
     ('error_y', make_error('histogram','y')),
 
@@ -2104,25 +2106,24 @@ META += [('font', OrderedDict([
 
     ('family', dict(
         required=False,
-        val_types=" 'Courier New, monospace' | "
+        val_types=" 'Arial, sans-serif' | "
                   " 'Balto, sans-serif' | "
+                  " 'Courier New, monospace' | "
                   " 'Droid Sans, sans-serif' | "
                   " 'Droid Serif, serif' | "
                   " 'Droid Sans Mono, sans-serif' | "
                   " 'Georgia, serif' | "
                   " 'Gravitas One, cursive' | "
-                  " 'Impact, Charcoal, sans-serif' | "
-                  " 'Lucida Console, Monaco, monospace' | "
                   " 'Old Standard TT, serif' | "
-                  " 'Open Sans, sans-serif' | "
+                  " 'Open Sans, sans-serif' or ('')| "
                   " 'PT Sans Narrow, sans-serif' | "
                   " 'Raleway, sans-serif' | "
-                  " 'Times New Roman, Times, serif' | "
-                  " 'Verdana, sans-serif'",
+                  " 'Times New Roman, Times, serif' |",
         type='style',
         description="Sets the font family. "
                     "If linked in the first level of the layout object,  "
-                    "set the color of the global font."
+                    "set the color of the global font. "
+                    "The default font in Plotly is 'Open Sans, sans-serif'."
     )),
 
     ('size', make_size('font')),
@@ -2736,7 +2737,13 @@ META += [('annotation', OrderedDict([
         required=False,
         type='plot_info',
         val_types=val_types['string'],
-        description='The text associated with this annotation.'
+        description="The text associated with this annotation. "
+                    "Plotly uses a subset of HTML escape characters "
+                    "to do things like newline (<br>), bold (<b></b>), "
+                    "italics (<i></i>), etc.",
+        examples=["regular text", 
+                  "an annotation<br>spanning two lines",
+                  "<b>bold text</b>"]
     )),
 
     ('font', make_font('annotation')),
