@@ -291,6 +291,22 @@ class PlotlyList(list):
 
     def __init__(self, *args):
         super(PlotlyList, self).__init__(*args)
+        if args and isinstance(args[0], dict):
+            raise exceptions.PlotlyListEntryError(
+                obj=self,
+                index=0,
+                notes="Just like a `list`, `{name}` must be instantiated with "
+                      "a *single* collection.\n"
+                      "In other words these are OK:\n"
+                      ">>> {name}()\n"
+                      ">>> {name}([])\n"
+                      ">>> {name}([dict()])\n"
+                      ">>> {name}([dict(), dict()])\n"
+                      "However, these don't make sense:\n"
+                      ">>> {name}(dict())\n"
+                      ">>> {name}(dict(), dict())"
+                      "".format(name=self.__class__.__name__)
+            )
         self.validate()
         if self.__class__.__name__ == 'PlotlyList':
             warnings.warn("\nThe PlotlyList class is a base class of "
