@@ -16,11 +16,11 @@ SIMPLE_SCATTER = Figure(
             marker=Marker(
                 symbol='dot',
                 line=Line(
-                    color='rgb(0,0,0)',
+                    color='rgba(0,0,0,1.0)',
                     width=1.0
                 ),
                 size=4.4721359549995796,
-                color='rgb(0,0,255)',
+                color='rgba(0,0,255,1.0)',
                 opacity=1.0
             ),
             xaxis='x1',
@@ -84,11 +84,11 @@ DOUBLE_SCATTER = Figure(
             marker=Marker(
                 symbol='triangle-up',
                 line=Line(
-                    color='rgb(255,0,0)',
+                    color='rgba(255,0,0,0.5)',
                     width=1.0
                 ),
                 size=11.0,
-                color='rgb(255,0,0)',
+                color='rgba(255,0,0,0.5)',
                 opacity=0.5
             ),
             xaxis='x1',
@@ -101,11 +101,11 @@ DOUBLE_SCATTER = Figure(
             marker=Marker(
                 symbol='square',
                 line=Line(
-                    color='rgb(128,0,128)',
+                    color='rgba(128,0,128,0.5)',
                     width=1.0
                 ),
                 size=8.0,
-                color='rgb(128,0,128)',
+                color='rgba(128,0,128,0.5)',
                 opacity=0.5
             ),
             xaxis='x1',
