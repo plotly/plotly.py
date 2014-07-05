@@ -351,29 +351,12 @@ class PlotlyRenderer(Renderer):
         """
         self.msg += "    Attempting to draw a path collection\n"
         if props['offset_coordinates'] is 'data':
-            alpha_face = props['styles']['facecolor'][0][3]
-            rgb_face = [int(c*255)
-                        for c in props['styles']['facecolor'][0][:3]]
-            alpha_edge = props['styles']['edgecolor'][0][3]
-            rgb_edge = [int(c*255)
-                        for c in props['styles']['edgecolor'][0][:3]]
-            data = props['offsets']
-            marker = mpltools.convert_path(props['paths'][0])
-            style = {
-                'alpha': alpha_face,
-                'facecolor': 'rgb({},{},{})'.format(*rgb_face),
-                'marker': marker,
-                'edgecolor': 'rgb({},{},{})'.format(*rgb_edge),
-                'edgewidth': props['styles']['linewidth'][0],
-                'markersize': mpltools.convert_affine_trans(
-                    dpi=self.mpl_fig.get_dpi(),
-                    aff=props['path_transforms'][0])
-            }
+            markerstyle = mpltools.get_markerstyle_from_collection(props)
             scatter_props = {
                 'coordinates': 'data',
-                'data': data,
+                'data': props['offsets'],
                 'label': None,
-                'markerstyle': style,
+                'markerstyle': markerstyle,
                 'linestyle': None
             }
             self.msg += "    Drawing path collection as markers\n"
