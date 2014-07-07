@@ -616,7 +616,7 @@ class image:
 
         img = cls.get(figure_or_data, format, width, height)
 
-        f = open(filename, 'w')
+        f = open(filename, 'wb')
         f.write(img)
         f.close()
 
