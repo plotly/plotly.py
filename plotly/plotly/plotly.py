@@ -18,9 +18,7 @@ import requests
 import chunked_requests
 import json
 import warnings
-import httplib
 import copy
-import base64
 import os
 from .. import utils  # TODO make non-relative
 from .. import tools
@@ -618,7 +616,7 @@ class image:
 
         img = cls.get(figure_or_data, format, width, height)
 
-        f = open(filename, 'w')
+        f = open(filename, 'wb')
         f.write(img)
         f.close()
 
