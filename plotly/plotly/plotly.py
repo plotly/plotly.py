@@ -18,9 +18,7 @@ import requests
 import chunked_requests
 import json
 import warnings
-import httplib
 import copy
-import base64
 import os
 from .. import utils  # TODO make non-relative
 from .. import tools
