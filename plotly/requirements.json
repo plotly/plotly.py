@@ -1,0 +1,8 @@
+{
+  "core": {
+    "requests": "2.3.0"
+  },
+  "optional": {
+    "matplotlib": "1.3.1"
+  }
+}
