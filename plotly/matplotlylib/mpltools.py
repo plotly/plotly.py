@@ -50,16 +50,6 @@ def check_corners(inner_obj, outer_obj):
         return True
 
 
-def convert_affine_trans(dpi=None, aff=None):
-    if aff is not None and dpi is not None:
-        try:
-            return aff.to_values()[0]*72/dpi
-        except AttributeError:
-            return aff[0][0]*72/dpi
-    else:
-        return None
-
-
 def convert_dash(mpl_dash):
     """Convert mpl line symbol to plotly line symbol and return symbol."""
     if mpl_dash in DASH_MAP:
@@ -79,7 +69,12 @@ def convert_path(path):
 
 def convert_symbol(mpl_symbol):
     """Convert mpl marker symbol to plotly symbol and return symbol."""
-    if mpl_symbol in SYMBOL_MAP:
+    if isinstance(mpl_symbol, list):
+        symbol = list()
+        for s in mpl_symbol:
+            symbol += [convert_symbol(s)]
+        return symbol
+    elif mpl_symbol in SYMBOL_MAP:
         return SYMBOL_MAP[mpl_symbol]
     else:
         return 'dot'  # default
@@ -229,6 +224,60 @@ def get_bar_gap(bar_starts, bar_ends, tol=1e-10):
         uniform = all([abs(gap0-gap) < tol for gap in gaps])
         if uniform:
             return gap0
+
+
+def convert_rgba_array(color_list):
+    clean_color_list = list()
+    for c in color_list:
+        clean_color_list += [(dict(r=int(c[0]*255),
+                                   g=int(c[1]*255),
+                                   b=int(c[2]*255),
+                                   a=c[3]
+        ))]
+    plotly_colors = list()
+    for rgba in clean_color_list:
+        plotly_colors += ["rgba({r},{g},{b},{a})".format(**rgba)]
+    if len(plotly_colors) == 1:
+        return plotly_colors[0]
+    else:
+        return plotly_colors
+
+
+def convert_path_array(path_array):
+    symbols = list()
+    for path in path_array:
+        symbols += [convert_path(path)]
+    if len(symbols) == 1:
+        return symbols[0]
+    else:
+        return symbols
+
+def convert_linewidth_array(width_array):
+    if len(width_array) == 1:
+        return width_array[0]
+    else:
+        return width_array
+
+
+def convert_size_array(size_array):
+    size = [math.sqrt(s) for s in size_array]
+    if len(size) == 1:
+        return size[0]
+    else:
+        return size
+
+
+def get_markerstyle_from_collection(props):
+    markerstyle=dict(
+        alpha=None,
+        facecolor=convert_rgba_array(props['styles']['facecolor']),
+        marker=convert_path_array(props['paths']),
+        edgewidth=convert_linewidth_array(props['styles']['linewidth']),
+        # markersize=convert_size_array(props['styles']['size']),  # TODO!
+        markersize=convert_size_array(props['mplobj'].get_sizes()),
+        edgecolor=convert_rgba_array(props['styles']['edgecolor'])
+    )
+    return markerstyle
 
 
 def get_rect_xmin(data):
