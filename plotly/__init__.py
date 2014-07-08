@@ -21,7 +21,9 @@ def _check_for_requirements():
             warnings.warn(
                 "{} is a core requirement, you'll have to install it "
                 "on your machine before being able to use the plotly "
-                "package.".format(req))
+                "package.\n"
+                "Questions? feedback@plot.ly"
+                "".format(req))
         else:
             our_version = version.split('.')
             exec "your_version = {}.__version__.split('.')".format(req)
@@ -32,7 +34,8 @@ def _check_for_requirements():
                         "machine, but it may be out of date. If you run "
                         "into problems related to this package, "
                         "you should try updating to the version we test "
-                        "with: '{}'. Your version: '{}'."
+                        "with: '{}'. Your version: '{}'.\n"
+                        "Questions? feedback@plot.ly"
                         "".format(req, version, ".".join(your_version)))
 
     for req, version in reqs['optional'].items():
@@ -50,7 +53,8 @@ def _check_for_requirements():
                         "machine, but it may be out of date. If you run "
                         "into problems related to this package, "
                         "you should try updating to the version we test "
-                        "with: '{}'. Your version: '{}'."
+                        "with: '{}'. Your version: '{}'.\n"
+                        "Questions? feedback@plot.ly"
                         "".format(req, version, ".".join(your_version)))
 
 _check_for_requirements()
