@@ -1,5 +1,5 @@
 """
-it's all about the graphs.
+https://plot.ly/python/
 
 Plotly's Python API allows users to programmatically access Plotly's
 server resources.
