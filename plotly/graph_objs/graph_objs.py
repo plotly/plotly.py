@@ -26,6 +26,7 @@ import warnings
 import textwrap
 import six
 import sys
+from . import graph_objs_tools
 from .. import exceptions
 from plotly import utils
 
@@ -644,8 +645,19 @@ class PlotlyDict(dict):
 
         """
         info_key = NAME_TO_KEY[self.__class__.__name__]
-        keys = list(self.keys())
-        for key in keys:
+        keys = self.keys()
+        updated_keys = graph_objs_tools.update_keys(keys)
+        for k_old, k_new in zip(keys, updated_keys):
+            if k_old != k_new:
+                self[k_new] = self.pop(k_old)
+                warnings.warn(
+                    "\n"
+                    "The key, '{old}', has been depreciated, it's been "
+                    "converted to '{new}'. You should change your code to use "
+                    "'{new}' in the future."
+                    "".format(old=k_old, new=k_new)
+                )
+        for key in updated_keys:
             if isinstance(self[key], (PlotlyDict, PlotlyList)):
                 try:
                     self[key].to_graph_objs(caller=False)
