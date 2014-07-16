@@ -26,6 +26,7 @@ import warnings
 import collections
 import json
 import textwrap
+import copy
 from .. import exceptions
 from .. import utils
 
@@ -557,9 +558,9 @@ class PlotlyDict(dict):
                     if isinstance(self[key], (PlotlyDict, PlotlyList)):
                         self[key].update(val)
                     else:
-                        self[key] = val
+                        self[key] = copy.deepcopy(val)
                 else:
-                    self[key] = val
+                    self[key] = copy.deepcopy(val)
 
         if len(dict2):
             for key, val in dict2.items():
@@ -567,9 +568,9 @@ class PlotlyDict(dict):
                     if isinstance(self[key], (PlotlyDict, PlotlyList)):
                         self[key].update(val)
                     else:
-                        self[key] = val
+                        self[key] = copy.deepcopy(val)
                 else:
-                    self[key] = val
+                    self[key] = copy.deepcopy(val)
         self.to_graph_objs()
 
     def strip_style(self):
