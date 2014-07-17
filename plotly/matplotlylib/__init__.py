@@ -9,3 +9,5 @@ Most of the functionality should be accessed through the parent directory's
 'tools' module or 'plotly' package.
 
 """
+from . renderer import PlotlyRenderer
+from . mplexporter import Exporter

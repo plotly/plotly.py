@@ -10,7 +10,7 @@ import warnings
 
 from . mplexporter import Renderer
 from . import mpltools
-from ..plotly.graph_objs import *
+from ..graph_objs import *
 
 
 
