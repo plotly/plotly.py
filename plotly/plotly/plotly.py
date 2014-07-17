@@ -18,6 +18,7 @@ import json
 import warnings
 import copy
 import os
+import six
 
 import requests
 
@@ -336,7 +337,10 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
         )
     response = requests.get(plotly_rest_url + resource, headers=headers)
     if response.status_code == 200:
-        content = json.loads(response.content)
+        if six.PY3:
+            content = json.loads(response.content.decode('unicode_escape'))
+        else:
+            content = json.loads(response.content)
         response_payload = content['payload']
         figure = response_payload['figure']
         utils.decode_unicode(figure)
