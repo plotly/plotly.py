@@ -26,6 +26,7 @@ import warnings
 import collections
 import json
 import textwrap
+import six
 
 from .. import exceptions
 from plotly import utils
@@ -269,8 +270,8 @@ class DictMeta(type):
         attrs['__doc__'] = doc.expandtabs(tab_size)
         return super(DictMeta, mcs).__new__(mcs, name, bases, attrs)
 
-
-class PlotlyList(list, metaclass=ListMeta):
+@six.add_metaclass(ListMeta)
+class PlotlyList(list):
     """A container for PlotlyDicts, inherits from standard list.
 
     Plotly uses lists and dicts as collections to hold information about a
@@ -493,8 +494,8 @@ class PlotlyList(list, metaclass=ListMeta):
             del self[index - del_ct]
             del_ct += 1
 
-
-class PlotlyDict(dict, metaclass=DictMeta):
+@six.add_metaclass(DictMeta)
+class PlotlyDict(dict):
     """A base dict class for all objects that style a figure in plotly.
 
     A PlotlyDict can be instantiated like any dict object. This class
