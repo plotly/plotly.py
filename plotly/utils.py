@@ -8,6 +8,7 @@ Low-level functionality NOT intended for users to EVER use.
 
 import json
 import os.path
+import sys
 
 
 ### general file setup tools ###
@@ -142,7 +143,8 @@ def decode_unicode(coll):
 ### docstring templating ###
 def template_doc(**names):
     def _decorator(func):
-        if func.__doc__ is not None:
-            func.__doc__ = func.__doc__.format(**names)
+        if sys.version[:3] != '3.2':
+            if func.__doc__ is not None:
+                func.__doc__ = func.__doc__.format(**names)
         return func
     return _decorator
