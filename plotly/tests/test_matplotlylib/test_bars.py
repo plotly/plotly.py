@@ -1,3 +1,6 @@
+import matplotlib
+# Force matplotlib to not use any Xwindows backend.
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 from . nose_tools import compare_dict, run_fig
