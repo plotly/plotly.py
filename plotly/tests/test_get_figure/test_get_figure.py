@@ -40,8 +40,8 @@ def compare_with_raw(obj, raw_obj, parents=None):
                     if parents is not None:
                         msg += "->".join(parents) + "->"
                     msg += key + " not equal!\n"
-                    msg += "    raw: {} != obj: {}\n".format(raw_obj[key],
-                                                             obj[key])
+                    msg += "    raw: {0} != obj: {1}\n".format(raw_obj[key],
+                                                               obj[key])
                     print(msg)
     elif isinstance(obj, list):
         for entry, entry_raw in zip(obj, raw_obj):
@@ -65,8 +65,8 @@ def compare_with_raw(obj, raw_obj, parents=None):
                     if parents is not None:
                         msg += "->".join(parents) + "->"
                     msg += "->[]->\n"
-                    msg += "    obj: {} != raw_obj: {}\n".format(entry,
-                                                                 entry_raw)
+                    msg += "    obj: {0} != raw_obj: {1}\n".format(entry,
+                                                                   entry_raw)
                     print(msg)
 
 
@@ -95,7 +95,7 @@ def test_get_figure():
     run_test = False
     file_id = 2
     py.sign_in(un, ak)
-    print("getting: https://plot.ly/{}/{}".format(un, file_id))
+    print("getting: https://plot.ly/{0}/{1}".format(un, file_id))
     print("###########################################\n\n")
     fig = py.get_figure('plotlyimagetest', str(file_id))
 
@@ -113,11 +113,12 @@ def test_all():
         while True:
             fig, fig_raw = None, None
             while (file_id in polar_plots) or (file_id in skip):
-                print("    skipping: https://plot.ly/{}/{}".format(un, file_id))
+                print("    skipping: https://plot.ly/{0}/{1}".format(
+                    un, file_id))
                 file_id += 1
             print("\n")
             try:
-                print("testing: https://plot.ly/{}/{}".format(un, file_id))
+                print("testing: https://plot.ly/{0}/{1}".format(un, file_id))
                 print("###########################################\n\n")
                 fig = py.get_figure('plotlyimagetest', str(file_id))
                 fig_raw = py.get_figure('plotlyimagetest',
@@ -126,8 +127,8 @@ def test_all():
             except exceptions.PlotlyError:
                 pass
             if (fig is None) and (fig_raw is None):
-                print("    couldn't find: https://plot.ly/{}/{}".format(un,
-                                                                        file_id))
+                print("    couldn't find: https://plot.ly/{0}/{1}".format(
+                    un, file_id))
             else:
                 compare_with_raw(fig, fig_raw, parents=['figure'])
             file_id += 1

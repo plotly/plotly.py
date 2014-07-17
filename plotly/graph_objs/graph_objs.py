@@ -179,7 +179,7 @@ class ListMeta(type):
         doc = "".join([line[min_indent:] + '\n' for line in doc.splitlines()])
         # Add section header for method list...
         doc += "Quick method reference:\n\n"
-        doc += "\t{}.".format(name) + "\n\t{}.".format(name).join(
+        doc += "\t{0}.".format(name) + "\n\t{0}.".format(name).join(
             ["update(changes)", "strip_style()", "get_data()",
              "to_graph_objs()", "validate()", "to_string()",
              "force_clean()"]) + "\n\n"
@@ -209,7 +209,7 @@ class DictMeta(type):
         doc = "".join([line[min_indent:] + '\n' for line in doc.splitlines()])
         # Add section header for method list...
         doc += "Quick method reference:\n\n"
-        doc += "\t{}.".format(name) + "\n\t{}.".format(name).join(
+        doc += "\t{0}.".format(name) + "\n\t{0}.".format(name).join(
             ["update(changes)", "strip_style()", "get_data()",
              "to_graph_objs()", "validate()", "to_string()",
              "force_clean()"]) + "\n\n"
@@ -236,7 +236,7 @@ class DictMeta(type):
                 try:
                     val_types = str(obj_info[key]['val_types'])
                     if typ == 'object':
-                        val_types = "{} object | ".format(KEY_TO_NAME[key]) + \
+                        val_types = "{0} object | ".format(KEY_TO_NAME[key])+\
                                     val_types
                 except KeyError:
                     val_types = undocumented
@@ -244,7 +244,7 @@ class DictMeta(type):
                     descr = str(obj_info[key]['description'])
                 except KeyError:
                     descr = undocumented
-                str_1 = "{} [required={}] (value={})".format(
+                str_1 = "{0} [required={1}] (value={2})".format(
                     key, required, val_types)
                 if "streamable" in obj_info[key] and obj_info[key]["streamable"]:
                     str_1 += " (streamable)"
@@ -256,7 +256,7 @@ class DictMeta(type):
                 doc += str_1 + str_2
                 # if a user can run help on this value, tell them!
                 if typ == "object":
-                    doc += "\n\t\tFor more, run `help(plotly.graph_objs.{" \
+                    doc += "\n\t\tFor more, run `help(plotly.graph_objs.{0" \
                            "})`\n".format(KEY_TO_NAME[key])
                 # if example usage exists, tell them!
                 if 'examples' in obj_info[key]:
@@ -607,7 +607,7 @@ class PlotlyDict(dict):
                         if not hasattr(self[key], '__iter__'):
                             del self[key]
                 except KeyError:  # TODO: Update the JSON
-                    # print "'type' not in {} for {}".format(obj_key, key)
+                    # print "'type' not in {0} for {1}".format(obj_key, key)
                     pass
 
     def get_data(self):
@@ -742,15 +742,15 @@ class PlotlyDict(dict):
                     if len(matching_objects):
                         notes += "That key is valid only in these objects:\n\n"
                         for obj in matching_objects:
-                            notes += "\t{}".format(KEY_TO_NAME[obj])
+                            notes += "\t{0}".format(KEY_TO_NAME[obj])
                             try:
-                                notes += '({}="{}")\n'.format(
+                                notes += '({0}="{1}")\n'.format(
                                     repr(key), INFO[obj][key]['val_types'])
                             except KeyError:
-                                notes += '({}="..")\n'.format(repr(key))
+                                notes += '({0}="..")\n'.format(repr(key))
                         notes.expandtabs()
                     else:
-                        notes += ("Couldn't find uses for key: {}\n\n"
+                        notes += ("Couldn't find uses for key: {0}\n\n"
                                   "".format(repr(key)))
                     raise exceptions.PlotlyDictKeyError(obj=self,
                                                         key=key,
