@@ -343,16 +343,16 @@ class PlotlyList(list):
                                                       entry=entry)
 
 
-    def update(self, changes, make_copies=True):
+    def update(self, changes, make_copies=False):
         """Update current list with changed_list, which must be iterable.
         The 'changes' should be a list of dictionaries, however,
         it is permitted to be a single dict object.
 
         Because mutable objects contain references to their values, updating
         multiple items in a list will cause the items to all reference the same
-        original set of objects. This behavior is usually not wanted and so
-        `make_copies=True` by default to deep copy the update items and
-        therefore break references. Add `make_copies=False` to change this.
+        original set of objects. To change this behavior add
+        `make_copies=True` which makes deep copies of the update items and
+        therefore break references. 
 
         """
         if isinstance(changes, dict):
