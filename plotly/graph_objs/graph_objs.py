@@ -345,9 +345,10 @@ class PlotlyList(list):
         if isinstance(changes, dict):
             changes = [changes]
         if immutable:
-             changes = [copy.deepcopy(changes)[j] 
-                        for i in range(len(self))
-                        for j in range(len(changes))]
+            N = len(self)
+            tmp = range(len(changes))*N
+            inds = tmp[0:N]
+            changes = [copy.deepcopy(changes[ind]) for ind in inds]
         self.to_graph_objs()
         for index in range(len(self)):
             try:
