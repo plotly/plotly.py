@@ -26,8 +26,10 @@ import warnings
 import collections
 import json
 import textwrap
+
 from .. import exceptions
-from .. import utils
+from plotly import utils
+
 
 __all__ = ["Data",
            "Annotations",
@@ -268,7 +270,7 @@ class DictMeta(type):
         return super(DictMeta, mcs).__new__(mcs, name, bases, attrs)
 
 
-class PlotlyList(list):
+class PlotlyList(list, metaclass=ListMeta):
     """A container for PlotlyDicts, inherits from standard list.
 
     Plotly uses lists and dicts as collections to hold information about a
@@ -287,7 +289,6 @@ class PlotlyList(list):
 
 
     """
-    __metaclass__ = ListMeta
 
     def __init__(self, *args):
         super(PlotlyList, self).__init__(*args)
@@ -493,7 +494,7 @@ class PlotlyList(list):
             del_ct += 1
 
 
-class PlotlyDict(dict):
+class PlotlyDict(dict, metaclass=DictMeta):
     """A base dict class for all objects that style a figure in plotly.
 
     A PlotlyDict can be instantiated like any dict object. This class
@@ -506,7 +507,6 @@ class PlotlyDict(dict):
     Any available methods that hold for a dict hold for a PlotlyDict.
 
     """
-    __metaclass__ = DictMeta
 
     def __init__(self, *args, **kwargs):
         class_name = self.__class__.__name__
@@ -552,7 +552,7 @@ class PlotlyDict(dict):
         self.to_graph_objs()
 
         if dict1 is not None:
-            for key, val in dict1.items():
+            for key, val in list(dict1.items()):
                 if key in self:
                     if isinstance(self[key], (PlotlyDict, PlotlyList)):
                         self[key].update(val)
@@ -562,7 +562,7 @@ class PlotlyDict(dict):
                     self[key] = val
 
         if len(dict2):
-            for key, val in dict2.items():
+            for key, val in list(dict2.items()):
                 if key in self:
                     if isinstance(self[key], (PlotlyDict, PlotlyList)):
                         self[key].update(val)
@@ -592,7 +592,7 @@ class PlotlyDict(dict):
         """
         self.to_graph_objs()
         obj_key = NAME_TO_KEY[self.__class__.__name__]
-        keys = self.keys()
+        keys = list(self.keys())
         for key in keys:
             if isinstance(self[key], (PlotlyDict, PlotlyList)):
                 self[key].strip_style()
@@ -611,7 +611,7 @@ class PlotlyDict(dict):
         class_name = self.__class__.__name__
         obj_key = NAME_TO_KEY[class_name]
         d = dict()
-        for key, val in self.items():
+        for key, val in list(self.items()):
             if isinstance(val, (PlotlyDict, PlotlyList)):
                 d[key] = val.get_data()
             else:
@@ -620,13 +620,13 @@ class PlotlyDict(dict):
                         d[key] = val
                 except KeyError:
                     pass
-        keys = d.keys()
+        keys = list(d.keys())
         for key in keys:
             if isinstance(d[key], (dict, list)):
                 if len(d[key]) == 0:
                     del d[key]
         if len(d) == 1:
-            d = d.values()[0]
+            d = list(d.values())[0]
         return d
 
     def to_graph_objs(self, caller=True):
@@ -639,7 +639,7 @@ class PlotlyDict(dict):
 
         """
         info_key = NAME_TO_KEY[self.__class__.__name__]
-        keys = self.keys()
+        keys = list(self.keys())
         for key in keys:
             if isinstance(self[key], (PlotlyDict, PlotlyList)):
                 try:
@@ -665,7 +665,7 @@ class PlotlyDict(dict):
                                 val_types=val_types,
                                 notes="value needs to be dictionary-like"
                             )
-                        for k, v in self.pop(key).items():
+                        for k, v in list(self.pop(key).items()):
                             obj[k] = v  # finish up momentarily...
                     else:  # if not PlotlyDict, it MUST be a PlotlyList
                         if not isinstance(self[key], list):
@@ -708,7 +708,7 @@ class PlotlyDict(dict):
                 err.prepare()
                 raise
         obj_key = NAME_TO_KEY[self.__class__.__name__]
-        for key, val in self.items():
+        for key, val in list(self.items()):
             if isinstance(val, (PlotlyDict, PlotlyList)):
                 try:
                     val.validate(caller=False)
@@ -843,7 +843,7 @@ class PlotlyDict(dict):
         del_keys = [key for key in self if str(key) not in INFO[obj_key]]
         for key in del_keys:
             del self[key]
-        keys = self.keys()
+        keys = list(self.keys())
         for key in keys:
             try:
                 self[key].force_clean(caller=False)  # TODO: add error handling
@@ -889,7 +889,7 @@ class Data(PlotlyList):
                         index=index
                     )
                 obj = NAME_TO_CLASS[obj_name]()  # don't hide if KeyError!
-                for k, v in entry.items():
+                for k, v in list(entry.items()):
                     obj[k] = v
                 self[index] = obj
             if not isinstance(self[index], PlotlyTrace):  # Trace ONLY!!!
@@ -939,7 +939,7 @@ class Annotations(PlotlyList):
                     )
             elif isinstance(entry, dict):
                 obj = Annotation()
-                for k, v in entry.items():
+                for k, v in list(entry.items()):
                     obj[k] = v
                 self[index] = obj
             else:
@@ -1253,7 +1253,7 @@ class Layout(PlotlyDict):
         appropriate `kind`.
 
         """
-        keys = self.keys()
+        keys = list(self.keys())
         for key in keys:
             if key[:5] in ['xaxis', 'yaxis']:  # allows appended integers!
                 try:
@@ -1267,7 +1267,7 @@ class Layout(PlotlyDict):
                         obj = XAxis()
                     else:
                         obj = YAxis()
-                    for k, v in self.pop(key).items():
+                    for k, v in list(self.pop(key).items()):
                         obj[k] = v
                     self[key] = obj  # call to super will call 'to_graph_objs'
         super(Layout, self).to_graph_objs(caller=caller)
@@ -1366,7 +1366,7 @@ class Layout(PlotlyDict):
                     del self[key]
             else:
                 del self[key]
-        keys = self.keys()
+        keys = list(self.keys())
         for key in keys:
             try:
                 self[key].force_clean(caller=False)  # TODO error handling??

@@ -114,17 +114,17 @@ def decode_unicode(coll):
             if isinstance(entry, (dict, list)):
                 coll[no] = decode_unicode(entry)
             else:
-                if isinstance(entry, unicode):
+                if isinstance(entry, str):
                     try:
                         coll[no] = str(entry)
                     except UnicodeEncodeError:
                         pass
     elif isinstance(coll, dict):
-        keys, vals = coll.keys(), coll.values()
+        keys, vals = list(coll.keys()), list(coll.values())
         for key, val in zip(keys, vals):
             if isinstance(val, (dict, list)):
                 coll[key] = decode_unicode(val)
-            elif isinstance(val, unicode):
+            elif isinstance(val, str):
                 try:
                     coll[key] = str(val)
                 except UnicodeEncodeError:

@@ -7,9 +7,12 @@ with the matplotlylib package.
 
 """
 import warnings
-from . mplexporter import Exporter, Renderer
+
+from . mplexporter import Renderer
 from . import mpltools
-from .. graph_objs import *
+from ..plotly.graph_objs import *
+
+
 
 # Warning format
 def warning_on_one_line(message, category, filename, lineno, file=None, line=None):

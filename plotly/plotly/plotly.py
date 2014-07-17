@@ -14,16 +14,19 @@ and ploty's servers.
 4. update plot_options with kwargs!
 
 """
-import requests
-import chunked_requests
 import json
 import warnings
 import copy
 import os
+
+import requests
+
+from . import chunked_requests
 from .. import utils  # TODO make non-relative
 from .. import tools
 from .. import exceptions
-from .. import version
+from plotly import version
+
 
 __all__ = ["sign_in", "update_plot_options", "get_plot_options",
            "get_credentials", "iplot", "plot", "iplot_mpl", "plot_mpl",
@@ -160,7 +163,7 @@ def plot(figure_or_data, validate=True, **plot_options):
                                          "plot option.\nHere's why you're "
                                          "seeing this error:\n\n{}".format(err))
     for entry in figure['data']:
-        for key, val in entry.items():
+        for key, val in list(entry.items()):
             try:
                 if len(val) > 40000:
                     msg = ("Woah there! Look at all those points! Due to "
@@ -658,11 +661,11 @@ def _send_to_plotly(figure, **plot_options):
     r.raise_for_status()
     r = json.loads(r.text)
     if 'error' in r and r['error'] != '':
-        print(r['error'])
+        print((r['error']))
     if 'warning' in r and r['warning'] != '':
         warnings.warn(r['warning'])
     if 'message' in r and r['message'] != '':
-        print(r['message'])
+        print((r['message']))
 
     return r
 
