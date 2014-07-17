@@ -26,4 +26,4 @@ Modules:
 
 """
 
-from plotly import plotly, graph_objs, tools, utils
+from . import plotly, graph_objs, tools, utils
