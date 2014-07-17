@@ -23,14 +23,18 @@ from a dict/list JSON representation.
 
 """
 import warnings
-import collections
-import json
 import textwrap
 import six
-
+import sys
 from .. import exceptions
 from plotly import utils
 
+if sys.version[:3] == '2.6':
+    from ordereddict import OrderedDict
+    import simplejson as json
+else:
+    from collections import OrderedDict
+    import json
 
 __all__ = ["Data",
            "Annotations",
@@ -70,7 +74,7 @@ __all__ = ["Data",
 from pkg_resources import resource_string
 s = resource_string('plotly',
                     'graph_reference/graph_objs_meta.json').decode('utf-8')
-INFO = json.loads(s, object_pairs_hook=collections.OrderedDict)
+INFO = json.loads(s, object_pairs_hook=OrderedDict)
 
 INFO = utils.decode_unicode(INFO)
 
@@ -811,7 +815,7 @@ class PlotlyDict(dict):
                 err.prepare()
                 raise
         obj_type = NAME_TO_KEY[self.__class__.__name__]
-        ordered_dict = collections.OrderedDict()
+        ordered_dict = OrderedDict()
         # grab keys like xaxis1, xaxis2, etc...
         unordered_keys = [key for key in self if key not in INFO[obj_type]]
         for key in INFO[obj_type]:
