@@ -336,25 +336,32 @@ class PlotlyList(list):
                                                       entry=entry)
 
 
-    def update(self, changes, immutable=False):
+    def update(self, changes, make_copies=True):
         """Update current list with changed_list, which must be iterable.
         The 'changes' should be a list of dictionaries, however,
         it is permitted to be a single dict object.
 
+        Because mutable objects contain references to their values, updating
+        multiple items in a list will cause the items to all reference the same
+        original set of objects. This behavior is usually not wanted and so
+        `make_copies=True` by default to deep copy the update items and
+        therefore break references. Add `make_copies=False` to change this.
+
         """
         if isinstance(changes, dict):
             changes = [changes]
-        if immutable:
-            N = len(self)
-            tmp = range(len(changes))*N
-            inds = tmp[0:N]
-            changes = [copy.deepcopy(changes[ind]) for ind in inds]
         self.to_graph_objs()
         for index in range(len(self)):
             try:
-                self[index].update(changes[index % len(changes)])
+                update = changes[index % len(changes)]
             except ZeroDivisionError:
                 pass
+            else:
+                if make_copies:
+                    self[index].update(copy.deepcopy(update))
+                else:
+                    self[index].update(update)
+
 
     def strip_style(self):
         """Strip style from the current representation.
