@@ -71,7 +71,8 @@ def ensure_local_plotly_files():
         for fn in [CREDENTIALS_FILE, CONFIG_FILE]:
             contents = utils.load_json_dict(fn)
             for key, val in list(_FILE_CONTENT[fn].items()):
-                if key not in contents or not isinstance(contents[key], type(val)):
+                # TODO: removed type checking below, may want to revisit
+                if key not in contents:
                     contents[key] = val
             contents_keys = list(contents.keys())
             for key in contents_keys:
@@ -97,7 +98,7 @@ def set_credentials_file(username=None, api_key=None, stream_ids=None):
     if not _file_permissions:
         raise exceptions.PlotlyError("You don't have proper file permissions "
                                      "to run this function.")
-    # ensure_local_plotly_files()  # make sure what's there is OK
+    ensure_local_plotly_files()  # make sure what's there is OK
     credentials = get_credentials_file()
     if isinstance(username, str):
         credentials['username'] = username
@@ -106,7 +107,7 @@ def set_credentials_file(username=None, api_key=None, stream_ids=None):
     if isinstance(stream_ids, (list, tuple)):
         credentials['stream_ids'] = stream_ids
     utils.save_json_dict(CREDENTIALS_FILE, credentials)
-    # ensure_local_plotly_files()  # make sure what we just put there is OK
+    ensure_local_plotly_files()  # make sure what we just put there is OK
 
 
 def get_credentials_file(*args):
@@ -119,17 +120,17 @@ def get_credentials_file(*args):
 
     """
     if _file_permissions:
-        # ensure_local_plotly_files()  # make sure what's there is OK
+        ensure_local_plotly_files()  # make sure what's there is OK
         return utils.load_json_dict(CREDENTIALS_FILE, *args)
     else:
         return _FILE_CONTENT[CREDENTIALS_FILE]
 
 
 def reset_credentials_file():
-    # ensure_local_plotly_files()  # make sure what's there is OK
+    ensure_local_plotly_files()  # make sure what's there is OK
     f = open(CREDENTIALS_FILE, 'w')
     f.close()
-    # ensure_local_plotly_files()  # put the defaults back
+    ensure_local_plotly_files()  # put the defaults back
 
 
 # def show_credentials_file(*args):  # TODO, can we lose this?
@@ -157,14 +158,14 @@ def set_config_file(plotly_domain=None, plotly_streaming_domain=None):
     if not _file_permissions:
         raise exceptions.PlotlyError("You don't have proper file permissions "
                                      "to run this function.")
-    # ensure_local_plotly_files()  # make sure what's there is OK
+    ensure_local_plotly_files()  # make sure what's there is OK
     settings = get_config_file()
     if isinstance(plotly_domain, str):
         settings['plotly_domain'] = plotly_domain
     if isinstance(plotly_streaming_domain, str):
         settings['plotly_streaming_domain'] = plotly_streaming_domain
     utils.save_json_dict(CONFIG_FILE, settings)
-    # ensure_local_plotly_files()  # make sure what we just put there is OK
+    ensure_local_plotly_files()  # make sure what we just put there is OK
 
 
 def get_config_file(*args):
@@ -177,17 +178,17 @@ def get_config_file(*args):
 
     """
     if _file_permissions:
-        # ensure_local_plotly_files()  # make sure what's there is OK
+        ensure_local_plotly_files()  # make sure what's there is OK
         return utils.load_json_dict(CONFIG_FILE, *args)
     else:
         return _FILE_CONTENT[CONFIG_FILE]
 
 
 def reset_config_file():
-    # ensure_local_plotly_files()  # make sure what's there is OK
+    ensure_local_plotly_files()  # make sure what's there is OK
     f = open(CONFIG_FILE, 'w')
     f.close()
-    # ensure_local_plotly_files()  # put the defaults back
+    ensure_local_plotly_files()  # put the defaults back
 
 
 ### embed tools ###
