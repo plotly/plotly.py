@@ -10,7 +10,7 @@ def readme():
 
 setup(name='plotly',
       version=__version__,
-      use_2to3=True,
+      use_2to3=False,
       author='Chris P',
       author_email='chris@plot.ly',
       maintainer='Chris P',
