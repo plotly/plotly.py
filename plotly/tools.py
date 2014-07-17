@@ -20,8 +20,8 @@ from . import exceptions
 
 
 # Warning format
-from . import graph_objs, matplotlylib
-
+from . import matplotlylib
+from . graph_objs import graph_objs
 
 def warning_on_one_line(message, category, filename, lineno, file=None, line=None):
     return '%s:%s: %s:\n\n%s\n\n' % (filename, lineno, category.__name__, message)
