@@ -24,7 +24,13 @@ def load_json_dict(filename, *args):
             except:
                 pass # TODO: issue a warning and bubble it up
         if args:
-            return {key: data[key] for key in args if key in data}
+            d = dict()
+            for key in args:
+                if key in data:
+                    d[key] = data[key]
+            return d
+            # TODO: replace with below if we drop Python 2.6 compatibility
+            # return {key: data[key] for key in args if key in data}
     return data
 
 
