@@ -25,7 +25,7 @@ from . import chunked_requests
 from .. import utils  # TODO make non-relative
 from .. import tools
 from .. import exceptions
-from plotly import version
+from .. import version
 
 
 __all__ = ["sign_in", "update_plot_options", "get_plot_options",
