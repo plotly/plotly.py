@@ -44,7 +44,7 @@ _credentials = dict()
 _plot_options = dict()
 
 ### test file permissions and make sure nothing is corrupted ###
-tools.ensure_local_plotly_files()
+# tools.ensure_local_plotly_files()
 
 ### _credentials stuff ###
 
