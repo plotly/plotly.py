@@ -26,6 +26,7 @@ import warnings
 import collections
 import json
 import textwrap
+import copy
 from .. import exceptions
 from .. import utils
 
@@ -335,7 +336,7 @@ class PlotlyList(list):
                                                       entry=entry)
 
 
-    def update(self, changes):
+    def update(self, changes, immutable=False):
         """Update current list with changed_list, which must be iterable.
         The 'changes' should be a list of dictionaries, however,
         it is permitted to be a single dict object.
@@ -343,6 +344,10 @@ class PlotlyList(list):
         """
         if isinstance(changes, dict):
             changes = [changes]
+        if immutable:
+             changes = [copy.deepcopy(changes)[j] 
+                        for i in range(len(self))
+                        for j in range(len(changes))]
         self.to_graph_objs()
         for index in range(len(self)):
             try:
