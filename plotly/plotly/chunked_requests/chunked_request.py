@@ -61,7 +61,7 @@ class Stream:
             msglen = format(len(msg), 'x')  # msg length in hex
             # Send the message in chunk-encoded form
             self._conn.send('{msglen}\r\n{msg}\r\n'
-                            .format(msglen=msglen, msg=msg))
+                            .format(msglen=msglen, msg=msg).encode('utf-8'))
         except http_client.socket.error:
             self._reconnect()
             self.write(data)
@@ -103,7 +103,7 @@ class Stream:
         # For some reason, either Python or node.js seems to
         # require an extra \r\n.
         try:
-            self._conn.send('\r\n0\r\n\r\n')
+            self._conn.send('\r\n0\r\n\r\n'.encode('utf-8'))
         except http_client.socket.error:
             # In case the socket has already been closed
             return ''
