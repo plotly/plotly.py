@@ -29,3 +29,4 @@ Modules:
 from __future__ import absolute_import
 
 from plotly import plotly, graph_objs, tools, utils
+from plotly.version import __version__
