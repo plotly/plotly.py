@@ -1,46 +1,97 @@
-The ultimate reference of Plotly's JSON graph format.
+# Plotly Graph Reference
 
-Used as the help reference in [Plotly-Python library](https://github.com/plotly/python-api) and in [Plotly's web documentation](https://plot.ly/api/rest).
+*Welcome to the ultimate reference of Plotly's JSON graph format!*
 
-#### Files in this repo:
+Or just graph reference for short.
 
-- For reference, see [graph_objs_meta.json](/graph_objs_meta.json)
-- To contribute, edit [graph_objs_meta.py](/graph_objs_meta.py)
+Graph reference is used:
+
+- in Plotly's API online documentation:
+  [Python](https://plot.ly/python/reference/),
+  [MATLAB](https://plot.ly/matlab/reference/),
+  [R](https://plot.ly/r/reference/), 
+  [node.js](https://plot.ly/nodejs/reference/) and
+  [Julia](https://plot.ly/julia/reference/),
+
+- in the output of our APIs' help functions.
 
 
-#### Format
+### Files in this repo:
 
-A fully described `key` is an object with the keys: `val_types`, `required`, `type`, `description`. 
-- `val_types`: Valid types (e.g. `array_like of strings`, `number: in [0, 1]`)
-- `required`: Whether the key is required or not to create the chart type
-- `type`: `style` | `plot_info` | `object` | `data`
-- `description`: Self explanatory 
+- `CONTRIBUTING.md` : info on how to contribute to this repo
 
-#### Contributing
-1 - Add and modified keys in the `graph_objs_meta.py` file.  There are a bunch of shortcuts in that file, so you might have to hunt around a bit to check if something was already defined or not.
+- `graph_objs_meta.py` : Meta-generating script
 
-2 - Generate JSON
-```bash
-python graph_objs_meta.py
-```
+- `graph_objs_meta-toc.md` : Table of content for meta-generating file
 
-3 - Commit and push
+- `graph_objs_keys.py` : JSON of all Plotly keys
 
-Alternatively, if you're working directly in master, like a boss, you can do this:
-1 - Add and modified keys in the `graph_objs_meta.py` file.
+- `graph_objs_meta.json` : JSON of (all) META of all Plotly keys
 
-2 - MAKE SURE YOU PULL FIRST! (no one likes dealing with conflicts...)
-```bash
-git pull origin master
-```
+- `graph_objs_checklist.json` : List of undocumented keys 
 
-3 - Use the little makefile shortcut to generate the json, add, commit, and push
-```bash
-make push
-```
+- `test_graph_reference.py` : Test script
 
-#### Testing
+- `circle.yml` : Tells Circle to run test
 
-When you upload to any branch, Nose is going to test the
-test_graph_references.py file. To see if you're push passed, go to:
-https://circleci.com/gh/plotly/graph_reference
+- `__init__.py` : to support relative imports
+
+
+### Philosophy
+
+* All Plotly meta should be generated using a single (Python) file (this is
+  `graph_objs_meta.py`). This meta-generating script should be clean and
+  well-organized (see `graph_objs_meta-toc.md`).
+
++ All Plotly keys should be contained in a single JSON file (this is
+  `graph_objs_keys.json`).
+
++ Every Plotly API should have its own meta JSON file, with meta consistent with
+  each language's terminology (coming soon).
+
+* A fully described key is an object with the keys: 
+  1. `'required'`: whether the key is required or not to create the chart type,
+  1. `'type'`: &nbsp; **IMPORTANT**  <br> `'data'` the only keys that remain
+  after`.get_data()`<br> `'style'` keys that are stripped by `.strip_style()`,
+  <br> `'plot_info'` keys that not affected by `.strip_style()`, i.e.
+  *information specific to a given figure or, in other words, information that
+  cannot be transplanted to other figures* <br> `'object'` keys that are to be
+  linked to another object
+  1. `'val_types'`: valid types (e.g. array-like of strings, number: in [0, 1]),
+  1. `'description'`: making help helpful!
+
+* Additionally, there are two optional keys: 
+
+  1. `'streamable'`: whether not this key can be streamed using the Streaming
+     API,
+  1. `'examples'`: list of examples of accepted values for this key.
+
+* Repetition in the meta-generating file should be kept to a minimum.  More
+  precisely, meta for keys that are contained in more than 1 object and that
+  show significant similarities, is generated using shortcuts. In
+  `graph_objs_meta.py`, the meta-generating shortcuts come in two flavors:
+  1. functions, named `make_<key>` e.g. `make_x`, used when small discrepancies
+  occur from object to object.
+  1. dictionaries, named `drop_<key>` e.g. `drop_ visisble`, used when the exact
+  same meta is used for all objects containing a particular key.
+
+  Regardless of flavor, all shortcuts are labelled as `@key@` in
+  `graph_objs_meta.py` making navigation between objects, keys and shortcuts a
+  breeze.
+  
+### Glossary
+
+* `#Q`: in `graph_objs_meta.py` these comments refer to questions about Plotly's
+  functionality.
+* `#TODO!`: in `graph_objs_meta.py` these comments refer to tasks that remain
+  to be completed.
+* Artifact (or `#ARTIFACT`): Artifact keys are keys that not intended for API
+  use (i.e. meant for GUI use), but that must remain part of graph reference to 
+  ensure reproducibility. Artifact keys should be placed last in each graph
+  objects. 
+* Obsolete: Obsolete keys are keys no longer relevant in both from the APIs and
+  the GUI. Obsolete keys must be dropped from graph reference.
+
+### How to contribute?
+
+See `CONTRIBUTING.md`.

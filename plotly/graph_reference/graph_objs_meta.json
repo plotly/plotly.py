@@ -15,23 +15,23 @@
             "streamable": true
         }, 
         "r": {
-            "val_types": "array-like of numbers, strings, datetimes", 
-            "required": " when 'x' and 'y' are unset", 
+            "val_types": "array-like of numbers", 
+            "required": " when making a Polar Chart", 
             "type": "data", 
-            "description": "For Polar charts only. The radial coordinates of the points in this polar scatter trace.", 
+            "description": "For Polar charts only. The radial coordinates of the points in this polar scatter trace about the origin.", 
             "streamable": true
         }, 
         "t": {
             "val_types": "array-like of numbers, strings, datetimes", 
-            "required": " when 'x' and 'y' are unset", 
+            "required": " when making a Polar Chart", 
             "type": "data", 
-            "description": "For Polar charts only. The angular coordinates of the points in this polar scatter trace.", 
+            "description": "For Polar charts only. The angular coordinates of the points in this polar scatter trace. By default, the angular coordinates are in degrees (0 to 360) where the angles are measured clockwise about the right-hand side of the origin. To change this behavior, modify 'range' in AngularAxis or/and 'direction' in Layout. If 't' is linked to an array-like of strings, then the angular coordinates are [0, 360\\N, 2*360/N, ...] where N is the number of coordinates given labeled by the array-like of strings linked to 't'.", 
             "streamable": true
         }, 
         "mode": {
             "val_types": "'lines' | 'markers' | 'text' | 'lines+markers' | 'lines+text' | 'markers+text' | 'lines+markers+text'", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "style", 
             "description": "Plotting mode (or style) for the scatter plot. If the mode includes 'text' then the 'text' will appear at the (x,y) points, otherwise it will appear on hover."
         }, 
         "name": {
@@ -158,30 +158,16 @@
     "bar": {
         "x": {
             "val_types": "array-like of numbers, strings, datetimes", 
-            "required": " when 'y','r' and 't' are unset", 
+            "required": " when 'y' is unset", 
             "type": "data", 
             "description": "The x coordinates of the bars. If 'x' is linked to an list or array of strings, then the x coordinates are integers [0,1,2,3, ...] labeled on the x-axis by the list or array of strings linked to 'x'. If 'y' is not set, the bars are plotted horizontally, with their length determined by the list or array linked to 'x'.", 
             "streamable": true
         }, 
         "y": {
             "val_types": "array-like of numbers, strings, datetimes", 
-            "required": " when 'x','r' and 't' are unset", 
+            "required": " when 'x' is unset", 
             "type": "data", 
             "description": "The y coordinates of the bars. If 'y' is linked to an list or array of strings, then the y coordinates are integers [0,1,2,3, ...] labeled on the y-axis by the list or array of strings linked to 'y'. If 'x' is not set, the bars are plotted vertically, with their length determined by the list or array linked to 'y'.", 
-            "streamable": true
-        }, 
-        "r": {
-            "val_types": "array-like of numbers, strings, datetimes", 
-            "required": " when 'x' and 'y' are unset", 
-            "type": "data", 
-            "description": "For Polar charts only. The radial coordinates of the bars in this polar bar trace", 
-            "streamable": true
-        }, 
-        "t": {
-            "val_types": "array-like of numbers, strings, datetimes", 
-            "required": " when 'x' and 'y' are unset", 
-            "type": "data", 
-            "description": "For Polar charts only. The angular coordinates of the bars in this polar bar trace.", 
             "streamable": true
         }, 
         "name": {
@@ -191,9 +177,9 @@
             "description": "The label associated with this trace. This name will appear in the legend, on hover and in the column header in the online spreadsheet."
         }, 
         "orientation": {
-            "val_types": "array-like of numbers, strings, datetimes", 
+            "val_types": "'v' | 'h'", 
             "required": false, 
-            "type": "style", 
+            "type": "plot_info", 
             "description": "This defines the direction of the bars. If set to 'v', the length of each bar will run vertically. If set to 'h', the length of each bar will run horizontally"
         }, 
         "text": {
@@ -266,6 +252,20 @@
             "type": "plot_info", 
             "description": "Plotly identifier for this data's trace type.  This defines how this  data dictionary will be handled.  For example, 'scatter' type expects  x and y data-arrays corresponding to (x, y) coordinates whereas a 'histogram' only requires a single x or y array  and a 'heatmap' type requires a z matrix."
         }, 
+        "r": {
+            "val_types": "array-like of numbers", 
+            "required": " when making a Polar Chart", 
+            "type": "data", 
+            "description": "For Polar charts only. The radial coordinates of the bars in this polar bar trace about the original; that is, the radial extent of each bar.", 
+            "streamable": true
+        }, 
+        "t": {
+            "val_types": "array-like of numbers, strings, datetimes", 
+            "required": " when making a Polar Chart", 
+            "type": "data", 
+            "description": "For Polar charts only. The angular coordinates of the bars in this polar bar trace. By default, the angular coordinates are in degrees (0 to 360) where the angles are measured clockwise about the right-hand side of the origin. To change this behavior, modify 'range' in AngularAxis or/and 'direction' in Layout. If 't' is linked to an array-like of strings, then the angular coordinates are [0, 360\\N, 2*360/N, ...] where N is the number of coordinates given labeled by the array-like of strings linked to 't'.", 
+            "streamable": true
+        }, 
         "line": {
             "val_types": "dictionary-like", 
             "required": false, 
@@ -283,14 +283,14 @@
     "histogram": {
         "x": {
             "val_types": "array-like of numbers, strings, datetimes", 
-            "required": " when 'y','r' and 't' are unset", 
+            "required": " when 'y' is unset", 
             "type": "data", 
             "description": "The data sample to be binned (done by Plotly) on the x-axis and plotted as vertical bars.", 
             "streamable": true
         }, 
         "y": {
             "val_types": "array-like of numbers, strings, datetimes", 
-            "required": " when 'x','r' and 't' are unset", 
+            "required": " when 'x' is unset", 
             "type": "data", 
             "description": "The data sample to be binned (done by Plotly) on the y-axis and plotted as horizontal bars.", 
             "streamable": true
@@ -298,7 +298,7 @@
         "histnorm": {
             "val_types": "'' (or 'count') | 'percent' | 'probability' | 'density' | 'probability density'", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "style", 
             "description": "If histnorm is not specified, or histnorm='' (empty string), the height of each bar displays the frequency of occurrence, i.e., the number of times this value was found in the corresponding bin. If histnorm='percent', the height of each bar displays the percentage of total occurrences found within the corresponding bin. If histnorm='probability', the height of each bar displays the probability that an event will fall into the corresponding bin. If histnorm='density', the height of each bar is equal to the number of occurrences in a bin divided by the size of the bin interval such that summing the area of all bins will yield the total number of occurrences. If histnorm='probability density', the height of each bar is equal to the number of probability that an event will fall into the corresponding bin divided by the size of the bin interval such that summing the area of all bins will yield 1, i.e. an event must fall into one of the bins."
         }, 
         "name": {
@@ -310,7 +310,7 @@
         "autobinx": {
             "val_types": "boolean: True | False", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "style", 
             "description": "Toggle whether or not the x-axis bin parameters are picked automatically by Plotly. Once 'autobinx' is set to False, the x-axis bins parameters can be declared in the XBins object."
         }, 
         "nbinsx": {
@@ -328,7 +328,7 @@
         "autobiny": {
             "val_types": "boolean: True | False", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "style", 
             "description": "Toggle whether or not the y-axis bin parameters are picked automatically by Plotly. Once 'autobiny' is set to False, the y-axis bins parameters can be declared in the YBins object."
         }, 
         "nbinsy": {
@@ -421,9 +421,9 @@
             "streamable": true
         }, 
         "orientation": {
-            "val_types": "array-like of numbers, strings, datetimes", 
+            "val_types": "'v' | 'h'", 
             "required": false, 
-            "type": "style", 
+            "type": "plot_info", 
             "description": "Web GUI Artifact. Histogram orientation is determined by which of 'x' or 'y' the data sample is linked to."
         }
     }, 
@@ -432,7 +432,7 @@
             "val_types": "array-like of numbers, strings, datetimes", 
             "required": true, 
             "type": "data", 
-            "description": "This array is used to define an individual box plot, or, a concatenation of multiple boxplots. Statistics from these numbers define the bounds of the box, the length of the whiskers, etc. For details on defining multiple boxes with locations see 'x'.", 
+            "description": "This array is used to define an individual box plot, or, a concatenation of multiple box plots. Statistics from these numbers define the bounds of the box, the length of the whiskers, etc. For details on defining multiple boxes with locations see 'x'. Each box spans from the first quartile to the third. The second quartile is marked by a line inside the box. By default, the whiskers are correspond to box' edges +/- 1.5 times the interquartile range. See also 'boxpoints' for more info", 
             "streamable": true
         }, 
         "x0": {
@@ -455,35 +455,35 @@
             "type": "data", 
             "description": "The label associated with this trace. This name will appear in the legend, on hover and in the column header in the online spreadsheet."
         }, 
-        "boxpoints": {
-            "val_types": "'all' | 'outliers' | 'suspectedoutliers' | False", 
-            "required": false, 
-            "type": "plot_info", 
-            "description": "If 'all' then the 'y' points are shown with the box. If 'outliers' then only the 'outliers' of the 'y' points are shown. If False then no points are shown."
-        }, 
         "boxmean": {
             "val_types": "False | True | 'sd'", 
             "required": false, 
             "type": "style", 
-            "description": "If True then the mean of the y-points is shown as a dashed line in the box. If 'sd', then the standard deviation is also shown. If False, then no line shown."
+            "description": "Choose between add-on features for this box trace. If True then the mean of the data linked to 'y' is shown as a dashed line in the box. If 'sd', then the standard deviation is also shown. If False (the default), then no line shown."
         }, 
-        "jitter": {
-            "val_types": "number in [0, 1]", 
+        "boxpoints": {
+            "val_types": "'outliers' | 'all' | 'suspectedoutliers' | False", 
             "required": false, 
             "type": "style", 
-            "description": "Width of the jittered scatter. If 0, then the boxpoints are aligned vertically, if 1 then the points are randomly jittered horizontally up to the width of the box."
+            "description": "Choose between boxpoints options for this box trace. If 'outliers' (the default), then only the points lying outside the box' whiskers (more info in 'y') are shown. If 'all', then all data points linked 'y' are shown. If 'suspectedoutliers', then outliers points are shown and points either less than 4*Q1-3*Q3 or greater than 4*Q3-3*Q1 are highlighted (with 'outliercolor' in Marker). If False, then only the boxes are shown and the whiskers correspond to the minimum and maximum value linked to 'y'."
+        }, 
+        "jitter": {
+            "val_types": "number: x in [0, 1]", 
+            "required": false, 
+            "type": "style", 
+            "description": "Sets the width of the jitter in the boxpoints scatter in this trace. Has an no effect if 'boxpoints' is set to False. If 0, then the boxpoints are aligned vertically. If 1 then the boxpoints are placed in a random horizontal jitter of width equal to the width of the boxes."
         }, 
         "pointpos": {
             "val_types": "number: x in [-2, 2]", 
             "required": false, 
             "type": "style", 
-            "description": "Horizontal position of the center of the boxpoints relative to the center and width of the box."
+            "description": "Sets the horizontal position of the boxpoints in relation to the boxes in this trace. Has an no effect if 'boxpoints' is set to False. If 0, then the boxpoints are placed over the center of each box. If 1 (-1), then the boxpoints are placed on the right (left) each box border. If 2 (-2), then the boxpoints are  placed 1 one box width to right (left) of each box. "
         }, 
         "whiskerwidth": {
             "val_types": "number: x in [0, 1]", 
             "required": false, 
             "type": "style", 
-            "description": "Width of the whisker of the box relative to the box' width (in normalized coordinates, e.g. if 'whiskerwidth' set 1, then the whiskers are as wide as the box."
+            "description": "Sets the width of the whisker of the box relative to the box' width (in normalized coordinates, e.g. if 'whiskerwidth' set 1, then the whiskers are as wide as the box."
         }, 
         "fillcolor": {
             "val_types": "string describing color", 
@@ -502,7 +502,7 @@
             "val_types": "dictionary-like", 
             "required": false, 
             "type": "object", 
-            "description": "A dictionary-like object containing marker style parameters for this the box points of box trace. Has an effect only 'boxpoints' is set to 'outliers' or 'all'.", 
+            "description": "A dictionary-like object containing marker style parameters for this the boxpoints of box trace. Has an effect only 'boxpoints' is set to 'outliers', 'suspectedoutliers' or 'all'.", 
             "streamable": true
         }, 
         "line": {
@@ -558,7 +558,7 @@
     "heatmap": {
         "z": {
             "val_types": "matrix-like: list of lists, numpy.matrix", 
-            "required": false, 
+            "required": true, 
             "type": "data", 
             "description": "The data that describes the mapping. The dimensions of the 'z' matrix are (n x m) where there are 'n' ROWS defining the number of partitions along the y-axis; this is equal to the length of the 'y' array. There are 'm' COLUMNS defining the number of partitions along the x-axis; this is equal to the length of the 'x' array. Therefore, the color of the cell z[i][j] is mapped to the ith partition of the y-axis (starting from the bottom of the plot) and the jth partition of the x-axis (starting from the left of the plot). In Python, a (non-numpy) matrix is best thought of as a list of lists (of lists, of lists, etc.). Therefore, running len(z) will give you the number of ROWS and running len(z[0]) will give you the number of COLUMNS. If you ARE using numpy, then running z.shape will give you the tuple, (n, m), e.g., (3, 5).", 
             "streamable": true
@@ -567,14 +567,14 @@
             "val_types": "array-like of numbers, strings, datetimes", 
             "required": false, 
             "type": "data", 
-            "description": "This array-like value contains the horizontal coordinates referring to the columns of the 'z' matrix. if strings, the x-labels are spaced evenly.if the dimensions of z are (n x m), the length of the 'x' array should be 'm'.", 
+            "description": "This array-like value contains the horizontal coordinates referring to the columns of the 'z' matrix. if strings, the x-labels are spaced evenly. If the dimensions of z are (n x m), the length of the 'x' array should be 'm'.", 
             "streamable": true
         }, 
         "y": {
             "val_types": "array-like of numbers, strings, datetimes", 
             "required": false, 
             "type": "data", 
-            "description": "This array-like value contains the vertical coordinates referring to the rows of the 'z' matrix. If strings, the y-labels are spaced evenly.If the dimensions of z are (n x m), the length of the 'y' array should be 'n'.", 
+            "description": "This array-like value contains the vertical coordinates referring to the rows of the 'z' matrix. If strings, the y-labels are spaced evenly. If the dimensions of z are (n x m), the length of the 'y' array should be 'n'.", 
             "streamable": true
         }, 
         "name": {
@@ -593,20 +593,21 @@
             "val_types": "number", 
             "required": false, 
             "type": "style", 
-            "description": "The value used as the minimum in the color scale normalization in 'scl'. The default value is the minimum of the 'z' data values."
+            "description": "Sets the minimum 'z' data value to be resolved by the color scale. Its default value is the minimum of the 'z' data values. This value will be used as the minimum in the color scale normalization. For more info see 'colorscale'."
         }, 
         "zmax": {
             "val_types": "number", 
             "required": false, 
             "type": "style", 
-            "description": "The value used as the maximum in the color scale normalization in 'scl'. The default value is the maximum of the 'z' data values."
+            "description": "Sets the maximum 'z' data value to be resolved by the color scale. Its default value is the maximum of the 'z' data values. This value will be used as the maximum in the color scale normalization. For more info see 'colorscale'."
         }, 
-        "scl": {
+        "colorscale": {
             "val_types": "array_like of value-color pairs | 'Greys' | 'Greens' | 'Bluered' | 'Hot' | 'Picnic' | 'Portland' | 'Jet' | 'RdBu' | 'Blackbody' | 'Earth' | 'Electric' | 'YIOrRd' | 'YIGnBu'", 
             "required": false, 
             "type": "style", 
+            "description": "Sets and/or defines the color scale for this trace. The string values are pre-defined color scales. For custom color scales, define a list of color-value pairs where, by default, the first element of the pair corresponds to a normalized value of z from 0-1, i.e. (z-zmin)/ (zmax-zmin), and the second element of pair corresponds to a color. Use with 'zauto', 'zmin' and 'zmax to fine-tune the map from 'z' to rendered colors.", 
             "examples": [
-                "Greys", 
+                "'Greys'", 
                 [
                     [
                         0, 
@@ -621,10 +622,9 @@
                         "rgb(255,255,255)"
                     ]
                 ]
-            ], 
-            "description": "The color scale. The strings are pre-defined color scales. For custom color scales, define a list of color-value pairs, where the first element of the pair corresponds to a normalized value of z from 0-1, i.e. (z-zmin)/ (zmax-zmin), and the second element of pair corresponds to a color."
+            ]
         }, 
-        "reversescl": {
+        "reversescale": {
             "val_types": "boolean: True | False", 
             "required": false, 
             "type": "style", 
@@ -713,7 +713,7 @@
                 "'array' | 'scaled'"
             ], 
             "required": false, 
-            "type": "data", 
+            "type": "plot_info", 
             "description": "If set to 'scaled' and 'x' is linked to a list/array, then the horizontal labels are scaled to a list of integers of unit step starting from 0."
         }, 
         "ytype": {
@@ -721,7 +721,7 @@
                 "'array' | 'scaled'"
             ], 
             "required": false, 
-            "type": "data", 
+            "type": "plot_info", 
             "description": "If set to 'scaled' and 'y' is linked to a list/array, then the vertical labels are scaled to a list of integers of unit step starting from 0."
         }, 
         "type": {
@@ -734,7 +734,7 @@
     "contour": {
         "z": {
             "val_types": "matrix-like: list of lists, numpy.matrix", 
-            "required": false, 
+            "required": true, 
             "type": "data", 
             "description": "The data that describes the mapping. The dimensions of the 'z' matrix are (n x m) where there are 'n' ROWS defining the number of partitions along the y-axis; this is equal to the length of the 'y' array. There are 'm' COLUMNS defining the number of partitions along the x-axis; this is equal to the length of the 'x' array. Therefore, the color of the cell z[i][j] is mapped to the ith partition of the y-axis (starting from the bottom of the plot) and the jth partition of the x-axis (starting from the left of the plot). In Python, a (non-numpy) matrix is best thought of as a list of lists (of lists, of lists, etc.). Therefore, running len(z) will give you the number of ROWS and running len(z[0]) will give you the number of COLUMNS. If you ARE using numpy, then running z.shape will give you the tuple, (n, m), e.g., (3, 5).", 
             "streamable": true
@@ -743,14 +743,14 @@
             "val_types": "array-like of numbers, strings, datetimes", 
             "required": false, 
             "type": "data", 
-            "description": "This array-like value contains the horizontal coordinates referring to the columns of the 'z' matrix. if strings, the x-labels are spaced evenly.if the dimensions of z are (n x m), the length of the 'x' array should be 'm'.", 
+            "description": "This array-like value contains the horizontal coordinates referring to the columns of the 'z' matrix. if strings, the x-labels are spaced evenly. If the dimensions of z are (n x m), the length of the 'x' array should be 'm'.", 
             "streamable": true
         }, 
         "y": {
             "val_types": "array-like of numbers, strings, datetimes", 
             "required": false, 
             "type": "data", 
-            "description": "This array-like value contains the vertical coordinates referring to the rows of the 'z' matrix. If strings, the y-labels are spaced evenly.If the dimensions of z are (n x m), the length of the 'y' array should be 'n'.", 
+            "description": "This array-like value contains the vertical coordinates referring to the rows of the 'z' matrix. If strings, the y-labels are spaced evenly. If the dimensions of z are (n x m), the length of the 'y' array should be 'n'.", 
             "streamable": true
         }, 
         "name": {
@@ -769,13 +769,13 @@
             "val_types": "number", 
             "required": false, 
             "type": "style", 
-            "description": "The value used as the minimum in the color scale normalization in 'scl'. The default value is the minimum of the 'z' data values."
+            "description": "Sets the minimum 'z' data value to be resolved by the color scale. Its default value is the minimum of the 'z' data values. This value will be used as the minimum in the color scale normalization. For more info see 'colorscale'."
         }, 
         "zmax": {
             "val_types": "number", 
             "required": false, 
             "type": "style", 
-            "description": "The value used as the maximum in the color scale normalization in 'scl'. The default value is the maximum of the 'z' data values."
+            "description": "Sets the maximum 'z' data value to be resolved by the color scale. Its default value is the maximum of the 'z' data values. This value will be used as the maximum in the color scale normalization. For more info see 'colorscale'."
         }, 
         "autocontour": {
             "val_types": "boolean: True | False", 
@@ -802,12 +802,13 @@
             "description": "A dictionary-like object containing line style parameters for contour lines of this contour trace (including line width, dash, color and smoothing level). Has no an effect if 'showlines' is set to False in Contours.", 
             "streamable": true
         }, 
-        "scl": {
+        "colorscale": {
             "val_types": "array_like of value-color pairs | 'Greys' | 'Greens' | 'Bluered' | 'Hot' | 'Picnic' | 'Portland' | 'Jet' | 'RdBu' | 'Blackbody' | 'Earth' | 'Electric' | 'YIOrRd' | 'YIGnBu'", 
             "required": false, 
             "type": "style", 
+            "description": "Sets and/or defines the color scale for this trace. The string values are pre-defined color scales. For custom color scales, define a list of color-value pairs where, by default, the first element of the pair corresponds to a normalized value of z from 0-1, i.e. (z-zmin)/ (zmax-zmin), and the second element of pair corresponds to a color. Use with 'zauto', 'zmin' and 'zmax to fine-tune the map from 'z' to rendered colors.", 
             "examples": [
-                "Greys", 
+                "'Greys'", 
                 [
                     [
                         0, 
@@ -822,10 +823,9 @@
                         "rgb(255,255,255)"
                     ]
                 ]
-            ], 
-            "description": "The color scale. The strings are pre-defined color scales. For custom color scales, define a list of color-value pairs, where the first element of the pair corresponds to a normalized value of z from 0-1, i.e. (z-zmin)/ (zmax-zmin), and the second element of pair corresponds to a color."
+            ]
         }, 
-        "reversescl": {
+        "reversescale": {
             "val_types": "boolean: True | False", 
             "required": false, 
             "type": "style", 
@@ -908,7 +908,7 @@
                 "'array' | 'scaled'"
             ], 
             "required": false, 
-            "type": "data", 
+            "type": "plot_info", 
             "description": "If set to 'scaled' and 'x' is linked to a list/array, then the horizontal labels are scaled to a list of integers of unit step starting from 0."
         }, 
         "ytype": {
@@ -916,7 +916,7 @@
                 "'array' | 'scaled'"
             ], 
             "required": false, 
-            "type": "data", 
+            "type": "plot_info", 
             "description": "If set to 'scaled' and 'y' is linked to a list/array, then the vertical labels are scaled to a list of integers of unit step starting from 0."
         }, 
         "type": {
@@ -944,7 +944,7 @@
         "histnorm": {
             "val_types": "'' (or 'count') | 'percent' | 'probability' | 'density' | 'probability density'", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "style", 
             "description": "If histnorm is not specified, or histnorm='' (empty string), the height of each bar displays the frequency of occurrence, i.e., the number of times this value was found in the corresponding bin. If histnorm='percent', the height of each bar displays the percentage of total occurrences found within the corresponding bin. If histnorm='probability', the height of each bar displays the probability that an event will fall into the corresponding bin. If histnorm='density', the height of each bar is equal to the number of occurrences in a bin divided by the size of the bin interval such that summing the area of all bins will yield the total number of occurrences. If histnorm='probability density', the height of each bar is equal to the number of probability that an event will fall into the corresponding bin divided by the size of the bin interval such that summing the area of all bins will yield 1, i.e. an event must fall into one of the bins."
         }, 
         "name": {
@@ -956,7 +956,7 @@
         "autobinx": {
             "val_types": "boolean: True | False", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "style", 
             "description": "Toggle whether or not the x-axis bin parameters are picked automatically by Plotly. Once 'autobinx' is set to False, the x-axis bins parameters can be declared in the XBins object."
         }, 
         "nbinsx": {
@@ -974,7 +974,7 @@
         "autobiny": {
             "val_types": "boolean: True | False", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "style", 
             "description": "Toggle whether or not the y-axis bin parameters are picked automatically by Plotly. Once 'autobiny' is set to False, the y-axis bins parameters can be declared in the YBins object."
         }, 
         "nbinsy": {
@@ -989,12 +989,13 @@
             "type": "object", 
             "description": "A dictionary-like object defining the parameters of y-axis bins of this trace, for example, the bin width and the bins' starting and  ending value. Has an effect only if 'autobiny'=False."
         }, 
-        "scl": {
+        "colorscale": {
             "val_types": "array_like of value-color pairs | 'Greys' | 'Greens' | 'Bluered' | 'Hot' | 'Picnic' | 'Portland' | 'Jet' | 'RdBu' | 'Blackbody' | 'Earth' | 'Electric' | 'YIOrRd' | 'YIGnBu'", 
             "required": false, 
             "type": "style", 
+            "description": "Sets and/or defines the color scale for this trace. The string values are pre-defined color scales. For custom color scales, define a list of color-value pairs where, by default, the first element of the pair corresponds to a normalized value of z from 0-1, i.e. (z-zmin)/ (zmax-zmin), and the second element of pair corresponds to a color. Use with 'zauto', 'zmin' and 'zmax to fine-tune the map from 'z' to rendered colors.", 
             "examples": [
-                "Greys", 
+                "'Greys'", 
                 [
                     [
                         0, 
@@ -1009,10 +1010,9 @@
                         "rgb(255,255,255)"
                     ]
                 ]
-            ], 
-            "description": "The color scale. The strings are pre-defined color scales. For custom color scales, define a list of color-value pairs, where the first element of the pair corresponds to a normalized value of z from 0-1, i.e. (z-zmin)/ (zmax-zmin), and the second element of pair corresponds to a color."
+            ]
         }, 
-        "reversescl": {
+        "reversescale": {
             "val_types": "boolean: True | False", 
             "required": false, 
             "type": "style", 
@@ -1040,13 +1040,13 @@
             "val_types": "number", 
             "required": false, 
             "type": "style", 
-            "description": "The value used as the minimum in the color scale normalization in 'scl'. The default value is the minimum of the 'z' data values."
+            "description": "Sets the minimum 'z' data value to be resolved by the color scale. Its default value is the minimum of the 'z' data values. This value will be used as the minimum in the color scale normalization. For more info see 'colorscale'."
         }, 
         "zmax": {
             "val_types": "number", 
             "required": false, 
             "type": "style", 
-            "description": "The value used as the maximum in the color scale normalization in 'scl'. The default value is the maximum of the 'z' data values."
+            "description": "Sets the maximum 'z' data value to be resolved by the color scale. Its default value is the maximum of the 'z' data values. This value will be used as the maximum in the color scale normalization. For more info see 'colorscale'."
         }, 
         "zsmooth": {
             "val_types": " False | 'best' | 'fast' ", 
@@ -1115,7 +1115,7 @@
         "histnorm": {
             "val_types": "'' (or 'count') | 'percent' | 'probability' | 'density' | 'probability density'", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "style", 
             "description": "If histnorm is not specified, or histnorm='' (empty string), the height of each bar displays the frequency of occurrence, i.e., the number of times this value was found in the corresponding bin. If histnorm='percent', the height of each bar displays the percentage of total occurrences found within the corresponding bin. If histnorm='probability', the height of each bar displays the probability that an event will fall into the corresponding bin. If histnorm='density', the height of each bar is equal to the number of occurrences in a bin divided by the size of the bin interval such that summing the area of all bins will yield the total number of occurrences. If histnorm='probability density', the height of each bar is equal to the number of probability that an event will fall into the corresponding bin divided by the size of the bin interval such that summing the area of all bins will yield 1, i.e. an event must fall into one of the bins."
         }, 
         "name": {
@@ -1127,7 +1127,7 @@
         "autobinx": {
             "val_types": "boolean: True | False", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "style", 
             "description": "Toggle whether or not the x-axis bin parameters are picked automatically by Plotly. Once 'autobinx' is set to False, the x-axis bins parameters can be declared in the XBins object."
         }, 
         "nbinsx": {
@@ -1145,7 +1145,7 @@
         "autobiny": {
             "val_types": "boolean: True | False", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "style", 
             "description": "Toggle whether or not the y-axis bin parameters are picked automatically by Plotly. Once 'autobiny' is set to False, the y-axis bins parameters can be declared in the YBins object."
         }, 
         "nbinsy": {
@@ -1185,12 +1185,13 @@
             "description": "A dictionary-like object containing line style parameters for contour lines of this contour trace (including line width, dash, color and smoothing level). Has no an effect if 'showlines' is set to False in Contours.", 
             "streamable": true
         }, 
-        "scl": {
+        "colorscale": {
             "val_types": "array_like of value-color pairs | 'Greys' | 'Greens' | 'Bluered' | 'Hot' | 'Picnic' | 'Portland' | 'Jet' | 'RdBu' | 'Blackbody' | 'Earth' | 'Electric' | 'YIOrRd' | 'YIGnBu'", 
             "required": false, 
             "type": "style", 
+            "description": "Sets and/or defines the color scale for this trace. The string values are pre-defined color scales. For custom color scales, define a list of color-value pairs where, by default, the first element of the pair corresponds to a normalized value of z from 0-1, i.e. (z-zmin)/ (zmax-zmin), and the second element of pair corresponds to a color. Use with 'zauto', 'zmin' and 'zmax to fine-tune the map from 'z' to rendered colors.", 
             "examples": [
-                "Greys", 
+                "'Greys'", 
                 [
                     [
                         0, 
@@ -1205,10 +1206,9 @@
                         "rgb(255,255,255)"
                     ]
                 ]
-            ], 
-            "description": "The color scale. The strings are pre-defined color scales. For custom color scales, define a list of color-value pairs, where the first element of the pair corresponds to a normalized value of z from 0-1, i.e. (z-zmin)/ (zmax-zmin), and the second element of pair corresponds to a color."
+            ]
         }, 
-        "reversescl": {
+        "reversescale": {
             "val_types": "boolean: True | False", 
             "required": false, 
             "type": "style", 
@@ -1236,13 +1236,13 @@
             "val_types": "number", 
             "required": false, 
             "type": "style", 
-            "description": "The value used as the minimum in the color scale normalization in 'scl'. The default value is the minimum of the 'z' data values."
+            "description": "Sets the minimum 'z' data value to be resolved by the color scale. Its default value is the minimum of the 'z' data values. This value will be used as the minimum in the color scale normalization. For more info see 'colorscale'."
         }, 
         "zmax": {
             "val_types": "number", 
             "required": false, 
             "type": "style", 
-            "description": "The value used as the maximum in the color scale normalization in 'scl'. The default value is the maximum of the 'z' data values."
+            "description": "Sets the maximum 'z' data value to be resolved by the color scale. Its default value is the maximum of the 'z' data values. This value will be used as the maximum in the color scale normalization. For more info see 'colorscale'."
         }, 
         "opacity": {
             "val_types": "number: x in [0, 1]", 
@@ -1289,17 +1289,17 @@
     }, 
     "area": {
         "r": {
-            "val_types": "array-like of numbers, strings, datetimes", 
+            "val_types": "array-like of numbers", 
             "required": true, 
             "type": "data", 
-            "description": "The radial coordinates of the circle sectors in this polar area trace.", 
+            "description": "The radial coordinates of the circle sectors in this polar area trace about the origin; that is, the radial extent of each circle sector.", 
             "streamable": true
         }, 
         "t": {
             "val_types": "array-like of numbers, strings, datetimes", 
             "required": true, 
             "type": "data", 
-            "description": "The angular coordinates of the circle sectors in this polar area trace.", 
+            "description": "The angular coordinates of the circle sectors in this polar area trace. There are as many sectors as coordinates linked to 't' and 'r'. Each sector is drawn about the coordinates linked to 't', where they spanned symmetrically in both the positive and negative angular directions. The angular extent of each sector is equal to the angular range (360 degree by default) divided by the number of sectors. Note that the sectors are drawn in order; coordinates at the end of the array may overlay the coordinates at the start. By default, the angular coordinates are in degrees (0 to 360) where the angles are measured clockwise about the right-hand side of the origin. To change this behavior, modify 'range' in AngularAxis or/and 'direction' in Layout. If 't' is linked to an array-like of strings, then the angular coordinates are [0, 360\\N, 2*360/N, ...] where N is the number of coordinates given labeled by the array-like of strings linked to 't'.", 
             "streamable": true
         }, 
         "name": {
@@ -1337,13 +1337,13 @@
             "val_types": "", 
             "required": false, 
             "type": "plot_info", 
-            "description": "info coming soon"
+            "description": "Polar chart subplots are not supported yet. Info coming soon"
         }, 
         "radialaxis": {
             "val_types": "", 
             "required": false, 
             "type": "plot_info", 
-            "description": "info coming soon"
+            "description": "Polar chart subplots are not supported yet. Info coming soon"
         }, 
         "type": {
             "val_types": "area", 
@@ -1374,7 +1374,7 @@
         "value": {
             "val_types": "number: x >= 0", 
             "required": false, 
-            "type": "data", 
+            "type": "plot_info", 
             "description": "The value or percentage determining the error bars' span, at all trace coordinates. Has an effect if 'type' is set to 'value' or 'percent'. If 'symmetric' is set to False, this value corresponds to the span above the trace of coordinates. To specify multiple error bar lengths, you should set 'type' to 'data' and use the 'array' key instead."
         }, 
         "arrayminus": {
@@ -1386,7 +1386,7 @@
         "valueminus": {
             "val_types": "number: x >= 0", 
             "required": false, 
-            "type": "data", 
+            "type": "plot_info", 
             "description": "Only functional when 'symmetric' is set to False. Same as 'value' but corresponding to the span of the error bars below the trace coordinates"
         }, 
         "color": {
@@ -1426,12 +1426,6 @@
             "required": false, 
             "type": "plot_info", 
             "description": "Toggles whether or not this object will actually be visible in the rendered figure."
-        }, 
-        "traceref": {
-            "val_types": "", 
-            "required": false, 
-            "type": "plot_info", 
-            "description": "more info coming soon"
         }
     }, 
     "error_x": {
@@ -1456,7 +1450,7 @@
         "value": {
             "val_types": "number: x >= 0", 
             "required": false, 
-            "type": "data", 
+            "type": "plot_info", 
             "description": "The value or percentage determining the error bars' span, at all trace coordinates. Has an effect if 'type' is set to 'value' or 'percent'. If 'symmetric' is set to False, this value corresponds to the span right of the trace of coordinates. To specify multiple error bar lengths, you should set 'type' to 'data' and use the 'array' key instead."
         }, 
         "arrayminus": {
@@ -1468,7 +1462,7 @@
         "valueminus": {
             "val_types": "number: x >= 0", 
             "required": false, 
-            "type": "data", 
+            "type": "plot_info", 
             "description": "Only functional when 'symmetric' is set to False. Same as 'value' but corresponding to the span of the error bars left of the trace coordinates"
         }, 
         "color": {
@@ -1514,31 +1508,25 @@
             "required": false, 
             "type": "plot_info", 
             "description": "Toggles whether or not this object will actually be visible in the rendered figure."
-        }, 
-        "traceref": {
-            "val_types": "", 
-            "required": false, 
-            "type": "plot_info", 
-            "description": "more info coming soon"
         }
     }, 
     "xbins": {
         "start": {
             "val_types": "number: x > 0", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "style", 
             "description": "Sets the starting point on the x-axis for the first bin."
         }, 
         "end": {
             "val_types": "number: x > 0", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "style", 
             "description": "Sets the end point on the x-axis for the last bin."
         }, 
         "size": {
             "val_types": "number: x > 0", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "style", 
             "description": "Sets the size (i.e. their width) of each x-axis bin.", 
             "streamable": true
         }
@@ -1547,19 +1535,19 @@
         "start": {
             "val_types": "number: x > 0", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "style", 
             "description": "Sets the starting point on the y-axis for the first bin."
         }, 
         "end": {
             "val_types": "number: x > 0", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "style", 
             "description": "Sets the end point on the y-axis for the last bin."
         }, 
         "size": {
             "val_types": "number: x > 0", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "style", 
             "description": "Sets the size (i.e. their width) of each y-axis bin.", 
             "streamable": true
         }
@@ -1574,26 +1562,26 @@
         "start": {
             "val_types": "number: x > 0", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "style", 
             "description": "Sets the value of the first contour level."
         }, 
         "end": {
             "val_types": "number: x > 0", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "style", 
             "description": "Sets the value of the last contour level."
         }, 
         "size": {
             "val_types": "number: x > 0", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "style", 
             "description": "Sets the size of each contour level.", 
             "streamable": true
         }, 
         "coloring": {
             "val_types": " 'fill' | 'heatmap' | 'lines' | 'none' ", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "style", 
             "description": "Choose the coloring method for this contour trace. The default value is 'fill' where coloring is done evenly between each contour line. 'heatmap' colors on a grid point-by-grid point basis. 'lines' colors only the contour lines, each with respect to the color scale. 'none' prints all contour lines with the same color; choose their color in a Line object at the trace level if desired."
         }
     }, 
@@ -1607,14 +1595,14 @@
         "maxpoints": {
             "val_types": "number: x > 0", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "style", 
             "description": "Sets the maximum number of points to keep on the plots from an incoming stream. For example, if 'maxpoints' is set to 50, only the newest 50 points will be displayed on the plot."
         }
     }, 
     "marker": {
         "color": {
             "val_types": "array-like of string describing color", 
-            "description": "Sets the color of the face of the marker object. If 'color' is linked to a list or an array of numbers, color values are mapped to individual marker points in the same order as in the data lists or arrays. To set the color of the marker's bordering line, use the 'line' key in Marker.", 
+            "description": "Sets the color of the face of the marker object. If 'color' is linked to a list or an array of color strings, color values are mapped to individual marker points in the same order as in the data lists or arrays. To set the color of the marker's bordering line, use the 'line' key in Marker. The 'color' key can also accept a list or an array of numbers, where each number is then mapped to a color using the color scale set in 'colorscale'.", 
             "required": false, 
             "streamable": true, 
             "examples": [
@@ -1630,14 +1618,14 @@
             "val_types": "number: x > 0, or list of these numbers", 
             "required": false, 
             "type": "style", 
-            "description": "Sets the size of the markers (in pixels). If 'size' is linked to a list or an array of numbers, size values are mapped to individual marker points in the same order as in the data lists or arrays.", 
+            "description": "Sets the size of the markers (in pixels). If 'size' is linked to a list or an array of numbers, size values are mapped to individual marker points in the same order as in the data lists or arrays. In this case, use 'size' in conjunction with 'sizeref' and 'sizemode' to fine-tune the map from the numbers linked to 'size' and the marker points' rendered sizes.", 
             "streamable": true
         }, 
         "symbol": {
             "val_types": "'dot' | 'cross' | 'diamond' | 'square' | 'triangle-down' | 'triangle-left' | 'triangle-right' | 'triangle-up' | 'x' OR list of these string values", 
             "required": false, 
             "type": "style", 
-            "description": "The symbol that is drawn on the plot for each marker. Supported only in scatter trace. If 'symbol' is linked to a list or an array of numbers, symbol values are mapped to individual marker points in the same order as in the data lists or arrays."
+            "description": "The symbol that is drawn on the plot for each marker. Supported only in scatter traces. If 'symbol' is linked to a list or an array of numbers, symbol values are mapped to individual marker points in the same order as in the data lists or arrays."
         }, 
         "line": {
             "val_types": "dictionary-like", 
@@ -1652,29 +1640,77 @@
             "type": "style", 
             "description": "Sets the opacity, or transparency also known as the alpha channel of colors) of the marker points. If the marker points' color is given in terms of 'rgba' color model, this does not need to be defined. If 'opacity' is linked to a list or an array of numbers, opacity values are mapped to individual marker points in the same order as in the data lists or arrays."
         }, 
-        "colorscale": {
-            "val_types": "array_like of value-color pairs | 'Greys' | 'Greens' | 'Bluered' | 'Hot' | 'Picnic' | 'Portland' | 'Jet' | 'RdBu' | 'Blackbody' | 'Earth' | 'Electric' | 'YIOrRd' | 'YIGnBu'", 
-            "required": false, 
-            "type": "style", 
-            "description": "The color scale. The strings are pre-defined color scales. For custom color scales, define a list of color-value pairs, where the first element of the pair corresponds to a normalized value of the y coordinates (for scatter traces) from 0-1 and the second element of pair corresponds to a color."
-        }, 
-        "sizemode": {
-            "val_types": "'diameter' | 'area'", 
-            "required": false, 
-            "type": "style", 
-            "description": "Scale the size each points with respect to diameter or area. Applies only to scatter traces."
-        }, 
         "sizeref": {
             "val_types": "number: x >= 0", 
             "required": false, 
             "type": "style", 
-            "description": "Select scale factor for the size of each point. Applies only to scatter traces."
+            "description": "Sets the scale factor used to determine the rendered size of each marker point in this trace. Applies only to scatter traces that have an array linked to the 'size' key in Marker. If set, the value linked to 'sizeref' is used to divide each entry linked to 'size'. That is, setting 'sizeref' to less (greater) than 1, increases (decreases) the rendered marker sizes."
+        }, 
+        "sizemode": {
+            "val_types": "'diameter'| 'area'", 
+            "required": false, 
+            "type": "style", 
+            "description": "Choose between marker size scaling options for the marker points in this trace. Applies only to scatter traces that have an array linked to the 'size' key in Marker. If 'diameter' ('area'), then the diameter (area) of the rendered marker points (in pixels) are proportional to the numbers linked to 'size'.E.g. set 'sizemode' to 'area' for a more a smaller range of rendered marker sizes."
+        }, 
+        "colorscale": {
+            "val_types": "array_like of value-color pairs | 'Greys' | 'Greens' | 'Bluered' | 'Hot' | 'Picnic' | 'Portland' | 'Jet' | 'RdBu' | 'Blackbody' | 'Earth' | 'Electric' | 'YIOrRd' | 'YIGnBu'", 
+            "required": false, 
+            "type": "style", 
+            "description": "Sets and/or defines the color scale for this trace. The string values are pre-defined color scales. For custom color scales, define a list of color-value pairs where, by default, the first element of the pair corresponds to a normalized value of color from 0-1, i.e. (c-cmin)/ (cmax-cmin), and the second element of pair corresponds to a color. Use with 'cauto', 'cmin' and 'cmax to fine-tune the map from 'color' to rendered colors.", 
+            "examples": [
+                "'Greys'", 
+                [
+                    [
+                        0, 
+                        "rgb(0,0,0)"
+                    ], 
+                    [
+                        0.5, 
+                        "rgb(65, 182, 196)"
+                    ], 
+                    [
+                        1, 
+                        "rgb(255,255,255)"
+                    ]
+                ]
+            ]
+        }, 
+        "cauto": {
+            "val_types": "boolean: True | False", 
+            "required": false, 
+            "type": "style", 
+            "description": "Toggle whether or not the default values of 'cmax' and 'cmax' can be overwritten."
+        }, 
+        "cmin": {
+            "val_types": "number", 
+            "required": false, 
+            "type": "style", 
+            "description": "Sets the minimum 'color' data value to be resolved by the color scale. Its default value is the minimum of the 'color' data values. This value will be used as the minimum in the color scale normalization. For more info see 'colorscale'. Has only an effect if 'color' is linked to an array-like and 'colorscale' is set."
+        }, 
+        "cmax": {
+            "val_types": "number", 
+            "required": false, 
+            "type": "style", 
+            "description": "Sets the maximum 'color' data value to be resolved by the color scale. Its default value is the maximum of the 'color' data values. This value will be used as the maximum in the color scale normalization. For more info see 'colorscale'. Has only an effect if 'color' is linked to an array-like and 'colorscale' is set."
+        }, 
+        "outliercolor": {
+            "val_types": "string describing color", 
+            "required": false, 
+            "type": "style", 
+            "examples": [
+                "'green'", 
+                "'rgb(0, 255, 0)'", 
+                "'rgba(0, 255, 0, 0.3)'", 
+                "'hsl(120,100%,50%)'", 
+                "'hsla(120,100%,50%,0.3)'"
+            ], 
+            "description": "For box plots only. Has an effect only if 'boxpoints' is set to 'suspectedoutliers'. Sets the face color of the outlier points."
         }, 
         "maxdisplayed": {
             "val_types": "number: x >= 0", 
             "required": false, 
             "type": "style", 
-            "description": "Set maximum number of displayed points for this trace. Applies only to scatter traces."
+            "description": "Sets maximum number of displayed points for this trace. Applies only to scatter traces."
         }
     }, 
     "line": {
@@ -1710,22 +1746,48 @@
             "type": "style", 
             "description": "Sets the opacity, or transparency, of the entire object, also known as the alpha channel of colors. If the object's color is given in terms of 'rgba' color model, 'opacity' is redundant."
         }, 
-        "smoothing": {
-            "val_types": "number: x >= 0", 
-            "required": false, 
-            "type": "style", 
-            "description": "The amount of smoothing. Applies only to contour traces and scatter trace if 'shape' is set to 'spline'."
-        }, 
         "shape": {
             "val_types": "'linear' | 'spline' | 'hv' | 'vh' | 'hvh' | 'vhv'", 
             "required": false, 
             "type": "style", 
-            "description": "Choose the line shape between each coordinate pair. Applies only to scatter traces."
+            "description": "Choose the line shape between each coordinate pair in this trace. Applies only to scatter traces. The default value is 'linear'. If 'spline', then the lines are drawn using spline interpolation between the coordinate pairs. The remaining available values correspond to step-wise line shapes, see example in: https://plot.ly/~alex/315 ."
+        }, 
+        "smoothing": {
+            "val_types": "number: x >= 0", 
+            "required": false, 
+            "type": "style", 
+            "description": "Sets the amount of smoothing applied to this line object. Applies only to contour traces and scatter traces if 'shape' is set to 'spline'. The default value is 1. If 'smoothing' is set to 0, then no smoothing is applied. Set 'smoothing' to a value less (greater) than 1 for a less (more) pronounced line smoothing. "
+        }, 
+        "outliercolor": {
+            "val_types": "string describing color", 
+            "required": false, 
+            "type": "style", 
+            "examples": [
+                "'green'", 
+                "'rgb(0, 255, 0)'", 
+                "'rgba(0, 255, 0, 0.3)'", 
+                "'hsl(120,100%,50%)'", 
+                "'hsla(120,100%,50%,0.3)'"
+            ], 
+            "description": "For box plots only. Has an effect only if 'boxpoints' is set to 'suspectedoutliers'. Sets the color of the bordering line of the outlier points."
+        }, 
+        "outlierwidth": {
+            "val_types": "string describing color", 
+            "required": false, 
+            "type": "style", 
+            "examples": [
+                "'green'", 
+                "'rgb(0, 255, 0)'", 
+                "'rgba(0, 255, 0, 0.3)'", 
+                "'hsl(120,100%,50%)'", 
+                "'hsla(120,100%,50%,0.3)'"
+            ], 
+            "description": "For box plots only. Has an effect only if 'boxpoints' is set to 'suspectedoutliers'. Sets the width in pixels of bordering line of the outlier points."
         }
     }, 
     "font": {
         "family": {
-            "val_types": " 'Arial, sans-serif' |  'Balto, sans-serif' |  'Courier New, monospace' |  'Droid Sans, sans-serif' |  'Droid Serif, serif' |  'Droid Sans Mono, sans-serif' |  'Georgia, serif' |  'Gravitas One, cursive' |  'Old Standard TT, serif' |  'Open Sans, sans-serif' or ('')|  'PT Sans Narrow, sans-serif' |  'Raleway, sans-serif' |  'Times New Roman, Times, serif' |", 
+            "val_types": " 'Arial, sans-serif' |  'Balto, sans-serif' |  'Courier New, monospace' |  'Droid Sans, sans-serif' |  'Droid Serif, serif' |  'Droid Sans Mono, sans-serif' |  'Georgia, serif' |  'Gravitas One, cursive' |  'Old Standard TT, serif' |  'Open Sans, sans-serif' or ('') |  'PT Sans Narrow, sans-serif' |  'Raleway, sans-serif' |  'Times New Roman, Times, serif'", 
             "required": false, 
             "type": "style", 
             "description": "Sets the font family. If linked in the first level of the layout object,  set the color of the global font. The default font in Plotly is 'Open Sans, sans-serif'."
@@ -1734,7 +1796,7 @@
             "val_types": "number: x > 0", 
             "required": false, 
             "type": "style", 
-            "description": "Sets the size of font.If linked in the first level of the layout object, set the color of the global font.", 
+            "description": "Sets the size of font. If linked in the first level of the layout object, set the color of the global font.", 
             "streamable": true
         }, 
         "color": {
@@ -1775,40 +1837,58 @@
         "titlefont": {
             "val_types": "string", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "style", 
             "description": "A dictionary-like object describing the font settings of the x-axis title."
         }, 
         "range": {
             "val_types": "number array of length 2", 
             "required": false, 
             "type": "style", 
+            "description": "Defines the start and end point of this x axis.", 
             "examples": [
-                -13, 
-                20
-            ], 
-            "description": "Defines the start and end point of this x-axis."
+                [
+                    -13, 
+                    20
+                ], 
+                [
+                    0, 
+                    1
+                ]
+            ]
         }, 
         "domain": {
             "val_types": "number array of length 2", 
             "required": false, 
             "type": "plot_info", 
+            "description": "Sets the domain of this x axis; that is, the available space for this x axis to live in. Domain coordinates are given in normalized coordinates with respect to the paper.", 
             "examples": [
-                0, 
-                0.5
-            ], 
-            "description": "Sets the domain of this x-axis. The available space for this axis to live in is  from 0 to 1."
+                [
+                    0, 
+                    0.4
+                ], 
+                [
+                    0.6, 
+                    1
+                ]
+            ]
         }, 
         "type": {
-            "val_types": "'linear' | 'log' | 'category'", 
+            "val_types": "'linear' | 'log' | 'date' | 'category'", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "style", 
             "description": "Sets the format of this axis."
         }, 
         "rangemode": {
-            "val_types": "string: 'normal' | 'tozero' | 'nonnegative'", 
+            "val_types": "'normal' | 'tozero' | 'nonnegative'", 
             "required": false, 
-            "type": "plot_info", 
-            "description": "Choose between Plotly's automated axis generation modes: 'normal' (the default) sets the axis range in relation to the extrema in the data object, 'tozero' extends the axes to {}=0 no matter the data plotted and 'nonnegative' sets a non-negative range no matter the data plotted."
+            "type": "style", 
+            "description": "Choose between Plotly's automated axis generation modes: 'normal' (the default) sets the axis range in relation to the extrema in the data object, 'tozero' extends the axes to x=0 no matter the data plotted and 'nonnegative' sets a non-negative range no matter the data plotted."
+        }, 
+        "autorange": {
+            "val_types": "True | False | 'reversed'", 
+            "required": false, 
+            "type": "style", 
+            "description": "Toggle whether or not the range of this x-axis is automatically picked by Plotly. If 'range' is set, then 'autorange' is set to False automatically. Otherwise, if 'autorange' is set to True (the default behavior), the range of this x-axis can respond to adjustments made in the web GUI automatically. If 'autorange' is set to 'reversed', then this x-axis is drawn in reverse i.e. from right to left instead of from left to right (the default behavior)."
         }, 
         "showgrid": {
             "val_types": "boolean: True | False", 
@@ -1826,7 +1906,7 @@
             "val_types": "boolean: True | False", 
             "required": false, 
             "type": "style", 
-            "description": "Toggle whether or not to show the label (i.e. bordering) line of the axis."
+            "description": "Toggle whether or not the line bounding this x axis will be shown on the figure."
         }, 
         "autotick": {
             "val_types": "boolean: True | False", 
@@ -1855,7 +1935,7 @@
         "tick0": {
             "val_types": "number", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "style", 
             "description": "Sets the starting point of the ticks of this axis."
         }, 
         "dtick": {
@@ -1905,13 +1985,19 @@
             "val_types": "'none' | 'e' | 'E' | 'power' | 'SI' | 'B'", 
             "required": false, 
             "type": "style", 
-            "description": "Sets how exponents show up. Here's how the number 1000000000 (1 billion) shows up in each. If set to 'none': 1,000,000,000. If set to 'e': 1e+9. If set to 'E': 1E+9. If set to 'power': 1x10^9 (where the 9 will appear super-scripted. If set to 'SI': 1G. If set to 'B': 1B (useful when referring to currency."
+            "description": "Sets how exponents show up. Here's how the number 1000000000 (1 billion) shows up in each. If set to 'none': 1,000,000,000. If set to 'e': 1e+9. If set to 'E': 1E+9. If set to 'power': 1x10^9 (where the 9 will appear super-scripted). If set to 'SI': 1G. If set to 'B': 1B (useful when referring to currency)."
         }, 
         "showexponent": {
             "val_types": "'all' | 'first' | 'last' | 'none'", 
             "required": false, 
             "type": "style", 
             "description": "If set to 'all', ALL exponents will be shown appended to their significands. If set to 'first', the first tick's exponent will be appended to its significand, however no other exponents will appear--only the significands. If set to 'last', the last tick's exponent will be appended to its significand, however no other exponents will appear--only the significands. If set to 'none', no exponents will appear, only the significands."
+        }, 
+        "mirror": {
+            "val_types": "boolean: True | False", 
+            "required": false, 
+            "type": "style", 
+            "description": "Toggle whether to mirror the axis line to the opposite side of the plot."
         }, 
         "gridcolor": {
             "val_types": "string describing color", 
@@ -1943,7 +2029,7 @@
                 "'hsl(120,100%,50%)'", 
                 "'hsla(120,100%,50%,0.3)'"
             ], 
-            "description": "Set the color of this axis' zeroline."
+            "description": "Sets the color of this axis' zeroline."
         }, 
         "zerolinewidth": {
             "val_types": "number: x > 0", 
@@ -1962,49 +2048,37 @@
                 "'hsl(120,100%,50%)'", 
                 "'hsla(120,100%,50%,0.3)'"
             ], 
-            "description": "Defines the axis line color."
+            "description": "Sets the axis line color."
         }, 
         "linewidth": {
             "val_types": "number: x > 0", 
             "required": false, 
             "type": "style", 
-            "description": "Sets the width of the axis line (in pixels)"
+            "description": "Sets the width of the axis line (in pixels)."
         }, 
         "anchor": {
-            "val_types": "'y' | 'free'", 
+            "val_types": "'y' | 'y1' | 'y2' | ... | 'free'", 
             "required": false, 
             "type": "plot_info", 
-            "description": "Sets whether the x-axis will be anchored to its corresponding y-axis OR 'free' to appear  anywhere in the vertical space of the plot."
+            "description": "Choose whether the position of this x-axis will be anchored to a corresponding y-axis or will be 'free' to appear anywhere in the vertical space of this figure."
+        }, 
+        "overlaying": {
+            "val_types": "'x' | 'x1' | 'x2' | ... | False", 
+            "required": false, 
+            "type": "plot_info", 
+            "description": "Choose to overlay the data bound to this x-axis on the same plotting area as a corresponding y-axis or choose not overlay other x-the other axis/axes of this figure."
         }, 
         "side": {
             "val_types": "'bottom' | 'top'", 
             "required": false, 
-            "type": "style", 
-            "description": "Set whether this x-axis sits at the 'bottom' of the plot or at the 'top' of the plot."
+            "type": "plot_info", 
+            "description": "Sets whether this x-axis sits at the 'bottom' of the plot or at the 'top' of the plot."
         }, 
         "position": {
             "val_types": "number: x in [0, 1]", 
             "required": false, 
             "type": "style", 
-            "description": "Sets where the axis is positioned in the plotting space. For example 'position'=0.5 will place this axis in the exact center of the plotting space. This only has functionality if 'anchor'='free'."
-        }, 
-        "mirror": {
-            "val_types": "boolean: True | False", 
-            "required": false, 
-            "type": "style", 
-            "description": "Toggle whether to mirror the axis line to the opposite side of the plot."
-        }, 
-        "overlaying": {
-            "val_types": "", 
-            "required": false, 
-            "type": "style", 
-            "description": "more info coming soon."
-        }, 
-        "autorange": {
-            "val_types": "boolean: True | False", 
-            "required": false, 
-            "type": "plot_info", 
-            "description": "Artifact. If 'range' is set than Plotly's autorange is overwritten."
+            "description": "Sets where this x-axis is positioned in the plotting space. For example 'position'=0.5 will place this axis in the exact center of the plotting space. Has an effect only if 'anchor' is set to 'free'."
         }
     }, 
     "yaxis": {
@@ -2017,40 +2091,58 @@
         "titlefont": {
             "val_types": "string", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "style", 
             "description": "A dictionary-like object describing the font settings of the y-axis title."
         }, 
         "range": {
             "val_types": "number array of length 2", 
             "required": false, 
             "type": "style", 
+            "description": "Defines the start and end point of this y axis.", 
             "examples": [
-                -13, 
-                20
-            ], 
-            "description": "Defines the start and end point of this y-axis."
+                [
+                    -13, 
+                    20
+                ], 
+                [
+                    0, 
+                    1
+                ]
+            ]
         }, 
         "domain": {
             "val_types": "number array of length 2", 
             "required": false, 
             "type": "plot_info", 
+            "description": "Sets the domain of this y axis; that is, the available space for this y axis to live in. Domain coordinates are given in normalized coordinates with respect to the paper.", 
             "examples": [
-                0, 
-                0.5
-            ], 
-            "description": "Sets the domain of this y-axis. The available space for this axis to live in is  from 0 to 1."
+                [
+                    0, 
+                    0.4
+                ], 
+                [
+                    0.6, 
+                    1
+                ]
+            ]
         }, 
         "type": {
-            "val_types": "'linear' | 'log' | 'category'", 
+            "val_types": "'linear' | 'log' | 'date' | 'category'", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "style", 
             "description": "Sets the format of this axis."
         }, 
         "rangemode": {
-            "val_types": "string: 'normal' | 'tozero' | 'nonnegative'", 
+            "val_types": "'normal' | 'tozero' | 'nonnegative'", 
             "required": false, 
-            "type": "plot_info", 
-            "description": "Choose between Plotly's automated axis generation modes: 'normal' (the default) sets the axis range in relation to the extrema in the data object, 'tozero' extends the axes to {}=0 no matter the data plotted and 'nonnegative' sets a non-negative range no matter the data plotted."
+            "type": "style", 
+            "description": "Choose between Plotly's automated axis generation modes: 'normal' (the default) sets the axis range in relation to the extrema in the data object, 'tozero' extends the axes to y=0 no matter the data plotted and 'nonnegative' sets a non-negative range no matter the data plotted."
+        }, 
+        "autorange": {
+            "val_types": "True | False | 'reversed'", 
+            "required": false, 
+            "type": "style", 
+            "description": "Toggle whether or not the range of this y-axis is automatically picked by Plotly. If 'range' is set, then 'autorange' is set to False automatically. Otherwise, if 'autorange' is set to True (the default behavior), the range of this y-axis can respond to adjustments made in the web GUI automatically. If 'autorange' is set to 'reversed', then this y-axis is drawn in reverse i.e. from top to bottom instead of from bottom to top (the default behavior)."
         }, 
         "showgrid": {
             "val_types": "boolean: True | False", 
@@ -2068,7 +2160,7 @@
             "val_types": "boolean: True | False", 
             "required": false, 
             "type": "style", 
-            "description": "Toggle whether or not to show the label (i.e. bordering) line of the axis."
+            "description": "Toggle whether or not the line bounding this y axis will be shown on the figure."
         }, 
         "autotick": {
             "val_types": "boolean: True | False", 
@@ -2097,7 +2189,7 @@
         "tick0": {
             "val_types": "number", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "style", 
             "description": "Sets the starting point of the ticks of this axis."
         }, 
         "dtick": {
@@ -2147,13 +2239,19 @@
             "val_types": "'none' | 'e' | 'E' | 'power' | 'SI' | 'B'", 
             "required": false, 
             "type": "style", 
-            "description": "Sets how exponents show up. Here's how the number 1000000000 (1 billion) shows up in each. If set to 'none': 1,000,000,000. If set to 'e': 1e+9. If set to 'E': 1E+9. If set to 'power': 1x10^9 (where the 9 will appear super-scripted. If set to 'SI': 1G. If set to 'B': 1B (useful when referring to currency."
+            "description": "Sets how exponents show up. Here's how the number 1000000000 (1 billion) shows up in each. If set to 'none': 1,000,000,000. If set to 'e': 1e+9. If set to 'E': 1E+9. If set to 'power': 1x10^9 (where the 9 will appear super-scripted). If set to 'SI': 1G. If set to 'B': 1B (useful when referring to currency)."
         }, 
         "showexponent": {
             "val_types": "'all' | 'first' | 'last' | 'none'", 
             "required": false, 
             "type": "style", 
             "description": "If set to 'all', ALL exponents will be shown appended to their significands. If set to 'first', the first tick's exponent will be appended to its significand, however no other exponents will appear--only the significands. If set to 'last', the last tick's exponent will be appended to its significand, however no other exponents will appear--only the significands. If set to 'none', no exponents will appear, only the significands."
+        }, 
+        "mirror": {
+            "val_types": "boolean: True | False", 
+            "required": false, 
+            "type": "style", 
+            "description": "Toggle whether to mirror the axis line to the opposite side of the plot."
         }, 
         "gridcolor": {
             "val_types": "string describing color", 
@@ -2185,7 +2283,7 @@
                 "'hsl(120,100%,50%)'", 
                 "'hsla(120,100%,50%,0.3)'"
             ], 
-            "description": "Set the color of this axis' zeroline."
+            "description": "Sets the color of this axis' zeroline."
         }, 
         "zerolinewidth": {
             "val_types": "number: x > 0", 
@@ -2204,49 +2302,37 @@
                 "'hsl(120,100%,50%)'", 
                 "'hsla(120,100%,50%,0.3)'"
             ], 
-            "description": "Defines the axis line color."
+            "description": "Sets the axis line color."
         }, 
         "linewidth": {
             "val_types": "number: x > 0", 
             "required": false, 
             "type": "style", 
-            "description": "Sets the width of the axis line (in pixels)"
+            "description": "Sets the width of the axis line (in pixels)."
         }, 
         "anchor": {
-            "val_types": "'x' | 'free'", 
+            "val_types": "'x' | 'x1' | 'x2' | ... | 'free'", 
             "required": false, 
             "type": "plot_info", 
-            "description": "Sets whether the y-axis will be anchored to its corresponding x-axis OR 'free' to appear  anywhere in the vertical space of the plot."
+            "description": "Choose whether the position of this y-axis will be anchored to a corresponding x-axis or will be 'free' to appear anywhere in the horizontal space of this figure."
+        }, 
+        "overlaying": {
+            "val_types": "'y' | 'y1' | 'y2' | ... | False", 
+            "required": false, 
+            "type": "plot_info", 
+            "description": "Choose to overlay the data bound to this y-axis on the same plotting area as a corresponding x-axis or choose not overlay other y-the other axis/axes of this figure."
         }, 
         "side": {
             "val_types": "'left' | 'right'", 
             "required": false, 
-            "type": "style", 
-            "description": "Set whether this y-axis sits at the 'left' of the plot or at the 'right' of the plot."
+            "type": "plot_info", 
+            "description": "Sets whether this y-axis sits at the 'left' of the plot or at the 'right' of the plot."
         }, 
         "position": {
             "val_types": "number: x in [0, 1]", 
             "required": false, 
             "type": "style", 
-            "description": "Sets where the axis is positioned in the plotting space. For example 'position'=0.5 will place this axis in the exact center of the plotting space. This only has functionality if 'anchor'='free'."
-        }, 
-        "mirror": {
-            "val_types": "boolean: True | False", 
-            "required": false, 
-            "type": "style", 
-            "description": "Toggle whether to mirror the axis line to the opposite side of the plot."
-        }, 
-        "overlaying": {
-            "val_types": "", 
-            "required": false, 
-            "type": "style", 
-            "description": "more info coming soon."
-        }, 
-        "autorange": {
-            "val_types": "boolean: True | False", 
-            "required": false, 
-            "type": "plot_info", 
-            "description": "Artifact. If 'range' is set than Plotly's autorange is overwritten."
+            "description": "Sets where this y-axis is positioned in the plotting space. For example 'position'=0.5 will place this axis in the exact center of the plotting space. Has an effect only if 'anchor' is set to 'free'."
         }
     }, 
     "radialaxis": {
@@ -2270,29 +2356,19 @@
             "val_types": "number array of length 2", 
             "required": false, 
             "type": "plot_info", 
-            "description": "Sets the domain of this radial axis. The available space for this radial axis to live in is  from 0 to 1.", 
-            "examples": [
-                [
-                    -13, 
-                    20
-                ], 
-                [
-                    0, 
-                    1
-                ]
-            ]
+            "description": "Polar chart subplots are not supported yet. This key has currently no effect."
         }, 
         "orientation": {
             "val_types": "number: x in [-360, 360]", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "style", 
             "description": "Sets the orientation (an angle with respect to the origin) of the radial axis."
         }, 
         "showline": {
             "val_types": "boolean: True | False", 
             "required": false, 
             "type": "style", 
-            "description": "Toggle whether or not to show the label (i.e. bordering) line of the axis."
+            "description": "Toggle whether or not the line bounding this radial axis will be shown on the figure."
         }, 
         "showticklabels": {
             "val_types": "boolean: True | False", 
@@ -2349,23 +2425,29 @@
             "val_types": "number array of length 2", 
             "required": false, 
             "type": "style", 
-            "description": "Defines the start and end point of this angular axis.", 
+            "description": "Defines the start and end point of this angular axis. By default, 'range' is set to [0,360]. Has no effect if 't' is linked to an array-like of string.", 
             "examples": [
                 [
-                    -13, 
-                    20
+                    0, 
+                    180
                 ], 
                 [
                     0, 
-                    1
+                    6.2831
                 ]
             ]
+        }, 
+        "domain": {
+            "val_types": "number array of length 2", 
+            "required": false, 
+            "type": "plot_info", 
+            "description": "Polar chart subplots are not supported yet. This key has currently no effect."
         }, 
         "showline": {
             "val_types": "boolean: True | False", 
             "required": false, 
             "type": "style", 
-            "description": "Toggle whether or not to show the label (i.e. bordering) line of the axis."
+            "description": "Toggle whether or not the line bounding this angular axis will be shown on the figure. If 'showline' is set to True, the bounding line starts from the origin and extends to the edge of radial axis."
         }, 
         "showticklabels": {
             "val_types": "boolean: True | False", 
@@ -2413,16 +2495,16 @@
     }, 
     "legend": {
         "x": {
-            "val_types": "number: x >= 0", 
+            "val_types": "number", 
             "required": false, 
             "type": "plot_info", 
-            "description": "Sets the 'x' position of the legend."
+            "description": "Sets the 'x' position of this legend. Use in conjunction with 'xref' and 'xanchor' to fine-tune the location of this legend."
         }, 
         "y": {
-            "val_types": "number: x >= 0", 
+            "val_types": "number", 
             "required": false, 
             "type": "plot_info", 
-            "description": "Sets the 'y' position of the legend."
+            "description": "Sets the 'y' position of this legend. Use in conjunction with 'yref' and 'yanchor' to fine-tune the location of this legend."
         }, 
         "traceorder": {
             "val_types": "'normal' | 'reversed'", 
@@ -2481,22 +2563,16 @@
             "description": "Sets the y coordinate for this object refers to. If you reference an axis, e.g., 'y2', the object will move with pan-and-zoom to stay fixed to this point. If you reference the 'paper', it remains fixed regardless of pan-and-zoom. In other words, if set to 'paper', the 'y' location refers to the distance from the left side of the plotting area in normalized coordinates where 0=='bottom' and 1=='top'. If set to refer to an yaxis' object, e.g., 'y1', 'y2', 'y3', etc., the 'y' location will refer to the location in terms of this axis."
         }, 
         "xanchor": {
-            "val_types": "'left' | 'center' | 'right'", 
+            "val_types": "'auto' | 'left' | 'center' | 'right'", 
             "required": false, 
             "type": "plot_info", 
-            "description": "This defines the horizontal location on the object referenced by the 'x' (position) key. For example, if 'x'==1, 'xref'='paper', and 'xanchor'='right', the rightmost portion of this object will line up with the rightmost edge of the plotting area."
+            "description": "Sets the horizontal location of the object referenced by the 'x' (position) key. For example, if 'x'==1, 'xref'='paper', and 'xanchor'='right', the rightmost portion of this object will line up with the rightmost edge of the plotting area."
         }, 
         "yanchor": {
-            "val_types": "'bottom' | 'middle' | 'top'", 
+            "val_types": "'auto' | 'bottom' | 'middle' | 'top'", 
             "required": false, 
             "type": "plot_info", 
-            "description": "This defines the horizontal location on the object referenced by the 'y' (position) key. For example, if 'y'==1, 'yref'='paper', and 'yanchor'='top', the topmost portion of this object will line up with the topmost edge of the plotting area."
-        }, 
-        "showlegend": {
-            "val_types": "boolean: True | False", 
-            "required": false, 
-            "type": "style", 
-            "description": "Toggle whether or not the legend will be shown in this figure."
+            "description": "Sets the horizontal location of the object referenced by the 'y' (position) key. For example, if 'y'==1, 'yref'='paper', and 'yanchor'='top', the topmost portion of this object will line up with the topmost edge of the plotting area."
         }
     }, 
     "colorbar": {
@@ -2509,13 +2585,13 @@
         "titleside": {
             "val_types": "'right' | 'top' | 'bottom'", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "style", 
             "description": "Location of colorbar title with respect to the colorbar."
         }, 
         "titlefont": {
             "val_types": "string", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "style", 
             "description": "A dictionary-like object describing the font settings of the colorbar title."
         }, 
         "thickness": {
@@ -2543,16 +2619,16 @@
             "description": "Sets length unit mode."
         }, 
         "x": {
-            "val_types": "number: x >= 0", 
+            "val_types": "number", 
             "required": false, 
             "type": "plot_info", 
-            "description": "Sets the 'x' position of the colorbar (in paper coordinates)."
+            "description": "Sets the 'x' position of this colorbar. "
         }, 
         "y": {
-            "val_types": "number: x >= 0", 
+            "val_types": "number", 
             "required": false, 
             "type": "plot_info", 
-            "description": "Sets the 'y' position of the colorbar (in paper coordinates)."
+            "description": "Sets the 'y' position of this colorbar. "
         }, 
         "autotick": {
             "val_types": "boolean: True | False", 
@@ -2581,7 +2657,7 @@
         "tick0": {
             "val_types": "number", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "style", 
             "description": "Sets the starting point of the ticks of this colorbar."
         }, 
         "dtick": {
@@ -2631,7 +2707,7 @@
             "val_types": "'none' | 'e' | 'E' | 'power' | 'SI' | 'B'", 
             "required": false, 
             "type": "style", 
-            "description": "Sets how exponents show up. Here's how the number 1000000000 (1 billion) shows up in each. If set to 'none': 1,000,000,000. If set to 'e': 1e+9. If set to 'E': 1E+9. If set to 'power': 1x10^9 (where the 9 will appear super-scripted. If set to 'SI': 1G. If set to 'B': 1B (useful when referring to currency."
+            "description": "Sets how exponents show up. Here's how the number 1000000000 (1 billion) shows up in each. If set to 'none': 1,000,000,000. If set to 'e': 1e+9. If set to 'E': 1E+9. If set to 'power': 1x10^9 (where the 9 will appear super-scripted). If set to 'SI': 1G. If set to 'B': 1B (useful when referring to currency)."
         }, 
         "showexponent": {
             "val_types": "'all' | 'first' | 'last' | 'none'", 
@@ -2640,10 +2716,10 @@
             "description": "If set to 'all', ALL exponents will be shown appended to their significands. If set to 'first', the first tick's exponent will be appended to its significand, however no other exponents will appear--only the significands. If set to 'last', the last tick's exponent will be appended to its significand, however no other exponents will appear--only the significands. If set to 'none', no exponents will appear, only the significands."
         }, 
         "xanchor": {
-            "val_types": "'bottom' | 'middle' | 'top'", 
+            "val_types": "'auto' | 'bottom' | 'middle' | 'top'", 
             "required": false, 
             "type": "plot_info", 
-            "description": "This defines the horizontal location on the object referenced by the 'y' (position) key. For example, if 'y'==1, 'yref'='paper', and 'yanchor'='top', the topmost portion of this object will line up with the topmost edge of the plotting area."
+            "description": "Sets the horizontal location of the object referenced by the 'y' (position) key. For example, if 'y'==1, 'yref'='paper', and 'yanchor'='top', the topmost portion of this object will line up with the topmost edge of the plotting area."
         }, 
         "bgcolor": {
             "val_types": "string describing color", 
@@ -2675,7 +2751,7 @@
             "val_types": "number", 
             "required": false, 
             "type": "style", 
-            "description": "The width of the outline surrounding this colorbar."
+            "description": "Sets the width of the outline surrounding this colorbar."
         }, 
         "borderwidth": {
             "val_types": "number: x >= 0", 
@@ -2687,13 +2763,13 @@
             "val_types": "number: x in [0, 50]", 
             "required": false, 
             "type": "style", 
-            "description": "The amount of space (padding) between the colorbar and the enclosing boarder in the x-direction."
+            "description": "Sets the amount of space (padding) between the colorbar and the enclosing boarder in the x-direction."
         }, 
         "ypad": {
             "val_types": "number: x in [0, 50]", 
             "required": false, 
             "type": "style", 
-            "description": "The amount of space (padding) between the colorbar and the enclosing boarder in the y-direction."
+            "description": "Sets the amount of space (padding) between the colorbar and the enclosing boarder in the y-direction."
         }
     }, 
     "margin": {
@@ -2701,31 +2777,31 @@
             "val_types": "number: x >= 0", 
             "required": false, 
             "type": "style", 
-            "description": "Left margin size in pixels."
+            "description": "Sets the left margin size in pixels."
         }, 
         "r": {
             "val_types": "number: x >= 0", 
             "required": false, 
             "type": "style", 
-            "description": "Right margin size in pixels."
+            "description": "Sets the right margin size in pixels."
         }, 
         "b": {
             "val_types": "number: x >= 0", 
             "required": false, 
             "type": "style", 
-            "description": "Bottom margin size in pixels."
+            "description": "Sets the bottom margin size in pixels."
         }, 
         "t": {
             "val_types": "number: x >= 0", 
             "required": false, 
             "type": "style", 
-            "description": "Top margin size in pixels."
+            "description": "Sets the top margin size in pixels."
         }, 
         "pad": {
             "val_types": "number: x >= 0", 
             "required": false, 
             "type": "style", 
-            "description": "The distance between edge of the plot and the bounding rectangle that encloses the plot (in pixels)."
+            "description": "Sets the distance between edge of the plot and the bounding rectangle that encloses the plot (in pixels)."
         }, 
         "autoexpand": {
             "val_types": "boolean: True | False", 
@@ -2736,16 +2812,16 @@
     }, 
     "annotation": {
         "x": {
-            "val_types": "number: x >= 0", 
+            "val_types": "number", 
             "required": false, 
             "type": "plot_info", 
-            "description": "Sets the 'x' position of this annotations."
+            "description": "Sets the 'x' position of this annotation. Use in conjunction with 'xref' and 'xanchor' to fine-tune the location of this annotation."
         }, 
         "y": {
-            "val_types": "number: x >= 0", 
+            "val_types": "number", 
             "required": false, 
             "type": "plot_info", 
-            "description": "Sets the 'y' position of this annotations."
+            "description": "Sets the 'y' position of this annotation. Use in conjunction with 'yref' and 'yanchor' to fine-tune the location of this annotation."
         }, 
         "xref": {
             "val_types": "'paper' | 'x1' | 'x2' | etc", 
@@ -2766,9 +2842,16 @@
             "examples": [
                 "regular text", 
                 "an annotation<br>spanning two lines", 
-                "<b>bold text</b>"
+                "<b>bold text</b>", 
+                "<a href='https://plot.ly/'>a link to plot.ly</a>"
             ], 
-            "description": "The text associated with this annotation. Plotly uses a subset of HTML escape characters to do things like newline (<br>), bold (<b></b>), italics (<i></i>), etc."
+            "description": "The text associated with this annotation. Plotly uses a subset of HTML tags to do things like newline (<br>), bold (<b></b>), italics (<i></i>), hyperlinks (<a href='...'></a>). Tags <em>, <sup>, <sub>, <span> are also supported."
+        }, 
+        "showarrow": {
+            "val_types": "boolean: True | False", 
+            "required": false, 
+            "type": "plot_info", 
+            "description": "Toggle whether or not the arrow associated with this annotation with be shown. If False, then the text linked to 'text' lines up with the 'x', 'y' coordinates'. If True (the default), then 'text' is placed near the arrow's tail."
         }, 
         "font": {
             "val_types": "dictionary-like", 
@@ -2776,17 +2859,23 @@
             "type": "object", 
             "description": "A dictionary-like object describing the font settings within this annotation."
         }, 
+        "xanchor": {
+            "val_types": "'auto' | 'left' | 'center' | 'right'", 
+            "required": false, 
+            "type": "plot_info", 
+            "description": "Sets the horizontal location of the object referenced by the 'x' (position) key. For example, if 'x'==1, 'xref'='paper', and 'xanchor'='right', the rightmost portion of this object will line up with the rightmost edge of the plotting area."
+        }, 
+        "yanchor": {
+            "val_types": "'auto' | 'bottom' | 'middle' | 'top'", 
+            "required": false, 
+            "type": "plot_info", 
+            "description": "Sets the horizontal location of the object referenced by the 'y' (position) key. For example, if 'y'==1, 'yref'='paper', and 'yanchor'='top', the topmost portion of this object will line up with the topmost edge of the plotting area."
+        }, 
         "align": {
             "val_types": "'left' | 'center' | 'right'", 
             "required": false, 
             "type": "plot_info", 
-            "description": "Sets the alignment of the text in the annotation."
-        }, 
-        "showarrow": {
-            "val_types": "boolean: True | False", 
-            "required": false, 
-            "type": "plot_info", 
-            "description": "Toggle whether or not the arrow associated with this annotation with be shown."
+            "description": "Sets the vertical alignment of the text in the annotation with respect to the set 'x', 'y' position. Has only an effect if the text linked to 'text' spans more two or more lines (using <br> HTML one or more tags)."
         }, 
         "arrowhead": {
             "val_types": "0 | 1 | 2 | 3 | 4 | 5 | 6 | 7", 
@@ -2831,6 +2920,12 @@
             "type": "plot_info", 
             "description": "Position of the annotation text relative to the arrowhead about the y-axis. Has an effect only if 'showarrow' is set to True."
         }, 
+        "textangle": {
+            "val_types": "number: x in [-180, 180]", 
+            "required": false, 
+            "type": "style", 
+            "description": "Sets the angle of the text linked to 'text' with respect to the horizontal."
+        }, 
         "bordercolor": {
             "val_types": "string describing color", 
             "required": false, 
@@ -2874,42 +2969,6 @@
             "required": false, 
             "type": "style", 
             "description": "Sets the opacity, or transparency, of the entire object, also known as the alpha channel of colors. If the object's color is given in terms of 'rgba' color model, 'opacity' is redundant."
-        }, 
-        "xanchor": {
-            "val_types": "'left' | 'center' | 'right'", 
-            "required": false, 
-            "type": "plot_info", 
-            "description": "This defines the horizontal location on the object referenced by the 'x' (position) key. For example, if 'x'==1, 'xref'='paper', and 'xanchor'='right', the rightmost portion of this object will line up with the rightmost edge of the plotting area."
-        }, 
-        "yanchor": {
-            "val_types": "'bottom' | 'middle' | 'top'", 
-            "required": false, 
-            "type": "plot_info", 
-            "description": "This defines the horizontal location on the object referenced by the 'y' (position) key. For example, if 'y'==1, 'yref'='paper', and 'yanchor'='top', the topmost portion of this object will line up with the topmost edge of the plotting area."
-        }, 
-        "xatype": {
-            "val_types": "", 
-            "required": false, 
-            "type": "style", 
-            "description": "more info coming soon"
-        }, 
-        "yatype": {
-            "val_types": "", 
-            "required": false, 
-            "type": "style", 
-            "description": "more info coming soon"
-        }, 
-        "tag": {
-            "val_types": "", 
-            "required": false, 
-            "type": "style", 
-            "description": "more info coming soon"
-        }, 
-        "ref": {
-            "val_types": "", 
-            "required": false, 
-            "type": "style", 
-            "description": "more info coming soon"
         }
     }, 
     "layout": {
@@ -2922,7 +2981,7 @@
         "titlefont": {
             "val_types": "string", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "style", 
             "description": "A dictionary-like object describing the font settings of the figure's title."
         }, 
         "font": {
@@ -2941,7 +3000,7 @@
             "val_types": "boolean: True | False", 
             "required": false, 
             "type": "style", 
-            "description": "Toggle whether or not the dimensions of the figure are picked automatically by Plotly. Once 'autosize' is set to False, the figure's dimensions can be set with 'width' and 'height'."
+            "description": "Toggle whether or not the dimensions of the figure are automatically picked by Plotly. Plotly picks figure's dimensions as a function of your machine's display resolution. Once 'autosize' is set to False, the figure's dimensions can be set with 'width' and 'height'."
         }, 
         "width": {
             "val_types": "number: x > 0", 
@@ -3015,19 +3074,25 @@
             "val_types": "'closest' | 'x' | 'y'", 
             "required": false, 
             "type": "style", 
-            "description": "Set what happens when a user hovers over the figure. When set to 'x', all data sharing the same 'x' coordinate will be shown on screen with corresponding trace labels. When set to 'y' all data sharing the same 'y' coordainte will be shown on the screen with corresponding trace labels. When set to 'closest', information about the data point closest to where the viewer is hovering will appear."
+            "description": "Sets this figure's behavior when a user hovers over it. When set to 'x', all data sharing the same 'x' coordinate will be shown on screen with corresponding trace labels. When set to 'y' all data sharing the same 'y' coordainte will be shown on the screen with corresponding trace labels. When set to 'closest', information about the data point closest to where the viewer is hovering will appear."
         }, 
         "dragmode": {
             "val_types": "'zoom' | 'pan'", 
             "required": false, 
             "type": "style", 
-            "description": "Set what happens when a user preforms a mouse 'drag' in the plot area. When set to 'zoom', a portion of the plot will be highlighted, when the viewer exits the drag, this highlighted section will be zoomed in on. When set to 'pan', data in the plot will move along with the viewers dragging motions. A user can always depress the 'shift' key to access the whatever functionality has not been set as the default."
+            "description": "Sets this figure's behavior when a user preforms a mouse 'drag' in the plot area. When set to 'zoom', a portion of the plot will be highlighted, when the viewer exits the drag, this highlighted section will be zoomed in on. When set to 'pan', data in the plot will move along with the viewers dragging motions. A user can always depress the 'shift' key to access the whatever functionality has not been set as the default."
+        }, 
+        "separators": {
+            "val_types": "a two-character string", 
+            "required": false, 
+            "type": "style", 
+            "description": "Sets the decimal (the first character) and thousands (the second character) separators to be displayed on this figure's tick labels and hover mode. This is meant for internationalization purposes. For example, if 'separator' is set to ', ', then decimals are separated by commas and thousands by spaces. One may have to set 'exponentformat' to 'none' in the corresponding axis object(s) to see the effects."
         }, 
         "barmode": {
             "val_types": "'stack' | 'group' | 'overlay'", 
             "required": false, 
             "type": "plot_info", 
-            "description": "For bar and histogram plots only. This sets how multiple bar objects are plotted together. In other words, this defines how bars at the same location appear on the plot. If set to 'stack' the bars are stacked ontop of one another. If set to 'group', the bars are plotted next to one another, centered around the shared location. If set to 'overlay', the bars are simply plotted over one another, you may need to set the opacity to see this."
+            "description": "For bar and histogram plots only. This sets how multiple bar objects are plotted together. In other words, this defines how bars at the same location appear on the plot. If set to 'stack' the bars are stacked on top of one another. If set to 'group', the bars are plotted next to one another, centered around the shared location. If set to 'overlay', the bars are simply plotted over one another, you may need to set the opacity to see this."
         }, 
         "bargap": {
             "val_types": "number: x >= 0", 
@@ -3063,61 +3128,19 @@
             "val_types": "'clockwise' | 'counterclockwise'", 
             "required": false, 
             "type": "plot_info", 
-            "description": "For polar plots only. Choose the direction corresponding to positive angular distances."
+            "description": "For polar plots only. Sets the direction corresponding to positive angles."
         }, 
         "orientation": {
             "val_types": "number: x in [-360, 360]", 
             "required": false, 
             "type": "plot_info", 
-            "description": "For polar plots only. Sets the orientation of (i.e. rotate) the polar plot."
-        }, 
-        "defaultcolorrange": {
-            "val_types": "number: x in [-360, 360]", 
-            "required": false, 
-            "type": "style", 
-            "description": "For polar plots only. More info coming soon."
-        }, 
-        "opacity": {
-            "val_types": "number: x in [0, 1]", 
-            "required": false, 
-            "type": "style", 
-            "description": "For polar plots only.Sets the opacity of the entire plot."
-        }, 
-        "needsEndSpacing": {
-            "val_types": "", 
-            "required": false, 
-            "type": "style", 
-            "description": "For polar plots only. info coming soon."
-        }, 
-        "categories": {
-            "val_types": "", 
-            "required": false, 
-            "type": "plot_info", 
-            "description": "info coming soon"
-        }, 
-        "separators": {
-            "val_types": "", 
-            "required": false, 
-            "type": "style", 
-            "description": "info coming soon"
-        }, 
-        "labeloffset": {
-            "val_types": "", 
-            "required": false, 
-            "type": "style", 
-            "description": "info coming soon"
+            "description": "For polar plots only. Rotates the entire polar by the given angle."
         }, 
         "hidesources": {
-            "val_types": "", 
+            "val_types": "boolean: True | False", 
             "required": false, 
-            "type": "plot_info", 
-            "description": "more info coming soon"
-        }, 
-        "bardir": {
-            "val_types": "", 
-            "required": false, 
-            "type": "plot_info", 
-            "description": "more info coming soon"
+            "type": "style", 
+            "description": "Toggle whether or not an annotation citing the data source is placed at the bottom-right corner of the figure.This key has an effect only on graphs that have been generated from forked graphs from plot.ly."
         }
     }, 
     "figure": {
