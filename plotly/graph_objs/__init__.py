@@ -7,7 +7,7 @@ information, run help(Obj) on any of the following objects defined here.
 
 
 """
-from graph_objs import *
+from .graph_objs import *
 
 __all__ = ["Data",
            "Annotations",

@@ -26,8 +26,4 @@ Modules:
 
 """
 
-from . version import __version__
-import graph_objs
-import plotly
-import tools
-import utils
+from . import plotly, graph_objs, tools, utils

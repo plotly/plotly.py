@@ -26,7 +26,7 @@ def test_initialize_stream_plot():
         res = py.plot([Scatter(x=[], y=[], mode='markers', stream=stream)],
                       auto_open=False,
                       filename='stream-test')
-        assert res == u'https://plot.ly/~PythonAPI/461'
+        assert res == 'https://plot.ly/~PythonAPI/461'
         time.sleep(5)
 
 
@@ -43,7 +43,7 @@ def test_stream_single_points():
         time.sleep(1)
         my_stream.close()
         fig = py.get_figure(un, fi)
-        print fig.to_string()
+        print(fig.to_string())
         assert fig['data'][0]['x'] == 1
         assert fig['data'][0]['y'] == 10
 
@@ -61,7 +61,7 @@ def test_stream_multiple_points():
         time.sleep(1)
         my_stream.close()
         fig = py.get_figure(un, fi)
-        print fig.to_string()
+        print(fig.to_string())
         assert fig['data'][0]['x'] == [1, 2, 3, 4]
         assert fig['data'][0]['y'] == [2, 1, 2, 5]
 
@@ -81,14 +81,14 @@ def test_stream_layout():
         time.sleep(1)
         my_stream.close()
         fig = py.get_figure(un, fi)
-        print fig.to_string()
+        print(fig.to_string())
         assert fig['layout']['title'] == title_0
         my_stream.open()
         my_stream.write(Scatter(x=1, y=10), layout=Layout(title=title_1))
         time.sleep(1)
         my_stream.close()
         fig = py.get_figure(un, fi)
-        print fig.to_string()
+        print(fig.to_string())
         assert fig['layout']['title'] == title_1
 
 

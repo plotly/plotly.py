@@ -1,3 +1,6 @@
+import matplotlib
+# Force matplotlib to not use any Xwindows backend.
+matplotlib.use('Agg')
 from ... matplotlylib import Exporter, PlotlyRenderer
 from numbers import Number as Num
 
@@ -5,7 +8,7 @@ from numbers import Number as Num
 def compare_dict(dict1, dict2, equivalent=True, msg='', tol=10e-8):
     for key in dict1:
         if key not in dict2:
-            return False, "{} should be {}".format(dict1.keys(), dict2.keys())
+            return False, "{} should be {}".format(list(dict1.keys()), list(dict2.keys()))
     for key in dict1:
         if isinstance(dict1[key], dict):
             equivalent, msg = compare_dict(dict1[key],

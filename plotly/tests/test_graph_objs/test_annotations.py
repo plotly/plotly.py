@@ -24,7 +24,7 @@ def test_trivial():
 
 @raises(PlotlyError)
 def test_weird_instantiation():  # Python allows this, but nonsensical for us.
-    print Annotations({})
+    print(Annotations({}))
 
 
 def test_dict_instantiation():
@@ -33,12 +33,12 @@ def test_dict_instantiation():
 
 @raises(PlotlyDictKeyError)
 def test_dict_instantiation_key_error():
-    print Annotations([{'not-a-key': 'anything'}])
+    print(Annotations([{'not-a-key': 'anything'}]))
 
 
 @raises(PlotlyDictValueError)
 def test_dict_instantiation_key_error():
-    print Annotations([{'font': 'not-a-dict'}])
+    print(Annotations([{'font': 'not-a-dict'}]))
 
 
 @raises(PlotlyListEntryError)

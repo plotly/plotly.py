@@ -65,7 +65,8 @@ class PlotlyGraphObjectError(PlotlyError):
                 message += "]["
         message += "]"
         if len(self.notes):
-            message += "\n\nAdditional Notes:\n{}".format("\n".join(self.notes))
+            message += "\n\nAdditional Notes:\n{0}".format(
+                "\n".join(self.notes))
         if len(self.args) > 1:
             self.args = (message, self.args[1:][0])
         else:
@@ -109,7 +110,7 @@ class PlotlyDictValueError(PlotlyGraphObjectError):
 class PlotlyListEntryError(PlotlyGraphObjectError):
     def __init__(self, obj='', index='', entry='', **kwargs):
         message = (
-            "The entry at index, '{}', is invalid in a '{}' object"
+            "The entry at index, '{0}', is invalid in a '{1}' object"
             "".format(index, obj.__class__.__name__)
         )
         plain_message = (
@@ -125,14 +126,14 @@ class PlotlyListEntryError(PlotlyGraphObjectError):
 class PlotlyDataTypeError(PlotlyGraphObjectError):
     def __init__(self, obj='', index='', **kwargs):
         message = (
-                "The entry at index, '{}', is invalid because it does not "
+                "The entry at index, '{0}', is invalid because it does not "
                 "contain a valid 'type' key-value. This is required for valid "
-                "'{}' lists.".format(index, obj.__class__.__name__)
+                "'{1}' lists.".format(index, obj.__class__.__name__)
         )
         plain_message = (
-                "Invalid entry found in 'data' object at index, '{}'. It does "
-                "not contain a valid 'type' key, required for 'data' lists."
-                "".format(index))
+                "Invalid entry found in 'data' object at index, '{0}'. It "
+                "does not contain a valid 'type' key, required for 'data' "
+                "lists.".format(index))
         super(PlotlyDataTypeError, self).__init__(message=message,
                                                   plain_message=plain_message,
                                                   path=[index],

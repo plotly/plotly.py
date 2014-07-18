@@ -1,6 +1,6 @@
 import time
-import httplib
-import StringIO
+import six
+from six.moves import http_client
 
 
 class Stream:
@@ -32,11 +32,11 @@ class Stream:
 
             # Reconnect depending on the status code.
             if ((response == '' and '' in reconnect_on) or
-                (response and isinstance(response, httplib.HTTPResponse) and
+                (response and isinstance(response, http_client.HTTPResponse) and
                  response.status in reconnect_on)):
                 self._reconnect()
 
-            elif response and isinstance(response, httplib.HTTPResponse):
+            elif response and isinstance(response, http_client.HTTPResponse):
                 # If an HTTPResponse was recieved then
                 # make the users aware instead of
                 # auto-reconnecting in case the
@@ -62,7 +62,7 @@ class Stream:
             # Send the message in chunk-encoded form
             self._conn.send('{msglen}\r\n{msg}\r\n'
                             .format(msglen=msglen, msg=msg))
-        except httplib.socket.error:
+        except http_client.socket.error:
             self._reconnect()
             self.write(data)
 
@@ -73,7 +73,7 @@ class Stream:
         server = self._server
         port = self._port
         headers = self._headers
-        self._conn = httplib.HTTPConnection(server, port)
+        self._conn = http_client.HTTPConnection(server, port)
 
         self._conn.putrequest('POST', '/')
         self._conn.putheader('Transfer-Encoding', 'chunked')
@@ -91,7 +91,7 @@ class Stream:
     def close(self):
         ''' Close the connection to server.
 
-        If available, return a httplib.HTTPResponse object.
+        If available, return a http_client.HTTPResponse object.
 
         Closing the connection involves sending the
         Transfer-Encoding terminating bytes.
@@ -104,7 +104,7 @@ class Stream:
         # require an extra \r\n.
         try:
             self._conn.send('\r\n0\r\n\r\n')
-        except httplib.socket.error:
+        except http_client.socket.error:
             # In case the socket has already been closed
             return ''
 
@@ -124,7 +124,7 @@ class Stream:
         while True:
             try:
                 bytes = self._conn.sock.recv(1)
-            except httplib.socket.error:
+            except http_client.socket.error:
                 # For error 54: Connection reset by peer
                 # (and perhaps others)
                 return ''
@@ -135,13 +135,13 @@ class Stream:
         # Set recv to be non-blocking again
         self._conn.sock.setblocking(False)
 
-        # Convert the response string to a httplib.HTTPResponse
+        # Convert the response string to a http_client.HTTPResponse
         # object with a bit of a hack
         if response != '':
             # Taken from
             # http://pythonwise.blogspot.ca/2010/02/parse-http-response.html
             try:
-                response = httplib.HTTPResponse(_FakeSocket(response))
+                response = http_client.HTTPResponse(_FakeSocket(response))
                 response.begin()
             except:
                 # Bad headers ... etc.
@@ -176,7 +176,7 @@ class Stream:
             self._bytes = ''
             self._bytes = self._conn.sock.recv(1)
             return False
-        except httplib.socket.error as e:
+        except http_client.socket.error as e:
             # Check why recv failed
             # Windows machines are the error codes
             # that start with 1
@@ -215,7 +215,7 @@ class Stream:
         if not self._isconnected():
             try:
                 self._connect()
-            except httplib.socket.error as e:
+            except http_client.socket.error as e:
                 # Attempt to reconnect if the connection was refused
                 if e.errno == 61 or e.errno == 10061:
                     # errno 61 is the "Connection Refused" error
@@ -241,8 +241,8 @@ class Stream:
         self._delay = 1
 
 
-class _FakeSocket(StringIO.StringIO):
-    # Used to construct a httplib.HTTPResponse object
+class _FakeSocket(six.StringIO):
+    # Used to construct a http_client.HTTPResponse object
     # from a string.
     # Thx to: http://pythonwise.blogspot.ca/2010/02/parse-http-response.html
     def makefile(self, *args, **kwargs):

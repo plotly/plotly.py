@@ -8,6 +8,9 @@ A module intended for use with Nose.
 from ... plotly import plotly as py
 from ... import exceptions
 from nose.tools import raises
+import matplotlib
+# Force matplotlib to not use any Xwindows backend.
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 py.sign_in('test-runner', '9h29fe3l0x')

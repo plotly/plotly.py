@@ -16,12 +16,12 @@ def test_trivial():
 
 @raises(PlotlyError)
 def test_weird_instantiation():
-    print PlotlyList({})
+    print(PlotlyList({}))
 
 
 @raises(PlotlyError)
 def test_instantiation_error():
-    print PlotlyList([{}])
+    print(PlotlyList([{}]))
 
 
 def test_blank_trace_instantiation():

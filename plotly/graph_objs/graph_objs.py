@@ -23,11 +23,18 @@ from a dict/list JSON representation.
 
 """
 import warnings
-import collections
-import json
 import textwrap
+import six
+import sys
 from .. import exceptions
-from .. import utils
+from plotly import utils
+
+if sys.version[:3] == '2.6':
+    from ordereddict import OrderedDict
+    import simplejson as json
+else:
+    from collections import OrderedDict
+    import json
 
 __all__ = ["Data",
            "Annotations",
@@ -67,7 +74,7 @@ __all__ = ["Data",
 from pkg_resources import resource_string
 s = resource_string('plotly',
                     'graph_reference/graph_objs_meta.json').decode('utf-8')
-INFO = json.loads(s, object_pairs_hook=collections.OrderedDict)
+INFO = json.loads(s, object_pairs_hook=OrderedDict)
 
 INFO = utils.decode_unicode(INFO)
 
@@ -172,7 +179,7 @@ class ListMeta(type):
         doc = "".join([line[min_indent:] + '\n' for line in doc.splitlines()])
         # Add section header for method list...
         doc += "Quick method reference:\n\n"
-        doc += "\t{}.".format(name) + "\n\t{}.".format(name).join(
+        doc += "\t{0}.".format(name) + "\n\t{0}.".format(name).join(
             ["update(changes)", "strip_style()", "get_data()",
              "to_graph_objs()", "validate()", "to_string()",
              "force_clean()"]) + "\n\n"
@@ -202,7 +209,7 @@ class DictMeta(type):
         doc = "".join([line[min_indent:] + '\n' for line in doc.splitlines()])
         # Add section header for method list...
         doc += "Quick method reference:\n\n"
-        doc += "\t{}.".format(name) + "\n\t{}.".format(name).join(
+        doc += "\t{0}.".format(name) + "\n\t{0}.".format(name).join(
             ["update(changes)", "strip_style()", "get_data()",
              "to_graph_objs()", "validate()", "to_string()",
              "force_clean()"]) + "\n\n"
@@ -229,7 +236,7 @@ class DictMeta(type):
                 try:
                     val_types = str(obj_info[key]['val_types'])
                     if typ == 'object':
-                        val_types = "{} object | ".format(KEY_TO_NAME[key]) + \
+                        val_types = "{0} object | ".format(KEY_TO_NAME[key])+\
                                     val_types
                 except KeyError:
                     val_types = undocumented
@@ -237,7 +244,7 @@ class DictMeta(type):
                     descr = str(obj_info[key]['description'])
                 except KeyError:
                     descr = undocumented
-                str_1 = "{} [required={}] (value={})".format(
+                str_1 = "{0} [required={1}] (value={2})".format(
                     key, required, val_types)
                 if "streamable" in obj_info[key] and obj_info[key]["streamable"]:
                     str_1 += " (streamable)"
@@ -249,7 +256,7 @@ class DictMeta(type):
                 doc += str_1 + str_2
                 # if a user can run help on this value, tell them!
                 if typ == "object":
-                    doc += "\n\t\tFor more, run `help(plotly.graph_objs.{" \
+                    doc += "\n\t\tFor more, run `help(plotly.graph_objs.{0" \
                            "})`\n".format(KEY_TO_NAME[key])
                 # if example usage exists, tell them!
                 if 'examples' in obj_info[key]:
@@ -267,7 +274,7 @@ class DictMeta(type):
         attrs['__doc__'] = doc.expandtabs(tab_size)
         return super(DictMeta, mcs).__new__(mcs, name, bases, attrs)
 
-
+@six.add_metaclass(ListMeta)
 class PlotlyList(list):
     """A container for PlotlyDicts, inherits from standard list.
 
@@ -287,7 +294,6 @@ class PlotlyList(list):
 
 
     """
-    __metaclass__ = ListMeta
 
     def __init__(self, *args):
         super(PlotlyList, self).__init__(*args)
@@ -492,7 +498,7 @@ class PlotlyList(list):
             del self[index - del_ct]
             del_ct += 1
 
-
+@six.add_metaclass(DictMeta)
 class PlotlyDict(dict):
     """A base dict class for all objects that style a figure in plotly.
 
@@ -506,7 +512,6 @@ class PlotlyDict(dict):
     Any available methods that hold for a dict hold for a PlotlyDict.
 
     """
-    __metaclass__ = DictMeta
 
     def __init__(self, *args, **kwargs):
         class_name = self.__class__.__name__
@@ -552,7 +557,7 @@ class PlotlyDict(dict):
         self.to_graph_objs()
 
         if dict1 is not None:
-            for key, val in dict1.items():
+            for key, val in list(dict1.items()):
                 if key in self:
                     if isinstance(self[key], (PlotlyDict, PlotlyList)):
                         self[key].update(val)
@@ -562,7 +567,7 @@ class PlotlyDict(dict):
                     self[key] = val
 
         if len(dict2):
-            for key, val in dict2.items():
+            for key, val in list(dict2.items()):
                 if key in self:
                     if isinstance(self[key], (PlotlyDict, PlotlyList)):
                         self[key].update(val)
@@ -592,7 +597,7 @@ class PlotlyDict(dict):
         """
         self.to_graph_objs()
         obj_key = NAME_TO_KEY[self.__class__.__name__]
-        keys = self.keys()
+        keys = list(self.keys())
         for key in keys:
             if isinstance(self[key], (PlotlyDict, PlotlyList)):
                 self[key].strip_style()
@@ -602,7 +607,7 @@ class PlotlyDict(dict):
                         if not hasattr(self[key], '__iter__'):
                             del self[key]
                 except KeyError:  # TODO: Update the JSON
-                    # print "'type' not in {} for {}".format(obj_key, key)
+                    # print "'type' not in {0} for {1}".format(obj_key, key)
                     pass
 
     def get_data(self):
@@ -611,7 +616,7 @@ class PlotlyDict(dict):
         class_name = self.__class__.__name__
         obj_key = NAME_TO_KEY[class_name]
         d = dict()
-        for key, val in self.items():
+        for key, val in list(self.items()):
             if isinstance(val, (PlotlyDict, PlotlyList)):
                 d[key] = val.get_data()
             else:
@@ -620,13 +625,13 @@ class PlotlyDict(dict):
                         d[key] = val
                 except KeyError:
                     pass
-        keys = d.keys()
+        keys = list(d.keys())
         for key in keys:
             if isinstance(d[key], (dict, list)):
                 if len(d[key]) == 0:
                     del d[key]
         if len(d) == 1:
-            d = d.values()[0]
+            d = list(d.values())[0]
         return d
 
     def to_graph_objs(self, caller=True):
@@ -639,7 +644,7 @@ class PlotlyDict(dict):
 
         """
         info_key = NAME_TO_KEY[self.__class__.__name__]
-        keys = self.keys()
+        keys = list(self.keys())
         for key in keys:
             if isinstance(self[key], (PlotlyDict, PlotlyList)):
                 try:
@@ -665,7 +670,7 @@ class PlotlyDict(dict):
                                 val_types=val_types,
                                 notes="value needs to be dictionary-like"
                             )
-                        for k, v in self.pop(key).items():
+                        for k, v in list(self.pop(key).items()):
                             obj[k] = v  # finish up momentarily...
                     else:  # if not PlotlyDict, it MUST be a PlotlyList
                         if not isinstance(self[key], list):
@@ -708,7 +713,7 @@ class PlotlyDict(dict):
                 err.prepare()
                 raise
         obj_key = NAME_TO_KEY[self.__class__.__name__]
-        for key, val in self.items():
+        for key, val in list(self.items()):
             if isinstance(val, (PlotlyDict, PlotlyList)):
                 try:
                     val.validate(caller=False)
@@ -737,15 +742,15 @@ class PlotlyDict(dict):
                     if len(matching_objects):
                         notes += "That key is valid only in these objects:\n\n"
                         for obj in matching_objects:
-                            notes += "\t{}".format(KEY_TO_NAME[obj])
+                            notes += "\t{0}".format(KEY_TO_NAME[obj])
                             try:
-                                notes += '({}="{}")\n'.format(
+                                notes += '({0}="{1}")\n'.format(
                                     repr(key), INFO[obj][key]['val_types'])
                             except KeyError:
-                                notes += '({}="..")\n'.format(repr(key))
+                                notes += '({0}="..")\n'.format(repr(key))
                         notes.expandtabs()
                     else:
-                        notes += ("Couldn't find uses for key: {}\n\n"
+                        notes += ("Couldn't find uses for key: {0}\n\n"
                                   "".format(repr(key)))
                     raise exceptions.PlotlyDictKeyError(obj=self,
                                                         key=key,
@@ -810,7 +815,7 @@ class PlotlyDict(dict):
                 err.prepare()
                 raise
         obj_type = NAME_TO_KEY[self.__class__.__name__]
-        ordered_dict = collections.OrderedDict()
+        ordered_dict = OrderedDict()
         # grab keys like xaxis1, xaxis2, etc...
         unordered_keys = [key for key in self if key not in INFO[obj_type]]
         for key in INFO[obj_type]:
@@ -843,7 +848,7 @@ class PlotlyDict(dict):
         del_keys = [key for key in self if str(key) not in INFO[obj_key]]
         for key in del_keys:
             del self[key]
-        keys = self.keys()
+        keys = list(self.keys())
         for key in keys:
             try:
                 self[key].force_clean(caller=False)  # TODO: add error handling
@@ -889,7 +894,7 @@ class Data(PlotlyList):
                         index=index
                     )
                 obj = NAME_TO_CLASS[obj_name]()  # don't hide if KeyError!
-                for k, v in entry.items():
+                for k, v in list(entry.items()):
                     obj[k] = v
                 self[index] = obj
             if not isinstance(self[index], PlotlyTrace):  # Trace ONLY!!!
@@ -939,7 +944,7 @@ class Annotations(PlotlyList):
                     )
             elif isinstance(entry, dict):
                 obj = Annotation()
-                for k, v in entry.items():
+                for k, v in list(entry.items()):
                     obj[k] = v
                 self[index] = obj
             else:
@@ -1253,7 +1258,7 @@ class Layout(PlotlyDict):
         appropriate `kind`.
 
         """
-        keys = self.keys()
+        keys = list(self.keys())
         for key in keys:
             if key[:5] in ['xaxis', 'yaxis']:  # allows appended integers!
                 try:
@@ -1267,7 +1272,7 @@ class Layout(PlotlyDict):
                         obj = XAxis()
                     else:
                         obj = YAxis()
-                    for k, v in self.pop(key).items():
+                    for k, v in list(self.pop(key).items()):
                         obj[k] = v
                     self[key] = obj  # call to super will call 'to_graph_objs'
         super(Layout, self).to_graph_objs(caller=caller)
@@ -1366,7 +1371,7 @@ class Layout(PlotlyDict):
                     del self[key]
             else:
                 del self[key]
-        keys = self.keys()
+        keys = list(self.keys())
         for key in keys:
             try:
                 self[key].force_clean(caller=False)  # TODO error handling??

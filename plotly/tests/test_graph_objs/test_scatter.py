@@ -11,7 +11,7 @@ from ... exceptions import PlotlyError
 
 
 def test_trivial():
-    print Scatter()
+    print(Scatter())
     assert Scatter() == dict(type='scatter')
 
 

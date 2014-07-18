@@ -9,6 +9,7 @@ A module intended for use with Nose.
 import requests
 import copy
 import json
+import six
 
 default_headers = {'plotly-username': '',
                    'plotly-apikey': '',
@@ -30,13 +31,16 @@ def test_user_does_not_exist():
     hd = copy.copy(default_headers)
     hd['plotly-username'] = username
     hd['plotly-apikey'] = api_key
-    resource = "/apigetfile/{}/{}/".format(file_owner, file_id)
+    resource = "/apigetfile/{0}/{1}/".format(file_owner, file_id)
     response = requests.get(server + resource, headers=hd)
-    content = json.loads(response.content)
-    print response.status_code
-    print content
+    if six.PY3:
+        content = json.loads(response.content.decode('unicode_escape'))
+    else:
+        content = json.loads(response.content)
+    print(response.status_code)
+    print(content)
     assert response.status_code == 404
-    assert (content['error'] == "Aw, snap! We don't have an account for {}. "
+    assert (content['error'] == "Aw, snap! We don't have an account for {0}. "
                                 "Want to try again? Sign in is not case "
                                 "sensitive.".format(username))
 
@@ -49,11 +53,14 @@ def test_file_does_not_exist():
     hd = copy.copy(default_headers)
     hd['plotly-username'] = username
     hd['plotly-apikey'] = api_key
-    resource = "/apigetfile/{}/{}/".format(file_owner, file_id)
+    resource = "/apigetfile/{0}/{1}/".format(file_owner, file_id)
     response = requests.get(server + resource, headers=hd)
-    content = json.loads(response.content)
-    print response.status_code
-    print content
+    if six.PY3:
+        content = json.loads(response.content.decode('unicode_escape'))
+    else:
+        content = json.loads(response.content)
+    print(response.status_code)
+    print(content)
     assert response.status_code == 404
     assert (content['error'] == "Aw, snap! It looks like this file does not "
                                 "exist. Want to try again?")
@@ -67,11 +74,8 @@ def test_wrong_api_key():  # TODO: does this test the right thing?
     hd = copy.copy(default_headers)
     hd['plotly-username'] = username
     hd['plotly-apikey'] = api_key
-    resource = "/apigetfile/{}/{}/".format(file_owner, file_id)
+    resource = "/apigetfile/{0}/{1}/".format(file_owner, file_id)
     response = requests.get(server + resource, headers=hd)
-    content = json.loads(response.content)
-    print response.status_code
-    print content
     assert response.status_code == 401
     # TODO: check error message?
 
@@ -87,11 +91,14 @@ def test_private_permission_defined():
     hd = copy.copy(default_headers)
     hd['plotly-username'] = username
     hd['plotly-apikey'] = api_key
-    resource = "/apigetfile/{}/{}/".format(file_owner, file_id)
+    resource = "/apigetfile/{0}/{1}/".format(file_owner, file_id)
     response = requests.get(server + resource, headers=hd)
-    content = json.loads(response.content)
-    print response.status_code
-    print content
+    if six.PY3:
+        content = json.loads(response.content.decode('unicode_escape'))
+    else:
+        content = json.loads(response.content)
+    print(response.status_code)
+    print(content)
     assert response.status_code == 403
 
 # Private File that is shared
@@ -101,15 +108,18 @@ def test_private_permission_defined():
 def test_missing_headers():
     file_owner = 'get_test_user'
     file_id = 0
-    resource = "/apigetfile/{}/{}/".format(file_owner, file_id)
-    headers = default_headers.keys()
+    resource = "/apigetfile/{0}/{1}/".format(file_owner, file_id)
+    headers = list(default_headers.keys())
     for header in headers:
         hd = copy.copy(default_headers)
         del hd[header]
         response = requests.get(server + resource, headers=hd)
-        content = json.loads(response.content)
-        print response.status_code
-        print content
+        if six.PY3:
+            content = json.loads(response.content.decode('unicode_escape'))
+        else:
+            content = json.loads(response.content)
+        print(response.status_code)
+        print(content)
         assert response.status_code == 422
 
 
@@ -121,11 +131,14 @@ def test_valid_request():
     hd = copy.copy(default_headers)
     hd['plotly-username'] = username
     hd['plotly-apikey'] = api_key
-    resource = "/apigetfile/{}/{}/".format(file_owner, file_id)
+    resource = "/apigetfile/{0}/{1}/".format(file_owner, file_id)
     response = requests.get(server + resource, headers=hd)
-    content = json.loads(response.content)
-    print response.status_code
-    print content
+    if six.PY3:
+        content = json.loads(response.content.decode('unicode_escape'))
+    else:
+        content = json.loads(response.content)
+    print(response.status_code)
+    print(content)
     assert response.status_code == 200
     # content = json.loads(res.content)
     # response_payload = content['payload']

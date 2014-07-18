@@ -7,9 +7,12 @@ with the matplotlylib package.
 
 """
 import warnings
-from . mplexporter import Exporter, Renderer
+
+from . mplexporter import Renderer
 from . import mpltools
-from .. graph_objs import *
+from ..graph_objs import *
+
+
 
 # Warning format
 def warning_on_one_line(message, category, filename, lineno, file=None, line=None):
@@ -135,11 +138,11 @@ class PlotlyRenderer(Renderer):
         self.axis_ct += 1
         # set defaults in axes
         xaxis = XAxis(
-            anchor='y{}'.format(self.axis_ct),
+            anchor='y{0}'.format(self.axis_ct),
             zeroline=False,
             ticks='inside')
         yaxis = YAxis(
-            anchor='x{}'.format(self.axis_ct),
+            anchor='x{0}'.format(self.axis_ct),
             zeroline=False,
             ticks='inside')
         # update defaults with things set in mpl
@@ -160,8 +163,8 @@ class PlotlyRenderer(Renderer):
 
 
         # put axes in our figure
-        self.plotly_fig['layout']['xaxis{}'.format(self.axis_ct)] = xaxis
-        self.plotly_fig['layout']['yaxis{}'.format(self.axis_ct)] = yaxis
+        self.plotly_fig['layout']['xaxis{0}'.format(self.axis_ct)] = xaxis
+        self.plotly_fig['layout']['yaxis{0}'.format(self.axis_ct)] = yaxis
 
     def close_axes(self, ax):
         """Close the axes object and clean up.
@@ -211,8 +214,8 @@ class PlotlyRenderer(Renderer):
         bar = Bar(orientation=orientation,
                   x=x,
                   y=y,
-                  xaxis='x{}'.format(self.axis_ct),
-                  yaxis='y{}'.format(self.axis_ct),
+                  xaxis='x{0}'.format(self.axis_ct),
+                  yaxis='y{0}'.format(self.axis_ct),
                   opacity=patch_coll[0]['alpha'],
                   marker=Marker(
                       color=patch_coll[0]['facecolor'],
@@ -294,8 +297,8 @@ class PlotlyRenderer(Renderer):
                                   name=props['label'],
                                   x=[xy_pair[0] for xy_pair in props['data']],
                                   y=[xy_pair[1] for xy_pair in props['data']],
-                                  xaxis='x{}'.format(self.axis_ct),
-                                  yaxis='y{}'.format(self.axis_ct),
+                                  xaxis='x{0}'.format(self.axis_ct),
+                                  yaxis='y{0}'.format(self.axis_ct),
                                   line=line,
                                   marker=marker)
             self.plotly_fig['data'] += marked_line,
@@ -525,12 +528,12 @@ class PlotlyRenderer(Renderer):
                             "coordinates\n"
                 x, y = props['position']
                 axis_ct = self.axis_ct
-                xaxis = self.plotly_fig['layout']['xaxis{}'.format(axis_ct)]
-                yaxis = self.plotly_fig['layout']['yaxis{}'.format(axis_ct)]
+                xaxis = self.plotly_fig['layout']['xaxis{0}'.format(axis_ct)]
+                yaxis = self.plotly_fig['layout']['yaxis{0}'.format(axis_ct)]
                 if (xaxis['range'][0] < x < xaxis['range'][1]
                         and yaxis['range'][0] < y < yaxis['range'][1]):
-                    xref = 'x{}'.format(self.axis_ct)
-                    yref = 'y{}'.format(self.axis_ct)
+                    xref = 'x{0}'.format(self.axis_ct)
+                    yref = 'y{0}'.format(self.axis_ct)
                 else:
                     self.msg += "            Text object is outside " \
                                 "plotting area, making 'paper' reference.\n"
@@ -642,7 +645,7 @@ class PlotlyRenderer(Renderer):
 
         """
         self.msg += "        Adding xlabel\n"
-        axis_key = 'xaxis{}'.format(self.axis_ct)
+        axis_key = 'xaxis{0}'.format(self.axis_ct)
         self.plotly_fig['layout'][axis_key]['title'] = props['text']
         titlefont = Font(size=props['style']['fontsize'],
                          color=props['style']['color'])
@@ -672,7 +675,7 @@ class PlotlyRenderer(Renderer):
 
         """
         self.msg += "        Adding ylabel\n"
-        axis_key = 'yaxis{}'.format(self.axis_ct)
+        axis_key = 'yaxis{0}'.format(self.axis_ct)
         self.plotly_fig['layout'][axis_key]['title'] = props['text']
         titlefont = Font(size=props['style']['fontsize'],
                          color=props['style']['color'])

@@ -24,7 +24,7 @@ def test_trivial():
 
 @raises(PlotlyError)
 def test_weird_instantiation():  # Python allows this...
-    print Data({})
+    print(Data({}))
 
 
 def test_default_scatter():
@@ -37,12 +37,12 @@ def test_dict_instantiation():
 
 @raises(PlotlyDictKeyError)
 def test_dict_instantiation_key_error():
-    print Data([{'not-a-key': 'anything'}])
+    print(Data([{'not-a-key': 'anything'}]))
 
 
 @raises(PlotlyDictValueError)
 def test_dict_instantiation_key_error():
-    print Data([{'marker': 'not-a-dict'}])
+    print(Data([{'marker': 'not-a-dict'}]))
 
 
 @raises(PlotlyDataTypeError)

@@ -8,6 +8,7 @@ Low-level functionality NOT intended for users to EVER use.
 
 import json
 import os.path
+import sys
 
 
 ### general file setup tools ###
@@ -24,7 +25,13 @@ def load_json_dict(filename, *args):
             except:
                 pass # TODO: issue a warning and bubble it up
         if args:
-            return {key: data[key] for key in args if key in data}
+            d = dict()
+            for key in args:
+                if key in data:
+                    d[key] = data[key]
+            return d
+            # TODO: replace with below if we drop Python 2.6 compatibility
+            # return {key: data[key] for key in args if key in data}
     return data
 
 
@@ -114,17 +121,17 @@ def decode_unicode(coll):
             if isinstance(entry, (dict, list)):
                 coll[no] = decode_unicode(entry)
             else:
-                if isinstance(entry, unicode):
+                if isinstance(entry, str):
                     try:
                         coll[no] = str(entry)
                     except UnicodeEncodeError:
                         pass
     elif isinstance(coll, dict):
-        keys, vals = coll.keys(), coll.values()
+        keys, vals = list(coll.keys()), list(coll.values())
         for key, val in zip(keys, vals):
             if isinstance(val, (dict, list)):
                 coll[key] = decode_unicode(val)
-            elif isinstance(val, unicode):
+            elif isinstance(val, str):
                 try:
                     coll[key] = str(val)
                 except UnicodeEncodeError:
@@ -136,7 +143,8 @@ def decode_unicode(coll):
 ### docstring templating ###
 def template_doc(**names):
     def _decorator(func):
-        if func.__doc__ is not None:
-            func.__doc__ = func.__doc__.format(**names)
+        if sys.version[:3] != '3.2':
+            if func.__doc__ is not None:
+                func.__doc__ = func.__doc__.format(**names)
         return func
     return _decorator

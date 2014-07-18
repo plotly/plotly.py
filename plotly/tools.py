@@ -10,17 +10,24 @@ Functions that USERS will possibly want access to.
 import os
 import os.path
 import warnings
-from . graph_objs import graph_objs
+
 from . import utils
 from . import exceptions
 
+
+
+
+
+
 # Warning format
+from . import matplotlylib
+from . graph_objs import graph_objs
+
 def warning_on_one_line(message, category, filename, lineno, file=None, line=None):
     return '%s:%s: %s:\n\n%s\n\n' % (filename, lineno, category.__name__, message)
 warnings.formatwarning = warning_on_one_line
 
 try:
-    from . import matplotlylib
     _matplotlylib_imported = True
 except ImportError:
     _matplotlylib_imported = False
@@ -32,11 +39,11 @@ TEST_DIR = os.path.join(os.path.expanduser("~"), ".test")
 TEST_FILE = os.path.join(PLOTLY_DIR, ".permission_test")
 
 # this sets both the DEFAULTS and the TYPES for these items
-_FILE_CONTENT = {CREDENTIALS_FILE: {'username': u'',
-                                    'api_key': u'',
+_FILE_CONTENT = {CREDENTIALS_FILE: {'username': '',
+                                    'api_key': '',
                                     'stream_ids': []},
-                 CONFIG_FILE: {'plotly_domain': u'https://plot.ly',
-                               'plotly_streaming_domain': u'stream.plot.ly'}}
+                 CONFIG_FILE: {'plotly_domain': 'https://plot.ly',
+                               'plotly_streaming_domain': 'stream.plot.ly'}}
 
 try:
     os.mkdir(TEST_DIR)
@@ -63,10 +70,11 @@ def ensure_local_plotly_files():
             os.mkdir(PLOTLY_DIR)
         for fn in [CREDENTIALS_FILE, CONFIG_FILE]:
             contents = utils.load_json_dict(fn)
-            for key, val in _FILE_CONTENT[fn].items():
-                if key not in contents or not isinstance(contents[key], type(val)):
+            for key, val in list(_FILE_CONTENT[fn].items()):
+                # TODO: removed type checking below, may want to revisit
+                if key not in contents:
                     contents[key] = val
-            contents_keys = contents.keys()
+            contents_keys = list(contents.keys())
             for key in contents_keys:
                 if key not in _FILE_CONTENT[fn]:
                     del contents[key]
@@ -92,9 +100,9 @@ def set_credentials_file(username=None, api_key=None, stream_ids=None):
                                      "to run this function.")
     ensure_local_plotly_files()  # make sure what's there is OK
     credentials = get_credentials_file()
-    if isinstance(username, (str, unicode)):
+    if isinstance(username, str):
         credentials['username'] = username
-    if isinstance(api_key, (str, unicode)):
+    if isinstance(api_key, str):
         credentials['api_key'] = api_key
     if isinstance(stream_ids, (list, tuple)):
         credentials['stream_ids'] = stream_ids
@@ -152,9 +160,9 @@ def set_config_file(plotly_domain=None, plotly_streaming_domain=None):
                                      "to run this function.")
     ensure_local_plotly_files()  # make sure what's there is OK
     settings = get_config_file()
-    if isinstance(plotly_domain, (str, unicode)):
+    if isinstance(plotly_domain, str):
         settings['plotly_domain'] = plotly_domain
-    if isinstance(plotly_streaming_domain, (str, unicode)):
+    if isinstance(plotly_streaming_domain, str):
         settings['plotly_streaming_domain'] = plotly_streaming_domain
     utils.save_json_dict(CONFIG_FILE, settings)
     ensure_local_plotly_files()  # make sure what we just put there is OK
@@ -238,7 +246,7 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
         raise exceptions.PlotlyError(
             "The 'file_id' argument must be a non-negative number."
         )
-    if isinstance(width, (int, long)):
+    if isinstance(width, int):
         s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\""
              "seamless=\"seamless\" "
              "src=\"{plotly_rest_url}/"
@@ -357,7 +365,7 @@ def mpl_to_plotly(fig, resize=False, strip_style=False, verbose=False):
         if strip_style:
             renderer.strip_style()
         if verbose:
-            print renderer.msg
+            print(renderer.msg)
         return renderer.plotly_fig
     else:
         warnings.warn(
@@ -425,7 +433,7 @@ def get_subplots(rows=1, columns=1, horizontal_spacing=0.1,
             fig['layout'][yaxis_name] = yaxis
             plot_num += 1
     if print_grid:
-        print "This is the format of your plot grid!"
+        print("This is the format of your plot grid!")
         grid_string = ""
         plot = 1
         for rrr in range(rows):
@@ -434,7 +442,7 @@ def get_subplots(rows=1, columns=1, horizontal_spacing=0.1,
                 grid_line += "[{}]\t".format(plot)
                 plot += 1
             grid_string = grid_line + '\n' + grid_string
-        print grid_string
+        print(grid_string)
     return graph_objs.Figure(fig)  # forces us to validate what we just did...
 
 
@@ -456,7 +464,7 @@ def get_valid_graph_obj(obj, obj_type=None):
     if isinstance(new_obj, list):
         new_obj += obj
     else:
-        for key, val in obj.items():
+        for key, val in list(obj.items()):
             new_obj[key] = val
     new_obj.force_clean()
     return new_obj
@@ -493,7 +501,7 @@ def validate_stream(obj, obj_type):
     except KeyError:
         pass
     info = graph_objs.INFO[graph_objs.NAME_TO_KEY[obj_type]]
-    for key, val in obj.items():
+    for key, val in list(obj.items()):
         if key == 'type':
             continue
         if 'streamable' in info[key]:
@@ -520,7 +528,7 @@ def _replace_newline(obj):
     """Replaces '\n' with '<br>' for all strings in a collection."""
     if isinstance(obj, dict):
         d = dict()
-        for key, val in obj.items():
+        for key, val in list(obj.items()):
             d[key] = _replace_newline(val)
         return d
     elif isinstance(obj, list):
@@ -528,7 +536,7 @@ def _replace_newline(obj):
         for index, entry in enumerate(obj):
             l += [_replace_newline(entry)]
         return l
-    elif isinstance(obj, (str, unicode)):
+    elif isinstance(obj, str):
         s = obj.replace('\n', '<br>')
         if s != obj:
             warnings.warn("Looks like you used a newline character: '\\n'.\n\n"
