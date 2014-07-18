@@ -20,7 +20,6 @@ def test_instantiate_error_x():
            opacity=.4,
            symmetric=False,
            thickness=2,
-           traceref=0,  # TODO, what's this do again?
            type='percent',
            value=1,
            valueminus=4,
@@ -36,7 +35,6 @@ def test_instantiate_error_y():
            opacity=.4,
            symmetric=False,
            thickness=2,
-           traceref=0,  # TODO, what's this do again?
            type='percent',
            value=1,
            valueminus=4,
