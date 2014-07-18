@@ -6,6 +6,8 @@
 
 *.ipynb
 
+*.coverage
+
 build
 
 dist
