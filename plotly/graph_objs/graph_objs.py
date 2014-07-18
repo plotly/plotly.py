@@ -27,6 +27,7 @@ import textwrap
 import six
 import sys
 from . import graph_objs_tools
+import copy
 from .. import exceptions
 from plotly import utils
 
@@ -342,10 +343,16 @@ class PlotlyList(list):
                                                       entry=entry)
 
 
-    def update(self, changes):
+    def update(self, changes, make_copies=False):
         """Update current list with changed_list, which must be iterable.
         The 'changes' should be a list of dictionaries, however,
         it is permitted to be a single dict object.
+
+        Because mutable objects contain references to their values, updating
+        multiple items in a list will cause the items to all reference the same
+        original set of objects. To change this behavior add
+        `make_copies=True` which makes deep copies of the update items and
+        therefore break references. 
 
         """
         if isinstance(changes, dict):
@@ -353,9 +360,15 @@ class PlotlyList(list):
         self.to_graph_objs()
         for index in range(len(self)):
             try:
-                self[index].update(changes[index % len(changes)])
+                update = changes[index % len(changes)]
             except ZeroDivisionError:
                 pass
+            else:
+                if make_copies:
+                    self[index].update(copy.deepcopy(update))
+                else:
+                    self[index].update(update)
+
 
     def strip_style(self):
         """Strip style from the current representation.
