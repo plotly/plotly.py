@@ -10,7 +10,7 @@ from __future__ import absolute_import
 import time
 from nose.tools import raises
 from plotly.graph_objs import *
-from plotly.plotly import plotly as py
+import plotly.plotly as py
 from plotly import exceptions
 
 un = 'pythonapi'
@@ -19,16 +19,16 @@ tk = 'vaia8trjjb'
 fi = 461
 py.sign_in(un, ak)
 
-run_tests = False
+run_tests = True
 
 
 def test_initialize_stream_plot():
     if run_tests:
         stream = Stream(token=tk, maxpoints=50)
-        res = py.plot([Scatter(x=[], y=[], mode='markers', stream=stream)],
+        url = py.plot([Scatter(x=[], y=[], mode='markers', stream=stream)],
                       auto_open=False,
                       filename='stream-test')
-        assert res == 'https://plot.ly/~PythonAPI/461'
+        assert url == 'https://plot.ly/~PythonAPI/461'
         time.sleep(5)
 
 
