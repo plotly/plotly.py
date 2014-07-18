@@ -5,8 +5,10 @@ test_plot_mpl:
 A module intended for use with Nose.
 
 """
-from ... plotly import plotly as py
-from ... import exceptions
+from __future__ import absolute_import
+
+from plotly.plotly import plotly as py
+from plotly import exceptions
 from nose.tools import raises
 import matplotlib
 # Force matplotlib to not use any Xwindows backend.

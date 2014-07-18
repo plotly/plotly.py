@@ -7,22 +7,19 @@ tools
 Functions that USERS will possibly want access to.
 
 """
+from __future__ import absolute_import
+
 import os
 import os.path
 import warnings
 
-from . import utils
-from . import exceptions
+from plotly import utils
+from plotly import exceptions
 
-
-
-
-
-
-# Warning format
 from . import matplotlylib
 from . graph_objs import graph_objs
 
+# Warning format
 def warning_on_one_line(message, category, filename, lineno, file=None, line=None):
     return '%s:%s: %s:\n\n%s\n\n' % (filename, lineno, category.__name__, message)
 warnings.formatwarning = warning_on_one_line

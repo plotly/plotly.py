@@ -22,13 +22,15 @@ graph_objs object and it should always be possible to make a graph_objs object
 from a dict/list JSON representation.
 
 """
+from __future__ import absolute_import
+
 import warnings
 import textwrap
 import six
 import sys
-from . import graph_objs_tools
+from plotly.graph_objs import graph_objs_tools
 import copy
-from .. import exceptions
+from plotly import exceptions
 from plotly import utils
 
 if sys.version[:3] == '2.6':
