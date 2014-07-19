@@ -91,3 +91,12 @@ def test_stream_validate_layout():
     my_stream.open()
     my_stream.write(Scatter(x=1, y=10), layout=Layout(legend=True))
     my_stream.close()
+
+
+@raises(exceptions.PlotlyError)
+def test_stream_unstreamable():
+    py.sign_in(un, ak)
+    my_stream = py.Stream(tk)
+    my_stream.open()
+    my_stream.write(Scatter(x=1, y=10, name='nope'))
+    my_stream.close()
