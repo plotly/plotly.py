@@ -12,7 +12,6 @@ dependencies:
     - pip install matplotlib
     - pip install -I .
     - cd ~ && python -c "import plotly"
-    - chmod 000 ~/.plotly && python -c "import plotly"
 
 ## Customize database setup (pass)
 
@@ -20,6 +19,7 @@ dependencies:
 test:
   post:
     - nosetests -w plotly/tests
+    - chmod 000 ~/.plotly && python -c "import plotly"
 
 ## Customize deployment commands (pass)
 
