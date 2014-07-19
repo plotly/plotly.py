@@ -61,7 +61,7 @@ class Stream:
             msglen = format(len(msg), 'x')  # msg length in hex
             # Send the message in chunk-encoded form
             self._conn.send('{msglen}\r\n{msg}\r\n'
-                            .format(msglen=msglen, msg=msg))
+                            .format(msglen=msglen, msg=msg).encode('utf-8'))
         except http_client.socket.error:
             self._reconnect()
             self.write(data)
@@ -84,7 +84,7 @@ class Stream:
         # Set blocking to False prevents recv
         # from blocking while waiting for a response.
         self._conn.sock.setblocking(False)
-        self._bytes = ''
+        self._bytes = six.b('')
         self._reset_retries()
         time.sleep(0.5)
 
@@ -103,7 +103,7 @@ class Stream:
         # For some reason, either Python or node.js seems to
         # require an extra \r\n.
         try:
-            self._conn.send('\r\n0\r\n\r\n')
+            self._conn.send('\r\n0\r\n\r\n'.encode('utf-8'))
         except http_client.socket.error:
             # In case the socket has already been closed
             return ''
@@ -123,21 +123,21 @@ class Stream:
         response = self._bytes
         while True:
             try:
-                bytes = self._conn.sock.recv(1)
+                _bytes = self._conn.sock.recv(1)
             except http_client.socket.error:
                 # For error 54: Connection reset by peer
                 # (and perhaps others)
-                return ''
-            if bytes == '':
+                return six.b('')
+            if _bytes == six.b(''):
                 break
             else:
-                response += bytes
+                response += _bytes
         # Set recv to be non-blocking again
         self._conn.sock.setblocking(False)
 
         # Convert the response string to a http_client.HTTPResponse
         # object with a bit of a hack
-        if response != '':
+        if response != six.b(''):
             # Taken from
             # http://pythonwise.blogspot.ca/2010/02/parse-http-response.html
             try:
@@ -145,7 +145,7 @@ class Stream:
                 response.begin()
             except:
                 # Bad headers ... etc.
-                response = ''
+                response = six.b('')
         return response
 
     def _isconnected(self):
@@ -173,7 +173,7 @@ class Stream:
             # 3 - Check if the server has returned any data.
             # If they have, then start to store the response
             # in _bytes.
-            self._bytes = ''
+            self._bytes = six.b('')
             self._bytes = self._conn.sock.recv(1)
             return False
         except http_client.socket.error as e:
