@@ -620,7 +620,9 @@ class PlotlyDict(dict):
             else:
                 try:
                     if INFO[obj_key][key]['type'] == 'style':
-                        if not hasattr(self[key], '__iter__'):
+                        if isinstance(self[key], six.string_types):
+                            del self[key]
+                        elif not hasattr(self[key], '__iter__'):
                             del self[key]
                 except KeyError:  # TODO: Update the JSON
                     # print "'type' not in {0} for {1}".format(obj_key, key)
