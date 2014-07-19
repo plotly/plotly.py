@@ -17,13 +17,12 @@ from plotly.exceptions import PlotlyError
 # api_key for account: '786r5mecv0'
 
 
-def plot_valid():
+def test_plot_valid():
     fig = {
         'data':[
             {
                 'x':[1,2,3],
-                'y':[2,1,2],
-                'z':[3,4,1]
+                'y':[2,1,2]
             }
         ]
     }
@@ -31,7 +30,7 @@ def plot_valid():
 
 
 @raises(PlotlyError)
-def plot_invalid():
+def test_plot_invalid():
     fig = {
         'data':[
             {
@@ -42,6 +41,19 @@ def plot_invalid():
         ]
     }
     url = py.plot(fig, auto_open=False, filename='plot_invalid')
+
+@raises(TypeError)
+def test_plot_invalid_args_1():
+    url = py.plot(x=[1,2,3],
+                  y=[2,1,2],
+                  auto_open=False,
+                  filename='plot_invalid')
+
+@raises(PlotlyError)
+def test_plot_invalid_args_2():
+    url = py.plot([1,2,3], [2,1,2],
+                  auto_open=False,
+                  filename='plot_invalid')
 
 
 def test_bar():
