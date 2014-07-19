@@ -12,6 +12,7 @@ from __future__ import absolute_import
 import os
 import os.path
 import warnings
+import six
 
 from plotly import utils
 from plotly import exceptions
@@ -97,9 +98,9 @@ def set_credentials_file(username=None, api_key=None, stream_ids=None):
                                      "to run this function.")
     ensure_local_plotly_files()  # make sure what's there is OK
     credentials = get_credentials_file()
-    if isinstance(username, str):
+    if isinstance(username, six.string_types):
         credentials['username'] = username
-    if isinstance(api_key, str):
+    if isinstance(api_key, six.string_types):
         credentials['api_key'] = api_key
     if isinstance(stream_ids, (list, tuple)):
         credentials['stream_ids'] = stream_ids
@@ -130,22 +131,6 @@ def reset_credentials_file():
     ensure_local_plotly_files()  # put the defaults back
 
 
-# def show_credentials_file(*args):  # TODO, can we lose this?
-#     """Print specified kwargs from `~/.plotly_credentials`.
-#
-#     Prints all if no keyword arguments are specified.
-#
-#     """
-#     ensure_local_plotly_files() # make sure what's there is OK
-#     credentials = get_credentials_file(*args)
-#     if len(args):
-#         print "The specified keys from your credentials file:\n"
-#     else:
-#         print "Your credentials file:\n"
-#     for key, val in credentials.items():
-#         print "\t{}: {}".format(key, val).expandtabs()
-
-
 ### config tools ###
 
 def set_config_file(plotly_domain=None, plotly_streaming_domain=None):
@@ -157,9 +142,9 @@ def set_config_file(plotly_domain=None, plotly_streaming_domain=None):
                                      "to run this function.")
     ensure_local_plotly_files()  # make sure what's there is OK
     settings = get_config_file()
-    if isinstance(plotly_domain, str):
+    if isinstance(plotly_domain, six.string_types):
         settings['plotly_domain'] = plotly_domain
-    if isinstance(plotly_streaming_domain, str):
+    if isinstance(plotly_streaming_domain, six.string_types):
         settings['plotly_streaming_domain'] = plotly_streaming_domain
     utils.save_json_dict(CONFIG_FILE, settings)
     ensure_local_plotly_files()  # make sure what we just put there is OK
@@ -533,7 +518,7 @@ def _replace_newline(obj):
         for index, entry in enumerate(obj):
             l += [_replace_newline(entry)]
         return l
-    elif isinstance(obj, str):
+    elif isinstance(obj, six.string_types):
         s = obj.replace('\n', '<br>')
         if s != obj:
             warnings.warn("Looks like you used a newline character: '\\n'.\n\n"
