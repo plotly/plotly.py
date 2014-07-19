@@ -164,7 +164,8 @@ def plot(figure_or_data, validate=True, **plot_options):
                                          "to Plotly anyway (not recommended), "
                                          "you can set 'validate=False' as a "
                                          "plot option.\nHere's why you're "
-                                         "seeing this error:\n\n{}".format(err))
+                                         "seeing this error:\n\n{0}"
+                                         "".format(err))
     for entry in figure['data']:
         for key, val in list(entry.items()):
             try:
@@ -309,7 +310,8 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
             raise exceptions.PlotlyError(
                 "Because you didn't supply a 'file_id' in the call, "
                 "we're assuming you're trying to snag a figure from a url. "
-                "You supplied the url, '{}', we expected it to start with '{}'."
+                "You supplied the url, '{0}', we expected it to start with "
+                "'{1}'."
                 "\nRun help on this function for more information."
                 "".format(url, plotly_rest_url))
         head = plotly_rest_url + "/~"
@@ -460,22 +462,22 @@ class Stream:
                 tools.validate(stream_object, stream_object['type'])
             except exceptions.PlotlyError as err:
                 raise exceptions.PlotlyError(
-                    "Part of the data object with type, '{}', is invalid. This "
-                    "will default to 'scatter' if you do not supply a 'type'. "
-                    "If you do not want to validate your data objects when "
-                    "streaming, you can set 'validate=False' in the call to "
-                    "'your_stream.write()'. Here's why the object is "
-                    "invalid:\n\n{}".format(stream_object['type'], err)
+                    "Part of the data object with type, '{0}', is invalid. "
+                    "This will default to 'scatter' if you do not supply a "
+                    "'type'. If you do not want to validate your data objects "
+                    "when streaming, you can set 'validate=False' in the call "
+                    "to 'your_stream.write()'. Here's why the object is "
+                    "invalid:\n\n{1}".format(stream_object['type'], err)
                 )
             try:
                 tools.validate_stream(stream_object, stream_object['type'])
             except exceptions.PlotlyError as err:
                 raise exceptions.PlotlyError(
-                    "Part of the data object with type, '{}', cannot yet be "
+                    "Part of the data object with type, '{0}', cannot yet be "
                     "streamed into Plotly. If you do not want to validate your "
                     "data objects when streaming, you can set 'validate=False' "
                     "in the call to 'your_stream.write()'. Here's why the "
-                    "object cannot be streamed:\n\n{}"
+                    "object cannot be streamed:\n\n{1}"
                     "".format(stream_object['type'], err)
                 )
             if layout is not None:
@@ -484,7 +486,7 @@ class Stream:
                 except exceptions.PlotlyError as err:
                     raise exceptions.PlotlyError(
                         "Your layout kwarg was invalid. "
-                        "Here's why:\n\n{}".format(err)
+                        "Here's why:\n\n{0}".format(err)
                     )
         del stream_object['type']
 

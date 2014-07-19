@@ -205,7 +205,8 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
             raise exceptions.PlotlyError(
                 "Because you didn't supply a 'file_id' in the call, "
                 "we're assuming you're trying to snag a figure from a url. "
-                "You supplied the url, '{}', we expected it to start with '{}'."
+                "You supplied the url, '{0}', we expected it to start with "
+                "'{1}'."
                 "\nRun help on this function for more information."
                 "".format(url, plotly_rest_url))
         head = plotly_rest_url + "/~"
@@ -399,13 +400,13 @@ def get_subplots(rows=1, columns=1, horizontal_spacing=0.1,
     plot_num = 0
     for rrr in range(rows):
         for ccc in range(columns):
-            xaxis_name = 'xaxis{}'.format(plot_num + 1)
-            x_anchor = 'y{}'.format(plot_num + 1)
+            xaxis_name = 'xaxis{0}'.format(plot_num + 1)
+            x_anchor = 'y{0}'.format(plot_num + 1)
             x_start = (plot_width + horizontal_spacing) * ccc
             x_end = x_start + plot_width
 
-            yaxis_name = 'yaxis{}'.format(plot_num + 1)
-            y_anchor = 'x{}'.format(plot_num + 1)
+            yaxis_name = 'yaxis{0}'.format(plot_num + 1)
+            y_anchor = 'x{0}'.format(plot_num + 1)
             y_start = (plot_height + vertical_spacing) * rrr
             y_end = y_start + plot_height
 
@@ -421,7 +422,7 @@ def get_subplots(rows=1, columns=1, horizontal_spacing=0.1,
         for rrr in range(rows):
             grid_line = ""
             for ccc in range(columns):
-                grid_line += "[{}]\t".format(plot)
+                grid_line += "[{0}]\t".format(plot)
                 plot += 1
             grid_string = grid_line + '\n' + grid_string
         print(grid_string)
@@ -441,7 +442,7 @@ def get_valid_graph_obj(obj, obj_type=None):
             new_obj = graph_objs.NAME_TO_CLASS[obj_type]()
         except KeyError:
             raise exceptions.PlotlyError(
-                "'{}' nor '{}' are recognizable graph_objs.".
+                "'{0}' nor '{1}' are recognizable graph_objs.".
                 format(obj.__class__.__name__, obj_type))
     if isinstance(new_obj, list):
         new_obj += obj
@@ -468,7 +469,7 @@ def validate(obj, obj_type):
         test_obj = graph_objs.NAME_TO_CLASS[obj_type](obj)
     except KeyError:
         raise exceptions.PlotlyError(
-            "'{}' is not a recognizable graph_obj.".
+            "'{0}' is not a recognizable graph_obj.".
             format(obj_type))
 
 
@@ -489,13 +490,14 @@ def validate_stream(obj, obj_type):
         if 'streamable' in info[key]:
             if not info[key]['streamable']:
                 raise exceptions.PlotlyError(
-                    "The '{}' key is not streamable in the '{}' object".format(
+                    "The '{0}' key is not streamable in the '{1}' "
+                    "object".format(
                         key, obj_type
                     )
                 )
         else:
             raise exceptions.PlotlyError(
-                "The '{}' key is not streamable in the '{}' object".format(
+                "The '{0}' key is not streamable in the '{1}' object".format(
                     key, obj_type
                 )
             )

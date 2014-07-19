@@ -10,14 +10,14 @@ def test_strip_style():
             Scatter(
                 x=[52698, 43117],
                 y=[53, 31],
-                mode=u'markers',
-                name=u'North America',
-                text=[u'United States', u'Canada'],
+                mode='markers',
+                name='North America',
+                text=['United States', 'Canada'],
                 marker=Marker(
-                    color=u'rgb(164, 194, 244)',
+                    color='rgb(164, 194, 244)',
                     size=12,
                     line=Line(
-                        color=u'white',
+                        color='white',
                         width=0.5
                     )
                 )
@@ -25,14 +25,14 @@ def test_strip_style():
             Scatter(
                 x=[39317, 37236, 35650, 30066, 29570, 27159, 23557, 21046, 18007],
                 y=[33, 20, 13, 19, 27, 19, 49, 44, 38],
-                mode=u'markers',
-                name=u'Europe',
-                text=[u'Germany', u'Britain', u'France', u'Spain', u'Italy', u'Czech Rep.', u'Greece', u'Poland'],
+                mode='markers',
+                name='Europe',
+                text=['Germany', 'Britain', 'France', 'Spain', 'Italy', 'Czech Rep.', 'Greece', 'Poland'],
                 marker=Marker(
-                    color=u'rgb(255, 217, 102)',
+                    color='rgb(255, 217, 102)',
                     size=12,
                     line=Line(
-                        color=u'white',
+                        color='white',
                         width=0.5
                     )
                 )
@@ -40,14 +40,14 @@ def test_strip_style():
             Scatter(
                 x=[42952, 37037, 33106, 17478, 9813, 5253, 4692, 3899],
                 y=[23, 42, 54, 89, 14, 99, 93, 70],
-                mode=u'markers',
-                name=u'Asia/Pacific',
-                text=[u'Australia', u'Japan', u'South Korea', u'Malaysia', u'China', u'Indonesia', u'Philippines', u'India'],
+                mode='markers',
+                name='Asia/Pacific',
+                text=['Australia', 'Japan', 'South Korea', 'Malaysia', 'China', 'Indonesia', 'Philippines', 'India'],
                 marker=Marker(
-                    color=u'rgb(234, 153, 153)',
+                    color='rgb(234, 153, 153)',
                     size=12,
                     line=Line(
-                        color=u'white',
+                        color='white',
                         width=0.5
                     )
                 )
@@ -55,31 +55,31 @@ def test_strip_style():
             Scatter(
                 x=[19097, 18601, 15595, 13546, 12026, 7434, 5419],
                 y=[43, 47, 56, 80, 86, 93, 80],
-                mode=u'markers',
-                name=u'Latin America',
-                text=[u'Chile', u'Argentina', u'Mexico', u'Venezuela', u'Venezuela', u'El Salvador', u'Bolivia'],
+                mode='markers',
+                name='Latin America',
+                text=['Chile', 'Argentina', 'Mexico', 'Venezuela', 'Venezuela', 'El Salvador', 'Bolivia'],
                 marker=Marker(
-                    color=u'rgb(142, 124, 195)',
+                    color='rgb(142, 124, 195)',
                     size=12,
                     line=Line(
-                        color=u'white',
+                        color='white',
                         width=0.5
                     )
                 )
             )
         ]),
         layout=Layout(
-            title=u'Quarter 1 Growth',
+            title='Quarter 1 Growth',
             autosize=False,
             width=500,
             height=500,
             xaxis=XAxis(
-                title=u'GDP per Capita',
+                title='GDP per Capita',
                 showgrid=False,
                 zeroline=False
             ),
             yaxis=YAxis(
-                title=u'Percent',
+                title='Percent',
                 showline=False
             ),
             margin=Margin(
@@ -100,8 +100,8 @@ def test_strip_style():
             Scatter(
                 x=[52698, 43117],
                 y=[53, 31],
-                name=u'North America',
-                text=[u'United States', u'Canada'],
+                name='North America',
+                text=['United States', 'Canada'],
                 marker=Marker(
                     line=Line()
                 )
@@ -109,8 +109,8 @@ def test_strip_style():
             Scatter(
                 x=[39317, 37236, 35650, 30066, 29570, 27159, 23557, 21046, 18007],
                 y=[33, 20, 13, 19, 27, 19, 49, 44, 38],
-                name=u'Europe',
-                text=[u'Germany', u'Britain', u'France', u'Spain', u'Italy', u'Czech Rep.', u'Greece', u'Poland'],
+                name='Europe',
+                text=['Germany', 'Britain', 'France', 'Spain', 'Italy', 'Czech Rep.', 'Greece', 'Poland'],
                 marker=Marker(
                     line=Line()
                 )
@@ -118,8 +118,8 @@ def test_strip_style():
             Scatter(
                 x=[42952, 37037, 33106, 17478, 9813, 5253, 4692, 3899],
                 y=[23, 42, 54, 89, 14, 99, 93, 70],
-                name=u'Asia/Pacific',
-                text=[u'Australia', u'Japan', u'South Korea', u'Malaysia', u'China', u'Indonesia', u'Philippines', u'India'],
+                name='Asia/Pacific',
+                text=['Australia', 'Japan', 'South Korea', 'Malaysia', 'China', 'Indonesia', 'Philippines', 'India'],
                 marker=Marker(
                     line=Line()
                 )
@@ -127,20 +127,20 @@ def test_strip_style():
             Scatter(
                 x=[19097, 18601, 15595, 13546, 12026, 7434, 5419],
                 y=[43, 47, 56, 80, 86, 93, 80],
-                name=u'Latin America',
-                text=[u'Chile', u'Argentina', u'Mexico', u'Venezuela', u'Venezuela', u'El Salvador', u'Bolivia'],
+                name='Latin America',
+                text=['Chile', 'Argentina', 'Mexico', 'Venezuela', 'Venezuela', 'El Salvador', 'Bolivia'],
                 marker=Marker(
                     line=Line()
                 )
             )
         ]),
         layout=Layout(
-            title=u'Quarter 1 Growth',
+            title='Quarter 1 Growth',
             xaxis=XAxis(
-                title=u'GDP per Capita'
+                title='GDP per Capita'
             ),
             yaxis=YAxis(
-                title=u'Percent'
+                title='Percent'
             ),
             margin=Margin()
         )
