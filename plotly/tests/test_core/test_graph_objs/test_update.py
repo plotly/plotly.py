@@ -26,7 +26,7 @@ def test_update_dict_empty():
     trace2 = Scatter(x=[1,2,3], y=[3,2,1])
     data = Data([trace1, trace2])
     data.update({})
-    print data.to_string()
+    print(data.to_string())
     assert data[0] == Scatter(x=[1,2,3], y=[2,1,2])
     assert data[1] == Scatter(x=[1,2,3], y=[3,2,1])
 
@@ -36,7 +36,7 @@ def test_update_list_empty():
     trace2 = Scatter(x=[1,2,3], y=[3,2,1])
     data = Data([trace1, trace2])
     data.update([])
-    print data.to_string()
+    print(data.to_string())
     assert data[0] == Scatter(x=[1,2,3], y=[2,1,2])
     assert data[1] == Scatter(x=[1,2,3], y=[3,2,1])
 
