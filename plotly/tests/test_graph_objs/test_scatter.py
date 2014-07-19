@@ -5,9 +5,11 @@ test_scatter:
 A module intended for use with Nose.
 
 """
+from __future__ import absolute_import
+
 from nose.tools import raises
-from ... graph_objs import Scatter
-from ... exceptions import PlotlyError
+from plotly.graph_objs import Scatter
+from plotly.exceptions import PlotlyError
 
 
 def test_trivial():

@@ -5,12 +5,15 @@ test_data:
 A module intended for use with Nose.
 
 """
+from __future__ import absolute_import
+
 from nose.tools import raises
-from ...graph_objs.graph_objs import *
-from ...exceptions import (PlotlyError,
-                           PlotlyDictKeyError,
-                           PlotlyDictValueError,
-                           PlotlyDataTypeError, PlotlyListEntryError)
+from plotly.graph_objs.graph_objs import *
+from plotly.exceptions import (PlotlyError,
+                               PlotlyDictKeyError,
+                               PlotlyDictValueError,
+                               PlotlyDataTypeError,
+                               PlotlyListEntryError)
 
 
 def setup():

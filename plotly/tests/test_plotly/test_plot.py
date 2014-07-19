@@ -5,9 +5,11 @@ test_plot:
 A module intended for use with Nose.
 
 """
-from ... graph_objs import graph_objs
-from ... plotly import plotly as py
-from ... import exceptions
+from __future__ import absolute_import
+
+from plotly.graph_objs import graph_objs
+from plotly.plotly import plotly as py
+from plotly import exceptions
 
 
 # username for tests: 'plotlyimagetest'

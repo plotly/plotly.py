@@ -6,11 +6,13 @@ fig_to_plotly, which is intended to be the main way that user's will interact
 with the matplotlylib package.
 
 """
+from __future__ import absolute_import
+
 import warnings
 
 from . mplexporter import Renderer
 from . import mpltools
-from ..graph_objs import *
+from plotly.graph_objs import *
 
 
 

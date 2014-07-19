@@ -5,11 +5,13 @@ test_get_figure:
 A module intended for use with Nose.
 
 """
+from __future__ import absolute_import
+
 import time
 from nose.tools import raises
-from ... graph_objs import *
-from ... plotly import plotly as py
-from ... import exceptions
+from plotly.graph_objs import *
+from plotly.plotly import plotly as py
+from plotly import exceptions
 
 un = 'pythonapi'
 ak = 'ubpiol2cve'

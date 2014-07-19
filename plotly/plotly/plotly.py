@@ -14,6 +14,8 @@ and ploty's servers.
 4. update plot_options with kwargs!
 
 """
+from __future__ import absolute_import
+
 import json
 import warnings
 import copy
@@ -22,11 +24,11 @@ import six
 
 import requests
 
-from . import chunked_requests
-from .. import utils  # TODO make non-relative
-from .. import tools
-from .. import exceptions
-from .. import version
+from plotly.plotly import chunked_requests
+from plotly import utils
+from plotly import tools
+from plotly import exceptions
+from plotly import version
 
 
 __all__ = ["sign_in", "update_plot_options", "get_plot_options",

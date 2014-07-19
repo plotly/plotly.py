@@ -5,9 +5,11 @@ test_plotly_list:
 A module intended for use with Nose.
 
 """
+from __future__ import absolute_import
+
 from nose.tools import raises
-from ... graph_objs.graph_objs import PlotlyList, PlotlyDict
-from ... exceptions import PlotlyError
+from plotly.graph_objs.graph_objs import PlotlyList, PlotlyDict
+from plotly.exceptions import PlotlyError
 
 
 def test_trivial():

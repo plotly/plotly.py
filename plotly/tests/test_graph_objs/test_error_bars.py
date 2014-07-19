@@ -5,10 +5,14 @@ test_error_bars:
 A module intended for use with Nose.
 
 """
+from __future__ import absolute_import
+
 from nose.tools import raises
-from ...graph_objs.graph_objs import *
-from ...exceptions import (PlotlyDictKeyError, PlotlyDictValueError,
-                           PlotlyDataTypeError, PlotlyListEntryError)
+from plotly.graph_objs.graph_objs import *
+from plotly.exceptions import (PlotlyDictKeyError,
+                               PlotlyDictValueError,
+                               PlotlyDataTypeError,
+                               PlotlyListEntryError)
 
 
 def test_instantiate_error_x():

@@ -1,7 +1,9 @@
+from __future__ import absolute_import
+
 import matplotlib
 # Force matplotlib to not use any Xwindows backend.
 matplotlib.use('Agg')
-from ... matplotlylib import Exporter, PlotlyRenderer
+from plotly.matplotlylib import Exporter, PlotlyRenderer
 from numbers import Number as Num
 
 

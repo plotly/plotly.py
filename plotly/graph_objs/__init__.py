@@ -7,7 +7,9 @@ information, run help(Obj) on any of the following objects defined here.
 
 
 """
-from .graph_objs import *
+from __future__ import absolute_import
+
+from plotly.graph_objs.graph_objs import *
 
 __all__ = ["Data",
            "Annotations",
