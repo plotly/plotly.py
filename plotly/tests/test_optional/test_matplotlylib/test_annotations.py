@@ -5,8 +5,8 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-from . nose_tools import compare_dict, run_fig
-from . data.annotations import *
+from .nose_tools import compare_dict, run_fig
+from .data.annotations import *
 
 
 def test_annotations():

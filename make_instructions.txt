@@ -4,7 +4,7 @@ MAKE INSTRUCTIONS
 
 Contents:
 
-    Availble targets
+    Available targets
 
     Getting setup
 
@@ -37,6 +37,8 @@ Available targets (i.e. $ make target):
     pull_chunked -> pull in chunked_requests *master* branch
 
     pull_refs -> pull in graph_reference *master* branch
+
+    make_coverage -> (requires `nose` and `coverage`) run tests with coverage
 
 ################################################################################
 

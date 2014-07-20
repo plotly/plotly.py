@@ -3,7 +3,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-from . nose_tools import compare_dict, run_fig
+from .nose_tools import compare_dict, run_fig
 from .data.bars import *
 
 

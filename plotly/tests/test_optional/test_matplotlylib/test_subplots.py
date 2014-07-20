@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
 
 from .nose_tools import compare_dict, run_fig
-from . data.subplots import *
+from .data.subplots import *
 
 
 def test_blank_subplots():
