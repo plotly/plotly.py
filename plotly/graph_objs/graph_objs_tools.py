@@ -10,5 +10,5 @@ def update_keys(keys):
 
 translations = dict(
     scl="colorscale",
-    reversescale="reversescale"
+    reversescl="reversescale"
 )
