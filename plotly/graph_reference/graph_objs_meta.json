@@ -139,7 +139,7 @@
         "stream": {
             "val_types": "dictionary-like", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "object", 
             "description": "The stream dictionary-like object that initializes traces as writable-streams, for use with the real-time streaming API. Learn more here:\nhttps://plot.ly/python/streaming/"
         }, 
         "visible": {
@@ -237,7 +237,7 @@
         "stream": {
             "val_types": "dictionary-like", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "object", 
             "description": "The stream dictionary-like object that initializes traces as writable-streams, for use with the real-time streaming API. Learn more here:\nhttps://plot.ly/python/streaming/"
         }, 
         "visible": {
@@ -398,7 +398,7 @@
         "stream": {
             "val_types": "dictionary-like", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "object", 
             "description": "The stream dictionary-like object that initializes traces as writable-streams, for use with the real-time streaming API. Learn more here:\nhttps://plot.ly/python/streaming/"
         }, 
         "visible": {
@@ -539,7 +539,7 @@
         "stream": {
             "val_types": "dictionary-like", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "object", 
             "description": "The stream dictionary-like object that initializes traces as writable-streams, for use with the real-time streaming API. Learn more here:\nhttps://plot.ly/python/streaming/"
         }, 
         "visible": {
@@ -675,7 +675,7 @@
         "stream": {
             "val_types": "dictionary-like", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "object", 
             "description": "The stream dictionary-like object that initializes traces as writable-streams, for use with the real-time streaming API. Learn more here:\nhttps://plot.ly/python/streaming/"
         }, 
         "visible": {
@@ -870,7 +870,7 @@
         "stream": {
             "val_types": "dictionary-like", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "object", 
             "description": "The stream dictionary-like object that initializes traces as writable-streams, for use with the real-time streaming API. Learn more here:\nhttps://plot.ly/python/streaming/"
         }, 
         "visible": {
@@ -1081,7 +1081,7 @@
         "stream": {
             "val_types": "dictionary-like", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "object", 
             "description": "The stream dictionary-like object that initializes traces as writable-streams, for use with the real-time streaming API. Learn more here:\nhttps://plot.ly/python/streaming/"
         }, 
         "visible": {
@@ -1271,7 +1271,7 @@
         "stream": {
             "val_types": "dictionary-like", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "object", 
             "description": "The stream dictionary-like object that initializes traces as writable-streams, for use with the real-time streaming API. Learn more here:\nhttps://plot.ly/python/streaming/"
         }, 
         "visible": {
@@ -1324,7 +1324,7 @@
         "stream": {
             "val_types": "dictionary-like", 
             "required": false, 
-            "type": "plot_info", 
+            "type": "object", 
             "description": "The stream dictionary-like object that initializes traces as writable-streams, for use with the real-time streaming API. Learn more here:\nhttps://plot.ly/python/streaming/"
         }, 
         "visible": {
@@ -1835,9 +1835,9 @@
             "description": "The x-axis title."
         }, 
         "titlefont": {
-            "val_types": "string", 
+            "val_types": "dictionary-like", 
             "required": false, 
-            "type": "style", 
+            "type": "object", 
             "description": "A dictionary-like object describing the font settings of the x-axis title."
         }, 
         "range": {
@@ -2089,9 +2089,9 @@
             "description": "The y-axis title."
         }, 
         "titlefont": {
-            "val_types": "string", 
+            "val_types": "dictionary-like", 
             "required": false, 
-            "type": "style", 
+            "type": "object", 
             "description": "A dictionary-like object describing the font settings of the y-axis title."
         }, 
         "range": {
@@ -2589,9 +2589,9 @@
             "description": "Location of colorbar title with respect to the colorbar."
         }, 
         "titlefont": {
-            "val_types": "string", 
+            "val_types": "dictionary-like", 
             "required": false, 
-            "type": "style", 
+            "type": "object", 
             "description": "A dictionary-like object describing the font settings of the colorbar title."
         }, 
         "thickness": {
@@ -2979,9 +2979,9 @@
             "description": "The title of the figure."
         }, 
         "titlefont": {
-            "val_types": "string", 
+            "val_types": "dictionary-like", 
             "required": false, 
-            "type": "style", 
+            "type": "object", 
             "description": "A dictionary-like object describing the font settings of the figure's title."
         }, 
         "font": {
@@ -3033,7 +3033,7 @@
             "description": "A dictionary-like object containing the legend parameters for this figure."
         }, 
         "annotations": {
-            "val_types": "dictionary-like", 
+            "val_types": "array-like of one or several dictionaries", 
             "required": false, 
             "type": "object", 
             "description": "A list-like object that contains one or multiple annotation dictionaries."
@@ -3145,7 +3145,7 @@
     }, 
     "figure": {
         "data": {
-            "val_types": "dictionary-like", 
+            "val_types": "array-like of one or several dictionaries", 
             "required": false, 
             "type": "object", 
             "description": "A list-like array of the data trace(s) that is/are to be visualized."

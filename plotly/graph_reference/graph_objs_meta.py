@@ -93,6 +93,7 @@ val_types = dict(
     color_array="array-like of string describing color",
     matrix="matrix-like: list of lists, numpy.matrix",
     object="dictionary-like",
+    object_list="array-like of one or several dictionaries",
 )
 
 ### @required_cond@ - Inventory of shortcuts for conditionally required keys
@@ -580,7 +581,7 @@ drop_name=dict(
 # @stream@
 drop_stream=dict(
     required=False,
-    type='plot_info',
+    type='object',
     val_types=val_types['object'],
     description="The stream dictionary-like object that initializes traces as "
                 "writable-streams, for use with the real-time streaming "
@@ -1066,8 +1067,8 @@ def make_title(obj, x_or_y=False):
 # @titlefont@
 def make_titlefont(obj, x_or_y=False):
     _required=False
-    _type='style'
-    _val_types=val_types['string']
+    _type='object'
+    _val_types=val_types['object']
     _description=dict(
             axis="A dictionary-like object describing the font "
                  "settings of the {S}-axis title.".format(S=x_or_y),
@@ -2949,7 +2950,7 @@ META += [('layout', OrderedDict([
     ('annotations', dict(
         required=False,
         type='object',
-        val_types=val_types['object'],
+        val_types=val_types['object_list'],
         description="A list-like object that contains one or multiple "
                     "annotation dictionaries."
     )),
@@ -3125,7 +3126,7 @@ META += [('figure', OrderedDict([
     ('data', dict(
         required=False,
         type='object',
-        val_types=val_types['object'],
+        val_types=val_types['object_list'],
         description="A list-like array of the data trace(s) that is/are "
                     "to be visualized."
     )),
