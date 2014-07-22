@@ -17,7 +17,6 @@ import six
 from plotly import utils
 from plotly import exceptions
 
-from . import matplotlylib
 from . graph_objs import graph_objs
 
 # Warning format
@@ -26,6 +25,7 @@ def warning_on_one_line(message, category, filename, lineno, file=None, line=Non
 warnings.formatwarning = warning_on_one_line
 
 try:
+    from . import matplotlylib
     _matplotlylib_imported = True
 except ImportError:
     _matplotlylib_imported = False
