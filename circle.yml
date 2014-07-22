@@ -9,16 +9,18 @@ checkout:
 ## Customize dependencies
 dependencies:
   post:
-    - pip install matplotlib
     - pip install -I .
     - cd ~ && python -c "import plotly"
+    - pip install matplotlib
 
 ## Customize database setup (pass)
 
 ## Customize test commands
 test:
   post:
-    - nosetests -w plotly/tests
+    - nosetests -w plotly/tests/test_optional
+    - pip uninstall -y matplotlib
+    - nosetests -w plotly/tests/test_core
     - chmod 000 ~/.plotly && python -c "import plotly"
 
 ## Customize deployment commands (pass)
