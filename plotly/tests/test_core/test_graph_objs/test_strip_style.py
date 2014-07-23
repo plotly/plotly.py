@@ -1,7 +1,7 @@
 from __future__ import absolute_import
 
 from plotly.graph_objs import *
-from . import nose_tools
+from plotly.tests.utils import compare_dict
 
 
 def test_strip_style():
@@ -145,6 +145,6 @@ def test_strip_style():
             margin=Margin()
         )
     )
-    equivalent, msg = nose_tools.compare_dict(fig, comp_fig)
+    equivalent, msg = compare_dict(fig, comp_fig)
     print(msg)
     assert equivalent
