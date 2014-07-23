@@ -3,7 +3,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-from plotly.tests.test_optional import run_fig
+from plotly.tests.test_optional.optional_utils import run_fig
 from .data.data import *
 
 

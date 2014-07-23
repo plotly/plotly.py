@@ -5,7 +5,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-from plotly.tests.test_optional import compare_dict, run_fig
+from plotly.tests.test_optional.optional_utils import compare_dict, run_fig
 from .data.annotations import *
 
 

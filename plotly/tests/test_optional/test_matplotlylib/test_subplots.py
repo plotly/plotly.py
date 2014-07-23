@@ -4,7 +4,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
 
-from plotly.tests.test_optional import compare_dict, run_fig
+from plotly.tests.test_optional.optional_utils import compare_dict, run_fig
 from .data.subplots import *
 
 
