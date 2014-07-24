@@ -267,7 +267,6 @@ class PlotlyRenderer(Renderer):
             self.msg += "    Bar chart not drawn\n"
             warnings.warn('found box chart data with length <= 1, '
                           'assuming data redundancy, not plotting.')
-        print bar.to_string()
 
 
     def draw_marked_line(self, **props):
