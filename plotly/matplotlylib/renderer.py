@@ -243,6 +243,7 @@ class PlotlyRenderer(Renderer):
             for old, new in zip(old_heights, new_heights):
                 if abs(old - new) > tol:
                     self.plotly_fig['layout']['barmode']='stack'
+                    self.plotly_fig['layout']['hovermode']='x'
             x = [bar['x0']+(bar['x1']-bar['x0'])/2 for bar in trace]
             y = [bar['y1'] for bar in trace]
             bar_gap = mpltools.get_bar_gap([bar['x0'] for bar in trace],
@@ -257,6 +258,7 @@ class PlotlyRenderer(Renderer):
             for old, new in zip(old_rights, new_rights):
                 if abs(old - new) > tol:
                     self.plotly_fig['layout']['barmode']='stack'
+                    self.plotly_fig['layout']['hovermode']='y'
             x = [bar['x1'] for bar in trace]
             y = [bar['y0']+(bar['y1']-bar['y0'])/2 for bar in trace]
             bar_gap = mpltools.get_bar_gap([bar['y0'] for bar in trace],
