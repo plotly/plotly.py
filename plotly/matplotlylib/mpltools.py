@@ -318,24 +318,14 @@ def get_spine_visible(ax, spine_key):
         return False # oh man, and i thought we exhausted the options...
 
 
-def is_bar(**props):
+def is_bar(bar_containers, **props):
     """A test to decide whether a path is a bar from a vertical bar chart."""
-    tests = []
-    tests += get_rect_ymin(props['data']) == 0,
-    if all(tests):
-        return True
-    else:
-        return False
 
-
-def is_barh(**props):
-    """A test to decide whether a path is a bar from a horizontal bar chart."""
-    tests = []
-    tests += get_rect_xmin(props['data']) == 0,
-    if all(tests):
-        return True
-    else:
-        return False
+    # is this patch in a bar container?
+    for container in bar_containers:
+        if props['mplobj'] in container:
+            return True
+    return False
 
 
 def make_bar(**props):
@@ -351,7 +341,6 @@ def make_bar(**props):
     """
     return {
         'bar': props['mplobj'],
-        'orientation': props['orientation'],
         'x0': get_rect_xmin(props['data']),
         'y0': get_rect_ymin(props['data']),
         'x1': get_rect_xmax(props['data']),
