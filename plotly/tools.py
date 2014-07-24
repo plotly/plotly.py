@@ -82,8 +82,8 @@ def ensure_local_plotly_files():
                       "your 'home' ('~') directory or to our '~/.plotly' "
                       "directory. That means plotly's python api can't setup "
                       "local configuration files. No problem though! You'll "
-                      "just have to sign-in using 'plotly.sign_in()'. For help "
-                      "with that: 'help(plotly.sign_in)'."
+                      "just have to sign-in using 'plotly.plotly.sign_in()'. For help "
+                      "with that: 'help(plotly.plotly.sign_in)'."
                       "\nQuestions? support@plot.ly")
 
 
