@@ -235,16 +235,28 @@ class PlotlyRenderer(Renderer):
             orientation = 'h'
         if orientation == 'v':
             self.msg += "    Attempting to draw a vertical bar chart\n"
+            old_heights = [bar_props['y1'] for bar_props in trace]
             for bar in trace:
                 bar['y0'], bar['y1'] = 0, bar['y1'] - bar['y0']
+            new_heights = [bar_props['y1'] for bar_props in trace]
+            # check if we're stacked or not...
+            for old, new in zip(old_heights, new_heights):
+                if abs(old - new) > tol:
+                    self.plotly_fig['layout']['barmode']='stack'
             x = [bar['x0']+(bar['x1']-bar['x0'])/2 for bar in trace]
             y = [bar['y1'] for bar in trace]
             bar_gap = mpltools.get_bar_gap([bar['x0'] for bar in trace],
                                            [bar['x1'] for bar in trace])
         else:
             self.msg += "    Attempting to draw a horizontal bar chart\n"
+            old_rights = [bar_props['x1'] for bar_props in trace]
             for bar in trace:
                 bar['x0'], bar['x1'] = 0, bar['x1'] - bar['x0']
+            new_rights = [bar_props['x1'] for bar_props in trace]
+            # check if we're stacked or not...
+            for old, new in zip(old_rights, new_rights):
+                if abs(old - new) > tol:
+                    self.plotly_fig['layout']['barmode']='stack'
             x = [bar['x1'] for bar in trace]
             y = [bar['y0']+(bar['y1']-bar['y0'])/2 for bar in trace]
             bar_gap = mpltools.get_bar_gap([bar['y0'] for bar in trace],
