@@ -50,7 +50,9 @@ class PlotlyRenderer(Renderer):
         """
         self.plotly_fig = Figure(data=Data(), layout=Layout())
         self.mpl_fig = None
-        self.current_ax_patches = []
+        self.current_mpl_ax = None
+        self.bar_containers = None
+        self.current_bars = []
         self.axis_ct = 0
         self.mpl_x_bounds = (0, 1)
         self.mpl_y_bounds = (0, 1)
@@ -137,6 +139,10 @@ class PlotlyRenderer(Renderer):
 
         """
         self.msg += "  Opening axes\n"
+        self.current_mpl_ax = ax
+        self.bar_containers = [c for c in ax.containers  # empty is OK
+                               if c.__class__.__name__ == 'BarContainer']
+        self.current_bars = []
         self.axis_ct += 1
         # set defaults in axes
         xaxis = XAxis(
@@ -173,20 +179,27 @@ class PlotlyRenderer(Renderer):
 
         Bars from bar charts are given to PlotlyRenderer one-by-one,
         thus they need to be taken care of at the close of each axes object.
-        The self.current_ax_patches variable should be empty unless a bar
-        chart has been created or a rectangle object has been drawn that has
-        an edge exactly on the lines x=0 or y=0.
+        The self.current_bars variable should be empty unless a bar
+        chart has been created.
 
         Positional arguments:
         ax -- an mpl axes object, not required at this time.
 
         """
-        for patch_coll in self.current_ax_patches:
-            self.draw_bar(patch_coll)
-        self.current_ax_patches = []  # clear this for next axes obj
+        self.draw_bars(self.current_bars)
         self.msg += "  Closing axes\n"
 
-    def draw_bar(self, patch_coll):
+    def draw_bars(self, bars):
+
+        # sort bars according to bar containers
+        mpl_traces = []
+        for container in self.bar_containers:
+            mpl_traces.append([bar_props for bar_props in self.current_bars
+                               if bar_props['mplobj'] in container])
+        for trace in mpl_traces:
+            self.draw_bar(trace)
+
+    def draw_bar(self, coll):
         """Draw a collection of similar patches as a bar chart.
 
         After bars are sorted, an appropriate data dictionary must be created
@@ -198,30 +211,53 @@ class PlotlyRenderer(Renderer):
         patch_coll -- a collection of patches to be drawn as a bar chart.
 
         """
-        orientation = patch_coll[0]['orientation']
+        tol = 1e-10
+        trace = [mpltools.make_bar(**bar_props) for bar_props in coll]
+        widths = [bar_props['x1'] - bar_props['x0'] for bar_props in trace]
+        heights = [bar_props['y1'] - bar_props['y0'] for bar_props in trace]
+        vertical = abs(
+            sum(widths[0]-widths[iii] for iii in range(len(widths)))
+        ) < tol
+        horizontal = abs(
+            sum(heights[0]-heights[iii] for iii in range(len(heights)))
+        ) < tol
+        if vertical and horizontal:
+            # Check for monotonic x. Can't both be true!
+            x_zeros = [bar_props['x0'] for bar_props in trace]
+            if all((x_zeros[iii+1] > x_zeros[iii]
+                    for iii in range(len(x_zeros[:-1])))):
+                orientation = 'v'
+            else:
+                orientation = 'h'
+        elif vertical:
+            orientation = 'v'
+        else:
+            orientation = 'h'
         if orientation == 'v':
             self.msg += "    Attempting to draw a vertical bar chart\n"
-            patch_coll.sort(key=lambda b: b['x0'])
-            x = [bar['x0']+(bar['x1']-bar['x0'])/2 for bar in patch_coll]
-            y = [bar['y1'] for bar in patch_coll]
-            bar_gap = mpltools.get_bar_gap([bar['x0'] for bar in patch_coll],
-                                           [bar['x1'] for bar in patch_coll])
+            for bar in trace:
+                bar['y0'], bar['y1'] = 0, bar['y1'] - bar['y0']
+            x = [bar['x0']+(bar['x1']-bar['x0'])/2 for bar in trace]
+            y = [bar['y1'] for bar in trace]
+            bar_gap = mpltools.get_bar_gap([bar['x0'] for bar in trace],
+                                           [bar['x1'] for bar in trace])
         else:
             self.msg += "    Attempting to draw a horizontal bar chart\n"
-            patch_coll.sort(key=lambda b: b['y0'])
-            x = [bar['x1'] for bar in patch_coll]
-            y = [bar['y0']+(bar['y1']-bar['y0'])/2 for bar in patch_coll]
-            bar_gap = mpltools.get_bar_gap([bar['y0'] for bar in patch_coll],
-                                           [bar['y1'] for bar in patch_coll])
+            for bar in trace:
+                bar['x0'], bar['x1'] = 0, bar['x1'] - bar['x0']
+            x = [bar['x1'] for bar in trace]
+            y = [bar['y0']+(bar['y1']-bar['y0'])/2 for bar in trace]
+            bar_gap = mpltools.get_bar_gap([bar['y0'] for bar in trace],
+                                           [bar['y1'] for bar in trace])
         bar = Bar(orientation=orientation,
                   x=x,
                   y=y,
                   xaxis='x{0}'.format(self.axis_ct),
                   yaxis='y{0}'.format(self.axis_ct),
-                  opacity=patch_coll[0]['alpha'],
+                  opacity=trace[0]['alpha'],  # TODO: get all alphas if array?
                   marker=Marker(
-                      color=patch_coll[0]['facecolor'],
-                      line=Line(width=patch_coll[0]['edgewidth'])))
+                      color=trace[0]['facecolor'],  # TODO: get all
+                      line=Line(width=trace[0]['edgewidth'])))  # TODO: get all
         if len(bar['x']) > 1:
             self.msg += "    Heck yeah, I drew that bar chart\n"
             self.plotly_fig['data'] += bar,
@@ -231,6 +267,8 @@ class PlotlyRenderer(Renderer):
             self.msg += "    Bar chart not drawn\n"
             warnings.warn('found box chart data with length <= 1, '
                           'assuming data redundancy, not plotting.')
+        print bar.to_string()
+
 
     def draw_marked_line(self, **props):
         """Create a data dict for a line obj.
@@ -400,65 +438,14 @@ class PlotlyRenderer(Renderer):
 
         """
         self.msg += "    Attempting to draw a path\n"
-        is_bar = mpltools.is_bar(**props)
-        is_barh = mpltools.is_barh(**props)
-        if is_bar:  # if we think it's a bar, add it!
-            self.msg += "      Assuming path is a vertical bar\n"
-            bar = mpltools.make_bar(orientation='v', **props)
-            self.file_bar(bar)
-        if is_barh:  # perhaps a horizontal bar?
-            self.msg += "      Assuming path is a horizontal bar\n"
-            bar = mpltools.make_bar(orientation='h', **props)
-            self.file_bar(bar)
-        if not (is_bar or is_barh):
+        is_bar = mpltools.is_bar(self.current_mpl_ax.containers, **props)
+        if is_bar:
+            self.current_bars += [props]
+        else:
             self.msg += "    This path isn't a bar, not drawing\n"
             warnings.warn("I found a path object that I don't think is part "
                           "of a bar chart. Ignoring.")
 
-    def file_bar(self, bar):
-        """Puts a given bar into an appropriate bar or barh collection.
-
-        Bars come from the mplexporter one-by-one. To try to put them into
-        appropriate data sets, we must compare them to existing data.
-
-        Positional arguments:
-        bar -- a bar dictionary created in mpltools.make_bar.py.
-
-        bar.keys() -- [
-        'bar',          (mpl path object)
-        'orientation',  (bar direction, 'v' or 'h' for horizontal or vertical)
-        'x0',           ([x0, y0] = bottom-left corner of rectangle)
-        'y0',
-        'x1',           ([x1, y1] = top-right corner of rectangle):
-        'y1',
-        'alpha',        (opacity of rectangle)
-        'edgecolor',    (boundary line color)
-        'facecolor',    (rectangle color)
-        'edgewidth',    (boundary line width)
-        'dasharray',    (linestyle for boundary line)
-        'zorder',       (precedence when stacked)
-        ]
-
-        """
-        self.msg += "        Putting a bar into the proper bar collection\n"
-        if len(self.current_ax_patches) == 0:
-            self.msg += "          Started a new bar collection with this " \
-                        "bar\n"
-            self.current_ax_patches.append([])
-            self.current_ax_patches[-1] += bar,
-        else:
-            match = False
-            for patch_collection in self.current_ax_patches:
-                if mpltools.check_bar_match(patch_collection[0], bar):
-                    match = True
-                    patch_collection += bar,
-                    self.msg += "          Filed bar into existing bar " \
-                                "collection\n"
-            if not match:
-                self.msg += "          Started a new bar collection with " \
-                            "this bar\n"
-                self.current_ax_patches.append([])
-                self.current_ax_patches[-1] += bar,
 
     def draw_text(self, **props):
         """Create an annotation dict for a text obj.
