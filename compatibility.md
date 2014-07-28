@@ -3,7 +3,7 @@
 ##Backwards Compatibility
 
 * import statements and module locations have changed
-* depreciated methods
+* deprecated methods
 
 ### careful, modules may have shifted during flight
 
@@ -14,7 +14,7 @@ The functionality in within `plotly.plotly` has been moved to two locations:
 
 Read on to see how this might affect you!
 
-### changed/moved/depreciated functionality
+### changed/moved/deprecated functionality
 
 Some functionality has moved, or has been altogether deleted. Here's the
 rundown of what got effected:
@@ -22,16 +22,16 @@ rundown of what got effected:
 | Name                       | Action         |
 | ------------------------   | -------------- |
 | `plotly.embed()`           | moved          |
-| `plotly.display()`         | depreciated    |
-| `plotly.signup()`          | depreciated    |
-| `plotly.plotly()`          | depreciated    |
-| `plotly.plotly.ion()`      | depreciated    |
-| `plotly.plotly.ioff()`     | depreciated    |
+| `plotly.display()`         | deprecated    |
+| `plotly.signup()`          | deprecated    |
+| `plotly.plotly()`          | deprecated    |
+| `plotly.plotly.ion()`      | deprecated    |
+| `plotly.plotly.ioff()`     | deprecated    |
 | `plotly.plotly.plot()`     | moved/changed  |
 | `plotly.plotly.iplot()`    | moved/changed  |
-| `plotly.plotly.layout()`   | depreciated    |
-| `plotly.plotly.style()`    | depreciated    |
-| `plotly.stream.init()`     | depreciated    |
+| `plotly.plotly.layout()`   | deprecated    |
+| `plotly.plotly.style()`    | deprecated    |
+| `plotly.stream.init()`     | deprecated    |
 | `plotly.stream.write()`    | moved          |
 | `plotly.stream.close()`    | moved          |
 
@@ -164,7 +164,7 @@ case-insensitive string and a file_id number.
 
 ###`plotly.display()` is now `plotly.tools.embed()`
 
-The `plotly.display()` function is depreciated and has been replaced with
+The `plotly.display()` function is deprecated and has been replaced with
 `potly.tools.embed()`.
 
 See the entry on `embed` for more details on new call signatures.
@@ -175,7 +175,7 @@ In general, `'orientation'` now describes how x and y data relate to plots
 and can be used more broadly than in just `'histogram'` and `'bar'`. Note,
 however, the `'bardir'` still exists in `'layout'`.
 
-###`ion` and `ioff` have been depreciated, use `auto_open=True`
+###`ion` and `ioff` have been deprecated, use `auto_open=True`
 
 Previously, you could set whether or not new plots created in Plotly from the
 API caused a new browser tab to open.
@@ -222,7 +222,7 @@ figure['layout'].update({})  # (option 2)
 figure['layout'].update(key1=val1, key2=val2, key3=val3)  # (option 3)
 ```
 
-###style() has been depreciated
+###style() has been deprecated
 
 All style parameters need to be declared within their resepctive objects.
 That is, layout styles must be declared within the layout dictionary and data
@@ -234,7 +234,7 @@ Aside from the class name being capitalized, the functionlity of the
 streaming class has improved. Run help(plotly.plotly.Stream) for more
 information.
 
-###`plotly.signup()` has been depreciated
+###`plotly.signup()` has been deprecated
 
 Users must signup initially at the plotly website, this can no longer be done
 through the Python API.
