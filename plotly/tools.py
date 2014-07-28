@@ -13,6 +13,7 @@ import os
 import os.path
 import warnings
 import six
+from distutils.version import StrictVersion
 
 from plotly import utils
 from plotly import exceptions
@@ -26,9 +27,22 @@ warnings.formatwarning = warning_on_one_line
 
 try:
     from . import matplotlylib
-    _matplotlylib_imported = True
+    import matplotlib  # imported above, but repeated for clarity
 except ImportError:
     _matplotlylib_imported = False
+else:
+    our_mpl = '1.3.1'
+    if StrictVersion(matplotlib.__version__) < StrictVersion(our_mpl):
+        warnings.warn("Looks like you don't have a supported version of "
+                      "matplotlib installed. You're current version is {"
+                      "yours}, but we require >= {ours}. \nFor "
+                      "install information, check out "
+                      "http://matplotlib.org/faq/installing_faq.html."
+                      "".format(yours=matplotlib.__version__, ours=our_mpl))
+        _matplotlylib_imported = False
+    else:
+        _matplotlylib_imported = True
+
 
 PLOTLY_DIR = os.path.join(os.path.expanduser("~"), ".plotly")
 CREDENTIALS_FILE = os.path.join(PLOTLY_DIR, ".credentials")
