@@ -59,14 +59,3 @@ pull_chunked : submodules/chunked_requests
 	@echo ""
 	@echo "Pulling down updates from chunked_requests"
 	cd submodules/chunked_requests; git pull origin master
-
-run_coverage : 
-	@echo ""
-	@echo "Running api nosetests with coverage"
-	nosetests -w plotly/tests --with-coverage --cover-erase --cover-package plotly.plotly.plotly --cover-package plotly.graph_objs.graph_objs --cover-package plotly.graph_objs.graph_objs_tools --cover-package plotly.matplotlylib.mpltools --cover-package plotly.matplotlylib.renderer --cover-package plotly.tools --cover-package plotly.exceptions --cover-package plotly.utils --cover-package plotly.version
-	@echo "Removing old html if it exists"
-	if [ -d plotly/tests/coverage ]; then rm -rf plotly/tests/coverage; fi
-	@echo "Generating html with coverage"
-	coverage html -d plotly/tests/coverage
-	
-	

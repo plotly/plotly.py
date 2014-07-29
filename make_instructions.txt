@@ -38,8 +38,6 @@ Available targets (i.e. $ make target):
 
     pull_refs -> pull in graph_reference *master* branch
 
-    make_coverage -> (requires `nose` and `coverage`) run tests with coverage
-
 ################################################################################
 
 Getting setup:
