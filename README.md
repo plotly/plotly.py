@@ -21,6 +21,10 @@ Heck yeah! We've got suggestions! We've got guides!
 
 Checkout [`contributing.md`](https://github.com/plotly/python-api/blob/master/contributing.md).
 
+###Dependencies
+
+See [`requirements.txt`](https://github.com/plotly/python-api/blob/master/requirements.txt) and [`optional-requirements.txt`](https://github.com/plotly/python-api/blob/master/optional-requirements.txt) for dependency information.
+
 ###Get in touch
 
 - <feedback@plot.ly>
