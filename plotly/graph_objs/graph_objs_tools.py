@@ -36,6 +36,8 @@ def curtail_val_repr(val, max_chars, add_delim=False):
         if isinstance(val, six.string_types):
             # TODO: can we assume this ends in "'"
             r = r[:max_chars - len(end + "'")] + end + "'"
+        elif isinstance(val, list) and max_chars >= len("[{end}]".format(end)):
+            r = r[:max_chars - len(end + ']')] + end + ']'
         else:
             r = r[:max_chars - len(end)] + end
     if add_delim:
