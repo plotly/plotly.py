@@ -17,7 +17,7 @@ import six
 from plotly import utils
 from plotly import exceptions
 
-from . graph_objs import graph_objs
+from plotly.graph_objs import graph_objs
 
 # Warning format
 def warning_on_one_line(message, category, filename, lineno, file=None, line=None):
@@ -436,10 +436,10 @@ def get_valid_graph_obj(obj, obj_type=None):
 
     """
     try:
-        new_obj = graph_objs.NAME_TO_CLASS[obj.__class__.__name__]()
+        new_obj = graph_objs._factory(obj.__class__.__name__)
     except KeyError:
         try:
-            new_obj = graph_objs.NAME_TO_CLASS[obj_type]()
+            new_obj = graph_objs._factory(obj_type)
         except KeyError:
             raise exceptions.PlotlyError(
                 "'{0}' nor '{1}' are recognizable graph_objs.".
@@ -466,7 +466,7 @@ def validate(obj, obj_type):
     except KeyError:
         pass
     try:
-        test_obj = graph_objs.NAME_TO_CLASS[obj_type](obj)
+        test_obj = graph_objs._factory(obj_type, obj)
     except KeyError:
         raise exceptions.PlotlyError(
             "'{0}' is not a recognizable graph_obj.".

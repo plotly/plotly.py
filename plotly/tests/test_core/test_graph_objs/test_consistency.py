@@ -23,4 +23,4 @@ def test_names_in_name_to_key():
 def test_names_in_name_to_class():
     for key in graph_objs.INFO:
         class_name = graph_objs.KEY_TO_NAME[key]
-        _class = graph_objs.NAME_TO_CLASS[class_name]
+        _class = graph_objs._factory(class_name)
