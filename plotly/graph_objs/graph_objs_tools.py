@@ -18,7 +18,7 @@ translations = dict(
 
 def curtail_val_repr(val, max_chars, add_delim=False):
     delim = ", "
-    end = "..."
+    end = ".."
     if isinstance(val, six.string_types):
         if max_chars <= len("'" + end + "'"):
             return ' ' * max_chars
