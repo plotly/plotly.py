@@ -35,7 +35,7 @@ else:
     _matplotlib_imported = True
 
 if _matplotlib_imported:
-    if StrictVersion(matplotlib.__version__) >= _mpl_version:
+    if StrictVersion(matplotlib.__version__) >= StrictVersion(_mpl_version):
         from plotly import matplotlylib
 
 
@@ -350,7 +350,7 @@ def mpl_to_plotly(fig, resize=False, strip_style=False, verbose=False):
 
     """
     if _matplotlib_imported:
-        if StrictVersion(matplotlib.__version__) >= _mpl_version:
+        if StrictVersion(matplotlib.__version__) >=StrictVersion(_mpl_version):
             renderer = matplotlylib.PlotlyRenderer()
             matplotlylib.Exporter(renderer).run(fig)
             if resize:
