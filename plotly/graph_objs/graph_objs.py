@@ -26,141 +26,15 @@ from __future__ import absolute_import
 
 import warnings
 import six
-import sys
 from plotly.graph_objs import graph_objs_tools
+from plotly.graph_objs.graph_objs_tools import INFO, KEY_TO_NAME, NAME_TO_KEY
 import copy
 from plotly import exceptions
-from plotly import utils
-
+import sys
 if sys.version[:3] == '2.6':
     from ordereddict import OrderedDict
-    import simplejson as json
 else:
     from collections import OrderedDict
-    import json
-
-__all__ = ["Data",
-           "Annotations",
-           "Area",
-           "Bar",
-           "Box",
-           "Contour",
-           "Heatmap",
-           "Histogram",
-           "Histogram2d",
-           "Histogram2dContour",
-           "Scatter",
-           "Annotation",
-           "AngularAxis",
-           "ColorBar",
-           "Contours",
-           "ErrorX",
-           "ErrorY",
-           "Figure",
-           "Font",
-           "Layout",
-           "Legend",
-           "Line",
-           "Margin",
-           "Marker",
-           "RadialAxis",
-           "Stream",
-           "Trace",
-           "XAxis",
-           "XBins",
-           "YAxis",
-           "YBins"]
-
-# TODO: BIG ONE, how should exceptions bubble up in this inheritance scheme?
-    # TODO: related, WHAT exceptions should bubble up?
-
-from pkg_resources import resource_string
-s = resource_string('plotly',
-                    'graph_reference/graph_objs_meta.json').decode('utf-8')
-INFO = json.loads(s, object_pairs_hook=OrderedDict)
-
-INFO = utils.decode_unicode(INFO)
-
-# define how to map from keys in INFO to a class
-# mapping: (n->m, m < n)
-KEY_TO_NAME = dict(
-    plotlylist='PlotlyList',
-    data='Data',
-    angularaxis='AngularAxis',
-    annotations='Annotations',
-    area='Area',
-    plotlydict='PlotlyDict',
-    plotlytrace='PlotlyTrace',
-    bar='Bar',
-    box='Box',
-    contour='Contour',
-    heatmap='Heatmap',
-    histogram='Histogram',
-    histogram2d='Histogram2d',
-    histogram2dcontour='Histogram2dContour',
-    scatter='Scatter',
-    annotation='Annotation',
-    colorbar='ColorBar',
-    contours='Contours',
-    error_x='ErrorX',
-    error_y='ErrorY',
-    figure='Figure',
-    font='Font',
-    layout='Layout',
-    legend='Legend',
-    line='Line',
-    margin='Margin',
-    marker='Marker',
-    radialaxis='RadialAxis',
-    stream='Stream',
-    trace='Trace',
-    textfont='Font',
-    tickfont='Font',
-    titlefont='Font',
-    xaxis='XAxis',
-    xbins='XBins',
-    yaxis='YAxis',
-    ybins='YBins'
-)
-
-# define how to map from a class name to a key name in INFO
-# mapping: (n->n)
-NAME_TO_KEY = dict(
-    PlotlyList='plotlylist',
-    Data='data',
-    AngularAxis='angularaxis',
-    Annotations='annotations',
-    PlotlyDict='plotlydict',
-    PlotlyTrace='plotlytrace',
-    Area='area',
-    Bar='bar',
-    Box='box',
-    Contour='contour',
-    Heatmap='heatmap',
-    Histogram='histogram',
-    Histogram2d='histogram2d',
-    Histogram2dContour='histogram2dcontour',
-    Scatter='scatter',
-    Annotation='annotation',
-    ColorBar='colorbar',
-    Contours='contours',
-    ErrorX='error_x',
-    ErrorY='error_y',
-    Figure='figure',
-    Font='font',
-    Layout='layout',
-    Legend='legend',
-    Line='line',
-    Margin='margin',
-    Marker='marker',
-    RadialAxis='radialaxis',
-    Stream='stream',
-    Trace='trace',
-    XAxis='xaxis',
-    XBins='xbins',
-    YAxis='yaxis',
-    YBins='ybins'
-)
 
 
 class PlotlyList(list):
@@ -219,7 +93,7 @@ class PlotlyList(list):
             if isinstance(entry, PlotlyDict):
                 try:
                     entry.to_graph_objs(caller=False)
-                except (exceptions.PlotlyGraphObjectError) as err:
+                except exceptions.PlotlyGraphObjectError as err:
                     err.add_to_error_path(index)
                     err.prepare()
                     raise  # re-raise current exception
@@ -227,7 +101,6 @@ class PlotlyList(list):
                 raise exceptions.PlotlyListEntryError(obj=self,
                                                       index=index,
                                                       entry=entry)
-
 
     def update(self, changes, make_copies=False):
         """Update current list with changed_list, which must be iterable.
@@ -254,7 +127,6 @@ class PlotlyList(list):
                     self[index].update(copy.deepcopy(update))
                 else:
                     self[index].update(update)
-
 
     def strip_style(self):
         """Strip style from the current representation.
@@ -374,7 +246,6 @@ class PlotlyList(list):
             ordered_list += [entry.get_ordered()]
         return ordered_list
 
-
     def force_clean(self, caller=True):
         """Attempts to convert to graph_objs and calls force_clean() on entries.
 
@@ -397,6 +268,7 @@ class PlotlyList(list):
         for index in del_indicies:
             del self[index - del_ct]
             del_ct += 1
+
 
 class PlotlyDict(dict):
     """A base dict class for all objects that style a figure in plotly.
@@ -742,7 +614,6 @@ class PlotlyDict(dict):
             else:
                 ordered_dict[key] = self[key]
         return ordered_dict
-
 
     def force_clean(self, caller=True):
         """Attempts to convert to graph_objs and call force_clean() on values.
@@ -1131,12 +1002,12 @@ def _factory(name, *args, **kwargs):
 # bases are the base classes that the new class inherits from
 # dict holds attributes for the new class, e.g., __doc__
 # why? because __doc__ isn't writeable after-the-fact!
-for obj in graph_objs_tools.NAME_TO_BASE:
+for obj in graph_objs_tools.OBJ_MAP:
     if obj not in globals():
-        basename = graph_objs_tools.NAME_TO_BASE[obj]
-        if basename == 'PlotlyList':
+        base_name = graph_objs_tools.OBJ_MAP[obj]['base_name']
+        if base_name == 'PlotlyList':
             doc = graph_objs_tools.make_list_doc(obj)
         else:
             doc = graph_objs_tools.make_dict_doc(obj)
-        base = globals()[basename]
+        base = globals()[base_name]
         globals()[obj] = type(obj, (base,), {'__doc__': doc, '__name__': obj})
