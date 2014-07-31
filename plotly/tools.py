@@ -13,6 +13,7 @@ import os
 import os.path
 import warnings
 import six
+from distutils.version import StrictVersion
 
 from plotly import utils
 from plotly import exceptions
@@ -24,11 +25,19 @@ def warning_on_one_line(message, category, filename, lineno, file=None, line=Non
     return '%s:%s: %s:\n\n%s\n\n' % (filename, lineno, category.__name__, message)
 warnings.formatwarning = warning_on_one_line
 
+_mpl_version = '1.3.1'
+
 try:
-    from . import matplotlylib
-    _matplotlylib_imported = True
+    import matplotlib
 except ImportError:
-    _matplotlylib_imported = False
+    _matplotlib_imported = False
+else:
+    _matplotlib_imported = True
+
+if _matplotlib_imported:
+    if StrictVersion(matplotlib.__version__) >= StrictVersion(_mpl_version):
+        from plotly import matplotlylib
+
 
 PLOTLY_DIR = os.path.join(os.path.expanduser("~"), ".plotly")
 CREDENTIALS_FILE = os.path.join(PLOTLY_DIR, ".credentials")
@@ -340,22 +349,32 @@ def mpl_to_plotly(fig, resize=False, strip_style=False, verbose=False):
     {plotly_domain}/api/python/getting-started
 
     """
-    if _matplotlylib_imported:
-        renderer = matplotlylib.PlotlyRenderer()
-        matplotlylib.Exporter(renderer).run(fig)
-        if resize:
-            renderer.resize()
-        if strip_style:
-            renderer.strip_style()
-        if verbose:
-            print(renderer.msg)
-        return renderer.plotly_fig
+    if _matplotlib_imported:
+        if StrictVersion(matplotlib.__version__) >=StrictVersion(_mpl_version):
+            renderer = matplotlylib.PlotlyRenderer()
+            matplotlylib.Exporter(renderer).run(fig)
+            if resize:
+                renderer.resize()
+            if strip_style:
+                renderer.strip_style()
+            if verbose:
+                print(renderer.msg)
+            return renderer.plotly_fig
+        else:
+            raise exceptions.PlotlyError(
+                "The matplotlib version you have, {yours}, is older than the "
+                "version supported in the plotly package, {ours}. You'll have "
+                "to update this to fix this error."
+                "\nQuestions? support@plot.ly"
+                "".format(yours=matplotlib.__version__, ours=_mpl_version)
+            )
     else:
-        warnings.warn(
-            "To use Plotly's matplotlylib functionality, you'll need to have "
-            "matplotlib successfully installed with all of its dependencies. "
-            "You're getting this error because matplotlib or one of its "
-            "dependencies doesn't seem to be installed correctly.")
+        raise exceptions.PlotlyError(
+            "The matplotlib package is not installed. This is required to use "
+            "Plotly's matplotlylib functionality. Install it to remove this "
+            "error."
+            "\nQuestions? support@plot.ly"
+        )
 
 
 ### graph_objs related tools ###
