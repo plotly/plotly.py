@@ -13,6 +13,7 @@ import os
 import os.path
 import warnings
 import six
+import requests
 
 from plotly import utils
 from plotly import exceptions
@@ -283,9 +284,37 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
         return html(s, hide=False)
     except:
         pass
+    if file_id:
+        url = "{plotly_domain}/~{un}/{fid}".format(
+            plotly_domain=get_config_file()['plotly_domain'],
+            un=file_owner_or_url,
+            fid=file_id)
+    else:
+        url = file_owner_or_url
     try:
-        from IPython.display import HTML, display
-        display(HTML(s))
+        from IPython.core.display import HTML
+        class PlotlyFrame(HTML):
+            def __init__(self, url):
+                self.resource = url
+                self.embed_code = get_embed(url)
+                super(PlotlyFrame, self).__init__(data=self.embed_code)
+            def _repr_svg_(self):
+                url = self.resource + ".svg"
+                res = requests.get(url)
+                return res.content
+            def _repr_png_(self):
+                url = self.resource + ".png"
+                res = requests.get(url)
+                return res.content
+            def _repr_pdf_(self):
+                url = self.resource + ".pdf"
+                res = requests.get(url)
+                return res.content
+            def _repr_jpeg_(self):
+                url = self.resource + ".jpeg"
+                res = requests.get(url)
+                return res.content
+        return PlotlyFrame(url)
     except:
         pass
 
