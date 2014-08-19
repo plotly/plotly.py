@@ -31,6 +31,12 @@ try:
 except ImportError:
     _matplotlylib_imported = False
 
+try:
+    import IPython
+    _ipython_imported = True
+except ImportError:
+    _ipython_imported = False
+
 PLOTLY_DIR = os.path.join(os.path.expanduser("~"), ".plotly")
 CREDENTIALS_FILE = os.path.join(PLOTLY_DIR, ".credentials")
 CONFIG_FILE = os.path.join(PLOTLY_DIR, ".config")
@@ -284,39 +290,21 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
         return html(s, hide=False)
     except:
         pass
-    if file_id:
-        url = "{plotly_domain}/~{un}/{fid}".format(
-            plotly_domain=get_config_file()['plotly_domain'],
-            un=file_owner_or_url,
-            fid=file_id)
+    if _ipython_imported:
+        if file_id:
+            url = "{plotly_domain}/~{un}/{fid}".format(
+                plotly_domain=get_config_file()['plotly_domain'],
+                un=file_owner_or_url,
+                fid=file_id)
+        else:
+            url = file_owner_or_url
+        return PlotlyDisplay(url)
     else:
-        url = file_owner_or_url
-    try:
-        from IPython.core.display import HTML
-        class PlotlyFrame(HTML):
-            def __init__(self, url):
-                self.resource = url
-                self.embed_code = get_embed(url)
-                super(PlotlyFrame, self).__init__(data=self.embed_code)
-            def _repr_svg_(self):
-                url = self.resource + ".svg"
-                res = requests.get(url)
-                return res.content
-            def _repr_png_(self):
-                url = self.resource + ".png"
-                res = requests.get(url)
-                return res.content
-            def _repr_pdf_(self):
-                url = self.resource + ".pdf"
-                res = requests.get(url)
-                return res.content
-            def _repr_jpeg_(self):
-                url = self.resource + ".jpeg"
-                res = requests.get(url)
-                return res.content
-        return PlotlyFrame(url)
-    except:
-        pass
+        warnings.warn(
+            "Looks like you're not using IPython or Sage to embed this plot. "
+            "If you just want the *embed code*, try using `get_embed()` "
+            "instead."
+            "\nQuestions? support@plot.ly")
 
 
 ### mpl-related tools ###
@@ -561,3 +549,40 @@ def _replace_newline(obj):
         return s
     else:
         return obj  # we return the actual reference... but DON'T mutate.
+
+
+if _ipython_imported:
+    class PlotlyDisplay(IPython.core.display.HTML):
+        """An IPython display object for use with plotly urls
+
+        PlotlyDisplay objects should be instantiated with a url for a plot.
+        IPython will *choose* the proper display representation from any
+        Python object, and using provided methods if they exist. By defining
+        the following, if an HTML display is unusable, the PlotlyDisplay
+        object can provide alternate representations.
+
+        """
+        def __init__(self, url):
+            self.resource = url
+            self.embed_code = get_embed(url)
+            super(PlotlyDisplay, self).__init__(data=self.embed_code)
+
+        def _repr_svg_(self):
+            url = self.resource + ".svg"
+            res = requests.get(url)
+            return res.content
+
+        def _repr_png_(self):
+            url = self.resource + ".png"
+            res = requests.get(url)
+            return res.content
+
+        def _repr_pdf_(self):
+            url = self.resource + ".pdf"
+            res = requests.get(url)
+            return res.content
+
+        def _repr_jpeg_(self):
+            url = self.resource + ".jpeg"
+            res = requests.get(url)
+            return res.content
