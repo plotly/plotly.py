@@ -563,6 +563,7 @@ class PlotlyDict(dict):
         obj_key = NAME_TO_KEY[self.__class__.__name__]
         for key in INFO[obj_key]:  # this sets the order of the keys! nice.
             if key in self:
+                index += 1
                 string += "{eol}{indent}{key}=".format(
                     eol=eol,
                     indent=' ' * indent * (level+1),
@@ -574,16 +575,40 @@ class PlotlyDict(dict):
                                                   pretty=pretty,
                                                   max_chars=max_chars)
                 except AttributeError:
-                    val = repr(self[key])
-                    val_chars = max_chars - (indent*(level+1)) - (len(key)+1)
-                    if pretty and (len(val) > val_chars):
-                        string += val[:val_chars - 5] + '...' + val[-1]
-                    else:
-                        string += val
-                if index < len(self) - 1:
+                    if pretty:  # curtail representation if too many chars
+                        max_len = (max_chars -
+                                   indent*(level + 1) -
+                                   len(key + "=") -
+                                   len(eol))
+                        if index < len(self):
+                            max_len -= len(',')  # remember the comma!
+                        if isinstance(self[key], list):
+                            s = "[]"
+                            for iii, entry in enumerate(self[key], 1):
+                                if iii < len(self[key]):
+                                    s_sub = graph_objs_tools.curtail_val_repr(
+                                        entry,
+                                        max_chars=max_len - len(s),
+                                        add_delim=True
+                                    )
+                                else:
+                                    s_sub = graph_objs_tools.curtail_val_repr(
+                                        entry,
+                                        max_chars=max_len - len(s),
+                                        add_delim=False
+                                    )
+                                s = s[:-1] + s_sub + s[-1]
+                                if len(s) == max_len:
+                                    break
+                            string += s
+                        else:
+                            string += graph_objs_tools.curtail_val_repr(
+                                self[key], max_len)
+                    else:  # they want it all!
+                        string += repr(self[key])
+                if index < len(self):
                     string += ","
-                index += 1
-                if index == len(self):
+                if index == len(self):  # TODO: extraneous...
                     break
         string += "{eol}{indent})".format(eol=eol, indent=' ' * indent * level)
         return string
@@ -906,16 +931,41 @@ class Layout(PlotlyDict):
                                                   pretty=pretty,
                                                   max_chars=max_chars)
                 except AttributeError:
-                    val = repr(self[key])
-                    val_chars = max_chars - (indent*(level+1)) - (len(key)+1)
-                    if pretty and (len(val) > val_chars):
-                        string += val[:val_chars - 5] + '...' + val[-1]
-                    else:
-                        string += val
+                    if pretty:  # curtail representation if too many chars
+                        max_len = (max_chars -
+                                   indent*(level + 1) -
+                                   len(key + "=") -
+                                   len(eol))
+                        if index < len(self):
+                            max_len -= len(',')  # remember the comma!
+                        if isinstance(self[key], list):
+                            s = "[]"
+                            for iii, entry in enumerate(self[key], 1):
+                                if iii < len(self[key]):
+                                    s_sub = graph_objs_tools.curtail_val_repr(
+                                        entry,
+                                        max_chars=max_len - len(s),
+                                        add_delim=True
+                                    )
+                                else:
+                                    s_sub = graph_objs_tools.curtail_val_repr(
+                                        entry,
+                                        max_chars=max_len - len(s),
+                                        add_delim=False
+                                    )
+                                s = s[:-1] + s_sub + s[-1]
+                                if len(s) == max_len:
+                                    break
+                            string += s
+                        else:
+                            string += graph_objs_tools.curtail_val_repr(
+                                self[key], max_len)
+                    else:  # they want it all!
+                        string += repr(self[key])
                 if index < len(self) - 1:
                     string += ","
                 index += 1
-                if index == len(self):
+                if index == len(self):  # TODO: extraneous...
                     break
         left_over_keys = [key for key in self if key not in INFO[obj_key]]
         left_over_keys.sort()
