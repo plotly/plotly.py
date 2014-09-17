@@ -27,7 +27,9 @@ from __future__ import absolute_import
 import warnings
 import six
 from plotly.graph_objs import graph_objs_tools
-from plotly.graph_objs.graph_objs_tools import INFO, KEY_TO_NAME, NAME_TO_KEY
+from plotly.graph_objs.graph_objs_tools import (
+    INFO, OBJ_MAP, NAME_TO_KEY, KEY_TO_NAME
+)
 import copy
 from plotly import exceptions
 import sys
@@ -192,12 +194,17 @@ class PlotlyList(list):
                     raise
             else:
                 raise exceptions.PlotlyGraphObjectError(  # TODO!!!
-                    message="uh-oh, this error shouldn't have happenend.",
-                    plain_message="uh-oh, this error shouldn't have happenend.",
+                    message=(
+                        "uh-oh, this error shouldn't have happenend."
+                    ),
+                    plain_message=(
+                        "uh-oh, this error shouldn't have happenend."
+                    ),
                     path=[index],
                 )
 
-    def to_string(self, level=0, indent=4, eol='\n', pretty=True, max_chars=80):
+    def to_string(self, level=0, indent=4, eol='\n',
+                  pretty=True, max_chars=80):
         """Returns a formatted string showing graph_obj constructors.
 
         Example:
@@ -229,7 +236,8 @@ class PlotlyList(list):
                 string += ",{eol}{indent}".format(
                     eol=eol,
                     indent=' ' * indent * (level + 1))
-        string += "{eol}{indent}])".format(eol=eol, indent=' ' * indent * level)
+        string += (
+            "{eol}{indent}])").format(eol=eol, indent=' ' * indent * level)
         return string
 
     def get_ordered(self, caller=True):
@@ -394,7 +402,8 @@ class PlotlyDict(dict):
                 d[key] = val.get_data()
             else:
                 try:
-                    if INFO[obj_key][key]['type'] == 'data':  # TODO: Update the JSON
+                    # TODO: Update the JSON
+                    if INFO[obj_key][key]['type'] == 'data':
                         d[key] = val
                 except KeyError:
                     pass
@@ -521,7 +530,8 @@ class PlotlyDict(dict):
                             val_types=val_types
                         )
                 else:
-                    matching_objects = [obj for obj in INFO if key in INFO[obj]]
+                    matching_objects = [obj for obj in
+                                        INFO if key in INFO[obj]]
                     notes = ''
                     if len(matching_objects):
                         notes += "That key is valid only in these objects:\n\n"
@@ -540,7 +550,8 @@ class PlotlyDict(dict):
                                                         key=key,
                                                         notes=notes)
 
-    def to_string(self, level=0, indent=4, eol='\n', pretty=True, max_chars=80):
+    def to_string(self, level=0, indent=4, eol='\n',
+                  pretty=True, max_chars=80):
         """Returns a formatted string showing graph_obj constructors.
 
         Example:
@@ -677,7 +688,7 @@ class Data(PlotlyList):
 
     Data([Scatter(), Heatmap(), Box()])
 
-    Valid entry types: (dict or any subclass of Trace, i.e., Scatter, Box, etc.)
+    Valid entry types: (dict or any Trace subclass, e.g. Scatter, Box, etc.)
 
     """
     def to_graph_objs(self, caller=True):  # TODO TODO TODO! check logic!
@@ -709,8 +720,10 @@ class Data(PlotlyList):
                 raise exceptions.PlotlyListEntryError(
                     obj=self,
                     index=index,
-                    notes="The entry could not be converted into a PlotlyTrace "
-                          "object (e.g., Scatter, Heatmap, Bar, etc).",
+                    notes=(
+                        "The entry could not be converted into a PlotlyTrace "
+                        "object (e.g., Scatter, Heatmap, Bar, etc)."
+                    ),
                 )
         super(Data, self).to_graph_objs(caller=caller)
 
@@ -759,8 +772,10 @@ class Annotations(PlotlyList):
                 raise exceptions.PlotlyListEntryError(
                     obj=self,
                     index=index,
-                    notes="The entry could not be converted into an Annotation "
-                          "object because it was not a dictionary.",
+                    notes=(
+                        "The entry could not be converted into an Annotation "
+                        "object because it was not a dictionary."
+                    ),
                 )
         super(Annotations, self).to_graph_objs(caller=caller)
 
@@ -786,7 +801,8 @@ class PlotlyTrace(PlotlyDict):
                           "dictionary-like plot types.\nIt is not meant to be "
                           "a user interface.")
 
-    def to_string(self, level=0, indent=4, eol='\n', pretty=True, max_chars=80):
+    def to_string(self, level=0, indent=4, eol='\n',
+                  pretty=True, max_chars=80):
         """Returns a formatted string showing graph_obj constructors.
 
         Example:
@@ -896,7 +912,8 @@ class Layout(PlotlyDict):
                     self[key] = obj  # call to super will call 'to_graph_objs'
         super(Layout, self).to_graph_objs(caller=caller)
 
-    def to_string(self, level=0, indent=4, eol='\n', pretty=True, max_chars=80):
+    def to_string(self, level=0, indent=4, eol='\n',
+                  pretty=True, max_chars=80):
         """Returns a formatted string showing graph_obj constructors.
 
         Example:
@@ -1052,7 +1069,7 @@ def _factory(name, *args, **kwargs):
 # bases are the base classes that the new class inherits from
 # dict holds attributes for the new class, e.g., __doc__
 # why? because __doc__ isn't writeable after-the-fact!
-for obj in graph_objs_tools.OBJ_MAP:
+for obj in OBJ_MAP:
     if obj not in globals():
         base_name = graph_objs_tools.OBJ_MAP[obj]['base_name']
         if base_name == 'PlotlyList':
