@@ -137,7 +137,7 @@ class PlotlyList(list):
         stripping process, though they made be left empty. This is allowable.
 
         Keys that will be stripped in this process are tagged with
-        `'type': 'style'` in the INFO dictionary listed in graph_objs_meta.py.
+        `'type': 'style'` in graph_objs_meta.json.
 
         This process first attempts to convert nested collections from dicts
         or lists to subclasses of PlotlyList/PlotlyDict. This process forces
@@ -363,7 +363,7 @@ class PlotlyDict(dict):
         stripping process, though they made be left empty. This is allowable.
 
         Keys that will be stripped in this process are tagged with
-        `'type': 'style'` in the INFO dictionary listed in graph_objs_meta.py.
+        `'type': 'style'` in graph_objs_meta.json.
 
         This process first attempts to convert nested collections from dicts
         or lists to subclasses of PlotlyList/PlotlyDict. This process forces
@@ -382,7 +382,7 @@ class PlotlyDict(dict):
                 self[key].strip_style()
             else:
                 try:
-                    if INFO[obj_key][key]['type'] == 'style':
+                    if INFO[obj_key]['keymeta'][key]['type'] == 'style':
                         if isinstance(self[key], six.string_types):
                             del self[key]
                         elif not hasattr(self[key], '__iter__'):
@@ -403,7 +403,7 @@ class PlotlyDict(dict):
             else:
                 try:
                     # TODO: Update the JSON
-                    if INFO[obj_key][key]['type'] == 'data':
+                    if INFO[obj_key]['keymeta'][key]['type'] == 'data':
                         d[key] = val
                 except KeyError:
                     pass
@@ -446,14 +446,17 @@ class PlotlyDict(dict):
                     err.add_to_error_path(key)
                     err.prepare()
                     raise
-            elif key in INFO[info_key] and 'type' in INFO[info_key][key]:
-                if INFO[info_key][key]['type'] == 'object':
+            elif (key in INFO[info_key]['keymeta'] and
+                  'type' in INFO[info_key]['keymeta'][key]):
+                if INFO[info_key]['keymeta'][key]['type'] == 'object':
                     class_name = KEY_TO_NAME[key]
                     obj = _factory(class_name)
                     if isinstance(obj, PlotlyDict):
                         if not isinstance(self[key], dict):
                             try:
-                                val_types = INFO[info_key][key]['val_types']
+                                val_types = (
+                                    INFO[info_key]['keymeta'][key]['val_types']
+                                )
                             except KeyError:
                                 val_types = 'undocumented'
                             raise exceptions.PlotlyDictValueError(
@@ -468,7 +471,9 @@ class PlotlyDict(dict):
                     else:  # if not PlotlyDict, it MUST be a PlotlyList
                         if not isinstance(self[key], list):
                             try:
-                                val_types = INFO[info_key][key]['val_types']
+                                val_types = (
+                                    INFO[info_key]['keymeta'][key]['val_types']
+                                )
                             except KeyError:
                                 val_types = 'undocumented'
                             raise exceptions.PlotlyDictValueError(  # TODO!!!
@@ -491,7 +496,7 @@ class PlotlyDict(dict):
         """Recursively check the validity of the keys in a PlotlyDict.
 
         The valid keys constitute the entries in each object
-        dictionary in INFO stored in graph_objs_meta.py.
+        dictionary in graph_objs_meta.json
 
         The validation process first requires that all nested collections be
         converted to the appropriate subclass of PlotlyDict/PlotlyList. Then,
@@ -515,12 +520,13 @@ class PlotlyDict(dict):
                     err.prepare()
                     raise
             else:
-                if key in INFO[obj_key]:
-                    if 'type' not in INFO[obj_key][key]:
+                if key in INFO[obj_key]['keymeta']:
+                    if 'type' not in INFO[obj_key]['keymeta'][key]:
                         continue  # TODO: 'type' may not be documented yet!
-                    if INFO[obj_key][key]['type'] == 'object':
+                    if INFO[obj_key]['keymeta'][key]['type'] == 'object':
                         try:
-                            val_types = INFO[obj_key][key]['val_types']
+                            val_types = (
+                                INFO[obj_key]['keymeta'][key]['val_types'])
                         except KeyError:
                             val_types = 'undocumented'
                         raise exceptions.PlotlyDictValueError(
@@ -531,7 +537,7 @@ class PlotlyDict(dict):
                         )
                 else:
                     matching_objects = [obj for obj in
-                                        INFO if key in INFO[obj]]
+                                        INFO if key in INFO[obj]['keymeta']]
                     notes = ''
                     if len(matching_objects):
                         notes += "That key is valid only in these objects:\n\n"
@@ -539,7 +545,8 @@ class PlotlyDict(dict):
                             notes += "\t{0}".format(KEY_TO_NAME[obj])
                             try:
                                 notes += '({0}="{1}")\n'.format(
-                                    repr(key), INFO[obj][key]['val_types'])
+                                    repr(key),
+                                    INFO[obj]['keymeta'][key]['val_types'])
                             except KeyError:
                                 notes += '({0}="..")\n'.format(repr(key))
                         notes.expandtabs()
@@ -572,7 +579,8 @@ class PlotlyDict(dict):
         string = "{name}(".format(name=self.__class__.__name__)
         index = 0
         obj_key = NAME_TO_KEY[self.__class__.__name__]
-        for key in INFO[obj_key]:  # this sets the order of the keys! nice.
+        # This sets the order of the keys! nice.
+        for key in INFO[obj_key]['keymeta']:
             if key in self:
                 index += 1
                 string += "{eol}{indent}{key}=".format(
@@ -637,8 +645,9 @@ class PlotlyDict(dict):
         obj_type = NAME_TO_KEY[self.__class__.__name__]
         ordered_dict = OrderedDict()
         # grab keys like xaxis1, xaxis2, etc...
-        unordered_keys = [key for key in self if key not in INFO[obj_type]]
-        for key in INFO[obj_type]:
+        unordered_keys = [key for key in self
+                          if key not in INFO[obj_type]['keymeta']]
+        for key in INFO[obj_type]['keymeta']:
             if key in self:
                 if isinstance(self[key], (PlotlyDict, PlotlyList)):
                     ordered_dict[key] = self[key].get_ordered(caller=False)
@@ -664,7 +673,8 @@ class PlotlyDict(dict):
         obj_key = NAME_TO_KEY[self.__class__.__name__]
         if caller:
             self.to_graph_objs(caller=False)
-        del_keys = [key for key in self if str(key) not in INFO[obj_key]]
+        del_keys = [key for key in self
+                    if str(key) not in INFO[obj_key]['keymeta']]
         for key in del_keys:
             del self[key]
         keys = list(self.keys())
@@ -935,7 +945,7 @@ class Layout(PlotlyDict):
         string = "{name}(".format(name=self.__class__.__name__)
         index = 0
         obj_key = NAME_TO_KEY[self.__class__.__name__]
-        for key in INFO[obj_key]:
+        for key in INFO[obj_key]['keymeta']:
             if key in self:
                 string += "{eol}{indent}{key}=".format(
                     eol=eol,
@@ -984,7 +994,8 @@ class Layout(PlotlyDict):
                 index += 1
                 if index == len(self):  # TODO: extraneous...
                     break
-        left_over_keys = [key for key in self if key not in INFO[obj_key]]
+        left_over_keys = [key for key in self
+                          if key not in INFO[obj_key]['keymeta']]
         left_over_keys.sort()
         for key in left_over_keys:
             string += "{eol}{indent}{key}=".format(
@@ -1023,7 +1034,8 @@ class Layout(PlotlyDict):
         obj_key = NAME_TO_KEY[self.__class__.__name__]
         if caller:
             self.to_graph_objs(caller=False)
-        del_keys = [key for key in self if str(key) not in INFO[obj_key]]
+        del_keys = [key for key in self
+                    if str(key) not in INFO[obj_key]['keymeta']]
         for key in del_keys:
             if (key[:5] == 'xaxis') or (key[:5] == 'yaxis'):
                 try:
