@@ -1,0 +1,138 @@
+{
+    "Layout": {
+        "info_key": "layout", 
+        "base_name": "PlotlyDict"
+    }, 
+    "Area": {
+        "info_key": "area", 
+        "base_name": "PlotlyDict"
+    }, 
+    "PlotlyDict": {
+        "info_key": "plotlydict", 
+        "base_name": "PlotlyDict"
+    }, 
+    "RadialAxis": {
+        "info_key": "radialaxis", 
+        "base_name": "PlotlyDict"
+    }, 
+    "PlotlyList": {
+        "info_key": "plotlylist", 
+        "base_name": "PlotlyList"
+    }, 
+    "Heatmap": {
+        "info_key": "heatmap", 
+        "base_name": "PlotlyDict"
+    }, 
+    "Contours": {
+        "info_key": "contours", 
+        "base_name": "PlotlyDict"
+    }, 
+    "XBins": {
+        "info_key": "xbins", 
+        "base_name": "PlotlyDict"
+    }, 
+    "Histogram": {
+        "info_key": "histogram", 
+        "base_name": "PlotlyDict"
+    }, 
+    "Annotations": {
+        "info_key": "annotations", 
+        "base_name": "PlotlyList"
+    }, 
+    "YBins": {
+        "info_key": "ybins", 
+        "base_name": "PlotlyDict"
+    }, 
+    "Trace": {
+        "info_key": "trace", 
+        "base_name": "PlotlyDict"
+    }, 
+    "YAxis": {
+        "info_key": "yaxis", 
+        "base_name": "PlotlyDict"
+    }, 
+    "ErrorX": {
+        "info_key": "error_x", 
+        "base_name": "PlotlyDict"
+    }, 
+    "ErrorY": {
+        "info_key": "error_y", 
+        "base_name": "PlotlyDict"
+    }, 
+    "Histogram2d": {
+        "info_key": "histogram2d", 
+        "base_name": "PlotlyDict"
+    }, 
+    "ColorBar": {
+        "info_key": "colorbar", 
+        "base_name": "PlotlyDict"
+    }, 
+    "Line": {
+        "info_key": "line", 
+        "base_name": "PlotlyDict"
+    }, 
+    "Data": {
+        "info_key": "data", 
+        "base_name": "PlotlyList"
+    }, 
+    "Legend": {
+        "info_key": "legend", 
+        "base_name": "PlotlyDict"
+    }, 
+    "Box": {
+        "info_key": "box", 
+        "base_name": "PlotlyDict"
+    }, 
+    "Bar": {
+        "info_key": "bar", 
+        "base_name": "PlotlyDict"
+    }, 
+    "PlotlyTrace": {
+        "info_key": "plotlytrace", 
+        "base_name": "PlotlyList"
+    }, 
+    "AngularAxis": {
+        "info_key": "angularaxis", 
+        "base_name": "PlotlyDict"
+    }, 
+    "Margin": {
+        "info_key": "margin", 
+        "base_name": "PlotlyDict"
+    }, 
+    "Scatter": {
+        "info_key": "scatter", 
+        "base_name": "PlotlyDict"
+    }, 
+    "Figure": {
+        "info_key": "figure", 
+        "base_name": "PlotlyDict"
+    }, 
+    "Stream": {
+        "info_key": "stream", 
+        "base_name": "PlotlyDict"
+    }, 
+    "Annotation": {
+        "info_key": "annotation", 
+        "base_name": "PlotlyDict"
+    }, 
+    "XAxis": {
+        "info_key": "xaxis", 
+        "base_name": "PlotlyDict"
+    }, 
+    "Marker": {
+        "info_key": "marker", 
+        "base_name": "PlotlyDict"
+    }, 
+    "Font": {
+        "info_key": "font", 
+        "base_name": "PlotlyDict"
+    }, 
+    "Histogram2dContour": {
+        "info_key": "histogram2dcontour", 
+        "base_name": "PlotlyDict"
+    }, 
+    "Contour": {
+        "info_key": "contour", 
+        "base_name": "PlotlyDict"
+    }
+}

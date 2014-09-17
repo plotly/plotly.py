@@ -1,0 +1,164 @@
+{
+    "stream": {
+        "stream": [
+            "Scatter", 
+            "Bar", 
+            "Histogram", 
+            "Box", 
+            "Heatmap", 
+            "Contour", 
+            "Histogram2d", 
+            "Histogram2dContour", 
+            "Area"
+        ]
+    }, 
+    "plotlydict": {}, 
+    "radialaxis": {
+        "radialaxis": [
+            "Layout"
+        ]
+    }, 
+    "plotlylist": {}, 
+    "marker": {
+        "marker": [
+            "Scatter", 
+            "Bar", 
+            "Histogram", 
+            "Box", 
+            "Area", 
+            "Trace"
+        ]
+    }, 
+    "font": {
+        "tickfont": [
+            "ColorBar", 
+            "XAxis", 
+            "YAxis"
+        ], 
+        "textfont": [
+            "Scatter", 
+            "Trace"
+        ], 
+        "font": [
+            "Layout", 
+            "Legend", 
+            "Annotation"
+        ], 
+        "titlefont": [
+            "ColorBar", 
+            "XAxis", 
+            "YAxis", 
+            "Layout"
+        ]
+    }, 
+    "angularaxis": {
+        "angularaxis": [
+            "Layout"
+        ]
+    }, 
+    "error_x": {
+        "error_x": [
+            "Scatter", 
+            "Bar", 
+            "Histogram", 
+            "Trace"
+        ]
+    }, 
+    "error_y": {
+        "error_y": [
+            "Scatter", 
+            "Bar", 
+            "Histogram", 
+            "Trace"
+        ]
+    }, 
+    "area": {}, 
+    "contour": {}, 
+    "heatmap": {}, 
+    "contours": {
+        "contours": [
+            "Contour", 
+            "Histogram2dContour"
+        ]
+    }, 
+    "xaxis": {
+        "xaxis": [
+            "Layout"
+        ]
+    }, 
+    "figure": {}, 
+    "annotation": {}, 
+    "annotations": {
+        "annotations": [
+            "Layout"
+        ]
+    }, 
+    "trace": {}, 
+    "histogram2d": {}, 
+    "xbins": {
+        "xbins": [
+            "Histogram", 
+            "Histogram2d", 
+            "Histogram2dContour", 
+            "Trace"
+        ]
+    }, 
+    "plotlytrace": {}, 
+    "layout": {
+        "layout": [
+            "Figure"
+        ]
+    }, 
+    "line": {
+        "line": [
+            "Scatter", 
+            "Box", 
+            "Contour", 
+            "Histogram2dContour", 
+            "Marker", 
+            "Trace"
+        ]
+    }, 
+    "histogram": {}, 
+    "data": {
+        "data": [
+            "Figure"
+        ]
+    }, 
+    "legend": {
+        "legend": [
+            "Layout"
+        ]
+    }, 
+    "ybins": {
+        "ybins": [
+            "Histogram", 
+            "Histogram2d", 
+            "Histogram2dContour", 
+            "Trace"
+        ]
+    }, 
+    "box": {}, 
+    "bar": {}, 
+    "yaxis": {
+        "yaxis": [
+            "Layout"
+        ]
+    }, 
+    "margin": {
+        "margin": [
+            "Layout"
+        ]
+    }, 
+    "colorbar": {
+        "colorbar": [
+            "Heatmap", 
+            "Contour", 
+            "Histogram2d", 
+            "Histogram2dContour", 
+            "Trace"
+        ]
+    }, 
+    "histogram2dcontour": {}, 
+    "scatter": {}
+}
