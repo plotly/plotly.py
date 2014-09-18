@@ -39,6 +39,7 @@ else:
     from collections import OrderedDict
 
 
+# (1) Make primitive graph objects
 class PlotlyList(list):
     """A container for PlotlyDicts, inherits from standard list.
 
@@ -690,106 +691,6 @@ class PlotlyDict(dict):
                 del self[key]
 
 
-class Data(PlotlyList):
-    """A list of traces to be shown on a plot/graph.
-
-    Any operation that can be done with a standard list may be used with Data.
-    Instantiation requires an iterable (just like list does), for example:
-
-    Data([Scatter(), Heatmap(), Box()])
-
-    Valid entry types: (dict or any Trace subclass, e.g. Scatter, Box, etc.)
-
-    """
-    def to_graph_objs(self, caller=True):  # TODO TODO TODO! check logic!
-        """Change any nested collections to subclasses of PlotlyDict/List.
-
-        Procedure:
-            1. Attempt to convert all entries to a subclass of PlotlyTrace.
-            2. Call `to_graph_objects` on each of these entries.
-
-        """
-        for index, entry in enumerate(self):
-            if isinstance(entry, PlotlyDict):
-                self[index] = _factory(entry.__class__.__name__, entry)
-            elif isinstance(entry, dict):
-                if 'type' not in entry:  # assume 'scatter' if not given
-                    entry['type'] = 'scatter'
-                try:
-                    obj_name = KEY_TO_NAME[entry['type']]
-                except KeyError:
-                    raise exceptions.PlotlyDataTypeError(
-                        obj=self,
-                        index=index
-                    )
-                obj = _factory(obj_name)
-                for k, v in list(entry.items()):
-                    obj[k] = v
-                self[index] = obj
-            if not isinstance(self[index], PlotlyTrace):  # Trace ONLY!!!
-                raise exceptions.PlotlyListEntryError(
-                    obj=self,
-                    index=index,
-                    notes=(
-                        "The entry could not be converted into a PlotlyTrace "
-                        "object (e.g., Scatter, Heatmap, Bar, etc)."
-                    ),
-                )
-        super(Data, self).to_graph_objs(caller=caller)
-
-
-class Annotations(PlotlyList):
-    """A list-like object to contain all figure notes.
-
-    Any operation that can be done with a standard list may be used with
-    Annotations. Instantiation requires an iterable (just like list does),
-    for example:
-
-    Annotations([Annotation(), Annotation(), Annotation()])
-
-    This Annotations list is validated upon instantiation, meaning exceptions
-    will be thrown if any invalid entries are found.
-
-    Valid entry types: (dict or Annotation)
-
-    For help on Annotation, run `help(plotly.graph_objs.Annotation)`
-
-    """
-    def to_graph_objs(self, caller=True):
-        """Change any nested collections to subclasses of PlotlyDict/List.
-
-        Procedure:
-            1. Attempt to convert all entries to a subclass of PlotlyDict.
-            2. Call `to_graph_objects` on each of these entries.
-
-        """
-        for index, entry in enumerate(self):
-            if isinstance(entry, (PlotlyDict, PlotlyList)):
-                if not isinstance(entry, globals()['Annotation']):
-                    raise exceptions.PlotlyListEntryError(
-                        obj=self,
-                        index=index,
-                        notes="The entry could not be converted into an "
-                              "Annotation object because it was already a "
-                              "different kind of graph object.",
-                    )
-            elif isinstance(entry, dict):
-                obj = _factory('Annotation')
-                for k, v in list(entry.items()):
-                    obj[k] = v
-                self[index] = obj
-            else:
-                raise exceptions.PlotlyListEntryError(
-                    obj=self,
-                    index=index,
-                    notes=(
-                        "The entry could not be converted into an Annotation "
-                        "object because it was not a dictionary."
-                    ),
-                )
-        super(Annotations, self).to_graph_objs(caller=caller)
-
-
 class PlotlyTrace(PlotlyDict):
     """A general data class for plotly.
 
@@ -864,15 +765,105 @@ class Trace(PlotlyTrace):
     pass
 
 
-class Figure(PlotlyDict):
-    """A dictionary-like object representing a figure to be rendered in plotly.
+# (2) Generate graph objects using OBJ_MAP
+# With type(name, bases, dict) :
+# - name will be the new class name
+# - bases are the base classes that the new class inherits from
+# - dict holds attributes for the new class, e.g., __doc__
+for obj in OBJ_MAP:
+    base_name = graph_objs_tools.OBJ_MAP[obj]['base_name']
+    if base_name == 'PlotlyList':
+        doc = graph_objs_tools.make_list_doc(obj)
+    else:
+        doc = graph_objs_tools.make_dict_doc(obj)
+    base = globals()[base_name]
+    globals()[obj] = type(obj, (base,), {'__doc__': doc, '__name__': obj})
 
-    This is the container for all things to be rendered in a figure.
 
-    For help with setting up subplots, run:
-    `help(plotly.tools.get_subplots)`
+# (3) Patch 'custom' methods into some graph objects
+def patch_Data(Data):
+    def to_graph_objs(self, caller=True):  # TODO TODO TODO! check logic!
+        """Change any nested collections to subclasses of PlotlyDict/List.
 
-    """
+        Procedure:
+            1. Attempt to convert all entries to a subclass of PlotlyTrace.
+            2. Call `to_graph_objects` on each of these entries.
+
+        """
+        for index, entry in enumerate(self):
+            if isinstance(entry, PlotlyDict):
+                self[index] = _factory(entry.__class__.__name__, entry)
+            elif isinstance(entry, dict):
+                if 'type' not in entry:  # assume 'scatter' if not given
+                    entry['type'] = 'scatter'
+                try:
+                    obj_name = KEY_TO_NAME[entry['type']]
+                except KeyError:
+                    raise exceptions.PlotlyDataTypeError(
+                        obj=self,
+                        index=index
+                    )
+                obj = _factory(obj_name)
+                for k, v in list(entry.items()):
+                    obj[k] = v
+                self[index] = obj
+            if not isinstance(self[index], PlotlyTrace):  # Trace ONLY!!!
+                raise exceptions.PlotlyListEntryError(
+                    obj=self,
+                    index=index,
+                    notes=(
+                        "The entry could not be converted into a PlotlyTrace "
+                        "object (e.g., Scatter, Heatmap, Bar, etc)."
+                    ),
+                )
+        super(Data, self).to_graph_objs(caller=caller)
+    Data.to_graph_objs = to_graph_objs  # override method!
+    return Data
+
+Data = patch_Data(Data)
+
+
+def patch_Annotations(Annotations):
+    def to_graph_objs(self, caller=True):
+        """Change any nested collections to subclasses of PlotlyDict/List.
+
+        Procedure:
+            1. Attempt to convert all entries to a subclass of PlotlyDict.
+            2. Call `to_graph_objects` on each of these entries.
+
+        """
+        for index, entry in enumerate(self):
+            if isinstance(entry, (PlotlyDict, PlotlyList)):
+                if not isinstance(entry, globals()['Annotation']):
+                    raise exceptions.PlotlyListEntryError(
+                        obj=self,
+                        index=index,
+                        notes="The entry could not be converted into an "
+                              "Annotation object because it was already a "
+                              "different kind of graph object.",
+                    )
+            elif isinstance(entry, dict):
+                obj = _factory('Annotation')
+                for k, v in list(entry.items()):
+                    obj[k] = v
+                self[index] = obj
+            else:
+                raise exceptions.PlotlyListEntryError(
+                    obj=self,
+                    index=index,
+                    notes=(
+                        "The entry could not be converted into an Annotation "
+                        "object because it was not a dictionary."
+                    ),
+                )
+        super(Annotations, self).to_graph_objs(caller=caller)
+    Annotations.to_graph_objs = to_graph_objs  # override method!
+    return Annotations
+
+Annotations = patch_Annotations(Annotations)
+
+
+def patch_Figure(Figure):
     def __init__(self, *args, **kwargs):
         if len(args):
             if ('data' not in kwargs) and ('data' not in args[0]):
@@ -885,12 +876,13 @@ class Figure(PlotlyDict):
             if 'layout' not in kwargs:
                 kwargs['layout'] = Layout()
         super(Figure, self).__init__(*args, **kwargs)
+    Figure.__init__ = __init__  # override method!
+    return Figure
+
+Figure = patch_Figure(Figure)
 
 
-class Layout(PlotlyDict):
-    """A dictionary-like object holding plot settings for plotly figures.
-
-    """
+def patch_Layout(Layout):
     def __init__(self, *args, **kwargs):
         super(Layout, self).__init__(*args, **kwargs)
 
@@ -1055,8 +1047,16 @@ class Layout(PlotlyDict):
                     del self[key]  # clears empty collections!
             elif self[key] is None:
                 del self[key]
+    Layout.__init__ = __init__
+    Layout.to_graph_objs = to_graph_objs
+    Layout.to_string = to_string
+    Layout.force_clean = force_clean  # override methods!
+    return Layout
+
+Layout = patch_Layout(Layout)
 
 
+# (4) Class-generating function
 def _factory(name, *args, **kwargs):
     """All class creation goes through here.
 
@@ -1073,20 +1073,3 @@ def _factory(name, *args, **kwargs):
         return globals()[name](**kwargs)
     else:
         return globals()[name]()
-
-
-# some magic... you can use `type` to create new classes:
-# type(name, bases, dict)
-# name will be the new class name
-# bases are the base classes that the new class inherits from
-# dict holds attributes for the new class, e.g., __doc__
-# why? because __doc__ isn't writeable after-the-fact!
-for obj in OBJ_MAP:
-    if obj not in globals():
-        base_name = graph_objs_tools.OBJ_MAP[obj]['base_name']
-        if base_name == 'PlotlyList':
-            doc = graph_objs_tools.make_list_doc(obj)
-        else:
-            doc = graph_objs_tools.make_dict_doc(obj)
-        base = globals()[base_name]
-        globals()[obj] = type(obj, (base,), {'__doc__': doc, '__name__': obj})
