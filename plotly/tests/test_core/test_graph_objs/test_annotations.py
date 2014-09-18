@@ -8,7 +8,7 @@ A module intended for use with Nose.
 from __future__ import absolute_import
 
 from nose.tools import raises
-from plotly.graph_objs.graph_objs import *
+from plotly.graph_objs import *
 from plotly.exceptions import (PlotlyError,
                                PlotlyDictKeyError,
                                PlotlyDictValueError,

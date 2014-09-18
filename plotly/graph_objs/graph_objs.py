@@ -40,37 +40,7 @@ else:
     from collections import OrderedDict
     import json
 
-__all__ = ["Data",
-           "Annotations",
-           "Area",
-           "Bar",
-           "Box",
-           "Contour",
-           "Heatmap",
-           "Histogram",
-           "Histogram2d",
-           "Histogram2dContour",
-           "Scatter",
-           "Annotation",
-           "AngularAxis",
-           "ColorBar",
-           "Contours",
-           "ErrorX",
-           "ErrorY",
-           "Figure",
-           "Font",
-           "Layout",
-           "Legend",
-           "Line",
-           "Margin",
-           "Marker",
-           "RadialAxis",
-           "Stream",
-           "Trace",
-           "XAxis",
-           "XBins",
-           "YAxis",
-           "YBins"]
+__all__ = None
 
 # TODO: BIG ONE, how should exceptions bubble up in this inheritance scheme?
     # TODO: related, WHAT exceptions should bubble up?
