@@ -5,23 +5,15 @@
     }, 
     "Area": {
         "info_key": "area", 
-        "base_name": "PlotlyDict"
-    }, 
-    "PlotlyDict": {
-        "info_key": "plotlydict", 
-        "base_name": "PlotlyDict"
+        "base_name": "PlotlyTrace"
     }, 
     "RadialAxis": {
         "info_key": "radialaxis", 
         "base_name": "PlotlyDict"
     }, 
-    "PlotlyList": {
-        "info_key": "plotlylist", 
-        "base_name": "PlotlyList"
-    }, 
     "Heatmap": {
         "info_key": "heatmap", 
-        "base_name": "PlotlyDict"
+        "base_name": "PlotlyTrace"
     }, 
     "Contours": {
         "info_key": "contours", 
@@ -33,7 +25,7 @@
     }, 
     "Histogram": {
         "info_key": "histogram", 
-        "base_name": "PlotlyDict"
+        "base_name": "PlotlyTrace"
     }, 
     "Annotations": {
         "info_key": "annotations", 
@@ -41,10 +33,6 @@
     }, 
     "YBins": {
         "info_key": "ybins", 
-        "base_name": "PlotlyDict"
-    }, 
-    "Trace": {
-        "info_key": "trace", 
         "base_name": "PlotlyDict"
     }, 
     "YAxis": {
@@ -61,7 +49,7 @@
     }, 
     "Histogram2d": {
         "info_key": "histogram2d", 
-        "base_name": "PlotlyDict"
+        "base_name": "PlotlyTrace"
     }, 
     "ColorBar": {
         "info_key": "colorbar", 
@@ -81,15 +69,11 @@
     }, 
     "Box": {
         "info_key": "box", 
-        "base_name": "PlotlyDict"
+        "base_name": "PlotlyTrace"
     }, 
     "Bar": {
         "info_key": "bar", 
-        "base_name": "PlotlyDict"
-    }, 
-    "PlotlyTrace": {
-        "info_key": "plotlytrace", 
-        "base_name": "PlotlyList"
+        "base_name": "PlotlyTrace"
     }, 
     "AngularAxis": {
         "info_key": "angularaxis", 
@@ -101,7 +85,7 @@
     }, 
     "Scatter": {
         "info_key": "scatter", 
-        "base_name": "PlotlyDict"
+        "base_name": "PlotlyTrace"
     }, 
     "Figure": {
         "info_key": "figure", 
@@ -129,10 +113,10 @@
     }, 
     "Histogram2dContour": {
         "info_key": "histogram2dcontour", 
-        "base_name": "PlotlyDict"
+        "base_name": "PlotlyTrace"
     }, 
     "Contour": {
         "info_key": "contour", 
-        "base_name": "PlotlyDict"
+        "base_name": "PlotlyTrace"
     }
 }

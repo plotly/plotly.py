@@ -643,7 +643,7 @@
             }, 
             "colorscale": {
                 "key_type": "style", 
-                "val_types": "array_like of value-color pairs | 'Greys' | 'Greens' | 'Bluered' | 'Hot' | 'Picnic' | 'Portland' | 'Jet' | 'RdBu' | 'Blackbody' | 'Earth' | 'Electric' | 'YIOrRd' | 'YIGnBu'", 
+                "val_types": "list or 1d numpy array of value-color pairs | 'Greys' | 'Greens' | 'Bluered' | 'Hot' | 'Picnic' | 'Portland' | 'Jet' | 'RdBu' | 'Blackbody' | 'Earth' | 'Electric' | 'YIOrRd' | 'YIGnBu'", 
                 "required": false, 
                 "description": "Sets and/or defines the color scale for this trace. The string values are pre-defined color scales. For custom color scales, define a list or 1d numpy arraycolor-value pairs where, by default, the first element of the pair corresponds to a normalized value of z from 0-1, i.e. (z-zmin)/ (zmax-zmin), and the second element of pair corresponds to a color. Use with 'zauto', 'zmin' and 'zmax to fine-tune the map from 'z' to rendered colors.", 
                 "examples": [
@@ -845,7 +845,7 @@
             }, 
             "colorscale": {
                 "key_type": "style", 
-                "val_types": "array_like of value-color pairs | 'Greys' | 'Greens' | 'Bluered' | 'Hot' | 'Picnic' | 'Portland' | 'Jet' | 'RdBu' | 'Blackbody' | 'Earth' | 'Electric' | 'YIOrRd' | 'YIGnBu'", 
+                "val_types": "list or 1d numpy array of value-color pairs | 'Greys' | 'Greens' | 'Bluered' | 'Hot' | 'Picnic' | 'Portland' | 'Jet' | 'RdBu' | 'Blackbody' | 'Earth' | 'Electric' | 'YIOrRd' | 'YIGnBu'", 
                 "required": false, 
                 "description": "Sets and/or defines the color scale for this trace. The string values are pre-defined color scales. For custom color scales, define a list or 1d numpy arraycolor-value pairs where, by default, the first element of the pair corresponds to a normalized value of z from 0-1, i.e. (z-zmin)/ (zmax-zmin), and the second element of pair corresponds to a color. Use with 'zauto', 'zmin' and 'zmax to fine-tune the map from 'z' to rendered colors.", 
                 "examples": [
@@ -1034,7 +1034,7 @@
             }, 
             "colorscale": {
                 "key_type": "style", 
-                "val_types": "array_like of value-color pairs | 'Greys' | 'Greens' | 'Bluered' | 'Hot' | 'Picnic' | 'Portland' | 'Jet' | 'RdBu' | 'Blackbody' | 'Earth' | 'Electric' | 'YIOrRd' | 'YIGnBu'", 
+                "val_types": "list or 1d numpy array of value-color pairs | 'Greys' | 'Greens' | 'Bluered' | 'Hot' | 'Picnic' | 'Portland' | 'Jet' | 'RdBu' | 'Blackbody' | 'Earth' | 'Electric' | 'YIOrRd' | 'YIGnBu'", 
                 "required": false, 
                 "description": "Sets and/or defines the color scale for this trace. The string values are pre-defined color scales. For custom color scales, define a list or 1d numpy arraycolor-value pairs where, by default, the first element of the pair corresponds to a normalized value of z from 0-1, i.e. (z-zmin)/ (zmax-zmin), and the second element of pair corresponds to a color. Use with 'zauto', 'zmin' and 'zmax to fine-tune the map from 'z' to rendered colors.", 
                 "examples": [
@@ -1232,7 +1232,7 @@
             }, 
             "colorscale": {
                 "key_type": "style", 
-                "val_types": "array_like of value-color pairs | 'Greys' | 'Greens' | 'Bluered' | 'Hot' | 'Picnic' | 'Portland' | 'Jet' | 'RdBu' | 'Blackbody' | 'Earth' | 'Electric' | 'YIOrRd' | 'YIGnBu'", 
+                "val_types": "list or 1d numpy array of value-color pairs | 'Greys' | 'Greens' | 'Bluered' | 'Hot' | 'Picnic' | 'Portland' | 'Jet' | 'RdBu' | 'Blackbody' | 'Earth' | 'Electric' | 'YIOrRd' | 'YIGnBu'", 
                 "required": false, 
                 "description": "Sets and/or defines the color scale for this trace. The string values are pre-defined color scales. For custom color scales, define a list or 1d numpy arraycolor-value pairs where, by default, the first element of the pair corresponds to a normalized value of z from 0-1, i.e. (z-zmin)/ (zmax-zmin), and the second element of pair corresponds to a color. Use with 'zauto', 'zmin' and 'zmax to fine-tune the map from 'z' to rendered colors.", 
                 "examples": [
@@ -1715,7 +1715,7 @@
             }, 
             "colorscale": {
                 "key_type": "style", 
-                "val_types": "array_like of value-color pairs | 'Greys' | 'Greens' | 'Bluered' | 'Hot' | 'Picnic' | 'Portland' | 'Jet' | 'RdBu' | 'Blackbody' | 'Earth' | 'Electric' | 'YIOrRd' | 'YIGnBu'", 
+                "val_types": "list or 1d numpy array of value-color pairs | 'Greys' | 'Greens' | 'Bluered' | 'Hot' | 'Picnic' | 'Portland' | 'Jet' | 'RdBu' | 'Blackbody' | 'Earth' | 'Electric' | 'YIOrRd' | 'YIGnBu'", 
                 "required": false, 
                 "description": "Sets and/or defines the color scale for this trace. The string values are pre-defined color scales. For custom color scales, define a list or 1d numpy arraycolor-value pairs where, by default, the first element of the pair corresponds to a normalized value of color from 0-1, i.e. (c-cmin)/ (cmax-cmin), and the second element of pair corresponds to a color. Use with 'cauto', 'cmin' and 'cmax to fine-tune the map from 'color' to rendered colors.", 
                 "examples": [
@@ -3462,170 +3462,6 @@
             "annotations"
         ], 
         "docstring": "A list-like object of annotation dictionary-like objects to be shown on one plotly figure.", 
-        "examples": [], 
-        "links": [], 
-        "keymeta": {}
-    }, 
-    "trace": {
-        "name": "Trace", 
-        "obj_type": "dictionary", 
-        "parent_keys": [], 
-        "docstring": "", 
-        "examples": [], 
-        "links": [], 
-        "keymeta": {
-            "x": {
-                "key_type": "data"
-            }, 
-            "y": {
-                "key_type": "data"
-            }, 
-            "z": {
-                "key_type": "data"
-            }, 
-            "r": {
-                "key_type": "data"
-            }, 
-            "t": {
-                "key_type": "data"
-            }, 
-            "text": {
-                "key_type": "data"
-            }, 
-            "name": {
-                "key_type": "data"
-            }, 
-            "mode": {
-                "key_type": "plot_info"
-            }, 
-            "marker": {
-                "key_type": "object"
-            }, 
-            "line": {
-                "key_type": "object"
-            }, 
-            "fill": {
-                "key_type": "style"
-            }, 
-            "fillcolor": {
-                "key_type": "style"
-            }, 
-            "opacity": {
-                "key_type": "style"
-            }, 
-            "showlegend": {
-                "key_type": "style"
-            }, 
-            "xaxis": {
-                "key_type": "plot_info"
-            }, 
-            "yaxis": {
-                "key_type": "plot_info"
-            }, 
-            "angularaxis": {}, 
-            "radialaxis": {}, 
-            "error_y": {
-                "key_type": "object"
-            }, 
-            "error_x": {
-                "key_type": "object"
-            }, 
-            "textfont": {
-                "key_type": "object"
-            }, 
-            "type": {
-                "key_type": "plot_info"
-            }, 
-            "orientation": {
-                "key_type": "plot_info"
-            }, 
-            "boxpoints": {
-                "key_type": "style"
-            }, 
-            "jitter": {
-                "key_type": "style"
-            }, 
-            "pointpos": {
-                "key_type": "style"
-            }, 
-            "boxmean": {
-                "key_type": "style"
-            }, 
-            "whiskerwidth": {
-                "key_type": "style"
-            }, 
-            "scl": {
-                "key_type": "style"
-            }, 
-            "reversescl": {
-                "key_type": "style"
-            }, 
-            "colorbar": {
-                "key_type": "object"
-            }, 
-            "autobinx": {
-                "key_type": "style"
-            }, 
-            "autobiny": {
-                "key_type": "style"
-            }, 
-            "xbins": {
-                "key_type": "object"
-            }, 
-            "ybins": {
-                "key_type": "object"
-            }, 
-            "histnorm": {
-                "key_type": "plot_info"
-            }, 
-            "zmax": {
-                "key_type": "plot_info"
-            }, 
-            "zmin": {
-                "key_type": "plot_info"
-            }, 
-            "dx": {}, 
-            "dy": {}, 
-            "x0": {}, 
-            "y0": {}, 
-            "zauto": {
-                "key_type": "plot_info"
-            }, 
-            "hm_id": {}, 
-            "nbinsx": {
-                "key_type": "style"
-            }, 
-            "nbinsy": {
-                "key_type": "style"
-            }, 
-            "showscale": {
-                "key_type": "style"
-            }
-        }
-    }, 
-    "plotlylist": {
-        "name": "PlotlyList", 
-        "obj_type": "list or 1d numpy array", 
-        "parent_keys": [], 
-        "docstring": "", 
-        "examples": [], 
-        "links": [], 
-        "keymeta": {}
-    }, 
-    "plotlydict": {
-        "name": "PlotlyDict", 
-        "obj_type": "dictionary", 
-        "parent_keys": [], 
-        "docstring": "", 
-        "examples": [], 
-        "links": [], 
-        "keymeta": {}
-    }, 
-    "plotlytrace": {
-        "name": "PlotlyTrace", 
-        "obj_type": "list or 1d numpy array", 
-        "parent_keys": [], 
-        "docstring": "", 
         "examples": [], 
         "links": [], 
         "keymeta": {}
