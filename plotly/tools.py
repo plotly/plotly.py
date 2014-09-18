@@ -33,6 +33,7 @@ except ImportError:
 
 try:
     import IPython
+    import IPython.core.display
     _ipython_imported = True
 except ImportError:
     _ipython_imported = False
