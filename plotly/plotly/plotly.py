@@ -31,9 +31,7 @@ from plotly import exceptions
 from plotly import version
 
 
-__all__ = ["sign_in", "update_plot_options", "get_plot_options",
-           "get_credentials", "iplot", "plot", "iplot_mpl", "plot_mpl",
-           "get_figure", "Stream", "image"]
+__all__ = None
 
 _DEFAULT_PLOT_OPTIONS = dict(
     filename="plot from API",
