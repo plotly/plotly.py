@@ -9,6 +9,10 @@ Low-level functionality NOT intended for users to EVER use.
 import json
 import os.path
 import sys
+import threading
+
+### incase people are using threadig, we lock file reads
+lock = threading.Lock()
 
 
 ### general file setup tools ###
@@ -17,13 +21,15 @@ def load_json_dict(filename, *args):
     """Checks if file exists. Returns {} if something fails."""
     data = {}
     if os.path.exists(filename):
+        lock.acquire()
         with open(filename, "r") as f:
             try:
                 data = json.load(f)
                 if not isinstance(data, dict):
                     data = {}
             except:
-                pass # TODO: issue a warning and bubble it up
+                data = {}  # TODO: issue a warning and bubble it up
+        lock.release()
         if args:
             d = dict()
             for key in args:
@@ -36,13 +42,32 @@ def load_json_dict(filename, *args):
 
 
 def save_json_dict(filename, json_dict):
-    """Will error if filename is not appropriate, but it's checked elsewhere.
-    """
+    """Save json to file. Error if path DNE, not a dict, or invalid json."""
     if isinstance(json_dict, dict):
+        # this will raise a TypeError if something goes wrong
+        json_string = json.dumps(json_dict, indent=4)
+        lock.acquire()
         with open(filename, "w") as f:
-            f.write(json.dumps(json_dict, indent=4))
+            f.write(json_string)
+        lock.release()
     else:
-        raise TypeError("json_dict was not a dictionay. couldn't save.")
+        raise TypeError("json_dict was not a dictionary. not saving.")
+
+
+def ensure_file_exists(filename):
+    """Given a valid filename, make sure it exists (will create if DNE)."""
+    if not os.path.exists(filename):
+        head, tail = os.path.split(filename)
+        ensure_dir_exists(head)
+        with open(filename, 'w') as f:
+            pass  # just create the file
+
+
+def ensure_dir_exists(directory):
+    """Given a valid directory path, make sure it exists."""
+    if dir:
+        if not os.path.isdir(directory):
+            os.makedirs(directory)
 
 
 ### Custom JSON encoders ###

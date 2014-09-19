@@ -72,9 +72,8 @@ def check_file_permissions():
 def ensure_local_plotly_files():
     """Ensure that filesystem is setup/filled out in a valid way"""
     if _file_permissions:
-        if not os.path.isdir(PLOTLY_DIR):
-            os.mkdir(PLOTLY_DIR)
         for fn in [CREDENTIALS_FILE, CONFIG_FILE]:
+            utils.ensure_file_exists(fn)
             contents = utils.load_json_dict(fn)
             for key, val in list(_FILE_CONTENT[fn].items()):
                 # TODO: removed type checking below, may want to revisit
@@ -134,8 +133,7 @@ def get_credentials_file(*args):
 
 def reset_credentials_file():
     ensure_local_plotly_files()  # make sure what's there is OK
-    f = open(CREDENTIALS_FILE, 'w')
-    f.close()
+    utils.save_json_dict(CREDENTIALS_FILE, {})
     ensure_local_plotly_files()  # put the defaults back
 
 
