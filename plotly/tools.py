@@ -504,8 +504,8 @@ def validate_stream(obj, obj_type):
     for key, val in list(obj.items()):
         if key == 'type':
             continue
-        if 'streamable' in info[key]:
-            if not info[key]['streamable']:
+        if 'streamable' in info['keymeta'][key].keys():
+            if not info['keymeta'][key]['streamable']:
                 raise exceptions.PlotlyError(
                     "The '{0}' key is not streamable in the '{1}' "
                     "object".format(

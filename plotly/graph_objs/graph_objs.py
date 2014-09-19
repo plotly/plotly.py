@@ -383,7 +383,7 @@ class PlotlyDict(dict):
                 self[key].strip_style()
             else:
                 try:
-                    if INFO[obj_key]['keymeta'][key]['type'] == 'style':
+                    if INFO[obj_key]['keymeta'][key]['key_type'] == 'style':
                         if isinstance(self[key], six.string_types):
                             del self[key]
                         elif not hasattr(self[key], '__iter__'):
@@ -404,7 +404,7 @@ class PlotlyDict(dict):
             else:
                 try:
                     # TODO: Update the JSON
-                    if INFO[obj_key]['keymeta'][key]['type'] == 'data':
+                    if INFO[obj_key]['keymeta'][key]['key_type'] == 'data':
                         d[key] = val
                 except KeyError:
                     pass
@@ -447,9 +447,9 @@ class PlotlyDict(dict):
                     err.add_to_error_path(key)
                     err.prepare()
                     raise
-            elif (key in INFO[info_key]['keymeta'] and
-                  'type' in INFO[info_key]['keymeta'][key]):
-                if INFO[info_key]['keymeta'][key]['type'] == 'object':
+            elif (key in INFO[info_key]['keymeta'].keys() and
+                  'key_type' in INFO[info_key]['keymeta'][key].keys()):
+                if INFO[info_key]['keymeta'][key]['key_type'] == 'object':
                     class_name = KEY_TO_NAME[key]
                     obj = _factory(class_name)
                     if isinstance(obj, PlotlyDict):
@@ -521,10 +521,10 @@ class PlotlyDict(dict):
                     err.prepare()
                     raise
             else:
-                if key in INFO[obj_key]['keymeta']:
-                    if 'type' not in INFO[obj_key]['keymeta'][key]:
+                if key in INFO[obj_key]['keymeta'].keys():
+                    if 'key_type' not in INFO[obj_key]['keymeta'][key].keys():
                         continue  # TODO: 'type' may not be documented yet!
-                    if INFO[obj_key]['keymeta'][key]['type'] == 'object':
+                    if INFO[obj_key]['keymeta'][key]['key_type'] == 'object':
                         try:
                             val_types = (
                                 INFO[obj_key]['keymeta'][key]['val_types'])
