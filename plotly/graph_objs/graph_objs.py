@@ -217,7 +217,7 @@ class PlotlyList(list):
         Keyword arguments:
         level (default = 0) -- set number of indentations to start with
         indent (default = 4) -- set indentation amount
-        eol (default = '\n') -- set end of line character(s)
+        eol (default = '\\n') -- set end of line character(s)
         pretty (default = True) -- curtail long list output with a '...'
         max_chars (default = 80) -- set max characters per line
 
@@ -571,7 +571,7 @@ class PlotlyDict(dict):
         Keyword arguments:
         level (default = 0) -- set number of indentations to start with
         indent (default = 4) -- set indentation amount
-        eol (default = '\n') -- set end of line character(s)
+        eol (default = '\\n') -- set end of line character(s)
         pretty (default = True) -- curtail long list output with a '...'
         max_chars (default = 80) -- set max characters per line
 
@@ -725,7 +725,7 @@ class PlotlyTrace(PlotlyDict):
         Keyword arguments:
         level (default = 0) -- set number of indentations to start with
         indent (default = 4) -- set indentation amount
-        eol (default = '\n') -- set end of line character(s)
+        eol (default = '\\n') -- set end of line character(s)
         pretty (default = True) -- curtail long list output with a '...'
         max_chars (default = 80) -- set max characters per line
 
@@ -927,7 +927,7 @@ def patch_Layout(Layout):
         Keyword arguments:
         level (default = 0) -- set number of indentations to start with
         indent (default = 4) -- set indentation amount
-        eol (default = '\n') -- set end of line character(s)
+        eol (default = '\\n') -- set end of line character(s)
         pretty (default = True) -- curtail long list output with a '...'
         max_chars (default = 80) -- set max characters per line
 
