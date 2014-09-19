@@ -30,21 +30,20 @@ def _load_graph_ref():
 # Load graph reference
 INFO, OBJ_MAP, NAME_TO_KEY, KEY_TO_NAME = _load_graph_ref()
 
-
-def update_keys(keys):
-    """Change keys we used to support to their new equivalent."""
-    updated_keys = list()
-    for key in keys:
-        if key in translations:
-            updated_keys += [translations[key]]
-        else:
-            updated_keys += [key]
-    return updated_keys
-
-translations = dict(
-    scl="colorscale",
-    reversescl="reversescale"
-)
+# Add mentions to Python-specific graph obj
+# to NAME_TO_KEY, KEY_TO_NAME, INFO
+NAME_TO_KEY['PlotlyList'] = 'plotlylist'
+NAME_TO_KEY['PlotlyDict'] = 'plotlydict'
+NAME_TO_KEY['PlotlyTrace'] = 'plotlytrace'
+NAME_TO_KEY['Trace'] = 'trace'
+KEY_TO_NAME['plotlylist'] = 'PlotlyList'
+KEY_TO_NAME['plotlydict'] = 'PlotlyDict'
+KEY_TO_NAME['plotlytrace'] = 'PlotlyTrace'
+KEY_TO_NAME['trace'] = 'Trace'
+INFO['plotlylist'] = dict(keymeta=dict())
+INFO['plotlydict'] = dict(keymeta=dict())
+INFO['plotlytrace'] = dict(keymeta=dict())
+INFO['trace'] = dict(keymeta=dict())
 
 # Define line and tab size for help text!
 LINE_SIZE = 76
@@ -75,7 +74,7 @@ def make_list_doc(name):
     elif len(parent_keys) > 1:
         doc += "\nParent keys:\n\n    " + "\n    ".join(parent_keys) + "\n"
     # Add method list to doc
-    doc += "Quick method reference:\n\n"
+    doc += "\nQuick method reference:\n\n"
     doc += "\t{0}.".format(name) + "\n\t{0}.".format(name).join(
         ["update(changes)", "strip_style()", "get_data()",
          "to_graph_objs()", "validate()", "to_string()",
@@ -168,6 +167,22 @@ def make_dict_doc(name):
                 pass
             doc += '\n'
     return doc.expandtabs(TAB_SIZE)
+
+
+def update_keys(keys):
+    """Change keys we used to support to their new equivalent."""
+    updated_keys = list()
+    for key in keys:
+        if key in translations:
+            updated_keys += [translations[key]]
+        else:
+            updated_keys += [key]
+    return updated_keys
+
+translations = dict(
+    scl="colorscale",
+    reversescl="reversescale"
+)
 
 
 def curtail_val_repr(val, max_chars, add_delim=False):
