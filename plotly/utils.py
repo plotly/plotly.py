@@ -9,7 +9,10 @@ Low-level functionality NOT intended for users to EVER use.
 import json
 import os.path
 import sys
+import threading
 
+### incase people are using threadig, we lock file reads
+lock = threading.Lock()
 
 ### general file setup tools ###
 
@@ -17,6 +20,7 @@ def load_json_dict(filename, *args):
     """Checks if file exists. Returns {} if something fails."""
     data = {}
     if os.path.exists(filename):
+        lock.acquire()
         with open(filename, "r") as f:
             try:
                 data = json.load(f)
@@ -24,6 +28,7 @@ def load_json_dict(filename, *args):
                     data = {}
             except:
                 pass # TODO: issue a warning and bubble it up
+        lock.release()
         if args:
             d = dict()
             for key in args:
@@ -39,8 +44,10 @@ def save_json_dict(filename, json_dict):
     """Will error if filename is not appropriate, but it's checked elsewhere.
     """
     if isinstance(json_dict, dict):
+        lock.acquire()
         with open(filename, "w") as f:
             f.write(json.dumps(json_dict, indent=4))
+        lock.release()
     else:
         raise TypeError("json_dict was not a dictionay. couldn't save.")
 

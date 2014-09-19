@@ -134,8 +134,7 @@ def get_credentials_file(*args):
 
 def reset_credentials_file():
     ensure_local_plotly_files()  # make sure what's there is OK
-    f = open(CREDENTIALS_FILE, 'w')
-    f.close()
+    utils.save_json_dict(CREDENTIALS_FILE, {})
     ensure_local_plotly_files()  # put the defaults back
 
 
