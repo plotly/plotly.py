@@ -18,6 +18,7 @@ from plotly.exceptions import PlotlyError
 
 
 def test_plot_valid():
+    py.sign_in('plotlyimagetest', '786r5mecv0')
     fig = {
         'data':[
             {

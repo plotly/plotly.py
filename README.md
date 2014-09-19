@@ -11,7 +11,7 @@ Now you can download, design, and upload Plotly figures--all from Python.
 
 ###Where to go from here
 
-* [Get started with our guide book!](http://nbviewer.ipython.org/github/plotly/python-user-guide/blob/master/s0_getting-started/s0_getting-started.ipynb)
+* [Get started with our guide book!](https://plot.ly/python/user-guide/)
 
 * Official docs: [https://plot.ly/python](https://plot.ly/python)
 

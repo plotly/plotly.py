@@ -38,6 +38,8 @@ if sys.version[:3] == '2.6':
 else:
     from collections import OrderedDict
 
+__all__ = None
+
 
 # (1) Make primitive graph objects
 class PlotlyList(list):

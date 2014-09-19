@@ -5,13 +5,14 @@ graph_objs
 This package imports definitions for all of Plotly's graph objects. For more
 information, run help(Obj) on any of the following objects defined here.
 
+The reason for the package graph_objs and the module graph_objs is to provide
+a clearer API for users.
 
 """
-from __future__ import absolute_import
-
-from plotly.graph_objs.graph_objs import *  # import everything...
-
-from plotly.graph_objs.graph_objs_tools import OBJ_MAP
-
-__all__ = [name for name in OBJ_MAP  # ... but, only expose certain objects
-           if name not in ['PlotlyList', 'PlotlyDict', 'PlotlyTrace']]
+from . graph_objs import (
+    Data, Annotations, Area, Bar, Box, Contour, Heatmap, Histogram,
+    Histogram2d, Histogram2dContour, Scatter, Annotation, AngularAxis,
+    ColorBar, Contours, ErrorX, ErrorY, Figure, Font, Layout, Legend,
+    Line, Margin, Marker, RadialAxis, Stream, Trace, XAxis, XBins, YAxis,
+    YBins
+)
