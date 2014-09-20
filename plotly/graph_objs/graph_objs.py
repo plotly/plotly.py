@@ -1058,7 +1058,11 @@ def patch_Layout(Layout):
 Layout = patch_Layout(Layout)
 
 
-# (4) Class-generating function
+# (4) NAME_TO_CLASS dict and class-generating function
+NAME_TO_CLASS = {name: getattr(sys.modules[__name__], name)
+                 for name in NAME_TO_KEY.keys()}
+
+
 def _factory(name, *args, **kwargs):
     """All class creation goes through here.
 
@@ -1067,11 +1071,12 @@ def _factory(name, *args, **kwargs):
     allows instantiation errors to occur naturally.
 
     """
+    print sys.modules[__name__], name
     if args and kwargs:
-        return globals()[name](*args, **kwargs)
+        return NAME_TO_CLASS[name](*args, **kwargs)
     elif args:
-        return globals()[name](*args)
+        return NAME_TO_CLASS[name](*args)
     elif kwargs:
-        return globals()[name](**kwargs)
+        return NAME_TO_CLASS[name](**kwargs)
     else:
-        return globals()[name]()
+        return NAME_TO_CLASS[name]()
