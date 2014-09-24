@@ -460,7 +460,7 @@ def mpl_dates_to_datestrings(mpl_dates, format_string="%Y-%m-%d %H:%M:%S"):
         # make sure we have a list
         mpl_date_list = list(mpl_dates)
         epoch_times = matplotlib.dates.num2epoch(mpl_date_list)
-        date_times = [datetime.datetime.fromtimestamp(epoch_time)
+        date_times = [datetime.datetime.utcfromtimestamp(epoch_time)
                       for epoch_time in epoch_times]
         time_strings = [date_time.strftime(format_string)
                         for date_time in date_times]
