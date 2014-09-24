@@ -256,6 +256,9 @@ class PlotlyRenderer(Renderer):
             y = [bar['y1'] for bar in trace]
             bar_gap = mpltools.get_bar_gap([bar['x0'] for bar in trace],
                                            [bar['x1'] for bar in trace])
+            if self.x_is_mpl_date:
+                x = [bar['x0'] for bar in trace]
+                x = mpltools.mpl_dates_to_datestrings(x)
         else:
             self.msg += "    Attempting to draw a horizontal bar chart\n"
             old_rights = [bar_props['x1'] for bar_props in trace]
