@@ -15,7 +15,7 @@ else:
     class TestPlotlyDisplay(unittest.TestCase):
 
         def setUp(self):
-            plot_info = {"un": "plotlyimagetest", "fid": "2"}
+            plot_info = {"un": "PlotlyImageTest", "fid": "2"}
             url = "https://plot.ly/~{un}/{fid}".format(**plot_info)
             self.display_obj = tls.embed(url)
             self.results = {}

@@ -46,7 +46,7 @@ def test_user_does_not_exist():
 
 
 def test_file_does_not_exist():
-    username = 'plotlyimagetest'
+    username = 'PlotlyImageTest'
     api_key = '786r5mecv0'
     file_owner = 'get_test_user'
     file_id = 1000
@@ -67,7 +67,7 @@ def test_file_does_not_exist():
 
 
 def test_wrong_api_key():  # TODO: does this test the right thing?
-    username = 'plotlyimagetest'
+    username = 'PlotlyImageTest'
     api_key = 'invalid-apikey'
     file_owner = 'get_test_user'
     file_id = 0
@@ -84,7 +84,7 @@ def test_wrong_api_key():  # TODO: does this test the right thing?
 # TODO
 
 def test_private_permission_defined():
-    username = 'plotlyimagetest'
+    username = 'PlotlyImageTest'
     api_key = '786r5mecv0'
     file_owner = 'get_test_user'
     file_id = 1  # 1 is a private file
@@ -124,7 +124,7 @@ def test_missing_headers():
 
 
 def test_valid_request():
-    username = 'plotlyimagetest'
+    username = 'PlotlyImageTest'
     api_key = '786r5mecv0'
     file_owner = 'get_test_user'
     file_id = 0
