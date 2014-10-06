@@ -298,7 +298,7 @@ class PlotlyDict(dict):
     def __init__(self, *args, **kwargs):
         class_name = self.__class__.__name__
         super(PlotlyDict, self).__init__(*args, **kwargs)
-        if issubclass(globals()[class_name], PlotlyTrace):
+        if issubclass(NAME_TO_CLASS[class_name], PlotlyTrace):
             if (class_name != 'PlotlyTrace') and (class_name != 'Trace'):
                 self['type'] = NAME_TO_KEY[class_name]
         self.validate()
@@ -836,7 +836,7 @@ def patch_Annotations(Annotations):
         """
         for index, entry in enumerate(self):
             if isinstance(entry, (PlotlyDict, PlotlyList)):
-                if not isinstance(entry, globals()['Annotation']):
+                if not isinstance(entry, NAME_TO_CLASS['Annotation']):
                     raise exceptions.PlotlyListEntryError(
                         obj=self,
                         index=index,
