@@ -783,7 +783,7 @@ for obj in OBJ_MAP:
 
 
 # (3) Patch 'custom' methods into some graph objects
-def patch_Data(Data):
+def get_patched_data_class(Data):
     def to_graph_objs(self, caller=True):  # TODO TODO TODO! check logic!
         """Change any nested collections to subclasses of PlotlyDict/List.
 
@@ -823,10 +823,10 @@ def patch_Data(Data):
     Data.to_graph_objs = to_graph_objs  # override method!
     return Data
 
-Data = patch_Data(Data)
+Data = get_patched_data_class(Data)
 
 
-def patch_Annotations(Annotations):
+def get_patched_annotations_class(Annotations):
     def to_graph_objs(self, caller=True):
         """Change any nested collections to subclasses of PlotlyDict/List.
 
@@ -863,10 +863,10 @@ def patch_Annotations(Annotations):
     Annotations.to_graph_objs = to_graph_objs  # override method!
     return Annotations
 
-Annotations = patch_Annotations(Annotations)
+Annotations = get_patched_annotations_class(Annotations)
 
 
-def patch_Figure(Figure):
+def get_patched_figure_class(Figure):
     def __init__(self, *args, **kwargs):
         if len(args):
             if ('data' not in kwargs) and ('data' not in args[0]):
@@ -882,10 +882,10 @@ def patch_Figure(Figure):
     Figure.__init__ = __init__  # override method!
     return Figure
 
-Figure = patch_Figure(Figure)
+Figure = get_patched_figure_class(Figure)
 
 
-def patch_Layout(Layout):
+def get_patched_layout_class(Layout):
     def __init__(self, *args, **kwargs):
         super(Layout, self).__init__(*args, **kwargs)
 
@@ -1056,7 +1056,7 @@ def patch_Layout(Layout):
     Layout.force_clean = force_clean  # override methods!
     return Layout
 
-Layout = patch_Layout(Layout)
+Layout = get_patched_layout_class(Layout)
 
 
 # (4) NAME_TO_CLASS dict and class-generating function
