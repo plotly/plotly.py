@@ -454,10 +454,11 @@ def get_valid_graph_obj(obj, obj_type=None):
 
     """
     try:
-        new_obj = graph_objs._factory(obj.__class__.__name__)
+        new_obj = graph_objs.get_class_instance_by_name(
+            obj.__class__.__name__)
     except KeyError:
         try:
-            new_obj = graph_objs._factory(obj_type)
+            new_obj = graph_objs.get_class_instance_by_name(obj_type)
         except KeyError:
             raise exceptions.PlotlyError(
                 "'{0}' nor '{1}' are recognizable graph_objs.".
@@ -484,7 +485,7 @@ def validate(obj, obj_type):
     except KeyError:
         pass
     try:
-        test_obj = graph_objs._factory(obj_type, obj)
+        test_obj = graph_objs.get_class_instance_by_name(obj_type, obj)
     except KeyError:
         raise exceptions.PlotlyError(
             "'{0}' is not a recognizable graph_obj.".

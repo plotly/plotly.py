@@ -453,7 +453,7 @@ class PlotlyDict(dict):
                   'key_type' in INFO[info_key]['keymeta'][key].keys()):
                 if INFO[info_key]['keymeta'][key]['key_type'] == 'object':
                     class_name = KEY_TO_NAME[key]
-                    obj = _factory(class_name)
+                    obj = get_class_instance_by_name(class_name)
                     if isinstance(obj, PlotlyDict):
                         if not isinstance(self[key], dict):
                             try:
@@ -794,7 +794,8 @@ def patch_Data(Data):
         """
         for index, entry in enumerate(self):
             if isinstance(entry, PlotlyDict):
-                self[index] = _factory(entry.__class__.__name__, entry)
+                self[index] = get_class_instance_by_name(
+                    entry.__class__.__name__, entry)
             elif isinstance(entry, dict):
                 if 'type' not in entry:  # assume 'scatter' if not given
                     entry['type'] = 'scatter'
@@ -805,7 +806,7 @@ def patch_Data(Data):
                         obj=self,
                         index=index
                     )
-                obj = _factory(obj_name)
+                obj = get_class_instance_by_name(obj_name)
                 for k, v in list(entry.items()):
                     obj[k] = v
                 self[index] = obj
@@ -845,7 +846,7 @@ def patch_Annotations(Annotations):
                               "different kind of graph object.",
                     )
             elif isinstance(entry, dict):
-                obj = _factory('Annotation')
+                obj = get_class_instance_by_name('Annotation')
                 for k, v in list(entry.items()):
                     obj[k] = v
                 self[index] = obj
@@ -908,9 +909,9 @@ def patch_Layout(Layout):
                     continue  # not an XAxis or YAxis object after all
                 if isinstance(self[key], dict):
                     if key[:5] == 'xaxis':
-                        obj = _factory('XAxis')
+                        obj = get_class_instance_by_name('XAxis')
                     else:
-                        obj = _factory('YAxis')
+                        obj = get_class_instance_by_name('YAxis')
                     for k, v in list(self.pop(key).items()):
                         obj[k] = v
                     self[key] = obj  # call to super will call 'to_graph_objs'
@@ -1063,7 +1064,7 @@ NAME_TO_CLASS = {name: getattr(sys.modules[__name__], name)
                  for name in NAME_TO_KEY.keys()}
 
 
-def _factory(name, *args, **kwargs):
+def get_class_instance_by_name(name, *args, **kwargs):
     """All class creation goes through here.
 
     Because call signatures for the different classes are different, we have
