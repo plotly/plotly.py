@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 from plotly import utils
 import textwrap
+import os
 import sys
 if sys.version[:3] == '2.6':
     from ordereddict import OrderedDict
@@ -15,13 +16,17 @@ from pkg_resources import resource_string
 
 # Define graph reference loader
 def _load_graph_ref():
-    json_files = ['graph_objs_meta', 'OBJ_MAP',
-                  'NAME_TO_KEY', 'KEY_TO_NAME']
+    graph_reference_dir = 'graph_reference'
+    json_files = [
+        'graph_objs_meta.json',
+        'OBJ_MAP.json',
+        'NAME_TO_KEY.json',
+        'KEY_TO_NAME.json'
+    ]
     out = []
     for json_file in json_files:
-        s = resource_string('plotly',
-                            'graph_reference/' +
-                            json_file+'.json').decode('utf-8')
+        relative_path = os.path.join(graph_reference_dir, json_file)
+        s = resource_string('plotly', relative_path).decode('utf-8')
         tmp = json.loads(s, object_pairs_hook=OrderedDict)
         tmp = utils.decode_unicode(tmp)
         out += [tmp]
