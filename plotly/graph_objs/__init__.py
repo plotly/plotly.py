@@ -14,5 +14,5 @@ from . graph_objs import (
     Histogram2d, Histogram2dContour, Scatter, Annotation, AngularAxis,
     ColorBar, Contours, ErrorX, ErrorY, Figure, Font, Layout, Legend,
     Line, Margin, Marker, RadialAxis, Stream, Trace, XAxis, XBins, YAxis,
-    YBins
+    YBins, Scatter3d, Surface, Scene, ZAxis, ErrorZ
 )
