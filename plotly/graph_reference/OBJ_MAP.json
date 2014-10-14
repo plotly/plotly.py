@@ -23,6 +23,10 @@
         "info_key": "xbins", 
         "base_name": "PlotlyDict"
     }, 
+    "Scatter3d": {
+        "info_key": "scatter3d", 
+        "base_name": "PlotlyTrace"
+    }, 
     "Histogram": {
         "info_key": "histogram", 
         "base_name": "PlotlyTrace"
@@ -45,6 +49,10 @@
     }, 
     "ErrorY": {
         "info_key": "error_y", 
+        "base_name": "PlotlyDict"
+    }, 
+    "ErrorZ": {
+        "info_key": "error_z", 
         "base_name": "PlotlyDict"
     }, 
     "Histogram2d": {
@@ -95,8 +103,20 @@
         "info_key": "stream", 
         "base_name": "PlotlyDict"
     }, 
+    "Scene": {
+        "info_key": "scene", 
+        "base_name": "PlotlyDict"
+    }, 
+    "Surface": {
+        "info_key": "surface", 
+        "base_name": "PlotlyTrace"
+    }, 
     "Annotation": {
         "info_key": "annotation", 
+        "base_name": "PlotlyDict"
+    }, 
+    "ZAxis": {
+        "info_key": "zaxis", 
         "base_name": "PlotlyDict"
     }, 
     "XAxis": {
