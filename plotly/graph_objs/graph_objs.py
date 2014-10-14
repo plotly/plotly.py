@@ -1072,7 +1072,6 @@ def get_class_instance_by_name(name, *args, **kwargs):
     allows instantiation errors to occur naturally.
 
     """
-    print sys.modules[__name__], name
     if args and kwargs:
         return NAME_TO_CLASS[name](*args, **kwargs)
     elif args:
