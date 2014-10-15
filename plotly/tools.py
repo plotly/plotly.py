@@ -18,7 +18,7 @@ import requests
 from plotly import utils
 from plotly import exceptions
 
-from . graph_objs import graph_objs
+from plotly.graph_objs import graph_objs
 
 # Warning format
 def warning_on_one_line(message, category, filename, lineno, file=None, line=None):
@@ -452,10 +452,11 @@ def get_valid_graph_obj(obj, obj_type=None):
 
     """
     try:
-        new_obj = graph_objs.NAME_TO_CLASS[obj.__class__.__name__]()
+        new_obj = graph_objs.get_class_instance_by_name(
+            obj.__class__.__name__)
     except KeyError:
         try:
-            new_obj = graph_objs.NAME_TO_CLASS[obj_type]()
+            new_obj = graph_objs.get_class_instance_by_name(obj_type)
         except KeyError:
             raise exceptions.PlotlyError(
                 "'{0}' nor '{1}' are recognizable graph_objs.".
@@ -482,7 +483,7 @@ def validate(obj, obj_type):
     except KeyError:
         pass
     try:
-        test_obj = graph_objs.NAME_TO_CLASS[obj_type](obj)
+        test_obj = graph_objs.get_class_instance_by_name(obj_type, obj)
     except KeyError:
         raise exceptions.PlotlyError(
             "'{0}' is not a recognizable graph_obj.".
@@ -503,8 +504,8 @@ def validate_stream(obj, obj_type):
     for key, val in list(obj.items()):
         if key == 'type':
             continue
-        if 'streamable' in info[key]:
-            if not info[key]['streamable']:
+        if 'streamable' in info['keymeta'][key].keys():
+            if not info['keymeta'][key]['streamable']:
                 raise exceptions.PlotlyError(
                     "The '{0}' key is not streamable in the '{1}' "
                     "object".format(

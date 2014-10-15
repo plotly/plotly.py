@@ -43,7 +43,12 @@ sync_chunked : submodules/chunked_requests
 sync_refs : submodules/graph_reference
 	@echo ""
 	@echo "Syncing graph_reference directories"
-	rsync -r submodules/graph_reference plotly/
+	rm -rf plotly/graph_reference
+	mkdir plotly/graph_reference
+	cp submodules/graph_reference/graph_objs/python/graph_objs_meta.json plotly/graph_reference
+	cp submodules/graph_reference/graph_objs/python/KEY_TO_NAME.json plotly/graph_reference
+	cp submodules/graph_reference/graph_objs/python/NAME_TO_KEY.json plotly/graph_reference
+	cp submodules/graph_reference/graph_objs/python/OBJ_MAP.json plotly/graph_reference
 
 pull_refs : submodules/graph_reference
 	@echo ""
