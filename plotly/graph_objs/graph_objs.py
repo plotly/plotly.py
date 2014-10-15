@@ -1060,8 +1060,10 @@ Layout = get_patched_layout_class(Layout)
 
 
 # (4) NAME_TO_CLASS dict and class-generating function
-NAME_TO_CLASS = {name: getattr(sys.modules[__name__], name)
-                 for name in NAME_TO_KEY.keys()}
+# NOTE: used to be a dict comprehension, but we try and support 2.6.x now
+NAME_TO_CLASS = {}
+for name in NAME_TO_KEY.keys():
+    NAME_TO_CLASS[name] = getattr(sys.modules[__name__], name)
 
 
 def get_class_instance_by_name(name, *args, **kwargs):
