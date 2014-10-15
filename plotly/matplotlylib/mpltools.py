@@ -7,6 +7,8 @@ A module for converting from mpl language to plotly language.
 
 import math
 import warnings
+import datetime
+import matplotlib.dates
 
 def check_bar_match(old_bar, new_bar):
     """Check if two bars belong in the same collection (bar chart).
@@ -416,6 +418,17 @@ def prep_ticks(ax, index, ax_type, props):
         return dict()
     # get tick label formatting information
     formatter = axis.get_major_formatter().__class__.__name__
+    if ax_type == 'x' and formatter == 'DateFormatter':
+        axis_dict['type'] = 'date'
+        try:
+            axis_dict['tick0'] = mpl_dates_to_datestrings(axis_dict['tick0'])
+        except KeyError:
+            pass
+        finally:
+            axis_dict.pop('dtick', None)
+            axis_dict.pop('autotick', None)
+            axis_dict['range'] = mpl_dates_to_datestrings(props['xlim'])
+
     if formatter == 'LogFormatterMathtext':
         axis_dict['exponentformat'] = 'e'
     return axis_dict
@@ -441,6 +454,22 @@ def prep_xy_axis(ax, props, x_bounds, y_bounds):
     )
     yaxis.update(prep_ticks(ax, 1, 'y', props))
     return xaxis, yaxis
+
+def mpl_dates_to_datestrings(mpl_dates, format_string="%Y-%m-%d %H:%M:%S"):
+    try:
+        # make sure we have a list
+        mpl_date_list = list(mpl_dates)
+        epoch_times = matplotlib.dates.num2epoch(mpl_date_list)
+        date_times = [datetime.datetime.utcfromtimestamp(epoch_time)
+                      for epoch_time in epoch_times]
+        time_strings = [date_time.strftime(format_string)
+                        for date_time in date_times]
+        if len(time_strings) > 1:
+            return time_strings
+        else:
+            return time_strings[0]
+    except TypeError:
+        return mpl_dates
 
 
 DASH_MAP = {

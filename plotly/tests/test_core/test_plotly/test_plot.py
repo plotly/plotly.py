@@ -13,12 +13,12 @@ from plotly.plotly import plotly as py
 from plotly.exceptions import PlotlyError
 
 
-# username for tests: 'plotlyimagetest'
+# username for tests: 'PlotlyImageTest'
 # api_key for account: '786r5mecv0'
 
 
 def test_plot_valid():
-    py.sign_in('plotlyimagetest', '786r5mecv0')
+    py.sign_in('PlotlyImageTest', '786r5mecv0')
     fig = {
         'data':[
             {

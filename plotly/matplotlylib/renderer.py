@@ -54,6 +54,7 @@ class PlotlyRenderer(Renderer):
         self.bar_containers = None
         self.current_bars = []
         self.axis_ct = 0
+        self.x_is_mpl_date = False
         self.mpl_x_bounds = (0, 1)
         self.mpl_y_bounds = (0, 1)
         self.msg = "Initialized PlotlyRenderer\n"
@@ -176,6 +177,10 @@ class PlotlyRenderer(Renderer):
         self.plotly_fig['layout']['xaxis{0}'.format(self.axis_ct)] = xaxis
         self.plotly_fig['layout']['yaxis{0}'.format(self.axis_ct)] = yaxis
 
+        # let all subsequent dates be handled properly if required
+        if xaxis.get('type') == 'date':
+            self.x_is_mpl_date = True
+
     def close_axes(self, ax):
         """Close the axes object and clean up.
 
@@ -190,6 +195,7 @@ class PlotlyRenderer(Renderer):
         """
         self.draw_bars(self.current_bars)
         self.msg += "  Closing axes\n"
+        self.x_is_mpl_date = False
 
     def draw_bars(self, bars):
 
@@ -250,6 +256,9 @@ class PlotlyRenderer(Renderer):
             y = [bar['y1'] for bar in trace]
             bar_gap = mpltools.get_bar_gap([bar['x0'] for bar in trace],
                                            [bar['x1'] for bar in trace])
+            if self.x_is_mpl_date:
+                x = [bar['x0'] for bar in trace]
+                x = mpltools.mpl_dates_to_datestrings(x)
         else:
             self.msg += "    Attempting to draw a horizontal bar chart\n"
             old_rights = [bar_props['x1'] for bar_props in trace]
@@ -357,6 +366,10 @@ class PlotlyRenderer(Renderer):
                 yaxis='y{0}'.format(self.axis_ct),
                 line=line,
                 marker=marker)
+            if self.x_is_mpl_date:
+                marked_line['x'] = mpltools.mpl_dates_to_datestrings(
+                    marked_line['x']
+                )
             self.plotly_fig['data'] += marked_line,
             self.msg += "    Heck yeah, I drew that line\n"
         else:

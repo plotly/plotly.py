@@ -91,17 +91,17 @@ def is_trivial(obj):
 
 
 def test_get_figure():
-    un = 'plotlyimagetest'
+    un = 'PlotlyImageTest'
     ak = '786r5mecv0'
     file_id = 2
     py.sign_in(un, ak)
     print("getting: https://plot.ly/~{0}/{1}/".format(un, file_id))
     print("###########################################\n\n")
-    fig = py.get_figure('plotlyimagetest', str(file_id))
+    fig = py.get_figure('PlotlyImageTest', str(file_id))
 
 
 def test_get_figure_with_url():
-    un = 'plotlyimagetest'
+    un = 'PlotlyImageTest'
     ak = '786r5mecv0'
     url = "https://plot.ly/~PlotlyImageTest/2/"
     py.sign_in(un, ak)
@@ -112,7 +112,7 @@ def test_get_figure_with_url():
 
 @raises(exceptions.PlotlyError)
 def test_get_figure_invalid_1():
-    un = 'plotlyimagetest'
+    un = 'PlotlyImageTest'
     ak = '786r5mecv0'
     url = "https://plot.ly/~PlotlyImageTest/a/"
     py.sign_in(un, ak)
@@ -123,7 +123,7 @@ def test_get_figure_invalid_1():
 
 @raises(exceptions.PlotlyError)
 def test_get_figure_invalid_2():
-    un = 'plotlyimagetest'
+    un = 'PlotlyImageTest'
     ak = '786r5mecv0'
     url = "https://plot.ly/~PlotlyImageTest/-1/"
     py.sign_in(un, ak)
@@ -134,7 +134,7 @@ def test_get_figure_invalid_2():
 
 @raises(exceptions.PlotlyError)
 def test_get_figure_does_not_exist():
-    un = 'plotlyimagetest'
+    un = 'PlotlyImageTest'
     ak = '786r5mecv0'
     url = "https://plot.ly/~PlotlyImageTest/1000000000/"
     py.sign_in(un, ak)
@@ -144,17 +144,17 @@ def test_get_figure_does_not_exist():
 
 
 def test_get_figure_raw():
-    un = 'plotlyimagetest'
+    un = 'PlotlyImageTest'
     ak = '786r5mecv0'
     file_id = 2
     py.sign_in(un, ak)
     print("getting: https://plot.ly/~{0}/{1}/".format(un, file_id))
     print("###########################################\n\n")
-    fig = py.get_figure('plotlyimagetest', str(file_id), raw=True)
+    fig = py.get_figure('PlotlyImageTest', str(file_id), raw=True)
 
 
 def test_all():
-    un = 'plotlyimagetest'
+    un = 'PlotlyImageTest'
     ak = '786r5mecv0'
     run_test = False
     end_file = 2
@@ -173,8 +173,8 @@ def test_all():
             try:
                 print("testing: https://plot.ly/~{0}/{1}".format(un, file_id))
                 print("###########################################\n\n")
-                fig = py.get_figure('plotlyimagetest', str(file_id))
-                fig_raw = py.get_figure('plotlyimagetest',
+                fig = py.get_figure('PlotlyImageTest', str(file_id))
+                fig_raw = py.get_figure('PlotlyImageTest',
                                         str(file_id),
                                         raw=True)
             except exceptions.PlotlyError:
