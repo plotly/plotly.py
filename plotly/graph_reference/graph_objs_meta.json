@@ -163,6 +163,20 @@
                 "required": false, 
                 "description": "Toggles whether or not this object will be visible on the rendered figure."
             }, 
+            "xsrc": {
+                "key_type": "data", 
+                "val_types": "a string equal to the unique identifier of a plotly grid column", 
+                "required": " when 'y','r' and 't' are unset", 
+                "description": "Sets the x coordinates of the points of this scatter trace. If 'x' is linked to a list or 1d numpy array of strings, then the x coordinates are integers, 0, 1, 2, 3, ..., labeled on the x-axis by the list or 1d numpy array of strings linked to 'x'.", 
+                "streamable": true
+            }, 
+            "ysrc": {
+                "key_type": "data", 
+                "val_types": "a string equal to the unique identifier of a plotly grid column", 
+                "required": " when 'x','r' and 't' are unset", 
+                "description": "Sets the y coordinates of the points of this scatter trace. If 'y' is linked to a list or 1d numpy array of strings, then the y coordinates are integers, 0, 1, 2, 3, ..., labeled on the y-axis by the list or 1d numpy array of strings linked to 'y'.", 
+                "streamable": true
+            }, 
             "type": {
                 "key_type": "plot_info", 
                 "val_types": "'scatter'", 
@@ -272,6 +286,20 @@
                 "val_types": "a boolean: True | False", 
                 "required": false, 
                 "description": "Toggles whether or not this object will be visible on the rendered figure."
+            }, 
+            "xsrc": {
+                "key_type": "data", 
+                "val_types": "a string equal to the unique identifier of a plotly grid column", 
+                "required": " when 'y' is unset", 
+                "description": "Sets the x coordinates of the bars. If 'x' is linked to a list or 1d numpy array of strings, then the x coordinates are integers, 0, 1, 2, 3, ..., labeled on the x-axis by the list or 1d numpy array of strings linked to 'x'. If 'y' is not set, the bars are plotted horizontally, with their length determined by the list or 1d numpy array linked to 'x'.", 
+                "streamable": true
+            }, 
+            "ysrc": {
+                "key_type": "data", 
+                "val_types": "a string equal to the unique identifier of a plotly grid column", 
+                "required": " when 'x' is unset", 
+                "description": "Sets the y coordinates of the bars. If 'y' is linked to a list or 1d numpy array of strings, then the y coordinates are integers, 0, 1, 2, 3, ..., labeled on the y-axis by the list or 1d numpy array of strings linked to 'y'. If 'x' is not set, the bars are plotted vertically, with their length determined by the list or 1d numpy array linked to 'y'.", 
+                "streamable": true
             }, 
             "r": {
                 "key_type": "data", 
@@ -434,6 +462,20 @@
                 "required": false, 
                 "description": "Toggles whether or not this object will be visible on the rendered figure."
             }, 
+            "xsrc": {
+                "key_type": "data", 
+                "val_types": "a string equal to the unique identifier of a plotly grid column", 
+                "required": " when 'y' is unset", 
+                "description": "Sets the data sample to be binned (done by Plotly) on the x-axis and plotted as vertical bars.", 
+                "streamable": true
+            }, 
+            "ysrc": {
+                "key_type": "data", 
+                "val_types": "a string equal to the unique identifier of a plotly grid column", 
+                "required": " when 'x' is unset", 
+                "description": "Sets the data sample to be binned (done by Plotly) on the y-axis and plotted as horizontal bars.", 
+                "streamable": true
+            }, 
             "type": {
                 "key_type": "plot_info", 
                 "val_types": "'histogram'", 
@@ -573,6 +615,20 @@
                 "val_types": "a boolean: True | False", 
                 "required": false, 
                 "description": "Toggles whether or not this object will be visible on the rendered figure."
+            }, 
+            "xsrc": {
+                "key_type": "data", 
+                "val_types": "a string equal to the unique identifier of a plotly grid column", 
+                "required": false, 
+                "description": "Usually, you do not need to set this value as plotly will handle box locations for you. However this allows you to have fine control over the location data for the box. Unlike making a bar, a box plot is made of many y values. Therefore, to give location data to the values you place in 'y', the length of 'x' must equal the length of 'y'. when making multiple box plots, you can concatenate the data sets for each box into a single 'y' array. then, the entries in 'x' define which box plot each entry in 'y' belongs to. When making a single box plot, you must set each entry in 'x' to the same value, see 'x0' for a more practical way to handle this case. If you don't include 'x', the box will simply be assigned a location.", 
+                "streamable": true
+            }, 
+            "ysrc": {
+                "key_type": "data", 
+                "val_types": "a string equal to the unique identifier of a plotly grid column", 
+                "required": true, 
+                "description": "This array is used to define an individual box plot, or, a concatenation of multiple box plots. Statistics from these numbers define the bounds of the box, the length of the whiskers, etc. For details on defining multiple boxes with locations see 'x'. Each box spans from the first quartile to the third. The second quartile is marked by a line inside the box. By default, the whiskers are correspond to box' edges +/- 1.5 times the interquartile range. See also 'boxpoints' for more info", 
+                "streamable": true
             }, 
             "type": {
                 "key_type": "plot_info", 
@@ -1112,6 +1168,20 @@
                 "required": false, 
                 "description": "Toggles whether or not this object will be visible on the rendered figure."
             }, 
+            "xsrc": {
+                "key_type": "data", 
+                "val_types": "a string equal to the unique identifier of a plotly grid column", 
+                "required": true, 
+                "description": "Sets the data sample to be binned on the x-axis and whose distribution (computed by Plotly) will correspond to the x-coordinates of this 2D histogram trace.", 
+                "streamable": true
+            }, 
+            "ysrc": {
+                "key_type": "data", 
+                "val_types": "a string equal to the unique identifier of a plotly grid column", 
+                "required": true, 
+                "description": "Sets the data sample to be binned on the y-axis and whose distribution (computed by Plotly) will correspond to the y-coordinates of this 2D histogram trace.", 
+                "streamable": true
+            }, 
             "type": {
                 "key_type": "plot_info", 
                 "val_types": "'histogram2d'", 
@@ -1303,6 +1373,20 @@
                 "val_types": "a boolean: True | False", 
                 "required": false, 
                 "description": "Toggles whether or not this object will be visible on the rendered figure."
+            }, 
+            "xsrc": {
+                "key_type": "data", 
+                "val_types": "a string equal to the unique identifier of a plotly grid column", 
+                "required": true, 
+                "description": "Sets the data sample to be binned on the x-axis and whose distribution (computed by Plotly) will correspond to the x-coordinates of this 2D histogram trace.", 
+                "streamable": true
+            }, 
+            "ysrc": {
+                "key_type": "data", 
+                "val_types": "a string equal to the unique identifier of a plotly grid column", 
+                "required": true, 
+                "description": "Sets the data sample to be binned on the y-axis and whose distribution (computed by Plotly) will correspond to the y-coordinates of this 2D histogram trace.", 
+                "streamable": true
             }, 
             "type": {
                 "key_type": "plot_info", 

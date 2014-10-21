@@ -30,6 +30,7 @@ from plotly.graph_objs import graph_objs_tools
 from plotly.graph_objs.graph_objs_tools import (
     INFO, OBJ_MAP, NAME_TO_KEY, KEY_TO_NAME
 )
+from plotly.grid_objs.grid_objs import Column, Grid
 import copy
 from plotly import exceptions
 import sys
@@ -297,6 +298,12 @@ class PlotlyDict(dict):
 
     def __init__(self, *args, **kwargs):
         class_name = self.__class__.__name__
+
+        for src in ('xsrc', 'ysrc'):
+            if src in kwargs:
+                column = kwargs[src] # TODO: make sure this is really a column
+                kwargs[src] = column.uid # TODO: make sure that uid is set (maybe move logic to grid_objs)
+
         super(PlotlyDict, self).__init__(*args, **kwargs)
         if issubclass(NAME_TO_CLASS[class_name], PlotlyTrace):
             if (class_name != 'PlotlyTrace') and (class_name != 'Trace'):

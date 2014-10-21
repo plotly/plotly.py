@@ -21,7 +21,7 @@ import warnings
 import copy
 import os
 import six
-
+import base64
 import requests
 
 from plotly.plotly import chunked_requests
@@ -630,12 +630,55 @@ class image:
         f.close()
 
 
-def _send_to_plotly(figure, **plot_options):
-    """
-    """
-    fig = tools._replace_newline(figure)  # does not mutate figure
-    data = json.dumps(fig['data'] if 'data' in fig else [],
-                      cls=utils._plotlyJSONEncoder)
+def upload_grid(grid, filename, world_readable=True):
+    username, api_key = _get_session_username_and_key()
+
+    # transmorgify grid object into plotly's format
+    grid_json = {'cols': {}}
+    for column_index, column in enumerate(grid):
+        grid_json['cols'][column.name] = {
+            'data': column.data,
+            'order': column_index
+        }
+
+    payload = {
+        'filename': filename,
+        'data': json.dumps(grid_json),
+        'world_readable': world_readable
+    }
+
+    headers = {
+        'authorization': 'Basic ' + base64.b64encode('{username}:{api_key}'.format(username=username, api_key=api_key)),
+        'plotly_client_platform': 'python {}'.format(version.__version__)
+    }
+
+    r = requests.post('https://api-local.plot.ly/v2/grids', data=payload, headers=headers)
+
+    # TODO: non-json responses, like nginx gateway timeouts of html
+
+    response_content = json.loads(r.content)
+    if 'warnings' in response_content and len(response_content['warnings']):
+        warnings.warn('\n'.join(response_content['warnings']))
+
+    if r.status_code == 200:
+        column_uid_lookup = response_content['file']['cols']
+
+        # mutate the grid columns with the uid's returned from the server
+        for column in grid:
+            for col in column_uid_lookup:
+                if col['name'] == column.name:
+                    column.uid = response_content['file']['fid']+'/'+col['uid']
+                    column_uid_lookup.remove(col)
+
+    else:
+        # TODO: handle the common ones, like bad api key, users not found
+        # account warnings
+        raise Exception(r.content)
+
+    # TODO: variable server
+    return 'https://local.plot.ly/~'+response_content['file']['fid'].replace(':', '/')
+
+def _get_session_username_and_key():
     file_credentials = tools.get_credentials_file()
     if ('username' in _credentials) and ('api_key' in _credentials):
         username, api_key = _credentials['username'], _credentials['api_key']
@@ -644,7 +687,15 @@ def _send_to_plotly(figure, **plot_options):
                                file_credentials['api_key'])
     else:
         raise exceptions.PlotlyLocalCredentialsError()
+    return username, api_key
 
+def _send_to_plotly(figure, **plot_options):
+    """
+    """
+    fig = tools._replace_newline(figure)  # does not mutate figure
+    data = json.dumps(fig['data'] if 'data' in fig else [],
+                      cls=utils._plotlyJSONEncoder)
+    username, api_key = _get_session_username_and_key()
     kwargs = json.dumps(dict(filename=plot_options['filename'],
                              fileopt=plot_options['fileopt'],
                              world_readable=plot_options['world_readable'],
