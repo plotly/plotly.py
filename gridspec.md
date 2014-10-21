@@ -79,7 +79,7 @@ In the near future:
 
 ```python
 >> print Column([1,2,3], 'column 1')
-<Column "asdf": [1, 2, 3]>
+<Column "column 1": [1, 2, 3]>
 ```
 
 ```python
