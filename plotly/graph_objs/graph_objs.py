@@ -314,6 +314,13 @@ class PlotlyDict(dict):
                           "dictionary-like graph_objs.\nIt is not meant to be "
                           "a user interface.")
 
+    def __setitem__(self, key, value):
+        for src in ('xsrc', 'ysrc'):
+            if src == key:
+                value = value.uid # TODO: uid is set, this is really a column
+
+        return super(PlotlyDict, self).__setitem__(key, value)
+
     def update(self, dict1=None, **dict2):
         """Update current dict with dict1 and then dict2.
 
