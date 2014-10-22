@@ -301,11 +301,7 @@ class PlotlyDict(dict):
 
         for src in ('xsrc', 'ysrc'):
             if src in kwargs and isinstance(kwargs[src], Column):
-                column = kwargs[src]
-                if column.id == '':
-                    raise exceptions.InputError(exceptions.
-                                                ColumnHasntBeenUploadedErrorMessage(column.name, src))
-                kwargs[src] = kwargs[src].id
+                kwargs[src] = self._assign_id_to_src(src, kwargs[src])
 
         super(PlotlyDict, self).__init__(*args, **kwargs)
         if issubclass(NAME_TO_CLASS[class_name], PlotlyTrace):
@@ -318,14 +314,21 @@ class PlotlyDict(dict):
                           "a user interface.")
 
     def __setitem__(self, key, value):
-        for src in ('xsrc', 'ysrc'):
-            if src == key and isinstance(value, Column):
-                if value.id == '':
-                    raise exceptions.InputError(exceptions.
-                                                ColumnHasntBeenUploadedErrorMessage(value.name, src))
-                value = value.id
+        if key in ('xsrc', 'ysrc'):
+            value = self._assign_id_to_src(key, value)
 
         return super(PlotlyDict, self).__setitem__(key, value)
+
+    def _assign_id_to_src(self, src_name, src_value):
+        if isinstance(src_value, Column):
+            if src_value.id == '':
+                err = exceptions.COLUMN_NOT_YET_UPLOADED_MESSAGE
+                err.format(column_name=src_value.name, reference=src_name)
+                raise exceptions.InputError(err)
+            else:
+                src_value = src_value.id
+        return src_value
+
 
     def update(self, dict1=None, **dict2):
         """Update current dict with dict1 and then dict2.

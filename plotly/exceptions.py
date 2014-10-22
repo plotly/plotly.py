@@ -27,20 +27,22 @@ class InputError(Exception):
     pass
 
 
-def ColumnHasntBeenUploadedErrorMessage(column_name, src):
-    return ("Hm... it looks like your "
-            "column \"{}\" hasn't been "
-            "uploaded to Plotly yet. "
-            "You need to upload your "
-            "column to Plotly before "
-            "you can assign it to {}.\n"
-            "To upload, try "
-            "`plotly.plotly.grid_objs."
-            "upload` or "
-            "`plotly.plotly.grid_objs."
-            "append_column`.\n"
-            "Questions? chris@plot.ly")\
-        .format(column_name, src)
+## Grid Errors ##
+
+COLUMN_NOT_YET_UPLOADED_MESSAGE = (
+    "Hm... it looks like your column '{column_name}' hasn't "
+    "been uploaded to Plotly yet. You need to upload your "
+    "column to Plotly before you can assign it to '{reference}'.\n"
+    "To upload, try `plotly.plotly.grid_objs.upload` or "
+    "`plotly.plotly.grid_objs.append_column`.\n"
+    "Questions? chris@plot.ly"
+)
+
+NON_UNIQUE_COLUMN_MESSAGE = (
+    "Yikes, plotly grids currently "
+    "can't have duplicate column names. Rename "
+    "the column \"{}\" and try again."
+)
 
 
 ## Graph Objects Errors ##

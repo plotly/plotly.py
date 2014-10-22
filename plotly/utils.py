@@ -174,5 +174,12 @@ def template_doc(**names):
         return func
     return _decorator
 
-# http://codegolf.stackexchange.com/questions/4707/outputting-ordinal-numbers-1st-2nd-3rd#answer-4712
-ordinal = lambda n: "%d%s" % (n, "tsnrhtdd"[(n/10%10!=1)*(n%10<4)*n%10::4])
+
+def get_first_duplicate(items):
+    seen = set()
+    for item in items:
+        if item not in seen:
+            seen.add(item)
+        else:
+            return item
+    return None
