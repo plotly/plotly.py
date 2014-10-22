@@ -22,7 +22,7 @@ class Column():
         return '<Column "{name}": {data}{ellipses}>'.format(
             name=self.name,
             data=jdata[0:10],
-            ellipses='...]' if len(jdata) > 10 else '')
+            ellipses='...]' if len(jdata) > 20 else '')
 
 
 class Grid(MutableSequence):
@@ -32,7 +32,6 @@ class Grid(MutableSequence):
             # TODO: Descriptive exception
             raise Exception('duplicate!')
         self._columns = list(iterable_of_columns)
-
         self.id = ''
 
     def __repr__(self):

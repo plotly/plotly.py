@@ -300,9 +300,12 @@ class PlotlyDict(dict):
         class_name = self.__class__.__name__
 
         for src in ('xsrc', 'ysrc'):
-            if src in kwargs:
-                column = kwargs[src] # TODO: make sure this is really a column
-                kwargs[src] = column.uid # TODO: make sure that uid is set (maybe move logic to grid_objs)
+            if src in kwargs and isinstance(kwargs[src], Column):
+                column = kwargs[src]
+                if column.id == '':
+                    raise exceptions.InputError(exceptions.
+                                                ColumnHasntBeenUploadedErrorMessage(column.name, src))
+                kwargs[src] = kwargs[src].id
 
         super(PlotlyDict, self).__init__(*args, **kwargs)
         if issubclass(NAME_TO_CLASS[class_name], PlotlyTrace):
@@ -316,8 +319,11 @@ class PlotlyDict(dict):
 
     def __setitem__(self, key, value):
         for src in ('xsrc', 'ysrc'):
-            if src == key:
-                value = value.uid # TODO: uid is set, this is really a column
+            if src == key and isinstance(value, Column):
+                if value.id == '':
+                    raise exceptions.InputError(exceptions.
+                                                ColumnHasntBeenUploadedErrorMessage(value.name, src))
+                value = value.id
 
         return super(PlotlyDict, self).__setitem__(key, value)
 

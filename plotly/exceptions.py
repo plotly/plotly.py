@@ -23,6 +23,26 @@ class PlotlyError(Exception):
     pass
 
 
+class InputError(Exception):
+    pass
+
+
+def ColumnHasntBeenUploadedErrorMessage(column_name, src):
+    return ("Hm... it looks like your "
+            "column \"{}\" hasn't been "
+            "uploaded to Plotly yet. "
+            "You need to upload your "
+            "column to Plotly before "
+            "you can assign it to {}.\n"
+            "To upload, try "
+            "`plotly.plotly.grid_objs."
+            "upload` or "
+            "`plotly.plotly.grid_objs."
+            "append_column`.\n"
+            "Questions? chris@plot.ly")\
+        .format(column_name, src)
+
+
 ## Graph Objects Errors ##
 
 class PlotlyGraphObjectError(PlotlyError):

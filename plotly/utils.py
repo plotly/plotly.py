@@ -11,7 +11,7 @@ import os.path
 import sys
 import threading
 
-### incase people are using threadig, we lock file reads
+### incase people are using threading, we lock file reads
 lock = threading.Lock()
 
 
@@ -173,3 +173,6 @@ def template_doc(**names):
                 func.__doc__ = func.__doc__.format(**names)
         return func
     return _decorator
+
+# http://codegolf.stackexchange.com/questions/4707/outputting-ordinal-numbers-1st-2nd-3rd#answer-4712
+ordinal = lambda n: "%d%s" % (n, "tsnrhtdd"[(n/10%10!=1)*(n%10<4)*n%10::4])

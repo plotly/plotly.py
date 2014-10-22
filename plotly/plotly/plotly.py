@@ -23,6 +23,7 @@ import os
 import six
 import base64
 import requests
+from urlparse import urlparse
 
 from plotly.plotly import chunked_requests
 from plotly.grid_objs.grid_objs import Grid, Column
@@ -190,11 +191,8 @@ def plot(figure_or_data, validate=True, **plot_options):
     res = _send_to_plotly(figure, **plot_options)
     if res['error'] == '':
         if plot_options['auto_open']:
-            try:
-                from webbrowser import open as wbopen
-                wbopen(res['url'])
-            except:  # TODO: what should we except here? this is dangerous
-                pass
+            _open_url(res['url'])
+
         return res['url']
     else:
         raise exceptions.PlotlyAccountError(res['error'])
@@ -644,11 +642,39 @@ class grid_ops:
         }
 
     @classmethod
-    def _parse_grid_id_args(cls, grid, grid_id, grid_url):
-        return grid.id or grid_id
+    def _parse_grid_id_args(cls, grid, grid_url, grid_id):
+        """ Return the grid_id from the non-None input argument.
+        Raise an error if more than one argument was supplied.
+        """
+
+        id_from_grid = grid.id if grid is not None else None
+
+        grid_id_options = [id_from_grid, grid_url, grid_id]
+        arg_names = ('grid', 'grid_url', 'grid_id')
+        indices = [i for i, v in enumerate(grid_id_options) if v != None]
+        if len(indices) > 1:
+            raise exceptions.InputError("Only one of `grid`, `grid_id`, "
+                "or `grid_url` is required. You supplied {}. Try again with just supplying {}.".format(
+                    'both {} and {}'.format(arg_names[indices[0]], arg_names[indices[1]]) if len(indices) == 2 else 'all three.',
+                    '{}="{}"'.format(arg_names[indices[0]], grid_id_options[indices[0]])))
+
+        if len(indices) == 0:
+            raise exceptions.InputError("One of the three keyword arguments `grid`, `grid_id`, or `grid_url` "
+                "is required.\n"
+                "- `grid` is a plotly.graph_objs.Grid object that has been uploaded to Plotly.\n"
+                "- `grid_url` is the url where the grid can be accessed on Plotly, e.g. \"https://plot.ly/~chris/3043\""
+                "- `grid_id` is a unique identifier assigned by Plotly to the grid object, e.g. \"chris:3043\".\n")
+
+        if grid_url:
+            path = urlparse(grid_url).path
+            file_owner, file_id = path.replace("/~", "").split('/')[0:2]
+            return '{}:{}'.format(file_owner, file_id)
+        else:
+            return id_from_grid or grid_id
 
     @classmethod
     def _api_url(cls):
+        # TODO: Variable URL
         return 'https://api-local.plot.ly/v2/grids'
 
     @classmethod
@@ -660,7 +686,25 @@ class grid_ops:
                     response_columns.remove(resp_col)
 
     @classmethod
-    def upload(cls, grid, filename, world_readable=True):
+    def _response_handler(cls, response):
+
+        response.raise_for_status()
+        # TODO: Maybe use some custom messages in the future? With a lookup table like the following?
+        # error_messages = {
+        #     401: 'Unauthorized - are you sure that your API key is correct? Visit https://plot.ly/settings'
+        # }
+
+        if 'content-type' in response.headers and 'json' in response.headers['content-type']:
+            if len(response.content):
+                response_dict = json.loads(response.content)
+
+                if 'warnings' in response_dict and len(response_dict['warnings']):
+                    warnings.warn('\n'.join(response_dict['warnings']))
+
+                return response_dict
+
+    @classmethod
+    def upload(cls, grid, filename, world_readable=True, auto_open=True):
         """ Upload a grid to your Plotly account with the specified filename.
 
         """
@@ -679,65 +723,85 @@ class grid_ops:
             'world_readable': world_readable
         }
 
-        # TODO: variable server
-        r = requests.post(cls._api_url(), data=payload, headers=cls._headers())
-        r.raise_for_status()
-        # TODO: non-json responses, like nginx gateway timeouts of html
+        res = cls._response_handler(requests.post(cls._api_url(), data=payload, headers=cls._headers()))
 
-        response_content = json.loads(r.content)
-        if 'warnings' in response_content and len(response_content['warnings']):
-            warnings.warn('\n'.join(response_content['warnings']))
-
-        response_columns = response_content['file']['cols']
-        grid_id = response_content['file']['fid']
+        response_columns = res['file']['cols']
+        grid_id = res['file']['fid']
         # mutate the grid columns with the id's returned from the server
         cls._fill_in_response_column_ids(grid, response_columns, grid_id)
 
         grid.id = grid_id
 
-        # TODO: variable server
-        return 'https://local.plot.ly/~'+response_content['file']['fid'].replace(':', '/')
+        grid_url = tools.get_config_file()['plotly_domain']+'/~'+res['file']['fid'].replace(':', '/')
+
+        if auto_open:
+            _open_url(grid_url)
+
+        return grid_url
 
 
     @classmethod
-    def append_columns(cls, columns, grid=None, grid_id=None, grid_url=None):
-        grid_id = cls._parse_grid_id_args(grid, grid_id, grid_url)
+    def append_columns(cls, columns, grid=None, grid_url=None, grid_id=None):
+        grid_id = cls._parse_grid_id_args(grid, grid_url, grid_id)
+
+        if grid:
+            # Verify unique column names
+            new_column_names = [c.name for c in columns]
+            existing_column_names = [c.name for c in grid]
+            for new_column_name in new_column_names:
+                if new_column_name in existing_column_names:
+                    raise exceptions.InputError("Yikes, plotly grids currently "
+                        "can't have duplicate column names. Rename "
+                        "the column \"{}\" and try again."
+                        .format(new_column_name))
+
+        # Verify that columns haven't already been uploaded to Plotly (and already have an id)
+        for i, column in enumerate(columns):
+            if column.id != '':
+                raise exceptions.InputError("Hm... Looks like your {} column (\"{}\")"
+                    "has already been uploaded to Plotly. If you still want to upload "
+                    "or append this data, try copying the data into a new "
+                    "plotly.grid_objs.Column object and uploading or appending that. \n"
+                    "Questions? chris@plot.ly".format(utils.ordinal(i+1), column.name))
 
         payload = {
             'cols': json.dumps(columns, cls=ColumnJSONEncoder)
         }
 
-        # TODO variable server
-        r = requests.post(cls._api_url()+'/{grid_id}/col'.format(grid_id=grid_id),
+        res = cls._response_handler(requests.post(cls._api_url()+'/{grid_id}/col'.format(grid_id=grid_id),
             data=payload,
-            headers=cls._headers())
+            headers=cls._headers()))
 
-        # TODO non-json responses
-        # TODO: parse status code
-        # TODO: parse warnings
-        r.raise_for_status()
-
-        response_content = json.loads(r.content)
-
-        cls._fill_in_response_column_ids(columns, response_content['cols'], grid_id)
+        cls._fill_in_response_column_ids(columns, res['cols'], grid_id)
 
         if grid:
             grid.extend(columns)
 
 
     @classmethod
-    def append_rows(cls, rows, grid=None, grid_id=None, grid_url=None):
-        grid_id = cls._parse_grid_id_args(grid, grid_id, grid_url)
+    def append_rows(cls, rows, grid=None, grid_url=None, grid_id=None):
+        grid_id = cls._parse_grid_id_args(grid, grid_url, grid_id)
+
+        if grid:
+            n_columns = len([column for column in grid])
+            for row_i, row in enumerate(rows):
+                if len(row) != n_columns:
+                    raise exceptions.InputError("The number of entries in "
+                        "each row needs to equal the number of columns in "
+                        "the grid. Your {} row has {} {} but your "
+                        "grid has {} {}. "
+                        .format(utils.ordinal(row_i+1), len(row),
+                                'entry' if len(row) == 1 else 'entries',
+                                n_columns,
+                                'column' if n_columns == 1 else 'columns'))
 
         payload = {
             'rows': json.dumps(rows)
         }
 
-        r = requests.post(cls._api_url()+'/{grid_id}/row'.format(grid_id=grid_id),
+        cls._response_handler(requests.post(cls._api_url()+'/{grid_id}/row'.format(grid_id=grid_id),
             data=payload,
-            headers=cls._headers())
-
-        r.raise_for_status()
+            headers=cls._headers()))
 
         if grid:
             longest_column_length = max([len(col.data) for col in grid])
@@ -751,10 +815,9 @@ class grid_ops:
 
 
     @classmethod
-    def delete(cls, grid=None, grid_id=None, grid_url=None):
-        grid_id = cls._parse_grid_id_args(grid, grid_id, grid_url)
-        r = requests.delete(cls._api_url()+'/'+grid_id, headers=cls._headers())
-        r.raise_for_status()
+    def delete(cls, grid=None, grid_url=None, grid_id=None):
+        grid_id = cls._parse_grid_id_args(grid, grid_url, grid_id)
+        cls._response_handler(requests.delete(cls._api_url()+'/'+grid_id, headers=cls._headers()))
 
 
 def _get_session_username_and_key():
@@ -823,3 +886,10 @@ def _validation_key_logic():
     if username is None or api_key is None:
         raise exceptions.PlotlyLocalCredentialsError()
     return (username, api_key)
+
+def _open_url(url):
+    try:
+        from webbrowser import open as wbopen
+        wbopen(url)
+    except:  # TODO: what should we except here? this is dangerous
+        pass
