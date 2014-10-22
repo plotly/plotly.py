@@ -329,7 +329,6 @@ class PlotlyDict(dict):
                 src_value = src_value.id
         return src_value
 
-
     def update(self, dict1=None, **dict2):
         """Update current dict with dict1 and then dict2.
 
