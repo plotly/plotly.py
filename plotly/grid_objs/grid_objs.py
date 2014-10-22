@@ -15,7 +15,7 @@ class Column():
         # TODO: name type checking
         self.name = name
 
-        self.uid = ''
+        self.id = ''
 
     def __repr__(self):
         jdata = json.dumps(self.data)
@@ -32,6 +32,8 @@ class Grid(MutableSequence):
             # TODO: Descriptive exception
             raise Exception('duplicate!')
         self._columns = list(iterable_of_columns)
+
+        self.id = ''
 
     def __repr__(self):
         return self._columns.__repr__()

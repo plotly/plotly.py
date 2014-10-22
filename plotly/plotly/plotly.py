@@ -25,6 +25,8 @@ import base64
 import requests
 
 from plotly.plotly import chunked_requests
+from plotly.grid_objs.grid_objs import Grid, Column
+from plotly.grid_objs.grid_objs_tools import ColumnJSONEncoder
 from plotly import utils
 from plotly import tools
 from plotly import exceptions
@@ -629,54 +631,131 @@ class image:
         f.write(img)
         f.close()
 
+class grid_ops:
+    """ Interface to Plotly's Grid API.
+    """
 
-def upload_grid(grid, filename, world_readable=True):
-    username, api_key = _get_session_username_and_key()
-
-    # transmorgify grid object into plotly's format
-    grid_json = {'cols': {}}
-    for column_index, column in enumerate(grid):
-        grid_json['cols'][column.name] = {
-            'data': column.data,
-            'order': column_index
+    @classmethod
+    def _headers(cls):
+        username, api_key = _get_session_username_and_key()
+        return {
+            'authorization': 'Basic ' + base64.b64encode('{username}:{api_key}'.format(username=username, api_key=api_key)),
+            'plotly_client_platform': 'python {}'.format(version.__version__)
         }
 
-    payload = {
-        'filename': filename,
-        'data': json.dumps(grid_json),
-        'world_readable': world_readable
-    }
+    @classmethod
+    def _parse_grid_id_args(cls, grid, grid_id, grid_url):
+        return grid.id or grid_id
 
-    headers = {
-        'authorization': 'Basic ' + base64.b64encode('{username}:{api_key}'.format(username=username, api_key=api_key)),
-        'plotly_client_platform': 'python {}'.format(version.__version__)
-    }
+    @classmethod
+    def _api_url(cls):
+        return 'https://api-local.plot.ly/v2/grids'
 
-    r = requests.post('https://api-local.plot.ly/v2/grids', data=payload, headers=headers)
+    @classmethod
+    def _fill_in_response_column_ids(cls, request_columns, response_columns, grid_id):
+        for req_col in request_columns:
+            for resp_col in response_columns:
+                if resp_col['name'] == req_col.name:
+                    req_col.id = grid_id+'/'+resp_col['uid']
+                    response_columns.remove(resp_col)
 
-    # TODO: non-json responses, like nginx gateway timeouts of html
+    @classmethod
+    def upload(cls, grid, filename, world_readable=True):
+        """ Upload a grid to your Plotly account with the specified filename.
 
-    response_content = json.loads(r.content)
-    if 'warnings' in response_content and len(response_content['warnings']):
-        warnings.warn('\n'.join(response_content['warnings']))
+        """
 
-    if r.status_code == 200:
-        column_uid_lookup = response_content['file']['cols']
+        # transmorgify grid object into plotly's format
+        grid_json = {'cols': {}}
+        for column_index, column in enumerate(grid):
+            grid_json['cols'][column.name] = {
+                'data': column.data,
+                'order': column_index
+            }
 
-        # mutate the grid columns with the uid's returned from the server
-        for column in grid:
-            for col in column_uid_lookup:
-                if col['name'] == column.name:
-                    column.uid = response_content['file']['fid']+'/'+col['uid']
-                    column_uid_lookup.remove(col)
+        payload = {
+            'filename': filename,
+            'data': json.dumps(grid_json),
+            'world_readable': world_readable
+        }
 
-    else:
-        # TODO: handle the common ones, like bad api key, users not found
-        # account warnings
-        raise Exception(r.content)
+        # TODO: variable server
+        r = requests.post(cls._api_url(), data=payload, headers=cls._headers())
+        r.raise_for_status()
+        # TODO: non-json responses, like nginx gateway timeouts of html
 
-    # TODO: variable server
-    return 'https://local.plot.ly/~'+response_content['file']['fid'].replace(':', '/')
+        response_content = json.loads(r.content)
+        if 'warnings' in response_content and len(response_content['warnings']):
+            warnings.warn('\n'.join(response_content['warnings']))
+
+        response_columns = response_content['file']['cols']
+        grid_id = response_content['file']['fid']
+        # mutate the grid columns with the id's returned from the server
+        cls._fill_in_response_column_ids(grid, response_columns, grid_id)
+
+        grid.id = grid_id
+
+        # TODO: variable server
+        return 'https://local.plot.ly/~'+response_content['file']['fid'].replace(':', '/')
+
+
+    @classmethod
+    def append_columns(cls, columns, grid=None, grid_id=None, grid_url=None):
+        grid_id = cls._parse_grid_id_args(grid, grid_id, grid_url)
+
+        payload = {
+            'cols': json.dumps(columns, cls=ColumnJSONEncoder)
+        }
+
+        # TODO variable server
+        r = requests.post(cls._api_url()+'/{grid_id}/col'.format(grid_id=grid_id),
+            data=payload,
+            headers=cls._headers())
+
+        # TODO non-json responses
+        # TODO: parse status code
+        # TODO: parse warnings
+        r.raise_for_status()
+
+        response_content = json.loads(r.content)
+
+        cls._fill_in_response_column_ids(columns, response_content['cols'], grid_id)
+
+        if grid:
+            grid.extend(columns)
+
+
+    @classmethod
+    def append_rows(cls, rows, grid=None, grid_id=None, grid_url=None):
+        grid_id = cls._parse_grid_id_args(grid, grid_id, grid_url)
+
+        payload = {
+            'rows': json.dumps(rows)
+        }
+
+        r = requests.post(cls._api_url()+'/{grid_id}/row'.format(grid_id=grid_id),
+            data=payload,
+            headers=cls._headers())
+
+        r.raise_for_status()
+
+        if grid:
+            longest_column_length = max([len(col.data) for col in grid])
+
+            for column in grid:
+                column.data.extend(['' for _ in range(longest_column_length-len(column.data))])
+
+            column_extensions = zip(*rows)
+            for local_column, column_extension in zip(grid, column_extensions):
+                local_column.data.extend(column_extension)
+
+
+    @classmethod
+    def delete(cls, grid=None, grid_id=None, grid_url=None):
+        grid_id = cls._parse_grid_id_args(grid, grid_id, grid_url)
+        r = requests.delete(cls._api_url()+'/'+grid_id, headers=cls._headers())
+        r.raise_for_status()
+
 
 def _get_session_username_and_key():
     file_credentials = tools.get_credentials_file()
