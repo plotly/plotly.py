@@ -30,3 +30,9 @@ def test_to_string():
     fig_string = fig.to_string(pretty=False)
     comp_string = 'Figure(\n    data=Data([\n        Scatter(\n            x=[1, 2, 3, 4],\n            y=[10, 15, 13, 17]\n        ),\n        Scatter(\n            x=[1, 2, 3, 4],\n            y=[16, 5, 11, 9]\n        )\n    ]),\n    layout=Layout(\n        autosize=False,\n        width=500,\n        height=500,\n        margin=Margin(\n            l=65,\n            r=50,\n            b=65,\n            t=65\n        )\n    )\n)'
     assert fig_string == comp_string
+
+
+def test_nested_list():
+    z = [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
+          13, 14, 15, 16, 17, 18, 19, 20, 21]]
+    print Contour(z=z).to_string()
