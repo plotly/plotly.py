@@ -418,7 +418,7 @@ def prep_ticks(ax, index, ax_type, props):
         return dict()
     # get tick label formatting information
     formatter = axis.get_major_formatter().__class__.__name__
-    if ax_type == 'x' and formatter == 'DateFormatter':
+    if ax_type == 'x' and 'DateFormatter' in formatter:
         axis_dict['type'] = 'date'
         try:
             axis_dict['tick0'] = mpl_dates_to_datestrings(axis_dict['tick0'])
