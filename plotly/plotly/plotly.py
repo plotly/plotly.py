@@ -706,12 +706,13 @@ class grid_ops:
         # With a lookup table like the following?
         # error_messages = {
         #     401: 'Unauthorized - are you sure that your '
-        #          'API key is correct? Visit https://plot.ly/settings'
+        #          'API key is correct? Visit https://plot.ly/settings',
+        #     503: 'Service unavailable. Having trouble connection to plotly.'
         # }
 
         if ('content-type' in response.headers and
-            'json' in response.headers['content-type'] and
-            len(response.content) > 0):
+                'json' in response.headers['content-type'] and
+                len(response.content) > 0):
 
             response_dict = json.loads(response.content)
 

@@ -18,8 +18,8 @@ import plotly.tools as tls
 from plotly.grid_objs import Column, Grid
 from plotly.exceptions import InputError
 
-## Nominal usage
-def test_grid_upload():
+
+def get_uploaded_grid():
     tls.set_config_file('https://local.plot.ly')
     py.sign_in('GridTest', 'fp4rldzhv0')
 
@@ -32,23 +32,26 @@ def test_grid_upload():
     py.grid_ops.upload(g, unique_filename, auto_open=False)
     return g
 
+## Nominal usage
+def test_grid_upload():
+    get_uploaded_grid()
 
 def test_column_append():
-    g = test_grid_upload()
+    g = get_uploaded_grid()
     new_col = Column('new col', [1, 5, 3])
 
     py.grid_ops.append_columns([new_col], grid=g)
 
 
 def test_row_append():
-    g = test_grid_upload()
+    g = get_uploaded_grid()
     new_rows = [[1, 2], [10, 20]]
 
     py.grid_ops.append_rows(new_rows, grid=g)
 
 
 def test_plot_from_grid():
-    g = test_grid_upload()
+    g = get_uploaded_grid()
     url = py.plot([Scatter(xsrc=g[0], ysrc=g[1])],
                   auto_open=False, filename='plot from grid')
     return url, g
@@ -120,7 +123,7 @@ def test_row_append_of_non_uploaded_grid():
 ## Input Errors
 @raises(InputError)
 def test_unequal_length_rows():
-    g = test_grid_upload()
+    g = get_uploaded_grid()
     rows = [[1, 2], ['to', 'many', 'cells']]
     py.grid_ops.append_rows(rows, grid=g)
 

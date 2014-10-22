@@ -20,14 +20,14 @@ class Column():
         self.id = ''
 
     def __str__(self):
+        max_chars = 10
         jdata = json.dumps(self.data)
-        return ('<name="{name}", '
-                'data={data}{ellipses}, '
-                'id={id}>').format(
-            name=self.name,
-            data=jdata[0:10],
-            ellipses='...]' if len(jdata) > 10 else '',
-            id=self.id)
+        if len(jdata) > max_chars:
+            data_string = jdata[:max_chars] + "...]"
+        else:
+            data_string = jdata
+        string = '<name="{name}", data={data_string}, id={id}>'
+        return string.format(name=self.name, data=data_string, id=self.id)
 
     def __repr__(self):
         return 'Coumn("{name}", {data})'.format(name=self.name, data=self.data)
@@ -74,6 +74,9 @@ class Grid(MutableSequence):
             raise exceptions.InputError(err)
 
     def get_column(self, column_name):
+        """ Return the first column with name `column_name`.
+        If no column with `column_name` exists in this grid, return None.
+        """
         for column in self._columns:
             if column.name == column_name:
                 return column
