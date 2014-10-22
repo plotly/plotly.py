@@ -9,7 +9,7 @@ column_2 = Column(['a', 'b', datetime.datetime.now()], 'column 2')
 
 grid = Grid(column_1, column_2)
 
-unique_url = py.grid.upload(grid, filename, world_readable=True)
+unique_url = py.grid_ops.upload(grid, filename, world_readable=True)
 ```
 
 ### Updating grids
@@ -17,22 +17,21 @@ unique_url = py.grid.upload(grid, filename, world_readable=True)
 Grids are identified with either `grid`, `grid_id`, `grid_url`, or `filename`
 `filename` will be unsupported in this version
 ```python
-from plotly.grid_objs import Row
 
-row = Row({'column 1': 4, 'column 2': 5})
+rows = [[1, 'a'], [2, 'b']]
 
 grid = Grid(c1, c2)
 
-py.grid.upload(grid, 'my file')
+py.grid_ops.upload(grid, 'my file')
 
 # We recommend this call signature, since `row` gets appended to the grid
-py.grid.append_row(row, grid=grid)
+py.grid_ops.append_rows(rows, grid=grid)
 
 # But, these all do the same thing
-py.grid.append_row(row, grid_id=grid.id)
-py.grid.append_row(row, grid_id="chris:3")
-py.grid.append_row(row, grid_url="https://plot.ly/~chris/3") #shortcut
-py.grid.append_row(row, filename='my file') # currently unsupported.
+py.grid_ops.append_rows(rows, grid_id=grid.id)
+py.grid_ops.append_rows(rows, grid_id="chris:3")
+py.grid_ops.append_rows(rows, grid_url="https://plot.ly/~chris/3") #shortcut
+py.grid_ops.append_rows(rows, filename='my file') # currently unsupported.
                                             # will do a get request behind
                                             # the scenes to get the grid_id
 ```
@@ -44,15 +43,18 @@ from plotly.grid_objs import Column
 new_col = Column([1,2,3], 'new col name')
 
 # these are equivalent
-py.grid.append_column(new_col, grid_id='chris:3')
-py.grid.append_column(new_col, grid_url='https://plot.ly/~chris/3')
-py.grid.append_column(new_col, filename='my file')
+py.grid_ops.append_columns([new_col], grid_id='chris:3')
+py.grid_ops.append_columns([new_col], grid_url='https://plot.ly/~chris/3')
+py.grid_ops.append_columns([new_col], filename='my file')
 
 # this, too:
-grid = Grid(Column([1,2,3], 'col 1'))
-py.grid.upload(grid, 'my grid')
+grid = Grid(Column([1,2,3], 'first column name'))
+py.grid_ops.upload(grid, 'my file')
 
-py.grid.append_column(new_col, grid=grid) # also implicitly adds new_col to grid
+py.grid_ops.append_columns([new_col], grid=grid) # also implicitly adds new_col to grid
+
+grid[0].name # 'first column name'
+grid[1].name # 'new col name'
 ```
 
 
@@ -60,10 +62,10 @@ py.grid.append_column(new_col, grid=grid) # also implicitly adds new_col to grid
 
 Overwriting currently isn't possible. For now,
 ```python
->> py.grid.upload(grid, 'my grid')
+>> py.grid_ops.upload(grid, 'my grid')
 "PlotlyFileException: Yikes, a file already exists with this filename."
 "You can delete that file with:"
-"> py.grid.delete('my grid')"
+"> py.grid_ops.delete('my grid')"
 "Warning: If any graphs were made from this grid, the data in those graphs"
 "will also be lost. If you make a new grid after you delete with the same filename, "
 "the new grid's URL will also be different."
@@ -77,19 +79,19 @@ In the near future:
 # Behind the scenes, this:
 # 1 - Makes a `GET` request to retrieve a {column_name: column_id} hash
 # 2 - Makes a `PUT` request to update the data of the columns
->> py.grid.upload('my grid') # overwrite defaults to True
+>> py.grid_ops.upload('my grid') # overwrite defaults to True
 
 # Or, recieve an exception with:
->> py.grid.upload(grid, 'my grid', overwrite=False)
+>> py.grid_ops.upload(grid, 'my grid', overwrite=False)
 "PLotlyFileException: Yikes! ..."
 ```
 
 Deleting:
 ```
-py.grid.delete(grid_id_OR_filename_OR_grid_url) # uh..
+py.grid_ops.delete(grid_id_OR_filename_OR_grid_url) # uh..
 
 # or
-py.grid.delete(grid_id=None, filename=None, grid_url=None) # and just throw good errors if none or more than 1 were specified?
+py.grid_ops.delete(grid_id=None, filename=None, grid_url=None) # and just throw good errors if none or more than 1 were specified?
 
 ```
 
@@ -139,8 +141,7 @@ py.grid.delete(grid_id=None, filename=None, grid_url=None) # and just throw good
 "PlotlyFileException: you must upload a grid before you can reference it in plots"
 >>  Scatter(x=grid[0], y=grid[1])
 "PlotlyTypeException: Yikes, column objects aren't currently supported here."
-"I made the same mistake. Not sure if we should support this yet."
-"For now, x must be an array of strings, numbers, or datetimes."
+"x must be an array of strings, numbers, or datetimes."
 >> print Scatter(xsrc=grid[0], yscr=grid[1])
 {"xsrc": "chris/3:3dfbk", "ysrc": "chris/3:dk3c"}
 
@@ -152,7 +153,7 @@ py.grid.delete(grid_id=None, filename=None, grid_url=None) # and just throw good
 >> grid = Grid(column_1, column_2)
 >> trace = Scatter(x=grid[0], y=grid[1])
 "PlotlyGridException: Grid must be uploaded to Plotly before figures can be created."
-"Call `py.grid.upload(grid)`"
+"Call `py.grid_ops.upload(grid)`"
 ```
 
 ```python
@@ -163,7 +164,7 @@ py.grid.delete(grid_id=None, filename=None, grid_url=None) # and just throw good
 ```
 
 ```python
->> py.grid.append_row(Row({'column 1': 1}), grid=grid)
+>> py.grid_ops.append_row(Row({'column 1': 1}), grid=grid)
 "PlotlyGridException: Missing column entries, partial row update is not supported."
 "Supply data for 'column 2' and try again."
 ```
