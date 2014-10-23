@@ -23,6 +23,12 @@ class PlotlyError(Exception):
     pass
 
 
+## Would Cause Server Errors ##
+
+class PlotlyEmptyDataError(PlotlyError):
+    pass
+
+
 ## Graph Objects Errors ##
 
 class PlotlyGraphObjectError(PlotlyError):
