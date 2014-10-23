@@ -163,6 +163,20 @@
                 "required": false, 
                 "description": "Toggles whether or not this object will be visible on the rendered figure."
             }, 
+            "xsrc": {
+                "key_type": "data", 
+                "val_types": "a string equal to the unique identifier of a plotly grid column", 
+                "required": " when 'y','r' and 't' are unset", 
+                "description": "Sets the x coordinates of the points of this scatter trace. If 'x' is linked to a list or 1d numpy array of strings, then the x coordinates are integers, 0, 1, 2, 3, ..., labeled on the x-axis by the list or 1d numpy array of strings linked to 'x'.", 
+                "streamable": true
+            }, 
+            "ysrc": {
+                "key_type": "data", 
+                "val_types": "a string equal to the unique identifier of a plotly grid column", 
+                "required": " when 'x','r' and 't' are unset", 
+                "description": "Sets the y coordinates of the points of this scatter trace. If 'y' is linked to a list or 1d numpy array of strings, then the y coordinates are integers, 0, 1, 2, 3, ..., labeled on the y-axis by the list or 1d numpy array of strings linked to 'y'.", 
+                "streamable": true
+            }, 
             "type": {
                 "key_type": "plot_info", 
                 "val_types": "'scatter'", 
@@ -272,6 +286,20 @@
                 "val_types": "a boolean: True | False", 
                 "required": false, 
                 "description": "Toggles whether or not this object will be visible on the rendered figure."
+            }, 
+            "xsrc": {
+                "key_type": "data", 
+                "val_types": "a string equal to the unique identifier of a plotly grid column", 
+                "required": " when 'y' is unset", 
+                "description": "Sets the x coordinates of the bars. If 'x' is linked to a list or 1d numpy array of strings, then the x coordinates are integers, 0, 1, 2, 3, ..., labeled on the x-axis by the list or 1d numpy array of strings linked to 'x'. If 'y' is not set, the bars are plotted horizontally, with their length determined by the list or 1d numpy array linked to 'x'.", 
+                "streamable": true
+            }, 
+            "ysrc": {
+                "key_type": "data", 
+                "val_types": "a string equal to the unique identifier of a plotly grid column", 
+                "required": " when 'x' is unset", 
+                "description": "Sets the y coordinates of the bars. If 'y' is linked to a list or 1d numpy array of strings, then the y coordinates are integers, 0, 1, 2, 3, ..., labeled on the y-axis by the list or 1d numpy array of strings linked to 'y'. If 'x' is not set, the bars are plotted vertically, with their length determined by the list or 1d numpy array linked to 'y'.", 
+                "streamable": true
             }, 
             "r": {
                 "key_type": "data", 
@@ -434,6 +462,20 @@
                 "required": false, 
                 "description": "Toggles whether or not this object will be visible on the rendered figure."
             }, 
+            "xsrc": {
+                "key_type": "data", 
+                "val_types": "a string equal to the unique identifier of a plotly grid column", 
+                "required": " when 'y' is unset", 
+                "description": "Sets the data sample to be binned (done by Plotly) on the x-axis and plotted as vertical bars.", 
+                "streamable": true
+            }, 
+            "ysrc": {
+                "key_type": "data", 
+                "val_types": "a string equal to the unique identifier of a plotly grid column", 
+                "required": " when 'x' is unset", 
+                "description": "Sets the data sample to be binned (done by Plotly) on the y-axis and plotted as horizontal bars.", 
+                "streamable": true
+            }, 
             "type": {
                 "key_type": "plot_info", 
                 "val_types": "'histogram'", 
@@ -573,6 +615,20 @@
                 "val_types": "a boolean: True | False", 
                 "required": false, 
                 "description": "Toggles whether or not this object will be visible on the rendered figure."
+            }, 
+            "xsrc": {
+                "key_type": "data", 
+                "val_types": "a string equal to the unique identifier of a plotly grid column", 
+                "required": false, 
+                "description": "Usually, you do not need to set this value as plotly will handle box locations for you. However this allows you to have fine control over the location data for the box. Unlike making a bar, a box plot is made of many y values. Therefore, to give location data to the values you place in 'y', the length of 'x' must equal the length of 'y'. when making multiple box plots, you can concatenate the data sets for each box into a single 'y' array. then, the entries in 'x' define which box plot each entry in 'y' belongs to. When making a single box plot, you must set each entry in 'x' to the same value, see 'x0' for a more practical way to handle this case. If you don't include 'x', the box will simply be assigned a location.", 
+                "streamable": true
+            }, 
+            "ysrc": {
+                "key_type": "data", 
+                "val_types": "a string equal to the unique identifier of a plotly grid column", 
+                "required": true, 
+                "description": "This array is used to define an individual box plot, or, a concatenation of multiple box plots. Statistics from these numbers define the bounds of the box, the length of the whiskers, etc. For details on defining multiple boxes with locations see 'x'. Each box spans from the first quartile to the third. The second quartile is marked by a line inside the box. By default, the whiskers are correspond to box' edges +/- 1.5 times the interquartile range. See also 'boxpoints' for more info", 
+                "streamable": true
             }, 
             "type": {
                 "key_type": "plot_info", 
@@ -1112,6 +1168,20 @@
                 "required": false, 
                 "description": "Toggles whether or not this object will be visible on the rendered figure."
             }, 
+            "xsrc": {
+                "key_type": "data", 
+                "val_types": "a string equal to the unique identifier of a plotly grid column", 
+                "required": true, 
+                "description": "Sets the data sample to be binned on the x-axis and whose distribution (computed by Plotly) will correspond to the x-coordinates of this 2D histogram trace.", 
+                "streamable": true
+            }, 
+            "ysrc": {
+                "key_type": "data", 
+                "val_types": "a string equal to the unique identifier of a plotly grid column", 
+                "required": true, 
+                "description": "Sets the data sample to be binned on the y-axis and whose distribution (computed by Plotly) will correspond to the y-coordinates of this 2D histogram trace.", 
+                "streamable": true
+            }, 
             "type": {
                 "key_type": "plot_info", 
                 "val_types": "'histogram2d'", 
@@ -1303,6 +1373,20 @@
                 "val_types": "a boolean: True | False", 
                 "required": false, 
                 "description": "Toggles whether or not this object will be visible on the rendered figure."
+            }, 
+            "xsrc": {
+                "key_type": "data", 
+                "val_types": "a string equal to the unique identifier of a plotly grid column", 
+                "required": true, 
+                "description": "Sets the data sample to be binned on the x-axis and whose distribution (computed by Plotly) will correspond to the x-coordinates of this 2D histogram trace.", 
+                "streamable": true
+            }, 
+            "ysrc": {
+                "key_type": "data", 
+                "val_types": "a string equal to the unique identifier of a plotly grid column", 
+                "required": true, 
+                "description": "Sets the data sample to be binned on the y-axis and whose distribution (computed by Plotly) will correspond to the y-coordinates of this 2D histogram trace.", 
+                "streamable": true
             }, 
             "type": {
                 "key_type": "plot_info", 
@@ -3652,13 +3736,13 @@
             }, 
             "bargap": {
                 "key_type": "style", 
-                "val_types": "number: x >= 0", 
+                "val_types": "number: x in [0, 1)", 
                 "required": false, 
                 "description": "For bar and histogram plots only. Sets the gap between bars (or sets of bars) at different locations."
             }, 
             "bargroupgap": {
                 "key_type": "style", 
-                "val_types": "number: x >= 0", 
+                "val_types": "number: x in [0, 1)", 
                 "required": false, 
                 "description": "For bar and histogram plots only. Sets the gap between bars in the same group. That is, when multiple bar objects are plotted and share the same locations, this sets the distance between bars at each location."
             }, 
@@ -3667,6 +3751,18 @@
                 "val_types": "'overlay' | 'group'", 
                 "required": false, 
                 "description": "For box plots only. Sets how groups of box plots appear. If set to 'overlay', a group of boxes will be plotted directly on top of one another at their specified location. If set to 'group', the boxes will be centered around their shared location, but they will not overlap."
+            }, 
+            "boxgap": {
+                "key_type": "style", 
+                "val_types": "number: x in [0, 1)", 
+                "required": false, 
+                "description": "For box plots only. Sets the gap between boxes at different locations (i.e. x-labels). If there are multiple boxes at a single x-label, then this sets the gap between these sets of boxes.For example, if 0, then there is no gap between boxes. If 0.25, then this gap occupies 25% of the available space and the box width (or width of the set of boxes) occupies the remaining 75%."
+            }, 
+            "boxgroupgap": {
+                "key_type": "style", 
+                "val_types": "number: x in [0, 1)", 
+                "required": false, 
+                "description": "For box plots only. Sets the gap between boxes in the same group, where a group is the set of boxes with the same location (i.e. x-label). For example, if 0, then there is no gap between boxes. If 0.25, then this gap occupies 25% of the available space and the box width occupies the remaining 75%."
             }, 
             "radialaxis": {
                 "key_type": "object", 
@@ -3784,13 +3880,13 @@
                 "key_type": "style", 
                 "val_types": "number", 
                 "required": false, 
-                "description": "Sets the 'x' position of this legend.Use in conjunction with 'xref' and 'xanchor' to fine-tune the location of this legend."
+                "description": "Sets the 'x' position of this legend. Use in conjunction with 'xref' and 'xanchor' to fine-tune the location of this legend."
             }, 
             "y": {
                 "key_type": "style", 
                 "val_types": "number", 
                 "required": false, 
-                "description": "Sets the 'y' position of this legend.Use in conjunction with 'yref' and 'yanchor' to fine-tune the location of this legend."
+                "description": "Sets the 'y' position of this legend. Use in conjunction with 'yref' and 'yanchor' to fine-tune the location of this legend."
             }, 
             "traceorder": {
                 "key_type": "style", 
@@ -3880,22 +3976,22 @@
                 "key_type": "plot_info", 
                 "val_types": "number", 
                 "required": false, 
-                "description": "Sets the 'x' position of this annotation.Use in conjunction with 'xref' and 'xanchor' to fine-tune the location of this annotation."
+                "description": "Sets the 'x' position of this annotation. Use in conjunction with 'xref' and 'xanchor' to fine-tune the location of this annotation."
             }, 
             "y": {
                 "key_type": "plot_info", 
                 "val_types": "number", 
                 "required": false, 
-                "description": "Sets the 'y' position of this annotation.Use in conjunction with 'yref' and 'yanchor' to fine-tune the location of this annotation."
+                "description": "Sets the 'y' position of this annotation. Use in conjunction with 'yref' and 'yanchor' to fine-tune the location of this annotation."
             }, 
             "xref": {
-                "key_type": "style", 
+                "key_type": "plot_info", 
                 "val_types": "'paper' | 'x1' | 'x2' | etc", 
                 "required": false, 
                 "description": "Sets the x coordinate system which this object refers to. If you reference an axis, e.g., 'x2', the object will move with pan-and-zoom to stay fixed to this point. If you reference the 'paper', it remains fixed regardless of pan-and-zoom. In other words, if set to 'paper', the 'x' location refers to the distance from the left side of the plotting area in normalized coordinates where 0 is 'left' and 1 is 'right'. If set to refer to an xaxis' , e.g., 'x1', 'x2', 'x3', etc., the 'x' location will refer to the location in terms of this axis."
             }, 
             "yref": {
-                "key_type": "style", 
+                "key_type": "plot_info", 
                 "val_types": "'paper' | 'y1' | 'y2' | etc", 
                 "required": false, 
                 "description": "Sets the y coordinate system which this object refers to. If you reference an axis, e.g., 'y2', the object will move with pan-and-zoom to stay fixed to this point. If you reference the 'paper', it remains fixed regardless of pan-and-zoom. In other words, if set to 'paper', the 'y' location refers to the distance from the left side of the plotting area in normalized coordinates where 0 is 'bottom' and 1 is 'top'. If set to refer to an yaxis' , e.g., 'y1', 'y2', 'y3', etc., the 'y' location will refer to the location in terms of this axis."
