@@ -164,6 +164,12 @@ def plot(figure_or_data, validate=True, **plot_options):
                                          "plot option.\nHere's why you're "
                                          "seeing this error:\n\n{0}"
                                          "".format(err))
+        if not figure['data']:
+            raise exceptions.PlotlyEmptyDataError(
+                "Empty data list found. Make sure that you populated the "
+                "list of data objects you're sending and try again.\n"
+                "Questions? support@plot.ly"
+            )
     for entry in figure['data']:
         for key, val in list(entry.items()):
             try:
