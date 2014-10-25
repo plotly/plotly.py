@@ -634,48 +634,6 @@ class grid_ops:
     """
 
     @classmethod
-    def _parse_grid_id_args(cls, grid, grid_url, grid_id):
-        """Return the grid_id from the non-None input argument.
-        Raise an error if more than one argument was supplied.
-        """
-        if grid is not None:
-            id_from_grid = grid.id
-        else:
-            id_from_grid = None
-        args = [id_from_grid, grid_url, grid_id]
-        arg_names = ('grid', 'grid_url', 'grid_id')
-
-        supplied_arg_names = [arg_name for arg_name, arg
-                              in zip(arg_names, args) if arg is not None]
-
-        if not supplied_arg_names:
-            raise exceptions.InputError(
-                "One of the following keyword arguments is required:\n"
-                "    `grid`, `grid_id`, or `grid_url`\n\n"
-                "grid: a plotly.graph_objs.Grid object that has already\n"
-                "    been uploaded to Plotly.\n\n"
-                "grid_url: the url where the grid can be accessed on\n"
-                "    Plotly, e.g. 'https://plot.ly/~chris/3043'\n\n"
-                "grid_id: a unique identifier assigned by Plotly to the\n"
-                "    grid object, e.g. 'chris:3043'."
-            )
-        elif len(supplied_arg_names) > 1:
-            raise exceptions.InputError(
-                "Only one of `grid`, `grid_id`, or `grid_url` is required. \n"
-                "You supplied '{}'. \n".format(supplied_arg_names)
-            )
-        else:
-            supplied_arg_name = supplied_arg_names.pop()
-            if supplied_arg_name == 'grid_url':
-                path = urlparse(grid_url).path
-                file_owner, file_id = path.replace("/~", "").split('/')[0:2]
-                return '{}:{}'.format(file_owner, file_id)
-            elif supplied_arg_name == 'grid_id':
-                return grid_id
-            else:
-                return grid.id
-
-    @classmethod
     def _fill_in_response_column_ids(cls, request_columns,
                                      response_columns, grid_id):
         for req_col in request_columns:
@@ -733,7 +691,7 @@ class grid_ops:
 
     @classmethod
     def append_columns(cls, columns, grid=None, grid_url=None, grid_id=None):
-        grid_id = cls._parse_grid_id_args(grid, grid_url, grid_id)
+        grid_id = _api_v2.parse_grid_id_args(grid, grid_url, grid_id)
 
         # Verify unique column names
         column_names = [c.name for c in columns]
@@ -760,7 +718,7 @@ class grid_ops:
 
     @classmethod
     def append_rows(cls, rows, grid=None, grid_url=None, grid_id=None):
-        grid_id = cls._parse_grid_id_args(grid, grid_url, grid_id)
+        grid_id = _api_v2.parse_grid_id_args(grid, grid_url, grid_id)
 
         if grid:
             n_columns = len([column for column in grid])
@@ -798,7 +756,7 @@ class grid_ops:
 
     @classmethod
     def delete(cls, grid=None, grid_url=None, grid_id=None):
-        grid_id = cls._parse_grid_id_args(grid, grid_url, grid_id)
+        grid_id = _api_v2.parse_grid_id_args(grid, grid_url, grid_id)
         api_url = _api_v2.api_url()+'/'+grid_id
         res = requests.delete(api_url, headers=_api_v2.headers())
         _api_v2.response_handler(res)
@@ -810,7 +768,7 @@ class meta_ops:
 
     @classmethod
     def upload(cls, meta, grid=None, grid_url=None, grid_id=None):
-        grid_id = grid_ops._parse_grid_id_args(grid, grid_url, grid_id)
+        grid_id = _api_v2.parse_grid_id_args(grid, grid_url, grid_id)
 
         payload = {
             'metadata': json.dumps(meta)
@@ -827,6 +785,49 @@ class _api_v2:
     """ Request and response helper class for communicating with
         Plotly's v2 API
     """
+    @classmethod
+    def parse_grid_id_args(cls, grid, grid_url, grid_id):
+        """Return the grid_id from the non-None input argument.
+        Raise an error if more than one argument was supplied.
+        """
+        if grid is not None:
+            id_from_grid = grid.id
+        else:
+            id_from_grid = None
+        args = [id_from_grid, grid_url, grid_id]
+        arg_names = ('grid', 'grid_url', 'grid_id')
+
+        supplied_arg_names = [arg_name for arg_name, arg
+                              in zip(arg_names, args) if arg is not None]
+
+        if not supplied_arg_names:
+            raise exceptions.InputError(
+                "One of the following keyword arguments is required:\n"
+                "    `grid`, `grid_id`, or `grid_url`\n\n"
+                "grid: a plotly.graph_objs.Grid object that has already\n"
+                "    been uploaded to Plotly.\n\n"
+                "grid_url: the url where the grid can be accessed on\n"
+                "    Plotly, e.g. 'https://plot.ly/~chris/3043'\n\n"
+                "grid_id: a unique identifier assigned by Plotly to the\n"
+                "    grid object, e.g. 'chris:3043'."
+            )
+        elif len(supplied_arg_names) > 1:
+            raise exceptions.InputError(
+                "Only one of `grid`, `grid_id`, or `grid_url` is required. \n"
+                "You supplied '{}'. \n".format(supplied_arg_names)
+            )
+        else:
+            supplied_arg_name = supplied_arg_names.pop()
+            if supplied_arg_name == 'grid_url':
+                path = urlparse(grid_url).path
+                file_owner, file_id = path.replace("/~", "").split('/')[0:2]
+                return '{}:{}'.format(file_owner, file_id)
+            elif supplied_arg_name == 'grid_id':
+                return grid_id
+            else:
+                return grid.id
+
+
     @classmethod
     def response_handler(cls, response):
 
