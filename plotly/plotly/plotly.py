@@ -634,15 +634,6 @@ class grid_ops:
     """
 
     @classmethod
-    def _headers(cls):
-        un, api_key = _get_session_username_and_key()
-        encoded_un_key_pair = base64.b64encode('{}:{}'.format(un, api_key))
-        return {
-            'authorization': 'Basic ' + encoded_un_key_pair,
-            'plotly_client_platform': 'python {}'.format(version.__version__)
-        }
-
-    @classmethod
     def _parse_grid_id_args(cls, grid, grid_url, grid_id):
         """Return the grid_id from the non-None input argument.
         Raise an error if more than one argument was supplied.
@@ -685,11 +676,6 @@ class grid_ops:
                 return grid.id
 
     @classmethod
-    def _api_url(cls):
-        # TODO: Variable URL
-        return 'https://api-local.plot.ly/v2/grids'
-
-    @classmethod
     def _fill_in_response_column_ids(cls, request_columns,
                                      response_columns, grid_id):
         for req_col in request_columns:
@@ -698,37 +684,18 @@ class grid_ops:
                     req_col.id = '{}/{}'.format(grid_id, resp_col['uid'])
                     response_columns.remove(resp_col)
 
-    @classmethod
-    def _response_handler(cls, response):
-
-        response.raise_for_status()
-        # TODO: Maybe use some custom messages in the future?
-        # With a lookup table like the following?
-        # error_messages = {
-        #     401: 'Unauthorized - are you sure that your '
-        #          'API key is correct? Visit https://plot.ly/settings',
-        #     503: 'Service unavailable. Having trouble connection to plotly.'
-        # }
-
-        if ('content-type' in response.headers and
-                'json' in response.headers['content-type'] and
-                len(response.content) > 0):
-
-            response_dict = json.loads(response.content)
-
-            if 'warnings' in response_dict and len(response_dict['warnings']):
-                warnings.warn('\n'.join(response_dict['warnings']))
-
-            return response_dict
 
     @classmethod
-    def upload(cls, grid, filename, world_readable=True, auto_open=True):
+    def upload(cls, grid, filename, world_readable=True, auto_open=True, meta=None):
         """ Upload a grid to your Plotly account with the specified filename.
 
         """
 
         # transmorgify grid object into plotly's format
         grid_json = {'cols': {}}
+        if meta is not None:
+            grid_json['metadata'] = meta
+
         for column_index, column in enumerate(grid):
             grid_json['cols'][column.name] = {
                 'data': column.data,
@@ -741,9 +708,9 @@ class grid_ops:
             'world_readable': world_readable
         }
 
-        upload_url = cls._api_url()
-        req = requests.post(upload_url, data=payload, headers=cls._headers())
-        res = cls._response_handler(req)
+        upload_url = _api_v2.api_url()
+        req = requests.post(upload_url, data=payload, headers=_api_v2.headers())
+        res = _api_v2.response_handler(req)
 
         response_columns = res['file']['cols']
         grid_id = res['file']['fid']
@@ -755,6 +722,9 @@ class grid_ops:
 
         plotly_domain = tools.get_config_file()['plotly_domain']
         grid_url = '{}/~{}'.format(plotly_domain, grid_id.replace(':', '/'))
+
+        if meta is not None:
+            meta_ops.upload(meta, grid=grid)
 
         if auto_open:
             _open_url(grid_url)
@@ -779,9 +749,9 @@ class grid_ops:
             'cols': json.dumps(columns, cls=ColumnJSONEncoder)
         }
 
-        api_url = cls._api_url()+'/{grid_id}/col'.format(grid_id=grid_id)
-        res = requests.post(api_url, data=payload, headers=cls._headers())
-        res = cls._response_handler(res)
+        api_url = _api_v2.api_url()+'/{grid_id}/col'.format(grid_id=grid_id)
+        res = requests.post(api_url, data=payload, headers=_api_v2.headers())
+        res = _api_v2.response_handler(res)
 
         cls._fill_in_response_column_ids(columns, res['cols'], grid_id)
 
@@ -810,9 +780,9 @@ class grid_ops:
             'rows': json.dumps(rows)
         }
 
-        api_url = cls._api_url()+'/{grid_id}/row'.format(grid_id=grid_id)
-        res = requests.post(api_url, data=payload, headers=cls._headers())
-        cls._response_handler(res)
+        api_url = _api_v2.api_url()+'/{grid_id}/row'.format(grid_id=grid_id)
+        res = requests.post(api_url, data=payload, headers=_api_v2.headers())
+        _api_v2.response_handler(res)
 
         if grid:
             longest_column_length = max([len(col.data) for col in grid])
@@ -829,9 +799,70 @@ class grid_ops:
     @classmethod
     def delete(cls, grid=None, grid_url=None, grid_id=None):
         grid_id = cls._parse_grid_id_args(grid, grid_url, grid_id)
-        api_url = cls._api_url()+'/'+grid_id
-        res = requests.delete(api_url, headers=cls._headers())
-        cls._response_handler(res)
+        api_url = _api_v2.api_url()+'/'+grid_id
+        res = requests.delete(api_url, headers=_api_v2.headers())
+        _api_v2.response_handler(res)
+
+
+class meta_ops:
+    """ Interface to Plotly's Metadata API
+    """
+
+    @classmethod
+    def upload(cls, meta, grid=None, grid_url=None, grid_id=None):
+        grid_id = grid_ops._parse_grid_id_args(grid, grid_url, grid_id)
+
+        payload = {
+            'metadata': json.dumps(meta)
+        }
+
+        api_url = _api_v2.api_url()+'/{grid_id}'.format(grid_id=grid_id)
+
+        res = requests.patch(api_url, data=payload, headers=_api_v2.headers())
+
+        _api_v2.response_handler(res)
+
+
+class _api_v2:
+    """ Request and response helper class for communicating with
+        Plotly's v2 API
+    """
+    @classmethod
+    def response_handler(cls, response):
+
+        response.raise_for_status()
+        # TODO: Maybe use some custom messages in the future?
+        # With a lookup table like the following?
+        # error_messages = {
+        #     401: 'Unauthorized - are you sure that your '
+        #          'API key is correct? Visit https://plot.ly/settings',
+        #     503: 'Service unavailable. Having trouble connection to plotly.'
+        # }
+
+        if ('content-type' in response.headers and
+                'json' in response.headers['content-type'] and
+                len(response.content) > 0):
+
+            response_dict = json.loads(response.content)
+
+            if 'warnings' in response_dict and len(response_dict['warnings']):
+                warnings.warn('\n'.join(response_dict['warnings']))
+
+            return response_dict
+
+    @classmethod
+    def api_url(cls):
+        # TODO: Variable URL
+        return 'https://api-local.plot.ly/v2/grids'
+
+    @classmethod
+    def headers(cls):
+        un, api_key = _get_session_username_and_key()
+        encoded_un_key_pair = base64.b64encode('{}:{}'.format(un, api_key))
+        return {
+            'authorization': 'Basic ' + encoded_un_key_pair,
+            'plotly_client_platform': 'python {}'.format(version.__version__)
+        }
 
 
 def _get_session_username_and_key():
