@@ -74,24 +74,24 @@ _grid_url = 'https://plot.ly/~chris/3043/my-grid'
 
 def test_grid_id_args():
     assert(
-        py.grid_ops._parse_grid_id_args(_grid, None, None) ==
-        py.grid_ops._parse_grid_id_args(None, _grid_url, None)
+        py._api_v2.parse_grid_id_args(_grid, None, None) ==
+        py._api_v2.parse_grid_id_args(None, _grid_url, None)
     )
 
     assert(
-        py.grid_ops._parse_grid_id_args(_grid, None, None) ==
-        py.grid_ops._parse_grid_id_args(None, None, _grid_id)
+        py._api_v2.parse_grid_id_args(_grid, None, None) ==
+        py._api_v2.parse_grid_id_args(None, None, _grid_id)
     )
 
 
 @raises(InputError)
 def test_no_grid_id_args():
-    py.grid_ops._parse_grid_id_args(None, None, None)
+    py._api_v2.parse_grid_id_args(None, None, None)
 
 
 @raises(InputError)
 def test_overspecified_grid_args():
-    py.grid_ops._parse_grid_id_args(_grid, _grid_url, None)
+    py._api_v2.parse_grid_id_args(_grid, _grid_url, None)
 
 
 ## Out of order usage
