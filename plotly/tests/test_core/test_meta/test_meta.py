@@ -1,5 +1,5 @@
 """
-test_grid:
+test_meta:
 ==========
 
 A module intended for use with Nose.
@@ -25,11 +25,15 @@ def init():
 _grid = grid = Grid([Column('first column', [1, 2, 3, 4])])
 _meta = {"settings":{"scope1":{"model":"Unicorn Finder","voltage":4}}}
 
+def _random_filename():
+    random_chars = [random.choice(string.ascii_uppercase) for _ in range(5)]
+    unique_filename = 'Valid Grid with Meta '+''.join(random_chars)
+    return unique_filename
+
 def test_upload_meta():
     init()
 
-    random_chars = [random.choice(string.ascii_uppercase) for _ in range(5)]
-    unique_filename = 'Valid Grid with Meta '+''.join(random_chars)
+    unique_filename = _random_filename()
     grid_url = py.grid_ops.upload(_grid, unique_filename, auto_open=False)
 
     # Add some meta data to that grid
@@ -43,8 +47,9 @@ def test_upload_meta_with_grid():
 
     c1 = Column('first column', [1, 2, 3, 4])
     grid = Grid([c1])
-    random_chars = [random.choice(string.ascii_uppercase) for _ in range(5)]
-    unique_filename = 'Valid Grid '+''.join(random_chars)
+
+    unique_filename = _random_filename()
+
     py.grid_ops.upload(
         _grid,
         unique_filename,
