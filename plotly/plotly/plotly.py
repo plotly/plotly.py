@@ -628,6 +628,44 @@ class image:
         f.write(img)
         f.close()
 
+class file_ops:
+    """ Interface to Plotly's File System API
+    """
+
+    @classmethod
+    def mkdir(cls, folder_path):
+        """ Make a folder in Plotly at folder_path
+            Mimics the shell's mkdir.
+            Exceptions:
+            - Parent folder doesn't exist
+            - A file already exists with that same name
+            Usage examples:
+            >> mkdir('new folder')
+            >> mkdir('existing folder/new folder')
+        """
+
+        # trim trailing slash
+        if folder_path[-1] == '/':
+            folder_path = folder_path[0:-1]
+
+        folder_names = folder_path.split('/')
+        name = folder_names[-1]
+        payload = {
+            'name': name
+        }
+
+        parent_path = '/'.join(folder_names[0:-1])
+        if parent_path == '':
+            payload['parent'] = -1
+        else:
+            payload['parent_path'] = parent_path
+
+        url = _api_v2.api_url('folders')
+
+        res = requests.post(url, data=payload, headers=_api_v2.headers())
+
+        _api_v2.response_handler(res)
+
 
 class grid_ops:
     """ Interface to Plotly's Grid API.
@@ -666,7 +704,7 @@ class grid_ops:
             'world_readable': world_readable
         }
 
-        upload_url = _api_v2.api_url()
+        upload_url = _api_v2.api_url('grids')
         req = requests.post(upload_url, data=payload, headers=_api_v2.headers())
         res = _api_v2.response_handler(req)
 
@@ -707,7 +745,7 @@ class grid_ops:
             'cols': json.dumps(columns, cls=ColumnJSONEncoder)
         }
 
-        api_url = _api_v2.api_url()+'/{grid_id}/col'.format(grid_id=grid_id)
+        api_url = _api_v2.api_url('grids')+'/{grid_id}/col'.format(grid_id=grid_id)
         res = requests.post(api_url, data=payload, headers=_api_v2.headers())
         res = _api_v2.response_handler(res)
 
@@ -738,7 +776,7 @@ class grid_ops:
             'rows': json.dumps(rows)
         }
 
-        api_url = _api_v2.api_url()+'/{grid_id}/row'.format(grid_id=grid_id)
+        api_url = _api_v2.api_url('grids')+'/{grid_id}/row'.format(grid_id=grid_id)
         res = requests.post(api_url, data=payload, headers=_api_v2.headers())
         _api_v2.response_handler(res)
 
@@ -757,7 +795,7 @@ class grid_ops:
     @classmethod
     def delete(cls, grid=None, grid_url=None, grid_id=None):
         grid_id = _api_v2.parse_grid_id_args(grid, grid_url, grid_id)
-        api_url = _api_v2.api_url()+'/'+grid_id
+        api_url = _api_v2.api_url('grids')+'/'+grid_id
         res = requests.delete(api_url, headers=_api_v2.headers())
         _api_v2.response_handler(res)
 
@@ -774,7 +812,7 @@ class meta_ops:
             'metadata': json.dumps(meta)
         }
 
-        api_url = _api_v2.api_url()+'/{grid_id}'.format(grid_id=grid_id)
+        api_url = _api_v2.api_url('grids')+'/{grid_id}'.format(grid_id=grid_id)
 
         res = requests.patch(api_url, data=payload, headers=_api_v2.headers())
 
@@ -852,9 +890,9 @@ class _api_v2:
             return response_dict
 
     @classmethod
-    def api_url(cls):
+    def api_url(cls, resource):
         # TODO: Variable URL
-        return 'https://api-local.plot.ly/v2/grids'
+        return 'https://api-local.plot.ly/v2/{}'.format(resource)
 
     @classmethod
     def headers(cls):
