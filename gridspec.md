@@ -179,3 +179,30 @@ Type checking boiler plate
 >> Column([{'a': 'b'}], 'col1')
 "PlotlyColumnException: Data values must be an array string, a number, Nones, or a datetime"
 ```
+
+### Adding metadata to grids
+
+```python
+c1 = Column('first column', [1, 2, 3, 4])
+grid = Grid([c1])
+meta = {"settings":{"scope1":{"model":"Unicorn Finder","voltage":4}}}
+py.grid_ops.upload(
+    grid,
+    unique_filename,
+    meta=meta,
+    auto_open=False)
+```
+
+```python
+# First, create a grid
+c1 = Column('first column', [1, 2, 3, 4])
+grid = Grid([c1])
+grid_url = py.grid_ops.upload(grid, unique_filename, auto_open=False)
+
+# Add some meta data to that grid
+meta = {"settings": {"scope1": {"model": "Unicorn Finder", "voltage": 4}}}
+meta_url = py.meta_ops.upload(
+    meta,
+    grid_url=grid_url)
+```
+
