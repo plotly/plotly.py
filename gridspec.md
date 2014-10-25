@@ -206,3 +206,15 @@ meta_url = py.meta_ops.upload(
     grid_url=grid_url)
 ```
 
+### Plotly File system
+
+```python
+
+>> py.file_ops.mkdir('new folder in root')
+
+>> py.file_ops.mkdir('new folder in root/new nested folder')
+
+>> py.file_ops.mkdir("this folder doesn't exist/new folder")
+Exception: The folder "this folder doesn't exist" doesn't exist
+
+```
