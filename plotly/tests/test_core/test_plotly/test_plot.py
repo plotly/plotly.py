@@ -7,10 +7,11 @@ A module intended for use with Nose.
 """
 from __future__ import absolute_import
 from nose.tools import raises
+from unittest import TestCase
 
 from plotly.graph_objs import graph_objs
 from plotly.plotly import plotly as py
-from plotly.exceptions import PlotlyError
+from plotly.exceptions import PlotlyError, PlotlyEmptyDataError
 
 
 # username for tests: 'PlotlyImageTest'
@@ -55,6 +56,14 @@ def test_plot_invalid_args_2():
     url = py.plot([1,2,3], [2,1,2],
                   auto_open=False,
                   filename='plot_invalid')
+
+
+class TestPlot(TestCase):
+
+    def test_plot_empty_data(self):
+        py.sign_in('PlotlyImageTest', '786r5mecv0')
+        with self.assertRaises(PlotlyEmptyDataError):
+            py.plot([], filename='plot_invalid')
 
 
 def test_bar():
