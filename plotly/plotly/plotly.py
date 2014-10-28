@@ -53,14 +53,14 @@ tools.ensure_local_plotly_files()
 
 
 def sign_in(username, api_key, **kwargs):
-    """Set module-scoped _credentials for session. Verify with plotly."""
-    global _credentials
+    """Set module-scoped _credentials for session. Optionally, set config info.
+    """
     _credentials['username'], _credentials['api_key'] = username, api_key
     # TODO: verify these _credentials with plotly
 
-    global _config
     _config['plotly_domain'] = kwargs.get('plotly_domain')
     _config['plotly_streaming_domain'] = kwargs.get('plotly_streaming_domain')
+    # TODO: verify format of config options
 
 
 ### plot options stuff ###
@@ -68,7 +68,6 @@ def sign_in(username, api_key, **kwargs):
 def update_plot_options(**kwargs):
     """ Update the module-level _plot_options
     """
-    global _plot_options
     _plot_options.update(kwargs)
 
 
@@ -76,7 +75,6 @@ def get_plot_options():
     """ Returns a copy of the user supplied plot options.
     Use `update_plot_options()` to change.
     """
-    global _plot_options
     return copy.copy(_plot_options)
 
 
