@@ -81,13 +81,12 @@ def get_plot_options():
 
 
 def get_credentials():
-    """ Returns a copy of the user supplied credentials.
-    """
-    global _credentials
-    if ('username' in _credentials) and ('api_key' in _credentials):
-        return copy.copy(_credentials)
-    else:
-        return tools.get_credentials_file()
+    """Returns the credentials that will be sent to plotly."""
+    credentials = tools.get_credentials_file()
+    for credentials_key in credentials:
+        if _credentials.get(credentials_key):
+            credentials[credentials_key] = _credentials[credentials_key]
+    return credentials
 
 
 ### plot stuff ###
