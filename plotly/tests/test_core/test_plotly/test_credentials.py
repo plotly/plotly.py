@@ -45,3 +45,20 @@ class TestSignIn(TestCase):
         self.assertEqual(
             config3['plotly_streaming_domain'], plotly_streaming_domain
         )
+
+    def test_sign_in_with_config(self):
+        username = 'place holder'
+        api_key = 'place holder'
+        plotly_domain = 'test domain'
+        plotly_streaming_domain = 'test streaming domain'
+        py.sign_in(
+            username,
+            api_key,
+            plotly_domain=plotly_domain,
+            plotly_streaming_domain=plotly_streaming_domain
+        )
+        config = py.get_config()
+        self.assertEqual(config['plotly_domain'], plotly_domain)
+        self.assertEqual(
+            config['plotly_streaming_domain'], plotly_streaming_domain
+        )

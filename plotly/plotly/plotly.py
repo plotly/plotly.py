@@ -52,11 +52,15 @@ tools.ensure_local_plotly_files()
 ### _credentials stuff ###
 
 
-def sign_in(username, api_key):
+def sign_in(username, api_key, **kwargs):
     """Set module-scoped _credentials for session. Verify with plotly."""
     global _credentials
     _credentials['username'], _credentials['api_key'] = username, api_key
     # TODO: verify these _credentials with plotly
+
+    global _config
+    _config['plotly_domain'] = kwargs.get('plotly_domain')
+    _config['plotly_streaming_domain'] = kwargs.get('plotly_streaming_domain')
 
 
 ### plot options stuff ###
