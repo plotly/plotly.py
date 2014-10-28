@@ -312,7 +312,7 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
     `graph objects`.
 
     """
-    plotly_rest_url = tools.get_config_file()['plotly_domain']
+    plotly_rest_url = get_config()['plotly_domain']
     if file_id is None:  # assume we're using a url
         url = file_owner_or_url
         if url[:len(plotly_rest_url)] != plotly_rest_url:
@@ -418,7 +418,7 @@ class Stream:
         http://nbviewer.ipython.org/github/plotly/python-user-guide/blob/master/s7_streaming/s7_streaming.ipynb
         """
 
-        streaming_url = tools.get_config_file()['plotly_streaming_domain']
+        streaming_url = get_config()['plotly_streaming_domain']
         self._stream = chunked_requests.Stream(streaming_url,
                                                80,
                                                {'Host': streaming_url,
@@ -567,7 +567,7 @@ class image:
         if height is not None:
             payload['height'] = height
 
-        url = tools.get_config_file()['plotly_domain'] + "/apigenimage/"
+        url = get_config()['plotly_domain'] + "/apigenimage/"
         res = requests.post(url,
                             data=json.dumps(payload,
                                             cls=utils._plotlyJSONEncoder),
@@ -672,7 +672,7 @@ def _send_to_plotly(figure, **plot_options):
                    origin='plot',
                    kwargs=kwargs)
 
-    url = tools.get_config_file()['plotly_domain'] + "/clientresp"
+    url = get_config()['plotly_domain'] + "/clientresp"
 
     r = requests.post(url, data=payload)
     r.raise_for_status()
