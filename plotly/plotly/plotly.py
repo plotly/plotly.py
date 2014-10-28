@@ -44,6 +44,8 @@ _credentials = dict()
 
 _plot_options = dict()
 
+_config = dict()
+
 ### test file permissions and make sure nothing is corrupted ###
 tools.ensure_local_plotly_files()
 
@@ -125,6 +127,15 @@ def _plot_option_logic(plot_options):
        and 'fileopt' not in plot_options):
         options['fileopt'] = 'overwrite'
     return options
+
+
+def get_config():
+    """Returns either module config or file config."""
+    config = tools.get_config_file()
+    for config_key in config:
+        if _config.get(config_key):
+            config[config_key] = _config[config_key]
+    return config
 
 
 def plot(figure_or_data, validate=True, **plot_options):
