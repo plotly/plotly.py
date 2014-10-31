@@ -881,14 +881,11 @@ class _api_v2:
     @classmethod
     def response_handler(cls, response):
 
-        response.raise_for_status()
-        # TODO: Maybe use some custom messages in the future?
-        # With a lookup table like the following?
-        # error_messages = {
-        #     401: 'Unauthorized - are you sure that your '
-        #          'API key is correct? Visit https://plot.ly/settings',
-        #     503: 'Service unavailable. Having trouble connection to plotly.'
-        # }
+        try:
+            response.raise_for_status()
+        except requests.exceptions.HTTPError as requests_exception:
+            plotly_exception = exceptions.PlotlyRequestError(requests_exception)
+            raise(plotly_exception)
 
         if ('content-type' in response.headers and
                 'json' in response.headers['content-type'] and
