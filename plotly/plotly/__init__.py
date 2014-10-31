@@ -9,5 +9,6 @@ verifiable account (username/api-key pair) and a network connection.
 """
 from . plotly import (
     sign_in, update_plot_options, get_plot_options, get_credentials, iplot,
-    plot, iplot_mpl, plot_mpl, get_figure, Stream, image, grid_ops
+    plot, iplot_mpl, plot_mpl, get_figure, Stream, image, grid_ops,
+    meta_ops, file_ops, _api_v2
 )

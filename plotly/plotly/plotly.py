@@ -628,37 +628,34 @@ class image:
         f.write(img)
         f.close()
 
+
 class file_ops:
     """ Interface to Plotly's File System API
     """
 
     @classmethod
-    def mkdir(cls, folder_path):
+    def mkdirs(cls, folder_path):
         """ Make a folder in Plotly at folder_path
-            Mimics the shell's mkdir.
-            Exceptions:
-            - Parent folder doesn't exist
-            - A file already exists with that same name
+            Mimics the shell's mkdir -p.
+            Returns:
+            - 200 if folders already existed, nothing was created
+            - 201 if path was created
+            Raises:
+            -  requests.exceptions.RequestException: 400
+
             Usage examples:
-            >> mkdir('new folder')
-            >> mkdir('existing folder/new folder')
+            >> mkdirs('new folder')
+            >> mkdirs('existing folder/new folder')
+            >> mkdirs('new/folder/path')
         """
 
-        # trim trailing slash
+        # trim trailing slash TODO: necessesary?
         if folder_path[-1] == '/':
             folder_path = folder_path[0:-1]
 
-        folder_names = folder_path.split('/')
-        name = folder_names[-1]
         payload = {
-            'name': name
+            'path': folder_path
         }
-
-        parent_path = '/'.join(folder_names[0:-1])
-        if parent_path == '':
-            payload['parent'] = -1
-        else:
-            payload['parent_path'] = parent_path
 
         url = _api_v2.api_url('folders')
 
@@ -684,8 +681,18 @@ class grid_ops:
     @classmethod
     def upload(cls, grid, filename, world_readable=True, auto_open=True, meta=None):
         """ Upload a grid to your Plotly account with the specified filename.
-
         """
+
+        # Made a folder path
+        if filename[-1] == '/':
+            filename = filename[0:-1]
+
+        paths = filename.split('/')
+        parent_path = '/'.join(paths[0:-1])
+        filename = paths[-1]
+
+        if parent_path != '':
+            file_ops.mkdirs(parent_path)
 
         # transmorgify grid object into plotly's format
         grid_json = {'cols': {}}
@@ -704,8 +711,13 @@ class grid_ops:
             'world_readable': world_readable
         }
 
+        if parent_path != '':
+            payload['parent_path'] = parent_path
+
         upload_url = _api_v2.api_url('grids')
-        req = requests.post(upload_url, data=payload, headers=_api_v2.headers())
+        req = requests.post(upload_url, data=payload,
+                            headers=_api_v2.headers())
+
         res = _api_v2.response_handler(req)
 
         response_columns = res['file']['cols']
