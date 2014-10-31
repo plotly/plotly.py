@@ -15,7 +15,8 @@ import requests
 import plotly.plotly as py
 import plotly.tools as tls
 from plotly.grid_objs import Column, Grid
-from nose.plugins.attrib import attr
+from plotly.exceptions import PlotlyRequestError
+
 
 def init():
     tls.set_config_file('https://local.plot.ly')
@@ -57,7 +58,7 @@ def test_upload_meta_with_grid():
         auto_open=False)
 
 
-@raises(requests.exceptions.HTTPError)
+@raises(PlotlyRequestError)
 def test_metadata_to_nonexistent_grid():
     init()
 

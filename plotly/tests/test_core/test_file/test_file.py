@@ -14,7 +14,7 @@ import requests
 
 import plotly.plotly as py
 import plotly.tools as tls
-
+from plotly.exceptions import PlotlyRequestError
 
 def _random_filename():
     random_chars = [random.choice(string.ascii_uppercase) for _ in range(5)]
@@ -29,20 +29,22 @@ def init():
 
 def test_create_folder():
     init()
-    py.file_ops.mkdir(_random_filename())
+    py.file_ops.mkdirs(_random_filename())
 
 
 def test_create_nested_folders():
     init()
     first_folder = _random_filename()
-    second_folder = '{}/{}'.format(first_folder, _random_filename())
-    py.file_ops.mkdir(first_folder)
-    py.file_ops.mkdir(second_folder)
+    nested_folder = '{}/{}'.format(first_folder, _random_filename())
+    py.file_ops.mkdirs(nested_folder)
 
 
-@raises(requests.exceptions.HTTPError) # TODO: 409, not just any 4xx
 def test_duplicate_folders():
     init()
     first_folder = _random_filename()
-    py.file_ops.mkdir(first_folder)
-    py.file_ops.mkdir(first_folder)
+    py.file_ops.mkdirs(first_folder)
+    try:
+        py.file_ops.mkdirs(first_folder)
+    except PlotlyRequestError as e:
+        if e.status_code != 409:
+            raise e
