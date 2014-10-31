@@ -87,13 +87,18 @@ In the near future:
 ```
 
 Deleting:
-```
-py.grid_ops.delete(grid_id_OR_filename_OR_grid_url) # uh..
-
-# or
-py.grid_ops.delete(grid_id=None, filename=None, grid_url=None) # and just throw good errors if none or more than 1 were specified?
 
 ```
+# throw good errors if none or more than 1 were specified
+py.grid_ops.delete(filename=None, grid_url=None, grid=None, grid_id=None)
+```
+
+In the future, once we can delete Plots and Folders
+
+```
+py.file_ops.delete(file_path=None, fid=None, url=None)
+```
+
 
 ### Appearance and Access
 
@@ -121,6 +126,7 @@ py.grid_ops.delete(grid_id=None, filename=None, grid_url=None) # and just throw 
 
 ### Creating a graph from a grid
 
+If you have the grid
 ```python
 >> from plotly.grid_objs import Grid
 >> grid = Grid(column_1, column_2)
@@ -144,9 +150,14 @@ py.grid_ops.delete(grid_id=None, filename=None, grid_url=None) # and just throw 
 "x must be an array of strings, numbers, or datetimes."
 >> print Scatter(xsrc=grid[0], yscr=grid[1])
 {"xsrc": "chris/3:3dfbk", "ysrc": "chris/3:dk3c"}
-
 ```
 
+Otherwise, download the grid (Not currently supported)
+```
+>> grid = grid_ops.get(filename=None, grid_id=None, grid_url=None)
+```
+
+(Download should use same endpoint as `grid_url.json`, e.g. [https://plot.ly/~chris/142.json](https://plot.ly/~chris/142.json))
 
 ### Errors
 ```python
@@ -180,6 +191,15 @@ Type checking boiler plate
 "PlotlyColumnException: Data values must be an array string, a number, Nones, or a datetime"
 ```
 
+### Exceptions from Requests
+A `PlotlyRequestError` that prints a useful error message from the server:
+1. Print `response.detail` if provided (Plotly error message)
+2. Otherwise, print `response.body` if the response is plain-text
+3. Otherwise, print the original `requests.expceptions.HTTPError` error message.
+
+Also, store the status code.
+
+
 ### Adding metadata to grids
 
 ```python
@@ -210,11 +230,29 @@ meta_url = py.meta_ops.upload(
 
 ```python
 
->> py.file_ops.mkdir('new folder in root')
+>> py.file_ops.mkdirs('new folder in root')
 
->> py.file_ops.mkdir('new folder in root/new nested folder')
+>> py.file_ops.mkdirs('make/each/of/these/folders')
+```
 
->> py.file_ops.mkdir("this folder doesn't exist/new folder")
-Exception: The folder "this folder doesn't exist" doesn't exist
+Note that this is like `mkdir -p`. `mkdirs` is a Java convention.
+We could also use our own, like:
 
+- `py.file_ops.create_folders('new/folders')`
+- `py.file_ops.new_folders('new/folders')`
+
+These commands will:
+- return status codes: `200` if nothing created, `201` if created
+- raise exception if a file or folder already exists with that path
+
+
+In the future, once we can delete Plots and Folders
+
+```
+py.file_ops.delete(file_path=None, fid=None, url=None)
+```
+
+Or, if we want to keep unix convention (do we?)
+```
+py.file_ops.rm(file_path=None, fid=None, url=None)
 ```
