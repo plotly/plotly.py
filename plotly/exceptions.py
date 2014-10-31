@@ -15,7 +15,7 @@ info: (required!)
 
 
 """
-
+import json
 
 ## Base Plotly Error ##
 
@@ -25,6 +25,30 @@ class PlotlyError(Exception):
 
 class InputError(Exception):
     pass
+
+
+class PlotlyRequestError(Exception):
+    def __init__(self, requests_exception):
+        self.status_code = requests_exception.response.status_code
+        self.HTTPError = requests_exception
+        content_type = requests_exception.response.headers['content-type']
+        if 'json' in content_type:
+            content = requests_exception.response.content
+            if content != '':
+                res_payload = json.loads(requests_exception.response.content)
+                if 'detail' in res_payload:
+                    self.message = res_payload['detail']
+                else:
+                    self.message = ''
+            else:
+                self.message = ''
+        elif content_type == 'text/plain':
+            self.message = requests_exception.response.content
+        else:
+            self.message = requests_exception.message
+
+    def __str__(self):
+        return self.message
 
 
 ## Grid Errors ##
