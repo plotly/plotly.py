@@ -23,8 +23,7 @@ def _random_filename():
 
 
 def init():
-    tls.set_config_file('https://local.plot.ly')
-    py.sign_in('GridTest', 'fp4rldzhv0')
+    py.sign_in('PythonTest', '9v9f20pext')
 
 
 def test_create_folder():
