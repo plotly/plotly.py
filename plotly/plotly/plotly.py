@@ -900,8 +900,8 @@ class _api_v2:
 
     @classmethod
     def api_url(cls, resource):
-        # TODO: Variable URL
-        return 'https://api-local.plot.ly/v2/{}'.format(resource)
+        return '{}/v2/{}'.format(tools.get_config_file()['plotly_api_domain'],
+            resource)
 
     @classmethod
     def headers(cls):
@@ -923,6 +923,7 @@ def _get_session_username_and_key():
     else:
         raise exceptions.PlotlyLocalCredentialsError()
     return username, api_key
+
 
 def _send_to_plotly(figure, **plot_options):
     """
