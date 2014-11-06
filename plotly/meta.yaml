@@ -6,8 +6,7 @@ source:
   git_url: git@github.com:plotly/python-api.git
 
 build:
-  number: 1
-  script: python setup.py install
+  number: 0
 
 requirements:
   build:
@@ -24,3 +23,4 @@ requirements:
 about:
   home: https://plot.ly
   license: MIT
+  summary: Python plotting library for collaborative, interactive, publication-quality graphs.
