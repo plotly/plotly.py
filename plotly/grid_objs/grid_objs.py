@@ -7,7 +7,7 @@ grid_objs
 import json
 from collections import MutableSequence
 from plotly import exceptions
-from plotly import utils
+import plotly
 
 
 class Column(object):
@@ -21,7 +21,7 @@ class Column(object):
 
     def __str__(self):
         max_chars = 10
-        jdata = json.dumps(self.data)
+        jdata = json.dumps(self.data, cls=plotly.utils._plotlyJSONEncoder)
         if len(jdata) > max_chars:
             data_string = jdata[:max_chars] + "...]"
         else:
@@ -30,14 +30,13 @@ class Column(object):
         return string.format(name=self.name, data=data_string, id=self.id)
 
     def __repr__(self):
-        return ('Column("{}", {})'
-                .format(data=self.data, name=self.name))
+        return  'Column("{}", {})'.format(self.data, self.name)
 
 
 class Grid(MutableSequence):
     def __init__(self, iterable_of_columns):
         column_names = [column.name for column in iterable_of_columns]
-        duplicate_name = utils.get_first_duplicate(column_names)
+        duplicate_name = plotly.utils.get_first_duplicate(column_names)
         if duplicate_name:
             err = exceptions.NON_UNIQUE_COLUMN_MESSAGE.format(duplicate_name)
             raise exceptions.InputError(err)

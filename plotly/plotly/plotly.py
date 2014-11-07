@@ -26,7 +26,6 @@ import requests
 from urlparse import urlparse
 
 from plotly.plotly import chunked_requests
-from plotly.grid_objs.grid_objs_tools import ColumnJSONEncoder
 from plotly import utils
 from plotly import tools
 from plotly import exceptions
@@ -748,7 +747,7 @@ class grid_ops:
             raise exceptions.InputError(err)
 
         payload = {
-            'cols': json.dumps(columns, cls=ColumnJSONEncoder)
+            'cols': json.dumps(columns, cls=utils._plotlyJSONEncoder)
         }
 
         api_url = _api_v2.api_url('grids')+'/{grid_id}/col'.format(grid_id=grid_id)
