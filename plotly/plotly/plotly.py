@@ -61,6 +61,7 @@ def sign_in(username, api_key, **kwargs):
 
     _config['plotly_domain'] = kwargs.get('plotly_domain')
     _config['plotly_streaming_domain'] = kwargs.get('plotly_streaming_domain')
+    _config['plotly_api_domain'] = kwargs.get('plotly_api_domain')
     # TODO: verify format of config options
 
 
@@ -739,7 +740,7 @@ class grid_ops:
 
         grid.id = grid_id
 
-        plotly_domain = tools.get_config_file()['plotly_domain']
+        plotly_domain = get_config()['plotly_domain']
         grid_url = '{}/~{}'.format(plotly_domain, grid_id.replace(':', '/'))
 
         if meta is not None:
@@ -907,7 +908,7 @@ class _api_v2:
 
     @classmethod
     def api_url(cls, resource):
-        return ('{}/v2/{}'.format(tools.get_config_file()['plotly_api_domain'],
+        return ('{}/v2/{}'.format(get_config()['plotly_api_domain'],
                 resource))
 
     @classmethod
