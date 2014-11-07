@@ -12,8 +12,6 @@ import sys
 import threading
 import re
 
-import plotly
-
 ### incase people are using threading, we lock file reads
 lock = threading.Lock()
 
@@ -128,19 +126,18 @@ class _plotlyJSONEncoder(json.JSONEncoder):
             pass
         return None
 
-    def ColumnJSONEncoder(self, obj):
-        if isinstance(obj, plotly.grid_objs.Column):
-            return {'name': obj.name, 'data': obj.data}
-        else:
+    def builtinJSONEncoder(self, obj):
+        try:
+            return obj.to_json()
+        except AttributeError:
             return None
-
 
     def default(self, obj):
         try:
             return json.dumps(obj)
         except TypeError as e:
-            encoders = (self.datetimeJSONEncoder, self.numpyJSONEncoder,
-                        self.pandasJSONEncoder, self.ColumnJSONEncoder,
+            encoders = (self.builtinJSONEncoder, self.datetimeJSONEncoder,
+                        self.numpyJSONEncoder, self.pandasJSONEncoder,
                         self.sageJSONEncoder)
             for encoder in encoders:
                 s = encoder(obj)
