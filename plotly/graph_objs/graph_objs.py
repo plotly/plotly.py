@@ -30,8 +30,11 @@ from plotly.graph_objs import graph_objs_tools
 from plotly.graph_objs.graph_objs_tools import (
     INFO, OBJ_MAP, NAME_TO_KEY, KEY_TO_NAME
 )
-import copy
+
 from plotly import exceptions
+from plotly import utils
+
+import copy
 import sys
 if sys.version[:3] == '2.6':
     from ordereddict import OrderedDict
@@ -297,6 +300,11 @@ class PlotlyDict(dict):
 
     def __init__(self, *args, **kwargs):
         class_name = self.__class__.__name__
+
+        for key in kwargs:
+            if utils.is_source_key(key):
+                kwargs[key] = self._assign_id_to_src(key, kwargs[key])
+
         super(PlotlyDict, self).__init__(*args, **kwargs)
         if issubclass(NAME_TO_CLASS[class_name], PlotlyTrace):
             if (class_name != 'PlotlyTrace') and (class_name != 'Trace'):
@@ -306,6 +314,37 @@ class PlotlyDict(dict):
             warnings.warn("\nThe PlotlyDict class is a base class of "
                           "dictionary-like graph_objs.\nIt is not meant to be "
                           "a user interface.")
+
+    def __setitem__(self, key, value):
+
+        if key in ('xsrc', 'ysrc'):
+            value = self._assign_id_to_src(key, value)
+
+        return super(PlotlyDict, self).__setitem__(key, value)
+
+    def _assign_id_to_src(self, src_name, src_value):
+        if isinstance(src_value, basestring):
+            src_id = src_value
+        else:
+            try:
+                src_id = src_value.id
+            except:
+                err = ("{} does not have an `id` property. "
+                       "{} needs to be assigned to either an "
+                       "object with an `id` (like a "
+                       "plotly.grid_objs.Column) or a string. "
+                       "The `id` is a unique identifier "
+                       "assigned by the Plotly webserver "
+                       "to this grid column.")
+                src_value_str = str(src_value)
+                err = err.format(src_name, src_value_str)
+                raise exceptions.InputError(err)
+
+        if src_id == '':
+            err = exceptions.COLUMN_NOT_YET_UPLOADED_MESSAGE
+            err.format(column_name=src_value.name, reference=src_name)
+            raise exceptions.InputError(err)
+        return src_id
 
     def update(self, dict1=None, **dict2):
         """Update current dict with dict1 and then dict2.

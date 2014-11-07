@@ -10,8 +10,9 @@ import json
 import os.path
 import sys
 import threading
+import re
 
-### incase people are using threadig, we lock file reads
+### incase people are using threading, we lock file reads
 lock = threading.Lock()
 
 
@@ -125,12 +126,19 @@ class _plotlyJSONEncoder(json.JSONEncoder):
             pass
         return None
 
+    def builtinJSONEncoder(self, obj):
+        try:
+            return obj.to_json()
+        except AttributeError:
+            return None
+
     def default(self, obj):
         try:
             return json.dumps(obj)
         except TypeError as e:
-            encoders = (self.datetimeJSONEncoder, self.numpyJSONEncoder,
-                        self.pandasJSONEncoder, self.sageJSONEncoder)
+            encoders = (self.builtinJSONEncoder, self.datetimeJSONEncoder,
+                        self.numpyJSONEncoder, self.pandasJSONEncoder,
+                        self.sageJSONEncoder)
             for encoder in encoders:
                 s = encoder(obj)
                 if s is not None:
@@ -173,3 +181,22 @@ def template_doc(**names):
                 func.__doc__ = func.__doc__.format(**names)
         return func
     return _decorator
+
+
+def get_first_duplicate(items):
+    seen = set()
+    for item in items:
+        if item not in seen:
+            seen.add(item)
+        else:
+            return item
+    return None
+
+
+### source key
+def is_source_key(key):
+    src_regex = re.compile(r'.+src$')
+    if src_regex.match(key) is not None:
+        return True
+    else:
+        return False

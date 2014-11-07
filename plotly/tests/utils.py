@@ -48,5 +48,3 @@ def is_num_list(item):
     except TypeError:
         return False
     return True
-
-

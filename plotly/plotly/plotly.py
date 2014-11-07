@@ -21,8 +21,9 @@ import warnings
 import copy
 import os
 import six
-
+import base64
 import requests
+from urlparse import urlparse
 
 from plotly.plotly import chunked_requests
 from plotly import utils
@@ -60,6 +61,7 @@ def sign_in(username, api_key, **kwargs):
 
     _config['plotly_domain'] = kwargs.get('plotly_domain')
     _config['plotly_streaming_domain'] = kwargs.get('plotly_streaming_domain')
+    _config['plotly_api_domain'] = kwargs.get('plotly_api_domain')
     # TODO: verify format of config options
 
 
@@ -206,11 +208,8 @@ def plot(figure_or_data, validate=True, **plot_options):
     res = _send_to_plotly(figure, **plot_options)
     if res['error'] == '':
         if plot_options['auto_open']:
-            try:
-                from webbrowser import open as wbopen
-                wbopen(res['url'])
-            except:  # TODO: what should we except here? this is dangerous
-                pass
+            _open_url(res['url'])
+
         return res['url']
     else:
         raise exceptions.PlotlyAccountError(res['error'])
@@ -648,12 +647,281 @@ class image:
         f.close()
 
 
-def _send_to_plotly(figure, **plot_options):
+class file_ops:
+    """ Interface to Plotly's File System API
     """
+
+    @classmethod
+    def mkdirs(cls, folder_path):
+        """ Make a folder in Plotly at folder_path
+            Mimics the shell's mkdir -p.
+            Returns:
+            - 200 if folders already existed, nothing was created
+            - 201 if path was created
+            Raises:
+            -  requests.exceptions.RequestException: 400
+
+            Usage examples:
+            >> mkdirs('new folder')
+            >> mkdirs('existing folder/new folder')
+            >> mkdirs('new/folder/path')
+        """
+
+        # trim trailing slash TODO: necessesary?
+        if folder_path[-1] == '/':
+            folder_path = folder_path[0:-1]
+
+        payload = {
+            'path': folder_path
+        }
+
+        url = _api_v2.api_url('folders')
+
+        res = requests.post(url, data=payload, headers=_api_v2.headers())
+
+        _api_v2.response_handler(res)
+
+
+class grid_ops:
+    """ Interface to Plotly's Grid API.
     """
-    fig = tools._replace_newline(figure)  # does not mutate figure
-    data = json.dumps(fig['data'] if 'data' in fig else [],
-                      cls=utils._plotlyJSONEncoder)
+
+    @classmethod
+    def _fill_in_response_column_ids(cls, request_columns,
+                                     response_columns, grid_id):
+        for req_col in request_columns:
+            for resp_col in response_columns:
+                if resp_col['name'] == req_col.name:
+                    req_col.id = '{}/{}'.format(grid_id, resp_col['uid'])
+                    response_columns.remove(resp_col)
+
+    @classmethod
+    def upload(cls, grid, filename,
+               world_readable=True, auto_open=True, meta=None):
+        """ Upload a grid to your Plotly account with the specified filename.
+        """
+
+        # Make a folder path
+        if filename[-1] == '/':
+            filename = filename[0:-1]
+
+        paths = filename.split('/')
+        parent_path = '/'.join(paths[0:-1])
+        filename = paths[-1]
+
+        if parent_path != '':
+            file_ops.mkdirs(parent_path)
+
+        # transmorgify grid object into plotly's format
+        grid_json = grid._to_plotly_grid_json()
+        if meta is not None:
+            grid_json['metadata'] = meta
+
+        payload = {
+            'filename': filename,
+            'data': json.dumps(grid_json, cls=utils._plotlyJSONEncoder),
+            'world_readable': world_readable
+        }
+
+        if parent_path != '':
+            payload['parent_path'] = parent_path
+
+        upload_url = _api_v2.api_url('grids')
+        req = requests.post(upload_url, data=payload,
+                            headers=_api_v2.headers())
+
+        res = _api_v2.response_handler(req)
+
+        response_columns = res['file']['cols']
+        grid_id = res['file']['fid']
+
+        # mutate the grid columns with the id's returned from the server
+        cls._fill_in_response_column_ids(grid, response_columns, grid_id)
+
+        grid.id = grid_id
+
+        plotly_domain = get_config()['plotly_domain']
+        grid_url = '{}/~{}'.format(plotly_domain, grid_id.replace(':', '/'))
+
+        if meta is not None:
+            meta_ops.upload(meta, grid=grid)
+
+        if auto_open:
+            _open_url(grid_url)
+
+        return grid_url
+
+    @classmethod
+    def append_columns(cls, columns, grid=None, grid_url=None):
+        grid_id = _api_v2.parse_grid_id_args(grid, grid_url)
+
+        # Verify unique column names
+        column_names = [c.name for c in columns]
+        if grid:
+            existing_column_names = [c.name for c in grid]
+            column_names.extend(existing_column_names)
+        duplicate_name = utils.get_first_duplicate(column_names)
+        if duplicate_name:
+            err = exceptions.NON_UNIQUE_COLUMN_MESSAGE.format(duplicate_name)
+            raise exceptions.InputError(err)
+
+        payload = {
+            'cols': json.dumps(columns, cls=utils._plotlyJSONEncoder)
+        }
+
+        api_url = _api_v2.api_url('grids')+'/{grid_id}/col'.format(grid_id=grid_id)
+        res = requests.post(api_url, data=payload, headers=_api_v2.headers())
+        res = _api_v2.response_handler(res)
+
+        cls._fill_in_response_column_ids(columns, res['cols'], grid_id)
+
+        if grid:
+            grid.extend(columns)
+
+    @classmethod
+    def append_rows(cls, rows, grid=None, grid_url=None):
+        grid_id = _api_v2.parse_grid_id_args(grid, grid_url)
+
+        if grid:
+            n_columns = len([column for column in grid])
+            for row_i, row in enumerate(rows):
+                if len(row) != n_columns:
+                    raise exceptions.InputError(
+                        "The number of entries in "
+                        "each row needs to equal the number of columns in "
+                        "the grid. Row {} has {} {} but your "
+                        "grid has {} {}. "
+                        .format(row_i, len(row),
+                                'entry' if len(row) == 1 else 'entries',
+                                n_columns,
+                                'column' if n_columns == 1 else 'columns'))
+
+        payload = {
+            'rows': json.dumps(rows, cls=utils._plotlyJSONEncoder)
+        }
+
+        api_url = (_api_v2.api_url('grids')+
+                   '/{grid_id}/row'.format(grid_id=grid_id))
+        res = requests.post(api_url, data=payload, headers=_api_v2.headers())
+        _api_v2.response_handler(res)
+
+        if grid:
+            longest_column_length = max([len(col.data) for col in grid])
+
+            for column in grid:
+                n_empty_rows = longest_column_length - len(column.data)
+                empty_string_rows = ['' for _ in range(n_empty_rows)]
+                column.data.extend(empty_string_rows)
+
+            column_extensions = zip(*rows)
+            for local_column, column_extension in zip(grid, column_extensions):
+                local_column.data.extend(column_extension)
+
+    @classmethod
+    def delete(cls, grid=None, grid_url=None):
+        grid_id = _api_v2.parse_grid_id_args(grid, grid_url)
+        api_url = _api_v2.api_url('grids')+'/'+grid_id
+        res = requests.delete(api_url, headers=_api_v2.headers())
+        _api_v2.response_handler(res)
+
+
+class meta_ops:
+    """ Interface to Plotly's Metadata API
+    """
+
+    @classmethod
+    def upload(cls, meta, grid=None, grid_url=None):
+        grid_id = _api_v2.parse_grid_id_args(grid, grid_url)
+
+        payload = {
+            'metadata': json.dumps(meta, cls=utils._plotlyJSONEncoder)
+        }
+
+        api_url = _api_v2.api_url('grids')+'/{grid_id}'.format(grid_id=grid_id)
+
+        res = requests.patch(api_url, data=payload, headers=_api_v2.headers())
+
+        return _api_v2.response_handler(res)
+
+
+class _api_v2:
+    """ Request and response helper class for communicating with
+        Plotly's v2 API
+    """
+    @classmethod
+    def parse_grid_id_args(cls, grid, grid_url):
+        """Return the grid_id from the non-None input argument.
+        Raise an error if more than one argument was supplied.
+        """
+        if grid is not None:
+            id_from_grid = grid.id
+        else:
+            id_from_grid = None
+        args = [id_from_grid, grid_url]
+        arg_names = ('grid', 'grid_url')
+
+        supplied_arg_names = [arg_name for arg_name, arg
+                              in zip(arg_names, args) if arg is not None]
+
+        if not supplied_arg_names:
+            raise exceptions.InputError(
+                "One of the two keyword arguments is required:\n"
+                "    `grid` or `grid_url`\n\n"
+                "grid: a plotly.graph_objs.Grid object that has already\n"
+                "    been uploaded to Plotly.\n\n"
+                "grid_url: the url where the grid can be accessed on\n"
+                "    Plotly, e.g. 'https://plot.ly/~chris/3043'\n\n"
+            )
+        elif len(supplied_arg_names) > 1:
+            raise exceptions.InputError(
+                "Only one of `grid` or `grid_url` is required. \n"
+                "You supplied both. \n"
+            )
+        else:
+            supplied_arg_name = supplied_arg_names.pop()
+            if supplied_arg_name == 'grid_url':
+                path = urlparse(grid_url).path
+                file_owner, file_id = path.replace("/~", "").split('/')[0:2]
+                return '{}:{}'.format(file_owner, file_id)
+            else:
+                return grid.id
+
+    @classmethod
+    def response_handler(cls, response):
+
+        try:
+            response.raise_for_status()
+        except requests.exceptions.HTTPError as requests_exception:
+            plotly_exception = exceptions.PlotlyRequestError(requests_exception)
+            raise(plotly_exception)
+
+        if ('content-type' in response.headers and
+                'json' in response.headers['content-type'] and
+                len(response.content) > 0):
+
+            response_dict = json.loads(response.content)
+
+            if 'warnings' in response_dict and len(response_dict['warnings']):
+                warnings.warn('\n'.join(response_dict['warnings']))
+
+            return response_dict
+
+    @classmethod
+    def api_url(cls, resource):
+        return ('{}/v2/{}'.format(get_config()['plotly_api_domain'],
+                resource))
+
+    @classmethod
+    def headers(cls):
+        un, api_key = _get_session_username_and_key()
+        encoded_un_key_pair = base64.b64encode('{}:{}'.format(un, api_key))
+        return {
+            'authorization': 'Basic ' + encoded_un_key_pair,
+            'plotly-client-platform': 'python {}'.format(version.__version__)
+        }
+
+
+def _get_session_username_and_key():
     file_credentials = tools.get_credentials_file()
     if ('username' in _credentials) and ('api_key' in _credentials):
         username, api_key = _credentials['username'], _credentials['api_key']
@@ -662,7 +930,16 @@ def _send_to_plotly(figure, **plot_options):
                                file_credentials['api_key'])
     else:
         raise exceptions.PlotlyLocalCredentialsError()
+    return username, api_key
 
+
+def _send_to_plotly(figure, **plot_options):
+    """
+    """
+    fig = tools._replace_newline(figure)  # does not mutate figure
+    data = json.dumps(fig['data'] if 'data' in fig else [],
+                      cls=utils._plotlyJSONEncoder)
+    username, api_key = _get_session_username_and_key()
     kwargs = json.dumps(dict(filename=plot_options['filename'],
                              fileopt=plot_options['fileopt'],
                              world_readable=plot_options['world_readable'],
@@ -711,3 +988,10 @@ def _validation_key_logic():
     if username is None or api_key is None:
         raise exceptions.PlotlyLocalCredentialsError()
     return (username, api_key)
+
+def _open_url(url):
+    try:
+        from webbrowser import open as wbopen
+        wbopen(url)
+    except:  # TODO: what should we except here? this is dangerous
+        pass
