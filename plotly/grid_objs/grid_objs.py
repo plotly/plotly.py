@@ -10,8 +10,8 @@ from plotly import exceptions
 from plotly import utils
 
 
-class Column():
-    def __init__(self, name, data):
+class Column(object):
+    def __init__(self, data, name):
         # TODO: data type checking
         self.data = data
         # TODO: name type checking
@@ -30,7 +30,8 @@ class Column():
         return string.format(name=self.name, data=data_string, id=self.id)
 
     def __repr__(self):
-        return 'Coumn("{name}", {data})'.format(name=self.name, data=self.data)
+        return ('Column("{}", {})'
+                .format(data=self.data, name=self.name))
 
 
 class Grid(MutableSequence):
