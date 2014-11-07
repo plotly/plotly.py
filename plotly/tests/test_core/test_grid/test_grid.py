@@ -15,6 +15,7 @@ from nose.plugins.attrib import attr
 
 from plotly.graph_objs import Scatter
 import plotly.plotly as py
+from plotly.plotly.plotly import _api_v2
 import plotly.tools as tls
 from plotly.grid_objs import Column, Grid
 from plotly.exceptions import InputError, PlotlyRequestError
