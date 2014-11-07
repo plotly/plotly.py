@@ -700,7 +700,7 @@ class grid_ops:
 
         payload = {
             'filename': filename,
-            'data': json.dumps(grid_json),
+            'data': json.dumps(grid_json, cls=utils._plotlyJSONEncoder),
             'world_readable': world_readable
         }
 
@@ -778,7 +778,7 @@ class grid_ops:
                                 'column' if n_columns == 1 else 'columns'))
 
         payload = {
-            'rows': json.dumps(rows)
+            'rows': json.dumps(rows, cls=utils._plotlyJSONEncoder)
         }
 
         api_url = (_api_v2.api_url('grids')+
@@ -815,7 +815,7 @@ class meta_ops:
         grid_id = _api_v2.parse_grid_id_args(grid, grid_url)
 
         payload = {
-            'metadata': json.dumps(meta)
+            'metadata': json.dumps(meta, cls=utils._plotlyJSONEncoder)
         }
 
         api_url = _api_v2.api_url('grids')+'/{grid_id}'.format(grid_id=grid_id)
