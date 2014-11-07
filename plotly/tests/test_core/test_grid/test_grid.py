@@ -105,31 +105,26 @@ _grid_url = 'https://plot.ly/~chris/3043/my-grid'
 
 def test_grid_id_args():
     assert(
-        py._api_v2.parse_grid_id_args(_grid, None, None) ==
-        py._api_v2.parse_grid_id_args(None, _grid_url, None)
-    )
-
-    assert(
-        py._api_v2.parse_grid_id_args(_grid, None, None) ==
-        py._api_v2.parse_grid_id_args(None, None, _grid_id)
+        _api_v2.parse_grid_id_args(_grid, None) ==
+        _api_v2.parse_grid_id_args(None, _grid_url)
     )
 
 
 @raises(InputError)
 def test_no_grid_id_args():
-    py._api_v2.parse_grid_id_args(None, None, None)
+    _api_v2.parse_grid_id_args(None, None)
 
 
 @raises(InputError)
 def test_overspecified_grid_args():
-    py._api_v2.parse_grid_id_args(_grid, _grid_url, None)
+    _api_v2.parse_grid_id_args(_grid, _grid_url)
 
 
 ## Out of order usage
 @raises(InputError)
 def test_scatter_from_non_uploaded_grid():
-    c1 = Column('first column', [1, 2, 3, 4])
-    c2 = Column('second column', ['a', 'b', 'c', 'd'])
+    c1 = Column([1, 2, 3, 4], 'first column')
+    c2 = Column(['a', 'b', 'c', 'd'], 'second column')
     g = Grid([c1, c2])
 
     Scatter(xsrc=g[0], ysrc=g[1])
@@ -137,15 +132,15 @@ def test_scatter_from_non_uploaded_grid():
 
 @raises(PlotlyRequestError)
 def test_column_append_of_non_uploaded_grid():
-    c1 = Column('first column', [1, 2, 3, 4])
-    c2 = Column('second column', ['a', 'b', 'c', 'd'])
+    c1 = Column([1, 2, 3, 4], 'first column')
+    c2 = Column(['a', 'b', 'c', 'd'], 'second column')
     g = Grid([c1])
     py.grid_ops.append_columns([c2], grid=g)
 
 
 @raises(PlotlyRequestError)
 def test_row_append_of_non_uploaded_grid():
-    c1 = Column('first column', [1, 2, 3, 4])
+    c1 = Column([1, 2, 3, 4], 'first column')
     rows = [[1], [2]]
     g = Grid([c1])
     py.grid_ops.append_rows(rows, grid=g)

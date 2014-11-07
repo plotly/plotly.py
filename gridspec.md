@@ -14,7 +14,7 @@ unique_url = py.grid_ops.upload(grid, filename, world_readable=True)
 
 ### Updating grids
 
-Grids are identified with either `grid`, `grid_id`, `grid_url`, or `filename`
+Grids are identified with either `grid` or `grid_url`, or `filename`
 `filename` will be unsupported in this version
 ```python
 
@@ -28,8 +28,6 @@ py.grid_ops.upload(grid, 'my file')
 py.grid_ops.append_rows(rows, grid=grid)
 
 # But, these all do the same thing
-py.grid_ops.append_rows(rows, grid_id=grid.id)
-py.grid_ops.append_rows(rows, grid_id="chris:3")
 py.grid_ops.append_rows(rows, grid_url="https://plot.ly/~chris/3") #shortcut
 py.grid_ops.append_rows(rows, filename='my file') # currently unsupported.
                                             # will do a get request behind
@@ -43,7 +41,6 @@ from plotly.grid_objs import Column
 new_col = Column([1,2,3], 'new col name')
 
 # these are equivalent
-py.grid_ops.append_columns([new_col], grid_id='chris:3')
 py.grid_ops.append_columns([new_col], grid_url='https://plot.ly/~chris/3')
 py.grid_ops.append_columns([new_col], filename='my file')
 
