@@ -73,6 +73,15 @@ class Grid(MutableSequence):
             err = exceptions.NON_UNIQUE_COLUMN_MESSAGE.format(column.name)
             raise exceptions.InputError(err)
 
+    def _to_plotly_grid_json(self):
+        grid_json = {'cols': {}}
+        for column_index, column in enumerate(self):
+            grid_json['cols'][column.name] = {
+                'data': column.data,
+                'order': column_index
+            }
+        return grid_json
+
     def get_column(self, column_name):
         """ Return the first column with name `column_name`.
         If no column with `column_name` exists in this grid, return None.
@@ -80,3 +89,4 @@ class Grid(MutableSequence):
         for column in self._columns:
             if column.name == column_name:
                 return column
+

@@ -695,15 +695,9 @@ class grid_ops:
             file_ops.mkdirs(parent_path)
 
         # transmorgify grid object into plotly's format
-        grid_json = {'cols': {}}
+        grid_json = grid._to_plotly_grid_json()
         if meta is not None:
             grid_json['metadata'] = meta
-
-        for column_index, column in enumerate(grid):
-            grid_json['cols'][column.name] = {
-                'data': column.data,
-                'order': column_index
-            }
 
         payload = {
             'filename': filename,
