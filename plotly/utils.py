@@ -12,7 +12,7 @@ import sys
 import threading
 import re
 
-import grid_objs
+import plotly
 
 ### incase people are using threading, we lock file reads
 lock = threading.Lock()
@@ -129,7 +129,7 @@ class _plotlyJSONEncoder(json.JSONEncoder):
         return None
 
     def ColumnJSONEncoder(self, obj):
-        if isinstance(obj, grid_objs.Column):
+        if isinstance(obj, plotly.grid_objs.Column):
             return {'name': obj.name, 'data': obj.data}
         else:
             return None

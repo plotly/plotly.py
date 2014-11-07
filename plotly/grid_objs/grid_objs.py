@@ -3,12 +3,15 @@ grid_objs
 =========
 
 """
+from __future__ import absolute_import
+
 
 import json
 from collections import MutableSequence
 from plotly import exceptions
 import plotly
 
+__all__ = None
 
 class Column(object):
     def __init__(self, data, name):

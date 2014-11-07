@@ -30,10 +30,11 @@ from plotly.graph_objs import graph_objs_tools
 from plotly.graph_objs.graph_objs_tools import (
     INFO, OBJ_MAP, NAME_TO_KEY, KEY_TO_NAME
 )
-from plotly.grid_objs.grid_objs import Column
-import copy
+
 from plotly import exceptions
 from plotly import utils
+
+import copy
 import sys
 if sys.version[:3] == '2.6':
     from ordereddict import OrderedDict
@@ -302,7 +303,6 @@ class PlotlyDict(dict):
 
         for key in kwargs:
             if utils.is_source_key(key):
-                #if src in kwargs and isinstance(kwargs[src], Column):
                 kwargs[key] = self._assign_id_to_src(key, kwargs[key])
 
         super(PlotlyDict, self).__init__(*args, **kwargs)
@@ -341,17 +341,9 @@ class PlotlyDict(dict):
                 raise exceptions.InputError(err)
 
         if src_id == '':
-            if isinstance(src_value, Column):
-                err = exceptions.COLUMN_NOT_YET_UPLOADED_MESSAGE
-                err.format(column_name=src_value.name, reference=src_name)
-                raise exceptions.InputError(err)
-            else:
-                err = ("{} should be a unique identifier "
-                       "string assigned by the Plotly "
-                       "server to this to this grid column, "
-                       "not an empty string.".format(src_name))
-                raise exceptions.InputError(err)
-
+            err = exceptions.COLUMN_NOT_YET_UPLOADED_MESSAGE
+            err.format(column_name=src_value.name, reference=src_name)
+            raise exceptions.InputError(err)
         return src_id
 
     def update(self, dict1=None, **dict2):
