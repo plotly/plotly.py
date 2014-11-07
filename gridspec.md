@@ -42,7 +42,7 @@ new_col = Column([1,2,3], 'new col name')
 
 # these are equivalent
 py.grid_ops.append_columns([new_col], grid_url='https://plot.ly/~chris/3')
-py.grid_ops.append_columns([new_col], filename='my file')
+py.grid_ops.append_columns([new_col], filename='my file') # Currently unsupported
 
 # this, too:
 grid = Grid(Column([1,2,3], 'first column name'))
