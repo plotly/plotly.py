@@ -8,10 +8,10 @@ A module intended for use with Nose.
 
 from nose.tools import raises
 from nose import with_setup
+from nose.plugins.attrib import attr
 
 import random
 import string
-from nose.plugins.attrib import attr
 
 from plotly.graph_objs import Scatter
 import plotly.plotly as py

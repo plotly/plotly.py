@@ -30,9 +30,10 @@ from plotly.graph_objs import graph_objs_tools
 from plotly.graph_objs.graph_objs_tools import (
     INFO, OBJ_MAP, NAME_TO_KEY, KEY_TO_NAME
 )
-from plotly.grid_objs.grid_objs import Column, Grid
+from plotly.grid_objs.grid_objs import Column
 import copy
 from plotly import exceptions
+from plotly import utils
 import sys
 if sys.version[:3] == '2.6':
     from ordereddict import OrderedDict

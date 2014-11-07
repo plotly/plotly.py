@@ -677,13 +677,13 @@ class grid_ops:
                     req_col.id = '{}/{}'.format(grid_id, resp_col['uid'])
                     response_columns.remove(resp_col)
 
-
     @classmethod
-    def upload(cls, grid, filename, world_readable=True, auto_open=True, meta=None):
+    def upload(cls, grid, filename,
+               world_readable=True, auto_open=True, meta=None):
         """ Upload a grid to your Plotly account with the specified filename.
         """
 
-        # Made a folder path
+        # Make a folder path
         if filename[-1] == '/':
             filename = filename[0:-1]
 
@@ -782,7 +782,8 @@ class grid_ops:
             'rows': json.dumps(rows)
         }
 
-        api_url = _api_v2.api_url('grids')+'/{grid_id}/row'.format(grid_id=grid_id)
+        api_url = (_api_v2.api_url('grids')+
+                   '/{grid_id}/row'.format(grid_id=grid_id))
         res = requests.post(api_url, data=payload, headers=_api_v2.headers())
         _api_v2.response_handler(res)
 
@@ -889,8 +890,8 @@ class _api_v2:
 
     @classmethod
     def api_url(cls, resource):
-        return '{}/v2/{}'.format(tools.get_config_file()['plotly_api_domain'],
-            resource)
+        return ('{}/v2/{}'.format(tools.get_config_file()['plotly_api_domain'],
+                resource))
 
     @classmethod
     def headers(cls):
@@ -898,7 +899,7 @@ class _api_v2:
         encoded_un_key_pair = base64.b64encode('{}:{}'.format(un, api_key))
         return {
             'authorization': 'Basic ' + encoded_un_key_pair,
-            'plotly_client_platform': 'python {}'.format(version.__version__)
+            'plotly-client-platform': 'python {}'.format(version.__version__)
         }
 
 

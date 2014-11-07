@@ -332,7 +332,7 @@ def mpl_to_plotly(fig, resize=False, strip_style=False, verbose=False):
     render an mpl figure in plotly. If you need to trouble shoot, you can do
     this step manually by NOT running this fuction and entereing the following:
 
-    ============================================================================
+    ===========================================================================
     from mplexporter import Exporter
     from mplexporter.renderers import PlotlyRenderer
 
@@ -341,7 +341,7 @@ def mpl_to_plotly(fig, resize=False, strip_style=False, verbose=False):
     renderer = PlotlyRenderer()
     exporter = Exporter(renderer)
     exporter.run(fig)
-    ============================================================================
+    ===========================================================================
 
     You can then inspect the JSON structures by accessing these:
 
@@ -358,7 +358,7 @@ def mpl_to_plotly(fig, resize=False, strip_style=False, verbose=False):
     {plotly_domain}/plot
 
     ** Forgot your api_key? Try signing in and looking here:
-    {plotly_domain}/api/python/getting-started
+    {plotly_domain}/python/getting-started
 
     """
     if _matplotlylib_imported:
