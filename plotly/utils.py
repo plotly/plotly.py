@@ -10,6 +10,7 @@ import json
 import os.path
 import sys
 import threading
+import re
 
 ### incase people are using threading, we lock file reads
 lock = threading.Lock()
@@ -183,3 +184,12 @@ def get_first_duplicate(items):
         else:
             return item
     return None
+
+
+### source key
+def is_source_key(key):
+    src_regex = re.compile(r'.+src$')
+    if src_regex.match(key) is not None:
+        return True
+    else:
+        return False

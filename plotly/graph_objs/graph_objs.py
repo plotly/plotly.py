@@ -299,9 +299,10 @@ class PlotlyDict(dict):
     def __init__(self, *args, **kwargs):
         class_name = self.__class__.__name__
 
-        for src in ('xsrc', 'ysrc'):
-            if src in kwargs and isinstance(kwargs[src], Column):
-                kwargs[src] = self._assign_id_to_src(src, kwargs[src])
+        for key in kwargs:
+            if utils.is_source_key(key):
+                #if src in kwargs and isinstance(kwargs[src], Column):
+                kwargs[key] = self._assign_id_to_src(key, kwargs[key])
 
         super(PlotlyDict, self).__init__(*args, **kwargs)
         if issubclass(NAME_TO_CLASS[class_name], PlotlyTrace):
@@ -314,20 +315,43 @@ class PlotlyDict(dict):
                           "a user interface.")
 
     def __setitem__(self, key, value):
+
         if key in ('xsrc', 'ysrc'):
             value = self._assign_id_to_src(key, value)
 
         return super(PlotlyDict, self).__setitem__(key, value)
 
     def _assign_id_to_src(self, src_name, src_value):
-        if isinstance(src_value, Column):
-            if src_value.id == '':
+        if isinstance(src_value, basestring):
+            src_id = src_value
+        else:
+            try:
+                src_id = src_value.id
+            except:
+                err = ("{} does not have an `id` property. "
+                       "{} needs to be assigned to either an "
+                       "object with an `id` (like a "
+                       "plotly.grid_objs.Column) or a string. "
+                       "The `id` is a unique identifier "
+                       "assigned by the Plotly webserver "
+                       "to this grid column.")
+                src_value_str = str(src_value)
+                err = err.format(src_name, src_value_str)
+                raise exceptions.InputError(err)
+
+        if src_id == '':
+            if isinstance(src_value, Column):
                 err = exceptions.COLUMN_NOT_YET_UPLOADED_MESSAGE
                 err.format(column_name=src_value.name, reference=src_name)
                 raise exceptions.InputError(err)
             else:
-                src_value = src_value.id
-        return src_value
+                err = ("{} should be a unique identifier "
+                       "string assigned by the Plotly "
+                       "server to this to this grid column, "
+                       "not an empty string.".format(src_name))
+                raise exceptions.InputError(err)
+
+        return src_id
 
     def update(self, dict1=None, **dict2):
         """Update current dict with dict1 and then dict2.
