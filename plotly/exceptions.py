@@ -23,11 +23,12 @@ class PlotlyError(Exception):
     pass
 
 
-class InputError(Exception):
+
+class InputError(PlotlyError):
     pass
 
 
-class PlotlyRequestError(Exception):
+class PlotlyRequestError(PlotlyError):
     def __init__(self, requests_exception):
         self.status_code = requests_exception.response.status_code
         self.HTTPError = requests_exception
@@ -67,6 +68,10 @@ NON_UNIQUE_COLUMN_MESSAGE = (
     "can't have duplicate column names. Rename "
     "the column \"{}\" and try again."
 )
+## Would Cause Server Errors ##
+
+class PlotlyEmptyDataError(PlotlyError):
+    pass
 
 
 ## Graph Objects Errors ##

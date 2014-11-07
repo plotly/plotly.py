@@ -1,3 +1,4 @@
+from unittest import TestCase
 import plotly.plotly.plotly as py
 import plotly.tools as tls
 
@@ -25,3 +26,39 @@ def test_sign_in():
     assert creds['api_key'] == ak
     # TODO, and check it!
     # assert creds['stream_ids'] == si
+
+
+class TestSignIn(TestCase):
+
+    def test_get_config(self):
+        plotly_domain = 'test domain'
+        plotly_streaming_domain = 'test streaming domain'
+        config1 = py.get_config()
+        py._config['plotly_domain'] = plotly_domain
+        config2 = py.get_config()
+        py._config['plotly_streaming_domain'] = plotly_streaming_domain
+        config3 = py.get_config()
+        self.assertEqual(config2['plotly_domain'], plotly_domain)
+        self.assertNotEqual(
+            config2['plotly_streaming_domain'], plotly_streaming_domain
+        )
+        self.assertEqual(
+            config3['plotly_streaming_domain'], plotly_streaming_domain
+        )
+
+    def test_sign_in_with_config(self):
+        username = 'place holder'
+        api_key = 'place holder'
+        plotly_domain = 'test domain'
+        plotly_streaming_domain = 'test streaming domain'
+        py.sign_in(
+            username,
+            api_key,
+            plotly_domain=plotly_domain,
+            plotly_streaming_domain=plotly_streaming_domain
+        )
+        config = py.get_config()
+        self.assertEqual(config['plotly_domain'], plotly_domain)
+        self.assertEqual(
+            config['plotly_streaming_domain'], plotly_streaming_domain
+        )

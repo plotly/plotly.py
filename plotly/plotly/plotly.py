@@ -45,17 +45,23 @@ _credentials = dict()
 
 _plot_options = dict()
 
+_config = dict()
+
 ### test file permissions and make sure nothing is corrupted ###
 tools.ensure_local_plotly_files()
 
 ### _credentials stuff ###
 
 
-def sign_in(username, api_key):
-    """Set module-scoped _credentials for session. Verify with plotly."""
-    global _credentials
+def sign_in(username, api_key, **kwargs):
+    """Set module-scoped _credentials for session. Optionally, set config info.
+    """
     _credentials['username'], _credentials['api_key'] = username, api_key
     # TODO: verify these _credentials with plotly
+
+    _config['plotly_domain'] = kwargs.get('plotly_domain')
+    _config['plotly_streaming_domain'] = kwargs.get('plotly_streaming_domain')
+    # TODO: verify format of config options
 
 
 ### plot options stuff ###
@@ -63,7 +69,6 @@ def sign_in(username, api_key):
 def update_plot_options(**kwargs):
     """ Update the module-level _plot_options
     """
-    global _plot_options
     _plot_options.update(kwargs)
 
 
@@ -71,18 +76,16 @@ def get_plot_options():
     """ Returns a copy of the user supplied plot options.
     Use `update_plot_options()` to change.
     """
-    global _plot_options
     return copy.copy(_plot_options)
 
 
 def get_credentials():
-    """ Returns a copy of the user supplied credentials.
-    """
-    global _credentials
-    if ('username' in _credentials) and ('api_key' in _credentials):
-        return copy.copy(_credentials)
-    else:
-        return tools.get_credentials_file()
+    """Returns the credentials that will be sent to plotly."""
+    credentials = tools.get_credentials_file()
+    for credentials_key in credentials:
+        if _credentials.get(credentials_key):
+            credentials[credentials_key] = _credentials[credentials_key]
+    return credentials
 
 
 ### plot stuff ###
@@ -128,6 +131,15 @@ def _plot_option_logic(plot_options):
     return options
 
 
+def get_config():
+    """Returns either module config or file config."""
+    config = tools.get_config_file()
+    for config_key in config:
+        if _config.get(config_key):
+            config[config_key] = _config[config_key]
+    return config
+
+
 def plot(figure_or_data, validate=True, **plot_options):
     """Create a unique url for this plot in Plotly and optionally open url.
 
@@ -165,6 +177,12 @@ def plot(figure_or_data, validate=True, **plot_options):
                                          "plot option.\nHere's why you're "
                                          "seeing this error:\n\n{0}"
                                          "".format(err))
+        if not figure['data']:
+            raise exceptions.PlotlyEmptyDataError(
+                "Empty data list found. Make sure that you populated the "
+                "list of data objects you're sending and try again.\n"
+                "Questions? support@plot.ly"
+            )
     for entry in figure['data']:
         for key, val in list(entry.items()):
             try:
@@ -299,7 +317,7 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
     `graph objects`.
 
     """
-    plotly_rest_url = tools.get_config_file()['plotly_domain']
+    plotly_rest_url = get_config()['plotly_domain']
     if file_id is None:  # assume we're using a url
         url = file_owner_or_url
         if url[:len(plotly_rest_url)] != plotly_rest_url:
@@ -405,7 +423,7 @@ class Stream:
         http://nbviewer.ipython.org/github/plotly/python-user-guide/blob/master/s7_streaming/s7_streaming.ipynb
         """
 
-        streaming_url = tools.get_config_file()['plotly_streaming_domain']
+        streaming_url = get_config()['plotly_streaming_domain']
         self._stream = chunked_requests.Stream(streaming_url,
                                                80,
                                                {'Host': streaming_url,
@@ -554,7 +572,7 @@ class image:
         if height is not None:
             payload['height'] = height
 
-        url = tools.get_config_file()['plotly_domain'] + "/apigenimage/"
+        url = get_config()['plotly_domain'] + "/apigenimage/"
         res = requests.post(url,
                             data=json.dumps(payload,
                                             cls=utils._plotlyJSONEncoder),
@@ -937,7 +955,7 @@ def _send_to_plotly(figure, **plot_options):
                    origin='plot',
                    kwargs=kwargs)
 
-    url = tools.get_config_file()['plotly_domain'] + "/clientresp"
+    url = get_config()['plotly_domain'] + "/clientresp"
 
     r = requests.post(url, data=payload)
     r.raise_for_status()

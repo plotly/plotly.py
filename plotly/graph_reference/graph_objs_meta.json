@@ -3736,13 +3736,13 @@
             }, 
             "bargap": {
                 "key_type": "style", 
-                "val_types": "number: x >= 0", 
+                "val_types": "number: x in [0, 1)", 
                 "required": false, 
                 "description": "For bar and histogram plots only. Sets the gap between bars (or sets of bars) at different locations."
             }, 
             "bargroupgap": {
                 "key_type": "style", 
-                "val_types": "number: x >= 0", 
+                "val_types": "number: x in [0, 1)", 
                 "required": false, 
                 "description": "For bar and histogram plots only. Sets the gap between bars in the same group. That is, when multiple bar objects are plotted and share the same locations, this sets the distance between bars at each location."
             }, 
@@ -3751,6 +3751,18 @@
                 "val_types": "'overlay' | 'group'", 
                 "required": false, 
                 "description": "For box plots only. Sets how groups of box plots appear. If set to 'overlay', a group of boxes will be plotted directly on top of one another at their specified location. If set to 'group', the boxes will be centered around their shared location, but they will not overlap."
+            }, 
+            "boxgap": {
+                "key_type": "style", 
+                "val_types": "number: x in [0, 1)", 
+                "required": false, 
+                "description": "For box plots only. Sets the gap between boxes at different locations (i.e. x-labels). If there are multiple boxes at a single x-label, then this sets the gap between these sets of boxes.For example, if 0, then there is no gap between boxes. If 0.25, then this gap occupies 25% of the available space and the box width (or width of the set of boxes) occupies the remaining 75%."
+            }, 
+            "boxgroupgap": {
+                "key_type": "style", 
+                "val_types": "number: x in [0, 1)", 
+                "required": false, 
+                "description": "For box plots only. Sets the gap between boxes in the same group, where a group is the set of boxes with the same location (i.e. x-label). For example, if 0, then there is no gap between boxes. If 0.25, then this gap occupies 25% of the available space and the box width occupies the remaining 75%."
             }, 
             "radialaxis": {
                 "key_type": "object", 
@@ -3868,13 +3880,13 @@
                 "key_type": "style", 
                 "val_types": "number", 
                 "required": false, 
-                "description": "Sets the 'x' position of this legend.Use in conjunction with 'xref' and 'xanchor' to fine-tune the location of this legend."
+                "description": "Sets the 'x' position of this legend. Use in conjunction with 'xref' and 'xanchor' to fine-tune the location of this legend."
             }, 
             "y": {
                 "key_type": "style", 
                 "val_types": "number", 
                 "required": false, 
-                "description": "Sets the 'y' position of this legend.Use in conjunction with 'yref' and 'yanchor' to fine-tune the location of this legend."
+                "description": "Sets the 'y' position of this legend. Use in conjunction with 'yref' and 'yanchor' to fine-tune the location of this legend."
             }, 
             "traceorder": {
                 "key_type": "style", 
@@ -3964,22 +3976,22 @@
                 "key_type": "plot_info", 
                 "val_types": "number", 
                 "required": false, 
-                "description": "Sets the 'x' position of this annotation.Use in conjunction with 'xref' and 'xanchor' to fine-tune the location of this annotation."
+                "description": "Sets the 'x' position of this annotation. Use in conjunction with 'xref' and 'xanchor' to fine-tune the location of this annotation."
             }, 
             "y": {
                 "key_type": "plot_info", 
                 "val_types": "number", 
                 "required": false, 
-                "description": "Sets the 'y' position of this annotation.Use in conjunction with 'yref' and 'yanchor' to fine-tune the location of this annotation."
+                "description": "Sets the 'y' position of this annotation. Use in conjunction with 'yref' and 'yanchor' to fine-tune the location of this annotation."
             }, 
             "xref": {
-                "key_type": "style", 
+                "key_type": "plot_info", 
                 "val_types": "'paper' | 'x1' | 'x2' | etc", 
                 "required": false, 
                 "description": "Sets the x coordinate system which this object refers to. If you reference an axis, e.g., 'x2', the object will move with pan-and-zoom to stay fixed to this point. If you reference the 'paper', it remains fixed regardless of pan-and-zoom. In other words, if set to 'paper', the 'x' location refers to the distance from the left side of the plotting area in normalized coordinates where 0 is 'left' and 1 is 'right'. If set to refer to an xaxis' , e.g., 'x1', 'x2', 'x3', etc., the 'x' location will refer to the location in terms of this axis."
             }, 
             "yref": {
-                "key_type": "style", 
+                "key_type": "plot_info", 
                 "val_types": "'paper' | 'y1' | 'y2' | etc", 
                 "required": false, 
                 "description": "Sets the y coordinate system which this object refers to. If you reference an axis, e.g., 'y2', the object will move with pan-and-zoom to stay fixed to this point. If you reference the 'paper', it remains fixed regardless of pan-and-zoom. In other words, if set to 'paper', the 'y' location refers to the distance from the left side of the plotting area in normalized coordinates where 0 is 'bottom' and 1 is 'top'. If set to refer to an yaxis' , e.g., 'y1', 'y2', 'y3', etc., the 'y' location will refer to the location in terms of this axis."
