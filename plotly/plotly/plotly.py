@@ -16,6 +16,7 @@ and ploty's servers.
 """
 from __future__ import absolute_import
 
+import sys
 import json
 import warnings
 import copy
@@ -23,7 +24,11 @@ import os
 import six
 import base64
 import requests
-from urlparse import urlparse
+
+if sys.version[:1] == '2':
+    from urlparse import urlparse
+else:
+    from urllib.parse import urlparse
 
 from plotly.plotly import chunked_requests
 from plotly import utils
