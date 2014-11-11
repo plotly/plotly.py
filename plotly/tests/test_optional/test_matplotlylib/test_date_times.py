@@ -37,4 +37,7 @@ class TestDateTimes(TestCase):
         print date_strings
         print pfig['data'][0]['x']
         # we use the same format here, so we expect equality here
+        self.assertEqual(
+            fig.axes[0].lines[0].get_xydata()[0][0], 7.33776000e+05
+        )
         self.assertEqual(pfig['data'][0]['x'], date_strings)
