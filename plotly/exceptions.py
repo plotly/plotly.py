@@ -15,7 +15,7 @@ info: (required!)
 
 
 """
-
+import json
 
 ## Base Plotly Error ##
 
@@ -23,6 +23,51 @@ class PlotlyError(Exception):
     pass
 
 
+
+class InputError(PlotlyError):
+    pass
+
+
+class PlotlyRequestError(PlotlyError):
+    def __init__(self, requests_exception):
+        self.status_code = requests_exception.response.status_code
+        self.HTTPError = requests_exception
+        content_type = requests_exception.response.headers['content-type']
+        if 'json' in content_type:
+            content = requests_exception.response.content
+            if content != '':
+                res_payload = json.loads(requests_exception.response.content)
+                if 'detail' in res_payload:
+                    self.message = res_payload['detail']
+                else:
+                    self.message = ''
+            else:
+                self.message = ''
+        elif content_type == 'text/plain':
+            self.message = requests_exception.response.content
+        else:
+            self.message = requests_exception.message
+
+    def __str__(self):
+        return self.message
+
+
+## Grid Errors ##
+
+COLUMN_NOT_YET_UPLOADED_MESSAGE = (
+    "Hm... it looks like your column '{column_name}' hasn't "
+    "been uploaded to Plotly yet. You need to upload your "
+    "column to Plotly before you can assign it to '{reference}'.\n"
+    "To upload, try `plotly.plotly.grid_objs.upload` or "
+    "`plotly.plotly.grid_objs.append_column`.\n"
+    "Questions? chris@plot.ly"
+)
+
+NON_UNIQUE_COLUMN_MESSAGE = (
+    "Yikes, plotly grids currently "
+    "can't have duplicate column names. Rename "
+    "the column \"{}\" and try again."
+)
 ## Would Cause Server Errors ##
 
 class PlotlyEmptyDataError(PlotlyError):

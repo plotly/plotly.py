@@ -49,7 +49,8 @@ _FILE_CONTENT = {CREDENTIALS_FILE: {'username': '',
                                     'api_key': '',
                                     'stream_ids': []},
                  CONFIG_FILE: {'plotly_domain': 'https://plot.ly',
-                               'plotly_streaming_domain': 'stream.plot.ly'}}
+                               'plotly_streaming_domain': 'stream.plot.ly',
+                               'plotly_api_domain': 'https://api.plot.ly'}}
 
 try:
     os.mkdir(TEST_DIR)
@@ -139,7 +140,9 @@ def reset_credentials_file():
 
 ### config tools ###
 
-def set_config_file(plotly_domain=None, plotly_streaming_domain=None):
+def set_config_file(plotly_domain=None,
+                    plotly_streaming_domain=None,
+                    plotly_api_domain=None):
     """Set the keyword-value pairs in `~/.plotly/.config`.
 
     """
@@ -152,6 +155,8 @@ def set_config_file(plotly_domain=None, plotly_streaming_domain=None):
         settings['plotly_domain'] = plotly_domain
     if isinstance(plotly_streaming_domain, six.string_types):
         settings['plotly_streaming_domain'] = plotly_streaming_domain
+    if isinstance(plotly_api_domain, six.string_types):
+        settings['plotly_api_domain'] = plotly_api_domain
     utils.save_json_dict(CONFIG_FILE, settings)
     ensure_local_plotly_files()  # make sure what we just put there is OK
 
@@ -183,7 +188,7 @@ def reset_config_file():
 
 def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
     """Returns HTML code to embed figure on a webpage as an <iframe>
-    
+
     Plotly uniquely identifies figures with a 'file_owner'/'file_id' pair.
     Since each file is given a corresponding unique url, you may also simply
     pass a valid plotly url as the first argument.
@@ -262,7 +267,7 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
 
 def embed(file_owner_or_url, file_id=None, width="100%", height=525):
     """Embeds existing Plotly figure in IPython Notebook
-    
+
     Plotly uniquely identifies figures with a 'file_owner'/'file_id' pair.
     Since each file is given a corresponding unique url, you may also simply
     pass a valid plotly url as the first argument.
@@ -327,7 +332,7 @@ def mpl_to_plotly(fig, resize=False, strip_style=False, verbose=False):
     render an mpl figure in plotly. If you need to trouble shoot, you can do
     this step manually by NOT running this fuction and entereing the following:
 
-    ============================================================================
+    ===========================================================================
     from mplexporter import Exporter
     from mplexporter.renderers import PlotlyRenderer
 
@@ -336,7 +341,7 @@ def mpl_to_plotly(fig, resize=False, strip_style=False, verbose=False):
     renderer = PlotlyRenderer()
     exporter = Exporter(renderer)
     exporter.run(fig)
-    ============================================================================
+    ===========================================================================
 
     You can then inspect the JSON structures by accessing these:
 
@@ -353,7 +358,7 @@ def mpl_to_plotly(fig, resize=False, strip_style=False, verbose=False):
     {plotly_domain}/plot
 
     ** Forgot your api_key? Try signing in and looking here:
-    {plotly_domain}/api/python/getting-started
+    {plotly_domain}/python/getting-started
 
     """
     if _matplotlylib_imported:

@@ -422,13 +422,17 @@ def prep_ticks(ax, index, ax_type, props):
     if ax_type == 'x' and 'DateFormatter' in formatter:
         axis_dict['type'] = 'date'
         try:
-            axis_dict['tick0'] = mpl_dates_to_datestrings(axis_dict['tick0'])
+            axis_dict['tick0'] = mpl_dates_to_datestrings(
+                axis_dict['tick0'], formatter
+            )
         except KeyError:
             pass
         finally:
             axis_dict.pop('dtick', None)
             axis_dict.pop('autotick', None)
-            axis_dict['range'] = mpl_dates_to_datestrings(props['xlim'])
+            axis_dict['range'] = mpl_dates_to_datestrings(
+                props['xlim'], formatter
+            )
 
     if formatter == 'LogFormatterMathtext':
         axis_dict['exponentformat'] = 'e'
@@ -457,22 +461,39 @@ def prep_xy_axis(ax, props, x_bounds, y_bounds):
     return xaxis, yaxis
 
 
-def mpl_dates_to_datestrings(mpl_dates, format_string="%Y-%m-%d %H:%M:%S"):
-    """Convert matplotlib dates to formatted datestrings for plotly.
+def mpl_dates_to_datestrings(dates, mpl_formatter):
+    """Convert matplotlib dates to iso-formatted-like time strings.
+
+    Plotly's accepted format: "YYYY-MM-DD HH:MM:SS" (e.g., 2001-01-01 00:00:00)
 
     Info on mpl dates: http://matplotlib.org/api/dates_api.html
 
     """
-    try:
-        date_times = matplotlib.dates.num2date(mpl_dates, tz=pytz.utc)
-        time_strings = [date_time.strftime(format_string)
-                        for date_time in date_times]
-        if len(time_strings) > 1:
-            return time_strings
-        else:
-            return time_strings[0]
-    except TypeError:
-        return mpl_dates
+    _dates = dates
+
+    # this is a pandas datetime formatter, times show up in floating point days
+    # since the epoch (1970-01-01T00:00:00+00:00)
+    if mpl_formatter == "TimeSeries_DateFormatter":
+        try:
+            dates = matplotlib.dates.epoch2num(
+                [date*24*60*60 for date in dates]
+            )
+            dates = matplotlib.dates.num2date(dates, tz=pytz.utc)
+        except:
+            return _dates
+
+    # the rest of mpl dates are in floating point days since
+    # (0001-01-01T00:00:00+00:00) + 1. I.e., (0001-01-01T00:00:00+00:00) == 1.0
+    # according to mpl --> try num2date(1)
+    else:
+        try:
+            dates = matplotlib.dates.num2date(dates, tz=pytz.utc)
+        except:
+            return _dates
+
+    time_stings = [' '.join(date.isoformat().split('+')[0].split('T'))
+                   for date in dates]
+    return time_stings
 
 
 DASH_MAP = {
