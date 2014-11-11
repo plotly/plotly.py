@@ -1,10 +1,13 @@
 from __future__ import absolute_import
+
+import random
 import matplotlib
 # Force matplotlib to not use any Xwindows backend.
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import datetime
 from matplotlib.dates import date2num
+import pandas as pd
 import plotly.tools as tls
 from unittest import TestCase
 
@@ -37,4 +40,28 @@ class TestDateTimes(TestCase):
         print date_strings
         print pfig['data'][0]['x']
         # we use the same format here, so we expect equality here
+        self.assertEqual(
+            fig.axes[0].lines[0].get_xydata()[0][0], 7.33776000e+05
+        )
         self.assertEqual(pfig['data'][0]['x'], date_strings)
+
+    def test_pandas_time_series_date_formatter(self):
+        ndays = 3
+        x = pd.date_range('1/1/2001', periods=ndays, freq='D')
+        y = [random.randint(0, 10) for i in range(ndays)]
+        s = pd.DataFrame(y, columns=['a'])
+
+        s['Date'] = x
+        s.plot(x='Date')
+
+        fig = plt.gcf()
+        pfig = tls.mpl_to_plotly(fig)
+
+        expected_x = ['2001-01-01 00:00:00',
+                      '2001-01-02 00:00:00',
+                      '2001-01-03 00:00:00']
+        expected_x0 = 11323.0  # this is floating point days since epoch
+
+        x0 = fig.axes[0].lines[0].get_xydata()[0][0]
+        self.assertEqual(x0, expected_x0)
+        self.assertListEqual(pfig['data'][0]['x'], expected_x)

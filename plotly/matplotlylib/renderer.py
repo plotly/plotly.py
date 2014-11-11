@@ -258,7 +258,9 @@ class PlotlyRenderer(Renderer):
                                            [bar['x1'] for bar in trace])
             if self.x_is_mpl_date:
                 x = [bar['x0'] for bar in trace]
-                x = mpltools.mpl_dates_to_datestrings(x)
+                formatter = (self.current_mpl_ax.get_xaxis()
+                             .get_major_formatter().__class__.__name__)
+                x = mpltools.mpl_dates_to_datestrings(x, formatter)
         else:
             self.msg += "    Attempting to draw a horizontal bar chart\n"
             old_rights = [bar_props['x1'] for bar_props in trace]
@@ -367,8 +369,10 @@ class PlotlyRenderer(Renderer):
                 line=line,
                 marker=marker)
             if self.x_is_mpl_date:
+                formatter = (self.current_mpl_ax.get_xaxis()
+                             .get_major_formatter().__class__.__name__)
                 marked_line['x'] = mpltools.mpl_dates_to_datestrings(
-                    marked_line['x']
+                    marked_line['x'], formatter
                 )
             self.plotly_fig['data'] += marked_line,
             self.msg += "    Heck yeah, I drew that line\n"
