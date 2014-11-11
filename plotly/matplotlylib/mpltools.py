@@ -422,13 +422,17 @@ def prep_ticks(ax, index, ax_type, props):
     if ax_type == 'x' and 'DateFormatter' in formatter:
         axis_dict['type'] = 'date'
         try:
-            axis_dict['tick0'] = mpl_dates_to_datestrings(axis_dict['tick0'])
+            axis_dict['tick0'] = mpl_dates_to_datestrings(
+                axis_dict['tick0'], formatter
+            )
         except KeyError:
             pass
         finally:
             axis_dict.pop('dtick', None)
             axis_dict.pop('autotick', None)
-            axis_dict['range'] = mpl_dates_to_datestrings(props['xlim'])
+            axis_dict['range'] = mpl_dates_to_datestrings(
+                props['xlim'], formatter
+            )
 
     if formatter == 'LogFormatterMathtext':
         axis_dict['exponentformat'] = 'e'
