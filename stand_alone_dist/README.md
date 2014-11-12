@@ -11,7 +11,7 @@ Here we assume you're familiar with command-line tools and that you've got pip i
 curl -O https://github.com/plotly/python-api/raw/tarball-link/stand_alone_dist/dist.zip
 unzip dist.zip
 cd dist
-ls | xargs pip install
+ls | xargs pip -I install
 ```
 
 ### Need Help?
