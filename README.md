@@ -25,6 +25,10 @@ Checkout [`contributing.md`](https://github.com/plotly/python-api/blob/master/co
 
 See [`requirements.txt`](https://github.com/plotly/python-api/blob/master/requirements.txt) and [`optional-requirements.txt`](https://github.com/plotly/python-api/blob/master/optional-requirements.txt) for dependency information.
 
+###Installing on a machine that can't connect to PyPI?
+
+See the [`stand_alone_dist/README.md`](https://github.com/plotly/python-api/blob/master/stand_alone_dist/README.md)
+
 ###Get in touch
 
 - <feedback@plot.ly>
