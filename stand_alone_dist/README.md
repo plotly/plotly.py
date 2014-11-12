@@ -6,19 +6,13 @@ If for reasons beyond your control, you cannot install the plotly package via pi
 
 Here we assume you're familiar with command-line tools and that you've got pip installed.
 
-#### Unix-y Folks
-1. download the zipped files
-2. unzip it!
-3. open your terminal
-4. `cd` into this folder
-5. run `ls | xargs pip install`
-
-#### Windows Folks
-1. download the zipped files
-2. unzip it!
-3. open cmd
-4. `cd` into this folder
-5. run `dir | xargs pip install`
+#### Unix-y Folks, do this:
+```bash
+curl -O https://github.com/plotly/python-api/raw/tarball-link/stand_alone_dist/dist.zip
+unzip dist.zip
+cd dist
+ls | xargs pip install
+```
 
 ### Need Help?
 <mailto:support@plot.ly>
