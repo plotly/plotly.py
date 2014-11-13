@@ -67,6 +67,7 @@ def sign_in(username, api_key, **kwargs):
     _config['plotly_domain'] = kwargs.get('plotly_domain')
     _config['plotly_streaming_domain'] = kwargs.get('plotly_streaming_domain')
     _config['plotly_api_domain'] = kwargs.get('plotly_api_domain')
+    _config['plotly_ssl_verification'] = kwargs.get('plotly_ssl_verification')
     # TODO: verify format of config options
 
 
@@ -141,7 +142,7 @@ def get_config():
     """Returns either module config or file config."""
     config = tools.get_config_file()
     for config_key in config:
-        if _config.get(config_key):
+        if _config.get(config_key) is not None:
             config[config_key] = _config[config_key]
     return config
 
