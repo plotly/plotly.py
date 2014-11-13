@@ -360,7 +360,9 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
         raise exceptions.PlotlyError(
             "The 'file_id' argument must be a non-negative number."
         )
-    response = requests.get(plotly_rest_url + resource, headers=headers)
+    response = requests.get(plotly_rest_url + resource,
+                            headers=headers,
+                            verify=get_config()['plotly_ssl_verification'])
     if response.status_code == 200:
         if six.PY3:
             content = json.loads(response.content.decode('unicode_escape'))
@@ -580,10 +582,10 @@ class image:
             payload['height'] = height
 
         url = get_config()['plotly_domain'] + "/apigenimage/"
-        res = requests.post(url,
-                            data=json.dumps(payload,
-                                            cls=utils._plotlyJSONEncoder),
-                            headers=headers)
+        res = requests.post(
+            url, data=json.dumps(payload, cls=utils._plotlyJSONEncoder),
+            headers=headers, verify=get_config()['plotly_ssl_verification']
+        )
 
         headers = res.headers
 
@@ -683,7 +685,8 @@ class file_ops:
 
         url = _api_v2.api_url('folders')
 
-        res = requests.post(url, data=payload, headers=_api_v2.headers())
+        res = requests.post(url, data=payload, headers=_api_v2.headers(),
+                            verify=get_config()['plotly_ssl_verification'])
 
         _api_v2.response_handler(res)
 
@@ -734,7 +737,8 @@ class grid_ops:
 
         upload_url = _api_v2.api_url('grids')
         req = requests.post(upload_url, data=payload,
-                            headers=_api_v2.headers())
+                            headers=_api_v2.headers(),
+                            verify=get_config()['plotly_ssl_verification'])
 
         res = _api_v2.response_handler(req)
 
@@ -776,7 +780,8 @@ class grid_ops:
         }
 
         api_url = _api_v2.api_url('grids')+'/{grid_id}/col'.format(grid_id=grid_id)
-        res = requests.post(api_url, data=payload, headers=_api_v2.headers())
+        res = requests.post(api_url, data=payload, headers=_api_v2.headers(),
+                            verify=get_config()['plotly_ssl_verification'])
         res = _api_v2.response_handler(res)
 
         cls._fill_in_response_column_ids(columns, res['cols'], grid_id)
@@ -808,7 +813,8 @@ class grid_ops:
 
         api_url = (_api_v2.api_url('grids')+
                    '/{grid_id}/row'.format(grid_id=grid_id))
-        res = requests.post(api_url, data=payload, headers=_api_v2.headers())
+        res = requests.post(api_url, data=payload, headers=_api_v2.headers(),
+                            verify=get_config()['plotly_ssl_verification'])
         _api_v2.response_handler(res)
 
         if grid:
@@ -827,7 +833,8 @@ class grid_ops:
     def delete(cls, grid=None, grid_url=None):
         grid_id = _api_v2.parse_grid_id_args(grid, grid_url)
         api_url = _api_v2.api_url('grids')+'/'+grid_id
-        res = requests.delete(api_url, headers=_api_v2.headers())
+        res = requests.delete(api_url, headers=_api_v2.headers(),
+                              verify=get_config()['plotly_ssl_verification'])
         _api_v2.response_handler(res)
 
 
@@ -845,7 +852,8 @@ class meta_ops:
 
         api_url = _api_v2.api_url('grids')+'/{grid_id}'.format(grid_id=grid_id)
 
-        res = requests.patch(api_url, data=payload, headers=_api_v2.headers())
+        res = requests.patch(api_url, data=payload, headers=_api_v2.headers(),
+                             verify=get_config()['plotly_ssl_verification'])
 
         return _api_v2.response_handler(res)
 
@@ -964,7 +972,8 @@ def _send_to_plotly(figure, **plot_options):
 
     url = get_config()['plotly_domain'] + "/clientresp"
 
-    r = requests.post(url, data=payload)
+    r = requests.post(url, data=payload,
+                      verify=get_config()['plotly_ssl_verification'])
     r.raise_for_status()
     r = json.loads(r.text)
     if 'error' in r and r['error'] != '':
