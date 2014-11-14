@@ -307,7 +307,7 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
                 fid=file_id)
         else:
             url = file_owner_or_url
-        return PlotlyDisplay(url)
+        return PlotlyDisplay(url, width, height)
     else:
         warnings.warn(
             "Looks like you're not using IPython or Sage to embed this plot. "
@@ -572,9 +572,9 @@ if _ipython_imported:
         object can provide alternate representations.
 
         """
-        def __init__(self, url):
+        def __init__(self, url, width, height):
             self.resource = url
-            self.embed_code = get_embed(url)
+            self.embed_code = get_embed(url, width=width, height=height)
             super(PlotlyDisplay, self).__init__(data=self.embed_code)
 
         def _repr_svg_(self):
