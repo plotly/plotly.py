@@ -215,7 +215,7 @@ class PlotlyList(list):
 
         Example:
 
-            print obj.to_string()
+            print(obj.to_string())
 
         Keyword arguments:
         level (default = 0) -- set number of indentations to start with
@@ -430,7 +430,7 @@ class PlotlyDict(dict):
                         elif not hasattr(self[key], '__iter__'):
                             del self[key]
                 except KeyError:  # TODO: Update the JSON
-                    # print "'type' not in {0} for {1}".format(obj_key, key)
+                    # print("'type' not in {0} for {1}".format(obj_key, key))
                     pass
 
     def get_data(self):
@@ -605,7 +605,7 @@ class PlotlyDict(dict):
 
         Example:
 
-            print obj.to_string()
+            print(obj.to_string())
 
         Keyword arguments:
         level (default = 0) -- set number of indentations to start with
@@ -759,7 +759,7 @@ class PlotlyTrace(PlotlyDict):
 
         Example:
 
-            print obj.to_string()
+            print(obj.to_string())
 
         Keyword arguments:
         level (default = 0) -- set number of indentations to start with
@@ -962,7 +962,7 @@ def get_patched_layout_class(Layout):
 
         Example:
 
-            print obj.to_string()
+            print(obj.to_string())
 
         Keyword arguments:
         level (default = 0) -- set number of indentations to start with

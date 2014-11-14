@@ -18,7 +18,7 @@ def test_trivial():
 
 # @raises(PlotlyError)  # TODO: decide if this SHOULD raise error...
 # def test_instantiation_error():
-#     print Trace(anything='something')
+#     print(Trace(anything='something'))
 
 
 def test_validate():
