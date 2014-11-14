@@ -913,7 +913,7 @@ class _api_v2:
                 'json' in response.headers['content-type'] and
                 len(response.content) > 0):
 
-            response_dict = json.loads(response.content)
+            response_dict = json.loads(response.content.decode('utf8'))
 
             if 'warnings' in response_dict and len(response_dict['warnings']):
                 warnings.warn('\n'.join(response_dict['warnings']))
@@ -928,7 +928,10 @@ class _api_v2:
     @classmethod
     def headers(cls):
         un, api_key = _get_session_username_and_key()
-        encoded_un_key_pair = base64.b64encode('{}:{}'.format(un, api_key))
+        encoded_un_key_pair = base64.b64encode(
+            six.b('{}:{}'.format(un, api_key))
+        ).decode('utf8')
+
         return {
             'authorization': 'Basic ' + encoded_un_key_pair,
             'plotly-client-platform': 'python {}'.format(version.__version__)
