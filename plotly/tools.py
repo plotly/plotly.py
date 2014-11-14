@@ -248,7 +248,8 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
         s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\""
              "seamless=\"seamless\" "
              "src=\"{plotly_rest_url}/"
-             "~{file_owner}/{file_id}/{plot_width}/{plot_height}\" "
+             "~{file_owner}/{file_id}.embed"
+             "?width={plot_width}&height={plot_height}\" "
              "height=\"{iframe_height}\" width=\"{iframe_width}\">"
              "</iframe>").format(
             plotly_rest_url=plotly_rest_url,
@@ -259,7 +260,7 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
         s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\""
              "seamless=\"seamless\" "
              "src=\"{plotly_rest_url}/"
-             "~{file_owner}/{file_id}\" "
+             "~{file_owner}/{file_id}.embed\" "
              "height=\"{iframe_height}\" width=\"{iframe_width}\">"
              "</iframe>").format(
             plotly_rest_url=plotly_rest_url,
