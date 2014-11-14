@@ -858,7 +858,7 @@ class grid_ops:
         from plotly.grid_objs import Grid, Column
         import plotly.plotly as py
 
-        grid_url = 'https://plot.ly/~chris/39' # TODO: verify grid
+        grid_url = 'https://plot.ly/~chris/3143'
         column_1 = Column([1, 2, 3], 'time')
         py.grid_ops.append_columns([column_1], grid_url=grid_url)
         ```
@@ -927,7 +927,7 @@ class grid_ops:
         from plotly.grid_objs import Grid
         import plotly.plotly as py
 
-        grid_url = 'https://plot.ly/~chris/39' # TODO: verify grid
+        grid_url = 'https://plot.ly/~chris/3143'
 
         row = [1, 5]
         py.grid_ops.append_rows([row], grid=grid_url)
@@ -1057,7 +1057,7 @@ class meta_ops:
             ```
             import plotly.plotly as py
 
-            grid_url = 'https://plot.ly/~chris/39' # TODO: verify grid
+            grid_url = 'https://plot.ly/~chris/3143'
 
             meta = {'experment': 'GaAs'}
 
