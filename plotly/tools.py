@@ -577,6 +577,9 @@ if _ipython_imported:
             self.embed_code = get_embed(url, width=width, height=height)
             super(PlotlyDisplay, self).__init__(data=self.embed_code)
 
+        def _repr_html_(self):
+            return self.embed_code
+
         def _repr_svg_(self):
             url = self.resource + ".svg"
             res = requests.get(url)
