@@ -14,7 +14,49 @@ from plotly import utils
 __all__ = None
 
 class Column(object):
+    '''
+    Columns make up Plotly Grids and can be the source of
+    data for Plotly Graphs.
+    They have a name and an array of data.
+    They can be uploaded to Plotly with the `plotly.plotly.plotly.grid_ops`
+    class.
+
+    Usage example 1: Upload a set of columns as a grid to Plotly
+    ```
+    from plotly.grid_objs import Grid, Column
+    import plotly.plotly as py
+    column_1 = Column([1, 2, 3], 'time')
+    column_2 = Column([4, 2, 5], 'voltage')
+    grid = Grid([column_1, column_2])
+    py.grid_ops.upload(grid, 'time vs voltage')
+    ```
+
+    Usage example 2: Make a graph based with data that is sourced
+                     from a newly uploaded Plotly columns
+    ```
+    import plotly.plotly as py
+    from plotly.grid_objs import Grid, Column
+    from plotly.graph_objs import Scatter
+    # Upload a grid
+    column_1 = Column([1, 2, 3], 'time')
+    column_2 = Column([4, 2, 5], 'voltage')
+    grid = Grid([column_1, column_2])
+    py.grid_ops.upload(grid, 'time vs voltage')
+
+    # Build a Plotly graph object sourced from the
+    # grid's columns
+    trace = Scatter(xsrc=grid[0], ysrc=grid[1])
+    py.plot([trace], filename='graph from grid')
+    ```
+    '''
     def __init__(self, data, name):
+        '''
+        Initialize a Plotly column with `data` and `name`.
+        `data` is an array of strings, numbers, or dates.
+        `name` is the name of the column as it will apppear
+               in the Plotly grid.
+        '''
+
         # TODO: data type checking
         self.data = data
         # TODO: name type checking
@@ -40,7 +82,57 @@ class Column(object):
 
 
 class Grid(MutableSequence):
+    '''
+    Grid is Plotly's Python representation of Plotly Grids.
+    Plotly Grids tabular data made up of columns. They can be
+    uploaded, appended to, and can source the data for Plotly
+    graphs.
+
+    This plotly.grid_objs.Grid object is essentially a list.
+
+    Usage example 1: Upload a set of columns as a grid to Plotly
+    ```
+    from plotly.grid_objs import Grid, Column
+    import plotly.plotly as py
+    column_1 = Column([1, 2, 3], 'time')
+    column_2 = Column([4, 2, 5], 'voltage')
+    grid = Grid([column_1, column_2])
+    py.grid_ops.upload(grid, 'time vs voltage')
+    ```
+
+    Usage example 2: Make a graph based with data that is sourced
+                     from a newly uploaded Plotly columns
+    ```
+    import plotly.plotly as py
+    from plotly.grid_objs import Grid, Column
+    from plotly.graph_objs import Scatter
+    # Upload a grid
+    column_1 = Column([1, 2, 3], 'time')
+    column_2 = Column([4, 2, 5], 'voltage')
+    grid = Grid([column_1, column_2])
+    py.grid_ops.upload(grid, 'time vs voltage')
+
+    # Build a Plotly graph object sourced from the
+    # grid's columns
+    trace = Scatter(xsrc=grid[0], ysrc=grid[1])
+    py.plot([trace], filename='graph from grid')
+    ```
+    '''
     def __init__(self, iterable_of_columns):
+        '''
+        Initialize a grid with an iterable of
+        `plotly.grid_objs.Column objects
+
+        Usage example:
+        ```
+        column_1 = Column([1, 2, 3], 'time')
+        column_2 = Column([4, 2, 5], 'voltage')
+        grid = Grid([column_1, column_2])
+        ```
+        '''
+
+        # TODO: verify that columns are actually columns
+
         column_names = [column.name for column in iterable_of_columns]
         duplicate_name = utils.get_first_duplicate(column_names)
         if duplicate_name:
@@ -95,4 +187,3 @@ class Grid(MutableSequence):
         for column in self._columns:
             if column.name == column_name:
                 return column
-
