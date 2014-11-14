@@ -292,8 +292,8 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
     height (default="525") -- same as width but corresp. to the height of the figure
 
     """
-    s = get_embed(file_owner_or_url, file_id, width, height)
     try:
+        s = get_embed(file_owner_or_url, file_id, width, height)
         # see if we are in the SageMath Cloud
         from sage_salvus import html
         return html(s, hide=False)
