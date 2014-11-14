@@ -323,7 +323,7 @@ class PlotlyDict(dict):
         return super(PlotlyDict, self).__setitem__(key, value)
 
     def _assign_id_to_src(self, src_name, src_value):
-        if isinstance(src_value, basestring):
+        if isinstance(src_value, six.string_types):
             src_id = src_value
         else:
             try:
