@@ -329,8 +329,8 @@ class PlotlyDict(dict):
             try:
                 src_id = src_value.id
             except:
-                err = ("{} does not have an `id` property. "
-                       "{} needs to be assigned to either an "
+                err = ("{0} does not have an `id` property. "
+                       "{1} needs to be assigned to either an "
                        "object with an `id` (like a "
                        "plotly.grid_objs.Column) or a string. "
                        "The `id` is a unique identifier "
