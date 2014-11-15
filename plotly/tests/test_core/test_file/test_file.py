@@ -36,7 +36,7 @@ def test_create_folder():
 @with_setup(init)
 def test_create_nested_folders():
     first_folder = _random_filename()
-    nested_folder = '{}/{}'.format(first_folder, _random_filename())
+    nested_folder = '{0}/{1}'.format(first_folder, _random_filename())
     py.file_ops.mkdirs(nested_folder)
 
 

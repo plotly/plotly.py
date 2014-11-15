@@ -51,14 +51,19 @@ class TestSignIn(TestCase):
         api_key = 'place holder'
         plotly_domain = 'test domain'
         plotly_streaming_domain = 'test streaming domain'
+        plotly_ssl_verification = False
         py.sign_in(
             username,
             api_key,
             plotly_domain=plotly_domain,
-            plotly_streaming_domain=plotly_streaming_domain
+            plotly_streaming_domain=plotly_streaming_domain,
+            plotly_ssl_verification=plotly_ssl_verification
         )
         config = py.get_config()
         self.assertEqual(config['plotly_domain'], plotly_domain)
         self.assertEqual(
             config['plotly_streaming_domain'], plotly_streaming_domain
+        )
+        self.assertEqual(
+            config['plotly_ssl_verification'], plotly_ssl_verification
         )

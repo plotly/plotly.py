@@ -16,6 +16,7 @@ and ploty's servers.
 """
 from __future__ import absolute_import
 
+import sys
 import json
 import warnings
 import copy
@@ -23,7 +24,11 @@ import os
 import six
 import base64
 import requests
-from urlparse import urlparse
+
+if sys.version[:1] == '2':
+    from urlparse import urlparse
+else:
+    from urllib.parse import urlparse
 
 from plotly.plotly import chunked_requests
 from plotly import utils
@@ -62,6 +67,7 @@ def sign_in(username, api_key, **kwargs):
     _config['plotly_domain'] = kwargs.get('plotly_domain')
     _config['plotly_streaming_domain'] = kwargs.get('plotly_streaming_domain')
     _config['plotly_api_domain'] = kwargs.get('plotly_api_domain')
+    _config['plotly_ssl_verification'] = kwargs.get('plotly_ssl_verification')
     # TODO: verify format of config options
 
 
@@ -136,7 +142,7 @@ def get_config():
     """Returns either module config or file config."""
     config = tools.get_config_file()
     for config_key in config:
-        if _config.get(config_key):
+        if _config.get(config_key) is not None:
             config[config_key] = _config[config_key]
     return config
 
@@ -354,7 +360,9 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
         raise exceptions.PlotlyError(
             "The 'file_id' argument must be a non-negative number."
         )
-    response = requests.get(plotly_rest_url + resource, headers=headers)
+    response = requests.get(plotly_rest_url + resource,
+                            headers=headers,
+                            verify=get_config()['plotly_ssl_verification'])
     if response.status_code == 200:
         if six.PY3:
             content = json.loads(response.content.decode('unicode_escape'))
@@ -574,10 +582,10 @@ class image:
             payload['height'] = height
 
         url = get_config()['plotly_domain'] + "/apigenimage/"
-        res = requests.post(url,
-                            data=json.dumps(payload,
-                                            cls=utils._plotlyJSONEncoder),
-                            headers=headers)
+        res = requests.post(
+            url, data=json.dumps(payload, cls=utils._plotlyJSONEncoder),
+            headers=headers, verify=get_config()['plotly_ssl_verification']
+        )
 
         headers = res.headers
 
@@ -677,7 +685,8 @@ class file_ops:
 
         url = _api_v2.api_url('folders')
 
-        res = requests.post(url, data=payload, headers=_api_v2.headers())
+        res = requests.post(url, data=payload, headers=_api_v2.headers(),
+                            verify=get_config()['plotly_ssl_verification'])
 
         _api_v2.response_handler(res)
 
@@ -692,7 +701,7 @@ class grid_ops:
         for req_col in request_columns:
             for resp_col in response_columns:
                 if resp_col['name'] == req_col.name:
-                    req_col.id = '{}/{}'.format(grid_id, resp_col['uid'])
+                    req_col.id = '{0}/{1}'.format(grid_id, resp_col['uid'])
                     response_columns.remove(resp_col)
 
     @classmethod
@@ -728,7 +737,8 @@ class grid_ops:
 
         upload_url = _api_v2.api_url('grids')
         req = requests.post(upload_url, data=payload,
-                            headers=_api_v2.headers())
+                            headers=_api_v2.headers(),
+                            verify=get_config()['plotly_ssl_verification'])
 
         res = _api_v2.response_handler(req)
 
@@ -741,7 +751,7 @@ class grid_ops:
         grid.id = grid_id
 
         plotly_domain = get_config()['plotly_domain']
-        grid_url = '{}/~{}'.format(plotly_domain, grid_id.replace(':', '/'))
+        grid_url = '{0}/~{1}'.format(plotly_domain, grid_id.replace(':', '/'))
 
         if meta is not None:
             meta_ops.upload(meta, grid=grid)
@@ -770,7 +780,8 @@ class grid_ops:
         }
 
         api_url = _api_v2.api_url('grids')+'/{grid_id}/col'.format(grid_id=grid_id)
-        res = requests.post(api_url, data=payload, headers=_api_v2.headers())
+        res = requests.post(api_url, data=payload, headers=_api_v2.headers(),
+                            verify=get_config()['plotly_ssl_verification'])
         res = _api_v2.response_handler(res)
 
         cls._fill_in_response_column_ids(columns, res['cols'], grid_id)
@@ -789,8 +800,8 @@ class grid_ops:
                     raise exceptions.InputError(
                         "The number of entries in "
                         "each row needs to equal the number of columns in "
-                        "the grid. Row {} has {} {} but your "
-                        "grid has {} {}. "
+                        "the grid. Row {0} has {1} {2} but your "
+                        "grid has {3} {4}. "
                         .format(row_i, len(row),
                                 'entry' if len(row) == 1 else 'entries',
                                 n_columns,
@@ -802,7 +813,8 @@ class grid_ops:
 
         api_url = (_api_v2.api_url('grids')+
                    '/{grid_id}/row'.format(grid_id=grid_id))
-        res = requests.post(api_url, data=payload, headers=_api_v2.headers())
+        res = requests.post(api_url, data=payload, headers=_api_v2.headers(),
+                            verify=get_config()['plotly_ssl_verification'])
         _api_v2.response_handler(res)
 
         if grid:
@@ -821,7 +833,8 @@ class grid_ops:
     def delete(cls, grid=None, grid_url=None):
         grid_id = _api_v2.parse_grid_id_args(grid, grid_url)
         api_url = _api_v2.api_url('grids')+'/'+grid_id
-        res = requests.delete(api_url, headers=_api_v2.headers())
+        res = requests.delete(api_url, headers=_api_v2.headers(),
+                              verify=get_config()['plotly_ssl_verification'])
         _api_v2.response_handler(res)
 
 
@@ -839,7 +852,8 @@ class meta_ops:
 
         api_url = _api_v2.api_url('grids')+'/{grid_id}'.format(grid_id=grid_id)
 
-        res = requests.patch(api_url, data=payload, headers=_api_v2.headers())
+        res = requests.patch(api_url, data=payload, headers=_api_v2.headers(),
+                             verify=get_config()['plotly_ssl_verification'])
 
         return _api_v2.response_handler(res)
 
@@ -882,7 +896,7 @@ class _api_v2:
             if supplied_arg_name == 'grid_url':
                 path = urlparse(grid_url).path
                 file_owner, file_id = path.replace("/~", "").split('/')[0:2]
-                return '{}:{}'.format(file_owner, file_id)
+                return '{0}:{1}'.format(file_owner, file_id)
             else:
                 return grid.id
 
@@ -899,7 +913,7 @@ class _api_v2:
                 'json' in response.headers['content-type'] and
                 len(response.content) > 0):
 
-            response_dict = json.loads(response.content)
+            response_dict = json.loads(response.content.decode('utf8'))
 
             if 'warnings' in response_dict and len(response_dict['warnings']):
                 warnings.warn('\n'.join(response_dict['warnings']))
@@ -908,16 +922,19 @@ class _api_v2:
 
     @classmethod
     def api_url(cls, resource):
-        return ('{}/v2/{}'.format(get_config()['plotly_api_domain'],
+        return ('{0}/v2/{1}'.format(get_config()['plotly_api_domain'],
                 resource))
 
     @classmethod
     def headers(cls):
         un, api_key = _get_session_username_and_key()
-        encoded_un_key_pair = base64.b64encode('{}:{}'.format(un, api_key))
+        encoded_un_key_pair = base64.b64encode(
+            six.b('{0}:{1}'.format(un, api_key))
+        ).decode('utf8')
+
         return {
             'authorization': 'Basic ' + encoded_un_key_pair,
-            'plotly-client-platform': 'python {}'.format(version.__version__)
+            'plotly-client-platform': 'python {0}'.format(version.__version__)
         }
 
 
@@ -958,7 +975,8 @@ def _send_to_plotly(figure, **plot_options):
 
     url = get_config()['plotly_domain'] + "/clientresp"
 
-    r = requests.post(url, data=payload)
+    r = requests.post(url, data=payload,
+                      verify=get_config()['plotly_ssl_verification'])
     r.raise_for_status()
     r = json.loads(r.text)
     if 'error' in r and r['error'] != '':

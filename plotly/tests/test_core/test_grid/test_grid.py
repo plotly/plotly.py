@@ -55,7 +55,10 @@ def test_grid_upload():
 @with_setup(init)
 def test_grid_upload_in_new_folder():
     g = get_grid()
-    path = 'new folder: {}/grid in folder {}'.format(random_filename(), random_filename())
+    path = (
+        'new folder: {0}/grid in folder {1}'
+        .format(random_filename(), random_filename())
+    )
     py.grid_ops.upload(g, path, auto_open=False)
 
 
@@ -65,7 +68,10 @@ def test_grid_upload_in_existing_folder():
     folder = random_filename()
     filename = random_filename()
     py.file_ops.mkdirs(folder)
-    path = 'existing folder: {}/grid in folder {}'.format(folder, filename)
+    path =(
+        'existing folder: {0}/grid in folder {1}'
+        .format(folder, filename)
+    )
     py.grid_ops.upload(g, path, auto_open=False)
 
 

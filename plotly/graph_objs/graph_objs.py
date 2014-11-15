@@ -215,7 +215,7 @@ class PlotlyList(list):
 
         Example:
 
-            print obj.to_string()
+            print(obj.to_string())
 
         Keyword arguments:
         level (default = 0) -- set number of indentations to start with
@@ -323,14 +323,14 @@ class PlotlyDict(dict):
         return super(PlotlyDict, self).__setitem__(key, value)
 
     def _assign_id_to_src(self, src_name, src_value):
-        if isinstance(src_value, basestring):
+        if isinstance(src_value, six.string_types):
             src_id = src_value
         else:
             try:
                 src_id = src_value.id
             except:
-                err = ("{} does not have an `id` property. "
-                       "{} needs to be assigned to either an "
+                err = ("{0} does not have an `id` property. "
+                       "{1} needs to be assigned to either an "
                        "object with an `id` (like a "
                        "plotly.grid_objs.Column) or a string. "
                        "The `id` is a unique identifier "
@@ -430,7 +430,7 @@ class PlotlyDict(dict):
                         elif not hasattr(self[key], '__iter__'):
                             del self[key]
                 except KeyError:  # TODO: Update the JSON
-                    # print "'type' not in {0} for {1}".format(obj_key, key)
+                    # print("'type' not in {0} for {1}".format(obj_key, key))
                     pass
 
     def get_data(self):
@@ -605,7 +605,7 @@ class PlotlyDict(dict):
 
         Example:
 
-            print obj.to_string()
+            print(obj.to_string())
 
         Keyword arguments:
         level (default = 0) -- set number of indentations to start with
@@ -759,7 +759,7 @@ class PlotlyTrace(PlotlyDict):
 
         Example:
 
-            print obj.to_string()
+            print(obj.to_string())
 
         Keyword arguments:
         level (default = 0) -- set number of indentations to start with
@@ -962,7 +962,7 @@ def get_patched_layout_class(Layout):
 
         Example:
 
-            print obj.to_string()
+            print(obj.to_string())
 
         Keyword arguments:
         level (default = 0) -- set number of indentations to start with
