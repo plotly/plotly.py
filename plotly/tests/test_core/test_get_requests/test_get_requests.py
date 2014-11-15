@@ -144,6 +144,6 @@ def test_valid_request():
     # response_payload = content['payload']
     # figure = response_payload['figure']
     # if figure['data'][0]['x'] != [u'1', u'2', u'3']:
-    #     print 'ERROR'
+    #     print('ERROR')
     # return res
 
