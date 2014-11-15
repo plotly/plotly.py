@@ -128,7 +128,7 @@ class _plotlyJSONEncoder(json.JSONEncoder):
 
     def builtinJSONEncoder(self, obj):
         try:
-            return obj.to_json()
+            return obj.to_plotly_json()
         except AttributeError:
             return None
 

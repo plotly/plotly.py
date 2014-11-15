@@ -35,7 +35,7 @@ class Column(object):
     def __repr__(self):
         return 'Column("{}", {})'.format(self.data, self.name)
 
-    def to_json(self):
+    def to_plotly_json(self):
         return {'name': self.name, 'data': self.data}
 
 
