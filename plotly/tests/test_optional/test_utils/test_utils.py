@@ -40,8 +40,7 @@ def test_figure_json_encoding():
 
     js1 = json.dumps(s1, cls=utils._plotlyJSONEncoder, sort_keys=True)
     js2 = json.dumps(s2, cls=utils._plotlyJSONEncoder, sort_keys=True)
-    assert(js1 == '{"y": [1, 2, 3], "x": [1, 2, 3], "z": '
-                  '[1, "A", "2014-01-05"], "type": "scatter3d"}')
+    assert(js1 == '{"y": [1, 2, 3], "x": [1, 2, 3], "z": [1, "A", "2014-01-05"], "type": "scatter3d"}')
     assert(js2 == '{"x": [1, 2, 3], "type": "scatter"}')
     json.dumps(data, cls=utils._plotlyJSONEncoder, sort_keys=True)
     json.dumps(figure, cls=utils._plotlyJSONEncoder, sort_keys=True)
