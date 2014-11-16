@@ -701,7 +701,7 @@ class grid_ops:
         for req_col in request_columns:
             for resp_col in response_columns:
                 if resp_col['name'] == req_col.name:
-                    req_col.id = '{}/{}'.format(grid_id, resp_col['uid'])
+                    req_col.id = '{0}/{1}'.format(grid_id, resp_col['uid'])
                     response_columns.remove(resp_col)
 
     @classmethod
@@ -751,7 +751,7 @@ class grid_ops:
         grid.id = grid_id
 
         plotly_domain = get_config()['plotly_domain']
-        grid_url = '{}/~{}'.format(plotly_domain, grid_id.replace(':', '/'))
+        grid_url = '{0}/~{1}'.format(plotly_domain, grid_id.replace(':', '/'))
 
         if meta is not None:
             meta_ops.upload(meta, grid=grid)
@@ -800,8 +800,8 @@ class grid_ops:
                     raise exceptions.InputError(
                         "The number of entries in "
                         "each row needs to equal the number of columns in "
-                        "the grid. Row {} has {} {} but your "
-                        "grid has {} {}. "
+                        "the grid. Row {0} has {1} {2} but your "
+                        "grid has {3} {4}. "
                         .format(row_i, len(row),
                                 'entry' if len(row) == 1 else 'entries',
                                 n_columns,
@@ -896,7 +896,7 @@ class _api_v2:
             if supplied_arg_name == 'grid_url':
                 path = urlparse(grid_url).path
                 file_owner, file_id = path.replace("/~", "").split('/')[0:2]
-                return '{}:{}'.format(file_owner, file_id)
+                return '{0}:{1}'.format(file_owner, file_id)
             else:
                 return grid.id
 
@@ -913,7 +913,7 @@ class _api_v2:
                 'json' in response.headers['content-type'] and
                 len(response.content) > 0):
 
-            response_dict = json.loads(response.content)
+            response_dict = json.loads(response.content.decode('utf8'))
 
             if 'warnings' in response_dict and len(response_dict['warnings']):
                 warnings.warn('\n'.join(response_dict['warnings']))
@@ -922,16 +922,19 @@ class _api_v2:
 
     @classmethod
     def api_url(cls, resource):
-        return ('{}/v2/{}'.format(get_config()['plotly_api_domain'],
+        return ('{0}/v2/{1}'.format(get_config()['plotly_api_domain'],
                 resource))
 
     @classmethod
     def headers(cls):
         un, api_key = _get_session_username_and_key()
-        encoded_un_key_pair = base64.b64encode('{}:{}'.format(un, api_key))
+        encoded_un_key_pair = base64.b64encode(
+            six.b('{0}:{1}'.format(un, api_key))
+        ).decode('utf8')
+
         return {
             'authorization': 'Basic ' + encoded_un_key_pair,
-            'plotly-client-platform': 'python {}'.format(version.__version__)
+            'plotly-client-platform': 'python {0}'.format(version.__version__)
         }
 
 
