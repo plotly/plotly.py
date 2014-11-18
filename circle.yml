@@ -11,6 +11,7 @@ dependencies:
     # run all the pre-written installers (this will take a *while*)
     - bash circle/setup.sh
     # install testing tools for circle's version of things
+    - export PYENV_VERSION=2.7
     - pip install nose coverage
   override:
     - pip install -I .
