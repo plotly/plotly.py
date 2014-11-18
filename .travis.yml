@@ -1,0 +1,14 @@
+language: python
+python:
+#  - "2.6"
+  - "2.7"
+  # - "3.2"
+#  - "3.3"
+  - "3.4"
+install:
+  - "pip install -r requirements.txt"
+#  - "pip install -r optional_requirements.txt"
+  - "pip install coverage"
+  - "pip install nose"
+script:
+  - "nosetests -xv plotly/tests/test_core --with-coverage --cover-package=plotly"
