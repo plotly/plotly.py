@@ -42,13 +42,11 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
     echo "running tests for Python ${version} as user '$(whoami)'"
     if [ ${version:0:3} == '2.7' ]
     then
-        nosetests -xv plotly/tests/test_core \
-            --with-coverage \
-            --cover-package=plotly ||
+        nosetests -xv plotly/tests --with-coverage --cover-package=plotly ||
             error_exit "${LINENO}: test suite failed for Python ${version}"
         coverage html -d ${CIRCLE_ARTIFACTS}
     else
-        nosetests -xv plotly/tests/test_core ||
+        nosetests -xv plotly/tests ||
             error_exit "${LINENO}: test suite failed for Python ${version}"
     fi
 done
