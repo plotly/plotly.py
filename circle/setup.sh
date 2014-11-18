@@ -2,6 +2,8 @@
 
 echo "running setup routine"
 
+env
+
 PROGNAME=$(basename $0)
 function error_exit
 {

@@ -2,6 +2,8 @@
 
 echo "running test routine"
 
+env
+
 PROGNAME=$(basename $0)
 function error_exit
 {
