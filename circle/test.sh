@@ -18,17 +18,7 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
 
     # exporting this variable (in this scope) chooses the python version
     export PYENV_VERSION=${version}
-
     echo "Using pyenv version $(pyenv version)"
-
-#    echo "get rid of the current virtualenv if we're in one"
-#    if [ ${VIRTUAL_ENV} ]; then
-#        deactivate
-#    fi
-#
-#    echo "drop us into a virtualenv"
-#    source ${PLOTLY_VENV_DIR}/${version}/bin/activate ||
-#        error_exit "${LINENO}: can't activate virtualenv for Python ${version}"
 
     echo "install plotly (ignoring possibly cached versions)"
     pip install -I ${PLOTLY_PACKAGE_ROOT} ||
