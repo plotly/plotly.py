@@ -43,6 +43,7 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
     nosetests -xv plotly/tests --with-coverage --cover-package=plotly ||
         error_exit "${LINENO}: test suite failed for Python ${version}"
     mkdir "${CIRCLE_ARTIFACTS}/${PYENV_VERSION}" || true
-    coverage html -d "${CIRCLE_ARTIFACTS}/${PYENV_VERSION}"
+    coverage html -d "${CIRCLE_ARTIFACTS}/${PYENV_VERSION}" \
+        --title=${PYENV_VERSION}
 
 done
