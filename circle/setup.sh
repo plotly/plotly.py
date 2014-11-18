@@ -26,7 +26,7 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
 
     # only create a virtualenv if it doesn't already exist
     if [ ! -d ${PLOTLY_VENV_DIR}/${version} ]; then
-        virtualenv ${PLOTLY_VENV_DIR}/${version}
+        virtualenv ${PLOTLY_VENV_DIR}/${version} || error_exit "${LINENO}: can't install virtualenv for ${version}"
     fi
 
     # get rid of the current virtualenv if we're in one
