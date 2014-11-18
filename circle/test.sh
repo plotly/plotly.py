@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "running test routine"
+
 PROGNAME=$(basename $0)
 function error_exit
 {

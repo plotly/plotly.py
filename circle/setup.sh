@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "running setup routine"
+
 PROGNAME=$(basename $0)
 function error_exit
 {
