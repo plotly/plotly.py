@@ -28,4 +28,6 @@ test:
 #    - chmod 660 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
 
     # test core things in the general 2.7 version that circle has
-    - nosetests -xv plotly/tests/test_core
+    - nosetests -xv plotly/tests --with-coverage --cover-package=plotly
+    - mkdir "${CIRCLE_ARTIFACTS}/${PYENV_VERSION}"
+    - coverage html -d "${CIRCLE_ARTIFACTS}/${PYENV_VERSION}"
