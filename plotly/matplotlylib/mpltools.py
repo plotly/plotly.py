@@ -386,7 +386,7 @@ def prep_ticks(ax, index, ax_type, props):
                     for i in range(1, len(dticks) - 1)]):
                 dtick = tickvalues[1] - tickvalues[0]
             else:
-                warnings.warn("'linear' {}-axis tick spacing not even, "
+                warnings.warn("'linear' {0}-axis tick spacing not even, "
                               "ignoring mpl tick formatting.".format(ax_type))
                 raise TypeError
         except (IndexError, TypeError):
@@ -413,7 +413,7 @@ def prep_ticks(ax, index, ax_type, props):
                                  math.log10(props['ylim'][1])]
         else:
             axis_dict = dict(range=None, type='linear')
-            warnings.warn("Converted non-base10 {}-axis log scale to 'linear'"
+            warnings.warn("Converted non-base10 {0}-axis log scale to 'linear'"
                           "".format(ax_type))
     else:
         return dict()

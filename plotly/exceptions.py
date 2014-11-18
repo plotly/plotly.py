@@ -69,7 +69,7 @@ COLUMN_NOT_YET_UPLOADED_MESSAGE = (
 NON_UNIQUE_COLUMN_MESSAGE = (
     "Yikes, plotly grids currently "
     "can't have duplicate column names. Rename "
-    "the column \"{}\" and try again."
+    "the column \"{0}\" and try again."
 )
 ## Would Cause Server Errors ##
 
