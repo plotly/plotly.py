@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "running setup routine with python versions:"
-for version in ${PYTHON_VERSIONS[@]}; do
+for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
     echo "    ${version}"
 done
 
@@ -20,7 +20,7 @@ if [ ! -d ${PLOTLY_VENV_DIR} ]; then
 fi
 
 # for each version we want, setup a functional virtual environment
-for version in ${PYTHON_VERSIONS[@]}; do
+for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
     echo Setting up Python ${version}
 
     # exporting this variable (in this scope) chooses the python version

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "running test routine with python versions:"
-for version in ${PYTHON_VERSIONS[@]}; do
+for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
     echo "    ${version}"
 done
 
@@ -15,7 +15,7 @@ function error_exit
 }
 
 # for each version we want, setup a functional virtual environment
-for version in ${PYTHON_VERSIONS[@]}; do
+for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
     echo Testing Python ${version}
 
     # get rid of the current virtualenv if we're in one
@@ -24,7 +24,7 @@ for version in ${PYTHON_VERSIONS[@]}; do
     fi
 
     # drop us into a virtualenv
-    source ~/venvs/${version}/bin/activate
+    source ${PLOTLY_VENV_DIR}/${version}/bin/activate
 
     # install plotly (ignoring possibly cached versions)
     pip install -I ${PLOTLY_PACKAGE_ROOT}
