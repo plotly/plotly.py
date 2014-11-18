@@ -41,7 +41,7 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
     pip install -r ${PLOTLY_CORE_REQUIREMENTS_FILE}
 
     # handle funkiness around python 2.6
-    if [ ${version} == '2.6' ]
+    if [ ${version:0:3} == '2.6' ]
     then
         pip install simplejson ordereddict
 #        pip install -r ${PLOTLY_OPTIONAL_REQUIREMENTS_FILE_2_6}

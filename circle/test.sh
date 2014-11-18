@@ -36,7 +36,7 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
 #    # test that setting permissions will work for import (and tests)
 #    chmod 660 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
 
-    if [ $version == '2.7' ]
+    if [ ${version:0:3} == '2.7' ]
     then
         nosetests -xv plotly/tests/test_core --with-coverage --cover-package=plotly
         coverage html -d ${CIRCLE_ARTIFACTS}
