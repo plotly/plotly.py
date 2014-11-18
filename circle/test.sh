@@ -5,8 +5,6 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
     echo "    ${version}"
 done
 
-env
-
 PROGNAME=$(basename $0)
 function error_exit
 {
