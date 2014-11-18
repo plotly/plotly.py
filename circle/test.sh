@@ -31,13 +31,13 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
     echo "${HOME}"
     echo "${PLOTLY_CONFIG_DIR}"
 
-    # test that it imports when you don't have file permissions
-    chmod 000 ${PLOTLY_CONFIG_DIR} && python -c "import plotly" ||
-        error_exit "${LINENO}: permissions test 000 on .plotly dir failed"
+    # test that it imports when you don't have write permissions
+    chmod -R 400 ${PLOTLY_CONFIG_DIR} && python -c "import plotly" ||
+        error_exit "${LINENO}: permissions test 400 on .plotly dir failed"
 
-    # test that setting permissions will work for import (and tests)
-    chmod 666 ${PLOTLY_CONFIG_DIR} && python -c "import plotly" ||
-        error_exit "${LINENO}: permissions test 666 on .plotly dir failed"
+    # test that setting write permissions will work for import (and tests)
+    chmod -R 600 ${PLOTLY_CONFIG_DIR} && python -c "import plotly" ||
+        error_exit "${LINENO}: permissions test 600 on .plotly dir failed"
 
     echo "running tests for Python ${version} as user '$(whoami)'"
     if [ ${version:0:3} == '2.7' ]
