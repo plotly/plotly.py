@@ -15,9 +15,9 @@ dependencies:
   override:
     - pip install -I .
     - cd ~ && python -c "import plotly"
-  cache_directories:
-    # things we don't want to have to do again...
-    - ${HOME}/.pyenv/versions
+#  cache_directories:
+#    # things we don't want to have to do again...
+#    - ${HOME}/.pyenv/versions
 test:
   override:
 
