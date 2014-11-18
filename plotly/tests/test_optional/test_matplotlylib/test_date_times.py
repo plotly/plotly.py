@@ -37,8 +37,8 @@ class TestDateTimes(TestCase):
         # convert this figure to plotly's graph_objs
         pfig = tls.mpl_to_plotly(fig)
 
-        print date_strings
-        print pfig['data'][0]['x']
+        print(date_strings)
+        print(pfig['data'][0]['x'])
         # we use the same format here, so we expect equality here
         self.assertEqual(
             fig.axes[0].lines[0].get_xydata()[0][0], 7.33776000e+05

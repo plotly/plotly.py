@@ -18,7 +18,7 @@ def test_trivial():
 
 # @raises(PlotlyError)  # TODO: decide if this SHOULD raise error...
 # def test_instantiation_error():
-#     print PlotlyDict(anything='something')
+#     print(PlotlyDict(anything='something'))
 
 
 def test_validate():

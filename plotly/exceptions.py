@@ -16,6 +16,7 @@ info: (required!)
 
 """
 import json
+import six
 
 ## Base Plotly Error ##
 
@@ -36,7 +37,9 @@ class PlotlyRequestError(PlotlyError):
         if 'json' in content_type:
             content = requests_exception.response.content
             if content != '':
-                res_payload = json.loads(requests_exception.response.content)
+                res_payload = json.loads(
+                    requests_exception.response.content.decode('utf8')
+                )
                 if 'detail' in res_payload:
                     self.message = res_payload['detail']
                 else:
