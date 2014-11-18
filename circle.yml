@@ -1,4 +1,6 @@
 machine:
+  python:
+    version: 2.7
   environment:
     PLOTLY_PACKAGE_ROOT: /home/ubuntu/python-api
     PLOTLY_CONFIG_DIR: ${HOME}/.plotly
@@ -11,7 +13,6 @@ dependencies:
     # run all the pre-written installers (this will take a *while*)
     - bash circle/setup.sh
     # install testing tools for circle's version of things
-    - export PYENV_VERSION=2.7
     - pip install nose coverage
   override:
     - pip install -I .
@@ -20,7 +21,7 @@ test:
   override:
 
     # run test suite in all our python versions
-    - bash circle/test.sh
+#    - bash circle/test.sh
 
 #    # test that it imports when you don't have file permissions
 #    - chmod 000 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
