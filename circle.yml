@@ -1,6 +1,4 @@
 machine:
-  python:
-    version: 2.7
   environment:
     PLOTLY_CONFIG_DIR: ~/.plotly
     PLOTLY_VENV_DIR: ~/venvs
