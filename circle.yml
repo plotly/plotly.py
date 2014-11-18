@@ -1,6 +1,4 @@
 machine:
-  python:
-    version: 2.7
   environment:
     PLOTLY_PACKAGE_ROOT: /home/ubuntu/python-api
     PLOTLY_CONFIG_DIR: ${HOME}/.plotly
@@ -13,10 +11,10 @@ dependencies:
     # run all the pre-written installers (this will take a *while*)
     - bash circle/setup.sh
     # install testing tools for circle's version of things
-    - pip install nose coverage
+    - PYENV_VERSION=2.7 && pip install nose coverage
   override:
-    - pip install -I .
-    - cd ~ && python -c "import plotly"
+    - PYENV_VERSION=2.7 && pip install -I .
+    - PYENV_VERSION=2.7 && cd ~ && python -c "import plotly"
 test:
   override:
 
@@ -30,6 +28,6 @@ test:
 #    - chmod 660 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
 
     # test core things in the general 2.7 version that circle has
-    - nosetests -xv plotly/tests --with-coverage --cover-package=plotly
-    - mkdir "${CIRCLE_ARTIFACTS}/${PYENV_VERSION}" || true
-    - coverage html -d "${CIRCLE_ARTIFACTS}/${PYENV_VERSION}" --title=${PYENV_VERSION}
+    - PYENV_VERSION=2.7 && nosetests -xv plotly/tests --with-coverage --cover-package=plotly
+    - mkdir "${CIRCLE_ARTIFACTS}/2.7" || true
+    - coverage html -d "${CIRCLE_ARTIFACTS}/2.7" --title=2.7
