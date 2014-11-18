@@ -62,8 +62,8 @@ class TestPlot(TestCase):
 
     def test_plot_empty_data(self):
         py.sign_in('PlotlyImageTest', '786r5mecv0')
-        with self.assertRaises(PlotlyEmptyDataError):
-            py.plot([], filename='plot_invalid')
+        self.assertRaises(PlotlyEmptyDataError, py.plot, [],
+                          filename='plot_invalid')
 
 
 def test_bar():
