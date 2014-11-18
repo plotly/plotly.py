@@ -33,7 +33,7 @@ class Column(object):
         return string.format(name=self.name, data=data_string, id=self.id)
 
     def __repr__(self):
-        return 'Column("{}", {})'.format(self.data, self.name)
+        return 'Column("{0}", {1})'.format(self.data, self.name)
 
     def to_plotly_json(self):
         return {'name': self.name, 'data': self.data}
