@@ -22,13 +22,13 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
     fi
 
     # drop us into a virtualenv
-    source ${PLOTLY_VENV_DIR}/${version}/bin/activate
+    source ${PLOTLY_VENV_DIR}/${version}/bin/activate || error_exit
 
     # install plotly (ignoring possibly cached versions)
-    pip install -I ${PLOTLY_PACKAGE_ROOT}
+    pip install -I ${PLOTLY_PACKAGE_ROOT} || error_exit
 
     # import it once to make sure that works and to create .plotly dir if DNE
-    python -c 'import plotly'
+    python -c 'import plotly' || error_exit
 
 #    # test that it imports when you don't have file permissions
 #    chmod 000 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
@@ -38,9 +38,9 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
 
     if [ ${version:0:3} == '2.7' ]
     then
-        nosetests -xv plotly/tests/test_core --with-coverage --cover-package=plotly
+        nosetests -xv plotly/tests/test_core --with-coverage --cover-package=plotly || error_exit
         coverage html -d ${CIRCLE_ARTIFACTS}
     else
-        nosetests -xv plotly/tests/test_core
+        nosetests -xv plotly/tests/test_core || error_exit
     fi
 done
