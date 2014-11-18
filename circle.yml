@@ -16,7 +16,7 @@ dependencies:
     - pip install nose coverage
   override:
     - pip install -I .
-  cach_directories:
+  cache_directories:
     # things we don't want to have to do again...
     - ${PLOTLY_VENV_DIR}
 test:
