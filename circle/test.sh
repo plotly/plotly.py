@@ -19,11 +19,17 @@ for version in ${PYTHON_VERSIONS[@]}; do
     # drop us into a virtualenv
     source ~/venvs/${version}/bin/activate
 
+    # install plotly (ignoring possibly cached versions)
+    pip install -I ${PLOTLY_PACKAGE_ROOT}
+
+    # import it once to make sure that works and to create .plotly dir if DNE
+    python -c 'import plotly'
+
+    # test that it imports when you don't have file permissions
     chmod 000 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
 
+    # test that setting permissions will work for import (and tests)
     chmod 600 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
-
-
 
     if [ $version == '2.7' ]
     then
