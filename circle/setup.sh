@@ -24,7 +24,13 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
     # exporting this variable (in this scope) chooses the python version
     export PYENV_VERSION=${version}
 
-    # only create a virtualenv if it doesn't already exist
+    echo "Using pyenv version $(pyenv version)"
+
+    ls ${HOME}/.pyenv/versions
+
+    exit 1
+
+    # only create a pyvenv if it doesn't already exist
     if [ ! -d ${PLOTLY_VENV_DIR}/${version} ]; then
         virtualenv ${PLOTLY_VENV_DIR}/${version} ||
             error_exit "${LINENO}: can't install virtualenv for ${version}"
