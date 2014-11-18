@@ -16,20 +16,20 @@ function error_exit
 for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
     echo Testing Python ${version}
 
-    # get rid of the current virtualenv if we're in one
+    echo "get rid of the current virtualenv if we're in one"
     if [ ${VIRTUAL_ENV} ]; then
         deactivate
     fi
 
-    # drop us into a virtualenv
+    echo "drop us into a virtualenv"
     source ${PLOTLY_VENV_DIR}/${version}/bin/activate ||
         error_exit "${LINENO}: can't activate virtualenv for Python ${version}"
 
-    # install plotly (ignoring possibly cached versions)
+    echo "install plotly (ignoring possibly cached versions)"
     pip install -I ${PLOTLY_PACKAGE_ROOT} ||
         error_exit "${LINENO}: can't install plotly package from project root"
 
-    # import it once to make sure that works and to create .plotly dir if DNE
+    echo "import plotly to create .plotly dir if DNE"
     python -c 'import plotly' ||
         error_exit "${LINENO}: can't import plotly package"
 
@@ -39,6 +39,7 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
 #    # test that setting permissions will work for import (and tests)
 #    chmod 660 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
 
+    echo "running tests"
     if [ ${version:0:3} == '2.7' ]
     then
         nosetests -xv plotly/tests/test_core \
