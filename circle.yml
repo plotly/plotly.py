@@ -10,7 +10,7 @@ machine:
 dependencies:
   pre:
     # run all the pre-written installers (this will take a *while*)
-    - chmod 777 circle/setup.sh && ./circle/setup.sh
+    - bash circle/setup.sh
     # install testing tools for circle's version of things
     - pip install nose coverage
   override:
@@ -32,4 +32,4 @@ test:
 #    - nosetests -xv plotly/tests/test_core
 
     # run test suite in all our python versions
-    - chmod 777 circle/test.sh && ./circle/test.sh
+    - bash circle/test.sh
