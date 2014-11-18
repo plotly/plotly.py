@@ -19,13 +19,13 @@ test:
   override:
 
     # run test suite in all our python versions
-#    - bash circle/test.sh
+    - bash circle/test.sh
 
-    # test that it imports when you don't have file permissions
-    - sudo chmod 400 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
-
-    # test that setting permissions will work for import (and tests)
-    - sudo chmod 600 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
+#    # test that it imports when you don't have file permissions
+#    - sudo chmod 400 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
+#
+#    # test that setting permissions will work for import (and tests)
+#    - sudo chmod 600 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
 
     # test core things in the general 2.7 version that circle has
     - PYENV_VERSION=2.7 && nosetests -xv plotly/tests --with-coverage --cover-package=plotly
