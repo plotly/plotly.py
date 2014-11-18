@@ -26,24 +26,20 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
 
     echo "Using pyenv version $(pyenv version)"
 
-    ls ${HOME}/.pyenv/versions
+#    # only create a pyvenv if it doesn't already exist
+#    if [ ! -d ${PLOTLY_VENV_DIR}/${version} ]; then
+#        virtualenv ${PLOTLY_VENV_DIR}/${version} ||
+#            error_exit "${LINENO}: can't install virtualenv for ${version}"
+#    fi
+#
+#    # get rid of the current virtualenv if we're in one
+#    if [ ${VIRTUAL_ENV} ]; then
+#        deactivate
+#    fi
 
-    exit 1
-
-    # only create a pyvenv if it doesn't already exist
-    if [ ! -d ${PLOTLY_VENV_DIR}/${version} ]; then
-        virtualenv ${PLOTLY_VENV_DIR}/${version} ||
-            error_exit "${LINENO}: can't install virtualenv for ${version}"
-    fi
-
-    # get rid of the current virtualenv if we're in one
-    if [ ${VIRTUAL_ENV} ]; then
-        deactivate
-    fi
-
-    # drop us into a virtualenv
-    source ${PLOTLY_VENV_DIR}/${version}/bin/activate ||
-        error_exit "${LINENO}: can't activate virtualenv for Python ${version}"
+#    # drop us into a virtualenv
+#    source ${PLOTLY_VENV_DIR}/${version}/bin/activate ||
+#        error_exit "${LINENO}: can't activate virtualenv for Python ${version}"
 
     # install core requirements all versions need
     pip install -r ${PLOTLY_CORE_REQUIREMENTS_FILE} ||
