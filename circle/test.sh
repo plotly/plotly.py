@@ -25,11 +25,11 @@ for version in ${PYTHON_VERSIONS[@]}; do
     # import it once to make sure that works and to create .plotly dir if DNE
     python -c 'import plotly'
 
-    # test that it imports when you don't have file permissions
-    chmod 000 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
-
-    # test that setting permissions will work for import (and tests)
-    chmod 660 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
+#    # test that it imports when you don't have file permissions
+#    chmod 000 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
+#
+#    # test that setting permissions will work for import (and tests)
+#    chmod 660 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
 
     if [ $version == '2.7' ]
     then
