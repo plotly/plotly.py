@@ -16,6 +16,9 @@ function error_exit
 for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
     echo Testing Python ${version}
 
+    # exporting this variable (in this scope) chooses the python version
+    export PYENV_VERSION=${version}
+
     echo "get rid of the current virtualenv if we're in one"
     if [ ${VIRTUAL_ENV} ]; then
         deactivate
