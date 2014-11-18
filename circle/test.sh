@@ -8,7 +8,7 @@ done
 PROGNAME=$(basename $0)
 function error_exit
 {
-    echo "${PROGNAME}: ${1:-"Unknown Error"}\n" 1>&2
+    echo -e "${PROGNAME}: ${1:-"Unknown Error"}\n" 1>&2
     exit 1
 }
 
