@@ -29,7 +29,7 @@ for version in ${PYTHON_VERSIONS[@]}; do
     chmod 000 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
 
     # test that setting permissions will work for import (and tests)
-    chmod 600 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
+    chmod 660 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
 
     if [ $version == '2.7' ]
     then
