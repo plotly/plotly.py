@@ -28,8 +28,8 @@ test:
 #    # test that setting permissions will work for import (and tests)
 #    - chmod 660 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
 
-    # test core things in the general 2.7 version that circle has
-    - nosetests -xv plotly/tests/test_core
+#    # test core things in the general 2.7 version that circle has
+#    - nosetests -xv plotly/tests/test_core
 
     # run test suite in all our python versions
     - chmod 777 circle/test.sh && ./circle/test.sh
