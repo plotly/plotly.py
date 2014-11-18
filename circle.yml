@@ -1,5 +1,6 @@
 machine:
   environment:
+    PLOTLY_PACKAGE_ROOT: ${PWD}
     PLOTLY_CONFIG_DIR: ~/.plotly
     PLOTLY_VENV_DIR: ~/venvs
     PLOTLY_PYTHON_VERSIONS: ( 3.4 ) # ( 2.6 2.7 3.3 3.4 )
