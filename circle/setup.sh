@@ -29,9 +29,9 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
     then
         pip install simplejson ordereddict ||
             error_exit "${LINENO}: can't install extras for Python ${version}"
-#        pip install -r ${PLOTLY_OPTIONAL_REQUIREMENTS_FILE_2_6}
-#    else
-#        pip install -r ${PLOTLY_OPTIONAL_REQUIREMENTS_FILE}
+        pip install -r ${PLOTLY_OPTIONAL_REQUIREMENTS_FILE_2_6}
+    else
+        pip install -r ${PLOTLY_OPTIONAL_REQUIREMENTS_FILE}
     fi
 
     # install some test tools
