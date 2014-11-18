@@ -29,5 +29,5 @@ test:
 
     # test core things in the general 2.7 version that circle has
     - nosetests -xv plotly/tests --with-coverage --cover-package=plotly
-    - mkdir "${CIRCLE_ARTIFACTS}/${PYENV_VERSION}"
+    - mkdir "${CIRCLE_ARTIFACTS}/${PYENV_VERSION}" || true
     - coverage html -d "${CIRCLE_ARTIFACTS}/${PYENV_VERSION}"

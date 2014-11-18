@@ -42,7 +42,7 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
     echo "running tests for Python ${version} as user '$(whoami)'"
     nosetests -xv plotly/tests --with-coverage --cover-package=plotly ||
         error_exit "${LINENO}: test suite failed for Python ${version}"
-    mkdir "${CIRCLE_ARTIFACTS}/${PYENV_VERSION}"
+    mkdir "${CIRCLE_ARTIFACTS}/${PYENV_VERSION}" || true
     coverage html -d "${CIRCLE_ARTIFACTS}/${PYENV_VERSION}"
 
 done
