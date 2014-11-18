@@ -30,14 +30,19 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
 
     echo "${HOME}"
     echo "${PLOTLY_CONFIG_DIR}"
+    ls -l ${PLOTLY_CONFIG_DIR}
 
     # test that it imports when you don't have write permissions
-    sudo chmod -R 400 ${PLOTLY_CONFIG_DIR} && python -c "import plotly" ||
-        error_exit "${LINENO}: permissions test 400 on .plotly dir failed"
+    sudo chmod -R 444 ${PLOTLY_CONFIG_DIR} && python -c "import plotly" ||
+        error_exit "${LINENO}: permissions test 444 on .plotly dir failed"
+
+    ls -l ${PLOTLY_CONFIG_DIR}
 
     # test that setting write permissions will work for import (and tests)
-    sudo chmod -R 600 ${PLOTLY_CONFIG_DIR} && python -c "import plotly" ||
-        error_exit "${LINENO}: permissions test 600 on .plotly dir failed"
+    sudo chmod -R 666 ${PLOTLY_CONFIG_DIR} && python -c "import plotly" ||
+        error_exit "${LINENO}: permissions test 666 on .plotly dir failed"
+
+    ls -l ${PLOTLY_CONFIG_DIR}
 
     echo "running tests for Python ${version} as user '$(whoami)'"
     if [ ${version:0:3} == '2.7' ]
