@@ -3,7 +3,7 @@ machine:
     PLOTLY_PACKAGE_ROOT: ${PWD}
     PLOTLY_CONFIG_DIR: ${HOME}/.plotly
     PLOTLY_VENV_DIR: ${HOME}/venvs
-    PLOTLY_PYTHON_VERSIONS: ( 3.4 ) # ( 2.6 2.7 3.3 3.4 )
+    PLOTLY_PYTHON_VERSIONS: ( 3.3 3.4 ) # ( 2.6 2.7 3.3 3.4 )
     PLOTLY_CORE_REQUIREMENTS_FILE: ${PWD}/requirements.txt
     PLOTLY_OPTIONAL_REQUIREMENTS_FILE: ${PWD}/optional-requirements.txt
     PLOTLY_OPTIONAL_REQUIREMENTS_FILE_2_6: ${PWD}/optional-requirements-2-6.txt

@@ -1,6 +1,9 @@
 #!/bin/bash
 
-echo "running setup routine"
+echo "running setup routine with python versions:"
+for version in ${PYTHON_VERSIONS[@]}; do
+    echo "    ${version}"
+done
 
 env
 

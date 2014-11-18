@@ -1,6 +1,9 @@
 #!/bin/bash
 
-echo "running test routine"
+echo "running test routine with python versions:"
+for version in ${PYTHON_VERSIONS[@]}; do
+    echo "    ${version}"
+done
 
 env
 
