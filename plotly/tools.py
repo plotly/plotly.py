@@ -595,8 +595,11 @@ if _ipython_imported:
 
         def _repr_pdf_(self):
             url = self.resource + ".pdf"
-            res = requests.get(url)
-            return res.content
+            res = requests.get(url).content
+            if six.PY3:
+                return res.decode('utf-8', 'replace')
+            else:
+                res
 
         def _repr_jpeg_(self):
             url = self.resource + ".jpeg"
