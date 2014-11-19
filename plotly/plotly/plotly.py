@@ -424,6 +424,21 @@ class Stream:
         self.stream_id = stream_id
         self.connected = False
 
+    def heartbeat(self, reconnect_on=(200, '', 408)):
+        """Keep stream alive. Streams will close after ~1 min of inactivity.
+
+        If the interval between stream writes is > 30 seconds, you should
+        consider adding a heartbeat between your stream.write() calls like so:
+        >>> stream.heartbeat()
+
+        """
+        try:
+            self._stream.write('\n', reconnect_on=reconnect_on)
+        except AttributeError:
+            raise exceptions.PlotlyError("Stream has not been opened yet, "
+                                         "cannot write to a closed connection. "
+                                         "Call `open()` on the stream to open the stream.")
+
     def open(self):
         """Open streaming connection to plotly.
 
