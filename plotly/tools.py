@@ -582,26 +582,26 @@ if _ipython_imported:
 
         def _repr_svg_(self):
             url = self.resource + ".svg"
-            res = requests.get(url).content
+            cont = requests.get(url).content
             if six.PY3:
-                return res.decode('utf-8', 'replace')
+                return cont.decode('utf-8', 'replace')
             else:
-                res
+                cont
 
         def _repr_png_(self):
             url = self.resource + ".png"
-            res = requests.get(url)
-            return res.content
+            cont = requests.get(url)
+            return cont.content
 
         def _repr_pdf_(self):
             url = self.resource + ".pdf"
-            res = requests.get(url).content
+            cont = requests.get(url).content
             if six.PY3:
-                return res.decode('utf-8', 'replace')
+                return cont.decode('utf-8', 'replace')
             else:
-                res
+                cont
 
         def _repr_jpeg_(self):
             url = self.resource + ".jpeg"
-            res = requests.get(url)
-            return res.content
+            cont = requests.get(url)
+            return cont.content
