@@ -4,6 +4,25 @@ readme :
 	@echo ""
 	@less make_instructions.txt
 
+build :
+	@echo making a new distribution zip
+	@echo deleting all the old things
+	rm -rf stand_alone_dist/dist/
+	rm -f stand_alone_dist/dist.zip
+	@echo grabbing tarballs
+	mkdir stand_alone_dist/dist/
+	cd stand_alone_dist/dist; python ../../build_utils/get_core_requirements_links.py | xargs -n1 curl -O
+	python setup.py sdist --dist-dir stand_alone_dist/dist
+	@echo unpacking tarballs
+	cd stand_alone_dist/dist; ls | xargs -n1 tar -xf
+	@echo renaming packages so they install in order
+	python build_utils/rename_dist_packages.py
+	@echo making a downloadable zip
+	cd stand_alone_dist; zip -r dist.zip dist
+	@echo cleaning up
+	rm -rf stand_alone_dist/dist
+	@echo all done, have an ok day
+
 setup_subs :
 	@echo "Deleting old submodule locations, if they exist"
 	rm -rf plotly/graph_reference
