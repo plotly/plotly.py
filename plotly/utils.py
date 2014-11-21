@@ -126,6 +126,21 @@ class _plotlyJSONEncoder(json.JSONEncoder):
             pass
         return None
 
+    def maskedNumbersEncoder(self, obj):
+        """This catches masked numbers which can't be serialized.
+
+        Pandas (and others) may use masked numbers to signify data that's
+        not NaN, but also not valid in computations; something to be ignored.
+
+        """
+        import math
+        try:
+            if math.isnan(obj):
+                return float('NaN')
+        except:
+            pass
+        return None
+
     def builtinJSONEncoder(self, obj):
         try:
             return obj.to_plotly_json()
@@ -138,7 +153,7 @@ class _plotlyJSONEncoder(json.JSONEncoder):
         except TypeError as e:
             encoders = (self.builtinJSONEncoder, self.datetimeJSONEncoder,
                         self.numpyJSONEncoder, self.pandasJSONEncoder,
-                        self.sageJSONEncoder)
+                        self.sageJSONEncoder, self.maskedNumbersEncoder)
             for encoder in encoders:
                 s = encoder(obj)
                 if s is not None:
