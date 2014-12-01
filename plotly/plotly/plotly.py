@@ -698,9 +698,9 @@ class file_ops:
 class grid_ops:
     """ Interface to Plotly's Grid API.
         Plotly Grids are Plotly's tabular data object, rendered
-        in a online spreadsheet. Plotly graphs can be made from
+        in an online spreadsheet. Plotly graphs can be made from
         references of columns of Plotly grid objects. Free-form
-        JSON Meta data can be saved with Plotly grids.
+        JSON Metadata can be saved with Plotly grids.
 
         To create a Plotly grid in your Plotly account from Python,
         see `grid_ops.upload`.
@@ -724,57 +724,62 @@ class grid_ops:
     @classmethod
     def upload(cls, grid, filename,
                world_readable=True, auto_open=True, meta=None):
-        """ Upload a grid to your Plotly account with the specified filename.
+        """
+        Upload a grid to your Plotly account with the specified filename.
 
-            Positional arguments:
-                - grid: A plotly.grid_objs.Grid object,
-                        call `help(plotly.grid_ops.Grid)` for more info.
-                - filename: Name of the grid to be saved in your Plotly account.
-                            To save a grid in a folder in your Plotly account,
-                            separate specify a filename with folders and filename
-                            separated by backslashes (`/`).
-                            If a grid, plot, or folder already exists with the same
-                            filename, a `plotly.exceptions.RequestError` will be thrown
-                            with status_code 409
+        Positional arguments:
+            - grid: A plotly.grid_objs.Grid object,
+                    call `help(plotly.grid_ops.Grid)` for more info.
+            - filename: Name of the grid to be saved in your Plotly account.
+                        To save a grid in a folder in your Plotly account,
+                        separate specify a filename with folders and filename
+                        separated by backslashes (`/`).
+                        If a grid, plot, or folder already exists with the same
+                        filename, a `plotly.exceptions.RequestError` will be thrown
+                        with status_code 409
 
-            Optional keyword arguments:
-                - world_readable (default=True): make this grid publically (True)
-                                                 or privately (False) viewable.
-                - auto_open (default=True): Automatically open this grid in
-                                            the browser (True)
-                - meta (default=None): Optional meta data to associate with
-                                       this grid.
-                                       Meta data is any arbitrary
-                                       JSON-encodable object, for example:
-                                       `{"experiment name": "GaAs"}`
+        Optional keyword arguments:
+            - world_readable (default=True): make this grid publically (True)
+                                             or privately (False) viewable.
+            - auto_open (default=True): Automatically open this grid in
+                                        the browser (True)
+            - meta (default=None): Optional Metadata to associate with
+                                   this grid.
+                                   Metadata is any arbitrary
+                                   JSON-encodable object, for example:
+                                   `{"experiment name": "GaAs"}`
 
-            Usage example 1: Upload a plotly grid
-            ```
-            from plotly.grid_objs import Grid, Column
-            import plotly.plotly as py
-            column_1 = Column([1, 2, 3], 'time')
-            column_2 = Column([4, 2, 5], 'voltage')
-            grid = Grid([column_1, column_2])
-            py.grid_ops.upload(grid, 'time vs voltage')
-            ```
+        Filenames must be unique. To overwrite a grid with the same filename,
+        you'll first have to delete the grid with the blocking name. See
+        `plotly.plotly.grid_ops.delete`.
 
-            Usage example 2: Make a graph based with data that is sourced
-                             from a newly uploaded Plotly grid
-            ```
-            import plotly.plotly as py
-            from plotly.grid_objs import Grid, Column
-            from plotly.graph_objs import Scatter
-            # Upload a grid
-            column_1 = Column([1, 2, 3], 'time')
-            column_2 = Column([4, 2, 5], 'voltage')
-            grid = Grid([column_1, column_2])
-            py.grid_ops.upload(grid, 'time vs voltage')
+        Usage example 1: Upload a plotly grid
+        ```
+        from plotly.grid_objs import Grid, Column
+        import plotly.plotly as py
+        column_1 = Column([1, 2, 3], 'time')
+        column_2 = Column([4, 2, 5], 'voltage')
+        grid = Grid([column_1, column_2])
+        py.grid_ops.upload(grid, 'time vs voltage')
+        ```
 
-            # Build a Plotly graph object sourced from the
-            # grid's columns
-            trace = Scatter(xsrc=grid[0], ysrc=grid[1])
-            py.plot([trace], filename='graph from grid')
-            ```
+        Usage example 2: Make a graph based with data that is sourced
+                         from a newly uploaded Plotly grid
+        ```
+        import plotly.plotly as py
+        from plotly.grid_objs import Grid, Column
+        from plotly.graph_objs import Scatter
+        # Upload a grid
+        column_1 = Column([1, 2, 3], 'time')
+        column_2 = Column([4, 2, 5], 'voltage')
+        grid = Grid([column_1, column_2])
+        py.grid_ops.upload(grid, 'time vs voltage')
+
+        # Build a Plotly graph object sourced from the
+        # grid's columns
+        trace = Scatter(xsrc=grid[0], ysrc=grid[1])
+        py.plot([trace], filename='graph from grid')
+        ```
         """
 
         # Make a folder path
@@ -974,35 +979,35 @@ class grid_ops:
     @classmethod
     def delete(cls, grid=None, grid_url=None):
         '''
-            Delete a grid from your Plotly account.
+        Delete a grid from your Plotly account.
 
-            Only one of `grid` or `grid_url` needs to be specified.
+        Only one of `grid` or `grid_url` needs to be specified.
 
-            `grid` is a plotly.grid_objs.Grid object that has already
-                   been uploaded to Plotly.
+        `grid` is a plotly.grid_objs.Grid object that has already
+               been uploaded to Plotly.
 
-            `grid_url` is the URL of the Plotly grid to delete
+        `grid_url` is the URL of the Plotly grid to delete
 
-            Usage example 1: Upload a grid to plotly, then delete it
-            ```
-            from plotly.grid_objs import Grid, Column
-            import plotly.plotly as py
-            column_1 = Column([1, 2, 3], 'time')
-            column_2 = Column([4, 2, 5], 'voltage')
-            grid = Grid([column_1, column_2])
-            py.grid_ops.upload(grid, 'time vs voltage')
+        Usage example 1: Upload a grid to plotly, then delete it
+        ```
+        from plotly.grid_objs import Grid, Column
+        import plotly.plotly as py
+        column_1 = Column([1, 2, 3], 'time')
+        column_2 = Column([4, 2, 5], 'voltage')
+        grid = Grid([column_1, column_2])
+        py.grid_ops.upload(grid, 'time vs voltage')
 
-            # now delete it, and free up that filename
-            py.grid_ops.delete(grid)
-            ```
+        # now delete it, and free up that filename
+        py.grid_ops.delete(grid)
+        ```
 
-            Usage example 2: Delete a plotly grid by url
-            ```
-            import plotly.plotly as py
+        Usage example 2: Delete a plotly grid by url
+        ```
+        import plotly.plotly as py
 
-            grid_url = 'https://plot.ly/~chris/3'
-            py.grid_ops.delete(grid_url=grid_url)
-            ```
+        grid_url = 'https://plot.ly/~chris/3'
+        py.grid_ops.delete(grid_url=grid_url)
+        ```
         '''
 
         grid_id = _api_v2.parse_grid_id_args(grid, grid_url)
@@ -1014,12 +1019,12 @@ class grid_ops:
 class meta_ops:
     """ Interface to Plotly's Metadata API.
 
-        In Plotly, meta data is arbitrary, free-form JSON data that is
-        associated with Plotly grids. Meta data is viewable with any grid
+        In Plotly, Metadata is arbitrary, free-form JSON data that is
+        associated with Plotly grids. Metadata is viewable with any grid
         that is shared and grids are searchable by key value pairs in
-        the meta data. Meta data is any JSON-encodable object.
+        the Metadata. Metadata is any JSON-encodable object.
 
-        To upload meta data, either use the optional keyword argument `meta`
+        To upload Metadata, either use the optional keyword argument `meta`
         in the `py.grid_ops.upload` method, or use `py.meta_ops.upload`.
 
     """
@@ -1027,9 +1032,9 @@ class meta_ops:
     @classmethod
     def upload(cls, meta, grid=None, grid_url=None):
         '''
-            Upload meta data to a Plotly grid.
+            Upload Metadata to a Plotly grid.
 
-            Meta data is any JSON-encodable object. For example,
+            Metadata is any JSON-encodable object. For example,
             a dictionary, string, or list.
 
             Only one of `grid` or `grid_url` needs to be specified.
@@ -1037,9 +1042,9 @@ class meta_ops:
             `grid` is a plotly.grid_objs.Grid object that has already
                    been uploaded to Plotly.
 
-            `grid_url` is the URL of the Plotly grid to attach meta data to.
+            `grid_url` is the URL of the Plotly grid to attach Metadata to.
 
-            Usage example 1: Upload a grid to Plotly, then attach meta data to it
+            Usage example 1: Upload a grid to Plotly, then attach Metadata to it
             ```
             from plotly.grid_objs import Grid, Column
             import plotly.plotly as py
@@ -1048,12 +1053,12 @@ class meta_ops:
             grid = Grid([column_1, column_2])
             py.grid_ops.upload(grid, 'time vs voltage')
 
-            # now attach meta data to the grid
+            # now attach Metadata to the grid
             meta = {'experment': 'GaAs'}
             py.meta_ops.upload(meta, grid=grid)
             ```
 
-            Usage example 2: Upload meta data to an existing Plotly grid
+            Usage example 2: Upload Metadata to an existing Plotly grid
             ```
             import plotly.plotly as py
 
