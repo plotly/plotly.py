@@ -37,7 +37,7 @@ def test_upload_meta():
     unique_filename = _random_filename()
     grid_url = py.grid_ops.upload(_grid, unique_filename, auto_open=False)
 
-    # Add some meta data to that grid
+    # Add some Metadata to that grid
     meta_url = py.meta_ops.upload(
         _meta,
         grid_url=grid_url)
