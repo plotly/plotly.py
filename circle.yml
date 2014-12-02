@@ -1,0 +1,33 @@
+machine:
+  environment:
+    PLOTLY_PACKAGE_ROOT: /home/ubuntu/python-api
+    PLOTLY_CONFIG_DIR: ${HOME}/.plotly
+    PLOTLY_PYTHON_VERSIONS: 2.6.8 2.7.8 3.3.3 3.4.1
+    PLOTLY_CORE_REQUIREMENTS_FILE: ${PLOTLY_PACKAGE_ROOT}/requirements.txt
+    PLOTLY_OPTIONAL_REQUIREMENTS_FILE: ${PLOTLY_PACKAGE_ROOT}/optional-requirements.txt
+    PLOTLY_OPTIONAL_REQUIREMENTS_FILE_2_6: ${PLOTLY_PACKAGE_ROOT}/optional-requirements-2-6.txt
+dependencies:
+  pre:
+    # run all the pre-written installers (this will take a *while*)
+    - bash circle/setup.sh
+    # install testing tools for circle's version of things
+    - PYENV_VERSION=2.7 && pip install nose coverage
+  override:
+    - PYENV_VERSION=2.7 && pip install -I .
+    - PYENV_VERSION=2.7 && cd ~ && python -c "import plotly"
+test:
+  override:
+
+    # run test suite in all our python versions
+    - bash circle/test.sh
+
+#    # test that it imports when you don't have file permissions
+#    - sudo chmod 400 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
+#
+#    # test that setting permissions will work for import (and tests)
+#    - sudo chmod 600 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
+
+    # test core things in the general 2.7 version that circle has
+    - PYENV_VERSION=2.7 && nosetests -xv plotly/tests --with-coverage --cover-package=plotly
+    - mkdir "${CIRCLE_ARTIFACTS}/2.7" || true
+    - coverage html -d "${CIRCLE_ARTIFACTS}/2.7" --title=2.7

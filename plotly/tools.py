@@ -50,7 +50,8 @@ _FILE_CONTENT = {CREDENTIALS_FILE: {'username': '',
                                     'stream_ids': []},
                  CONFIG_FILE: {'plotly_domain': 'https://plot.ly',
                                'plotly_streaming_domain': 'stream.plot.ly',
-                               'plotly_api_domain': 'https://api.plot.ly'}}
+                               'plotly_api_domain': 'https://api.plot.ly',
+                               'plotly_ssl_verification': True}}
 
 try:
     os.mkdir(TEST_DIR)
@@ -142,7 +143,8 @@ def reset_credentials_file():
 
 def set_config_file(plotly_domain=None,
                     plotly_streaming_domain=None,
-                    plotly_api_domain=None):
+                    plotly_api_domain=None,
+                    plotly_ssl_verification=None):
     """Set the keyword-value pairs in `~/.plotly/.config`.
 
     """
@@ -157,6 +159,8 @@ def set_config_file(plotly_domain=None,
         settings['plotly_streaming_domain'] = plotly_streaming_domain
     if isinstance(plotly_api_domain, six.string_types):
         settings['plotly_api_domain'] = plotly_api_domain
+    if isinstance(plotly_ssl_verification, (six.string_types, bool)):
+        settings['plotly_ssl_verification'] = plotly_ssl_verification
     utils.save_json_dict(CONFIG_FILE, settings)
     ensure_local_plotly_files()  # make sure what we just put there is OK
 
@@ -244,7 +248,8 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
         s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\""
              "seamless=\"seamless\" "
              "src=\"{plotly_rest_url}/"
-             "~{file_owner}/{file_id}/{plot_width}/{plot_height}\" "
+             "~{file_owner}/{file_id}.embed"
+             "?width={plot_width}&height={plot_height}\" "
              "height=\"{iframe_height}\" width=\"{iframe_width}\">"
              "</iframe>").format(
             plotly_rest_url=plotly_rest_url,
@@ -255,7 +260,7 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
         s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\""
              "seamless=\"seamless\" "
              "src=\"{plotly_rest_url}/"
-             "~{file_owner}/{file_id}\" "
+             "~{file_owner}/{file_id}.embed\" "
              "height=\"{iframe_height}\" width=\"{iframe_width}\">"
              "</iframe>").format(
             plotly_rest_url=plotly_rest_url,
@@ -287,8 +292,8 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
     height (default="525") -- same as width but corresp. to the height of the figure
 
     """
-    s = get_embed(file_owner_or_url, file_id, width, height)
     try:
+        s = get_embed(file_owner_or_url, file_id, width, height)
         # see if we are in the SageMath Cloud
         from sage_salvus import html
         return html(s, hide=False)
@@ -302,7 +307,7 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
                 fid=file_id)
         else:
             url = file_owner_or_url
-        return PlotlyDisplay(url)
+        return PlotlyDisplay(url, width, height)
     else:
         warnings.warn(
             "Looks like you're not using IPython or Sage to embed this plot. "
@@ -567,27 +572,41 @@ if _ipython_imported:
         object can provide alternate representations.
 
         """
-        def __init__(self, url):
+        def __init__(self, url, width, height):
             self.resource = url
-            self.embed_code = get_embed(url)
+            self.embed_code = get_embed(url, width=width, height=height)
             super(PlotlyDisplay, self).__init__(data=self.embed_code)
+
+        def _repr_html_(self):
+            return self.embed_code
 
         def _repr_svg_(self):
             url = self.resource + ".svg"
             res = requests.get(url)
-            return res.content
+            if six.PY3:
+                cont = res.content.decode('utf-8', 'replace')
+            else:
+                cont = res.content
+            return cont
 
         def _repr_png_(self):
             url = self.resource + ".png"
             res = requests.get(url)
-            return res.content
+            cont = res.content
+            return cont
 
         def _repr_pdf_(self):
             url = self.resource + ".pdf"
             res = requests.get(url)
-            return res.content
+            cont = res.content
+            if six.PY3:
+                cont = res.content.decode('utf-8', 'replace')
+            else:
+                cont = res.content
+            return cont
 
         def _repr_jpeg_(self):
             url = self.resource + ".jpeg"
             res = requests.get(url)
-            return res.content
+            cont = res.content
+            return cont

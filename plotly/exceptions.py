@@ -16,6 +16,7 @@ info: (required!)
 
 """
 import json
+import six
 
 ## Base Plotly Error ##
 
@@ -36,7 +37,9 @@ class PlotlyRequestError(PlotlyError):
         if 'json' in content_type:
             content = requests_exception.response.content
             if content != '':
-                res_payload = json.loads(requests_exception.response.content)
+                res_payload = json.loads(
+                    requests_exception.response.content.decode('utf8')
+                )
                 if 'detail' in res_payload:
                     self.message = res_payload['detail']
                 else:
@@ -66,7 +69,7 @@ COLUMN_NOT_YET_UPLOADED_MESSAGE = (
 NON_UNIQUE_COLUMN_MESSAGE = (
     "Yikes, plotly grids currently "
     "can't have duplicate column names. Rename "
-    "the column \"{}\" and try again."
+    "the column \"{0}\" and try again."
 )
 ## Would Cause Server Errors ##
 
