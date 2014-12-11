@@ -856,7 +856,7 @@ def get_patched_data_class(Data):
                     entry['type'] = new_type
                     warnings.warn(
                     "\n"
-                    "The type, '{old}', is not a valid Plotly trace. "
+                    "Whoops! '{old}' is not a valid Plotly trace type. "
                     "It's been converted to 'scatter' by default."
                     "".format(old=old_type)
                     )
