@@ -840,14 +840,12 @@ class grid_ops:
 
         response_columns = res['file']['cols']
         grid_id = res['file']['fid']
+        grid_url = res['file']['web_url']
 
         # mutate the grid columns with the id's returned from the server
         cls._fill_in_response_column_ids(grid, response_columns, grid_id)
 
         grid.id = grid_id
-
-        plotly_domain = get_config()['plotly_domain']
-        grid_url = '{0}/~{1}'.format(plotly_domain, grid_id.replace(':', '/'))
 
         if meta is not None:
             meta_ops.upload(meta, grid=grid)
