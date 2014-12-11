@@ -28,7 +28,8 @@ import warnings
 import six
 from plotly.graph_objs import graph_objs_tools
 from plotly.graph_objs.graph_objs_tools import (
-    INFO, OBJ_MAP, NAME_TO_KEY, KEY_TO_NAME
+    INFO, OBJ_MAP, NAME_TO_KEY, KEY_TO_NAME,
+    DEPRECATED_TYPE_MAP, VALID_TYPES
 )
 
 from plotly import exceptions
@@ -475,7 +476,7 @@ class PlotlyDict(dict):
                 self[k_new] = self.pop(k_old)
                 warnings.warn(
                     "\n"
-                    "The key, '{old}', has been depreciated, it's been "
+                    "The key, '{old}', has been deprecated, it's been "
                     "converted to '{new}'. You should change your code to use "
                     "'{new}' in the future."
                     "".format(old=k_old, new=k_new)
@@ -838,9 +839,30 @@ def get_patched_data_class(Data):
             elif isinstance(entry, dict):
                 if 'type' not in entry:  # assume 'scatter' if not given
                     entry['type'] = 'scatter'
+                elif entry['type'] in DEPRECATED_TYPE_MAP.keys():
+                    old_type = entry['type']
+                    new_type = DEPRECATED_TYPE_MAP[entry['type']]
+                    entry['type'] = new_type
+                    warnings.warn(
+                    "\n"
+                    "The type, '{old}', has been deprecated, it's been "
+                    "converted to '{new}'. You should change your code to use "
+                    "'{new}' in the future."
+                    "".format(old=old_type, new=new_type)
+                    )
+                elif entry['type'] not in VALID_TYPES: # default to 'scatter'
+                    old_type = entry['type']
+                    new_type = 'scatter'
+                    entry['type'] = new_type
+                    warnings.warn(
+                    "\n"
+                    "The type, '{old}', is not a valid Plotly trace. "
+                    "It's been converted to 'scatter' by default."
+                    "".format(old=old_type)
+                    )
                 try:
                     obj_name = KEY_TO_NAME[entry['type']]
-                except KeyError:
+                except KeyError: # this should never get hit
                     raise exceptions.PlotlyDataTypeError(
                         obj=self,
                         index=index
