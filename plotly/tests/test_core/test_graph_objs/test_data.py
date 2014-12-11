@@ -48,9 +48,9 @@ def test_dict_instantiation_key_error():
     print(Data([{'marker': 'not-a-dict'}]))
 
 
-@raises(PlotlyDataTypeError)
-def test_dict_instantiation_type_error():
-    Data([{'type': 'invalid_type'}])
+def test_dict_instantiation_invalid_type():
+    data = Data([{'type': 'invalid_type'}])
+    assert(data[0]['type'] == 'scatter')
 
 
 @raises(PlotlyListEntryError)
