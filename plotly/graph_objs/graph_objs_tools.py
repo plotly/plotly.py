@@ -54,6 +54,17 @@ INFO['trace'] = dict(keymeta=dict())
 LINE_SIZE = 76
 TAB_SIZE = 4
 
+# Deprecated trace type mapping
+DEPRECATED_TYPE_MAP = dict(
+    histogramx="histogram",
+    histogramy="histogram"
+)
+
+# Valid trace types
+VALID_TYPES = []
+for traces in OBJ_MAP:
+    if OBJ_MAP[traces]['base_name'] == 'PlotlyTrace':
+        VALID_TYPES.append(traces.lower())
 
 # Doc make function for list-like objects
 def make_list_doc(name):
