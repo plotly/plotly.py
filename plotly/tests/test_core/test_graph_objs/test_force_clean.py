@@ -4,9 +4,9 @@ from plotly.graph_objs import *
 
 def createTraceByType(type):
     test_trace = dict(
-        "x":[1,2,3,4],
-        "y":[5,6,7,8],
-        "type":type)
+        x=[1,2,3,4],
+        y=[5,6,7,8],
+        type=type)
     return test_trace
 
 def test_force_clean_figure_valid_type():
