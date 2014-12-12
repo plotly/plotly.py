@@ -11,6 +11,7 @@ import os.path
 import sys
 import threading
 import re
+import datetime
 
 ### incase people are using threading, we lock file reads
 lock = threading.Lock()
@@ -101,7 +102,14 @@ class _plotlyJSONEncoder(json.JSONEncoder):
         depending on what non-zero resolution was provided
         '''
         try:
+            import pandas
+            pandas_importable = True
         except:
+            pandas_importable = False
+
+        if pandas_importable and obj is pandas.NaT:
+            return None
+
         if isinstance(obj, (datetime.datetime, datetime.date)):
             if obj.microsecond != 0:
                 return obj.strftime('%Y-%m-%d %H:%M:%S.%f')
