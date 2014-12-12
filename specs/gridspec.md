@@ -216,7 +216,7 @@ c1 = Column('first column', [1, 2, 3, 4])
 grid = Grid([c1])
 grid_url = py.grid_ops.upload(grid, unique_filename, auto_open=False)
 
-# Add some meta data to that grid
+# Add some Metadata to that grid
 meta = {"settings": {"scope1": {"model": "Unicorn Finder", "voltage": 4}}}
 meta_url = py.meta_ops.upload(
     meta,
