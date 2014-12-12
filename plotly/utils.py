@@ -172,11 +172,17 @@ class _plotlyJSONEncoder(json.JSONEncoder):
             raise NotEncodable
 
     def builtinJSONEncoder(self, obj):
+        '''
+        Provide an API for folks to write their own
+        JSON encoders for their objects that they wanna
+        send to Plotly: this is an object's `to_plotly_json` method
+
+        Used for grid_objs.Column objects.
+        '''
         try:
             return obj.to_plotly_json()
         except AttributeError:
             raise NotEncodable
-
 
     def default(self, obj):
         encoders = (self.builtinJSONEncoder,
