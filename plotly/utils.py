@@ -92,9 +92,14 @@ class _plotlyJSONEncoder(json.JSONEncoder):
             raise NotEncodable
 
     def datetimeJSONEncoder(self, obj):
-        # if datetime or iterable of datetimes, convert to a string that plotly understands
-        # format as %Y-%m-%d %H:%M:%S.%f, %Y-%m-%d %H:%M:%S, or %Y-%m-%d depending on what non-zero resolution was provided
-        import datetime
+        '''
+        if datetime or iterable of datetimes,
+        convert to a string that plotly understands
+        format as %Y-%m-%d %H:%M:%S.%f,
+                  %Y-%m-%d %H:%M:%S, or
+                  %Y-%m-%d
+        depending on what non-zero resolution was provided
+        '''
         try:
         except:
         if isinstance(obj, (datetime.datetime, datetime.date)):
