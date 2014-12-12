@@ -13,6 +13,25 @@ import threading
 import re
 import datetime
 
+try:
+    import numpy
+    _numpy_imported = True
+except ImportError:
+    _numpy_imported = False
+
+try:
+    import pandas
+    _pandas_imported = True
+except ImportError:
+    _pandas_imported = False
+
+try:
+    from sage.all import RR, ZZ
+    _sage_imported = True
+except ImportError:
+    _sage_imported = False
+
+
 ### incase people are using threading, we lock file reads
 lock = threading.Lock()
 
@@ -76,11 +95,10 @@ def ensure_dir_exists(directory):
 class NotEncodable(Exception):
     pass
 
+
 class _plotlyJSONEncoder(json.JSONEncoder):
     def numpyJSONEncoder(self, obj):
-        try:
-            import numpy
-        except:
+        if not _numpy_imported:
             raise NotEncodable
 
         if type(obj).__module__.split('.')[0] == numpy.__name__:
@@ -101,13 +119,8 @@ class _plotlyJSONEncoder(json.JSONEncoder):
                   %Y-%m-%d
         depending on what non-zero resolution was provided
         """
-        try:
-            import pandas
-            pandas_importable = True
-        except:
-            pandas_importable = False
 
-        if pandas_importable and obj is pandas.NaT:
+        if _pandas_imported and obj is pandas.NaT:
             return None
 
         if isinstance(obj, (datetime.datetime, datetime.date)):
@@ -127,9 +140,7 @@ class _plotlyJSONEncoder(json.JSONEncoder):
             raise NotEncodable
 
     def pandasJSONEncoder(self, obj):
-        try:
-            import pandas
-        except:
+        if not _pandas_imported:
             raise NotEncodable
 
         if isinstance(obj, pandas.Series):
@@ -150,9 +161,7 @@ class _plotlyJSONEncoder(json.JSONEncoder):
             raise NotEncodable
 
     def sageJSONEncoder(self, obj):
-        try:
-            from sage.all import RR, ZZ
-        except:
+        if not _sage_imported:
             raise NotEncodable
 
         if obj in RR:
