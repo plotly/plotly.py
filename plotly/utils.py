@@ -72,59 +72,75 @@ def ensure_dir_exists(directory):
 
 
 ### Custom JSON encoders ###
+class NotEncodable(Exception):
+    pass
+
 class _plotlyJSONEncoder(json.JSONEncoder):
     def numpyJSONEncoder(self, obj):
         try:
             import numpy
-            if type(obj).__module__.split('.')[0] == numpy.__name__:
-                l = obj.tolist()
-                d = self.datetimeJSONEncoder(l)
-                return d if d is not None else l
         except:
-            pass
-        return None
+            raise NotEncodable
+
+        if type(obj).__module__.split('.')[0] == numpy.__name__:
+            l = obj.tolist()
+            try:
+                return self.datetimeJSONEncoder(l)
+            except NotEncodable:
+                return l
+        else:
+            raise NotEncodable
 
     def datetimeJSONEncoder(self, obj):
         # if datetime or iterable of datetimes, convert to a string that plotly understands
         # format as %Y-%m-%d %H:%M:%S.%f, %Y-%m-%d %H:%M:%S, or %Y-%m-%d depending on what non-zero resolution was provided
         import datetime
         try:
-            if isinstance(obj, (datetime.datetime, datetime.date)):
-                if obj.microsecond != 0:
-                    return obj.strftime('%Y-%m-%d %H:%M:%S.%f')
-                elif obj.second != 0 or obj.minute != 0 or obj.hour != 0:
-                    return obj.strftime('%Y-%m-%d %H:%M:%S')
-                else:
-                    return obj.strftime('%Y-%m-%d')
-            elif isinstance(obj[0], (datetime.datetime, datetime.date)):
-                return [o.strftime(
-                        '%Y-%m-%d %H:%M:%S.%f') if o.microsecond != 0 else
-                        o.strftime('%Y-%m-%d %H:%M:%S') if o.second != 0 or o.minute != 0 or o.hour != 0 else
-                        o.strftime('%Y-%m-%d')
-                        for o in obj]
         except:
-            pass
-        return None
+        if isinstance(obj, (datetime.datetime, datetime.date)):
+            if obj.microsecond != 0:
+                return obj.strftime('%Y-%m-%d %H:%M:%S.%f')
+            elif obj.second != 0 or obj.minute != 0 or obj.hour != 0:
+                return obj.strftime('%Y-%m-%d %H:%M:%S')
+            else:
+                return obj.strftime('%Y-%m-%d')
+        elif isinstance(obj[0], (datetime.datetime, datetime.date)):
+            return [o.strftime(
+                    '%Y-%m-%d %H:%M:%S.%f') if o.microsecond != 0 else
+                    o.strftime('%Y-%m-%d %H:%M:%S') if o.second != 0 or o.minute != 0 or o.hour != 0 else
+                    o.strftime('%Y-%m-%d')
+                    for o in obj]
+        else:
+            raise NotEncodable
 
     def pandasJSONEncoder(self, obj):
         try:
             import pandas
-            if isinstance(obj, pandas.Series):
-                return obj.tolist()
         except:
-            pass
-        return None
+            raise NotEncodable
+
+        if isinstance(obj, pandas.Series):
+            serializable_list = []
+            for li in list(obj):
+                try:
+                    json.dumps(li)
+                    serializable_list.append(li)
+                except TypeError:
+                    serializable_list.append(self.default(li))
+
+            return serializable_list
+        elif isinstance(obj, pandas.Index):
+            return obj.tolist()
+        elif obj is pandas.NaT:
+            return None
+        else:
+            raise NotEncodable
 
     def sageJSONEncoder(self, obj):
         try:
             from sage.all import RR, ZZ
-            if obj in RR:
-                return float(obj)
-            elif obj in ZZ:
-                return int(obj)
         except:
-            pass
-        return None
+            raise NotEncodable
 
     def maskedNumbersEncoder(self, obj):
         """This catches masked numbers which can't be serialized.
@@ -140,26 +156,33 @@ class _plotlyJSONEncoder(json.JSONEncoder):
         except:
             pass
         return None
+        if obj in RR:
+            return float(obj)
+        elif obj in ZZ:
+            return int(obj)
+        else:
+            raise NotEncodable
 
     def builtinJSONEncoder(self, obj):
         try:
             return obj.to_plotly_json()
         except AttributeError:
-            return None
+            raise NotEncodable
+
 
     def default(self, obj):
-        try:
-            return json.dumps(obj)
-        except TypeError as e:
-            encoders = (self.builtinJSONEncoder, self.datetimeJSONEncoder,
-                        self.numpyJSONEncoder, self.pandasJSONEncoder,
-                        self.sageJSONEncoder, self.maskedNumbersEncoder)
-            for encoder in encoders:
-                s = encoder(obj)
-                if s is not None:
-                    return s
-            raise e
-        return json.JSONEncoder.default(self, obj)
+        encoders = (self.builtinJSONEncoder,
+                    self.datetimeJSONEncoder,
+                    self.numpyJSONEncoder,
+                    self.pandasJSONEncoder,
+                    self.sageJSONEncoder)
+        for encoder in encoders:
+            try:
+                return encoder(obj)
+            except NotEncodable:
+                pass
+
+        raise TypeError(repr(obj) + " is not JSON serializable")
 
 
 ### unicode stuff ###
