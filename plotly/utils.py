@@ -123,13 +123,16 @@ class _plotlyJSONEncoder(json.JSONEncoder):
         if _pandas_imported and obj is pandas.NaT:
             return None
 
-        if isinstance(obj, (datetime.datetime, datetime.date)):
+
+        if isinstance(obj, datetime.datetime):
             if obj.microsecond:
                 return obj.strftime('%Y-%m-%d %H:%M:%S.%f')
             elif any((obj.second, obj.minute, obj.hour)):
                 return obj.strftime('%Y-%m-%d %H:%M:%S')
             else:
                 return obj.strftime('%Y-%m-%d')
+        elif isinstance(obj, datetime.date):
+            return obj.strftime('%Y-%m-%d')
         else:
             raise NotEncodable
 
