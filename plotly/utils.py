@@ -101,6 +101,9 @@ class _plotlyJSONEncoder(json.JSONEncoder):
         if not _numpy_imported:
             raise NotEncodable
 
+        if obj is numpy.ma.core.masked:
+            return float('nan')
+
         if type(obj).__module__.split('.')[0] == numpy.__name__:
             l = obj.tolist()
             try:
