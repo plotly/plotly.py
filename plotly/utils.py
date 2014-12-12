@@ -124,16 +124,16 @@ class _plotlyJSONEncoder(json.JSONEncoder):
             return None
 
         if isinstance(obj, (datetime.datetime, datetime.date)):
-            if obj.microsecond != 0:
+            if obj.microsecond:
                 return obj.strftime('%Y-%m-%d %H:%M:%S.%f')
-            elif obj.second != 0 or obj.minute != 0 or obj.hour != 0:
+            elif any((obj.second, obj.minute, obj.hour)):
                 return obj.strftime('%Y-%m-%d %H:%M:%S')
             else:
                 return obj.strftime('%Y-%m-%d')
         elif isinstance(obj[0], (datetime.datetime, datetime.date)):
             return [o.strftime(
-                    '%Y-%m-%d %H:%M:%S.%f') if o.microsecond != 0 else
-                    o.strftime('%Y-%m-%d %H:%M:%S') if o.second != 0 or o.minute != 0 or o.hour != 0 else
+                    '%Y-%m-%d %H:%M:%S.%f') if o.microsecond else
+                    o.strftime('%Y-%m-%d %H:%M:%S') if any((o.second, o.minute, o.hour)) else
                     o.strftime('%Y-%m-%d')
                     for o in obj]
         else:
