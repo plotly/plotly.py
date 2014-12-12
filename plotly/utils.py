@@ -105,11 +105,8 @@ class _plotlyJSONEncoder(json.JSONEncoder):
             return float('nan')
 
         if type(obj).__module__.split('.')[0] == numpy.__name__:
-            l = obj.tolist()
-            try:
-                return self.datetimeJSONEncoder(l)
-            except NotEncodable:
-                return l
+            return obj.tolist()
+
         else:
             raise NotEncodable
 
@@ -133,12 +130,6 @@ class _plotlyJSONEncoder(json.JSONEncoder):
                 return obj.strftime('%Y-%m-%d %H:%M:%S')
             else:
                 return obj.strftime('%Y-%m-%d')
-        elif isinstance(obj[0], (datetime.datetime, datetime.date)):
-            return [o.strftime(
-                    '%Y-%m-%d %H:%M:%S.%f') if o.microsecond else
-                    o.strftime('%Y-%m-%d %H:%M:%S') if any((o.second, o.minute, o.hour)) else
-                    o.strftime('%Y-%m-%d')
-                    for o in obj]
         else:
             raise NotEncodable
 
