@@ -63,6 +63,18 @@ class TestJSONEncoder(TestCase):
         res = utils.PlotlyJSONEncoder.encode_as_list(ObjWithAttr())
         self.assertEqual(res, expected_res)
 
+    def test_encode_as_pandas(self):
+
+        # should *fail* on things that are not specific pandas objects
+        not_pandas = ['giraffe', 6, float('nan'), ['a', 'list']]
+        for obj in not_pandas:
+            self.assertRaises(utils.NotEncodable,
+                              utils.PlotlyJSONEncoder.encode_as_pandas, obj)
+
+        # should succeed when we've got specific pandas thingies
+        res = utils.PlotlyJSONEncoder.encode_as_pandas(pd.NaT)
+        self.assertIs(res, None)
+
 ## JSON encoding
 numeric_list = [1, 2, 3]
 np_list = np.array([1, 2, 3, np.NaN, np.NAN, np.Inf, dt(2014, 1, 5)])
