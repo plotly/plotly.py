@@ -12,6 +12,7 @@ import sys
 import threading
 import re
 import datetime
+import pytz
 
 try:
     import numpy
@@ -93,11 +94,18 @@ def ensure_dir_exists(directory):
 
 def iso_to_plotly_time_string(iso_string):
     """Remove timezone info and replace 'T' delimeter with ' ' (ws)."""
-    no_tz_string = '-'.join(iso_string.split('-')[:3])
-    if no_tz_string.endswith('T00:00:00'):
-        return no_tz_string.replace('T00:00:00', '')
+    # make sure we don't send timezone info to plotly
+    if (iso_string.split('-')[:3] is '00:00') or\
+            (iso_string.split('+')[0] is '00:00'):
+        raise Exception("Plotly won't accept timestrings with timezone info.\n"
+                        "All timestrings are assumed to be in UTC.")
+
+    iso_string = iso_string.replace('-00:00', '').replace('+00:00', '')
+
+    if iso_string.endswith('T00:00:00'):
+        return iso_string.replace('T00:00:00', '')
     else:
-        return no_tz_string.replace('T', ' ')
+        return iso_string.replace('T', ' ')
 
 
 ### Custom JSON encoders ###
@@ -215,9 +223,22 @@ class PlotlyJSONEncoder(json.JSONEncoder):
     @staticmethod
     def encode_as_datetime(obj):
         """Attempt to convert to utc-iso time string using datetime methods."""
+
+        # first we need to get this into utc
         try:
-            if obj.utcoffset():
-                obj = obj - obj.utcoffset()
+            obj = obj.astimezone(pytz.utc)
+        except ValueError:
+            # we'll get a value error if trying to convert with naive datetime
+            pass
+        except TypeError:
+            # pandas throws a typeerror here instead of a value error, it's OK
+            pass
+        except AttributeError:
+            # we'll get an attribute error if astimezone DNE
+            raise NotEncodable
+
+        # now we need to get a nicely formatted time string
+        try:
             time_string = obj.isoformat()
         except AttributeError:
             raise NotEncodable
