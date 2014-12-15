@@ -96,10 +96,10 @@ class NotEncodable(Exception):
     pass
 
 
-class _plotlyJSONEncoder(json.JSONEncoder):
     def numpyJSONEncoder(self, obj):
         if not _numpy_imported:
             raise NotEncodable
+class PlotlyJSONEncoder(json.JSONEncoder):
 
         if obj is numpy.ma.core.masked:
             return float('nan')

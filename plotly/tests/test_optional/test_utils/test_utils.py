@@ -38,7 +38,7 @@ def test_column_json_encoding():
         Column(np_list, 'col 3')
     ]
     json_columns = json.dumps(
-        columns, cls=utils._plotlyJSONEncoder, sort_keys=True
+        columns, cls=utils.PlotlyJSONEncoder, sort_keys=True
     )
     assert('[{"data": [1, 2, 3], "name": "col 1"}, '
            '{"data": [1, "A", "2014-01-05", '
@@ -56,8 +56,8 @@ def test_figure_json_encoding():
     data = Data([s1, s2])
     figure = Figure(data=data)
 
-    js1 = json.dumps(s1, cls=utils._plotlyJSONEncoder, sort_keys=True)
-    js2 = json.dumps(s2, cls=utils._plotlyJSONEncoder, sort_keys=True)
+    js1 = json.dumps(s1, cls=utils.PlotlyJSONEncoder, sort_keys=True)
+    js2 = json.dumps(s2, cls=utils.PlotlyJSONEncoder, sort_keys=True)
 
     assert(js1 == '{"type": "scatter3d", "x": [1, 2, 3], '
                   '"y": [1, 2, 3, NaN, NaN, Infinity, "2014-01-05"], '
@@ -66,8 +66,8 @@ def test_figure_json_encoding():
     assert(js2 == '{"type": "scatter", "x": [1, 2, 3]}')
 
     # Test JSON encoding works
-    json.dumps(data, cls=utils._plotlyJSONEncoder, sort_keys=True)
-    json.dumps(figure, cls=utils._plotlyJSONEncoder, sort_keys=True)
+    json.dumps(data, cls=utils.PlotlyJSONEncoder, sort_keys=True)
+    json.dumps(figure, cls=utils.PlotlyJSONEncoder, sort_keys=True)
 
     # Test data wasn't mutated
     assert(bool(np.asarray(np_list ==
@@ -79,18 +79,18 @@ def test_figure_json_encoding():
 
 
 def test_datetime_json_encoding():
-    j1 = json.dumps(dt_list, cls=utils._plotlyJSONEncoder)
+    j1 = json.dumps(dt_list, cls=utils.PlotlyJSONEncoder)
     assert(j1 == '["2014-01-05", '
                  '"2014-01-05 01:01:01", '
                  '"2014-01-05 01:01:01.000001"]')
-    j2 = json.dumps({"x": dt_list}, cls=utils._plotlyJSONEncoder)
+    j2 = json.dumps({"x": dt_list}, cls=utils.PlotlyJSONEncoder)
     assert(j2 == '{"x": ["2014-01-05", '
                  '"2014-01-05 01:01:01", '
                  '"2014-01-05 01:01:01.000001"]}')
 
 
 def test_pandas_json_encoding():
-    j1 = json.dumps(df['col 1'], cls=utils._plotlyJSONEncoder)
+    j1 = json.dumps(df['col 1'], cls=utils.PlotlyJSONEncoder)
     assert(j1 == '[1, 2, 3, "2014-01-05", null, NaN, Infinity]')
 
     # Test that data wasn't mutated
@@ -98,28 +98,29 @@ def test_pandas_json_encoding():
                         pd.Series([1, 2, 3, dt(2014, 1, 5),
                                    pd.NaT, np.NaN, np.Inf]))
 
-    j2 = json.dumps(df.index, cls=utils._plotlyJSONEncoder)
+    j2 = json.dumps(df.index, cls=utils.PlotlyJSONEncoder)
     assert(j2 == '[0, 1, 2, 3, 4, 5, 6]')
 
     nat = [pd.NaT]
-    j3 = json.dumps(nat, cls=utils._plotlyJSONEncoder)
+    j3 = json.dumps(nat, cls=utils.PlotlyJSONEncoder)
     assert(j3 == '[null]')
     assert(nat[0] is pd.NaT)
 
-    j4 = json.dumps(rng, cls=utils._plotlyJSONEncoder)
+    j4 = json.dumps(rng, cls=utils.PlotlyJSONEncoder)
     assert(j4 == '["2011-01-01", "2011-01-01 01:00:00"]')
 
-    j5 = json.dumps(ts, cls=utils._plotlyJSONEncoder)
+    j5 = json.dumps(ts, cls=utils.PlotlyJSONEncoder)
     assert(j5 == '[1.5, 2.5]')
     assert_series_equal(ts, pd.Series([1.5, 2.5], index=rng))
 
-    j6 = json.dumps(ts.index, cls=utils._plotlyJSONEncoder)
+    j6 = json.dumps(ts.index, cls=utils.PlotlyJSONEncoder)
     assert(j6 == '["2011-01-01", "2011-01-01 01:00:00"]')
 
 
 def test_numpy_masked_json_encoding():
     l = [1, 2, np.ma.core.masked]
-    j1 = json.dumps(l, cls=utils._plotlyJSONEncoder)
+    j1 = json.dumps(l, cls=utils.PlotlyJSONEncoder)
+    print j1
     assert(j1 == '[1, 2, NaN]')
     assert(set(l) == set([1, 2, np.ma.core.masked]))
 
@@ -142,17 +143,17 @@ def test_masked_constants_example():
     renderer = PlotlyRenderer()
     Exporter(renderer).run(fig)
 
-    json.dumps(renderer.plotly_fig, cls=utils._plotlyJSONEncoder)
+    json.dumps(renderer.plotly_fig, cls=utils.PlotlyJSONEncoder)
 
     jy = json.dumps(renderer.plotly_fig['data'][1]['y'],
-                    cls=utils._plotlyJSONEncoder)
+                    cls=utils.PlotlyJSONEncoder)
     assert(jy == '[-398.11793026999999, -398.11792966000002, '
                  '-398.11786308000001, NaN]')
 
 
 def test_numpy_dates():
     a = np.arange(np.datetime64('2011-07-11'), np.datetime64('2011-07-18'))
-    j1 = json.dumps(a, cls=utils._plotlyJSONEncoder)
+    j1 = json.dumps(a, cls=utils.PlotlyJSONEncoder)
     assert(j1 == '["2011-07-11", "2011-07-12", "2011-07-13", '
                  '"2011-07-14", "2011-07-15", "2011-07-16", '
                  '"2011-07-17"]')
@@ -160,5 +161,5 @@ def test_numpy_dates():
 
 def test_datetime_dot_date():
     a = [datetime.date(2014, 1, 1), datetime.date(2014, 1, 2)]
-    j1 = json.dumps(a, cls=utils._plotlyJSONEncoder)
+    j1 = json.dumps(a, cls=utils.PlotlyJSONEncoder)
     assert(j1 == '["2014-01-01", "2014-01-02"]')
