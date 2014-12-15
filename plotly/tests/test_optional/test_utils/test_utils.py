@@ -42,6 +42,27 @@ class TestJSONEncoder(TestCase):
         res = utils.PlotlyJSONEncoder.encode_as_plotly(ObjWithAttr())
         self.assertEqual(res, expected_res)
 
+    def test_encode_as_list(self):
+
+        # should *fail* when object doesn't have `tolist` method
+        objs_without_attr = [
+            1, 'one', {'a', 'set'}, {'a': 'dict'}, ['a', 'list']
+        ]
+        for obj in objs_without_attr:
+            self.assertRaises(utils.NotEncodable,
+                              utils.PlotlyJSONEncoder.encode_as_list, obj)
+
+        # should return without exception when obj has `tolist` attr
+        expected_res = ['some', 'list']
+
+        class ObjWithAttr(object):
+
+            def tolist(self):
+                return expected_res
+
+        res = utils.PlotlyJSONEncoder.encode_as_list(ObjWithAttr())
+        self.assertEqual(res, expected_res)
+
 ## JSON encoding
 numeric_list = [1, 2, 3]
 np_list = np.array([1, 2, 3, np.NaN, np.NAN, np.Inf, dt(2014, 1, 5)])
