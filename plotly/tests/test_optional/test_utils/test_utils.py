@@ -4,6 +4,7 @@ from nose.plugins.attrib import attr
 
 from unittest import TestCase
 
+import math
 from datetime import datetime as dt
 import datetime
 import numpy as np
@@ -74,6 +75,19 @@ class TestJSONEncoder(TestCase):
         # should succeed when we've got specific pandas thingies
         res = utils.PlotlyJSONEncoder.encode_as_pandas(pd.NaT)
         self.assertIs(res, None)
+
+    def test_encode_as_numpy(self):
+
+        # should *fail* on non-numpy-y things
+        not_numpy = ['hippo', 8, float('nan'), {'a': 'dict'}]
+        for obj in not_numpy:
+            self.assertRaises(utils.NotEncodable,
+                              utils.PlotlyJSONEncoder.encode_as_numpy, obj)
+
+        # should succeed with numpy-y-thingies
+        res = utils.PlotlyJSONEncoder.encode_as_numpy(np.ma.core.masked)
+        self.assertTrue(math.isnan(res))
+
 
 ## JSON encoding
 numeric_list = [1, 2, 3]
