@@ -123,6 +123,27 @@ class TestJSONEncoder(TestCase):
         res = utils.PlotlyJSONEncoder.encode_as_datetime(aware_datetime)
         self.assertEqual(res, '2013-10-01 04:00:00')
 
+    def test_encode_as_date(self):
+
+        # should *fail* without 'utcoffset' and 'isoformat' and '__sub__' attrs
+        non_datetimes = ['noon', 56, '00:00:00']
+        for obj in non_datetimes:
+            self.assertRaises(utils.NotEncodable,
+                              utils.PlotlyJSONEncoder.encode_as_date, obj)
+
+        # should work with a date
+        a_date = datetime.date(2013, 10, 01)
+        res = utils.PlotlyJSONEncoder.encode_as_date(a_date)
+        self.assertEqual(res, '2013-10-01')
+
+        # should also work with a date time without a utc offset!
+        # TODO: is this OK? We could raise errors after checking isinstance...
+        res = utils.PlotlyJSONEncoder.encode_as_date(
+            datetime.datetime(2013, 10, 1, microsecond=10)
+        )
+        self.assertEqual(res, '2013-10-01 00:00:00.000010')
+
+
 ## JSON encoding
 numeric_list = [1, 2, 3]
 np_list = np.array([1, 2, 3, np.NaN, np.NAN, np.Inf, dt(2014, 1, 5)])
