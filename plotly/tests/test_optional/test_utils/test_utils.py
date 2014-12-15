@@ -2,6 +2,8 @@ from nose.tools import raises
 from nose import with_setup
 from nose.plugins.attrib import attr
 
+from unittest import TestCase
+
 from datetime import datetime as dt
 import datetime
 import numpy as np
@@ -15,6 +17,30 @@ from plotly.grid_objs import Column
 from plotly.graph_objs import Scatter, Scatter3d, Figure, Data
 from plotly.matplotlylib import Exporter, PlotlyRenderer
 from plotly.plotly import plot
+
+
+class TestJSONEncoder(TestCase):
+
+    def test_encode_as_plotly(self):
+
+        # should *fail* when object doesn't have `to_plotly_json` attribute
+        objs_without_attr = [
+            1, 'one', {'a', 'set'}, {'a': 'dict'}, ['a', 'list']
+        ]
+        for obj in objs_without_attr:
+            self.assertRaises(utils.NotEncodable,
+                              utils.PlotlyJSONEncoder.encode_as_plotly, obj)
+
+        # should return without exception when obj has `to_plotly_josn` attr
+        expected_res = 'wedidit'
+
+        class ObjWithAttr(object):
+
+            def to_plotly_json(self):
+                return expected_res
+
+        res = utils.PlotlyJSONEncoder.encode_as_plotly(ObjWithAttr())
+        self.assertEqual(res, expected_res)
 
 ## JSON encoding
 numeric_list = [1, 2, 3]
