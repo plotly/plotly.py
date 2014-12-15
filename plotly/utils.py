@@ -163,7 +163,7 @@ class PlotlyJSONEncoder(json.JSONEncoder):
 
     @staticmethod
     def encode_as_plotly(obj):
-        """Attempt to use a builtin `ploty_to_json` method."""
+        """Attempt to use a builtin `to_plotly_json` method."""
         try:
             return obj.to_plotly_json()
         except AttributeError:
