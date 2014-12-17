@@ -4,7 +4,7 @@ from six.moves import http_client
 
 
 class Stream:
-    def __init__(self, server, port=80, headers={}):
+    def __init__(self, server, port=80, headers={}, url='/'):
         ''' Initialize a stream object and an HTTP Connection
         with chunked Transfer-Encoding to server:port with optional headers.
         '''
@@ -15,6 +15,7 @@ class Stream:
         self._server = server
         self._port = port
         self._headers = headers
+        self._url = url
         self._connect()
 
     def write(self, data, reconnect_on=('', 200, )):
@@ -60,8 +61,10 @@ class Stream:
             msg = data
             msglen = format(len(msg), 'x')  # msg length in hex
             # Send the message in chunk-encoded form
+            self._conn.sock.setblocking(1)
             self._conn.send('{msglen}\r\n{msg}\r\n'
                             .format(msglen=msglen, msg=msg).encode('utf-8'))
+            self._conn.sock.setblocking(0)
         except http_client.socket.error:
             self._reconnect()
             self.write(data)
@@ -75,7 +78,7 @@ class Stream:
         headers = self._headers
         self._conn = http_client.HTTPConnection(server, port)
 
-        self._conn.putrequest('POST', '/')
+        self._conn.putrequest('POST', self._url)
         self._conn.putheader('Transfer-Encoding', 'chunked')
         for header in headers:
             self._conn.putheader(header, headers[header])
