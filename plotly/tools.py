@@ -387,8 +387,7 @@ def mpl_to_plotly(fig, resize=False, strip_style=False, verbose=False):
 ### graph_objs related tools ###
 
 # TODO: Scale spacing based on number of plots and figure size
-def get_subplots(rows=1, columns=1, horizontal_spacing=0.1,
-                 vertical_spacing=0.15, print_grid=False):
+def get_subplots(*arg, **kwargs):
     """Return a dictionary instance with the subplots set in 'layout'.
 
     Example 1:
@@ -401,25 +400,73 @@ def get_subplots(rows=1, columns=1, horizontal_spacing=0.1,
         # print out string showing the subplot grid you've put in the layout
         fig = tools.get_subplots(rows=3, columns=2, print_grid=True)
 
-    key (types, default=default):
-        description.
+    fig (arg[0]):
+        Plotly figure object or dictionary.
 
-    rows (int, default=1):
-        Number of rows, evenly spaced vertically on the figure.
+        By default, get_subplots add keys 'xaxis[1-9]' and 'yaxis [1-9]'
+        to fig['layout']
 
-    columns (int, default=1):
-        Number of columns, evenly spaced horizontally on the figure.
+        If fig['data'] contains ONLY 3D traces, get_subplots add keys
+        'scene[1-9]' to fig['layout']
 
-    horizontal_spacing (float in [0,1], default=0.1):
-        Space between subplot columns. Applied to all columns.
+    rows (kwarg, int, default=1):
+        Number of rows on the figure.
 
-    vertical_spacing (float in [0,1], default=0.05):
-        Space between subplot rows. Applied to all rows.
+    columns (kwarg, int, default=1):
+        Number of columns on the figure.
 
-    print_grid (True | False, default=False):
-        If True, prints a tab-delimited string representation of your plot grid.
+    arrangements (kwarg, list or list of lists, default=[]):
+        Subplot arrangement as a list (or list of lists) of subplot indices.
+        Overrides the 'rows' and 'columns' arguments.
 
+        Use integers 1, 2, ... for 2d subplots.
+        Use 'scene1', 'scene2', ... for 3d subscenes.
+
+        The x-domain of each subplot i is given by:
+
+            number of index i in row / total number of indices in row
+
+        The y-domain of each subplot is given by:
+
+            number of index i in column /  total number of indices in column
+
+        ex1: [[1, 2, 3], [4, 5], [6]]
+        ex2: [[1], [1, 2], [1, 3]]
+        ex3: [1, 'scene1']
+
+    horizontal_spacing (kwarg, float in [0,1] or list, default=0.1):
+        Space between subplot columns.
+        Applied to all columns if float.
+        Applied to per column from left to right if list.
+        Applied to per column from left to right and per row from bottom to top
+            if list of lists.
+
+    vertical_spacing (kwarg, float in [0,1] or list, default=0.05):
+        Space between subplot rows.
+        Applied to all rows if float.
+        Applied to per row from bottom to top if list.
+        Applied to per row from bottom to top and per column from left to right
+            if list of lists.
+
+    shared_xaxes (kwarg, boolean or list, default=False)
+        Assign shared x axes.
+        If True, share all x axes.
+        If list of booleans, share all x axes per column from left to right.
+        If list of integers, share x axes per subplot index,
+            set in 'arrangement'.
+
+    shared_yaxes (kwarg, boolean or list, default=False)
+        Assign shared y axes.
+        If True, share all y axes.
+        If list of booleans, share all y axes per row from left to right.
+        If list of integers, share y axes per subplot index,
+            set in 'arrangement'.
+
+    print_grid (kwarg, boolean, default=False):
+        If True, prints a tab-delimited string representation of
+        your plot grid.
     """
+
     fig = dict(layout=graph_objs.Layout())  # will return this at the end
     plot_width = (1 - horizontal_spacing * (columns - 1)) / columns
     plot_height = (1 - vertical_spacing * (rows - 1)) / rows
