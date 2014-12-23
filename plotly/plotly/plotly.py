@@ -369,7 +369,7 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
                             verify=get_config()['plotly_ssl_verification'])
     if response.status_code == 200:
         if six.PY3:
-            content = json.loads(response.content.decode('unicode_escape'))
+            content = json.loads(response.content.decode('utf-8'))
         else:
             content = json.loads(response.content)
         response_payload = content['payload']
