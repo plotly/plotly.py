@@ -536,7 +536,7 @@ class Stream:
             stream_object.update(dict(layout=layout))
 
         # TODO: allow string version of this?
-        jdata = json.dumps(stream_object, cls=utils._plotlyJSONEncoder)
+        jdata = json.dumps(stream_object, cls=utils.PlotlyJSONEncoder)
         jdata += "\n"
 
         try:
@@ -602,7 +602,7 @@ class image:
 
         url = get_config()['plotly_domain'] + "/apigenimage/"
         res = requests.post(
-            url, data=json.dumps(payload, cls=utils._plotlyJSONEncoder),
+            url, data=json.dumps(payload, cls=utils.PlotlyJSONEncoder),
             headers=headers, verify=get_config()['plotly_ssl_verification']
         )
 
@@ -824,7 +824,7 @@ class grid_ops:
 
         payload = {
             'filename': filename,
-            'data': json.dumps(grid_json, cls=utils._plotlyJSONEncoder),
+            'data': json.dumps(grid_json, cls=utils.PlotlyJSONEncoder),
             'world_readable': world_readable
         }
 
@@ -905,7 +905,7 @@ class grid_ops:
             raise exceptions.InputError(err)
 
         payload = {
-            'cols': json.dumps(columns, cls=utils._plotlyJSONEncoder)
+            'cols': json.dumps(columns, cls=utils.PlotlyJSONEncoder)
         }
 
         api_url = _api_v2.api_url('grids')+'/{grid_id}/col'.format(grid_id=grid_id)
@@ -980,7 +980,7 @@ class grid_ops:
                                 'column' if n_columns == 1 else 'columns'))
 
         payload = {
-            'rows': json.dumps(rows, cls=utils._plotlyJSONEncoder)
+            'rows': json.dumps(rows, cls=utils.PlotlyJSONEncoder)
         }
 
         api_url = (_api_v2.api_url('grids')+
@@ -1098,7 +1098,7 @@ class meta_ops:
         grid_id = _api_v2.parse_grid_id_args(grid, grid_url)
 
         payload = {
-            'metadata': json.dumps(meta, cls=utils._plotlyJSONEncoder)
+            'metadata': json.dumps(meta, cls=utils.PlotlyJSONEncoder)
         }
 
         api_url = _api_v2.api_url('grids')+'/{grid_id}'.format(grid_id=grid_id)
@@ -1206,14 +1206,14 @@ def _send_to_plotly(figure, **plot_options):
     """
     fig = tools._replace_newline(figure)  # does not mutate figure
     data = json.dumps(fig['data'] if 'data' in fig else [],
-                      cls=utils._plotlyJSONEncoder)
+                      cls=utils.PlotlyJSONEncoder)
     username, api_key = _get_session_username_and_key()
     kwargs = json.dumps(dict(filename=plot_options['filename'],
                              fileopt=plot_options['fileopt'],
                              world_readable=plot_options['world_readable'],
                              layout=fig['layout'] if 'layout' in fig
                              else {}),
-                        cls=utils._plotlyJSONEncoder)
+                        cls=utils.PlotlyJSONEncoder)
 
 
     payload = dict(platform='python', # TODO: It'd be cool to expose the platform for RaspPi and others

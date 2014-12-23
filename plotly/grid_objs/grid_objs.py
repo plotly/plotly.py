@@ -67,7 +67,7 @@ class Column(object):
 
     def __str__(self):
         max_chars = 10
-        jdata = json.dumps(self.data, cls=utils._plotlyJSONEncoder)
+        jdata = json.dumps(self.data, cls=utils.PlotlyJSONEncoder)
         if len(jdata) > max_chars:
             data_string = jdata[:max_chars] + "...]"
         else:
