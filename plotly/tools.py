@@ -499,6 +499,37 @@ def get_subplots(rows=1, columns=1,
     except KeyError:
         vertical_spacing = 0.3 / rows
 
+    # Sanitize 'specs' -- TODO more sanitizing?
+    try:
+        specs = kwargs['specs']
+        if not isinstance(specs, list):
+            raise Exception("Keyword argument 'specs' must be a list")
+        elif isinstance(specs[0], dict):
+            # To support one-row specs=[{},{}]
+            specs = [specs]
+    except KeyError:
+        specs = [[{}
+                 for col in range(columns)]
+                 for row in range(rows)]     # default 'specs'
+
+    # Default spec key-values
+    SPEC_defaults = dict(
+        isEmpty=False,
+        is3D=False,
+        colspan=1,
+        rowspan=1,
+        l=0.0,
+        r=0.0,
+        t=0.0,
+        b=0.0
+    )
+
+    # Fill in 'specs' with defaults
+    for spec_row in specs:
+        for spec in spec_row:
+            for k in SPEC_defaults.keys():
+                if k not in spec.keys():
+                    spec[k] = SPEC_defaults[k]
     if print_grid:
         print("This is the format of your plot grid!")
         grid_string = ""
