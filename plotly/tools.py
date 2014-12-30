@@ -530,6 +530,14 @@ def get_subplots(rows=1, columns=1,
             for k in SPEC_defaults.keys():
                 if k not in spec.keys():
                     spec[k] = SPEC_defaults[k]
+
+    # Width / Height of each subplot cell (exclud. spacing and padding)
+    width = 1. / columns
+    height = 1. / rows
+
+    # Spacing corrections between each subplot
+    x_space = horizontal_spacing * (columns - 1) / columns
+    y_space = vertical_spacing * (rows - 1) / rows
     if print_grid:
         print("This is the format of your plot grid!")
         grid_string = ""
