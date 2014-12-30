@@ -680,7 +680,10 @@ def get_subplots(rows=1, columns=1,
     if print_grid:
         print("This is the format of your plot grid!")
         grid_string = ""
+        for grid_row in grid:
+            grid_string = "  ".join(grid_row) + '\n' + grid_string
         print(grid_string)
+
     return graph_objs.Figure(fig)  # forces us to validate what we just did...
 
 
