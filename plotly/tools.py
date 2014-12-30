@@ -538,6 +538,53 @@ def get_subplots(rows=1, columns=1,
     # Spacing corrections between each subplot
     x_space = horizontal_spacing * (columns - 1) / columns
     y_space = vertical_spacing * (rows - 1) / rows
+
+    # Loop through 'specs'
+    for row, spec_row in enumerate(specs):
+
+        x = 0  # init x tracer before row
+
+        for col, spec in enumerate(spec_row):
+
+            # Get x domain (and correct x_e for colspan > 1)
+            x_s = x + spec['l']
+            x_e = x_s + spec['colspan'] * width
+            x_e -= (spec['l'] + spec['r'] + x_space)
+            if spec['colspan'] > 1:
+                x_e += (spec['colspan'] - 1) * (horizontal_spacing - x_space)
+
+            # Get y domain (and correct y_e for rowspan > 1)
+            y_s = y + spec['b']
+            y_e = y_s + spec['rowspan'] * height
+            y_e -= (spec['b'] + spec['t'] + y_space)
+            if spec['rowspan'] > 1:
+                y_e += (spec['rowspan'] - 1) * (vertical_spacing - y_space)
+
+            # Add domains to fig!
+            if not spec['isEmpty']:
+                if spec['is3D']:
+                    _add_domain_is3D(fig, s_cnt, [x_s, x_e], [y_s, y_e])
+                    _fill_grid(grid, (row, col), spec, s_cnt, False)
+                    s_cnt += 1
+
+                else:
+                    x_shared = get_shared((row, col), 'x', shared_xaxes)
+                    y_shared = get_shared((row, col), 'y', shared_yaxes)
+                    _fill_grid(grid, (row, col), spec,
+                               (x_cnt, y_cnt), (x_shared, y_shared))
+                    if not x_shared:
+                        _add_domain(fig, 'x', x_cnt, y_shared, [x_s, x_e])
+                        x_cnt += 1
+                    if not y_shared:
+                        _add_domain(fig, 'y', y_cnt, x_shared, [y_s, y_e])
+                        y_cnt += 1
+            else:
+                _fill_grid(grid, (row, col), spec, False, (False, False))
+
+            x = x_e + horizontal_spacing  # move tracer to next col
+
+        y = y_e + vertical_spacing  # move tracer to next row
+
     if print_grid:
         print("This is the format of your plot grid!")
         grid_string = ""
