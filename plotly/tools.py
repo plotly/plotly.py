@@ -387,8 +387,11 @@ def mpl_to_plotly(fig, resize=False, strip_style=False, verbose=False):
 ### graph_objs related tools ###
 
 # TODO: Scale spacing based on number of plots and figure size
-def get_subplots(*arg, **kwargs):
-    """Return a dictionary instance with the subplots set in 'layout'.
+def get_subplots(rows=1, columns=1,
+                 shared_xaxes=False, shared_yaxes=False,
+                 print_grid=False, **kwargs):
+    """Return an instance of plotly.graph_objs.Figure
+    with the subplots domain set in 'layout'.
 
     Example 1:
         # stack two subplots vertically
@@ -397,17 +400,24 @@ def get_subplots(*arg, **kwargs):
         fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x2', yaxis='y2')]
 
     Example 2:
+        # subplots with shared x axes
+        fig = tools.get_subplots(rows=2, shared_xaxes=True)
+        fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], yaxis='y1')]
+        fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], yaxis='y2')]
+
+    Example 3:
+        # irregular subplot layout
+        fig = tools.get_subplots(rows=2, columns=2,
+                                 specs=[[{}, {}], [{'colspan': 2}]])
+        fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x1', yaxis='y1')]
+        fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x2', yaxis='y2')]
+        fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x3', yaxis='y3')]
+
+    Example 4:
         # print out string showing the subplot grid you've put in the layout
         fig = tools.get_subplots(rows=3, columns=2, print_grid=True)
 
-    fig (arg[0]):
-        Plotly figure object or dictionary.
-
-        By default, get_subplots add keys 'xaxis[1-9]' and 'yaxis [1-9]'
-        to fig['layout']
-
-        If fig['data'] contains ONLY 3D traces, get_subplots add keys
-        'scene[1-9]' to fig['layout']
+    Keywords arguments with constant defaults:
 
     rows (kwarg, int, default=1):
         Number of rows on the figure.
@@ -415,56 +425,63 @@ def get_subplots(*arg, **kwargs):
     columns (kwarg, int, default=1):
         Number of columns on the figure.
 
-    arrangements (kwarg, list or list of lists, default=[]):
-        Subplot arrangement as a list (or list of lists) of subplot indices.
-        Overrides the 'rows' and 'columns' arguments.
-
-        Use integers 1, 2, ... for 2d subplots.
-        Use 'scene1', 'scene2', ... for 3d subscenes.
-
-        The x-domain of each subplot i is given by:
-
-            number of index i in row / total number of indices in row
-
-        The y-domain of each subplot is given by:
-
-            number of index i in column /  total number of indices in column
-
-        ex1: [[1, 2, 3], [4, 5], [6]]
-        ex2: [[1], [1, 2], [1, 3]]
-        ex3: [1, 'scene1']
-
-    horizontal_spacing (kwarg, float in [0,1] or list, default=0.1):
-        Space between subplot columns.
-        Applied to all columns if float.
-        Applied to per column from left to right if list.
-        Applied to per column from left to right and per row from bottom to top
-            if list of lists.
-
-    vertical_spacing (kwarg, float in [0,1] or list, default=0.05):
-        Space between subplot rows.
-        Applied to all rows if float.
-        Applied to per row from bottom to top if list.
-        Applied to per row from bottom to top and per column from left to right
-            if list of lists.
-
     shared_xaxes (kwarg, boolean or list, default=False)
         Assign shared x axes.
-        If True, share all x axes.
-        If list of booleans, share all x axes per column from left to right.
-        If list of integers, share x axes per subplot index,
-            set in 'arrangement'.
+        If True, all x axes are shared.
+        To assign shared x axes per subplot grid cell (see 'specs'),
+        send list (or list of lists, one list per shared axis)
+        of cell index tuples.
 
     shared_yaxes (kwarg, boolean or list, default=False)
         Assign shared y axes.
-        If True, share all y axes.
-        If list of booleans, share all y axes per row from left to right.
-        If list of integers, share y axes per subplot index,
-            set in 'arrangement'.
+        If True, all y axes are shared.
+        To assign shared y axes per subplot grid cell (see 'specs'),
+        send list (or list of lists, one list per shared axis)
+        of cell index tuples.
 
     print_grid (kwarg, boolean, default=False):
         If True, prints a tab-delimited string representation of
         your plot grid.
+
+    Keyword arguments with variable defaults:
+
+    horizontal_spacing (kwarg, float in [0,1], default=0.2 / columns):
+        Space between subplot columns.
+
+        Applies to all columns (use 'specs' subplot-dependents spacing)
+
+    vertical_spacing (kwarg, float in [0,1], default=0.3 / rows):
+        Space between subplot rows.
+        Applies to all rows (use 'specs' subplot-dependents spacing)
+
+    specs (kwarg, list (of lists) of dictionaries):
+        Subplot specifications.
+
+        - Indices of the outer list correspond to subplot grid rows
+          starting from the bottom.
+
+        - Indices of the inner lists correspond to subplot grid columns
+          starting from the left
+
+        - Note that specs[0][0] has the specs for the bottom-left subplot
+
+        - Each item in the 'specs' list corresponds to one subplot
+          in a subplot grid. The subplot grid has 'rows' times 'columns'
+          cells.
+
+        - Each item in the 'specs' is a dictionary.
+            The available keys are:
+
+            * isEmpty (boolean, default=False): flag for empty grid cells
+            * is3D (boolean, default=False): flag for 3d scenes
+            * colspan (int, default=1): span across grid columns
+                                        from left to right
+            * rowspan (int, default=1): span across grid rows
+                                        from bottom to top
+            * l (float, default=0.0): padding left of cell
+            * r (float, default=0.0): padding right of cell
+            * t (float, default=0.0): padding right of cell
+            * b (float, default=0.0): padding bottom of cell
     """
 
     fig = dict(layout=graph_objs.Layout())  # will return this at the end
