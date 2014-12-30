@@ -386,7 +386,6 @@ def mpl_to_plotly(fig, resize=False, strip_style=False, verbose=False):
 
 ### graph_objs related tools ###
 
-# TODO: Scale spacing based on number of plots and figure size
 def get_subplots(rows=1, columns=1,
                  shared_xaxes=False, shared_yaxes=False,
                  print_grid=False, **kwargs):
@@ -484,37 +483,9 @@ def get_subplots(rows=1, columns=1,
             * b (float, default=0.0): padding bottom of cell
     """
 
-    fig = dict(layout=graph_objs.Layout())  # will return this at the end
-    plot_width = (1 - horizontal_spacing * (columns - 1)) / columns
-    plot_height = (1 - vertical_spacing * (rows - 1)) / rows
-    plot_num = 0
-    for rrr in range(rows):
-        for ccc in range(columns):
-            xaxis_name = 'xaxis{0}'.format(plot_num + 1)
-            x_anchor = 'y{0}'.format(plot_num + 1)
-            x_start = (plot_width + horizontal_spacing) * ccc
-            x_end = x_start + plot_width
-
-            yaxis_name = 'yaxis{0}'.format(plot_num + 1)
-            y_anchor = 'x{0}'.format(plot_num + 1)
-            y_start = (plot_height + vertical_spacing) * rrr
-            y_end = y_start + plot_height
-
-            xaxis = graph_objs.XAxis(domain=[x_start, x_end], anchor=x_anchor)
-            fig['layout'][xaxis_name] = xaxis
-            yaxis = graph_objs.YAxis(domain=[y_start, y_end], anchor=y_anchor)
-            fig['layout'][yaxis_name] = yaxis
-            plot_num += 1
     if print_grid:
         print("This is the format of your plot grid!")
         grid_string = ""
-        plot = 1
-        for rrr in range(rows):
-            grid_line = ""
-            for ccc in range(columns):
-                grid_line += "[{0}]\t".format(plot)
-                plot += 1
-            grid_string = grid_line + '\n' + grid_string
         print(grid_string)
     return graph_objs.Figure(fig)  # forces us to validate what we just did...
 
