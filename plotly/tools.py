@@ -483,6 +483,12 @@ def get_subplots(rows=1, columns=1,
             * b (float, default=0.0): padding bottom of cell
     """
 
+    # Throw exception for non-integer rows and columns
+    if not isinstance(rows, int):
+        raise Exception("Keyword argument 'rows' must be an int")
+    if not isinstance(columns, int):
+        raise Exception("Keyword argument 'columns' must be an int")
+
     if print_grid:
         print("This is the format of your plot grid!")
         grid_string = ""
