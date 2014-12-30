@@ -577,6 +577,25 @@ def get_subplots(rows=1, columns=1,
         else:
             return False
 
+    # Function pasting x/y domains in fig object (2d anchored case)
+    def _add_domain(fig, x_or_y, cnt, shared, domain):
+        num = cnt + 1
+        y_or_x = {'x': 'y', 'y': 'x'}[x_or_y]
+        axis_name = '{x_or_y}axis{num}'.format(x_or_y=x_or_y, num=num)
+        graph_obj = '{X_or_Y}Axis'.format(X_or_Y=x_or_y.upper())
+        axis = getattr(graph_objs, graph_obj)(domain=domain)
+        if not shared:  # non-shared axes get an anchor
+            anchor = '{y_or_x}{num}'.format(y_or_x=y_or_x, num=num)
+            axis['anchor'] = anchor
+        fig['layout'][axis_name] = axis
+
+    # Function pasting x/y domains in fig object (3d case)
+    def _add_domain_is3D(fig, s_cnt, x_domain, y_domain):
+        num = s_cnt + 1
+        scene_name = "scene{num}".format(num=num)
+        scene = graph_objs.Scene(domain={'x': x_domain, 'y': y_domain})
+        fig['layout'][scene_name] = scene
+
     # Loop through 'specs'
     for row, spec_row in enumerate(specs):
 
