@@ -489,6 +489,16 @@ def get_subplots(rows=1, columns=1,
     if not isinstance(columns, int):
         raise Exception("Keyword argument 'columns' must be an int")
 
+    # Set 'horizontal_spacing' / 'vertical_spacing' w.r.t. rows / columns
+    try:
+        horizontal_spacing = float(kwargs['horizontal_spacing'])
+    except KeyError:
+        horizontal_spacing = 0.2 / columns
+    try:
+        vertical_spacing = float(kwargs['vertical_spacing'])
+    except KeyError:
+        vertical_spacing = 0.3 / rows
+
     if print_grid:
         print("This is the format of your plot grid!")
         grid_string = ""
