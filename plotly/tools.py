@@ -624,6 +624,13 @@ def get_subplots(rows=1, columns=1,
                 grid[cell[0]+j][cell[1]] = '   |   '
             grid[cell[0]+j][cell[1]] = '   ^   '
 
+    fig = dict(layout=graph_objs.Layout())  # init layout object
+    x_cnt = y_cnt = s_cnt = 0               # subplot counters
+    y = 0                                   # init y tracer
+    grid = [[''                             # init grid (for print_grid)
+            for row in spec_row]
+            for spec_row in specs]
+
     # Loop through 'specs'
     for row, spec_row in enumerate(specs):
 
