@@ -298,7 +298,11 @@ def test_a_lot():
             )
         )
     )
-    assert tls.get_subplots(4, 7) == expected
+
+    fig = tls.get_subplots(4, 7,
+                            horizontal_spacing=0.1,
+                            vertical_spacing=0.15)
+    assert fig == expected
 
 def test_spacing():
     expected = Figure(
@@ -354,5 +358,8 @@ def test_spacing():
             )
         )
     )
+    fig = tls.get_subplots(2, 3,
+                           horizontal_spacing=.05,
+                           vertical_spacing=.1)
 
-    assert expected == tls.get_subplots(2, 3, .05, .1)
+    assert fig == expected
