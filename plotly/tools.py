@@ -596,6 +596,34 @@ def get_subplots(rows=1, columns=1,
         scene = graph_objs.Scene(domain={'x': x_domain, 'y': y_domain})
         fig['layout'][scene_name] = scene
 
+    # Function generating the grid's string repr
+    def _fill_grid(grid, cell, spec, cnt, shared):
+        if grid[cell[0]][cell[1]] != '':  # Needed to make rowspan > 1 work
+            return
+        if spec['isEmpty']:
+            grid[cell[0]][cell[1]] = '{empty}'
+            return
+        if spec['is3D']:
+            grid[cell[0]][cell[1]] = (
+                "[scene{0}".format(cnt) +
+                "   --  " * (spec['colspan'] - 1) +
+                "]"
+            )
+        else:
+            labels = (
+                "x{0}".format(cnt[0]+1) if not shared[0] else shared[0],
+                "y{0}".format(cnt[1]+1) if not shared[1] else shared[1]
+            )
+            grid[cell[0]][cell[1]] = (
+                "[{0},{1}".format(*labels) +
+                "   --  " * (spec['colspan'] - 1) +
+                "]"
+            )
+        if spec['rowspan'] > 1:
+            for j in range(1, spec['rowspan']):
+                grid[cell[0]+j][cell[1]] = '   |   '
+            grid[cell[0]+j][cell[1]] = '   ^   '
+
     # Loop through 'specs'
     for row, spec_row in enumerate(specs):
 
