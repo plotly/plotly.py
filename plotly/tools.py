@@ -660,8 +660,8 @@ def get_subplots(rows=1, columns=1,
                     s_cnt += 1
 
                 else:
-                    x_shared = get_shared((row, col), 'x', shared_xaxes)
-                    y_shared = get_shared((row, col), 'y', shared_yaxes)
+                    x_shared = _get_shared((row, col), 'x', shared_xaxes)
+                    y_shared = _get_shared((row, col), 'y', shared_yaxes)
                     _fill_grid(grid, (row, col), spec,
                                (x_cnt, y_cnt), (x_shared, y_shared))
                     if not x_shared:
