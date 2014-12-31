@@ -531,13 +531,19 @@ def get_subplots(rows=1, columns=1,
                 if k not in spec.keys():
                     spec[k] = SPEC_defaults[k]
 
-    # Width / Height of each subplot cell (exclud. spacing and padding)
-    width = 1. / columns
-    height = 1. / rows
+    # Set width & height of each subplot cell (excluding padding)
+    width = (1. - horizontal_spacing * (columns - 1)) / columns
+    height = (1. - vertical_spacing * (rows - 1)) / rows
 
-    # Spacing corrections between each subplot
-    x_space = horizontal_spacing * (columns - 1) / columns
-    y_space = vertical_spacing * (rows - 1) / rows
+    # Build subplot grid (tuple of starting coords for each cell)
+    grid = [[((width + horizontal_spacing) * column,
+              (height + vertical_spacing) * row)
+            for column in range(columns)]
+            for row in range(rows)]       # all we need
+
+    # Initialize the grid's string representation
+    if print_grid:
+        grid_str = [['' for column in range(columns)] for row in range(rows)]
 
     # Handler for shared axes logic (return shared axis label or False)
     def _get_shared(cell, x_or_y, shared_axes):
@@ -627,9 +633,6 @@ def get_subplots(rows=1, columns=1,
     fig = dict(layout=graph_objs.Layout())  # init layout object
     x_cnt = y_cnt = s_cnt = 0               # subplot counters
     y = 0                                   # init y tracer
-    grid = [[''                             # init grid (for print_grid)
-            for row in spec_row]
-            for spec_row in specs]
 
     # Loop through 'specs'
     for row, spec_row in enumerate(specs):
