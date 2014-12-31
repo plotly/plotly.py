@@ -1042,6 +1042,41 @@ def test_subplot_shared_yaxes():
 
     assert fig == expected
 
+def test_subplot_shared_xaxes_yaxes():
+    expected = Figure(
+        data=Data(),
+        layout=Layout(
+            xaxis1=XAxis(
+                domain=[0.0, 0.2888888888888889],
+                anchor='y1'
+            ),
+            xaxis2=XAxis(
+                domain=[0.35555555555555557, 0.6444444444444445],
+                anchor='free'
+            ),
+            xaxis3=XAxis(
+                domain=[0.7111111111111111, 1.0],
+                anchor='free'
+            ),
+            yaxis1=YAxis(
+                domain=[0.0, 0.26666666666666666],
+                anchor='x1'
+            ),
+            yaxis2=YAxis(
+                domain=[0.36666666666666664, 0.6333333333333333],
+                anchor='free'
+            ),
+            yaxis3=YAxis(
+                domain=[0.7333333333333333, 1.0],
+                anchor='free'
+            )
+        )
+    )
+    fig = tls.get_subplots(rows=3, columns=3,
+                           shared_xaxes=True, shared_yaxes=True)
+
+    assert fig == expected
+
 def test_subplot_shared_axes_list():
     expected = Figure(
         data=Data(),
