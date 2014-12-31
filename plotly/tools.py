@@ -623,22 +623,39 @@ def get_subplots(rows=1, columns=1,
             y_s = grid[i][j][1] + spec['b']
             y_e = grid[i+(spec['rowspan']-1)][j][1] + height - spec['t']
             y_domain = [y_s, y_e]
+
             if not spec['isEmpty']:
                 if spec['is3D']:
-                    _add_domain_is3D(fig, s_cnt, [x_s, x_e], [y_s, y_e])
+                    # Add scene to layout
+                    _add_domain_is3D(fig, s_cnt, x_domain, y_domain)
                     if print_grid:
                         grid_str[i][j] = '[scene{}'.format(s_cnt)
                     s_cnt += 1
 
                 else:
-                    x_shared = _get_shared((row, col), 'x', shared_xaxes)
-                    y_shared = _get_shared((row, col), 'y', shared_yaxes)
-                    if not x_shared:
-                        _add_domain(fig, 'x', x_cnt, y_shared, [x_s, x_e])
+
+                    # Get axis label and anchor
+                    x_label = _get_label('x', row, col, x_cnt, shared_xaxes)
+                    y_label = _get_label('y', row, col, y_cnt, shared_yaxes)
+                    x_anchor, y_anchor = _get_anchors(row, col,
+                                                      x_cnt, y_cnt,
+                                                      shared_xaxes,
+                                                      shared_yaxes)
+
+                    # Add a xaxis to layout (N.B anchor == False -> no axis)
+                    if x_anchor:
+                        x_position = y_domain[0] if x_anchor == 'free' else 0
+                        _add_domain(fig, 'x', x_label, x_domain,
+                                    x_anchor, x_position)
                         x_cnt += 1
-                    if not y_shared:
-                        _add_domain(fig, 'y', y_cnt, x_shared, [y_s, y_e])
+
+                    # Add a yaxis to layout (N.B anchor == False -> no axis)
+                    if y_anchor:
+                        y_position = x_domain[0] if y_anchor == 'free' else 0
+                        _add_domain(fig, 'y', y_label, y_domain,
+                                    y_anchor, y_position)
                         y_cnt += 1
+
                     if print_grid:
                         grid_str[i][j] = '[{},{}'.format(x_label, y_label)
 
@@ -655,6 +672,7 @@ def get_subplots(rows=1, columns=1,
                         for r in range(1, spec['rowspan']-1):
                             grid_str[i+r][j] = '       '
                         grid_str[i+spec['rowspan']-1][j] = '   ^   '
+
             else:
                 # String representation for empty cells
                 if print_grid and grid_str[i][j] == '':
