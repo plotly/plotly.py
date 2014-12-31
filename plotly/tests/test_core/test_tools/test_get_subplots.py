@@ -923,11 +923,11 @@ def test_subplot_shared_xaxes():
         data=Data(),
         layout=Layout(
             xaxis1=XAxis(
-                domain=[0.0, 0.28888888888888886],
+                domain=[0.0, 0.2888888888888889],
                 anchor='y1'
             ),
             xaxis2=XAxis(
-                domain=[0.3555555555555555, 0.6444444444444445],
+                domain=[0.35555555555555557, 0.6444444444444445],
                 anchor='y2'
             ),
             xaxis3=XAxis(
@@ -947,13 +947,18 @@ def test_subplot_shared_xaxes():
                 anchor='x3'
             ),
             yaxis4=YAxis(
-                domain=[0.575, 1.0]
+                domain=[0.575, 1.0],
+                anchor='free'
             ),
             yaxis5=YAxis(
-                domain=[0.575, 1.0]
+                domain=[0.575, 1.0],
+                anchor='free',
+                position=0.35555555555555557
             ),
             yaxis6=YAxis(
-                domain=[0.575, 1.0]
+                domain=[0.575, 1.0],
+                anchor='free',
+                position=0.7111111111111111
             )
         )
     )
