@@ -524,7 +524,7 @@ def get_subplots(rows=1, columns=1,
         b=0.0
     )
 
-    # Fill in 'specs' with defaults
+    # Fill in specs with defaults
     for spec_row in specs:
         for spec in spec_row:
             for k in SPEC_defaults.keys():
@@ -544,6 +544,8 @@ def get_subplots(rows=1, columns=1,
     # Initialize the grid's string representation
     if print_grid:
         grid_str = [['' for column in range(columns)] for row in range(rows)]
+
+    fig = dict(layout=graph_objs.Layout())  # init layout object
 
     # Function handling logic around 2d axis labels
     # Returns 'x{}' | 'y{}'
@@ -637,9 +639,7 @@ def get_subplots(rows=1, columns=1,
     i = j = 0                  # subplot grid indices
     x_cnt = y_cnt = s_cnt = 1  # subplot axis/scene counters
 
-    fig = dict(layout=graph_objs.Layout())  # init layout object
-
-    # Loop through 'specs'
+    # Loop through specs
     for row, spec_row in enumerate(specs):
 
         j = 0  # start at leftmost grid cell for each spec_row
@@ -663,7 +663,6 @@ def get_subplots(rows=1, columns=1,
                     if print_grid:
                         grid_str[i][j] = '[scene{}'.format(s_cnt)
                     s_cnt += 1
-
                 else:
 
                     # Get axis label and anchor
