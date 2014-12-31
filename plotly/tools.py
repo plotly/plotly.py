@@ -569,9 +569,53 @@ def get_subplots(rows=1, columns=1,
                     }[x_or_y]
 
         return label
-                else:
-                else:
 
+    # Function handling logic around 2d axis anchors
+    # Return 'x{}' | 'y{}' | 'free' | False
+    def _get_anchors(row, col, x_cnt, y_cnt, shared_xaxes, shared_yaxes):
+        # Default anchors (give strictly by cnt)
+        x_anchor = "y{y_cnt}".format(y_cnt=y_cnt)
+        y_anchor = "x{x_cnt}".format(x_cnt=x_cnt)
+
+        if isinstance(shared_xaxes, bool):
+            if shared_xaxes:
+                if row == 0:
+                    x_anchor = "y{col_cnt}".format(col_cnt=col+1)
+                else:
+                    x_anchor = False
+                    y_anchor = 'free'
+                    if shared_yaxes and col > 0:  # TODO covers all cases?
+                        y_anchor = False
+                    return x_anchor, y_anchor
+
+        elif isinstance(shared_xaxes, list):
+            if isinstance(shared_xaxes[0], tuple):
+                shared_xaxes = [shared_xaxes]  # TODO put this elsewhere
+            for shared_xaxis in shared_xaxes:
+                if (row, col) in shared_xaxis[1:]:
+                    x_anchor = False
+                    y_anchor = 'free'  # TODO covers all cases?
+
+        if isinstance(shared_yaxes, bool):
+            if shared_yaxes:
+                if col == 0:
+                    y_anchor = "x{row_cnt}".format(row_cnt=row+1)
+                else:
+                    y_anchor = False
+                    x_anchor = 'free'
+                    if shared_xaxes and row > 0:  # TODO covers all cases?
+                        x_anchor = False
+                    return x_anchor, y_anchor
+
+        elif isinstance(shared_yaxes, list):
+            if isinstance(shared_yaxes[0], tuple):
+                shared_yaxes = [shared_yaxes]  # TODO put this elsewhere
+            for shared_yaxis in shared_yaxes:
+                if (row, col) in shared_yaxis[1:]:
+                    y_anchor = False
+                    x_anchor = 'free'  # TODO covers all cases?
+
+        return x_anchor, y_anchor
     # Function pasting x/y domains in fig object (2d anchored case)
     def _add_domain(fig, x_or_y, cnt, shared, domain):
         num = cnt + 1
