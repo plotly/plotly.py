@@ -604,33 +604,6 @@ def get_subplots(rows=1, columns=1,
 
     i = j = 0                  # subplot grid indices
     x_cnt = y_cnt = s_cnt = 1  # subplot axis/scene counters
-    # Function generating the grid's string repr
-    def _fill_grid(grid, cell, spec, cnt, shared):
-        if grid[cell[0]][cell[1]] != '':  # Needed to make rowspan > 1 work
-            return
-        if spec['isEmpty']:
-            grid[cell[0]][cell[1]] = '{empty}'
-            return
-        if spec['is3D']:
-            grid[cell[0]][cell[1]] = (
-                "[scene{0}".format(cnt) +
-                "   --  " * (spec['colspan'] - 1) +
-                "]"
-            )
-        else:
-            labels = (
-                "x{0}".format(cnt[0]+1) if not shared[0] else shared[0],
-                "y{0}".format(cnt[1]+1) if not shared[1] else shared[1]
-            )
-            grid[cell[0]][cell[1]] = (
-                "[{0},{1}".format(*labels) +
-                "   --  " * (spec['colspan'] - 1) +
-                "]"
-            )
-        if spec['rowspan'] > 1:
-            for j in range(1, spec['rowspan']):
-                grid[cell[0]+j][cell[1]] = '   |   '
-            grid[cell[0]+j][cell[1]] = '   ^   '
 
     fig = dict(layout=graph_objs.Layout())  # init layout object
 
@@ -653,22 +626,39 @@ def get_subplots(rows=1, columns=1,
             if not spec['isEmpty']:
                 if spec['is3D']:
                     _add_domain_is3D(fig, s_cnt, [x_s, x_e], [y_s, y_e])
-                    _fill_grid(grid, (row, col), spec, s_cnt, False)
+                    if print_grid:
+                        grid_str[i][j] = '[scene{}'.format(s_cnt)
                     s_cnt += 1
 
                 else:
                     x_shared = _get_shared((row, col), 'x', shared_xaxes)
                     y_shared = _get_shared((row, col), 'y', shared_yaxes)
-                    _fill_grid(grid, (row, col), spec,
-                               (x_cnt, y_cnt), (x_shared, y_shared))
                     if not x_shared:
                         _add_domain(fig, 'x', x_cnt, y_shared, [x_s, x_e])
                         x_cnt += 1
                     if not y_shared:
                         _add_domain(fig, 'y', y_cnt, x_shared, [y_s, y_e])
                         y_cnt += 1
+                    if print_grid:
+                        grid_str[i][j] = '[{},{}'.format(x_label, y_label)
+
+                # String representation for spanned cells
+                # TODO more general spacing over spanned cells
+                if print_grid:
+                    if spec['colspan'] > 1:
+                        for c in range(1, spec['colspan']-1):
+                            grid_str[i][j+c] = '       '
+                        grid_str[i][j+spec['colspan']-1] = '       ]'
+                    else:
+                        grid_str[i][j] += ']'
+                    if spec['rowspan'] > 1:
+                        for r in range(1, spec['rowspan']-1):
+                            grid_str[i+r][j] = '       '
+                        grid_str[i+spec['rowspan']-1][j] = '   ^   '
             else:
-                _fill_grid(grid, (row, col), spec, False, (False, False))
+                # String representation for empty cells
+                if print_grid and grid_str[i][j] == '':
+                    grid_str[i][j] = '{empty}'
 
             j += spec['colspan']  # move right by a colspan
 
@@ -677,8 +667,8 @@ def get_subplots(rows=1, columns=1,
     if print_grid:
         print("This is the format of your plot grid!")
         grid_string = ""
-        for grid_row in grid:
-            grid_string = "  ".join(grid_row) + '\n' + grid_string
+        for grid_str_row in grid_str:
+            grid_string = "  ".join(grid_str_row) + '\n' + grid_string
         print(grid_string)
 
     return graph_objs.Figure(fig)  # forces us to validate what we just did...
