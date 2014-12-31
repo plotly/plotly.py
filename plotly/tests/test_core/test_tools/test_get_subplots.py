@@ -784,6 +784,60 @@ def test_subplot_specs_rowspan():
 
     assert fig == expected
 
+def test_subplot_specs_rowspan2():
+    expected = Figure(
+        data=Data(),
+        layout=Layout(
+            xaxis1=XAxis(
+                domain=[0.0, 0.2888888888888889],
+                anchor='y1'
+            ),
+            xaxis2=XAxis(
+                domain=[0.35555555555555557, 0.6444444444444445],
+                anchor='y2'
+            ),
+            xaxis3=XAxis(
+                domain=[0.7111111111111111, 1.0],
+                anchor='y3'
+            ),
+            xaxis4=XAxis(
+                domain=[0.0, 0.6444444444444445],
+                anchor='y4'
+            ),
+            xaxis5=XAxis(
+                domain=[0.0, 1.0],
+                anchor='y5'
+            ),
+            yaxis1=YAxis(
+                domain=[0.0, 0.26666666666666666],
+                anchor='x1'
+            ),
+            yaxis2=YAxis(
+                domain=[0.0, 0.26666666666666666],
+                anchor='x2'
+            ),
+            yaxis3=YAxis(
+                domain=[0.0, 0.6333333333333333],
+                anchor='x3'
+            ),
+            yaxis4=YAxis(
+                domain=[0.36666666666666664, 0.6333333333333333],
+                anchor='x4'
+            ),
+            yaxis5=YAxis(
+                domain=[0.7333333333333333, 1.0],
+                anchor='x5'
+            )
+        )
+    )
+
+    fig = tls.get_subplots(rows=3, columns=3,
+                           specs=[[{}, {}, {'rowspan': 2}],
+                                  [{'colspan': 2}],
+                                  [{'colspan': 3}]])
+
+    assert fig == expected
+
 def test_subplot_specs_is3D():
     expected = Figure(
         data=Data(),
