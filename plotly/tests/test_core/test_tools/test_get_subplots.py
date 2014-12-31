@@ -976,54 +976,63 @@ def test_subplot_shared_yaxes():
                 anchor='y1'
             ),
             xaxis10=XAxis(
-                domain=[0.55, 1.0]
+                domain=[0.55, 1.0],
+                anchor='free',
+                position=0.848
             ),
             xaxis2=XAxis(
-                domain=[0.55, 1.0]
+                domain=[0.55, 1.0],
+                anchor='free'
             ),
             xaxis3=XAxis(
                 domain=[0.0, 0.45],
-                anchor='y3'
+                anchor='y2'
             ),
             xaxis4=XAxis(
-                domain=[0.55, 1.0]
+                domain=[0.55, 1.0],
+                anchor='free',
+                position=0.212
             ),
             xaxis5=XAxis(
                 domain=[0.0, 0.45],
-                anchor='y5'
+                anchor='y3'
             ),
             xaxis6=XAxis(
-                domain=[0.55, 1.0]
+                domain=[0.55, 1.0],
+                anchor='free',
+                position=0.424
             ),
             xaxis7=XAxis(
                 domain=[0.0, 0.45],
-                anchor='y7'
+                anchor='y4'
             ),
             xaxis8=XAxis(
-                domain=[0.55, 1.0]
+                domain=[0.55, 1.0],
+                anchor='free',
+                position=0.636
             ),
             xaxis9=XAxis(
                 domain=[0.0, 0.45],
-                anchor='y9'
+                anchor='y5'
             ),
             yaxis1=YAxis(
-                domain=[0.0, 0.15200000000000002],
+                domain=[0.0, 0.152],
                 anchor='x1'
             ),
             yaxis2=YAxis(
-                domain=[0.21200000000000002, 0.36400000000000005],
+                domain=[0.212, 0.364],
                 anchor='x2'
             ),
             yaxis3=YAxis(
-                domain=[0.42400000000000004, 0.5760000000000001],
+                domain=[0.424, 0.576],
                 anchor='x3'
             ),
             yaxis4=YAxis(
-                domain=[0.6360000000000001, 0.788],
+                domain=[0.636, 0.788],
                 anchor='x4'
             ),
             yaxis5=YAxis(
-                domain=[0.8480000000000001, 1.0],
+                domain=[0.848, 1.0],
                 anchor='x5'
             )
         )
@@ -1042,7 +1051,8 @@ def test_subplot_shared_axes_list():
                 anchor='y1'
             ),
             xaxis2=XAxis(
-                domain=[0.55, 1.0]
+                domain=[0.55, 1.0],
+                anchor='free'
             ),
             xaxis3=XAxis(
                 domain=[0.55, 1.0],
@@ -1053,7 +1063,8 @@ def test_subplot_shared_axes_list():
                 anchor='x1'
             ),
             yaxis2=YAxis(
-                domain=[0.575, 1.0]
+                domain=[0.575, 1.0],
+                anchor='free'
             ),
             yaxis3=YAxis(
                 domain=[0.575, 1.0],
@@ -1069,16 +1080,16 @@ def test_subplot_shared_axes_list():
     assert fig == expected
 
 
-def test_subplot_shared_axes_list_of_list():
+def test_subplot_shared_axes_list_of_lists():
     expected = Figure(
         data=Data(),
         layout=Layout(
             xaxis1=XAxis(
-                domain=[0.0, 0.28888888888888886],
+                domain=[0.0, 0.2888888888888889],
                 anchor='y1'
             ),
             xaxis2=XAxis(
-                domain=[0.3555555555555555, 0.6444444444444445],
+                domain=[0.35555555555555557, 0.6444444444444445],
                 anchor='y2'
             ),
             xaxis3=XAxis(
@@ -1086,8 +1097,8 @@ def test_subplot_shared_axes_list_of_list():
                 anchor='y3'
             ),
             xaxis4=XAxis(
-                domain=[0.3555555555555555, 0.6444444444444445],
-                anchor='y4'
+                domain=[0.35555555555555557, 0.6444444444444445],
+                anchor='y5'
             ),
             yaxis1=YAxis(
                 domain=[0.0, 0.425],
@@ -1102,19 +1113,23 @@ def test_subplot_shared_axes_list_of_list():
                 anchor='x3'
             ),
             yaxis4=YAxis(
-                domain=[0.575, 1.0]
+                domain=[0.575, 1.0],
+                anchor='free'
             ),
             yaxis5=YAxis(
                 domain=[0.575, 1.0],
-                anchor='x5'
+                anchor='x4'
             ),
             yaxis6=YAxis(
-                domain=[0.575, 1.0]
+                domain=[0.575, 1.0],
+                anchor='free',
+                position=0.7111111111111111
             )
         )
     )
 
     fig = tls.get_subplots(rows=2, columns=3,
-                           shared_xaxes=[[(0,0), (1,0)], [(0,2), (1,2)]])
+                           shared_xaxes=[[(0,0), (1,0)],
+                                         [(0,2), (1,2)]])
 
     assert fig == expected
