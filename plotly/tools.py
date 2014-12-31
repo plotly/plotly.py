@@ -545,43 +545,11 @@ def get_subplots(rows=1, columns=1,
     if print_grid:
         grid_str = [['' for column in range(columns)] for row in range(rows)]
 
-    # Handler for shared axes logic (return shared axis label or False)
-    def _get_shared(cell, x_or_y, shared_axes):
         if isinstance(shared_axes, bool):
-            if not shared_axes:
-                return False
-            if x_or_y == 'x':
-                if cell[0] == 0:
-                    return False
-                else:
-                    return "x{0}".format(cell[1]+1)
-            elif x_or_y == 'y':
-                if cell[1] == 0:
-                    return False
-                else:
-                    return "y{0}".format(cell[0]+1)
-        elif isinstance(shared_axes, list):
             if isinstance(shared_axes[0], tuple):
-                if cell in shared_axes and cell != shared_axes[0]:
-                    return {
-                        'x': "x{0}".format(shared_axes[0][1]+1),
-                        'y': "y{0}".format(shared_axes[0][0]+1)
                     }[x_or_y]
                 else:
-                    return False
-            elif isinstance(shared_axes[0], list):
-                for shared_axis in shared_axes:
-                    if cell in shared_axis and cell != shared_axis[0]:
-                        return {
-                            'x': "x{0}".format(shared_axis[0][1]+1),
-                            'y': "y{0}".format(shared_axis[0][0]+1)
-                        }[x_or_y]
                 else:
-                    return False
-            else:
-                return False
-        else:
-            return False
 
     # Function pasting x/y domains in fig object (2d anchored case)
     def _add_domain(fig, x_or_y, cnt, shared, domain):
