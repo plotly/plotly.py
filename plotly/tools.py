@@ -637,25 +637,19 @@ def get_subplots(rows=1, columns=1,
     # Loop through 'specs'
     for row, spec_row in enumerate(specs):
 
-        x = 0  # init x tracer before row
+        j = 0  # start at leftmost grid cell for each spec_row
 
         for col, spec in enumerate(spec_row):
 
-            # Get x domain (and correct x_e for colspan > 1)
-            x_s = x + spec['l']
-            x_e = x_s + spec['colspan'] * width
-            x_e -= (spec['l'] + spec['r'] + x_space)
-            if spec['colspan'] > 1:
-                x_e += (spec['colspan'] - 1) * (horizontal_spacing - x_space)
+            # Get x domain using grid and colspan
+            x_s = grid[i][j][0] + spec['l']
+            x_e = grid[i][j+(spec['colspan']-1)][0] + width - spec['r']
+            x_domain = [x_s, x_e]
 
-            # Get y domain (and correct y_e for rowspan > 1)
-            y_s = y + spec['b']
-            y_e = y_s + spec['rowspan'] * height
-            y_e -= (spec['b'] + spec['t'] + y_space)
-            if spec['rowspan'] > 1:
-                y_e += (spec['rowspan'] - 1) * (vertical_spacing - y_space)
-
-            # Add domains to fig!
+            # Get y domain using grid and rowspan
+            y_s = grid[i][j][1] + spec['b']
+            y_e = grid[i+(spec['rowspan']-1)][j][1] + height - spec['t']
+            y_domain = [y_s, y_e]
             if not spec['isEmpty']:
                 if spec['is3D']:
                     _add_domain_is3D(fig, s_cnt, [x_s, x_e], [y_s, y_e])
@@ -676,9 +670,9 @@ def get_subplots(rows=1, columns=1,
             else:
                 _fill_grid(grid, (row, col), spec, False, (False, False))
 
-            x = x_e + horizontal_spacing  # move tracer to next col
+            j += spec['colspan']  # move right by a colspan
 
-        y = y_e + vertical_spacing  # move tracer to next row
+        i += 1  # move up by one row
 
     if print_grid:
         print("This is the format of your plot grid!")
