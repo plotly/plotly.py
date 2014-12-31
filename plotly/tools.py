@@ -545,9 +545,30 @@ def get_subplots(rows=1, columns=1,
     if print_grid:
         grid_str = [['' for column in range(columns)] for row in range(rows)]
 
+    # Function handling logic around 2d axis labels
+    # Returns 'x{}' | 'y{}'
+    def _get_label(x_or_y, row, col, cnt, shared_axes):
+        # Default label (given strictly by cnt)
+        label = "{x_or_y}{cnt}".format(x_or_y=x_or_y, cnt=cnt)
+
         if isinstance(shared_axes, bool):
+            if shared_axes:
+                if x_or_y == 'x':
+                    label = "{x_or_y}{c}".format(x_or_y=x_or_y, c=col+1)
+                if x_or_y == 'y':
+                    label = "{x_or_y}{r}".format(x_or_y=x_or_y, r=row+1)
+
+        if isinstance(shared_axes, list):
             if isinstance(shared_axes[0], tuple):
+                shared_axes = [shared_axes]  # TODO put this elsewhere
+            for shared_axis in shared_axes:
+                if (row, col) in shared_axis:
+                    label = {
+                        'x': "x{0}".format(shared_axis[0][1]+1),
+                        'y': "y{0}".format(shared_axis[0][0]+1)
                     }[x_or_y]
+
+        return label
                 else:
                 else:
 
