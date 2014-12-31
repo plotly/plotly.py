@@ -74,7 +74,7 @@ def test_a_lot():
         data=Data(),
         layout=Layout(
             xaxis1=XAxis(
-                domain=[0.0, 0.05714285714285712],
+                domain=[0.0, 0.05714285714285713],
                 anchor='y1'
             ),
             xaxis10=XAxis(
@@ -86,23 +86,23 @@ def test_a_lot():
                 anchor='y11'
             ),
             xaxis12=XAxis(
-                domain=[0.6285714285714286, 0.6857142857142856],
+                domain=[0.6285714285714286, 0.6857142857142857],
                 anchor='y12'
             ),
             xaxis13=XAxis(
-                domain=[0.7857142857142856, 0.8428571428571426],
+                domain=[0.7857142857142857, 0.8428571428571429],
                 anchor='y13'
             ),
             xaxis14=XAxis(
-                domain=[0.9428571428571426, 0.9999999999999997],
+                domain=[0.9428571428571428, 1.0],
                 anchor='y14'
             ),
             xaxis15=XAxis(
-                domain=[0.0, 0.05714285714285712],
+                domain=[0.0, 0.05714285714285713],
                 anchor='y15'
             ),
             xaxis16=XAxis(
-                domain=[0.15714285714285714, 0.21428571428571425],
+                domain=[0.15714285714285714, 0.21428571428571427],
                 anchor='y16'
             ),
             xaxis17=XAxis(
@@ -114,27 +114,27 @@ def test_a_lot():
                 anchor='y18'
             ),
             xaxis19=XAxis(
-                domain=[0.6285714285714286, 0.6857142857142856],
+                domain=[0.6285714285714286, 0.6857142857142857],
                 anchor='y19'
             ),
             xaxis2=XAxis(
-                domain=[0.15714285714285714, 0.21428571428571425],
+                domain=[0.15714285714285714, 0.21428571428571427],
                 anchor='y2'
             ),
             xaxis20=XAxis(
-                domain=[0.7857142857142856, 0.8428571428571426],
+                domain=[0.7857142857142857, 0.8428571428571429],
                 anchor='y20'
             ),
             xaxis21=XAxis(
-                domain=[0.9428571428571426, 0.9999999999999997],
+                domain=[0.9428571428571428, 1.0],
                 anchor='y21'
             ),
             xaxis22=XAxis(
-                domain=[0.0, 0.05714285714285712],
+                domain=[0.0, 0.05714285714285713],
                 anchor='y22'
             ),
             xaxis23=XAxis(
-                domain=[0.15714285714285714, 0.21428571428571425],
+                domain=[0.15714285714285714, 0.21428571428571427],
                 anchor='y23'
             ),
             xaxis24=XAxis(
@@ -146,15 +146,15 @@ def test_a_lot():
                 anchor='y25'
             ),
             xaxis26=XAxis(
-                domain=[0.6285714285714286, 0.6857142857142856],
+                domain=[0.6285714285714286, 0.6857142857142857],
                 anchor='y26'
             ),
             xaxis27=XAxis(
-                domain=[0.7857142857142856, 0.8428571428571426],
+                domain=[0.7857142857142857, 0.8428571428571429],
                 anchor='y27'
             ),
             xaxis28=XAxis(
-                domain=[0.9428571428571426, 0.9999999999999997],
+                domain=[0.9428571428571428, 1.0],
                 anchor='y28'
             ),
             xaxis3=XAxis(
@@ -166,23 +166,23 @@ def test_a_lot():
                 anchor='y4'
             ),
             xaxis5=XAxis(
-                domain=[0.6285714285714286, 0.6857142857142856],
+                domain=[0.6285714285714286, 0.6857142857142857],
                 anchor='y5'
             ),
             xaxis6=XAxis(
-                domain=[0.7857142857142856, 0.8428571428571426],
+                domain=[0.7857142857142857, 0.8428571428571429],
                 anchor='y6'
             ),
             xaxis7=XAxis(
-                domain=[0.9428571428571426, 0.9999999999999997],
+                domain=[0.9428571428571428, 1.0],
                 anchor='y7'
             ),
             xaxis8=XAxis(
-                domain=[0.0, 0.05714285714285712],
+                domain=[0.0, 0.05714285714285713],
                 anchor='y8'
             ),
             xaxis9=XAxis(
-                domain=[0.15714285714285714, 0.21428571428571425],
+                domain=[0.15714285714285714, 0.21428571428571427],
                 anchor='y9'
             ),
             yaxis1=YAxis(
@@ -242,31 +242,31 @@ def test_a_lot():
                 anchor='x21'
             ),
             yaxis22=YAxis(
-                domain=[0.8624999999999999, 0.9999999999999998],
+                domain=[0.8624999999999999, 1.0],
                 anchor='x22'
             ),
             yaxis23=YAxis(
-                domain=[0.8624999999999999, 0.9999999999999998],
+                domain=[0.8624999999999999, 1.0],
                 anchor='x23'
             ),
             yaxis24=YAxis(
-                domain=[0.8624999999999999, 0.9999999999999998],
+                domain=[0.8624999999999999, 1.0],
                 anchor='x24'
             ),
             yaxis25=YAxis(
-                domain=[0.8624999999999999, 0.9999999999999998],
+                domain=[0.8624999999999999, 1.0],
                 anchor='x25'
             ),
             yaxis26=YAxis(
-                domain=[0.8624999999999999, 0.9999999999999998],
+                domain=[0.8624999999999999, 1.0],
                 anchor='x26'
             ),
             yaxis27=YAxis(
-                domain=[0.8624999999999999, 0.9999999999999998],
+                domain=[0.8624999999999999, 1.0],
                 anchor='x27'
             ),
             yaxis28=YAxis(
-                domain=[0.8624999999999999, 0.9999999999999998],
+                domain=[0.8624999999999999, 1.0],
                 anchor='x28'
             ),
             yaxis3=YAxis(
@@ -303,6 +303,7 @@ def test_a_lot():
     fig = tls.get_subplots(4, 7,
                             horizontal_spacing=0.1,
                             vertical_spacing=0.15)
+
     assert fig == expected
 
 def test_spacing():
@@ -314,11 +315,11 @@ def test_spacing():
                 anchor='y1'
             ),
             xaxis2=XAxis(
-                domain=[0.35, 0.65],
+                domain=[0.35, 0.6499999999999999],
                 anchor='y2'
             ),
             xaxis3=XAxis(
-                domain=[0.7000000000000001, 1.0],
+                domain=[0.7, 1.0],
                 anchor='y3'
             ),
             xaxis4=XAxis(
@@ -326,11 +327,11 @@ def test_spacing():
                 anchor='y4'
             ),
             xaxis5=XAxis(
-                domain=[0.35, 0.65],
+                domain=[0.35, 0.6499999999999999],
                 anchor='y5'
             ),
             xaxis6=XAxis(
-                domain=[0.7000000000000001, 1.0],
+                domain=[0.7, 1.0],
                 anchor='y6'
             ),
             yaxis1=YAxis(
@@ -359,6 +360,7 @@ def test_spacing():
             )
         )
     )
+
     fig = tls.get_subplots(2, 3,
                            horizontal_spacing=.05,
                            vertical_spacing=.1)
@@ -378,19 +380,19 @@ def test_default_spacing():
         data=Data(),
         layout=Layout(
             xaxis1=XAxis(
-                domain=[0.0, 0.168],
+                domain=[0.0, 0.16799999999999998],
                 anchor='y1'
             ),
             xaxis10=XAxis(
-                domain=[0.8320000000000001, 1.0],
+                domain=[0.832, 1.0],
                 anchor='y10'
             ),
             xaxis11=XAxis(
-                domain=[0.0, 0.168],
+                domain=[0.0, 0.16799999999999998],
                 anchor='y11'
             ),
             xaxis12=XAxis(
-                domain=[0.20800000000000002, 0.376],
+                domain=[0.208, 0.376],
                 anchor='y12'
             ),
             xaxis13=XAxis(
@@ -402,15 +404,15 @@ def test_default_spacing():
                 anchor='y14'
             ),
             xaxis15=XAxis(
-                domain=[0.8320000000000001, 1.0],
+                domain=[0.832, 1.0],
                 anchor='y15'
             ),
             xaxis16=XAxis(
-                domain=[0.0, 0.168],
+                domain=[0.0, 0.16799999999999998],
                 anchor='y16'
             ),
             xaxis17=XAxis(
-                domain=[0.20800000000000002, 0.376],
+                domain=[0.208, 0.376],
                 anchor='y17'
             ),
             xaxis18=XAxis(
@@ -422,19 +424,19 @@ def test_default_spacing():
                 anchor='y19'
             ),
             xaxis2=XAxis(
-                domain=[0.20800000000000002, 0.376],
+                domain=[0.208, 0.376],
                 anchor='y2'
             ),
             xaxis20=XAxis(
-                domain=[0.8320000000000001, 1.0],
+                domain=[0.832, 1.0],
                 anchor='y20'
             ),
             xaxis21=XAxis(
-                domain=[0.0, 0.168],
+                domain=[0.0, 0.16799999999999998],
                 anchor='y21'
             ),
             xaxis22=XAxis(
-                domain=[0.20800000000000002, 0.376],
+                domain=[0.208, 0.376],
                 anchor='y22'
             ),
             xaxis23=XAxis(
@@ -446,15 +448,15 @@ def test_default_spacing():
                 anchor='y24'
             ),
             xaxis25=XAxis(
-                domain=[0.8320000000000001, 1.0],
+                domain=[0.832, 1.0],
                 anchor='y25'
             ),
             xaxis26=XAxis(
-                domain=[0.0, 0.168],
+                domain=[0.0, 0.16799999999999998],
                 anchor='y26'
             ),
             xaxis27=XAxis(
-                domain=[0.20800000000000002, 0.376],
+                domain=[0.208, 0.376],
                 anchor='y27'
             ),
             xaxis28=XAxis(
@@ -470,7 +472,7 @@ def test_default_spacing():
                 anchor='y3'
             ),
             xaxis30=XAxis(
-                domain=[0.8320000000000001, 1.0],
+                domain=[0.832, 1.0],
                 anchor='y30'
             ),
             xaxis4=XAxis(
@@ -478,15 +480,15 @@ def test_default_spacing():
                 anchor='y4'
             ),
             xaxis5=XAxis(
-                domain=[0.8320000000000001, 1.0],
+                domain=[0.832, 1.0],
                 anchor='y5'
             ),
             xaxis6=XAxis(
-                domain=[0.0, 0.168],
+                domain=[0.0, 0.16799999999999998],
                 anchor='y6'
             ),
             xaxis7=XAxis(
-                domain=[0.20800000000000002, 0.376],
+                domain=[0.208, 0.376],
                 anchor='y7'
             ),
             xaxis8=XAxis(
@@ -506,23 +508,23 @@ def test_default_spacing():
                 anchor='x10'
             ),
             yaxis11=YAxis(
-                domain=[0.35, 0.4749999999999999],
+                domain=[0.35, 0.475],
                 anchor='x11'
             ),
             yaxis12=YAxis(
-                domain=[0.35, 0.4749999999999999],
+                domain=[0.35, 0.475],
                 anchor='x12'
             ),
             yaxis13=YAxis(
-                domain=[0.35, 0.4749999999999999],
+                domain=[0.35, 0.475],
                 anchor='x13'
             ),
             yaxis14=YAxis(
-                domain=[0.35, 0.4749999999999999],
+                domain=[0.35, 0.475],
                 anchor='x14'
             ),
             yaxis15=YAxis(
-                domain=[0.35, 0.4749999999999999],
+                domain=[0.35, 0.475],
                 anchor='x15'
             ),
             yaxis16=YAxis(
@@ -629,15 +631,15 @@ def test_subplot_specs():
         data=Data(),
         layout=Layout(
             xaxis1=XAxis(
-                domain=[0.0, 0.28888888888888886],
+                domain=[0.0, 0.2888888888888889],
                 anchor='y1'
             ),
             xaxis2=XAxis(
-                domain=[0.0, 0.28888888888888886],
+                domain=[0.0, 0.2888888888888889],
                 anchor='y2'
             ),
             xaxis3=XAxis(
-                domain=[0.3555555555555555, 0.6444444444444445],
+                domain=[0.35555555555555557, 0.6444444444444445],
                 anchor='y3'
             ),
             xaxis4=XAxis(
@@ -725,11 +727,11 @@ def test_subplot_specs_rowspan():
         data=Data(),
         layout=Layout(
             xaxis1=XAxis(
-                domain=[0.0, 0.28888888888888886],
+                domain=[0.0, 0.2888888888888889],
                 anchor='y1'
             ),
             xaxis2=XAxis(
-                domain=[0.3555555555555555, 0.6444444444444445],
+                domain=[0.35555555555555557, 0.6444444444444445],
                 anchor='y2'
             ),
             xaxis3=XAxis(
@@ -737,7 +739,7 @@ def test_subplot_specs_rowspan():
                 anchor='y3'
             ),
             xaxis4=XAxis(
-                domain=[0.3555555555555555, 0.6444444444444445],
+                domain=[0.35555555555555557, 0.6444444444444445],
                 anchor='y4'
             ),
             xaxis5=XAxis(
@@ -745,7 +747,7 @@ def test_subplot_specs_rowspan():
                 anchor='y5'
             ),
             xaxis6=XAxis(
-                domain=[0.3555555555555555, 1.0],
+                domain=[0.35555555555555557, 1.0],
                 anchor='y6'
             ),
             yaxis1=YAxis(
@@ -841,15 +843,15 @@ def test_subplot_specs_padding():
                 anchor='x1'
             ),
             yaxis2=YAxis(
-                domain=[0.2, 0.49999999999999994],
+                domain=[0.2, 0.5],
                 anchor='x2'
             ),
             yaxis3=YAxis(
-                domain=[0.49999999999999994, 0.8],
+                domain=[0.5, 0.8],
                 anchor='x3'
             ),
             yaxis4=YAxis(
-                domain=[0.49999999999999994, 1.0],
+                domain=[0.5, 1.0],
                 anchor='x4'
             )
         )
