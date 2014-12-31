@@ -602,6 +602,8 @@ def get_subplots(rows=1, columns=1,
         scene = graph_objs.Scene(domain={'x': x_domain, 'y': y_domain})
         fig['layout'][scene_name] = scene
 
+    i = j = 0                  # subplot grid indices
+    x_cnt = y_cnt = s_cnt = 1  # subplot axis/scene counters
     # Function generating the grid's string repr
     def _fill_grid(grid, cell, spec, cnt, shared):
         if grid[cell[0]][cell[1]] != '':  # Needed to make rowspan > 1 work
@@ -631,8 +633,6 @@ def get_subplots(rows=1, columns=1,
             grid[cell[0]+j][cell[1]] = '   ^   '
 
     fig = dict(layout=graph_objs.Layout())  # init layout object
-    x_cnt = y_cnt = s_cnt = 0               # subplot counters
-    y = 0                                   # init y tracer
 
     # Loop through 'specs'
     for row, spec_row in enumerate(specs):
