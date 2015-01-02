@@ -471,8 +471,8 @@ def get_subplots(rows=1, columns=1,
         - Each item in the 'specs' is a dictionary.
             The available keys are:
 
-            * isEmpty (boolean, default=False): flag for empty grid cells
-            * is3D (boolean, default=False): flag for 3d scenes
+            * is_empty (boolean, default=False): flag for empty grid cells
+            * is_3d (boolean, default=False): flag for 3d scenes
             * colspan (int, default=1): span across grid columns
                                         from left to right
             * rowspan (int, default=1): span across grid rows
@@ -514,8 +514,8 @@ def get_subplots(rows=1, columns=1,
 
     # Default spec key-values
     SPEC_defaults = dict(
-        isEmpty=False,
-        is3D=False,
+        is_empty=False,
+        is_3d=False,
         colspan=1,
         rowspan=1,
         l=0.0,
@@ -631,7 +631,7 @@ def get_subplots(rows=1, columns=1,
         fig['layout'][name] = axis
 
     # Function pasting x/y domains in fig object (3d case)
-    def _add_domain_is3D(fig, s_cnt, x_domain, y_domain):
+    def _add_domain_is_3d(fig, s_cnt, x_domain, y_domain):
         scene_name = "scene{s_cnt}".format(s_cnt=s_cnt)
         scene = graph_objs.Scene(domain={'x': x_domain, 'y': y_domain})
         fig['layout'][scene_name] = scene
@@ -656,10 +656,10 @@ def get_subplots(rows=1, columns=1,
             y_e = grid[i+(spec['rowspan']-1)][j][1] + height - spec['t']
             y_domain = [y_s, y_e]
 
-            if not spec['isEmpty']:
-                if spec['is3D']:
+            if not spec['is_empty']:
+                if spec['is_3d']:
                     # Add scene to layout
-                    _add_domain_is3D(fig, s_cnt, x_domain, y_domain)
+                    _add_domain_is_3d(fig, s_cnt, x_domain, y_domain)
                     if print_grid:
                         grid_str[i][j] = '[scene{}'.format(s_cnt)
                     s_cnt += 1

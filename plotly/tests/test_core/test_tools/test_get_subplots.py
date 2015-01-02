@@ -779,8 +779,8 @@ def test_subplot_specs_rowspan():
 
     fig = tls.get_subplots(rows=3, columns=3,
             specs=[[{'rowspan': 3}, {}, {}],
-                   [{'isEmpty': True}, {}, {}],
-                   [{'isEmpty': True}, {'colspan': 2}]])
+                   [{'is_empty': True}, {}, {}],
+                   [{'is_empty': True}, {'colspan': 2}]])
 
     assert fig == expected
 
@@ -838,7 +838,7 @@ def test_subplot_specs_rowspan2():
 
     assert fig == expected
 
-def test_subplot_specs_is3D():
+def test_subplot_specs_is_3d():
     expected = Figure(
         data=Data(),
         layout=Layout(
@@ -868,7 +868,8 @@ def test_subplot_specs_is3D():
     )
 
     fig = tls.get_subplots(rows=2, columns=2,
-                           specs=[[{'is3D': True}, {}], [{'is3D': True}, {}]])
+                           specs=[[{'is_3d': True}, {}],
+                                   [{'is_3d': True}, {}]])
 
     assert fig == expected
 
