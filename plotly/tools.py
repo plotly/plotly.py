@@ -543,6 +543,23 @@ def get_subplots(rows=1, columns=1,
     except KeyError:
         insets = False
 
+    # Throw exception if non-valid key / fill in defaults
+    def _check_keys_and_fill(name, arg, defaults):
+        def _checks(item, defaults):
+            for k in item.keys():
+                if k not in defaults.keys():
+                    raise Exception("Invalid key '{k}' in keyword "
+                                    "argument '{name}'".format(k=k, name=name))
+            for k in defaults.keys():
+                if k not in item.keys():
+                    item[k] = defaults[k]
+        for arg_i in arg:
+            if isinstance(arg_i, list):
+                for arg_ii in arg_i:
+                    _checks(arg_ii, defaults)
+            elif isinstance(arg_i, dict):
+                _checks(arg_i, defaults)
+
     # Default spec key-values
     SPEC_defaults = dict(
         is_empty=False,
