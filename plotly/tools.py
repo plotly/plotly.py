@@ -831,6 +831,13 @@ def get_subplots(rows=1, columns=1,
         for grid_str_row in grid_str:
             grid_string = "  ".join(grid_str_row) + '\n' + grid_string
         print(grid_string)
+        if insets:
+            print("With insets:")
+            for i_inset, inset in enumerate(insets):
+                print(
+                    insets_str[i_inset] + ' over ' +
+                    grid_str[inset['cell'][0]][inset['cell'][1]])
+            print('')
 
     return graph_objs.Figure(fig)  # forces us to validate what we just did...
 
