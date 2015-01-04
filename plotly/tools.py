@@ -413,6 +413,12 @@ def get_subplots(rows=1, columns=1,
         fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x3', yaxis='y3')]
 
     Example 4:
+        # insets
+        fig = tools.get_subplots(insets=[{'cell':(0,0), 'l': 0.7, 'b': 0.3}])
+        fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2])]
+        fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x2', yaxis='y2')]
+
+    Example 5:
         # print out string showing the subplot grid you've put in the layout
         fig = tools.get_subplots(rows=3, columns=2, print_grid=True)
 
@@ -481,6 +487,23 @@ def get_subplots(rows=1, columns=1,
             * r (float, default=0.0): padding right of cell
             * t (float, default=0.0): padding right of cell
             * b (float, default=0.0): padding bottom of cell
+
+    insets (kwarg, list of dictionaries):
+        Inset specifications.
+
+        - Each item in 'insets' is a dictionary.
+            The available keys are:
+
+            * cell (tuple, default=(0,0)) subplot cell indices
+            * is_3d (boolean, default=False): flag for 3d scenes
+            * l (float, default=0.0): padding left of inset
+                  in fraction of cell width
+            * w (float or 'to_end', default='to_end') inset width
+                  in fraction of cell width ('to_end': to cell right edge)
+            * b (float, default=0.0): padding bottom of inset
+                  in fraction of cell height
+            * h (float or 'to_end', default='to_end') inset height
+                  in fraction of cell height ('to_end': to cell top edge)
     """
 
     # Throw exception for non-integer rows and columns
