@@ -551,8 +551,8 @@ def get_subplots(rows=1, columns=1,
         rowspan=1,
         l=0.0,
         r=0.0,
-        t=0.0,
-        b=0.0
+        b=0.0,
+        t=0.0
     )
 
     # Fill in specs with defaults
