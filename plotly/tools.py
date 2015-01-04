@@ -463,21 +463,24 @@ def get_subplots(rows=1, columns=1,
         Subplot specifications.
 
         - Indices of the outer list correspond to subplot grid rows
-          starting from the bottom.
+          starting from the bottom. The number of rows in 'specs'
+          must be equal to 'rows'.
 
         - Indices of the inner lists correspond to subplot grid columns
-          starting from the left
+          starting from the left. The number of columns in 'specs'
+          must be equal to 'columns'.
+
+        - Each item in the 'specs' list corresponds to one subplot
+          in a subplot grid. The subplot grid has exactly 'rows'
+          times 'columns' cells.
+
+        - Use None for blank a subplot cell (or to move pass a col/row span).
 
         - Note that specs[0][0] has the specs for the bottom-left subplot
 
-        - Each item in the 'specs' list corresponds to one subplot
-          in a subplot grid. The subplot grid has 'rows' times 'columns'
-          cells.
-
-        - Each item in the 'specs' is a dictionary.
+        - Each item in 'specs' is a dictionary.
             The available keys are:
 
-            * is_empty (boolean, default=False): flag for empty grid cells
             * is_3d (boolean, default=False): flag for 3d scenes
             * colspan (int, default=1): span across grid columns
                                         from left to right
