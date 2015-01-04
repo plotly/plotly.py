@@ -545,6 +545,15 @@ def get_subplots(rows=1, columns=1,
                  for col in range(columns)]
                  for row in range(rows)]     # default 'specs'
 
+    # Throw exception if specs is over or under specified
+    if len(specs) != rows:
+        raise Exception("The number of rows in 'specs' "
+                        "must be equal to 'rows'")
+    for spec_row in specs:
+        if len(spec_row) != columns:
+            raise Exception("The number of columns in 'specs' "
+                            "must be equal to 'columns'")
+
     # Sanitize 'insets'
     try:
         insets = kwargs['insets']
