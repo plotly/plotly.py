@@ -721,6 +721,13 @@ def get_subplots(rows=1, columns=1,
 
         for col, spec in enumerate(spec_row):
 
+            # String representation for empty cells
+            if spec is None:
+                if print_grid and grid_str[i][j] == '':
+                    grid_str[i][j] = '{none}'
+                j += 1
+                continue
+
             # Get x domain using grid and colspan
             x_s = grid[i][j][0] + spec['l']
             x_e = grid[i][j+(spec['colspan']-1)][0] + width - spec['r']
