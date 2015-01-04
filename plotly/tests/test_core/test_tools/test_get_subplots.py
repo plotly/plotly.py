@@ -1189,3 +1189,100 @@ def test_subplot_insets_wrong_type():
 @raises(Exception)
 def test_subplot_insets_wrong_item():
     fig = tls.get_subplots(insets=[{'not': "going to work"}])
+
+def test_subplot_insets():
+    expected = Figure(
+        data=Data(),
+        layout=Layout(
+            xaxis1=XAxis(
+                domain=[0.0, 0.45],
+                anchor='y1'
+            ),
+            xaxis2=XAxis(
+                domain=[0.55, 1.0],
+                anchor='y2'
+            ),
+            xaxis3=XAxis(
+                domain=[0.0, 0.45],
+                anchor='y3'
+            ),
+            xaxis4=XAxis(
+                domain=[0.55, 1.0],
+                anchor='y4'
+            ),
+            xaxis5=XAxis(
+                domain=[0.865, 0.955],
+                anchor='y5'
+            ),
+            yaxis1=YAxis(
+                domain=[0.0, 0.425],
+                anchor='x1'
+            ),
+            yaxis2=YAxis(
+                domain=[0.0, 0.425],
+                anchor='x2'
+            ),
+            yaxis3=YAxis(
+                domain=[0.575, 1.0],
+                anchor='x3'
+            ),
+            yaxis4=YAxis(
+                domain=[0.575, 1.0],
+                anchor='x4'
+            ),
+            yaxis5=YAxis(
+                domain=[0.6599999999999999, 0.8724999999999999],
+                anchor='x5'
+            )
+        )
+    )
+
+    fig = tls.get_subplots(rows=2, columns=2,
+                           insets=[{'cell': (1,1),
+                                    'l': 0.7, 'w': 0.2,
+                                    'b': 0.2, 'h': 0.5}])
+
+    assert fig == expected
+
+def test_subplot_insets_multiple():
+    expected = Figure(
+        data=Data(),
+        layout=Layout(
+            xaxis1=XAxis(
+                domain=[0.0, 1.0],
+                anchor='y1'
+            ),
+            xaxis2=XAxis(
+                domain=[0.0, 1.0],
+                anchor='y2'
+            ),
+            xaxis3=XAxis(
+                domain=[0.8, 1.0],
+                anchor='y3'
+            ),
+            xaxis4=XAxis(
+                domain=[0.8, 1.0],
+                anchor='y4'
+            ),
+            yaxis1=YAxis(
+                domain=[0.0, 0.425],
+                anchor='x1'
+            ),
+            yaxis2=YAxis(
+                domain=[0.575, 1.0],
+                anchor='x2'
+            ),
+            yaxis3=YAxis(
+                domain=[0.0, 0.425],
+                anchor='x3'
+            ),
+            yaxis4=YAxis(
+                domain=[0.575, 1.0],
+                anchor='x4'
+            )
+        )
+    )
+
+    fig = tls.get_subplots(rows=2,
+                           insets=[{'cell': (0,0), 'l':0.8},
+                                   {'cell': (1,0), 'l':0.8}])
