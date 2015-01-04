@@ -535,6 +535,14 @@ def get_subplots(rows=1, columns=1,
                  for col in range(columns)]
                  for row in range(rows)]     # default 'specs'
 
+    # Sanitize 'insets'
+    try:
+        insets = kwargs['insets']
+        if not isinstance(insets, list):
+            raise Exception("Keyword argument 'insets' must be a list")
+    except KeyError:
+        insets = False
+
     # Default spec key-values
     SPEC_defaults = dict(
         is_empty=False,
