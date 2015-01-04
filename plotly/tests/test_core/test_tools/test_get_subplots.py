@@ -375,6 +375,10 @@ def test_non_integer_rows():
 def test_non_integer_columns():
    fig = tls.get_subplots(columns=2/3)
 
+@raises(Exception)
+def test_wrong_kwarg():
+   fig = tls.get_subplots(stuff='no gonna work')
+
 def test_default_spacing():
     expected = Figure(
         data=Data(),
@@ -625,6 +629,14 @@ def test_default_spacing():
     fig = tls.get_subplots(rows=6, columns=5)
 
     assert fig == expected
+
+@raises(Exception)
+def test_subplot_specs_wrong_type():
+    fig = tls.get_subplots(specs="not going to work")
+
+@raises(Exception)
+def test_subplot_specs_wrong_item():
+    fig = tls.get_subplots(specs=[{'not': "going to work"}])
 
 def test_subplot_specs():
     expected =  Figure(
@@ -1169,3 +1181,11 @@ def test_subplot_shared_axes_list_of_lists():
                                          [(0,2), (1,2)]])
 
     assert fig == expected
+
+@raises(Exception)
+def test_subplot_insets_wrong_type():
+    fig = tls.get_subplots(insets="not going to work")
+
+@raises(Exception)
+def test_subplot_insets_wrong_item():
+    fig = tls.get_subplots(insets=[{'not': "going to work"}])
