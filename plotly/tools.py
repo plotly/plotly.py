@@ -512,6 +512,13 @@ def get_subplots(rows=1, columns=1,
     if not isinstance(columns, int):
         raise Exception("Keyword argument 'columns' must be an int")
 
+    # Throw exception if non-valid kwarg is sent
+    VALID_KWARGS = ['horizontal_spacing', 'vertical_spacing',
+                    'specs', 'insets']
+    for key in kwargs.keys():
+        if key not in VALID_KWARGS:
+            raise Exception("Invalid keyword argument: '{0}'".format(key))
+
     # Set 'horizontal_spacing' / 'vertical_spacing' w.r.t. rows / columns
     try:
         horizontal_spacing = float(kwargs['horizontal_spacing'])
