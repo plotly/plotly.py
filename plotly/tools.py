@@ -573,6 +573,18 @@ def get_subplots(rows=1, columns=1,
     )
     _check_keys_and_fill('specs', specs, SPEC_defaults)
 
+    # Default inset key-values
+    if insets:
+        INSET_defaults = dict(
+            cell=(0,0),
+            is_3d=False,
+            l=0.0,
+            w='to_end',
+            b=0.0,
+            h='to_end'
+        )
+        _check_keys_and_fill('insets', insets, INSET_defaults)
+
     # Set width & height of each subplot cell (excluding padding)
     width = (1. - horizontal_spacing * (columns - 1)) / columns
     height = (1. - vertical_spacing * (rows - 1)) / rows
@@ -586,6 +598,8 @@ def get_subplots(rows=1, columns=1,
     # Initialize the grid's string representation
     if print_grid:
         grid_str = [['' for column in range(columns)] for row in range(rows)]
+        if insets:
+            insets_str = ['' for inset in range(len(insets))]
 
     fig = dict(layout=graph_objs.Layout())  # init layout object
 
