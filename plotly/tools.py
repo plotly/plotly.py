@@ -575,7 +575,8 @@ def get_subplots(rows=1, columns=1,
         for arg_i in arg:
             if isinstance(arg_i, list):
                 for arg_ii in arg_i:
-                    _checks(arg_ii, defaults)
+                    if arg_ii is not None:  # for specs[i][j] == None
+                        _checks(arg_ii, defaults)
             elif isinstance(arg_i, dict):
                 _checks(arg_i, defaults)
 
