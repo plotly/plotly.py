@@ -581,7 +581,6 @@ def get_subplots(rows=1, columns=1,
 
     # Default spec key-values
     SPEC_defaults = dict(
-        is_empty=False,
         is_3d=False,
         colspan=1,
         rowspan=1,
