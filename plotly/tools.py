@@ -522,7 +522,7 @@ def get_subplots(rows=1, columns=1,
     except KeyError:
         vertical_spacing = 0.3 / rows
 
-    # Sanitize 'specs' -- TODO more sanitizing?
+    # Sanitize 'specs'
     try:
         specs = kwargs['specs']
         if not isinstance(specs, list):
@@ -571,13 +571,7 @@ def get_subplots(rows=1, columns=1,
         b=0.0,
         t=0.0
     )
-
-    # Fill in specs with defaults
-    for spec_row in specs:
-        for spec in spec_row:
-            for k in SPEC_defaults.keys():
-                if k not in spec.keys():
-                    spec[k] = SPEC_defaults[k]
+    _check_keys_and_fill('specs', specs, SPEC_defaults)
 
     # Set width & height of each subplot cell (excluding padding)
     width = (1. - horizontal_spacing * (columns - 1)) / columns
