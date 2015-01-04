@@ -595,7 +595,7 @@ def get_subplots(rows=1, columns=1,
     # Default inset key-values
     if insets:
         INSET_defaults = dict(
-            cell=(0,0),
+            cell=(0, 0),
             is_3d=False,
             l=0.0,
             w='to_end',
