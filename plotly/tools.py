@@ -388,7 +388,8 @@ def mpl_to_plotly(fig, resize=False, strip_style=False, verbose=False):
 
 def get_subplots(rows=1, columns=1,
                  shared_xaxes=False, shared_yaxes=False,
-                 print_grid=False, **kwargs):
+                 start_cell='bottom-left', print_grid=False,
+                 **kwargs):
     """Return an instance of plotly.graph_objs.Figure
     with the subplots domain set in 'layout'.
 
@@ -443,6 +444,10 @@ def get_subplots(rows=1, columns=1,
         To assign shared y axes per subplot grid cell (see 'specs'),
         send list (or list of lists, one list per shared axis)
         of cell index tuples.
+
+    start_cell (kwarg, 'bottom-left' or 'top-left', default='bottom-left')
+        Choose the starting cell in the subplot grid used to set the
+        domains of the subplots.
 
     print_grid (kwarg, boolean, default=False):
         If True, prints a tab-delimited string representation of
