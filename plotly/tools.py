@@ -746,7 +746,7 @@ def get_subplots(rows=1, columns=1,
                 s_cnt += 1
             else:
 
-            j += spec['colspan']  # move right by a colspan
+                # Get axis label and anchor
                 x_label = _get_label('x', row, col, x_cnt, shared_xaxes)
                 y_label = _get_label('y', row, col, y_cnt, shared_yaxes)
                 x_anchor, y_anchor = _get_anchors(row, col,
@@ -786,6 +786,7 @@ def get_subplots(rows=1, columns=1,
                     for c in range(0, spec['colspan']):
                         grid_str[i+spec['rowspan']-1][j+c] = '   ^   '
 
+            j += 1  # move right by one column
 
         i += 1  # move up by one row
 
