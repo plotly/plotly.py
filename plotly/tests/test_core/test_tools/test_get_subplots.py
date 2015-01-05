@@ -687,7 +687,9 @@ def test_subplot_specs():
         )
     )
 
-    fig = tls.get_subplots(rows=2, columns=3, specs=[[{}], [{}, {}, {}]])
+    fig = tls.get_subplots(rows=2, columns=3,
+                           specs=[[{}, None, None],
+                                  [{}, {}, {}]])
 
     assert fig == expected
 
@@ -739,7 +741,7 @@ def test_subplot_specs_colspan():
     )
 
     fig = tls.get_subplots(rows=3, columns=2,
-                            specs=[[{'colspan':2}],
+                            specs=[[{'colspan':2}, None],
                                    [{}, {}],
                                    [{}, {}]])
     assert fig == expected
@@ -801,8 +803,8 @@ def test_subplot_specs_rowspan():
 
     fig = tls.get_subplots(rows=3, columns=3,
             specs=[[{'rowspan': 3}, {}, {}],
-                   [{'is_empty': True}, {}, {}],
-                   [{'is_empty': True}, {'colspan': 2}]])
+                   [None, {}, {}],
+                   [None, {'colspan': 2}, None]])
 
     assert fig == expected
 
@@ -855,8 +857,10 @@ def test_subplot_specs_rowspan2():
 
     fig = tls.get_subplots(rows=3, columns=3,
                            specs=[[{}, {}, {'rowspan': 2}],
-                                  [{'colspan': 2}],
-                                  [{'colspan': 3}]])
+                                  [{'colspan': 2}, None, None],
+                                  [{'colspan': 3}, None, None]])
+
+    assert fig == expected
 
     assert fig == expected
 
