@@ -638,6 +638,16 @@ def test_subplot_specs_wrong_type():
 def test_subplot_specs_wrong_item():
     fig = tls.get_subplots(specs=[{'not': "going to work"}])
 
+@raises(Exception)
+def test_subplot_specs_underspecified():
+    fig = tls.get_subplots(rows=2, specs=[{}])
+    fig = tls.get_subplots(rows=2, columns=2, specs=[[{}, {}], [{}]])
+
+@raises(Exception)
+def test_subplot_specs_overspecified():
+    fig = tls.get_subplots(rows=2, specs=[[{}], [{}], [{}]])
+    fig = tls.get_subplots(columns=2, specs=[{}, {}, {}])
+
 def test_subplot_specs():
     expected =  Figure(
         data=Data(),
