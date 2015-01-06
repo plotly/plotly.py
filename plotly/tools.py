@@ -414,7 +414,8 @@ def get_subplots(rows=1, columns=1, print_grid=False, **kwargs):
         Space between subplot rows. Applied to all rows.
 
     print_grid (True | False, default=False):
-        If True, prints a tab-delimited string representation of your plot grid.
+        If True, prints a tab-delimited string representation
+        of your plot grid.
 
     Keyword arguments with variable defaults:
 
