@@ -3,6 +3,19 @@ from plotly.graph_objs import *
 import plotly.tools as tls
 from nose.tools import raises
 
+
+@raises(Exception)
+def test_non_integer_rows():
+   fig = tls.get_subplots(rows=2.1)
+
+@raises(Exception)
+def test_non_integer_columns():
+   fig = tls.get_subplots(columns=2/3)
+
+@raises(Exception)
+def test_wrong_kwarg():
+   fig = tls.get_subplots(stuff='no gonna work')
+
 def test_get_single_plot():
     expected = Figure(
         data=Data(),
@@ -366,18 +379,6 @@ def test_spacing():
                            vertical_spacing=.1)
 
     assert fig == expected
-
-@raises(Exception)
-def test_non_integer_rows():
-   fig = tls.get_subplots(rows=2.1)
-
-@raises(Exception)
-def test_non_integer_columns():
-   fig = tls.get_subplots(columns=2/3)
-
-@raises(Exception)
-def test_wrong_kwarg():
-   fig = tls.get_subplots(stuff='no gonna work')
 
 def test_default_spacing():
     expected = Figure(
