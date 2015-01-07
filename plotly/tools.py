@@ -880,13 +880,11 @@ def make_subplots(rows=1, cols=1,
         scene = graph_objs.Scene(domain={'x': x_domain, 'y': y_domain})
         fig['layout'][scene_name] = scene
 
-    i = j = 0                  # subplot grid indices
     x_cnt = y_cnt = s_cnt = 1  # subplot axis/scene counters
 
     # Loop through specs
     for row, spec_row in enumerate(specs):
 
-        j = 0  # start at leftmost grid cell for each spec_row
 
         for col, spec in enumerate(spec_row):
 
@@ -954,10 +952,6 @@ def make_subplots(rows=1, cols=1,
                         grid_str[i+r][j] = '       '
                     for c in range(0, spec['colspan']):
                         grid_str[i+spec['rowspan']-1][j+c] = '   ^   '
-
-            j += 1  # move right by one column
-
-        i += 1  # move up by one row
 
     # Loop through insets
     if insets:
