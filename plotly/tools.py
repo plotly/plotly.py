@@ -947,23 +947,6 @@ def make_subplots(rows=1, cols=1,
                     y_cnt += 1
 
                 grid_ref[r][c] = (x_label, y_label)  # fill in ref
-                if print_grid:
-                    grid_str[i][j] = '[{},{}'.format(x_label, y_label)
-
-            # String representation for spanned cells
-            # TODO more general spacing over spanned cells
-            if print_grid:
-                if spec['colspan'] > 1:
-                    for c in range(1, spec['colspan']-1):
-                        grid_str[i][j+c] = '       '
-                    grid_str[i][j+spec['colspan']-1] = '       ]'
-                else:
-                    grid_str[i][j] += ']'
-                if spec['rowspan'] > 1:
-                    for r in range(1, spec['rowspan']-1):
-                        grid_str[i+r][j] = '       '
-                    for c in range(0, spec['colspan']):
-                        grid_str[i+spec['rowspan']-1][j+c] = '   ^   '
 
     # Loop through insets
     if insets:
