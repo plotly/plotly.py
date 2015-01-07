@@ -644,11 +644,11 @@ def make_subplots(rows=1, cols=1,
                   in fraction of cell height ('to_end': to cell top edge)
     """
 
-    # Throw exception for non-integer rows and columns
+    # Throw exception for non-integer rows and cols
     if not isinstance(rows, int):
         raise Exception("Keyword argument 'rows' must be an int")
-    if not isinstance(columns, int):
-        raise Exception("Keyword argument 'columns' must be an int")
+    if not isinstance(cols, int):
+        raise Exception("Keyword argument 'cols' must be an int")
 
     # Throw exception if non-valid kwarg is sent
     VALID_KWARGS = ['horizontal_spacing', 'vertical_spacing',
@@ -657,11 +657,11 @@ def make_subplots(rows=1, cols=1,
         if key not in VALID_KWARGS:
             raise Exception("Invalid keyword argument: '{0}'".format(key))
 
-    # Set 'horizontal_spacing' / 'vertical_spacing' w.r.t. rows / columns
+    # Set 'horizontal_spacing' / 'vertical_spacing' w.r.t. rows / cols
     try:
         horizontal_spacing = float(kwargs['horizontal_spacing'])
     except KeyError:
-        horizontal_spacing = 0.2 / columns
+        horizontal_spacing = 0.2 / cols
     try:
         vertical_spacing = float(kwargs['vertical_spacing'])
     except KeyError:
@@ -677,17 +677,17 @@ def make_subplots(rows=1, cols=1,
             specs = [specs]
     except KeyError:
         specs = [[{}
-                 for col in range(columns)]
-                 for row in range(rows)]     # default 'specs'
+                 for c in range(cols)]
+                 for r in range(rows)]     # default 'specs'
 
     # Throw exception if specs is over or under specified
     if len(specs) != rows:
         raise Exception("The number of rows in 'specs' "
                         "must be equal to 'rows'")
-    for spec_row in specs:
-        if len(spec_row) != columns:
+    for r, spec_row in enumerate(specs):
+        if len(spec_row) != cols:
             raise Exception("The number of columns in 'specs' "
-                            "must be equal to 'columns'")
+                            "must be equal to 'cols'")
 
     # Sanitize 'insets'
     try:
@@ -740,7 +740,7 @@ def make_subplots(rows=1, cols=1,
         _check_keys_and_fill('insets', insets, INSET_defaults)
 
     # Set width & height of each subplot cell (excluding padding)
-    width = (1. - horizontal_spacing * (columns - 1)) / columns
+    width = (1. - horizontal_spacing * (cols - 1)) / cols
     height = (1. - vertical_spacing * (rows - 1)) / rows
 
     # Build subplot grid (tuple of starting coords for each cell)
