@@ -997,19 +997,83 @@ def make_subplots(rows=1, cols=1,
 
                 insets_ref[i_inset] = (x_label, y_label)  # fill in ref
 
+    # [grid_str] Set the grid's string representation
+    sp = "  "            # space between cell
+    s_str = "[ "         # cell start string
+    e_str = " ]"         # cell end string
+    colspan_str = '       -'     # colspan string
+    rowspan_str = '       |'     # rowspan string
+    empty_str = '    (empty) '   # empty cell string
+
+    # Init grid_str with intro message
+    grid_str = "This is the format of your plot grid!\n"
+
+    # Init tmp list of lists of strings (sorta like 'grid_ref' but w/ strings)
+    _tmp = [['' for c in range(cols)] for r in range(rows)]
+
+    # Define cell string as function of (r, c) and grid_ref
+    def _get_cell_str(r, c, ref):
+        return '({r},{c}) {ref}'.format(r=r+1, c=c+1, ref=','.join(ref))
+
+    # Find max len of _cell_str, add define a padding function
+    cell_len = max([len(_get_cell_str(r, c, ref))
+                    for r, row_ref in enumerate(grid_ref)
+                    for c, ref in enumerate(row_ref)
+                    if ref]) + len(s_str) + len(e_str)
+
+    def _pad(s, cell_len=cell_len):
+        return ' ' * (cell_len - len(s))
+
+    # Loop through specs, fill in _tmp
+    for r, spec_row in enumerate(specs):
+        for c, spec in enumerate(spec_row):
+
+            ref = grid_ref[r][c]
+            if ref is None:
+                if _tmp[r][c] == '':
+                    _tmp[r][c] = empty_str + _pad(empty_str)
+                continue
+
+            cell_str = s_str + _get_cell_str(r, c, ref)
+
+            if spec['colspan'] > 1:
+                for cc in range(1, spec['colspan']-1):
+                    _tmp[r][c+cc] = colspan_str + _pad(colspan_str)
+                _tmp[r][c+spec['colspan']-1] = (
+                    colspan_str + _pad(colspan_str + e_str)) + e_str
+            else:
+                cell_str += e_str
+
+            if spec['rowspan'] > 1:
+                for rr in range(1, spec['rowspan']-1):
+                    _tmp[r+rr][c] = rowspan_str + _pad(rowspan_str)
+                for cc in range(spec['colspan']):
+                    _tmp[r+spec['rowspan']-1][c+cc] = (
+                        rowspan_str + _pad(rowspan_str))
+
+            _tmp[r][c] = cell_str + _pad(cell_str)
+
+    # Append grid_str using data from _tmp in the correct order
+    for r in row_seq[::-1]:
+        grid_str += sp.join(_tmp[r]) + '\n'
+
+    # Append grid_str to include insets info
+    if insets:
+        grid_str += "\nWith insets:\n"
+        for i_inset, inset in enumerate(insets):
+
+            r = inset['cell'][0] - 1
+            c = inset['cell'][1] - 1
+            ref = grid_ref[r][c]
+
+            grid_str += (
+                s_str + ','.join(insets_ref[i_inset]) + e_str +
+                ' over ' +
+                s_str + _get_cell_str(r, c, ref) + e_str + '\n'
+            )
+
     if print_grid:
-        print("This is the format of your plot grid!")
-        grid_string = ""
-        for grid_str_row in grid_str:
-            grid_string = "  ".join(grid_str_row) + '\n' + grid_string
-        print(grid_string)
-        if insets:
-            print("With insets:")
-            for i_inset, inset in enumerate(insets):
-                print(
-                    insets_str[i_inset] + ' over ' +
-                    grid_str[inset['cell'][0]][inset['cell'][1]])
-            print('')
+        print(grid_str)
 
     fig = graph_objs.Figure(layout=layout)
     return fig
