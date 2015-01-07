@@ -499,46 +499,63 @@ def make_subplots(rows=1, cols=1,
     with the subplots domain set in 'layout'.
 
     Example 1:
-        # stack two subplots vertically
-        fig = tools.get_subplots(rows=2)
-        fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x1', yaxis='y1')]
-        fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x2', yaxis='y2')]
+    # stack two subplots vertically
+    >>> fig = tools.make_subplots(rows=2, print_grid=True)
+    This is the format of your plot grid!
+    [ (1,1) x1,y1 ]
+    [ (2,1) x2,y2 ]
+
+    >>> fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x1', yaxis='y1')]
+    >>> fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x2', yaxis='y2')]
 
     Example 2:
-        # subplots with shared x axes
-        fig = tools.get_subplots(rows=2, shared_xaxes=True)
-        fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], yaxis='y1')]
-        fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], yaxis='y2')]
+    # subplots with shared x axes
+    >>> fig = tools.make_subplots(rows=2, shared_xaxes=True, print_grid=True)
+
+    TODO What's the default behavior here??
+
+    >>> fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], yaxis='y1')]
+    >>> fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], yaxis='y2')]
 
     Example 3:
-        # irregular subplot layout
-        fig = tools.get_subplots(rows=2, columns=2,
-                                 specs=[[{}, {}], [{'colspan': 2}]])
-        fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x1', yaxis='y1')]
-        fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x2', yaxis='y2')]
-        fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x3', yaxis='y3')]
+    # irregular subplot layout (more examples below under 'specs')
+    >>> fig = tools.make_subplots(rows=2, cols=2,
+                                 specs=[[{}, {}],
+                                        [{'colspan': 2}, None]],
+                                 print_grid=True)
+    This is the format of your plot grid!
+    [ (1,1) x1,y1 ]  [ (1,2) x2,y2 ]
+    [ (2,1) x3,y3           -      ]
+
+    >>> fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x1', yaxis='y1')]
+    >>> fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x2', yaxis='y2')]
+    >>> fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x3', yaxis='y3')]
 
     Example 4:
-        # insets
-        fig = tools.get_subplots(insets=[{'cell':(0,0), 'l': 0.7, 'b': 0.3}])
-        fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2])]
-        fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x2', yaxis='y2')]
+    # insets
+    >>> fig = tools.make_subplots(insets=[{'cell': (1,1), 'l': 0.7, 'b': 0.3}],
+                                  print_grid=True)
+    This is the format of your plot grid!
+    [ (1,1) x1,y1 ]
 
-    Example 5:
-        # print out string showing the subplot grid you've put in the layout
-        fig = tools.get_subplots(rows=3, columns=2, print_grid=True)
+    With insets:
+    [ x2,y2 ] over [ (1,1) x1,y1 ]
+
+    >>> fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2])]
+    >>> fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x2', yaxis='y2')]
 
     Keywords arguments with constant defaults:
 
     rows (kwarg, int, default=1):
-        Number of rows on the figure.
+        Number of rows in the subplot grid.
 
-    columns (kwarg, int, default=1):
-        Number of columns on the figure.
+    cols (kwarg, int, default=1):
+        Number of columns in the subplot grid.
 
     shared_xaxes (kwarg, boolean or list, default=False)
         Assign shared x axes.
         If True, all x axes are shared.
+
         To assign shared x axes per subplot grid cell (see 'specs'),
         send list (or list of lists, one list per shared axis)
         of cell index tuples.
@@ -546,11 +563,12 @@ def make_subplots(rows=1, cols=1,
     shared_yaxes (kwarg, boolean or list, default=False)
         Assign shared y axes.
         If True, all y axes are shared.
+
         To assign shared y axes per subplot grid cell (see 'specs'),
         send list (or list of lists, one list per shared axis)
         of cell index tuples.
 
-    start_cell (kwarg, 'bottom-left' or 'top-left', default='bottom-left')
+    start_cell (kwarg, 'bottom-left' or 'top-left', default='top-left')
         Choose the starting cell in the subplot grid used to set the
         domains of the subplots.
 
@@ -560,17 +578,20 @@ def make_subplots(rows=1, cols=1,
 
     Keyword arguments with variable defaults:
 
-    horizontal_spacing (kwarg, float in [0,1], default=0.2 / columns):
+    horizontal_spacing (kwarg, float in [0,1], default=0.2 / cols):
         Space between subplot columns.
-
         Applies to all columns (use 'specs' subplot-dependents spacing)
 
     vertical_spacing (kwarg, float in [0,1], default=0.3 / rows):
         Space between subplot rows.
         Applies to all rows (use 'specs' subplot-dependents spacing)
 
-    specs (kwarg, list (of lists) of dictionaries):
+    specs (kwarg, list of lists of dictionaries):
         Subplot specifications.
+
+        ex1: specs=[[{}, {}], [{'colspan': 2}, None]]
+
+        ex2: specs=[[{'rowspan': 2}, {}], [None, {}]]
 
         - Indices of the outer list correspond to subplot grid rows
           starting from the bottom. The number of rows in 'specs'
@@ -578,28 +599,31 @@ def make_subplots(rows=1, cols=1,
 
         - Indices of the inner lists correspond to subplot grid columns
           starting from the left. The number of columns in 'specs'
-          must be equal to 'columns'.
+          must be equal to 'cols'.
 
         - Each item in the 'specs' list corresponds to one subplot
-          in a subplot grid. The subplot grid has exactly 'rows'
-          times 'columns' cells.
+          in a subplot grid. (N.B. The subplot grid has exactly 'rows'
+          times 'cols' cells.)
 
         - Use None for blank a subplot cell (or to move pass a col/row span).
 
-        - Note that specs[0][0] has the specs for the bottom-left subplot
+        - Note that specs[0][0] has the specs of the 'start_cell' subplot.
 
         - Each item in 'specs' is a dictionary.
             The available keys are:
 
             * is_3d (boolean, default=False): flag for 3d scenes
-            * colspan (int, default=1): span across grid columns
-                                        from left to right
-            * rowspan (int, default=1): span across grid rows
-                                        from bottom to top
+            * colspan (int, default=1): number of subplot columns
+                for this subplot to span.
+            * rowspan (int, default=1): number of subplot rows
+                for this subplot to span.
             * l (float, default=0.0): padding left of cell
             * r (float, default=0.0): padding right of cell
             * t (float, default=0.0): padding right of cell
             * b (float, default=0.0): padding bottom of cell
+
+        - Use 'horizontal_spacing' and 'vertical_spacing' to adjust
+          the spacing in between the subplots.
 
     insets (kwarg, list of dictionaries):
         Inset specifications.
@@ -607,7 +631,8 @@ def make_subplots(rows=1, cols=1,
         - Each item in 'insets' is a dictionary.
             The available keys are:
 
-            * cell (tuple, default=(0,0)) subplot cell indices
+            * cell (tuple, default=(1,1)): (row, col) index of the
+                subplot cell to overlay inset axes onto.
             * is_3d (boolean, default=False): flag for 3d scenes
             * l (float, default=0.0): padding left of inset
                   in fraction of cell width
