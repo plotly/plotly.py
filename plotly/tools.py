@@ -653,6 +653,27 @@ def make_subplots(rows=1, cols=1,
     if not isinstance(cols, int):
         raise Exception("Keyword argument 'cols' must be an int")
 
+    # Dictionary of things start_cell
+    START_CELL_all = {
+        'bottom-left': {
+            # 'natural' setup where x & y domains increase monotonically
+            'col_dir': 1,
+            'row_dir': 1
+        },
+        'top-left': {
+            # 'default' setup visually matching the 'specs' list of lists
+            'col_dir': 1,
+            'row_dir': -1
+        }
+        # TODO maybe add 'bottom-right' and 'top-right'
+    }
+
+    # Throw exception for invalid 'start_cell' values
+    try:
+        START_CELL = START_CELL_all[start_cell]
+    except KeyError:
+        raise Exception("Invalid 'start_cell' value")
+
     # Throw exception if non-valid kwarg is sent
     VALID_KWARGS = ['horizontal_spacing', 'vertical_spacing',
                     'specs', 'insets']
@@ -752,12 +773,17 @@ def make_subplots(rows=1, cols=1,
     width = (1. - horizontal_spacing * (cols - 1)) / cols
     height = (1. - vertical_spacing * (rows - 1)) / rows
 
-    # Build subplot grid (tuple of starting coords for each cell)
-    grid = [[((width + horizontal_spacing) * column,
-              (height + vertical_spacing) * row)
-            for column in range(columns)]
-            for row in range(rows)]       # all we need
+    # Built row/col sequence using 'row_dir' and 'col_dir'
+    col_dir = START_CELL['col_dir']
+    col_seq = range(cols)[::col_dir]
+    row_dir = START_CELL['row_dir']
+    row_seq = range(rows)[::row_dir]
 
+    # [grid] Build subplot grid (coord tuple of cell)
+    grid = [[((width + horizontal_spacing) * c,
+              (height + vertical_spacing) * r)
+            for c in col_seq]
+            for r in row_seq]
     # Initialize the grid's string representation
     if print_grid:
         grid_str = [['' for column in range(columns)] for row in range(rows)]
