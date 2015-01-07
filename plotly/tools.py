@@ -882,41 +882,52 @@ def make_subplots(rows=1, cols=1,
 
     x_cnt = y_cnt = s_cnt = 1  # subplot axis/scene counters
 
-    # Loop through specs
-    for row, spec_row in enumerate(specs):
+    # Loop through specs -- (r, c) <-> (row, col)
+    for r, spec_row in enumerate(specs):
+        for c, spec in enumerate(spec_row):
 
-
-        for col, spec in enumerate(spec_row):
-
-            # String representation for empty cells
-            if spec is None:
-                if print_grid and grid_str[i][j] == '':
-                    grid_str[i][j] = '{none}'
-                j += 1
+            if spec is None:  # skip over None cells
                 continue
 
+            c_spanned = c + spec['colspan'] - 1  # get spanned c
+            r_spanned = r + spec['rowspan'] - 1  # get spanned r
+
+            # Throw exception if 'colspan' | 'rowspan' is too large for grid
+            if c_spanned >= cols:
+                raise Exception("Some 'colspan' value is too large for "
+                                "this subplot grid.")
+            if r_spanned >= rows:
+                raise Exception("Some 'rowspan' value is too large for "
+                                "this subplot grid.")
+
             # Get x domain using grid and colspan
-            x_s = grid[i][j][0] + spec['l']
-            x_e = grid[i][j+(spec['colspan']-1)][0] + width - spec['r']
+            x_s = grid[r][c][0] + spec['l']
+            x_e = grid[r][c_spanned][0] + width - spec['r']
             x_domain = [x_s, x_e]
 
-            # Get y domain using grid and rowspan
-            y_s = grid[i][j][1] + spec['b']
-            y_e = grid[i+(spec['rowspan']-1)][j][1] + height - spec['t']
+            # Get y domain (dep. on row_dir) using grid & r_spanned
+            if row_dir > 0:
+                y_s = grid[r][c][1] + spec['b']
+                y_e = grid[r_spanned][c][1] + height - spec['t']
+            else:
+                y_s = grid[r_spanned][c][1] + spec['b']
+                y_e = grid[r][c][1] + height - spec['t']
             y_domain = [y_s, y_e]
 
             if spec['is_3d']:
+
                 # Add scene to layout
-                _add_domain_is_3d(fig, s_cnt, x_domain, y_domain)
-                if print_grid:
-                    grid_str[i][j] = '[scene{}'.format(s_cnt)
+                s_label = 'scene{0}'.format(s_cnt)
+                _add_domain_is_3d(layout, s_label, x_domain, y_domain)
+                grid_ref[r][c] = (s_label, )
                 s_cnt += 1
+
             else:
 
                 # Get axis label and anchor
-                x_label = _get_label('x', row, col, x_cnt, shared_xaxes)
-                y_label = _get_label('y', row, col, y_cnt, shared_yaxes)
-                x_anchor, y_anchor = _get_anchors(row, col,
+                x_label = _get_label('x', r, c, x_cnt, shared_xaxes)
+                y_label = _get_label('y', r, c, y_cnt, shared_yaxes)
+                x_anchor, y_anchor = _get_anchors(r, c,
                                                   x_cnt, y_cnt,
                                                   shared_xaxes,
                                                   shared_yaxes)
@@ -924,17 +935,18 @@ def make_subplots(rows=1, cols=1,
                 # Add a xaxis to layout (N.B anchor == False -> no axis)
                 if x_anchor:
                     x_position = y_domain[0] if x_anchor == 'free' else 0
-                    _add_domain(fig, 'x', x_label, x_domain,
+                    _add_domain(layout, 'x', x_label, x_domain,
                                 x_anchor, x_position)
                     x_cnt += 1
 
                 # Add a yaxis to layout (N.B anchor == False -> no axis)
                 if y_anchor:
                     y_position = x_domain[0] if y_anchor == 'free' else 0
-                    _add_domain(fig, 'y', y_label, y_domain,
+                    _add_domain(layout, 'y', y_label, y_domain,
                                 y_anchor, y_position)
                     y_cnt += 1
 
+                grid_ref[r][c] = (x_label, y_label)  # fill in ref
                 if print_grid:
                     grid_str[i][j] = '[{},{}'.format(x_label, y_label)
 
