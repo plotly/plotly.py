@@ -406,14 +406,15 @@ class Stream:
     Stream example:
     # Initialize a streaming graph
     # by embedding stream_id's in the graph's traces
-    >>> stream_id = "your_stream_id" # See {plotly_domain}/settings
-    >>> py.plot(Data([Scatter(x=[],
-                              y=[],
-                              stream=dict(token=stream_id, maxpoints=100))])
+    import plotly.plotly as py
+    from plotly.graph_objs import Data, Scatter, Stream
+    stream_id = "your_stream_id" # See {plotly_domain}/settings
+    py.plot(Data([Scatter(x=[], y=[],
+                          stream=Stream(token=stream_id, maxpoints=100))]))
     # Stream data to the import trace
-    >>> stream = Stream(stream_id) # Initialize a stream object
-    >>> stream.open() # Open the stream
-    >>> stream.write(dict(x=1, y=1)) # Plot (1, 1) in your graph
+    stream = Stream(stream_id) # Initialize a stream object
+    stream.open() # Open the stream
+    stream.write(dict(x=1, y=1)) # Plot (1, 1) in your graph
     """
 
     @utils.template_doc(**tools.get_config_file())
