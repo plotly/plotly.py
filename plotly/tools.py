@@ -951,50 +951,51 @@ def make_subplots(rows=1, cols=1,
     if insets:
         for i_inset, inset in enumerate(insets):
 
-            i = inset['cell'][0]
-            j = inset['cell'][1]
+            r = inset['cell'][0] - 1
+            c = inset['cell'][1] - 1
 
             # Get inset x domain using grid
-            x_s = grid[i][j][0] + inset['l'] * width
+            x_s = grid[r][c][0] + inset['l'] * width
             if inset['w'] == 'to_end':
-                x_e = grid[i][j][0] + width
+                x_e = grid[r][c][0] + width
             else:
                 x_e = x_s + inset['w'] * width
             x_domain = [x_s, x_e]
 
             # Get inset y domain using grid
-            y_s = grid[i][j][1] + inset['b'] * height
+            y_s = grid[r][c][1] + inset['b'] * height
             if inset['h'] == 'to_end':
-                y_e = grid[i][j][1] + height
+                y_e = grid[r][c][1] + height
             else:
                 y_e = y_s + inset['h'] * height
             y_domain = [y_s, y_e]
 
             if inset['is_3d']:
+
                 # Add scene to layout
-                _add_domain_is_3d(fig, s_cnt, x_domain, y_domain)
-                if print_grid:
-                    insets_str[i_inset] = '[scene{}]'.format(s_cnt)
+                s_label = 'scene{0}'.format(s_cnt)
+                _add_domain_is_3d(layout, s_label, x_domain, y_domain)
+                insets_ref[i_inset] = (s_label, )
                 s_cnt += 1
+
             else:
 
                 # Get axis label and anchor
                 x_label = _get_label('x', False, False, x_cnt, False)
                 y_label = _get_label('y', False, False, y_cnt, False)
-                x_anchor, y_anchor = _get_anchors(row, col,
+                x_anchor, y_anchor = _get_anchors(r, c,
                                                   x_cnt, y_cnt,
                                                   False, False)
 
                 # Add a xaxis to layout (N.B insets always have anchors)
-                _add_domain(fig, 'x', x_label, x_domain, x_anchor, False)
+                _add_domain(layout, 'x', x_label, x_domain, x_anchor, False)
                 x_cnt += 1
 
                 # Add a yayis to layout (N.B insets always have anchors)
-                _add_domain(fig, 'y', y_label, y_domain, y_anchor, False)
+                _add_domain(layout, 'y', y_label, y_domain, y_anchor, False)
                 y_cnt += 1
 
-                if print_grid:
-                    insets_str[i_inset] = '[{},{}]'.format(x_label, y_label)
+                insets_ref[i_inset] = (x_label, y_label)  # fill in ref
 
     if print_grid:
         print("This is the format of your plot grid!")
