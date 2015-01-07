@@ -71,12 +71,20 @@ def test_specs_rowspan_too_big():
                                    [{'rowspan': 2}]])
 
 @raises(Exception)
-def test_subplot_insets_wrong_type():
+def test_insets_wrong_type():
     fig = tls.make_subplots(insets="not going to work")
 
 @raises(Exception)
-def test_subplot_insets_wrong_item():
+def test_insets_wrong_item():
     fig = tls.make_subplots(insets=[{'not': "going to work"}])
+
+@raises(Exception)
+def test_insets_wrong_cell_row():
+    fig = tls.make_subplots(insets=([{'cell': (0, 1)}]))
+
+@raises(Exception)
+def test_insets_wrong_cell_col():
+    fig = tls.make_subplots(insets=([{'cell': (1, 0)}]))
 
 def test_get_single_plot():
     expected = Figure(
