@@ -670,14 +670,16 @@ def make_subplots(rows=1, cols=1,
     except KeyError:
         vertical_spacing = 0.3 / rows
 
-    # Sanitize 'specs'
+    # Sanitize 'specs' (must be a list of lists)
+    exception_msg = "Keyword argument 'specs' must be a list of lists"
     try:
         specs = kwargs['specs']
         if not isinstance(specs, list):
-            raise Exception("Keyword argument 'specs' must be a list")
-        elif isinstance(specs[0], dict):
-            # To support one-row specs=[{},{}]
-            specs = [specs]
+            raise Exception(exception_msg)
+        else:
+            for spec_row in specs:
+                if not isinstance(spec_row, list):
+                    raise Exception(exception_msg)
     except KeyError:
         specs = [[{}
                  for c in range(cols)]
