@@ -492,9 +492,9 @@ def get_subplots(rows=1, columns=1, print_grid=False, **kwargs):
 
 
 def make_subplots(rows=1, cols=1,
-                 shared_xaxes=False, shared_yaxes=False,
-                 start_cell='bottom-left', print_grid=False,
-                 **kwargs):
+                  shared_xaxes=False, shared_yaxes=False,
+                  start_cell='top-left', print_grid=False,
+                  **kwargs):
     """Return an instance of plotly.graph_objs.Figure
     with the subplots domain set in 'layout'.
 
@@ -754,6 +754,7 @@ def make_subplots(rows=1, cols=1,
         r=0.0,
         b=0.0,
         t=0.0
+        # TODO add support for 'w' and 'h'
     )
     _check_keys_and_fill('specs', specs, SPEC_defaults)
 
