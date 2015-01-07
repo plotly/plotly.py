@@ -784,12 +784,10 @@ def make_subplots(rows=1, cols=1,
               (height + vertical_spacing) * r)
             for c in col_seq]
             for r in row_seq]
-    # Initialize the grid's string representation
-    if print_grid:
-        grid_str = [['' for column in range(columns)] for row in range(rows)]
-        if insets:
-            insets_str = ['' for inset in range(len(insets))]
 
+    # [grid_ref] Initialize the grid and insets' axis-reference lists
+    grid_ref = [[None for c in range(cols)] for r in range(rows)]
+    insets_ref = [None for inset in range(len(insets))] if insets else None
     fig = dict(layout=graph_objs.Layout())  # init layout object
 
     # Function handling logic around 2d axis labels
