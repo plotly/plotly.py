@@ -760,7 +760,7 @@ def make_subplots(rows=1, cols=1,
     # Default inset key-values
     if insets:
         INSET_defaults = dict(
-            cell=(0, 0),
+            cell=(1, 1),
             is_3d=False,
             l=0.0,
             w='to_end',
@@ -793,44 +793,44 @@ def make_subplots(rows=1, cols=1,
 
     # Function handling logic around 2d axis labels
     # Returns 'x{}' | 'y{}'
-    def _get_label(x_or_y, row, col, cnt, shared_axes):
+    def _get_label(x_or_y, r, c, cnt, shared_axes):
         # Default label (given strictly by cnt)
         label = "{x_or_y}{cnt}".format(x_or_y=x_or_y, cnt=cnt)
 
         if isinstance(shared_axes, bool):
             if shared_axes:
                 if x_or_y == 'x':
-                    label = "{x_or_y}{c}".format(x_or_y=x_or_y, c=col+1)
+                    label = "{x_or_y}{c}".format(x_or_y=x_or_y, c=c+1)
                 if x_or_y == 'y':
-                    label = "{x_or_y}{r}".format(x_or_y=x_or_y, r=row+1)
+                    label = "{x_or_y}{r}".format(x_or_y=x_or_y, r=r+1)
 
         if isinstance(shared_axes, list):
             if isinstance(shared_axes[0], tuple):
                 shared_axes = [shared_axes]  # TODO put this elsewhere
             for shared_axis in shared_axes:
-                if (row, col) in shared_axis:
+                if (r+1, c+1) in shared_axis:
                     label = {
-                        'x': "x{0}".format(shared_axis[0][1]+1),
-                        'y': "y{0}".format(shared_axis[0][0]+1)
+                        'x': "x{0}".format(shared_axis[0][1]),
+                        'y': "y{0}".format(shared_axis[0][0])
                     }[x_or_y]
 
         return label
 
     # Function handling logic around 2d axis anchors
     # Return 'x{}' | 'y{}' | 'free' | False
-    def _get_anchors(row, col, x_cnt, y_cnt, shared_xaxes, shared_yaxes):
+    def _get_anchors(r, c, x_cnt, y_cnt, shared_xaxes, shared_yaxes):
         # Default anchors (give strictly by cnt)
         x_anchor = "y{y_cnt}".format(y_cnt=y_cnt)
         y_anchor = "x{x_cnt}".format(x_cnt=x_cnt)
 
         if isinstance(shared_xaxes, bool):
             if shared_xaxes:
-                if row == 0:
-                    x_anchor = "y{col_cnt}".format(col_cnt=col+1)
+                if r == 0:
+                    x_anchor = "y{col_cnt}".format(col_cnt=c+1)
                 else:
                     x_anchor = False
                     y_anchor = 'free'
-                    if shared_yaxes and col > 0:  # TODO covers all cases?
+                    if shared_yaxes and c > 0:  # TODO covers all cases?
                         y_anchor = False
                     return x_anchor, y_anchor
 
@@ -838,18 +838,18 @@ def make_subplots(rows=1, cols=1,
             if isinstance(shared_xaxes[0], tuple):
                 shared_xaxes = [shared_xaxes]  # TODO put this elsewhere
             for shared_xaxis in shared_xaxes:
-                if (row, col) in shared_xaxis[1:]:
+                if (r+1, c+1) in shared_xaxis[1:]:
                     x_anchor = False
                     y_anchor = 'free'  # TODO covers all cases?
 
         if isinstance(shared_yaxes, bool):
             if shared_yaxes:
-                if col == 0:
-                    y_anchor = "x{row_cnt}".format(row_cnt=row+1)
+                if c == 0:
+                    y_anchor = "x{row_cnt}".format(row_cnt=r+1)
                 else:
                     y_anchor = False
                     x_anchor = 'free'
-                    if shared_xaxes and row > 0:  # TODO covers all cases?
+                    if shared_xaxes and r > 0:  # TODO covers all cases?
                         x_anchor = False
                     return x_anchor, y_anchor
 
@@ -857,7 +857,7 @@ def make_subplots(rows=1, cols=1,
             if isinstance(shared_yaxes[0], tuple):
                 shared_yaxes = [shared_yaxes]  # TODO put this elsewhere
             for shared_yaxis in shared_yaxes:
-                if (row, col) in shared_yaxis[1:]:
+                if (r+1, c+1) in shared_yaxis[1:]:
                     y_anchor = False
                     x_anchor = 'free'  # TODO covers all cases?
 
