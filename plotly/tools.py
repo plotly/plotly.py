@@ -788,7 +788,8 @@ def make_subplots(rows=1, cols=1,
     # [grid_ref] Initialize the grid and insets' axis-reference lists
     grid_ref = [[None for c in range(cols)] for r in range(rows)]
     insets_ref = [None for inset in range(len(insets))] if insets else None
-    fig = dict(layout=graph_objs.Layout())  # init layout object
+
+    layout = graph_objs.Layout()  # init layout object
 
     # Function handling logic around 2d axis labels
     # Returns 'x{}' | 'y{}'
@@ -1021,7 +1022,8 @@ def make_subplots(rows=1, cols=1,
                     grid_str[inset['cell'][0]][inset['cell'][1]])
             print('')
 
-    return graph_objs.Figure(fig)  # forces us to validate what we just did...
+    fig = graph_objs.Figure(layout=layout)
+    return fig
 
 
 def get_valid_graph_obj(obj, obj_type=None):
