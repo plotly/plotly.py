@@ -705,6 +705,11 @@ def make_subplots(rows=1, cols=1,
     # Throw exception if non-valid key / fill in defaults
     def _check_keys_and_fill(name, arg, defaults):
         def _checks(item, defaults):
+            if item is None:
+                return
+            if not isinstance(item, dict):
+                raise Exception("Items in keyword argument '{name}' must be "
+                                "dictionaries or None".format(name=name))
             for k in item.keys():
                 if k not in defaults.keys():
                     raise Exception("Invalid key '{k}' in keyword "
@@ -715,8 +720,7 @@ def make_subplots(rows=1, cols=1,
         for arg_i in arg:
             if isinstance(arg_i, list):
                 for arg_ii in arg_i:
-                    if arg_ii is not None:  # for specs[i][j] == None
-                        _checks(arg_ii, defaults)
+                    _checks(arg_ii, defaults)
             elif isinstance(arg_i, dict):
                 _checks(arg_i, defaults)
 
