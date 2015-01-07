@@ -863,8 +863,8 @@ def make_subplots(rows=1, cols=1,
 
         return x_anchor, y_anchor
 
-    # Function pasting x/y domains in fig object (2d case)
-    def _add_domain(fig, x_or_y, label, domain, anchor, position):
+    # Function pasting x/y domains in layout object (2d case)
+    def _add_domain(layout, x_or_y, label, domain, anchor, position):
         name = label[0] + 'axis' + label[1:]
         graph_obj = '{X_or_Y}Axis'.format(X_or_Y=x_or_y.upper())
         axis = getattr(graph_objs, graph_obj)(domain=domain)
@@ -872,13 +872,12 @@ def make_subplots(rows=1, cols=1,
             axis['anchor'] = anchor
         if position:  # N.B. No need to add position == 0 to axis
             axis['position'] = position
-        fig['layout'][name] = axis
+        layout[name] = axis
 
-    # Function pasting x/y domains in fig object (3d case)
-    def _add_domain_is_3d(fig, s_cnt, x_domain, y_domain):
-        scene_name = "scene{s_cnt}".format(s_cnt=s_cnt)
+    # Function pasting x/y domains in layout object (3d case)
+    def _add_domain_is_3d(layout, s_label, x_domain, y_domain):
         scene = graph_objs.Scene(domain={'x': x_domain, 'y': y_domain})
-        fig['layout'][scene_name] = scene
+        layout[s_label] = scene
 
     x_cnt = y_cnt = s_cnt = 1  # subplot axis/scene counters
 
