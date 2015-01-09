@@ -86,7 +86,7 @@ def test_insets_wrong_cell_row():
 def test_insets_wrong_cell_col():
     fig = tls.make_subplots(insets=([{'cell': (1, 0)}]))
 
-def test_get_single_plot():
+def test_single_plot():
     expected = Figure(
         data=Data(),
         layout=Layout(
