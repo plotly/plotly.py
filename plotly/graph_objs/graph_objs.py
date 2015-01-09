@@ -936,6 +936,12 @@ def get_patched_figure_class(Figure):
             raise Exception("In order to use Figure.append_trace, "
                             "you must first use tools.make_subplots "
                             "to create a subplot grid.")
+        if row <= 0:
+            raise Exception("Row value is out of range. "
+                            "Note: the starting cell is (1, 1)")
+        if col <= 0:
+            raise Exception("Col value is out of range. "
+                            "Note: the starting cell is (1, 1)")
         try:
             ref = grid_ref[row-1][col-1]
         except IndexError:
