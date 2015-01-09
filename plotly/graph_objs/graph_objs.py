@@ -921,20 +921,43 @@ def get_patched_figure_class(Figure):
     Figure.__init__ = __init__  # override method!
 
     def print_grid(self):
+        """Print a visual layout of the figure's axes arrangement.
+
+        This is only valid for figures that are created
+        with plotly.tools.make_subplots.
+        """
         try:
             grid_str = self._grid_str
         except KeyError:
-            raise Exception("Use tools.make_subplots "
+            raise Exception("Use plotly.tools.make_subplots "
                             "to create a subplot grid.")
         print(grid_str)
     Figure.print_grid = print_grid
 
     def append_trace(self, trace, row, col):
+        """ Helper function to add a data traces to your figure
+        that is bound to axes at the row, col index.
+
+        The row, col index is generated from figures created with
+        plotly.tools.make_subplots and can be viewed with Figure.print_grid.
+
+        Arguments:
+
+        trace (plotly trace object):
+            The data trace to be bound.
+
+        row (int):
+            Subplot row index on the subplot grid (see Figure.print_grid)
+
+        col (int):
+            Subplot column index on the subplot grid (see Figure.print_grid)
+
+        """
         try:
             grid_ref = self._grid_ref
         except KeyError:
             raise Exception("In order to use Figure.append_trace, "
-                            "you must first use tools.make_subplots "
+                            "you must first use plotly.tools.make_subplots "
                             "to create a subplot grid.")
         if row <= 0:
             raise Exception("Row value is out of range. "
