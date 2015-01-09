@@ -872,7 +872,7 @@ def make_subplots(rows=1, cols=1,
         axis = getattr(graph_objs, graph_obj)(domain=domain)
         if anchor:
             axis['anchor'] = anchor
-        if position:  # N.B. No need to add position == 0 to axis
+        if isinstance(position, float):
             axis['position'] = position
         layout[name] = axis
 
@@ -935,14 +935,20 @@ def make_subplots(rows=1, cols=1,
 
                 # Add a xaxis to layout (N.B anchor == False -> no axis)
                 if x_anchor:
-                    x_position = y_domain[0] if x_anchor == 'free' else 0
+                    if x_anchor == 'free':
+                        x_position = y_domain[0]
+                    else:
+                        x_position = False
                     _add_domain(layout, 'x', x_label, x_domain,
                                 x_anchor, x_position)
                     x_cnt += 1
 
                 # Add a yaxis to layout (N.B anchor == False -> no axis)
                 if y_anchor:
-                    y_position = x_domain[0] if y_anchor == 'free' else 0
+                    if y_anchor == 'free':
+                        y_position = x_domain[0]
+                    else:
+                        y_position = False
                     _add_domain(layout, 'y', y_label, y_domain,
                                 y_anchor, y_position)
                     y_cnt += 1
