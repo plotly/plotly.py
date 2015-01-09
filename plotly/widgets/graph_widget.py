@@ -128,3 +128,49 @@ class Graph(widgets.DOMWidget):
     def hover(self, hover_obj):
         message = {'hover': hover_obj, 'graphId': self._graphId}
         self._handle_outgoing_message(message)
+
+    def add_traces(self, traces, new_indices=None):
+        """
+        Add new data traces to a graph.
+
+        If `new_indices` isn't specified, they are simply appended.
+
+        :param (list[dict]) traces: The list of trace dicts
+        :param (list[int]|None|optional) new_indices: The final indices the
+            added traces should occupy.
+
+        """
+        body = {'traces': traces}
+        if new_indices is not None:
+            body['newIndices'] = new_indices
+        message = {'addTraces': body}
+        self._handle_outgoing_message(message)
+
+    def delete_traces(self, indices):
+        """
+        Delete data traces from a graph.
+
+        :param (list[int]) indices: The indices of the traces to be removed
+
+        """
+        message = {'deleteTraces': {'indices': indices}}
+        self._handle_outgoing_message(message)
+
+    def move_traces(self, current_indices, new_indices=None):
+        """
+        Move data traces around in a graph.
+
+        If new_indices isn't specified, the traces at the locations specified
+        in current_indices are moved to the end of the data array.
+
+        :param (list[int]) current_indices: The initial indices the traces to
+        be moved occupy.
+        :param (list[int]|None|optional) new_indices: The final indices the
+            traces to be moved will occupy.
+
+        """
+        body = {'currentIndices': current_indices}
+        if new_indices is not None:
+            body['newIndices'] = new_indices
+        message = {'moveTraces': body}
+        self._handle_outgoing_message(message)
