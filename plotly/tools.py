@@ -819,6 +819,9 @@ def make_subplots(rows=1, cols=1,
 
         return label
 
+    # Row in grid of anchor row if shared_xaxes=True
+    ANCHOR_ROW = 0 if ROW_DIR > 0 else rows - 1
+
     # Function handling logic around 2d axis anchors
     # Return 'x{}' | 'y{}' | 'free' | False
     def _get_anchors(r, c, x_cnt, y_cnt, shared_xaxes, shared_yaxes):
@@ -828,12 +831,10 @@ def make_subplots(rows=1, cols=1,
 
         if isinstance(shared_xaxes, bool):
             if shared_xaxes:
-                if r == 0:
-                    x_anchor = "y{col_cnt}".format(col_cnt=c+1)
-                else:
+                if r != ANCHOR_ROW:
                     x_anchor = False
                     y_anchor = 'free'
-                    if shared_yaxes and c > 0:  # TODO covers all cases?
+                    if shared_yaxes and c != 0:  # TODO covers all cases?
                         y_anchor = False
                     return x_anchor, y_anchor
 
@@ -847,12 +848,10 @@ def make_subplots(rows=1, cols=1,
 
         if isinstance(shared_yaxes, bool):
             if shared_yaxes:
-                if c == 0:
-                    y_anchor = "x{row_cnt}".format(row_cnt=r+1)
-                else:
+                if c != 0:
                     y_anchor = False
                     x_anchor = 'free'
-                    if shared_xaxes and r > 0:  # TODO covers all cases?
+                    if shared_xaxes and r != ANCHOR_ROW:  # TODO all cases?
                         x_anchor = False
                     return x_anchor, y_anchor
 
