@@ -557,18 +557,20 @@ def make_subplots(rows=1, cols=1,
 
     shared_xaxes (kwarg, boolean or list, default=False)
         Assign shared x axes.
-        If True, all x axes are shared.
+        If True, subplots in the same grid column have one common
+        shared x-axis at the bottom of the gird.
 
         To assign shared x axes per subplot grid cell (see 'specs'),
-        send list (or list of lists, one list per shared axis)
+        send list (or list of lists, one list per shared x axis)
         of cell index tuples.
 
     shared_yaxes (kwarg, boolean or list, default=False)
         Assign shared y axes.
-        If True, all y axes are shared.
+        If True, subplots in the same grid row have one common
+        shared y-axis on the left-hand side of the gird.
 
         To assign shared y axes per subplot grid cell (see 'specs'),
-        send list (or list of lists, one list per shared axis)
+        send list (or list of lists, one list per shared y axis)
         of cell index tuples.
 
     start_cell (kwarg, 'bottom-left' or 'top-left', default='top-left')
