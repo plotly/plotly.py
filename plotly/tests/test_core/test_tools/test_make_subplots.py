@@ -1226,7 +1226,8 @@ def test_shared_xaxes():
             ),
             yaxis1=YAxis(
                 domain=[0.575, 1.0],
-                anchor='free'
+                anchor='free',
+                position=0.0
             ),
             yaxis2=YAxis(
                 domain=[0.575, 1.0],
@@ -1286,7 +1287,8 @@ def test_shared_xaxes_bottom_left():
             ),
             yaxis4=YAxis(
                 domain=[0.575, 1.0],
-                anchor='free'
+                anchor='free',
+                position=0.0
             ),
             yaxis5=YAxis(
                 domain=[0.575, 1.0],
@@ -1389,7 +1391,8 @@ def test_shared_yaxes():
             ),
             xaxis10=XAxis(
                 domain=[0.55, 1.0],
-                anchor='free'
+                anchor='free',
+                position=0.0
             ),
             xaxis2=XAxis(
                 domain=[0.55, 1.0],
@@ -1463,19 +1466,23 @@ def test_shared_xaxes_yaxes():
             ),
             xaxis2=XAxis(
                 domain=[0.35555555555555557, 0.6444444444444445],
-                anchor='free'
+                anchor='free',
+                position=0.0
             ),
             xaxis3=XAxis(
                 domain=[0.7111111111111111, 1.0],
-                anchor='free'
+                anchor='free',
+                position=0.0
             ),
             yaxis1=YAxis(
                 domain=[0.7333333333333333, 1.0],
-                anchor='free'
+                anchor='free',
+                position=0.0
             ),
             yaxis2=YAxis(
                 domain=[0.36666666666666664, 0.6333333333333333],
-                anchor='free'
+                anchor='free',
+                position=0.0
             ),
             yaxis3=YAxis(
                 domain=[0.0, 0.26666666666666666],
@@ -1499,11 +1506,13 @@ def test_shared_xaxes_yaxes_bottom_left():
             ),
             xaxis2=XAxis(
                 domain=[0.35555555555555557, 0.6444444444444445],
-                anchor='free'
+                anchor='free',
+                position=0.0
             ),
             xaxis3=XAxis(
                 domain=[0.7111111111111111, 1.0],
-                anchor='free'
+                anchor='free',
+                position=0.0
             ),
             yaxis1=YAxis(
                 domain=[0.0, 0.26666666666666666],
@@ -1511,11 +1520,13 @@ def test_shared_xaxes_yaxes_bottom_left():
             ),
             yaxis2=YAxis(
                 domain=[0.36666666666666664, 0.6333333333333333],
-                anchor='free'
+                anchor='free',
+                position=0.0
             ),
             yaxis3=YAxis(
                 domain=[0.7333333333333333, 1.0],
-                anchor='free'
+                anchor='free',
+                position=0.0
             )
         )
     )
@@ -1548,7 +1559,8 @@ def test_shared_axes_list():
             ),
             yaxis2=YAxis(
                 domain=[0.0, 0.425],
-                anchor='free'
+                anchor='free',
+                position=0.0
             ),
             yaxis3=YAxis(
                 domain=[0.0, 0.425],
@@ -1572,7 +1584,8 @@ def test_shared_axes_list_bottom_left():
             ),
             xaxis2=XAxis(
                 domain=[0.55, 1.0],
-                anchor='free'
+                anchor='free',
+                position=0.0
             ),
             xaxis3=XAxis(
                 domain=[0.55, 1.0],
@@ -1584,7 +1597,8 @@ def test_shared_axes_list_bottom_left():
             ),
             yaxis2=YAxis(
                 domain=[0.575, 1.0],
-                anchor='free'
+                anchor='free',
+                position=0.0
             ),
             yaxis3=YAxis(
                 domain=[0.575, 1.0],
@@ -1633,7 +1647,8 @@ def test_shared_axes_list_of_lists():
             ),
             yaxis4=YAxis(
                 domain=[0.0, 0.425],
-                anchor='free'
+                anchor='free',
+                position=0.0
             ),
             yaxis5=YAxis(
                 domain=[0.0, 0.425],
@@ -1687,7 +1702,8 @@ def test_shared_axes_list_of_lists_bottom_left():
             ),
             yaxis4=YAxis(
                 domain=[0.575, 1.0],
-                anchor='free'
+                anchor='free',
+                position=0.0
             ),
             yaxis5=YAxis(
                 domain=[0.575, 1.0],
