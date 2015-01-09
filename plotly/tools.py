@@ -500,43 +500,44 @@ def make_subplots(rows=1, cols=1,
 
     Example 1:
     # stack two subplots vertically
-    fig = tools.make_subplots(rows=2, print_grid=True)
+    fig = tools.make_subplots(rows=2)
 
-    This is the format of your plot grid!
+    This is the format of your plot grid:
     [ (1,1) x1,y1 ]
     [ (2,1) x2,y2 ]
 
-    fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x1', yaxis='y1')]
+    fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2])]
     fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x2', yaxis='y2')]
 
     Example 2:
     # subplots with shared x axes
-    fig = tools.make_subplots(rows=2, shared_xaxes=True, print_grid=True)
+    fig = tools.make_subplots(rows=2, shared_xaxes=True)
 
-    TODO What's the default behavior here??
+    This is the format of your plot grid:
+    [ (1,1) x1,y1 ]
+    [ (2,1) x1,y2 ]
 
-    fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], yaxis='y1')]
+
+    fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2])]
     fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], yaxis='y2')]
 
     Example 3:
     # irregular subplot layout (more examples below under 'specs')
     fig = tools.make_subplots(rows=2, cols=2,
                               specs=[[{}, {}],
-                                     [{'colspan': 2}, None]],
-                              print_grid=True)
+                                     [{'colspan': 2}, None]])
 
     This is the format of your plot grid!
     [ (1,1) x1,y1 ]  [ (1,2) x2,y2 ]
     [ (2,1) x3,y3           -      ]
 
-    fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x1', yaxis='y1')]
+    fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2])]
     fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x2', yaxis='y2')]
     fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x3', yaxis='y3')]
 
     Example 4:
     # insets
-    fig = tools.make_subplots(insets=[{'cell': (1,1), 'l': 0.7, 'b': 0.3}],
-                              print_grid=True)
+    fig = tools.make_subplots(insets=[{'cell': (1,1), 'l': 0.7, 'b': 0.3}])
 
     This is the format of your plot grid!
     [ (1,1) x1,y1 ]
