@@ -1208,7 +1208,53 @@ def test_specs_padding_bottom_left():
                            start_cell='bottom-left')
     assert fig == expected
 
-# def test_shared_xaxes():
+def test_shared_xaxes():
+    expected = Figure(
+        data=Data(),
+        layout=Layout(
+            xaxis1=XAxis(
+                domain=[0.0, 0.2888888888888889],
+                anchor='y4'
+            ),
+            xaxis2=XAxis(
+                domain=[0.35555555555555557, 0.6444444444444445],
+                anchor='y5'
+            ),
+            xaxis3=XAxis(
+                domain=[0.7111111111111111, 1.0],
+                anchor='y6'
+            ),
+            yaxis1=YAxis(
+                domain=[0.575, 1.0],
+                anchor='free'
+            ),
+            yaxis2=YAxis(
+                domain=[0.575, 1.0],
+                anchor='free',
+                position=0.35555555555555557
+            ),
+            yaxis3=YAxis(
+                domain=[0.575, 1.0],
+                anchor='free',
+                position=0.7111111111111111
+            ),
+            yaxis4=YAxis(
+                domain=[0.0, 0.425],
+                anchor='x1'
+            ),
+            yaxis5=YAxis(
+                domain=[0.0, 0.425],
+                anchor='x2'
+            ),
+            yaxis6=YAxis(
+                domain=[0.0, 0.425],
+                anchor='x3'
+            )
+        )
+    )
+
+    fig = tls.make_subplots(rows=2, cols=3, shared_xaxes=True)
+    assert fig == expected
 
 def test_shared_xaxes_bottom_left():
     expected = Figure(
@@ -1313,19 +1359,19 @@ def test_shared_yaxes():
             ),
             yaxis2=YAxis(
                 domain=[0.636, 0.788],
-                anchor='x2'
+                anchor='x3'
             ),
             yaxis3=YAxis(
                 domain=[0.424, 0.576],
-                anchor='x3'
+                anchor='x5'
             ),
             yaxis4=YAxis(
                 domain=[0.212, 0.364],
-                anchor='x4'
+                anchor='x7'
             ),
             yaxis5=YAxis(
                 domain=[0.0, 0.152],
-                anchor='x5'
+                anchor='x9'
             )
         )
     )
@@ -1333,7 +1379,115 @@ def test_shared_yaxes():
     fig = tls.make_subplots(rows=5, cols=2, shared_yaxes=True)
     assert fig == expected
 
-# def test_shared_xaxes_yaxes():
+def test_shared_yaxes():
+    expected = Figure(
+        data=Data(),
+        layout=Layout(
+            xaxis1=XAxis(
+                domain=[0.0, 0.45],
+                anchor='y1'
+            ),
+            xaxis10=XAxis(
+                domain=[0.55, 1.0],
+                anchor='free'
+            ),
+            xaxis2=XAxis(
+                domain=[0.55, 1.0],
+                anchor='free',
+                position=0.848
+            ),
+            xaxis3=XAxis(
+                domain=[0.0, 0.45],
+                anchor='y2'
+            ),
+            xaxis4=XAxis(
+                domain=[0.55, 1.0],
+                anchor='free',
+                position=0.636
+            ),
+            xaxis5=XAxis(
+                domain=[0.0, 0.45],
+                anchor='y3'
+            ),
+            xaxis6=XAxis(
+                domain=[0.55, 1.0],
+                anchor='free',
+                position=0.424
+            ),
+            xaxis7=XAxis(
+                domain=[0.0, 0.45],
+                anchor='y4'
+            ),
+            xaxis8=XAxis(
+                domain=[0.55, 1.0],
+                anchor='free',
+                position=0.212
+            ),
+            xaxis9=XAxis(
+                domain=[0.0, 0.45],
+                anchor='y5'
+            ),
+            yaxis1=YAxis(
+                domain=[0.848, 1.0],
+                anchor='x1'
+            ),
+            yaxis2=YAxis(
+                domain=[0.636, 0.788],
+                anchor='x3'
+            ),
+            yaxis3=YAxis(
+                domain=[0.424, 0.576],
+                anchor='x5'
+            ),
+            yaxis4=YAxis(
+                domain=[0.212, 0.364],
+                anchor='x7'
+            ),
+            yaxis5=YAxis(
+                domain=[0.0, 0.152],
+                anchor='x9'
+            )
+        )
+    )
+
+    fig = tls.make_subplots(rows=5, cols=2, shared_yaxes=True)
+    assert fig == expected
+
+def test_shared_xaxes_yaxes():
+    expected = Figure(
+        data=Data(),
+        layout=Layout(
+            xaxis1=XAxis(
+                domain=[0.0, 0.2888888888888889],
+                anchor='y3'
+            ),
+            xaxis2=XAxis(
+                domain=[0.35555555555555557, 0.6444444444444445],
+                anchor='free'
+            ),
+            xaxis3=XAxis(
+                domain=[0.7111111111111111, 1.0],
+                anchor='free'
+            ),
+            yaxis1=YAxis(
+                domain=[0.7333333333333333, 1.0],
+                anchor='free'
+            ),
+            yaxis2=YAxis(
+                domain=[0.36666666666666664, 0.6333333333333333],
+                anchor='free'
+            ),
+            yaxis3=YAxis(
+                domain=[0.0, 0.26666666666666666],
+                anchor='x1'
+            )
+        )
+    )
+
+    fig = tls.make_subplots(rows=3, cols=3,
+                            shared_xaxes=True, shared_yaxes=True)
+    assert fig == expected
+
 
 def test_shared_xaxes_yaxes_bottom_left():
     expected = Figure(
@@ -1371,7 +1525,42 @@ def test_shared_xaxes_yaxes_bottom_left():
                             start_cell='bottom-left')
     assert fig == expected
 
-# def test_shared_axes_list():
+def test_shared_axes_list():
+    expected = Figure(
+        data=Data(),
+        layout=Layout(
+            xaxis1=XAxis(
+                domain=[0.0, 0.45],
+                anchor='y1'
+            ),
+            xaxis2=XAxis(
+                domain=[0.55, 1.0],
+                anchor='free',
+                position=0.575
+            ),
+            xaxis3=XAxis(
+                domain=[0.55, 1.0],
+                anchor='y3'
+            ),
+            yaxis1=YAxis(
+                domain=[0.575, 1.0],
+                anchor='x1'
+            ),
+            yaxis2=YAxis(
+                domain=[0.0, 0.425],
+                anchor='free'
+            ),
+            yaxis3=YAxis(
+                domain=[0.0, 0.425],
+                anchor='x3'
+            )
+        )
+    )
+
+    fig = tls.make_subplots(rows=2, cols=2,
+                            shared_xaxes=[(1,1), (2,1)],
+                            shared_yaxes=[(1,1), (1,2)])
+    assert fig == expected
 
 def test_shared_axes_list_bottom_left():
     expected = Figure(
@@ -1410,7 +1599,59 @@ def test_shared_axes_list_bottom_left():
                             start_cell='bottom-left')
     assert fig == expected
 
-# def test_shared_axes_list_of_lists():
+def test_shared_axes_list_of_lists():
+    expected = Figure(
+        data=Data(),
+        layout=Layout(
+            xaxis1=XAxis(
+                domain=[0.0, 0.2888888888888889],
+                anchor='y1'
+            ),
+            xaxis2=XAxis(
+                domain=[0.35555555555555557, 0.6444444444444445],
+                anchor='y2'
+            ),
+            xaxis3=XAxis(
+                domain=[0.7111111111111111, 1.0],
+                anchor='y3'
+            ),
+            xaxis4=XAxis(
+                domain=[0.35555555555555557, 0.6444444444444445],
+                anchor='y5'
+            ),
+            yaxis1=YAxis(
+                domain=[0.575, 1.0],
+                anchor='x1'
+            ),
+            yaxis2=YAxis(
+                domain=[0.575, 1.0],
+                anchor='x2'
+            ),
+            yaxis3=YAxis(
+                domain=[0.575, 1.0],
+                anchor='x3'
+            ),
+            yaxis4=YAxis(
+                domain=[0.0, 0.425],
+                anchor='free'
+            ),
+            yaxis5=YAxis(
+                domain=[0.0, 0.425],
+                anchor='x4'
+            ),
+            yaxis6=YAxis(
+                domain=[0.0, 0.425],
+                anchor='free',
+                position=0.7111111111111111
+            )
+        )
+    )
+
+    fig = tls.make_subplots(rows=2, cols=3,
+                            shared_xaxes=[[(1,1), (2,1)],
+                                          [(1,3), (2,3)]])
+    assert fig == expected
+
 
 def test_shared_axes_list_of_lists_bottom_left():
     expected = Figure(
