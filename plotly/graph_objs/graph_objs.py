@@ -919,6 +919,16 @@ def get_patched_figure_class(Figure):
                 kwargs['layout'] = Layout()
         super(Figure, self).__init__(*args, **kwargs)
     Figure.__init__ = __init__  # override method!
+
+    def print_grid(self):
+        try:
+            grid_str = self['_grid_str']
+        except KeyError:
+            raise Exception("Use tools.make_subplots "
+                            "to create a subplot grid.")
+        print(grid_str)
+    Figure.print_grid = print_grid
+
     return Figure
 
 Figure = get_patched_figure_class(Figure)
