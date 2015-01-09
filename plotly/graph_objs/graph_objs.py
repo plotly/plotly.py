@@ -929,6 +929,37 @@ def get_patched_figure_class(Figure):
         print(grid_str)
     Figure.print_grid = print_grid
 
+    def append_trace(self, trace, row, col):
+        try:
+            grid_ref = self['_grid_ref']
+        except KeyError:
+            raise Exception("In order to use Figure.append_trace, "
+                            "you must first use tools.make_subplots "
+                            "to create a subplot grid.")
+        try:
+            ref = grid_ref[row-1][col-1]
+        except IndexError:
+            raise Exception("The (row, col) pair sent is out of range. "
+                            "Use Figure.print_grid to view the subplot grid. ")
+        if 'scene' in ref[0]:
+            trace['scene'] = ref[0]
+            if ref[0] not in self['layout']:
+                raise Exception("Something went wrong. "
+                                "The scene object for ({r},{c}) subplot cell "
+                                "got deleted.".format(r=row, c=col))
+        else:
+            xaxis_key = "xaxis{ref}".format(ref=ref[0][1:])
+            yaxis_key = "yaxis{ref}".format(ref=ref[1][1:])
+            if (xaxis_key not in self['layout']
+                    or yaxis_key not in self['layout']):
+                raise Exception("Something went wrong. "
+                                "An axis object for ({r},{c}) subplot cell "
+                                "got deleted.".format(r=row, c=col))
+            trace['xaxis'] = ref[0]
+            trace['yaxis'] = ref[1]
+        self['data'] += [trace]
+    Figure.append_trace = append_trace
+
     return Figure
 
 Figure = get_patched_figure_class(Figure)
