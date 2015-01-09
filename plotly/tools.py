@@ -958,10 +958,10 @@ def make_subplots(rows=1, cols=1,
 
             # Throw exception if r | c is out of range
             if not (0 <= r < rows):
-                raise Exception("Some 'cell' row value it out of range. "
+                raise Exception("Some 'cell' row value is out of range. "
                                 "Note: the starting cell is (1, 1)")
             if not (0 <= c < cols):
-                raise Exception("Some 'cell' col value it out of range. "
+                raise Exception("Some 'cell' col value is out of range. "
                                 "Note: the starting cell is (1, 1)")
 
             # Get inset x domain using grid
