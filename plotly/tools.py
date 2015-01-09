@@ -1015,7 +1015,7 @@ def make_subplots(rows=1, cols=1,
     empty_str = '    (empty) '   # empty cell string
 
     # Init grid_str with intro message
-    grid_str = "This is the format of your plot grid!\n"
+    grid_str = "This is the format of your plot grid:\n"
 
     # Init tmp list of lists of strings (sorta like 'grid_ref' but w/ strings)
     _tmp = [['' for c in range(cols)] for r in range(rows)]
