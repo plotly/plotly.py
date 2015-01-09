@@ -493,7 +493,7 @@ def get_subplots(rows=1, columns=1, print_grid=False, **kwargs):
 
 def make_subplots(rows=1, cols=1,
                   shared_xaxes=False, shared_yaxes=False,
-                  start_cell='top-left', print_grid=False,
+                  start_cell='top-left', print_grid=True,
                   **kwargs):
     """Return an instance of plotly.graph_objs.Figure
     with the subplots domain set in 'layout'.
@@ -575,7 +575,7 @@ def make_subplots(rows=1, cols=1,
         Choose the starting cell in the subplot grid used to set the
         domains of the subplots.
 
-    print_grid (kwarg, boolean, default=False):
+    print_grid (kwarg, boolean, default=True):
         If True, prints a tab-delimited string representation of
         your plot grid.
 
