@@ -1087,8 +1087,8 @@ def make_subplots(rows=1, cols=1,
 
     fig = graph_objs.Figure(layout=layout)
 
-    fig['_grid_ref'] = grid_ref
-    fig['_grid_str'] = grid_str
+    fig._grid_ref = grid_ref
+    fig._grid_str = grid_str
 
     return fig
 

@@ -922,7 +922,7 @@ def get_patched_figure_class(Figure):
 
     def print_grid(self):
         try:
-            grid_str = self['_grid_str']
+            grid_str = self._grid_str
         except KeyError:
             raise Exception("Use tools.make_subplots "
                             "to create a subplot grid.")
@@ -931,7 +931,7 @@ def get_patched_figure_class(Figure):
 
     def append_trace(self, trace, row, col):
         try:
-            grid_ref = self['_grid_ref']
+            grid_ref = self._grid_ref
         except KeyError:
             raise Exception("In order to use Figure.append_trace, "
                             "you must first use tools.make_subplots "
