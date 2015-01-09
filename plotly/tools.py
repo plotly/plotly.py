@@ -777,10 +777,10 @@ def make_subplots(rows=1, cols=1,
     height = (1. - vertical_spacing * (rows - 1)) / rows
 
     # Built row/col sequence using 'row_dir' and 'col_dir'
-    col_dir = START_CELL['col_dir']
-    col_seq = range(cols)[::col_dir]
-    row_dir = START_CELL['row_dir']
-    row_seq = range(rows)[::row_dir]
+    COL_DIR = START_CELL['col_dir']
+    ROW_DIR = START_CELL['row_dir']
+    col_seq = range(cols)[::COL_DIR]
+    row_seq = range(rows)[::ROW_DIR]
 
     # [grid] Build subplot grid (coord tuple of cell)
     grid = [[((width + horizontal_spacing) * c,
@@ -908,7 +908,7 @@ def make_subplots(rows=1, cols=1,
             x_domain = [x_s, x_e]
 
             # Get y domain (dep. on row_dir) using grid & r_spanned
-            if row_dir > 0:
+            if ROW_DIR > 0:
                 y_s = grid[r][c][1] + spec['b']
                 y_e = grid[r_spanned][c][1] + height - spec['t']
             else:
