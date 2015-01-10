@@ -941,6 +941,17 @@ def get_patched_figure_class(Figure):
         The row, col index is generated from figures created with
         plotly.tools.make_subplots and can be viewed with Figure.print_grid.
 
+        Example:
+        # stack two subplots vertically
+        fig = tools.make_subplots(rows=2)
+
+        This is the format of your plot grid:
+        [ (1,1) x1,y1 ]
+        [ (2,1) x2,y2 ]
+
+        fig.append_trace(Scatter(x=[1,2,3], y=[2,1,2]), 1, 1)
+        fig.append_trace(Scatter(x=[1,2,3], y=[2,1,2]), 2, 1)
+
         Arguments:
 
         trace (plotly trace object):

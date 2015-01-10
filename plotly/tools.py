@@ -511,6 +511,8 @@ def make_subplots(rows=1, cols=1,
     fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2])]
     fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x2', yaxis='y2')]
 
+    # or see Figure.append_trace
+
     Example 2:
     # subplots with shared x axes
     fig = tools.make_subplots(rows=2, shared_xaxes=True)
