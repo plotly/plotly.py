@@ -401,19 +401,19 @@ def get_subplots(rows=1, columns=1, print_grid=False, **kwargs):
 
     Keywords arguments with constant defaults:
 
-    rows (int, default=1):
+    rows (kwarg, int greater than 0, default=1):
         Number of rows, evenly spaced vertically on the figure.
 
-    columns (int, default=1):
+    columns (kwarg, int greater than 0, default=1):
         Number of columns, evenly spaced horizontally on the figure.
 
-    horizontal_spacing (float in [0,1], default=0.1):
+    horizontal_spacing (kwarg, float in [0,1], default=0.1):
         Space between subplot columns. Applied to all columns.
 
-    vertical_spacing (float in [0,1], default=0.05):
+    vertical_spacing (kwarg, float in [0,1], default=0.05):
         Space between subplot rows. Applied to all rows.
 
-    print_grid (True | False, default=False):
+    print_grid (kwarg, True | False, default=False):
         If True, prints a tab-delimited string representation
         of your plot grid.
 
@@ -433,10 +433,12 @@ def get_subplots(rows=1, columns=1, print_grid=False, **kwargs):
     )
 
     # Throw exception for non-integer rows and columns
-    if not isinstance(rows, int):
-        raise Exception("Keyword argument 'rows' must be an int")
-    if not isinstance(columns, int):
-        raise Exception("Keyword argument 'columns' must be an int")
+    if not isinstance(rows, int) or rows <= 0:
+        raise Exception("Keyword argument 'rows' "
+                        "must be an int greater than 0")
+    if not isinstance(columns, int) or columns <= 0:
+        raise Exception("Keyword argument 'columns' "
+                        "must be an int greater than 0")
 
     # Throw exception if non-valid kwarg is sent
     VALID_KWARGS = ['horizontal_spacing', 'vertical_spacing']
@@ -550,10 +552,10 @@ def make_subplots(rows=1, cols=1,
 
     Keywords arguments with constant defaults:
 
-    rows (kwarg, int, default=1):
+    rows (kwarg, int greater than 0, default=1):
         Number of rows in the subplot grid.
 
-    cols (kwarg, int, default=1):
+    cols (kwarg, int greater than 0, default=1):
         Number of columns in the subplot grid.
 
     shared_xaxes (kwarg, boolean or list, default=False)
@@ -651,10 +653,12 @@ def make_subplots(rows=1, cols=1,
     """
 
     # Throw exception for non-integer rows and cols
-    if not isinstance(rows, int):
-        raise Exception("Keyword argument 'rows' must be an int")
-    if not isinstance(cols, int):
-        raise Exception("Keyword argument 'cols' must be an int")
+    if not isinstance(rows, int) or rows <= 0:
+        raise Exception("Keyword argument 'rows' "
+                        "must be an int greater than 0")
+    if not isinstance(cols, int) or cols <= 0:
+        raise Exception("Keyword argument 'cols' "
+                        "must be an int greater than 0")
 
     # Dictionary of things start_cell
     START_CELL_all = {
