@@ -42,7 +42,7 @@ require(["widgets/js/widget"], function(WidgetManager){
 
             window.pingers[frameId] = setInterval(function() {
                 that.graphContentWindow = $('#'+frameId)[0].contentWindow;
-                that.graphContentWindow.postMessage({ping: true}, plotly_domain);
+                that.graphContentWindow.postMessage({task: 'ping'}, plotly_domain);
             }, 200);
 
             // Assign a message listener to the 'message' events

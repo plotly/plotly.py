@@ -119,17 +119,21 @@ class Graph(widgets.DOMWidget):
         self._handle_registration('zoom', callback, remove)
 
     def restyle(self, data, traces=None):
-        message = {'restyle': data, 'graphId': self._graphId}
+        message = {'task': 'restyle', 'update': data, 'graphId': self._graphId}
         if traces:
             message['traces'] = traces
         self._handle_outgoing_message(message)
 
     def relayout(self, layout):
-        message = {'relayout': layout, 'graphId': self._graphId}
+        message = {
+            'task': 'relayout', 'update': layout, 'graphId': self._graphId
+        }
         self._handle_outgoing_message(message)
 
     def hover(self, hover_obj):
-        message = {'hover': hover_obj, 'graphId': self._graphId}
+        message = {
+            'task': 'hover', 'event': hover_obj, 'graphId': self._graphId
+        }
         self._handle_outgoing_message(message)
 
     def add_traces(self, traces, new_indices=None):
@@ -143,10 +147,11 @@ class Graph(widgets.DOMWidget):
             added traces should occupy.
 
         """
-        body = {'traces': traces}
+        message = {
+            'task': 'addTraces', 'traces': traces, 'graphId': self._graphId
+        }
         if new_indices is not None:
-            body['newIndices'] = new_indices
-        message = {'addTraces': body}
+            message['newIndices'] = new_indices
         self._handle_outgoing_message(message)
 
     def delete_traces(self, indices):
@@ -156,7 +161,11 @@ class Graph(widgets.DOMWidget):
         :param (list[int]) indices: The indices of the traces to be removed
 
         """
-        message = {'deleteTraces': {'indices': indices}}
+        message = {
+            'task': 'deleteTraces',
+            'indices': indices,
+            'graphId': self._graphId
+        }
         self._handle_outgoing_message(message)
 
     def move_traces(self, current_indices, new_indices=None):
@@ -172,8 +181,11 @@ class Graph(widgets.DOMWidget):
             traces to be moved will occupy.
 
         """
-        body = {'currentIndices': current_indices}
+        message = {
+            'task': 'moveTraces',
+            'currentIndices': current_indices,
+            'graphId': self._graphId
+            }
         if new_indices is not None:
-            body['newIndices'] = new_indices
-        message = {'moveTraces': body}
+            message['newIndices'] = new_indices
         self._handle_outgoing_message(message)
