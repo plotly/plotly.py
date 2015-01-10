@@ -7,6 +7,8 @@ from IPython.html import widgets
 from IPython.utils.traitlets import Unicode
 from IPython.display import Javascript, display
 
+import plotly
+
 __all__ = None
 
 class Graph(widgets.DOMWidget):
@@ -85,6 +87,7 @@ class Graph(widgets.DOMWidget):
             self._handle_outgoing_message(message)
 
     def _handle_outgoing_message(self, message):
+        message['plotlyDomain'] = plotly.plotly.get_config()['plotly_domain']
         if self._graphId == '':
             self._clientMessages.append(message)
         else:
