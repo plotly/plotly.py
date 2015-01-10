@@ -12,6 +12,7 @@ import sys
 import threading
 import re
 import datetime
+import pytz
 
 try:
     import numpy
@@ -26,7 +27,7 @@ except ImportError:
     _pandas_imported = False
 
 try:
-    from sage.all import RR, ZZ
+    import sage.all
     _sage_imported = True
 except ImportError:
     _sage_imported = False
@@ -91,109 +92,168 @@ def ensure_dir_exists(directory):
             os.makedirs(directory)
 
 
+def iso_to_plotly_time_string(iso_string):
+    """Remove timezone info and replace 'T' delimeter with ' ' (ws)."""
+    # make sure we don't send timezone info to plotly
+    if (iso_string.split('-')[:3] is '00:00') or\
+            (iso_string.split('+')[0] is '00:00'):
+        raise Exception("Plotly won't accept timestrings with timezone info.\n"
+                        "All timestrings are assumed to be in UTC.")
+
+    iso_string = iso_string.replace('-00:00', '').replace('+00:00', '')
+
+    if iso_string.endswith('T00:00:00'):
+        return iso_string.replace('T00:00:00', '')
+    else:
+        return iso_string.replace('T', ' ')
+
+
 ### Custom JSON encoders ###
 class NotEncodable(Exception):
     pass
 
 
-class _plotlyJSONEncoder(json.JSONEncoder):
-    def numpyJSONEncoder(self, obj):
-        if not _numpy_imported:
-            raise NotEncodable
+class PlotlyJSONEncoder(json.JSONEncoder):
+    """
+    Meant to be passed as the `cls` kwarg to json.dumps(obj, cls=..)
 
-        if obj is numpy.ma.core.masked:
-            return float('nan')
+    See PlotlyJSONEncoder.default for more implementation information.
 
-        if type(obj).__module__.split('.')[0] == numpy.__name__:
-            return obj.tolist()
+    """
 
-        else:
-            raise NotEncodable
-
-    def datetimeJSONEncoder(self, obj):
+    def default(self, obj):
         """
-        if datetime or iterable of datetimes,
-        convert to a string that plotly understands
-        format as %Y-%m-%d %H:%M:%S.%f,
-                  %Y-%m-%d %H:%M:%S, or
-                  %Y-%m-%d
-        depending on what non-zero resolution was provided
+        Accept an object (of unknown type) and try to encode with priority:
+        1. builtin:     user-defined objects
+        2. sage:        sage math cloud
+        3. pandas:      dataframes/series
+        4. numpy:       ndarrays
+        5. datetime:    time/datetime objects
+
+        Each method throws a NotEncoded exception if it fails.
+
+        The default method will only get hit if the object is not a type that
+        is naturally encoded by json:
+
+            Normal objects:
+                dict                object
+                list, tuple         array
+                str, unicode        string
+                int, long, float    number
+                True                true
+                False               false
+                None                null
+
+            Extended objects:
+                float('nan')        'NaN'
+                float('infinity')   'Infinity'
+                float('-infinity')  '-Infinity'
+
+        Therefore, we only anticipate either unknown iterables or values here.
+
         """
+        # TODO: The ordering if these methods is *very* important. Is this OK?
+        encoding_methods = (
+            self.encode_as_plotly,
+            self.encode_as_sage,
+            self.encode_as_numpy,
+            self.encode_as_pandas,
+            self.encode_as_datetime,
+            self.encode_as_date,
+            self.encode_as_list  # because some values have `tolist` do last.
+        )
+        for encoding_method in encoding_methods:
+            try:
+                return encoding_method(obj)
+            except NotEncodable:
+                pass
+        return json.JSONEncoder.default(self, obj)
 
-        if _pandas_imported and obj is pandas.NaT:
-            return None
-
-
-        if isinstance(obj, datetime.datetime):
-            if obj.microsecond:
-                return obj.strftime('%Y-%m-%d %H:%M:%S.%f')
-            elif any((obj.second, obj.minute, obj.hour)):
-                return obj.strftime('%Y-%m-%d %H:%M:%S')
-            else:
-                return obj.strftime('%Y-%m-%d')
-        elif isinstance(obj, datetime.date):
-            return obj.strftime('%Y-%m-%d')
-        else:
-            raise NotEncodable
-
-    def pandasJSONEncoder(self, obj):
-        if not _pandas_imported:
-            raise NotEncodable
-
-        if isinstance(obj, pandas.Series):
-            serializable_list = []
-            for li in list(obj):
-                try:
-                    json.dumps(li)
-                    serializable_list.append(li)
-                except TypeError:
-                    serializable_list.append(self.default(li))
-
-            return serializable_list
-        elif isinstance(obj, pandas.Index):
-            return obj.tolist()
-        elif obj is pandas.NaT:
-            return None
-        else:
-            raise NotEncodable
-
-    def sageJSONEncoder(self, obj):
-        if not _sage_imported:
-            raise NotEncodable
-
-        if obj in RR:
-            return float(obj)
-        elif obj in ZZ:
-            return int(obj)
-        else:
-            raise NotEncodable
-
-    def builtinJSONEncoder(self, obj):
-        '''
-        Provide an API for folks to write their own
-        JSON encoders for their objects that they wanna
-        send to Plotly: this is an object's `to_plotly_json` method
-
-        Used for grid_objs.Column objects.
-        '''
+    @staticmethod
+    def encode_as_plotly(obj):
+        """Attempt to use a builtin `to_plotly_json` method."""
         try:
             return obj.to_plotly_json()
         except AttributeError:
             raise NotEncodable
 
-    def default(self, obj):
-        encoders = (self.builtinJSONEncoder,
-                    self.datetimeJSONEncoder,
-                    self.numpyJSONEncoder,
-                    self.pandasJSONEncoder,
-                    self.sageJSONEncoder)
-        for encoder in encoders:
-            try:
-                return encoder(obj)
-            except NotEncodable:
-                pass
+    @staticmethod
+    def encode_as_list(obj):
+        """Attempt to use `tolist` method to convert to normal Python list."""
+        if hasattr(obj, 'tolist'):
+            return obj.tolist()
+        else:
+            raise NotEncodable
 
-        raise TypeError(repr(obj) + " is not JSON serializable")
+    @staticmethod
+    def encode_as_sage(obj):
+        """Attempt to convert sage.all.RR to floats and sage.all.ZZ to ints"""
+        if not _sage_imported:
+            raise NotEncodable
+
+        if obj in sage.all.RR:
+            return float(obj)
+        elif obj in sage.all.ZZ:
+            return int(obj)
+        else:
+            raise NotEncodable
+
+    @staticmethod
+    def encode_as_pandas(obj):
+        """Attempt to convert pandas.NaT"""
+        if not _pandas_imported:
+            raise NotEncodable
+
+        if obj is pandas.NaT:
+            return None
+        else:
+            raise NotEncodable
+
+    @staticmethod
+    def encode_as_numpy(obj):
+        """Attempt to convert numpy.ma.core.masked"""
+        if not _numpy_imported:
+            raise NotEncodable
+
+        if obj is numpy.ma.core.masked:
+            return float('nan')
+        else:
+            raise NotEncodable
+
+    @staticmethod
+    def encode_as_datetime(obj):
+        """Attempt to convert to utc-iso time string using datetime methods."""
+
+        # first we need to get this into utc
+        try:
+            obj = obj.astimezone(pytz.utc)
+        except ValueError:
+            # we'll get a value error if trying to convert with naive datetime
+            pass
+        except TypeError:
+            # pandas throws a typeerror here instead of a value error, it's OK
+            pass
+        except AttributeError:
+            # we'll get an attribute error if astimezone DNE
+            raise NotEncodable
+
+        # now we need to get a nicely formatted time string
+        try:
+            time_string = obj.isoformat()
+        except AttributeError:
+            raise NotEncodable
+        else:
+            return iso_to_plotly_time_string(time_string)
+
+    @staticmethod
+    def encode_as_date(obj):
+        """Attempt to convert to utc-iso time string using date methods."""
+        try:
+            time_string = obj.isoformat()
+        except AttributeError:
+            raise NotEncodable
+        else:
+            return iso_to_plotly_time_string(time_string)
 
 
 ### unicode stuff ###
