@@ -1,6 +1,8 @@
 from collections import deque
 import json
 import os
+import random
+import string
 
 # TODO: protected imports?
 from IPython.html import widgets
@@ -88,6 +90,8 @@ class Graph(widgets.DOMWidget):
 
     def _handle_outgoing_message(self, message):
         message['plotlyDomain'] = plotly.plotly.get_config()['plotly_domain']
+        message['taskID'] = ''.join([random.choice(string.ascii_letters)
+                                     for _ in range(20)])
         if self._graphId == '':
             self._clientMessages.append(message)
         else:
