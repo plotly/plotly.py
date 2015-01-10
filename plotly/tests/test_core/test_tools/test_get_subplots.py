@@ -9,8 +9,16 @@ def test_non_integer_rows():
    fig = tls.get_subplots(rows=2.1)
 
 @raises(Exception)
+def test_less_than_zero_rows():
+   fig = tls.make_subplots(rows=-2)
+
+@raises(Exception)
 def test_non_integer_columns():
    fig = tls.get_subplots(columns=2/3)
+
+@raises(Exception)
+def test_less_than_zero_cols():
+   fig = tls.make_subplots(columns=-10)
 
 @raises(Exception)
 def test_wrong_kwarg():

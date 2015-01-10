@@ -9,8 +9,16 @@ def test_non_integer_rows():
    fig = tls.make_subplots(rows=2.1)
 
 @raises(Exception)
-def test_non_integer_columns():
-   fig = tls.make_subplots(columns=2/3)
+def test_less_than_zero_rows():
+   fig = tls.make_subplots(rows=-2)
+
+@raises(Exception)
+def test_non_integer_cols():
+   fig = tls.make_subplots(cols=2/3)
+
+@raises(Exception)
+def test_less_than_zero_cols():
+   fig = tls.make_subplots(cols=-10)
 
 @raises(Exception)
 def test_wrong_kwarg():
@@ -21,8 +29,8 @@ def test_non_integer_rows():
    fig = tls.make_subplots(rows=2.1)
 
 @raises(Exception)
-def test_non_integer_columns():
-   fig = tls.make_subplots(columns=2/3)
+def test_non_integer_cols():
+   fig = tls.make_subplots(cols=2/3)
 
 @raises(Exception)
 def test_wrong_kwarg():
@@ -30,7 +38,7 @@ def test_wrong_kwarg():
 
 @raises(Exception)
 def test_start_cell_wrong_values():
-    fig = tls.make_subplots(rows=2, columns=2, start_cell='not gonna work')
+    fig = tls.make_subplots(rows=2, cols=2, start_cell='not gonna work')
 
 @raises(Exception)
 def test_specs_wrong_type():
@@ -51,12 +59,12 @@ def test_specs_wrong_item_key():
 @raises(Exception)
 def test_specs_underspecified():
     fig = tls.make_subplots(rows=2, specs=[{}])
-    fig = tls.make_subplots(rows=2, columns=2, specs=[[{}, {}], [{}]])
+    fig = tls.make_subplots(rows=2, cols=2, specs=[[{}, {}], [{}]])
 
 @raises(Exception)
 def test_specs_overspecified():
     fig = tls.make_subplots(rows=2, specs=[[{}], [{}], [{}]])
-    fig = tls.make_subplots(columns=2, specs=[{}, {}, {}])
+    fig = tls.make_subplots(cols=2, specs=[{}, {}, {}])
 
 @raises(Exception)
 def test_specs_colspan_too_big():
