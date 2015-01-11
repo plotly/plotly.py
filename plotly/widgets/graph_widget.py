@@ -18,6 +18,9 @@ class Graph(widgets.DOMWidget):
     _view_name = Unicode('GraphView', sync=True)
     _message = Unicode(sync=True)
     _graph_url = Unicode(sync=True)
+    plotly_domain = Unicode(
+        sync=True, default_value=plotly.plotly.get_config()['plotly_domain']
+    )
 
     def __init__(self, graph_url, **kwargs):
         """Initialize a plotly graph object.
@@ -87,7 +90,7 @@ class Graph(widgets.DOMWidget):
             self._handle_outgoing_message(message)
 
     def _handle_outgoing_message(self, message):
-        message['plotlyDomain'] = plotly.plotly.get_config()['plotly_domain']
+        message['plotlyDomain'] = self.plotly_domain
         if self._graphId == '':
             self._clientMessages.append(message)
         else:
