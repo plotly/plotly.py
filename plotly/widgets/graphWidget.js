@@ -98,10 +98,8 @@ require(["widgets/js/widget"], function(WidgetManager){
             }
 
             if(!(message.uid in window.messageIds)){
-                // message hsn't been received yet, do stuff
+                // message hasn't been received yet, do stuff
                 window.messageIds[message.uid] = true;
-
-                alert('gogogogo');
 
                 var plot = $('#'+message.graphId)[0].contentWindow;
                 plot.postMessage(message, message.plotlyDomain);
