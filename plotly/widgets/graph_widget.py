@@ -1,6 +1,7 @@
 from collections import deque
 import json
 import os
+import uuid
 
 # TODO: protected imports?
 from IPython.html import widgets
@@ -9,7 +10,18 @@ from IPython.display import Javascript, display
 
 import plotly
 
+# Load JS widget code
+# No officially recommended way to do this in any other way
+# http://mail.scipy.org/pipermail/ipython-dev/2014-April/013835.html
+directory = os.path.dirname(os.path.realpath(__file__))
+js_widget_file = os.path.join(directory, 'graphWidget.js')
+with open(js_widget_file) as f:
+    js_widget_code = f.read()
+
+display(Javascript(js_widget_code))
+
 __all__ = None
+
 
 class Graph(widgets.DOMWidget):
     """An interactive Plotly graph widget for use in IPython
@@ -32,13 +44,6 @@ class Graph(widgets.DOMWidget):
         --------
         GraphWidget('https://plot.ly/~chris/3375')
         """
-        directory = os.path.dirname(os.path.realpath(__file__))
-        js_widget_file = os.path.join(directory, 'graphWidget.js')
-        with open(js_widget_file) as f:
-            js_widget_code = f.read()
-
-        display(Javascript(js_widget_code))
-
         super(Graph, self).__init__(**kwargs)
 
         # TODO: Validate graph_url
@@ -95,6 +100,7 @@ class Graph(widgets.DOMWidget):
             self._clientMessages.append(message)
         else:
             message['graphId'] = self._graphId
+            message['uid'] = str(uuid.uuid4())
             self._message = json.dumps(message)
 
     def on_click(self, callback, remove=False):
