@@ -92,7 +92,7 @@ require(["widgets/js/widget"], function(WidgetManager){
             message = JSON.parse(message);
 
             var plot = $('#'+message.graphId)[0].contentWindow;
-            plot.postMessage(message, 'https://plot.ly');
+            plot.postMessage(message, message.plotlyDomain);
 
             return GraphView.__super__.update.apply(this);
         }
