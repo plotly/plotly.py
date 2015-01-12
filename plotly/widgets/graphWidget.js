@@ -87,12 +87,25 @@ require(["widgets/js/widget"], function(WidgetManager){
 
         update: function() {
             // Listen for messages from the graph widget in python
-            var message = this.model.get('_message');
+            var jmessage = this.model.get('_message');
 
-            message = JSON.parse(message);
+            var message = JSON.parse(jmessage);
 
-            var plot = $('#'+message.graphId)[0].contentWindow;
-            plot.postMessage(message, message.plotlyDomain);
+            // check for duplicate messages
+            if(!('messageIds' in window)){
+                window.messageIds = {};
+                window.messageIds[message.uid] = true;
+            }
+
+            if(!(message.uid in window.messageIds)){
+                // message hsn't been received yet, do stuff
+                window.messageIds[message.uid] = true;
+
+                alert('gogogogo');
+
+                var plot = $('#'+message.graphId)[0].contentWindow;
+                plot.postMessage(message, message.plotlyDomain);
+            }
 
             return GraphView.__super__.update.apply(this);
         }
