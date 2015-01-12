@@ -1,6 +1,7 @@
 from collections import deque
 import json
 import os
+import uuid
 
 # TODO: protected imports?
 from IPython.html import widgets
@@ -96,6 +97,7 @@ class Graph(widgets.DOMWidget):
             self._clientMessages.append(message)
         else:
             message['graphId'] = self._graphId
+            message['uid'] = str(uuid.uuid4())
             self._message = json.dumps(message)
 
     def on_click(self, callback, remove=False):
