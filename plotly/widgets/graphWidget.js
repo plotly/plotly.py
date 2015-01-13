@@ -102,7 +102,7 @@ require(["widgets/js/widget"], function(WidgetManager){
                 window.messageIds[message.uid] = true;
 
                 var plot = $('#'+message.graphId)[0].contentWindow;
-                plot.postMessage(message, message.plotlyDomain);
+                plot.postMessage(message, this.model.get('_plotly_domain'));
             }
 
             return GraphView.__super__.update.apply(this);

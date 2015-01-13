@@ -95,7 +95,6 @@ class Graph(widgets.DOMWidget):
             self._handle_outgoing_message(message)
 
     def _handle_outgoing_message(self, message):
-        message['plotlyDomain'] = self._plotly_domain
         if self._graphId == '':
             self._clientMessages.append(message)
         else:
