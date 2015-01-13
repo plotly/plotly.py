@@ -1586,9 +1586,9 @@
             }, 
             "scene": {
                 "key_type": "plot_info", 
-                "val_types": "'s1' | 's2' | 's3' | etc.", 
+                "val_types": "'scene1' | 'scene2' | 'scene3' | etc.", 
                 "required": false, 
-                "description": "This key determines the scene on which this trace will be plotted in. More info coming soon."
+                "description": "This key determines the scene on which this trace will be plotted in."
             }, 
             "stream": {
                 "key_type": "object", 
@@ -1657,9 +1657,9 @@
             }, 
             "scene": {
                 "key_type": "plot_info", 
-                "val_types": "'s1' | 's2' | 's3' | etc.", 
+                "val_types": "'scene1' | 'scene2' | 'scene3' | etc.", 
                 "required": false, 
-                "description": "This key determines the scene on which this trace will be plotted in. More info coming soon."
+                "description": "This key determines the scene on which this trace will be plotted in."
             }, 
             "stream": {
                 "key_type": "object", 
@@ -3316,6 +3316,16 @@
                     "[[0.2, 0.5, 0.1, 0.2], [0.1, 0, -0.1], 3]"
                 ], 
                 "description": "Sets the camera position with respect to the scene. The first entry (a list or 1d numpy array of length 4) sets the angular position of the camera. The second entry (a list or 1d numpy array of length 3) sets the (x,y,z) translation of the camera. The third entry (a scalar) sets zoom of the camera."
+            }, 
+            "domain": {
+                "key_type": "plot_info", 
+                "val_types": "domain dictionary", 
+                "required": false, 
+                "examples": [
+                    "{'x': [0, 0.4], 'y': [0.6, 1]}", 
+                    "dict(x=[0, 0.4], y=[0.6, 1])"
+                ], 
+                "description": "Sets the x-y domain of this scene on the plotting surface."
             }, 
             "bgcolor": {
                 "key_type": "style", 
