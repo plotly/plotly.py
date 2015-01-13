@@ -127,10 +127,10 @@ class Graph(widgets.DOMWidget):
             Set to true to remove the callback from the list of callbacks."""
         self._handle_registration('zoom', callback, remove)
 
-    def restyle(self, data, traces=None):
+    def restyle(self, data, indices=None):
         message = {'task': 'restyle', 'update': data, 'graphId': self._graphId}
-        if traces:
-            message['traces'] = traces
+        if indices:
+            message['indices'] = indices
         self._handle_outgoing_message(message)
 
     def relayout(self, layout):
@@ -139,10 +139,12 @@ class Graph(widgets.DOMWidget):
         }
         self._handle_outgoing_message(message)
 
-    def hover(self, hover_obj):
+    def hover(self, hover_obj, subplot=None):
         message = {
-            'task': 'hover', 'event': hover_obj, 'graphId': self._graphId
+            'task': 'hover', 'selection': hover_obj, 'graphId': self._graphId
         }
+        if subplot is not None:
+            message['subplot'] = subplot
         self._handle_outgoing_message(message)
 
     def add_traces(self, traces, new_indices=None):
