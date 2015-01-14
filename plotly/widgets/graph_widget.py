@@ -8,8 +8,6 @@ from IPython.html import widgets
 from IPython.utils.traitlets import Unicode
 from IPython.display import Javascript, display
 
-import plotly
-
 # Load JS widget code
 # No officially recommended way to do this in any other way
 # http://mail.scipy.org/pipermail/ipython-dev/2014-April/013835.html
@@ -30,9 +28,6 @@ class Graph(widgets.DOMWidget):
     _view_name = Unicode('GraphView', sync=True)
     _message = Unicode(sync=True)
     _graph_url = Unicode(sync=True)
-    _plotly_domain = Unicode(
-        sync=True, default_value=plotly.plotly.get_config()['plotly_domain']
-    )
 
     def __init__(self, graph_url, **kwargs):
         """Initialize a plotly graph object.

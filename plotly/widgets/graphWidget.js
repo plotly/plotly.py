@@ -17,9 +17,14 @@ require(["widgets/js/widget"], function(WidgetManager){
 
             var _graph_url = that.model.get('_graph_url');
 
-            // variable plotly_domain in the case of enterprise
+            // variable plotlyDomain in the case of enterprise
             var url_parts = _graph_url.split('/');
-            var plotly_domain = url_parts[0] + '//' + url_parts[2];
+            var plotlyDomain = url_parts[0] + '//' + url_parts[2];
+
+            if(!('plotlyDomains' in window)){
+                window.plotlyDomains = {};
+            }
+            window.plotlyDomains[graphId] = plotlyDomain;
 
             // Place IFrame in output cell div `$el`
             that.$el.css('width', '100%');
@@ -42,7 +47,7 @@ require(["widgets/js/widget"], function(WidgetManager){
 
             window.pingers[graphId] = setInterval(function() {
                 that.graphContentWindow = $('#'+graphId)[0].contentWindow;
-                that.graphContentWindow.postMessage({task: 'ping'}, plotly_domain);
+                that.graphContentWindow.postMessage({task: 'ping'}, plotlyDomain);
             }, 200);
 
             // Assign a message listener to the 'message' events
@@ -60,7 +65,6 @@ require(["widgets/js/widget"], function(WidgetManager){
                     if(frame === null){
                         // frame doesn't exist in the dom anymore, clean up it's old event listener
                         window.removeEventListener('message', window.messageListeners[graphId]);
-                        clearInterval(window.pingers[frameId]);
                         clearInterval(window.pingers[graphId]);
                     } else if(frame.contentWindow === e.source) {
                         // TODO: Stop event propagation, so each frame doesn't listen and filter
@@ -89,13 +93,11 @@ require(["widgets/js/widget"], function(WidgetManager){
         update: function() {
             // Listen for messages from the graph widget in python
             var jmessage = this.model.get('_message');
-
             var message = JSON.parse(jmessage);
 
             // check for duplicate messages
             if(!('messageIds' in window)){
                 window.messageIds = {};
-                window.messageIds[message.uid] = true;
             }
 
             if(!(message.uid in window.messageIds)){
@@ -103,7 +105,7 @@ require(["widgets/js/widget"], function(WidgetManager){
                 window.messageIds[message.uid] = true;
 
                 var plot = $('#'+message.graphId)[0].contentWindow;
-                plot.postMessage(message, this.model.get('_plotly_domain'));
+                plot.postMessage(message, window.plotlyDomains[message.graphId]);
             }
 
             return GraphView.__super__.update.apply(this);
