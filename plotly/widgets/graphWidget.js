@@ -11,19 +11,24 @@ require(["widgets/js/widget"], function(WidgetManager){
         render: function(){
             var that = this;
 
-            var frameId = window.genUID();
-            var loadingId = 'loading-'+frameId;
+            var graphId = window.genUID();
+            var loadingId = 'loading-'+graphId;
 
 
             var _graph_url = that.model.get('_graph_url');
 
-            // variable plotly_domain in the case of enterprise
+            // variable plotlyDomain in the case of enterprise
             var url_parts = _graph_url.split('/');
-            var plotly_domain = url_parts[0] + '//' + url_parts[2];
+            var plotlyDomain = url_parts[0] + '//' + url_parts[2];
+
+            if(!('plotlyDomains' in window)){
+                window.plotlyDomains = {};
+            }
+            window.plotlyDomains[graphId] = plotlyDomain;
 
             // Place IFrame in output cell div `$el`
             that.$el.css('width', '100%');
-            that.$graph = $(['<iframe id="'+frameId+'"',
+            that.$graph = $(['<iframe id="'+graphId+'"',
                              'src="'+_graph_url+'.embed"',
                              'seamless',
                              'style="border: none;"',
@@ -40,9 +45,9 @@ require(["widgets/js/widget"], function(WidgetManager){
                 window.pingers = {};
             }
 
-            window.pingers[frameId] = setInterval(function() {
-                that.graphContentWindow = $('#'+frameId)[0].contentWindow;
-                that.graphContentWindow.postMessage({ping: true}, plotly_domain);
+            window.pingers[graphId] = setInterval(function() {
+                that.graphContentWindow = $('#'+graphId)[0].contentWindow;
+                that.graphContentWindow.postMessage({task: 'ping'}, plotlyDomain);
             }, 200);
 
             // Assign a message listener to the 'message' events
@@ -53,48 +58,46 @@ require(["widgets/js/widget"], function(WidgetManager){
                  window.messageListeners = {};
             }
 
-            window.messageListeners[frameId] = function(e) {
+            window.messageListeners[graphId] = function(e) {
                 if(_graph_url.indexOf(e.origin)>-1) {
-                    var frame = document.getElementById(frameId);
+                    var frame = document.getElementById(graphId);
 
                     if(frame === null){
                         // frame doesn't exist in the dom anymore, clean up it's old event listener
-                        window.removeEventListener('message', window.messageListeners[frameId]);
-                        clearInterval(window.pingers[frameId]);
+                        window.removeEventListener('message', window.messageListeners[graphId]);
+                        clearInterval(window.pingers[graphId]);
                     } else if(frame.contentWindow === e.source) {
                         // TODO: Stop event propagation, so each frame doesn't listen and filter
-                        var frameContentWindow = $('#'+frameId)[0].contentWindow;
+                        var frameContentWindow = $('#'+graphId)[0].contentWindow;
                         var message = e.data;
 
                         if(message==='pong') {
-                            $('#loading-'+frameId).hide();
-                            clearInterval(window.pingers[frameId]);
-                            that.send({event: 'pong', graphId: frameId});
+                            $('#loading-'+graphId).hide();
+                            clearInterval(window.pingers[graphId]);
+                            that.send({event: 'pong', graphId: graphId});
                         } else if (message.type==='hover' ||
                                    message.type==='zoom'  ||
                                    message.type==='click' ||
                                    message.type==='unhover') {
-                            that.send({event: message.type, message: message, graphId: frameId});
+                            that.send({event: message.type, message: message, graphId: graphId});
                         }
                     }
                 }
             };
 
-            window.removeEventListener('message', window.messageListeners[frameId]);
-            window.addEventListener('message', window.messageListeners[frameId]);
+            window.removeEventListener('message', window.messageListeners[graphId]);
+            window.addEventListener('message', window.messageListeners[graphId]);
 
         },
 
         update: function() {
             // Listen for messages from the graph widget in python
             var jmessage = this.model.get('_message');
-
             var message = JSON.parse(jmessage);
 
             // check for duplicate messages
             if(!('messageIds' in window)){
                 window.messageIds = {};
-                window.messageIds[message.uid] = true;
             }
 
             if(!(message.uid in window.messageIds)){
@@ -102,7 +105,7 @@ require(["widgets/js/widget"], function(WidgetManager){
                 window.messageIds[message.uid] = true;
 
                 var plot = $('#'+message.graphId)[0].contentWindow;
-                plot.postMessage(message, message.plotlyDomain);
+                plot.postMessage(message, window.plotlyDomains[message.graphId]);
             }
 
             return GraphView.__super__.update.apply(this);

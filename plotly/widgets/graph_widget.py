@@ -8,8 +8,6 @@ from IPython.html import widgets
 from IPython.utils.traitlets import Unicode
 from IPython.display import Javascript, display
 
-import plotly
-
 # Load JS widget code
 # No officially recommended way to do this in any other way
 # http://mail.scipy.org/pipermail/ipython-dev/2014-April/013835.html
@@ -88,11 +86,10 @@ class Graph(widgets.DOMWidget):
         event_callbacks = self._event_handlers[event_type].callbacks
         if (len(event_callbacks) and event_type not in self._listener_set):
             self._listener_set.add(event_type)
-            message = {'listen': list(self._listener_set)}
+            message = {'task': 'listen', 'events': list(self._listener_set)}
             self._handle_outgoing_message(message)
 
     def _handle_outgoing_message(self, message):
-        message['plotlyDomain'] = plotly.plotly.get_config()['plotly_domain']
         if self._graphId == '':
             self._clientMessages.append(message)
         else:
@@ -124,18 +121,24 @@ class Graph(widgets.DOMWidget):
             Set to true to remove the callback from the list of callbacks."""
         self._handle_registration('zoom', callback, remove)
 
-    def restyle(self, data, traces=None):
-        message = {'restyle': data, 'graphId': self._graphId}
-        if traces:
-            message['traces'] = traces
+    def restyle(self, data, indices=None):
+        message = {'task': 'restyle', 'update': data, 'graphId': self._graphId}
+        if indices:
+            message['indices'] = indices
         self._handle_outgoing_message(message)
 
     def relayout(self, layout):
-        message = {'relayout': layout, 'graphId': self._graphId}
+        message = {
+            'task': 'relayout', 'update': layout, 'graphId': self._graphId
+        }
         self._handle_outgoing_message(message)
 
-    def hover(self, hover_obj):
-        message = {'hover': hover_obj, 'graphId': self._graphId}
+    def hover(self, hover_obj, subplot=None):
+        message = {
+            'task': 'hover', 'selection': hover_obj, 'graphId': self._graphId
+        }
+        if subplot is not None:
+            message['subplot'] = subplot
         self._handle_outgoing_message(message)
 
     def add_traces(self, traces, new_indices=None):
@@ -149,10 +152,11 @@ class Graph(widgets.DOMWidget):
             added traces should occupy.
 
         """
-        body = {'traces': traces}
+        message = {
+            'task': 'addTraces', 'traces': traces, 'graphId': self._graphId
+        }
         if new_indices is not None:
-            body['newIndices'] = new_indices
-        message = {'addTraces': body}
+            message['newIndices'] = new_indices
         self._handle_outgoing_message(message)
 
     def delete_traces(self, indices):
@@ -162,7 +166,11 @@ class Graph(widgets.DOMWidget):
         :param (list[int]) indices: The indices of the traces to be removed
 
         """
-        message = {'deleteTraces': {'indices': indices}}
+        message = {
+            'task': 'deleteTraces',
+            'indices': indices,
+            'graphId': self._graphId
+        }
         self._handle_outgoing_message(message)
 
     def move_traces(self, current_indices, new_indices=None):
@@ -178,8 +186,11 @@ class Graph(widgets.DOMWidget):
             traces to be moved will occupy.
 
         """
-        body = {'currentIndices': current_indices}
+        message = {
+            'task': 'moveTraces',
+            'currentIndices': current_indices,
+            'graphId': self._graphId
+            }
         if new_indices is not None:
-            body['newIndices'] = new_indices
-        message = {'moveTraces': body}
+            message['newIndices'] = new_indices
         self._handle_outgoing_message(message)
