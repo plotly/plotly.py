@@ -82,7 +82,13 @@ class Graph(widgets.DOMWidget):
                 self._message = _message
 
         if content.get('event', '') in ['click', 'hover', 'zoom']:
-            self._event_handlers[content['event']](self, content)
+            # De-nest the message
+            if content['event'] == 'click' or content['event'] == 'hover':
+                message = content['message']['points']
+            elif content['event'] == 'zoom':
+                message = content['message']['ranges']
+
+            self._event_handlers[content['event']](self, message)
 
     def _handle_registration(self, event_type, callback, remove):
         self._event_handlers[event_type].register_callback(callback,
@@ -118,21 +124,14 @@ class Graph(widgets.DOMWidget):
                     which point(s) were clicked on.
 
                     click_obj example:
-                    {
-                        'event': 'hover',
-                        'graphId': '2e66d4da-0523-4b6b-a3d7-f3b8ced416b1',
-                        'message': {
-                            'points': [
-                                {
-                                    'curveNumber': 1,
-                                    'pointNumber': 2,
-                                    'x': 4,
-                                    'y': 14
-                                }
-                            ],
-                            'type': 'hover'
+                    [
+                        {
+                            'curveNumber': 1,
+                            'pointNumber': 2,
+                            'x': 4,
+                            'y': 14
                         }
-                    }
+                    ]
 
             remove (bool, optional): If False, attach the callback.
                 If True, remove the callback. Defaults to False.
@@ -173,21 +172,14 @@ class Graph(widgets.DOMWidget):
                     which point(s) was hovered over.
 
                     hover_obj example:
-                    {
-                        'event': 'hover',
-                        'graphId': '2e66d4da-0523-4b6b-a3d7-f3b8ced416b1',
-                        'message': {
-                            'points': [
-                                {
+                    [
+                        {
                                     'curveNumber': 1,
                                     'pointNumber': 2,
                                     'x': 4,
                                     'y': 14
-                                }
-                            ],
-                            'type': 'hover'
                         }
-                    }
+                    ]
 
             remove (bool, optional): If False, attach the callback.
                 If True, remove the callback. Defaults to False.
@@ -230,15 +222,8 @@ class Graph(widgets.DOMWidget):
 
                         zoom_obj example:
                         {
-                            'event': 'zoom',
-                            'graphId': '2e66d4da-0523-4b6b-a3d7-f3b8ced416b1',
-                            'message': {
-                                'ranges': {
-                                    'x': [1.8399058038561549, 2.16443359662],
-                                    'y': [4.640902872777017, 7.855677154582]
-                                },
-                                'type': 'zoom'
-                            }
+                            'x': [1.8399058038561549, 2.16443359662],
+                            'y': [4.640902872777017, 7.855677154582]
                         }
 
                     remove (bool, optional): If False, attach the callback.

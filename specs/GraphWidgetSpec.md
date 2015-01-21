@@ -22,21 +22,14 @@ g.on_click(callback, remove=False)
                 which point(s) were clicked on.
 
                 click_obj example:
-                {
-                    'event': 'hover',
-                    'graphId': '2e66d4da-0523-4b6b-a3d7-f3b8ced416b1',
-                    'message': {
-                        'points': [
-                            {
-                                'curveNumber': 1,
-                                'pointNumber': 2,
-                                'x': 4,
-                                'y': 14
-                            }
-                        ],
-                        'type': 'hover'
-                    }
-                }
+                    [
+                        {
+                            'curveNumber': 1,
+                            'pointNumber': 2,
+                            'x': 4,
+                            'y': 14
+                        }
+                    ]
 
         remove (bool, optional): If False, attach the callback.
             If True, remove the callback. Defaults to False.
@@ -79,21 +72,14 @@ g.on_hover(callback, remove=False)
                 points belong to.
 
                 hover_obj example:
-                {
-                    'event': 'hover',
-                    'graphId': '2e66d4da-0523-4b6b-a3d7-f3b8ced416b1',
-                    'message': {
-                        'points': [
-                            {
-                                'curveNumber': 1,
-                                'pointNumber': 2,
-                                'x': 4,
-                                'y': 14
-                            }
-                        ],
-                        'type': 'hover'
-                    }
-                }
+                    [
+                        {
+                            'curveNumber': 1,
+                            'pointNumber': 2,
+                            'x': 4,
+                            'y': 14
+                        }
+                    ]
 
         remove (bool, optional): If False, attach the callback.
             If True, remove the callback. Defaults to False.
@@ -136,15 +122,8 @@ g.on_zoom(callback, remove=False)
 
                     zoom_obj example:
                     {
-                        'event': 'zoom',
-                        'graphId': '2e66d4da-0523-4b6b-a3d7-f3b8ced416b1',
-                        'message': {
-                            'ranges': {
-                                'x': [1.8399058038561549, 2.1644335966246384],
-                                'y': [4.640902872777017, 7.8556771545827635]
-                            },
-                            'type': 'zoom'
-                        }
+                        'x': [1.8399058038561549, 2.1644335966246384],
+                        'y': [4.640902872777017, 7.8556771545827635]
                     }
 
                 remove (bool, optional): If False, attach the callback.
