@@ -79,6 +79,16 @@ require(["widgets/js/widget"], function(WidgetManager){
                                    message.type==='zoom'  ||
                                    message.type==='click' ||
                                    message.type==='unhover') {
+
+                            // click and hover events contain all of the data in the traces,
+                            // which can be a very large object and may take a ton of time
+                            // to pass to the python backend. Strip out the data, and require
+                            // the user to call get_figure if they need trace information
+                            if(message.type !== 'zoom') {
+                                for(var i in message.points) {
+                                    delete message.points[i].data;
+                                }
+                            }
                             that.send({event: message.type, message: message, graphId: graphId});
                         }
                     }

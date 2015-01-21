@@ -19,9 +19,7 @@ g.on_click(callback, remove=False)
                 of the graph widget that this callback is assigned to.
 
                 click_obj (dict): a nested dict that describes
-                which point(s) were clicked on and also
-                contains the full trace ('data') that the
-                points belong to.
+                which point(s) were clicked on.
 
                 click_obj example:
                 {
@@ -33,23 +31,7 @@ g.on_click(callback, remove=False)
                                 'curveNumber': 1,
                                 'pointNumber': 2,
                                 'x': 4,
-                                'y': 14,
-                                'data': {
-                                    'line': {
-                                        'color': 'rgb(31, 138, 112)',
-                                        'width': 3
-                                    },
-                                    'marker': {
-                                        'color': 'rgb(31, 138, 112)',
-                                        'size': 10,
-                                        'symbol': 'hexagon-open'
-                                    },
-                                    'name': 'Experiment',
-                                    'type': 'scatter',
-                                    'uid': '346c6b',
-                                    'x': [1, 2, 4],
-                                    'y': [5, 8, 14]
-                                }
+                                'y': 14
                             }
                         ],
                         'type': 'hover'
@@ -93,8 +75,7 @@ g.on_hover(callback, remove=False)
                 of the graph widget that this callback is assigned to.
 
                 hover_obj (dict): a nested dict that describes
-                which point(s) was hovered over and also
-                contains the full trace ('data') that the
+                which point(s) was hovered over that the
                 points belong to.
 
                 hover_obj example:
@@ -107,23 +88,7 @@ g.on_hover(callback, remove=False)
                                 'curveNumber': 1,
                                 'pointNumber': 2,
                                 'x': 4,
-                                'y': 14,
-                                'data': {
-                                    'line': {
-                                        'color': 'rgb(31, 138, 112)',
-                                        'width': 3
-                                    },
-                                    'marker': {
-                                        'color': 'rgb(31, 138, 112)',
-                                        'size': 10,
-                                        'symbol': 'hexagon-open'
-                                    },
-                                    'name': 'Experiment',
-                                    'type': 'scatter',
-                                    'uid': '346c6b',
-                                    'x': [1, 2, 4],
-                                    'y': [5, 8, 14]
-                                }
+                                'y': 14
                             }
                         ],
                         'type': 'hover'
