@@ -279,6 +279,8 @@ class Graph(widgets.DOMWidget):
             indices (list, optional):
                 Specify which traces to apply the update dict to.
                 Negative indices are supported.
+                If indices are not given, the update will apply to
+                *all* traces.
 
         Examples:
             Initialization - Start each example below with this setup:
