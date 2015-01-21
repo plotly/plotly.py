@@ -135,12 +135,15 @@ class Graph(widgets.DOMWidget):
         }
         self._handle_outgoing_message(message)
 
-    def hover(self, hover_obj, subplot=None):
+    def hover(self, *hover_objs):
+        # TODO: key check
+        if len(hover_objs) == 1:
+            hover_objs = hover_objs[0]
+
         message = {
-            'task': 'hover', 'selection': hover_obj, 'graphId': self._graphId
+            'task': 'hover', 'selection': hover_objs, 'graphId': self._graphId
         }
-        if subplot is not None:
-            message['subplot'] = subplot
+
         self._handle_outgoing_message(message)
 
     def add_traces(self, traces, new_indices=None):
@@ -149,9 +152,10 @@ class Graph(widgets.DOMWidget):
 
         If `new_indices` isn't specified, they are simply appended.
 
-        :param (list[dict]) traces: The list of trace dicts
-        :param (list[int]|None|optional) new_indices: The final indices the
-            added traces should occupy.
+        Args:
+            traces (dict or list of dicts, or class of plotly.graph_obj): trace
+            new_indices (list[int]|None), optional: The final indices the
+                added traces should occupy in the graph.
 
         """
         message = {
