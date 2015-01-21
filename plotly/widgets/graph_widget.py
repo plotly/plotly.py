@@ -169,7 +169,8 @@ class Graph(widgets.DOMWidget):
         """
         Delete data traces from a graph.
 
-        :param (list[int]) indices: The indices of the traces to be removed
+        Args:
+            indices (list[int]): The indices of the traces to be removed
 
         """
         message = {
@@ -186,10 +187,11 @@ class Graph(widgets.DOMWidget):
         If new_indices isn't specified, the traces at the locations specified
         in current_indices are moved to the end of the data array.
 
-        :param (list[int]) current_indices: The initial indices the traces to
-        be moved occupy.
-        :param (list[int]|None|optional) new_indices: The final indices the
-            traces to be moved will occupy.
+        Args:
+            current_indices (list[int]): The initial indices the traces to
+                be moved occupy.
+            new_indices (list[int]|None|optional): The final indices the
+                traces to be moved will occupy.
 
         """
         message = {
