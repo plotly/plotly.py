@@ -257,7 +257,9 @@ class Graph(widgets.DOMWidget):
 
                 To update graph objects that are nested, like
                 a marker's color, combine the keys with a period,
-                e.g. `marker.color`
+                e.g. `marker.color`. To replace an entire nested object,
+                like `marker`, set the value to the object.
+                See Example 2 below.
 
                 To update an attribute of multiple traces, set the
                 value to an list of values. If the list is shorter
@@ -293,32 +295,38 @@ class Graph(widgets.DOMWidget):
             graph.restyle({'marker.color': 'red'})
             ```
 
-            Example 2 - Set `marker.color` to red in the first trace of the graph
+            Example 2 - Replace `marker` with {'color': 'red'}
+            ```
+            graph.restyle({'marker': {'color': red'}})
+            ```
+
+            Example 3 - Set `marker.color` to red
+                        in the first trace of the graph
             ```
             graph.restyle({'marker.color': 'red'}, indices=[0])
             ```
 
-            Example 3 - Set `marker.color` of all of the traces to
+            Example 4 - Set `marker.color` of all of the traces to
                 alternating sequences of red and green
             ```
             graph.restyle({'marker.color': ['red', 'green']})
             ```
 
-            Example 4 - Set just `marker.color` of the first two traces
+            Example 5 - Set just `marker.color` of the first two traces
                         to red and green
             ```
             graph.restyle({'marker.color': ['red', 'green']}, indices=[0, 1])
             ```
 
-            Example 5 - Set multiple attributes of all of the traces
+            Example 6 - Set multiple attributes of all of the traces
             ```
             graph.restyle({
                 'marker.color': 'red',
                 'line.color': 'green'
-            }, indices=[0, 1])
+            })
             ```
 
-            Example 6 - Update the data of the first trace
+            Example 7 - Update the data of the first trace
             ```
             graph.restyle({
                 'x': [[1, 2, 3]],
@@ -326,7 +334,7 @@ class Graph(widgets.DOMWidget):
             }, indices=[0])
             ```
 
-            Example 7 - Update the data of the first two traces
+            Example 8 - Update the data of the first two traces
             ```
             graph.restyle({
                 'x': [[1, 2, 3],
