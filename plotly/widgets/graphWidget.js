@@ -71,7 +71,7 @@ require(["widgets/js/widget"], function(WidgetManager){
                         var frameContentWindow = $('#'+graphId)[0].contentWindow;
                         var message = e.data;
 
-                        if(message==='pong') {
+                        if('pong' in message && message.pong) {
                             $('#loading-'+graphId).hide();
                             clearInterval(window.pingers[graphId]);
                             that.send({event: 'pong', graphId: graphId});
