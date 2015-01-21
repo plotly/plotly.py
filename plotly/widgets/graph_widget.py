@@ -364,6 +364,8 @@ class Graph(widgets.DOMWidget):
                 the title of an axis, combine the keys with a period
                 e.g. `xaxis.title`. To set a value of an element in an array,
                 like an axis's range, use brackets, e.g. 'xaxis.range[0]'.
+                To replace an entire nested object, just specify the value to
+                the sub-object. See example 4 below.
 
                 See all of the layout attributes in our reference documentation
                 https://plot.ly/python/reference/#Layout
@@ -392,6 +394,11 @@ class Graph(widgets.DOMWidget):
             Example 3 - Update the first element of the xaxis range
             ```
             graph.relayout({'xaxis.range[0]': -3})
+            ```
+
+            Example 4 - Replace the entire xaxis object
+            ```
+            graph.relayout({'xaxis': {'title': 'Experimental results'}})
             ```
         """
         # TODO: Add flat layout to graph_objs
