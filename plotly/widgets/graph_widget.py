@@ -8,6 +8,8 @@ from IPython.html import widgets
 from IPython.utils.traitlets import Unicode
 from IPython.display import Javascript, display
 
+from plotly import utils
+
 # Load JS widget code
 # No officially recommended way to do this in any other way
 # http://mail.scipy.org/pipermail/ipython-dev/2014-April/013835.html
@@ -95,7 +97,7 @@ class Graph(widgets.DOMWidget):
         else:
             message['graphId'] = self._graphId
             message['uid'] = str(uuid.uuid4())
-            self._message = json.dumps(message)
+            self._message = json.dumps(message, cls=utils.PlotlyJSONEncoder)
 
     def on_click(self, callback, remove=False):
         """Register a callback to execute when the graph is clicked.
