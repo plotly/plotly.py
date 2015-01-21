@@ -23,7 +23,7 @@ display(Javascript(js_widget_code))
 __all__ = None
 
 
-class Graph(widgets.DOMWidget):
+class GraphWidget(widgets.DOMWidget):
     """An interactive Plotly graph widget for use in IPython
     Notebooks.
     """

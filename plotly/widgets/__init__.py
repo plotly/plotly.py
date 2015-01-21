@@ -1,1 +1,1 @@
-from . graph_widget import Graph
+from . graph_widget import GraphWidget
