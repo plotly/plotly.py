@@ -191,9 +191,9 @@ class Graph(widgets.DOMWidget):
         Example:
         ```
         from IPython.display import display
-        def message_handler(widget, msg):
+        def message_handler(widget, hover_msg):
             display(widget._graph_url)
-            display(msg)
+            display(hover_msg)
 
         g = Graph('https://plot.ly/~chris/3375')
         display(g)
@@ -211,16 +211,16 @@ class Graph(widgets.DOMWidget):
         Args:
             callback (function): Callback function this is called
                 on zoom events with the signature:
-                callback(widget, zoom_obj) -> None
+                callback(widget, ranges) -> None
 
                 Args:
                     widget (GraphWidget): The current instance
                     of the graph widget that this callback is assigned to.
 
-                    zoom_obj (dict): A description of the
+                    ranges (dict): A description of the
                         region that was zoomed into.
 
-                        zoom_obj example:
+                        ranges example:
                         {
                             'x': [1.8399058038561549, 2.16443359662],
                             'y': [4.640902872777017, 7.855677154582]
@@ -235,9 +235,9 @@ class Graph(widgets.DOMWidget):
         Example:
         ```
         from IPython.display import display
-        def message_handler(widget, msg):
+        def message_handler(widget, ranges):
             display(widget._graph_url)
-            display(msg)
+            display(ranges)
 
         g = Graph('https://plot.ly/~chris/3375')
         display(g)
