@@ -14,10 +14,8 @@ from pkg_resources import resource_string
 # Load JS widget code
 # No officially recommended way to do this in any other way
 # http://mail.scipy.org/pipermail/ipython-dev/2014-April/013835.html
-directory = os.path.dirname(os.path.realpath(__file__))
-js_widget_file = os.path.join(directory, 'graphWidget.js')
 js_widget_code = resource_string('plotly',
-                                 'widgets/graphWidgets.js').decode('utf-8')
+                                 'widgets/graphWidget.js').decode('utf-8')
 
 display(Javascript(js_widget_code))
 
