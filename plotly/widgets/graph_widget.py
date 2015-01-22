@@ -42,7 +42,7 @@ class GraphWidget(widgets.DOMWidget):
             GraphWidget('https://plot.ly/~chris/3375')
             ```
         """
-        super(Graph, self).__init__(**kwargs)
+        super(GraphWidget, self).__init__(**kwargs)
 
         # TODO: Validate graph_url
         self._graph_url = graph_url
@@ -252,7 +252,7 @@ class GraphWidget(widgets.DOMWidget):
 
         Args:
             update (dict):
-                Single-nested dict where keys are the graph attribute strings
+                dict where keys are the graph attribute strings
                 and values are the value of the graph attribute.
 
                 To update graph objects that are nested, like
@@ -357,7 +357,7 @@ class GraphWidget(widgets.DOMWidget):
 
         Args:
             layout (dict):
-                Single-nested dict where keys are the graph attribute strings
+                dict where keys are the graph attribute strings
                 and values are the value of the graph attribute.
 
                 To update graph objects that are nested, like
