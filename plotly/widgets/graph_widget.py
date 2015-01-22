@@ -31,7 +31,8 @@ class GraphWidget(widgets.DOMWidget):
     _message = Unicode(sync=True)
     _graph_url = Unicode(sync=True)
 
-    def __init__(self, graph_url, **kwargs):
+    # TODO: URL for offline enterprise
+    def __init__(self, graph_url='https://plot.ly/~playground/7', **kwargs):
         """Initialize a plotly graph widget
 
         Args:
@@ -147,7 +148,7 @@ class GraphWidget(widgets.DOMWidget):
             display(widget._graph_url)
             display(msg)
 
-        g = Graph('https://plot.ly/~chris/3375')
+        g = GraphWidget('https://plot.ly/~chris/3375')
         display(g)
 
         g.on_click(message_handler)
@@ -195,7 +196,7 @@ class GraphWidget(widgets.DOMWidget):
             display(widget._graph_url)
             display(hover_msg)
 
-        g = Graph('https://plot.ly/~chris/3375')
+        g = GraphWidget('https://plot.ly/~chris/3375')
         display(g)
 
         g.on_hover(message_handler)
@@ -239,7 +240,7 @@ class GraphWidget(widgets.DOMWidget):
             display(widget._graph_url)
             display(ranges)
 
-        g = Graph('https://plot.ly/~chris/3375')
+        g = GraphWidget('https://plot.ly/~chris/3375')
         display(g)
 
         g.on_zoom(message_handler)
@@ -288,7 +289,7 @@ class GraphWidget(widgets.DOMWidget):
             from plotly.widgets import Graph
             from IPython.display import display
 
-            graph = Graph('https://plot.ly/~chris/3979')
+            graph = GraphWidget('https://plot.ly/~chris/3979')
             display(graph)
             ```
 
@@ -377,7 +378,7 @@ class GraphWidget(widgets.DOMWidget):
             from plotly.widgets import Graph
             from IPython.display import display
 
-            graph = Graph('https://plot.ly/~chris/3979')
+            graph = GraphWidget('https://plot.ly/~chris/3979')
             display(graph)
             ```
 
@@ -460,7 +461,7 @@ class GraphWidget(widgets.DOMWidget):
             from plotly.widgets import Graph
             from IPython.display import display
 
-            graph = Graph('https://plot.ly/~chris/3979')
+            graph = GraphWidget('https://plot.ly/~chris/3979')
             display(graph)
             ```
 
@@ -509,7 +510,7 @@ class GraphWidget(widgets.DOMWidget):
             from plotly.graph_objs import Scatter
             from IPython.display import display
 
-            graph = Graph('https://plot.ly/~chris/3979')
+            graph = GraphWidget('https://plot.ly/~chris/3979')
             display(graph)
             ```
 
@@ -553,7 +554,7 @@ class GraphWidget(widgets.DOMWidget):
             from plotly.widgets import Graph
             from IPython.display import display
 
-            graph = Graph('https://plot.ly/~chris/3979')
+            graph = GraphWidget('https://plot.ly/~chris/3979')
             display(graph)
 
 
