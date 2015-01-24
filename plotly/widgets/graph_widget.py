@@ -605,26 +605,3 @@ class GraphWidget(widgets.DOMWidget):
             message['newIndices'] = new_indices
         self._handle_outgoing_message(message)
 
-    def get_attributes(self, attributes=None, ignore_defaults=False):
-        """
-        Get attributes of the Graph.
-
-        When `attributes` is specified, a dictionary of values is returned with
-        the requested attributes as keys.
-
-        When `attributes` is None, the entire graph object is returned.
-
-        :param (str|str[]|None) attributes: Return listed attributes or entire
-                                            graph.
-        :param (bool) ignore_defaults: If False, find default arguments if user
-                                       didn't define the values. If True,
-                                       return undefined if user didn't define
-                                       the values.
-        """
-        message = {
-            'task': 'getAttributes',
-            'ignoreDefaults': ignore_defaults
-        }
-        if attributes is not None:
-            message['attributes'] = attributes
-        self._handle_outgoing_message(message)
