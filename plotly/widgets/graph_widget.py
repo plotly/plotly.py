@@ -1,6 +1,5 @@
 from collections import deque
 import json
-import os
 import uuid
 
 # TODO: protected imports?
