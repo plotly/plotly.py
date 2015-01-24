@@ -8,6 +8,7 @@ from IPython.utils.traitlets import Unicode
 from IPython.display import Javascript, display
 
 from plotly import utils
+import plotly.plotly.plotly as py
 from pkg_resources import resource_string
 
 # Load JS widget code
@@ -28,6 +29,11 @@ class GraphWidget(widgets.DOMWidget):
     _view_name = Unicode('GraphView', sync=True)
     _message = Unicode(sync=True)
     _graph_url = Unicode(sync=True)
+    _new_url = Unicode(sync=True)
+    _filename = ''
+    _flags = {
+        'save_pending': False
+    }
 
     # TODO: URL for offline enterprise
     def __init__(self, graph_url='https://plot.ly/~playground/7', **kwargs):
@@ -88,6 +94,13 @@ class GraphWidget(widgets.DOMWidget):
                 message = content['message']['ranges']
 
             self._event_handlers[content['event']](self, message)
+        if content.get('event', '') == 'getAttributes':
+            self._attributes = content.get('response', {})
+            if self._flags['save_pending']:
+                self._flags['save_pending'] = False
+                url = py.plot(self._attributes, auto_open=False,
+                              filename=self._filename, validate=False)
+                self._new_url = url
 
     def _handle_registration(self, event_type, callback, remove):
         self._event_handlers[event_type].register_callback(callback,
@@ -605,3 +618,15 @@ class GraphWidget(widgets.DOMWidget):
             message['newIndices'] = new_indices
         self._handle_outgoing_message(message)
 
+    def save(self, ignore_defaults=False, filename=''):
+        """
+        Save a copy of the current state of the widget in plotly.
+
+        :param (bool) ignore_defaults: Auto-fill in unspecified figure keys?
+        :param (str) filename: Name of the file on plotly.
+
+        """
+        self._flags['save_pending'] = True
+        self._filename = filename
+        message = {'task': 'getAttributes', 'ignoreDefaults': ignore_defaults}
+        self._handle_outgoing_message(message)
