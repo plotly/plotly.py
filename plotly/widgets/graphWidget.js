@@ -90,6 +90,8 @@ require(["widgets/js/widget"], function(WidgetManager){
                                 }
                             }
                             that.send({event: message.type, message: message, graphId: graphId});
+                        } else if (message.task === 'getAttributes') {
+                            that.send({event: 'getAttributes', response: message.response});
                         }
                     }
                 }
