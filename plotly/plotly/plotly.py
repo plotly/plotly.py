@@ -97,8 +97,13 @@ def get_credentials():
 
 ### plot stuff ###
 
-def iplot(figure_or_data, **plot_options):
+def iplot(figure_or_data, cached=False, **plot_options):
     """Create a unique url for this plot in Plotly and open in IPython.
+
+    cached (bool) -- Show a static image of the graph while the interactive
+                     version loads. Note: the interactive version will
+                     not display on notebooks if Javascript can't be run,
+                     e.g. notebooks shared with nbviewer.
 
     plot_options keyword agruments:
     filename (string) -- the name that will be associated with this figure
