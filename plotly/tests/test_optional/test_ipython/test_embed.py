@@ -5,13 +5,14 @@ import imghdr
 import threading
 import six
 import unittest
+from unittest import skip
 version = six.sys.version_info[:2]  # need this for conditional testing
 
 # unittest `skipIf` not supported in 2.6 and IPython not supported in 2.6/3.2
 if version < (2, 7) or (2, 7) < version < (3, 3):
     pass
 else:
-
+    @skip
     class TestPlotlyDisplay(unittest.TestCase):
 
         def setUp(self):
