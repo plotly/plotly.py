@@ -35,6 +35,9 @@ from plotly import utils
 from plotly import tools
 from plotly import exceptions
 from plotly import version
+from plotly.session import (sign_in, update_session_plot_options,
+                            get_session_plot_options, get_session_credentials,
+                            get_session_config)
 
 
 __all__ = None
@@ -46,56 +49,70 @@ _DEFAULT_PLOT_OPTIONS = dict(
     auto_open=True,
     validate=True)
 
-_credentials = dict()
 
-_plot_options = dict()
+# don't break backwards compatibility
+sign_in = sign_in
+update_plot_options = update_session_plot_options
 
-_config = dict()
 
 ### test file permissions and make sure nothing is corrupted ###
 tools.ensure_local_plotly_files()
-
-### _credentials stuff ###
-
-
-def sign_in(username, api_key, **kwargs):
-    """Set module-scoped _credentials for session. Optionally, set config info.
-    """
-    _credentials['username'], _credentials['api_key'] = username, api_key
-    # TODO: verify these _credentials with plotly
-
-    _config['plotly_domain'] = kwargs.get('plotly_domain')
-    _config['plotly_streaming_domain'] = kwargs.get('plotly_streaming_domain')
-    _config['plotly_api_domain'] = kwargs.get('plotly_api_domain')
-    _config['plotly_ssl_verification'] = kwargs.get('plotly_ssl_verification')
-    # TODO: verify format of config options
-
-
-### plot options stuff ###
-
-def update_plot_options(**kwargs):
-    """ Update the module-level _plot_options
-    """
-    _plot_options.update(kwargs)
-
-
-def get_plot_options():
-    """ Returns a copy of the user supplied plot options.
-    Use `update_plot_options()` to change.
-    """
-    return copy.copy(_plot_options)
-
-
 def get_credentials():
     """Returns the credentials that will be sent to plotly."""
     credentials = tools.get_credentials_file()
+    session_credentials = get_session_credentials()
     for credentials_key in credentials:
-        if _credentials.get(credentials_key):
-            credentials[credentials_key] = _credentials[credentials_key]
+
+        # checking for not false, but truthy value here is the desired behavior
+        session_value = session_credentials.get(credentials_key)
+        if session_value is False or session_value:
+            credentials[credentials_key] = session_value
     return credentials
 
 
-### plot stuff ###
+def get_config():
+    """Returns either module config or file config."""
+    config = tools.get_config_file()
+    session_config = get_session_config()
+    for config_key in config:
+
+        # checking for not false, but truthy value here is the desired behavior
+        session_value = session_config.get(config_key)
+        if session_value is False or session_value:
+            config[config_key] = session_value
+    return config
+
+
+def get_plot_options():
+    """
+    Merge default and user-defined plot options.
+
+    """
+    plot_options = copy.deepcopy(DEFAULT_PLOT_OPTIONS)
+    session_plot_options = get_session_plot_options()
+    for plot_option_key in plot_options:
+
+        # checking for not false, but truthy value here is the desired behavior
+        session_value = session_plot_options.get(plot_option_key)
+        if session_value is False or session_value:
+            plot_options[plot_option_key] = session_value
+    return plot_options
+
+
+def _plot_option_logic(plot_options):
+    """
+    Given some plot_options as part of a plot call, decide on final options
+
+    """
+    session_plot_options = get_session_plot_options()
+    current_plot_options = get_plot_options()
+    current_plot_options.update(plot_options)
+    if (('filename' in plot_options or 'filename' in session_plot_options) and
+            'fileopt' not in session_plot_options and
+            'fileopt' not in plot_options):
+        current_plot_options['fileopt'] = 'overwrite'
+    return current_plot_options
+
 
 def iplot(figure_or_data, **plot_options):
     """Create a unique url for this plot in Plotly and open in IPython.
@@ -123,28 +140,6 @@ def iplot(figure_or_data, **plot_options):
         embed_options['height'] = plot_options['height']
 
     return tools.embed(username, plot_id, **embed_options)
-
-
-def _plot_option_logic(plot_options):
-    """Sets plot_options via a precedence hierarchy."""
-    options = dict()
-    options.update(_DEFAULT_PLOT_OPTIONS)
-    options.update(_plot_options)
-    options.update(plot_options)
-    if ('filename' in plot_options
-       and 'fileopt' not in _plot_options
-       and 'fileopt' not in plot_options):
-        options['fileopt'] = 'overwrite'
-    return options
-
-
-def get_config():
-    """Returns either module config or file config."""
-    config = tools.get_config_file()
-    for config_key in config:
-        if _config.get(config_key) is not None:
-            config[config_key] = _config[config_key]
-    return config
 
 
 def plot(figure_or_data, validate=True, **plot_options):
@@ -346,7 +341,9 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
         file_owner = file_owner_or_url
     resource = "/apigetfile/{username}/{file_id}".format(username=file_owner,
                                                          file_id=file_id)
-    (username, api_key) = _validation_key_logic()
+    credentials = get_credentials()
+    validate_credentials(credentials)
+    username, api_key = credentials['username'], credentials['api_key']
     headers = {'plotly-username': username,
                'plotly-apikey': api_key,
                'plotly-version': version.__version__,
@@ -585,7 +582,9 @@ class image:
                                          "types here: "
                                          "https://plot.ly/python/static-image-export/")
 
-        (username, api_key) = _validation_key_logic()
+        credentials = get_credentials()
+        validate_credentials(credentials)
+        username, api_key = credentials['username'], credentials['api_key']
         headers = {'plotly-username': username,
                    'plotly-apikey': api_key,
                    'plotly-version': version.__version__,
@@ -1179,7 +1178,9 @@ class _api_v2:
 
     @classmethod
     def headers(cls):
-        un, api_key = _get_session_username_and_key()
+        credentials = get_credentials()
+        # todo, validate here?
+        un, api_key = credentials['username'], credentials['api_key']
         encoded_un_key_pair = base64.b64encode(
             six.b('{0}:{1}'.format(un, api_key))
         ).decode('utf8')
@@ -1190,25 +1191,28 @@ class _api_v2:
         }
 
 
-def _get_session_username_and_key():
-    file_credentials = tools.get_credentials_file()
-    if ('username' in _credentials) and ('api_key' in _credentials):
-        username, api_key = _credentials['username'], _credentials['api_key']
-    elif ('username' in file_credentials) and ('api_key' in file_credentials):
-        (username, api_key) = (file_credentials['username'],
-                               file_credentials['api_key'])
-    else:
+def validate_credentials(credentials):
+    """
+    Currently only checks for truthy username and api_key
+
+    """
+    username = credentials.get('username')
+    api_key = credentials.get('api_key')
+    if not username or not api_key:
         raise exceptions.PlotlyLocalCredentialsError()
-    return username, api_key
 
 
 def _send_to_plotly(figure, **plot_options):
     """
+
     """
     fig = tools._replace_newline(figure)  # does not mutate figure
     data = json.dumps(fig['data'] if 'data' in fig else [],
                       cls=utils.PlotlyJSONEncoder)
-    username, api_key = _get_session_username_and_key()
+    credentials = get_credentials()
+    validate_credentials(credentials)
+    username = credentials['username']
+    api_key = credentials['api_key']
     kwargs = json.dumps(dict(filename=plot_options['filename'],
                              fileopt=plot_options['fileopt'],
                              world_readable=plot_options['world_readable'],
@@ -1240,24 +1244,6 @@ def _send_to_plotly(figure, **plot_options):
 
     return r
 
-
-def _validation_key_logic():
-    creds_on_file = tools.get_credentials_file()
-    if 'username' in _credentials:
-        username = _credentials['username']
-    elif 'username' in creds_on_file:
-        username = creds_on_file['username']
-    else:
-        username = None
-    if 'api_key' in _credentials:
-        api_key = _credentials['api_key']
-    elif 'api_key' in creds_on_file:
-        api_key = creds_on_file['api_key']
-    else:
-        api_key = None
-    if username is None or api_key is None:
-        raise exceptions.PlotlyLocalCredentialsError()
-    return (username, api_key)
 
 def _open_url(url):
     try:
