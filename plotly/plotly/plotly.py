@@ -42,12 +42,16 @@ from plotly.session import (sign_in, update_session_plot_options,
 
 __all__ = None
 
-_DEFAULT_PLOT_OPTIONS = dict(
-    filename="plot from API",
-    fileopt="new",
-    world_readable=True,
-    auto_open=True,
-    validate=True)
+DEFAULT_PLOT_OPTIONS = {
+    'filename': "plot from API",
+    'fileopt': "new",
+    'world_readable': True,
+    'auto_open': True,
+    'validate': True
+}
+
+# test file permissions and make sure nothing is corrupted
+tools.ensure_local_plotly_files()
 
 
 # don't break backwards compatibility
@@ -55,8 +59,6 @@ sign_in = sign_in
 update_plot_options = update_session_plot_options
 
 
-### test file permissions and make sure nothing is corrupted ###
-tools.ensure_local_plotly_files()
 def get_credentials():
     """Returns the credentials that will be sent to plotly."""
     credentials = tools.get_credentials_file()
@@ -349,7 +351,7 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
                'plotly-version': version.__version__,
                'plotly-platform': 'python'}
     try:
-        test_if_int = int(file_id)
+        int(file_id)
     except ValueError:
         raise exceptions.PlotlyError(
             "The 'file_id' argument was not able to be converted into an "
@@ -387,7 +389,8 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
 
 @utils.template_doc(**tools.get_config_file())
 class Stream:
-    """ Interface to Plotly's real-time graphing API.
+    """
+    Interface to Plotly's real-time graphing API.
 
     Initialize a Stream object with a stream_id
     found in {plotly_domain}/settings.
@@ -412,22 +415,27 @@ class Stream:
     stream = Stream(stream_id) # Initialize a stream object
     stream.open() # Open the stream
     stream.write(dict(x=1, y=1)) # Plot (1, 1) in your graph
+
     """
 
     @utils.template_doc(**tools.get_config_file())
     def __init__(self, stream_id):
-        """ Initialize a Stream object with your unique stream_id.
+        """
+        Initialize a Stream object with your unique stream_id.
         Find your stream_id at {plotly_domain}/settings.
 
         For more help, see: `help(plotly.plotly.Stream)`
         or see examples and tutorials here:
         https://plot.ly/python/streaming/
+
         """
         self.stream_id = stream_id
         self.connected = False
+        self._stream = None
 
     def heartbeat(self, reconnect_on=(200, '', 408)):
-        """Keep stream alive. Streams will close after ~1 min of inactivity.
+        """
+        Keep stream alive. Streams will close after ~1 min of inactivity.
 
         If the interval between stream writes is > 30 seconds, you should
         consider adding a heartbeat between your stream.write() calls like so:
@@ -437,27 +445,30 @@ class Stream:
         try:
             self._stream.write('\n', reconnect_on=reconnect_on)
         except AttributeError:
-            raise exceptions.PlotlyError("Stream has not been opened yet, "
-                                         "cannot write to a closed connection. "
-                                         "Call `open()` on the stream to open the stream.")
+            raise exceptions.PlotlyError(
+                "Stream has not been opened yet, "
+                "cannot write to a closed connection. "
+                "Call `open()` on the stream to open the stream."
+            )
 
     def open(self):
-        """Open streaming connection to plotly.
+        """
+        Open streaming connection to plotly.
 
         For more help, see: `help(plotly.plotly.Stream)`
         or see examples and tutorials here:
         https://plot.ly/python/streaming/
-        """
 
+        """
         streaming_url = get_config()['plotly_streaming_domain']
-        self._stream = chunked_requests.Stream(streaming_url,
-                                               80,
-                                               {'Host': streaming_url,
-                                                'plotly-streamtoken': self.stream_id})
+        self._stream = chunked_requests.Stream(
+            streaming_url, 80, {'Host': streaming_url,
+                                'plotly-streamtoken': self.stream_id})
 
     def write(self, trace, layout=None, validate=True,
               reconnect_on=(200, '', 408)):
-        """Write to an open stream.
+        """
+        Write to an open stream.
 
         Once you've instantiated a 'Stream' object with a 'stream_id',
         you can 'write' to it in real time.
@@ -492,6 +503,7 @@ class Stream:
         For more help, see: `help(plotly.plotly.Stream)`
         or see examples and tutorials here:
         http://nbviewer.ipython.org/github/plotly/python-user-guide/blob/master/s7_streaming/s7_streaming.ipynb
+
         """
         stream_object = dict()
         stream_object.update(trace)
@@ -514,11 +526,11 @@ class Stream:
             except exceptions.PlotlyError as err:
                 raise exceptions.PlotlyError(
                     "Part of the data object with type, '{0}', cannot yet be "
-                    "streamed into Plotly. If you do not want to validate your "
-                    "data objects when streaming, you can set 'validate=False' "
-                    "in the call to 'your_stream.write()'. Here's why the "
-                    "object cannot be streamed:\n\n{1}"
-                    "".format(stream_object['type'], err)
+                    "streamed into Plotly. If you do not want to validate "
+                    "your data objects when streaming, you can set "
+                    "'validate=False' in the call to 'your_stream.write()'. "
+                    "Here's why the object cannot be streamed:\n\n{1}"
+                    .format(stream_object['type'], err)
                 )
             if layout is not None:
                 try:
@@ -540,16 +552,19 @@ class Stream:
         try:
             self._stream.write(jdata, reconnect_on=reconnect_on)
         except AttributeError:
-            raise exceptions.PlotlyError("Stream has not been opened yet, "
-                                         "cannot write to a closed connection. "
-                                         "Call `open()` on the stream to open the stream.")
+            raise exceptions.PlotlyError(
+                "Stream has not been opened yet, "
+                "cannot write to a closed connection. "
+                "Call `open()` on the stream to open the stream.")
 
     def close(self):
-        """ Close the stream connection to plotly's streaming servers.
+        """
+        Close the stream connection to plotly's streaming servers.
 
         For more help, see: `help(plotly.plotly.Stream)`
         or see examples and tutorials here:
         https://plot.ly/python/streaming/
+
         """
         try:
             self._stream.close()
@@ -558,29 +573,36 @@ class Stream:
 
 
 class image:
-    ''' Helper functions wrapped around plotly's static image generation api.
-    '''
+    """
+    Helper functions wrapped around plotly's static image generation api.
 
+    """
     @staticmethod
     def get(figure_or_data, format='png', width=None, height=None):
-        """ Return a static image of the plot described by `figure`.
+        """
+        Return a static image of the plot described by `figure`.
 
         Valid formats: 'png', 'svg', 'jpeg', 'pdf'
+
         """
+        # TODO: format is a built-in name... we shouldn't really use it
         if isinstance(figure_or_data, dict):
             figure = figure_or_data
         elif isinstance(figure_or_data, list):
             figure = {'data': figure_or_data}
+        else:
+            raise exceptions.PlotlyEmptyDataError(
+                "`figure_or_data` must be a dict or a list."
+            )
 
         if format not in ['png', 'svg', 'jpeg', 'pdf']:
-            raise exceptions.PlotlyError("Invalid format. "
-                                         "This version of your Plotly-Python "
-                                         "package currently only supports "
-                                         "png, svg, jpeg, and pdf. "
-                                         "Learn more about image exporting, "
-                                         "and the currently supported file "
-                                         "types here: "
-                                         "https://plot.ly/python/static-image-export/")
+            raise exceptions.PlotlyError(
+                "Invalid format. This version of your Plotly-Python "
+                "package currently only supports png, svg, jpeg, and pdf. "
+                "Learn more about image exporting, and the currently "
+                "supported file types here: "
+                "https://plot.ly/python/static-image-export/"
+            )
 
         credentials = get_credentials()
         validate_credentials(credentials)
@@ -622,7 +644,7 @@ class image:
         else:
             try:
                 if ('content-type' in headers and
-                    'json' in headers['content-type']):
+                        'json' in headers['content-type']):
                     return_data = json.loads(res.content)
                 else:
                     return_data = {'error': res.content}
@@ -635,8 +657,10 @@ class image:
 
     @classmethod
     def ishow(cls, figure_or_data, format='png', width=None, height=None):
-        """ Display a static image of the plot described by `figure`
+        """
+        Display a static image of the plot described by `figure`
         in an IPython Notebook.
+
         """
         if format == 'pdf':
             raise exceptions.PlotlyError("Aw, snap! "
@@ -652,11 +676,17 @@ class image:
             display(Image(img))
 
     @classmethod
-    def save_as(cls, figure_or_data, filename, format=None, width=None, height=None):
-        """ Save a static image of the plot described by `figure` locally as `filename`.
-            Valid image formats are 'png', 'svg', 'jpeg', and 'pdf'.
-            The format is taken as the extension of the filename or as the supplied format.
+    def save_as(cls, figure_or_data, filename, format=None, width=None,
+                height=None):
         """
+        Save a image of the plot described by `figure` locally as `filename`.
+
+        Valid image formats are 'png', 'svg', 'jpeg', and 'pdf'.
+        The format is taken as the extension of the filename or as the
+        supplied format.
+
+        """
+        # todo: format shadows built-in name
         (base, ext) = os.path.splitext(filename)
         if not ext and not format:
             filename += '.png'
@@ -675,33 +705,35 @@ class image:
 
 
 class file_ops:
-    """ Interface to Plotly's File System API
+    """
+    Interface to Plotly's File System API
+
     """
 
     @classmethod
     def mkdirs(cls, folder_path):
-        """ Create folder(s) specified by folder_path
-            in your Plotly account.
-
-            If the intermediate directories do not exist,
-            they will be created. If they already exist,
-            no error will be thrown.
-
-            Mimics the shell's mkdir -p.
-
-            Returns:
-            - 200 if folders already existed, nothing was created
-            - 201 if path was created
-            Raises:
-            -  exceptions.PlotlyRequestError with status code
-               400 if the path already exists.
-
-            Usage:
-            >> mkdirs('new folder')
-            >> mkdirs('existing folder/new folder')
-            >> mkdirs('new/folder/path')
         """
+        Create folder(s) specified by folder_path in your Plotly account.
 
+        If the intermediate directories do not exist,
+        they will be created. If they already exist,
+        no error will be thrown.
+
+        Mimics the shell's mkdir -p.
+
+        Returns:
+        - 200 if folders already existed, nothing was created
+        - 201 if path was created
+        Raises:
+        -  exceptions.PlotlyRequestError with status code
+           400 if the path already exists.
+
+        Usage:
+        >> mkdirs('new folder')
+        >> mkdirs('existing folder/new folder')
+        >> mkdirs('new/folder/path')
+
+        """
         # trim trailing slash TODO: necessesary?
         if folder_path[-1] == '/':
             folder_path = folder_path[0:-1]
@@ -719,23 +751,25 @@ class file_ops:
 
         return res.status_code
 
+
 class grid_ops:
-    """ Interface to Plotly's Grid API.
-        Plotly Grids are Plotly's tabular data object, rendered
-        in an online spreadsheet. Plotly graphs can be made from
-        references of columns of Plotly grid objects. Free-form
-        JSON Metadata can be saved with Plotly grids.
-
-        To create a Plotly grid in your Plotly account from Python,
-        see `grid_ops.upload`.
-
-        To add rows or columns to an existing Plotly grid, see
-        `grid_ops.append_rows` and `grid_ops.append_columns`
-        respectively.
-
-        To delete one of your grid objects, see `grid_ops.delete`.
     """
+    Interface to Plotly's Grid API.
+    Plotly Grids are Plotly's tabular data object, rendered
+    in an online spreadsheet. Plotly graphs can be made from
+    references of columns of Plotly grid objects. Free-form
+    JSON Metadata can be saved with Plotly grids.
 
+    To create a Plotly grid in your Plotly account from Python,
+    see `grid_ops.upload`.
+
+    To add rows or columns to an existing Plotly grid, see
+    `grid_ops.append_rows` and `grid_ops.append_columns`
+    respectively.
+
+    To delete one of your grid objects, see `grid_ops.delete`.
+
+    """
     @classmethod
     def _fill_in_response_column_ids(cls, request_columns,
                                      response_columns, grid_id):
@@ -759,8 +793,8 @@ class grid_ops:
                         separate specify a filename with folders and filename
                         separated by backslashes (`/`).
                         If a grid, plot, or folder already exists with the same
-                        filename, a `plotly.exceptions.RequestError` will be thrown
-                        with status_code 409
+                        filename, a `plotly.exceptions.RequestError` will be
+                        thrown with status_code 409
 
         Optional keyword arguments:
             - world_readable (default=True): make this grid publically (True)
@@ -804,8 +838,8 @@ class grid_ops:
         trace = Scatter(xsrc=grid[0], ysrc=grid[1])
         py.plot([trace], filename='graph from grid')
         ```
-        """
 
+        """
         # Make a folder path
         if filename[-1] == '/':
             filename = filename[0:-1]
@@ -857,7 +891,7 @@ class grid_ops:
 
     @classmethod
     def append_columns(cls, columns, grid=None, grid_url=None):
-        '''
+        """
         Append columns to a Plotly grid.
 
         `columns` is an iterable of plotly.grid_objs.Column objects
@@ -890,8 +924,8 @@ class grid_ops:
         column_1 = Column([1, 2, 3], 'time')
         py.grid_ops.append_columns([column_1], grid_url=grid_url)
         ```
-        '''
 
+        """
         grid_id = _api_v2.parse_grid_id_args(grid, grid_url)
 
         # Verify unique column names
@@ -908,7 +942,8 @@ class grid_ops:
             'cols': json.dumps(columns, cls=utils.PlotlyJSONEncoder)
         }
 
-        api_url = _api_v2.api_url('grids')+'/{grid_id}/col'.format(grid_id=grid_id)
+        api_url = (_api_v2.api_url('grids') +
+                   '/{grid_id}/col'.format(grid_id=grid_id))
         res = requests.post(api_url, data=payload, headers=_api_v2.headers(),
                             verify=get_config()['plotly_ssl_verification'])
         res = _api_v2.response_handler(res)
@@ -920,7 +955,7 @@ class grid_ops:
 
     @classmethod
     def append_rows(cls, rows, grid=None, grid_url=None):
-        '''
+        """
         Append rows to a Plotly grid.
 
         `rows` is an iterable of rows, where each row is a
@@ -961,8 +996,8 @@ class grid_ops:
         row = [1, 5]
         py.grid_ops.append_rows([row], grid=grid_url)
         ```
-        '''
 
+        """
         grid_id = _api_v2.parse_grid_id_args(grid, grid_url)
 
         if grid:
@@ -1003,7 +1038,7 @@ class grid_ops:
 
     @classmethod
     def delete(cls, grid=None, grid_url=None):
-        '''
+        """
         Delete a grid from your Plotly account.
 
         Only one of `grid` or `grid_url` needs to be specified.
@@ -1033,8 +1068,8 @@ class grid_ops:
         grid_url = 'https://plot.ly/~chris/3'
         py.grid_ops.delete(grid_url=grid_url)
         ```
-        '''
 
+        """
         grid_id = _api_v2.parse_grid_id_args(grid, grid_url)
         api_url = _api_v2.api_url('grids')+'/'+grid_id
         res = requests.delete(api_url, headers=_api_v2.headers(),
@@ -1043,58 +1078,60 @@ class grid_ops:
 
 
 class meta_ops:
-    """ Interface to Plotly's Metadata API.
+    """
+    Interface to Plotly's Metadata API.
 
-        In Plotly, Metadata is arbitrary, free-form JSON data that is
-        associated with Plotly grids. Metadata is viewable with any grid
-        that is shared and grids are searchable by key value pairs in
-        the Metadata. Metadata is any JSON-encodable object.
+    In Plotly, Metadata is arbitrary, free-form JSON data that is
+    associated with Plotly grids. Metadata is viewable with any grid
+    that is shared and grids are searchable by key value pairs in
+    the Metadata. Metadata is any JSON-encodable object.
 
-        To upload Metadata, either use the optional keyword argument `meta`
-        in the `py.grid_ops.upload` method, or use `py.meta_ops.upload`.
+    To upload Metadata, either use the optional keyword argument `meta`
+    in the `py.grid_ops.upload` method, or use `py.meta_ops.upload`.
 
     """
 
     @classmethod
     def upload(cls, meta, grid=None, grid_url=None):
-        '''
-            Upload Metadata to a Plotly grid.
+        """
+        Upload Metadata to a Plotly grid.
 
-            Metadata is any JSON-encodable object. For example,
-            a dictionary, string, or list.
+        Metadata is any JSON-encodable object. For example,
+        a dictionary, string, or list.
 
-            Only one of `grid` or `grid_url` needs to be specified.
+        Only one of `grid` or `grid_url` needs to be specified.
 
-            `grid` is a plotly.grid_objs.Grid object that has already
-                   been uploaded to Plotly.
+        `grid` is a plotly.grid_objs.Grid object that has already
+               been uploaded to Plotly.
 
-            `grid_url` is the URL of the Plotly grid to attach Metadata to.
+        `grid_url` is the URL of the Plotly grid to attach Metadata to.
 
-            Usage example 1: Upload a grid to Plotly, then attach Metadata to it
-            ```
-            from plotly.grid_objs import Grid, Column
-            import plotly.plotly as py
-            column_1 = Column([1, 2, 3], 'time')
-            column_2 = Column([4, 2, 5], 'voltage')
-            grid = Grid([column_1, column_2])
-            py.grid_ops.upload(grid, 'time vs voltage')
+        Usage example 1: Upload a grid to Plotly, then attach Metadata to it
+        ```
+        from plotly.grid_objs import Grid, Column
+        import plotly.plotly as py
+        column_1 = Column([1, 2, 3], 'time')
+        column_2 = Column([4, 2, 5], 'voltage')
+        grid = Grid([column_1, column_2])
+        py.grid_ops.upload(grid, 'time vs voltage')
 
-            # now attach Metadata to the grid
-            meta = {'experment': 'GaAs'}
-            py.meta_ops.upload(meta, grid=grid)
-            ```
+        # now attach Metadata to the grid
+        meta = {'experment': 'GaAs'}
+        py.meta_ops.upload(meta, grid=grid)
+        ```
 
-            Usage example 2: Upload Metadata to an existing Plotly grid
-            ```
-            import plotly.plotly as py
+        Usage example 2: Upload Metadata to an existing Plotly grid
+        ```
+        import plotly.plotly as py
 
-            grid_url = 'https://plot.ly/~chris/3143'
+        grid_url = 'https://plot.ly/~chris/3143'
 
-            meta = {'experment': 'GaAs'}
+        meta = {'experment': 'GaAs'}
 
-            py.meta_ops.upload(meta, grid_url=grid_Url)
-            ```
-        '''
+        py.meta_ops.upload(meta, grid_url=grid_Url)
+        ```
+
+        """
         grid_id = _api_v2.parse_grid_id_args(grid, grid_url)
 
         payload = {
@@ -1110,13 +1147,17 @@ class meta_ops:
 
 
 class _api_v2:
-    """ Request and response helper class for communicating with
-        Plotly's v2 API
+    """
+    Request and response helper class for communicating with Plotly's v2 API
+
     """
     @classmethod
     def parse_grid_id_args(cls, grid, grid_url):
-        """Return the grid_id from the non-None input argument.
+        """
+        Return the grid_id from the non-None input argument.
+
         Raise an error if more than one argument was supplied.
+
         """
         if grid is not None:
             id_from_grid = grid.id
@@ -1157,7 +1198,9 @@ class _api_v2:
         try:
             response.raise_for_status()
         except requests.exceptions.HTTPError as requests_exception:
-            plotly_exception = exceptions.PlotlyRequestError(requests_exception)
+            plotly_exception = exceptions.PlotlyRequestError(
+                requests_exception
+            )
             raise(plotly_exception)
 
         if ('content-type' in response.headers and
@@ -1220,8 +1263,8 @@ def _send_to_plotly(figure, **plot_options):
                              else {}),
                         cls=utils.PlotlyJSONEncoder)
 
-
-    payload = dict(platform='python', # TODO: It'd be cool to expose the platform for RaspPi and others
+    # TODO: It'd be cool to expose the platform for RaspPi and others
+    payload = dict(platform='python',
                    version=version.__version__,
                    args=data,
                    un=username,
@@ -1236,11 +1279,11 @@ def _send_to_plotly(figure, **plot_options):
     r.raise_for_status()
     r = json.loads(r.text)
     if 'error' in r and r['error'] != '':
-        print((r['error']))
+        print(r['error'])
     if 'warning' in r and r['warning'] != '':
         warnings.warn(r['warning'])
     if 'message' in r and r['message'] != '':
-        print((r['message']))
+        print(r['message'])
 
     return r
 
