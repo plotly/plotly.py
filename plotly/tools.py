@@ -17,6 +17,7 @@ import requests
 
 from plotly import utils
 from plotly import exceptions
+from plotly import session
 
 from plotly.graph_objs import graph_objs
 
@@ -213,7 +214,8 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
 
     """
     padding = 25
-    plotly_rest_url = get_config_file()['plotly_domain']
+    plotly_rest_url = (session.get_session_config().get('plotly_domain') or
+                       get_config_file()['plotly_domain'])
     if file_id is None:  # assume we're using a url
         url = file_owner_or_url
         if url[:len(plotly_rest_url)] != plotly_rest_url:
@@ -301,8 +303,12 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
         pass
     if _ipython_imported:
         if file_id:
+            plotly_domain = (
+                session.get_session_config().get('plotly_domain') or
+                get_config_file()['plotly_domain']
+            )
             url = "{plotly_domain}/~{un}/{fid}".format(
-                plotly_domain=get_config_file()['plotly_domain'],
+                plotly_domain=plotly_domain,
                 un=file_owner_or_url,
                 fid=file_id)
         else:
