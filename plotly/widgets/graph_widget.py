@@ -1,6 +1,5 @@
 from collections import deque
 import json
-import os
 import uuid
 
 # TODO: protected imports?
@@ -8,7 +7,7 @@ from IPython.html import widgets
 from IPython.utils.traitlets import Unicode
 from IPython.display import Javascript, display
 
-from plotly import utils
+from plotly import utils, tools
 from pkg_resources import resource_string
 
 # Load JS widget code
@@ -246,6 +245,18 @@ class GraphWidget(widgets.DOMWidget):
         ```
         """
         self._handle_registration('zoom', callback, remove)
+
+    def plot(self, figure_or_data, validate=True):
+        """Plot figure_or_data in the Plotly graph.
+        """
+        figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
+        message = {
+            'task': 'newPlot',
+            'data': figure['data'],
+            'layout': figure.get('layout', {}),
+            'graphId': self._graphId
+        }
+        self._handle_outgoing_message(message)
 
     def restyle(self, data, indices=None):
         """Update the style of existing traces in the Plotly graph.
