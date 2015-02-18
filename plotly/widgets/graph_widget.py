@@ -22,6 +22,78 @@ display(Javascript(js_widget_code))
 __all__ = None
 
 
+class GraphContainerWidget(widgets.ContainerWidget):
+
+    def __init__(self, graph_url=None, graph_only=False, height=700,
+                 width=1000):
+        self._graph = GraphWidget(graph_url=graph_url)
+        self._graph.parent = self
+        self.children = (self._graph,)
+        self._save_button = widgets.ButtonWidget(description='save')
+        self._save_button.on_click(self.save_on_click)
+        self._filename_input = widgets.TextWidget()
+        self._new_url_box = widgets.HTMLWidget(value='<a href="plot.ly">plot.ly</a>')
+        self._save_container = widgets.ContainerWidget()
+        self._graph_only = graph_only
+        self._save_container.children = (self._filename_input,
+                                         self._save_button,
+                                         self._new_url_box)
+        super(GraphContainerWidget, self).__init__()
+        self.set_css({'width': width, 'height': height})
+
+    def on_click(self, callback, remove=False):
+        self._graph.on_click(callback, remove=remove)
+
+    def on_hover(self, callback, remove=False):
+        self._graph.on_hover(callback, remove=False)
+
+    def on_zoom(self, callback, remove=False):
+        self._graph.on_zoom(callback, remove=remove)
+
+    def restyle(self, data, indices=None):
+        self._save_button.remove_class('disabled')
+        self._graph.restyle(data, indices=indices)
+
+    def relayout(self, layout):
+        self._save_button.remove_class('disabled')
+        self._graph.relayout(layout)
+
+    def hover(self, *hover_objs):
+        self._graph.hover(*hover_objs)
+
+    def add_traces(self, traces, new_indices=None):
+        self._save_button.remove_class('disabled')
+        self._graph.add_traces(traces, new_indices=new_indices)
+
+    def delete_traces(self, indices):
+        self._save_button.remove_class('disabled')
+        self._graph.delete_traces(indices)
+
+    def reorder_traces(self, current_indices, new_indices=None):
+        self._save_button.remove_class('disabled')
+        self._graph.reorder_traces(current_indices, new_indices=new_indices)
+
+    def save(self, ignore_defaults=False, filename=''):
+        self._graph.save(ignore_defaults=ignore_defaults, filename=filename)
+
+    def save_on_click(self, *args, **kwargs):
+        self._save_button.add_class('disabled')
+        self._graph.save(filename=self._filename_input.value)
+
+    def update_children(self):
+        if not self._graph_only:
+            self.children += (self._save_container,)
+        self._save_container.remove_class('vbox')
+        self._save_container.add_class('hbox')
+        from IPython.display import Javascript, display
+        display(Javascript(
+            "$('input').attr('placeholder', 'plotly filename')"
+        ))
+
+    def update_url(self):
+        self._new_url_box.value = "<a href={g}>{g}</a>".format(g=self._graph._new_url)
+
+
 class GraphWidget(widgets.DOMWidget):
     """An interactive Plotly graph widget for use in IPython
     Notebooks.
@@ -36,7 +108,7 @@ class GraphWidget(widgets.DOMWidget):
     }
 
     # TODO: URL for offline enterprise
-    def __init__(self, graph_url='https://plot.ly/~playground/7', **kwargs):
+    def __init__(self, graph_url=None, **kwargs):
         """Initialize a plotly graph widget
 
         Args:
@@ -50,7 +122,10 @@ class GraphWidget(widgets.DOMWidget):
         super(GraphWidget, self).__init__(**kwargs)
 
         # TODO: Validate graph_url
-        self._graph_url = graph_url
+        if graph_url:
+            self._graph_url = graph_url
+        else:
+            self._graph_url = 'https://plot.ly/~playground/7'
         self._listener_set = set()
         self._event_handlers = {
             'click': widgets.CallbackDispatcher(),
@@ -78,6 +153,7 @@ class GraphWidget(widgets.DOMWidget):
         content = message['content']['data']['content']
         if content.get('event', '') == 'pong':
             self._graphId = content['graphId']
+            self.parent.update_children()
 
             # ready to recieve - pop out all of the items in the deque
             while self._clientMessages:
@@ -101,6 +177,7 @@ class GraphWidget(widgets.DOMWidget):
                 url = py.plot(self._attributes, auto_open=False,
                               filename=self._filename, validate=False)
                 self._new_url = url
+                self.parent.update_url()
 
     def _handle_registration(self, event_type, callback, remove):
         self._event_handlers[event_type].register_callback(callback,
