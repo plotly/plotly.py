@@ -1,1 +1,1 @@
-from . graph_widget import GraphWidget
+from . graph_widget import GraphWidget, GraphContainerWidget
