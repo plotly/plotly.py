@@ -248,7 +248,46 @@ class GraphWidget(widgets.DOMWidget):
         self._handle_registration('zoom', callback, remove)
 
     def plot(self, figure_or_data, validate=True):
-        """Plot figure_or_data in the Plotly graph.
+        """Plot figure_or_data in the Plotly graph widget.
+
+        Args:
+            figure_or_data (dict, list, or plotly.graph_obj object):
+                The standard Plotly graph object that describes Plotly
+                graphs as used in `plotly.plotly.plot`. See examples
+                of the figure_or_data in https://plot.ly/python/
+
+        Returns: None
+
+        Example 1 - Graph a scatter plot:
+        ```
+        from plotly.graph_objs import Scatter
+        g = GraphWidget()
+        g.plot([Scatter(x=[1, 2, 3], y=[10, 15, 13])])
+        ```
+
+        Example 2 - Graph a scatter plot with a title:
+        ```
+        from plotly.graph_objs import Scatter, Figure, Data
+        fig = Figure(
+            data = Data([
+                Scatter(x=[1, 2, 3], y=[20, 15, 13])
+            ]),
+            layout = Layout(title='Experimental Data')
+        )
+
+        g = GraphWidget()
+        g.plot(fig)
+        ```
+
+        Example 3 - Clear a graph widget
+        ```
+        from plotly.graph_objs import Scatter, Figure
+        g = GraphWidget()
+        g.plot([Scatter(x=[1, 2, 3], y=[10, 15, 13])])
+
+        # Now clear it
+        g.plot({}) # alternatively, g.plot(Figure())
+        ```
         """
         if figure_or_data == {} or figure_or_data == Figure():
             validate = False
