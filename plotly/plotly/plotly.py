@@ -163,33 +163,8 @@ def plot(figure_or_data, validate=True, **plot_options):
         False: do not open plot in the browser, but do return the unique url
 
     """
-    if isinstance(figure_or_data, dict):
-        figure = figure_or_data
-    elif isinstance(figure_or_data, list):
-        figure = {'data': figure_or_data}
-    else:
-        raise exceptions.PlotlyError("The `figure_or_data` positional argument "
-                                     "must be either `dict`-like or "
-                                     "`list`-like.")
-    if validate:
-        try:
-            tools.validate(figure, obj_type='Figure')
-        except exceptions.PlotlyError as err:
-            raise exceptions.PlotlyError("Invalid 'figure_or_data' argument. "
-                                         "Plotly will not be able to properly "
-                                         "parse the resulting JSON. If you "
-                                         "want to send this 'figure_or_data' "
-                                         "to Plotly anyway (not recommended), "
-                                         "you can set 'validate=False' as a "
-                                         "plot option.\nHere's why you're "
-                                         "seeing this error:\n\n{0}"
-                                         "".format(err))
-        if not figure['data']:
-            raise exceptions.PlotlyEmptyDataError(
-                "Empty data list found. Make sure that you populated the "
-                "list of data objects you're sending and try again.\n"
-                "Questions? support@plot.ly"
-            )
+    figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
+
     for entry in figure['data']:
         for key, val in list(entry.items()):
             try:

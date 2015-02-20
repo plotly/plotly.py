@@ -1,6 +1,5 @@
 from collections import deque
 import json
-import os
 import uuid
 
 # TODO: protected imports?
@@ -8,7 +7,8 @@ from IPython.html import widgets
 from IPython.utils.traitlets import Unicode
 from IPython.display import Javascript, display
 
-from plotly import utils
+from plotly import utils, tools
+from plotly.graph_objs import Figure
 from pkg_resources import resource_string
 
 # Load JS widget code
@@ -246,6 +246,61 @@ class GraphWidget(widgets.DOMWidget):
         ```
         """
         self._handle_registration('zoom', callback, remove)
+
+    def plot(self, figure_or_data, validate=True):
+        """Plot figure_or_data in the Plotly graph widget.
+
+        Args:
+            figure_or_data (dict, list, or plotly.graph_obj object):
+                The standard Plotly graph object that describes Plotly
+                graphs as used in `plotly.plotly.plot`. See examples
+                of the figure_or_data in https://plot.ly/python/
+
+        Returns: None
+
+        Example 1 - Graph a scatter plot:
+        ```
+        from plotly.graph_objs import Scatter
+        g = GraphWidget()
+        g.plot([Scatter(x=[1, 2, 3], y=[10, 15, 13])])
+        ```
+
+        Example 2 - Graph a scatter plot with a title:
+        ```
+        from plotly.graph_objs import Scatter, Figure, Data
+        fig = Figure(
+            data = Data([
+                Scatter(x=[1, 2, 3], y=[20, 15, 13])
+            ]),
+            layout = Layout(title='Experimental Data')
+        )
+
+        g = GraphWidget()
+        g.plot(fig)
+        ```
+
+        Example 3 - Clear a graph widget
+        ```
+        from plotly.graph_objs import Scatter, Figure
+        g = GraphWidget()
+        g.plot([Scatter(x=[1, 2, 3], y=[10, 15, 13])])
+
+        # Now clear it
+        g.plot({}) # alternatively, g.plot(Figure())
+        ```
+        """
+        if figure_or_data == {} or figure_or_data == Figure():
+            validate = False
+
+        figure = tools.return_figure_from_figure_or_data(figure_or_data,
+                                                         validate)
+        message = {
+            'task': 'newPlot',
+            'data': figure.get('data', []),
+            'layout': figure.get('layout', {}),
+            'graphId': self._graphId
+        }
+        self._handle_outgoing_message(message)
 
     def restyle(self, data, indices=None):
         """Update the style of existing traces in the Plotly graph.
