@@ -8,6 +8,7 @@ from IPython.utils.traitlets import Unicode
 from IPython.display import Javascript, display
 
 from plotly import utils, tools
+from plotly.graph_objs import Figure
 from pkg_resources import resource_string
 
 # Load JS widget code
@@ -249,10 +250,14 @@ class GraphWidget(widgets.DOMWidget):
     def plot(self, figure_or_data, validate=True):
         """Plot figure_or_data in the Plotly graph.
         """
-        figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
+        if figure_or_data == {} or figure_or_data == Figure():
+            validate = False
+
+        figure = tools.return_figure_from_figure_or_data(figure_or_data,
+                                                         validate)
         message = {
             'task': 'newPlot',
-            'data': figure['data'],
+            'data': figure.get('data', []),
             'layout': figure.get('layout', {}),
             'graphId': self._graphId
         }
