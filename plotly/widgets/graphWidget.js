@@ -87,6 +87,7 @@ require(["widgets/js/widget"], function(WidgetManager){
                             if(message.type !== 'zoom') {
                                 for(var i in message.points) {
                                     delete message.points[i].data;
+                                    delete message.points[i].fullData;
                                 }
                             }
                             that.send({event: message.type, message: message, graphId: graphId});
