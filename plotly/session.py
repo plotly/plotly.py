@@ -19,7 +19,7 @@ _session = {
 CREDENTIALS_KEYS = {
     'username': six.string_types,
     'api_key': six.string_types,
-    'stream_ids': []
+    'stream_ids': list
 }
 
 CONFIG_KEYS = {
