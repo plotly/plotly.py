@@ -17,6 +17,7 @@ import requests
 
 from plotly import utils
 from plotly import exceptions
+from plotly import session
 
 from plotly.graph_objs import graph_objs
 
@@ -199,8 +200,8 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
 
     Note, if you're using a file_owner string as the first argument, you MUST
     specify a `file_id` keyword argument. Else, if you're using a url string
-    as the first argument, you MUST NOT specify a `file_id` keyword argument, or
-    file_id must be set to Python's None value.
+    as the first argument, you MUST NOT specify a `file_id` keyword argument,
+    or file_id must be set to Python's None value.
 
     Positional arguments:
     file_owner_or_url (string) -- a valid plotly username OR a valid plotly url
@@ -209,11 +210,13 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
     file_id (default=None) -- an int or string that can be converted to int
                               if you're using a url, don't fill this in!
     width (default="100%") -- an int or string corresp. to width of the figure
-    height (default="525") -- same as width but corresp. to the height of the figure
+    height (default="525") -- same as width but corresp. to the height of the
+                              figure
 
     """
     padding = 25
-    plotly_rest_url = get_config_file()['plotly_domain']
+    plotly_rest_url = (session.get_session_config().get('plotly_domain') or
+                       get_config_file()['plotly_domain'])
     if file_id is None:  # assume we're using a url
         url = file_owner_or_url
         if url[:len(plotly_rest_url)] != plotly_rest_url:
@@ -301,8 +304,12 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
         pass
     if _ipython_imported:
         if file_id:
+            plotly_domain = (
+                session.get_session_config().get('plotly_domain') or
+                get_config_file()['plotly_domain']
+            )
             url = "{plotly_domain}/~{un}/{fid}".format(
-                plotly_domain=get_config_file()['plotly_domain'],
+                plotly_domain=plotly_domain,
                 un=file_owner_or_url,
                 fid=file_id)
         else:

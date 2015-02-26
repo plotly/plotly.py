@@ -17,9 +17,12 @@ from plotly.exceptions import PlotlyError, PlotlyEmptyDataError
 # username for tests: 'PlotlyImageTest'
 # api_key for account: '786r5mecv0'
 
+def setUp():
+    py.sign_in('PlotlyImageTest', '786r5mecv0',
+               plotly_domain='https://plot.ly')
+
 
 def test_plot_valid():
-    py.sign_in('PlotlyImageTest', '786r5mecv0')
     fig = {
         'data':[
             {
