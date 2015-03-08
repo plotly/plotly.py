@@ -24,6 +24,7 @@ import os
 import six
 import base64
 import requests
+from requests.auth import HTTPBasicAuth
 
 if sys.version[:1] == '2':
     from urlparse import urlparse
@@ -582,25 +583,22 @@ class image:
         credentials = get_credentials()
         validate_credentials(credentials)
         username, api_key = credentials['username'], credentials['api_key']
-        headers = {'plotly-username': username,
-                   'plotly-apikey': api_key,
-                   'plotly-version': version.__version__,
-                   'plotly-platform': 'python'}
+        headers = {'Plotly-Version': version.__version__,
+                   'Content-Type': 'application/json',
+                   'Plotly-Client-Platform': 'python'}
 
-        payload = {
-            'figure': figure,
-            'format': format
-        }
-
+        payload = {'figure': figure, 'format': format}
         if width is not None:
             payload['width'] = width
         if height is not None:
             payload['height'] = height
 
-        url = get_config()['plotly_domain'] + "/apigenimage/"
+        url = _api_v2.api_url('images/')
+
         res = requests.post(
             url, data=json.dumps(payload, cls=utils.PlotlyJSONEncoder),
-            headers=headers, verify=get_config()['plotly_ssl_verification']
+            headers=headers, verify=get_config()['plotly_ssl_verification'],
+            auth=HTTPBasicAuth(username, api_key)
         )
 
         headers = res.headers
