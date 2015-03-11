@@ -173,7 +173,7 @@ def test_column_json_encoding():
            '"2014-01-05 01:01:01", '
            '"2014-01-05 01:01:01.000001"], '
            '"name": "col 2"}, '
-           '{"data": [1, 2, 3, NaN, NaN, Infinity, '
+           '{"data": [1, 2, 3, null, null, null, '
            '"2014-01-05"], "name": "col 3"}]' == json_columns)
 
 
@@ -188,7 +188,7 @@ def test_figure_json_encoding():
     js2 = json.dumps(s2, cls=utils.PlotlyJSONEncoder, sort_keys=True)
 
     assert(js1 == '{"type": "scatter3d", "x": [1, 2, 3], '
-                  '"y": [1, 2, 3, NaN, NaN, Infinity, "2014-01-05"], '
+                  '"y": [1, 2, 3, null, null, null, "2014-01-05"], '
                   '"z": [1, "A", "2014-01-05", '
                   '"2014-01-05 01:01:01", "2014-01-05 01:01:01.000001"]}')
     assert(js2 == '{"type": "scatter", "x": [1, 2, 3]}')
@@ -219,7 +219,7 @@ def test_datetime_json_encoding():
 
 def test_pandas_json_encoding():
     j1 = json.dumps(df['col 1'], cls=utils.PlotlyJSONEncoder)
-    assert(j1 == '[1, 2, 3, "2014-01-05", null, NaN, Infinity]')
+    assert(j1 == '[1, 2, 3, "2014-01-05", null, null, null]')
 
     # Test that data wasn't mutated
     assert_series_equal(df['col 1'],
@@ -249,7 +249,7 @@ def test_numpy_masked_json_encoding():
     l = [1, 2, np.ma.core.masked]
     j1 = json.dumps(l, cls=utils.PlotlyJSONEncoder)
     print j1
-    assert(j1 == '[1, 2, NaN]')
+    assert(j1 == '[1, 2, null]')
     assert(set(l) == set([1, 2, np.ma.core.masked]))
 
 
@@ -276,7 +276,7 @@ def test_masked_constants_example():
     jy = json.dumps(renderer.plotly_fig['data'][1]['y'],
                     cls=utils.PlotlyJSONEncoder)
     assert(jy == '[-398.11793026999999, -398.11792966000002, '
-                 '-398.11786308000001, NaN]')
+                 '-398.11786308000001, null]')
 
 
 def test_numpy_dates():
