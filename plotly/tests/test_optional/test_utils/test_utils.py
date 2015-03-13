@@ -28,7 +28,7 @@ class TestJSONEncoder(TestCase):
 
         # should *fail* when object doesn't have `to_plotly_json` attribute
         objs_without_attr = [
-            1, 'one', {'a', 'set'}, {'a': 'dict'}, ['a', 'list']
+            1, 'one', set(['a', 'set']), {'a': 'dict'}, ['a', 'list']
         ]
         for obj in objs_without_attr:
             self.assertRaises(utils.NotEncodable,
@@ -49,7 +49,7 @@ class TestJSONEncoder(TestCase):
 
         # should *fail* when object doesn't have `tolist` method
         objs_without_attr = [
-            1, 'one', {'a', 'set'}, {'a': 'dict'}, ['a', 'list']
+            1, 'one', set(['a', 'set']), {'a': 'dict'}, ['a', 'list']
         ]
         for obj in objs_without_attr:
             self.assertRaises(utils.NotEncodable,
