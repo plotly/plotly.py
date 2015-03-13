@@ -24,14 +24,11 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
     export PYENV_VERSION=${version}
     echo "Using pyenv version $(pyenv version)"
 
-    echo "python -c 'import sys; print(sys.version_info)' yields:"
-    python -c 'import sys; print(sys.version_info)'
+    # this was a major issue previously, sanity check that we're using the
+    # version we *think* we're using (that pyenv is pointing to)
+    echo "python -c 'import sys; print(sys.version)'"
+    python -c 'import sys; print(sys.version)'
 
-    echo "python -c 'import os; print(os.getenv('\''PYENV_VERSION'\''))'"
-    python -c 'import os; print(os.getenv('\''PYENV_VERSION'\''))'
-
-    echo "current env"
-    env
 
     echo "install plotly (ignoring possibly cached versions)"
     pip install -I ${PLOTLY_PACKAGE_ROOT} ||

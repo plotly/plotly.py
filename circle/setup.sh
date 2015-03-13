@@ -24,6 +24,11 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
     export PYENV_VERSION=${version}
     echo "Using pyenv version $(pyenv version)"
 
+    # this was a major issue previously, sanity check that we're using the
+    # version we *think* we're using (that pyenv is pointing to)
+    echo "python -c 'import sys; print(sys.version)'"
+    python -c 'import sys; print(sys.version)'
+
     # install core requirements all versions need
     pip install -r ${PLOTLY_CORE_REQUIREMENTS_FILE} ||
         error_exit "${LINENO}: can't install core reqs for Python ${version}"
