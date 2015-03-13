@@ -18,7 +18,6 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
 
     # exporting this variable (in this scope) chooses the python version
     pyenv global ${version}
-    pyenv local ${version}
     echo "Using pyenv version $(pyenv version)"
 
     # install core requirements all versions need
