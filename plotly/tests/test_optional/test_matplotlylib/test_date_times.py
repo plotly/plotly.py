@@ -64,4 +64,4 @@ class TestDateTimes(TestCase):
 
         x0 = fig.axes[0].lines[0].get_xydata()[0][0]
         self.assertEqual(x0, expected_x0)
-        self.assertListEqual(pfig['data'][0]['x'], expected_x)
+        self.assertEqual(pfig['data'][0]['x'], expected_x)
