@@ -17,7 +17,6 @@ and ploty's servers.
 from __future__ import absolute_import
 
 import sys
-import json
 import warnings
 import copy
 import os
@@ -29,6 +28,11 @@ if sys.version[:1] == '2':
     from urlparse import urlparse
 else:
     from urllib.parse import urlparse
+
+if sys.version[:3] == '2.6':
+    import simplejson as json
+else:
+    import json
 
 from plotly.plotly import chunked_requests
 from plotly import utils

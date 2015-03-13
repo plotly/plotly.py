@@ -1,7 +1,12 @@
-import json
+import sys
 from unittest import TestCase
 
 from plotly.utils import PlotlyJSONEncoder
+
+if sys.version[:3] == '2.6':
+    import simplejson as json
+else:
+    import json
 
 
 class TestJSONEncoder(TestCase):

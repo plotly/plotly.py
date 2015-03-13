@@ -11,6 +11,7 @@ import datetime
 import numpy as np
 import json
 import pandas as pd
+import sys
 from pandas.util.testing import assert_series_equal
 import matplotlib.pyplot as plt
 
@@ -27,7 +28,7 @@ class TestJSONEncoder(TestCase):
 
         # should *fail* when object doesn't have `to_plotly_json` attribute
         objs_without_attr = [
-            1, 'one', {'a', 'set'}, {'a': 'dict'}, ['a', 'list']
+            1, 'one', set(['a', 'set']), {'a': 'dict'}, ['a', 'list']
         ]
         for obj in objs_without_attr:
             self.assertRaises(utils.NotEncodable,
@@ -48,7 +49,7 @@ class TestJSONEncoder(TestCase):
 
         # should *fail* when object doesn't have `tolist` method
         objs_without_attr = [
-            1, 'one', {'a', 'set'}, {'a': 'dict'}, ['a', 'list']
+            1, 'one', set(['a', 'set']), {'a': 'dict'}, ['a', 'list']
         ]
         for obj in objs_without_attr:
             self.assertRaises(utils.NotEncodable,
@@ -75,7 +76,7 @@ class TestJSONEncoder(TestCase):
 
         # should succeed when we've got specific pandas thingies
         res = utils.PlotlyJSONEncoder.encode_as_pandas(pd.NaT)
-        self.assertIs(res, None)
+        self.assertTrue(res is None)
 
     def test_encode_as_numpy(self):
 
@@ -132,7 +133,7 @@ class TestJSONEncoder(TestCase):
                               utils.PlotlyJSONEncoder.encode_as_date, obj)
 
         # should work with a date
-        a_date = datetime.date(2013, 10, 01)
+        a_date = datetime.date(2013, 10, 1)
         res = utils.PlotlyJSONEncoder.encode_as_date(a_date)
         self.assertEqual(res, '2013-10-01')
 
@@ -248,9 +249,8 @@ def test_pandas_json_encoding():
 def test_numpy_masked_json_encoding():
     l = [1, 2, np.ma.core.masked]
     j1 = json.dumps(l, cls=utils.PlotlyJSONEncoder)
-    print j1
+    print(j1)
     assert(j1 == '[1, 2, null]')
-    assert(set(l) == set([1, 2, np.ma.core.masked]))
 
 
 def test_masked_constants_example():
@@ -275,8 +275,9 @@ def test_masked_constants_example():
 
     jy = json.dumps(renderer.plotly_fig['data'][1]['y'],
                     cls=utils.PlotlyJSONEncoder)
-    assert(jy == '[-398.11793026999999, -398.11792966000002, '
-                 '-398.11786308000001, null]')
+    print(jy)
+    array = json.loads(jy)
+    assert(array == [-398.11793027, -398.11792966, -398.11786308, None])
 
 
 def test_numpy_dates():

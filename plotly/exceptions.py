@@ -15,8 +15,13 @@ info: (required!)
 
 
 """
-import json
+import sys
 import six
+
+if sys.version[:3] == '2.6':
+    import simplejson as json
+else:
+    import json
 
 ## Base Plotly Error ##
 
@@ -49,7 +54,10 @@ class PlotlyRequestError(PlotlyError):
         elif content_type == 'text/plain':
             self.message = requests_exception.response.content
         else:
-            self.message = requests_exception.message
+            try:
+                self.message = requests_exception.message
+            except AttributeError:
+                self.message = 'unknown error'
 
     def __str__(self):
         return self.message

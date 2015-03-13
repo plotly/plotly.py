@@ -8,8 +8,13 @@ A module intended for use with Nose.
 
 import requests
 import copy
-import json
 import six
+import sys
+
+if sys.version[:3] == '2.6':
+    import simplejson as json
+else:
+    import json
 
 default_headers = {'plotly-username': '',
                    'plotly-apikey': '',
