@@ -20,6 +20,9 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
     pyenv global ${version}
     echo "Using pyenv version $(pyenv version)"
 
+    echo "python -c 'import sys; print(sys.version_info)' yields:"
+    python -c 'import sys; print(sys.version_info)'
+
     echo "install plotly (ignoring possibly cached versions)"
     pip install -I ${PLOTLY_PACKAGE_ROOT} ||
         error_exit "${LINENO}: can't install plotly package from project root"
