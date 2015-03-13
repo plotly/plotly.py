@@ -11,7 +11,7 @@ import datetime
 import numpy as np
 import json
 import pandas as pd
-import six
+import sys
 from pandas.util.testing import assert_series_equal
 import matplotlib.pyplot as plt
 
@@ -76,7 +76,7 @@ class TestJSONEncoder(TestCase):
 
         # should succeed when we've got specific pandas thingies
         res = utils.PlotlyJSONEncoder.encode_as_pandas(pd.NaT)
-        self.assertIs(res, None)
+        self.assertTrue(res is None)
 
     def test_encode_as_numpy(self):
 
