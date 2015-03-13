@@ -132,7 +132,7 @@ class TestJSONEncoder(TestCase):
                               utils.PlotlyJSONEncoder.encode_as_date, obj)
 
         # should work with a date
-        a_date = datetime.date(2013, 10, 01)
+        a_date = datetime.date(2013, 10, 1)
         res = utils.PlotlyJSONEncoder.encode_as_date(a_date)
         self.assertEqual(res, '2013-10-01')
 
