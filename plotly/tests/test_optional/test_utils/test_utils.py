@@ -248,7 +248,7 @@ def test_pandas_json_encoding():
 def test_numpy_masked_json_encoding():
     l = [1, 2, np.ma.core.masked]
     j1 = json.dumps(l, cls=utils.PlotlyJSONEncoder)
-    print j1
+    print(j1)
     assert(j1 == '[1, 2, null]')
     assert(set(l) == set([1, 2, np.ma.core.masked]))
 
