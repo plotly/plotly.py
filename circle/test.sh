@@ -13,6 +13,7 @@ function error_exit
 }
 
 # PYENV shims need to be infront of the rest of the path to work!
+echo "adding pyenv shims to the beginning of the path in this shell"
 export PATH="/home/ubuntu/.pyenv/shims:$PATH"
 
 # for each version we want, setup a functional virtual environment
