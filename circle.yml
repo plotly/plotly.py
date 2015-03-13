@@ -11,10 +11,10 @@ dependencies:
     # run all the pre-written installers (this will take a *while*)
     - bash circle/setup.sh
     # install testing tools for circle's version of things
-    - PYENV_VERSION=2.7 && pip install nose coverage
+    - pyenv global 2.7 && pip install nose coverage
   override:
-    - PYENV_VERSION=2.7 && pip install -I .
-    - PYENV_VERSION=2.7 && cd ~ && python -c "import plotly"
+    - pyenv global 2.7 && pip install -I .
+    - pyenv global 2.7 && cd ~ && python -c "import plotly"
 test:
   override:
 
@@ -28,6 +28,6 @@ test:
 #    - sudo chmod 600 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
 
     # test core things in the general 2.7 version that circle has
-    - PYENV_VERSION=2.7 && nosetests -xv plotly/tests --with-coverage --cover-package=plotly
+    - pyenv global 2.7 && nosetests -xv plotly/tests --with-coverage --cover-package=plotly
     - mkdir "${CIRCLE_ARTIFACTS}/2.7" || true
     - coverage html -d "${CIRCLE_ARTIFACTS}/2.7" --title=2.7
