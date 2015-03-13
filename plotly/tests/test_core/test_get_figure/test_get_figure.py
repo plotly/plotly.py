@@ -10,7 +10,6 @@ from plotly.plotly import plotly as py
 from plotly import exceptions
 from nose.tools import raises
 import six
-import json
 
 from unittest import TestCase
 

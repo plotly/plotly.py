@@ -1,6 +1,6 @@
 from collections import deque
-import json
 import uuid
+import sys
 
 # TODO: protected imports?
 from IPython.html import widgets
@@ -10,6 +10,12 @@ from IPython.display import Javascript, display
 from plotly import utils, tools
 from plotly.graph_objs import Figure
 from pkg_resources import resource_string
+
+# even though python 2.6 wouldn't be able to run *any* of this...
+if sys.version[:3] == '2.6':
+    import simplejson as json
+else:
+    import json
 
 # Load JS widget code
 # No officially recommended way to do this in any other way

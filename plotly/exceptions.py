@@ -15,8 +15,13 @@ info: (required!)
 
 
 """
-import json
+import sys
 import six
+
+if sys.version[:3] == '2.6':
+    import simplejson as json
+else:
+    import json
 
 ## Base Plotly Error ##
 
