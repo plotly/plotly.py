@@ -19,7 +19,6 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
     # exporting this variable (in this scope) chooses the python version
     pyenv global ${version}
     pyenv local ${version}
-    pyenv shell ${version}
     echo "Using pyenv version $(pyenv version)"
 
     echo "python -c 'import sys; print(sys.version_info)' yields:"
