@@ -18,6 +18,9 @@ dependencies:
 
     # we need to cd out of the project root to ensure the install worked
     - cd ~ && python -c "import plotly"
+
+  cache_directories:
+    - "~/.pyenv/versions"  # attempt to just cache installed pyenv things
 test:
   override:
 
