@@ -12,6 +12,9 @@ function error_exit
     exit 1
 }
 
+# PYENV shims need to be infront of the rest of the path to work!
+export PATH="/home/ubuntu/.pyenv/shims:$PATH"
+
 # for each version we want, setup a functional virtual environment
 for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
     echo Testing Python ${version}
