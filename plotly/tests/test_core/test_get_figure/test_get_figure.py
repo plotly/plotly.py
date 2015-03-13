@@ -13,7 +13,8 @@ import six
 import json
 
 from unittest import TestCase
-from unittest import skipIf
+
+version = six.sys.version_info[:2]  # need this for conditional testing
 
 
 # username for tests: 'plotlyimagetest'
@@ -198,12 +199,18 @@ def test_all():
 
 class TestBytesVStrings(TestCase):
 
-    @skipIf(not six.PY3, 'Decoding and missing escapes is only seen in PY3')
-    def test_proper_escaping(self):
-        un = 'PlotlyImageTest'
-        ak = '786r5mecv0'
-        url = "https://plot.ly/~PlotlyImageTest/91/"
-        py.sign_in(un, ak)
-        print("getting: https://plot.ly/~PlotlyImageTest/91/")
-        print("###########################################\n\n")
-        fig = py.get_figure(url)
+    # unittest `skipIf` not supported in 2.6
+    if version < (2, 7) or (2, 7) < version < (3, 3):
+        pass
+    else:
+        from unittest import skipIf
+
+        @skipIf(not six.PY3, 'Decoding and missing escapes only seen in PY3')
+        def test_proper_escaping(self):
+            un = 'PlotlyImageTest'
+            ak = '786r5mecv0'
+            url = "https://plot.ly/~PlotlyImageTest/91/"
+            py.sign_in(un, ak)
+            print("getting: https://plot.ly/~PlotlyImageTest/91/")
+            print("###########################################\n\n")
+            fig = py.get_figure(url)
