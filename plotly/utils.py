@@ -6,7 +6,6 @@ Low-level functionality NOT intended for users to EVER use.
 
 """
 
-import json
 import os.path
 import sys
 import threading
@@ -31,6 +30,11 @@ try:
     _sage_imported = True
 except ImportError:
     _sage_imported = False
+
+if sys.version[:3] == '2.6':
+    import simplejson as json
+else:
+    import json
 
 
 ### incase people are using threading, we lock file reads
@@ -124,66 +128,45 @@ class PlotlyJSONEncoder(json.JSONEncoder):
     version.
 
     """
-
-    # we want stricter JSON, so convert NaN, Inf, -Inf --> 'null'
-    nan_str = inf_str = neg_inf_str = 'null'
-
-    # uses code from official python json.encoder module. Same licence applies.
-    def iterencode(self, o, _one_shot=False):
+    def coerce_to_strict(self, const):
         """
-        Encode the given object and yield each string
-        representation as available.
-
-        For example::
-
-            for chunk in JSONEncoder().iterencode(bigobject):
-                mysocket.write(chunk)
+        This is used to ultimately *encode* into strict JSON, see `encode`
 
         """
-        if self.check_circular:
-            markers = {}
+        # before python 2.7, 'true', 'false', 'null', were include here.
+        if const in ('Infinity', '-Infinity', 'NaN'):
+            return None
         else:
-            markers = None
-        if self.ensure_ascii:
-            _encoder = json.encoder.encode_basestring_ascii
+            return const
+
+    def encode(self, o):
+        """
+        Load and then dump the result using parse_constant kwarg
+
+        Note that setting invalid separators will cause a failure at this step.
+
+        """
+
+        # this will raise errors in a normal-expected way
+        encoded_o = super(PlotlyJSONEncoder, self).encode(o)
+
+        # now:
+        #    1. `loads` to switch Infinity, -Infinity, NaN to None
+        #    2. `dumps` again so you get 'null' instead of extended JSON
+        try:
+            new_o = json.loads(encoded_o, parse_constant=self.coerce_to_strict)
+        except ValueError:
+
+            # invalid separators will fail here. raise a helpful exception
+            raise ValueError(
+                "Encoding into strict JSON failed. Did you set the separators "
+                "valid JSON separators?"
+            )
         else:
-            _encoder = json.encoder.encode_basestring
-        if self.encoding != 'utf-8':
-            def _encoder(o, _orig_encoder=_encoder, _encoding=self.encoding):
-                if isinstance(o, str):
-                    o = o.decode(_encoding)
-                return _orig_encoder(o)
-
-        def floatstr(o, allow_nan=self.allow_nan,
-                     _repr=json.encoder.FLOAT_REPR, _inf=json.encoder.INFINITY,
-                     _neginf=-json.encoder.INFINITY):
-            # Check for specials.  Note that this type of test is processor
-            # and/or platform-specific, so do tests which don't depend on the
-            # internals.
-
-            # *any* two NaNs are not equivalent (even to itself) try:
-            # float('NaN') == float('NaN')
-            if o != o:
-                text = self.nan_str
-            elif o == _inf:
-                text = self.inf_str
-            elif o == _neginf:
-                text = self.neg_inf_str
-            else:
-                return _repr(o)
-
-            if not allow_nan:
-                raise ValueError(
-                    "Out of range float values are not JSON compliant: " +
-                    repr(o))
-
-            return text
-
-        _iterencode = json.encoder._make_iterencode(
-                markers, self.default, _encoder, self.indent, floatstr,
-                self.key_separator, self.item_separator, self.sort_keys,
-                self.skipkeys, _one_shot)
-        return _iterencode(o, 0)
+            return json.dumps(new_o, sort_keys=self.sort_keys,
+                              indent=self.indent,
+                              separators=(self.item_separator,
+                                          self.key_separator))
 
     def default(self, obj):
         """
