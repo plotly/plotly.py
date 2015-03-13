@@ -11,6 +11,7 @@ import datetime
 import numpy as np
 import json
 import pandas as pd
+import six
 from pandas.util.testing import assert_series_equal
 import matplotlib.pyplot as plt
 
@@ -274,8 +275,11 @@ def test_masked_constants_example():
 
     jy = json.dumps(renderer.plotly_fig['data'][1]['y'],
                     cls=utils.PlotlyJSONEncoder)
-    assert(jy == '[-398.11793026999999, -398.11792966000002, '
-                 '-398.11786308000001, null]')
+    if six.PY3:
+        assert(jy == '[-398.11793027, -398.11792966, -398.11786308, null]')
+    else:
+        assert(jy == '[-398.11793026999999, -398.11792966000002, '
+                     '-398.11786308000001, null]')
 
 
 def test_numpy_dates():
