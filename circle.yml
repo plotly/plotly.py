@@ -7,13 +7,15 @@ machine:
     PLOTLY_OPTIONAL_REQUIREMENTS_FILE: ${PLOTLY_PACKAGE_ROOT}/optional-requirements.txt
     PLOTLY_OPTIONAL_REQUIREMENTS_FILE_2_6: ${PLOTLY_PACKAGE_ROOT}/optional-requirements-2-6.txt
 dependencies:
-  pre:
+  override:
+
     # run all the pre-written installers (this will take a *while*)
     - bash circle/setup.sh
+
     # install testing tools for circle's version of things
     - pip install nose coverage
-  override:
     - pip install -I .
+
     # we need to cd out of the project root to ensure the install worked
     - cd ~ && python -c "import plotly"
 test:
