@@ -275,7 +275,9 @@ def test_masked_constants_example():
 
     jy = json.dumps(renderer.plotly_fig['data'][1]['y'],
                     cls=utils.PlotlyJSONEncoder)
-    assert(jy == '[-398.11793027, -398.11792966, -398.11786308, null]')
+    print(jy)
+    array = json.loads(jy)
+    assert(array == [-398.11793027, -398.11792966, -398.11786308, None])
 
 
 def test_numpy_dates():
