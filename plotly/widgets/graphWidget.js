@@ -50,6 +50,15 @@ require(["widgets/js/widget", "widgets/js/manager"], function (widget, manager) 
             that.$loading = $('<div id="'+loadingId+'">Initializing...</div>')
                             .appendTo(that.$el);
 
+            // for some reason the 'width' is being changed in IPython 3.0.0
+            // for the containing `div` element. There's a flicker here, but
+            // I was unable to fix it otherwise.
+            setTimeout(function ()  {
+                if (IPYTHON_VERSION === '3') {
+                    $('#' + graphId)[0].parentElement.style.width = '100%';
+                }
+            }, 500);
+
             // initialize communication with the iframe
             if(!('pingers' in window)){
                 window.pingers = {};
