@@ -6,6 +6,7 @@ window.genUID = function() {
 };
 
 require(["widgets/js/widget"], function(WidgetManager){
+var IPYTHON_VERSION = '3';
 
     var GraphView = IPython.DOMWidgetView.extend({
         render: function(){
