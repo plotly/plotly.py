@@ -308,7 +308,7 @@ class GraphWidget(widgets.DOMWidget):
         }
         self._handle_outgoing_message(message)
 
-    def restyle(self, data, indices=None):
+    def restyle(self, update, indices=None):
         """Update the style of existing traces in the Plotly graph.
 
         Args:
@@ -408,7 +408,10 @@ class GraphWidget(widgets.DOMWidget):
             ```
         """
         # TODO: Add flat traces to graph_objs
-        message = {'task': 'restyle', 'update': data, 'graphId': self._graphId}
+        message = {
+            'task': 'restyle', 'update': update,
+            'graphId': self._graphId
+        }
         if indices:
             message['indices'] = indices
         self._handle_outgoing_message(message)
