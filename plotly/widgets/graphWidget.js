@@ -14,7 +14,7 @@ require(["widgets/js/widget", "widgets/js/manager"], function (widget, manager) 
         // construct the expected IPython3 widget API
         IPYTHON_VERSION = '2';
         manager = {WidgetManager: widget};
-        widget = {DOMWidgetView: IPython.DOMWidgetView}
+        widget = {DOMWidgetView: IPython.DOMWidgetView};
     }
 
     var GraphView = widget.DOMWidgetView.extend({
