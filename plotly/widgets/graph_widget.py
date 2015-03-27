@@ -733,7 +733,7 @@ class GraphWidget(widgets.DOMWidget):
                 ```
                 graph.extend_traces({
                     'x': [[1, 2, 3], [2, 3, 4]],
-                    'y': [[10, 20, 30], [3, 4, 3]]
+                    'y': [[10, 20, 30], [3, 4, 3]]
                 }, indices=[0, 1])
                 ```
 
