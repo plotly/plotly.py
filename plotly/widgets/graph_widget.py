@@ -671,7 +671,7 @@ class GraphWidget(widgets.DOMWidget):
             message['newIndices'] = new_indices
         self._handle_outgoing_message(message)
 
-    def extend_traces(self, update, indices, max_points=None):
+    def extend_traces(self, update, indices=(0,), max_points=None):
         """ Append data points to existing traces in the Plotly graph.
 
         Args:
