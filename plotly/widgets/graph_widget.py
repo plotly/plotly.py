@@ -758,7 +758,6 @@ class GraphWidget(widgets.DOMWidget):
                         'y': [new_points, new_points]
                     },
                     indices=[0, 1],
-                    [0, 1],
                     max_points={
                         'x': [25, 50],
                         'y': [25, 50]
