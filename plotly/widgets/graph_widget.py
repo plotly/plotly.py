@@ -764,6 +764,44 @@ class GraphWidget(widgets.DOMWidget):
                     }
                 )
                 ```
+
+                Example 6 - Update other attributes, like marker colors and
+                            sizes and text
+                ```
+                # Initialize a plot with some empty attributes
+                graph.plot([{
+                    'x': [],
+                    'y': [],
+                    'text': [],
+                    'marker': {
+                        'size': [],
+                        'color': []
+                    }
+                }])
+                # Append some data into those attributes
+                graph.extend_traces({
+                    'x': [[1, 2, 3]],
+                    'y': [[10, 20, 30]],
+                    'text': [['A', 'B', 'C']],
+                    'marker.size': [[10, 15, 20]],
+                    'marker.color': [['blue', 'red', 'orange']]
+                }, indices=[0])
+                ```
+
+                Example 7 - Live-update a graph over a few seconds
+                ```
+                import time
+
+                graph.plot([{'x': [], 'y': []}])
+                for i in range(10):
+                    graph.extend_traces({
+                        'x': [[i]],
+                        'y': [[i]]
+                    }, indices=[0])
+
+                    time.sleep(0.5)
+                ```
+
         """
         message = {
             'task': 'extendTraces',
