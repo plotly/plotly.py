@@ -308,7 +308,7 @@ class GraphWidget(widgets.DOMWidget):
         }
         self._handle_outgoing_message(message)
 
-    def restyle(self, data, indices=None):
+    def restyle(self, update, indices=None):
         """Update the style of existing traces in the Plotly graph.
 
         Args:
@@ -346,10 +346,10 @@ class GraphWidget(widgets.DOMWidget):
         Examples:
             Initialization - Start each example below with this setup:
             ```
-            from plotly.widgets import Graph
+            from plotly.widgets import GraphWidget
             from IPython.display import display
 
-            graph = GraphWidget('https://plot.ly/~chris/3979')
+            graph = GraphWidget()
             display(graph)
             ```
 
@@ -408,7 +408,11 @@ class GraphWidget(widgets.DOMWidget):
             ```
         """
         # TODO: Add flat traces to graph_objs
-        message = {'task': 'restyle', 'update': data, 'graphId': self._graphId}
+        message = {
+            'task': 'restyle',
+            'update': update,
+            'graphId': self._graphId
+        }
         if indices:
             message['indices'] = indices
         self._handle_outgoing_message(message)
@@ -435,7 +439,7 @@ class GraphWidget(widgets.DOMWidget):
         Examples - Start each example below with this setup:
             Initialization:
             ```
-            from plotly.widgets import Graph
+            from plotly.widgets import GraphWidget
             from IPython.display import display
 
             graph = GraphWidget('https://plot.ly/~chris/3979')
@@ -518,7 +522,7 @@ class GraphWidget(widgets.DOMWidget):
         Examples:
             Initialization - Start each example below with this setup:
             ```
-            from plotly.widgets import Graph
+            from plotly.widgets import GraphWidget
             from IPython.display import display
 
             graph = GraphWidget('https://plot.ly/~chris/3979')
@@ -566,7 +570,7 @@ class GraphWidget(widgets.DOMWidget):
         Examples:
             Initialization - Start each example below with this setup:
             ```
-            from plotly.widgets import Graph
+            from plotly.widgets import GraphWidget
             from plotly.graph_objs import Scatter
             from IPython.display import display
 
@@ -611,7 +615,7 @@ class GraphWidget(widgets.DOMWidget):
 
         Example - Delete the 2nd trace:
             ```
-            from plotly.widgets import Graph
+            from plotly.widgets import GraphWidget
             from IPython.display import display
 
             graph = GraphWidget('https://plot.ly/~chris/3979')
@@ -665,4 +669,146 @@ class GraphWidget(widgets.DOMWidget):
         }
         if new_indices is not None:
             message['newIndices'] = new_indices
+        self._handle_outgoing_message(message)
+
+    def extend_traces(self, update, indices=(0,), max_points=None):
+        """ Append data points to existing traces in the Plotly graph.
+
+        Args:
+            update (dict):
+                dict where keys are the graph attribute strings
+                and values are arrays of arrays with values to extend.
+
+                Each array in the array will extend a trace.
+
+                Valid keys include:
+                    'x', 'y', 'text,
+                    'marker.color', 'marker.size', 'marker.symbol',
+                    'marker.line.color', 'marker.line.width'
+
+            indices (list, int):
+                Specify which traces to apply the `update` dict to.
+                If indices are not given, the update will apply to
+                the traces in order.
+
+            max_points (int or dict, optional):
+                If specified, then only show the `max_points` most
+                recent points in the graph.
+                This is useful to prevent traces from becoming too
+                large (and slow) or for creating "windowed" graphs
+                in monitoring applications.
+
+                To set max_points to different values for each trace
+                or attribute, set max_points to a dict mapping keys
+                to max_points values. See the examples below.
+
+            Examples:
+                Initialization - Start each example below with this setup:
+                ```
+                from plotly.widgets import GraphWidget
+                from IPython.display import display
+
+                graph = GraphWidget()
+                graph.plot([
+                    {'x': [], 'y': []},
+                    {'x': [], 'y': []}
+                ])
+
+                display(graph)
+                ```
+
+                Example 1 - Extend the first trace with x and y data
+                ```
+                graph.extend_traces({'x': [[1, 2, 3]], 'y': [[10, 20, 30]]},
+                                    indices=[0])
+                ```
+
+                Example 2 - Extend the second trace with x and y data
+                ```
+                graph.extend_traces({'x': [[1, 2, 3]], 'y': [[10, 20, 30]]},
+                                    indices=[1])
+                ```
+
+                Example 3 - Extend the first two traces with x and y data
+                ```
+                graph.extend_traces({
+                    'x': [[1, 2, 3], [2, 3, 4]],
+                    'y': [[10, 20, 30], [3, 4, 3]]
+                }, indices=[0, 1])
+                ```
+
+                Example 4 - Extend the first trace with x and y data and
+                            limit the length of data in that trace to 50
+                            points.
+                ```
+
+                graph.extend_traces({
+                    'x': [range(100)],
+                    'y': [range(100)]
+                }, indices=[0, 1], max_points=50)
+                ```
+
+                Example 5 - Extend the first and second trace with x and y data
+                            and limit the length of data in the first trace to
+                            25 points and the second trace to 50 points.
+                ```
+                new_points = range(100)
+                graph.extend_traces({
+                        'x': [new_points, new_points],
+                        'y': [new_points, new_points]
+                    },
+                    indices=[0, 1],
+                    max_points={
+                        'x': [25, 50],
+                        'y': [25, 50]
+                    }
+                )
+                ```
+
+                Example 6 - Update other attributes, like marker colors and
+                            sizes and text
+                ```
+                # Initialize a plot with some empty attributes
+                graph.plot([{
+                    'x': [],
+                    'y': [],
+                    'text': [],
+                    'marker': {
+                        'size': [],
+                        'color': []
+                    }
+                }])
+                # Append some data into those attributes
+                graph.extend_traces({
+                    'x': [[1, 2, 3]],
+                    'y': [[10, 20, 30]],
+                    'text': [['A', 'B', 'C']],
+                    'marker.size': [[10, 15, 20]],
+                    'marker.color': [['blue', 'red', 'orange']]
+                }, indices=[0])
+                ```
+
+                Example 7 - Live-update a graph over a few seconds
+                ```
+                import time
+
+                graph.plot([{'x': [], 'y': []}])
+                for i in range(10):
+                    graph.extend_traces({
+                        'x': [[i]],
+                        'y': [[i]]
+                    }, indices=[0])
+
+                    time.sleep(0.5)
+                ```
+
+        """
+        message = {
+            'task': 'extendTraces',
+            'update': update,
+            'graphId': self._graphId,
+            'indices': indices
+        }
+        if max_points is not None:
+            message['maxPoints'] = max_points
         self._handle_outgoing_message(message)
