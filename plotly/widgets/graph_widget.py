@@ -346,10 +346,10 @@ class GraphWidget(widgets.DOMWidget):
         Examples:
             Initialization - Start each example below with this setup:
             ```
-            from plotly.widgets import Graph
+            from plotly.widgets import GraphWidget
             from IPython.display import display
 
-            graph = GraphWidget('https://plot.ly/~chris/3979')
+            graph = GraphWidget()
             display(graph)
             ```
 
@@ -438,7 +438,7 @@ class GraphWidget(widgets.DOMWidget):
         Examples - Start each example below with this setup:
             Initialization:
             ```
-            from plotly.widgets import Graph
+            from plotly.widgets import GraphWidget
             from IPython.display import display
 
             graph = GraphWidget('https://plot.ly/~chris/3979')
@@ -521,7 +521,7 @@ class GraphWidget(widgets.DOMWidget):
         Examples:
             Initialization - Start each example below with this setup:
             ```
-            from plotly.widgets import Graph
+            from plotly.widgets import GraphWidget
             from IPython.display import display
 
             graph = GraphWidget('https://plot.ly/~chris/3979')
@@ -569,7 +569,7 @@ class GraphWidget(widgets.DOMWidget):
         Examples:
             Initialization - Start each example below with this setup:
             ```
-            from plotly.widgets import Graph
+            from plotly.widgets import GraphWidget
             from plotly.graph_objs import Scatter
             from IPython.display import display
 
@@ -614,7 +614,7 @@ class GraphWidget(widgets.DOMWidget):
 
         Example - Delete the 2nd trace:
             ```
-            from plotly.widgets import Graph
+            from plotly.widgets import GraphWidget
             from IPython.display import display
 
             graph = GraphWidget('https://plot.ly/~chris/3979')
@@ -704,7 +704,7 @@ class GraphWidget(widgets.DOMWidget):
             Examples:
                 Initialization - Start each example below with this setup:
                 ```
-                from plotly.widgets import Graph
+                from plotly.widgets import GraphWidget
                 from IPython.display import display
 
                 graph = GraphWidget()
