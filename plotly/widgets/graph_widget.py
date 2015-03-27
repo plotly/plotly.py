@@ -409,7 +409,8 @@ class GraphWidget(widgets.DOMWidget):
         """
         # TODO: Add flat traces to graph_objs
         message = {
-            'task': 'restyle', 'update': update,
+            'task': 'restyle',
+            'update': update,
             'graphId': self._graphId
         }
         if indices:
