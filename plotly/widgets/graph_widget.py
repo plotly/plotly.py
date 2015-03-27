@@ -719,20 +719,22 @@ class GraphWidget(widgets.DOMWidget):
 
                 Example 1 - Extend the first trace with x and y data
                 ```
-                graph.extend_traces({'x': [[1,2,3]], 'y': [[10,20,30]]}, [0])
+                graph.extend_traces({'x': [[1, 2, 3]], 'y': [[10, 20, 30]]},
+                                    indices=[0])
                 ```
 
                 Example 2 - Extend the second trace with x and y data
                 ```
-                graph.extend_traces({'x': [[1,2,3]], 'y': [[10,20,30]]}, [1])
+                graph.extend_traces({'x': [[1, 2, 3]], 'y': [[10, 20, 30]]},
+                                    indices=[1])
                 ```
 
                 Example 3 - Extend the first two traces with x and y data
                 ```
                 graph.extend_traces({
-                    'x': [[1,2,3], [2,3,4]],
-                    'y': [[10,20,30], [3,4,3]]
-                }, [0, 1])
+                    'x': [[1, 2, 3], [2, 3, 4]],
+                    'y': [[10, 20, 30], [3, 4, 3]]
+                }, indices=[0, 1])
                 ```
 
                 Example 4 - Extend the first trace with x and y data and
@@ -743,7 +745,7 @@ class GraphWidget(widgets.DOMWidget):
                 graph.extend_traces({
                     'x': [range(100)],
                     'y': [range(100)]
-                }, [0, 1], max_points=50)
+                }, indices=[0, 1], max_points=50)
                 ```
 
                 Example 5 - Extend the first and second trace with x and y data
@@ -755,6 +757,7 @@ class GraphWidget(widgets.DOMWidget):
                         'x': [new_points, new_points],
                         'y': [new_points, new_points]
                     },
+                    indices=[0, 1],
                     [0, 1],
                     max_points={
                         'x': [25, 50],
