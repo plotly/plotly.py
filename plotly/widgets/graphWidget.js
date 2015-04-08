@@ -136,8 +136,12 @@ require(["widgets/js/widget", "widgets/js/manager"], function (widget, manager) 
                 // message hasn't been received yet, do stuff
                 window.messageIds[message.uid] = true;
 
-                var plot = $('#'+message.graphId)[0].contentWindow;
-                plot.postMessage(message, window.plotlyDomains[message.graphId]);
+                if (message.fadeTo) {
+                    this.fadeTo(message);
+                } else {
+                    var plot = $('#' + message.graphId)[0].contentWindow;
+                    plot.postMessage(message, window.plotlyDomains[message.graphId]);
+                }
             }
 
             return GraphView.__super__.update.apply(this);
