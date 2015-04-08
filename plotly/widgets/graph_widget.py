@@ -841,3 +841,11 @@ class GraphWidget(widgets.DOMWidget):
         if max_points is not None:
             message['maxPoints'] = max_points
         self._handle_outgoing_message(message)
+
+    def _fade_to(self, duration, opacity):
+        """
+        Change the opacity to give a visual signal to users.
+
+        """
+        message = {'fadeTo': True, 'duration': duration, 'opacity': opacity}
+        self._handle_outgoing_message(message)
