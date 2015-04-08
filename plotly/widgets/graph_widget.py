@@ -7,6 +7,7 @@ from IPython.html import widgets
 from IPython.utils.traitlets import Unicode
 from IPython.display import Javascript, display
 
+import plotly.plotly.plotly as py
 from plotly import utils, tools
 from plotly.graph_objs import Figure
 from pkg_resources import resource_string
@@ -35,6 +36,11 @@ class GraphWidget(widgets.DOMWidget):
     _view_name = Unicode('GraphView', sync=True)
     _message = Unicode(sync=True)
     _graph_url = Unicode(sync=True)
+    _new_url = Unicode(sync=True)
+    _filename = ''
+    _flags = {
+        'save_pending': False
+    }
 
     # TODO: URL for offline enterprise
     def __init__(self, graph_url='https://plot.ly/~playground/7', **kwargs):
@@ -70,6 +76,10 @@ class GraphWidget(widgets.DOMWidget):
         # so we'll just cue up messages until they're ready to be sent
         self._clientMessages = deque()
 
+    @property
+    def url(self):
+        return self._new_url or ''
+
     def _handle_msg(self, message):
         """Handle a msg from the front-end.
 
@@ -95,6 +105,17 @@ class GraphWidget(widgets.DOMWidget):
                 message = content['message']['ranges']
 
             self._event_handlers[content['event']](self, message)
+
+        if content.get('event', '') == 'getAttributes':
+            self._attributes = content.get('response', {})
+
+            # there might be a save pending, use the plotly module to save
+            if self._flags['save_pending']:
+                self._flags['save_pending'] = False
+                url = py.plot(self._attributes, auto_open=False,
+                              filename=self._filename, validate=False)
+                self._new_url = url
+                self._fade_to('slow', 1)
 
     def _handle_registration(self, event_type, callback, remove):
         self._event_handlers[event_type].register_callback(callback,
@@ -671,6 +692,20 @@ class GraphWidget(widgets.DOMWidget):
             message['newIndices'] = new_indices
         self._handle_outgoing_message(message)
 
+    def save(self, ignore_defaults=False, filename=''):
+        """
+        Save a copy of the current state of the widget in plotly.
+
+        :param (bool) ignore_defaults: Auto-fill in unspecified figure keys?
+        :param (str) filename: Name of the file on plotly.
+
+        """
+        self._flags['save_pending'] = True
+        self._filename = filename
+        message = {'task': 'getAttributes', 'ignoreDefaults': ignore_defaults}
+        self._handle_outgoing_message(message)
+        self._fade_to('slow', 0.1)
+
     def extend_traces(self, update, indices=(0,), max_points=None):
         """ Append data points to existing traces in the Plotly graph.
 
@@ -811,4 +846,12 @@ class GraphWidget(widgets.DOMWidget):
         }
         if max_points is not None:
             message['maxPoints'] = max_points
+        self._handle_outgoing_message(message)
+
+    def _fade_to(self, duration, opacity):
+        """
+        Change the opacity to give a visual signal to users.
+
+        """
+        message = {'fadeTo': True, 'duration': duration, 'opacity': opacity}
         self._handle_outgoing_message(message)

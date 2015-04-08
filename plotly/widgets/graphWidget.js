@@ -110,6 +110,8 @@ require(["widgets/js/widget", "widgets/js/manager"], function (widget, manager) 
                                 }
                             }
                             that.send({event: message.type, message: message, graphId: graphId});
+                        } else if (message.task === 'getAttributes') {
+                            that.send({event: 'getAttributes', response: message.response});
                         }
                     }
                 }
@@ -134,11 +136,25 @@ require(["widgets/js/widget", "widgets/js/manager"], function (widget, manager) 
                 // message hasn't been received yet, do stuff
                 window.messageIds[message.uid] = true;
 
-                var plot = $('#'+message.graphId)[0].contentWindow;
-                plot.postMessage(message, window.plotlyDomains[message.graphId]);
+                if (message.fadeTo) {
+                    this.fadeTo(message);
+                } else {
+                    var plot = $('#' + message.graphId)[0].contentWindow;
+                    plot.postMessage(message, window.plotlyDomains[message.graphId]);
+                }
             }
 
             return GraphView.__super__.update.apply(this);
+        },
+
+        /**
+         * Wrapper for jquery's `fadeTo` function.
+         *
+         * @param message Contains the id we need to find the element.
+         */
+        fadeTo: function (message) {
+            var plot = $('#' + message.graphId);
+            plot.fadeTo(message.duration, message.opacity);
         }
     });
 
