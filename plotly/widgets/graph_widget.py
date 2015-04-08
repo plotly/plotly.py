@@ -115,6 +115,7 @@ class GraphWidget(widgets.DOMWidget):
                 url = py.plot(self._attributes, auto_open=False,
                               filename=self._filename, validate=False)
                 self._new_url = url
+                self._fade_to('slow', 1)
 
     def _handle_registration(self, event_type, callback, remove):
         self._event_handlers[event_type].register_callback(callback,
@@ -703,6 +704,7 @@ class GraphWidget(widgets.DOMWidget):
         self._filename = filename
         message = {'task': 'getAttributes', 'ignoreDefaults': ignore_defaults}
         self._handle_outgoing_message(message)
+        self._fade_to('slow', 0.1)
 
     def extend_traces(self, update, indices=(0,), max_points=None):
         """ Append data points to existing traces in the Plotly graph.
