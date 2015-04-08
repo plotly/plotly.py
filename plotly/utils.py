@@ -6,7 +6,6 @@ Low-level functionality NOT intended for users to EVER use.
 
 """
 
-import json
 import os.path
 import sys
 import threading
@@ -31,6 +30,11 @@ try:
     _sage_imported = True
 except ImportError:
     _sage_imported = False
+
+if sys.version[:3] == '2.6':
+    import simplejson as json
+else:
+    import json
 
 
 ### incase people are using threading, we lock file reads
@@ -119,7 +123,50 @@ class PlotlyJSONEncoder(json.JSONEncoder):
 
     See PlotlyJSONEncoder.default for more implementation information.
 
+    Additionally, this encoder overrides nan functionality so that 'Inf',
+    'NaN' and '-Inf' encode to 'null'. Which is stricter JSON than the Python
+    version.
+
     """
+    def coerce_to_strict(self, const):
+        """
+        This is used to ultimately *encode* into strict JSON, see `encode`
+
+        """
+        # before python 2.7, 'true', 'false', 'null', were include here.
+        if const in ('Infinity', '-Infinity', 'NaN'):
+            return None
+        else:
+            return const
+
+    def encode(self, o):
+        """
+        Load and then dump the result using parse_constant kwarg
+
+        Note that setting invalid separators will cause a failure at this step.
+
+        """
+
+        # this will raise errors in a normal-expected way
+        encoded_o = super(PlotlyJSONEncoder, self).encode(o)
+
+        # now:
+        #    1. `loads` to switch Infinity, -Infinity, NaN to None
+        #    2. `dumps` again so you get 'null' instead of extended JSON
+        try:
+            new_o = json.loads(encoded_o, parse_constant=self.coerce_to_strict)
+        except ValueError:
+
+            # invalid separators will fail here. raise a helpful exception
+            raise ValueError(
+                "Encoding into strict JSON failed. Did you set the separators "
+                "valid JSON separators?"
+            )
+        else:
+            return json.dumps(new_o, sort_keys=self.sort_keys,
+                              indent=self.indent,
+                              separators=(self.item_separator,
+                                          self.key_separator))
 
     def default(self, obj):
         """

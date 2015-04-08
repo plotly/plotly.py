@@ -11,7 +11,9 @@ version = six.sys.version_info[:2]  # need this for conditional testing
 if version < (2, 7) or (2, 7) < version < (3, 3):
     pass
 else:
+    from unittest import skip
 
+    @skip
     class TestPlotlyDisplay(unittest.TestCase):
 
         def setUp(self):

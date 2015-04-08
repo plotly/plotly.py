@@ -1,13 +1,15 @@
 from unittest import TestCase
 import plotly.plotly.plotly as py
 import plotly.tools as tls
+import plotly.session as session
 
 
 def test_get_credentials():
-    if 'username' in py._credentials:
-        del py._credentials['username']
-    if 'api_key' in py._credentials:
-        del py._credentials['api_key']
+    session_credentials = session.get_session_credentials()
+    if 'username' in session_credentials:
+        del session._session['credentials']['username']
+    if 'api_key' in session_credentials:
+        del session._session['credentials']['api_key']
     creds = py.get_credentials()
     file_creds = tls.get_credentials_file()
     print(creds)
@@ -34,9 +36,11 @@ class TestSignIn(TestCase):
         plotly_domain = 'test domain'
         plotly_streaming_domain = 'test streaming domain'
         config1 = py.get_config()
-        py._config['plotly_domain'] = plotly_domain
+        session._session['config']['plotly_domain'] = plotly_domain
         config2 = py.get_config()
-        py._config['plotly_streaming_domain'] = plotly_streaming_domain
+        session._session['config']['plotly_streaming_domain'] = (
+            plotly_streaming_domain
+        )
         config3 = py.get_config()
         self.assertEqual(config2['plotly_domain'], plotly_domain)
         self.assertNotEqual(

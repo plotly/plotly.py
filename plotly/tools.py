@@ -17,6 +17,7 @@ import requests
 
 from plotly import utils
 from plotly import exceptions
+from plotly import session
 
 from plotly.graph_objs import graph_objs
 
@@ -199,8 +200,8 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
 
     Note, if you're using a file_owner string as the first argument, you MUST
     specify a `file_id` keyword argument. Else, if you're using a url string
-    as the first argument, you MUST NOT specify a `file_id` keyword argument, or
-    file_id must be set to Python's None value.
+    as the first argument, you MUST NOT specify a `file_id` keyword argument,
+    or file_id must be set to Python's None value.
 
     Positional arguments:
     file_owner_or_url (string) -- a valid plotly username OR a valid plotly url
@@ -209,11 +210,13 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
     file_id (default=None) -- an int or string that can be converted to int
                               if you're using a url, don't fill this in!
     width (default="100%") -- an int or string corresp. to width of the figure
-    height (default="525") -- same as width but corresp. to the height of the figure
+    height (default="525") -- same as width but corresp. to the height of the
+                              figure
 
     """
     padding = 25
-    plotly_rest_url = get_config_file()['plotly_domain']
+    plotly_rest_url = (session.get_session_config().get('plotly_domain') or
+                       get_config_file()['plotly_domain'])
     if file_id is None:  # assume we're using a url
         url = file_owner_or_url
         if url[:len(plotly_rest_url)] != plotly_rest_url:
@@ -301,8 +304,12 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
         pass
     if _ipython_imported:
         if file_id:
+            plotly_domain = (
+                session.get_session_config().get('plotly_domain') or
+                get_config_file()['plotly_domain']
+            )
             url = "{plotly_domain}/~{un}/{fid}".format(
-                plotly_domain=get_config_file()['plotly_domain'],
+                plotly_domain=plotly_domain,
                 un=file_owner_or_url,
                 fid=file_id)
         else:
@@ -1231,33 +1238,34 @@ if _ipython_imported:
         def _repr_html_(self):
             return self.embed_code
 
-        def _repr_svg_(self):
-            url = self.resource + ".svg"
-            res = requests.get(url)
-            if six.PY3:
-                cont = res.content.decode('utf-8', 'replace')
-            else:
-                cont = res.content
-            return cont
 
-        def _repr_png_(self):
-            url = self.resource + ".png"
-            res = requests.get(url)
-            cont = res.content
-            return cont
+def return_figure_from_figure_or_data(figure_or_data, validate_figure):
+    if isinstance(figure_or_data, dict):
+        figure = figure_or_data
+    elif isinstance(figure_or_data, list):
+        figure = {'data': figure_or_data}
+    else:
+        raise exceptions.PlotlyError("The `figure_or_data` positional "
+                                     "argument must be either "
+                                     "`dict`-like or `list`-like.")
+    if validate_figure:
+        try:
+            validate(figure, obj_type='Figure')
+        except exceptions.PlotlyError as err:
+            raise exceptions.PlotlyError("Invalid 'figure_or_data' argument. "
+                                         "Plotly will not be able to properly "
+                                         "parse the resulting JSON. If you "
+                                         "want to send this 'figure_or_data' "
+                                         "to Plotly anyway (not recommended), "
+                                         "you can set 'validate=False' as a "
+                                         "plot option.\nHere's why you're "
+                                         "seeing this error:\n\n{0}"
+                                         "".format(err))
+        if not figure['data']:
+            raise exceptions.PlotlyEmptyDataError(
+                "Empty data list found. Make sure that you populated the "
+                "list of data objects you're sending and try again.\n"
+                "Questions? support@plot.ly"
+            )
 
-        def _repr_pdf_(self):
-            url = self.resource + ".pdf"
-            res = requests.get(url)
-            cont = res.content
-            if six.PY3:
-                cont = res.content.decode('utf-8', 'replace')
-            else:
-                cont = res.content
-            return cont
-
-        def _repr_jpeg_(self):
-            url = self.resource + ".jpeg"
-            res = requests.get(url)
-            cont = res.content
-            return cont
+    return figure

@@ -5,9 +5,19 @@ window.genUID = function() {
     });
 };
 
-require(["widgets/js/widget"], function(WidgetManager){
+var IPYTHON_VERSION = '3';
 
-    var GraphView = IPython.DOMWidgetView.extend({
+require(["widgets/js/widget", "widgets/js/manager"], function (widget, manager) {
+    if (!('DOMWidgetView' in widget)) {
+
+        // we're in IPython2, things moved a bit from 2 --> 3.
+        // construct the expected IPython3 widget API
+        IPYTHON_VERSION = '2';
+        manager = {WidgetManager: widget};
+        widget = {DOMWidgetView: IPython.DOMWidgetView};
+    }
+
+    var GraphView = widget.DOMWidgetView.extend({
         render: function(){
             var that = this;
 
@@ -39,6 +49,15 @@ require(["widgets/js/widget"], function(WidgetManager){
 
             that.$loading = $('<div id="'+loadingId+'">Initializing...</div>')
                             .appendTo(that.$el);
+
+            // for some reason the 'width' is being changed in IPython 3.0.0
+            // for the containing `div` element. There's a flicker here, but
+            // I was unable to fix it otherwise.
+            setTimeout(function ()  {
+                if (IPYTHON_VERSION === '3') {
+                    $('#' + graphId)[0].parentElement.style.width = '100%';
+                }
+            }, 500);
 
             // initialize communication with the iframe
             if(!('pingers' in window)){
@@ -87,6 +106,7 @@ require(["widgets/js/widget"], function(WidgetManager){
                             if(message.type !== 'zoom') {
                                 for(var i in message.points) {
                                     delete message.points[i].data;
+                                    delete message.points[i].fullData;
                                 }
                             }
                             that.send({event: message.type, message: message, graphId: graphId});
@@ -125,7 +145,8 @@ require(["widgets/js/widget"], function(WidgetManager){
     });
 
     // Register the GraphView with the widget manager.
-    WidgetManager.register_widget_view('GraphView', GraphView);
+    manager.WidgetManager.register_widget_view('GraphView', GraphView);
+
 });
 
 //@ sourceURL=graphWidget.js

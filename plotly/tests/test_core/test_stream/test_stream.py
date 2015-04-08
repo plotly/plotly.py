@@ -16,6 +16,13 @@ from plotly import exceptions
 un = 'PythonAPI'
 ak = 'ubpiol2cve'
 tk = 'vaia8trjjb'
+config = {'plotly_domain': 'https://plot.ly',
+          'plotly_streaming_domain': 'stream.plot.ly',
+          'plotly_api_domain': 'https://api.plot.ly'}
+
+
+def setUp():
+    py.sign_in(un, ak, **config)
 
 
 def test_initialize_stream_plot():
