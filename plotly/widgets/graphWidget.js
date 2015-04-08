@@ -141,6 +141,16 @@ require(["widgets/js/widget", "widgets/js/manager"], function (widget, manager) 
             }
 
             return GraphView.__super__.update.apply(this);
+        },
+
+        /**
+         * Wrapper for jquery's `fadeTo` function.
+         *
+         * @param message Contains the id we need to find the element.
+         */
+        fadeTo: function (message) {
+            var plot = $('#' + message.graphId);
+            plot.fadeTo(message.duration, message.opacity);
         }
     });
 
