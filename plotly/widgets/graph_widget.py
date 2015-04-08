@@ -76,6 +76,10 @@ class GraphWidget(widgets.DOMWidget):
         # so we'll just cue up messages until they're ready to be sent
         self._clientMessages = deque()
 
+    @property
+    def url(self):
+        return self._new_url or ''
+
     def _handle_msg(self, message):
         """Handle a msg from the front-end.
 
