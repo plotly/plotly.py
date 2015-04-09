@@ -5,12 +5,12 @@ from unittest import TestCase
 from plotly.graph_objs import *
 
 
-class TestGetData(TestCase):
+class TestToDataframe(TestCase):
 
     fig = None
 
     def setUp(self):
-        super(TestGetData, self).setUp()
+        super(TestToDataframe, self).setUp()
         self.fig = Figure(
             data=Data([
                 Scatter(
@@ -101,74 +101,7 @@ class TestGetData(TestCase):
             )
         )
 
-    def test_get_data(self):
-        data = self.fig.get_data()
-        comp_data = [
-            {
-                'name': 'North America',
-                'text': ['United States', 'Canada'],
-                'x': [52698, 43117],
-                'y': [53, 31]
-            },
-            {
-                'name': 'Europe',
-                'text': ['Germany', 'Britain', 'France', 'Spain', 'Italy',
-                         'Czech Rep.', 'Greece', 'Poland'],
-                'x': [39317, 37236, 35650, 30066, 29570, 27159, 23557, 21046,
-                      18007],
-                'y': [33, 20, 13, 19, 27, 19, 49, 44, 38]
-            },
-            {
-                'name': 'Asia/Pacific',
-                'text': ['Australia', 'Japan', 'South Korea', 'Malaysia',
-                         'China', 'Indonesia', 'Philippines', 'India'],
-                'x': [42952, 37037, 33106, 17478, 9813, 5253, 4692, 3899],
-                'y': [23, 42, 54, 89, 14, 99, 93, 70]},
-            {
-                'name': 'Latin America',
-                'text': ['Chile', 'Argentina', 'Mexico', 'Venezuela',
-                         'Venezuela', 'El Salvador', 'Bolivia'],
-                'x': [19097, 18601, 15595, 13546, 12026, 7434, 5419],
-                'y': [43, 47, 56, 80, 86, 93, 80]
-            }
-        ]
-        self.assertEqual(data, comp_data)
-
-    def test_get_data_flatten(self):
-
-        # this is similar to above, except nested objects are flattened
-
-        flat_data = self.fig.get_data(flatten=True)
-        comp_data = {
-            'Europe.x': [39317, 37236, 35650, 30066, 29570, 27159, 23557,
-                         21046, 18007],
-            'Europe.y': [33, 20, 13, 19, 27, 19, 49, 44, 38],
-            'Asia/Pacific.x': [42952, 37037, 33106, 17478, 9813, 5253, 4692,
-                               3899],
-            'Latin America.text': ['Chile', 'Argentina', 'Mexico', 'Venezuela',
-                                   'Venezuela', 'El Salvador', 'Bolivia'],
-            'North America.x': [52698, 43117],
-            'Asia/Pacific.y': [23, 42, 54, 89, 14, 99, 93, 70],
-            'Asia/Pacific.text': ['Australia', 'Japan', 'South Korea',
-                                  'Malaysia', 'China', 'Indonesia',
-                                  'Philippines', 'India'],
-            'North America.y': [53, 31],
-            'North America.text': ['United States', 'Canada'],
-            'Europe.text': ['Germany', 'Britain', 'France', 'Spain', 'Italy',
-                            'Czech Rep.', 'Greece', 'Poland'],
-            'Latin America.x': [19097, 18601, 15595, 13546, 12026, 7434, 5419],
-            'Latin America.y': [43, 47, 56, 80, 86, 93, 80]
-        }
-        self.assertEqual(flat_data, comp_data)
-
-    # TODO test for Data, Scatter, etc..
-
-    def test_flatten_repeated_trace_names(self):
-        dl = Data([Scatter(name='thesame', x=[1, 2, 3]) for _ in range(3)])
-        data = dl.get_data(flatten=True)
-        comp_data = {
-            'thesame.x': [1, 2, 3],
-            'thesame_1.x': [1, 2, 3],
-            'thesame_2.x': [1, 2, 3]
-        }
-        self.assertEqual(data, comp_data)
+    def test_figure_to_dataframe(self):
+        df = self.fig.to_dataframe()
+        self.assertEqual(len(df), 9)
+        self.assertEqual(len(df.columns), 12)
