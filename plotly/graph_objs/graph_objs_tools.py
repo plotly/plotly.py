@@ -226,3 +226,36 @@ def curtail_val_repr(val, max_chars, add_delim=False):
     if add_delim:
         r += delim
     return r
+
+
+def value_is_data(obj_name, key, value):
+    """
+    Values have types associated with them based on graph_reference.
+
+    'data' type values are always kept
+    'style' values are kept if they're sequences (but not strings)
+
+    :param (str) obj_name: E.g., 'scatter', 'figure'
+    :param (str) key: E.g., 'x', 'y', 'text'
+    :param (*) value:
+    :returns: (bool)
+
+    """
+    try:
+        key_type = INFO[obj_name]['keymeta'][key]['key_type']
+    except KeyError:
+        return False
+
+    if key_type not in ['data', 'style']:
+        return False
+
+    if key_type == 'data':
+        return True
+
+    if key_type == 'style':
+        iterable = hasattr(value, '__iter__')
+        stringy = isinstance(value, six.string_types)
+        dicty = isinstance(value, dict)
+        return iterable and not stringy and not dicty
+
+    return False
