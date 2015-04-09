@@ -162,3 +162,13 @@ class TestGetData(TestCase):
         self.assertEqual(flat_data, comp_data)
 
     # TODO test for Data, Scatter, etc..
+
+    def test_flatten_repeated_trace_names(self):
+        dl = Data([Scatter(name='thesame', x=[1, 2, 3]) for _ in range(3)])
+        data = dl.get_data(flatten=True)
+        comp_data = {
+            'thesame.x': [1, 2, 3],
+            'thesame_1.x': [1, 2, 3],
+            'thesame_2.x': [1, 2, 3]
+        }
+        self.assertEqual(data, comp_data)

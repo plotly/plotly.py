@@ -895,18 +895,20 @@ def get_patched_data_class(Data):
             self.to_graph_objs()
             data = [v.get_data(flatten=flatten) for v in self]
             d = {}
+            taken_names = []
             for i, trace in enumerate(data):
 
                 # we want to give the traces helpful names
                 # however, we need to be sure they're unique too...
                 trace_name = trace.pop('name', 'trace_{}'.format(i))
-                if trace_name in d:
+                if trace_name in taken_names:
                     j = 1
                     new_trace_name = "{}_{}".format(trace_name, j)
-                    while new_trace_name in d:
+                    while new_trace_name in taken_names:
                         new_trace_name = "{}_{}".format(trace_name, j)
                         j += 1
                     trace_name = new_trace_name
+                taken_names.append(trace_name)
 
                 # finish up the dot-concatenation
                 for k, v in trace.items():
