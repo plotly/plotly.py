@@ -1003,17 +1003,8 @@ def get_patched_figure_class(Figure):
         :returns: (dict|list) Depending on (flat|unflat)
 
         """
-        data = super(Figure, self).get_data(flatten=flatten)
-        if flatten:
-            keys = data.keys()
-            for key in keys:
-                new_key = '.'.join(key.split('.')[1:])
-                old_data = data.pop(key)
-                if key.split('.')[0] == 'data':
-                    data[new_key] = old_data
-            return data
-        else:
-            return data['data']
+        self.to_graph_objs()
+        return self['data'].get_data(flatten=flatten)
     Figure.get_data = get_data
 
     def to_dataframe(self):
