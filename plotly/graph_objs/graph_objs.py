@@ -183,7 +183,7 @@ class PlotlyList(list):
             d = {}
             for i, e in enumerate(l):
                 for k, v in e.items():
-                    key = "{}.{}".format(i, k)
+                    key = "{0}.{1}".format(i, k)
                     d[key] = v
             return d
         else:
@@ -463,7 +463,7 @@ class PlotlyDict(dict):
                 sub_data = val.get_data(flatten=flatten)
                 if flatten:
                     for sub_key, sub_val in sub_data.items():
-                        key_string = "{}.{}".format(key, sub_key)
+                        key_string = "{0}.{1}".format(key, sub_key)
                         d[key_string] = sub_val
                 else:
                     d[key] = sub_data
@@ -900,19 +900,19 @@ def get_patched_data_class(Data):
 
                 # we want to give the traces helpful names
                 # however, we need to be sure they're unique too...
-                trace_name = trace.pop('name', 'trace_{}'.format(i))
+                trace_name = trace.pop('name', 'trace_{0}'.format(i))
                 if trace_name in taken_names:
                     j = 1
-                    new_trace_name = "{}_{}".format(trace_name, j)
+                    new_trace_name = "{0}_{1}".format(trace_name, j)
                     while new_trace_name in taken_names:
-                        new_trace_name = "{}_{}".format(trace_name, j)
+                        new_trace_name = "{0}_{1}".format(trace_name, j)
                         j += 1
                     trace_name = new_trace_name
                 taken_names.append(trace_name)
 
                 # finish up the dot-concatenation
                 for k, v in trace.items():
-                    key = "{}.{}".format(trace_name, k)
+                    key = "{0}.{1}".format(trace_name, k)
                     d[key] = v
             return d
         else:
