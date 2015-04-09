@@ -425,6 +425,8 @@ class PlotlyDict(dict):
             else:
                 try:
                     if INFO[obj_key]['keymeta'][key]['key_type'] == 'style':
+
+                        # TODO: use graph_objs_tools.value_is_data
                         if isinstance(self[key], six.string_types):
                             del self[key]
                         elif not hasattr(self[key], '__iter__'):
