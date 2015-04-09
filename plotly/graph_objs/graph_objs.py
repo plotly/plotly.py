@@ -158,19 +158,36 @@ class PlotlyList(list):
         for plotly_dict in self:
             plotly_dict.strip_style()
 
-    def get_data(self):
-        """Returns the JSON for the plot with non-data elements stripped."""
+    def get_data(self, flatten=False):
+        """
+        Returns the JSON for the plot with non-data elements stripped.
+
+        Flattening may increase the utility of the result.
+
+        :param (bool) flatten: {'a': {'b': ''}} --> {'a.b': ''}
+        :returns: (dict|list) Depending on (flat|unflat)
+
+        """
         self.to_graph_objs()
         l = list()
         for _plotlydict in self:
-            l += [_plotlydict.get_data()]
+            l += [_plotlydict.get_data(flatten=flatten)]
         del_indicies = [index for index, item in enumerate(self)
                         if len(item) == 0]
         del_ct = 0
         for index in del_indicies:
             del self[index - del_ct]
             del_ct += 1
-        return l
+
+        if flatten:
+            d = {}
+            for i, e in enumerate(l):
+                for k, v in e.items():
+                    key = "{}.{}".format(i, k)
+                    d[key] = v
+            return d
+        else:
+            return l
 
     def validate(self, caller=True):
         """Recursively check the validity of the entries in a PlotlyList.
@@ -435,7 +452,7 @@ class PlotlyDict(dict):
                     # print("'type' not in {0} for {1}".format(obj_key, key))
                     pass
 
-    def get_data(self):
+    def get_data(self, flatten=False):
         """Returns the JSON for the plot with non-data elements stripped."""
         self.to_graph_objs()
         class_name = self.__class__.__name__
@@ -443,11 +460,17 @@ class PlotlyDict(dict):
         d = dict()
         for key, val in list(self.items()):
             if isinstance(val, (PlotlyDict, PlotlyList)):
-                d[key] = val.get_data()
+                sub_data = val.get_data(flatten=flatten)
+                if flatten:
+                    for sub_key, sub_val in sub_data.items():
+                        key_string = "{}.{}".format(key, sub_key)
+                        d[key_string] = sub_val
+                else:
+                    d[key] = sub_data
             else:
                 try:
                     # TODO: Update the JSON
-                    if INFO[obj_key]['keymeta'][key]['key_type'] == 'data':
+                    if graph_objs_tools.value_is_data(obj_key, key, val):
                         d[key] = val
                 except KeyError:
                     pass
@@ -456,8 +479,6 @@ class PlotlyDict(dict):
             if isinstance(d[key], (dict, list)):
                 if len(d[key]) == 0:
                     del d[key]
-        if len(d) == 1:
-            d = list(d.values())[0]
         return d
 
     def to_graph_objs(self, caller=True):
@@ -862,6 +883,40 @@ def get_patched_data_class(Data):
                 )
         super(Data, self).to_graph_objs(caller=caller)
     Data.to_graph_objs = to_graph_objs  # override method!
+
+    def get_data(self, flatten=False):
+        """
+
+        :param flatten:
+        :return:
+
+        """
+        if flatten:
+            self.to_graph_objs()
+            data = [v.get_data(flatten=flatten) for v in self]
+            d = {}
+            for i, trace in enumerate(data):
+
+                # we want to give the traces helpful names
+                # however, we need to be sure they're unique too...
+                trace_name = trace.pop('name', 'trace_{}'.format(i))
+                if trace_name in d:
+                    j = 1
+                    new_trace_name = "{}_{}".format(trace_name, j)
+                    while new_trace_name in d:
+                        new_trace_name = "{}_{}".format(trace_name, j)
+                        j += 1
+                    trace_name = new_trace_name
+
+                # finish up the dot-concatenation
+                for k, v in trace.items():
+                    key = "{}.{}".format(trace_name, k)
+                    d[key] = v
+            return d
+        else:
+            return super(Data, self).get_data(flatten=flatten)
+    Data.get_data = get_data
+
     return Data
 
 Data = get_patched_data_class(Data)
@@ -935,6 +990,29 @@ def get_patched_figure_class(Figure):
                             "to create a subplot grid.")
         print(grid_str)
     Figure.print_grid = print_grid
+
+    def get_data(self, flatten=False):
+        """
+        Returns the JSON for the plot with non-data elements stripped.
+
+        Flattening may increase the utility of the result.
+
+        :param (bool) flatten: {'a': {'b': ''}} --> {'a.b': ''}
+        :returns: (dict|list) Depending on (flat|unflat)
+
+        """
+        data = super(Figure, self).get_data(flatten=flatten)
+        if flatten:
+            keys = data.keys()
+            for key in keys:
+                new_key = '.'.join(key.split('.')[1:])
+                old_data = data.pop(key)
+                if key.split('.')[0] == 'data':
+                    data[new_key] = old_data
+            return data
+        else:
+            return data['data']
+    Figure.get_data = get_data
 
     def append_trace(self, trace, row, col):
         """ Helper function to add a data traces to your figure
