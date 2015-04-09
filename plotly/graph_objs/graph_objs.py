@@ -1014,6 +1014,16 @@ def get_patched_figure_class(Figure):
             return data['data']
     Figure.get_data = get_data
 
+    def to_dataframe(self):
+        data = self.get_data(flatten=True)
+        try:
+            import pandas as pd
+            return pd.DataFrame(dict([(k, pd.Series(v))
+                                      for k, v in data.items()]))
+        except ImportError:
+            return data
+    Figure.to_dataframe = to_dataframe
+
     def append_trace(self, trace, row, col):
         """ Helper function to add a data traces to your figure
         that is bound to axes at the row, col index.
