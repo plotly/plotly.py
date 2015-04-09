@@ -1016,12 +1016,8 @@ def get_patched_figure_class(Figure):
 
     def to_dataframe(self):
         data = self.get_data(flatten=True)
-        try:
-            import pandas as pd
-            return pd.DataFrame(dict([(k, pd.Series(v))
-                                      for k, v in data.items()]))
-        except ImportError:
-            return data
+        from pandas import DataFrame, Series
+        return DataFrame(dict([(k, Series(v)) for k, v in data.items()]))
     Figure.to_dataframe = to_dataframe
 
     def append_trace(self, trace, row, col):
