@@ -749,6 +749,12 @@
                 "required": false, 
                 "description": "Sets the opacity, or transparency, of the entire object, also known as the alpha channel of colors. If the object's color is given in terms of 'rgba' color model, 'opacity' is redundant."
             }, 
+            "connectgaps": {
+                "key_type": "plot_info", 
+                "val_types": "a boolean: True | False", 
+                "required": false, 
+                "description": "Toggle whether or not missing data points (i.e. '' or numpy.nan) linked to 'x' and/or 'y', are added in by Plotly using linear interpolation."
+            }, 
             "xaxis": {
                 "key_type": "plot_info", 
                 "val_types": "'x1' | 'x2' | 'x3' | etc.", 
@@ -772,6 +778,13 @@
                 "val_types": "dictionary-like object", 
                 "required": false, 
                 "description": "Links a dictionary-like object that initializes this trace as a writable-stream, for use with the streaming API."
+            }, 
+            "text": {
+                "key_type": "data", 
+                "val_types": "list or 1d numpy array of strings", 
+                "required": false, 
+                "description": "The value of 'text' must be a list of lists or 2d numpy array corresponding to the value associated with 'z'.", 
+                "streamable": true
             }, 
             "visible": {
                 "key_type": "plot_info", 
@@ -934,6 +947,12 @@
                 "val_types": "dictionary-like object", 
                 "required": false, 
                 "description": "Links a dictionary-like object defining the parameters of the color bar associated with this trace (including its title, length and width)."
+            }, 
+            "connectgaps": {
+                "key_type": "plot_info", 
+                "val_types": "a boolean: True | False", 
+                "required": false, 
+                "description": "Toggle whether or not missing data points (i.e. '' or numpy.nan) linked to 'x' and/or 'y', are added in by Plotly using linear interpolation."
             }, 
             "opacity": {
                 "key_type": "style", 
@@ -1542,6 +1561,12 @@
                 "required": false, 
                 "description": "The text elements associated with each (x,y,z) pair in this 3D scatter trace. If the scatter 'mode' does not include 'text' then elements linked to 'text' will appear on hover only. In contrast, if 'text' is included in 'mode', the elements in 'text' will be rendered on the plot at the locations specified in part by their corresponding (x,y,z) coordinate pair and the 'textposition' key.", 
                 "streamable": true
+            }, 
+            "textfont": {
+                "key_type": "object", 
+                "val_types": "dictionary-like object", 
+                "required": false, 
+                "description": "Links a dictionary-like object describing the font style of this scatter3d trace's text elements. Has only an effect if 'mode' is set and includes 'text'."
             }, 
             "error_z": {
                 "key_type": "object", 
@@ -3779,6 +3804,12 @@
                 "val_types": "number: x in [0, 1)", 
                 "required": false, 
                 "description": "For bar and histogram plots only. Sets the gap between bars in the same group. That is, when multiple bar objects are plotted and share the same locations, this sets the distance between bars at each location."
+            }, 
+            "barnorm": {
+                "key_type": "plot_info", 
+                "val_types": "'' | 'percent' | 'fraction'", 
+                "required": false, 
+                "description": "Sets the type of normalization for this bar trace. By default, 'barnorm' is set to '', which results in the height of each bar being displayed. If set to 'fraction', the value of each bar is divided by the sum of the values in the bar group. If set to 'percent', each bar's height is set to the fractional value * 100."
             }, 
             "boxmode": {
                 "key_type": "plot_info", 
