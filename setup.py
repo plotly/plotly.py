@@ -1,4 +1,5 @@
 from setuptools import setup
+from setuptools import setup, find_packages
 
 exec (open('plotly/version.py').read())
 
@@ -31,15 +32,7 @@ setup(name='plotly',
           'Topic :: Scientific/Engineering :: Visualization',
       ],
       license='MIT',
-      packages=['plotly',
-                'plotly/plotly',
-                'plotly/plotly/chunked_requests',
-                'plotly/graph_objs',
-                'plotly/grid_objs',
-                'plotly/widgets',
-                'plotly/matplotlylib',
-                'plotly/matplotlylib/mplexporter',
-                'plotly/matplotlylib/mplexporter/renderers'],
+      packages=find_packages(),
       package_data={'plotly': ['graph_reference/*.json', 'widgets/*.js']},
       install_requires=['requests', 'six', 'pytz'],
       extras_require={"PY2.6": ['simplejson', 'ordereddict',
