@@ -34,6 +34,6 @@ test:
 #    - sudo chmod 600 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
 
     # test core things in the general 2.7 version that circle has
-    - nosetests -xv plotly/tests --with-coverage --cover-package=plotly
+    - nosetests -xv plotly/tests/test_core --with-coverage --cover-package=plotly
     - mkdir "${CIRCLE_ARTIFACTS}/2.7" || true
     - coverage html -d "${CIRCLE_ARTIFACTS}/2.7" --title=2.7
