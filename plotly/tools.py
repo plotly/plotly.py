@@ -15,6 +15,8 @@ import warnings
 import six
 import requests
 
+import numpy as np
+
 from plotly import utils
 from plotly import exceptions
 from plotly import session
@@ -1269,3 +1271,512 @@ def return_figure_from_figure_or_data(figure_or_data, validate_figure):
             )
 
     return figure
+
+### Quiver Plots ###
+def Quiver(X, Y, U, V, **kwargs):
+    """ Return data and layout objects for quiver plot
+    Example 1:
+    # X and Y are the coordinates of the arrow locations (created from numpy meshgrid),
+    # and U and V give the X and Y components of the arrow vectors. 
+    X,Y = np.meshgrid(np.arange(0,np.pi,.2),np.arange(0,np.pi,.2) )
+    U = np.cos(X)
+    V = np.sin(Y)
+    data, layout = Quiver(X,Y,U,V)
+    figure = Figure(data = data, layout = layout)
+    plot_url = py.plot(figure, filename = 'QuiverEx1')
+    Example 2:
+    X,Y = np.meshgrid(np.arange(0,2,.2),np.arange(0,2,.2))
+    U = np.cos(X)*Y;
+    V = np.sin(X)*Y;
+    data, layout = Quiver(X, Y, U, V)
+    figure = Figure(data = data, layout = layout)
+    plot_url = py.plot(figure, filename = 'QuiverEx2')
+
+    Keywords arguments with constant defaults:
+    angle (kwarg, angle in radians, default = np.pi/9):
+        Angle of arrowhead.
+    scale (kwarg, float in [0,1], default = .1):
+        Scales size of the arrows (avoid overlap).
+    arrow_length (kwarg, float in [0,1], default = 0.3):
+        Value multiplied to length of barb to get length of arrowhead.
+    color (kwarg, rgb vale, default = rgb(114, 132, 304)):
+        Set color of both barb and arrow.
+    barb_color (kwarg, rgb vale, default = color):
+        Set color of barbs.
+    arrow_color (kwarg, rgb vale, default = color):
+        Set color of arrow.
+    width (kwarg, int greater than or equal to 1, default = 1):
+        Set width of lines for barbs and arrows.
+    barb_width (kwarg, int greater than or equal to 1, default = width):
+        Change width of lines for barbs.
+    arrow_width (kwarg, int greater than or equal to 1, default = width):
+        Change width of lines for arrows.
+    title (kwarg, string, default=none):
+        Title of plot.
+    xlabel (kwarg, string, default=none):
+        Label of x-axis
+    ylabel (kwarg, string, default=none):
+        Label of y-axis
+    hover (kwarg, string, default=closest)
+        Hover options, default to show closest hover
+    """
+    angle = kwargs.pop('angle', np.pi/9)
+    scale = kwargs.pop('scale', .1)
+    arrow_len = kwargs.pop('arrow_length', .3)
+    color = kwargs.pop('color', 'rgb(114, 132, 314)')
+    barb_col = kwargs.pop('barb_color', color)
+    arrow_col = kwargs.pop('arrow_color', color)
+    width = kwargs.pop('width', 1)
+    arrow_width = kwargs.pop('arrow_width', width)
+    barb_width = kwargs.pop('barb_width', width)
+    title = kwargs.pop('title','')
+    xlab = kwargs.pop('xlabel','')
+    ylab = kwargs.pop('ylabel','')
+    hover = kwargs.pop('hover','closest')
+        
+    # Make array of x start values 
+    Xstart = np.array(X)
+    Xstart = Xstart.flatten('F')
+        
+    # Make array of x end values 
+    Xend = X + U * scale
+    Xend = np.array(Xend)
+    Xend = Xend.flatten('F')
+
+    # Make array of nans
+    ## These are used as spaces so the separate 
+    ## arrows can be included in 1 trace
+    nnn = np.empty((len(Xstart)))
+    nnn[:] = np.NAN
+        
+    # Combine arrays into matrix
+    Xvals = np.matrix([Xstart, Xend, nnn])
+    # Make matrix into array readable by plotly
+    Xvals = np.array(Xvals)
+    Xvals = Xvals.flatten('F')
+        
+    # Make array of y start values 
+    Ystart = np.array(Y)
+    Ystart = Ystart.flatten('F')
+
+    # Make array of y end values 
+    Yend = Y + V * scale
+    Yend = np.array(Yend)
+    Yend = Yend.flatten('F')
+
+    # Combine arrays into matrix
+    Yvals=np.matrix([Ystart, Yend, nnn])
+    # Make matrix into array readable by plotly
+    Yvals = np.array(Yvals)
+    Yvals = Yvals.flatten('F')
+        
+    # Make Trace1: the lines
+    trace1 = Scatter(x = Xvals, y = Yvals, 
+                     mode = 'lines', name = 'Barb', 
+                     line = Line(width = barb_width, color = barb_col))
+        
+    # ARROWS!
+    # Get line lengths
+    # Default arrow length = 30% of line length
+    Xdif = Xend - Xstart
+    Ydif = Yend - Ystart
+    LineLen = np.sqrt(np.square(Xdif) + np.square(Ydif))
+    ArrowLen = LineLen * arrow_len
+        
+    # Get angle of line
+    LineAng = np.arctan(Ydif / Xdif)
+        
+    # Set angles to create arrow
+    # Default angle = +/- 20 degrees
+    Ang1 = LineAng + (angle)
+    Ang2 = LineAng - (angle)
+        
+    XSeg1 = np.cos(Ang1) * ArrowLen
+    YSeg1 = np.sin(Ang1) * ArrowLen
+        
+    XSeg2 = np.cos(Ang2) * ArrowLen
+    YSeg2 = np.sin(Ang2) * ArrowLen
+        
+    XPoint1 = np.empty((len(Xdif)))
+    YPoint1 = np.empty((len(Ydif)))
+        
+    XPoint2 = np.empty((len(Xdif)))
+    YPoint2 = np.empty((len(Ydif)))
+        
+    for index in range(len(Xdif)):
+        if Xdif[index] >= 0:
+            XPoint1[index] = Xend[index] - XSeg1[index]
+            YPoint1[index] = Yend[index] - YSeg1[index]
+            XPoint2[index] = Xend[index] - XSeg2[index]
+            YPoint2[index] = Yend[index] - YSeg2[index]
+        else:
+            XPoint1[index] = Xend[index] + XSeg1[index]
+            YPoint1[index] = Yend[index] + YSeg1[index]
+            XPoint2[index] = Xend[index] + XSeg2[index]
+            YPoint2[index] = Yend[index] + YSeg2[index]
+            
+    # Combine arrays into matrix
+    XArrows = np.matrix([XPoint1, Xend, XPoint2, nnn])
+    # Make matrix into array readable by plotly
+    XArrows = np.array(XArrows)
+    XArrows = XArrows.flatten('F')
+        
+    # Combine arrays into matrix
+    YArrows = np.matrix([YPoint1, Yend, YPoint2, nnn])
+    # Make matrix into array readable by plotly
+    YArrows = np.array(YArrows)
+    YArrows = YArrows.flatten('F')
+        
+    # Make trace2: the arrows
+    trace2 = Scatter(x = XArrows, y = YArrows, 
+                     mode = 'lines', name = 'Arrow', 
+                     line = Line(width = arrow_width, color = arrow_col))
+        
+    # Data
+    data = Data([trace1, trace2])
+    # Layout
+    layout = Layout(title = title, xaxis = XAxis(title = xlab), 
+                    yaxis = YAxis(title = ylab), hovermode = hover)
+            
+    return data, layout
+
+### Streamline Plots ###
+def Streamline(x, y, u, v, **kwargs):
+    """Returns data and layout objects to plot streamlines of a vector flow.
+    
+    Example 1:
+    # x and y are 1d arrays defining an *evenly spaced* grid.
+    # u and v are 2d arrays (shape [y,x]) giving velocities.
+    # Add data
+    x = np.linspace(-3, 3, 100)
+    y = np.linspace(-3, 3, 100)
+    Y, X = np.meshgrid(x, y)
+    u = -1 - X**2 + Y
+    v = 1 + X - Y**2
+    u = u.T #transpose
+    v = v.T #transpose
+    # Run streamline function
+    data, layout = Streamline(x, y, u, v, arrow_length = .1)
+    # Plot
+    figure=Figure(data=data, layout=layout)
+    url=py.plot(figure, filename = 'Streamline1')
+    
+    Example 2:
+    # from http://nbviewer.ipython.org/github/barbagroup/AeroPython/blob/master/lessons/01_Lesson01_sourceSink.ipynb
+    # Enter data
+    N = 50                                
+    x_start, x_end = -2.0, 2.0            
+    y_start, y_end = -1.0, 1.0            
+    x = np.linspace(x_start, x_end, N)    
+    y = np.linspace(y_start, y_end, N)    
+    X, Y = np.meshgrid(x, y)              
+    strength_source = 5.0                      
+    x_source, y_source = -1.0, 0.0             
+    # Computes the velocity field on the mesh grid
+    u_source = strength_source/(2*np.pi) * (X-x_source)/((X-x_source)**2 + (Y-y_source)**2)
+    v_source = strength_source/(2*np.pi) * (Y-y_source)/((X-x_source)**2 + (Y-y_source)**2)
+    # Run streamline function
+    data, layout = Streamline(x, y, u_source, v_source)
+    # Add Source Point to data 
+    trace2 = Scatter(x=[x_source], y=[y_source], mode='markers', marker=Marker(size=14), name='Source Point')
+    data = data + Data([trace2])
+    # Plot
+    figure = Figure(data=data, layout=layout)
+    url = py.plot(figure, filename='Streamline_Source')
+
+    Keywords arguments with constant defaults:
+    density (kwarg, integer, default=1):
+        density controls the closeness of the streamlines.
+    angle (kwarg, angle in radians, default = np.pi/9):
+        Angle of arrowhead.
+    arrow_length (kwarg, float in [0,1], default = 0.08):
+        Value multiplied to length of barb to get length of arrowhead.
+    color (kwarg, rgb vale, default = rgb(114, 132, 304)):
+        Set color of both barb and arrow.
+    barb_color (kwarg, rgb vale, default = color):
+        Set color of barbs.
+    arrow_color (kwarg, rgb vale, default = color):
+        Set color of arrow.
+    width (kwarg, int greater than or equal to 1, default = 1):
+        Set width of lines for barbs and arrows.
+    barb_width (kwarg, int greater than or equal to 1, default = width):
+        Change width of lines for barbs.
+    arrow_width (kwarg, int greater than or equal to 1, default = width):
+        Change width of lines for arrows.
+    title (kwarg, string, default=none):
+        Title of plot.
+    xlabel (kwarg, string, default=none):
+        Label of x-axis
+    ylabel (kwarg, string, default=none):
+        Label of y-axis
+    hover (kwarg, string, default=closest)
+        Hover options, default to show closest hover
+    """
+    
+    density = kwargs.pop('density', 1)    
+    angle = kwargs.pop('angle', np.pi/9)
+    arrow_len = kwargs.pop('arrow_length', .08)
+    color = kwargs.pop('color', 'rgb(114, 132, 304)')
+    stream_col = kwargs.pop('stream_color', color)
+    arrow_col = kwargs.pop('arrow_color', color)
+    width = kwargs.pop('width', 1)
+    arrow_width = kwargs.pop('arrow_width', width)
+    stream_width = kwargs.pop('stream_width', width)
+    title = kwargs.pop('title','')
+    xlab = kwargs.pop('xlabel','')
+    ylab = kwargs.pop('ylabel','')
+    hover = kwargs.pop('hover','closest')
+    
+    # Set up some constants - size of the grid used.
+    NGX = len(x)
+    NGY = len(y)
+
+    # Constants used to convert between grid index coords and user coords.
+    DX = x[1] - x[0]
+    DY = y[1] - y[0]
+    XOFF = x[0]
+    YOFF = y[0]
+
+    # Now rescale velocity onto axes-coordinates
+    u = u/(x[-1]-x[0])
+    v = v/(y[-1]-y[0])
+    speed = np.sqrt(u*u + v*v)
+    # s (path length) will now be in axes-coordinates
+    # rescale u for integrations.
+    u *= NGX
+    v *= NGY
+    # Now u and v in grid-coordinates.
+
+    NBX = int(30*density)
+    NBY = int(30*density)
+    blank = np.zeros((NBY,NBX))
+
+    bx_spacing = NGX/float(NBX-1)
+    by_spacing = NGY/float(NBY-1)
+
+    def blank_pos(xi, yi):
+        return int((xi/bx_spacing)+0.5), int((yi/by_spacing)+0.5)
+
+    def value_at(a, xi, yi):
+        if type(xi) == np.ndarray:
+            x = xi.astype(np.int)
+            y = yi.astype(np.int)
+        else:
+            x = np.int(xi)
+            y = np.int(yi)
+        a00 = a[y, x]
+        a01 = a[y, x+1]
+        a10 = a[y+1, x]
+        a11 = a[y+1, x+1]
+        xt = xi-x
+        yt = yi-y
+        a0 = a00*(1-xt) + a01*xt
+        a1 = a10*(1-xt) + a11*xt
+        return a0*(1-yt) + a1*yt
+
+    # RK4 forward and back trajectories from the initial conditions, 
+    # with the odd 'blank array' termination conditions.
+    def rk4_integrate(x0, y0):
+
+        def f(xi, yi):
+            dt_ds = 1./value_at(speed, xi, yi)
+            ui = value_at(u, xi, yi)
+            vi = value_at(v, xi, yi)
+            return ui*dt_ds, vi*dt_ds
+
+        def g(xi, yi):
+            dt_ds = 1./value_at(speed, xi, yi)
+            ui = value_at(u, xi, yi)
+            vi = value_at(v, xi, yi)
+            return -ui*dt_ds, -vi*dt_ds
+
+        check = lambda xi, yi: xi>=0 and xi<NGX-1 and yi>=0 and yi<NGY-1
+
+        bx_changes = []
+        by_changes = []
+
+        # Integrator function
+        def rk4(x0, y0, f):
+            ds = 0.01 #min(1./NGX, 1./NGY, 0.01)
+            stotal = 0
+            xi = x0
+            yi = y0
+            xb, yb = blank_pos(xi, yi)
+            xf_traj = []
+            yf_traj = []
+            while check(xi, yi):
+                # Time step. First save the point.
+                xf_traj.append(xi)
+                yf_traj.append(yi)
+                # Next, advance one using RK4
+                try:
+                    k1x, k1y = f(xi, yi)
+                    k2x, k2y = f(xi + .5*ds*k1x, yi + .5*ds*k1y)
+                    k3x, k3y = f(xi + .5*ds*k2x, yi + .5*ds*k2y)
+                    k4x, k4y = f(xi + ds*k3x, yi + ds*k3y)
+                except IndexError:
+                    # Out of the domain on one of the intermediate steps
+                    break
+                xi += ds*(k1x+2*k2x+2*k3x+k4x) / 6.
+                yi += ds*(k1y+2*k2y+2*k3y+k4y) / 6.
+                # Final position might be out of the domain
+                if not check(xi, yi): break
+                stotal += ds
+                # Next, if s gets to thres, check blank.
+                new_xb, new_yb = blank_pos(xi, yi)
+                if new_xb != xb or new_yb != yb:
+                    # New square, so check and colour. Quit if required.
+                    if blank[new_yb,new_xb] == 0:
+                        blank[new_yb,new_xb] = 1
+                        bx_changes.append(new_xb)
+                        by_changes.append(new_yb)
+                        xb = new_xb
+                        yb = new_yb
+                    else:
+                        break
+                if stotal > 2:
+                    break
+            return stotal, xf_traj, yf_traj
+
+        integrator = rk4
+
+        sf, xf_traj, yf_traj = integrator(x0, y0, f)
+        sb, xb_traj, yb_traj = integrator(x0, y0, g)
+        stotal = sf + sb
+        x_traj = xb_traj[::-1] + xf_traj[1:]
+        y_traj = yb_traj[::-1] + yf_traj[1:]
+
+        # Tests to check length of traj. Remember, s in units of axes.
+        if len(x_traj) < 1: return None
+        if stotal > .2:
+            initxb, inityb = blank_pos(x0, y0)
+            blank[inityb, initxb] = 1
+            return x_traj, y_traj
+        else:
+            for xb, yb in zip(bx_changes, by_changes):
+                blank[yb, xb] = 0
+            return None
+
+    # A quick function for integrating trajectories if blank==0.
+    trajectories = []
+    def traj(xb, yb):
+        if xb < 0 or xb >= NBX or yb < 0 or yb >= NBY:
+            return
+        if blank[yb, xb] == 0:
+            t = rk4_integrate(xb*bx_spacing, yb*by_spacing)
+            if t != None:
+                trajectories.append(t)
+
+    # Build up the trajectory set.
+    for indent in range((max(NBX,NBY))//2):
+        for xi in range(max(NBX,NBY)-2*indent):
+            traj(xi+indent, indent)
+            traj(xi+indent, NBY-1-indent)
+            traj(indent, xi+indent)
+            traj(NBX-1-indent, xi+indent)
+
+    xs = [np.array(t[0])*DX+XOFF for t in trajectories]
+    ys = [np.array(t[1])*DY+YOFF for t in trajectories]
+    
+    # Below edited to make a list readable by plotly
+    # and add one nan to the end of each list to plot 
+    # multiple "streamlines" in one trace
+   
+    xspl = xs
+    yspl = ys
+    
+    for index in range(len(xspl)):
+        xspl[index] = xspl[index].tolist()
+        xspl[index].append(np.nan)
+    
+    
+    for index in range(len(yspl)):
+        yspl[index] = yspl[index].tolist()
+        yspl[index].append(np.nan)
+
+    # xs & ys are lists of lists-> combine each into 1 list 
+    # This makes all the steamlines into 1 trace
+    xspl = sum(xspl, [])
+    yspl = sum(yspl, [])
+
+    
+    #ARROWS 
+    
+    XMid = np.empty((len(xs)))
+    YMid = np.empty((len(ys)))
+    XStart = np.empty((len(xs)))
+    YStart = np.empty((len(ys)))
+    # Find slopes between point a (mid point + 2) and 
+    # point b (midpoint -2)
+    for index in range(len(xs)):
+        XMid[index] = xs[index][(len(xs[index])/2)+2]
+        XStart[index] = xs[index][(len(xs[index])/2)-2]
+        YMid[index] = ys[index][(len(ys[index])/2)+2]
+        YStart[index] = ys[index][(len(ys[index])/2)-2]
+    
+    Xdif = XMid - XStart
+    Ydif = YMid - YStart
+
+    # Get angle of line
+    LineAng = np.arctan(Ydif/Xdif)
+
+    # Set angles to create arrow
+    # Currently set to +/- 20 degrees
+    Ang1 = LineAng + (angle)
+    Ang2 = LineAng - (angle)
+        
+    XSeg1 = np.cos(Ang1)*arrow_len
+    YSeg1 = np.sin(Ang1)*arrow_len
+        
+    XSeg2 = np.cos(Ang2)*arrow_len
+    YSeg2 = np.sin(Ang2)*arrow_len
+        
+    XPoint1 = np.empty((len(Xdif)))
+    YPoint1 = np.empty((len(Ydif)))
+        
+    XPoint2 = np.empty((len(Xdif)))
+    YPoint2 = np.empty((len(Ydif)))
+
+    for index in range(len(Xdif)):
+        if Xdif[index] >= 0:
+            XPoint1[index] = XMid[index] - XSeg1[index]
+            YPoint1[index] = YMid[index] - YSeg1[index]
+            XPoint2[index] = XMid[index] - XSeg2[index]
+            YPoint2[index] = YMid[index] - YSeg2[index]
+        else:
+            XPoint1[index] = XMid[index] + XSeg1[index]
+            YPoint1[index] = YMid[index] + YSeg1[index]
+            XPoint2[index] = XMid[index] + XSeg2[index]
+            YPoint2[index] = YMid[index] + YSeg2[index]
+        
+    nnn = np.empty((len(YMid)))
+    nnn[:] = np.NAN
+        
+    # Combine arrays into matrix
+    XArrows = np.matrix([XPoint1, XMid, XPoint2, nnn])
+    # Make matrix into array readable by plotly
+    XArrows = np.array(XArrows)
+    XArrows = XArrows.flatten('F')
+        
+    # Combine arrays into matrix
+    YArrows = np.matrix([YPoint1, YMid, YPoint2, nnn])
+    # Make matrix into array readable by plotly
+    YArrows = np.array(YArrows)
+    YArrows = YArrows.flatten('F')
+    
+    # Data
+    trace1 = Scatter(x=xspl, y=yspl, 
+                     mode='lines', name='Streamline', 
+                     line=Line(width=stream_width, color=stream_col))
+    trace2 = Scatter(x=XArrows, y=YArrows, 
+                     mode='lines', name='Arrow', 
+                     line=Line(width=arrow_width, color=arrow_col))
+    data = Data([trace1, trace2])
+    
+    # Layout
+    layout = Layout(title=title, xaxis=XAxis(title=xlab), 
+                    yaxis=YAxis(title=ylab), hovermode=hover)
+            
+    return data, layout
+
+
