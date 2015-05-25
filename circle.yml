@@ -28,10 +28,11 @@ test:
     - bash circle/test.sh
 
     # test that it imports when you don't have write permissions
-    - sudo chmod 444 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
+    - sudo chmod -R 444 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
 
     # test that giving back write permissions works again
-    - sudo chmod 666 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
+    # this also has to pass the test suite that follows
+    - sudo chmod -R 666 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
 
     # test core things in the general 2.7 version that circle has
     - nosetests -xv plotly/tests/test_core --with-coverage --cover-package=plotly
