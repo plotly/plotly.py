@@ -32,7 +32,7 @@ test:
 
     # test that giving back write permissions works again
     # this also has to pass the test suite that follows
-    - sudo chmod -R 666 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
+    - sudo chmod -R 777 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
 
     # test core things in the general 2.7 version that circle has
     - nosetests -xv plotly/tests/test_core --with-coverage --cover-package=plotly
