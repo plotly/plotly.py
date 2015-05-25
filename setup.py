@@ -34,7 +34,7 @@ setup(name='plotly',
       packages=find_packages(),
       data_files=[(GRAPH_REFERENCE_DIR, GRAPH_REFERENCE_FILES),
                   (WIDGETS_DIR, WIDGETS_FILES)],
-      install_requires=['requests', 'six', 'pytz'],
+      install_requires=['requests[security]', 'six', 'pytz'],
       extras_require={"PY2.6": ['simplejson', 'ordereddict',
                                 'requests[security]']},
       zip_safe=False)
