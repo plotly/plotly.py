@@ -2,6 +2,7 @@ from setuptools import setup
 from setuptools import setup, find_packages
 
 exec (open('plotly/version.py').read())
+exec (open('plotly/resources.py').read())
 
 
 def readme():
@@ -33,6 +34,8 @@ setup(name='plotly',
       ],
       license='MIT',
       packages=find_packages(),
+      data_files=[(GRAPH_REFERENCE_DIR, GRAPH_REFERENCE_FILES),
+                  (WIDGETS_DIR, WIDGETS_FILES)],
       package_data={'plotly': ['graph_reference/*.json', 'widgets/*.js']},
       install_requires=['requests', 'six', 'pytz'],
       extras_require={"PY2.6": ['simplejson', 'ordereddict',
