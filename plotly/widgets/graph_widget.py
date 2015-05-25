@@ -1,7 +1,7 @@
-from collections import deque
-import uuid
 import os
 import sys
+import uuid
+from collections import deque
 
 # TODO: protected imports?
 from IPython.html import widgets

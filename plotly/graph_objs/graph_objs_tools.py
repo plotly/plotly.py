@@ -1,8 +1,9 @@
 from __future__ import absolute_import
-from plotly import utils
 import textwrap
 import os
 import sys
+
+from plotly import utils
 from plotly.resources import (GRAPH_REFERENCE_GRAPH_OBJS_META,
                               GRAPH_REFERENCE_NAME_TO_KEY,
                               GRAPH_REFERENCE_KEY_TO_NAME,

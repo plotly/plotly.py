@@ -1,4 +1,3 @@
-from setuptools import setup
 from setuptools import setup, find_packages
 
 exec (open('plotly/version.py').read())
@@ -8,7 +7,6 @@ exec (open('plotly/resources.py').read())
 def readme():
     with open('README.rst') as f:
         return f.read()
-
 
 setup(name='plotly',
       version=__version__,
