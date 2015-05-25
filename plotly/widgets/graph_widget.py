@@ -25,7 +25,7 @@ else:
 js_file_path = os.path.join(sys.prefix, WIDGETS_DIR,
                             os.path.split(WIDGETS_MAIN_JS)[-1])
 with open(js_file_path, 'r') as f:
-    js_widget_code = f.read().decode('utf-8')
+    js_widget_code = f.read()
 
 display(Javascript(js_widget_code))
 
