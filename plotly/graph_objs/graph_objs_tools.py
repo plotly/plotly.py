@@ -3,6 +3,11 @@ from plotly import utils
 import textwrap
 import os
 import sys
+from plotly.resources import (GRAPH_REFERENCE_GRAPH_OBJS_META,
+                              GRAPH_REFERENCE_NAME_TO_KEY,
+                              GRAPH_REFERENCE_KEY_TO_NAME,
+                              GRAPH_REFERENCE_OBJ_MAP, GRAPH_REFERENCE_DIR)
+
 if sys.version[:3] == '2.6':
     try:
         from ordereddict import OrderedDict
@@ -19,23 +24,27 @@ else:
     import json
 import six
 
-from pkg_resources import resource_string
 
-
-# Define graph reference loader
 def _load_graph_ref():
-    graph_reference_dir = 'graph_reference'
-    json_files = [
-        'graph_objs_meta.json',
-        'OBJ_MAP.json',
-        'NAME_TO_KEY.json',
-        'KEY_TO_NAME.json'
-    ]
+    """
+    A private method to load the graph reference json files.
+
+    :return: (tuple) A tuple of dict objects.
+
+    """
     out = []
-    for json_file in json_files:
-        relative_path = os.path.join(graph_reference_dir, json_file)
-        s = resource_string('plotly', relative_path).decode('utf-8')
-        tmp = json.loads(s, object_pairs_hook=OrderedDict)
+
+    # this splits directory path from basenames
+    filenames = [
+        os.path.split(GRAPH_REFERENCE_GRAPH_OBJS_META)[-1],
+        os.path.split(GRAPH_REFERENCE_OBJ_MAP)[-1],
+        os.path.split(GRAPH_REFERENCE_NAME_TO_KEY)[-1],
+        os.path.split(GRAPH_REFERENCE_KEY_TO_NAME)[-1]
+    ]
+    for filename in filenames:
+        path = os.path.join(sys.prefix, GRAPH_REFERENCE_DIR, filename)
+        with open(path, 'r') as f:
+            tmp = json.load(f, object_pairs_hook=OrderedDict)
         tmp = utils.decode_unicode(tmp)
         out += [tmp]
     return tuple(out)
