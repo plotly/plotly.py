@@ -1,6 +1,7 @@
-from collections import deque
-import uuid
+import os
 import sys
+import uuid
+from collections import deque
 
 # TODO: protected imports?
 from IPython.html import widgets
@@ -10,7 +11,7 @@ from IPython.display import Javascript, display
 import plotly.plotly.plotly as py
 from plotly import utils, tools
 from plotly.graph_objs import Figure
-from pkg_resources import resource_string
+from plotly.resources import WIDGETS_DIR, WIDGETS_MAIN_JS
 
 # even though python 2.6 wouldn't be able to run *any* of this...
 if sys.version[:3] == '2.6':
@@ -21,8 +22,10 @@ else:
 # Load JS widget code
 # No officially recommended way to do this in any other way
 # http://mail.scipy.org/pipermail/ipython-dev/2014-April/013835.html
-js_widget_code = resource_string('plotly',
-                                 'widgets/graphWidget.js').decode('utf-8')
+js_file_path = os.path.join(sys.prefix, WIDGETS_DIR,
+                            os.path.split(WIDGETS_MAIN_JS)[-1])
+with open(js_file_path, 'r') as f:
+    js_widget_code = f.read()
 
 display(Javascript(js_widget_code))
 
