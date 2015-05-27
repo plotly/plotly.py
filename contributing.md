@@ -53,7 +53,7 @@ Once you've made your changes (and hopefully written some tests...), make that p
 ##Suggestions
 
 ###Local Python
-Setting up Python versions that *don't* require you to use `sudo` is a good idea. In addition, the core Python on your machine may not be the Python that we've developed in! Here are some nice guides for Mac, Windows, and Linux: 
+Setting up Python versions that *don't* require you to use `sudo` is a good idea. In addition, the core Python on your machine may not be the Python that we've developed in! Here are some nice guides for Mac, Windows, and Linux:
 - http://docs.python-guide.org/en/latest/starting/install/osx/
 - http://docs.python-guide.org/en/latest/starting/install/win/
 - http://docs.python-guide.org/en/latest/starting/install/linux/
@@ -82,7 +82,7 @@ export PYTHONPATH="/path/to/local/repo:$PYTHONPATH"
 
 ##Dependencies
 
-There's a short list of core dependencies you'll need installed in your Python environment to have any sort of fun with Plotly's Python API (see `requirements.txt`). Additionally, you're likely to have even more fun if you install some other requirements (see `optional-requirements.txt`). 
+There's a short list of core dependencies you'll need installed in your Python environment to have any sort of fun with Plotly's Python API (see `requirements.txt`). Additionally, you're likely to have even more fun if you install some other requirements (see `optional-requirements.txt`).
 
 ###Dependencies and Virtualenv
 
@@ -121,18 +121,18 @@ nosetests -w plotly/tests -v
 Either of those will run *every* test we've written for the Python API. You can get more granular by running something like:
 
 ```bash
-nosetests -w plotly/tests/test_plotly
+nosetests -w plotly/tests/test_core/test_plotly
 ```
 
 ... or even more granular by running something like:
 
 ```bash
-nosetests plotly/tests/test_plotly/test_plot.py
+nosetests plotly/tests/test_core/test_plotly/test_plot.py
 ```
 
 ###Writing Tests
 
-You're *strongly* encouraged to write tests that check your added functionality. 
+You're *strongly* encouraged to write tests that check your added functionality.
 
 When you write a new test anywhere under the `tests` directory, if your PR gets accepted, that test will run in a virtual machine to ensure that future changes don't break your contributions!
 
