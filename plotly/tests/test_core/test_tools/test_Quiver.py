@@ -23,8 +23,8 @@ def test_wrong_kwarg():
 def test_one_arrow():
     nan = np.nan
     trace1 = Scatter(
-            x=np.array([0., 1., nan]),
-            y=np.array([0., 1., nan]),
+            x=[0., 1., nan],
+            y=[0., 1., nan],
             mode='lines',
             name='Barb',
             line=Line(color='rgb(114, 132, 314)', width=1)
