@@ -37,4 +37,10 @@ def test_one_arrow():
             line=Line(color='rgb(114, 132, 314)', width=1)
             )
     expected = Data([trace1, trace2])
-    assert tls.Quiver(x=[0], y=[0], u=[1], v=[1], scale=1) == expected
+
+    data = tls.Quiver(x=[0], y=[0], u=[1], v=[1], scale=1)
+
+    np.testing.assert_almost_equal(expected[0]['y'], data[0]['y'])
+    np.testing.assert_almost_equal(expected[0]['x'], data[0]['x'])
+    np.testing.assert_almost_equal(expected[1]['y'], data[1]['y'])
+    np.testing.assert_almost_equal(expected[0]['x'], data[0]['x'])
