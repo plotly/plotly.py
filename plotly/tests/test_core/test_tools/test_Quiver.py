@@ -37,8 +37,3 @@ def test_one_arrow():
             )
     expected = Data([trace1, trace2])
     assert tls.Quiver(x=[0], y=[0], u=[1], v=[1], scale=1) == expected
-
-
-def test_two_arrow():
-    expected = 1
-    assert 2 == expected
