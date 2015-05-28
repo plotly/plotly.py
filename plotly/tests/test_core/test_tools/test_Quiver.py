@@ -21,16 +21,17 @@ def test_wrong_kwarg():
 
 
 def test_one_arrow():
+    nan = np.nan
     trace1 = Scatter(
-            x=np.array([0., 1., np.nan]),
-            y=np.array([0., 1., np.nan]),
+            x=np.array([0., 1., nan]),
+            y=np.array([0., 1., nan]),
             mode='lines',
             name='Barb',
             line=Line(color='rgb(114, 132, 314)', width=1)
             )
     trace2 = Scatter(
-            x=np.array([0.82069826, 1, 0.61548617, np.nan]),
-            y=np.array([0.61548617,  1,  0.82069826, np.nan]),
+            x=np.array([0.82069826, 1., 0.61548617, nan]),
+            y=np.array([0.61548617,  1.,  0.82069826, nan]),
             mode='lines',
             name='Arrow',
             line=Line(color='rgb(114, 132, 314)', width=1)
