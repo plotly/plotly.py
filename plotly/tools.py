@@ -20,6 +20,7 @@ from plotly import exceptions
 from plotly import session
 
 from plotly.graph_objs import graph_objs
+from plotly.graph_objs import Scatter, Data, Marker
 
 # Warning format
 def warning_on_one_line(message, category, filename, lineno, file=None, line=None):
@@ -38,6 +39,12 @@ try:
     _ipython_imported = True
 except ImportError:
     _ipython_imported = False
+
+try:
+    import numpy as np
+    _numpy_imported = True
+except ImportError:
+    _numpy_imported = False
 
 PLOTLY_DIR = os.path.join(os.path.expanduser("~"), ".plotly")
 CREDENTIALS_FILE = os.path.join(PLOTLY_DIR, ".credentials")
@@ -1272,36 +1279,48 @@ def return_figure_from_figure_or_data(figure_or_data, validate_figure):
 
 
 def Quiver(x, y, u, v,
-           angle=np.pi/9, scale=.1,
-           arrow_length=.3, color='rgb(114, 132, 314)',
-           barb_color=color, arrow_color=color,
-           width=1, arrow_width=width,
-           barb_width=width, **kwargs):
-    """Return a data object for a quiver plot where x and y are the coordinates
-    of the arrow locations and u and v give the x and y components of the arrow
-    vectors.
+           scale=.1, angle=np.pi/9,
+           arrow_scale=.3, color='rgb(114, 132, 314)',
+           barb_color='rgb(114, 132, 314)', arrow_color='rgb(114, 132, 314)',
+           width=1, arrow_width=1,
+           barb_width=1, **kwargs):
+    """Return a data object for a quiver plot.
+    x, y, u, and v can be np.ndarrays of equal dimmensions,
+    or lists where x & y are the same length and u & v are the same length.
+    x and y are the coordinates of the arrow locations.
+    u and v give the x and y components of the arrow vectors.
 
     Example 1:
+    ```
+    # Just 1 Arrow from (0,0) to (1,1)
+    data = Quiver(x=[0], y=[0], u=[1], v=[1], scale=1)
+    ```
+
+    Example 2:
+    ```
     x,y = np.meshgrid(np.arange(0,np.pi,.2),np.arange(0,np.pi,.2) )
     u = np.cos(x)
     v = np.sin(y)
-    data = Quiver(x,y,u,v)
+    data = Quiver(x, y, u, v)
+    ```
 
-    Example 2:
+    Example 3:
+    ```
     x,y = np.meshgrid(np.arange(0,2,.2),np.arange(0,2,.2))
     u = np.cos(x)*y;
     v = np.sin(x)*y;
     data = Quiver(x, y, u, v)
+    ```
 
     Keywords arguments with constant defaults:
+
+    scale (kwarg, float in [0,1], default = .1):
+        Scales size of the arrows (ideally to avoid overlap).
 
     angle (kwarg, angle in radians, default = np.pi/9):
         Angle of arrowhead.
 
-    scale (kwarg, float in [0,1], default = .1):
-        Scales size of the arrows (avoid overlap).
-
-    arrow_length (kwarg, float in [0,1], default = 0.3):
+    arrow_scale (kwarg, float in [0,1], default = 0.3):
         Value multiplied to length of barb to get length of arrowhead.
 
     color (kwarg, color string, default = rgb(114, 132, 304)):
@@ -1323,24 +1342,43 @@ def Quiver(x, y, u, v,
         Change width of lines for arrows.
     """
 
-    # angle = kwargs.pop('angle', np.pi/9)
-    # scale = kwargs.pop('scale', .1)
-    # arrow_length = kwargs.pop('arrow_length', .3)
-    # color = kwargs.pop('color', 'rgb(114, 132, 314)')
-    # barb_col = kwargs.pop('barb_color', color)
-    # arrow_col = kwargs.pop('arrow_color', color)
-    # width = kwargs.pop('width', 1)
-    # arrow_width = kwargs.pop('arrow_width', width)
-    # barb_width = kwargs.pop('barb_width', width)
+    if _numpy_imported is False:
+        raise Exception("To use Quiver() please import numpy as np")
 
-    # Make array of x start values
-    Xstart = np.array(x)
-    Xstart = Xstart.flatten('F')
+    if len(x) != len(y):
+        raise Exception("x, y, u, and v should be ndarrays of equal dimmension"
+                        "or lists where x and y are the same length"
+                        "and u and v are the same length")
 
-    # Make array of x end values
-    Xend = x + u * scale
-    Xend = np.array(Xend)
+    if len(u) != len(v):
+        raise Exception("x, y, u, and v should be ndarrays of equal dimmension"
+                        "or lists where x and y are the same length"
+                        "and u and v are the same length")
+
+    VALID_KWARGS = ['angle', 'scale',
+                    'arrow_scale', 'color',
+                    'barb_color', 'arrow_color',
+                    'width', 'barb_width',
+                    'arrow_width']
+    for key in kwargs.keys():
+        if key not in VALID_KWARGS:
+            raise Exception("Invalid keyword argument: '{0}'".format(key))
+
+    # Make x y u v into np.array in case user entered list
+    x = np.array(x)
+    y = np.array(y)
+    u = np.array(u)
+    v = np.array(v)
+
+    # Make arrays of x & y start values
+    Xstart = x.flatten('F')
+    Ystart = y.flatten('F')
+
+    # Make arrays of x & y end values
+    Xend = x + (u * scale)
     Xend = Xend.flatten('F')
+    Yend = y + (v * scale)
+    Yend = Yend.flatten('F')
 
     # Make array of nans
     # These are used as spaces so the separate
@@ -1354,15 +1392,6 @@ def Quiver(x, y, u, v,
     Xvals = np.array(Xvals)
     Xvals = Xvals.flatten('F')
 
-    # Make array of y start values
-    Ystart = np.array(Y)
-    Ystart = Ystart.flatten('F')
-
-    # Make array of y end values
-    Yend = y + v * scale
-    Yend = np.array(Yend)
-    Yend = Yend.flatten('F')
-
     # Combine arrays into matrix
     Yvals = np.matrix([Ystart, Yend, nnn])
     # Make matrix into array readable by plotly
@@ -1374,13 +1403,13 @@ def Quiver(x, y, u, v,
                      mode='lines', name='Barb',
                      line=Line(width=barb_width, color=barb_color))
 
-    # ARROWS!
+    # Arrows
     # Get line lengths
     # Default arrow length = 30% of line length
     Xdif = Xend - Xstart
     Ydif = Yend - Ystart
     LineLen = np.sqrt(np.square(Xdif) + np.square(Ydif))
-    ArrowLen = LineLen * arrow_length
+    ArrowLen = LineLen * arrow_scale
 
     # Get angle of line
     LineAng = np.arctan(Ydif / Xdif)
@@ -1439,15 +1468,17 @@ def Quiver(x, y, u, v,
 
 def Streamline(x, y, u, v,
                density=1, angle=np.pi/9,
-               arrow_length=.08, color='rgb(114, 132, 304)',
-               stream_color=color, arrow_color=color,
-               width=1, arrow_width=width,
-               stream_width=width, **kwargs):
-    '''Return a data object to plot streamlines of a vector flow.
+               arrow_scale=.08, color='rgb(114, 132, 304)',
+               stream_color='rgb(114, 132, 304)',
+               arrow_color='rgb(114, 132, 304)',
+               width=1, arrow_width=1,
+               stream_width=1, **kwargs):
+    """Return a data object to plot streamlines of a vector flow.
     x and y are 1d arrays that define an EVENLY spaced grid.
     u and v are 2d arrays (shape [y,x]) giving velocities.
 
     Example 1:
+    ```
     # Add data
     x = np.linspace(-3, 3, 100)
     y = np.linspace(-3, 3, 100)
@@ -1459,9 +1490,12 @@ def Streamline(x, y, u, v,
 
     # Streamline function
     data = Streamline(x, y, u, v, arrow_length = .1)
+    ```
 
     Example 2:
     # from http://nbviewer.ipython.org/github/barbagroup/AeroPython
+    ```
+    import plotly.plotly as py
 
     # Add data
     N = 50
@@ -1491,16 +1525,17 @@ def Streamline(x, y, u, v,
 
     # Plot
     url = py.plot(data, filename='Streamline_Source')
+    ```
 
-    Keywords arguments with constant defaults:
+    Keywords arguments:
 
     density (kwarg, integer, default=1):
-        density controls the closeness of the streamlines.
+        density controls the closeness (density) of the streamlines.
 
     angle (kwarg, angle in radians, default = np.pi/9):
         Angle of arrowhead.
 
-    arrow_length (kwarg, float in [0,1], default = 0.08):
+    arrow_scale (kwarg, float in [0,1], default = 0.08):
         Value multiplied to length of barb to get length of arrowhead.
 
     color (kwarg, color string, default = rgb(114, 132, 304)):
@@ -1520,17 +1555,35 @@ def Streamline(x, y, u, v,
 
     arrow_width (kwarg, int greater than or equal to 1, default = width):
         Change width of lines for arrows.
-    '''
+    """
 
-    # density = kwargs.pop('density', 1)
-    # angle = kwargs.pop('angle', np.pi/9)
-    # arrow_len = kwargs.pop('arrow_length', .08)
-    # color = kwargs.pop('color', 'rgb(114, 132, 304)')
-    # stream_col = kwargs.pop('stream_color', color)
-    # arrow_col = kwargs.pop('arrow_color', color)
-    # width = kwargs.pop('width', 1)
-    # arrow_width = kwargs.pop('arrow_width', width)
-    # stream_width = kwargs.pop('stream_width', width)
+    # Throw exception if numpy is not imported
+    if _numpy_imported is False:
+        raise Exception("To use Streamline() please import numpy as np")
+
+    # Throw exception if x is not an evenly spaced array
+    for index in range(len(x)-1):
+        if (x[index + 1]-x[index])-(x[1]-x[0]) > .0001:
+            raise Exception("x must be a 1 dimmensional evenly spaced array")
+
+    # Throw exception if y is not an evenly spaced array
+    for index in range(len(y)-1):
+        if (y[index + 1]-y[index])-(y[1]-y[0]) > .0001:
+            raise Exception("y must be a 1 dimmensional evenly spaced array")
+
+    # Throw exception if u and v are not the same dimmensions
+    if u.shape != v.shape:
+            raise Exception("u and v should have the same dimmensions")
+
+    # Throw exception for invalid kwarg
+    VALID_KWARGS = ['density', 'angle',
+                    'arrow_scale', 'color',
+                    'barb_color', 'arrow_color',
+                    'width', 'barb_width',
+                    'arrow_width']
+    for key in kwargs.keys():
+        if key not in VALID_KWARGS:
+            raise Exception("Invalid keyword argument: '{0}'".format(key))
 
     # Set up some constants - size of the grid used.
     NGX = len(x)
@@ -1715,10 +1768,10 @@ def Streamline(x, y, u, v,
     # Find slopes between point a (mid point + 2) and
     # point b (midpoint -2)
     for index in range(len(xs)):
-        XMid[index] = xs[index][(len(xs[index])/2)+2]
-        XStart[index] = xs[index][(len(xs[index])/2)-2]
-        YMid[index] = ys[index][(len(ys[index])/2)+2]
-        YStart[index] = ys[index][(len(ys[index])/2)-2]
+        XMid[index] = xs[index][(len(xs[index])/2)+1]
+        XStart[index] = xs[index][(len(xs[index])/2)-1]
+        YMid[index] = ys[index][(len(ys[index])/2)+1]
+        YStart[index] = ys[index][(len(ys[index])/2)-1]
 
     Xdif = XMid - XStart
     Ydif = YMid - YStart
@@ -1731,11 +1784,11 @@ def Streamline(x, y, u, v,
     Ang1 = LineAng + (angle)
     Ang2 = LineAng - (angle)
 
-    XSeg1 = np.cos(Ang1)*arrow_length
-    YSeg1 = np.sin(Ang1)*arrow_length
+    XSeg1 = np.cos(Ang1)*arrow_scale
+    YSeg1 = np.sin(Ang1)*arrow_scale
 
-    XSeg2 = np.cos(Ang2)*arrow_length
-    YSeg2 = np.sin(Ang2)*arrow_length
+    XSeg2 = np.cos(Ang2)*arrow_scale
+    YSeg2 = np.sin(Ang2)*arrow_scale
 
     XPoint1 = np.empty((len(Xdif)))
     YPoint1 = np.empty((len(Ydif)))
