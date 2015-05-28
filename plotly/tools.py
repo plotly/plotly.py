@@ -20,7 +20,7 @@ from plotly import exceptions
 from plotly import session
 
 from plotly.graph_objs import graph_objs
-from plotly.graph_objs import Scatter, Data, Marker
+from plotly.graph_objs import Scatter, Data, Marker, Line
 
 # Warning format
 def warning_on_one_line(message, category, filename, lineno, file=None, line=None):
@@ -1391,12 +1391,14 @@ def Quiver(x, y, u, v,
     # Make matrix into array readable by plotly
     Xvals = np.array(Xvals)
     Xvals = Xvals.flatten('F')
+    Xvals = Xvals.tolist()
 
     # Combine arrays into matrix
     Yvals = np.matrix([Ystart, Yend, nnn])
     # Make matrix into array readable by plotly
     Yvals = np.array(Yvals)
     Yvals = Yvals.flatten('F')
+    Yvals = Yvals.tolist()
 
     # Make Trace1: the lines
     trace1 = Scatter(x=Xvals, y=Yvals,
@@ -1448,12 +1450,14 @@ def Quiver(x, y, u, v,
     # Make matrix into array readable by plotly
     XArrows = np.array(XArrows)
     XArrows = XArrows.flatten('F')
+    XArrows = XArrows.tolist()
 
     # Combine arrays into matrix
     YArrows = np.matrix([YPoint1, Yend, YPoint2, nnn])
     # Make matrix into array readable by plotly
     YArrows = np.array(YArrows)
     YArrows = YArrows.flatten('F')
+    YArrows = YArrows.tolist()
 
     # Make trace2: the arrows
     trace2 = Scatter(x=XArrows, y=YArrows,
@@ -1573,7 +1577,8 @@ def Streamline(x, y, u, v,
 
     # Throw exception if u and v are not the same dimmensions
     if u.shape != v.shape:
-            raise Exception("u and v should have the same dimmensions")
+            raise Exception("u and v should have the same dimmensions"
+                            "try using np.ndarrays with the same dimmensions")
 
     # Throw exception for invalid kwarg
     VALID_KWARGS = ['density', 'angle',
@@ -1648,8 +1653,7 @@ def Streamline(x, y, u, v,
             vi = value_at(v, xi, yi)
             return -ui*dt_ds, -vi*dt_ds
 
-        check = lambda xi, yi: xi >= 0 and xi < NGX-1
-        and yi >= 0 and yi < NGY-1
+        check = lambda xi, yi: xi >= 0 and xi < NGX-1 and yi >= 0 and yi < NGY-1
 
         bx_changes = []
         by_changes = []
