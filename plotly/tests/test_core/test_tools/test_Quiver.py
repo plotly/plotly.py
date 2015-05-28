@@ -41,4 +41,4 @@ def test_one_arrow():
 
 def test_two_arrow():
     expected = 1
-    assert 1 == expected
+    assert 2 == expected
