@@ -36,4 +36,4 @@ def test_one_arrow():
             line=Line(color='rgb(114, 132, 314)', width=1)
             )
     expected = Data([trace1, trace2])
-    assert tls.Quiver(x=[0], y=[0], u=[1], v=[1], scale=1)) == expected
+    assert tls.Quiver(x=[0], y=[0], u=[1], v=[1], scale=1) == expected
