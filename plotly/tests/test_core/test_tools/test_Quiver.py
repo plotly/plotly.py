@@ -69,7 +69,7 @@ def test_complicated():
     u = np.cos(x)
     v = np.sin(y)
     data = tls.Quiver(x, y, u, v, scale=.5, angle=np.pi/8,
-                      arrow_scale=.25, barb_width=2
+                      arrow_scale=.25, barb_width=2,
                       arrow_width=3)
 
     # np.testing.assert_almost_equal(data[0]['y'], expected[0]['y'])
