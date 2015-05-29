@@ -72,7 +72,7 @@ def test_complicated():
                2.4269051683109994, nan],
             mode='lines',
             name='Barb',
-            line=Line(color='rgb(114, 132, 314)', barb_width=2)
+            line=Line(color='rgb(114, 132, 314)', width=2)
             )
     trace2 = Scatter(
             x=[0.07690301168721783, 0.1, 0.07690301168721783, nan,
