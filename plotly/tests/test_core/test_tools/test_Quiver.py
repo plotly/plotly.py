@@ -43,7 +43,7 @@ def test_one_arrow():
     np.testing.assert_almost_equal(data[0]['y'], expected[0]['y'])
     np.testing.assert_almost_equal(data[0]['x'], expected[0]['x'])
     np.testing.assert_almost_equal(data[1]['y'], expected[1]['y'])
-    np.testing.assert_almost_equal(data[1]['y'], expected[0]['x'])
+    np.testing.assert_almost_equal(data[1]['x'], expected[1]['x'])
     assert data[0].keys() == expected[0].keys()
 
 
@@ -122,5 +122,5 @@ def test_complicated():
     np.testing.assert_almost_equal(data[0]['y'], expected[0]['y'])
     np.testing.assert_almost_equal(data[0]['x'], expected[0]['x'])
     np.testing.assert_almost_equal(data[1]['y'], expected[1]['y'])
-    np.testing.assert_almost_equal(data[1]['y'], expected[0]['x'])
+    np.testing.assert_almost_equal(data[1]['x'], expected[1]['x'])
     assert data[0].keys() == expected[0].keys()
