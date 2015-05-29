@@ -1280,9 +1280,8 @@ def return_figure_from_figure_or_data(figure_or_data, validate_figure):
 
 def Quiver(x, y, u, v,
            scale=.1, angle=np.pi/9,
-           arrow_scale=.3, color='rgb(114, 132, 314)',
-           barb_color='rgb(114, 132, 314)', arrow_color='rgb(114, 132, 314)',
-           width=1, arrow_width=1,
+           arrow_scale=.3, barb_color='rgb(114, 132, 314)',
+           arrow_color='rgb(114, 132, 314)', arrow_width=1,
            barb_width=1, **kwargs):
     """Return a data object for a quiver plot.
     x, y, u, and v can be np.ndarrays of equal dimmensions,
@@ -1323,17 +1322,11 @@ def Quiver(x, y, u, v,
     arrow_scale (kwarg, float in [0,1], default = 0.3):
         Value multiplied to length of barb to get length of arrowhead.
 
-    color (kwarg, color string, default = rgb(114, 132, 304)):
-        Set color of both barb and arrow.
-
     barb_color (kwarg, color string, default = color):
         Set color of barbs.
 
     arrow_color (kwarg, color string, default = color):
         Set color of arrow.
-
-    width (kwarg, int greater than or equal to 1, default = 1):
-        Set width of lines for barbs and arrows.
 
     barb_width (kwarg, int greater than or equal to 1, default = width):
         Change width of lines for barbs.
@@ -1356,9 +1349,8 @@ def Quiver(x, y, u, v,
                         "and u and v are the same length")
 
     VALID_KWARGS = ['angle', 'scale',
-                    'arrow_scale', 'color',
-                    'barb_color', 'arrow_color',
-                    'width', 'barb_width',
+                    'arrow_scale', 'barb_color',
+                    'arrow_color', 'barb_width',
                     'arrow_width']
     for key in kwargs.keys():
         if key not in VALID_KWARGS:
@@ -1472,10 +1464,8 @@ def Quiver(x, y, u, v,
 
 def Streamline(x, y, u, v,
                density=1, angle=np.pi/9,
-               arrow_scale=.08, color='rgb(114, 132, 304)',
-               stream_color='rgb(114, 132, 304)',
-               arrow_color='rgb(114, 132, 304)',
-               width=1, arrow_width=1,
+               arrow_scale=.08, stream_color='rgb(114, 132, 304)',
+               arrow_color='rgb(114, 132, 304)', arrow_width=1,
                stream_width=1, **kwargs):
     """Return a data object to plot streamlines of a vector flow.
     x and y are 1d arrays that define an EVENLY spaced grid.
@@ -1542,17 +1532,11 @@ def Streamline(x, y, u, v,
     arrow_scale (kwarg, float in [0,1], default = 0.08):
         Value multiplied to length of barb to get length of arrowhead.
 
-    color (kwarg, color string, default = rgb(114, 132, 304)):
-        Set color of both barb and arrow.
-
     barb_color (kwarg, color string, default = color):
         Set color of barbs.
 
     arrow_color (kwarg, color string, default = color):
         Set color of arrow.
-
-    width (kwarg, int greater than or equal to 1, default = 1):
-        Set width of lines for barbs and arrows.
 
     barb_width (kwarg, int greater than or equal to 1, default = width):
         Change width of lines for barbs.
@@ -1582,10 +1566,9 @@ def Streamline(x, y, u, v,
 
     # Throw exception for invalid kwarg
     VALID_KWARGS = ['density', 'angle',
-                    'arrow_scale', 'color',
-                    'barb_color', 'arrow_color',
-                    'width', 'barb_width',
-                    'arrow_width']
+                    'arrow_scale', 'barb_color',
+                    'arrow_color', 'width',
+                    'barb_width', 'arrow_width']
     for key in kwargs.keys():
         if key not in VALID_KWARGS:
             raise Exception("Invalid keyword argument: '{0}'".format(key))
