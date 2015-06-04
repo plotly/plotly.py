@@ -1278,16 +1278,34 @@ def return_figure_from_figure_or_data(figure_or_data, validate_figure):
     return figure
 
 
-def Quiver(x, y, u, v,
-           scale=.1, angle=np.pi/9,
-           arrow_scale=.3, barb_color='rgb(114, 132, 314)',
-           arrow_color='rgb(114, 132, 314)', arrow_width=1,
-           barb_width=1, **kwargs):
+class Quiver(object):
     """Return a data object for a quiver plot.
-    x, y, u, and v can be np.ndarrays of equal dimmensions,
-    or lists where x & y are the same length and u & v are the same length.
-    x and y are the coordinates of the arrow locations.
-    u and v give the x and y components of the arrow vectors.
+
+    :param (list or array) x: x coordinates of the arrow locations
+    :param (list or array) y: y coordinates of the arrow locations
+    :param (list or array) u: x components of the arrow vectors
+    :param (list or array) v: y components of the arrow vectors
+    :param (float in [0,1]) scale: scales size of the arrows(ideally to
+        avoid overlap).
+    :param (angle in radians) angle: angle of arrowhead.
+    :param (float in [0,1]) arrow_scale: value multiplied to length of barb to
+        get length of arrowhead.
+    :param barb_color (kwarg, color string, default = 'rgb(114, 132, 314)'):
+        Set color of barbs.
+    :param arrow_color (kwarg, color string, default = 'rgb(114, 132, 314)'):
+        Set color of arrow.
+    :param barb_width (kwarg, int or float greater than 0, default = 1):
+        Change width of lines for barbs.
+    :param arrow_width (kwarg, int or float greater than 0, default = 1):
+        Change width of lines for arrows.
+
+    :rtype: (obj) data object
+
+    :raises: (AttributeError) Will happen if x, y, u, and v are not all
+        the same length (or size if ndarray)
+
+    :raises: (AttributeError) Will happen if scale, arrow_scale, barb_width, or
+        arrow_width are less than or equal to 0
 
     Example 1:
     ```
@@ -1297,7 +1315,7 @@ def Quiver(x, y, u, v,
 
     Example 2:
     ```
-    x,y = np.meshgrid(np.arange(0,np.pi,.2),np.arange(0,np.pi,.2) )
+    x,y = np.meshgrid(np.arange(0,math.pi,.2),np.arange(0,math.pi,.2) )
     u = np.cos(x)
     v = np.sin(y)
     data = Quiver(x, y, u, v)
@@ -1310,513 +1328,162 @@ def Quiver(x, y, u, v,
     v = np.sin(x)*y;
     data = Quiver(x, y, u, v)
     ```
-
-    Keywords arguments with constant defaults:
-
-    scale (kwarg, float in [0,1], default = .1):
-        Scales size of the arrows (ideally to avoid overlap).
-
-    angle (kwarg, angle in radians, default = np.pi/9):
-        Angle of arrowhead.
-
-    arrow_scale (kwarg, float in [0,1], default = 0.3):
-        Value multiplied to length of barb to get length of arrowhead.
-
-    barb_color (kwarg, color string, default = color):
-        Set color of barbs.
-
-    arrow_color (kwarg, color string, default = color):
-        Set color of arrow.
-
-    barb_width (kwarg, int greater than or equal to 1, default = width):
-        Change width of lines for barbs.
-
-    arrow_width (kwarg, int greater than or equal to 1, default = width):
-        Change width of lines for arrows.
     """
-
-    if _numpy_imported is False:
-        raise Exception("To use Quiver() please import numpy as np")
-
-    if len(x) != len(y):
-        raise Exception("x, y, u, and v should be ndarrays of equal dimmension"
-                        "or lists where x and y are the same length"
-                        "and u and v are the same length")
-
-    if len(u) != len(v):
-        raise Exception("x, y, u, and v should be ndarrays of equal dimmension"
-                        "or lists where x and y are the same length"
-                        "and u and v are the same length")
-
-    VALID_KWARGS = ['angle', 'scale',
-                    'arrow_scale', 'barb_color',
-                    'arrow_color', 'barb_width',
-                    'arrow_width']
-    for key in kwargs.keys():
-        if key not in VALID_KWARGS:
-            raise Exception("Invalid keyword argument: '{0}'".format(key))
-
-    # Make x y u v into np.array in case user entered list
-    x = np.array(x)
-    y = np.array(y)
-    u = np.array(u)
-    v = np.array(v)
-
-    # Make arrays of x & y start values
-    Xstart = x.flatten('F')
-    Ystart = y.flatten('F')
-
-    # Make arrays of x & y end values
-    Xend = x + (u * scale)
-    Xend = Xend.flatten('F')
-    Yend = y + (v * scale)
-    Yend = Yend.flatten('F')
-
-    # Make array of nans
-    # These are used as spaces so the separate
-    # arrows can be included in 1 trace
-    nnn = np.empty((len(Xstart)))
-    nnn[:] = np.NAN
-
-    # Combine arrays into matrix
-    Xvals = np.matrix([Xstart, Xend, nnn])
-    # Make matrix into array readable by plotly
-    Xvals = np.array(Xvals)
-    Xvals = Xvals.flatten('F')
-    Xvals = Xvals.tolist()
-
-    # Combine arrays into matrix
-    Yvals = np.matrix([Ystart, Yend, nnn])
-    # Make matrix into array readable by plotly
-    Yvals = np.array(Yvals)
-    Yvals = Yvals.flatten('F')
-    Yvals = Yvals.tolist()
-
-    # Make Trace1: the lines
-    trace1 = Scatter(x=Xvals, y=Yvals,
-                     mode='lines', name='Barb',
-                     line=Line(width=barb_width, color=barb_color))
-
-    # Arrows
-    # Get line lengths
-    # Default arrow length = 30% of line length
-    Xdif = Xend - Xstart
-    Ydif = Yend - Ystart
-    LineLen = np.sqrt(np.square(Xdif) + np.square(Ydif))
-    ArrowLen = LineLen * arrow_scale
-
-    # Get angle of line
-    LineAng = np.arctan(Ydif / Xdif)
-
-    # Set angles to create arrow
-    # Default angle = +/- 20 degrees
-    Ang1 = LineAng + (angle)
-    Ang2 = LineAng - (angle)
-
-    XSeg1 = np.cos(Ang1) * ArrowLen
-    YSeg1 = np.sin(Ang1) * ArrowLen
-
-    XSeg2 = np.cos(Ang2) * ArrowLen
-    YSeg2 = np.sin(Ang2) * ArrowLen
-
-    XPoint1 = np.empty((len(Xdif)))
-    YPoint1 = np.empty((len(Ydif)))
-
-    XPoint2 = np.empty((len(Xdif)))
-    YPoint2 = np.empty((len(Ydif)))
-
-    for index in range(len(Xdif)):
-        if Xdif[index] >= 0:
-            XPoint1[index] = Xend[index] - XSeg1[index]
-            YPoint1[index] = Yend[index] - YSeg1[index]
-            XPoint2[index] = Xend[index] - XSeg2[index]
-            YPoint2[index] = Yend[index] - YSeg2[index]
-        else:
-            XPoint1[index] = Xend[index] + XSeg1[index]
-            YPoint1[index] = Yend[index] + YSeg1[index]
-            XPoint2[index] = Xend[index] + XSeg2[index]
-            YPoint2[index] = Yend[index] + YSeg2[index]
-
-    # Combine arrays into matrix
-    XArrows = np.matrix([XPoint1, Xend, XPoint2, nnn])
-    # Make matrix into array readable by plotly
-    XArrows = np.array(XArrows)
-    XArrows = XArrows.flatten('F')
-    XArrows = XArrows.tolist()
-
-    # Combine arrays into matrix
-    YArrows = np.matrix([YPoint1, Yend, YPoint2, nnn])
-    # Make matrix into array readable by plotly
-    YArrows = np.array(YArrows)
-    YArrows = YArrows.flatten('F')
-    YArrows = YArrows.tolist()
-
-    # Make trace2: the arrows
-    trace2 = Scatter(x=XArrows, y=YArrows,
-                     mode='lines', name='Arrow',
-                     line=Line(width=arrow_width, color=arrow_color))
-
-    # Data
-    data = Data([trace1, trace2])
-
-    return data
-
-
-def Streamline(x, y, u, v,
-               density=1, angle=np.pi/9,
-               arrow_scale=.08, stream_color='rgb(114, 132, 304)',
-               arrow_color='rgb(114, 132, 304)', arrow_width=1,
-               stream_width=1, **kwargs):
-    """Return a data object to plot streamlines of a vector flow.
-    x and y are 1d arrays that define an EVENLY spaced grid.
-    u and v are 2d arrays (shape [y,x]) giving velocities.
-
-    Example 1:
-    ```
-    # Add data
-    x = np.linspace(-3, 3, 100)
-    y = np.linspace(-3, 3, 100)
-    Y, X = np.meshgrid(x, y)
-    u = -1 - X**2 + Y
-    v = 1 + X - Y**2
-    u = u.T #transpose
-    v = v.T #transpose
-
-    # Streamline function
-    data = Streamline(x, y, u, v, arrow_length = .1)
-    ```
-
-    Example 2:
-    # from http://nbviewer.ipython.org/github/barbagroup/AeroPython
-    ```
-    import plotly.plotly as py
-
-    # Add data
-    N = 50
-    x_start, x_end = -2.0, 2.0
-    y_start, y_end = -1.0, 1.0
-    x = np.linspace(x_start, x_end, N)
-    y = np.linspace(y_start, y_end, N)
-    X, Y = np.meshgrid(x, y)
-    strength_source = 5.0
-    x_source, y_source = -1.0, 0.0
-
-    # Compute the velocity field on the mesh grid
-    u_source = strength_source/(2*np.pi) *
-               (X-x_source)/((X-x_source)**2 +
-               (Y-y_source)**2)
-    v_source = strength_source/(2*np.pi) *
-               (Y-y_source)/((X-x_source)**2 +
-               (Y-y_source)**2)
-
-    # Streamline function
-    data = Streamline(x, y, u_source, v_source)
-
-    # Add Source Point to data
-    trace2 = Scatter(x=[x_source], y=[y_source], mode='markers',
-                     marker=Marker(size=14), name='Source Point')
-    data = data + Data([trace2])
-
-    # Plot
-    url = py.plot(data, filename='Streamline_Source')
-    ```
-
-    Keywords arguments:
-
-    density (kwarg, integer, default=1):
-        density controls the closeness (density) of the streamlines.
-
-    angle (kwarg, angle in radians, default = np.pi/9):
-        Angle of arrowhead.
-
-    arrow_scale (kwarg, float in [0,1], default = 0.08):
-        Value multiplied to length of barb to get length of arrowhead.
-
-    barb_color (kwarg, color string, default = color):
-        Set color of barbs.
-
-    arrow_color (kwarg, color string, default = color):
-        Set color of arrow.
-
-    barb_width (kwarg, int greater than or equal to 1, default = width):
-        Change width of lines for barbs.
-
-    arrow_width (kwarg, int greater than or equal to 1, default = width):
-        Change width of lines for arrows.
-    """
-
-    # Throw exception if numpy is not imported
-    if _numpy_imported is False:
-        raise Exception("To use Streamline() please import numpy as np")
-
-    # Throw exception if x is not an evenly spaced array
-    for index in range(len(x)-1):
-        if (x[index + 1]-x[index])-(x[1]-x[0]) > .0001:
-            raise Exception("x must be a 1 dimmensional evenly spaced array")
-
-    # Throw exception if y is not an evenly spaced array
-    for index in range(len(y)-1):
-        if (y[index + 1]-y[index])-(y[1]-y[0]) > .0001:
-            raise Exception("y must be a 1 dimmensional evenly spaced array")
-
-    # Throw exception if u and v are not the same dimmensions
-    if u.shape != v.shape:
-            raise Exception("u and v should have the same dimmensions"
-                            "try using np.ndarrays with the same dimmensions")
-
-    # Throw exception for invalid kwarg
-    VALID_KWARGS = ['density', 'angle',
-                    'arrow_scale', 'barb_color',
-                    'arrow_color', 'width',
-                    'barb_width', 'arrow_width']
-    for key in kwargs.keys():
-        if key not in VALID_KWARGS:
-            raise Exception("Invalid keyword argument: '{0}'".format(key))
-
-    # Set up some constants - size of the grid used.
-    NGX = len(x)
-    NGY = len(y)
-
-    # Constants used to convert between grid index coords and user coords.
-    DX = x[1] - x[0]
-    DY = y[1] - y[0]
-    XOFF = x[0]
-    YOFF = y[0]
-
-    # Now rescale velocity onto axes-coordinates
-    u = u/(x[-1]-x[0])
-    v = v/(y[-1]-y[0])
-    speed = np.sqrt(u*u + v*v)
-    # s (path length) will now be in axes-coordinates
-    # rescale u for integrations.
-    u *= NGX
-    v *= NGY
-    # Now u and v in grid-coordinates.
-
-    NBX = int(30*density)
-    NBY = int(30*density)
-    blank = np.zeros((NBY, NBX))
-
-    bx_spacing = NGX/float(NBX-1)
-    by_spacing = NGY/float(NBY-1)
-
-    def blank_pos(xi, yi):
-        return int((xi/bx_spacing)+0.5), int((yi/by_spacing)+0.5)
-
-    def value_at(a, xi, yi):
-        if type(xi) == np.ndarray:
-            x = xi.astype(np.int)
-            y = yi.astype(np.int)
-        else:
-            x = np.int(xi)
-            y = np.int(yi)
-        a00 = a[y, x]
-        a01 = a[y, x+1]
-        a10 = a[y+1, x]
-        a11 = a[y+1, x+1]
-        xt = xi-x
-        yt = yi-y
-        a0 = a00*(1-xt) + a01*xt
-        a1 = a10*(1-xt) + a11*xt
-        return a0*(1-yt) + a1*yt
-
-    # RK4 forward and back trajectories from the initial conditions,
-    # with the odd 'blank array' termination conditions.
-    def rk4_integrate(x0, y0):
-
-        def f(xi, yi):
-            dt_ds = 1./value_at(speed, xi, yi)
-            ui = value_at(u, xi, yi)
-            vi = value_at(v, xi, yi)
-            return ui*dt_ds, vi*dt_ds
-
-        def g(xi, yi):
-            dt_ds = 1./value_at(speed, xi, yi)
-            ui = value_at(u, xi, yi)
-            vi = value_at(v, xi, yi)
-            return -ui*dt_ds, -vi*dt_ds
-
-        check = lambda xi, yi: xi >= 0 and xi < NGX-1 and yi >= 0 and yi < NGY-1
-
-        bx_changes = []
-        by_changes = []
-
-        # Integrator function
-        def rk4(x0, y0, f):
-            ds = 0.01  # Min(1./NGX, 1./NGY, 0.01)
-            stotal = 0
-            xi = x0
-            yi = y0
-            xb, yb = blank_pos(xi, yi)
-            xf_traj = []
-            yf_traj = []
-            while check(xi, yi):
-                # Time step. First save the point.
-                xf_traj.append(xi)
-                yf_traj.append(yi)
-                # Next, advance one using RK4
-                try:
-                    k1x, k1y = f(xi, yi)
-                    k2x, k2y = f(xi + .5*ds*k1x, yi + .5*ds*k1y)
-                    k3x, k3y = f(xi + .5*ds*k2x, yi + .5*ds*k2y)
-                    k4x, k4y = f(xi + ds*k3x, yi + ds*k3y)
-                except IndexError:
-                    # Out of the domain on one of the intermediate steps
-                    break
-                xi += ds*(k1x+2*k2x+2*k3x+k4x) / 6.
-                yi += ds*(k1y+2*k2y+2*k3y+k4y) / 6.
-                # Final position might be out of the domain
-                if not check(xi, yi):
-                    break
-                stotal += ds
-                # Next, if s gets to thres, check blank.
-                new_xb, new_yb = blank_pos(xi, yi)
-                if new_xb != xb or new_yb != yb:
-                    # New square, so check and colour. Quit if required.
-                    if blank[new_yb, new_xb] == 0:
-                        blank[new_yb, new_xb] = 1
-                        bx_changes.append(new_xb)
-                        by_changes.append(new_yb)
-                        xb = new_xb
-                        yb = new_yb
-                    else:
-                        break
-                if stotal > 2:
-                    break
-            return stotal, xf_traj, yf_traj
-
-        integrator = rk4
-
-        sf, xf_traj, yf_traj = integrator(x0, y0, f)
-        sb, xb_traj, yb_traj = integrator(x0, y0, g)
-        stotal = sf + sb
-        x_traj = xb_traj[::-1] + xf_traj[1:]
-        y_traj = yb_traj[::-1] + yf_traj[1:]
-
-        # Tests to check length of traj. Remember, s in units of axes.
-        if len(x_traj) < 1:
-            return None
-        if stotal > .2:
-            initxb, inityb = blank_pos(x0, y0)
-            blank[inityb, initxb] = 1
-            return x_traj, y_traj
-        else:
-            for xb, yb in zip(bx_changes, by_changes):
-                blank[yb, xb] = 0
-            return None
-
-    # A quick function for integrating trajectories if blank==0.
-    trajectories = []
-
-    def traj(xb, yb):
-        if xb < 0 or xb >= NBX or yb < 0 or yb >= NBY:
-            return
-        if blank[yb, xb] == 0:
-            t = rk4_integrate(xb*bx_spacing, yb*by_spacing)
-            if t is not None:
-                trajectories.append(t)
-
-    # Build up the trajectory set.
-    for indent in range((max(NBX, NBY))//2):
-        for xi in range(max(NBX, NBY)-2*indent):
-            traj(xi+indent, indent)
-            traj(xi+indent, NBY-1-indent)
-            traj(indent, xi+indent)
-            traj(NBX-1-indent, xi+indent)
-
-    xs = [np.array(t[0])*DX+XOFF for t in trajectories]
-    ys = [np.array(t[1])*DY+YOFF for t in trajectories]
-
-    # Below edited to make a list readable by plotly
-    # and add one nan to the end of each list to plot
-    # multiple "streamlines" in one trace
-
-    xspl = xs
-    yspl = ys
-
-    for index in range(len(xspl)):
-        xspl[index] = xspl[index].tolist()
-        xspl[index].append(np.nan)
-
-    for index in range(len(yspl)):
-        yspl[index] = yspl[index].tolist()
-        yspl[index].append(np.nan)
-
-    # xs & ys are lists of lists-> combine each into 1 list
-    # This makes all the steamlines into 1 trace
-    xspl = sum(xspl, [])
-    yspl = sum(yspl, [])
-
-    # ARROWS
-    XMid = np.empty((len(xs)))
-    YMid = np.empty((len(ys)))
-    XStart = np.empty((len(xs)))
-    YStart = np.empty((len(ys)))
-    # Find slopes between point a (mid point + 2) and
-    # point b (midpoint -2)
-    for index in range(len(xs)):
-        XMid[index] = xs[index][(len(xs[index])/2)+1]
-        XStart[index] = xs[index][(len(xs[index])/2)-1]
-        YMid[index] = ys[index][(len(ys[index])/2)+1]
-        YStart[index] = ys[index][(len(ys[index])/2)-1]
-
-    Xdif = XMid - XStart
-    Ydif = YMid - YStart
-
-    # Get angle of line
-    LineAng = np.arctan(Ydif/Xdif)
-
-    # Set angles to create arrow
-    # Currently set to +/- 20 degrees
-    Ang1 = LineAng + (angle)
-    Ang2 = LineAng - (angle)
-
-    XSeg1 = np.cos(Ang1)*arrow_scale
-    YSeg1 = np.sin(Ang1)*arrow_scale
-
-    XSeg2 = np.cos(Ang2)*arrow_scale
-    YSeg2 = np.sin(Ang2)*arrow_scale
-
-    XPoint1 = np.empty((len(Xdif)))
-    YPoint1 = np.empty((len(Ydif)))
-
-    XPoint2 = np.empty((len(Xdif)))
-    YPoint2 = np.empty((len(Ydif)))
-
-    for index in range(len(Xdif)):
-        if Xdif[index] >= 0:
-            XPoint1[index] = XMid[index] - XSeg1[index]
-            YPoint1[index] = YMid[index] - YSeg1[index]
-            XPoint2[index] = XMid[index] - XSeg2[index]
-            YPoint2[index] = YMid[index] - YSeg2[index]
-        else:
-            XPoint1[index] = XMid[index] + XSeg1[index]
-            YPoint1[index] = YMid[index] + YSeg1[index]
-            XPoint2[index] = XMid[index] + XSeg2[index]
-            YPoint2[index] = YMid[index] + YSeg2[index]
-
-    nnn = np.empty((len(YMid)))
-    nnn[:] = np.NAN
-
-    # Combine arrays into matrix
-    XArrows = np.matrix([XPoint1, XMid, XPoint2, nnn])
-    # Make matrix into array readable by plotly
-    XArrows = np.array(XArrows)
-    XArrows = XArrows.flatten('F')
-
-    # Combine arrays into matrix
-    YArrows = np.matrix([YPoint1, YMid, YPoint2, nnn])
-    # Make matrix into array readable by plotly
-    YArrows = np.array(YArrows)
-    YArrows = YArrows.flatten('F')
-
-    # Data
-    trace1 = Scatter(x=xspl, y=yspl,
-                     mode='lines', name='Streamline',
-                     line=Line(width=stream_width, color=stream_color))
-    trace2 = Scatter(x=XArrows, y=YArrows,
-                     mode='lines', name='Arrow',
-                     line=Line(width=arrow_width, color=arrow_color))
-    data = Data([trace1, trace2])
-
-    return data
+    def __init__(self, x, y, u, v,
+                 scale=.1, angle=math.pi/9,
+                 arrow_scale=.3, barb_color='rgb(114, 132, 314)',
+                 arrow_color='rgb(114, 132, 314)', arrow_width=1,
+                 barb_width=1, **kwargs):
+        self.x = x
+        self.y = y
+        self.u = u
+        self.v = v
+        self.scale = scale
+        self.angle = angle
+        self.arrow_scale = arrow_scale
+        self.barb_color = barb_color
+        self.arrow_color = arrow_color
+        self.arrow_width = arrow_width
+        self.barb_width = barb_width
+        self.kwargs = kwargs
+
+    def quiver_cleanup(self):
+        if type(self.x) != list:
+            self.x = self.x.tolist()
+            self.x = [item for sublist in self.x for item in sublist]
+
+        if type(self.y) != list:
+            self.y = self.y.tolist()
+            self.y = [item for sublist in self.y for item in sublist]
+
+        if type(self.u) != list:
+            self.u = self.u.tolist()
+            self.u = [item for sublist in self.u for item in sublist]
+
+        if type(self.v) != list:
+            self.v = self.v.tolist()
+            self.v = [item for sublist in self.v for item in sublist]
+
+        if self.scale <= 0:
+            raise Exception("scale must be > 0")
+
+        if self.arrow_scale <= 0:
+            raise Exception("arrow_scale must be > 0")
+
+        if self.barb_width <= 0:
+            raise Exception("barb_width must be > 0")
+
+        if self.arrow_width <= 0:
+            raise Exception("arrow_width must be > 0")
+
+        if len(self.x) != len(self.y) != len(self.u) != len(self.v):
+            raise Exception("x, y, u, and v must be the same length")
+
+        VALID_QUIVER_KWARGS = ('angle', 'scale',
+                               'arrow_scale', 'barb_color',
+                               'arrow_color', 'barb_width',
+                               'arrow_width')
+        for key in self.kwargs.keys():
+            if key not in VALID_QUIVER_KWARGS:
+                raise Exception("Invalid keyword argument: '{0}'".format(key))
+
+    def data(self):
+        # Make arrays of x & y start values
+        start_x = self.x
+        start_y = self.y
+
+        # Make arrays of x & y end values
+        self.u = [i * self.scale for i in self.u]
+        self.v = [i * self.scale for i in self.v]
+
+        end_x = [i + j for i, j in zip(self.x, self.u)]
+        end_y = [i + j for i, j in zip(self.y, self.v)]
+
+        # These are used as spaces so the separate
+        # arrows can be included in 1 trace
+        blank_space = [None] * len(start_x)
+
+        # Zip lists: start, end, blank
+        barb_x = [i for sub in zip(start_x, end_x, blank_space) for i in sub]
+        barb_y = [i for sub in zip(start_y, end_y, blank_space) for i in sub]
+
+        # Make Trace1: the lines
+        trace1 = Scatter(x=barb_x, y=barb_y,
+                         mode='lines', name='Barb',
+                         line=Line(width=self.barb_width,
+                                   color=self.barb_color))
+
+        # Arrows
+
+        # Get barb lengths
+        # Default arrow length (arrow_scale) = 30% of barb length
+        dif_x = [i - j for i, j in zip(end_x, start_x)]
+        dif_y = [i - j for i, j in zip(end_y, start_y)]
+
+        barb_len = [None] * len(start_x)
+        for index in range(len(barb_len)):
+            barb_len[index] = math.hypot(dif_x[index], dif_y[index])
+
+        arrow_len = [None] * len(barb_len)
+        arrow_len = [i * self.arrow_scale for i in barb_len]
+
+        # Get barb angles
+        barb_ang = [None] * len(start_x)
+        for index in range(len(barb_ang)):
+            barb_ang[index] = math.atan2(dif_y[index], dif_x[index])
+
+        # Set angles to create arrow
+        # Default angle = +/- 20 degrees
+        ang1 = [i + self.angle for i in barb_ang]
+        ang2 = [i - self.angle for i in barb_ang]
+
+        cos_ang1 = [None] * len(ang1)
+        for index in range(len(ang1)):
+            cos_ang1[index] = math.cos(ang1[index])
+        seg1_x = [i * j for i, j in zip(arrow_len, cos_ang1)]
+
+        sin_ang1 = [None] * len(ang1)
+        for index in range(len(ang1)):
+            sin_ang1[index] = math.sin(ang1[index])
+        seg1_y = [i * j for i, j in zip(arrow_len, sin_ang1)]
+
+        cos_ang2 = [None] * len(ang2)
+        for index in range(len(ang2)):
+            cos_ang2[index] = math.cos(ang2[index])
+        seg2_x = [i * j for i, j in zip(arrow_len, cos_ang2)]
+
+        sin_ang2 = [None] * len(ang2)
+        for index in range(len(ang2)):
+            sin_ang2[index] = math.sin(ang2[index])
+        seg2_y = [i * j for i, j in zip(arrow_len, sin_ang2)]
+
+        point1_x = [None] * len(dif_x)
+        point1_y = [None] * len(dif_y)
+
+        point2_x = [None] * len(dif_x)
+        point2_y = [None] * len(dif_y)
+
+        for index in range(len(dif_x)):
+            point1_x = [i - j for i, j in zip(end_x, seg1_x)]
+            point1_y = [i - j for i, j in zip(end_y, seg1_y)]
+            point2_x = [i - j for i, j in zip(end_x, seg2_x)]
+            point2_y = [i - j for i, j in zip(end_y, seg2_y)]
+
+        # Combine arrays into matrix
+        arrows_x = [i for sub in zip(point1_x, end_x, point2_x, blank_space)
+                    for i in sub]
+        arrows_y = [i for sub in zip(point1_y, end_y, point2_y, blank_space)
+                    for i in sub]
+
+        # Make trace2: the arrows
+        trace2 = Scatter(x=arrows_x, y=arrows_y,
+                         mode='lines', name='Arrow',
+                         line=Line(width=self.arrow_width,
+                                   color=self.arrow_color))
+
+        data = Data([trace1, trace2])
+        return data
+
+    def main(self):
+        return self.quiver_cleanup()
+        return self.data()
