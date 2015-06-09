@@ -1278,7 +1278,7 @@ def return_figure_from_figure_or_data(figure_or_data, validate_figure):
     return figure
 
 
-class Quiver(object):
+class Quiver(dict):
     """Return a data object for a quiver plot.
 
     :param (list or array) x: x coordinates of the arrow locations
@@ -1286,156 +1286,130 @@ class Quiver(object):
     :param (list or array) u: x components of the arrow vectors
     :param (list or array) v: y components of the arrow vectors
     :param (float in [0,1]) scale: scales size of the arrows(ideally to
-        avoid overlap).
-    :param (angle in radians) angle: angle of arrowhead.
+        avoid overlap). Default = .1
     :param (float in [0,1]) arrow_scale: value multiplied to length of barb to
-        get length of arrowhead.
-    :param barb_color (kwarg, color string, default = 'rgb(114, 132, 314)'):
-        Set color of barbs.
-    :param arrow_color (kwarg, color string, default = 'rgb(114, 132, 314)'):
-        Set color of arrow.
-    :param barb_width (kwarg, int or float greater than 0, default = 1):
-        Change width of lines for barbs.
-    :param arrow_width (kwarg, int or float greater than 0, default = 1):
-        Change width of lines for arrows.
+        get length of arrowhead. Default = .3
+    :param (angle in radians) angle: angle of arrowhead. Default = pi/9
 
-    :rtype: (obj) data object
+    :rtype: (obj) returns quiver trace
 
-    :raises: (AttributeError) Will happen if x, y, u, and v are not all
+    :raises: (PlotlyError) will happen if x, y, u, and v are not all
         the same length (or size if ndarray)
 
-    :raises: (AttributeError) Will happen if scale, arrow_scale, barb_width, or
-        arrow_width are less than or equal to 0
+    :raises: (PlotlyError) will happen if scale or arrow_scale are less than or
+        equal to 0
 
     Example 1:
     ```
-    # Just 1 Arrow from (0,0) to (1,1)
+    # 1 Arrow from (0,0) to (1,1)
     data = Quiver(x=[0], y=[0], u=[1], v=[1], scale=1)
     ```
 
     Example 2:
     ```
-    x,y = np.meshgrid(np.arange(0,math.pi,.2),np.arange(0,math.pi,.2) )
+    x,y = np.meshgrid(np.arange(0,2,.5),np.arange(0,2,.5))
     u = np.cos(x)
     v = np.sin(y)
-    data = Quiver(x, y, u, v)
+    data = Quiver(x, y, u, v, scale=.2)
     ```
 
     Example 3:
     ```
-    x,y = np.meshgrid(np.arange(0,2,.2),np.arange(0,2,.2))
-    u = np.cos(x)*y;
-    v = np.sin(x)*y;
-    data = Quiver(x, y, u, v)
+    x,y = np.meshgrid(np.arange(-np.pi,math.pi,.2),
+                      np.arange(-math.pi,math.pi,.2))
+    u = np.cos(x)
+    v = np.sin(x)*x
+    data = Quiver(x,y,u,v,
+                  arrow_scale=.2,
+                  angle = math.pi/6,
+                  line=Line(color='purple',
+                            width=1))
     ```
     """
     def __init__(self, x, y, u, v,
-                 scale=.1, angle=math.pi/9,
-                 arrow_scale=.3, barb_color='rgb(114, 132, 314)',
-                 arrow_color='rgb(114, 132, 314)', arrow_width=1,
-                 barb_width=1, **kwargs):
-        self.x = x
-        self.y = y
-        self.u = u
-        self.v = v
-        self.scale = scale
-        self.angle = angle
-        self.arrow_scale = arrow_scale
-        self.barb_color = barb_color
-        self.arrow_color = arrow_color
-        self.arrow_width = arrow_width
-        self.barb_width = barb_width
-        self.kwargs = kwargs
+                 scale=.1, arrow_scale=.3, angle=math.pi/9, **kwargs):
 
-    def quiver_cleanup(self):
-        if type(self.x) != list:
-            self.x = self.x.tolist()
-            self.x = [item for sublist in self.x for item in sublist]
+        if type(x) != list:
+            x = x.tolist()
+            x = [item for sublist in x for item in sublist]
+        else:
+            x = x
+        if type(y) != list:
+            y = y.tolist()
+            y = [item for sublist in y for item in sublist]
+        else:
+            y = y
+        if type(u) != list:
+            u = u.tolist()
+            u = [item for sublist in u for item in sublist]
+        else:
+            u = u
+        if type(v) != list:
+            v = v.tolist()
+            v = [item for sublist in v for item in sublist]
+        else:
+            v = v
 
-        if type(self.y) != list:
-            self.y = self.y.tolist()
-            self.y = [item for sublist in self.y for item in sublist]
+        scale = scale
+        arrow_scale = arrow_scale
+        angle = angle
 
-        if type(self.u) != list:
-            self.u = self.u.tolist()
-            self.u = [item for sublist in self.u for item in sublist]
+        errors = Quiver.quiver_checks(scale, arrow_scale, x, y, u, v)
+        u, v = Quiver.scale_uv(u, v, scale)
+        end_x, end_y, barb_x, barb_y = Quiver.barb(x, y, u, v)
+        arrow_x, arrow_y = Quiver.arrow(x, end_x, y, end_y, arrow_scale, angle)
 
-        if type(self.v) != list:
-            self.v = self.v.tolist()
-            self.v = [item for sublist in self.v for item in sublist]
+        super(Quiver, self).__init__(x=barb_x + arrow_x, y=barb_y + arrow_y,
+                                     mode='lines', name='quiver', **kwargs)
 
-        if self.scale <= 0:
-            raise Exception("scale must be > 0")
+    @staticmethod
+    def quiver_checks(scale, arrow_scale, x, y, u, v):
+        if scale <= 0:
+            raise exceptions.PlotlyError("scale must be > 0")
+        if arrow_scale <= 0:
+            raise exceptions.PlotlyError("arrow_scale must be > 0")
+        if len(x) != len(y) or len(u) != len(v) or len(x) != len(u):
+            raise exceptions.PlotlyError("x, y, u, and v should all be the"
+                                         "length (or size if ndarray)")
 
-        if self.arrow_scale <= 0:
-            raise Exception("arrow_scale must be > 0")
+    @staticmethod
+    def scale_uv(u, v, scale):
+        u = [i * scale for i in u]
+        v = [i * scale for i in v]
+        return u, v
 
-        if self.barb_width <= 0:
-            raise Exception("barb_width must be > 0")
+    @staticmethod
+    def barb(x, y, u, v):
+        end_x = [i + j for i, j in zip(x, u)]
+        end_y = [i + j for i, j in zip(y, v)]
+        empty = [None] * len(x)
+        barb_x = [i for sub in zip(x, end_x, empty) for i in sub]
+        barb_y = [i for sub in zip(y, end_y, empty) for i in sub]
+        return end_x, end_y, barb_x, barb_y
 
-        if self.arrow_width <= 0:
-            raise Exception("arrow_width must be > 0")
+    @staticmethod
+    def arrow(x, end_x, y, end_y, arrow_scale, angle):
 
-        if len(self.x) != len(self.y) != len(self.u) != len(self.v):
-            raise Exception("x, y, u, and v must be the same length")
+        # Get barb lengths(default arrow length = 30% barb length)
+        dif_x = [i - j for i, j in zip(end_x, x)]
+        dif_y = [i - j for i, j in zip(end_y, y)]
 
-        VALID_QUIVER_KWARGS = ('angle', 'scale',
-                               'arrow_scale', 'barb_color',
-                               'arrow_color', 'barb_width',
-                               'arrow_width')
-        for key in self.kwargs.keys():
-            if key not in VALID_QUIVER_KWARGS:
-                raise Exception("Invalid keyword argument: '{0}'".format(key))
-
-    def data(self):
-        # Make arrays of x & y start values
-        start_x = self.x
-        start_y = self.y
-
-        # Make arrays of x & y end values
-        self.u = [i * self.scale for i in self.u]
-        self.v = [i * self.scale for i in self.v]
-
-        end_x = [i + j for i, j in zip(self.x, self.u)]
-        end_y = [i + j for i, j in zip(self.y, self.v)]
-
-        # These are used as spaces so the separate
-        # arrows can be included in 1 trace
-        blank_space = [None] * len(start_x)
-
-        # Zip lists: start, end, blank
-        barb_x = [i for sub in zip(start_x, end_x, blank_space) for i in sub]
-        barb_y = [i for sub in zip(start_y, end_y, blank_space) for i in sub]
-
-        # Make Trace1: the lines
-        trace1 = Scatter(x=barb_x, y=barb_y,
-                         mode='lines', name='Barb',
-                         line=Line(width=self.barb_width,
-                                   color=self.barb_color))
-
-        # Arrows
-
-        # Get barb lengths
-        # Default arrow length (arrow_scale) = 30% of barb length
-        dif_x = [i - j for i, j in zip(end_x, start_x)]
-        dif_y = [i - j for i, j in zip(end_y, start_y)]
-
-        barb_len = [None] * len(start_x)
+        barb_len = [None] * len(x)
         for index in range(len(barb_len)):
             barb_len[index] = math.hypot(dif_x[index], dif_y[index])
 
-        arrow_len = [None] * len(barb_len)
-        arrow_len = [i * self.arrow_scale for i in barb_len]
+        # Make arrow lengths
+        arrow_len = [None] * len(x)
+        arrow_len = [i * arrow_scale for i in barb_len]
 
         # Get barb angles
-        barb_ang = [None] * len(start_x)
+        barb_ang = [None] * len(x)
         for index in range(len(barb_ang)):
             barb_ang[index] = math.atan2(dif_y[index], dif_x[index])
 
         # Set angles to create arrow
-        # Default angle = +/- 20 degrees
-        ang1 = [i + self.angle for i in barb_ang]
-        ang2 = [i - self.angle for i in barb_ang]
+        ang1 = [i + angle for i in barb_ang]
+        ang2 = [i - angle for i in barb_ang]
 
         cos_ang1 = [None] * len(ang1)
         for index in range(len(ang1)):
@@ -1457,6 +1431,7 @@ class Quiver(object):
             sin_ang2[index] = math.sin(ang2[index])
         seg2_y = [i * j for i, j in zip(arrow_len, sin_ang2)]
 
+        # Set coordinates to create arrow
         point1_x = [None] * len(dif_x)
         point1_y = [None] * len(dif_y)
 
@@ -1469,21 +1444,10 @@ class Quiver(object):
             point2_x = [i - j for i, j in zip(end_x, seg2_x)]
             point2_y = [i - j for i, j in zip(end_y, seg2_y)]
 
-        # Combine arrays into matrix
-        arrows_x = [i for sub in zip(point1_x, end_x, point2_x, blank_space)
-                    for i in sub]
-        arrows_y = [i for sub in zip(point1_y, end_y, point2_y, blank_space)
-                    for i in sub]
-
-        # Make trace2: the arrows
-        trace2 = Scatter(x=arrows_x, y=arrows_y,
-                         mode='lines', name='Arrow',
-                         line=Line(width=self.arrow_width,
-                                   color=self.arrow_color))
-
-        data = Data([trace1, trace2])
-        return data
-
-    def main(self):
-        return self.quiver_cleanup()
-        return self.data()
+        # Combine lists to create arrow
+        empty = [None] * len(x)
+        arrow_x = [i for sub in zip(point1_x, end_x, point2_x, empty)
+                   for i in sub]
+        arrow_y = [i for sub in zip(point1_y, end_y, point2_y, empty)
+                   for i in sub]
+        return arrow_x, arrow_y
