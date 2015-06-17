@@ -33,6 +33,7 @@ from plotly.graph_objs.graph_objs_tools import (
 
 from plotly import exceptions
 from plotly import utils
+from plotly.session import get_session_plot_options
 
 import copy
 import sys
@@ -67,6 +68,11 @@ class PlotlyList(list):
 
     def __init__(self, *args):
         super(PlotlyList, self).__init__(*args)
+
+        if not get_session_plot_options().get('validate', True):
+            warnings.warn('Validation off. Defaulting to plain lists/dicts.')
+            return
+
         if args and isinstance(args[0], dict):
             raise exceptions.PlotlyListEntryError(
                 obj=self,
@@ -326,6 +332,11 @@ class PlotlyDict(dict):
         if issubclass(NAME_TO_CLASS[class_name], PlotlyTrace):
             if (class_name != 'PlotlyTrace') and (class_name != 'Trace'):
                 self['type'] = NAME_TO_KEY[class_name]
+
+        if not get_session_plot_options().get('validate', True):
+            warnings.warn('Validation off. Defaulting to plain lists/dicts.')
+            return
+
         self.validate()
         if self.__class__.__name__ == 'PlotlyDict':
             warnings.warn("\nThe PlotlyDict class is a base class of "
