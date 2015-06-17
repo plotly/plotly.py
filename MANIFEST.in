@@ -1,2 +1,0 @@
-include plotly/graph_reference/*.json
-include plotly/widgets/*.js
