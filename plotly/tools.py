@@ -1279,10 +1279,10 @@ def return_figure_from_figure_or_data(figure_or_data, validate_figure):
     return figure
 
 
-class Quiver(dict):
-
-    def __init__(self, x, y, u, v,
-                 scale=.1, arrow_scale=.3, angle=math.pi/9, **kwargs):
+class TraceFactory(dict):
+    @staticmethod
+    def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
+                      angle=math.pi/9, **kwargs):
         """
         Return data for a quiver plot.
 
@@ -1296,7 +1296,7 @@ class Quiver(dict):
             to get length of arrowhead. Default = .3
         :param (angle in radians) angle: angle of arrowhead. Default = pi/9
 
-        :rtype (Quiver): returns quiver trace
+        :rtype (trace): returns quiver trace
 
         :raises (PlotlyError): will happen if x, y, u, and v are not all
             the same length (or size if ndarray)
@@ -1307,7 +1307,9 @@ class Quiver(dict):
         Example 1:
         ```
         # 1 Arrow from (0,0) to (1,1)
-        q = Quiver(x=[0], y=[0], u=[1], v=[1], scale=1)
+        quiver = TraceFactory.create_quiver(x=[0], y=[0],
+                                            u=[1], v=[1],
+                                            scale=1)
         ```
 
         Example 2:
@@ -1315,7 +1317,7 @@ class Quiver(dict):
         x,y = np.meshgrid(np.arange(0, 2, .2), np.arange(0, 2, .2))
         u = np.cos(x)*y
         v = np.sin(x)*y
-        q = Quiver(x, y, u, v)
+        quiver = TraceFactory.create_quiver(x, y, u, v)
         ```
 
         Example 3:
@@ -1324,10 +1326,105 @@ class Quiver(dict):
                            np.arange(-math.pi, math.pi, .5))
         u = np.cos(x)*y
         v = np.sin(x)*y
-        data = Quiver(x, y, u, v, scale=.2, arrow_scale=.3, angle=math.pi/6,
-                      line=Line(color='purple', width=1))```
+        quiver = TraceFactory.create_quiver(x, y, u, v, scale=.2,
+                                            arrow_scale=.3, angle=math.pi/6,
+                                            line=Line(color='purple', width=1))
+        ```
         """
+        barb_x, barb_y = Quiver(x, y, u, v, scale,
+                                arrow_scale, angle).get_barbs()
+        arrow_x, arrow_y = Quiver(x, y, u, v, scale,
+                                  arrow_scale, angle).get_quiver_arrows()
+        quiver = Scatter(x=barb_x + arrow_x,
+                         y=barb_y + arrow_y,
+                         mode='lines', **kwargs)
+        return quiver
 
+    @staticmethod
+    def create_streamline(x, y, u, v,
+                          density=1, angle=math.pi/9,
+                          arrow_scale=.09, **kwargs):
+        """
+        Return data for a streamline plot.
+
+        :param (list or array) x: 1 dimmensional, evenly spaced list or array
+        :param (list or array) y: 1 dimmensional, evenly spaced list or array
+        :param (array) u: 2 dimmensional array
+        :param (array) v: 2 dimmensional array
+
+        :param (int) density: controls the density of streamlines in plot.
+            Default = 1
+        :param (angle in radians) angle: angle of arrowhead. Default = pi/9
+        :param (float in [0,1]) arrow_scale: value to scale length of arrowhead
+            Default = .09
+
+        :rtype: (trace) returns streamline data
+
+        :raises: (ImportError) will happen if numpy is not installed
+        :raises: (PlotlyError) will happen if x or y are not evenly spaced
+            1 dimmensional lists or arrays
+        :raises: (PlotlyError) will happen if u and v are not the same shape.
+
+        Example 1:
+        ```
+        # Add data
+        x = np.linspace(-3, 3, 100)
+        y = np.linspace(-3, 3, 100)
+        Y, X = np.meshgrid(x, y)
+        u = -1 - X**2 + Y
+        v = 1 + X - Y**2
+        u = u.T #transpose
+        v = v.T #transpose
+
+        # create streamline
+        stream = TraceFactory.create_streamline(x, y, u, v, arrow_scale = .1)
+        ```
+
+        Example 2:
+        # from http://nbviewer.ipython.org/github/barbagroup/AeroPython
+        ```
+        N = 50
+        x_start, x_end = -2.0, 2.0
+        y_start, y_end = -1.0, 1.0
+        x = np.linspace(x_start, x_end, N)
+        y = np.linspace(y_start, y_end, N)
+        X, Y = np.meshgrid(x, y)
+        ss = 5.0
+        x_s, y_s = -1.0, 0.0
+
+        # Compute the velocity field on the mesh grid
+        u_s = ss/(2*np.pi) * (X-x_s)/((X-x_s)**2 + (Y-y_s)**2)
+        v_s = ss/(2*np.pi) * (Y-y_s)/((X-x_s)**2 + (Y-y_s)**2)
+
+        # Create streamline
+        stream = TraceFactory.create_streamline(x, y, u_s, v_s, density=2,
+                                                name='stream')
+
+        # Add source point
+        point = Scatter(x=[x_s], y=[y_s], mode='markers',
+                        marker=Marker(size=14), name='source point')
+        fig=Figure()
+        fig['data'].append(stream)
+        fig['data'].append(point)
+        py.iplot(fig, filename='stream', overwrite=True)
+        ```
+        """
+        streams_x, streams_y = Streamline(x, y, u, v,
+                                          density, angle,
+                                          arrow_scale).get_total_streams()
+        arrow_x, arrow_y = Streamline(x, y, u, v,
+                                      density, angle,
+                                      arrow_scale).get_streamline_arrows()
+
+        stream = Scatter(x=streams_x + arrow_x,
+                         y=streams_y + arrow_y,
+                         mode='lines', **kwargs)
+        return stream
+
+
+class Quiver(TraceFactory):
+    def __init__(self, x, y, u, v,
+                 scale, arrow_scale, angle, **kwargs):
         try:
             x = self.flatten(x)
         except exceptions.PlotlyError:
@@ -1359,11 +1456,8 @@ class Quiver(dict):
         self.end_y = []
         self.validate()
         self.scale_uv()
-        barb_x, barb_y = self.get_barb()
-        arrow_x, arrow_y = self.get_quiver_arrow()
-
-        super(Quiver, self).__init__(x=barb_x + arrow_x, y=barb_y + arrow_y,
-                                     mode='lines', name='quiver', **kwargs)
+        barb_x, barb_y = self.get_barbs()
+        arrow_x, arrow_y = self.get_quiver_arrows()
 
     def flatten(self, array):
         """
@@ -1407,7 +1501,7 @@ class Quiver(dict):
         self.u = [i * self.scale for i in self.u]
         self.v = [i * self.scale for i in self.v]
 
-    def get_barb(self):
+    def get_barbs(self):
         """
         Gets endpoint of the barb and then zips startpoint and endpoint
         pairs to create 2 lists: x_values for barbs and y values for barbs
@@ -1424,7 +1518,7 @@ class Quiver(dict):
         barb_y = self.flatten(zip(self.y, self.end_y, empty))
         return barb_x, barb_y
 
-    def get_quiver_arrow(self):
+    def get_quiver_arrows(self):
         """
         Gets length of each barb then calculates the length of each side of
         the arrow. Gets angle of barb and applies angle (kwarg) to each
@@ -1494,71 +1588,10 @@ class Quiver(dict):
         return arrow_x, arrow_y
 
 
-class Streamline(dict):
+class Streamline(TraceFactory):
     def __init__(self, x, y, u, v,
-                 density=1, angle=math.pi/9,
-                 arrow_scale=.09, **kwargs):
-        """
-        Return data for a streamline plot.
-
-        :param (list or array) x: 1 dimmensional, evenly spaced list or array
-        :param (list or array) y: 1 dimmensional, evenly spaced list or array
-        :param (array) u: 2 dimmensional array
-        :param (array) v: 2 dimmensional array
-
-        :param (int) density: controls the density of streamlines in plot.
-            Default = 1
-        :param (angle in radians) angle: angle of arrowhead. Default = pi/9
-        :param (float in [0,1]) arrow_scale: value to scale length of arrowhead
-            Default = .09
-
-        :rtype: (dict) returns streamline data
-
-        :raises: (ImportError) will happen if numpy is not installed
-        :raises: (PlotlyError) will happen if x or y are not evenly spaced
-            1 dimmensional lists or arrays
-        :raises: (PlotlyError) will happen if u and v are not the same shape.
-
-        Example 1:
-        ```
-        # Add data
-        x = np.linspace(-3, 3, 100)
-        y = np.linspace(-3, 3, 100)
-        Y, X = np.meshgrid(x, y)
-        u = -1 - X**2 + Y
-        v = 1 + X - Y**2
-        u = u.T #transpose
-        v = v.T #transpose
-
-        # Streamline function
-        data = Streamline(x, y, u, v, arrow_scale = .1)
-        ```
-
-        Example 2:
-        # from http://nbviewer.ipython.org/github/barbagroup/AeroPython
-        ```
-        import plotly.plotly as py
-
-        N = 50
-        x_start, x_end = -2.0, 2.0
-        y_start, y_end = -1.0, 1.0
-        x = np.linspace(x_start, x_end, N)
-        y = np.linspace(y_start, y_end, N)
-        X, Y = np.meshgrid(x, y)
-        ss = 5.0
-        x_s, y_s = -1.0, 0.0
-
-        # Compute the velocity field on the mesh grid
-        u_s = ss/(2*np.pi) * (X-x_s)/((X-x_s)**2 + (Y-y_s)**2)
-        v_s = ss/(2*np.pi) * (Y-y_s)/((X-x_s)**2 + (Y-y_s)**2)
-        # Streamline function
-        data = Streamline(x, y, u_s, v_s, density=2)
-
-        # Add Source Point to data
-        trace2 = Scatter(x=[x_s], y=[y_s], mode='markers',
-                         marker=Marker(size=14), name='Source Point')
-        data = [data] + [trace2]
-        """
+                 density, angle,
+                 arrow_scale, **kwargs):
         self.x = np.array(x)
         self.y = np.array(y)
         self.u = np.array(u)
@@ -1582,14 +1615,12 @@ class Streamline(dict):
         # Rescale u and v for integrations.
         self.u *= len(self.x)
         self.v *= len(self.y)
-
         self.validate()
-        stream_x, stream_y, total_x, total_y = self.get_streams()
-        arrows_x, arrows_y = self.get_streamline_arrows(stream_x, stream_y)
-
-        super(Streamline, self).__init__(x=total_x + arrows_x,
-                                         y=total_y + arrows_y,
-                                         mode='lines', name='quiver', **kwargs)
+        self.st_x = []
+        self.st_y = []
+        self.get_stream()
+        streams_x, streams_y = self.get_total_streams()
+        arrows_x, arrows_y = self.get_streamline_arrows()
 
     def validate(self):
         """
@@ -1727,7 +1758,7 @@ class Streamline(dict):
 
     def traj(self, xb, yb):
         """
-        Integrate trajectories, used in get_streams()
+        Integrate trajectories, used in get_stream()
         """
         if xb < 0 or xb >= self.density or yb < 0 or yb >= self.density:
             return
@@ -1736,16 +1767,12 @@ class Streamline(dict):
             if t is not None:
                 self.trajectories.append(t)
 
-    def get_streams(self):
+    def get_stream(self):
         """
         Get streamlines by building trajectory set.
 
-        :rtype (list of lists) stream_x: lists of x-values for each stream
-        :rtype (list of lists) stream_y: lists of y-values for each stream
-        :rtype (list) total_x: all x values for each stream combined into
-            single list
-        :rtype (list) total_y: all y values for each stream combined into
-            single list
+        :rtype (list of lists) st_x: lists of x-values for each stream
+        :rtype (list of lists) st_y: lists of y-values for each stream
         """
         for indent in range((max(self.density, self.density))//2):
             for xi in range(max(self.density, self.density)-2*indent):
@@ -1754,46 +1781,42 @@ class Streamline(dict):
                 self.traj(indent, xi+indent)
                 self.traj(self.density-1-indent, xi+indent)
 
-        stream_x = [np.array(t[0])*self.delta_x+self.x[0] for t in
-                    self.trajectories]
-        stream_y = [np.array(t[1])*self.delta_y+self.y[0] for t in
-                    self.trajectories]
+        self.st_x = [np.array(t[0])*self.delta_x+self.x[0] for t in
+                     self.trajectories]
+        self.st_y = [np.array(t[1])*self.delta_y+self.y[0] for t in
+                     self.trajectories]
 
-        for index in range(len(stream_x)):
-            stream_x[index] = stream_x[index].tolist()
-            stream_x[index].append(np.nan)
+        for index in range(len(self.st_x)):
+            self.st_x[index] = self.st_x[index].tolist()
+            self.st_x[index].append(np.nan)
 
-        for index in range(len(stream_y)):
-            stream_y[index] = stream_y[index].tolist()
-            stream_y[index].append(np.nan)
+        for index in range(len(self.st_y)):
+            self.st_y[index] = self.st_y[index].tolist()
+            self.st_y[index].append(np.nan)
 
-        total_x = sum(stream_x, [])
-        total_y = sum(stream_y, [])
-        return stream_x, stream_y, total_x, total_y
-
-    def get_streamline_arrows(self, stream_x, stream_y):
+    def get_streamline_arrows(self):
         """
         Makes an arrow for each stream. Gets angle of streamline at 1/3 mark
         and creates arrow coordinates based off of user defined angle and
         arrow_scale
 
-        :param (array) stream_x: x-values for all streams
-        :param (array) stream_y: y-values for all streams
+        :param (array) st_x: x-values for all streams
+        :param (array) st_y: y-values for all streams
         :param (angle in radians) angle: angle of arrowhead. Default = pi/9
         :param (float in [0,1]) arrow_scale: value to scale length of arrowhead
             Default = .09
         :rtype (list) arrows_x: x-values to create arrowhead
         :rtype (list) arrows_y: y-values to create arrowhead
         """
-        ArrowEnd_x = np.empty((len(stream_x)))
-        ArrowEnd_y = np.empty((len(stream_y)))
-        ArrowStart_x = np.empty((len(stream_x)))
-        ArrowStart_y = np.empty((len(stream_y)))
-        for index in range(len(stream_x)):
-            ArrowEnd_x[index] = stream_x[index][(len(stream_x[index])/3)]
-            ArrowStart_x[index] = stream_x[index][(len(stream_x[index])/3)-1]
-            ArrowEnd_y[index] = stream_y[index][(len(stream_y[index])/3)]
-            ArrowStart_y[index] = stream_y[index][(len(stream_y[index])/3)-1]
+        ArrowEnd_x = np.empty((len(self.st_x)))
+        ArrowEnd_y = np.empty((len(self.st_y)))
+        ArrowStart_x = np.empty((len(self.st_x)))
+        ArrowStart_y = np.empty((len(self.st_y)))
+        for index in range(len(self.st_x)):
+            ArrowEnd_x[index] = self.st_x[index][(len(self.st_x[index])/3)]
+            ArrowStart_x[index] = self.st_x[index][(len(self.st_x[index])/3)-1]
+            ArrowEnd_y[index] = self.st_y[index][(len(self.st_y[index])/3)]
+            ArrowStart_y[index] = self.st_y[index][(len(self.st_y[index])/3)-1]
 
         dif_x = ArrowEnd_x - ArrowStart_x
         dif_y = ArrowEnd_y - ArrowStart_y
@@ -1841,3 +1864,14 @@ class Streamline(dict):
         arrows_y = arrows_y.tolist()
 
         return arrows_x, arrows_y
+
+    def get_total_streams(self):
+        """
+        :rtype (list) streams_x: all x values for each stream combined into
+            single list
+        :rtype (list) streams_y: all y values for each stream combined into
+            single list
+        """
+        streams_x = sum(self.st_x, [])
+        streams_y = sum(self.st_y, [])
+        return streams_x, streams_y
