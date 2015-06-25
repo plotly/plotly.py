@@ -1310,25 +1310,44 @@ class TraceFactory(dict):
         quiver = TraceFactory.create_quiver(x=[0], y=[0],
                                             u=[1], v=[1],
                                             scale=1)
+        # Plot
+        fig=Figure()
+        fig['data'].append(quiver)
+        py.iplot(fig, filename='quiver')
         ```
 
         Example 2:
         ```
+        # Add data
         x,y = np.meshgrid(np.arange(0, 2, .2), np.arange(0, 2, .2))
         u = np.cos(x)*y
         v = np.sin(x)*y
+
+        #Create quiver
         quiver = TraceFactory.create_quiver(x, y, u, v)
+
+        # Plot
+        fig=Figure()
+        fig['data'].append(quiver)
+        py.iplot(fig, filename='quiver')
         ```
 
         Example 3:
         ```
+        # Add data
         x, y = np.meshgrid(np.arange(-np.pi, math.pi, .5),
                            np.arange(-math.pi, math.pi, .5))
         u = np.cos(x)*y
         v = np.sin(x)*y
+
+        # Create quiver
         quiver = TraceFactory.create_quiver(x, y, u, v, scale=.2,
                                             arrow_scale=.3, angle=math.pi/6,
                                             line=Line(color='purple', width=1))
+        # Plot
+        fig=Figure()
+        fig['data'].append(quiver)
+        py.iplot(fig, filename='quiver')
         ```
         """
         barb_x, barb_y = Quiver(x, y, u, v, scale,
@@ -1376,13 +1395,19 @@ class TraceFactory(dict):
         u = u.T #transpose
         v = v.T #transpose
 
-        # create streamline
+        # Create streamline
         stream = TraceFactory.create_streamline(x, y, u, v, arrow_scale = .1)
+
+        # Plot
+        fig=Figure()
+        fig['data'].append(stream)
+        py.iplot(fig, filename='stream')
         ```
 
         Example 2:
         # from http://nbviewer.ipython.org/github/barbagroup/AeroPython
         ```
+        # Add data
         N = 50
         x_start, x_end = -2.0, 2.0
         y_start, y_end = -1.0, 1.0
@@ -1403,10 +1428,11 @@ class TraceFactory(dict):
         # Add source point
         point = Scatter(x=[x_s], y=[y_s], mode='markers',
                         marker=Marker(size=14), name='source point')
+        # Plot
         fig=Figure()
         fig['data'].append(stream)
         fig['data'].append(point)
-        py.iplot(fig, filename='stream', overwrite=True)
+        py.iplot(fig, filename='stream')
         ```
         """
         streams_x, streams_y = Streamline(x, y, u, v,
