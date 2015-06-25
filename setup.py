@@ -15,7 +15,7 @@ setup(name='plotly',
       author_email='chris@plot.ly',
       maintainer='Chris P',
       maintainer_email='chris@plot.ly',
-      url='https://plot.ly/api/python',
+      url='https://plot.ly/python/',
       description="Python plotting library for collaborative, "
                   "interactive, publication-quality graphs.",
       long_description=readme(),
