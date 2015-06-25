@@ -3,7 +3,9 @@
     without connecting to a public or private plotly enterprise
     server.
 """
-import utils
+from __future__ import absolute_import
+
+from plotly import utils
 import uuid
 import json
 import os
