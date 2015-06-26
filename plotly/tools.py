@@ -1396,12 +1396,12 @@ class TraceFactory(dict):
         v = v.T #transpose
 
         # Create streamline
-        stream = TraceFactory.create_streamline(x, y, u, v, arrow_scale = .1)
+        streamline = TraceFactory.create_streamline(x, y, u, v, arrow_scale= 1)
 
         # Plot
         fig=Figure()
-        fig['data'].append(stream)
-        py.iplot(fig, filename='stream')
+        fig['data'].append(streamline)
+        py.iplot(fig, filename='streamline')
         ```
 
         Example 2:
@@ -1422,30 +1422,30 @@ class TraceFactory(dict):
         v_s = ss/(2*np.pi) * (Y-y_s)/((X-x_s)**2 + (Y-y_s)**2)
 
         # Create streamline
-        stream = TraceFactory.create_streamline(x, y, u_s, v_s, density=2,
-                                                name='stream')
+        streamline = TraceFactory.create_streamline(x, y, u_s, v_s, density=2,
+                                                name='streamline')
 
         # Add source point
         point = Scatter(x=[x_s], y=[y_s], mode='markers',
                         marker=Marker(size=14), name='source point')
         # Plot
         fig=Figure()
-        fig['data'].append(stream)
+        fig['data'].append(streamline)
         fig['data'].append(point)
-        py.iplot(fig, filename='stream')
+        py.iplot(fig, filename='streamline')
         ```
         """
-        streams_x, streams_y = Streamline(x, y, u, v,
-                                          density, angle,
-                                          arrow_scale).get_total_streams()
+        streamline_x, streamline_y = Streamline(x, y, u, v,
+                                                density, angle,
+                                                arrow_scale).sum_streamlines()
         arrow_x, arrow_y = Streamline(x, y, u, v,
                                       density, angle,
                                       arrow_scale).get_streamline_arrows()
 
-        stream = Scatter(x=streams_x + arrow_x,
-                         y=streams_y + arrow_y,
-                         mode='lines', **kwargs)
-        return stream
+        streamline = Scatter(x=streamline_x + arrow_x,
+                             y=streamline_y + arrow_y,
+                             mode='lines', **kwargs)
+        return streamline
 
 
 class Quiver(TraceFactory):
@@ -1644,8 +1644,8 @@ class Streamline(TraceFactory):
         self.validate()
         self.st_x = []
         self.st_y = []
-        self.get_stream()
-        streams_x, streams_y = self.get_total_streams()
+        self.get_streamlines()
+        streamline_x, streamline_y = self.sum_streamlines()
         arrows_x, arrows_y = self.get_streamline_arrows()
 
     def validate(self):
@@ -1662,7 +1662,8 @@ class Streamline(TraceFactory):
         :raises: (PlotlyError) If u and v are not the same shape.
         """
         if _numpy_imported is False:
-            raise ImportError("To use Streamline() please import numpy as np")
+            raise ImportError("To use TraceFactory.create_streamline()"
+                              " please import numpy as np")
         if self.arrow_scale <= 0:
             raise ValueError("arrow_scale must be > 0")
         if self.density <= 0:
@@ -1687,7 +1688,7 @@ class Streamline(TraceFactory):
 
     def value_at(self, a, xi, yi):
         """
-        Set up for RK4 function, taken from Bokeh's streamline code
+        Set up for RK4 function, based on Bokeh's streamline code
         """
         if type(xi) == np.ndarray:
             self.x = xi.astype(np.int)
@@ -1784,7 +1785,7 @@ class Streamline(TraceFactory):
 
     def traj(self, xb, yb):
         """
-        Integrate trajectories, used in get_stream()
+        Integrate trajectories, used in get_streamlines()
         """
         if xb < 0 or xb >= self.density or yb < 0 or yb >= self.density:
             return
@@ -1793,12 +1794,12 @@ class Streamline(TraceFactory):
             if t is not None:
                 self.trajectories.append(t)
 
-    def get_stream(self):
+    def get_streamlines(self):
         """
         Get streamlines by building trajectory set.
 
-        :rtype (list of lists) st_x: lists of x-values for each stream
-        :rtype (list of lists) st_y: lists of y-values for each stream
+        :rtype (list of lists) st_x: lists of x-values for each streamline
+        :rtype (list of lists) st_y: lists of y-values for each streamline
         """
         for indent in range((max(self.density, self.density))//2):
             for xi in range(max(self.density, self.density)-2*indent):
@@ -1822,12 +1823,12 @@ class Streamline(TraceFactory):
 
     def get_streamline_arrows(self):
         """
-        Makes an arrow for each stream. Gets angle of streamline at 1/3 mark
-        and creates arrow coordinates based off of user defined angle and
+        Makes an arrow for each streamline. Gets angle of streamline at 1/3
+        mark and creates arrow coordinates based off of user defined angle and
         arrow_scale
 
-        :param (array) st_x: x-values for all streams
-        :param (array) st_y: y-values for all streams
+        :param (array) st_x: x-values for all streamlines
+        :param (array) st_y: y-values for all streamlines
         :param (angle in radians) angle: angle of arrowhead. Default = pi/9
         :param (float in [0,1]) arrow_scale: value to scale length of arrowhead
             Default = .09
@@ -1847,10 +1848,10 @@ class Streamline(TraceFactory):
         dif_x = ArrowEnd_x - ArrowStart_x
         dif_y = ArrowEnd_y - ArrowStart_y
 
-        stream_ang = np.arctan(dif_y/dif_x)
+        streamline_ang = np.arctan(dif_y/dif_x)
 
-        ang1 = stream_ang + (self.angle)
-        ang2 = stream_ang - (self.angle)
+        ang1 = streamline_ang + (self.angle)
+        ang2 = streamline_ang - (self.angle)
 
         seg1_x = np.cos(ang1)*self.arrow_scale
         seg1_y = np.sin(ang1)*self.arrow_scale
@@ -1891,13 +1892,13 @@ class Streamline(TraceFactory):
 
         return arrows_x, arrows_y
 
-    def get_total_streams(self):
+    def sum_streamlines(self):
         """
-        :rtype (list) streams_x: all x values for each stream combined into
-            single list
-        :rtype (list) streams_y: all y values for each stream combined into
-            single list
+        :rtype (list) streamline_x: all x values for each streamline combined
+            into single list
+        :rtype (list) streamline_y: all y values for each streamline combined
+            into single list
         """
-        streams_x = sum(self.st_x, [])
-        streams_y = sum(self.st_y, [])
-        return streams_x, streams_y
+        streamline_x = sum(self.st_x, [])
+        streamline_y = sum(self.st_y, [])
+        return streamline_x, streamline_y
