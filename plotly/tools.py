@@ -48,6 +48,9 @@ TEST_FILE = os.path.join(PLOTLY_DIR, ".permission_test")
 # this sets both the DEFAULTS and the TYPES for these items
 _FILE_CONTENT = {CREDENTIALS_FILE: {'username': '',
                                     'api_key': '',
+                                    'proxy_username': '',
+                                    'proxy_passwd': '',
+                                    'api_key': '',
                                     'stream_ids': []},
                  CONFIG_FILE: {'plotly_domain': 'https://plot.ly',
                                'plotly_streaming_domain': 'stream.plot.ly',
@@ -99,7 +102,8 @@ def ensure_local_plotly_files():
 
 ### credentials tools ###
 
-def set_credentials_file(username=None, api_key=None, stream_ids=None):
+def set_credentials_file(username=None, api_key=None, proxy_username=None,
+                         proxy_passwd=None, stream_ids=None):
     """Set the keyword-value pairs in `~/.plotly_credentials`.
 
     """
@@ -112,6 +116,10 @@ def set_credentials_file(username=None, api_key=None, stream_ids=None):
         credentials['username'] = username
     if isinstance(api_key, six.string_types):
         credentials['api_key'] = api_key
+    if isinstance(proxy_username, six.string_types):
+        credentials['proxy_username'] = proxy_username
+    if isinstance(proxy_passwd, six.string_types):
+        credentials['proxy_passwd'] = proxy_passwd
     if isinstance(stream_ids, (list, tuple)):
         credentials['stream_ids'] = stream_ids
     utils.save_json_dict(CREDENTIALS_FILE, credentials)
