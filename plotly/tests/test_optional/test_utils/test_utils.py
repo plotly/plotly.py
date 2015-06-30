@@ -225,7 +225,7 @@ def test_pandas_json_encoding():
     # Test that data wasn't mutated
     assert_series_equal(df['col 1'],
                         pd.Series([1, 2, 3, dt(2014, 1, 5),
-                                   pd.NaT, np.NaN, np.Inf]))
+                                   pd.NaT, np.NaN, np.Inf], name='col 1'))
 
     j2 = json.dumps(df.index, cls=utils.PlotlyJSONEncoder)
     assert(j2 == '[0, 1, 2, 3, 4, 5, 6]')
