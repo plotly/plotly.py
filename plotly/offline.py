@@ -11,53 +11,38 @@ import json
 import os
 import requests
 
+PLOTLY_OFFLINE_DIRECTORY = plotlyjs_path = os.path.expanduser(
+    os.path.join(*'~/.plotly/plotlyjs'.split('/')))
+PLOTLY_OFFLINE_BUNDLE = os.path.join(PLOTLY_OFFLINE_DIRECTORY,
+                                     'plotlyofflinebundle.js')
 
-def download_plotlyjs(download_url, plotlyjs_dir='~/.plotly/plotlyjs'):
-    plotlyjs_path = os.path.expanduser(
-        os.path.join(*'~/.plotly/plotlyjs'.split('/')))
 
+def download_plotlyjs(download_url):
     if not os.path.exists(plotlyjs_path):
         os.makedirs(plotlyjs_path)
 
-    res = requests.get(download_url + '/sourcefiles.json')
+    res = requests.get(download_url)
     res.raise_for_status()
 
-    with open(os.path.join(plotlyjs_path, 'sourcefiles.json'), 'w') as f:
+    with open(PLOTLY_OFFLINE_BUNDLE, 'w') as f:
         f.write(res.content)
 
-    download_queue = json.loads(res.content)['files']
-    for fn in download_queue:
-        file_url = download_url + '/' + fn
-        print('Downloading {}'.format(file_url))
-        res = requests.get(file_url)
-        res.raise_for_status()
-
-        file_path = os.path.join(plotlyjs_path, *fn.split('/'))
-        file_dir = os.path.dirname(file_path)
-        if not os.path.exists(file_dir):
-            os.makedirs(file_dir)
-
-        with open(file_path, 'w') as f:
-            print('Copying into {}'.format(file_path))
-            f.write(res.content)
-
-    print('\n\n'
-          'Success! Now start an IPython notebook, '
-          'initialize offline mode with\n'
-          'plotly.offline.init_notebook_mode()\n'
-          'and make your first offline graph:\n'
-          'plotly.offline.iplot([{"x": [1, 2, 3], "y": [3, 1, 6]}])\n')
+    print('\n'.join([
+        'Success! Now start an IPython notebook and run the following ' +
+        'code to make your first offline graph:',
+        '',
+        'import plotly',
+        'plotly.offline.init_notebook_mode() # initialize offline mode',
+        'plotly.offline.iplot([{"x": [1, 2, 3], "y": [3, 1, 6]}])'
+    ]))
 
 
 def init_notebook_mode(plotlyjs_dir='~/.plotly/plotlyjs'):
     # TODO: check if ipython is available...?
     from IPython.display import HTML, display
 
-    # Split and join the install path for cross-OS directories
-    plotlyjs_dir = os.path.expanduser(os.path.join(*'~/.plotly/plotlyjs'.split('/')))
-    sourcefiles_path = os.path.join(plotlyjs_dir, 'sourcefiles.json')
-    if not os.path.exists(sourcefiles_path):
-        raise Exception('Plotly Offline configuration file at {source_path} '
+    if not os.path.exists(PLOTLY_OFFLINE_BUNDLE):
+        raise Exception('Plotly Offline source file at {source_path} '
                         'is not found.\n'
                         'If you have a Plotly Offline license, then try '
                         'running plotly.offline.configure_offline(url) '
@@ -65,24 +50,10 @@ def init_notebook_mode(plotlyjs_dir='~/.plotly/plotlyjs'):
                         "Don't have a Plotly Offline license?"
                         'Contact sales@plot.ly learn more about licensing.\n'
                         'Questions? support@plot.ly.'
-                        .format(source_path=sourcefiles_path))
+                        .format(source_path=PLOTLY_OFFLINE_BUNDLE))
 
-    sourcefiles = json.load(open(sourcefiles_path))['files']
-
-    # Include all of the files in the dependencies folder
-    scriptpaths = [os.path.join(plotlyjs_dir, *sourcefile.split('/'))
-                   for sourcefile in sourcefiles]
-
-    unrequirejs = ('<script type="text/javascript">'
-                   'require=requirejs=define=undefined;</script>')
-
-    display(HTML(
-        unrequirejs +
-        '\n'.join([
-            '<script type="text/javascript">' + open(script).read() +
-            '</script>' for script in scriptpaths
-        ])
-    ))
+    display(HTML('<script type="text/javascript">' +
+                 open(PLOTLY_OFFLINE_BUNDLE).read() + '</script>'))
 
 
 def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly'):
@@ -146,4 +117,3 @@ def plot():
     """ Configured to work with localhost Plotly graph viewer
     """
     raise NotImplementedError
-
