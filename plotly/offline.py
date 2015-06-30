@@ -87,21 +87,34 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly'):
     jdata = json.dumps(data, cls=utils.PlotlyJSONEncoder)
     jlayout = json.dumps(layout, cls=utils.PlotlyJSONEncoder)
 
+    if show_link is False:
+        link_text = ''
+
+    plotly_platform_url = py.get_config().get('plotly_domain',
+                                              'https://plot.ly')
+    if (plotly_platform_url != 'https://plot.ly' and
+            link_text == 'Export to plot.ly'):
+
+        link_domain = plotly_platform_url\
+            .replace('https://', '')\
+            .replace('http://', '')
+        link_text = link_text.replace('plot.ly', link_domain)
+
+    display(HTML(
+        '<script type="text/javascript">'
+        'window.PLOTLYENV={"BASE_URL": "' + plotly_platform_url + '"};'
+        'Plotly.LINKTEXT = "' + link_text + '";'
+        '</script>'
+    ))
+
     script = '\n'.join([
         'Plotly.plot("{id}", {data}, {layout}).then(function() {{',
         '    $(".{id}.loading").remove();',
-        '    $(".link--embedview").text("{link_text}");'
+        '}})'
     ]).format(id=plotdivid,
               data=jdata,
               layout=jlayout,
               link_text=link_text)
-
-    if not show_link:
-        script += '\n'.join([
-            '    $("{} .link--embedview").remove();'.format(plotdivid),
-            '\n});'])
-    else:
-        script += '\n});'
 
     display(HTML(''
                  '<div class="{id} loading" style="color: rgb(50,50,50);">'
