@@ -28,3 +28,13 @@ def test_downloading_file_saves_it_to_the_disk():
 
     plotly.offline.download_plotlyjs(dummy_js_url)
     assert os.path.isfile(plotly.offline.PLOTLY_OFFLINE_BUNDLE) is True
+
+
+@raises(PlotlyError)
+def test_initializing_before_downloading_raises_an_error():
+    try:
+        os.remove(plotly.offline.PLOTLY_OFFLINE_BUNDLE)
+    except OSError:
+        pass
+
+    plotly.offline.init_notebook_mode()
