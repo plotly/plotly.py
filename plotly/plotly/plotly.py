@@ -1212,7 +1212,7 @@ class _api_v2:
             headers['authorization'] = 'Basic ' + encoded_proxy_auth
             headers['plotly-authorization'] = 'Basic ' + encoded_api_auth
         else:
-            headers['authorization'] = 'Basic ' + encoded_api_auth,
+            headers['authorization'] = 'Basic ' + encoded_api_auth
 
         return headers
 
