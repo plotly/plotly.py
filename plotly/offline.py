@@ -87,6 +87,14 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly'):
                                 of the chart that will export the chart to
                                 Plotly Cloud or Plotly Enterprise
     link_text (default='Export to plot.ly') -- the text of export link
+
+    Example:
+    ```
+    from plotly.offline import init_notebook_mode, iplot
+    init_notebook_mode()
+
+    iplot([{'x': [1, 2, 3], 'y': [5, 2, 7]}])
+    ```
     """
     if not __PLOTLY_OFFLINE_INITIALIZED:
         raise exceptions.PlotlyError('\n'.join([
