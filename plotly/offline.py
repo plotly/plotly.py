@@ -19,6 +19,8 @@ PLOTLY_OFFLINE_DIRECTORY = plotlyjs_path = os.path.expanduser(
 PLOTLY_OFFLINE_BUNDLE = os.path.join(PLOTLY_OFFLINE_DIRECTORY,
                                      'plotly-ipython-offline-bundle.js')
 
+__PLOTLY_OFFLINE_INITIALIZED = False
+
 
 def download_plotlyjs(download_url):
     if not os.path.exists(plotlyjs_path):
@@ -55,6 +57,8 @@ def init_notebook_mode():
                         'Questions? support@plot.ly.'
                         .format(source_path=PLOTLY_OFFLINE_BUNDLE))
 
+    global __PLOTLY_OFFLINE_INITIALIZED
+    __PLOTLY_OFFLINE_INITIALIZED = True
     display(HTML('<script type="text/javascript">' +
                  open(PLOTLY_OFFLINE_BUNDLE).read() + '</script>'))
 
@@ -62,6 +66,15 @@ def init_notebook_mode():
 def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly'):
     """
     """
+    if not __PLOTLY_OFFLINE_INITIALIZED:
+        raise exceptions.PlotlyError('\n'.join([
+            'Plotly Offline mode has not been initialized in this notebook. '
+            'Run: ',
+            '',
+            'import plotly',
+            'plotly.offline.init_notebook_mode() '
+            '# run at the start of every ipython notebook',
+        ]))
     from IPython.display import HTML, display
     if isinstance(figure_or_data, dict):
         data = figure_or_data['data']
