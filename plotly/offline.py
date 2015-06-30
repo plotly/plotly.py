@@ -12,7 +12,7 @@ import requests
 
 import plotly.plotly as py
 from plotly import utils
-from plotly import exceptions
+from plotly.exceptions import PlotlyError
 
 PLOTLY_OFFLINE_DIRECTORY = plotlyjs_path = os.path.expanduser(
     os.path.join(*'~/.plotly/plotlyjs'.split('/')))
@@ -53,15 +53,15 @@ def init_notebook_mode():
     from IPython.display import HTML, display
 
     if not os.path.exists(PLOTLY_OFFLINE_BUNDLE):
-        raise Exception('Plotly Offline source file at {source_path} '
-                        'is not found.\n'
-                        'If you have a Plotly Offline license, then try '
-                        'running plotly.offline.download_plotlyjs(url) '
-                        'with a licensed download url.\n'
-                        "Don't have a Plotly Offline license? "
-                        'Contact sales@plot.ly learn more about licensing.\n'
-                        'Questions? support@plot.ly.'
-                        .format(source_path=PLOTLY_OFFLINE_BUNDLE))
+        raise PlotlyError('Plotly Offline source file at {source_path} '
+                          'is not found.\n'
+                          'If you have a Plotly Offline license, then try '
+                          'running plotly.offline.download_plotlyjs(url) '
+                          'with a licensed download url.\n'
+                          "Don't have a Plotly Offline license? "
+                          'Contact sales@plot.ly learn more about licensing.\n'
+                          'Questions? support@plot.ly.'
+                          .format(source_path=PLOTLY_OFFLINE_BUNDLE))
 
     global __PLOTLY_OFFLINE_INITIALIZED
     __PLOTLY_OFFLINE_INITIALIZED = True
@@ -97,7 +97,7 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly'):
     ```
     """
     if not __PLOTLY_OFFLINE_INITIALIZED:
-        raise exceptions.PlotlyError('\n'.join([
+        raise PlotlyError('\n'.join([
             'Plotly Offline mode has not been initialized in this notebook. '
             'Run: ',
             '',
