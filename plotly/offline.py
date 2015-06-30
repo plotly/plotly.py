@@ -37,22 +37,28 @@ def download_plotlyjs(download_url):
         'code to make your first offline graph:',
         '',
         'import plotly',
-        'plotly.offline.init_notebook_mode() # initialize offline mode',
+        'plotly.offline.init_notebook_mode() '
+        '# run at the start of every ipython notebook',
         'plotly.offline.iplot([{"x": [1, 2, 3], "y": [3, 1, 6]}])'
     ]))
 
 
 def init_notebook_mode():
-    # TODO: check if ipython is available...?
+    """
+    Initialize Plotly Offline mode in an IPython Notebook.
+    Run this function at the start of an IPython notebook
+    to load the necessary javascript files for creating
+    Plotly graphs with plotly.offline.iplot.
+    """
     from IPython.display import HTML, display
 
     if not os.path.exists(PLOTLY_OFFLINE_BUNDLE):
         raise Exception('Plotly Offline source file at {source_path} '
                         'is not found.\n'
                         'If you have a Plotly Offline license, then try '
-                        'running plotly.offline.configure_offline(url) '
+                        'running plotly.offline.download_plotlyjs(url) '
                         'with a licensed download url.\n'
-                        "Don't have a Plotly Offline license?"
+                        "Don't have a Plotly Offline license? "
                         'Contact sales@plot.ly learn more about licensing.\n'
                         'Questions? support@plot.ly.'
                         .format(source_path=PLOTLY_OFFLINE_BUNDLE))
@@ -65,6 +71,22 @@ def init_notebook_mode():
 
 def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly'):
     """
+    Draw plotly graphs inside an IPython notebook without
+    connecting to an external server.
+    To save the chart to Plotly Cloud or Plotly Enterprise, use
+    `plotly.plotly.iplot`.
+    To embed an image of the chart, use `plotly.image.ishow`.
+
+    figure_or_data -- a plotly.graph_objs.Figure or plotly.graph_objs.Data or
+                      dict or list that describes a Plotly graph.
+                      See https://plot.ly/python/ for examples of
+                      graph descriptions.
+
+    Keyword arguments:
+    show_link (default=True) -- display a link in the bottom-right corner of
+                                of the chart that will export the chart to
+                                Plotly Cloud or Plotly Enterprise
+    link_text (default='Export to plot.ly') -- the text of export link
     """
     if not __PLOTLY_OFFLINE_INITIALIZED:
         raise exceptions.PlotlyError('\n'.join([
