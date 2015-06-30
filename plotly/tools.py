@@ -107,6 +107,12 @@ def set_credentials_file(username=None, api_key=None, proxy_username=None,
                          proxy_passwd=None, stream_ids=None):
     """Set the keyword-value pairs in `~/.plotly_credentials`.
 
+    :param (str) username: The username you'd use to sign in to Plotly
+    :param (str) api_key: The api key associated with above username
+    :param (list) stream_ids: Stream tokens for above credentials
+    :param (str) proxy_username: The un associated with with your Proxy
+    :param (str) proxy_password: The pw associated with your Proxy un
+
     """
     if not _file_permissions:
         raise exceptions.PlotlyError("You don't have proper file permissions "
@@ -157,6 +163,12 @@ def set_config_file(plotly_domain=None,
                     plotly_ssl_verification=None,
                     plotly_proxy_authorization=None):
     """Set the keyword-value pairs in `~/.plotly/.config`.
+
+    :param (str) plotly_domain: ex - https://plot.ly
+    :param (str) plotly_streaming_domain: ex - https://stream.plot.ly
+    :param (str) plotly_api_domain: ex - https://api.plot.ly
+    :param (bool) plotly_ssl_verification: True = verify, False = don't verify
+    :param (bool) plotly_proxy_authorization: True = use plotly proxy auth creds
 
     """
     if not _file_permissions:
