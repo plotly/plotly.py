@@ -1211,6 +1211,8 @@ class _api_v2:
                 proxy_username, proxy_password))).decode('utf8')
             headers['authorization'] = 'Basic ' + encoded_proxy_auth
             headers['plotly-authorization'] = 'Basic ' + encoded_api_auth
+        else:
+            headers['authorization'] = 'Basic ' + encoded_api_auth,
 
         return headers
 
