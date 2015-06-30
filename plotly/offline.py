@@ -37,7 +37,7 @@ def download_plotlyjs(download_url):
     ]))
 
 
-def init_notebook_mode(plotlyjs_dir='~/.plotly/plotlyjs'):
+def init_notebook_mode():
     # TODO: check if ipython is available...?
     from IPython.display import HTML, display
 
