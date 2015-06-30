@@ -1201,18 +1201,14 @@ class _api_v2:
             username, api_key))).decode('utf8')
 
         headers = {
-            'authorization': 'Basic ' + encoded_api_auth,
             'plotly-client-platform': 'python {0}'.format(version.__version__)
         }
 
         if get_config()['plotly_proxy_authorization']:
-
-            # custom enterprise + proxy authentication
             proxy_username = credentials['proxy_username']
-            proxy_passwd = credentials['proxy_passwd']
+            proxy_password = credentials['proxy_password']
             encoded_proxy_auth = base64.b64encode(six.b('{0}:{1}'.format(
-                proxy_username, proxy_passwd))).decode('utf8')
-
+                proxy_username, proxy_password))).decode('utf8')
             headers['authorization'] = 'Basic ' + encoded_proxy_auth
             headers['plotly-authorization'] = 'Basic ' + encoded_api_auth
 
