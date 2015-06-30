@@ -17,7 +17,7 @@ from plotly import exceptions
 PLOTLY_OFFLINE_DIRECTORY = plotlyjs_path = os.path.expanduser(
     os.path.join(*'~/.plotly/plotlyjs'.split('/')))
 PLOTLY_OFFLINE_BUNDLE = os.path.join(PLOTLY_OFFLINE_DIRECTORY,
-                                     'plotlyofflinebundle.js')
+                                     'plotly-ipython-offline-bundle.js')
 
 
 def download_plotlyjs(download_url):
