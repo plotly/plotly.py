@@ -29,7 +29,7 @@ def download_plotlyjs(download_url):
     res = requests.get(download_url)
     res.raise_for_status()
 
-    with open(PLOTLY_OFFLINE_BUNDLE, 'w') as f:
+    with open(PLOTLY_OFFLINE_BUNDLE, 'wb') as f:
         f.write(res.content)
 
     print('\n'.join([
