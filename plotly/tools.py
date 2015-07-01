@@ -48,11 +48,15 @@ TEST_FILE = os.path.join(PLOTLY_DIR, ".permission_test")
 # this sets both the DEFAULTS and the TYPES for these items
 _FILE_CONTENT = {CREDENTIALS_FILE: {'username': '',
                                     'api_key': '',
+                                    'proxy_username': '',
+                                    'proxy_password': '',
+                                    'api_key': '',
                                     'stream_ids': []},
                  CONFIG_FILE: {'plotly_domain': 'https://plot.ly',
                                'plotly_streaming_domain': 'stream.plot.ly',
                                'plotly_api_domain': 'https://api.plot.ly',
-                               'plotly_ssl_verification': True}}
+                               'plotly_ssl_verification': True,
+                               'plotly_proxy_authorization': False}}
 
 try:
     os.mkdir(TEST_DIR)
@@ -99,8 +103,18 @@ def ensure_local_plotly_files():
 
 ### credentials tools ###
 
-def set_credentials_file(username=None, api_key=None, stream_ids=None):
+def set_credentials_file(username=None,
+                         api_key=None,
+                         stream_ids=None,
+                         proxy_username=None,
+                         proxy_password=None):
     """Set the keyword-value pairs in `~/.plotly_credentials`.
+
+    :param (str) username: The username you'd use to sign in to Plotly
+    :param (str) api_key: The api key associated with above username
+    :param (list) stream_ids: Stream tokens for above credentials
+    :param (str) proxy_username: The un associated with with your Proxy
+    :param (str) proxy_password: The pw associated with your Proxy un
 
     """
     if not _file_permissions:
@@ -112,6 +126,10 @@ def set_credentials_file(username=None, api_key=None, stream_ids=None):
         credentials['username'] = username
     if isinstance(api_key, six.string_types):
         credentials['api_key'] = api_key
+    if isinstance(proxy_username, six.string_types):
+        credentials['proxy_username'] = proxy_username
+    if isinstance(proxy_password, six.string_types):
+        credentials['proxy_password'] = proxy_password
     if isinstance(stream_ids, (list, tuple)):
         credentials['stream_ids'] = stream_ids
     utils.save_json_dict(CREDENTIALS_FILE, credentials)
@@ -145,8 +163,15 @@ def reset_credentials_file():
 def set_config_file(plotly_domain=None,
                     plotly_streaming_domain=None,
                     plotly_api_domain=None,
-                    plotly_ssl_verification=None):
+                    plotly_ssl_verification=None,
+                    plotly_proxy_authorization=None):
     """Set the keyword-value pairs in `~/.plotly/.config`.
+
+    :param (str) plotly_domain: ex - https://plot.ly
+    :param (str) plotly_streaming_domain: ex - stream.plot.ly
+    :param (str) plotly_api_domain: ex - https://api.plot.ly
+    :param (bool) plotly_ssl_verification: True = verify, False = don't verify
+    :param (bool) plotly_proxy_authorization: True = use plotly proxy auth creds
 
     """
     if not _file_permissions:
@@ -162,6 +187,8 @@ def set_config_file(plotly_domain=None,
         settings['plotly_api_domain'] = plotly_api_domain
     if isinstance(plotly_ssl_verification, (six.string_types, bool)):
         settings['plotly_ssl_verification'] = plotly_ssl_verification
+    if isinstance(plotly_proxy_authorization, (six.string_types, bool)):
+        settings['plotly_proxy_authorization'] = plotly_proxy_authorization
     utils.save_json_dict(CONFIG_FILE, settings)
     ensure_local_plotly_files()  # make sure what we just put there is OK
 

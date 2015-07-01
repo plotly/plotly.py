@@ -23,7 +23,6 @@ import os
 import six
 import base64
 import requests
-from requests.auth import HTTPBasicAuth
 
 if sys.version[:1] == '2':
     from urlparse import urlparse
@@ -584,12 +583,9 @@ class image:
                 "https://plot.ly/python/static-image-export/"
             )
 
-        credentials = get_credentials()
-        validate_credentials(credentials)
-        username, api_key = credentials['username'], credentials['api_key']
-        headers = {'Plotly-Version': version.__version__,
-                   'Content-Type': 'application/json',
-                   'Plotly-Client-Platform': 'python'}
+        headers = _api_v2.headers()
+        headers['plotly_version'] = version.__version__
+        headers['content-type'] = 'application/json'
 
         payload = {'figure': figure, 'format': format}
         if width is not None:
@@ -602,7 +598,6 @@ class image:
         res = requests.post(
             url, data=json.dumps(payload, cls=utils.PlotlyJSONEncoder),
             headers=headers, verify=get_config()['plotly_ssl_verification'],
-            auth=HTTPBasicAuth(username, api_key)
         )
 
         headers = res.headers
@@ -1199,16 +1194,27 @@ class _api_v2:
     @classmethod
     def headers(cls):
         credentials = get_credentials()
-        # todo, validate here?
-        un, api_key = credentials['username'], credentials['api_key']
-        encoded_un_key_pair = base64.b64encode(
-            six.b('{0}:{1}'.format(un, api_key))
-        ).decode('utf8')
 
-        return {
-            'authorization': 'Basic ' + encoded_un_key_pair,
+        # todo, validate here?
+        username, api_key = credentials['username'], credentials['api_key']
+        encoded_api_auth = base64.b64encode(six.b('{0}:{1}'.format(
+            username, api_key))).decode('utf8')
+
+        headers = {
             'plotly-client-platform': 'python {0}'.format(version.__version__)
         }
+
+        if get_config()['plotly_proxy_authorization']:
+            proxy_username = credentials['proxy_username']
+            proxy_password = credentials['proxy_password']
+            encoded_proxy_auth = base64.b64encode(six.b('{0}:{1}'.format(
+                proxy_username, proxy_password))).decode('utf8')
+            headers['authorization'] = 'Basic ' + encoded_proxy_auth
+            headers['plotly-authorization'] = 'Basic ' + encoded_api_auth
+        else:
+            headers['authorization'] = 'Basic ' + encoded_api_auth
+
+        return headers
 
 
 def validate_credentials(credentials):
