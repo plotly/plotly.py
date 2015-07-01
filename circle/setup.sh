@@ -33,17 +33,8 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
     pip install -r ${PLOTLY_CORE_REQUIREMENTS_FILE} ||
         error_exit "${LINENO}: can't install core reqs for Python ${version}"
 
-    # handle funkiness around python 2.6
-    if [ ${version:0:3} == '2.6' ]
-    then
-        pip install -e '.[PY2.6]' ||
-            error_exit "${LINENO}: can't install extras for Python ${version}"
-        pip install -r ${PLOTLY_OPTIONAL_REQUIREMENTS_FILE_2_6} ||
-            error_exit "${LINENO}: can't install optional for Python ${version}"
-    else
-        pip install -r ${PLOTLY_OPTIONAL_REQUIREMENTS_FILE} ||
-            error_exit "${LINENO}: can't install optional for Python ${version}"
-    fi
+    pip install -r ${PLOTLY_OPTIONAL_REQUIREMENTS_FILE} ||
+        error_exit "${LINENO}: can't install optional for Python ${version}"
 
     # install some test tools
     pip install nose coverage ||
