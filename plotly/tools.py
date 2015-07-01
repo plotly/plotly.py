@@ -168,7 +168,7 @@ def set_config_file(plotly_domain=None,
     """Set the keyword-value pairs in `~/.plotly/.config`.
 
     :param (str) plotly_domain: ex - https://plot.ly
-    :param (str) plotly_streaming_domain: ex - https://stream.plot.ly
+    :param (str) plotly_streaming_domain: ex - stream.plot.ly
     :param (str) plotly_api_domain: ex - https://api.plot.ly
     :param (bool) plotly_ssl_verification: True = verify, False = don't verify
     :param (bool) plotly_proxy_authorization: True = use plotly proxy auth creds
