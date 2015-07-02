@@ -169,8 +169,12 @@ def plot():
 
 try:
     _init_notebook_mode()
-except (PlotlyOfflineNotFound, ImportError):
+except:
     # No big deal. The user just hasn't called download_plotlyjs yet.
     # Only bubble up the PlotlyOfflineNotFound error when they attempt
     # to create a plot and don't have the source files.
+    # Since this is run on every `import plotly`, catch all of the errors
+    # here - we'll bubble up the errors in `iplot` if the user intends on
+    # using offline mode. Otherwise, no sense in erroring on running a
+    # a function that the user wasn't even going to run.
     pass
