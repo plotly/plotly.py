@@ -15,7 +15,7 @@ class PlotlyOfflineTestCase(TestCase):
     @raises(PlotlyOfflineNotFound)
     def test_initializing_before_downloading_raises_an_error(self):
         try:
-            os.remove(plotly.offline.PLOTLY_OFFLINE_BUNDLE)
+            os.remove(plotly.offline.offline.PLOTLY_OFFLINE_BUNDLE)
         except OSError:
             pass
 
