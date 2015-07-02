@@ -10,41 +10,37 @@ import json
 import os
 import requests
 
-import plotly.plotly as py
 from plotly import utils
+from plotly.utils import PLOTLY_OFFLINE_DIRECTORY, PLOTLY_OFFLINE_BUNDLE
 from plotly import tools
-from plotly.exceptions import PlotlyError
+from plotly.exceptions import PlotlyOfflineNotFound
 
-_PLOTLY_OFFLINE_DIRECTORY = plotlyjs_path = os.path.expanduser(
-    os.path.join(*'~/.plotly/plotlyjs'.split('/')))
-_PLOTLY_OFFLINE_BUNDLE = os.path.join(_PLOTLY_OFFLINE_DIRECTORY,
-                                      'plotly-ipython-offline-bundle.js')
 
 __PLOTLY_OFFLINE_INITIALIZED = False
 
 
 def download_plotlyjs(download_url):
-    if not os.path.exists(plotlyjs_path):
-        os.makedirs(plotlyjs_path)
+    if not os.path.exists(PLOTLY_OFFLINE_DIRECTORY):
+        os.makedirs(PLOTLY_OFFLINE_DIRECTORY)
 
     res = requests.get(download_url)
     res.raise_for_status()
 
-    with open(_PLOTLY_OFFLINE_BUNDLE, 'wb') as f:
+    with open(PLOTLY_OFFLINE_BUNDLE, 'wb') as f:
         f.write(res.content)
+
+    _init_notebook_mode()
 
     print('\n'.join([
         'Success! Now start an IPython notebook and run the following ' +
         'code to make your first offline graph:',
         '',
         'import plotly',
-        'plotly.offline.init_notebook_mode() '
-        '# run at the start of every ipython notebook',
         'plotly.offline.iplot([{"x": [1, 2, 3], "y": [3, 1, 6]}])'
     ]))
 
 
-def init_notebook_mode():
+def _init_notebook_mode():
     """
     Initialize Plotly Offline mode in an IPython Notebook.
     Run this function at the start of an IPython notebook
@@ -55,21 +51,13 @@ def init_notebook_mode():
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
     from IPython.display import HTML, display
 
-    if not os.path.exists(_PLOTLY_OFFLINE_BUNDLE):
-        raise PlotlyError('Plotly Offline source file at {source_path} '
-                          'is not found.\n'
-                          'If you have a Plotly Offline license, then try '
-                          'running plotly.offline.download_plotlyjs(url) '
-                          'with a licensed download url.\n'
-                          "Don't have a Plotly Offline license? "
-                          'Contact sales@plot.ly learn more about licensing.\n'
-                          'Questions? support@plot.ly.'
-                          .format(source_path=_PLOTLY_OFFLINE_BUNDLE))
+    if not os.path.exists(PLOTLY_OFFLINE_BUNDLE):
+        raise PlotlyOfflineNotFound
 
     global __PLOTLY_OFFLINE_INITIALIZED
     __PLOTLY_OFFLINE_INITIALIZED = True
     display(HTML('<script type="text/javascript">' +
-                 open(_PLOTLY_OFFLINE_BUNDLE).read() + '</script>'))
+                 open(PLOTLY_OFFLINE_BUNDLE).read() + '</script>'))
 
 
 def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly'):
@@ -93,21 +81,13 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly'):
 
     Example:
     ```
-    from plotly.offline import init_notebook_mode, iplot
-    init_notebook_mode()
+    from plotly.offline import iplot
 
     iplot([{'x': [1, 2, 3], 'y': [5, 2, 7]}])
     ```
     """
     if not __PLOTLY_OFFLINE_INITIALIZED:
-        raise PlotlyError('\n'.join([
-            'Plotly Offline mode has not been initialized in this notebook. '
-            'Run: ',
-            '',
-            'import plotly',
-            'plotly.offline.init_notebook_mode() '
-            '# run at the start of every ipython notebook',
-        ]))
+        raise PlotlyOfflineNotFound
     if not tools._ipython_imported:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
@@ -142,8 +122,8 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly'):
     if show_link is False:
         link_text = ''
 
-    plotly_platform_url = py.get_config().get('plotly_domain',
-                                              'https://plot.ly')
+    plotly_platform_url = tools.get_config_file().get('plotly_domain',
+                                                      'https://plot.ly')
     if (plotly_platform_url != 'https://plot.ly' and
             link_text == 'Export to plot.ly'):
 
@@ -185,3 +165,12 @@ def plot():
     """ Configured to work with localhost Plotly graph viewer
     """
     raise NotImplementedError
+
+
+try:
+    _init_notebook_mode()
+except PlotlyOfflineNotFound:
+    # No big deal. The user just hasn't called download_plotlyjs yet.
+    # Only bubble up the PlotlyOfflineNotFound error when they attempt
+    # to create a plot and don't have the source files.
+    pass

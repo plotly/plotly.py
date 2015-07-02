@@ -17,6 +17,8 @@ info: (required!)
 """
 import sys
 import six
+from utils import PLOTLY_OFFLINE_BUNDLE
+
 
 if sys.version[:3] == '2.6':
     import simplejson as json
@@ -27,7 +29,6 @@ else:
 
 class PlotlyError(Exception):
     pass
-
 
 
 class InputError(PlotlyError):
@@ -58,6 +59,25 @@ class PlotlyRequestError(PlotlyError):
                 self.message = requests_exception.message
             except AttributeError:
                 self.message = 'unknown error'
+
+    def __str__(self):
+        return self.message
+
+
+## Offline Errors ##
+class PlotlyOfflineNotFound(PlotlyError):
+    def __init__(self):
+        self.message = ('Plotly Offline source file at {source_path} '
+                        'is not found.\n'
+                        'If you have a Plotly Offline license, '
+                        'then try running: \n'
+                        'import plotly\n'
+                        'plotly.offline.download_plotlyjs(url)\n'
+                        'with a licensed download url.\n'
+                        "Don't have a Plotly Offline license? "
+                        'Contact sales@plot.ly learn more about licensing.\n'
+                        'Questions? support@plot.ly.'
+                        .format(source_path=PLOTLY_OFFLINE_BUNDLE))
 
     def __str__(self):
         return self.message
