@@ -50,6 +50,7 @@ def init_notebook_mode():
     to load the necessary javascript files for creating
     Plotly graphs with plotly.offline.iplot.
     """
+    if not
     from IPython.display import HTML, display
 
     if not os.path.exists(PLOTLY_OFFLINE_BUNDLE):
@@ -117,14 +118,17 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly'):
     height = layout.get('height', 525)
     try:
         float(width)
+    except (ValueError, TypeError):
+        pass
+    else:
         width = str(width) + 'px'
-    except:
-        pass
+
     try:
-        float(height)
-        height = str(height) + 'px'
-    except:
+        float(width)
+    except (ValueError, TypeError):
         pass
+    else:
+        width = str(width) + 'px'
 
     plotdivid = uuid.uuid4()
     jdata = json.dumps(data, cls=utils.PlotlyJSONEncoder)
