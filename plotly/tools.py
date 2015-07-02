@@ -741,7 +741,7 @@ def make_subplots(rows=1, cols=1,
     try:
         subplot_titles = kwargs['subplot_titles']
     except KeyError:
-        subplot_titles = [""]*rows*cols
+        subplot_titles = []
 
     # Sanitize 'specs' (must be a list of lists)
     exception_msg = "Keyword argument 'specs' must be a list of lists"
@@ -1143,32 +1143,35 @@ def make_subplots(rows=1, cols=1,
             )
 
     # Add subplot titles
-    x_dom = list_of_domains[::2]
-    y_dom = list_of_domains[1::2]
+    if not subplot_titles:
+        pass
+    else:
+        x_dom = list_of_domains[::2]
+        y_dom = list_of_domains[1::2]
 
-    subtitle_pos_x = []
-    for index in range(len(x_dom)):
-        subtitle_pos_x.append(((x_dom[index][1])-(x_dom[index][0]))/2 +
-                              x_dom[index][0])
+        subtitle_pos_x = []
+        for index in range(len(x_dom)):
+            subtitle_pos_x.append(((x_dom[index][1])-(x_dom[index][0]))/2 +
+                                  x_dom[index][0])
 
-    subtitle_pos_y = []
-    for index in range(len(y_dom)):
-        subtitle_pos_y.append(y_dom[index][1])
+        subtitle_pos_y = []
+        for index in range(len(y_dom)):
+            subtitle_pos_y.append(y_dom[index][1])
 
-    plot_titles = []
-    for index in range(len(x_dom)):
-        plot_titles.append({'y': subtitle_pos_y[index],
-                            'xref': 'paper',
-                            'x': subtitle_pos_x[index],
-                            'yref': 'paper',
-                            'text': subplot_titles[index],
-                            'showarrow': False,
-                            'font': Font(size=18),
-                            'xanchor': 'center',
-                            'yanchor': 'bottom'
-                            })
+        plot_titles = []
+        for index in range(len(x_dom)):
+            plot_titles.append({'y': subtitle_pos_y[index],
+                                'xref': 'paper',
+                                'x': subtitle_pos_x[index],
+                                'yref': 'paper',
+                                'text': subplot_titles[index],
+                                'showarrow': False,
+                                'font': Font(size=18),
+                                'xanchor': 'center',
+                                'yanchor': 'bottom'
+                                })
 
-    layout['annotations'] = plot_titles
+        layout['annotations'] = plot_titles
 
     if print_grid:
         print(grid_str)
