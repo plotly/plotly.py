@@ -14,7 +14,7 @@ from plotly import utils
 from plotly.utils import PLOTLY_OFFLINE_DIRECTORY, PLOTLY_OFFLINE_BUNDLE
 from plotly import tools
 from plotly.exceptions import PlotlyOfflineNotFound
-
+from plotly import session
 
 __PLOTLY_OFFLINE_INITIALIZED = False
 
@@ -122,8 +122,8 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly'):
     if show_link is False:
         link_text = ''
 
-    plotly_platform_url = tools.get_config_file().get('plotly_domain',
-                                                      'https://plot.ly')
+    plotly_platform_url = session.get_session_config().get('plotly_domain',
+                                                           'https://plot.ly')
     if (plotly_platform_url != 'https://plot.ly' and
             link_text == 'Export to plot.ly'):
 
