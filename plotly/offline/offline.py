@@ -10,27 +10,28 @@ import json
 import os
 import requests
 
-import plotly.plotly as py
 from plotly import utils
 from plotly import tools
 from plotly.exceptions import PlotlyError
+from plotly import session
 
-_PLOTLY_OFFLINE_DIRECTORY = plotlyjs_path = os.path.expanduser(
+PLOTLY_OFFLINE_DIRECTORY = plotlyjs_path = os.path.expanduser(
     os.path.join(*'~/.plotly/plotlyjs'.split('/')))
-_PLOTLY_OFFLINE_BUNDLE = os.path.join(_PLOTLY_OFFLINE_DIRECTORY,
-                                      'plotly-ipython-offline-bundle.js')
+PLOTLY_OFFLINE_BUNDLE = os.path.join(PLOTLY_OFFLINE_DIRECTORY,
+                                     'plotly-ipython-offline-bundle.js')
+
 
 __PLOTLY_OFFLINE_INITIALIZED = False
 
 
 def download_plotlyjs(download_url):
-    if not os.path.exists(plotlyjs_path):
-        os.makedirs(plotlyjs_path)
+    if not os.path.exists(PLOTLY_OFFLINE_DIRECTORY):
+        os.makedirs(PLOTLY_OFFLINE_DIRECTORY)
 
     res = requests.get(download_url)
     res.raise_for_status()
 
-    with open(_PLOTLY_OFFLINE_BUNDLE, 'wb') as f:
+    with open(PLOTLY_OFFLINE_BUNDLE, 'wb') as f:
         f.write(res.content)
 
     print('\n'.join([
@@ -55,7 +56,7 @@ def init_notebook_mode():
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
     from IPython.display import HTML, display
 
-    if not os.path.exists(_PLOTLY_OFFLINE_BUNDLE):
+    if not os.path.exists(PLOTLY_OFFLINE_BUNDLE):
         raise PlotlyError('Plotly Offline source file at {source_path} '
                           'is not found.\n'
                           'If you have a Plotly Offline license, then try '
@@ -64,12 +65,12 @@ def init_notebook_mode():
                           "Don't have a Plotly Offline license? "
                           'Contact sales@plot.ly learn more about licensing.\n'
                           'Questions? support@plot.ly.'
-                          .format(source_path=_PLOTLY_OFFLINE_BUNDLE))
+                          .format(source_path=PLOTLY_OFFLINE_BUNDLE))
 
     global __PLOTLY_OFFLINE_INITIALIZED
     __PLOTLY_OFFLINE_INITIALIZED = True
     display(HTML('<script type="text/javascript">' +
-                 open(_PLOTLY_OFFLINE_BUNDLE).read() + '</script>'))
+                 open(PLOTLY_OFFLINE_BUNDLE).read() + '</script>'))
 
 
 def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly'):
@@ -142,8 +143,8 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly'):
     if show_link is False:
         link_text = ''
 
-    plotly_platform_url = py.get_config().get('plotly_domain',
-                                              'https://plot.ly')
+    plotly_platform_url = session.get_session_config().get('plotly_domain',
+                                                           'https://plot.ly')
     if (plotly_platform_url != 'https://plot.ly' and
             link_text == 'Export to plot.ly'):
 
@@ -185,3 +186,4 @@ def plot():
     """ Configured to work with localhost Plotly graph viewer
     """
     raise NotImplementedError
+
