@@ -356,3 +356,8 @@ def is_source_key(key):
         return True
     else:
         return False
+
+PLOTLY_OFFLINE_DIRECTORY = plotlyjs_path = os.path.expanduser(
+    os.path.join(*'~/.plotly/plotlyjs'.split('/')))
+PLOTLY_OFFLINE_BUNDLE = os.path.join(PLOTLY_OFFLINE_DIRECTORY,
+                                     'plotly-ipython-offline-bundle.js')
