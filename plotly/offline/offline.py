@@ -169,7 +169,7 @@ def plot():
 
 try:
     _init_notebook_mode()
-except PlotlyOfflineNotFound:
+except PlotlyOfflineNotFound, ImportError:
     # No big deal. The user just hasn't called download_plotlyjs yet.
     # Only bubble up the PlotlyOfflineNotFound error when they attempt
     # to create a plot and don't have the source files.
