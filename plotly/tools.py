@@ -14,12 +14,14 @@ import os.path
 import warnings
 import six
 import requests
+import math
 
 from plotly import utils
 from plotly import exceptions
 from plotly import session
 
 from plotly.graph_objs import graph_objs
+from plotly.graph_objs import Scatter, Marker, Line
 
 # Warning format
 def warning_on_one_line(message, category, filename, lineno, file=None, line=None):
@@ -38,6 +40,12 @@ try:
     _ipython_imported = True
 except ImportError:
     _ipython_imported = False
+
+try:
+    import numpy as np
+    _numpy_imported = True
+except ImportError:
+    _numpy_imported = False
 
 PLOTLY_DIR = os.path.join(os.path.expanduser("~"), ".plotly")
 CREDENTIALS_FILE = os.path.join(PLOTLY_DIR, ".credentials")
@@ -1296,3 +1304,628 @@ def return_figure_from_figure_or_data(figure_or_data, validate_figure):
             )
 
     return figure
+
+
+class TraceFactory(dict):
+    @staticmethod
+    def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
+                      angle=math.pi/9, **kwargs):
+        """
+        Return data for a quiver plot.
+
+        :param (list or array) x: x coordinates of the arrow locations
+        :param (list or array) y: y coordinates of the arrow locations
+        :param (list or array) u: x components of the arrow vectors
+        :param (list or array) v: y components of the arrow vectors
+        :param (float in [0,1]) scale: scales size of the arrows(ideally to
+            avoid overlap). Default = .1
+        :param (float in [0,1]) arrow_scale: value multiplied to length of barb
+            to get length of arrowhead. Default = .3
+        :param (angle in radians) angle: angle of arrowhead. Default = pi/9
+
+        :rtype (trace): returns quiver trace
+
+        :raises (PlotlyError): will happen if x, y, u, and v are not all
+            the same length (or size if ndarray)
+
+        :raises (PlotlyError): will happen if scale or arrow_scale are less
+            than or equal to 0
+
+        Example 1:
+        ```
+        # 1 Arrow from (0,0) to (1,1)
+        quiver = TraceFactory.create_quiver(x=[0], y=[0],
+                                            u=[1], v=[1],
+                                            scale=1)
+        # Plot
+        fig=Figure()
+        fig['data'].append(quiver)
+        py.iplot(fig, filename='quiver')
+        ```
+
+        Example 2:
+        ```
+        # Add data
+        x,y = np.meshgrid(np.arange(0, 2, .2), np.arange(0, 2, .2))
+        u = np.cos(x)*y
+        v = np.sin(x)*y
+
+        #Create quiver
+        quiver = TraceFactory.create_quiver(x, y, u, v)
+
+        # Plot
+        fig=Figure()
+        fig['data'].append(quiver)
+        py.iplot(fig, filename='quiver')
+        ```
+
+        Example 3:
+        ```
+        # Add data
+        x, y = np.meshgrid(np.arange(-np.pi, math.pi, .5),
+                           np.arange(-math.pi, math.pi, .5))
+        u = np.cos(x)*y
+        v = np.sin(x)*y
+
+        # Create quiver
+        quiver = TraceFactory.create_quiver(x, y, u, v, scale=.2,
+                                            arrow_scale=.3, angle=math.pi/6,
+                                            line=Line(color='purple', width=1))
+        # Plot
+        fig=Figure()
+        fig['data'].append(quiver)
+        py.iplot(fig, filename='quiver')
+        ```
+        """
+        barb_x, barb_y = Quiver(x, y, u, v, scale,
+                                arrow_scale, angle).get_barbs()
+        arrow_x, arrow_y = Quiver(x, y, u, v, scale,
+                                  arrow_scale, angle).get_quiver_arrows()
+        quiver = Scatter(x=barb_x + arrow_x,
+                         y=barb_y + arrow_y,
+                         mode='lines', **kwargs)
+        return quiver
+
+    @staticmethod
+    def create_streamline(x, y, u, v,
+                          density=1, angle=math.pi/9,
+                          arrow_scale=.09, **kwargs):
+        """
+        Return data for a streamline plot.
+
+        :param (list or array) x: 1 dimmensional, evenly spaced list or array
+        :param (list or array) y: 1 dimmensional, evenly spaced list or array
+        :param (array) u: 2 dimmensional array
+        :param (array) v: 2 dimmensional array
+
+        :param (int) density: controls the density of streamlines in plot.
+            Default = 1
+        :param (angle in radians) angle: angle of arrowhead. Default = pi/9
+        :param (float in [0,1]) arrow_scale: value to scale length of arrowhead
+            Default = .09
+
+        :rtype: (trace) returns streamline data
+
+        :raises: (ImportError) will happen if numpy is not installed
+        :raises: (PlotlyError) will happen if x or y are not evenly spaced
+            1 dimmensional lists or arrays
+        :raises: (PlotlyError) will happen if u and v are not the same shape.
+
+        Example 1:
+        ```
+        # Add data
+        x = np.linspace(-3, 3, 100)
+        y = np.linspace(-3, 3, 100)
+        Y, X = np.meshgrid(x, y)
+        u = -1 - X**2 + Y
+        v = 1 + X - Y**2
+        u = u.T #transpose
+        v = v.T #transpose
+
+        # Create streamline
+        streamline = TraceFactory.create_streamline(x, y, u, v, arrow_scale= 1)
+
+        # Plot
+        fig=Figure()
+        fig['data'].append(streamline)
+        py.iplot(fig, filename='streamline')
+        ```
+
+        Example 2:
+        # from http://nbviewer.ipython.org/github/barbagroup/AeroPython
+        ```
+        # Add data
+        N = 50
+        x_start, x_end = -2.0, 2.0
+        y_start, y_end = -1.0, 1.0
+        x = np.linspace(x_start, x_end, N)
+        y = np.linspace(y_start, y_end, N)
+        X, Y = np.meshgrid(x, y)
+        ss = 5.0
+        x_s, y_s = -1.0, 0.0
+
+        # Compute the velocity field on the mesh grid
+        u_s = ss/(2*np.pi) * (X-x_s)/((X-x_s)**2 + (Y-y_s)**2)
+        v_s = ss/(2*np.pi) * (Y-y_s)/((X-x_s)**2 + (Y-y_s)**2)
+
+        # Create streamline
+        streamline = TraceFactory.create_streamline(x, y, u_s, v_s, density=2,
+                                                name='streamline')
+
+        # Add source point
+        point = Scatter(x=[x_s], y=[y_s], mode='markers',
+                        marker=Marker(size=14), name='source point')
+        # Plot
+        fig=Figure()
+        fig['data'].append(streamline)
+        fig['data'].append(point)
+        py.iplot(fig, filename='streamline')
+        ```
+        """
+        streamline_x, streamline_y = Streamline(x, y, u, v,
+                                                density, angle,
+                                                arrow_scale).sum_streamlines()
+        arrow_x, arrow_y = Streamline(x, y, u, v,
+                                      density, angle,
+                                      arrow_scale).get_streamline_arrows()
+
+        streamline = Scatter(x=streamline_x + arrow_x,
+                             y=streamline_y + arrow_y,
+                             mode='lines', **kwargs)
+        return streamline
+
+
+class Quiver(TraceFactory):
+    def __init__(self, x, y, u, v,
+                 scale, arrow_scale, angle, **kwargs):
+        try:
+            x = self.flatten(x)
+        except exceptions.PlotlyError:
+            pass
+
+        try:
+            y = self.flatten(y)
+        except exceptions.PlotlyError:
+            pass
+
+        try:
+            u = self.flatten(u)
+        except exceptions.PlotlyError:
+            pass
+
+        try:
+            v = self.flatten(v)
+        except exceptions.PlotlyError:
+            pass
+
+        self.x = x
+        self.y = y
+        self.u = u
+        self.v = v
+        self.scale = scale
+        self.arrow_scale = arrow_scale
+        self.angle = angle
+        self.end_x = []
+        self.end_y = []
+        self.validate()
+        self.scale_uv()
+        barb_x, barb_y = self.get_barbs()
+        arrow_x, arrow_y = self.get_quiver_arrows()
+
+    def flatten(self, array):
+        """
+        Uses list comprehension to flatten array
+
+        :param (array): An iterable to flatten
+        :raises (PlotlyError): If iterable is not nested.
+        :rtype (list): The flattened list.
+        """
+        try:
+            return [item for sublist in array for item in sublist]
+        except TypeError:
+            raise exceptions.PlotlyError("Your data array could not be"
+                                         "flattened! Make sure x, y, u, and v"
+                                         "are lists or numpy ndarrays!")
+
+    def validate(self):
+        """
+        Validates that args and kwargs meet criteria,
+        specifically that scale and arrow_scale are positive
+        and that x, y, u, and v are the same length
+
+        :raises: (ValueError) If scale or arrow_scale is < 1.
+        :raises: (PlotlyError) If x, y, u, and v are not the same length.
+        """
+        if self.scale <= 0:
+            raise ValueError("scale must be > 0")
+        if self.arrow_scale <= 0:
+            raise ValueError("arrow_scale must be > 0")
+        if (len(self.x) != len(self.y) or len(self.u) != len(self.v) or
+           len(self.x) != len(self.u)):
+            raise exceptions.PlotlyError("x, y, u, and v should all be the"
+                                         " same length (or size if ndarray)")
+
+    def scale_uv(self):
+        """
+        Scales u and v. u and v are added to x and y to get the
+        endpoints of the arros so a smaller scale value will
+        result in less overlap of arrows.
+        """
+        self.u = [i * self.scale for i in self.u]
+        self.v = [i * self.scale for i in self.v]
+
+    def get_barbs(self):
+        """
+        Gets endpoint of the barb and then zips startpoint and endpoint
+        pairs to create 2 lists: x_values for barbs and y values for barbs
+
+        :rtype: (list) barb_x: list of startpoint and endpoint x_value
+            pairs separated by a None to create the barb of the arrow.
+        :rtype: (list) barb_y: list of startpoint and endpoint y_value
+            pairs separated by a None to create the barb of the arrow.
+        """
+        self.end_x = [i + j for i, j in zip(self.x, self.u)]
+        self.end_y = [i + j for i, j in zip(self.y, self.v)]
+        empty = [None] * len(self.x)
+        barb_x = self.flatten(zip(self.x, self.end_x, empty))
+        barb_y = self.flatten(zip(self.y, self.end_y, empty))
+        return barb_x, barb_y
+
+    def get_quiver_arrows(self):
+        """
+        Gets length of each barb then calculates the length of each side of
+        the arrow. Gets angle of barb and applies angle (kwarg) to each
+        side of the arrowhead. Next uses arrow_scale to scale the length of
+        arrowhead and creates x and y values for arrowhead point1 and point2.
+        Finally x and y values for point1, endpoint and point2s for each
+        arrowhead are separated by a None and zipped to create lists of x and
+        y values for the arrows.
+
+        :rtype: (list) arrow_x: list of point1, endpoint, point2 x_values
+            separated by a None to create the arrowhead.
+        :rtype: (list) arrow_y: list of point1, endpoint, point2 y_values
+            separated by a None to create the barb of the arrow.
+        """
+        dif_x = [i - j for i, j in zip(self.end_x, self.x)]
+        dif_y = [i - j for i, j in zip(self.end_y, self.y)]
+
+        # Get barb lengths(default arrow length = 30% barb length)
+        barb_len = [None] * len(self.x)
+        for index in range(len(barb_len)):
+            barb_len[index] = math.hypot(dif_x[index], dif_y[index])
+
+        # Make arrow lengths
+        arrow_len = [None] * len(self.x)
+        arrow_len = [i * self.arrow_scale for i in barb_len]
+
+        # Get barb angles
+        barb_ang = [None] * len(self.x)
+        for index in range(len(barb_ang)):
+            barb_ang[index] = math.atan2(dif_y[index], dif_x[index])
+
+        # Set angles to create arrow
+        ang1 = [i + self.angle for i in barb_ang]
+        ang2 = [i - self.angle for i in barb_ang]
+
+        cos_ang1 = [None] * len(ang1)
+        for index in range(len(ang1)):
+            cos_ang1[index] = math.cos(ang1[index])
+        seg1_x = [i * j for i, j in zip(arrow_len, cos_ang1)]
+
+        sin_ang1 = [None] * len(ang1)
+        for index in range(len(ang1)):
+            sin_ang1[index] = math.sin(ang1[index])
+        seg1_y = [i * j for i, j in zip(arrow_len, sin_ang1)]
+
+        cos_ang2 = [None] * len(ang2)
+        for index in range(len(ang2)):
+            cos_ang2[index] = math.cos(ang2[index])
+        seg2_x = [i * j for i, j in zip(arrow_len, cos_ang2)]
+
+        sin_ang2 = [None] * len(ang2)
+        for index in range(len(ang2)):
+            sin_ang2[index] = math.sin(ang2[index])
+        seg2_y = [i * j for i, j in zip(arrow_len, sin_ang2)]
+
+        # Set coordinates to create arrow
+        for index in range(len(self.end_x)):
+            point1_x = [i - j for i, j in zip(self.end_x, seg1_x)]
+            point1_y = [i - j for i, j in zip(self.end_y, seg1_y)]
+            point2_x = [i - j for i, j in zip(self.end_x, seg2_x)]
+            point2_y = [i - j for i, j in zip(self.end_y, seg2_y)]
+
+        # Combine lists to create arrow
+        empty = [None] * len(self.end_x)
+        arrow_x = self.flatten(zip(point1_x, self.end_x, point2_x, empty))
+        arrow_y = self.flatten(zip(point1_y, self.end_y, point2_y, empty))
+        return arrow_x, arrow_y
+
+
+class Streamline(TraceFactory):
+    def __init__(self, x, y, u, v,
+                 density, angle,
+                 arrow_scale, **kwargs):
+        self.x = np.array(x)
+        self.y = np.array(y)
+        self.u = np.array(u)
+        self.v = np.array(v)
+        self.angle = angle
+        self.arrow_scale = arrow_scale
+        self.density = int(30*density)
+        self.delta_x = self.x[1] - self.x[0]
+        self.delta_y = self.y[1] - self.y[0]
+        self.val_x = self.x
+        self.val_y = self.y
+        # Set up spacing
+        self.blank = np.zeros((self.density, self.density))
+        self.spacing_x = len(self.x)/float(self.density-1)
+        self.spacing_y = len(self.y)/float(self.density-1)
+        self.trajectories = []
+        # Rescale speed onto axes-coordinates
+        self.u = self.u/(self.x[-1]-self.x[0])
+        self.v = self.v/(self.y[-1]-self.y[0])
+        self.speed = np.sqrt(self.u*self.u + self.v*self.v)
+        # Rescale u and v for integrations.
+        self.u *= len(self.x)
+        self.v *= len(self.y)
+        self.validate()
+        self.st_x = []
+        self.st_y = []
+        self.get_streamlines()
+        streamline_x, streamline_y = self.sum_streamlines()
+        arrows_x, arrows_y = self.get_streamline_arrows()
+
+    def validate(self):
+        """
+        Validates that args and kwargs meet criteria,
+        specifically that scale and arrow_scale are positive
+        and that x, y, u, and v are the same length
+
+        :raises: (ImportError) If numpy is not imported.
+        :raises: (ValueError) If scale or arrow_scale is < 1.
+        :raises: (ValueError) If density or arrow_scale is < 1.
+        :raises: (PlotlyError) If x and y are not evenly spaced lists or
+            1D arrays.
+        :raises: (PlotlyError) If u and v are not the same shape.
+        """
+        if _numpy_imported is False:
+            raise ImportError("To use TraceFactory.create_streamline()"
+                              " please import numpy as np")
+        if self.arrow_scale <= 0:
+            raise ValueError("arrow_scale must be > 0")
+        if self.density <= 0:
+            raise ValueError("density must be > 0")
+        for index in range(len(self.x)-1):
+            if (self.x[index + 1]-self.x[index])-(self.x[1]-self.x[0]) > .0001:
+                raise exceptions.PlotlyError("x must be a 1 dimmensional"
+                                             "evenly spaced array")
+        for index in range(len(self.y)-1):
+            if (self.y[index + 1]-self.y[index])-(self.y[1]-self.y[0]) > .0001:
+                raise exceptions.PlotlyError("y must be a 1 dimmensional"
+                                             "evenly spaced array")
+        if self.u.shape != self.v.shape:
+                raise exceptions.PlotlyError("u and v should both be 2d arrays"
+                                             "with the same dimmensions")
+
+    def blank_pos(self, xi, yi):
+        """
+        Set up postitions for trajectories to be used with rk4 function.
+        """
+        return int((xi/self.spacing_x)+0.5), int((yi/self.spacing_y)+0.5)
+
+    def value_at(self, a, xi, yi):
+        """
+        Set up for RK4 function, based on Bokeh's streamline code
+        """
+        if type(xi) == np.ndarray:
+            self.x = xi.astype(np.int)
+            self.y = yi.astype(np.int)
+        else:
+            self.val_x = np.int(xi)
+            self.val_y = np.int(yi)
+        a00 = a[self.val_y, self.val_x]
+        a01 = a[self.val_y, self.val_x+1]
+        a10 = a[self.val_y+1, self.val_x]
+        a11 = a[self.val_y+1, self.val_x+1]
+        xt = xi-self.val_x
+        yt = yi-self.val_y
+        a0 = a00*(1-xt) + a01*xt
+        a1 = a10*(1-xt) + a11*xt
+        return a0*(1-yt) + a1*yt
+
+    def rk4_integrate(self, x0, y0):
+        """
+        RK4 forward and back trajectories from the initial conditions.
+        Adapted from Bokeh's streamline code
+        Use Runge-Kutta method to fill x and y trajectories
+        then checks length of traj (s in units of axes)
+        """
+        def f(xi, yi):
+            dt_ds = 1./self.value_at(self.speed, xi, yi)
+            ui = self.value_at(self.u, xi, yi)
+            vi = self.value_at(self.v, xi, yi)
+            return ui*dt_ds, vi*dt_ds
+
+        def g(xi, yi):
+            dt_ds = 1./self.value_at(self.speed, xi, yi)
+            ui = self.value_at(self.u, xi, yi)
+            vi = self.value_at(self.v, xi, yi)
+            return -ui*dt_ds, -vi*dt_ds
+
+        check = lambda xi, yi: 0 <= xi < len(self.x)-1 and 0 <= yi < len(self.y)-1
+        xb_changes = []
+        yb_changes = []
+
+        def rk4(x0, y0, f):
+            ds = 0.01
+            stotal = 0
+            xi = x0
+            yi = y0
+            xb, yb = self.blank_pos(xi, yi)
+            xf_traj = []
+            yf_traj = []
+            while check(xi, yi):
+                xf_traj.append(xi)
+                yf_traj.append(yi)
+                try:
+                    k1x, k1y = f(xi, yi)
+                    k2x, k2y = f(xi + .5*ds*k1x, yi + .5*ds*k1y)
+                    k3x, k3y = f(xi + .5*ds*k2x, yi + .5*ds*k2y)
+                    k4x, k4y = f(xi + ds*k3x, yi + ds*k3y)
+                except IndexError:
+                    break
+                xi += ds*(k1x+2*k2x+2*k3x+k4x) / 6.
+                yi += ds*(k1y+2*k2y+2*k3y+k4y) / 6.
+                if not check(xi, yi):
+                    break
+                stotal += ds
+                new_xb, new_yb = self.blank_pos(xi, yi)
+                if new_xb != xb or new_yb != yb:
+                    if self.blank[new_yb, new_xb] == 0:
+                        self.blank[new_yb, new_xb] = 1
+                        xb_changes.append(new_xb)
+                        yb_changes.append(new_yb)
+                        xb = new_xb
+                        yb = new_yb
+                    else:
+                        break
+                if stotal > 2:
+                    break
+            return stotal, xf_traj, yf_traj
+
+        sf, xf_traj, yf_traj = rk4(x0, y0, f)
+        sb, xb_traj, yb_traj = rk4(x0, y0, g)
+        stotal = sf + sb
+        x_traj = xb_traj[::-1] + xf_traj[1:]
+        y_traj = yb_traj[::-1] + yf_traj[1:]
+
+        if len(x_traj) < 1:
+            return None
+        if stotal > .2:
+            initxb, inityb = self.blank_pos(x0, y0)
+            self.blank[inityb, initxb] = 1
+            return x_traj, y_traj
+        else:
+            for xb, yb in zip(xb_changes, yb_changes):
+                self.blank[yb, xb] = 0
+            return None
+
+    def traj(self, xb, yb):
+        """
+        Integrate trajectories, used in get_streamlines()
+        """
+        if xb < 0 or xb >= self.density or yb < 0 or yb >= self.density:
+            return
+        if self.blank[yb, xb] == 0:
+            t = self.rk4_integrate(xb*self.spacing_x, yb*self.spacing_y)
+            if t is not None:
+                self.trajectories.append(t)
+
+    def get_streamlines(self):
+        """
+        Get streamlines by building trajectory set.
+
+        :rtype (list of lists) st_x: lists of x-values for each streamline
+        :rtype (list of lists) st_y: lists of y-values for each streamline
+        """
+        for indent in range((max(self.density, self.density))//2):
+            for xi in range(max(self.density, self.density)-2*indent):
+                self.traj(xi+indent, indent)
+                self.traj(xi+indent, self.density-1-indent)
+                self.traj(indent, xi+indent)
+                self.traj(self.density-1-indent, xi+indent)
+
+        self.st_x = [np.array(t[0])*self.delta_x+self.x[0] for t in
+                     self.trajectories]
+        self.st_y = [np.array(t[1])*self.delta_y+self.y[0] for t in
+                     self.trajectories]
+
+        for index in range(len(self.st_x)):
+            self.st_x[index] = self.st_x[index].tolist()
+            self.st_x[index].append(np.nan)
+
+        for index in range(len(self.st_y)):
+            self.st_y[index] = self.st_y[index].tolist()
+            self.st_y[index].append(np.nan)
+
+    def get_streamline_arrows(self):
+        """
+        Makes an arrow for each streamline. Gets angle of streamline at 1/3
+        mark and creates arrow coordinates based off of user defined angle and
+        arrow_scale
+
+        :param (array) st_x: x-values for all streamlines
+        :param (array) st_y: y-values for all streamlines
+        :param (angle in radians) angle: angle of arrowhead. Default = pi/9
+        :param (float in [0,1]) arrow_scale: value to scale length of arrowhead
+            Default = .09
+        :rtype (list) arrows_x: x-values to create arrowhead
+        :rtype (list) arrows_y: y-values to create arrowhead
+        """
+        ArrowEnd_x = np.empty((len(self.st_x)))
+        ArrowEnd_y = np.empty((len(self.st_y)))
+        ArrowStart_x = np.empty((len(self.st_x)))
+        ArrowStart_y = np.empty((len(self.st_y)))
+        for index in range(len(self.st_x)):
+            ArrowEnd_x[index] = self.st_x[index][(len(self.st_x[index])/3)]
+            ArrowStart_x[index] = self.st_x[index][(len(self.st_x[index])/3)-1]
+            ArrowEnd_y[index] = self.st_y[index][(len(self.st_y[index])/3)]
+            ArrowStart_y[index] = self.st_y[index][(len(self.st_y[index])/3)-1]
+
+        dif_x = ArrowEnd_x - ArrowStart_x
+        dif_y = ArrowEnd_y - ArrowStart_y
+
+        streamline_ang = np.arctan(dif_y/dif_x)
+
+        ang1 = streamline_ang + (self.angle)
+        ang2 = streamline_ang - (self.angle)
+
+        seg1_x = np.cos(ang1)*self.arrow_scale
+        seg1_y = np.sin(ang1)*self.arrow_scale
+        seg2_x = np.cos(ang2)*self.arrow_scale
+        seg2_y = np.sin(ang2)*self.arrow_scale
+
+        point1_x = np.empty((len(dif_x)))
+        point1_y = np.empty((len(dif_y)))
+        point2_x = np.empty((len(dif_x)))
+        point2_y = np.empty((len(dif_y)))
+
+        for index in range(len(dif_x)):
+            if dif_x[index] >= 0:
+                point1_x[index] = ArrowEnd_x[index] - seg1_x[index]
+                point1_y[index] = ArrowEnd_y[index] - seg1_y[index]
+                point2_x[index] = ArrowEnd_x[index] - seg2_x[index]
+                point2_y[index] = ArrowEnd_y[index] - seg2_y[index]
+            else:
+                point1_x[index] = ArrowEnd_x[index] + seg1_x[index]
+                point1_y[index] = ArrowEnd_y[index] + seg1_y[index]
+                point2_x[index] = ArrowEnd_x[index] + seg2_x[index]
+                point2_y[index] = ArrowEnd_y[index] + seg2_y[index]
+
+        space = np.empty((len(point1_x)))
+        space[:] = np.NAN
+
+        # Combine arrays into matrix
+        arrows_x = np.matrix([point1_x, ArrowEnd_x, point2_x, space])
+        arrows_x = np.array(arrows_x)
+        arrows_x = arrows_x.flatten('F')
+        arrows_x = arrows_x.tolist()
+
+        # Combine arrays into matrix
+        arrows_y = np.matrix([point1_y, ArrowEnd_y, point2_y, space])
+        arrows_y = np.array(arrows_y)
+        arrows_y = arrows_y.flatten('F')
+        arrows_y = arrows_y.tolist()
+
+        return arrows_x, arrows_y
+
+    def sum_streamlines(self):
+        """
+        :rtype (list) streamline_x: all x values for each streamline combined
+            into single list
+        :rtype (list) streamline_y: all y values for each streamline combined
+            into single list
+        """
+        streamline_x = sum(self.st_x, [])
+        streamline_y = sum(self.st_y, [])
+        return streamline_x, streamline_y
