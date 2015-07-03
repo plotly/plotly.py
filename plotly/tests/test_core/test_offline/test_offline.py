@@ -17,5 +17,5 @@ class PlotlyOfflineTestCase(TestCase):
                         '24cd2e4e62ceea79e6e790b3a2c94cda63510ede/test.js')
 
         plotly.offline.download_plotlyjs(dummy_js_url)
-        assert (os.path.isfile(plotly.offline.PLOTLY_OFFLINE_BUNDLE) is
+        assert (os.path.isfile(plotly.offline.offline.PLOTLY_OFFLINE_BUNDLE) is
                 True)
