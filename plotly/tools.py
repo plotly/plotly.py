@@ -960,7 +960,6 @@ def make_subplots(rows=1, cols=1,
     def _add_domain_is_3d(layout, s_label, x_domain, y_domain):
         scene = graph_objs.Scene(domain={'x': x_domain, 'y': y_domain})
         layout[s_label] = scene
-        list_of_domains.append(domain)  # added for subplot titles
 
     x_cnt = y_cnt = s_cnt = 1  # subplot axis/scene counters
 
@@ -1175,7 +1174,7 @@ def make_subplots(rows=1, cols=1,
 
     subtitle_pos_x = []
     for index in range(len(x_dom)):
-        subtitle_pos_x.append(((x_dom[index][1])-(x_dom[index][0]))/2 +
+        subtitle_pos_x.append(((x_dom[index][1]) - (x_dom[index][0])) / 2 +
                               x_dom[index][0])
 
     subtitle_pos_y = []
