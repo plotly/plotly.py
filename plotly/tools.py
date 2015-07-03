@@ -586,6 +586,31 @@ def make_subplots(rows=1, cols=1,
     fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2])]
     fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x2', yaxis='y2')]
 
+    Example 5:
+    # include subplot titles
+    fig = tools.make_subplots(rows=2, subplot_titles=('Plot 1','Plot 2'))
+
+    This is the format of your plot grid:
+    [ (1,1) x1,y1 ]
+    [ (2,1) x2,y2 ]
+
+    fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2])]
+    fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x2', yaxis='y2')]
+
+    Example 6:
+    # Include subplot title on one plot (but not all)
+    fig = tools.make_subplots(insets=[{'cell': (1,1), 'l': 0.7, 'b': 0.3}],
+                              subplot_titles=('','Inset'))
+
+    This is the format of your plot grid!
+    [ (1,1) x1,y1 ]
+
+    With insets:
+    [ x2,y2 ] over [ (1,1) x1,y1 ]
+
+    fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2])]
+    fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x2', yaxis='y2')]
+
     Keywords arguments with constant defaults:
 
     rows (kwarg, int greater than 0, default=1):
@@ -632,6 +657,8 @@ def make_subplots(rows=1, cols=1,
 
     subplot_titles (kwarg, list of strings, default=empty list):
         Title of each subplot.
+        "" can be included in the list if no subplot title is desired in
+        that space so that the titles are properly indexed.
 
     specs (kwarg, list of lists of dictionaries):
         Subplot specifications.
@@ -1143,23 +1170,23 @@ def make_subplots(rows=1, cols=1,
             )
 
     # Add subplot titles
-    if not subplot_titles:
-        pass
-    else:
-        x_dom = list_of_domains[::2]
-        y_dom = list_of_domains[1::2]
+    x_dom = list_of_domains[::2]
+    y_dom = list_of_domains[1::2]
 
-        subtitle_pos_x = []
-        for index in range(len(x_dom)):
-            subtitle_pos_x.append(((x_dom[index][1])-(x_dom[index][0]))/2 +
-                                  x_dom[index][0])
+    subtitle_pos_x = []
+    for index in range(len(x_dom)):
+        subtitle_pos_x.append(((x_dom[index][1])-(x_dom[index][0]))/2 +
+                              x_dom[index][0])
 
-        subtitle_pos_y = []
-        for index in range(len(y_dom)):
-            subtitle_pos_y.append(y_dom[index][1])
+    subtitle_pos_y = []
+    for index in range(len(y_dom)):
+        subtitle_pos_y.append(y_dom[index][1])
 
-        plot_titles = []
-        for index in range(len(x_dom)):
+    plot_titles = []
+    for index in range(len(subplot_titles)):
+        if not subplot_titles[index]:
+            pass
+        else:
             plot_titles.append({'y': subtitle_pos_y[index],
                                 'xref': 'paper',
                                 'x': subtitle_pos_x[index],
