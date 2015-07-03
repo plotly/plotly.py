@@ -1309,7 +1309,7 @@ def return_figure_from_figure_or_data(figure_or_data, validate_figure):
 class TraceFactory(dict):
     @staticmethod
     def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
-                      angle=math.pi/9, **kwargs):
+                      angle=math.pi / 9, **kwargs):
         """
         Return data for a quiver plot.
 
@@ -1388,7 +1388,7 @@ class TraceFactory(dict):
 
     @staticmethod
     def create_streamline(x, y, u, v,
-                          density=1, angle=math.pi/9,
+                          density=1, angle=math.pi / 9,
                           arrow_scale=.09, **kwargs):
         """
         Return data for a streamline plot.
@@ -1651,20 +1651,20 @@ class Streamline(TraceFactory):
         self.v = np.array(v)
         self.angle = angle
         self.arrow_scale = arrow_scale
-        self.density = int(30*density)
+        self.density = int(30 * density)
         self.delta_x = self.x[1] - self.x[0]
         self.delta_y = self.y[1] - self.y[0]
         self.val_x = self.x
         self.val_y = self.y
         # Set up spacing
         self.blank = np.zeros((self.density, self.density))
-        self.spacing_x = len(self.x)/float(self.density-1)
-        self.spacing_y = len(self.y)/float(self.density-1)
+        self.spacing_x = len(self.x) / float(self.density - 1)
+        self.spacing_y = len(self.y) / float(self.density - 1)
         self.trajectories = []
         # Rescale speed onto axes-coordinates
-        self.u = self.u/(self.x[-1]-self.x[0])
-        self.v = self.v/(self.y[-1]-self.y[0])
-        self.speed = np.sqrt(self.u*self.u + self.v*self.v)
+        self.u = self.u / (self.x[-1] - self.x[0])
+        self.v = self.v / (self.y[-1] - self.y[0])
+        self.speed = np.sqrt(self.u * self.u + self.v * self.v)
         # Rescale u and v for integrations.
         self.u *= len(self.x)
         self.v *= len(self.y)
@@ -1695,12 +1695,14 @@ class Streamline(TraceFactory):
             raise ValueError("arrow_scale must be > 0")
         if self.density <= 0:
             raise ValueError("density must be > 0")
-        for index in range(len(self.x)-1):
-            if (self.x[index + 1]-self.x[index])-(self.x[1]-self.x[0]) > .0001:
+        for index in range(len(self.x) - 1):
+            if ((self.x[index + 1] - self.x[index]) -
+               (self.x[1] - self.x[0])) > .0001:
                 raise exceptions.PlotlyError("x must be a 1 dimmensional"
                                              "evenly spaced array")
-        for index in range(len(self.y)-1):
-            if (self.y[index + 1]-self.y[index])-(self.y[1]-self.y[0]) > .0001:
+        for index in range(len(self.y) - 1):
+            if ((self.y[index + 1] - self.y[index]) -
+               (self.y[1] - self.y[0])) > .0001:
                 raise exceptions.PlotlyError("y must be a 1 dimmensional"
                                              "evenly spaced array")
         if self.u.shape != self.v.shape:
@@ -1711,7 +1713,8 @@ class Streamline(TraceFactory):
         """
         Set up postitions for trajectories to be used with rk4 function.
         """
-        return int((xi/self.spacing_x)+0.5), int((yi/self.spacing_y)+0.5)
+        return (int((xi / self.spacing_x) + 0.5),
+                int((yi / self.spacing_y) + 0.5))
 
     def value_at(self, a, xi, yi):
         """
@@ -1724,14 +1727,14 @@ class Streamline(TraceFactory):
             self.val_x = np.int(xi)
             self.val_y = np.int(yi)
         a00 = a[self.val_y, self.val_x]
-        a01 = a[self.val_y, self.val_x+1]
-        a10 = a[self.val_y+1, self.val_x]
-        a11 = a[self.val_y+1, self.val_x+1]
-        xt = xi-self.val_x
-        yt = yi-self.val_y
-        a0 = a00*(1-xt) + a01*xt
-        a1 = a10*(1-xt) + a11*xt
-        return a0*(1-yt) + a1*yt
+        a01 = a[self.val_y, self.val_x + 1]
+        a10 = a[self.val_y + 1, self.val_x]
+        a11 = a[self.val_y + 1, self.val_x + 1]
+        xt = xi - self.val_x
+        yt = yi - self.val_y
+        a0 = a00 * (1 - xt) + a01 * xt
+        a1 = a10 * (1 - xt) + a11 * xt
+        return a0 * (1 - yt) + a1 * yt
 
     def rk4_integrate(self, x0, y0):
         """
@@ -1741,18 +1744,19 @@ class Streamline(TraceFactory):
         then checks length of traj (s in units of axes)
         """
         def f(xi, yi):
-            dt_ds = 1./self.value_at(self.speed, xi, yi)
+            dt_ds = 1. / self.value_at(self.speed, xi, yi)
             ui = self.value_at(self.u, xi, yi)
             vi = self.value_at(self.v, xi, yi)
-            return ui*dt_ds, vi*dt_ds
+            return ui * dt_ds, vi * dt_ds
 
         def g(xi, yi):
-            dt_ds = 1./self.value_at(self.speed, xi, yi)
+            dt_ds = 1. / self.value_at(self.speed, xi, yi)
             ui = self.value_at(self.u, xi, yi)
             vi = self.value_at(self.v, xi, yi)
-            return -ui*dt_ds, -vi*dt_ds
+            return -ui * dt_ds, -vi * dt_ds
 
-        check = lambda xi, yi: 0 <= xi < len(self.x)-1 and 0 <= yi < len(self.y)-1
+        check = lambda xi, yi: (0 <= xi < len(self.x) - 1 and
+                                0 <= yi < len(self.y) - 1)
         xb_changes = []
         yb_changes = []
 
@@ -1769,13 +1773,13 @@ class Streamline(TraceFactory):
                 yf_traj.append(yi)
                 try:
                     k1x, k1y = f(xi, yi)
-                    k2x, k2y = f(xi + .5*ds*k1x, yi + .5*ds*k1y)
-                    k3x, k3y = f(xi + .5*ds*k2x, yi + .5*ds*k2y)
-                    k4x, k4y = f(xi + ds*k3x, yi + ds*k3y)
+                    k2x, k2y = f(xi + .5 * ds * k1x, yi + .5 * ds * k1y)
+                    k3x, k3y = f(xi + .5 * ds * k2x, yi + .5 * ds * k2y)
+                    k4x, k4y = f(xi + ds * k3x, yi + ds * k3y)
                 except IndexError:
                     break
-                xi += ds*(k1x+2*k2x+2*k3x+k4x) / 6.
-                yi += ds*(k1y+2*k2y+2*k3y+k4y) / 6.
+                xi += ds * (k1x + 2 * k2x + 2 * k3x + k4x) / 6.
+                yi += ds * (k1y + 2 * k2y + 2 * k3y + k4y) / 6.
                 if not check(xi, yi):
                     break
                 stotal += ds
@@ -1817,7 +1821,7 @@ class Streamline(TraceFactory):
         if xb < 0 or xb >= self.density or yb < 0 or yb >= self.density:
             return
         if self.blank[yb, xb] == 0:
-            t = self.rk4_integrate(xb*self.spacing_x, yb*self.spacing_y)
+            t = self.rk4_integrate(xb * self.spacing_x, yb * self.spacing_y)
             if t is not None:
                 self.trajectories.append(t)
 
@@ -1828,16 +1832,16 @@ class Streamline(TraceFactory):
         :rtype (list of lists) st_x: lists of x-values for each streamline
         :rtype (list of lists) st_y: lists of y-values for each streamline
         """
-        for indent in range((max(self.density, self.density))//2):
-            for xi in range(max(self.density, self.density)-2*indent):
-                self.traj(xi+indent, indent)
-                self.traj(xi+indent, self.density-1-indent)
-                self.traj(indent, xi+indent)
-                self.traj(self.density-1-indent, xi+indent)
+        for indent in range((max(self.density, self.density)) // 2):
+            for xi in range(max(self.density, self.density) - 2 * indent):
+                self.traj(xi + indent, indent)
+                self.traj(xi + indent, self.density - 1 - indent)
+                self.traj(indent, xi + indent)
+                self.traj(self.density - 1 - indent, xi + indent)
 
-        self.st_x = [np.array(t[0])*self.delta_x+self.x[0] for t in
+        self.st_x = [np.array(t[0]) * self.delta_x + self.x[0] for t in
                      self.trajectories]
-        self.st_y = [np.array(t[1])*self.delta_y+self.y[0] for t in
+        self.st_y = [np.array(t[1]) * self.delta_y + self.y[0] for t in
                      self.trajectories]
 
         for index in range(len(self.st_x)):
@@ -1862,28 +1866,30 @@ class Streamline(TraceFactory):
         :rtype (list) arrows_x: x-values to create arrowhead
         :rtype (list) arrows_y: y-values to create arrowhead
         """
-        ArrowEnd_x = np.empty((len(self.st_x)))
-        ArrowEnd_y = np.empty((len(self.st_y)))
-        ArrowStart_x = np.empty((len(self.st_x)))
-        ArrowStart_y = np.empty((len(self.st_y)))
+        arrow_end_x = np.empty((len(self.st_x)))
+        arrow_end_y = np.empty((len(self.st_y)))
+        arrow_start_x = np.empty((len(self.st_x)))
+        arrow_start_y = np.empty((len(self.st_y)))
         for index in range(len(self.st_x)):
-            ArrowEnd_x[index] = self.st_x[index][(len(self.st_x[index])/3)]
-            ArrowStart_x[index] = self.st_x[index][(len(self.st_x[index])/3)-1]
-            ArrowEnd_y[index] = self.st_y[index][(len(self.st_y[index])/3)]
-            ArrowStart_y[index] = self.st_y[index][(len(self.st_y[index])/3)-1]
+            arrow_end_x[index] = self.st_x[index][(len(self.st_x[index]) / 3)]
+            arrow_start_x[index] = (self.st_x[index]
+                                    [(len(self.st_x[index]) / 3) - 1])
+            arrow_end_y[index] = self.st_y[index][(len(self.st_y[index]) / 3)]
+            arrow_start_y[index] = (self.st_y[index]
+                                    [(len(self.st_y[index]) / 3) - 1])
 
-        dif_x = ArrowEnd_x - ArrowStart_x
-        dif_y = ArrowEnd_y - ArrowStart_y
+        dif_x = arrow_end_x - arrow_start_x
+        dif_y = arrow_end_y - arrow_start_y
 
-        streamline_ang = np.arctan(dif_y/dif_x)
+        streamline_ang = np.arctan(dif_y / dif_x)
 
         ang1 = streamline_ang + (self.angle)
         ang2 = streamline_ang - (self.angle)
 
-        seg1_x = np.cos(ang1)*self.arrow_scale
-        seg1_y = np.sin(ang1)*self.arrow_scale
-        seg2_x = np.cos(ang2)*self.arrow_scale
-        seg2_y = np.sin(ang2)*self.arrow_scale
+        seg1_x = np.cos(ang1) * self.arrow_scale
+        seg1_y = np.sin(ang1) * self.arrow_scale
+        seg2_x = np.cos(ang2) * self.arrow_scale
+        seg2_y = np.sin(ang2) * self.arrow_scale
 
         point1_x = np.empty((len(dif_x)))
         point1_y = np.empty((len(dif_y)))
@@ -1892,27 +1898,27 @@ class Streamline(TraceFactory):
 
         for index in range(len(dif_x)):
             if dif_x[index] >= 0:
-                point1_x[index] = ArrowEnd_x[index] - seg1_x[index]
-                point1_y[index] = ArrowEnd_y[index] - seg1_y[index]
-                point2_x[index] = ArrowEnd_x[index] - seg2_x[index]
-                point2_y[index] = ArrowEnd_y[index] - seg2_y[index]
+                point1_x[index] = arrow_end_x[index] - seg1_x[index]
+                point1_y[index] = arrow_end_y[index] - seg1_y[index]
+                point2_x[index] = arrow_end_x[index] - seg2_x[index]
+                point2_y[index] = arrow_end_y[index] - seg2_y[index]
             else:
-                point1_x[index] = ArrowEnd_x[index] + seg1_x[index]
-                point1_y[index] = ArrowEnd_y[index] + seg1_y[index]
-                point2_x[index] = ArrowEnd_x[index] + seg2_x[index]
-                point2_y[index] = ArrowEnd_y[index] + seg2_y[index]
+                point1_x[index] = arrow_end_x[index] + seg1_x[index]
+                point1_y[index] = arrow_end_y[index] + seg1_y[index]
+                point2_x[index] = arrow_end_x[index] + seg2_x[index]
+                point2_y[index] = arrow_end_y[index] + seg2_y[index]
 
         space = np.empty((len(point1_x)))
         space[:] = np.NAN
 
         # Combine arrays into matrix
-        arrows_x = np.matrix([point1_x, ArrowEnd_x, point2_x, space])
+        arrows_x = np.matrix([point1_x, arrow_end_x, point2_x, space])
         arrows_x = np.array(arrows_x)
         arrows_x = arrows_x.flatten('F')
         arrows_x = arrows_x.tolist()
 
         # Combine arrays into matrix
-        arrows_y = np.matrix([point1_y, ArrowEnd_y, point2_y, space])
+        arrows_y = np.matrix([point1_y, arrow_end_y, point2_y, space])
         arrows_y = np.array(arrows_y)
         arrows_y = arrows_y.flatten('F')
         arrows_y = arrows_y.tolist()
