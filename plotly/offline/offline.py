@@ -40,6 +40,21 @@ def download_plotlyjs(download_url):
     ]))
 
 
+class JSSourceFiles(object):
+    def __init__(self, text):
+        self.text = text
+
+    def _repr_html_(self):
+        return ('<script type="text/javascript>' +
+                self.text + '</script>')
+
+    def __repr__(self):
+        return ''
+
+    def __str__(self):
+        return ''
+
+
 def _init_notebook_mode():
     """
     Initialize Plotly Offline mode in an IPython Notebook.
@@ -49,15 +64,14 @@ def _init_notebook_mode():
     """
     if not tools._ipython_imported:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
-    from IPython.display import HTML, display
+    from IPython.display import display
 
     if not os.path.exists(PLOTLY_OFFLINE_BUNDLE):
         raise PlotlyOfflineNotFound
 
     global __PLOTLY_OFFLINE_INITIALIZED
     __PLOTLY_OFFLINE_INITIALIZED = True
-    display(HTML('<script type="text/javascript">' +
-                 open(PLOTLY_OFFLINE_BUNDLE).read() + '</script>'))
+    display(JSSourceFiles(open(PLOTLY_OFFLINE_BUNDLE).read()))
 
 
 def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly'):
@@ -166,15 +180,23 @@ def plot():
     """
     raise NotImplementedError
 
-
 try:
-    _init_notebook_mode()
-except:
-    # No big deal. The user just hasn't called download_plotlyjs yet.
-    # Only bubble up the PlotlyOfflineNotFound error when they attempt
-    # to create a plot and don't have the source files.
-    # Since this is run on every `import plotly`, catch all of the errors
-    # here - we'll bubble up the errors in `iplot` if the user intends on
-    # using offline mode. Otherwise, no sense in erroring on running a
-    # a function that the user wasn't even going to run.
-    pass
+    # http://stackoverflow.com/questions/5376837/how-can-i-do-an-if-run-from-ipython-test-in-python
+    ipython_environment = __IPYTHON__
+    ipython_environment = True
+except NameError:
+    ipython_environment = False
+
+
+if ipython_environment:
+    try:
+        _init_notebook_mode()
+    except:
+        # No big deal. The user just hasn't called download_plotlyjs yet.
+        # Only bubble up the PlotlyOfflineNotFound error when they attempt
+        # to create a plot and don't have the source files.
+        # Since this is run on every `import plotly`, catch all of the errors
+        # here - we'll bubble up the errors in `iplot` if the user intends on
+        # using offline mode. Otherwise, no sense in erroring on running a
+        # a function that the user wasn't even going to run.
+        pass
