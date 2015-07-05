@@ -1210,10 +1210,10 @@ def test_specs_padding_bottom_left():
     )
 
     fig = tls.make_subplots(rows=2, cols=2,
-                           horizontal_spacing=0, vertical_spacing=0,
-                           specs=[[{'l': 0.1}, {'b': 0.2}],
-                                  [{'t': 0.2}, {'r': 0.1}]],
-                           start_cell='bottom-left')
+                            horizontal_spacing=0, vertical_spacing=0,
+                            specs=[[{'l': 0.1}, {'b': 0.2}],
+                                   [{'t': 0.2}, {'r': 0.1}]],
+                            start_cell='bottom-left')
     assert fig == expected
 
 def test_shared_xaxes():
@@ -1925,4 +1925,319 @@ def test_insets_multiple_bottom_left():
                             insets=[{'cell': (1,1), 'l':0.8},
                                     {'cell': (2,1), 'l':0.8}],
                             start_cell='bottom-left')
+    assert fig == expected
+
+
+def test_subplot_titles_2x1():
+    # make a title for each subplot when the layout is 2 rows and 1 column
+    expected = Figure(
+        data=Data(),
+        layout=Layout(
+            annotations=Annotations([
+                Annotation(
+                    x=0.5,
+                    y=1.0,
+                    xref='paper',
+                    yref='paper',
+                    text='Title 1',
+                    showarrow=False,
+                    font=Font(size=18),
+                    xanchor='center',
+                    yanchor='bottom'
+                ),
+                Annotation(
+                    x=0.5,
+                    y=0.425,
+                    xref='paper',
+                    yref='paper',
+                    text='Title 2',
+                    showarrow=False,
+                    font=Font(size=18),
+                    xanchor='center',
+                    yanchor='bottom'
+                )
+            ]),
+            xaxis1=XAxis(
+                domain=[0.0, 1.0],
+                anchor='y1'
+            ),
+            xaxis2=XAxis(
+                domain=[0.0, 1.0],
+                anchor='y2'
+            ),
+            yaxis1=YAxis(
+                domain=[0.575, 1.0],
+                anchor='x1'
+            ),
+            yaxis2=YAxis(
+                domain=[0.0, 0.425],
+                anchor='x2'
+            )
+        )
+    )
+    fig = tls.make_subplots(rows=2, subplot_titles=('Title 1', 'Title 2'))
+    assert fig == expected
+
+
+def test_subplot_titles_1x3():
+    # make a title for each subplot when the layout is 1 row and 3 columns
+    expected = Figure(
+        data=Data(),
+        layout=Layout(
+            annotations=Annotations([
+                Annotation(
+                    x=0.14444444444444446,
+                    y=1.0,
+                    xref='paper',
+                    yref='paper',
+                    text='Title 1',
+                    showarrow=False,
+                    font=Font(size=18),
+                    xanchor='center',
+                    yanchor='bottom'
+                ),
+                Annotation(
+                    x=0.5,
+                    y=1.0,
+                    xref='paper',
+                    yref='paper',
+                    text='Title 2',
+                    showarrow=False,
+                    font=Font(size=18),
+                    xanchor='center',
+                    yanchor='bottom'
+                ),
+                Annotation(
+                    x=0.8555555555555556,
+                    y=1.0,
+                    xref='paper',
+                    yref='paper',
+                    text='Title 3',
+                    showarrow=False,
+                    font=Font(size=18),
+                    xanchor='center',
+                    yanchor='bottom'
+                )
+            ]),
+            xaxis1=XAxis(
+                domain=[0.0, 0.2888888888888889],
+                anchor='y1'
+            ),
+            xaxis2=XAxis(
+                domain=[0.35555555555555557, 0.6444444444444445],
+                anchor='y2'
+            ),
+            xaxis3=XAxis(
+                domain=[0.7111111111111111, 1.0],
+                anchor='y3'
+            ),
+            yaxis1=YAxis(
+                domain=[0.0, 1.0],
+                anchor='x1'
+            ),
+            yaxis2=YAxis(
+                domain=[0.0, 1.0],
+                anchor='x2'
+            ),
+            yaxis3=YAxis(
+                domain=[0.0, 1.0],
+                anchor='x3'
+            )
+        )
+    )
+    fig = tls.make_subplots(cols=3,
+                            subplot_titles=('Title 1', 'Title 2', 'Title 3'))
+    assert fig == expected
+
+
+def test_subplot_titles_shared_axes():
+    # make a title for each subplot when the layout is 1 row and 3 columns
+    expected = Figure(
+        data=Data(),
+        layout=Layout(
+            annotations=Annotations([
+                Annotation(
+                    x=0.22499999999999998,
+                    y=1.0,
+                    xref='paper',
+                    yref='paper',
+                    text='Title 1',
+                    showarrow=False,
+                    font=Font(size=18),
+                    xanchor='center',
+                    yanchor='bottom'
+                ),
+                Annotation(
+                    x=0.7749999999999999,
+                    y=1.0,
+                    xref='paper',
+                    yref='paper',
+                    text='Title 2',
+                    showarrow=False,
+                    font=Font(size=18),
+                    xanchor='center',
+                    yanchor='bottom'
+                ),
+                Annotation(
+                    x=0.22499999999999998,
+                    y=0.42500000000000004,
+                    xref='paper',
+                    yref='paper',
+                    text='Title 3',
+                    showarrow=False,
+                    font=Font(size=18),
+                    xanchor='center',
+                    yanchor='bottom'
+                ),
+                Annotation(
+                    x=0.7749999999999999,
+                    y=0.42500000000000004,
+                    xref='paper',
+                    yref='paper',
+                    text='Title 4',
+                    showarrow=False,
+                    font=Font(size=18),
+                    xanchor='center',
+                    yanchor='bottom'
+                )
+            ]),
+            xaxis1=XAxis(
+                domain=[0.0, 0.45],
+                anchor='y2'
+            ),
+            xaxis2=XAxis(
+                domain=[0.55, 1.0],
+                anchor='free',
+                position=0.0
+            ),
+            yaxis1=YAxis(
+                domain=[0.575, 1.0],
+                anchor='free',
+                position=0.0
+            ),
+            yaxis2=YAxis(
+                domain=[0.0, 0.425],
+                anchor='x1'
+            )
+        )
+    )
+    fig = tls.make_subplots(rows=2, cols=2,
+                            subplot_titles=('Title 1', 'Title 2',
+                                            'Title 3', 'Title 4'),
+                            shared_xaxes=True, shared_yaxes=True)
+
+    assert fig == expected
+
+
+def test_subplot_titles_irregular_layout():
+    # make a title for each subplot when the layout is irregular:
+    expected = Figure(
+        data=Data(),
+        layout=Layout(
+            annotations=Annotations([
+                Annotation(
+                    x=0.225,
+                    y=1.0,
+                    xref='paper',
+                    yref='paper',
+                    text='Title 1',
+                    showarrow=False,
+                    font=Font(size=18),
+                    xanchor='center',
+                    yanchor='bottom'
+                ),
+                Annotation(
+                    x=0.775,
+                    y=1.0,
+                    xref='paper',
+                    yref='paper',
+                    text='Title 2',
+                    showarrow=False,
+                    font=Font(size=18),
+                    xanchor='center',
+                    yanchor='bottom'
+                ),
+                Annotation(
+                    x=0.5,
+                    y=0.425,
+                    xref='paper',
+                    yref='paper',
+                    text='Title 3',
+                    showarrow=False,
+                    font=Font(size=18),
+                    xanchor='center',
+                    yanchor='bottom'
+                )
+            ]),
+            xaxis1=XAxis(
+                domain=[0.0, 0.45],
+                anchor='y1'
+            ),
+            xaxis2=XAxis(
+                domain=[0.55, 1.0],
+                anchor='y2'
+            ),
+            xaxis3=XAxis(
+                domain=[0.0, 1.0],
+                anchor='y3'
+            ),
+            yaxis1=YAxis(
+                domain=[0.575, 1.0],
+                anchor='x1'
+            ),
+            yaxis2=YAxis(
+                domain=[0.575, 1.0],
+                anchor='x2'
+            ),
+            yaxis3=YAxis(
+                domain=[0.0, 0.425],
+                anchor='x3'
+            )
+        )
+    )
+    fig = tls.make_subplots(rows=2, cols=2,
+                            subplot_titles=('Title 1', 'Title 2', 'Title 3'),
+                            specs=[[{}, {}], [{'colspan': 2}, None]])
+    assert fig == expected
+
+
+def test_subplot_titles_insets():
+    # This should make a title for the inset plot
+    # and no title for the main plot.
+    expected = Figure(
+        data=Data(),
+        layout=Layout(
+            annotations=Annotations([
+                Annotation(
+                    x=0.85,
+                    y=1.0,
+                    xref='paper',
+                    yref='paper',
+                    text='Inset',
+                    showarrow=False,
+                    font=Font(size=18),
+                    xanchor='center',
+                    yanchor='bottom'
+                )
+            ]),
+            xaxis1=XAxis(
+                domain=[0.0, 1.0],
+                anchor='y1'
+            ),
+            xaxis2=XAxis(
+                domain=[0.7, 1.0],
+                anchor='y2'
+            ),
+            yaxis1=YAxis(
+                domain=[0.0, 1.0],
+                anchor='x1'
+            ),
+            yaxis2=YAxis(
+                domain=[0.3, 1.0],
+                anchor='x2'
+            )
+        )
+    )
+    fig = tls.make_subplots(insets=[{'cell': (1, 1), 'l': 0.7, 'b': 0.3}],
+                            subplot_titles=("", 'Inset'))
     assert fig == expected

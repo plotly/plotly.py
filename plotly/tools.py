@@ -586,6 +586,31 @@ def make_subplots(rows=1, cols=1,
     fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2])]
     fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x2', yaxis='y2')]
 
+    Example 5:
+    # include subplot titles
+    fig = tools.make_subplots(rows=2, subplot_titles=('Plot 1','Plot 2'))
+
+    This is the format of your plot grid:
+    [ (1,1) x1,y1 ]
+    [ (2,1) x2,y2 ]
+
+    fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2])]
+    fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x2', yaxis='y2')]
+
+    Example 6:
+    # Include subplot title on one plot (but not all)
+    fig = tools.make_subplots(insets=[{'cell': (1,1), 'l': 0.7, 'b': 0.3}],
+                              subplot_titles=('','Inset'))
+
+    This is the format of your plot grid!
+    [ (1,1) x1,y1 ]
+
+    With insets:
+    [ x2,y2 ] over [ (1,1) x1,y1 ]
+
+    fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2])]
+    fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x2', yaxis='y2')]
+
     Keywords arguments with constant defaults:
 
     rows (kwarg, int greater than 0, default=1):
@@ -629,6 +654,11 @@ def make_subplots(rows=1, cols=1,
     vertical_spacing (kwarg, float in [0,1], default=0.3 / rows):
         Space between subplot rows.
         Applies to all rows (use 'specs' subplot-dependents spacing)
+
+    subplot_titles (kwarg, list of strings, default=empty list):
+        Title of each subplot.
+        "" can be included in the list if no subplot title is desired in
+        that space so that the titles are properly indexed.
 
     specs (kwarg, list of lists of dictionaries):
         Subplot specifications.
@@ -719,7 +749,7 @@ def make_subplots(rows=1, cols=1,
 
     # Throw exception if non-valid kwarg is sent
     VALID_KWARGS = ['horizontal_spacing', 'vertical_spacing',
-                    'specs', 'insets']
+                    'specs', 'insets', 'subplot_titles']
     for key in kwargs.keys():
         if key not in VALID_KWARGS:
             raise Exception("Invalid keyword argument: '{0}'".format(key))
@@ -733,6 +763,12 @@ def make_subplots(rows=1, cols=1,
         vertical_spacing = float(kwargs['vertical_spacing'])
     except KeyError:
         vertical_spacing = 0.3 / rows
+
+    # Set 'subplot_titles'
+    try:
+        subplot_titles = kwargs['subplot_titles']
+    except KeyError:
+        subplot_titles = []
 
     # Sanitize 'specs' (must be a list of lists)
     exception_msg = "Keyword argument 'specs' must be a list of lists"
@@ -906,6 +942,8 @@ def make_subplots(rows=1, cols=1,
 
         return x_anchor, y_anchor
 
+    list_of_domains = []  # added for subplot titles
+
     # Function pasting x/y domains in layout object (2d case)
     def _add_domain(layout, x_or_y, label, domain, anchor, position):
         name = label[0] + 'axis' + label[1:]
@@ -916,6 +954,7 @@ def make_subplots(rows=1, cols=1,
         if isinstance(position, float):
             axis['position'] = position
         layout[name] = axis
+        list_of_domains.append(domain)  # added for subplot titles
 
     # Function pasting x/y domains in layout object (3d case)
     def _add_domain_is_3d(layout, s_label, x_domain, y_domain):
@@ -1128,6 +1167,53 @@ def make_subplots(rows=1, cols=1,
                 ' over ' +
                 s_str + _get_cell_str(r, c, ref) + e_str + '\n'
             )
+
+    # Add subplot titles
+
+    # If shared_axes is False (default) use list_of_domains
+    # This is used for insets and irregular layouts
+    if not shared_xaxes and not shared_yaxes:
+        x_dom = list_of_domains[::2]
+        y_dom = list_of_domains[1::2]
+        subtitle_pos_x = []
+        subtitle_pos_y = []
+        for index in range(len(x_dom)):
+            subtitle_pos_x.append(((x_dom[index][1]) - (x_dom[index][0])) / 2 +
+                                  x_dom[index][0])
+        for index in range(len(y_dom)):
+            subtitle_pos_y.append(y_dom[index][1])
+    # If shared_axes is True the domin of each subplot is not returned so the
+    # title position must be calculated for each subplot
+    else:
+        subtitle_pos_x = [None] * cols
+        subtitle_pos_y = [None] * rows
+        delt_x = (x_e - x_s)
+        for index in range(cols):
+            subtitle_pos_x[index] = ((delt_x / 2) +
+                                     ((delt_x + horizontal_spacing) * index))
+        subtitle_pos_x *= rows
+        for index in range(rows):
+            subtitle_pos_y[index] = (1 - ((y_e + vertical_spacing) * index))
+        subtitle_pos_y *= cols
+        subtitle_pos_y = sorted(subtitle_pos_y, reverse=True)
+
+    plot_titles = []
+    for index in range(len(subplot_titles)):
+        if not subplot_titles[index]:
+            pass
+        else:
+            plot_titles.append({'y': subtitle_pos_y[index],
+                                'xref': 'paper',
+                                'x': subtitle_pos_x[index],
+                                'yref': 'paper',
+                                'text': subplot_titles[index],
+                                'showarrow': False,
+                                'font': graph_objs.Font(size=18),
+                                'xanchor': 'center',
+                                'yanchor': 'bottom'
+                                })
+
+            layout['annotations'] = plot_titles
 
     if print_grid:
         print(grid_str)
