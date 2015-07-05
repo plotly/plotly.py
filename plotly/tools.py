@@ -1169,17 +1169,33 @@ def make_subplots(rows=1, cols=1,
             )
 
     # Add subplot titles
-    x_dom = list_of_domains[::2]
-    y_dom = list_of_domains[1::2]
 
-    subtitle_pos_x = []
-    for index in range(len(x_dom)):
-        subtitle_pos_x.append(((x_dom[index][1]) - (x_dom[index][0])) / 2 +
-                              x_dom[index][0])
-
-    subtitle_pos_y = []
-    for index in range(len(y_dom)):
-        subtitle_pos_y.append(y_dom[index][1])
+    # If shared_axes is False (default) use list_of_domains
+    # This is used for insets and irregular layouts
+    if not shared_xaxes and not shared_yaxes:
+        x_dom = list_of_domains[::2]
+        y_dom = list_of_domains[1::2]
+        subtitle_pos_x = []
+        subtitle_pos_y = []
+        for index in range(len(x_dom)):
+            subtitle_pos_x.append(((x_dom[index][1]) - (x_dom[index][0])) / 2 +
+                                  x_dom[index][0])
+        for index in range(len(y_dom)):
+            subtitle_pos_y.append(y_dom[index][1])
+    # If shared_axes is True the domin of each subplot is not returned so the
+    # title position must be calculated for each subplot
+    else:
+        subtitle_pos_x = [None] * cols
+        subtitle_pos_y = [None] * rows
+        delt_x = (x_e - x_s)
+        for index in range(cols):
+            subtitle_pos_x[index] = ((delt_x / 2) +
+                                     ((delt_x + horizontal_spacing) * index))
+        subtitle_pos_x *= rows
+        for index in range(rows):
+            subtitle_pos_y[index] = (1 - ((y_e + vertical_spacing) * index))
+        subtitle_pos_y *= cols
+        subtitle_pos_y = sorted(subtitle_pos_y, reverse=True)
 
     plot_titles = []
     for index in range(len(subplot_titles)):
@@ -1192,12 +1208,12 @@ def make_subplots(rows=1, cols=1,
                                 'yref': 'paper',
                                 'text': subplot_titles[index],
                                 'showarrow': False,
-                                'font': Font(size=18),
+                                'font': graph_objs.Font(size=18),
                                 'xanchor': 'center',
                                 'yanchor': 'bottom'
                                 })
 
-        layout['annotations'] = plot_titles
+            layout['annotations'] = plot_titles
 
     if print_grid:
         print(grid_str)
