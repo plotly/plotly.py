@@ -1177,8 +1177,8 @@ def make_subplots(rows=1, cols=1,
         for index in range(len(x_dom)):
             subtitle_pos_x.append(((x_dom[index][1]) - (x_dom[index][0])) / 2 +
                                   x_dom[index][0])
-        for index in range(len(y_dom)):
-            subtitle_pos_y.append(y_dom[index][1])
+        for y_end in y_dom:  # y_dom --> y_domains above ?
+            subtitle_pos_y.append(y_end[1])
     # If shared_axes is True the domin of each subplot is not returned so the
     # title position must be calculated for each subplot
     else:
