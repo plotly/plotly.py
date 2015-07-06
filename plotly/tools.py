@@ -754,6 +754,9 @@ def make_subplots(rows=1, cols=1,
         if key not in VALID_KWARGS:
             raise Exception("Invalid keyword argument: '{0}'".format(key))
 
+    # Set 'subplot_titles'
+    subplot_titles = kwargs.get('subplot_titles', [""] * rows * cols)
+
     # Set 'horizontal_spacing' / 'vertical_spacing' w.r.t. rows / cols
     try:
         horizontal_spacing = float(kwargs['horizontal_spacing'])
@@ -762,13 +765,10 @@ def make_subplots(rows=1, cols=1,
     try:
         vertical_spacing = float(kwargs['vertical_spacing'])
     except KeyError:
-        vertical_spacing = 0.3 / rows
-
-    # Set 'subplot_titles'
-    try:
-        subplot_titles = kwargs['subplot_titles']
-    except KeyError:
-        subplot_titles = []
+        if 'subplot_titles' in kwargs:
+            vertical_spacing = 0.5 / rows
+        else:
+            vertical_spacing = 0.3 / rows
 
     # Sanitize 'specs' (must be a list of lists)
     exception_msg = "Keyword argument 'specs' must be a list of lists"
@@ -1177,11 +1177,10 @@ def make_subplots(rows=1, cols=1,
         y_dom = list_of_domains[1::2]
         subtitle_pos_x = []
         subtitle_pos_y = []
-        for index in range(len(x_dom)):
-            subtitle_pos_x.append(((x_dom[index][1]) - (x_dom[index][0])) / 2 +
-                                  x_dom[index][0])
-        for index in range(len(y_dom)):
-            subtitle_pos_y.append(y_dom[index][1])
+        for x_domains in x_dom:
+            subtitle_pos_x.append(sum(x_domains) / 2)
+        for y_domains in y_dom:
+            subtitle_pos_y.append(y_domains[1])
     # If shared_axes is True the domin of each subplot is not returned so the
     # title position must be calculated for each subplot
     else:
@@ -1208,7 +1207,7 @@ def make_subplots(rows=1, cols=1,
                                 'yref': 'paper',
                                 'text': subplot_titles[index],
                                 'showarrow': False,
-                                'font': graph_objs.Font(size=18),
+                                'font': graph_objs.Font(size=16),
                                 'xanchor': 'center',
                                 'yanchor': 'bottom'
                                 })
