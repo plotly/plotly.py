@@ -1941,18 +1941,18 @@ def test_subplot_titles_2x1():
                     yref='paper',
                     text='Title 1',
                     showarrow=False,
-                    font=Font(size=18),
+                    font=Font(size=16),
                     xanchor='center',
                     yanchor='bottom'
                 ),
                 Annotation(
                     x=0.5,
-                    y=0.425,
+                    y=0.375,
                     xref='paper',
                     yref='paper',
                     text='Title 2',
                     showarrow=False,
-                    font=Font(size=18),
+                    font=Font(size=16),
                     xanchor='center',
                     yanchor='bottom'
                 )
@@ -1966,11 +1966,11 @@ def test_subplot_titles_2x1():
                 anchor='y2'
             ),
             yaxis1=YAxis(
-                domain=[0.575, 1.0],
+                domain=[0.625, 1.0],
                 anchor='x1'
             ),
             yaxis2=YAxis(
-                domain=[0.0, 0.425],
+                domain=[0.0, 0.375],
                 anchor='x2'
             )
         )
@@ -1992,7 +1992,7 @@ def test_subplot_titles_1x3():
                     yref='paper',
                     text='Title 1',
                     showarrow=False,
-                    font=Font(size=18),
+                    font=Font(size=16),
                     xanchor='center',
                     yanchor='bottom'
                 ),
@@ -2003,7 +2003,7 @@ def test_subplot_titles_1x3():
                     yref='paper',
                     text='Title 2',
                     showarrow=False,
-                    font=Font(size=18),
+                    font=Font(size=16),
                     xanchor='center',
                     yanchor='bottom'
                 ),
@@ -2014,7 +2014,7 @@ def test_subplot_titles_1x3():
                     yref='paper',
                     text='Title 3',
                     showarrow=False,
-                    font=Font(size=18),
+                    font=Font(size=16),
                     xanchor='center',
                     yanchor='bottom'
                 )
@@ -2063,7 +2063,7 @@ def test_subplot_titles_shared_axes():
                     yref='paper',
                     text='Title 1',
                     showarrow=False,
-                    font=Font(size=18),
+                    font=Font(size=16),
                     xanchor='center',
                     yanchor='bottom'
                 ),
@@ -2074,29 +2074,29 @@ def test_subplot_titles_shared_axes():
                     yref='paper',
                     text='Title 2',
                     showarrow=False,
-                    font=Font(size=18),
+                    font=Font(size=16),
                     xanchor='center',
                     yanchor='bottom'
                 ),
                 Annotation(
                     x=0.22499999999999998,
-                    y=0.42500000000000004,
+                    y=0.375,
                     xref='paper',
                     yref='paper',
                     text='Title 3',
                     showarrow=False,
-                    font=Font(size=18),
+                    font=Font(size=16),
                     xanchor='center',
                     yanchor='bottom'
                 ),
                 Annotation(
                     x=0.7749999999999999,
-                    y=0.42500000000000004,
+                    y=0.375,
                     xref='paper',
                     yref='paper',
                     text='Title 4',
                     showarrow=False,
-                    font=Font(size=18),
+                    font=Font(size=16),
                     xanchor='center',
                     yanchor='bottom'
                 )
@@ -2111,12 +2111,12 @@ def test_subplot_titles_shared_axes():
                 position=0.0
             ),
             yaxis1=YAxis(
-                domain=[0.575, 1.0],
+                domain=[0.625, 1.0],
                 anchor='free',
                 position=0.0
             ),
             yaxis2=YAxis(
-                domain=[0.0, 0.425],
+                domain=[0.0, 0.375],
                 anchor='x1'
             )
         )
@@ -2142,7 +2142,7 @@ def test_subplot_titles_irregular_layout():
                     yref='paper',
                     text='Title 1',
                     showarrow=False,
-                    font=Font(size=18),
+                    font=Font(size=16),
                     xanchor='center',
                     yanchor='bottom'
                 ),
@@ -2153,18 +2153,18 @@ def test_subplot_titles_irregular_layout():
                     yref='paper',
                     text='Title 2',
                     showarrow=False,
-                    font=Font(size=18),
+                    font=Font(size=16),
                     xanchor='center',
                     yanchor='bottom'
                 ),
                 Annotation(
                     x=0.5,
-                    y=0.425,
+                    y=0.375,
                     xref='paper',
                     yref='paper',
                     text='Title 3',
                     showarrow=False,
-                    font=Font(size=18),
+                    font=Font(size=16),
                     xanchor='center',
                     yanchor='bottom'
                 )
@@ -2182,15 +2182,15 @@ def test_subplot_titles_irregular_layout():
                 anchor='y3'
             ),
             yaxis1=YAxis(
-                domain=[0.575, 1.0],
+                domain=[0.625, 1.0],
                 anchor='x1'
             ),
             yaxis2=YAxis(
-                domain=[0.575, 1.0],
+                domain=[0.625, 1.0],
                 anchor='x2'
             ),
             yaxis3=YAxis(
-                domain=[0.0, 0.425],
+                domain=[0.0, 0.375],
                 anchor='x3'
             )
         )
@@ -2215,7 +2215,7 @@ def test_subplot_titles_insets():
                     yref='paper',
                     text='Inset',
                     showarrow=False,
-                    font=Font(size=18),
+                    font=Font(size=16),
                     xanchor='center',
                     yanchor='bottom'
                 )

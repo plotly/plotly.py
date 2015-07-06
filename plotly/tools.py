@@ -754,6 +754,9 @@ def make_subplots(rows=1, cols=1,
         if key not in VALID_KWARGS:
             raise Exception("Invalid keyword argument: '{0}'".format(key))
 
+    # Set 'subplot_titles'
+    subplot_titles = kwargs.get('subplot_titles', [""] * rows * cols)
+
     # Set 'horizontal_spacing' / 'vertical_spacing' w.r.t. rows / cols
     try:
         horizontal_spacing = float(kwargs['horizontal_spacing'])
@@ -762,10 +765,10 @@ def make_subplots(rows=1, cols=1,
     try:
         vertical_spacing = float(kwargs['vertical_spacing'])
     except KeyError:
-        vertical_spacing = 0.3 / rows
-
-    # Set 'subplot_titles'
-    subplot_titles = kwargs.get('subplot_titles', [""] * rows * cols)
+        if 'subplot_titles' in kwargs:
+            vertical_spacing = 0.5 / rows
+        else:
+            vertical_spacing = 0.3 / rows
 
     # Sanitize 'specs' (must be a list of lists)
     exception_msg = "Keyword argument 'specs' must be a list of lists"
@@ -1205,7 +1208,7 @@ def make_subplots(rows=1, cols=1,
                                 'yref': 'paper',
                                 'text': subplot_titles[index],
                                 'showarrow': False,
-                                'font': graph_objs.Font(size=18),
+                                'font': graph_objs.Font(size=16),
                                 'xanchor': 'center',
                                 'yanchor': 'bottom'
                                 })
