@@ -765,10 +765,7 @@ def make_subplots(rows=1, cols=1,
         vertical_spacing = 0.3 / rows
 
     # Set 'subplot_titles'
-    try:
-        subplot_titles = kwargs['subplot_titles']
-    except KeyError:
-        subplot_titles = []
+    subplot_titles = kwargs.get('subplot_titles', [""] * rows * cols)
 
     # Sanitize 'specs' (must be a list of lists)
     exception_msg = "Keyword argument 'specs' must be a list of lists"
