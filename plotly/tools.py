@@ -1565,10 +1565,10 @@ class _Quiver(TraceFactory):
         endpoint pairs to create 2 lists: x_values for barbs and y values
         for barbs
 
-        :rtype: (list) barb_x: list of startpoint and endpoint x_value
-            pairs separated by a None to create the barb of the arrow.
-        :rtype: (list) barb_y: list of startpoint and endpoint y_value
-            pairs separated by a None to create the barb of the arrow.
+        :rtype: (list, list) barb_x, barb_y: list of startpoint and endpoint
+            x_value pairs separated by a None to create the barb of the arrow,
+            and list of startpoint and endpoint y_value pairs separated by a
+            None to create the barb of the arrow.
         """
         self.end_x = [i + j for i, j in zip(self.x, self.u)]
         self.end_y = [i + j for i, j in zip(self.y, self.v)]
@@ -1589,10 +1589,10 @@ class _Quiver(TraceFactory):
         arrowhead are separated by a None and zipped to create lists of x and
         y values for the arrows.
 
-        :rtype: (list) arrow_x: list of point1, endpoint, point2 x_values
-            separated by a None to create the arrowhead.
-        :rtype: (list) arrow_y: list of point1, endpoint, point2 y_values
-            separated by a None to create the barb of the arrow.
+        :rtype: (list, list) arrow_x, arrow_y: list of point1, endpoint, point2
+            x_values separated by a None to create the arrowhead and list of
+            point1, endpoint, point2 y_values separated by a None to create
+            the barb of the arrow.
         """
         dif_x = [i - j for i, j in zip(self.end_x, self.x)]
         dif_y = [i - j for i, j in zip(self.end_y, self.y)]
@@ -1672,7 +1672,7 @@ class _Streamline(TraceFactory):
         # Rescale speed onto axes-coordinates
         self.u = self.u / (self.x[-1] - self.x[0])
         self.v = self.v / (self.y[-1] - self.y[0])
-        self.speed = np.sqrt(self.u * self.u + self.v * self.v)
+        self.speed = np.sqrt(self.u**2 + self.v**2)
         # Rescale u and v for integrations.
         self.u *= len(self.x)
         self.v *= len(self.y)
@@ -1685,9 +1685,10 @@ class _Streamline(TraceFactory):
 
     def validate(self):
         """
-        Validates that args and kwargs meet criteria,
-        specifically that scale and arrow_scale are positive
-        and that x, y, u, and v are the same length
+        Validates the user-input arguments,
+
+        Specifically, that density and arrow_scale are positive
+        and that x and y are both evenly spaced.
 
         :raises: (ImportError) If numpy is not imported.
         :raises: (ValueError) If scale or arrow_scale is < 1.
@@ -1697,8 +1698,7 @@ class _Streamline(TraceFactory):
         :raises: (PlotlyError) If u and v are not the same shape.
         """
         if _numpy_imported is False:
-            raise ImportError("To use TraceFactory.create_streamline() "
-                              "please import numpy as np")
+            raise ImportError("TraceFactor.create_streamline requires numpy.")
         if self.arrow_scale <= 0:
             raise ValueError("arrow_scale must be > 0")
         if self.density <= 0:
@@ -1706,21 +1706,21 @@ class _Streamline(TraceFactory):
         for index in range(len(self.x) - 1):
             if ((self.x[index + 1] - self.x[index]) -
                (self.x[1] - self.x[0])) > .0001:
-                raise exceptions.PlotlyError("x must be a 1 dimmensional "
+                raise exceptions.PlotlyError("x must be a 1 dimensional, "
                                              "evenly spaced array")
         for index in range(len(self.y) - 1):
             if ((self.y[index + 1] - self.y[index]) -
                (self.y[1] - self.y[0])) > .0001:
-                raise exceptions.PlotlyError("y must be a 1 dimmensional "
+                raise exceptions.PlotlyError("y must be a 1 dimensional, "
                                              "evenly spaced array")
         if self.u.shape != self.v.shape:
                 raise exceptions.PlotlyError("u and v should both be 2d "
                                              "arrays with the same "
-                                             "dimmensions")
+                                             "dimensions")
 
     def blank_pos(self, xi, yi):
         """
-        Set up postitions for trajectories to be used with rk4 function.
+        Set up positions for trajectories to be used with rk4 function.
         """
         return (int((xi / self.spacing_x) + 0.5),
                 int((yi / self.spacing_y) + 0.5))
@@ -1729,7 +1729,7 @@ class _Streamline(TraceFactory):
         """
         Set up for RK4 function, based on Bokeh's streamline code
         """
-        if type(xi) == np.ndarray:
+        if isinstance(xi, np.ndarray):
             self.x = xi.astype(np.int)
             self.y = yi.astype(np.int)
         else:
@@ -1748,9 +1748,9 @@ class _Streamline(TraceFactory):
     def rk4_integrate(self, x0, y0):
         """
         RK4 forward and back trajectories from the initial conditions.
-        Adapted from Bokeh's streamline code
-        Use Runge-Kutta method to fill x and y trajectories
-        then checks length of traj (s in units of axes)
+
+        Adapted from Bokeh's streamline -uses Runge-Kutta method to fill
+        x and y trajectories then checks length of traj (s in units of axes)
         """
         def f(xi, yi):
             dt_ds = 1. / self.value_at(self.speed, xi, yi)
@@ -1825,7 +1825,11 @@ class _Streamline(TraceFactory):
 
     def traj(self, xb, yb):
         """
-        Integrate trajectories, used in get_streamlines()
+        Integrate trajectories
+
+        :xb:
+        :xy:
+        Used in get_streamlines()
         """
         if xb < 0 or xb >= self.density or yb < 0 or yb >= self.density:
             return
@@ -1863,9 +1867,10 @@ class _Streamline(TraceFactory):
 
     def get_streamline_arrows(self):
         """
-        Makes an arrow for each streamline. Gets angle of streamline at 1/3
-        mark and creates arrow coordinates based off of user defined angle and
-        arrow_scale
+        Makes an arrow for each streamline.
+
+        Gets angle of streamline at 1/3 mark and creates arrow coordinates
+        based off of user defined angle and arrow_scale.
 
         :param (array) st_x: x-values for all streamlines
         :param (array) st_y: y-values for all streamlines
@@ -1936,6 +1941,9 @@ class _Streamline(TraceFactory):
 
     def sum_streamlines(self):
         """
+
+        Makes streamlines readable as a single trace.
+
         :rtype (list) streamline_x: all x values for each streamline combined
             into single list
         :rtype (list) streamline_y: all y values for each streamline combined
