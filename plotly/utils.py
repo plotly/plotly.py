@@ -52,13 +52,7 @@ def load_json_dict(filename, *args):
                 data = {}  # TODO: issue a warning and bubble it up
         lock.release()
         if args:
-            d = dict()
-            for key in args:
-                if key in data:
-                    d[key] = data[key]
-            return d
-            # TODO: replace with below if we drop Python 2.6 compatibility
-            # return {key: data[key] for key in args if key in data}
+            return {key: data[key] for key in args if key in data}
     return data
 
 
