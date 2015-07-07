@@ -5,13 +5,12 @@ utils
 Low-level functionality NOT intended for users to EVER use.
 
 """
-
 import json
 import os.path
+import re
 import sys
 import threading
-import re
-import datetime
+
 import pytz
 
 try:

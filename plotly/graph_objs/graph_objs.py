@@ -24,18 +24,18 @@ from a dict/list JSON representation.
 """
 from __future__ import absolute_import
 
+import copy
 import warnings
 from collections import OrderedDict
+
 import six
+
+from plotly import exceptions, utils
 from plotly.graph_objs import graph_objs_tools
 from plotly.graph_objs.graph_objs_tools import (
     INFO, OBJ_MAP, NAME_TO_KEY, KEY_TO_NAME
 )
 
-from plotly import exceptions
-from plotly import utils
-
-import copy
 __all__ = None
 
 

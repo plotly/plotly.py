@@ -7,9 +7,8 @@ from __future__ import absolute_import
 
 import json
 from collections import MutableSequence
-from plotly import exceptions
-from plotly import utils
 
+from plotly import exceptions, utils
 
 __all__ = None
 

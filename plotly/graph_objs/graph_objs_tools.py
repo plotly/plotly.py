@@ -1,12 +1,14 @@
 from __future__ import absolute_import
-from plotly import utils
-import textwrap
+
 import json
 import os
+import textwrap
 from collections import OrderedDict
+from pkg_resources import resource_string
+
 import six
 
-from pkg_resources import resource_string
+from plotly import utils
 
 
 # Define graph reference loader
