@@ -1146,7 +1146,7 @@ class _api_v2:
         else:
             supplied_arg_name = supplied_arg_names.pop()
             if supplied_arg_name == 'grid_url':
-                path = six.moves.urllib.parse(grid_url).path
+                path = six.moves.urllib.parse.urlparse(grid_url).path
                 file_owner, file_id = path.replace("/~", "").split('/')[0:2]
                 return '{0}:{1}'.format(file_owner, file_id)
             else:
