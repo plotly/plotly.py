@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 
-from plotly.graph_objs import *
+from plotly.graph_objs import Contour, Data, Figure, Layout, Margin, Scatter
 
 
 def test_to_string():
@@ -28,7 +28,29 @@ def test_to_string():
         )
     )
     fig_string = fig.to_string(pretty=False)
-    comp_string = 'Figure(\n    data=Data([\n        Scatter(\n            x=[1, 2, 3, 4],\n            y=[10, 15, 13, 17]\n        ),\n        Scatter(\n            x=[1, 2, 3, 4],\n            y=[16, 5, 11, 9]\n        )\n    ]),\n    layout=Layout(\n        autosize=False,\n        width=500,\n        height=500,\n        margin=Margin(\n            l=65,\n            r=50,\n            b=65,\n            t=65\n        )\n    )\n)'
+    comp_string = ('Figure(\n'
+                   '    data=Data([\n'
+                   '        Scatter(\n'
+                   '            x=[1, 2, 3, 4],\n'
+                   '            y=[10, 15, 13, 17]\n'
+                   '        ),\n'
+                   '        Scatter(\n'
+                   '            x=[1, 2, 3, 4],\n'
+                   '            y=[16, 5, 11, 9]\n'
+                   '        )\n'
+                   '    ]),\n'
+                   '    layout=Layout(\n'
+                   '        autosize=False,\n'
+                   '        width=500,\n'
+                   '        height=500,\n'
+                   '        margin=Margin(\n'
+                   '            l=65,\n'
+                   '            r=50,\n'
+                   '            b=65,\n'
+                   '            t=65\n'
+                   '        )\n'
+                   '    )\n'
+                   ')')
     assert fig_string == comp_string
 
 

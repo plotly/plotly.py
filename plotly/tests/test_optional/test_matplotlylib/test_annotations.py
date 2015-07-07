@@ -6,7 +6,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 from plotly.tests.test_optional.optional_utils import compare_dict, run_fig
-from .data.annotations import *
+from plotly.tests.test_optional.test_matplotlylib.data.annotations import *
 
 
 def test_annotations():

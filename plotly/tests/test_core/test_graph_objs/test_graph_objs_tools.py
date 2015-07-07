@@ -2,11 +2,6 @@ from __future__ import absolute_import
 
 from unittest import TestCase
 
-try:
-    from collections import OrderedDict
-except ImportError:
-    from ordereddict import OrderedDict
-
 from plotly.graph_objs.graph_objs_tools import value_is_data
 
 

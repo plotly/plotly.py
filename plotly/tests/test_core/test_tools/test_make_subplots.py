@@ -1,98 +1,118 @@
-import plotly
-from plotly.graph_objs import *
-import plotly.tools as tls
+from __future__ import absolute_import
+
 from nose.tools import raises
+
+from plotly.graph_objs import (Annotation, Annotations, Data, Figure, Font,
+                               Layout, Scene, XAxis, YAxis)
+import plotly.tools as tls
 
 
 @raises(Exception)
 def test_non_integer_rows():
-   fig = tls.make_subplots(rows=2.1)
+    tls.make_subplots(rows=2.1)
+
 
 @raises(Exception)
 def test_less_than_zero_rows():
-   fig = tls.make_subplots(rows=-2)
+    tls.make_subplots(rows=-2)
+
 
 @raises(Exception)
 def test_non_integer_cols():
-   fig = tls.make_subplots(cols=2/3)
+    tls.make_subplots(cols=2/3)
+
 
 @raises(Exception)
 def test_less_than_zero_cols():
-   fig = tls.make_subplots(cols=-10)
+    tls.make_subplots(cols=-10)
+
 
 @raises(Exception)
 def test_wrong_kwarg():
-   fig = tls.make_subplots(stuff='no gonna work')
+    tls.make_subplots(stuff='no gonna work')
+
 
 @raises(Exception)
 def test_non_integer_rows():
-   fig = tls.make_subplots(rows=2.1)
+    tls.make_subplots(rows=2.1)
+
 
 @raises(Exception)
 def test_non_integer_cols():
-   fig = tls.make_subplots(cols=2/3)
+    tls.make_subplots(cols=2/3)
+
 
 @raises(Exception)
 def test_wrong_kwarg():
-   fig = tls.make_subplots(stuff='no gonna work')
+    tls.make_subplots(stuff='no gonna work')
+
 
 @raises(Exception)
 def test_start_cell_wrong_values():
-    fig = tls.make_subplots(rows=2, cols=2, start_cell='not gonna work')
+    tls.make_subplots(rows=2, cols=2, start_cell='not gonna work')
+
 
 @raises(Exception)
 def test_specs_wrong_type():
-    fig = tls.make_subplots(specs="not going to work")
+    tls.make_subplots(specs="not going to work")
+
 
 @raises(Exception)
 def test_specs_wrong_inner_type():
-    fig = tls.make_subplots(specs=[{}])
+    tls.make_subplots(specs=[{}])
+
 
 @raises(Exception)
 def test_specs_wrong_item_type():
-    fig = tls.make_subplots(specs=[[('not', 'going to work')]])
+    tls.make_subplots(specs=[[('not', 'going to work')]])
+
 
 @raises(Exception)
 def test_specs_wrong_item_key():
-    fig = tls.make_subplots(specs=[{'not': "going to work"}])
+    tls.make_subplots(specs=[{'not': "going to work"}])
+
 
 @raises(Exception)
 def test_specs_underspecified():
-    fig = tls.make_subplots(rows=2, specs=[{}])
-    fig = tls.make_subplots(rows=2, cols=2, specs=[[{}, {}], [{}]])
+    tls.make_subplots(rows=2, specs=[{}])
+    tls.make_subplots(rows=2, cols=2, specs=[[{}, {}], [{}]])
+
 
 @raises(Exception)
 def test_specs_overspecified():
-    fig = tls.make_subplots(rows=2, specs=[[{}], [{}], [{}]])
-    fig = tls.make_subplots(cols=2, specs=[{}, {}, {}])
+    tls.make_subplots(rows=2, specs=[[{}], [{}], [{}]])
+    tls.make_subplots(cols=2, specs=[{}, {}, {}])
+
 
 @raises(Exception)
 def test_specs_colspan_too_big():
-    fig = tls.make_subplots(cols=3,
-                            specs=[[{}, None, {'colspan': 2}]])
+    tls.make_subplots(cols=3, specs=[[{}, None, {'colspan': 2}]])
+
 
 @raises(Exception)
 def test_specs_rowspan_too_big():
-    fig = tls.make_subplots(rows=3,
-                            specs=[[{}],
-                                   [None],
-                                   [{'rowspan': 2}]])
+    tls.make_subplots(rows=3, specs=[[{}], [None], [{'rowspan': 2}]])
+
 
 @raises(Exception)
 def test_insets_wrong_type():
-    fig = tls.make_subplots(insets="not going to work")
+    tls.make_subplots(insets="not going to work")
+
 
 @raises(Exception)
 def test_insets_wrong_item():
-    fig = tls.make_subplots(insets=[{'not': "going to work"}])
+    tls.make_subplots(insets=[{'not': "going to work"}])
+
 
 @raises(Exception)
 def test_insets_wrong_cell_row():
-    fig = tls.make_subplots(insets=([{'cell': (0, 1)}]))
+    tls.make_subplots(insets=([{'cell': (0, 1)}]))
+
 
 @raises(Exception)
 def test_insets_wrong_cell_col():
-    fig = tls.make_subplots(insets=([{'cell': (1, 0)}]))
+    tls.make_subplots(insets=([{'cell': (1, 0)}]))
+
 
 def test_single_plot():
     expected = Figure(
@@ -109,6 +129,7 @@ def test_single_plot():
         )
     )
     assert tls.make_subplots() == expected
+
 
 def test_two_row():
     expected = Figure(
@@ -133,6 +154,7 @@ def test_two_row():
         )
     )
     assert tls.make_subplots(rows=2) == expected
+
 
 def test_two_row_bottom_left():
     expected = Figure(
@@ -160,6 +182,7 @@ def test_two_row_bottom_left():
     fig = tls.make_subplots(rows=2, start_cell='bottom-left')
     assert fig == expected
 
+
 def test_two_column():
     expected = Figure(
         data=Data(),
@@ -183,6 +206,7 @@ def test_two_column():
         )
     )
     assert tls.make_subplots(cols=2) == expected
+
 
 def test_a_lot():
     expected = Figure(
@@ -418,6 +442,7 @@ def test_a_lot():
     fig = tls.make_subplots(rows=4, cols=7)
     assert fig == expected
 
+
 def test_a_lot_bottom_left():
     expected = Figure(
         data=Data(),
@@ -652,6 +677,7 @@ def test_a_lot_bottom_left():
     fig = tls.make_subplots(rows=4, cols=7, start_cell='bottom-left')
     assert fig == expected
 
+
 def test_spacing():
     expected = Figure(
         data=Data(),
@@ -708,12 +734,13 @@ def test_spacing():
     )
 
     fig = tls.make_subplots(rows=2, cols=3,
-                           horizontal_spacing=.05,
-                           vertical_spacing=.1)
+                            horizontal_spacing=.05,
+                            vertical_spacing=.1)
     assert fig == expected
 
+
 def test_specs():
-    expected =  Figure(
+    expected = Figure(
         data=Data(),
         layout=Layout(
             xaxis1=XAxis(
@@ -756,8 +783,9 @@ def test_specs():
                                    [{}, {}, {}]])
     assert fig == expected
 
+
 def test_specs_bottom_left():
-    expected =  Figure(
+    expected = Figure(
         data=Data(),
         layout=Layout(
             xaxis1=XAxis(
@@ -800,6 +828,7 @@ def test_specs_bottom_left():
                                    [{}, {}, {}]],
                             start_cell='bottom-left')
     assert fig == expected
+
 
 def test_specs_colspan():
     expected = Figure(
@@ -849,10 +878,11 @@ def test_specs_colspan():
     )
 
     fig = tls.make_subplots(rows=3, cols=2,
-                            specs=[[{'colspan':2}, None],
+                            specs=[[{'colspan': 2}, None],
                                    [{}, {}],
                                    [{}, {}]])
     assert fig == expected
+
 
 def test_specs_rowspan():
     expected = Figure(
@@ -909,11 +939,10 @@ def test_specs_rowspan():
         )
     )
 
-    fig = tls.make_subplots(rows=3, cols=3,
-            specs=[[{'rowspan': 3}, {}, {}],
-                   [None, {}, {}],
-                   [None, {'colspan': 2}, None]])
+    fig = tls.make_subplots(rows=3, cols=3, specs=[[{'rowspan': 3}, {}, {}],
+                            [None, {}, {}], [None, {'colspan': 2}, None]])
     assert fig == expected
+
 
 def test_specs_rowspan2():
     expected = Figure(
@@ -962,11 +991,11 @@ def test_specs_rowspan2():
         )
     )
 
-    fig = tls.make_subplots(rows=3, cols=3,
-                           specs=[[{}, {}, {'rowspan': 2}],
-                                  [{'colspan': 2}, None, None],
-                                  [{'colspan': 3}, None, None]])
+    fig = tls.make_subplots(rows=3, cols=3, specs=[[{}, {}, {'rowspan': 2}],
+                            [{'colspan': 2}, None, None],
+                            [{'colspan': 3}, None, None]])
     assert fig == expected
+
 
 def test_specs_colspan_rowpan():
     expected = Figure(
@@ -1024,10 +1053,10 @@ def test_specs_colspan_rowpan():
     )
 
     fig = tls.make_subplots(rows=3, cols=3,
-                           specs=[[{'colspan': 2, 'rowspan': 2}, None, {}],
-                                  [None, None, {}],
-                                  [{}, {}, {}]])
+                            specs=[[{'colspan': 2, 'rowspan': 2}, None, {}],
+                                   [None, None, {}], [{}, {}, {}]])
     assert fig == expected
+
 
 def test_specs_colspan_rowpan_bottom_left():
     expected = Figure(
@@ -1086,10 +1115,10 @@ def test_specs_colspan_rowpan_bottom_left():
 
     fig = tls.make_subplots(rows=3, cols=3,
                             specs=[[{'colspan': 2, 'rowspan': 2}, None, {}],
-                                  [None, None, {}],
-                                  [{}, {}, {}]],
+                                   [None, None, {}], [{}, {}, {}]],
                             start_cell='bottom-left')
     assert fig == expected
+
 
 def test_specs_is_3d():
     expected = Figure(
@@ -1120,10 +1149,10 @@ def test_specs_is_3d():
         )
     )
 
-    fig = tls.make_subplots(rows=2, cols=2,
-                           specs=[[{'is_3d': True}, {}],
-                                   [{'is_3d': True}, {}]])
+    fig = tls.make_subplots(rows=2, cols=2, specs=[[{'is_3d': True}, {}],
+                                                   [{'is_3d': True}, {}]])
     assert fig == expected
+
 
 def test_specs_padding():
     expected = Figure(
@@ -1164,11 +1193,12 @@ def test_specs_padding():
         )
     )
 
-    fig = tls.make_subplots(rows=2, cols=2,
-                           horizontal_spacing=0, vertical_spacing=0,
-                           specs=[[{'l': 0.1}, {'b': 0.2}],
-                                  [{'t': 0.2}, {'r': 0.1}]])
+    fig = tls.make_subplots(rows=2, cols=2, horizontal_spacing=0,
+                            vertical_spacing=0,
+                            specs=[[{'l': 0.1}, {'b': 0.2}],
+                                   [{'t': 0.2}, {'r': 0.1}]])
     assert fig == expected
+
 
 def test_specs_padding_bottom_left():
     expected = Figure(
@@ -1215,6 +1245,7 @@ def test_specs_padding_bottom_left():
                                    [{'t': 0.2}, {'r': 0.1}]],
                             start_cell='bottom-left')
     assert fig == expected
+
 
 def test_shared_xaxes():
     expected = Figure(
@@ -1265,6 +1296,7 @@ def test_shared_xaxes():
     fig = tls.make_subplots(rows=2, cols=3, shared_xaxes=True)
     assert fig == expected
 
+
 def test_shared_xaxes_bottom_left():
     expected = Figure(
         data=Data(),
@@ -1314,6 +1346,7 @@ def test_shared_xaxes_bottom_left():
     fig = tls.make_subplots(rows=2, cols=3,
                             shared_xaxes=True, start_cell='bottom-left')
     assert fig == expected
+
 
 def test_shared_yaxes():
     expected = Figure(
@@ -1389,80 +1422,6 @@ def test_shared_yaxes():
     fig = tls.make_subplots(rows=5, cols=2, shared_yaxes=True)
     assert fig == expected
 
-def test_shared_yaxes():
-    expected = Figure(
-        data=Data(),
-        layout=Layout(
-            xaxis1=XAxis(
-                domain=[0.0, 0.45],
-                anchor='y1'
-            ),
-            xaxis10=XAxis(
-                domain=[0.55, 1.0],
-                anchor='free',
-                position=0.0
-            ),
-            xaxis2=XAxis(
-                domain=[0.55, 1.0],
-                anchor='free',
-                position=0.848
-            ),
-            xaxis3=XAxis(
-                domain=[0.0, 0.45],
-                anchor='y2'
-            ),
-            xaxis4=XAxis(
-                domain=[0.55, 1.0],
-                anchor='free',
-                position=0.636
-            ),
-            xaxis5=XAxis(
-                domain=[0.0, 0.45],
-                anchor='y3'
-            ),
-            xaxis6=XAxis(
-                domain=[0.55, 1.0],
-                anchor='free',
-                position=0.424
-            ),
-            xaxis7=XAxis(
-                domain=[0.0, 0.45],
-                anchor='y4'
-            ),
-            xaxis8=XAxis(
-                domain=[0.55, 1.0],
-                anchor='free',
-                position=0.212
-            ),
-            xaxis9=XAxis(
-                domain=[0.0, 0.45],
-                anchor='y5'
-            ),
-            yaxis1=YAxis(
-                domain=[0.848, 1.0],
-                anchor='x1'
-            ),
-            yaxis2=YAxis(
-                domain=[0.636, 0.788],
-                anchor='x3'
-            ),
-            yaxis3=YAxis(
-                domain=[0.424, 0.576],
-                anchor='x5'
-            ),
-            yaxis4=YAxis(
-                domain=[0.212, 0.364],
-                anchor='x7'
-            ),
-            yaxis5=YAxis(
-                domain=[0.0, 0.152],
-                anchor='x9'
-            )
-        )
-    )
-
-    fig = tls.make_subplots(rows=5, cols=2, shared_yaxes=True)
-    assert fig == expected
 
 def test_shared_xaxes_yaxes():
     expected = Figure(
@@ -1544,6 +1503,7 @@ def test_shared_xaxes_yaxes_bottom_left():
                             start_cell='bottom-left')
     assert fig == expected
 
+
 def test_shared_axes_list():
     expected = Figure(
         data=Data(),
@@ -1577,10 +1537,10 @@ def test_shared_axes_list():
         )
     )
 
-    fig = tls.make_subplots(rows=2, cols=2,
-                            shared_xaxes=[(1,1), (2,1)],
-                            shared_yaxes=[(1,1), (1,2)])
+    fig = tls.make_subplots(rows=2, cols=2, shared_xaxes=[(1, 1), (2, 1)],
+                            shared_yaxes=[(1, 1), (1, 2)])
     assert fig == expected
+
 
 def test_shared_axes_list_bottom_left():
     expected = Figure(
@@ -1615,11 +1575,11 @@ def test_shared_axes_list_bottom_left():
         )
     )
 
-    fig = tls.make_subplots(rows=2, cols=2,
-                            shared_xaxes=[(1,1), (2,1)],
-                            shared_yaxes=[(1,1), (1,2)],
+    fig = tls.make_subplots(rows=2, cols=2, shared_xaxes=[(1, 1), (2, 1)],
+                            shared_yaxes=[(1, 1), (1, 2)],
                             start_cell='bottom-left')
     assert fig == expected
+
 
 def test_shared_axes_list_of_lists():
     expected = Figure(
@@ -1670,9 +1630,8 @@ def test_shared_axes_list_of_lists():
         )
     )
 
-    fig = tls.make_subplots(rows=2, cols=3,
-                            shared_xaxes=[[(1,1), (2,1)],
-                                          [(1,3), (2,3)]])
+    fig = tls.make_subplots(rows=2, cols=3, shared_xaxes=[[(1, 1), (2, 1)],
+                                                          [(1, 3), (2, 3)]])
     assert fig == expected
 
 
@@ -1725,11 +1684,11 @@ def test_shared_axes_list_of_lists_bottom_left():
         )
     )
 
-    fig = tls.make_subplots(rows=2, cols=3,
-                            shared_xaxes=[[(1,1), (2,1)],
-                                          [(1,3), (2,3)]],
+    fig = tls.make_subplots(rows=2, cols=3, shared_xaxes=[[(1, 1), (2, 1)],
+                                                          [(1, 3), (2, 3)]],
                             start_cell='bottom-left')
     assert fig == expected
+
 
 def test_insets():
     expected = Figure(
@@ -1779,10 +1738,10 @@ def test_insets():
     )
 
     fig = tls.make_subplots(rows=2, cols=2,
-                            insets=[{'cell': (2,2),
-                                     'l': 0.7, 'w': 0.2,
+                            insets=[{'cell': (2, 2), 'l': 0.7, 'w': 0.2,
                                      'b': 0.2, 'h': 0.5}])
     assert fig == expected
+
 
 def test_insets_bottom_left():
     expected = Figure(
@@ -1832,11 +1791,11 @@ def test_insets_bottom_left():
     )
 
     fig = tls.make_subplots(rows=2, cols=2,
-                            insets=[{'cell': (2,2),
-                                     'l': 0.7, 'w': 0.2,
+                            insets=[{'cell': (2, 2), 'l': 0.7, 'w': 0.2,
                                      'b': 0.2, 'h': 0.5}],
                             start_cell='bottom-left')
     assert fig == expected
+
 
 def test_insets_multiple():
     expected = Figure(
@@ -1877,10 +1836,10 @@ def test_insets_multiple():
         )
     )
 
-    fig = tls.make_subplots(rows=2,
-                            insets=[{'cell': (1,1), 'l':0.8},
-                                    {'cell': (2,1), 'l':0.8}])
+    fig = tls.make_subplots(rows=2, insets=[{'cell': (1, 1), 'l': 0.8},
+                                            {'cell': (2, 1), 'l': 0.8}])
     assert fig == expected
+
 
 def test_insets_multiple_bottom_left():
     expected = Figure(
@@ -1922,8 +1881,8 @@ def test_insets_multiple_bottom_left():
     )
 
     fig = tls.make_subplots(rows=2,
-                            insets=[{'cell': (1,1), 'l':0.8},
-                                    {'cell': (2,1), 'l':0.8}],
+                            insets=[{'cell': (1, 1), 'l': 0.8},
+                                    {'cell': (2, 1), 'l': 0.8}],
                             start_cell='bottom-left')
     assert fig == expected
 

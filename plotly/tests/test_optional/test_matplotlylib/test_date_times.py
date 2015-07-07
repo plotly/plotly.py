@@ -1,17 +1,17 @@
 from __future__ import absolute_import
 
+import datetime
 import random
+from unittest import TestCase
+
 import matplotlib
 # Force matplotlib to not use any Xwindows backend.
 matplotlib.use('Agg')
-import matplotlib.pyplot as plt
-import datetime
 from matplotlib.dates import date2num
+import matplotlib.pyplot as plt
 import pandas as pd
-import plotly.tools as tls
-from unittest import TestCase
 
-from plotly.tests.test_optional.optional_utils import compare_dict, run_fig
+import plotly.tools as tls
 
 
 class TestDateTimes(TestCase):

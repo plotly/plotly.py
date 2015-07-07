@@ -3,12 +3,13 @@ test__offline
 
 """
 from __future__ import absolute_import
+
+import os
 from nose.tools import raises
 from unittest import TestCase
-import os
 
-from plotly.exceptions import PlotlyError
 import plotly
+from plotly.exceptions import PlotlyError
 
 dummy_js_url = ('https://gist.githubusercontent.com/chriddyp/'
                 'f40bd33d1eab6f0715dc/raw/'
