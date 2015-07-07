@@ -18,6 +18,7 @@ from . plotly import (
     plot_mpl,
     get_figure,
     Stream,
+    StreamWriter,
     image,
     grid_ops,
     meta_ops,
