@@ -13,3 +13,6 @@ six==1.8.0
 
 ## timezone definitions ##
 pytz==2014.9
+
+## async streaming ##
+trollius==1.0.4
