@@ -5,7 +5,8 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-from plotly.tests.test_optional.optional_utils import compare_dict, run_fig
+from plotly.tests.utils import compare_dict
+from plotly.tests.test_optional.optional_utils import run_fig
 from plotly.tests.test_optional.test_matplotlylib.data.scatter import *
 
 

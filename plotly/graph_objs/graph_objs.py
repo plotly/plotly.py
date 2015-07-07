@@ -25,6 +25,7 @@ from a dict/list JSON representation.
 from __future__ import absolute_import
 
 import copy
+import sys
 import warnings
 from collections import OrderedDict
 
