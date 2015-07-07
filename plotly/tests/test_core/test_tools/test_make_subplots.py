@@ -1358,7 +1358,8 @@ def test_shared_yaxes():
             ),
             xaxis10=XAxis(
                 domain=[0.55, 1.0],
-                anchor='free'
+                anchor='free',
+                position=0.0
             ),
             xaxis2=XAxis(
                 domain=[0.55, 1.0],
