@@ -345,3 +345,16 @@ def is_source_key(key):
         return True
     else:
         return False
+
+
+class DisconnectThread(threading.Thread):
+    """Provides a disconnect api to communicate with threads."""
+
+    _connected = True
+
+    @property
+    def connected(self):
+        return self._connected
+
+    def disconnect(self):
+        self._connected = False
