@@ -5,15 +5,11 @@ grid_objs
 """
 from __future__ import absolute_import
 
-import sys
+import json
 from collections import MutableSequence
 from plotly import exceptions
 from plotly import utils
 
-if sys.version[:3] == '2.6':
-    import simplejson as json
-else:
-    import json
 
 __all__ = None
 

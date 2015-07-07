@@ -19,6 +19,7 @@ from __future__ import absolute_import
 import sys
 import warnings
 import copy
+import json
 import os
 import six
 import base64
@@ -29,10 +30,6 @@ if sys.version[:1] == '2':
 else:
     from urllib.parse import urlparse
 
-if sys.version[:3] == '2.6':
-    import simplejson as json
-else:
-    import json
 
 from plotly.plotly import chunked_requests
 from plotly import utils

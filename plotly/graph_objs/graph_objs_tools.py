@@ -1,22 +1,9 @@
 from __future__ import absolute_import
 from plotly import utils
 import textwrap
+import json
 import os
-import sys
-if sys.version[:3] == '2.6':
-    try:
-        from ordereddict import OrderedDict
-        import simplejson as json
-    except ImportError:
-        raise ImportError(
-            "Looks like you're running Python 2.6. Plotly expects newer "
-            "standard library versions of ordereddict and json. You can "
-            "simply upgrade with these 'extras' with the following terminal "
-            "command:\npip install 'plotly[PY2.6]'"
-        )
-else:
-    from collections import OrderedDict
-    import json
+from collections import OrderedDict
 import six
 
 from pkg_resources import resource_string

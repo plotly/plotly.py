@@ -25,6 +25,7 @@ from a dict/list JSON representation.
 from __future__ import absolute_import
 
 import warnings
+from collections import OrderedDict
 import six
 from plotly.graph_objs import graph_objs_tools
 from plotly.graph_objs.graph_objs_tools import (
@@ -35,12 +36,6 @@ from plotly import exceptions
 from plotly import utils
 
 import copy
-import sys
-if sys.version[:3] == '2.6':
-    from ordereddict import OrderedDict
-else:
-    from collections import OrderedDict
-
 __all__ = None
 
 

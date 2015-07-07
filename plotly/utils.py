@@ -6,6 +6,7 @@ Low-level functionality NOT intended for users to EVER use.
 
 """
 
+import json
 import os.path
 import sys
 import threading
@@ -30,11 +31,6 @@ try:
     _sage_imported = True
 except ImportError:
     _sage_imported = False
-
-if sys.version[:3] == '2.6':
-    import simplejson as json
-else:
-    import json
 
 
 ### incase people are using threading, we lock file reads
