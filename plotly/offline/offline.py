@@ -155,7 +155,8 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly'):
 
     display(HTML(
         '<script type="text/javascript">'
-        'window.PLOTLYENV={"BASE_URL": "' + plotly_platform_url + '"};'
+        'window.PLOTLYENV=window.PLOTLYENV || {};'
+        'window.PLOTLYENV.BASE_URL="' + plotly_platform_url + '";'
         'Plotly.LINKTEXT = "' + link_text + '";'
         '</script>'
     ))
