@@ -6,6 +6,7 @@ A module intended for use with Nose.
 
 """
 from __future__ import absolute_import
+import warnings
 
 from nose.tools import raises
 from plotly.graph_objs import *
@@ -34,14 +35,10 @@ def test_dict_instantiation():
     Annotations([{'text': 'annotation text'}])
 
 
-@raises(PlotlyDictKeyError)
 def test_dict_instantiation_key_error():
-    print(Annotations([{'not-a-key': 'anything'}]))
-
-
-@raises(PlotlyDictValueError)
-def test_dict_instantiation_key_error():
-    print(Annotations([{'font': 'not-a-dict'}]))
+    with warnings.catch_warnings(True) as w:
+        print(Annotations([{'not-a-key': 'anything'}]))
+        assert(len(w) > 1)
 
 
 @raises(PlotlyListEntryError)
@@ -73,9 +70,9 @@ def test_validate():
     annotations.validate()
 
 
-@raises(PlotlyDictKeyError)
 def test_validate_error():
     annotations = Annotations()
     annotations.append({'not-a-key': 'anything'})
-    annotations.validate()
-
+    with warnings.catch_warnings(True) as w:
+        annotations.validate()
+        assert len(w) > 1

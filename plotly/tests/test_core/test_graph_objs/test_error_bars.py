@@ -6,6 +6,7 @@ A module intended for use with Nose.
 
 """
 from __future__ import absolute_import
+import warnings
 
 from nose.tools import raises
 from plotly.graph_objs import *
@@ -46,6 +47,7 @@ def test_instantiate_error_y():
            width=5)
 
 
-@raises(PlotlyDictKeyError)
 def test_key_error():
-    ErrorX(value=0.1, typ='percent', color='red')
+    with warnings.catch_warnings(True) as w:
+        ErrorX(value=0.1, typ='percent', color='red')
+        assert len(w) > 1
