@@ -1310,9 +1310,7 @@ class TraceFactory(dict):
 
     # use as validate method for all traces (not just streamline)
     @staticmethod
-    def validate_streamline(x, y, u, v,
-                            density, angle,
-                            arrow_scale, **kwargs):
+    def validate(*args, **kwargs):
         """
         Validates the user-input arguments,
 
@@ -1347,6 +1345,26 @@ class TraceFactory(dict):
             raise exceptions.PlotlyError("u and v should both be 2d "
                                          "arrays with the same "
                                          "dimensions")
+
+        # TODO: pull validate method out
+    def validate(self):
+        """
+        Validates the user-input arguments,
+
+        Specifically, this checks that scale and arrow_scale are positive
+        and that x, y, u, and v are the same length
+
+        :raises: (ValueError) If scale or arrow_scale is <= 0.
+        :raises: (PlotlyError) If x, y, u, and v are not the same length.
+        """
+        if self.scale <= 0:
+            raise ValueError("scale must be > 0")
+        if self.arrow_scale <= 0:
+            raise ValueError("arrow_scale must be > 0")
+        if (len(self.x) != len(self.y) or len(self.u) != len(self.v) or
+           len(self.x) != len(self.u)):
+            raise exceptions.PlotlyError("x, y, u, and v should all be the "
+                                         "same length (or size if ndarray)")
 
     @staticmethod
     def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
@@ -1447,10 +1465,10 @@ class TraceFactory(dict):
         """
         Returns data for a streamline plot.
 
-        :param (list|ndarray) x: 1 dimmensional, evenly spaced list or array
-        :param (list|ndarray) y: 1 dimmensional, evenly spaced list or array
-        :param (ndarray) u: 2 dimmensional array
-        :param (ndarray) v: 2 dimmensional array
+        :param (list|ndarray) x: 1 dimensional, evenly spaced list or array
+        :param (list|ndarray) y: 1 dimensional, evenly spaced list or array
+        :param (ndarray) u: 2 dimensional array
+        :param (ndarray) v: 2 dimensional array
         :param (int) density: controls the density of streamlines in plot.
             Default = 1
         :param (angle in radians) angle: angle of arrowhead. Default = pi/9
@@ -1461,11 +1479,6 @@ class TraceFactory(dict):
             help(plotly.graph_objs.Scatter)
 
         :rtype: (trace) returns streamline data
-
-        :raises: (ImportError) will happen if numpy is not installed
-        :raises: (PlotlyError) will happen if x or y are not evenly spaced
-            1 dimmensional lists or arrays
-        :raises: (PlotlyError) will happen if u and v are not the same shape.
 
         Example 1: Plot simple streamline and increase arrow size
         ```
@@ -1478,8 +1491,8 @@ class TraceFactory(dict):
         Y, X = np.meshgrid(x, y)
         u = -1 - X**2 + Y
         v = 1 + X - Y**2
-        u = u.T #transpose
-        v = v.T #transpose
+        u = u.T  # Transpose
+        v = v.T  # Transpose
 
         # Create streamline
         streamline = TraceFactory.create_streamline(x, y, u, v, arrow_scale= 1)
@@ -1538,8 +1551,6 @@ class TraceFactory(dict):
                              mode='lines', **kwargs)
         return streamline
 
-    # def validate():
-
 
 class _Quiver(TraceFactory):
     def __init__(self, x, y, u, v,
@@ -1573,7 +1584,6 @@ class _Quiver(TraceFactory):
         self.angle = angle
         self.end_x = []
         self.end_y = []
-        self.validate()
         self.scale_uv()
         barb_x, barb_y = self.get_barbs()
         arrow_x, arrow_y = self.get_quiver_arrows()
@@ -1592,26 +1602,6 @@ class _Quiver(TraceFactory):
             raise exceptions.PlotlyError("Your data array could not be "
                                          "flattened! Make sure x, y, u, and v "
                                          "are lists or numpy ndarrays!")
-
-    # todo pull validate method out
-    def validate(self):
-        """
-        Validates the user-input arguments,
-
-        Specifically, this checks that scale and arrow_scale are positive
-        and that x, y, u, and v are the same length
-
-        :raises: (ValueError) If scale or arrow_scale is <= 0.
-        :raises: (PlotlyError) If x, y, u, and v are not the same length.
-        """
-        if self.scale <= 0:
-            raise ValueError("scale must be > 0")
-        if self.arrow_scale <= 0:
-            raise ValueError("arrow_scale must be > 0")
-        if (len(self.x) != len(self.y) or len(self.u) != len(self.v) or
-           len(self.x) != len(self.u)):
-            raise exceptions.PlotlyError("x, y, u, and v should all be the "
-                                         "same length (or size if ndarray)")
 
     def scale_uv(self):
         """
@@ -1649,12 +1639,12 @@ class _Quiver(TraceFactory):
         Creates lists of x and y values to plot the arrows
 
         Gets length of each barb then calculates the length of each side of
-        the arrow. Gets angle of barb and applies angle (kwarg) to each
-        side of the arrowhead. Next uses arrow_scale to scale the length of
-        arrowhead and creates x and y values for arrowhead point1 and point2.
-        Finally x and y values for point1, endpoint and point2s for each
-        arrowhead are separated by a None and zipped to create lists of x and
-        y values for the arrows.
+        the arrow. Gets angle of barb and applies angle to each side of the
+        arrowhead. Next uses arrow_scale to scale the length of arrowhead and
+        creates x and y values for arrowhead point1 and point2. Finally x and y
+        values for point1, endpoint and point2s for each arrowhead are
+        separated by a None and zipped to create lists of x and y values for
+        the arrows.
 
         :rtype: (list, list) arrow_x, arrow_y: list of point1, endpoint, point2
             x_values separated by a None to create the arrowhead and list of
@@ -1987,3 +1977,4 @@ class _Streamline(TraceFactory):
         streamline_x = sum(self.st_x, [])
         streamline_y = sum(self.st_y, [])
         return streamline_x, streamline_y
+

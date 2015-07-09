@@ -87,4 +87,3 @@ class TestQuiver(TestCase):
             'type': 'scatter',
             'mode': 'lines', }
         self.assertEqual(quiver, expected_quiver)
-
