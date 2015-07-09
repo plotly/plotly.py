@@ -91,6 +91,9 @@ class TestQuiver(TestCase):
 
 class TestStreamline(TestCase):
 
+    # create_streamline has numpy dependency-
+    # additional streamline tests in test_optional
+
     def test_wrong_arrow_scale(self):
 
         # check for ValueError if arrow_scale is <= 0
@@ -142,20 +145,3 @@ class TestStreamline(TestCase):
                   'v': [[1, 1], [-3, -3]]}
         self.assertRaises(PlotlyError, tls.TraceFactory.create_streamline,
                           **kwargs)
-
-    def test_simple(self):
-
-        # check that the expected streamline keys result from create_streamline
-
-        self.assertEqual((tls.TraceFactory.create_streamline(x=[0, 2],
-                                                             y=[0, 2],
-                                                             u=[[-1, -5],
-                                                                [-1, -5]],
-                                                             v=[[1, 1],
-                                                                [-3, -3]],
-                                                             density=2,
-                                                             arrow_scale=.4,
-                                                             angle=math.pi / 6,
-                                                             line=Line(color='purple',
-                                                                       width=3))).keys(),
-                         (['y', 'x', 'line', 'type', 'mode']))
