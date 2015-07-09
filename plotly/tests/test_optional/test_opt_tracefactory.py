@@ -6,11 +6,7 @@ import plotly.tools as tls
 import math
 from nose.tools import raises
 
-try:
-    import numpy as np
-    _numpy_imported = True
-except ImportError:
-    _numpy_imported = False
+import numpy as np
 
 
 class TestQuiver(TestCase):
@@ -33,7 +29,7 @@ class TestQuiver(TestCase):
             'line': {'width': 2},
             'type': 'scatter',
             'mode': 'lines', }
-        self.assertEqual(quiver, expected_quiver)
+        self.assertAlmostEqual(quiver, expected_quiver)
 
 
 class TestStreamline(TestCase):
