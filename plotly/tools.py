@@ -1307,6 +1307,47 @@ def return_figure_from_figure_or_data(figure_or_data, validate_figure):
 
 
 class TraceFactory(dict):
+
+    # use as validate method for all traces (not just streamline)
+    @staticmethod
+    def validate_streamline(x, y, u, v,
+                            density, angle,
+                            arrow_scale, **kwargs):
+        """
+        Validates the user-input arguments,
+
+        Specifically, that density and arrow_scale are positive
+        and that x and y are both evenly spaced.
+
+        :raises: (ImportError) If numpy is not imported.
+        :raises: (ValueError) If scale or arrow_scale is < 1.
+        :raises: (ValueError) If density or arrow_scale is < 1.
+        :raises: (PlotlyError) If x and y are not evenly spaced lists or
+            1D arrays.
+        :raises: (PlotlyError) If u and v are not the same shape.
+        """
+
+        if _numpy_imported is False:
+            raise ImportError("TraceFactor.create_streamline requires numpy.")
+        if arrow_scale <= 0:
+            raise ValueError("arrow_scale must be > 0")
+        if density <= 0:
+            raise ValueError("density must be > 0")
+        for index in range(len(x) - 1):
+            if ((x[index + 1] - x[index]) -
+               (x[1] - x[0])) > .0001:
+                raise exceptions.PlotlyError("x must be a 1 dimensional, "
+                                             "evenly spaced array")
+        for index in range(len(y) - 1):
+            if ((y[index + 1] - y[index]) -
+               (y[1] - y[0])) > .0001:
+                raise exceptions.PlotlyError("y must be a 1 dimensional, "
+                                             "evenly spaced array")
+        if len(u) != len(v):
+            raise exceptions.PlotlyError("u and v should both be 2d "
+                                         "arrays with the same "
+                                         "dimensions")
+
     @staticmethod
     def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
                       angle=math.pi / 9, **kwargs):
@@ -1482,6 +1523,9 @@ class TraceFactory(dict):
         py.iplot(fig, filename='streamline')
         ```
         """
+        TraceFactory.validate_streamline(x, y, u, v,
+                                         density, angle,
+                                         arrow_scale, **kwargs)
         streamline_x, streamline_y = _Streamline(x, y, u, v,
                                                  density, angle,
                                                  arrow_scale).sum_streamlines()
@@ -1699,48 +1743,12 @@ class _Streamline(TraceFactory):
         # Rescale u and v for integrations.
         self.u *= len(self.x)
         self.v *= len(self.y)
-        self.validate()
+        #self.validate()
         self.st_x = []
         self.st_y = []
         self.get_streamlines()
         streamline_x, streamline_y = self.sum_streamlines()
         arrows_x, arrows_y = self.get_streamline_arrows()
-
-    # todo pull validate method out
-    def validate(self):
-        """
-        Validates the user-input arguments,
-
-        Specifically, that density and arrow_scale are positive
-        and that x and y are both evenly spaced.
-
-        :raises: (ImportError) If numpy is not imported.
-        :raises: (ValueError) If scale or arrow_scale is < 1.
-        :raises: (ValueError) If density or arrow_scale is < 1.
-        :raises: (PlotlyError) If x and y are not evenly spaced lists or
-            1D arrays.
-        :raises: (PlotlyError) If u and v are not the same shape.
-        """
-        if _numpy_imported is False:
-            raise ImportError("TraceFactor.create_streamline requires numpy.")
-        if self.arrow_scale <= 0:
-            raise ValueError("arrow_scale must be > 0")
-        if self.density <= 0:
-            raise ValueError("density must be > 0")
-        for index in range(len(self.x) - 1):
-            if ((self.x[index + 1] - self.x[index]) -
-               (self.x[1] - self.x[0])) > .0001:
-                raise exceptions.PlotlyError("x must be a 1 dimensional, "
-                                             "evenly spaced array")
-        for index in range(len(self.y) - 1):
-            if ((self.y[index + 1] - self.y[index]) -
-               (self.y[1] - self.y[0])) > .0001:
-                raise exceptions.PlotlyError("y must be a 1 dimensional, "
-                                             "evenly spaced array")
-        if self.u.shape != self.v.shape:
-                raise exceptions.PlotlyError("u and v should both be 2d "
-                                             "arrays with the same "
-                                             "dimensions")
 
     def blank_pos(self, xi, yi):
         """
