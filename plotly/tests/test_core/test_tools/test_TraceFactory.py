@@ -93,55 +93,6 @@ class TestStreamline(TestCase):
 
     # create_streamline has numpy dependency-
     # additional streamline tests in test_optional
-
-    def test_wrong_arrow_scale(self):
-
-        # check for ValueError if arrow_scale is <= 0
-
-        kwargs = {'x': [0, 2], 'y': [0, 2],
-                  'u': [[-1, -5], [-1, -5]],
-                  'v': [[1, 1], [-3, -3]],
-                  'arrow_scale': 0}
-        self.assertRaises(ValueError, tls.TraceFactory.create_streamline,
-                          **kwargs)
-
-    def test_wrong_density(self):
-
-        # check for ValueError if density is <= 0
-
-        kwargs = {'x': [0, 2], 'y': [0, 2],
-                  'u': [[-1, -5], [-1, -5]],
-                  'v': [[1, 1], [-3, -3]],
-                  'density': 0}
-        self.assertRaises(ValueError, tls.TraceFactory.create_streamline,
-                          **kwargs)
-
-    def test_uneven_x(self):
-
-        # check for PlotlyError if x is not evenly spaced
-
-        kwargs = {'x': [0, 2, 7, 9], 'y': [0, 2, 4, 6],
-                  'u': [[-1, -5], [-1, -5]],
-                  'v': [[1, 1], [-3, -3]]}
-        self.assertRaises(PlotlyError, tls.TraceFactory.create_streamline,
-                          **kwargs)
-
-    def test_uneven_y(self):
-
-        # check for PlotlyError if y is not evenly spaced
-
-        kwargs = {'x': [0, 2, 4, 6], 'y': [1.5, 2, 3, 3.5],
-                  'u': [[-1, -5], [-1, -5]],
-                  'v': [[1, 1], [-3, -3]]}
-        self.assertRaises(PlotlyError, tls.TraceFactory.create_streamline,
-                          **kwargs)
-
-    def test_unequal_shape_u(self):
-
-        # check for PlotlyError if u and v are not the same length
-
-        kwargs = {'x': [0, 2, 4, 6], 'y': [1.5, 2, 3, 3.5],
-                  'u': [[-1, -5], [-1, -5], [-1, -5]],
-                  'v': [[1, 1], [-3, -3]]}
-        self.assertRaises(PlotlyError, tls.TraceFactory.create_streamline,
-                          **kwargs)
+    @raises(ValueError)
+    def test_wrong_arrow_scale():
+        fig = tls.TraceFactory.create_streamline(arrow_scale=0)
