@@ -5,16 +5,16 @@ test_get_figure:
 A module intended for use with Nose.
 
 """
-from plotly.graph_objs import graph_objs
-from plotly.plotly import plotly as py
-from plotly import exceptions
+from __future__ import absolute_import
+
+from unittest import TestCase, skipIf
+
 from nose.tools import raises
 import six
 
-from unittest import TestCase
-
-version = six.sys.version_info[:2]  # need this for conditional testing
-
+from plotly import exceptions
+from plotly.graph_objs import graph_objs
+from plotly.plotly import plotly as py
 
 # username for tests: 'plotlyimagetest'
 # api_key for account: '786r5mecv0'
@@ -53,8 +53,9 @@ def compare_with_raw(obj, raw_obj, parents=None):
         for entry, entry_raw in zip(obj, raw_obj):
             if isinstance(entry, (dict, list)):
                 try:
-                    coll_name = graph_objs.NAME_TO_KEY[entry.__class__
-                        .__name__]
+                    coll_name = (
+                        graph_objs.NAME_TO_KEY[entry.__class__.__name__]
+                    )
                 except KeyError:
                     coll_name = entry.__class__.__name__
                 if parents is None:
@@ -163,7 +164,7 @@ def test_all():
     ak = '786r5mecv0'
     run_test = False
     end_file = 2
-    polar_plots = [], #[6, 7, 8]
+    polar_plots = [],  # [6, 7, 8]
     skip = list(range(0))
     if run_test:
         py.sign_in(un, ak)
@@ -198,18 +199,12 @@ def test_all():
 
 class TestBytesVStrings(TestCase):
 
-    # unittest `skipIf` not supported in 2.6
-    if version < (2, 7) or (2, 7) < version < (3, 3):
-        pass
-    else:
-        from unittest import skipIf
-
-        @skipIf(not six.PY3, 'Decoding and missing escapes only seen in PY3')
-        def test_proper_escaping(self):
-            un = 'PlotlyImageTest'
-            ak = '786r5mecv0'
-            url = "https://plot.ly/~PlotlyImageTest/91/"
-            py.sign_in(un, ak)
-            print("getting: https://plot.ly/~PlotlyImageTest/91/")
-            print("###########################################\n\n")
-            fig = py.get_figure(url)
+    @skipIf(not six.PY3, 'Decoding and missing escapes only seen in PY3')
+    def test_proper_escaping(self):
+        un = 'PlotlyImageTest'
+        ak = '786r5mecv0'
+        url = "https://plot.ly/~PlotlyImageTest/91/"
+        py.sign_in(un, ak)
+        print("getting: https://plot.ly/~PlotlyImageTest/91/")
+        print("###########################################\n\n")
+        fig = py.get_figure(url)

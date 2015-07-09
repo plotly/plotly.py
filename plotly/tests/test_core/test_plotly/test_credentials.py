@@ -1,7 +1,10 @@
+from __future__ import absolute_import
+
 from unittest import TestCase
+
 import plotly.plotly.plotly as py
-import plotly.tools as tls
 import plotly.session as session
+import plotly.tools as tls
 
 
 def test_get_credentials():

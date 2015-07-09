@@ -1,10 +1,12 @@
 from __future__ import absolute_import
 
+from numbers import Number as Num
+
 import matplotlib
 # Force matplotlib to not use any Xwindows backend.
 matplotlib.use('Agg')
+
 from plotly.matplotlylib import Exporter, PlotlyRenderer
-from numbers import Number as Num
 
 
 def compare_dict(dict1, dict2, equivalent=True, msg='', tol=10e-8):

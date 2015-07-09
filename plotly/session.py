@@ -5,10 +5,13 @@ This allows users to dynamically change which plotly domain they're using,
 which user they're signed in as, and plotting defaults.
 
 """
+from __future__ import absolute_import
 
 import copy
+
 import six
-from . import exceptions
+
+from plotly import exceptions
 
 _session = {
     'credentials': {},

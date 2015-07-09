@@ -1,11 +1,14 @@
+from __future__ import absolute_import
+
 import matplotlib
 # Force matplotlib to not use any Xwindows backend.
 matplotlib.use('Agg')
-import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
+import matplotlib.pyplot as plt
 
-from plotly.tests.test_optional.optional_utils import compare_dict, run_fig
-from .data.subplots import *
+from plotly.tests.utils import compare_dict
+from plotly.tests.test_optional.optional_utils import run_fig
+from plotly.tests.test_optional.test_matplotlylib.data.subplots import *
 
 
 def test_blank_subplots():
@@ -25,5 +28,3 @@ def test_blank_subplots():
     equivalent, msg = compare_dict(renderer.plotly_fig['layout'],
                                    BLANK_SUBPLOTS['layout'])
     assert equivalent, msg
-
-

@@ -1,4 +1,7 @@
-from plotly.graph_objs import *
+from __future__ import absolute_import
+
+from plotly.graph_objs import (Bar, Data, Figure, Font, Margin, Marker, Layout,
+                               Line, XAxis, YAxis)
 
 D = dict(
     left=[0, 1, 2, 3, 4, 5],

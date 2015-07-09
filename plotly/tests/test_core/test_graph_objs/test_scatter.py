@@ -29,5 +29,5 @@ def test_validate():
 @raises(PlotlyError)
 def test_validate_error():
     scatter = Scatter()
-    scatter['invalid']='something'
+    scatter['invalid'] = 'something'
     scatter.validate()

@@ -1,10 +1,13 @@
+from __future__ import absolute_import
+
 import matplotlib
 # Force matplotlib to not use any Xwindows backend.
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-from plotly.tests.test_optional.optional_utils import compare_dict, run_fig
-from .data.bars import *
+from plotly.tests.utils import compare_dict
+from plotly.tests.test_optional.optional_utils import run_fig
+from plotly.tests.test_optional.test_matplotlylib.data.bars import *
 
 
 def test_vertical_bar():

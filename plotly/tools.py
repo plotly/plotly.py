@@ -9,11 +9,10 @@ Functions that USERS will possibly want access to.
 """
 from __future__ import absolute_import
 
-import os
 import os.path
 import warnings
+
 import six
-import requests
 
 from plotly import utils
 from plotly import exceptions

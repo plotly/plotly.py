@@ -5,15 +5,14 @@
 """
 from __future__ import absolute_import
 
-import uuid
 import json
 import os
+import uuid
+
 import requests
 
-from plotly import utils
-from plotly import tools
+from plotly import session, tools, utils
 from plotly.exceptions import PlotlyError
-from plotly import session
 
 PLOTLY_OFFLINE_DIRECTORY = plotlyjs_path = os.path.expanduser(
     os.path.join(*'~/.plotly/plotlyjs'.split('/')))

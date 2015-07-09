@@ -15,19 +15,12 @@ info: (required!)
 
 
 """
-import sys
-import six
+import json
 
-if sys.version[:3] == '2.6':
-    import simplejson as json
-else:
-    import json
 
-## Base Plotly Error ##
-
+# Base Plotly Error
 class PlotlyError(Exception):
     pass
-
 
 
 class InputError(PlotlyError):
@@ -63,8 +56,7 @@ class PlotlyRequestError(PlotlyError):
         return self.message
 
 
-## Grid Errors ##
-
+# Grid Errors #
 COLUMN_NOT_YET_UPLOADED_MESSAGE = (
     "Hm... it looks like your column '{column_name}' hasn't "
     "been uploaded to Plotly yet. You need to upload your "
@@ -79,14 +71,14 @@ NON_UNIQUE_COLUMN_MESSAGE = (
     "can't have duplicate column names. Rename "
     "the column \"{0}\" and try again."
 )
-## Would Cause Server Errors ##
+
+# Would Cause Server Errors
 
 class PlotlyEmptyDataError(PlotlyError):
     pass
 
 
-## Graph Objects Errors ##
-
+# Graph Objects Errors
 class PlotlyGraphObjectError(PlotlyError):
     def __init__(self, message='', path=None, notes=None, plain_message=''):
         self.message = message
@@ -202,8 +194,7 @@ class PlotlyDataTypeError(PlotlyGraphObjectError):
                                                   **kwargs)
 
 
-## Local Config Errors ##
-
+# Local Config Errors
 class PlotlyLocalError(PlotlyError):
     pass
 
@@ -224,8 +215,7 @@ class PlotlyLocalCredentialsError(PlotlyLocalError):
         super(PlotlyLocalCredentialsError, self).__init__(message)
 
 
-## Server Errors ##
-
+# Server Errors
 class PlotlyServerError(PlotlyError):
     pass
 

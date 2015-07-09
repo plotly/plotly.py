@@ -8,12 +8,11 @@ A module intended for use with Nose.
 from __future__ import absolute_import
 
 from nose.tools import raises
-from plotly.graph_objs import *
-from plotly.exceptions import (PlotlyError,
-                               PlotlyDictKeyError,
-                               PlotlyDictValueError,
-                               PlotlyDataTypeError,
-                               PlotlyListEntryError)
+
+from plotly.exceptions import (PlotlyError, PlotlyDictKeyError,
+                               PlotlyDictValueError, PlotlyListEntryError)
+from plotly.graph_objs import Annotation, Annotations, Data, Figure, Layout
+
 
 
 def setup():
@@ -69,7 +68,7 @@ def test_validate():
     annotations.validate()
     annotations += [{'text': 'some text'}]
     annotations.validate()
-    annotations += [{},{},{}]
+    annotations += [{}, {}, {}]
     annotations.validate()
 
 
@@ -78,4 +77,3 @@ def test_validate_error():
     annotations = Annotations()
     annotations.append({'not-a-key': 'anything'})
     annotations.validate()
-

@@ -16,33 +16,21 @@ and ploty's servers.
 """
 from __future__ import absolute_import
 
-import sys
-import warnings
-import copy
-import os
-import six
 import base64
+import copy
+import json
+import os
+import warnings
+
 import requests
+import six
+import six.moves
 
-if sys.version[:1] == '2':
-    from urlparse import urlparse
-else:
-    from urllib.parse import urlparse
-
-if sys.version[:3] == '2.6':
-    import simplejson as json
-else:
-    import json
-
+from plotly import exceptions, tools, utils, version
 from plotly.plotly import chunked_requests
-from plotly import utils
-from plotly import tools
-from plotly import exceptions
-from plotly import version
 from plotly.session import (sign_in, update_session_plot_options,
                             get_session_plot_options, get_session_credentials,
                             get_session_config)
-
 
 __all__ = None
 
@@ -1158,7 +1146,7 @@ class _api_v2:
         else:
             supplied_arg_name = supplied_arg_names.pop()
             if supplied_arg_name == 'grid_url':
-                path = urlparse(grid_url).path
+                path = six.moves.urllib.parse.urlparse(grid_url).path
                 file_owner, file_id = path.replace("/~", "").split('/')[0:2]
                 return '{0}:{1}'.format(file_owner, file_id)
             else:
