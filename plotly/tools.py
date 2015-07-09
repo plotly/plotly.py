@@ -1322,6 +1322,9 @@ class TraceFactory(dict):
         :param (float in [0,1]) arrow_scale: value multiplied to length of barb
             to get length of arrowhead. Default = .3
         :param (angle in radians) angle: angle of arrowhead. Default = pi/9
+        :param (class) kwargs: kwargs passed through plotly.graph_objs.Scatter
+            for more information on valid kwargs call
+            help(plotly.graph_objs.Scatter)
 
         :rtype (trace): returns quiver trace
 
@@ -1331,9 +1334,12 @@ class TraceFactory(dict):
         :raises (PlotlyError): will happen if scale or arrow_scale are less
             than or equal to 0
 
-        Example 1:
+        Example 1: Trivial Quiver
         ```
         # 1 Arrow from (0,0) to (1,1)
+
+        import math
+
         quiver = TraceFactory.create_quiver(x=[0], y=[0],
                                             u=[1], v=[1],
                                             scale=1)
@@ -1343,8 +1349,11 @@ class TraceFactory(dict):
         py.iplot(fig, filename='quiver')
         ```
 
-        Example 2:
+        Example 2: Quiver plot using meshgrid
         ```
+        import numpy as np
+        import math
+
         # Add data
         x,y = np.meshgrid(np.arange(0, 2, .2), np.arange(0, 2, .2))
         u = np.cos(x)*y
@@ -1359,8 +1368,11 @@ class TraceFactory(dict):
         py.iplot(fig, filename='quiver')
         ```
 
-        Example 3:
+        Example 3: Styling the quiver plot
         ```
+        import numpy as np
+        import math
+
         # Add data
         x, y = np.meshgrid(np.arange(-np.pi, math.pi, .5),
                            np.arange(-math.pi, math.pi, .5))
@@ -1370,7 +1382,8 @@ class TraceFactory(dict):
         # Create quiver
         quiver = TraceFactory.create_quiver(x, y, u, v, scale=.2,
                                             arrow_scale=.3, angle=math.pi/6,
-                                            line=Line(color='purple', width=1))
+                                            name='Wind Velocity',
+                                            line=Line(width=1))
         # Plot
         fig=Figure()
         fig['data'].append(quiver)
@@ -1397,12 +1410,14 @@ class TraceFactory(dict):
         :param (list|ndarray) y: 1 dimmensional, evenly spaced list or array
         :param (ndarray) u: 2 dimmensional array
         :param (ndarray) v: 2 dimmensional array
-
         :param (int) density: controls the density of streamlines in plot.
             Default = 1
         :param (angle in radians) angle: angle of arrowhead. Default = pi/9
         :param (float in [0,1]) arrow_scale: value to scale length of arrowhead
             Default = .09
+        :param (class) kwargs: kwargs passed through plotly.graph_objs.Scatter
+            for more information on valid kwargs call
+            help(plotly.graph_objs.Scatter)
 
         :rtype: (trace) returns streamline data
 
@@ -1411,8 +1426,11 @@ class TraceFactory(dict):
             1 dimmensional lists or arrays
         :raises: (PlotlyError) will happen if u and v are not the same shape.
 
-        Example 1:
+        Example 1: Plot simple streamline and increase arrow size
         ```
+        import numpy as np
+        import math
+
         # Add data
         x = np.linspace(-3, 3, 100)
         y = np.linspace(-3, 3, 100)
@@ -1431,9 +1449,11 @@ class TraceFactory(dict):
         py.iplot(fig, filename='streamline')
         ```
 
-        Example 2:
-        # from http://nbviewer.ipython.org/github/barbagroup/AeroPython
+        Example 2: from nbviewer.ipython.org/github/barbagroup/AeroPython
         ```
+        import numpy as np
+        import math
+
         # Add data
         N = 50
         x_start, x_end = -2.0, 2.0
@@ -1473,6 +1493,8 @@ class TraceFactory(dict):
                              y=streamline_y + arrow_y,
                              mode='lines', **kwargs)
         return streamline
+
+    # def validate():
 
 
 class _Quiver(TraceFactory):
@@ -1527,6 +1549,7 @@ class _Quiver(TraceFactory):
                                          "flattened! Make sure x, y, u, and v "
                                          "are lists or numpy ndarrays!")
 
+    # todo pull validate method out
     def validate(self):
         """
         Validates the user-input arguments,
@@ -1683,6 +1706,7 @@ class _Streamline(TraceFactory):
         streamline_x, streamline_y = self.sum_streamlines()
         arrows_x, arrows_y = self.get_streamline_arrows()
 
+    # todo pull validate method out
     def validate(self):
         """
         Validates the user-input arguments,
@@ -1825,12 +1849,15 @@ class _Streamline(TraceFactory):
 
     def traj(self, xb, yb):
         """
+
         Integrate trajectories
 
-        :xb:
-        :xy:
-        Used in get_streamlines()
+        :param (int) xb: results of passing xi through self.blank_pos
+        :param (int) xy: results of passing yi through self.blank_pos
+
+        Calculate each trajectory based on rk4 integrate method.
         """
+
         if xb < 0 or xb >= self.density or yb < 0 or yb >= self.density:
             return
         if self.blank[yb, xb] == 0:
@@ -1923,7 +1950,7 @@ class _Streamline(TraceFactory):
                 point2_y[index] = arrow_end_y[index] + seg2_y[index]
 
         space = np.empty((len(point1_x)))
-        space[:] = np.NAN
+        space[:] = np.nan
 
         # Combine arrays into matrix
         arrows_x = np.matrix([point1_x, arrow_end_x, point2_x, space])
@@ -1942,7 +1969,7 @@ class _Streamline(TraceFactory):
     def sum_streamlines(self):
         """
 
-        Makes streamlines readable as a single trace.
+        Makes all streamlines readable as a single trace.
 
         :rtype (list) streamline_x: all x values for each streamline combined
             into single list
