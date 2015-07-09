@@ -29,7 +29,7 @@ class TestQuiver(TestCase):
             'line': {'width': 2},
             'type': 'scatter',
             'mode': 'lines', }
-        self.assertAlmostEqual(quiver, expected_quiver)
+        self.assertEqual(quiver, expected_quiver)
 
 
 class TestStreamline(TestCase):
