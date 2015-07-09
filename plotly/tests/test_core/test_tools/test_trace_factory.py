@@ -1,10 +1,11 @@
+import math
 from unittest import TestCase
-from plotly.graph_objs import graph_objs, Line
-from plotly.exceptions import PlotlyError
+
+from nose.tools import raises
 
 import plotly.tools as tls
-import math
-from nose.tools import raises
+from plotly.exceptions import PlotlyError
+from plotly.graph_objs import Line, graph_objs
 
 
 class TestQuiver(TestCase):
@@ -27,6 +28,12 @@ class TestQuiver(TestCase):
         self.assertRaises(ValueError, tls.TraceFactory.create_quiver,
                           **kwargs)
 
+        kwargs = {'x': [1, 2], 'y': [1, 2],
+                  'u': [1, 2], 'v': [1, 2],
+                  'scale': 0}
+        self.assertRaises(ValueError, tls.TraceFactory.create_quiver,
+                          **kwargs)
+
     def test_wrong_arrow_scale(self):
 
         # check: ValueError if arrow_scale is <= 0
@@ -34,6 +41,12 @@ class TestQuiver(TestCase):
         kwargs = {'x': [1, 2], 'y': [1, 2],
                   'u': [1, 2], 'v': [1, 2],
                   'arrow_scale': -1}
+        self.assertRaises(ValueError, tls.TraceFactory.create_quiver,
+                          **kwargs)
+
+        kwargs = {'x': [1, 2], 'y': [1, 2],
+                  'u': [1, 2], 'v': [1, 2],
+                  'arrow_scale': 0}
         self.assertRaises(ValueError, tls.TraceFactory.create_quiver,
                           **kwargs)
 

@@ -1310,27 +1310,57 @@ class TraceFactory(dict):
 
     # use as validate method for all traces (not just streamline)
     @staticmethod
-    def validate(*args, **kwargs):
+    def validate(x, y, u, v,
+                 scale=.1, density=1,
+                 arrow_scale=.3, **kwargs):
         """
-        Validates the user-input arguments,
+        Validates the user-input arguments for quiver and streamline,
 
-        Specifically, that density and arrow_scale are positive
-        and that x and y are both evenly spaced.
+        Specifically, that density, scale, and arrow_scale are positive
+        and that x and y and u and v are the same length.
 
-        :raises: (ImportError) If numpy is not imported.
-        :raises: (ValueError) If scale or arrow_scale is < 1.
-        :raises: (ValueError) If density or arrow_scale is < 1.
-        :raises: (PlotlyError) If x and y are not evenly spaced lists or
-            1D arrays.
-        :raises: (PlotlyError) If u and v are not the same shape.
+        Refer to TraceFactory.create_streamline() or
+        TraceFactory.create_quiver() for params
+
+        :raises: (ValueError) If scale is <= 0.
+        :raises: (ValueError) If arrow_scale is <= 0.
+        v:raises: (ValueError) If density is <= 0.
+        :raises: (PlotlyError) If x and y are not lists or ndarrays
+            of the same length.
+        :raises: (PlotlyError) If u and v are not lists or ndarrays
+            of the same length.
         """
 
-        if _numpy_imported is False:
-            raise ImportError("TraceFactor.create_streamline requires numpy.")
+        if scale <= 0:
+            raise ValueError("arrow_scale must be > 0")
         if arrow_scale <= 0:
             raise ValueError("arrow_scale must be > 0")
         if density <= 0:
             raise ValueError("density must be > 0")
+        if len(x) != len(y):
+            raise exceptions.PlotlyError("x and y should be a list or array "
+                                         "of the same length")
+        if len(u) != len(v):
+            raise exceptions.PlotlyError("u and v should be a list or array "
+                                         "of the same length")
+
+    @staticmethod
+    def validate_streamline(x, y, **kwargs):
+
+        """
+        streamline specific validations
+
+        Specifically, this checks that x and y are both evenly spaced,
+        and that the package numpy is available.
+
+        See TraceFactory.create_streamline() for params
+
+        :raises: (ImportError) If numpy is not available.
+        :raises: (PlotlyError) If x is not evenly spaced.
+        :raises: (PlotlyError) If y is not evenly spaced.
+        """
+        if _numpy_imported is False:
+            raise ImportError("TraceFactory.create_streamline requires numpy.")
         for index in range(len(x) - 1):
             if ((x[index + 1] - x[index]) -
                (x[1] - x[0])) > .0001:
@@ -1341,30 +1371,6 @@ class TraceFactory(dict):
                (y[1] - y[0])) > .0001:
                 raise exceptions.PlotlyError("y must be a 1 dimensional, "
                                              "evenly spaced array")
-        if len(u) != len(v):
-            raise exceptions.PlotlyError("u and v should both be 2d "
-                                         "arrays with the same "
-                                         "dimensions")
-
-        # TODO: pull validate method out
-    def validate(self):
-        """
-        Validates the user-input arguments,
-
-        Specifically, this checks that scale and arrow_scale are positive
-        and that x, y, u, and v are the same length
-
-        :raises: (ValueError) If scale or arrow_scale is <= 0.
-        :raises: (PlotlyError) If x, y, u, and v are not the same length.
-        """
-        if self.scale <= 0:
-            raise ValueError("scale must be > 0")
-        if self.arrow_scale <= 0:
-            raise ValueError("arrow_scale must be > 0")
-        if (len(self.x) != len(self.y) or len(self.u) != len(self.v) or
-           len(self.x) != len(self.u)):
-            raise exceptions.PlotlyError("x, y, u, and v should all be the "
-                                         "same length (or size if ndarray)")
 
     @staticmethod
     def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
@@ -1387,12 +1393,6 @@ class TraceFactory(dict):
 
         :rtype (trace): returns quiver trace
 
-        :raises (PlotlyError): will happen if x, y, u, and v are not all
-            the same length (or size if ndarray)
-
-        :raises (PlotlyError): will happen if scale or arrow_scale are less
-            than or equal to 0
-
         Example 1: Trivial Quiver
         ```
         # 1 Arrow from (0,0) to (1,1)
@@ -1402,6 +1402,7 @@ class TraceFactory(dict):
         quiver = TraceFactory.create_quiver(x=[0], y=[0],
                                             u=[1], v=[1],
                                             scale=1)
+
         # Plot
         fig=Figure()
         fig['data'].append(quiver)
@@ -1443,12 +1444,16 @@ class TraceFactory(dict):
                                             arrow_scale=.3, angle=math.pi/6,
                                             name='Wind Velocity',
                                             line=Line(width=1))
+
         # Plot
         fig=Figure()
         fig['data'].append(quiver)
         py.iplot(fig, filename='quiver')
         ```
         """
+        TraceFactory.validate(x, y, u, v,
+                              scale, arrow_scale,
+                              **kwargs)
         barb_x, barb_y = _Quiver(x, y, u, v, scale,
                                  arrow_scale, angle).get_barbs()
         arrow_x, arrow_y = _Quiver(x, y, u, v, scale,
@@ -1469,7 +1474,9 @@ class TraceFactory(dict):
         :param (list|ndarray) y: 1 dimensional, evenly spaced list or array
         :param (ndarray) u: 2 dimensional array
         :param (ndarray) v: 2 dimensional array
-        :param (int) density: controls the density of streamlines in plot.
+        :param (float|int) density: controls the density of streamlines in
+            plot. This is multiplied by 30 to scale similiarly to other
+            available streamline functions such as matplotlib.
             Default = 1
         :param (angle in radians) angle: angle of arrowhead. Default = pi/9
         :param (float in [0,1]) arrow_scale: value to scale length of arrowhead
@@ -1529,6 +1536,7 @@ class TraceFactory(dict):
         # Add source point
         point = Scatter(x=[x_s], y=[y_s], mode='markers',
                         marker=Marker(size=14), name='source point')
+
         # Plot
         fig=Figure()
         fig['data'].append(streamline)
@@ -1536,9 +1544,10 @@ class TraceFactory(dict):
         py.iplot(fig, filename='streamline')
         ```
         """
-        TraceFactory.validate_streamline(x, y, u, v,
-                                         density, angle,
-                                         arrow_scale, **kwargs)
+        TraceFactory.validate(x, y, u, v,
+                              density, arrow_scale,
+                              **kwargs)
+        TraceFactory.validate_streamline(x, y)
         streamline_x, streamline_y = _Streamline(x, y, u, v,
                                                  density, angle,
                                                  arrow_scale).sum_streamlines()
@@ -1553,6 +1562,9 @@ class TraceFactory(dict):
 
 
 class _Quiver(TraceFactory):
+    """
+    Refer to TraceFactory.create_quiver() for docstring
+    """
     def __init__(self, x, y, u, v,
                  scale, arrow_scale, angle, **kwargs):
         try:
@@ -1707,6 +1719,9 @@ class _Quiver(TraceFactory):
 
 
 class _Streamline(TraceFactory):
+    """
+    Refer to TraceFactory.create_streamline() for docstring
+    """
     def __init__(self, x, y, u, v,
                  density, angle,
                  arrow_scale, **kwargs):
@@ -1716,24 +1731,26 @@ class _Streamline(TraceFactory):
         self.v = np.array(v)
         self.angle = angle
         self.arrow_scale = arrow_scale
-        self.density = int(30 * density)
+        self.density = int(30 * density)  # Scale similarly to other functions
         self.delta_x = self.x[1] - self.x[0]
         self.delta_y = self.y[1] - self.y[0]
         self.val_x = self.x
         self.val_y = self.y
+
         # Set up spacing
         self.blank = np.zeros((self.density, self.density))
         self.spacing_x = len(self.x) / float(self.density - 1)
         self.spacing_y = len(self.y) / float(self.density - 1)
         self.trajectories = []
+
         # Rescale speed onto axes-coordinates
         self.u = self.u / (self.x[-1] - self.x[0])
         self.v = self.v / (self.y[-1] - self.y[0])
         self.speed = np.sqrt(self.u**2 + self.v**2)
+
         # Rescale u and v for integrations.
         self.u *= len(self.x)
         self.v *= len(self.y)
-        #self.validate()
         self.st_x = []
         self.st_y = []
         self.get_streamlines()
@@ -1867,11 +1884,9 @@ class _Streamline(TraceFactory):
         """
         Get streamlines by building trajectory set.
 
-        :rtype (list of lists) st_x: lists of x-values for each streamline
-        :rtype (list of lists) st_y: lists of y-values for each streamline
         """
-        for indent in range((max(self.density, self.density)) // 2):
-            for xi in range(max(self.density, self.density) - 2 * indent):
+        for indent in range(self.density // 2):
+            for xi in range(self.density - 2 * indent):
                 self.traj(xi + indent, indent)
                 self.traj(xi + indent, self.density - 1 - indent)
                 self.traj(indent, xi + indent)
