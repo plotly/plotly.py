@@ -87,12 +87,3 @@ class TestQuiver(TestCase):
             'type': 'scatter',
             'mode': 'lines', }
         self.assertEqual(quiver, expected_quiver)
-
-
-class TestStreamline(TestCase):
-
-    # create_streamline has numpy dependency-
-    # additional streamline tests in test_optional
-    @raises(ValueError)
-    def test_wrong_arrow_scale():
-        fig = tls.TraceFactory.create_streamline(arrow_scale=0)
