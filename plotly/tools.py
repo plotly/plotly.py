@@ -1589,7 +1589,7 @@ class TraceFactory(dict):
         v = v.T  # Transpose
 
         # Create streamline
-        streamline = TraceFactory.create_streamline(x, y, u, v, arrow_scale= 1)
+        streamline = TraceFactory.create_streamline(x, y, u, v, arrow_scale=.1)
 
         # Plot
         fig=Figure()
@@ -2012,7 +2012,8 @@ class _Streamline(TraceFactory):
         arrow_start_x = np.empty((len(self.st_x)))
         arrow_start_y = np.empty((len(self.st_y)))
         for index in range(len(self.st_x)):
-            arrow_end_x[index] = self.st_x[index][(len(self.st_x[index]) / 3)]
+            arrow_end_x[index] = (self.st_x[index]
+                                  [int(len(self.st_x[index]) / 3)])
             arrow_start_x[index] = (self.st_x[index]
                                     [(len(self.st_x[index]) / 3) - 1])
             arrow_end_y[index] = self.st_y[index][(len(self.st_y[index]) / 3)]
