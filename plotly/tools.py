@@ -2015,10 +2015,11 @@ class _Streamline(TraceFactory):
             arrow_end_x[index] = (self.st_x[index]
                                   [int(len(self.st_x[index]) / 3)])
             arrow_start_x[index] = (self.st_x[index]
-                                    [(len(self.st_x[index]) / 3) - 1])
-            arrow_end_y[index] = self.st_y[index][(len(self.st_y[index]) / 3)]
+                                    [(int(len(self.st_x[index]) / 3)) - 1])
+            arrow_end_y[index] = (self.st_y[index]
+                                  [int(len(self.st_y[index]) / 3)])
             arrow_start_y[index] = (self.st_y[index]
-                                    [(len(self.st_y[index]) / 3) - 1])
+                                    [(int(len(self.st_y[index]) / 3)) - 1])
 
         dif_x = arrow_end_x - arrow_start_x
         dif_y = arrow_end_y - arrow_start_y
