@@ -1,1 +1,3 @@
-from . graph_widget import GraphWidget
+from __future__ import absolute_import
+
+from plotly.widgets.graph_widget import GraphWidget

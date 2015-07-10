@@ -8,11 +8,8 @@ A module intended for use with Nose.
 from __future__ import absolute_import
 
 from nose.tools import raises
-from plotly.graph_objs import *
-from plotly.exceptions import (PlotlyDictKeyError,
-                               PlotlyDictValueError,
-                               PlotlyDataTypeError,
-                               PlotlyListEntryError)
+from plotly.graph_objs import ErrorX, ErrorY
+from plotly.exceptions import PlotlyDictKeyError
 
 
 def test_instantiate_error_x():

@@ -4,9 +4,9 @@ Tools
 A module for converting from mpl language to plotly language.
 
 """
-
 import math
 import warnings
+
 import matplotlib.dates
 import pytz
 

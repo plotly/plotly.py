@@ -10,9 +10,9 @@ from __future__ import absolute_import
 
 import warnings
 
-from . mplexporter import Renderer
-from . import mpltools
 import plotly.graph_objs as go
+from plotly.matplotlylib.mplexporter import Renderer
+from plotly.matplotlylib import mpltools
 
 
 # Warning format

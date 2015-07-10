@@ -1,10 +1,13 @@
+from __future__ import absolute_import
+
 import matplotlib
 # Force matplotlib to not use any Xwindows backend.
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-from plotly.tests.test_optional.optional_utils import compare_dict, run_fig
-from .data.axis_scales import *
+from plotly.tests.utils import compare_dict
+from plotly.tests.test_optional.optional_utils import run_fig
+from plotly.tests.test_optional.test_matplotlylib.data.axis_scales import *
 
 
 def test_even_linear_scale():

@@ -1,4 +1,7 @@
-from plotly.graph_objs import *
+from __future__ import absolute_import
+
+from plotly.graph_objs import (Annotation, Annotations, Data, Figure, Font,
+                               Layout, Line, Margin, Scatter, XAxis, YAxis)
 
 ANNOTATIONS = Figure(
     data=Data([

@@ -1,25 +1,25 @@
-from nose.tools import raises
-from nose import with_setup
-from nose.plugins.attrib import attr
+"""
+Module to test plotly.utils with optional dependencies.
 
+"""
+from __future__ import absolute_import
+
+import datetime
+import json
+import math
+from datetime import datetime as dt
 from unittest import TestCase
 
-import math
-import pytz
-from datetime import datetime as dt
-import datetime
-import numpy as np
-import json
-import pandas as pd
-import sys
-from pandas.util.testing import assert_series_equal
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from pandas.util.testing import assert_series_equal
+import pytz
 
 from plotly import utils
-from plotly.grid_objs import Column
 from plotly.graph_objs import Scatter, Scatter3d, Figure, Data
+from plotly.grid_objs import Column
 from plotly.matplotlylib import Exporter, PlotlyRenderer
-from plotly.plotly import plot
 
 
 class TestJSONEncoder(TestCase):

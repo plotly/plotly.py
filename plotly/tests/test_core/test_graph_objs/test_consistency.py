@@ -6,6 +6,8 @@ A module intended for use with Nose. Check that items in graph_objs_meta.json
 are properly defined in both graph_objs.py and included in the mapping dicts.
 
 """
+from __future__ import absolute_import
+
 from plotly.graph_objs import graph_objs
 
 

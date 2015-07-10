@@ -1,10 +1,12 @@
+from __future__ import absolute_import
+
 import matplotlib
 # Force matplotlib to not use any Xwindows backend.
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 from plotly.tests.test_optional.optional_utils import run_fig
-from .data.data import *
+from plotly.tests.test_optional.test_matplotlylib.data.data import *
 
 
 def test_line_data():

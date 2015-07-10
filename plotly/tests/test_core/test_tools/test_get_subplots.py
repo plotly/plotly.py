@@ -1,28 +1,35 @@
-import plotly
-from plotly.graph_objs import *
-import plotly.tools as tls
+from __future__ import absolute_import
+
 from nose.tools import raises
+
+from plotly.graph_objs import (Data, Figure, Layout, XAxis, YAxis)
+import plotly.tools as tls
 
 
 @raises(Exception)
 def test_non_integer_rows():
-   fig = tls.get_subplots(rows=2.1)
+    tls.get_subplots(rows=2.1)
+
 
 @raises(Exception)
 def test_less_than_zero_rows():
-   fig = tls.make_subplots(rows=-2)
+    tls.make_subplots(rows=-2)
+
 
 @raises(Exception)
 def test_non_integer_columns():
-   fig = tls.get_subplots(columns=2/3)
+    tls.get_subplots(columns=2/3)
+
 
 @raises(Exception)
 def test_less_than_zero_cols():
-   fig = tls.make_subplots(columns=-10)
+    tls.make_subplots(columns=-10)
+
 
 @raises(Exception)
 def test_wrong_kwarg():
-   fig = tls.get_subplots(stuff='no gonna work')
+    tls.get_subplots(stuff='no gonna work')
+
 
 def test_get_single_plot():
     expected = Figure(
@@ -39,6 +46,7 @@ def test_get_single_plot():
         )
     )
     assert tls.get_subplots() == expected
+
 
 def test_two_row():
     expected = Figure(
@@ -89,6 +97,7 @@ def test_two_column():
     )
 
     assert tls.get_subplots(1, 2) == expected
+
 
 def test_a_lot():
     expected = Figure(
@@ -321,11 +330,10 @@ def test_a_lot():
         )
     )
 
-    fig = tls.get_subplots(4, 7,
-                            horizontal_spacing=0.1,
-                            vertical_spacing=0.15)
+    fig = tls.get_subplots(4, 7, horizontal_spacing=0.1, vertical_spacing=0.15)
 
     assert fig == expected
+
 
 def test_spacing():
     expected = Figure(
@@ -387,6 +395,7 @@ def test_spacing():
                            vertical_spacing=.1)
 
     assert fig == expected
+
 
 def test_default_spacing():
     expected = Figure(
