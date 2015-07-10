@@ -13,11 +13,10 @@ import os.path
 import warnings
 
 import six
-<<<<<<< HEAD
+
 import requests
 import math
-=======
->>>>>>> master
+
 
 from plotly import utils
 from plotly import exceptions
