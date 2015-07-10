@@ -90,6 +90,6 @@ class TestStreamline(TestCase):
             'type': 'scatter',
             'mode': 'lines'
         }
-        self.assertAlmostEqual(strmln['y'][0:100], expected_strmln_0_100['y'])
-        self.assertAlmostEqual(strmln['x'][0:100], expected_strmln_0_100['x'])
+        self.assertListEqual(strmln['y'][0:100], expected_strmln_0_100['y'])
+        self.assertListEqual(strmln['x'][0:100], expected_strmln_0_100['x'])
 
