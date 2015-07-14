@@ -1395,26 +1395,32 @@ def return_figure_from_figure_or_data(figure_or_data, validate_figure):
 
 class TraceFactory(dict):
 
-    # use as validate method for all traces (not just streamline)
     @staticmethod
-    def validate(x, y, u, v,
-                 scale=.1, density=1,
-                 arrow_scale=.3, **kwargs):
+    def validate_shared(x, y, u, v,
+                        scale=.1, density=1,
+                        arrow_scale=.3, **kwargs):
         """
-        Validates the user-input arguments for quiver and streamline,
+        Validates the user-input arguments for charts with shared arguments,
 
-        Specifically, that density, scale, and arrow_scale are positive
-        and that x and y and u and v are the same length.
+        Specifically for quiver and streamline, that density, scale,
+        and arrow_scale are positive and that x and y and u and v are
+        the same length.
 
-        Refer to TraceFactory.create_streamline() or
-        TraceFactory.create_quiver() for params
+        Specifically for ohlc charts that open, high, low, and close lists
+        are the same length.
+
+        Refer to TraceFactory.create_streamline(),
+        TraceFactory.create_quiver(), or
+        TraceFactory.create_ohlc_increasing for params
 
         :raises: (ValueError) If scale is <= 0.
         :raises: (ValueError) If arrow_scale is <= 0.
-        v:raises: (ValueError) If density is <= 0.
+        :raises: (ValueError) If density is <= 0.
         :raises: (PlotlyError) If x and y are not lists or ndarrays
             of the same length.
         :raises: (PlotlyError) If u and v are not lists or ndarrays
+            of the same length.
+        :raises: (PlotlyError) If op, hi, lo, and cl are not lists
             of the same length.
         """
 
@@ -1445,6 +1451,8 @@ class TraceFactory(dict):
         :raises: (ImportError) If numpy is not available.
         :raises: (PlotlyError) If x is not evenly spaced.
         :raises: (PlotlyError) If y is not evenly spaced.
+        :raises: (PlotlyError) If open, high, low, and close
+            are not the same length.
         """
         if _numpy_imported is False:
             raise ImportError("TraceFactory.create_streamline requires numpy.")
@@ -1458,6 +1466,22 @@ class TraceFactory(dict):
                (y[1] - y[0])) > .0001:
                 raise exceptions.PlotlyError("y must be a 1 dimensional, "
                                              "evenly spaced array")
+
+    @staticmethod
+    def flatten(array):
+        """
+        Uses list comprehension to flatten array
+
+        :param (array): An iterable to flatten
+        :raises (PlotlyError): If iterable is not nested.
+        :rtype (list): The flattened list.
+        """
+        try:
+            return [item for sublist in array for item in sublist]
+        except TypeError:
+            raise exceptions.PlotlyError("Your data array could not be "
+                                         "flattened! Make sure x, y, u, and v "
+                                         "are lists or numpy ndarrays!")
 
     @staticmethod
     def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
@@ -1538,9 +1562,9 @@ class TraceFactory(dict):
         py.iplot(fig, filename='quiver')
         ```
         """
-        TraceFactory.validate(x, y, u, v,
-                              scale, arrow_scale,
-                              **kwargs)
+        TraceFactory.validate_shared(x, y, u, v,
+                                     scale, arrow_scale,
+                                     **kwargs)
         barb_x, barb_y = _Quiver(x, y, u, v, scale,
                                  arrow_scale, angle).get_barbs()
         arrow_x, arrow_y = _Quiver(x, y, u, v, scale,
@@ -1631,9 +1655,9 @@ class TraceFactory(dict):
         py.iplot(fig, filename='streamline')
         ```
         """
-        TraceFactory.validate(x, y, u, v,
-                              density, arrow_scale,
-                              **kwargs)
+        TraceFactory.validate_shared(x, y, u, v,
+                                     density, arrow_scale,
+                                     **kwargs)
         TraceFactory.validate_streamline(x, y)
         streamline_x, streamline_y = _Streamline(x, y, u, v,
                                                  density, angle,
@@ -1647,6 +1671,192 @@ class TraceFactory(dict):
                              mode='lines', **kwargs)
         return streamline
 
+    @staticmethod
+    def create_ohlc_increasing(op, hi, lo, cl, **kwargs):
+        """
+        Returns data for the increasing periods of the ohlc chart
+
+        To create a full ohlc chart use both create_ohlc_increase
+        and create_ohlc_decrease
+
+        :param (list) op: opening prices
+        :param (list) hi: high prices
+        :param (list) lo: low prices
+        :param (list) cl: closing prices
+        :param (class) kwargs: kwargs passed through plotly.graph_objs.Scatter
+            for more information on valid kwargs call
+            help(plotly.graph_objs.Scatter)
+
+        :rtype: (trace) returns ohlc data trace for increasing periods
+
+        Example 1: Plot ohlc chart increasing periods
+        ```
+        import plotly.plotly as py
+        import plotly.tools as tls
+        from plotly.graph_objs import *
+
+        # Add data
+        open_data = [33.0, 33.3, 33.5, 33.0, 34.1]
+        high_data = [33.1, 33.3, 33.6, 33.2, 34.8]
+        low_data = [32.7, 32.7, 32.8, 32.6, 32.8]
+        close_data = [33.0, 32.9, 33.3, 33.1, 33.1]
+
+        # Create ohlc increasing periods
+        ohlc_increasing = TraceFactory.create_ohlc_increase(open_data,
+                                                            high_data,
+                                                            low_data,
+                                                            close_data)
+
+        # Plot
+        fig=Figure()
+        fig['data'].append(ohlc_increasing)
+        url = py.plot(fig, filename='ohlc_increasing')
+        ```
+
+        Example 2: Plot ohlc chart increasing and decreasing periods
+        ```
+        import plotly.plotly as py
+        import plotly.tools as tls
+        from plotly.graph_objs import *
+
+        # Add data
+        open_data = [33.0, 33.3, 33.5, 33.0, 34.1]
+        high_data = [33.1, 33.3, 33.6, 33.2, 34.8]
+        low_data = [32.7, 32.7, 32.8, 32.6, 32.8]
+        close_data = [33.0, 32.9, 33.3, 33.1, 33.1]
+
+        # Create ohlc increasing periods
+        ohlc_increasing = TraceFactory.create_ohlc_increase(open_data,
+                                                            high_data,
+                                                            low_data,
+                                                            close_data)
+
+        # Create ohlc decreasing periods
+        ohlc_decreasing = TraceFactory.create_ohlc_decrease(open_data,
+                                                            high_data,
+                                                            low_data,
+                                                            close_data)
+
+        # Plot
+        fig=Figure()
+        fig['data'].append(ohlc_increasing)
+        fig['data'].append(ohlc_decreasing)
+        url = py.plot(fig, filename='ohlc_increasing_decreasing')
+        ```
+
+        Example 3: Plot ohlc chart with date labels
+        ```
+        import plotly.plotly as py
+        import plotly.tools as tls
+        from plotly.graph_objs import *
+
+        # Add data
+        open_data = [33.0, 33.3, 33.5, 33.0, 34.1]
+        high_data = [33.1, 33.3, 33.6, 33.2, 34.8]
+        low_data = [32.7, 32.7, 32.8, 32.6, 32.8]
+        close_data = [33.0, 32.9, 33.3, 33.1, 33.1]
+        dates = ['3/09', '6/09', '9/09', '12/09', '3/10']
+
+        # Create ohlc increasing periods
+        ohlc_increasing = TraceFactory.create_ohlc_increase(open_data,
+                                                            high_data,
+                                                            low_data,
+                                                            close_data)
+
+        # Create ohlc decreasing periods
+        ohlc_decreasing = TraceFactory.create_ohlc_decrease(open_data,
+                                                            high_data,
+                                                            low_data,
+                                                            close_data)
+
+        # Create layout with dates as x-axis labels
+        layout = dict(xaxis = dict(ticktext = dates,
+                      tickvals = range(1, len(dates)+1)))
+
+        # Plot
+        data=Data([ohlc_increasing, ohlc_decreasing])
+        fig = { 'data':data, 'layout':layout }
+
+        url = py.plot(fig, filename='ohlc_chart', validate=False)
+        ```
+
+        """
+
+        # TraceFactory.validate_ohlc(op, hi, lo, cl, **kwargs)
+
+        (flat_increasing_x,
+         flat_increasing_y,
+         text_increasing) = _OHLC(op, hi, lo, cl).get_increasing()
+
+        ohlc_increasing = Scatter(x=flat_increasing_x,
+                                  y=flat_increasing_y,
+                                  mode='lines',
+                                  name='Increasing',
+                                  line=Line(color='green'),
+                                  text=text_increasing,
+                                  **kwargs)
+        return ohlc_increasing
+
+    @staticmethod
+    def create_ohlc_decreasing(op, hi, lo, cl, **kwargs):
+        """
+        Returns data for the decreasing periods of the ohlc chart
+
+        To create a full ohlc chart use both create_ohlc_decrease
+        and create_ohlc_increase
+
+        :param (list) op: opening prices
+        :param (list) hi: high prices
+        :param (list) op: low prices
+        :param (list) cl: closing prices
+        :param (class) kwargs: kwargs passed through plotly.graph_objs.Scatter
+            for more information on valid kwargs call
+            help(plotly.graph_objs.Scatter)
+
+        :rtype: (trace) returns ohlc data trace for decreasing periods
+
+        Example 1: Plot ohlc chart decreasing periods
+        ```
+        import plotly.plotly as py
+        import plotly.tools as tls
+        from plotly.graph_objs import *
+
+        # Add data
+        open_data = [33.0, 33.3, 33.5, 33.0, 34.1]
+        high_data = [33.1, 33.3, 33.6, 33.2, 34.8]
+        low_data = [32.7, 32.7, 32.8, 32.6, 32.8]
+        close_data = [33.0, 32.9, 33.3, 33.1, 33.1]
+
+        # Create ohlc decreasing periods
+        ohlc_decreasing = TraceFactory.create_ohlc_decrease(open_data,
+                                                            high_data,
+                                                            low_data,
+                                                            close_data)
+
+        # Plot
+        fig=Figure()
+        fig['data'].append(ohlc_decreasing)
+        url = py.plot(fig, filename='ohlc_decreasing')
+        ```
+
+        For more examples refer to TraceFactory.create_ohlc_increase()
+        """
+
+        # TraceFactory.validate_ohlc(op, hi, lo, cl, **kwargs)
+
+        (flat_decreasing_x,
+         flat_decreasing_y,
+         text_decreasing) = _OHLC(op, hi, lo, cl).get_decreasing()
+
+        ohlc_decreasing = Scatter(x=flat_decreasing_x,
+                                  y=flat_decreasing_y,
+                                  mode='lines',
+                                  name="Decreasing",
+                                  line=Line(color='red'),
+                                  text=text_decreasing,
+                                  **kwargs)
+        return ohlc_decreasing
+
 
 class _Quiver(TraceFactory):
     """
@@ -1655,22 +1865,22 @@ class _Quiver(TraceFactory):
     def __init__(self, x, y, u, v,
                  scale, arrow_scale, angle, **kwargs):
         try:
-            x = self.flatten(x)
+            x = TraceFactory.flatten(x)
         except exceptions.PlotlyError:
             pass
 
         try:
-            y = self.flatten(y)
+            y = TraceFactory.flatten(y)
         except exceptions.PlotlyError:
             pass
 
         try:
-            u = self.flatten(u)
+            u = TraceFactory.flatten(u)
         except exceptions.PlotlyError:
             pass
 
         try:
-            v = self.flatten(v)
+            v = TraceFactory.flatten(v)
         except exceptions.PlotlyError:
             pass
 
@@ -1686,21 +1896,6 @@ class _Quiver(TraceFactory):
         self.scale_uv()
         barb_x, barb_y = self.get_barbs()
         arrow_x, arrow_y = self.get_quiver_arrows()
-
-    def flatten(self, array):
-        """
-        Uses list comprehension to flatten array
-
-        :param (array): An iterable to flatten
-        :raises (PlotlyError): If iterable is not nested.
-        :rtype (list): The flattened list.
-        """
-        try:
-            return [item for sublist in array for item in sublist]
-        except TypeError:
-            raise exceptions.PlotlyError("Your data array could not be "
-                                         "flattened! Make sure x, y, u, and v "
-                                         "are lists or numpy ndarrays!")
 
     def scale_uv(self):
         """
@@ -2081,4 +2276,78 @@ class _Streamline(TraceFactory):
         streamline_x = sum(self.st_x, [])
         streamline_y = sum(self.st_y, [])
         return streamline_x, streamline_y
+
+
+class _OHLC(dict):
+    """
+    Refer to TraceFactory.create_ohlc_increasing() for docstring.
+    """
+
+    def __init__(self, op, hi, lo, cl, **kwargs):
+        self.op = op
+        self.hi = hi
+        self.lo = lo
+        self.cl = cl
+        self.empty = [None] * len(op)
+        self.all_x = []
+        self.all_y = []
+        self.increasing_x = []
+        self.increasing_y = []
+        self.decreasing_x = []
+        self.decreasing_y = []
+        self.get_all_xy()
+        self.separate_increasing_decreasing()
+        self.get_increasing()
+        self.get_decreasing()
+
+    def get_all_xy(self):
+        """
+        Zip data to create OHLC shape
+        """
+        self.all_y = list(zip(self.op, self.op, self.hi,
+                              self.lo, self.cl, self.cl, self.empty))
+        self.all_x = [[x + .8, x + 1, x + 1, x + 1, x + 1, x + 1.2, None]
+                      for x in range(len(self.op))]
+
+    def separate_increasing_decreasing(self):
+        """
+        Separate data into two groups: increasing and decreasing
+
+        (1) Increasing, where close - open is positive and
+        (2) Decreasing, where close - open is negative
+        """
+
+        for index in range(len(self.op)):
+            if self.cl[index] is None:
+                pass
+            elif self.cl[index] - self.op[index] > 0:
+                self.increasing_x.append(self.all_x[index])
+                self.increasing_y.append(self.all_y[index])
+            else:
+                self.decreasing_x.append(self.all_x[index])
+                self.decreasing_y.append(self.all_y[index])
+
+    def get_increasing(self):
+        """
+        Flatten increasing data and get increasing text
+        """
+        flat_increasing_x = TraceFactory.flatten(self.increasing_x)
+        flat_increasing_y = TraceFactory.flatten(self.increasing_y)
+        text_increasing = (("Open", "Open", "High",
+                            "Low", "Close", "Close", '')
+                           * (len(self.increasing_x)))
+
+        return flat_increasing_x, flat_increasing_y, text_increasing
+
+    def get_decreasing(self):
+        """
+        Flatten decreasing data and get decreasing text
+        """
+        flat_decreasing_x = TraceFactory.flatten(self.decreasing_x)
+        flat_decreasing_y = TraceFactory.flatten(self.decreasing_y)
+        text_decreasing = (("Open", "Open", "High",
+                            "Low", "Close", "Close", '')
+                           * (len(self.decreasing_x)))
+
+        return flat_decreasing_x, flat_decreasing_y, text_decreasing
 
