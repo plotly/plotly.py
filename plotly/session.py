@@ -26,7 +26,8 @@ CONFIG_KEYS = {
     'plotly_domain': six.string_types,
     'plotly_streaming_domain': six.string_types,
     'plotly_api_domain': six.string_types,
-    'plotly_ssl_verification': bool
+    'plotly_ssl_verification': bool,
+    'plot_option':{'world_readable': bool}
 }
 
 PLOT_OPTIONS = {
@@ -52,6 +53,7 @@ def sign_in(username, api_key, **kwargs):
     :param (str|optional) plotly_streaming_domain:
     :param (str|optional) plotly_api_domain:
     :param (str|optional) plotly_ssl_verification:
+    :param (dict|optional) plot_option:
 
     """
     # TODO: verify these _credentials with plotly

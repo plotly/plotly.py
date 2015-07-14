@@ -50,7 +50,7 @@ __all__ = None
 DEFAULT_PLOT_OPTIONS = {
     'filename': "plot from API",
     'fileopt': "new",
-    'world_readable': True,
+    'world_readable': False,
     'auto_open': True,
     'validate': True
 }

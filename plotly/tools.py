@@ -52,7 +52,8 @@ _FILE_CONTENT = {CREDENTIALS_FILE: {'username': '',
                  CONFIG_FILE: {'plotly_domain': 'https://plot.ly',
                                'plotly_streaming_domain': 'stream.plot.ly',
                                'plotly_api_domain': 'https://api.plot.ly',
-                               'plotly_ssl_verification': True}}
+                               'plotly_ssl_verification': True,
+                               'plot_option': {'world_readable': False}}}
 
 try:
     os.mkdir(TEST_DIR)
@@ -145,7 +146,8 @@ def reset_credentials_file():
 def set_config_file(plotly_domain=None,
                     plotly_streaming_domain=None,
                     plotly_api_domain=None,
-                    plotly_ssl_verification=None):
+                    plotly_ssl_verification=None,
+                    plot_option=None):
     """Set the keyword-value pairs in `~/.plotly/.config`.
 
     """
@@ -162,6 +164,9 @@ def set_config_file(plotly_domain=None,
         settings['plotly_api_domain'] = plotly_api_domain
     if isinstance(plotly_ssl_verification, (six.string_types, bool)):
         settings['plotly_ssl_verification'] = plotly_ssl_verification
+    if isinstance(plot_option, dict):
+        settings['plot_option'] = plot_option
+        session.update_session_plot_options('plot_option')
     utils.save_json_dict(CONFIG_FILE, settings)
     ensure_local_plotly_files()  # make sure what we just put there is OK
 
