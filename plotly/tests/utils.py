@@ -10,31 +10,31 @@ class PlotlyTestCase(TestCase):
     # parent test case to assist with clean up of local credentials/config
 
     def __init__(self, **kwargs):
-        self._credentials = None
-        self._config = None
+        self._file_credentials = None
+        self._file_config = None
         super(PlotlyTestCase, self).__init__(**kwargs)
 
     def setUp(self):
-        self.stash_credentials_and_config()
+        self.stash_file_credentials_and_config()
 
     def tearDown(self):
-        self.restore_credentials_and_config()
+        self.restore_file_credentials_and_config()
 
-    def stash_credentials_and_config(self):
+    def stash_file_credentials_and_config(self):
         if _file_permissions:
             with open(CREDENTIALS_FILE, 'r') as f:
-                self._credentials = json.load(f)
+                self._file_credentials = json.load(f)
             with open(CONFIG_FILE, 'r') as f:
-                self._config = json.load(f)
+                self._file_config = json.load(f)
 
-    def restore_credentials_and_config(self):
+    def restore_file_credentials_and_config(self):
         if _file_permissions:
-            if self._credentials is not None:
+            if self._file_credentials is not None:
                 with open(CREDENTIALS_FILE, 'w') as f:
-                    json.dump(self._credentials, f)
-            if self._config is not None:
+                    json.dump(self._file_credentials, f)
+            if self._file_config is not None:
                 with open(CONFIG_FILE, 'w') as f:
-                    json.load(self._config, f)
+                    json.load(self._file_config, f)
 
 
 def compare_dict(dict1, dict2, equivalent=True, msg='', tol=10e-8):
