@@ -1,7 +1,9 @@
+import copy
 import json
 from numbers import Number as Num
 from unittest import TestCase
 
+from plotly import session
 from plotly.tools import CREDENTIALS_FILE, CONFIG_FILE, _file_permissions
 
 
@@ -12,6 +14,7 @@ class PlotlyTestCase(TestCase):
     def __init__(self, **kwargs):
         self._file_credentials = None
         self._file_config = None
+        self._session = None
         super(PlotlyTestCase, self).__init__(**kwargs)
 
     def setUp(self):
@@ -36,6 +39,12 @@ class PlotlyTestCase(TestCase):
                 with open(CONFIG_FILE, 'w') as f:
                     json.load(self._file_config, f)
 
+    def stash_session(self):
+        self._session = copy.deepcopy(session._session)
+
+    def restore_session(self):
+        session._session.clear()  # clear and update to preserve references.
+        session._session.update(self._session)
 
 def compare_dict(dict1, dict2, equivalent=True, msg='', tol=10e-8):
     for key in dict1:
