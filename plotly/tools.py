@@ -53,7 +53,7 @@ _FILE_CONTENT = {CREDENTIALS_FILE: {'username': '',
                                'plotly_streaming_domain': 'stream.plot.ly',
                                'plotly_api_domain': 'https://api.plot.ly',
                                'plotly_ssl_verification': True,
-                               'plot_option': {'world_readable': False}}}
+                               'plot_options': {'world_readable': False}}}
 
 try:
     os.mkdir(TEST_DIR)
@@ -147,7 +147,7 @@ def set_config_file(plotly_domain=None,
                     plotly_streaming_domain=None,
                     plotly_api_domain=None,
                     plotly_ssl_verification=None,
-                    plot_option=None):
+                    plot_options=None):
     """Set the keyword-value pairs in `~/.plotly/.config`.
 
     """
@@ -164,25 +164,25 @@ def set_config_file(plotly_domain=None,
         settings['plotly_api_domain'] = plotly_api_domain
     if isinstance(plotly_ssl_verification, (six.string_types, bool)):
         settings['plotly_ssl_verification'] = plotly_ssl_verification
-    if isinstance(plot_option, dict):
-        settings['plot_option'] = plot_option
-        session.update_session_plot_options('plot_option')
+    if isinstance(plot_options, dict):
+        settings['plot_options'] = plot_options
+        session.update_session_plot_options(**plot_options)
     utils.save_json_dict(CONFIG_FILE, settings)
     ensure_local_plotly_files()  # make sure what we just put there is OK
 
 
-def get_config_file(*args):
-    """Return specified args from `~/.plotly_credentials`. as dict.
+def get_config_file(**kwargs):
+    """Return specified args from `~/.plotly/.config`. as dict.
 
     Returns all if no arguments are specified.
 
     Example:
-        get_credentials_file('username')
+        get_credentials_file('plotly_domain')
 
     """
     if _file_permissions:
         ensure_local_plotly_files()  # make sure what's there is OK
-        return utils.load_json_dict(CONFIG_FILE, *args)
+        return utils.load_json_dict(CONFIG_FILE, **kwargs)
     else:
         return _FILE_CONTENT[CONFIG_FILE]
 

@@ -27,7 +27,7 @@ CONFIG_KEYS = {
     'plotly_streaming_domain': six.string_types,
     'plotly_api_domain': six.string_types,
     'plotly_ssl_verification': bool,
-    'plot_option':{'world_readable': bool}
+    'plot_options': {'world_readable': bool}
 }
 
 PLOT_OPTIONS = {
