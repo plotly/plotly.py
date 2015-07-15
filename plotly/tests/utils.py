@@ -46,6 +46,7 @@ class PlotlyTestCase(TestCase):
         session._session.clear()  # clear and update to preserve references.
         session._session.update(self._session)
 
+
 def compare_dict(dict1, dict2, equivalent=True, msg='', tol=10e-8):
     for key in dict1:
         if key not in dict2:
