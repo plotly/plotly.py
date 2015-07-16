@@ -1,10 +1,9 @@
-from unittest import TestCase
-
 from plotly import tools
 from plotly import session
+from plotly.tests.utils import PlotlyTestCase
 
 
-class FileToolsTest(TestCase):
+class FileToolsTest(PlotlyTestCase):
 
     def test_set_config_file_all_entries(self):
 
