@@ -37,7 +37,7 @@ class PlotlyTestCase(TestCase):
                     json.dump(self._file_credentials, f)
             if self._file_config is not None:
                 with open(CONFIG_FILE, 'w') as f:
-                    json.load(self._file_config, f)
+                    json.dump(self._file_config, f)
 
     def stash_session(self):
         self._session = copy.deepcopy(session._session)
