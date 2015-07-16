@@ -1,7 +1,6 @@
 from unittest import TestCase
 
-from plotly import tools
-from plotly import session
+from plotly import tools, session
 
 
 class FileToolsTest(TestCase):
@@ -53,7 +52,7 @@ class FileToolsTest(TestCase):
         kwargs = {'plot_option': False}
         self.assertRaises(TypeError, tools.set_config_file, **kwargs)
 
-    def reset_config_file_test(self):
+    def test_reset_config_file(self):
 
         # Check reset_config and get_config return the same values
 
