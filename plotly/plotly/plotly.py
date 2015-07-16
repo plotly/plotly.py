@@ -16,34 +16,21 @@ and ploty's servers.
 """
 from __future__ import absolute_import
 
-import sys
-import warnings
-import copy
-import os
-import six
 import base64
+import copy
+import json
+import os
+import warnings
+
 import requests
-from requests.auth import HTTPBasicAuth
+import six
+import six.moves
 
-if sys.version[:1] == '2':
-    from urlparse import urlparse
-else:
-    from urllib.parse import urlparse
-
-if sys.version[:3] == '2.6':
-    import simplejson as json
-else:
-    import json
-
+from plotly import exceptions, tools, utils, version
 from plotly.plotly import chunked_requests
-from plotly import utils
-from plotly import tools
-from plotly import exceptions
-from plotly import version
 from plotly.session import (sign_in, update_session_plot_options,
                             get_session_plot_options, get_session_credentials,
                             get_session_config)
-
 
 __all__ = None
 
@@ -584,12 +571,9 @@ class image:
                 "https://plot.ly/python/static-image-export/"
             )
 
-        credentials = get_credentials()
-        validate_credentials(credentials)
-        username, api_key = credentials['username'], credentials['api_key']
-        headers = {'Plotly-Version': version.__version__,
-                   'Content-Type': 'application/json',
-                   'Plotly-Client-Platform': 'python'}
+        headers = _api_v2.headers()
+        headers['plotly_version'] = version.__version__
+        headers['content-type'] = 'application/json'
 
         payload = {'figure': figure, 'format': format}
         if width is not None:
@@ -602,7 +586,6 @@ class image:
         res = requests.post(
             url, data=json.dumps(payload, cls=utils.PlotlyJSONEncoder),
             headers=headers, verify=get_config()['plotly_ssl_verification'],
-            auth=HTTPBasicAuth(username, api_key)
         )
 
         headers = res.headers
@@ -1163,7 +1146,7 @@ class _api_v2:
         else:
             supplied_arg_name = supplied_arg_names.pop()
             if supplied_arg_name == 'grid_url':
-                path = urlparse(grid_url).path
+                path = six.moves.urllib.parse.urlparse(grid_url).path
                 file_owner, file_id = path.replace("/~", "").split('/')[0:2]
                 return '{0}:{1}'.format(file_owner, file_id)
             else:
@@ -1199,16 +1182,27 @@ class _api_v2:
     @classmethod
     def headers(cls):
         credentials = get_credentials()
-        # todo, validate here?
-        un, api_key = credentials['username'], credentials['api_key']
-        encoded_un_key_pair = base64.b64encode(
-            six.b('{0}:{1}'.format(un, api_key))
-        ).decode('utf8')
 
-        return {
-            'authorization': 'Basic ' + encoded_un_key_pair,
+        # todo, validate here?
+        username, api_key = credentials['username'], credentials['api_key']
+        encoded_api_auth = base64.b64encode(six.b('{0}:{1}'.format(
+            username, api_key))).decode('utf8')
+
+        headers = {
             'plotly-client-platform': 'python {0}'.format(version.__version__)
         }
+
+        if get_config()['plotly_proxy_authorization']:
+            proxy_username = credentials['proxy_username']
+            proxy_password = credentials['proxy_password']
+            encoded_proxy_auth = base64.b64encode(six.b('{0}:{1}'.format(
+                proxy_username, proxy_password))).decode('utf8')
+            headers['authorization'] = 'Basic ' + encoded_proxy_auth
+            headers['plotly-authorization'] = 'Basic ' + encoded_api_auth
+        else:
+            headers['authorization'] = 'Basic ' + encoded_api_auth
+
+        return headers
 
 
 def validate_credentials(credentials):

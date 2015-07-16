@@ -1,8 +1,9 @@
 from __future__ import absolute_import
 
-import plotly.tools as tls
 from nose.tools import raises
+
 from plotly.exceptions import PlotlyError
+import plotly.tools as tls
 
 
 def test_validate_valid_fig():

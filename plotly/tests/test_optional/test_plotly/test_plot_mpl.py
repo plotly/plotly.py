@@ -7,13 +7,15 @@ A module intended for use with Nose.
 """
 from __future__ import absolute_import
 
-from plotly.plotly import plotly as py
-from plotly import exceptions
-from nose.tools import raises
 import matplotlib
+
 # Force matplotlib to not use any Xwindows backend.
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+from nose.tools import raises
+
+from plotly import exceptions
+from plotly.plotly import plotly as py
 
 py.sign_in('test-runner', '9h29fe3l0x')
 

@@ -8,8 +8,9 @@ A module intended for use with Nose.
 from __future__ import absolute_import
 
 from nose.tools import raises
-from plotly.graph_objs.graph_objs import PlotlyDict
+
 from plotly.exceptions import PlotlyError
+from plotly.graph_objs.graph_objs import PlotlyDict
 
 
 def test_trivial():
@@ -28,5 +29,5 @@ def test_validate():
 @raises(PlotlyError)
 def test_validate_error():
     pd = PlotlyDict()
-    pd['invalid']='something'
+    pd['invalid'] = 'something'
     pd.validate()

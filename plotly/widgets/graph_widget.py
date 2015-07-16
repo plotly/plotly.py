@@ -1,6 +1,12 @@
-from collections import deque
+"""
+Module to allow Plotly graphs to interact with IPython widgets.
+
+"""
+import json
 import uuid
-import sys
+from collections import deque
+from pkg_resources import resource_string
+
 
 # TODO: protected imports?
 from IPython.html import widgets
@@ -10,13 +16,6 @@ from IPython.display import Javascript, display
 import plotly.plotly.plotly as py
 from plotly import utils, tools
 from plotly.graph_objs import Figure
-from pkg_resources import resource_string
-
-# even though python 2.6 wouldn't be able to run *any* of this...
-if sys.version[:3] == '2.6':
-    import simplejson as json
-else:
-    import json
 
 # Load JS widget code
 # No officially recommended way to do this in any other way

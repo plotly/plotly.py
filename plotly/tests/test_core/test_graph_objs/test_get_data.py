@@ -2,7 +2,8 @@ from __future__ import absolute_import
 
 from unittest import TestCase
 
-from plotly.graph_objs import *
+from plotly.graph_objs import (Data, Figure, Layout, Line, Margin, Marker,
+                               Scatter, XAxis, YAxis)
 
 
 class TestGetData(TestCase):

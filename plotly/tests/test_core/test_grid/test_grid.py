@@ -5,20 +5,19 @@ test_grid:
 A module intended for use with Nose.
 
 """
-
-from nose.tools import raises
-from nose import with_setup
-from nose.plugins.attrib import attr
+from __future__ import absolute_import
 
 import random
 import string
 
-from plotly.graph_objs import Scatter
+from nose import with_setup
+from nose.tools import raises
+
 import plotly.plotly as py
-from plotly.plotly.plotly import _api_v2
-import plotly.tools as tls
-from plotly.grid_objs import Column, Grid
 from plotly.exceptions import InputError, PlotlyRequestError
+from plotly.graph_objs import Scatter
+from plotly.grid_objs import Column, Grid
+from plotly.plotly.plotly import _api_v2
 
 
 def random_filename():
@@ -47,7 +46,7 @@ def upload_and_return_grid():
     return g
 
 
-## Nominal usage
+# Nominal usage
 def test_grid_upload():
     upload_and_return_grid()
 
@@ -68,7 +67,7 @@ def test_grid_upload_in_existing_folder():
     folder = random_filename()
     filename = random_filename()
     py.file_ops.mkdirs(folder)
-    path =(
+    path = (
         'existing folder: {0}/grid in folder {1}'
         .format(folder, filename)
     )
@@ -105,7 +104,7 @@ def test_get_figure_from_references():
     assert(g[0].data == trace['x'])
     assert(g[1].data == trace['y'])
 
-## Test grid args
+# Test grid args
 _grid_id = 'chris:3043'
 _grid = Grid([])
 _grid.id = _grid_id
@@ -129,7 +128,7 @@ def test_overspecified_grid_args():
     _api_v2.parse_grid_id_args(_grid, _grid_url)
 
 
-## Out of order usage
+# Out of order usage
 @raises(InputError)
 def test_scatter_from_non_uploaded_grid():
     c1 = Column([1, 2, 3, 4], 'first column')
@@ -155,7 +154,7 @@ def test_row_append_of_non_uploaded_grid():
     py.grid_ops.append_rows(rows, grid=g)
 
 
-## Input Errors
+# Input Errors
 @raises(InputError)
 def test_unequal_length_rows():
     g = upload_and_return_grid()
@@ -181,7 +180,7 @@ def test_delete_grid():
     py.grid_ops.upload(g, fn, auto_open=False)
 
 
-## Plotly failures
+# Plotly failures
 def test_duplicate_filenames():
     c1 = Column([1, 2, 3, 4], 'first column')
     g = Grid([c1])

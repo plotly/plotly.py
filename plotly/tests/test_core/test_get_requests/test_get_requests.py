@@ -5,16 +5,12 @@ test_get_requests:
 A module intended for use with Nose.
 
 """
-
-import requests
 import copy
-import six
-import sys
+import json
+import requests
 
-if sys.version[:3] == '2.6':
-    import simplejson as json
-else:
-    import json
+import six
+
 
 default_headers = {'plotly-username': '',
                    'plotly-apikey': '',
@@ -151,4 +147,3 @@ def test_valid_request():
     # if figure['data'][0]['x'] != [u'1', u'2', u'3']:
     #     print('ERROR')
     # return res
-

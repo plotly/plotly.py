@@ -5,10 +5,13 @@ This allows users to dynamically change which plotly domain they're using,
 which user they're signed in as, and plotting defaults.
 
 """
+from __future__ import absolute_import
 
 import copy
+
 import six
-from . import exceptions
+
+from plotly import exceptions
 
 _session = {
     'credentials': {},
@@ -45,15 +48,24 @@ def sign_in(username, api_key, **kwargs):
 
     If unspecified, credentials and config are searched for in `.plotly` dir.
 
-    :param (str) username: The username you'd use to sign into Plotly
+    :param (str) username: The username you'd use to sign in to Plotly
     :param (str) api_key: The api key associated with above username
     :param (list|optional) stream_ids: Stream tokens for above credentials
+    :param (str|optional) proxy_username: The un associated with with your Proxy
+    :param (str|optional) proxy_password: The pw associated with your Proxy un
 
     :param (str|optional) plotly_domain:
     :param (str|optional) plotly_streaming_domain:
     :param (str|optional) plotly_api_domain:
+<<<<<<< HEAD
     :param (str|optional) plotly_ssl_verification:
     :param (dict|optional) plot_option:
+||||||| merged common ancestors
+    :param (str|optional) plotly_ssl_verification:
+=======
+    :param (bool|optional) plotly_ssl_verification:
+    :param (bool|optional) plotly_proxy_authorization:
+>>>>>>> afe8b56bb06320a90ce3a404264bc8b3060b87da
 
     """
     # TODO: verify these _credentials with plotly
