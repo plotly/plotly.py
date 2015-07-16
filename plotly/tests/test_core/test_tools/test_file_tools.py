@@ -1,9 +1,20 @@
+<<<<<<< HEAD
 from unittest import TestCase
 
 from plotly import tools, session
+||||||| merged common ancestors
+from unittest import TestCase
+
+from plotly import tools
+from plotly import session
+=======
+from plotly import tools
+from plotly import session
+from plotly.tests.utils import PlotlyTestCase
+>>>>>>> 6f2eb8a4d210809121fe7536e2150ff8f30b8168
 
 
-class FileToolsTest(TestCase):
+class FileToolsTest(PlotlyTestCase):
 
     def test_set_config_file_all_entries(self):
 
