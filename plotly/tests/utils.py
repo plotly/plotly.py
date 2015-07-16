@@ -11,11 +11,11 @@ class PlotlyTestCase(TestCase):
 
     # parent test case to assist with clean up of local credentials/config
 
-    def __init__(self, **kwargs):
+    def __init__(self, *args, **kwargs):
         self._file_credentials = None
         self._file_config = None
         self._session = None
-        super(PlotlyTestCase, self).__init__(**kwargs)
+        super(PlotlyTestCase, self).__init__(*args, **kwargs)
 
     def setUp(self):
         self.stash_file_credentials_and_config()
