@@ -78,7 +78,7 @@ def compare_dict(dict1, dict2, equivalent=True, msg='', tol=10e-8):
 
 
 def comp_nums(num1, num2, tol=10e-8):
-    return abs(num1-num2) < tol
+    return abs(num1 - num2) < tol
 
 
 def comp_num_list(list1, list2, tol=10e-8):
