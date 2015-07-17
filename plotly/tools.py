@@ -1411,7 +1411,7 @@ class TraceFactory(dict):
 
         Refer to TraceFactory.create_streamline(),
         TraceFactory.create_quiver(), or
-        TraceFactory.create_ohlc_increasing for params
+        TraceFactory.create_ohlc_increase for params
 
         :raises: (ValueError) If scale is <= 0.
         :raises: (ValueError) If arrow_scale is <= 0.
@@ -1466,6 +1466,34 @@ class TraceFactory(dict):
                (y[1] - y[0])) > .0001:
                 raise exceptions.PlotlyError("y must be a 1 dimensional, "
                                              "evenly spaced array")
+
+    @staticmethod
+    def validate_ohlc(op, hi, lo, cl, **kwargs):
+        length = len(hi)
+        if any(len(lst) != length for lst in [op, lo, cl]):
+            raise exceptions.PlotlyError("Oops! Your high, open, low, and "
+                                         "close lists should all be the same "
+                                         "length.")
+
+        for lst in [op, lo, cl]:
+            for index in range(len(hi)):
+                if hi[index] < lst[index]:
+                    raise exceptions.PlotlyError("Oops! Looks like some of "
+                                                 "your high values are less "
+                                                 "the corresponding open, "
+                                                 "low, or close values. "
+                                                 "Double check that your data "
+                                                 "is entered in O-H-L-C order")
+
+        for lst in [hi, op, cl]:
+            for index in range(len(lo)):
+                if lo[index] > lst[index]:
+                    raise exceptions.PlotlyError("Oops! Looks like some of "
+                                                 "your low values are greater "
+                                                 "than the corresponding high"
+                                                 ", open, or close values. "
+                                                 "Double check that your data "
+                                                 "is entered in O-H-L-C order")
 
     @staticmethod
     def flatten(array):
@@ -1672,17 +1700,18 @@ class TraceFactory(dict):
         return streamline
 
     @staticmethod
-    def create_ohlc_increasing(op, hi, lo, cl, **kwargs):
+    def create_ohlc_increase(op, hi, lo, cl,
+                             **kwargs):
         """
         Returns data for the increasing periods of the ohlc chart
 
         To create a full ohlc chart use both create_ohlc_increase
         and create_ohlc_decrease
 
-        :param (list) op: opening prices
-        :param (list) hi: high prices
-        :param (list) lo: low prices
-        :param (list) cl: closing prices
+        :param (list) op: opening values
+        :param (list) hi: high values
+        :param (list) lo: low values
+        :param (list) cl: closing values
         :param (class) kwargs: kwargs passed through plotly.graph_objs.Scatter
             for more information on valid kwargs call
             help(plotly.graph_objs.Scatter)
@@ -1702,15 +1731,15 @@ class TraceFactory(dict):
         close_data = [33.0, 32.9, 33.3, 33.1, 33.1]
 
         # Create ohlc increasing periods
-        ohlc_increasing = TraceFactory.create_ohlc_increase(open_data,
-                                                            high_data,
-                                                            low_data,
-                                                            close_data)
+        ohlc_increase = tls.TraceFactory.create_ohlc_increase(open_data,
+                                                              high_data,
+                                                              low_data,
+                                                              close_data)
 
         # Plot
         fig=Figure()
-        fig['data'].append(ohlc_increasing)
-        url = py.plot(fig, filename='ohlc_increasing')
+        fig['data'].append(ohlc_increase)
+        url = py.plot(fig, filename='ohlc_increase')
         ```
 
         Example 2: Plot ohlc chart increasing and decreasing periods
@@ -1726,22 +1755,22 @@ class TraceFactory(dict):
         close_data = [33.0, 32.9, 33.3, 33.1, 33.1]
 
         # Create ohlc increasing periods
-        ohlc_increasing = TraceFactory.create_ohlc_increase(open_data,
-                                                            high_data,
-                                                            low_data,
-                                                            close_data)
+        ohlc_increase = tls.TraceFactory.create_ohlc_increase(open_data,
+                                                              high_data,
+                                                              low_data,
+                                                              close_data)
 
         # Create ohlc decreasing periods
-        ohlc_decreasing = TraceFactory.create_ohlc_decrease(open_data,
-                                                            high_data,
-                                                            low_data,
-                                                            close_data)
+        ohlc_decrease = tls.TraceFactory.create_ohlc_decrease(open_data,
+                                                              high_data,
+                                                              low_data,
+                                                              close_data)
 
         # Plot
         fig=Figure()
-        fig['data'].append(ohlc_increasing)
-        fig['data'].append(ohlc_decreasing)
-        url = py.plot(fig, filename='ohlc_increasing_decreasing')
+        fig['data'].append(ohlc_increase)
+        fig['data'].append(ohlc_decrease)
+        url = py.plot(fig, filename='ohlc_increase_decrease')
         ```
 
         Example 3: Plot ohlc chart with date labels
@@ -1758,57 +1787,56 @@ class TraceFactory(dict):
         dates = ['3/09', '6/09', '9/09', '12/09', '3/10']
 
         # Create ohlc increasing periods
-        ohlc_increasing = TraceFactory.create_ohlc_increase(open_data,
-                                                            high_data,
-                                                            low_data,
-                                                            close_data)
+        ohlc_increase = tls.TraceFactory.create_ohlc_increase(open_data,
+                                                              high_data,
+                                                              low_data,
+                                                              close_data)
 
         # Create ohlc decreasing periods
-        ohlc_decreasing = TraceFactory.create_ohlc_decrease(open_data,
-                                                            high_data,
-                                                            low_data,
-                                                            close_data)
+        ohlc_decrease = tls.TraceFactory.create_ohlc_decrease(open_data,
+                                                              high_data,
+                                                              low_data,
+                                                              close_data)
 
         # Create layout with dates as x-axis labels
-        layout = dict(xaxis = dict(ticktext = dates,
-                      tickvals = range(1, len(dates)+1)))
+        fig = dict(data=[ohlc_incr, ohlc_decr],
+              layout=dict(xaxis = dict(ticktext = dates,
+                                       tickvals = [1, 2, 3, 4, 5 ])))
 
         # Plot
-        data=Data([ohlc_increasing, ohlc_decreasing])
-        fig = { 'data':data, 'layout':layout }
-
-        url = py.plot(fig, filename='ohlc_chart', validate=False)
+        url = py.plot(fig, filename='ohlcs_dates',
+                      overwrite=True, validate=False)
         ```
-
         """
 
-        # TraceFactory.validate_ohlc(op, hi, lo, cl, **kwargs)
+        TraceFactory.validate_ohlc(op, hi, lo, cl, **kwargs)
 
-        (flat_increasing_x,
-         flat_increasing_y,
-         text_increasing) = _OHLC(op, hi, lo, cl).get_increasing()
+        (flat_increase_x,
+         flat_increase_y,
+         text_increase) = _OHLC(op, hi, lo, cl).get_increase()
 
-        ohlc_increasing = Scatter(x=flat_increasing_x,
-                                  y=flat_increasing_y,
-                                  mode='lines',
-                                  name='Increasing',
-                                  line=Line(color='green'),
-                                  text=text_increasing,
-                                  **kwargs)
-        return ohlc_increasing
+        kwargs.setdefault('name', 'Increasing')
+        kwargs.setdefault('line', {'color': 'rgb(44, 160, 44)'})
+        kwargs.setdefault('text', text_increase)
+
+        ohlc_increase = Scatter(x=flat_increase_x,
+                                y=flat_increase_y,
+                                mode='lines',
+                                **kwargs)
+        return ohlc_increase
 
     @staticmethod
-    def create_ohlc_decreasing(op, hi, lo, cl, **kwargs):
+    def create_ohlc_decrease(op, hi, lo, cl, **kwargs):
         """
         Returns data for the decreasing periods of the ohlc chart
 
         To create a full ohlc chart use both create_ohlc_decrease
         and create_ohlc_increase
 
-        :param (list) op: opening prices
-        :param (list) hi: high prices
-        :param (list) op: low prices
-        :param (list) cl: closing prices
+        :param (list) op: opening values
+        :param (list) hi: high values
+        :param (list) op: low values
+        :param (list) cl: closing values
         :param (class) kwargs: kwargs passed through plotly.graph_objs.Scatter
             for more information on valid kwargs call
             help(plotly.graph_objs.Scatter)
@@ -1828,34 +1856,35 @@ class TraceFactory(dict):
         close_data = [33.0, 32.9, 33.3, 33.1, 33.1]
 
         # Create ohlc decreasing periods
-        ohlc_decreasing = TraceFactory.create_ohlc_decrease(open_data,
-                                                            high_data,
-                                                            low_data,
-                                                            close_data)
+        ohlc_decrease = tls.TraceFactory.create_ohlc_decrease(open_data,
+                                                              high_data,
+                                                              low_data,
+                                                              close_data)
 
         # Plot
         fig=Figure()
-        fig['data'].append(ohlc_decreasing)
-        url = py.plot(fig, filename='ohlc_decreasing')
+        fig['data'].append(ohlc_decrease)
+        url = py.plot(fig, filename='ohlc_decrease')
         ```
 
         For more examples refer to TraceFactory.create_ohlc_increase()
         """
 
-        # TraceFactory.validate_ohlc(op, hi, lo, cl, **kwargs)
+        TraceFactory.validate_ohlc(op, hi, lo, cl, **kwargs)
 
-        (flat_decreasing_x,
-         flat_decreasing_y,
-         text_decreasing) = _OHLC(op, hi, lo, cl).get_decreasing()
+        (flat_decrease_x,
+         flat_decrease_y,
+         text_decrease) = _OHLC(op, hi, lo, cl).get_decrease()
 
-        ohlc_decreasing = Scatter(x=flat_decreasing_x,
-                                  y=flat_decreasing_y,
-                                  mode='lines',
-                                  name="Decreasing",
-                                  line=Line(color='red'),
-                                  text=text_decreasing,
-                                  **kwargs)
-        return ohlc_decreasing
+        kwargs.setdefault('name', 'Decreasing')
+        kwargs.setdefault('line', {'color': 'rgb(214, 39, 40)'})
+        kwargs.setdefault('text', text_decrease)
+
+        ohlc_decrease = Scatter(x=flat_decrease_x,
+                                y=flat_decrease_y,
+                                mode='lines',
+                                **kwargs)
+        return ohlc_decrease
 
 
 class _Quiver(TraceFactory):
@@ -2280,7 +2309,7 @@ class _Streamline(TraceFactory):
 
 class _OHLC(dict):
     """
-    Refer to TraceFactory.create_ohlc_increasing() for docstring.
+    Refer to TraceFactory.create_ohlc_increase() for docstring.
     """
 
     def __init__(self, op, hi, lo, cl, **kwargs):
@@ -2291,63 +2320,66 @@ class _OHLC(dict):
         self.empty = [None] * len(op)
         self.all_x = []
         self.all_y = []
-        self.increasing_x = []
-        self.increasing_y = []
-        self.decreasing_x = []
-        self.decreasing_y = []
+        self.increase_x = []
+        self.increase_y = []
+        self.decrease_x = []
+        self.decrease_y = []
         self.get_all_xy()
-        self.separate_increasing_decreasing()
-        self.get_increasing()
-        self.get_decreasing()
+        self.separate_increase_decrease()
+        self.get_increase()
+        self.get_decrease()
 
     def get_all_xy(self):
         """
         Zip data to create OHLC shape
+
+        OHLC shape: low to high vertical bar with
+        horizontal branches for open and close values
         """
         self.all_y = list(zip(self.op, self.op, self.hi,
                               self.lo, self.cl, self.cl, self.empty))
         self.all_x = [[x + .8, x + 1, x + 1, x + 1, x + 1, x + 1.2, None]
                       for x in range(len(self.op))]
 
-    def separate_increasing_decreasing(self):
+    def separate_increase_decrease(self):
         """
-        Separate data into two groups: increasing and decreasing
+        Separate data into two groups: increase and decrease
 
-        (1) Increasing, where close - open is positive and
-        (2) Decreasing, where close - open is negative
+        (1) Increase, where close - open is positive and
+        (2) Decrease, where close - open is negative
         """
 
         for index in range(len(self.op)):
             if self.cl[index] is None:
                 pass
             elif self.cl[index] - self.op[index] > 0:
-                self.increasing_x.append(self.all_x[index])
-                self.increasing_y.append(self.all_y[index])
+                self.increase_x.append(self.all_x[index])
+                self.increase_y.append(self.all_y[index])
             else:
-                self.decreasing_x.append(self.all_x[index])
-                self.decreasing_y.append(self.all_y[index])
+                self.decrease_x.append(self.all_x[index])
+                self.decrease_y.append(self.all_y[index])
 
-    def get_increasing(self):
+    def get_increase(self):
         """
-        Flatten increasing data and get increasing text
+        Flatten increase data and get increase text
         """
-        flat_increasing_x = TraceFactory.flatten(self.increasing_x)
-        flat_increasing_y = TraceFactory.flatten(self.increasing_y)
-        text_increasing = (("Open", "Open", "High",
-                            "Low", "Close", "Close", '')
-                           * (len(self.increasing_x)))
+        flat_increase_x = TraceFactory.flatten(self.increase_x)
+        flat_increase_y = TraceFactory.flatten(self.increase_y)
+        text_increase = (("Open", "Open", "High",
+                          "Low", "Close", "Close", '')
+                         * (len(self.increase_x)))
 
-        return flat_increasing_x, flat_increasing_y, text_increasing
+        return flat_increase_x, flat_increase_y, text_increase
 
-    def get_decreasing(self):
+    def get_decrease(self):
         """
-        Flatten decreasing data and get decreasing text
+        Flatten decrease data and get decrease text
         """
-        flat_decreasing_x = TraceFactory.flatten(self.decreasing_x)
-        flat_decreasing_y = TraceFactory.flatten(self.decreasing_y)
-        text_decreasing = (("Open", "Open", "High",
-                            "Low", "Close", "Close", '')
-                           * (len(self.decreasing_x)))
+        flat_decrease_x = TraceFactory.flatten(self.decrease_x)
+        flat_decrease_y = TraceFactory.flatten(self.decrease_y)
+        text_decrease = (("Open", "Open", "High",
+                          "Low", "Close", "Close", '')
+                         * (len(self.decrease_x)))
 
-        return flat_decreasing_x, flat_decreasing_y, text_decreasing
+        return flat_decrease_x, flat_decrease_y, text_decrease
 

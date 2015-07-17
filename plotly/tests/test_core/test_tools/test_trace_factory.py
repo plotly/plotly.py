@@ -5,7 +5,7 @@ from nose.tools import raises
 
 import plotly.tools as tls
 from plotly.exceptions import PlotlyError
-from plotly.graph_objs import Line, graph_objs
+from plotly.graph_objs import Data, Line, graph_objs
 
 
 class TestQuiver(TestCase):
@@ -100,3 +100,180 @@ class TestQuiver(TestCase):
             'type': 'scatter',
             'mode': 'lines', }
         self.assertEqual(quiver, expected_quiver)
+
+
+class TestOHLC(TestCase):
+
+    def test_unequal_o_h_l_c_length(self):
+
+        # check: PlotlyError if op, hi, lo, cl are not the same length for
+        # TraceFactory.ohlc_increase and TraceFactory.ohlc_decrease
+
+        kwargs = {'op': [1], 'hi': [1, 3], 'lo': [1, 2], 'cl': [1, 2]}
+        self.assertRaises(PlotlyError, tls.TraceFactory.create_ohlc_increase,
+                          **kwargs)
+
+        kwargs = {'op': [1, 2], 'hi': [1, 2, 3], 'lo': [1, 2], 'cl': [1, 2]}
+        self.assertRaises(PlotlyError, tls.TraceFactory.create_ohlc_increase,
+                          **kwargs)
+
+        kwargs = {'op': [1], 'hi': [1, 3], 'lo': [1, 2], 'cl': [2]}
+        self.assertRaises(PlotlyError, tls.TraceFactory.create_ohlc_decrease,
+                          **kwargs)
+
+        kwargs = {'op': [1, 2], 'hi': [1, 2], 'lo': [1, 2, .5], 'cl': [1, 2]}
+        self.assertRaises(PlotlyError, tls.TraceFactory.create_ohlc_decrease,
+                          **kwargs)
+
+    def test_hi_highest_value(self):
+
+        # check: PlotlyError if the "hi" value is less than the corresponding
+        # op, lo, or cl value because if the "high" value is not the highest
+        # (or equal) then the data may have been entered incorrectly.
+
+        # create_ohlc_increase
+        kwargs = {'op': [2, 3], 'hi': [4, 2], 'lo': [1, 1], 'cl': [1, 2]}
+        self.assertRaises(PlotlyError, tls.TraceFactory.create_ohlc_increase,
+                          **kwargs)
+
+        # create_ohlc_decrease
+        kwargs = {'op': [2, 3], 'hi': [4, 3], 'lo': [1, 1], 'cl': [1, 6]}
+        self.assertRaises(PlotlyError, tls.TraceFactory.create_ohlc_decrease,
+                          **kwargs)
+
+    def test_lo_lowest_value(self):
+
+        # check: PlotlyError if the "lo" value is greater than the
+        # corresponding op, hi, or cl value because if the "lo" value is not
+        # the lowest (or equal) then the data may have been entered incorrectly
+
+        # create_ohlc_increase
+        kwargs = {'op': [2, 3], 'hi': [4, 6], 'lo': [3, 1], 'cl': [1, 2]}
+        self.assertRaises(PlotlyError, tls.TraceFactory.create_ohlc_increase,
+                          **kwargs)
+
+        # create_ohlc_decrease
+        kwargs = {'op': [2, 3], 'hi': [4, 6], 'lo': [1, 5], 'cl': [1, 6]}
+        self.assertRaises(PlotlyError, tls.TraceFactory.create_ohlc_decrease,
+                          **kwargs)
+
+    def test_one_ohlc_increase(self):
+
+        # This should create one "increase" (i.e. close > open) ohlc stick
+
+        ohlc_incr = tls.TraceFactory.create_ohlc_increase(op=[33.0], hi=[33.2],
+                                                          lo=[32.7], cl=[33.1])
+
+        expected_ohlc_incr = {
+            'mode': 'lines',
+            'y': [33.0, 33.0, 33.2, 32.7, 33.1, 33.1, None],
+            'line': {'color': 'rgb(44, 160, 44)'},
+            'x': [0.8, 1, 1, 1, 1, 1.2, None],
+            'name': 'Increasing',
+            'type': 'scatter',
+            'text': ('Open', 'Open', 'High', 'Low', 'Close', 'Close', '')}
+        self.assertEqual(ohlc_incr, expected_ohlc_incr)
+
+    def test_ohlc_increase_with_kwargs(self):
+
+        # This should create one "increase" (i.e. close > open) ohlc stick
+        # and change the name to "POSITIVE!!"
+
+        ohlc_incr = tls.TraceFactory.create_ohlc_increase(op=[1.5], hi=[30],
+                                                          lo=[1], cl=[25],
+                                                          name="POSITIVE!!")
+
+        expected_ohlc_incr = {
+            'text': ('Open', 'Open', 'High', 'Low', 'Close', 'Close', ''),
+            'type': 'scatter',
+            'name': 'POSITIVE!!',
+            'x': [0.8, 1, 1, 1, 1, 1.2, None],
+            'y': [1.5, 1.5, 30, 1, 25, 25, None],
+            'mode': 'lines',
+            'line': {'color': 'rgb(44, 160, 44)'}}
+
+        self.assertEqual(ohlc_incr, expected_ohlc_incr)
+
+    def test_one_ohlc_decrease(self):
+
+        # This should create one "decrease" (i.e. close < open) ohlc stick
+
+        ohlc_decr = tls.TraceFactory.create_ohlc_decrease(op=[33.3], hi=[33.3],
+                                                          lo=[32.7], cl=[32.9])
+
+        expected_ohlc_decr = {
+            'mode': 'lines',
+            'y': [33.3, 33.3, 33.3, 32.7, 32.9, 32.9, None],
+            'line': {'color': 'rgb(214, 39, 40)'},
+            'x': [0.8, 1, 1, 1, 1, 1.2, None],
+            'name': 'Decreasing',
+            'type': 'scatter',
+            'text': ('Open', 'Open', 'High', 'Low', 'Close', 'Close', '')}
+        self.assertEqual(ohlc_decr, expected_ohlc_decr)
+
+    def test_ohlc_decrease_with_kwargs(self):
+
+        # This should create one "decrease" (i.e. close < open) ohlc stick
+        # and change the line width to 4
+
+        ohlc_decr = tls.TraceFactory.create_ohlc_decrease(op=[15], hi=[30],
+                                                          lo=[1], cl=[5],
+                                                          line=Line(
+                                                              color='rgb(214, 39, 40)',
+                                                              width=4))
+
+        expected_ohlc_decr = {
+            'text': ('Open', 'Open', 'High', 'Low', 'Close', 'Close', ''),
+            'type': 'scatter',
+            'name': 'Decreasing',
+            'x': [0.8, 1, 1, 1, 1, 1.2, None],
+            'y': [15, 15, 30, 1, 5, 5, None],
+            'mode': 'lines',
+            'line': {'color': 'rgb(214, 39, 40)', 'width': 4}}
+
+        self.assertEqual(ohlc_decr, expected_ohlc_decr)
+
+    def test_ohlc_increase_and_decrease(self):
+
+        # This should add multiple increasing and decreasing sticks
+        # and check that what we expect (i.e. the data and default kwargs)
+        # is resulting from data=Data([ohlc_increasing, ohlc_decreasing])
+
+        o = [3.3, 4, 9.3, 8.9, 4.9, 9, 2.9, 5]
+        h = [7, 6.4, 10, 10, 10, 14.6, 12, 7]
+        l = [3, 2, 7, 3, 2, 2, 1.1, 2.3]
+        c = [3.3, 6.3, 10, 9, 9.2, 3, 2.9, 6.1]
+
+        ohlc_incr = tls.TraceFactory.create_ohlc_increase(o, h, l, c)
+        ohlc_decr = tls.TraceFactory.create_ohlc_decrease(o, h, l, c)
+        ohlc_data = Data([ohlc_incr, ohlc_decr])
+
+        expected_ohlc_data = [{
+            'text': ('Open', 'Open', 'High', 'Low', 'Close', 'Close', '',
+                     'Open', 'Open', 'High', 'Low', 'Close', 'Close', '',
+                     'Open', 'Open', 'High', 'Low', 'Close', 'Close', '',
+                     'Open', 'Open', 'High', 'Low', 'Close', 'Close', '',
+                     'Open', 'Open', 'High', 'Low', 'Close', 'Close', ''),
+            'type': 'scatter',
+            'name': 'Increasing',
+            'x': [1.8, 2, 2, 2, 2, 2.2, None, 2.8, 3, 3, 3, 3, 3.2, None,
+                  3.8, 4, 4, 4, 4, 4.2, None, 4.8, 5, 5, 5, 5, 5.2, None,
+                  7.8, 8, 8, 8, 8, 8.2, None],
+            'y': [4, 4, 6.4, 2, 6.3, 6.3, None, 9.3, 9.3, 10, 7, 10, 10, None,
+                  8.9, 8.9, 10, 3, 9, 9, None, 4.9, 4.9, 10, 2, 9.2, 9.2, None,
+                  5, 5, 7, 2.3, 6.1, 6.1, None],
+            'mode': 'lines',
+            'line': {'color': 'rgb(44, 160, 44)'}},
+            {'text': ('Open', 'Open', 'High', 'Low', 'Close', 'Close', '',
+                      'Open', 'Open', 'High', 'Low', 'Close', 'Close', '',
+                      'Open', 'Open', 'High', 'Low', 'Close', 'Close', ''),
+             'type': 'scatter', 'name': 'Decreasing',
+             'x': [0.8, 1, 1, 1, 1, 1.2, None, 5.8, 6, 6, 6, 6, 6.2, None,
+                   6.8, 7, 7, 7, 7, 7.2, None],
+             'y': [3.3, 3.3, 7, 3, 3.3, 3.3, None, 9, 9, 14.6, 2, 3, 3, None,
+                   2.9, 2.9, 12, 1.1, 2.9, 2.9, None],
+             'mode': 'lines',
+             'line': {'color': 'rgb(214, 39, 40)'}}]
+
+        self.assertEqual(ohlc_data, expected_ohlc_data)
+
