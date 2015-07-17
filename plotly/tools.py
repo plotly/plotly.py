@@ -226,8 +226,8 @@ def set_config_file(plotly_domain=None,
     ensure_local_plotly_files()  # make sure what we just put there is OK
 
 
-def get_config_file(**kwargs):
-    """Return specified args from `~/.plotly/.config`. as dict.
+def get_config_file(*args):
+    """Return specified args from `~/.plotly/.config`. as tuple.
 
     Returns all if no arguments are specified.
 
@@ -237,7 +237,7 @@ def get_config_file(**kwargs):
     """
     if _file_permissions:
         ensure_local_plotly_files()  # make sure what's there is OK
-        return utils.load_json_dict(CONFIG_FILE, **kwargs)
+        return utils.load_json_dict(CONFIG_FILE, *args)
     else:
         return _FILE_CONTENT[CONFIG_FILE]
 
