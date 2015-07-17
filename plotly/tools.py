@@ -232,7 +232,7 @@ def get_config_file(**kwargs):
     Returns all if no arguments are specified.
 
     Example:
-        get_credentials_file('plotly_domain')
+        get_config_file('plotly_domain')
 
     """
     if _file_permissions:
