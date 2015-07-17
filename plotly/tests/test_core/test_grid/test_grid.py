@@ -182,7 +182,8 @@ def test_delete_grid():
 
 
 # Plotly failures
-@skip('adding this for now so test_file_tools pass, more info on GH python-api #260')
+@skip('adding this for now so test_file_tools pass, more info' +
+      'https://github.com/plotly/python-api/issues/262')
 def test_duplicate_filenames():
     c1 = Column([1, 2, 3, 4], 'first column')
     g = Grid([c1])
