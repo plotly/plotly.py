@@ -25,9 +25,12 @@ from plotly import session
 from plotly.graph_objs import graph_objs
 from plotly.graph_objs import Scatter, Marker, Line
 
+
 # Warning format
-def warning_on_one_line(message, category, filename, lineno, file=None, line=None):
-    return '%s:%s: %s:\n\n%s\n\n' % (filename, lineno, category.__name__, message)
+def warning_on_one_line(message, category, filename, lineno,
+                        file=None, line=None):
+    return '%s:%s: %s:\n\n%s\n\n' % (filename, lineno, category.__name__,
+                                     message)
 warnings.formatwarning = warning_on_one_line
 
 try:
@@ -66,7 +69,9 @@ _FILE_CONTENT = {CREDENTIALS_FILE: {'username': '',
                                'plotly_streaming_domain': 'stream.plot.ly',
                                'plotly_api_domain': 'https://api.plot.ly',
                                'plotly_ssl_verification': True,
-                               'plotly_proxy_authorization': False}}
+                               'plotly_proxy_authorization': False,
+                               'world_readable': True}}
+
 
 try:
     os.mkdir(TEST_DIR)
@@ -174,7 +179,8 @@ def set_config_file(plotly_domain=None,
                     plotly_streaming_domain=None,
                     plotly_api_domain=None,
                     plotly_ssl_verification=None,
-                    plotly_proxy_authorization=None):
+                    plotly_proxy_authorization=None,
+                    world_readable=None):
     """Set the keyword-value pairs in `~/.plotly/.config`.
 
     :param (str) plotly_domain: ex - https://plot.ly
@@ -182,6 +188,7 @@ def set_config_file(plotly_domain=None,
     :param (str) plotly_api_domain: ex - https://api.plot.ly
     :param (bool) plotly_ssl_verification: True = verify, False = don't verify
     :param (bool) plotly_proxy_authorization: True = use plotly proxy auth creds
+    :param (bool) world_readable: True = public, False = private
 
     """
     if not _file_permissions:
@@ -191,25 +198,41 @@ def set_config_file(plotly_domain=None,
     settings = get_config_file()
     if isinstance(plotly_domain, six.string_types):
         settings['plotly_domain'] = plotly_domain
+    elif plotly_domain is not None:
+        raise TypeError('Input should be a string')
     if isinstance(plotly_streaming_domain, six.string_types):
         settings['plotly_streaming_domain'] = plotly_streaming_domain
+    elif plotly_streaming_domain is not None:
+        raise TypeError('Input should be a string')
     if isinstance(plotly_api_domain, six.string_types):
         settings['plotly_api_domain'] = plotly_api_domain
+    elif plotly_api_domain is not None:
+        raise TypeError('Input should be a string')
     if isinstance(plotly_ssl_verification, (six.string_types, bool)):
         settings['plotly_ssl_verification'] = plotly_ssl_verification
+    elif plotly_ssl_verification is not None:
+        raise TypeError('Input should be a boolean')
     if isinstance(plotly_proxy_authorization, (six.string_types, bool)):
         settings['plotly_proxy_authorization'] = plotly_proxy_authorization
+    elif plotly_proxy_authorization is not None:
+        raise TypeError('Input should be a boolean')
+    if isinstance(world_readable, bool):
+        settings['world_readable'] = world_readable
+        kwargs = {'world_readable': world_readable}
+        session.update_session_plot_options(**kwargs)
+    elif world_readable is not None:
+        raise TypeError('Input should be a boolean')
     utils.save_json_dict(CONFIG_FILE, settings)
     ensure_local_plotly_files()  # make sure what we just put there is OK
 
 
 def get_config_file(*args):
-    """Return specified args from `~/.plotly_credentials`. as dict.
+    """Return specified args from `~/.plotly/.config`. as tuple.
 
     Returns all if no arguments are specified.
 
     Example:
-        get_credentials_file('username')
+        get_config_file('plotly_domain')
 
     """
     if _file_permissions:
@@ -294,7 +317,7 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
              "</iframe>").format(
             plotly_rest_url=plotly_rest_url,
             file_owner=file_owner, file_id=file_id,
-            plot_width=width-padding, plot_height=height-padding,
+            plot_width=width - padding, plot_height=height - padding,
             iframe_height=height, iframe_width=width)
     else:
         s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\""
@@ -890,15 +913,15 @@ def make_subplots(rows=1, cols=1,
         if isinstance(shared_axes, bool):
             if shared_axes:
                 if x_or_y == 'x':
-                    label = "{x_or_y}{c}".format(x_or_y=x_or_y, c=c+1)
+                    label = "{x_or_y}{c}".format(x_or_y=x_or_y, c=c + 1)
                 if x_or_y == 'y':
-                    label = "{x_or_y}{r}".format(x_or_y=x_or_y, r=r+1)
+                    label = "{x_or_y}{r}".format(x_or_y=x_or_y, r=r + 1)
 
         if isinstance(shared_axes, list):
             if isinstance(shared_axes[0], tuple):
                 shared_axes = [shared_axes]  # TODO put this elsewhere
             for shared_axis in shared_axes:
-                if (r+1, c+1) in shared_axis:
+                if (r + 1, c + 1) in shared_axis:
                     label = {
                         'x': "x{0}".format(shared_axis[0][1]),
                         'y': "y{0}".format(shared_axis[0][0])
@@ -929,7 +952,7 @@ def make_subplots(rows=1, cols=1,
             if isinstance(shared_xaxes[0], tuple):
                 shared_xaxes = [shared_xaxes]  # TODO put this elsewhere
             for shared_xaxis in shared_xaxes:
-                if (r+1, c+1) in shared_xaxis[1:]:
+                if (r + 1, c + 1) in shared_xaxis[1:]:
                     x_anchor = False
                     y_anchor = 'free'  # TODO covers all cases?
 
@@ -946,7 +969,7 @@ def make_subplots(rows=1, cols=1,
             if isinstance(shared_yaxes[0], tuple):
                 shared_yaxes = [shared_yaxes]  # TODO put this elsewhere
             for shared_yaxis in shared_yaxes:
-                if (r+1, c+1) in shared_yaxis[1:]:
+                if (r + 1, c + 1) in shared_yaxis[1:]:
                     y_anchor = False
                     x_anchor = 'free'  # TODO covers all cases?
 
@@ -1119,7 +1142,7 @@ def make_subplots(rows=1, cols=1,
 
     # Define cell string as function of (r, c) and grid_ref
     def _get_cell_str(r, c, ref):
-        return '({r},{c}) {ref}'.format(r=r+1, c=c+1, ref=','.join(ref))
+        return '({r},{c}) {ref}'.format(r=r + 1, c=c + 1, ref=','.join(ref))
 
     # Find max len of _cell_str, add define a padding function
     cell_len = max([len(_get_cell_str(r, c, ref))
@@ -1143,18 +1166,18 @@ def make_subplots(rows=1, cols=1,
             cell_str = s_str + _get_cell_str(r, c, ref)
 
             if spec['colspan'] > 1:
-                for cc in range(1, spec['colspan']-1):
-                    _tmp[r][c+cc] = colspan_str + _pad(colspan_str)
-                _tmp[r][c+spec['colspan']-1] = (
+                for cc in range(1, spec['colspan'] - 1):
+                    _tmp[r][c + cc] = colspan_str + _pad(colspan_str)
+                _tmp[r][c + spec['colspan'] - 1] = (
                     colspan_str + _pad(colspan_str + e_str)) + e_str
             else:
                 cell_str += e_str
 
             if spec['rowspan'] > 1:
-                for rr in range(1, spec['rowspan']-1):
-                    _tmp[r+rr][c] = rowspan_str + _pad(rowspan_str)
+                for rr in range(1, spec['rowspan'] - 1):
+                    _tmp[r + rr][c] = rowspan_str + _pad(rowspan_str)
                 for cc in range(spec['colspan']):
-                    _tmp[r+spec['rowspan']-1][c+cc] = (
+                    _tmp[r + spec['rowspan'] - 1][c + cc] = (
                         rowspan_str + _pad(rowspan_str))
 
             _tmp[r][c] = cell_str + _pad(cell_str)
@@ -1833,7 +1856,7 @@ class _Streamline(TraceFactory):
         # Rescale speed onto axes-coordinates
         self.u = self.u / (self.x[-1] - self.x[0])
         self.v = self.v / (self.y[-1] - self.y[0])
-        self.speed = np.sqrt(self.u**2 + self.v**2)
+        self.speed = np.sqrt(self.u ** 2 + self.v ** 2)
 
         # Rescale u and v for integrations.
         self.u *= len(self.x)
@@ -2081,4 +2104,3 @@ class _Streamline(TraceFactory):
         streamline_x = sum(self.st_x, [])
         streamline_y = sum(self.st_y, [])
         return streamline_x, streamline_y
-
