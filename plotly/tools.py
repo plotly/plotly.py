@@ -1420,7 +1420,7 @@ class TraceFactory(dict):
             of the same length.
         :raises: (PlotlyError) If u and v are not lists or ndarrays
             of the same length.
-        :raises: (PlotlyError) If op, hi, lo, and cl are not lists
+        :raises: (PlotlyError) If open, high, low, and close are not lists
             of the same length.
         """
 
@@ -1468,16 +1468,16 @@ class TraceFactory(dict):
                                              "evenly spaced array")
 
     @staticmethod
-    def validate_ohlc(op, hi, lo, cl, **kwargs):
-        length = len(hi)
-        if any(len(lst) != length for lst in [op, lo, cl]):
+    def validate_ohlc(open, high, low, close, **kwargs):
+        length = len(high)
+        if any(len(lst) != length for lst in [open, low, close]):
             raise exceptions.PlotlyError("Oops! Your high, open, low, and "
                                          "close lists should all be the same "
                                          "length.")
 
-        for lst in [op, lo, cl]:
-            for index in range(len(hi)):
-                if hi[index] < lst[index]:
+        for lst in [open, low, close]:
+            for index in range(len(high)):
+                if high[index] < lst[index]:
                     raise exceptions.PlotlyError("Oops! Looks like some of "
                                                  "your high values are less "
                                                  "the corresponding open, "
@@ -1485,9 +1485,9 @@ class TraceFactory(dict):
                                                  "Double check that your data "
                                                  "is entered in O-H-L-C order")
 
-        for lst in [hi, op, cl]:
-            for index in range(len(lo)):
-                if lo[index] > lst[index]:
+        for lst in [high, open, close]:
+            for index in range(len(low)):
+                if low[index] > lst[index]:
                     raise exceptions.PlotlyError("Oops! Looks like some of "
                                                  "your low values are greater "
                                                  "than the corresponding high"
@@ -1508,8 +1508,8 @@ class TraceFactory(dict):
             return [item for sublist in array for item in sublist]
         except TypeError:
             raise exceptions.PlotlyError("Your data array could not be "
-                                         "flattened! Make sure x, y, u, and v "
-                                         "are lists or numpy ndarrays!")
+                                         "flattened! Make sure your data is "
+                                         "entered as lists or ndarrays!")
 
     @staticmethod
     def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
@@ -1700,7 +1700,117 @@ class TraceFactory(dict):
         return streamline
 
     @staticmethod
-    def create_ohlc_increase(op, hi, lo, cl,
+    def create_ohlc(open, high, low, close,
+                    increasing_trace_name='Increasing',
+                    decreasing_trace_name='Decreasing',
+                    increasing_trace_color='rgb(44, 160, 44)',
+                    decreasing_trace_color='rgb(214, 39, 40)',
+                    **kwargs):
+
+        """
+        Returns data for an ohlc chart
+
+        :param (list) open: opening values
+        :param (list) high: high values
+        :param (list) low: low values
+        :param (list) close: closing values
+        :param (string) increasing_trace_name: name of trace where
+            close values are higher than the corresponding open value.
+        :param (string) decreasing_trace_name: name of trace where
+            close values are less than the corresponding open value.
+        :param (string) increasing_trace_color: color of trace where
+            close values are greater than the corresponding open value.
+        :param (string) decreasing_trace_color: color of trace where
+            close values are less than the corresponding open value.
+        :param (class) kwargs: kwargs passed through plotly.graph_objs.Scatter
+            for more information on valid kwargs call
+            help(plotly.graph_objs.Scatter)
+
+        :rtype: (list) returns a list of ohlc traces: an increasing trace and
+            a decreasing trace.
+
+        Example 1: Plot ohlc chart
+        ```
+        import plotly.plotly as py
+        import plotly.tools as tls
+        from plotly.graph_objs import *
+
+        # Add data
+        open_data = [33.0, 33.3, 33.5, 33.0, 34.1]
+        high_data = [33.1, 33.3, 33.6, 33.2, 34.8]
+        low_data = [32.7, 32.7, 32.8, 32.6, 32.8]
+        close_data = [33.0, 32.9, 33.3, 33.1, 33.1]
+
+        # Create ohlc increasing periods
+        ohlc = tls.TraceFactory.create_ohlc(open_data, high_data,
+                                            low_data, close_data)
+
+        # Plot
+        fig = Figure()
+        fig['data'] = ohlc
+        url = py.plot(fig, filename='ohlc')
+        ```
+
+        Example 2: Plot ohlc chart with date labels
+        ```
+        import plotly.plotly as py
+        import plotly.tools as tls
+        from plotly.graph_objs import *
+
+        # Add data
+        open_data = [33.0, 33.3, 33.5, 33.0, 34.1]
+        high_data = [33.1, 33.3, 33.6, 33.2, 34.8]
+        low_data = [32.7, 32.7, 32.8, 32.6, 32.8]
+        close_data = [33.0, 32.9, 33.3, 33.1, 33.1]
+        dates = ['3/09', '6/09', '9/09', '12/09', '3/10']
+
+        # Create ohlc
+        ohlc = tls.TraceFactory.create_ohlc(open_data, high_data,
+                                            low_data, close_data)
+
+        # Create layout with dates as x-axis labels
+        fig = dict(data=ohlc,
+              layout=dict(xaxis = dict(ticktext = dates,
+                                       tickvals = [1, 2, 3, 4, 5 ])))
+
+        # Plot
+        url = py.plot(fig, filename='ohlcs_dates', validate=False)
+        ```
+        """
+
+        TraceFactory.validate_ohlc(open, high, low, close,
+                                   **kwargs)
+
+        (flat_increase_x,
+         flat_increase_y,
+         text_increase) = _OHLC(open, high, low, close).get_increase()
+
+        ohlc_increase = Scatter(x=flat_increase_x,
+                                y=flat_increase_y,
+                                mode='lines',
+                                name=increasing_trace_name,
+                                line=Line(color=increasing_trace_color),
+                                text=text_increase,
+                                **kwargs)
+
+        (flat_decrease_x,
+         flat_decrease_y,
+         text_decrease) = _OHLC(open, high, low, close).get_decrease()
+
+        ohlc_decrease = Scatter(x=flat_decrease_x,
+                                y=flat_decrease_y,
+                                mode='lines',
+                                name=decreasing_trace_name,
+                                line=Line(color=decreasing_trace_color),
+                                text=text_decrease,
+                                **kwargs)
+
+        ohlc = [ohlc_increase, ohlc_decrease]
+
+        return ohlc
+
+    @staticmethod
+    def create_ohlc_increase(open, high, low, close,
                              **kwargs):
         """
         Returns data for the increasing periods of the ohlc chart
@@ -1708,10 +1818,10 @@ class TraceFactory(dict):
         To create a full ohlc chart use both create_ohlc_increase
         and create_ohlc_decrease
 
-        :param (list) op: opening values
-        :param (list) hi: high values
-        :param (list) lo: low values
-        :param (list) cl: closing values
+        :param (list) open: opening values
+        :param (list) high: high values
+        :param (list) low: low values
+        :param (list) close: closing values
         :param (class) kwargs: kwargs passed through plotly.graph_objs.Scatter
             for more information on valid kwargs call
             help(plotly.graph_objs.Scatter)
@@ -1767,7 +1877,7 @@ class TraceFactory(dict):
                                                               close_data)
 
         # Plot
-        fig=Figure()
+        fig = Figure()
         fig['data'].append(ohlc_increase)
         fig['data'].append(ohlc_decrease)
         url = py.plot(fig, filename='ohlc_increase_decrease')
@@ -1804,16 +1914,15 @@ class TraceFactory(dict):
                                        tickvals = [1, 2, 3, 4, 5 ])))
 
         # Plot
-        url = py.plot(fig, filename='ohlcs_dates',
-                      overwrite=True, validate=False)
+        url = py.plot(fig, filename='ohlcs_dates', validate=False)
         ```
         """
 
-        TraceFactory.validate_ohlc(op, hi, lo, cl, **kwargs)
+        TraceFactory.validate_ohlc(open, high, low, close, **kwargs)
 
         (flat_increase_x,
          flat_increase_y,
-         text_increase) = _OHLC(op, hi, lo, cl).get_increase()
+         text_increase) = _OHLC(open, high, low, close).get_increase()
 
         kwargs.setdefault('name', 'Increasing')
         kwargs.setdefault('line', {'color': 'rgb(44, 160, 44)'})
@@ -1826,17 +1935,17 @@ class TraceFactory(dict):
         return ohlc_increase
 
     @staticmethod
-    def create_ohlc_decrease(op, hi, lo, cl, **kwargs):
+    def create_ohlc_decrease(open, high, low, close, **kwargs):
         """
         Returns data for the decreasing periods of the ohlc chart
 
         To create a full ohlc chart use both create_ohlc_decrease
         and create_ohlc_increase
 
-        :param (list) op: opening values
-        :param (list) hi: high values
-        :param (list) op: low values
-        :param (list) cl: closing values
+        :param (list) open: opening values
+        :param (list) high: high values
+        :param (list) low: low values
+        :param (list) close: closing values
         :param (class) kwargs: kwargs passed through plotly.graph_objs.Scatter
             for more information on valid kwargs call
             help(plotly.graph_objs.Scatter)
@@ -1862,7 +1971,7 @@ class TraceFactory(dict):
                                                               close_data)
 
         # Plot
-        fig=Figure()
+        fig = Figure()
         fig['data'].append(ohlc_decrease)
         url = py.plot(fig, filename='ohlc_decrease')
         ```
@@ -1870,11 +1979,11 @@ class TraceFactory(dict):
         For more examples refer to TraceFactory.create_ohlc_increase()
         """
 
-        TraceFactory.validate_ohlc(op, hi, lo, cl, **kwargs)
+        TraceFactory.validate_ohlc(open, high, low, close, **kwargs)
 
         (flat_decrease_x,
          flat_decrease_y,
-         text_decrease) = _OHLC(op, hi, lo, cl).get_decrease()
+         text_decrease) = _OHLC(open, high, low, close).get_decrease()
 
         kwargs.setdefault('name', 'Decreasing')
         kwargs.setdefault('line', {'color': 'rgb(214, 39, 40)'})
@@ -2312,12 +2421,12 @@ class _OHLC(dict):
     Refer to TraceFactory.create_ohlc_increase() for docstring.
     """
 
-    def __init__(self, op, hi, lo, cl, **kwargs):
-        self.op = op
-        self.hi = hi
-        self.lo = lo
-        self.cl = cl
-        self.empty = [None] * len(op)
+    def __init__(self, open, high, low, close, **kwargs):
+        self.open = open
+        self.high = high
+        self.low = low
+        self.close = close
+        self.empty = [None] * len(open)
         self.all_x = []
         self.all_y = []
         self.increase_x = []
@@ -2336,10 +2445,10 @@ class _OHLC(dict):
         OHLC shape: low to high vertical bar with
         horizontal branches for open and close values
         """
-        self.all_y = list(zip(self.op, self.op, self.hi,
-                              self.lo, self.cl, self.cl, self.empty))
+        self.all_y = list(zip(self.open, self.open, self.high,
+                              self.low, self.close, self.close, self.empty))
         self.all_x = [[x + .8, x + 1, x + 1, x + 1, x + 1, x + 1.2, None]
-                      for x in range(len(self.op))]
+                      for x in range(len(self.open))]
 
     def separate_increase_decrease(self):
         """
@@ -2349,10 +2458,10 @@ class _OHLC(dict):
         (2) Decrease, where close - open is negative
         """
 
-        for index in range(len(self.op)):
-            if self.cl[index] is None:
+        for index in range(len(self.open)):
+            if self.close[index] is None:
                 pass
-            elif self.cl[index] - self.op[index] > 0:
+            elif self.close[index] - self.open[index] > 0:
                 self.increase_x.append(self.all_x[index])
                 self.increase_y.append(self.all_y[index])
             else:

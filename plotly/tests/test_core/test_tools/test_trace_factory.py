@@ -104,65 +104,101 @@ class TestQuiver(TestCase):
 
 class TestOHLC(TestCase):
 
-    def test_unequal_o_h_l_c_length(self):
+    def test_unequal_ohlc_length(self):
 
-        # check: PlotlyError if op, hi, lo, cl are not the same length for
-        # TraceFactory.ohlc_increase and TraceFactory.ohlc_decrease
+        # check: PlotlyError if open, high, low, close are not the same length
+        # for TraceFactory.ohlc_increase and TraceFactory.ohlc_decrease
 
-        kwargs = {'op': [1], 'hi': [1, 3], 'lo': [1, 2], 'cl': [1, 2]}
+        kwargs = {'open': [1], 'high': [1, 3], 'low': [1, 2], 'close': [1, 2]}
         self.assertRaises(PlotlyError, tls.TraceFactory.create_ohlc_increase,
                           **kwargs)
 
-        kwargs = {'op': [1, 2], 'hi': [1, 2, 3], 'lo': [1, 2], 'cl': [1, 2]}
+        kwargs = {'open': [1, 2], 'high': [1, 2, 3], 'low': [1, 2],
+                  'close': [1, 2]}
         self.assertRaises(PlotlyError, tls.TraceFactory.create_ohlc_increase,
                           **kwargs)
 
-        kwargs = {'op': [1], 'hi': [1, 3], 'lo': [1, 2], 'cl': [2]}
+        kwargs = {'open': [1], 'high': [1, 3], 'low': [1, 2], 'close': [2]}
         self.assertRaises(PlotlyError, tls.TraceFactory.create_ohlc_decrease,
                           **kwargs)
 
-        kwargs = {'op': [1, 2], 'hi': [1, 2], 'lo': [1, 2, .5], 'cl': [1, 2]}
+        kwargs = {'open': [1, 2], 'high': [1, 2],
+                  'low': [1, 2, .5], 'close': [1, 2]}
         self.assertRaises(PlotlyError, tls.TraceFactory.create_ohlc_decrease,
                           **kwargs)
 
-    def test_hi_highest_value(self):
+    def test_high_highest_value(self):
 
-        # check: PlotlyError if the "hi" value is less than the corresponding
-        # op, lo, or cl value because if the "high" value is not the highest
-        # (or equal) then the data may have been entered incorrectly.
+        # check: PlotlyError if the "high" value is less than the corresponding
+        # open, low, or close value because if the "high" value is not the
+        # highest (or equal) then the data may have been entered incorrectly.
 
         # create_ohlc_increase
-        kwargs = {'op': [2, 3], 'hi': [4, 2], 'lo': [1, 1], 'cl': [1, 2]}
-        self.assertRaises(PlotlyError, tls.TraceFactory.create_ohlc_increase,
-                          **kwargs)
+        kwargs = {'open': [2, 3], 'high': [4, 2],
+                  'low': [1, 1], 'close': [1, 2]}
+        self.assertRaisesRegexp(PlotlyError, "Oops! Looks like some of "
+                                             "your high values are less "
+                                             "the corresponding open, "
+                                             "low, or close values. "
+                                             "Double check that your data "
+                                             "is entered in O-H-L-C order",
+                                tls.TraceFactory.create_ohlc_increase,
+                                **kwargs)
 
         # create_ohlc_decrease
-        kwargs = {'op': [2, 3], 'hi': [4, 3], 'lo': [1, 1], 'cl': [1, 6]}
-        self.assertRaises(PlotlyError, tls.TraceFactory.create_ohlc_decrease,
-                          **kwargs)
+        kwargs = {'open': [2, 3], 'high': [4, 3],
+                  'low': [1, 1], 'close': [1, 6]}
+        self.assertRaisesRegexp(PlotlyError,
+                                "Oops! Looks like some of "
+                                "your high values are less "
+                                "the corresponding open, "
+                                "low, or close values. "
+                                "Double check that your data "
+                                "is entered in O-H-L-C order",
+                                tls.TraceFactory.create_ohlc_decrease,
+                                **kwargs)
 
-    def test_lo_lowest_value(self):
+    def test_low_lowest_value(self):
 
-        # check: PlotlyError if the "lo" value is greater than the
-        # corresponding op, hi, or cl value because if the "lo" value is not
-        # the lowest (or equal) then the data may have been entered incorrectly
+        # check: PlotlyError if the "low" value is greater than the
+        # corresponding open, high, or close value because if the "low" value
+        # is not the lowest (or equal) then the data may have been entered
+        # incorrectly
 
         # create_ohlc_increase
-        kwargs = {'op': [2, 3], 'hi': [4, 6], 'lo': [3, 1], 'cl': [1, 2]}
-        self.assertRaises(PlotlyError, tls.TraceFactory.create_ohlc_increase,
-                          **kwargs)
+        kwargs = {'open': [2, 3], 'high': [4, 6],
+                  'low': [3, 1], 'close': [1, 2]}
+        self.assertRaisesRegexp(PlotlyError,
+                                "Oops! Looks like some of "
+                                "your low values are greater "
+                                "than the corresponding high"
+                                ", open, or close values. "
+                                "Double check that your data "
+                                "is entered in O-H-L-C order",
+                                tls.TraceFactory.create_ohlc_increase,
+                                **kwargs)
 
         # create_ohlc_decrease
-        kwargs = {'op': [2, 3], 'hi': [4, 6], 'lo': [1, 5], 'cl': [1, 6]}
-        self.assertRaises(PlotlyError, tls.TraceFactory.create_ohlc_decrease,
-                          **kwargs)
+        kwargs = {'open': [2, 3], 'high': [4, 6],
+                  'low': [1, 5], 'close': [1, 6]}
+        self.assertRaisesRegexp(PlotlyError,
+                                "Oops! Looks like some of "
+                                "your low values are greater "
+                                "than the corresponding high"
+                                ", open, or close values. "
+                                "Double check that your data "
+                                "is entered in O-H-L-C order",
+                                tls.TraceFactory.create_ohlc_decrease,
+                                **kwargs)
 
     def test_one_ohlc_increase(self):
 
         # This should create one "increase" (i.e. close > open) ohlc stick
 
-        ohlc_incr = tls.TraceFactory.create_ohlc_increase(op=[33.0], hi=[33.2],
-                                                          lo=[32.7], cl=[33.1])
+        ohlc_incr = tls.TraceFactory.create_ohlc_increase(open=[33.0],
+                                                          high=[33.2],
+                                                          low=[32.7],
+                                                          close=[33.1])
 
         expected_ohlc_incr = {
             'mode': 'lines',
@@ -179,8 +215,10 @@ class TestOHLC(TestCase):
         # This should create one "increase" (i.e. close > open) ohlc stick
         # and change the name to "POSITIVE!!"
 
-        ohlc_incr = tls.TraceFactory.create_ohlc_increase(op=[1.5], hi=[30],
-                                                          lo=[1], cl=[25],
+        ohlc_incr = tls.TraceFactory.create_ohlc_increase(open=[1.5],
+                                                          high=[30],
+                                                          low=[1],
+                                                          close=[25],
                                                           name="POSITIVE!!")
 
         expected_ohlc_incr = {
@@ -198,8 +236,10 @@ class TestOHLC(TestCase):
 
         # This should create one "decrease" (i.e. close < open) ohlc stick
 
-        ohlc_decr = tls.TraceFactory.create_ohlc_decrease(op=[33.3], hi=[33.3],
-                                                          lo=[32.7], cl=[32.9])
+        ohlc_decr = tls.TraceFactory.create_ohlc_decrease(open=[33.3],
+                                                          high=[33.3],
+                                                          low=[32.7],
+                                                          close=[32.9])
 
         expected_ohlc_decr = {
             'mode': 'lines',
@@ -216,8 +256,8 @@ class TestOHLC(TestCase):
         # This should create one "decrease" (i.e. close < open) ohlc stick
         # and change the line width to 4
 
-        ohlc_decr = tls.TraceFactory.create_ohlc_decrease(op=[15], hi=[30],
-                                                          lo=[1], cl=[5],
+        ohlc_decr = tls.TraceFactory.create_ohlc_decrease(open=[15], high=[30],
+                                                          low=[1], close=[5],
                                                           line=Line(
                                                               color='rgb(214, 39, 40)',
                                                               width=4))
