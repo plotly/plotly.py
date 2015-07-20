@@ -39,7 +39,8 @@ PLOT_OPTIONS = {
     'fileopt': six.string_types,
     'world_readable': bool,
     'auto_open': bool,
-    'validate': bool
+    'validate': bool,
+    'share_key_enabled': bool,
 }
 
 

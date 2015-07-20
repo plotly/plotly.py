@@ -39,7 +39,8 @@ DEFAULT_PLOT_OPTIONS = {
     'fileopt': "new",
     'world_readable': True,
     'auto_open': True,
-    'validate': True
+    'validate': True,
+    'share_key_enabled': True,
 }
 
 # test file permissions and make sure nothing is corrupted
