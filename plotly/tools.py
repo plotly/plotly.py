@@ -1396,11 +1396,36 @@ def return_figure_from_figure_or_data(figure_or_data, validate_figure):
 class TraceFactory(dict):
 
     @staticmethod
+    def validate_equal_length(*args):
         """
+        Validates that data lists or ndarrays are the same length.
 
+        :raises: (PlotlyError) If any data lists are not the same length.
+        """
+        length = len(args[0])
+        if any(len(lst) != length for lst in args):
+            raise exceptions.PlotlyError("Oops! Your data lists or ndarrays "
+                                         "should be the same length.")
 
     @staticmethod
+    def validate_positive_scalars(**kwargs):
+        """
+        Validates that all values given in key/val pairs are positive.
 
+        Accepts kwargs to improve Exception messages.
+
+        :raises: (PlotlyError) If any value is < 0 or raises.
+        """
+        for key, val in kwargs.items():
+            try:
+                if val <= 0:
+                    raise ValueError('{} must be > 0, got {}'.format(key, val))
+            except TypeError:
+                raise exceptions.PlotlyError('{} must be a number, got {}'
+                                             .format(key, val))
+
+    @staticmethod
+    def validate_streamline(x, y):
         """
         streamline specific validations
 
@@ -1416,8 +1441,7 @@ class TraceFactory(dict):
         if _numpy_imported is False:
             raise ImportError("TraceFactory.create_streamline requires numpy.")
         for index in range(len(x) - 1):
-            if ((x[index + 1] - x[index]) -
-               (x[1] - x[0])) > .0001:
+            if ((x[index + 1] - x[index]) - (x[1] - x[0])) > .0001:
                 raise exceptions.PlotlyError("x must be a 1 dimensional, "
                                              "evenly spaced array")
         for index in range(len(y) - 1):
@@ -1427,10 +1451,21 @@ class TraceFactory(dict):
                                              "evenly spaced array")
 
     @staticmethod
-            raise exceptions.PlotlyError("Oops! Your high, open, low, and "
-                                         "close lists should all be the same "
-                                         "length.")
+    def validate_ohlc(open, high, low, close, direction, **kwargs):
+        """
+        ohlc specific validations
 
+        Specifically, this checks that the high value is greatest value and the
+        low value is the lowest value in each unit.
+
+        See TraceFactory.create_streamline() for params
+
+        :raises: (PlotlyError) If the high value is not the greatest value in
+            each unit.
+        :raises: (PlotlyError) If the low value is not the lowest value in each
+            unit.
+        :raises: (PlotlyError) If direction is not 'increasing' or 'decreasing'
+        """
         for lst in [open, low, close]:
             for index in range(len(high)):
                 if high[index] < lst[index]:
@@ -1441,7 +1476,7 @@ class TraceFactory(dict):
                                                  "Double check that your data "
                                                  "is entered in O-H-L-C order")
 
-        for lst in [high, open, close]:
+        for lst in [open, high, close]:
             for index in range(len(low)):
                 if low[index] > lst[index]:
                     raise exceptions.PlotlyError("Oops! Looks like some of "
@@ -1450,6 +1485,12 @@ class TraceFactory(dict):
                                                  ", open, or close values. "
                                                  "Double check that your data "
                                                  "is entered in O-H-L-C order")
+
+        if direction is 'increasing' or direction is 'decreasing':
+            pass
+        else:
+            raise exceptions.PlotlyError("direction must be defined as "
+                                         "'increasing' or 'decreasing'")
 
     @staticmethod
     def flatten(array):
@@ -1546,6 +1587,10 @@ class TraceFactory(dict):
         py.iplot(fig, filename='quiver')
         ```
         """
+        TraceFactory.validate_equal_length(x, y, u, v)
+        TraceFactory.validate_positive_scalars(arrow_scale=arrow_scale,
+                                               scale=scale)
+
         barb_x, barb_y = _Quiver(x, y, u, v, scale,
                                  arrow_scale, angle).get_barbs()
         arrow_x, arrow_y = _Quiver(x, y, u, v, scale,
@@ -1577,6 +1622,7 @@ class TraceFactory(dict):
             for more information on valid kwargs call
             help(plotly.graph_objs.Scatter)
 
+        :rtype (trace): returns streamline data
 
         Example 1: Plot simple streamline and increase arrow size
         ```
@@ -1635,7 +1681,12 @@ class TraceFactory(dict):
         py.iplot(fig, filename='streamline')
         ```
         """
+        TraceFactory.validate_equal_length(x, y)
+        TraceFactory.validate_equal_length(u, v)
         TraceFactory.validate_streamline(x, y)
+        TraceFactory.validate_positive_scalars(density=density,
+                                               arrow_scale=arrow_scale)
+
         streamline_x, streamline_y = _Streamline(x, y, u, v,
                                                  density, angle,
                                                  arrow_scale).sum_streamlines()
@@ -1649,6 +1700,7 @@ class TraceFactory(dict):
         return streamline
 
     @staticmethod
+    def create_ohlc(open, high, low, close, direction, **kwargs):
 
         """
         Returns data for an ohlc chart
@@ -1657,10 +1709,18 @@ class TraceFactory(dict):
         :param (list) high: high values
         :param (list) low: low values
         :param (list) close: closing values
+        :param (string) direction: direction can be 'increasing' or
+            'decreasing'. When the direction is 'increasing', the returned data
+            consists of all units where the close value is greater than the
+            corresponding open value, and when the direction is 'decreasing',
+            the returned data consists of all units where the close value is
+            less than the corresponding open value.
         :param (class) kwargs: kwargs passed through plotly.graph_objs.Scatter
             for more information on valid kwargs call
             help(plotly.graph_objs.Scatter)
 
+        :rtype (trace): returns data for ohlc increasing units or decreasing
+            units.
 
         Example 1: Plot ohlc chart
         ```
@@ -1674,30 +1734,54 @@ class TraceFactory(dict):
         low_data = [32.7, 32.7, 32.8, 32.6, 32.8]
         close_data = [33.0, 32.9, 33.3, 33.1, 33.1]
 
-
+        # Create ohlc increasing units
+        ohlc_increase = tls.TraceFactory.create_ohlc(open_data, high_data,
                                                      low_data, close_data,
+                                                     direction='increasing')
+
+        # Create ohlc decreasing units
+        ohlc_decrease = tls.TraceFactory.create_ohlc(open_data, high_data,
+                                                     low_data, close_data,
+                                                     direction='decreasing')
 
         # Plot
         fig = Figure()
         fig['data'].append(ohlc_increase)
         fig['data'].append(ohlc_decrease)
+        url = py.plot(fig, filename='ohlc')
         ```
 
+        Example 2: Plot ohlc chart with date labels
         ```
         import plotly.plotly as py
         import plotly.tools as tls
         from plotly.graph_objs import *
+
+        from datetime import datetime
 
         # Add data
         open_data = [33.0, 33.3, 33.5, 33.0, 34.1]
         high_data = [33.1, 33.3, 33.6, 33.2, 34.8]
         low_data = [32.7, 32.7, 32.8, 32.6, 32.8]
         close_data = [33.0, 32.9, 33.3, 33.1, 33.1]
-        dates = ['3/09', '6/09', '9/09', '12/09', '3/10']
+        dates = [datetime(year=2013, month=10, day=10),
+                 datetime(year=2013, month=11, day=10),
+                 datetime(year=2013, month=12, day=10),
+                 datetime(year=2014, month=1, day=10),
+                 datetime(year=2015, month=2, day=10)]
 
+        # Create ohlc trace of increasing units
+        ohlc_increase = tls.TraceFactory.create_ohlc(open_data, high_data,
+                                                     low_data, close_data,
+                                                     direction='increasing')
 
+        # Create ohlc trace of decreasing units
+        ohlc_decrease = tls.TraceFactory.create_ohlc(open_data, high_data,
+                                                     low_data, close_data,
+                                                     direction='decreasing')
 
         # Create layout with dates as x-axis labels
+        fig = dict(data=[ohlc_increase, ohlc_decrease],
               layout=dict(xaxis = dict(ticktext = dates,
                                        tickvals = [1, 2, 3, 4, 5 ])))
 
@@ -1705,17 +1789,39 @@ class TraceFactory(dict):
         url = py.plot(fig, filename='ohlcs_dates', validate=False)
         ```
         """
+        TraceFactory.validate_equal_length(open, high, low, close)
+        TraceFactory.validate_ohlc(open, high, low, close, direction,
+                                   **kwargs)
 
+        if direction is 'increasing':
+            (flat_increase_x,
+             flat_increase_y,
+             text_increase) = _OHLC(open, high, low, close).get_increase()
 
+            kwargs.setdefault('name', 'Increasing')
+            kwargs.setdefault('line', {'color': 'rgb(44, 160, 44)'})
+            kwargs.setdefault('text', text_increase)
 
+            ohlc = Scatter(x=flat_increase_x,
+                           y=flat_increase_y,
+                           mode='lines',
+                           **kwargs)
 
+        elif direction is 'decreasing':
+            (flat_decrease_x,
+             flat_decrease_y,
+             text_decrease) = _OHLC(open, high, low, close).get_decrease()
 
+            kwargs.setdefault('name', 'Decreasing')
+            kwargs.setdefault('line', {'color': 'rgb(214, 39, 40)'})
+            kwargs.setdefault('text', text_decrease)
 
+            ohlc = Scatter(x=flat_decrease_x,
+                           y=flat_decrease_y,
+                           mode='lines',
+                           **kwargs)
 
-
-
-
-
+        return ohlc
 
 
 class _Quiver(TraceFactory):
