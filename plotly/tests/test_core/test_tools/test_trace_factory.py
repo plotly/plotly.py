@@ -109,23 +109,46 @@ class TestOHLC(TestCase):
         # check: PlotlyError if open, high, low, close are not the same length
         # for TraceFactory.ohlc_increase and TraceFactory.ohlc_decrease
 
-        kwargs = {'open': [1], 'high': [1, 3], 'low': [1, 2], 'close': [1, 2]}
-        self.assertRaises(PlotlyError, tls.TraceFactory.create_ohlc_increase,
-                          **kwargs)
+        kwargs = {'open': [1], 'high': [1, 3],
+                  'low': [1, 2], 'close': [1, 2],
+                  'direction': ['increasing']}
+        self.assertRaises(PlotlyError, tls.TraceFactory.create_ohlc, **kwargs)
 
-        kwargs = {'open': [1, 2], 'high': [1, 2, 3], 'low': [1, 2],
-                  'close': [1, 2]}
-        self.assertRaises(PlotlyError, tls.TraceFactory.create_ohlc_increase,
-                          **kwargs)
+        kwargs = {'open': [1, 2], 'high': [1, 2, 3],
+                  'low': [1, 2], 'close': [1, 2],
+                  'direction': ['decreasing']}
+        self.assertRaises(PlotlyError, tls.TraceFactory.create_ohlc, **kwargs)
 
-        kwargs = {'open': [1], 'high': [1, 3], 'low': [1, 2], 'close': [2]}
-        self.assertRaises(PlotlyError, tls.TraceFactory.create_ohlc_decrease,
-                          **kwargs)
+        kwargs = {'open': [1, 2], 'high': [2, 3],
+                  'low': [0], 'close': [1, 3],
+                  'direction': ['increasing']}
+        self.assertRaises(PlotlyError, tls.TraceFactory.create_ohlc, **kwargs)
 
-        kwargs = {'open': [1, 2], 'high': [1, 2],
-                  'low': [1, 2, .5], 'close': [1, 2]}
-        self.assertRaises(PlotlyError, tls.TraceFactory.create_ohlc_decrease,
-                          **kwargs)
+        kwargs = {'open': [1, 2], 'high': [2, 3],
+                  'low': [1, 2], 'close': [1],
+                  'direction': ['decreasing']}
+        self.assertRaises(PlotlyError, tls.TraceFactory.create_ohlc, **kwargs)
+
+    def test_direction_arg(self):
+
+        # check: PlotlyError if direction is not defined as "increasing" or
+        # "decreasing"
+
+        kwargs = {'open': [1, 4], 'high': [1, 5],
+                  'low': [1, 2], 'close': [1, 2],
+                  'direction': ['inc']}
+        self.assertRaisesRegexp(PlotlyError,
+                                "direction must be defined as "
+                                "'increasing' or 'decreasing'",
+                                tls.TraceFactory.create_ohlc, **kwargs)
+
+        kwargs = {'open': [1, 2], 'high': [1, 3],
+                  'low': [1, 2], 'close': [1, 2],
+                  'direction': ['d']}
+        self.assertRaisesRegexp(PlotlyError,
+                                "direction must be defined as "
+                                "'increasing' or 'decreasing'",
+                                tls.TraceFactory.create_ohlc, **kwargs)
 
     def test_high_highest_value(self):
 
@@ -135,27 +158,15 @@ class TestOHLC(TestCase):
 
         # create_ohlc_increase
         kwargs = {'open': [2, 3], 'high': [4, 2],
-                  'low': [1, 1], 'close': [1, 2]}
+                  'low': [1, 1], 'close': [1, 2],
+                  'direction': ['increasing']}
         self.assertRaisesRegexp(PlotlyError, "Oops! Looks like some of "
                                              "your high values are less "
                                              "the corresponding open, "
                                              "low, or close values. "
                                              "Double check that your data "
                                              "is entered in O-H-L-C order",
-                                tls.TraceFactory.create_ohlc_increase,
-                                **kwargs)
-
-        # create_ohlc_decrease
-        kwargs = {'open': [2, 3], 'high': [4, 3],
-                  'low': [1, 1], 'close': [1, 6]}
-        self.assertRaisesRegexp(PlotlyError,
-                                "Oops! Looks like some of "
-                                "your high values are less "
-                                "the corresponding open, "
-                                "low, or close values. "
-                                "Double check that your data "
-                                "is entered in O-H-L-C order",
-                                tls.TraceFactory.create_ohlc_decrease,
+                                tls.TraceFactory.create_ohlc,
                                 **kwargs)
 
     def test_low_lowest_value(self):
@@ -167,7 +178,8 @@ class TestOHLC(TestCase):
 
         # create_ohlc_increase
         kwargs = {'open': [2, 3], 'high': [4, 6],
-                  'low': [3, 1], 'close': [1, 2]}
+                  'low': [3, 1], 'close': [1, 2],
+                  'direction': ['decreasing']}
         self.assertRaisesRegexp(PlotlyError,
                                 "Oops! Looks like some of "
                                 "your low values are greater "
@@ -175,30 +187,18 @@ class TestOHLC(TestCase):
                                 ", open, or close values. "
                                 "Double check that your data "
                                 "is entered in O-H-L-C order",
-                                tls.TraceFactory.create_ohlc_increase,
-                                **kwargs)
-
-        # create_ohlc_decrease
-        kwargs = {'open': [2, 3], 'high': [4, 6],
-                  'low': [1, 5], 'close': [1, 6]}
-        self.assertRaisesRegexp(PlotlyError,
-                                "Oops! Looks like some of "
-                                "your low values are greater "
-                                "than the corresponding high"
-                                ", open, or close values. "
-                                "Double check that your data "
-                                "is entered in O-H-L-C order",
-                                tls.TraceFactory.create_ohlc_decrease,
+                                tls.TraceFactory.create_ohlc,
                                 **kwargs)
 
     def test_one_ohlc_increase(self):
 
         # This should create one "increase" (i.e. close > open) ohlc stick
 
-        ohlc_incr = tls.TraceFactory.create_ohlc_increase(open=[33.0],
-                                                          high=[33.2],
-                                                          low=[32.7],
-                                                          close=[33.1])
+        ohlc_incr = tls.TraceFactory.create_ohlc(open=[33.0],
+                                                 high=[33.2],
+                                                 low=[32.7],
+                                                 close=[33.1],
+                                                 direction="increasing")
 
         expected_ohlc_incr = {
             'mode': 'lines',
@@ -215,11 +215,12 @@ class TestOHLC(TestCase):
         # This should create one "increase" (i.e. close > open) ohlc stick
         # and change the name to "POSITIVE!!"
 
-        ohlc_incr = tls.TraceFactory.create_ohlc_increase(open=[1.5],
-                                                          high=[30],
-                                                          low=[1],
-                                                          close=[25],
-                                                          name="POSITIVE!!")
+        ohlc_incr = tls.TraceFactory.create_ohlc(open=[1.5],
+                                                 high=[30],
+                                                 low=[1],
+                                                 close=[25],
+                                                 direction="increasing",
+                                                 name="POSITIVE!!")
 
         expected_ohlc_incr = {
             'text': ('Open', 'Open', 'High', 'Low', 'Close', 'Close', ''),
@@ -236,10 +237,11 @@ class TestOHLC(TestCase):
 
         # This should create one "decrease" (i.e. close < open) ohlc stick
 
-        ohlc_decr = tls.TraceFactory.create_ohlc_decrease(open=[33.3],
-                                                          high=[33.3],
-                                                          low=[32.7],
-                                                          close=[32.9])
+        ohlc_decr = tls.TraceFactory.create_ohlc(open=[33.3],
+                                                 high=[33.3],
+                                                 low=[32.7],
+                                                 close=[32.9],
+                                                 direction="decreasing")
 
         expected_ohlc_decr = {
             'mode': 'lines',
@@ -256,11 +258,12 @@ class TestOHLC(TestCase):
         # This should create one "decrease" (i.e. close < open) ohlc stick
         # and change the line width to 4
 
-        ohlc_decr = tls.TraceFactory.create_ohlc_decrease(open=[15], high=[30],
-                                                          low=[1], close=[5],
-                                                          line=Line(
-                                                              color='rgb(214, 39, 40)',
-                                                              width=4))
+        ohlc_decr = tls.TraceFactory.create_ohlc(open=[15], high=[30],
+                                                 low=[1], close=[5],
+                                                 direction="decreasing",
+                                                 line=Line(
+                                                     color='rgb(214, 39, 40)',
+                                                     width=4))
 
         expected_ohlc_decr = {
             'text': ('Open', 'Open', 'High', 'Low', 'Close', 'Close', ''),
@@ -284,8 +287,10 @@ class TestOHLC(TestCase):
         l = [3, 2, 7, 3, 2, 2, 1.1, 2.3]
         c = [3.3, 6.3, 10, 9, 9.2, 3, 2.9, 6.1]
 
-        ohlc_incr = tls.TraceFactory.create_ohlc_increase(o, h, l, c)
-        ohlc_decr = tls.TraceFactory.create_ohlc_decrease(o, h, l, c)
+        ohlc_incr = tls.TraceFactory.create_ohlc(o, h, l, c,
+                                                 direction='increasing')
+        ohlc_decr = tls.TraceFactory.create_ohlc(o, h, l, c,
+                                                 direction='decreasing')
         ohlc_data = Data([ohlc_incr, ohlc_decr])
 
         expected_ohlc_data = [{

@@ -53,7 +53,17 @@ class TestStreamline(TestCase):
         self.assertRaises(PlotlyError, tls.TraceFactory.create_streamline,
                           **kwargs)
 
-    def test_unequal_shape_u(self):
+    def test_unequal_length_xy(self):
+
+        # check for PlotlyError if u and v are not the same length
+
+        kwargs = {'x': [0, 2, 4, 6], 'y': [1.5, 2, 3.5],
+                  'u': [[-1, -5], [-1, -5]],
+                  'v': [[1, 1], [-3, -3]]}
+        self.assertRaises(PlotlyError, tls.TraceFactory.create_streamline,
+                          **kwargs)
+
+    def test_unequal_length_uv(self):
 
         # check for PlotlyError if u and v are not the same length
 

@@ -1396,49 +1396,10 @@ def return_figure_from_figure_or_data(figure_or_data, validate_figure):
 class TraceFactory(dict):
 
     @staticmethod
-    def validate_shared(x, y, u, v,
-                        scale=.1, density=1,
-                        arrow_scale=.3, **kwargs):
-        """
-        Validates the user-input arguments for charts with shared arguments,
-
-        Specifically for quiver and streamline, that density, scale,
-        and arrow_scale are positive and that x and y and u and v are
-        the same length.
-
-        Specifically for ohlc charts that open, high, low, and close lists
-        are the same length.
-
-        Refer to TraceFactory.create_streamline(),
-        TraceFactory.create_quiver(), or
-        TraceFactory.create_ohlc_increase for params
-
-        :raises: (ValueError) If scale is <= 0.
-        :raises: (ValueError) If arrow_scale is <= 0.
-        :raises: (ValueError) If density is <= 0.
-        :raises: (PlotlyError) If x and y are not lists or ndarrays
-            of the same length.
-        :raises: (PlotlyError) If u and v are not lists or ndarrays
-            of the same length.
-        :raises: (PlotlyError) If open, high, low, and close are not lists
-            of the same length.
         """
 
-        if scale <= 0:
-            raise ValueError("arrow_scale must be > 0")
-        if arrow_scale <= 0:
-            raise ValueError("arrow_scale must be > 0")
-        if density <= 0:
-            raise ValueError("density must be > 0")
-        if len(x) != len(y):
-            raise exceptions.PlotlyError("x and y should be a list or array "
-                                         "of the same length")
-        if len(u) != len(v):
-            raise exceptions.PlotlyError("u and v should be a list or array "
-                                         "of the same length")
 
     @staticmethod
-    def validate_streamline(x, y, **kwargs):
 
         """
         streamline specific validations
@@ -1451,8 +1412,6 @@ class TraceFactory(dict):
         :raises: (ImportError) If numpy is not available.
         :raises: (PlotlyError) If x is not evenly spaced.
         :raises: (PlotlyError) If y is not evenly spaced.
-        :raises: (PlotlyError) If open, high, low, and close
-            are not the same length.
         """
         if _numpy_imported is False:
             raise ImportError("TraceFactory.create_streamline requires numpy.")
@@ -1468,9 +1427,6 @@ class TraceFactory(dict):
                                              "evenly spaced array")
 
     @staticmethod
-    def validate_ohlc(open, high, low, close, **kwargs):
-        length = len(high)
-        if any(len(lst) != length for lst in [open, low, close]):
             raise exceptions.PlotlyError("Oops! Your high, open, low, and "
                                          "close lists should all be the same "
                                          "length.")
@@ -1590,9 +1546,6 @@ class TraceFactory(dict):
         py.iplot(fig, filename='quiver')
         ```
         """
-        TraceFactory.validate_shared(x, y, u, v,
-                                     scale, arrow_scale,
-                                     **kwargs)
         barb_x, barb_y = _Quiver(x, y, u, v, scale,
                                  arrow_scale, angle).get_barbs()
         arrow_x, arrow_y = _Quiver(x, y, u, v, scale,
@@ -1624,7 +1577,6 @@ class TraceFactory(dict):
             for more information on valid kwargs call
             help(plotly.graph_objs.Scatter)
 
-        :rtype: (trace) returns streamline data
 
         Example 1: Plot simple streamline and increase arrow size
         ```
@@ -1683,9 +1635,6 @@ class TraceFactory(dict):
         py.iplot(fig, filename='streamline')
         ```
         """
-        TraceFactory.validate_shared(x, y, u, v,
-                                     density, arrow_scale,
-                                     **kwargs)
         TraceFactory.validate_streamline(x, y)
         streamline_x, streamline_y = _Streamline(x, y, u, v,
                                                  density, angle,
@@ -1700,12 +1649,6 @@ class TraceFactory(dict):
         return streamline
 
     @staticmethod
-    def create_ohlc(open, high, low, close,
-                    increasing_trace_name='Increasing',
-                    decreasing_trace_name='Decreasing',
-                    increasing_trace_color='rgb(44, 160, 44)',
-                    decreasing_trace_color='rgb(214, 39, 40)',
-                    **kwargs):
 
         """
         Returns data for an ohlc chart
@@ -1714,20 +1657,10 @@ class TraceFactory(dict):
         :param (list) high: high values
         :param (list) low: low values
         :param (list) close: closing values
-        :param (string) increasing_trace_name: name of trace where
-            close values are higher than the corresponding open value.
-        :param (string) decreasing_trace_name: name of trace where
-            close values are less than the corresponding open value.
-        :param (string) increasing_trace_color: color of trace where
-            close values are greater than the corresponding open value.
-        :param (string) decreasing_trace_color: color of trace where
-            close values are less than the corresponding open value.
         :param (class) kwargs: kwargs passed through plotly.graph_objs.Scatter
             for more information on valid kwargs call
             help(plotly.graph_objs.Scatter)
 
-        :rtype: (list) returns a list of ohlc traces: an increasing trace and
-            a decreasing trace.
 
         Example 1: Plot ohlc chart
         ```
@@ -1741,17 +1674,15 @@ class TraceFactory(dict):
         low_data = [32.7, 32.7, 32.8, 32.6, 32.8]
         close_data = [33.0, 32.9, 33.3, 33.1, 33.1]
 
-        # Create ohlc increasing periods
-        ohlc = tls.TraceFactory.create_ohlc(open_data, high_data,
-                                            low_data, close_data)
+
+                                                     low_data, close_data,
 
         # Plot
         fig = Figure()
-        fig['data'] = ohlc
-        url = py.plot(fig, filename='ohlc')
+        fig['data'].append(ohlc_increase)
+        fig['data'].append(ohlc_decrease)
         ```
 
-        Example 2: Plot ohlc chart with date labels
         ```
         import plotly.plotly as py
         import plotly.tools as tls
@@ -1764,12 +1695,9 @@ class TraceFactory(dict):
         close_data = [33.0, 32.9, 33.3, 33.1, 33.1]
         dates = ['3/09', '6/09', '9/09', '12/09', '3/10']
 
-        # Create ohlc
-        ohlc = tls.TraceFactory.create_ohlc(open_data, high_data,
-                                            low_data, close_data)
+
 
         # Create layout with dates as x-axis labels
-        fig = dict(data=ohlc,
               layout=dict(xaxis = dict(ticktext = dates,
                                        tickvals = [1, 2, 3, 4, 5 ])))
 
@@ -1778,222 +1706,16 @@ class TraceFactory(dict):
         ```
         """
 
-        TraceFactory.validate_ohlc(open, high, low, close,
-                                   **kwargs)
 
-        (flat_increase_x,
-         flat_increase_y,
-         text_increase) = _OHLC(open, high, low, close).get_increase()
 
-        ohlc_increase = Scatter(x=flat_increase_x,
-                                y=flat_increase_y,
-                                mode='lines',
-                                name=increasing_trace_name,
-                                line=Line(color=increasing_trace_color),
-                                text=text_increase,
-                                **kwargs)
 
-        (flat_decrease_x,
-         flat_decrease_y,
-         text_decrease) = _OHLC(open, high, low, close).get_decrease()
 
-        ohlc_decrease = Scatter(x=flat_decrease_x,
-                                y=flat_decrease_y,
-                                mode='lines',
-                                name=decreasing_trace_name,
-                                line=Line(color=decreasing_trace_color),
-                                text=text_decrease,
-                                **kwargs)
 
-        ohlc = [ohlc_increase, ohlc_decrease]
 
-        return ohlc
 
-    @staticmethod
-    def create_ohlc_increase(open, high, low, close,
-                             **kwargs):
-        """
-        Returns data for the increasing periods of the ohlc chart
 
-        To create a full ohlc chart use both create_ohlc_increase
-        and create_ohlc_decrease
 
-        :param (list) open: opening values
-        :param (list) high: high values
-        :param (list) low: low values
-        :param (list) close: closing values
-        :param (class) kwargs: kwargs passed through plotly.graph_objs.Scatter
-            for more information on valid kwargs call
-            help(plotly.graph_objs.Scatter)
 
-        :rtype: (trace) returns ohlc data trace for increasing periods
-
-        Example 1: Plot ohlc chart increasing periods
-        ```
-        import plotly.plotly as py
-        import plotly.tools as tls
-        from plotly.graph_objs import *
-
-        # Add data
-        open_data = [33.0, 33.3, 33.5, 33.0, 34.1]
-        high_data = [33.1, 33.3, 33.6, 33.2, 34.8]
-        low_data = [32.7, 32.7, 32.8, 32.6, 32.8]
-        close_data = [33.0, 32.9, 33.3, 33.1, 33.1]
-
-        # Create ohlc increasing periods
-        ohlc_increase = tls.TraceFactory.create_ohlc_increase(open_data,
-                                                              high_data,
-                                                              low_data,
-                                                              close_data)
-
-        # Plot
-        fig=Figure()
-        fig['data'].append(ohlc_increase)
-        url = py.plot(fig, filename='ohlc_increase')
-        ```
-
-        Example 2: Plot ohlc chart increasing and decreasing periods
-        ```
-        import plotly.plotly as py
-        import plotly.tools as tls
-        from plotly.graph_objs import *
-
-        # Add data
-        open_data = [33.0, 33.3, 33.5, 33.0, 34.1]
-        high_data = [33.1, 33.3, 33.6, 33.2, 34.8]
-        low_data = [32.7, 32.7, 32.8, 32.6, 32.8]
-        close_data = [33.0, 32.9, 33.3, 33.1, 33.1]
-
-        # Create ohlc increasing periods
-        ohlc_increase = tls.TraceFactory.create_ohlc_increase(open_data,
-                                                              high_data,
-                                                              low_data,
-                                                              close_data)
-
-        # Create ohlc decreasing periods
-        ohlc_decrease = tls.TraceFactory.create_ohlc_decrease(open_data,
-                                                              high_data,
-                                                              low_data,
-                                                              close_data)
-
-        # Plot
-        fig = Figure()
-        fig['data'].append(ohlc_increase)
-        fig['data'].append(ohlc_decrease)
-        url = py.plot(fig, filename='ohlc_increase_decrease')
-        ```
-
-        Example 3: Plot ohlc chart with date labels
-        ```
-        import plotly.plotly as py
-        import plotly.tools as tls
-        from plotly.graph_objs import *
-
-        # Add data
-        open_data = [33.0, 33.3, 33.5, 33.0, 34.1]
-        high_data = [33.1, 33.3, 33.6, 33.2, 34.8]
-        low_data = [32.7, 32.7, 32.8, 32.6, 32.8]
-        close_data = [33.0, 32.9, 33.3, 33.1, 33.1]
-        dates = ['3/09', '6/09', '9/09', '12/09', '3/10']
-
-        # Create ohlc increasing periods
-        ohlc_increase = tls.TraceFactory.create_ohlc_increase(open_data,
-                                                              high_data,
-                                                              low_data,
-                                                              close_data)
-
-        # Create ohlc decreasing periods
-        ohlc_decrease = tls.TraceFactory.create_ohlc_decrease(open_data,
-                                                              high_data,
-                                                              low_data,
-                                                              close_data)
-
-        # Create layout with dates as x-axis labels
-        fig = dict(data=[ohlc_incr, ohlc_decr],
-              layout=dict(xaxis = dict(ticktext = dates,
-                                       tickvals = [1, 2, 3, 4, 5 ])))
-
-        # Plot
-        url = py.plot(fig, filename='ohlcs_dates', validate=False)
-        ```
-        """
-
-        TraceFactory.validate_ohlc(open, high, low, close, **kwargs)
-
-        (flat_increase_x,
-         flat_increase_y,
-         text_increase) = _OHLC(open, high, low, close).get_increase()
-
-        kwargs.setdefault('name', 'Increasing')
-        kwargs.setdefault('line', {'color': 'rgb(44, 160, 44)'})
-        kwargs.setdefault('text', text_increase)
-
-        ohlc_increase = Scatter(x=flat_increase_x,
-                                y=flat_increase_y,
-                                mode='lines',
-                                **kwargs)
-        return ohlc_increase
-
-    @staticmethod
-    def create_ohlc_decrease(open, high, low, close, **kwargs):
-        """
-        Returns data for the decreasing periods of the ohlc chart
-
-        To create a full ohlc chart use both create_ohlc_decrease
-        and create_ohlc_increase
-
-        :param (list) open: opening values
-        :param (list) high: high values
-        :param (list) low: low values
-        :param (list) close: closing values
-        :param (class) kwargs: kwargs passed through plotly.graph_objs.Scatter
-            for more information on valid kwargs call
-            help(plotly.graph_objs.Scatter)
-
-        :rtype: (trace) returns ohlc data trace for decreasing periods
-
-        Example 1: Plot ohlc chart decreasing periods
-        ```
-        import plotly.plotly as py
-        import plotly.tools as tls
-        from plotly.graph_objs import *
-
-        # Add data
-        open_data = [33.0, 33.3, 33.5, 33.0, 34.1]
-        high_data = [33.1, 33.3, 33.6, 33.2, 34.8]
-        low_data = [32.7, 32.7, 32.8, 32.6, 32.8]
-        close_data = [33.0, 32.9, 33.3, 33.1, 33.1]
-
-        # Create ohlc decreasing periods
-        ohlc_decrease = tls.TraceFactory.create_ohlc_decrease(open_data,
-                                                              high_data,
-                                                              low_data,
-                                                              close_data)
-
-        # Plot
-        fig = Figure()
-        fig['data'].append(ohlc_decrease)
-        url = py.plot(fig, filename='ohlc_decrease')
-        ```
-
-        For more examples refer to TraceFactory.create_ohlc_increase()
-        """
-
-        TraceFactory.validate_ohlc(open, high, low, close, **kwargs)
-
-        (flat_decrease_x,
-         flat_decrease_y,
-         text_decrease) = _OHLC(open, high, low, close).get_decrease()
-
-        kwargs.setdefault('name', 'Decreasing')
-        kwargs.setdefault('line', {'color': 'rgb(214, 39, 40)'})
-        kwargs.setdefault('text', text_decrease)
-
-        ohlc_decrease = Scatter(x=flat_decrease_x,
-                                y=flat_decrease_y,
-                                mode='lines',
-                                **kwargs)
-        return ohlc_decrease
 
 
 class _Quiver(TraceFactory):
