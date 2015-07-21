@@ -26,6 +26,8 @@ import requests
 import six
 import six.moves
 
+from requests.auth import HTTPBasicAuth
+
 from plotly import exceptions, tools, utils, version
 from plotly.plotly import chunked_requests
 from plotly.session import (sign_in, update_session_plot_options,
@@ -40,7 +42,7 @@ DEFAULT_PLOT_OPTIONS = {
     'world_readable': True,
     'auto_open': True,
     'validate': True,
-    'share_key_enabled': True,
+    'share_key_enabled': False,
 }
 
 # test file permissions and make sure nothing is corrupted
@@ -615,7 +617,6 @@ class image:
                                              "not be translated.")
             raise exceptions.PlotlyError(return_data['error'])
 
-
     @classmethod
     def ishow(cls, figure_or_data, format='png', width=None, height=None):
         """
@@ -654,9 +655,9 @@ class image:
         elif ext and not format:
             format = ext[1:]
         elif not ext and format:
-            filename += '.'+format
+            filename += '.' + format
         else:
-            filename += '.'+format
+            filename += '.' + format
 
         img = cls.get(figure_or_data, format, width, height)
 
@@ -979,7 +980,7 @@ class grid_ops:
             'rows': json.dumps(rows, cls=utils.PlotlyJSONEncoder)
         }
 
-        api_url = (_api_v2.api_url('grids')+
+        api_url = (_api_v2.api_url('grids') +
                    '/{grid_id}/row'.format(grid_id=grid_id))
         res = requests.post(api_url, data=payload, headers=_api_v2.headers(),
                             verify=get_config()['plotly_ssl_verification'])
@@ -1032,7 +1033,7 @@ class grid_ops:
 
         """
         grid_id = _api_v2.parse_grid_id_args(grid, grid_url)
-        api_url = _api_v2.api_url('grids')+'/'+grid_id
+        api_url = _api_v2.api_url('grids') + '/' + grid_id
         res = requests.delete(api_url, headers=_api_v2.headers(),
                               verify=get_config()['plotly_ssl_verification'])
         _api_v2.response_handler(res)
@@ -1099,7 +1100,7 @@ class meta_ops:
             'metadata': json.dumps(meta, cls=utils.PlotlyJSONEncoder)
         }
 
-        api_url = _api_v2.api_url('grids')+'/{grid_id}'.format(grid_id=grid_id)
+        api_url = _api_v2.api_url('grids') + '/{grid_id}'.format(grid_id=grid_id)
 
         res = requests.patch(api_url, data=payload, headers=_api_v2.headers(),
                              verify=get_config()['plotly_ssl_verification'])
@@ -1217,6 +1218,31 @@ def validate_credentials(credentials):
         raise exceptions.PlotlyLocalCredentialsError()
 
 
+def secret_key(r, **payload):
+    """
+    update plot's url to include the scret key
+
+    """
+
+    plot_id = r['url'].replace("https://plot.ly/~" + payload['un'] + "/", "")
+    url = "https://api.plot.ly/v2/files/" + payload['un'] + ":" + plot_id
+    plot_kwargs = json.loads(payload['kwargs'])
+    response = requests.patch(url,
+                              headers={'Plotly-Client-Platform': 'Python'},
+                              auth=HTTPBasicAuth(payload['un'],
+                                                 payload['key']),
+                              data={"share_key_enabled":
+                                    plot_kwargs['share_key_enabled'],
+                                    "world_readable":
+                                    plot_kwargs['world_readable'],
+                                    "filename": plot_kwargs['filename'],
+                                    "fileopt": plot_kwargs['fileopt']})
+    response = json.loads(response.content)
+    r['url'] += '?share_key=' + response['share_key']
+
+    return r
+
+
 def _send_to_plotly(figure, **plot_options):
     """
 
@@ -1231,6 +1257,7 @@ def _send_to_plotly(figure, **plot_options):
     kwargs = json.dumps(dict(filename=plot_options['filename'],
                              fileopt=plot_options['fileopt'],
                              world_readable=plot_options['world_readable'],
+                             share_key_enabled=plot_options['share_key_enabled'],
                              layout=fig['layout'] if 'layout' in fig
                              else {}),
                         cls=utils.PlotlyJSONEncoder)
@@ -1247,9 +1274,13 @@ def _send_to_plotly(figure, **plot_options):
     url = get_config()['plotly_domain'] + "/clientresp"
 
     r = requests.post(url, data=payload,
-                      verify=get_config()['plotly_ssl_verification'])
+                      verify=get_config()['plotly_ssl_verification'],)
     r.raise_for_status()
     r = json.loads(r.text)
+    # Check if the url needs a secret key
+    if plot_options['share_key_enabled'] is True:
+        # secret_key updates the url to include the secret key
+        r = secret_key(r, **payload)
     if 'error' in r and r['error'] != '':
         print(r['error'])
     if 'warning' in r and r['warning'] != '':
