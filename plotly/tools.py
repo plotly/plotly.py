@@ -1737,7 +1737,7 @@ class TraceFactory(dict):
             consists of all units where the close value is greater than the
             corresponding open value, and when the direction is 'decreasing',
             the returned data consists of all units where the close value is
-            less than the corresponding open value.
+            less than or equal to the corresponding open value.
         :param (class) kwargs: kwargs passed through plotly.graph_objs.Scatter
             for more information on valid kwargs call
             help(plotly.graph_objs.Scatter)
@@ -1845,6 +1845,197 @@ class TraceFactory(dict):
                            **kwargs)
 
         return ohlc
+
+    @staticmethod
+    def create_candlestick(open, high, low, close, direction, **kwargs):
+
+        """
+        Returns data for a candlestick chart
+
+        When direction is 'increasing' the increasing (i.e. close > open)
+        data units are returned and when direction  is 'decreasing' the
+        decreasing (i.e. close <= open) data units are returned.
+
+        :param (list) open: opening values
+        :param (list) high: high values
+        :param (list) low: low values
+        :param (list) close: closing values
+        :param (string) direction: direction can be 'increasing' or
+            'decreasing'. When the direction is 'increasing', the returned data
+            consists of all units where the close value is greater than the
+            corresponding open value, and when the direction is 'decreasing',
+            the returned data consists of all units where the close value is
+            less than or equal to the corresponding open value.
+        :param (class) kwargs: kwargs passed through plotly.graph_objs.Scatter
+            for more information on valid kwargs call
+            help(plotly.graph_objs.Scatter)
+
+        :rtype (dict): returns data for candlestick increasing units or
+            decreasing units.
+
+        Example 1: Plot candlestick chart
+        ```
+        import plotly.plotly as py
+        import plotly.tools as tls
+        from plotly.graph_objs import *
+
+        # Add data
+        open = [33.0, 33.3, 33.5, 33.0, 34.1]
+        high = [33.1, 33.3, 33.6, 33.2, 34.8]
+        low = [32.7, 32.7, 32.8, 32.6, 32.8]
+        close = [33.0, 32.9, 33.3, 33.1, 33.1]
+
+        # Create candlestick increasing units
+        candle_incr = tls.TraceFactory.create_candlestick(open, high,
+                                                          low, close,
+                                                          direction='increasing')
+
+        # Create ohlc decreasing units
+        candle_decr = tls.TraceFactory.create_candlestick(open, high,
+                                                          low, close,
+                                                          direction='decreasing')
+
+        # Plot
+        data = candle_incr
+        data.extend(candle_decr)
+        fig = dict(data=data)
+        url = py.plot(fig, filename='simple candlestick', validate=False)
+        ```
+
+        Example 2: Plot candlestick chart with date labels
+        ```
+        import plotly.plotly as py
+        import plotly.tools as tls
+        from plotly.graph_objs import *
+
+        from datetime import datetime
+
+        # Add data
+        open = [33.0, 33.3, 33.5, 33.0, 34.1]
+        high = [33.1, 33.3, 33.6, 33.2, 34.8]
+        low = [32.7, 32.7, 32.8, 32.6, 32.8]
+        close = [33.0, 32.9, 33.3, 33.1, 33.1]
+        dates = [datetime(year=2013, month=10, day=10),
+                 datetime(year=2013, month=11, day=10),
+                 datetime(year=2013, month=12, day=10),
+                 datetime(year=2014, month=1, day=10),
+                 datetime(year=2015, month=2, day=10)]
+
+        # Create candlestick increasing units
+        candle_incr = tls.TraceFactory.create_candlestick(open, high,
+                                                          low, close,
+                                                          direction='increasing')
+
+        # Create ohlc decreasing units
+        candle_decr = tls.TraceFactory.create_candlestick(open, high,
+                                                          low, close,
+                                                          direction='decreasing')
+
+        # Create layout with dates as x-axis labels
+        data = candle_incr
+        data.extend(candle_decr)
+        fig = dict(data=data,
+              layout=dict(xaxis = dict(ticktext = dates,
+                                       tickvals = [1, 2, 3, 4, 5 ])))
+
+        # Plot
+        url = py.plot(fig, filename='candle_dates', validate=False)
+        ```
+        """
+        TraceFactory.validate_equal_length(open, high, low, close)
+        TraceFactory.validate_ohlc(open, high, low, close, direction,
+                                   **kwargs)
+
+        (increase_y,
+         increase_x,
+         decrease_y,
+         decrease_x,
+         increase_text,
+         decrease_text) = (_Candlestick(open, high, low, close)
+                           .separate_increase_decrease())
+
+        (increasing_fill_y,
+         increasing_fill_x,
+         decreasing_fill_y,
+         decreasing_fill_x) = _Candlestick(open, high, low, close).get_fill()
+
+        candlestick = []
+
+        if direction is 'increasing':
+
+            kwargs.setdefault('name', 'Increasing')
+            kwargs.setdefault('line', {'color': 'rgb(44, 160, 44)'})
+
+            candlestick = [None] * (len(increasing_fill_y))
+
+            # Make segments to stop fill (individual traces)
+            for index in range(0, len(candlestick), 2):
+                candlestick[index] = dict(type='scatter',
+                                          x=increasing_fill_x[index],
+                                          y=increasing_fill_y[index],
+                                          mode='lines',
+                                          legendgroup='Increasing',
+                                          showlegend=False,
+                                          **kwargs)
+
+            # Make segments to start fill (individual traces)
+            for index in range(1, len(candlestick), 2):
+                candlestick[index] = dict(type='scatter',
+                                          x=increasing_fill_x[index],
+                                          y=increasing_fill_y[index],
+                                          mode='lines',
+                                          legendgroup='Increasing',
+                                          showlegend=False,
+                                          fill='tonextx',
+                                          **kwargs)
+
+            # Make one trace of all increasing candlestick outlines
+            candlestick.append(dict(type='scatter',
+                                    x=increase_x,
+                                    y=increase_y,
+                                    mode='lines',
+                                    text=increase_text,
+                                    legendgroup='Increasing',
+                                    **kwargs))
+
+        if direction is 'decreasing':
+
+            kwargs.setdefault('name', 'Decreasing')
+            kwargs.setdefault('line', {'color': 'rgb(214, 39, 40)'})
+
+            candlestick = [None] * (len(decreasing_fill_y))
+
+            # Make segments to stop fill (individual traces)
+            for index in range(0, len(candlestick), 2):
+                candlestick[index] = dict(type='scatter',
+                                          x=decreasing_fill_x[index],
+                                          y=decreasing_fill_y[index],
+                                          mode='lines',
+                                          legendgroup='Decreasing',
+                                          showlegend=False,
+                                          **kwargs)
+
+            # Make segments to start fill (individual traces)
+            for index in range(1, len(candlestick), 2):
+                candlestick[index] = dict(type='scatter',
+                                          x=decreasing_fill_x[index],
+                                          y=decreasing_fill_y[index],
+                                          mode='lines',
+                                          legendgroup='Decreasing',
+                                          showlegend=False,
+                                          fill='tonextx',
+                                          **kwargs)
+
+            # Make one trace of all decreasing candlestick outlines
+            candlestick.append(dict(type='scatter',
+                                    x=decrease_x,
+                                    y=decrease_y,
+                                    mode='lines',
+                                    text=decrease_text,
+                                    legendgroup='Decreasing',
+                                    **kwargs))
+
+        return candlestick
 
 
 class _Quiver(TraceFactory):
@@ -2188,8 +2379,8 @@ class _Streamline(TraceFactory):
         :param (angle in radians) angle: angle of arrowhead. Default = pi/9
         :param (float in [0,1]) arrow_scale: value to scale length of arrowhead
             Default = .09
-        :rtype (list) arrows_x: x-values to create arrowhead
-        :rtype (list) arrows_y: y-values to create arrowhead
+        :rtype (list, list) arrows_x: x-values to create arrowhead and
+            arrows_y: y-values to create arrowhead
         """
         arrow_end_x = np.empty((len(self.st_x)))
         arrow_end_y = np.empty((len(self.st_y)))
@@ -2257,17 +2448,16 @@ class _Streamline(TraceFactory):
 
         Makes all streamlines readable as a single trace.
 
-        :rtype (list) streamline_x: all x values for each streamline combined
-            into single list
-        :rtype (list) streamline_y: all y values for each streamline combined
-            into single list
+        :rtype (list, list): streamline_x: all x values for each streamline
+            combined into single list and streamline_y: all y values for each
+            streamline combined into single list
         """
         streamline_x = sum(self.st_x, [])
         streamline_y = sum(self.st_y, [])
         return streamline_x, streamline_y
 
 
-class _OHLC(dict):
+class _OHLC(TraceFactory):
     """
     Refer to TraceFactory.create_ohlc_increase() for docstring.
     """
@@ -2305,14 +2495,14 @@ class _OHLC(dict):
         """
         Separate data into two groups: increase and decrease
 
-        (1) Increase, where close - open is positive and
-        (2) Decrease, where close - open is negative
+        (1) Increase, where close > open and
+        (2) Decrease, where close <= open
         """
 
         for index in range(len(self.open)):
             if self.close[index] is None:
                 pass
-            elif self.close[index] - self.open[index] > 0:
+            elif self.close[index] > self.open[index]:
                 self.increase_x.append(self.all_x[index])
                 self.increase_y.append(self.all_y[index])
             else:
@@ -2322,6 +2512,10 @@ class _OHLC(dict):
     def get_increase(self):
         """
         Flatten increase data and get increase text
+
+        :rtype (list, list, list): flat_increase_x: x-values for the increasing
+            trace, flat_increase_y: y=values for the increasing trace and
+            text_increase: hovertext for the increasing trace
         """
         flat_increase_x = TraceFactory.flatten(self.increase_x)
         flat_increase_y = TraceFactory.flatten(self.increase_y)
@@ -2334,6 +2528,10 @@ class _OHLC(dict):
     def get_decrease(self):
         """
         Flatten decrease data and get decrease text
+
+        :rtype (list, list, list): flat_decrease_x: x-values for the decreasing
+            trace, flat_decrease_y: y=values for the decreasing trace and
+            text_decrease: hovertext for the decreasing trace
         """
         flat_decrease_x = TraceFactory.flatten(self.decrease_x)
         flat_decrease_y = TraceFactory.flatten(self.decrease_y)
@@ -2342,4 +2540,125 @@ class _OHLC(dict):
                          * (len(self.decrease_x)))
 
         return flat_decrease_x, flat_decrease_y, text_decrease
+
+
+class _Candlestick(TraceFactory):
+    """
+    Refer to TraceFactory.create_candlestick() for docstring.
+    """
+
+    def __init__(self, open, high, low, close, **kwargs):
+        self.open = open
+        self.high = high
+        self.low = low
+        self.close = close
+        self.empty = [None] * len(open)
+        self.all_x = []
+        self.all_y = []
+        self.fill_x = []
+        self.fill_y = []
+        self.get_all_xy()
+        self.separate_increase_decrease()
+
+    def get_all_xy(self):
+        """
+        Zip data to create Candlestick outline
+
+        Candlestick outline: high-low center line and the open and close
+        horizontal lines (i.e. the top and bottom of the shaded body).
+        """
+        self.all_y = list(zip(self.high, self.low, self.empty,
+                              self.close, self.close, self.empty,
+                              self.open, self.open, self.empty))
+
+        self.all_x = [[x + 1, x + 1, None,
+                       x + 1.2, x + .8, None,
+                       x + .8, x + 1.2, None] for x in range(len(self.open))]
+
+    def separate_increase_decrease(self):
+        """
+        Separate increasing trace data from decreasing trace data and flatten
+
+        :rtype (list, list, list, list, list, list): increase_x: x-values for
+            the increasing trace. increase_y: y=values for the increasing
+            trace, decrease_x: x-values for the decreasing trace, and
+            decrease_y: y=values for the decreasing trace. increase_text
+            is the hover text for the increasing candlestick outlines and
+            decrease_text is the hover text for the decreasing candlestick
+            outlines.
+        """
+        increase_y = []
+        increase_x = []
+        decrease_y = []
+        decrease_x = []
+        for index in range(len(self.open)):
+            if self.close[index] > self.open[index]:
+                increase_y.append(self.all_y[index])
+                increase_x.append(self.all_x[index])
+            else:
+                decrease_y.append(self.all_y[index])
+                decrease_x.append(self.all_x[index])
+
+        increase_text = (("High", "Low", None,
+                          "Close", "Close", None,
+                          "Open", "Open", None) * (len(increase_y)))
+
+        decrease_text = (("High", "Low", None,
+                          "Close", "Close", None,
+                          "Open", "Open", None) * (len(decrease_y)))
+
+        increase_y = TraceFactory.flatten(increase_y)
+        increase_x = TraceFactory.flatten(increase_x)
+        decrease_y = TraceFactory.flatten(decrease_y)
+        decrease_x = TraceFactory.flatten(decrease_x)
+
+        return (increase_y, increase_x,
+                decrease_y, decrease_x,
+                increase_text, decrease_text)
+
+    def get_fill(self):
+        """
+        Get the segments to fill the 'candle'
+
+        This will separate the increasing and decreasing data and create the
+        x and y data lists that will make the open/close shaded body of
+        each candlestick,
+
+        :rtype (list, list, list, list): increasing_fill_y: List of increasing
+            y data units where each unit is comprised of a close value, open
+            value, and a None. The unit appears twice in a row becasue to
+            create the sides of the shaded body with the corresponding x
+            increasing data. increasing_fill_x: The corresponding inccreasing
+            x-values that create the shaded box with the increasing y values.
+            The first unit is 'x' + .8 to create the start value (no fill) and
+            the second unit is 'x' + 1.2 to create the end value which fills
+            'tonextx'. decreasing_fill_y: Same as increasing_fill_y but for
+            decreasing data units. decreasing_fill_x: Same as increasing fill
+            y but for decreasing data units.
+        """
+        fill_y = list(zip(self.close, self.open, self.empty))
+        fill_x_start = [[x + .8, x + .8, None]
+                        for x in range((len(self.open)))]
+        fill_x_end = [[x + 1.2, x + 1.2, None]
+                      for x in range((len(self.open)))]
+
+        increasing_fill_y = []
+        increasing_fill_x = []
+        decreasing_fill_y = []
+        decreasing_fill_x = []
+
+        for index in range(len(self.close)):
+            if self.close[index] > self.open[index]:
+                increasing_fill_y.append(fill_y[index])
+                increasing_fill_y.append(fill_y[index])
+                increasing_fill_x.append(fill_x_start[index])
+                increasing_fill_x.append(fill_x_end[index])
+            else:
+                decreasing_fill_y.append(fill_y[index])
+                decreasing_fill_y.append(fill_y[index])
+                decreasing_fill_x.append(fill_x_start[index])
+                decreasing_fill_x.append(fill_x_end[index])
+
+        return (increasing_fill_y, increasing_fill_x,
+                decreasing_fill_y, decreasing_fill_x)
 

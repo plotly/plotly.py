@@ -102,37 +102,46 @@ class TestQuiver(TestCase):
         self.assertEqual(quiver, expected_quiver)
 
 
-class TestOHLC(TestCase):
+class TestFinanceCharts(TestCase):
 
     def test_unequal_ohlc_length(self):
 
         # check: PlotlyError if open, high, low, close are not the same length
-        # for TraceFactory.ohlc_increase and TraceFactory.ohlc_decrease
+        # for TraceFactory.create_ohlc and TraceFactory.create_candlestick
 
         kwargs = {'open': [1], 'high': [1, 3],
                   'low': [1, 2], 'close': [1, 2],
                   'direction': ['increasing']}
         self.assertRaises(PlotlyError, tls.TraceFactory.create_ohlc, **kwargs)
+        self.assertRaises(PlotlyError, tls.TraceFactory.create_candlestick,
+                          **kwargs)
 
         kwargs = {'open': [1, 2], 'high': [1, 2, 3],
                   'low': [1, 2], 'close': [1, 2],
                   'direction': ['decreasing']}
         self.assertRaises(PlotlyError, tls.TraceFactory.create_ohlc, **kwargs)
+        self.assertRaises(PlotlyError, tls.TraceFactory.create_candlestick,
+                          **kwargs)
 
         kwargs = {'open': [1, 2], 'high': [2, 3],
                   'low': [0], 'close': [1, 3],
                   'direction': ['increasing']}
         self.assertRaises(PlotlyError, tls.TraceFactory.create_ohlc, **kwargs)
+        self.assertRaises(PlotlyError, tls.TraceFactory.create_candlestick,
+                          **kwargs)
 
         kwargs = {'open': [1, 2], 'high': [2, 3],
                   'low': [1, 2], 'close': [1],
                   'direction': ['decreasing']}
         self.assertRaises(PlotlyError, tls.TraceFactory.create_ohlc, **kwargs)
+        self.assertRaises(PlotlyError, tls.TraceFactory.create_candlestick,
+                          **kwargs)
 
     def test_direction_arg(self):
 
         # check: PlotlyError if direction is not defined as "increasing" or
-        # "decreasing"
+        # "decreasing" for TraceFactory.create_ohlc and
+        # TraceFactory.create_candlestick
 
         kwargs = {'open': [1, 4], 'high': [1, 5],
                   'low': [1, 2], 'close': [1, 2],
@@ -141,6 +150,10 @@ class TestOHLC(TestCase):
                                 "direction must be defined as "
                                 "'increasing' or 'decreasing'",
                                 tls.TraceFactory.create_ohlc, **kwargs)
+        self.assertRaisesRegexp(PlotlyError,
+                                "direction must be defined as "
+                                "'increasing' or 'decreasing'",
+                                tls.TraceFactory.create_candlestick, **kwargs)
 
         kwargs = {'open': [1, 2], 'high': [1, 3],
                   'low': [1, 2], 'close': [1, 2],
@@ -149,6 +162,10 @@ class TestOHLC(TestCase):
                                 "direction must be defined as "
                                 "'increasing' or 'decreasing'",
                                 tls.TraceFactory.create_ohlc, **kwargs)
+        self.assertRaisesRegexp(PlotlyError,
+                                "direction must be defined as "
+                                "'increasing' or 'decreasing'",
+                                tls.TraceFactory.create_candlestick, **kwargs)
 
     def test_high_highest_value(self):
 
@@ -168,13 +185,21 @@ class TestOHLC(TestCase):
                                              "is entered in O-H-L-C order",
                                 tls.TraceFactory.create_ohlc,
                                 **kwargs)
+        self.assertRaisesRegexp(PlotlyError, "Oops! Looks like some of "
+                                             "your high values are less "
+                                             "the corresponding open, "
+                                             "low, or close values. "
+                                             "Double check that your data "
+                                             "is entered in O-H-L-C order",
+                                tls.TraceFactory.create_candlestick,
+                                **kwargs)
 
     def test_low_lowest_value(self):
 
         # check: PlotlyError if the "low" value is greater than the
         # corresponding open, high, or close value because if the "low" value
         # is not the lowest (or equal) then the data may have been entered
-        # incorrectly
+        # incorrectly.
 
         # create_ohlc_increase
         kwargs = {'open': [2, 3], 'high': [4, 6],
@@ -188,6 +213,15 @@ class TestOHLC(TestCase):
                                 "Double check that your data "
                                 "is entered in O-H-L-C order",
                                 tls.TraceFactory.create_ohlc,
+                                **kwargs)
+        self.assertRaisesRegexp(PlotlyError,
+                                "Oops! Looks like some of "
+                                "your low values are greater "
+                                "than the corresponding high"
+                                ", open, or close values. "
+                                "Double check that your data "
+                                "is entered in O-H-L-C order",
+                                tls.TraceFactory.create_candlestick,
                                 **kwargs)
 
     def test_one_ohlc_increase(self):
@@ -321,4 +355,204 @@ class TestOHLC(TestCase):
              'line': {'color': 'rgb(214, 39, 40)'}}]
 
         self.assertEqual(ohlc_data, expected_ohlc_data)
+
+    def test_one_candlestick_increase(self):
+
+        # This should create one "increase" (i.e. close > open) candlestick
+
+        candl_inc = tls.TraceFactory.create_candlestick(open=[33.0],
+                                                        high=[33.2],
+                                                        low=[32.7],
+                                                        close=[33.1],
+                                                        direction="increasing")
+
+        expected_candl_inc = [
+            {'name': 'Increasing',
+             'x': [0.8, 0.8, None],
+             'y': (33.1, 33.0, None),
+             'type': 'scatter',
+             'showlegend': False,
+             'mode': 'lines',
+             'legendgroup': 'Increasing',
+             'line': {'color': 'rgb(44, 160, 44)'}},
+            {'name': 'Increasing',
+             'x': [1.2, 1.2, None],
+             'y': (33.1, 33.0, None),
+             'type': 'scatter',
+             'fill': 'tonextx',
+             'showlegend': False,
+             'line': {'color': 'rgb(44, 160, 44)'},
+             'legendgroup': 'Increasing',
+             'mode': 'lines'},
+            {'name': 'Increasing',
+             'x': [1, 1, None, 1.2, 0.8, None, 0.8, 1.2, None],
+             'y': [33.2, 32.7, None, 33.1, 33.1, None, 33.0, 33.0, None],
+             'text': ('High', 'Low', None,
+                      'Close', 'Close', None,
+                      'Open', 'Open', None),
+             'type': 'scatter',
+             'mode': 'lines',
+             'legendgroup': 'Increasing',
+             'line': {'color': 'rgb(44, 160, 44)'}}
+        ]
+        self.assertEqual(candl_inc, expected_candl_inc)
+
+    def test_one_candlestick_decrease(self):
+
+        # This should create one "decrease" (i.e. close < open) ohlc stick
+
+        candl_dec = tls.TraceFactory.create_candlestick(open=[33.3],
+                                                        high=[33.3],
+                                                        low=[32.7],
+                                                        close=[32.9],
+                                                        direction="decreasing")
+
+        expected_candl_dec = [
+            {'name': 'Decreasing',
+             'x': [0.8, 0.8, None],
+             'y': (32.9, 33.3, None),
+             'type': 'scatter',
+             'showlegend': False,
+             'mode': 'lines',
+             'legendgroup': 'Decreasing',
+             'line': {'color': 'rgb(214, 39, 40)'}},
+            {'name': 'Decreasing',
+             'x': [1.2, 1.2, None],
+             'y': (32.9, 33.3, None),
+             'type': 'scatter',
+             'fill': 'tonextx',
+             'showlegend': False,
+             'line': {'color': 'rgb(214, 39, 40)'},
+             'legendgroup': 'Decreasing', 'mode': 'lines'},
+            {'name': 'Decreasing',
+             'x': [1, 1, None, 1.2, 0.8, None, 0.8, 1.2, None],
+             'y': [33.3, 32.7, None, 32.9, 32.9, None, 33.3, 33.3, None],
+             'text': ('High', 'Low', None,
+                      'Close', 'Close', None,
+                      'Open', 'Open', None),
+             'type': 'scatter',
+             'mode': 'lines',
+             'legendgroup': 'Decreasing',
+             'line': {'color': 'rgb(214, 39, 40)'}}]
+        self.assertEqual(candl_dec, expected_candl_dec)
+
+    def test_candlestick_increase_and_decrease(self):
+
+        # This should add multiple increasing and decreasing candlesticks
+        # and check that what we expect (i.e. the data and kwargs)
+        # is resulting from data = candl_inc data.extend(candl_dec)
+
+        o = [3.3, 4, 9.3, 8.9, 4.9, 9, 2.9, 5]
+        h = [7, 6.4, 10, 10, 10, 14.6, 12, 7]
+        l = [3, 2, 7, 3, 2, 2, 1.1, 2.3]
+        c = [3.3, 6.3, 10, 9, 9.2, 3, 2.9, 6.1]
+
+        candl_inc = tls.TraceFactory.create_candlestick(o, h, l, c,
+                                                        direction='increasing',
+                                                        name='positive')
+        candl_dec = tls.TraceFactory.create_candlestick(o, h, l, c,
+                                                        direction='decreasing',
+                                                        name='negative')
+        candl_data = candl_inc
+        candl_data.extend(candl_dec)
+
+        expected_candl_data = [
+            {'name': 'positive', 'x': [1.8, 1.8, None],
+             'y': (6.3, 4, None), 'type': 'scatter', 'showlegend': False,
+             'mode': 'lines', 'legendgroup': 'Increasing',
+             'line': {'color': 'rgb(44, 160, 44)'}},
+            {'name': 'positive', 'x': [2.2, 2.2, None], 'y': (6.3, 4, None),
+             'type': 'scatter', 'fill': 'tonextx', 'showlegend': False,
+             'line': {'color': 'rgb(44, 160, 44)'},
+             'legendgroup': 'Increasing', 'mode': 'lines'},
+            {'name': 'positive', 'x': [2.8, 2.8, None], 'y': (10, 9.3, None),
+             'type': 'scatter', 'showlegend': False, 'mode': 'lines',
+             'legendgroup': 'Increasing',
+             'line': {'color': 'rgb(44, 160, 44)'}},
+            {'name': 'positive', 'x': [3.2, 3.2, None], 'y': (10, 9.3, None),
+             'type': 'scatter', 'fill': 'tonextx', 'showlegend': False,
+             'line': {'color': 'rgb(44, 160, 44)'},
+             'legendgroup': 'Increasing', 'mode': 'lines'},
+            {'name': 'positive', 'x': [3.8, 3.8, None], 'y': (9, 8.9, None),
+             'type': 'scatter', 'showlegend': False, 'mode': 'lines',
+             'legendgroup': 'Increasing',
+             'line': {'color': 'rgb(44, 160, 44)'}},
+            {'name': 'positive', 'x': [4.2, 4.2, None], 'y': (9, 8.9, None),
+             'type': 'scatter', 'fill': 'tonextx', 'showlegend': False,
+             'line': {'color': 'rgb(44, 160, 44)'},
+             'legendgroup': 'Increasing', 'mode': 'lines'},
+            {'name': 'positive', 'x': [4.8, 4.8, None], 'y': (9.2, 4.9, None),
+             'type': 'scatter', 'showlegend': False, 'mode': 'lines',
+             'legendgroup': 'Increasing',
+             'line': {'color': 'rgb(44, 160, 44)'}},
+            {'name': 'positive', 'x': [5.2, 5.2, None], 'y': (9.2, 4.9, None),
+             'type': 'scatter', 'fill': 'tonextx', 'showlegend': False,
+             'line': {'color': 'rgb(44, 160, 44)'},
+             'legendgroup': 'Increasing', 'mode': 'lines'},
+            {'name': 'positive', 'x': [7.8, 7.8, None], 'y': (6.1, 5, None),
+             'type': 'scatter', 'showlegend': False, 'mode': 'lines',
+             'legendgroup': 'Increasing',
+             'line': {'color': 'rgb(44, 160, 44)'}},
+            {'name': 'positive', 'x': [8.2, 8.2, None], 'y': (6.1, 5, None),
+             'type': 'scatter', 'fill': 'tonextx', 'showlegend': False,
+             'line': {'color': 'rgb(44, 160, 44)'},
+             'legendgroup': 'Increasing', 'mode': 'lines'},
+            {'name': 'positive',
+             'x': [2, 2, None, 2.2, 1.8, None, 1.8, 2.2, None, 3, 3, None, 3.2,
+                   2.8, None, 2.8, 3.2, None, 4, 4, None, 4.2, 3.8, None, 3.8,
+                   4.2, None, 5, 5, None, 5.2, 4.8, None, 4.8, 5.2, None, 8, 8,
+                   None, 8.2, 7.8, None, 7.8, 8.2, None],
+             'y': [6.4, 2, None, 6.3, 6.3, None, 4, 4, None, 10, 7, None, 10,
+                   10, None, 9.3, 9.3, None, 10, 3, None, 9, 9, None, 8.9, 8.9,
+                   None, 10, 2, None, 9.2, 9.2, None, 4.9, 4.9, None, 7, 2.3,
+                   None, 6.1, 6.1, None, 5, 5, None],
+             'text': ('High', 'Low', None, 'Close', 'Close', None,
+                      'Open', 'Open', None, 'High', 'Low', None,
+                      'Close', 'Close', None, 'Open', 'Open', None,
+                      'High', 'Low', None, 'Close', 'Close', None,
+                      'Open', 'Open', None, 'High', 'Low', None,
+                      'Close', 'Close', None, 'Open', 'Open', None,
+                      'High', 'Low', None, 'Close', 'Close', None,
+                      'Open', 'Open', None),
+             'type': 'scatter', 'mode': 'lines', 'legendgroup': 'Increasing',
+             'line': {'color': 'rgb(44, 160, 44)'}},
+            {'name': 'negative', 'x': [0.8, 0.8, None], 'y': (3.3, 3.3, None),
+             'type': 'scatter', 'showlegend': False, 'mode': 'lines',
+             'legendgroup': 'Decreasing',
+             'line': {'color': 'rgb(214, 39, 40)'}},
+            {'name': 'negative', 'x': [1.2, 1.2, None], 'y': (3.3, 3.3, None),
+             'type': 'scatter', 'fill': 'tonextx', 'showlegend': False,
+             'line': {'color': 'rgb(214, 39, 40)'},
+             'legendgroup': 'Decreasing', 'mode': 'lines'},
+            {'name': 'negative', 'x': [5.8, 5.8, None], 'y': (3, 9, None),
+             'type': 'scatter', 'showlegend': False, 'mode': 'lines',
+             'legendgroup': 'Decreasing',
+             'line': {'color': 'rgb(214, 39, 40)'}},
+            {'name': 'negative', 'x': [6.2, 6.2, None], 'y': (3, 9, None),
+             'type': 'scatter', 'fill': 'tonextx', 'showlegend': False,
+             'line': {'color': 'rgb(214, 39, 40)'},
+             'legendgroup': 'Decreasing', 'mode': 'lines'},
+            {'name': 'negative', 'x': [6.8, 6.8, None], 'y': (2.9, 2.9, None),
+             'type': 'scatter', 'showlegend': False, 'mode': 'lines',
+             'legendgroup': 'Decreasing',
+             'line': {'color': 'rgb(214, 39, 40)'}},
+            {'name': 'negative', 'x': [7.2, 7.2, None], 'y': (2.9, 2.9, None),
+             'type': 'scatter', 'fill': 'tonextx', 'showlegend': False,
+             'line': {'color': 'rgb(214, 39, 40)'},
+             'legendgroup': 'Decreasing', 'mode': 'lines'},
+            {'name': 'negative',
+             'x': [1, 1, None, 1.2, 0.8, None, 0.8, 1.2, None, 6, 6, None,
+                   6.2, 5.8, None, 5.8, 6.2, None, 7, 7, None, 7.2, 6.8, None,
+                   6.8, 7.2, None],
+             'y': [7, 3, None, 3.3, 3.3, None, 3.3, 3.3, None, 14.6, 2, None,
+                   3, 3, None, 9, 9, None, 12, 1.1, None, 2.9, 2.9, None, 2.9,
+                   2.9, None],
+             'text': ('High', 'Low', None, 'Close', 'Close', None,
+                      'Open', 'Open', None, 'High', 'Low', None,
+                      'Close', 'Close', None, 'Open', 'Open', None,
+                      'High', 'Low', None, 'Close', 'Close', None,
+                      'Open', 'Open', None), 'type': 'scatter',
+             'mode': 'lines', 'legendgroup': 'Decreasing',
+             'line': {'color': 'rgb(214, 39, 40)'}}]
+        self.assertEqual(candl_data, expected_candl_data)
 
