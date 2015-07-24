@@ -653,9 +653,7 @@ class image:
         elif ext and not format:
             format = ext[1:]
         elif not ext and format:
-            filename += '.'+format
-        else:
-            filename += '.'+format
+            filename += '.' + format
 
         img = cls.get(figure_or_data, format, width, height)
 
