@@ -545,7 +545,7 @@ class image:
 
     """
     @staticmethod
-    def get(figure_or_data, format='png', width=None, height=None):
+    def get(figure_or_data, format='png', width=None, height=None, scale=None):
         """
         Return a static image of the plot described by `figure`.
 
@@ -570,6 +570,13 @@ class image:
                 "supported file types here: "
                 "https://plot.ly/python/static-image-export/"
             )
+        if scale is not None:
+            try:
+                scale = float(scale)
+            except:
+                raise exceptions.PlotlyError(
+                    "Invalid scale parameter. Scale must be a number."
+                )
 
         headers = _api_v2.headers()
         headers['plotly_version'] = version.__version__
@@ -580,7 +587,8 @@ class image:
             payload['width'] = width
         if height is not None:
             payload['height'] = height
-
+        if scale is not None:
+            payload['scale'] = scale
         url = _api_v2.api_url('images/')
 
         res = requests.post(
@@ -614,21 +622,22 @@ class image:
                                              "not be translated.")
             raise exceptions.PlotlyError(return_data['error'])
 
-
     @classmethod
-    def ishow(cls, figure_or_data, format='png', width=None, height=None):
+    def ishow(cls, figure_or_data, format='png', width=None, height=None,
+              scale=None):
         """
         Display a static image of the plot described by `figure`
         in an IPython Notebook.
 
         """
         if format == 'pdf':
-            raise exceptions.PlotlyError("Aw, snap! "
+            raise exceptions.PlotlyError(
+                "Aw, snap! "
                 "It's not currently possible to embed a pdf into "
                 "an IPython notebook. You can save the pdf "
                 "with the `image.save_as` or you can "
                 "embed an png, jpeg, or svg.")
-        img = cls.get(figure_or_data, format, width, height)
+        img = cls.get(figure_or_data, format, width, height, scale)
         from IPython.display import display, Image, SVG
         if format == 'svg':
             display(SVG(img))
@@ -637,7 +646,7 @@ class image:
 
     @classmethod
     def save_as(cls, figure_or_data, filename, format=None, width=None,
-                height=None):
+                height=None, scale=None):
         """
         Save a image of the plot described by `figure` locally as `filename`.
 
@@ -655,7 +664,7 @@ class image:
         elif not ext and format:
             filename += '.' + format
 
-        img = cls.get(figure_or_data, format, width, height)
+        img = cls.get(figure_or_data, format, width, height, scale)
 
         f = open(filename, 'wb')
         f.write(img)

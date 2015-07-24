@@ -19,9 +19,9 @@ class TestImage(TestCase):
 
 
 def _generate_image_get_returns_valid_image_test(image_format,
-                                                 width, height):
+                                                 width, height, scale):
     def test(self):
-        image = py.image.get(self.data, image_format, width, height)
+        image = py.image.get(self.data, image_format, width, height, scale)
         if image_format in ['png', 'jpeg']:
             assert imghdr.what('', image) == image_format
 
@@ -29,11 +29,11 @@ def _generate_image_get_returns_valid_image_test(image_format,
 
 
 def _generate_image_save_as_saves_valid_image(image_format,
-                                              width, height):
+                                              width, height, scale):
     def _test(self):
         f, filename = tempfile.mkstemp('.{}'.format(image_format))
         py.image.save_as(self.data, filename, format=image_format,
-                         width=width, height=height)
+                         width=width, height=height, scale=scale)
         if image_format in ['png', 'jpeg']:
             assert imghdr.what(filename) == image_format
         else:
@@ -46,7 +46,8 @@ def _generate_image_save_as_saves_valid_image(image_format,
 kwargs = {
     'format': ['png', 'jpeg', 'pdf', 'svg'],
     'width': [None, 300],
-    'height': [None, 300]
+    'height': [None, 300],
+    'scale': [None, 5]
 }
 
 for args in itertools.product(kwargs['format'], kwargs['width'],
