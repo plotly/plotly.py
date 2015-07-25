@@ -108,6 +108,21 @@ def _plot_option_logic(plot_options):
             'fileopt' not in session_plot_options and
             'fileopt' not in plot_options):
         current_plot_options['fileopt'] = 'overwrite'
+
+    if ('world_readable' not in plot_options and
+            plot_options['share_key_enabled']):
+        current_plot_options['world_readable'] = False
+        current_plot_options['share_key_enabled'] = True
+
+    # If plot set as public but Share_key_enabled is activated 
+    if ('world_readable' in plot_options and plot_options['world_readable']
+            and plot_options['share_key_enabled']):
+        current_plot_options['world_readable'] = True
+        current_plot_options['share_key_enabled'] = False
+        warnings.warn(
+            "Looks like you've activated the share_key for a public plot. "
+            "share_key can only be activaited for private plots."
+            "\nQuestions? support@plot.ly")
     return current_plot_options
 
 
@@ -122,24 +137,51 @@ def iplot(figure_or_data, **plot_options):
         'extend': add additional numbers (data) to existing traces
         'append': add additional traces to existing data lists
     world_readable (default=True) -- make this figure private/public
+    share_key_enabled (default=False) -- activate the share key for private
+                                         plots
 
     """
     if 'auto_open' not in plot_options:
         plot_options['auto_open'] = False
-    res = plot(figure_or_data, **plot_options)
+    plot_options = _plot_option_logic(plot_options)
+    _logic = True,
+    res = plot(figure_or_data, _logic, **plot_options)
     urlsplit = res.split('/')
-    username, plot_id = urlsplit[-2][1:], urlsplit[-1]  # TODO: HACKY!
+    username = urlsplit[-2][1:]
 
-    embed_options = dict()
-    if 'width' in plot_options:
-        embed_options['width'] = plot_options['width']
-    if 'height' in plot_options:
-        embed_options['height'] = plot_options['height']
+    # Check if the url contains share_key
+    if ('share_key_enabled' in plot_options and
+            plot_options['share_key_enabled']):
+        plot_id, share_key = urlsplit[-1].split('?share_key=', 1)
+    else:
+        plot_id = urlsplit[-1]
+        share_key = None
 
-    return tools.embed(username, plot_id, **embed_options)
+    if isinstance(figure_or_data, dict):
+        layout = figure_or_data.get('layout', {})
+    else:
+        layout = {}
+
+    width = layout.get('width', '100%')
+    height = layout.get('height', 525)
+    try:
+        float(width)
+    except (ValueError, TypeError):
+        pass
+    else:
+        width = str(width) + 'px'
+
+    try:
+        float(height)
+    except (ValueError, TypeError):
+        pass
+    else:
+        height = str(height) + 'px'
+
+    return tools.embed(username, width, height, plot_id, share_key)
 
 
-def plot(figure_or_data, validate=True, **plot_options):
+def plot(figure_or_data, _logic=None, validate=True, **plot_options):
     """Create a unique url for this plot in Plotly and optionally open url.
 
     plot_options keyword agruments:
@@ -153,6 +195,8 @@ def plot(figure_or_data, validate=True, **plot_options):
     auto_open (default=True) -- Toggle browser options
         True: open this plot in a new browser tab
         False: do not open plot in the browser, but do return the unique url
+    share_key_enabled (default=False) -- activate the share key for private
+                                         plots
 
     """
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
@@ -177,7 +221,10 @@ def plot(figure_or_data, validate=True, **plot_options):
                     warnings.warn(msg)
             except TypeError:
                 pass
-    plot_options = _plot_option_logic(plot_options)
+
+    # Check if _plot_option_logic has already been called in iplot
+    if not _logic:
+        plot_options = _plot_option_logic(plot_options)
     res = _send_to_plotly(figure, **plot_options)
     if res['error'] == '':
         if plot_options['auto_open']:
@@ -1218,29 +1265,46 @@ def validate_credentials(credentials):
         raise exceptions.PlotlyLocalCredentialsError()
 
 
-def secret_key(r, **payload):
+def add_share_key_to_url(response, **payload):
     """
-    update plot's url to include the scret key
+    Update plot's url to include the secret key
+
+    payload keyword agruments:
+    platform ('python') -- the platform that is associated with this url
+    version (string) -- the Plotly version that was used to create the plot
+    args (dict) -- contains the data from figure
+    un (string) -- username from credentials file
+    key (string) -- api_key from credentials file
+    origin('plot') --
+    kwargs (dict) --
+        'filename': (string) the name that is associated with this url
+        'fileopt': ('new' | 'overwrite' | 'extend' | 'append')
+                   file option of the url
+        'world_readable': (bool) make the plot public/ private
+        'share_key_enabled': (bool) activate the share_key for this url
+        'layout': (dict) the layout of the figure
 
     """
 
-    plot_id = r['url'].replace("https://plot.ly/~" + payload['un'] + "/", "")
+    plot_id = response['url'].replace("https://plot.ly/~" + payload['un']
+                                      + "/", "")
     url = "https://api.plot.ly/v2/files/" + payload['un'] + ":" + plot_id
     plot_kwargs = json.loads(payload['kwargs'])
-    response = requests.patch(url,
-                              headers={'Plotly-Client-Platform': 'Python'},
-                              auth=HTTPBasicAuth(payload['un'],
-                                                 payload['key']),
-                              data={"share_key_enabled":
-                                    plot_kwargs['share_key_enabled'],
-                                    "world_readable":
-                                    plot_kwargs['world_readable'],
-                                    "filename": plot_kwargs['filename'],
-                                    "fileopt": plot_kwargs['fileopt']})
-    response = json.loads(response.content)
-    r['url'] += '?share_key=' + response['share_key']
+    new_response = requests.patch(url,
+                                  headers={'Plotly-Client-Platform':
+                                           payload['platform']},
+                                  auth=HTTPBasicAuth(payload['un'],
+                                                     payload['key']),
+                                  data={"share_key_enabled":
+                                        plot_kwargs['share_key_enabled'],
+                                        "world_readable":
+                                        plot_kwargs['world_readable'],
+                                        "filename": plot_kwargs['filename'],
+                                        "fileopt": plot_kwargs['fileopt']})
+    new_response_data = json.loads(new_response.content)
+    response['url'] += '?share_key=' + new_response_data['share_key']
 
-    return r
+    return response
 
 
 def _send_to_plotly(figure, **plot_options):
@@ -1274,13 +1338,15 @@ def _send_to_plotly(figure, **plot_options):
     url = get_config()['plotly_domain'] + "/clientresp"
 
     r = requests.post(url, data=payload,
-                      verify=get_config()['plotly_ssl_verification'],)
+                      verify=get_config()['plotly_ssl_verification'])
     r.raise_for_status()
     r = json.loads(r.text)
+
     # Check if the url needs a secret key
-    if plot_options['share_key_enabled'] is True:
-        # secret_key updates the url to include the secret key
-        r = secret_key(r, **payload)
+    if plot_options['share_key_enabled']:
+
+        # add_share_key_to_url updates the url to include the share_key
+        r = add_share_key_to_url(r, **payload)
     if 'error' in r and r['error'] != '':
         print(r['error'])
     if 'warning' in r and r['warning'] != '':
