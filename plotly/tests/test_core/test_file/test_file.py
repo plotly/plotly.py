@@ -8,6 +8,7 @@ A module intended for use with Nose.
 import random
 import string
 from unittest import TestCase
+from nose.tools import nottest
 
 import plotly.plotly as py
 from plotly.exceptions import PlotlyRequestError
@@ -40,6 +41,7 @@ class FolderAPITestCase(TestCase):
             self.fail('Expected this *not* to fail! Status: {}'
                       .format(e.status_code))
 
+    @nottest
     def test_duplicate_folders(self):
         first_folder = self._random_filename()
         py.file_ops.mkdirs(first_folder)
