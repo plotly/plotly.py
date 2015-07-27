@@ -109,20 +109,13 @@ def _plot_option_logic(plot_options):
             'fileopt' not in plot_options):
         current_plot_options['fileopt'] = 'overwrite'
 
+    # If world_readable was not assigned but share_key_enabled is activated,
+    # the plot will set to private with share_key included
     if ('world_readable' not in plot_options and
-            plot_options['share_key_enabled']):
+            get_plot_options().get('share_key_enabled')):
         current_plot_options['world_readable'] = False
         current_plot_options['share_key_enabled'] = True
 
-    # If plot set as public but Share_key_enabled is activated 
-    if ('world_readable' in plot_options and plot_options['world_readable']
-            and plot_options['share_key_enabled']):
-        current_plot_options['world_readable'] = True
-        current_plot_options['share_key_enabled'] = False
-        warnings.warn(
-            "Looks like you've activated the share_key for a public plot. "
-            "share_key can only be activaited for private plots."
-            "\nQuestions? support@plot.ly")
     return current_plot_options
 
 
@@ -143,18 +136,16 @@ def iplot(figure_or_data, **plot_options):
     """
     if 'auto_open' not in plot_options:
         plot_options['auto_open'] = False
-    plot_options = _plot_option_logic(plot_options)
-    _logic = True,
-    res = plot(figure_or_data, _logic, **plot_options)
-    urlsplit = res.split('/')
-    username = urlsplit[-2][1:]
+    res = plot(figure_or_data, **plot_options)
+    urlsplit = six.moves.urllib.parse.urlparse(res)
+    username = urlsplit.path.split('~')[1].split('/')[0]
+    plot_id = urlsplit.path.split('~')[1].split('/')[1]
 
     # Check if the url contains share_key
     if ('share_key_enabled' in plot_options and
             plot_options['share_key_enabled']):
-        plot_id, share_key = urlsplit[-1].split('?share_key=', 1)
+        share_key = urlsplit.query
     else:
-        plot_id = urlsplit[-1]
         share_key = None
 
     if isinstance(figure_or_data, dict):
@@ -178,10 +169,10 @@ def iplot(figure_or_data, **plot_options):
     else:
         height = str(height) + 'px'
 
-    return tools.embed(username, width, height, plot_id, share_key)
+    return tools.embed(username, plot_id, share_key, width, height)
 
 
-def plot(figure_or_data, _logic=None, validate=True, **plot_options):
+def plot(figure_or_data, validate=True, **plot_options):
     """Create a unique url for this plot in Plotly and optionally open url.
 
     plot_options keyword agruments:
@@ -222,9 +213,7 @@ def plot(figure_or_data, _logic=None, validate=True, **plot_options):
             except TypeError:
                 pass
 
-    # Check if _plot_option_logic has already been called in iplot
-    if not _logic:
-        plot_options = _plot_option_logic(plot_options)
+    plot_options = _plot_option_logic(plot_options)
     res = _send_to_plotly(figure, **plot_options)
     if res['error'] == '':
         if plot_options['auto_open']:
