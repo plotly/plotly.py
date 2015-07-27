@@ -1274,9 +1274,10 @@ def add_share_key_to_url(response, **payload):
         'layout': (dict) the layout of the figure
 
     """
-
-    plot_id = response['url'].replace("https://plot.ly/~" + payload['un']
-                                      + "/", "")
+    domain = (get_session_config().get('plotly_domain') or
+              get_config()['plotly_domain'])
+    plot_id = response['url'].replace(domain + "/~"
+                                      + payload['un'] + "/", "")
     url = "https://api.plot.ly/v2/files/" + payload['un'] + ":" + plot_id
     plot_kwargs = json.loads(payload['kwargs'])
     new_response = requests.patch(url,
