@@ -69,7 +69,8 @@ class TestPlot(TestCase):
 
     def test_plot_sharing_argument(self):
 
-        # Check if sharing argument is correct
+        # Raise an error if sharing argument is incorrect
+        # correct arguments {'public, 'private', 'secret'}
 
         fig = {
             'data': [
@@ -104,7 +105,7 @@ class TestPlot(TestCase):
 
     def test_plot_world_readable_sharing_conflict_2(self):
 
-        # check: if world_readable=True but sharing='secret'
+        # Raise an error if world_readable=True but sharing='secret'
 
         fig = {
             'data': [
