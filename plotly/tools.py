@@ -14,7 +14,6 @@ import warnings
 
 import six
 
-import requests
 import math
 
 
@@ -23,7 +22,7 @@ from plotly import exceptions
 from plotly import session
 
 from plotly.graph_objs import graph_objs
-from plotly.graph_objs import Scatter, Marker, Line
+from plotly.graph_objs import Scatter, Marker
 
 
 # Warning format
@@ -111,8 +110,8 @@ def ensure_local_plotly_files():
                       "your 'home' ('~') directory or to our '~/.plotly' "
                       "directory. That means plotly's python api can't setup "
                       "local configuration files. No problem though! You'll "
-                      "just have to sign-in using 'plotly.plotly.sign_in()'. For help "
-                      "with that: 'help(plotly.plotly.sign_in)'."
+                      "just have to sign-in using 'plotly.plotly.sign_in()'. "
+                      "For help with that: 'help(plotly.plotly.sign_in)'."
                       "\nQuestions? support@plot.ly")
 
 
@@ -2903,4 +2902,3 @@ class _Candlestick(FigureFactory):
 
         return (decrease_x, decrease_close, decrease_dif,
                 stick_decrease_y, stick_decrease_x)
-
