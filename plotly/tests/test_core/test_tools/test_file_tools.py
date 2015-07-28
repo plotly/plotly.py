@@ -51,7 +51,7 @@ class FileToolsTest(PlotlyTestCase):
 
     def test_set_config_file_world_readable(self):
 
-        # Return TypeError when world_readable type is not a dict
+        # Return TypeError when world_readable type is not a bool
 
         kwargs = {'world_readable': 'True'}
         self.assertRaises(TypeError, tools.set_config_file, **kwargs)
