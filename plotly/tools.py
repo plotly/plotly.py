@@ -15,14 +15,16 @@ import warnings
 import six
 
 import math
+import scipy
 
+import scipy.cluster.hierarchy as sch
 
 from plotly import utils
 from plotly import exceptions
 from plotly import session
 
 from plotly.graph_objs import graph_objs
-from plotly.graph_objs import Scatter, Marker
+from plotly.graph_objs import Scatter, Marker, Line, Data
 
 
 # Warning format
@@ -1760,6 +1762,7 @@ class FigureFactory(object):
                              y=streamline_y + arrow_y,
                              mode='lines', **kwargs)
 
+<<<<<<< HEAD
         data = [streamline]
         layout = graph_objs.Layout(hovermode='closest')
 
@@ -2275,6 +2278,23 @@ class FigureFactory(object):
         return dict(data=data, layout=layout)
 
 
+    @staticmethod
+    def create_dendrogram(X, orientation="bottom", labels=None,
+                          colorscale=None, **kwargs):
+        """
+        Returns a dendrogram Plotly figure object.
+
+        X: Heatmap matrix as array of arrays
+        orientation: 'top', 'right', 'bottom', or 'left'
+        labels: List of axis category labels
+        colorscale: Optional colorscale for dendgrogram tree clusters
+        """
+
+        #TODO: add validations of input
+
+        dendrogram = _Dendrogram(X, orientation, labels, colorscale)
+        return dendrogram
+
 class _Quiver(FigureFactory):
     """
     Refer to FigureFactory.create_quiver() for docstring
@@ -2690,6 +2710,7 @@ class _Streamline(FigureFactory):
         streamline_y = sum(self.st_y, [])
         return streamline_x, streamline_y
 
+<<<<<<< HEAD
 
 class _OHLC(FigureFactory):
     """
@@ -2870,4 +2891,150 @@ class _Candlestick(FigureFactory):
 
         return (decrease_x, decrease_close, decrease_dif,
                 stick_decrease_y, stick_decrease_x)
+
+class _Dendrogram(TraceFactory):
+    ''' Returns a Dendrogram figure object
+        Example usage:
+        D = Dendrogram( Z )
+        fig = { 'data':D.data, 'layout':D.layout }
+        py.iplot( fig, filename='Dendro', validate=False )'''
+    
+    def __init__(self, X, orientation='bottom', labels=None, colorscale=None, \
+                 width=700, height=700, xaxis='xaxis', yaxis='yaxis' ):
+        ''' Draw a 2d dendrogram tree 
+            X: Heatmap matrix as array of arrays
+            orientation: 'top', 'right', 'bottom', or 'left'
+            labels: List of axis category labels
+            colorscale: Optional colorscale for dendgrogram tree clusters
+            Returns a dendrogram Plotly figure object '''
+    
+        self.orientation = orientation
+        self.labels = labels
+        self.xaxis = xaxis
+        self.yaxis = yaxis
+        self.data = []
+        self.leaves = []
+        self.sign = { self.xaxis:1, self.yaxis:1 }        
+        self.layout = { self.xaxis:{}, self.yaxis:{} }
+        
+        self.sign[self.xaxis] = 1 if self.orientation in ['left','bottom'] else -1
+        self.sign[self.yaxis] = 1 if self.orientation in ['right','bottom'] else -1        
+        
+        dd_traces, xvals, yvals, ordered_labels, leaves = self.get_dendrogram_traces( X, colorscale )
+        
+        self.labels = ordered_labels
+        self.leaves = leaves
+        yvals_flat = yvals.flatten()
+        xvals_flat = xvals.flatten()
+
+        self.zero_vals = []
+
+        for i in range(len(yvals_flat)):
+            if yvals_flat[i] == 0.0 and xvals_flat[i] not in self.zero_vals:
+                self.zero_vals.append( xvals_flat[i] )
+
+        self.zero_vals.sort() 
+                
+        self.layout = self.set_figure_layout( width, height )
+        self.data = Data( dd_traces )
+
+    def get_color_dict( self, colorscale ):
+        ''' Return colorscale used for dendrogram tree clusters '''
+        
+        # These are the color codes returned for dendrograms
+        # We're replacing them with nicer colors
+        default_colors = {'r':'red','g':'green','b':'blue','c':'cyan',\
+                  'm':'magenta','y':'yellow','k':'black','w':'white'}
+        
+        if colorscale is None:
+            colorscale = [
+                "rgb(0,116,217)",
+                "rgb(255,65,54)",
+                "rgb(133,20,75)",
+                "rgb(255,133,27)",
+                "rgb(255,220,0)",
+                "rgb(61,153,112)"]
+        for i in range(len(default_colors.keys())):
+            k = default_colors.keys()[i] 
+            if i < len( colorscale ):
+                default_colors[k] = colorscale[i] 
+                
+        return default_colors
+   
+    def set_axis_layout( self, axis_key ):
+        ''' Sets and returns default axis object for dendrogram figure 
+            axis_key: "xaxis", "xaxis1", "yaxis", yaxis1", etc '''
+        
+        axis_defaults = {
+                'type': 'linear',
+                'ticks': 'inside',
+                'mirror': 'allticks',
+                'rangemode': 'tozero',
+                'showticklabels': True,                 
+                'zeroline': False,
+                'showgrid': False,              
+                'showline': True,
+            }
+        
+        if self.labels != None:
+            axis_key_labels = self.xaxis
+            if self.orientation in ['left','right']:
+                axis_key_labels = self.yaxis
+            if axis_key_labels not in self.layout:
+                self.layout[axis_key_labels] = {}
+            self.layout[axis_key_labels]['tickvals'] = [ea*self.sign[axis_key] for ea in self.zero_vals]
+            self.layout[axis_key_labels]['ticktext'] = self.labels
+            self.layout[axis_key_labels]['tickmode'] = 'array'
+            
+        self.layout[axis_key].update( axis_defaults )
+            
+        return self.layout[axis_key]
+
+    def set_figure_layout( self, width, height ):
+        ''' Sets and returns default layout object for dendrogram figure '''
+        
+        self.layout.update({
+            'showlegend':False,
+            'autoscale':False,            
+            'hovermode':'closest',
+            'width':width,
+            'width':height 
+        })
+        
+        self.set_axis_layout(self.xaxis)
+        self.set_axis_layout(self.yaxis)
+
+        return self.layout
+
+    def get_dendrogram_traces( self, X, colorscale ):
+        ''' Returns a tuple with:
+            (a) List of Plotly trace objects for the dendrogram tree
+            (b) icoord: All X points of the dendogram tree as array of arrays with lenght 4 
+            (c) dcoord: All Y points of the dendogram tree as array of arrays with lenght 4 '''
+        
+        d = sch.distance.pdist(X)
+        Z = sch.linkage(d, method='complete') 
+        P = sch.dendrogram(Z,orientation=self.orientation,labels=self.labels, no_plot=True)
+
+        icoord = scipy.array( P['icoord'] )
+        dcoord = scipy.array( P['dcoord'] )
+        ordered_labels = scipy.array( P['ivl'] )
+        color_list = scipy.array( P['color_list'] )
+        colors = self.get_color_dict( colorscale )
+        
+        trace_list = []
+        
+        for i in range(len(icoord)):
+            # xs and ys are arrays of 4 points that make up the '∩' shapes of the dendrogram tree
+            xs = icoord[i] if self.orientation in ['top','bottom'] else dcoord[i]
+            ys = dcoord[i] if self.orientation in ['top','bottom'] else icoord[i]
+            color_key = color_list[i]   
+            trace = Scatter(x=np.multiply(self.sign[self.xaxis],xs), \
+                            y=np.multiply(self.sign[self.yaxis],ys), \
+                            mode='lines', marker=Marker(color=colors[color_key]) )
+            trace['xaxis'] = 'x'+self.xaxis[-1]
+            trace['yaxis'] = 'y'+self.yaxis[-1]
+            trace_list.append( trace )
+            
+        return trace_list, icoord, dcoord, ordered_labels, P['leaves']
 
