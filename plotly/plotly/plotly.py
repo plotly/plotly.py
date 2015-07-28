@@ -42,7 +42,7 @@ DEFAULT_PLOT_OPTIONS = {
     'world_readable': True,
     'auto_open': True,
     'validate': True,
-    'share_key_enabled': False,
+    'sharing': {"public", "private", "secret"}
 }
 
 # test file permissions and make sure nothing is corrupted
@@ -109,12 +109,36 @@ def _plot_option_logic(plot_options):
             'fileopt' not in plot_options):
         current_plot_options['fileopt'] = 'overwrite'
 
-    # If world_readable was not assigned but share_key_enabled is activated,
-    # the plot will set to private with share_key included
-    if ('world_readable' not in plot_options and
-            get_plot_options().get('share_key_enabled')):
-        current_plot_options['world_readable'] = False
-        current_plot_options['share_key_enabled'] = True
+    # Check for any conflicts between 'sharing' and 'world_readble'
+    if 'sharing' in plot_options:
+        if plot_options['sharing'] in DEFAULT_PLOT_OPTIONS['sharing']:
+
+            if 'world_readable' not in plot_options:
+                if plot_options['sharing'] != 'public':
+                    current_plot_options['world_readable'] = False
+                else:
+                    current_plot_options['world_readable'] = True
+            elif (plot_options['world_readable'] and
+                    plot_options['sharing'] != 'public'):
+                raise exceptions.PlotlyError(
+                    "Looks like you are setting your plot privacy to both "
+                    "public and private.\n If you set world_readable as True,"
+                    "sharing can only be set to 'public'")
+            elif (not plot_options['world_readable'] and
+                    plot_options['sharing'] == 'public'):
+                raise exceptions.PlotlyError(
+                    "Looks like you are setting your plot privacy to both "
+                    "public and private.\n If you set world_readable as "
+                    "False, sharing can only be set to 'private' or 'secret'")
+        else:
+            raise exceptions.PlotlyError(
+                "The 'sharing' argument only accepts one of the following "
+                "strings:\n'public' -- for public plots\n"
+                "'private' -- for private plots\n"
+                "'secret' -- for private plots that can be shared \n"
+            )
+    else:
+        current_plot_options['sharing'] = None
 
     return current_plot_options
 
@@ -142,8 +166,8 @@ def iplot(figure_or_data, **plot_options):
     plot_id = urlsplit.path.split('~')[1].split('/')[1]
 
     # Check if the url contains share_key
-    if ('share_key_enabled' in plot_options and
-            plot_options['share_key_enabled']):
+    if ('sharing' in plot_options and
+            plot_options['sharing'] == 'secret'):
         share_key = urlsplit.query
     else:
         share_key = None
@@ -1270,7 +1294,8 @@ def add_share_key_to_url(response, **payload):
         'fileopt': ('new' | 'overwrite' | 'extend' | 'append')
                    file option of the url
         'world_readable': (bool) make the plot public/ private
-        'share_key_enabled': (bool) activate the share_key for this url
+        'sharing': ('public' | 'private' | 'secret')
+                    privacy option of the url
         'layout': (dict) the layout of the figure
 
     """
@@ -1286,7 +1311,7 @@ def add_share_key_to_url(response, **payload):
                                   auth=HTTPBasicAuth(payload['un'],
                                                      payload['key']),
                                   data={"share_key_enabled":
-                                        plot_kwargs['share_key_enabled'],
+                                        "True",
                                         "world_readable":
                                         plot_kwargs['world_readable'],
                                         "filename": plot_kwargs['filename'],
@@ -1311,7 +1336,7 @@ def _send_to_plotly(figure, **plot_options):
     kwargs = json.dumps(dict(filename=plot_options['filename'],
                              fileopt=plot_options['fileopt'],
                              world_readable=plot_options['world_readable'],
-                             share_key_enabled=plot_options['share_key_enabled'],
+                             sharing=plot_options['sharing'],
                              layout=fig['layout'] if 'layout' in fig
                              else {}),
                         cls=utils.PlotlyJSONEncoder)
@@ -1333,10 +1358,11 @@ def _send_to_plotly(figure, **plot_options):
     r = json.loads(r.text)
 
     # Check if the url needs a secret key
-    if plot_options['share_key_enabled']:
+    if plot_options['sharing'] == 'secret':
 
         # add_share_key_to_url updates the url to include the share_key
         r = add_share_key_to_url(r, **payload)
+
     if 'error' in r and r['error'] != '':
         print(r['error'])
     if 'warning' in r and r['warning'] != '':
