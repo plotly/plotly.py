@@ -66,3 +66,98 @@ class TestPlot(TestCase):
         py.sign_in('PlotlyImageTest', '786r5mecv0')
         self.assertRaises(PlotlyEmptyDataError, py.plot, [],
                           filename='plot_invalid')
+
+    def test_plot_sharing_argument(self):
+
+        # Check if sharing argument is correct
+
+        fig = {
+            'data': [
+                {
+                    'x': [1, 2, 3],
+                    'y': [2, 1, 2]
+                }
+            ]
+        }
+
+        kwargs = {'filename': 'invalid-sharing-argument',
+                  'sharing': 'privste'}
+        self.assertRaises(PlotlyError, py.plot, fig, **kwargs)
+
+    def test_plot_world_readable_sharing_conflict_1(self):
+
+        # Raise an error if world_readable=False but sharing='public'
+
+        fig = {
+            'data': [
+                {
+                    'x': [1, 2, 3],
+                    'y': [2, 1, 2]
+                }
+            ]
+        }
+
+        kwargs = {'filename': 'invalid-privacy-setting',
+                  'world_readable': False,
+                  'sharing': 'public'}
+        self.assertRaises(PlotlyError, py.plot, fig, **kwargs)
+
+    def test_plot_world_readable_sharing_conflict_2(self):
+
+        # check: if world_readable=True but sharing='secret'
+
+        fig = {
+            'data': [
+                {
+                    'x': [1, 2, 3],
+                    'y': [2, 1, 2]
+                }
+            ]
+        }
+
+        kwargs = {'filename': 'invalid-privacy-setting',
+                  'world_readable': True,
+                  'sharing': 'secret'}
+        self.assertRaises(PlotlyError, py.plot, fig, **kwargs)
+
+    def test_plot_option_logic_only_world_readable_given(self):
+
+        # If sharing is not given and world_readable=False,
+        # sharing should be set to None
+
+        kwargs = {'filename': 'test',
+                  'auto_open': True,
+                  'fileopt': 'overwrite',
+                  'validate': True,
+                  'world_readable': False}
+
+        plot_option_logic = py._plot_option_logic(kwargs)
+
+        expected_plot_option_logic = {'filename': 'test',
+                                      'auto_open': True,
+                                      'fileopt': 'overwrite',
+                                      'validate': True,
+                                      'world_readable': False,
+                                      'sharing': None}
+        self.assertEqual(plot_option_logic, expected_plot_option_logic)
+
+    def test_plot_option_logic_only_sharing_given(self):
+
+        # If world_readable is not given and sharing ='private',
+        # world_readable should be set to False
+
+        kwargs = {'filename': 'test',
+                  'auto_open': True,
+                  'fileopt': 'overwrite',
+                  'validate': True,
+                  'sharing': 'private'}
+
+        plot_option_logic = py._plot_option_logic(kwargs)
+
+        expected_plot_option_logic = {'filename': 'test',
+                                      'auto_open': True,
+                                      'fileopt': 'overwrite',
+                                      'validate': True,
+                                      'world_readable': False,
+                                      'sharing': 'private'}
+        self.assertEqual(plot_option_logic, expected_plot_option_logic)
