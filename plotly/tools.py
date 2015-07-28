@@ -2440,8 +2440,8 @@ class FigureFactory(object):
                                                             dates, **kwargs)
             data = [ohlc_incr, ohlc_decr]
 
-        layout = dict(xaxis=dict(zeroline=False),
-                      hovermode='closest')
+        layout = graph_objs.Layout(xaxis=dict(zeroline=False),
+                                   hovermode='closest')
 
         return dict(data=data, layout=layout)
 
@@ -2755,13 +2755,15 @@ class FigureFactory(object):
                                                                      **kwargs)
             data = candle_incr_data + candle_decr_data
 
-        layout = dict(barmode='stack',
-                      bargroupgap=0.2,
-                      yaxis=dict(fixedrange=True,
-                                 range=[(min(low) -
-                                        ((max(high) - min(low)) * .1)),
-                                        (max(high) +
-                                        ((max(high) - min(low)) * .1))]))
+        layout = graph_objs.Layout(barmode='stack',
+                                   bargroupgap=0.2,
+                                   yaxis=dict(range=[(min(low) -
+                                                     ((max(high) - min(low)) *
+                                                      .1)),
+                                                     (max(high) + ((max(high) -
+                                                                    min(low)) *
+                                                      .1))]))
+        layout['yaxis']['fixedrange'] = True
 
         return dict(data=data, layout=layout)
 
