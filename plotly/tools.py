@@ -2184,7 +2184,7 @@ class FigureFactory(object):
             kwargs.setdefault('name', 'Increasing')
             showlegend = False
 
-        kwargs.setdefault('line', dict(color='rgb(44, 160, 44)'))
+        kwargs.setdefault('line', dict(color='#3D9970', width=1))
         kwargs.setdefault('text', text_increase)
 
         ohlc_incr = dict(type='scatter',
@@ -2215,7 +2215,7 @@ class FigureFactory(object):
          flat_decrease_y,
          text_decrease) = _OHLC(open, high, low, close, dates).get_decrease()
 
-        kwargs.setdefault('line', dict(color='rgb(214, 39, 40)'))
+        kwargs.setdefault('line', dict(color='#FF4136', width=1))
         kwargs.setdefault('text', text_decrease)
         kwargs.setdefault('showlegend', False)
         kwargs.setdefault('name', 'Decreasing')
@@ -2482,8 +2482,8 @@ class FigureFactory(object):
             kwargs.setdefault('name', 'Increasing')
             showlegend = False
 
-        kwargs.setdefault('marker', dict(color='rgb(44, 160, 44)'))
-        kwargs.setdefault('line', dict(color='rgb(44, 160, 44)', width=4))
+        kwargs.setdefault('marker', dict(color='#3D9970'))
+        kwargs.setdefault('line', dict(color='#3D9970'))
 
         hidden_bar_incr = dict(type='bar',
                                x=increase_x,
@@ -2537,8 +2537,8 @@ class FigureFactory(object):
          stick_decrease_x) = (_Candlestick(open, high, low, close, dates,
                                            **kwargs).get_candle_decrease())
 
-        kwargs.setdefault('marker', dict(color='rgb(214, 39, 40)'))
-        kwargs.setdefault('line', dict(color='rgb(214, 39, 40)', width=4))
+        kwargs.setdefault('marker', dict(color='#FF4136'))
+        kwargs.setdefault('line', dict(color='#FF4136'))
         kwargs.setdefault('name', 'Decreasing')
 
         hidden_bar_decr = dict(type='bar',
@@ -2690,8 +2690,7 @@ class FigureFactory(object):
                                                  direction='increasing',
                                                  line=Line(color='rgb(204,
                                                                       229,
-                                                                      255)',
-                                                           width=4),
+                                                                      255)''),
                                                  marker=Marker(color='rgb(204,
                                                                           229,
                                                                           255)')
@@ -2705,8 +2704,7 @@ class FigureFactory(object):
                                                  direction='decreasing',
                                                  line=Line(color='rgb(160,
                                                                       160,
-                                                                      160)',
-                                                           width=4),
+                                                                      160)'),
                                                  marker=Marker(color='rgb(160,
                                                                           160,
                                                                           160)'),
@@ -2758,7 +2756,9 @@ class FigureFactory(object):
             data = candle_incr_data + candle_decr_data
 
         layout = dict(barmode='stack',
-                      yaxis=dict(range=[(min(low) -
+                      bargroupgap=0.2,
+                      yaxis=dict(fixedrange=True,
+                                 range=[(min(low) -
                                         ((max(high) - min(low)) * .1)),
                                         (max(high) +
                                         ((max(high) - min(low)) * .1))]))
