@@ -23,7 +23,7 @@ from plotly import exceptions
 from plotly import session
 
 from plotly.graph_objs import graph_objs
-from plotly.graph_objs import Scatter, Marker, Line
+from plotly.graph_objs import Scatter, Marker
 
 
 # Warning format
@@ -1448,7 +1448,7 @@ class TraceFactory(object):
                                              .format(key, val))
 
     @staticmethod
-    def validate_streamline(x, y):
+    def _validate_streamline(x, y):
         """
         streamline specific validations
 
@@ -2612,10 +2612,53 @@ class FigureFactory(object):
                                                   close_data)
 
         # Plot!
-        py.iplot(candle, filename='candle', validate=False, overwrite=True)
+        py.plot(candle, filename='candle', validate=False, overwrite=True)
         ```
 
-        Example 2: Plot candlestick chart with dates and change trace colors
+        Example 2: Candlestick with date x-axis and title
+        ```
+        from datetime import datetime
+
+        # Add Data
+        high_data = [34.20, 34.37, 33.62, 34.25, 35.18,
+                     33.25, 35.37, 34.62, 34.25]
+        low_data = [31.70, 30.75, 32.87, 31.62, 30.81,
+                    32.75, 32.75, 32.87, 32.62]
+        close_data = [34.10, 31.93, 33.37, 33.18, 31.18,
+                      33.10, 32.93, 33.70, 33.18]
+        open_data = [33.01, 33.31, 33.50, 32.06, 34.12,
+                     33.05, 33.31, 33.50, 32.62]
+
+        # Add Dates
+        x = [datetime(year=2013, month=3, day=4),
+             datetime(year=2013, month=6, day=5),
+             datetime(year=2013, month=9, day=6),
+             datetime(year=2013, month=12, day=4),
+             datetime(year=2014, month=3, day=5),
+             datetime(year=2014, month=6, day=6),
+             datetime(year=2014, month=9, day=4),
+             datetime(year=2014, month=12, day=5),
+             datetime(year=2015, month=3, day=6),
+        ]
+
+        # Create Candlestick
+        candle = FigureFactory.create_candlestick(open_data,
+                                                  high_data,
+                                                  low_data,
+                                                  close_data,
+                                                  dates=x,
+                                                  direction='both'
+                                                  )
+
+        # Customize layout with .update()
+        fig = candle
+        fig['layout'].update(title = 'Candlestick Chart')
+
+        # Plot!
+        py.plot(fig, filename='candle', validate=False, overwrite=True)
+        ```
+
+        Example 3: Plot candlestick and change trace colors
         ```
         from datetime import datetime
 
@@ -2671,15 +2714,17 @@ class FigureFactory(object):
         fig = c=_inc
         fig['data'].extend(c_dec['data'])
 
-        py.iplot(fig, filename='candle', validate=False, overwrite=True)
+        py.plot(fig, filename='candle', validate=False, overwrite=True)
         ```
         """
-        FigureFactory.validate_ohlc(open, high, low, close, direction,
-                                    **kwargs)
+
         if dates:
             TraceFactory.validate_equal_length(open, high, low, close, dates)
         else:
             TraceFactory.validate_equal_length(open, high, low, close)
+
+        FigureFactory.validate_ohlc(open, high, low, close, direction,
+                                    **kwargs)
 
         if direction is 'increasing':
             candle_incr_data = FigureFactory._make_increasing_candle(open,
