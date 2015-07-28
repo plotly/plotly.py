@@ -608,11 +608,26 @@ class image:
 
     """
     @staticmethod
-    def get(figure_or_data, format='png', width=None, height=None):
-        """
-        Return a static image of the plot described by `figure`.
+    def get(figure_or_data, format='png', width=None, height=None, scale=None):
+        """Return a static image of the plot described by `figure_or_data`.
 
-        Valid formats: 'png', 'svg', 'jpeg', 'pdf'
+        positional arguments:
+        - figure_or_data: The figure dict-like or data list-like object that
+                          describes a plotly figure.
+                          Same argument used in `py.plot`, `py.iplot`,
+                          see https://plot.ly/python for examples
+        - format: 'png', 'svg', 'jpeg', 'pdf'
+        - width: output width
+        - height: output height
+        - scale: Increase the resolution of the image by `scale` amount (e.g. `3`)
+               Only valid for PNG and JPEG images.
+
+        example:
+        ```
+        import plotly.plotly as py
+        fig = {'data': [{'x': [1, 2, 3], 'y': [3, 1, 5], 'type': 'bar'}]}
+        py.image.get(fig, 'png', scale=3)
+        ```
 
         """
         # TODO: format is a built-in name... we shouldn't really use it
@@ -633,6 +648,13 @@ class image:
                 "supported file types here: "
                 "https://plot.ly/python/static-image-export/"
             )
+        if scale is not None:
+            try:
+                scale = float(scale)
+            except:
+                raise exceptions.PlotlyError(
+                    "Invalid scale parameter. Scale must be a number."
+                )
 
         headers = _api_v2.headers()
         headers['plotly_version'] = version.__version__
@@ -643,7 +665,8 @@ class image:
             payload['width'] = width
         if height is not None:
             payload['height'] = height
-
+        if scale is not None:
+            payload['scale'] = scale
         url = _api_v2.api_url('images/')
 
         res = requests.post(
@@ -678,19 +701,36 @@ class image:
             raise exceptions.PlotlyError(return_data['error'])
 
     @classmethod
-    def ishow(cls, figure_or_data, format='png', width=None, height=None):
-        """
-        Display a static image of the plot described by `figure`
+    def ishow(cls, figure_or_data, format='png', width=None, height=None,
+              scale=None):
+        """Display a static image of the plot described by `figure_or_data`
         in an IPython Notebook.
 
+        positional arguments:
+        - figure_or_data: The figure dict-like or data list-like object that
+                          describes a plotly figure.
+                          Same argument used in `py.plot`, `py.iplot`,
+                          see https://plot.ly/python for examples
+        - format: 'png', 'svg', 'jpeg', 'pdf'
+        - width: output width
+        - height: output height
+        - scale: Increase the resolution of the image by `scale` amount
+               Only valid for PNG and JPEG images.
+
+        example:
+        ```
+        import plotly.plotly as py
+        fig = {'data': [{'x': [1, 2, 3], 'y': [3, 1, 5], 'type': 'bar'}]}
+        py.image.ishow(fig, 'png', scale=3)
         """
         if format == 'pdf':
-            raise exceptions.PlotlyError("Aw, snap! "
+            raise exceptions.PlotlyError(
+                "Aw, snap! "
                 "It's not currently possible to embed a pdf into "
                 "an IPython notebook. You can save the pdf "
                 "with the `image.save_as` or you can "
                 "embed an png, jpeg, or svg.")
-        img = cls.get(figure_or_data, format, width, height)
+        img = cls.get(figure_or_data, format, width, height, scale)
         from IPython.display import display, Image, SVG
         if format == 'svg':
             display(SVG(img))
@@ -699,14 +739,32 @@ class image:
 
     @classmethod
     def save_as(cls, figure_or_data, filename, format=None, width=None,
-                height=None):
-        """
-        Save a image of the plot described by `figure` locally as `filename`.
+                height=None, scale=None):
+        """Save a image of the plot described by `figure_or_data` locally as
+        `filename`.
 
         Valid image formats are 'png', 'svg', 'jpeg', and 'pdf'.
         The format is taken as the extension of the filename or as the
         supplied format.
 
+        positional arguments:
+        - figure_or_data: The figure dict-like or data list-like object that
+                          describes a plotly figure.
+                          Same argument used in `py.plot`, `py.iplot`,
+                          see https://plot.ly/python for examples
+        - filename: The filepath to save the image to
+        - format: 'png', 'svg', 'jpeg', 'pdf'
+        - width: output width
+        - height: output height
+        - scale: Increase the resolution of the image by `scale` amount
+               Only valid for PNG and JPEG images.
+
+        example:
+        ```
+        import plotly.plotly as py
+        fig = {'data': [{'x': [1, 2, 3], 'y': [3, 1, 5], 'type': 'bar'}]}
+        py.image.save_as(fig, 'my_image.png', scale=3)
+        ```
         """
         # todo: format shadows built-in name
         (base, ext) = os.path.splitext(filename)
@@ -716,10 +774,8 @@ class image:
             format = ext[1:]
         elif not ext and format:
             filename += '.' + format
-        else:
-            filename += '.' + format
 
-        img = cls.get(figure_or_data, format, width, height)
+        img = cls.get(figure_or_data, format, width, height, scale)
 
         f = open(filename, 'wb')
         f.write(img)
