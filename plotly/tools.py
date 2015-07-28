@@ -1416,7 +1416,7 @@ def return_figure_from_figure_or_data(figure_or_data, validate_figure):
     return figure
 
 
-class TraceFactory(dict):
+class TraceFactory(object):
 
     @staticmethod
     def validate_equal_length(*args):
@@ -2099,7 +2099,15 @@ class _Streamline(TraceFactory):
         return streamline_x, streamline_y
 
 
-class FigureFactory(dict):
+class FigureFactory(object):
+    """
+    BETA functions to create specific chart types.
+
+    See FigureFactory.create_ohlc for more infomation and examples of open high
+    low close charts or FigureFactory.create_candlestick for more information
+    and examples of candlestick charts.
+
+    """
 
     @staticmethod
     def validate_ohlc(open, high, low, close, direction, **kwargs):
@@ -2145,11 +2153,86 @@ class FigureFactory(dict):
                                          "'both'")
 
     @staticmethod
+    def _make_increasing_ohlc(open, high, low, close, dates, **kwargs):
+        """
+        Makes increasing ohlc sticks
+
+        _make_increasing_ohlc() and _make_decreasing_ohlc separate the
+        increasing trace from the decreasing trace so kwargs (such as
+        color) can be passed separately to increasing or decreasing traces
+        when direction is set to 'increasing' or 'decreasing' in
+        FigureFactory.create_candlestick()
+
+        :param (list) open: opening values
+        :param (list) high: high values
+        :param (list) low: low values
+        :param (list) close: closing values
+        :param (list) dates: list of datetime objects. Default: None
+        :param kwargs: kwargs to be passed to increasing trace via
+            plotly.graph_objs.Scatter.
+
+        :rtype (trace) ohlc_incr_data: Scatter trace of all increasing ohlc
+            sticks.
+        """
+        (flat_increase_x,
+         flat_increase_y,
+         text_increase) = _OHLC(open, high, low, close, dates).get_increase()
+
+        if 'name' in kwargs:
+            showlegend = True
+        else:
+            kwargs.setdefault('name', 'Increasing')
+            showlegend = False
+
+        kwargs.setdefault('line', dict(color='rgb(44, 160, 44)'))
+        kwargs.setdefault('text', text_increase)
+
+        ohlc_incr = dict(type='scatter',
+                         x=flat_increase_x,
+                         y=flat_increase_y,
+                         mode='lines',
+                         showlegend=showlegend,
+                         **kwargs)
+        return ohlc_incr
+
+    @staticmethod
+    def _make_decreasing_ohlc(open, high, low, close, dates, **kwargs):
+        """
+        Makes decreasing ohlc sticks
+
+        :param (list) open: opening values
+        :param (list) high: high values
+        :param (list) low: low values
+        :param (list) close: closing values
+        :param (list) dates: list of datetime objects. Default: None
+        :param kwargs: kwargs to be passed to increasing trace via
+            plotly.graph_objs.Scatter.
+
+        :rtype (trace) ohlc_decr_data: Scatter trace of all decreasing ohlc
+            sticks.
+        """
+        (flat_decrease_x,
+         flat_decrease_y,
+         text_decrease) = _OHLC(open, high, low, close, dates).get_decrease()
+
+        kwargs.setdefault('line', dict(color='rgb(214, 39, 40)'))
+        kwargs.setdefault('text', text_decrease)
+        kwargs.setdefault('showlegend', False)
+        kwargs.setdefault('name', 'Decreasing')
+
+        ohlc_decr = dict(type='scatter',
+                         x=flat_decrease_x,
+                         y=flat_decrease_y,
+                         mode='lines',
+                         **kwargs)
+        return ohlc_decr
+
+    @staticmethod
     def create_ohlc(open, high, low, close,
                     dates=None, direction='both',
                     **kwargs):
         """
-        Returns a figure that represents an ohlc chart
+        BETA function that creates an ohlc chart
 
         :param (list) open: opening values
         :param (list) high: high values
@@ -2283,48 +2366,157 @@ class FigureFactory(dict):
         FigureFactory.validate_ohlc(open, high, low, close, direction,
                                     **kwargs)
 
-        (flat_increase_x,
-         flat_increase_y,
-         text_increase) = _OHLC(open, high, low, close, dates).get_increase()
-
-        ohlc_incr = dict(type='scatter',
-                         x=flat_increase_x,
-                         y=flat_increase_y,
-                         mode='lines',
-                         name='Increasing',
-                         showlegend=False,
-                         line=Line(color='rgb(44, 160, 44)'),
-                         text=text_increase,
-                         **kwargs)
-
-        (flat_decrease_x,
-         flat_decrease_y,
-         text_decrease) = _OHLC(open, high, low, close, dates).get_decrease()
-
-        ohlc_decr = dict(type='scatter',
-                         x=flat_decrease_x,
-                         y=flat_decrease_y,
-                         mode='lines',
-                         name='Decreasing',
-                         showlegend=False,
-                         line=Line(color='rgb(214, 39, 40)'),
-                         text=text_decrease,
-                         **kwargs)
-
-        layout = dict(xaxis=dict(zeroline=False))
-
         if direction is 'increasing':
-            return dict(data=[ohlc_incr], layout=layout)
+            ohlc_incr = FigureFactory._make_increasing_ohlc(open, high,
+                                                            low, close,
+                                                            dates, **kwargs)
+            data = [ohlc_incr]
         elif direction is 'decreasing':
-            return dict(data=[ohlc_decr], layout=layout)
-        elif direction is 'both':
-            return dict(data=[ohlc_incr, ohlc_decr], layout=layout)
+            ohlc_decr = FigureFactory._make_decreasing_ohlc(open, high,
+                                                            low, close,
+                                                            dates, **kwargs)
+            data = [ohlc_decr]
+        else:
+            ohlc_incr = FigureFactory._make_increasing_ohlc(open, high,
+                                                            low, close,
+                                                            dates, **kwargs)
+            ohlc_decr = FigureFactory._make_decreasing_ohlc(open, high,
+                                                            low, close,
+                                                            dates, **kwargs)
+            data = [ohlc_incr, ohlc_decr]
+
+        layout = dict(xaxis=dict(zeroline=False),
+                      hovermode='closest')
+
+        return dict(data=data, layout=layout)
+
+    @staticmethod
+    def _make_increasing_candle(open, high, low, close, dates, **kwargs):
+        """
+        Makes stacked bar and vertical line for increasing candlesticks
+
+        _make_increasing_candle() and _make_decreasing_candle separate the
+        increasing traces from the decreasing traces so kwargs (such as
+        color) can be passed separately to increasing or decreasing traces
+        when direction is set to 'increasing' or 'decreasing' in
+        FigureFactory.create_candlestick()
+
+        :param (list) open: opening values
+        :param (list) high: high values
+        :param (list) low: low values
+        :param (list) close: closing values
+        :param (list) dates: list of datetime objects. Default: None
+        :param kwargs: kwargs to be passed to increasing trace via
+            plotly.graph_objs.Scatter.
+
+        :rtype (list) candle_incr_data: list of three traces: hidden_bar_incr,
+            candle_bar_incr, candle_line_incr: returns the first (invisible)
+            stacked bar, second (visible) stacked bar, and trace composed of
+            vertical lines for each increasing candlestick.
+        """
+        (increase_x,
+         increase_open,
+         increase_dif,
+         stick_increase_y,
+         stick_increase_x) = (_Candlestick(open, high, low, close, dates,
+                                           **kwargs).get_candle_increase())
+
+        if 'name' in kwargs:
+            showlegend = True
+        else:
+            kwargs.setdefault('name', 'Increasing')
+            showlegend = False
+
+        kwargs.setdefault('marker', dict(color='rgb(44, 160, 44)'))
+        kwargs.setdefault('line', dict(color='rgb(44, 160, 44)', width=4))
+
+        hidden_bar_incr = dict(type='bar',
+                               x=increase_x,
+                               y=increase_open,
+                               marker=Marker(color='rgba(0, 0, 0, 0)'),
+                               legendgroup='Increasing',
+                               showlegend=False,
+                               hoverinfo='none')
+        candle_bar_incr = dict(type='bar',
+                               x=increase_x,
+                               y=increase_dif,
+                               legendgroup='Increasing',
+                               showlegend=False,
+                               hoverinfo='none',
+                               **kwargs)
+        candle_line_incr = dict(type='scatter',
+                                x=stick_increase_x,
+                                y=stick_increase_y,
+                                mode='lines',
+                                legendgroup='Increasing',
+                                text=('Low', 'Open', 'Close',
+                                      'High', '') * len(increase_x),
+                                showlegend=showlegend,
+                                **kwargs)
+        candle_incr_data = [hidden_bar_incr, candle_bar_incr, candle_line_incr]
+        return candle_incr_data
+
+    @staticmethod
+    def _make_decreasing_candle(open, high, low, close, dates, **kwargs):
+        """
+        Makes stacked bar and vertical line for decreasing candlesticks
+
+        :param (list) open: opening values
+        :param (list) high: high values
+        :param (list) low: low values
+        :param (list) close: closing values
+        :param (list) dates: list of datetime objects. Default: None
+        :param kwargs: kwargs to be passed to decreasing trace via
+            plotly.graph_objs.Scatter.
+
+        :rtype (list) candle_decr_data: list of three traces: hidden_bar_decr,
+            candle_bar_decr, candle_line_decr: returns the first (invisible)
+            stacked bar, second (visible) stacked bar, and trace composed of
+            vertical lines for each decreasing candlestick.
+        """
+
+        (decrease_x,
+         decrease_close,
+         decrease_dif,
+         stick_decrease_y,
+         stick_decrease_x) = (_Candlestick(open, high, low, close, dates,
+                                           **kwargs).get_candle_decrease())
+
+        kwargs.setdefault('marker', dict(color='rgb(214, 39, 40)'))
+        kwargs.setdefault('line', dict(color='rgb(214, 39, 40)', width=4))
+        kwargs.setdefault('name', 'Decreasing')
+
+        hidden_bar_decr = dict(type='bar',
+                               x=decrease_x,
+                               y=decrease_close,
+                               marker=Marker(color='rgba(0, 0, 0, 0)'),
+                               legendgroup='Decreasing',
+                               showlegend=False,
+                               hoverinfo='none')
+        candle_bar_decr = dict(type='bar',
+                               x=decrease_x,
+                               y=decrease_dif,
+                               legendgroup='Decreasing',
+                               showlegend=False,
+                               hoverinfo='none',
+                               **kwargs)
+        candle_line_decr = dict(type='scatter',
+                                x=stick_decrease_x,
+                                y=stick_decrease_y,
+                                mode='lines',
+                                legendgroup='Decreasing',
+                                showlegend=False,
+                                text=('Low', 'Close', 'Open',
+                                      'High', '') * len(decrease_x),
+                                **kwargs)
+        candle_decr_data = [hidden_bar_decr, candle_bar_decr, candle_line_decr]
+        return candle_decr_data
 
     @staticmethod
     def create_candlestick(open, high, low, close,
                            dates=None, direction='both', **kwargs):
         """
-        Returns a figure that represents a candlestick chart
+        BETA function that creates a candlestick chart
 
         :param (list) open: opening values
         :param (list) high: high values
@@ -2415,155 +2607,43 @@ class FigureFactory(dict):
         url = py.plot(fig, filename='candle_dates', validate=False)
         ```
         """
+        FigureFactory.validate_ohlc(open, high, low, close, direction,
+                                    **kwargs)
         if dates:
             TraceFactory.validate_equal_length(open, high, low, close, dates)
         else:
             TraceFactory.validate_equal_length(open, high, low, close)
-        FigureFactory.validate_ohlc(open, high, low, close, direction,
-                                    **kwargs)
-        (increase_x,
-         increase_open,
-         increase_dif,
-         stick_increase_y,
-         stick_increase_x) = (_Candlestick(open, high, low, close, dates,
-                                           **kwargs).get_candle_increase())
 
-        (decrease_x,
-         decrease_close,
-         decrease_dif,
-         stick_decrease_y,
-         stick_decrease_x) = (_Candlestick(open, high, low, close, dates,
-                                           **kwargs).get_candle_decrease())
-
-        def make_increasing_candle(increase_x, increase_open, increase_dif,
-                                   stick_increase_y, stick_increase_x,
-                                   **kwargs):
-            """
-            Makes stacked bar and vertical line for increasing candlesticks
-
-            make_increasing_candle() and make_decreasing_candle separate the
-            increasing traces from the decreasing traces so kwargs (such as
-            color) can be passed separately to increasing or decreasing traces
-            when direction is set to 'increasing' or 'decreasing' in
-            FigureFactory.create_candlestick()
-
-            :param (list) increase_x: list of ints or datetime objects that
-                make up the x data for the stacked bar chart of increasing
-                candlesticks.
-            :param (list) increase_open: the open values of the increasing
-                candlestick are the y-values of the first (i.e. hidden) stacked
-                box
-            :param (list) increase_dif: The increase_dif values (close-open)
-                are the y values for the second (i.e. visible) stacked box.
-                When stacked on the increase_open values these represent the
-                candlestick 'body' for the increasing candlesticks.
-            :param (list) stick_increase_y: y-vaues used to create the high-low
-                'stick'
-            :param (list) stick_increase_x: x-vaues used to create the high-low
-                'stick'
-            :param kwargs: kwargs to be passed to increasing trace via
-                plotly.graph_objs.Scatter.
-
-            :rtype (trace, trace, trace) hidden_bar_incr, candle_bar_incr,
-                candle_line_incr: returns the first (invisible) stacked bar,
-                second (visible) stacked bar, and trace composed of vertical
-                lines for each increasing candlestick.
-
-            """
-
-            if 'name' in kwargs:
-                showlegend = True
-            else:
-                kwargs.setdefault('name', 'Increasing')
-                showlegend = False
-
-            kwargs.setdefault('marker', dict(color='rgb(44, 160, 44)'))
-            kwargs.setdefault('line', dict(color='rgb(44, 160, 44)', width=4))
-
-            hidden_bar_incr = dict(type='bar',
-                                   x=increase_x,
-                                   y=increase_open,
-                                   marker=Marker(color='rgba(0, 0, 0, 0)'),
-                                   legendgroup='Increasing',
-                                   showlegend=False,
-                                   hoverinfo='none')
-            candle_bar_incr = dict(type='bar',
-                                   x=increase_x,
-                                   y=increase_dif,
-                                   legendgroup='Increasing',
-                                   showlegend=False,
-                                   hoverinfo='none',
-                                   **kwargs)
-            candle_line_incr = dict(type='scatter',
-                                    x=stick_increase_x,
-                                    y=stick_increase_y,
-                                    mode='lines',
-                                    legendgroup='Increasing',
-                                    text=('Low', 'Open', 'Close',
-                                          'High', '') * len(increase_x),
-                                    showlegend=showlegend,
-                                    **kwargs)
-
-            return hidden_bar_incr, candle_bar_incr, candle_line_incr
-
-        def make_decreasing_candle(decrease_x, decrease_open, decrease_dif,
-                                   stick_decrease_y, stick_decrease_x,
-                                   **kwargs):
-            """
-            Makes stacked bar and vertical line for decreasing candlesticks
-
-            :param (list) decrease_x: list of ints or datetime objects that
-                make up the x data for the stacked bar chart of decreasing
-                candlesticks.
-            :param (list) decrease_close: the close values of the decreasing
-                candlestick are the y-values of the first (i.e. hidden) stacked
-                box
-            :param (list) decrease_dif: The decrease_dif values (open-close)
-                are the y values for the second (i.e. visible) stacked box.
-                When stacked on the decrease_close values these represent the
-                candlestick 'body' for the decreasing candlesticks.
-            :param (list) stick_decrease_y: y-vaues used to create the high-low
-                'stick'
-            :param (list) stick_decrease_x: x-vaues used to create the high-low
-                'stick'
-            :param kwargs: kwargs to be passed to decreasing trace via
-                plotly.graph_objs.Scatter.
-
-            :rtype (trace, trace, trace) hidden_bar_decr, candle_bar_decr,
-                candle_line_decr: returns the first (invisible) stacked bar,
-                second (visible) stacked bar, and trace composed of vertical
-                lines for each decreasing candlestick.
-            """
-
-            kwargs.setdefault('marker', dict(color='rgb(214, 39, 40)'))
-            kwargs.setdefault('line', dict(color='rgb(214, 39, 40)'))
-            kwargs.setdefault('name', 'Decreasing')
-
-            hidden_bar_decr = dict(type='bar',
-                                   x=decrease_x,
-                                   y=decrease_close,
-                                   marker=Marker(color='rgba(0, 0, 0, 0)'),
-                                   legendgroup='Decreasing',
-                                   showlegend=False,
-                                   hoverinfo='none')
-            candle_bar_decr = dict(type='bar',
-                                   x=decrease_x,
-                                   y=decrease_dif,
-                                   legendgroup='Decreasing',
-                                   showlegend=False,
-                                   hoverinfo='none',
-                                   **kwargs)
-            candle_line_decr = dict(type='scatter',
-                                    x=stick_decrease_x,
-                                    y=stick_decrease_y,
-                                    mode='lines',
-                                    legendgroup='Decreasing',
-                                    showlegend=False,
-                                    text=('Low', 'Close', 'Open',
-                                          'High', '') * len(decrease_x),
-                                    **kwargs)
-
-            return hidden_bar_decr, candle_bar_decr, candle_line_decr
+        if direction is 'increasing':
+            candle_incr_data = FigureFactory._make_increasing_candle(open,
+                                                                     high,
+                                                                     low,
+                                                                     close,
+                                                                     dates,
+                                                                     **kwargs)
+            data = candle_incr_data
+        elif direction is 'decreasing':
+            candle_decr_data = FigureFactory._make_decreasing_candle(open,
+                                                                     high,
+                                                                     low,
+                                                                     close,
+                                                                     dates,
+                                                                     **kwargs)
+            data = candle_decr_data
+        else:
+            candle_incr_data = FigureFactory._make_increasing_candle(open,
+                                                                     high,
+                                                                     low,
+                                                                     close,
+                                                                     dates,
+                                                                     **kwargs)
+            candle_decr_data = FigureFactory._make_decreasing_candle(open,
+                                                                     high,
+                                                                     low,
+                                                                     close,
+                                                                     dates,
+                                                                     **kwargs)
+            data = candle_incr_data + candle_decr_data
 
         layout = dict(barmode='stack',
                       yaxis=dict(range=[(min(low) -
@@ -2571,53 +2651,10 @@ class FigureFactory(dict):
                                         (max(high) +
                                         ((max(high) - min(low)) * .1))]))
 
-        if direction is 'increasing':
-            (hidden_bar_incr,
-             candle_bar_incr,
-             candle_line_incr) = make_increasing_candle(increase_x,
-                                                        increase_open,
-                                                        increase_dif,
-                                                        stick_increase_y,
-                                                        stick_increase_x,
-                                                        **kwargs)
-
-            data = [hidden_bar_incr, candle_bar_incr, candle_line_incr]
-
-        elif direction is 'decreasing':
-            (hidden_bar_decr,
-             candle_bar_decr,
-             candle_line_decr) = make_decreasing_candle(decrease_x,
-                                                        decrease_close,
-                                                        decrease_dif,
-                                                        stick_decrease_y,
-                                                        stick_decrease_x,
-                                                        **kwargs)
-            data = [hidden_bar_decr, candle_bar_decr, candle_line_decr]
-
-        elif direction is 'both':
-            (hidden_bar_incr,
-             candle_bar_incr,
-             candle_line_incr) = make_increasing_candle(increase_x,
-                                                        increase_open,
-                                                        increase_dif,
-                                                        stick_increase_y,
-                                                        stick_increase_x,
-                                                        **kwargs)
-            (hidden_bar_decr,
-             candle_bar_decr,
-             candle_line_decr) = make_decreasing_candle(decrease_x,
-                                                        decrease_close,
-                                                        decrease_dif,
-                                                        stick_decrease_y,
-                                                        stick_decrease_x,
-                                                        **kwargs)
-            data = [hidden_bar_incr, candle_bar_incr, candle_line_incr,
-                    hidden_bar_decr, candle_bar_decr, candle_line_decr]
-
         return dict(data=data, layout=layout)
 
 
-class _OHLC(dict):
+class _OHLC(FigureFactory):
     """
     Refer to TraceFactory.create_ohlc_increase() for docstring.
     """
@@ -2639,8 +2676,6 @@ class _OHLC(dict):
         self.decrease_y = []
         self.get_all_xy()
         self.separate_increase_decrease()
-        self.get_increase()
-        self.get_decrease()
 
     def get_all_xy(self):
         """
@@ -2717,7 +2752,7 @@ class _OHLC(dict):
         return flat_decrease_x, flat_decrease_y, text_decrease
 
 
-class _Candlestick(dict):
+class _Candlestick(FigureFactory):
     """
     Refer to TraceFactory.create_candlestick() for docstring.
     """
