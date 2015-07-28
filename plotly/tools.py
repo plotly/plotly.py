@@ -2303,10 +2303,6 @@ class FigureFactory(object):
 
         Example 3: Plot ohlc chart with Title
         ```
-        import plotly.plotly as py
-        import plotly.tools as tls
-        from plotly.graph_objs import *
-
         from datetime import datetime
 
         # Add data
@@ -2325,13 +2321,72 @@ class FigureFactory(object):
                                              low_data, close_data,
                                              dates=dates)
 
+        # Customize layout by using .update()
         fig = ohlc
         fig['layout'].update(title = 'OHLC Chart')
 
         py.plot(fig, filename='ohlc with title', validate=False)
         ```
 
-        Example 4: Plot OHLC with Pandas
+        Example 4: OHLC with increasing vs decreasing keyword arguments
+        ```
+        from datetime import datetime
+
+        # Add Data
+        high_data = [33.2, 33.3750, 33.6250, 33.2500, 34.1880, 33.2, 33.3750,
+                     33.6250, 33.2500, 34.1880]
+        low_data = [32.7, 32.7500, 32.8750, 32.6250, 32.8130, 32.7, 32.7500,
+                    32.8750, 32.6250, 32.8130,]
+        close_data = [33.1, 32.9380, 33.3750, 33.1880, 33.1880, 33.1, 32.9380,
+                      33.3750, 33.1880, 33.1880]
+        open_data = [33.0, 33.3125, 33.5000, 33.0625, 34.1250, 33.0, 33.3125,
+                     33.5000, 33.0625, 34.1250]
+        x = [datetime(year=2013, month=3, day=4),
+             datetime(year=2013, month=6, day=5),
+             datetime(year=2013, month=9, day=6),
+             datetime(year=2014, month=3, day=4),
+             datetime(year=2014, month=6, day=5),
+             datetime(year=2014, month=9, day=4),
+             datetime(year=2015, month=3, day=5),
+             datetime(year=2015, month=6, day=6),
+             datetime(year=2015, month=9, day=4),
+             datetime(year=2016, month=3, day=5)]
+
+        # Make increasing ohlc sticks and set kwargs
+        ohlc_incr = FigureFactory.create_ohlc(open_data,
+                                              high_data,
+                                              low_data,
+                                              close_data,
+                                              dates=x,
+                                              direction='increasing',
+                                              name='XYZ Increasing',
+                                              line=Line(color='rgb(150, 200,
+                                                                   250)'))
+
+        # Make decreasing ohlc sticks and set kwargs
+        ohlc_decr = FigureFactory.create_ohlc(open_data,
+                                              high_data,
+                                              low_data,
+                                              close_data,
+                                              dates=x,
+                                              direction='decreasing',
+                                              name='XYZ Decreasing',
+                                              showlegend=True,
+                                              line=Line(color='rgb(128, 128,
+                                                                   128)'))
+
+        # Set figure with increasing data and layout
+        fig = ohlc_incr
+
+        # Add decreasing data with .extend()
+        fig['data'].extend(ohlc_decr['data'])
+
+        # Plot!
+        py.iplot(fig, filename='ohlc keywords', validate=False)
+
+        ```
+
+        Example 5: Plot OHLC with Pandas
         ```
         import pandas.io.data as web
         import pandas as pd
@@ -2545,66 +2600,78 @@ class FigureFactory(object):
         from plotly.graph_objs import *
 
         # Add data
-        open = [33.0, 33.3, 33.5, 33.0, 34.1]
-        high = [33.1, 33.3, 33.6, 33.2, 34.8]
-        low = [32.7, 32.7, 32.8, 32.6, 32.8]
-        close = [33.0, 32.9, 33.3, 33.1, 33.1]
+        high_data = [34.20, 34.37, 33.62, 34.25, 35.18, 33.25, 35.37, 34.62]
+        low_data = [31.70, 30.75, 32.87, 31.62, 30.81, 32.75, 32.75, 32.87]
+        close_data = [34.10, 31.93, 33.37, 33.18, 31.18, 33.10, 32.93, 33.70]
+        open_data = [33.01, 33.31, 33.50, 32.06, 34.12, 33.05, 33.31, 33.50]
 
-        # Create candlestick increasing units
-        candle_incr = tls.TraceFactory.create_candlestick(open, high,
-                                                          low, close,
-                                                          direction='increasing')
+        # Make candlestick
+        candle = FigureFactory.create_candlestick(open_data,
+                                                  high_data,
+                                                  low_data,
+                                                  close_data)
 
-        # Create ohlc decreasing units
-        candle_decr = tls.TraceFactory.create_candlestick(open, high,
-                                                          low, close,
-                                                          direction='decreasing')
-
-        # Plot
-        data = candle_incr
-        data.extend(candle_decr)
-        fig = dict(data=data)
-        url = py.plot(fig, filename='simple candlestick', validate=False)
+        # Plot!
+        py.iplot(candle, filename='candle', validate=False, overwrite=True)
         ```
 
-        Example 2: Plot candlestick chart with date labels
+        Example 2: Plot candlestick chart with dates and change trace colors
         ```
-        import plotly.plotly as py
-        import plotly.tools as tls
-        from plotly.graph_objs import *
-
         from datetime import datetime
 
-        # Add data
-        open = [33.0, 33.3, 33.5, 33.0, 34.1]
-        high = [33.1, 33.3, 33.6, 33.2, 34.8]
-        low = [32.7, 32.7, 32.8, 32.6, 32.8]
-        close = [33.0, 32.9, 33.3, 33.1, 33.1]
-        dates = [datetime(year=2013, month=10, day=10),
-                 datetime(year=2013, month=11, day=10),
-                 datetime(year=2013, month=12, day=10),
-                 datetime(year=2014, month=1, day=10),
-                 datetime(year=2015, month=2, day=10)]
+        # Add Data
+        open_data = [33.01, 33.31, 33.50, 32.06, 34.12,
+                     33.05, 33.31, 33.50, 32.62]
+        high_data = [34.20, 34.37, 33.62, 34.25, 35.18,
+                     33.25, 35.37, 34.62, 34.25]
+        low_data = [31.70, 30.75, 32.87, 31.62, 30.81,
+                    32.75, 32.75, 32.87, 32.62]
+        close_data = [34.10, 31.93, 33.37, 33.18, 31.18,
+                      33.10, 32.93, 33.70, 33.18]
 
-        # Create candlestick increasing units
-        candle_incr = tls.TraceFactory.create_candlestick(open, high,
-                                                          low, close,
-                                                          direction='increasing')
+        x = [datetime(year=2013, month=3, day=4),
+             datetime(year=2013, month=6, day=5),
+             datetime(year=2013, month=9, day=6),
+             datetime(year=2013, month=12, day=4),
+             datetime(year=2014, month=3, day=5),
+             datetime(year=2014, month=6, day=6),
+             datetime(year=2014, month=9, day=4),
+             datetime(year=2014, month=12, day=5),
+             datetime(year=2015, month=3, day=6)]
 
-        # Create ohlc decreasing units
-        candle_decr = tls.TraceFactory.create_candlestick(open, high,
-                                                          low, close,
-                                                          direction='decreasing')
+        c_inc = FigureFactory.create_candlestick(open_data,
+                                                 high_data,
+                                                 low_data,
+                                                 close_data,
+                                                 dates=x,
+                                                 direction='increasing',
+                                                 line=Line(color='rgb(204,
+                                                                      229,
+                                                                      255)',
+                                                           width=4),
+                                                 marker=Marker(color='rgb(204,
+                                                                          229,
+                                                                          255)')
+                                                )
 
-        # Create layout with dates as x-axis labels
-        data = candle_incr
-        data.extend(candle_decr)
-        fig = dict(data=data,
-              layout=dict(xaxis = dict(ticktext = dates,
-                                       tickvals = [1, 2, 3, 4, 5 ])))
+        c_dec = FigureFactory.create_candlestick(open_data,
+                                                 high_data,
+                                                 low_data,
+                                                 close_data,
+                                                 dates=x,
+                                                 direction='decreasing',
+                                                 line=Line(color='rgb(160,
+                                                                      160,
+                                                                      160)',
+                                                           width=4),
+                                                 marker=Marker(color='rgb(160,
+                                                                          160,
+                                                                          160)'),
+                                                )
+        fig = c=_inc
+        fig['data'].extend(c_dec['data'])
 
-        # Plot
-        url = py.plot(fig, filename='candle_dates', validate=False)
+        py.iplot(fig, filename='candle', validate=False, overwrite=True)
         ```
         """
         FigureFactory.validate_ohlc(open, high, low, close, direction,
@@ -2656,7 +2723,7 @@ class FigureFactory(object):
 
 class _OHLC(FigureFactory):
     """
-    Refer to TraceFactory.create_ohlc_increase() for docstring.
+    Refer to FigureFactory.create_ohlc_increase() for docstring.
     """
     def __init__(self, open, high, low, close, dates, **kwargs):
         self.open = open
@@ -2754,7 +2821,7 @@ class _OHLC(FigureFactory):
 
 class _Candlestick(FigureFactory):
     """
-    Refer to TraceFactory.create_candlestick() for docstring.
+    Refer to FigureFactory.create_candlestick() for docstring.
     """
     def __init__(self, open, high, low, close, dates, **kwargs):
         self.open = open
