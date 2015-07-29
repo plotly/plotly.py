@@ -2257,164 +2257,102 @@ class FigureFactory(object):
 
         :rtype (dict): returns a representation of an ohlc chart figure.
 
-        Example 1: Plot simple ohlc chart
+        Example 1: Simple OHLC chart from a Pandas DataFrame
         ```
         import plotly.plotly as py
-        import plotly.tools as tls
-        from plotly.graph_objs import *
+        from plotly.tools import FigureFactory as FF
 
-        # Add data
-        open_data = [33.0, 33.3, 33.5, 33.0, 34.1]
-        high_data = [33.1, 33.3, 33.6, 33.2, 34.8]
-        low_data = [32.7, 32.7, 32.8, 32.6, 32.8]
-        close_data = [33.0, 32.9, 33.3, 33.1, 33.1]
+        import pandas.io.data as web
 
-        # Create ohlc
-        ohlc = FigureFactory.create_ohlc(open_data, high_data,
-                                         low_data, close_data)
+        df = web.DataReader("aapl", 'yahoo', datetime(2008, 8, 15), datetime(2008, 10, 15))
+        fig = FF.create_ohlc(df.Open, df.High, df.Low, df.Close, dates=df.index)
 
-        # Plot
-        py.plot(ohlc, filename='simple ohlc', validate=False)
+        py.plot(fig, filename='finance/aapl-ohlc')
         ```
 
-        Example 2: Plot ohlc chart with date labels
+        Example 2: Add text and annotations to the OHLC chart
         ```
         import plotly.plotly as py
-        import plotly.tools as tls
-        from plotly.graph_objs import *
+        from plotly.tools import FigureFactory as FF
 
+        import pandas.io.data as web
+
+        df = web.DataReader("aapl", 'yahoo', datetime(2008, 8, 15), datetime(2008, 10, 15))
+        fig = FF.create_ohlc(df.Open, df.High, df.Low, df.Close, dates=df.index)
+
+        # Update the fig - all options here: https://plot.ly/python/reference/#Layout
+        fig['layout'].update({
+            'title': 'The Great Recession',
+            'yaxis': {'title': 'AAPL Stock'},
+            'shapes': [{
+                'x0': '2008-09-15', 'x1': '2008-09-15', 'type': 'line',
+                'y0': 0, 'y1': 1, 'xref': 'x', 'yref': 'paper',
+                'line': {'color': 'rgb(40,40,40)', 'width': 0.5}
+            }],
+            'annotations': [{
+                'text': "the fall of Lehman Brothers",
+                'x': '2008-09-15', 'y': 1.02,
+                'xref': 'x', 'yref': 'paper',
+                'showarrow': False, 'xanchor': 'left'
+            }]
+        })
+
+        py.plot(fig, filename='finance/aapl-recession-ohlc', validate=False)
+        ```
+
+        Example 3: Customize the OHLC colors
+        ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+        from plotly.graph_objs import Line, Marker
         from datetime import datetime
 
-        # Add data
-        open_data = [33.0, 33.3, 33.5, 33.0, 34.1]
-        high_data = [33.1, 33.3, 33.6, 33.2, 34.8]
-        low_data = [32.7, 32.7, 32.8, 32.6, 32.8]
-        close_data = [33.0, 32.9, 33.3, 33.1, 33.1]
-        dates = [datetime(year=2013, month=10, day=10),
-                 datetime(year=2013, month=11, day=10),
-                 datetime(year=2013, month=12, day=10),
-                 datetime(year=2014, month=1, day=10),
-                 datetime(year=2014, month=2, day=10)]
+        import pandas.io.data as web
 
-        # Create ohlc
-        ohlc = tls.FigureFactory.create_ohlc(open_data, high_data,
-                                             low_data, close_data,
-                                             dates=dates)
+        df = web.DataReader("aapl", 'yahoo', datetime(2008, 1, 1), datetime(2009, 4, 1))
 
-        py.plot(ohlc, filename='ohlc with dates', validate=False)
-        ```
+        # Make increasing ohlc sticks and customize their color and name
+        fig_increasing = FF.create_ohlc(df.Open, df.High, df.Low, df.Close, dates=df.index,
+            direction='increasing', name='AAPL',
+            line=Line(color='rgb(150, 200, 250)'))
 
-        Example 3: Plot ohlc chart with Title
-        ```
-        from datetime import datetime
+        # Make decreasing ohlc sticks and customize their color and name
+        fig_decreasing = FF.create_ohlc(df.Open, df.High, df.Low, df.Close, dates=df.index,
+            direction='decreasing',
+            line=Line(color='rgb(128, 128, 128)'))
 
-        # Add data
-        open_data = [33.0, 33.3, 33.5, 33.0, 34.1]
-        high_data = [33.1, 33.3, 33.6, 33.2, 34.8]
-        low_data = [32.7, 32.7, 32.8, 32.6, 32.8]
-        close_data = [33.0, 32.9, 33.3, 33.1, 33.1]
-        dates = [datetime(year=2013, month=10, day=10),
-                 datetime(year=2013, month=11, day=10),
-                 datetime(year=2013, month=12, day=10),
-                 datetime(year=2014, month=1, day=10),
-                 datetime(year=2014, month=2, day=10)]
-
-        # Create ohlc
-        ohlc = tls.FigureFactory.create_ohlc(open_data, high_data,
-                                             low_data, close_data,
-                                             dates=dates)
-
-        # Customize layout by using .update()
-        fig = ohlc
-        fig['layout'].update(title = 'OHLC Chart')
-
-        py.plot(fig, filename='ohlc with title', validate=False)
-        ```
-
-        Example 4: OHLC with increasing vs decreasing keyword arguments
-        ```
-        from datetime import datetime
-
-        # Add Data
-        high_data = [33.2, 33.3750, 33.6250, 33.2500, 34.1880, 33.2, 33.3750,
-                     33.6250, 33.2500, 34.1880]
-        low_data = [32.7, 32.7500, 32.8750, 32.6250, 32.8130, 32.7, 32.7500,
-                    32.8750, 32.6250, 32.8130,]
-        close_data = [33.1, 32.9380, 33.3750, 33.1880, 33.1880, 33.1, 32.9380,
-                      33.3750, 33.1880, 33.1880]
-        open_data = [33.0, 33.3125, 33.5000, 33.0625, 34.1250, 33.0, 33.3125,
-                     33.5000, 33.0625, 34.1250]
-        x = [datetime(year=2013, month=3, day=4),
-             datetime(year=2013, month=6, day=5),
-             datetime(year=2013, month=9, day=6),
-             datetime(year=2014, month=3, day=4),
-             datetime(year=2014, month=6, day=5),
-             datetime(year=2014, month=9, day=4),
-             datetime(year=2015, month=3, day=5),
-             datetime(year=2015, month=6, day=6),
-             datetime(year=2015, month=9, day=4),
-             datetime(year=2016, month=3, day=5)]
-
-        # Make increasing ohlc sticks and set kwargs
-        ohlc_incr = FigureFactory.create_ohlc(open_data,
-                                              high_data,
-                                              low_data,
-                                              close_data,
-                                              dates=x,
-                                              direction='increasing',
-                                              name='XYZ Increasing',
-                                              line=Line(color='rgb(150, 200,
-                                                                   250)'))
-
-        # Make decreasing ohlc sticks and set kwargs
-        ohlc_decr = FigureFactory.create_ohlc(open_data,
-                                              high_data,
-                                              low_data,
-                                              close_data,
-                                              dates=x,
-                                              direction='decreasing',
-                                              name='XYZ Decreasing',
-                                              showlegend=True,
-                                              line=Line(color='rgb(128, 128,
-                                                                   128)'))
-
-        # Set figure with increasing data and layout
-        fig = ohlc_incr
+        # Initialize the figure
+        fig = fig_increasing
 
         # Add decreasing data with .extend()
-        fig['data'].extend(ohlc_decr['data'])
+        fig['data'].extend(fig_decreasing['data'])
 
-        # Plot!
-        py.iplot(fig, filename='ohlc keywords', validate=False)
-
+        py.iplot(fig, filename='finance/aapl-ohlc-colors', validate=False)
         ```
 
-        Example 5: Plot OHLC with Pandas
+        Example 4: OHLC chart with datetime objects
         ```
-        import pandas.io.data as web
-        import pandas as pd
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+
         from datetime import datetime
 
-        # Get Data
-        start = datetime(2010, 1, 1)
-        end = datetime(2012, 1, 27)
-        df = web.DataReader("aapl", 'yahoo', start, end)
+        # Add data
+        open_data = [33.0, 33.3, 33.5, 33.0, 34.1]
+        high_data = [33.1, 33.3, 33.6, 33.2, 34.8]
+        low_data = [32.7, 32.7, 32.8, 32.6, 32.8]
+        close_data = [33.0, 32.9, 33.3, 33.1, 33.1]
+        dates = [datetime(year=2013, month=10, day=10),
+                 datetime(year=2013, month=11, day=10),
+                 datetime(year=2013, month=12, day=10),
+                 datetime(year=2014, month=1, day=10),
+                 datetime(year=2014, month=2, day=10)]
 
-        # Get Dates
-        datelist = (pd.date_range(datetime(2010, 1, 1),
-                    periods=len(df.Open)).tolist())
-        d=[]
-        for i in range(len(datelist)):
-            d.append(datelist[i].to_datetime())
+        # Create ohlc
+        fig = FF.create_ohlc(open_data, high_data,
+            low_data, close_data, dates=dates)
 
-        # Make OHLC
-        ohlc_panda = tls.FigureFactory.create_ohlc(df.Open, df.High,
-                                                   df.Low, df.Close,
-                                                   dates=d)
-
-        # Plot
-        py.plot(ohlc_panda, filename='ohlc with pandas', validate=False)
-
+        py.iplot(fig, filename='finance/simple-ohlc', validate=False)
         ```
         """
         if dates:
@@ -2596,85 +2534,96 @@ class FigureFactory(object):
 
         :rtype (dict): returns a representation of candlestick chart figure.
 
-        Example 1: Plot candlestick chart
+        Example 1: Simple candlestick chart from a Pandas DataFrame
         ```
         import plotly.plotly as py
-        import plotly.tools as tls
-        from plotly.graph_objs import *
-
-        # Add data
-        high_data = [34.20, 34.37, 33.62, 34.25, 35.18, 33.25, 35.37, 34.62]
-        low_data = [31.70, 30.75, 32.87, 31.62, 30.81, 32.75, 32.75, 32.87]
-        close_data = [34.10, 31.93, 33.37, 33.18, 31.18, 33.10, 32.93, 33.70]
-        open_data = [33.01, 33.31, 33.50, 32.06, 34.12, 33.05, 33.31, 33.50]
-
-        # Make candlestick
-        candle = FigureFactory.create_candlestick(open_data,
-                                                  high_data,
-                                                  low_data,
-                                                  close_data)
-
-        # Plot!
-        py.iplot(candle, filename='candle', validate=False, overwrite=True)
-        ```
-
-        Example 2: Plot candlestick chart with dates and change trace colors
-        ```
+        from plotly.tools import FigureFactory as FF
         from datetime import datetime
 
-        # Add Data
-        open_data = [33.01, 33.31, 33.50, 32.06, 34.12,
-                     33.05, 33.31, 33.50, 32.62]
-        high_data = [34.20, 34.37, 33.62, 34.25, 35.18,
-                     33.25, 35.37, 34.62, 34.25]
-        low_data = [31.70, 30.75, 32.87, 31.62, 30.81,
-                    32.75, 32.75, 32.87, 32.62]
-        close_data = [34.10, 31.93, 33.37, 33.18, 31.18,
-                      33.10, 32.93, 33.70, 33.18]
+        import pandas.io.data as web
 
-        x = [datetime(year=2013, month=3, day=4),
-             datetime(year=2013, month=6, day=5),
-             datetime(year=2013, month=9, day=6),
-             datetime(year=2013, month=12, day=4),
-             datetime(year=2014, month=3, day=5),
-             datetime(year=2014, month=6, day=6),
-             datetime(year=2014, month=9, day=4),
-             datetime(year=2014, month=12, day=5),
-             datetime(year=2015, month=3, day=6)]
+        df = web.DataReader("aapl", 'yahoo', datetime(2007, 10, 1), datetime(2009, 4, 1))
+        fig = FF.create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index)
+        py.plot(fig, filename='finance/aapl-candlestick', validate=False)
+        ```
 
-        c_inc = FigureFactory.create_candlestick(open_data,
-                                                 high_data,
-                                                 low_data,
-                                                 close_data,
-                                                 dates=x,
-                                                 direction='increasing',
-                                                 line=Line(color='rgb(204,
-                                                                      229,
-                                                                      255)',
-                                                           width=4),
-                                                 marker=Marker(color='rgb(204,
-                                                                          229,
-                                                                          255)')
-                                                )
+        Example 2: Add text and annotations to the candlestick chart
+        ```
+        fig = FF.create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index)
+        # Update the fig - all options here: https://plot.ly/python/reference/#Layout
+        fig['layout'].update({
+            'title': 'The Great Recession',
+            'yaxis': {'title': 'AAPL Stock'},
+            'shapes': [{
+                'x0': '2007-12-01', 'x1': '2007-12-01',
+                'y0': 0, 'y1': 1, 'xref': 'x', 'yref': 'paper',
+                'line': {'color': 'rgb(30,30,30)', 'width': 1}
+            }],
+            'annotations': [{
+                'x': '2007-12-01', 'y': 0.05, 'xref': 'x', 'yref': 'paper',
+                'showarrow': False, 'xanchor': 'left',
+                'text': 'Official start of the recession'
+            }]
+        })
+        py.plot(fig, filename='finance/aapl-recession-candlestick', validate=False)
+        ```
 
-        c_dec = FigureFactory.create_candlestick(open_data,
-                                                 high_data,
-                                                 low_data,
-                                                 close_data,
-                                                 dates=x,
-                                                 direction='decreasing',
-                                                 line=Line(color='rgb(160,
-                                                                      160,
-                                                                      160)',
-                                                           width=4),
-                                                 marker=Marker(color='rgb(160,
-                                                                          160,
-                                                                          160)'),
-                                                )
-        fig = c=_inc
-        fig['data'].extend(c_dec['data'])
+        Example 3: Customize the candlestick colors
+        ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+        from plotly.graph_objs import Line, Marker
+        from datetime import datetime
 
-        py.iplot(fig, filename='candle', validate=False, overwrite=True)
+        import pandas.io.data as web
+
+        df = web.DataReader("aapl", 'yahoo', datetime(2008, 1, 1), datetime(2009, 4, 1))
+        fig = FF.create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index)
+
+        # Make increasing ohlc sticks and customize their color and name
+        fig_increasing = FF.create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index,
+            direction='increasing', name='AAPL',
+            marker=Marker(color='rgb(150, 200, 250)'),
+            line=Line(color='rgb(150, 200, 250)'))
+
+        # Make decreasing ohlc sticks and customize their color and name
+        fig_decreasing = FF.create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index,
+            direction='decreasing',
+            marker=Marker(color='rgb(128, 128, 128)'),
+            line=Line(color='rgb(128, 128, 128)'))
+
+        # Initialize the figure
+        fig = fig_increasing
+
+        # Add decreasing data with .extend()
+        fig['data'].extend(fig_decreasing['data'])
+
+        py.iplot(fig, filename='finance/aapl-candlestick-custom', validate=False)
+        ```
+
+        Example 4: Candlestick chart with datetime objects
+        ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+
+        from datetime import datetime
+
+        # Add data
+        open_data = [33.0, 33.3, 33.5, 33.0, 34.1]
+        high_data = [33.1, 33.3, 33.6, 33.2, 34.8]
+        low_data = [32.7, 32.7, 32.8, 32.6, 32.8]
+        close_data = [33.0, 32.9, 33.3, 33.1, 33.1]
+        dates = [datetime(year=2013, month=10, day=10),
+                 datetime(year=2013, month=11, day=10),
+                 datetime(year=2013, month=12, day=10),
+                 datetime(year=2014, month=1, day=10),
+                 datetime(year=2014, month=2, day=10)]
+
+        # Create ohlc
+        fig = FF.create_candlestick(open_data, high_data,
+            low_data, close_data, dates=dates)
+
+        py.iplot(fig, filename='finance/simple-candlestick', validate=False)
         ```
         """
         FigureFactory.validate_ohlc(open, high, low, close, direction,
