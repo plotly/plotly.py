@@ -2478,8 +2478,8 @@ class FigureFactory(object):
          stick_decrease_x) = (_Candlestick(open, high, low, close, dates,
                                            **kwargs).get_candle_decrease())
 
-        kwargs.setdefault('marker', dict(color='rgb(214, 39, 40)'))
-        kwargs.setdefault('line', dict(color='rgb(214, 39, 40)', width=4))
+        kwargs.setdefault('marker', dict(color=_DEFAULT_DECREASING_COLOR))
+        kwargs.setdefault('line', dict(color=_DEFAULT_DECREASING_COLOR, width=4))
         kwargs.setdefault('name', 'Decreasing')
 
         hidden_bar_decr = dict(type='bar',
