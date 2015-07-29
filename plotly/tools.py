@@ -251,7 +251,7 @@ def reset_config_file():
 
 ### embed tools ###
 
-def get_embed(file_owner_or_url, file_id=None, share_key=None, width="100%", height=525):
+def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
     """Returns HTML code to embed figure on a webpage as an <iframe>
 
     Plotly uniquely identifies figures with a 'file_owner'/'file_id' pair.
@@ -290,9 +290,13 @@ def get_embed(file_owner_or_url, file_id=None, share_key=None, width="100%", hei
                 "'{1}'."
                 "\nRun help on this function for more information."
                 "".format(url, plotly_rest_url))
-        head = plotly_rest_url + "/~"
-        file_owner = url.replace(head, "").split('/')[0]
-        file_id = url.replace(head, "").split('/')[1]
+        urlsplit = six.moves.urllib.parse.urlparse(url)
+        file_owner = urlsplit.path.split('/')[1].split('~')[1]
+        file_id = urlsplit.path.split('/')[2]
+        if urlsplit.query:
+            share_key = urlsplit.query.split('share_key=')[1]
+        else:
+            share_key = None
     else:
         file_owner = file_owner_or_url
 
@@ -323,7 +327,7 @@ def get_embed(file_owner_or_url, file_id=None, share_key=None, width="100%", hei
         s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\""
              "seamless=\"seamless\" "
              "src=\"{plotly_rest_url}/"
-             "~{file_owner}/{file_id}.embed?{share_key}\" "
+             "~{file_owner}/{file_id}.embed?share_key={share_key}\" "
              "height=\"{iframe_height}\" width=\"{iframe_width}\">"
              "</iframe>").format(
             plotly_rest_url=plotly_rest_url,
@@ -333,7 +337,7 @@ def get_embed(file_owner_or_url, file_id=None, share_key=None, width="100%", hei
     return s
 
 
-def embed(file_owner_or_url, file_id=None, share_key=None, width="100%", height=525):
+def embed(file_owner_or_url, file_id=None, width="100%", height=525):
     """Embeds existing Plotly figure in IPython Notebook
 
     Plotly uniquely identifies figures with a 'file_owner'/'file_id' pair.
@@ -360,7 +364,8 @@ def embed(file_owner_or_url, file_id=None, share_key=None, width="100%", height=
 
     """
     try:
-        s = get_embed(file_owner_or_url, file_id, share_key, width, height)
+        s = get_embed(file_owner_or_url, file_id=file_id, width=width,
+                      height=height)
 
         # see if we are in the SageMath Cloud
         from sage_salvus import html
@@ -368,11 +373,8 @@ def embed(file_owner_or_url, file_id=None, share_key=None, width="100%", height=
     except:
         pass
     if _ipython_imported:
-        if file_id:
-            return PlotlyDisplay(file_owner_or_url, file_id, share_key, width,
-                                 height)
-        else:
-            return PlotlyDisplay(file_owner_or_url, width, height)
+        url = file_owner_or_url
+        return PlotlyDisplay(url, width, height)
     else:
         warnings.warn(
             "Looks like you're not using IPython or Sage to embed this plot. "
@@ -1373,9 +1375,9 @@ if _ipython_imported:
         object can provide alternate representations.
 
         """
-        def __init__(self, url, width, height, file_id, share_key):
+        def __init__(self, url, width, height):
             self.resource = url
-            self.embed_code = get_embed(url, width, height, file_id, share_key)
+            self.embed_code = get_embed(url, width=width, height=height)
             super(PlotlyDisplay, self).__init__(data=self.embed_code)
 
         def _repr_html_(self):

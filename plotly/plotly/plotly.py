@@ -160,17 +160,9 @@ def iplot(figure_or_data, **plot_options):
     """
     if 'auto_open' not in plot_options:
         plot_options['auto_open'] = False
-    res = plot(figure_or_data, **plot_options)
-    urlsplit = six.moves.urllib.parse.urlparse(res)
-    username = urlsplit.path.split('~')[1].split('/')[0]
-    plot_id = urlsplit.path.split('~')[1].split('/')[1]
-
-    # Check if the url contains share_key
-    if ('sharing' in plot_options and
-            plot_options['sharing'] == 'secret'):
-        share_key = urlsplit.query
-    else:
-        share_key = None
+    url = plot(figure_or_data, **plot_options)
+    urlsplit = six.moves.urllib.parse.urlparse(url)
+    plot_id = urlsplit.path.split('/')[2]
 
     if isinstance(figure_or_data, dict):
         layout = figure_or_data.get('layout', {})
@@ -193,7 +185,7 @@ def iplot(figure_or_data, **plot_options):
     else:
         height = str(height) + 'px'
 
-    return tools.embed(username, plot_id, share_key, width, height)
+    return tools.embed(url, plot_id, width, height)
 
 
 def plot(figure_or_data, validate=True, **plot_options):
