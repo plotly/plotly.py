@@ -1447,7 +1447,7 @@ class TraceFactory(object):
                                              .format(key, val))
 
     @staticmethod
-    def _validate_streamline(x, y):
+    def validate_streamline(x, y):
         """
         streamline specific validations
 
