@@ -2098,6 +2098,10 @@ class _Streamline(TraceFactory):
         return streamline_x, streamline_y
 
 
+_DEFAULT_INCREASING_COLOR = '#3D9970'  # http://clrs.cc
+_DEFAULT_DECREASING_COLOR = '#FF4136'
+
+
 class FigureFactory(object):
     """
     BETA functions to create specific chart types.
@@ -2183,7 +2187,7 @@ class FigureFactory(object):
             kwargs.setdefault('name', 'Increasing')
             showlegend = False
 
-        kwargs.setdefault('line', dict(color='rgb(44, 160, 44)'))
+        kwargs.setdefault('line', dict(color=_DEFAULT_INCREASING_COLOR))
         kwargs.setdefault('text', text_increase)
 
         ohlc_incr = dict(type='scatter',
@@ -2214,7 +2218,7 @@ class FigureFactory(object):
          flat_decrease_y,
          text_decrease) = _OHLC(open, high, low, close, dates).get_decrease()
 
-        kwargs.setdefault('line', dict(color='rgb(214, 39, 40)'))
+        kwargs.setdefault('line', dict(color=_DEFAULT_DECREASING_COLOR))
         kwargs.setdefault('text', text_decrease)
         kwargs.setdefault('showlegend', False)
         kwargs.setdefault('name', 'Decreasing')
