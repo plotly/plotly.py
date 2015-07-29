@@ -2261,6 +2261,7 @@ class FigureFactory(object):
         ```
         import plotly.plotly as py
         from plotly.tools import FigureFactory as FF
+        from datetime import datetime
 
         import pandas.io.data as web
 
@@ -2274,6 +2275,7 @@ class FigureFactory(object):
         ```
         import plotly.plotly as py
         from plotly.tools import FigureFactory as FF
+        from datetime import datetime
 
         import pandas.io.data as web
 
