@@ -14,7 +14,6 @@ import warnings
 
 import six
 
-import requests
 import math
 
 
@@ -23,7 +22,7 @@ from plotly import exceptions
 from plotly import session
 
 from plotly.graph_objs import graph_objs
-from plotly.graph_objs import Scatter, Marker, Line
+from plotly.graph_objs import Scatter, Marker
 
 
 # Warning format
@@ -111,8 +110,8 @@ def ensure_local_plotly_files():
                       "your 'home' ('~') directory or to our '~/.plotly' "
                       "directory. That means plotly's python api can't setup "
                       "local configuration files. No problem though! You'll "
-                      "just have to sign-in using 'plotly.plotly.sign_in()'. For help "
-                      "with that: 'help(plotly.plotly.sign_in)'."
+                      "just have to sign-in using 'plotly.plotly.sign_in()'. "
+                      "For help with that: 'help(plotly.plotly.sign_in)'."
                       "\nQuestions? support@plot.ly")
 
 
@@ -1416,47 +1415,39 @@ def return_figure_from_figure_or_data(figure_or_data, validate_figure):
     return figure
 
 
-class TraceFactory(dict):
-
-    # use as validate method for all traces (not just streamline)
-    @staticmethod
-    def validate(x, y, u, v,
-                 scale=.1, density=1,
-                 arrow_scale=.3, **kwargs):
-        """
-        Validates the user-input arguments for quiver and streamline,
-
-        Specifically, that density, scale, and arrow_scale are positive
-        and that x and y and u and v are the same length.
-
-        Refer to TraceFactory.create_streamline() or
-        TraceFactory.create_quiver() for params
-
-        :raises: (ValueError) If scale is <= 0.
-        :raises: (ValueError) If arrow_scale is <= 0.
-        v:raises: (ValueError) If density is <= 0.
-        :raises: (PlotlyError) If x and y are not lists or ndarrays
-            of the same length.
-        :raises: (PlotlyError) If u and v are not lists or ndarrays
-            of the same length.
-        """
-
-        if scale <= 0:
-            raise ValueError("arrow_scale must be > 0")
-        if arrow_scale <= 0:
-            raise ValueError("arrow_scale must be > 0")
-        if density <= 0:
-            raise ValueError("density must be > 0")
-        if len(x) != len(y):
-            raise exceptions.PlotlyError("x and y should be a list or array "
-                                         "of the same length")
-        if len(u) != len(v):
-            raise exceptions.PlotlyError("u and v should be a list or array "
-                                         "of the same length")
+class TraceFactory(object):
 
     @staticmethod
-    def validate_streamline(x, y, **kwargs):
+    def validate_equal_length(*args):
+        """
+        Validates that data lists or ndarrays are the same length.
 
+        :raises: (PlotlyError) If any data lists are not the same length.
+        """
+        length = len(args[0])
+        if any(len(lst) != length for lst in args):
+            raise exceptions.PlotlyError("Oops! Your data lists or ndarrays "
+                                         "should be the same length.")
+
+    @staticmethod
+    def validate_positive_scalars(**kwargs):
+        """
+        Validates that all values given in key/val pairs are positive.
+
+        Accepts kwargs to improve Exception messages.
+
+        :raises: (PlotlyError) If any value is < 0 or raises.
+        """
+        for key, val in kwargs.items():
+            try:
+                if val <= 0:
+                    raise ValueError('{} must be > 0, got {}'.format(key, val))
+            except TypeError:
+                raise exceptions.PlotlyError('{} must be a number, got {}'
+                                             .format(key, val))
+
+    @staticmethod
+    def validate_streamline(x, y):
         """
         streamline specific validations
 
@@ -1472,8 +1463,7 @@ class TraceFactory(dict):
         if _numpy_imported is False:
             raise ImportError("TraceFactory.create_streamline requires numpy.")
         for index in range(len(x) - 1):
-            if ((x[index + 1] - x[index]) -
-               (x[1] - x[0])) > .0001:
+            if ((x[index + 1] - x[index]) - (x[1] - x[0])) > .0001:
                 raise exceptions.PlotlyError("x must be a 1 dimensional, "
                                              "evenly spaced array")
         for index in range(len(y) - 1):
@@ -1481,6 +1471,22 @@ class TraceFactory(dict):
                (y[1] - y[0])) > .0001:
                 raise exceptions.PlotlyError("y must be a 1 dimensional, "
                                              "evenly spaced array")
+
+    @staticmethod
+    def flatten(array):
+        """
+        Uses list comprehension to flatten array
+
+        :param (array): An iterable to flatten
+        :raises (PlotlyError): If iterable is not nested.
+        :rtype (list): The flattened list.
+        """
+        try:
+            return [item for sublist in array for item in sublist]
+        except TypeError:
+            raise exceptions.PlotlyError("Your data array could not be "
+                                         "flattened! Make sure your data is "
+                                         "entered as lists or ndarrays!")
 
     @staticmethod
     def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
@@ -1497,7 +1503,7 @@ class TraceFactory(dict):
         :param (float in [0,1]) arrow_scale: value multiplied to length of barb
             to get length of arrowhead. Default = .3
         :param (angle in radians) angle: angle of arrowhead. Default = pi/9
-        :param (class) kwargs: kwargs passed through plotly.graph_objs.Scatter
+        :param kwargs: kwargs passed through plotly.graph_objs.Scatter
             for more information on valid kwargs call
             help(plotly.graph_objs.Scatter)
 
@@ -1561,9 +1567,10 @@ class TraceFactory(dict):
         py.iplot(fig, filename='quiver')
         ```
         """
-        TraceFactory.validate(x, y, u, v,
-                              scale, arrow_scale,
-                              **kwargs)
+        TraceFactory.validate_equal_length(x, y, u, v)
+        TraceFactory.validate_positive_scalars(arrow_scale=arrow_scale,
+                                               scale=scale)
+
         barb_x, barb_y = _Quiver(x, y, u, v, scale,
                                  arrow_scale, angle).get_barbs()
         arrow_x, arrow_y = _Quiver(x, y, u, v, scale,
@@ -1591,11 +1598,11 @@ class TraceFactory(dict):
         :param (angle in radians) angle: angle of arrowhead. Default = pi/9
         :param (float in [0,1]) arrow_scale: value to scale length of arrowhead
             Default = .09
-        :param (class) kwargs: kwargs passed through plotly.graph_objs.Scatter
+        :param kwargs: kwargs passed through plotly.graph_objs.Scatter
             for more information on valid kwargs call
             help(plotly.graph_objs.Scatter)
 
-        :rtype: (trace) returns streamline data
+        :rtype (trace): returns streamline data
 
         Example 1: Plot simple streamline and increase arrow size
         ```
@@ -1654,10 +1661,12 @@ class TraceFactory(dict):
         py.iplot(fig, filename='streamline')
         ```
         """
-        TraceFactory.validate(x, y, u, v,
-                              density, arrow_scale,
-                              **kwargs)
+        TraceFactory.validate_equal_length(x, y)
+        TraceFactory.validate_equal_length(u, v)
         TraceFactory.validate_streamline(x, y)
+        TraceFactory.validate_positive_scalars(density=density,
+                                               arrow_scale=arrow_scale)
+
         streamline_x, streamline_y = _Streamline(x, y, u, v,
                                                  density, angle,
                                                  arrow_scale).sum_streamlines()
@@ -1678,22 +1687,22 @@ class _Quiver(TraceFactory):
     def __init__(self, x, y, u, v,
                  scale, arrow_scale, angle, **kwargs):
         try:
-            x = self.flatten(x)
+            x = TraceFactory.flatten(x)
         except exceptions.PlotlyError:
             pass
 
         try:
-            y = self.flatten(y)
+            y = TraceFactory.flatten(y)
         except exceptions.PlotlyError:
             pass
 
         try:
-            u = self.flatten(u)
+            u = TraceFactory.flatten(u)
         except exceptions.PlotlyError:
             pass
 
         try:
-            v = self.flatten(v)
+            v = TraceFactory.flatten(v)
         except exceptions.PlotlyError:
             pass
 
@@ -1709,21 +1718,6 @@ class _Quiver(TraceFactory):
         self.scale_uv()
         barb_x, barb_y = self.get_barbs()
         arrow_x, arrow_y = self.get_quiver_arrows()
-
-    def flatten(self, array):
-        """
-        Uses list comprehension to flatten array
-
-        :param (array): An iterable to flatten
-        :raises (PlotlyError): If iterable is not nested.
-        :rtype (list): The flattened list.
-        """
-        try:
-            return [item for sublist in array for item in sublist]
-        except TypeError:
-            raise exceptions.PlotlyError("Your data array could not be "
-                                         "flattened! Make sure x, y, u, and v "
-                                         "are lists or numpy ndarrays!")
 
     def scale_uv(self):
         """
@@ -2027,8 +2021,8 @@ class _Streamline(TraceFactory):
         :param (angle in radians) angle: angle of arrowhead. Default = pi/9
         :param (float in [0,1]) arrow_scale: value to scale length of arrowhead
             Default = .09
-        :rtype (list) arrows_x: x-values to create arrowhead
-        :rtype (list) arrows_y: y-values to create arrowhead
+        :rtype (list, list) arrows_x: x-values to create arrowhead and
+            arrows_y: y-values to create arrowhead
         """
         arrow_end_x = np.empty((len(self.st_x)))
         arrow_end_y = np.empty((len(self.st_y)))
@@ -2093,14 +2087,778 @@ class _Streamline(TraceFactory):
 
     def sum_streamlines(self):
         """
-
         Makes all streamlines readable as a single trace.
 
-        :rtype (list) streamline_x: all x values for each streamline combined
-            into single list
-        :rtype (list) streamline_y: all y values for each streamline combined
-            into single list
+        :rtype (list, list): streamline_x: all x values for each streamline
+            combined into single list and streamline_y: all y values for each
+            streamline combined into single list
         """
         streamline_x = sum(self.st_x, [])
         streamline_y = sum(self.st_y, [])
         return streamline_x, streamline_y
+
+
+_DEFAULT_INCREASING_COLOR = '#3D9970'  # http://clrs.cc
+_DEFAULT_DECREASING_COLOR = '#FF4136'
+
+
+class FigureFactory(object):
+    """
+    BETA functions to create specific chart types.
+
+    See FigureFactory.create_ohlc for more infomation and examples of open high
+    low close charts or FigureFactory.create_candlestick for more information
+    and examples of candlestick charts.
+
+    """
+
+    @staticmethod
+    def validate_ohlc(open, high, low, close, direction, **kwargs):
+        """
+        ohlc and candlestick specific validations
+
+        Specifically, this checks that the high value is the greatest value and
+        the low value is the lowest value in each unit.
+
+        See FigureFactory.create_ohlc() or FigureFactory.create_candlestick()
+        for params
+
+        :raises: (PlotlyError) If the high value is not the greatest value in
+            each unit.
+        :raises: (PlotlyError) If the low value is not the lowest value in each
+            unit.
+        :raises: (PlotlyError) If direction is not 'increasing' or 'decreasing'
+        """
+        for lst in [open, low, close]:
+            for index in range(len(high)):
+                if high[index] < lst[index]:
+                    raise exceptions.PlotlyError("Oops! Looks like some of "
+                                                 "your high values are less "
+                                                 "the corresponding open, "
+                                                 "low, or close values. "
+                                                 "Double check that your data "
+                                                 "is entered in O-H-L-C order")
+
+        for lst in [open, high, close]:
+            for index in range(len(low)):
+                if low[index] > lst[index]:
+                    raise exceptions.PlotlyError("Oops! Looks like some of "
+                                                 "your low values are greater "
+                                                 "than the corresponding high"
+                                                 ", open, or close values. "
+                                                 "Double check that your data "
+                                                 "is entered in O-H-L-C order")
+
+        direction_opts = ('increasing', 'decreasing', 'both')
+        if direction not in direction_opts:
+            raise exceptions.PlotlyError("direction must be defined as "
+                                         "'increasing', 'decreasing', or "
+                                         "'both'")
+
+    @staticmethod
+    def _make_increasing_ohlc(open, high, low, close, dates, **kwargs):
+        """
+        Makes increasing ohlc sticks
+
+        _make_increasing_ohlc() and _make_decreasing_ohlc separate the
+        increasing trace from the decreasing trace so kwargs (such as
+        color) can be passed separately to increasing or decreasing traces
+        when direction is set to 'increasing' or 'decreasing' in
+        FigureFactory.create_candlestick()
+
+        :param (list) open: opening values
+        :param (list) high: high values
+        :param (list) low: low values
+        :param (list) close: closing values
+        :param (list) dates: list of datetime objects. Default: None
+        :param kwargs: kwargs to be passed to increasing trace via
+            plotly.graph_objs.Scatter.
+
+        :rtype (trace) ohlc_incr_data: Scatter trace of all increasing ohlc
+            sticks.
+        """
+        (flat_increase_x,
+         flat_increase_y,
+         text_increase) = _OHLC(open, high, low, close, dates).get_increase()
+
+        if 'name' in kwargs:
+            showlegend = True
+        else:
+            kwargs.setdefault('name', 'Increasing')
+            showlegend = False
+
+        kwargs.setdefault('line', dict(color=_DEFAULT_INCREASING_COLOR,
+                                       width=1))
+        kwargs.setdefault('text', text_increase)
+
+        ohlc_incr = dict(type='scatter',
+                         x=flat_increase_x,
+                         y=flat_increase_y,
+                         mode='lines',
+                         showlegend=showlegend,
+                         **kwargs)
+        return ohlc_incr
+
+    @staticmethod
+    def _make_decreasing_ohlc(open, high, low, close, dates, **kwargs):
+        """
+        Makes decreasing ohlc sticks
+
+        :param (list) open: opening values
+        :param (list) high: high values
+        :param (list) low: low values
+        :param (list) close: closing values
+        :param (list) dates: list of datetime objects. Default: None
+        :param kwargs: kwargs to be passed to increasing trace via
+            plotly.graph_objs.Scatter.
+
+        :rtype (trace) ohlc_decr_data: Scatter trace of all decreasing ohlc
+            sticks.
+        """
+        (flat_decrease_x,
+         flat_decrease_y,
+         text_decrease) = _OHLC(open, high, low, close, dates).get_decrease()
+
+        kwargs.setdefault('line', dict(color=_DEFAULT_DECREASING_COLOR,
+                                       width=1))
+        kwargs.setdefault('text', text_decrease)
+        kwargs.setdefault('showlegend', False)
+        kwargs.setdefault('name', 'Decreasing')
+
+        ohlc_decr = dict(type='scatter',
+                         x=flat_decrease_x,
+                         y=flat_decrease_y,
+                         mode='lines',
+                         **kwargs)
+        return ohlc_decr
+
+    @staticmethod
+    def create_ohlc(open, high, low, close,
+                    dates=None, direction='both',
+                    **kwargs):
+        """
+        BETA function that creates an ohlc chart
+
+        :param (list) open: opening values
+        :param (list) high: high values
+        :param (list) low: low values
+        :param (list) close: closing
+        :param (list) dates: list of datetime objects. Default: None
+        :param (string) direction: direction can be 'increasing', 'decreasing',
+            or 'both'. When the direction is 'increasing', the returned figure
+            consists of all units where the close value is greater than the
+            corresponding open value, and when the direction is 'decreasing',
+            the returned figure consists of all units where the close value is
+            less than or equal to the corresponding open value. When the
+            direction is 'both', both increasing and decreasing units are
+            returned. Default: 'both'
+        :param kwargs: kwargs passed through plotly.graph_objs.Scatter.
+            These kwargs describe other attributes about the ohlc Scatter trace
+            such as the color or the legend name. For more information on valid
+            kwargs call help(plotly.graph_objs.Scatter)
+
+        :rtype (dict): returns a representation of an ohlc chart figure.
+
+        Example 1: Simple OHLC chart from a Pandas DataFrame
+        ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+        from datetime import datetime
+
+        import pandas.io.data as web
+
+        df = web.DataReader("aapl", 'yahoo', datetime(2008, 8, 15), datetime(2008, 10, 15))
+        fig = FF.create_ohlc(df.Open, df.High, df.Low, df.Close, dates=df.index)
+
+        py.plot(fig, filename='finance/aapl-ohlc')
+        ```
+
+        Example 2: Add text and annotations to the OHLC chart
+        ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+        from datetime import datetime
+
+        import pandas.io.data as web
+
+        df = web.DataReader("aapl", 'yahoo', datetime(2008, 8, 15), datetime(2008, 10, 15))
+        fig = FF.create_ohlc(df.Open, df.High, df.Low, df.Close, dates=df.index)
+
+        # Update the fig - all options here: https://plot.ly/python/reference/#Layout
+        fig['layout'].update({
+            'title': 'The Great Recession',
+            'yaxis': {'title': 'AAPL Stock'},
+            'shapes': [{
+                'x0': '2008-09-15', 'x1': '2008-09-15', 'type': 'line',
+                'y0': 0, 'y1': 1, 'xref': 'x', 'yref': 'paper',
+                'line': {'color': 'rgb(40,40,40)', 'width': 0.5}
+            }],
+            'annotations': [{
+                'text': "the fall of Lehman Brothers",
+                'x': '2008-09-15', 'y': 1.02,
+                'xref': 'x', 'yref': 'paper',
+                'showarrow': False, 'xanchor': 'left'
+            }]
+        })
+
+        py.plot(fig, filename='finance/aapl-recession-ohlc', validate=False)
+        ```
+
+        Example 3: Customize the OHLC colors
+        ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+        from plotly.graph_objs import Line, Marker
+        from datetime import datetime
+
+        import pandas.io.data as web
+
+        df = web.DataReader("aapl", 'yahoo', datetime(2008, 1, 1), datetime(2009, 4, 1))
+
+        # Make increasing ohlc sticks and customize their color and name
+        fig_increasing = FF.create_ohlc(df.Open, df.High, df.Low, df.Close, dates=df.index,
+            direction='increasing', name='AAPL',
+            line=Line(color='rgb(150, 200, 250)'))
+
+        # Make decreasing ohlc sticks and customize their color and name
+        fig_decreasing = FF.create_ohlc(df.Open, df.High, df.Low, df.Close, dates=df.index,
+            direction='decreasing',
+            line=Line(color='rgb(128, 128, 128)'))
+
+        # Initialize the figure
+        fig = fig_increasing
+
+        # Add decreasing data with .extend()
+        fig['data'].extend(fig_decreasing['data'])
+
+        py.iplot(fig, filename='finance/aapl-ohlc-colors', validate=False)
+        ```
+
+        Example 4: OHLC chart with datetime objects
+        ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+
+        from datetime import datetime
+
+        # Add data
+        open_data = [33.0, 33.3, 33.5, 33.0, 34.1]
+        high_data = [33.1, 33.3, 33.6, 33.2, 34.8]
+        low_data = [32.7, 32.7, 32.8, 32.6, 32.8]
+        close_data = [33.0, 32.9, 33.3, 33.1, 33.1]
+        dates = [datetime(year=2013, month=10, day=10),
+                 datetime(year=2013, month=11, day=10),
+                 datetime(year=2013, month=12, day=10),
+                 datetime(year=2014, month=1, day=10),
+                 datetime(year=2014, month=2, day=10)]
+
+        # Create ohlc
+        fig = FF.create_ohlc(open_data, high_data,
+            low_data, close_data, dates=dates)
+
+        py.iplot(fig, filename='finance/simple-ohlc', validate=False)
+        ```
+        """
+        if dates is not None:
+            TraceFactory.validate_equal_length(open, high, low, close, dates)
+        else:
+            TraceFactory.validate_equal_length(open, high, low, close)
+        FigureFactory.validate_ohlc(open, high, low, close, direction,
+                                    **kwargs)
+
+        if direction is 'increasing':
+            ohlc_incr = FigureFactory._make_increasing_ohlc(open, high,
+                                                            low, close,
+                                                            dates, **kwargs)
+            data = [ohlc_incr]
+        elif direction is 'decreasing':
+            ohlc_decr = FigureFactory._make_decreasing_ohlc(open, high,
+                                                            low, close,
+                                                            dates, **kwargs)
+            data = [ohlc_decr]
+        else:
+            ohlc_incr = FigureFactory._make_increasing_ohlc(open, high,
+                                                            low, close,
+                                                            dates, **kwargs)
+            ohlc_decr = FigureFactory._make_decreasing_ohlc(open, high,
+                                                            low, close,
+                                                            dates, **kwargs)
+            data = [ohlc_incr, ohlc_decr]
+
+        layout = graph_objs.Layout(xaxis=dict(zeroline=False),
+                                   hovermode='closest')
+
+        return dict(data=data, layout=layout)
+
+    @staticmethod
+    def _make_increasing_candle(open, high, low, close, dates, **kwargs):
+        """
+        Makes stacked bar and vertical line for increasing candlesticks
+
+        _make_increasing_candle() and _make_decreasing_candle separate the
+        increasing traces from the decreasing traces so kwargs (such as
+        color) can be passed separately to increasing or decreasing traces
+        when direction is set to 'increasing' or 'decreasing' in
+        FigureFactory.create_candlestick()
+
+        :param (list) open: opening values
+        :param (list) high: high values
+        :param (list) low: low values
+        :param (list) close: closing values
+        :param (list) dates: list of datetime objects. Default: None
+        :param kwargs: kwargs to be passed to increasing trace via
+            plotly.graph_objs.Scatter.
+
+        :rtype (list) candle_incr_data: list of three traces: hidden_bar_incr,
+            candle_bar_incr, candle_line_incr: returns the first (invisible)
+            stacked bar, second (visible) stacked bar, and trace composed of
+            vertical lines for each increasing candlestick.
+        """
+        (increase_x,
+         increase_open,
+         increase_dif,
+         stick_increase_y,
+         stick_increase_x) = (_Candlestick(open, high, low, close, dates,
+                                           **kwargs).get_candle_increase())
+
+        if 'name' in kwargs:
+            showlegend = True
+        else:
+            kwargs.setdefault('name', 'Increasing')
+            showlegend = False
+
+        kwargs.setdefault('marker', dict(color=_DEFAULT_INCREASING_COLOR))
+        kwargs.setdefault('line', dict(color=_DEFAULT_INCREASING_COLOR))
+
+        hidden_bar_incr = dict(type='bar',
+                               x=increase_x,
+                               y=increase_open,
+                               marker=Marker(color='rgba(0, 0, 0, 0)'),
+                               legendgroup='Increasing',
+                               showlegend=False,
+                               hoverinfo='none')
+        candle_bar_incr = dict(type='bar',
+                               x=increase_x,
+                               y=increase_dif,
+                               legendgroup='Increasing',
+                               showlegend=False,
+                               hoverinfo='none',
+                               **kwargs)
+        candle_line_incr = dict(type='scatter',
+                                x=stick_increase_x,
+                                y=stick_increase_y,
+                                mode='lines',
+                                legendgroup='Increasing',
+                                text=('Low', 'Open', 'Close',
+                                      'High', '') * len(increase_x),
+                                showlegend=showlegend,
+                                **kwargs)
+        candle_incr_data = [hidden_bar_incr, candle_bar_incr, candle_line_incr]
+        return candle_incr_data
+
+    @staticmethod
+    def _make_decreasing_candle(open, high, low, close, dates, **kwargs):
+        """
+        Makes stacked bar and vertical line for decreasing candlesticks
+
+        :param (list) open: opening values
+        :param (list) high: high values
+        :param (list) low: low values
+        :param (list) close: closing values
+        :param (list) dates: list of datetime objects. Default: None
+        :param kwargs: kwargs to be passed to decreasing trace via
+            plotly.graph_objs.Scatter.
+
+        :rtype (list) candle_decr_data: list of three traces: hidden_bar_decr,
+            candle_bar_decr, candle_line_decr: returns the first (invisible)
+            stacked bar, second (visible) stacked bar, and trace composed of
+            vertical lines for each decreasing candlestick.
+        """
+
+        (decrease_x,
+         decrease_close,
+         decrease_dif,
+         stick_decrease_y,
+         stick_decrease_x) = (_Candlestick(open, high, low, close, dates,
+                                           **kwargs).get_candle_decrease())
+
+        kwargs.setdefault('marker', dict(color=_DEFAULT_DECREASING_COLOR))
+        kwargs.setdefault('line', dict(color=_DEFAULT_DECREASING_COLOR))
+        kwargs.setdefault('name', 'Decreasing')
+
+        hidden_bar_decr = dict(type='bar',
+                               x=decrease_x,
+                               y=decrease_close,
+                               marker=Marker(color='rgba(0, 0, 0, 0)'),
+                               legendgroup='Decreasing',
+                               showlegend=False,
+                               hoverinfo='none')
+        candle_bar_decr = dict(type='bar',
+                               x=decrease_x,
+                               y=decrease_dif,
+                               legendgroup='Decreasing',
+                               showlegend=False,
+                               hoverinfo='none',
+                               **kwargs)
+        candle_line_decr = dict(type='scatter',
+                                x=stick_decrease_x,
+                                y=stick_decrease_y,
+                                mode='lines',
+                                legendgroup='Decreasing',
+                                showlegend=False,
+                                text=('Low', 'Close', 'Open',
+                                      'High', '') * len(decrease_x),
+                                **kwargs)
+        candle_decr_data = [hidden_bar_decr, candle_bar_decr, candle_line_decr]
+        return candle_decr_data
+
+    @staticmethod
+    def create_candlestick(open, high, low, close,
+                           dates=None, direction='both', **kwargs):
+        """
+        BETA function that creates a candlestick chart
+
+        :param (list) open: opening values
+        :param (list) high: high values
+        :param (list) low: low values
+        :param (list) close: closing values
+        :param (list) dates: list of datetime objects. Default: None
+        :param (string) direction: direction can be 'increasing', 'decreasing',
+            or 'both'. When the direction is 'increasing', the returned figure
+            consists of all candlesticks where the close value is greater than
+            the corresponding open value, and when the direction is
+            'decreasing', the returned figure consists of all candlesticks
+            where the close value is less than or equal to the corresponding
+            open value. When the direction is 'both', both increasing and
+            decreasing candlesticks are returned. Default: 'both'
+        :param kwargs: kwargs passed through plotly.graph_objs.Scatter.
+            These kwargs describe other attributes about the ohlc Scatter trace
+            such as the color or the legend name. For more information on valid
+            kwargs call help(plotly.graph_objs.Scatter)
+
+        :rtype (dict): returns a representation of candlestick chart figure.
+
+        Example 1: Simple candlestick chart from a Pandas DataFrame
+        ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+        from datetime import datetime
+
+        import pandas.io.data as web
+
+        df = web.DataReader("aapl", 'yahoo', datetime(2007, 10, 1), datetime(2009, 4, 1))
+        fig = FF.create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index)
+        py.plot(fig, filename='finance/aapl-candlestick', validate=False)
+        ```
+
+        Example 2: Add text and annotations to the candlestick chart
+        ```
+        fig = FF.create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index)
+        # Update the fig - all options here: https://plot.ly/python/reference/#Layout
+        fig['layout'].update({
+            'title': 'The Great Recession',
+            'yaxis': {'title': 'AAPL Stock'},
+            'shapes': [{
+                'x0': '2007-12-01', 'x1': '2007-12-01',
+                'y0': 0, 'y1': 1, 'xref': 'x', 'yref': 'paper',
+                'line': {'color': 'rgb(30,30,30)', 'width': 1}
+            }],
+            'annotations': [{
+                'x': '2007-12-01', 'y': 0.05, 'xref': 'x', 'yref': 'paper',
+                'showarrow': False, 'xanchor': 'left',
+                'text': 'Official start of the recession'
+            }]
+        })
+        py.plot(fig, filename='finance/aapl-recession-candlestick', validate=False)
+        ```
+
+        Example 3: Customize the candlestick colors
+        ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+        from plotly.graph_objs import Line, Marker
+        from datetime import datetime
+
+        import pandas.io.data as web
+
+        df = web.DataReader("aapl", 'yahoo', datetime(2008, 1, 1), datetime(2009, 4, 1))
+        fig = FF.create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index)
+
+        # Make increasing ohlc sticks and customize their color and name
+        fig_increasing = FF.create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index,
+            direction='increasing', name='AAPL',
+            marker=Marker(color='rgb(150, 200, 250)'),
+            line=Line(color='rgb(150, 200, 250)'))
+
+        # Make decreasing ohlc sticks and customize their color and name
+        fig_decreasing = FF.create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index,
+            direction='decreasing',
+            marker=Marker(color='rgb(128, 128, 128)'),
+            line=Line(color='rgb(128, 128, 128)'))
+
+        # Initialize the figure
+        fig = fig_increasing
+
+        # Add decreasing data with .extend()
+        fig['data'].extend(fig_decreasing['data'])
+
+        py.iplot(fig, filename='finance/aapl-candlestick-custom', validate=False)
+        ```
+
+        Example 4: Candlestick chart with datetime objects
+        ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+
+        from datetime import datetime
+
+        # Add data
+        open_data = [33.0, 33.3, 33.5, 33.0, 34.1]
+        high_data = [33.1, 33.3, 33.6, 33.2, 34.8]
+        low_data = [32.7, 32.7, 32.8, 32.6, 32.8]
+        close_data = [33.0, 32.9, 33.3, 33.1, 33.1]
+        dates = [datetime(year=2013, month=10, day=10),
+                 datetime(year=2013, month=11, day=10),
+                 datetime(year=2013, month=12, day=10),
+                 datetime(year=2014, month=1, day=10),
+                 datetime(year=2014, month=2, day=10)]
+
+        # Create ohlc
+        fig = FF.create_candlestick(open_data, high_data,
+            low_data, close_data, dates=dates)
+
+        py.iplot(fig, filename='finance/simple-candlestick', validate=False)
+        ```
+        """
+        if dates is not None:
+            TraceFactory.validate_equal_length(open, high, low, close, dates)
+        else:
+            TraceFactory.validate_equal_length(open, high, low, close)
+        FigureFactory.validate_ohlc(open, high, low, close, direction,
+                                    **kwargs)
+
+        if direction is 'increasing':
+            candle_incr_data = FigureFactory._make_increasing_candle(open,
+                                                                     high,
+                                                                     low,
+                                                                     close,
+                                                                     dates,
+                                                                     **kwargs)
+            data = candle_incr_data
+        elif direction is 'decreasing':
+            candle_decr_data = FigureFactory._make_decreasing_candle(open,
+                                                                     high,
+                                                                     low,
+                                                                     close,
+                                                                     dates,
+                                                                     **kwargs)
+            data = candle_decr_data
+        else:
+            candle_incr_data = FigureFactory._make_increasing_candle(open,
+                                                                     high,
+                                                                     low,
+                                                                     close,
+                                                                     dates,
+                                                                     **kwargs)
+            candle_decr_data = FigureFactory._make_decreasing_candle(open,
+                                                                     high,
+                                                                     low,
+                                                                     close,
+                                                                     dates,
+                                                                     **kwargs)
+            data = candle_incr_data + candle_decr_data
+
+        layout = graph_objs.Layout(barmode='stack',
+                                   bargroupgap=0.2,
+                                   yaxis=dict(range=[(min(low) -
+                                                     ((max(high) - min(low)) *
+                                                      .1)),
+                                                     (max(high) + ((max(high) -
+                                                                    min(low)) *
+                                                      .1))]))
+        layout['yaxis']['fixedrange'] = True
+
+        return dict(data=data, layout=layout)
+
+
+class _OHLC(FigureFactory):
+    """
+    Refer to FigureFactory.create_ohlc_increase() for docstring.
+    """
+    def __init__(self, open, high, low, close, dates, **kwargs):
+        self.open = open
+        self.high = high
+        self.low = low
+        self.close = close
+        self.empty = [None] * len(open)
+        self.dates = dates
+
+        self.all_x = []
+        self.all_y = []
+        self.increase_x = []
+        self.increase_y = []
+        self.decrease_x = []
+        self.decrease_y = []
+        self.get_all_xy()
+        self.separate_increase_decrease()
+
+    def get_all_xy(self):
+        """
+        Zip data to create OHLC shape
+
+        OHLC shape: low to high vertical bar with
+        horizontal branches for open and close values.
+        If dates were added, the smallest date difference is calculated and
+        multiplied by .2 to get the length of the open and close branches.
+        If no date data was provided, the x-axis is a list of integers and the
+        length of the open and close branches is .2.
+        """
+        self.all_y = list(zip(self.open, self.open, self.high,
+                              self.low, self.close, self.close, self.empty))
+        if self.dates is not None:
+            date_dif = []
+            for i in range(len(self.dates) - 1):
+                date_dif.append(self.dates[i + 1] - self.dates[i])
+            date_dif_min = (min(date_dif)) / 5
+            self.all_x = [[x - date_dif_min, x, x, x, x, x +
+                           date_dif_min, None] for x in self.dates]
+        else:
+            self.all_x = [[x - .2, x, x, x, x, x + .2, None]
+                          for x in range(len(self.open))]
+
+    def separate_increase_decrease(self):
+        """
+        Separate data into two groups: increase and decrease
+
+        (1) Increase, where close > open and
+        (2) Decrease, where close <= open
+        """
+
+        for index in range(len(self.open)):
+            if self.close[index] is None:
+                pass
+            elif self.close[index] > self.open[index]:
+                self.increase_x.append(self.all_x[index])
+                self.increase_y.append(self.all_y[index])
+            else:
+                self.decrease_x.append(self.all_x[index])
+                self.decrease_y.append(self.all_y[index])
+
+    def get_increase(self):
+        """
+        Flatten increase data and get increase text
+
+        :rtype (list, list, list): flat_increase_x: x-values for the increasing
+            trace, flat_increase_y: y=values for the increasing trace and
+            text_increase: hovertext for the increasing trace
+        """
+        flat_increase_x = TraceFactory.flatten(self.increase_x)
+        flat_increase_y = TraceFactory.flatten(self.increase_y)
+        text_increase = (("Open", "Open", "High",
+                          "Low", "Close", "Close", '')
+                         * (len(self.increase_x)))
+
+        return flat_increase_x, flat_increase_y, text_increase
+
+    def get_decrease(self):
+        """
+        Flatten decrease data and get decrease text
+
+        :rtype (list, list, list): flat_decrease_x: x-values for the decreasing
+            trace, flat_decrease_y: y=values for the decreasing trace and
+            text_decrease: hovertext for the decreasing trace
+        """
+        flat_decrease_x = TraceFactory.flatten(self.decrease_x)
+        flat_decrease_y = TraceFactory.flatten(self.decrease_y)
+        text_decrease = (("Open", "Open", "High",
+                          "Low", "Close", "Close", '')
+                         * (len(self.decrease_x)))
+
+        return flat_decrease_x, flat_decrease_y, text_decrease
+
+
+class _Candlestick(FigureFactory):
+    """
+    Refer to FigureFactory.create_candlestick() for docstring.
+    """
+    def __init__(self, open, high, low, close, dates, **kwargs):
+        self.open = open
+        self.high = high
+        self.low = low
+        self.close = close
+        if dates is not None:
+            self.x = dates
+        else:
+            self.x = [x for x in range(len(self.open))]
+        self.get_candle_increase()
+
+    def get_candle_increase(self):
+        """
+        Separate increasing data from decreasing data.
+
+        The data is increasing when close value > open value
+        and decreasing when the close value <= open value.
+        """
+        increase_open = []
+        increase_high = []
+        increase_low = []
+        increase_close = []
+        increase_x = []
+        for index in range(len(self.open)):
+            if self.close[index] > self.open[index]:
+                increase_open.append(self.open[index])
+                increase_high.append(self.high[index])
+                increase_low.append(self.low[index])
+                increase_close.append(self.close[index])
+                increase_x.append(self.x[index])
+
+        increase_dif = [cl - op for (cl, op)
+                        in zip(increase_close, increase_open)]
+
+        increase_empty = [None] * len(increase_open)
+        stick_increase_y = list(zip(increase_low, increase_open,
+                                    increase_close, increase_high,
+                                    increase_empty))
+        stick_increase_x = [[x, x, x, x, None] for x in increase_x]
+        stick_increase_y = TraceFactory.flatten(stick_increase_y)
+        stick_increase_x = TraceFactory.flatten(stick_increase_x)
+
+        return (increase_x, increase_open, increase_dif,
+                stick_increase_y, stick_increase_x)
+
+    def get_candle_decrease(self):
+        """
+        Separate increasing data from decreasing data.
+
+        The data is increasing when close value > open value
+        and decreasing when the close value <= open value.
+        """
+        decrease_open = []
+        decrease_high = []
+        decrease_low = []
+        decrease_close = []
+        decrease_x = []
+
+        for index in range(len(self.open)):
+            if self.close[index] <= self.open[index]:
+                decrease_open.append(self.open[index])
+                decrease_high.append(self.high[index])
+                decrease_low.append(self.low[index])
+                decrease_close.append(self.close[index])
+                decrease_x.append(self.x[index])
+
+        decrease_dif = [op - cl for (op, cl)
+                        in zip(decrease_open, decrease_close)]
+
+        decrease_empty = [None] * len(decrease_open)
+        stick_decrease_y = list(zip(decrease_low, decrease_close,
+                                    decrease_open, decrease_high,
+                                    decrease_empty))
+        stick_decrease_x = [[x, x, x, x, None] for x in decrease_x]
+
+        stick_decrease_y = TraceFactory.flatten(stick_decrease_y)
+        stick_decrease_x = TraceFactory.flatten(stick_decrease_x)
+
+        return (decrease_x, decrease_close, decrease_dif,
+                stick_decrease_y, stick_decrease_x)
+

@@ -5,7 +5,7 @@ from nose.tools import raises
 
 import plotly.tools as tls
 from plotly.exceptions import PlotlyError
-from plotly.graph_objs import Line, graph_objs
+from plotly.graph_objs import Data, Line, graph_objs
 
 
 class TestQuiver(TestCase):
@@ -100,3 +100,4 @@ class TestQuiver(TestCase):
             'type': 'scatter',
             'mode': 'lines', }
         self.assertEqual(quiver, expected_quiver)
+
