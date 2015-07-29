@@ -269,13 +269,9 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
     Keyword arguments:
     file_id (default=None) -- an int or string that can be converted to int
                               if you're using a url, don't fill this in!
-    share_key (default=None) -- a string that enables private plots to be
-                                shared. Note, you must have admin privileges
-                                on the file for this to work
     width (default="100%") -- an int or string corresp. to width of the figure
     height (default="525") -- same as width but corresp. to the height of the
                               figure
-
 
     """
     plotly_rest_url = (session.get_session_config().get('plotly_domain') or
@@ -355,9 +351,6 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
     Keyword arguments:
     file_id (default=None) -- an int or string that can be converted to int
                               if you're using a url, don't fill this in!
-    share_key (default=None) -- a string that enables private plots to be
-                                shared. Note, you must have admin privileges
-                                on the file for this to work
     width (default="100%") -- an int or string corresp. to width of the figure
     height (default="525") -- same as width but corresp. to the height of the
                               figure
@@ -380,7 +373,7 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
             "Looks like you're not using IPython or Sage to embed this plot. "
             "If you just want the *embed code*, try using `get_embed()` "
             "instead."
-            "\nQuestions? support@plot.ly")
+            "\nQuestions? feedback@plot.ly")
 
 
 ### mpl-related tools ###

@@ -109,7 +109,7 @@ def _plot_option_logic(plot_options):
             'fileopt' not in plot_options):
         current_plot_options['fileopt'] = 'overwrite'
 
-    # Check for any conflicts between 'sharing' and 'world_readble'
+    # Check for any conflicts between 'sharing' and 'world_readable'
     if 'sharing' in plot_options:
         if plot_options['sharing'] in DEFAULT_PLOT_OPTIONS['sharing']:
 
@@ -154,9 +154,11 @@ def iplot(figure_or_data, **plot_options):
         'extend': add additional numbers (data) to existing traces
         'append': add additional traces to existing data lists
     world_readable (default=True) -- make this figure private/public
-    share_key_enabled (default=False) -- activate the share key for private
-                                         plots
-
+    sharing ('public' | 'private' | 'secret')
+        'public': set the privacy of the plot to public
+        'private': set the privacy of the plot as private
+        'secret':  set the privacy of the plot as private and
+                   it also enables the plot to be shared
     """
     if 'auto_open' not in plot_options:
         plot_options['auto_open'] = False
@@ -202,8 +204,11 @@ def plot(figure_or_data, validate=True, **plot_options):
     auto_open (default=True) -- Toggle browser options
         True: open this plot in a new browser tab
         False: do not open plot in the browser, but do return the unique url
-    share_key_enabled (default=False) -- activate the share key for private
-                                         plots
+    sharing ('public' | 'private' | 'secret')
+        'public': set the privacy of the plot to public
+        'private': set the privacy of the plot as private
+        'secret':  set the privacy of the plot as private and
+                   it also enables the plot to be shared
 
     """
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
