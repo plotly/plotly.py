@@ -40,7 +40,7 @@ PLOT_OPTIONS = {
     'world_readable': bool,
     'auto_open': bool,
     'validate': bool,
-    'share': dict
+    'sharing': dict
 }
 
 
