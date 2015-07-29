@@ -2423,8 +2423,8 @@ class FigureFactory(object):
             kwargs.setdefault('name', 'Increasing')
             showlegend = False
 
-        kwargs.setdefault('marker', dict(color='rgb(44, 160, 44)'))
-        kwargs.setdefault('line', dict(color='rgb(44, 160, 44)', width=4))
+        kwargs.setdefault('marker', dict(color=_DEFAULT_INCREASING_COLOR))
+        kwargs.setdefault('line', dict(color=_DEFAULT_INCREASING_COLOR, width=4))
 
         hidden_bar_incr = dict(type='bar',
                                x=increase_x,
