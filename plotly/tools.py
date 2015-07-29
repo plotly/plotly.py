@@ -2355,7 +2355,7 @@ class FigureFactory(object):
         py.iplot(fig, filename='finance/simple-ohlc', validate=False)
         ```
         """
-        if dates:
+        if dates is not None:
             TraceFactory.validate_equal_length(open, high, low, close, dates)
         else:
             TraceFactory.validate_equal_length(open, high, low, close)
@@ -2628,7 +2628,7 @@ class FigureFactory(object):
         """
         FigureFactory.validate_ohlc(open, high, low, close, direction,
                                     **kwargs)
-        if dates:
+        if dates is not None:
             TraceFactory.validate_equal_length(open, high, low, close, dates)
         else:
             TraceFactory.validate_equal_length(open, high, low, close)
@@ -2683,10 +2683,8 @@ class _OHLC(FigureFactory):
         self.low = low
         self.close = close
         self.empty = [None] * len(open)
-        if dates:
-            self.dates = dates
-        else:
-            self.dates = None
+        self.dates = dates
+
         self.all_x = []
         self.all_y = []
         self.increase_x = []
@@ -2709,7 +2707,7 @@ class _OHLC(FigureFactory):
         """
         self.all_y = list(zip(self.open, self.open, self.high,
                               self.low, self.close, self.close, self.empty))
-        if self.dates:
+        if self.dates is not None:
             date_dif = []
             for i in range(len(self.dates) - 1):
                 date_dif.append(self.dates[i + 1] - self.dates[i])
@@ -2780,7 +2778,7 @@ class _Candlestick(FigureFactory):
         self.high = high
         self.low = low
         self.close = close
-        if dates:
+        if dates is not None:
             self.x = dates
         else:
             self.x = [x for x in range(len(self.open))]
