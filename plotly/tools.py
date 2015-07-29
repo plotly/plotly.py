@@ -2861,3 +2861,4 @@ class _Candlestick(FigureFactory):
 
         return (decrease_x, decrease_close, decrease_dif,
                 stick_decrease_y, stick_decrease_x)
+
