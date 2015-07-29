@@ -1447,7 +1447,7 @@ class TraceFactory(object):
                                              .format(key, val))
 
     @staticmethod
-    def validate_streamline(x, y):
+    def _validate_streamline(x, y):
         """
         streamline specific validations
 
@@ -2381,8 +2381,8 @@ class FigureFactory(object):
                                                             dates, **kwargs)
             data = [ohlc_incr, ohlc_decr]
 
-        layout = dict(xaxis=dict(zeroline=False),
-                      hovermode='closest')
+        layout = graph_objs.Layout(xaxis=dict(zeroline=False),
+                                   hovermode='closest')
 
         return dict(data=data, layout=layout)
 
@@ -2424,7 +2424,7 @@ class FigureFactory(object):
             showlegend = False
 
         kwargs.setdefault('marker', dict(color=_DEFAULT_INCREASING_COLOR))
-        kwargs.setdefault('line', dict(color=_DEFAULT_INCREASING_COLOR, width=4))
+        kwargs.setdefault('line', dict(color=_DEFAULT_INCREASING_COLOR))
 
         hidden_bar_incr = dict(type='bar',
                                x=increase_x,
@@ -2479,7 +2479,7 @@ class FigureFactory(object):
                                            **kwargs).get_candle_decrease())
 
         kwargs.setdefault('marker', dict(color=_DEFAULT_DECREASING_COLOR))
-        kwargs.setdefault('line', dict(color=_DEFAULT_DECREASING_COLOR, width=4))
+        kwargs.setdefault('line', dict(color=_DEFAULT_DECREASING_COLOR))
         kwargs.setdefault('name', 'Decreasing')
 
         hidden_bar_decr = dict(type='bar',
@@ -2633,6 +2633,9 @@ class FigureFactory(object):
         else:
             TraceFactory.validate_equal_length(open, high, low, close)
 
+        FigureFactory.validate_ohlc(open, high, low, close, direction,
+                                    **kwargs)
+
         if direction is 'increasing':
             candle_incr_data = FigureFactory._make_increasing_candle(open,
                                                                      high,
@@ -2664,11 +2667,15 @@ class FigureFactory(object):
                                                                      **kwargs)
             data = candle_incr_data + candle_decr_data
 
-        layout = dict(barmode='stack',
-                      yaxis=dict(range=[(min(low) -
-                                        ((max(high) - min(low)) * .1)),
-                                        (max(high) +
-                                        ((max(high) - min(low)) * .1))]))
+        layout = graph_objs.Layout(barmode='stack',
+                                   bargroupgap=0.2,
+                                   yaxis=dict(range=[(min(low) -
+                                                     ((max(high) - min(low)) *
+                                                      .1)),
+                                                     (max(high) + ((max(high) -
+                                                                    min(low)) *
+                                                      .1))]))
+        layout['yaxis']['fixedrange'] = True
 
         return dict(data=data, layout=layout)
 
