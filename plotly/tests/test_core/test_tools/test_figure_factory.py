@@ -130,31 +130,31 @@ class TestFinanceCharts(TestCase):
 
         # This should create one "increase" (i.e. close > open) ohlc stick
 
-        ohlc_incr = tls.FigureFactory.create_ohlc(open=[33.0],
-                                                  high=[33.2],
-                                                  low=[32.7],
-                                                  close=[33.1])
+        ohlc = tls.FigureFactory.create_ohlc(open=[33.0],
+                                             high=[33.2],
+                                             low=[32.7],
+                                             close=[33.1])
 
-        expected_ohlc_incr = {'layout': {'hovermode': 'closest',
-                                         'xaxis': {'zeroline': False}},
-                              'data': [{'y': [33.0, 33.0, 33.2, 32.7,
-                                              33.1, 33.1, None],
-                                        'line': {'width': 1,
-                                                 'color': '#3D9970'},
-                                        'showlegend': False,
-                                        'name': 'Increasing',
-                                        'text': ('Open', 'Open', 'High', 'Low',
-                                                 'Close', 'Close', ''),
-                                        'mode': 'lines', 'type': 'scatter',
-                                        'x': [-0.2, 0, 0, 0, 0, 0.2, None]},
-                                       {'y': [], 'line': {'width': 1,
-                                                          'color': '#FF4136'},
-                                        'showlegend': False,
-                                        'name': 'Decreasing', 'text': (),
-                                        'mode': 'lines', 'type': 'scatter',
-                                        'x': []}]}
+        expected_ohlc = {'layout': {'hovermode': 'closest',
+                                    'xaxis': {'zeroline': False}},
+                         'data': [{'y': [33.0, 33.0, 33.2, 32.7,
+                                         33.1, 33.1, None],
+                                   'line': {'width': 1,
+                                            'color': '#3D9970'},
+                                   'showlegend': False,
+                                   'name': 'Increasing',
+                                   'text': ('Open', 'Open', 'High', 'Low',
+                                            'Close', 'Close', ''),
+                                   'mode': 'lines', 'type': 'scatter',
+                                   'x': [-0.2, 0, 0, 0, 0, 0.2, None]},
+                                  {'y': [], 'line': {'width': 1,
+                                                     'color': '#FF4136'},
+                                   'showlegend': False,
+                                   'name': 'Decreasing', 'text': (),
+                                   'mode': 'lines', 'type': 'scatter',
+                                   'x': []}]}
 
-        self.assertEqual(ohlc_incr, expected_ohlc_incr)
+        self.assertEqual(ohlc, expected_ohlc)
 
     def test_one_ohlc_increase(self):
 
@@ -294,11 +294,11 @@ class TestFinanceCharts(TestCase):
              datetime.datetime(year=2014, month=9, day=4),
              datetime.datetime(year=2014, month=12, day=5)]
 
-        ohlc = tls.FigureFactory.create_ohlc(open_data, high_data,
-                                             low_data, close_data,
-                                             dates=x)
+        ohlc_d = tls.FigureFactory.create_ohlc(open_data, high_data,
+                                               low_data, close_data,
+                                               dates=x)
 
-        expe_ohlc = {'data': [{'line': {'color': '#3D9970', 'width': 1},
+        ex_ohlc_d = {'data': [{'line': {'color': '#3D9970', 'width': 1},
                                'mode': 'lines',
                                'name': 'Increasing',
                                'showlegend': False,
@@ -478,7 +478,7 @@ class TestFinanceCharts(TestCase):
                                      None]}],
                      'layout': {'hovermode': 'closest',
                                 'xaxis': {'zeroline': False}}}
-        self.assertEqual(ohlc, expe_ohlc)
+        self.assertEqual(ohlc_d, ex_ohlc_d)
 
     def test_datetime_candlestick(self):
 

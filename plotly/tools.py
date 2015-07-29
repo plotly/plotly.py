@@ -2187,7 +2187,8 @@ class FigureFactory(object):
             kwargs.setdefault('name', 'Increasing')
             showlegend = False
 
-        kwargs.setdefault('line', dict(color=_DEFAULT_INCREASING_COLOR))
+        kwargs.setdefault('line', dict(color=_DEFAULT_INCREASING_COLOR,
+                                       width=1))
         kwargs.setdefault('text', text_increase)
 
         ohlc_incr = dict(type='scatter',
@@ -2218,7 +2219,8 @@ class FigureFactory(object):
          flat_decrease_y,
          text_decrease) = _OHLC(open, high, low, close, dates).get_decrease()
 
-        kwargs.setdefault('line', dict(color=_DEFAULT_DECREASING_COLOR))
+        kwargs.setdefault('line', dict(color=_DEFAULT_DECREASING_COLOR,
+                                       width=1))
         kwargs.setdefault('text', text_decrease)
         kwargs.setdefault('showlegend', False)
         kwargs.setdefault('name', 'Decreasing')
@@ -2628,13 +2630,10 @@ class FigureFactory(object):
         py.iplot(fig, filename='finance/simple-candlestick', validate=False)
         ```
         """
-        FigureFactory.validate_ohlc(open, high, low, close, direction,
-                                    **kwargs)
         if dates is not None:
             TraceFactory.validate_equal_length(open, high, low, close, dates)
         else:
             TraceFactory.validate_equal_length(open, high, low, close)
-
         FigureFactory.validate_ohlc(open, high, low, close, direction,
                                     **kwargs)
 
