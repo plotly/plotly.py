@@ -19,9 +19,9 @@ class FolderAPITestCase(TestCase):
         py.sign_in('PythonTest', '9v9f20pext')
 
     def _random_filename(self):
-        random_chars = [random.choice(string.ascii_uppercase)
-                        for _ in range(5)]
-        unique_filename = 'Valid Folder'+''.join(random_chars)
+        choice_chars = string.ascii_letters + string.digits
+        random_chars = [random.choice(choice_chars) for _ in range(10)]
+        unique_filename = 'Valid Folder ' + ''.join(random_chars)
         return unique_filename
 
     def test_create_folder(self):
