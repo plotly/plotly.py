@@ -245,7 +245,8 @@ def plot(figure_or_data, validate=True, **plot_options):
         raise exceptions.PlotlyAccountError(res['error'])
 
 
-def iplot_mpl(fig, resize=True, strip_style=False, update=None, **plot_options):
+def iplot_mpl(fig, resize=True, strip_style=False, update=None,
+              **plot_options):
     """Replot a matplotlib figure with plotly in IPython.
 
     This function:
@@ -272,7 +273,8 @@ def iplot_mpl(fig, resize=True, strip_style=False, update=None, **plot_options):
             fig.update(update)
             fig.validate()
         except exceptions.PlotlyGraphObjectError as err:
-            err.add_note("Your updated figure could not be properly validated.")
+            err.add_note("Your updated figure could not be properly " +
+                         "validated.")
             err.prepare()
             raise
     elif update is not None:
@@ -310,7 +312,8 @@ def plot_mpl(fig, resize=True, strip_style=False, update=None, **plot_options):
             fig.update(update)
             fig.validate()
         except exceptions.PlotlyGraphObjectError as err:
-            err.add_note("Your updated figure could not be properly validated.")
+            err.add_note("Your updated figure could not be properly " +
+                         "validated.")
             err.prepare()
             raise
     elif update is not None:
@@ -334,8 +337,8 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
 
     Note, if you're using a file_owner string as the first argument, you MUST
     specify a `file_id` keyword argument. Else, if you're using a url string
-    as the first argument, you MUST NOT specify a `file_id` keyword argument, or
-    file_id must be set to Python's None value.
+    as the first argument, you MUST NOT specify a `file_id` keyword argument,
+     or file_id must be set to Python's None value.
 
     Positional arguments:
     file_owner_or_url (string) -- a valid plotly username OR a valid plotly url
@@ -511,7 +514,8 @@ class Stream:
         layout (default=None) - A valid Layout object
                                 Run help(plotly.graph_objs.Layout)
         validate (default = True) - Validate this stream before sending?
-                                    This will catch local errors if set to True.
+                                    This will catch local errors if set to
+                                    True.
 
         Some valid keys for trace dictionaries:
             'x', 'y', 'text', 'z', 'marker', 'line'
@@ -616,8 +620,9 @@ class image:
         - format: 'png', 'svg', 'jpeg', 'pdf'
         - width: output width
         - height: output height
-        - scale: Increase the resolution of the image by `scale` amount (e.g. `3`)
-               Only valid for PNG and JPEG images.
+        - scale: Increase the resolution of the image by `scale`
+                 amount (e.g. `3`)
+                 Only valid for PNG and JPEG images.
 
         example:
         ```
@@ -990,7 +995,8 @@ class grid_ops:
         py.grid_ops.append_columns([column_2], grid=grid)
         ```
 
-        Usage example 2: Append a column to a grid that already exists on Plotly
+        Usage example 2: Append a column to a grid that already exists on
+                         Plotly
         ```
         from plotly.grid_objs import Grid, Column
         import plotly.plotly as py
