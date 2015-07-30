@@ -1269,14 +1269,20 @@ class _api_v2:
 
     @classmethod
     def response_handler(cls, response):
-
         try:
             response.raise_for_status()
         except requests.exceptions.HTTPError as requests_exception:
-            plotly_exception = exceptions.PlotlyRequestError(
-                requests_exception
-            )
-            raise(plotly_exception)
+            if (requests_exception == 404 and
+                    get_config()['plotly_api_domain']
+                    != 'https://api.plot.ly'):
+                raise exceptions.PlotlyError(
+                    " "
+                )
+            else:
+                plotly_exception = exceptions.PlotlyRequestError(
+                    requests_exception
+                )
+                raise(plotly_exception)
 
         if ('content-type' in response.headers and
                 'json' in response.headers['content-type'] and
@@ -1336,39 +1342,29 @@ def add_share_key_to_url(response, **payload):
     Update plot's url to include the secret key
 
     payload keyword agruments:
-    platform ('python') -- the platform that is associated with this url
-    version (string) -- the Plotly version that was used to create the plot
-    args (dict) -- contains the data from figure
     un (string) -- username from credentials file
-    key (string) -- api_key from credentials file
-    origin('plot') --
     kwargs (dict) --
-        'filename': (string) the name that is associated with this url
-        'fileopt': ('new' | 'overwrite' | 'extend' | 'append')
-                   file option of the url
         'world_readable': (bool) make the plot public/ private
         'sharing': ('public' | 'private' | 'secret')
-                    privacy option of the url
-        'layout': (dict) the layout of the figure
+                    set privacy for the url
 
     """
     domain = (get_session_config().get('plotly_domain') or
               get_config()['plotly_domain'])
     plot_id = response['url'].replace(domain + "/~"
                                       + payload['un'] + "/", "")
-    url = "https://api.plot.ly/v2/files/" + payload['un'] + ":" + plot_id
+
+    url = _api_v2.api_url("files/") + payload['un'] + ":" + plot_id
     plot_kwargs = json.loads(payload['kwargs'])
     new_response = requests.patch(url,
-                                  headers={'Plotly-Client-Platform':
-                                           payload['platform']},
-                                  auth=HTTPBasicAuth(payload['un'],
-                                                     payload['key']),
+                                  headers=_api_v2.headers(),
                                   data={"share_key_enabled":
                                         "True",
                                         "world_readable":
-                                        plot_kwargs['world_readable'],
-                                        "filename": plot_kwargs['filename'],
-                                        "fileopt": plot_kwargs['fileopt']})
+                                        plot_kwargs['world_readable']})
+
+    _api_v2.response_handler(new_response)
+
     new_response_data = json.loads(new_response.content)
     response['url'] += '?share_key=' + new_response_data['share_key']
 
