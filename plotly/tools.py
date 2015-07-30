@@ -369,11 +369,19 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
         url = file_owner_or_url
         return PlotlyDisplay(url, width, height)
     else:
-        warnings.warn(
-            "Looks like you're not using IPython or Sage to embed this plot. "
-            "If you just want the *embed code*, try using `get_embed()` "
-            "instead."
-            "\nQuestions? feedback@plot.ly")
+        if (session.get_session_config()['plotly_domain'] !=
+                'https://plot.ly'):
+            warnings.warn(
+                "Looks like you're not using IPython or Sage to embed this "
+                "plot. If you just want the *embed code*, try using "
+                "`get_embed()` instead."
+                "\nQuestions? support@plot.ly")
+        else:
+            warnings.warn(
+                "Looks like you're not using IPython or Sage to embed this "
+                "plot. If you just want the *embed code*, try using "
+                "`get_embed()` instead."
+                "\nQuestions? feedback@plot.ly")
 
 
 ### mpl-related tools ###
