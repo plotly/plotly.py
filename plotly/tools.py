@@ -1414,8 +1414,24 @@ def return_figure_from_figure_or_data(figure_or_data, validate_figure):
 
     return figure
 
+# Default colours for finance charts
+_DEFAULT_INCREASING_COLOR = '#3D9970'  # http://clrs.cc
+_DEFAULT_DECREASING_COLOR = '#FF4136'
 
-class TraceFactory(object):
+
+class FigureFactory(object):
+    """
+    BETA functions to create specific chart types.
+
+    This is beta as in: subject to change in a backwards incompatible way
+    without notice.
+
+    Supported chart types include candlestick, open high low close, quiver,
+    and streamline. See FigureFactory.create_candlestick,
+    FigureFactory.create_ohlc, FigureFactory.create_quiver, or
+    FigureFactory.create_streamline for for more infomation and examples of a
+    specific chart type.
+    """
 
     @staticmethod
     def validate_equal_length(*args):
@@ -1428,6 +1444,49 @@ class TraceFactory(object):
         if any(len(lst) != length for lst in args):
             raise exceptions.PlotlyError("Oops! Your data lists or ndarrays "
                                          "should be the same length.")
+
+    @staticmethod
+    def validate_ohlc(open, high, low, close, direction, **kwargs):
+        """
+        ohlc and candlestick specific validations
+
+        Specifically, this checks that the high value is the greatest value and
+        the low value is the lowest value in each unit.
+
+        See FigureFactory.create_ohlc() or FigureFactory.create_candlestick()
+        for params
+
+        :raises: (PlotlyError) If the high value is not the greatest value in
+            each unit.
+        :raises: (PlotlyError) If the low value is not the lowest value in each
+            unit.
+        :raises: (PlotlyError) If direction is not 'increasing' or 'decreasing'
+        """
+        for lst in [open, low, close]:
+            for index in range(len(high)):
+                if high[index] < lst[index]:
+                    raise exceptions.PlotlyError("Oops! Looks like some of "
+                                                 "your high values are less "
+                                                 "the corresponding open, "
+                                                 "low, or close values. "
+                                                 "Double check that your data "
+                                                 "is entered in O-H-L-C order")
+
+        for lst in [open, high, close]:
+            for index in range(len(low)):
+                if low[index] > lst[index]:
+                    raise exceptions.PlotlyError("Oops! Looks like some of "
+                                                 "your low values are greater "
+                                                 "than the corresponding high"
+                                                 ", open, or close values. "
+                                                 "Double check that your data "
+                                                 "is entered in O-H-L-C order")
+
+        direction_opts = ('increasing', 'decreasing', 'both')
+        if direction not in direction_opts:
+            raise exceptions.PlotlyError("direction must be defined as "
+                                         "'increasing', 'decreasing', or "
+                                         "'both'")
 
     @staticmethod
     def validate_positive_scalars(**kwargs):
@@ -1454,14 +1513,14 @@ class TraceFactory(object):
         Specifically, this checks that x and y are both evenly spaced,
         and that the package numpy is available.
 
-        See TraceFactory.create_streamline() for params
+        See FigureFactory.create_streamline() for params
 
         :raises: (ImportError) If numpy is not available.
         :raises: (PlotlyError) If x is not evenly spaced.
         :raises: (PlotlyError) If y is not evenly spaced.
         """
         if _numpy_imported is False:
-            raise ImportError("TraceFactory.create_streamline requires numpy.")
+            raise ImportError("FigureFactory.create_streamline requires numpy")
         for index in range(len(x) - 1):
             if ((x[index + 1] - x[index]) - (x[1] - x[0])) > .0001:
                 raise exceptions.PlotlyError("x must be a 1 dimensional, "
@@ -1507,26 +1566,28 @@ class TraceFactory(object):
             for more information on valid kwargs call
             help(plotly.graph_objs.Scatter)
 
-        :rtype (trace): returns quiver trace
+        :rtype (dict): returns a representation of quiver figure.
 
         Example 1: Trivial Quiver
         ```
-        # 1 Arrow from (0,0) to (1,1)
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
 
         import math
 
-        quiver = TraceFactory.create_quiver(x=[0], y=[0],
-                                            u=[1], v=[1],
-                                            scale=1)
+        # 1 Arrow from (0,0) to (1,1)
+        fig = FF.create_quiver(x=[0], y=[0],
+                               u=[1], v=[1],
+                               scale=1)
 
-        # Plot
-        fig=Figure()
-        fig['data'].append(quiver)
-        py.iplot(fig, filename='quiver')
+        py.plot(fig, filename='quiver')
         ```
 
         Example 2: Quiver plot using meshgrid
         ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+
         import numpy as np
         import math
 
@@ -1536,16 +1597,16 @@ class TraceFactory(object):
         v = np.sin(x)*y
 
         #Create quiver
-        quiver = TraceFactory.create_quiver(x, y, u, v)
+        fig = FF.create_quiver(x, y, u, v)
 
         # Plot
-        fig=Figure()
-        fig['data'].append(quiver)
-        py.iplot(fig, filename='quiver')
+        py.plot(fig, filename='quiver')
         ```
 
         Example 3: Styling the quiver plot
         ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
         import numpy as np
         import math
 
@@ -1556,20 +1617,22 @@ class TraceFactory(object):
         v = np.sin(x)*y
 
         # Create quiver
-        quiver = TraceFactory.create_quiver(x, y, u, v, scale=.2,
-                                            arrow_scale=.3, angle=math.pi/6,
-                                            name='Wind Velocity',
-                                            line=Line(width=1))
+        fig = FF.create_quiver(x, y, u, v, scale=.2,
+                               arrow_scale=.3,
+                               angle=math.pi/6,
+                               name='Wind Velocity',
+                               line=Line(width=1))
+
+        # Add title to layout
+        fig['layout'].update(title='Quiver Plot')
 
         # Plot
-        fig=Figure()
-        fig['data'].append(quiver)
-        py.iplot(fig, filename='quiver')
+        py.plot(fig, filename='quiver')
         ```
         """
-        TraceFactory.validate_equal_length(x, y, u, v)
-        TraceFactory.validate_positive_scalars(arrow_scale=arrow_scale,
-                                               scale=scale)
+        FigureFactory.validate_equal_length(x, y, u, v)
+        FigureFactory.validate_positive_scalars(arrow_scale=arrow_scale,
+                                                scale=scale)
 
         barb_x, barb_y = _Quiver(x, y, u, v, scale,
                                  arrow_scale, angle).get_barbs()
@@ -1578,7 +1641,11 @@ class TraceFactory(object):
         quiver = Scatter(x=barb_x + arrow_x,
                          y=barb_y + arrow_y,
                          mode='lines', **kwargs)
-        return quiver
+
+        data = [quiver]
+        layout = graph_objs.Layout(hovermode='closest')
+
+        return dict(data=data, layout=layout)
 
     @staticmethod
     def create_streamline(x, y, u, v,
@@ -1602,10 +1669,13 @@ class TraceFactory(object):
             for more information on valid kwargs call
             help(plotly.graph_objs.Scatter)
 
-        :rtype (trace): returns streamline data
+        :rtype (dict): returns a representation of streamline figure.
 
         Example 1: Plot simple streamline and increase arrow size
         ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+
         import numpy as np
         import math
 
@@ -1619,16 +1689,18 @@ class TraceFactory(object):
         v = v.T  # Transpose
 
         # Create streamline
-        streamline = TraceFactory.create_streamline(x, y, u, v, arrow_scale=.1)
+        fig = FF.create_streamline(x, y, u, v,
+                                   arrow_scale=.1)
 
         # Plot
-        fig=Figure()
-        fig['data'].append(streamline)
-        py.iplot(fig, filename='streamline')
+        py.plot(fig, filename='streamline')
         ```
 
         Example 2: from nbviewer.ipython.org/github/barbagroup/AeroPython
         ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+
         import numpy as np
         import math
 
@@ -1647,25 +1719,23 @@ class TraceFactory(object):
         v_s = ss/(2*np.pi) * (Y-y_s)/((X-x_s)**2 + (Y-y_s)**2)
 
         # Create streamline
-        streamline = TraceFactory.create_streamline(x, y, u_s, v_s, density=2,
-                                                    name='streamline')
+        fig = FF.create_streamline(x, y, u_s, v_s,
+                                   density=2, name='streamline')
 
         # Add source point
         point = Scatter(x=[x_s], y=[y_s], mode='markers',
                         marker=Marker(size=14), name='source point')
 
         # Plot
-        fig=Figure()
-        fig['data'].append(streamline)
         fig['data'].append(point)
-        py.iplot(fig, filename='streamline')
+        py.plot(fig, filename='streamline')
         ```
         """
-        TraceFactory.validate_equal_length(x, y)
-        TraceFactory.validate_equal_length(u, v)
-        TraceFactory.validate_streamline(x, y)
-        TraceFactory.validate_positive_scalars(density=density,
-                                               arrow_scale=arrow_scale)
+        FigureFactory.validate_equal_length(x, y)
+        FigureFactory.validate_equal_length(u, v)
+        FigureFactory.validate_streamline(x, y)
+        FigureFactory.validate_positive_scalars(density=density,
+                                                arrow_scale=arrow_scale)
 
         streamline_x, streamline_y = _Streamline(x, y, u, v,
                                                  density, angle,
@@ -1677,483 +1747,11 @@ class TraceFactory(object):
         streamline = Scatter(x=streamline_x + arrow_x,
                              y=streamline_y + arrow_y,
                              mode='lines', **kwargs)
-        return streamline
 
+        data = [streamline]
+        layout = graph_objs.Layout(hovermode='closest')
 
-class _Quiver(TraceFactory):
-    """
-    Refer to TraceFactory.create_quiver() for docstring
-    """
-    def __init__(self, x, y, u, v,
-                 scale, arrow_scale, angle, **kwargs):
-        try:
-            x = TraceFactory.flatten(x)
-        except exceptions.PlotlyError:
-            pass
-
-        try:
-            y = TraceFactory.flatten(y)
-        except exceptions.PlotlyError:
-            pass
-
-        try:
-            u = TraceFactory.flatten(u)
-        except exceptions.PlotlyError:
-            pass
-
-        try:
-            v = TraceFactory.flatten(v)
-        except exceptions.PlotlyError:
-            pass
-
-        self.x = x
-        self.y = y
-        self.u = u
-        self.v = v
-        self.scale = scale
-        self.arrow_scale = arrow_scale
-        self.angle = angle
-        self.end_x = []
-        self.end_y = []
-        self.scale_uv()
-        barb_x, barb_y = self.get_barbs()
-        arrow_x, arrow_y = self.get_quiver_arrows()
-
-    def scale_uv(self):
-        """
-        Scales u and v to avoid overlap of the arrows.
-
-        u and v are added to x and y to get the
-        endpoints of the arrows so a smaller scale value will
-        result in less overlap of arrows.
-        """
-        self.u = [i * self.scale for i in self.u]
-        self.v = [i * self.scale for i in self.v]
-
-    def get_barbs(self):
-        """
-        Creates x and y startpoint and endpoint pairs
-
-        After finding the endpoint of each barb this zips startpoint and
-        endpoint pairs to create 2 lists: x_values for barbs and y values
-        for barbs
-
-        :rtype: (list, list) barb_x, barb_y: list of startpoint and endpoint
-            x_value pairs separated by a None to create the barb of the arrow,
-            and list of startpoint and endpoint y_value pairs separated by a
-            None to create the barb of the arrow.
-        """
-        self.end_x = [i + j for i, j in zip(self.x, self.u)]
-        self.end_y = [i + j for i, j in zip(self.y, self.v)]
-        empty = [None] * len(self.x)
-        barb_x = self.flatten(zip(self.x, self.end_x, empty))
-        barb_y = self.flatten(zip(self.y, self.end_y, empty))
-        return barb_x, barb_y
-
-    def get_quiver_arrows(self):
-        """
-        Creates lists of x and y values to plot the arrows
-
-        Gets length of each barb then calculates the length of each side of
-        the arrow. Gets angle of barb and applies angle to each side of the
-        arrowhead. Next uses arrow_scale to scale the length of arrowhead and
-        creates x and y values for arrowhead point1 and point2. Finally x and y
-        values for point1, endpoint and point2s for each arrowhead are
-        separated by a None and zipped to create lists of x and y values for
-        the arrows.
-
-        :rtype: (list, list) arrow_x, arrow_y: list of point1, endpoint, point2
-            x_values separated by a None to create the arrowhead and list of
-            point1, endpoint, point2 y_values separated by a None to create
-            the barb of the arrow.
-        """
-        dif_x = [i - j for i, j in zip(self.end_x, self.x)]
-        dif_y = [i - j for i, j in zip(self.end_y, self.y)]
-
-        # Get barb lengths(default arrow length = 30% barb length)
-        barb_len = [None] * len(self.x)
-        for index in range(len(barb_len)):
-            barb_len[index] = math.hypot(dif_x[index], dif_y[index])
-
-        # Make arrow lengths
-        arrow_len = [None] * len(self.x)
-        arrow_len = [i * self.arrow_scale for i in barb_len]
-
-        # Get barb angles
-        barb_ang = [None] * len(self.x)
-        for index in range(len(barb_ang)):
-            barb_ang[index] = math.atan2(dif_y[index], dif_x[index])
-
-        # Set angles to create arrow
-        ang1 = [i + self.angle for i in barb_ang]
-        ang2 = [i - self.angle for i in barb_ang]
-
-        cos_ang1 = [None] * len(ang1)
-        for index in range(len(ang1)):
-            cos_ang1[index] = math.cos(ang1[index])
-        seg1_x = [i * j for i, j in zip(arrow_len, cos_ang1)]
-
-        sin_ang1 = [None] * len(ang1)
-        for index in range(len(ang1)):
-            sin_ang1[index] = math.sin(ang1[index])
-        seg1_y = [i * j for i, j in zip(arrow_len, sin_ang1)]
-
-        cos_ang2 = [None] * len(ang2)
-        for index in range(len(ang2)):
-            cos_ang2[index] = math.cos(ang2[index])
-        seg2_x = [i * j for i, j in zip(arrow_len, cos_ang2)]
-
-        sin_ang2 = [None] * len(ang2)
-        for index in range(len(ang2)):
-            sin_ang2[index] = math.sin(ang2[index])
-        seg2_y = [i * j for i, j in zip(arrow_len, sin_ang2)]
-
-        # Set coordinates to create arrow
-        for index in range(len(self.end_x)):
-            point1_x = [i - j for i, j in zip(self.end_x, seg1_x)]
-            point1_y = [i - j for i, j in zip(self.end_y, seg1_y)]
-            point2_x = [i - j for i, j in zip(self.end_x, seg2_x)]
-            point2_y = [i - j for i, j in zip(self.end_y, seg2_y)]
-
-        # Combine lists to create arrow
-        empty = [None] * len(self.end_x)
-        arrow_x = self.flatten(zip(point1_x, self.end_x, point2_x, empty))
-        arrow_y = self.flatten(zip(point1_y, self.end_y, point2_y, empty))
-        return arrow_x, arrow_y
-
-
-class _Streamline(TraceFactory):
-    """
-    Refer to TraceFactory.create_streamline() for docstring
-    """
-    def __init__(self, x, y, u, v,
-                 density, angle,
-                 arrow_scale, **kwargs):
-        self.x = np.array(x)
-        self.y = np.array(y)
-        self.u = np.array(u)
-        self.v = np.array(v)
-        self.angle = angle
-        self.arrow_scale = arrow_scale
-        self.density = int(30 * density)  # Scale similarly to other functions
-        self.delta_x = self.x[1] - self.x[0]
-        self.delta_y = self.y[1] - self.y[0]
-        self.val_x = self.x
-        self.val_y = self.y
-
-        # Set up spacing
-        self.blank = np.zeros((self.density, self.density))
-        self.spacing_x = len(self.x) / float(self.density - 1)
-        self.spacing_y = len(self.y) / float(self.density - 1)
-        self.trajectories = []
-
-        # Rescale speed onto axes-coordinates
-        self.u = self.u / (self.x[-1] - self.x[0])
-        self.v = self.v / (self.y[-1] - self.y[0])
-        self.speed = np.sqrt(self.u ** 2 + self.v ** 2)
-
-        # Rescale u and v for integrations.
-        self.u *= len(self.x)
-        self.v *= len(self.y)
-        self.st_x = []
-        self.st_y = []
-        self.get_streamlines()
-        streamline_x, streamline_y = self.sum_streamlines()
-        arrows_x, arrows_y = self.get_streamline_arrows()
-
-    def blank_pos(self, xi, yi):
-        """
-        Set up positions for trajectories to be used with rk4 function.
-        """
-        return (int((xi / self.spacing_x) + 0.5),
-                int((yi / self.spacing_y) + 0.5))
-
-    def value_at(self, a, xi, yi):
-        """
-        Set up for RK4 function, based on Bokeh's streamline code
-        """
-        if isinstance(xi, np.ndarray):
-            self.x = xi.astype(np.int)
-            self.y = yi.astype(np.int)
-        else:
-            self.val_x = np.int(xi)
-            self.val_y = np.int(yi)
-        a00 = a[self.val_y, self.val_x]
-        a01 = a[self.val_y, self.val_x + 1]
-        a10 = a[self.val_y + 1, self.val_x]
-        a11 = a[self.val_y + 1, self.val_x + 1]
-        xt = xi - self.val_x
-        yt = yi - self.val_y
-        a0 = a00 * (1 - xt) + a01 * xt
-        a1 = a10 * (1 - xt) + a11 * xt
-        return a0 * (1 - yt) + a1 * yt
-
-    def rk4_integrate(self, x0, y0):
-        """
-        RK4 forward and back trajectories from the initial conditions.
-
-        Adapted from Bokeh's streamline -uses Runge-Kutta method to fill
-        x and y trajectories then checks length of traj (s in units of axes)
-        """
-        def f(xi, yi):
-            dt_ds = 1. / self.value_at(self.speed, xi, yi)
-            ui = self.value_at(self.u, xi, yi)
-            vi = self.value_at(self.v, xi, yi)
-            return ui * dt_ds, vi * dt_ds
-
-        def g(xi, yi):
-            dt_ds = 1. / self.value_at(self.speed, xi, yi)
-            ui = self.value_at(self.u, xi, yi)
-            vi = self.value_at(self.v, xi, yi)
-            return -ui * dt_ds, -vi * dt_ds
-
-        check = lambda xi, yi: (0 <= xi < len(self.x) - 1 and
-                                0 <= yi < len(self.y) - 1)
-        xb_changes = []
-        yb_changes = []
-
-        def rk4(x0, y0, f):
-            ds = 0.01
-            stotal = 0
-            xi = x0
-            yi = y0
-            xb, yb = self.blank_pos(xi, yi)
-            xf_traj = []
-            yf_traj = []
-            while check(xi, yi):
-                xf_traj.append(xi)
-                yf_traj.append(yi)
-                try:
-                    k1x, k1y = f(xi, yi)
-                    k2x, k2y = f(xi + .5 * ds * k1x, yi + .5 * ds * k1y)
-                    k3x, k3y = f(xi + .5 * ds * k2x, yi + .5 * ds * k2y)
-                    k4x, k4y = f(xi + ds * k3x, yi + ds * k3y)
-                except IndexError:
-                    break
-                xi += ds * (k1x + 2 * k2x + 2 * k3x + k4x) / 6.
-                yi += ds * (k1y + 2 * k2y + 2 * k3y + k4y) / 6.
-                if not check(xi, yi):
-                    break
-                stotal += ds
-                new_xb, new_yb = self.blank_pos(xi, yi)
-                if new_xb != xb or new_yb != yb:
-                    if self.blank[new_yb, new_xb] == 0:
-                        self.blank[new_yb, new_xb] = 1
-                        xb_changes.append(new_xb)
-                        yb_changes.append(new_yb)
-                        xb = new_xb
-                        yb = new_yb
-                    else:
-                        break
-                if stotal > 2:
-                    break
-            return stotal, xf_traj, yf_traj
-
-        sf, xf_traj, yf_traj = rk4(x0, y0, f)
-        sb, xb_traj, yb_traj = rk4(x0, y0, g)
-        stotal = sf + sb
-        x_traj = xb_traj[::-1] + xf_traj[1:]
-        y_traj = yb_traj[::-1] + yf_traj[1:]
-
-        if len(x_traj) < 1:
-            return None
-        if stotal > .2:
-            initxb, inityb = self.blank_pos(x0, y0)
-            self.blank[inityb, initxb] = 1
-            return x_traj, y_traj
-        else:
-            for xb, yb in zip(xb_changes, yb_changes):
-                self.blank[yb, xb] = 0
-            return None
-
-    def traj(self, xb, yb):
-        """
-
-        Integrate trajectories
-
-        :param (int) xb: results of passing xi through self.blank_pos
-        :param (int) xy: results of passing yi through self.blank_pos
-
-        Calculate each trajectory based on rk4 integrate method.
-        """
-
-        if xb < 0 or xb >= self.density or yb < 0 or yb >= self.density:
-            return
-        if self.blank[yb, xb] == 0:
-            t = self.rk4_integrate(xb * self.spacing_x, yb * self.spacing_y)
-            if t is not None:
-                self.trajectories.append(t)
-
-    def get_streamlines(self):
-        """
-        Get streamlines by building trajectory set.
-
-        """
-        for indent in range(self.density // 2):
-            for xi in range(self.density - 2 * indent):
-                self.traj(xi + indent, indent)
-                self.traj(xi + indent, self.density - 1 - indent)
-                self.traj(indent, xi + indent)
-                self.traj(self.density - 1 - indent, xi + indent)
-
-        self.st_x = [np.array(t[0]) * self.delta_x + self.x[0] for t in
-                     self.trajectories]
-        self.st_y = [np.array(t[1]) * self.delta_y + self.y[0] for t in
-                     self.trajectories]
-
-        for index in range(len(self.st_x)):
-            self.st_x[index] = self.st_x[index].tolist()
-            self.st_x[index].append(np.nan)
-
-        for index in range(len(self.st_y)):
-            self.st_y[index] = self.st_y[index].tolist()
-            self.st_y[index].append(np.nan)
-
-    def get_streamline_arrows(self):
-        """
-        Makes an arrow for each streamline.
-
-        Gets angle of streamline at 1/3 mark and creates arrow coordinates
-        based off of user defined angle and arrow_scale.
-
-        :param (array) st_x: x-values for all streamlines
-        :param (array) st_y: y-values for all streamlines
-        :param (angle in radians) angle: angle of arrowhead. Default = pi/9
-        :param (float in [0,1]) arrow_scale: value to scale length of arrowhead
-            Default = .09
-        :rtype (list, list) arrows_x: x-values to create arrowhead and
-            arrows_y: y-values to create arrowhead
-        """
-        arrow_end_x = np.empty((len(self.st_x)))
-        arrow_end_y = np.empty((len(self.st_y)))
-        arrow_start_x = np.empty((len(self.st_x)))
-        arrow_start_y = np.empty((len(self.st_y)))
-        for index in range(len(self.st_x)):
-            arrow_end_x[index] = (self.st_x[index]
-                                  [int(len(self.st_x[index]) / 3)])
-            arrow_start_x[index] = (self.st_x[index]
-                                    [(int(len(self.st_x[index]) / 3)) - 1])
-            arrow_end_y[index] = (self.st_y[index]
-                                  [int(len(self.st_y[index]) / 3)])
-            arrow_start_y[index] = (self.st_y[index]
-                                    [(int(len(self.st_y[index]) / 3)) - 1])
-
-        dif_x = arrow_end_x - arrow_start_x
-        dif_y = arrow_end_y - arrow_start_y
-
-        streamline_ang = np.arctan(dif_y / dif_x)
-
-        ang1 = streamline_ang + (self.angle)
-        ang2 = streamline_ang - (self.angle)
-
-        seg1_x = np.cos(ang1) * self.arrow_scale
-        seg1_y = np.sin(ang1) * self.arrow_scale
-        seg2_x = np.cos(ang2) * self.arrow_scale
-        seg2_y = np.sin(ang2) * self.arrow_scale
-
-        point1_x = np.empty((len(dif_x)))
-        point1_y = np.empty((len(dif_y)))
-        point2_x = np.empty((len(dif_x)))
-        point2_y = np.empty((len(dif_y)))
-
-        for index in range(len(dif_x)):
-            if dif_x[index] >= 0:
-                point1_x[index] = arrow_end_x[index] - seg1_x[index]
-                point1_y[index] = arrow_end_y[index] - seg1_y[index]
-                point2_x[index] = arrow_end_x[index] - seg2_x[index]
-                point2_y[index] = arrow_end_y[index] - seg2_y[index]
-            else:
-                point1_x[index] = arrow_end_x[index] + seg1_x[index]
-                point1_y[index] = arrow_end_y[index] + seg1_y[index]
-                point2_x[index] = arrow_end_x[index] + seg2_x[index]
-                point2_y[index] = arrow_end_y[index] + seg2_y[index]
-
-        space = np.empty((len(point1_x)))
-        space[:] = np.nan
-
-        # Combine arrays into matrix
-        arrows_x = np.matrix([point1_x, arrow_end_x, point2_x, space])
-        arrows_x = np.array(arrows_x)
-        arrows_x = arrows_x.flatten('F')
-        arrows_x = arrows_x.tolist()
-
-        # Combine arrays into matrix
-        arrows_y = np.matrix([point1_y, arrow_end_y, point2_y, space])
-        arrows_y = np.array(arrows_y)
-        arrows_y = arrows_y.flatten('F')
-        arrows_y = arrows_y.tolist()
-
-        return arrows_x, arrows_y
-
-    def sum_streamlines(self):
-        """
-        Makes all streamlines readable as a single trace.
-
-        :rtype (list, list): streamline_x: all x values for each streamline
-            combined into single list and streamline_y: all y values for each
-            streamline combined into single list
-        """
-        streamline_x = sum(self.st_x, [])
-        streamline_y = sum(self.st_y, [])
-        return streamline_x, streamline_y
-
-
-_DEFAULT_INCREASING_COLOR = '#3D9970'  # http://clrs.cc
-_DEFAULT_DECREASING_COLOR = '#FF4136'
-
-
-class FigureFactory(object):
-    """
-    BETA functions to create specific chart types.
-
-    See FigureFactory.create_ohlc for more infomation and examples of open high
-    low close charts or FigureFactory.create_candlestick for more information
-    and examples of candlestick charts.
-
-    """
-
-    @staticmethod
-    def validate_ohlc(open, high, low, close, direction, **kwargs):
-        """
-        ohlc and candlestick specific validations
-
-        Specifically, this checks that the high value is the greatest value and
-        the low value is the lowest value in each unit.
-
-        See FigureFactory.create_ohlc() or FigureFactory.create_candlestick()
-        for params
-
-        :raises: (PlotlyError) If the high value is not the greatest value in
-            each unit.
-        :raises: (PlotlyError) If the low value is not the lowest value in each
-            unit.
-        :raises: (PlotlyError) If direction is not 'increasing' or 'decreasing'
-        """
-        for lst in [open, low, close]:
-            for index in range(len(high)):
-                if high[index] < lst[index]:
-                    raise exceptions.PlotlyError("Oops! Looks like some of "
-                                                 "your high values are less "
-                                                 "the corresponding open, "
-                                                 "low, or close values. "
-                                                 "Double check that your data "
-                                                 "is entered in O-H-L-C order")
-
-        for lst in [open, high, close]:
-            for index in range(len(low)):
-                if low[index] > lst[index]:
-                    raise exceptions.PlotlyError("Oops! Looks like some of "
-                                                 "your low values are greater "
-                                                 "than the corresponding high"
-                                                 ", open, or close values. "
-                                                 "Double check that your data "
-                                                 "is entered in O-H-L-C order")
-
-        direction_opts = ('increasing', 'decreasing', 'both')
-        if direction not in direction_opts:
-            raise exceptions.PlotlyError("direction must be defined as "
-                                         "'increasing', 'decreasing', or "
-                                         "'both'")
+        return dict(data=data, layout=layout)
 
     @staticmethod
     def _make_increasing_ohlc(open, high, low, close, dates, **kwargs):
@@ -2360,9 +1958,9 @@ class FigureFactory(object):
         ```
         """
         if dates is not None:
-            TraceFactory.validate_equal_length(open, high, low, close, dates)
+            FigureFactory.validate_equal_length(open, high, low, close, dates)
         else:
-            TraceFactory.validate_equal_length(open, high, low, close)
+            FigureFactory.validate_equal_length(open, high, low, close)
         FigureFactory.validate_ohlc(open, high, low, close, direction,
                                     **kwargs)
 
@@ -2631,41 +2229,25 @@ class FigureFactory(object):
         ```
         """
         if dates is not None:
-            TraceFactory.validate_equal_length(open, high, low, close, dates)
+            FigureFactory.validate_equal_length(open, high, low, close, dates)
         else:
-            TraceFactory.validate_equal_length(open, high, low, close)
+            FigureFactory.validate_equal_length(open, high, low, close)
         FigureFactory.validate_ohlc(open, high, low, close, direction,
                                     **kwargs)
 
         if direction is 'increasing':
-            candle_incr_data = FigureFactory._make_increasing_candle(open,
-                                                                     high,
-                                                                     low,
-                                                                     close,
-                                                                     dates,
-                                                                     **kwargs)
+            candle_incr_data = FigureFactory._make_increasing_candle(
+                open, high, low, close, dates, **kwargs)
             data = candle_incr_data
         elif direction is 'decreasing':
-            candle_decr_data = FigureFactory._make_decreasing_candle(open,
-                                                                     high,
-                                                                     low,
-                                                                     close,
-                                                                     dates,
-                                                                     **kwargs)
+            candle_decr_data = FigureFactory._make_decreasing_candle(
+                open, high, low, close, dates, **kwargs)
             data = candle_decr_data
         else:
-            candle_incr_data = FigureFactory._make_increasing_candle(open,
-                                                                     high,
-                                                                     low,
-                                                                     close,
-                                                                     dates,
-                                                                     **kwargs)
-            candle_decr_data = FigureFactory._make_decreasing_candle(open,
-                                                                     high,
-                                                                     low,
-                                                                     close,
-                                                                     dates,
-                                                                     **kwargs)
+            candle_incr_data = FigureFactory._make_increasing_candle(
+                open, high, low, close, dates, **kwargs)
+            candle_decr_data = FigureFactory._make_decreasing_candle(
+                open, high, low, close, dates, **kwargs)
             data = candle_incr_data + candle_decr_data
 
         layout = graph_objs.Layout(barmode='stack',
@@ -2679,6 +2261,422 @@ class FigureFactory(object):
         layout['yaxis']['fixedrange'] = True
 
         return dict(data=data, layout=layout)
+
+
+class _Quiver(FigureFactory):
+    """
+    Refer to FigureFactory.create_quiver() for docstring
+    """
+    def __init__(self, x, y, u, v,
+                 scale, arrow_scale, angle, **kwargs):
+        try:
+            x = FigureFactory.flatten(x)
+        except exceptions.PlotlyError:
+            pass
+
+        try:
+            y = FigureFactory.flatten(y)
+        except exceptions.PlotlyError:
+            pass
+
+        try:
+            u = FigureFactory.flatten(u)
+        except exceptions.PlotlyError:
+            pass
+
+        try:
+            v = FigureFactory.flatten(v)
+        except exceptions.PlotlyError:
+            pass
+
+        self.x = x
+        self.y = y
+        self.u = u
+        self.v = v
+        self.scale = scale
+        self.arrow_scale = arrow_scale
+        self.angle = angle
+        self.end_x = []
+        self.end_y = []
+        self.scale_uv()
+        barb_x, barb_y = self.get_barbs()
+        arrow_x, arrow_y = self.get_quiver_arrows()
+
+    def scale_uv(self):
+        """
+        Scales u and v to avoid overlap of the arrows.
+
+        u and v are added to x and y to get the
+        endpoints of the arrows so a smaller scale value will
+        result in less overlap of arrows.
+        """
+        self.u = [i * self.scale for i in self.u]
+        self.v = [i * self.scale for i in self.v]
+
+    def get_barbs(self):
+        """
+        Creates x and y startpoint and endpoint pairs
+
+        After finding the endpoint of each barb this zips startpoint and
+        endpoint pairs to create 2 lists: x_values for barbs and y values
+        for barbs
+
+        :rtype: (list, list) barb_x, barb_y: list of startpoint and endpoint
+            x_value pairs separated by a None to create the barb of the arrow,
+            and list of startpoint and endpoint y_value pairs separated by a
+            None to create the barb of the arrow.
+        """
+        self.end_x = [i + j for i, j in zip(self.x, self.u)]
+        self.end_y = [i + j for i, j in zip(self.y, self.v)]
+        empty = [None] * len(self.x)
+        barb_x = self.flatten(zip(self.x, self.end_x, empty))
+        barb_y = self.flatten(zip(self.y, self.end_y, empty))
+        return barb_x, barb_y
+
+    def get_quiver_arrows(self):
+        """
+        Creates lists of x and y values to plot the arrows
+
+        Gets length of each barb then calculates the length of each side of
+        the arrow. Gets angle of barb and applies angle to each side of the
+        arrowhead. Next uses arrow_scale to scale the length of arrowhead and
+        creates x and y values for arrowhead point1 and point2. Finally x and y
+        values for point1, endpoint and point2s for each arrowhead are
+        separated by a None and zipped to create lists of x and y values for
+        the arrows.
+
+        :rtype: (list, list) arrow_x, arrow_y: list of point1, endpoint, point2
+            x_values separated by a None to create the arrowhead and list of
+            point1, endpoint, point2 y_values separated by a None to create
+            the barb of the arrow.
+        """
+        dif_x = [i - j for i, j in zip(self.end_x, self.x)]
+        dif_y = [i - j for i, j in zip(self.end_y, self.y)]
+
+        # Get barb lengths(default arrow length = 30% barb length)
+        barb_len = [None] * len(self.x)
+        for index in range(len(barb_len)):
+            barb_len[index] = math.hypot(dif_x[index], dif_y[index])
+
+        # Make arrow lengths
+        arrow_len = [None] * len(self.x)
+        arrow_len = [i * self.arrow_scale for i in barb_len]
+
+        # Get barb angles
+        barb_ang = [None] * len(self.x)
+        for index in range(len(barb_ang)):
+            barb_ang[index] = math.atan2(dif_y[index], dif_x[index])
+
+        # Set angles to create arrow
+        ang1 = [i + self.angle for i in barb_ang]
+        ang2 = [i - self.angle for i in barb_ang]
+
+        cos_ang1 = [None] * len(ang1)
+        for index in range(len(ang1)):
+            cos_ang1[index] = math.cos(ang1[index])
+        seg1_x = [i * j for i, j in zip(arrow_len, cos_ang1)]
+
+        sin_ang1 = [None] * len(ang1)
+        for index in range(len(ang1)):
+            sin_ang1[index] = math.sin(ang1[index])
+        seg1_y = [i * j for i, j in zip(arrow_len, sin_ang1)]
+
+        cos_ang2 = [None] * len(ang2)
+        for index in range(len(ang2)):
+            cos_ang2[index] = math.cos(ang2[index])
+        seg2_x = [i * j for i, j in zip(arrow_len, cos_ang2)]
+
+        sin_ang2 = [None] * len(ang2)
+        for index in range(len(ang2)):
+            sin_ang2[index] = math.sin(ang2[index])
+        seg2_y = [i * j for i, j in zip(arrow_len, sin_ang2)]
+
+        # Set coordinates to create arrow
+        for index in range(len(self.end_x)):
+            point1_x = [i - j for i, j in zip(self.end_x, seg1_x)]
+            point1_y = [i - j for i, j in zip(self.end_y, seg1_y)]
+            point2_x = [i - j for i, j in zip(self.end_x, seg2_x)]
+            point2_y = [i - j for i, j in zip(self.end_y, seg2_y)]
+
+        # Combine lists to create arrow
+        empty = [None] * len(self.end_x)
+        arrow_x = self.flatten(zip(point1_x, self.end_x, point2_x, empty))
+        arrow_y = self.flatten(zip(point1_y, self.end_y, point2_y, empty))
+        return arrow_x, arrow_y
+
+
+class _Streamline(FigureFactory):
+    """
+    Refer to FigureFactory.create_streamline() for docstring
+    """
+    def __init__(self, x, y, u, v,
+                 density, angle,
+                 arrow_scale, **kwargs):
+        self.x = np.array(x)
+        self.y = np.array(y)
+        self.u = np.array(u)
+        self.v = np.array(v)
+        self.angle = angle
+        self.arrow_scale = arrow_scale
+        self.density = int(30 * density)  # Scale similarly to other functions
+        self.delta_x = self.x[1] - self.x[0]
+        self.delta_y = self.y[1] - self.y[0]
+        self.val_x = self.x
+        self.val_y = self.y
+
+        # Set up spacing
+        self.blank = np.zeros((self.density, self.density))
+        self.spacing_x = len(self.x) / float(self.density - 1)
+        self.spacing_y = len(self.y) / float(self.density - 1)
+        self.trajectories = []
+
+        # Rescale speed onto axes-coordinates
+        self.u = self.u / (self.x[-1] - self.x[0])
+        self.v = self.v / (self.y[-1] - self.y[0])
+        self.speed = np.sqrt(self.u ** 2 + self.v ** 2)
+
+        # Rescale u and v for integrations.
+        self.u *= len(self.x)
+        self.v *= len(self.y)
+        self.st_x = []
+        self.st_y = []
+        self.get_streamlines()
+        streamline_x, streamline_y = self.sum_streamlines()
+        arrows_x, arrows_y = self.get_streamline_arrows()
+
+    def blank_pos(self, xi, yi):
+        """
+        Set up positions for trajectories to be used with rk4 function.
+        """
+        return (int((xi / self.spacing_x) + 0.5),
+                int((yi / self.spacing_y) + 0.5))
+
+    def value_at(self, a, xi, yi):
+        """
+        Set up for RK4 function, based on Bokeh's streamline code
+        """
+        if isinstance(xi, np.ndarray):
+            self.x = xi.astype(np.int)
+            self.y = yi.astype(np.int)
+        else:
+            self.val_x = np.int(xi)
+            self.val_y = np.int(yi)
+        a00 = a[self.val_y, self.val_x]
+        a01 = a[self.val_y, self.val_x + 1]
+        a10 = a[self.val_y + 1, self.val_x]
+        a11 = a[self.val_y + 1, self.val_x + 1]
+        xt = xi - self.val_x
+        yt = yi - self.val_y
+        a0 = a00 * (1 - xt) + a01 * xt
+        a1 = a10 * (1 - xt) + a11 * xt
+        return a0 * (1 - yt) + a1 * yt
+
+    def rk4_integrate(self, x0, y0):
+        """
+        RK4 forward and back trajectories from the initial conditions.
+
+        Adapted from Bokeh's streamline -uses Runge-Kutta method to fill
+        x and y trajectories then checks length of traj (s in units of axes)
+        """
+        def f(xi, yi):
+            dt_ds = 1. / self.value_at(self.speed, xi, yi)
+            ui = self.value_at(self.u, xi, yi)
+            vi = self.value_at(self.v, xi, yi)
+            return ui * dt_ds, vi * dt_ds
+
+        def g(xi, yi):
+            dt_ds = 1. / self.value_at(self.speed, xi, yi)
+            ui = self.value_at(self.u, xi, yi)
+            vi = self.value_at(self.v, xi, yi)
+            return -ui * dt_ds, -vi * dt_ds
+
+        check = lambda xi, yi: (0 <= xi < len(self.x) - 1 and
+                                0 <= yi < len(self.y) - 1)
+        xb_changes = []
+        yb_changes = []
+
+        def rk4(x0, y0, f):
+            ds = 0.01
+            stotal = 0
+            xi = x0
+            yi = y0
+            xb, yb = self.blank_pos(xi, yi)
+            xf_traj = []
+            yf_traj = []
+            while check(xi, yi):
+                xf_traj.append(xi)
+                yf_traj.append(yi)
+                try:
+                    k1x, k1y = f(xi, yi)
+                    k2x, k2y = f(xi + .5 * ds * k1x, yi + .5 * ds * k1y)
+                    k3x, k3y = f(xi + .5 * ds * k2x, yi + .5 * ds * k2y)
+                    k4x, k4y = f(xi + ds * k3x, yi + ds * k3y)
+                except IndexError:
+                    break
+                xi += ds * (k1x + 2 * k2x + 2 * k3x + k4x) / 6.
+                yi += ds * (k1y + 2 * k2y + 2 * k3y + k4y) / 6.
+                if not check(xi, yi):
+                    break
+                stotal += ds
+                new_xb, new_yb = self.blank_pos(xi, yi)
+                if new_xb != xb or new_yb != yb:
+                    if self.blank[new_yb, new_xb] == 0:
+                        self.blank[new_yb, new_xb] = 1
+                        xb_changes.append(new_xb)
+                        yb_changes.append(new_yb)
+                        xb = new_xb
+                        yb = new_yb
+                    else:
+                        break
+                if stotal > 2:
+                    break
+            return stotal, xf_traj, yf_traj
+
+        sf, xf_traj, yf_traj = rk4(x0, y0, f)
+        sb, xb_traj, yb_traj = rk4(x0, y0, g)
+        stotal = sf + sb
+        x_traj = xb_traj[::-1] + xf_traj[1:]
+        y_traj = yb_traj[::-1] + yf_traj[1:]
+
+        if len(x_traj) < 1:
+            return None
+        if stotal > .2:
+            initxb, inityb = self.blank_pos(x0, y0)
+            self.blank[inityb, initxb] = 1
+            return x_traj, y_traj
+        else:
+            for xb, yb in zip(xb_changes, yb_changes):
+                self.blank[yb, xb] = 0
+            return None
+
+    def traj(self, xb, yb):
+        """
+        Integrate trajectories
+
+        :param (int) xb: results of passing xi through self.blank_pos
+        :param (int) xy: results of passing yi through self.blank_pos
+
+        Calculate each trajectory based on rk4 integrate method.
+        """
+
+        if xb < 0 or xb >= self.density or yb < 0 or yb >= self.density:
+            return
+        if self.blank[yb, xb] == 0:
+            t = self.rk4_integrate(xb * self.spacing_x, yb * self.spacing_y)
+            if t is not None:
+                self.trajectories.append(t)
+
+    def get_streamlines(self):
+        """
+        Get streamlines by building trajectory set.
+        """
+        for indent in range(self.density // 2):
+            for xi in range(self.density - 2 * indent):
+                self.traj(xi + indent, indent)
+                self.traj(xi + indent, self.density - 1 - indent)
+                self.traj(indent, xi + indent)
+                self.traj(self.density - 1 - indent, xi + indent)
+
+        self.st_x = [np.array(t[0]) * self.delta_x + self.x[0] for t in
+                     self.trajectories]
+        self.st_y = [np.array(t[1]) * self.delta_y + self.y[0] for t in
+                     self.trajectories]
+
+        for index in range(len(self.st_x)):
+            self.st_x[index] = self.st_x[index].tolist()
+            self.st_x[index].append(np.nan)
+
+        for index in range(len(self.st_y)):
+            self.st_y[index] = self.st_y[index].tolist()
+            self.st_y[index].append(np.nan)
+
+    def get_streamline_arrows(self):
+        """
+        Makes an arrow for each streamline.
+
+        Gets angle of streamline at 1/3 mark and creates arrow coordinates
+        based off of user defined angle and arrow_scale.
+
+        :param (array) st_x: x-values for all streamlines
+        :param (array) st_y: y-values for all streamlines
+        :param (angle in radians) angle: angle of arrowhead. Default = pi/9
+        :param (float in [0,1]) arrow_scale: value to scale length of arrowhead
+            Default = .09
+        :rtype (list, list) arrows_x: x-values to create arrowhead and
+            arrows_y: y-values to create arrowhead
+        """
+        arrow_end_x = np.empty((len(self.st_x)))
+        arrow_end_y = np.empty((len(self.st_y)))
+        arrow_start_x = np.empty((len(self.st_x)))
+        arrow_start_y = np.empty((len(self.st_y)))
+        for index in range(len(self.st_x)):
+            arrow_end_x[index] = (self.st_x[index]
+                                  [int(len(self.st_x[index]) / 3)])
+            arrow_start_x[index] = (self.st_x[index]
+                                    [(int(len(self.st_x[index]) / 3)) - 1])
+            arrow_end_y[index] = (self.st_y[index]
+                                  [int(len(self.st_y[index]) / 3)])
+            arrow_start_y[index] = (self.st_y[index]
+                                    [(int(len(self.st_y[index]) / 3)) - 1])
+
+        dif_x = arrow_end_x - arrow_start_x
+        dif_y = arrow_end_y - arrow_start_y
+
+        streamline_ang = np.arctan(dif_y / dif_x)
+
+        ang1 = streamline_ang + (self.angle)
+        ang2 = streamline_ang - (self.angle)
+
+        seg1_x = np.cos(ang1) * self.arrow_scale
+        seg1_y = np.sin(ang1) * self.arrow_scale
+        seg2_x = np.cos(ang2) * self.arrow_scale
+        seg2_y = np.sin(ang2) * self.arrow_scale
+
+        point1_x = np.empty((len(dif_x)))
+        point1_y = np.empty((len(dif_y)))
+        point2_x = np.empty((len(dif_x)))
+        point2_y = np.empty((len(dif_y)))
+
+        for index in range(len(dif_x)):
+            if dif_x[index] >= 0:
+                point1_x[index] = arrow_end_x[index] - seg1_x[index]
+                point1_y[index] = arrow_end_y[index] - seg1_y[index]
+                point2_x[index] = arrow_end_x[index] - seg2_x[index]
+                point2_y[index] = arrow_end_y[index] - seg2_y[index]
+            else:
+                point1_x[index] = arrow_end_x[index] + seg1_x[index]
+                point1_y[index] = arrow_end_y[index] + seg1_y[index]
+                point2_x[index] = arrow_end_x[index] + seg2_x[index]
+                point2_y[index] = arrow_end_y[index] + seg2_y[index]
+
+        space = np.empty((len(point1_x)))
+        space[:] = np.nan
+
+        # Combine arrays into matrix
+        arrows_x = np.matrix([point1_x, arrow_end_x, point2_x, space])
+        arrows_x = np.array(arrows_x)
+        arrows_x = arrows_x.flatten('F')
+        arrows_x = arrows_x.tolist()
+
+        # Combine arrays into matrix
+        arrows_y = np.matrix([point1_y, arrow_end_y, point2_y, space])
+        arrows_y = np.array(arrows_y)
+        arrows_y = arrows_y.flatten('F')
+        arrows_y = arrows_y.tolist()
+
+        return arrows_x, arrows_y
+
+    def sum_streamlines(self):
+        """
+        Makes all streamlines readable as a single trace.
+
+        :rtype (list, list): streamline_x: all x values for each streamline
+            combined into single list and streamline_y: all y values for each
+            streamline combined into single list
+        """
+        streamline_x = sum(self.st_x, [])
+        streamline_y = sum(self.st_y, [])
+        return streamline_x, streamline_y
 
 
 class _OHLC(FigureFactory):
@@ -2733,7 +2731,6 @@ class _OHLC(FigureFactory):
         (1) Increase, where close > open and
         (2) Decrease, where close <= open
         """
-
         for index in range(len(self.open)):
             if self.close[index] is None:
                 pass
@@ -2752,8 +2749,8 @@ class _OHLC(FigureFactory):
             trace, flat_increase_y: y=values for the increasing trace and
             text_increase: hovertext for the increasing trace
         """
-        flat_increase_x = TraceFactory.flatten(self.increase_x)
-        flat_increase_y = TraceFactory.flatten(self.increase_y)
+        flat_increase_x = FigureFactory.flatten(self.increase_x)
+        flat_increase_y = FigureFactory.flatten(self.increase_y)
         text_increase = (("Open", "Open", "High",
                           "Low", "Close", "Close", '')
                          * (len(self.increase_x)))
@@ -2768,8 +2765,8 @@ class _OHLC(FigureFactory):
             trace, flat_decrease_y: y=values for the decreasing trace and
             text_decrease: hovertext for the decreasing trace
         """
-        flat_decrease_x = TraceFactory.flatten(self.decrease_x)
-        flat_decrease_y = TraceFactory.flatten(self.decrease_y)
+        flat_decrease_x = FigureFactory.flatten(self.decrease_x)
+        flat_decrease_y = FigureFactory.flatten(self.decrease_y)
         text_decrease = (("Open", "Open", "High",
                           "Low", "Close", "Close", '')
                          * (len(self.decrease_x)))
@@ -2820,8 +2817,8 @@ class _Candlestick(FigureFactory):
                                     increase_close, increase_high,
                                     increase_empty))
         stick_increase_x = [[x, x, x, x, None] for x in increase_x]
-        stick_increase_y = TraceFactory.flatten(stick_increase_y)
-        stick_increase_x = TraceFactory.flatten(stick_increase_x)
+        stick_increase_y = FigureFactory.flatten(stick_increase_y)
+        stick_increase_x = FigureFactory.flatten(stick_increase_x)
 
         return (increase_x, increase_open, increase_dif,
                 stick_increase_y, stick_increase_x)
@@ -2856,8 +2853,8 @@ class _Candlestick(FigureFactory):
                                     decrease_empty))
         stick_decrease_x = [[x, x, x, x, None] for x in decrease_x]
 
-        stick_decrease_y = TraceFactory.flatten(stick_decrease_y)
-        stick_decrease_x = TraceFactory.flatten(stick_decrease_x)
+        stick_decrease_y = FigureFactory.flatten(stick_decrease_y)
+        stick_decrease_x = FigureFactory.flatten(stick_decrease_x)
 
         return (decrease_x, decrease_close, decrease_dif,
                 stick_decrease_y, stick_decrease_x)
