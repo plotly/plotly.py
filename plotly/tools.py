@@ -289,10 +289,13 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
         urlsplit = six.moves.urllib.parse.urlparse(url)
         file_owner = urlsplit.path.split('/')[1].split('~')[1]
         file_id = urlsplit.path.split('/')[2]
-        if urlsplit.query:
-            share_key = urlsplit.query.split('share_key=')[1]
+
+        # to check for share_key we check urlsplit.query
+        query_dict = six.moves.urllib.parse.parse_qs(urlsplit.query)
+        if query_dict:
+            share_key = query_dict['share_key='][-1]
         else:
-            share_key = None
+            share_key = ''
     else:
         file_owner = file_owner_or_url
 
