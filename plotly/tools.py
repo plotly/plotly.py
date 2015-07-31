@@ -85,6 +85,19 @@ except:
     _file_permissions = False
 
 
+def get_config_defaults():
+    """
+    Convenience function to check current settings against defaults.
+
+    Example:
+
+        if plotly_domain != get_config_defaults()['plotly_domain']:
+            # do something
+
+    """
+    return dict(_FILE_CONTENT[CONFIG_FILE])  # performs a shallow copy
+
+
 def check_file_permissions():
     return _file_permissions
 
