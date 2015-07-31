@@ -1423,6 +1423,9 @@ class FigureFactory(object):
     """
     BETA functions to create specific chart types.
 
+    This is beta as in: subject to change in a backwards incompatible way
+    without notice.
+
     Supported chart types include candlestick, open high low close, quiver,
     and streamline. See FigureFactory.create_candlestick,
     FigureFactory.create_ohlc, FigureFactory.create_quiver, or
@@ -1577,7 +1580,7 @@ class FigureFactory(object):
                                u=[1], v=[1],
                                scale=1)
 
-        py.plot(quiver, filename='quiver')
+        py.plot(fig, filename='quiver')
         ```
 
         Example 2: Quiver plot using meshgrid
@@ -2233,34 +2236,18 @@ class FigureFactory(object):
                                     **kwargs)
 
         if direction is 'increasing':
-            candle_incr_data = FigureFactory._make_increasing_candle(open,
-                                                                     high,
-                                                                     low,
-                                                                     close,
-                                                                     dates,
-                                                                     **kwargs)
+            candle_incr_data = FigureFactory._make_increasing_candle(
+                open, high, low, close, dates, **kwargs)
             data = candle_incr_data
         elif direction is 'decreasing':
-            candle_decr_data = FigureFactory._make_decreasing_candle(open,
-                                                                     high,
-                                                                     low,
-                                                                     close,
-                                                                     dates,
-                                                                     **kwargs)
+            candle_decr_data = FigureFactory._make_decreasing_candle(
+                open, high, low, close, dates, **kwargs)
             data = candle_decr_data
         else:
-            candle_incr_data = FigureFactory._make_increasing_candle(open,
-                                                                     high,
-                                                                     low,
-                                                                     close,
-                                                                     dates,
-                                                                     **kwargs)
-            candle_decr_data = FigureFactory._make_decreasing_candle(open,
-                                                                     high,
-                                                                     low,
-                                                                     close,
-                                                                     dates,
-                                                                     **kwargs)
+            candle_incr_data = FigureFactory._make_increasing_candle(
+                open, high, low, close, dates, **kwargs)
+            candle_decr_data = FigureFactory._make_decreasing_candle(
+                open, high, low, close, dates, **kwargs)
             data = candle_incr_data + candle_decr_data
 
         layout = graph_objs.Layout(barmode='stack',
