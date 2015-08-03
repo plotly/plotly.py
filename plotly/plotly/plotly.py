@@ -1413,7 +1413,8 @@ def _send_to_plotly(figure, **plot_options):
     r = json.loads(r.text)
 
     # Check if the url needs a secret key
-    if plot_options['sharing'] == 'secret':
+    if (plot_options['sharing'] == 'secret' and
+            'share_key=' not in r['url']):
 
         # add_share_key_to_url updates the url to include the share_key
         r = add_share_key_to_url(r, **payload)
