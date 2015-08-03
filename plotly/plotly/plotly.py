@@ -164,7 +164,7 @@ def iplot(figure_or_data, **plot_options):
         plot_options['auto_open'] = False
     url = plot(figure_or_data, **plot_options)
     urlsplit = six.moves.urllib.parse.urlparse(url)
-    plot_id = urlsplit.path.split('/')[2]
+    file_id = urlsplit.path.split('/')[2]
 
     if isinstance(figure_or_data, dict):
         layout = figure_or_data.get('layout', {})
@@ -187,7 +187,7 @@ def iplot(figure_or_data, **plot_options):
     else:
         height = str(height) + 'px'
 
-    return tools.embed(url, plot_id, width, height)
+    return tools.embed(url, file_id, width, height)
 
 
 def plot(figure_or_data, validate=True, **plot_options):
@@ -1357,10 +1357,10 @@ def add_share_key_to_url(response, **payload):
     """
     domain = (get_session_config().get('plotly_domain') or
               get_config()['plotly_domain'])
-    plot_id = response['url'].replace(domain + "/~"
+    file_id = response['url'].replace(domain + "/~"
                                       + payload['un'] + "/", "")
 
-    url = _api_v2.api_url("files/") + payload['un'] + ":" + plot_id
+    url = _api_v2.api_url("files/") + payload['un'] + ":" + file_id
     plot_kwargs = json.loads(payload['kwargs'])
     new_response = requests.patch(url,
                                   headers=_api_v2.headers(),
