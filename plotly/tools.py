@@ -368,7 +368,18 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
     except:
         pass
     if _ipython_imported:
-        url = file_owner_or_url
+        if (file_id and
+                get_config_file()['plotly_domain'] not in file_owner_or_url):
+            plotly_domain = (
+                session.get_session_config().get('plotly_domain') or
+                get_config_file()['plotly_domain']
+            )
+            url = "{plotly_domain}/~{un}/{fid}".format(
+                plotly_domain=plotly_domain,
+                un=file_owner_or_url,
+                fid=file_id)
+        else:
+            url = file_owner_or_url
         return PlotlyDisplay(url, width, height)
     else:
         if (session.get_session_config()['plotly_domain'] !=
