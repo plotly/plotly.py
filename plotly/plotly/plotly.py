@@ -1278,7 +1278,7 @@ class _api_v2:
         try:
             response.raise_for_status()
         except requests.exceptions.HTTPError as requests_exception:
-            if (requests_exception == 404 and
+            if (response.status_code == 404 and
                     get_config()['plotly_api_domain']
                     != 'https://api.plot.ly'):
                 raise exceptions.PlotlyError(
