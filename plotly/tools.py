@@ -293,12 +293,11 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
         # to check for share_key we check urlsplit.query
         query_dict = six.moves.urllib.parse.parse_qs(urlsplit.query)
         if query_dict:
-            share_key = query_dict['share_key='][-1]
+            share_key = query_dict['share_key'][-1]
         else:
             share_key = ''
     else:
         file_owner = file_owner_or_url
-
     try:
         test_if_int = int(file_id)
     except ValueError:
@@ -312,7 +311,7 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
         raise exceptions.PlotlyError(
             "The 'file_id' argument must be a non-negative number."
         )
-    if share_key is None:
+    if share_key is '':
         s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\""
              "seamless=\"seamless\" "
              "src=\"{plotly_rest_url}/"
