@@ -1357,8 +1357,8 @@ def add_share_key_to_url(response, **payload):
     """
     domain = (get_session_config().get('plotly_domain') or
               get_config()['plotly_domain'])
-    file_id = response['url'].replace(domain + "/~"
-                                      + payload['un'] + "/", "")
+    urlsplit = six.moves.urllib.parse.urlparse(response['url'])
+    file_id = urlsplit.path.split('/')[2]
 
     url = _api_v2.api_url("files/") + payload['un'] + ":" + file_id
     plot_kwargs = json.loads(payload['kwargs'])
