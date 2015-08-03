@@ -62,7 +62,6 @@ _FILE_CONTENT = {CREDENTIALS_FILE: {'username': '',
                                     'api_key': '',
                                     'proxy_username': '',
                                     'proxy_password': '',
-                                    'api_key': '',
                                     'stream_ids': []},
                  CONFIG_FILE: {'plotly_domain': 'https://plot.ly',
                                'plotly_streaming_domain': 'stream.plot.ly',
@@ -84,6 +83,19 @@ try:
     _file_permissions = True
 except:
     _file_permissions = False
+
+
+def get_config_defaults():
+    """
+    Convenience function to check current settings against defaults.
+
+    Example:
+
+        if plotly_domain != get_config_defaults()['plotly_domain']:
+            # do something
+
+    """
+    return dict(_FILE_CONTENT[CONFIG_FILE])  # performs a shallow copy
 
 
 def check_file_permissions():
