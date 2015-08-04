@@ -102,6 +102,7 @@ def update_session_plot_options(**kwargs):
     :param (str|optional) filename: What the file will be named in Plotly
     :param (str|optional) fileopt: 'overwrite', 'append', 'new', or 'extend'
     :param (bool|optional) world_readable: Make public or private.
+    :param (dict|optional) sharing: 'public', 'private', 'secret'
     :param (bool|optional) auto_open: For `plot`, open in new browser tab?
     :param (bool|optional) validate: Error locally if data doesn't pass?
 
