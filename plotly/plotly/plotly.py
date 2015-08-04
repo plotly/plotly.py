@@ -1303,7 +1303,7 @@ class _api_v2:
             response.raise_for_status()
         except requests.exceptions.HTTPError as requests_exception:
             if (response.status_code == 404 and
-                    get_session_config()['plotly_api_domain']
+                    get_config()['plotly_api_domain']
                     != tools.get_config_defaults()['plotly_api_domain']):
                 raise exceptions.PlotlyError(
                     "This endpoint is unavailable at {url}. If you are using "
