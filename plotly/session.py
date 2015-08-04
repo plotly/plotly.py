@@ -40,7 +40,7 @@ PLOT_OPTIONS = {
     'world_readable': bool,
     'auto_open': bool,
     'validate': bool,
-    'sharing': dict
+    'sharing': six.string_types
 }
 
 
@@ -116,6 +116,13 @@ def update_session_plot_options(**kwargs):
         if not isinstance(kwargs[key], PLOT_OPTIONS[key]):
             raise exceptions.PlotlyError("{} must be of type '{}'"
                                          .format(key, PLOT_OPTIONS[key]))
+
+        # raise exception if sharing is invalid
+        if (key == 'sharing' and not (kwargs[key] in
+                                      ['public', 'private', 'secret'])):
+            raise exceptions.PlotlyError("'{}' must be of either {}"
+                                         .format(key, "'public', 'private'" +
+                                                 " or'secret'"))
 
     # update local _session dict with new plot options
     _session['plot_options'].update(kwargs)

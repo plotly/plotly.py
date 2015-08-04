@@ -42,7 +42,7 @@ DEFAULT_PLOT_OPTIONS = {
     'world_readable': True,
     'auto_open': True,
     'validate': True,
-    'sharing': {"public", "private", "secret"}
+    'sharing': "public"
 }
 
 # test file permissions and make sure nothing is corrupted
