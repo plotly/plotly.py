@@ -1306,7 +1306,12 @@ class _api_v2:
                     get_config()['plotly_api_domain']
                     != 'https://api.plot.ly'):
                 raise exceptions.PlotlyError(
-                    " "
+                    "This endpoint is unavailable at {url}. If you are using "
+                    "Plotly Enterprise, you may need to upgrade your Plotly "
+                    "Enterprise server to request against this endpoint or "
+                    "this endpoint may not be available yet.\nQuestions? "
+                    "support@plot.ly".format(url=get_config()
+                                             ['plotly_api_domain'])
                 )
             else:
                 plotly_exception = exceptions.PlotlyRequestError(
@@ -1379,8 +1384,6 @@ def add_share_key_to_url(response, **payload):
                     set privacy for the url
 
     """
-    domain = (get_session_config().get('plotly_domain') or
-              get_config()['plotly_domain'])
     urlsplit = six.moves.urllib.parse.urlparse(response['url'])
     file_id = urlsplit.path.split('/')[2]
 
