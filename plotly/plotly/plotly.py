@@ -111,7 +111,7 @@ def _plot_option_logic(plot_options):
 
     # Check for any conflicts between 'sharing' and 'world_readable'
     if 'sharing' in plot_options:
-        if plot_options['sharing'] in DEFAULT_PLOT_OPTIONS['sharing']:
+        if plot_options['sharing'] in ['public', 'private', 'secret']:
 
             if 'world_readable' not in plot_options:
                 if plot_options['sharing'] != 'public':
