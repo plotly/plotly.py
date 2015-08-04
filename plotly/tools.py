@@ -1762,7 +1762,6 @@ class FigureFactory(object):
                              y=streamline_y + arrow_y,
                              mode='lines', **kwargs)
 
-<<<<<<< HEAD
         data = [streamline]
         layout = graph_objs.Layout(hovermode='closest')
 
@@ -2290,7 +2289,9 @@ class FigureFactory(object):
         colorscale: Optional colorscale for dendgrogram tree clusters
         """
 
-        #TODO: add validations of input
+        s = X.shape
+        if len(s) != 2:
+            exceptions.PlotlyError("X should be 2-dimensional array.")
 
         dendrogram = _Dendrogram(X, orientation, labels, colorscale)
         return dendrogram
