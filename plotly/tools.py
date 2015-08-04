@@ -2274,6 +2274,99 @@ class FigureFactory(object):
 
         return dict(data=data, layout=layout)
 
+    @staticmethod
+    def create_distplot(hist_data, group_labels,
+                        bin_size=1., curve_type='kde',
+                        show_hist=True, show_curve=True,
+                        show_rug=True, **kwargs):
+        """
+        BETA function that creates a distplot similar to seaborn.distplot
+
+        The distplot can be composed of all or any combination of the following
+        3 components: (1) histogram, (2) curve: (a) kernal density estimation
+        or (b)normal curve, and (3)rug plot. Additionally, multiple distplots
+        (from multiple datasets) can be created in the same plot.
+
+        :param (list) hist_data: list of histogram data, should be a list of
+            lists if multiple data sets are plotted on the same plot
+        :param (list) group_labels: list of strings of the name of each data
+            set
+        :param (float) bin_size: size of histogram bin, default = 1.
+        :param (string) curve_type: 'kde' or 'normal', default = 'kde'
+        :param (bool) show_hist: True/False defines if histogram is added to
+            distplot, default = True
+        :param (bool) show_curve: True/False defines if curve is added to
+            distplot, default = True
+        :param (bool) show_rug: True/False defines if rug plot is added to
+            distplot, default = True
+        :param (list) colors: list of strings of color values,
+            default = first 10 Plot.ly colors
+        :param (list) rug_text: list of strings of hovertext for rug_plot,
+            default=None
+
+        :rtype (dict): returns a representation of a distplot figure.
+
+        Example 1: Simple distplot of 1 data set
+        ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+
+        import scipy
+
+        fig = FF.create_displot()
+        py.plot(fig, filename='finance/aapl-candlestick', validate=False)
+        ```
+        """
+        hist = _Distplot(
+            hist_data, group_labels, bin_size,
+            curve_type, **kwargs).make_hist()
+        if curve_type == 'normal':
+            curve = _Distplot(
+                hist_data, group_labels, bin_size,
+                curve_type, **kwargs).make_normal()
+        else:
+            curve = _Distplot(
+                hist_data, group_labels, bin_size,
+                curve_type, **kwargs).make_kde()
+        rug = _Distplot(
+            hist_data, group_labels, bin_size,
+            curve_type, **kwargs).make_rug()
+
+        data = []
+        if show_hist:
+            data.append(hist)
+        if show_curve:
+            data.append(curve)
+        if show_rug:
+            data.append(rug)
+            layout = graph_objs.Layout(
+                barmode='overlay',
+                hovermode='closest',
+                xaxis1=dict(domain=[0.0, 1.0],
+                            anchor='y2',
+                            zeroline=False),
+                yaxis1=dict(domain=[0.35, 1],
+                            anchor='free',
+                            position=0.0),
+                yaxis2=dict(domain=[0, 0.25],
+                            anchor='x1',
+                            dtick=1))
+        else:
+                layout = graph_objs.Layout(
+                    barmode='overlay',
+                    hovermode='closest',
+                    xaxis1=dict(domain=[0.0, 1.0],
+                                anchor='y2',
+                                zeroline=False),
+                    yaxis1=dict(domain=[0., 1],
+                                anchor='free',
+                                position=0.0))
+
+        data = sum(data, [])
+        dist_fig = dict(data=data, layout=layout)
+
+        return dist_fig
+
 
 class _Quiver(FigureFactory):
     """
@@ -2870,4 +2963,151 @@ class _Candlestick(FigureFactory):
 
         return (decrease_x, decrease_close, decrease_dif,
                 stick_decrease_y, stick_decrease_x)
+
+
+class _Distplot(FigureFactory):
+    """
+    Refer to TraceFactory.create_distplot() for docstring
+    """
+    def __init__(self, hist_data, group_labels,
+                 bin_size, curve_type,
+                 **kwargs):
+        self.hist_data = hist_data
+        self.group_labels = group_labels
+        self.bin_size = bin_size
+        if 'rug_text' in kwargs:
+            self.rug_text = rug_text
+        else:
+            self.rug_text = None
+        self.trace_number = len(hist_data)
+
+        self.start = []
+        self.end = []
+        if 'colors' in kwargs:
+            self.colors = colors
+        else:
+            self.colors = colors = [
+                "rgb(31, 119, 180)", "rgb(255, 127, 14)",
+                "rgb(44, 160, 44)", "rgb(214, 39, 40)",
+                "rgb(148, 103, 189)", "rgb(140, 86, 75)",
+                "rgb(227, 119, 194)", "rgb(127, 127, 127)",
+                "rgb(188, 189, 34)", "rgb(23, 190, 207)"]
+        self.curve_x = [None]*self.trace_number
+        self.curve_y = [None]*self.trace_number
+
+        for trace in self.hist_data:
+            self.start.append(min(trace)*1.)
+            self.end.append(max(trace)*1.)
+
+    def make_hist(self):
+        """
+        Makes the histogram(s) for FigureFactory.create_distplot().
+
+        :rtype (list) hist: list of histogram representations
+        """
+        hist = [None]*self.trace_number
+
+        for index in range(self.trace_number):
+            hist[index] = dict(type='histogram',
+                               x=self.hist_data[index],
+                               xaxis='x1',
+                               yaxis='y1',
+                               histnorm='probability',
+                               name=self.group_labels[index],
+                               legendgroup=self.group_labels[index],
+                               marker=dict(color=self.colors[index]),
+                               autobinx=False,
+                               xbins=dict(start=self.start[index],
+                                          end=self.end[index],
+                                          size=self.bin_size),
+                               opacity=.7)
+        return hist
+
+    def make_kde(self):
+        """
+        Makes the kernal density estimation(s) for create_distplot().
+
+        This is called when curve_type = 'kde' in create_distplot().
+
+        :rtype (list) curve: list of kde representations
+        """
+        curve = [None]*self.trace_number
+        for index in range(self.trace_number):
+            self.curve_x[index] = [self.start[index] +
+                                   x * (self.end[index] - self.start[index])
+                                   / 500 for x in range(500)]
+            self.curve_y[index] = (gaussian_kde(self.hist_data[index])
+                                   (self.curve_x[index]))
+            self.curve_y[index] *= self.bin_size
+
+        for index in range(self.trace_number):
+            curve[index] = dict(type='scatter',
+                                x=self.curve_x[index],
+                                y=self.curve_y[index],
+                                xaxis='x1',
+                                yaxis='y1',
+                                mode='lines',
+                                name=self.group_labels[index],
+                                legendgroup=self.group_labels[index],
+                                showlegend=False,
+                                marker=dict(color=self.colors[index]))
+        return curve
+
+    def make_normal(self):
+        """
+        Makes the normal curve(s) for create_distplot().
+
+        This is called when curve_type = 'normal' in create_distplot().
+
+        :rtype (list) curve: list of normal curve representations
+        """
+        curve = [None]*self.trace_number
+        mean = [None]*self.trace_number
+        sd = [None]*self.trace_number
+
+        for index in range(self.trace_number):
+            mean[index], sd[index] = norm.fit(self.hist_data[index])
+            self.curve_x[index] = [self.start[index] +
+                                   x * (self.end[index] - self.start[index])
+                                   / 500 for x in range(500)]
+            self.curve_y[index] = norm.pdf(
+                self.curve_x[index], loc=mean[index], scale=sd[index])
+            self.curve_y[index] *= self.bin_size
+
+        for index in range(self.trace_number):
+            curve[index] = dict(type='scatter',
+                                x=self.curve_x[index],
+                                y=self.curve_y[index],
+                                xaxis='x1',
+                                yaxis='y1',
+                                mode='lines',
+                                name=self.group_labels[index],
+                                legendgroup=self.group_labels[index],
+                                showlegend=False,
+                                marker=dict(color=self.colors[index]))
+        return curve
+
+    def make_rug(self):
+        """
+        Makes the rug plot(s) for FigureFactory.create_distplot().
+
+        :rtype (list) rug: list of rug plot representations
+        """
+        rug = [None]*self.trace_number
+        for index in range(self.trace_number):
+
+            rug[index] = dict(type='scatter',
+                              x=self.hist_data[index],
+                              y=([self.group_labels[index]] *
+                                 len(self.hist_data[index])),
+                              xaxis='x1',
+                              yaxis='y2',
+                              mode='markers',
+                              name=self.group_labels[index],
+                              legendgroup=self.group_labels[index],
+                              showlegend=False,
+                              text=self.rug_text,
+                              marker=dict(color=self.colors[index],
+                                          symbol='line-ns-open'))
+        return rug
 
