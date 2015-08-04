@@ -1372,29 +1372,22 @@ def validate_credentials(credentials):
         raise exceptions.PlotlyLocalCredentialsError()
 
 
-def add_share_key_to_url(response, **payload):
+def add_share_key_to_url(response):
     """
     Update plot's url to include the secret key
 
-    payload keyword agruments:
-    un (string) -- username from credentials file
-    kwargs (dict) --
-        'world_readable': (bool) make the plot public/ private
-        'sharing': ('public' | 'private' | 'secret')
-                    set privacy for the url
-
     """
     urlsplit = six.moves.urllib.parse.urlparse(response['url'])
+    file_owner = urlsplit.path.split('/')[1].split('~')[1]
     file_id = urlsplit.path.split('/')[2]
 
-    url = _api_v2.api_url("files/") + payload['un'] + ":" + file_id
-    plot_kwargs = json.loads(payload['kwargs'])
+    url = _api_v2.api_url("files/") + file_owner + ":" + file_id
     new_response = requests.patch(url,
                                   headers=_api_v2.headers(),
                                   data={"share_key_enabled":
                                         "True",
                                         "world_readable":
-                                        plot_kwargs['world_readable']})
+                                        "False"})
 
     _api_v2.response_handler(new_response)
 
@@ -1444,7 +1437,7 @@ def _send_to_plotly(figure, **plot_options):
             'share_key=' not in r['url']):
 
         # add_share_key_to_url updates the url to include the share_key
-        r = add_share_key_to_url(r, **payload)
+        r = add_share_key_to_url(r)
 
     if 'error' in r and r['error'] != '':
         print(r['error'])
