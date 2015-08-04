@@ -122,7 +122,7 @@ def update_session_plot_options(**kwargs):
                                       ['public', 'private', 'secret'])):
             raise exceptions.PlotlyError("'{}' must be of either {}"
                                          .format(key, "'public', 'private'" +
-                                                 " or'secret'"))
+                                                 " or 'secret'"))
 
     # update local _session dict with new plot options
     _session['plot_options'].update(kwargs)
