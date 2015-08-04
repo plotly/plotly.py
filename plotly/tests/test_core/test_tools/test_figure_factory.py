@@ -807,10 +807,10 @@ class TestFinanceCharts(TestCase):
 class TestDendrogram(TestCase):
 
     def test_default_dendrogram(self):
-        dendro = tls.TraceFactory.create_dendrogram(X=[[1, 2, 3, 4],
+        dendro = tls.FigureFactory.create_dendrogram(X=np.array([[1, 2, 3, 4],
                                                        [1, 1, 3, 4],
                                                        [1, 2, 1, 4],
-                                                       [1, 2, 3, 1]])
+                                                       [1, 2, 3, 1]]))
         expected_dendro_data = [{'marker': {'color': 'rgb(255,133,27)'},
                                  'mode': 'lines', 'xaxis': 'xs',
                                  'yaxis': 'ys',
@@ -844,7 +844,7 @@ class TestDendrogram(TestCase):
         # variable 2 is correlated with all the other variables
         X[2,:] = sum(X,0)
 
-        dendro = tls.TraceFactory.create_dendrogram(X)
+        dendro = tls.FigureFactory.create_dendrogram(X)
 
         # Check that 2 is in a separate cluster
         self.assertEqual(dendro.labels[0], '2')

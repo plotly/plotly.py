@@ -2711,8 +2711,6 @@ class _Streamline(FigureFactory):
         streamline_y = sum(self.st_y, [])
         return streamline_x, streamline_y
 
-<<<<<<< HEAD
-
 class _OHLC(FigureFactory):
     """
     Refer to FigureFactory.create_ohlc_increase() for docstring.
@@ -2893,7 +2891,7 @@ class _Candlestick(FigureFactory):
         return (decrease_x, decrease_close, decrease_dif,
                 stick_decrease_y, stick_decrease_x)
 
-class _Dendrogram(TraceFactory):
+class _Dendrogram(FigureFactory):
     ''' Returns a Dendrogram figure object
         Example usage:
         D = Dendrogram( Z )
