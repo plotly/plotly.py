@@ -1372,12 +1372,12 @@ def validate_credentials(credentials):
         raise exceptions.PlotlyLocalCredentialsError()
 
 
-def add_share_key_to_url(response):
+def add_share_key_to_url(plot_url):
     """
     Update plot's url to include the secret key
 
     """
-    urlsplit = six.moves.urllib.parse.urlparse(response['url'])
+    urlsplit = six.moves.urllib.parse.urlparse(plot_url)
     file_owner = urlsplit.path.split('/')[1].split('~')[1]
     file_id = urlsplit.path.split('/')[2]
 
@@ -1392,9 +1392,9 @@ def add_share_key_to_url(response):
     _api_v2.response_handler(new_response)
 
     new_response_data = json.loads(new_response.content)
-    response['url'] += '?share_key=' + new_response_data['share_key']
+    plot_url += '?share_key=' + new_response_data['share_key']
 
-    return response
+    return plot_url
 
 
 def _send_to_plotly(figure, **plot_options):
@@ -1437,7 +1437,7 @@ def _send_to_plotly(figure, **plot_options):
             'share_key=' not in r['url']):
 
         # add_share_key_to_url updates the url to include the share_key
-        r = add_share_key_to_url(r)
+        r['url'] = add_share_key_to_url(r['url'])
 
     if 'error' in r and r['error'] != '':
         print(r['error'])
