@@ -53,7 +53,7 @@ except ImportError:
 
 try:
     import scipy
-    from scipy.stats import norm, gaussian_kde
+    import scipy.stats
     _scipy_imported = True
 except ImportError:
     _scipy_imported = False
@@ -2351,16 +2351,14 @@ class FigureFactory(object):
         import plotly.plotly as py
         from plotly.tools import FigureFactory as FF
 
+        hist_data = [[1.1, 1.1, 2.5, 3.0, 3.5,
+                      3.5, 4.1, 4.4, 4.5, 4.5,
+                      5.0, 5.0, 5.2, 5.5, 5.5,
+                      5.5, 5.5, 5.5, 6.1, 7.0]]
 
+        group_labels = ['distplot example']
 
-        hist_x = [[1.1, 1.1, 2.5, 3.0, 3.5,
-                   3.5, 4.1, 4.4, 4.5, 4.5,
-                   5.0, 5.0, 5.2, 5.5, 5.5,
-                   5.5, 5.5, 5.5, 6.1, 7.0]]
-
-        group_label = ['distplot example']
-
-        fig = FF.create_distplot(hist_x, group_label)
+        fig = FF.create_distplot(hist_data, group_labels)
 
         url = py.plot(fig, filename='Simple distplot', validate=False)
         ```
@@ -2379,7 +2377,7 @@ class FigureFactory(object):
                    -0.3, 1.2, 0.56, 0.3, 2.2]
 
         # Group data together
-        all_hist_data = [hist1_x] + [hist2_x]
+        hist_data = [hist1_x] + [hist2_x]
 
         group_labels = ['2012', '2013']
 
@@ -2389,13 +2387,13 @@ class FigureFactory(object):
 
         # Create distplot
         fig = FF.create_distplot(
-            all_hist_data, group_labels, rug_text=rug_text, bin_size=.2)
+            hist_data, group_labels, rug_text=rug_text, bin_size=.2)
 
         # Add title
         fig['layout'].update(title='Dist Plot')
 
         # Plot!
-        py.iplot(fig, filename='Distplot with rug text', validate=False)
+        url = py.plot(fig, filename='Distplot with rug text', validate=False)
         ```
 
         Example 3: Plot with normal curve and hide rug plot
@@ -2408,11 +2406,11 @@ class FigureFactory(object):
         x3 = np.random.randn(10)-1
         x4 = np.random.randn(10)+2
 
-        all_hist_data = [x1] + [x2] + [x3] + [x4]
+        hist_data = [x1] + [x2] + [x3] + [x4]
         group_labels = ['2012', '2013', '2014', '2015']
 
         fig = FF.create_distplot(
-            all_hist_data, group_labels, curve_type='normal',
+            hist_data, group_labels, curve_type='normal',
             show_rug=False, bin_size=.4)
 
         url = py.plot(fig, filename='hist and normal curve', validate=False)
@@ -3139,7 +3137,8 @@ class _Distplot(FigureFactory):
             self.curve_x[index] = [self.start[index] +
                                    x * (self.end[index] - self.start[index])
                                    / 500 for x in range(500)]
-            self.curve_y[index] = (gaussian_kde(self.hist_data[index])
+            self.curve_y[index] = (scipy.stats.gaussian_kde
+                                   (self.hist_data[index])
                                    (self.curve_x[index]))
             self.curve_y[index] *= self.bin_size
 
@@ -3169,11 +3168,12 @@ class _Distplot(FigureFactory):
         sd = [None]*self.trace_number
 
         for index in range(self.trace_number):
-            mean[index], sd[index] = norm.fit(self.hist_data[index])
+            mean[index], sd[index] = (scipy.stats.norm.fit
+                                      (self.hist_data[index]))
             self.curve_x[index] = [self.start[index] +
                                    x * (self.end[index] - self.start[index])
                                    / 500 for x in range(500)]
-            self.curve_y[index] = norm.pdf(
+            self.curve_y[index] = scipy.stats.norm.pdf(
                 self.curve_x[index], loc=mean[index], scale=sd[index])
             self.curve_y[index] *= self.bin_size
 
