@@ -9,6 +9,30 @@ from plotly.exceptions import PlotlyError
 from plotly.graph_objs import graph_objs
 
 
+class TestDistplot(TestCase):
+
+    def test_wrong_curve_type(self):
+        kwargs = {'hist_data': [[1, 2, 3]], 'group_labels': ['group'],
+                  'curve_type': 'curve'}
+        self.assertRaisesRegexp(PlotlyError, "curve_type must be defined as "
+                                             "'kde' or 'normal'",
+                                tls.FigureFactory.create_distplot, **kwargs)
+
+    def test_wrong_histdata_format(self):
+        kwargs = {'hist_data': [1, 2, 3], 'group_labels': ['group']}
+        self.assertRaises(PlotlyError, tls.FigureFactory.create_distplot,
+                          **kwargs)
+
+    def test_unequal_data_label_length(self):
+        kwargs = {'hist_data': [[1, 2]], 'group_labels': ['group', 'group2']}
+        self.assertRaises(PlotlyError, tls.FigureFactory.create_distplot,
+                          **kwargs)
+
+        kwargs = {'hist_data': [[1, 2], [1, 2, 3]], 'group_labels': ['group']}
+        self.assertRaises(PlotlyError, tls.FigureFactory.create_distplot,
+                          **kwargs)
+
+
 class TestQuiver(TestCase):
 
     def test_unequal_xy_length(self):

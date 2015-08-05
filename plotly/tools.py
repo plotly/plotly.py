@@ -1501,6 +1501,28 @@ class FigureFactory(object):
                                          "'both'")
 
     @staticmethod
+    def validate_distplot(hist_data, curve_type):
+        """
+        distplot specific validations
+
+        :raises: (PlotlyError) If hist_data is not a list of lists
+        :raises: (PlotlyError) If curve_type is not valid (i.e. not 'kde' or
+            'normal').
+        """
+        if type(hist_data[0]) not in [list, np.ndarray]:
+            raise exceptions.PlotlyError("Oops, this function was written to "
+                                         "handle multiple datasets, if you "
+                                         "want to plot just one, make sure "
+                                         "your hist_data variable is still "
+                                         "a list of lists, i.e. x = "
+                                         "[1, 2, 3] -> x = [[1, 2, 3]]")
+
+        curve_opts = ('kde', 'normal')
+        if curve_type not in curve_opts:
+            raise exceptions.PlotlyError("curve_type must be defined as "
+                                         "'kde' or 'normal'")
+
+    @staticmethod
     def validate_positive_scalars(**kwargs):
         """
         Validates that all values given in key/val pairs are positive.
@@ -2311,12 +2333,79 @@ class FigureFactory(object):
         import plotly.plotly as py
         from plotly.tools import FigureFactory as FF
 
-        import scipy
+        from scipy.stats import norm, gaussian_kde
 
-        fig = FF.create_displot()
-        py.plot(fig, filename='finance/aapl-candlestick', validate=False)
+        hist_x = [[1.1, 1.1, 2.5, 3.0, 3.5,
+                   3.5, 4.1, 4.4, 4.5, 4.5,
+                   5.0, 5.0, 5.2, 5.5, 5.5,
+                   5.5, 5.5, 5.5, 6.1, 7.0]]
+
+        group_label = ['distplot example']
+
+        fig = FF.create_distplot(hist_x, group_label)
+
+        url = py.plot(fig, filename='Simple distplot', validate=False)
         ```
+
+        Example 2: Two data sets and added rug text
+        ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+
+        from scipy.stats import norm, gaussian_kde
+
+        # Add histogram data
+        hist1_x = [0.8, 1.2, 0.2, 0.6, 1.6,
+                   -0.9, -0.07, 1.95, 0.9, -0.2,
+                   -0.5, 0.3, 0.4, -0.37, 0.6]
+        hist2_x = [0.8, 1.5, 1.5, 0.6, 0.59,
+                   1.0, 0.8, 1.7, 0.5, 0.8,
+                   -0.3, 1.2, 0.56, 0.3, 2.2]
+
+        # Group data together
+        all_hist_data = [hist1_x] + [hist2_x]
+
+        group_labels = ['2012', '2013']
+
+        rug_text = ['a', 'b', 'c', 'd', 'e',
+                    'f', 'g', 'h', 'i', 'j',
+                    'k', 'l', 'm', 'n', 'o']
+
+        # Create distplot
+        fig = FF.create_distplot(
+            all_hist_data, group_labels, rug_text=rug_text, bin_size=.2)
+
+        # Add title
+        fig['layout'].update(title='Dist Plot')
+
+        # Plot!
+        py.iplot(fig, filename='Distplot with rug text', validate=False)
+        ```
+
+        Example 3: Plot with normal curve and hide rug plot
+        ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+
+        from scipy.stats import norm, gaussian_kde
+
+        x1 = np.random.randn(20)
+        x2 = np.random.randn(40)+1
+        x3 = np.random.randn(10)-1
+        x4 = np.random.randn(10)+2
+
+        all_hist_data = [x1] + [x2] + [x3] + [x4]
+        hist_labels = ['2012', '2013', '2014', '2015']
+
+        fig = FF.create_distplot(
+            all_hist_data, hist_labels, curve_type='normal',
+            show_rug=False, bin_size=.4)
+
+        url = py.plot(fig, filename='hist and normal curve', validate=False)
         """
+        FigureFactory.validate_distplot(hist_data, curve_type)
+        FigureFactory.validate_equal_length(hist_data, group_labels)
+
         hist = _Distplot(
             hist_data, group_labels, bin_size,
             curve_type, **kwargs).make_hist()
@@ -3089,7 +3178,7 @@ class _Distplot(FigureFactory):
 
     def make_rug(self):
         """
-        Makes the rug plot(s) for FigureFactory.create_distplot().
+        Makes the rug plot(s) for create_distplot().
 
         :rtype (list) rug: list of rug plot representations
         """
