@@ -51,6 +51,12 @@ try:
 except ImportError:
     _numpy_imported = False
 
+try:
+    from scipy.stats import norm, gaussian_kde
+    _scipy_imported = True
+except ImportError:
+    _scipy_imported = False
+
 PLOTLY_DIR = os.path.join(os.path.expanduser("~"), ".plotly")
 CREDENTIALS_FILE = os.path.join(PLOTLY_DIR, ".credentials")
 CONFIG_FILE = os.path.join(PLOTLY_DIR, ".config")
@@ -1509,18 +1515,29 @@ class FigureFactory(object):
         :raises: (PlotlyError) If curve_type is not valid (i.e. not 'kde' or
             'normal').
         """
-        if type(hist_data[0]) not in [list, np.ndarray]:
-            raise exceptions.PlotlyError("Oops, this function was written to "
-                                         "handle multiple datasets, if you "
-                                         "want to plot just one, make sure "
-                                         "your hist_data variable is still "
-                                         "a list of lists, i.e. x = "
+        if _numpy_imported is True:
+            if type(hist_data[0]) not in [list, np.ndarray]:
+                raise exceptions.PlotlyError("Oops, this function was written "
+                                             "to handle multiple datasets, if "
+                                             "you want to plot just one, make "
+                                             "sure your hist_data variable is "
+                                             "still a list of lists, i.e. x = "
+                                             "[1, 2, 3] -> x = [[1, 2, 3]]")
+        elif type(hist_data[0]) is not list:
+            raise exceptions.PlotlyError("Oops, this function was written "
+                                         "to handle multiple datasets, if "
+                                         "you want to plot just one, make "
+                                         "sure your hist_data variable is "
+                                         "still a list of lists, i.e. x = "
                                          "[1, 2, 3] -> x = [[1, 2, 3]]")
 
         curve_opts = ('kde', 'normal')
         if curve_type not in curve_opts:
             raise exceptions.PlotlyError("curve_type must be defined as "
                                          "'kde' or 'normal'")
+
+        if _scipy_imported is False:
+            raise ImportError("FigureFactory.create_distplot requires scipy")
 
     @staticmethod
     def validate_positive_scalars(**kwargs):
@@ -2395,10 +2412,10 @@ class FigureFactory(object):
         x4 = np.random.randn(10)+2
 
         all_hist_data = [x1] + [x2] + [x3] + [x4]
-        hist_labels = ['2012', '2013', '2014', '2015']
+        group_labels = ['2012', '2013', '2014', '2015']
 
         fig = FF.create_distplot(
-            all_hist_data, hist_labels, curve_type='normal',
+            all_hist_data, group_labels, curve_type='normal',
             show_rug=False, bin_size=.4)
 
         url = py.plot(fig, filename='hist and normal curve', validate=False)

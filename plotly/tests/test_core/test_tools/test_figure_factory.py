@@ -12,6 +12,10 @@ from plotly.graph_objs import graph_objs
 class TestDistplot(TestCase):
 
     def test_wrong_curve_type(self):
+
+        # check: PlotlyError (and specific message) is raised if curve_type is
+        # not 'kde' or 'normal'
+
         kwargs = {'hist_data': [[1, 2, 3]], 'group_labels': ['group'],
                   'curve_type': 'curve'}
         self.assertRaisesRegexp(PlotlyError, "curve_type must be defined as "
@@ -19,6 +23,11 @@ class TestDistplot(TestCase):
                                 tls.FigureFactory.create_distplot, **kwargs)
 
     def test_wrong_histdata_format(self):
+
+        # check: PlotlyError if hist_data is not a list of lists or list of
+        # np.ndarrays (if hist_data is entered as just a list the function
+        # will fail)
+
         kwargs = {'hist_data': [1, 2, 3], 'group_labels': ['group']}
         self.assertRaises(PlotlyError, tls.FigureFactory.create_distplot,
                           **kwargs)

@@ -7,6 +7,119 @@ import math
 from nose.tools import raises
 
 import numpy as np
+from scipy.stats import norm, gaussian_kde
+
+
+class TestDistplot(TestCase):
+
+    def test_simple_distplot(self):
+
+        # we should be able to create a single distplot with a simple dataset
+        # and default kwargs
+
+        dp = tls.FigureFactory.create_distplot(hist_data=[[1, 2, 2, 3]],
+                                               group_labels=['distplot'])
+        expected_dp_layout = {'barmode': 'overlay',
+                                         'hovermode': 'closest',
+                                         'xaxis1': {'anchor': 'y2',
+                                                    'domain': [0.0, 1.0],
+                                                    'zeroline': False},
+                                         'yaxis1': {'anchor': 'free',
+                                                    'domain': [0.35, 1],
+                                                    'position': 0.0},
+                                         'yaxis2': {'anchor': 'x1',
+                                                    'domain': [0, 0.25],
+                                                    'dtick': 1}}
+        self.assertEqual(dp['layout'], expected_dp_layout)
+
+        expected_dp_data_hist = {'autobinx': False,
+                                 'histnorm': 'probability',
+                                 'legendgroup': 'distplot',
+                                 'marker': {'color': 'rgb(31, 119, 180)'},
+                                 'name': 'distplot',
+                                 'opacity': 0.7,
+                                 'type': 'histogram',
+                                 'x': [1, 2, 2, 3],
+                                 'xaxis': 'x1',
+                                 'xbins': {'end': 3.0, 'size': 1.0,
+                                           'start': 1.0},
+                                 'yaxis': 'y1'}
+        self.assertEqual(dp['data'][0], expected_dp_data_hist)
+
+        expected_dp_data_rug = {'legendgroup': 'distplot',
+                                'marker': {'color': 'rgb(31, 119, 180)',
+                                           'symbol': 'line-ns-open'},
+                                'mode': 'markers',
+                                'name': 'distplot',
+                                'showlegend': False,
+                                'text': None,
+                                'type': 'scatter',
+                                'x': [1, 2, 2, 3],
+                                'xaxis': 'x1',
+                                'y': ['distplot', 'distplot', 'distplot',
+                                      'distplot'],
+                                'yaxis': 'y2'}
+        self.assertEqual(dp['data'][2], expected_dp_data_rug)
+
+    def test_distplot_more_args(self):
+
+        # we should be able to create a distplot with 2 datasets no
+        # rugplot, defined bin_size, and added title
+
+        hist1_x = [0.8, 1.2, 0.2, 0.6, 1.6,
+                   -0.9, -0.07, 1.95, 0.9, -0.2,
+                   -0.5, 0.3, 0.4, -0.37, 0.6]
+        hist2_x = [0.8, 1.5, 1.5, 0.6, 0.59,
+                   1.0, 0.8, 1.7, 0.5, 0.8,
+                   -0.3, 1.2, 0.56, 0.3, 2.2]
+
+        hist_data = [hist1_x] + [hist2_x]
+        group_labels = ['2012', '2013']
+
+        dp = tls.FigureFactory.create_distplot(hist_data, group_labels,
+                                               show_rug=False, bin_size=.2)
+        dp['layout'].update(title='Dist Plot')
+
+        expected_dp_layout = {'barmode': 'overlay',
+                              'hovermode': 'closest',
+                              'title': 'Dist Plot',
+                              'xaxis1': {'anchor': 'y2', 'domain': [0.0, 1.0],
+                                         'zeroline': False},
+                              'yaxis1': {'anchor': 'free', 'domain': [0.0, 1],
+                                         'position': 0.0}}
+        self.assertEqual(dp['layout'], expected_dp_layout)
+
+        expected_dp_data_hist_1 = {'autobinx': False,
+                                   'histnorm': 'probability',
+                                   'legendgroup': '2012',
+                                   'marker': {'color': 'rgb(31, 119, 180)'},
+                                   'name': '2012',
+                                   'opacity': 0.7,
+                                   'type': 'histogram',
+                                   'x': [0.8, 1.2, 0.2, 0.6, 1.6, -0.9, -0.07,
+                                         1.95, 0.9, -0.2, -0.5, 0.3, 0.4,
+                                         -0.37, 0.6],
+                                   'xaxis': 'x1',
+                                   'xbins': {'end': 1.95, 'size': 0.2,
+                                             'start': -0.9},
+                                   'yaxis': 'y1'}
+        self.assertEqual(dp['data'][0], expected_dp_data_hist_1)
+
+        expected_dp_data_hist_2 = {'autobinx': False,
+                                   'histnorm': 'probability',
+                                   'legendgroup': '2013',
+                                   'marker': {'color': 'rgb(255, 127, 14)'},
+                                   'name': '2013',
+                                   'opacity': 0.7,
+                                   'type': 'histogram',
+                                   'x': [0.8, 1.5, 1.5, 0.6, 0.59, 1.0, 0.8,
+                                         1.7, 0.5, 0.8, -0.3, 1.2, 0.56, 0.3,
+                                         2.2],
+                                   'xaxis': 'x1',
+                                   'xbins': {'end': 2.2, 'size': 0.2,
+                                             'start': -0.3},
+                                   'yaxis': 'y1'}
+        self.assertEqual(dp['data'][1], expected_dp_data_hist_2)
 
 
 class TestStreamline(TestCase):
