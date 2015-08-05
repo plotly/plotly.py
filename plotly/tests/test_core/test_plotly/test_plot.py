@@ -83,7 +83,9 @@ class TestPlot(TestCase):
 
         kwargs = {'filename': 'invalid-sharing-argument',
                   'sharing': 'privste'}
-        self.assertRaises(PlotlyError, py.plot, fig, **kwargs)
+
+        with self.assertRaisesRegexp(PlotlyError, 'sharing'):
+            py.plot(fig, **kwargs)
 
     def test_plot_world_readable_sharing_conflict_1(self):
 
@@ -101,7 +103,9 @@ class TestPlot(TestCase):
         kwargs = {'filename': 'invalid-privacy-setting',
                   'world_readable': False,
                   'sharing': 'public'}
-        self.assertRaises(PlotlyError, py.plot, fig, **kwargs)
+
+        with self.assertRaisesRegexp(PlotlyError, 'sharing'):
+            py.plot(fig, **kwargs)
 
     def test_plot_world_readable_sharing_conflict_2(self):
 
@@ -119,7 +123,9 @@ class TestPlot(TestCase):
         kwargs = {'filename': 'invalid-privacy-setting',
                   'world_readable': True,
                   'sharing': 'secret'}
-        self.assertRaises(PlotlyError, py.plot, fig, **kwargs)
+
+        with self.assertRaisesRegexp(PlotlyError, 'sharing'):
+            py.plot(fig, **kwargs)
 
     def test_plot_option_logic_only_world_readable_given(self):
 
