@@ -380,8 +380,7 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
     except:
         pass
     if _ipython_imported:
-        if (file_id and
-                get_config_file()['plotly_domain'] not in file_owner_or_url):
+        if (file_id):
             plotly_domain = (
                 session.get_session_config().get('plotly_domain') or
                 get_config_file()['plotly_domain']
