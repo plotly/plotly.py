@@ -311,7 +311,7 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
         file_owner = file_owner_or_url
         share_key = ''
     try:
-        test_if_int = int(0 if file_id is None else file_id)
+        test_if_int = int(file_id)
     except ValueError:
         raise exceptions.PlotlyError(
             "The 'file_id' argument was not able to be converted into an "
