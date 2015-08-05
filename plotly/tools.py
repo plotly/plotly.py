@@ -52,6 +52,7 @@ except ImportError:
     _numpy_imported = False
 
 try:
+    import scipy
     from scipy.stats import norm, gaussian_kde
     _scipy_imported = True
 except ImportError:
@@ -2350,7 +2351,7 @@ class FigureFactory(object):
         import plotly.plotly as py
         from plotly.tools import FigureFactory as FF
 
-        from scipy.stats import norm, gaussian_kde
+
 
         hist_x = [[1.1, 1.1, 2.5, 3.0, 3.5,
                    3.5, 4.1, 4.4, 4.5, 4.5,
@@ -2368,8 +2369,6 @@ class FigureFactory(object):
         ```
         import plotly.plotly as py
         from plotly.tools import FigureFactory as FF
-
-        from scipy.stats import norm, gaussian_kde
 
         # Add histogram data
         hist1_x = [0.8, 1.2, 0.2, 0.6, 1.6,
@@ -2403,8 +2402,6 @@ class FigureFactory(object):
         ```
         import plotly.plotly as py
         from plotly.tools import FigureFactory as FF
-
-        from scipy.stats import norm, gaussian_kde
 
         x1 = np.random.randn(20)
         x2 = np.random.randn(40)+1
