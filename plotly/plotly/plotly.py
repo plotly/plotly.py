@@ -297,7 +297,7 @@ def iplot_mpl(fig, resize=True, strip_style=False, update=None,
             fig.update(update)
             fig.validate()
         except exceptions.PlotlyGraphObjectError as err:
-            err.add_note("Your updated figure could not be properly " +
+            err.add_note("Your updated figure could not be properly "
                          "validated.")
             err.prepare()
             raise
@@ -336,7 +336,7 @@ def plot_mpl(fig, resize=True, strip_style=False, update=None, **plot_options):
             fig.update(update)
             fig.validate()
         except exceptions.PlotlyGraphObjectError as err:
-            err.add_note("Your updated figure could not be properly " +
+            err.add_note("Your updated figure could not be properly "
                          "validated.")
             err.prepare()
             raise
