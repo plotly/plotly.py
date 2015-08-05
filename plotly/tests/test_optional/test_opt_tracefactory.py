@@ -7,7 +7,9 @@ import math
 from nose.tools import raises
 
 import numpy as np
-from scipy.stats import norm, gaussian_kde
+
+import scipy
+import scipy.stats
 
 
 class TestDistplot(TestCase):
