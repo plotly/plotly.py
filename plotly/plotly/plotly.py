@@ -183,23 +183,24 @@ def iplot(figure_or_data, **plot_options):
     else:
         layout = {}
 
-    width = layout.get('width', '100%')
-    height = layout.get('height', 525)
+    embed_options = dict()
+    embed_options['width'] = layout.get('width', '100%')
+    embed_options['height'] = layout.get('height', 525)
     try:
-        float(width)
+        float(embed_options['width'])
     except (ValueError, TypeError):
         pass
     else:
-        width = str(width) + 'px'
+        embed_options['width'] = str(embed_options['width']) + 'px'
 
     try:
-        float(height)
+        float(embed_options['height'])
     except (ValueError, TypeError):
         pass
     else:
-        height = str(height) + 'px'
+        embed_options['height'] = str(embed_options['height']) + 'px'
 
-    return tools.embed(url, file_id, width, height)
+    return tools.embed(url, **embed_options)
 
 
 def plot(figure_or_data, validate=True, **plot_options):
