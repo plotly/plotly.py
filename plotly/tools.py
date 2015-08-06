@@ -2003,7 +2003,7 @@ class FigureFactory(object):
     @staticmethod
     def _make_increasing_candle(open, high, low, close, dates, **kwargs):
         """
-        Makes stacked bar and vertical line for increasing candlesticks
+        Makes boxplot trace for increasing candlesticks
 
         _make_increasing_candle() and _make_decreasing_candle separate the
         increasing traces from the decreasing traces so kwargs (such as
@@ -2019,57 +2019,36 @@ class FigureFactory(object):
         :param kwargs: kwargs to be passed to increasing trace via
             plotly.graph_objs.Scatter.
 
-        :rtype (list) candle_incr_data: list of three traces: hidden_bar_incr,
-            candle_bar_incr, candle_line_incr: returns the first (invisible)
-            stacked bar, second (visible) stacked bar, and trace composed of
-            vertical lines for each increasing candlestick.
+        :rtype (list) candle_incr_data: list of the box trace for
+            increasing candlesticks.
         """
-        (increase_x,
-         increase_open,
-         increase_dif,
-         stick_increase_y,
-         stick_increase_x) = (_Candlestick(open, high, low, close, dates,
-                                           **kwargs).get_candle_increase())
+        increase_x, increase_y = _Candlestick(
+            open, high, low, close, dates, **kwargs).get_candle_increase()
 
-        if 'name' in kwargs:
-            showlegend = True
+        if 'line' in kwargs:
+            kwargs.setdefault('fillcolor', kwargs['line']['color'])
         else:
-            kwargs.setdefault('name', 'Increasing')
-            showlegend = False
-
-        kwargs.setdefault('marker', dict(color=_DEFAULT_INCREASING_COLOR))
+            kwargs.setdefault('fillcolor', _DEFAULT_INCREASING_COLOR)
+        if 'name' in kwargs:
+            kwargs.setdefault('showlegend', True)
+        else:
+            kwargs.setdefault('showlegend', False)
+        kwargs.setdefault('name', 'Increasing')
         kwargs.setdefault('line', dict(color=_DEFAULT_INCREASING_COLOR))
 
-        hidden_bar_incr = dict(type='bar',
-                               x=increase_x,
-                               y=increase_open,
-                               marker=Marker(color='rgba(0, 0, 0, 0)'),
-                               legendgroup='Increasing',
-                               showlegend=False,
-                               hoverinfo='none')
-        candle_bar_incr = dict(type='bar',
-                               x=increase_x,
-                               y=increase_dif,
-                               legendgroup='Increasing',
-                               showlegend=False,
-                               hoverinfo='none',
-                               **kwargs)
-        candle_line_incr = dict(type='scatter',
-                                x=stick_increase_x,
-                                y=stick_increase_y,
-                                mode='lines',
-                                legendgroup='Increasing',
-                                text=('Low', 'Open', 'Close',
-                                      'High', '') * len(increase_x),
-                                showlegend=showlegend,
+        candle_incr_data = dict(type='box',
+                                x=increase_x,
+                                y=increase_y,
+                                whiskerwidth=0,
+                                boxpoints=False,
                                 **kwargs)
-        candle_incr_data = [hidden_bar_incr, candle_bar_incr, candle_line_incr]
-        return candle_incr_data
+
+        return [candle_incr_data]
 
     @staticmethod
     def _make_decreasing_candle(open, high, low, close, dates, **kwargs):
         """
-        Makes stacked bar and vertical line for decreasing candlesticks
+        Makes boxplot trace for decreasing candlesticks
 
         :param (list) open: opening values
         :param (list) high: high values
@@ -2079,48 +2058,29 @@ class FigureFactory(object):
         :param kwargs: kwargs to be passed to decreasing trace via
             plotly.graph_objs.Scatter.
 
-        :rtype (list) candle_decr_data: list of three traces: hidden_bar_decr,
-            candle_bar_decr, candle_line_decr: returns the first (invisible)
-            stacked bar, second (visible) stacked bar, and trace composed of
-            vertical lines for each decreasing candlestick.
+        :rtype (list) candle_decr_data: list of the box trace for
+            decreasing candlesticks.
         """
 
-        (decrease_x,
-         decrease_close,
-         decrease_dif,
-         stick_decrease_y,
-         stick_decrease_x) = (_Candlestick(open, high, low, close, dates,
-                                           **kwargs).get_candle_decrease())
+        decrease_x, decrease_y = _Candlestick(
+            open, high, low, close, dates, **kwargs).get_candle_decrease()
 
-        kwargs.setdefault('marker', dict(color=_DEFAULT_DECREASING_COLOR))
+        if 'line' in kwargs:
+            kwargs.setdefault('fillcolor', kwargs['line']['color'])
+        else:
+            kwargs.setdefault('fillcolor', _DEFAULT_DECREASING_COLOR)
+        kwargs.setdefault('showlegend', False)
         kwargs.setdefault('line', dict(color=_DEFAULT_DECREASING_COLOR))
         kwargs.setdefault('name', 'Decreasing')
 
-        hidden_bar_decr = dict(type='bar',
-                               x=decrease_x,
-                               y=decrease_close,
-                               marker=Marker(color='rgba(0, 0, 0, 0)'),
-                               legendgroup='Decreasing',
-                               showlegend=False,
-                               hoverinfo='none')
-        candle_bar_decr = dict(type='bar',
-                               x=decrease_x,
-                               y=decrease_dif,
-                               legendgroup='Decreasing',
-                               showlegend=False,
-                               hoverinfo='none',
-                               **kwargs)
-        candle_line_decr = dict(type='scatter',
-                                x=stick_decrease_x,
-                                y=stick_decrease_y,
-                                mode='lines',
-                                legendgroup='Decreasing',
-                                showlegend=False,
-                                text=('Low', 'Close', 'Open',
-                                      'High', '') * len(decrease_x),
+        candle_decr_data = dict(type='box',
+                                x=decrease_x,
+                                y=decrease_y,
+                                whiskerwidth=0,
+                                boxpoints=False,
                                 **kwargs)
-        candle_decr_data = [hidden_bar_decr, candle_bar_decr, candle_line_decr]
-        return candle_decr_data
+
+        return [candle_decr_data]
 
     @staticmethod
     def create_candlestick(open, high, low, close,
@@ -2192,15 +2152,14 @@ class FigureFactory(object):
         import pandas.io.data as web
 
         df = web.DataReader("aapl", 'yahoo', datetime(2008, 1, 1), datetime(2009, 4, 1))
-        fig = FF.create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index)
 
-        # Make increasing ohlc sticks and customize their color and name
+        # Make increasing candlesticks and customize their color and name
         fig_increasing = FF.create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index,
             direction='increasing', name='AAPL',
             marker=Marker(color='rgb(150, 200, 250)'),
             line=Line(color='rgb(150, 200, 250)'))
 
-        # Make decreasing ohlc sticks and customize their color and name
+        # Make decreasing candlesticks and customize their color and name
         fig_decreasing = FF.create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index,
             direction='decreasing',
             marker=Marker(color='rgb(128, 128, 128)'),
@@ -2262,16 +2221,7 @@ class FigureFactory(object):
                 open, high, low, close, dates, **kwargs)
             data = candle_incr_data + candle_decr_data
 
-        layout = graph_objs.Layout(barmode='stack',
-                                   bargroupgap=0.2,
-                                   yaxis=dict(range=[(min(low) -
-                                                     ((max(high) - min(low)) *
-                                                      .1)),
-                                                     (max(high) + ((max(high) -
-                                                                    min(low)) *
-                                                      .1))]))
-        layout['yaxis']['fixedrange'] = True
-
+        layout = graph_objs.Layout()
         return dict(data=data, layout=layout)
 
 
@@ -2808,32 +2758,22 @@ class _Candlestick(FigureFactory):
         The data is increasing when close value > open value
         and decreasing when the close value <= open value.
         """
-        increase_open = []
-        increase_high = []
-        increase_low = []
-        increase_close = []
+        increase_y = []
         increase_x = []
         for index in range(len(self.open)):
             if self.close[index] > self.open[index]:
-                increase_open.append(self.open[index])
-                increase_high.append(self.high[index])
-                increase_low.append(self.low[index])
-                increase_close.append(self.close[index])
+                increase_y.append(self.low[index])
+                increase_y.append(self.open[index])
+                increase_y.append(self.close[index])
+                increase_y.append(self.close[index])
+                increase_y.append(self.close[index])
+                increase_y.append(self.high[index])
                 increase_x.append(self.x[index])
 
-        increase_dif = [cl - op for (cl, op)
-                        in zip(increase_close, increase_open)]
+        increase_x = [[x, x, x, x, x, x] for x in increase_x]
+        increase_x = FigureFactory.flatten(increase_x)
 
-        increase_empty = [None] * len(increase_open)
-        stick_increase_y = list(zip(increase_low, increase_open,
-                                    increase_close, increase_high,
-                                    increase_empty))
-        stick_increase_x = [[x, x, x, x, None] for x in increase_x]
-        stick_increase_y = FigureFactory.flatten(stick_increase_y)
-        stick_increase_x = FigureFactory.flatten(stick_increase_x)
-
-        return (increase_x, increase_open, increase_dif,
-                stick_increase_y, stick_increase_x)
+        return increase_x, increase_y
 
     def get_candle_decrease(self):
         """
@@ -2842,32 +2782,20 @@ class _Candlestick(FigureFactory):
         The data is increasing when close value > open value
         and decreasing when the close value <= open value.
         """
-        decrease_open = []
-        decrease_high = []
-        decrease_low = []
-        decrease_close = []
+        decrease_y = []
         decrease_x = []
-
         for index in range(len(self.open)):
             if self.close[index] <= self.open[index]:
-                decrease_open.append(self.open[index])
-                decrease_high.append(self.high[index])
-                decrease_low.append(self.low[index])
-                decrease_close.append(self.close[index])
+                decrease_y.append(self.low[index])
+                decrease_y.append(self.open[index])
+                decrease_y.append(self.close[index])
+                decrease_y.append(self.close[index])
+                decrease_y.append(self.close[index])
+                decrease_y.append(self.high[index])
                 decrease_x.append(self.x[index])
 
-        decrease_dif = [op - cl for (op, cl)
-                        in zip(decrease_open, decrease_close)]
+        decrease_x = [[x, x, x, x, x, x] for x in decrease_x]
+        decrease_x = FigureFactory.flatten(decrease_x)
 
-        decrease_empty = [None] * len(decrease_open)
-        stick_decrease_y = list(zip(decrease_low, decrease_close,
-                                    decrease_open, decrease_high,
-                                    decrease_empty))
-        stick_decrease_x = [[x, x, x, x, None] for x in decrease_x]
-
-        stick_decrease_y = FigureFactory.flatten(stick_decrease_y)
-        stick_decrease_x = FigureFactory.flatten(stick_decrease_x)
-
-        return (decrease_x, decrease_close, decrease_dif,
-                stick_decrease_y, stick_decrease_x)
+        return decrease_x, decrease_y
 
