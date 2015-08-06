@@ -135,7 +135,8 @@ def _plot_option_logic(plot_options):
                 "The 'sharing' argument only accepts one of the following "
                 "strings:\n'public' -- for public plots\n"
                 "'private' -- for private plots\n"
-                "'secret' -- for private plots that can be shared \n"
+                "'secret' -- for private plots that can be shared with a "
+                "secret url"
             )
     else:
         current_plot_options['sharing'] = None
@@ -1309,8 +1310,8 @@ class _api_v2:
                     "Plotly Enterprise, you may need to upgrade your Plotly "
                     "Enterprise server to request against this endpoint or "
                     "this endpoint may not be available yet.\nQuestions? "
-                    "support@plot.ly".format(url=get_config()
-                                             ['plotly_api_domain'])
+                    "support@plot.ly or your plotly administrator."
+                    .format(url=get_config()['plotly_api_domain'])
                 )
             else:
                 plotly_exception = exceptions.PlotlyRequestError(
