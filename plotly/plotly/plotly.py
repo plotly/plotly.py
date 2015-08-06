@@ -175,8 +175,6 @@ def iplot(figure_or_data, **plot_options):
     if 'auto_open' not in plot_options:
         plot_options['auto_open'] = False
     url = plot(figure_or_data, **plot_options)
-    urlsplit = six.moves.urllib.parse.urlparse(url)
-    file_id = urlsplit.path.split('/')[2]
 
     if isinstance(figure_or_data, dict):
         layout = figure_or_data.get('layout', {})
