@@ -7,12 +7,15 @@ A module intended for use with Nose.
 """
 from __future__ import absolute_import
 
-from unittest import TestCase
+import requests
+import six
 
+from unittest import TestCase
 from nose.tools import raises
 
-from plotly.exceptions import PlotlyError, PlotlyEmptyDataError
+import plotly.tools as tls
 from plotly.plotly import plotly as py
+from plotly.exceptions import PlotlyError, PlotlyEmptyDataError
 
 
 # username for tests: 'PlotlyImageTest'
@@ -168,3 +171,83 @@ class TestPlot(TestCase):
                                       'world_readable': False,
                                       'sharing': 'private'}
         self.assertEqual(plot_option_logic, expected_plot_option_logic)
+
+    def test_plot_url_given_sharing_key(self):
+
+        # Give share_key is requested, the retun url should contain
+        # the share_key
+
+        data = {
+            'data': [
+                {
+                    'x': [1, 2, 3],
+                    'y': [2, 1, 2]
+                }
+            ]
+        }
+        validate = True
+        fig = tls.return_figure_from_figure_or_data(data, validate)
+        kwargs = {'filename': 'is_share_key_included',
+                  'fileopt': 'overwrite',
+                  'world_readable': False,
+                  'sharing': 'secret'}
+
+        self.assertTrue('share_key=' in
+                        py._send_to_plotly(fig, **kwargs)['url'])
+
+    def test_plot_url_response_given_sharing_key(self):
+
+        # Give share_key is requested, the get request of url should
+        # be 200
+
+        data = {
+            'data': [
+                {
+                    'x': [1, 2, 3],
+                    'y': [2, 1, 2]
+                }
+            ]
+        }
+        validate = True
+        fig = tls.return_figure_from_figure_or_data(data, validate)
+        kwargs = {'filename': 'is_share_key_included',
+                  'fileopt': 'overwrite',
+                  'world_readable': False,
+                  'sharing': 'secret'}
+
+        self.assertTrue(200 ==
+                        requests.get(
+                            py._send_to_plotly(fig, **kwargs)['url'])
+                        .status_code)
+
+    def test_private_plot_response_with_and_without_share_key(self):
+
+        # The get response of private plot should be 404 and once share_key
+        # is added it should be 200
+
+        data = {
+            'data': [
+                {
+                    'x': [1, 2, 3],
+                    'y': [2, 1, 2]
+                }
+            ]
+        }
+        validate = True
+        fig = tls.return_figure_from_figure_or_data(data, validate)
+        kwargs = {'filename': 'is_share_key_included',
+                  'fileopt': 'overwrite',
+                  'world_readable': False,
+                  'sharing': 'private'}
+
+        private_plot_url = py._send_to_plotly(fig, **kwargs)['url']
+
+        self.assertTrue(404 ==
+                        requests.get(private_plot_url + ".json").status_code)
+
+        secret_plot_url = py.add_share_key_to_url(private_plot_url)
+        urlsplit = six.moves.urllib.parse.urlparse(secret_plot_url)
+        secret_plot_url_in_json = six.moves.urllib.parse.urljoin(
+            urlsplit.geturl(), "?.json" + urlsplit.query)
+        self.assertTrue(200 ==
+                        requests.get(secret_plot_url_in_json).status_code)
