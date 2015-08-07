@@ -3081,9 +3081,9 @@ class _Distplot(FigureFactory):
         self.start = []
         self.end = []
         if 'colors' in kwargs:
-            self.colors = colors
+            self.colors = kwargs['colors']
         else:
-            self.colors = colors = [
+            self.colors = [
                 "rgb(31, 119, 180)", "rgb(255, 127, 14)",
                 "rgb(44, 160, 44)", "rgb(214, 39, 40)",
                 "rgb(148, 103, 189)", "rgb(140, 86, 75)",
