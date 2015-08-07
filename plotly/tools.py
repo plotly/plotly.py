@@ -1516,21 +1516,17 @@ class FigureFactory(object):
         :raises: (PlotlyError) If curve_type is not valid (i.e. not 'kde' or
             'normal').
         """
-        if _numpy_imported is True:
-            if type(hist_data[0]) not in [list, np.ndarray]:
+        hist_data_types = (list,)
+        if _numpy_imported:
+            hist_data_types += (np.ndarray,)
+
+        if not isinstance(hist_data[0], hist_data_types):
                 raise exceptions.PlotlyError("Oops, this function was written "
                                              "to handle multiple datasets, if "
                                              "you want to plot just one, make "
                                              "sure your hist_data variable is "
                                              "still a list of lists, i.e. x = "
                                              "[1, 2, 3] -> x = [[1, 2, 3]]")
-        elif type(hist_data[0]) is not list:
-            raise exceptions.PlotlyError("Oops, this function was written "
-                                         "to handle multiple datasets, if "
-                                         "you want to plot just one, make "
-                                         "sure your hist_data variable is "
-                                         "still a list of lists, i.e. x = "
-                                         "[1, 2, 3] -> x = [[1, 2, 3]]")
 
         curve_opts = ('kde', 'normal')
         if curve_type not in curve_opts:
@@ -2453,15 +2449,15 @@ class FigureFactory(object):
                             anchor='x1',
                             dtick=1))
         else:
-                layout = graph_objs.Layout(
-                    barmode='overlay',
-                    hovermode='closest',
-                    xaxis1=dict(domain=[0.0, 1.0],
-                                anchor='y2',
-                                zeroline=False),
-                    yaxis1=dict(domain=[0., 1],
-                                anchor='free',
-                                position=0.0))
+            layout = graph_objs.Layout(
+                barmode='overlay',
+                hovermode='closest',
+                xaxis1=dict(domain=[0.0, 1.0],
+                            anchor='y2',
+                            zeroline=False),
+                yaxis1=dict(domain=[0., 1],
+                            anchor='free',
+                            position=0.0))
 
         data = sum(data, [])
         dist_fig = dict(data=data, layout=layout)
