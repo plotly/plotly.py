@@ -191,7 +191,8 @@ class TestPlot(TestCase):
                   'fileopt': 'overwrite',
                   'world_readable': False,
                   'sharing': 'secret'}
-        plot_url = py._send_to_plotly(fig, **kwargs)['url']
+        response = py._send_to_plotly(fig, **kwargs)
+        plot_url = response['url']
 
         self.assertTrue('share_key=' in plot_url)
 
