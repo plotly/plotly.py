@@ -1435,6 +1435,9 @@ def _send_to_plotly(figure, **plot_options):
     r.raise_for_status()
     r = json.loads(r.text)
 
+    if 'error' in r and r['error'] != '':
+        raise exceptions.PlotlyError(r['error'])
+
     # Check if the url needs a secret key
     if (plot_options['sharing'] == 'secret' and
             'share_key=' not in r['url']):
