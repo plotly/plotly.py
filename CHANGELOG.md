@@ -12,5 +12,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - If the response from `plot` or `iplot` contains an error message, raise an exception
 
+### Removed
+- `height` and `width` are no longer accepted in `iplot`. Just stick them into your figure's layout instead, it'll be more consistent when you view it outside of the IPython notebook environment. So, instead of this:
+
+	```
+	py.iplot([{'x': [1, 2, 3], 'y': [3, 1, 5]}], height=800)
+	```
+
+	do this:
+
+	```
+	py.iplot({
+		'data': [{'x': [1, 2, 3], 'y': [3, 1, 5]}],
+		'layout': {'height': 800}
+	})
+	```
+
 ### Fixed
 - The height of the graph in `iplot` respects the figure's height in layout
