@@ -173,7 +173,7 @@ class TestPlot(TestCase):
                                       'sharing': 'private'}
         self.assertEqual(plot_option_logic, expected_plot_option_logic)
 
-    @skip('added to see if everything else passes on circle')
+    # @skip('added to see if everything else passes on circle')
     def test_plot_url_given_sharing_key(self):
 
         # Give share_key is requested, the retun url should contain
