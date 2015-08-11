@@ -122,7 +122,7 @@ def _plot_option_logic(plot_options):
                     plot_options['sharing'] != 'public'):
                 raise exceptions.PlotlyError(
                     "Looks like you are setting your plot privacy to both "
-                    "public and private.\n If you set world_readable as True,"
+                    "public and private.\n If you set world_readable as True, "
                     "sharing can only be set to 'public'")
             elif (not plot_options['world_readable'] and
                     plot_options['sharing'] == 'public'):
