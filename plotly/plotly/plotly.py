@@ -1391,7 +1391,10 @@ def add_share_key_to_url(plot_url):
 
     _api_v2.response_handler(new_response)
 
-    new_response_data = json.loads(new_response.content)
+    # decode bytes for python 3.3: https://bugs.python.org/issue10976
+    str_content = new_response.content.decode('utf-8')
+
+    new_response_data = json.loads(str_content)
     plot_url += '?share_key=' + new_response_data['share_key']
 
     return plot_url
