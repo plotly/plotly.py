@@ -1314,10 +1314,7 @@ class _api_v2:
                     .format(url=get_config()['plotly_api_domain'])
                 )
             else:
-                plotly_exception = exceptions.PlotlyRequestError(
-                    requests_exception
-                )
-                raise(plotly_exception)
+                raise requests_exception
 
         if ('content-type' in response.headers and
                 'json' in response.headers['content-type'] and
