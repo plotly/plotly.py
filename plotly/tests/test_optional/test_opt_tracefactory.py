@@ -105,3 +105,47 @@ class TestStreamline(TestCase):
         self.assertListEqual(strln['data'][0]['x'][0:100],
                              expected_strln_0_100['x'])
 
+class TestDendrogram(TestCase):
+
+    def test_default_dendrogram(self):
+        dendro = tls.FigureFactory.create_dendrogram(X=np.array([[1, 2, 3, 4],
+                                                       [1, 1, 3, 4],
+                                                       [1, 2, 1, 4],
+                                                       [1, 2, 3, 1]]))
+        expected_dendro_data = [{'marker': {'color': 'rgb(255,133,27)'},
+                                 'mode': 'lines', 'xaxis': 'xs',
+                                 'yaxis': 'ys',
+                                 'y': np.array([0.,  1.,  1.,  0.]),
+                                 'x': np.array([25.,  25.,  35.,  35.]),
+                                 'type': u'scatter'},
+                                {'marker': {'color': 'rgb(255,133,27)'},
+                                 'mode': 'lines',
+                                 'xaxis': 'xs',
+                                 'yaxis': 'ys',
+                                 'y': np.array([0., 2.23606798, 2.23606798, 1.]),
+                                 'x': np.array([15., 15., 30., 30.]),
+                                 'type': u'scatter'},
+                                {'marker': {'color': 'blue'},
+                                 'mode': 'lines',
+                                 'xaxis': 'xs',
+                                 'yaxis': 'ys',
+                                 'y': np.array([0., 3.60555128, 3.60555128, 2.23606798]),
+                                 'x': np.array([5., 5., 22.5, 22.5]), 'type': u'scatter'}]
+       
+        self.assertEqual(len(dendro.data), len(expected_dendro_data))
+        self.assertTrue(np.array_equal(dendro.labels, np.array(['3', '2', '0', '1'])))
+
+        for i in range(1,len(dendro.data)):
+          self.assertTrue(np.allclose(dendro.data[i]['x'], expected_dendro_data[i]['x']))
+          self.assertTrue(np.allclose(dendro.data[i]['y'], expected_dendro_data[i]['y']))
+
+    def test_dendrogram_random_matrix(self):
+        # create a random uncorrelated matrix
+        X = np.random.rand(5,5) 
+        # variable 2 is correlated with all the other variables
+        X[2,:] = sum(X,0)
+
+        dendro = tls.FigureFactory.create_dendrogram(X)
+
+        # Check that 2 is in a separate cluster
+        self.assertEqual(dendro.labels[0], '2')
