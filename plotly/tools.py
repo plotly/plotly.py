@@ -558,7 +558,7 @@ def get_subplots(rows=1, columns=1, print_grid=False, **kwargs):
             y_start = (plot_height + vertical_spacing) * rrr
             y_end = y_start + plot_height
 
-            xaxis = graph_objs.Axis(domain=[x_start, x_end], anchor=x_anchor)
+            xaxis = graph_objs.XAxis(domain=[x_start, x_end], anchor=x_anchor)
             fig['layout'][xaxis_name] = xaxis
             yaxis = graph_objs.YAxis(domain=[y_start, y_end], anchor=y_anchor)
             fig['layout'][yaxis_name] = yaxis
