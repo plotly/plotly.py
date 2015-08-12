@@ -15,9 +15,6 @@ import warnings
 import six
 
 import math
-import scipy
-
-import scipy.cluster.hierarchy as sch
 
 from plotly import utils
 from plotly import exceptions
@@ -52,6 +49,15 @@ try:
     _numpy_imported = True
 except ImportError:
     _numpy_imported = False
+
+try:
+    import scipy as scp
+    import scipy.spatial as scs 
+    import scipy.cluster.hierarchy as sch 
+
+    _scipy_imported = True
+except ImportError:
+    _scipy_imported = False
 
 PLOTLY_DIR = os.path.join(os.path.expanduser("~"), ".plotly")
 CREDENTIALS_FILE = os.path.join(PLOTLY_DIR, ".credentials")
@@ -2288,6 +2294,8 @@ class FigureFactory(object):
         labels: List of axis category labels
         colorscale: Optional colorscale for dendgrogram tree clusters
         """
+        if _scipy_imported is False:
+            raise ImportError("FigureFactory.create_dendrogram requires scipy, scipy.spatial and scipy.hierarchy")
 
         s = X.shape
         if len(s) != 2:
@@ -3011,14 +3019,14 @@ class _Dendrogram(FigureFactory):
             (b) icoord: All X points of the dendogram tree as array of arrays with lenght 4 
             (c) dcoord: All Y points of the dendogram tree as array of arrays with lenght 4 '''
         
-        d = sch.distance.pdist(X)
+        d = scs.distance.pdist(X)
         Z = sch.linkage(d, method='complete') 
         P = sch.dendrogram(Z,orientation=self.orientation,labels=self.labels, no_plot=True)
 
-        icoord = scipy.array( P['icoord'] )
-        dcoord = scipy.array( P['dcoord'] )
-        ordered_labels = scipy.array( P['ivl'] )
-        color_list = scipy.array( P['color_list'] )
+        icoord = scp.array( P['icoord'] )
+        dcoord = scp.array( P['dcoord'] )
+        ordered_labels = scp.array( P['ivl'] )
+        color_list = scp.array( P['color_list'] )
         colors = self.get_color_dict( colorscale )
         
         trace_list = []
