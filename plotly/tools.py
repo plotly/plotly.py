@@ -558,7 +558,7 @@ def get_subplots(rows=1, columns=1, print_grid=False, **kwargs):
             y_start = (plot_height + vertical_spacing) * rrr
             y_end = y_start + plot_height
 
-            xaxis = graph_objs.XAxis(domain=[x_start, x_end], anchor=x_anchor)
+            xaxis = graph_objs.Axis(domain=[x_start, x_end], anchor=x_anchor)
             fig['layout'][xaxis_name] = xaxis
             yaxis = graph_objs.YAxis(domain=[y_start, y_end], anchor=y_anchor)
             fig['layout'][yaxis_name] = yaxis
@@ -2292,8 +2292,32 @@ class FigureFactory(object):
         X: Heatmap matrix as array of arrays
         orientation: 'top', 'right', 'bottom', or 'left'
         labels: List of axis category labels
-        colorscale: Optional colorscale for dendgrogram tree clusters
+        colorscale: Optional colorscale for dendrogram tree clusters
+
+
+        Example 1: Simple bottom oriented dendrogram
+        ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+
+        import numpy as np
+
+        X = np.random.rand(5,5) 
+        dendro_X = FF.create_dendrogram(X)
+        py.iplot(dendro_X, validate=False, height=300, width=1000)
+
+        ```
+
+        Example 2: Dendrogram to put on the left of the heatmap
+        ```
+        X = np.random.rand(5,5)
+        names_X = ['Jack', 'Oxana', 'John', 'Chelsea', 'Mark']
+        dendro_X = FF.create_dendrogram(X, orientation='right', labels=names_X)
+
+        py.iplot(dendro_X, validate=False, height=1000, width=300)
+        ```
         """
+
         if _scipy_imported is False:
             raise ImportError("FigureFactory.create_dendrogram requires scipy, scipy.spatial and scipy.hierarchy")
 
@@ -2302,7 +2326,8 @@ class FigureFactory(object):
             exceptions.PlotlyError("X should be 2-dimensional array.")
 
         dendrogram = _Dendrogram(X, orientation, labels, colorscale)
-        return dendrogram
+
+        return {'layout': dendrogram.layout, 'data': dendrogram.data, 'labels': dendrogram.labels}
 
 class _Quiver(FigureFactory):
     """
@@ -2912,7 +2937,7 @@ class _Dendrogram(FigureFactory):
             X: Heatmap matrix as array of arrays
             orientation: 'top', 'right', 'bottom', or 'left'
             labels: List of axis category labels
-            colorscale: Optional colorscale for dendgrogram tree clusters
+            colorscale: Optional colorscale for dendrogram tree clusters
             Returns a dendrogram Plotly figure object '''
     
         self.orientation = orientation
@@ -3016,12 +3041,12 @@ class _Dendrogram(FigureFactory):
     def get_dendrogram_traces( self, X, colorscale ):
         ''' Returns a tuple with:
             (a) List of Plotly trace objects for the dendrogram tree
-            (b) icoord: All X points of the dendogram tree as array of arrays with lenght 4 
-            (c) dcoord: All Y points of the dendogram tree as array of arrays with lenght 4 '''
+            (b) icoord: All X points of the dendogram tree as array of arrays with length 4 
+            (c) dcoord: All Y points of the dendogram tree as array of arrays with length 4 '''
         
         d = scs.distance.pdist(X)
         Z = sch.linkage(d, method='complete') 
-        P = sch.dendrogram(Z,orientation=self.orientation,labels=self.labels, no_plot=True)
+        P = sch.dendrogram(Z, orientation=self.orientation,labels=self.labels, no_plot=True)
 
         icoord = scp.array( P['icoord'] )
         dcoord = scp.array( P['dcoord'] )

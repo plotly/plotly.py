@@ -132,12 +132,12 @@ class TestDendrogram(TestCase):
                                  'y': np.array([0., 3.60555128, 3.60555128, 2.23606798]),
                                  'x': np.array([5., 5., 22.5, 22.5]), 'type': u'scatter'}]
        
-        self.assertEqual(len(dendro.data), len(expected_dendro_data))
-        self.assertTrue(np.array_equal(dendro.labels, np.array(['3', '2', '0', '1'])))
+        self.assertEqual(len(dendro['data']), len(expected_dendro_data))
+        self.assertTrue(np.array_equal(dendro['labels'], np.array(['3', '2', '0', '1'])))
 
-        for i in range(1,len(dendro.data)):
-          self.assertTrue(np.allclose(dendro.data[i]['x'], expected_dendro_data[i]['x']))
-          self.assertTrue(np.allclose(dendro.data[i]['y'], expected_dendro_data[i]['y']))
+        for i in range(1,len(dendro['data'])):
+          self.assertTrue(np.allclose(dendro['data'][i]['x'], expected_dendro_data[i]['x']))
+          self.assertTrue(np.allclose(dendro['data'][i]['y'], expected_dendro_data[i]['y']))
 
     def test_dendrogram_random_matrix(self):
         # create a random uncorrelated matrix
@@ -148,4 +148,4 @@ class TestDendrogram(TestCase):
         dendro = tls.FigureFactory.create_dendrogram(X)
 
         # Check that 2 is in a separate cluster
-        self.assertEqual(dendro.labels[0], '2')
+        self.assertEqual(dendro['labels'][0], '2')
