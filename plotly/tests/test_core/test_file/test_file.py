@@ -7,6 +7,7 @@ A module intended for use with Nose.
 """
 import random
 import string
+import requests
 from unittest import TestCase
 
 import plotly.plotly as py
@@ -45,7 +46,7 @@ class FolderAPITestCase(TestCase):
         py.file_ops.mkdirs(first_folder)
         try:
             py.file_ops.mkdirs(first_folder)
-        except PlotlyRequestError as e:
-            self.assertTrue(400 <= e.status_code < 500)
+        except requests.exceptions.RequestException as e:
+            self.assertTrue(400 <= e.response.status_code < 500)
         else:
             self.fail('Expected this to fail!')
