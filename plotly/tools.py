@@ -285,7 +285,6 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
                               figure
 
     """
-    padding = 25
     plotly_rest_url = (session.get_session_config().get('plotly_domain') or
                        get_config_file()['plotly_domain'])
     if file_id is None:  # assume we're using a url
@@ -298,13 +297,19 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
                 "'{1}'."
                 "\nRun help on this function for more information."
                 "".format(url, plotly_rest_url))
-        head = plotly_rest_url + "/~"
-        file_owner = url.replace(head, "").split('/')[0]
-        file_id = url.replace(head, "").split('/')[1]
+        urlsplit = six.moves.urllib.parse.urlparse(url)
+        file_owner = urlsplit.path.split('/')[1].split('~')[1]
+        file_id = urlsplit.path.split('/')[2]
+
+        # to check for share_key we check urlsplit.query
+        query_dict = six.moves.urllib.parse.parse_qs(urlsplit.query)
+        if query_dict:
+            share_key = query_dict['share_key'][-1]
+        else:
+            share_key = ''
     else:
         file_owner = file_owner_or_url
-    resource = "/apigetfile/{file_owner}/{file_id}".format(file_owner=file_owner,
-                                                           file_id=file_id)
+        share_key = ''
     try:
         test_if_int = int(file_id)
     except ValueError:
@@ -318,19 +323,7 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
         raise exceptions.PlotlyError(
             "The 'file_id' argument must be a non-negative number."
         )
-    if isinstance(width, int):
-        s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\""
-             "seamless=\"seamless\" "
-             "src=\"{plotly_rest_url}/"
-             "~{file_owner}/{file_id}.embed"
-             "?width={plot_width}&height={plot_height}\" "
-             "height=\"{iframe_height}\" width=\"{iframe_width}\">"
-             "</iframe>").format(
-            plotly_rest_url=plotly_rest_url,
-            file_owner=file_owner, file_id=file_id,
-            plot_width=width - padding, plot_height=height - padding,
-            iframe_height=height, iframe_width=width)
-    else:
+    if share_key is '':
         s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\""
              "seamless=\"seamless\" "
              "src=\"{plotly_rest_url}/"
@@ -339,6 +332,16 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
              "</iframe>").format(
             plotly_rest_url=plotly_rest_url,
             file_owner=file_owner, file_id=file_id,
+            iframe_height=height, iframe_width=width)
+    else:
+        s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\""
+             "seamless=\"seamless\" "
+             "src=\"{plotly_rest_url}/"
+             "~{file_owner}/{file_id}.embed?share_key={share_key}\" "
+             "height=\"{iframe_height}\" width=\"{iframe_width}\">"
+             "</iframe>").format(
+            plotly_rest_url=plotly_rest_url,
+            file_owner=file_owner, file_id=file_id, share_key=share_key,
             iframe_height=height, iframe_width=width)
 
     return s
@@ -353,8 +356,8 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
 
     Note, if you're using a file_owner string as the first argument, you MUST
     specify a `file_id` keyword argument. Else, if you're using a url string
-    as the first argument, you MUST NOT specify a `file_id` keyword argument, or
-    file_id must be set to Python's None value.
+    as the first argument, you MUST NOT specify a `file_id` keyword argument,
+    or file_id must be set to Python's None value.
 
     Positional arguments:
     file_owner_or_url (string) -- a valid plotly username OR a valid plotly url
@@ -363,11 +366,14 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
     file_id (default=None) -- an int or string that can be converted to int
                               if you're using a url, don't fill this in!
     width (default="100%") -- an int or string corresp. to width of the figure
-    height (default="525") -- same as width but corresp. to the height of the figure
+    height (default="525") -- same as width but corresp. to the height of the
+                              figure
 
     """
     try:
-        s = get_embed(file_owner_or_url, file_id, width, height)
+        s = get_embed(file_owner_or_url, file_id=file_id, width=width,
+                      height=height)
+
         # see if we are in the SageMath Cloud
         from sage_salvus import html
         return html(s, hide=False)
@@ -387,11 +393,19 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
             url = file_owner_or_url
         return PlotlyDisplay(url, width, height)
     else:
+        if (get_config_defaults()['plotly_domain']
+                != session.get_session_config()['plotly_domain']):
+            feedback_email = 'feedback@plot.ly'
+        else:
+
+            # different domain likely means enterprise
+            feedback_email = 'support@plot.ly'
+
         warnings.warn(
-            "Looks like you're not using IPython or Sage to embed this plot. "
-            "If you just want the *embed code*, try using `get_embed()` "
-            "instead."
-            "\nQuestions? support@plot.ly")
+            "Looks like you're not using IPython or Sage to embed this "
+            "plot. If you just want the *embed code*,\ntry using "
+            "`get_embed()` instead."
+            '\nQuestions? {}'.format(feedback_email))
 
 
 ### mpl-related tools ###
