@@ -9,6 +9,7 @@ from __future__ import absolute_import
 
 import random
 import string
+import requests
 
 from nose import with_setup
 from nose.tools import raises
@@ -22,8 +23,9 @@ from plotly.plotly.plotly import _api_v2
 
 
 def random_filename():
-    random_chars = [random.choice(string.ascii_uppercase) for _ in range(5)]
-    unique_filename = 'Valid Grid '+''.join(random_chars)
+    choice_chars = string.ascii_letters + string.digits
+    random_chars = [random.choice(choice_chars) for _ in range(10)]
+    unique_filename = 'Valid Grid ' + ''.join(random_chars)
     return unique_filename
 
 
@@ -139,7 +141,7 @@ def test_scatter_from_non_uploaded_grid():
     Scatter(xsrc=g[0], ysrc=g[1])
 
 
-@raises(PlotlyRequestError)
+@raises(requests.exceptions.HTTPError)
 def test_column_append_of_non_uploaded_grid():
     c1 = Column([1, 2, 3, 4], 'first column')
     c2 = Column(['a', 'b', 'c', 'd'], 'second column')
@@ -147,7 +149,7 @@ def test_column_append_of_non_uploaded_grid():
     py.grid_ops.append_columns([c2], grid=g)
 
 
-@raises(PlotlyRequestError)
+@raises(requests.exceptions.HTTPError)
 def test_row_append_of_non_uploaded_grid():
     c1 = Column([1, 2, 3, 4], 'first column')
     rows = [[1], [2]]
@@ -189,7 +191,7 @@ def test_duplicate_filenames():
     g = Grid([c1])
 
     random_chars = [random.choice(string.ascii_uppercase) for _ in range(5)]
-    unique_filename = 'Valid Grid '+''.join(random_chars)
+    unique_filename = 'Valid Grid ' + ''.join(random_chars)
     py.grid_ops.upload(g, unique_filename, auto_open=False)
     try:
         py.grid_ops.upload(g, unique_filename, auto_open=False)
