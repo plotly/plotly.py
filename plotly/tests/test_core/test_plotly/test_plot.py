@@ -12,7 +12,6 @@ import six
 
 from unittest import TestCase
 from nose.tools import raises
-from unittest import skip
 
 import plotly.tools as tls
 from plotly.plotly import plotly as py
@@ -66,70 +65,47 @@ def test_plot_invalid_args_2():
 
 class TestPlot(TestCase):
 
+    def setUp(self):
+        self.simple_figure = {'data': [{'x': [1, 2, 3], 'y': [2, 1, 2]}]}
+        super(TestPlot, self).setUp()
+
     def test_plot_empty_data(self):
         py.sign_in('PlotlyImageTest', '786r5mecv0')
         self.assertRaises(PlotlyEmptyDataError, py.plot, [],
                           filename='plot_invalid')
 
-    def test_plot_sharing_argument(self):
+    def test_plot_sharing_invalid_argument(self):
 
         # Raise an error if sharing argument is incorrect
         # correct arguments {'public, 'private', 'secret'}
-
-        fig = {
-            'data': [
-                {
-                    'x': [1, 2, 3],
-                    'y': [2, 1, 2]
-                }
-            ]
-        }
 
         kwargs = {'filename': 'invalid-sharing-argument',
                   'sharing': 'privste'}
 
         with self.assertRaisesRegexp(PlotlyError, 'sharing'):
-            py.plot(fig, **kwargs)
+            py.plot(self.simple_figure, **kwargs)
 
     def test_plot_world_readable_sharing_conflict_1(self):
 
         # Raise an error if world_readable=False but sharing='public'
-
-        fig = {
-            'data': [
-                {
-                    'x': [1, 2, 3],
-                    'y': [2, 1, 2]
-                }
-            ]
-        }
 
         kwargs = {'filename': 'invalid-privacy-setting',
                   'world_readable': False,
                   'sharing': 'public'}
 
         with self.assertRaisesRegexp(PlotlyError, 'sharing'):
-            py.plot(fig, **kwargs)
+            py.plot(self.simple_figure, **kwargs)
 
     def test_plot_world_readable_sharing_conflict_2(self):
 
         # Raise an error if world_readable=True but sharing='secret'
-
-        fig = {
-            'data': [
-                {
-                    'x': [1, 2, 3],
-                    'y': [2, 1, 2]
-                }
-            ]
-        }
 
         kwargs = {'filename': 'invalid-privacy-setting',
                   'world_readable': True,
                   'sharing': 'secret'}
 
         with self.assertRaisesRegexp(PlotlyError, 'sharing'):
-            py.plot(fig, **kwargs)
+            py.plot(self.simple_figure, **kwargs)
 
     def test_plot_option_logic_only_world_readable_given(self):
 
@@ -173,22 +149,14 @@ class TestPlot(TestCase):
                                       'sharing': 'private'}
         self.assertEqual(plot_option_logic, expected_plot_option_logic)
 
-    # @skip('added to see if everything else passes on circle')
     def test_plot_url_given_sharing_key(self):
 
         # Give share_key is requested, the retun url should contain
         # the share_key
 
-        data = {
-            'data': [
-                {
-                    'x': [1, 2, 3],
-                    'y': [2, 1, 2]
-                }
-            ]
-        }
         validate = True
-        fig = tls.return_figure_from_figure_or_data(data, validate)
+        fig = tls.return_figure_from_figure_or_data(self.simple_figure,
+                                                    validate)
         kwargs = {'filename': 'is_share_key_included',
                   'fileopt': 'overwrite',
                   'world_readable': False,
@@ -200,57 +168,41 @@ class TestPlot(TestCase):
 
     def test_plot_url_response_given_sharing_key(self):
 
-        # Give share_key is requested, the get request of url should
+        # Given share_key is requested, get request of the url should
         # be 200
 
-        data = {
-            'data': [
-                {
-                    'x': [1, 2, 3],
-                    'y': [2, 1, 2]
-                }
-            ]
-        }
-        validate = True
-        fig = tls.return_figure_from_figure_or_data(data, validate)
         kwargs = {'filename': 'is_share_key_included',
                   'fileopt': 'overwrite',
+                  'auto_open': False,
                   'world_readable': False,
                   'sharing': 'secret'}
 
-        self.assertTrue(200 ==
-                        requests.get(
-                            py._send_to_plotly(fig, **kwargs)['url'])
-                        .status_code)
+        plot_url = py.plot(self.simple_figure, **kwargs)
+        response = requests.get(plot_url)
+        self.assertEqual(response.status_code, 200)
 
     def test_private_plot_response_with_and_without_share_key(self):
 
-        # The get response of private plot should be 404 and once share_key
-        # is added it should be 200
+        # The json file of the private plot should be 404 and once
+        # share_key is added it should be 200
 
-        data = {
-            'data': [
-                {
-                    'x': [1, 2, 3],
-                    'y': [2, 1, 2]
-                }
-            ]
-        }
-        validate = True
-        fig = tls.return_figure_from_figure_or_data(data, validate)
         kwargs = {'filename': 'is_share_key_included',
                   'fileopt': 'overwrite',
                   'world_readable': False,
                   'sharing': 'private'}
 
-        private_plot_url = py._send_to_plotly(fig, **kwargs)['url']
+        private_plot_url = py._send_to_plotly(self.simple_figure,
+                                              **kwargs)['url']
+        private_plot_response = requests.get(private_plot_url + ".json")
 
-        self.assertTrue(404 ==
-                        requests.get(private_plot_url + ".json").status_code)
+        # The json file of the private plot should be 404
+        self.assertEqual(private_plot_response.status_code, 404)
 
         secret_plot_url = py.add_share_key_to_url(private_plot_url)
         urlsplit = six.moves.urllib.parse.urlparse(secret_plot_url)
-        secret_plot_url_in_json = six.moves.urllib.parse.urljoin(
+        secret_plot_json_file = six.moves.urllib.parse.urljoin(
             urlsplit.geturl(), "?.json" + urlsplit.query)
-        self.assertTrue(200 ==
-                        requests.get(secret_plot_url_in_json).status_code)
+        secret_plot_response = requests.get(secret_plot_json_file)
+
+        # The json file of the secret plot should be 200
+        self.assertTrue(secret_plot_response.status_code, 200)
