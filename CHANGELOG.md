@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.8.3] - 2015-08-14
+### Fixed
+- Fixed typos in `plot` and `iplot` documentations
+
 ## [1.8.2] - 2015-08-11
 ### Added
 - CHANGELOG

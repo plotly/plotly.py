@@ -155,7 +155,7 @@ def iplot(figure_or_data, **plot_options):
         'extend': add additional numbers (data) to existing traces
         'append': add additional traces to existing data lists
     world_readable (default=True) -- make this figure private/public
-    sharing ('public' | 'private' | 'sharing') -- Toggle who can view this
+    sharing ('public' | 'private' | 'secret') -- Toggle who can view this
                                                   graph
         - 'public': Anyone can view this graph. It will appear in your profile
                     and can appear in search engines. You do not need to be
@@ -216,7 +216,7 @@ def plot(figure_or_data, validate=True, **plot_options):
     auto_open (default=True) -- Toggle browser options
         True: open this plot in a new browser tab
         False: do not open plot in the browser, but do return the unique url
-    sharing ('public' | 'private' | 'sharing') -- Toggle who can view this
+    sharing ('public' | 'private' | 'secret') -- Toggle who can view this
                                                   graph
         - 'public': Anyone can view this graph. It will appear in your profile
                     and can appear in search engines. You do not need to be
