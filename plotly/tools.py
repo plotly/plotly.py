@@ -8,12 +8,12 @@ Functions that USERS will possibly want access to.
 
 """
 from __future__ import absolute_import
+from collections import OrderedDict
 
 import os.path
 import warnings
 
 import six
-
 import math
 
 from plotly import utils
@@ -2963,37 +2963,47 @@ class _Dendrogram(FigureFactory):
 
         for i in range(len(yvals_flat)):
             if yvals_flat[i] == 0.0 and xvals_flat[i] not in self.zero_vals:
-                self.zero_vals.append( xvals_flat[i] )
+                self.zero_vals.append(xvals_flat[i])
 
-        self.zero_vals.sort() 
+        self.zero_vals.sort()
                 
-        self.layout = self.set_figure_layout( width, height )
-        self.data = Data( dd_traces )
+        self.layout = self.set_figure_layout(width, height)
+        self.data = Data(dd_traces)
 
-    def get_color_dict( self, colorscale ):
+    def get_color_dict(self, colorscale):
         ''' Return colorscale used for dendrogram tree clusters '''
-        
+       
         # These are the color codes returned for dendrograms
         # We're replacing them with nicer colors
-        default_colors = {'r':'red','g':'green','b':'blue','c':'cyan',\
-                  'm':'magenta','y':'yellow','k':'black','w':'white'}
-        
+        d = {'r': 'red',
+             'g': 'green',
+             'b': 'blue',
+             'c': 'cyan',
+             'm': 'magenta',
+             'y': 'yellow',
+             'k': 'black',
+             'w': 'white'}
+        default_colors = OrderedDict(sorted(d.items(), key=lambda t: t[0]))
+
         if colorscale is None:
             colorscale = [
-                "rgb(0,116,217)",
-                "rgb(255,65,54)",
-                "rgb(133,20,75)",
-                "rgb(255,133,27)",
-                "rgb(255,220,0)",
-                "rgb(61,153,112)"]
+                "rgb(0,116,217)",   # blue
+                "rgb(35,205,205)",  # cyan
+                "rgb(61,153,112)",  # green
+                "rgb(40,35,35)",    # black
+                "rgb(133,20,75)",   # magenta
+                "rgb(255,65,54)",   # red
+                "rgb(255,255,255)",   # white
+                "rgb(255,220,0)"]   # yellow
+
         for i in range(len(default_colors.keys())):
-            k = default_colors.keys()[i] 
-            if i < len( colorscale ):
-                default_colors[k] = colorscale[i] 
+            k = default_colors.keys()[i]
+            if i < len(colorscale):
+                default_colors[k] = colorscale[i]
                 
         return default_colors
    
-    def set_axis_layout( self, axis_key ):
+    def set_axis_layout(self, axis_key):
         ''' Sets and returns default axis object for dendrogram figure 
             axis_key: "xaxis", "xaxis1", "yaxis", yaxis1", etc '''
         
