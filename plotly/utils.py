@@ -10,8 +10,10 @@ import os.path
 import re
 import sys
 import threading
+from StringIO import StringIO
 
 import pytz
+import six.moves
 
 try:
     import numpy
@@ -345,3 +347,37 @@ def is_source_key(key):
         return True
     else:
         return False
+
+
+# TODO: unclear if there's an async version to hook to our StreamReader.
+class HttpResponseParser(object):
+    """To parse a raw http response, we need to fake a socket."""
+
+    class FakeSocket(object):
+        def __init__(self, response_str):
+            self._file = StringIO(response_str)
+
+        def makefile(self, *args, **kwargs):
+            return self._file
+
+    def __init__(self, response_string):
+        self.response_string = response_string
+
+    def get_response(self):
+        sock = self.FakeSocket(self.response_string)
+        response = six.moves.http_client.HTTPResponse(sock)
+        response.begin()
+        return response
+
+
+class DisconnectThread(threading.Thread):
+    """Provides a disconnect api to communicate with threads."""
+
+    _connected = True
+
+    @property
+    def connected(self):
+        return self._connected
+
+    def disconnect(self):
+        self._connected = False

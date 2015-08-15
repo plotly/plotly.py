@@ -19,12 +19,18 @@ from __future__ import absolute_import
 import base64
 import copy
 import json
+import socket
 import os
+import threading
+import time
 import warnings
+from collections import deque
 
 import requests
 import six
 import six.moves
+import trollius
+from trollius import From, Return, TimeoutError
 
 from requests.auth import HTTPBasicAuth
 
@@ -33,6 +39,7 @@ from plotly.plotly import chunked_requests
 from plotly.session import (sign_in, update_session_plot_options,
                             get_session_plot_options, get_session_credentials,
                             get_session_config)
+from plotly.utils import HttpResponseParser, DisconnectThread
 
 __all__ = None
 
@@ -439,6 +446,295 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
         except:
             raise exceptions.PlotlyError(
                 "There was an error retrieving this file")
+
+
+class StreamWriter(object):
+    """
+    Class to help stream to Plotly's streaming server.
+
+    """
+    linear_back_off_rate = 0.250  # additional seconds per retry
+    linear_wait_max = 16  # seconds
+
+    exponential_back_off_base = 5  # base for exponentiation
+    exponential_wait_max = 320  # seconds
+
+    eol = '\r\n'  # end of line character for our http communication
+
+    def __init__(self, token, ignore_status_codes=(None, 200),
+                 ignore_errors=(), queue_length=500, initial_write_timeout=4):
+        """
+        Initialize a StreamWriter which can write to Plotly's streaming server.
+
+        :param (str) token: The Plotly streaming token which links a trace to
+            this data stream. *Not* your Plotly api_key.
+
+        :param ignore_status_codes: Http status codes to ignore from server and
+            reconnect on.
+
+        :param (int) queue_length: The maximum number of messages to store if
+            we're waiting to communicate with server.
+
+        :param (int) initial_write_timeout: Seconds to wait for a response from
+            the streaming server after the initial http request is sent.
+
+        :param ignore_errors: Exception classes to ignore and reconnect on.
+            Useful if you want quietly reconnect on network hiccups.
+
+        """
+        self.token = token
+        self.ignore_status_codes = ignore_status_codes
+        self.ignore_errors = ignore_errors
+        self.queue_length = queue_length
+        self.initial_write_timeout = initial_write_timeout
+
+        self._queue = deque(maxlen=self.queue_length)  # prevent memory leaks
+        self._last_beat = None
+
+        self._connect_errors = 0
+        self._last_connect_error = time.time()
+        self._disconnections = 0
+        self._last_disconnection = time.time()
+
+        self._thread = None
+        self._reader = None
+        self._writer = None
+
+        self._error = None
+        self._response = None
+
+        # hold reference to germain credentials/config at instantiation time.
+        self.host = get_config()['plotly_streaming_domain']
+        self.port = 80
+
+        self._headers = {'Plotly-Streamtoken': self.token, 'Host': self.host,
+                         'Transfer-Encoding': 'chunked',
+                         'Content-Type': 'text/plain'}
+
+    def _reset(self):
+        """Prep some attributes to reconnect."""
+        self._response = None
+        self._error = None
+        self._last_beat = None
+        self._reader = None
+        self._writer = None
+
+    def _back_off_linearly(self):
+        """Back off linearly if connect exceptions are thrown in the thread."""
+        now = time.time()
+        if now - self._last_connect_error > self.linear_wait_max * 2:
+            self._connect_errors = 0
+        self._last_connect_error = now
+
+        self._connect_errors += 1
+        wait_time = self._connect_errors * self.linear_back_off_rate
+        if wait_time > self.linear_wait_max:
+            raise exceptions.TooManyConnectFailures
+        else:
+            time.sleep(wait_time)
+
+    def _back_off_exponentially(self):
+        """Back off exponentially if peer keeps disconnecting."""
+        now = time.time()
+        if now - self._last_disconnection > self.exponential_wait_max * 2:
+            self._disconnections = 0
+        self._last_disconnection = now
+
+        self._disconnections += 1
+        wait_time = self.exponential_back_off_base ** self._disconnections
+        if wait_time > self.exponential_wait_max:
+            raise exceptions.TooManyConnectFailures
+        else:
+            time.sleep(wait_time)
+
+    def _raise_for_response(self):
+        """If we got a response, the server disconnected. Possibly raise."""
+        if self._response is None:
+            return
+
+        try:
+            response = self.response
+            message = response.read()
+            status = response.status
+        except (AttributeError, six.moves.http_client.BadStatusLine):
+            message = ''
+            status = None
+
+        if status not in self.ignore_status_codes:
+            raise exceptions.ClosedConnection(message, status_code=status)
+
+        # if we didn't raise here, we need to at least back off
+        if status >= 500:
+            self._back_off_linearly()  # it's the server's fault.
+        else:
+            self._back_off_exponentially()  # it's the client's fault.
+
+    def _raise_for_error(self):
+        """If there was an error during reading/writing, possibly raise."""
+        if self._error is None:
+            return
+
+        if not isinstance(self._error, self.ignore_errors):
+            raise self._error
+
+        # if we didn't raise here, we need to at least back off
+        if isinstance(self._error, socket.error):
+            self._back_off_linearly()
+
+        # TODO: do we need to dive into the socket error numbers here?
+
+    def _check_pulse(self):
+        """Streams get shut down after 60 seconds of inactivity."""
+        self._last_beat = self._last_beat or time.time()
+        now = time.time()
+        if now - self._last_beat > 30:
+            self._last_beat = now
+            if not self._queue:
+                self.write('')
+
+    def _initial_write(self):
+        """Write our request-line and readers with a blank body."""
+        self._writer.write('POST / HTTP/1.1')
+        self._writer.write(self.eol)
+        for header, header_value in self._headers.items():
+            self._writer.write('{}: {}'.format(header, header_value))
+            self._writer.write(self.eol)
+        self._writer.write(self.eol)
+
+    def _write(self):
+        """Check the queue, if it's not empty, write a chunk!"""
+        if self._queue:
+            self._chunk = self._queue.pop()
+            hex_len = format(len(self._chunk), 'x')
+            self._writer.write()
+            message = '{}\r\n{}\r\n'.format(hex_len, self._chunk)
+            self._writer.write(message.encode('utf-8'))
+
+    @trollius.coroutine
+    def _read(self, timeout=0.01):
+        """
+        Read the whole buffer or return None if nothing's there.
+
+        :return: (str|None)
+
+        """
+        try:
+            data = yield From(trollius.wait_for(self._reader.read(),
+                                                timeout=timeout))
+        except TimeoutError:
+            data = None
+
+        # This is how we return from coroutines with trollius
+        raise Return(data)
+
+    @trollius.coroutine
+    def _read_write(self):
+        """
+        Entry point into coroutine functionality.
+
+        Creates a reader and a writer by opening a connection to Plotly's
+        streaming server. Then, it loops forever!
+
+        """
+        try:
+            # open up a connection and get our StreamReader/StreamWriter
+            current_thread = threading.current_thread()
+            self._reader, self._writer = yield From(trollius.wait_for(
+                trollius.open_connection(self.host, self.port), timeout=60
+            ))
+
+            # wait for an initial failure response, e.g., bad headers
+            self._initial_write()
+            self._response = yield From(self._read(self.initial_write_timeout))
+
+            # read/write until server responds or thread is disconnected.
+            while self._response is None and current_thread.connected:
+                self._check_pulse()
+                self._response = yield From(self._read())  # usually just None.
+                self._write()
+
+        except Exception as e:
+            self._error = e
+        finally:
+            if self._writer:
+                self._writer.close()
+
+    def _thread_func(self, loop):
+        """
+        StreamWriters have threads that loop coroutines forever.
+
+        :param loop: From `trollius.get_event_loop()`
+
+        """
+        trollius.set_event_loop(loop)
+        loop.run_until_complete(self._read_write())
+
+    @property
+    def connected(self):
+        """Returns state of the StreamWriter's thread."""
+        return self._thread and self._thread.isAlive()
+
+    @property
+    def response(self):
+        """Return a response object parsed from server string response."""
+        if self._response is None:
+            return None
+        return HttpResponseParser(self._response).get_response()
+
+    def open(self):
+        """
+        Standard `open` API. Strictly unnecessary as it opens on `write`.
+
+        If not already opened, start a new daemon thread to consume the buffer.
+
+        """
+        if self.connected:
+            return
+
+        # if we've previously hit a failure, we should let the user know
+        self._raise_for_response()
+        self._raise_for_error()
+
+        # reset our error, response, pulse information, etc.
+        self._reset()
+
+        # start up a new daemon thread
+        loop = trollius.get_event_loop()
+        self._thread = DisconnectThread(target=self._thread_func, args=(loop,))
+        self._thread.setDaemon(True)
+        self._thread.start()
+
+    def write(self, chunk):
+        """
+        Standard `write` API.
+
+        Reopens connection if closed and appends chunk to buffer.
+
+        If chunk isn't a str|unicode, `json.dumps` is called with chunk.
+
+        :param (str|unicode|dict) chunk: The data to be queued to send.
+
+        """
+        if not self.connected:
+            self.open()
+
+        if not isinstance(chunk, six.string_types):
+            chunk = json.dumps(chunk, cls=utils.PlotlyJSONEncoder)
+
+        self._queue.appendleft(chunk + '\n')  # needs at least 1 trailing '\n'
+
+    def close(self):
+        """
+        Standard `close` API.
+
+        Ensures thread is disconnected.
+
+        """
+        if not self.connected:
+            return
+
+        self._thread.disconnect()  # lets thread know to stop communicating
+        self._thread = None
 
 
 @utils.template_doc(**tools.get_config_file())

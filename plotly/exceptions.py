@@ -234,3 +234,20 @@ class PlotlyAccountError(PlotlyServerError):
 
 class PlotlyRateLimitError(PlotlyServerError):
     pass
+
+
+class ClosedConnection(PlotlyConnectionError):
+    """Raised when the Plotly streaming server has disconnected."""
+    def __init__(self, message, status_code=None):
+        self.message = "[Code: {}] {}".format(status_code, message)
+        self.status_code = status_code or None
+        super(ClosedConnection, self).__init__(self.message)
+
+
+class TooManyConnectFailures(PlotlyConnectionError):
+    """Raised when too many unsuccessful (re)connects were attempted"""
+    message = "Connecting or reconnecting to stream failed too many times."
+
+    def __init__(self, message=None):
+        message = message or self.message
+        super(TooManyConnectFailures, self).__init__(message)
