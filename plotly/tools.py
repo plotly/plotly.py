@@ -2932,8 +2932,8 @@ class _Dendrogram(FigureFactory):
         py.iplot( fig, filename='Dendro', validate=False )'''
     
     def __init__(self, X, orientation='bottom', labels=None, colorscale=None, \
-                 width=700, height=700, xaxis='xaxis', yaxis='yaxis' ):
-        ''' Draw a 2d dendrogram tree 
+                 width="100%", height="100%", xaxis='xaxis', yaxis='yaxis' ):
+        ''' Draw a 2d dendrogram tree
             X: Heatmap matrix as array of arrays
             orientation: 'top', 'right', 'bottom', or 'left'
             labels: List of axis category labels
@@ -3009,7 +3009,7 @@ class _Dendrogram(FigureFactory):
         
         axis_defaults = {
                 'type': 'linear',
-                'ticks': 'inside',
+                'ticks': 'outside',
                 'mirror': 'allticks',
                 'rangemode': 'tozero',
                 'showticklabels': True,                 
@@ -3018,9 +3018,9 @@ class _Dendrogram(FigureFactory):
                 'showline': True,
             }
         
-        if self.labels != None:
+        if len(self.labels) != 0:
             axis_key_labels = self.xaxis
-            if self.orientation in ['left','right']:
+            if self.orientation in ['left', 'right']:
                 axis_key_labels = self.yaxis
             if axis_key_labels not in self.layout:
                 self.layout[axis_key_labels] = {}
@@ -3028,19 +3028,19 @@ class _Dendrogram(FigureFactory):
             self.layout[axis_key_labels]['ticktext'] = self.labels
             self.layout[axis_key_labels]['tickmode'] = 'array'
             
-        self.layout[axis_key].update( axis_defaults )
+        self.layout[axis_key].update(axis_defaults)
             
         return self.layout[axis_key]
 
-    def set_figure_layout( self, width, height ):
+    def set_figure_layout(self, width, height):
         ''' Sets and returns default layout object for dendrogram figure '''
         
         self.layout.update({
-            'showlegend':False,
-            'autoscale':False,            
-            'hovermode':'closest',
-            'width':width,
-            'width':height 
+            'showlegend': False,
+            'autoscale': False,          
+            'hovermode': 'closest',
+            'width': width,
+            'width': height
         })
         
         self.set_axis_layout(self.xaxis)
