@@ -3089,12 +3089,12 @@ class _Distplot(FigureFactory):
                 "rgb(148, 103, 189)", "rgb(140, 86, 75)",
                 "rgb(227, 119, 194)", "rgb(127, 127, 127)",
                 "rgb(188, 189, 34)", "rgb(23, 190, 207)"]
-        self.curve_x = [None]*self.trace_number
-        self.curve_y = [None]*self.trace_number
+        self.curve_x = [None] * self.trace_number
+        self.curve_y = [None] * self.trace_number
 
         for trace in self.hist_data:
-            self.start.append(min(trace)*1.)
-            self.end.append(max(trace)*1.)
+            self.start.append(min(trace) * 1.)
+            self.end.append(max(trace) * 1.)
 
     def make_hist(self):
         """
@@ -3102,7 +3102,7 @@ class _Distplot(FigureFactory):
 
         :rtype (list) hist: list of histogram representations
         """
-        hist = [None]*self.trace_number
+        hist = [None] * self.trace_number
 
         for index in range(self.trace_number):
             hist[index] = dict(type='histogram',
@@ -3128,7 +3128,7 @@ class _Distplot(FigureFactory):
 
         :rtype (list) curve: list of kde representations
         """
-        curve = [None]*self.trace_number
+        curve = [None] * self.trace_number
         for index in range(self.trace_number):
             self.curve_x[index] = [self.start[index] +
                                    x * (self.end[index] - self.start[index])
@@ -3159,9 +3159,9 @@ class _Distplot(FigureFactory):
 
         :rtype (list) curve: list of normal curve representations
         """
-        curve = [None]*self.trace_number
-        mean = [None]*self.trace_number
-        sd = [None]*self.trace_number
+        curve = [None] * self.trace_number
+        mean = [None] * self.trace_number
+        sd = [None] * self.trace_number
 
         for index in range(self.trace_number):
             mean[index], sd[index] = (scipy.stats.norm.fit
@@ -3192,7 +3192,7 @@ class _Distplot(FigureFactory):
 
         :rtype (list) rug: list of rug plot representations
         """
-        rug = [None]*self.trace_number
+        rug = [None] * self.trace_number
         for index in range(self.trace_number):
 
             rug[index] = dict(type='scatter',
