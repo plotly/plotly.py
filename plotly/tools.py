@@ -20,8 +20,7 @@ from plotly import utils
 from plotly import exceptions
 from plotly import session
 
-from plotly.graph_objs import graph_objs
-from plotly.graph_objs import Scatter, Marker, Line, Data
+from plotly.graph_objs import graph_objs, Scatter, Marker, Line, Data
 
 
 # Warning format
@@ -52,12 +51,22 @@ except ImportError:
 
 try:
     import scipy as scp
-    import scipy.spatial as scs 
-    import scipy.cluster.hierarchy as sch 
-
     _scipy_imported = True
 except ImportError:
     _scipy_imported = False
+
+try:
+    import scipy.spatial as scs
+    _scipy__spatial_imported = True
+except ImportError:
+    _scipy__spatial_imported = False
+
+try:
+    import scipy.cluster.hierarchy as sch
+    _scipy__cluster__hierarchy_imported = True
+except ImportError:
+    _scipy__cluster__hierarchy_imported = False
+
 
 PLOTLY_DIR = os.path.join(os.path.expanduser("~"), ".plotly")
 CREDENTIALS_FILE = os.path.join(PLOTLY_DIR, ".credentials")
@@ -2323,10 +2332,12 @@ class FigureFactory(object):
         py.iplot(dendro_X, validate=False, height=1000, width=300)
         ```
         """
-
-        if _scipy_imported is False:
-            raise ImportError("FigureFactory.create_dendrogram requires scipy,
-                              scipy.spatial and scipy.hierarchy")
+        dependencies = (_scipy_imported and _scipy__spatial_imported and
+                        _scipy__cluster__hierarchy_imported)
+    
+        if dependencies is False:
+            raise ImportError("FigureFactory.create_dendrogram requires scipy, \
+                                scipy.spatial and scipy.hierarchy")
 
         s = X.shape
         if len(s) != 2:
@@ -2934,14 +2945,15 @@ class _Candlestick(FigureFactory):
         return (decrease_x, decrease_close, decrease_dif,
                 stick_decrease_y, stick_decrease_x)
 
+
 class _Dendrogram(FigureFactory):
-    
+   
     """
     Refer to FigureFactory.create_dendrogram() for docstring.
     """
 
-    def __init__(self, X, orientation='bottom', labels=None, colorscale=None, \
-                 width="100%", height="100%", xaxis='xaxis', yaxis='yaxis' ):
+    def __init__(self, X, orientation='bottom', labels=None, colorscale=None,
+                 width="100%", height="100%", xaxis='xaxis', yaxis='yaxis'):
         self.orientation = orientation
         self.labels = labels
         self.xaxis = xaxis
@@ -2961,8 +2973,8 @@ class _Dendrogram(FigureFactory):
         else:
             self.sign[self.yaxis] = -1
         
-        dd_traces, xvals, yvals,
-        ordered_labels, leaves = self.get_dendrogram_traces(X, colorscale)
+        (dd_traces, xvals, yvals,
+            ordered_labels, leaves) = self.get_dendrogram_traces(X, colorscale)
         
         self.labels = ordered_labels
         self.leaves = leaves
