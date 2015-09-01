@@ -2346,8 +2346,7 @@ class FigureFactory(object):
         dendrogram = _Dendrogram(X, orientation, labels, colorscale)
 
         return {'layout': dendrogram.layout,
-                'data': dendrogram.data,
-                'labels': dendrogram.labels}
+                'data': dendrogram.data}
 
 
 class _Quiver(FigureFactory):
@@ -2953,7 +2952,7 @@ class _Dendrogram(FigureFactory):
     """
 
     def __init__(self, X, orientation='bottom', labels=None, colorscale=None,
-                 width="100%", height="100%", xaxis='xaxis', yaxis='yaxis'):
+                 width="100%", height="100%", xaxis='x', yaxis='y'):
         self.orientation = orientation
         self.labels = labels
         self.xaxis = xaxis
@@ -3125,8 +3124,8 @@ class _Dendrogram(FigureFactory):
                             y=np.multiply(self.sign[self.yaxis], ys),
                             mode='lines',
                             marker=Marker(color=colors[color_key]))
-            trace['xaxis'] = 'x'+self.xaxis[-1]
-            trace['yaxis'] = 'y'+self.yaxis[-1]
+            trace['xaxis'] = self.xaxis
+            trace['yaxis'] = self.yaxis
             trace_list.append(trace)
            
         return trace_list, icoord, dcoord, ordered_labels, P['leaves']

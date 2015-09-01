@@ -115,29 +115,29 @@ class TestDendrogram(TestCase):
                                                                  [1, 2, 3, 1]]))
         expected_dendro_data = [{'marker': {'color': 'rgb(255,133,27)'},
                                  'mode': 'lines', 'xaxis': 'xs',
-                                 'yaxis': 'ys',
+                                 'yaxis': 'y',
                                  'y': np.array([0.,  1.,  1.,  0.]),
                                  'x': np.array([25.,  25.,  35.,  35.]),
                                  'type': u'scatter'},
                                 {'marker': {'color': 'rgb(255,133,27)'},
                                  'mode': 'lines',
-                                 'xaxis': 'xs',
-                                 'yaxis': 'ys',
+                                 'xaxis': 'x',
+                                 'yaxis': 'y',
                                  'y': np.array([0., 2.23606798,
                                                2.23606798, 1.]),
                                  'x': np.array([15., 15., 30., 30.]),
                                  'type': u'scatter'},
                                 {'marker': {'color': 'blue'},
                                  'mode': 'lines',
-                                 'xaxis': 'xs',
-                                 'yaxis': 'ys',
+                                 'xaxis': 'x',
+                                 'yaxis': 'y',
                                  'y': np.array([0., 3.60555128,
                                                3.60555128, 2.23606798]),
                                  'x': np.array([5., 5., 22.5, 22.5]),
                                  'type': u'scatter'}]
 
         self.assertEqual(len(dendro['data']), len(expected_dendro_data))
-        self.assertTrue(np.array_equal(dendro['labels'],
+        self.assertTrue(np.array_equal(dendro['layout']['x']['ticktext'],
                                        np.array(['3', '2', '0', '1'])))
 
         for i in range(1, len(dendro['data'])):
@@ -152,7 +152,32 @@ class TestDendrogram(TestCase):
         # variable 2 is correlated with all the other variables
         X[2, :] = sum(X, 0)
 
-        dendro = tls.FigureFactory.create_dendrogram(X)
+        names = ['Jack', 'Oxana', 'John', 'Chelsea', 'Mark']
+        dendro = tls.FigureFactory.create_dendrogram(X, labels=names)
 
-        # Check that 2 is in a separate cluster
-        self.assertEqual(dendro['labels'][0], '2')
+        # Check that 2 is in a separate cluster and it's labelled correctly
+        self.assertEqual(dendro['layout']['x']['ticktext'][0], 'John')
+
+    def test_dendrogram_orientation(self):
+        X = np.random.rand(5, 5) 
+
+        dendro_left = tls.FigureFactory.create_dendrogram(X, orientation='left')
+
+        self.assertEqual(len(dendro_left['layout']['y']['ticktext']), 5)
+        tickvals_left = np.array(dendro_left['layout']['y']['tickvals'])
+        self.assertTrue((tickvals_left <= 0).all())
+
+        dendro_right = tls.FigureFactory.create_dendrogram(X, orientation='right')
+        tickvals_right = np.array(dendro_right['layout']['y']['tickvals'])
+        self.assertTrue((tickvals_right >= 0).all())
+
+        dendro_bottom = tls.FigureFactory.create_dendrogram(X, orientation='bottom')
+        self.assertEqual(len(dendro_bottom['layout']['x']['ticktext']), 5)
+        tickvals_bottom = np.array(dendro_bottom['layout']['x']['tickvals'])
+        self.assertTrue((tickvals_bottom >= 0).all())
+
+        dendro_top = tls.FigureFactory.create_dendrogram(X, orientation='top')
+        tickvals_top = np.array(dendro_top['layout']['x']['tickvals'])
+        self.assertTrue((tickvals_top <= 0).all())
+
+      
