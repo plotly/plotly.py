@@ -2952,7 +2952,7 @@ class _Dendrogram(FigureFactory):
     """
 
     def __init__(self, X, orientation='bottom', labels=None, colorscale=None,
-                 width="100%", height="100%", xaxis='x', yaxis='y'):
+                 width="100%", height="100%", xaxis='xaxis', yaxis='yaxis'):
         self.orientation = orientation
         self.labels = labels
         self.xaxis = xaxis
