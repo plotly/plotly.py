@@ -3124,8 +3124,20 @@ class _Dendrogram(FigureFactory):
                             y=np.multiply(self.sign[self.yaxis], ys),
                             mode='lines',
                             marker=Marker(color=colors[color_key]))
-            trace['xaxis'] = self.xaxis
-            trace['yaxis'] = self.yaxis
+
+            try:
+                x_index = int(self.xaxis[-1])
+            except ValueError:
+                x_index = ''
+
+            try:
+                y_index = int(self.yaxis[-1])
+            except ValueError:
+                y_index = ''
+
+            trace['xaxis'] = 'x' + x_index
+            trace['yaxis'] = 'y' + y_index
+
             trace_list.append(trace)
            
         return trace_list, icoord, dcoord, ordered_labels, P['leaves']

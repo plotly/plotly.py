@@ -113,38 +113,71 @@ class TestDendrogram(TestCase):
                                                                  [1, 1, 3, 4],
                                                                  [1, 2, 1, 4],
                                                                  [1, 2, 3, 1]]))
-        expected_dendro_data = [{'marker': {'color': 'rgb(255,133,27)'},
-                                 'mode': 'lines', 'xaxis': 'xs',
-                                 'yaxis': 'y',
-                                 'y': np.array([0.,  1.,  1.,  0.]),
-                                 'x': np.array([25.,  25.,  35.,  35.]),
-                                 'type': u'scatter'},
-                                {'marker': {'color': 'rgb(255,133,27)'},
-                                 'mode': 'lines',
-                                 'xaxis': 'x',
-                                 'yaxis': 'y',
-                                 'y': np.array([0., 2.23606798,
-                                               2.23606798, 1.]),
-                                 'x': np.array([15., 15., 30., 30.]),
-                                 'type': u'scatter'},
-                                {'marker': {'color': 'blue'},
-                                 'mode': 'lines',
-                                 'xaxis': 'x',
-                                 'yaxis': 'y',
-                                 'y': np.array([0., 3.60555128,
-                                               3.60555128, 2.23606798]),
-                                 'x': np.array([5., 5., 22.5, 22.5]),
-                                 'type': u'scatter'}]
+        expected_data = [{'marker': {'color': 'rgb(255,133,27)'},
+                          'mode': 'lines', 'xaxis': 'xs',
+                          'yaxis': 'y',
+                          'y': np.array([0.,  1.,  1.,  0.]),
+                          'x': np.array([25.,  25.,  35.,  35.]),
+                          'type': u'scatter'},
+                         {'marker': {'color': 'rgb(255,133,27)'},
+                          'mode': 'lines',
+                          'xaxis': 'x',
+                          'yaxis': 'y',
+                          'y': np.array([0., 2.23606798,
+                                        2.23606798, 1.]),
+                          'x': np.array([15., 15., 30., 30.]),
+                          'type': u'scatter'},
+                         {'marker': {'color': 'blue'},
+                          'mode': 'lines',
+                          'xaxis': 'x',
+                          'yaxis': 'y',
+                          'y': np.array([0., 3.60555128,
+                                        3.60555128, 2.23606798]),
+                          'x': np.array([5., 5., 22.5, 22.5]),
+                          'type': u'scatter'}]
+        expected_layout = {'width': '100%',
+                            'showlegend': False,
+                            'autoscale': False,
+                            'x': {'showticklabels': True,
+                                     'tickmode': 'array',
+                                     'ticks': 'outside',
+                                     'showgrid': False,
+                                     'mirror': 'allticks',
+                                     'zeroline': False,
+                                     'showline': True,
+                                     'ticktext': np.array(['3', '2',
+                                                           '0', '1'],
+                                                          dtype='|S1'),
+                                     'rangemode': 'tozero',
+                                     'type': 'linear',
+                                     'tickvals': np.array([5.0, 15.0,
+                                                          25.0, 35.0])},
+                            'y': {'showticklabels': True,
+                                  'ticks': 'outside',
+                                  'showgrid': False,
+                                  'mirror': 'allticks',
+                                  'zeroline': False,
+                                  'showline': True,
+                                  'rangemode': 'tozero',
+                                  'type': 'linear'},
+                            'hovermode': 'closest'}  
 
-        self.assertEqual(len(dendro['data']), len(expected_dendro_data))
-        self.assertTrue(np.array_equal(dendro['layout']['x']['ticktext'],
-                                       np.array(['3', '2', '0', '1'])))
-
+        # Make sure data is as expected
+        self.assertEqual(len(dendro['data']), len(expected_data))
         for i in range(1, len(dendro['data'])):
             self.assertTrue(np.allclose(dendro['data'][i]['x'],
-                            expected_dendro_data[i]['x']))
+                            expected_data[i]['x']))
             self.assertTrue(np.allclose(dendro['data'][i]['y'],
-                            expected_dendro_data[i]['y']))
+                            expected_data[i]['y']))
+
+        # Make sure layout is as expected
+        self.assertTrue(np.array_equal(dendro['layout']['x']['ticktext'],
+                                       expected_layout['x']['ticktext']))
+        self.assertTrue(np.array_equal(dendro['layout']['x']['tickvals'],
+                                       expected_layout['x']['tickvals']))
+        self.assertEqual(dendro['layout']['x']['ticks'], 'outside')
+        self.assertEqual(dendro['layout']['y']['ticks'], 'outside')
+        self.assertEqual(dendro['layout']['width'], expected_layout['width'])
 
     def test_dendrogram_random_matrix(self):
         # create a random uncorrelated matrix
