@@ -9,7 +9,6 @@ Functions that USERS will possibly want access to.
 """
 from __future__ import absolute_import
 
-import os.path
 import warnings
 
 import six
@@ -19,6 +18,7 @@ import math
 
 from plotly import utils
 from plotly import exceptions
+from plotly import graph_reference
 from plotly import session
 from plotly.files import (CONFIG_FILE, CREDENTIALS_FILE, FILE_CONTENT,
                           GRAPH_REFERENCE_FILE, check_file_permissions)
@@ -64,8 +64,6 @@ def get_config_defaults():
     return dict(FILE_CONTENT[CONFIG_FILE])  # performs a shallow copy
 
 
-
-
 def ensure_local_plotly_files():
     """Ensure that filesystem is setup/filled out in a valid way"""
     if check_file_permissions():
@@ -81,7 +79,14 @@ def ensure_local_plotly_files():
                 if key not in FILE_CONTENT[fn]:
                     del contents[key]
             utils.save_json_dict(fn, contents)
-        ensure_graph_reference_file()
+
+        # make a request to get graph reference if DNE.
+        utils.ensure_file_exists(GRAPH_REFERENCE_FILE)
+        graph_reference_dict = utils.load_json_dict(GRAPH_REFERENCE_FILE)
+
+        if not graph_reference_dict:
+            utils.save_json_dict(GRAPH_REFERENCE_FILE,
+                                 graph_reference.GRAPH_REFERENCE)
     else:
         warnings.warn("Looks like you don't have 'read-write' permission to "
                       "your 'home' ('~') directory or to our '~/.plotly' "
@@ -223,6 +228,14 @@ def reset_config_file():
     f = open(CONFIG_FILE, 'w')
     f.close()
     ensure_local_plotly_files()  # put the defaults back
+
+
+### graph reference tools ###
+
+def reset_graph_reference_file():
+    """Temporary until we can use local hash in request for graph reference."""
+    utils.ensure_file_exists(GRAPH_REFERENCE_FILE)
+    utils.save_json_dict(GRAPH_REFERENCE_FILE, {})
 
 
 ### embed tools ###
