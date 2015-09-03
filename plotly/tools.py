@@ -21,9 +21,6 @@ from plotly import utils
 from plotly import exceptions
 from plotly import session
 
-from plotly.graph_objs import graph_objs
-from plotly.graph_objs import Scatter, Marker
-
 
 # Warning format
 def warning_on_one_line(message, category, filename, lineno,
@@ -518,6 +515,8 @@ def get_subplots(rows=1, columns=1, print_grid=False, **kwargs):
         Space between subplot rows.
 
     """
+    # TODO: protected until #282
+    from plotly.graph_objs import graph_objs
 
     warnings.warn(
         "tools.get_subplots is depreciated. "
@@ -775,6 +774,8 @@ def make_subplots(rows=1, cols=1,
             * h (float or 'to_end', default='to_end') inset height
                   in fraction of cell height ('to_end': to cell top edge)
     """
+    # TODO: protected until #282
+    from plotly.graph_objs import graph_objs
 
     # Throw exception for non-integer rows and cols
     if not isinstance(rows, int) or rows <= 0:
@@ -1289,6 +1290,8 @@ def get_valid_graph_obj(obj, obj_type=None):
     CAREFUL: this will *silently* strip out invalid pieces of the object.
 
     """
+    # TODO: Deprecate or move. #283
+    from plotly.graph_objs import graph_objs
     try:
         new_obj = graph_objs.get_class_instance_by_name(
             obj.__class__.__name__)
@@ -1316,6 +1319,8 @@ def validate(obj, obj_type):
     valid 'obj_type' graph object.
 
     """
+    # TODO: Deprecate or move. #283
+    from plotly.graph_objs import graph_objs
     try:
         obj_type = graph_objs.KEY_TO_NAME[obj_type]
     except KeyError:
@@ -1334,6 +1339,8 @@ def validate_stream(obj, obj_type):
     An error is raised if a key within (or nested within) is not streamable.
 
     """
+    # TODO: Deprecate or move. #283
+    from plotly.graph_objs import graph_objs
     try:
         obj_type = graph_objs.KEY_TO_NAME[obj_type]
     except KeyError:
@@ -1656,6 +1663,8 @@ class FigureFactory(object):
         py.plot(fig, filename='quiver')
         ```
         """
+        # TODO: protected until #282
+        from plotly.graph_objs import graph_objs
         FigureFactory.validate_equal_length(x, y, u, v)
         FigureFactory.validate_positive_scalars(arrow_scale=arrow_scale,
                                                 scale=scale)
@@ -1664,9 +1673,9 @@ class FigureFactory(object):
                                  arrow_scale, angle).get_barbs()
         arrow_x, arrow_y = _Quiver(x, y, u, v, scale,
                                    arrow_scale, angle).get_quiver_arrows()
-        quiver = Scatter(x=barb_x + arrow_x,
-                         y=barb_y + arrow_y,
-                         mode='lines', **kwargs)
+        quiver = graph_objs.Scatter(x=barb_x + arrow_x,
+                                    y=barb_y + arrow_y,
+                                    mode='lines', **kwargs)
 
         data = [quiver]
         layout = graph_objs.Layout(hovermode='closest')
@@ -1757,6 +1766,8 @@ class FigureFactory(object):
         py.plot(fig, filename='streamline')
         ```
         """
+        # TODO: protected until #282
+        from plotly.graph_objs import graph_objs
         FigureFactory.validate_equal_length(x, y)
         FigureFactory.validate_equal_length(u, v)
         FigureFactory.validate_streamline(x, y)
@@ -1770,9 +1781,9 @@ class FigureFactory(object):
                                        density, angle,
                                        arrow_scale).get_streamline_arrows()
 
-        streamline = Scatter(x=streamline_x + arrow_x,
-                             y=streamline_y + arrow_y,
-                             mode='lines', **kwargs)
+        streamline = graph_objs.Scatter(x=streamline_x + arrow_x,
+                                        y=streamline_y + arrow_y,
+                                        mode='lines', **kwargs)
 
         data = [streamline]
         layout = graph_objs.Layout(hovermode='closest')
@@ -1983,6 +1994,8 @@ class FigureFactory(object):
         py.iplot(fig, filename='finance/simple-ohlc', validate=False)
         ```
         """
+        # TODO: protected until #282
+        from plotly.graph_objs import graph_objs
         if dates is not None:
             FigureFactory.validate_equal_length(open, high, low, close, dates)
         else:
@@ -2213,6 +2226,8 @@ class FigureFactory(object):
         py.iplot(fig, filename='finance/simple-candlestick', validate=False)
         ```
         """
+        # TODO: protected until #282
+        from plotly.graph_objs import graph_objs
         if dates is not None:
             FigureFactory.validate_equal_length(open, high, low, close, dates)
         else:
