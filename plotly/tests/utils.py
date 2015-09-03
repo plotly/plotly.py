@@ -3,8 +3,8 @@ import json
 from numbers import Number as Num
 from unittest import TestCase
 
+from plotly.files import CREDENTIALS_FILE, CONFIG_FILE, check_file_permissions
 from plotly import session
-from plotly.tools import CREDENTIALS_FILE, CONFIG_FILE, _file_permissions
 
 
 class PlotlyTestCase(TestCase):
@@ -24,14 +24,14 @@ class PlotlyTestCase(TestCase):
         self.restore_file_credentials_and_config()
 
     def stash_file_credentials_and_config(self):
-        if _file_permissions:
+        if check_file_permissions():
             with open(CREDENTIALS_FILE, 'r') as f:
                 self._file_credentials = json.load(f)
             with open(CONFIG_FILE, 'r') as f:
                 self._file_config = json.load(f)
 
     def restore_file_credentials_and_config(self):
-        if _file_permissions:
+        if check_file_permissions():
             if self._file_credentials is not None:
                 with open(CREDENTIALS_FILE, 'w') as f:
                     json.dump(self._file_credentials, f)
