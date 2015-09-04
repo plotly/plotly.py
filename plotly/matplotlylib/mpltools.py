@@ -83,6 +83,24 @@ def convert_symbol(mpl_symbol):
         return 'dot'  # default
 
 
+def hex_to_rgb(value):
+    value = value.lstrip('#')
+    lv = len(value)
+    return tuple(int(value[i:i + lv // 3], 16) for i in range(0, lv, lv // 3))
+
+
+def merge_color_and_opacity(color, opacity):
+    if color is None:
+        return None
+
+    rgb_tup = hex_to_rgb(color)
+    if opacity is None:
+        return 'rgb {}'.format(rgb_tup)
+
+    rgba_tup = rgb_tup + (opacity,)
+    return 'rgba {}'.format(rgba_tup)
+
+
 def convert_va(mpl_va):
     """Convert mpl vertical alignment word to equivalent HTML word.
 
@@ -394,13 +412,13 @@ def prep_ticks(ax, index, ax_type, props):
         else:
             axis_dict['tick0'] = tick0
             axis_dict['dtick'] = dtick
-            axis_dict['autotick'] = False
+            axis_dict['tickmode'] = False
     elif scale == 'log':
         try:
             axis_dict['tick0'] = props['axes'][index]['tickvalues'][0]
             axis_dict['dtick'] = props['axes'][index]['tickvalues'][1] - \
                             props['axes'][index]['tickvalues'][0]
-            axis_dict['autotick'] = False
+            axis_dict['tickmode'] = False
         except (IndexError, TypeError):
             axis_dict = dict(nticks=props['axes'][index]['nticks'])
         base = axis.get_transform().base
@@ -429,7 +447,7 @@ def prep_ticks(ax, index, ax_type, props):
             pass
         finally:
             axis_dict.pop('dtick', None)
-            axis_dict.pop('autotick', None)
+            axis_dict.pop('tickmode', None)
             axis_dict['range'] = mpl_dates_to_datestrings(
                 props['xlim'], formatter
             )

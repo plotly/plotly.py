@@ -125,7 +125,7 @@ def test_append_scatter3d():
                 x=[1, 2, 3],
                 y=[2, 3, 4],
                 z=[1, 2, 3],
-                scene='scene2'
+                scene='scene1'
             ),
             Scatter3d(
                 x=[1, 2, 3],
@@ -145,7 +145,7 @@ def test_append_scatter3d():
     )
 
     fig = tls.make_subplots(rows=2, cols=1,
-                            specs=[[{'is_3d': True}], 
+                            specs=[[{'is_3d': True}],
                                    [{'is_3d': True}]])
     trace = Scatter3d(x=[1, 2, 3], y=[2, 3, 4], z=[1, 2, 3])
     fig.append_trace(trace, 1, 1)
@@ -156,7 +156,7 @@ def test_append_scatter3d():
 @raises(Exception)
 def test_append_scatter3d_after_deleting_scene():
     fig = tls.make_subplots(rows=2, cols=1,
-                            specs=[[{'is_3d': True}], 
+                            specs=[[{'is_3d': True}],
                                    [{'is_3d': True}]])
     trace = Scatter3d(x=[1, 2, 3], y=[2, 3, 4], z=[1, 2, 3])
     fig['layout'].pop('scene1', None)

@@ -1259,14 +1259,14 @@ def make_subplots(rows=1, cols=1,
 
     fig = graph_objs.Figure(layout=layout)
 
-    fig._grid_ref = grid_ref
-    fig._grid_str = grid_str
+    fig.__dict__['_grid_ref'] = grid_ref
+    fig.__dict__['_grid_str'] = grid_str
 
     return fig
 
 
 def get_valid_graph_obj(obj, obj_type=None):
-    """Returns a new graph object that is guaranteed to pass validate().
+    """Returns a new graph object that won't raise.
 
     CAREFUL: this will *silently* strip out invalid pieces of the object.
 
@@ -1274,22 +1274,15 @@ def get_valid_graph_obj(obj, obj_type=None):
     # TODO: Deprecate or move. #283
     from plotly.graph_objs import graph_objs
     try:
-        new_obj = graph_objs.get_class_instance_by_name(
-            obj.__class__.__name__)
-    except KeyError:
+        cls = getattr(graph_objs, obj.__class__.__name__)
+    except (AttributeError, KeyError):
         try:
-            new_obj = graph_objs.get_class_instance_by_name(obj_type)
-        except KeyError:
+            cls = getattr(graph_objs, obj_type)
+        except (AttributeError, KeyError):
             raise exceptions.PlotlyError(
                 "'{0}' nor '{1}' are recognizable graph_objs.".
                 format(obj.__class__.__name__, obj_type))
-    if isinstance(new_obj, list):
-        new_obj += obj
-    else:
-        for key, val in list(obj.items()):
-            new_obj[key] = val
-    new_obj.force_clean()
-    return new_obj
+    return cls(obj, _raise=False)
 
 
 def validate(obj, obj_type):
@@ -1302,53 +1295,18 @@ def validate(obj, obj_type):
     """
     # TODO: Deprecate or move. #283
     from plotly.graph_objs import graph_objs
+
+    if obj_type not in graph_reference.CLASS_NAMES_TO_OBJECT_NAMES:
+        obj_type = graph_reference.string_to_class_name(obj_type)
+
     try:
-        obj_type = graph_objs.KEY_TO_NAME[obj_type]
-    except KeyError:
-        pass
-    try:
-        test_obj = graph_objs.get_class_instance_by_name(obj_type, obj)
-    except KeyError:
+        cls = getattr(graph_objs, obj_type)
+    except AttributeError:
         raise exceptions.PlotlyError(
             "'{0}' is not a recognizable graph_obj.".
             format(obj_type))
 
-
-def validate_stream(obj, obj_type):
-    """Validate a data dictionary (only) for use with streaming.
-
-    An error is raised if a key within (or nested within) is not streamable.
-
-    """
-    # TODO: Deprecate or move. #283
-    from plotly.graph_objs import graph_objs
-    try:
-        obj_type = graph_objs.KEY_TO_NAME[obj_type]
-    except KeyError:
-        pass
-    info = graph_objs.INFO[graph_objs.NAME_TO_KEY[obj_type]]
-    for key, val in list(obj.items()):
-        if key == 'type':
-            continue
-        if 'streamable' in info['keymeta'][key].keys():
-            if not info['keymeta'][key]['streamable']:
-                raise exceptions.PlotlyError(
-                    "The '{0}' key is not streamable in the '{1}' "
-                    "object".format(
-                        key, obj_type
-                    )
-                )
-        else:
-            raise exceptions.PlotlyError(
-                "The '{0}' key is not streamable in the '{1}' object".format(
-                    key, obj_type
-                )
-            )
-        try:
-            sub_obj_type = graph_objs.KEY_TO_NAME[key]
-            validate_stream(val, sub_obj_type)
-        except KeyError:
-            pass
+    cls(obj)  # this will raise on invalid keys/items
 
 
 def _replace_newline(obj):
@@ -1398,6 +1356,7 @@ if _ipython_imported:
 
 
 def return_figure_from_figure_or_data(figure_or_data, validate_figure):
+    from plotly.graph_objs import graph_objs
     if isinstance(figure_or_data, dict):
         figure = figure_or_data
     elif isinstance(figure_or_data, list):
@@ -1407,8 +1366,9 @@ def return_figure_from_figure_or_data(figure_or_data, validate_figure):
                                      "argument must be either "
                                      "`dict`-like or `list`-like.")
     if validate_figure:
+
         try:
-            validate(figure, obj_type='Figure')
+            graph_objs.Figure(figure)
         except exceptions.PlotlyError as err:
             raise exceptions.PlotlyError("Invalid 'figure_or_data' argument. "
                                          "Plotly will not be able to properly "
