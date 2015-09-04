@@ -49,16 +49,14 @@ class TestDistplot(TestCase):
         dp = tls.FigureFactory.create_distplot(hist_data=[[1, 2, 2, 3]],
                                                group_labels=['distplot'])
         expected_dp_layout = {'barmode': 'overlay',
-                                         'hovermode': 'closest',
-                                         'xaxis1': {'anchor': 'y2',
-                                                    'domain': [0.0, 1.0],
-                                                    'zeroline': False},
-                                         'yaxis1': {'anchor': 'free',
-                                                    'domain': [0.35, 1],
-                                                    'position': 0.0},
-                                         'yaxis2': {'anchor': 'x1',
-                                                    'domain': [0, 0.25],
-                                                    'dtick': 1}}
+                              'hovermode': 'closest',
+                              'legend': {'traceorder': 'reversed'},
+                              'xaxis1': {'anchor': 'y2', 'domain': [0.0, 1.0], 'zeroline': False},
+                              'yaxis1': {'anchor': 'free', 'domain': [0.35, 1], 'position': 0.0},
+                              'yaxis2': {'anchor': 'x1',
+                                         'domain': [0, 0.25],
+                                         'dtick': 1,
+                                         'showticklabels': False}}
         self.assertEqual(dp['layout'], expected_dp_layout)
 
         expected_dp_data_hist = {'autobinx': False,
@@ -70,8 +68,7 @@ class TestDistplot(TestCase):
                                  'type': 'histogram',
                                  'x': [1, 2, 2, 3],
                                  'xaxis': 'x1',
-                                 'xbins': {'end': 3.0, 'size': 1.0,
-                                           'start': 1.0},
+                                 'xbins': {'end': 3.0, 'size': 1.0, 'start': 1.0},
                                  'yaxis': 'y1'}
         self.assertEqual(dp['data'][0], expected_dp_data_hist)
 
@@ -85,8 +82,8 @@ class TestDistplot(TestCase):
                                 'type': 'scatter',
                                 'x': [1, 2, 2, 3],
                                 'xaxis': 'x1',
-                                'y': ['distplot', 'distplot', 'distplot',
-                                      'distplot'],
+                                'y': ['distplot', 'distplot',
+                                      'distplot', 'distplot'],
                                 'yaxis': 'y2'}
         self.assertEqual(dp['data'][2], expected_dp_data_rug)
 
@@ -111,6 +108,7 @@ class TestDistplot(TestCase):
 
         expected_dp_layout = {'barmode': 'overlay',
                               'hovermode': 'closest',
+                              'legend': {'traceorder': 'reversed'},
                               'title': 'Dist Plot',
                               'xaxis1': {'anchor': 'y2', 'domain': [0.0, 1.0],
                                          'zeroline': False},

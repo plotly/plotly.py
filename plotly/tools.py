@@ -1453,7 +1453,7 @@ class FigureFactory(object):
     """
 
     @staticmethod
-    def validate_equal_length(*args):
+    def _validate_equal_length(*args):
         """
         Validates that data lists or ndarrays are the same length.
 
@@ -1465,7 +1465,7 @@ class FigureFactory(object):
                                          "should be the same length.")
 
     @staticmethod
-    def validate_ohlc(open, high, low, close, direction, **kwargs):
+    def _validate_ohlc(open, high, low, close, direction, **kwargs):
         """
         ohlc and candlestick specific validations
 
@@ -1508,7 +1508,7 @@ class FigureFactory(object):
                                          "'both'")
 
     @staticmethod
-    def validate_distplot(hist_data, curve_type):
+    def _validate_distplot(hist_data, curve_type):
         """
         distplot specific validations
 
@@ -1516,9 +1516,17 @@ class FigureFactory(object):
         :raises: (PlotlyError) If curve_type is not valid (i.e. not 'kde' or
             'normal').
         """
+        try:
+            import pandas as pd
+            _pandas_imported = True
+        except ImportError:
+            _pandas_imported = False
+
         hist_data_types = (list,)
         if _numpy_imported:
             hist_data_types += (np.ndarray,)
+        if _pandas_imported:
+            hist_data_types += (pd.core.series.Series,)
 
         if not isinstance(hist_data[0], hist_data_types):
                 raise exceptions.PlotlyError("Oops, this function was written "
@@ -1537,7 +1545,7 @@ class FigureFactory(object):
             raise ImportError("FigureFactory.create_distplot requires scipy")
 
     @staticmethod
-    def validate_positive_scalars(**kwargs):
+    def _validate_positive_scalars(**kwargs):
         """
         Validates that all values given in key/val pairs are positive.
 
@@ -1554,7 +1562,7 @@ class FigureFactory(object):
                                              .format(key, val))
 
     @staticmethod
-    def validate_streamline(x, y):
+    def _validate_streamline(x, y):
         """
         streamline specific validations
 
@@ -1580,7 +1588,7 @@ class FigureFactory(object):
                                              "evenly spaced array")
 
     @staticmethod
-    def flatten(array):
+    def _flatten(array):
         """
         Uses list comprehension to flatten array
 
@@ -1678,9 +1686,9 @@ class FigureFactory(object):
         py.plot(fig, filename='quiver')
         ```
         """
-        FigureFactory.validate_equal_length(x, y, u, v)
-        FigureFactory.validate_positive_scalars(arrow_scale=arrow_scale,
-                                                scale=scale)
+        FigureFactory._validate_equal_length(x, y, u, v)
+        FigureFactory._validate_positive_scalars(arrow_scale=arrow_scale,
+                                                 scale=scale)
 
         barb_x, barb_y = _Quiver(x, y, u, v, scale,
                                  arrow_scale, angle).get_barbs()
@@ -1779,10 +1787,10 @@ class FigureFactory(object):
         py.plot(fig, filename='streamline')
         ```
         """
-        FigureFactory.validate_equal_length(x, y)
-        FigureFactory.validate_equal_length(u, v)
-        FigureFactory.validate_streamline(x, y)
-        FigureFactory.validate_positive_scalars(density=density,
+        FigureFactory._validate_equal_length(x, y)
+        FigureFactory._validate_equal_length(u, v)
+        FigureFactory._validate_streamline(x, y)
+        FigureFactory._validate_positive_scalars(density=density,
                                                 arrow_scale=arrow_scale)
 
         streamline_x, streamline_y = _Streamline(x, y, u, v,
@@ -2006,10 +2014,10 @@ class FigureFactory(object):
         ```
         """
         if dates is not None:
-            FigureFactory.validate_equal_length(open, high, low, close, dates)
+            FigureFactory._validate_equal_length(open, high, low, close, dates)
         else:
-            FigureFactory.validate_equal_length(open, high, low, close)
-        FigureFactory.validate_ohlc(open, high, low, close, direction,
+            FigureFactory._validate_equal_length(open, high, low, close)
+        FigureFactory._validate_ohlc(open, high, low, close, direction,
                                     **kwargs)
 
         if direction is 'increasing':
@@ -2277,10 +2285,10 @@ class FigureFactory(object):
         ```
         """
         if dates is not None:
-            FigureFactory.validate_equal_length(open, high, low, close, dates)
+            FigureFactory._validate_equal_length(open, high, low, close, dates)
         else:
-            FigureFactory.validate_equal_length(open, high, low, close)
-        FigureFactory.validate_ohlc(open, high, low, close, direction,
+            FigureFactory._validate_equal_length(open, high, low, close)
+        FigureFactory._validate_ohlc(open, high, low, close, direction,
                                     **kwargs)
 
         if direction is 'increasing':
@@ -2313,34 +2321,28 @@ class FigureFactory(object):
     @staticmethod
     def create_distplot(hist_data, group_labels,
                         bin_size=1., curve_type='kde',
+                        colors=[], rug_text=[],
                         show_hist=True, show_curve=True,
-                        show_rug=True, **kwargs):
+                        show_rug=True):
         """
         BETA function that creates a distplot similar to seaborn.distplot
 
         The distplot can be composed of all or any combination of the following
         3 components: (1) histogram, (2) curve: (a) kernal density estimation
-        or (b)normal curve, and (3)rug plot. Additionally, multiple distplots
+        or (b) normal curve, and (3) rug plot. Additionally, multiple distplots
         (from multiple datasets) can be created in the same plot.
 
-        :param (list) hist_data: list of histogram data, should be a list of
-            lists if multiple data sets are plotted on the same plot
-        :param (list) group_labels: list of strings of the name of each data
-            set
-        :param (float) bin_size: size of histogram bin, default = 1.
-        :param (string) curve_type: 'kde' or 'normal', default = 'kde'
-        :param (bool) show_hist: True/False defines if histogram is added to
-            distplot, default = True
-        :param (bool) show_curve: True/False defines if curve is added to
-            distplot, default = True
-        :param (bool) show_rug: True/False defines if rug plot is added to
-            distplot, default = True
-        :param (list) colors: list of strings of color values,
-            default = first 10 Plot.ly colors
-        :param (list) rug_text: list of strings of hovertext for rug_plot,
-            default=None
-
-        :rtype (dict): returns a representation of a distplot figure.
+        :param (list[list]) hist_data: Use list of lists to plot multiple data
+            sets on the same plot.
+        :param (list[str]) group_labels: Names for each data set.
+        :param (float) bin_size: Size of histogram bins. Default = 1.
+        :param (str) curve_type: 'kde' or 'normal'. Default = 'kde'
+        :param (bool) show_hist: Add histogram to distplot? Default = True
+        :param (bool) show_curve: Add curve to distplot? Default = True
+        :param (bool) show_rug: Add rug to distplot? Default = True
+        :param (list[str]) colors: Colors for traces.
+        :param (list[list]) rug_text: Hovertext values for rug_plot,
+        :return (dict): Representation of a distplot figure.
 
         Example 1: Simple distplot of 1 data set
         ```
@@ -2377,13 +2379,21 @@ class FigureFactory(object):
 
         group_labels = ['2012', '2013']
 
-        rug_text = ['a', 'b', 'c', 'd', 'e',
-                    'f', 'g', 'h', 'i', 'j',
-                    'k', 'l', 'm', 'n', 'o']
+        # Add text
+        rug_text_1 = ['a1', 'b1', 'c1', 'd1', 'e1',
+              'f1', 'g1', 'h1', 'i1', 'j1',
+              'k1', 'l1', 'm1', 'n1', 'o1']
+
+        rug_text_2 = ['a2', 'b2', 'c2', 'd2', 'e2',
+              'f2', 'g2', 'h2', 'i2', 'j2',
+              'k2', 'l2', 'm2', 'n2', 'o2']
+
+        # Group text together
+        rug_text_all = [rug_text_1] + [rug_text_2]
 
         # Create distplot
         fig = FF.create_distplot(
-            hist_data, group_labels, rug_text=rug_text, bin_size=.2)
+            hist_data, group_labels, rug_text=rug_text_all, bin_size=.2)
 
         # Add title
         fig['layout'].update(title='Dist Plot')
@@ -2396,11 +2406,12 @@ class FigureFactory(object):
         ```
         import plotly.plotly as py
         from plotly.tools import FigureFactory as FF
+        import numpy as np
 
-        x1 = np.random.randn(20)
-        x2 = np.random.randn(40)+1
-        x3 = np.random.randn(10)-1
-        x4 = np.random.randn(10)+2
+        x1 = np.random.randn(190)
+        x2 = np.random.randn(200)+1
+        x3 = np.random.randn(200)-1
+        x4 = np.random.randn(210)+2
 
         hist_data = [x1] + [x2] + [x3] + [x4]
         group_labels = ['2012', '2013', '2014', '2015']
@@ -2410,24 +2421,44 @@ class FigureFactory(object):
             show_rug=False, bin_size=.4)
 
         url = py.plot(fig, filename='hist and normal curve', validate=False)
+
+        Example 4: Distplot with Pandas
+        ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+        import numpy as np
+        import pandas as pd
+
+        df = pd.DataFrame({'2012': np.random.randn(200),
+                           '2013': np.random.randn(200)+1})
+        py.iplot(FF.create_distplot([df[c] for c in df.columns], df.columns),
+                                    filename='examples/distplot with pandas',
+                                    validate=False)
+        ```
         """
-        FigureFactory.validate_distplot(hist_data, curve_type)
-        FigureFactory.validate_equal_length(hist_data, group_labels)
+        FigureFactory._validate_distplot(hist_data, curve_type)
+        FigureFactory._validate_equal_length(hist_data, group_labels)
 
         hist = _Distplot(
             hist_data, group_labels, bin_size,
-            curve_type, **kwargs).make_hist()
+            curve_type, colors, rug_text,
+            show_hist, show_curve).make_hist()
+
         if curve_type == 'normal':
             curve = _Distplot(
                 hist_data, group_labels, bin_size,
-                curve_type, **kwargs).make_normal()
+                curve_type, colors, rug_text,
+                show_hist, show_curve).make_normal()
         else:
             curve = _Distplot(
                 hist_data, group_labels, bin_size,
-                curve_type, **kwargs).make_kde()
+                curve_type, colors, rug_text,
+                show_hist, show_curve).make_kde()
+
         rug = _Distplot(
             hist_data, group_labels, bin_size,
-            curve_type, **kwargs).make_rug()
+            curve_type, colors, rug_text,
+            show_hist, show_curve).make_rug()
 
         data = []
         if show_hist:
@@ -2439,6 +2470,7 @@ class FigureFactory(object):
             layout = graph_objs.Layout(
                 barmode='overlay',
                 hovermode='closest',
+                legend=dict(traceorder='reversed'),
                 xaxis1=dict(domain=[0.0, 1.0],
                             anchor='y2',
                             zeroline=False),
@@ -2447,11 +2479,13 @@ class FigureFactory(object):
                             position=0.0),
                 yaxis2=dict(domain=[0, 0.25],
                             anchor='x1',
-                            dtick=1))
+                            dtick=1,
+                            showticklabels=False))
         else:
             layout = graph_objs.Layout(
                 barmode='overlay',
                 hovermode='closest',
+                legend=dict(traceorder='reversed'),
                 xaxis1=dict(domain=[0.0, 1.0],
                             anchor='y2',
                             zeroline=False),
@@ -2472,22 +2506,22 @@ class _Quiver(FigureFactory):
     def __init__(self, x, y, u, v,
                  scale, arrow_scale, angle, **kwargs):
         try:
-            x = FigureFactory.flatten(x)
+            x = FigureFactory._flatten(x)
         except exceptions.PlotlyError:
             pass
 
         try:
-            y = FigureFactory.flatten(y)
+            y = FigureFactory._flatten(y)
         except exceptions.PlotlyError:
             pass
 
         try:
-            u = FigureFactory.flatten(u)
+            u = FigureFactory._flatten(u)
         except exceptions.PlotlyError:
             pass
 
         try:
-            v = FigureFactory.flatten(v)
+            v = FigureFactory._flatten(v)
         except exceptions.PlotlyError:
             pass
 
@@ -2531,8 +2565,8 @@ class _Quiver(FigureFactory):
         self.end_x = [i + j for i, j in zip(self.x, self.u)]
         self.end_y = [i + j for i, j in zip(self.y, self.v)]
         empty = [None] * len(self.x)
-        barb_x = self.flatten(zip(self.x, self.end_x, empty))
-        barb_y = self.flatten(zip(self.y, self.end_y, empty))
+        barb_x = FigureFactory._flatten(zip(self.x, self.end_x, empty))
+        barb_y = FigureFactory._flatten(zip(self.y, self.end_y, empty))
         return barb_x, barb_y
 
     def get_quiver_arrows(self):
@@ -2602,8 +2636,10 @@ class _Quiver(FigureFactory):
 
         # Combine lists to create arrow
         empty = [None] * len(self.end_x)
-        arrow_x = self.flatten(zip(point1_x, self.end_x, point2_x, empty))
-        arrow_y = self.flatten(zip(point1_y, self.end_y, point2_y, empty))
+        arrow_x = FigureFactory._flatten(zip(point1_x, self.end_x,
+                                             point2_x, empty))
+        arrow_y = FigureFactory._flatten(zip(point1_y, self.end_y,
+                                             point2_y, empty))
         return arrow_x, arrow_y
 
 
@@ -2951,8 +2987,8 @@ class _OHLC(FigureFactory):
             trace, flat_increase_y: y=values for the increasing trace and
             text_increase: hovertext for the increasing trace
         """
-        flat_increase_x = FigureFactory.flatten(self.increase_x)
-        flat_increase_y = FigureFactory.flatten(self.increase_y)
+        flat_increase_x = FigureFactory._flatten(self.increase_x)
+        flat_increase_y = FigureFactory._flatten(self.increase_y)
         text_increase = (("Open", "Open", "High",
                           "Low", "Close", "Close", '')
                          * (len(self.increase_x)))
@@ -2967,8 +3003,8 @@ class _OHLC(FigureFactory):
             trace, flat_decrease_y: y=values for the decreasing trace and
             text_decrease: hovertext for the decreasing trace
         """
-        flat_decrease_x = FigureFactory.flatten(self.decrease_x)
-        flat_decrease_y = FigureFactory.flatten(self.decrease_y)
+        flat_decrease_x = FigureFactory._flatten(self.decrease_x)
+        flat_decrease_y = FigureFactory._flatten(self.decrease_y)
         text_decrease = (("Open", "Open", "High",
                           "Low", "Close", "Close", '')
                          * (len(self.decrease_x)))
@@ -3019,8 +3055,8 @@ class _Candlestick(FigureFactory):
                                     increase_close, increase_high,
                                     increase_empty))
         stick_increase_x = [[x, x, x, x, None] for x in increase_x]
-        stick_increase_y = FigureFactory.flatten(stick_increase_y)
-        stick_increase_x = FigureFactory.flatten(stick_increase_x)
+        stick_increase_y = FigureFactory._flatten(stick_increase_y)
+        stick_increase_x = FigureFactory._flatten(stick_increase_x)
 
         return (increase_x, increase_open, increase_dif,
                 stick_increase_y, stick_increase_x)
@@ -3055,8 +3091,8 @@ class _Candlestick(FigureFactory):
                                     decrease_empty))
         stick_decrease_x = [[x, x, x, x, None] for x in decrease_x]
 
-        stick_decrease_y = FigureFactory.flatten(stick_decrease_y)
-        stick_decrease_x = FigureFactory.flatten(stick_decrease_x)
+        stick_decrease_y = FigureFactory._flatten(stick_decrease_y)
+        stick_decrease_x = FigureFactory._flatten(stick_decrease_x)
 
         return (decrease_x, decrease_close, decrease_dif,
                 stick_decrease_y, stick_decrease_x)
@@ -3067,21 +3103,23 @@ class _Distplot(FigureFactory):
     Refer to TraceFactory.create_distplot() for docstring
     """
     def __init__(self, hist_data, group_labels,
-                 bin_size, curve_type,
-                 **kwargs):
+                 bin_size, curve_type, colors,
+                 rug_text, show_hist, show_curve):
         self.hist_data = hist_data
         self.group_labels = group_labels
         self.bin_size = bin_size
-        if 'rug_text' in kwargs:
+        self.show_hist = show_hist
+        self.show_curve = show_curve
+        self.trace_number = len(hist_data)
+        if rug_text:
             self.rug_text = rug_text
         else:
-            self.rug_text = None
-        self.trace_number = len(hist_data)
+            self.rug_text = [None] * self.trace_number
 
         self.start = []
         self.end = []
-        if 'colors' in kwargs:
-            self.colors = kwargs['colors']
+        if colors:
+            self.colors = 'colors'
         else:
             self.colors = [
                 "rgb(31, 119, 180)", "rgb(255, 127, 14)",
@@ -3147,7 +3185,7 @@ class _Distplot(FigureFactory):
                                 mode='lines',
                                 name=self.group_labels[index],
                                 legendgroup=self.group_labels[index],
-                                showlegend=False,
+                                showlegend=False if self.show_hist else True,
                                 marker=dict(color=self.colors[index]))
         return curve
 
@@ -3182,7 +3220,7 @@ class _Distplot(FigureFactory):
                                 mode='lines',
                                 name=self.group_labels[index],
                                 legendgroup=self.group_labels[index],
-                                showlegend=False,
+                                showlegend=False if self.show_hist else True,
                                 marker=dict(color=self.colors[index]))
         return curve
 
@@ -3204,8 +3242,9 @@ class _Distplot(FigureFactory):
                               mode='markers',
                               name=self.group_labels[index],
                               legendgroup=self.group_labels[index],
-                              showlegend=False,
-                              text=self.rug_text,
+                              showlegend=(False if self.show_hist or
+                                          self.show_curve else True),
+                              text=self.rug_text[index],
                               marker=dict(color=self.colors[index],
                                           symbol='line-ns-open'))
         return rug
