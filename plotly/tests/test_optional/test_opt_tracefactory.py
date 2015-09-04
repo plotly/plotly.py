@@ -194,17 +194,19 @@ class TestDendrogram(TestCase):
     def test_dendrogram_orientation(self):
         X = np.random.rand(5, 5) 
 
-        dendro_left = tls.FigureFactory.create_dendrogram(X, orientation='left')
-
+        dendro_left = tls.FigureFactory.create_dendrogram(
+                       X, orientation='left')
         self.assertEqual(len(dendro_left['layout']['yaxis']['ticktext']), 5)
         tickvals_left = np.array(dendro_left['layout']['yaxis']['tickvals'])
         self.assertTrue((tickvals_left <= 0).all())
 
-        dendro_right = tls.FigureFactory.create_dendrogram(X, orientation='right')
+        dendro_right = tls.FigureFactory.create_dendrogram(
+                        X, orientation='right')
         tickvals_right = np.array(dendro_right['layout']['yaxis']['tickvals'])
         self.assertTrue((tickvals_right >= 0).all())
 
-        dendro_bottom = tls.FigureFactory.create_dendrogram(X, orientation='bottom')
+        dendro_bottom = tls.FigureFactory.create_dendrogram(
+                        X, orientation='bottom')
         self.assertEqual(len(dendro_bottom['layout']['xaxis']['ticktext']), 5)
         tickvals_bottom = np.array(dendro_bottom['layout']['xaxis']['tickvals'])
         self.assertTrue((tickvals_bottom >= 0).all())
@@ -213,4 +215,25 @@ class TestDendrogram(TestCase):
         tickvals_top = np.array(dendro_top['layout']['xaxis']['tickvals'])
         self.assertTrue((tickvals_top <= 0).all())
 
-      
+    def test_dendrogram_orientation(self):
+        X = np.array([[1, 2, 3, 4],
+                      [1, 1, 3, 4],
+                      [1, 2, 1, 4],
+                      [1, 2, 3, 1]])
+        greyscale = [
+                'rgb(0,0,0)',        # black
+                'rgb(05,105,105)',   # dim grey
+                'rgb(128,128,128)',  # grey
+                'rgb(169,169,169)',  # dark grey
+                'rgb(192,192,192)',  # silver
+                'rgb(211,211,211)',  # light grey
+                'rgb(220,220,220)',  # gainsboro
+                'rgb(245,245,245)']  # white smoke
+
+        dendro = tls.FigureFactory.create_dendrogram(X, colorscale=greyscale)
+        self.assertEqual(dendro["data"][0]['marker']['color'],
+                         'rgb(128,128,128)')
+        self.assertEqual(dendro["data"][1]['marker']['color'],
+                         'rgb(128,128,128)')
+        self.assertEqual(dendro["data"][2]['marker']['color'],
+                         'rgb(0,0,0)')
