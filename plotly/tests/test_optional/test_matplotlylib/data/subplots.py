@@ -18,8 +18,7 @@ BLANK_SUBPLOTS = Figure(
             line=Line(
                 dash='solid',
                 color='#0000FF',
-                width=1.0,
-                opacity=1
+                width=1.0
             ),
             xaxis='x1',
             yaxis='y1'
