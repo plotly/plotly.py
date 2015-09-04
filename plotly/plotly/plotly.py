@@ -26,6 +26,8 @@ import requests
 import six
 import six.moves
 
+from requests.auth import HTTPBasicAuth
+
 from plotly import exceptions, tools, utils, version
 from plotly.plotly import chunked_requests
 from plotly.session import (sign_in, update_session_plot_options,
@@ -39,7 +41,8 @@ DEFAULT_PLOT_OPTIONS = {
     'fileopt': "new",
     'world_readable': True,
     'auto_open': True,
-    'validate': True
+    'validate': True,
+    'sharing': "public"
 }
 
 # test file permissions and make sure nothing is corrupted
@@ -105,6 +108,39 @@ def _plot_option_logic(plot_options):
             'fileopt' not in session_plot_options and
             'fileopt' not in plot_options):
         current_plot_options['fileopt'] = 'overwrite'
+
+    # Check for any conflicts between 'sharing' and 'world_readable'
+    if 'sharing' in plot_options:
+        if plot_options['sharing'] in ['public', 'private', 'secret']:
+
+            if 'world_readable' not in plot_options:
+                if plot_options['sharing'] != 'public':
+                    current_plot_options['world_readable'] = False
+                else:
+                    current_plot_options['world_readable'] = True
+            elif (plot_options['world_readable'] and
+                    plot_options['sharing'] != 'public'):
+                raise exceptions.PlotlyError(
+                    "Looks like you are setting your plot privacy to both "
+                    "public and private.\n If you set world_readable as True, "
+                    "sharing can only be set to 'public'")
+            elif (not plot_options['world_readable'] and
+                    plot_options['sharing'] == 'public'):
+                raise exceptions.PlotlyError(
+                    "Looks like you are setting your plot privacy to both "
+                    "public and private.\n If you set world_readable as "
+                    "False, sharing can only be set to 'private' or 'secret'")
+        else:
+            raise exceptions.PlotlyError(
+                "The 'sharing' argument only accepts one of the following "
+                "strings:\n'public' -- for public plots\n"
+                "'private' -- for private plots\n"
+                "'secret' -- for private plots that can be shared with a "
+                "secret url"
+            )
+    else:
+        current_plot_options['sharing'] = None
+
     return current_plot_options
 
 
@@ -119,21 +155,51 @@ def iplot(figure_or_data, **plot_options):
         'extend': add additional numbers (data) to existing traces
         'append': add additional traces to existing data lists
     world_readable (default=True) -- make this figure private/public
-
+    sharing ('public' | 'private' | 'secret') -- Toggle who can view this
+                                                  graph
+        - 'public': Anyone can view this graph. It will appear in your profile
+                    and can appear in search engines. You do not need to be
+                    logged in to Plotly to view this chart.
+        - 'private': Only you can view this plot. It will not appear in the
+                     Plotly feed, your profile, or search engines. You must be
+                     logged in to Plotly to view this graph. You can privately
+                     share this graph with other Plotly users in your online
+                     Plotly account and they will need to be logged in to
+                     view this plot.
+        - 'secret': Anyone with this secret link can view this chart. It will
+                    not appear in the Plotly feed, your profile, or search
+                    engines. If it is embedded inside a webpage or an IPython
+                    notebook, anybody who is viewing that page will be able to
+                    view the graph. You do not need to be logged in to view
+                    this plot.
     """
     if 'auto_open' not in plot_options:
         plot_options['auto_open'] = False
-    res = plot(figure_or_data, **plot_options)
-    urlsplit = res.split('/')
-    username, plot_id = urlsplit[-2][1:], urlsplit[-1]  # TODO: HACKY!
+    url = plot(figure_or_data, **plot_options)
+
+    if isinstance(figure_or_data, dict):
+        layout = figure_or_data.get('layout', {})
+    else:
+        layout = {}
 
     embed_options = dict()
-    if 'width' in plot_options:
-        embed_options['width'] = plot_options['width']
-    if 'height' in plot_options:
-        embed_options['height'] = plot_options['height']
+    embed_options['width'] = layout.get('width', '100%')
+    embed_options['height'] = layout.get('height', 525)
+    try:
+        float(embed_options['width'])
+    except (ValueError, TypeError):
+        pass
+    else:
+        embed_options['width'] = str(embed_options['width']) + 'px'
 
-    return tools.embed(username, plot_id, **embed_options)
+    try:
+        float(embed_options['height'])
+    except (ValueError, TypeError):
+        pass
+    else:
+        embed_options['height'] = str(embed_options['height']) + 'px'
+
+    return tools.embed(url, **embed_options)
 
 
 def plot(figure_or_data, validate=True, **plot_options):
@@ -150,6 +216,23 @@ def plot(figure_or_data, validate=True, **plot_options):
     auto_open (default=True) -- Toggle browser options
         True: open this plot in a new browser tab
         False: do not open plot in the browser, but do return the unique url
+    sharing ('public' | 'private' | 'secret') -- Toggle who can view this
+                                                  graph
+        - 'public': Anyone can view this graph. It will appear in your profile
+                    and can appear in search engines. You do not need to be
+                    logged in to Plotly to view this chart.
+        - 'private': Only you can view this plot. It will not appear in the
+                     Plotly feed, your profile, or search engines. You must be
+                     logged in to Plotly to view this graph. You can privately
+                     share this graph with other Plotly users in your online
+                     Plotly account and they will need to be logged in to
+                     view this plot.
+        - 'secret': Anyone with this secret link can view this chart. It will
+                    not appear in the Plotly feed, your profile, or search
+                    engines. If it is embedded inside a webpage or an IPython
+                    notebook, anybody who is viewing that page will be able to
+                    view the graph. You do not need to be logged in to view
+                    this plot.
 
     """
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
@@ -174,6 +257,7 @@ def plot(figure_or_data, validate=True, **plot_options):
                     warnings.warn(msg)
             except TypeError:
                 pass
+
     plot_options = _plot_option_logic(plot_options)
     res = _send_to_plotly(figure, **plot_options)
     if res['error'] == '':
@@ -185,7 +269,8 @@ def plot(figure_or_data, validate=True, **plot_options):
         raise exceptions.PlotlyAccountError(res['error'])
 
 
-def iplot_mpl(fig, resize=True, strip_style=False, update=None, **plot_options):
+def iplot_mpl(fig, resize=True, strip_style=False, update=None,
+              **plot_options):
     """Replot a matplotlib figure with plotly in IPython.
 
     This function:
@@ -212,7 +297,8 @@ def iplot_mpl(fig, resize=True, strip_style=False, update=None, **plot_options):
             fig.update(update)
             fig.validate()
         except exceptions.PlotlyGraphObjectError as err:
-            err.add_note("Your updated figure could not be properly validated.")
+            err.add_note("Your updated figure could not be properly "
+                         "validated.")
             err.prepare()
             raise
     elif update is not None:
@@ -250,7 +336,8 @@ def plot_mpl(fig, resize=True, strip_style=False, update=None, **plot_options):
             fig.update(update)
             fig.validate()
         except exceptions.PlotlyGraphObjectError as err:
-            err.add_note("Your updated figure could not be properly validated.")
+            err.add_note("Your updated figure could not be properly "
+                         "validated.")
             err.prepare()
             raise
     elif update is not None:
@@ -274,8 +361,8 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
 
     Note, if you're using a file_owner string as the first argument, you MUST
     specify a `file_id` keyword argument. Else, if you're using a url string
-    as the first argument, you MUST NOT specify a `file_id` keyword argument, or
-    file_id must be set to Python's None value.
+    as the first argument, you MUST NOT specify a `file_id` keyword argument,
+     or file_id must be set to Python's None value.
 
     Positional arguments:
     file_owner_or_url (string) -- a valid plotly username OR a valid plotly url
@@ -451,7 +538,8 @@ class Stream:
         layout (default=None) - A valid Layout object
                                 Run help(plotly.graph_objs.Layout)
         validate (default = True) - Validate this stream before sending?
-                                    This will catch local errors if set to True.
+                                    This will catch local errors if set to
+                                    True.
 
         Some valid keys for trace dictionaries:
             'x', 'y', 'text', 'z', 'marker', 'line'
@@ -556,8 +644,9 @@ class image:
         - format: 'png', 'svg', 'jpeg', 'pdf'
         - width: output width
         - height: output height
-        - scale: Increase the resolution of the image by `scale` amount (e.g. `3`)
-               Only valid for PNG and JPEG images.
+        - scale: Increase the resolution of the image by `scale`
+                 amount (e.g. `3`)
+                 Only valid for PNG and JPEG images.
 
         example:
         ```
@@ -930,7 +1019,8 @@ class grid_ops:
         py.grid_ops.append_columns([column_2], grid=grid)
         ```
 
-        Usage example 2: Append a column to a grid that already exists on Plotly
+        Usage example 2: Append a column to a grid that already exists on
+                         Plotly
         ```
         from plotly.grid_objs import Grid, Column
         import plotly.plotly as py
@@ -1033,7 +1123,7 @@ class grid_ops:
             'rows': json.dumps(rows, cls=utils.PlotlyJSONEncoder)
         }
 
-        api_url = (_api_v2.api_url('grids')+
+        api_url = (_api_v2.api_url('grids') +
                    '/{grid_id}/row'.format(grid_id=grid_id))
         res = requests.post(api_url, data=payload, headers=_api_v2.headers(),
                             verify=get_config()['plotly_ssl_verification'])
@@ -1086,7 +1176,7 @@ class grid_ops:
 
         """
         grid_id = _api_v2.parse_grid_id_args(grid, grid_url)
-        api_url = _api_v2.api_url('grids')+'/'+grid_id
+        api_url = _api_v2.api_url('grids') + '/' + grid_id
         res = requests.delete(api_url, headers=_api_v2.headers(),
                               verify=get_config()['plotly_ssl_verification'])
         _api_v2.response_handler(res)
@@ -1153,7 +1243,7 @@ class meta_ops:
             'metadata': json.dumps(meta, cls=utils.PlotlyJSONEncoder)
         }
 
-        api_url = _api_v2.api_url('grids')+'/{grid_id}'.format(grid_id=grid_id)
+        api_url = _api_v2.api_url('grids') + '/{grid_id}'.format(grid_id=grid_id)
 
         res = requests.patch(api_url, data=payload, headers=_api_v2.headers(),
                              verify=get_config()['plotly_ssl_verification'])
@@ -1209,14 +1299,22 @@ class _api_v2:
 
     @classmethod
     def response_handler(cls, response):
-
         try:
             response.raise_for_status()
         except requests.exceptions.HTTPError as requests_exception:
-            plotly_exception = exceptions.PlotlyRequestError(
-                requests_exception
-            )
-            raise(plotly_exception)
+            if (response.status_code == 404 and
+                    get_config()['plotly_api_domain']
+                    != tools.get_config_defaults()['plotly_api_domain']):
+                raise exceptions.PlotlyError(
+                    "This endpoint is unavailable at {url}. If you are using "
+                    "Plotly Enterprise, you may need to upgrade your Plotly "
+                    "Enterprise server to request against this endpoint or "
+                    "this endpoint may not be available yet.\nQuestions? "
+                    "support@plot.ly or your plotly administrator."
+                    .format(url=get_config()['plotly_api_domain'])
+                )
+            else:
+                raise requests_exception
 
         if ('content-type' in response.headers and
                 'json' in response.headers['content-type'] and
@@ -1271,6 +1369,34 @@ def validate_credentials(credentials):
         raise exceptions.PlotlyLocalCredentialsError()
 
 
+def add_share_key_to_url(plot_url):
+    """
+    Update plot's url to include the secret key
+
+    """
+    urlsplit = six.moves.urllib.parse.urlparse(plot_url)
+    file_owner = urlsplit.path.split('/')[1].split('~')[1]
+    file_id = urlsplit.path.split('/')[2]
+
+    url = _api_v2.api_url("files/") + file_owner + ":" + file_id
+    new_response = requests.patch(url,
+                                  headers=_api_v2.headers(),
+                                  data={"share_key_enabled":
+                                        "True",
+                                        "world_readable":
+                                        "False"})
+
+    _api_v2.response_handler(new_response)
+
+    # decode bytes for python 3.3: https://bugs.python.org/issue10976
+    str_content = new_response.content.decode('utf-8')
+
+    new_response_data = json.loads(str_content)
+    plot_url += '?share_key=' + new_response_data['share_key']
+
+    return plot_url
+
+
 def _send_to_plotly(figure, **plot_options):
     """
 
@@ -1285,6 +1411,7 @@ def _send_to_plotly(figure, **plot_options):
     kwargs = json.dumps(dict(filename=plot_options['filename'],
                              fileopt=plot_options['fileopt'],
                              world_readable=plot_options['world_readable'],
+                             sharing=plot_options['sharing'],
                              layout=fig['layout'] if 'layout' in fig
                              else {}),
                         cls=utils.PlotlyJSONEncoder)
@@ -1304,6 +1431,17 @@ def _send_to_plotly(figure, **plot_options):
                       verify=get_config()['plotly_ssl_verification'])
     r.raise_for_status()
     r = json.loads(r.text)
+
+    if 'error' in r and r['error'] != '':
+        raise exceptions.PlotlyError(r['error'])
+
+    # Check if the url needs a secret key
+    if (plot_options['sharing'] == 'secret' and
+            'share_key=' not in r['url']):
+
+        # add_share_key_to_url updates the url to include the share_key
+        r['url'] = add_share_key_to_url(r['url'])
+
     if 'error' in r and r['error'] != '':
         print(r['error'])
     if 'warning' in r and r['warning'] != '':

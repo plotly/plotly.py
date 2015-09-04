@@ -292,7 +292,6 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
                               figure
 
     """
-    padding = 25
     plotly_rest_url = (session.get_session_config().get('plotly_domain') or
                        get_config_file()['plotly_domain'])
     if file_id is None:  # assume we're using a url
@@ -305,13 +304,19 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
                 "'{1}'."
                 "\nRun help on this function for more information."
                 "".format(url, plotly_rest_url))
-        head = plotly_rest_url + "/~"
-        file_owner = url.replace(head, "").split('/')[0]
-        file_id = url.replace(head, "").split('/')[1]
+        urlsplit = six.moves.urllib.parse.urlparse(url)
+        file_owner = urlsplit.path.split('/')[1].split('~')[1]
+        file_id = urlsplit.path.split('/')[2]
+
+        # to check for share_key we check urlsplit.query
+        query_dict = six.moves.urllib.parse.parse_qs(urlsplit.query)
+        if query_dict:
+            share_key = query_dict['share_key'][-1]
+        else:
+            share_key = ''
     else:
         file_owner = file_owner_or_url
-    resource = "/apigetfile/{file_owner}/{file_id}".format(file_owner=file_owner,
-                                                           file_id=file_id)
+        share_key = ''
     try:
         test_if_int = int(file_id)
     except ValueError:
@@ -325,19 +330,7 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
         raise exceptions.PlotlyError(
             "The 'file_id' argument must be a non-negative number."
         )
-    if isinstance(width, int):
-        s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\""
-             "seamless=\"seamless\" "
-             "src=\"{plotly_rest_url}/"
-             "~{file_owner}/{file_id}.embed"
-             "?width={plot_width}&height={plot_height}\" "
-             "height=\"{iframe_height}\" width=\"{iframe_width}\">"
-             "</iframe>").format(
-            plotly_rest_url=plotly_rest_url,
-            file_owner=file_owner, file_id=file_id,
-            plot_width=width - padding, plot_height=height - padding,
-            iframe_height=height, iframe_width=width)
-    else:
+    if share_key is '':
         s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\""
              "seamless=\"seamless\" "
              "src=\"{plotly_rest_url}/"
@@ -346,6 +339,16 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
              "</iframe>").format(
             plotly_rest_url=plotly_rest_url,
             file_owner=file_owner, file_id=file_id,
+            iframe_height=height, iframe_width=width)
+    else:
+        s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\""
+             "seamless=\"seamless\" "
+             "src=\"{plotly_rest_url}/"
+             "~{file_owner}/{file_id}.embed?share_key={share_key}\" "
+             "height=\"{iframe_height}\" width=\"{iframe_width}\">"
+             "</iframe>").format(
+            plotly_rest_url=plotly_rest_url,
+            file_owner=file_owner, file_id=file_id, share_key=share_key,
             iframe_height=height, iframe_width=width)
 
     return s
@@ -360,8 +363,8 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
 
     Note, if you're using a file_owner string as the first argument, you MUST
     specify a `file_id` keyword argument. Else, if you're using a url string
-    as the first argument, you MUST NOT specify a `file_id` keyword argument, or
-    file_id must be set to Python's None value.
+    as the first argument, you MUST NOT specify a `file_id` keyword argument,
+    or file_id must be set to Python's None value.
 
     Positional arguments:
     file_owner_or_url (string) -- a valid plotly username OR a valid plotly url
@@ -370,11 +373,14 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
     file_id (default=None) -- an int or string that can be converted to int
                               if you're using a url, don't fill this in!
     width (default="100%") -- an int or string corresp. to width of the figure
-    height (default="525") -- same as width but corresp. to the height of the figure
+    height (default="525") -- same as width but corresp. to the height of the
+                              figure
 
     """
     try:
-        s = get_embed(file_owner_or_url, file_id, width, height)
+        s = get_embed(file_owner_or_url, file_id=file_id, width=width,
+                      height=height)
+
         # see if we are in the SageMath Cloud
         from sage_salvus import html
         return html(s, hide=False)
@@ -394,11 +400,19 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
             url = file_owner_or_url
         return PlotlyDisplay(url, width, height)
     else:
+        if (get_config_defaults()['plotly_domain']
+                != session.get_session_config()['plotly_domain']):
+            feedback_email = 'feedback@plot.ly'
+        else:
+
+            # different domain likely means enterprise
+            feedback_email = 'support@plot.ly'
+
         warnings.warn(
-            "Looks like you're not using IPython or Sage to embed this plot. "
-            "If you just want the *embed code*, try using `get_embed()` "
-            "instead."
-            "\nQuestions? support@plot.ly")
+            "Looks like you're not using IPython or Sage to embed this "
+            "plot. If you just want the *embed code*,\ntry using "
+            "`get_embed()` instead."
+            '\nQuestions? {}'.format(feedback_email))
 
 
 ### mpl-related tools ###
@@ -2047,7 +2061,7 @@ class FigureFactory(object):
     @staticmethod
     def _make_increasing_candle(open, high, low, close, dates, **kwargs):
         """
-        Makes stacked bar and vertical line for increasing candlesticks
+        Makes boxplot trace for increasing candlesticks
 
         _make_increasing_candle() and _make_decreasing_candle separate the
         increasing traces from the decreasing traces so kwargs (such as
@@ -2063,57 +2077,36 @@ class FigureFactory(object):
         :param kwargs: kwargs to be passed to increasing trace via
             plotly.graph_objs.Scatter.
 
-        :rtype (list) candle_incr_data: list of three traces: hidden_bar_incr,
-            candle_bar_incr, candle_line_incr: returns the first (invisible)
-            stacked bar, second (visible) stacked bar, and trace composed of
-            vertical lines for each increasing candlestick.
+        :rtype (list) candle_incr_data: list of the box trace for
+            increasing candlesticks.
         """
-        (increase_x,
-         increase_open,
-         increase_dif,
-         stick_increase_y,
-         stick_increase_x) = (_Candlestick(open, high, low, close, dates,
-                                           **kwargs).get_candle_increase())
+        increase_x, increase_y = _Candlestick(
+            open, high, low, close, dates, **kwargs).get_candle_increase()
 
-        if 'name' in kwargs:
-            showlegend = True
+        if 'line' in kwargs:
+            kwargs.setdefault('fillcolor', kwargs['line']['color'])
         else:
-            kwargs.setdefault('name', 'Increasing')
-            showlegend = False
-
-        kwargs.setdefault('marker', dict(color=_DEFAULT_INCREASING_COLOR))
+            kwargs.setdefault('fillcolor', _DEFAULT_INCREASING_COLOR)
+        if 'name' in kwargs:
+            kwargs.setdefault('showlegend', True)
+        else:
+            kwargs.setdefault('showlegend', False)
+        kwargs.setdefault('name', 'Increasing')
         kwargs.setdefault('line', dict(color=_DEFAULT_INCREASING_COLOR))
 
-        hidden_bar_incr = dict(type='bar',
-                               x=increase_x,
-                               y=increase_open,
-                               marker=Marker(color='rgba(0, 0, 0, 0)'),
-                               legendgroup='Increasing',
-                               showlegend=False,
-                               hoverinfo='none')
-        candle_bar_incr = dict(type='bar',
-                               x=increase_x,
-                               y=increase_dif,
-                               legendgroup='Increasing',
-                               showlegend=False,
-                               hoverinfo='none',
-                               **kwargs)
-        candle_line_incr = dict(type='scatter',
-                                x=stick_increase_x,
-                                y=stick_increase_y,
-                                mode='lines',
-                                legendgroup='Increasing',
-                                text=('Low', 'Open', 'Close',
-                                      'High', '') * len(increase_x),
-                                showlegend=showlegend,
+        candle_incr_data = dict(type='box',
+                                x=increase_x,
+                                y=increase_y,
+                                whiskerwidth=0,
+                                boxpoints=False,
                                 **kwargs)
-        candle_incr_data = [hidden_bar_incr, candle_bar_incr, candle_line_incr]
-        return candle_incr_data
+
+        return [candle_incr_data]
 
     @staticmethod
     def _make_decreasing_candle(open, high, low, close, dates, **kwargs):
         """
-        Makes stacked bar and vertical line for decreasing candlesticks
+        Makes boxplot trace for decreasing candlesticks
 
         :param (list) open: opening values
         :param (list) high: high values
@@ -2123,48 +2116,29 @@ class FigureFactory(object):
         :param kwargs: kwargs to be passed to decreasing trace via
             plotly.graph_objs.Scatter.
 
-        :rtype (list) candle_decr_data: list of three traces: hidden_bar_decr,
-            candle_bar_decr, candle_line_decr: returns the first (invisible)
-            stacked bar, second (visible) stacked bar, and trace composed of
-            vertical lines for each decreasing candlestick.
+        :rtype (list) candle_decr_data: list of the box trace for
+            decreasing candlesticks.
         """
 
-        (decrease_x,
-         decrease_close,
-         decrease_dif,
-         stick_decrease_y,
-         stick_decrease_x) = (_Candlestick(open, high, low, close, dates,
-                                           **kwargs).get_candle_decrease())
+        decrease_x, decrease_y = _Candlestick(
+            open, high, low, close, dates, **kwargs).get_candle_decrease()
 
-        kwargs.setdefault('marker', dict(color=_DEFAULT_DECREASING_COLOR))
+        if 'line' in kwargs:
+            kwargs.setdefault('fillcolor', kwargs['line']['color'])
+        else:
+            kwargs.setdefault('fillcolor', _DEFAULT_DECREASING_COLOR)
+        kwargs.setdefault('showlegend', False)
         kwargs.setdefault('line', dict(color=_DEFAULT_DECREASING_COLOR))
         kwargs.setdefault('name', 'Decreasing')
 
-        hidden_bar_decr = dict(type='bar',
-                               x=decrease_x,
-                               y=decrease_close,
-                               marker=Marker(color='rgba(0, 0, 0, 0)'),
-                               legendgroup='Decreasing',
-                               showlegend=False,
-                               hoverinfo='none')
-        candle_bar_decr = dict(type='bar',
-                               x=decrease_x,
-                               y=decrease_dif,
-                               legendgroup='Decreasing',
-                               showlegend=False,
-                               hoverinfo='none',
-                               **kwargs)
-        candle_line_decr = dict(type='scatter',
-                                x=stick_decrease_x,
-                                y=stick_decrease_y,
-                                mode='lines',
-                                legendgroup='Decreasing',
-                                showlegend=False,
-                                text=('Low', 'Close', 'Open',
-                                      'High', '') * len(decrease_x),
+        candle_decr_data = dict(type='box',
+                                x=decrease_x,
+                                y=decrease_y,
+                                whiskerwidth=0,
+                                boxpoints=False,
                                 **kwargs)
-        candle_decr_data = [hidden_bar_decr, candle_bar_decr, candle_line_decr]
-        return candle_decr_data
+
+        return [candle_decr_data]
 
     @staticmethod
     def create_candlestick(open, high, low, close,
@@ -2236,15 +2210,14 @@ class FigureFactory(object):
         import pandas.io.data as web
 
         df = web.DataReader("aapl", 'yahoo', datetime(2008, 1, 1), datetime(2009, 4, 1))
-        fig = FF.create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index)
 
-        # Make increasing ohlc sticks and customize their color and name
+        # Make increasing candlesticks and customize their color and name
         fig_increasing = FF.create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index,
             direction='increasing', name='AAPL',
             marker=Marker(color='rgb(150, 200, 250)'),
             line=Line(color='rgb(150, 200, 250)'))
 
-        # Make decreasing ohlc sticks and customize their color and name
+        # Make decreasing candlesticks and customize their color and name
         fig_decreasing = FF.create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index,
             direction='decreasing',
             marker=Marker(color='rgb(128, 128, 128)'),
@@ -2306,16 +2279,7 @@ class FigureFactory(object):
                 open, high, low, close, dates, **kwargs)
             data = candle_incr_data + candle_decr_data
 
-        layout = graph_objs.Layout(barmode='stack',
-                                   bargroupgap=0.2,
-                                   yaxis=dict(range=[(min(low) -
-                                                     ((max(high) - min(low)) *
-                                                      .1)),
-                                                     (max(high) + ((max(high) -
-                                                                    min(low)) *
-                                                      .1))]))
-        layout['yaxis']['fixedrange'] = True
-
+        layout = graph_objs.Layout()
         return dict(data=data, layout=layout)
 
     @staticmethod
@@ -3034,32 +2998,22 @@ class _Candlestick(FigureFactory):
         The data is increasing when close value > open value
         and decreasing when the close value <= open value.
         """
-        increase_open = []
-        increase_high = []
-        increase_low = []
-        increase_close = []
+        increase_y = []
         increase_x = []
         for index in range(len(self.open)):
             if self.close[index] > self.open[index]:
-                increase_open.append(self.open[index])
-                increase_high.append(self.high[index])
-                increase_low.append(self.low[index])
-                increase_close.append(self.close[index])
+                increase_y.append(self.low[index])
+                increase_y.append(self.open[index])
+                increase_y.append(self.close[index])
+                increase_y.append(self.close[index])
+                increase_y.append(self.close[index])
+                increase_y.append(self.high[index])
                 increase_x.append(self.x[index])
 
-        increase_dif = [cl - op for (cl, op)
-                        in zip(increase_close, increase_open)]
+        increase_x = [[x, x, x, x, x, x] for x in increase_x]
+        increase_x = FigureFactory.flatten(increase_x)
 
-        increase_empty = [None] * len(increase_open)
-        stick_increase_y = list(zip(increase_low, increase_open,
-                                    increase_close, increase_high,
-                                    increase_empty))
-        stick_increase_x = [[x, x, x, x, None] for x in increase_x]
-        stick_increase_y = FigureFactory._flatten(stick_increase_y)
-        stick_increase_x = FigureFactory._flatten(stick_increase_x)
-
-        return (increase_x, increase_open, increase_dif,
-                stick_increase_y, stick_increase_x)
+        return increase_x, increase_y
 
     def get_candle_decrease(self):
         """
@@ -3068,34 +3022,22 @@ class _Candlestick(FigureFactory):
         The data is increasing when close value > open value
         and decreasing when the close value <= open value.
         """
-        decrease_open = []
-        decrease_high = []
-        decrease_low = []
-        decrease_close = []
+        decrease_y = []
         decrease_x = []
-
         for index in range(len(self.open)):
             if self.close[index] <= self.open[index]:
-                decrease_open.append(self.open[index])
-                decrease_high.append(self.high[index])
-                decrease_low.append(self.low[index])
-                decrease_close.append(self.close[index])
+                decrease_y.append(self.low[index])
+                decrease_y.append(self.open[index])
+                decrease_y.append(self.close[index])
+                decrease_y.append(self.close[index])
+                decrease_y.append(self.close[index])
+                decrease_y.append(self.high[index])
                 decrease_x.append(self.x[index])
 
-        decrease_dif = [op - cl for (op, cl)
-                        in zip(decrease_open, decrease_close)]
+        decrease_x = [[x, x, x, x, x, x] for x in decrease_x]
+        decrease_x = FigureFactory.flatten(decrease_x)
 
-        decrease_empty = [None] * len(decrease_open)
-        stick_decrease_y = list(zip(decrease_low, decrease_close,
-                                    decrease_open, decrease_high,
-                                    decrease_empty))
-        stick_decrease_x = [[x, x, x, x, None] for x in decrease_x]
-
-        stick_decrease_y = FigureFactory._flatten(stick_decrease_y)
-        stick_decrease_x = FigureFactory._flatten(stick_decrease_x)
-
-        return (decrease_x, decrease_close, decrease_dif,
-                stick_decrease_y, stick_decrease_x)
+        return decrease_x, decrease_y
 
 
 class _Distplot(FigureFactory):
