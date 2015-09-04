@@ -2304,37 +2304,31 @@ class FigureFactory(object):
         :param (list) colorscale: Optional colorscale for dendrogram tree
         clusters
 
-        X: Heatmap matrix as array of arrays
-        orientation: 'top', 'right', 'bottom', or 'left'
-        labels: List of axis category labels
-        colorscale: Optional colorscale for dendrogram tree clusters
-
-
         Example 1: Simple bottom oriented dendrogram
         ```
+        import numpy as np
+
         import plotly.plotly as py
         from plotly.tools import FigureFactory as FF
 
-        import numpy as np
-
         X = np.random.rand(5,5)
-        dendro_X = FF.create_dendrogram(X)
-        py.iplot(dendro_X, validate=False, height=300, width=1000)
+        dendro = FF.create_dendrogram(X)
+        py.iplot(dendro, validate=False, height=300, width=1000)
 
         ```
 
         Example 2: Dendrogram to put on the left of the heatmap
         ```
         X = np.random.rand(5,5)
-        names_X = ['Jack', 'Oxana', 'John', 'Chelsea', 'Mark']
-        dendro_X = FF.create_dendrogram(X, orientation='right', labels=names_X)
+        names = ['Jack', 'Oxana', 'John', 'Chelsea', 'Mark']
+        dendro = FF.create_dendrogram(X, orientation='right', labels=names)
 
-        py.iplot(dendro_X, validate=False, height=1000, width=300)
+        py.iplot(dendro, validate=False, height=1000, width=300)
         ```
         """
         dependencies = (_scipy_imported and _scipy__spatial_imported and
                         _scipy__cluster__hierarchy_imported)
-    
+
         if dependencies is False:
             raise ImportError("FigureFactory.create_dendrogram requires scipy, \
                                 scipy.spatial and scipy.hierarchy")
@@ -2946,7 +2940,7 @@ class _Candlestick(FigureFactory):
 
 
 class _Dendrogram(FigureFactory):
-   
+
     """
     Refer to FigureFactory.create_dendrogram() for docstring.
     """
@@ -2971,10 +2965,10 @@ class _Dendrogram(FigureFactory):
             self.sign[self.yaxis] = 1
         else:
             self.sign[self.yaxis] = -1
-        
+
         (dd_traces, xvals, yvals,
             ordered_labels, leaves) = self.get_dendrogram_traces(X, colorscale)
-        
+
         self.labels = ordered_labels
         self.leaves = leaves
         yvals_flat = yvals.flatten()
@@ -2987,17 +2981,19 @@ class _Dendrogram(FigureFactory):
                 self.zero_vals.append(xvals_flat[i])
 
         self.zero_vals.sort()
-                
+
         self.layout = self.set_figure_layout(width, height)
         self.data = Data(dd_traces)
 
     def get_color_dict(self, colorscale):
-        """ 
-            Returns colorscale used for dendrogram tree clusters
-            :param (list) colorscale: colors to use for the plot,
-            in rgb format
         """
-       
+        Returns colorscale used for dendrogram tree clusters
+        :param (list) colorscale: colors to use for the plot,
+        in rgb format
+        :rtype (dict): returns a dictionary of default colors mapped
+        to the user colorscale
+        """
+
         # These are the color codes returned for dendrograms
         # We're replacing them with nicer colors
         d = {'r': 'red',
@@ -3025,13 +3021,14 @@ class _Dendrogram(FigureFactory):
             k = default_colors.keys()[i]
             if i < len(colorscale):
                 default_colors[k] = colorscale[i]
-                
+
         return default_colors
-   
+
     def set_axis_layout(self, axis_key):
-        """ 
-            Sets and returns default axis object for dendrogram figure
-            :param (str) axis_key: "xaxis", "xaxis1", "yaxis", yaxis1", etc.
+        """
+        Sets and returns default axis object for dendrogram figure
+        :param (str) axis_key: "xaxis", "xaxis1", "yaxis", yaxis1", etc.
+        :rtype (dict): returns an axis_key dictionary with set parameters
         """
 
         axis_defaults = {
@@ -3039,61 +3036,64 @@ class _Dendrogram(FigureFactory):
                 'ticks': 'outside',
                 'mirror': 'allticks',
                 'rangemode': 'tozero',
-                'showticklabels': True,                 
+                'showticklabels': True,
                 'zeroline': False,
-                'showgrid': False,              
+                'showgrid': False,
                 'showline': True,
             }
-        
+
         if len(self.labels) != 0:
             axis_key_labels = self.xaxis
             if self.orientation in ['left', 'right']:
                 axis_key_labels = self.yaxis
             if axis_key_labels not in self.layout:
                 self.layout[axis_key_labels] = {}
-            self.layout[axis_key_labels]['tickvals'] = [ea*self.sign[axis_key]
-                                                        for ea in self.zero_vals]
+            self.layout[axis_key_labels]['tickvals'] = [zv*self.sign[axis_key]
+                                                        for zv in self.zero_vals]
             self.layout[axis_key_labels]['ticktext'] = self.labels
             self.layout[axis_key_labels]['tickmode'] = 'array'
-            
+
         self.layout[axis_key].update(axis_defaults)
-            
+
         return self.layout[axis_key]
 
     def set_figure_layout(self, width, height):
-        """ 
-            Sets and returns default layout object for dendrogram figure 
         """
-        
+        Sets and returns default layout object for dendrogram figure
+        """
+
         self.layout.update({
             'showlegend': False,
-            'autoscale': False,         
+            'autoscale': False,
             'hovermode': 'closest',
             'width': width,
             'width': height
         })
-        
+
         self.set_axis_layout(self.xaxis)
         self.set_axis_layout(self.yaxis)
 
         return self.layout
 
     def get_dendrogram_traces(self, X, colorscale):
-        """ 
-            Calculates all the elements needed for plotting a dendrogram
-
-            :rtype (tuple): Contains all the traces in the following order
-            (a) trace_list: List of Plotly trace objects for the dendrogram
-            tree
-            (b) icoord: All X points of the dendogram tree as array of arrays
-            with length 4
-            (c) dcoord: All Y points of the dendogram tree as array of arrays
-            with length 4
-            (d) ordered_labels: leaf labels in the order they are going to
-            appear on the plot
-            (e) P['leaves']: left-to-right traversal of the leaves
         """
-        
+        Calculates all the elements needed for plotting a dendrogram
+
+        :param (ndarray) X: Matrix of observations as arrray of arrays
+        :param (list) colorscale: Optional colorscale for dendrogram tree
+        clusters
+
+        :rtype (tuple): Contains all the traces in the following order
+        (a) trace_list: List of Plotly trace objects for the dendrogram tree
+        (b) icoord: All X points of the dendogram tree as array of arrays
+        with length 4
+        (c) dcoord: All Y points of the dendogram tree as array of arrays
+        with length 4
+        (d) ordered_labels: leaf labels in the order they are going to
+        appear on the plot
+        (e) P['leaves']: left-to-right traversal of the leaves
+        """
+
         d = scs.distance.pdist(X)
         Z = sch.linkage(d, method='complete')
         P = sch.dendrogram(Z, orientation=self.orientation,
@@ -3104,9 +3104,9 @@ class _Dendrogram(FigureFactory):
         ordered_labels = scp.array(P['ivl'])
         color_list = scp.array(P['color_list'])
         colors = self.get_color_dict(colorscale)
-        
+
         trace_list = []
-        
+
         for i in range(len(icoord)):
             # xs and ys are arrays of 4 points that make up the '∩' shapes
             # of the dendrogram tree
@@ -3139,6 +3139,5 @@ class _Dendrogram(FigureFactory):
             trace['yaxis'] = 'y' + y_index
 
             trace_list.append(trace)
-           
-        return trace_list, icoord, dcoord, ordered_labels, P['leaves']
 
+        return trace_list, icoord, dcoord, ordered_labels, P['leaves']
