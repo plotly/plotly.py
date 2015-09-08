@@ -2339,7 +2339,7 @@ class FigureFactory(object):
                    -0.3, 1.2, 0.56, 0.3, 2.2]
 
         # Group data together
-        hist_data = [hist1_x] + [hist2_x]
+        hist_data = [hist1_x, hist2_x]
 
         group_labels = ['2012', '2013']
 
@@ -2353,7 +2353,7 @@ class FigureFactory(object):
               'k2', 'l2', 'm2', 'n2', 'o2']
 
         # Group text together
-        rug_text_all = [rug_text_1] + [rug_text_2]
+        rug_text_all = [rug_text_1, rug_text_2]
 
         # Create distplot
         fig = FF.create_distplot(
@@ -2377,7 +2377,7 @@ class FigureFactory(object):
         x3 = np.random.randn(200)-1
         x4 = np.random.randn(210)+2
 
-        hist_data = [x1] + [x2] + [x3] + [x4]
+        hist_data = [x1, x2, x3, x4]
         group_labels = ['2012', '2013', '2014', '2015']
 
         fig = FF.create_distplot(
