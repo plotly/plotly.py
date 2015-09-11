@@ -699,7 +699,7 @@ class TestDistplot(TestCase):
                       5.5, 5.5, 5.5, 6.1, 7.0]]
 
         group_labels = ['distplot example']
-
+        import scipy
         self.assertRaisesRegexp(ImportError,
                                 "FigureFactory.create_distplot requires scipy",
                                 tls.FigureFactory.create_distplot,
