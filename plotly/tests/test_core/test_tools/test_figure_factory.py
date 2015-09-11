@@ -687,21 +687,21 @@ class TestFinanceCharts(TestCase):
         self.assertEqual(candle, exp_candle)
 
 
-class TestDistplot(TestCase):
+# class TestDistplot(TestCase):
 
-    def test_scipy_import_error(self):
+#     def test_scipy_import_error(self):
 
-        # make sure Import Error is raised when _scipy_imported = False
+#         # make sure Import Error is raised when _scipy_imported = False
 
-        hist_data = [[1.1, 1.1, 2.5, 3.0, 3.5,
-                      3.5, 4.1, 4.4, 4.5, 4.5,
-                      5.0, 5.0, 5.2, 5.5, 5.5,
-                      5.5, 5.5, 5.5, 6.1, 7.0]]
+#         hist_data = [[1.1, 1.1, 2.5, 3.0, 3.5,
+#                       3.5, 4.1, 4.4, 4.5, 4.5,
+#                       5.0, 5.0, 5.2, 5.5, 5.5,
+#                       5.5, 5.5, 5.5, 6.1, 7.0]]
 
-        group_labels = ['distplot example']
+#         group_labels = ['distplot example']
 
-        self.assertRaisesRegexp(ImportError,
-                                "FigureFactory.create_distplot requires scipy",
-                                tls.FigureFactory.create_distplot,
-                                hist_data, group_labels)
+#         self.assertRaisesRegexp(ImportError,
+#                                 "FigureFactory.create_distplot requires scipy",
+#                                 tls.FigureFactory.create_distplot,
+#                                 hist_data, group_labels)
 
