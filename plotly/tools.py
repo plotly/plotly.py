@@ -3011,7 +3011,7 @@ class _Candlestick(FigureFactory):
                 increase_x.append(self.x[index])
 
         increase_x = [[x, x, x, x, x, x] for x in increase_x]
-        increase_x = FigureFactory.flatten(increase_x)
+        increase_x = FigureFactory._flatten(increase_x)
 
         return increase_x, increase_y
 
@@ -3035,7 +3035,7 @@ class _Candlestick(FigureFactory):
                 decrease_x.append(self.x[index])
 
         decrease_x = [[x, x, x, x, x, x] for x in decrease_x]
-        decrease_x = FigureFactory.flatten(decrease_x)
+        decrease_x = FigureFactory._flatten(decrease_x)
 
         return decrease_x, decrease_y
 
