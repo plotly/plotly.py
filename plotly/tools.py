@@ -3061,7 +3061,7 @@ class _Distplot(FigureFactory):
         self.start = []
         self.end = []
         if colors:
-            self.colors = 'colors'
+            self.colors = colors
         else:
             self.colors = [
                 "rgb(31, 119, 180)", "rgb(255, 127, 14)",
