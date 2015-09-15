@@ -25,18 +25,12 @@ from a dict/list JSON representation.
 from __future__ import absolute_import
 
 import copy
-import sys
-import warnings
-from collections import OrderedDict
 
+import re
 import six
 
-from plotly import exceptions, graph_reference, utils
+from plotly import exceptions, graph_reference
 from plotly.graph_objs import graph_objs_tools
-from plotly.graph_objs.graph_objs_tools import (
-    INFO, OBJ_MAP, NAME_TO_KEY, KEY_TO_NAME
-)
-
 __all__ = None
 
 
