@@ -102,8 +102,10 @@ def test_stream_validate_layout():
     my_stream.close()
 
 
-@raises(exceptions.PlotlyError)
 def test_stream_unstreamable():
+
+    # even though `name` isn't streamable, we don't validate it --> should pass
+
     py.sign_in(un, ak)
     my_stream = py.Stream(tk)
     my_stream.open()
