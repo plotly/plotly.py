@@ -171,20 +171,7 @@ def make_dict_doc(name):
     return doc.expandtabs(TAB_SIZE)
 
 
-def update_keys(keys):
-    """Change keys we used to support to their new equivalent."""
-    updated_keys = list()
-    for key in keys:
-        if key in translations:
-            updated_keys += [translations[key]]
-        else:
-            updated_keys += [key]
-    return updated_keys
 
-translations = dict(
-    scl="colorscale",
-    reversescl="reversescale"
-)
 
 
 def curtail_val_repr(val, max_chars, add_delim=False):
