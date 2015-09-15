@@ -355,28 +355,97 @@ class PlotlyDict(dict, PlotlyBase):
     _parent_key = None
 
     def __init__(self, *args, **kwargs):
-        class_name = self.__class__.__name__
+        if self._name is None:
+            raise exceptions.PlotlyError(
+                "PlotlyDict is a base class. It's shouldn't be instantiated."
+            )
 
-        for key in kwargs:
-            if utils.is_source_key(key):
-                kwargs[key] = self._assign_id_to_src(key, kwargs[key])
+        _raise = kwargs.pop('_raise', True)
 
-        super(PlotlyDict, self).__init__(*args, **kwargs)
-        if issubclass(NAME_TO_CLASS[class_name], PlotlyTrace):
-            if (class_name != 'PlotlyTrace') and (class_name != 'Trace'):
-                self['type'] = NAME_TO_KEY[class_name]
-        self.validate()
-        if self.__class__.__name__ == 'PlotlyDict':
-            warnings.warn("\nThe PlotlyDict class is a base class of "
-                          "dictionary-like graph_objs.\nIt is not meant to be "
-                          "a user interface.")
+        super(PlotlyDict, self).__init__()
 
-    def __setitem__(self, key, value):
+        if self._name in graph_reference.TRACE_NAMES:
+            self['type'] = self._name
 
-        if key in ('xsrc', 'ysrc'):
-            value = self._assign_id_to_src(key, value)
+        # force key-value pairs to go through validation
+        d = {key: val for key, val in dict(*args, **kwargs).items()}
+        for key, val in d.items():
+            try:
+                self.__setitem__(key, val, _raise=_raise)
+            except exceptions.PlotlyGraphObjectError as err:
+                err.prepare()
+                raise
 
-        return super(PlotlyDict, self).__setitem__(key, value)
+    def __dir__(self):
+        attrs = self.__dict__.keys()
+        attrs += [attr for attr in dir(dict()) if attr not in attrs]
+        return sorted(self._attributes) + attrs
+
+    def __getitem__(self, key):
+        if key not in self:
+            self.__missing__(key)
+        return super(PlotlyDict, self).__getitem__(key)
+
+    def __setattr__(self, key, value):
+        self.__setitem__(key, value)
+
+    def __setitem__(self, key, value, _raise=True):
+
+        if not isinstance(key, six.string_types):
+            if _raise:
+                raise TypeError('Key must be string, not {}'.format(type(key)))
+            return
+
+        if key.endswith('src') and key in self._attributes:
+            value = graph_objs_tools.assign_id_to_src(key, value)
+            return super(PlotlyDict, self).__setitem__(key, value)
+
+        subplot_key = self._get_subplot_key(key)
+        if subplot_key is not None:
+            value = self.value_to_graph_object(subplot_key, value,
+                                               _raise=_raise)
+            if isinstance(value, (PlotlyDict, PlotlyList)):
+                value.__dict__['_parent'] = self
+                value.__dict__['_parent_key'] = key
+                return super(PlotlyDict, self).__setitem__(key, value)
+
+        if key not in self._attributes:
+            if _raise:
+                raise exceptions.PlotlyDictKeyError(self, key)
+            return
+
+        if graph_objs_tools.get_role(self, key) == 'object':
+            value = self.value_to_graph_object(key, value, _raise=_raise)
+            if isinstance(value, (PlotlyDict, PlotlyList)):
+                value.__dict__['_parent'] = self
+                value.__dict__['_parent_key'] = key
+            else:
+                return
+
+        super(PlotlyDict, self).__setitem__(key, value)
+
+    def __getattr__(self, key):
+        """Python only calls this when key is missing!"""
+        try:
+            return self.__getitem__(key)
+        except KeyError:
+            raise AttributeError(key)
+
+    def __missing__(self, key):
+
+        if key in self._attributes:
+            if graph_objs_tools.get_role(self, key) == 'object':
+                value = GraphObjectFactory.create(key)
+                value.__dict__['_parent'] = self
+                value.__dict__['_parent_key'] = key
+                return super(PlotlyDict, self).__setitem__(key, value)
+
+        subplot_key = self._get_subplot_key(key)
+        if subplot_key is not None:
+            value = GraphObjectFactory.create(subplot_key)
+            value.__dict__['_parent'] = self
+            value.__dict__['_parent_key'] = key
+            super(PlotlyDict, self).__setitem__(key, value)
 
     def _get_subplot_key(self, key):
 
