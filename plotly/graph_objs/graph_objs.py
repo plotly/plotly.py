@@ -896,6 +896,14 @@ class Data(PlotlyList):
             return super(Data, self).get_data(flatten=flatten)
 
 
+class Layout(PlotlyDict):
+
+    _name = 'layout'
+    _attributes = set(graph_reference.get_object_info(
+        None, 'layout'
+    )['attributes'])
+
+
 class PlotlyTrace(PlotlyDict):
     """A general data class for plotly.
 
@@ -1024,180 +1032,6 @@ def get_patched_annotations_class(Annotations):
     return Annotations
 
 Annotations = get_patched_annotations_class(Annotations)
-
-
-def get_patched_layout_class(Layout):
-    def __init__(self, *args, **kwargs):
-        super(Layout, self).__init__(*args, **kwargs)
-
-    def to_graph_objs(self, caller=True):
-        """Walk obj, convert dicts and lists to plotly graph objs.
-
-        For each key in the object, if it corresponds to a special key that
-        should be associated with a graph object, the ordinary dict or list
-        will be reinitialized as a special PlotlyDict or PlotlyList of the
-        appropriate `kind`.
-
-        """
-        keys = list(self.keys())
-        for key in keys:
-            if key[:5] in ['xaxis', 'yaxis']:  # allows appended integers!
-                try:
-                    axis_int = int(key[5:])  # may raise ValueError
-                    if axis_int == 0:
-                        continue  # xaxis0 and yaxis0 are not valid keys...
-                except ValueError:
-                    continue  # not an XAxis or YAxis object after all
-                if isinstance(self[key], dict):
-                    if key[:5] == 'xaxis':
-                        obj = get_class_instance_by_name('XAxis')
-                    else:
-                        obj = get_class_instance_by_name('YAxis')
-                    for k, v in list(self.pop(key).items()):
-                        obj[k] = v
-                    self[key] = obj  # call to super will call 'to_graph_objs'
-        super(Layout, self).to_graph_objs(caller=caller)
-
-    def to_string(self, level=0, indent=4, eol='\n',
-                  pretty=True, max_chars=80):
-        """Returns a formatted string showing graph_obj constructors.
-
-        Example:
-
-            print(obj.to_string())
-
-        Keyword arguments:
-        level (default = 0) -- set number of indentations to start with
-        indent (default = 4) -- set indentation amount
-        eol (default = '\\n') -- set end of line character(s)
-        pretty (default = True) -- curtail long list output with a '...'
-        max_chars (default = 80) -- set max characters per line
-
-        """
-        # TODO: can't call super
-        self.to_graph_objs()
-        if not len(self):
-            return "{name}()".format(name=self.__class__.__name__)
-        string = "{name}(".format(name=self.__class__.__name__)
-        index = 0
-        obj_key = NAME_TO_KEY[self.__class__.__name__]
-        for key in INFO[obj_key]['keymeta']:
-            if key in self:
-                string += "{eol}{indent}{key}=".format(
-                    eol=eol,
-                    indent=' ' * indent * (level+1),
-                    key=key)
-                try:
-                    string += self[key].to_string(level=level+1,
-                                                  indent=indent,
-                                                  eol=eol,
-                                                  pretty=pretty,
-                                                  max_chars=max_chars)
-                except AttributeError:
-                    if pretty:  # curtail representation if too many chars
-                        max_len = (max_chars -
-                                   indent*(level + 1) -
-                                   len(key + "=") -
-                                   len(eol))
-                        if index < len(self):
-                            max_len -= len(',')  # remember the comma!
-                        if isinstance(self[key], list):
-                            s = "[]"
-                            for iii, entry in enumerate(self[key], 1):
-                                if iii < len(self[key]):
-                                    s_sub = graph_objs_tools.curtail_val_repr(
-                                        entry,
-                                        max_chars=max_len - len(s),
-                                        add_delim=True
-                                    )
-                                else:
-                                    s_sub = graph_objs_tools.curtail_val_repr(
-                                        entry,
-                                        max_chars=max_len - len(s),
-                                        add_delim=False
-                                    )
-                                s = s[:-1] + s_sub + s[-1]
-                                if len(s) == max_len:
-                                    break
-                            string += s
-                        else:
-                            string += graph_objs_tools.curtail_val_repr(
-                                self[key], max_len)
-                    else:  # they want it all!
-                        string += repr(self[key])
-                if index < len(self) - 1:
-                    string += ","
-                index += 1
-                if index == len(self):  # TODO: extraneous...
-                    break
-        left_over_keys = [key for key in self
-                          if key not in INFO[obj_key]['keymeta']]
-        left_over_keys.sort()
-        for key in left_over_keys:
-            string += "{eol}{indent}{key}=".format(
-                eol=eol,
-                indent=' ' * indent * (level+1),
-                key=key)
-            try:
-                string += self[key].to_string(level=level + 1,
-                                              indent=indent,
-                                              eol=eol,
-                                              pretty=pretty,
-                                              max_chars=max_chars)
-            except AttributeError:
-                string += str(repr(self[key]))
-            if index < len(self) - 1:
-                string += ","
-            index += 1
-        string += "{eol}{indent})".format(eol=eol, indent=' ' * indent * level)
-        return string
-
-    def force_clean(self, caller=True):  # TODO: can't make call to super...
-        """Attempts to convert to graph_objs and call force_clean() on values.
-
-        Calling force_clean() on a Layout will ensure that the object is
-        valid and may be sent to plotly. This process will also remove any
-        entries that end up with a length == 0.
-
-        Careful! This will delete any invalid entries *silently*.
-
-        This method differs from the parent (PlotlyDict) method in that it
-        must check for an infinite number of possible axis keys, i.e. 'xaxis',
-        'xaxis1', 'xaxis2', 'xaxis3', etc. Therefore, it cannot make a call
-        to super...
-
-        """
-        obj_key = NAME_TO_KEY[self.__class__.__name__]
-        if caller:
-            self.to_graph_objs(caller=False)
-        del_keys = [key for key in self
-                    if str(key) not in INFO[obj_key]['keymeta']]
-        for key in del_keys:
-            if (key[:5] == 'xaxis') or (key[:5] == 'yaxis'):
-                try:
-                    test_if_int = int(key[5:])
-                except ValueError:
-                    del self[key]
-            else:
-                del self[key]
-        keys = list(self.keys())
-        for key in keys:
-            try:
-                self[key].force_clean(caller=False)  # TODO error handling??
-            except AttributeError:
-                pass
-            if isinstance(self[key], (dict, list)):
-                if len(self[key]) == 0:
-                    del self[key]  # clears empty collections!
-            elif self[key] is None:
-                del self[key]
-    Layout.__init__ = __init__
-    Layout.to_graph_objs = to_graph_objs
-    Layout.to_string = to_string
-    Layout.force_clean = force_clean  # override methods!
-    return Layout
-
-Layout = get_patched_layout_class(Layout)
 
 
 # (4) NAME_TO_CLASS dict and class-generating function
