@@ -15,7 +15,7 @@ Goals of this module:
 * A dict/list with the same entries as a PlotlyDict/PlotlyList should look
 exactly the same once a call is made to plot.
 
-* Only mutate object structure when users ASK for it.
+* Only mutate object structure when users ASK for it. (some magic now...)
 
 * It should always be possible to get a dict/list JSON representation from a
 graph_objs object and it should always be possible to make a graph_objs object
