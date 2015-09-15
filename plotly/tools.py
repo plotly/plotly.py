@@ -1295,16 +1295,17 @@ def validate(obj, obj_type):
     """
     # TODO: Deprecate or move. #283
     from plotly.graph_objs import graph_objs
+
+    if obj_type not in graph_reference.CLASS_NAMES_TO_OBJECT_NAMES:
+        obj_type = graph_reference.string_to_class_name(obj_type)
+
     try:
-        obj_type = graph_objs.KEY_TO_NAME[obj_type]
-    except KeyError:
-        pass
-    try:
-        test_obj = graph_objs.get_class_instance_by_name(obj_type, obj)
-    except KeyError:
+        cls = getattr(graph_objs, obj_type)
+    except AttributeError:
         raise exceptions.PlotlyError(
             "'{0}' is not a recognizable graph_obj.".
             format(obj_type))
+    cls(obj)  # this will raise on invalid keys/items
 
 
 def _replace_newline(obj):
