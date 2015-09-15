@@ -166,6 +166,16 @@ class PlotlyList(list, PlotlyBase):
         raise exceptions.PlotlyError('Setting attributes on a PlotlyList is '
                                      'not allowed')
 
+    def __copy__(self):
+
+        # TODO: https://github.com/plotly/python-api/issues/291
+        return GraphObjectFactory.create(self._name, *self)
+
+    def __deepcopy__(self, memodict={}):
+
+        # TODO: https://github.com/plotly/python-api/issues/291
+        return self.__copy__()
+
     def append(self, value):
         """Override to enforce validation."""
         index = len(self)  # used for error messages
@@ -430,6 +440,16 @@ class PlotlyDict(dict, PlotlyBase):
             return self.__getitem__(key)
         except KeyError:
             raise AttributeError(key)
+
+    def __copy__(self):
+
+        # TODO: https://github.com/plotly/python-api/issues/291
+        return GraphObjectFactory.create(self._name, **self)
+
+    def __deepcopy__(self, memodict={}):
+
+        # TODO: https://github.com/plotly/python-api/issues/291
+        return self.__copy__()
 
     def __missing__(self, key):
 
