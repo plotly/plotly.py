@@ -1314,43 +1314,6 @@ def validate(obj, obj_type):
             format(obj_type))
 
 
-def validate_stream(obj, obj_type):
-    """Validate a data dictionary (only) for use with streaming.
-
-    An error is raised if a key within (or nested within) is not streamable.
-
-    """
-    # TODO: Deprecate or move. #283
-    from plotly.graph_objs import graph_objs
-    try:
-        obj_type = graph_objs.KEY_TO_NAME[obj_type]
-    except KeyError:
-        pass
-    info = graph_objs.INFO[graph_objs.NAME_TO_KEY[obj_type]]
-    for key, val in list(obj.items()):
-        if key == 'type':
-            continue
-        if 'streamable' in info['keymeta'][key].keys():
-            if not info['keymeta'][key]['streamable']:
-                raise exceptions.PlotlyError(
-                    "The '{0}' key is not streamable in the '{1}' "
-                    "object".format(
-                        key, obj_type
-                    )
-                )
-        else:
-            raise exceptions.PlotlyError(
-                "The '{0}' key is not streamable in the '{1}' object".format(
-                    key, obj_type
-                )
-            )
-        try:
-            sub_obj_type = graph_objs.KEY_TO_NAME[key]
-            validate_stream(val, sub_obj_type)
-        except KeyError:
-            pass
-
-
 def _replace_newline(obj):
     """Replaces '\n' with '<br>' for all strings in a collection."""
     if isinstance(obj, dict):

@@ -576,17 +576,6 @@ class Stream:
                     "to 'your_stream.write()'. Here's why the object is "
                     "invalid:\n\n{1}".format(stream_object['type'], err)
                 )
-            try:
-                tools.validate_stream(stream_object, stream_object['type'])
-            except exceptions.PlotlyError as err:
-                raise exceptions.PlotlyError(
-                    "Part of the data object with type, '{0}', cannot yet be "
-                    "streamed into Plotly. If you do not want to validate "
-                    "your data objects when streaming, you can set "
-                    "'validate=False' in the call to 'your_stream.write()'. "
-                    "Here's why the object cannot be streamed:\n\n{1}"
-                    .format(stream_object['type'], err)
-                )
             if layout is not None:
                 try:
                     tools.validate(layout, 'Layout')
