@@ -245,22 +245,17 @@ class PlotlyList(list, PlotlyBase):
             "{eol}{indent}])").format(eol=eol, indent=' ' * indent * level)
         return string
 
-    def force_clean(self, caller=True):
+    def force_clean(self, **kwargs):
         """Attempts to convert to graph_objs and calls force_clean() on entries.
-
         Calling force_clean() on a PlotlyList will ensure that the object is
         valid and may be sent to plotly. This process will remove any entries
         that end up with a length == 0. It will also remove itself from
         enclosing trivial structures if it is enclosed by a collection with
         length 1, meaning the data is the ONLY object in the collection.
-
         Careful! This will delete any invalid entries *silently*.
-
         """
-        if caller:
-            self.to_graph_objs()  # TODO add error handling here!
         for entry in self:
-            entry.force_clean(caller=False)
+            entry.force_clean()
         del_indicies = [index for index, item in enumerate(self)
                         if len(item) == 0]
         del_ct = 0
@@ -486,21 +481,11 @@ class PlotlyDict(dict, PlotlyBase):
 
     def force_clean(self, caller=True):
         """Attempts to convert to graph_objs and call force_clean() on values.
-
         Calling force_clean() on a PlotlyDict will ensure that the object is
         valid and may be sent to plotly. This process will also remove any
         entries that end up with a length == 0.
-
         Careful! This will delete any invalid entries *silently*.
-
         """
-        obj_key = NAME_TO_KEY[self.__class__.__name__]
-        if caller:
-            self.to_graph_objs(caller=False)
-        del_keys = [key for key in self
-                    if str(key) not in INFO[obj_key]['keymeta']]
-        for key in del_keys:
-            del self[key]
         keys = list(self.keys())
         for key in keys:
             try:
