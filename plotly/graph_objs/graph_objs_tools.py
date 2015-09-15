@@ -1,51 +1,7 @@
 from __future__ import absolute_import
-
-import json
-import os
 import textwrap
-from collections import OrderedDict
-from pkg_resources import resource_string
-
 import six
 
-from plotly import utils
-
-
-# Define graph reference loader
-def _load_graph_ref():
-    graph_reference_dir = 'graph_reference'
-    json_files = [
-        'graph_objs_meta.json',
-        'OBJ_MAP.json',
-        'NAME_TO_KEY.json',
-        'KEY_TO_NAME.json'
-    ]
-    out = []
-    for json_file in json_files:
-        relative_path = os.path.join(graph_reference_dir, json_file)
-        s = resource_string('plotly', relative_path).decode('utf-8')
-        tmp = json.loads(s, object_pairs_hook=OrderedDict)
-        tmp = utils.decode_unicode(tmp)
-        out += [tmp]
-    return tuple(out)
-
-# Load graph reference
-INFO, OBJ_MAP, NAME_TO_KEY, KEY_TO_NAME = _load_graph_ref()
-
-# Add mentions to Python-specific graph obj
-# to NAME_TO_KEY, KEY_TO_NAME, INFO
-NAME_TO_KEY['PlotlyList'] = 'plotlylist'
-NAME_TO_KEY['PlotlyDict'] = 'plotlydict'
-NAME_TO_KEY['PlotlyTrace'] = 'plotlytrace'
-NAME_TO_KEY['Trace'] = 'trace'
-KEY_TO_NAME['plotlylist'] = 'PlotlyList'
-KEY_TO_NAME['plotlydict'] = 'PlotlyDict'
-KEY_TO_NAME['plotlytrace'] = 'PlotlyTrace'
-KEY_TO_NAME['trace'] = 'Trace'
-INFO['plotlylist'] = dict(keymeta=dict())
-INFO['plotlydict'] = dict(keymeta=dict())
-INFO['plotlytrace'] = dict(keymeta=dict())
-INFO['trace'] = dict(keymeta=dict())
 from plotly import exceptions, graph_reference
 
 # Define line and tab size for help text!
