@@ -111,37 +111,58 @@ def curtail_val_repr(val, max_chars, add_delim=False):
     return r
 
 
-def value_is_data(obj_name, key, value):
+def get_role(parent, key, value=None):
     """
     Values have types associated with them based on graph_reference.
 
     'data' type values are always kept
     'style' values are kept if they're sequences (but not strings)
 
-    :param (str) obj_name: E.g., 'scatter', 'figure'
-    :param (str) key: E.g., 'x', 'y', 'text'
-    :param (*) value:
     :returns: (bool)
 
     """
+    parents = parent.get_parents() + [parent]
+    parent_names = [p._name for p in parents]
+
+    object_name = parent_names[-1]
     try:
-        key_type = INFO[obj_name]['keymeta'][key]['key_type']
-    except KeyError:
-        return False
+        parent_object_name = parent_names[-2]
+    except IndexError:
+        parent_object_name = None
 
-    if key_type not in ['data', 'style']:
-        return False
+    object_paths = graph_reference.OBJECTS[object_name]
+    if object_paths:
+        object_infos = [graph_reference.get_object_info(path, object_name)
+                        for path in object_paths]
+    else:
+        object_info = graph_reference.get_object_info(None, object_name)
+        object_infos = [object_info]
 
-    if key_type == 'data':
-        return True
+    if parent_object_name is not None:
+        object_infos = [object_info for object_info in object_infos
+                        if object_info['parent'] == parent_object_name]
 
-    if key_type == 'style':
-        iterable = hasattr(value, '__iter__')
-        stringy = isinstance(value, six.string_types)
-        dicty = isinstance(value, dict)
-        return iterable and not stringy and not dicty
+    # TODO: I'd be curious to know if object_infos can have length > 1 ?
+    role = None
+    for object_info in object_infos:
 
-    return False
+        # we assume the first match holds for all
+        if key in object_info['attributes']:
+            role = object_info['attributes'][key]['role']
+            array_ok = object_info['attributes'][key].get('arrayOk', False)
+
+            if value is not None and array_ok:
+                iterable = hasattr(value, '__iter__')
+                stringy = isinstance(value, six.string_types)
+                dicty = isinstance(value, dict)
+                if iterable and not stringy and not dicty:
+                    role = 'data'
+
+        if role == 'data':
+            break  # we do this to play it as conservatively as possible.
+
+    return role
+
 
 def assign_id_to_src(src_name, src_value):
     if isinstance(src_value, six.string_types):
