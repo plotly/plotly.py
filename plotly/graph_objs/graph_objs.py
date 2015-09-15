@@ -109,8 +109,14 @@ class PlotlyList(list, PlotlyBase):
     _name = None
     _items = set()
 
-    def __init__(self, *args):
-        super(PlotlyList, self).__init__(*args)
+    def __init__(self, *args, **kwargs):
+        if self._name is None:
+            raise exceptions.PlotlyError(
+                "PlotlyList is a base class. It's shouldn't be instantiated."
+            )
+
+        _raise = kwargs.get('_raise', True)
+
         if args and isinstance(args[0], dict):
             raise exceptions.PlotlyListEntryError(
                 obj=self,
@@ -127,11 +133,58 @@ class PlotlyList(list, PlotlyBase):
                       ">>> {name}(dict(), dict())"
                       "".format(name=self.__class__.__name__)
             )
-        self.validate()
-        if self.__class__.__name__ == 'PlotlyList':
-            warnings.warn("\nThe PlotlyList class is a base class of "
-                          "list-like graph_objs.\nIt is not meant to be a "
-                          "user interface.")
+
+        super(PlotlyList, self).__init__()
+
+        for index, value in enumerate(list(*args)):
+            try:
+                value = self.value_to_graph_object(index, value, _raise=_raise)
+            except exceptions.PlotlyGraphObjectError as err:
+                err.prepare()
+                raise
+
+            if isinstance(value, PlotlyBase):
+                self.append(value)
+
+    def __setitem__(self, index, value, _raise=True):
+        """Override to enforce validation."""
+        if not isinstance(index, int):
+            if _raise:
+                index_type = type(index)
+                raise TypeError('Index must be int, not {}'.format(index_type))
+            return
+
+        if index >= len(self):
+            raise IndexError(index)
+
+        value = self.value_to_graph_object(index, value, _raise=_raise)
+        if isinstance(value, (PlotlyDict, PlotlyList)):
+            value.__dict__['_parent'] = self
+            super(PlotlyList, self).__setitem__(index, value)
+
+    def __setattr__(self, key, value):
+        raise exceptions.PlotlyError('Setting attributes on a PlotlyList is '
+                                     'not allowed')
+
+    def append(self, value):
+        """Override to enforce validation."""
+        index = len(self)  # used for error messages
+        value = self.value_to_graph_object(index, value)
+        value.__dict__['_parent'] = self
+        super(PlotlyList, self).append(value)
+
+    def extend(self, iterable):
+        """Override to enforce validation."""
+        for value in iterable:
+            index = len(self)
+            value = self.value_to_graph_object(index, value)
+            super(PlotlyList, self).append(value)
+
+    def insert(self, index, value):
+        """Override to enforce validation."""
+        value = self.value_to_graph_object(index, value)
+        value.__dict__['_parent'] = self
+        super(PlotlyList, self).insert(index, value)
 
     def value_to_graph_object(self, index, value, _raise=True):
         """
