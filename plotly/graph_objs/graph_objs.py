@@ -40,6 +40,67 @@ from plotly.graph_objs.graph_objs_tools import (
 __all__ = None
 
 
+class PlotlyBase(object):
+    """
+    Base object for PlotlyList and PlotlyDict.
+
+    """
+    _parent = None
+
+    def get_path(self):
+        """
+        Get a tuple of the str keys and int indices for this object's path.
+
+        :return: (tuple)
+
+        """
+        path = []
+        parents = self.get_parents()
+        parents.reverse()
+        children = [self] + parents[:-1]
+        for parent, child in zip(parents, children):
+            if isinstance(parent, dict):
+                path.append(child._parent_key)
+            else:
+                path.append(parent.index(child))
+        path.reverse()
+        return tuple(path)
+
+    def get_parents(self):
+        """
+        Get a list of all the parent objects above this one.
+
+        :return: (list[PlotlyBase])
+
+        """
+        parents = []
+        parent = self._parent
+        while parent is not None:
+            parents.append(parent)
+            parent = parent._parent
+        parents.reverse()
+        return parents
+
+    def to_graph_objs(self, **kwargs):
+        """Everything is cast into graph_objs. Here for backwards compat."""
+        pass
+
+    def validate(self):
+        """Everything is *always* validated now. keep for backwards compat."""
+        pass
+
+    def get_ordered(self, **kwargs):
+        """
+        We have no way to order things anymore. Keep for backwards compat.
+
+        See https://github.com/plotly/python-api/issues/290.
+
+        :return: (PlotlyBase)
+
+        """
+        return self
+
+
 # (1) Make primitive graph objects
 class PlotlyList(list):
     """A container for PlotlyDicts, inherits from standard list.
