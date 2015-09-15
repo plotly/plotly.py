@@ -835,6 +835,67 @@ class Figure(PlotlyDict):
         self['data'] += [trace]
 
 
+class Data(PlotlyList):
+
+    _name = 'data'
+    _items = set(graph_reference.TRACE_NAMES)
+
+    def value_to_graph_object(self, index, value, _raise=True):
+
+        if not isinstance(value, dict):
+            if _raise:
+                e = exceptions.PlotlyListEntryError(self, index, value)
+                e.add_note('Entry should subclass dict.')
+                raise e
+            else:
+                return
+
+        item = value.get('type', 'scatter')
+        if item not in self._items:
+            if _raise:
+                err = exceptions.PlotlyListEntryError(self, index, value)
+                err.add_note("Entry does not have a valid 'type' key")
+                err.add_to_error_path(index)
+                raise err
+
+        try:
+            return GraphObjectFactory.create(item, _raise=_raise, **value)
+        except exceptions.PlotlyGraphObjectError as e:
+            e.add_to_error_path(index)
+            raise
+
+    def get_data(self, flatten=False):
+        """
+        :param flatten:
+        :return:
+        """
+        if flatten:
+            data = [v.get_data(flatten=flatten) for v in self]
+            d = {}
+            taken_names = []
+            for i, trace in enumerate(data):
+
+                # we want to give the traces helpful names
+                # however, we need to be sure they're unique too...
+                trace_name = trace.pop('name', 'trace_{0}'.format(i))
+                if trace_name in taken_names:
+                    j = 1
+                    new_trace_name = "{0}_{1}".format(trace_name, j)
+                    while new_trace_name in taken_names:
+                        new_trace_name = "{0}_{1}".format(trace_name, j)
+                        j += 1
+                    trace_name = new_trace_name
+                taken_names.append(trace_name)
+
+                # finish up the dot-concatenation
+                for k, v in trace.items():
+                    key = "{0}.{1}".format(trace_name, k)
+                    d[key] = v
+            return d
+        else:
+            return super(Data, self).get_data(flatten=flatten)
+
+
 class PlotlyTrace(PlotlyDict):
     """A general data class for plotly.
 
@@ -925,85 +986,6 @@ for obj in OBJ_MAP:
 
 
 # (3) Patch 'custom' methods into some graph objects
-def get_patched_data_class(Data):
-    def to_graph_objs(self, caller=True):  # TODO TODO TODO! check logic!
-        """Change any nested collections to subclasses of PlotlyDict/List.
-
-        Procedure:
-            1. Attempt to convert all entries to a subclass of PlotlyTrace.
-            2. Call `to_graph_objects` on each of these entries.
-
-        """
-        for index, entry in enumerate(self):
-            if isinstance(entry, PlotlyDict):
-                self[index] = get_class_instance_by_name(
-                    entry.__class__.__name__, entry)
-            elif isinstance(entry, dict):
-                if 'type' not in entry:  # assume 'scatter' if not given
-                    entry['type'] = 'scatter'
-                try:
-                    obj_name = KEY_TO_NAME[entry['type']]
-                except KeyError:
-                    raise exceptions.PlotlyDataTypeError(
-                        obj=self,
-                        index=index
-                    )
-                obj = get_class_instance_by_name(obj_name)
-                for k, v in list(entry.items()):
-                    obj[k] = v
-                self[index] = obj
-            if not isinstance(self[index], PlotlyTrace):  # Trace ONLY!!!
-                raise exceptions.PlotlyListEntryError(
-                    obj=self,
-                    index=index,
-                    notes=(
-                        "The entry could not be converted into a PlotlyTrace "
-                        "object (e.g., Scatter, Heatmap, Bar, etc)."
-                    ),
-                )
-        super(Data, self).to_graph_objs(caller=caller)
-    Data.to_graph_objs = to_graph_objs  # override method!
-
-    def get_data(self, flatten=False):
-        """
-
-        :param flatten:
-        :return:
-
-        """
-        if flatten:
-            self.to_graph_objs()
-            data = [v.get_data(flatten=flatten) for v in self]
-            d = {}
-            taken_names = []
-            for i, trace in enumerate(data):
-
-                # we want to give the traces helpful names
-                # however, we need to be sure they're unique too...
-                trace_name = trace.pop('name', 'trace_{0}'.format(i))
-                if trace_name in taken_names:
-                    j = 1
-                    new_trace_name = "{0}_{1}".format(trace_name, j)
-                    while new_trace_name in taken_names:
-                        new_trace_name = "{0}_{1}".format(trace_name, j)
-                        j += 1
-                    trace_name = new_trace_name
-                taken_names.append(trace_name)
-
-                # finish up the dot-concatenation
-                for k, v in trace.items():
-                    key = "{0}.{1}".format(trace_name, k)
-                    d[key] = v
-            return d
-        else:
-            return super(Data, self).get_data(flatten=flatten)
-    Data.get_data = get_data
-
-    return Data
-
-Data = get_patched_data_class(Data)
-
-
 def get_patched_annotations_class(Annotations):
     def to_graph_objs(self, caller=True):
         """Change any nested collections to subclasses of PlotlyDict/List.
