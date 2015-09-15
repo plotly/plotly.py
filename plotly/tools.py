@@ -1266,7 +1266,7 @@ def make_subplots(rows=1, cols=1,
 
 
 def get_valid_graph_obj(obj, obj_type=None):
-    """Returns a new graph object that is guaranteed to pass validate().
+    """Returns a new graph object that won't raise.
 
     CAREFUL: this will *silently* strip out invalid pieces of the object.
 
@@ -1274,22 +1274,15 @@ def get_valid_graph_obj(obj, obj_type=None):
     # TODO: Deprecate or move. #283
     from plotly.graph_objs import graph_objs
     try:
-        new_obj = graph_objs.get_class_instance_by_name(
-            obj.__class__.__name__)
-    except KeyError:
+        cls = getattr(graph_objs, obj.__class__.__name__)
+    except (AttributeError, KeyError):
         try:
-            new_obj = graph_objs.get_class_instance_by_name(obj_type)
-        except KeyError:
+            cls = getattr(graph_objs, obj_type)
+        except (AttributeError, KeyError):
             raise exceptions.PlotlyError(
                 "'{0}' nor '{1}' are recognizable graph_objs.".
                 format(obj.__class__.__name__, obj_type))
-    if isinstance(new_obj, list):
-        new_obj += obj
-    else:
-        for key, val in list(obj.items()):
-            new_obj[key] = val
-    new_obj.force_clean()
-    return new_obj
+    return cls(obj, _raise=False)
 
 
 def validate(obj, obj_type):
