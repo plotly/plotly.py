@@ -22,7 +22,10 @@ def get_graph_reference():
     if files.check_file_permissions():
         graph_reference = utils.load_json_dict(files.GRAPH_REFERENCE_FILE)
         config = utils.load_json_dict(files.CONFIG_FILE)
-        plotly_domain = config['plotly_domain']
+
+        # TODO: https://github.com/plotly/python-api/issues/293
+        default_domain = files.FILE_CONTENT[files.CONFIG_FILE]['plotly_domain']
+        plotly_domain = config.get('plotly_domain', default_domain)
     else:
         graph_reference = {}
         plotly_domain = files.FILE_CONTENT[files.CONFIG_FILE]['plotly_domain']
