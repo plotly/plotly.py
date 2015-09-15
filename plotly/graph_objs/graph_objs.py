@@ -133,6 +133,34 @@ class PlotlyList(list, PlotlyBase):
                           "list-like graph_objs.\nIt is not meant to be a "
                           "user interface.")
 
+    def value_to_graph_object(self, index, value, _raise=True):
+        """
+        Attempt to change the given value into a graph object.
+
+        If _raise is False, this won't raise. If the entry can't be converted,
+        `None` is returned, meaning the caller should ignore the value or
+        discard it as a failed conversion.
+
+        :param (dict) value: A dict to be converted into a graph object.
+        :param (bool) _raise: If False, ignore bad values instead of raising.
+        :return: (PlotlyBase|None) The graph object or possibly `None`.
+
+        """
+        if not isinstance(value, dict):
+            if _raise:
+                raise exceptions.PlotlyListEntryError(self, index, value)
+            else:
+                return
+
+        for i, item in enumerate(self._items, 1):
+            try:
+                return GraphObjectFactory.create(item, _raise=_raise, **value)
+            except exceptions.PlotlyGraphObjectError as e:
+                if i == len(self._items) and _raise:
+                    e.add_to_error_path(index)
+                    e.prepare()
+                    raise
+
     def update(self, changes, make_copies=False):
         """Update current list with changed_list, which must be iterable.
         The 'changes' should be a list of dictionaries, however,
@@ -296,6 +324,47 @@ class PlotlyDict(dict, PlotlyBase):
             value = self._assign_id_to_src(key, value)
 
         return super(PlotlyDict, self).__setitem__(key, value)
+
+    def value_to_graph_object(self, key, value, _raise=True):
+
+        if graph_reference.attribute_is_array(key, self._name):
+            val_types = (list, )
+            if not isinstance(value, val_types):
+                if _raise:
+                    e = exceptions.PlotlyDictValueError(self, key, value,
+                                                        val_types)
+                    e.add_to_error_path(key)
+                    e.prepare()
+                    raise e
+                else:
+                    return
+            try:
+                graph_object = GraphObjectFactory.create(key, value,
+                                                         _raise=_raise)
+            except exceptions.PlotlyGraphObjectError as e:
+                e.add_to_error_path(key)
+                e.prepare()
+                raise e
+        else:
+            val_types = (dict, )
+            if not isinstance(value, val_types):
+                if _raise:
+                    e = exceptions.PlotlyDictValueError(self, key, value,
+                                                        val_types)
+                    e.add_to_error_path(key)
+                    e.prepare()
+                    raise e
+                else:
+                    return
+            try:
+                graph_object = GraphObjectFactory.create(key, value,
+                                                         _raise=_raise)
+            except exceptions.PlotlyGraphObjectError as e:
+                e.add_to_error_path(key)
+                e.prepare()
+                raise e
+
+        return graph_object  # this can be `None` when `_raise == False`
 
     def update(self, dict1=None, **dict2):
         """Update current dict with dict1 and then dict2.
