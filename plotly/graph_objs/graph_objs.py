@@ -31,7 +31,6 @@ import six
 
 from plotly import exceptions, graph_reference
 from plotly.graph_objs import graph_objs_tools
-__all__ = None
 
 
 class PlotlyBase(object):
@@ -971,3 +970,6 @@ def _add_classes_to_globals(globals):
                 globals[key] = cls
 
 _add_classes_to_globals(globals())
+
+# We don't want to expose this module to users, just the classes.
+__all__ = graph_reference.CLASS_NAMES_TO_OBJECT_NAMES.keys()
