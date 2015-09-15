@@ -167,3 +167,14 @@ def assign_id_to_src(src_name, src_value):
         raise exceptions.InputError(err)
     return src_id
 
+
+def sort_keys(key):
+    """
+    Temporary function. See https://github.com/plotly/python-api/issues/290.
+
+    :param (str|unicode) key: The attribute we're sorting on.
+    :return: (bool, str|unicode) The naturally-sortable tuple.
+
+    """
+    is_special = key in 'rtxyz'
+    return (not is_special, key)
