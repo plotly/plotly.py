@@ -11,6 +11,7 @@ import requests
 from plotly import exceptions, files, utils
 
 GRAPH_REFERENCE_PATH = '/plot-schema.json'
+META_KEYS = ['_isLinkedToArray', '_isSubplotObj', 'description', 'role']
 
 # for backwards compat, we need to add a few class names
 _BACKWARDS_COMPAT_CLASS_NAME_TO_OBJECT_NAME = {
@@ -87,6 +88,21 @@ def string_to_class_name(string):
     return string
 
 
+def get_object_info(path, object_name):
+    """
+    Can be used outside this module to get meta info about a graph object.
+
+    :param (tuple|None) path: A path inside GRAPH_REFERENCE to an object.
+    :param (str|unicode) object_name: The name of an object in GRAPH_REFERENCE.
+    :return: (dict)
+
+    """
+    if path:
+        return _get_object_info_from_path(path, object_name)
+    else:
+        return _get_object_info_from_name(object_name)
+
+
 
 def _get_objects():
     """
@@ -138,6 +154,133 @@ def _get_class_names_to_object_names():
         class_names_to_object_names[class_name] = object_name
 
     return class_names_to_object_names
+
+
+def _get_object_info_from_path(path, object_name):
+    """
+    Get object info given a path in GRAPH_REFERENCE.
+
+    :param (tuple) path: A valid path in GRAPH_REFERENCE.
+    :param (str|unicode) object_name: To differentiate item from parent array.
+
+    :return: (dict)
+
+    """
+    path_value = utils.get_by_path(GRAPH_REFERENCE, path)
+    if object_name == path[-1][:-1] and '_isLinkedToArray' in path_value:
+
+        attribute_container = utils.get_by_path(GRAPH_REFERENCE, path)
+
+        is_array = False
+        parent = path[-1]
+        name = parent[:-1]
+        description = attribute_container.get('description', '')
+        attributes = {k: v for k, v in attribute_container.items()
+                      if k not in META_KEYS}
+        items = None
+
+    else:
+
+        name = path[-1]
+
+        if path[-2] == 'attributes':
+            parent = path[-3]  # a trace
+        elif path[-2] == 'layoutAttributes':
+            parent = 'layout'
+        else:
+            parent = path[-2]
+
+        if '_isLinkedToArray' in path_value:
+
+            is_array = True
+            description = ''
+            attributes = None
+            items = [name[:-1]]
+
+        else:
+
+            is_array = False
+            description = path_value.get('description', '')
+            attributes = {k: v for k, v in path_value.items()
+                          if k not in META_KEYS}
+            items = None
+
+    return {
+        'role': 'object',
+        'is_array': is_array,
+        'parent': parent,
+        'name': name,
+        'description': description,
+        'attributes': attributes,
+        'items': items
+    }
+
+
+def _get_object_info_from_name(object_name):
+    """
+    Get object info given an object name in OBJECTS.
+
+    If a valid path *could* have been used, this will fail. This is meant to be
+    a last resort to get the object info dict.
+
+    :param (str) object_name: The name of an object in OBJECTS.
+
+    :return: (dict)
+
+    """
+    if object_name not in ['figure', 'data', 'layout'] + TRACE_NAMES:
+        raise Exception('TBD')
+
+    if object_name in TRACE_NAMES:
+
+        trace = utils.get_by_path(GRAPH_REFERENCE, ('traces', object_name))
+        description = 'A {} trace'.format(object_name)
+        attributes = {k: v for k, v in trace['attributes'].items()}
+        attributes['type'] = {'role': 'info'}
+
+        return {'role': 'object', 'name': object_name, 'is_array': False,
+                'parent': 'data', 'description': description,
+                'attributes': attributes, 'items': None}
+
+    elif object_name == 'data':
+
+        return {'role': 'object', 'name': 'data', 'is_array': True,
+                'parent': 'figure', 'attributes': None, 'items': TRACE_NAMES,
+                'description': 'Array container for trace objects.'}
+
+    elif object_name == 'layout':
+
+        # find and add layout keys from traces
+        attributes = {}
+        for trace_name in TRACE_NAMES:
+            try:
+                path = ('traces', trace_name, 'layoutAttributes')
+                layout_attributes = utils.get_by_path(GRAPH_REFERENCE, path)
+            except KeyError:
+                pass
+            else:
+                for key, val in layout_attributes.items():
+                    if key not in META_KEYS:
+                        attributes[key] = val
+
+        # find and add layout keys from layout
+        layout_attributes = GRAPH_REFERENCE['layout']['layoutAttributes']
+        for key, val in layout_attributes.items():
+            if key not in META_KEYS:
+                attributes[key] = val
+
+        return {'role': 'object', 'name': 'layout', 'is_array': False,
+                'parent': 'figure', 'attributes': attributes, 'items': None,
+                'description': 'Plot layout object container.'}
+
+    else:  # assume it's 'figure'
+
+        attributes = {'data': _get_object_info_from_name('data'),
+                      'layout': _get_object_info_from_name('layout')}
+
+        return {'role': 'object', 'name': 'figure', 'is_array': False,
+                'parent': '', 'description': 'Top level of figure object.',
+                'attributes': attributes, 'items': None}
 
 
 # The ordering here is important.
