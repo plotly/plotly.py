@@ -83,6 +83,43 @@ def convert_symbol(mpl_symbol):
         return 'dot'  # default
 
 
+def hex_to_rgb(value):
+    """
+    Change a hex color to an rgb tuple
+
+    :param (str|unicode) value: The hex string we want to convert.
+    :return: (int, int, int) The red, green, blue int-tuple.
+
+    Example:
+
+        '#FFFFFF' --> (255, 255, 255)
+
+    """
+    value = value.lstrip('#')
+    lv = len(value)
+    return tuple(int(value[i:i + lv // 3], 16) for i in range(0, lv, lv // 3))
+
+
+def merge_color_and_opacity(color, opacity):
+    """
+    Merge hex color with an alpha (opacity) to get an rgba tuple.
+
+    :param (str|unicode) color: A hex color string.
+    :param (float|int) opacity: A value [0, 1] for the 'a' in 'rgba'.
+    :return: (int, int, int, float) The rgba color and alpha tuple.
+
+    """
+    if color is None:  # None can be used as a placeholder, just bail.
+        return None
+
+    rgb_tup = hex_to_rgb(color)
+    if opacity is None:
+        return 'rgb {}'.format(rgb_tup)
+
+    rgba_tup = rgb_tup + (opacity,)
+    return 'rgba {}'.format(rgba_tup)
+
+
 def convert_va(mpl_va):
     """Convert mpl vertical alignment word to equivalent HTML word.
 

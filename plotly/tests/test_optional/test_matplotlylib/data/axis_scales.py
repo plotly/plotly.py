@@ -16,9 +16,8 @@ EVEN_LINEAR_SCALE = Figure(
             mode='lines',
             line=Line(
                 dash='solid',
-                color='#0000FF',
-                width=1.0,
-                opacity=1
+                color='rgba (0, 0, 255, 1)',
+                width=1.0
             ),
             xaxis='x1',
             yaxis='y1'
