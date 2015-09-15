@@ -904,78 +904,7 @@ class Layout(PlotlyDict):
     )['attributes'])
 
 
-class PlotlyTrace(PlotlyDict):
-    """A general data class for plotly.
-
-    The PlotlyTrace object is not meant for user interaction. It's sole
-    purpose is to improve the structure of the object hierarchy established
-    in this module.
-
-    Users should work with the subclasses of PlotlyTrace: Scatter, Box, Bar,
-    Heatmap, etc.
-
-    For help with these subclasses, run:
-    `help(plotly.graph_objs.Obj)` where Obj == Scatter, Box, Bar, Heatmap, etc.
-
-    """
-    def __init__(self, *args, **kwargs):
-        super(PlotlyTrace, self).__init__(*args, **kwargs)
-        if self.__class__.__name__ == 'PlotlyTrace':
-            warnings.warn("\nThe PlotlyTrace class is a base class of "
-                          "dictionary-like plot types.\nIt is not meant to be "
-                          "a user interface.")
-
-    def to_string(self, level=0, indent=4, eol='\n',
-                  pretty=True, max_chars=80):
-        """Returns a formatted string showing graph_obj constructors.
-
-        Example:
-
-            print(obj.to_string())
-
-        Keyword arguments:
-        level (default = 0) -- set number of indentations to start with
-        indent (default = 4) -- set indentation amount
-        eol (default = '\\n') -- set end of line character(s)
-        pretty (default = True) -- curtail long list output with a '...'
-        max_chars (default = 80) -- set max characters per line
-
-        """
-        self.to_graph_objs()
-        if self.__class__.__name__ != "Trace":
-            trace_type = self.pop('type')
-            string = super(PlotlyTrace, self).to_string(level=level,
-                                                        indent=indent,
-                                                        eol=eol,
-                                                        pretty=pretty,
-                                                        max_chars=max_chars)
-            self['type'] = trace_type
-        else:
-            string = super(PlotlyTrace, self).to_string(level=level,
-                                                        indent=indent,
-                                                        eol=eol,
-                                                        pretty=pretty,
-                                                        max_chars=max_chars)
-        return string
-
-
-class Trace(PlotlyTrace):
-    """A general data class for plotly. Never validated...
-
-    This class should be used only for the right reason. This class does not
-    do much validation because plotly usually accepts more trace specifiers
-    and more value type varieties, e.g., 'x', 'y', 'r', 't', marker = [
-    array], etc.
-
-    If you are getting errors locally, you might try using this case if
-    you're sure that what you're attempting to plot is valid.
-
-    Also, when getting figures from plotly, you may get back `Trace` types if
-    the figure was constructed with data objects that don't fall into any of
-    the class categorizations that are defined in this api.
-
-    """
-    pass
+Trace = dict  # for backwards compat.
 
 
 # (2) Generate graph objects using OBJ_MAP
