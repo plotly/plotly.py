@@ -70,4 +70,44 @@ def string_to_class_name(string):
 
     return string
 
+
+
+def _get_objects():
+    """
+    Return the main dict that we'll work with for graph objects.
+
+    This maps object names to paths inside GRAPH_REFERENCE. If the object
+    doesn't have a path, no path is associated and methods are provided to look
+    the object up *by name*.
+
+    :return: (dict)
+
+    """
+    objects = {}
+    for object_path in OBJECT_PATHS:
+
+        name = object_path[-1]
+        value = utils.get_by_path(GRAPH_REFERENCE, object_path)
+
+        if value.get('_isLinkedToArray', False):
+            item_name = name[:-1]
+            if item_name not in objects:
+                objects[item_name] = []
+            objects[item_name].append(object_path)
+
+        if name not in objects:
+            objects[name] = []
+        objects[name].append(object_path)
+
+    objects.update({trace_name: [] for trace_name in TRACE_NAMES})
+    objects.update(figure=[], data=[], layout=[])
+
+    return objects
+
+
+# The ordering here is important.
 GRAPH_REFERENCE = get_graph_reference()
+TRACE_NAMES = GRAPH_REFERENCE['traces'].keys()
+OBJECT_PATHS = [path for node, path in utils.node_generator(GRAPH_REFERENCE)
+                if node.get('role') == 'object']
+OBJECTS = _get_objects()
