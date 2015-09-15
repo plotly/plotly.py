@@ -147,7 +147,6 @@ class PlotlyList(list, PlotlyBase):
         """
         if isinstance(changes, dict):
             changes = [changes]
-        self.to_graph_objs()
         for index in range(len(self)):
             try:
                 update = changes[index % len(changes)]
@@ -335,8 +334,6 @@ class PlotlyDict(dict, PlotlyBase):
         method provided by Python's dictionaries.
 
         """
-        self.to_graph_objs()
-
         if dict1 is not None:
             for key, val in list(dict1.items()):
                 if key in self:
@@ -356,7 +353,6 @@ class PlotlyDict(dict, PlotlyBase):
                         self[key] = val
                 else:
                     self[key] = val
-        self.to_graph_objs()
 
     def strip_style(self):
         """Strip style from the current representation.
