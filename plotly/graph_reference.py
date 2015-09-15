@@ -103,6 +103,32 @@ def get_object_info(path, object_name):
         return _get_object_info_from_name(object_name)
 
 
+def attribute_is_array(attribute, parent_name):
+    """
+    Returns True if attribute should be an special *array* object.
+
+    :param (str) attribute: Possibly the name of an object.
+    :param (str) parent_name: We need the parent object name as context.
+    :return: (bool)
+
+    """
+    if attribute not in OBJECTS:
+        return False
+
+    if OBJECTS[attribute]:
+        object_infos = [get_object_info(path, attribute)
+                        for path in OBJECTS[attribute]]
+    else:
+        object_info = get_object_info(None, attribute)
+        object_infos = [object_info]
+
+    for object_info in object_infos:
+
+        if object_info['parent'] == parent_name and object_info['is_array']:
+            return True
+
+    return False
+
 
 def _get_objects():
     """
