@@ -105,3 +105,135 @@ class TestStreamline(TestCase):
         self.assertListEqual(strln['data'][0]['x'][0:100],
                              expected_strln_0_100['x'])
 
+
+class TestDendrogram(TestCase):
+
+    def test_default_dendrogram(self):
+        dendro = tls.FigureFactory.create_dendrogram(X=np.array([[1, 2, 3, 4],
+                                                                 [1, 1, 3, 4],
+                                                                 [1, 2, 1, 4],
+                                                                 [1, 2, 3, 1]]))
+        expected_data = [{'marker': {'color': 'rgb(255,133,27)'},
+                          'mode': 'lines', 'xaxis': 'xs',
+                          'yaxis': 'y',
+                          'y': np.array([0.,  1.,  1.,  0.]),
+                          'x': np.array([25.,  25.,  35.,  35.]),
+                          'type': u'scatter'},
+                         {'marker': {'color': 'rgb(255,133,27)'},
+                          'mode': 'lines',
+                          'xaxis': 'x',
+                          'yaxis': 'y',
+                          'y': np.array([0., 2.23606798,
+                                        2.23606798, 1.]),
+                          'x': np.array([15., 15., 30., 30.]),
+                          'type': u'scatter'},
+                         {'marker': {'color': 'blue'},
+                          'mode': 'lines',
+                          'xaxis': 'x',
+                          'yaxis': 'y',
+                          'y': np.array([0., 3.60555128,
+                                        3.60555128, 2.23606798]),
+                          'x': np.array([5., 5., 22.5, 22.5]),
+                          'type': u'scatter'}]
+        expected_layout = {'width': '100%',
+                           'showlegend': False,
+                           'autoscale': False,
+                           'xaxis': {'showticklabels': True,
+                                     'tickmode': 'array',
+                                     'ticks': 'outside',
+                                     'showgrid': False,
+                                     'mirror': 'allticks',
+                                     'zeroline': False,
+                                     'showline': True,
+                                     'ticktext': np.array(['3', '2',
+                                                           '0', '1'],
+                                                          dtype='|S1'),
+                                     'rangemode': 'tozero',
+                                     'type': 'linear',
+                                     'tickvals': np.array([5.0, 15.0,
+                                                          25.0, 35.0])},
+                           'yaxis': {'showticklabels': True,
+                                     'ticks': 'outside',
+                                     'showgrid': False,
+                                     'mirror': 'allticks',
+                                     'zeroline': False,
+                                     'showline': True,
+                                     'rangemode': 'tozero',
+                                     'type': 'linear'},
+                           'hovermode': 'closest'}  
+
+        # Make sure data is as expected
+        self.assertEqual(len(dendro['data']), len(expected_data))
+        for i in range(1, len(dendro['data'])):
+            self.assertTrue(np.allclose(dendro['data'][i]['x'],
+                            expected_data[i]['x']))
+            self.assertTrue(np.allclose(dendro['data'][i]['y'],
+                            expected_data[i]['y']))
+
+        # Make sure layout is as expected
+        self.assertTrue(np.array_equal(dendro['layout']['xaxis']['ticktext'],
+                                       expected_layout['xaxis']['ticktext']))
+        self.assertTrue(np.array_equal(dendro['layout']['xaxis']['tickvals'],
+                                       expected_layout['xaxis']['tickvals']))
+        self.assertEqual(dendro['layout']['xaxis']['ticks'], 'outside')
+        self.assertEqual(dendro['layout']['yaxis']['ticks'], 'outside')
+        self.assertEqual(dendro['layout']['width'], expected_layout['width'])
+
+    def test_dendrogram_random_matrix(self):
+        # create a random uncorrelated matrix
+        X = np.random.rand(5, 5)
+        # variable 2 is correlated with all the other variables
+        X[2, :] = sum(X, 0)
+
+        names = ['Jack', 'Oxana', 'John', 'Chelsea', 'Mark']
+        dendro = tls.FigureFactory.create_dendrogram(X, labels=names)
+
+        # Check that 2 is in a separate cluster and it's labelled correctly
+        self.assertEqual(dendro['layout']['xaxis']['ticktext'][0], 'John')
+
+    def test_dendrogram_orientation(self):
+        X = np.random.rand(5, 5) 
+
+        dendro_left = tls.FigureFactory.create_dendrogram(
+                       X, orientation='left')
+        self.assertEqual(len(dendro_left['layout']['yaxis']['ticktext']), 5)
+        tickvals_left = np.array(dendro_left['layout']['yaxis']['tickvals'])
+        self.assertTrue((tickvals_left <= 0).all())
+
+        dendro_right = tls.FigureFactory.create_dendrogram(
+                        X, orientation='right')
+        tickvals_right = np.array(dendro_right['layout']['yaxis']['tickvals'])
+        self.assertTrue((tickvals_right >= 0).all())
+
+        dendro_bottom = tls.FigureFactory.create_dendrogram(
+                        X, orientation='bottom')
+        self.assertEqual(len(dendro_bottom['layout']['xaxis']['ticktext']), 5)
+        tickvals_bottom = np.array(dendro_bottom['layout']['xaxis']['tickvals'])
+        self.assertTrue((tickvals_bottom >= 0).all())
+
+        dendro_top = tls.FigureFactory.create_dendrogram(X, orientation='top')
+        tickvals_top = np.array(dendro_top['layout']['xaxis']['tickvals'])
+        self.assertTrue((tickvals_top <= 0).all())
+
+    def test_dendrogram_orientation(self):
+        X = np.array([[1, 2, 3, 4],
+                      [1, 1, 3, 4],
+                      [1, 2, 1, 4],
+                      [1, 2, 3, 1]])
+        greyscale = [
+                'rgb(0,0,0)',        # black
+                'rgb(05,105,105)',   # dim grey
+                'rgb(128,128,128)',  # grey
+                'rgb(169,169,169)',  # dark grey
+                'rgb(192,192,192)',  # silver
+                'rgb(211,211,211)',  # light grey
+                'rgb(220,220,220)',  # gainsboro
+                'rgb(245,245,245)']  # white smoke
+
+        dendro = tls.FigureFactory.create_dendrogram(X, colorscale=greyscale)
+        self.assertEqual(dendro["data"][0]['marker']['color'],
+                         'rgb(128,128,128)')
+        self.assertEqual(dendro["data"][1]['marker']['color'],
+                         'rgb(128,128,128)')
+        self.assertEqual(dendro["data"][2]['marker']['color'],
+                         'rgb(0,0,0)')
