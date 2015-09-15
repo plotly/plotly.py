@@ -31,7 +31,7 @@ from collections import OrderedDict
 
 import six
 
-from plotly import exceptions, utils
+from plotly import exceptions, graph_reference, utils
 from plotly.graph_objs import graph_objs_tools
 from plotly.graph_objs.graph_objs_tools import (
     INFO, OBJ_MAP, NAME_TO_KEY, KEY_TO_NAME
@@ -1338,3 +1338,26 @@ def get_class_instance_by_name(name, *args, **kwargs):
         return NAME_TO_CLASS[name](**kwargs)
     else:
         return NAME_TO_CLASS[name]()
+
+
+class GraphObjectFactory(object):
+    """GraphObject creation in this module should run through this factory."""
+
+    @staticmethod
+    def create(object_name, *args, **kwargs):
+        """
+        Create a graph object from the OBJECTS dict by name, args, and kwargs.
+
+        :param (str) object_name: A valid object name from OBJECTS.
+        :param args: Arguments to pass to class constructor.
+        :param kwargs: Keyword arguments to pass to class constructor.
+
+        :return: (PlotlyList|PlotlyDict) The instantiated graph object.
+
+        """
+        if object_name not in graph_reference.OBJECTS:
+            raise Exception('tbd')  # TODO
+        class_name = graph_reference.string_to_class_name(object_name)
+        graph_object_class = globals()[class_name]
+
+        return graph_object_class(*args, **kwargs)
