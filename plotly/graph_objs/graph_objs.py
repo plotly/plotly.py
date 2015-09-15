@@ -189,10 +189,9 @@ class PlotlyList(list, PlotlyBase):
         :returns: (dict|list) Depending on (flat|unflat)
 
         """
-        self.to_graph_objs()
         l = list()
-        for _plotlydict in self:
-            l += [_plotlydict.get_data(flatten=flatten)]
+        for plotly_dict in self:
+            l += [plotly_dict.get_data(flatten=flatten)]
         del_indicies = [index for index, item in enumerate(self)
                         if len(item) == 0]
         del_ct = 0
@@ -386,9 +385,6 @@ class PlotlyDict(dict, PlotlyBase):
 
     def get_data(self, flatten=False):
         """Returns the JSON for the plot with non-data elements stripped."""
-        self.to_graph_objs()
-        class_name = self.__class__.__name__
-        obj_key = NAME_TO_KEY[class_name]
         d = dict()
         for key, val in list(self.items()):
             if isinstance(val, (PlotlyDict, PlotlyList)):
@@ -400,12 +396,13 @@ class PlotlyDict(dict, PlotlyBase):
                 else:
                     d[key] = sub_data
             else:
-                try:
-                    # TODO: Update the JSON
-                    if graph_objs_tools.value_is_data(obj_key, key, val):
-                        d[key] = val
-                except KeyError:
-                    pass
+                role = graph_objs_tools.get_role(self, key, val)
+                if role == 'data':
+                    d[key] = val
+
+                # we use the name to help make data frames
+                if self._name in graph_reference.TRACE_NAMES and key == 'name':
+                    d[key] = val
         keys = list(d.keys())
         for key in keys:
             if isinstance(d[key], (dict, list)):
