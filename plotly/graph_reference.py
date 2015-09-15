@@ -12,6 +12,22 @@ from plotly import exceptions, files, utils
 
 GRAPH_REFERENCE_PATH = '/plot-schema.json'
 
+# for backwards compat, we need to add a few class names
+_BACKWARDS_COMPAT_CLASS_NAME_TO_OBJECT_NAME = {
+    'AngularAxis': 'angularaxis',
+    'ColorBar': 'colorbar',
+    'Area': 'scatter',
+    'Font': 'textfont',
+    'Histogram2dContour': 'histogram2dcontour',
+    'RadialAxis': 'radialaxis',
+    'XAxis': 'xaxis',
+    'XBins': 'xbins',
+    'YAxis': 'yaxis',
+    'YBins': 'ybins',
+    'ZAxis': 'zaxis'
+}
+
+
 def get_graph_reference():
     """
     Attempts to load local copy of graph reference or makes GET request if DNE.
@@ -105,9 +121,29 @@ def _get_objects():
     return objects
 
 
+def _get_class_names_to_object_names():
+    """
+    We eventually make classes out of the objects in GRAPH_REFERENCE.
+
+    :return: (dict) A mapping of class names to object names.
+
+    """
+    class_names_to_object_names = {}
+    for object_name in OBJECTS:
+        class_name = string_to_class_name(object_name)
+        class_names_to_object_names[class_name] = object_name
+
+    for class_name in _BACKWARDS_COMPAT_CLASS_NAME_TO_OBJECT_NAME:
+        object_name = _BACKWARDS_COMPAT_CLASS_NAME_TO_OBJECT_NAME[class_name]
+        class_names_to_object_names[class_name] = object_name
+
+    return class_names_to_object_names
+
+
 # The ordering here is important.
 GRAPH_REFERENCE = get_graph_reference()
 TRACE_NAMES = GRAPH_REFERENCE['traces'].keys()
 OBJECT_PATHS = [path for node, path in utils.node_generator(GRAPH_REFERENCE)
                 if node.get('role') == 'object']
 OBJECTS = _get_objects()
+CLASS_NAMES_TO_OBJECT_NAMES = _get_class_names_to_object_names()
