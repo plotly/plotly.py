@@ -130,27 +130,6 @@ class PlotlyList(list, PlotlyBase):
                           "list-like graph_objs.\nIt is not meant to be a "
                           "user interface.")
 
-    def to_graph_objs(self, caller=True):
-        """Change any nested collections to subclasses of PlotlyDict/List.
-
-        Procedure:
-            1. Attempt to convert all entries to a subclass of PlotlyDict.
-            2. Call `to_graph_objects` on each of these entries.
-
-        """
-        for index, entry in enumerate(self):
-            if isinstance(entry, PlotlyDict):
-                try:
-                    entry.to_graph_objs(caller=False)
-                except exceptions.PlotlyGraphObjectError as err:
-                    err.add_to_error_path(index)
-                    err.prepare()
-                    raise  # re-raise current exception
-            else:
-                raise exceptions.PlotlyListEntryError(obj=self,
-                                                      index=index,
-                                                      entry=entry)
-
     def update(self, changes, make_copies=False):
         """Update current list with changed_list, which must be iterable.
         The 'changes' should be a list of dictionaries, however,
@@ -266,20 +245,6 @@ class PlotlyList(list, PlotlyBase):
         string += (
             "{eol}{indent}])").format(eol=eol, indent=' ' * indent * level)
         return string
-
-    def get_ordered(self, caller=True):
-        if caller:
-            try:
-                self.to_graph_objs(caller=False)
-            except exceptions.PlotlyGraphObjectError as err:
-                err.add_note("Could not order list because it could not be "
-                             "converted to a valid graph object.")
-                err.prepare()
-                raise
-        ordered_list = []
-        for index, entry in enumerate(self):
-            ordered_list += [entry.get_ordered()]
-        return ordered_list
 
     def force_clean(self, caller=True):
         """Attempts to convert to graph_objs and calls force_clean() on entries.
@@ -550,34 +515,6 @@ class PlotlyDict(dict, PlotlyBase):
                     break
         string += "{eol}{indent})".format(eol=eol, indent=' ' * indent * level)
         return string
-
-    def get_ordered(self, caller=True):
-        if caller:  # change everything to 'order-able' objs
-            try:
-                self.to_graph_objs(caller=False)
-            except exceptions.PlotlyGraphObjectError as err:
-                err.add_note("dictionary could not be ordered because it "
-                             "could not be converted to a valid plotly graph "
-                             "object.")
-                err.prepare()
-                raise
-        obj_type = NAME_TO_KEY[self.__class__.__name__]
-        ordered_dict = OrderedDict()
-        # grab keys like xaxis1, xaxis2, etc...
-        unordered_keys = [key for key in self
-                          if key not in INFO[obj_type]['keymeta']]
-        for key in INFO[obj_type]['keymeta']:
-            if key in self:
-                if isinstance(self[key], (PlotlyDict, PlotlyList)):
-                    ordered_dict[key] = self[key].get_ordered(caller=False)
-                else:
-                    ordered_dict[key] = self[key]
-        for key in unordered_keys:
-            if isinstance(self[key], (PlotlyDict, PlotlyList)):
-                ordered_dict[key] = self[key].get_ordered(caller=False)
-            else:
-                ordered_dict[key] = self[key]
-        return ordered_dict
 
     def force_clean(self, caller=True):
         """Attempts to convert to graph_objs and call force_clean() on values.
