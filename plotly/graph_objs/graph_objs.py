@@ -106,6 +106,9 @@ class PlotlyList(list, PlotlyBase):
     Base class for list-like Plotly objects.
 
     """
+    _name = None
+    _items = set()
+
     def __init__(self, *args):
         super(PlotlyList, self).__init__(*args)
         if args and isinstance(args[0], dict):
@@ -275,6 +278,10 @@ class PlotlyDict(dict, PlotlyBase):
     Base class for dict-like Plotly objects.
 
     """
+    _name = None
+    _attributes = set()
+    _parent_key = None
+
     def __init__(self, *args, **kwargs):
         class_name = self.__class__.__name__
 
