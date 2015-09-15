@@ -907,28 +907,6 @@ class Layout(PlotlyDict):
 Trace = dict  # for backwards compat.
 
 
-# (2) Generate graph objects using OBJ_MAP
-# With type(name, bases, dict) :
-# - name will be the new class name
-# - bases are the base classes that the new class inherits from
-# - dict holds attributes for the new class, e.g., __doc__
-for obj in OBJ_MAP:
-    base_name = graph_objs_tools.OBJ_MAP[obj]['base_name']
-    if base_name == 'PlotlyList':
-        doc = graph_objs_tools.make_list_doc(obj)
-    else:
-        doc = graph_objs_tools.make_dict_doc(obj)
-    base = globals()[base_name]
-    globals()[obj] = type(obj, (base,), {'__doc__': doc, '__name__': obj})
-
-
-# (4) NAME_TO_CLASS dict and class-generating function
-# NOTE: used to be a dict comprehension, but we try and support 2.6.x now
-NAME_TO_CLASS = {}
-for name in NAME_TO_KEY.keys():
-    NAME_TO_CLASS[name] = getattr(sys.modules[__name__], name)
-
-
 def get_class_instance_by_name(name, *args, **kwargs):
     """All class creation goes through here.
 
@@ -968,3 +946,34 @@ class GraphObjectFactory(object):
         graph_object_class = globals()[class_name]
 
         return graph_object_class(*args, **kwargs)
+
+
+def _add_classes_to_globals(globals):
+    """
+    Create and add all the Graph Objects to this module for export.
+
+    :param (dict) globals: The globals() dict from this module.
+
+    """
+    for object_name in graph_reference.OBJECTS:
+
+        if object_name in ['figure', 'data', 'layout']:
+            continue  # we manually define these
+
+        class_name, class_bases, class_dict = \
+            graph_objs_tools.get_class_create_args(object_name,
+                                                   list_class=PlotlyList,
+                                                   dict_class=PlotlyDict)
+        doc = graph_objs_tools.make_doc(object_name)
+        class_dict.update(__doc__=doc, __name__=class_name)
+        cls = type(class_name, class_bases, class_dict)
+
+        globals[class_name] = cls
+
+        for key, val in graph_reference.CLASS_NAMES_TO_OBJECT_NAMES.items():
+            if val == object_name:
+                class_dict.update(__name__=key)
+                cls = type(key, class_bases, class_dict)
+                globals[key] = cls
+
+_add_classes_to_globals(globals())
