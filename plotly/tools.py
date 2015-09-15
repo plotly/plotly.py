@@ -1355,6 +1355,7 @@ if _ipython_imported:
 
 
 def return_figure_from_figure_or_data(figure_or_data, validate_figure):
+    from plotly.graph_objs import graph_objs
     if isinstance(figure_or_data, dict):
         figure = figure_or_data
     elif isinstance(figure_or_data, list):
@@ -1364,8 +1365,9 @@ def return_figure_from_figure_or_data(figure_or_data, validate_figure):
                                      "argument must be either "
                                      "`dict`-like or `list`-like.")
     if validate_figure:
+
         try:
-            validate(figure, obj_type='Figure')
+            graph_objs.Figure(figure)
         except exceptions.PlotlyError as err:
             raise exceptions.PlotlyError("Invalid 'figure_or_data' argument. "
                                          "Plotly will not be able to properly "
