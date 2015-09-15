@@ -176,7 +176,6 @@ class PlotlyList(list, PlotlyBase):
         stripped.
 
         """
-        self.to_graph_objs()
         for plotly_dict in self:
             plotly_dict.strip_style()
 
@@ -372,24 +371,18 @@ class PlotlyDict(dict, PlotlyBase):
         stripped.
 
         """
-        self.to_graph_objs()
-        obj_key = NAME_TO_KEY[self.__class__.__name__]
         keys = list(self.keys())
         for key in keys:
             if isinstance(self[key], (PlotlyDict, PlotlyList)):
                 self[key].strip_style()
             else:
-                try:
-                    if INFO[obj_key]['keymeta'][key]['key_type'] == 'style':
+                role = graph_objs_tools.get_role(self, key, self[key])
+                if role == 'style':
+                    del self[key]
 
-                        # TODO: use graph_objs_tools.value_is_data
-                        if isinstance(self[key], six.string_types):
-                            del self[key]
-                        elif not hasattr(self[key], '__iter__'):
-                            del self[key]
-                except KeyError:  # TODO: Update the JSON
-                    # print("'type' not in {0} for {1}".format(obj_key, key))
-                    pass
+                # this is for backwards compat when we updated graph reference.
+                if self._name == 'layout' and key == 'autosize':
+                    del self[key]
 
     def get_data(self, flatten=False):
         """Returns the JSON for the plot with non-data elements stripped."""
