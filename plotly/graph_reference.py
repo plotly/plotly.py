@@ -5,6 +5,7 @@ This module handles accessing, storing, and managing the graph reference.
 from __future__ import absolute_import
 
 import json
+import re
 import requests
 
 from plotly import exceptions, files, utils
@@ -48,5 +49,25 @@ def get_graph_reference():
         graph_reference = json.loads(response.content)
 
     return utils.decode_unicode(graph_reference)
+
+
+def string_to_class_name(string):
+    """
+    Single function to handle turning object names into class names.
+
+    GRAPH_REFERENCE has names like `error_y`, which we'll turn into `ErrorY`.
+
+    :param (str) string: Presumably an object_name from GRAPH_REFERENCE.
+    :return: (str)
+
+    """
+
+    # capitalize first letter
+    string = re.sub(r'[A-Za-z]', lambda m: m.group().title(), string, count=1)
+
+    # replace `*_<c>` with `*<C>` E.g., `Error_x` --> `ErrorX`
+    string = re.sub(r'_[A-Za-z]+', lambda m: m.group()[1:].title(), string)
+
+    return string
 
 GRAPH_REFERENCE = get_graph_reference()
