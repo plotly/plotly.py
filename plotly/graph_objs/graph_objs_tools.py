@@ -235,3 +235,28 @@ def value_is_data(obj_name, key, value):
         return iterable and not stringy and not dicty
 
     return False
+
+def assign_id_to_src(src_name, src_value):
+    if isinstance(src_value, six.string_types):
+        src_id = src_value
+    else:
+        try:
+            src_id = src_value.id
+        except:
+            err = ("{0} does not have an `id` property. "
+                   "{1} needs to be assigned to either an "
+                   "object with an `id` (like a "
+                   "plotly.grid_objs.Column) or a string. "
+                   "The `id` is a unique identifier "
+                   "assigned by the Plotly webserver "
+                   "to this grid column.")
+            src_value_str = str(src_value)
+            err = err.format(src_name, src_value_str)
+            raise exceptions.InputError(err)
+
+    if src_id == '':
+        err = exceptions.COLUMN_NOT_YET_UPLOADED_MESSAGE
+        err.format(column_name=src_value.name, reference=src_name)
+        raise exceptions.InputError(err)
+    return src_id
+
