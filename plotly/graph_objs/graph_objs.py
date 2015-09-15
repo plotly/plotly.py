@@ -727,6 +727,114 @@ class PlotlyDict(dict, PlotlyBase):
                 del self[key]
 
 
+class Figure(PlotlyDict):
+
+    _name = 'figure'
+    _attributes = set(graph_reference.get_object_info(
+        None, 'figure'
+    )['attributes'])
+
+    def __init__(self, *args, **kwargs):
+        super(Figure, self).__init__(*args, **kwargs)
+        if 'data' not in self:
+            self.data = []
+
+    def get_data(self, flatten=False):
+        """
+        Returns the JSON for the plot with non-data elements stripped.
+
+        Flattening may increase the utility of the result.
+
+        :param (bool) flatten: {'a': {'b': ''}} --> {'a.b': ''}
+        :returns: (dict|list) Depending on (flat|unflat)
+
+        """
+        return self.data.get_data(flatten=flatten)
+
+    def to_dataframe(self):
+        data = self.get_data(flatten=True)
+        from pandas import DataFrame, Series
+        return DataFrame(dict([(k, Series(v)) for k, v in data.items()]))
+
+    def print_grid(self):
+        """Print a visual layout of the figure's axes arrangement.
+
+        This is only valid for figures that are created
+        with plotly.tools.make_subplots.
+        """
+        try:
+            grid_str = self.__dict__['_grid_str']
+        except AttributeError:
+            raise Exception("Use plotly.tools.make_subplots "
+                            "to create a subplot grid.")
+        print(grid_str)
+
+    def append_trace(self, trace, row, col):
+        """ Helper function to add a data traces to your figure
+        that is bound to axes at the row, col index.
+
+        The row, col index is generated from figures created with
+        plotly.tools.make_subplots and can be viewed with Figure.print_grid.
+
+        Example:
+        # stack two subplots vertically
+        fig = tools.make_subplots(rows=2)
+
+        This is the format of your plot grid:
+        [ (1,1) x1,y1 ]
+        [ (2,1) x2,y2 ]
+
+        fig.append_trace(Scatter(x=[1,2,3], y=[2,1,2]), 1, 1)
+        fig.append_trace(Scatter(x=[1,2,3], y=[2,1,2]), 2, 1)
+
+        Arguments:
+
+        trace (plotly trace object):
+            The data trace to be bound.
+
+        row (int):
+            Subplot row index on the subplot grid (see Figure.print_grid)
+
+        col (int):
+            Subplot column index on the subplot grid (see Figure.print_grid)
+
+        """
+        try:
+            grid_ref = self._grid_ref
+        except AttributeError:
+            raise Exception("In order to use Figure.append_trace, "
+                            "you must first use plotly.tools.make_subplots "
+                            "to create a subplot grid.")
+        if row <= 0:
+            raise Exception("Row value is out of range. "
+                            "Note: the starting cell is (1, 1)")
+        if col <= 0:
+            raise Exception("Col value is out of range. "
+                            "Note: the starting cell is (1, 1)")
+        try:
+            ref = grid_ref[row-1][col-1]
+        except IndexError:
+            raise Exception("The (row, col) pair sent is out of range. "
+                            "Use Figure.print_grid to view the subplot grid. ")
+        if 'scene' in ref[0]:
+            trace['scene'] = ref[0]
+            if ref[0] not in self['layout']:
+                raise Exception("Something went wrong. "
+                                "The scene object for ({r},{c}) subplot cell "
+                                "got deleted.".format(r=row, c=col))
+        else:
+            xaxis_key = "xaxis{ref}".format(ref=ref[0][1:])
+            yaxis_key = "yaxis{ref}".format(ref=ref[1][1:])
+            if (xaxis_key not in self['layout']
+                    or yaxis_key not in self['layout']):
+                raise Exception("Something went wrong. "
+                                "An axis object for ({r},{c}) subplot cell "
+                                "got deleted.".format(r=row, c=col))
+            trace['xaxis'] = ref[0]
+            trace['yaxis'] = ref[1]
+        self['data'] += [trace]
+
+
 class PlotlyTrace(PlotlyDict):
     """A general data class for plotly.
 
@@ -934,126 +1042,6 @@ def get_patched_annotations_class(Annotations):
     return Annotations
 
 Annotations = get_patched_annotations_class(Annotations)
-
-
-def get_patched_figure_class(Figure):
-    def __init__(self, *args, **kwargs):
-        if len(args):
-            if ('data' not in kwargs) and ('data' not in args[0]):
-                kwargs['data'] = Data()
-            if ('layout' not in kwargs) and ('layout' not in args[0]):
-                kwargs['layout'] = Layout()
-        else:
-            if 'data' not in kwargs:
-                kwargs['data'] = Data()
-            if 'layout' not in kwargs:
-                kwargs['layout'] = Layout()
-        super(Figure, self).__init__(*args, **kwargs)
-    Figure.__init__ = __init__  # override method!
-
-    def print_grid(self):
-        """Print a visual layout of the figure's axes arrangement.
-
-        This is only valid for figures that are created
-        with plotly.tools.make_subplots.
-        """
-        try:
-            grid_str = self._grid_str
-        except KeyError:
-            raise Exception("Use plotly.tools.make_subplots "
-                            "to create a subplot grid.")
-        print(grid_str)
-    Figure.print_grid = print_grid
-
-    def get_data(self, flatten=False):
-        """
-        Returns the JSON for the plot with non-data elements stripped.
-
-        Flattening may increase the utility of the result.
-
-        :param (bool) flatten: {'a': {'b': ''}} --> {'a.b': ''}
-        :returns: (dict|list) Depending on (flat|unflat)
-
-        """
-        self.to_graph_objs()
-        return self['data'].get_data(flatten=flatten)
-    Figure.get_data = get_data
-
-    def to_dataframe(self):
-        data = self.get_data(flatten=True)
-        from pandas import DataFrame, Series
-        return DataFrame(dict([(k, Series(v)) for k, v in data.items()]))
-    Figure.to_dataframe = to_dataframe
-
-    def append_trace(self, trace, row, col):
-        """ Helper function to add a data traces to your figure
-        that is bound to axes at the row, col index.
-
-        The row, col index is generated from figures created with
-        plotly.tools.make_subplots and can be viewed with Figure.print_grid.
-
-        Example:
-        # stack two subplots vertically
-        fig = tools.make_subplots(rows=2)
-
-        This is the format of your plot grid:
-        [ (1,1) x1,y1 ]
-        [ (2,1) x2,y2 ]
-
-        fig.append_trace(Scatter(x=[1,2,3], y=[2,1,2]), 1, 1)
-        fig.append_trace(Scatter(x=[1,2,3], y=[2,1,2]), 2, 1)
-
-        Arguments:
-
-        trace (plotly trace object):
-            The data trace to be bound.
-
-        row (int):
-            Subplot row index on the subplot grid (see Figure.print_grid)
-
-        col (int):
-            Subplot column index on the subplot grid (see Figure.print_grid)
-
-        """
-        try:
-            grid_ref = self._grid_ref
-        except KeyError:
-            raise Exception("In order to use Figure.append_trace, "
-                            "you must first use plotly.tools.make_subplots "
-                            "to create a subplot grid.")
-        if row <= 0:
-            raise Exception("Row value is out of range. "
-                            "Note: the starting cell is (1, 1)")
-        if col <= 0:
-            raise Exception("Col value is out of range. "
-                            "Note: the starting cell is (1, 1)")
-        try:
-            ref = grid_ref[row-1][col-1]
-        except IndexError:
-            raise Exception("The (row, col) pair sent is out of range. "
-                            "Use Figure.print_grid to view the subplot grid. ")
-        if 'scene' in ref[0]:
-            trace['scene'] = ref[0]
-            if ref[0] not in self['layout']:
-                raise Exception("Something went wrong. "
-                                "The scene object for ({r},{c}) subplot cell "
-                                "got deleted.".format(r=row, c=col))
-        else:
-            xaxis_key = "xaxis{ref}".format(ref=ref[0][1:])
-            yaxis_key = "yaxis{ref}".format(ref=ref[1][1:])
-            if (xaxis_key not in self['layout']
-                    or yaxis_key not in self['layout']):
-                raise Exception("Something went wrong. "
-                                "An axis object for ({r},{c}) subplot cell "
-                                "got deleted.".format(r=row, c=col))
-            trace['xaxis'] = ref[0]
-            trace['yaxis'] = ref[1]
-        self['data'] += [trace]
-    Figure.append_trace = append_trace
-
-    return Figure
-
-Figure = get_patched_figure_class(Figure)
 
 
 def get_patched_layout_class(Layout):
