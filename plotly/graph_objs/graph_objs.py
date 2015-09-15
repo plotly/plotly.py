@@ -922,47 +922,6 @@ for obj in OBJ_MAP:
     globals()[obj] = type(obj, (base,), {'__doc__': doc, '__name__': obj})
 
 
-# (3) Patch 'custom' methods into some graph objects
-def get_patched_annotations_class(Annotations):
-    def to_graph_objs(self, caller=True):
-        """Change any nested collections to subclasses of PlotlyDict/List.
-
-        Procedure:
-            1. Attempt to convert all entries to a subclass of PlotlyDict.
-            2. Call `to_graph_objects` on each of these entries.
-
-        """
-        for index, entry in enumerate(self):
-            if isinstance(entry, (PlotlyDict, PlotlyList)):
-                if not isinstance(entry, NAME_TO_CLASS['Annotation']):
-                    raise exceptions.PlotlyListEntryError(
-                        obj=self,
-                        index=index,
-                        notes="The entry could not be converted into an "
-                              "Annotation object because it was already a "
-                              "different kind of graph object.",
-                    )
-            elif isinstance(entry, dict):
-                obj = get_class_instance_by_name('Annotation')
-                for k, v in list(entry.items()):
-                    obj[k] = v
-                self[index] = obj
-            else:
-                raise exceptions.PlotlyListEntryError(
-                    obj=self,
-                    index=index,
-                    notes=(
-                        "The entry could not be converted into an Annotation "
-                        "object because it was not a dictionary."
-                    ),
-                )
-        super(Annotations, self).to_graph_objs(caller=caller)
-    Annotations.to_graph_objs = to_graph_objs  # override method!
-    return Annotations
-
-Annotations = get_patched_annotations_class(Annotations)
-
-
 # (4) NAME_TO_CLASS dict and class-generating function
 # NOTE: used to be a dict comprehension, but we try and support 2.6.x now
 NAME_TO_CLASS = {}
