@@ -82,11 +82,9 @@ def ensure_local_plotly_files():
 
         # make a request to get graph reference if DNE.
         utils.ensure_file_exists(GRAPH_REFERENCE_FILE)
-        graph_reference_dict = utils.load_json_dict(GRAPH_REFERENCE_FILE)
+        utils.save_json_dict(GRAPH_REFERENCE_FILE,
+                             graph_reference.GRAPH_REFERENCE)
 
-        if not graph_reference_dict:
-            utils.save_json_dict(GRAPH_REFERENCE_FILE,
-                                 graph_reference.GRAPH_REFERENCE)
     else:
         warnings.warn("Looks like you don't have 'read-write' permission to "
                       "your 'home' ('~') directory or to our '~/.plotly' "
@@ -228,14 +226,6 @@ def reset_config_file():
     f = open(CONFIG_FILE, 'w')
     f.close()
     ensure_local_plotly_files()  # put the defaults back
-
-
-### graph reference tools ###
-
-def reset_graph_reference_file():
-    """Temporary until we can use local hash in request for graph reference."""
-    utils.ensure_file_exists(GRAPH_REFERENCE_FILE)
-    utils.save_json_dict(GRAPH_REFERENCE_FILE, {})
 
 
 ### embed tools ###
