@@ -8,6 +8,8 @@ import hashlib
 import json
 import requests
 
+import six
+
 from plotly import exceptions, files, utils
 
 GRAPH_REFERENCE_PATH = '/v2/plot-schema'
@@ -33,7 +35,7 @@ def get_graph_reference():
         graph_reference = {}
         plotly_api_domain = default_config['plotly_api_domain']
 
-    sha1 = hashlib.sha1(str(graph_reference)).hexdigest()
+    sha1 = hashlib.sha1(six.b(str(graph_reference))).hexdigest()
 
     graph_reference_url = '{}{}?sha1={}'.format(plotly_api_domain,
                                                 GRAPH_REFERENCE_PATH, sha1)
