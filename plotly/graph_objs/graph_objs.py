@@ -905,24 +905,6 @@ class Layout(PlotlyDict):
 Trace = dict  # for backwards compat.
 
 
-def get_class_instance_by_name(name, *args, **kwargs):
-    """All class creation goes through here.
-
-    Because call signatures for the different classes are different, we have
-    anticipate that args, kwargs, or both may be specified. Note, this still
-    allows instantiation errors to occur naturally.
-
-    """
-    if args and kwargs:
-        return NAME_TO_CLASS[name](*args, **kwargs)
-    elif args:
-        return NAME_TO_CLASS[name](*args)
-    elif kwargs:
-        return NAME_TO_CLASS[name](**kwargs)
-    else:
-        return NAME_TO_CLASS[name]()
-
-
 class GraphObjectFactory(object):
     """GraphObject creation in this module should run through this factory."""
 
