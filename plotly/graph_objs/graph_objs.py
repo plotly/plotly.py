@@ -159,6 +159,11 @@ class PlotlyList(list, PlotlyBase):
         raise exceptions.PlotlyError('Setting attributes on a PlotlyList is '
                                      'not allowed')
 
+    def __iadd__(self, other):
+        """Defines the `+=` operator, which we map to extend."""
+        self.extend(other)
+        return self
+
     def __copy__(self):
 
         # TODO: https://github.com/plotly/python-api/issues/291
