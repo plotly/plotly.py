@@ -11,7 +11,6 @@ import requests
 from plotly import exceptions, files, utils
 
 GRAPH_REFERENCE_PATH = '/plot-schema.json'
-META_KEYS = ['_isLinkedToArray', '_isSubplotObj', 'description', 'role']
 
 # for backwards compat, we need to add a few class names
 _BACKWARDS_COMPAT_CLASS_NAME_TO_OBJECT_NAME = {
@@ -205,7 +204,7 @@ def _get_object_info_from_path(path, object_name):
         name = parent[:-1]
         description = attribute_container.get('description', '')
         attributes = {k: v for k, v in attribute_container.items()
-                      if k not in META_KEYS}
+                      if k not in GRAPH_REFERENCE['defs']['metaKeys']}
         items = None
 
     else:
@@ -231,7 +230,7 @@ def _get_object_info_from_path(path, object_name):
             is_array = False
             description = path_value.get('description', '')
             attributes = {k: v for k, v in path_value.items()
-                          if k not in META_KEYS}
+                          if k not in GRAPH_REFERENCE['defs']['metaKeys']}
             items = None
 
     return {
@@ -289,13 +288,13 @@ def _get_object_info_from_name(object_name):
                 pass
             else:
                 for key, val in layout_attributes.items():
-                    if key not in META_KEYS:
+                    if key not in GRAPH_REFERENCE['defs']['metaKeys']:
                         attributes[key] = val
 
         # find and add layout keys from layout
         layout_attributes = GRAPH_REFERENCE['layout']['layoutAttributes']
         for key, val in layout_attributes.items():
-            if key not in META_KEYS:
+            if key not in GRAPH_REFERENCE['defs']['metaKeys']:
                 attributes[key] = val
 
         return {'role': 'object', 'name': 'layout', 'is_array': False,
