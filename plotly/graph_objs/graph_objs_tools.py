@@ -13,7 +13,7 @@ def get_class_create_args(object_name, list_class=list, dict_class=dict):
 
     object_paths = graph_reference.OBJECTS[object_name]
 
-    class_name = graph_reference.string_to_class_name(object_name)
+    class_name = graph_reference.object_name_to_class_name(object_name)
 
     if object_paths:
         object_infos = [graph_reference.get_object_info(path, object_name)
@@ -59,7 +59,7 @@ def _make_list_doc(name):
 
     # TODO: https://github.com/plotly/python-api/issues/289
     items = get_class_create_args(name)[2]['_items']
-    items_classes = [graph_reference.string_to_class_name(item)
+    items_classes = [graph_reference.object_name_to_class_name(item)
                      for item in items]
     doc = 'Documentation for {}.\n'.format(name)
     doc = '\t' + '\n\t'.join(textwrap.wrap(doc, width=LINE_SIZE)) + '\n\n'

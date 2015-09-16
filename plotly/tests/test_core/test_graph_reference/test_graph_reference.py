@@ -6,19 +6,33 @@ from __future__ import absolute_import
 
 from unittest import TestCase
 
-from plotly.graph_reference import string_to_class_name
+from plotly.graph_reference import object_name_to_class_name
 
 
-class TestStringToClass(TestCase):
+class TestObjectNameToClass(TestCase):
 
     def test_capitalize_first_letter(self):
-        strings = ['a', 'bee', 'see', 'dilla']
-        class_names = ['A', 'Bee', 'See', 'Dilla']
-        for string, class_name in zip(strings, class_names):
-            self.assertEqual(string_to_class_name(string), class_name)
+
+        object_names = ['marker', 'line', 'scatter']
+        class_names = ['Marker', 'Line', 'Scatter']
+        for object_name, class_name in zip(object_names, class_names):
+            self.assertEqual(
+                object_name_to_class_name(object_name), class_name
+            )
 
     def test_capitalize_after_underscore(self):
-        strings = ['any_thing', 'cat_paws']
-        class_names = ['AnyThing', 'CatPaws']
-        for string, class_name in zip(strings, class_names):
-            self.assertEqual(string_to_class_name(string), class_name)
+
+        object_names = ['error_y', 'error_x']
+        class_names = ['ErrorY', 'ErrorX']
+        for object_name, class_name in zip(object_names, class_names):
+            self.assertEqual(
+                object_name_to_class_name(object_name), class_name
+            )
+
+    def test_use_hr_name(self):
+
+        # we should be checking for an hr_name in the plot schema.
+
+        object_name = 'histogram2dcontour'
+        class_name = 'Histogram2DContour'
+        self.assertEqual(object_name_to_class_name(object_name), class_name)

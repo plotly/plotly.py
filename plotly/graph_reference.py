@@ -18,8 +18,10 @@ _BACKWARDS_COMPAT_CLASS_NAME_TO_OBJECT_NAME = {
     'ColorBar': 'colorbar',
     'Area': 'scatter',
     'Font': 'textfont',
+    'Histogram2d': 'histogram2d',
     'Histogram2dContour': 'histogram2dcontour',
     'RadialAxis': 'radialaxis',
+    'Scatter3d': 'scatter3d',
     'XAxis': 'xaxis',
     'XBins': 'xbins',
     'YAxis': 'yaxis',
@@ -70,22 +72,23 @@ def get_graph_reference():
     return utils.decode_unicode(graph_reference)
 
 
-def string_to_class_name(string):
+def object_name_to_class_name(object_name):
     """
     Single function to handle turning object names into class names.
 
     GRAPH_REFERENCE has names like `error_y`, which we'll turn into `ErrorY`.
 
-    :param (str) string: Presumably an object_name from GRAPH_REFERENCE.
+    :param (str) object_name: Presumably an object_name from GRAPH_REFERENCE.
     :return: (str)
 
     """
+    string = _get_hr_name(object_name)
 
     # capitalize first letter
     string = re.sub(r'[A-Za-z]', lambda m: m.group().title(), string, count=1)
 
     # replace `*_<c>` with `*<C>` E.g., `Error_x` --> `ErrorX`
-    string = re.sub(r'_[A-Za-z]+', lambda m: m.group()[1:].title(), string)
+    string = re.sub(r'_[A-Za-z0-9]+', lambda m: m.group()[1:].title(), string)
 
     return string
 
@@ -132,6 +135,20 @@ def attribute_is_array(attribute, parent_name):
     return False
 
 
+def _get_hr_name(object_name):
+    """Get human readable object name from reference ('hrName')."""
+    object_paths = OBJECTS[object_name]
+
+    if object_paths:
+        object_infos = [get_object_info(path, object_name)
+                        for path in object_paths]
+    else:
+        object_info = get_object_info(None, object_name)
+        object_infos = [object_info]
+
+    return object_infos[0]['hr_name']
+
+
 def _get_objects():
     """
     Return the main dict that we'll work with for graph objects.
@@ -174,7 +191,7 @@ def _get_class_names_to_object_names():
     """
     class_names_to_object_names = {}
     for object_name in OBJECTS:
-        class_name = string_to_class_name(object_name)
+        class_name = object_name_to_class_name(object_name)
         class_names_to_object_names[class_name] = object_name
 
     for class_name in _BACKWARDS_COMPAT_CLASS_NAME_TO_OBJECT_NAME:
@@ -202,6 +219,7 @@ def _get_object_info_from_path(path, object_name):
         is_array = False
         parent = path[-1]
         name = parent[:-1]
+        hr_name = attribute_container.get('hrName', name)
         description = attribute_container.get('description', '')
         attributes = {k: v for k, v in attribute_container.items()
                       if k not in GRAPH_REFERENCE['defs']['metaKeys']}
@@ -210,6 +228,7 @@ def _get_object_info_from_path(path, object_name):
     else:
 
         name = path[-1]
+        hr_name = path_value.get('hrName', name)
 
         if path[-2] == 'attributes':
             parent = path[-3]  # a trace
@@ -238,6 +257,7 @@ def _get_object_info_from_path(path, object_name):
         'is_array': is_array,
         'parent': parent,
         'name': name,
+        'hr_name': hr_name,
         'description': description,
         'attributes': attributes,
         'items': items
@@ -265,15 +285,18 @@ def _get_object_info_from_name(object_name):
         description = 'A {} trace'.format(object_name)
         attributes = {k: v for k, v in trace['attributes'].items()}
         attributes['type'] = {'role': 'info'}
+        hr_name = trace.get('hrName', object_name)
 
-        return {'role': 'object', 'name': object_name, 'is_array': False,
-                'parent': 'data', 'description': description,
-                'attributes': attributes, 'items': None}
+        return {'role': 'object', 'name': object_name, 'hr_name': hr_name,
+                'is_array': False, 'parent': 'data',
+                'description': description, 'attributes': attributes,
+                'items': None}
 
     elif object_name == 'data':
 
-        return {'role': 'object', 'name': 'data', 'is_array': True,
-                'parent': 'figure', 'attributes': None, 'items': TRACE_NAMES,
+        return {'role': 'object', 'name': 'data', 'hr_name': 'data',
+                'is_array': True, 'parent': 'figure', 'attributes': None,
+                'items': TRACE_NAMES,
                 'description': 'Array container for trace objects.'}
 
     elif object_name == 'layout':
@@ -297,8 +320,9 @@ def _get_object_info_from_name(object_name):
             if key not in GRAPH_REFERENCE['defs']['metaKeys']:
                 attributes[key] = val
 
-        return {'role': 'object', 'name': 'layout', 'is_array': False,
-                'parent': 'figure', 'attributes': attributes, 'items': None,
+        return {'role': 'object', 'name': 'layout', 'hr_name': 'layout',
+                'is_array': False, 'parent': 'figure',
+                'attributes': attributes, 'items': None,
                 'description': 'Plot layout object container.'}
 
     else:  # assume it's 'figure'
@@ -306,8 +330,9 @@ def _get_object_info_from_name(object_name):
         attributes = {'data': _get_object_info_from_name('data'),
                       'layout': _get_object_info_from_name('layout')}
 
-        return {'role': 'object', 'name': 'figure', 'is_array': False,
-                'parent': '', 'description': 'Top level of figure object.',
+        return {'role': 'object', 'name': 'figure', 'hr_name': 'figure',
+                'is_array': False, 'parent': '',
+                'description': 'Top level of figure object.',
                 'attributes': attributes, 'items': None}
 
 

@@ -940,7 +940,7 @@ class GraphObjectFactory(object):
         """
         if object_name not in graph_reference.OBJECTS:
             raise Exception('tbd')  # TODO
-        class_name = graph_reference.string_to_class_name(object_name)
+        class_name = graph_reference.object_name_to_class_name(object_name)
         graph_object_class = globals()[class_name]
 
         return graph_object_class(*args, **kwargs)
@@ -964,14 +964,14 @@ def _add_classes_to_globals(globals):
                                                    dict_class=PlotlyDict)
         doc = graph_objs_tools.make_doc(object_name)
         class_dict.update(__doc__=doc, __name__=class_name)
-        cls = type(class_name, class_bases, class_dict)
+        cls = type(str(class_name), class_bases, class_dict)
 
         globals[class_name] = cls
 
         for key, val in graph_reference.CLASS_NAMES_TO_OBJECT_NAMES.items():
             if val == object_name:
                 class_dict.update(__name__=key)
-                cls = type(key, class_bases, class_dict)
+                cls = type(str(key), class_bases, class_dict)
                 globals[key] = cls
 
 _add_classes_to_globals(globals())
