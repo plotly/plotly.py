@@ -53,7 +53,11 @@ def get_graph_reference():
                 "the schema from '{}' failed.".format(graph_reference_url)
             )
     else:
-        data = json.loads(str(response.content))  # str for PY2/3 compat.
+        if six.PY3:
+            content = str(response.content, encoding='utf-8')
+        else:
+            content = response.content
+        data = json.loads(content)
         if data['modified']:
             graph_reference = data['schema']
 
