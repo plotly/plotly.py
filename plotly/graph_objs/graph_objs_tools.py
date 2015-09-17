@@ -35,12 +35,16 @@ def get_class_create_args(object_name, list_class=list, dict_class=dict):
     else:
 
         _attributes = set()
+        _deprecated_attributes = set()
         for object_info in object_infos:
             _attributes.update(object_info['attributes'])
+            _deprecated_attributes.update(object_info['deprecated_attributes'])
         _attributes = list(_attributes)
+        _deprecated_attributes = list(_deprecated_attributes)
         class_bases = (dict_class, )
         class_dict = {'__name__': class_name, '_name': object_name,
-                      '_attributes': _attributes}
+                      '_attributes': _attributes,
+                      '_deprecated_attributes': _deprecated_attributes}
 
     return class_name, class_bases, class_dict
 

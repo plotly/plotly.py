@@ -248,6 +248,10 @@ def _get_object_info_from_path(path, object_name):
         description = attribute_container.get('description', '')
         attributes = {k: v for k, v in attribute_container.items()
                       if k not in GRAPH_REFERENCE['defs']['metaKeys']}
+        deprecated_attributes = {
+            k: v for k, v in attribute_container.get('_deprecated', {}).items()
+            if k not in GRAPH_REFERENCE['defs']['metaKeys']
+        }
         items = None
 
     else:
@@ -267,6 +271,7 @@ def _get_object_info_from_path(path, object_name):
             is_array = True
             description = ''
             attributes = None
+            deprecated_attributes = None
             items = [name[:-1]]
 
         else:
@@ -275,6 +280,10 @@ def _get_object_info_from_path(path, object_name):
             description = path_value.get('description', '')
             attributes = {k: v for k, v in path_value.items()
                           if k not in GRAPH_REFERENCE['defs']['metaKeys']}
+            deprecated_attributes = {
+                k: v for k, v in path_value.get('_deprecated', {}).items()
+                if k not in GRAPH_REFERENCE['defs']['metaKeys']
+            }
             items = None
 
     return {
@@ -285,6 +294,7 @@ def _get_object_info_from_path(path, object_name):
         'hr_name': hr_name,
         'description': description,
         'attributes': attributes,
+        'deprecated_attributes': deprecated_attributes,
         'items': items
     }
 
@@ -310,24 +320,29 @@ def _get_object_info_from_name(object_name):
         description = 'A {} trace'.format(object_name)
         attributes = {k: v for k, v in trace['attributes'].items()}
         attributes['type'] = {'role': 'info'}
+        deprecated_attributes = {
+            k: v for k, v in trace['attributes'].get('_deprecated', {}).items()
+            if k not in GRAPH_REFERENCE['defs']['metaKeys']
+        }
         hr_name = trace.get('hrName', object_name)
 
         return {'role': 'object', 'name': object_name, 'hr_name': hr_name,
                 'is_array': False, 'parent': 'data',
                 'description': description, 'attributes': attributes,
-                'items': None}
+                'deprecated_attributes': deprecated_attributes, 'items': None}
 
     elif object_name == 'data':
 
         return {'role': 'object', 'name': 'data', 'hr_name': 'data',
                 'is_array': True, 'parent': 'figure', 'attributes': None,
-                'items': TRACE_NAMES,
+                'deprecated_attributes': None, 'items': TRACE_NAMES,
                 'description': 'Array container for trace objects.'}
 
     elif object_name == 'layout':
 
         # find and add layout keys from traces
         attributes = {}
+        deprecated_attributes = {}
         for trace_name in TRACE_NAMES:
             try:
                 path = ('traces', trace_name, 'layoutAttributes')
@@ -338,16 +353,23 @@ def _get_object_info_from_name(object_name):
                 for key, val in layout_attributes.items():
                     if key not in GRAPH_REFERENCE['defs']['metaKeys']:
                         attributes[key] = val
+                for key, val in layout_attributes.get('_deprecated', {}):
+                    if key not in GRAPH_REFERENCE['defs']['metaKeys']:
+                        deprecated_attributes[key] = val
 
         # find and add layout keys from layout
         layout_attributes = GRAPH_REFERENCE['layout']['layoutAttributes']
         for key, val in layout_attributes.items():
             if key not in GRAPH_REFERENCE['defs']['metaKeys']:
                 attributes[key] = val
+        for key, val in layout_attributes.get('_deprecated', {}):
+            if key not in GRAPH_REFERENCE['defs']['metaKeys']:
+                deprecated_attributes[key] = val
 
         return {'role': 'object', 'name': 'layout', 'hr_name': 'layout',
                 'is_array': False, 'parent': 'figure',
-                'attributes': attributes, 'items': None,
+                'attributes': attributes,
+                'deprecated_attributes': deprecated_attributes, 'items': None,
                 'description': 'Plot layout object container.'}
 
     else:  # assume it's 'figure'
@@ -358,7 +380,8 @@ def _get_object_info_from_name(object_name):
         return {'role': 'object', 'name': 'figure', 'hr_name': 'figure',
                 'is_array': False, 'parent': '',
                 'description': 'Top level of figure object.',
-                'attributes': attributes, 'items': None}
+                'attributes': attributes, 'deprecated_attributes': {},
+                'items': None}
 
 
 # The ordering here is important.
