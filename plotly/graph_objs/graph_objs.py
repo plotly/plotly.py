@@ -711,7 +711,7 @@ class PlotlyDict(dict, PlotlyBase):
         string += "{eol}{indent})".format(eol=eol, indent=' ' * indent * level)
         return string
 
-    def force_clean(self, caller=True):
+    def force_clean(self, **kwargs):
         """Attempts to convert to graph_objs and call force_clean() on values.
         Calling force_clean() on a PlotlyDict will ensure that the object is
         valid and may be sent to plotly. This process will also remove any
@@ -721,7 +721,7 @@ class PlotlyDict(dict, PlotlyBase):
         keys = list(self.keys())
         for key in keys:
             try:
-                self[key].force_clean(caller=False)  # TODO: add error handling
+                self[key].force_clean()  # TODO: add error handling
             except AttributeError:
                 pass
             if isinstance(self[key], (dict, list)):
