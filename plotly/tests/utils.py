@@ -3,8 +3,7 @@ import json
 from numbers import Number as Num
 from unittest import TestCase
 
-from plotly.files import CREDENTIALS_FILE, CONFIG_FILE, check_file_permissions
-from plotly import session
+from plotly import files, session, utils
 
 
 class PlotlyTestCase(TestCase):
@@ -12,32 +11,36 @@ class PlotlyTestCase(TestCase):
     # parent test case to assist with clean up of local credentials/config
 
     def __init__(self, *args, **kwargs):
-        self._file_credentials = None
-        self._file_config = None
+        self._credentials = None
+        self._config = None
+        self._graph_reference = None
         self._session = None
         super(PlotlyTestCase, self).__init__(*args, **kwargs)
 
     def setUp(self):
-        self.stash_file_credentials_and_config()
+        self.stash_session()
+        self.stash_files()
 
     def tearDown(self):
-        self.restore_file_credentials_and_config()
+        self.restore_files()
+        self.restore_session()
 
-    def stash_file_credentials_and_config(self):
-        if check_file_permissions():
-            with open(CREDENTIALS_FILE, 'r') as f:
-                self._file_credentials = json.load(f)
-            with open(CONFIG_FILE, 'r') as f:
-                self._file_config = json.load(f)
+    def stash_files(self):
+        if files.check_file_permissions():
+            self._credentials = utils.load_json_dict(files.CREDENTIALS_FILE)
+            self._config = utils.load_json_dict(files.CONFIG_FILE)
+            self._graph_reference = \
+                utils.load_json_dict(files.GRAPH_REFERENCE_FILE)
 
-    def restore_file_credentials_and_config(self):
-        if check_file_permissions():
-            if self._file_credentials is not None:
-                with open(CREDENTIALS_FILE, 'w') as f:
-                    json.dump(self._file_credentials, f)
-            if self._file_config is not None:
-                with open(CONFIG_FILE, 'w') as f:
-                    json.dump(self._file_config, f)
+    def restore_files(self):
+        if files.check_file_permissions():
+            if self._credentials is not None:
+                utils.save_json_dict(files.CREDENTIALS_FILE, self._credentials)
+            if self._config is not None:
+                utils.save_json_dict(files.CONFIG_FILE, self._config)
+            if self._graph_reference is not None:
+                utils.save_json_dict(files.GRAPH_REFERENCE_FILE,
+                                     self._graph_reference)
 
     def stash_session(self):
         self._session = copy.deepcopy(session._session)

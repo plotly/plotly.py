@@ -18,6 +18,8 @@ Available targets (i.e. $ make target):
 
     readme -> `less` this file
 
+    update_default_schema -> download the latest plot schema from plot.ly
+
     setup_subs -> delete old submodule locations, init, update, and sync new
 
     install -> 1. sync submodules 2. install plotly with setup.py
