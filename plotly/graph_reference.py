@@ -158,6 +158,22 @@ def _get_hr_name(object_name):
     return object_infos[0]['hr_name']
 
 
+def _get_object_paths():
+    """
+    We lookup information based on its location in GRAPH_REFERENCE.
+
+    :return: (list[tuple])
+
+    """
+    object_paths = []
+    for node, path in utils.node_generator(GRAPH_REFERENCE):
+        if any([key in path for key in GRAPH_REFERENCE['defs']['metaKeys']]):
+            continue  # objects don't exist under nested meta keys
+        if node.get('role') == 'object':
+            object_paths.append(path)
+    return object_paths
+
+
 def _get_objects():
     """
     Return the main dict that we'll work with for graph objects.
@@ -350,7 +366,6 @@ GRAPH_REFERENCE = get_graph_reference()
 
 # See http://blog.labix.org/2008/06/27/watch-out-for-listdictkeys-in-python-3
 TRACE_NAMES = list(GRAPH_REFERENCE['traces'].keys())
-OBJECT_PATHS = [path for node, path in utils.node_generator(GRAPH_REFERENCE)
-                if node.get('role') == 'object']
+OBJECT_PATHS = _get_object_paths()
 OBJECTS = _get_objects()
 CLASS_NAMES_TO_OBJECT_NAMES = _get_class_names_to_object_names()
