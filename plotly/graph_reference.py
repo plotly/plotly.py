@@ -347,7 +347,9 @@ def _get_object_info_from_name(object_name):
 
 # The ordering here is important.
 GRAPH_REFERENCE = get_graph_reference()
-TRACE_NAMES = GRAPH_REFERENCE['traces'].keys()
+
+# See http://blog.labix.org/2008/06/27/watch-out-for-listdictkeys-in-python-3
+TRACE_NAMES = list(GRAPH_REFERENCE['traces'].keys())
 OBJECT_PATHS = [path for node, path in utils.node_generator(GRAPH_REFERENCE)
                 if node.get('role') == 'object']
 OBJECTS = _get_objects()
