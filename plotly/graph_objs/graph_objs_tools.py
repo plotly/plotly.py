@@ -206,4 +206,4 @@ def sort_keys(key):
 
     """
     is_special = key in 'rtxyz'
-    return (not is_special, key)
+    return not is_special, key
