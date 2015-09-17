@@ -959,4 +959,5 @@ def _add_classes_to_globals(globals):
 _add_classes_to_globals(globals())
 
 # We don't want to expose this module to users, just the classes.
-__all__ = graph_reference.CLASS_NAMES_TO_OBJECT_NAMES.keys()
+# See http://blog.labix.org/2008/06/27/watch-out-for-listdictkeys-in-python-3
+__all__ = list(graph_reference.CLASS_NAMES_TO_OBJECT_NAMES.keys())
