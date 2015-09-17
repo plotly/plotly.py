@@ -8,6 +8,8 @@ import json
 import os
 from pkg_resources import resource_string
 
+from nose.plugins.attrib import attr
+
 from plotly import files, graph_reference as gr, tools, utils
 from plotly.graph_reference import object_name_to_class_name
 from plotly.tests.utils import PlotlyTestCase
@@ -19,6 +21,7 @@ class TestGraphReferenceCaching(PlotlyTestCase):
         if files.check_file_permissions():
             utils.save_json_dict(files.GRAPH_REFERENCE_FILE, graph_reference)
 
+    @attr('slow')
     def test_get_graph_reference_outdated(self):
 
         # if the hash of the current graph reference doesn't match the hash of

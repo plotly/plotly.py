@@ -5,6 +5,7 @@ test__offline
 from __future__ import absolute_import
 
 import os
+from nose.plugins.attrib import attr
 from nose.tools import raises
 from unittest import TestCase
 
@@ -30,6 +31,7 @@ class PlotlyOfflineTestCase(TestCase):
         plotly.offline.init_notebook_mode()
         plotly.offline.iplot([{'x': [1, 2, 3]}])
 
+    @attr('slow')
     @raises(PlotlyError)
     def test_calling_iplot_before_initializing_raises_an_error(self):
         self._remove_plotlyjs()

@@ -9,7 +9,9 @@ from __future__ import absolute_import
 
 from unittest import TestCase, skipIf
 
+from nose.plugins.attrib import attr
 from nose.tools import raises
+
 import six
 
 from plotly import exceptions
@@ -96,6 +98,7 @@ def is_trivial(obj):
         return False
 
 
+@attr('slow')
 def test_get_figure():
     un = 'PlotlyImageTest'
     ak = '786r5mecv0'
@@ -106,6 +109,7 @@ def test_get_figure():
     fig = py.get_figure('PlotlyImageTest', str(file_id))
 
 
+@attr('slow')
 def test_get_figure_with_url():
     un = 'PlotlyImageTest'
     ak = '786r5mecv0'
@@ -127,6 +131,7 @@ def test_get_figure_invalid_1():
     fig = py.get_figure(url)
 
 
+@attr('slow')
 @raises(exceptions.PlotlyError)
 def test_get_figure_invalid_2():
     un = 'PlotlyImageTest'
@@ -138,6 +143,7 @@ def test_get_figure_invalid_2():
     fig = py.get_figure(url)
 
 
+@attr('slow')
 @raises(exceptions.PlotlyError)
 def test_get_figure_does_not_exist():
     un = 'PlotlyImageTest'
@@ -149,6 +155,7 @@ def test_get_figure_does_not_exist():
     fig = py.get_figure(url)
 
 
+@attr('slow')
 def test_get_figure_raw():
     un = 'PlotlyImageTest'
     ak = '786r5mecv0'
@@ -159,6 +166,7 @@ def test_get_figure_raw():
     fig = py.get_figure('PlotlyImageTest', str(file_id), raw=True)
 
 
+@attr('slow')
 def test_all():
     un = 'PlotlyImageTest'
     ak = '786r5mecv0'
@@ -197,6 +205,7 @@ def test_all():
                                      "following output is produced...")
 
 
+@attr('slow')
 class TestBytesVStrings(TestCase):
 
     @skipIf(not six.PY3, 'Decoding and missing escapes only seen in PY3')

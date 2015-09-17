@@ -10,6 +10,7 @@ import json
 import requests
 
 import six
+from nose.plugins.attrib import attr
 
 
 default_headers = {'plotly-username': '',
@@ -24,6 +25,7 @@ server = "https://plot.ly"
 # api_key = "vgs6e0cnoi" (currently...)
 
 
+@attr('slow')
 def test_user_does_not_exist():
     username = 'user_does_not_exist'
     api_key = 'invalid-apikey'
@@ -46,6 +48,7 @@ def test_user_does_not_exist():
                                 "sensitive.".format(username))
 
 
+@attr('slow')
 def test_file_does_not_exist():
     username = 'PlotlyImageTest'
     api_key = '786r5mecv0'
@@ -67,6 +70,7 @@ def test_file_does_not_exist():
                                 "exist. Want to try again?")
 
 
+@attr('slow')
 def test_wrong_api_key():  # TODO: does this test the right thing?
     username = 'PlotlyImageTest'
     api_key = 'invalid-apikey'
@@ -84,6 +88,7 @@ def test_wrong_api_key():  # TODO: does this test the right thing?
 # Locked File
 # TODO
 
+@attr('slow')
 def test_private_permission_defined():
     username = 'PlotlyImageTest'
     api_key = '786r5mecv0'
@@ -106,6 +111,7 @@ def test_private_permission_defined():
 # TODO
 
 
+@attr('slow')
 def test_missing_headers():
     file_owner = 'get_test_user'
     file_id = 0
@@ -124,6 +130,7 @@ def test_missing_headers():
         assert response.status_code == 422
 
 
+@attr('slow')
 def test_valid_request():
     username = 'PlotlyImageTest'
     api_key = '786r5mecv0'
