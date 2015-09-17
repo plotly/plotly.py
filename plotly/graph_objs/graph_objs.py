@@ -741,9 +741,14 @@ class PlotlyDict(dict, PlotlyBase):
 class Figure(PlotlyDict):
 
     _name = 'figure'
+
     _attributes = set(graph_reference.get_object_info(
         None, 'figure'
     )['attributes'])
+
+    _deprecated_attributes = set(graph_reference.get_object_info(
+        None, 'figure'
+    )['deprecated_attributes'])
 
     def __init__(self, *args, **kwargs):
         super(Figure, self).__init__(*args, **kwargs)
@@ -910,9 +915,14 @@ class Data(PlotlyList):
 class Layout(PlotlyDict):
 
     _name = 'layout'
+
     _attributes = set(graph_reference.get_object_info(
         None, 'layout'
     )['attributes'])
+
+    _deprecated_attributes = set(graph_reference.get_object_info(
+        None, 'layout'
+    )['deprecated_attributes'])
 
 
 Trace = dict  # for backwards compat.
