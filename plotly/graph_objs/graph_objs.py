@@ -28,6 +28,7 @@ import copy
 
 import re
 import six
+import warnings
 
 from plotly import exceptions, graph_reference
 from plotly.graph_objs import graph_objs_tools
@@ -360,6 +361,7 @@ class PlotlyDict(dict, PlotlyBase):
     """
     _name = None
     _attributes = set()
+    _deprecated_attributes = set()
     _parent_key = None
 
     def __init__(self, *args, **kwargs):
@@ -418,9 +420,20 @@ class PlotlyDict(dict, PlotlyBase):
                 return super(PlotlyDict, self).__setitem__(key, value)
 
         if key not in self._attributes:
-            if _raise:
-                raise exceptions.PlotlyDictKeyError(self, key)
-            return
+
+            if key in self._deprecated_attributes:
+                warnings.warn(
+                    "Oops! '{}' has been deprecated in '{}'\n"
+                    "This may still work, but you should update your code "
+                    "when possible.".format(key, self._name)
+                )
+
+                # this means deprecated attrs get set *as-is*!
+                return super(PlotlyDict, self).__setitem__(key, value)
+            else:
+                if _raise:
+                    raise exceptions.PlotlyDictKeyError(self, key)
+                return
 
         if graph_objs_tools.get_role(self, key) == 'object':
             value = self.value_to_graph_object(key, value, _raise=_raise)
