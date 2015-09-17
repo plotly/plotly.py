@@ -750,7 +750,7 @@ class Figure(PlotlyDict):
     def __init__(self, *args, **kwargs):
         super(Figure, self).__init__(*args, **kwargs)
         if 'data' not in self:
-            self.data = []
+            self.data = Data()
 
     def get_data(self, flatten=False):
         """
