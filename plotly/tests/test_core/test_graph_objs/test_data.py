@@ -48,7 +48,7 @@ def test_dict_instantiation_key_error():
     print(Data([{'marker': 'not-a-dict'}]))
 
 
-@skip('error handling needs to be revisited.')
+@skip('See https://github.com/plotly/python-api/issues/295')
 @raises(PlotlyDataTypeError)
 def test_dict_instantiation_type_error():
     Data([{'type': 'invalid_type'}])
@@ -59,7 +59,7 @@ def test_dict_instantiation_graph_obj_error_0():
     Data([Data()])
 
 
-@skip('Dict-like objects are converted into Scatter, so this passes...')
+@skip('See https://github.com/plotly/python-api/issues/294')
 @raises(PlotlyListEntryError)
 def test_dict_instantiation_graph_obj_error_1():
     Data([Figure()])
@@ -69,7 +69,7 @@ def test_dict_instantiation_graph_obj_error_1():
 def test_dict_instantiation_graph_obj_error_2():
     Data([Annotations()])
 
-@skip('Dict-like objects are converted into Scatter, so this passes...')
+@skip('See https://github.com/plotly/python-api/issues/294')
 @raises(PlotlyListEntryError)
 def test_dict_instantiation_graph_obj_error_3():
     Data([Layout()])

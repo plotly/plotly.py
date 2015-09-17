@@ -49,7 +49,7 @@ def test_dict_instantiation_graph_obj_error_0():
     Annotations([Data()])
 
 
-@skip('Dict-like objects are converted into Annotation, so this passes...')
+@skip('See https://github.com/plotly/python-api/issues/294')
 @raises(PlotlyListEntryError)
 def test_dict_instantiation_graph_obj_error_1():
     Annotations([Figure()])

@@ -43,7 +43,7 @@ def test_update_list_empty():
     assert data[1] == Scatter(x=[1, 2, 3], y=[3, 2, 1])
 
 
-@skip('We need to not re-instantiate to get this working again.')
+@skip('See https://github.com/plotly/python-api/issues/291')
 def test_update_list_make_copies_false():
     trace1 = Scatter(x=[1, 2, 3], y=[2, 1, 2])
     trace2 = Scatter(x=[1, 2, 3], y=[3, 2, 1])
