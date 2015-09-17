@@ -6,7 +6,9 @@ from __future__ import absolute_import
 
 import hashlib
 import json
+import os
 import requests
+from pkg_resources import resource_string
 
 import six
 
@@ -45,13 +47,9 @@ def get_graph_reference():
         response.raise_for_status()
     except requests.exceptions.RequestException:
         if not graph_reference:
-            raise exceptions.PlotlyError(
-                "The schema used to validate Plotly figures has never been "
-                "downloaded to your computer. You'll need to connect to a "
-                "Plotly server at least once to do this.\n"
-                "You're seeing this error because the attempt to download "
-                "the schema from '{}' failed.".format(graph_reference_url)
-            )
+            path = os.path.join('graph_reference', 'default-schema.json')
+            s = resource_string('plotly', path).decode('utf-8')
+            graph_reference = json.loads(s)
     else:
         if six.PY3:
             content = str(response.content, encoding='utf-8')

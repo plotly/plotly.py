@@ -3,8 +3,12 @@ A module to test functionality related to *using* the graph reference.
 
 """
 from __future__ import absolute_import
+import json
 
-from plotly import exceptions, files, graph_reference as gr, tools, utils
+import os
+from pkg_resources import resource_string
+
+from plotly import files, graph_reference as gr, tools, utils
 from plotly.tests.utils import PlotlyTestCase
 
 
@@ -37,10 +41,13 @@ class TestGraphReferenceCaching(PlotlyTestCase):
 
     def test_get_graph_reference_bad_request_no_copy(self):
 
-        # if we don't have a graph reference we *have* to error, no choice :(
+        # if we don't have a graph reference we load an outdated default
 
         tools.set_config_file(plotly_api_domain='api.am.not.here.ly')
         empty_graph_reference = {}  # set it to a false-y value.
         self.set_graph_reference(empty_graph_reference)
-        with self.assertRaisesRegexp(exceptions.PlotlyError, 'schema'):
-            gr.get_graph_reference()
+        path = os.path.join('graph_reference', 'default-schema.json')
+        s = resource_string('plotly', path).decode('utf-8')
+        default_graph_reference = json.loads(s)
+        graph_reference = gr.get_graph_reference()
+        self.assertEqual(graph_reference, default_graph_reference)
