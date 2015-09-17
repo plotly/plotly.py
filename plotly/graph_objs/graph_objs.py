@@ -224,9 +224,11 @@ class PlotlyList(list, PlotlyBase):
                     raise
 
     def update(self, changes, make_copies=False):
-        """Update current list with changed_list, which must be iterable.
-        The 'changes' should be a list of dictionaries, however,
-        it is permitted to be a single dict object.
+        """
+        Update current list with changed_list, which must be iterable.
+
+        :param (dict|list[dict]) changes:
+        :param (bool) make_copies:
 
         Because mutable objects contain references to their values, updating
         multiple items in a list will cause the items to all reference the same
@@ -249,31 +251,13 @@ class PlotlyList(list, PlotlyBase):
                     self[index].update(update)
 
     def strip_style(self):
-        """Strip style from the current representation.
-
-        All PlotlyDicts and PlotlyLists are guaranteed to survive the
-        stripping process, though they made be left empty. This is allowable.
-
-        Keys that will be stripped in this process are tagged with
-        `'type': 'style'` in graph_objs_meta.json.
-
-        This process first attempts to convert nested collections from dicts
-        or lists to subclasses of PlotlyList/PlotlyDict. This process forces
-        a validation, which may throw exceptions.
-
-        Then, each of these objects call `strip_style` on themselves and so
-        on, recursively until the entire structure has been validated and
-        stripped.
-
-        """
+        """Strip style by calling `stip_style` on children items."""
         for plotly_dict in self:
             plotly_dict.strip_style()
 
     def get_data(self, flatten=False):
         """
         Returns the JSON for the plot with non-data elements stripped.
-
-        Flattening may increase the utility of the result.
 
         :param (bool) flatten: {'a': {'b': ''}} --> {'a.b': ''}
         :returns: (dict|list) Depending on (flat|unflat)
@@ -301,20 +285,7 @@ class PlotlyList(list, PlotlyBase):
 
     def to_string(self, level=0, indent=4, eol='\n',
                   pretty=True, max_chars=80):
-        """Returns a formatted string showing graph_obj constructors.
-
-        Example:
-
-            print(obj.to_string())
-
-        Keyword arguments:
-        level (default = 0) -- set number of indentations to start with
-        indent (default = 4) -- set indentation amount
-        eol (default = '\\n') -- set end of line character(s)
-        pretty (default = True) -- curtail long list output with a '...'
-        max_chars (default = 80) -- set max characters per line
-
-        """
+        """Get formatted string by calling `to_string` on children items."""
         if not len(self):
             return "{name}()".format(name=self.__class__.__name__)
         string = "{name}([{eol}{indent}".format(
@@ -336,14 +307,7 @@ class PlotlyList(list, PlotlyBase):
         return string
 
     def force_clean(self, **kwargs):
-        """Attempts to convert to graph_objs and calls force_clean() on entries.
-        Calling force_clean() on a PlotlyList will ensure that the object is
-        valid and may be sent to plotly. This process will remove any entries
-        that end up with a length == 0. It will also remove itself from
-        enclosing trivial structures if it is enclosed by a collection with
-        length 1, meaning the data is the ONLY object in the collection.
-        Careful! This will delete any invalid entries *silently*.
-        """
+        """Remove empty/None values by calling `force_clean()` on children."""
         for entry in self:
             entry.force_clean()
         del_indicies = [index for index, item in enumerate(self)
@@ -388,20 +352,23 @@ class PlotlyDict(dict, PlotlyBase):
                 raise
 
     def __dir__(self):
+        """Dynamically return the existing and possible attributes."""
         attrs = self.__dict__.keys()
         attrs += [attr for attr in dir(dict()) if attr not in attrs]
         return sorted(self._attributes) + attrs
 
     def __getitem__(self, key):
+        """Calls __missing__ when key is not found. May mutate object."""
         if key not in self:
             self.__missing__(key)
         return super(PlotlyDict, self).__getitem__(key)
 
     def __setattr__(self, key, value):
+        """Maps __setattr__ onto __setitem__"""
         self.__setitem__(key, value)
 
     def __setitem__(self, key, value, _raise=True):
-
+        """Validates/Converts values which should be Graph Objects."""
         if not isinstance(key, six.string_types):
             if _raise:
                 raise TypeError('Key must be string, not {}'.format(type(key)))
@@ -464,7 +431,7 @@ class PlotlyDict(dict, PlotlyBase):
         return self.__copy__()
 
     def __missing__(self, key):
-
+        """Mimics defaultdict. This is called from __getitem__ when key DNE."""
         if key in self._attributes:
             if graph_objs_tools.get_role(self, key) == 'object':
                 value = GraphObjectFactory.create(key)
@@ -480,7 +447,7 @@ class PlotlyDict(dict, PlotlyBase):
             super(PlotlyDict, self).__setitem__(key, value)
 
     def _get_subplot_key(self, key):
-
+        """Some keys can have appended integers, this handles that."""
         match = re.search(r'(?P<digits>\d+$)', key)
         if match:
             root_key = key[:match.start()]
@@ -489,7 +456,16 @@ class PlotlyDict(dict, PlotlyBase):
                 return root_key
 
     def value_to_graph_object(self, key, value, _raise=True):
+        """
+        Attempt to convert value to graph object.
 
+        :param (str|unicode) key: Should be an object_name from GRAPH_REFERENCE
+        :param (dict) value: This will fail if it's not a dict.
+        :param (bool) _raise: Flag to prevent inappropriate erring.
+
+        :return: (PlotlyList|PlotlyDict|None) `None` if `_raise` and failure.
+
+        """
         if graph_reference.attribute_is_array(key, self._name):
             val_types = (list, )
             if not isinstance(value, val_types):
@@ -530,7 +506,8 @@ class PlotlyDict(dict, PlotlyBase):
         return graph_object  # this can be `None` when `_raise == False`
 
     def update(self, dict1=None, **dict2):
-        """Update current dict with dict1 and then dict2.
+        """
+        Update current dict with dict1 and then dict2.
 
         This recursively updates the structure of the original dictionary-like
         object with the new entries in the second and third objects. This
@@ -579,21 +556,15 @@ class PlotlyDict(dict, PlotlyBase):
                     self[key] = val
 
     def strip_style(self):
-        """Strip style from the current representation.
+        """
+        Recursively strip style from the current representation.
 
         All PlotlyDicts and PlotlyLists are guaranteed to survive the
         stripping process, though they made be left empty. This is allowable.
 
         Keys that will be stripped in this process are tagged with
-        `'type': 'style'` in graph_objs_meta.json.
-
-        This process first attempts to convert nested collections from dicts
-        or lists to subclasses of PlotlyList/PlotlyDict. This process forces
-        a validation, which may throw exceptions.
-
-        Then, each of these objects call `strip_style` on themselves and so
-        on, recursively until the entire structure has been validated and
-        stripped.
+        `'type': 'style'` in graph_objs_meta.json. Note that a key tagged as
+        style, but with an array as a value may still be considered data.
 
         """
         keys = list(self.keys())
@@ -638,18 +609,18 @@ class PlotlyDict(dict, PlotlyBase):
 
     def to_string(self, level=0, indent=4, eol='\n',
                   pretty=True, max_chars=80):
-        """Returns a formatted string showing graph_obj constructors.
+        """
+        Returns a formatted string showing graph_obj constructors.
+
+        :param (int) level: The number of indentations to start with.
+        :param (int) indent: The indentation amount.
+        :param (str) eol: The end of line character(s).
+        :param (bool) pretty: Curtail long list output with a '..' ?
+        :param (int) max_chars: The max characters per line.
 
         Example:
 
             print(obj.to_string())
-
-        Keyword arguments:
-        level (default = 0) -- set number of indentations to start with
-        indent (default = 4) -- set indentation amount
-        eol (default = '\\n') -- set end of line character(s)
-        pretty (default = True) -- curtail long list output with a '...'
-        max_chars (default = 80) -- set max characters per line
 
         """
         if not len(self):
@@ -712,12 +683,7 @@ class PlotlyDict(dict, PlotlyBase):
         return string
 
     def force_clean(self, **kwargs):
-        """Attempts to convert to graph_objs and call force_clean() on values.
-        Calling force_clean() on a PlotlyDict will ensure that the object is
-        valid and may be sent to plotly. This process will also remove any
-        entries that end up with a length == 0.
-        Careful! This will delete any invalid entries *silently*.
-        """
+        """Recursively remove empty/None values."""
         keys = list(self.keys())
         for key in keys:
             try:
@@ -732,7 +698,15 @@ class PlotlyDict(dict, PlotlyBase):
 
 
 class Figure(PlotlyDict):
+    """
+    Top-level Plotly figure object.
 
+    Valid Keys:
+
+        * data
+        * layout
+
+    """
     _name = 'figure'
 
     _attributes = set(graph_reference.get_object_info(
@@ -765,15 +739,23 @@ class Figure(PlotlyDict):
         return self.data.get_data(flatten=flatten)
 
     def to_dataframe(self):
+        """
+        Create a pandas dataframe with trace names and keys as column names.
+
+        :return: (DataFrame)
+
+        """
         data = self.get_data(flatten=True)
         from pandas import DataFrame, Series
         return DataFrame(dict([(k, Series(v)) for k, v in data.items()]))
 
     def print_grid(self):
-        """Print a visual layout of the figure's axes arrangement.
+        """
+        Print a visual layout of the figure's axes arrangement.
 
         This is only valid for figures that are created
         with plotly.tools.make_subplots.
+
         """
         try:
             grid_str = self.__dict__['_grid_str']
@@ -783,11 +765,15 @@ class Figure(PlotlyDict):
         print(grid_str)
 
     def append_trace(self, trace, row, col):
-        """ Helper function to add a data traces to your figure
-        that is bound to axes at the row, col index.
+        """
+        Add a data traces to your figure bound to axes at the row, col index.
 
         The row, col index is generated from figures created with
         plotly.tools.make_subplots and can be viewed with Figure.print_grid.
+
+        :param (dict) trace: The data trace to be bound.
+        :param (int) row: Subplot row index (see Figure.print_grid).
+        :param (int) col: Subplot column index (see Figure.print_grid).
 
         Example:
         # stack two subplots vertically
@@ -799,17 +785,6 @@ class Figure(PlotlyDict):
 
         fig.append_trace(Scatter(x=[1,2,3], y=[2,1,2]), 1, 1)
         fig.append_trace(Scatter(x=[1,2,3], y=[2,1,2]), 2, 1)
-
-        Arguments:
-
-        trace (plotly trace object):
-            The data trace to be bound.
-
-        row (int):
-            Subplot row index on the subplot grid (see Figure.print_grid)
-
-        col (int):
-            Subplot column index on the subplot grid (see Figure.print_grid)
 
         """
         try:
@@ -849,7 +824,10 @@ class Figure(PlotlyDict):
 
 
 class Data(PlotlyList):
+    """
+    Container for all Plotly traces.
 
+    """
     _name = 'data'
     _items = set(graph_reference.TRACE_NAMES)
 
@@ -879,8 +857,11 @@ class Data(PlotlyList):
 
     def get_data(self, flatten=False):
         """
-        :param flatten:
-        :return:
+        Returns the JSON for the plot with non-data elements stripped.
+
+        :param (bool) flatten: {'a': {'b': ''}} --> {'a.b': ''}
+        :returns: (dict|list) Depending on (flat|unflat)
+
         """
         if flatten:
             data = [v.get_data(flatten=flatten) for v in self]
@@ -910,7 +891,10 @@ class Data(PlotlyList):
 
 
 class Layout(PlotlyDict):
+    """
+    Container for plot layout information.
 
+    """
     _name = 'layout'
 
     _attributes = set(graph_reference.get_object_info(

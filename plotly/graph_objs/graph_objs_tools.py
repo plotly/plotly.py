@@ -10,7 +10,18 @@ TAB_SIZE = 4
 
 
 def get_class_create_args(object_name, list_class=list, dict_class=dict):
+    """
+    Graph objects are created dynamically, this assists that process.
 
+    We default to `list` and `dict` because importing `PlotlyDict` and
+    `PlotlyList` would be circular and doesn't make sense hierarchically.
+
+    :param (str|unicode) object_name: The object name from GRAPH_REFERENCE.
+    :param list_class: Either `list` or `PlotlyList`.
+    :param dict_class: Either `dict` or `PlotlyDict`.
+    :return: (str, type, dict) class_name, class_bases, and class_dict values.
+
+    """
     object_paths = graph_reference.OBJECTS[object_name]
 
     class_name = graph_reference.object_name_to_class_name(object_name)
@@ -54,7 +65,16 @@ def get_class_create_args(object_name, list_class=list, dict_class=dict):
 
 
 def make_doc(object_name):
+    """
+    Single path to create general documentation based on the object name.
 
+    Graph objects are created dynamically based on external information. The
+    docs are also based on this information and must be created at runtime.
+
+    :param (str|unicode) object_name: The object name from GRAPH_REFERENCE.
+    :return: (str) The formatted doc string.
+
+    """
     _, class_bases, _ = get_class_create_args(object_name)
 
     if class_bases[0] == list:
@@ -90,6 +110,18 @@ def _make_dict_doc(name):
 
 
 def curtail_val_repr(val, max_chars, add_delim=False):
+    """
+    Used mostly by the `to_string` function on Graph Objects to pretty print.
+
+    Limit the number of characters of output, but keep the representation
+    pretty.
+
+    :param (*) val: The `repr(val)` result is what gets curtailed.
+    :param (int) max_chars: Max number of chars which may be returned.
+    :param (bool) add_delim: Used if a value is *not* the last in an iterable.
+    :return: (str)
+
+    """
     delim = ", "
     end = ".."
     if isinstance(val, six.string_types):
