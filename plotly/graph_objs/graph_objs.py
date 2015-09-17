@@ -362,6 +362,7 @@ class PlotlyDict(dict, PlotlyBase):
     _name = None
     _attributes = set()
     _deprecated_attributes = set()
+    _subplot_attributes = set()
     _parent_key = None
 
     def __init__(self, *args, **kwargs):
@@ -480,20 +481,12 @@ class PlotlyDict(dict, PlotlyBase):
 
     def _get_subplot_key(self, key):
 
-        # TODO: this can use _isSubplotObj instead and won't require subclass!
-        subplot_key_strings = ('xaxis', 'yaxis', 'zaxis', 'lataxis', 'lonaxis',
-                               'radialaxis', 'angularaxis', 'geo', 'scene')
-
         match = re.search(r'(?P<digits>\d+$)', key)
         if match:
             root_key = key[:match.start()]
-            digits = match.group('digits')
-
-            if root_key in self._attributes:
-                role = graph_objs_tools.get_role(self, root_key)
-                if (role == 'object' and not digits.startswith('0') and
-                        root_key in subplot_key_strings):
-                    return root_key
+            if (root_key in self._subplot_attributes and
+                    not match.group('digits').startswith('0')):
+                return root_key
 
     def value_to_graph_object(self, key, value, _raise=True):
 
@@ -750,6 +743,10 @@ class Figure(PlotlyDict):
         None, 'figure'
     )['deprecated_attributes'])
 
+    _subplot_attributes = set(graph_reference.get_object_info(
+        None, 'figure'
+    )['subplot_attributes'])
+
     def __init__(self, *args, **kwargs):
         super(Figure, self).__init__(*args, **kwargs)
         if 'data' not in self:
@@ -923,6 +920,10 @@ class Layout(PlotlyDict):
     _deprecated_attributes = set(graph_reference.get_object_info(
         None, 'layout'
     )['deprecated_attributes'])
+
+    _subplot_attributes = set(graph_reference.get_object_info(
+        None, 'layout'
+    )['subplot_attributes'])
 
 
 Trace = dict  # for backwards compat.
