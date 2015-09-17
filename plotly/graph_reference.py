@@ -252,6 +252,11 @@ def _get_object_info_from_path(path, object_name):
             k: v for k, v in attribute_container.get('_deprecated', {}).items()
             if k not in GRAPH_REFERENCE['defs']['metaKeys']
         }
+        subplot_attributes = {
+            k: v for k, v in attribute_container.items()
+            if k not in GRAPH_REFERENCE['defs']['metaKeys'] and
+            isinstance(v, dict) and v.get('_isSubplotObj')
+        }
         items = None
 
     else:
@@ -272,6 +277,7 @@ def _get_object_info_from_path(path, object_name):
             description = ''
             attributes = None
             deprecated_attributes = None
+            subplot_attributes = None
             items = [name[:-1]]
 
         else:
@@ -284,6 +290,11 @@ def _get_object_info_from_path(path, object_name):
                 k: v for k, v in path_value.get('_deprecated', {}).items()
                 if k not in GRAPH_REFERENCE['defs']['metaKeys']
             }
+            subplot_attributes = {
+                k: v for k, v in path_value.items()
+                if k not in GRAPH_REFERENCE['defs']['metaKeys'] and
+                isinstance(v, dict) and v.get('_isSubplotObj')
+            }
             items = None
 
     return {
@@ -295,6 +306,7 @@ def _get_object_info_from_path(path, object_name):
         'description': description,
         'attributes': attributes,
         'deprecated_attributes': deprecated_attributes,
+        'subplot_attributes': subplot_attributes,
         'items': items
     }
 
@@ -324,18 +336,25 @@ def _get_object_info_from_name(object_name):
             k: v for k, v in trace['attributes'].get('_deprecated', {}).items()
             if k not in GRAPH_REFERENCE['defs']['metaKeys']
         }
+        subplot_attributes = {
+            k: v for k, v in trace['attributes'].items()
+            if k not in GRAPH_REFERENCE['defs']['metaKeys'] and
+            isinstance(v, dict) and v.get('_isSubplotObj')
+        }
         hr_name = trace.get('hrName', object_name)
 
         return {'role': 'object', 'name': object_name, 'hr_name': hr_name,
                 'is_array': False, 'parent': 'data',
                 'description': description, 'attributes': attributes,
-                'deprecated_attributes': deprecated_attributes, 'items': None}
+                'deprecated_attributes': deprecated_attributes,
+                'subplot_attributes': subplot_attributes, 'items': None}
 
     elif object_name == 'data':
 
         return {'role': 'object', 'name': 'data', 'hr_name': 'data',
                 'is_array': True, 'parent': 'figure', 'attributes': None,
-                'deprecated_attributes': None, 'items': TRACE_NAMES,
+                'deprecated_attributes': None, 'subplot_attributes': None,
+                'items': TRACE_NAMES,
                 'description': 'Array container for trace objects.'}
 
     elif object_name == 'layout':
@@ -343,6 +362,7 @@ def _get_object_info_from_name(object_name):
         # find and add layout keys from traces
         attributes = {}
         deprecated_attributes = {}
+        subplot_attributes = {}
         for trace_name in TRACE_NAMES:
             try:
                 path = ('traces', trace_name, 'layoutAttributes')
@@ -353,6 +373,8 @@ def _get_object_info_from_name(object_name):
                 for key, val in layout_attributes.items():
                     if key not in GRAPH_REFERENCE['defs']['metaKeys']:
                         attributes[key] = val
+                        if isinstance(val, dict) and val.get('_isSubplotObj'):
+                            subplot_attributes[key] = val
                 for key, val in layout_attributes.get('_deprecated', {}):
                     if key not in GRAPH_REFERENCE['defs']['metaKeys']:
                         deprecated_attributes[key] = val
@@ -362,6 +384,8 @@ def _get_object_info_from_name(object_name):
         for key, val in layout_attributes.items():
             if key not in GRAPH_REFERENCE['defs']['metaKeys']:
                 attributes[key] = val
+                if isinstance(val, dict) and val.get('_isSubplotObj'):
+                    subplot_attributes[key] = val
         for key, val in layout_attributes.get('_deprecated', {}):
             if key not in GRAPH_REFERENCE['defs']['metaKeys']:
                 deprecated_attributes[key] = val
@@ -369,7 +393,8 @@ def _get_object_info_from_name(object_name):
         return {'role': 'object', 'name': 'layout', 'hr_name': 'layout',
                 'is_array': False, 'parent': 'figure',
                 'attributes': attributes,
-                'deprecated_attributes': deprecated_attributes, 'items': None,
+                'deprecated_attributes': deprecated_attributes,
+                'subplot_attributes': subplot_attributes, 'items': None,
                 'description': 'Plot layout object container.'}
 
     else:  # assume it's 'figure'
@@ -381,7 +406,7 @@ def _get_object_info_from_name(object_name):
                 'is_array': False, 'parent': '',
                 'description': 'Top level of figure object.',
                 'attributes': attributes, 'deprecated_attributes': {},
-                'items': None}
+                'subplot_attributes': {}, 'items': None}
 
 
 # The ordering here is important.
