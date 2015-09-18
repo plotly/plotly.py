@@ -9,61 +9,6 @@ LINE_SIZE = 76
 TAB_SIZE = 4
 
 
-def get_class_create_args(object_name, list_class=list, dict_class=dict):
-    """
-    Graph objects are created dynamically, this assists that process.
-
-    We default to `list` and `dict` because importing `PlotlyDict` and
-    `PlotlyList` would be circular and doesn't make sense hierarchically.
-
-    :param (str|unicode) object_name: The object name from GRAPH_REFERENCE.
-    :param list_class: Either `list` or `PlotlyList`.
-    :param dict_class: Either `dict` or `PlotlyDict`.
-    :return: (str, type, dict) class_name, class_bases, and class_dict values.
-
-    """
-    object_paths = graph_reference.OBJECTS[object_name]
-
-    class_name = graph_reference.object_name_to_class_name(object_name)
-
-    if object_paths:
-        object_infos = [graph_reference.get_object_info(path, object_name)
-                        for path in object_paths]
-    else:
-        object_info = graph_reference.get_object_info(None, object_name)
-        object_infos = [object_info]
-
-    if object_infos[0]['is_array']:
-
-        _items = set()
-        for object_info in object_infos:
-            _items.update(object_info['items'])
-        _items = list(_items)
-        class_bases = (list_class, )
-        class_dict = {'__name__': class_name, '_name': object_name,
-                      '_items': _items}
-
-    else:
-
-        _attributes = set()
-        _deprecated_attributes = set()
-        _subplot_attributes = set()
-        for object_info in object_infos:
-            _attributes.update(object_info['attributes'])
-            _deprecated_attributes.update(object_info['deprecated_attributes'])
-            _subplot_attributes.update(object_info['subplot_attributes'])
-        _attributes = list(_attributes)
-        _deprecated_attributes = list(_deprecated_attributes)
-        _subplot_attributes = list(_subplot_attributes)
-        class_bases = (dict_class, )
-        class_dict = {'__name__': class_name, '_name': object_name,
-                      '_attributes': _attributes,
-                      '_deprecated_attributes': _deprecated_attributes,
-                      '_subplot_attributes': _subplot_attributes}
-
-    return class_name, class_bases, class_dict
-
-
 def make_doc(object_name):
     """
     Single path to create general documentation based on the object name.
@@ -75,9 +20,7 @@ def make_doc(object_name):
     :return: (str) The formatted doc string.
 
     """
-    _, class_bases, _ = get_class_create_args(object_name)
-
-    if class_bases[0] == list:
+    if object_name in graph_reference.ARRAYS:
         return _make_list_doc(object_name)
     else:
         return _make_dict_doc(object_name)
@@ -86,7 +29,7 @@ def make_doc(object_name):
 def _make_list_doc(name):
 
     # TODO: https://github.com/plotly/python-api/issues/289
-    items = get_class_create_args(name)[2]['_items']
+    items = graph_reference.ARRAYS[name]['items']
     items_classes = [graph_reference.object_name_to_class_name(item)
                      for item in items]
     doc = 'Documentation for {}.\n'.format(name)
@@ -100,7 +43,8 @@ def _make_list_doc(name):
 def _make_dict_doc(name):
 
     # TODO: https://github.com/plotly/python-api/issues/289
-    attributes = get_class_create_args(name)[2]['_attributes']
+    attributes = graph_reference.get_attributes(name)['valid_names']
+    attributes = sorted(attributes, key=sort_keys)
     doc = 'Documentation for {}'.format(name)
     doc = '\t' + '\n\t'.join(textwrap.wrap(doc, width=LINE_SIZE)) + '\n\n'
 
@@ -161,46 +105,49 @@ def get_role(parent, key, value=None):
     :returns: (bool)
 
     """
-    parents = parent.get_parents() + [parent]
-    parent_names = [p._name for p in parents]
+    if parent._name in graph_reference.TRACE_NAMES and key == 'type':
+        return 'info'
+    matches = []
+    deprecated_match_exists = False
+    for val in parent._get_attributes().values():
+        if not isinstance(val, dict):
+            continue
 
-    object_name = parent_names[-1]
-    try:
-        parent_object_name = parent_names[-2]
-    except IndexError:
-        parent_object_name = None
+        for k, v in val.items():
+            if k == key:
+                matches.append(v)
 
-    object_paths = graph_reference.OBJECTS[object_name]
-    if object_paths:
-        object_infos = [graph_reference.get_object_info(path, object_name)
-                        for path in object_paths]
+        for k, v in val.get('_deprecated', {}).items():
+            if k == key:
+                deprecated_match_exists = True
+                matches.append(v)
+
+    roles = []
+    for match in matches:
+
+        # TODO: this can go if role is included in deprecated attribute dicts.
+        if 'role' not in match:
+            continue
+
+        role = match['role']
+        array_ok = match.get('arrayOk')
+        if value is not None and array_ok:
+            iterable = hasattr(value, '__iter__')
+            stringy = isinstance(value, six.string_types)
+            dicty = isinstance(value, dict)
+            if iterable and not stringy and not dicty:
+                role = 'data'
+        roles.append(role)
+
+    # TODO: this can go if role is included in deprecated attribute dicts.
+    if not roles and deprecated_match_exists:
+        return 'info'  # worst that happens is we *don't* strip some style...
+
+    # TODO: this is ambiguous until the figure is in place...
+    if 'data' in roles:
+        role = 'data'
     else:
-        object_info = graph_reference.get_object_info(None, object_name)
-        object_infos = [object_info]
-
-    if parent_object_name is not None:
-        object_infos = [object_info for object_info in object_infos
-                        if object_info['parent'] == parent_object_name]
-
-    # TODO: I'd be curious to know if object_infos can have length > 1 ?
-    role = None
-    for object_info in object_infos:
-
-        # we assume the first match holds for all
-        if key in object_info['attributes']:
-            role = object_info['attributes'][key]['role']
-            array_ok = object_info['attributes'][key].get('arrayOk', False)
-
-            if value is not None and array_ok:
-                iterable = hasattr(value, '__iter__')
-                stringy = isinstance(value, six.string_types)
-                dicty = isinstance(value, dict)
-                if iterable and not stringy and not dicty:
-                    role = 'data'
-
-        if role == 'data':
-            break  # we do this to play it as conservatively as possible.
-
+        role = roles[0]
     return role
 
 

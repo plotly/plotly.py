@@ -23,7 +23,6 @@ _BACKWARDS_COMPAT_CLASS_NAME_TO_OBJECT_NAME = {
     'AngularAxis': 'angularaxis',
     'ColorBar': 'colorbar',
     'Area': 'scatter',
-    'Font': 'textfont',
     'Histogram2d': 'histogram2d',
     'Histogram2dContour': 'histogram2dcontour',
     'RadialAxis': 'radialaxis',
@@ -102,109 +101,221 @@ def object_name_to_class_name(object_name):
     return string
 
 
-def get_object_info(path, object_name):
+def get_attributes(object_name, parent_object_names=()):
     """
-    Can be used outside this module to get meta info about a graph object.
+    Returns *all* attribute information given the context of parents.
 
-    :param (tuple|None) path: A path inside GRAPH_REFERENCE to an object.
-    :param (str|unicode) object_name: The name of an object in GRAPH_REFERENCE.
+    The response has the form:
+    {
+      ('some', 'path'): {},
+      ('some', 'other', 'path'): {},
+      ...
+      'additional_attributes': {},
+      'valid_names': [],
+      'deprecated_names': [],
+      'subplot_names': []
+    }
+
+    There may be any number of paths mapping to attribute dicts. There will be
+    one attribute dict under 'additional_attributes' which will usually be
+    empty. Finally, there is some meta information in the form of lists under
+    the 'valid_names', 'deprecated_names', and 'subplot_names' keys.
+
+    :param (str|unicode) object_name: The object name whose attributes we want.
+    :param (list[str|unicode]) parent_object_names: Names of parent objects.
     :return: (dict)
 
     """
-    if path:
-        return _get_object_info_from_path(path, object_name)
-    else:
-        return _get_object_info_from_name(object_name)
+    object_dict = OBJECTS[object_name]
+
+    # If we patched this object, we may have added hard-coded attrs.
+    additional_attributes = object_dict['additional_attributes']
+
+    # We should also one or more paths where attributes are defined.
+    attribute_paths = list(object_dict['attribute_paths'])  # shallow copy
+
+    # If we have parent_names, some of these attribute paths may be invalid.
+    for parent_object_name in reversed(parent_object_names):
+        if parent_object_name in ARRAYS:
+            continue
+        parent_object_dict = OBJECTS[parent_object_name]
+        parent_attribute_paths = parent_object_dict['attribute_paths']
+        for path in list(attribute_paths):
+            if not _is_valid_sub_path(path, parent_attribute_paths):
+                attribute_paths.remove(path)
+
+    # We return a dict mapping paths to attributes. We also add in additional
+    # attributes if defined.
+    response = {path: utils.get_by_path(GRAPH_REFERENCE, path)
+                for path in attribute_paths}
+    response['additional_attributes'] = additional_attributes
+
+    # These are for documentation and quick lookups. They're just strings.
+    valid_names = set()
+    deprecated_names = set()
+    subplot_names = set()
+    for attributes in response.values():
+
+        for key, val in attributes.items():
+            if key not in GRAPH_REFERENCE['defs']['metaKeys']:
+                valid_names.add(key)
+                if isinstance(val, dict) and val.get('_isSubplotObj'):
+                    subplot_names.add(key)
+
+        deprecated_attributes = attributes.get('_deprecated', {})
+        for key, val in deprecated_attributes.items():
+            if key not in GRAPH_REFERENCE['defs']['metaKeys']:
+                valid_names.add(key)
+                deprecated_names.add(key)
+                if isinstance(val, dict) and val.get('_isSubplotObj'):
+                    subplot_names.add(key)
+
+    response['valid_names'] = valid_names
+    response['deprecated_names'] = deprecated_names
+    response['subplot_names'] = subplot_names
+
+    return response
 
 
-def attribute_is_array(attribute, parent_name):
+def _is_valid_sub_path(path, parent_paths):
     """
-    Returns True if attribute should be an special *array* object.
+    Check if a sub path is valid given an iterable of parent paths.
 
-    :param (str) attribute: Possibly the name of an object.
-    :param (str) parent_name: We need the parent object name as context.
+    :param (tuple[str]) path: The path that may be a sub path.
+    :param (list[tuple]) parent_paths: The known parent paths.
     :return: (bool)
 
+    Examples:
+
+        * ('a', 'b', 'c') is a valid subpath of ('a', )
+        * ('a', 'd') is not a valid subpath of ('b', )
+        * ('a', ) is not a valid subpath of ('a', 'b')
+        * ('anything',) is a valid subpath of ()
+
     """
-    if attribute not in OBJECTS:
-        return False
-
-    if OBJECTS[attribute]:
-        object_infos = [get_object_info(path, attribute)
-                        for path in OBJECTS[attribute]]
-    else:
-        object_info = get_object_info(None, attribute)
-        object_infos = [object_info]
-
-    for object_info in object_infos:
-
-        if object_info['parent'] == parent_name and object_info['is_array']:
+    if not parent_paths:
+        return True
+    for parent_path in parent_paths:
+        if path[:len(parent_path)] == parent_path:
             return True
-
     return False
 
 
 def _get_hr_name(object_name):
     """Get human readable object name from reference ('hrName')."""
-    object_paths = OBJECTS[object_name]
+    if object_name in ARRAYS:
+        return object_name  # TODO: how to handle hr name on array?
 
-    if object_paths:
-        object_infos = [get_object_info(path, object_name)
-                        for path in object_paths]
-    else:
-        object_info = get_object_info(None, object_name)
-        object_infos = [object_info]
+    object_dict = OBJECTS[object_name]
+    meta_paths = object_dict['meta_paths']
+    for meta_path in meta_paths:
+        meta_dict = utils.get_by_path(GRAPH_REFERENCE, meta_path)
+        if meta_dict.get('_isLinkedToArray'):
+            return object_name  # TODO: how to handle hr name on array?
+        if 'hrName' in meta_dict:
+            return meta_dict['hrName']
 
-    return object_infos[0]['hr_name']
-
-
-def _get_object_paths():
-    """
-    We lookup information based on its location in GRAPH_REFERENCE.
-
-    :return: (list[tuple])
-
-    """
-    object_paths = []
-    for node, path in utils.node_generator(GRAPH_REFERENCE):
-        if any([key in path for key in GRAPH_REFERENCE['defs']['metaKeys']]):
-            continue  # objects don't exist under nested meta keys
-        if node.get('role') == 'object':
-            object_paths.append(path)
-    return object_paths
+    return object_name  # default is to keep the original name
 
 
 def _get_objects():
     """
-    Return the main dict that we'll work with for graph objects.
+    Create a reorganization of graph reference which organizes by object name.
 
-    This maps object names to paths inside GRAPH_REFERENCE. If the object
-    doesn't have a path, no path is associated and methods are provided to look
-    the object up *by name*.
+    Each object can have *many* different definitions in the graph reference.
+    These possibilities get narrowed down when we have contextual information
+    about parent objects. For instance, Marker in Scatter has a different
+    definition than Marker in Pie. However, we need Marker, Scatter, and Pie
+    to exist on their own as well.
+
+    Each value has the form:
+    {
+        'meta_paths': [],
+        'attribute_paths': [],
+        'additional_attributes': {}
+    }
+
+    * meta_paths describes the top-most path where this object is defined
+    * attribute_paths describes all the locations where attributes exist
+    * additional_attributes can be used to hard-code (patch) the plot schema
 
     :return: (dict)
 
     """
     objects = {}
-    for object_path in OBJECT_PATHS:
+    for node, path in utils.node_generator(GRAPH_REFERENCE):
+        if any([key in path for key in GRAPH_REFERENCE['defs']['metaKeys']]):
+            continue  # objects don't exist under nested meta keys
 
-        name = object_path[-1]
-        value = utils.get_by_path(GRAPH_REFERENCE, object_path)
+        # note that arrays are *not* stored in objects! they're arrays!
+        if node.get('role') == 'object':
+            object_name = path[-1]
+            if node.get('_isLinkedToArray'):
+                object_name = object_name[:-1]
 
-        if value.get('_isLinkedToArray', False):
-            item_name = name[:-1]
-            if item_name not in objects:
-                objects[item_name] = []
-            objects[item_name].append(object_path)
+            if object_name not in objects:
+                objects[object_name] = {'meta_paths': [],
+                                        'attribute_paths': [],
+                                        'additional_attributes': {}}
 
-        if name not in objects:
-            objects[name] = []
-        objects[name].append(object_path)
+            if node.get('attributes'):
+                objects[object_name]['attribute_paths'].append(
+                    path + ('attributes', )
+                )
+            else:
+                objects[object_name]['attribute_paths'].append(path)
 
-    objects.update({trace_name: [] for trace_name in TRACE_NAMES})
-    objects.update(figure=[], data=[], layout=[])
+            objects[object_name]['meta_paths'].append(path)
 
     return objects
+
+
+def _patch_objects():
+    """Things like Layout, Figure, and Data need to be included."""
+    layout_attribute_paths = []
+    for node, path in utils.node_generator(GRAPH_REFERENCE):
+        if any([key in path for key in GRAPH_REFERENCE['defs']['metaKeys']]):
+            continue  # objects don't exist under nested meta keys
+
+        if path and path[-1] == 'layoutAttributes':
+            layout_attribute_paths.append(path)
+
+    for trace_name in TRACE_NAMES:
+        OBJECTS[trace_name] = {
+            'meta_paths': [('traces', trace_name)],
+            'attribute_paths': [('traces', trace_name, 'attributes')],
+            'additional_attributes': {}
+        }
+
+    OBJECTS['layout'] = {'meta_paths': [('layout', )],
+                         'attribute_paths': layout_attribute_paths,
+                         'additional_attributes': {}}
+
+    figure_attributes = {'layout': {'role': 'object'},
+                         'data': {'role': 'object', '_isLinkedToArray': True}}
+    OBJECTS['figure'] = {'meta_paths': [],
+                         'attribute_paths': [],
+                         'additional_attributes': figure_attributes}
+
+
+def _get_arrays():
+    """Very few arrays, but this dict is the complement of OBJECTS."""
+    arrays = {}
+    for object_name, object_dict in OBJECTS.items():
+        meta_paths = object_dict['meta_paths']
+        for meta_path in meta_paths:
+            meta_dict = utils.get_by_path(GRAPH_REFERENCE, meta_path)
+            if meta_dict.get('_isLinkedToArray'):
+
+                # TODO can we have multiply defined arrays?
+                arrays[object_name + 's'] = {'meta_paths': [meta_path],
+                                             'items': [object_name]}
+    return arrays
+
+
+def _patch_arrays():
+    """Adds information on our eventual Data array."""
+    ARRAYS['data'] = {'meta_paths': [('traces', )], 'items': list(TRACE_NAMES)}
 
 
 def _get_class_names_to_object_names():
@@ -219,6 +330,10 @@ def _get_class_names_to_object_names():
         class_name = object_name_to_class_name(object_name)
         class_names_to_object_names[class_name] = object_name
 
+    for array_name in ARRAYS:
+        class_name = object_name_to_class_name(array_name)
+        class_names_to_object_names[class_name] = array_name
+
     for class_name in _BACKWARDS_COMPAT_CLASS_NAME_TO_OBJECT_NAME:
         object_name = _BACKWARDS_COMPAT_CLASS_NAME_TO_OBJECT_NAME[class_name]
         class_names_to_object_names[class_name] = object_name
@@ -226,194 +341,15 @@ def _get_class_names_to_object_names():
     return class_names_to_object_names
 
 
-def _get_object_info_from_path(path, object_name):
-    """
-    Get object info given a path in GRAPH_REFERENCE.
-
-    :param (tuple) path: A valid path in GRAPH_REFERENCE.
-    :param (str|unicode) object_name: To differentiate item from parent array.
-
-    :return: (dict)
-
-    """
-    path_value = utils.get_by_path(GRAPH_REFERENCE, path)
-    if object_name == path[-1][:-1] and '_isLinkedToArray' in path_value:
-
-        attribute_container = utils.get_by_path(GRAPH_REFERENCE, path)
-
-        is_array = False
-        parent = path[-1]
-        name = parent[:-1]
-        hr_name = attribute_container.get('hrName', name)
-        description = attribute_container.get('description', '')
-        attributes = {k: v for k, v in attribute_container.items()
-                      if k not in GRAPH_REFERENCE['defs']['metaKeys']}
-        deprecated_attributes = {
-            k: v for k, v in attribute_container.get('_deprecated', {}).items()
-            if k not in GRAPH_REFERENCE['defs']['metaKeys']
-        }
-        subplot_attributes = {
-            k: v for k, v in attribute_container.items()
-            if k not in GRAPH_REFERENCE['defs']['metaKeys'] and
-            isinstance(v, dict) and v.get('_isSubplotObj')
-        }
-        items = None
-
-    else:
-
-        name = path[-1]
-        hr_name = path_value.get('hrName', name)
-
-        if path[-2] == 'attributes':
-            parent = path[-3]  # a trace
-        elif path[-2] == 'layoutAttributes':
-            parent = 'layout'
-        else:
-            parent = path[-2]
-
-        if '_isLinkedToArray' in path_value:
-
-            is_array = True
-            description = ''
-            attributes = None
-            deprecated_attributes = None
-            subplot_attributes = None
-            items = [name[:-1]]
-
-        else:
-
-            is_array = False
-            description = path_value.get('description', '')
-            attributes = {k: v for k, v in path_value.items()
-                          if k not in GRAPH_REFERENCE['defs']['metaKeys']}
-            deprecated_attributes = {
-                k: v for k, v in path_value.get('_deprecated', {}).items()
-                if k not in GRAPH_REFERENCE['defs']['metaKeys']
-            }
-            subplot_attributes = {
-                k: v for k, v in path_value.items()
-                if k not in GRAPH_REFERENCE['defs']['metaKeys'] and
-                isinstance(v, dict) and v.get('_isSubplotObj')
-            }
-            items = None
-
-    return {
-        'role': 'object',
-        'is_array': is_array,
-        'parent': parent,
-        'name': name,
-        'hr_name': hr_name,
-        'description': description,
-        'attributes': attributes,
-        'deprecated_attributes': deprecated_attributes,
-        'subplot_attributes': subplot_attributes,
-        'items': items
-    }
-
-
-def _get_object_info_from_name(object_name):
-    """
-    Get object info given an object name in OBJECTS.
-
-    If a valid path *could* have been used, this will fail. This is meant to be
-    a last resort to get the object info dict.
-
-    :param (str) object_name: The name of an object in OBJECTS.
-
-    :return: (dict)
-
-    """
-    if object_name not in ['figure', 'data', 'layout'] + TRACE_NAMES:
-        raise Exception('TBD')
-
-    if object_name in TRACE_NAMES:
-
-        trace = utils.get_by_path(GRAPH_REFERENCE, ('traces', object_name))
-        description = 'A {} trace'.format(object_name)
-        attributes = {k: v for k, v in trace['attributes'].items()}
-        attributes['type'] = {'role': 'info'}
-        deprecated_attributes = {
-            k: v for k, v in trace['attributes'].get('_deprecated', {}).items()
-            if k not in GRAPH_REFERENCE['defs']['metaKeys']
-        }
-        subplot_attributes = {
-            k: v for k, v in trace['attributes'].items()
-            if k not in GRAPH_REFERENCE['defs']['metaKeys'] and
-            isinstance(v, dict) and v.get('_isSubplotObj')
-        }
-        hr_name = trace.get('hrName', object_name)
-
-        return {'role': 'object', 'name': object_name, 'hr_name': hr_name,
-                'is_array': False, 'parent': 'data',
-                'description': description, 'attributes': attributes,
-                'deprecated_attributes': deprecated_attributes,
-                'subplot_attributes': subplot_attributes, 'items': None}
-
-    elif object_name == 'data':
-
-        return {'role': 'object', 'name': 'data', 'hr_name': 'data',
-                'is_array': True, 'parent': 'figure', 'attributes': None,
-                'deprecated_attributes': None, 'subplot_attributes': None,
-                'items': TRACE_NAMES,
-                'description': 'Array container for trace objects.'}
-
-    elif object_name == 'layout':
-
-        # find and add layout keys from traces
-        attributes = {}
-        deprecated_attributes = {}
-        subplot_attributes = {}
-        for trace_name in TRACE_NAMES:
-            try:
-                path = ('traces', trace_name, 'layoutAttributes')
-                layout_attributes = utils.get_by_path(GRAPH_REFERENCE, path)
-            except KeyError:
-                pass
-            else:
-                for key, val in layout_attributes.items():
-                    if key not in GRAPH_REFERENCE['defs']['metaKeys']:
-                        attributes[key] = val
-                        if isinstance(val, dict) and val.get('_isSubplotObj'):
-                            subplot_attributes[key] = val
-                for key, val in layout_attributes.get('_deprecated', {}):
-                    if key not in GRAPH_REFERENCE['defs']['metaKeys']:
-                        deprecated_attributes[key] = val
-
-        # find and add layout keys from layout
-        layout_attributes = GRAPH_REFERENCE['layout']['layoutAttributes']
-        for key, val in layout_attributes.items():
-            if key not in GRAPH_REFERENCE['defs']['metaKeys']:
-                attributes[key] = val
-                if isinstance(val, dict) and val.get('_isSubplotObj'):
-                    subplot_attributes[key] = val
-        for key, val in layout_attributes.get('_deprecated', {}):
-            if key not in GRAPH_REFERENCE['defs']['metaKeys']:
-                deprecated_attributes[key] = val
-
-        return {'role': 'object', 'name': 'layout', 'hr_name': 'layout',
-                'is_array': False, 'parent': 'figure',
-                'attributes': attributes,
-                'deprecated_attributes': deprecated_attributes,
-                'subplot_attributes': subplot_attributes, 'items': None,
-                'description': 'Plot layout object container.'}
-
-    else:  # assume it's 'figure'
-
-        attributes = {'data': _get_object_info_from_name('data'),
-                      'layout': _get_object_info_from_name('layout')}
-
-        return {'role': 'object', 'name': 'figure', 'hr_name': 'figure',
-                'is_array': False, 'parent': '',
-                'description': 'Top level of figure object.',
-                'attributes': attributes, 'deprecated_attributes': {},
-                'subplot_attributes': {}, 'items': None}
-
-
 # The ordering here is important.
 GRAPH_REFERENCE = get_graph_reference()
 
 # See http://blog.labix.org/2008/06/27/watch-out-for-listdictkeys-in-python-3
 TRACE_NAMES = list(GRAPH_REFERENCE['traces'].keys())
-OBJECT_PATHS = _get_object_paths()
+
 OBJECTS = _get_objects()
+_patch_objects()
+ARRAYS = _get_arrays()
+_patch_arrays()
+
 CLASS_NAMES_TO_OBJECT_NAMES = _get_class_names_to_object_names()

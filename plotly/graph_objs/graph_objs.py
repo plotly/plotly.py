@@ -40,6 +40,7 @@ class PlotlyBase(object):
 
     """
     _parent = None
+    _parent_key = None
 
     def get_path(self):
         """
@@ -53,10 +54,7 @@ class PlotlyBase(object):
         parents.reverse()
         children = [self] + parents[:-1]
         for parent, child in zip(parents, children):
-            if isinstance(parent, dict):
-                path.append(child._parent_key)
-            else:
-                path.append(parent.index(child))
+            path.append(child._parent_key)
         path.reverse()
         return tuple(path)
 
@@ -101,7 +99,6 @@ class PlotlyList(list, PlotlyBase):
 
     """
     _name = None
-    _items = set()
 
     def __init__(self, *args, **kwargs):
         if self._name is None:
@@ -110,6 +107,8 @@ class PlotlyList(list, PlotlyBase):
             )
 
         _raise = kwargs.get('_raise', True)
+        self.__dict__['_parent'] = kwargs.get('_parent')
+        self.__dict__['_parent_key'] = kwargs.get('_parent_key')
 
         if args and isinstance(args[0], dict):
             raise exceptions.PlotlyListEntryError(
@@ -131,11 +130,7 @@ class PlotlyList(list, PlotlyBase):
         super(PlotlyList, self).__init__()
 
         for index, value in enumerate(list(*args)):
-            try:
-                value = self.value_to_graph_object(index, value, _raise=_raise)
-            except exceptions.PlotlyGraphObjectError as err:
-                err.prepare()
-                raise
+            value = self.value_to_graph_object(index, value, _raise=_raise)
 
             if isinstance(value, PlotlyBase):
                 self.append(value)
@@ -153,7 +148,6 @@ class PlotlyList(list, PlotlyBase):
 
         value = self.value_to_graph_object(index, value, _raise=_raise)
         if isinstance(value, (PlotlyDict, PlotlyList)):
-            value.__dict__['_parent'] = self
             super(PlotlyList, self).__setitem__(index, value)
 
     def __setattr__(self, key, value):
@@ -168,7 +162,8 @@ class PlotlyList(list, PlotlyBase):
     def __copy__(self):
 
         # TODO: https://github.com/plotly/python-api/issues/291
-        return GraphObjectFactory.create(self._name, *self)
+        return GraphObjectFactory.create(self._name, _parent=self._parent,
+                                         _parent_key=self._parent_key, *self)
 
     def __deepcopy__(self, memodict={}):
 
@@ -179,7 +174,6 @@ class PlotlyList(list, PlotlyBase):
         """Override to enforce validation."""
         index = len(self)  # used for error messages
         value = self.value_to_graph_object(index, value)
-        value.__dict__['_parent'] = self
         super(PlotlyList, self).append(value)
 
     def extend(self, iterable):
@@ -192,7 +186,6 @@ class PlotlyList(list, PlotlyBase):
     def insert(self, index, value):
         """Override to enforce validation."""
         value = self.value_to_graph_object(index, value)
-        value.__dict__['_parent'] = self
         super(PlotlyList, self).insert(index, value)
 
     def value_to_graph_object(self, index, value, _raise=True):
@@ -210,17 +203,21 @@ class PlotlyList(list, PlotlyBase):
         """
         if not isinstance(value, dict):
             if _raise:
-                raise exceptions.PlotlyListEntryError(self, index, value)
+                e = exceptions.PlotlyListEntryError(self, index, value)
+                e.path = self.get_path() + (index, )
+                e.prepare()
+                raise e
             else:
                 return
 
-        for i, item in enumerate(self._items, 1):
+        items = graph_reference.ARRAYS[self._name]['items']
+        for i, item in enumerate(items, 1):
             try:
-                return GraphObjectFactory.create(item, _raise=_raise, **value)
-            except exceptions.PlotlyGraphObjectError as e:
-                if i == len(self._items) and _raise:
-                    e.add_to_error_path(index)
-                    e.prepare()
+                return GraphObjectFactory.create(item, _raise=_raise,
+                                                 _parent=self,
+                                                 _parent_key=index, **value)
+            except exceptions.PlotlyGraphObjectError:
+                if i == len(items) and _raise:
                     raise
 
     def update(self, changes, make_copies=False):
@@ -324,10 +321,8 @@ class PlotlyDict(dict, PlotlyBase):
 
     """
     _name = None
-    _attributes = set()
-    _deprecated_attributes = set()
-    _subplot_attributes = set()
     _parent_key = None
+    _attributes = None
 
     def __init__(self, *args, **kwargs):
         if self._name is None:
@@ -336,6 +331,8 @@ class PlotlyDict(dict, PlotlyBase):
             )
 
         _raise = kwargs.pop('_raise', True)
+        self.__dict__['_parent'] = kwargs.pop('_parent', None)
+        self.__dict__['_parent_key'] = kwargs.pop('_parent_key', None)
 
         super(PlotlyDict, self).__init__()
 
@@ -345,17 +342,11 @@ class PlotlyDict(dict, PlotlyBase):
         # force key-value pairs to go through validation
         d = {key: val for key, val in dict(*args, **kwargs).items()}
         for key, val in d.items():
-            try:
-                self.__setitem__(key, val, _raise=_raise)
-            except exceptions.PlotlyGraphObjectError as err:
-                err.prepare()
-                raise
+            self.__setitem__(key, val, _raise=_raise)
 
     def __dir__(self):
         """Dynamically return the existing and possible attributes."""
-        attrs = self.__dict__.keys()
-        attrs += [attr for attr in dir(dict()) if attr not in attrs]
-        return sorted(self._attributes) + attrs
+        return sorted(list(self._get_attributes()['valid_names']))
 
     def __getitem__(self, key):
         """Calls __missing__ when key is not found. May mutate object."""
@@ -374,22 +365,21 @@ class PlotlyDict(dict, PlotlyBase):
                 raise TypeError('Key must be string, not {}'.format(type(key)))
             return
 
-        if key.endswith('src') and key in self._attributes:
-            value = graph_objs_tools.assign_id_to_src(key, value)
-            return super(PlotlyDict, self).__setitem__(key, value)
+        if key.endswith('src'):
+            if key in self._get_attributes()['valid_names']:
+                value = graph_objs_tools.assign_id_to_src(key, value)
+                return super(PlotlyDict, self).__setitem__(key, value)
 
         subplot_key = self._get_subplot_key(key)
         if subplot_key is not None:
             value = self.value_to_graph_object(subplot_key, value,
                                                _raise=_raise)
             if isinstance(value, (PlotlyDict, PlotlyList)):
-                value.__dict__['_parent'] = self
-                value.__dict__['_parent_key'] = key
                 return super(PlotlyDict, self).__setitem__(key, value)
 
-        if key not in self._attributes:
+        if key not in self._get_attributes()['valid_names']:
 
-            if key in self._deprecated_attributes:
+            if key in self._get_attributes()['deprecated_names']:
                 warnings.warn(
                     "Oops! '{}' has been deprecated in '{}'\n"
                     "This may still work, but you should update your code "
@@ -400,15 +390,15 @@ class PlotlyDict(dict, PlotlyBase):
                 return super(PlotlyDict, self).__setitem__(key, value)
             else:
                 if _raise:
-                    raise exceptions.PlotlyDictKeyError(self, key)
+                    e = exceptions.PlotlyDictKeyError(self, key)
+                    e.path = self.get_path() + (key, )
+                    e.prepare()
+                    raise e
                 return
 
         if graph_objs_tools.get_role(self, key) == 'object':
             value = self.value_to_graph_object(key, value, _raise=_raise)
-            if isinstance(value, (PlotlyDict, PlotlyList)):
-                value.__dict__['_parent'] = self
-                value.__dict__['_parent_key'] = key
-            else:
+            if not isinstance(value, (PlotlyDict, PlotlyList)):
                 return
 
         super(PlotlyDict, self).__setitem__(key, value)
@@ -423,7 +413,8 @@ class PlotlyDict(dict, PlotlyBase):
     def __copy__(self):
 
         # TODO: https://github.com/plotly/python-api/issues/291
-        return GraphObjectFactory.create(self._name, **self)
+        return GraphObjectFactory.create(self._name, _parent=self.parent,
+                                         _parent_key=self._parent_key, **self)
 
     def __deepcopy__(self, memodict={}):
 
@@ -432,26 +423,35 @@ class PlotlyDict(dict, PlotlyBase):
 
     def __missing__(self, key):
         """Mimics defaultdict. This is called from __getitem__ when key DNE."""
-        if key in self._attributes:
+        if key in self._get_attributes()['valid_names']:
             if graph_objs_tools.get_role(self, key) == 'object':
-                value = GraphObjectFactory.create(key)
-                value.__dict__['_parent'] = self
-                value.__dict__['_parent_key'] = key
+                value = GraphObjectFactory.create(key, _parent=self,
+                                                  _parent_key=key)
                 return super(PlotlyDict, self).__setitem__(key, value)
 
         subplot_key = self._get_subplot_key(key)
         if subplot_key is not None:
-            value = GraphObjectFactory.create(subplot_key)
-            value.__dict__['_parent'] = self
-            value.__dict__['_parent_key'] = key
+            value = GraphObjectFactory.create(subplot_key, _parent=self,
+                                              _parent_key=key)
             super(PlotlyDict, self).__setitem__(key, value)
+
+    def _get_attributes(self):
+        """See `graph_reference.get_attributes`."""
+        if self._attributes is None:
+            parents = self.get_parents()
+            parent_object_names = [parent._name for parent in parents]
+            attributes = graph_reference.get_attributes(
+                self._name, parent_object_names
+            )
+            self.__dict__['_attributes'] = attributes
+        return self._attributes
 
     def _get_subplot_key(self, key):
         """Some keys can have appended integers, this handles that."""
         match = re.search(r'(?P<digits>\d+$)', key)
         if match:
             root_key = key[:match.start()]
-            if (root_key in self._subplot_attributes and
+            if (root_key in self._get_attributes()['subplot_names'] and
                     not match.group('digits').startswith('0')):
                 return root_key
 
@@ -466,44 +466,24 @@ class PlotlyDict(dict, PlotlyBase):
         :return: (PlotlyList|PlotlyDict|None) `None` if `_raise` and failure.
 
         """
-        if graph_reference.attribute_is_array(key, self._name):
+        if key in graph_reference.ARRAYS:
             val_types = (list, )
-            if not isinstance(value, val_types):
-                if _raise:
-                    e = exceptions.PlotlyDictValueError(self, key, value,
-                                                        val_types)
-                    e.add_to_error_path(key)
-                    e.prepare()
-                    raise e
-                else:
-                    return
-            try:
-                graph_object = GraphObjectFactory.create(key, value,
-                                                         _raise=_raise)
-            except exceptions.PlotlyGraphObjectError as e:
-                e.add_to_error_path(key)
-                e.prepare()
-                raise e
         else:
             val_types = (dict, )
-            if not isinstance(value, val_types):
-                if _raise:
-                    e = exceptions.PlotlyDictValueError(self, key, value,
-                                                        val_types)
-                    e.add_to_error_path(key)
-                    e.prepare()
-                    raise e
-                else:
-                    return
-            try:
-                graph_object = GraphObjectFactory.create(key, value,
-                                                         _raise=_raise)
-            except exceptions.PlotlyGraphObjectError as e:
-                e.add_to_error_path(key)
+
+        if not isinstance(value, val_types):
+            if _raise:
+                e = exceptions.PlotlyDictValueError(self, key, value,
+                                                    val_types)
+                e.path = self.get_path() + (key, )
                 e.prepare()
                 raise e
+            else:
+                return
 
-        return graph_object  # this can be `None` when `_raise == False`
+        # this can be `None` when `_raise == False`
+        return GraphObjectFactory.create(key, value, _raise=_raise,
+                                         _parent=self, _parent_key=key)
 
     def update(self, dict1=None, **dict2):
         """
@@ -709,22 +689,11 @@ class Figure(PlotlyDict):
     """
     _name = 'figure'
 
-    _attributes = set(graph_reference.get_object_info(
-        None, 'figure'
-    )['attributes'])
-
-    _deprecated_attributes = set(graph_reference.get_object_info(
-        None, 'figure'
-    )['deprecated_attributes'])
-
-    _subplot_attributes = set(graph_reference.get_object_info(
-        None, 'figure'
-    )['subplot_attributes'])
-
     def __init__(self, *args, **kwargs):
         super(Figure, self).__init__(*args, **kwargs)
         if 'data' not in self:
-            self.data = Data()
+            self.data = GraphObjectFactory.create('data', _parent=self,
+                                                  _parent_key='data')
 
     def get_data(self, flatten=False):
         """
@@ -829,7 +798,6 @@ class Data(PlotlyList):
 
     """
     _name = 'data'
-    _items = set(graph_reference.TRACE_NAMES)
 
     def value_to_graph_object(self, index, value, _raise=True):
 
@@ -842,18 +810,15 @@ class Data(PlotlyList):
                 return
 
         item = value.get('type', 'scatter')
-        if item not in self._items:
+        if item not in graph_reference.ARRAYS['data']['items']:
             if _raise:
                 err = exceptions.PlotlyListEntryError(self, index, value)
                 err.add_note("Entry does not have a valid 'type' key")
                 err.add_to_error_path(index)
                 raise err
 
-        try:
-            return GraphObjectFactory.create(item, _raise=_raise, **value)
-        except exceptions.PlotlyGraphObjectError as e:
-            e.add_to_error_path(index)
-            raise
+        return GraphObjectFactory.create(item, _raise=_raise, _parent=self,
+                                         _parent_key=index, **value)
 
     def get_data(self, flatten=False):
         """
@@ -890,26 +855,6 @@ class Data(PlotlyList):
             return super(Data, self).get_data(flatten=flatten)
 
 
-class Layout(PlotlyDict):
-    """
-    Container for plot layout information.
-
-    """
-    _name = 'layout'
-
-    _attributes = set(graph_reference.get_object_info(
-        None, 'layout'
-    )['attributes'])
-
-    _deprecated_attributes = set(graph_reference.get_object_info(
-        None, 'layout'
-    )['deprecated_attributes'])
-
-    _subplot_attributes = set(graph_reference.get_object_info(
-        None, 'layout'
-    )['subplot_attributes'])
-
-
 Trace = dict  # for backwards compat.
 
 
@@ -928,7 +873,8 @@ class GraphObjectFactory(object):
         :return: (PlotlyList|PlotlyDict) The instantiated graph object.
 
         """
-        if object_name not in graph_reference.OBJECTS:
+        if (object_name not in graph_reference.OBJECTS and
+                object_name not in graph_reference.ARRAYS):
             raise Exception('tbd')  # TODO
         class_name = graph_reference.object_name_to_class_name(object_name)
         graph_object_class = globals()[class_name]
@@ -943,17 +889,23 @@ def _add_classes_to_globals(globals):
     :param (dict) globals: The globals() dict from this module.
 
     """
-    for object_name in graph_reference.OBJECTS:
+    object_names = list(graph_reference.OBJECTS.keys())
+    array_names = list(graph_reference.ARRAYS.keys())
+    for object_name in object_names + array_names:
 
-        if object_name in ['figure', 'data', 'layout']:
+        if object_name in ['figure', 'data']:
             continue  # we manually define these
 
-        class_name, class_bases, class_dict = \
-            graph_objs_tools.get_class_create_args(object_name,
-                                                   list_class=PlotlyList,
-                                                   dict_class=PlotlyDict)
         doc = graph_objs_tools.make_doc(object_name)
-        class_dict.update(__doc__=doc, __name__=class_name)
+        class_name = graph_reference.object_name_to_class_name(object_name)
+        if object_name in graph_reference.ARRAYS:
+            class_bases = (PlotlyList, )
+        else:
+            class_bases = (PlotlyDict, )
+
+        class_dict = {'__doc__': doc, '__name__': class_name,
+                      '_name': object_name}
+
         cls = type(str(class_name), class_bases, class_dict)
 
         globals[class_name] = cls
