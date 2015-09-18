@@ -130,7 +130,7 @@ class PlotlyList(list, PlotlyBase):
         super(PlotlyList, self).__init__()
 
         for index, value in enumerate(list(*args)):
-            value = self.value_to_graph_object(index, value, _raise=_raise)
+            value = self._value_to_graph_object(index, value, _raise=_raise)
 
             if isinstance(value, PlotlyBase):
                 self.append(value)
@@ -146,7 +146,7 @@ class PlotlyList(list, PlotlyBase):
         if index >= len(self):
             raise IndexError(index)
 
-        value = self.value_to_graph_object(index, value, _raise=_raise)
+        value = self._value_to_graph_object(index, value, _raise=_raise)
         if isinstance(value, (PlotlyDict, PlotlyList)):
             super(PlotlyList, self).__setitem__(index, value)
 
@@ -173,22 +173,22 @@ class PlotlyList(list, PlotlyBase):
     def append(self, value):
         """Override to enforce validation."""
         index = len(self)  # used for error messages
-        value = self.value_to_graph_object(index, value)
+        value = self._value_to_graph_object(index, value)
         super(PlotlyList, self).append(value)
 
     def extend(self, iterable):
         """Override to enforce validation."""
         for value in iterable:
             index = len(self)
-            value = self.value_to_graph_object(index, value)
+            value = self._value_to_graph_object(index, value)
             super(PlotlyList, self).append(value)
 
     def insert(self, index, value):
         """Override to enforce validation."""
-        value = self.value_to_graph_object(index, value)
+        value = self._value_to_graph_object(index, value)
         super(PlotlyList, self).insert(index, value)
 
-    def value_to_graph_object(self, index, value, _raise=True):
+    def _value_to_graph_object(self, index, value, _raise=True):
         """
         Attempt to change the given value into a graph object.
 
@@ -372,8 +372,8 @@ class PlotlyDict(dict, PlotlyBase):
 
         subplot_key = self._get_subplot_key(key)
         if subplot_key is not None:
-            value = self.value_to_graph_object(subplot_key, value,
-                                               _raise=_raise)
+            value = self._value_to_graph_object(subplot_key, value,
+                                                _raise=_raise)
             if isinstance(value, (PlotlyDict, PlotlyList)):
                 return super(PlotlyDict, self).__setitem__(key, value)
 
@@ -397,7 +397,7 @@ class PlotlyDict(dict, PlotlyBase):
                 return
 
         if graph_objs_tools.get_role(self, key) == 'object':
-            value = self.value_to_graph_object(key, value, _raise=_raise)
+            value = self._value_to_graph_object(key, value, _raise=_raise)
             if not isinstance(value, (PlotlyDict, PlotlyList)):
                 return
 
@@ -455,7 +455,7 @@ class PlotlyDict(dict, PlotlyBase):
                     not match.group('digits').startswith('0')):
                 return root_key
 
-    def value_to_graph_object(self, key, value, _raise=True):
+    def _value_to_graph_object(self, key, value, _raise=True):
         """
         Attempt to convert value to graph object.
 
@@ -799,7 +799,7 @@ class Data(PlotlyList):
     """
     _name = 'data'
 
-    def value_to_graph_object(self, index, value, _raise=True):
+    def _value_to_graph_object(self, index, value, _raise=True):
 
         if not isinstance(value, dict):
             if _raise:
