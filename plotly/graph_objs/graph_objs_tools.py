@@ -108,7 +108,6 @@ def get_role(parent, key, value=None):
     if parent._name in graph_reference.TRACE_NAMES and key == 'type':
         return 'info'
     matches = []
-    deprecated_match_exists = False
     for val in parent._get_attributes().values():
         if not isinstance(val, dict):
             continue
@@ -119,16 +118,10 @@ def get_role(parent, key, value=None):
 
         for k, v in val.get('_deprecated', {}).items():
             if k == key:
-                deprecated_match_exists = True
                 matches.append(v)
 
     roles = []
     for match in matches:
-
-        # TODO: this can go if role is included in deprecated attribute dicts.
-        if 'role' not in match:
-            continue
-
         role = match['role']
         array_ok = match.get('arrayOk')
         if value is not None and array_ok:
@@ -138,10 +131,6 @@ def get_role(parent, key, value=None):
             if iterable and not stringy and not dicty:
                 role = 'data'
         roles.append(role)
-
-    # TODO: this can go if role is included in deprecated attribute dicts.
-    if not roles and deprecated_match_exists:
-        return 'info'  # worst that happens is we *don't* strip some style...
 
     # TODO: this is ambiguous until the figure is in place...
     if 'data' in roles:
