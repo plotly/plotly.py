@@ -16,6 +16,7 @@ import six
 from plotly import files, utils
 
 GRAPH_REFERENCE_PATH = '/v2/plot-schema'
+GRAPH_REFERENCE_DOWNLOAD_TIMEOUT = 5  # seconds
 
 
 # for backwards compat, we need to add a few class names
@@ -61,7 +62,8 @@ def get_graph_reference():
                                                 GRAPH_REFERENCE_PATH, sha1)
 
     try:
-        response = requests.get(graph_reference_url)
+        response = requests.get(graph_reference_url,
+                                timeout=GRAPH_REFERENCE_DOWNLOAD_TIMEOUT)
         response.raise_for_status()
     except requests.exceptions.RequestException:
         if not graph_reference:
