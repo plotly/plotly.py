@@ -222,7 +222,9 @@
             "annotations": {
                 "_deprecated": {
                     "ref": {
-                        "description": "Obsolete. Set `xref` and `yref` separately instead."
+                        "description": "Obsolete. Set `xref` and `yref` separately instead.",
+                        "role": "info",
+                        "valType": "string"
                     }
                 },
                 "_isLinkedToArray": true,
@@ -1089,7 +1091,9 @@
             "scene": {
                 "_deprecated": {
                     "cameraposition": {
-                        "description": "Obsolete. Use `camera` instead."
+                        "description": "Obsolete. Use `camera` instead.",
+                        "role": "info",
+                        "valType": "info_array"
                     }
                 },
                 "_isSubplotObj": true,
@@ -2522,7 +2526,9 @@
             "xaxis": {
                 "_deprecated": {
                     "autotick": {
-                        "description": "Obsolete. Set `tickmode` to *auto* for old `autotick` *true* behavior. Set `tickmode` to *linear* for `autotick` *false*."
+                        "description": "Obsolete. Set `tickmode` to *auto* for old `autotick` *true* behavior. Set `tickmode` to *linear* for `autotick` *false*.",
+                        "role": "info",
+                        "valType": "boolean"
                     }
                 },
                 "_isSubplotObj": true,
@@ -2922,7 +2928,9 @@
             "yaxis": {
                 "_deprecated": {
                     "autotick": {
-                        "description": "Obsolete. Set `tickmode` to *auto* for old `autotick` *true* behavior. Set `tickmode` to *linear* for `autotick` *false*."
+                        "description": "Obsolete. Set `tickmode` to *auto* for old `autotick` *true* behavior. Set `tickmode` to *linear* for `autotick` *false*.",
+                        "role": "info",
+                        "valType": "boolean"
                     }
                 },
                 "_isSubplotObj": true,
@@ -3763,7 +3771,13 @@
             "attributes": {
                 "_deprecated": {
                     "bardir": {
-                        "description": "Renamed to `orientation`."
+                        "description": "Renamed to `orientation`.",
+                        "role": "info",
+                        "valType": "enumerated",
+                        "values": [
+                            "v",
+                            "h"
+                        ]
                     }
                 },
                 "dx": {
@@ -3781,7 +3795,9 @@
                 "error_x": {
                     "_deprecated": {
                         "opacity": {
-                            "description": "Obsolete. Use the alpha channel in error bar `color` to set the opacity."
+                            "description": "Obsolete. Use the alpha channel in error bar `color` to set the opacity.",
+                            "role": "style",
+                            "valType": "number"
                         }
                     },
                     "array": {
@@ -3882,7 +3898,9 @@
                 "error_y": {
                     "_deprecated": {
                         "opacity": {
-                            "description": "Obsolete. Use the alpha channel in error bar `color` to set the opacity."
+                            "description": "Obsolete. Use the alpha channel in error bar `color` to set the opacity.",
+                            "role": "style",
+                            "valType": "number"
                         }
                     },
                     "array": {
@@ -7010,7 +7028,13 @@
             "attributes": {
                 "_deprecated": {
                     "bardir": {
-                        "description": "Renamed to `orientation`."
+                        "description": "Renamed to `orientation`.",
+                        "role": "info",
+                        "valType": "enumerated",
+                        "values": [
+                            "v",
+                            "h"
+                        ]
                     }
                 },
                 "autobinx": {
@@ -7040,7 +7064,9 @@
                 "error_x": {
                     "_deprecated": {
                         "opacity": {
-                            "description": "Obsolete. Use the alpha channel in error bar `color` to set the opacity."
+                            "description": "Obsolete. Use the alpha channel in error bar `color` to set the opacity.",
+                            "role": "style",
+                            "valType": "number"
                         }
                     },
                     "array": {
@@ -7141,7 +7167,9 @@
                 "error_y": {
                     "_deprecated": {
                         "opacity": {
-                            "description": "Obsolete. Use the alpha channel in error bar `color` to set the opacity."
+                            "description": "Obsolete. Use the alpha channel in error bar `color` to set the opacity.",
+                            "role": "style",
+                            "valType": "number"
                         }
                     },
                     "array": {
@@ -10358,7 +10386,9 @@
                 "error_x": {
                     "_deprecated": {
                         "opacity": {
-                            "description": "Obsolete. Use the alpha channel in error bar `color` to set the opacity."
+                            "description": "Obsolete. Use the alpha channel in error bar `color` to set the opacity.",
+                            "role": "style",
+                            "valType": "number"
                         }
                     },
                     "array": {
@@ -10459,7 +10489,9 @@
                 "error_y": {
                     "_deprecated": {
                         "opacity": {
-                            "description": "Obsolete. Use the alpha channel in error bar `color` to set the opacity."
+                            "description": "Obsolete. Use the alpha channel in error bar `color` to set the opacity.",
+                            "role": "style",
+                            "valType": "number"
                         }
                     },
                     "array": {
@@ -11670,7 +11702,9 @@
                 "error_x": {
                     "_deprecated": {
                         "opacity": {
-                            "description": "Obsolete. Use the alpha channel in error bar `color` to set the opacity."
+                            "description": "Obsolete. Use the alpha channel in error bar `color` to set the opacity.",
+                            "role": "style",
+                            "valType": "number"
                         }
                     },
                     "array": {
@@ -11771,7 +11805,9 @@
                 "error_y": {
                     "_deprecated": {
                         "opacity": {
-                            "description": "Obsolete. Use the alpha channel in error bar `color` to set the opacity."
+                            "description": "Obsolete. Use the alpha channel in error bar `color` to set the opacity.",
+                            "role": "style",
+                            "valType": "number"
                         }
                     },
                     "array": {
@@ -11872,7 +11908,9 @@
                 "error_z": {
                     "_deprecated": {
                         "opacity": {
-                            "description": "Obsolete. Use the alpha channel in error bar `color` to set the opacity."
+                            "description": "Obsolete. Use the alpha channel in error bar `color` to set the opacity.",
+                            "role": "style",
+                            "valType": "number"
                         }
                     },
                     "array": {
