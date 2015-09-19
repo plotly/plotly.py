@@ -9,7 +9,6 @@ Functions that USERS will possibly want access to.
 """
 from __future__ import absolute_import
 
-import os.path
 import warnings
 
 import six
@@ -19,10 +18,10 @@ import math
 
 from plotly import utils
 from plotly import exceptions
+from plotly import graph_reference
 from plotly import session
-
-from plotly.graph_objs import graph_objs
-from plotly.graph_objs import Scatter, Marker
+from plotly.files import (CONFIG_FILE, CREDENTIALS_FILE, FILE_CONTENT,
+                          GRAPH_REFERENCE_FILE, check_file_permissions)
 
 
 # Warning format
@@ -58,39 +57,6 @@ try:
 except ImportError:
     _scipy_imported = False
 
-PLOTLY_DIR = os.path.join(os.path.expanduser("~"), ".plotly")
-CREDENTIALS_FILE = os.path.join(PLOTLY_DIR, ".credentials")
-CONFIG_FILE = os.path.join(PLOTLY_DIR, ".config")
-TEST_DIR = os.path.join(os.path.expanduser("~"), ".test")
-TEST_FILE = os.path.join(PLOTLY_DIR, ".permission_test")
-
-# this sets both the DEFAULTS and the TYPES for these items
-_FILE_CONTENT = {CREDENTIALS_FILE: {'username': '',
-                                    'api_key': '',
-                                    'proxy_username': '',
-                                    'proxy_password': '',
-                                    'stream_ids': []},
-                 CONFIG_FILE: {'plotly_domain': 'https://plot.ly',
-                               'plotly_streaming_domain': 'stream.plot.ly',
-                               'plotly_api_domain': 'https://api.plot.ly',
-                               'plotly_ssl_verification': True,
-                               'plotly_proxy_authorization': False,
-                               'world_readable': True}}
-
-
-try:
-    os.mkdir(TEST_DIR)
-    os.rmdir(TEST_DIR)
-    if not os.path.exists(PLOTLY_DIR):
-        os.mkdir(PLOTLY_DIR)
-    f = open(TEST_FILE, 'w')
-    f.write('testing\n')
-    f.close()
-    os.remove(TEST_FILE)
-    _file_permissions = True
-except:
-    _file_permissions = False
-
 
 def get_config_defaults():
     """
@@ -102,28 +68,30 @@ def get_config_defaults():
             # do something
 
     """
-    return dict(_FILE_CONTENT[CONFIG_FILE])  # performs a shallow copy
-
-
-def check_file_permissions():
-    return _file_permissions
+    return dict(FILE_CONTENT[CONFIG_FILE])  # performs a shallow copy
 
 
 def ensure_local_plotly_files():
     """Ensure that filesystem is setup/filled out in a valid way"""
-    if _file_permissions:
+    if check_file_permissions():
         for fn in [CREDENTIALS_FILE, CONFIG_FILE]:
             utils.ensure_file_exists(fn)
             contents = utils.load_json_dict(fn)
-            for key, val in list(_FILE_CONTENT[fn].items()):
+            for key, val in list(FILE_CONTENT[fn].items()):
                 # TODO: removed type checking below, may want to revisit
                 if key not in contents:
                     contents[key] = val
             contents_keys = list(contents.keys())
             for key in contents_keys:
-                if key not in _FILE_CONTENT[fn]:
+                if key not in FILE_CONTENT[fn]:
                     del contents[key]
             utils.save_json_dict(fn, contents)
+
+        # make a request to get graph reference if DNE.
+        utils.ensure_file_exists(GRAPH_REFERENCE_FILE)
+        utils.save_json_dict(GRAPH_REFERENCE_FILE,
+                             graph_reference.GRAPH_REFERENCE)
+
     else:
         warnings.warn("Looks like you don't have 'read-write' permission to "
                       "your 'home' ('~') directory or to our '~/.plotly' "
@@ -150,7 +118,7 @@ def set_credentials_file(username=None,
     :param (str) proxy_password: The pw associated with your Proxy un
 
     """
-    if not _file_permissions:
+    if not check_file_permissions():
         raise exceptions.PlotlyError("You don't have proper file permissions "
                                      "to run this function.")
     ensure_local_plotly_files()  # make sure what's there is OK
@@ -178,11 +146,11 @@ def get_credentials_file(*args):
         get_credentials_file('username')
 
     """
-    if _file_permissions:
+    if check_file_permissions():
         ensure_local_plotly_files()  # make sure what's there is OK
         return utils.load_json_dict(CREDENTIALS_FILE, *args)
     else:
-        return _FILE_CONTENT[CREDENTIALS_FILE]
+        return FILE_CONTENT[CREDENTIALS_FILE]
 
 
 def reset_credentials_file():
@@ -209,7 +177,7 @@ def set_config_file(plotly_domain=None,
     :param (bool) world_readable: True = public, False = private
 
     """
-    if not _file_permissions:
+    if not check_file_permissions():
         raise exceptions.PlotlyError("You don't have proper file permissions "
                                      "to run this function.")
     ensure_local_plotly_files()  # make sure what's there is OK
@@ -253,11 +221,11 @@ def get_config_file(*args):
         get_config_file('plotly_domain')
 
     """
-    if _file_permissions:
+    if check_file_permissions():
         ensure_local_plotly_files()  # make sure what's there is OK
         return utils.load_json_dict(CONFIG_FILE, *args)
     else:
-        return _FILE_CONTENT[CONFIG_FILE]
+        return FILE_CONTENT[CONFIG_FILE]
 
 
 def reset_config_file():
@@ -525,6 +493,8 @@ def get_subplots(rows=1, columns=1, print_grid=False, **kwargs):
         Space between subplot rows.
 
     """
+    # TODO: protected until #282
+    from plotly.graph_objs import graph_objs
 
     warnings.warn(
         "tools.get_subplots is depreciated. "
@@ -782,6 +752,8 @@ def make_subplots(rows=1, cols=1,
             * h (float or 'to_end', default='to_end') inset height
                   in fraction of cell height ('to_end': to cell top edge)
     """
+    # TODO: protected until #282
+    from plotly.graph_objs import graph_objs
 
     # Throw exception for non-integer rows and cols
     if not isinstance(rows, int) or rows <= 0:
@@ -1296,6 +1268,8 @@ def get_valid_graph_obj(obj, obj_type=None):
     CAREFUL: this will *silently* strip out invalid pieces of the object.
 
     """
+    # TODO: Deprecate or move. #283
+    from plotly.graph_objs import graph_objs
     try:
         new_obj = graph_objs.get_class_instance_by_name(
             obj.__class__.__name__)
@@ -1323,6 +1297,8 @@ def validate(obj, obj_type):
     valid 'obj_type' graph object.
 
     """
+    # TODO: Deprecate or move. #283
+    from plotly.graph_objs import graph_objs
     try:
         obj_type = graph_objs.KEY_TO_NAME[obj_type]
     except KeyError:
@@ -1665,6 +1641,8 @@ class FigureFactory(object):
         py.plot(fig, filename='quiver')
         ```
         """
+        # TODO: protected until #282
+        from plotly.graph_objs import graph_objs
         FigureFactory._validate_equal_length(x, y, u, v)
         FigureFactory._validate_positive_scalars(arrow_scale=arrow_scale,
                                                  scale=scale)
@@ -1673,9 +1651,9 @@ class FigureFactory(object):
                                  arrow_scale, angle).get_barbs()
         arrow_x, arrow_y = _Quiver(x, y, u, v, scale,
                                    arrow_scale, angle).get_quiver_arrows()
-        quiver = Scatter(x=barb_x + arrow_x,
-                         y=barb_y + arrow_y,
-                         mode='lines', **kwargs)
+        quiver = graph_objs.Scatter(x=barb_x + arrow_x,
+                                    y=barb_y + arrow_y,
+                                    mode='lines', **kwargs)
 
         data = [quiver]
         layout = graph_objs.Layout(hovermode='closest')
@@ -1766,6 +1744,8 @@ class FigureFactory(object):
         py.plot(fig, filename='streamline')
         ```
         """
+        # TODO: protected until #282
+        from plotly.graph_objs import graph_objs
         FigureFactory._validate_equal_length(x, y)
         FigureFactory._validate_equal_length(u, v)
         FigureFactory._validate_streamline(x, y)
@@ -1779,9 +1759,9 @@ class FigureFactory(object):
                                        density, angle,
                                        arrow_scale).get_streamline_arrows()
 
-        streamline = Scatter(x=streamline_x + arrow_x,
-                             y=streamline_y + arrow_y,
-                             mode='lines', **kwargs)
+        streamline = graph_objs.Scatter(x=streamline_x + arrow_x,
+                                        y=streamline_y + arrow_y,
+                                        mode='lines', **kwargs)
 
         data = [streamline]
         layout = graph_objs.Layout(hovermode='closest')
@@ -1992,6 +1972,8 @@ class FigureFactory(object):
         py.iplot(fig, filename='finance/simple-ohlc', validate=False)
         ```
         """
+        # TODO: protected until #282
+        from plotly.graph_objs import graph_objs
         if dates is not None:
             FigureFactory._validate_equal_length(open, high, low, close, dates)
         else:
@@ -2222,6 +2204,8 @@ class FigureFactory(object):
         py.iplot(fig, filename='finance/simple-candlestick', validate=False)
         ```
         """
+        # TODO: protected until #282
+        from plotly.graph_objs import graph_objs
         if dates is not None:
             FigureFactory._validate_equal_length(open, high, low, close, dates)
         else:
@@ -2365,6 +2349,8 @@ class FigureFactory(object):
                                     validate=False)
         ```
         """
+        # TODO: protected until #282
+        from plotly.graph_objs import graph_objs
         FigureFactory._validate_distplot(hist_data, curve_type)
         FigureFactory._validate_equal_length(hist_data, group_labels)
 
@@ -3155,4 +3141,3 @@ class _Distplot(FigureFactory):
                               marker=dict(color=self.colors[index],
                                           symbol='line-ns-open'))
         return rug
-
