@@ -59,20 +59,9 @@ def test_dict_instantiation_graph_obj_error_0():
     Data([Data()])
 
 
-@skip('See https://github.com/plotly/python-api/issues/294')
-@raises(PlotlyListEntryError)
-def test_dict_instantiation_graph_obj_error_1():
-    Data([Figure()])
-
-
 @raises(PlotlyListEntryError)
 def test_dict_instantiation_graph_obj_error_2():
     Data([Annotations()])
-
-@skip('See https://github.com/plotly/python-api/issues/294')
-@raises(PlotlyListEntryError)
-def test_dict_instantiation_graph_obj_error_3():
-    Data([Layout()])
 
 
 def test_validate():
