@@ -43,7 +43,7 @@ def _make_list_doc(name):
 def _make_dict_doc(name):
 
     # TODO: https://github.com/plotly/python-api/issues/289
-    attributes = graph_reference.get_attributes(name)['valid_names']
+    attributes = graph_reference.get_valid_attributes(name)
     attributes = sorted(attributes, key=sort_keys)
     doc = 'Documentation for {}'.format(name)
     doc = '\t' + '\n\t'.join(textwrap.wrap(doc, width=LINE_SIZE)) + '\n\n'
@@ -108,9 +108,11 @@ def get_role(parent, key, value=None):
     if parent._name in graph_reference.TRACE_NAMES and key == 'type':
         return 'info'
     matches = []
-    for val in parent._get_attributes().values():
-        if not isinstance(val, dict):
-            continue
+    parent_object_names = [p._name for p in parent.get_parents()]
+    attributes_dicts = graph_reference.get_attributes_dicts(
+        parent._name, parent_object_names=parent_object_names
+    )
+    for val in attributes_dicts.values():
 
         for k, v in val.items():
             if k == key:

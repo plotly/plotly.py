@@ -103,7 +103,7 @@ def object_name_to_class_name(object_name):
     return string
 
 
-def get_attributes(object_name, parent_object_names=()):
+def get_attributes_dicts(object_name, parent_object_names=()):
     """
     Returns *all* attribute information given the context of parents.
 
@@ -112,16 +112,12 @@ def get_attributes(object_name, parent_object_names=()):
       ('some', 'path'): {},
       ('some', 'other', 'path'): {},
       ...
-      'additional_attributes': {},
-      'valid_names': [],
-      'deprecated_names': [],
-      'subplot_names': []
+      'additional_attributes': {}
     }
 
     There may be any number of paths mapping to attribute dicts. There will be
     one attribute dict under 'additional_attributes' which will usually be
-    empty. Finally, there is some meta information in the form of lists under
-    the 'valid_names', 'deprecated_names', and 'subplot_names' keys.
+    empty.
 
     :param (str|unicode) object_name: The object name whose attributes we want.
     :param (list[str|unicode]) parent_object_names: Names of parent objects.
@@ -148,35 +144,63 @@ def get_attributes(object_name, parent_object_names=()):
 
     # We return a dict mapping paths to attributes. We also add in additional
     # attributes if defined.
-    response = {path: utils.get_by_path(GRAPH_REFERENCE, path)
-                for path in attribute_paths}
-    response['additional_attributes'] = additional_attributes
+    attributes_dicts = {path: utils.get_by_path(GRAPH_REFERENCE, path)
+                  for path in attribute_paths}
+    attributes_dicts['additional_attributes'] = additional_attributes
 
+    return attributes_dicts
+
+
+def get_valid_attributes(object_name, parent_object_names=()):
+    attributes = get_attributes_dicts(object_name, parent_object_names)
     # These are for documentation and quick lookups. They're just strings.
-    valid_names = set()
-    deprecated_names = set()
-    subplot_names = set()
-    for attributes in response.values():
+    valid_attributes = set()
+    for attributes_dict in attributes.values():
 
-        for key, val in attributes.items():
+        for key, val in attributes_dict.items():
             if key not in GRAPH_REFERENCE['defs']['metaKeys']:
-                valid_names.add(key)
-                if isinstance(val, dict) and val.get('_isSubplotObj'):
-                    subplot_names.add(key)
+                valid_attributes.add(key)
 
-        deprecated_attributes = attributes.get('_deprecated', {})
+        deprecated_attributes = attributes_dict.get('_deprecated', {})
         for key, val in deprecated_attributes.items():
             if key not in GRAPH_REFERENCE['defs']['metaKeys']:
-                valid_names.add(key)
-                deprecated_names.add(key)
+                valid_attributes.add(key)
+
+    return valid_attributes
+
+
+def get_deprecated_attributes(object_name, parent_object_names=()):
+    attributes = get_attributes_dicts(object_name, parent_object_names)
+    # These are for documentation and quick lookups. They're just strings.
+    deprecated_attributes = set()
+    for attributes_dict in attributes.values():
+
+        deprecated_attributes_dict = attributes_dict.get('_deprecated', {})
+        for key, val in deprecated_attributes_dict.items():
+            if key not in GRAPH_REFERENCE['defs']['metaKeys']:
+                deprecated_attributes.add(key)
+
+    return deprecated_attributes
+
+
+def get_subplot_attributes(object_name, parent_object_names=()):
+    attributes = get_attributes_dicts(object_name, parent_object_names)
+    # These are for documentation and quick lookups. They're just strings.
+    subplot_attributes = set()
+    for attributes_dict in attributes.values():
+
+        for key, val in attributes_dict.items():
+            if key not in GRAPH_REFERENCE['defs']['metaKeys']:
                 if isinstance(val, dict) and val.get('_isSubplotObj'):
-                    subplot_names.add(key)
+                    subplot_attributes.add(key)
 
-    response['valid_names'] = valid_names
-    response['deprecated_names'] = deprecated_names
-    response['subplot_names'] = subplot_names
+        deprecated_attributes = attributes_dict.get('_deprecated', {})
+        for key, val in deprecated_attributes.items():
+            if key not in GRAPH_REFERENCE['defs']['metaKeys']:
+                if isinstance(val, dict) and val.get('_isSubplotObj'):
+                    subplot_attributes.add(key)
 
-    return response
+    return subplot_attributes
 
 
 def _is_valid_sub_path(path, parent_paths):

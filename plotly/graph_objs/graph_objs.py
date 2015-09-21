@@ -322,7 +322,9 @@ class PlotlyDict(dict, PlotlyBase):
     """
     _name = None
     _parent_key = None
-    _attributes = None
+    _valid_attributes = None
+    _deprecated_attributes = None
+    _subplot_attributes = None
 
     def __init__(self, *args, **kwargs):
         if self._name is None:
@@ -346,7 +348,7 @@ class PlotlyDict(dict, PlotlyBase):
 
     def __dir__(self):
         """Dynamically return the existing and possible attributes."""
-        return sorted(list(self._get_attributes()['valid_names']))
+        return sorted(list(self._get_valid_attributes()))
 
     def __getitem__(self, key):
         """Calls __missing__ when key is not found. May mutate object."""
@@ -366,7 +368,7 @@ class PlotlyDict(dict, PlotlyBase):
             return
 
         if key.endswith('src'):
-            if key in self._get_attributes()['valid_names']:
+            if key in self._get_valid_attributes():
                 value = graph_objs_tools.assign_id_to_src(key, value)
                 return super(PlotlyDict, self).__setitem__(key, value)
 
@@ -377,9 +379,9 @@ class PlotlyDict(dict, PlotlyBase):
             if isinstance(value, (PlotlyDict, PlotlyList)):
                 return super(PlotlyDict, self).__setitem__(key, value)
 
-        if key not in self._get_attributes()['valid_names']:
+        if key not in self._get_valid_attributes():
 
-            if key in self._get_attributes()['deprecated_names']:
+            if key in self._get_deprecated_attributes():
                 warnings.warn(
                     "Oops! '{}' has been deprecated in '{}'\n"
                     "This may still work, but you should update your code "
@@ -423,7 +425,7 @@ class PlotlyDict(dict, PlotlyBase):
 
     def __missing__(self, key):
         """Mimics defaultdict. This is called from __getitem__ when key DNE."""
-        if key in self._get_attributes()['valid_names']:
+        if key in self._get_valid_attributes():
             if graph_objs_tools.get_role(self, key) == 'object':
                 value = GraphObjectFactory.create(key, _parent=self,
                                                   _parent_key=key)
@@ -435,23 +437,42 @@ class PlotlyDict(dict, PlotlyBase):
                                               _parent_key=key)
             super(PlotlyDict, self).__setitem__(key, value)
 
-    def _get_attributes(self):
-        """See `graph_reference.get_attributes`."""
-        if self._attributes is None:
-            parents = self.get_parents()
-            parent_object_names = [parent._name for parent in parents]
-            attributes = graph_reference.get_attributes(
+    def _get_valid_attributes(self):
+        """See `graph_reference.get_valid_attributes`."""
+        if self._valid_attributes is None:
+            parent_object_names = [p._name for p in self.get_parents()]
+            valid_attributes = graph_reference.get_valid_attributes(
                 self._name, parent_object_names
             )
-            self.__dict__['_attributes'] = attributes
-        return self._attributes
+            self.__dict__['_valid_attributes'] = valid_attributes
+        return self._valid_attributes
+
+    def _get_deprecated_attributes(self):
+        """See `graph_reference.get_deprecated_attributes`."""
+        if self._deprecated_attributes is None:
+            parent_object_names = [p._name for p in self.get_parents()]
+            deprecated_attributes = graph_reference.get_deprecated_attributes(
+                self._name, parent_object_names
+            )
+            self.__dict__['_deprecated_attributes'] = deprecated_attributes
+        return self._deprecated_attributes
+
+    def _get_subplot_attributes(self):
+        """See `graph_reference.get_subplot_attributes`."""
+        if self._subplot_attributes is None:
+            parent_object_names = [p._name for p in self.get_parents()]
+            subplot_attributes = graph_reference.get_subplot_attributes(
+                self._name, parent_object_names
+            )
+            self.__dict__['_subplot_attributes'] = subplot_attributes
+        return self._subplot_attributes
 
     def _get_subplot_key(self, key):
         """Some keys can have appended integers, this handles that."""
         match = re.search(r'(?P<digits>\d+$)', key)
         if match:
             root_key = key[:match.start()]
-            if (root_key in self._get_attributes()['subplot_names'] and
+            if (root_key in self._get_subplot_attributes() and
                     not match.group('digits').startswith('0')):
                 return root_key
 
