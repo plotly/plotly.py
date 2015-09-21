@@ -923,9 +923,9 @@ def _patch_data_class(data_class):
         item = value.get('type', 'scatter')
         if item not in graph_reference.ARRAYS['data']['items']:
             if _raise:
-                err = exceptions.PlotlyListEntryError(self, index, value)
-                err.add_note("Entry does not have a valid 'type' key")
-                err.add_to_error_path(index)
+                err = exceptions.PlotlyDataTypeError(self, index)
+                err.path = self._get_path() + (0, )
+                err.prepare()
                 raise err
 
         return GraphObjectFactory.create(item, _raise=_raise, _parent=self,

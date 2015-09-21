@@ -48,7 +48,6 @@ def test_dict_instantiation_key_error():
     print(Data([{'marker': 'not-a-dict'}]))
 
 
-@skip('See https://github.com/plotly/python-api/issues/295')
 @raises(PlotlyDataTypeError)
 def test_dict_instantiation_type_error():
     Data([{'type': 'invalid_type'}])
