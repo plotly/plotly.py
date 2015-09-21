@@ -391,9 +391,11 @@ class PlotlyDict(dict, PlotlyBase):
 
             if key in self._get_deprecated_attributes():
                 warnings.warn(
-                    "Oops! '{}' has been deprecated in '{}'\n"
-                    "This may still work, but you should update your code "
-                    "when possible.".format(key, self._name)
+                    "Oops! '{attribute}' has been deprecated in "
+                    "'{object_name}'\nThis may still work, but you should "
+                    "update your code when possible.\n\n"
+                    "Run `.help('{attribute}')` for more information."
+                    .format(attribute=key, object_name=self._name)
                 )
 
                 # this means deprecated attrs get set *as-is*!
