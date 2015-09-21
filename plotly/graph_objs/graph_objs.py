@@ -46,11 +46,11 @@ class PlotlyBase(object):
     def help(self):
         """Print a help string for this object."""
         object_name = self._name
-        path = self.get_path()
+        path = self._get_path()
         parent_object_names = self.get_parent_object_names()
         print graph_objs_tools.get_help(object_name, path, parent_object_names)
 
-    def get_path(self):
+    def _get_path(self):
         """
         Get a tuple of the str keys and int indices for this object's path.
 
@@ -222,7 +222,7 @@ class PlotlyList(list, PlotlyBase):
         if not isinstance(value, dict):
             if _raise:
                 e = exceptions.PlotlyListEntryError(self, index, value)
-                e.path = self.get_path() + (index, )
+                e.path = self._get_path() + (index, )
                 e.prepare()
                 raise e
             else:
@@ -413,7 +413,7 @@ class PlotlyDict(dict, PlotlyBase):
             else:
                 if _raise:
                     e = exceptions.PlotlyDictKeyError(self, key)
-                    e.path = self.get_path() + (key, )
+                    e.path = self._get_path() + (key, )
                     e.prepare()
                     raise e
                 return
@@ -525,7 +525,7 @@ class PlotlyDict(dict, PlotlyBase):
             if _raise:
                 e = exceptions.PlotlyDictValueError(self, key, value,
                                                     val_types)
-                e.path = self.get_path() + (key, )
+                e.path = self._get_path() + (key, )
                 e.prepare()
                 raise e
             else:
@@ -541,7 +541,7 @@ class PlotlyDict(dict, PlotlyBase):
             super(PlotlyDict, self).help()
         else:
             object_name = self._name
-            path = self.get_path()
+            path = self._get_path()
             parent_object_names = self.get_parent_object_names()
             print graph_objs_tools.get_help(object_name, path,
                                             parent_object_names, attribute)
