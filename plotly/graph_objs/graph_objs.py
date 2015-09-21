@@ -964,6 +964,177 @@ def _add_classes_to_globals(globals):
                 cls = type(str(key), class_bases, class_dict)
                 globals[key] = cls
 
+
+def _patch_figure_class(figure_class):
+
+    def __init__(self, *args, **kwargs):
+        super(figure_class, self).__init__(*args, **kwargs)
+        if 'data' not in self:
+            self.data = GraphObjectFactory.create('data', _parent=self,
+                                                  _parent_key='data')
+    figure_class.__init__ = __init__
+
+    def get_data(self, flatten=False):
+        """
+        Returns the JSON for the plot with non-data elements stripped.
+
+        Flattening may increase the utility of the result.
+
+        :param (bool) flatten: {'a': {'b': ''}} --> {'a.b': ''}
+        :returns: (dict|list) Depending on (flat|unflat)
+
+        """
+        return self.data.get_data(flatten=flatten)
+    figure_class.get_data = get_data
+
+    def to_dataframe(self):
+        """
+        Create a pandas dataframe with trace names and keys as column names.
+
+        :return: (DataFrame)
+
+        """
+        data = self.get_data(flatten=True)
+        from pandas import DataFrame, Series
+        return DataFrame(dict([(k, Series(v)) for k, v in data.items()]))
+    figure_class.to_dataframe = to_dataframe
+
+    def print_grid(self):
+        """
+        Print a visual layout of the figure's axes arrangement.
+
+        This is only valid for figures that are created
+        with plotly.tools.make_subplots.
+
+        """
+        try:
+            grid_str = self.__dict__['_grid_str']
+        except AttributeError:
+            raise Exception("Use plotly.tools.make_subplots "
+                            "to create a subplot grid.")
+        print(grid_str)
+    figure_class.print_grid = print_grid
+
+    def append_trace(self, trace, row, col):
+        """
+        Add a data traces to your figure bound to axes at the row, col index.
+
+        The row, col index is generated from figures created with
+        plotly.tools.make_subplots and can be viewed with Figure.print_grid.
+
+        :param (dict) trace: The data trace to be bound.
+        :param (int) row: Subplot row index (see Figure.print_grid).
+        :param (int) col: Subplot column index (see Figure.print_grid).
+
+        Example:
+        # stack two subplots vertically
+        fig = tools.make_subplots(rows=2)
+
+        This is the format of your plot grid:
+        [ (1,1) x1,y1 ]
+        [ (2,1) x2,y2 ]
+
+        fig.append_trace(Scatter(x=[1,2,3], y=[2,1,2]), 1, 1)
+        fig.append_trace(Scatter(x=[1,2,3], y=[2,1,2]), 2, 1)
+
+        """
+        try:
+            grid_ref = self._grid_ref
+        except AttributeError:
+            raise Exception("In order to use Figure.append_trace, "
+                            "you must first use plotly.tools.make_subplots "
+                            "to create a subplot grid.")
+        if row <= 0:
+            raise Exception("Row value is out of range. "
+                            "Note: the starting cell is (1, 1)")
+        if col <= 0:
+            raise Exception("Col value is out of range. "
+                            "Note: the starting cell is (1, 1)")
+        try:
+            ref = grid_ref[row-1][col-1]
+        except IndexError:
+            raise Exception("The (row, col) pair sent is out of range. "
+                            "Use Figure.print_grid to view the subplot grid. ")
+        if 'scene' in ref[0]:
+            trace['scene'] = ref[0]
+            if ref[0] not in self['layout']:
+                raise Exception("Something went wrong. "
+                                "The scene object for ({r},{c}) subplot cell "
+                                "got deleted.".format(r=row, c=col))
+        else:
+            xaxis_key = "xaxis{ref}".format(ref=ref[0][1:])
+            yaxis_key = "yaxis{ref}".format(ref=ref[1][1:])
+            if (xaxis_key not in self['layout']
+                    or yaxis_key not in self['layout']):
+                raise Exception("Something went wrong. "
+                                "An axis object for ({r},{c}) subplot cell "
+                                "got deleted.".format(r=row, c=col))
+            trace['xaxis'] = ref[0]
+            trace['yaxis'] = ref[1]
+        self['data'] += [trace]
+    figure_class.append_trace = append_trace
+
+
+def _patch_data_class(data_class):
+
+    def _value_to_graph_object(self, index, value, _raise=True):
+
+        if not isinstance(value, dict):
+            if _raise:
+                e = exceptions.PlotlyListEntryError(self, index, value)
+                e.add_note('Entry should subclass dict.')
+                raise e
+            else:
+                return
+
+        item = value.get('type', 'scatter')
+        if item not in graph_reference.ARRAYS['data']['items']:
+            if _raise:
+                err = exceptions.PlotlyListEntryError(self, index, value)
+                err.add_note("Entry does not have a valid 'type' key")
+                err.add_to_error_path(index)
+                raise err
+
+        return GraphObjectFactory.create(item, _raise=_raise, _parent=self,
+                                         _parent_key=index, **value)
+    data_class._value_to_graph_object = _value_to_graph_object
+
+    def get_data(self, flatten=False):
+        """
+        Returns the JSON for the plot with non-data elements stripped.
+
+        :param (bool) flatten: {'a': {'b': ''}} --> {'a.b': ''}
+        :returns: (dict|list) Depending on (flat|unflat)
+
+        """
+        if flatten:
+            data = [v.get_data(flatten=flatten) for v in self]
+            d = {}
+            taken_names = []
+            for i, trace in enumerate(data):
+
+                # we want to give the traces helpful names
+                # however, we need to be sure they're unique too...
+                trace_name = trace.pop('name', 'trace_{0}'.format(i))
+                if trace_name in taken_names:
+                    j = 1
+                    new_trace_name = "{0}_{1}".format(trace_name, j)
+                    while new_trace_name in taken_names:
+                        new_trace_name = "{0}_{1}".format(trace_name, j)
+                        j += 1
+                    trace_name = new_trace_name
+                taken_names.append(trace_name)
+
+                # finish up the dot-concatenation
+                for k, v in trace.items():
+                    key = "{0}.{1}".format(trace_name, k)
+                    d[key] = v
+            return d
+        else:
+            return super(data_class, self).get_data(flatten=flatten)
+    data_class.get_data = get_data
+
+
 _add_classes_to_globals(globals())
 
 # We don't want to expose this module to users, just the classes.
