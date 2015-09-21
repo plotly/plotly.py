@@ -1390,6 +1390,11 @@ def _send_to_plotly(figure, **plot_options):
     """
 
     """
+    invalid_plot_options = [plot_option for plot_option in plot_options
+                            if plot_option not in DEFAULT_PLOT_OPTIONS]
+    if invalid_plot_options:
+        raise exceptions.PlotlyError('Invalid plot options, {}.'
+                                     .format(invalid_plot_options))
     fig = tools._replace_newline(figure)  # does not mutate figure
     data = json.dumps(fig['data'] if 'data' in fig else [],
                       cls=utils.PlotlyJSONEncoder)
