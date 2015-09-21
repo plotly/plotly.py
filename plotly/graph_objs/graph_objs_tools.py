@@ -104,10 +104,14 @@ def _dict_attribute_help(object_name, path, parent_object_names, attribute):
     attribute_definitions = []
     additional_definition = None
     meta_keys = graph_reference.GRAPH_REFERENCE['defs']['metaKeys']
+    trace_names = graph_reference.TRACE_NAMES
     for key, attribute_dict in attributes_dicts.items():
         if attribute in attribute_dict:
-            d = {k: v for k, v in attribute_dict[attribute].items()
-                 if k in meta_keys and not k.startswith('_')}
+            if object_name in trace_names and attribute == 'type':
+                d = {'role': 'info'}
+            else:
+                d = {k: v for k, v in attribute_dict[attribute].items()
+                     if k in meta_keys and not k.startswith('_')}
         elif attribute in attribute_dict.get('_deprecated', {}):
             deprecate_attribute_dict = attribute_dict['_deprecated'][attribute]
             d = {k: v for k, v in deprecate_attribute_dict.items()
@@ -153,6 +157,11 @@ def _dict_attribute_help(object_name, path, parent_object_names, attribute):
         for meta_key, val in sorted(item['definition'].items()):
             help_string += '\t{}: '.format(meta_key)
             if meta_key == 'description':
+
+                # TODO: https://github.com/plotly/streambed/issues/3950
+                if isinstance(val, list) and attribute == 'showline':
+                    val = val[0]
+
                 lines = textwrap.wrap(val, width=LINE_SIZE)
                 help_string += '\n\t\t'.join(lines)
             else:
