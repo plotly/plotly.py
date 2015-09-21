@@ -47,7 +47,7 @@ class PlotlyBase(object):
         """Print a help string for this object."""
         object_name = self._name
         path = self.get_path()
-        parent_object_names = [parent._name for parent in self.get_parents()]
+        parent_object_names = self.get_parent_object_names()
         print graph_objs_tools.get_help(object_name, path, parent_object_names)
 
     def get_path(self):
@@ -80,6 +80,16 @@ class PlotlyBase(object):
             parent = parent._parent
         parents.reverse()
         return parents
+
+    def get_parent_object_names(self):
+        """
+        Get a list of the names of the parent objects above this one.
+
+        :return: (list[str])
+
+        """
+        parents = self.get_parents()
+        return [parent._name for parent in parents]
 
     def to_graph_objs(self, **kwargs):
         """Everything is cast into graph_objs. Here for backwards compat."""
@@ -450,7 +460,7 @@ class PlotlyDict(dict, PlotlyBase):
     def _get_attribute_role(self, key, value=None):
         """See `graph_reference.get_role`."""
         object_name = self._name
-        parent_object_names = [parent._name for parent in self.get_parents()]
+        parent_object_names = self.get_parent_object_names()
         return graph_reference.get_role(
             object_name, key, value=value,
             parent_object_names=parent_object_names
@@ -459,7 +469,7 @@ class PlotlyDict(dict, PlotlyBase):
     def _get_valid_attributes(self):
         """See `graph_reference.get_valid_attributes`."""
         if self._valid_attributes is None:
-            parent_object_names = [p._name for p in self.get_parents()]
+            parent_object_names = self.get_parent_object_names()
             valid_attributes = graph_reference.get_valid_attributes(
                 self._name, parent_object_names
             )
@@ -469,7 +479,7 @@ class PlotlyDict(dict, PlotlyBase):
     def _get_deprecated_attributes(self):
         """See `graph_reference.get_deprecated_attributes`."""
         if self._deprecated_attributes is None:
-            parent_object_names = [p._name for p in self.get_parents()]
+            parent_object_names = self.get_parent_object_names()
             deprecated_attributes = graph_reference.get_deprecated_attributes(
                 self._name, parent_object_names
             )
@@ -479,7 +489,7 @@ class PlotlyDict(dict, PlotlyBase):
     def _get_subplot_attributes(self):
         """See `graph_reference.get_subplot_attributes`."""
         if self._subplot_attributes is None:
-            parent_object_names = [p._name for p in self.get_parents()]
+            parent_object_names = self.get_parent_object_names()
             subplot_attributes = graph_reference.get_subplot_attributes(
                 self._name, parent_object_names
             )
@@ -532,8 +542,7 @@ class PlotlyDict(dict, PlotlyBase):
         else:
             object_name = self._name
             path = self.get_path()
-            parent_object_names = [parent._name
-                                   for parent in self.get_parents()]
+            parent_object_names = self.get_parent_object_names()
             print graph_objs_tools.get_help(object_name, path,
                                             parent_object_names, attribute)
 
