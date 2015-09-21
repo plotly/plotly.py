@@ -87,6 +87,54 @@ class TestObjectNameToClass(PlotlyTestCase):
         self.assertEqual(object_name_to_class_name(object_name), class_name)
 
 
+class TestGetAttributesMethods(TestCase):
+
+    def test_get_subplot_attributes(self):
+
+        # importantly, layout should have a bunch of these
+
+        layout_subplot_attributes = gr.get_subplot_attributes('layout')
+
+        # there may be more...
+        expected_attributes = ['xaxis', 'yaxis', 'geo', 'scene']
+
+        for expected_attribute in expected_attributes:
+            self.assertIn(expected_attribute, layout_subplot_attributes)
+
+    def test_get_deprecated_attributes(self):
+
+        # this may eventually break, but it's important to check *something*
+
+        bar_deprecated_attributes = gr.get_deprecated_attributes('bar')
+
+        expected_attributes = ['bardir']
+
+        for expected_attribute in expected_attributes:
+            self.assertIn(expected_attribute, bar_deprecated_attributes)
+
+
+class TestGetAttributePathToObjectNames(TestCase):
+
+    def test_layout_attributes(self):
+
+        # layout attrs defined under traces should still show up under layout
+
+        graph_reference_path = ('traces', 'box', 'layoutAttributes')
+        expected_object_names = ('figure', 'layout')
+        object_names = gr.attribute_path_to_object_names(graph_reference_path)
+        self.assertEqual(object_names, expected_object_names)
+
+    def test_trace_attributes(self):
+
+        # trace attributes should be found under 'data' somewhere
+
+        graph_reference_path = ('traces', 'scatter', 'attributes', 'marker',
+                                'line')
+        expected_object_names = ('figure', 'data', 'scatter', 'marker', 'line')
+        object_names = gr.attribute_path_to_object_names(graph_reference_path)
+        self.assertEqual(object_names, expected_object_names)
+
+
 class TestGetRole(TestCase):
 
     def test_get_role_no_value(self):
