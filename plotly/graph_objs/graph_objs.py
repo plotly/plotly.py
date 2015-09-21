@@ -398,7 +398,7 @@ class PlotlyDict(dict, PlotlyBase):
                     raise e
                 return
 
-        if graph_objs_tools.get_role(self, key) == 'object':
+        if self._get_attribute_role(key) == 'object':
             value = self._value_to_graph_object(key, value, _raise=_raise)
             if not isinstance(value, (PlotlyDict, PlotlyList)):
                 return
@@ -426,7 +426,7 @@ class PlotlyDict(dict, PlotlyBase):
     def __missing__(self, key):
         """Mimics defaultdict. This is called from __getitem__ when key DNE."""
         if key in self._get_valid_attributes():
-            if graph_objs_tools.get_role(self, key) == 'object':
+            if self._get_attribute_role(key) == 'object':
                 value = GraphObjectFactory.create(key, _parent=self,
                                                   _parent_key=key)
                 return super(PlotlyDict, self).__setitem__(key, value)
@@ -436,6 +436,15 @@ class PlotlyDict(dict, PlotlyBase):
             value = GraphObjectFactory.create(subplot_key, _parent=self,
                                               _parent_key=key)
             super(PlotlyDict, self).__setitem__(key, value)
+
+    def _get_attribute_role(self, key, value=None):
+        """See `graph_reference.get_role`."""
+        object_name = self._name
+        parent_object_names = [parent._name for parent in self.get_parents()]
+        return graph_reference.get_role(
+            object_name, key, value=value,
+            parent_object_names=parent_object_names
+        )
 
     def _get_valid_attributes(self):
         """See `graph_reference.get_valid_attributes`."""
@@ -573,12 +582,11 @@ class PlotlyDict(dict, PlotlyBase):
             if isinstance(self[key], (PlotlyDict, PlotlyList)):
                 self[key].strip_style()
             else:
-                role = graph_objs_tools.get_role(self, key, self[key])
-                if role == 'style':
+                if self._get_attribute_role(key, value=self[key]) == 'style':
                     del self[key]
 
                 # this is for backwards compat when we updated graph reference.
-                if self._name == 'layout' and key == 'autosize':
+                elif self._name == 'layout' and key == 'autosize':
                     del self[key]
 
     def get_data(self, flatten=False):
@@ -594,8 +602,7 @@ class PlotlyDict(dict, PlotlyBase):
                 else:
                     d[key] = sub_data
             else:
-                role = graph_objs_tools.get_role(self, key, val)
-                if role == 'data':
+                if self._get_attribute_role(key, value=val) == 'data':
                     d[key] = val
 
                 # we use the name to help make data frames

@@ -203,6 +203,54 @@ def get_subplot_attributes(object_name, parent_object_names=()):
     return subplot_attributes
 
 
+def get_role(object_name, attribute, value=None, parent_object_names=()):
+    """
+    Values have types associated with them based on graph_reference.
+
+    'data' type values are always kept
+    'style' values are kept if they're sequences (but not strings)
+
+    :param (str) object_name: The name of the object containing 'attribute'.
+    :param (str) attribute: The attribute we want the `role` of.
+    :param (*) value: If the value is an array, the return can be different.
+    :param parent_object_names: An iterable of obj names from graph reference.
+    :returns: (str) This will be 'data', 'style', or 'info'.
+
+    """
+    if object_name in TRACE_NAMES and attribute == 'type':
+        return 'info'
+    attributes_dicts = get_attributes_dicts(object_name, parent_object_names)
+    matches = []
+    for attributes_dict in attributes_dicts.values():
+
+        for key, val in attributes_dict.items():
+            if key == attribute:
+                matches.append(val)
+
+        for key, val in attributes_dict.get('_deprecated', {}).items():
+            if key == attribute:
+                matches.append(val)
+
+    roles = []
+    for match in matches:
+        role = match['role']
+        array_ok = match.get('arrayOk')
+        if value is not None and array_ok:
+            iterable = hasattr(value, '__iter__')
+            stringy = isinstance(value, six.string_types)
+            dicty = isinstance(value, dict)
+            if iterable and not stringy and not dicty:
+                role = 'data'
+        roles.append(role)
+
+    # TODO: this is ambiguous until the figure is in place...
+    if 'data' in roles:
+        role = 'data'
+    else:
+        role = roles[0]
+    return role
+
+
 def _is_valid_sub_path(path, parent_paths):
     """
     Check if a sub path is valid given an iterable of parent paths.

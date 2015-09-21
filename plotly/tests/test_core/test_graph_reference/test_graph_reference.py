@@ -7,11 +7,12 @@ from __future__ import absolute_import
 import json
 import os
 from pkg_resources import resource_string
+from unittest import TestCase
 
 from nose.plugins.attrib import attr
 
 from plotly import files, graph_reference as gr, tools, utils
-from plotly.graph_reference import object_name_to_class_name
+from plotly.graph_reference import object_name_to_class_name, get_role
 from plotly.tests.utils import PlotlyTestCase
 
 
@@ -84,3 +85,43 @@ class TestObjectNameToClass(PlotlyTestCase):
         object_name = 'histogram2dcontour'
         class_name = 'Histogram2DContour'
         self.assertEqual(object_name_to_class_name(object_name), class_name)
+
+
+class TestGetRole(TestCase):
+
+    def test_get_role_no_value(self):
+
+        # this is a bit fragile, but we pick a few stable values
+
+        # (<object_name>, <attribute_name>, <parent_object_names>, <role>)
+        test_tuples = [
+            ('scatter', 'x', ('figure', 'data'), 'data'),
+            ('scatter', 'marker', ('figure', 'data'), 'object'),
+            ('marker', 'color', ('figure', 'data', 'scatter'), 'style'),
+            ('layout', 'title', ('figure', ), 'info'),
+            ('figure', 'data', (), 'object')
+        ]
+
+        for tup in test_tuples:
+            object_name, key, parent_object_names, role = tup
+            found_role = get_role(object_name, key,
+                                  parent_object_names=parent_object_names)
+            self.assertEqual(found_role, role, msg=tup)
+
+    def test_get_role_with_value(self):
+
+        # some attributes are conditionally considered data if they're arrays
+
+        # (<object_name>, <attribute_name>, <parent_object_names>, <role>)
+        test_tuples = [
+            ('scatter', 'x', 'wh0cares', ('figure', 'data'), 'data'),
+            ('scatter', 'marker', 'wh0cares', ('figure', 'data'), 'object'),
+            ('marker', 'color', 'r', ('figure', 'data', 'scatter'), 'style'),
+            ('marker', 'color', ['r'], ('figure', 'data', 'scatter'), 'data'),
+        ]
+
+        for tup in test_tuples:
+            object_name, key, value, parent_object_names, role = tup
+            found_role = get_role(object_name, key, value=value,
+                                  parent_object_names=parent_object_names)
+            self.assertEqual(found_role, role, msg=tup)

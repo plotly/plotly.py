@@ -95,53 +95,6 @@ def curtail_val_repr(val, max_chars, add_delim=False):
     return r
 
 
-def get_role(parent, key, value=None):
-    """
-    Values have types associated with them based on graph_reference.
-
-    'data' type values are always kept
-    'style' values are kept if they're sequences (but not strings)
-
-    :returns: (bool)
-
-    """
-    if parent._name in graph_reference.TRACE_NAMES and key == 'type':
-        return 'info'
-    matches = []
-    parent_object_names = [p._name for p in parent.get_parents()]
-    attributes_dicts = graph_reference.get_attributes_dicts(
-        parent._name, parent_object_names=parent_object_names
-    )
-    for val in attributes_dicts.values():
-
-        for k, v in val.items():
-            if k == key:
-                matches.append(v)
-
-        for k, v in val.get('_deprecated', {}).items():
-            if k == key:
-                matches.append(v)
-
-    roles = []
-    for match in matches:
-        role = match['role']
-        array_ok = match.get('arrayOk')
-        if value is not None and array_ok:
-            iterable = hasattr(value, '__iter__')
-            stringy = isinstance(value, six.string_types)
-            dicty = isinstance(value, dict)
-            if iterable and not stringy and not dicty:
-                role = 'data'
-        roles.append(role)
-
-    # TODO: this is ambiguous until the figure is in place...
-    if 'data' in roles:
-        role = 'data'
-    else:
-        role = roles[0]
-    return role
-
-
 def assign_id_to_src(src_name, src_value):
     if isinstance(src_value, six.string_types):
         src_id = src_value
