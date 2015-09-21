@@ -717,7 +717,7 @@ class PlotlyDict(dict, PlotlyBase):
         keys = list(self.keys())
         for key in keys:
             try:
-                self[key].force_clean()  # TODO: add error handling
+                self[key].force_clean()
             except AttributeError:
                 pass
             if isinstance(self[key], (dict, list)):
