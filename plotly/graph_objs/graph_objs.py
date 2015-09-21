@@ -58,7 +58,7 @@ class PlotlyBase(object):
 
         """
         path = []
-        parents = self.get_parents()
+        parents = self._get_parents()
         parents.reverse()
         children = [self] + parents[:-1]
         for parent, child in zip(parents, children):
@@ -66,7 +66,7 @@ class PlotlyBase(object):
         path.reverse()
         return tuple(path)
 
-    def get_parents(self):
+    def _get_parents(self):
         """
         Get a list of all the parent objects above this one.
 
@@ -88,7 +88,7 @@ class PlotlyBase(object):
         :return: (list[str])
 
         """
-        parents = self.get_parents()
+        parents = self._get_parents()
         return [parent._name for parent in parents]
 
     def to_graph_objs(self, **kwargs):
