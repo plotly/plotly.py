@@ -43,13 +43,6 @@ class PlotlyBase(object):
     _parent = None
     _parent_key = None
 
-    def help(self):
-        """Print a help string for this object."""
-        object_name = self._name
-        path = self._get_path()
-        parent_object_names = self._get_parent_object_names()
-        print graph_objs_tools.get_help(object_name, path, parent_object_names)
-
     def _get_path(self):
         """
         Get a tuple of the str keys and int indices for this object's path.
@@ -90,6 +83,13 @@ class PlotlyBase(object):
         """
         parents = self._get_parents()
         return [parent._name for parent in parents]
+
+    def help(self):
+        """Print a help string for this object."""
+        object_name = self._name
+        path = self._get_path()
+        parent_object_names = self._get_parent_object_names()
+        print graph_objs_tools.get_help(object_name, path, parent_object_names)
 
     def to_graph_objs(self, **kwargs):
         """Everything is cast into graph_objs. Here for backwards compat."""
@@ -188,24 +188,6 @@ class PlotlyList(list, PlotlyBase):
         # TODO: https://github.com/plotly/python-api/issues/291
         return self.__copy__()
 
-    def append(self, value):
-        """Override to enforce validation."""
-        index = len(self)  # used for error messages
-        value = self._value_to_graph_object(index, value)
-        super(PlotlyList, self).append(value)
-
-    def extend(self, iterable):
-        """Override to enforce validation."""
-        for value in iterable:
-            index = len(self)
-            value = self._value_to_graph_object(index, value)
-            super(PlotlyList, self).append(value)
-
-    def insert(self, index, value):
-        """Override to enforce validation."""
-        value = self._value_to_graph_object(index, value)
-        super(PlotlyList, self).insert(index, value)
-
     def _value_to_graph_object(self, index, value, _raise=True):
         """
         Attempt to change the given value into a graph object.
@@ -237,6 +219,24 @@ class PlotlyList(list, PlotlyBase):
             except exceptions.PlotlyGraphObjectError:
                 if i == len(items) and _raise:
                     raise
+
+    def append(self, value):
+        """Override to enforce validation."""
+        index = len(self)  # used for error messages
+        value = self._value_to_graph_object(index, value)
+        super(PlotlyList, self).append(value)
+
+    def extend(self, iterable):
+        """Override to enforce validation."""
+        for value in iterable:
+            index = len(self)
+            value = self._value_to_graph_object(index, value)
+            super(PlotlyList, self).append(value)
+
+    def insert(self, index, value):
+        """Override to enforce validation."""
+        value = self._value_to_graph_object(index, value)
+        super(PlotlyList, self).insert(index, value)
 
     def update(self, changes, make_copies=False):
         """
