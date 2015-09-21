@@ -744,7 +744,9 @@ class GraphObjectFactory(object):
         """
         if (object_name not in graph_reference.OBJECTS and
                 object_name not in graph_reference.ARRAYS):
-            raise Exception('tbd')  # TODO
+            raise exceptions.PlotlyError(
+                "'{}' is not a valid object name.".format(object_name)
+            )
         class_name = graph_reference.object_name_to_class_name(object_name)
         graph_object_class = globals()[class_name]
 
