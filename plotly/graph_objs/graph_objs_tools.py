@@ -169,50 +169,6 @@ def _dict_attribute_help(object_name, path, parent_object_names, attribute):
     return help_string
 
 
-def make_doc(object_name):
-    """
-    Single path to create general documentation based on the object name.
-
-    Graph objects are created dynamically based on external information. The
-    docs are also based on this information and must be created at runtime.
-
-    :param (str|unicode) object_name: The object name from GRAPH_REFERENCE.
-    :return: (str) The formatted doc string.
-
-    """
-    if object_name in graph_reference.ARRAYS:
-        return _make_list_doc(object_name)
-    else:
-        return _make_dict_doc(object_name)
-
-
-def _make_list_doc(name):
-
-    # TODO: https://github.com/plotly/python-api/issues/289
-    items = graph_reference.ARRAYS[name]['items']
-    items_classes = [graph_reference.object_name_to_class_name(item)
-                     for item in items]
-    doc = 'Documentation for {}.\n'.format(name)
-    doc = '\t' + '\n\t'.join(textwrap.wrap(doc, width=LINE_SIZE)) + '\n\n'
-
-    items_string = '\n\t* {}\n'.format('\n\t* '.join(items_classes))
-    doc += 'Valid Item Classes:\n{}\n'.format(items_string)
-    return doc.expandtabs(TAB_SIZE)
-
-
-def _make_dict_doc(name):
-
-    # TODO: https://github.com/plotly/python-api/issues/289
-    attributes = graph_reference.get_valid_attributes(name)
-    attributes = sorted(attributes, key=sort_keys)
-    doc = 'Documentation for {}'.format(name)
-    doc = '\t' + '\n\t'.join(textwrap.wrap(doc, width=LINE_SIZE)) + '\n\n'
-
-    attributes_string = '\n\t* {}\n'.format('\n\t* '.join(attributes))
-    doc += 'Valid Attributes:\n{}\n'.format(attributes_string)
-    return doc.expandtabs(TAB_SIZE)
-
-
 def curtail_val_repr(val, max_chars, add_delim=False):
     """
     Used mostly by the `to_string` function on Graph Objects to pretty print.

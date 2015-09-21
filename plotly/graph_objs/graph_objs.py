@@ -944,7 +944,7 @@ def _add_classes_to_globals(globals):
         if object_name in ['figure', 'data']:
             continue  # we manually define these
 
-        doc = graph_objs_tools.make_doc(object_name)
+        doc = graph_objs_tools.get_help(object_name)
         class_name = graph_reference.object_name_to_class_name(object_name)
         if object_name in graph_reference.ARRAYS:
             class_bases = (PlotlyList, )
