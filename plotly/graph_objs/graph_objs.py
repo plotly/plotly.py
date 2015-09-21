@@ -89,7 +89,9 @@ class PlotlyBase(object):
         object_name = self._name
         path = self._get_path()
         parent_object_names = self._get_parent_object_names()
-        print graph_objs_tools.get_help(object_name, path, parent_object_names)
+        help_string = graph_objs_tools.get_help(object_name, path,
+                                                parent_object_names)
+        print(help_string)
 
     def to_graph_objs(self, **kwargs):
         """Everything is cast into graph_objs. Here for backwards compat."""
@@ -543,8 +545,10 @@ class PlotlyDict(dict, PlotlyBase):
             object_name = self._name
             path = self._get_path()
             parent_object_names = self._get_parent_object_names()
-            print graph_objs_tools.get_help(object_name, path,
-                                            parent_object_names, attribute)
+            help_string = graph_objs_tools.get_help(object_name, path,
+                                                    parent_object_names,
+                                                    attribute)
+            print(help_string)
 
     def update(self, dict1=None, **dict2):
         """
