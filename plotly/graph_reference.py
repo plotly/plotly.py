@@ -100,7 +100,7 @@ def object_name_to_class_name(object_name):
     # replace `*_<c>` with `*<C>` E.g., `Error_x` --> `ErrorX`
     string = re.sub(r'_[A-Za-z0-9]+', lambda m: m.group()[1:].title(), string)
 
-    return string
+    return str(string)
 
 
 def get_attributes_dicts(object_name, parent_object_names=()):
@@ -201,6 +201,67 @@ def get_subplot_attributes(object_name, parent_object_names=()):
                     subplot_attributes.add(key)
 
     return subplot_attributes
+
+
+def attribute_path_to_object_names(attribute_container_path):
+    """
+    Return a location within a figure from a path existing in GRAPH_REFERENCE.
+
+    Users don't need to know about GRAPH_REFERENCE, so yielding information
+    about paths there would only be confusing. Also, the implementation and
+    structure there may change, but figure structure won't.
+
+    :param (tuple[str]) attribute_container_path: An object should exist here.
+
+    :return: (tuple[str]) A tuple of object names:
+
+    Example:
+
+        In: ('traces', 'pie', 'attributes', 'marker')
+        Out: ('figure', 'data', 'pie', 'marker')
+
+    """
+    object_names = ['figure']  # this is always the case
+
+    if 'layout' in attribute_container_path:
+
+        for path_part in attribute_container_path:
+
+            if path_part in OBJECTS:
+                object_names.append(path_part)
+
+            if path_part in ARRAYS:
+                object_names.append(path_part)
+                object_names.append(path_part[:-1])
+
+    elif 'layoutAttributes' in attribute_container_path:
+
+        object_names.append('layout')
+
+        start_index = attribute_container_path.index('layoutAttributes')
+        for path_part in attribute_container_path[start_index:]:
+
+            if path_part in OBJECTS:
+                object_names.append(path_part)
+
+            if path_part in ARRAYS:
+                object_names.append(path_part)
+                object_names.append(path_part[:-1])
+
+    else:
+
+        # assume it's in 'traces'
+        object_names.append('data')
+        for path_part in attribute_container_path:
+
+            if path_part in OBJECTS:
+                object_names.append(path_part)
+
+            if path_part in ARRAYS:
+                object_names.append(path_part)
+                object_names.append(path_part[:-1])
+
+    return tuple(object_names)
 
 
 def get_role(object_name, attribute, value=None, parent_object_names=()):

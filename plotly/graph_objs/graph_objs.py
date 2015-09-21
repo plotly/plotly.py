@@ -39,8 +39,16 @@ class PlotlyBase(object):
     Base object for PlotlyList and PlotlyDict.
 
     """
+    _name = None
     _parent = None
     _parent_key = None
+
+    def help(self):
+        """Print a help string for this object."""
+        object_name = self._name
+        path = self.get_path()
+        parent_object_names = [parent._name for parent in self.get_parents()]
+        print graph_objs_tools.get_help(object_name, path, parent_object_names)
 
     def get_path(self):
         """
@@ -514,6 +522,18 @@ class PlotlyDict(dict, PlotlyBase):
         # this can be `None` when `_raise == False`
         return GraphObjectFactory.create(key, value, _raise=_raise,
                                          _parent=self, _parent_key=key)
+
+    def help(self, attribute=None):
+        """Print help string for this object or an attribute of this object."""
+        if not attribute:
+            super(PlotlyDict, self).help()
+        else:
+            object_name = self._name
+            path = self.get_path()
+            parent_object_names = [parent._name
+                                   for parent in self.get_parents()]
+            print graph_objs_tools.get_help(object_name, path,
+                                            parent_object_names, attribute)
 
     def update(self, dict1=None, **dict2):
         """

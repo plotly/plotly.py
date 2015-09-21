@@ -9,6 +9,166 @@ LINE_SIZE = 76
 TAB_SIZE = 4
 
 
+def get_help(object_name, path=(), parent_object_names=(), attribute=None):
+    """
+    Returns a help string for a graph object.
+
+    :param (str) object_name: An object name from GRAPH_REFERENCE
+    :param (tuple[str]) path: The path within a `figure` object.
+    :param parent_object_names: An iterable of names of this object's parents.
+    :param (str|None) attribute: An attribute of <object_name> given <path>.
+    :return: (str) A printable string to show to users.
+
+    """
+    class_name = graph_reference.object_name_to_class_name(object_name)
+    help_string = 'Help for {}\n\n'.format(class_name)
+    if object_name in graph_reference.ARRAYS:
+        help_string += _list_help(object_name, path, parent_object_names)
+    else:
+        if attribute:
+            help_string += _dict_attribute_help(object_name, path,
+                                                parent_object_names, attribute)
+        else:
+            help_string += _dict_object_help(object_name, path,
+                                             parent_object_names)
+    help_string = help_string.expandtabs(TAB_SIZE)
+    return help_string
+
+
+def _list_help(object_name, path=(), parent_object_names=()):
+    items = graph_reference.ARRAYS[object_name]['items']
+    items_classes = [graph_reference.object_name_to_class_name(item)
+                     for item in items]
+    items_string = '\n\t* {}\n'.format('\n\t* '.join(items_classes))
+    help_string = 'Valid Item Classes:\n{}\n'.format(items_string)
+    return help_string
+
+
+def _dict_object_help(object_name, path, parent_object_names):
+    """
+    Get general help information on an dict-like plotly graph object.
+
+    :param object_name:
+    :param path:
+    :param parent_object_names:
+    :return:
+
+    """
+    parent_class_names = [
+        graph_reference.object_name_to_class_name(parent_object_name)
+        for parent_object_name in parent_object_names
+    ]
+    attributes = graph_reference.get_valid_attributes(object_name,
+                                                      parent_object_names)
+    help_dict = {'path': path,
+                 'parent_class_names': parent_class_names}
+
+    attributes_str = '\n\t* {}\n'.format('\n\t* '.join(attributes))
+    help_string = (
+        "Run `.help('attribute')` on any of the following attributes:\n"
+        "{attributes_str}"
+    )
+    return help_string.format(attributes_str=attributes_str, **help_dict)
+
+
+def _dict_attribute_help(object_name, path, parent_object_names, attribute):
+    """
+    Get general help information or information on a specific attribute.
+
+    :param (str|unicode) attribute: The attribute we'll get info for.
+
+    """
+    parent_class_names = [
+        graph_reference.object_name_to_class_name(parent_object_name)
+        for parent_object_name in parent_object_names
+    ]
+    valid_attributes = graph_reference.get_valid_attributes(
+        object_name, parent_object_names
+    )
+    help_dict = {'path': path,
+                 'parent_class_names': parent_class_names,
+                 'attribute': attribute}
+
+    help_string = (
+        "Current path: {path}\n"
+        "Current parents: {parent_class_names}\n\n")
+
+    if attribute not in valid_attributes:
+        help_string += "'{attribute}' is not allowed here.\n"
+        return help_string.format(**help_dict)
+
+    attributes_dicts = graph_reference.get_attributes_dicts(
+        object_name, parent_object_names
+    )
+
+    attribute_definitions = []
+    additional_definition = None
+    meta_keys = graph_reference.GRAPH_REFERENCE['defs']['metaKeys']
+    for key, attribute_dict in attributes_dicts.items():
+        if attribute in attribute_dict:
+            d = {k: v for k, v in attribute_dict[attribute].items()
+                 if k in meta_keys and not k.startswith('_')}
+        elif attribute in attribute_dict.get('_deprecated', {}):
+            deprecate_attribute_dict = attribute_dict['_deprecated'][attribute]
+            d = {k: v for k, v in deprecate_attribute_dict.items()
+                 if k in meta_keys and not k.startswith('_')}
+            d['deprecated'] = True
+        else:
+            continue
+
+        if key == 'additional_attributes':
+            additional_definition = d
+            continue
+
+        new_definition = True
+        for item in attribute_definitions:
+            if item['definition'] == d:
+                item['paths'].append(key)
+                new_definition = False
+        if new_definition:
+            attribute_definitions.append({'paths': [key], 'definition': d})
+
+    if attribute_definitions:
+        help_string += ("With the current parents, '{attribute}' can be "
+                        "used as follows:\n\n")
+
+    help_string = help_string.format(**help_dict)
+
+    for item in attribute_definitions:
+        valid_parents_objects_names = [
+            graph_reference.attribute_path_to_object_names(definition_path)
+            for definition_path in item['paths']
+        ]
+
+        if len(valid_parents_objects_names) == 1:
+            valid_parent_objects_names = valid_parents_objects_names[0]
+            help_string += 'Under {}:\n\n'.format(
+                str(valid_parent_objects_names)
+            )
+        else:
+            help_string += 'Under any of:\n\t\t* {}\n\n'.format(
+                '\n\t\t* '.join(str(tup) for tup in valid_parents_objects_names)
+            )
+
+        for meta_key, val in sorted(item['definition'].items()):
+            help_string += '\t{}: '.format(meta_key)
+            if meta_key == 'description':
+                lines = textwrap.wrap(val, width=LINE_SIZE)
+                help_string += '\n\t\t'.join(lines)
+            else:
+                help_string += '{}'.format(val)
+            help_string += '\n'
+        help_string += '\n\n'
+
+    if additional_definition:
+        help_string += 'Additionally:\n\n'
+        for item in sorted(additional_definition.items()):
+            help_string += '\t{}: {}\n'.format(*item)
+        help_string += '\n'
+
+    return help_string
+
+
 def make_doc(object_name):
     """
     Single path to create general documentation based on the object name.
