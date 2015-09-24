@@ -72,7 +72,10 @@ def get_config_defaults():
 
 
 def ensure_local_plotly_files():
-    """Ensure that filesystem is setup/filled out in a valid way"""
+    """Ensure that filesystem is setup/filled out in a valid way.
+    If the config or credential files aren't filled out, then write them
+    to the disk.
+    """
     if check_file_permissions():
         for fn in [CREDENTIALS_FILE, CONFIG_FILE]:
             utils.ensure_file_exists(fn)
