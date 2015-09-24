@@ -39,10 +39,10 @@ __all__ = None
 DEFAULT_PLOT_OPTIONS = {
     'filename': "plot from API",
     'fileopt': "new",
-    'auto_open': True,
     'world_readable': files.FILE_CONTENT[files.CONFIG_FILE]['world_readable'],
+    'auto_open': files.FILE_CONTENT[files.CONFIG_FILE]['auto_open'],
     'validate': True,
-    'sharing': "public"
+    'sharing': files.FILE_CONTENT[files.CONFIG_FILE]['sharing']
 }
 
 # test file permissions and make sure nothing is corrupted
