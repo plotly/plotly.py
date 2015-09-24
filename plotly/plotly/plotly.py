@@ -90,6 +90,22 @@ def _plot_option_logic(plot_options_from_call_signature):
         4 - Update each key with plot, iplot call signature options
 
     """
+    default_plot_options = copy.deepcopy(DEFAULT_PLOT_OPTIONS)
+    plot_options_from_call_signature = copy.deepcopy(plot_options_from_call_signature)
+    file_options = tools.get_config_file()
+    session_options = get_session_plot_options()
+
+    # Validate options and fill in defaults w world_readable and sharing
+    for option_set in [plot_options_from_call_signature,
+                       session_options, file_options]:
+        utils.validate_world_readable_and_sharing_settings(option_set)
+        utils.set_sharing_and_world_readable(option_set)
+        # dynamic defaults
+        if ('filename' in option_set and
+                'fileopt' not in option_set):
+            option_set['fileopt'] = 'overwrite'
+
+    # merge options together with precedence
     def update_plot_options(base_plot_options, new_plot_options):
         """
         Merge new_plot_options into base_plot_options
@@ -104,62 +120,15 @@ def _plot_option_logic(plot_options_from_call_signature):
 
         return updated_plot_options
 
-    user_plot_options = update_plot_options(tools.get_config_file(),
-                                            get_session_plot_options())
+    user_plot_options = default_plot_options
+    user_plot_options = update_plot_options(user_plot_options,
+                                            file_options)
+    user_plot_options = update_plot_options(user_plot_options,
+                                            session_options)
     user_plot_options = update_plot_options(user_plot_options,
                                             plot_options_from_call_signature)
-    plot_options = update_plot_options(DEFAULT_PLOT_OPTIONS, user_plot_options)
 
-    # dynamic defaults
-    if ('filename' in user_plot_options and
-            'fileopt' not in user_plot_options):
-        plot_options['fileopt'] = 'overwrite'
-
-    # merge in duplicate arguments
-    if ('world_readable' in user_plot_options and
-            'sharing' not in user_plot_options):
-        plot_options['sharing'] = (
-            'public' if user_plot_options['world_readable']
-            else 'private')
-    elif ('sharing' in user_plot_options and
-            'world_readable' not in user_plot_options):
-        if user_plot_options['sharing'] in ('private', 'secret'):
-            plot_options['world_readable'] = False
-        elif user_plot_options['sharing'] == 'public':
-            plot_options['world_readable'] = True
-
-    # Check for any conflicts between 'sharing' and 'world_readable'
-    if 'sharing' in plot_options:
-        if plot_options['sharing'] in ['public', 'private', 'secret']:
-            if 'world_readable' not in plot_options:
-                if plot_options['sharing'] != 'public':
-                    plot_options['world_readable'] = False
-                else:
-                    plot_options['world_readable'] = True
-            elif (plot_options['world_readable'] and
-                    plot_options['sharing'] != 'public'):
-                raise exceptions.PlotlyError(
-                    "Looks like you are setting your plot privacy to both "
-                    "public and private.\n If you set world_readable as True, "
-                    "sharing can only be set to 'public'")
-            elif (not plot_options['world_readable'] and
-                    plot_options['sharing'] == 'public'):
-                raise exceptions.PlotlyError(
-                    "Looks like you are setting your plot privacy to both "
-                    "public and private.\n If you set world_readable as "
-                    "False, sharing can only be set to 'private' or 'secret'")
-        else:
-            raise exceptions.PlotlyError(
-                "The 'sharing' argument only accepts one of the following "
-                "strings:\n'public' -- for public plots\n"
-                "'private' -- for private plots\n"
-                "'secret' -- for private plots that can be shared with a "
-                "secret url"
-            )
-    else:
-        plot_options['sharing'] = None
-
-    return plot_options
+    return user_plot_options
 
 
 def iplot(figure_or_data, **plot_options):
