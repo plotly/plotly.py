@@ -28,7 +28,7 @@ import six.moves
 
 from requests.auth import HTTPBasicAuth
 
-from plotly import exceptions, tools, utils, version
+from plotly import exceptions, tools, utils, version, files
 from plotly.plotly import chunked_requests
 from plotly.session import (sign_in, update_session_plot_options,
                             get_session_plot_options, get_session_credentials,
@@ -39,8 +39,8 @@ __all__ = None
 DEFAULT_PLOT_OPTIONS = {
     'filename': "plot from API",
     'fileopt': "new",
-    'world_readable': True,
     'auto_open': True,
+    'world_readable': files.FILE_CONTENT[files.CONFIG_FILE]['world_readable'],
     'validate': True,
     'sharing': "public"
 }
