@@ -80,44 +80,62 @@ def get_config():
     return config
 
 
-def get_plot_options():
+def _plot_option_logic(plot_options_from_call_signature):
     """
-    Merge default and user-defined plot options.
-
-    """
-    plot_options = copy.deepcopy(DEFAULT_PLOT_OPTIONS)
-    session_plot_options = get_session_plot_options()
-    for plot_option_key in plot_options:
-
-        # checking for not false, but truthy value here is the desired behavior
-        session_value = session_plot_options.get(plot_option_key)
-        if session_value is False or session_value:
-            plot_options[plot_option_key] = session_value
-    return plot_options
-
-
-def _plot_option_logic(plot_options):
-    """
-    Given some plot_options as part of a plot call, decide on final options
+    Given some plot_options as part of a plot call, decide on final options.
+    Precendence:
+        1 - Start with DEFAULT_PLOT_OPTIONS
+        2 - Update each key with ~/.plotly/.config options (tls.get_config)
+        3 - Update each key with session plot options (set by py.sign_in)
+        4 - Update each key with plot, iplot call signature options
 
     """
-    session_plot_options = get_session_plot_options()
-    current_plot_options = get_plot_options()
-    current_plot_options.update(plot_options)
-    if (('filename' in plot_options or 'filename' in session_plot_options) and
-            'fileopt' not in session_plot_options and
-            'fileopt' not in plot_options):
-        current_plot_options['fileopt'] = 'overwrite'
+    def update_plot_options(base_plot_options, new_plot_options):
+        """
+        Merge new_plot_options into base_plot_options
+
+        """
+        updated_plot_options = {}
+        base_plot_options = copy.deepcopy(base_plot_options)
+        new_plot_options = copy.deepcopy(new_plot_options)
+        for key in base_plot_options:
+            updated_plot_options[key] = new_plot_options.get(
+                key, base_plot_options[key])
+
+        return updated_plot_options
+
+    user_plot_options = update_plot_options(tools.get_config_file(),
+                                            get_session_plot_options())
+    user_plot_options = update_plot_options(user_plot_options,
+                                            plot_options_from_call_signature)
+    plot_options = update_plot_options(DEFAULT_PLOT_OPTIONS, user_plot_options)
+
+    # dynamic defaults
+    if ('filename' in user_plot_options and
+            'fileopt' not in user_plot_options):
+        plot_options['fileopt'] = 'overwrite'
+
+    # merge in duplicate arguments
+    if ('world_readable' in user_plot_options and
+            'sharing' not in user_plot_options):
+        plot_options['sharing'] = (
+            'public' if user_plot_options['world_readable']
+            else 'private')
+    elif ('sharing' in user_plot_options and
+            'world_readable' not in user_plot_options):
+        if user_plot_options['sharing'] in ('private', 'secret'):
+            plot_options['world_readable'] = False
+        elif user_plot_options['sharing'] == 'public':
+            plot_options['world_readable'] = True
 
     # Check for any conflicts between 'sharing' and 'world_readable'
     if 'sharing' in plot_options:
         if plot_options['sharing'] in ['public', 'private', 'secret']:
-
             if 'world_readable' not in plot_options:
                 if plot_options['sharing'] != 'public':
-                    current_plot_options['world_readable'] = False
+                    plot_options['world_readable'] = False
                 else:
-                    current_plot_options['world_readable'] = True
+                    plot_options['world_readable'] = True
             elif (plot_options['world_readable'] and
                     plot_options['sharing'] != 'public'):
                 raise exceptions.PlotlyError(
@@ -139,9 +157,9 @@ def _plot_option_logic(plot_options):
                 "secret url"
             )
     else:
-        current_plot_options['sharing'] = None
+        plot_options['sharing'] = None
 
-    return current_plot_options
+    return plot_options
 
 
 def iplot(figure_or_data, **plot_options):
@@ -150,13 +168,11 @@ def iplot(figure_or_data, **plot_options):
     plot_options keyword agruments:
     filename (string) -- the name that will be associated with this figure
     fileopt ('new' | 'overwrite' | 'extend' | 'append')
-        'new': create a new, unique url for this plot
-        'overwrite': overwrite the file associated with `filename` with this
-        'extend': add additional numbers (data) to existing traces
-        'append': add additional traces to existing data lists
-    world_readable (default=True) -- make this figure private/public
-    sharing ('public' | 'private' | 'secret') -- Toggle who can view this
-                                                  graph
+        - 'new': create a new, unique url for this plot
+        - 'overwrite': overwrite the file associated with `filename` with this
+        - 'extend': add additional numbers (data) to existing traces
+        - 'append': add additional traces to existing data lists
+    sharing ('public' | 'private' | 'secret') -- Toggle who can view this graph
         - 'public': Anyone can view this graph. It will appear in your profile
                     and can appear in search engines. You do not need to be
                     logged in to Plotly to view this chart.
@@ -172,6 +188,8 @@ def iplot(figure_or_data, **plot_options):
                     notebook, anybody who is viewing that page will be able to
                     view the graph. You do not need to be logged in to view
                     this plot.
+    world_readable (default=True) -- Depreciated: use "sharing".
+                                     Make this figure private/public
     """
     if 'auto_open' not in plot_options:
         plot_options['auto_open'] = False
@@ -212,7 +230,6 @@ def plot(figure_or_data, validate=True, **plot_options):
         'overwrite': overwrite the file associated with `filename` with this
         'extend': add additional numbers (data) to existing traces
         'append': add additional traces to existing data lists
-    world_readable (default=True) -- make this figure private/public
     auto_open (default=True) -- Toggle browser options
         True: open this plot in a new browser tab
         False: do not open plot in the browser, but do return the unique url
@@ -233,6 +250,8 @@ def plot(figure_or_data, validate=True, **plot_options):
                     notebook, anybody who is viewing that page will be able to
                     view the graph. You do not need to be logged in to view
                     this plot.
+    world_readable (default=True) -- Depreciated: use "sharing".
+                                     Make this figure private/public
 
     """
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
