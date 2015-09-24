@@ -12,7 +12,7 @@ from unittest import TestCase
 from nose.plugins.attrib import attr
 
 from plotly import files, graph_reference as gr, tools, utils
-from plotly.graph_reference import object_name_to_class_name, get_role
+from plotly.graph_reference import string_to_class_name, get_role
 from plotly.tests.utils import PlotlyTestCase
 
 
@@ -58,33 +58,21 @@ class TestGraphReferenceCaching(PlotlyTestCase):
         self.assertEqual(graph_reference, default_graph_reference)
 
 
-class TestObjectNameToClass(PlotlyTestCase):
+class TestStringToClass(PlotlyTestCase):
 
     def test_capitalize_first_letter(self):
 
         object_names = ['marker', 'line', 'scatter']
         class_names = ['Marker', 'Line', 'Scatter']
         for object_name, class_name in zip(object_names, class_names):
-            self.assertEqual(
-                object_name_to_class_name(object_name), class_name
-            )
+            self.assertEqual(string_to_class_name(object_name), class_name)
 
     def test_capitalize_after_underscore(self):
 
         object_names = ['error_y', 'error_x']
         class_names = ['ErrorY', 'ErrorX']
         for object_name, class_name in zip(object_names, class_names):
-            self.assertEqual(
-                object_name_to_class_name(object_name), class_name
-            )
-
-    def test_use_hr_name(self):
-
-        # we should be checking for an hr_name in the plot schema.
-
-        object_name = 'histogram2dcontour'
-        class_name = 'Histogram2DContour'
-        self.assertEqual(object_name_to_class_name(object_name), class_name)
+            self.assertEqual(string_to_class_name(object_name), class_name)
 
 
 class TestGetAttributesMethods(TestCase):

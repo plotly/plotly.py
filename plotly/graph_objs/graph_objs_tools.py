@@ -20,7 +20,7 @@ def get_help(object_name, path=(), parent_object_names=(), attribute=None):
     :return: (str) A printable string to show to users.
 
     """
-    class_name = graph_reference.object_name_to_class_name(object_name)
+    class_name = graph_reference.string_to_class_name(object_name)
     help_string = 'Help for {}\n\n'.format(class_name)
     if object_name in graph_reference.ARRAYS:
         help_string += _list_help(object_name, path, parent_object_names)
@@ -37,7 +37,7 @@ def get_help(object_name, path=(), parent_object_names=(), attribute=None):
 
 def _list_help(object_name, path=(), parent_object_names=()):
     items = graph_reference.ARRAYS[object_name]['items']
-    items_classes = [graph_reference.object_name_to_class_name(item)
+    items_classes = [graph_reference.string_to_class_name(item)
                      for item in items]
     items_string = '\n\t* {}\n'.format('\n\t* '.join(items_classes))
     help_string = 'Valid Item Classes:\n{}\n'.format(items_string)
@@ -55,7 +55,7 @@ def _dict_object_help(object_name, path, parent_object_names):
 
     """
     parent_class_names = [
-        graph_reference.object_name_to_class_name(parent_object_name)
+        graph_reference.string_to_class_name(parent_object_name)
         for parent_object_name in parent_object_names
     ]
     attributes = graph_reference.get_valid_attributes(object_name,
@@ -79,7 +79,7 @@ def _dict_attribute_help(object_name, path, parent_object_names, attribute):
 
     """
     parent_class_names = [
-        graph_reference.object_name_to_class_name(parent_object_name)
+        graph_reference.string_to_class_name(parent_object_name)
         for parent_object_name in parent_object_names
     ]
     valid_attributes = graph_reference.get_valid_attributes(

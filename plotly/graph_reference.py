@@ -24,10 +24,8 @@ _BACKWARDS_COMPAT_CLASS_NAME_TO_OBJECT_NAME = {
     'AngularAxis': 'angularaxis',
     'ColorBar': 'colorbar',
     'Area': 'scatter',
-    'Histogram2d': 'histogram2d',
     'Histogram2dContour': 'histogram2dcontour',
     'RadialAxis': 'radialaxis',
-    'Scatter3d': 'scatter3d',
     'XAxis': 'xaxis',
     'XBins': 'xbins',
     'YAxis': 'yaxis',
@@ -82,17 +80,16 @@ def get_graph_reference():
     return utils.decode_unicode(graph_reference)
 
 
-def object_name_to_class_name(object_name):
+def string_to_class_name(string):
     """
     Single function to handle turning object names into class names.
 
     GRAPH_REFERENCE has names like `error_y`, which we'll turn into `ErrorY`.
 
-    :param (str) object_name: Presumably an object_name from GRAPH_REFERENCE.
+    :param (str) string: A string that we'll turn into a class name string.
     :return: (str)
 
     """
-    string = _get_hr_name(object_name)
 
     # capitalize first letter
     string = re.sub(r'[A-Za-z]', lambda m: m.group().title(), string, count=1)
@@ -336,23 +333,6 @@ def _is_valid_sub_path(path, parent_paths):
     return False
 
 
-def _get_hr_name(object_name):
-    """Get human readable object name from reference ('hrName')."""
-    if object_name in ARRAYS:
-        return object_name  # TODO: how to handle hr name on array?
-
-    object_dict = OBJECTS[object_name]
-    meta_paths = object_dict['meta_paths']
-    for meta_path in meta_paths:
-        meta_dict = utils.get_by_path(GRAPH_REFERENCE, meta_path)
-        if meta_dict.get('_isLinkedToArray'):
-            return object_name  # TODO: how to handle hr name on array?
-        if 'hrName' in meta_dict:
-            return meta_dict['hrName']
-
-    return object_name  # default is to keep the original name
-
-
 def _get_objects():
     """
     Create a reorganization of graph reference which organizes by object name.
@@ -462,11 +442,11 @@ def _get_class_names_to_object_names():
     """
     class_names_to_object_names = {}
     for object_name in OBJECTS:
-        class_name = object_name_to_class_name(object_name)
+        class_name = string_to_class_name(object_name)
         class_names_to_object_names[class_name] = object_name
 
     for array_name in ARRAYS:
-        class_name = object_name_to_class_name(array_name)
+        class_name = string_to_class_name(array_name)
         class_names_to_object_names[class_name] = array_name
 
     for class_name in _BACKWARDS_COMPAT_CLASS_NAME_TO_OBJECT_NAME:

@@ -760,7 +760,7 @@ class GraphObjectFactory(object):
             raise exceptions.PlotlyError(
                 "'{}' is not a valid object name.".format(object_name)
             )
-        class_name = graph_reference.object_name_to_class_name(object_name)
+        class_name = graph_reference.string_to_class_name(object_name)
         graph_object_class = globals()[class_name]
 
         return graph_object_class(*args, **kwargs)
@@ -778,7 +778,7 @@ def _add_classes_to_globals(globals):
     for object_name in object_names + array_names:
 
         doc = graph_objs_tools.get_help(object_name)
-        class_name = graph_reference.object_name_to_class_name(object_name)
+        class_name = graph_reference.string_to_class_name(object_name)
         if object_name in graph_reference.ARRAYS:
             class_bases = (PlotlyList, )
         else:

@@ -1294,7 +1294,7 @@ def validate(obj, obj_type):
     from plotly.graph_objs import graph_objs
 
     if obj_type not in graph_reference.CLASS_NAMES_TO_OBJECT_NAMES:
-        obj_type = graph_reference.object_name_to_class_name(obj_type)
+        obj_type = graph_reference.string_to_class_name(obj_type)
 
     try:
         cls = getattr(graph_objs, obj_type)
