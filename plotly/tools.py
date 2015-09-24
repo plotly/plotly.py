@@ -169,7 +169,9 @@ def set_config_file(plotly_domain=None,
                     plotly_api_domain=None,
                     plotly_ssl_verification=None,
                     plotly_proxy_authorization=None,
-                    world_readable=None):
+                    world_readable=None,
+                    sharing=None,
+                    auto_open=None):
     """Set the keyword-value pairs in `~/.plotly/.config`.
 
     :param (str) plotly_domain: ex - https://plot.ly
@@ -184,33 +186,45 @@ def set_config_file(plotly_domain=None,
         raise exceptions.PlotlyError("You don't have proper file permissions "
                                      "to run this function.")
     ensure_local_plotly_files()  # make sure what's there is OK
+    utils.validate_world_readable_and_sharing_settings({
+        'sharing': sharing, 'world_readable': world_readable})
     settings = get_config_file()
     if isinstance(plotly_domain, six.string_types):
         settings['plotly_domain'] = plotly_domain
     elif plotly_domain is not None:
-        raise TypeError('Input should be a string')
+        raise TypeError('plotly_domain should be a string')
     if isinstance(plotly_streaming_domain, six.string_types):
         settings['plotly_streaming_domain'] = plotly_streaming_domain
     elif plotly_streaming_domain is not None:
-        raise TypeError('Input should be a string')
+        raise TypeError('plotly_streaming_domain should be a string')
     if isinstance(plotly_api_domain, six.string_types):
         settings['plotly_api_domain'] = plotly_api_domain
     elif plotly_api_domain is not None:
-        raise TypeError('Input should be a string')
+        raise TypeError('plotly_api_domain should be a string')
     if isinstance(plotly_ssl_verification, (six.string_types, bool)):
         settings['plotly_ssl_verification'] = plotly_ssl_verification
     elif plotly_ssl_verification is not None:
-        raise TypeError('Input should be a boolean')
+        raise TypeError('plotly_ssl_verification should be a boolean')
     if isinstance(plotly_proxy_authorization, (six.string_types, bool)):
         settings['plotly_proxy_authorization'] = plotly_proxy_authorization
     elif plotly_proxy_authorization is not None:
-        raise TypeError('Input should be a boolean')
+        raise TypeError('plotly_proxy_authorization should be a boolean')
+    if isinstance(auto_open, bool):
+        settings['auto_open'] = auto_open
+    elif auto_open is not None:
+        raise TypeError('auto_open should be a boolean')
+
     if isinstance(world_readable, bool):
         settings['world_readable'] = world_readable
-        kwargs = {'world_readable': world_readable}
-        session.update_session_plot_options(**kwargs)
+        settings.pop('sharing')
     elif world_readable is not None:
         raise TypeError('Input should be a boolean')
+    if isinstance(sharing, six.string_types):
+        settings['sharing'] = sharing
+    elif sharing is not None:
+        raise TypeError('sharing should be a string')
+    utils.set_sharing_and_world_readable(settings)
+
     utils.save_json_dict(CONFIG_FILE, settings)
     ensure_local_plotly_files()  # make sure what we just put there is OK
 

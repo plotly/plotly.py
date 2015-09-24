@@ -13,6 +13,8 @@ import threading
 
 import pytz
 
+from exceptions import PlotlyError
+
 try:
     import numpy
     _numpy_imported = True
@@ -399,3 +401,46 @@ def get_by_path(obj, path):
     for key in path:
         obj = obj[key]
     return obj
+
+
+### validation
+def validate_world_readable_and_sharing_settings(option_set):
+    if ('world_readable' in option_set and
+        option_set['world_readable'] is not None and
+        option_set['world_readable'] is True and
+        'sharing' in option_set and
+        option_set['sharing'] is not None and
+            option_set['sharing'] != 'public'):
+        raise PlotlyError(
+            "Looks like you are setting your plot privacy to both "
+            "public and private.\n If you set world_readable as True, "
+            "sharing can only be set to 'public'")
+    elif ('world_readable' in option_set and
+          option_set['world_readable'] is False and
+          'sharing' in option_set and
+          option_set['sharing'] == 'public'):
+        raise PlotlyError(
+            "Looks like you are setting your plot privacy to both "
+            "public and private.\n If you set world_readable as "
+            "False, sharing can only be set to 'private' or 'secret'")
+    elif ('sharing' in option_set and
+          option_set['sharing'] not in ['public', 'private', 'secret', None]):
+        raise PlotlyError(
+            "The 'sharing' argument only accepts one of the following "
+            "strings:\n'public' -- for public plots\n"
+            "'private' -- for private plots\n"
+            "'secret' -- for private plots that can be shared with a "
+            "secret url"
+        )
+
+
+def set_sharing_and_world_readable(option_set):
+    if 'world_readable' in option_set and 'sharing' not in option_set:
+        option_set['sharing'] = (
+            'public' if option_set['world_readable'] else 'private')
+
+    elif 'sharing' in option_set and 'world_readable' not in option_set:
+        if option_set['sharing'] == 'public':
+            option_set['world_readable'] = True
+        else:
+            option_set['world_readable'] = False
