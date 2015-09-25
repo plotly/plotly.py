@@ -402,28 +402,27 @@ def _get_objects():
     """
     objects = {}
     for node, path in utils.node_generator(GRAPH_REFERENCE):
+
         if any([key in path for key in GRAPH_REFERENCE['defs']['metaKeys']]):
             continue  # objects don't exist under nested meta keys
+        if node.get('role') != 'object':
+            continue
+        if 'items' in node:
+            continue
 
-        # note that arrays are *not* stored in objects! they're arrays!
-        if node.get('role') == 'object':
-            object_name = path[-1]
-            if node.get('_isLinkedToArray'):
-                object_name = object_name[:-1]
+        object_name = path[-1]
+        if object_name not in objects:
+            objects[object_name] = {'meta_paths': [], 'attribute_paths': [],
+                                    'additional_attributes': {}}
 
-            if object_name not in objects:
-                objects[object_name] = {'meta_paths': [],
-                                        'attribute_paths': [],
-                                        'additional_attributes': {}}
+        if node.get('attributes'):
+            objects[object_name]['attribute_paths'].append(
+                path + ('attributes', )
+            )
+        else:
+            objects[object_name]['attribute_paths'].append(path)
 
-            if node.get('attributes'):
-                objects[object_name]['attribute_paths'].append(
-                    path + ('attributes', )
-                )
-            else:
-                objects[object_name]['attribute_paths'].append(path)
-
-            objects[object_name]['meta_paths'].append(path)
+        objects[object_name]['meta_paths'].append(path)
 
     return objects
 
@@ -459,15 +458,26 @@ def _patch_objects():
 def _get_arrays():
     """Very few arrays, but this dict is the complement of OBJECTS."""
     arrays = {}
-    for object_name, object_dict in OBJECTS.items():
-        meta_paths = object_dict['meta_paths']
-        for meta_path in meta_paths:
-            meta_dict = utils.get_by_path(GRAPH_REFERENCE, meta_path)
-            if meta_dict.get('_isLinkedToArray'):
+    for node, path in utils.node_generator(GRAPH_REFERENCE):
 
-                # TODO can we have multiply defined arrays?
-                arrays[object_name + 's'] = {'meta_paths': [meta_path],
-                                             'items': [object_name]}
+        if any([key in path for key in GRAPH_REFERENCE['defs']['metaKeys']]):
+            continue  # objects don't exist under nested meta keys
+        if node.get('role') != 'object':
+            continue
+        if 'items' not in node:
+            continue
+
+        object_name = path[-1]
+        if object_name not in arrays:
+            items = node['items']
+
+            # If items is a dict, it's anyOf them.
+            if isinstance(items, dict):
+                item_names = list(items.keys())
+            else:
+                item_names = [object_name[:-1]]
+            arrays[object_name] = {'meta_paths': [path], 'items': item_names}
+
     return arrays
 
 
