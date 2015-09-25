@@ -1271,14 +1271,11 @@ def get_valid_graph_obj(obj, obj_type=None):
     # TODO: Deprecate or move. #283
     from plotly.graph_objs import graph_objs
     try:
-        cls = getattr(graph_objs, obj.__class__.__name__)
+        cls = getattr(graph_objs, obj_type)
     except (AttributeError, KeyError):
-        try:
-            cls = getattr(graph_objs, obj_type)
-        except (AttributeError, KeyError):
-            raise exceptions.PlotlyError(
-                "'{0}' nor '{1}' are recognizable graph_objs.".
-                format(obj.__class__.__name__, obj_type))
+        raise exceptions.PlotlyError(
+            "'{}' is not a recognized graph_obj.".format(obj_type)
+        )
     return cls(obj, _raise=False)
 
 
