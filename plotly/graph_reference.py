@@ -19,20 +19,8 @@ GRAPH_REFERENCE_PATH = '/v2/plot-schema'
 GRAPH_REFERENCE_DOWNLOAD_TIMEOUT = 5  # seconds
 
 
-# for backwards compat, we need to add a few class names
-_BACKWARDS_COMPAT_CLASS_NAME_TO_OBJECT_NAME = {
-    'AngularAxis': 'angularaxis',
-    'ColorBar': 'colorbar',
-    'Area': 'scatter',
-    'Histogram2dContour': 'histogram2dcontour',
-    'RadialAxis': 'radialaxis',
-    'XAxis': 'xaxis',
-    'XBins': 'xbins',
-    'YAxis': 'yaxis',
-    'YBins': 'ybins',
-    'ZAxis': 'zaxis'
-}
-
+# For backwards compat, we keep this list of previously known objects.
+# Moving forward, we only add new trace names.
 # {<ClassName>: {'object_name': <object_name>, 'base_type': <base-type>}
 _BACKWARDS_COMPAT_CLASS_NAMES = {
     'AngularAxis': {'object_name': 'angularaxis', 'base_type': dict},
@@ -488,29 +476,6 @@ def _patch_arrays():
     ARRAYS['data'] = {'meta_paths': [('traces', )], 'items': list(TRACE_NAMES)}
 
 
-def _get_class_names_to_object_names():
-    """
-    We eventually make classes out of the objects in GRAPH_REFERENCE.
-
-    :return: (dict) A mapping of class names to object names.
-
-    """
-    class_names_to_object_names = {}
-    for object_name in OBJECTS:
-        class_name = string_to_class_name(object_name)
-        class_names_to_object_names[class_name] = object_name
-
-    for array_name in ARRAYS:
-        class_name = string_to_class_name(array_name)
-        class_names_to_object_names[class_name] = array_name
-
-    for class_name in _BACKWARDS_COMPAT_CLASS_NAME_TO_OBJECT_NAME:
-        object_name = _BACKWARDS_COMPAT_CLASS_NAME_TO_OBJECT_NAME[class_name]
-        class_names_to_object_names[class_name] = object_name
-
-    return class_names_to_object_names
-
-
 def _get_classes():
     """
     We eventually make classes out of the objects in GRAPH_REFERENCE.
@@ -549,8 +514,6 @@ OBJECTS = _get_objects()
 _patch_objects()
 ARRAYS = _get_arrays()
 _patch_arrays()
-
-CLASS_NAMES_TO_OBJECT_NAMES = _get_class_names_to_object_names()
 
 CLASSES = _get_classes()
 
