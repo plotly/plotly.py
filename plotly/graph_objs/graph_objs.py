@@ -84,6 +84,10 @@ class PlotlyBase(object):
         parents = self._get_parents()
         return [parent._name for parent in parents]
 
+    def _get_class_name(self):
+        """For convenience. See `graph_reference.object_name_to_class_name`."""
+        return graph_reference.object_name_to_class_name(self._name)
+
     def help(self):
         """Print a help string for this object."""
         object_name = self._name
@@ -146,7 +150,7 @@ class PlotlyList(list, PlotlyBase):
                       "However, these don't make sense:\n"
                       ">>> {name}(dict())\n"
                       ">>> {name}(dict(), dict())"
-                      "".format(name=self.__class__.__name__)
+                      "".format(name=self._get_class_name())
             )
 
         super(PlotlyList, self).__init__()
@@ -306,9 +310,9 @@ class PlotlyList(list, PlotlyBase):
                   pretty=True, max_chars=80):
         """Get formatted string by calling `to_string` on children items."""
         if not len(self):
-            return "{name}()".format(name=self.__class__.__name__)
+            return "{name}()".format(name=self._get_class_name())
         string = "{name}([{eol}{indent}".format(
-            name=self.__class__.__name__,
+            name=self._get_class_name(),
             eol=eol,
             indent=' ' * indent * (level + 1))
         for index, entry in enumerate(self):
@@ -672,8 +676,8 @@ class PlotlyDict(dict, PlotlyBase):
 
         """
         if not len(self):
-            return "{name}()".format(name=self.__class__.__name__)
-        string = "{name}(".format(name=self.__class__.__name__)
+            return "{name}()".format(name=self._get_class_name())
+        string = "{name}(".format(name=self._get_class_name())
         if self._name in graph_reference.TRACE_NAMES:
             keys = [key for key in self.keys() if key != 'type']
         else:
