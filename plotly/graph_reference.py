@@ -33,6 +33,47 @@ _BACKWARDS_COMPAT_CLASS_NAME_TO_OBJECT_NAME = {
     'ZAxis': 'zaxis'
 }
 
+# {<ClassName>: {'object_name': <object_name>, 'base_type': <base-type>}
+_BACKWARDS_COMPAT_CLASS_NAMES = {
+    'AngularAxis': {'object_name': 'angularaxis', 'base_type': dict},
+    'Annotation': {'object_name': 'annotation', 'base_type': dict},
+    'Annotations': {'object_name': 'annotations', 'base_type': list},
+    'Area': {'object_name': 'area', 'base_type': dict},
+    'Bar': {'object_name': 'bar', 'base_type': dict},
+    'Box': {'object_name': 'box', 'base_type': dict},
+    'ColorBar': {'object_name': 'colorbar', 'base_type': dict},
+    'Contour': {'object_name': 'contour', 'base_type': dict},
+    'Contours': {'object_name': 'contours', 'base_type': dict},
+    'Data': {'object_name': 'data', 'base_type': list},
+    'ErrorX': {'object_name': 'error_x', 'base_type': dict},
+    'ErrorY': {'object_name': 'error_y', 'base_type': dict},
+    'ErrorZ': {'object_name': 'error_z', 'base_type': dict},
+    'Figure': {'object_name': 'figure', 'base_type': dict},
+    'Font': {'object_name': 'font', 'base_type': dict},
+    'Heatmap': {'object_name': 'heatmap', 'base_type': dict},
+    'Histogram': {'object_name': 'histogram', 'base_type': dict},
+    'Histogram2d': {'object_name': 'histogram2d', 'base_type': dict},
+    'Histogram2dContour': {'object_name': 'histogram2dcontour',
+                           'base_type': dict},
+    'Layout': {'object_name': 'layout', 'base_type': dict},
+    'Legend': {'object_name': 'legend', 'base_type': dict},
+    'Line': {'object_name': 'line', 'base_type': dict},
+    'Margin': {'object_name': 'margin', 'base_type': dict},
+    'Marker': {'object_name': 'marker', 'base_type': dict},
+    'RadialAxis': {'object_name': 'radialaxis', 'base_type': dict},
+    'Scatter': {'object_name': 'scatter', 'base_type': dict},
+    'Scatter3d': {'object_name': 'scatter3d', 'base_type': dict},
+    'Scene': {'object_name': 'scene', 'base_type': dict},
+    'Stream': {'object_name': 'stream', 'base_type': dict},
+    'Surface': {'object_name': 'surface', 'base_type': dict},
+    'Trace': {'object_name': None, 'base_type': dict},
+    'XAxis': {'object_name': 'xaxis', 'base_type': dict},
+    'XBins': {'object_name': 'xbins', 'base_type': dict},
+    'YAxis': {'object_name': 'yaxis', 'base_type': dict},
+    'YBins': {'object_name': 'ybins', 'base_type': dict},
+    'ZAxis': {'object_name': 'zaxis', 'base_type': dict}
+}
+
 
 def get_graph_reference():
     """
@@ -456,6 +497,34 @@ def _get_class_names_to_object_names():
     return class_names_to_object_names
 
 
+def _get_classes():
+    """
+    We eventually make classes out of the objects in GRAPH_REFERENCE.
+
+    :return: (dict) A mapping of class names to object names.
+
+    """
+    classes = {}
+
+    # add all the objects we had before, but mark them if they no longer
+    # exist in the graph reference
+    for class_name, class_dict in _BACKWARDS_COMPAT_CLASS_NAMES.items():
+        object_name = class_dict['object_name']
+        base_type = class_dict['base_type']
+        if object_name in OBJECTS or object_name in ARRAYS:
+            classes[class_name] = {'object_name': object_name,
+                                   'base_type': base_type}
+        else:
+            classes[class_name] = {'object_name': None, 'base_type': base_type}
+
+    # always keep the trace dicts up to date
+    for object_name in TRACE_NAMES:
+        class_name = string_to_class_name(object_name)
+        classes[class_name] = {'object_name': object_name, 'base_type': dict}
+
+    return classes
+
+
 # The ordering here is important.
 GRAPH_REFERENCE = get_graph_reference()
 
@@ -468,3 +537,9 @@ ARRAYS = _get_arrays()
 _patch_arrays()
 
 CLASS_NAMES_TO_OBJECT_NAMES = _get_class_names_to_object_names()
+
+CLASSES = _get_classes()
+
+OBJECT_NAME_TO_CLASS_NAME = {class_dict['object_name']: class_name
+                             for class_name, class_dict in CLASSES.items()
+                             if class_dict['object_name'] is not None}
