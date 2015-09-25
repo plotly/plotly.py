@@ -121,14 +121,16 @@ class PlotlyList(list, PlotlyBase):
     _name = None
 
     def __init__(self, *args, **kwargs):
+        _raise = kwargs.get('_raise', True)
+        if self._name is None:
+            self.__dict__['_name'] = kwargs.pop('_name', None)
+        self.__dict__['_parent'] = kwargs.get('_parent')
+        self.__dict__['_parent_key'] = kwargs.get('_parent_key')
+
         if self._name is None:
             raise exceptions.PlotlyError(
                 "PlotlyList is a base class. It's shouldn't be instantiated."
             )
-
-        _raise = kwargs.get('_raise', True)
-        self.__dict__['_parent'] = kwargs.get('_parent')
-        self.__dict__['_parent_key'] = kwargs.get('_parent_key')
 
         if args and isinstance(args[0], dict):
             raise exceptions.PlotlyListEntryError(
@@ -347,14 +349,17 @@ class PlotlyDict(dict, PlotlyBase):
     _subplot_attributes = None
 
     def __init__(self, *args, **kwargs):
+
+        _raise = kwargs.pop('_raise', True)
+        if self._name is None:
+            self.__dict__['_name'] = kwargs.pop('_name', None)
+        self.__dict__['_parent'] = kwargs.pop('_parent', None)
+        self.__dict__['_parent_key'] = kwargs.pop('_parent_key', None)
+
         if self._name is None:
             raise exceptions.PlotlyError(
                 "PlotlyDict is a base class. It's shouldn't be instantiated."
             )
-
-        _raise = kwargs.pop('_raise', True)
-        self.__dict__['_parent'] = kwargs.pop('_parent', None)
-        self.__dict__['_parent_key'] = kwargs.pop('_parent_key', None)
 
         super(PlotlyDict, self).__init__()
 
