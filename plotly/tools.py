@@ -1290,7 +1290,7 @@ def validate(obj, obj_type):
     # TODO: Deprecate or move. #283
     from plotly.graph_objs import graph_objs
 
-    if obj_type not in graph_reference.CLASS_NAMES_TO_OBJECT_NAMES:
+    if obj_type not in graph_reference.CLASSES:
         obj_type = graph_reference.string_to_class_name(obj_type)
 
     try:
