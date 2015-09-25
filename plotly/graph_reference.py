@@ -141,6 +141,20 @@ def string_to_class_name(string):
     return str(string)
 
 
+def object_name_to_class_name(object_name):
+    """Not all objects have classes auto-generated."""
+    if object_name in TRACE_NAMES:
+        return string_to_class_name(object_name)
+
+    if object_name in OBJECT_NAME_TO_CLASS_NAME:
+        return OBJECT_NAME_TO_CLASS_NAME[object_name]
+
+    if object_name in ARRAYS:
+        return 'list'
+    else:
+        return 'dict'
+
+
 def get_attributes_dicts(object_name, parent_object_names=()):
     """
     Returns *all* attribute information given the context of parents.

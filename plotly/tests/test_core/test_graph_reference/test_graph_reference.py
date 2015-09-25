@@ -75,6 +75,88 @@ class TestStringToClass(PlotlyTestCase):
             self.assertEqual(string_to_class_name(object_name), class_name)
 
 
+class TestObjectNameToClassName(TestCase):
+
+    def test_backwards_compat(self):
+
+        # Old classes should still be shown to users.
+
+        test_tuples = [
+            ('angularaxis', 'AngularAxis'),
+            ('annotation', 'Annotation'),
+            ('annotations', 'Annotations'),
+            ('area', 'Area'),
+            ('colorbar', 'ColorBar'),
+            ('contour', 'Contour'),
+            ('contours', 'Contours'),
+            ('data', 'Data'),
+            ('error_x', 'ErrorX'),
+            ('error_y', 'ErrorY'),
+            ('error_z', 'ErrorZ'),
+            ('figure', 'Figure'),
+            ('font', 'Font'),
+            ('layout', 'Layout'),
+            ('legend', 'Legend'),
+            ('margin', 'Margin'),
+            ('marker', 'Marker'),
+            ('radialaxis', 'RadialAxis'),
+            ('scene', 'Scene'),
+            ('stream', 'Stream'),
+            ('xaxis', 'XAxis'),
+            ('xbins', 'XBins'),
+            ('yaxis', 'YAxis'),
+            ('ybins', 'YBins'),
+            ('zaxis', 'ZAxis')
+        ]
+
+        for object_name, expected_class_name in test_tuples:
+            class_name = gr.object_name_to_class_name(object_name)
+            msg = (object_name, expected_class_name, class_name)
+            self.assertEqual(class_name, expected_class_name, msg=msg)
+
+    def test_old_traces(self):
+
+        # While the old trace classes exist, the newer should be returned.
+
+        test_tuples = [
+            ('histogram2dcontour', 'Histogram2dcontour')
+        ]
+
+        for object_name, expected_class_name in test_tuples:
+            class_name = gr.object_name_to_class_name(object_name)
+            msg = (object_name, expected_class_name, class_name)
+            self.assertEqual(class_name, expected_class_name, msg=msg)
+
+    def test_new_traces(self):
+
+        # New traces should get have classes defined.
+
+        test_tuples = [
+            ('choropleth', 'Choropleth'),
+            ('pie', 'Pie')
+        ]
+
+        for object_name, expected_class_name in test_tuples:
+            class_name = gr.object_name_to_class_name(object_name)
+            msg = (object_name, expected_class_name, class_name)
+            self.assertEqual(class_name, expected_class_name, msg=msg)
+
+    def test_new_non_trace_objects(self):
+
+        # New objects get 'dict' or 'list'.
+
+        test_tuples = [
+            ('geo', 'dict'),
+            ('shapes', 'list'),
+            ('shape', 'dict'),
+        ]
+
+        for object_name, expected_class_name in test_tuples:
+            class_name = gr.object_name_to_class_name(object_name)
+            msg = (object_name, expected_class_name, class_name)
+            self.assertEqual(class_name, expected_class_name, msg=msg)
+
+
 class TestGetAttributesMethods(TestCase):
 
     def test_get_subplot_attributes(self):
