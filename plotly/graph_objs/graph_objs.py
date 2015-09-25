@@ -764,15 +764,23 @@ class GraphObjectFactory(object):
         :return: (PlotlyList|PlotlyDict) The instantiated graph object.
 
         """
-        if (object_name not in graph_reference.OBJECTS and
-                object_name not in graph_reference.ARRAYS):
+        is_array = object_name in graph_reference.ARRAYS
+        is_object = object_name in graph_reference.OBJECTS
+        if not (is_array or is_object):
             raise exceptions.PlotlyError(
                 "'{}' is not a valid object name.".format(object_name)
             )
-        class_name = graph_reference.string_to_class_name(object_name)
-        graph_object_class = globals()[class_name]
 
-        return graph_object_class(*args, **kwargs)
+        # We patch Figure and Data, so they actually require the subclass.
+        class_name = graph_reference.OBJECT_NAME_TO_CLASS_NAME.get(object_name)
+        if class_name in ['Figure', 'Data']:
+            return globals()[class_name](*args, **kwargs)
+        else:
+            kwargs['_name'] = object_name
+            if is_array:
+                return PlotlyList(*args, **kwargs)
+            else:
+                return PlotlyDict(*args, **kwargs)
 
 
 def _add_classes_to_globals(globals):
@@ -782,12 +790,16 @@ def _add_classes_to_globals(globals):
     :param (dict) globals: The globals() dict from this module.
 
     """
-    object_names = list(graph_reference.OBJECTS.keys())
-    array_names = list(graph_reference.ARRAYS.keys())
-    for object_name in object_names + array_names:
+    for class_name, class_dict in graph_reference.CLASSES.items():
+        object_name = class_dict['object_name']
+        base_type = class_dict['base_type']
+
+        # This is for backwards compat (e.g., Trace) and future changes.
+        if object_name is None:
+            globals[class_name] = base_type
+            continue
 
         doc = graph_objs_tools.get_help(object_name)
-        class_name = graph_reference.string_to_class_name(object_name)
         if object_name in graph_reference.ARRAYS:
             class_bases = (PlotlyList, )
         else:
@@ -799,12 +811,6 @@ def _add_classes_to_globals(globals):
         cls = type(str(class_name), class_bases, class_dict)
 
         globals[class_name] = cls
-
-        for key, val in graph_reference.CLASS_NAMES_TO_OBJECT_NAMES.items():
-            if val == object_name:
-                class_dict.update(__name__=key)
-                cls = type(str(key), class_bases, class_dict)
-                globals[key] = cls
 
 
 def _patch_figure_class(figure_class):
@@ -980,8 +986,7 @@ def _patch_data_class(data_class):
 _add_classes_to_globals(globals())
 _patch_figure_class(globals()['Figure'])
 _patch_data_class(globals()['Data'])
-Trace = dict  # for backwards compat.
 
 # We don't want to expose this module to users, just the classes.
 # See http://blog.labix.org/2008/06/27/watch-out-for-listdictkeys-in-python-3
-__all__ = list(graph_reference.CLASS_NAMES_TO_OBJECT_NAMES.keys())
+__all__ = list(graph_reference.CLASSES.keys())
