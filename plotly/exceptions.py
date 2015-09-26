@@ -91,10 +91,8 @@ class PlotlyGraphObjectError(PlotlyError):
             'path': '[' + ']['.join(repr(k) for k in self.path) + ']',
             'notes': '\n'.join(self.notes)
         }
-        message = '{message}\n\nPath To Error: {path}'.format(**format_dict)
-        if format_dict['notes']:
-            message += '\n\nAdditional Notes:\n\n{notes}'.format(**format_dict)
-        return message
+        return ('{message}\n\nPath To Error: {path}\n\n{notes}'
+                .format(**format_dict))
 
 
 class PlotlyDictKeyError(PlotlyGraphObjectError):
