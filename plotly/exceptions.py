@@ -4,16 +4,6 @@ exceptions
 
 A module that contains plotly's exception hierarchy.
 
-message (required!) (should be root message + caller message)
-info: (required!)
-    path_to_error (required!)
-    minimal_message (required!)
-
-- minimal_message is set inside this module, should not be set elsewhere
-
-- message is set inside this module, should not be set elsewhere
-
-
 """
 import json
 
