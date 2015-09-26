@@ -81,93 +81,68 @@ class PlotlyEmptyDataError(PlotlyError):
 
 # Graph Objects Errors
 class PlotlyGraphObjectError(PlotlyError):
-    def __init__(self, message='', path=(), note='', plain_message=''):
+    def __init__(self, message='', path=(), notes=(), plain_message=''):
         self.message = message
         self.plain_message = plain_message
         self.path = list(path)
-        self.note = note
+        self.notes = notes
         super(PlotlyGraphObjectError, self).__init__(message)
 
     def __str__(self):
         format_dict = {
             'message': self.message,
             'path': '[' + ']['.join(repr(k) for k in self.path) + ']',
-            'note': self.note
+            'notes': '\n'.join(self.notes)
         }
         message = '{message}\n\nPath To Error: {path}'.format(**format_dict)
-        if format_dict['note']:
-            message += '\n\nAdditional Notes:\n {note}'.format(**format_dict)
+        if format_dict['notes']:
+            message += '\n\nAdditional Notes:\n\n{notes}'.format(**format_dict)
         return message
 
 
 class PlotlyDictKeyError(PlotlyGraphObjectError):
-    def __init__(self, obj, path=(), **kwargs):
-        key = path[-1]
-        message = (
-            "Invalid key, '{key}', for class, '{obj_name}'.\n\nRun "
-            "'help(plotly.graph_objs.{obj_name})' for more information."
-            "".format(key=key, obj_name=obj.__class__.__name__)
+    def __init__(self, obj, path, notes=()):
+        format_dict = {'attribute': path[-1], 'object_name': obj._name}
+        message = ("'{attribute}' is not allowed in '{object_name}'"
+                   .format(**format_dict))
+        notes = [obj.help(return_help=True)] + list(notes)
+        super(PlotlyDictKeyError, self).__init__(
+            message=message, path=path, notes=notes, plain_message=message
         )
-        plain_message = ("Invalid key, '{key}', found in '{obj}' object"
-                         "".format(key=key, obj=obj.__class__.__name__))
-        super(PlotlyDictKeyError, self).__init__(message=message,
-                                                 path=path,
-                                                 plain_message=plain_message,
-                                                 **kwargs)
 
 
 class PlotlyDictValueError(PlotlyGraphObjectError):
-    def __init__(self, obj, value, val_types, path=(), **kwargs):
-        key = path[-1]
-        message = (
-            "Invalid value type, '{value_name}', associated with key, "
-            "'{key}', for class, '{obj_name}'.\nValid types for this key "
-            "are:\n '{val_types}'.\n\n"
-            "Run 'help(plotly.graph_objs.{obj_name})' for more information."
-            .format(key=key, value_name=value.__class__.__name__,
-                    val_types=val_types, obj_name=obj.__class__.__name__)
+    def __init__(self, obj, path, notes=()):
+        format_dict = {'attribute': path[-1], 'object_name': obj._name}
+        message = ("'{attribute}' has invalid value inside '{object_name}'"
+                   .format(**format_dict))
+        notes = [obj.help(path[-1], return_help=True)] + list(notes)
+        super(PlotlyDictValueError, self).__init__(
+            message=message, plain_message=message, notes=notes, path=path
         )
-        plain_message = ("Invalid value found in '{obj}' associated with key, "
-                         "'{key}'".format(key=key, obj=obj.__class__.__name__))
-        super(PlotlyDictValueError, self).__init__(message=message,
-                                                   plain_message=plain_message,
-                                                   path=path,
-                                                   **kwargs)
 
 
 class PlotlyListEntryError(PlotlyGraphObjectError):
-    def __init__(self, obj, path=(), **kwargs):
-        index = path[-1]
-        message = (
-            "The entry at index, '{0}', is invalid in a '{1}' object"
-            "".format(index, obj.__class__.__name__)
+    def __init__(self, obj, path, notes=()):
+        format_dict = {'index': path[-1], 'object_name': obj._name}
+        message = ("Invalid entry found in '{object_name}' at index, '{index}'"
+                   .format(**format_dict))
+        notes = [obj.help(return_help=True)] + list(notes)
+        super(PlotlyListEntryError, self).__init__(
+            message=message, plain_message=message, path=path, notes=notes
         )
-        plain_message = (
-            "Invalid entry found in '{obj}' object at index, '{index}'."
-            "".format(obj=obj.__class__.__name__, index=index)
-        )
-        super(PlotlyListEntryError, self).__init__(message=message,
-                                                   plain_message=plain_message,
-                                                   path=path,
-                                                   **kwargs)
 
 
 class PlotlyDataTypeError(PlotlyGraphObjectError):
-    def __init__(self, obj, path=(), **kwargs):
-        index = path[-1]
-        message = (
-                "The entry at index, '{0}', is invalid because it does not "
-                "contain a valid 'type' key-value. This is required for valid "
-                "'{1}' lists.".format(index, obj.__class__.__name__)
+    def __init__(self, obj, path, notes=()):
+        format_dict = {'index': path[-1], 'object_name': obj._name}
+        message = ("Invalid entry found in '{object_name}' at index, '{index}'"
+                   .format(**format_dict))
+        note = "It's invalid because it does't contain a valid 'type' value."
+        notes = [note] + list(notes)
+        super(PlotlyDataTypeError, self).__init__(
+            message=message, plain_message=message, path=path, notes=notes
         )
-        plain_message = (
-                "Invalid entry found in 'data' object at index, '{0}'. It "
-                "does not contain a valid 'type' key, required for 'data' "
-                "lists.".format(index))
-        super(PlotlyDataTypeError, self).__init__(message=message,
-                                                  plain_message=plain_message,
-                                                  path=path,
-                                                  **kwargs)
 
 
 # Local Config Errors

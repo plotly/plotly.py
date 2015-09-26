@@ -145,21 +145,20 @@ class PlotlyList(list, PlotlyBase):
             )
 
         if args and isinstance(args[0], dict):
-            raise exceptions.PlotlyListEntryError(
-                obj=self,
-                path=[0],
-                note="Just like a `list`, `{name}` must be instantiated with "
-                     "a *single* collection.\n"
-                     "In other words these are OK:\n"
-                     ">>> {name}()\n"
-                     ">>> {name}([])\n"
-                     ">>> {name}([dict()])\n"
-                     ">>> {name}([dict(), dict()])\n"
-                     "However, these don't make sense:\n"
-                     ">>> {name}(dict())\n"
-                     ">>> {name}(dict(), dict())"
-                     .format(name=self._get_class_name())
+            note = (
+                "Just like a `list`, `{name}` must be instantiated "
+                "with a *single* collection.\n"
+                "In other words these are OK:\n"
+                ">>> {name}()\n"
+                ">>> {name}([])\n"
+                ">>> {name}([dict()])\n"
+                ">>> {name}([dict(), dict()])\n"
+                "However, these don't make sense:\n"
+                ">>> {name}(dict())\n"
+                ">>> {name}(dict(), dict())"
+                .format(name=self._get_class_name())
             )
+            raise exceptions.PlotlyListEntryError(self, [0], notes=[note])
 
         super(PlotlyList, self).__init__()
 
@@ -220,7 +219,7 @@ class PlotlyList(list, PlotlyBase):
         if not isinstance(value, dict):
             if _raise:
                 path = self._get_path() + (index, )
-                raise exceptions.PlotlyListEntryError(self, path=path)
+                raise exceptions.PlotlyListEntryError(self, path)
             else:
                 return
 
@@ -430,7 +429,7 @@ class PlotlyDict(dict, PlotlyBase):
             else:
                 if _raise:
                     path = self._get_path() + (key, )
-                    raise exceptions.PlotlyDictKeyError(self, path=path)
+                    raise exceptions.PlotlyDictKeyError(self, path)
                 return
 
         if self._get_attribute_role(key) == 'object':
@@ -539,8 +538,7 @@ class PlotlyDict(dict, PlotlyBase):
         if not isinstance(value, val_types):
             if _raise:
                 path = self._get_path() + (key, )
-                raise exceptions.PlotlyDictValueError(self, value, val_types,
-                                                      path=path)
+                raise exceptions.PlotlyDictValueError(self, path)
             else:
                 return
 
@@ -940,9 +938,9 @@ def _patch_data_class(data_class):
 
         if not isinstance(value, dict):
             if _raise:
-                note = 'Entry should subclass dict.'
+                notes = ['Entry should subclass dict.']
                 path = self._get_path() + (index, )
-                raise exceptions.PlotlyListEntryError(self, path, note=note)
+                raise exceptions.PlotlyListEntryError(self, path, notes=notes)
             else:
                 return
 
@@ -950,7 +948,7 @@ def _patch_data_class(data_class):
         if item not in graph_reference.ARRAYS['data']['items']:
             if _raise:
                 path = self._get_path() + (0, )
-                raise exceptions.PlotlyDataTypeError(self, path=path)
+                raise exceptions.PlotlyDataTypeError(self, path)
 
         return GraphObjectFactory.create(item, _raise=_raise, _parent=self,
                                          _parent_key=index, **value)
