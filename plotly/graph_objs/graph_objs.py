@@ -140,17 +140,17 @@ class PlotlyList(list, PlotlyBase):
             raise exceptions.PlotlyListEntryError(
                 obj=self,
                 index=0,
-                notes="Just like a `list`, `{name}` must be instantiated with "
-                      "a *single* collection.\n"
-                      "In other words these are OK:\n"
-                      ">>> {name}()\n"
-                      ">>> {name}([])\n"
-                      ">>> {name}([dict()])\n"
-                      ">>> {name}([dict(), dict()])\n"
-                      "However, these don't make sense:\n"
-                      ">>> {name}(dict())\n"
-                      ">>> {name}(dict(), dict())"
-                      "".format(name=self._get_class_name())
+                note="Just like a `list`, `{name}` must be instantiated with "
+                     "a *single* collection.\n"
+                     "In other words these are OK:\n"
+                     ">>> {name}()\n"
+                     ">>> {name}([])\n"
+                     ">>> {name}([dict()])\n"
+                     ">>> {name}([dict(), dict()])\n"
+                     "However, these don't make sense:\n"
+                     ">>> {name}(dict())\n"
+                     ">>> {name}(dict(), dict())"
+                     .format(name=self._get_class_name())
             )
 
         super(PlotlyList, self).__init__()
@@ -926,9 +926,9 @@ def _patch_data_class(data_class):
 
         if not isinstance(value, dict):
             if _raise:
-                e = exceptions.PlotlyListEntryError(self, index, value)
-                e.add_note('Entry should subclass dict.')
-                raise e
+                note = 'Entry should subclass dict.'
+                raise exceptions.PlotlyListEntryError(self, index, value,
+                                                      note=note)
             else:
                 return
 

@@ -81,26 +81,15 @@ class PlotlyEmptyDataError(PlotlyError):
 
 # Graph Objects Errors
 class PlotlyGraphObjectError(PlotlyError):
-    def __init__(self, message='', path=(), notes=None, plain_message=''):
+    def __init__(self, message='', path=(), note='', plain_message=''):
         self.message = message
         self.plain_message = plain_message
         if isinstance(path, (basestring, int)):
             self.path = [path]
         else:
             self.path = list(path)
-        if isinstance(notes, list):
-            self.notes = notes
-        elif notes is None:
-            self.notes = []
-        else:
-            self.notes = [notes]
+        self.note = note
         super(PlotlyGraphObjectError, self).__init__(message)
-
-    def add_note(self, note):
-        if isinstance(note, list):
-            self.notes += note
-        else:
-            self.notes += [note]
 
     def add_to_error_path(self, path):
         if isinstance(path, list):
@@ -112,10 +101,10 @@ class PlotlyGraphObjectError(PlotlyError):
         format_dict = {
             'message': self.message,
             'path': '[' + ']['.join(repr(k) for k in self.path) + ']',
-            'notes': '\n'.join(self.notes)
+            'note': self.note
         }
         return (
-            '{message}\n\nPath To Error: {path}\n\nAdditional Notes:\n {notes}'
+            '{message}\n\nPath To Error: {path}\n\nAdditional Notes:\n {note}'
             .format(**format_dict)
         )
 
