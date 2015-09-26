@@ -165,7 +165,8 @@ class PlotlyLocalError(PlotlyError):
 
 class PlotlyLocalCredentialsError(PlotlyLocalError):
     def __init__(self):
-        message = ("\n"
+        message = (
+            "\n"
             "Couldn't find a 'username', 'api-key' pair for you on your local "
             "machine. To sign in temporarily (until you stop running Python), "
             "run:\n"
@@ -174,8 +175,10 @@ class PlotlyLocalCredentialsError(PlotlyLocalError):
             "Even better, save your credentials permanently using the 'tools' "
             "module:\n"
             ">>> import plotly.tools as tls\n"
-            ">>> tls.set_credentials_file(username='username', api_key='api-key')\n\n"
-            "For more help, see https://plot.ly/python.\n")
+            ">>> tls.set_credentials_file(username='username', "
+            "api_key='api-key')\n\n"
+            "For more help, see https://plot.ly/python.\n"
+        )
         super(PlotlyLocalCredentialsError, self).__init__(message)
 
 
