@@ -20,8 +20,7 @@ def get_help(object_name, path=(), parent_object_names=(), attribute=None):
     :return: (str) A printable string to show to users.
 
     """
-    class_name = graph_reference.string_to_class_name(object_name)
-    help_string = 'Help for {}\n\n'.format(class_name)
+    help_string = 'Help for {}\n\n'.format(object_name)
     if object_name in graph_reference.ARRAYS:
         help_string += _list_help(object_name, path, parent_object_names)
     else:
