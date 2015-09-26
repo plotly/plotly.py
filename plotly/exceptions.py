@@ -74,6 +74,7 @@ NON_UNIQUE_COLUMN_MESSAGE = (
 
 # Would Cause Server Errors
 
+
 class PlotlyEmptyDataError(PlotlyError):
     pass
 
@@ -82,7 +83,7 @@ class PlotlyEmptyDataError(PlotlyError):
 class PlotlyGraphObjectError(PlotlyError):
     def __init__(self, message='', path=None, notes=None, plain_message=''):
         self.message = message
-        self.plain_message=plain_message
+        self.plain_message = plain_message
         if isinstance(path, list):
             self.path = path
         elif path is None:
