@@ -88,13 +88,21 @@ class PlotlyBase(object):
         """For convenience. See `graph_reference.object_name_to_class_name`."""
         return graph_reference.object_name_to_class_name(self._name)
 
-    def help(self):
-        """Print a help string for this object."""
+    def help(self, return_help=False):
+        """
+        Print a help string for this object.
+
+        :param (bool) return_help: Return help string instead of prining?
+        :return: (None|str) Optionally can return help string.
+
+        """
         object_name = self._name
         path = self._get_path()
         parent_object_names = self._get_parent_object_names()
         help_string = graph_objs_tools.get_help(object_name, path,
                                                 parent_object_names)
+        if return_help:
+            return help_string
         print(help_string)
 
     def to_graph_objs(self, **kwargs):
@@ -540,18 +548,27 @@ class PlotlyDict(dict, PlotlyBase):
         return GraphObjectFactory.create(key, value, _raise=_raise,
                                          _parent=self, _parent_key=key)
 
-    def help(self, attribute=None):
-        """Print help string for this object or an attribute of this object."""
+    def help(self, attribute=None, return_help=False):
+        """
+        Print help string for this object or an attribute of this object.
+
+        :param (str) attribute: A valid attribute string for this object.
+        :param (bool) return_help: Return help_string instead of printing it?
+        :return: (None|str)
+
+        """
         if not attribute:
-            super(PlotlyDict, self).help()
-        else:
-            object_name = self._name
-            path = self._get_path()
-            parent_object_names = self._get_parent_object_names()
-            help_string = graph_objs_tools.get_help(object_name, path,
-                                                    parent_object_names,
-                                                    attribute)
-            print(help_string)
+            return super(PlotlyDict, self).help(return_help=return_help)
+
+        object_name = self._name
+        path = self._get_path()
+        parent_object_names = self._get_parent_object_names()
+        help_string = graph_objs_tools.get_help(object_name, path,
+                                                parent_object_names, attribute)
+
+        if return_help:
+            return help_string
+        print(help_string)
 
     def update(self, dict1=None, **dict2):
         """
