@@ -122,11 +122,10 @@ class PlotlyDictValueError(PlotlyGraphObjectError):
         message = (
             "Invalid value type, '{value_name}', associated with key, "
             "'{key}', for class, '{obj_name}'.\nValid types for this key "
-            "are:\n '{val_types}'.\n\nRun 'help(plotly.graph_objs.{obj_name})' "
-            "for more information.".format(key=key,
-                                           value_name=value.__class__.__name__,
-                                           val_types=val_types,
-                                           obj_name=obj.__class__.__name__)
+            "are:\n '{val_types}'.\n\n"
+            "Run 'help(plotly.graph_objs.{obj_name})' for more information."
+            .format(key=key, value_name=value.__class__.__name__,
+                    val_types=val_types, obj_name=obj.__class__.__name__)
         )
         plain_message = ("Invalid value found in '{obj}' associated with key, "
                          "'{key}'".format(key=key, obj=obj.__class__.__name__))
