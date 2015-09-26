@@ -84,10 +84,7 @@ class PlotlyGraphObjectError(PlotlyError):
     def __init__(self, message='', path=(), note='', plain_message=''):
         self.message = message
         self.plain_message = plain_message
-        if isinstance(path, (basestring, int)):
-            self.path = [path]
-        else:
-            self.path = list(path)
+        self.path = list(path)
         self.note = note
         super(PlotlyGraphObjectError, self).__init__(message)
 
