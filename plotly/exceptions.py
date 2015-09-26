@@ -81,9 +81,9 @@ class PlotlyEmptyDataError(PlotlyError):
 
 # Graph Objects Errors
 class PlotlyGraphObjectError(PlotlyError):
-    def __init__(self, message='', path=(), notes=(), plain_message=''):
+    def __init__(self, message='', path=(), notes=()):
         self.message = message
-        self.plain_message = plain_message
+        self.plain_message = message  # for backwards compat
         self.path = list(path)
         self.notes = notes
         super(PlotlyGraphObjectError, self).__init__(message)
@@ -107,7 +107,7 @@ class PlotlyDictKeyError(PlotlyGraphObjectError):
                    .format(**format_dict))
         notes = [obj.help(return_help=True)] + list(notes)
         super(PlotlyDictKeyError, self).__init__(
-            message=message, path=path, notes=notes, plain_message=message
+            message=message, path=path, notes=notes
         )
 
 
@@ -118,7 +118,7 @@ class PlotlyDictValueError(PlotlyGraphObjectError):
                    .format(**format_dict))
         notes = [obj.help(path[-1], return_help=True)] + list(notes)
         super(PlotlyDictValueError, self).__init__(
-            message=message, plain_message=message, notes=notes, path=path
+            message=message, notes=notes, path=path
         )
 
 
@@ -129,7 +129,7 @@ class PlotlyListEntryError(PlotlyGraphObjectError):
                    .format(**format_dict))
         notes = [obj.help(return_help=True)] + list(notes)
         super(PlotlyListEntryError, self).__init__(
-            message=message, plain_message=message, path=path, notes=notes
+            message=message, path=path, notes=notes
         )
 
 
@@ -141,7 +141,7 @@ class PlotlyDataTypeError(PlotlyGraphObjectError):
         note = "It's invalid because it does't contain a valid 'type' value."
         notes = [note] + list(notes)
         super(PlotlyDataTypeError, self).__init__(
-            message=message, plain_message=message, path=path, notes=notes
+            message=message, path=path, notes=notes
         )
 
 
