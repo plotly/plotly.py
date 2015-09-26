@@ -95,7 +95,6 @@ class PlotlyGraphObjectError(PlotlyError):
         else:
             self.notes = [notes]
         super(PlotlyGraphObjectError, self).__init__(message)
-        self.prepare()
 
     def add_note(self, note):
         if isinstance(note, list):
@@ -109,7 +108,7 @@ class PlotlyGraphObjectError(PlotlyError):
         else:
             self.path = [path] + self.path
 
-    def prepare(self):
+    def __str__(self):
         message = self.message
         message += "\n\nPath To Error:\n["
         for iii, key in enumerate(self.path):
@@ -120,10 +119,7 @@ class PlotlyGraphObjectError(PlotlyError):
         if len(self.notes):
             message += "\n\nAdditional Notes:\n{0}".format(
                 "\n".join(self.notes))
-        if len(self.args) > 1:
-            self.args = (message, self.args[1:][0])
-        else:
-            self.args = message,
+        return message
 
 
 class PlotlyDictKeyError(PlotlyGraphObjectError):

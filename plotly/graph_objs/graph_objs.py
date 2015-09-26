@@ -213,7 +213,6 @@ class PlotlyList(list, PlotlyBase):
             if _raise:
                 e = exceptions.PlotlyListEntryError(self, index, value)
                 e.path = self._get_path() + (index, )
-                e.prepare()
                 raise e
             else:
                 return
@@ -425,7 +424,6 @@ class PlotlyDict(dict, PlotlyBase):
                 if _raise:
                     e = exceptions.PlotlyDictKeyError(self, key)
                     e.path = self._get_path() + (key, )
-                    e.prepare()
                     raise e
                 return
 
@@ -537,7 +535,6 @@ class PlotlyDict(dict, PlotlyBase):
                 e = exceptions.PlotlyDictValueError(self, key, value,
                                                     val_types)
                 e.path = self._get_path() + (key, )
-                e.prepare()
                 raise e
             else:
                 return
@@ -940,7 +937,6 @@ def _patch_data_class(data_class):
             if _raise:
                 err = exceptions.PlotlyDataTypeError(self, index)
                 err.path = self._get_path() + (0, )
-                err.prepare()
                 raise err
 
         return GraphObjectFactory.create(item, _raise=_raise, _parent=self,
