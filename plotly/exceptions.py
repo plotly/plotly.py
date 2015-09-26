@@ -91,12 +91,6 @@ class PlotlyGraphObjectError(PlotlyError):
         self.note = note
         super(PlotlyGraphObjectError, self).__init__(message)
 
-    def add_to_error_path(self, path):
-        if isinstance(path, list):
-            self.path = path + self.path
-        else:
-            self.path = [path] + self.path
-
     def __str__(self):
         format_dict = {
             'message': self.message,
