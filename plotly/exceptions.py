@@ -46,7 +46,7 @@ class PlotlyRequestError(PlotlyError):
         return self.message
 
 
-# Grid Errors #
+# Grid Errors
 COLUMN_NOT_YET_UPLOADED_MESSAGE = (
     "Hm... it looks like your column '{column_name}' hasn't "
     "been uploaded to Plotly yet. You need to upload your "
@@ -61,8 +61,6 @@ NON_UNIQUE_COLUMN_MESSAGE = (
     "can't have duplicate column names. Rename "
     "the column \"{0}\" and try again."
 )
-
-# Would Cause Server Errors
 
 
 class PlotlyEmptyDataError(PlotlyError):
