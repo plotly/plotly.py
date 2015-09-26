@@ -11,6 +11,7 @@ import requests
 import six
 
 from unittest import TestCase
+from nose.plugins.attrib import attr
 from nose.tools import raises
 
 import plotly.tools as tls
@@ -27,6 +28,7 @@ def setUp():
                plotly_domain='https://plot.ly')
 
 
+@attr('slow')
 def test_plot_valid():
     fig = {
         'data': [
@@ -149,6 +151,7 @@ class TestPlot(TestCase):
                                       'sharing': 'private'}
         self.assertEqual(plot_option_logic, expected_plot_option_logic)
 
+    @attr('slow')
     def test_plot_url_given_sharing_key(self):
 
         # Give share_key is requested, the retun url should contain
@@ -166,6 +169,7 @@ class TestPlot(TestCase):
 
         self.assertTrue('share_key=' in plot_url)
 
+    @attr('slow')
     def test_plot_url_response_given_sharing_key(self):
 
         # Given share_key is requested, get request of the url should
@@ -181,6 +185,7 @@ class TestPlot(TestCase):
         response = requests.get(plot_url)
         self.assertEqual(response.status_code, 200)
 
+    @attr('slow')
     def test_private_plot_response_with_and_without_share_key(self):
 
         # The json file of the private plot should be 404 and once

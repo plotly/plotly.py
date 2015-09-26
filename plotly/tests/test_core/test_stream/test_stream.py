@@ -9,6 +9,7 @@ from __future__ import absolute_import
 
 import time
 
+from nose.plugins.attrib import attr
 from nose.tools import raises
 
 import plotly.plotly as py
@@ -27,6 +28,7 @@ def setUp():
     py.sign_in(un, ak, **config)
 
 
+@attr('slow')
 def test_initialize_stream_plot():
     py.sign_in(un, ak)
     stream = Stream(token=tk, maxpoints=50)
@@ -37,6 +39,7 @@ def test_initialize_stream_plot():
     time.sleep(.5)
 
 
+@attr('slow')
 def test_stream_single_points():
     py.sign_in(un, ak)
     stream = Stream(token=tk, maxpoints=50)
@@ -51,6 +54,7 @@ def test_stream_single_points():
     my_stream.close()
 
 
+@attr('slow')
 def test_stream_multiple_points():
     py.sign_in(un, ak)
     stream = Stream(token=tk, maxpoints=50)
@@ -65,6 +69,7 @@ def test_stream_multiple_points():
     my_stream.close()
 
 
+@attr('slow')
 def test_stream_layout():
     py.sign_in(un, ak)
     stream = Stream(token=tk, maxpoints=50)
@@ -84,6 +89,7 @@ def test_stream_layout():
     my_stream.close()
 
 
+@attr('slow')
 @raises(exceptions.PlotlyError)
 def test_stream_validate_data():
     py.sign_in(un, ak)
@@ -93,6 +99,7 @@ def test_stream_validate_data():
     my_stream.close()
 
 
+@attr('slow')
 @raises(exceptions.PlotlyError)
 def test_stream_validate_layout():
     py.sign_in(un, ak)
@@ -102,6 +109,7 @@ def test_stream_validate_layout():
     my_stream.close()
 
 
+@attr('slow')
 def test_stream_unstreamable():
 
     # even though `name` isn't streamable, we don't validate it --> should pass

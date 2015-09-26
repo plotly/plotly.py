@@ -2,23 +2,31 @@ from __future__ import absolute_import
 
 from unittest import TestCase
 
-from plotly.graph_objs.graph_objs_tools import value_is_data
+from plotly import graph_reference as gr
+from plotly.graph_objs import graph_objs_tools as got
 
 
-class TestValueIsData(TestCase):
+class TestGetHelp(TestCase):
 
-    def test_unknown_strings(self):
-        self.assertFalse(value_is_data('scatter', 'blah', ''))
-        self.assertFalse(value_is_data('huh?', 'text', None))
+    def test_get_help_does_not_raise(self):
 
-    def test_data_value_type(self):
-        self.assertTrue(value_is_data('scatter', 'x', {}))
-        self.assertTrue(value_is_data('bar', 'name', 'bill'))
-        self.assertTrue(value_is_data('histogram', 'x', [5, 5]))
-        self.assertTrue(value_is_data('xaxis', 'range', [0, 5]))
+        msg = None
+        try:
+            for object_name in gr.OBJECTS:
+                msg = object_name
+                got.get_help(object_name)
 
-    def test_style_value_type(self):
-        self.assertFalse(value_is_data('marker', 'color', 'red'))
-        self.assertTrue(value_is_data('marker', 'color', ['red', 'blue']))
-        self.assertTrue(value_is_data('marker', 'opacity', (.9, .5)))
-        self.assertFalse(value_is_data('marker', 'symbol', {}))
+            for object_name in gr.ARRAYS:
+                msg = object_name
+                got.get_help(object_name)
+
+            for object_name in gr.OBJECTS:
+                attributes = gr.get_valid_attributes(object_name)
+                for attribute in attributes:
+                    msg = (object_name, attribute)
+                    got.get_help(object_name, attribute=attribute)
+                fake_attribute = 'fake attribute'
+                msg = (object_name, fake_attribute)
+                got.get_help(object_name, attribute=fake_attribute)
+        except:
+            self.fail(msg=msg)

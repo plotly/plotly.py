@@ -341,9 +341,11 @@ class PlotlyRenderer(Renderer):
             self.msg += "... with just markers\n"
             mode = "markers"
         if props['linestyle']:
+            color = \
+                mpltools.merge_color_and_opacity(props['linestyle']['color'],
+                                                 props['linestyle']['alpha'])
             line = go.Line(
-                opacity=props['linestyle']['alpha'],
-                color=props['linestyle']['color'],
+                color=color,
                 width=props['linestyle']['linewidth'],
                 dash=mpltools.convert_dash(props['linestyle']['dasharray'])
             )

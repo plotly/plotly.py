@@ -345,3 +345,57 @@ def is_source_key(key):
         return True
     else:
         return False
+
+
+def node_generator(node, path=()):
+    """
+    General, node-yielding generator.
+
+    Yields (node, path) tuples when it finds values that are dict
+    instances.
+
+    A path is a sequence of hashable values that can be used as either keys to
+    a mapping (dict) or indices to a sequence (list). A path is always wrt to
+    some object. Given an object, a path explains how to get from the top level
+    of that object to a nested value in the object.
+
+    :param (dict) node: Part of a dict to be traversed.
+    :param (tuple[str]) path: Defines the path of the current node.
+    :return: (Generator)
+
+    Example:
+
+        >>> for node, path in node_generator({'a': {'b': 5}}):
+        >>>     print node, path
+        {'a': {'b': 5}} ()
+        {'b': 5} ('a', )
+
+    """
+    if not isinstance(node, dict):
+        return  # in case it's called with a non-dict node at top level
+    yield node, path
+    for key, val in node.items():
+        if isinstance(val, dict):
+            for item in node_generator(val, path + (key, )):
+                yield item
+
+
+def get_by_path(obj, path):
+    """
+    Iteratively get on obj for each key in path.
+
+    :param (list|dict) obj: The top-level object.
+    :param (tuple[str]|tuple[int]) path: Keys to access parts of obj.
+
+    :return: (*)
+
+    Example:
+
+        >>> figure = {'data': [{'x': [5]}]}
+        >>> path = ('data', 0, 'x')
+        >>> get_by_path(figure, path)  # [5]
+
+    """
+    for key in path:
+        obj = obj[key]
+    return obj

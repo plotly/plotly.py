@@ -10,10 +10,13 @@ import string
 import requests
 from unittest import TestCase
 
+from nose.plugins.attrib import attr
+
 import plotly.plotly as py
 from plotly.exceptions import PlotlyRequestError
 
 
+@attr('slow')
 class FolderAPITestCase(TestCase):
 
     def setUp(self):
