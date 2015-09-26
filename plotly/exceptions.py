@@ -81,15 +81,13 @@ class PlotlyEmptyDataError(PlotlyError):
 
 # Graph Objects Errors
 class PlotlyGraphObjectError(PlotlyError):
-    def __init__(self, message='', path=None, notes=None, plain_message=''):
+    def __init__(self, message='', path=(), notes=None, plain_message=''):
         self.message = message
         self.plain_message = plain_message
-        if isinstance(path, list):
-            self.path = path
-        elif path is None:
-            self.path = []
-        else:
+        if isinstance(path, (basestring, int)):
             self.path = [path]
+        else:
+            self.path = list(path)
         if isinstance(notes, list):
             self.notes = notes
         elif notes is None:
