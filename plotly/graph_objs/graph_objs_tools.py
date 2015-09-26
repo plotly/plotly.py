@@ -39,7 +39,8 @@ def _list_help(object_name, path=(), parent_object_names=()):
     items = graph_reference.ARRAYS[object_name]['items']
     items_classes = [graph_reference.string_to_class_name(item)
                      for item in items]
-    items_string = '\n\t* {}\n'.format('\n\t* '.join(items_classes))
+    lines = textwrap.wrap(repr(items_classes), width=LINE_SIZE - TAB_SIZE)
+    items_string = '\n\t'.join(lines)
     help_string = 'Valid Item Classes:\n{}\n'.format(items_string)
     return help_string
 
@@ -63,9 +64,10 @@ def _dict_object_help(object_name, path, parent_object_names):
     help_dict = {'path': path,
                  'parent_class_names': parent_class_names}
 
-    attributes_str = '\n\t* {}\n'.format('\n\t* '.join(attributes))
+    lines = textwrap.wrap(repr(list(attributes)), width=LINE_SIZE - TAB_SIZE)
+    attributes_str = '\n\t'.join(lines)
     help_string = (
-        "Run `.help('attribute')` on any of the following attributes:\n"
+        "Run `.help('attribute')` on any of the following attributes:\n\n\t"
         "{attributes_str}"
     )
     return help_string.format(attributes_str=attributes_str, **help_dict)
