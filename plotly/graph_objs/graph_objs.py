@@ -88,13 +88,21 @@ class PlotlyBase(object):
         """For convenience. See `graph_reference.object_name_to_class_name`."""
         return graph_reference.object_name_to_class_name(self._name)
 
-    def help(self):
-        """Print a help string for this object."""
+    def help(self, return_help=False):
+        """
+        Print a help string for this object.
+
+        :param (bool) return_help: Return help string instead of prining?
+        :return: (None|str) Optionally can return help string.
+
+        """
         object_name = self._name
         path = self._get_path()
         parent_object_names = self._get_parent_object_names()
         help_string = graph_objs_tools.get_help(object_name, path,
                                                 parent_object_names)
+        if return_help:
+            return help_string
         print(help_string)
 
     def to_graph_objs(self, **kwargs):
@@ -137,21 +145,20 @@ class PlotlyList(list, PlotlyBase):
             )
 
         if args and isinstance(args[0], dict):
-            raise exceptions.PlotlyListEntryError(
-                obj=self,
-                index=0,
-                notes="Just like a `list`, `{name}` must be instantiated with "
-                      "a *single* collection.\n"
-                      "In other words these are OK:\n"
-                      ">>> {name}()\n"
-                      ">>> {name}([])\n"
-                      ">>> {name}([dict()])\n"
-                      ">>> {name}([dict(), dict()])\n"
-                      "However, these don't make sense:\n"
-                      ">>> {name}(dict())\n"
-                      ">>> {name}(dict(), dict())"
-                      "".format(name=self._get_class_name())
+            note = (
+                "Just like a `list`, `{name}` must be instantiated "
+                "with a *single* collection.\n"
+                "In other words these are OK:\n"
+                ">>> {name}()\n"
+                ">>> {name}([])\n"
+                ">>> {name}([dict()])\n"
+                ">>> {name}([dict(), dict()])\n"
+                "However, these don't make sense:\n"
+                ">>> {name}(dict())\n"
+                ">>> {name}(dict(), dict())"
+                .format(name=self._get_class_name())
             )
+            raise exceptions.PlotlyListEntryError(self, [0], notes=[note])
 
         super(PlotlyList, self).__init__()
 
@@ -211,10 +218,8 @@ class PlotlyList(list, PlotlyBase):
         """
         if not isinstance(value, dict):
             if _raise:
-                e = exceptions.PlotlyListEntryError(self, index, value)
-                e.path = self._get_path() + (index, )
-                e.prepare()
-                raise e
+                path = self._get_path() + (index, )
+                raise exceptions.PlotlyListEntryError(self, path)
             else:
                 return
 
@@ -423,10 +428,8 @@ class PlotlyDict(dict, PlotlyBase):
                 return super(PlotlyDict, self).__setitem__(key, value)
             else:
                 if _raise:
-                    e = exceptions.PlotlyDictKeyError(self, key)
-                    e.path = self._get_path() + (key, )
-                    e.prepare()
-                    raise e
+                    path = self._get_path() + (key, )
+                    raise exceptions.PlotlyDictKeyError(self, path)
                 return
 
         if self._get_attribute_role(key) == 'object':
@@ -534,11 +537,8 @@ class PlotlyDict(dict, PlotlyBase):
 
         if not isinstance(value, val_types):
             if _raise:
-                e = exceptions.PlotlyDictValueError(self, key, value,
-                                                    val_types)
-                e.path = self._get_path() + (key, )
-                e.prepare()
-                raise e
+                path = self._get_path() + (key, )
+                raise exceptions.PlotlyDictValueError(self, path)
             else:
                 return
 
@@ -546,18 +546,27 @@ class PlotlyDict(dict, PlotlyBase):
         return GraphObjectFactory.create(key, value, _raise=_raise,
                                          _parent=self, _parent_key=key)
 
-    def help(self, attribute=None):
-        """Print help string for this object or an attribute of this object."""
+    def help(self, attribute=None, return_help=False):
+        """
+        Print help string for this object or an attribute of this object.
+
+        :param (str) attribute: A valid attribute string for this object.
+        :param (bool) return_help: Return help_string instead of printing it?
+        :return: (None|str)
+
+        """
         if not attribute:
-            super(PlotlyDict, self).help()
-        else:
-            object_name = self._name
-            path = self._get_path()
-            parent_object_names = self._get_parent_object_names()
-            help_string = graph_objs_tools.get_help(object_name, path,
-                                                    parent_object_names,
-                                                    attribute)
-            print(help_string)
+            return super(PlotlyDict, self).help(return_help=return_help)
+
+        object_name = self._name
+        path = self._get_path()
+        parent_object_names = self._get_parent_object_names()
+        help_string = graph_objs_tools.get_help(object_name, path,
+                                                parent_object_names, attribute)
+
+        if return_help:
+            return help_string
+        print(help_string)
 
     def update(self, dict1=None, **dict2):
         """
@@ -929,19 +938,17 @@ def _patch_data_class(data_class):
 
         if not isinstance(value, dict):
             if _raise:
-                e = exceptions.PlotlyListEntryError(self, index, value)
-                e.add_note('Entry should subclass dict.')
-                raise e
+                notes = ['Entry should subclass dict.']
+                path = self._get_path() + (index, )
+                raise exceptions.PlotlyListEntryError(self, path, notes=notes)
             else:
                 return
 
         item = value.get('type', 'scatter')
         if item not in graph_reference.ARRAYS['data']['items']:
             if _raise:
-                err = exceptions.PlotlyDataTypeError(self, index)
-                err.path = self._get_path() + (0, )
-                err.prepare()
-                raise err
+                path = self._get_path() + (0, )
+                raise exceptions.PlotlyDataTypeError(self, path)
 
         return GraphObjectFactory.create(item, _raise=_raise, _parent=self,
                                          _parent_key=index, **value)

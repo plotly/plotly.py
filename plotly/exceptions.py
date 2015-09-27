@@ -4,16 +4,6 @@ exceptions
 
 A module that contains plotly's exception hierarchy.
 
-message (required!) (should be root message + caller message)
-info: (required!)
-    path_to_error (required!)
-    minimal_message (required!)
-
-- minimal_message is set inside this module, should not be set elsewhere
-
-- message is set inside this module, should not be set elsewhere
-
-
 """
 import json
 
@@ -56,7 +46,7 @@ class PlotlyRequestError(PlotlyError):
         return self.message
 
 
-# Grid Errors #
+# Grid Errors
 COLUMN_NOT_YET_UPLOADED_MESSAGE = (
     "Hm... it looks like your column '{column_name}' hasn't "
     "been uploaded to Plotly yet. You need to upload your "
@@ -72,7 +62,6 @@ NON_UNIQUE_COLUMN_MESSAGE = (
     "the column \"{0}\" and try again."
 )
 
-# Would Cause Server Errors
 
 class PlotlyEmptyDataError(PlotlyError):
     pass
@@ -80,118 +69,79 @@ class PlotlyEmptyDataError(PlotlyError):
 
 # Graph Objects Errors
 class PlotlyGraphObjectError(PlotlyError):
-    def __init__(self, message='', path=None, notes=None, plain_message=''):
+    def __init__(self, message='', path=(), notes=()):
+        """
+        General graph object error for validation failures.
+
+        :param (str|unicode) message: The error message.
+        :param (iterable) path: A path pointing to the error.
+        :param notes: Add additional notes, but keep default exception message.
+
+        """
         self.message = message
-        self.plain_message=plain_message
-        if isinstance(path, list):
-            self.path = path
-        elif path is None:
-            self.path = []
-        else:
-            self.path = [path]
-        if isinstance(notes, list):
-            self.notes = notes
-        elif notes is None:
-            self.notes = []
-        else:
-            self.notes = [notes]
+        self.plain_message = message  # for backwards compat
+        self.path = list(path)
+        self.notes = notes
         super(PlotlyGraphObjectError, self).__init__(message)
-        self.prepare()
 
-    def add_note(self, note):
-        if isinstance(note, list):
-            self.notes += note
-        else:
-            self.notes += [note]
-
-    def add_to_error_path(self, path):
-        if isinstance(path, list):
-            self.path = path + self.path
-        else:
-            self.path = [path] + self.path
-
-    def prepare(self):
-        message = self.message
-        message += "\n\nPath To Error:\n["
-        for iii, key in enumerate(self.path):
-            message += repr(key)
-            if iii < len(self.path) - 1:
-                message += "]["
-        message += "]"
-        if len(self.notes):
-            message += "\n\nAdditional Notes:\n{0}".format(
-                "\n".join(self.notes))
-        if len(self.args) > 1:
-            self.args = (message, self.args[1:][0])
-        else:
-            self.args = message,
+    def __str__(self):
+        """This is called by Python to present the error message."""
+        format_dict = {
+            'message': self.message,
+            'path': '[' + ']['.join(repr(k) for k in self.path) + ']',
+            'notes': '\n'.join(self.notes)
+        }
+        return ('{message}\n\nPath To Error: {path}\n\n{notes}'
+                .format(**format_dict))
 
 
 class PlotlyDictKeyError(PlotlyGraphObjectError):
-    def __init__(self, obj='', key='', **kwargs):
-        message = (
-            "Invalid key, '{key}', for class, '{obj_name}'.\n\nRun "
-            "'help(plotly.graph_objs.{obj_name})' for more information."
-            "".format(key=key, obj_name=obj.__class__.__name__)
+    def __init__(self, obj, path, notes=()):
+        """See PlotlyGraphObjectError.__init__ for param docs."""
+        format_dict = {'attribute': path[-1], 'object_name': obj._name}
+        message = ("'{attribute}' is not allowed in '{object_name}'"
+                   .format(**format_dict))
+        notes = [obj.help(return_help=True)] + list(notes)
+        super(PlotlyDictKeyError, self).__init__(
+            message=message, path=path, notes=notes
         )
-        plain_message = ("Invalid key, '{key}', found in '{obj}' object"
-                         "".format(key=key, obj=obj.__class__.__name__))
-        super(PlotlyDictKeyError, self).__init__(message=message,
-                                                 path=[key],
-                                                 plain_message=plain_message,
-                                                 **kwargs)
 
 
 class PlotlyDictValueError(PlotlyGraphObjectError):
-    def __init__(self, obj='', key='', value='', val_types='', **kwargs):
-        message = (
-            "Invalid value type, '{value_name}', associated with key, "
-            "'{key}', for class, '{obj_name}'.\nValid types for this key "
-            "are:\n '{val_types}'.\n\nRun 'help(plotly.graph_objs.{obj_name})' "
-            "for more information.".format(key=key,
-                                           value_name=value.__class__.__name__,
-                                           val_types=val_types,
-                                           obj_name=obj.__class__.__name__)
+    def __init__(self, obj, path, notes=()):
+        """See PlotlyGraphObjectError.__init__ for param docs."""
+        format_dict = {'attribute': path[-1], 'object_name': obj._name}
+        message = ("'{attribute}' has invalid value inside '{object_name}'"
+                   .format(**format_dict))
+        notes = [obj.help(path[-1], return_help=True)] + list(notes)
+        super(PlotlyDictValueError, self).__init__(
+            message=message, notes=notes, path=path
         )
-        plain_message = ("Invalid value found in '{obj}' associated with key, "
-                         "'{key}'".format(key=key, obj=obj.__class__.__name__))
-        super(PlotlyDictValueError, self).__init__(message=message,
-                                                   plain_message=plain_message,
-                                                   path=[key],
-                                                   **kwargs)
 
 
 class PlotlyListEntryError(PlotlyGraphObjectError):
-    def __init__(self, obj='', index='', entry='', **kwargs):
-        message = (
-            "The entry at index, '{0}', is invalid in a '{1}' object"
-            "".format(index, obj.__class__.__name__)
+    def __init__(self, obj, path, notes=()):
+        """See PlotlyGraphObjectError.__init__ for param docs."""
+        format_dict = {'index': path[-1], 'object_name': obj._name}
+        message = ("Invalid entry found in '{object_name}' at index, '{index}'"
+                   .format(**format_dict))
+        notes = [obj.help(return_help=True)] + list(notes)
+        super(PlotlyListEntryError, self).__init__(
+            message=message, path=path, notes=notes
         )
-        plain_message = (
-            "Invalid entry found in '{obj}' object at index, '{index}'."
-            "".format(obj=obj.__class__.__name__, index=index)
-        )
-        super(PlotlyListEntryError, self).__init__(message=message,
-                                                   plain_message=plain_message,
-                                                   path=[index],
-                                                   **kwargs)
 
 
 class PlotlyDataTypeError(PlotlyGraphObjectError):
-    def __init__(self, obj='', index='', **kwargs):
-        message = (
-                "The entry at index, '{0}', is invalid because it does not "
-                "contain a valid 'type' key-value. This is required for valid "
-                "'{1}' lists.".format(index, obj.__class__.__name__)
+    def __init__(self, obj, path, notes=()):
+        """See PlotlyGraphObjectError.__init__ for param docs."""
+        format_dict = {'index': path[-1], 'object_name': obj._name}
+        message = ("Invalid entry found in '{object_name}' at index, '{index}'"
+                   .format(**format_dict))
+        note = "It's invalid because it does't contain a valid 'type' value."
+        notes = [note] + list(notes)
+        super(PlotlyDataTypeError, self).__init__(
+            message=message, path=path, notes=notes
         )
-        plain_message = (
-                "Invalid entry found in 'data' object at index, '{0}'. It "
-                "does not contain a valid 'type' key, required for 'data' "
-                "lists.".format(index))
-        super(PlotlyDataTypeError, self).__init__(message=message,
-                                                  plain_message=plain_message,
-                                                  path=[index],
-                                                  **kwargs)
 
 
 # Local Config Errors
@@ -201,7 +151,8 @@ class PlotlyLocalError(PlotlyError):
 
 class PlotlyLocalCredentialsError(PlotlyLocalError):
     def __init__(self):
-        message = ("\n"
+        message = (
+            "\n"
             "Couldn't find a 'username', 'api-key' pair for you on your local "
             "machine. To sign in temporarily (until you stop running Python), "
             "run:\n"
@@ -210,8 +161,10 @@ class PlotlyLocalCredentialsError(PlotlyLocalError):
             "Even better, save your credentials permanently using the 'tools' "
             "module:\n"
             ">>> import plotly.tools as tls\n"
-            ">>> tls.set_credentials_file(username='username', api_key='api-key')\n\n"
-            "For more help, see https://plot.ly/python.\n")
+            ">>> tls.set_credentials_file(username='username', "
+            "api_key='api-key')\n\n"
+            "For more help, see https://plot.ly/python.\n"
+        )
         super(PlotlyLocalCredentialsError, self).__init__(message)
 
 

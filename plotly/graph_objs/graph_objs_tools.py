@@ -20,78 +20,83 @@ def get_help(object_name, path=(), parent_object_names=(), attribute=None):
     :return: (str) A printable string to show to users.
 
     """
-    class_name = graph_reference.string_to_class_name(object_name)
-    help_string = 'Help for {}\n\n'.format(class_name)
     if object_name in graph_reference.ARRAYS:
-        help_string += _list_help(object_name, path, parent_object_names)
+        help_string = _list_help(object_name, path, parent_object_names)
     else:
         if attribute:
-            help_string += _dict_attribute_help(object_name, path,
-                                                parent_object_names, attribute)
+            help_string = _dict_attribute_help(object_name, path,
+                                               parent_object_names, attribute)
         else:
-            help_string += _dict_object_help(object_name, path,
-                                             parent_object_names)
-    help_string = help_string.expandtabs(TAB_SIZE)
-    return help_string
+            help_string = _dict_object_help(object_name, path,
+                                            parent_object_names)
+    return help_string.expandtabs(TAB_SIZE)
 
 
 def _list_help(object_name, path=(), parent_object_names=()):
+    """See get_help()."""
     items = graph_reference.ARRAYS[object_name]['items']
     items_classes = [graph_reference.string_to_class_name(item)
                      for item in items]
-    items_string = '\n\t* {}\n'.format('\n\t* '.join(items_classes))
-    help_string = 'Valid Item Classes:\n{}\n'.format(items_string)
-    return help_string
+    lines = textwrap.wrap(repr(items_classes), width=LINE_SIZE-TAB_SIZE)
+
+    help_dict = {
+        'object_name': object_name,
+        'path_string': '[' + ']['.join(repr(k) for k in path) + ']',
+        'parent_object_names': parent_object_names,
+        'items_string': '\t' + '\n\t'.join(lines)
+    }
+
+    return (
+        "Valid items for '{object_name}' at path {path_string} under parents "
+        "{parent_object_names}:\n{items_string}\n".format(**help_dict)
+    )
 
 
 def _dict_object_help(object_name, path, parent_object_names):
-    """
-    Get general help information on an dict-like plotly graph object.
-
-    :param object_name:
-    :param path:
-    :param parent_object_names:
-    :return:
-
-    """
-    parent_class_names = [
-        graph_reference.string_to_class_name(parent_object_name)
-        for parent_object_name in parent_object_names
-    ]
+    """See get_help()."""
     attributes = graph_reference.get_valid_attributes(object_name,
                                                       parent_object_names)
-    help_dict = {'path': path,
-                 'parent_class_names': parent_class_names}
+    lines = textwrap.wrap(repr(list(attributes)), width=LINE_SIZE-TAB_SIZE)
 
-    attributes_str = '\n\t* {}\n'.format('\n\t* '.join(attributes))
-    help_string = (
-        "Run `.help('attribute')` on any of the following attributes:\n"
-        "{attributes_str}"
+    help_dict = {
+        'object_name': object_name,
+        'path_string': '[' + ']['.join(repr(k) for k in path) + ']',
+        'parent_object_names': parent_object_names,
+        'attributes_string': '\t' + '\n\t'.join(lines)
+    }
+
+    return (
+        "Valid attributes for '{object_name}' at path {path_string} under "
+        "parents {parent_object_names}:\n\n{attributes_string}\n\n"
+        "Run `<{object_name}-object>.help('attribute')` on any of the above.\n"
+        "'<{object_name}-object>' is the object at {path_string}"
+        .format(**help_dict)
     )
-    return help_string.format(attributes_str=attributes_str, **help_dict)
 
 
 def _dict_attribute_help(object_name, path, parent_object_names, attribute):
     """
     Get general help information or information on a specific attribute.
 
+    See get_help().
+
     :param (str|unicode) attribute: The attribute we'll get info for.
 
     """
-    parent_class_names = [
-        graph_reference.string_to_class_name(parent_object_name)
-        for parent_object_name in parent_object_names
-    ]
+    help_dict = {
+        'object_name': object_name,
+        'path_string': '[' + ']['.join(repr(k) for k in path) + ']',
+        'parent_object_names': parent_object_names,
+        'attribute': attribute
+    }
+
     valid_attributes = graph_reference.get_valid_attributes(
         object_name, parent_object_names
     )
-    help_dict = {'path': path,
-                 'parent_class_names': parent_class_names,
-                 'attribute': attribute}
 
     help_string = (
-        "Current path: {path}\n"
-        "Current parents: {parent_class_names}\n\n")
+        "Current path: {path_string}\n"
+        "Current parent object_names: {parent_object_names}\n\n")
 
     if attribute not in valid_attributes:
         help_string += "'{attribute}' is not allowed here.\n"
