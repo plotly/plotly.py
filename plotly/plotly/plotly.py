@@ -91,9 +91,9 @@ def _plot_option_logic(plot_options_from_call_signature):
 
     """
     default_plot_options = copy.deepcopy(DEFAULT_PLOT_OPTIONS)
-    plot_options_from_call_signature = copy.deepcopy(plot_options_from_call_signature)
     file_options = tools.get_config_file()
     session_options = get_session_plot_options()
+    plot_options_from_call_signature = copy.deepcopy(plot_options_from_call_signature)
 
     # Validate options and fill in defaults w world_readable and sharing
     for option_set in [plot_options_from_call_signature,
