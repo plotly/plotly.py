@@ -9,25 +9,20 @@ from __future__ import absolute_import
 
 import requests
 import six
+import json
 
 from unittest import TestCase
 from nose.plugins.attrib import attr
 from nose.tools import raises
 
+from plotly.tests.utils import PlotlyTestCase
 import plotly.tools as tls
 from plotly.plotly import plotly as py
 from plotly.exceptions import PlotlyError, PlotlyEmptyDataError
-import plotly.session
+from plotly.files import CONFIG_FILE
 
 # username for tests: 'PlotlyImageTest'
 # api_key for account: '786r5mecv0'
-
-
-def setUp():
-    py.sign_in('PlotlyImageTest', '786r5mecv0',
-               plotly_domain='https://plot.ly',
-               world_readable=True,
-               sharing='public')
 
 
 @attr('slow')
@@ -222,13 +217,25 @@ class TestPlot(TestCase):
         self.assertTrue(secret_plot_response.status_code, 200)
 
 
-class TestPlotOptionLogic(TestCase):
-    def tearDown(self):
-        plotly.session._session['credentials'] = {}
-        plotly.session._session['config'] = {}
-        plotly.session._session['plot_options'] = {}
-        py.sign_in('PlotlyImageTest', '786r5mecv0')
-        tls.set_config_file(world_readable=True, sharing='public')
+class TestPlotOptionLogic(PlotlyTestCase):
+    conflicting_option_set = (
+        {'world_readable': True, 'sharing': 'secret', },
+        {'world_readable': True, 'sharing': 'private'},
+        {'world_readable': False, 'sharing': 'public'}
+    )
+    opposite_option_set = (
+        ({'world_readable': True, 'sharing': 'public'},
+         {'world_readable': False, 'sharing': 'secret'}),
+
+        ({'world_readable': True, 'sharing': 'public'},
+         {'world_readable': False, 'sharing': 'private'}),
+
+        ({'world_readable': False, 'sharing': 'private'},
+         {'world_readable': True, 'sharing': 'public'}),
+
+        ({'world_readable': False, 'sharing': 'private'},
+         {'world_readable': True, 'sharing': 'public'})
+    )
 
     def test_default_options(self):
         options = py._plot_option_logic({})
@@ -237,66 +244,10 @@ class TestPlotOptionLogic(TestCase):
             if key != 'fileopt' and key in config_options:
                 self.assertEqual(options[key], config_options[key])
 
-    def test_signin_updates_options(self):
-        config_options = tls.get_config_file()
-
-        user_options = {
-            'auto_open': not config_options['auto_open'],
-            'world_readable': not config_options['world_readable'],
-            'sharing': ('secret' if config_options['sharing'] != 'secret'
-                        else 'private')
-        }
-        py.sign_in('username', 'api_key', **user_options)
-        options = py._plot_option_logic({})
-
-        # reload config_options to make sure that no mutation happened
-        config_options = tls.get_config_file()
-
-        for key in user_options:
-            self.assertEqual(options[key], user_options[key])
-            self.assertNotEqual(options[key], config_options[key])
-
-    def test_call_signature_arguments_updates_options(self):
-        config_options = tls.get_config_file()
-
-        user_options = {
-            'auto_open': not config_options['auto_open'],
-            'world_readable': not config_options['world_readable']
-        }
-        if user_options['world_readable']:
-            user_options['sharing'] = 'public'
-        else:
-            user_options['sharing'] = 'private'
-
-        options = py._plot_option_logic(user_options)
-        for key in user_options:
-            self.assertEqual(options[key], user_options[key])
-
-    def test_call_signature_overrides_signin_and_config_file(self):
-        config_options = tls.get_config_file()
-
-        signin_options = {
-            'auto_open': not config_options['auto_open'],
-            'world_readable': not config_options['world_readable'],
-            'sharing': ('public' if config_options['world_readable'] is False
-                        else 'secret')
-        }
-
-        call_signature_options = {
-            'auto_open': config_options['auto_open'],
-            'world_readable': config_options['world_readable']
-        }
-        if call_signature_options['world_readable'] is True:
-            call_signature_options['sharing'] = 'public'
-        elif config_options['sharing'] == 'secret':
-            call_signature_options['sharing'] = 'private'
-        else:
-            call_signature_options['sharing'] = 'secret'
-
-        py.sign_in('username', 'api_key', **signin_options)
-        options = py._plot_option_logic(call_signature_options)
-        for key in signin_options:
-            self.assertNotEqual(signin_options[key], options[key])
+    def test_conflicting_plot_options_in_plot_option_logic(self):
+        for plot_options in self.conflicting_option_set:
+            self.assertRaises(PlotlyError, py._plot_option_logic,
+                              plot_options)
 
     def test_set_config_updates_plot_options(self):
         original_config = tls.get_config_file()
@@ -310,80 +261,146 @@ class TestPlotOptionLogic(TestCase):
         options = py._plot_option_logic({})
         for key in new_options:
             self.assertEqual(new_options[key], options[key])
-        tls.set_config_file(**original_config)
 
-    def test_private_sharing_and_public_world_readable_conflict(self):
-        """ If you supply an invalid combination at the same time,
-        ie through sign_in, set_config, or through the call signature,
-        then check that an error is raised.
-        Otherwise, use whichever world_readable or sharing option has
-        the highest precendence
-        """
 
-        self.assertRaises(PlotlyError, py._plot_option_logic,
-                          {'world_readable': True, 'sharing': 'secret'})
-        self.assertRaises(PlotlyError, py._plot_option_logic,
-                          {'world_readable': True, 'sharing': 'private'})
-        self.assertRaises(PlotlyError, py._plot_option_logic,
-                          {'world_readable': False, 'sharing': 'public'})
+def generate_call_signature_arguments_updates_options():
+    def gen_test(config_plot_options, user_plot_options):
+        tls.set_config_file(**config_plot_options)
 
-        py.sign_in('username', 'key', world_readable=True, sharing='secret')
-        self.assertRaises(PlotlyError, py._plot_option_logic, {})
-        self.tearDown()
+        def test(self):
+            options = py._plot_option_logic(user_plot_options)
 
-        py.sign_in('username', 'key', world_readable=True, sharing='private')
-        self.assertRaises(PlotlyError, py._plot_option_logic, {})
-        self.tearDown()
+            for key in user_plot_options:
+                self.assertEqual(options[key], user_plot_options[key])
+                self.assertNotEqual(options[key], config_plot_options[key])
+        return test
 
-        py.sign_in('username', 'key', world_readable=False, sharing='public')
-        self.assertRaises(PlotlyError, py._plot_option_logic, {})
-        self.tearDown()
+    for i, option_sets in enumerate(TestPlotOptionLogic.opposite_option_set):
+        setattr(TestPlotOptionLogic,
+                'test_call_signature_arguments_updates_options{}'.format(i),
+                gen_test(option_sets[0], option_sets[1]))
+generate_call_signature_arguments_updates_options()
 
-        self.assertRaises(PlotlyError, tls.set_config_file,
-                          **dict(world_readable=True, sharing='secret'))
-        self.tearDown()
 
-        self.assertRaises(PlotlyError, tls.set_config_file,
-                          world_readable=True, sharing='private')
-        self.tearDown()
+def generate_call_signature_overrides_signin_and_config_file():
+    def gen_test(signin_plot_options, user_plot_options):
+        py.sign_in('username', 'key', **signin_plot_options)
 
-        self.assertRaises(PlotlyError, tls.set_config_file,
-                          world_readable=False, sharing='public')
-        self.tearDown()
+        def test(self):
+            options = py._plot_option_logic(user_plot_options)
 
-        # But, precedence overwrites the options, no errors are raised
-        py.sign_in('username', 'key', world_readable=True)
-        options = py._plot_option_logic({'sharing': 'secret'})
-        self.assertEqual(options['sharing'], 'secret')
-        self.assertEqual(options['world_readable'], False)
-        self.tearDown()
+            for key in user_plot_options:
+                self.assertEqual(options[key], user_plot_options[key])
+                self.assertNotEqual(options[key], signin_plot_options[key])
+        return test
 
-        py.sign_in('username', 'key', world_readable=True)
-        options = py._plot_option_logic({'sharing': 'private'})
-        self.assertEqual(options['sharing'], 'private')
-        self.assertEqual(options['world_readable'], False)
-        self.tearDown()
+    for i, option_sets in enumerate(TestPlotOptionLogic.opposite_option_set):
+        setattr(TestPlotOptionLogic,
+                'test_call_signature_overrides_signin_and_config_file{}'.format(i),
+                gen_test(option_sets[0], option_sets[1]))
+generate_call_signature_overrides_signin_and_config_file()
 
-        py.sign_in('username', 'key', world_readable=False)
-        options = py._plot_option_logic({'sharing': 'public'})
-        self.assertEqual(options['sharing'], 'public')
-        self.assertEqual(options['world_readable'], True)
-        self.tearDown()
 
-        tls.set_config_file(world_readable=True)
-        options = py._plot_option_logic({'sharing': 'secret'})
-        self.assertEqual(options['sharing'], 'secret')
-        self.assertEqual(options['world_readable'], False)
-        self.tearDown()
+def generate_conflicting_plot_options_in_signin():
+    """sign_in overrides the default plot options.
+    conflicting options aren't raised until plot or iplot is called,
+    through _plot_option_logic
+    """
+    def gen_test(plot_options):
+        def test(self):
+            py.sign_in('username', 'key', **plot_options)
+            self.assertRaises(PlotlyError, py._plot_option_logic, {})
+        return test
 
-        tls.set_config_file(world_readable=True)
-        options = py._plot_option_logic({'sharing': 'private'})
-        self.assertEqual(options['sharing'], 'private')
-        self.assertEqual(options['world_readable'], False)
-        self.tearDown()
+    for i, plot_options in enumerate(TestPlotOptionLogic.conflicting_option_set):
+        setattr(TestPlotOptionLogic,
+                'test_conflicting_plot_options_in_signin_{}'.format(i),
+                gen_test(plot_options))
+generate_conflicting_plot_options_in_signin()
 
-        tls.set_config_file(world_readable=False)
-        options = py._plot_option_logic({'sharing': 'public'})
-        self.assertEqual(options['sharing'], 'public')
-        self.assertEqual(options['world_readable'], True)
-        self.tearDown()
+
+def generate_conflicting_plot_options_in_tools_dot_set_config():
+    """tls.set_config overrides the default plot options.
+    conflicting options are actually raised when the options are saved,
+    because we push out default arguments for folks, and we don't want to
+    require users to specify both world_readable and secret *and* we don't
+    want to raise an error if they specified only one of these options
+    and didn't know that a default option was being saved for them.
+    """
+    def gen_test(plot_options):
+        def test(self):
+            self.assertRaises(PlotlyError, tls.set_config_file,
+                              **plot_options)
+        return test
+
+    for i, plot_options in enumerate(TestPlotOptionLogic.conflicting_option_set):
+        setattr(TestPlotOptionLogic,
+                'test_conflicting_plot_options_in_'
+                'tools_dot_set_config{}'.format(i),
+                gen_test(plot_options))
+generate_conflicting_plot_options_in_tools_dot_set_config()
+
+
+def generate_conflicting_plot_options_with_json_writes_of_config():
+    """ if the user wrote their own options in the config file,
+    then we'll raise the error when the call plot or iplot through
+    _plot_option_logic
+    """
+    def gen_test(plot_options):
+        def test(self):
+            config = json.load(open(CONFIG_FILE))
+            with open(CONFIG_FILE, 'w') as f:
+                config.update(plot_options)
+                f.write(json.dumps(config))
+            self.assertRaises(PlotlyError, py._plot_option_logic, {})
+        return test
+
+    for i, plot_options in enumerate(TestPlotOptionLogic.conflicting_option_set):
+        setattr(TestPlotOptionLogic,
+                'test_conflicting_plot_options_with_'
+                'json_writes_of_config{}'.format(i),
+                gen_test(plot_options))
+generate_conflicting_plot_options_with_json_writes_of_config()
+
+
+def generate_private_sharing_and_public_world_readable_precedence():
+    """ Test that call signature arguments applied through _plot_option_logic
+    overwrite options supplied through py.sign_in which overwrite options
+    set through tls.set_config
+    """
+    plot_option_sets = (
+        {
+            'parent': {'world_readable': True},
+            'child': {'sharing': 'secret'},
+            'expected_output': {'world_readable': False,
+                                'sharing': 'secret'}
+        },
+        {
+            'parent': {'world_readable': True},
+            'child': {'sharing': 'private'},
+            'expected_output': {'world_readable': False,
+                                'sharing': 'private'}
+        },
+        {
+            'parent': {'world_readable': False},
+            'child': {'sharing': 'public'},
+            'expected_output': {'world_readable': True,
+                                'sharing': 'public'}
+        }
+    )
+
+    def gen_test_signin(plot_options):
+        def test(self):
+            py.sign_in('username', 'key', **plot_options['parent'])
+            options = py._plot_option_logic(plot_options['child'])
+            for option, value in plot_options['expected_output'].iteritems():
+                self.assertEqual(options[option], value)
+        return test
+
+    for i, plot_options in enumerate(plot_option_sets):
+        setattr(TestPlotOptionLogic,
+                'test_private_sharing_and_public_'
+                'world_readable_precedence{}'.format(i),
+                gen_test_signin(plot_options))
+
+generate_private_sharing_and_public_world_readable_precedence()
