@@ -157,7 +157,7 @@ def iplot(figure_or_data, **plot_options):
                     notebook, anybody who is viewing that page will be able to
                     view the graph. You do not need to be logged in to view
                     this plot.
-    world_readable (default=True) -- Depreciated: use "sharing".
+    world_readable (default=True) -- Deprecated: use "sharing".
                                      Make this figure private/public
     """
     if 'auto_open' not in plot_options:
@@ -219,7 +219,7 @@ def plot(figure_or_data, validate=True, **plot_options):
                     notebook, anybody who is viewing that page will be able to
                     view the graph. You do not need to be logged in to view
                     this plot.
-    world_readable (default=True) -- Depreciated: use "sharing".
+    world_readable (default=True) -- Deprecated: use "sharing".
                                      Make this figure private/public
 
     """
