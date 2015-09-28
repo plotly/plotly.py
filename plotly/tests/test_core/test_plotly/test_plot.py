@@ -223,19 +223,6 @@ class TestPlotOptionLogic(PlotlyTestCase):
         {'world_readable': True, 'sharing': 'private'},
         {'world_readable': False, 'sharing': 'public'}
     )
-    opposite_option_set = (
-        ({'world_readable': True, 'sharing': 'public', 'auto_open': True},
-         {'world_readable': False, 'sharing': 'secret', 'auto_open': False}),
-
-        ({'world_readable': True, 'sharing': 'public', 'auto_open': False},
-         {'world_readable': False, 'sharing': 'private', 'auto_open': True}),
-
-        ({'world_readable': False, 'sharing': 'private', 'auto_open': True},
-         {'world_readable': True, 'sharing': 'public', 'auto_open': False}),
-
-        ({'world_readable': False, 'sharing': 'private', 'auto_open': False},
-         {'world_readable': True, 'sharing': 'public', 'auto_open': True})
-    )
 
     def test_default_options(self):
         options = py._plot_option_logic({})
@@ -261,44 +248,6 @@ class TestPlotOptionLogic(PlotlyTestCase):
         options = py._plot_option_logic({})
         for key in new_options:
             self.assertEqual(new_options[key], options[key])
-
-
-def generate_call_signature_arguments_updates_options():
-    def gen_test(config_plot_options, user_plot_options):
-        tls.set_config_file(**config_plot_options)
-
-        def test(self):
-            options = py._plot_option_logic(user_plot_options)
-
-            for key in user_plot_options:
-                self.assertEqual(options[key], user_plot_options[key])
-                self.assertNotEqual(options[key], config_plot_options[key])
-        return test
-
-    for i, option_sets in enumerate(TestPlotOptionLogic.opposite_option_set):
-        setattr(TestPlotOptionLogic,
-                'test_call_signature_arguments_updates_options{}'.format(i),
-                gen_test(option_sets[0], option_sets[1]))
-generate_call_signature_arguments_updates_options()
-
-
-def generate_call_signature_overrides_signin_and_config_file():
-    def gen_test(signin_plot_options, user_plot_options):
-        py.sign_in('username', 'key', **signin_plot_options)
-
-        def test(self):
-            options = py._plot_option_logic(user_plot_options)
-
-            for key in user_plot_options:
-                self.assertEqual(options[key], user_plot_options[key])
-                self.assertNotEqual(options[key], signin_plot_options[key])
-        return test
-
-    for i, option_sets in enumerate(TestPlotOptionLogic.opposite_option_set):
-        setattr(TestPlotOptionLogic,
-                'test_call_signature_overrides_signin_and_config_file{}'.format(i),
-                gen_test(option_sets[0], option_sets[1]))
-generate_call_signature_overrides_signin_and_config_file()
 
 
 def generate_conflicting_plot_options_in_signin():
@@ -370,22 +319,25 @@ def generate_private_sharing_and_public_world_readable_precedence():
     """
     plot_option_sets = (
         {
-            'parent': {'world_readable': True},
-            'child': {'sharing': 'secret'},
+            'parent': {'world_readable': True, 'auto_open': False},
+            'child': {'sharing': 'secret', 'auto_open': True},
             'expected_output': {'world_readable': False,
-                                'sharing': 'secret'}
+                                'sharing': 'secret',
+                                'auto_open': True}
         },
         {
-            'parent': {'world_readable': True},
-            'child': {'sharing': 'private'},
+            'parent': {'world_readable': True, 'auto_open': True},
+            'child': {'sharing': 'private', 'auto_open': False},
             'expected_output': {'world_readable': False,
-                                'sharing': 'private'}
+                                'sharing': 'private',
+                                'auto_open': False}
         },
         {
-            'parent': {'world_readable': False},
-            'child': {'sharing': 'public'},
+            'parent': {'world_readable': False, 'auto_open': False},
+            'child': {'sharing': 'public', 'auto_open': True},
             'expected_output': {'world_readable': True,
-                                'sharing': 'public'}
+                                'sharing': 'public',
+                                'auto_open': True}
         }
     )
 
@@ -397,10 +349,22 @@ def generate_private_sharing_and_public_world_readable_precedence():
                 self.assertEqual(options[option], value)
         return test
 
+    def gen_test_config(plot_options):
+        def test(self):
+            tls.set_config(**plot_options['parent'])
+            options = py._plot_option_logic(plot_options['child'])
+            for option, value in plot_options['expected_output'].iteritems():
+                self.assertEqual(options[option], value)
+
     for i, plot_options in enumerate(plot_option_sets):
         setattr(TestPlotOptionLogic,
                 'test_private_sharing_and_public_'
-                'world_readable_precedence{}'.format(i),
+                'world_readable_precedence_signin{}'.format(i),
                 gen_test_signin(plot_options))
+
+        setattr(TestPlotOptionLogic,
+                'test_private_sharing_and_public_'
+                'world_readable_precedence_config{}'.format(i),
+                gen_test_config(plot_options))
 
 generate_private_sharing_and_public_world_readable_precedence()
