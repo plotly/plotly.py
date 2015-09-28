@@ -224,17 +224,17 @@ class TestPlotOptionLogic(PlotlyTestCase):
         {'world_readable': False, 'sharing': 'public'}
     )
     opposite_option_set = (
-        ({'world_readable': True, 'sharing': 'public'},
-         {'world_readable': False, 'sharing': 'secret'}),
+        ({'world_readable': True, 'sharing': 'public', 'auto_open': True},
+         {'world_readable': False, 'sharing': 'secret', 'auto_open': False}),
 
-        ({'world_readable': True, 'sharing': 'public'},
-         {'world_readable': False, 'sharing': 'private'}),
+        ({'world_readable': True, 'sharing': 'public', 'auto_open': False},
+         {'world_readable': False, 'sharing': 'private', 'auto_open': True}),
 
-        ({'world_readable': False, 'sharing': 'private'},
-         {'world_readable': True, 'sharing': 'public'}),
+        ({'world_readable': False, 'sharing': 'private', 'auto_open': True},
+         {'world_readable': True, 'sharing': 'public', 'auto_open': False}),
 
-        ({'world_readable': False, 'sharing': 'private'},
-         {'world_readable': True, 'sharing': 'public'})
+        ({'world_readable': False, 'sharing': 'private', 'auto_open': False},
+         {'world_readable': True, 'sharing': 'public', 'auto_open': True})
     )
 
     def test_default_options(self):
