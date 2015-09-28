@@ -25,43 +25,6 @@ from plotly.files import CONFIG_FILE
 # api_key for account: '786r5mecv0'
 
 
-@attr('slow')
-def test_plot_valid():
-    fig = {
-        'data': [
-            {
-                'x': [1, 2, 3],
-                'y': [2, 1, 2]
-            }
-        ]
-    }
-    py.plot(fig, auto_open=False, filename='plot_valid')
-
-
-@raises(PlotlyError)
-def test_plot_invalid():
-    fig = {
-        'data': [
-            {
-                'x': [1, 2, 3],
-                'y': [2, 1, 2],
-                'z': [3, 4, 1]
-            }
-        ]
-    }
-    py.plot(fig, auto_open=False, filename='plot_invalid')
-
-
-@raises(TypeError)
-def test_plot_invalid_args_1():
-    py.plot(x=[1, 2, 3], y=[2, 1, 2], auto_open=False, filename='plot_invalid')
-
-
-@raises(PlotlyError)
-def test_plot_invalid_args_2():
-    py.plot([1, 2, 3], [2, 1, 2], auto_open=False, filename='plot_invalid')
-
-
 class TestPlot(TestCase):
     def setUp(self):
         py.sign_in('PlotlyImageTest', '786r5mecv0',
@@ -69,8 +32,40 @@ class TestPlot(TestCase):
         self.simple_figure = {'data': [{'x': [1, 2, 3], 'y': [2, 1, 2]}]}
         super(TestPlot, self).setUp()
 
+    @attr('slow')
+    def test_plot_valid(self):
+        fig = {
+            'data': [
+                {
+                    'x': [1, 2, 3],
+                    'y': [2, 1, 2]
+                }
+            ]
+        }
+        py.plot(fig, auto_open=False, filename='plot_valid')
+
+    @raises(PlotlyError)
+    def test_plot_invalid(self):
+        fig = {
+            'data': [
+                {
+                    'x': [1, 2, 3],
+                    'y': [2, 1, 2],
+                    'z': [3, 4, 1]
+                }
+            ]
+        }
+        py.plot(fig, auto_open=False, filename='plot_invalid')
+
+    @raises(TypeError)
+    def test_plot_invalid_args_1(self):
+        py.plot(x=[1, 2, 3], y=[2, 1, 2], auto_open=False, filename='plot_invalid')
+
+    @raises(PlotlyError)
+    def test_plot_invalid_args_2(self):
+        py.plot([1, 2, 3], [2, 1, 2], auto_open=False, filename='plot_invalid')
+
     def test_plot_empty_data(self):
-        py.sign_in('PlotlyImageTest', '786r5mecv0')
         self.assertRaises(PlotlyEmptyDataError, py.plot, [],
                           filename='plot_invalid')
 
