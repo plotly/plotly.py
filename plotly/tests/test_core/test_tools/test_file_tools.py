@@ -17,7 +17,8 @@ class FileToolsTest(PlotlyTestCase):
                               plotly_api_domain=api,
                               plotly_ssl_verification=ssl_verify,
                               plotly_proxy_authorization=proxy_auth,
-                              world_readable=world_readable)
+                              world_readable=world_readable,
+                              auto_open=auto_open)
         config = tools.get_config_file()
         self.assertEqual(config['plotly_domain'], domain)
         self.assertEqual(config['plotly_streaming_domain'], streaming_domain)
