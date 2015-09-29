@@ -5,6 +5,8 @@ utils
 Low-level functionality NOT intended for users to EVER use.
 
 """
+from __future__ import absolute_import
+
 import json
 import os.path
 import re
@@ -13,7 +15,8 @@ import threading
 
 import pytz
 
-from exceptions import PlotlyError
+
+from . exceptions import PlotlyError
 
 try:
     import numpy
