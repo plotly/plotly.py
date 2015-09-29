@@ -42,16 +42,6 @@ class FileToolsTest(PlotlyTestCase):
         self.assertEqual(config['plotly_streaming_domain'], streaming_domain)
         tools.reset_config_file()
 
-    def test_session_plot_option(self):
-
-        # Check if the session_plot_option and config_plot_option return the
-        # same value
-
-        readable = False
-        tools.set_config_file(world_readable=readable)
-        session_plot_option = session.get_session_plot_options()
-        self.assertEqual(session_plot_option['world_readable'], readable)
-        tools.reset_config_file()
 
     def test_set_config_file_world_readable(self):
 
