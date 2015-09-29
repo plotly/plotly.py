@@ -700,7 +700,7 @@ class PlotlyDict(dict, PlotlyBase):
                 eol=eol,
                 indent=' ' * indent * (level+1),
                 key=key)
-            if isinstance(key, PlotlyBase):
+            if isinstance(self[key], PlotlyBase):
                 string += self[key].to_string(level=level+1,
                                               indent=indent,
                                               eol=eol,
