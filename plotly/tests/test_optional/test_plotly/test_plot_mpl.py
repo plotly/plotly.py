@@ -17,10 +17,14 @@ from nose.tools import raises
 
 from plotly import exceptions
 from plotly.plotly import plotly as py
-from plotly.tests.utils import PlotlyTestCase
+from unittest import TestCase
 
 
-class PlotMPLTest(PlotlyTestCase):
+class PlotMPLTest(TestCase):
+    def setUp(self):
+        py.sign_in('PlotlyImageTest', '786r5mecv0',
+                   plotly_domain='https://plot.ly')
+
     @raises(exceptions.PlotlyError)
     def test_update_type_error(self):
         fig, ax = plt.subplots()
