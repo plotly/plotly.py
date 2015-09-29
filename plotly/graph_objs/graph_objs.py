@@ -700,13 +700,13 @@ class PlotlyDict(dict, PlotlyBase):
                 eol=eol,
                 indent=' ' * indent * (level+1),
                 key=key)
-            try:
+            if isinstance(key, PlotlyBase):
                 string += self[key].to_string(level=level+1,
                                               indent=indent,
                                               eol=eol,
                                               pretty=pretty,
                                               max_chars=max_chars)
-            except AttributeError:
+            else:
                 if pretty:  # curtail representation if too many chars
                     max_len = (max_chars -
                                indent*(level + 1) -
