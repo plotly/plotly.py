@@ -10,6 +10,7 @@ from pkg_resources import resource_string
 from unittest import TestCase
 
 import requests
+import six
 from nose.plugins.attrib import attr
 
 from plotly import files, graph_reference as gr, tools, utils
@@ -64,7 +65,11 @@ class TestGraphReferenceCaching(PlotlyTestCase):
         graph_reference_url = '{}{}?sha1'.format(api_domain,
                                                  gr.GRAPH_REFERENCE_PATH)
         response = requests.get(graph_reference_url)
-        schema = json.loads(response.content)['schema']
+        if six.PY3:
+            content = str(response.content, encoding='utf-8')
+        else:
+            content = response.content
+        schema = json.loads(content)['schema']
 
         path = os.path.join('graph_reference', 'default-schema.json')
         s = resource_string('plotly', path).decode('utf-8')
