@@ -1,8 +1,8 @@
 {
     "defs": {
         "metaKeys": [
-            "_isLinkedToArray",
             "_isSubplotObj",
+            "_isLinkedToArray",
             "_deprecated",
             "description",
             "role"
@@ -220,186 +220,190 @@
                 }
             },
             "annotations": {
-                "_deprecated": {
-                    "ref": {
-                        "description": "Obsolete. Set `xref` and `yref` separately instead.",
-                        "role": "info",
-                        "valType": "string"
+                "items": {
+                    "annotation": {
+                        "_deprecated": {
+                            "ref": {
+                                "description": "Obsolete. Set `xref` and `yref` separately instead.",
+                                "role": "info",
+                                "valType": "string"
+                            }
+                        },
+                        "align": {
+                            "description": "Sets the vertical alignment of the `text` with respect to the set `x` and `y` position. Has only an effect if `text` spans more two or more lines (i.e. `text` contains one or more <br> HTML tags).",
+                            "dflt": "center",
+                            "role": "style",
+                            "valType": "enumerated",
+                            "values": [
+                                "left",
+                                "center",
+                                "right"
+                            ]
+                        },
+                        "arrowcolor": {
+                            "description": "Sets the color of the annotation arrow.",
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "arrowhead": {
+                            "description": "Sets the annotation arrow head style.",
+                            "dflt": 1,
+                            "max": 8,
+                            "min": 0,
+                            "role": "style",
+                            "valType": "integer"
+                        },
+                        "arrowsize": {
+                            "description": "Sets the size (in px) of annotation arrow head.",
+                            "dflt": 1,
+                            "min": 0.3,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "arrowwidth": {
+                            "description": "Sets the width (in px) of annotation arrow.",
+                            "min": 0.1,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "ax": {
+                            "description": "Sets the x component of the arrow tail about the arrow head. A positive (negative) component corresponds to an arrow pointing from right to left (left to right)",
+                            "dflt": -10,
+                            "role": "info",
+                            "valType": "number"
+                        },
+                        "ay": {
+                            "description": "Sets the y component of the arrow tail about the arrow head. A positive (negative) component corresponds to an arrow pointing from bottom to top (top to bottom)",
+                            "dflt": -30,
+                            "role": "info",
+                            "valType": "number"
+                        },
+                        "bgcolor": {
+                            "description": "Sets the background color of the annotation.",
+                            "dflt": "rgba(0,0,0,0)",
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "bordercolor": {
+                            "description": "Sets the color of the border enclosing the annotation `text`.",
+                            "dflt": "rgba(0,0,0,0)",
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "borderpad": {
+                            "description": "Sets the padding (in px) between the `text` and the enclosing border.",
+                            "dflt": 1,
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "borderwidth": {
+                            "description": "Sets the width (in px) of the border enclosing the annotation `text`.",
+                            "dflt": 1,
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "font": {
+                            "color": {
+                                "role": "style",
+                                "valType": "color"
+                            },
+                            "description": "Sets the annotation text font.",
+                            "family": {
+                                "noBlank": true,
+                                "role": "style",
+                                "strict": true,
+                                "valType": "string"
+                            },
+                            "role": "object",
+                            "size": {
+                                "min": 1,
+                                "role": "style",
+                                "valType": "number"
+                            }
+                        },
+                        "opacity": {
+                            "description": "Sets the opacity of the annotation (text + arrow).",
+                            "dflt": 1,
+                            "max": 1,
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "role": "object",
+                        "showarrow": {
+                            "description": "Determines whether or not the annotation is drawn with an arrow. If *true*, `text` is placed near the arrow's tail. If *false*, `text` lines up with the `x` and `y` provided.",
+                            "dflt": true,
+                            "role": "style",
+                            "valType": "boolean"
+                        },
+                        "text": {
+                            "description": "Sets the text associated with this annotation. Plotly uses a subset of HTML tags to do things like newline (<br>), bold (<b></b>), italics (<i></i>), hyperlinks (<a href='...'></a>). Tags <em>, <sup>, <sub> <span> are also supported.",
+                            "role": "info",
+                            "valType": "string"
+                        },
+                        "textangle": {
+                            "description": "Sets the angle at which the `text` is drawn with respect to the horizontal.",
+                            "dflt": 0,
+                            "role": "style",
+                            "valType": "angle"
+                        },
+                        "x": {
+                            "description": "Sets the annotation's x position. Note that dates and categories are converted to numbers.",
+                            "role": "info",
+                            "valType": "number"
+                        },
+                        "xanchor": {
+                            "description": "Sets the annotation's horizontal position anchor This anchor binds the `x` position to the *left*, *center* or *right* of the annotation. For example, if `x` is set to 1, `xref` to *paper* and `xanchor` to *right* then the right-most portion of the annotation lines up with the right-most edge of the plotting area. If *auto*, the anchor is equivalent to *center* for data-referenced annotations whereas for paper-referenced, the anchor picked corresponds to the closest side.",
+                            "dflt": "auto",
+                            "role": "info",
+                            "valType": "enumerated",
+                            "values": [
+                                "auto",
+                                "left",
+                                "center",
+                                "right"
+                            ]
+                        },
+                        "xref": {
+                            "description": "Sets the annotation's x coordinate axis. If set to an x axis id (e.g. *x* or *x2*), the `x` position refers to an x coordinate If set to *paper*, the `x` position refers to the distance from the left side of the plotting area in normalized coordinates where 0 (1) corresponds to the left (right) side.",
+                            "role": "info",
+                            "valType": "enumerated",
+                            "values": [
+                                "paper",
+                                "/^x([2-9]|[1-9][0-9]+)?$/"
+                            ]
+                        },
+                        "y": {
+                            "description": "Sets the annotation's y position. Note that dates and categories are converted to numbers.",
+                            "role": "info",
+                            "valType": "number"
+                        },
+                        "yanchor": {
+                            "description": "Sets the annotation's vertical position anchor This anchor binds the `y` position to the *top*, *middle* or *bottom* of the annotation. For example, if `y` is set to 1, `yref` to *paper* and `yanchor` to *top* then the top-most portion of the annotation lines up with the top-most edge of the plotting area. If *auto*, the anchor is equivalent to *middle* for data-referenced annotations whereas for paper-referenced, the anchor picked corresponds to the closest side.",
+                            "dflt": "auto",
+                            "role": "info",
+                            "valType": "enumerated",
+                            "values": [
+                                "auto",
+                                "top",
+                                "middle",
+                                "bottom"
+                            ]
+                        },
+                        "yref": {
+                            "description": "Sets the annotation's y coordinate axis. If set to an y axis id (e.g. *y* or *y2*), the `y` position refers to an y coordinate If set to *paper*, the `y` position refers to the distance from the bottom of the plotting area in normalized coordinates where 0 (1) corresponds to the bottom (top).",
+                            "role": "info",
+                            "valType": "enumerated",
+                            "values": [
+                                "paper",
+                                "/^y([2-9]|[1-9][0-9]+)?$/"
+                            ]
+                        }
                     }
                 },
-                "_isLinkedToArray": true,
-                "align": {
-                    "description": "Sets the vertical alignment of the `text` with respect to the set `x` and `y` position. Has only an effect if `text` spans more two or more lines (i.e. `text` contains one or more <br> HTML tags).",
-                    "dflt": "center",
-                    "role": "style",
-                    "valType": "enumerated",
-                    "values": [
-                        "left",
-                        "center",
-                        "right"
-                    ]
-                },
-                "arrowcolor": {
-                    "description": "Sets the color of the annotation arrow.",
-                    "role": "style",
-                    "valType": "color"
-                },
-                "arrowhead": {
-                    "description": "Sets the annotation arrow head style.",
-                    "dflt": 1,
-                    "max": 8,
-                    "min": 0,
-                    "role": "style",
-                    "valType": "integer"
-                },
-                "arrowsize": {
-                    "description": "Sets the size (in px) of annotation arrow head.",
-                    "dflt": 1,
-                    "min": 0.3,
-                    "role": "style",
-                    "valType": "number"
-                },
-                "arrowwidth": {
-                    "description": "Sets the width (in px) of annotation arrow.",
-                    "min": 0.1,
-                    "role": "style",
-                    "valType": "number"
-                },
-                "ax": {
-                    "description": "Sets the x component of the arrow tail about the arrow head. A positive (negative) component corresponds to an arrow pointing from right to left (left to right)",
-                    "dflt": -10,
-                    "role": "info",
-                    "valType": "number"
-                },
-                "ay": {
-                    "description": "Sets the y component of the arrow tail about the arrow head. A positive (negative) component corresponds to an arrow pointing from bottom to top (top to bottom)",
-                    "dflt": -30,
-                    "role": "info",
-                    "valType": "number"
-                },
-                "bgcolor": {
-                    "description": "Sets the background color of the annotation.",
-                    "dflt": "rgba(0,0,0,0)",
-                    "role": "style",
-                    "valType": "color"
-                },
-                "bordercolor": {
-                    "description": "Sets the color of the border enclosing the annotation `text`.",
-                    "dflt": "rgba(0,0,0,0)",
-                    "role": "style",
-                    "valType": "color"
-                },
-                "borderpad": {
-                    "description": "Sets the padding (in px) between the `text` and the enclosing border.",
-                    "dflt": 1,
-                    "min": 0,
-                    "role": "style",
-                    "valType": "number"
-                },
-                "borderwidth": {
-                    "description": "Sets the width (in px) of the border enclosing the annotation `text`.",
-                    "dflt": 1,
-                    "min": 0,
-                    "role": "style",
-                    "valType": "number"
-                },
-                "font": {
-                    "color": {
-                        "role": "style",
-                        "valType": "color"
-                    },
-                    "description": "Sets the annotation text font.",
-                    "family": {
-                        "noBlank": true,
-                        "role": "style",
-                        "strict": true,
-                        "valType": "string"
-                    },
-                    "role": "object",
-                    "size": {
-                        "min": 1,
-                        "role": "style",
-                        "valType": "number"
-                    }
-                },
-                "opacity": {
-                    "description": "Sets the opacity of the annotation (text + arrow).",
-                    "dflt": 1,
-                    "max": 1,
-                    "min": 0,
-                    "role": "style",
-                    "valType": "number"
-                },
-                "role": "object",
-                "showarrow": {
-                    "description": "Determines whether or not the annotation is drawn with an arrow. If *true*, `text` is placed near the arrow's tail. If *false*, `text` lines up with the `x` and `y` provided.",
-                    "dflt": true,
-                    "role": "style",
-                    "valType": "boolean"
-                },
-                "text": {
-                    "description": "Sets the text associated with this annotation. Plotly uses a subset of HTML tags to do things like newline (<br>), bold (<b></b>), italics (<i></i>), hyperlinks (<a href='...'></a>). Tags <em>, <sup>, <sub> <span> are also supported.",
-                    "role": "info",
-                    "valType": "string"
-                },
-                "textangle": {
-                    "description": "Sets the angle at which the `text` is drawn with respect to the horizontal.",
-                    "dflt": 0,
-                    "role": "style",
-                    "valType": "angle"
-                },
-                "x": {
-                    "description": "Sets the annotation's x position. Note that dates and categories are converted to numbers.",
-                    "role": "info",
-                    "valType": "number"
-                },
-                "xanchor": {
-                    "description": "Sets the annotation's horizontal position anchor This anchor binds the `x` position to the *left*, *center* or *right* of the annotation. For example, if `x` is set to 1, `xref` to *paper* and `xanchor` to *right* then the right-most portion of the annotation lines up with the right-most edge of the plotting area. If *auto*, the anchor is equivalent to *center* for data-referenced annotations whereas for paper-referenced, the anchor picked corresponds to the closest side.",
-                    "dflt": "auto",
-                    "role": "info",
-                    "valType": "enumerated",
-                    "values": [
-                        "auto",
-                        "left",
-                        "center",
-                        "right"
-                    ]
-                },
-                "xref": {
-                    "description": "Sets the annotation's x coordinate axis. If set to an x axis id (e.g. *x* or *x2*), the `x` position refers to an x coordinate If set to *paper*, the `x` position refers to the distance from the left side of the plotting area in normalized coordinates where 0 (1) corresponds to the left (right) side.",
-                    "role": "info",
-                    "valType": "enumerated",
-                    "values": [
-                        "paper",
-                        "/^x([2-9]|[1-9][0-9]+)?$/"
-                    ]
-                },
-                "y": {
-                    "description": "Sets the annotation's y position. Note that dates and categories are converted to numbers.",
-                    "role": "info",
-                    "valType": "number"
-                },
-                "yanchor": {
-                    "description": "Sets the annotation's vertical position anchor This anchor binds the `y` position to the *top*, *middle* or *bottom* of the annotation. For example, if `y` is set to 1, `yref` to *paper* and `yanchor` to *top* then the top-most portion of the annotation lines up with the top-most edge of the plotting area. If *auto*, the anchor is equivalent to *middle* for data-referenced annotations whereas for paper-referenced, the anchor picked corresponds to the closest side.",
-                    "dflt": "auto",
-                    "role": "info",
-                    "valType": "enumerated",
-                    "values": [
-                        "auto",
-                        "top",
-                        "middle",
-                        "bottom"
-                    ]
-                },
-                "yref": {
-                    "description": "Sets the annotation's y coordinate axis. If set to an y axis id (e.g. *y* or *y2*), the `y` position refers to an y coordinate If set to *paper*, the `y` position refers to the distance from the bottom of the plotting area in normalized coordinates where 0 (1) corresponds to the bottom (top).",
-                    "role": "info",
-                    "valType": "enumerated",
-                    "values": [
-                        "paper",
-                        "/^y([2-9]|[1-9][0-9]+)?$/"
-                    ]
-                }
+                "role": "object"
             },
             "autosize": {
                 "description": "Determines whether or not the dimensions of the figure are computed as a function of the display size.",
@@ -1390,9 +1394,7 @@
                         "valType": "boolean"
                     },
                     "showline": {
-                        "description": [
-                            "Determines whether or not a line bounding this axis is drawn."
-                        ],
+                        "description": "Determines whether or not a line bounding this axis is drawn.",
                         "dflt": false,
                         "role": "style",
                         "valType": "boolean"
@@ -1767,9 +1769,7 @@
                         "valType": "boolean"
                     },
                     "showline": {
-                        "description": [
-                            "Determines whether or not a line bounding this axis is drawn."
-                        ],
+                        "description": "Determines whether or not a line bounding this axis is drawn.",
                         "dflt": false,
                         "role": "style",
                         "valType": "boolean"
@@ -2144,9 +2144,7 @@
                         "valType": "boolean"
                     },
                     "showline": {
-                        "description": [
-                            "Determines whether or not a line bounding this axis is drawn."
-                        ],
+                        "description": "Determines whether or not a line bounding this axis is drawn.",
                         "dflt": false,
                         "role": "style",
                         "valType": "boolean"
@@ -2378,105 +2376,109 @@
                 "valType": "string"
             },
             "shapes": {
-                "_isLinkedToArray": true,
-                "fillcolor": {
-                    "description": "Sets the color filling the shape's interior.",
-                    "dflt": "rgba(0,0,0,0)",
-                    "role": "info",
-                    "valType": "color"
-                },
-                "line": {
-                    "color": {
-                        "description": "Sets the line color.",
-                        "role": "style",
-                        "valType": "color"
-                    },
-                    "dash": {
-                        "description": "Sets the style of the lines.",
-                        "dflt": "solid",
-                        "role": "style",
-                        "valType": "string",
-                        "values": [
-                            "solid",
-                            "dot",
-                            "dash",
-                            "longdash",
-                            "dashdot",
-                            "longdashdot"
-                        ]
-                    },
-                    "role": "object",
-                    "width": {
-                        "description": "Sets the line width (in px).",
-                        "dflt": 2,
-                        "min": 0,
-                        "role": "style",
-                        "valType": "number"
+                "items": {
+                    "shape": {
+                        "fillcolor": {
+                            "description": "Sets the color filling the shape's interior.",
+                            "dflt": "rgba(0,0,0,0)",
+                            "role": "info",
+                            "valType": "color"
+                        },
+                        "line": {
+                            "color": {
+                                "description": "Sets the line color.",
+                                "role": "style",
+                                "valType": "color"
+                            },
+                            "dash": {
+                                "description": "Sets the style of the lines.",
+                                "dflt": "solid",
+                                "role": "style",
+                                "valType": "string",
+                                "values": [
+                                    "solid",
+                                    "dot",
+                                    "dash",
+                                    "longdash",
+                                    "dashdot",
+                                    "longdashdot"
+                                ]
+                            },
+                            "role": "object",
+                            "width": {
+                                "description": "Sets the line width (in px).",
+                                "dflt": 2,
+                                "min": 0,
+                                "role": "style",
+                                "valType": "number"
+                            }
+                        },
+                        "opacity": {
+                            "description": "Sets the opacity of the shape.",
+                            "dflt": 1,
+                            "max": 1,
+                            "min": 0,
+                            "role": "info",
+                            "valType": "number"
+                        },
+                        "path": {
+                            "description": "For `type` *path* - a valid SVG path but with the pixel values replaced by data values. There are a few restrictions / quirks only absolute instructions, not relative. So the allowed segments are: M, L, H, V, Q, C, T, S, and Z arcs (A) are not allowed because radius rx and ry are relative. In the future we could consider supporting relative commands, but we would have to decide on how to handle date and log axes. Note that even as is, Q and C Bezier paths that are smooth on linear axes may not be smooth on log, and vice versa. no chained \"polybezier\" commands - specify the segment type for each one. On category axes, values are numbers scaled to the serial numbers of categories because using the categories themselves there would be no way to describe fractional positions On data axes: because space and T are both normal components of path strings, we can't use either to separate date from time parts. Therefore we'll use underscore for this purpose: 2015-02-21_13:45:56.789",
+                            "role": "info",
+                            "valType": "string"
+                        },
+                        "role": "object",
+                        "type": {
+                            "description": "Specifies the shape type to be drawn. If *line*, a line is drawn from (`x0`,`y0`) to (`x1`,`y1`) If *circle*, a circle is drawn from ((`x0`+`x1`)/2, (`y0`+`y1`)/2)) with radius (|(`x0`+`x1`)/2 - `x0`|, |(`y0`+`y1`)/2 -`y0`)|) If *rect*, a rectangle is drawn linking (`x0`,`y0`), (`x1`,`y0`), (`x1`,`y1`), (`x0`,`y1`), (`x0`,`y0`) If *path*, draw a custom SVG path using `path`.",
+                            "role": "info",
+                            "valType": "enumerated",
+                            "values": [
+                                "circle",
+                                "rect",
+                                "path",
+                                "line"
+                            ]
+                        },
+                        "x0": {
+                            "description": "Sets the shape's starting x position. See `type` for more info.",
+                            "role": "info",
+                            "valType": "any"
+                        },
+                        "x1": {
+                            "description": "Sets the shape's end x position. See `type` for more info.",
+                            "role": "info",
+                            "valType": "any"
+                        },
+                        "xref": {
+                            "description": "Sets the shape's x coordinate axis. If set to an x axis id (e.g. *x* or *x2*), the `x` position refers to an x coordinate If set to *paper*, the `x` position refers to the distance from the left side of the plotting area in normalized coordinates where *0* (*1*) corresponds to the left (right) side.",
+                            "role": "info",
+                            "valType": "enumerated",
+                            "values": [
+                                "paper",
+                                "/^x([2-9]|[1-9][0-9]+)?$/"
+                            ]
+                        },
+                        "y0": {
+                            "description": "Sets the shape's starting y position. See `type` for more info.",
+                            "role": "info",
+                            "valType": "any"
+                        },
+                        "y1": {
+                            "description": "Sets the shape's end y position. See `type` for more info.",
+                            "role": "info",
+                            "valType": "any"
+                        },
+                        "yref": {
+                            "description": "Sets the annotation's y coordinate axis. If set to an y axis id (e.g. *y* or *y2*), the `y` position refers to an y coordinate If set to *paper*, the `y` position refers to the distance from the bottom of the plotting area in normalized coordinates where *0* (*1*) corresponds to the bottom (top).",
+                            "role": "info",
+                            "valType": "enumerated",
+                            "values": [
+                                "paper",
+                                "/^y([2-9]|[1-9][0-9]+)?$/"
+                            ]
+                        }
                     }
                 },
-                "opacity": {
-                    "description": "Sets the opacity of the shape.",
-                    "dflt": 1,
-                    "max": 1,
-                    "min": 0,
-                    "role": "info",
-                    "valType": "number"
-                },
-                "path": {
-                    "dflt": "For `type` *path* - a valid SVG path but with the pixel values replaced by data values. There are a few restrictions / quirks only absolute instructions, not relative. So the allowed segments are: M, L, H, V, Q, C, T, S, and Z arcs (A) are not allowed because radius rx and ry are relative. In the future we could consider supporting relative commands, but we would have to decide on how to handle date and log axes. Note that even as is, Q and C Bezier paths that are smooth on linear axes may not be smooth on log, and vice versa. no chained \"polybezier\" commands - specify the segment type for each one. On category axes, values are numbers scaled to the serial numbers of categories because using the categories themselves there would be no way to describe fractional positions On data axes: because space and T are both normal components of path strings, we can't use either to separate date from time parts. Therefore we'll use underscore for this purpose: 2015-02-21_13:45:56.789",
-                    "role": "info",
-                    "valType": "string"
-                },
-                "role": "object",
-                "type": {
-                    "description": "Specifies the shape type to be drawn. If *line*, a line is drawn from (`x0`,`y0`) to (`x1`,`y1`) If *circle*, a circle is drawn from ((`x0`+`x1`)/2, (`y0`+`y1`)/2)) with radius (|(`x0`+`x1`)/2 - `x0`|, |(`y0`+`y1`)/2 -`y0`)|) If *rect*, a rectangle is drawn linking (`x0`,`y0`), (`x1`,`y0`), (`x1`,`y1`), (`x0`,`y1`), (`x0`,`y0`) If *path*, draw a custom SVG path using `path`.",
-                    "role": "info",
-                    "valType": "enumerated",
-                    "values": [
-                        "circle",
-                        "rect",
-                        "path",
-                        "line"
-                    ]
-                },
-                "x0": {
-                    "description": "Sets the shape's starting x position. See `type` for more info.",
-                    "role": "info",
-                    "valType": "any"
-                },
-                "x1": {
-                    "description": "Sets the shape's end x position. See `type` for more info.",
-                    "role": "info",
-                    "valType": "any"
-                },
-                "xref": {
-                    "description": "Sets the shape's x coordinate axis. If set to an x axis id (e.g. *x* or *x2*), the `x` position refers to an x coordinate If set to *paper*, the `x` position refers to the distance from the left side of the plotting area in normalized coordinates where *0* (*1*) corresponds to the left (right) side.",
-                    "role": "info",
-                    "valType": "enumerated",
-                    "values": [
-                        "paper",
-                        "/^x([2-9]|[1-9][0-9]+)?$/"
-                    ]
-                },
-                "y0": {
-                    "description": "Sets the shape's starting y position. See `type` for more info.",
-                    "role": "info",
-                    "valType": "any"
-                },
-                "y1": {
-                    "description": "Sets the shape's end y position. See `type` for more info.",
-                    "role": "info",
-                    "valType": "any"
-                },
-                "yref": {
-                    "description": "Sets the annotation's y coordinate axis. If set to an y axis id (e.g. *y* or *y2*), the `y` position refers to an y coordinate If set to *paper*, the `y` position refers to the distance from the bottom of the plotting area in normalized coordinates where *0* (*1*) corresponds to the bottom (top).",
-                    "role": "info",
-                    "valType": "enumerated",
-                    "values": [
-                        "paper",
-                        "/^y([2-9]|[1-9][0-9]+)?$/"
-                    ]
-                }
+                "role": "object"
             },
             "showlegend": {
                 "description": "Determines whether or not a legend is drawn.",
@@ -2713,9 +2715,7 @@
                     "valType": "boolean"
                 },
                 "showline": {
-                    "description": [
-                        "Determines whether or not a line bounding this axis is drawn."
-                    ],
+                    "description": "Determines whether or not a line bounding this axis is drawn.",
                     "dflt": false,
                     "role": "style",
                     "valType": "boolean"
@@ -3115,9 +3115,7 @@
                     "valType": "boolean"
                 },
                 "showline": {
-                    "description": [
-                        "Determines whether or not a line bounding this axis is drawn."
-                    ],
+                    "description": "Determines whether or not a line bounding this axis is drawn.",
                     "dflt": false,
                     "role": "style",
                     "valType": "boolean"
@@ -4116,17 +4114,6 @@
                             "role": "style",
                             "valType": "integer"
                         },
-                        "orient": {
-                            "dflt": "right",
-                            "role": "info",
-                            "valType": "enumerated",
-                            "values": [
-                                "left",
-                                "right",
-                                "top",
-                                "bottom"
-                            ]
-                        },
                         "outlinecolor": {
                             "description": "Sets the axis line color.",
                             "dflt": "#444",
@@ -4336,6 +4323,7 @@
                             }
                         },
                         "titleside": {
+                            "description": "Determines the location of the colorbar title with respect to the color bar.",
                             "dflt": "top",
                             "role": "style",
                             "valType": "enumerated",
@@ -5309,17 +5297,6 @@
                         "role": "style",
                         "valType": "integer"
                     },
-                    "orient": {
-                        "dflt": "right",
-                        "role": "info",
-                        "valType": "enumerated",
-                        "values": [
-                            "left",
-                            "right",
-                            "top",
-                            "bottom"
-                        ]
-                    },
                     "outlinecolor": {
                         "description": "Sets the axis line color.",
                         "dflt": "#444",
@@ -5529,6 +5506,7 @@
                         }
                     },
                     "titleside": {
+                        "description": "Determines the location of the colorbar title with respect to the color bar.",
                         "dflt": "top",
                         "role": "style",
                         "valType": "enumerated",
@@ -5854,17 +5832,6 @@
                         "role": "style",
                         "valType": "integer"
                     },
-                    "orient": {
-                        "dflt": "right",
-                        "role": "info",
-                        "valType": "enumerated",
-                        "values": [
-                            "left",
-                            "right",
-                            "top",
-                            "bottom"
-                        ]
-                    },
                     "outlinecolor": {
                         "description": "Sets the axis line color.",
                         "dflt": "#444",
@@ -6074,6 +6041,7 @@
                         }
                     },
                     "titleside": {
+                        "description": "Determines the location of the colorbar title with respect to the color bar.",
                         "dflt": "top",
                         "role": "style",
                         "valType": "enumerated",
@@ -6516,17 +6484,6 @@
                         "role": "style",
                         "valType": "integer"
                     },
-                    "orient": {
-                        "dflt": "right",
-                        "role": "info",
-                        "valType": "enumerated",
-                        "values": [
-                            "left",
-                            "right",
-                            "top",
-                            "bottom"
-                        ]
-                    },
                     "outlinecolor": {
                         "description": "Sets the axis line color.",
                         "dflt": "#444",
@@ -6736,6 +6693,7 @@
                         }
                     },
                     "titleside": {
+                        "description": "Determines the location of the colorbar title with respect to the color bar.",
                         "dflt": "top",
                         "role": "style",
                         "valType": "enumerated",
@@ -7317,7 +7275,32 @@
                     "valType": "string"
                 },
                 "marker": {
+                    "autocolorscale": {
+                        "description": "Has only an effect if `marker.color` is set to a numerical array. Determines whether or not the colorscale is picked using values inside `marker.color`.",
+                        "dflt": true,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
+                    "cauto": {
+                        "description": "Has only an effect if `marker.color` is set to a numerical array. Determines the whether or not the color domain is computed automatically.",
+                        "dflt": true,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
+                    "cmax": {
+                        "description": "Has only an effect if `marker.color` is set to a numerical array. Sets the upper bound of the color domain.",
+                        "dflt": null,
+                        "role": "info",
+                        "valType": "number"
+                    },
+                    "cmin": {
+                        "description": "Has only an effect if `marker.color` is set to a numerical array. Sets the lower bound of the color domain.",
+                        "dflt": null,
+                        "role": "info",
+                        "valType": "number"
+                    },
                     "color": {
+                        "description": "Sets the marker color.",
                         "role": "data",
                         "valType": "data_array"
                     },
@@ -7384,17 +7367,6 @@
                             "min": 0,
                             "role": "style",
                             "valType": "integer"
-                        },
-                        "orient": {
-                            "dflt": "right",
-                            "role": "info",
-                            "valType": "enumerated",
-                            "values": [
-                                "left",
-                                "right",
-                                "top",
-                                "bottom"
-                            ]
                         },
                         "outlinecolor": {
                             "description": "Sets the axis line color.",
@@ -7605,6 +7577,7 @@
                             }
                         },
                         "titleside": {
+                            "description": "Determines the location of the colorbar title with respect to the color bar.",
                             "dflt": "top",
                             "role": "style",
                             "valType": "enumerated",
@@ -7663,12 +7636,90 @@
                             "valType": "number"
                         }
                     },
+                    "colorscale": {
+                        "description": "Has only an effect if `marker.color` is set to a numerical array. Sets the colorscale.",
+                        "role": "style",
+                        "valType": "colorscale"
+                    },
                     "colorsrc": {
                         "description": "Sets the source reference on plot.ly for  color .",
                         "role": "info",
                         "valType": "string"
                     },
-                    "role": "object"
+                    "line": {
+                        "autocolorscale": {
+                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Determines whether or not the colorscale is picked using the sign of values inside `marker.line.color`.",
+                            "dflt": true,
+                            "role": "style",
+                            "valType": "boolean"
+                        },
+                        "cauto": {
+                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Determines the whether or not the color domain is computed with respect to the input data.",
+                            "dflt": true,
+                            "role": "style",
+                            "valType": "boolean"
+                        },
+                        "cmax": {
+                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Sets the upper bound of the color domain.",
+                            "dflt": null,
+                            "role": "info",
+                            "valType": "number"
+                        },
+                        "cmin": {
+                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Sets the lower bound of the color domain.",
+                            "dflt": null,
+                            "role": "info",
+                            "valType": "number"
+                        },
+                        "color": {
+                            "arrayOk": true,
+                            "description": "Sets the color of the lines bounding the marker points.",
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "colorscale": {
+                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Sets the colorscale.",
+                            "role": "style",
+                            "valType": "colorscale"
+                        },
+                        "colorsrc": {
+                            "description": "Sets the source reference on plot.ly for  color .",
+                            "role": "info",
+                            "valType": "string"
+                        },
+                        "reversescale": {
+                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Reverses the colorscale.",
+                            "dflt": false,
+                            "role": "style",
+                            "valType": "boolean"
+                        },
+                        "role": "object",
+                        "width": {
+                            "arrayOk": true,
+                            "description": "Sets the width (in px) of the lines bounding the marker points.",
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "widthsrc": {
+                            "description": "Sets the source reference on plot.ly for  width .",
+                            "role": "info",
+                            "valType": "string"
+                        }
+                    },
+                    "reversescale": {
+                        "description": "Has only an effect if `marker.color` is set to a numerical array. Reverses the colorscale.",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
+                    "role": "object",
+                    "showscale": {
+                        "description": "Has only an effect if `marker.color` is set to a numerical array. Determines whether or not a colorbar is displayed.",
+                        "dflt": false,
+                        "role": "info",
+                        "valType": "boolean"
+                    }
                 },
                 "name": {
                     "description": "Sets the trace name. The trace name appear as the legend item and on hover.",
@@ -7999,17 +8050,6 @@
                         "role": "style",
                         "valType": "integer"
                     },
-                    "orient": {
-                        "dflt": "right",
-                        "role": "info",
-                        "valType": "enumerated",
-                        "values": [
-                            "left",
-                            "right",
-                            "top",
-                            "bottom"
-                        ]
-                    },
                     "outlinecolor": {
                         "description": "Sets the axis line color.",
                         "dflt": "#444",
@@ -8219,6 +8259,7 @@
                         }
                     },
                     "titleside": {
+                        "description": "Determines the location of the colorbar title with respect to the color bar.",
                         "dflt": "top",
                         "role": "style",
                         "valType": "enumerated",
@@ -8701,17 +8742,6 @@
                         "role": "style",
                         "valType": "integer"
                     },
-                    "orient": {
-                        "dflt": "right",
-                        "role": "info",
-                        "valType": "enumerated",
-                        "values": [
-                            "left",
-                            "right",
-                            "top",
-                            "bottom"
-                        ]
-                    },
                     "outlinecolor": {
                         "description": "Sets the axis line color.",
                         "dflt": "#444",
@@ -8921,6 +8951,7 @@
                         }
                     },
                     "titleside": {
+                        "description": "Determines the location of the colorbar title with respect to the color bar.",
                         "dflt": "top",
                         "role": "style",
                         "valType": "enumerated",
@@ -9470,17 +9501,6 @@
                         "role": "style",
                         "valType": "integer"
                     },
-                    "orient": {
-                        "dflt": "right",
-                        "role": "info",
-                        "valType": "enumerated",
-                        "values": [
-                            "left",
-                            "right",
-                            "top",
-                            "bottom"
-                        ]
-                    },
                     "outlinecolor": {
                         "description": "Sets the axis line color.",
                         "dflt": "#444",
@@ -9690,6 +9710,7 @@
                         }
                     },
                     "titleside": {
+                        "description": "Determines the location of the colorbar title with respect to the color bar.",
                         "dflt": "top",
                         "role": "style",
                         "valType": "enumerated",
@@ -10776,17 +10797,6 @@
                             "role": "style",
                             "valType": "integer"
                         },
-                        "orient": {
-                            "dflt": "right",
-                            "role": "info",
-                            "valType": "enumerated",
-                            "values": [
-                                "left",
-                                "right",
-                                "top",
-                                "bottom"
-                            ]
-                        },
                         "outlinecolor": {
                             "description": "Sets the axis line color.",
                             "dflt": "#444",
@@ -10996,6 +11006,7 @@
                             }
                         },
                         "titleside": {
+                            "description": "Determines the location of the colorbar title with respect to the color bar.",
                             "dflt": "top",
                             "role": "style",
                             "valType": "enumerated",
@@ -12155,17 +12166,6 @@
                             "role": "style",
                             "valType": "integer"
                         },
-                        "orient": {
-                            "dflt": "right",
-                            "role": "info",
-                            "valType": "enumerated",
-                            "values": [
-                                "left",
-                                "right",
-                                "top",
-                                "bottom"
-                            ]
-                        },
                         "outlinecolor": {
                             "description": "Sets the axis line color.",
                             "dflt": "#444",
@@ -12375,6 +12375,7 @@
                             }
                         },
                         "titleside": {
+                            "description": "Determines the location of the colorbar title with respect to the color bar.",
                             "dflt": "top",
                             "role": "style",
                             "valType": "enumerated",
@@ -13053,17 +13054,6 @@
                             "role": "style",
                             "valType": "integer"
                         },
-                        "orient": {
-                            "dflt": "right",
-                            "role": "info",
-                            "valType": "enumerated",
-                            "values": [
-                                "left",
-                                "right",
-                                "top",
-                                "bottom"
-                            ]
-                        },
                         "outlinecolor": {
                             "description": "Sets the axis line color.",
                             "dflt": "#444",
@@ -13273,6 +13263,7 @@
                             }
                         },
                         "titleside": {
+                            "description": "Determines the location of the colorbar title with respect to the color bar.",
                             "dflt": "top",
                             "role": "style",
                             "valType": "enumerated",
@@ -13977,17 +13968,6 @@
                         "role": "style",
                         "valType": "integer"
                     },
-                    "orient": {
-                        "dflt": "right",
-                        "role": "info",
-                        "valType": "enumerated",
-                        "values": [
-                            "left",
-                            "right",
-                            "top",
-                            "bottom"
-                        ]
-                    },
                     "outlinecolor": {
                         "description": "Sets the axis line color.",
                         "dflt": "#444",
@@ -14197,6 +14177,7 @@
                         }
                     },
                     "titleside": {
+                        "description": "Determines the location of the colorbar title with respect to the color bar.",
                         "dflt": "top",
                         "role": "style",
                         "valType": "enumerated",
