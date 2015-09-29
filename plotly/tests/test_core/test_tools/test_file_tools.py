@@ -11,7 +11,7 @@ class FileToolsTest(PlotlyTestCase):
         domain, streaming_domain, api, sharing = ('this', 'thing',
                                                   'that', 'private')
         ssl_verify, proxy_auth, world_readable, auto_open = (True, True,
-                                                             True, False)
+                                                             False, False)
         tools.set_config_file(plotly_domain=domain,
                               plotly_streaming_domain=streaming_domain,
                               plotly_api_domain=api,
