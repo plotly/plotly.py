@@ -1,13 +1,13 @@
 from __future__ import absolute_import
 
-from unittest import TestCase
+from plotly.tests.utils import PlotlyTestCase
 
 from plotly.session import (update_session_plot_options, SHARING_OPTIONS,
                             _session)
 from plotly.exceptions import PlotlyError
 
 
-class TestSession(TestCase):
+class TestSession(PlotlyTestCase):
 
     def test_update_session_plot_options_invalid_sharing_argument(self):
 
