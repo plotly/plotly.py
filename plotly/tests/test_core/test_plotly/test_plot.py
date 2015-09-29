@@ -340,7 +340,7 @@ def generate_private_sharing_and_public_world_readable_precedence():
         def test(self):
             py.sign_in('username', 'key', **plot_options['parent'])
             options = py._plot_option_logic(plot_options['child'])
-            for option, value in plot_options['expected_output'].iteritems():
+            for option, value in plot_options['expected_output'].items():
                 self.assertEqual(options[option], value)
         return test
 
@@ -348,7 +348,7 @@ def generate_private_sharing_and_public_world_readable_precedence():
         def test(self):
             tls.set_config(**plot_options['parent'])
             options = py._plot_option_logic(plot_options['child'])
-            for option, value in plot_options['expected_output'].iteritems():
+            for option, value in plot_options['expected_output'].items():
                 self.assertEqual(options[option], value)
 
     for i, plot_options in enumerate(plot_option_sets):
