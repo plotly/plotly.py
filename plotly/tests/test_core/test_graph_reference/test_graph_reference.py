@@ -9,6 +9,7 @@ import os
 from pkg_resources import resource_string
 from unittest import TestCase
 
+import requests
 from nose.plugins.attrib import attr
 
 from plotly import files, graph_reference as gr, tools, utils
@@ -56,6 +57,25 @@ class TestGraphReferenceCaching(PlotlyTestCase):
         default_graph_reference = json.loads(s)
         graph_reference = gr.get_graph_reference()
         self.assertEqual(graph_reference, default_graph_reference)
+
+    @attr('slow')
+    def test_default_schema_is_up_to_date(self):
+        api_domain = files.FILE_CONTENT[files.CONFIG_FILE]['plotly_api_domain']
+        graph_reference_url = '{}{}?sha1'.format(api_domain,
+                                                 gr.GRAPH_REFERENCE_PATH)
+        response = requests.get(graph_reference_url)
+        schema = json.loads(response.content)['schema']
+
+        path = os.path.join('graph_reference', 'default-schema.json')
+        s = resource_string('plotly', path).decode('utf-8')
+        default_schema = json.loads(s)
+
+        msg = (
+            'The default, hard-coded plot schema we ship with pip is out of '
+            'sync with the prod plot schema!\n'
+            'Run `make update_default_schema` to fix it!'
+        )
+        self.assertEqual(schema, default_schema, msg=msg)
 
 
 class TestStringToClass(PlotlyTestCase):
