@@ -249,10 +249,8 @@ class TestStreamline(TestCase):
 class TestDendrogram(TestCase):
 
     def test_default_dendrogram(self):
-        dendro = tls.FigureFactory.create_dendrogram(X=np.array([[1, 2, 3, 4],
-                                                                 [1, 1, 3, 4],
-                                                                 [1, 2, 1, 4],
-                                                                 [1, 2, 3, 1]]))
+        X = np.array([[1, 2, 3, 4], [1, 1, 3, 4], [1, 2, 1, 4], [1, 2, 3, 1]])
+        dendro = tls.FigureFactory.create_dendrogram(X=X)
         expected_data = [{'marker': {'color': 'rgb(255,133,27)'},
                           'mode': 'lines', 'xaxis': 'xs',
                           'yaxis': 'y',
@@ -348,7 +346,9 @@ class TestDendrogram(TestCase):
         dendro_bottom = tls.FigureFactory.create_dendrogram(
                         X, orientation='bottom')
         self.assertEqual(len(dendro_bottom['layout']['xaxis']['ticktext']), 5)
-        tickvals_bottom = np.array(dendro_bottom['layout']['xaxis']['tickvals'])
+        tickvals_bottom = np.array(
+            dendro_bottom['layout']['xaxis']['tickvals']
+        )
         self.assertTrue((tickvals_bottom >= 0).all())
 
         dendro_top = tls.FigureFactory.create_dendrogram(X, orientation='top')
@@ -361,8 +361,8 @@ class TestDendrogram(TestCase):
                       [1, 2, 1, 4],
                       [1, 2, 3, 1]])
         greyscale = [
-                'rgb(0,0,0)',        # black
-                'rgb(05,105,105)',   # dim grey
+                'rgb(0,0,0)',  # black
+                'rgb(05,105,105)',  # dim grey
                 'rgb(128,128,128)',  # grey
                 'rgb(169,169,169)',  # dark grey
                 'rgb(192,192,192)',  # silver
