@@ -447,7 +447,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
         tickvals_top = np.array(dendro_top['layout']['xaxis']['tickvals'])
         self.assertTrue((tickvals_top <= 0).all())
 
-    def test_dendrogram_orientation_two(self):
+    def test_dendrogram_colorscale(self):
         X = np.array([[1, 2, 3, 4],
                       [1, 1, 3, 4],
                       [1, 2, 1, 4],
