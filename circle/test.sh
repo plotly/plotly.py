@@ -38,17 +38,6 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
     python -c 'import plotly' ||
         error_exit "${LINENO}: can't import plotly package"
 
-#    echo "${HOME}"
-#    echo "${PLOTLY_CONFIG_DIR}"
-#
-#    # test that it imports when you don't have write permissions
-#    sudo chmod -R 444 ${PLOTLY_CONFIG_DIR} && python -c "import plotly" ||
-#        error_exit "${LINENO}: permissions test 444 on .plotly dir failed"
-#
-#    # test that setting write permissions will work for import (and tests)
-#    sudo chmod -R 666 ${PLOTLY_CONFIG_DIR} && python -c "import plotly" ||
-#        error_exit "${LINENO}: permissions test 666 on .plotly dir failed"
-
     echo "running tests for Python ${version} as user '$(whoami)'"
     nosetests -xv plotly/tests ||
         error_exit "${LINENO}: test suite failed for Python ${version}"
