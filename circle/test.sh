@@ -26,16 +26,16 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
 
     # this was a major issue previously, sanity check that we're using the
     # version we *think* we're using (that pyenv is pointing to)
-    echo "python -c 'import sys; print(sys.version)'"
+    echo "Running: python -c 'import sys; print(sys.version)'. We've got:"
     python -c 'import sys; print(sys.version)'
 
 
     echo "install plotly (ignoring possibly cached versions)"
-    pip install -I ${PLOTLY_PACKAGE_ROOT} ||
+    pip install -I ${PLOTLY_PACKAGE_ROOT} >/dev/null ||
         error_exit "${LINENO}: can't install plotly package from project root"
 
     echo "import plotly to create .plotly dir if DNE"
-    python -c 'import plotly' ||
+    python -c 'import plotly' >/dev/null ||
         error_exit "${LINENO}: can't import plotly package"
 
     echo "running tests for Python ${version} as user '$(whoami)'"
