@@ -294,7 +294,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
                     showticklabels=True,
                     tickmode='array',
                     ticks='outside',
-                    ticktext=np.array(['3', '2', '0', '1'], dtype='|S1'),
+                    ticktext=np.array(['3', '2', '0', '1']),
                     tickvals=[5.0, 15.0, 25.0, 35.0],
                     type='linear',
                     zeroline=False
