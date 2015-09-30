@@ -3,6 +3,7 @@ from plotly.graph_objs import graph_objs, Line
 from plotly.exceptions import PlotlyError
 
 import plotly.tools as tls
+from plotly.tests.test_optional.optional_utils import NumpyTestUtilsMixin
 import math
 from nose.tools import raises
 
@@ -246,7 +247,7 @@ class TestStreamline(TestCase):
                              expected_strln_0_100['x'])
 
 
-class TestDendrogram(TestCase):
+class TestDendrogram(NumpyTestUtilsMixin, TestCase):
 
     def test_default_dendrogram(self):
         X = np.array([[1, 2, 3, 4], [1, 1, 3, 4], [1, 2, 1, 4], [1, 2, 3, 1]])
@@ -297,24 +298,17 @@ class TestDendrogram(TestCase):
                                      'showline': True,
                                      'rangemode': 'tozero',
                                      'type': 'linear'},
-                           'hovermode': 'closest'}  
+                           'hovermode': 'closest'}
 
-        # Make sure data is as expected
-        self.assertEqual(len(dendro['data']), len(expected_data))
-        for i in range(1, len(dendro['data'])):
-            self.assertTrue(np.allclose(dendro['data'][i]['x'],
-                            expected_data[i]['x']))
-            self.assertTrue(np.allclose(dendro['data'][i]['y'],
-                            expected_data[i]['y']))
+        expected_dendro = {'data': expected_data, 'layout': expected_layout}
+        self.assertEqual(len(dendro['data']), 3)
 
-        # Make sure layout is as expected
-        self.assertTrue(np.array_equal(dendro['layout']['xaxis']['ticktext'],
-                                       expected_layout['xaxis']['ticktext']))
-        self.assertTrue(np.array_equal(dendro['layout']['xaxis']['tickvals'],
-                                       expected_layout['xaxis']['tickvals']))
-        self.assertEqual(dendro['layout']['xaxis']['ticks'], 'outside')
-        self.assertEqual(dendro['layout']['yaxis']['ticks'], 'outside')
-        self.assertEqual(dendro['layout']['width'], expected_layout['width'])
+        # this is actually a bit clearer when debugging tests.
+        self.assert_dict_equal(dendro['data'][0], expected_dendro['data'][0])
+        self.assert_dict_equal(dendro['data'][1], expected_dendro['data'][1])
+        self.assert_dict_equal(dendro['data'][2], expected_dendro['data'][2])
+
+        self.assert_dict_equal(dendro['layout'], expected_dendro['layout'])
 
     def test_dendrogram_random_matrix(self):
         # create a random uncorrelated matrix
