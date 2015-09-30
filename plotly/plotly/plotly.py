@@ -111,7 +111,7 @@ def _plot_option_logic(plot_options_from_call_signature):
     user_plot_options.update(file_options)
     user_plot_options.update(session_options)
     user_plot_options.update(plot_options_from_call_signature)
-    user_plot_options = {k: v for k, v in user_plot_options.items
+    user_plot_options = {k: v for k, v in user_plot_options.items()
                          if k in default_plot_options}
 
     return user_plot_options
