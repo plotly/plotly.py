@@ -3329,7 +3329,7 @@ class _Dendrogram(FigureFactory):
         """
         self.layout.update({
             'showlegend': False,
-            'autoscale': False,
+            'autosize': False,
             'hovermode': 'closest',
             'width': width,
             'height': height
