@@ -463,9 +463,69 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
                 'rgb(245,245,245)']  # white smoke
 
         dendro = tls.FigureFactory.create_dendrogram(X, colorscale=greyscale)
-        self.assertEqual(dendro["data"][0]['marker']['color'],
-                         'rgb(128,128,128)')
-        self.assertEqual(dendro["data"][1]['marker']['color'],
-                         'rgb(128,128,128)')
-        self.assertEqual(dendro["data"][2]['marker']['color'],
-                         'rgb(0,0,0)')
+
+        expected_dendro = go.Figure(
+            data=go.Data([
+                go.Scatter(
+                    x=np.array([25., 25., 35., 35.]),
+                    y=np.array([0., 1., 1., 0.]),
+                    marker=go.Marker(color='rgb(128,128,128)'),
+                    mode='lines',
+                    xaxis='x',
+                    yaxis='y'
+                ),
+                go.Scatter(
+                    x=np.array([15., 15., 30., 30.]),
+                    y=np.array([0., 2.23606798, 2.23606798, 1.]),
+                    marker=go.Marker(color='rgb(128,128,128)'),
+                    mode='lines',
+                    xaxis='x',
+                    yaxis='y'
+                ),
+                go.Scatter(
+                    x=np.array([5., 5., 22.5, 22.5]),
+                    y=np.array([0., 3.60555128, 3.60555128, 2.23606798]),
+                    marker=go.Marker(color='rgb(0,0,0)'),
+                    mode='lines',
+                    xaxis='x',
+                    yaxis='y'
+                )
+            ]),
+            layout=go.Layout(
+                autosize=False,
+                height='100%',
+                hovermode='closest',
+                showlegend=False,
+                width='100%',
+                xaxis=go.XAxis(
+                    mirror='allticks',
+                    rangemode='tozero',
+                    showgrid=False,
+                    showline=True,
+                    showticklabels=True,
+                    tickmode='array',
+                    ticks='outside',
+                    ticktext=np.array(['3', '2', '0', '1']),
+                    tickvals=[5.0, 15.0, 25.0, 35.0],
+                    type='linear',
+                    zeroline=False
+                ),
+                yaxis=go.YAxis(
+                    mirror='allticks',
+                    rangemode='tozero',
+                    showgrid=False,
+                    showline=True,
+                    showticklabels=True,
+                    ticks='outside',
+                    type='linear',
+                    zeroline=False
+                )
+            )
+        )
+
+        self.assertEqual(len(dendro['data']), 3)
+
+        # this is actually a bit clearer when debugging tests.
+        self.assert_dict_equal(dendro['data'][0], expected_dendro['data'][0])
+        self.assert_dict_equal(dendro['data'][1], expected_dendro['data'][1])
+        self.assert_dict_equal(dendro['data'][2], expected_dendro['data'][2])
