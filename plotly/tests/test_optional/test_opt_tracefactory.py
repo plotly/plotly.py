@@ -1,5 +1,5 @@
 from unittest import TestCase
-from plotly.graph_objs import graph_objs, Line
+from plotly.graph_objs import graph_objs as go
 from plotly.exceptions import PlotlyError
 
 import plotly.tools as tls
@@ -252,55 +252,66 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
     def test_default_dendrogram(self):
         X = np.array([[1, 2, 3, 4], [1, 1, 3, 4], [1, 2, 1, 4], [1, 2, 3, 1]])
         dendro = tls.FigureFactory.create_dendrogram(X=X)
-        expected_data = [{'marker': {'color': 'rgb(255,133,27)'},
-                          'mode': 'lines', 'xaxis': 'xs',
-                          'yaxis': 'y',
-                          'y': np.array([0., 1., 1., 0.]),
-                          'x': np.array([25., 25., 35., 35.]),
-                          'type': u'scatter'},
-                         {'marker': {'color': 'rgb(255,133,27)'},
-                          'mode': 'lines',
-                          'xaxis': 'x',
-                          'yaxis': 'y',
-                          'y': np.array([0., 2.23606798, 2.23606798, 1.]),
-                          'x': np.array([15., 15., 30., 30.]),
-                          'type': u'scatter'},
-                         {'marker': {'color': 'blue'},
-                          'mode': 'lines',
-                          'xaxis': 'x',
-                          'yaxis': 'y',
-                          'y': np.array([0., 3.60555128,
-                                         3.60555128, 2.23606798]),
-                          'x': np.array([5., 5., 22.5, 22.5]),
-                          'type': u'scatter'}]
-        expected_layout = {'width': '100%',
-                           'showlegend': False,
-                           'autoscale': False,
-                           'xaxis': {'showticklabels': True,
-                                     'tickmode': 'array',
-                                     'ticks': 'outside',
-                                     'showgrid': False,
-                                     'mirror': 'allticks',
-                                     'zeroline': False,
-                                     'showline': True,
-                                     'ticktext': np.array(['3', '2',
-                                                           '0', '1'],
-                                                          dtype='|S1'),
-                                     'rangemode': 'tozero',
-                                     'type': 'linear',
-                                     'tickvals': np.array([5.0, 15.0,
-                                                           25.0, 35.0])},
-                           'yaxis': {'showticklabels': True,
-                                     'ticks': 'outside',
-                                     'showgrid': False,
-                                     'mirror': 'allticks',
-                                     'zeroline': False,
-                                     'showline': True,
-                                     'rangemode': 'tozero',
-                                     'type': 'linear'},
-                           'hovermode': 'closest'}
 
-        expected_dendro = {'data': expected_data, 'layout': expected_layout}
+        expected_dendro = go.Figure(
+            data=go.Data([
+                go.Scatter(
+                    x=np.array([25., 25., 35., 35.]),
+                    y=np.array([0., 1., 1., 0.]),
+                    marker=go.Marker(color='rgb(61,153,112)'),
+                    mode='lines',
+                    xaxis='x',
+                    yaxis='y'
+                ),
+                go.Scatter(
+                    x=np.array([15., 15., 30., 30.]),
+                    y=np.array([0., 2.23606798, 2.23606798, 1.]),
+                    marker=go.Marker(color='rgb(61,153,112)'),
+                    mode='lines',
+                    xaxis='x',
+                    yaxis='y'
+                ),
+                go.Scatter(
+                    x=np.array([5., 5., 22.5, 22.5]),
+                    y=np.array([0., 3.60555128, 3.60555128, 2.23606798]),
+                    marker=go.Marker(color='rgb(0,116,217)'),
+                    mode='lines',
+                    xaxis='x',
+                    yaxis='y'
+                )
+            ]),
+            layout=go.Layout(
+                autosize=False,
+                height='100%',
+                hovermode='closest',
+                showlegend=False,
+                width='100%',
+                xaxis=go.XAxis(
+                    mirror='allticks',
+                    rangemode='tozero',
+                    showgrid=False,
+                    showline=True,
+                    showticklabels=True,
+                    tickmode='array',
+                    ticks='outside',
+                    ticktext=np.array(['3', '2', '0', '1'], dtype='|S1'),
+                    tickvals=[5.0, 15.0, 25.0, 35.0],
+                    type='linear',
+                    zeroline=False
+                ),
+                yaxis=go.YAxis(
+                    mirror='allticks',
+                    rangemode='tozero',
+                    showgrid=False,
+                    showline=True,
+                    showticklabels=True,
+                    ticks='outside',
+                    type='linear',
+                    zeroline=False
+                )
+            )
+        )
+
         self.assertEqual(len(dendro['data']), 3)
 
         # this is actually a bit clearer when debugging tests.
