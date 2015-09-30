@@ -39,7 +39,7 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
         error_exit "${LINENO}: can't import plotly package"
 
     echo "running tests for Python ${version} as user '$(whoami)'"
-    nosetests -xv plotly/tests ||
+    nosetests -x plotly/tests ||
         error_exit "${LINENO}: test suite failed for Python ${version}"
 
 done
