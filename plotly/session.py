@@ -39,8 +39,11 @@ PLOT_OPTIONS = {
     'fileopt': six.string_types,
     'world_readable': bool,
     'auto_open': bool,
-    'validate': bool
+    'validate': bool,
+    'sharing': six.string_types
 }
+
+SHARING_OPTIONS = ['public', 'private', 'secret']
 
 
 def sign_in(username, api_key, **kwargs):
@@ -101,6 +104,7 @@ def update_session_plot_options(**kwargs):
     :param (str|optional) filename: What the file will be named in Plotly
     :param (str|optional) fileopt: 'overwrite', 'append', 'new', or 'extend'
     :param (bool|optional) world_readable: Make public or private.
+    :param (dict|optional) sharing: 'public', 'private', 'secret'
     :param (bool|optional) auto_open: For `plot`, open in new browser tab?
     :param (bool|optional) validate: Error locally if data doesn't pass?
 
@@ -114,6 +118,12 @@ def update_session_plot_options(**kwargs):
         if not isinstance(kwargs[key], PLOT_OPTIONS[key]):
             raise exceptions.PlotlyError("{} must be of type '{}'"
                                          .format(key, PLOT_OPTIONS[key]))
+
+        # raise exception if sharing is invalid
+        if (key == 'sharing' and not (kwargs[key] in SHARING_OPTIONS)):
+            raise exceptions.PlotlyError("'{0}' must be of either '{1}', '{2}'"
+                                         " or '{3}'"
+                                         .format(key, *SHARING_OPTIONS))
 
     # update local _session dict with new plot options
     _session['plot_options'].update(kwargs)

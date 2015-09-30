@@ -6,9 +6,12 @@ import tempfile
 import os
 import itertools
 
+from nose.plugins.attrib import attr
+
 from plotly.plotly import plotly as py
 
 
+@attr('slow')
 class TestImage(TestCase):
     def setUp(self):
         py.sign_in('PlotlyImageTest', '786r5mecv0',

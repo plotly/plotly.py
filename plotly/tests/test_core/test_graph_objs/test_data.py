@@ -6,6 +6,7 @@ A module intended for use with Nose.
 
 """
 from __future__ import absolute_import
+from unittest import skip
 
 from nose.tools import raises
 
@@ -58,18 +59,8 @@ def test_dict_instantiation_graph_obj_error_0():
 
 
 @raises(PlotlyListEntryError)
-def test_dict_instantiation_graph_obj_error_1():
-    Data([Figure()])
-
-
-@raises(PlotlyListEntryError)
 def test_dict_instantiation_graph_obj_error_2():
     Data([Annotations()])
-
-
-@raises(PlotlyListEntryError)
-def test_dict_instantiation_graph_obj_error_3():
-    Data([Layout()])
 
 
 def test_validate():

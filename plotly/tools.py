@@ -10,7 +10,6 @@ Functions that USERS will possibly want access to.
 from __future__ import absolute_import
 from collections import OrderedDict
 
-import os.path
 import warnings
 
 import six
@@ -18,9 +17,10 @@ import math
 
 from plotly import utils
 from plotly import exceptions
+from plotly import graph_reference
 from plotly import session
-
-from plotly.graph_objs import graph_objs, Scatter, Marker, Line, Data
+from plotly.files import (CONFIG_FILE, CREDENTIALS_FILE, FILE_CONTENT,
+                          GRAPH_REFERENCE_FILE, check_file_permissions)
 
 
 # Warning format
@@ -67,39 +67,12 @@ try:
 except ImportError:
     _scipy__cluster__hierarchy_imported = False
 
-
-PLOTLY_DIR = os.path.join(os.path.expanduser("~"), ".plotly")
-CREDENTIALS_FILE = os.path.join(PLOTLY_DIR, ".credentials")
-CONFIG_FILE = os.path.join(PLOTLY_DIR, ".config")
-TEST_DIR = os.path.join(os.path.expanduser("~"), ".test")
-TEST_FILE = os.path.join(PLOTLY_DIR, ".permission_test")
-
-# this sets both the DEFAULTS and the TYPES for these items
-_FILE_CONTENT = {CREDENTIALS_FILE: {'username': '',
-                                    'api_key': '',
-                                    'proxy_username': '',
-                                    'proxy_password': '',
-                                    'stream_ids': []},
-                 CONFIG_FILE: {'plotly_domain': 'https://plot.ly',
-                               'plotly_streaming_domain': 'stream.plot.ly',
-                               'plotly_api_domain': 'https://api.plot.ly',
-                               'plotly_ssl_verification': True,
-                               'plotly_proxy_authorization': False,
-                               'world_readable': True}}
-
-
 try:
-    os.mkdir(TEST_DIR)
-    os.rmdir(TEST_DIR)
-    if not os.path.exists(PLOTLY_DIR):
-        os.mkdir(PLOTLY_DIR)
-    f = open(TEST_FILE, 'w')
-    f.write('testing\n')
-    f.close()
-    os.remove(TEST_FILE)
-    _file_permissions = True
-except:
-    _file_permissions = False
+    import scipy
+    import scipy.stats
+    _scipy_imported = True
+except ImportError:
+    _scipy_imported = False
 
 
 def get_config_defaults():
@@ -112,28 +85,30 @@ def get_config_defaults():
             # do something
 
     """
-    return dict(_FILE_CONTENT[CONFIG_FILE])  # performs a shallow copy
-
-
-def check_file_permissions():
-    return _file_permissions
+    return dict(FILE_CONTENT[CONFIG_FILE])  # performs a shallow copy
 
 
 def ensure_local_plotly_files():
     """Ensure that filesystem is setup/filled out in a valid way"""
-    if _file_permissions:
+    if check_file_permissions():
         for fn in [CREDENTIALS_FILE, CONFIG_FILE]:
             utils.ensure_file_exists(fn)
             contents = utils.load_json_dict(fn)
-            for key, val in list(_FILE_CONTENT[fn].items()):
+            for key, val in list(FILE_CONTENT[fn].items()):
                 # TODO: removed type checking below, may want to revisit
                 if key not in contents:
                     contents[key] = val
             contents_keys = list(contents.keys())
             for key in contents_keys:
-                if key not in _FILE_CONTENT[fn]:
+                if key not in FILE_CONTENT[fn]:
                     del contents[key]
             utils.save_json_dict(fn, contents)
+
+        # make a request to get graph reference if DNE.
+        utils.ensure_file_exists(GRAPH_REFERENCE_FILE)
+        utils.save_json_dict(GRAPH_REFERENCE_FILE,
+                             graph_reference.GRAPH_REFERENCE)
+
     else:
         warnings.warn("Looks like you don't have 'read-write' permission to "
                       "your 'home' ('~') directory or to our '~/.plotly' "
@@ -160,7 +135,7 @@ def set_credentials_file(username=None,
     :param (str) proxy_password: The pw associated with your Proxy un
 
     """
-    if not _file_permissions:
+    if not check_file_permissions():
         raise exceptions.PlotlyError("You don't have proper file permissions "
                                      "to run this function.")
     ensure_local_plotly_files()  # make sure what's there is OK
@@ -188,11 +163,11 @@ def get_credentials_file(*args):
         get_credentials_file('username')
 
     """
-    if _file_permissions:
+    if check_file_permissions():
         ensure_local_plotly_files()  # make sure what's there is OK
         return utils.load_json_dict(CREDENTIALS_FILE, *args)
     else:
-        return _FILE_CONTENT[CREDENTIALS_FILE]
+        return FILE_CONTENT[CREDENTIALS_FILE]
 
 
 def reset_credentials_file():
@@ -219,7 +194,7 @@ def set_config_file(plotly_domain=None,
     :param (bool) world_readable: True = public, False = private
 
     """
-    if not _file_permissions:
+    if not check_file_permissions():
         raise exceptions.PlotlyError("You don't have proper file permissions "
                                      "to run this function.")
     ensure_local_plotly_files()  # make sure what's there is OK
@@ -263,11 +238,11 @@ def get_config_file(*args):
         get_config_file('plotly_domain')
 
     """
-    if _file_permissions:
+    if check_file_permissions():
         ensure_local_plotly_files()  # make sure what's there is OK
         return utils.load_json_dict(CONFIG_FILE, *args)
     else:
-        return _FILE_CONTENT[CONFIG_FILE]
+        return FILE_CONTENT[CONFIG_FILE]
 
 
 def reset_config_file():
@@ -302,7 +277,6 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
                               figure
 
     """
-    padding = 25
     plotly_rest_url = (session.get_session_config().get('plotly_domain') or
                        get_config_file()['plotly_domain'])
     if file_id is None:  # assume we're using a url
@@ -315,13 +289,19 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
                 "'{1}'."
                 "\nRun help on this function for more information."
                 "".format(url, plotly_rest_url))
-        head = plotly_rest_url + "/~"
-        file_owner = url.replace(head, "").split('/')[0]
-        file_id = url.replace(head, "").split('/')[1]
+        urlsplit = six.moves.urllib.parse.urlparse(url)
+        file_owner = urlsplit.path.split('/')[1].split('~')[1]
+        file_id = urlsplit.path.split('/')[2]
+
+        # to check for share_key we check urlsplit.query
+        query_dict = six.moves.urllib.parse.parse_qs(urlsplit.query)
+        if query_dict:
+            share_key = query_dict['share_key'][-1]
+        else:
+            share_key = ''
     else:
         file_owner = file_owner_or_url
-    resource = "/apigetfile/{file_owner}/{file_id}".format(file_owner=file_owner,
-                                                           file_id=file_id)
+        share_key = ''
     try:
         test_if_int = int(file_id)
     except ValueError:
@@ -335,19 +315,7 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
         raise exceptions.PlotlyError(
             "The 'file_id' argument must be a non-negative number."
         )
-    if isinstance(width, int):
-        s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\""
-             "seamless=\"seamless\" "
-             "src=\"{plotly_rest_url}/"
-             "~{file_owner}/{file_id}.embed"
-             "?width={plot_width}&height={plot_height}\" "
-             "height=\"{iframe_height}\" width=\"{iframe_width}\">"
-             "</iframe>").format(
-            plotly_rest_url=plotly_rest_url,
-            file_owner=file_owner, file_id=file_id,
-            plot_width=width - padding, plot_height=height - padding,
-            iframe_height=height, iframe_width=width)
-    else:
+    if share_key is '':
         s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\""
              "seamless=\"seamless\" "
              "src=\"{plotly_rest_url}/"
@@ -356,6 +324,16 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
              "</iframe>").format(
             plotly_rest_url=plotly_rest_url,
             file_owner=file_owner, file_id=file_id,
+            iframe_height=height, iframe_width=width)
+    else:
+        s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\""
+             "seamless=\"seamless\" "
+             "src=\"{plotly_rest_url}/"
+             "~{file_owner}/{file_id}.embed?share_key={share_key}\" "
+             "height=\"{iframe_height}\" width=\"{iframe_width}\">"
+             "</iframe>").format(
+            plotly_rest_url=plotly_rest_url,
+            file_owner=file_owner, file_id=file_id, share_key=share_key,
             iframe_height=height, iframe_width=width)
 
     return s
@@ -370,8 +348,8 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
 
     Note, if you're using a file_owner string as the first argument, you MUST
     specify a `file_id` keyword argument. Else, if you're using a url string
-    as the first argument, you MUST NOT specify a `file_id` keyword argument, or
-    file_id must be set to Python's None value.
+    as the first argument, you MUST NOT specify a `file_id` keyword argument,
+    or file_id must be set to Python's None value.
 
     Positional arguments:
     file_owner_or_url (string) -- a valid plotly username OR a valid plotly url
@@ -380,11 +358,14 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
     file_id (default=None) -- an int or string that can be converted to int
                               if you're using a url, don't fill this in!
     width (default="100%") -- an int or string corresp. to width of the figure
-    height (default="525") -- same as width but corresp. to the height of the figure
+    height (default="525") -- same as width but corresp. to the height of the
+                              figure
 
     """
     try:
-        s = get_embed(file_owner_or_url, file_id, width, height)
+        s = get_embed(file_owner_or_url, file_id=file_id, width=width,
+                      height=height)
+
         # see if we are in the SageMath Cloud
         from sage_salvus import html
         return html(s, hide=False)
@@ -404,11 +385,19 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
             url = file_owner_or_url
         return PlotlyDisplay(url, width, height)
     else:
+        if (get_config_defaults()['plotly_domain']
+                != session.get_session_config()['plotly_domain']):
+            feedback_email = 'feedback@plot.ly'
+        else:
+
+            # different domain likely means enterprise
+            feedback_email = 'support@plot.ly'
+
         warnings.warn(
-            "Looks like you're not using IPython or Sage to embed this plot. "
-            "If you just want the *embed code*, try using `get_embed()` "
-            "instead."
-            "\nQuestions? support@plot.ly")
+            "Looks like you're not using IPython or Sage to embed this "
+            "plot. If you just want the *embed code*,\ntry using "
+            "`get_embed()` instead."
+            '\nQuestions? {}'.format(feedback_email))
 
 
 ### mpl-related tools ###
@@ -521,6 +510,8 @@ def get_subplots(rows=1, columns=1, print_grid=False, **kwargs):
         Space between subplot rows.
 
     """
+    # TODO: protected until #282
+    from plotly.graph_objs import graph_objs
 
     warnings.warn(
         "tools.get_subplots is depreciated. "
@@ -778,6 +769,8 @@ def make_subplots(rows=1, cols=1,
             * h (float or 'to_end', default='to_end') inset height
                   in fraction of cell height ('to_end': to cell top edge)
     """
+    # TODO: protected until #282
+    from plotly.graph_objs import graph_objs
 
     # Throw exception for non-integer rows and cols
     if not isinstance(rows, int) or rows <= 0:
@@ -1280,35 +1273,27 @@ def make_subplots(rows=1, cols=1,
 
     fig = graph_objs.Figure(layout=layout)
 
-    fig._grid_ref = grid_ref
-    fig._grid_str = grid_str
+    fig.__dict__['_grid_ref'] = grid_ref
+    fig.__dict__['_grid_str'] = grid_str
 
     return fig
 
 
 def get_valid_graph_obj(obj, obj_type=None):
-    """Returns a new graph object that is guaranteed to pass validate().
+    """Returns a new graph object that won't raise.
 
     CAREFUL: this will *silently* strip out invalid pieces of the object.
 
     """
+    # TODO: Deprecate or move. #283
+    from plotly.graph_objs import graph_objs
     try:
-        new_obj = graph_objs.get_class_instance_by_name(
-            obj.__class__.__name__)
-    except KeyError:
-        try:
-            new_obj = graph_objs.get_class_instance_by_name(obj_type)
-        except KeyError:
-            raise exceptions.PlotlyError(
-                "'{0}' nor '{1}' are recognizable graph_objs.".
-                format(obj.__class__.__name__, obj_type))
-    if isinstance(new_obj, list):
-        new_obj += obj
-    else:
-        for key, val in list(obj.items()):
-            new_obj[key] = val
-    new_obj.force_clean()
-    return new_obj
+        cls = getattr(graph_objs, obj_type)
+    except (AttributeError, KeyError):
+        raise exceptions.PlotlyError(
+            "'{}' is not a recognized graph_obj.".format(obj_type)
+        )
+    return cls(obj, _raise=False)
 
 
 def validate(obj, obj_type):
@@ -1319,51 +1304,19 @@ def validate(obj, obj_type):
     valid 'obj_type' graph object.
 
     """
+    # TODO: Deprecate or move. #283
+    from plotly.graph_objs import graph_objs
+
+    if obj_type not in graph_reference.CLASSES:
+        obj_type = graph_reference.string_to_class_name(obj_type)
+
     try:
-        obj_type = graph_objs.KEY_TO_NAME[obj_type]
-    except KeyError:
-        pass
-    try:
-        test_obj = graph_objs.get_class_instance_by_name(obj_type, obj)
-    except KeyError:
+        cls = getattr(graph_objs, obj_type)
+    except AttributeError:
         raise exceptions.PlotlyError(
             "'{0}' is not a recognizable graph_obj.".
             format(obj_type))
-
-
-def validate_stream(obj, obj_type):
-    """Validate a data dictionary (only) for use with streaming.
-
-    An error is raised if a key within (or nested within) is not streamable.
-
-    """
-    try:
-        obj_type = graph_objs.KEY_TO_NAME[obj_type]
-    except KeyError:
-        pass
-    info = graph_objs.INFO[graph_objs.NAME_TO_KEY[obj_type]]
-    for key, val in list(obj.items()):
-        if key == 'type':
-            continue
-        if 'streamable' in info['keymeta'][key].keys():
-            if not info['keymeta'][key]['streamable']:
-                raise exceptions.PlotlyError(
-                    "The '{0}' key is not streamable in the '{1}' "
-                    "object".format(
-                        key, obj_type
-                    )
-                )
-        else:
-            raise exceptions.PlotlyError(
-                "The '{0}' key is not streamable in the '{1}' object".format(
-                    key, obj_type
-                )
-            )
-        try:
-            sub_obj_type = graph_objs.KEY_TO_NAME[key]
-            validate_stream(val, sub_obj_type)
-        except KeyError:
-            pass
+    cls(obj)  # this will raise on invalid keys/items
 
 
 def _replace_newline(obj):
@@ -1413,6 +1366,7 @@ if _ipython_imported:
 
 
 def return_figure_from_figure_or_data(figure_or_data, validate_figure):
+    from plotly.graph_objs import graph_objs
     if isinstance(figure_or_data, dict):
         figure = figure_or_data
     elif isinstance(figure_or_data, list):
@@ -1422,8 +1376,9 @@ def return_figure_from_figure_or_data(figure_or_data, validate_figure):
                                      "argument must be either "
                                      "`dict`-like or `list`-like.")
     if validate_figure:
+
         try:
-            validate(figure, obj_type='Figure')
+            graph_objs.Figure(figure)
         except exceptions.PlotlyError as err:
             raise exceptions.PlotlyError("Invalid 'figure_or_data' argument. "
                                          "Plotly will not be able to properly "
@@ -1463,7 +1418,7 @@ class FigureFactory(object):
     """
 
     @staticmethod
-    def validate_equal_length(*args):
+    def _validate_equal_length(*args):
         """
         Validates that data lists or ndarrays are the same length.
 
@@ -1475,7 +1430,7 @@ class FigureFactory(object):
                                          "should be the same length.")
 
     @staticmethod
-    def validate_ohlc(open, high, low, close, direction, **kwargs):
+    def _validate_ohlc(open, high, low, close, direction, **kwargs):
         """
         ohlc and candlestick specific validations
 
@@ -1518,7 +1473,44 @@ class FigureFactory(object):
                                          "'both'")
 
     @staticmethod
-    def validate_positive_scalars(**kwargs):
+    def _validate_distplot(hist_data, curve_type):
+        """
+        distplot specific validations
+
+        :raises: (PlotlyError) If hist_data is not a list of lists
+        :raises: (PlotlyError) If curve_type is not valid (i.e. not 'kde' or
+            'normal').
+        """
+        try:
+            import pandas as pd
+            _pandas_imported = True
+        except ImportError:
+            _pandas_imported = False
+
+        hist_data_types = (list,)
+        if _numpy_imported:
+            hist_data_types += (np.ndarray,)
+        if _pandas_imported:
+            hist_data_types += (pd.core.series.Series,)
+
+        if not isinstance(hist_data[0], hist_data_types):
+                raise exceptions.PlotlyError("Oops, this function was written "
+                                             "to handle multiple datasets, if "
+                                             "you want to plot just one, make "
+                                             "sure your hist_data variable is "
+                                             "still a list of lists, i.e. x = "
+                                             "[1, 2, 3] -> x = [[1, 2, 3]]")
+
+        curve_opts = ('kde', 'normal')
+        if curve_type not in curve_opts:
+            raise exceptions.PlotlyError("curve_type must be defined as "
+                                         "'kde' or 'normal'")
+
+        if _scipy_imported is False:
+            raise ImportError("FigureFactory.create_distplot requires scipy")
+
+    @staticmethod
+    def _validate_positive_scalars(**kwargs):
         """
         Validates that all values given in key/val pairs are positive.
 
@@ -1535,7 +1527,7 @@ class FigureFactory(object):
                                              .format(key, val))
 
     @staticmethod
-    def validate_streamline(x, y):
+    def _validate_streamline(x, y):
         """
         streamline specific validations
 
@@ -1561,7 +1553,7 @@ class FigureFactory(object):
                                              "evenly spaced array")
 
     @staticmethod
-    def flatten(array):
+    def _flatten(array):
         """
         Uses list comprehension to flatten array
 
@@ -1659,17 +1651,19 @@ class FigureFactory(object):
         py.plot(fig, filename='quiver')
         ```
         """
-        FigureFactory.validate_equal_length(x, y, u, v)
-        FigureFactory.validate_positive_scalars(arrow_scale=arrow_scale,
-                                                scale=scale)
+        # TODO: protected until #282
+        from plotly.graph_objs import graph_objs
+        FigureFactory._validate_equal_length(x, y, u, v)
+        FigureFactory._validate_positive_scalars(arrow_scale=arrow_scale,
+                                                 scale=scale)
 
         barb_x, barb_y = _Quiver(x, y, u, v, scale,
                                  arrow_scale, angle).get_barbs()
         arrow_x, arrow_y = _Quiver(x, y, u, v, scale,
                                    arrow_scale, angle).get_quiver_arrows()
-        quiver = Scatter(x=barb_x + arrow_x,
-                         y=barb_y + arrow_y,
-                         mode='lines', **kwargs)
+        quiver = graph_objs.Scatter(x=barb_x + arrow_x,
+                                    y=barb_y + arrow_y,
+                                    mode='lines', **kwargs)
 
         data = [quiver]
         layout = graph_objs.Layout(hovermode='closest')
@@ -1760,10 +1754,12 @@ class FigureFactory(object):
         py.plot(fig, filename='streamline')
         ```
         """
-        FigureFactory.validate_equal_length(x, y)
-        FigureFactory.validate_equal_length(u, v)
-        FigureFactory.validate_streamline(x, y)
-        FigureFactory.validate_positive_scalars(density=density,
+        # TODO: protected until #282
+        from plotly.graph_objs import graph_objs
+        FigureFactory._validate_equal_length(x, y)
+        FigureFactory._validate_equal_length(u, v)
+        FigureFactory._validate_streamline(x, y)
+        FigureFactory._validate_positive_scalars(density=density,
                                                 arrow_scale=arrow_scale)
 
         streamline_x, streamline_y = _Streamline(x, y, u, v,
@@ -1773,9 +1769,9 @@ class FigureFactory(object):
                                        density, angle,
                                        arrow_scale).get_streamline_arrows()
 
-        streamline = Scatter(x=streamline_x + arrow_x,
-                             y=streamline_y + arrow_y,
-                             mode='lines', **kwargs)
+        streamline = graph_objs.Scatter(x=streamline_x + arrow_x,
+                                        y=streamline_y + arrow_y,
+                                        mode='lines', **kwargs)
 
         data = [streamline]
         layout = graph_objs.Layout(hovermode='closest')
@@ -1986,11 +1982,13 @@ class FigureFactory(object):
         py.iplot(fig, filename='finance/simple-ohlc', validate=False)
         ```
         """
+        # TODO: protected until #282
+        from plotly.graph_objs import graph_objs
         if dates is not None:
-            FigureFactory.validate_equal_length(open, high, low, close, dates)
+            FigureFactory._validate_equal_length(open, high, low, close, dates)
         else:
-            FigureFactory.validate_equal_length(open, high, low, close)
-        FigureFactory.validate_ohlc(open, high, low, close, direction,
+            FigureFactory._validate_equal_length(open, high, low, close)
+        FigureFactory._validate_ohlc(open, high, low, close, direction,
                                     **kwargs)
 
         if direction is 'increasing':
@@ -2020,7 +2018,7 @@ class FigureFactory(object):
     @staticmethod
     def _make_increasing_candle(open, high, low, close, dates, **kwargs):
         """
-        Makes stacked bar and vertical line for increasing candlesticks
+        Makes boxplot trace for increasing candlesticks
 
         _make_increasing_candle() and _make_decreasing_candle separate the
         increasing traces from the decreasing traces so kwargs (such as
@@ -2036,57 +2034,36 @@ class FigureFactory(object):
         :param kwargs: kwargs to be passed to increasing trace via
             plotly.graph_objs.Scatter.
 
-        :rtype (list) candle_incr_data: list of three traces: hidden_bar_incr,
-            candle_bar_incr, candle_line_incr: returns the first (invisible)
-            stacked bar, second (visible) stacked bar, and trace composed of
-            vertical lines for each increasing candlestick.
+        :rtype (list) candle_incr_data: list of the box trace for
+            increasing candlesticks.
         """
-        (increase_x,
-         increase_open,
-         increase_dif,
-         stick_increase_y,
-         stick_increase_x) = (_Candlestick(open, high, low, close, dates,
-                                           **kwargs).get_candle_increase())
+        increase_x, increase_y = _Candlestick(
+            open, high, low, close, dates, **kwargs).get_candle_increase()
 
-        if 'name' in kwargs:
-            showlegend = True
+        if 'line' in kwargs:
+            kwargs.setdefault('fillcolor', kwargs['line']['color'])
         else:
-            kwargs.setdefault('name', 'Increasing')
-            showlegend = False
-
-        kwargs.setdefault('marker', dict(color=_DEFAULT_INCREASING_COLOR))
+            kwargs.setdefault('fillcolor', _DEFAULT_INCREASING_COLOR)
+        if 'name' in kwargs:
+            kwargs.setdefault('showlegend', True)
+        else:
+            kwargs.setdefault('showlegend', False)
+        kwargs.setdefault('name', 'Increasing')
         kwargs.setdefault('line', dict(color=_DEFAULT_INCREASING_COLOR))
 
-        hidden_bar_incr = dict(type='bar',
-                               x=increase_x,
-                               y=increase_open,
-                               marker=Marker(color='rgba(0, 0, 0, 0)'),
-                               legendgroup='Increasing',
-                               showlegend=False,
-                               hoverinfo='none')
-        candle_bar_incr = dict(type='bar',
-                               x=increase_x,
-                               y=increase_dif,
-                               legendgroup='Increasing',
-                               showlegend=False,
-                               hoverinfo='none',
-                               **kwargs)
-        candle_line_incr = dict(type='scatter',
-                                x=stick_increase_x,
-                                y=stick_increase_y,
-                                mode='lines',
-                                legendgroup='Increasing',
-                                text=('Low', 'Open', 'Close',
-                                      'High', '') * len(increase_x),
-                                showlegend=showlegend,
+        candle_incr_data = dict(type='box',
+                                x=increase_x,
+                                y=increase_y,
+                                whiskerwidth=0,
+                                boxpoints=False,
                                 **kwargs)
-        candle_incr_data = [hidden_bar_incr, candle_bar_incr, candle_line_incr]
-        return candle_incr_data
+
+        return [candle_incr_data]
 
     @staticmethod
     def _make_decreasing_candle(open, high, low, close, dates, **kwargs):
         """
-        Makes stacked bar and vertical line for decreasing candlesticks
+        Makes boxplot trace for decreasing candlesticks
 
         :param (list) open: opening values
         :param (list) high: high values
@@ -2096,48 +2073,29 @@ class FigureFactory(object):
         :param kwargs: kwargs to be passed to decreasing trace via
             plotly.graph_objs.Scatter.
 
-        :rtype (list) candle_decr_data: list of three traces: hidden_bar_decr,
-            candle_bar_decr, candle_line_decr: returns the first (invisible)
-            stacked bar, second (visible) stacked bar, and trace composed of
-            vertical lines for each decreasing candlestick.
+        :rtype (list) candle_decr_data: list of the box trace for
+            decreasing candlesticks.
         """
 
-        (decrease_x,
-         decrease_close,
-         decrease_dif,
-         stick_decrease_y,
-         stick_decrease_x) = (_Candlestick(open, high, low, close, dates,
-                                           **kwargs).get_candle_decrease())
+        decrease_x, decrease_y = _Candlestick(
+            open, high, low, close, dates, **kwargs).get_candle_decrease()
 
-        kwargs.setdefault('marker', dict(color=_DEFAULT_DECREASING_COLOR))
+        if 'line' in kwargs:
+            kwargs.setdefault('fillcolor', kwargs['line']['color'])
+        else:
+            kwargs.setdefault('fillcolor', _DEFAULT_DECREASING_COLOR)
+        kwargs.setdefault('showlegend', False)
         kwargs.setdefault('line', dict(color=_DEFAULT_DECREASING_COLOR))
         kwargs.setdefault('name', 'Decreasing')
 
-        hidden_bar_decr = dict(type='bar',
-                               x=decrease_x,
-                               y=decrease_close,
-                               marker=Marker(color='rgba(0, 0, 0, 0)'),
-                               legendgroup='Decreasing',
-                               showlegend=False,
-                               hoverinfo='none')
-        candle_bar_decr = dict(type='bar',
-                               x=decrease_x,
-                               y=decrease_dif,
-                               legendgroup='Decreasing',
-                               showlegend=False,
-                               hoverinfo='none',
-                               **kwargs)
-        candle_line_decr = dict(type='scatter',
-                                x=stick_decrease_x,
-                                y=stick_decrease_y,
-                                mode='lines',
-                                legendgroup='Decreasing',
-                                showlegend=False,
-                                text=('Low', 'Close', 'Open',
-                                      'High', '') * len(decrease_x),
+        candle_decr_data = dict(type='box',
+                                x=decrease_x,
+                                y=decrease_y,
+                                whiskerwidth=0,
+                                boxpoints=False,
                                 **kwargs)
-        candle_decr_data = [hidden_bar_decr, candle_bar_decr, candle_line_decr]
-        return candle_decr_data
+
+        return [candle_decr_data]
 
     @staticmethod
     def create_candlestick(open, high, low, close,
@@ -2209,15 +2167,14 @@ class FigureFactory(object):
         import pandas.io.data as web
 
         df = web.DataReader("aapl", 'yahoo', datetime(2008, 1, 1), datetime(2009, 4, 1))
-        fig = FF.create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index)
 
-        # Make increasing ohlc sticks and customize their color and name
+        # Make increasing candlesticks and customize their color and name
         fig_increasing = FF.create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index,
             direction='increasing', name='AAPL',
             marker=Marker(color='rgb(150, 200, 250)'),
             line=Line(color='rgb(150, 200, 250)'))
 
-        # Make decreasing ohlc sticks and customize their color and name
+        # Make decreasing candlesticks and customize their color and name
         fig_decreasing = FF.create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index,
             direction='decreasing',
             marker=Marker(color='rgb(128, 128, 128)'),
@@ -2257,11 +2214,13 @@ class FigureFactory(object):
         py.iplot(fig, filename='finance/simple-candlestick', validate=False)
         ```
         """
+        # TODO: protected until #282
+        from plotly.graph_objs import graph_objs
         if dates is not None:
-            FigureFactory.validate_equal_length(open, high, low, close, dates)
+            FigureFactory._validate_equal_length(open, high, low, close, dates)
         else:
-            FigureFactory.validate_equal_length(open, high, low, close)
-        FigureFactory.validate_ohlc(open, high, low, close, direction,
+            FigureFactory._validate_equal_length(open, high, low, close)
+        FigureFactory._validate_ohlc(open, high, low, close, direction,
                                     **kwargs)
 
         if direction is 'increasing':
@@ -2279,17 +2238,190 @@ class FigureFactory(object):
                 open, high, low, close, dates, **kwargs)
             data = candle_incr_data + candle_decr_data
 
-        layout = graph_objs.Layout(barmode='stack',
-                                   bargroupgap=0.2,
-                                   yaxis=dict(range=[(min(low) -
-                                                     ((max(high) - min(low)) *
-                                                      .1)),
-                                                     (max(high) + ((max(high) -
-                                                                    min(low)) *
-                                                      .1))]))
-        layout['yaxis']['fixedrange'] = True
-
+        layout = graph_objs.Layout()
         return dict(data=data, layout=layout)
+
+    @staticmethod
+    def create_distplot(hist_data, group_labels,
+                        bin_size=1., curve_type='kde',
+                        colors=[], rug_text=[],
+                        show_hist=True, show_curve=True,
+                        show_rug=True):
+        """
+        BETA function that creates a distplot similar to seaborn.distplot
+
+        The distplot can be composed of all or any combination of the following
+        3 components: (1) histogram, (2) curve: (a) kernal density estimation
+        or (b) normal curve, and (3) rug plot. Additionally, multiple distplots
+        (from multiple datasets) can be created in the same plot.
+
+        :param (list[list]) hist_data: Use list of lists to plot multiple data
+            sets on the same plot.
+        :param (list[str]) group_labels: Names for each data set.
+        :param (float) bin_size: Size of histogram bins. Default = 1.
+        :param (str) curve_type: 'kde' or 'normal'. Default = 'kde'
+        :param (bool) show_hist: Add histogram to distplot? Default = True
+        :param (bool) show_curve: Add curve to distplot? Default = True
+        :param (bool) show_rug: Add rug to distplot? Default = True
+        :param (list[str]) colors: Colors for traces.
+        :param (list[list]) rug_text: Hovertext values for rug_plot,
+        :return (dict): Representation of a distplot figure.
+
+        Example 1: Simple distplot of 1 data set
+        ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+
+        hist_data = [[1.1, 1.1, 2.5, 3.0, 3.5,
+                      3.5, 4.1, 4.4, 4.5, 4.5,
+                      5.0, 5.0, 5.2, 5.5, 5.5,
+                      5.5, 5.5, 5.5, 6.1, 7.0]]
+
+        group_labels = ['distplot example']
+
+        fig = FF.create_distplot(hist_data, group_labels)
+
+        url = py.plot(fig, filename='Simple distplot', validate=False)
+        ```
+
+        Example 2: Two data sets and added rug text
+        ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+
+        # Add histogram data
+        hist1_x = [0.8, 1.2, 0.2, 0.6, 1.6,
+                   -0.9, -0.07, 1.95, 0.9, -0.2,
+                   -0.5, 0.3, 0.4, -0.37, 0.6]
+        hist2_x = [0.8, 1.5, 1.5, 0.6, 0.59,
+                   1.0, 0.8, 1.7, 0.5, 0.8,
+                   -0.3, 1.2, 0.56, 0.3, 2.2]
+
+        # Group data together
+        hist_data = [hist1_x, hist2_x]
+
+        group_labels = ['2012', '2013']
+
+        # Add text
+        rug_text_1 = ['a1', 'b1', 'c1', 'd1', 'e1',
+              'f1', 'g1', 'h1', 'i1', 'j1',
+              'k1', 'l1', 'm1', 'n1', 'o1']
+
+        rug_text_2 = ['a2', 'b2', 'c2', 'd2', 'e2',
+              'f2', 'g2', 'h2', 'i2', 'j2',
+              'k2', 'l2', 'm2', 'n2', 'o2']
+
+        # Group text together
+        rug_text_all = [rug_text_1, rug_text_2]
+
+        # Create distplot
+        fig = FF.create_distplot(
+            hist_data, group_labels, rug_text=rug_text_all, bin_size=.2)
+
+        # Add title
+        fig['layout'].update(title='Dist Plot')
+
+        # Plot!
+        url = py.plot(fig, filename='Distplot with rug text', validate=False)
+        ```
+
+        Example 3: Plot with normal curve and hide rug plot
+        ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+        import numpy as np
+
+        x1 = np.random.randn(190)
+        x2 = np.random.randn(200)+1
+        x3 = np.random.randn(200)-1
+        x4 = np.random.randn(210)+2
+
+        hist_data = [x1, x2, x3, x4]
+        group_labels = ['2012', '2013', '2014', '2015']
+
+        fig = FF.create_distplot(
+            hist_data, group_labels, curve_type='normal',
+            show_rug=False, bin_size=.4)
+
+        url = py.plot(fig, filename='hist and normal curve', validate=False)
+
+        Example 4: Distplot with Pandas
+        ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+        import numpy as np
+        import pandas as pd
+
+        df = pd.DataFrame({'2012': np.random.randn(200),
+                           '2013': np.random.randn(200)+1})
+        py.iplot(FF.create_distplot([df[c] for c in df.columns], df.columns),
+                                    filename='examples/distplot with pandas',
+                                    validate=False)
+        ```
+        """
+        # TODO: protected until #282
+        from plotly.graph_objs import graph_objs
+        FigureFactory._validate_distplot(hist_data, curve_type)
+        FigureFactory._validate_equal_length(hist_data, group_labels)
+
+        hist = _Distplot(
+            hist_data, group_labels, bin_size,
+            curve_type, colors, rug_text,
+            show_hist, show_curve).make_hist()
+
+        if curve_type == 'normal':
+            curve = _Distplot(
+                hist_data, group_labels, bin_size,
+                curve_type, colors, rug_text,
+                show_hist, show_curve).make_normal()
+        else:
+            curve = _Distplot(
+                hist_data, group_labels, bin_size,
+                curve_type, colors, rug_text,
+                show_hist, show_curve).make_kde()
+
+        rug = _Distplot(
+            hist_data, group_labels, bin_size,
+            curve_type, colors, rug_text,
+            show_hist, show_curve).make_rug()
+
+        data = []
+        if show_hist:
+            data.append(hist)
+        if show_curve:
+            data.append(curve)
+        if show_rug:
+            data.append(rug)
+            layout = graph_objs.Layout(
+                barmode='overlay',
+                hovermode='closest',
+                legend=dict(traceorder='reversed'),
+                xaxis1=dict(domain=[0.0, 1.0],
+                            anchor='y2',
+                            zeroline=False),
+                yaxis1=dict(domain=[0.35, 1],
+                            anchor='free',
+                            position=0.0),
+                yaxis2=dict(domain=[0, 0.25],
+                            anchor='x1',
+                            dtick=1,
+                            showticklabels=False))
+        else:
+            layout = graph_objs.Layout(
+                barmode='overlay',
+                hovermode='closest',
+                legend=dict(traceorder='reversed'),
+                xaxis1=dict(domain=[0.0, 1.0],
+                            anchor='y2',
+                            zeroline=False),
+                yaxis1=dict(domain=[0., 1],
+                            anchor='free',
+                            position=0.0))
+
+        data = sum(data, [])
+        dist_fig = dict(data=data, layout=layout)
+
+        return dist_fig
 
 
     @staticmethod
@@ -2350,22 +2482,22 @@ class _Quiver(FigureFactory):
     def __init__(self, x, y, u, v,
                  scale, arrow_scale, angle, **kwargs):
         try:
-            x = FigureFactory.flatten(x)
+            x = FigureFactory._flatten(x)
         except exceptions.PlotlyError:
             pass
 
         try:
-            y = FigureFactory.flatten(y)
+            y = FigureFactory._flatten(y)
         except exceptions.PlotlyError:
             pass
 
         try:
-            u = FigureFactory.flatten(u)
+            u = FigureFactory._flatten(u)
         except exceptions.PlotlyError:
             pass
 
         try:
-            v = FigureFactory.flatten(v)
+            v = FigureFactory._flatten(v)
         except exceptions.PlotlyError:
             pass
 
@@ -2409,8 +2541,8 @@ class _Quiver(FigureFactory):
         self.end_x = [i + j for i, j in zip(self.x, self.u)]
         self.end_y = [i + j for i, j in zip(self.y, self.v)]
         empty = [None] * len(self.x)
-        barb_x = self.flatten(zip(self.x, self.end_x, empty))
-        barb_y = self.flatten(zip(self.y, self.end_y, empty))
+        barb_x = FigureFactory._flatten(zip(self.x, self.end_x, empty))
+        barb_y = FigureFactory._flatten(zip(self.y, self.end_y, empty))
         return barb_x, barb_y
 
     def get_quiver_arrows(self):
@@ -2480,8 +2612,10 @@ class _Quiver(FigureFactory):
 
         # Combine lists to create arrow
         empty = [None] * len(self.end_x)
-        arrow_x = self.flatten(zip(point1_x, self.end_x, point2_x, empty))
-        arrow_y = self.flatten(zip(point1_y, self.end_y, point2_y, empty))
+        arrow_x = FigureFactory._flatten(zip(point1_x, self.end_x,
+                                             point2_x, empty))
+        arrow_y = FigureFactory._flatten(zip(point1_y, self.end_y,
+                                             point2_y, empty))
         return arrow_x, arrow_y
 
 
@@ -2828,8 +2962,8 @@ class _OHLC(FigureFactory):
             trace, flat_increase_y: y=values for the increasing trace and
             text_increase: hovertext for the increasing trace
         """
-        flat_increase_x = FigureFactory.flatten(self.increase_x)
-        flat_increase_y = FigureFactory.flatten(self.increase_y)
+        flat_increase_x = FigureFactory._flatten(self.increase_x)
+        flat_increase_y = FigureFactory._flatten(self.increase_y)
         text_increase = (("Open", "Open", "High",
                           "Low", "Close", "Close", '')
                          * (len(self.increase_x)))
@@ -2844,8 +2978,8 @@ class _OHLC(FigureFactory):
             trace, flat_decrease_y: y=values for the decreasing trace and
             text_decrease: hovertext for the decreasing trace
         """
-        flat_decrease_x = FigureFactory.flatten(self.decrease_x)
-        flat_decrease_y = FigureFactory.flatten(self.decrease_y)
+        flat_decrease_x = FigureFactory._flatten(self.decrease_x)
+        flat_decrease_y = FigureFactory._flatten(self.decrease_y)
         text_decrease = (("Open", "Open", "High",
                           "Low", "Close", "Close", '')
                          * (len(self.decrease_x)))
@@ -2875,32 +3009,22 @@ class _Candlestick(FigureFactory):
         The data is increasing when close value > open value
         and decreasing when the close value <= open value.
         """
-        increase_open = []
-        increase_high = []
-        increase_low = []
-        increase_close = []
+        increase_y = []
         increase_x = []
         for index in range(len(self.open)):
             if self.close[index] > self.open[index]:
-                increase_open.append(self.open[index])
-                increase_high.append(self.high[index])
-                increase_low.append(self.low[index])
-                increase_close.append(self.close[index])
+                increase_y.append(self.low[index])
+                increase_y.append(self.open[index])
+                increase_y.append(self.close[index])
+                increase_y.append(self.close[index])
+                increase_y.append(self.close[index])
+                increase_y.append(self.high[index])
                 increase_x.append(self.x[index])
 
-        increase_dif = [cl - op for (cl, op)
-                        in zip(increase_close, increase_open)]
+        increase_x = [[x, x, x, x, x, x] for x in increase_x]
+        increase_x = FigureFactory._flatten(increase_x)
 
-        increase_empty = [None] * len(increase_open)
-        stick_increase_y = list(zip(increase_low, increase_open,
-                                    increase_close, increase_high,
-                                    increase_empty))
-        stick_increase_x = [[x, x, x, x, None] for x in increase_x]
-        stick_increase_y = FigureFactory.flatten(stick_increase_y)
-        stick_increase_x = FigureFactory.flatten(stick_increase_x)
-
-        return (increase_x, increase_open, increase_dif,
-                stick_increase_y, stick_increase_x)
+        return increase_x, increase_y
 
     def get_candle_decrease(self):
         """
@@ -2909,34 +3033,174 @@ class _Candlestick(FigureFactory):
         The data is increasing when close value > open value
         and decreasing when the close value <= open value.
         """
-        decrease_open = []
-        decrease_high = []
-        decrease_low = []
-        decrease_close = []
+        decrease_y = []
         decrease_x = []
-
         for index in range(len(self.open)):
             if self.close[index] <= self.open[index]:
-                decrease_open.append(self.open[index])
-                decrease_high.append(self.high[index])
-                decrease_low.append(self.low[index])
-                decrease_close.append(self.close[index])
+                decrease_y.append(self.low[index])
+                decrease_y.append(self.open[index])
+                decrease_y.append(self.close[index])
+                decrease_y.append(self.close[index])
+                decrease_y.append(self.close[index])
+                decrease_y.append(self.high[index])
                 decrease_x.append(self.x[index])
 
-        decrease_dif = [op - cl for (op, cl)
-                        in zip(decrease_open, decrease_close)]
+        decrease_x = [[x, x, x, x, x, x] for x in decrease_x]
+        decrease_x = FigureFactory._flatten(decrease_x)
 
-        decrease_empty = [None] * len(decrease_open)
-        stick_decrease_y = list(zip(decrease_low, decrease_close,
-                                    decrease_open, decrease_high,
-                                    decrease_empty))
-        stick_decrease_x = [[x, x, x, x, None] for x in decrease_x]
+        return decrease_x, decrease_y
 
-        stick_decrease_y = FigureFactory.flatten(stick_decrease_y)
-        stick_decrease_x = FigureFactory.flatten(stick_decrease_x)
 
-        return (decrease_x, decrease_close, decrease_dif,
-                stick_decrease_y, stick_decrease_x)
+class _Distplot(FigureFactory):
+    """
+    Refer to TraceFactory.create_distplot() for docstring
+    """
+    def __init__(self, hist_data, group_labels,
+                 bin_size, curve_type, colors,
+                 rug_text, show_hist, show_curve):
+        self.hist_data = hist_data
+        self.group_labels = group_labels
+        self.bin_size = bin_size
+        self.show_hist = show_hist
+        self.show_curve = show_curve
+        self.trace_number = len(hist_data)
+        if rug_text:
+            self.rug_text = rug_text
+        else:
+            self.rug_text = [None] * self.trace_number
+
+        self.start = []
+        self.end = []
+        if colors:
+            self.colors = colors
+        else:
+            self.colors = [
+                "rgb(31, 119, 180)", "rgb(255, 127, 14)",
+                "rgb(44, 160, 44)", "rgb(214, 39, 40)",
+                "rgb(148, 103, 189)", "rgb(140, 86, 75)",
+                "rgb(227, 119, 194)", "rgb(127, 127, 127)",
+                "rgb(188, 189, 34)", "rgb(23, 190, 207)"]
+        self.curve_x = [None] * self.trace_number
+        self.curve_y = [None] * self.trace_number
+
+        for trace in self.hist_data:
+            self.start.append(min(trace) * 1.)
+            self.end.append(max(trace) * 1.)
+
+    def make_hist(self):
+        """
+        Makes the histogram(s) for FigureFactory.create_distplot().
+
+        :rtype (list) hist: list of histogram representations
+        """
+        hist = [None] * self.trace_number
+
+        for index in range(self.trace_number):
+            hist[index] = dict(type='histogram',
+                               x=self.hist_data[index],
+                               xaxis='x1',
+                               yaxis='y1',
+                               histnorm='probability',
+                               name=self.group_labels[index],
+                               legendgroup=self.group_labels[index],
+                               marker=dict(color=self.colors[index]),
+                               autobinx=False,
+                               xbins=dict(start=self.start[index],
+                                          end=self.end[index],
+                                          size=self.bin_size),
+                               opacity=.7)
+        return hist
+
+    def make_kde(self):
+        """
+        Makes the kernal density estimation(s) for create_distplot().
+
+        This is called when curve_type = 'kde' in create_distplot().
+
+        :rtype (list) curve: list of kde representations
+        """
+        curve = [None] * self.trace_number
+        for index in range(self.trace_number):
+            self.curve_x[index] = [self.start[index] +
+                                   x * (self.end[index] - self.start[index])
+                                   / 500 for x in range(500)]
+            self.curve_y[index] = (scipy.stats.gaussian_kde
+                                   (self.hist_data[index])
+                                   (self.curve_x[index]))
+            self.curve_y[index] *= self.bin_size
+
+        for index in range(self.trace_number):
+            curve[index] = dict(type='scatter',
+                                x=self.curve_x[index],
+                                y=self.curve_y[index],
+                                xaxis='x1',
+                                yaxis='y1',
+                                mode='lines',
+                                name=self.group_labels[index],
+                                legendgroup=self.group_labels[index],
+                                showlegend=False if self.show_hist else True,
+                                marker=dict(color=self.colors[index]))
+        return curve
+
+    def make_normal(self):
+        """
+        Makes the normal curve(s) for create_distplot().
+
+        This is called when curve_type = 'normal' in create_distplot().
+
+        :rtype (list) curve: list of normal curve representations
+        """
+        curve = [None] * self.trace_number
+        mean = [None] * self.trace_number
+        sd = [None] * self.trace_number
+
+        for index in range(self.trace_number):
+            mean[index], sd[index] = (scipy.stats.norm.fit
+                                      (self.hist_data[index]))
+            self.curve_x[index] = [self.start[index] +
+                                   x * (self.end[index] - self.start[index])
+                                   / 500 for x in range(500)]
+            self.curve_y[index] = scipy.stats.norm.pdf(
+                self.curve_x[index], loc=mean[index], scale=sd[index])
+            self.curve_y[index] *= self.bin_size
+
+        for index in range(self.trace_number):
+            curve[index] = dict(type='scatter',
+                                x=self.curve_x[index],
+                                y=self.curve_y[index],
+                                xaxis='x1',
+                                yaxis='y1',
+                                mode='lines',
+                                name=self.group_labels[index],
+                                legendgroup=self.group_labels[index],
+                                showlegend=False if self.show_hist else True,
+                                marker=dict(color=self.colors[index]))
+        return curve
+
+    def make_rug(self):
+        """
+        Makes the rug plot(s) for create_distplot().
+
+        :rtype (list) rug: list of rug plot representations
+        """
+        rug = [None] * self.trace_number
+        for index in range(self.trace_number):
+
+            rug[index] = dict(type='scatter',
+                              x=self.hist_data[index],
+                              y=([self.group_labels[index]] *
+                                 len(self.hist_data[index])),
+                              xaxis='x1',
+                              yaxis='y2',
+                              mode='markers',
+                              name=self.group_labels[index],
+                              legendgroup=self.group_labels[index],
+                              showlegend=(False if self.show_hist or
+                                          self.show_curve else True),
+                              text=self.rug_text[index],
+                              marker=dict(color=self.colors[index],
+                                          symbol='line-ns-open'))
+        return rug
 
 
 class _Dendrogram(FigureFactory):
@@ -2947,6 +3211,8 @@ class _Dendrogram(FigureFactory):
 
     def __init__(self, X, orientation='bottom', labels=None, colorscale=None,
                  width="100%", height="100%", xaxis='xaxis', yaxis='yaxis'):
+        # TODO: protected until #282
+        from plotly.graph_objs import graph_objs
         self.orientation = orientation
         self.labels = labels
         self.xaxis = xaxis
@@ -2983,7 +3249,7 @@ class _Dendrogram(FigureFactory):
         self.zero_vals.sort()
 
         self.layout = self.set_figure_layout(width, height)
-        self.data = Data(dd_traces)
+        self.data = graph_objs.Data(dd_traces)
 
     def get_color_dict(self, colorscale):
         """
@@ -3093,7 +3359,8 @@ class _Dendrogram(FigureFactory):
         appear on the plot
         (e) P['leaves']: left-to-right traversal of the leaves
         """
-
+        # TODO: protected until #282
+        from plotly.graph_objs import graph_objs
         d = scs.distance.pdist(X)
         Z = sch.linkage(d, method='complete')
         P = sch.dendrogram(Z, orientation=self.orientation,
@@ -3120,10 +3387,12 @@ class _Dendrogram(FigureFactory):
             else:
                 ys = icoord[i]
             color_key = color_list[i]
-            trace = Scatter(x=np.multiply(self.sign[self.xaxis], xs),
-                            y=np.multiply(self.sign[self.yaxis], ys),
-                            mode='lines',
-                            marker=Marker(color=colors[color_key]))
+            trace = graph_objs.Scatter(
+                x=np.multiply(self.sign[self.xaxis], xs),
+                y=np.multiply(self.sign[self.yaxis], ys),
+                mode='lines',
+                marker=graph_objs.Marker(color=colors[color_key])
+            )
 
             try:
                 x_index = int(self.xaxis[-1])

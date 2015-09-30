@@ -7,10 +7,14 @@ from __future__ import absolute_import
 import os
 from unittest import TestCase
 
+from nose.plugins.attrib import attr
+
 import plotly
 
 
 class PlotlyOfflineTestCase(TestCase):
+
+    @attr('slow')
     def test_downloading_file_saves_it_to_the_disk(self):
         dummy_js_url = ('https://gist.githubusercontent.com/chriddyp/'
                         'f40bd33d1eab6f0715dc/raw/'

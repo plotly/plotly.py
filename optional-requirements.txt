@@ -19,3 +19,6 @@ ipython[all]
 
 ## pandas deps for some matplotlib functionality ##
 pandas
+
+## scipy deps for some FigureFactory functions ##
+scipy

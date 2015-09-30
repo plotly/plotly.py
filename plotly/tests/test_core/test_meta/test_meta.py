@@ -11,6 +11,7 @@ import random
 import string
 
 from nose import with_setup
+from nose.plugins.attrib import attr
 from nose.tools import raises
 from unittest import skip
 
@@ -33,6 +34,7 @@ def _random_filename():
     return unique_filename
 
 
+@attr('slow')
 @with_setup(init)
 def test_upload_meta():
     unique_filename = _random_filename()
@@ -42,6 +44,7 @@ def test_upload_meta():
     py.meta_ops.upload(_meta, grid_url=grid_url)
 
 
+@attr('slow')
 @with_setup(init)
 def test_upload_meta_with_grid():
     c1 = Column([1, 2, 3, 4], 'first column')

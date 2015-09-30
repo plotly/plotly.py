@@ -41,14 +41,14 @@ def test_to_string():
                    '    ]),\n'
                    '    layout=Layout(\n'
                    '        autosize=False,\n'
-                   '        width=500,\n'
                    '        height=500,\n'
                    '        margin=Margin(\n'
-                   '            l=65,\n'
                    '            r=50,\n'
+                   '            t=65,\n'
                    '            b=65,\n'
-                   '            t=65\n'
-                   '        )\n'
+                   '            l=65\n'
+                   '        ),\n'
+                   '        width=500\n'
                    '    )\n'
                    ')')
     assert fig_string == comp_string
