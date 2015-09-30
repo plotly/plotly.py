@@ -3333,7 +3333,7 @@ class _Dendrogram(FigureFactory):
             'autoscale': False,
             'hovermode': 'closest',
             'width': width,
-            'width': height
+            'height': height
         })
 
         self.set_axis_layout(self.xaxis)
