@@ -2434,7 +2434,7 @@ class FigureFactory(object):
         :param (str) orientation: 'top', 'right', 'bottom', or 'left'
         :param (list) labels: List of axis category labels(observation labels)
         :param (list) colorscale: Optional colorscale for dendrogram tree
-        clusters
+            clusters
 
         Example 1: Simple bottom oriented dendrogram
         ```
@@ -2457,6 +2457,7 @@ class FigureFactory(object):
 
         py.iplot(dendro, validate=False, height=1000, width=300)
         ```
+
         """
         dependencies = (_scipy_imported and _scipy__spatial_imported and
                         _scipy__cluster__hierarchy_imported)
@@ -3204,10 +3205,7 @@ class _Distplot(FigureFactory):
 
 
 class _Dendrogram(FigureFactory):
-
-    """
-    Refer to FigureFactory.create_dendrogram() for docstring.
-    """
+    """Refer to FigureFactory.create_dendrogram() for docstring."""
 
     def __init__(self, X, orientation='bottom', labels=None, colorscale=None,
                  width="100%", height="100%", xaxis='xaxis', yaxis='yaxis'):
@@ -3253,11 +3251,11 @@ class _Dendrogram(FigureFactory):
 
     def get_color_dict(self, colorscale):
         """
-        Returns colorscale used for dendrogram tree clusters
-        :param (list) colorscale: colors to use for the plot,
-        in rgb format
-        :rtype (dict): returns a dictionary of default colors mapped
-        to the user colorscale
+        Returns colorscale used for dendrogram tree clusters.
+
+        :param (list) colorscale: Colors to use for the plot in rgb format.
+        :rtype (dict): A dict of default colors mapped to the user colorscale.
+
         """
 
         # These are the color codes returned for dendrograms
@@ -3292,11 +3290,12 @@ class _Dendrogram(FigureFactory):
 
     def set_axis_layout(self, axis_key):
         """
-        Sets and returns default axis object for dendrogram figure
-        :param (str) axis_key: "xaxis", "xaxis1", "yaxis", yaxis1", etc.
-        :rtype (dict): returns an axis_key dictionary with set parameters
-        """
+        Sets and returns default axis object for dendrogram figure.
 
+        :param (str) axis_key: E.g., 'xaxis', 'xaxis1', 'yaxis', yaxis1', etc.
+        :rtype (dict): An axis_key dictionary with set parameters.
+
+        """
         axis_defaults = {
                 'type': 'linear',
                 'ticks': 'outside',
@@ -3325,9 +3324,9 @@ class _Dendrogram(FigureFactory):
 
     def set_figure_layout(self, width, height):
         """
-        Sets and returns default layout object for dendrogram figure
-        """
+        Sets and returns default layout object for dendrogram figure.
 
+        """
         self.layout.update({
             'showlegend': False,
             'autoscale': False,
@@ -3343,21 +3342,20 @@ class _Dendrogram(FigureFactory):
 
     def get_dendrogram_traces(self, X, colorscale):
         """
-        Calculates all the elements needed for plotting a dendrogram
+        Calculates all the elements needed for plotting a dendrogram.
 
         :param (ndarray) X: Matrix of observations as arrray of arrays
-        :param (list) colorscale: Optional colorscale for dendrogram tree
-        clusters
+        :param (list) colorscale: Colorscale for dendrogram tree clusters
+        :rtype (tuple): Contains all the traces in the following order:
+            (a) trace_list: List of Plotly trace objects for dendrogram tree
+            (b) icoord: All X points of the dendogram tree as array of arrays
+                with length 4
+            (c) dcoord: All Y points of the dendogram tree as array of arrays
+                with length 4
+            (d) ordered_labels: leaf labels in the order they are going to
+                appear on the plot
+            (e) P['leaves']: left-to-right traversal of the leaves
 
-        :rtype (tuple): Contains all the traces in the following order
-        (a) trace_list: List of Plotly trace objects for the dendrogram tree
-        (b) icoord: All X points of the dendogram tree as array of arrays
-        with length 4
-        (c) dcoord: All Y points of the dendogram tree as array of arrays
-        with length 4
-        (d) ordered_labels: leaf labels in the order they are going to
-        appear on the plot
-        (e) P['leaves']: left-to-right traversal of the leaves
         """
         # TODO: protected until #282
         from plotly.graph_objs import graph_objs
