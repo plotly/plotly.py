@@ -322,16 +322,104 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
         self.assert_dict_equal(dendro['layout'], expected_dendro['layout'])
 
     def test_dendrogram_random_matrix(self):
+
         # create a random uncorrelated matrix
         X = np.random.rand(5, 5)
+
         # variable 2 is correlated with all the other variables
         X[2, :] = sum(X, 0)
 
         names = ['Jack', 'Oxana', 'John', 'Chelsea', 'Mark']
         dendro = tls.FigureFactory.create_dendrogram(X, labels=names)
 
-        # Check that 2 is in a separate cluster and it's labelled correctly
-        self.assertEqual(dendro['layout']['xaxis']['ticktext'][0], 'John')
+        expected_dendro = go.Figure(
+            data=go.Data([
+                go.Scatter(
+                    marker=go.Marker(color='rgb(61,153,112)'),
+                    mode='lines',
+                    xaxis='x',
+                    yaxis='y'
+                ),
+                go.Scatter(
+                    marker=go.Marker(
+                        color='rgb(61,153,112)'
+                    ),
+                    mode='lines',
+                    xaxis='x',
+                    yaxis='y'
+                ),
+                go.Scatter(
+                    marker=go.Marker(color='rgb(61,153,112)'),
+                    mode='lines',
+                    xaxis='x',
+                    yaxis='y'
+                ),
+                go.Scatter(
+                    marker=go.Marker(color='rgb(0,116,217)'),
+                    mode='lines',
+                    xaxis='x',
+                    yaxis='y'
+                )
+            ]),
+            layout=go.Layout(
+                autosize=False,
+                height='100%',
+                hovermode='closest',
+                showlegend=False,
+                width='100%',
+                xaxis=go.XAxis(
+                    mirror='allticks',
+                    rangemode='tozero',
+                    showgrid=False,
+                    showline=True,
+                    showticklabels=True,
+                    tickmode='array',
+                    ticks='outside',
+                    tickvals=[5.0, 15.0, 25.0, 35.0, 45.0],
+                    type='linear',
+                    zeroline=False
+                ),
+                yaxis=go.YAxis(
+                    mirror='allticks',
+                    rangemode='tozero',
+                    showgrid=False,
+                    showline=True,
+                    showticklabels=True,
+                    ticks='outside',
+                    type='linear',
+                    zeroline=False
+                )
+            )
+        )
+
+        self.assertEqual(len(dendro['data']), 4)
+
+        # it's random, so we can only check that the values aren't equal
+        y_vals = [dendro['data'][0].pop('y'), dendro['data'][1].pop('y'),
+                  dendro['data'][2].pop('y'), dendro['data'][3].pop('y')]
+        for i in range(len(y_vals)):
+            for j in range(len(y_vals)):
+                if i != j:
+                    self.assertFalse(np.allclose(y_vals[i], y_vals[j]))
+
+        x_vals = [dendro['data'][0].pop('x'), dendro['data'][1].pop('x'),
+                  dendro['data'][2].pop('x'), dendro['data'][3].pop('x')]
+        for i in range(len(x_vals)):
+            for j in range(len(x_vals)):
+                if i != j:
+                    self.assertFalse(np.allclose(x_vals[i], x_vals[j]))
+
+        # we also need to check the ticktext manually
+        xaxis_ticktext = dendro['layout']['xaxis'].pop('ticktext')
+        self.assertEqual(xaxis_ticktext[0], 'John')
+
+        # this is actually a bit clearer when debugging tests.
+        self.assert_dict_equal(dendro['data'][0], expected_dendro['data'][0])
+        self.assert_dict_equal(dendro['data'][1], expected_dendro['data'][1])
+        self.assert_dict_equal(dendro['data'][2], expected_dendro['data'][2])
+        self.assert_dict_equal(dendro['data'][3], expected_dendro['data'][3])
+
+        self.assert_dict_equal(dendro['layout'], expected_dendro['layout'])
 
     def test_dendrogram_orientation(self):
         X = np.random.rand(5, 5) 
