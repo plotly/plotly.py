@@ -20,8 +20,8 @@ FILE_CONTENT = {CREDENTIALS_FILE: {'username': '',
                               'plotly_ssl_verification': True,
                               'plotly_proxy_authorization': False,
                               'world_readable': True,
-                              'sharing': "public",
-                              "auto_open": True}}
+                              'sharing': 'public',
+                              'auto_open': True}}
 
 try:
     os.mkdir(TEST_DIR)

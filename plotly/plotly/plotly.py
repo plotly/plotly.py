@@ -100,33 +100,17 @@ def _plot_option_logic(plot_options_from_call_signature):
                        session_options, file_options]:
         utils.validate_world_readable_and_sharing_settings(option_set)
         utils.set_sharing_and_world_readable(option_set)
+
         # dynamic defaults
         if ('filename' in option_set and
                 'fileopt' not in option_set):
             option_set['fileopt'] = 'overwrite'
 
-    # merge options together with precedence
-    def update_plot_options(base_plot_options, new_plot_options):
-        """
-        Merge new_plot_options into base_plot_options
-
-        """
-        updated_plot_options = {}
-        base_plot_options = copy.deepcopy(base_plot_options)
-        new_plot_options = copy.deepcopy(new_plot_options)
-        for key in base_plot_options:
-            updated_plot_options[key] = new_plot_options.get(
-                key, base_plot_options[key])
-
-        return updated_plot_options
-
-    user_plot_options = default_plot_options
-    user_plot_options = update_plot_options(user_plot_options,
-                                            file_options)
-    user_plot_options = update_plot_options(user_plot_options,
-                                            session_options)
-    user_plot_options = update_plot_options(user_plot_options,
-                                            plot_options_from_call_signature)
+    user_plot_options = {}
+    user_plot_options.update(default_plot_options)
+    user_plot_options.update(file_options)
+    user_plot_options.update(session_options)
+    user_plot_options.update(plot_options_from_call_signature)
 
     return user_plot_options
 

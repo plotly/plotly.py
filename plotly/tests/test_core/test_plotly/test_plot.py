@@ -7,16 +7,16 @@ A module intended for use with Nose.
 """
 from __future__ import absolute_import
 
+import json
 import requests
 import six
-import json
 
 from unittest import TestCase
 from nose.plugins.attrib import attr
 from nose.tools import raises
 
-from plotly.tests.utils import PlotlyTestCase
 import plotly.tools as tls
+from plotly.tests.utils import PlotlyTestCase
 from plotly.plotly import plotly as py
 from plotly.exceptions import PlotlyError, PlotlyEmptyDataError
 from plotly.files import CONFIG_FILE
@@ -214,7 +214,7 @@ class TestPlot(TestCase):
 
 class TestPlotOptionLogic(PlotlyTestCase):
     conflicting_option_set = (
-        {'world_readable': True, 'sharing': 'secret', },
+        {'world_readable': True, 'sharing': 'secret'},
         {'world_readable': True, 'sharing': 'private'},
         {'world_readable': False, 'sharing': 'public'}
     )
