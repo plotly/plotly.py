@@ -3282,7 +3282,7 @@ class _Dendrogram(FigureFactory):
                 'rgb(255,220,0)']  # yellow
 
         for i in range(len(default_colors.keys())):
-            k = default_colors.keys()[i]
+            k = list(default_colors.keys())[i]  # PY3 won't index keys
             if i < len(colorscale):
                 default_colors[k] = colorscale[i]
 
