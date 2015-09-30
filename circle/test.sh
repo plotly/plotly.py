@@ -50,10 +50,7 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
 #        error_exit "${LINENO}: permissions test 666 on .plotly dir failed"
 
     echo "running tests for Python ${version} as user '$(whoami)'"
-    nosetests -xv plotly/tests --with-coverage --cover-package=plotly ||
+    nosetests -xv plotly/tests ||
         error_exit "${LINENO}: test suite failed for Python ${version}"
-    mkdir "${CIRCLE_ARTIFACTS}/${PYENV_VERSION}" || true
-    coverage html -d "${CIRCLE_ARTIFACTS}/${PYENV_VERSION}" \
-        --title=${PYENV_VERSION}
 
 done
