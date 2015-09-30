@@ -2430,7 +2430,7 @@ class FigureFactory(object):
         """
         BETA function that returns a dendrogram Plotly figure object.
 
-        :param (ndarray) X: Matrix of observations as arrray of arrays
+        :param (ndarray) X: Matrix of observations as array of arrays
         :param (str) orientation: 'top', 'right', 'bottom', or 'left'
         :param (list) labels: List of axis category labels(observation labels)
         :param (list) colorscale: Optional colorscale for dendrogram tree
@@ -3344,13 +3344,13 @@ class _Dendrogram(FigureFactory):
         """
         Calculates all the elements needed for plotting a dendrogram.
 
-        :param (ndarray) X: Matrix of observations as arrray of arrays
-        :param (list) colorscale: Colorscale for dendrogram tree clusters
+        :param (ndarray) X: Matrix of observations as array of arrays
+        :param (list) colorscale: Color scale for dendrogram tree clusters
         :rtype (tuple): Contains all the traces in the following order:
             (a) trace_list: List of Plotly trace objects for dendrogram tree
-            (b) icoord: All X points of the dendogram tree as array of arrays
+            (b) icoord: All X points of the dendrogram tree as array of arrays
                 with length 4
-            (c) dcoord: All Y points of the dendogram tree as array of arrays
+            (c) dcoord: All Y points of the dendrogram tree as array of arrays
                 with length 4
             (d) ordered_labels: leaf labels in the order they are going to
                 appear on the plot
