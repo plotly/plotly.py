@@ -9,6 +9,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - You can also save `auto_open` and `sharing` to the config file so that you can forget these
   keyword argument in `py.iplot` and `py.plot`.
 
+## [1.8.5] - 2015-09-29
+### Fixed
+- Fixed validation errors (validate=False workaround no longer required)
+
+### Added
+- Auto-sync API request on import to get the latest schema from Plotly
+- `.`-access for nested attributes in plotly graph objects
+- General `.help()` method for plotly graph objects
+- Specific attribute `.help(<attribute>)` also included
+
+### Removed
+- No more *is streamable*, streaming validation.
 
 ## [1.8.3] - 2015-08-14
 ### Fixed
