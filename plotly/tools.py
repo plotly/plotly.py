@@ -1668,7 +1668,7 @@ class FigureFactory(object):
         data = [quiver]
         layout = graph_objs.Layout(hovermode='closest')
 
-        return dict(data=data, layout=layout)
+        return graph_objs.Figure(data=data, layout=layout)
 
     @staticmethod
     def create_streamline(x, y, u, v,
@@ -1776,7 +1776,7 @@ class FigureFactory(object):
         data = [streamline]
         layout = graph_objs.Layout(hovermode='closest')
 
-        return dict(data=data, layout=layout)
+        return graph_objs.Figure(data=data, layout=layout)
 
     @staticmethod
     def _make_increasing_ohlc(open, high, low, close, dates, **kwargs):
@@ -2013,7 +2013,7 @@ class FigureFactory(object):
         layout = graph_objs.Layout(xaxis=dict(zeroline=False),
                                    hovermode='closest')
 
-        return dict(data=data, layout=layout)
+        return graph_objs.Figure(data=data, layout=layout)
 
     @staticmethod
     def _make_increasing_candle(open, high, low, close, dates, **kwargs):
@@ -2239,7 +2239,7 @@ class FigureFactory(object):
             data = candle_incr_data + candle_decr_data
 
         layout = graph_objs.Layout()
-        return dict(data=data, layout=layout)
+        return graph_objs.Figure(data=data, layout=layout)
 
     @staticmethod
     def create_distplot(hist_data, group_labels,
@@ -2419,9 +2419,7 @@ class FigureFactory(object):
                             position=0.0))
 
         data = sum(data, [])
-        dist_fig = dict(data=data, layout=layout)
-
-        return dist_fig
+        return graph_objs.Figure(data=data, layout=layout)
 
 
 class _Quiver(FigureFactory):
