@@ -17,6 +17,14 @@ class PlotlyTestCase(TestCase):
         self._session = None
         super(PlotlyTestCase, self).__init__(*args, **kwargs)
 
+    @classmethod
+    def setUpClass(cls):
+        session._session = {
+            'credentials': {},
+            'config': {},
+            'plot_options': {}
+        }
+
     def setUp(self):
         self.stash_session()
         self.stash_files()

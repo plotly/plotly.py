@@ -4,6 +4,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.8.6] - 2015-09-28
+- Saving "world_readable" to your config file via `plotly.tools.set_config` actually works.
+- You can also save `auto_open` and `sharing` to the config file so that you can forget these
+  keyword argument in `py.iplot` and `py.plot`.
+
 ## [1.8.5] - 2015-09-29
 ### Fixed
 - Fixed validation errors (validate=False workaround no longer required)

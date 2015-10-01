@@ -30,15 +30,11 @@ Available targets (i.e. $ make target):
 
     sync_chunked -> sync chunked_requests submodule ONLY
 
-    sync_refs -> sync graph_reference submodule ONLY
-
     pull_subs -> `cd` into *each* submodule and `git pull origin master`
 
     pull_mpl -> pull in mplexporter *master* branch
 
     pull_chunked -> pull in chunked_requests *master* branch
-
-    pull_refs -> pull in graph_reference *master* branch
 
 ################################################################################
 
@@ -51,8 +47,8 @@ Getting setup:
 
 Pulling in changes from subprojects:
 
-    1. Only pull submodules that you require (e.g., $ make pull_refs)
-    2. Make sure to sync these changes (e.g., $ make sync_refs)
+    1. Only pull submodules that you require (e.g., $ make pull_mpl)
+    2. Make sure to sync these changes (e.g., $ make sync_mpl)
 
 ################################################################################
 
