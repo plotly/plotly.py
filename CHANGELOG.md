@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.8.7] - 2015-10-01
+### Added
+- The FigureFactory can now create dendrogram plots with `.create_dendrogram`.
+
 ## [1.8.6] - 2015-09-28
 ### Fixed
 - Saving "world_readable" to your config file via `plotly.tools.set_config` actually works.
