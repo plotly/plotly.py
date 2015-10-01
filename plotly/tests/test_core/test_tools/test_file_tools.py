@@ -8,21 +8,26 @@ class FileToolsTest(PlotlyTestCase):
 
         # Check set_config and get_config return the same values
 
-        domain, streaming_domain, api = 'this', 'thing', 'that'
-        ssl_verify, proxy_auth, readable = True, True, True
+        domain, streaming_domain, api, sharing = ('this', 'thing',
+                                                  'that', 'private')
+        ssl_verify, proxy_auth, world_readable, auto_open = (True, True,
+                                                             False, False)
         tools.set_config_file(plotly_domain=domain,
                               plotly_streaming_domain=streaming_domain,
                               plotly_api_domain=api,
                               plotly_ssl_verification=ssl_verify,
                               plotly_proxy_authorization=proxy_auth,
-                              world_readable=readable)
+                              world_readable=world_readable,
+                              auto_open=auto_open)
         config = tools.get_config_file()
         self.assertEqual(config['plotly_domain'], domain)
         self.assertEqual(config['plotly_streaming_domain'], streaming_domain)
         self.assertEqual(config['plotly_api_domain'], api)
         self.assertEqual(config['plotly_ssl_verification'], ssl_verify)
         self.assertEqual(config['plotly_proxy_authorization'], proxy_auth)
-        self.assertEqual(config['world_readable'], readable)
+        self.assertEqual(config['world_readable'], world_readable)
+        self.assertEqual(config['sharing'], sharing)
+        self.assertEqual(config['auto_open'], auto_open)
         tools.reset_config_file()
 
     def test_set_config_file_two_entries(self):
@@ -38,16 +43,6 @@ class FileToolsTest(PlotlyTestCase):
         self.assertEqual(config['plotly_streaming_domain'], streaming_domain)
         tools.reset_config_file()
 
-    def test_session_plot_option(self):
-
-        # Check if the session_plot_option and config_plot_optin return the
-        # same value
-
-        readable = False
-        tools.set_config_file(world_readable=readable)
-        session_plot_option = session.get_session_plot_options()
-        self.assertEqual(session_plot_option['world_readable'], readable)
-        tools.reset_config_file()
 
     def test_set_config_file_world_readable(self):
 

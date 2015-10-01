@@ -31,15 +31,17 @@ CONFIG_KEYS = {
     'plotly_api_domain': six.string_types,
     'plotly_ssl_verification': bool,
     'plotly_proxy_authorization': bool,
-    'world_readable': bool
+    'world_readable': bool,
+    'auto_open': bool,
+    'sharing': six.string_types
 }
 
 PLOT_OPTIONS = {
     'filename': six.string_types,
     'fileopt': six.string_types,
+    'validate': bool,
     'world_readable': bool,
     'auto_open': bool,
-    'validate': bool,
     'sharing': six.string_types
 }
 
@@ -95,6 +97,14 @@ def sign_in(username, api_key, **kwargs):
                 raise exceptions.PlotlyError("{} must be of type '{}'"
                                              .format(key, CONFIG_KEYS[key]))
             _session['config'][key] = kwargs.get(key)
+
+    # add plot options, raise error if type is wrong.
+    for key in PLOT_OPTIONS:
+        if key in kwargs:
+            if not isinstance(kwargs[key], CONFIG_KEYS[key]):
+                raise exceptions.PlotlyError("{} must be of type '{}'"
+                                             .format(key, CONFIG_KEYS[key]))
+            _session['plot_options'][key] = kwargs.get(key)
 
 
 def update_session_plot_options(**kwargs):

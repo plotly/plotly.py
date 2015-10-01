@@ -19,7 +19,9 @@ FILE_CONTENT = {CREDENTIALS_FILE: {'username': '',
                               'plotly_api_domain': 'https://api.plot.ly',
                               'plotly_ssl_verification': True,
                               'plotly_proxy_authorization': False,
-                              'world_readable': True}}
+                              'world_readable': True,
+                              'sharing': 'public',
+                              'auto_open': True}}
 
 try:
     os.mkdir(TEST_DIR)

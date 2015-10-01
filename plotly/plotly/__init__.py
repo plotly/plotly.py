@@ -10,7 +10,6 @@ verifiable account (username/api-key pair) and a network connection.
 from . plotly import (
     sign_in,
     update_plot_options,
-    get_plot_options,
     get_credentials,
     iplot,
     plot,
