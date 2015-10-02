@@ -1179,7 +1179,6 @@ class _Quiver(FigureFactory):
             barb_len[index] = math.hypot(dif_x[index], dif_y[index])
 
         # Make arrow lengths
-        arrow_len = [None] * len(self.x)
         arrow_len = [i * self.arrow_scale for i in barb_len]
 
         # Get barb angles
