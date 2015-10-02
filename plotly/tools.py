@@ -1413,3 +1413,43 @@ def return_figure_from_figure_or_data(figure_or_data, validate_figure):
             )
 
     return figure
+
+FIGURE_FACTORY_DEPRECATION_WARNING = (
+    'DeprecationWarning: Oops, FigureFactory has been moved! Please import it '
+    'as follows:\n'
+    '`from plotly.graph_objs.figure_factory import FigureFactory`'
+)
+
+
+# Define this to raise a deprecation warning. Functionality has moved!
+class FigureFactory(object):
+
+    @staticmethod
+    def create_quiver(*args, **kwargs):
+        warnings.warn(FIGURE_FACTORY_DEPRECATION_WARNING)
+        from plotly.graph_objs.figure_factory import FigureFactory as FF
+        return FF.create_quiver(*args, **kwargs)
+
+    @staticmethod
+    def create_streamline(*args, **kwargs):
+        warnings.warn(FIGURE_FACTORY_DEPRECATION_WARNING)
+        from plotly.graph_objs.figure_factory import FigureFactory as FF
+        return FF.create_streamline(*args, **kwargs)
+
+    @staticmethod
+    def create_candlestick(*args, **kwargs):
+        warnings.warn(FIGURE_FACTORY_DEPRECATION_WARNING)
+        from plotly.graph_objs.figure_factory import FigureFactory as FF
+        return FF.create_candlestick(*args, **kwargs)
+
+    @staticmethod
+    def create_distplot(*args, **kwargs):
+        warnings.warn(FIGURE_FACTORY_DEPRECATION_WARNING)
+        from plotly.graph_objs.figure_factory import FigureFactory as FF
+        return FF.create_distplot(*args, **kwargs)
+
+    @staticmethod
+    def create_dendrogram(*args, **kwargs):
+        warnings.warn(FIGURE_FACTORY_DEPRECATION_WARNING)
+        from plotly.graph_objs.figure_factory import FigureFactory as FF
+        return FF.create_dendrogram(*args, **kwargs)
