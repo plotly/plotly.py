@@ -181,7 +181,11 @@ class TestPlot(TestCase):
                   'sharing': 'secret'}
 
         plot_url = py.plot(self.simple_figure, **kwargs)
-        response = requests.get(plot_url)
+        # shareplot basically always gives a 200 if even if permission denied
+        # embedplot returns an actual 404
+        embed_url = plot_url.split('?')[0] + '.embed' + plot_url.split('?')[1]
+        response = requests.get(embed_url)
+
         self.assertEqual(response.status_code, 200)
 
     @attr('slow')
