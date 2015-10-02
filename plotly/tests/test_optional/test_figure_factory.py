@@ -1,6 +1,7 @@
 from unittest import TestCase
 from plotly.graph_objs import graph_objs as go
 from plotly.exceptions import PlotlyError
+from plotly.graph_objs.figure_factory import FigureFactory
 
 import plotly.tools as tls
 from plotly.tests.test_optional.optional_utils import NumpyTestUtilsMixin
@@ -21,7 +22,7 @@ class TestDistplot(TestCase):
                   'curve_type': 'curve'}
         self.assertRaisesRegexp(PlotlyError, "curve_type must be defined as "
                                              "'kde' or 'normal'",
-                                tls.FigureFactory.create_distplot, **kwargs)
+                                FigureFactory.create_distplot, **kwargs)
 
     def test_wrong_histdata_format(self):
 
@@ -30,16 +31,16 @@ class TestDistplot(TestCase):
         # will fail)
 
         kwargs = {'hist_data': [1, 2, 3], 'group_labels': ['group']}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_distplot,
+        self.assertRaises(PlotlyError, FigureFactory.create_distplot,
                           **kwargs)
 
     def test_unequal_data_label_length(self):
         kwargs = {'hist_data': [[1, 2]], 'group_labels': ['group', 'group2']}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_distplot,
+        self.assertRaises(PlotlyError, FigureFactory.create_distplot,
                           **kwargs)
 
         kwargs = {'hist_data': [[1, 2], [1, 2, 3]], 'group_labels': ['group']}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_distplot,
+        self.assertRaises(PlotlyError, FigureFactory.create_distplot,
                           **kwargs)
 
     def test_simple_distplot(self):
@@ -47,8 +48,8 @@ class TestDistplot(TestCase):
         # we should be able to create a single distplot with a simple dataset
         # and default kwargs
 
-        dp = tls.FigureFactory.create_distplot(hist_data=[[1, 2, 2, 3]],
-                                               group_labels=['distplot'])
+        dp = FigureFactory.create_distplot(hist_data=[[1, 2, 2, 3]],
+                                           group_labels=['distplot'])
         expected_dp_layout = {'barmode': 'overlay',
                               'hovermode': 'closest',
                               'legend': {'traceorder': 'reversed'},
@@ -103,8 +104,8 @@ class TestDistplot(TestCase):
         hist_data = [hist1_x] + [hist2_x]
         group_labels = ['2012', '2013']
 
-        dp = tls.FigureFactory.create_distplot(hist_data, group_labels,
-                                               show_rug=False, bin_size=.2)
+        dp = FigureFactory.create_distplot(hist_data, group_labels,
+                                           show_rug=False, bin_size=.2)
         dp['layout'].update(title='Dist Plot')
 
         expected_dp_layout = {'barmode': 'overlay',
@@ -160,7 +161,7 @@ class TestStreamline(TestCase):
                   'u': [[-1, -5], [-1, -5]],
                   'v': [[1, 1], [-3, -3]],
                   'arrow_scale': 0}
-        self.assertRaises(ValueError, tls.FigureFactory.create_streamline,
+        self.assertRaises(ValueError, FigureFactory.create_streamline,
                           **kwargs)
 
     def test_wrong_density(self):
@@ -171,7 +172,7 @@ class TestStreamline(TestCase):
                   'u': [[-1, -5], [-1, -5]],
                   'v': [[1, 1], [-3, -3]],
                   'density': 0}
-        self.assertRaises(ValueError, tls.FigureFactory.create_streamline,
+        self.assertRaises(ValueError, FigureFactory.create_streamline,
                           **kwargs)
 
     def test_uneven_x(self):
@@ -181,7 +182,7 @@ class TestStreamline(TestCase):
         kwargs = {'x': [0, 2, 7, 9], 'y': [0, 2, 4, 6],
                   'u': [[-1, -5], [-1, -5]],
                   'v': [[1, 1], [-3, -3]]}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_streamline,
+        self.assertRaises(PlotlyError, FigureFactory.create_streamline,
                           **kwargs)
 
     def test_uneven_y(self):
@@ -191,7 +192,7 @@ class TestStreamline(TestCase):
         kwargs = {'x': [0, 2, 4, 6], 'y': [1.5, 2, 3, 3.5],
                   'u': [[-1, -5], [-1, -5]],
                   'v': [[1, 1], [-3, -3]]}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_streamline,
+        self.assertRaises(PlotlyError, FigureFactory.create_streamline,
                           **kwargs)
 
     def test_unequal_length_xy(self):
@@ -201,7 +202,7 @@ class TestStreamline(TestCase):
         kwargs = {'x': [0, 2, 4, 6], 'y': [1.5, 2, 3.5],
                   'u': [[-1, -5], [-1, -5]],
                   'v': [[1, 1], [-3, -3]]}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_streamline,
+        self.assertRaises(PlotlyError, FigureFactory.create_streamline,
                           **kwargs)
 
     def test_unequal_length_uv(self):
@@ -211,7 +212,7 @@ class TestStreamline(TestCase):
         kwargs = {'x': [0, 2, 4, 6], 'y': [1.5, 2, 3, 3.5],
                   'u': [[-1, -5], [-1, -5], [-1, -5]],
                   'v': [[1, 1], [-3, -3]]}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_streamline,
+        self.assertRaises(PlotlyError, FigureFactory.create_streamline,
                           **kwargs)
 
     def test_simple_streamline(self):
@@ -227,14 +228,14 @@ class TestStreamline(TestCase):
         # u = u.T #transpose
         # v = v.T #transpose
 
-        strln = tls.FigureFactory.create_streamline(x=[-1., 0., 1.],
-                                                    y=[-1., 0., 1.],
-                                                    u=[[1., 0., 1.],
-                                                       [1., 0., 1.],
-                                                       [1., 0., 1.]],
-                                                    v=[[1., 1., 1.],
-                                                       [0., 0., 0.],
-                                                       [1., 1., 1.]])
+        strln = FigureFactory.create_streamline(x=[-1., 0., 1.],
+                                                y=[-1., 0., 1.],
+                                                u=[[1., 0., 1.],
+                                                   [1., 0., 1.],
+                                                   [1., 0., 1.]],
+                                                v=[[1., 1., 1.],
+                                                   [0., 0., 0.],
+                                                   [1., 1., 1.]])
         expected_strln_0_100 = {
             'y': [-1.0, -0.9788791845863757, -0.9579399744939614, -0.9371777642073374, -0.9165881396413338, -0.8961668671832106, -0.8759098835283448, -0.8558132862403048, -0.835873324973195, -0.8160863933003534, -0.7964490210989816, -0.7769578674451656, -0.7576097139780906, -0.7384014586961288, -0.7193301101509343, -0.7003927820087748, -0.681586687951103, -0.6629091368888596, -0.64435752846723, -0.6259293488396024, -0.6076221666912738, -0.5894336294951057, -0.5713614599827976, -0.5534034528167977, -0.5355574714490806, -0.5178214451541254, -0.5001933662244311, -0.4826712873178177, -0.4652533189465894, -0.44793762709939944, -0.4307224309873414, -0.4136060009064273, -0.39658665620919065, -0.3796627633786812, -0.3628327341986042, -0.34609502401380254, -0.3294481300756896, -0.31289058996761565, -0.2964209801054992, -0.28003791430937197, -0.2637400424417804, -0.24752604910925968, -0.23139465242334434, -0.21534460281781365, -0.19937468191908325, -0.18348370146685278, -0.1676705022823033, -0.15193395328130999, -0.13627295053029143, -0.1206864163424669, -0.10517329841242584, -0.08973256898704507, -0.07436322407090357, -0.05906428266445696, -0.04383478603333624, -0.028673797007230273, -0.013580399306900914, 0.0014484211645073852, 0.01648792568956914, 0.03159429687713278, 0.04676843461935776, 0.062011259175942746, 0.07732371182540754, 0.09270675554339824, 0.10816137570939799, 0.12368858084331191, 0.1392894033734846, 0.1549649004378033, 0.1707161547196483, 0.1865442753205595, 0.20245039867161063, 0.21843568948560943, 0.23450134175238246, 0.25064857977955146, 0.26687865928136767, 0.2831928685183458, 0.29959252949062387, 0.3160789991881776, 0.33265367090123643, 0.3493179755944802, 0.366073383348855, 0.3829214048751186, 0.39986359310352526, 0.41690154485438513, 0.4340369025945845, 0.4512713562855355, 0.46860664532844054, 0.4860445606132082, 0.5035869466778524, 0.5212357039857456, 0.5389927913286829, 0.5568602283643591, 0.5748400982975623, 0.5929345507151613, 0.6111458045858065, 0.6294761514361948, 0.6479279587167714, 0.6665036733708583, 0.6852058256224467, 0.704037032999252],
             'x': [-1.0, -0.9788791845863756, -0.9579399744939614, -0.9371777642073374, -0.9165881396413338, -0.8961668671832106, -0.8759098835283448, -0.8558132862403048, -0.835873324973195, -0.8160863933003534, -0.7964490210989816, -0.7769578674451656, -0.7576097139780906, -0.7384014586961289, -0.7193301101509344, -0.7003927820087748, -0.6815866879511031, -0.6629091368888596, -0.6443575284672302, -0.6259293488396025, -0.6076221666912739, -0.5894336294951058, -0.5713614599827976, -0.5534034528167978, -0.5355574714490807, -0.5178214451541254, -0.5001933662244312, -0.4826712873178177, -0.4652533189465894, -0.44793762709939944, -0.4307224309873414, -0.4136060009064273, -0.39658665620919065, -0.3796627633786812, -0.3628327341986042, -0.34609502401380254, -0.3294481300756896, -0.31289058996761565, -0.2964209801054992, -0.28003791430937197, -0.2637400424417804, -0.24752604910925968, -0.23139465242334434, -0.21534460281781365, -0.19937468191908325, -0.18348370146685278, -0.1676705022823033, -0.15193395328130999, -0.13627295053029143, -0.1206864163424669, -0.10517329841242584, -0.08973256898704507, -0.07436322407090357, -0.05906428266445696, -0.04383478603333624, -0.028673797007230273, -0.013580399306900914, 0.0014484211645073852, 0.01648792568956914, 0.03159429687713278, 0.04676843461935776, 0.062011259175942746, 0.07732371182540754, 0.09270675554339824, 0.10816137570939799, 0.12368858084331191, 0.1392894033734846, 0.1549649004378033, 0.1707161547196483, 0.1865442753205595, 0.20245039867161063, 0.21843568948560943, 0.23450134175238246, 0.25064857977955146, 0.26687865928136767, 0.2831928685183458, 0.29959252949062387, 0.3160789991881776, 0.33265367090123643, 0.3493179755944802, 0.366073383348855, 0.3829214048751186, 0.39986359310352526, 0.41690154485438513, 0.4340369025945845, 0.4512713562855355, 0.46860664532844054, 0.4860445606132082, 0.5035869466778524, 0.5212357039857456, 0.5389927913286829, 0.5568602283643591, 0.5748400982975623, 0.5929345507151613, 0.6111458045858065, 0.6294761514361948, 0.6479279587167714, 0.6665036733708583, 0.6852058256224467, 0.704037032999252],
@@ -251,7 +252,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
 
     def test_default_dendrogram(self):
         X = np.array([[1, 2, 3, 4], [1, 1, 3, 4], [1, 2, 1, 4], [1, 2, 3, 1]])
-        dendro = tls.FigureFactory.create_dendrogram(X=X)
+        dendro = FigureFactory.create_dendrogram(X=X)
 
         expected_dendro = go.Figure(
             data=go.Data([
@@ -330,7 +331,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
         X[2, :] = sum(X, 0)
 
         names = ['Jack', 'Oxana', 'John', 'Chelsea', 'Mark']
-        dendro = tls.FigureFactory.create_dendrogram(X, labels=names)
+        dendro = FigureFactory.create_dendrogram(X, labels=names)
 
         expected_dendro = go.Figure(
             data=go.Data([
@@ -424,18 +425,18 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
     def test_dendrogram_orientation(self):
         X = np.random.rand(5, 5) 
 
-        dendro_left = tls.FigureFactory.create_dendrogram(
+        dendro_left = FigureFactory.create_dendrogram(
                        X, orientation='left')
         self.assertEqual(len(dendro_left['layout']['yaxis']['ticktext']), 5)
         tickvals_left = np.array(dendro_left['layout']['yaxis']['tickvals'])
         self.assertTrue((tickvals_left <= 0).all())
 
-        dendro_right = tls.FigureFactory.create_dendrogram(
+        dendro_right = FigureFactory.create_dendrogram(
                         X, orientation='right')
         tickvals_right = np.array(dendro_right['layout']['yaxis']['tickvals'])
         self.assertTrue((tickvals_right >= 0).all())
 
-        dendro_bottom = tls.FigureFactory.create_dendrogram(
+        dendro_bottom = FigureFactory.create_dendrogram(
                         X, orientation='bottom')
         self.assertEqual(len(dendro_bottom['layout']['xaxis']['ticktext']), 5)
         tickvals_bottom = np.array(
@@ -443,7 +444,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
         )
         self.assertTrue((tickvals_bottom >= 0).all())
 
-        dendro_top = tls.FigureFactory.create_dendrogram(X, orientation='top')
+        dendro_top = FigureFactory.create_dendrogram(X, orientation='top')
         tickvals_top = np.array(dendro_top['layout']['xaxis']['tickvals'])
         self.assertTrue((tickvals_top <= 0).all())
 
@@ -462,7 +463,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
                 'rgb(220,220,220)',  # gainsboro
                 'rgb(245,245,245)']  # white smoke
 
-        dendro = tls.FigureFactory.create_dendrogram(X, colorscale=greyscale)
+        dendro = FigureFactory.create_dendrogram(X, colorscale=greyscale)
 
         expected_dendro = go.Figure(
             data=go.Data([
