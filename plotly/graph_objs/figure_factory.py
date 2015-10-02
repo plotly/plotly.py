@@ -1036,7 +1036,6 @@ class FigureFactory(object):
         data = sum(data, [])
         return graph_objs.Figure(data=data, layout=layout)
 
-
     @staticmethod
     def create_dendrogram(X, orientation="bottom", labels=None,
                           colorscale=None):
