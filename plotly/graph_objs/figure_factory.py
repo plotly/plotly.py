@@ -511,8 +511,10 @@ class FigureFactory(object):
 
         import pandas.io.data as web
 
-        df = web.DataReader("aapl", 'yahoo', datetime(2008, 8, 15), datetime(2008, 10, 15))
-        fig = FF.create_ohlc(df.Open, df.High, df.Low, df.Close, dates=df.index)
+        df = web.DataReader("aapl", 'yahoo', datetime(2008, 8, 15),
+                            datetime(2008, 10, 15))
+        fig = FF.create_ohlc(df.Open, df.High, df.Low, df.Close,
+                             dates=df.index)
 
         py.plot(fig, filename='finance/aapl-ohlc')
         ```
@@ -525,10 +527,12 @@ class FigureFactory(object):
 
         import pandas.io.data as web
 
-        df = web.DataReader("aapl", 'yahoo', datetime(2008, 8, 15), datetime(2008, 10, 15))
-        fig = FF.create_ohlc(df.Open, df.High, df.Low, df.Close, dates=df.index)
+        df = web.DataReader("aapl", 'yahoo', datetime(2008, 8, 15),
+                            datetime(2008, 10, 15))
+        fig = FF.create_ohlc(df.Open, df.High, df.Low, df.Close,
+                             dates=df.index)
 
-        # Update the fig - all options here: https://plot.ly/python/reference/#Layout
+        # Update the fig - See https://plot.ly/python/reference/#Layout
         fig['layout'].update({
             'title': 'The Great Recession',
             'yaxis': {'title': 'AAPL Stock'},
@@ -557,17 +561,20 @@ class FigureFactory(object):
 
         import pandas.io.data as web
 
-        df = web.DataReader("aapl", 'yahoo', datetime(2008, 1, 1), datetime(2009, 4, 1))
+        df = web.DataReader("aapl", 'yahoo', datetime(2008, 1, 1),
+                            datetime(2009, 4, 1))
 
         # Make increasing ohlc sticks and customize their color and name
-        fig_increasing = FF.create_ohlc(df.Open, df.High, df.Low, df.Close, dates=df.index,
+        fig_increasing = FF.create_ohlc(df.Open, df.High, df.Low, df.Close,
+                                        dates=df.index,
             direction='increasing', name='AAPL',
             line=Line(color='rgb(150, 200, 250)'))
 
         # Make decreasing ohlc sticks and customize their color and name
-        fig_decreasing = FF.create_ohlc(df.Open, df.High, df.Low, df.Close, dates=df.index,
-            direction='decreasing',
-            line=Line(color='rgb(128, 128, 128)'))
+        fig_decreasing = FF.create_ohlc(df.Open, df.High, df.Low, df.Close,
+                                        dates=df.index,
+                                        direction='decreasing',
+                                        line=Line(color='rgb(128, 128, 128)'))
 
         # Initialize the figure
         fig = fig_increasing
@@ -608,7 +615,7 @@ class FigureFactory(object):
         else:
             FigureFactory._validate_equal_length(open, high, low, close)
         FigureFactory._validate_ohlc(open, high, low, close, direction,
-                                    **kwargs)
+                                     **kwargs)
 
         if direction is 'increasing':
             ohlc_incr = FigureFactory._make_increasing_ohlc(open, high,
@@ -750,15 +757,18 @@ class FigureFactory(object):
 
         import pandas.io.data as web
 
-        df = web.DataReader("aapl", 'yahoo', datetime(2007, 10, 1), datetime(2009, 4, 1))
-        fig = FF.create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index)
+        df = web.DataReader("aapl", 'yahoo', datetime(2007, 10, 1),
+                            datetime(2009, 4, 1))
+        fig = FF.create_candlestick(df.Open, df.High, df.Low, df.Close,
+                                    dates=df.index)
         py.plot(fig, filename='finance/aapl-candlestick', validate=False)
         ```
 
         Example 2: Add text and annotations to the candlestick chart
         ```
-        fig = FF.create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index)
-        # Update the fig - all options here: https://plot.ly/python/reference/#Layout
+        fig = FF.create_candlestick(df.Open, df.High, df.Low, df.Close,
+                                    dates=df.index)
+        # Update the fig - See https://plot.ly/python/reference/#Layout
         fig['layout'].update({
             'title': 'The Great Recession',
             'yaxis': {'title': 'AAPL Stock'},
@@ -773,7 +783,8 @@ class FigureFactory(object):
                 'text': 'Official start of the recession'
             }]
         })
-        py.plot(fig, filename='finance/aapl-recession-candlestick', validate=False)
+        py.plot(fig, filename='finance/aapl-recession-candlestick',
+                validate=False)
         ```
 
         Example 3: Customize the candlestick colors
@@ -785,19 +796,23 @@ class FigureFactory(object):
 
         import pandas.io.data as web
 
-        df = web.DataReader("aapl", 'yahoo', datetime(2008, 1, 1), datetime(2009, 4, 1))
+        df = web.DataReader("aapl", 'yahoo', datetime(2008, 1, 1),
+                            datetime(2009, 4, 1))
 
         # Make increasing candlesticks and customize their color and name
-        fig_increasing = FF.create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index,
+        fig_increasing = FF.create_candlestick(
+            df.Open, df.High, df.Low, df.Close, dates=df.index,
             direction='increasing', name='AAPL',
             marker=Marker(color='rgb(150, 200, 250)'),
-            line=Line(color='rgb(150, 200, 250)'))
+            line=Line(color='rgb(150, 200, 250)')
+        )
 
         # Make decreasing candlesticks and customize their color and name
-        fig_decreasing = FF.create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index,
-            direction='decreasing',
-            marker=Marker(color='rgb(128, 128, 128)'),
-            line=Line(color='rgb(128, 128, 128)'))
+        fig_decreasing = FF.create_candlestick(
+            df.Open, df.High, df.Low, df.Close, dates=df.index,
+            direction='decreasing', marker=Marker(color='rgb(128, 128, 128)'),
+            line=Line(color='rgb(128, 128, 128)')
+        )
 
         # Initialize the figure
         fig = fig_increasing
@@ -805,7 +820,8 @@ class FigureFactory(object):
         # Add decreasing data with .extend()
         fig['data'].extend(fig_decreasing['data'])
 
-        py.iplot(fig, filename='finance/aapl-candlestick-custom', validate=False)
+        py.iplot(fig, filename='finance/aapl-candlestick-custom',
+                 validate=False)
         ```
 
         Example 4: Candlestick chart with datetime objects
@@ -838,7 +854,7 @@ class FigureFactory(object):
         else:
             FigureFactory._validate_equal_length(open, high, low, close)
         FigureFactory._validate_ohlc(open, high, low, close, direction,
-                                    **kwargs)
+                                     **kwargs)
 
         if direction is 'increasing':
             candle_incr_data = FigureFactory._make_increasing_candle(
@@ -1075,8 +1091,8 @@ class FigureFactory(object):
                         _scipy__cluster__hierarchy_imported)
 
         if dependencies is False:
-            raise ImportError("FigureFactory.create_dendrogram requires scipy, \
-                                scipy.spatial and scipy.hierarchy")
+            raise ImportError("FigureFactory.create_dendrogram requires "
+                              "scipy, scipy.spatial and scipy.hierarchy")
 
         s = X.shape
         if len(s) != 2:
@@ -1317,8 +1333,9 @@ class _Streamline(FigureFactory):
             vi = self.value_at(self.v, xi, yi)
             return -ui * dt_ds, -vi * dt_ds
 
-        check = lambda xi, yi: (0 <= xi < len(self.x) - 1 and
-                                0 <= yi < len(self.y) - 1)
+        def check(xi, yi):
+            return 0 <= xi < len(self.x) - 1 and 0 <= yi < len(self.y) - 1
+
         xb_changes = []
         yb_changes = []
 
@@ -1579,8 +1596,8 @@ class _OHLC(FigureFactory):
         flat_increase_x = FigureFactory._flatten(self.increase_x)
         flat_increase_y = FigureFactory._flatten(self.increase_y)
         text_increase = (("Open", "Open", "High",
-                          "Low", "Close", "Close", '')
-                         * (len(self.increase_x)))
+                          "Low", "Close", "Close", '') *
+                         (len(self.increase_x)))
 
         return flat_increase_x, flat_increase_y, text_increase
 
@@ -1595,8 +1612,8 @@ class _OHLC(FigureFactory):
         flat_decrease_x = FigureFactory._flatten(self.decrease_x)
         flat_decrease_y = FigureFactory._flatten(self.decrease_y)
         text_decrease = (("Open", "Open", "High",
-                          "Low", "Close", "Close", '')
-                         * (len(self.decrease_x)))
+                          "Low", "Close", "Close", '') *
+                         (len(self.decrease_x)))
 
         return flat_decrease_x, flat_decrease_y, text_decrease
 
@@ -1736,8 +1753,8 @@ class _Distplot(FigureFactory):
         curve = [None] * self.trace_number
         for index in range(self.trace_number):
             self.curve_x[index] = [self.start[index] +
-                                   x * (self.end[index] - self.start[index])
-                                   / 500 for x in range(500)]
+                                   x * (self.end[index] - self.start[index]) /
+                                   500 for x in range(500)]
             self.curve_y[index] = (scipy.stats.gaussian_kde
                                    (self.hist_data[index])
                                    (self.curve_x[index]))
@@ -1772,8 +1789,8 @@ class _Distplot(FigureFactory):
             mean[index], sd[index] = (scipy.stats.norm.fit
                                       (self.hist_data[index]))
             self.curve_x[index] = [self.start[index] +
-                                   x * (self.end[index] - self.start[index])
-                                   / 500 for x in range(500)]
+                                   x * (self.end[index] - self.start[index]) /
+                                   500 for x in range(500)]
             self.curve_y[index] = scipy.stats.norm.pdf(
                 self.curve_x[index], loc=mean[index], scale=sd[index])
             self.curve_y[index] *= self.bin_size
