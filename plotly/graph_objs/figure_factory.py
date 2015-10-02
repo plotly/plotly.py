@@ -1098,8 +1098,8 @@ class FigureFactory(object):
 
         dendrogram = _Dendrogram(X, orientation, labels, colorscale)
 
-        return {'layout': dendrogram.layout,
-                'data': dendrogram.data}
+        return GraphObjectFactory.create('figure', data=dendrogram.data,
+                                         layout=dendrogram.layout)
 
 
 class _Quiver(FigureFactory):
