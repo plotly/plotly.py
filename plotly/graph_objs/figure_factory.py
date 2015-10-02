@@ -6,21 +6,8 @@ Helper methods for creating non-standardized Plotly traces/figures.
 import math
 from collections import OrderedDict
 
-from plotly import exceptions
+from plotly import exceptions, optional_imports
 from plotly.graph_objs.graph_objs import GraphObjectFactory
-from plotly.tools import (_numpy_imported, _scipy_imported,
-                          _scipy__spatial_imported,
-                          _scipy__cluster__hierarchy_imported)
-
-if _scipy_imported:
-    import scipy
-    import scipy as scp
-if _numpy_imported:
-    import numpy as np
-if _scipy__spatial_imported:
-    import scipy.spatial as scs
-if _scipy__cluster__hierarchy_imported:
-    import scipy.cluster.hierarchy as sch
 
 
 # Default colours for finance charts
@@ -106,16 +93,13 @@ class FigureFactory(object):
         :raises: (PlotlyError) If curve_type is not valid (i.e. not 'kde' or
             'normal').
         """
-        try:
-            import pandas as pd
-            _pandas_imported = True
-        except ImportError:
-            _pandas_imported = False
+        pd = optional_imports.get_module('pandas')
+        np = optional_imports.get_module('numpy')
 
         hist_data_types = (list,)
-        if _numpy_imported:
+        if np:
             hist_data_types += (np.ndarray,)
-        if _pandas_imported:
+        if pd:
             hist_data_types += (pd.core.series.Series,)
 
         if not isinstance(hist_data[0], hist_data_types):
@@ -131,8 +115,8 @@ class FigureFactory(object):
             raise exceptions.PlotlyError("curve_type must be defined as "
                                          "'kde' or 'normal'")
 
-        if _scipy_imported is False:
-            raise ImportError("FigureFactory.create_distplot requires scipy")
+        msg = 'FigureFactory.create_distplot requires scipy'
+        optional_imports.get_module('scipy', raise_exc=True, msg=msg)
 
     @staticmethod
     def _validate_positive_scalars(**kwargs):
@@ -165,8 +149,8 @@ class FigureFactory(object):
         :raises: (PlotlyError) If x is not evenly spaced.
         :raises: (PlotlyError) If y is not evenly spaced.
         """
-        if _numpy_imported is False:
-            raise ImportError("FigureFactory.create_streamline requires numpy")
+        msg = 'FigureFactory.create_streamline requires numpy'
+        optional_imports.get_module('numpy', raise_exc=True, msg=msg)
         for index in range(len(x) - 1):
             if ((x[index + 1] - x[index]) - (x[1] - x[0])) > .0001:
                 raise exceptions.PlotlyError("x must be a 1 dimensional, "
@@ -1085,13 +1069,10 @@ class FigureFactory(object):
         ```
 
         """
-        dependencies = (_scipy_imported and _scipy__spatial_imported and
-                        _scipy__cluster__hierarchy_imported)
-
-        if dependencies is False:
-            raise ImportError("FigureFactory.create_dendrogram requires "
-                              "scipy, scipy.spatial and scipy.hierarchy")
-
+        msg = ('FigureFactory.create_dendrogram requires scipy, scipy.spatial '
+               'and scipy.hierarchy')
+        for module in ['scipy', 'scipy.spatial', 'scipy.cluster.hierarchy']:
+            optional_imports.get_module(module, raise_exc=True, msg=msg)
         s = X.shape
         if len(s) != 2:
             exceptions.PlotlyError("X should be 2-dimensional array.")
@@ -1253,6 +1234,7 @@ class _Streamline(FigureFactory):
     def __init__(self, x, y, u, v,
                  density, angle,
                  arrow_scale, **kwargs):
+        np = optional_imports.get_module('numpy', raise_exc=True)
         self.x = np.array(x)
         self.y = np.array(y)
         self.u = np.array(u)
@@ -1296,6 +1278,7 @@ class _Streamline(FigureFactory):
         """
         Set up for RK4 function, based on Bokeh's streamline code
         """
+        np = optional_imports.get_module('numpy', raise_exc=True)
         if isinstance(xi, np.ndarray):
             self.x = xi.astype(np.int)
             self.y = yi.astype(np.int)
@@ -1412,6 +1395,7 @@ class _Streamline(FigureFactory):
         """
         Get streamlines by building trajectory set.
         """
+        np = optional_imports.get_module('numpy', raise_exc=True)
         for indent in range(self.density // 2):
             for xi in range(self.density - 2 * indent):
                 self.traj(xi + indent, indent)
@@ -1442,6 +1426,7 @@ class _Streamline(FigureFactory):
         :rtype (list, list) arrows_x: x-values to create arrowhead and
             arrows_y: y-values to create arrowhead
         """
+        np = optional_imports.get_module('numpy', raise_exc=True)
         arrow_end_x = np.empty((len(self.st_x)))
         arrow_end_y = np.empty((len(self.st_y)))
         arrow_start_x = np.empty((len(self.st_x)))
@@ -1743,12 +1728,14 @@ class _Distplot(FigureFactory):
 
         :rtype (list) curve: list of kde representations
         """
+        scipy__stats = optional_imports.get_module('scipy.stats',
+                                                   raise_exc=True)
         curve = [None] * self.trace_number
         for index in range(self.trace_number):
             self.curve_x[index] = [self.start[index] +
                                    x * (self.end[index] - self.start[index]) /
                                    500 for x in range(500)]
-            self.curve_y[index] = (scipy.stats.gaussian_kde
+            self.curve_y[index] = (scipy__stats.gaussian_kde
                                    (self.hist_data[index])
                                    (self.curve_x[index]))
             self.curve_y[index] *= self.bin_size
@@ -1774,6 +1761,7 @@ class _Distplot(FigureFactory):
 
         :rtype (list) curve: list of normal curve representations
         """
+        scipy = optional_imports.get_module('scipy', raise_exc=True)
         curve = [None] * self.trace_number
         mean = [None] * self.trace_number
         sd = [None] * self.trace_number
@@ -1978,6 +1966,11 @@ class _Dendrogram(FigureFactory):
             (e) P['leaves']: left-to-right traversal of the leaves
 
         """
+        np = optional_imports.get_module('numpy', raise_exc=True)
+        scp = optional_imports.get_module('scipy', raise_exc=True)
+        scs = optional_imports.get_module('scipy.spatial', raise_exc=True)
+        sch = optional_imports.get_module('scipy.cluster.hierarchy',
+                                          raise_exc=True)
         d = scs.distance.pdist(X)
         Z = sch.linkage(d, method='complete')
         P = sch.dendrogram(Z, orientation=self.orientation,

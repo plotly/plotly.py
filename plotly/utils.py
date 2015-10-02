@@ -15,26 +15,8 @@ import threading
 
 import pytz
 
-
-from . exceptions import PlotlyError
-
-try:
-    import numpy
-    _numpy_imported = True
-except ImportError:
-    _numpy_imported = False
-
-try:
-    import pandas
-    _pandas_imported = True
-except ImportError:
-    _pandas_imported = False
-
-try:
-    import sage.all
-    _sage_imported = True
-except ImportError:
-    _sage_imported = False
+from plotly import optional_imports
+from plotly.exceptions import PlotlyError
 
 
 ### incase people are using threading, we lock file reads
@@ -229,7 +211,8 @@ class PlotlyJSONEncoder(json.JSONEncoder):
     @staticmethod
     def encode_as_sage(obj):
         """Attempt to convert sage.all.RR to floats and sage.all.ZZ to ints"""
-        if not _sage_imported:
+        sage = optional_imports.get_module('sage')
+        if not sage:
             raise NotEncodable
 
         if obj in sage.all.RR:
@@ -242,7 +225,8 @@ class PlotlyJSONEncoder(json.JSONEncoder):
     @staticmethod
     def encode_as_pandas(obj):
         """Attempt to convert pandas.NaT"""
-        if not _pandas_imported:
+        pandas = optional_imports.get_module('pandas')
+        if not pandas:
             raise NotEncodable
 
         if obj is pandas.NaT:
@@ -253,7 +237,8 @@ class PlotlyJSONEncoder(json.JSONEncoder):
     @staticmethod
     def encode_as_numpy(obj):
         """Attempt to convert numpy.ma.core.masked"""
-        if not _numpy_imported:
+        numpy = optional_imports.get_module('numpy')
+        if not numpy:
             raise NotEncodable
 
         if obj is numpy.ma.core.masked:

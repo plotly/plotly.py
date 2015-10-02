@@ -11,7 +11,7 @@ import uuid
 
 import requests
 
-from plotly import session, tools, utils
+from plotly import session, tools, utils, optional_imports
 from plotly.exceptions import PlotlyError
 
 PLOTLY_OFFLINE_DIRECTORY = plotlyjs_path = os.path.expanduser(
@@ -51,9 +51,9 @@ def init_notebook_mode():
     to load the necessary javascript files for creating
     Plotly graphs with plotly.offline.iplot.
     """
-    if not tools._ipython_imported:
-        raise ImportError('`iplot` can only run inside an IPython Notebook.')
-    from IPython.display import HTML, display
+    msg = '`iplot` can only run inside an IPython Notebook.'
+    IPython__display = optional_imports.get_module('IPython.display',
+                                                   raise_exc=True, msg=msg)
 
     if not os.path.exists(PLOTLY_OFFLINE_BUNDLE):
         raise PlotlyError('Plotly Offline source file at {source_path} '
@@ -68,8 +68,10 @@ def init_notebook_mode():
 
     global __PLOTLY_OFFLINE_INITIALIZED
     __PLOTLY_OFFLINE_INITIALIZED = True
-    display(HTML('<script type="text/javascript">' +
-                 open(PLOTLY_OFFLINE_BUNDLE).read() + '</script>'))
+    IPython__display.display(IPython__display.HTML(
+        '<script type="text/javascript">' +
+        open(PLOTLY_OFFLINE_BUNDLE).read() + '</script>'
+    ))
 
 
 def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly'):
@@ -108,10 +110,10 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly'):
             'plotly.offline.init_notebook_mode() '
             '# run at the start of every ipython notebook',
         ]))
-    if not tools._ipython_imported:
-        raise ImportError('`iplot` can only run inside an IPython Notebook.')
+    msg = '`iplot` can only run inside an IPython Notebook.'
+    IPython__display = optional_imports.get_module('IPython.display',
+                                                   raise_exc=True, msg=msg)
 
-    from IPython.display import HTML, display
     if isinstance(figure_or_data, dict):
         data = figure_or_data['data']
         layout = figure_or_data.get('layout', {})
@@ -152,7 +154,7 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly'):
             .replace('http://', '')
         link_text = link_text.replace('plot.ly', link_domain)
 
-    display(HTML(
+    IPython__display.display(IPython__display.HTML(
         '<script type="text/javascript">'
         'window.PLOTLYENV=window.PLOTLYENV || {};'
         'window.PLOTLYENV.BASE_URL="' + plotly_platform_url + '";'
@@ -169,17 +171,17 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly'):
               layout=jlayout,
               link_text=link_text)
 
-    display(HTML(''
-                 '<div class="{id} loading" style="color: rgb(50,50,50);">'
-                 'Drawing...</div>'
-                 '<div id="{id}" style="height: {height}; width: {width};" '
-                 'class="plotly-graph-div">'
-                 '</div>'
-                 '<script type="text/javascript">'
-                 '{script}'
-                 '</script>'
-                 ''.format(id=plotdivid, script=script,
-                           height=height, width=width)))
+    IPython__display.display(IPython__display.HTML(
+        '<div class="{id} loading" style="color: rgb(50,50,50);">'
+        'Drawing...</div>'
+        '<div id="{id}" style="height: {height}; width: {width};" '
+        'class="plotly-graph-div">'
+        '</div>'
+        '<script type="text/javascript">'
+        '{script}'
+        '</script>'
+        ''.format(id=plotdivid, script=script, height=height, width=width)
+    ))
 
 
 def plot():
