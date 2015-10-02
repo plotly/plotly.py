@@ -1398,7 +1398,7 @@ class _Streamline(FigureFactory):
         Integrate trajectories
 
         :param (int) xb: results of passing xi through self.blank_pos
-        :param (int) xy: results of passing yi through self.blank_pos
+        :param (int) yb: results of passing yi through self.blank_pos
 
         Calculate each trajectory based on rk4 integrate method.
         """
@@ -1441,11 +1441,6 @@ class _Streamline(FigureFactory):
         Gets angle of streamline at 1/3 mark and creates arrow coordinates
         based off of user defined angle and arrow_scale.
 
-        :param (array) st_x: x-values for all streamlines
-        :param (array) st_y: y-values for all streamlines
-        :param (angle in radians) angle: angle of arrowhead. Default = pi/9
-        :param (float in [0,1]) arrow_scale: value to scale length of arrowhead
-            Default = .09
         :rtype (list, list) arrows_x: x-values to create arrowhead and
             arrows_y: y-values to create arrowhead
         """
