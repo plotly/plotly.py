@@ -877,7 +877,7 @@ class FigureFactory(object):
     @staticmethod
     def create_distplot(hist_data, group_labels,
                         bin_size=1., curve_type='kde',
-                        colors=[], rug_text=[],
+                        colors=None, rug_text=None,
                         show_hist=True, show_curve=True,
                         show_rug=True):
         """
@@ -992,6 +992,8 @@ class FigureFactory(object):
                                     validate=False)
         ```
         """
+        colors = colors if colors is not None else []
+        rug_text = rug_text if rug_text is not None else []
         FigureFactory._validate_distplot(hist_data, curve_type)
         FigureFactory._validate_equal_length(hist_data, group_labels)
 
