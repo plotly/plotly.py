@@ -217,7 +217,7 @@ class FigureFactory(object):
         Example 1: Trivial Quiver
         ```
         import plotly.plotly as py
-        from plotly.tools import FigureFactory as FF
+        from plotly.graph_objs.figure_factory import FigureFactory as FF
 
         import math
 
@@ -232,7 +232,7 @@ class FigureFactory(object):
         Example 2: Quiver plot using meshgrid
         ```
         import plotly.plotly as py
-        from plotly.tools import FigureFactory as FF
+        from plotly.graph_objs.figure_factory import FigureFactory as FF
 
         import numpy as np
         import math
@@ -252,7 +252,7 @@ class FigureFactory(object):
         Example 3: Styling the quiver plot
         ```
         import plotly.plotly as py
-        from plotly.tools import FigureFactory as FF
+        from plotly.graph_objs.figure_factory import FigureFactory as FF
         import numpy as np
         import math
 
@@ -319,7 +319,7 @@ class FigureFactory(object):
         Example 1: Plot simple streamline and increase arrow size
         ```
         import plotly.plotly as py
-        from plotly.tools import FigureFactory as FF
+        from plotly.graph_objs.figure_factory import FigureFactory as FF
 
         import numpy as np
         import math
@@ -344,7 +344,7 @@ class FigureFactory(object):
         Example 2: from nbviewer.ipython.org/github/barbagroup/AeroPython
         ```
         import plotly.plotly as py
-        from plotly.tools import FigureFactory as FF
+        from plotly.graph_objs.figure_factory import FigureFactory as FF
 
         import numpy as np
         import math
@@ -504,7 +504,7 @@ class FigureFactory(object):
         Example 1: Simple OHLC chart from a Pandas DataFrame
         ```
         import plotly.plotly as py
-        from plotly.tools import FigureFactory as FF
+        from plotly.graph_objs.figure_factory import FigureFactory as FF
         from datetime import datetime
 
         import pandas.io.data as web
@@ -520,7 +520,7 @@ class FigureFactory(object):
         Example 2: Add text and annotations to the OHLC chart
         ```
         import plotly.plotly as py
-        from plotly.tools import FigureFactory as FF
+        from plotly.graph_objs.figure_factory import FigureFactory as FF
         from datetime import datetime
 
         import pandas.io.data as web
@@ -553,7 +553,7 @@ class FigureFactory(object):
         Example 3: Customize the OHLC colors
         ```
         import plotly.plotly as py
-        from plotly.tools import FigureFactory as FF
+        from plotly.graph_objs.figure_factory import FigureFactory as FF
         from plotly.graph_objs import Line, Marker
         from datetime import datetime
 
@@ -586,7 +586,7 @@ class FigureFactory(object):
         Example 4: OHLC chart with datetime objects
         ```
         import plotly.plotly as py
-        from plotly.tools import FigureFactory as FF
+        from plotly.graph_objs.figure_factory import FigureFactory as FF
 
         from datetime import datetime
 
@@ -749,7 +749,7 @@ class FigureFactory(object):
         Example 1: Simple candlestick chart from a Pandas DataFrame
         ```
         import plotly.plotly as py
-        from plotly.tools import FigureFactory as FF
+        from plotly.graph_objs.figure_factory import FigureFactory as FF
         from datetime import datetime
 
         import pandas.io.data as web
@@ -787,7 +787,7 @@ class FigureFactory(object):
         Example 3: Customize the candlestick colors
         ```
         import plotly.plotly as py
-        from plotly.tools import FigureFactory as FF
+        from plotly.graph_objs.figure_factory import FigureFactory as FF
         from plotly.graph_objs import Line, Marker
         from datetime import datetime
 
@@ -824,7 +824,7 @@ class FigureFactory(object):
         Example 4: Candlestick chart with datetime objects
         ```
         import plotly.plotly as py
-        from plotly.tools import FigureFactory as FF
+        from plotly.graph_objs.figure_factory import FigureFactory as FF
 
         from datetime import datetime
 
@@ -899,7 +899,7 @@ class FigureFactory(object):
         Example 1: Simple distplot of 1 data set
         ```
         import plotly.plotly as py
-        from plotly.tools import FigureFactory as FF
+        from plotly.graph_objs.figure_factory import FigureFactory as FF
 
         hist_data = [[1.1, 1.1, 2.5, 3.0, 3.5,
                       3.5, 4.1, 4.4, 4.5, 4.5,
@@ -916,7 +916,7 @@ class FigureFactory(object):
         Example 2: Two data sets and added rug text
         ```
         import plotly.plotly as py
-        from plotly.tools import FigureFactory as FF
+        from plotly.graph_objs.figure_factory import FigureFactory as FF
 
         # Add histogram data
         hist1_x = [0.8, 1.2, 0.2, 0.6, 1.6,
@@ -957,7 +957,7 @@ class FigureFactory(object):
         Example 3: Plot with normal curve and hide rug plot
         ```
         import plotly.plotly as py
-        from plotly.tools import FigureFactory as FF
+        from plotly.graph_objs.figure_factory import FigureFactory as FF
         import numpy as np
 
         x1 = np.random.randn(190)
@@ -977,7 +977,7 @@ class FigureFactory(object):
         Example 4: Distplot with Pandas
         ```
         import plotly.plotly as py
-        from plotly.tools import FigureFactory as FF
+        from plotly.graph_objs.figure_factory import FigureFactory as FF
         import numpy as np
         import pandas as pd
 
@@ -1067,7 +1067,7 @@ class FigureFactory(object):
         import numpy as np
 
         import plotly.plotly as py
-        from plotly.tools import FigureFactory as FF
+        from plotly.graph_objs.figure_factory import FigureFactory as FF
 
         X = np.random.rand(5,5)
         dendro = FF.create_dendrogram(X)
