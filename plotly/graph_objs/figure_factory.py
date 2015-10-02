@@ -1140,8 +1140,8 @@ class _Quiver(FigureFactory):
         self.end_x = []
         self.end_y = []
         self.scale_uv()
-        barb_x, barb_y = self.get_barbs()
-        arrow_x, arrow_y = self.get_quiver_arrows()
+        self.get_barbs()
+        self.get_quiver_arrows()
 
     def scale_uv(self):
         """
@@ -1284,8 +1284,8 @@ class _Streamline(FigureFactory):
         self.st_x = []
         self.st_y = []
         self.get_streamlines()
-        streamline_x, streamline_y = self.sum_streamlines()
-        arrows_x, arrows_y = self.get_streamline_arrows()
+        self.sum_streamlines()
+        self.get_streamline_arrows()
 
     def blank_pos(self, xi, yi):
         """
