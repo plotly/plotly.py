@@ -1353,7 +1353,7 @@ def add_share_key_to_url(plot_url, attempt=0):
     if access_res.status_code == 404:
         attempt += 1
         if attempt == 5:
-            break
+            return plot_url
         plot_url = add_share_key_to_url(plot_url.split('?')[0], attempt)
 
     return plot_url
