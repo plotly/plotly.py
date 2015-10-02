@@ -1463,8 +1463,8 @@ class _Streamline(FigureFactory):
 
         streamline_ang = np.arctan(dif_y / dif_x)
 
-        ang1 = streamline_ang + (self.angle)
-        ang2 = streamline_ang - (self.angle)
+        ang1 = streamline_ang + self.angle
+        ang2 = streamline_ang - self.angle
 
         seg1_x = np.cos(ang1) * self.arrow_scale
         seg1_y = np.sin(ang1) * self.arrow_scale
