@@ -1,3 +1,4 @@
+# coding=utf-8
 """
 Helper methods for creating non-standardized Plotly traces/figures.
 
