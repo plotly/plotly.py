@@ -7,7 +7,7 @@ import math
 from collections import OrderedDict
 
 from plotly import exceptions
-from plotly.graph_objs import graph_objs
+from plotly.graph_objs.graph_objs import GraphObjectFactory
 from plotly.tools import (_numpy_imported, _scipy_imported,
                           _scipy__spatial_imported,
                           _scipy__cluster__hierarchy_imported)
@@ -284,14 +284,13 @@ class FigureFactory(object):
                                  arrow_scale, angle).get_barbs()
         arrow_x, arrow_y = _Quiver(x, y, u, v, scale,
                                    arrow_scale, angle).get_quiver_arrows()
-        quiver = graph_objs.Scatter(x=barb_x + arrow_x,
-                                    y=barb_y + arrow_y,
-                                    mode='lines', **kwargs)
+        quiver = dict(x=barb_x + arrow_x, y=barb_y + arrow_y,
+                      mode='lines', **kwargs)
 
         data = [quiver]
-        layout = graph_objs.Layout(hovermode='closest')
+        layout = dict(hovermode='closest')
 
-        return graph_objs.Figure(data=data, layout=layout)
+        return GraphObjectFactory.create('figure', data=data, layout=layout)
 
     @staticmethod
     def create_streamline(x, y, u, v,
@@ -381,7 +380,7 @@ class FigureFactory(object):
         FigureFactory._validate_equal_length(u, v)
         FigureFactory._validate_streamline(x, y)
         FigureFactory._validate_positive_scalars(density=density,
-                                                arrow_scale=arrow_scale)
+                                                 arrow_scale=arrow_scale)
 
         streamline_x, streamline_y = _Streamline(x, y, u, v,
                                                  density, angle,
@@ -390,14 +389,13 @@ class FigureFactory(object):
                                        density, angle,
                                        arrow_scale).get_streamline_arrows()
 
-        streamline = graph_objs.Scatter(x=streamline_x + arrow_x,
-                                        y=streamline_y + arrow_y,
-                                        mode='lines', **kwargs)
+        streamline = dict(x=streamline_x + arrow_x, y=streamline_y + arrow_y,
+                          mode='lines', **kwargs)
 
         data = [streamline]
-        layout = graph_objs.Layout(hovermode='closest')
+        layout = dict(hovermode='closest')
 
-        return graph_objs.Figure(data=data, layout=layout)
+        return GraphObjectFactory.create('figure', data=data, layout=layout)
 
     @staticmethod
     def _make_increasing_ohlc(open, high, low, close, dates, **kwargs):
@@ -636,10 +634,9 @@ class FigureFactory(object):
                                                             dates, **kwargs)
             data = [ohlc_incr, ohlc_decr]
 
-        layout = graph_objs.Layout(xaxis=dict(zeroline=False),
-                                   hovermode='closest')
+        layout = dict(xaxis=dict(zeroline=False), hovermode='closest')
 
-        return graph_objs.Figure(data=data, layout=layout)
+        return GraphObjectFactory.create('figure', data=data, layout=layout)
 
     @staticmethod
     def _make_increasing_candle(open, high, low, close, dates, **kwargs):
@@ -871,8 +868,7 @@ class FigureFactory(object):
                 open, high, low, close, dates, **kwargs)
             data = candle_incr_data + candle_decr_data
 
-        layout = graph_objs.Layout()
-        return graph_objs.Figure(data=data, layout=layout)
+        return GraphObjectFactory.create('figure', data=data, layout={})
 
     @staticmethod
     def create_distplot(hist_data, group_labels,
@@ -1025,7 +1021,7 @@ class FigureFactory(object):
             data.append(curve)
         if show_rug:
             data.append(rug)
-            layout = graph_objs.Layout(
+            layout = dict(
                 barmode='overlay',
                 hovermode='closest',
                 legend=dict(traceorder='reversed'),
@@ -1040,7 +1036,7 @@ class FigureFactory(object):
                             dtick=1,
                             showticklabels=False))
         else:
-            layout = graph_objs.Layout(
+            layout = dict(
                 barmode='overlay',
                 hovermode='closest',
                 legend=dict(traceorder='reversed'),
@@ -1052,7 +1048,7 @@ class FigureFactory(object):
                             position=0.0))
 
         data = sum(data, [])
-        return graph_objs.Figure(data=data, layout=layout)
+        return GraphObjectFactory.create('figure', data=data, layout=layout)
 
     @staticmethod
     def create_dendrogram(X, orientation="bottom", labels=None,
@@ -1872,7 +1868,7 @@ class _Dendrogram(FigureFactory):
         self.zero_vals.sort()
 
         self.layout = self.set_figure_layout(width, height)
-        self.data = graph_objs.Data(dd_traces)
+        self.data = list(dd_traces)
 
     def get_color_dict(self, colorscale):
         """
@@ -2007,11 +2003,11 @@ class _Dendrogram(FigureFactory):
             else:
                 ys = icoord[i]
             color_key = color_list[i]
-            trace = graph_objs.Scatter(
+            trace = dict(
                 x=np.multiply(self.sign[self.xaxis], xs),
                 y=np.multiply(self.sign[self.yaxis], ys),
                 mode='lines',
-                marker=graph_objs.Marker(color=colors[color_key])
+                marker=dict(color=colors[color_key])
             )
 
             try:
