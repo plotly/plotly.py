@@ -6,6 +6,7 @@ import math
 from collections import OrderedDict
 
 from plotly import exceptions
+from plotly.graph_objs import graph_objs
 from plotly.tools import (_numpy_imported, _scipy_imported,
                           _scipy__spatial_imported,
                           _scipy__cluster__hierarchy_imported)
@@ -274,8 +275,6 @@ class FigureFactory(object):
         py.plot(fig, filename='quiver')
         ```
         """
-        # TODO: protected until #282
-        from plotly.graph_objs import graph_objs
         FigureFactory._validate_equal_length(x, y, u, v)
         FigureFactory._validate_positive_scalars(arrow_scale=arrow_scale,
                                                  scale=scale)
@@ -377,8 +376,6 @@ class FigureFactory(object):
         py.plot(fig, filename='streamline')
         ```
         """
-        # TODO: protected until #282
-        from plotly.graph_objs import graph_objs
         FigureFactory._validate_equal_length(x, y)
         FigureFactory._validate_equal_length(u, v)
         FigureFactory._validate_streamline(x, y)
@@ -605,8 +602,6 @@ class FigureFactory(object):
         py.iplot(fig, filename='finance/simple-ohlc', validate=False)
         ```
         """
-        # TODO: protected until #282
-        from plotly.graph_objs import graph_objs
         if dates is not None:
             FigureFactory._validate_equal_length(open, high, low, close, dates)
         else:
@@ -837,8 +832,6 @@ class FigureFactory(object):
         py.iplot(fig, filename='finance/simple-candlestick', validate=False)
         ```
         """
-        # TODO: protected until #282
-        from plotly.graph_objs import graph_objs
         if dates is not None:
             FigureFactory._validate_equal_length(open, high, low, close, dates)
         else:
@@ -982,8 +975,6 @@ class FigureFactory(object):
                                     validate=False)
         ```
         """
-        # TODO: protected until #282
-        from plotly.graph_objs import graph_objs
         FigureFactory._validate_distplot(hist_data, curve_type)
         FigureFactory._validate_equal_length(hist_data, group_labels)
 
@@ -1831,8 +1822,6 @@ class _Dendrogram(FigureFactory):
 
     def __init__(self, X, orientation='bottom', labels=None, colorscale=None,
                  width="100%", height="100%", xaxis='xaxis', yaxis='yaxis'):
-        # TODO: protected until #282
-        from plotly.graph_objs import graph_objs
         self.orientation = orientation
         self.labels = labels
         self.xaxis = xaxis
@@ -1979,8 +1968,6 @@ class _Dendrogram(FigureFactory):
             (e) P['leaves']: left-to-right traversal of the leaves
 
         """
-        # TODO: protected until #282
-        from plotly.graph_objs import graph_objs
         d = scs.distance.pdist(X)
         Z = sch.linkage(d, method='complete')
         P = sch.dendrogram(Z, orientation=self.orientation,
@@ -1993,7 +1980,6 @@ class _Dendrogram(FigureFactory):
         colors = self.get_color_dict(colorscale)
 
         trace_list = []
-
         for i in range(len(icoord)):
             # xs and ys are arrays of 4 points that make up the '∩' shapes
             # of the dendrogram tree
