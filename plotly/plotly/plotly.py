@@ -1348,6 +1348,7 @@ def add_share_key_to_url(plot_url, attempt=0):
 
     # sometimes a share key is added, but access is still denied
     # check for access, and retry a couple of times if this is the case
+    # https://github.com/plotly/streambed/issues/4089
     embed_url = plot_url.split('?')[0] + '.embed' + plot_url.split('?')[1]
     access_res = requests.get(embed_url)
     if access_res.status_code == 404:
