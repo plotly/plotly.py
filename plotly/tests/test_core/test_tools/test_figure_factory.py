@@ -3,6 +3,7 @@ from unittest import TestCase
 
 import datetime
 from nose.tools import raises
+import plotly.graph_objs.figure_factory
 import plotly.tools as tls
 from plotly.exceptions import PlotlyError
 from plotly.graph_objs import graph_objs
@@ -15,7 +16,7 @@ class TestQuiver(TestCase):
         # check: PlotlyError if x and y are not the same length
 
         kwargs = {'x': [1, 2], 'y': [1], 'u': [1, 2], 'v': [1, 2]}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_quiver,
+        self.assertRaises(PlotlyError, plotly.graph_objs.figure_factory.FigureFactory.create_quiver,
                           **kwargs)
 
     def test_wrong_scale(self):
@@ -25,13 +26,13 @@ class TestQuiver(TestCase):
         kwargs = {'x': [1, 2], 'y': [1, 2],
                   'u': [1, 2], 'v': [1, 2],
                   'scale': -1}
-        self.assertRaises(ValueError, tls.FigureFactory.create_quiver,
+        self.assertRaises(ValueError, plotly.graph_objs.figure_factory.FigureFactory.create_quiver,
                           **kwargs)
 
         kwargs = {'x': [1, 2], 'y': [1, 2],
                   'u': [1, 2], 'v': [1, 2],
                   'scale': 0}
-        self.assertRaises(ValueError, tls.FigureFactory.create_quiver,
+        self.assertRaises(ValueError, plotly.graph_objs.figure_factory.FigureFactory.create_quiver,
                           **kwargs)
 
     def test_wrong_arrow_scale(self):
@@ -41,20 +42,20 @@ class TestQuiver(TestCase):
         kwargs = {'x': [1, 2], 'y': [1, 2],
                   'u': [1, 2], 'v': [1, 2],
                   'arrow_scale': -1}
-        self.assertRaises(ValueError, tls.FigureFactory.create_quiver,
+        self.assertRaises(ValueError, plotly.graph_objs.figure_factory.FigureFactory.create_quiver,
                           **kwargs)
 
         kwargs = {'x': [1, 2], 'y': [1, 2],
                   'u': [1, 2], 'v': [1, 2],
                   'arrow_scale': 0}
-        self.assertRaises(ValueError, tls.FigureFactory.create_quiver,
+        self.assertRaises(ValueError, plotly.graph_objs.figure_factory.FigureFactory.create_quiver,
                           **kwargs)
 
     def test_one_arrow(self):
 
         # we should be able to create a single arrow using create_quiver
 
-        quiver = tls.FigureFactory.create_quiver(x=[1], y=[1],
+        quiver = plotly.graph_objs.figure_factory.FigureFactory.create_quiver(x=[1], y=[1],
                                                  u=[1], v=[1],
                                                  scale=1)
         expected_quiver = {
@@ -72,7 +73,7 @@ class TestQuiver(TestCase):
         # we should be able to create 2 arrows and change the arrow_scale,
         # angle, and arrow using create_quiver
 
-        quiver = tls.FigureFactory.create_quiver(x=[1, 2],
+        quiver = plotly.graph_objs.figure_factory.FigureFactory.create_quiver(x=[1, 2],
                                                  y=[1, 2],
                                                  u=[math.cos(1),
                                                     math.cos(2)],
@@ -127,27 +128,27 @@ class TestFinanceCharts(TestCase):
         kwargs = {'open': [1], 'high': [1, 3],
                   'low': [1, 2], 'close': [1, 2],
                   'direction': ['increasing']}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_ohlc, **kwargs)
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_candlestick,
+        self.assertRaises(PlotlyError, plotly.graph_objs.figure_factory.FigureFactory.create_ohlc, **kwargs)
+        self.assertRaises(PlotlyError, plotly.graph_objs.figure_factory.FigureFactory.create_candlestick,
                           **kwargs)
 
         kwargs = {'open': [1, 2], 'high': [1, 2, 3],
                   'low': [1, 2], 'close': [1, 2],
                   'direction': ['decreasing']}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_ohlc, **kwargs)
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_candlestick,
+        self.assertRaises(PlotlyError, plotly.graph_objs.figure_factory.FigureFactory.create_ohlc, **kwargs)
+        self.assertRaises(PlotlyError, plotly.graph_objs.figure_factory.FigureFactory.create_candlestick,
                           **kwargs)
 
         kwargs = {'open': [1, 2], 'high': [2, 3],
                   'low': [0], 'close': [1, 3]}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_ohlc, **kwargs)
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_candlestick,
+        self.assertRaises(PlotlyError, plotly.graph_objs.figure_factory.FigureFactory.create_ohlc, **kwargs)
+        self.assertRaises(PlotlyError, plotly.graph_objs.figure_factory.FigureFactory.create_candlestick,
                           **kwargs)
 
         kwargs = {'open': [1, 2], 'high': [2, 3],
                   'low': [1, 2], 'close': [1]}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_ohlc, **kwargs)
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_candlestick,
+        self.assertRaises(PlotlyError, plotly.graph_objs.figure_factory.FigureFactory.create_ohlc, **kwargs)
+        self.assertRaises(PlotlyError, plotly.graph_objs.figure_factory.FigureFactory.create_candlestick,
                           **kwargs)
 
     def test_direction_arg(self):
@@ -162,11 +163,11 @@ class TestFinanceCharts(TestCase):
         self.assertRaisesRegexp(PlotlyError,
                                 "direction must be defined as "
                                 "'increasing', 'decreasing', or 'both'",
-                                tls.FigureFactory.create_ohlc, **kwargs)
+                                plotly.graph_objs.figure_factory.FigureFactory.create_ohlc, **kwargs)
         self.assertRaisesRegexp(PlotlyError,
                                 "direction must be defined as "
                                 "'increasing', 'decreasing', or 'both'",
-                                tls.FigureFactory.create_candlestick, **kwargs)
+                                plotly.graph_objs.figure_factory.FigureFactory.create_candlestick, **kwargs)
 
         kwargs = {'open': [1, 2], 'high': [1, 3],
                   'low': [1, 2], 'close': [1, 2],
@@ -174,11 +175,11 @@ class TestFinanceCharts(TestCase):
         self.assertRaisesRegexp(PlotlyError,
                                 "direction must be defined as "
                                 "'increasing', 'decreasing', or 'both'",
-                                tls.FigureFactory.create_ohlc, **kwargs)
+                                plotly.graph_objs.figure_factory.FigureFactory.create_ohlc, **kwargs)
         self.assertRaisesRegexp(PlotlyError,
                                 "direction must be defined as "
                                 "'increasing', 'decreasing', or 'both'",
-                                tls.FigureFactory.create_candlestick, **kwargs)
+                                plotly.graph_objs.figure_factory.FigureFactory.create_candlestick, **kwargs)
 
     def test_high_highest_value(self):
 
@@ -194,7 +195,7 @@ class TestFinanceCharts(TestCase):
                                              "low, or close values. "
                                              "Double check that your data "
                                              "is entered in O-H-L-C order",
-                                tls.FigureFactory.create_ohlc,
+                                plotly.graph_objs.figure_factory.FigureFactory.create_ohlc,
                                 **kwargs)
         self.assertRaisesRegexp(PlotlyError, "Oops! Looks like some of "
                                              "your high values are less "
@@ -202,7 +203,7 @@ class TestFinanceCharts(TestCase):
                                              "low, or close values. "
                                              "Double check that your data "
                                              "is entered in O-H-L-C order",
-                                tls.FigureFactory.create_candlestick,
+                                plotly.graph_objs.figure_factory.FigureFactory.create_candlestick,
                                 **kwargs)
 
     def test_low_lowest_value(self):
@@ -222,7 +223,7 @@ class TestFinanceCharts(TestCase):
                                 ", open, or close values. "
                                 "Double check that your data "
                                 "is entered in O-H-L-C order",
-                                tls.FigureFactory.create_ohlc,
+                                plotly.graph_objs.figure_factory.FigureFactory.create_ohlc,
                                 **kwargs)
         self.assertRaisesRegexp(PlotlyError,
                                 "Oops! Looks like some of "
@@ -231,14 +232,14 @@ class TestFinanceCharts(TestCase):
                                 ", open, or close values. "
                                 "Double check that your data "
                                 "is entered in O-H-L-C order",
-                                tls.FigureFactory.create_candlestick,
+                                plotly.graph_objs.figure_factory.FigureFactory.create_candlestick,
                                 **kwargs)
 
     def test_one_ohlc(self):
 
         # This should create one "increase" (i.e. close > open) ohlc stick
 
-        ohlc = tls.FigureFactory.create_ohlc(open=[33.0],
+        ohlc = plotly.graph_objs.figure_factory.FigureFactory.create_ohlc(open=[33.0],
                                              high=[33.2],
                                              low=[32.7],
                                              close=[33.1])
@@ -268,7 +269,7 @@ class TestFinanceCharts(TestCase):
 
         # This should create one "increase" (i.e. close > open) ohlc stick
 
-        ohlc_incr = tls.FigureFactory.create_ohlc(open=[33.0],
+        ohlc_incr = plotly.graph_objs.figure_factory.FigureFactory.create_ohlc(open=[33.0],
                                                   high=[33.2],
                                                   low=[32.7],
                                                   close=[33.1],
@@ -293,7 +294,7 @@ class TestFinanceCharts(TestCase):
 
         # This should create one "increase" (i.e. close > open) ohlc stick
 
-        ohlc_decr = tls.FigureFactory.create_ohlc(open=[33.0],
+        ohlc_decr = plotly.graph_objs.figure_factory.FigureFactory.create_ohlc(open=[33.0],
                                                   high=[33.2],
                                                   low=[30.7],
                                                   close=[31.1],
@@ -319,7 +320,7 @@ class TestFinanceCharts(TestCase):
 
         # This should create one "increase" (i.e. close > open) candlestick
 
-        can_inc = tls.FigureFactory.create_candlestick(open=[33.0],
+        can_inc = plotly.graph_objs.figure_factory.FigureFactory.create_candlestick(open=[33.0],
                                                        high=[33.2],
                                                        low=[32.7],
                                                        close=[33.1])
@@ -364,7 +365,7 @@ class TestFinanceCharts(TestCase):
              datetime.datetime(year=2014, month=9, day=4),
              datetime.datetime(year=2014, month=12, day=5)]
 
-        ohlc_d = tls.FigureFactory.create_ohlc(open_data, high_data,
+        ohlc_d = plotly.graph_objs.figure_factory.FigureFactory.create_ohlc(open_data, high_data,
                                                low_data, close_data,
                                                dates=x)
 
@@ -568,7 +569,7 @@ class TestFinanceCharts(TestCase):
              datetime.datetime(year=2014, month=9, day=4),
              datetime.datetime(year=2014, month=12, day=5)]
 
-        candle = tls.FigureFactory.create_candlestick(open_data, high_data,
+        candle = plotly.graph_objs.figure_factory.FigureFactory.create_candlestick(open_data, high_data,
                                                       low_data, close_data,
                                                       dates=x)
         exp_candle = {'data': [{'boxpoints': False,

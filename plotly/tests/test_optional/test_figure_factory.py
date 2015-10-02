@@ -1,6 +1,7 @@
 from unittest import TestCase
 from plotly.graph_objs import graph_objs as go
 from plotly.exceptions import PlotlyError
+import plotly.graph_objs.figure_factory
 
 import plotly.tools as tls
 from plotly.tests.test_optional.optional_utils import NumpyTestUtilsMixin
@@ -21,7 +22,7 @@ class TestDistplot(TestCase):
                   'curve_type': 'curve'}
         self.assertRaisesRegexp(PlotlyError, "curve_type must be defined as "
                                              "'kde' or 'normal'",
-                                tls.FigureFactory.create_distplot, **kwargs)
+                                plotly.graph_objs.figure_factory.FigureFactory.create_distplot, **kwargs)
 
     def test_wrong_histdata_format(self):
 
@@ -30,16 +31,16 @@ class TestDistplot(TestCase):
         # will fail)
 
         kwargs = {'hist_data': [1, 2, 3], 'group_labels': ['group']}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_distplot,
+        self.assertRaises(PlotlyError, plotly.graph_objs.figure_factory.FigureFactory.create_distplot,
                           **kwargs)
 
     def test_unequal_data_label_length(self):
         kwargs = {'hist_data': [[1, 2]], 'group_labels': ['group', 'group2']}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_distplot,
+        self.assertRaises(PlotlyError, plotly.graph_objs.figure_factory.FigureFactory.create_distplot,
                           **kwargs)
 
         kwargs = {'hist_data': [[1, 2], [1, 2, 3]], 'group_labels': ['group']}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_distplot,
+        self.assertRaises(PlotlyError, plotly.graph_objs.figure_factory.FigureFactory.create_distplot,
                           **kwargs)
 
     def test_simple_distplot(self):
@@ -47,7 +48,7 @@ class TestDistplot(TestCase):
         # we should be able to create a single distplot with a simple dataset
         # and default kwargs
 
-        dp = tls.FigureFactory.create_distplot(hist_data=[[1, 2, 2, 3]],
+        dp = plotly.graph_objs.figure_factory.FigureFactory.create_distplot(hist_data=[[1, 2, 2, 3]],
                                                group_labels=['distplot'])
         expected_dp_layout = {'barmode': 'overlay',
                               'hovermode': 'closest',
@@ -103,7 +104,7 @@ class TestDistplot(TestCase):
         hist_data = [hist1_x] + [hist2_x]
         group_labels = ['2012', '2013']
 
-        dp = tls.FigureFactory.create_distplot(hist_data, group_labels,
+        dp = plotly.graph_objs.figure_factory.FigureFactory.create_distplot(hist_data, group_labels,
                                                show_rug=False, bin_size=.2)
         dp['layout'].update(title='Dist Plot')
 
@@ -160,7 +161,7 @@ class TestStreamline(TestCase):
                   'u': [[-1, -5], [-1, -5]],
                   'v': [[1, 1], [-3, -3]],
                   'arrow_scale': 0}
-        self.assertRaises(ValueError, tls.FigureFactory.create_streamline,
+        self.assertRaises(ValueError, plotly.graph_objs.figure_factory.FigureFactory.create_streamline,
                           **kwargs)
 
     def test_wrong_density(self):
@@ -171,7 +172,7 @@ class TestStreamline(TestCase):
                   'u': [[-1, -5], [-1, -5]],
                   'v': [[1, 1], [-3, -3]],
                   'density': 0}
-        self.assertRaises(ValueError, tls.FigureFactory.create_streamline,
+        self.assertRaises(ValueError, plotly.graph_objs.figure_factory.FigureFactory.create_streamline,
                           **kwargs)
 
     def test_uneven_x(self):
@@ -181,7 +182,7 @@ class TestStreamline(TestCase):
         kwargs = {'x': [0, 2, 7, 9], 'y': [0, 2, 4, 6],
                   'u': [[-1, -5], [-1, -5]],
                   'v': [[1, 1], [-3, -3]]}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_streamline,
+        self.assertRaises(PlotlyError, plotly.graph_objs.figure_factory.FigureFactory.create_streamline,
                           **kwargs)
 
     def test_uneven_y(self):
@@ -191,7 +192,7 @@ class TestStreamline(TestCase):
         kwargs = {'x': [0, 2, 4, 6], 'y': [1.5, 2, 3, 3.5],
                   'u': [[-1, -5], [-1, -5]],
                   'v': [[1, 1], [-3, -3]]}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_streamline,
+        self.assertRaises(PlotlyError, plotly.graph_objs.figure_factory.FigureFactory.create_streamline,
                           **kwargs)
 
     def test_unequal_length_xy(self):
@@ -201,7 +202,7 @@ class TestStreamline(TestCase):
         kwargs = {'x': [0, 2, 4, 6], 'y': [1.5, 2, 3.5],
                   'u': [[-1, -5], [-1, -5]],
                   'v': [[1, 1], [-3, -3]]}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_streamline,
+        self.assertRaises(PlotlyError, plotly.graph_objs.figure_factory.FigureFactory.create_streamline,
                           **kwargs)
 
     def test_unequal_length_uv(self):
@@ -211,7 +212,7 @@ class TestStreamline(TestCase):
         kwargs = {'x': [0, 2, 4, 6], 'y': [1.5, 2, 3, 3.5],
                   'u': [[-1, -5], [-1, -5], [-1, -5]],
                   'v': [[1, 1], [-3, -3]]}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_streamline,
+        self.assertRaises(PlotlyError, plotly.graph_objs.figure_factory.FigureFactory.create_streamline,
                           **kwargs)
 
     def test_simple_streamline(self):
@@ -227,7 +228,7 @@ class TestStreamline(TestCase):
         # u = u.T #transpose
         # v = v.T #transpose
 
-        strln = tls.FigureFactory.create_streamline(x=[-1., 0., 1.],
+        strln = plotly.graph_objs.figure_factory.FigureFactory.create_streamline(x=[-1., 0., 1.],
                                                     y=[-1., 0., 1.],
                                                     u=[[1., 0., 1.],
                                                        [1., 0., 1.],
@@ -251,7 +252,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
 
     def test_default_dendrogram(self):
         X = np.array([[1, 2, 3, 4], [1, 1, 3, 4], [1, 2, 1, 4], [1, 2, 3, 1]])
-        dendro = tls.FigureFactory.create_dendrogram(X=X)
+        dendro = plotly.graph_objs.figure_factory.FigureFactory.create_dendrogram(X=X)
 
         expected_dendro = go.Figure(
             data=go.Data([
@@ -330,7 +331,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
         X[2, :] = sum(X, 0)
 
         names = ['Jack', 'Oxana', 'John', 'Chelsea', 'Mark']
-        dendro = tls.FigureFactory.create_dendrogram(X, labels=names)
+        dendro = plotly.graph_objs.figure_factory.FigureFactory.create_dendrogram(X, labels=names)
 
         expected_dendro = go.Figure(
             data=go.Data([
@@ -424,18 +425,18 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
     def test_dendrogram_orientation(self):
         X = np.random.rand(5, 5) 
 
-        dendro_left = tls.FigureFactory.create_dendrogram(
+        dendro_left = plotly.graph_objs.figure_factory.FigureFactory.create_dendrogram(
                        X, orientation='left')
         self.assertEqual(len(dendro_left['layout']['yaxis']['ticktext']), 5)
         tickvals_left = np.array(dendro_left['layout']['yaxis']['tickvals'])
         self.assertTrue((tickvals_left <= 0).all())
 
-        dendro_right = tls.FigureFactory.create_dendrogram(
+        dendro_right = plotly.graph_objs.figure_factory.FigureFactory.create_dendrogram(
                         X, orientation='right')
         tickvals_right = np.array(dendro_right['layout']['yaxis']['tickvals'])
         self.assertTrue((tickvals_right >= 0).all())
 
-        dendro_bottom = tls.FigureFactory.create_dendrogram(
+        dendro_bottom = plotly.graph_objs.figure_factory.FigureFactory.create_dendrogram(
                         X, orientation='bottom')
         self.assertEqual(len(dendro_bottom['layout']['xaxis']['ticktext']), 5)
         tickvals_bottom = np.array(
@@ -443,7 +444,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
         )
         self.assertTrue((tickvals_bottom >= 0).all())
 
-        dendro_top = tls.FigureFactory.create_dendrogram(X, orientation='top')
+        dendro_top = plotly.graph_objs.figure_factory.FigureFactory.create_dendrogram(X, orientation='top')
         tickvals_top = np.array(dendro_top['layout']['xaxis']['tickvals'])
         self.assertTrue((tickvals_top <= 0).all())
 
@@ -462,7 +463,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
                 'rgb(220,220,220)',  # gainsboro
                 'rgb(245,245,245)']  # white smoke
 
-        dendro = tls.FigureFactory.create_dendrogram(X, colorscale=greyscale)
+        dendro = plotly.graph_objs.figure_factory.FigureFactory.create_dendrogram(X, colorscale=greyscale)
 
         expected_dendro = go.Figure(
             data=go.Data([
