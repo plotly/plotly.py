@@ -3,7 +3,6 @@ from unittest import TestCase
 
 import datetime
 from nose.tools import raises
-
 import plotly.tools as tls
 from plotly.exceptions import PlotlyError
 from plotly.graph_objs import graph_objs
