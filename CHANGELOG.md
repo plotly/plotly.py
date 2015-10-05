@@ -4,6 +4,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.8.8] - 2015-10-05
+- Sometimes creating a graph with a private share-key doesn't work -
+the graph is private, but not accessible with the share key.
+Now we check to see if it didn't work, and re-try a few times until
+it does.
+
 ## [1.8.7] - 2015-10-01
 ### Added
 - The FigureFactory can now create dendrogram plots with `.create_dendrogram`.
