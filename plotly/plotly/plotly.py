@@ -1320,7 +1320,7 @@ def validate_credentials(credentials):
         raise exceptions.PlotlyLocalCredentialsError()
 
 
-def add_share_key_to_url(plot_url):
+def add_share_key_to_url(plot_url, attempt=0):
     """
     Update plot's url to include the secret key
 
@@ -1343,7 +1343,19 @@ def add_share_key_to_url(plot_url):
     str_content = new_response.content.decode('utf-8')
 
     new_response_data = json.loads(str_content)
+
     plot_url += '?share_key=' + new_response_data['share_key']
+
+    # sometimes a share key is added, but access is still denied
+    # check for access, and retry a couple of times if this is the case
+    # https://github.com/plotly/streambed/issues/4089
+    embed_url = plot_url.split('?')[0] + '.embed' + plot_url.split('?')[1]
+    access_res = requests.get(embed_url)
+    if access_res.status_code == 404:
+        attempt += 1
+        if attempt == 5:
+            return plot_url
+        plot_url = add_share_key_to_url(plot_url.split('?')[0], attempt)
 
     return plot_url
 

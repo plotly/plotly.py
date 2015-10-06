@@ -5584,8 +5584,7 @@
                         "none"
                     ],
                     "flags": [
-                        "x",
-                        "y",
+                        "location",
                         "z",
                         "text",
                         "name"
@@ -9921,7 +9920,6 @@
                     "valType": "string"
                 },
                 "opacity": {
-                    "description": "Sets the opacity of the trace.",
                     "dflt": 1,
                     "max": 1,
                     "min": 0,
@@ -10103,10 +10101,10 @@
                         "none"
                     ],
                     "flags": [
-                        "x",
-                        "y",
-                        "z",
+                        "label",
                         "text",
+                        "value",
+                        "percent",
                         "name"
                     ],
                     "role": "info",
@@ -12874,9 +12872,9 @@
                         "none"
                     ],
                     "flags": [
-                        "x",
-                        "y",
-                        "z",
+                        "lon",
+                        "lat",
+                        "location",
                         "text",
                         "name"
                     ],
@@ -14508,7 +14506,6 @@
                     "valType": "string"
                 },
                 "opacity": {
-                    "description": "Sets the opacity of the trace.",
                     "dflt": 1,
                     "max": 1,
                     "min": 0,
