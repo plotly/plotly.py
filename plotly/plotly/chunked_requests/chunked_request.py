@@ -1,7 +1,8 @@
 import time
 import six
+import os
 from six.moves import http_client
-
+from six.moves.urllib.parse import urlparse
 
 class Stream:
     def __init__(self, server, port=80, headers={}, url='/'):
@@ -76,7 +77,21 @@ class Stream:
         server = self._server
         port = self._port
         headers = self._headers
-        self._conn = http_client.HTTPConnection(server, port)
+
+        ## only doing HTTPConnection, so only use http_proxy
+        proxy = os.environ.get("http_proxy");
+        proxy_server = None
+        proxy_port = None
+        if (proxy != None):
+            p = urlparse(proxy)
+            proxy_server = p.hostname
+            proxy_port = p.port
+
+        if (proxy_server != None and proxy_port != None):
+            self._conn = http_client.HTTPConnection(proxy_server, proxy_port)
+            self._conn.set_tunnel(server, port)
+        else:
+            self._conn = http_client.HTTPConnection(server, port)
 
         self._conn.putrequest('POST', self._url)
         self._conn.putheader('Transfer-Encoding', 'chunked')
