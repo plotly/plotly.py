@@ -499,7 +499,7 @@ class Stream:
         keyword arguments:
         layout (default=None) - A valid Layout object
                                 Run help(plotly.graph_objs.Layout)
-        validate (default = True) - Validate this stream before sending?
+        validate (default=True) - Validate this stream before sending?
                                     This will catch local errors if set to
                                     True.
 
