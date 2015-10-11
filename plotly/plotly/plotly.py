@@ -491,7 +491,7 @@ class Stream:
 
         positional arguments:
         trace - A valid plotly trace object (e.g., Scatter, Heatmap, etc.).
-                Not all keys in these are `streamable`. Run help(Obj) on the type
+                Not all keys among these are `streamable`. Run help(Obj) on the type
                 of trace you are trying to stream. For each valid key, if the key
                 is streamable, it will say 'streamable = True'. Trace objects
                 must be dictionary-like.
