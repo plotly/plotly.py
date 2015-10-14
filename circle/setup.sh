@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SIG="☁☀☂"
+SIG="[-__-].oO"
 
 echo "${SIG} Running setup routine with Python versions:"
 for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
