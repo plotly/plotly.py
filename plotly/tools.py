@@ -2453,26 +2453,45 @@ class FigureFactory(object):
 
         Example 1: Simple bottom oriented dendrogram
         ```
-        import numpy as np
-
         import plotly.plotly as py
         from plotly.tools import FigureFactory as FF
 
-        X = np.random.rand(5,5)
+        import numpy as np
+
+        X = np.random.rand(10,10)
         dendro = FF.create_dendrogram(X)
-        py.iplot(dendro, validate=False, height=300, width=1000)
+        plot_url = py.plot(dendro, filename='simple-dendrogram')
 
         ```
 
         Example 2: Dendrogram to put on the left of the heatmap
         ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+
+        import numpy as np
+
         X = np.random.rand(5,5)
         names = ['Jack', 'Oxana', 'John', 'Chelsea', 'Mark']
         dendro = FF.create_dendrogram(X, orientation='right', labels=names)
+        dendro['layout'].update({'width':700, 'height':500})
 
-        py.iplot(dendro, validate=False, height=1000, width=300)
+        py.iplot(dendro, filename='vertical-dendrogram')
         ```
 
+        Example 3: Dendrogram with Pandas
+        ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+
+        import numpy as np
+        import pandas as pd
+
+        Index= ['A','B','C','D','E','F','G','H','I','J']
+        df = pd.DataFrame(abs(np.random.randn(10, 10)), index=Index)
+        fig = FF.create_dendrogram(df, labels=Index)
+        url = py.plot(fig, filename='pandas-dendrogram')
+        ```
         """
         dependencies = (_scipy_imported and _scipy__spatial_imported and
                         _scipy__cluster__hierarchy_imported)
