@@ -4,17 +4,25 @@ import datetime
 import random
 from unittest import TestCase
 
-import matplotlib
-# Force matplotlib to not use any Xwindows backend.
-matplotlib.use('Agg')
-from matplotlib.dates import date2num
-import matplotlib.pyplot as plt
 import pandas as pd
+from nose.plugins.attrib import attr
 
 import plotly.tools as tls
 
+# TODO: matplotlib-build-wip
+from plotly.tools import _matplotlylib_imported
+if _matplotlylib_imported:
+    import matplotlib
 
+    # Force matplotlib to not use any Xwindows backend.
+    matplotlib.use('Agg')
+    from matplotlib.dates import date2num
+    import matplotlib.pyplot as plt
+
+
+@attr('matplotlib')
 class TestDateTimes(TestCase):
+
     def test_normal_mpl_dates(self):
         datetime_format = '%Y-%m-%d %H:%M:%S'
         y = [1, 2, 3, 4]

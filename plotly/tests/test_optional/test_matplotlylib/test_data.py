@@ -1,14 +1,21 @@
 from __future__ import absolute_import
 
-import matplotlib
-# Force matplotlib to not use any Xwindows backend.
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
+from nose.plugins.attrib import attr
 
 from plotly.tests.test_optional.optional_utils import run_fig
 from plotly.tests.test_optional.test_matplotlylib.data.data import *
 
+# TODO: matplotlib-build-wip
+from plotly.tools import _matplotlylib_imported
+if _matplotlylib_imported:
+    import matplotlib
 
+    # Force matplotlib to not use any Xwindows backend.
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+
+
+@attr('matplotlib')
 def test_line_data():
     fig, ax = plt.subplots()
     ax.plot(D['x1'], D['y1'])
@@ -21,6 +28,7 @@ def test_line_data():
             renderer.plotly_fig['data'][0]['y']) + ' is not ' + str(D['y1'])
 
 
+@attr('matplotlib')
 def test_lines_data():
     fig, ax = plt.subplots()
     ax.plot(D['x1'], D['y1'])
@@ -40,6 +48,7 @@ def test_lines_data():
             renderer.plotly_fig['data'][0]['y']) + ' is not ' + str(D['y2'])
 
 
+@attr('matplotlib')
 def test_bar_data():
     fig, ax = plt.subplots()
     ax.bar(D['x1'], D['y1'])
@@ -49,6 +58,7 @@ def test_bar_data():
             renderer.plotly_fig['data'][0]['y']) + ' is not ' + str(D['y1'])
 
 
+@attr('matplotlib')
 def test_bars_data():
     fig, ax = plt.subplots()
     ax.bar(D['x1'], D['y1'], color='r')

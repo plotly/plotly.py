@@ -1,15 +1,22 @@
 from __future__ import absolute_import
 
-import matplotlib
-# Force matplotlib to not use any Xwindows backend.
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
+from nose.plugins.attrib import attr
 
 from plotly.tests.utils import compare_dict
 from plotly.tests.test_optional.optional_utils import run_fig
 from plotly.tests.test_optional.test_matplotlylib.data.lines import *
 
+# TODO: matplotlib-build-wip
+from plotly.tools import _matplotlylib_imported
+if _matplotlylib_imported:
+    import matplotlib
 
+    # Force matplotlib to not use any Xwindows backend.
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+
+
+@attr('matplotlib')
 def test_simple_line():
     fig, ax = plt.subplots()
     ax.plot(D['x1'], D['y1'], label='simple')
@@ -22,6 +29,7 @@ def test_simple_line():
     assert equivalent, msg
 
 
+@attr('matplotlib')
 def test_complicated_line():
     fig, ax = plt.subplots()
     ax.plot(D['x1'], D['y1'], 'ro', markersize=10, alpha=.5, label='one')
