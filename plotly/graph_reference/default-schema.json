@@ -4737,7 +4737,7 @@
                             "valType": "color"
                         },
                         "outliercolor": {
-                            "description": "Sets the border line color of the outlier sample points.",
+                            "description": "Sets the border line color of the outlier sample points. Defaults to marker.color",
                             "role": "style",
                             "valType": "color"
                         },
@@ -4769,7 +4769,7 @@
                     },
                     "outliercolor": {
                         "description": "Sets the color of the outlier sample points.",
-                        "dflt": "rgba(0,0,0,0)",
+                        "dflt": "rgba(0, 0, 0, 0)",
                         "role": "style",
                         "valType": "color"
                     },
