@@ -1,15 +1,22 @@
 from __future__ import absolute_import
 
-import matplotlib
-# Force matplotlib to not use any Xwindows backend.
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
+from nose.plugins.attrib import attr
 
 from plotly.tests.utils import compare_dict
 from plotly.tests.test_optional.optional_utils import run_fig
 from plotly.tests.test_optional.test_matplotlylib.data.scatter import *
 
+# TODO: matplotlib-build-wip
+from plotly.tools import _matplotlylib_imported
+if _matplotlylib_imported:
+    import matplotlib
 
+    # Force matplotlib to not use any Xwindows backend.
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+
+
+@attr('matplotlib')
 def test_simple_scatter():
     fig, ax = plt.subplots()
     ax.scatter(D['x1'], D['y1'])
@@ -23,6 +30,7 @@ def test_simple_scatter():
     assert equivalent, msg
 
 
+@attr('matplotlib')
 def test_double_scatter():
     fig, ax = plt.subplots()
     ax.scatter(D['x1'], D['y1'], color='red', s=121, marker='^', alpha=0.5)

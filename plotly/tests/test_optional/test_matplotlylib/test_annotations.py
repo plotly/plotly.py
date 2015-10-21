@@ -1,15 +1,22 @@
 from __future__ import absolute_import
 
-import matplotlib
-# Force matplotlib to not use any Xwindows backend.
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
+from nose.plugins.attrib import attr
 
-from plotly.tests.utils import compare_dict
-from plotly.tests.test_optional.optional_utils import run_fig
-from plotly.tests.test_optional.test_matplotlylib.data.annotations import *
+# TODO: matplotlib-build-wip
+from plotly.tools import _matplotlylib_imported
+
+if _matplotlylib_imported:
+    import matplotlib
+    # Force matplotlib to not use any Xwindows backend.
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+
+    from plotly.tests.utils import compare_dict
+    from plotly.tests.test_optional.optional_utils import run_fig
+    from plotly.tests.test_optional.test_matplotlylib.data.annotations import *
 
 
+@attr('matplotlib')
 def test_annotations():
     fig, ax = plt.subplots()
     ax.plot([1, 2, 3], 'b-')

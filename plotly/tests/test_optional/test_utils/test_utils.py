@@ -10,16 +10,21 @@ import math
 from datetime import datetime as dt
 from unittest import TestCase
 
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from pandas.util.testing import assert_series_equal
 import pytz
+from nose.plugins.attrib import attr
+from pandas.util.testing import assert_series_equal
 
 from plotly import utils
 from plotly.graph_objs import Scatter, Scatter3d, Figure, Data
 from plotly.grid_objs import Column
-from plotly.matplotlylib import Exporter, PlotlyRenderer
+
+# TODO: matplotlib-build-wip
+from plotly.tools import _matplotlylib_imported
+if _matplotlylib_imported:
+    import matplotlib.pyplot as plt
+    from plotly.matplotlylib import Exporter, PlotlyRenderer
 
 
 class TestJSONEncoder(TestCase):
@@ -253,6 +258,7 @@ def test_numpy_masked_json_encoding():
     assert(j1 == '[1, 2, null]')
 
 
+@attr('matplotlib')
 def test_masked_constants_example():
     # example from: https://gist.github.com/tschaume/d123d56bf586276adb98
     data = {

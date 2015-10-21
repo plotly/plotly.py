@@ -1,14 +1,20 @@
-from ..exporter import Exporter
-from ..renderers import FakeRenderer, FullFakeRenderer
+# TODO: matplotlib-build-wip
+from nose.plugins.attrib import attr
+from plotly.tools import _matplotlylib_imported
 
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
+if _matplotlylib_imported:
+    from ..exporter import Exporter
+    from ..renderers import FakeRenderer, FullFakeRenderer
 
-import numpy as np
-from numpy.testing import assert_warns
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+
+    import numpy as np
+    from numpy.testing import assert_warns
 
 
+@attr('matplotlib')
 def fake_renderer_output(fig, Renderer):
     renderer = Renderer()
     exporter = Exporter(renderer)
@@ -16,11 +22,13 @@ def fake_renderer_output(fig, Renderer):
     return renderer.output
 
 
+@attr('matplotlib')
 def _assert_output_equal(text1, text2):
     for line1, line2 in zip(text1.strip().split(), text2.strip().split()):
         assert line1 == line2
 
 
+@attr('matplotlib')
 def test_lines():
     fig, ax = plt.subplots()
     ax.plot(range(20), '-k')
@@ -44,6 +52,7 @@ def test_lines():
                          """)
 
 
+@attr('matplotlib')
 def test_markers():
     fig, ax = plt.subplots()
     ax.plot(range(2), 'ok')
@@ -68,6 +77,7 @@ def test_markers():
                          """)
 
 
+@attr('matplotlib')
 def test_path_collection():
     fig, ax = plt.subplots()
     ax.scatter(range(3), range(3))
@@ -93,6 +103,7 @@ def test_path_collection():
                          """)
 
 
+@attr('matplotlib')
 def test_text():
     fig, ax = plt.subplots()
     ax.set_xlabel("my x label")
@@ -113,6 +124,7 @@ def test_text():
                          """)
 
 
+@attr('matplotlib')
 def test_path():
     fig, ax = plt.subplots()
     ax.add_patch(plt.Circle((0, 0), 1))
@@ -129,6 +141,7 @@ def test_path():
                          """)
 
 
+@attr('matplotlib')
 def test_multiaxes():
     fig, ax = plt.subplots(2)
     ax[0].plot(range(4))
@@ -147,6 +160,7 @@ def test_multiaxes():
                          """)
 
 
+@attr('matplotlib')
 def test_image():
     np.random.seed(0)  # image size depends on the seed
     fig, ax = plt.subplots()
@@ -163,6 +177,7 @@ def test_image():
                          """)
 
 
+@attr('matplotlib')
 def test_legend():
     fig, ax = plt.subplots()
     ax.plot([1,2,3], label='label')
@@ -178,6 +193,8 @@ def test_legend():
                          closing figure
                          """)
 
+
+@attr('matplotlib')
 def test_legend_dots():
     fig, ax = plt.subplots()
     ax.plot([1,2,3], label='label')
@@ -200,8 +217,9 @@ def test_legend_dots():
                          closing figure
                          """)
 
+
+@attr('matplotlib')
 def test_blended():
     fig, ax = plt.subplots()
     ax.axvline(0)
     assert_warns(UserWarning, fake_renderer_output, fig, FakeRenderer)
-    
