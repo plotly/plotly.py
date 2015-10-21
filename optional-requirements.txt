@@ -9,13 +9,13 @@
 numpy
 
 ## matplotlylib dependencies ##
-matplotlib==1.3.1
+# matplotlib==1.3.1
 
 ## testing dependencies ##
 nose==1.3.3
 
 ## ipython dependencies ##
-ipython[all]
+ipython[all]==3.0.0
 
 ## pandas deps for some matplotlib functionality ##
 pandas
