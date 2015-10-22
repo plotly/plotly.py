@@ -7,11 +7,6 @@ A module intended for use with Nose.
 """
 from __future__ import absolute_import
 
-import matplotlib
-
-# Force matplotlib to not use any Xwindows backend.
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
 from nose.plugins.attrib import attr
 from nose.tools import raises
 
@@ -19,7 +14,17 @@ from plotly import exceptions
 from plotly.plotly import plotly as py
 from unittest import TestCase
 
+# TODO: matplotlib-build-wip
+from plotly.tools import _matplotlylib_imported
+if _matplotlylib_imported:
+    import matplotlib
 
+    # Force matplotlib to not use any Xwindows backend.
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+
+
+@attr('matplotlib')
 class PlotMPLTest(TestCase):
     def setUp(self):
         py.sign_in('PlotlyImageTest', '786r5mecv0',
