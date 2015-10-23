@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.8.9] - 2015-10-11
+- If you're behind a proxy, you can make requests by setting the environmental variable HTTP_PROXY and HTTPS_PROXY (http://docs.python-requests.org/en/v1.0.4/user/advanced/#proxies). This didn't work for streaming, but now it does.
+
 ## [1.8.8] - 2015-10-05
 - Sometimes creating a graph with a private share-key doesn't work -
 the graph is private, but not accessible with the share key.
