@@ -303,7 +303,7 @@ class PlotlyList(list, PlotlyBase):
 
     def get_ordered(self, **kwargs):
         """All children are already validated. Just use get_ordered on them."""
-        return [child.get_ordered for child in self]
+        return [child.get_ordered() for child in self]
 
     def to_string(self, level=0, indent=4, eol='\n',
                   pretty=True, max_chars=80):
