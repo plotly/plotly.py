@@ -25,10 +25,11 @@ from a dict/list JSON representation.
 from __future__ import absolute_import
 
 import copy
-
 import re
-import six
 import warnings
+from collections import OrderedDict
+
+import six
 
 from plotly import exceptions, graph_reference
 from plotly.graph_objs import graph_objs_tools
@@ -112,17 +113,6 @@ class PlotlyBase(object):
     def validate(self):
         """Everything is *always* validated now. keep for backwards compat."""
         pass
-
-    def get_ordered(self, **kwargs):
-        """
-        We have no way to order things anymore. Keep for backwards compat.
-
-        See https://github.com/plotly/python-api/issues/290.
-
-        :return: (PlotlyBase)
-
-        """
-        return self
 
 
 class PlotlyList(list, PlotlyBase):
@@ -310,6 +300,10 @@ class PlotlyList(list, PlotlyBase):
             return d
         else:
             return l
+
+    def get_ordered(self, **kwargs):
+        """All children are already validated. Just use get_ordered on them."""
+        return [child.get_ordered for child in self]
 
     def to_string(self, level=0, indent=4, eol='\n',
                   pretty=True, max_chars=80):
@@ -667,6 +661,17 @@ class PlotlyDict(dict, PlotlyBase):
                 if len(d[key]) == 0:
                     del d[key]
         return d
+
+    def get_ordered(self, **kwargs):
+        """Return a predictable, OrderedDict version of self."""
+        keys = sorted(self.keys(), key=graph_objs_tools.sort_keys)
+        ordered = OrderedDict()
+        for key in keys:
+            if isinstance(self[key], PlotlyBase):
+                ordered[key] = self[key].get_ordered()
+            else:
+                ordered[key] = self[key]
+        return ordered
 
     def to_string(self, level=0, indent=4, eol='\n',
                   pretty=True, max_chars=80):
