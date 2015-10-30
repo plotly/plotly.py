@@ -212,7 +212,7 @@ def plot(figure_or_data, validate=True, **plot_options):
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
 
     for entry in figure['data']:
-        if entry['type'] != 'scattergl':
+        if ('type' in entry) and (entry['type'] == 'scattergl'):
             continue
         for key, val in list(entry.items()):
             try:
