@@ -218,7 +218,7 @@ def plot(figure_or_data, validate=True, **plot_options):
             try:
                 if len(val) > 40000:
                     msg = ("Woah there! Look at all those points! Due to "
-                           "browser limitations, Plotly the SVG drawing "
+                           "browser limitations, the Plotly SVG drawing "
                            "functions have a hard time "
                            "graphing more than 500k data points for line "
                            "charts, or 40k points for other types of charts. "
