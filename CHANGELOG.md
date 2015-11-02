@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.8.12] - 2015-11-02
+- *Big data* warning mentions `plotly.graph_objs.Scattergl` as possible solution.
+
 ## [1.8.9] - 2015-10-11
 - If you're behind a proxy, you can make requests by setting the environmental variable HTTP_PROXY and HTTPS_PROXY (http://docs.python-requests.org/en/v1.0.4/user/advanced/#proxies). This didn't work for streaming, but now it does.
 
