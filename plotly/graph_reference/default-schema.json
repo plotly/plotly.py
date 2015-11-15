@@ -311,6 +311,7 @@
                             },
                             "description": "Sets the annotation text font.",
                             "family": {
+                                "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                                 "noBlank": true,
                                 "role": "style",
                                 "strict": true,
@@ -443,6 +444,7 @@
                 },
                 "description": "Sets the global font. Note that fonts used in traces and other layout components inherit from the global font.",
                 "family": {
+                    "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                     "dflt": "\"Open sans\", verdana, arial, sans-serif",
                     "noBlank": true,
                     "role": "style",
@@ -831,7 +833,7 @@
                 "valType": "number"
             },
             "hidesources": {
-                "description": "Determines whether or not a text link citing the data source is placed at the bottom-right cored of the figure. Has only an effect only on graphs that have been generated via forked graphs from the plotly cloud.",
+                "description": "Determines whether or not a text link citing the data source is placed at the bottom-right cored of the figure. Has only an effect only on graphs that have been generated via forked graphs from the plotly service (at https://plot.ly or on-premise).",
                 "dflt": false,
                 "role": "info",
                 "valType": "boolean"
@@ -873,6 +875,7 @@
                     },
                     "description": "Sets the font used to text the legend items.",
                     "family": {
+                        "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                         "noBlank": true,
                         "role": "style",
                         "strict": true,
@@ -914,7 +917,7 @@
                     "valType": "number"
                 },
                 "xanchor": {
-                    "description": "Sets the legend's horizontal position anchor This anchor binds the `x` position to the *left*, *center* or *right* of the legend.",
+                    "description": "Sets the legend's horizontal position anchor. This anchor binds the `x` position to the *left*, *center* or *right* of the legend.",
                     "dflt": "left",
                     "role": "info",
                     "valType": "enumerated",
@@ -1262,7 +1265,7 @@
                         "valType": "color"
                     },
                     "dtick": {
-                        "description": "Sets the step in-between ticks on this axis",
+                        "description": "Sets the step in-between ticks on this axis Use with `tick0`. If the axis `type` is *log*, then ticks are set every 10^(n*dtick) where n is the tick number. For example, to set a tick mark at 1, 10, 100, 1000, ... set dtick to 1. To set tick marks at 1, 100, 10000, ... set dtick to 2. To set tick marks at 1, 5, 25, 125, 625, 3125, ... set dtick to log_10(5), or 0.69897000433. If the axis `type` is *date*, then you must convert the time to milliseconds. For example, to set the interval between ticks to one day, set `dtick` to 86400000.0.",
                         "dflt": 1,
                         "role": "style",
                         "valType": "any"
@@ -1340,7 +1343,7 @@
                         "valType": "integer"
                     },
                     "range": {
-                        "description": "Sets the range of this axis.",
+                        "description": "Sets the range of this axis. If the axis `type` is *log*, then you must take the log of your desired range (e.g. to set the range from 1 to 100, set the range from 0 to 2). If the axis `type` is *date*, then you must convert the date to unix time in milliseconds (the number of milliseconds since January 1st, 1970). For example, to set the date range from January 1st 1970 to November 4th, 2013, set the range from 0 to 1380844800000.0",
                         "items": [
                             {
                                 "valType": "number"
@@ -1455,7 +1458,7 @@
                         "valType": "number"
                     },
                     "tick0": {
-                        "description": "Sets the placement of the first tick on this axis. Use with `dtick`.",
+                        "description": "Sets the placement of the first tick on this axis. Use with `dtick`. If the axis `type` is *log*, then you must take the log of your starting tick (e.g. to set the starting tick to 100, set the `tick0` to 2). If the axis `type` is *date*, then you must convert the date to unix time in milliseconds (the number of milliseconds since January 1st, 1970). For example, to set the starting tick to November 4th, 2013, set the range to 1380844800000.0.",
                         "dflt": 0,
                         "role": "style",
                         "valType": "number"
@@ -1479,6 +1482,7 @@
                         },
                         "description": "Sets the tick font.",
                         "family": {
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                             "noBlank": true,
                             "role": "style",
                             "strict": true,
@@ -1575,6 +1579,7 @@
                         },
                         "description": "Sets this axis' title font.",
                         "family": {
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                             "noBlank": true,
                             "role": "style",
                             "strict": true,
@@ -1637,7 +1642,7 @@
                         "valType": "color"
                     },
                     "dtick": {
-                        "description": "Sets the step in-between ticks on this axis",
+                        "description": "Sets the step in-between ticks on this axis Use with `tick0`. If the axis `type` is *log*, then ticks are set every 10^(n*dtick) where n is the tick number. For example, to set a tick mark at 1, 10, 100, 1000, ... set dtick to 1. To set tick marks at 1, 100, 10000, ... set dtick to 2. To set tick marks at 1, 5, 25, 125, 625, 3125, ... set dtick to log_10(5), or 0.69897000433. If the axis `type` is *date*, then you must convert the time to milliseconds. For example, to set the interval between ticks to one day, set `dtick` to 86400000.0.",
                         "dflt": 1,
                         "role": "style",
                         "valType": "any"
@@ -1715,7 +1720,7 @@
                         "valType": "integer"
                     },
                     "range": {
-                        "description": "Sets the range of this axis.",
+                        "description": "Sets the range of this axis. If the axis `type` is *log*, then you must take the log of your desired range (e.g. to set the range from 1 to 100, set the range from 0 to 2). If the axis `type` is *date*, then you must convert the date to unix time in milliseconds (the number of milliseconds since January 1st, 1970). For example, to set the date range from January 1st 1970 to November 4th, 2013, set the range from 0 to 1380844800000.0",
                         "items": [
                             {
                                 "valType": "number"
@@ -1830,7 +1835,7 @@
                         "valType": "number"
                     },
                     "tick0": {
-                        "description": "Sets the placement of the first tick on this axis. Use with `dtick`.",
+                        "description": "Sets the placement of the first tick on this axis. Use with `dtick`. If the axis `type` is *log*, then you must take the log of your starting tick (e.g. to set the starting tick to 100, set the `tick0` to 2). If the axis `type` is *date*, then you must convert the date to unix time in milliseconds (the number of milliseconds since January 1st, 1970). For example, to set the starting tick to November 4th, 2013, set the range to 1380844800000.0.",
                         "dflt": 0,
                         "role": "style",
                         "valType": "number"
@@ -1854,6 +1859,7 @@
                         },
                         "description": "Sets the tick font.",
                         "family": {
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                             "noBlank": true,
                             "role": "style",
                             "strict": true,
@@ -1950,6 +1956,7 @@
                         },
                         "description": "Sets this axis' title font.",
                         "family": {
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                             "noBlank": true,
                             "role": "style",
                             "strict": true,
@@ -2012,7 +2019,7 @@
                         "valType": "color"
                     },
                     "dtick": {
-                        "description": "Sets the step in-between ticks on this axis",
+                        "description": "Sets the step in-between ticks on this axis Use with `tick0`. If the axis `type` is *log*, then ticks are set every 10^(n*dtick) where n is the tick number. For example, to set a tick mark at 1, 10, 100, 1000, ... set dtick to 1. To set tick marks at 1, 100, 10000, ... set dtick to 2. To set tick marks at 1, 5, 25, 125, 625, 3125, ... set dtick to log_10(5), or 0.69897000433. If the axis `type` is *date*, then you must convert the time to milliseconds. For example, to set the interval between ticks to one day, set `dtick` to 86400000.0.",
                         "dflt": 1,
                         "role": "style",
                         "valType": "any"
@@ -2090,7 +2097,7 @@
                         "valType": "integer"
                     },
                     "range": {
-                        "description": "Sets the range of this axis.",
+                        "description": "Sets the range of this axis. If the axis `type` is *log*, then you must take the log of your desired range (e.g. to set the range from 1 to 100, set the range from 0 to 2). If the axis `type` is *date*, then you must convert the date to unix time in milliseconds (the number of milliseconds since January 1st, 1970). For example, to set the date range from January 1st 1970 to November 4th, 2013, set the range from 0 to 1380844800000.0",
                         "items": [
                             {
                                 "valType": "number"
@@ -2205,7 +2212,7 @@
                         "valType": "number"
                     },
                     "tick0": {
-                        "description": "Sets the placement of the first tick on this axis. Use with `dtick`.",
+                        "description": "Sets the placement of the first tick on this axis. Use with `dtick`. If the axis `type` is *log*, then you must take the log of your starting tick (e.g. to set the starting tick to 100, set the `tick0` to 2). If the axis `type` is *date*, then you must convert the date to unix time in milliseconds (the number of milliseconds since January 1st, 1970). For example, to set the starting tick to November 4th, 2013, set the range to 1380844800000.0.",
                         "dflt": 0,
                         "role": "style",
                         "valType": "number"
@@ -2229,6 +2236,7 @@
                         },
                         "description": "Sets the tick font.",
                         "family": {
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                             "noBlank": true,
                             "role": "style",
                             "strict": true,
@@ -2325,6 +2333,7 @@
                         },
                         "description": "Sets this axis' title font.",
                         "family": {
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                             "noBlank": true,
                             "role": "style",
                             "strict": true,
@@ -2391,7 +2400,7 @@
                                 "valType": "color"
                             },
                             "dash": {
-                                "description": "Sets the style of the lines.",
+                                "description": "Sets the style of the lines. Set to a dash string type or a dash length in px.",
                                 "dflt": "solid",
                                 "role": "style",
                                 "valType": "string",
@@ -2506,6 +2515,7 @@
                 },
                 "description": "Sets the title font.",
                 "family": {
+                    "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                     "noBlank": true,
                     "role": "style",
                     "strict": true,
@@ -2577,7 +2587,7 @@
                     "valType": "info_array"
                 },
                 "dtick": {
-                    "description": "Sets the step in-between ticks on this axis",
+                    "description": "Sets the step in-between ticks on this axis Use with `tick0`. If the axis `type` is *log*, then ticks are set every 10^(n*dtick) where n is the tick number. For example, to set a tick mark at 1, 10, 100, 1000, ... set dtick to 1. To set tick marks at 1, 100, 10000, ... set dtick to 2. To set tick marks at 1, 5, 25, 125, 625, 3125, ... set dtick to log_10(5), or 0.69897000433. If the axis `type` is *date*, then you must convert the time to milliseconds. For example, to set the interval between ticks to one day, set `dtick` to 86400000.0.",
                     "dflt": 1,
                     "role": "style",
                     "valType": "any"
@@ -2673,7 +2683,7 @@
                     "valType": "number"
                 },
                 "range": {
-                    "description": "Sets the range of this axis.",
+                    "description": "Sets the range of this axis. If the axis `type` is *log*, then you must take the log of your desired range (e.g. to set the range from 1 to 100, set the range from 0 to 2). If the axis `type` is *date*, then you must convert the date to unix time in milliseconds (the number of milliseconds since January 1st, 1970). For example, to set the date range from January 1st 1970 to November 4th, 2013, set the range from 0 to 1380844800000.0",
                     "items": [
                         {
                             "valType": "number"
@@ -2762,7 +2772,7 @@
                     ]
                 },
                 "tick0": {
-                    "description": "Sets the placement of the first tick on this axis. Use with `dtick`.",
+                    "description": "Sets the placement of the first tick on this axis. Use with `dtick`. If the axis `type` is *log*, then you must take the log of your starting tick (e.g. to set the starting tick to 100, set the `tick0` to 2). If the axis `type` is *date*, then you must convert the date to unix time in milliseconds (the number of milliseconds since January 1st, 1970). For example, to set the starting tick to November 4th, 2013, set the range to 1380844800000.0.",
                     "dflt": 0,
                     "role": "style",
                     "valType": "number"
@@ -2786,6 +2796,7 @@
                     },
                     "description": "Sets the tick font.",
                     "family": {
+                        "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                         "noBlank": true,
                         "role": "style",
                         "strict": true,
@@ -2882,6 +2893,7 @@
                     },
                     "description": "Sets this axis' title font.",
                     "family": {
+                        "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                         "noBlank": true,
                         "role": "style",
                         "strict": true,
@@ -2977,7 +2989,7 @@
                     "valType": "info_array"
                 },
                 "dtick": {
-                    "description": "Sets the step in-between ticks on this axis",
+                    "description": "Sets the step in-between ticks on this axis Use with `tick0`. If the axis `type` is *log*, then ticks are set every 10^(n*dtick) where n is the tick number. For example, to set a tick mark at 1, 10, 100, 1000, ... set dtick to 1. To set tick marks at 1, 100, 10000, ... set dtick to 2. To set tick marks at 1, 5, 25, 125, 625, 3125, ... set dtick to log_10(5), or 0.69897000433. If the axis `type` is *date*, then you must convert the time to milliseconds. For example, to set the interval between ticks to one day, set `dtick` to 86400000.0.",
                     "dflt": 1,
                     "role": "style",
                     "valType": "any"
@@ -3073,7 +3085,7 @@
                     "valType": "number"
                 },
                 "range": {
-                    "description": "Sets the range of this axis.",
+                    "description": "Sets the range of this axis. If the axis `type` is *log*, then you must take the log of your desired range (e.g. to set the range from 1 to 100, set the range from 0 to 2). If the axis `type` is *date*, then you must convert the date to unix time in milliseconds (the number of milliseconds since January 1st, 1970). For example, to set the date range from January 1st 1970 to November 4th, 2013, set the range from 0 to 1380844800000.0",
                     "items": [
                         {
                             "valType": "number"
@@ -3162,7 +3174,7 @@
                     ]
                 },
                 "tick0": {
-                    "description": "Sets the placement of the first tick on this axis. Use with `dtick`.",
+                    "description": "Sets the placement of the first tick on this axis. Use with `dtick`. If the axis `type` is *log*, then you must take the log of your starting tick (e.g. to set the starting tick to 100, set the `tick0` to 2). If the axis `type` is *date*, then you must convert the date to unix time in milliseconds (the number of milliseconds since January 1st, 1970). For example, to set the starting tick to November 4th, 2013, set the range to 1380844800000.0.",
                     "dflt": 0,
                     "role": "style",
                     "valType": "number"
@@ -3186,6 +3198,7 @@
                     },
                     "description": "Sets the tick font.",
                     "family": {
+                        "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                         "noBlank": true,
                         "role": "style",
                         "strict": true,
@@ -3282,6 +3295,7 @@
                     },
                     "description": "Sets this axis' title font.",
                     "family": {
+                        "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                         "noBlank": true,
                         "role": "style",
                         "strict": true,
@@ -4071,7 +4085,7 @@
                             "valType": "number"
                         },
                         "dtick": {
-                            "description": "Sets the step in-between ticks on this axis",
+                            "description": "Sets the step in-between ticks on this axis Use with `tick0`. If the axis `type` is *log*, then ticks are set every 10^(n*dtick) where n is the tick number. For example, to set a tick mark at 1, 10, 100, 1000, ... set dtick to 1. To set tick marks at 1, 100, 10000, ... set dtick to 2. To set tick marks at 1, 5, 25, 125, 625, 3125, ... set dtick to log_10(5), or 0.69897000433. If the axis `type` is *date*, then you must convert the time to milliseconds. For example, to set the interval between ticks to one day, set `dtick` to 86400000.0.",
                             "dflt": 1,
                             "role": "style",
                             "valType": "any"
@@ -4178,7 +4192,7 @@
                             "valType": "number"
                         },
                         "thicknessmode": {
-                            "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels. Use `thickness` to set the value.",
+                            "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels*. Use `thickness` to set the value.",
                             "dflt": "pixels",
                             "role": "style",
                             "valType": "enumerated",
@@ -4188,7 +4202,7 @@
                             ]
                         },
                         "tick0": {
-                            "description": "Sets the placement of the first tick on this axis. Use with `dtick`.",
+                            "description": "Sets the placement of the first tick on this axis. Use with `dtick`. If the axis `type` is *log*, then you must take the log of your starting tick (e.g. to set the starting tick to 100, set the `tick0` to 2). If the axis `type` is *date*, then you must convert the date to unix time in milliseconds (the number of milliseconds since January 1st, 1970). For example, to set the starting tick to November 4th, 2013, set the range to 1380844800000.0.",
                             "dflt": 0,
                             "role": "style",
                             "valType": "number"
@@ -4212,6 +4226,7 @@
                             },
                             "description": "Sets the tick font.",
                             "family": {
+                                "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                                 "noBlank": true,
                                 "role": "style",
                                 "strict": true,
@@ -4310,6 +4325,7 @@
                             },
                             "description": "Sets this color bar's title font.",
                             "family": {
+                                "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                                 "noBlank": true,
                                 "role": "style",
                                 "strict": true,
@@ -4336,11 +4352,13 @@
                         "x": {
                             "description": "Sets the x position of the color bar (in plot fraction).",
                             "dflt": 1.02,
+                            "max": 3,
+                            "min": -2,
                             "role": "style",
                             "valType": "number"
                         },
                         "xanchor": {
-                            "description": "Sets this color bar's horizontal position anchor This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
+                            "description": "Sets this color bar's horizontal position anchor. This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
                             "dflt": "left",
                             "role": "style",
                             "valType": "enumerated",
@@ -4360,6 +4378,8 @@
                         "y": {
                             "description": "Sets the y position of the color bar (in plot fraction).",
                             "dflt": 0.5,
+                            "max": 3,
+                            "min": -2,
                             "role": "style",
                             "valType": "number"
                         },
@@ -4394,25 +4414,25 @@
                     },
                     "line": {
                         "autocolorscale": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Determines whether or not the colorscale is picked using the sign of values inside `marker.line.color`.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Determines whether or not the colorscale is picked using the sign of values inside `marker.line.color`.",
                             "dflt": true,
                             "role": "style",
                             "valType": "boolean"
                         },
                         "cauto": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Determines the whether or not the color domain is computed with respect to the input data.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Determines the whether or not the color domain is computed with respect to the input data.",
                             "dflt": true,
                             "role": "style",
                             "valType": "boolean"
                         },
                         "cmax": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Sets the upper bound of the color domain.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the upper bound of the color domain.",
                             "dflt": null,
                             "role": "info",
                             "valType": "number"
                         },
                         "cmin": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Sets the lower bound of the color domain.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the lower bound of the color domain.",
                             "dflt": null,
                             "role": "info",
                             "valType": "number"
@@ -4424,7 +4444,7 @@
                             "valType": "color"
                         },
                         "colorscale": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Sets the colorscale.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the colorscale.",
                             "role": "style",
                             "valType": "colorscale"
                         },
@@ -4434,7 +4454,7 @@
                             "valType": "string"
                         },
                         "reversescale": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Reverses the colorscale.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Reverses the colorscale.",
                             "dflt": false,
                             "role": "style",
                             "valType": "boolean"
@@ -5254,7 +5274,7 @@
                         "valType": "number"
                     },
                     "dtick": {
-                        "description": "Sets the step in-between ticks on this axis",
+                        "description": "Sets the step in-between ticks on this axis Use with `tick0`. If the axis `type` is *log*, then ticks are set every 10^(n*dtick) where n is the tick number. For example, to set a tick mark at 1, 10, 100, 1000, ... set dtick to 1. To set tick marks at 1, 100, 10000, ... set dtick to 2. To set tick marks at 1, 5, 25, 125, 625, 3125, ... set dtick to log_10(5), or 0.69897000433. If the axis `type` is *date*, then you must convert the time to milliseconds. For example, to set the interval between ticks to one day, set `dtick` to 86400000.0.",
                         "dflt": 1,
                         "role": "style",
                         "valType": "any"
@@ -5361,7 +5381,7 @@
                         "valType": "number"
                     },
                     "thicknessmode": {
-                        "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels. Use `thickness` to set the value.",
+                        "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels*. Use `thickness` to set the value.",
                         "dflt": "pixels",
                         "role": "style",
                         "valType": "enumerated",
@@ -5371,7 +5391,7 @@
                         ]
                     },
                     "tick0": {
-                        "description": "Sets the placement of the first tick on this axis. Use with `dtick`.",
+                        "description": "Sets the placement of the first tick on this axis. Use with `dtick`. If the axis `type` is *log*, then you must take the log of your starting tick (e.g. to set the starting tick to 100, set the `tick0` to 2). If the axis `type` is *date*, then you must convert the date to unix time in milliseconds (the number of milliseconds since January 1st, 1970). For example, to set the starting tick to November 4th, 2013, set the range to 1380844800000.0.",
                         "dflt": 0,
                         "role": "style",
                         "valType": "number"
@@ -5395,6 +5415,7 @@
                         },
                         "description": "Sets the tick font.",
                         "family": {
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                             "noBlank": true,
                             "role": "style",
                             "strict": true,
@@ -5493,6 +5514,7 @@
                         },
                         "description": "Sets this color bar's title font.",
                         "family": {
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                             "noBlank": true,
                             "role": "style",
                             "strict": true,
@@ -5519,11 +5541,13 @@
                     "x": {
                         "description": "Sets the x position of the color bar (in plot fraction).",
                         "dflt": 1.02,
+                        "max": 3,
+                        "min": -2,
                         "role": "style",
                         "valType": "number"
                     },
                     "xanchor": {
-                        "description": "Sets this color bar's horizontal position anchor This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
+                        "description": "Sets this color bar's horizontal position anchor. This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
                         "dflt": "left",
                         "role": "style",
                         "valType": "enumerated",
@@ -5543,6 +5567,8 @@
                     "y": {
                         "description": "Sets the y position of the color bar (in plot fraction).",
                         "dflt": 0.5,
+                        "max": 3,
+                        "min": -2,
                         "role": "style",
                         "valType": "number"
                     },
@@ -5788,7 +5814,7 @@
                         "valType": "number"
                     },
                     "dtick": {
-                        "description": "Sets the step in-between ticks on this axis",
+                        "description": "Sets the step in-between ticks on this axis Use with `tick0`. If the axis `type` is *log*, then ticks are set every 10^(n*dtick) where n is the tick number. For example, to set a tick mark at 1, 10, 100, 1000, ... set dtick to 1. To set tick marks at 1, 100, 10000, ... set dtick to 2. To set tick marks at 1, 5, 25, 125, 625, 3125, ... set dtick to log_10(5), or 0.69897000433. If the axis `type` is *date*, then you must convert the time to milliseconds. For example, to set the interval between ticks to one day, set `dtick` to 86400000.0.",
                         "dflt": 1,
                         "role": "style",
                         "valType": "any"
@@ -5895,7 +5921,7 @@
                         "valType": "number"
                     },
                     "thicknessmode": {
-                        "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels. Use `thickness` to set the value.",
+                        "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels*. Use `thickness` to set the value.",
                         "dflt": "pixels",
                         "role": "style",
                         "valType": "enumerated",
@@ -5905,7 +5931,7 @@
                         ]
                     },
                     "tick0": {
-                        "description": "Sets the placement of the first tick on this axis. Use with `dtick`.",
+                        "description": "Sets the placement of the first tick on this axis. Use with `dtick`. If the axis `type` is *log*, then you must take the log of your starting tick (e.g. to set the starting tick to 100, set the `tick0` to 2). If the axis `type` is *date*, then you must convert the date to unix time in milliseconds (the number of milliseconds since January 1st, 1970). For example, to set the starting tick to November 4th, 2013, set the range to 1380844800000.0.",
                         "dflt": 0,
                         "role": "style",
                         "valType": "number"
@@ -5929,6 +5955,7 @@
                         },
                         "description": "Sets the tick font.",
                         "family": {
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                             "noBlank": true,
                             "role": "style",
                             "strict": true,
@@ -6027,6 +6054,7 @@
                         },
                         "description": "Sets this color bar's title font.",
                         "family": {
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                             "noBlank": true,
                             "role": "style",
                             "strict": true,
@@ -6053,11 +6081,13 @@
                     "x": {
                         "description": "Sets the x position of the color bar (in plot fraction).",
                         "dflt": 1.02,
+                        "max": 3,
+                        "min": -2,
                         "role": "style",
                         "valType": "number"
                     },
                     "xanchor": {
-                        "description": "Sets this color bar's horizontal position anchor This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
+                        "description": "Sets this color bar's horizontal position anchor. This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
                         "dflt": "left",
                         "role": "style",
                         "valType": "enumerated",
@@ -6077,6 +6107,8 @@
                     "y": {
                         "description": "Sets the y position of the color bar (in plot fraction).",
                         "dflt": 0.5,
+                        "max": 3,
+                        "min": -2,
                         "role": "style",
                         "valType": "number"
                     },
@@ -6191,7 +6223,7 @@
                         "valType": "color"
                     },
                     "dash": {
-                        "description": "Sets the style of the lines.",
+                        "description": "Sets the style of the lines. Set to a dash string type or a dash length in px.",
                         "dflt": "solid",
                         "role": "style",
                         "valType": "string",
@@ -6440,7 +6472,7 @@
                         "valType": "number"
                     },
                     "dtick": {
-                        "description": "Sets the step in-between ticks on this axis",
+                        "description": "Sets the step in-between ticks on this axis Use with `tick0`. If the axis `type` is *log*, then ticks are set every 10^(n*dtick) where n is the tick number. For example, to set a tick mark at 1, 10, 100, 1000, ... set dtick to 1. To set tick marks at 1, 100, 10000, ... set dtick to 2. To set tick marks at 1, 5, 25, 125, 625, 3125, ... set dtick to log_10(5), or 0.69897000433. If the axis `type` is *date*, then you must convert the time to milliseconds. For example, to set the interval between ticks to one day, set `dtick` to 86400000.0.",
                         "dflt": 1,
                         "role": "style",
                         "valType": "any"
@@ -6547,7 +6579,7 @@
                         "valType": "number"
                     },
                     "thicknessmode": {
-                        "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels. Use `thickness` to set the value.",
+                        "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels*. Use `thickness` to set the value.",
                         "dflt": "pixels",
                         "role": "style",
                         "valType": "enumerated",
@@ -6557,7 +6589,7 @@
                         ]
                     },
                     "tick0": {
-                        "description": "Sets the placement of the first tick on this axis. Use with `dtick`.",
+                        "description": "Sets the placement of the first tick on this axis. Use with `dtick`. If the axis `type` is *log*, then you must take the log of your starting tick (e.g. to set the starting tick to 100, set the `tick0` to 2). If the axis `type` is *date*, then you must convert the date to unix time in milliseconds (the number of milliseconds since January 1st, 1970). For example, to set the starting tick to November 4th, 2013, set the range to 1380844800000.0.",
                         "dflt": 0,
                         "role": "style",
                         "valType": "number"
@@ -6581,6 +6613,7 @@
                         },
                         "description": "Sets the tick font.",
                         "family": {
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                             "noBlank": true,
                             "role": "style",
                             "strict": true,
@@ -6679,6 +6712,7 @@
                         },
                         "description": "Sets this color bar's title font.",
                         "family": {
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                             "noBlank": true,
                             "role": "style",
                             "strict": true,
@@ -6705,11 +6739,13 @@
                     "x": {
                         "description": "Sets the x position of the color bar (in plot fraction).",
                         "dflt": 1.02,
+                        "max": 3,
+                        "min": -2,
                         "role": "style",
                         "valType": "number"
                     },
                     "xanchor": {
-                        "description": "Sets this color bar's horizontal position anchor This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
+                        "description": "Sets this color bar's horizontal position anchor. This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
                         "dflt": "left",
                         "role": "style",
                         "valType": "enumerated",
@@ -6729,6 +6765,8 @@
                     "y": {
                         "description": "Sets the y position of the color bar (in plot fraction).",
                         "dflt": 0.5,
+                        "max": 3,
+                        "min": -2,
                         "role": "style",
                         "valType": "number"
                     },
@@ -7324,7 +7362,7 @@
                             "valType": "number"
                         },
                         "dtick": {
-                            "description": "Sets the step in-between ticks on this axis",
+                            "description": "Sets the step in-between ticks on this axis Use with `tick0`. If the axis `type` is *log*, then ticks are set every 10^(n*dtick) where n is the tick number. For example, to set a tick mark at 1, 10, 100, 1000, ... set dtick to 1. To set tick marks at 1, 100, 10000, ... set dtick to 2. To set tick marks at 1, 5, 25, 125, 625, 3125, ... set dtick to log_10(5), or 0.69897000433. If the axis `type` is *date*, then you must convert the time to milliseconds. For example, to set the interval between ticks to one day, set `dtick` to 86400000.0.",
                             "dflt": 1,
                             "role": "style",
                             "valType": "any"
@@ -7431,7 +7469,7 @@
                             "valType": "number"
                         },
                         "thicknessmode": {
-                            "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels. Use `thickness` to set the value.",
+                            "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels*. Use `thickness` to set the value.",
                             "dflt": "pixels",
                             "role": "style",
                             "valType": "enumerated",
@@ -7441,7 +7479,7 @@
                             ]
                         },
                         "tick0": {
-                            "description": "Sets the placement of the first tick on this axis. Use with `dtick`.",
+                            "description": "Sets the placement of the first tick on this axis. Use with `dtick`. If the axis `type` is *log*, then you must take the log of your starting tick (e.g. to set the starting tick to 100, set the `tick0` to 2). If the axis `type` is *date*, then you must convert the date to unix time in milliseconds (the number of milliseconds since January 1st, 1970). For example, to set the starting tick to November 4th, 2013, set the range to 1380844800000.0.",
                             "dflt": 0,
                             "role": "style",
                             "valType": "number"
@@ -7465,6 +7503,7 @@
                             },
                             "description": "Sets the tick font.",
                             "family": {
+                                "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                                 "noBlank": true,
                                 "role": "style",
                                 "strict": true,
@@ -7563,6 +7602,7 @@
                             },
                             "description": "Sets this color bar's title font.",
                             "family": {
+                                "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                                 "noBlank": true,
                                 "role": "style",
                                 "strict": true,
@@ -7589,11 +7629,13 @@
                         "x": {
                             "description": "Sets the x position of the color bar (in plot fraction).",
                             "dflt": 1.02,
+                            "max": 3,
+                            "min": -2,
                             "role": "style",
                             "valType": "number"
                         },
                         "xanchor": {
-                            "description": "Sets this color bar's horizontal position anchor This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
+                            "description": "Sets this color bar's horizontal position anchor. This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
                             "dflt": "left",
                             "role": "style",
                             "valType": "enumerated",
@@ -7613,6 +7655,8 @@
                         "y": {
                             "description": "Sets the y position of the color bar (in plot fraction).",
                             "dflt": 0.5,
+                            "max": 3,
+                            "min": -2,
                             "role": "style",
                             "valType": "number"
                         },
@@ -7647,25 +7691,25 @@
                     },
                     "line": {
                         "autocolorscale": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Determines whether or not the colorscale is picked using the sign of values inside `marker.line.color`.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Determines whether or not the colorscale is picked using the sign of values inside `marker.line.color`.",
                             "dflt": true,
                             "role": "style",
                             "valType": "boolean"
                         },
                         "cauto": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Determines the whether or not the color domain is computed with respect to the input data.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Determines the whether or not the color domain is computed with respect to the input data.",
                             "dflt": true,
                             "role": "style",
                             "valType": "boolean"
                         },
                         "cmax": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Sets the upper bound of the color domain.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the upper bound of the color domain.",
                             "dflt": null,
                             "role": "info",
                             "valType": "number"
                         },
                         "cmin": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Sets the lower bound of the color domain.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the lower bound of the color domain.",
                             "dflt": null,
                             "role": "info",
                             "valType": "number"
@@ -7677,7 +7721,7 @@
                             "valType": "color"
                         },
                         "colorscale": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Sets the colorscale.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the colorscale.",
                             "role": "style",
                             "valType": "colorscale"
                         },
@@ -7687,7 +7731,7 @@
                             "valType": "string"
                         },
                         "reversescale": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Reverses the colorscale.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Reverses the colorscale.",
                             "dflt": false,
                             "role": "style",
                             "valType": "boolean"
@@ -8006,7 +8050,7 @@
                         "valType": "number"
                     },
                     "dtick": {
-                        "description": "Sets the step in-between ticks on this axis",
+                        "description": "Sets the step in-between ticks on this axis Use with `tick0`. If the axis `type` is *log*, then ticks are set every 10^(n*dtick) where n is the tick number. For example, to set a tick mark at 1, 10, 100, 1000, ... set dtick to 1. To set tick marks at 1, 100, 10000, ... set dtick to 2. To set tick marks at 1, 5, 25, 125, 625, 3125, ... set dtick to log_10(5), or 0.69897000433. If the axis `type` is *date*, then you must convert the time to milliseconds. For example, to set the interval between ticks to one day, set `dtick` to 86400000.0.",
                         "dflt": 1,
                         "role": "style",
                         "valType": "any"
@@ -8113,7 +8157,7 @@
                         "valType": "number"
                     },
                     "thicknessmode": {
-                        "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels. Use `thickness` to set the value.",
+                        "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels*. Use `thickness` to set the value.",
                         "dflt": "pixels",
                         "role": "style",
                         "valType": "enumerated",
@@ -8123,7 +8167,7 @@
                         ]
                     },
                     "tick0": {
-                        "description": "Sets the placement of the first tick on this axis. Use with `dtick`.",
+                        "description": "Sets the placement of the first tick on this axis. Use with `dtick`. If the axis `type` is *log*, then you must take the log of your starting tick (e.g. to set the starting tick to 100, set the `tick0` to 2). If the axis `type` is *date*, then you must convert the date to unix time in milliseconds (the number of milliseconds since January 1st, 1970). For example, to set the starting tick to November 4th, 2013, set the range to 1380844800000.0.",
                         "dflt": 0,
                         "role": "style",
                         "valType": "number"
@@ -8147,6 +8191,7 @@
                         },
                         "description": "Sets the tick font.",
                         "family": {
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                             "noBlank": true,
                             "role": "style",
                             "strict": true,
@@ -8245,6 +8290,7 @@
                         },
                         "description": "Sets this color bar's title font.",
                         "family": {
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                             "noBlank": true,
                             "role": "style",
                             "strict": true,
@@ -8271,11 +8317,13 @@
                     "x": {
                         "description": "Sets the x position of the color bar (in plot fraction).",
                         "dflt": 1.02,
+                        "max": 3,
+                        "min": -2,
                         "role": "style",
                         "valType": "number"
                     },
                     "xanchor": {
-                        "description": "Sets this color bar's horizontal position anchor This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
+                        "description": "Sets this color bar's horizontal position anchor. This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
                         "dflt": "left",
                         "role": "style",
                         "valType": "enumerated",
@@ -8295,6 +8343,8 @@
                     "y": {
                         "description": "Sets the y position of the color bar (in plot fraction).",
                         "dflt": 0.5,
+                        "max": 3,
+                        "min": -2,
                         "role": "style",
                         "valType": "number"
                     },
@@ -8698,7 +8748,7 @@
                         "valType": "number"
                     },
                     "dtick": {
-                        "description": "Sets the step in-between ticks on this axis",
+                        "description": "Sets the step in-between ticks on this axis Use with `tick0`. If the axis `type` is *log*, then ticks are set every 10^(n*dtick) where n is the tick number. For example, to set a tick mark at 1, 10, 100, 1000, ... set dtick to 1. To set tick marks at 1, 100, 10000, ... set dtick to 2. To set tick marks at 1, 5, 25, 125, 625, 3125, ... set dtick to log_10(5), or 0.69897000433. If the axis `type` is *date*, then you must convert the time to milliseconds. For example, to set the interval between ticks to one day, set `dtick` to 86400000.0.",
                         "dflt": 1,
                         "role": "style",
                         "valType": "any"
@@ -8805,7 +8855,7 @@
                         "valType": "number"
                     },
                     "thicknessmode": {
-                        "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels. Use `thickness` to set the value.",
+                        "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels*. Use `thickness` to set the value.",
                         "dflt": "pixels",
                         "role": "style",
                         "valType": "enumerated",
@@ -8815,7 +8865,7 @@
                         ]
                     },
                     "tick0": {
-                        "description": "Sets the placement of the first tick on this axis. Use with `dtick`.",
+                        "description": "Sets the placement of the first tick on this axis. Use with `dtick`. If the axis `type` is *log*, then you must take the log of your starting tick (e.g. to set the starting tick to 100, set the `tick0` to 2). If the axis `type` is *date*, then you must convert the date to unix time in milliseconds (the number of milliseconds since January 1st, 1970). For example, to set the starting tick to November 4th, 2013, set the range to 1380844800000.0.",
                         "dflt": 0,
                         "role": "style",
                         "valType": "number"
@@ -8839,6 +8889,7 @@
                         },
                         "description": "Sets the tick font.",
                         "family": {
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                             "noBlank": true,
                             "role": "style",
                             "strict": true,
@@ -8937,6 +8988,7 @@
                         },
                         "description": "Sets this color bar's title font.",
                         "family": {
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                             "noBlank": true,
                             "role": "style",
                             "strict": true,
@@ -8963,11 +9015,13 @@
                     "x": {
                         "description": "Sets the x position of the color bar (in plot fraction).",
                         "dflt": 1.02,
+                        "max": 3,
+                        "min": -2,
                         "role": "style",
                         "valType": "number"
                     },
                     "xanchor": {
-                        "description": "Sets this color bar's horizontal position anchor This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
+                        "description": "Sets this color bar's horizontal position anchor. This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
                         "dflt": "left",
                         "role": "style",
                         "valType": "enumerated",
@@ -8987,6 +9041,8 @@
                     "y": {
                         "description": "Sets the y position of the color bar (in plot fraction).",
                         "dflt": 0.5,
+                        "max": 3,
+                        "min": -2,
                         "role": "style",
                         "valType": "number"
                     },
@@ -9127,7 +9183,7 @@
                         "valType": "color"
                     },
                     "dash": {
-                        "description": "Sets the style of the lines.",
+                        "description": "Sets the style of the lines. Set to a dash string type or a dash length in px.",
                         "dflt": "solid",
                         "role": "style",
                         "valType": "string",
@@ -9457,7 +9513,7 @@
                         "valType": "number"
                     },
                     "dtick": {
-                        "description": "Sets the step in-between ticks on this axis",
+                        "description": "Sets the step in-between ticks on this axis Use with `tick0`. If the axis `type` is *log*, then ticks are set every 10^(n*dtick) where n is the tick number. For example, to set a tick mark at 1, 10, 100, 1000, ... set dtick to 1. To set tick marks at 1, 100, 10000, ... set dtick to 2. To set tick marks at 1, 5, 25, 125, 625, 3125, ... set dtick to log_10(5), or 0.69897000433. If the axis `type` is *date*, then you must convert the time to milliseconds. For example, to set the interval between ticks to one day, set `dtick` to 86400000.0.",
                         "dflt": 1,
                         "role": "style",
                         "valType": "any"
@@ -9564,7 +9620,7 @@
                         "valType": "number"
                     },
                     "thicknessmode": {
-                        "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels. Use `thickness` to set the value.",
+                        "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels*. Use `thickness` to set the value.",
                         "dflt": "pixels",
                         "role": "style",
                         "valType": "enumerated",
@@ -9574,7 +9630,7 @@
                         ]
                     },
                     "tick0": {
-                        "description": "Sets the placement of the first tick on this axis. Use with `dtick`.",
+                        "description": "Sets the placement of the first tick on this axis. Use with `dtick`. If the axis `type` is *log*, then you must take the log of your starting tick (e.g. to set the starting tick to 100, set the `tick0` to 2). If the axis `type` is *date*, then you must convert the date to unix time in milliseconds (the number of milliseconds since January 1st, 1970). For example, to set the starting tick to November 4th, 2013, set the range to 1380844800000.0.",
                         "dflt": 0,
                         "role": "style",
                         "valType": "number"
@@ -9598,6 +9654,7 @@
                         },
                         "description": "Sets the tick font.",
                         "family": {
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                             "noBlank": true,
                             "role": "style",
                             "strict": true,
@@ -9696,6 +9753,7 @@
                         },
                         "description": "Sets this color bar's title font.",
                         "family": {
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                             "noBlank": true,
                             "role": "style",
                             "strict": true,
@@ -9722,11 +9780,13 @@
                     "x": {
                         "description": "Sets the x position of the color bar (in plot fraction).",
                         "dflt": 1.02,
+                        "max": 3,
+                        "min": -2,
                         "role": "style",
                         "valType": "number"
                     },
                     "xanchor": {
-                        "description": "Sets this color bar's horizontal position anchor This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
+                        "description": "Sets this color bar's horizontal position anchor. This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
                         "dflt": "left",
                         "role": "style",
                         "valType": "enumerated",
@@ -9746,6 +9806,8 @@
                     "y": {
                         "description": "Sets the y position of the color bar (in plot fraction).",
                         "dflt": 0.5,
+                        "max": 3,
+                        "min": -2,
                         "role": "style",
                         "valType": "number"
                     },
@@ -10117,6 +10179,7 @@
                     },
                     "description": "Sets the font used for `textinfo` lying inside the pie.",
                     "family": {
+                        "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                         "noBlank": true,
                         "role": "style",
                         "strict": true,
@@ -10212,6 +10275,7 @@
                     },
                     "description": "Sets the font used for `textinfo` lying outside the pie.",
                     "family": {
+                        "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                         "noBlank": true,
                         "role": "style",
                         "strict": true,
@@ -10292,6 +10356,7 @@
                     },
                     "description": "Sets the font used for `textinfo`.",
                     "family": {
+                        "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                         "noBlank": true,
                         "role": "style",
                         "strict": true,
@@ -10656,7 +10721,7 @@
                         "valType": "color"
                     },
                     "dash": {
-                        "description": "Sets the style of the lines.",
+                        "description": "Sets the style of the lines. Set to a dash string type or a dash length in px.",
                         "dflt": "solid",
                         "role": "style",
                         "valType": "string",
@@ -10752,7 +10817,7 @@
                             "valType": "number"
                         },
                         "dtick": {
-                            "description": "Sets the step in-between ticks on this axis",
+                            "description": "Sets the step in-between ticks on this axis Use with `tick0`. If the axis `type` is *log*, then ticks are set every 10^(n*dtick) where n is the tick number. For example, to set a tick mark at 1, 10, 100, 1000, ... set dtick to 1. To set tick marks at 1, 100, 10000, ... set dtick to 2. To set tick marks at 1, 5, 25, 125, 625, 3125, ... set dtick to log_10(5), or 0.69897000433. If the axis `type` is *date*, then you must convert the time to milliseconds. For example, to set the interval between ticks to one day, set `dtick` to 86400000.0.",
                             "dflt": 1,
                             "role": "style",
                             "valType": "any"
@@ -10859,7 +10924,7 @@
                             "valType": "number"
                         },
                         "thicknessmode": {
-                            "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels. Use `thickness` to set the value.",
+                            "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels*. Use `thickness` to set the value.",
                             "dflt": "pixels",
                             "role": "style",
                             "valType": "enumerated",
@@ -10869,7 +10934,7 @@
                             ]
                         },
                         "tick0": {
-                            "description": "Sets the placement of the first tick on this axis. Use with `dtick`.",
+                            "description": "Sets the placement of the first tick on this axis. Use with `dtick`. If the axis `type` is *log*, then you must take the log of your starting tick (e.g. to set the starting tick to 100, set the `tick0` to 2). If the axis `type` is *date*, then you must convert the date to unix time in milliseconds (the number of milliseconds since January 1st, 1970). For example, to set the starting tick to November 4th, 2013, set the range to 1380844800000.0.",
                             "dflt": 0,
                             "role": "style",
                             "valType": "number"
@@ -10893,6 +10958,7 @@
                             },
                             "description": "Sets the tick font.",
                             "family": {
+                                "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                                 "noBlank": true,
                                 "role": "style",
                                 "strict": true,
@@ -10991,6 +11057,7 @@
                             },
                             "description": "Sets this color bar's title font.",
                             "family": {
+                                "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                                 "noBlank": true,
                                 "role": "style",
                                 "strict": true,
@@ -11017,11 +11084,13 @@
                         "x": {
                             "description": "Sets the x position of the color bar (in plot fraction).",
                             "dflt": 1.02,
+                            "max": 3,
+                            "min": -2,
                             "role": "style",
                             "valType": "number"
                         },
                         "xanchor": {
-                            "description": "Sets this color bar's horizontal position anchor This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
+                            "description": "Sets this color bar's horizontal position anchor. This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
                             "dflt": "left",
                             "role": "style",
                             "valType": "enumerated",
@@ -11041,6 +11110,8 @@
                         "y": {
                             "description": "Sets the y position of the color bar (in plot fraction).",
                             "dflt": 0.5,
+                            "max": 3,
+                            "min": -2,
                             "role": "style",
                             "valType": "number"
                         },
@@ -11075,25 +11146,25 @@
                     },
                     "line": {
                         "autocolorscale": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Determines whether or not the colorscale is picked using the sign of values inside `marker.line.color`.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Determines whether or not the colorscale is picked using the sign of values inside `marker.line.color`.",
                             "dflt": true,
                             "role": "style",
                             "valType": "boolean"
                         },
                         "cauto": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Determines the whether or not the color domain is computed with respect to the input data.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Determines the whether or not the color domain is computed with respect to the input data.",
                             "dflt": true,
                             "role": "style",
                             "valType": "boolean"
                         },
                         "cmax": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Sets the upper bound of the color domain.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the upper bound of the color domain.",
                             "dflt": null,
                             "role": "info",
                             "valType": "number"
                         },
                         "cmin": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Sets the lower bound of the color domain.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the lower bound of the color domain.",
                             "dflt": null,
                             "role": "info",
                             "valType": "number"
@@ -11105,7 +11176,7 @@
                             "valType": "color"
                         },
                         "colorscale": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Sets the colorscale.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the colorscale.",
                             "role": "style",
                             "valType": "colorscale"
                         },
@@ -11115,7 +11186,7 @@
                             "valType": "string"
                         },
                         "reversescale": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Reverses the colorscale.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Reverses the colorscale.",
                             "dflt": false,
                             "role": "style",
                             "valType": "boolean"
@@ -11503,7 +11574,7 @@
                     }
                 },
                 "mode": {
-                    "description": "Determines the drawing mode for this scatter trace. If the provided `mode` includes *text* then the `text` elements appear at the coordinates. Otherwise, the `text` elements appear on hover.",
+                    "description": "Determines the drawing mode for this scatter trace. If the provided `mode` includes *text* then the `text` elements appear at the coordinates. Otherwise, the `text` elements appear on hover. If there are less than 20 points, then the default is *lines+markers*. Otherwise, *lines*.",
                     "extras": [
                         "none"
                     ],
@@ -11704,7 +11775,7 @@
                     "valType": "string"
                 }
             },
-            "description": "The data visualized as scatter point or lines is set in `x` and `y` Text (appearing either on the chart or on hover only) is via `text`. Bubble charts are achieved by setting `marker.size` and/or `marker.color` to a numerical arrays."
+            "description": "The scatter trace type encompasses line charts, scatter charts, text charts, and bubble charts. The data visualized as scatter point or lines is set in `x` and `y`. Text (appearing either on the chart or on hover only) is via `text`. Bubble charts are achieved by setting `marker.size` and/or `marker.color` to a numerical arrays."
         },
         "scatter3d": {
             "attributes": {
@@ -12047,7 +12118,7 @@
                         "valType": "color"
                     },
                     "dash": {
-                        "description": "Sets the style of the lines.",
+                        "description": "Sets the style of the lines. Set to a dash string type or a dash length in px.",
                         "dflt": "solid",
                         "role": "style",
                         "valType": "string",
@@ -12121,7 +12192,7 @@
                             "valType": "number"
                         },
                         "dtick": {
-                            "description": "Sets the step in-between ticks on this axis",
+                            "description": "Sets the step in-between ticks on this axis Use with `tick0`. If the axis `type` is *log*, then ticks are set every 10^(n*dtick) where n is the tick number. For example, to set a tick mark at 1, 10, 100, 1000, ... set dtick to 1. To set tick marks at 1, 100, 10000, ... set dtick to 2. To set tick marks at 1, 5, 25, 125, 625, 3125, ... set dtick to log_10(5), or 0.69897000433. If the axis `type` is *date*, then you must convert the time to milliseconds. For example, to set the interval between ticks to one day, set `dtick` to 86400000.0.",
                             "dflt": 1,
                             "role": "style",
                             "valType": "any"
@@ -12228,7 +12299,7 @@
                             "valType": "number"
                         },
                         "thicknessmode": {
-                            "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels. Use `thickness` to set the value.",
+                            "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels*. Use `thickness` to set the value.",
                             "dflt": "pixels",
                             "role": "style",
                             "valType": "enumerated",
@@ -12238,7 +12309,7 @@
                             ]
                         },
                         "tick0": {
-                            "description": "Sets the placement of the first tick on this axis. Use with `dtick`.",
+                            "description": "Sets the placement of the first tick on this axis. Use with `dtick`. If the axis `type` is *log*, then you must take the log of your starting tick (e.g. to set the starting tick to 100, set the `tick0` to 2). If the axis `type` is *date*, then you must convert the date to unix time in milliseconds (the number of milliseconds since January 1st, 1970). For example, to set the starting tick to November 4th, 2013, set the range to 1380844800000.0.",
                             "dflt": 0,
                             "role": "style",
                             "valType": "number"
@@ -12262,6 +12333,7 @@
                             },
                             "description": "Sets the tick font.",
                             "family": {
+                                "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                                 "noBlank": true,
                                 "role": "style",
                                 "strict": true,
@@ -12360,6 +12432,7 @@
                             },
                             "description": "Sets this color bar's title font.",
                             "family": {
+                                "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                                 "noBlank": true,
                                 "role": "style",
                                 "strict": true,
@@ -12386,11 +12459,13 @@
                         "x": {
                             "description": "Sets the x position of the color bar (in plot fraction).",
                             "dflt": 1.02,
+                            "max": 3,
+                            "min": -2,
                             "role": "style",
                             "valType": "number"
                         },
                         "xanchor": {
-                            "description": "Sets this color bar's horizontal position anchor This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
+                            "description": "Sets this color bar's horizontal position anchor. This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
                             "dflt": "left",
                             "role": "style",
                             "valType": "enumerated",
@@ -12410,6 +12485,8 @@
                         "y": {
                             "description": "Sets the y position of the color bar (in plot fraction).",
                             "dflt": 0.5,
+                            "max": 3,
+                            "min": -2,
                             "role": "style",
                             "valType": "number"
                         },
@@ -12444,25 +12521,25 @@
                     },
                     "line": {
                         "autocolorscale": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Determines whether or not the colorscale is picked using the sign of values inside `marker.line.color`.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Determines whether or not the colorscale is picked using the sign of values inside `marker.line.color`.",
                             "dflt": true,
                             "role": "style",
                             "valType": "boolean"
                         },
                         "cauto": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Determines the whether or not the color domain is computed with respect to the input data.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Determines the whether or not the color domain is computed with respect to the input data.",
                             "dflt": true,
                             "role": "style",
                             "valType": "boolean"
                         },
                         "cmax": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Sets the upper bound of the color domain.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the upper bound of the color domain.",
                             "dflt": null,
                             "role": "info",
                             "valType": "number"
                         },
                         "cmin": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Sets the lower bound of the color domain.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the lower bound of the color domain.",
                             "dflt": null,
                             "role": "info",
                             "valType": "number"
@@ -12474,7 +12551,7 @@
                             "valType": "color"
                         },
                         "colorscale": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Sets the colorscale.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the colorscale.",
                             "role": "style",
                             "valType": "colorscale"
                         },
@@ -12484,7 +12561,7 @@
                             "valType": "string"
                         },
                         "reversescale": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Reverses the colorscale.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Reverses the colorscale.",
                             "dflt": false,
                             "role": "style",
                             "valType": "boolean"
@@ -12584,7 +12661,7 @@
                     }
                 },
                 "mode": {
-                    "description": "Determines the drawing mode for this scatter trace. If the provided `mode` includes *text* then the `text` elements appear at the coordinates. Otherwise, the `text` elements appear on hover.",
+                    "description": "Determines the drawing mode for this scatter trace. If the provided `mode` includes *text* then the `text` elements appear at the coordinates. Otherwise, the `text` elements appear on hover. If there are less than 20 points, then the default is *lines+markers*. Otherwise, *lines*.",
                     "dflt": "lines+markers",
                     "extras": [
                         "none"
@@ -12904,7 +12981,7 @@
                         "valType": "color"
                     },
                     "dash": {
-                        "description": "Sets the style of the lines.",
+                        "description": "Sets the style of the lines. Set to a dash string type or a dash length in px.",
                         "dflt": "solid",
                         "role": "style",
                         "valType": "string",
@@ -13009,7 +13086,7 @@
                             "valType": "number"
                         },
                         "dtick": {
-                            "description": "Sets the step in-between ticks on this axis",
+                            "description": "Sets the step in-between ticks on this axis Use with `tick0`. If the axis `type` is *log*, then ticks are set every 10^(n*dtick) where n is the tick number. For example, to set a tick mark at 1, 10, 100, 1000, ... set dtick to 1. To set tick marks at 1, 100, 10000, ... set dtick to 2. To set tick marks at 1, 5, 25, 125, 625, 3125, ... set dtick to log_10(5), or 0.69897000433. If the axis `type` is *date*, then you must convert the time to milliseconds. For example, to set the interval between ticks to one day, set `dtick` to 86400000.0.",
                             "dflt": 1,
                             "role": "style",
                             "valType": "any"
@@ -13116,7 +13193,7 @@
                             "valType": "number"
                         },
                         "thicknessmode": {
-                            "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels. Use `thickness` to set the value.",
+                            "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels*. Use `thickness` to set the value.",
                             "dflt": "pixels",
                             "role": "style",
                             "valType": "enumerated",
@@ -13126,7 +13203,7 @@
                             ]
                         },
                         "tick0": {
-                            "description": "Sets the placement of the first tick on this axis. Use with `dtick`.",
+                            "description": "Sets the placement of the first tick on this axis. Use with `dtick`. If the axis `type` is *log*, then you must take the log of your starting tick (e.g. to set the starting tick to 100, set the `tick0` to 2). If the axis `type` is *date*, then you must convert the date to unix time in milliseconds (the number of milliseconds since January 1st, 1970). For example, to set the starting tick to November 4th, 2013, set the range to 1380844800000.0.",
                             "dflt": 0,
                             "role": "style",
                             "valType": "number"
@@ -13150,6 +13227,7 @@
                             },
                             "description": "Sets the tick font.",
                             "family": {
+                                "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                                 "noBlank": true,
                                 "role": "style",
                                 "strict": true,
@@ -13248,6 +13326,7 @@
                             },
                             "description": "Sets this color bar's title font.",
                             "family": {
+                                "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                                 "noBlank": true,
                                 "role": "style",
                                 "strict": true,
@@ -13274,11 +13353,13 @@
                         "x": {
                             "description": "Sets the x position of the color bar (in plot fraction).",
                             "dflt": 1.02,
+                            "max": 3,
+                            "min": -2,
                             "role": "style",
                             "valType": "number"
                         },
                         "xanchor": {
-                            "description": "Sets this color bar's horizontal position anchor This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
+                            "description": "Sets this color bar's horizontal position anchor. This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
                             "dflt": "left",
                             "role": "style",
                             "valType": "enumerated",
@@ -13298,6 +13379,8 @@
                         "y": {
                             "description": "Sets the y position of the color bar (in plot fraction).",
                             "dflt": 0.5,
+                            "max": 3,
+                            "min": -2,
                             "role": "style",
                             "valType": "number"
                         },
@@ -13332,25 +13415,25 @@
                     },
                     "line": {
                         "autocolorscale": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Determines whether or not the colorscale is picked using the sign of values inside `marker.line.color`.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Determines whether or not the colorscale is picked using the sign of values inside `marker.line.color`.",
                             "dflt": true,
                             "role": "style",
                             "valType": "boolean"
                         },
                         "cauto": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Determines the whether or not the color domain is computed with respect to the input data.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Determines the whether or not the color domain is computed with respect to the input data.",
                             "dflt": true,
                             "role": "style",
                             "valType": "boolean"
                         },
                         "cmax": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Sets the upper bound of the color domain.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the upper bound of the color domain.",
                             "dflt": null,
                             "role": "info",
                             "valType": "number"
                         },
                         "cmin": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Sets the lower bound of the color domain.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the lower bound of the color domain.",
                             "dflt": null,
                             "role": "info",
                             "valType": "number"
@@ -13362,7 +13445,7 @@
                             "valType": "color"
                         },
                         "colorscale": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Sets the colorscale.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the colorscale.",
                             "role": "style",
                             "valType": "colorscale"
                         },
@@ -13372,7 +13455,7 @@
                             "valType": "string"
                         },
                         "reversescale": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Reverses the colorscale.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Reverses the colorscale.",
                             "dflt": false,
                             "role": "style",
                             "valType": "boolean"
@@ -13753,7 +13836,7 @@
                     }
                 },
                 "mode": {
-                    "description": "Determines the drawing mode for this scatter trace. If the provided `mode` includes *text* then the `text` elements appear at the coordinates. Otherwise, the `text` elements appear on hover.",
+                    "description": "Determines the drawing mode for this scatter trace. If the provided `mode` includes *text* then the `text` elements appear at the coordinates. Otherwise, the `text` elements appear on hover. If there are less than 20 points, then the default is *lines+markers*. Otherwise, *lines*.",
                     "dflt": "markers",
                     "extras": [
                         "none"
@@ -14234,7 +14317,7 @@
                             "valType": "number"
                         },
                         "dtick": {
-                            "description": "Sets the step in-between ticks on this axis",
+                            "description": "Sets the step in-between ticks on this axis Use with `tick0`. If the axis `type` is *log*, then ticks are set every 10^(n*dtick) where n is the tick number. For example, to set a tick mark at 1, 10, 100, 1000, ... set dtick to 1. To set tick marks at 1, 100, 10000, ... set dtick to 2. To set tick marks at 1, 5, 25, 125, 625, 3125, ... set dtick to log_10(5), or 0.69897000433. If the axis `type` is *date*, then you must convert the time to milliseconds. For example, to set the interval between ticks to one day, set `dtick` to 86400000.0.",
                             "dflt": 1,
                             "role": "style",
                             "valType": "any"
@@ -14341,7 +14424,7 @@
                             "valType": "number"
                         },
                         "thicknessmode": {
-                            "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels. Use `thickness` to set the value.",
+                            "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels*. Use `thickness` to set the value.",
                             "dflt": "pixels",
                             "role": "style",
                             "valType": "enumerated",
@@ -14351,7 +14434,7 @@
                             ]
                         },
                         "tick0": {
-                            "description": "Sets the placement of the first tick on this axis. Use with `dtick`.",
+                            "description": "Sets the placement of the first tick on this axis. Use with `dtick`. If the axis `type` is *log*, then you must take the log of your starting tick (e.g. to set the starting tick to 100, set the `tick0` to 2). If the axis `type` is *date*, then you must convert the date to unix time in milliseconds (the number of milliseconds since January 1st, 1970). For example, to set the starting tick to November 4th, 2013, set the range to 1380844800000.0.",
                             "dflt": 0,
                             "role": "style",
                             "valType": "number"
@@ -14375,6 +14458,7 @@
                             },
                             "description": "Sets the tick font.",
                             "family": {
+                                "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                                 "noBlank": true,
                                 "role": "style",
                                 "strict": true,
@@ -14473,6 +14557,7 @@
                             },
                             "description": "Sets this color bar's title font.",
                             "family": {
+                                "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                                 "noBlank": true,
                                 "role": "style",
                                 "strict": true,
@@ -14499,11 +14584,13 @@
                         "x": {
                             "description": "Sets the x position of the color bar (in plot fraction).",
                             "dflt": 1.02,
+                            "max": 3,
+                            "min": -2,
                             "role": "style",
                             "valType": "number"
                         },
                         "xanchor": {
-                            "description": "Sets this color bar's horizontal position anchor This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
+                            "description": "Sets this color bar's horizontal position anchor. This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
                             "dflt": "left",
                             "role": "style",
                             "valType": "enumerated",
@@ -14523,6 +14610,8 @@
                         "y": {
                             "description": "Sets the y position of the color bar (in plot fraction).",
                             "dflt": 0.5,
+                            "max": 3,
+                            "min": -2,
                             "role": "style",
                             "valType": "number"
                         },
@@ -14557,25 +14646,25 @@
                     },
                     "line": {
                         "autocolorscale": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Determines whether or not the colorscale is picked using the sign of values inside `marker.line.color`.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Determines whether or not the colorscale is picked using the sign of values inside `marker.line.color`.",
                             "dflt": true,
                             "role": "style",
                             "valType": "boolean"
                         },
                         "cauto": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Determines the whether or not the color domain is computed with respect to the input data.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Determines the whether or not the color domain is computed with respect to the input data.",
                             "dflt": true,
                             "role": "style",
                             "valType": "boolean"
                         },
                         "cmax": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Sets the upper bound of the color domain.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the upper bound of the color domain.",
                             "dflt": null,
                             "role": "info",
                             "valType": "number"
                         },
                         "cmin": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Sets the lower bound of the color domain.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the lower bound of the color domain.",
                             "dflt": null,
                             "role": "info",
                             "valType": "number"
@@ -14587,7 +14676,7 @@
                             "valType": "color"
                         },
                         "colorscale": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Sets the colorscale.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the colorscale.",
                             "role": "style",
                             "valType": "colorscale"
                         },
@@ -14597,7 +14686,7 @@
                             "valType": "string"
                         },
                         "reversescale": {
-                            "description": "Has only an effect if `marker.color.line` is set to a numerical array. Reverses the colorscale.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Reverses the colorscale.",
                             "dflt": false,
                             "role": "style",
                             "valType": "boolean"
@@ -14853,7 +14942,7 @@
                         "valType": "number"
                     },
                     "dtick": {
-                        "description": "Sets the step in-between ticks on this axis",
+                        "description": "Sets the step in-between ticks on this axis Use with `tick0`. If the axis `type` is *log*, then ticks are set every 10^(n*dtick) where n is the tick number. For example, to set a tick mark at 1, 10, 100, 1000, ... set dtick to 1. To set tick marks at 1, 100, 10000, ... set dtick to 2. To set tick marks at 1, 5, 25, 125, 625, 3125, ... set dtick to log_10(5), or 0.69897000433. If the axis `type` is *date*, then you must convert the time to milliseconds. For example, to set the interval between ticks to one day, set `dtick` to 86400000.0.",
                         "dflt": 1,
                         "role": "style",
                         "valType": "any"
@@ -14960,7 +15049,7 @@
                         "valType": "number"
                     },
                     "thicknessmode": {
-                        "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels. Use `thickness` to set the value.",
+                        "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels*. Use `thickness` to set the value.",
                         "dflt": "pixels",
                         "role": "style",
                         "valType": "enumerated",
@@ -14970,7 +15059,7 @@
                         ]
                     },
                     "tick0": {
-                        "description": "Sets the placement of the first tick on this axis. Use with `dtick`.",
+                        "description": "Sets the placement of the first tick on this axis. Use with `dtick`. If the axis `type` is *log*, then you must take the log of your starting tick (e.g. to set the starting tick to 100, set the `tick0` to 2). If the axis `type` is *date*, then you must convert the date to unix time in milliseconds (the number of milliseconds since January 1st, 1970). For example, to set the starting tick to November 4th, 2013, set the range to 1380844800000.0.",
                         "dflt": 0,
                         "role": "style",
                         "valType": "number"
@@ -14994,6 +15083,7 @@
                         },
                         "description": "Sets the tick font.",
                         "family": {
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                             "noBlank": true,
                             "role": "style",
                             "strict": true,
@@ -15092,6 +15182,7 @@
                         },
                         "description": "Sets this color bar's title font.",
                         "family": {
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                             "noBlank": true,
                             "role": "style",
                             "strict": true,
@@ -15118,11 +15209,13 @@
                     "x": {
                         "description": "Sets the x position of the color bar (in plot fraction).",
                         "dflt": 1.02,
+                        "max": 3,
+                        "min": -2,
                         "role": "style",
                         "valType": "number"
                     },
                     "xanchor": {
-                        "description": "Sets this color bar's horizontal position anchor This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
+                        "description": "Sets this color bar's horizontal position anchor. This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
                         "dflt": "left",
                         "role": "style",
                         "valType": "enumerated",
@@ -15142,6 +15235,8 @@
                     "y": {
                         "description": "Sets the y position of the color bar (in plot fraction).",
                         "dflt": 0.5,
+                        "max": 3,
+                        "min": -2,
                         "role": "style",
                         "valType": "number"
                     },
