@@ -124,8 +124,10 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     jdata = json.dumps(figure.get('data', []), cls=utils.PlotlyJSONEncoder)
     jlayout = json.dumps(figure.get('layout', {}), cls=utils.PlotlyJSONEncoder)
 
-    if show_link is False:
-        link_text = ''
+    config = {}
+    config['showLink'] = show_link
+    config['linkText'] = link_text
+    jconfig = json.dumps(config)
 
     plotly_platform_url = session.get_session_config().get('plotly_domain',
                                                            'https://plot.ly')
@@ -141,18 +143,17 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         '<script type="text/javascript">'
         'window.PLOTLYENV=window.PLOTLYENV || {};'
         'window.PLOTLYENV.BASE_URL="' + plotly_platform_url + '";'
-        'Plotly.LINKTEXT = "' + link_text + '";'
         '</script>'
     ))
 
     script = '\n'.join([
-        'Plotly.plot("{id}", {data}, {layout}).then(function() {{',
+        'Plotly.plot("{id}", {data}, {layout}, {config}).then(function() {{',
         '    $(".{id}.loading").remove();',
         '}})'
     ]).format(id=plotdivid,
               data=jdata,
               layout=jlayout,
-              link_text=link_text)
+              config=jconfig)
 
     display(HTML(''
                  '<div class="{id} loading" style="color: rgb(50,50,50);">'
