@@ -8,40 +8,29 @@ from __future__ import absolute_import
 import json
 import os
 import uuid
-
-import requests
+from pkg_resources import resource_string
+import warnings
 
 from plotly import session, tools, utils
 from plotly.exceptions import PlotlyError
-
-PLOTLY_OFFLINE_DIRECTORY = plotlyjs_path = os.path.expanduser(
-    os.path.join(*'~/.plotly/plotlyjs'.split('/')))
-PLOTLY_OFFLINE_BUNDLE = os.path.join(PLOTLY_OFFLINE_DIRECTORY,
-                                     'plotly-ipython-offline-bundle.js')
 
 
 __PLOTLY_OFFLINE_INITIALIZED = False
 
 
 def download_plotlyjs(download_url):
-    if not os.path.exists(PLOTLY_OFFLINE_DIRECTORY):
-        os.makedirs(PLOTLY_OFFLINE_DIRECTORY)
+    warnings.warn('''
+        `download_plotlyjs` is deprecated and will be removed in the
+        next release. plotly.js is shipped with this module, it is no
+        longer necessary to download this bundle separately.
+    ''', DeprecationWarning)
+    pass
 
-    res = requests.get(download_url)
-    res.raise_for_status()
 
-    with open(PLOTLY_OFFLINE_BUNDLE, 'wb') as f:
-        f.write(res.content)
-
-    print('\n'.join([
-        'Success! Now start an IPython notebook and run the following ' +
-        'code to make your first offline graph:',
-        '',
-        'import plotly',
-        'plotly.offline.init_notebook_mode() '
-        '# run at the start of every ipython notebook',
-        'plotly.offline.iplot([{"x": [1, 2, 3], "y": [3, 1, 6]}])'
-    ]))
+def get_plotlyjs():
+    path = os.path.join('offline', 'plotly.min.js')
+    plotlyjs = resource_string('plotly', path).decode('utf-8')
+    return plotlyjs
 
 
 def init_notebook_mode():
@@ -55,21 +44,16 @@ def init_notebook_mode():
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
     from IPython.display import HTML, display
 
-    if not os.path.exists(PLOTLY_OFFLINE_BUNDLE):
-        raise PlotlyError('Plotly Offline source file at {source_path} '
-                          'is not found.\n'
-                          'If you have a Plotly Offline license, then try '
-                          'running plotly.offline.download_plotlyjs(url) '
-                          'with a licensed download url.\n'
-                          "Don't have a Plotly Offline license? "
-                          'Contact sales@plot.ly learn more about licensing.\n'
-                          'Questions? support@plot.ly.'
-                          .format(source_path=PLOTLY_OFFLINE_BUNDLE))
-
     global __PLOTLY_OFFLINE_INITIALIZED
     __PLOTLY_OFFLINE_INITIALIZED = True
     display(HTML('<script type="text/javascript">' +
-                 open(PLOTLY_OFFLINE_BUNDLE).read() + '</script>'))
+                 # ipython's includes `require` as a global, which
+                 # conflicts with plotly.js. so, unrequire it.
+                 'require=requirejs=define=undefined;' +
+                 '</script>' +
+                 '<script type="text/javascript">' +
+                 get_plotlyjs() +
+                 '</script>'))
 
 
 def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly'):
@@ -186,4 +170,3 @@ def plot():
     """ Configured to work with localhost Plotly graph viewer
     """
     raise NotImplementedError
-
