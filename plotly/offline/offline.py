@@ -56,7 +56,8 @@ def init_notebook_mode():
                  '</script>'))
 
 
-def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly'):
+def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
+          validate=True):
     """
     Draw plotly graphs inside an IPython notebook without
     connecting to an external server.
@@ -74,6 +75,11 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly'):
                                 of the chart that will export the chart to
                                 Plotly Cloud or Plotly Enterprise
     link_text (default='Export to plot.ly') -- the text of export link
+    validate (default=True) -- validate that all of the keys in the figure
+                               are valid? omit if your version of plotly.js
+                               has become outdated with your version of
+                               graph_reference.json or if you need to include
+                               extra, unnecessary keys in your figure.
 
     Example:
     ```
@@ -96,15 +102,10 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly'):
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
     from IPython.display import HTML, display
-    if isinstance(figure_or_data, dict):
-        data = figure_or_data['data']
-        layout = figure_or_data.get('layout', {})
-    else:
-        data = figure_or_data
-        layout = {}
+    figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
 
-    width = layout.get('width', '100%')
-    height = layout.get('height', 525)
+    width = figure.get('layout', {}).get('width', '100%')
+    height = figure.get('layout', {}).get('height', 525)
     try:
         float(width)
     except (ValueError, TypeError):
@@ -120,8 +121,8 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly'):
         width = str(width) + 'px'
 
     plotdivid = uuid.uuid4()
-    jdata = json.dumps(data, cls=utils.PlotlyJSONEncoder)
-    jlayout = json.dumps(layout, cls=utils.PlotlyJSONEncoder)
+    jdata = json.dumps(figure.get('data', []), cls=utils.PlotlyJSONEncoder)
+    jlayout = json.dumps(figure.get('layout', {}), cls=utils.PlotlyJSONEncoder)
 
     if show_link is False:
         link_text = ''
