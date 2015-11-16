@@ -20,7 +20,7 @@ setup(name='plotly',
                   "interactive, publication-quality graphs.",
       long_description=readme(),
       classifiers=[
-          'Development Status :: 5 - Production/Stable',
+          'Development Status :: 4 - Beta',
           'Programming Language :: Python :: 2',
           'Programming Language :: Python :: 2.7',
           'Programming Language :: Python :: 3',
