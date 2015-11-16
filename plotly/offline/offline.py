@@ -8,8 +8,8 @@ from __future__ import absolute_import
 import json
 import os
 import uuid
-from pkg_resources import resource_string
 import warnings
+from pkg_resources import resource_string
 
 from plotly import session, tools, utils
 from plotly.exceptions import PlotlyError
