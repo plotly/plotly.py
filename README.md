@@ -1,31 +1,16 @@
-Plotly's Python-API
+plotly.py - an interactive, browser-based charting library for python
 ===================
 
-#### Shareable, interactive, publication-quality plots in your web browser.
+Plotly for Python is now entirely open source, free, and self-hosted.
 
-[![Contour subplots in Python](http://i.imgur.com/9QKmUQb.png)](https://plot.ly/~test-runner/10)
+[![](https://plot.ly/~chriddyp/1825/.png)](https://plot.ly/~chriddyp/1825.embed)
 
-###Nutshell
+[![](https://plot.ly/~chriddyp/1780/.png)](https://plot.ly/~chriddyp/1780.embed)
 
-Now you can download, design, and upload Plotly figures--all from Python.
+### [Documentation](https://plot.ly/python)
 
-###Where to go from here
-
-* [Get started with our guide book!](https://plot.ly/python/user-guide/)
-
-* Official docs: [https://plot.ly/python](https://plot.ly/python)
-
-###Contributing?
+### Contributing
 
 Heck yeah! We've got suggestions! We've got guides!
 
 Checkout [`contributing.md`](https://github.com/plotly/python-api/blob/master/contributing.md).
-
-###Dependencies
-
-See [`requirements.txt`](https://github.com/plotly/python-api/blob/master/requirements.txt) and [`optional-requirements.txt`](https://github.com/plotly/python-api/blob/master/optional-requirements.txt) for dependency information.
-
-###Get in touch
-
-- <feedback@plot.ly>
-- [@plotlygraphs](https://twitter.com/plotlygraphs)
