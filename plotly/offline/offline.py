@@ -172,3 +172,4 @@ def plot():
     """ Configured to work with localhost Plotly graph viewer
     """
     raise NotImplementedError
+
