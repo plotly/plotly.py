@@ -8,40 +8,29 @@ from __future__ import absolute_import
 import json
 import os
 import uuid
-
-import requests
+import warnings
+from pkg_resources import resource_string
 
 from plotly import session, tools, utils
 from plotly.exceptions import PlotlyError
-
-PLOTLY_OFFLINE_DIRECTORY = plotlyjs_path = os.path.expanduser(
-    os.path.join(*'~/.plotly/plotlyjs'.split('/')))
-PLOTLY_OFFLINE_BUNDLE = os.path.join(PLOTLY_OFFLINE_DIRECTORY,
-                                     'plotly-ipython-offline-bundle.js')
 
 
 __PLOTLY_OFFLINE_INITIALIZED = False
 
 
 def download_plotlyjs(download_url):
-    if not os.path.exists(PLOTLY_OFFLINE_DIRECTORY):
-        os.makedirs(PLOTLY_OFFLINE_DIRECTORY)
+    warnings.warn('''
+        `download_plotlyjs` is deprecated and will be removed in the
+        next release. plotly.js is shipped with this module, it is no
+        longer necessary to download this bundle separately.
+    ''', DeprecationWarning)
+    pass
 
-    res = requests.get(download_url)
-    res.raise_for_status()
 
-    with open(PLOTLY_OFFLINE_BUNDLE, 'wb') as f:
-        f.write(res.content)
-
-    print('\n'.join([
-        'Success! Now start an IPython notebook and run the following ' +
-        'code to make your first offline graph:',
-        '',
-        'import plotly',
-        'plotly.offline.init_notebook_mode() '
-        '# run at the start of every ipython notebook',
-        'plotly.offline.iplot([{"x": [1, 2, 3], "y": [3, 1, 6]}])'
-    ]))
+def get_plotlyjs():
+    path = os.path.join('offline', 'plotly.min.js')
+    plotlyjs = resource_string('plotly', path).decode('utf-8')
+    return plotlyjs
 
 
 def init_notebook_mode():
@@ -55,24 +44,20 @@ def init_notebook_mode():
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
     from IPython.display import HTML, display
 
-    if not os.path.exists(PLOTLY_OFFLINE_BUNDLE):
-        raise PlotlyError('Plotly Offline source file at {source_path} '
-                          'is not found.\n'
-                          'If you have a Plotly Offline license, then try '
-                          'running plotly.offline.download_plotlyjs(url) '
-                          'with a licensed download url.\n'
-                          "Don't have a Plotly Offline license? "
-                          'Contact sales@plot.ly learn more about licensing.\n'
-                          'Questions? support@plot.ly.'
-                          .format(source_path=PLOTLY_OFFLINE_BUNDLE))
-
     global __PLOTLY_OFFLINE_INITIALIZED
     __PLOTLY_OFFLINE_INITIALIZED = True
     display(HTML('<script type="text/javascript">' +
-                 open(PLOTLY_OFFLINE_BUNDLE).read() + '</script>'))
+                 # ipython's includes `require` as a global, which
+                 # conflicts with plotly.js. so, unrequire it.
+                 'require=requirejs=define=undefined;' +
+                 '</script>' +
+                 '<script type="text/javascript">' +
+                 get_plotlyjs() +
+                 '</script>'))
 
 
-def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly'):
+def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
+          validate=True):
     """
     Draw plotly graphs inside an IPython notebook without
     connecting to an external server.
@@ -90,6 +75,11 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly'):
                                 of the chart that will export the chart to
                                 Plotly Cloud or Plotly Enterprise
     link_text (default='Export to plot.ly') -- the text of export link
+    validate (default=True) -- validate that all of the keys in the figure
+                               are valid? omit if your version of plotly.js
+                               has become outdated with your version of
+                               graph_reference.json or if you need to include
+                               extra, unnecessary keys in your figure.
 
     Example:
     ```
@@ -112,15 +102,10 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly'):
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
     from IPython.display import HTML, display
-    if isinstance(figure_or_data, dict):
-        data = figure_or_data['data']
-        layout = figure_or_data.get('layout', {})
-    else:
-        data = figure_or_data
-        layout = {}
+    figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
 
-    width = layout.get('width', '100%')
-    height = layout.get('height', 525)
+    width = figure.get('layout', {}).get('width', '100%')
+    height = figure.get('layout', {}).get('height', 525)
     try:
         float(width)
     except (ValueError, TypeError):
@@ -136,11 +121,13 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly'):
         width = str(width) + 'px'
 
     plotdivid = uuid.uuid4()
-    jdata = json.dumps(data, cls=utils.PlotlyJSONEncoder)
-    jlayout = json.dumps(layout, cls=utils.PlotlyJSONEncoder)
+    jdata = json.dumps(figure.get('data', []), cls=utils.PlotlyJSONEncoder)
+    jlayout = json.dumps(figure.get('layout', {}), cls=utils.PlotlyJSONEncoder)
 
-    if show_link is False:
-        link_text = ''
+    config = {}
+    config['showLink'] = show_link
+    config['linkText'] = link_text
+    jconfig = json.dumps(config)
 
     plotly_platform_url = session.get_session_config().get('plotly_domain',
                                                            'https://plot.ly')
@@ -156,18 +143,17 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly'):
         '<script type="text/javascript">'
         'window.PLOTLYENV=window.PLOTLYENV || {};'
         'window.PLOTLYENV.BASE_URL="' + plotly_platform_url + '";'
-        'Plotly.LINKTEXT = "' + link_text + '";'
         '</script>'
     ))
 
     script = '\n'.join([
-        'Plotly.plot("{id}", {data}, {layout}).then(function() {{',
+        'Plotly.plot("{id}", {data}, {layout}, {config}).then(function() {{',
         '    $(".{id}.loading").remove();',
         '}})'
     ]).format(id=plotdivid,
               data=jdata,
               layout=jlayout,
-              link_text=link_text)
+              config=jconfig)
 
     display(HTML(''
                  '<div class="{id} loading" style="color: rgb(50,50,50);">'

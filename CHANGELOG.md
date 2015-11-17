@@ -4,6 +4,20 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.9.0] - 2015-11-15
+- Previously, using plotly offline required a paid license.
+No more: `plotly.js` is now shipped inside this package to allow
+unlimited free use of plotly inside the ipython notebook environment.
+The `plotly.js` library that is included in this package is free,
+open source, and maintained independently on GitHub at
+[https://github.com/plotly/plotly.js](https://github.com/plotly/plotly.js).
+- The `plotly.js` bundle that is required for offline use is no longer downloaded
+and installed independently from this package: `plotly.offline.download_plotlyjs`
+is **deprecated**.
+- New versions of `plotly.js` will be tested and incorporated
+  into this package as new versioned pip releases;
+  `plotly.js` is not automatically kept in sync with this package.
+
 ## [1.8.12] - 2015-11-02
 - *Big data* warning mentions `plotly.graph_objs.Scattergl` as possible solution.
 
