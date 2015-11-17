@@ -1,5 +1,5 @@
-plotly.py - an interactive, browser-based charting library for python
-===================
+## plotly.py
+##### an interactive, browser-based charting library for python
 
 Plotly for Python is now entirely open source, free, and self-hosted.
 
