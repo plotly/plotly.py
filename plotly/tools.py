@@ -50,6 +50,12 @@ except ImportError:
     _numpy_imported = False
 
 try:
+    import pandas as pd
+    _pandas_imported = True
+except ImportError:
+    _pandas_imported = False
+
+try:
     import scipy as scp
     _scipy_imported = True
 except ImportError:
@@ -1428,10 +1434,12 @@ class FigureFactory(object):
     without notice.
 
     Supported chart types include candlestick, open high low close, quiver,
-    and streamline. See FigureFactory.create_candlestick,
-    FigureFactory.create_ohlc, FigureFactory.create_quiver, or
-    FigureFactory.create_streamline for for more infomation and examples of a
-    specific chart type.
+    streamline, distplot, dendrogram, annotated heatmap, and tables. See
+    FigureFactory.create_candlestick, FigureFactory.create_ohlc,
+    FigureFactory.create_quiver, FigureFactory.create_streamline,
+    FigureFactory.create_distplot, FigureFactory.create_dendrogram,
+    FigureFactory.create_annotated_heatmap, or FigureFactory.create_table for
+    more infomation and examples of a specific chart type.
     """
 
     @staticmethod
@@ -1584,6 +1592,13 @@ class FigureFactory(object):
             raise exceptions.PlotlyError("Your data array could not be "
                                          "flattened! Make sure your data is "
                                          "entered as lists or ndarrays!")
+
+    @staticmethod
+    def _hex_to_rgb(value):
+        value = value.lstrip('#')
+        lv = len(value)
+        return tuple(int(value[i:i + lv // 3], 16)
+                     for i in range(0, lv, lv // 3))
 
     @staticmethod
     def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
@@ -2508,6 +2523,107 @@ class FigureFactory(object):
 
         return {'layout': dendrogram.layout,
                 'data': dendrogram.data}
+
+    @staticmethod
+    def create_annotated_heatmap(z, x=None, y=None, text=None,
+                                 fontcolor=None, showscale=False,
+                                 **kwargs):
+        """
+        BETA function that creates annotated heatmaps
+
+        The distplot can be composed of all or any combination of the following
+        3 components: (1) histogram, (2) curve: (a) kernal density estimation
+        or (b) normal curve, and (3) rug plot. Additionally, multiple distplots
+        (from multiple datasets) can be created in the same plot.
+
+        :param (list[list]) z: z matrix to create heatmap.
+        :param (list) x: x labels. Default = None
+        :param (list) y: y labels. Default = None
+        :param (list[list]) text: Text for annotations. Should be the same
+            dimmensions as the z matrix. If no text is added, the the values of
+            the z matrix are annotated. Default = None
+        :param (list) font_color: Add histogram to distplot? Default = True
+        :param (bool) showscale: Display colorscale. Default = False
+        :param kwargs: kwargs passed through plotly.graph_objs.Heatmap.
+            These kwargs describe other attributes about the annotated Heatmap
+            trace such as the colorscale. For more information on valid kwargs
+            call help(plotly.graph_objs.Heatmap)
+
+        Example 1: Simple distplot of 1 data set
+        ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+        ```
+        """
+        # TODO: protected until #282
+        from plotly.graph_objs import graph_objs
+        # FigureFactory._validate_annotated_heatmap()
+        annotations = _AnnotatedHeatmap(z, x, y, text, fontcolor,
+                                        **kwargs).make_annotations()
+
+        if x and y:
+            trace = dict(type='heatmap',
+                         z=z,
+                         x=x,
+                         y=y,
+                         showscale=showscale,
+                         **kwargs)
+        else:
+            trace = dict(type='heatmap',
+                         z=z,
+                         showscale=showscale,
+                         **kwargs)
+
+        data = [trace]
+        layout = dict(annotations=annotations,
+                      xaxis=dict(ticks='', side='top',
+                                 gridcolor='rgb(0, 0, 0)'),
+                      yaxis=dict(ticks='', ticksuffix='  '))
+        return graph_objs.Figure(data=data, layout=layout)
+
+    @staticmethod
+    def create_table(z, index=False,
+                     colorscale=[[0, 'purple'], [.5, 'grey'], [1, 'white']],
+                     fontcolor=['#000000'], line_color=[], index_title='',
+                     height_constant=30, showscale=False,
+                     **kwargs):
+        """
+        BETA function that creates Plotly tables
+        """
+        # TODO: protected until #282
+        from plotly.graph_objs import graph_objs
+        # FigureFactory._validate_annotated_heatmap()
+        table_matrix = _Table(z, index, colorscale, fontcolor, index_title,
+                              **kwargs).get_table_matrix()
+        annotations = _Table(z, index, colorscale, fontcolor, index_title,
+                             **kwargs).make_table_annotations()
+
+        trace = dict(type='heatmap',
+                     z=table_matrix,
+                     opacity=.7,
+                     colorscale=colorscale,
+                     showscale=showscale,
+                     **kwargs)
+
+        data = [trace]
+        layout = dict(annotations=annotations,
+                      height=len(table_matrix)*height_constant + 200,
+                      yaxis=dict(autorange='reversed',
+                                 zeroline=False,
+                                 gridcolor=line_color,
+                                 gridwidth=2,
+                                 ticks='',
+                                 dtick=1,
+                                 tick0=.5,
+                                 showticklabels=False),
+                      xaxis=dict(zeroline=False,
+                                 gridcolor=line_color,
+                                 gridwidth=2,
+                                 ticks='',
+                                 dtick=1,
+                                 tick0=-0.5,
+                                 showticklabels=False))
+        return graph_objs.Figure(data=data, layout=layout)
 
 
 class _Quiver(FigureFactory):
@@ -3442,3 +3558,200 @@ class _Dendrogram(FigureFactory):
             trace_list.append(trace)
 
         return trace_list, icoord, dcoord, ordered_labels, P['leaves']
+
+
+class _AnnotatedHeatmap(FigureFactory):
+    """
+    Refer to TraceFactory.create_annotated_heatmap() for docstring
+    """
+    def __init__(self, z, x=[], y=[], text=[],
+                 fontcolor=[], colorscale=[],
+                 reversescale=False, **kwargs):
+        from plotly.graph_objs import graph_objs
+        self.z = z
+        if x:
+            self.x = x
+        else:
+            self.x = range(len(z[0]))
+        if y:
+            self.y = y
+        else:
+            self.y = range(len(z))
+        if text:
+            self.text = text
+        else:
+            self.text = self.z
+        if colorscale:
+            self.colorscale = colorscale
+        else:
+            self.colorscale = 'RdBu'
+        self.reversescale = reversescale
+        self.fontcolor = fontcolor
+
+    def get_text_color(self):
+        '''
+        Get font color for annotations.
+
+        The annotated heatmap can feature 2 text colors: min_color_text and max_color_text
+        If no The user can define the text color for heatmap values >=
+            (max_value - min_value)/2 and for heatmap values <
+            (max_value - min_value)/2 Depending on the colorscale of the heatmap the text will be either
+        :rtype (string, string) min_color_text, max_color_text: text
+            color for the annotations
+        '''
+        colorscales = ['Greys', 'Greens', 'Blues',
+                       'YIGnBu', 'YIOrRd', 'RdBu',
+                       'Picnic', 'Jet', 'Hot', 'Blackbody',
+                       'Earth', 'Electric', 'Viridis']
+        colorscales_opp = ['Reds']
+        if self.fontcolor:
+            min_color_text = self.fontcolor[0]
+            max_color_text = self.fontcolor[-1]
+        elif self.colorscale in colorscales and self.reversescale:
+            min_color_text = '#000000'
+            max_color_text = '#FFFFFF'
+        elif self.colorscale in colorscales:
+            min_color_text = '#FFFFFF'
+            max_color_text = '#000000'
+        elif self.colorscale in colorscales_opp and self.reversescale:
+            min_color_text = '#FFFFFF'
+            max_color_text = '#000000'
+        elif self.colorscale in colorscales_opp:
+            min_color_text = '#000000'
+            max_color_text = '#FFFFFF'
+        elif isinstance(self.colorscale, list):
+            if 'rgb' in self.colorscale[0][1]:
+                min_col = map(int,
+                              self.colorscale[0][1].strip('rgb()').split(','))
+                max_col = map(int,
+                              self.colorscale[-1][1].strip('rgb()').split(','))
+            elif '#' in self.colorscale[0][1]:
+                    min_col = FigureFactory._hex_to_rgb(self.colorscale[0][1])
+                    max_col = FigureFactory._hex_to_rgb(self.colorscale[-1][1])
+            else:
+                min_col = [255, 255, 255]
+                max_col = [255, 255, 255]
+
+            if (min_col[0]*0.299 + min_col[1]*0.587 + min_col[2]*0.114) > 186:
+                min_color_text = '#000000'
+            else:
+                min_color_text = '#FFFFFF'
+            if (max_col[0]*0.299 + max_col[1]*0.587 + max_col[2]*0.114) > 186:
+                max_color_text = '#000000'
+            else:
+                max_color_text = '#FFFFFF'
+        else:
+            min_color_text = '#000000'
+            max_color_text = '#000000'
+        return min_color_text, max_color_text
+
+    def make_annotations(self):
+        '''
+        Generate annotations
+
+        :rtype (dict) annotations:
+        '''
+        from plotly.graph_objs import graph_objs
+        min_color_text, max_color_text = _AnnotatedHeatmap.get_text_color(self)
+        annotations = []
+        for n, row in enumerate(self.text):
+            for m, val in enumerate(row):
+                annotations.append(
+                    graph_objs.Annotation(
+                        text=str(val),
+                        x=self.x[m],
+                        y=self.y[n],
+                        xref='x1',
+                        yref='y1',
+                        font=dict(color=max_color_text if val >
+                                  max(max(self.z)) / 2 else min_color_text),
+                        showarrow=False))
+        return annotations
+
+
+class _Table(FigureFactory):
+    """
+    Refer to TraceFactory.create_annotated_heatmap() for docstring
+    """
+    def __init__(self, z, index, colorscale,
+                 fontcolor, index_title='',
+                 **kwargs):
+        from plotly.graph_objs import graph_objs
+        if _pandas_imported and isinstance(z, pd.DataFrame):
+            headers = z.columns.tolist()
+            z_index = z.index.tolist()
+            z = z.values.tolist()
+            z.insert(0, headers)
+            if index:
+                z_index.insert(0, index_title)
+                for i in range(len(z)):
+                    z[i].insert(0, z_index[i])
+        self.z = z
+        self.x = range(len(z[0]))
+        self.y = range(len(z))
+        if colorscale:
+            self.colorscale = colorscale
+        else:
+            self.colorscale = 'RdBu'
+        self.fontcolor = fontcolor
+        self.index = index
+
+    def get_table_matrix(self):
+        '''
+        Create
+
+        :rtype (list[list] table_matrix):
+        '''
+        header = [0] * len(self.z[0])
+        odd_row = [.5] * len(self.z[0])
+        even_row = [1] * len(self.z[0])
+        table_matrix = [None] * len(self.z)
+        table_matrix[0] = header
+        for i in range(1, len(self.z), 2):
+            table_matrix[i] = odd_row
+        for i in range(2, len(self.z), 2):
+            table_matrix[i] = even_row
+        if self.index:
+            for array in table_matrix:
+                array[0] = 0
+        return table_matrix
+
+    def get_table_fontcolor(self):
+        '''
+        Make fontcolor array if a fontcolor array is not supplied.
+        '''
+        if len(self.fontcolor) == 1:
+            self.fontcolor *= len(self.z)
+        elif len(self.fontcolor) == 3:
+            all_font_color = range(len(self.z))
+            all_font_color[0] = self.fontcolor[0]
+            for i in range(1, len(self.z), 2):
+                all_font_color[i] = self.fontcolor[1]
+            for i in range(2, len(self.z), 2):
+                all_font_color[i] = self.fontcolor[2]
+            self.fontcolor = all_font_color
+
+    def make_table_annotations(self):
+        '''
+        Generates annotations...
+        '''
+        from plotly.graph_objs import graph_objs
+        table_matrix = _Table.get_table_matrix(self)
+        _Table.get_table_fontcolor(self)
+        annotations = []
+        for n, row in enumerate(self.z):
+            for m, val in enumerate(row):
+                annotations.append(
+                    graph_objs.Annotation(
+                        text=('<b>' + str(val) + '</b>' if n < 1 or
+                              self.index and m < 1 else str(val)),
+                        x=self.x[m] - .45,
+                        y=self.y[n],
+                        xref='x1',
+                        yref='y1',
+                        align="left",
+                        xanchor="left",
+                        font=dict(color=self.fontcolor[n]),
+                        showarrow=False))
+        return annotations
+
