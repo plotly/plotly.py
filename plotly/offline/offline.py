@@ -131,13 +131,6 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
 
     plotly_platform_url = session.get_session_config().get('plotly_domain',
                                                            'https://plot.ly')
-    if (plotly_platform_url != 'https://plot.ly' and
-            link_text == 'Export to plot.ly'):
-
-        link_domain = plotly_platform_url\
-            .replace('https://', '')\
-            .replace('http://', '')
-        link_text = link_text.replace('plot.ly', link_domain)
 
     display(HTML(
         '<script type="text/javascript">'
