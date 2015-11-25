@@ -2728,7 +2728,8 @@ class FigureFactory(object):
 
         data = [trace]
         layout = dict(annotations=annotations,
-                      height=len(table_matrix)*height_constant + 200,
+                      height=len(table_matrix)*height_constant + 50,
+                      margin=dict(t=0, b=0, r=0, l=0),
                       yaxis=dict(autorange='reversed',
                                  zeroline=False,
                                  gridwidth=2,
