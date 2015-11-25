@@ -686,6 +686,305 @@ class TestFinanceCharts(TestCase):
         self.assertEqual(candle, exp_candle)
 
 
+class TestAnnotatedHeatmap(TestCase):
+
+    def test_unequal_z_text_size(self):
+
+        # check: PlotlyError if z and text are not the same dimmensions
+
+        kwargs = {'z': [[1, 2], [1, 2]], 'text': [[1, 2, 3], [1, 2]]}
+        self.assertRaises(PlotlyError,
+                          tls.FigureFactory.create_annotated_heatmap,
+                          **kwargs)
+
+        kwargs = {'z': [[1, 2], [1, 2]], 'text': [[1, 2], [1, 2], [1, 2]]}
+        self.assertRaises(PlotlyError,
+                          tls.FigureFactory.create_annotated_heatmap,
+                          **kwargs)
+
+    def test_simple_annotated_heatmap(self):
+
+        # we should be able to create a heatmap with annotated values with a
+        # logical text color
+
+        z = [[1, 0, .5], [.25, .75, .45]]
+        a_heat = tls.FigureFactory.create_annotated_heatmap(z)
+        expected_a_heat = {
+            'data': [{'showscale': False,
+                      'type': 'heatmap',
+                      'z': [[1, 0, 0.5], [0.25, 0.75, 0.45]]}],
+            'layout': {'annotations': [{'font': {'color': '#000000'},
+                                        'showarrow': False,
+                                        'text': '1',
+                                        'x': 0,
+                                        'xref': 'x1',
+                                        'y': 0,
+                                        'yref': 'y1'},
+                                       {'font': {'color': '#FFFFFF'},
+                                        'showarrow': False,
+                                        'text': '0',
+                                        'x': 1,
+                                        'xref': 'x1',
+                                        'y': 0,
+                                        'yref': 'y1'},
+                                       {'font': {'color': '#000000'},
+                                        'showarrow': False,
+                                        'text': '0.5',
+                                        'x': 2,
+                                        'xref': 'x1',
+                                        'y': 0,
+                                        'yref': 'y1'},
+                                       {'font': {'color': '#FFFFFF'},
+                                        'showarrow': False,
+                                        'text': '0.25',
+                                        'x': 0,
+                                        'xref': 'x1',
+                                        'y': 1,
+                                        'yref': 'y1'},
+                                       {'font': {'color': '#000000'},
+                                        'showarrow': False,
+                                        'text': '0.75',
+                                        'x': 1,
+                                        'xref': 'x1',
+                                        'y': 1,
+                                        'yref': 'y1'},
+                                       {'font': {'color': '#000000'},
+                                        'showarrow': False,
+                                        'text': '0.45',
+                                        'x': 2,
+                                        'xref': 'x1',
+                                        'y': 1,
+                                        'yref': 'y1'}],
+                       'xaxis': {'gridcolor': 'rgb(0, 0, 0)',
+                                 'showticklabels': False,
+                                 'side': 'top',
+                                 'ticks': ''},
+                       'yaxis': {'showticklabels': False, 'ticks': '',
+                                 'ticksuffix': '  '}}}
+        self.assertEqual(a_heat, expected_a_heat)
+
+    def test_more_kwargs(self):
+
+        # we should be able to create an annotated heatmap with x and y axes
+        # lables, a defined colorscale, and supplied text.
+
+        z = [[1, 0], [.25, .75], [.45, .5]]
+        text = [['first', 'second'], ['third', 'fourth'], ['fifth', 'sixth']]
+        a = tls.FigureFactory.create_annotated_heatmap(z,
+                                                       x=['A', 'B'],
+                                                       y=['One', 'Two',
+                                                          'Three'],
+                                                       text=text,
+                                                       colorscale=[[0,
+                                                                    '#ffffff'],
+                                                                   [1,
+                                                                    '#e6005a']]
+                                                       )
+        expected_a = {'data': [{'colorscale': [[0, '#ffffff'], [1, '#e6005a']],
+                                'showscale': False,
+                                'type': 'heatmap',
+                                'x': ['A', 'B'],
+                                'y': ['One', 'Two', 'Three'],
+                                'z': [[1, 0], [0.25, 0.75], [0.45, 0.5]]}],
+                      'layout': {'annotations': [{'font': {'color': '#FFFFFF'},
+                                                  'showarrow': False,
+                                                  'text': 'first',
+                                                  'x': 'A',
+                                                  'xref': 'x1',
+                                                  'y': 'One',
+                                                  'yref': 'y1'},
+                                                 {'font': {'color': '#000000'},
+                                                  'showarrow': False,
+                                                  'text': 'second',
+                                                  'x': 'B',
+                                                  'xref': 'x1',
+                                                  'y': 'One',
+                                                  'yref': 'y1'},
+                                                 {'font': {'color': '#000000'},
+                                                  'showarrow': False,
+                                                  'text': 'third',
+                                                  'x': 'A',
+                                                  'xref': 'x1',
+                                                  'y': 'Two',
+                                                  'yref': 'y1'},
+                                                 {'font': {'color': '#FFFFFF'},
+                                                  'showarrow': False,
+                                                  'text': 'fourth',
+                                                  'x': 'B',
+                                                  'xref': 'x1',
+                                                  'y': 'Two',
+                                                  'yref': 'y1'},
+                                                 {'font': {'color': '#FFFFFF'},
+                                                  'showarrow': False,
+                                                  'text': 'fifth',
+                                                  'x': 'A',
+                                                  'xref': 'x1',
+                                                  'y': 'Three',
+                                                  'yref': 'y1'},
+                                                 {'font': {'color': '#FFFFFF'},
+                                                  'showarrow': False,
+                                                  'text': 'sixth',
+                                                  'x': 'B',
+                                                  'xref': 'x1',
+                                                  'y': 'Three',
+                                                  'yref': 'y1'}],
+                                 'xaxis': {'gridcolor': 'rgb(0, 0, 0)',
+                                           'side': 'top', 'ticks': ''},
+                                 'yaxis': {'ticks': '', 'ticksuffix': '  '}}}
+        self.assertEqual(a, expected_a)
+
+
+class TestTable(TestCase):
+
+    def test_fontcolor_input(self):
+
+        # check: PlotlyError if fontcolor input is incorrect
+
+        kwargs = {'text': [['one', 'two'], [1, 2], [1, 2], [1, 2]],
+                  'fontcolor': '#000000'}
+        self.assertRaises(PlotlyError,
+                          tls.FigureFactory.create_table, **kwargs)
+
+        kwargs = {'text': [['one', 'two'], [1, 2], [1, 2], [1, 2]],
+                  'fontcolor': ['red', 'blue']}
+        self.assertRaises(PlotlyError,
+                          tls.FigureFactory.create_table, **kwargs)
+
+    def test_simple_table(self):
+
+        # we should be able to create a striped table by suppling a text matrix
+
+        text = [['Country', 'Year', 'Population'], ['US', 2000, 282200000],
+                ['Canada', 2000, 27790000], ['US', 1980, 226500000]]
+        table = tls.FigureFactory.create_table(text)
+        expected_table = {'data': [{'colorscale': [[0, '#66b2ff'], [0.5, '#e6e6e6'], [1, '#ffffff']],
+                                    'opacity': 0.7,
+                                    'showscale': False,
+                                    'type': 'heatmap',
+                                    'z': [[0, 0, 0], [0.5, 0.5, 0.5], [1, 1, 1], [0.5, 0.5, 0.5]]}],
+                          'layout': {'annotations': [{'align': 'left',
+                                     'font': {'color': '#000000'},
+                                     'showarrow': False,
+                                     'text': '<b>Country</b>',
+                                     'x': -0.45,
+                                     'xanchor': 'left',
+                                     'xref': 'x1',
+                                     'y': 0,
+                                     'yref': 'y1'},
+                                    {'align': 'left',
+                                     'font': {'color': '#000000'},
+                                     'showarrow': False,
+                                     'text': '<b>Year</b>',
+                                     'x': 0.55,
+                                     'xanchor': 'left',
+                                     'xref': 'x1',
+                                     'y': 0,
+                                     'yref': 'y1'},
+                                    {'align': 'left',
+                                     'font': {'color': '#000000'},
+                                     'showarrow': False,
+                                     'text': '<b>Population</b>',
+                                     'x': 1.55,
+                                     'xanchor': 'left',
+                                     'xref': 'x1',
+                                     'y': 0,
+                                     'yref': 'y1'},
+                                    {'align': 'left',
+                                     'font': {'color': '#000000'},
+                                     'showarrow': False,
+                                     'text': 'US',
+                                     'x': -0.45,
+                                     'xanchor': 'left',
+                                     'xref': 'x1',
+                                     'y': 1,
+                                     'yref': 'y1'},
+                                    {'align': 'left',
+                                     'font': {'color': '#000000'},
+                                     'showarrow': False,
+                                     'text': '2000',
+                                     'x': 0.55,
+                                     'xanchor': 'left',
+                                     'xref': 'x1',
+                                     'y': 1,
+                                     'yref': 'y1'},
+                                    {'align': 'left',
+                                     'font': {'color': '#000000'},
+                                     'showarrow': False,
+                                     'text': '282200000',
+                                     'x': 1.55,
+                                     'xanchor': 'left',
+                                     'xref': 'x1',
+                                     'y': 1,
+                                     'yref': 'y1'},
+                                    {'align': 'left',
+                                     'font': {'color': '#000000'},
+                                     'showarrow': False,
+                                     'text': 'Canada',
+                                     'x': -0.45,
+                                     'xanchor': 'left',
+                                     'xref': 'x1',
+                                     'y': 2,
+                                     'yref': 'y1'},
+                                    {'align': 'left',
+                                     'font': {'color': '#000000'},
+                                     'showarrow': False,
+                                     'text': '2000',
+                                     'x': 0.55,
+                                     'xanchor': 'left',
+                                     'xref': 'x1',
+                                     'y': 2,
+                                     'yref': 'y1'},
+                                    {'align': 'left',
+                                     'font': {'color': '#000000'},
+                                     'showarrow': False,
+                                     'text': '27790000',
+                                     'x': 1.55,
+                                     'xanchor': 'left',
+                                     'xref': 'x1',
+                                     'y': 2,
+                                     'yref': 'y1'},
+                                    {'align': 'left',
+                                     'font': {'color': '#000000'},
+                                     'showarrow': False,
+                                     'text': 'US',
+                                     'x': -0.45,
+                                     'xanchor': 'left',
+                                     'xref': 'x1',
+                                     'y': 3,
+                                     'yref': 'y1'},
+                                    {'align': 'left',
+                                     'font': {'color': '#000000'},
+                                     'showarrow': False,
+                                     'text': '1980',
+                                     'x': 0.55,
+                                     'xanchor': 'left',
+                                     'xref': 'x1',
+                                     'y': 3,
+                                     'yref': 'y1'},
+                                    {'align': 'left',
+                                     'font': {'color': '#000000'},
+                                     'showarrow': False,
+                                     'text': '226500000',
+                                     'x': 1.55,
+                                     'xanchor': 'left',
+                                     'xref': 'x1',
+                                     'y': 3,
+                                     'yref': 'y1'}],
+                                     'height': 320,
+                                     'xaxis': {'dtick': 1,
+                                               'gridwidth': 2,
+                                               'showticklabels': False,
+                                               'tick0': -0.5,
+                                               'ticks': '',
+                                               'zeroline': False},
+                                     'yaxis': {'autorange': 'reversed',
+                                               'dtick': 1,
+                                               'gridwidth': 2,
+                                               'showticklabels': False,
+                                               'tick0': 0.5,
+                                               'ticks': '',
+                                               'zeroline': False}}}
+
 # class TestDistplot(TestCase):
 
 #     def test_scipy_import_error(self):
