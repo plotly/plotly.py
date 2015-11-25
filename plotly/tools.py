@@ -1590,7 +1590,7 @@ class FigureFactory(object):
         :raises: (PlotlyError) If z and text matrices are not the same
             dimmensions.
         """
-        if annotation_text:
+        if annotation_text is not None and isinstance(annotation_text, list):
             FigureFactory._validate_equal_length(z, annotation_text)
             for lst in range(len(z)):
                 if len(z[lst]) != len(annotation_text[lst]):
@@ -2606,8 +2606,7 @@ class FigureFactory(object):
         from plotly.graph_objs import graph_objs
 
         # Avoiding mutables in the call signature
-        annotation_text = \
-            annotation_text if annotation_text is not None else []
+        colorscale = colorscale if colorscale is not None else 'RdBu'
         fontcolor = fontcolor if fontcolor is not None else []
         FigureFactory._validate_annotated_heatmap(z, annotation_text)
         annotations = _AnnotatedHeatmap(z, x, y, annotation_text,
@@ -2679,6 +2678,21 @@ class FigureFactory(object):
                 ['US', 2010, 309000000],
                 ['Canada', 2010, 34000000]]
 
+        table=FF.create_table(text)
+        py.iplot(table)
+        ```
+
+        Example 2: Table with Custom Coloring
+        ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+
+        text = [['Country', 'Year', 'Population'],
+                ['US', 2000, 282200000],
+                ['Canada', 2000, 27790000],
+                ['US', 2010, 309000000],
+                ['Canada', 2010, 34000000]]
+
         table=FF.create_table(text,
                               colorscale=[[0, '#000000'],
                                           [.5, '#80beff'],
@@ -2687,8 +2701,7 @@ class FigureFactory(object):
                                          '#000000'])
         py.iplot(table)
         ```
-
-        Example 2: Simple Plotly Table with Pandas
+        Example 3: Simple Plotly Table with Pandas
         ```
         import plotly.plotly as py
         from plotly.tools import FigureFactory as FF
@@ -2707,10 +2720,12 @@ class FigureFactory(object):
 
         # Avoiding mutables in the call signature
         colorscale = \
-            colorscale if colorscale is not None else [[0, '#66b2ff'],
-                                                       [.5, '#e6e6e6'],
+            colorscale if colorscale is not None else [[0, '#3D4E6F'],
+                                                       [.5, '#F5F5F5'],
                                                        [1, '#ffffff']]
-        fontcolor = fontcolor if fontcolor is not None else ['#000000']
+        fontcolor = fontcolor if fontcolor is not None else ['#ffffff',
+                                                             '#000000',
+                                                             '#000000']
 
         FigureFactory._validate_table(table_text, fontcolor)
         table_matrix = _Table(table_text, colorscale, fontcolor, index,
@@ -3698,11 +3713,11 @@ class _AnnotatedHeatmap(FigureFactory):
             self.y = y
         else:
             self.y = range(len(z))
-        if annotation_text:
+        if annotation_text is not None:
             self.annotation_text = annotation_text
         else:
             self.annotation_text = self.z
-        self.colorscale = colorscale if colorscale is not None else 'Reds'
+        self.colorscale = colorscale
         self.reversescale = reversescale
         self.fontcolor = fontcolor
 
@@ -3767,6 +3782,20 @@ class _AnnotatedHeatmap(FigureFactory):
             max_text_color = '#000000'
         return min_text_color, max_text_color
 
+    def get_min_max(self):
+        '''
+        Get min and max vals of z matrix
+
+        :rtype (float, float) z_min, z_max: min and max vals from z matrix
+        '''
+        if _numpy_imported and isinstance(self.z, np.ndarray):
+            z_min = np.amin(self.z)
+            z_max = np.amax(self.z)
+        else:
+            z_min = min(min(self.z))
+            z_max = max(max(self.z))
+        return z_min, z_max
+
     def make_annotations(self):
         '''
         Get annotations for each cell of the heatmap with graph_objs.Annotation
@@ -3776,6 +3805,7 @@ class _AnnotatedHeatmap(FigureFactory):
         '''
         from plotly.graph_objs import graph_objs
         min_text_color, max_text_color = _AnnotatedHeatmap.get_text_color(self)
+        z_min, z_max = _AnnotatedHeatmap.get_min_max(self)
         annotations = []
         for n, row in enumerate(self.z):
             for m, val in enumerate(row):
@@ -3787,7 +3817,7 @@ class _AnnotatedHeatmap(FigureFactory):
                         xref='x1',
                         yref='y1',
                         font=dict(color=min_text_color if val <
-                                  (max(max(self.z))-min(min(self.z))) / 2
+                                  (z_max+z_min) / 2
                                   else max_text_color),
                         showarrow=False))
         return annotations
