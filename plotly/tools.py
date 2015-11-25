@@ -1598,7 +1598,7 @@ class FigureFactory(object):
                                                  "same dimmensions")
 
     @staticmethod
-    def _validate_table(text, fontcolor):
+    def _validate_table(table_text, fontcolor):
         """
         Table specific validations
 
@@ -1609,7 +1609,7 @@ class FigureFactory(object):
 
         See FigureFactory.create_table() for params
         """
-        fontcolor_len_options = [1, 3, len(text)]
+        fontcolor_len_options = [1, 3, len(table_text)]
         if len(fontcolor) not in fontcolor_len_options:
             raise exceptions.PlotlyError("Oops, fontcolor should be a list of "
                                          "length 1, 3 or len(text)")
@@ -2644,7 +2644,7 @@ class FigureFactory(object):
         return graph_objs.Figure(data=data, layout=layout)
 
     @staticmethod
-    def create_table(table_text, colorscale=None, fontcolor=['#000000'],
+    def create_table(table_text, colorscale=None, fontcolor=None,
                      height_constant=30, index=False, index_title='',
                      hoverinfo='none', **kwargs):
         """
@@ -2705,10 +2705,13 @@ class FigureFactory(object):
         # TODO: protected until #282
         from plotly.graph_objs import graph_objs
 
+        # Avoiding mutables in the call signature
         colorscale = \
             colorscale if colorscale is not None else [[0, '#66b2ff'],
                                                        [.5, '#e6e6e6'],
                                                        [1, '#ffffff']]
+        fontcolor = fontcolor if fontcolor is not None else ['#000000']
+
         FigureFactory._validate_table(table_text, fontcolor)
         table_matrix = _Table(table_text, colorscale, fontcolor, index,
                               index_title, **kwargs).get_table_matrix()
