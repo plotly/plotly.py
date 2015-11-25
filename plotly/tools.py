@@ -1578,7 +1578,7 @@ class FigureFactory(object):
                                              "evenly spaced array")
 
     @staticmethod
-    def _validate_annotated_heatmap(z, text):
+    def _validate_annotated_heatmap(z, annotation_text):
         """
         Annotated heatmap specific validations
 
@@ -1590,10 +1590,10 @@ class FigureFactory(object):
         :raises: (PlotlyError) If z and text matrices are not the same
             dimmensions.
         """
-        if text:
-            FigureFactory._validate_equal_length(z, text)
+        if annotation_text:
+            FigureFactory._validate_equal_length(z, annotation_text)
             for lst in range(len(z)):
-                if len(z[lst]) != len(text[lst]):
+                if len(z[lst]) != len(annotation_text[lst]):
                     raise exceptions.PlotlyError("z and text should have the "
                                                  "same dimmensions")
 
@@ -2562,8 +2562,10 @@ class FigureFactory(object):
                 'data': dendrogram.data}
 
     @staticmethod
-    def create_annotated_heatmap(z, x=None, y=None, text=[], hover_text=[],
-                                 fontcolor=[], showscale=False, **kwargs):
+    def create_annotated_heatmap(z, x=None, y=None, annotation_text=None,
+                                 colorscale=None, fontcolor=None,
+                                 showscale=False, reversescale=False,
+                                 **kwargs):
         """
         BETA function that creates annotated heatmaps
 
@@ -2602,8 +2604,14 @@ class FigureFactory(object):
         """
         # TODO: protected until #282
         from plotly.graph_objs import graph_objs
-        FigureFactory._validate_annotated_heatmap(z, text)
-        annotations = _AnnotatedHeatmap(z, x, y, text, fontcolor,
+
+        # Avoiding mutables in the call signature
+        annotation_text = \
+            annotation_text if annotation_text is not None else []
+        fontcolor = fontcolor if fontcolor is not None else []
+        FigureFactory._validate_annotated_heatmap(z, annotation_text)
+        annotations = _AnnotatedHeatmap(z, x, y, annotation_text,
+                                        colorscale, fontcolor, reversescale,
                                         **kwargs).make_annotations()
 
         if x or y:
@@ -2611,7 +2619,7 @@ class FigureFactory(object):
                          z=z,
                          x=x,
                          y=y,
-                         text=hover_text,
+                         colorscale=colorscale,
                          showscale=showscale,
                          **kwargs)
             layout = dict(annotations=annotations,
@@ -2621,8 +2629,7 @@ class FigureFactory(object):
         else:
             trace = dict(type='heatmap',
                          z=z,
-                         text=hover_text,
-                         hoverinfo='text',
+                         colorscale=colorscale,
                          showscale=showscale,
                          **kwargs)
             layout = dict(annotations=annotations,
@@ -2637,8 +2644,7 @@ class FigureFactory(object):
         return graph_objs.Figure(data=data, layout=layout)
 
     @staticmethod
-    def create_table(text, colorscale=[[0, '#66b2ff'], [.5, '#e6e6e6'],
-                     [1, '#ffffff']], fontcolor=['#000000'],
+    def create_table(table_text, colorscale=None, fontcolor=['#000000'],
                      height_constant=30, index=False, index_title='',
                      hoverinfo='none', **kwargs):
         """
@@ -2698,17 +2704,23 @@ class FigureFactory(object):
         """
         # TODO: protected until #282
         from plotly.graph_objs import graph_objs
-        FigureFactory._validate_table(text, fontcolor)
-        table_matrix = _Table(text, colorscale, fontcolor, index, index_title,
-                              **kwargs).get_table_matrix()
-        annotations = _Table(text, colorscale, fontcolor, index, index_title,
-                             **kwargs).make_table_annotations()
+
+        colorscale = \
+            colorscale if colorscale is not None else [[0, '#66b2ff'],
+                                                       [.5, '#e6e6e6'],
+                                                       [1, '#ffffff']]
+        FigureFactory._validate_table(table_text, fontcolor)
+        table_matrix = _Table(table_text, colorscale, fontcolor, index,
+                              index_title, **kwargs).get_table_matrix()
+        annotations = _Table(table_text, colorscale, fontcolor, index,
+                             index_title, **kwargs).make_table_annotations()
 
         trace = dict(type='heatmap',
                      z=table_matrix,
                      opacity=.7,
                      colorscale=colorscale,
                      showscale=False,
+                     hoverinfo=hoverinfo,
                      **kwargs)
 
         data = [trace]
@@ -3669,10 +3681,10 @@ class _AnnotatedHeatmap(FigureFactory):
     """
     Refer to TraceFactory.create_annotated_heatmap() for docstring
     """
-    def __init__(self, z, x=[], y=[], text=[],
-                 fontcolor=[], colorscale=[],
-                 reversescale=False, **kwargs):
+    def __init__(self, z, x, y, annotation_text, colorscale,
+                 fontcolor, reversescale, **kwargs):
         from plotly.graph_objs import graph_objs
+
         self.z = z
         if x:
             self.x = x
@@ -3682,14 +3694,11 @@ class _AnnotatedHeatmap(FigureFactory):
             self.y = y
         else:
             self.y = range(len(z))
-        if text:
-            self.text = text
+        if annotation_text:
+            self.annotation_text = annotation_text
         else:
-            self.text = self.z
-        if colorscale:
-            self.colorscale = colorscale
-        else:
-            self.colorscale = 'RdBu'
+            self.annotation_text = self.z
+        self.colorscale = colorscale if colorscale is not None else 'Reds'
         self.reversescale = reversescale
         self.fontcolor = fontcolor
 
@@ -3768,7 +3777,7 @@ class _AnnotatedHeatmap(FigureFactory):
             for m, val in enumerate(row):
                 annotations.append(
                     graph_objs.Annotation(
-                        text=str(self.text[n][m]),
+                        text=str(self.annotation_text[n][m]),
                         x=self.x[m],
                         y=self.y[n],
                         xref='x1',
@@ -3784,24 +3793,24 @@ class _Table(FigureFactory):
     """
     Refer to TraceFactory.create_table() for docstring
     """
-    def __init__(self, text, colorscale, fontcolor, index, index_title='',
-                 **kwargs):
+    def __init__(self, table_text, colorscale, fontcolor, index,
+                 index_title='', **kwargs):
         from plotly.graph_objs import graph_objs
-        if _pandas_imported and isinstance(text, pd.DataFrame):
-            headers = text.columns.tolist()
-            text_index = text.index.tolist()
-            text = text.values.tolist()
-            text.insert(0, headers)
+        if _pandas_imported and isinstance(table_text, pd.DataFrame):
+            headers = table_text.columns.tolist()
+            table_text_index = table_text.index.tolist()
+            table_text = table_text.values.tolist()
+            table_text.insert(0, headers)
             if index:
-                text_index.insert(0, index_title)
-                for i in range(len(text)):
-                    text[i].insert(0, text_index[i])
-        self.text = text
+                table_text_index.insert(0, index_title)
+                for i in range(len(table_text)):
+                    table_text[i].insert(0, table_text_index[i])
+        self.table_text = table_text
         self.colorscale = colorscale
         self.fontcolor = fontcolor
         self.index = index
-        self.x = range(len(text[0]))
-        self.y = range(len(text))
+        self.x = range(len(table_text[0]))
+        self.y = range(len(table_text))
 
     def get_table_matrix(self):
         '''
@@ -3810,14 +3819,14 @@ class _Table(FigureFactory):
         :rtype (list[list]) table_matrix: z matrix to make heatmap with striped
             table coloring.
         '''
-        header = [0] * len(self.text[0])
-        odd_row = [.5] * len(self.text[0])
-        even_row = [1] * len(self.text[0])
-        table_matrix = [None] * len(self.text)
+        header = [0] * len(self.table_text[0])
+        odd_row = [.5] * len(self.table_text[0])
+        even_row = [1] * len(self.table_text[0])
+        table_matrix = [None] * len(self.table_text)
         table_matrix[0] = header
-        for i in range(1, len(self.text), 2):
+        for i in range(1, len(self.table_text), 2):
             table_matrix[i] = odd_row
-        for i in range(2, len(self.text), 2):
+        for i in range(2, len(self.table_text), 2):
             table_matrix[i] = even_row
         if self.index:
             for array in table_matrix:
@@ -3835,15 +3844,15 @@ class _Table(FigureFactory):
         :rtype (list) all_font_color: list of fontcolors for each row in table.
         '''
         if len(self.fontcolor) == 1:
-            all_font_color = self.fontcolor*len(self.text)
+            all_font_color = self.fontcolor*len(self.table_text)
         elif len(self.fontcolor) == 3:
-            all_font_color = range(len(self.text))
+            all_font_color = range(len(self.table_text))
             all_font_color[0] = self.fontcolor[0]
-            for i in range(1, len(self.text), 2):
+            for i in range(1, len(self.table_text), 2):
                 all_font_color[i] = self.fontcolor[1]
-            for i in range(2, len(self.text), 2):
+            for i in range(2, len(self.table_text), 2):
                 all_font_color[i] = self.fontcolor[2]
-        elif len(self.fontcolor) == len(self.text):
+        elif len(self.fontcolor) == len(self.table_text):
             all_font_color = self.fontcolor
         return all_font_color
 
@@ -3858,7 +3867,7 @@ class _Table(FigureFactory):
         table_matrix = _Table.get_table_matrix(self)
         all_font_color = _Table.get_table_fontcolor(self)
         annotations = []
-        for n, row in enumerate(self.text):
+        for n, row in enumerate(self.table_text):
             for m, val in enumerate(row):
                 annotations.append(
                     graph_objs.Annotation(
