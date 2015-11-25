@@ -2562,8 +2562,8 @@ class FigureFactory(object):
                 'data': dendrogram.data}
 
     @staticmethod
-    def create_annotated_heatmap(z, x=None, y=None, text=[], fontcolor=[],
-                                 showscale=False, **kwargs):
+    def create_annotated_heatmap(z, x=None, y=None, text=[], hover_text=[],
+                                 fontcolor=[], showscale=False, **kwargs):
         """
         BETA function that creates annotated heatmaps
 
@@ -2590,6 +2590,14 @@ class FigureFactory(object):
         ```
         import plotly.plotly as py
         from plotly.tools import FigureFactory as FF
+
+        z = [[0.300000, 0.00000, 0.65, 0.300000], 
+             [1, 0.100005, 0.45, 0.4300],
+             [0.300000, 0.00000, 0.65, 0.300000],
+             [1, 0.100005, 0.45, 0.00000]]
+
+        hm = FF.create_annotated_heatmap(z)
+        py.iplot(hm)
         ```
         """
         # TODO: protected until #282
@@ -2603,6 +2611,7 @@ class FigureFactory(object):
                          z=z,
                          x=x,
                          y=y,
+                         text=hover_text,
                          showscale=showscale,
                          **kwargs)
             layout = dict(annotations=annotations,
@@ -2612,6 +2621,8 @@ class FigureFactory(object):
         else:
             trace = dict(type='heatmap',
                          z=z,
+                         text=hover_text,
+                         hoverinfo='text',
                          showscale=showscale,
                          **kwargs)
             layout = dict(annotations=annotations,
@@ -2651,10 +2662,38 @@ class FigureFactory(object):
             trace such as the colorscale. For more information on valid kwargs
             call help(plotly.graph_objs.Heatmap)
 
-        Example 1: Simple annotated heatmap with default configuration
+        Example 1: Simple Plotly Table
         ```
         import plotly.plotly as py
         from plotly.tools import FigureFactory as FF
+
+        text = [['Country', 'Year', 'Population'],
+                ['US', 2000, 282200000],
+                ['Canada', 2000, 27790000],
+                ['US', 2010, 309000000],
+                ['Canada', 2010, 34000000]]
+
+        table=FF.create_table(text,
+                              colorscale=[[0, '#000000'],
+                                          [.5, '#80beff'],
+                                          [1, '#cce5ff']],
+                              fontcolor=['#ffffff', '#000000',
+                                         '#000000'])
+        py.iplot(table)
+        ```
+
+        Example 2: Simple Plotly Table with Pandas
+        ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+
+        import pandas as pd
+
+        df = pd.read_csv('http://www.stat.ubc.ca/~jenny/notOcto/STAT545A/examples/gapminder/data/gapminderDataFiveYear.txt', sep='\t')
+        df_p = df[0:25]
+
+        table_simple=FF.create_table(df_p)
+        py.iplot(table_simple)
         ```
         """
         # TODO: protected until #282
@@ -3831,6 +3870,7 @@ class _Table(FigureFactory):
                         yref='y1',
                         align="left",
                         xanchor="left",
+                        font=dict(color=all_font_color[n]),
                         showarrow=False))
         return annotations
 
