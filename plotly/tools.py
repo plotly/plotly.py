@@ -1651,7 +1651,7 @@ class FigureFactory(object):
 
         :rtype (tuple) (r_value, g_value, b_value): tuple of rgb values
         """
-        hex_value = value.lstrip('#')
+        value = value.lstrip('#')
         hex_total_length = len(value)
         rgb_section_length = hex_total_length // 3
         return tuple(int(value[i:i + rgb_section_length], 16)
@@ -2707,7 +2707,7 @@ class FigureFactory(object):
                 ['US', 2010, 309000000],
                 ['Canada', 2010, 34000000]]
 
-        table=FF.create_table(text,
+        table = FF.create_table(text,
                               colorscale=[[0, '#000000'],
                                           [.5, '#80beff'],
                                           [1, '#cce5ff']],
