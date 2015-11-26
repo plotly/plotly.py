@@ -690,7 +690,7 @@ class TestAnnotatedHeatmap(TestCase):
 
     def test_unequal_z_text_size(self):
 
-        # check: PlotlyError if z and text are not the same dimmensions
+        # check: PlotlyError if z and text are not the same dimensions
 
         kwargs = {'z': [[1, 2], [1, 2]], 'annotation_text': [[1, 2, 3], [1]]}
         self.assertRaises(PlotlyError,
