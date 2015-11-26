@@ -3888,7 +3888,7 @@ class _Table(FigureFactory):
         if len(self.font_colors) == 1:
             all_font_colors = self.font_colors*len(self.table_text)
         elif len(self.font_colors) == 3:
-            all_font_colors = range(len(self.table_text))
+            all_font_colors = list(range(len(self.table_text)))
             all_font_colors[0] = self.font_colors[0]
             for i in range(1, len(self.table_text), 2):
                 all_font_colors[i] = self.font_colors[1]
