@@ -4,6 +4,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.9.1] - 2015-11-26
+### Added
+- The FigureFactory can now create annotated heatmaps with `.create_annotated_heatmap`.
+- The FigureFactory can now create tables with `.create_table`.
+
 ## [1.9.0] - 2015-11-15
 - Previously, using plotly offline required a paid license.
 No more: `plotly.js` is now shipped inside this package to allow
