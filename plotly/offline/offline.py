@@ -56,6 +56,74 @@ def init_notebook_mode():
                  '</script>'))
 
 
+def plot(figure_or_data, html_style='standalone', show_link=True, link_text='Export to plot.ly', validate=True):
+    """ Configured to work with localhost Plotly graph viewer
+    """
+    EMBED_TYPES = ('standalone', 'body', 'div')
+    if html_style not in EMBED_TYPES:
+        raise ValueError('html_style must be one of %s' % ', '.join(EMBED_TYPES))
+
+    html = ""
+    if html_style == 'standalone':
+        html += '<html><head><script type="text/javascript">' + get_plotlyjs() + '</script></head><body>'
+    elif html_style == 'body':
+        html += '<body>'
+
+    figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
+
+    width = figure.get('layout', {}).get('width', '100%')
+    height = figure.get('layout', {}).get('height', 525)
+    try:
+        float(width)
+    except (ValueError, TypeError):
+        pass
+    else:
+        width = str(width) + 'px'
+
+    try:
+        float(width)
+    except (ValueError, TypeError):
+        pass
+    else:
+        width = str(width) + 'px'
+
+    plotdivid = uuid.uuid4()
+    jdata = json.dumps(figure.get('data', []), cls=utils.PlotlyJSONEncoder)
+    jlayout = json.dumps(figure.get('layout', {}), cls=utils.PlotlyJSONEncoder)
+
+    config = {}
+    config['showLink'] = show_link
+    config['linkText'] = link_text
+    jconfig = json.dumps(config)
+
+    script = '\n'.join([
+        'Plotly.plot("{id}", {data}, {layout}, {config}).then(function() {{',
+        '    $(".{id}.loading").remove();',
+        '}})'
+    ]).format(id=plotdivid,
+              data=jdata,
+              layout=jlayout,
+              config=jconfig)
+
+    html += '<div class="{id} loading" style="color: rgb(50,50,50);">'\
+            'Drawing...</div>'\
+            '<div id="{id}" style="height: {height}; width: {width};" '\
+            'class="plotly-graph-div">'\
+            '</div>'\
+            '<script type="text/javascript">'\
+            '{script}'\
+            '</script>'\
+            ''.format(id=plotdivid, script=script,
+                      height=height, width=width)
+
+    if html_style == 'body':
+        html += '</body>'
+    elif html_style == 'standalone':
+        html += '</body></html>'
+
+    return html
+
+
 def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
           validate=True):
     """
@@ -102,42 +170,9 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
     from IPython.display import HTML, display
-    figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
-
-    width = figure.get('layout', {}).get('width', '100%')
-    height = figure.get('layout', {}).get('height', 525)
-    try:
-        float(width)
-    except (ValueError, TypeError):
-        pass
-    else:
-        width = str(width) + 'px'
-
-    try:
-        float(width)
-    except (ValueError, TypeError):
-        pass
-    else:
-        width = str(width) + 'px'
-
-    plotdivid = uuid.uuid4()
-    jdata = json.dumps(figure.get('data', []), cls=utils.PlotlyJSONEncoder)
-    jlayout = json.dumps(figure.get('layout', {}), cls=utils.PlotlyJSONEncoder)
-
-    config = {}
-    config['showLink'] = show_link
-    config['linkText'] = link_text
-    jconfig = json.dumps(config)
 
     plotly_platform_url = session.get_session_config().get('plotly_domain',
                                                            'https://plot.ly')
-    if (plotly_platform_url != 'https://plot.ly' and
-            link_text == 'Export to plot.ly'):
-
-        link_domain = plotly_platform_url\
-            .replace('https://', '')\
-            .replace('http://', '')
-        link_text = link_text.replace('plot.ly', link_domain)
 
     display(HTML(
         '<script type="text/javascript">'
@@ -146,30 +181,8 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         '</script>'
     ))
 
-    script = '\n'.join([
-        'Plotly.plot("{id}", {data}, {layout}, {config}).then(function() {{',
-        '    $(".{id}.loading").remove();',
-        '}})'
-    ]).format(id=plotdivid,
-              data=jdata,
-              layout=jlayout,
-              config=jconfig)
-
-    display(HTML(''
-                 '<div class="{id} loading" style="color: rgb(50,50,50);">'
-                 'Drawing...</div>'
-                 '<div id="{id}" style="height: {height}; width: {width};" '
-                 'class="plotly-graph-div">'
-                 '</div>'
-                 '<script type="text/javascript">'
-                 '{script}'
-                 '</script>'
-                 ''.format(id=plotdivid, script=script,
-                           height=height, width=width)))
-
-
-def plot():
-    """ Configured to work with localhost Plotly graph viewer
-    """
-    raise NotImplementedError
-
+    display(HTML(plot(figure_or_data,
+                      html_style='div',
+                      show_link=show_link,
+                      link_text=link_text,
+                      validate=validate)))
