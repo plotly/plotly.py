@@ -4,6 +4,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.9.2] - 2015-11-30
+**Bug Fix**: Previously, the "Export to plot.ly" link on
+offline charts would export your figures to the
+public plotly cloud, even if your `config_file`
+(set with `plotly.tools.set_config_file` to the file
+`~/.plotly/.config`) set `plotly_domain` to a plotly enterprise
+URL like `https://plotly.acme.com`.
+
+This is now fixed. Your graphs will be exported to your
+`plotly_domain` if it is set.
+
 ## [1.9.1] - 2015-11-26
 ### Added
 - The FigureFactory can now create annotated heatmaps with `.create_annotated_heatmap`.
