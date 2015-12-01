@@ -11,7 +11,8 @@ import uuid
 import warnings
 from pkg_resources import resource_string
 
-from plotly import session, tools, utils
+import plotly
+from plotly import tools, utils
 from plotly.exceptions import PlotlyError
 
 
@@ -129,8 +130,10 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     config['linkText'] = link_text
     jconfig = json.dumps(config)
 
-    plotly_platform_url = session.get_session_config().get('plotly_domain',
-                                                           'https://plot.ly')
+    # TODO: The get_config 'source of truth' should
+    # really be somewhere other than plotly.plotly
+    plotly_platform_url = plotly.plotly.get_config().get('plotly_domain',
+                                                         'https://plot.ly')
     if (plotly_platform_url != 'https://plot.ly' and
             link_text == 'Export to plot.ly'):
 
