@@ -17,8 +17,16 @@ This is now fixed. Your graphs will be exported to your
 
 ## [1.9.1] - 2015-11-26
 ### Added
-- The FigureFactory can now create annotated heatmaps with `.create_annotated_heatmap`.
+- The FigureFactory can now create annotated heatmaps with `.create_annotated_heatmap`. Check it out with:
+```
+import plotly.tools as tls
+help(tls.FigureFactory.create_annotated_heatmap)
+```
 - The FigureFactory can now create tables with `.create_table`.
+```
+import plotly.tools as tls
+help(tls.FigureFactory.create_table)
+```
 
 ## [1.9.0] - 2015-11-15
 - Previously, using plotly offline required a paid license.
