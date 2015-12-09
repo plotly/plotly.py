@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.9.3] - 2015-12-08
+### Added
+- Check for `no_proxy` when determining if the streaming request should pass through a proxy in the chunked_requests submodule. Example: `no_proxy='my_stream_url'` and `http_proxy=my.proxy.ip:1234`, then `my_stream_url` will not get proxied. Previously it would.   
+
 ## [1.9.2] - 2015-11-30
 **Bug Fix**: Previously, the "Export to plot.ly" link on
 offline charts would export your figures to the
