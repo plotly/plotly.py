@@ -16,6 +16,19 @@ from plotly import tools, utils
 from plotly.exceptions import PlotlyError
 
 
+try:
+    import IPython
+    _ipython_imported = True
+except ImportError:
+    _ipython_imported = False
+
+try:
+    import matplotlib
+    _matplotlib_imported = True
+except ImportError:
+    _matplotlib_imported = False
+
+
 __PLOTLY_OFFLINE_INITIALIZED = False
 
 
@@ -170,6 +183,34 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                  ''.format(id=plotdivid, script=script,
                            height=height, width=width)))
 
+
+def iplot_mpl(mpl_fig,mpl_to_plotly_kw={},iplot_kw={}):
+    '''
+    Convert a matplotlib figure to plotly dictionary  plot inside an 
+    IPython notebook without connecting to an external server.
+    '''
+    plotly_plot = tools.mpl_to_plotly(mpl_fig,**mpl_to_plotly_kw)
+    return iplot(plotly_plot,**iplot_kw)
+
+def plotly_takeover(**kwargs):
+    '''
+    Enable the automatic display of figures in the IPython Notebook.
+    This function should be used with the inline Matplotlib backend
+    that ships with IPython that can be enabled with `%pylab inline`
+    or `%matplotlib inline`. This works by adding an HTML formatter
+    for Figure objects; the existing SVG/PNG formatters will remain
+    enabled.
+    
+    (idea taken from `mpld3._display.enable_notebook`)
+    '''
+    if __PLOTLY_OFFLINE_INITIALIZED != True:
+        init_notebook_mode()
+    ip = IPython.core.getipython.get_ipython()
+    formatter = ip.display_formatter.formatters['text/html']
+    formatter.for_type(matplotlib.figure.Figure,
+                       lambda fig, kwds=kwargs: iplot_mpl(fig, **kwds))
+
+    
 
 def plot():
     """ Configured to work with localhost Plotly graph viewer
