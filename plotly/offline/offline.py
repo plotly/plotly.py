@@ -115,11 +115,11 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         width = str(width) + 'px'
 
     try:
-        float(width)
+        float(height)
     except (ValueError, TypeError):
         pass
     else:
-        width = str(width) + 'px'
+        height = str(height) + 'px'
 
     plotdivid = uuid.uuid4()
     jdata = json.dumps(figure.get('data', []), cls=utils.PlotlyJSONEncoder)
