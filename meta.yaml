@@ -6,25 +6,10 @@ source:
   fn: plotly-1.9.3.tar.gz
   url: https://pypi.python.org/packages/source/p/plotly/plotly-1.9.3.tar.gz
   md5: f40ac2d3f0b1212f59c9a74d8f44067a
-#  patches:
-   # List any patch files here
-   # - fix.patch
 
-# build:
+build:
   # noarch_python: True
-  # preserve_egg_dir: True
-  # entry_points:
-    # Put any entry points (scripts to be generated automatically) here. The
-    # syntax is module:function.  For example
-    #
-    # - plotly = plotly:main
-    #
-    # Would create an entry point called plotly that calls plotly.main()
-
-
-  # If this is a new build for the same version, increment the build
-  # number. If you do not include this key, it defaults to 0.
-  # number: 1
+  number: 0
 
 requirements:
   build:
@@ -41,7 +26,6 @@ requirements:
     - pytz
 
 test:
-  # Python imports
   imports:
     - plotly
     - plotly/graph_objs
@@ -54,23 +38,7 @@ test:
     - plotly/plotly/chunked_requests
     - plotly/widgets
 
-  # commands:
-    # You can put test commands to be run here.  Use this to test that the
-    # entry points work.
-
-
-  # You can also put a file called run_test.py in the recipe that will be run
-  # at test time.
-
-  # requires:
-    # Put any additional test requirements here.  For example
-    # - nose
-
 about:
   home: https://plot.ly/python/
   license: MIT
   summary: 'Python plotting library for collaborative, interactive, publication-quality graphs.'
-
-# See
-# http://docs.continuum.io/conda/build.html for
-# more information about meta.yaml
