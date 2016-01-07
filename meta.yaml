@@ -1,0 +1,28 @@
+package:
+  name: plotly
+  version: "1.9.3"
+
+source:
+  git_url: https://github.com/plotly/plotly.py
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - python
+    - setuptools
+    - requests
+    - six
+    - pytz
+  run:
+    - python
+    - setuptools
+    - requests
+    - six
+    - pytz
+
+about:
+  home: https://plot.ly
+  license: MIT
+  summary: Python plotting library for collaborative, interactive, publication-quality graphs.
