@@ -171,9 +171,11 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
 
     from IPython.display import HTML, display
 
-    display(HTML(_plot_html(
+    plot_html, plotdivid, width, height = _plot_html(
         figure_or_data, show_link, link_text, validate,
-        '100%', 525)))
+        '100%', 525)
+
+    display(HTML(plot_html))
 
 
 def plot(figure_or_data,
