@@ -279,8 +279,11 @@ def plot(figure_or_data,
                 '</body>',
                 '</html>']))
 
+        url = 'file://' + os.path.abspath(filename)
         if auto_open:
-            webbrowser.open('file://' + os.path.abspath(filename))
+            webbrowser.open(url)
+
+        return url
 
     elif output_type == 'div':
         if include_plotlyjs:
