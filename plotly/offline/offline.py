@@ -260,7 +260,6 @@ def plot(figure_or_data,
         ).format(id=plotdivid)
 
     if output_type == 'file':
-        filename = 'plotly-temp.html'
         with open(filename, 'w') as f:
             if include_plotlyjs:
                 plotly_js_script = ''.join([
