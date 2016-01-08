@@ -253,7 +253,6 @@ def plot(figure_or_data,
             '<script type="text/javascript">'
             'window.removeEventListener("resize");'
             'window.addEventListener("resize", function(){{'
-            'console.log("resize");'
             'Plotly.Plots.resize(document.getElementById("{id}"));}});'
             '</script>'
         ).format(id=plotdivid)
