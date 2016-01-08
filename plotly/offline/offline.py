@@ -230,6 +230,16 @@ def plot(figure_or_data,
         web browser after saving.
         This argument only applies if `output_type` is 'file'.
     """
+    if output_type not in ['div', 'file']:
+        raise ValueError(
+            "`output_type` argument must be 'div' or 'file'. "
+            "You supplied `" + output_type + "``")
+    if not filename.endswith('.html') and output_type == 'file':
+        warnings.warn(
+            "Your filename `" + filename + "` didn't end with .html. "
+            "Adding .html to the end of your file.")
+        filename += '.html'
+
     plot_html, plotdivid, width, height = _plot_html(
         figure_or_data, show_link, link_text, validate,
         '100%', '100%')
