@@ -101,7 +101,7 @@ def _plot_html(figure_or_data, show_link, link_text,
             .replace('http://', '')
         link_text = link_text.replace('plot.ly', link_domain)
 
-    script = 'Plotly.plot("{id}", {data}, {layout}, {config})'.format(
+    script = 'Plotly.newPlot("{id}", {data}, {layout}, {config})'.format(
         id=plotdivid,
         data=jdata,
         layout=jlayout,
