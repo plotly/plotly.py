@@ -4,6 +4,31 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.9.4] - 2015-01-11
+### Added
+- Offline plotting now works outside of the IPython/Juypter notebook. Here's an example:
+```
+from plotly.offline import plot
+from plotly.graph_objs import Scatter
+
+plot([Scatter(x=[1, 2, 3], y=[3, 1, 6])])
+```
+
+This command works entirely locally. It writes to a local HTML file with the necessary [plotly.js](https://plot.ly/javascript) code to render the graph. Your browser will open the file after you make the call.
+
+The call signature is very similar to `plotly.offline.iplot` and `plotly.plotly.plot` and `plotly.plotly.iplot`, so you can basically use these commands interchangeably.
+
+If you want to publish your graphs to the web, use `plotly.plotly.plot`, as in:
+
+```
+import plotly.plotly as py
+from plotly.graph_objs import Scatter
+
+py.plot([Scatter(x=[1, 2, 3], y=[5, 1, 6])])
+```
+
+This will upload the graph to your online plotly account.
+
 ## [1.9.3] - 2015-12-08
 ### Added
 - Check for `no_proxy` when determining if the streaming request should pass through a proxy in the chunked_requests submodule. Example: `no_proxy='my_stream_url'` and `http_proxy=my.proxy.ip:1234`, then `my_stream_url` will not get proxied. Previously it would.   
