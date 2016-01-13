@@ -70,6 +70,28 @@ class Stream:
             self._reconnect()
             self.write(data)
 
+    def _get_proxy_config(self):
+        """
+        Determine if self._url should be passed through a proxy. If so, return
+        the appropriate proxy_server and proxy_port
+
+        """
+
+        proxy_server = None
+        proxy_port = None
+
+        ## only doing HTTPConnection, so only use http_proxy
+        proxy = os.environ.get("http_proxy")
+        no_proxy = os.environ.get("no_proxy")
+        no_proxy_url = no_proxy and self._url in no_proxy
+
+        if proxy and not no_proxy_url:
+            p = urlparse(proxy)
+            proxy_server = p.hostname
+            proxy_port = p.port
+
+        return proxy_server, proxy_port
+
     def _connect(self):
         ''' Initialize an HTTP connection with chunked Transfer-Encoding
         to server:port with optional headers.
@@ -77,17 +99,9 @@ class Stream:
         server = self._server
         port = self._port
         headers = self._headers
+        proxy_server, proxy_port = self._get_proxy_config()
 
-        ## only doing HTTPConnection, so only use http_proxy
-        proxy = os.environ.get("http_proxy");
-        proxy_server = None
-        proxy_port = None
-        if (proxy != None):
-            p = urlparse(proxy)
-            proxy_server = p.hostname
-            proxy_port = p.port
-
-        if (proxy_server != None and proxy_port != None):
+        if (proxy_server and proxy_port):
             self._conn = http_client.HTTPConnection(proxy_server, proxy_port)
             self._conn.set_tunnel(server, port)
         else:

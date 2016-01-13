@@ -445,7 +445,7 @@
                 "description": "Sets the global font. Note that fonts used in traces and other layout components inherit from the global font.",
                 "family": {
                     "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
-                    "dflt": "\"Open sans\", verdana, arial, sans-serif",
+                    "dflt": "\"Open Sans\", verdana, arial, sans-serif",
                     "noBlank": true,
                     "role": "style",
                     "strict": true,
@@ -6424,17 +6424,6 @@
                     "role": "info",
                     "valType": "number"
                 },
-                "zsmooth": {
-                    "description": "Picks a smoothing algorithm use to smooth `z` data.",
-                    "dflt": false,
-                    "role": "style",
-                    "valType": "enumerated",
-                    "values": [
-                        "fast",
-                        "best",
-                        false
-                    ]
-                },
                 "zsrc": {
                     "description": "Sets the source reference on plot.ly for  z .",
                     "role": "info",
@@ -7017,7 +7006,7 @@
                     "valType": "string"
                 }
             },
-            "description": "The data that describes the heatmap value-to-color mapping is set in `z`. Data in `z` can either be a {2D array} of values (ragged or not) or a 1D array of values. In the case where `z` is a {2D array}, say that `z` has N rows and M columns. Then, by default, the resulting heatmap will have N partitions along the y axis and M partitions along the x axis. In other words, the i-th row/ j-th column cell in `z` is mapped to the i-th partition of the y axis (starting from the bottom of the plot) and the j-th partition of the x-axis (starting from the left of the plot). This behavior can be flipped by using `transpose`. Moreover, `x` (`y`) can be provided with M or M+1 (N or N+1) elements If M (N), then the coordinates correspond to the center of the heatmap cells and the cells have equal width. If M+1 (N+1), then the coordinates correspond to the edges of the heatmap cells. In the case where `z` is a 1D {array}, the x and y coordinates must be provided in `x` and `y` respectively to form data triplets."
+            "description": "The data that describes the heatmap value-to-color mapping is set in `z`. Data in `z` can either be a {2D array} of values (ragged or not) or a 1D array of values. In the case where `z` is a {2D array}, say that `z` has N rows and M columns. Then, by default, the resulting heatmap will have N partitions along the y axis and M partitions along the x axis. In other words, the i-th row/ j-th column cell in `z` is mapped to the i-th partition of the y axis (starting from the bottom of the plot) and the j-th partition of the x-axis (starting from the left of the plot). This behavior can be flipped by using `transpose`. Moreover, `x` (`y`) can be provided with M or M+1 (N or N+1) elements. If M (N), then the coordinates correspond to the center of the heatmap cells and the cells have equal width. If M+1 (N+1), then the coordinates correspond to the edges of the heatmap cells. In the case where `z` is a 1D {array}, the x and y coordinates must be provided in `x` and `y` respectively to form data triplets."
         },
         "histogram": {
             "attributes": {
@@ -7043,18 +7032,6 @@
                     "dflt": true,
                     "role": "style",
                     "valType": "boolean"
-                },
-                "dx": {
-                    "description": "Sets the x coordinate step. See `x0` for more info.",
-                    "dflt": 1,
-                    "role": "info",
-                    "valType": "number"
-                },
-                "dy": {
-                    "description": "Sets the y coordinate step. See `y0` for more info.",
-                    "dflt": 1,
-                    "role": "info",
-                    "valType": "number"
                 },
                 "error_x": {
                     "_deprecated": {
@@ -7337,9 +7314,10 @@
                         "valType": "number"
                     },
                     "color": {
+                        "arrayOk": true,
                         "description": "Sets the marker color.",
-                        "role": "data",
-                        "valType": "data_array"
+                        "role": "style",
+                        "valType": "color"
                     },
                     "colorbar": {
                         "bgcolor": {
@@ -7740,6 +7718,7 @@
                         "width": {
                             "arrayOk": true,
                             "description": "Sets the width (in px) of the lines bounding the marker points.",
+                            "dflt": 0,
                             "min": 0,
                             "role": "style",
                             "valType": "number"
@@ -7800,16 +7779,6 @@
                         "h"
                     ]
                 },
-                "r": {
-                    "description": "For polar chart only.Sets the radial coordinates.",
-                    "role": "data",
-                    "valType": "data_array"
-                },
-                "rsrc": {
-                    "description": "Sets the source reference on plot.ly for  r .",
-                    "role": "info",
-                    "valType": "string"
-                },
                 "showlegend": {
                     "description": "Determines whether or not an item corresponding to this trace is shown in the legend.",
                     "dflt": true,
@@ -7832,11 +7801,6 @@
                         "valType": "string"
                     }
                 },
-                "t": {
-                    "description": "For polar chart only.Sets the angular coordinates.",
-                    "role": "data",
-                    "valType": "data_array"
-                },
                 "text": {
                     "arrayOk": true,
                     "description": "Sets text elements associated with each (x,y) pair. If a single string, the same string appears over all the data points. If an array of string, the items are mapped in order to the this trace's (x,y) coordinates.",
@@ -7846,11 +7810,6 @@
                 },
                 "textsrc": {
                     "description": "Sets the source reference on plot.ly for  text .",
-                    "role": "info",
-                    "valType": "string"
-                },
-                "tsrc": {
-                    "description": "Sets the source reference on plot.ly for  t .",
                     "role": "info",
                     "valType": "string"
                 },
@@ -7875,12 +7834,6 @@
                     "description": "Sets the sample data to be binned on the x axis.",
                     "role": "data",
                     "valType": "data_array"
-                },
-                "x0": {
-                    "description": "Alternate to `x`. Builds a linear space of x coordinates. Use with `dx` where `x0` is the starting coordinate and `dx` the step.",
-                    "dflt": 0,
-                    "role": "info",
-                    "valType": "any"
                 },
                 "xaxis": {
                     "description": "Sets a reference between this trace's x coordinates and a 2D cartesian x axis. If *x* (the default value), the x coordinates refer to `layout.xaxis`. If *x2*, the x coordinates refer to `layout.xaxis2`, and so on.",
@@ -7919,12 +7872,6 @@
                     "role": "data",
                     "valType": "data_array"
                 },
-                "y0": {
-                    "description": "Alternate to `y`. Builds a linear space of y coordinates. Use with `dy` where `y0` is the starting coordinate and `dy` the step.",
-                    "dflt": 0,
-                    "role": "info",
-                    "valType": "any"
-                },
                 "yaxis": {
                     "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.xaxis2`, and so on.",
                     "dflt": "y",
@@ -7954,16 +7901,6 @@
                 },
                 "ysrc": {
                     "description": "Sets the source reference on plot.ly for  y .",
-                    "role": "info",
-                    "valType": "string"
-                },
-                "z": {
-                    "description": "Sets the aggregation data.",
-                    "role": "data",
-                    "valType": "data_array"
-                },
-                "zsrc": {
-                    "description": "Sets the source reference on plot.ly for  z .",
                     "role": "info",
                     "valType": "string"
                 }
@@ -8372,24 +8309,6 @@
                     "role": "style",
                     "valType": "colorscale"
                 },
-                "connectgaps": {
-                    "description": "Determines whether or not gaps (i.e. {nan} or missing values) in the `z` data are filled in.",
-                    "dflt": false,
-                    "role": "info",
-                    "valType": "boolean"
-                },
-                "dx": {
-                    "description": "Sets the x coordinate step. See `x0` for more info.",
-                    "dflt": 1,
-                    "role": "info",
-                    "valType": "number"
-                },
-                "dy": {
-                    "description": "Sets the y coordinate step. See `y0` for more info.",
-                    "dflt": 1,
-                    "role": "info",
-                    "valType": "number"
-                },
                 "histfunc": {
                     "description": "Specifies the binning function used for this histogram trace. If *count*, the histogram values are computed by counting the number of values lying inside each bin. If *sum*, *avg*, *min*, *max*, the histogram values are computed using the sum, the average, the minimum or the maximum of the values lying inside each bin respectively.",
                     "dflt": "count",
@@ -8441,6 +8360,7 @@
                 },
                 "marker": {
                     "color": {
+                        "description": "Sets the aggregation data.",
                         "role": "data",
                         "valType": "data_array"
                     },
@@ -8478,15 +8398,6 @@
                     "role": "style",
                     "valType": "number"
                 },
-                "orientation": {
-                    "description": "Sets the orientation of the bars. With *v* (*h*), the value of the each bar spans along the vertical (horizontal).",
-                    "role": "info",
-                    "valType": "enumerated",
-                    "values": [
-                        "v",
-                        "h"
-                    ]
-                },
                 "reversescale": {
                     "description": "Reverses the colorscale.",
                     "dflt": false,
@@ -8521,22 +8432,6 @@
                         "valType": "string"
                     }
                 },
-                "text": {
-                    "description": "Sets the text elements associated with each z value.",
-                    "role": "data",
-                    "valType": "data_array"
-                },
-                "textsrc": {
-                    "description": "Sets the source reference on plot.ly for  text .",
-                    "role": "info",
-                    "valType": "string"
-                },
-                "transpose": {
-                    "description": "Transposes the z data.",
-                    "dflt": false,
-                    "role": "info",
-                    "valType": "boolean"
-                },
                 "type": "histogram2d",
                 "uid": {
                     "dflt": "",
@@ -8558,12 +8453,6 @@
                     "description": "Sets the sample data to be binned on the x axis.",
                     "role": "data",
                     "valType": "data_array"
-                },
-                "x0": {
-                    "description": "Alternate to `x`. Builds a linear space of x coordinates. Use with `dx` where `x0` is the starting coordinate and `dx` the step.",
-                    "dflt": 0,
-                    "role": "info",
-                    "valType": "any"
                 },
                 "xaxis": {
                     "description": "Sets a reference between this trace's x coordinates and a 2D cartesian x axis. If *x* (the default value), the x coordinates refer to `layout.xaxis`. If *x2*, the x coordinates refer to `layout.xaxis2`, and so on.",
@@ -8597,25 +8486,10 @@
                     "role": "info",
                     "valType": "string"
                 },
-                "xtype": {
-                    "description": "If *array*, the heatmap's x coordinates are given by *x* (the default behavior when `x` is provided). If *scaled*, the heatmap's x coordinates are given by *x0* and *dx* (the default behavior when `x` is not provided).",
-                    "role": "info",
-                    "valType": "enumerated",
-                    "values": [
-                        "array",
-                        "scaled"
-                    ]
-                },
                 "y": {
                     "description": "Sets the sample data to be binned on the y axis.",
                     "role": "data",
                     "valType": "data_array"
-                },
-                "y0": {
-                    "description": "Alternate to `y`. Builds a linear space of y coordinates. Use with `dy` where `y0` is the starting coordinate and `dy` the step.",
-                    "dflt": 0,
-                    "role": "info",
-                    "valType": "any"
                 },
                 "yaxis": {
                     "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.xaxis2`, and so on.",
@@ -8648,15 +8522,6 @@
                     "description": "Sets the source reference on plot.ly for  y .",
                     "role": "info",
                     "valType": "string"
-                },
-                "ytype": {
-                    "description": "If *array*, the heatmap's y coordinates are given by *y* (the default behavior when `y` is provided) If *scaled*, the heatmap's y coordinates are given by *y0* and *dy* (the default behavior when `y` is not provided)",
-                    "role": "info",
-                    "valType": "enumerated",
-                    "values": [
-                        "array",
-                        "scaled"
-                    ]
                 },
                 "z": {
                     "description": "Sets the aggregation data.",
@@ -9070,12 +8935,6 @@
                     "role": "style",
                     "valType": "colorscale"
                 },
-                "connectgaps": {
-                    "description": "Determines whether or not gaps (i.e. {nan} or missing values) in the `z` data are filled in.",
-                    "dflt": false,
-                    "role": "info",
-                    "valType": "boolean"
-                },
                 "contours": {
                     "coloring": {
                         "description": "Determines the coloring method showing the contour values. If *fill*, coloring is done evenly between each contour level If *heatmap*, a heatmap gradient is coloring is applied between each contour level. If *lines*, coloring is done on the contour lines. If *none*, no coloring is applied on this trace.",
@@ -9114,18 +8973,6 @@
                         "role": "style",
                         "valType": "number"
                     }
-                },
-                "dx": {
-                    "description": "Sets the x coordinate step. See `x0` for more info.",
-                    "dflt": 1,
-                    "role": "info",
-                    "valType": "number"
-                },
-                "dy": {
-                    "description": "Sets the y coordinate step. See `y0` for more info.",
-                    "dflt": 1,
-                    "role": "info",
-                    "valType": "number"
                 },
                 "histfunc": {
                     "description": "Specifies the binning function used for this histogram trace. If *count*, the histogram values are computed by counting the number of values lying inside each bin. If *sum*, *avg*, *min*, *max*, the histogram values are computed using the sum, the average, the minimum or the maximum of the values lying inside each bin respectively.",
@@ -9215,6 +9062,7 @@
                 },
                 "marker": {
                     "color": {
+                        "description": "Sets the aggregation data.",
                         "role": "data",
                         "valType": "data_array"
                     },
@@ -9258,15 +9106,6 @@
                     "role": "style",
                     "valType": "number"
                 },
-                "orientation": {
-                    "description": "Sets the orientation of the bars. With *v* (*h*), the value of the each bar spans along the vertical (horizontal).",
-                    "role": "info",
-                    "valType": "enumerated",
-                    "values": [
-                        "v",
-                        "h"
-                    ]
-                },
                 "reversescale": {
                     "description": "Reverses the colorscale.",
                     "dflt": false,
@@ -9301,22 +9140,6 @@
                         "valType": "string"
                     }
                 },
-                "text": {
-                    "description": "Sets the text elements associated with each z value.",
-                    "role": "data",
-                    "valType": "data_array"
-                },
-                "textsrc": {
-                    "description": "Sets the source reference on plot.ly for  text .",
-                    "role": "info",
-                    "valType": "string"
-                },
-                "transpose": {
-                    "description": "Transposes the z data.",
-                    "dflt": false,
-                    "role": "info",
-                    "valType": "boolean"
-                },
                 "type": "histogram2dcontour",
                 "uid": {
                     "dflt": "",
@@ -9338,12 +9161,6 @@
                     "description": "Sets the sample data to be binned on the x axis.",
                     "role": "data",
                     "valType": "data_array"
-                },
-                "x0": {
-                    "description": "Alternate to `x`. Builds a linear space of x coordinates. Use with `dx` where `x0` is the starting coordinate and `dx` the step.",
-                    "dflt": 0,
-                    "role": "info",
-                    "valType": "any"
                 },
                 "xaxis": {
                     "description": "Sets a reference between this trace's x coordinates and a 2D cartesian x axis. If *x* (the default value), the x coordinates refer to `layout.xaxis`. If *x2*, the x coordinates refer to `layout.xaxis2`, and so on.",
@@ -9377,25 +9194,10 @@
                     "role": "info",
                     "valType": "string"
                 },
-                "xtype": {
-                    "description": "If *array*, the heatmap's x coordinates are given by *x* (the default behavior when `x` is provided). If *scaled*, the heatmap's x coordinates are given by *x0* and *dx* (the default behavior when `x` is not provided).",
-                    "role": "info",
-                    "valType": "enumerated",
-                    "values": [
-                        "array",
-                        "scaled"
-                    ]
-                },
                 "y": {
                     "description": "Sets the sample data to be binned on the y axis.",
                     "role": "data",
                     "valType": "data_array"
-                },
-                "y0": {
-                    "description": "Alternate to `y`. Builds a linear space of y coordinates. Use with `dy` where `y0` is the starting coordinate and `dy` the step.",
-                    "dflt": 0,
-                    "role": "info",
-                    "valType": "any"
                 },
                 "yaxis": {
                     "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.xaxis2`, and so on.",
@@ -9429,15 +9231,6 @@
                     "role": "info",
                     "valType": "string"
                 },
-                "ytype": {
-                    "description": "If *array*, the heatmap's y coordinates are given by *y* (the default behavior when `y` is provided) If *scaled*, the heatmap's y coordinates are given by *y0* and *dy* (the default behavior when `y` is not provided)",
-                    "role": "info",
-                    "valType": "enumerated",
-                    "values": [
-                        "array",
-                        "scaled"
-                    ]
-                },
                 "z": {
                     "description": "Sets the aggregation data.",
                     "role": "data",
@@ -9461,17 +9254,6 @@
                     "role": "info",
                     "valType": "number"
                 },
-                "zsmooth": {
-                    "description": "Picks a smoothing algorithm use to smooth `z` data.",
-                    "dflt": false,
-                    "role": "style",
-                    "valType": "enumerated",
-                    "values": [
-                        "fast",
-                        "best",
-                        false
-                    ]
-                },
                 "zsrc": {
                     "description": "Sets the source reference on plot.ly for  z .",
                     "role": "info",
@@ -9484,11 +9266,13 @@
         "mesh3d": {
             "attributes": {
                 "alphahull": {
+                    "description": "Sets the shape of the mesh If *-1*, Delaunay triangulation is used If *>0*, the alpha-shape algorithm is used If *0*,  the convex-hull algorithm is used An alternative to the `i`, `j`, `k` indices triplets.",
                     "dflt": -1,
                     "role": "style",
                     "valType": "number"
                 },
                 "color": {
+                    "description": "Sets the color of the whole mesh",
                     "role": "style",
                     "valType": "color"
                 },
@@ -9843,6 +9627,7 @@
                     },
                     "role": "object",
                     "show": {
+                        "description": "Sets whether or not dynamic contours are shown on hover",
                         "dflt": false,
                         "role": "info",
                         "valType": "boolean"
@@ -9856,6 +9641,7 @@
                     }
                 },
                 "delaunayaxis": {
+                    "description": "Sets the Delaunay axis from which the triangulation of the mesh takes place. An alternative to setting the `i`, `j`, `k` indices triplets.",
                     "dflt": "z",
                     "role": "info",
                     "valType": "enumerated",
@@ -9866,6 +9652,7 @@
                     ]
                 },
                 "facecolor": {
+                    "description": "Sets the color of each face Overrides *color* and *vertexcolor*.",
                     "role": "data",
                     "valType": "data_array"
                 },
@@ -9875,6 +9662,7 @@
                     "valType": "string"
                 },
                 "flatshading": {
+                    "description": "Determines whether or not normal smoothing is applied to the meshes, creating meshes with a low-poly look.",
                     "dflt": false,
                     "role": "style",
                     "valType": "boolean"
@@ -9897,10 +9685,12 @@
                     "valType": "flaglist"
                 },
                 "i": {
+                    "description": "Sets the indices of x coordinates of the vertices",
                     "role": "data",
                     "valType": "data_array"
                 },
                 "intensity": {
+                    "description": "Sets the vertex intensity values, used for plotting fields on meshes",
                     "role": "data",
                     "valType": "data_array"
                 },
@@ -9915,6 +9705,7 @@
                     "valType": "string"
                 },
                 "j": {
+                    "description": "Sets the indices of y coordinates of the vertices",
                     "role": "data",
                     "valType": "data_array"
                 },
@@ -9924,6 +9715,7 @@
                     "valType": "string"
                 },
                 "k": {
+                    "description": "Sets the indices of z coordinates of the vertices",
                     "role": "data",
                     "valType": "data_array"
                 },
@@ -10035,6 +9827,7 @@
                     "valType": "string"
                 },
                 "vertexcolor": {
+                    "description": "Sets the color of each vertex Overrides *color*.",
                     "role": "data",
                     "valType": "data_array"
                 },
@@ -10055,6 +9848,7 @@
                     ]
                 },
                 "x": {
+                    "description": "Sets the x coordinates of the vertices",
                     "role": "data",
                     "valType": "data_array"
                 },
@@ -10064,6 +9858,7 @@
                     "valType": "string"
                 },
                 "y": {
+                    "description": "Sets the y coordinates of the vertices",
                     "role": "data",
                     "valType": "data_array"
                 },
@@ -10073,6 +9868,7 @@
                     "valType": "string"
                 },
                 "z": {
+                    "description": "Sets the z coordinates of the vertices",
                     "role": "data",
                     "valType": "data_array"
                 },
@@ -10082,7 +9878,7 @@
                     "valType": "string"
                 }
             },
-            "description": ""
+            "description": "Draws sets of triangles with coordinates given by three 1-dimensional arrays in `x`, `y`, `z` and (1) a sets of `i`, `j`, `k` indices (2) Delaunay triangulation or (3) the Alpha-shape algorithm or (4) the Convex-hull algorithm"
         },
         "pie": {
             "attributes": {
@@ -12576,17 +12372,12 @@
                         }
                     },
                     "opacity": {
-                        "arrayOk": true,
-                        "description": "Sets the marker opacity.",
+                        "arrayOk": false,
+                        "description": "Sets the marker opacity. Note that the marker opacity for scatter3d traces must be a scalar value for performance reasons. To set a blending opacity value (i.e. which is not transparent), set *marker.color* to an rgba color and use its alpha channel.",
                         "max": 1,
                         "min": 0,
                         "role": "style",
                         "valType": "number"
-                    },
-                    "opacitysrc": {
-                        "description": "Sets the source reference on plot.ly for  opacity .",
-                        "role": "info",
-                        "valType": "string"
                     },
                     "reversescale": {
                         "description": "Has only an effect if `marker.color` is set to a numerical array. Reverses the colorscale.",
