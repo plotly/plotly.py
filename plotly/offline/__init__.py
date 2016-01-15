@@ -7,7 +7,8 @@ from . offline import (
     download_plotlyjs,
     init_notebook_mode,
     iplot,
-    plot,
     iplot_mpl,
+    plot,
+    plot_mpl,
     plotly_takeover
 )

@@ -204,9 +204,7 @@ def plot(figure_or_data,
     from plotly.offline import plot
     import plotly.graph_objs as go
 
-    plot([
-        go.Scatter(x=[1, 2, 3], y=[3, 2 6])
-    ], filename='my-graph.html')
+    plot([go.Scatter(x=[1, 2, 3], y=[3, 2, 6])], filename='my-graph.html')
     ```
     More examples below.
 
@@ -313,18 +311,99 @@ def plot(figure_or_data,
             return plot_html
 
 
-def iplot_mpl(mpl_fig,mpl_to_plotly_kw={},iplot_kw={}):
+def plot_mpl(mpl_fig, resize=False, strip_style=False,
+             verbose=False, **kwargs):
     '''
-    Convert a matplotlib figure to plotly dictionary  plot inside an
-    IPython notebook without connecting to an external server.
+    Convert a matplotlib figure to a plotly graph locally as an HTML document
+    or string
+
+    For more information on converting matplotlib visualizations to plotly
+    graphs, call help(plotly.tools.mpl_to_plotly)
+
+    For more information on creating plotly charts locally as an HTML document
+    or string, call help(plotly.offline.plot)
+
+    :param (matplotlib figure) mpl_fig: matplotlib figure to convert to a
+        plotly graph
+    :param (bool) resize: Default = False
+    :param (bool) strip_style: Default = False
+    :param (bool) verbose: Default = False
+    :param kwargs: kwargs passed through `plotly.offline.plot`.
+        For more information on valid kwargs call `help(plotly.offline.plot)`
+    :return (None|string): if `output_type` is 'file' (default), then the graph
+        is saved as a standalone HTML file and `plot_mpl` returns None.
+        If `output_type` is 'div', then `plot` returns a string that contains
+        the HTML <div> that contains the graph and the script to generate the
+        graph. For more information about `output_type` call
+        `help(plotly.offline.plot)`
+
+    Example:
+    ```
+    from plotly.offline import init_notebook_mode, plot_mpl
+    import matplotlib.pyplot as plt
+
+    init_notebook_mode()
+
+    fig = plt.figure()
+    x = [10, 15, 20, 25, 30]
+    y = [100, 250, 200, 150, 300]
+    plt.plot(x, y, "o")
+
+    plot_mpl(fig)
+    ```
     '''
-    plotly_plot = tools.mpl_to_plotly(mpl_fig,**mpl_to_plotly_kw)
-    return iplot(plotly_plot,**iplot_kw)
+    plotly_plot = tools.mpl_to_plotly(mpl_fig, resize, strip_style, verbose)
+    return plot(plotly_plot, **kwargs)
+
+
+def iplot_mpl(mpl_fig, resize=False, strip_style=False,
+              verbose=False, **kwargs):
+    '''
+    Convert a matplotlib figure to a plotly graph and plot inside an IPython
+    notebook without connecting to an external server.
+
+    To save the chart to Plotly Cloud or Plotly Enterprise, use
+    `plotly.tools.mpl_to_plotly`.
+
+    For more information on converting matplotlib visualizations to plotly
+    graphs call `help(plotly.tools.mpl_to_plotly)`
+
+    For more information on plotting plotly charts offline in an Ipython
+    notebook call `help(plotly.offline.iplot)`
+
+    :param (matplotlib figure) mpl_fig: matplotlib figure to convert to a
+        plotly graph
+    :param (bool) resize: Default = False
+    :param (bool) strip_style: Default = False
+    :param (bool) verbose: Default = False
+    :param kwargs: kwargs passed through `plotly.offline.iplot`.
+        For more information on valid kwargs call `help(plotly.offline.iplot)`
+    :return: draws converted plotly figure in Ipython notebook
+
+    Example:
+    ```
+    from plotly.offline import init_notebook_mode, iplot_mpl
+    import matplotlib.pyplot as plt
+
+    init_notebook_mode()
+
+    fig = plt.figure()
+    x = [10, 15, 20, 25, 30]
+    y = [100, 250, 200, 150, 300]
+    plt.plot(x, y, "o")
+
+    iplot_mpl(fig)
+    ```
+    '''
+    plotly_plot = tools.mpl_to_plotly(mpl_fig, resize, strip_style, verbose)
+    return iplot(plotly_plot, **kwargs)
 
 
 def plotly_takeover(**kwargs):
     '''
-    Enable the automatic display of figures in the IPython Notebook.
+    Enable the automatic matplotlib to plotly conversion and display
+    of figures in an IPython Notebook.
+
     This function should be used with the inline Matplotlib backend
     that ships with IPython that can be enabled with `%pylab inline`
     or `%matplotlib inline`. This works by adding an HTML formatter
@@ -332,8 +411,23 @@ def plotly_takeover(**kwargs):
     enabled.
 
     (idea taken from `mpld3._display.enable_notebook`)
+
+    Example:
+    ```
+    from plotly.offline import init_notebook_mode, plotly_takeover
+    import matplotlib.pyplot as plt
+
+    init_notebook_mode
+    plotly_takeover()
+
+    fig = plt.figure()
+    x = [10, 15, 20, 25, 30]
+    y = [100, 250, 200, 150, 300]
+    plt.plot(x, y, "o")
+    fig
+    ```
     '''
-    if __PLOTLY_OFFLINE_INITIALIZED != True:
+    if not __PLOTLY_OFFLINE_INITIALIZED:
         init_notebook_mode()
     ip = IPython.core.getipython.get_ipython()
     formatter = ip.display_formatter.formatters['text/html']
