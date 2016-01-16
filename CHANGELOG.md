@@ -4,6 +4,22 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.9.5] - 2015-01-15
+### Fixed
+Raise a `plotly.exceptions.PlotlyError` if the user supplied an unsupported
+keyword argument in `py.plot`.
+
+Here's why this matters. If a intends on making their graph private but misspells
+the `sharing` argument or mistakes the `sharing` argument for something else, like
+`privacy`, their mistake will be silently ignored and their graph will be made
+public:
+
+```
+py.plot(figure, sharig='private')
+```
+
+Now, an error will be raised.
+
 ## [1.9.4] - 2015-01-11
 ### Added
 - Offline plotting now works outside of the IPython/Juypter notebook. Here's an example:

@@ -209,6 +209,16 @@ def plot(figure_or_data, validate=True, **plot_options):
                                      Make this figure private/public
 
     """
+
+    for plot_option in plot_options:
+        if plot_option not in ['filename', 'fileopt', 'auto_open',
+                               'sharing', 'world_readable']:
+            raise PlotlyError(
+                'Unsupported keyword argument `' + plot_option + '`.\n' +
+                'Supported keyword arguments are: ' +
+                'filename, fileopt, auto_open, sharing, and '
+                'world_readable (deprecated)')
+
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
 
     for entry in figure['data']:

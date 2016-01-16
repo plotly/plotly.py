@@ -65,6 +65,10 @@ class TestPlot(TestCase):
     def test_plot_invalid_args_2(self):
         py.plot([1, 2, 3], [2, 1, 2], auto_open=False, filename='plot_invalid')
 
+    @raises(PlotlyError)
+    def test_plot_invalid_kwargs(self):
+        py.plot([{'x': [1, 2], 'y': [10, 20]}], privacy='private')
+
     def test_plot_empty_data(self):
         self.assertRaises(PlotlyEmptyDataError, py.plot, [],
                           filename='plot_invalid')
