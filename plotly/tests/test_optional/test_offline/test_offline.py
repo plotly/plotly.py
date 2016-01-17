@@ -5,6 +5,8 @@ test__offline
 from __future__ import absolute_import
 
 from nose.tools import raises
+from nose.plugins.attrib import attr
+
 from unittest import TestCase
 import json
 
@@ -19,13 +21,6 @@ if _matplotlylib_imported:
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
 
-
-# Generate matplotlib plot for tests
-fig = plt.figure()
-
-x = [10, 20, 30]
-y = [100, 200, 300]
-plt.plot(x, y, "o")
 
 PLOTLYJS = plotly.offline.offline.get_plotlyjs()
 
@@ -43,13 +38,29 @@ class PlotlyOfflineTestCase(TestCase):
         plotly.offline.init_notebook_mode()
         plotly.offline.iplot([{}])
 
+    @attr('matplotlib')
     def test_iplot_mpl_works_after_you_call_init_notebook_mode(self):
+        # Generate matplotlib plot for tests
+        fig = plt.figure()
+
+        x = [10, 20, 30]
+        y = [100, 200, 300]
+        plt.plot(x, y, "o")
+
         plotly.tools._ipython_imported = True
         plotly.offline.init_notebook_mode()
         plotly.offline.iplot_mpl(fig)
 
 
+@attr('matplotlib')
 class PlotlyOfflineMPLTestCase(TestCase):
+    # Generate matplotlib plot for tests
+    fig = plt.figure()
+
+    x = [10, 20, 30]
+    y = [100, 200, 300]
+    plt.plot(x, y, "o")
+
     def setUp(self):
         pass
 
