@@ -319,7 +319,7 @@ def plot_mpl(mpl_fig, resize=False, strip_style=False,
     Convert a matplotlib figure to a Plotly graph stored locally as HTML.
 
     For more information on converting matplotlib visualizations to plotly
-    graphs, call help(plotly.plot_mpl)
+    graphs, call help(plotly.tools.mpl_to_plotly)
 
     For more information on creating plotly charts locally as an HTML document
     or string, call help(plotly.offline.plot)
@@ -387,7 +387,7 @@ def iplot_mpl(mpl_fig, resize=False, strip_style=False,
     notebook without connecting to an external server.
 
     To save the chart to Plotly Cloud or Plotly Enterprise, use
-    `plotly.tools.mpl_to_plotly`.
+    `plotly.plotly.plot_mpl`.
 
     For more information on converting matplotlib visualizations to plotly
     graphs call `help(plotly.tools.mpl_to_plotly)`
@@ -453,7 +453,7 @@ def enable_mpl_offline(resize=False, strip_style=False,
     import matplotlib.pyplot as plt
 
     init_notebook_mode()
-    plotly_takeover()
+    enable_mpl_offline()
 
     fig = plt.figure()
     x = [10, 15, 20, 25, 30]

@@ -6,17 +6,19 @@ from __future__ import absolute_import
 
 from nose.tools import raises
 from unittest import TestCase
+import json
 
 import plotly
 
 # TODO: matplotlib-build-wip
 from plotly.tools import _matplotlylib_imported
+
 if _matplotlylib_imported:
     import matplotlib
-
     # Force matplotlib to not use any Xwindows backend.
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
+
 
 # Generate matplotlib plot for tests
 fig = plt.figure()
@@ -59,24 +61,11 @@ class PlotlyOfflineMPLTestCase(TestCase):
             return f.read()
 
     def test_default_mpl_plot_generates_expected_html(self):
-        data_json = ('[{"name": "_line0", "yaxis": "y1", "marker": {"color":' +
-                     ' "#0000FF", "opacity": 1, "line": {"color": "#000000",' +
-                     ' "width": 0.5}, "symbol": "dot", "size": 6.0}, "mode":' +
-                     ' "markers", "xaxis": "x1", "y": [100.0, 200.0, 300.0],' +
-                     ' "x": [10.0, 20.0, 30.0], "type": "scatter"}]')
-        layout_json = ('{"autosize": false, "width": 640, "showlegend": ' +
-                       'false, "xaxis1": {"tickfont": {"size": 12.0}, ' +
-                       '"domain": [0.0, 1.0], "ticks": "inside", "showgrid":' +
-                       ' false, "range": [10.0, 30.0], "mirror": "ticks", ' +
-                       '"zeroline": false, "showline": true, "nticks": 5, ' +
-                       '"type": "linear", "anchor": "y1", "side": "bottom"},' +
-                       ' "height": 480, "yaxis1": {"tickfont": ' +
-                       '{"size": 12.0}, "domain": [0.0, 1.0], "ticks": ' +
-                       '"inside", "showgrid": false, "range": [100.0, 300.0]' +
-                       ', "mirror": "ticks", "zeroline": false, "showline": ' +
-                       'true, "nticks": 5, "type": "linear", "anchor": "x1",' +
-                       ' "side": "left"}, "hovermode": "closest", "margin":' +
-                       ' {"b": 47, "r": 63, "pad": 0, "t": 47, "l": 80}}')
+        figure = plotly.tools.mpl_to_plotly(fig)
+        data = figure['data']
+        layout = figure['layout']
+        data_json = json.dumps(data, cls=plotly.utils.PlotlyJSONEncoder)
+        layout_json = json.dumps(layout, cls=plotly.utils.PlotlyJSONEncoder)
         html = self._read_html(plotly.offline.plot_mpl(fig))
 
         # just make sure a few of the parts are in here
