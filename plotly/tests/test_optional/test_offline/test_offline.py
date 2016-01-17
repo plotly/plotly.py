@@ -52,15 +52,7 @@ class PlotlyOfflineTestCase(TestCase):
         plotly.offline.iplot_mpl(fig)
 
 
-@attr('matplotlib')
 class PlotlyOfflineMPLTestCase(TestCase):
-    # Generate matplotlib plot for tests
-    fig = plt.figure()
-
-    x = [10, 20, 30]
-    y = [100, 200, 300]
-    plt.plot(x, y, "o")
-
     def setUp(self):
         pass
 
@@ -71,7 +63,15 @@ class PlotlyOfflineMPLTestCase(TestCase):
         with open(file_url.replace('file://', '').replace(' ', '')) as f:
             return f.read()
 
+    @attr('matplotlib')
     def test_default_mpl_plot_generates_expected_html(self):
+        # Generate matplotlib plot for tests
+        fig = plt.figure()
+
+        x = [10, 20, 30]
+        y = [100, 200, 300]
+        plt.plot(x, y, "o")
+
         figure = plotly.tools.mpl_to_plotly(fig)
         data = figure['data']
         layout = figure['layout']
@@ -87,14 +87,4 @@ class PlotlyOfflineMPLTestCase(TestCase):
         self.assertTrue(PLOTLYJS in html)         # and the source code
         # and it's an <html> doc
         self.assertTrue(html.startswith('<html>') and html.endswith('</html>'))
-
-    def test_including_plotlyjs(self):
-        html = self._read_html(plotly.offline.plot_mpl(fig, include_plotlyjs=False))
-        self.assertTrue(PLOTLYJS not in html)
-
-    def test_div_output(self):
-        html = plotly.offline.plot_mpl(fig, output_type='div')
-
-        self.assertTrue('<html>' not in html and '</html>' not in html)
-        self.assertTrue(html.startswith('<div>') and html.endswith('</div>'))
 
