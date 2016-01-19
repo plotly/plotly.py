@@ -449,7 +449,7 @@ def enable_mpl_offline(resize=False, strip_style=False,
 
     Example:
     ```
-    from plotly.offline import init_notebook_mode, plotly_takeover
+    from plotly.offline import init_notebook_mode, enable_mpl_offline
     import matplotlib.pyplot as plt
 
     init_notebook_mode()
