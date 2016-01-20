@@ -339,7 +339,7 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
             "The 'file_id' argument must be a non-negative number."
         )
     if share_key is '':
-        s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\""
+        s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\" "
              "seamless=\"seamless\" "
              "src=\"{plotly_rest_url}/"
              "~{file_owner}/{file_id}.embed\" "
@@ -349,7 +349,7 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
             file_owner=file_owner, file_id=file_id,
             iframe_height=height, iframe_width=width)
     else:
-        s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\""
+        s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\" "
              "seamless=\"seamless\" "
              "src=\"{plotly_rest_url}/"
              "~{file_owner}/{file_id}.embed?share_key={share_key}\" "
