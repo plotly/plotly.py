@@ -257,8 +257,6 @@ def plot(figure_or_data,
         figure_or_data, show_link, link_text, validate,
         '100%', '100%')
 
-    figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
-
     resize_script = ''
     if width == '100%' or height == '100%':
         resize_script = (
@@ -469,4 +467,3 @@ def enable_mpl_offline(resize=False, strip_style=False,
     formatter.for_type(matplotlib.figure.Figure,
                        lambda fig: iplot_mpl(fig, resize, strip_style, verbose,
                                              show_link, link_text, validate))
-
