@@ -71,7 +71,7 @@ def init_notebook_mode():
                  '</script>'))
 
 
-def _plot_html(figure_or_data, show_link, link_text,
+def _plot_html(figure_or_data, config,
                validate, default_width, default_height):
 
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
@@ -97,10 +97,30 @@ def _plot_html(figure_or_data, show_link, link_text,
     jdata = json.dumps(figure.get('data', []), cls=utils.PlotlyJSONEncoder)
     jlayout = json.dumps(figure.get('layout', {}), cls=utils.PlotlyJSONEncoder)
 
-    config = {}
-    config['showLink'] = show_link
-    config['linkText'] = link_text
-    jconfig = json.dumps(config)
+    configkeys = (
+    'editable',
+    'autosizable',
+    'fillFrame',
+    'frameMargins',
+    'scrollZoom',
+    'doubleClick',
+    'showTips',
+    'showLink',
+    'sendData',
+    'linkText',
+    'showSources',
+    'displayModeBar',
+    'modeBarButtonsToRemove',
+    'modeBarButtonsToAdd',
+    'modeBarButtons',
+    'displaylogo',
+    'plotGlPixelRatio',
+    'setBackground',
+    'topojsonURL')
+
+    config_clean = dict((k,config[k]) for k in configkeys if k in config)
+
+    jconfig = json.dumps(config_clean)
 
     # TODO: The get_config 'source of truth' should
     # really be somewhere other than plotly.plotly
