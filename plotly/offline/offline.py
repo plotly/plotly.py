@@ -71,8 +71,8 @@ def init_notebook_mode():
                  '</script>'))
 
 
-def _plot_html(figure_or_data, config,
-               validate, default_width, default_height):
+def _plot_html(figure_or_data, show_link, link_text,
+               validate, default_width, default_height, config):
 
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
 
