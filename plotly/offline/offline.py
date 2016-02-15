@@ -71,8 +71,8 @@ def init_notebook_mode():
                  '</script>'))
 
 
-def _plot_html(figure_or_data, show_link, link_text,
-               validate, default_width, default_height, config):
+def _plot_html(figure_or_data, config,
+               validate, default_width, default_height):
 
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
 
@@ -157,7 +157,7 @@ def _plot_html(figure_or_data, show_link, link_text,
     return plotly_html_div, plotdivid, width, height
 
 
-def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
+def iplot(figure_or_data, config = {'show_link': True, 'link_text': 'Export to plot.ly'},
           validate=True):
     """
     Draw plotly graphs inside an IPython notebook without
@@ -205,14 +205,13 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     from IPython.display import HTML, display
 
     plot_html, plotdivid, width, height = _plot_html(
-        figure_or_data, show_link, link_text, validate,
+        figure_or_data, config, validate,
         '100%', 525)
 
     display(HTML(plot_html))
 
 
-def plot(figure_or_data,
-         show_link=True, link_text='Export to plot.ly',
+def plot(figure_or_data, config = {'show_link':True, 'link_text':'Export to plot.ly'},
          validate=True, output_type='file',
          include_plotlyjs=True,
          filename='temp-plot.html',
@@ -274,7 +273,7 @@ def plot(figure_or_data,
         filename += '.html'
 
     plot_html, plotdivid, width, height = _plot_html(
-        figure_or_data, show_link, link_text, validate,
+        figure_or_data, config, validate,
         '100%', '100%')
 
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
@@ -332,7 +331,7 @@ def plot(figure_or_data,
 
 
 def plot_mpl(mpl_fig, resize=False, strip_style=False,
-             verbose=False, show_link=True, link_text='Export to plot.ly',
+             verbose=False, config = {'show_link':True, 'link_text':'Export to plot.ly'},
              validate=True, output_type='file', include_plotlyjs=True,
              filename='temp-plot.html', auto_open=True):
     """
@@ -395,13 +394,13 @@ def plot_mpl(mpl_fig, resize=False, strip_style=False,
     ```
     """
     plotly_plot = tools.mpl_to_plotly(mpl_fig, resize, strip_style, verbose)
-    return plot(plotly_plot, show_link, link_text, validate, output_type,
+    return plot(plotly_plot, config, validate, output_type,
                 include_plotlyjs, filename, auto_open)
 
 
 def iplot_mpl(mpl_fig, resize=False, strip_style=False,
-              verbose=False, show_link=True,
-              link_text='Export to plot.ly', validate=True):
+              verbose=False, config = {'show_link':True, 'link_text':'Export to plot.ly'}, 
+              validate=True):
     """
     Convert a matplotlib figure to a plotly graph and plot inside an IPython
     notebook without connecting to an external server.
@@ -450,7 +449,7 @@ def iplot_mpl(mpl_fig, resize=False, strip_style=False,
     ```
     """
     plotly_plot = tools.mpl_to_plotly(mpl_fig, resize, strip_style, verbose)
-    return iplot(plotly_plot, show_link, link_text, validate)
+    return iplot(plotly_plot, config, validate)
 
 
 def enable_mpl_offline(resize=False, strip_style=False,
