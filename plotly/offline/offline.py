@@ -161,7 +161,8 @@ def _plot_html(figure_or_data, config,
     return plotly_html_div, plotdivid, width, height
 
 
-def iplot(figure_or_data, config={'showLink': True, 'linkText': 'Export to plot.ly'},
+def iplot(figure_or_data,
+          config={'showLink': True, 'linkText': 'Export to plot.ly'},
           validate=True):
     """
     Draw plotly graphs inside an IPython notebook without
@@ -217,7 +218,8 @@ def iplot(figure_or_data, config={'showLink': True, 'linkText': 'Export to plot.
     display(HTML(plot_html))
 
 
-def plot(figure_or_data, config = {'showLink':True, 'linkText':'Export to plot.ly'},
+def plot(figure_or_data,
+         config={'showLink': True, 'linkText': 'Export to plot.ly'},
          validate=True, output_type='file',
          include_plotlyjs=True,
          filename='temp-plot.html',
@@ -338,8 +340,8 @@ def plot(figure_or_data, config = {'showLink':True, 'linkText':'Export to plot.l
             return plot_html
 
 
-def plot_mpl(mpl_fig, resize=False, strip_style=False,
-             verbose=False, config = {'showLink':True, 'linkText':'Export to plot.ly'},
+def plot_mpl(mpl_fig, resize=False, strip_style=False, verbose=False,
+             config={'showLink': True, 'linkText': 'Export to plot.ly'},
              validate=True, output_type='file', include_plotlyjs=True,
              filename='temp-plot.html', auto_open=True):
     """
@@ -461,9 +463,10 @@ def iplot_mpl(mpl_fig, resize=False, strip_style=False, verbose=False,
     return iplot(plotly_plot, config, validate)
 
 
-def enable_mpl_offline(resize=False, strip_style=False,
-                       verbose=False, config = {'showLink':True, 'linkText':'Export to plot.ly'},
-                        validate=True):
+def enable_mpl_offline(resize=False, strip_style=False, verbose=False,
+                       config={'showLink': True,
+                               'linkText': 'Export to plot.ly'},
+                       validate=True):
     """
     Convert mpl plots to locally hosted HTML documents.
 
