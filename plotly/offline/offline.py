@@ -9,8 +9,10 @@ import json
 import os
 import uuid
 import warnings
-from pkg_resources import resource_string
 import webbrowser
+
+from pkg_resources import resource_string
+
 
 import plotly
 from plotly import tools, utils
@@ -98,25 +100,25 @@ def _plot_html(figure_or_data, config,
     jlayout = json.dumps(figure.get('layout', {}), cls=utils.PlotlyJSONEncoder)
 
     configkeys = (
-    'editable',
-    'autosizable',
-    'fillFrame',
-    'frameMargins',
-    'scrollZoom',
-    'doubleClick',
-    'showTips',
-    'showLink',
-    'sendData',
-    'linkText',
-    'showSources',
-    'displayModeBar',
-    'modeBarButtonsToRemove',
-    'modeBarButtonsToAdd',
-    'modeBarButtons',
-    'displaylogo',
-    'plotGlPixelRatio',
-    'setBackground',
-    'topojsonURL')
+        'editable',
+        'autosizable',
+        'fillFrame',
+        'frameMargins',
+        'scrollZoom',
+        'doubleClick',
+        'showTips',
+        'showLink',
+        'sendData',
+        'linkText',
+        'showSources',
+        'displayModeBar',
+        'modeBarButtonsToRemove',
+        'modeBarButtonsToAdd',
+        'modeBarButtons',
+        'displaylogo',
+        'plotGlPixelRatio',
+        'setBackground',
+        'topojsonURL')
 
     config_clean = dict((k,config[k]) for k in configkeys if k in config)
 
@@ -159,7 +161,7 @@ def _plot_html(figure_or_data, config,
     return plotly_html_div, plotdivid, width, height
 
 
-def iplot(figure_or_data, config = {'showLink': True, 'linkText': 'Export to plot.ly'},
+def iplot(figure_or_data, config={'showLink': True, 'linkText': 'Export to plot.ly'},
           validate=True):
     """
     Draw plotly graphs inside an IPython notebook without
@@ -406,8 +408,8 @@ def plot_mpl(mpl_fig, resize=False, strip_style=False,
                 include_plotlyjs, filename, auto_open)
 
 
-def iplot_mpl(mpl_fig, resize=False, strip_style=False,
-              verbose=False, config = {'showLink':True, 'linkText':'Export to plot.ly'}, 
+def iplot_mpl(mpl_fig, resize=False, strip_style=False, verbose=False,
+              config={'showLink': True, 'linkText': 'Export to plot.ly'},
               validate=True):
     """
     Convert a matplotlib figure to a plotly graph and plot inside an IPython
@@ -495,4 +497,3 @@ def enable_mpl_offline(resize=False, strip_style=False,
     formatter.for_type(matplotlib.figure.Figure,
                        lambda fig: iplot_mpl(fig, resize, strip_style, verbose,
                                              config, validate))
-
