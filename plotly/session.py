@@ -78,9 +78,8 @@ def sign_in(username, api_key, **kwargs):
         if key not in CREDENTIALS_KEYS and key not in CONFIG_KEYS:
             raise exceptions.PlotlyError("{} is not a valid config or "
                                          "credentials key\n"
-                                         "Type help(sign_in) for a full list "
-                                         "of possbile sign in related "
-                                         "keys".format(key))
+                                         "Type `help(sign_in)` for a full list "
+                                         "of sign in related keys".format(key))
 
     # add credentials, raise error if type is wrong.
     for key in CREDENTIALS_KEYS:
