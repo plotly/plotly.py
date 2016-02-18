@@ -72,7 +72,7 @@ def init_notebook_mode():
 
 
 def _plot_html(figure_or_data, show_link, link_text,
-               validate, default_width, default_height):
+               validate, default_width, default_height, **config_options):
 
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
 
@@ -97,9 +97,32 @@ def _plot_html(figure_or_data, show_link, link_text,
     jdata = json.dumps(figure.get('data', []), cls=utils.PlotlyJSONEncoder)
     jlayout = json.dumps(figure.get('layout', {}), cls=utils.PlotlyJSONEncoder)
 
-    config = {}
+    configkeys = (
+        'editable',
+        'autosizable',
+        'fillFrame',
+        'frameMargins',
+        'scrollZoom',
+        'doubleClick',
+        'showTips',
+        'showLink',
+        'sendData',
+        'linkText',
+        'showSources',
+        'displayModeBar',
+        'modeBarButtonsToRemove',
+        'modeBarButtonsToAdd',
+        'modeBarButtons',
+        'displaylogo',
+        'plotGlPixelRatio',
+        'setBackground',
+        'topojsonURL')
+
+    config = (dict((k, config_options[k]) for k in config_options
+              if k in configkeys))
     config['showLink'] = show_link
     config['linkText'] = link_text
+
     jconfig = json.dumps(config)
 
     # TODO: The get_config 'source of truth' should
@@ -138,7 +161,7 @@ def _plot_html(figure_or_data, show_link, link_text,
 
 
 def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
-          validate=True):
+          validate=True, **config_options):
     """
     Draw plotly graphs inside an IPython notebook without
     connecting to an external server.
@@ -186,7 +209,7 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
 
     plot_html, plotdivid, width, height = _plot_html(
         figure_or_data, show_link, link_text, validate,
-        '100%', 525)
+        '100%', 525, **config_options)
 
     display(HTML(plot_html))
 
@@ -196,7 +219,7 @@ def plot(figure_or_data,
          validate=True, output_type='file',
          include_plotlyjs=True,
          filename='temp-plot.html',
-         auto_open=True):
+         auto_open=True, **config_options):
     """ Create a plotly graph locally as an HTML document or string.
 
     Example:
@@ -255,7 +278,7 @@ def plot(figure_or_data,
 
     plot_html, plotdivid, width, height = _plot_html(
         figure_or_data, show_link, link_text, validate,
-        '100%', '100%')
+        '100%', '100%', **config_options)
 
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
 
