@@ -9,8 +9,10 @@ import json
 import os
 import uuid
 import warnings
-from pkg_resources import resource_string
 import webbrowser
+
+from pkg_resources import resource_string
+
 
 import plotly
 from plotly import tools, utils
@@ -71,7 +73,7 @@ def init_notebook_mode():
                  '</script>'))
 
 
-def _plot_html(figure_or_data, show_link, link_text,
+def _plot_html(figure_or_data, config,
                validate, default_width, default_height):
 
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
@@ -97,22 +99,44 @@ def _plot_html(figure_or_data, show_link, link_text,
     jdata = json.dumps(figure.get('data', []), cls=utils.PlotlyJSONEncoder)
     jlayout = json.dumps(figure.get('layout', {}), cls=utils.PlotlyJSONEncoder)
 
-    config = {}
-    config['showLink'] = show_link
-    config['linkText'] = link_text
-    jconfig = json.dumps(config)
+    configkeys = (
+        'editable',
+        'autosizable',
+        'fillFrame',
+        'frameMargins',
+        'scrollZoom',
+        'doubleClick',
+        'showTips',
+        'showLink',
+        'sendData',
+        'linkText',
+        'showSources',
+        'displayModeBar',
+        'modeBarButtonsToRemove',
+        'modeBarButtonsToAdd',
+        'modeBarButtons',
+        'displaylogo',
+        'plotGlPixelRatio',
+        'setBackground',
+        'topojsonURL')
+
+    config_clean = dict((k,config[k]) for k in configkeys if k in config)
+
+    jconfig = json.dumps(config_clean)
 
     # TODO: The get_config 'source of truth' should
     # really be somewhere other than plotly.plotly
     plotly_platform_url = plotly.plotly.get_config().get('plotly_domain',
                                                          'https://plot.ly')
+
     if (plotly_platform_url != 'https://plot.ly' and
-            link_text == 'Export to plot.ly'):
+            'linkText' in config):
 
         link_domain = plotly_platform_url\
             .replace('https://', '')\
             .replace('http://', '')
-        link_text = link_text.replace('plot.ly', link_domain)
+
+        config['linkText'] = config['linkText'].replace('plot.ly', link_domain)
 
     script = 'Plotly.newPlot("{id}", {data}, {layout}, {config})'.format(
         id=plotdivid,
@@ -137,7 +161,8 @@ def _plot_html(figure_or_data, show_link, link_text,
     return plotly_html_div, plotdivid, width, height
 
 
-def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
+def iplot(figure_or_data,
+          config={'showLink': True, 'linkText': 'Export to plot.ly'},
           validate=True):
     """
     Draw plotly graphs inside an IPython notebook without
@@ -152,10 +177,12 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                       graph descriptions.
 
     Keyword arguments:
-    show_link (default=True) -- display a link in the bottom-right corner of
-                                of the chart that will export the chart to
-                                Plotly Cloud or Plotly Enterprise
-    link_text (default='Export to plot.ly') -- the text of export link
+    config -- a dictionary with configuration attributes for the plot,
+        default contains the following two elements:
+        showLink (default=True) -- display a link in the bottom-right corner of
+                                    of the chart that will export the chart to
+                                    Plotly Cloud or Plotly Enterprise
+        linkText (default='Export to plot.ly') -- the text of export link
     validate (default=True) -- validate that all of the keys in the figure
                                are valid? omit if your version of plotly.js
                                has become outdated with your version of
@@ -185,14 +212,14 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     from IPython.display import HTML, display
 
     plot_html, plotdivid, width, height = _plot_html(
-        figure_or_data, show_link, link_text, validate,
+        figure_or_data, config, validate,
         '100%', 525)
 
     display(HTML(plot_html))
 
 
 def plot(figure_or_data,
-         show_link=True, link_text='Export to plot.ly',
+         config={'showLink': True, 'linkText': 'Export to plot.ly'},
          validate=True, output_type='file',
          include_plotlyjs=True,
          filename='temp-plot.html',
@@ -214,10 +241,12 @@ def plot(figure_or_data,
                       graph descriptions.
 
     Keyword arguments:
-    show_link (default=True) -- display a link in the bottom-right corner of
-        of the chart that will export the chart to Plotly Cloud or
-        Plotly Enterprise
-    link_text (default='Export to plot.ly') -- the text of export link
+    config -- a dictionary with configuration attributes for the plot,
+        default contains the following two elements:
+        showLink (default=True) -- display a link in the bottom-right corner of
+            of the chart that will export the chart to Plotly Cloud or
+            Plotly Enterprise
+        linkText (default='Export to plot.ly') -- the text of export link
     validate (default=True) -- validate that all of the keys in the figure
         are valid? omit if your version of plotly.js has become outdated
         with your version of graph_reference.json or if you need to include
@@ -254,7 +283,7 @@ def plot(figure_or_data,
         filename += '.html'
 
     plot_html, plotdivid, width, height = _plot_html(
-        figure_or_data, show_link, link_text, validate,
+        figure_or_data, config, validate,
         '100%', '100%')
 
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
@@ -311,8 +340,8 @@ def plot(figure_or_data,
             return plot_html
 
 
-def plot_mpl(mpl_fig, resize=False, strip_style=False,
-             verbose=False, show_link=True, link_text='Export to plot.ly',
+def plot_mpl(mpl_fig, resize=False, strip_style=False, verbose=False,
+             config={'showLink': True, 'linkText': 'Export to plot.ly'},
              validate=True, output_type='file', include_plotlyjs=True,
              filename='temp-plot.html', auto_open=True):
     """
@@ -330,10 +359,12 @@ def plot_mpl(mpl_fig, resize=False, strip_style=False,
     resize (default=False) -- allow plotly to choose the figure size.
     strip_style (default=False) -- allow plotly to choose style options.
     verbose (default=False) -- print message.
-    show_link (default=True) -- display a link in the bottom-right corner of
-        of the chart that will export the chart to Plotly Cloud or
-        Plotly Enterprise
-    link_text (default='Export to plot.ly') -- the text of export link
+    config -- a dictionary with configuration attributes for the plot,
+        default contains the following two elements:
+        showLink (default=True) -- display a link in the bottom-right corner of
+            of the chart that will export the chart to Plotly Cloud or
+            Plotly Enterprise
+        linkText (default='Export to plot.ly') -- the text of export link
     validate (default=True) -- validate that all of the keys in the figure
         are valid? omit if your version of plotly.js has become outdated
         with your version of graph_reference.json or if you need to include
@@ -375,13 +406,13 @@ def plot_mpl(mpl_fig, resize=False, strip_style=False,
     ```
     """
     plotly_plot = tools.mpl_to_plotly(mpl_fig, resize, strip_style, verbose)
-    return plot(plotly_plot, show_link, link_text, validate, output_type,
+    return plot(plotly_plot, config, validate, output_type,
                 include_plotlyjs, filename, auto_open)
 
 
-def iplot_mpl(mpl_fig, resize=False, strip_style=False,
-              verbose=False, show_link=True,
-              link_text='Export to plot.ly', validate=True):
+def iplot_mpl(mpl_fig, resize=False, strip_style=False, verbose=False,
+              config={'showLink': True, 'linkText': 'Export to plot.ly'},
+              validate=True):
     """
     Convert a matplotlib figure to a plotly graph and plot inside an IPython
     notebook without connecting to an external server.
@@ -401,13 +432,12 @@ def iplot_mpl(mpl_fig, resize=False, strip_style=False,
     resize (default=False) -- allow plotly to choose the figure size.
     strip_style (default=False) -- allow plotly to choose style options.
     verbose (default=False) -- print message.
-    show_link (default=True) -- display a link in the bottom-right corner of
-        of the chart that will export the chart to Plotly Cloud or
-        Plotly Enterprise
-    show_link (default=True) -- display a link in the bottom-right corner of
-                                of the chart that will export the chart to
-                                Plotly Cloud or Plotly Enterprise
-    link_text (default='Export to plot.ly') -- the text of export link
+    config -- a dictionary with configuration attributes for the plot,
+        default contains the following two elements:
+        showLink (default=True) -- display a link in the bottom-right corner of
+                                    of the chart that will export the chart to
+                                    Plotly Cloud or Plotly Enterprise
+        linkText (default='Export to plot.ly') -- the text of export link
     validate (default=True) -- validate that all of the keys in the figure
                                are valid? omit if your version of plotly.js
                                has become outdated with your version of
@@ -430,12 +460,13 @@ def iplot_mpl(mpl_fig, resize=False, strip_style=False,
     ```
     """
     plotly_plot = tools.mpl_to_plotly(mpl_fig, resize, strip_style, verbose)
-    return iplot(plotly_plot, show_link, link_text, validate)
+    return iplot(plotly_plot, config, validate)
 
 
-def enable_mpl_offline(resize=False, strip_style=False,
-                       verbose=False, show_link=True,
-                       link_text='Export to plot.ly', validate=True):
+def enable_mpl_offline(resize=False, strip_style=False, verbose=False,
+                       config={'showLink': True,
+                               'linkText': 'Export to plot.ly'},
+                       validate=True):
     """
     Convert mpl plots to locally hosted HTML documents.
 
@@ -468,5 +499,4 @@ def enable_mpl_offline(resize=False, strip_style=False,
     formatter = ip.display_formatter.formatters['text/html']
     formatter.for_type(matplotlib.figure.Figure,
                        lambda fig: iplot_mpl(fig, resize, strip_style, verbose,
-                                             show_link, link_text, validate))
-
+                                             config, validate))

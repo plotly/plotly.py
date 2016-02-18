@@ -98,7 +98,7 @@ To install the optional dependencies:
 pip install -r optional-requirements.txt
 ```
 
-##Testing
+##Testing 
 
 Our API uses Nose to run tests. (https://nose.readthedocs.org/en/latest/)
 
