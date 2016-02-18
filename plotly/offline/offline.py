@@ -265,6 +265,17 @@ def plot(figure_or_data,
     auto_open (default=True) -- If True, open the saved file in a
         web browser after saving.
         This argument only applies if `output_type` is 'file'.
+    **config_options -- This will take in other keywords that will
+    configure other options of your plot including mode bar buttons and
+    interactivity in your chart. Take a look at:
+    https://plot.ly/javascript/configuration-options/ for a full list of
+    possible keywords. For example we can add the keyword `displaylogo`
+    to False which would remove the Plotly logo in the top right corner.
+    ```
+    iplot([{"x": [1, 2, 3], "y": [3, 1, 6]}], show_link=True,
+            link_text="Send Here", displaylogo=False)
+    ```
+
     """
     if output_type not in ['div', 'file']:
         raise ValueError(
@@ -381,6 +392,18 @@ def plot_mpl(mpl_fig, resize=False, strip_style=False,
     auto_open (default=True) -- If True, open the saved file in a
         web browser after saving.
         This argument only applies if `output_type` is 'file'.
+    **config_options -- This will take in other keywords that will
+    configure other options of your plot including mode bar buttons and
+    interactivity in your chart. Take a look at:
+    https://plot.ly/javascript/configuration-options/ for a full list of
+    possible keywords. For example we can add the keyword `displaylogo`
+    to False which would remove the Plotly logo in the top right corner.
+
+    ```
+    iplot([{"x": [1, 2, 3], "y": [3, 1, 6]}], show_link=True,
+            link_text="Send Here", displaylogo=False)
+    ```
+
 
     Example:
     ```
@@ -436,6 +459,18 @@ def iplot_mpl(mpl_fig, resize=False, strip_style=False,
                                has become outdated with your version of
                                graph_reference.json or if you need to include
                                extra, unnecessary keys in your figure.
+    **config_options -- This will take in other keywords that will
+    configure other options of your plot including mode bar buttons and
+    interactivity in your chart. Take a look at:
+    https://plot.ly/javascript/configuration-options/ for a full list of
+    possible keywords. For example we can add the keyword `displaylogo`
+    to False which would remove the Plotly logo in the top right corner.
+
+    ```
+    iplot([{"x": [1, 2, 3], "y": [3, 1, 6]}], show_link=True,
+            link_text="Send Here", displaylogo=False)
+    ```
+
 
     Example:
     ```
@@ -492,4 +527,3 @@ def enable_mpl_offline(resize=False, strip_style=False,
     formatter.for_type(matplotlib.figure.Figure,
                        lambda fig: iplot_mpl(fig, resize, strip_style, verbose,
                                              show_link, link_text, validate))
-
