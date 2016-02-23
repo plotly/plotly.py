@@ -61,14 +61,14 @@ def init_notebook_mode():
 
     global __PLOTLY_OFFLINE_INITIALIZED
     if not __PLOTLY_OFFLINE_INITIALIZED:
-        display(HTML('<script type="text/javascript">' +
-                     # ipython's includes `require` as a global, which
-                     # conflicts with plotly.js. so, unrequire it.
-                     'require=requirejs=define=undefined;' +
-                     '</script>' +
-                     '<script type="text/javascript">' +
+        display(HTML("<script type='text/javascript'>" +
+                     "define('plotly', function(require, exports, module) {" +
                      get_plotlyjs() +
-                     '</script>'))
+                     "});" +
+                     "require(['plotly'], function(Plotly) {" +
+                     "window.Plotly = Plotly;" +
+                     "});" +
+                     "</script>"))
     __PLOTLY_OFFLINE_INITIALIZED = True
 
 
