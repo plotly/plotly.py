@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Fixed
+- Offline mode will no longer delete the Jupyter Notebook's require, requirejs, and define variables.
 
 ## [1.9.6] - 2016-02-18
 ### Updated
