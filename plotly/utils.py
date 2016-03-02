@@ -12,6 +12,7 @@ import os.path
 import re
 import sys
 import threading
+import decimal
 
 import pytz
 
@@ -130,6 +131,9 @@ class PlotlyJSONEncoder(json.JSONEncoder):
         # before python 2.7, 'true', 'false', 'null', were include here.
         if const in ('Infinity', '-Infinity', 'NaN'):
             return None
+        # Decimal Fails on Serialization, convert it to float
+        elif isinstance(const, decimal.Decimal):
+            return float(const)
         else:
             return const
 
@@ -201,7 +205,8 @@ class PlotlyJSONEncoder(json.JSONEncoder):
             self.encode_as_pandas,
             self.encode_as_datetime,
             self.encode_as_date,
-            self.encode_as_list  # because some values have `tolist` do last.
+            self.encode_as_list,  # because some values have `tolist` do last.
+            self.encode_as_decimal
         )
         for encoding_method in encoding_methods:
             try:
@@ -296,6 +301,13 @@ class PlotlyJSONEncoder(json.JSONEncoder):
         else:
             return iso_to_plotly_time_string(time_string)
 
+    @staticmethod
+    def encode_as_decimal(obj):
+        """Attempt to encode decimal by converting it to float"""
+        if isinstance(obj, decimal.Decimal):
+            return float(obj)
+        else:
+            raise NotEncodable
 
 ### unicode stuff ###
 def decode_unicode(coll):
