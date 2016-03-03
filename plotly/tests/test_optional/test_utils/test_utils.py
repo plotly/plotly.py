@@ -7,6 +7,7 @@ from __future__ import absolute_import
 import datetime
 import json
 import math
+import decimal
 from datetime import datetime as dt
 from unittest import TestCase
 
@@ -149,6 +150,13 @@ class TestJSONEncoder(TestCase):
         )
         self.assertEqual(res, '2013-10-01 00:00:00.000010')
 
+    def test_encode_as_decimal(self):
+
+        # should work with decimal values
+        res = utils.PlotlyJSONEncoder.encode_as_decimal(decimal.Decimal(1.023452))
+
+        self.assertAlmostEqual(res, 1.023452) # Checks upto 7 decimal places
+        self.assertIsInstance(res, float)
 
 ## JSON encoding
 numeric_list = [1, 2, 3]
