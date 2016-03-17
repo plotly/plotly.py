@@ -127,9 +127,11 @@ def _plot_html(figure_or_data, show_link, link_text,
         'class="plotly-graph-div">'
         '</div>'
         '<script type="text/javascript">'
+        'requirejs(["plotly"], function(util) {{'
         'window.PLOTLYENV=window.PLOTLYENV || {{}};'
         'window.PLOTLYENV.BASE_URL="' + plotly_platform_url + '";'
         '{script}'
+        '}});'
         '</script>'
         '').format(
         id=plotdivid, script=script,
