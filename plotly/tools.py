@@ -1443,30 +1443,320 @@ class FigureFactory(object):
     """
 
     @staticmethod
-    def create_scatterplotmatrix(df, useindex = False, index = " ",
-                                 diagonal = "Scatter", symbol = 0, size = 6,
-                                 height = " ", width = " ", jitter = 0,
-                                 title = "Scatterplot Matrix"):
+    def _scatterplot_no_index(matrix, headers, 
+                              diag, size, symbol,
+                              height, width,
+                              jitter, title):
+        from plotly.graph_objs import graph_objs
+        from random import gauss
+        
+        dim = len(matrix)
+        fig = make_subplots(rows=dim, cols=dim)
+        trace_list = []
 
-        from plotly import tools
-        import plotly.plotly as py
-        import plotly.graph_objs as go
-        import pandas as pd
-        import random as r
-       
-        colors = ["rgb(31, 119, 180)", "rgb(255, 127, 14)",
-                  "rgb(44, 160, 44)", "rgb(214, 39, 40)",
-                  "rgb(148, 103, 189)", "rgb(140, 86, 75)",
-                  "rgb(227, 119, 194)", "rgb(127, 127, 127)",
-                  "rgb(188, 189, 34)", "rgb(23, 190, 207)"]
+        # Insert traces into trace_list
+        for listy in matrix:
+            for listx in matrix:
+                if (listx == listy) and (diag == "Histogram"):
+                    trace = graph_objs.Histogram(
+                        x = listx,
+                        showlegend = False
+                        )
+                elif (listx == listy) and (diag == "box"):
+                    trace = graph_objs.Box(
+                        y = listx,
+                        name = None,
+                        showlegend = False
+                        )
+                else:
+                    # Add Jitter
+                    if not isinstance(listx[0], basestring):
+                        spanx = abs(max(listx) - min(listx))
+                        for j in range(len(listx)):
+                            listx[j] = listx[j] + (spanx/2)*jitter*gauss(0,1)
+                    if not isinstance(listy[0], basestring):
+                        spany = abs(max(listy) - min(listy))
+                        for j in range(len(listy)):
+                            listy[j] = listy[j] + (spany/2)*jitter*gauss(0,1)
 
-        matrix = []
-        col_names = []
-        index_vals = []
-        diagonal_choices = ["Scatter", "Histogram"]
+                    trace = graph_objs.Scatter(
+                            x = listx,
+                            y = listy,
+                            mode = "markers",
+                            marker = dict(
+                                symbol = symbol,
+                                size = size),
+                            showlegend = False
+                            )
+                trace_list.append(trace)
+
+        # Create list of index values for the axes
+        indicies = range(dim)
+        indicies.remove(0)
+        indicies.append(dim)
+        j = 0
+
+        for y_index in indicies:
+            for x_index in indicies:
+                fig.append_trace(trace_list[j], y_index, x_index)
+                j += 1
+        # Insert headers into the figure
+        for j in range(dim):
+            xaxis_place = "xaxis" + str(dim*dim - dim+1+j)
+            fig['layout'][xaxis_place].update(title = headers[j])
+        for j in range(dim):
+            yaxis_place = "yaxis" + str(1 + dim*j)
+            fig['layout'][yaxis_place].update(title = headers[j])
+
+        # Set height and width, if not already set by user
+        if (height is None):
+            if dim <= 4:
+                height = 985
+            else:
+                height = 1231
+        if (width is None):
+            if dim <= 4:
+                width = 985
+            else:
+                width = 1231
+
+        fig['layout'].update(
+        height = height, width = width,
+        title = title,
+        showlegend = True
+        )  
+        return fig
+
+
+    @staticmethod
+    def _scatterplot_index(matrix, headers, 
+                           diag, size, symbol,
+                           height, width,
+                           jitter, title,
+                           index, index_vals,
+                           colors):
+        from plotly.graph_objs import graph_objs
+        from random import gauss
+
+        dim = len(matrix)
+        fig = make_subplots(rows=dim, cols=dim)
+        trace_list = []
+
+        # Checks index_vals for errors
+        firstvector = matrix[0]
+        if len(index_vals) != len(firstvector):
+            raise exceptions.PlotlyError("The length of your index_vals "
+                                         "list doesn't match the number of "
+                                         "lists in your matrix. Please "
+                                         "make sure both the rows of your "
+                                         "matrix have the same length as "
+                                         "the index_vals list.")
+        
+        # Define a paramter that will determine whether
+        # or not a trace will show or hide its legend
+        # info when drawn
+        legend_param = 0
+
+        # Work over all permutations of list pairs
+        for listy in matrix:
+            for listx in matrix: 
+                # create a dictionary for index_vals
+                unique_leg_names = {}
+                for name in index_vals:
+                    if name not in unique_leg_names:
+                        unique_leg_names[name] = []
+
+                color_index = 0
+
+                # Fill all the rest of the names into the dictionary
+                for name in unique_leg_names:
+                    new_listx = []
+                    new_listy = []
+                        
+                    for j in range(len(index_vals)):
+                        if index_vals[j] == name: 
+                            new_listx.append(listx[j])
+                            new_listy.append(listy[j])
+
+                    # Generate trace with VISIBLE icon
+                    if legend_param == 1:
+                        if (listx == listy) and (diag == "Histogram"):
+                            trace = graph_objs.Histogram(
+                                x = new_listx,
+                                marker = dict(
+                                    color = colors[color_index]),
+                                showlegend = True
+                                )
+                        elif (listx == listy) and (diag == "box"):
+                            trace = graph_objs.Box(
+                                y = new_listx,
+                                name = None,
+                                marker = dict(
+                                    color = colors[color_index]),
+                                showlegend = True
+                                )
+                        else:
+                            trace = graph_objs.Scatter(
+                            x = new_listx,
+                            y = new_listy,
+                            mode = "markers",
+                            name = name,
+                            marker = dict(
+                                symbol = symbol,
+                                size = size,
+                                color = colors[color_index]),
+                            showlegend = True,
+                            )
+                    
+                    # Generate trace with INVISIBLE icon
+                    if legend_param != 1:
+                        if (listx == listy) and (diag == "Histogram"):
+                            trace = graph_objs.Histogram(
+                                x = new_listx,
+                                marker = dict(
+                                    color = colors[color_index]),
+                                showlegend = False
+                                )
+                        elif (listx == listy) and (diag == "box"):
+                            trace = graph_objs.Box(
+                                y = new_listx,
+                                name = None,
+                                marker = dict(
+                                    color = colors[color_index]),
+                                showlegend = False
+                                )
+                        else:
+                            trace = graph_objs.Scatter(
+                            x = new_listx,
+                            y = new_listy,
+                            mode = "markers",
+                            name = name,
+                            marker = dict(
+                                symbol = symbol,
+                                size = size,
+                                color = colors[color_index]),
+                            showlegend = False,
+                            )
+
+                    # Push the trace into dictionary
+                    unique_leg_names[name] = trace
+                    if color_index >= (len(colors) - 1):
+                        color_index = -1
+                    color_index += 1
+                    
+                trace_list.append(unique_leg_names)
+                legend_param += 1
+
+        # Create list of index values for the axes
+        indicies = range(dim)
+        indicies.remove(0)
+        indicies.append(dim)
+        j = 0
+        
+        for y_index in indicies:
+            for x_index in indicies:
+                for name in trace_list[j]:
+                    fig.append_trace(trace_list[j][name], y_index, x_index)
+                j += 1
+    
+        # Check if length of headers is equal to the
+        # number of lists in matrix
+        if len(headers) != dim:
+            raise exceptions.PlotlyError("Your list of variable_"
+                                         "names must match the "
+                                         "number of lists in your "
+                                         "array. That is to say that "
+                                         "both lists must have the "
+                                         "same dimension.")
+
+        # Insert headers into the figure
+        for j in range(dim):
+            xaxis_place = "xaxis" + str(dim*dim - dim+1+j)
+            fig['layout'][xaxis_place].update(title = headers[j])
+
+        for j in range(dim):
+            yaxis_place = "yaxis" + str(1 + dim*j)
+            fig['layout'][yaxis_place].update(title = headers[j])
+
+        # Set height and width, if not already set by user
+        if (height is None):
+            if dim <= 4:
+                height = 985
+            else:
+                height = 1231
+        if (width is None):
+            if dim <= 4:
+                width = 985
+            else:
+                width = 1231
+            
+        if diag == "Histogram":
+            fig['layout'].update(
+                height = height, width = width,
+                title = title,
+                showlegend = True,
+                barmode = "stack")
+            return fig
+
+        elif diag == "box":
+            fig['layout'].update(
+                height = height, width = width,
+                title = title,
+                showlegend = True)
+            return fig
+
+        else:
+            fig['layout'].update(
+                height = height, width = width,
+                title = title,
+                showlegend = True)
+            return fig
+
+
+    @staticmethod
+    def _validate_index(index_vals):
+        import types
+        NumberTypes = (types.IntType, types.LongType, types.FloatType)
+        if isinstance(index_vals[0], NumberTypes):
+            if not all(isinstance(item, NumberTypes) for item in index_vals):
+                raise exceptions.PlotlyError("Error in indexing column."
+                                             "Make sure all entries of each "
+                                             "column are all numbers or "
+                                             "all strings.")
+
+        elif isinstance(index_vals[0], basestring):
+            if not all(isinstance(item, basestring) for item in index_vals):
+                raise exceptions.PlotlyError("Error in indexing column."
+                                             "Make sure all entries of each "
+                                             "column are all numbers or "
+                                             "all strings.")
+
+    @staticmethod
+    def _validate_matrix(array):
+        import types
+        NumberTypes = (types.IntType, types.LongType, types.FloatType)
+        for vector in array:
+            if isinstance(vector[0], NumberTypes):
+                if not all(isinstance(item, NumberTypes) for item in vector):
+                    raise exceptions.PlotlyError("Error in dataframe. "
+                                                 "Make sure all entries of "
+                                                 "each column are either "
+                                                 "numbers or strings.")
+            elif isinstance(vector[0], basestring):
+                if not all(isinstance(item, basestring) for item in vector):
+                    raise exceptions.PlotlyError("Error in dataframe. "
+                                                 "Make sure all entries of "
+                                                 "each column are either "
+                                                 "numbers or strings.")
+
+    @staticmethod
+    def _validate_scatterplotmatrix(df, jitter, index, diag, **scatter_kws):
+        if _pandas_imported is False:
+            raise ImportError("FigureFactory.scatterplotmatrix requires "
+                              "a pandas DataFrame.")
 
         # Check if pandas dataframe
-        if type(df) != pd.core.frame.DataFrame:
+        if not isinstance(df, pd.core.frame.DataFrame):
             raise exceptions.PlotlyError("Dataframe not inputed. Please " 
                                          "use a pandas dataframe to pro" 
                                          "duce a scatterplot matrix.")
@@ -1477,339 +1767,155 @@ class FigureFactory(object):
                                          "use the scatterplot matrix, use at "
                                          "least 2 columns.")
 
-        # Check that diagonal parameter is selected properly
-        if diagonal not in diagonal_choices:
-            raise exceptions.PlotlyError("Make sure diagonal is set to "
-                                         "either Scatter or Histogram.")
+        # Check that diag parameter is selected properly
+        if diag not in diag_choices:
+            raise exceptions.PlotlyError("Make sure diag is set to "
+                                         "one of {}".format(diag_choices))
+        # Verify Jitter
+        if (jitter < 0.0) or (jitter > 1.0):
+            raise exceptions.PlotlyError("Jitter must lie between 0 and 1.0 "
+                                         "inclusive.")
 
+    @staticmethod
+    def create_scatterplotmatrix(df, index = None, diag = "Scatter", 
+                                 size = 6, symbol = 0,
+                                 height = None, width = None, jitter = 0,
+                                 title = "Scatterplot Matrix"):
 
-        if useindex == True:
+        """
+        Returns data for a scatterplot matrix.
+
+        : param (pandas dataframe) df: array of the data with column headers
+        : param (string) index: name of the index column in data array
+        : param (string) diag: sets graph type for the main diagonal plots
+        : param (number >= 0) size: sets marker size (in px)
+        : param (string|int) symbol: sets the marker symbol type
+        : param (int|float) height: sets the height of the graph 
+        : param (int|float) width: sets the width of the graph
+        : param (number in [0,1]) jitter: adds noise to points in scatterplots
+        : param (string) title: the title label of the scatterplot matrix
+        : param (dict) **scatter_kws: a dictionary of scatter attributes
+
+        Example 1: Trivial Scatterplot Matrix
+        ```
+        from plotly.graph_objs import graph_objs
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+
+        import numpy as np
+        import pandas as pd
+
+        # Create dataframe
+        df = pd.DataFrame(np.random.randn(10, 2),
+                           columns=["A", "B"])
+
+        # Create scatterplot matrix
+        fig = FF.create_scatterplotmatrix(df)
+
+        # Plot
+        py.iplot(fig, filename='ScatterPlot Matrix')
+        ```
+
+        Example 2: Indexing a column
+        ```
+        from plotly.graph_objs import graph_objs
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+
+        import numpy as np
+        import pandas as pd
+
+        # Create dataframe with index
+        df = pd.DataFrame(np.random.randn(10, 2),
+                           columns=["A", "B"])
+        
+        df["Fruit"] = pd.Series(["apple", "apple", "pear", "apple", "apple",
+                                 "pear", "pear", "pear", "apple", "pear"])
+
+        # Create scatterplot matrix
+        fig = FF.create_scatterplotmatrix(df, useindex = True, index = "Fruit")
+
+        # Plot
+        fig = py.iplot(fig, filename='ScatterPlot Matrix')
+        ```
+
+        Example 3: Adding some style
+        ```
+        from plotly.graph_objs import graph_objs
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+
+        import numpy as np
+        import pandas as pd
+
+        # Create 4X4 dataframe with index
+        df = pd.DataFrame(np.random.randn(10, 4),
+                           columns=["A", "B", "C", "D"])
+        
+        df["Fruit"] = pd.Series(["apple","apple","pear","apple","apple",
+                                 "pear","pear","pear","apple","pear"])
+
+        # Create scatterplot matrix
+        fig = FF.create_scatterplotmatrix(df, useindex = True, index = "Fruit",
+                                          symbol = 2, size = 8,
+                                          diag = "Histogram")
+
+        # Plot
+        fig = py.iplot(fig, filename='ScatterPlot Matrix')
+        ```
+        """
+        # TODO: protected until #282
+        matrix = []
+        headers = []
+        index_vals = []
+        global diag_choices
+        diag_choices = ["Scatter", "Histogram", "box"]
+        colors = ["rgb(31, 119, 180)", "rgb(255, 127, 14)",
+                  "rgb(44, 160, 44)", "rgb(214, 39, 40)",
+                  "rgb(148, 103, 189)", "rgb(140, 86, 75)",
+                  "rgb(227, 119, 194)", "rgb(127, 127, 127)",
+                  "rgb(188, 189, 34)", "rgb(23, 190, 207)"]
+
+        FigureFactory._validate_scatterplotmatrix(df, jitter, index, diag)
+
+        if not index:
+            for name in df:
+                headers.append(name)
+            for name in headers:
+                matrix.append(df[name].values.tolist())
+            # Check for same data-type in df columns
+            FigureFactory._validate_matrix(matrix)
+
+            figure = FigureFactory._scatterplot_no_index(matrix,
+                                                         headers, 
+                                                         diag,
+                                                         size, symbol,
+                                                         height, width,
+                                                         jitter, title)
+            return figure
+
+        if index:
             if index not in df:
                 raise exceptions.PlotlyError("Make sure you set the index " 
                                              "input variable to one of the "
                                              "column names of your matrix.")
-
-            else:
-                index_vals = df[index].values.tolist()
-
-            # Make list of column names besides index
+            index_vals = df[index].values.tolist()
             for name in df:
                 if name != index:
-                    col_names.append(name)
-
-            # Populate matrix = []
-            for name in col_names:
+                    headers.append(name)
+            for name in headers:
                 matrix.append(df[name].values.tolist())
+            # Check for same data-type in df columns
+            FigureFactory._validate_matrix(matrix)
+            FigureFactory._validate_index(index_vals)
 
-            # Check if Matrix Values are either all strings or numbers
-            for vector in matrix:   
-                if ((type(vector[0]) == float) or (type(vector[0]) == int)):
-                    for entry in vector:
-                        if not ((type(entry) == float) or (type(entry) == int)):
-                            raise exceptions.PlotlyError("Error in data"
-                                                         "frame. Make sure "
-                                                         "that all entries "
-                                                         "of each column are "
-                                                         "either numbers or "
-                                                         "strings.")
-                                
-                if (type(vector[0]) == str):
-                    for entry in vector:
-                        if (type(entry) != str):
-                            raise exceptions.PlotlyError("Error in data"
-                                                         "frame. Make sure "
-                                                         "that all entries "
-                                                         "of each column are "
-                                                         "either numbers or "
-                                                         "strings.")
-
-            # Check if index_vals are either all strings or numbers 
-            if ((type(index_vals[0]) == float) or (type(index_vals[0]) == int)):
-                for entry in index_vals:
-                    if not ((type(entry) == float) or (type(entry) == int)):
-                        raise exceptions.PlotlyError("Error in data"
-                                                     "frame. Make sure "
-                                                     "that all entries "
-                                                     "of each column are "
-                                                     "either numbers or "
-                                                     "strings.")
-                            
-            if (type(index_vals[0]) == str):
-                for entry in index_vals:
-                    if (type(entry) != str):
-                        raise exceptions.PlotlyError("Error in data"
-                                                     "frame. Make sure "
-                                                     "that all entries "
-                                                     "of each column are "
-                                                     "either numbers or "
-                                                     "strings.")
-
-        if useindex == False:
-            # Make list of column names
-            for name in df:
-                col_names.append(name)
-
-            # Populate matrix = [] with dataframe columns
-            for name in col_names:
-                matrix.append(df[name].values.tolist())
-
-
-            # Check if values in each column are either
-            # all strings or all numbers
-
-            # Matrix Check
-            for vector in matrix:   
-                if ((type(vector[0]) == float) or (type(vector[0]) == int)):
-                    for entry in vector:
-                        if not ((type(entry) == float) or (type(entry) == int)):
-                            raise exceptions.PlotlyError("Error in data"
-                                                         "frame. Make sure "
-                                                         "that all entries "
-                                                         "of each column are "
-                                                         "either numbers or "
-                                                         "strings.")
-                                
-                if (type(vector[0]) == str):
-                    for entry in vector:
-                        if (type(entry) != str):
-                            raise exceptions.PlotlyError("Error in dataframe. "
-                                                         "Make sure that all "
-                                                         "entries of each col"
-                                                         "umn are either "
-                                                         "numbers or strings.")
-
-        # Main Code
-        dim = len(matrix)
-        trace_list = []
-
-        if index_vals == []:
-            fig = tools.make_subplots(rows=dim, cols=dim)
-            
-            # Insert traces into trace_list
-            for listy in matrix:
-                for listx in matrix:
-                    if (listx == listy) and (diagonal == "Histogram"):
-                        trace = go.Histogram(
-                            x = listx,
-                            showlegend = False
-                            )
-                    else:
-                        # Add Jitter
-                        if (jitter < 0.0) or (jitter > 1.0):
-                            raise exceptions.PlotlyError("Jitter must lie "
-                                                         "between 0 and 1.0 "
-                                                         "inclusive.")
-
-                        if type(listx[0]) != str:
-                            for j in range(len(listx)):
-                                listx[j] = listx[j] + jitter*r.uniform(-1,1)
-
-                        if type(listy[0]) != str:
-                            for j in range(len(listy)):
-                                listy[j] = listy[j] + jitter*r.uniform(-1,1)
-
-                        trace = go.Scatter(
-                                x = listx,
-                                y = listy,
-                                mode = "markers",
-                                marker = dict(
-                                    symbol = symbol,
-                                    size = size),
-                                showlegend = False,
-                                )
-                    trace_list.append(trace)
-
-            # Create list of index values for the axes
-            # eg. if dim = 3, then the indicies are [1, 2, 3]
-            indicies = range(dim)
-            indicies.remove(0)
-            indicies.append(dim)
-            j = 0
-
-            for y_index in indicies:
-                for x_index in indicies:
-                    fig.append_trace(trace_list[j], y_index, x_index)
-                    j += 1
-
-            # Check if length of col_names and array match
-            if len(col_names) != dim:
-                raise exceptions.PlotlyError("The length of your variable_"
-                                             "names list doesn't match the "
-                                             "number of lists in your "
-                                             "matrix. This means that both "
-                                             "col_names and matrix "
-                                             "must have the same "
-                                             "dimension.")
-
-            # Insert col_names into the figure
-            for j in range(dim):
-                xaxis_place = "xaxis" + str(dim*dim - dim + 1 + j)
-                fig['layout'][xaxis_place].update(title = col_names[j])
-
-            for j in range(dim):
-                yaxis_place = "yaxis" + str(1 + dim*j)
-                fig['layout'][yaxis_place].update(title = col_names[j])
-
-            # Set height and width if not already selected by user
-            if (height == " "):
-                height = 400 + 200*(dim - 1)
-
-            if (width == " "):
-                width = 400 + 200*(dim - 1)
-
-            fig['layout'].update(
-                height = height, width = width,
-                title = title,
-                showlegend = True
-                )  
-            return fig
-                
-        if index_vals != []:
-            fig = tools.make_subplots(rows=dim, cols=dim)  
-
-            # Checks index_vals for errors
-            firstvector = matrix[0]
-            if len(index_vals) != len(firstvector):
-                raise exceptions.PlotlyError("The length of your index_vals "
-                                             "list doesn't match the number of "
-                                             "lists in your matrix. Please "
-                                             "make sure both the rows of your "
-                                             "matrix have the same length as "
-                                             "the index_vals list.")
-            
-            # Define a paramter that will determine whether
-            # or not a trace will show or hide its legend
-            # info when drawn
-            legend_param = 0
-
-            # Work over all permutations of list pairs
-            for listy in matrix:
-                for listx in matrix:
-                
-                    # create a dictionary for index_vals
-                    unique_leg_names = {}
-                    for name in index_vals:
-                        if name not in unique_leg_names:
-                            unique_leg_names[name] = []
-
-                    color_index = 0
-                
-                    # Fill all the rest of the names into the dictionary
-                    for name in unique_leg_names:
-                        new_listx = []
-                        new_listy = []
-                            
-                        for j in range(len(index_vals)):
-                            if index_vals[j] == name: 
-                                new_listx.append(listx[j])
-                                new_listy.append(listy[j])
-
-                        # Generate trace with VISIBLE icon
-                        if legend_param == 1:
-                            if (listx == listy) and (diagonal == "Histogram"):
-                                trace = go.Histogram(
-                                    x = new_listx,
-                                    marker = dict(
-                                        color = colors[color_index]),
-                                    showlegend = True
-                                    )
-                            else:
-                                trace = go.Scatter(
-                                x = new_listx,
-                                y = new_listy,
-                                mode = "markers",
-                                name = name,
-                                marker = dict(
-                                    symbol = symbol,
-                                    size = size,
-                                    color = colors[color_index]),
-                                showlegend = True
-                                )
-                        
-                        # Generate trace with INVISIBLE icon
-                        if legend_param != 1:
-                            if (listx == listy) and (diagonal == "Histogram"):
-                                trace = go.Histogram(
-                                    x = new_listx,
-                                    marker = dict(
-                                        color = colors[color_index]),
-                                    showlegend = False
-                                    )
-                            else:
-                                trace = go.Scatter(
-                                x = new_listx,
-                                y = new_listy,
-                                mode = "markers",
-                                name = name,
-                                marker = dict(
-                                    symbol = symbol,
-                                    size = size,
-                                    color = colors[color_index]),
-                                showlegend = False
-                                )
-
-                        # Push the trace into dictionary
-                        unique_leg_names[name] = trace
-                        if color_index >= (len(colors) - 1):
-                            color_index = -1
-                        color_index += 1
-                        
-                    trace_list.append(unique_leg_names)
-                    legend_param += 1
-
-            # Create list of index values for the axes
-            # eg. if dim = 3, then the indicies are [1, 2, 3]
-            indicies = range(dim)
-            indicies.remove(0)
-            indicies.append(dim)
-            j = 0
-            
-            for y_index in indicies:
-                for x_index in indicies:
-                    for name in trace_list[j]:
-                        fig.append_trace(trace_list[j][name], y_index, x_index)
-                    j += 1
-        
-            # Check if length of col_names is equal to the
-            # number of lists in matrix
-            if len(col_names) != dim:
-                raise exceptions.PlotlyError("Your list of variable_"
-                                             "names must match the "
-                                             "number of lists in your "
-                                             "array. That is to say that "
-                                             "both lists must have the "
-                                             "same dimension.")
-
-            # Insert col_names into the figure
-            for j in range(dim):
-                xaxis_place = "xaxis" + str(dim*dim - dim + 1 + j)
-                fig['layout'][xaxis_place].update(title = col_names[j])
-
-            for j in range(dim):
-                yaxis_place = "yaxis" + str(1 + dim*j)
-                fig['layout'][yaxis_place].update(title = col_names[j])
-
-            # Set height and width if not already selected by user
-            if (height == " "):
-                height = 400 + 200*(dim - 1)
-
-            if (width == " "):
-                width = 400 + 200*(dim - 1)
-
-            if diagonal == "Histogram":
-                fig['layout'].update(
-                    height = height, width = width,
-                    title = title,
-                    showlegend = True,
-                    barmode = "stack")
-                return fig
-
-            if diagonal == "Scatter":
-                fig['layout'].update(
-                    height = height, width = width,
-                    title = title,
-                    showlegend = True)
-                return fig
+            figure = FigureFactory._scatterplot_index(matrix, headers, 
+                                                      diag, size, symbol,
+                                                      height, width,
+                                                      jitter, title,
+                                                      index, index_vals,
+                                                      colors)
+            return figure
 
 
     @staticmethod
