@@ -45,7 +45,7 @@
                 "requiredOpts": []
             },
             "colorscale": {
-                "description": "A Plotly colorscale either picked by a name: (any of Greys, YIGnBu, Greens, YIOrRd, Bluered, RdBu, Reds, Blues, Picnic, Rainbow, Portland, Jet, Hot, Blackbody, Earth, Electric, Viridis ) customized as an {array} of 2-element {arrays} where the first element is the normalized color level value (starting at *0* and ending at *1*), and the second item is a valid color string.",
+                "description": "A Plotly colorscale either picked by a name: (any of Greys, YlGnBu, Greens, YlOrRd, Bluered, RdBu, Reds, Blues, Picnic, Rainbow, Portland, Jet, Hot, Blackbody, Earth, Electric, Viridis ) customized as an {array} of 2-element {arrays} where the first element is the normalized color level value (starting at *0* and ending at *1*), and the second item is a valid color string.",
                 "otherOpts": [
                     "dflt"
                 ],
@@ -427,6 +427,7 @@
             },
             "dragmode": {
                 "description": "Determines the mode of drag interactions. *select* and *lasso* apply only to scatter traces with markers or text. *orbit* and *turntable* apply only to 3D scenes.",
+                "dflt": "zoom",
                 "role": "info",
                 "valType": "enumerated",
                 "values": [
@@ -1246,6 +1247,28 @@
                         "role": "info",
                         "valType": "info_array"
                     }
+                },
+                "dragmode": {
+                    "description": "Determines the mode of drag interactions for this scene.",
+                    "dflt": "turntable",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "orbit",
+                        "turntable",
+                        "zoom",
+                        "pan"
+                    ]
+                },
+                "hovermode": {
+                    "description": "Determines the mode of hover interactions for this scene.",
+                    "dflt": "closest",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "closest",
+                        false
+                    ]
                 },
                 "role": "object",
                 "xaxis": {
@@ -14708,11 +14731,49 @@
         },
         "surface": {
             "attributes": {
+                "_deprecated": {
+                    "zauto": {
+                        "description": "Obsolete. Use `cauto` instead.",
+                        "dflt": true,
+                        "role": "info",
+                        "valType": "boolean"
+                    },
+                    "zmax": {
+                        "description": "Obsolete. Use `cmax` instead.",
+                        "dflt": null,
+                        "role": "info",
+                        "valType": "number"
+                    },
+                    "zmin": {
+                        "description": "Obsolete. Use `cmin` instead.",
+                        "dflt": null,
+                        "role": "info",
+                        "valType": "number"
+                    }
+                },
                 "autocolorscale": {
                     "description": "Determines whether or not the colorscale is picked using the sign of the input z values.",
                     "dflt": false,
                     "role": "style",
                     "valType": "boolean"
+                },
+                "cauto": {
+                    "description": "Determines the whether or not the color domain is computed with respect to the input data.",
+                    "dflt": true,
+                    "role": "info",
+                    "valType": "boolean"
+                },
+                "cmax": {
+                    "description": "Sets the upper bound of color domain.",
+                    "dflt": null,
+                    "role": "info",
+                    "valType": "number"
+                },
+                "cmin": {
+                    "description": "Sets the lower bound of color domain.",
+                    "dflt": null,
+                    "role": "info",
+                    "valType": "number"
                 },
                 "colorbar": {
                     "bgcolor": {
@@ -15370,6 +15431,16 @@
                         "valType": "string"
                     }
                 },
+                "surfacecolor": {
+                    "description": "Sets the surface color values, used for setting a color scale independent of `z`.",
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "surfacecolorsrc": {
+                    "description": "Sets the source reference on plot.ly for  surfacecolor .",
+                    "role": "info",
+                    "valType": "string"
+                },
                 "text": {
                     "description": "Sets the text elements associated with each z value.",
                     "role": "data",
@@ -15422,31 +15493,13 @@
                     "role": "data",
                     "valType": "data_array"
                 },
-                "zauto": {
-                    "description": "Determines the whether or not the color domain is computed with respect to the input data.",
-                    "dflt": true,
-                    "role": "info",
-                    "valType": "boolean"
-                },
-                "zmax": {
-                    "description": "Sets the upper bound of color domain.",
-                    "dflt": null,
-                    "role": "info",
-                    "valType": "number"
-                },
-                "zmin": {
-                    "description": "Sets the lower bound of color domain.",
-                    "dflt": null,
-                    "role": "info",
-                    "valType": "number"
-                },
                 "zsrc": {
                     "description": "Sets the source reference on plot.ly for  z .",
                     "role": "info",
                     "valType": "string"
                 }
             },
-            "description": "The data the describes the coordinates of the surface is set in `z`. Data in `z` should be a {2D array}. Coordinates in `x` and `y` can either be 1D {arrays} or {2D arrays} (e.g. to graph parametric surfaces). If not provided in `x` and `y`, the x and y coordinates are assumed to be linear starting at 0 with a unit step."
+            "description": "The data the describes the coordinates of the surface is set in `z`. Data in `z` should be a {2D array}. Coordinates in `x` and `y` can either be 1D {arrays} or {2D arrays} (e.g. to graph parametric surfaces). If not provided in `x` and `y`, the x and y coordinates are assumed to be linear starting at 0 with a unit step. The color scale corresponds to the `z` values by default. For custom color scales, use `surfacecolor` which should be a {2D array}, where its bounds can be controlled using `cmin` and `cmax`."
         }
     }
 }

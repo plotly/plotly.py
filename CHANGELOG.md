@@ -3,8 +3,12 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [1.9.7] - 2016-04-04
 ### Fixed
 - Offline mode will no longer delete the Jupyter Notebook's require, requirejs, and define variables.
+### Updated
+- Updated plotly.min.js so offline is using plotly.js v1.7.1
 
 ## [1.9.6] - 2016-02-18
 ### Updated
