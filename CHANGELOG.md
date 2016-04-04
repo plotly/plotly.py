@@ -3,8 +3,18 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [1.9.7] - 2016-04-04
 ### Fixed
 - Offline mode will no longer delete the Jupyter Notebook's require, requirejs, and define variables.
+
+### Updated
+- Updated plotly.min.js so offline is using plotly.js v1.8.0
+	- Added range selector functionality for cartesian plots
+	- Added range slider functionality for scatter traces
+	- Added custom surface color functionality
+	- Added ability to subplot multiple graph types (SVG cartesian, 3D, maps, pie charts)
+	- For comprehensive update list see the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md)
 
 ## [1.9.6] - 2016-02-18
 ### Updated
