@@ -2340,7 +2340,7 @@ class FigureFactory(object):
         BETA function that creates a distplot similar to seaborn.distplot
 
         The distplot can be composed of all or any combination of the following
-        3 components: (1) histogram, (2) curve: (a) kernal density estimation
+        3 components: (1) histogram, (2) curve: (a) kernel density estimation
         or (b) normal curve, and (3) rug plot. Additionally, multiple distplots
         (from multiple datasets) can be created in the same plot.
 
@@ -3404,7 +3404,7 @@ class _Distplot(FigureFactory):
 
     def make_kde(self):
         """
-        Makes the kernal density estimation(s) for create_distplot().
+        Makes the kernel density estimation(s) for create_distplot().
 
         This is called when curve_type = 'kde' in create_distplot().
 
