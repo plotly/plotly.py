@@ -31,3 +31,11 @@ from __future__ import absolute_import
 from plotly import (plotly, graph_objs, grid_objs, tools, utils, session,
                     offline)
 from plotly.version import __version__
+from plotly.check_version import get_latest
+
+_latest = get_latest()
+
+if __version__ != _latest :
+	print("Your version of Plotly is currently outdated,\n" + 
+		  "You're currently running {old}".format(old=__version__) +
+		  ", while the latest version is {}".format(_latest))
