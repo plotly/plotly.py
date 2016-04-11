@@ -39,3 +39,6 @@ if __version__ != _latest :
 	print("Your version of Plotly is currently outdated,\n" + 
 		  "You're currently running {old}".format(old=__version__) +
 		  ", while the latest version is {}".format(_latest))
+else:
+	print("Plotly is currently up to date.\n" + 
+		  "Plotly version: {}".format(__version__))
