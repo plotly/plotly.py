@@ -2731,6 +2731,173 @@
                         "nonnegative"
                     ]
                 },
+                "rangeselector": {
+                    "bgcolor": {
+                        "description": "Sets the background color of the range selector buttons.",
+                        "dflt": "#eee",
+                        "role": "style",
+                        "valType": "color"
+                    },
+                    "bordercolor": {
+                        "description": "Sets the color of the border enclosing the range selector.",
+                        "dflt": "#444",
+                        "role": "style",
+                        "valType": "color"
+                    },
+                    "borderwidth": {
+                        "description": "Sets the width (in px) of the border enclosing the range selector.",
+                        "dflt": 0,
+                        "min": 0,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "buttons": {
+                        "items": {
+                            "button": {
+                                "count": {
+                                    "description": "Sets the number of steps to take to update the range. Use with `step` to specify the update interval.",
+                                    "dflt": 1,
+                                    "min": 0,
+                                    "role": "info",
+                                    "valType": "number"
+                                },
+                                "description": "Sets the specifications for each buttons. By default, a range selector comes with no buttons.",
+                                "label": {
+                                    "description": "Sets the text label to appear on the button.",
+                                    "role": "info",
+                                    "valType": "string"
+                                },
+                                "role": "object",
+                                "step": {
+                                    "description": "The unit of measurement that the `count` value will set the range by.",
+                                    "dflt": "month",
+                                    "role": "info",
+                                    "valType": "enumerated",
+                                    "values": [
+                                        "month",
+                                        "year",
+                                        "day",
+                                        "hour",
+                                        "minute",
+                                        "second",
+                                        "all"
+                                    ]
+                                },
+                                "stepmode": {
+                                    "description": "Sets the range update mode. If *backward*, the range update shifts the start of range back *count* times *step* milliseconds. If *todate*, the range update shifts the start of range back to the first timestamp from *count* times *step* milliseconds back. For example, with `step` set to *year* and `count` set to *1* the range update shifts the start of the range back to January 01 of the current year.",
+                                    "dflt": "backward",
+                                    "role": "info",
+                                    "valType": "enumerated",
+                                    "values": [
+                                        "backward",
+                                        "todate"
+                                    ]
+                                }
+                            }
+                        },
+                        "role": "object"
+                    },
+                    "font": {
+                        "color": {
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "description": "Sets the font of the range selector button text.",
+                        "family": {
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                            "noBlank": true,
+                            "role": "style",
+                            "strict": true,
+                            "valType": "string"
+                        },
+                        "role": "object",
+                        "size": {
+                            "min": 1,
+                            "role": "style",
+                            "valType": "number"
+                        }
+                    },
+                    "role": "object",
+                    "visible": {
+                        "description": "Determines whether or not this range selector is visible. Note that range selectors are only available for x axes of `type` set to or auto-typed to *date*.",
+                        "role": "info",
+                        "valType": "boolean"
+                    },
+                    "x": {
+                        "description": "Sets the x position (in normalized coordinates) of the range selector.",
+                        "max": 3,
+                        "min": -2,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "xanchor": {
+                        "description": "Sets the range selector's horizontal position anchor. This anchor binds the `x` position to the *left*, *center* or *right* of the range selector.",
+                        "dflt": "left",
+                        "role": "info",
+                        "valType": "enumerated",
+                        "values": [
+                            "auto",
+                            "left",
+                            "center",
+                            "right"
+                        ]
+                    },
+                    "y": {
+                        "description": "Sets the y position (in normalized coordinates) of the range selector.",
+                        "max": 3,
+                        "min": -2,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "yanchor": {
+                        "description": "Sets the range selector's vertical position anchor This anchor binds the `y` position to the *top*, *middle* or *bottom* of the range selector.",
+                        "dflt": "bottom",
+                        "role": "info",
+                        "valType": "enumerated",
+                        "values": [
+                            "auto",
+                            "top",
+                            "middle",
+                            "bottom"
+                        ]
+                    }
+                },
+                "rangeslider": {
+                    "bgcolor": {
+                        "description": "Sets the background color of the range slider.",
+                        "dflt": "#fff",
+                        "role": "style",
+                        "valType": "color"
+                    },
+                    "bordercolor": {
+                        "description": "Sets the border color of the range slider.",
+                        "dflt": "#444",
+                        "role": "style",
+                        "valType": "color"
+                    },
+                    "borderwidth": {
+                        "description": "Sets the border color of the range slider.",
+                        "dflt": 0,
+                        "min": 0,
+                        "role": "style",
+                        "valType": "integer"
+                    },
+                    "role": "object",
+                    "thickness": {
+                        "description": "The height of the range slider as a fraction of the total plot area height.",
+                        "dflt": 0.15,
+                        "max": 1,
+                        "min": 0,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "visible": {
+                        "description": "Determines whether or not the range slider will be visible. If visible, perpendicular axes will be set to `fixedrange`",
+                        "dflt": true,
+                        "role": "info",
+                        "valType": "boolean"
+                    }
+                },
                 "role": "object",
                 "showexponent": {
                     "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
@@ -3133,6 +3300,173 @@
                         "nonnegative"
                     ]
                 },
+                "rangeselector": {
+                    "bgcolor": {
+                        "description": "Sets the background color of the range selector buttons.",
+                        "dflt": "#eee",
+                        "role": "style",
+                        "valType": "color"
+                    },
+                    "bordercolor": {
+                        "description": "Sets the color of the border enclosing the range selector.",
+                        "dflt": "#444",
+                        "role": "style",
+                        "valType": "color"
+                    },
+                    "borderwidth": {
+                        "description": "Sets the width (in px) of the border enclosing the range selector.",
+                        "dflt": 0,
+                        "min": 0,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "buttons": {
+                        "items": {
+                            "button": {
+                                "count": {
+                                    "description": "Sets the number of steps to take to update the range. Use with `step` to specify the update interval.",
+                                    "dflt": 1,
+                                    "min": 0,
+                                    "role": "info",
+                                    "valType": "number"
+                                },
+                                "description": "Sets the specifications for each buttons. By default, a range selector comes with no buttons.",
+                                "label": {
+                                    "description": "Sets the text label to appear on the button.",
+                                    "role": "info",
+                                    "valType": "string"
+                                },
+                                "role": "object",
+                                "step": {
+                                    "description": "The unit of measurement that the `count` value will set the range by.",
+                                    "dflt": "month",
+                                    "role": "info",
+                                    "valType": "enumerated",
+                                    "values": [
+                                        "month",
+                                        "year",
+                                        "day",
+                                        "hour",
+                                        "minute",
+                                        "second",
+                                        "all"
+                                    ]
+                                },
+                                "stepmode": {
+                                    "description": "Sets the range update mode. If *backward*, the range update shifts the start of range back *count* times *step* milliseconds. If *todate*, the range update shifts the start of range back to the first timestamp from *count* times *step* milliseconds back. For example, with `step` set to *year* and `count` set to *1* the range update shifts the start of the range back to January 01 of the current year.",
+                                    "dflt": "backward",
+                                    "role": "info",
+                                    "valType": "enumerated",
+                                    "values": [
+                                        "backward",
+                                        "todate"
+                                    ]
+                                }
+                            }
+                        },
+                        "role": "object"
+                    },
+                    "font": {
+                        "color": {
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "description": "Sets the font of the range selector button text.",
+                        "family": {
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                            "noBlank": true,
+                            "role": "style",
+                            "strict": true,
+                            "valType": "string"
+                        },
+                        "role": "object",
+                        "size": {
+                            "min": 1,
+                            "role": "style",
+                            "valType": "number"
+                        }
+                    },
+                    "role": "object",
+                    "visible": {
+                        "description": "Determines whether or not this range selector is visible. Note that range selectors are only available for x axes of `type` set to or auto-typed to *date*.",
+                        "role": "info",
+                        "valType": "boolean"
+                    },
+                    "x": {
+                        "description": "Sets the x position (in normalized coordinates) of the range selector.",
+                        "max": 3,
+                        "min": -2,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "xanchor": {
+                        "description": "Sets the range selector's horizontal position anchor. This anchor binds the `x` position to the *left*, *center* or *right* of the range selector.",
+                        "dflt": "left",
+                        "role": "info",
+                        "valType": "enumerated",
+                        "values": [
+                            "auto",
+                            "left",
+                            "center",
+                            "right"
+                        ]
+                    },
+                    "y": {
+                        "description": "Sets the y position (in normalized coordinates) of the range selector.",
+                        "max": 3,
+                        "min": -2,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "yanchor": {
+                        "description": "Sets the range selector's vertical position anchor This anchor binds the `y` position to the *top*, *middle* or *bottom* of the range selector.",
+                        "dflt": "bottom",
+                        "role": "info",
+                        "valType": "enumerated",
+                        "values": [
+                            "auto",
+                            "top",
+                            "middle",
+                            "bottom"
+                        ]
+                    }
+                },
+                "rangeslider": {
+                    "bgcolor": {
+                        "description": "Sets the background color of the range slider.",
+                        "dflt": "#fff",
+                        "role": "style",
+                        "valType": "color"
+                    },
+                    "bordercolor": {
+                        "description": "Sets the border color of the range slider.",
+                        "dflt": "#444",
+                        "role": "style",
+                        "valType": "color"
+                    },
+                    "borderwidth": {
+                        "description": "Sets the border color of the range slider.",
+                        "dflt": 0,
+                        "min": 0,
+                        "role": "style",
+                        "valType": "integer"
+                    },
+                    "role": "object",
+                    "thickness": {
+                        "description": "The height of the range slider as a fraction of the total plot area height.",
+                        "dflt": 0.15,
+                        "max": 1,
+                        "min": 0,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "visible": {
+                        "description": "Determines whether or not the range slider will be visible. If visible, perpendicular axes will be set to `fixedrange`",
+                        "dflt": true,
+                        "role": "info",
+                        "valType": "boolean"
+                    }
+                },
                 "role": "object",
                 "showexponent": {
                     "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
@@ -3395,7 +3729,7 @@
                 "marker": {
                     "color": {
                         "arrayOk": true,
-                        "description": "Sets the marker color.",
+                        "description": "Sets the marker color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                         "role": "style",
                         "valType": "color"
                     },
@@ -4072,20 +4406,20 @@
                         "valType": "boolean"
                     },
                     "cmax": {
-                        "description": "Has only an effect if `marker.color` is set to a numerical array. Sets the upper bound of the color domain.",
+                        "description": "Has only an effect if `marker.color` is set to a numerical array. Sets the upper bound of the color domain. Value should be associated to the `marker.color` array index, and if set, `marker.cmin` must be set as well.",
                         "dflt": null,
                         "role": "info",
                         "valType": "number"
                     },
                     "cmin": {
-                        "description": "Has only an effect if `marker.color` is set to a numerical array. Sets the lower bound of the color domain.",
+                        "description": "Has only an effect if `marker.color` is set to a numerical array. Sets the lower bound of the color domain. Value should be associated to the `marker.color` array index, and if set, `marker.cmax` must be set as well.",
                         "dflt": null,
                         "role": "info",
                         "valType": "number"
                     },
                     "color": {
                         "arrayOk": true,
-                        "description": "Sets the marker color.",
+                        "description": "Sets the marker color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                         "role": "style",
                         "valType": "color"
                     },
@@ -4428,7 +4762,7 @@
                         }
                     },
                     "colorscale": {
-                        "description": "Sets the colorscale. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use cmin and cmax",
+                        "description": "Sets the colorscale and only has an effect if `marker.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.cmin` and `marker.cmax`.",
                         "role": "style",
                         "valType": "colorscale"
                     },
@@ -4451,25 +4785,25 @@
                             "valType": "boolean"
                         },
                         "cmax": {
-                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the upper bound of the color domain.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the upper bound of the color domain. Value should be associated to the `marker.line.color` array index, and if set, `marker.line.cmin` must be set as well.",
                             "dflt": null,
                             "role": "info",
                             "valType": "number"
                         },
                         "cmin": {
-                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the lower bound of the color domain.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the lower bound of the color domain. Value should be associated to the `marker.line.color` array index, and if set, `marker.line.cmax` must be set as well.",
                             "dflt": null,
                             "role": "info",
                             "valType": "number"
                         },
                         "color": {
                             "arrayOk": true,
-                            "description": "Sets the color of the lines bounding the marker points.",
+                            "description": "Sets the marker outline color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                             "role": "style",
                             "valType": "color"
                         },
                         "colorscale": {
-                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the colorscale.",
+                            "description": "Sets the colorscale and only has an effect if `marker.line.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.line.cmin` and `marker.line.cmax`.",
                             "role": "style",
                             "valType": "colorscale"
                         },
@@ -4769,14 +5103,14 @@
                 "marker": {
                     "color": {
                         "arrayOk": false,
-                        "description": "Sets the marker color.",
+                        "description": "Sets the marker color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                         "role": "style",
                         "valType": "color"
                     },
                     "line": {
                         "color": {
                             "arrayOk": false,
-                            "description": "Sets the color of the lines bounding the marker points.",
+                            "description": "Sets the marker outline color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                             "dflt": "#444",
                             "role": "style",
                             "valType": "color"
@@ -5674,7 +6008,7 @@
                     "line": {
                         "color": {
                             "arrayOk": true,
-                            "description": "Sets the color of the lines bounding the marker points.",
+                            "description": "Sets the marker outline color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                             "role": "style",
                             "valType": "color"
                         },
@@ -7327,20 +7661,20 @@
                         "valType": "boolean"
                     },
                     "cmax": {
-                        "description": "Has only an effect if `marker.color` is set to a numerical array. Sets the upper bound of the color domain.",
+                        "description": "Has only an effect if `marker.color` is set to a numerical array. Sets the upper bound of the color domain. Value should be associated to the `marker.color` array index, and if set, `marker.cmin` must be set as well.",
                         "dflt": null,
                         "role": "info",
                         "valType": "number"
                     },
                     "cmin": {
-                        "description": "Has only an effect if `marker.color` is set to a numerical array. Sets the lower bound of the color domain.",
+                        "description": "Has only an effect if `marker.color` is set to a numerical array. Sets the lower bound of the color domain. Value should be associated to the `marker.color` array index, and if set, `marker.cmax` must be set as well.",
                         "dflt": null,
                         "role": "info",
                         "valType": "number"
                     },
                     "color": {
                         "arrayOk": true,
-                        "description": "Sets the marker color.",
+                        "description": "Sets the marker color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                         "role": "style",
                         "valType": "color"
                     },
@@ -7683,7 +8017,7 @@
                         }
                     },
                     "colorscale": {
-                        "description": "Sets the colorscale. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use cmin and cmax",
+                        "description": "Sets the colorscale and only has an effect if `marker.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.cmin` and `marker.cmax`.",
                         "role": "style",
                         "valType": "colorscale"
                     },
@@ -7706,25 +8040,25 @@
                             "valType": "boolean"
                         },
                         "cmax": {
-                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the upper bound of the color domain.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the upper bound of the color domain. Value should be associated to the `marker.line.color` array index, and if set, `marker.line.cmin` must be set as well.",
                             "dflt": null,
                             "role": "info",
                             "valType": "number"
                         },
                         "cmin": {
-                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the lower bound of the color domain.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the lower bound of the color domain. Value should be associated to the `marker.line.color` array index, and if set, `marker.line.cmax` must be set as well.",
                             "dflt": null,
                             "role": "info",
                             "valType": "number"
                         },
                         "color": {
                             "arrayOk": true,
-                            "description": "Sets the color of the lines bounding the marker points.",
+                            "description": "Sets the marker outline color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                             "role": "style",
                             "valType": "color"
                         },
                         "colorscale": {
-                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the colorscale.",
+                            "description": "Sets the colorscale and only has an effect if `marker.line.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.line.cmin` and `marker.line.cmax`.",
                             "role": "style",
                             "valType": "colorscale"
                         },
@@ -10600,20 +10934,20 @@
                         "valType": "boolean"
                     },
                     "cmax": {
-                        "description": "Has only an effect if `marker.color` is set to a numerical array. Sets the upper bound of the color domain.",
+                        "description": "Has only an effect if `marker.color` is set to a numerical array. Sets the upper bound of the color domain. Value should be associated to the `marker.color` array index, and if set, `marker.cmin` must be set as well.",
                         "dflt": null,
                         "role": "info",
                         "valType": "number"
                     },
                     "cmin": {
-                        "description": "Has only an effect if `marker.color` is set to a numerical array. Sets the lower bound of the color domain.",
+                        "description": "Has only an effect if `marker.color` is set to a numerical array. Sets the lower bound of the color domain. Value should be associated to the `marker.color` array index, and if set, `marker.cmax` must be set as well.",
                         "dflt": null,
                         "role": "info",
                         "valType": "number"
                     },
                     "color": {
                         "arrayOk": true,
-                        "description": "Sets the marker color.",
+                        "description": "Sets the marker color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                         "role": "style",
                         "valType": "color"
                     },
@@ -10956,7 +11290,7 @@
                         }
                     },
                     "colorscale": {
-                        "description": "Sets the colorscale. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use cmin and cmax",
+                        "description": "Sets the colorscale and only has an effect if `marker.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.cmin` and `marker.cmax`.",
                         "role": "style",
                         "valType": "colorscale"
                     },
@@ -10979,25 +11313,25 @@
                             "valType": "boolean"
                         },
                         "cmax": {
-                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the upper bound of the color domain.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the upper bound of the color domain. Value should be associated to the `marker.line.color` array index, and if set, `marker.line.cmin` must be set as well.",
                             "dflt": null,
                             "role": "info",
                             "valType": "number"
                         },
                         "cmin": {
-                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the lower bound of the color domain.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the lower bound of the color domain. Value should be associated to the `marker.line.color` array index, and if set, `marker.line.cmax` must be set as well.",
                             "dflt": null,
                             "role": "info",
                             "valType": "number"
                         },
                         "color": {
                             "arrayOk": true,
-                            "description": "Sets the color of the lines bounding the marker points.",
+                            "description": "Sets the marker outline color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                             "role": "style",
                             "valType": "color"
                         },
                         "colorscale": {
-                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the colorscale.",
+                            "description": "Sets the colorscale and only has an effect if `marker.line.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.line.cmin` and `marker.line.cmax`.",
                             "role": "style",
                             "valType": "colorscale"
                         },
@@ -11600,6 +11934,12 @@
         },
         "scatter3d": {
             "attributes": {
+                "connectgaps": {
+                    "description": "Determines whether or not gaps (i.e. {nan} or missing values) in the provided data arrays are connected.",
+                    "dflt": false,
+                    "role": "info",
+                    "valType": "boolean"
+                },
                 "error_x": {
                     "_deprecated": {
                         "opacity": {
@@ -11975,20 +12315,20 @@
                         "valType": "boolean"
                     },
                     "cmax": {
-                        "description": "Has only an effect if `marker.color` is set to a numerical array. Sets the upper bound of the color domain.",
+                        "description": "Has only an effect if `marker.color` is set to a numerical array. Sets the upper bound of the color domain. Value should be associated to the `marker.color` array index, and if set, `marker.cmin` must be set as well.",
                         "dflt": null,
                         "role": "info",
                         "valType": "number"
                     },
                     "cmin": {
-                        "description": "Has only an effect if `marker.color` is set to a numerical array. Sets the lower bound of the color domain.",
+                        "description": "Has only an effect if `marker.color` is set to a numerical array. Sets the lower bound of the color domain. Value should be associated to the `marker.color` array index, and if set, `marker.cmax` must be set as well.",
                         "dflt": null,
                         "role": "info",
                         "valType": "number"
                     },
                     "color": {
                         "arrayOk": true,
-                        "description": "Sets the marker color.",
+                        "description": "Sets the marker color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                         "role": "style",
                         "valType": "color"
                     },
@@ -12331,7 +12671,7 @@
                         }
                     },
                     "colorscale": {
-                        "description": "Sets the colorscale. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use cmin and cmax",
+                        "description": "Sets the colorscale and only has an effect if `marker.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.cmin` and `marker.cmax`.",
                         "role": "style",
                         "valType": "colorscale"
                     },
@@ -12354,25 +12694,25 @@
                             "valType": "boolean"
                         },
                         "cmax": {
-                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the upper bound of the color domain.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the upper bound of the color domain. Value should be associated to the `marker.line.color` array index, and if set, `marker.line.cmin` must be set as well.",
                             "dflt": null,
                             "role": "info",
                             "valType": "number"
                         },
                         "cmin": {
-                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the lower bound of the color domain.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the lower bound of the color domain. Value should be associated to the `marker.line.color` array index, and if set, `marker.line.cmax` must be set as well.",
                             "dflt": null,
                             "role": "info",
                             "valType": "number"
                         },
                         "color": {
                             "arrayOk": true,
-                            "description": "Sets the color of the lines bounding the marker points.",
+                            "description": "Sets the marker outline color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                             "role": "style",
                             "valType": "color"
                         },
                         "colorscale": {
-                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the colorscale.",
+                            "description": "Sets the colorscale and only has an effect if `marker.line.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.line.cmin` and `marker.line.cmax`.",
                             "role": "style",
                             "valType": "colorscale"
                         },
@@ -12864,20 +13204,20 @@
                         "valType": "boolean"
                     },
                     "cmax": {
-                        "description": "Has only an effect if `marker.color` is set to a numerical array. Sets the upper bound of the color domain.",
+                        "description": "Has only an effect if `marker.color` is set to a numerical array. Sets the upper bound of the color domain. Value should be associated to the `marker.color` array index, and if set, `marker.cmin` must be set as well.",
                         "dflt": null,
                         "role": "info",
                         "valType": "number"
                     },
                     "cmin": {
-                        "description": "Has only an effect if `marker.color` is set to a numerical array. Sets the lower bound of the color domain.",
+                        "description": "Has only an effect if `marker.color` is set to a numerical array. Sets the lower bound of the color domain. Value should be associated to the `marker.color` array index, and if set, `marker.cmax` must be set as well.",
                         "dflt": null,
                         "role": "info",
                         "valType": "number"
                     },
                     "color": {
                         "arrayOk": true,
-                        "description": "Sets the marker color.",
+                        "description": "Sets the marker color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                         "role": "style",
                         "valType": "color"
                     },
@@ -13220,7 +13560,7 @@
                         }
                     },
                     "colorscale": {
-                        "description": "Sets the colorscale. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use cmin and cmax",
+                        "description": "Sets the colorscale and only has an effect if `marker.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.cmin` and `marker.cmax`.",
                         "role": "style",
                         "valType": "colorscale"
                     },
@@ -13243,25 +13583,25 @@
                             "valType": "boolean"
                         },
                         "cmax": {
-                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the upper bound of the color domain.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the upper bound of the color domain. Value should be associated to the `marker.line.color` array index, and if set, `marker.line.cmin` must be set as well.",
                             "dflt": null,
                             "role": "info",
                             "valType": "number"
                         },
                         "cmin": {
-                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the lower bound of the color domain.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the lower bound of the color domain. Value should be associated to the `marker.line.color` array index, and if set, `marker.line.cmax` must be set as well.",
                             "dflt": null,
                             "role": "info",
                             "valType": "number"
                         },
                         "color": {
                             "arrayOk": true,
-                            "description": "Sets the color of the lines bounding the marker points.",
+                            "description": "Sets the marker outline color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                             "role": "style",
                             "valType": "color"
                         },
                         "colorscale": {
-                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the colorscale.",
+                            "description": "Sets the colorscale and only has an effect if `marker.line.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.line.cmin` and `marker.line.cmax`.",
                             "role": "style",
                             "valType": "colorscale"
                         },
@@ -14095,20 +14435,20 @@
                         "valType": "boolean"
                     },
                     "cmax": {
-                        "description": "Has only an effect if `marker.color` is set to a numerical array. Sets the upper bound of the color domain.",
+                        "description": "Has only an effect if `marker.color` is set to a numerical array. Sets the upper bound of the color domain. Value should be associated to the `marker.color` array index, and if set, `marker.cmin` must be set as well.",
                         "dflt": null,
                         "role": "info",
                         "valType": "number"
                     },
                     "cmin": {
-                        "description": "Has only an effect if `marker.color` is set to a numerical array. Sets the lower bound of the color domain.",
+                        "description": "Has only an effect if `marker.color` is set to a numerical array. Sets the lower bound of the color domain. Value should be associated to the `marker.color` array index, and if set, `marker.cmax` must be set as well.",
                         "dflt": null,
                         "role": "info",
                         "valType": "number"
                     },
                     "color": {
                         "arrayOk": true,
-                        "description": "Sets the marker color.",
+                        "description": "Sets the marker color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                         "role": "style",
                         "valType": "color"
                     },
@@ -14451,7 +14791,7 @@
                         }
                     },
                     "colorscale": {
-                        "description": "Sets the colorscale. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use cmin and cmax",
+                        "description": "Sets the colorscale and only has an effect if `marker.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.cmin` and `marker.cmax`.",
                         "role": "style",
                         "valType": "colorscale"
                     },
@@ -14474,25 +14814,25 @@
                             "valType": "boolean"
                         },
                         "cmax": {
-                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the upper bound of the color domain.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the upper bound of the color domain. Value should be associated to the `marker.line.color` array index, and if set, `marker.line.cmin` must be set as well.",
                             "dflt": null,
                             "role": "info",
                             "valType": "number"
                         },
                         "cmin": {
-                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the lower bound of the color domain.",
+                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the lower bound of the color domain. Value should be associated to the `marker.line.color` array index, and if set, `marker.line.cmax` must be set as well.",
                             "dflt": null,
                             "role": "info",
                             "valType": "number"
                         },
                         "color": {
                             "arrayOk": true,
-                            "description": "Sets the color of the lines bounding the marker points.",
+                            "description": "Sets the marker outline color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                             "role": "style",
                             "valType": "color"
                         },
                         "colorscale": {
-                            "description": "Has only an effect if `marker.line.color` is set to a numerical array. Sets the colorscale.",
+                            "description": "Sets the colorscale and only has an effect if `marker.line.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.line.cmin` and `marker.line.cmax`.",
                             "role": "style",
                             "valType": "colorscale"
                         },
