@@ -31,7 +31,7 @@ from __future__ import absolute_import
 from plotly import (plotly, graph_objs, grid_objs, tools, utils, session,
                     offline)
 from plotly.version import __version__
-from plotly.check_version_sp import get_latest
+from plotly.check_version import get_latest
 
 _latest = get_latest()
 
