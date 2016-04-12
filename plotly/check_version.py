@@ -6,7 +6,7 @@ def get_latest():
     os.system('pip show plotly > pip_version.txt')
     with open('pip_version.txt', 'r') as file:
         output = [i for i in file][2]
-    latest_version = re.findall(r'\s.*\n', output)[0][1:-1]
+    latest_version = re.findall(r'([0-9\.]+)', output)[0]
     return latest_version
 
 

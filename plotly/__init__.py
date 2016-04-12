@@ -40,5 +40,4 @@ if __version__ != _latest:
           "You're currently running {old}".format(old=__version__) +
           ", while the latest version is {}".format(_latest))
 else:
-    print("Plotly is currently up to date.\n" +
-          "Plotly version: {}".format(__version__))
+    print("Plotly {} is currently up to date.\n".format(__version__))
