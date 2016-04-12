@@ -33,11 +33,13 @@ from plotly import (plotly, graph_objs, grid_objs, tools, utils, session,
 from plotly.version import __version__
 from plotly.check_version import get_latest
 
-_latest = get_latest()
-
-if __version__ != _latest:
-    print("Your version of Plotly is currently outdated,\n" +
-          "You're currently running {}".format(__version__) +
-          ", while the latest version is {}".format(_latest))
-else:
-    print("Plotly {} is currently up to date".format(__version__))
+try:
+    _latest = get_latest()
+    if __version__ != _latest:
+        print("Your version of Plotly is currently outdated,\n" +
+              "You're currently running {}".format(__version__) +
+              ", while the latest version is {}".format(_latest))
+    else:
+        print("Plotly {} is currently up to date".format(__version__))
+except:
+    pass
