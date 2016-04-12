@@ -73,7 +73,7 @@ def init_notebook_mode():
 
 
 def _plot_html(figure_or_data, show_link, link_text,
-               validate, default_width, default_height):
+               validate, default_width, default_height, **config_options):
 
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
 
@@ -98,9 +98,32 @@ def _plot_html(figure_or_data, show_link, link_text,
     jdata = json.dumps(figure.get('data', []), cls=utils.PlotlyJSONEncoder)
     jlayout = json.dumps(figure.get('layout', {}), cls=utils.PlotlyJSONEncoder)
 
-    config = {}
+    configkeys = (
+        'editable',
+        'autosizable',
+        'fillFrame',
+        'frameMargins',
+        'scrollZoom',
+        'doubleClick',
+        'showTips',
+        'showLink',
+        'sendData',
+        'linkText',
+        'showSources',
+        'displayModeBar',
+        'modeBarButtonsToRemove',
+        'modeBarButtonsToAdd',
+        'modeBarButtons',
+        'displaylogo',
+        'plotGlPixelRatio',
+        'setBackground',
+        'topojsonURL')
+
+    config = (dict((k, config_options[k]) for k in config_options
+              if k in configkeys))
     config['showLink'] = show_link
     config['linkText'] = link_text
+
     jconfig = json.dumps(config)
 
     # TODO: The get_config 'source of truth' should
@@ -141,7 +164,7 @@ def _plot_html(figure_or_data, show_link, link_text,
 
 
 def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
-          validate=True):
+          validate=True, **config_options):
     """
     Draw plotly graphs inside an IPython notebook without
     connecting to an external server.
@@ -189,7 +212,7 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
 
     plot_html, plotdivid, width, height = _plot_html(
         figure_or_data, show_link, link_text, validate,
-        '100%', 525)
+        '100%', 525, **config_options)
 
     display(HTML(plot_html))
 
@@ -199,7 +222,7 @@ def plot(figure_or_data,
          validate=True, output_type='file',
          include_plotlyjs=True,
          filename='temp-plot.html',
-         auto_open=True):
+         auto_open=True, **config_options):
     """ Create a plotly graph locally as an HTML document or string.
 
     Example:
@@ -245,6 +268,17 @@ def plot(figure_or_data,
     auto_open (default=True) -- If True, open the saved file in a
         web browser after saving.
         This argument only applies if `output_type` is 'file'.
+    **config_options -- This will take in other keywords that will
+    configure other options of your plot including mode bar buttons and
+    interactivity in your chart. Take a look at:
+    https://plot.ly/javascript/configuration-options/ for a full list of
+    possible keywords. For example we can add the keyword `displaylogo`
+    to False which would remove the Plotly logo in the top right corner.
+    ```
+    iplot([{"x": [1, 2, 3], "y": [3, 1, 6]}], show_link=True,
+            link_text="Send Here", displaylogo=False)
+    ```
+
     """
     if output_type not in ['div', 'file']:
         raise ValueError(
@@ -258,7 +292,7 @@ def plot(figure_or_data,
 
     plot_html, plotdivid, width, height = _plot_html(
         figure_or_data, show_link, link_text, validate,
-        '100%', '100%')
+        '100%', '100%', **config_options)
 
     resize_script = ''
     if width == '100%' or height == '100%':
@@ -359,6 +393,18 @@ def plot_mpl(mpl_fig, resize=False, strip_style=False,
     auto_open (default=True) -- If True, open the saved file in a
         web browser after saving.
         This argument only applies if `output_type` is 'file'.
+    **config_options -- This will take in other keywords that will
+    configure other options of your plot including mode bar buttons and
+    interactivity in your chart. Take a look at:
+    https://plot.ly/javascript/configuration-options/ for a full list of
+    possible keywords. For example we can add the keyword `displaylogo`
+    to False which would remove the Plotly logo in the top right corner.
+
+    ```
+    iplot([{"x": [1, 2, 3], "y": [3, 1, 6]}], show_link=True,
+            link_text="Send Here", displaylogo=False)
+    ```
+
 
     Example:
     ```
@@ -414,6 +460,18 @@ def iplot_mpl(mpl_fig, resize=False, strip_style=False,
                                has become outdated with your version of
                                graph_reference.json or if you need to include
                                extra, unnecessary keys in your figure.
+    **config_options -- This will take in other keywords that will
+    configure other options of your plot including mode bar buttons and
+    interactivity in your chart. Take a look at:
+    https://plot.ly/javascript/configuration-options/ for a full list of
+    possible keywords. For example we can add the keyword `displaylogo`
+    to False which would remove the Plotly logo in the top right corner.
+
+    ```
+    iplot([{"x": [1, 2, 3], "y": [3, 1, 6]}], show_link=True,
+            link_text="Send Here", displaylogo=False)
+    ```
+
 
     Example:
     ```
