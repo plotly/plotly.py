@@ -686,6 +686,15 @@ def make_subplots(rows=1, cols=1,
     fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2])]
     fig['data'] += [Scatter(x=[1,2,3], y=[2,1,2], xaxis='x2', yaxis='y2')]
 
+    Example 7:
+    # Provide a custom subplot_titlefont
+    fig = tools.make_subplots(rows=2, subplot_titles=('Plot 1','Plot 2')),
+                              subplot_titlefont=graph_objs.Font(size=20))
+
+    This is the format of your plot grid:
+    [ (1,1) x1,y1 ]
+    [ (2,1) x2,y2 ]
+
     Keywords arguments with constant defaults:
 
     rows (kwarg, int greater than 0, default=1):
@@ -715,6 +724,10 @@ def make_subplots(rows=1, cols=1,
     start_cell (kwarg, 'bottom-left' or 'top-left', default='top-left')
         Choose the starting cell in the subplot grid used to set the
         domains of the subplots.
+
+    subplot_titlefont (kwarg, graph_objs.Font,
+                       default=graph_objs.Font(size=16))
+        Set the font for subplot titles.
 
     print_grid (kwarg, boolean, default=True):
         If True, prints a tab-delimited string representation of
@@ -826,13 +839,17 @@ def make_subplots(rows=1, cols=1,
 
     # Throw exception if non-valid kwarg is sent
     VALID_KWARGS = ['horizontal_spacing', 'vertical_spacing',
-                    'specs', 'insets', 'subplot_titles']
+                    'specs', 'insets', 'subplot_titles', 'subplot_titlefont']
     for key in kwargs.keys():
         if key not in VALID_KWARGS:
             raise Exception("Invalid keyword argument: '{0}'".format(key))
 
     # Set 'subplot_titles'
     subplot_titles = kwargs.get('subplot_titles', [""] * rows * cols)
+
+    # Set 'subplot_titlefont'
+    subplot_titlefont = kwargs.get('subplot_titlefont',
+                                   graph_objs.Font(size=16))
 
     # Set 'horizontal_spacing' / 'vertical_spacing' w.r.t. rows / cols
     try:
@@ -1284,7 +1301,7 @@ def make_subplots(rows=1, cols=1,
                                 'yref': 'paper',
                                 'text': subplot_titles[index],
                                 'showarrow': False,
-                                'font': graph_objs.Font(size=16),
+                                'font': subplot_titlefont,
                                 'xanchor': 'center',
                                 'yanchor': 'bottom'
                                 })

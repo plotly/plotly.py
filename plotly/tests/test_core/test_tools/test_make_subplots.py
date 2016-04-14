@@ -2201,3 +2201,54 @@ def test_subplot_titles_insets():
     fig = tls.make_subplots(insets=[{'cell': (1, 1), 'l': 0.7, 'b': 0.3}],
                             subplot_titles=("", 'Inset'))
     assert fig == expected
+
+def test_subplot_titlefont():
+    # make a 2x1 subplot with a title with a custom font
+    expected = Figure(
+        data=Data(),
+        layout=Layout(
+            annotations=Annotations([
+                Annotation(
+                    x=0.5,
+                    y=1.0,
+                    xref='paper',
+                    yref='paper',
+                    text='Title 1',
+                    showarrow=False,
+                    font=Font(size=20),
+                    xanchor='center',
+                    yanchor='bottom'
+                ),
+                Annotation(
+                    x=0.5,
+                    y=0.375,
+                    xref='paper',
+                    yref='paper',
+                    text='Title 2',
+                    showarrow=False,
+                    font=Font(size=20),
+                    xanchor='center',
+                    yanchor='bottom'
+                )
+            ]),
+            xaxis1=XAxis(
+                domain=[0.0, 1.0],
+                anchor='y1'
+            ),
+            xaxis2=XAxis(
+                domain=[0.0, 1.0],
+                anchor='y2'
+            ),
+            yaxis1=YAxis(
+                domain=[0.625, 1.0],
+                anchor='x1'
+            ),
+            yaxis2=YAxis(
+                domain=[0.0, 0.375],
+                anchor='x2'
+            )
+        )
+    )
+    fig = tls.make_subplots(rows=2, subplot_titles=('Title 1', 'Title 2'),
+        subplot_titlefont=Font(size=20))
+    assert fig == expected
