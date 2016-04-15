@@ -1,4 +1,3 @@
-import math
 from unittest import TestCase
 
 import datetime
@@ -1126,6 +1125,19 @@ class TestTable(TestCase):
         self.assertEqual(index_table, exp_index_table)
 
 
+class TestScatterPlotMatrix(TestCase):
+
+    def test_dataframe_input(self):
+
+        # check: dataframe is imported
+        df = 'foo'
+
+        self.assertRaisesRegexp(PlotlyError, "Dataframe not inputed. Please "
+                                             "use a pandas dataframe to pro"
+                                             "duce a scatterplot matrix.",
+                                tls.FigureFactory.create_scatterplotmatrix,
+                                df)
+
 # class TestDistplot(TestCase):
 
 #     def test_scipy_import_error(self):
@@ -1143,4 +1155,3 @@ class TestTable(TestCase):
 #                                 "FigureFactory.create_distplot requires scipy",
 #                                 tls.FigureFactory.create_distplot,
 #                                 hist_data, group_labels)
-
