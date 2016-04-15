@@ -73,7 +73,7 @@ def init_notebook_mode():
 
 
 def _plot_html(figure_or_data, show_link, link_text,
-               validate, default_width, default_height):
+               validate, default_width, default_height, **kwargs):
 
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
 
@@ -120,6 +120,42 @@ def _plot_html(figure_or_data, show_link, link_text,
         data=jdata,
         layout=jlayout,
         config=jconfig)
+
+    if kwargs and kwargs['browser']:
+        plotly_html_div = (
+            ''
+            '<div id="{id}" style="height: {height}; width: {width};" '
+            'class="plotly-graph-div">'
+            '</div>'
+            '<script type="text/javascript">'
+            'window.PLOTLYENV=window.PLOTLYENV || {{}};'
+            'window.PLOTLYENV.BASE_URL="' + plotly_platform_url + '";'
+            '{script}'
+            '</script>'
+            '').format(
+            id=plotdivid, script=script,
+            height=height, width=width)
+
+        return plotly_html_div, plotdivid, width, height
+
+    else:
+        plotly_html_div = (
+            ''
+            '<div id="{id}" style="height: {height}; width: {width};" '
+            'class="plotly-graph-div">'
+            '</div>'
+            '<script type="text/javascript">'
+            'require(["plotly"], function(Plotly) {{'
+            'window.PLOTLYENV=window.PLOTLYENV || {{}};'
+            'window.PLOTLYENV.BASE_URL="' + plotly_platform_url + '";'
+            '{script}'
+            '}});'
+            '</script>'
+            '').format(
+            id=plotdivid, script=script,
+            height=height, width=width)
+
+        return plotly_html_div, plotdivid, width, height
 
     plotly_html_div = (
         ''
@@ -258,7 +294,7 @@ def plot(figure_or_data,
 
     plot_html, plotdivid, width, height = _plot_html(
         figure_or_data, show_link, link_text, validate,
-        '100%', '100%')
+        '100%', '100%', browser=True)
 
     resize_script = ''
     if width == '100%' or height == '100%':
