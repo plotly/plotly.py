@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.9.9] - 2016-04-15
+### Fixed
+- Fixed `require is not defined` issue when plotting offline outside of Ipython Notebooks.
+
 ## [1.9.8] - 2016-04-14
 ### Fixed
 - Error no longer results from a "Run All" cells when working in a Jupyter Notebook.
