@@ -14,7 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Updated
 - Updated plotly.min.js so offline is using plotly.js v1.9.0
-	- Added Ternary plots with support for scatter traces (trace type `scatterternary`)
+	- Added Ternary plots with support for scatter traces (trace type `scatterternary`, currently only available in offline mode)
 	- For comprehensive update list see the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md)
 
 ## [1.9.7] - 2016-04-04
