@@ -122,52 +122,26 @@ def _plot_html(figure_or_data, show_link, link_text,
         config=jconfig)
 
     if kwargs and kwargs['browser']:
-        plotly_html_div = (
-            ''
-            '<div id="{id}" style="height: {height}; width: {width};" '
-            'class="plotly-graph-div">'
-            '</div>'
-            '<script type="text/javascript">'
-            'window.PLOTLYENV=window.PLOTLYENV || {{}};'
-            'window.PLOTLYENV.BASE_URL="' + plotly_platform_url + '";'
-            '{script}'
-            '</script>'
-            '').format(
-            id=plotdivid, script=script,
-            height=height, width=width)
-
-        return plotly_html_div, plotdivid, width, height
-
+        nb = False        # function was not called from a notebook
     else:
-        plotly_html_div = (
-            ''
-            '<div id="{id}" style="height: {height}; width: {width};" '
-            'class="plotly-graph-div">'
-            '</div>'
-            '<script type="text/javascript">'
-            'require(["plotly"], function(Plotly) {{'
-            'window.PLOTLYENV=window.PLOTLYENV || {{}};'
-            'window.PLOTLYENV.BASE_URL="' + plotly_platform_url + '";'
-            '{script}'
-            '}});'
-            '</script>'
-            '').format(
-            id=plotdivid, script=script,
-            height=height, width=width)
+        nb = True
 
-        return plotly_html_div, plotdivid, width, height
+    # evaluate whether or not to include lines based on the nb
+
+    optional_line1 = 'require(["plotly"], function(Plotly) {{ ' if nb else ''
+    optional_line2 = '}});' if nb else ''
 
     plotly_html_div = (
         ''
         '<div id="{id}" style="height: {height}; width: {width};" '
         'class="plotly-graph-div">'
         '</div>'
-        '<script type="text/javascript">'
-        'require(["plotly"], function(Plotly) {{'
+        '<script type="text/javascript">' +
+        optional_line1 +
         'window.PLOTLYENV=window.PLOTLYENV || {{}};'
         'window.PLOTLYENV.BASE_URL="' + plotly_platform_url + '";'
-        '{script}'
-        '}});'
+        '{script}' +
+        optional_line2 +
         '</script>'
         '').format(
         id=plotdivid, script=script,
