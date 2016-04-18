@@ -4,6 +4,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.9.9] - 2016-04-15
+### Fixed
+- Fixed `require is not defined` issue when plotting offline outside of Ipython Notebooks.
+
+## [1.9.8] - 2016-04-14
+### Fixed
+- Error no longer results from a "Run All" cells when working in a Jupyter Notebook.
+
+### Updated
+- Updated plotly.min.js so offline is using plotly.js v1.9.0
+	- Added Ternary plots with support for scatter traces (trace type `scatterternary`, currently only available in offline mode)
+	- For comprehensive update list see the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md)
+
 ## [1.9.7] - 2016-04-04
 ### Fixed
 - Offline mode will no longer delete the Jupyter Notebook's require, requirejs, and define variables.

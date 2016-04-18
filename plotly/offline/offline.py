@@ -73,7 +73,7 @@ def init_notebook_mode():
 
 
 def _plot_html(figure_or_data, show_link, link_text,
-               validate, default_width, default_height):
+               validate, default_width, default_height, global_requirejs):
 
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
 
@@ -121,15 +121,21 @@ def _plot_html(figure_or_data, show_link, link_text,
         layout=jlayout,
         config=jconfig)
 
+    optional_line1 = ('require(["plotly"], function(Plotly) {{ '
+                      if global_requirejs else '')
+    optional_line2 = '}});' if global_requirejs else ''
+
     plotly_html_div = (
         ''
         '<div id="{id}" style="height: {height}; width: {width};" '
         'class="plotly-graph-div">'
         '</div>'
-        '<script type="text/javascript">'
+        '<script type="text/javascript">' +
+        optional_line1 +
         'window.PLOTLYENV=window.PLOTLYENV || {{}};'
         'window.PLOTLYENV.BASE_URL="' + plotly_platform_url + '";'
-        '{script}'
+        '{script}' +
+        optional_line2 +
         '</script>'
         '').format(
         id=plotdivid, script=script,
@@ -187,7 +193,7 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
 
     plot_html, plotdivid, width, height = _plot_html(
         figure_or_data, show_link, link_text, validate,
-        '100%', 525)
+        '100%', 525, global_requirejs=True)
 
     display(HTML(plot_html))
 
@@ -256,7 +262,7 @@ def plot(figure_or_data,
 
     plot_html, plotdivid, width, height = _plot_html(
         figure_or_data, show_link, link_text, validate,
-        '100%', '100%')
+        '100%', '100%', global_requirejs=False)
 
     resize_script = ''
     if width == '100%' or height == '100%':
