@@ -4,9 +4,88 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-## [1.9.4] - 2015-01-11
+## [1.9.9] - 2016-04-15
+### Fixed
+- Fixed `require is not defined` issue when plotting offline outside of Ipython Notebooks.
+
+## [1.9.8] - 2016-04-14
+### Fixed
+- Error no longer results from a "Run All" cells when working in a Jupyter Notebook.
+
+### Updated
+- Updated plotly.min.js so offline is using plotly.js v1.9.0
+	- Added Ternary plots with support for scatter traces (trace type `scatterternary`, currently only available in offline mode)
+	- For comprehensive update list see the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md)
+
+## [1.9.7] - 2016-04-04
+### Fixed
+- Offline mode will no longer delete the Jupyter Notebook's require, requirejs, and define variables.
+
+### Updated
+- Updated plotly.min.js so offline is using plotly.js v1.8.0
+	- Added range selector functionality for cartesian plots
+	- Added range slider functionality for scatter traces
+	- Added custom surface color functionality
+	- Added ability to subplot multiple graph types (SVG cartesian, 3D, maps, pie charts)
+	- For comprehensive update list see the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md)
+
+## [1.9.6] - 2016-02-18
+### Updated
+- Updated plotly.min.js so offline is using plotly.js v1.5.2
+
+## [1.9.5] - 2016-01-17
 ### Added
-- Offline plotting now works outside of the IPython/Juypter notebook. Here's an example:
+- Offline matplotlib to Plotly figure conversion. Use `offline.plot_mpl` to convert and plot a matplotlib figure as a Plotly figure independently of IPython/Jupyter notebooks or use `offline.iplot_mpl` to convert and plot inside of IPython/Jupyter notebooks. Additionally, use `offline.enable_mpl_offline` to convert and plot all matplotlib figures as plotly figures inside an IPython/Jupyter notebook. See examples below:
+
+An example independent of IPython/Jupyter notebooks:
+```
+from plotly.offline import init_notebook_mode, plot_mpl
+import matplotlib.pyplot as plt
+
+init_notebook_mode()
+
+fig = plt.figure()
+x = [10, 15, 20]
+y = [100, 150, 200]
+plt.plot(x, y, "o")
+
+plot_mpl(fig)
+```
+
+An example inside of an IPython/Jupyter notebook:
+```
+from plotly.offline import init_notebook_mode, iplot_mpl
+import matplotlib.pyplot as plt
+
+init_notebook_mode()
+
+fig = plt.figure()
+x = [10, 15, 20]
+y = [100, 150, 200]
+plt.plot(x, y, "o")
+
+iplot_mpl(fig)
+```
+
+An example of enabling all matplotlib figures to be converted to
+Plotly figures inside of an IPython/Jupyter notebook:
+```
+from plotly.offline import init_notebook_mode, enable_mpl_offline
+import matplotlib.pyplot as plt
+
+init_notebook_mode()
+enable_mpl_offline()
+
+fig = plt.figure()
+x = [10, 15, 20, 25, 30]
+y = [100, 250, 200, 150, 300]
+plt.plot(x, y, "o")
+fig
+```
+
+## [1.9.4] - 2016-01-11
+### Added
+- Offline plotting now works outside of the IPython/Jupyter notebook. Here's an example:
 ```
 from plotly.offline import plot
 from plotly.graph_objs import Scatter
@@ -31,7 +110,7 @@ This will upload the graph to your online plotly account.
 
 ## [1.9.3] - 2015-12-08
 ### Added
-- Check for `no_proxy` when determining if the streaming request should pass through a proxy in the chunked_requests submodule. Example: `no_proxy='my_stream_url'` and `http_proxy=my.proxy.ip:1234`, then `my_stream_url` will not get proxied. Previously it would.   
+- Check for `no_proxy` when determining if the streaming request should pass through a proxy in the chunked_requests submodule. Example: `no_proxy='my_stream_url'` and `http_proxy=my.proxy.ip:1234`, then `my_stream_url` will not get proxied. Previously it would.
 
 ## [1.9.2] - 2015-11-30
 **Bug Fix**: Previously, the "Export to plot.ly" link on

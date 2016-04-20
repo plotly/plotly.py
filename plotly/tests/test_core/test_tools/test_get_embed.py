@@ -28,7 +28,7 @@ class TestGetEmbed(TestCase):
         get_embed_return = tls.get_embed('https://plot.ly/~neda/6572' +
                                          '?share_key=AH4MyPlyDyDWYA2cM2kj2m')
         expected_get_embed = ("<iframe id=\"igraph\" scrolling=\"no\" "
-                              "style=\"border:none;\"seamless=\"seamless\" "
+                              "style=\"border:none;\" seamless=\"seamless\" "
                               "src=\"{plotly_rest_url}/"
                               "~{file_owner}/{file_id}.embed?"
                               "share_key={share_key}\" "

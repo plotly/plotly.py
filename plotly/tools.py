@@ -339,7 +339,7 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
             "The 'file_id' argument must be a non-negative number."
         )
     if share_key is '':
-        s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\""
+        s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\" "
              "seamless=\"seamless\" "
              "src=\"{plotly_rest_url}/"
              "~{file_owner}/{file_id}.embed\" "
@@ -349,7 +349,7 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
             file_owner=file_owner, file_id=file_id,
             iframe_height=height, iframe_width=width)
     else:
-        s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\""
+        s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\" "
              "seamless=\"seamless\" "
              "src=\"{plotly_rest_url}/"
              "~{file_owner}/{file_id}.embed?share_key={share_key}\" "
@@ -3506,7 +3506,7 @@ class FigureFactory(object):
         BETA function that creates a distplot similar to seaborn.distplot
 
         The distplot can be composed of all or any combination of the following
-        3 components: (1) histogram, (2) curve: (a) kernal density estimation
+        3 components: (1) histogram, (2) curve: (a) kernel density estimation
         or (b) normal curve, and (3) rug plot. Additionally, multiple distplots
         (from multiple datasets) can be created in the same plot.
 
@@ -4570,7 +4570,7 @@ class _Distplot(FigureFactory):
 
     def make_kde(self):
         """
-        Makes the kernal density estimation(s) for create_distplot().
+        Makes the kernel density estimation(s) for create_distplot().
 
         This is called when curve_type = 'kde' in create_distplot().
 
