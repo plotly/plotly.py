@@ -1132,9 +1132,12 @@ class TestScatterPlotMatrix(TestCase):
         # check: dataframe is imported
         df = 'foo'
 
-        self.assertRaisesRegexp(PlotlyError, "Dataframe not inputed. Please "
-                                             "use a pandas dataframe to pro"
-                                             "duce a scatterplot matrix.",
+        pattern = (
+            "Dataframe not inputed. Please use a pandas dataframe to produce "
+            "a scatterplot matrix."
+        )
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
                                 tls.FigureFactory.create_scatterplotmatrix,
                                 df)
 

@@ -2295,11 +2295,6 @@ class FigureFactory(object):
             raise exceptions.PlotlyError("Make sure diag is set to "
                                          "one of {}".format(DIAG_CHOICES))
 
-        #if diag not in DIAG_CHOICES:
-        #    raise exceptions.PlotlyError("Make sure diag is set to "
-        #                                 "one of ['scatter', 'histogram', "
-        #                                 "'box']")
-
         # Check for not 'size' or 'color' in 'marker' of **kwargs
         if 'marker' in kwargs:
             FORBIDDEN_PARAMS = ['size', 'color', 'colorscale']
