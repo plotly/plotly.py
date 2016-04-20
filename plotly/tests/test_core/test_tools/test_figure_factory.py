@@ -1141,6 +1141,7 @@ class TestScatterPlotMatrix(TestCase):
                                 tls.FigureFactory.create_scatterplotmatrix,
                                 df)
 
+
 # class TestDistplot(TestCase):
 
 #     def test_scipy_import_error(self):

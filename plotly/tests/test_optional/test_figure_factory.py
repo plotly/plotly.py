@@ -539,8 +539,9 @@ class TestScatterPlotMatrix(TestCase):
         # check: dataframe has 1 column or less
         df = pd.DataFrame([1, 2, 3])
 
-        pattern = ("Dataframe has only one column. To use the scatterplot "
-                   "matrix, use at least 2 columns."
+        pattern = (
+            "Dataframe has only one column. To use the scatterplot matrix, "
+            "use at least 2 columns."
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern,
@@ -563,11 +564,11 @@ class TestScatterPlotMatrix(TestCase):
 
         kwargs = {'marker': {'size': 15}}
 
-        pattern = ("Your kwargs dictionary cannot include the 'size', 'color' "
-                   "or 'colorscale' key words inside the marker dict since "
-                   "'size' is already an argument of the scatterplot matrix "
-                   "function and both 'color' and 'colorscale are set "
-                   "internally."
+        pattern = (
+            "Your kwargs dictionary cannot include the 'size', 'color' or "
+            "'colorscale' key words inside the marker dict since 'size' is "
+            "already an argument of the scatterplot matrix function and both "
+            "'color' and 'colorscale are set internally."
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern,
@@ -579,8 +580,9 @@ class TestScatterPlotMatrix(TestCase):
         # check: index is a column name
         df = pd.DataFrame([[1, 2], [3, 4]], columns=['apple', 'pear'])
 
-        pattern = ("Make sure you set the index input variable to one of the "
-                   "column names of your dataframe."
+        pattern = (
+            "Make sure you set the index input variable to one of the column "
+            "names of your dataframe."
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern,
@@ -592,8 +594,9 @@ class TestScatterPlotMatrix(TestCase):
         # check: either all numbers or strings in each dataframe column
         df = pd.DataFrame([['a', 2], [3, 4]])
 
-        pattern = ("Error in dataframe. Make sure all entries of each column "
-                   "are either numbers or strings."
+        pattern = (
+            "Error in dataframe. Make sure all entries of each column are "
+            "either numbers or strings."
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern,
@@ -611,8 +614,9 @@ class TestScatterPlotMatrix(TestCase):
         # check: either all numbers or strings in index column
         df = pd.DataFrame([['a', 2], [3, 4]], columns=['apple', 'pear'])
 
-        pattern = ("Error in indexing column. Make sure all entries of each "
-                   "column are all numbers or all strings."
+        pattern = (
+            "Error in indexing column. Make sure all entries of each column "
+            "are all numbers or all strings."
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern,
@@ -637,9 +641,10 @@ class TestScatterPlotMatrix(TestCase):
                                 df, use_theme=True, index='a',
                                 palette='fake_scale')
 
-        pattern = ("The items of 'palette' must be tripets of the form a,b,c "
-                   "or 'rgbx,y,z' where a,b,c belong to the interval 0,1 and "
-                   "x,y,z belong to 0,255."
+        pattern = (
+            "The items of 'palette' must be tripets of the form a,b,c or "
+            "'rgbx,y,z' where a,b,c belong to the interval 0,1 and x,y,z "
+            "belong to 0,255."
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern,
@@ -652,8 +657,9 @@ class TestScatterPlotMatrix(TestCase):
         df = pd.DataFrame([[1, 2, 3], [4, 5, 6], [7, 8, 9]],
                           columns=['a', 'b', 'c'])
 
-        pattern = ("The intervals_endpts argument must be a list or tuple of "
-                   "a sequence of increasing numbers."
+        pattern = (
+            "The intervals_endpts argument must be a list or tuple of a "
+            "sequence of increasing numbers."
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern,
@@ -672,3 +678,42 @@ class TestScatterPlotMatrix(TestCase):
                                 tls.FigureFactory.create_scatterplotmatrix,
                                 df, use_theme=True, index='a',
                                 palette='Blues', endpts=[2, 1])
+
+    def test_scatter_plot_matrix_kwargs(self):
+
+        # check if test scatter plot matrix matches with
+        # the expected output
+
+        df = pd.DataFrame([[2, 'Apple'], [6, 'Pear'],
+                          [-15, 'Apple'], [5, 'Pear'],
+                          [-2, 'Apple'], [0, 'Apple']],
+                          columns=['Numbers', 'Fruit'])
+
+        test_scatter_plot_matrix = tls.FigureFactory.create_scatterplotmatrix(df, index='Fruit', endpts=[-10, -1],
+                                                                              diag='histogram', height=1000, width=1000,
+                                                                              size=13, title='Scatterplot Matrix',
+                                                                              use_theme=True, palette='YlOrRd',
+                                                                              marker=dict(symbol=136))
+
+        exp_scatter_plot_matrix = {'data': [{'marker': {'color': 'rgb(128.0, 0.0, 38.0)'},
+                                   'showlegend': False,
+                                   'type': 'histogram',
+                                   'x': [6, 5],
+                                   'xaxis': 'x1',
+                                   'yaxis': 'y1'},
+                                  {'marker': {'color': 'rgb(255.0, 255.0, 204.0)'},
+                                   'showlegend': False,
+                                   'type': 'histogram',
+                                   'x': [2, -15, -2, 0],
+                                   'xaxis': 'x1',
+                                   'yaxis': 'y1'}],
+                                   'layout': {'barmode': 'stack',
+                                              'height': 1000,
+                                              'showlegend': True,
+                                              'title': 'Scatterplot Matrix',
+                                              'width': 1000,
+                                              'xaxis1': {'anchor': 'y1', 'domain': [0.0, 1.0], 'title': 'Numbers'},
+                                              'yaxis1': {'anchor': 'x1', 'domain': [0.0, 1.0], 'title': 'Numbers'}}}
+
+        self.assertEqual(test_scatter_plot_matrix,
+                         exp_scatter_plot_matrix)
