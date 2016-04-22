@@ -2280,10 +2280,6 @@ class FigureFactory(object):
 
     @staticmethod
     def _validate_scatterplotmatrix(df, index, diag, **kwargs):
-        if _pandas_imported is False:
-            raise ImportError("FigureFactory.scatterplotmatrix requires "
-                              "a pandas DataFrame.")
-
         # Check if pandas dataframe
         if not isinstance(df, pd.core.frame.DataFrame):
             raise exceptions.PlotlyError("Dataframe not inputed. Please "
