@@ -1425,6 +1425,14 @@ def return_figure_from_figure_or_data(figure_or_data, validate_figure):
 _DEFAULT_INCREASING_COLOR = '#3D9970'  # http://clrs.cc
 _DEFAULT_DECREASING_COLOR = '#FF4136'
 
+DEFAULT_PLOTLY_COLORS = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
+                         'rgb(44, 160, 44)', 'rgb(214, 39, 40)',
+                         'rgb(148, 103, 189)', 'rgb(140, 86, 75)',
+                         'rgb(227, 119, 194)', 'rgb(127, 127, 127)',
+                         'rgb(188, 189, 34)', 'rgb(23, 190, 207)']
+
+DIAG_CHOICES = ['scatter', 'histogram', 'box']
+
 
 class FigureFactory(object):
     """
@@ -1485,7 +1493,7 @@ class FigureFactory(object):
                                 size=size),
                             showlegend=False,
                             **kwargs
-                            )
+                        )
                 trace_list.append(trace)
 
         trace_index = 0
@@ -1523,11 +1531,6 @@ class FigureFactory(object):
         dim = len(dataframe)
         fig = make_subplots(rows=dim, cols=dim)
         trace_list = []
-        DEFAULT_COLORS = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
-                          'rgb(44, 160, 44)', 'rgb(214, 39, 40)',
-                          'rgb(148, 103, 189)', 'rgb(140, 86, 75)',
-                          'rgb(227, 119, 194)', 'rgb(127, 127, 127)',
-                          'rgb(188, 189, 34)', 'rgb(23, 190, 207)']
 
         legend_param = 0
         # Work over all permutations of list pairs
@@ -1556,7 +1559,7 @@ class FigureFactory(object):
                             trace = graph_objs.Histogram(
                                 x=new_listx,
                                 marker=dict(
-                                    color=DEFAULT_COLORS[c_indx]),
+                                    color=DEFAULT_PLOTLY_COLORS[c_indx]),
                                 showlegend=True
                             )
                         elif (listx == listy) and (diag == 'box'):
@@ -1564,13 +1567,14 @@ class FigureFactory(object):
                                 y=new_listx,
                                 name=None,
                                 marker=dict(
-                                    color=DEFAULT_COLORS[c_indx]),
+                                    color=DEFAULT_PLOTLY_COLORS[c_indx]),
                                 showlegend=True
                             )
                         else:
                             if 'marker' in kwargs:
                                 kwargs['marker']['size'] = size
-                                kwargs['marker']['color'] = DEFAULT_COLORS[c_indx]
+                                (kwargs['marker']
+                                    ['color']) = DEFAULT_PLOTLY_COLORS[c_indx]
                                 trace = graph_objs.Scatter(
                                     x=new_listx,
                                     y=new_listy,
@@ -1587,7 +1591,7 @@ class FigureFactory(object):
                                     name=name,
                                     marker=dict(
                                         size=size,
-                                        color=DEFAULT_COLORS[c_indx]),
+                                        color=DEFAULT_PLOTLY_COLORS[c_indx]),
                                     showlegend=True,
                                     **kwargs
                                 )
@@ -1597,7 +1601,7 @@ class FigureFactory(object):
                             trace = graph_objs.Histogram(
                                 x=new_listx,
                                 marker=dict(
-                                    color=DEFAULT_COLORS[c_indx]),
+                                    color=DEFAULT_PLOTLY_COLORS[c_indx]),
                                 showlegend=False
                             )
                         elif (listx == listy) and (diag == 'box'):
@@ -1605,13 +1609,14 @@ class FigureFactory(object):
                                 y=new_listx,
                                 name=None,
                                 marker=dict(
-                                    color=DEFAULT_COLORS[c_indx]),
+                                    color=DEFAULT_PLOTLY_COLORS[c_indx]),
                                 showlegend=False
                             )
                         else:
                             if 'marker' in kwargs:
                                 kwargs['marker']['size'] = size
-                                kwargs['marker']['color'] = DEFAULT_COLORS[c_indx]
+                                (kwargs['marker']
+                                    ['color']) = DEFAULT_PLOTLY_COLORS[c_indx]
                                 trace = graph_objs.Scatter(
                                     x=new_listx,
                                     y=new_listy,
@@ -1628,13 +1633,13 @@ class FigureFactory(object):
                                     name=name,
                                     marker=dict(
                                         size=size,
-                                        color=DEFAULT_COLORS[c_indx]),
+                                        color=DEFAULT_PLOTLY_COLORS[c_indx]),
                                     showlegend=False,
                                     **kwargs
                                 )
                     # Push the trace into dictionary
                     unique_index_vals[name] = trace
-                    if c_indx >= (len(DEFAULT_COLORS) - 1):
+                    if c_indx >= (len(DEFAULT_PLOTLY_COLORS) - 1):
                         c_indx = -1
                     c_indx += 1
                 trace_list.append(unique_index_vals)
@@ -1687,23 +1692,23 @@ class FigureFactory(object):
                            palette, **kwargs):
         from plotly.graph_objs import graph_objs
 
-        plotly_scales = {'Greys':      ['rgb(0,0,0)', 'rgb(255,255,255)'],
-                         'YlGnBu':     ['rgb(8,29,88)', 'rgb(255,255,217)'],
-                         'Greens':     ['rgb(0,68,27)', 'rgb(247,252,245)'],
-                         'YlOrRd':     ['rgb(128,0,38)', 'rgb(255,255,204)'],
-                         'Bluered':    ['rgb(0,0,255)', 'rgb(255,0,0)'],
-                         'RdBu':       ['rgb(5,10,172)', 'rgb(178,10,28)'],
-                         'Reds':       ['rgb(220,220,220)', 'rgb(178,10,28)'],
-                         'Blues':      ['rgb(5,10,172)', 'rgb(220,220,220)'],
-                         'Picnic':     ['rgb(0,0,255)', 'rgb(255,0,0)'],
-                         'Rainbow':    ['rgb(150,0,90)', 'rgb(255,0,0)'],
-                         'Portland':   ['rgb(12,51,131)', 'rgb(217,30,30)'],
-                         'Jet':        ['rgb(0,0,131)', 'rgb(128,0,0)'],
-                         'Hot':        ['rgb(0,0,0)', 'rgb(255,255,255)'],
-                         'Blackbody':  ['rgb(0,0,0)', 'rgb(160,200,255)'],
-                         'Earth':      ['rgb(0,0,130)', 'rgb(255,255,255)'],
-                         'Electric':   ['rgb(0,0,0)', 'rgb(255,250,220)'],
-                         'Viridis':    ['rgb(68,1,84)', 'rgb(253,231,37)']}
+        plotly_scales = {'Greys': ['rgb(0,0,0)', 'rgb(255,255,255)'],
+                         'YlGnBu': ['rgb(8,29,88)', 'rgb(255,255,217)'],
+                         'Greens': ['rgb(0,68,27)', 'rgb(247,252,245)'],
+                         'YlOrRd': ['rgb(128,0,38)', 'rgb(255,255,204)'],
+                         'Bluered': ['rgb(0,0,255)', 'rgb(255,0,0)'],
+                         'RdBu': ['rgb(5,10,172)', 'rgb(178,10,28)'],
+                         'Reds': ['rgb(220,220,220)', 'rgb(178,10,28)'],
+                         'Blues': ['rgb(5,10,172)', 'rgb(220,220,220)'],
+                         'Picnic': ['rgb(0,0,255)', 'rgb(255,0,0)'],
+                         'Rainbow': ['rgb(150,0,90)', 'rgb(255,0,0)'],
+                         'Portland': ['rgb(12,51,131)', 'rgb(217,30,30)'],
+                         'Jet': ['rgb(0,0,131)', 'rgb(128,0,0)'],
+                         'Hot': ['rgb(0,0,0)', 'rgb(255,255,255)'],
+                         'Blackbody': ['rgb(0,0,0)', 'rgb(160,200,255)'],
+                         'Earth': ['rgb(0,0,130)', 'rgb(255,255,255)'],
+                         'Electric': ['rgb(0,0,0)', 'rgb(255,250,220)'],
+                         'Viridis': ['rgb(68,1,84)', 'rgb(253,231,37)']}
 
         # Validate choice of palette
         if isinstance(palette, basestring):
@@ -1717,12 +1722,6 @@ class FigureFactory(object):
                                              "'rgbx,y,z' where a,b,c belong "
                                              "to the interval 0,1 and x,y,z "
                                              "belong to 0,255.")
-
-                                             #"The items of 'palette' must be "
-                                             #"tripets of the form (a,b,c) or "
-                                             #"'rgb(x,y,z)' where a,b,c belong "
-                                             #"to the interval [0,1] and x,y,z "
-                                             #"belong to [0,255]."
 
         # Check if index is made of string values
         if isinstance(index_vals[0], basestring):
@@ -1915,7 +1914,9 @@ class FigureFactory(object):
                 # Convert palette to list of n RGB tuples
                 if isinstance(palette, basestring):
                     if palette in plotly_scales:
-                        foo = FigureFactory._unlabel_rgb(plotly_scales[palette])
+                        foo = FigureFactory._unlabel_rgb(
+                            plotly_scales[palette]
+                        )
                         foo = FigureFactory._n_colors(foo[0],
                                                       foo[1],
                                                       len(intervals))
@@ -1975,7 +1976,8 @@ class FigureFactory(object):
                                 else:
                                     if 'marker' in kwargs:
                                         kwargs['marker']['size'] = size
-                                        kwargs['marker']['color'] = theme[c_indx]
+                                        (kwargs['marker']
+                                            ['color']) = theme[c_indx]
                                         trace = graph_objs.Scatter(
                                             x=new_listx,
                                             y=new_listy,
@@ -2016,7 +2018,8 @@ class FigureFactory(object):
                                 else:
                                     if 'marker' in kwargs:
                                         kwargs['marker']['size'] = size
-                                        kwargs['marker']['color'] = theme[c_indx]
+                                        (kwargs['marker']
+                                            ['color']) = theme[c_indx]
                                         trace = graph_objs.Scatter(
                                             x=new_listx,
                                             y=new_listy,
@@ -2126,8 +2129,10 @@ class FigureFactory(object):
                                 if 'marker' in kwargs:
                                     kwargs['marker']['size'] = size
                                     kwargs['marker']['color'] = index_vals
-                                    kwargs['marker']['colorscale'] = [[0, theme[0]],
-                                                                      [1, theme[1]]]
+                                    kwargs['marker']['colorscale'] = [
+                                        [0, theme[0]],
+                                        [1, theme[1]]
+                                    ]
                                     kwargs['marker']['showscale'] = True
                                     trace = graph_objs.Scatter(
                                         x=listx,
@@ -2170,8 +2175,10 @@ class FigureFactory(object):
                                 if 'marker' in kwargs:
                                     kwargs['marker']['size'] = size
                                     kwargs['marker']['color'] = index_vals
-                                    kwargs['marker']['colorscale'] = [[0, theme[0]],
-                                                                      [1, theme[1]]]
+                                    kwargs['marker']['colorscale'] = [
+                                        [0, theme[0]],
+                                        [1, theme[1]]
+                                    ]
                                     kwargs['marker']['showscale'] = False
                                     trace = graph_objs.Scatter(
                                         x=listx,
@@ -2273,7 +2280,6 @@ class FigureFactory(object):
 
     @staticmethod
     def _validate_scatterplotmatrix(df, index, diag, **kwargs):
-        DIAG_CHOICES = ['scatter', 'histogram', 'box']
         if _pandas_imported is False:
             raise ImportError("FigureFactory.scatterplotmatrix requires "
                               "a pandas DataFrame.")
@@ -2570,8 +2576,8 @@ class FigureFactory(object):
                 dataframe.append(df[name].values.tolist())
             # Check for same data-type in df columns
             FigureFactory._validate_dataframe(dataframe)
-            figure = FigureFactory._scatterplot(dataframe, headers, diag, size,
-                                                height, width, title,
+            figure = FigureFactory._scatterplot(dataframe, headers, diag,
+                                                size, height, width, title,
                                                 **kwargs)
             return figure
         else:
@@ -2579,7 +2585,8 @@ class FigureFactory(object):
             if index not in df:
                 raise exceptions.PlotlyError("Make sure you set the index "
                                              "input variable to one of the "
-                                             "column names of your dataframe.")
+                                             "column names of your "
+                                             "dataframe.")
             index_vals = df[index].values.tolist()
             for name in df:
                 if name != index:
