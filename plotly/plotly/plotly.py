@@ -680,7 +680,14 @@ class image:
                 raise exceptions.PlotlyError("The response "
                                              "from plotly could "
                                              "not be translated.")
-            raise exceptions.PlotlyError(return_data['error'])
+
+            error_msg = return_data.get('error')
+            if error_msg is None:
+                error_msg = return_data.get('errors')
+            if error_msg is None:
+                error_msg = 'Unknow error: ' + return_data
+
+            raise exceptions.PlotlyError(error_msg)
 
     @classmethod
     def ishow(cls, figure_or_data, format='png', width=None, height=None,
