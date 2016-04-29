@@ -2417,8 +2417,9 @@ class FigureFactory(object):
         return unlabelled_colors
 
     @staticmethod
-    def create_scatterplotmatrix(df, index=None, endpts=None, diag='scatter',
-                                 height=500, width=500, size=6,
+    def create_scatterplotmatrix(df, dataframe=None, headers=None,
+                                 index_vals=None, index=None, endpts=None,
+                                 diag='scatter', height=500, width=500, size=6,
                                  title='Scatterplot Matrix', use_theme=False,
                                  palette=None, **kwargs):
         """
@@ -2564,9 +2565,13 @@ class FigureFactory(object):
         ```
         """
         # TODO: protected until #282
-        dataframe = []
-        headers = []
-        index_vals = []
+        if dataframe is None:
+            dataframe = []
+        if headers is None:
+            headers = []
+        if index_vals is None:
+            index_vals = []
+
         FigureFactory._validate_scatterplotmatrix(df, index, diag,
                                                   **kwargs)
         if not index:
