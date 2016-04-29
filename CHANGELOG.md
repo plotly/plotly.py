@@ -4,6 +4,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.9.10] - 2016-04-27
+### Updated
+- Updated plotly.min.js so the offline mode is using plotly.js v1.10.0
+	- Added beta versions of two new 2D WebGL trace types: heatmapgl, contourgl
+	- Added fills for scatterternary traces
+	- Added configurable shapes layer positioning with the shape attribute: `layer`
+
 ## [1.9.9] - 2016-04-15
 ### Fixed
 - Fixed `require is not defined` issue when plotting offline outside of Ipython Notebooks.
