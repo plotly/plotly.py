@@ -534,6 +534,20 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
 
 class TestScatterPlotMatrix(TestCase):
 
+    def test_dataframe_input(self):
+
+        # check: dataframe is imported
+        df = 'foo'
+
+        pattern = (
+            "Dataframe not inputed. Please use a pandas dataframe to produce "
+            "a scatterplot matrix."
+        )
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                tls.FigureFactory.create_scatterplotmatrix,
+                                df)
+
     def test_one_column_dataframe(self):
 
         # check: dataframe has 1 column or less

@@ -1126,23 +1126,6 @@ class TestTable(TestCase):
         self.assertEqual(index_table, exp_index_table)
 
 
-class TestScatterPlotMatrix(TestCase):
-
-    def test_dataframe_input(self):
-
-        # check: dataframe is imported
-        df = 'foo'
-
-        pattern = (
-            "Dataframe not inputed. Please use a pandas dataframe to produce "
-            "a scatterplot matrix."
-        )
-
-        self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_scatterplotmatrix,
-                                df)
-
-
 # class TestDistplot(TestCase):
 
 #     def test_scipy_import_error(self):
