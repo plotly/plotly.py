@@ -1479,7 +1479,7 @@
                     },
                     "spikecolor": {
                         "description": "Sets the color of the spikes.",
-                        "dflt": "rgb(0,0,0)",
+                        "dflt": "#444",
                         "role": "style",
                         "valType": "color"
                     },
@@ -1884,7 +1884,7 @@
                     },
                     "spikecolor": {
                         "description": "Sets the color of the spikes.",
-                        "dflt": "rgb(0,0,0)",
+                        "dflt": "#444",
                         "role": "style",
                         "valType": "color"
                     },
@@ -2289,7 +2289,7 @@
                     },
                     "spikecolor": {
                         "description": "Sets the color of the spikes.",
-                        "dflt": "rgb(0,0,0)",
+                        "dflt": "#444",
                         "role": "style",
                         "valType": "color"
                     },
@@ -10996,7 +10996,8 @@
                 },
                 "contour": {
                     "color": {
-                        "dflt": "#000",
+                        "description": "Sets the color of the contour lines.",
+                        "dflt": "#444",
                         "role": "style",
                         "valType": "color"
                     },
@@ -11008,6 +11009,7 @@
                         "valType": "boolean"
                     },
                     "width": {
+                        "description": "Sets the width of the contour lines.",
                         "dflt": 2,
                         "max": 16,
                         "min": 1,
@@ -11149,6 +11151,7 @@
                     "valType": "string"
                 },
                 "opacity": {
+                    "description": "Sets the opacity of the surface.",
                     "dflt": 1,
                     "max": 1,
                     "min": 0,
@@ -17567,21 +17570,25 @@
                     "role": "object",
                     "x": {
                         "color": {
-                            "dflt": "#000",
+                            "description": "Sets the color of the contour lines.",
+                            "dflt": "#444",
                             "role": "style",
                             "valType": "color"
                         },
                         "highlight": {
-                            "dflt": false,
+                            "description": "Determines whether or not contour lines about the x dimension are highlighted on hover.",
+                            "dflt": true,
                             "role": "info",
                             "valType": "boolean"
                         },
-                        "highlightColor": {
-                            "dflt": "#000",
+                        "highlightcolor": {
+                            "description": "Sets the color of the highlighted contour lines.",
+                            "dflt": "#444",
                             "role": "style",
                             "valType": "color"
                         },
-                        "highlightWidth": {
+                        "highlightwidth": {
+                            "description": "Sets the width of the highlighted contour lines.",
                             "dflt": 2,
                             "max": 16,
                             "min": 1,
@@ -17591,19 +17598,19 @@
                         "project": {
                             "role": "object",
                             "x": {
-                                "description": "Sets whether or not the dynamic contours are projected along the x axis.",
+                                "description": "Determines whether or not these contour lines are projected on the x axis walls. If `highlight` is set to *true* (the default), the projected lines are shown on hover. If `show` is set to *true*, the projected lines are shown in permanence.",
                                 "dflt": false,
                                 "role": "info",
                                 "valType": "boolean"
                             },
                             "y": {
-                                "description": "Sets whether or not the dynamic contours are projected along the y axis.",
+                                "description": "Determines whether or not these contour lines are projected on the y axis walls. If `highlight` is set to *true* (the default), the projected lines are shown on hover. If `show` is set to *true*, the projected lines are shown in permanence.",
                                 "dflt": false,
                                 "role": "info",
                                 "valType": "boolean"
                             },
                             "z": {
-                                "description": "Sets whether or not the dynamic contours are projected along the z axis.",
+                                "description": "Determines whether or not these contour lines are projected on the z axis walls. If `highlight` is set to *true* (the default), the projected lines are shown on hover. If `show` is set to *true*, the projected lines are shown in permanence.",
                                 "dflt": false,
                                 "role": "info",
                                 "valType": "boolean"
@@ -17611,17 +17618,19 @@
                         },
                         "role": "object",
                         "show": {
-                            "description": "Sets whether or not dynamic contours are shown along the x axis",
+                            "description": "Determines whether or not contour lines about the x dimension are drawn.",
                             "dflt": false,
                             "role": "info",
                             "valType": "boolean"
                         },
                         "usecolormap": {
+                            "description": "An alternate to *color*. Determines whether or not the contour lines are colored using the trace *colorscale*.",
                             "dflt": false,
                             "role": "info",
                             "valType": "boolean"
                         },
                         "width": {
+                            "description": "Sets the width of the contour lines.",
                             "dflt": 2,
                             "max": 16,
                             "min": 1,
@@ -17631,21 +17640,25 @@
                     },
                     "y": {
                         "color": {
-                            "dflt": "#000",
+                            "description": "Sets the color of the contour lines.",
+                            "dflt": "#444",
                             "role": "style",
                             "valType": "color"
                         },
                         "highlight": {
-                            "dflt": false,
+                            "description": "Determines whether or not contour lines about the y dimension are highlighted on hover.",
+                            "dflt": true,
                             "role": "info",
                             "valType": "boolean"
                         },
-                        "highlightColor": {
-                            "dflt": "#000",
+                        "highlightcolor": {
+                            "description": "Sets the color of the highlighted contour lines.",
+                            "dflt": "#444",
                             "role": "style",
                             "valType": "color"
                         },
-                        "highlightWidth": {
+                        "highlightwidth": {
+                            "description": "Sets the width of the highlighted contour lines.",
                             "dflt": 2,
                             "max": 16,
                             "min": 1,
@@ -17655,19 +17668,19 @@
                         "project": {
                             "role": "object",
                             "x": {
-                                "description": "Sets whether or not the dynamic contours are projected along the x axis.",
+                                "description": "Determines whether or not these contour lines are projected on the x axis walls. If `highlight` is set to *true* (the default), the projected lines are shown on hover. If `show` is set to *true*, the projected lines are shown in permanence.",
                                 "dflt": false,
                                 "role": "info",
                                 "valType": "boolean"
                             },
                             "y": {
-                                "description": "Sets whether or not the dynamic contours are projected along the y axis.",
+                                "description": "Determines whether or not these contour lines are projected on the y axis walls. If `highlight` is set to *true* (the default), the projected lines are shown on hover. If `show` is set to *true*, the projected lines are shown in permanence.",
                                 "dflt": false,
                                 "role": "info",
                                 "valType": "boolean"
                             },
                             "z": {
-                                "description": "Sets whether or not the dynamic contours are projected along the z axis.",
+                                "description": "Determines whether or not these contour lines are projected on the z axis walls. If `highlight` is set to *true* (the default), the projected lines are shown on hover. If `show` is set to *true*, the projected lines are shown in permanence.",
                                 "dflt": false,
                                 "role": "info",
                                 "valType": "boolean"
@@ -17675,17 +17688,19 @@
                         },
                         "role": "object",
                         "show": {
-                            "description": "Sets whether or not dynamic contours are shown along the y axis",
+                            "description": "Determines whether or not contour lines about the y dimension are drawn.",
                             "dflt": false,
                             "role": "info",
                             "valType": "boolean"
                         },
                         "usecolormap": {
+                            "description": "An alternate to *color*. Determines whether or not the contour lines are colored using the trace *colorscale*.",
                             "dflt": false,
                             "role": "info",
                             "valType": "boolean"
                         },
                         "width": {
+                            "description": "Sets the width of the contour lines.",
                             "dflt": 2,
                             "max": 16,
                             "min": 1,
@@ -17695,21 +17710,25 @@
                     },
                     "z": {
                         "color": {
-                            "dflt": "#000",
+                            "description": "Sets the color of the contour lines.",
+                            "dflt": "#444",
                             "role": "style",
                             "valType": "color"
                         },
                         "highlight": {
-                            "dflt": false,
+                            "description": "Determines whether or not contour lines about the z dimension are highlighted on hover.",
+                            "dflt": true,
                             "role": "info",
                             "valType": "boolean"
                         },
-                        "highlightColor": {
-                            "dflt": "#000",
+                        "highlightcolor": {
+                            "description": "Sets the color of the highlighted contour lines.",
+                            "dflt": "#444",
                             "role": "style",
                             "valType": "color"
                         },
-                        "highlightWidth": {
+                        "highlightwidth": {
+                            "description": "Sets the width of the highlighted contour lines.",
                             "dflt": 2,
                             "max": 16,
                             "min": 1,
@@ -17719,19 +17738,19 @@
                         "project": {
                             "role": "object",
                             "x": {
-                                "description": "Sets whether or not the dynamic contours are projected along the x axis.",
+                                "description": "Determines whether or not these contour lines are projected on the x axis walls. If `highlight` is set to *true* (the default), the projected lines are shown on hover. If `show` is set to *true*, the projected lines are shown in permanence.",
                                 "dflt": false,
                                 "role": "info",
                                 "valType": "boolean"
                             },
                             "y": {
-                                "description": "Sets whether or not the dynamic contours are projected along the y axis.",
+                                "description": "Determines whether or not these contour lines are projected on the y axis walls. If `highlight` is set to *true* (the default), the projected lines are shown on hover. If `show` is set to *true*, the projected lines are shown in permanence.",
                                 "dflt": false,
                                 "role": "info",
                                 "valType": "boolean"
                             },
                             "z": {
-                                "description": "Sets whether or not the dynamic contours are projected along the z axis.",
+                                "description": "Determines whether or not these contour lines are projected on the z axis walls. If `highlight` is set to *true* (the default), the projected lines are shown on hover. If `show` is set to *true*, the projected lines are shown in permanence.",
                                 "dflt": false,
                                 "role": "info",
                                 "valType": "boolean"
@@ -17739,17 +17758,19 @@
                         },
                         "role": "object",
                         "show": {
-                            "description": "Sets whether or not dynamic contours are shown along the z axis",
+                            "description": "Determines whether or not contour lines about the z dimension are drawn.",
                             "dflt": false,
                             "role": "info",
                             "valType": "boolean"
                         },
                         "usecolormap": {
+                            "description": "An alternate to *color*. Determines whether or not the contour lines are colored using the trace *colorscale*.",
                             "dflt": false,
                             "role": "info",
                             "valType": "boolean"
                         },
                         "width": {
+                            "description": "Sets the width of the contour lines.",
                             "dflt": 2,
                             "max": 16,
                             "min": 1,
@@ -17759,6 +17780,7 @@
                     }
                 },
                 "hidesurface": {
+                    "description": "Determines whether or not a surface is drawn. For example, set `hidesurface` to *false* `contours.x.show` to *true* and `contours.y.show` to *true* to draw a wire frame plot.",
                     "dflt": false,
                     "role": "info",
                     "valType": "boolean"
@@ -17830,6 +17852,7 @@
                     "valType": "string"
                 },
                 "opacity": {
+                    "description": "Sets the opacity of the surface.",
                     "dflt": 1,
                     "max": 1,
                     "min": 0,

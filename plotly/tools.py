@@ -2447,8 +2447,8 @@ class FigureFactory(object):
 
         Example 1: Vanilla Scatterplot Matrix
         ```
-        from plotly.graph_objs import graph_objs
         import plotly.plotly as py
+        from plotly.graph_objs import graph_objs
         from plotly.tools import FigureFactory as FF
 
         import numpy as np
@@ -2467,8 +2467,8 @@ class FigureFactory(object):
 
         Example 2: Indexing a Column
         ```
-        from plotly.graph_objs import graph_objs
         import plotly.plotly as py
+        from plotly.graph_objs import graph_objs
         from plotly.tools import FigureFactory as FF
 
         import numpy as np
@@ -2491,8 +2491,8 @@ class FigureFactory(object):
 
         Example 3: Styling the diagonal subplots
         ```
-        from plotly.graph_objs import graph_objs
         import plotly.plotly as py
+        from plotly.graph_objs import graph_objs
         from plotly.tools import FigureFactory as FF
 
         import numpy as np
@@ -2516,8 +2516,8 @@ class FigureFactory(object):
 
         Example 4: Use a theme to Styling the subplots
         ```
-        from plotly.graph_objs import graph_objs
         import plotly.plotly as py
+        from plotly.graph_objs import graph_objs
         from plotly.tools import FigureFactory as FF
 
         import numpy as np
@@ -2539,8 +2539,8 @@ class FigureFactory(object):
 
         Example 5: Example 4 with interval factoring
         ```
-        from plotly.graph_objs import graph_objs
         import plotly.plotly as py
+        from plotly.graph_objs import graph_objs
         from plotly.tools import FigureFactory as FF
 
         import numpy as np
