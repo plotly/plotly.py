@@ -1691,7 +1691,6 @@ class FigureFactory(object):
                            title, index, index_vals, endpts,
                            palette, **kwargs):
         from plotly.graph_objs import graph_objs
-
         plotly_scales = {'Greys': ['rgb(0,0,0)', 'rgb(255,255,255)'],
                          'YlGnBu': ['rgb(8,29,88)', 'rgb(255,255,217)'],
                          'Greens': ['rgb(0,68,27)', 'rgb(247,252,245)'],
@@ -1711,7 +1710,7 @@ class FigureFactory(object):
                          'Viridis': ['rgb(68,1,84)', 'rgb(253,231,37)']}
 
         # Validate choice of palette
-        if isinstance(palette, basestring):
+        if isinstance(palette, str):
             if palette not in plotly_scales:
                 raise exceptions.PlotlyError("You must pick a valid "
                                              "plotly colorscale name.")
@@ -1724,7 +1723,7 @@ class FigureFactory(object):
                                              "belong to 0,255.")
 
         # Check if index is made of string values
-        if isinstance(index_vals[0], basestring):
+        if isinstance(index_vals[0], str):
             unique_index_vals = []
             for name in index_vals:
                 if name not in unique_index_vals:
@@ -1732,7 +1731,7 @@ class FigureFactory(object):
             n_colors_len = len(unique_index_vals)
 
             # Convert palette to list of n RGB tuples
-            if isinstance(palette, basestring):
+            if isinstance(palette, str):
                 if palette in plotly_scales:
                     foo = FigureFactory._unlabel_rgb(plotly_scales[palette])
                     foo = FigureFactory._n_colors(foo[0],
@@ -1912,7 +1911,7 @@ class FigureFactory(object):
                 intervals = FigureFactory._endpts_to_intervals(endpts)
 
                 # Convert palette to list of n RGB tuples
-                if isinstance(palette, basestring):
+                if isinstance(palette, str):
                     if palette in plotly_scales:
                         foo = FigureFactory._unlabel_rgb(
                             plotly_scales[palette]
@@ -2091,7 +2090,7 @@ class FigureFactory(object):
 
             else:
                 # Convert palette to list of 2 RGB tuples
-                if isinstance(palette, basestring):
+                if isinstance(palette, str):
                     if palette in plotly_scales:
                         theme = plotly_scales[palette]
 
@@ -2254,8 +2253,8 @@ class FigureFactory(object):
                                              "column are all numbers or "
                                              "all strings.")
 
-        elif isinstance(index_vals[0], basestring):
-            if not all(isinstance(item, basestring) for item in index_vals):
+        elif isinstance(index_vals[0], str):
+            if not all(isinstance(item, str) for item in index_vals):
                 raise exceptions.PlotlyError("Error in indexing column. "
                                              "Make sure all entries of each "
                                              "column are all numbers or "
@@ -2271,8 +2270,8 @@ class FigureFactory(object):
                                                  "Make sure all entries of "
                                                  "each column are either "
                                                  "numbers or strings.")
-            elif isinstance(vector[0], basestring):
-                if not all(isinstance(item, basestring) for item in vector):
+            elif isinstance(vector[0], str):
+                if not all(isinstance(item, str) for item in vector):
                     raise exceptions.PlotlyError("Error in dataframe. "
                                                  "Make sure all entries of "
                                                  "each column are either "
@@ -2324,7 +2323,7 @@ class FigureFactory(object):
                                          "of increasing numbers.")
         # Check if endpts contains only numbers
         for item in endpts:
-            if isinstance(item, basestring):
+            if isinstance(item, str):
                 raise exceptions.PlotlyError("The intervals_endpts argument "
                                              "must be a list or tuple of a "
                                              "sequence of increasing "
