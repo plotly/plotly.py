@@ -735,5 +735,7 @@ class TestScatterPlotMatrix(TestCase):
             #                       'domain': [0.0, 1.0],
             #                       'title': 'Numbers'}}
 
-        self.assertEqual(test_scatter_plot_matrix.data,
-                         exp_scatter_plot_matrix)
+        #self.assertEqual(test_scatter_plot_matrix.data,
+        #                 exp_scatter_plot_matrix)
+
+        assert test_scatter_plot_matrix.data == exp_scatter_plot_matrix
