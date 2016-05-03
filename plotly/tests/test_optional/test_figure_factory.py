@@ -532,7 +532,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
         self.assert_dict_equal(dendro['data'][2], expected_dendro['data'][2])
 
 
-class TestScatterPlotMatrix(TestCase):
+class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
 
     def test_dataframe_input(self):
 
@@ -735,6 +735,12 @@ class TestScatterPlotMatrix(TestCase):
                                   'title': 'Numbers'}}
         }
 
-        self.maxDiff = None
-        self.assertEqual(test_scatter_plot_matrix,
-                         exp_scatter_plot_matrix)
+        #self.maxDiff = None
+        #self.assertEqual(test_scatter_plot_matrix,
+        #                 exp_scatter_plot_matrix)
+
+        self.assert_dict_equal(test_scatter_plot_matrix['layout'],
+                               exp_scatter_plot_matrix['layout'])
+
+        self.assert_dict_equal(test_scatter_plot_matrix['data'][0],
+                               exp_scatter_plot_matrix['data'][0])
