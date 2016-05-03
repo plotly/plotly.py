@@ -1425,6 +1425,12 @@ def return_figure_from_figure_or_data(figure_or_data, validate_figure):
 _DEFAULT_INCREASING_COLOR = '#3D9970'  # http://clrs.cc
 _DEFAULT_DECREASING_COLOR = '#FF4136'
 
+DEFAULT_PLOTLY_COLORS = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
+                         'rgb(44, 160, 44)', 'rgb(214, 39, 40)',
+                         'rgb(148, 103, 189)', 'rgb(140, 86, 75)',
+                         'rgb(227, 119, 194)', 'rgb(127, 127, 127)',
+                         'rgb(188, 189, 34)', 'rgb(23, 190, 207)']
+
 
 class FigureFactory(object):
     """
@@ -1441,6 +1447,333 @@ class FigureFactory(object):
     FigureFactory.create_annotated_heatmap, or FigureFactory.create_table for
     more information and examples of a specific chart type.
     """
+
+    @staticmethod
+    def _unlabel_rgb(colors):
+        unlabelled_colors = []
+        for color in colors:
+            str_vals = ''
+            for index in range(len(color)):
+                try:
+                    float(color[index])
+                    str_vals = str_vals + color[index]
+                except ValueError:
+                    if (color[index] == ',') or (color[index] == '.'):
+                        str_vals = str_vals + color[index]
+
+            str_vals = str_vals + ','
+            numbers = []
+            str_num = ''
+            for char in str_vals:
+                if char != ',':
+                    str_num = str_num + char
+                else:
+                    numbers.append(float(str_num))
+                    str_num = ''
+            unlabelled_tuple = (numbers[0], numbers[1], numbers[2])
+            unlabelled_colors.append(unlabelled_tuple)
+
+        return unlabelled_colors
+
+    @staticmethod
+    def _find_intermediate_color(tuple1, tuple2, t):
+        # Given two color tuples (in normalized RGB space)
+        # and a value 0 < t < 1, spit out a color that is
+        # t percent from tuple1 to tuple2.
+        diff_0 = float(tuple2[0] - tuple1[0])
+        diff_1 = float(tuple2[1] - tuple1[1])
+        diff_2 = float(tuple2[2] - tuple1[2])
+
+        new_tuple = (tuple1[0] + t*diff_0,
+                     tuple1[1] + t*diff_1,
+                     tuple1[2] + t*diff_2)
+        return new_tuple
+
+    @staticmethod
+    def _unconvert_from_RGB_255(colors):
+        un_rgb_colors = []
+        for color in colors:
+            un_rgb_color = (color[0]/(255.0),
+                            color[1]/(255.0),
+                            color[2]/(255.0))
+
+            un_rgb_colors.append(un_rgb_color)
+        return un_rgb_colors
+
+    @staticmethod
+    def _map_z2color(zval, colormap, vmin, vmax):
+        # Map the normalized value zval to a
+        #corresponding color in the colormap
+        if vmin > vmax:
+            raise ValueError("Incorrect relation between vmin and vmax."
+                             " The vmin cannot be bigger than vmax.")
+        t = (zval - vmin)/float((vmax - vmin))  # normalize val
+        t_color = FigureFactory._find_intermediate_color(colormap[0],
+                                                         colormap[1],
+                                                         t)
+        t_color = (t_color[0]*255.0, t_color[1]*255.0, t_color[2]*255.0)
+        labelled_color = 'rgb{}'.format(t_color)
+
+        return labelled_color
+
+    @staticmethod
+    def _tri_indices(simplices):
+        return ([triplet[c] for triplet in simplices] for c in range(3))
+
+    @staticmethod
+    def _plotly_trisurf(x, y, z, simplices, colormap=None,
+                        plot_edges=None):
+        import numpy as np
+        from plotly.graph_objs import graph_objs
+        points3D = np.vstack((x, y, z)).T
+
+        # vertices of the surface triangles
+        tri_vertices = map(lambda index: points3D[index], simplices)
+        # mean values of z-coordinates of triangle vertices
+        zmean = [np.mean(tri[:, 2]) for tri in tri_vertices]
+        min_zmean = np.min(zmean)
+        max_zmean = np.max(zmean)
+        facecolor = ([FigureFactory._map_z2color(zz,  colormap, min_zmean,
+                      max_zmean) for zz in zmean])
+        I, J, K = FigureFactory._tri_indices(simplices)
+
+        triangles = graph_objs.Mesh3d(x=x, y=y, z=z, facecolor=facecolor,
+                                      i=I, j=J, k=K, name='')
+
+        if plot_edges is None:  # the triangle sides are not plotted
+            return graph_objs.Data([triangles])
+
+        else:
+            # define the lists Xe, Ye, Ze, of x, y, resp z coordinates of
+            # edge end points for each triangle
+            # None separates data corresponding to two consecutive triangles
+            lists_coord = ([[[T[k % 3][c] for k in range(4)]+[None]
+                            for T in tri_vertices] for c in range(3)])
+            Xe, Ye, Ze = ([reduce(lambda x, y: x+y, lists_coord[k])
+                           for k in range(3)])
+
+            # define the lines to be plotted
+            lines = graph_objs.Scatter3d(
+                x=Xe, y=Ye, z=Ze, mode='lines',
+                line=graph_objs.Line(color='rgb(50,50,50)',
+                                     width=1.5)
+            )
+
+            return graph_objs.Data([triangles, lines])
+
+    @staticmethod
+    def create_trisurf(x, y, z, colormap=None, simplices=None,
+                       title='Trisurf Plot',
+                       showbackground=True,
+                       backgroundcolor='rgb(230, 230, 230)',
+                       gridcolor='rgb(255, 255, 255)',
+                       zerolinecolor='rgb(255, 255, 255)',
+                       height=800, width=800,
+                       aspectratio=dict(x=1, y=1, z=1)):
+        """
+        Returns data for a triangulated surface plot.
+
+        :param (array) x: data values of x in a 1D array
+        :param (array) y: data values of y in a 1D array
+        :param (array) z: data values of z in a 1D array
+        :param (str|list) colormap: either a plotly scale name, or a list
+            containing 2 triplets. These triplets must be of the form (a,b,c)
+            or 'rgb(x,y,z)' where a,b,c belong to the interval [0,1] and x,y,z
+            belong to [0,255]
+        :param (array) simplices: an array of shape (ntri, 3) where ntri is
+            the number of triangles in the triangularization. Each row of the
+            array contains the indicies of the verticies of each triangle.
+        :param (str) title: title of the plot
+        :param (bool) showbackground: makes background in plot visible
+        :param (str) backgroundcolor: color of background. Takes a string of
+            the form 'rgb(x,y,z)' x,y,z are between 0 and 255 inclusive.
+        :param (str) gridcolor: color of the gridlines besides the axes. Takes
+            a string of the form 'rgb(x,y,z)' x,y,z are between 0 and 255
+            inclusive.
+        :param (str) zerolinecolor: color of the axes. Takes a string of the
+            form 'rgb(x,y,z)' x,y,z are between 0 and 255 inclusive.
+        :param (int|float) height: the height of the plot (in pixels)
+        :param (int|float) width: the width of the plot (in pixels)
+        :param (dict) aspectratio: a dictionary of the aspect ratio values for
+            the x, y and z axes. 'x', 'y' and 'z' take (int|float) values.
+
+        Example 1: Sphere
+        ```
+        # Necessary Imports for Trisurf
+        import numpy as np
+        from scipy.spatial import Delaunay
+
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+        from plotly.graph_objs import graph_objs
+
+        # Make data for plot
+        u=np.linspace(0, 2*np.pi, 20)
+        v=np.linspace(0, np.pi, 20)
+        u,v=np.meshgrid(u,v)
+        u=u.flatten()
+        v=v.flatten()
+
+        x = np.sin(v)*np.cos(u)
+        y = np.sin(v)*np.sin(u)
+        z = np.cos(v)
+
+        points2D = np.vstack([u,v]).T
+        tri = Delaunay(points2D)
+        simplices = tri.simplices
+
+        # Create a figure
+        fig1 = FF.create_trisurf(x=x, y=y, z=z,
+                                 colormap="Blues",
+                                 simplices=simplices)
+        # Plot the data
+        py.iplot(fig1, filename='Trisurf Plot')
+        ```
+
+        Example 2: Torus
+        ```
+        # Necessary Imports for Trisurf
+        import numpy as np
+        from scipy.spatial import Delaunay
+
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+        from plotly.graph_objs import graph_objs
+
+        # Make data for plot
+        u=np.linspace(0, 2*np.pi, 20)
+        v=np.linspace(0, 2*np.pi, 20)
+        u,v=np.meshgrid(u,v)
+        u=u.flatten()
+        v=v.flatten()
+
+        x = (3 + (np.cos(v)))*np.cos(u)
+        y = (3 + (np.cos(v)))*np.sin(u)
+        z = np.sin(v)
+
+        points2D = np.vstack([u,v]).T
+        tri = Delaunay(points2D)
+        simplices = tri.simplices
+
+        # Create a figure
+        fig1 = FF.create_trisurf(x=x, y=y, z=z,
+                                 colormap="Portland",
+                                 simplices=simplices)
+        # Plot the data
+        py.iplot(fig1, filename='Trisurf Plot')
+        ```
+
+        Example 3: Mobius Band
+        ```
+        # Necessary Imports for Trisurf
+        import numpy as np
+        from scipy.spatial import Delaunay
+
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+        from plotly.graph_objs import graph_objs
+
+        # Make data for plot
+        u=np.linspace(0, 2*np.pi, 24)
+        v=np.linspace(-1, 1, 8)
+        u,v=np.meshgrid(u,v)
+        u=u.flatten()
+        v=v.flatten()
+
+        tp = 1 + 0.5*v*np.cos(u/2.)
+        x=tp*np.cos(u)
+        y=tp*np.sin(u)
+        z=0.5*v*np.sin(u/2.)
+
+        points2D = np.vstack([u,v]).T
+        tri = Delaunay(points2D)
+        simplices = tri.simplices
+
+        # Create a figure
+        fig1 = FF.create_trisurf(x=x, y=y, z=z,
+                                 colormap=[(0.2, 0.4, 0.6),(1, 1, 1)],
+                                 simplices=simplices)
+        # Plot the data
+        py.iplot(fig1, filename='Trisurf Plot')
+        ```
+        """
+        from plotly.graph_objs import graph_objs
+        plotly_scales = {'Greys': ['rgb(0,0,0)', 'rgb(255,255,255)'],
+                         'YlGnBu': ['rgb(8,29,88)', 'rgb(255,255,217)'],
+                         'Greens': ['rgb(0,68,27)', 'rgb(247,252,245)'],
+                         'YlOrRd': ['rgb(128,0,38)', 'rgb(255,255,204)'],
+                         'Bluered': ['rgb(0,0,255)', 'rgb(255,0,0)'],
+                         'RdBu': ['rgb(5,10,172)', 'rgb(178,10,28)'],
+                         'Reds': ['rgb(220,220,220)', 'rgb(178,10,28)'],
+                         'Blues': ['rgb(5,10,172)', 'rgb(220,220,220)'],
+                         'Picnic': ['rgb(0,0,255)', 'rgb(255,0,0)'],
+                         'Rainbow': ['rgb(150,0,90)', 'rgb(255,0,0)'],
+                         'Portland': ['rgb(12,51,131)', 'rgb(217,30,30)'],
+                         'Jet': ['rgb(0,0,131)', 'rgb(128,0,0)'],
+                         'Hot': ['rgb(0,0,0)', 'rgb(255,255,255)'],
+                         'Blackbody': ['rgb(0,0,0)', 'rgb(160,200,255)'],
+                         'Earth': ['rgb(0,0,130)', 'rgb(255,255,255)'],
+                         'Electric': ['rgb(0,0,0)', 'rgb(255,250,220)'],
+                         'Viridis': ['rgb(68,1,84)', 'rgb(253,231,37)']}
+
+        if simplices is None:
+            raise exceptions.PlotlyError("Make sure you enter 'simplices' "
+                                         "in the trisurf function.")
+
+        # Validate colormap
+        if colormap is None:
+            colormap = [DEFAULT_PLOTLY_COLORS[0],
+                        DEFAULT_PLOTLY_COLORS[1]]
+            colormap = FigureFactory._unlabel_rgb(colormap)
+            colormap = FigureFactory._unconvert_from_RGB_255(colormap)
+
+        if isinstance(colormap, str):
+            if colormap not in plotly_scales:
+                raise exceptions.PlotlyError("You must pick a valid "
+                                             "plotly colorscale name.")
+            colormap = [plotly_scales[colormap][0],
+                        plotly_scales[colormap][1]]
+            colormap = FigureFactory._unlabel_rgb(colormap)
+            colormap = FigureFactory._unconvert_from_RGB_255(colormap)
+
+        else:
+            if not isinstance(colormap, list):
+                raise exceptions.PlotlyError("If 'colormap' is a list, then "
+                                             "its items must be tripets of "
+                                             "the form a,b,c or 'rgbx,y,z' "
+                                             "where a,b,c are between 0 and "
+                                             "1 inclusive and x,y,z are "
+                                             "between 0 and 255 inclusive.")
+            if 'rgb' in colormap[0]:
+                colormap = FigureFactory._unlabel_rgb(colormap)
+                colormap = FigureFactory._unconvert_from_RGB_255(colormap)
+
+        data1 = FigureFactory._plotly_trisurf(x, y, z, simplices,
+                                              colormap=colormap,
+                                              plot_edges=True)
+        axis = dict(
+            showbackground=showbackground,
+            backgroundcolor=backgroundcolor,
+            gridcolor=gridcolor,
+            zerolinecolor=zerolinecolor,
+        )
+        layout = graph_objs.Layout(
+            title=title,
+            width=width,
+            height=height,
+            scene=graph_objs.Scene(
+                xaxis=graph_objs.XAxis(axis),
+                yaxis=graph_objs.YAxis(axis),
+                zaxis=graph_objs.ZAxis(axis),
+                aspectratio=dict(
+                    x=aspectratio['x'],
+                    y=aspectratio['y'],
+                    z=aspectratio['z']),
+                )
+        )
+        fig1 = graph_objs.Figure(data=data1, layout=layout)
+
+        return fig1
 
     @staticmethod
     def _validate_equal_length(*args):
