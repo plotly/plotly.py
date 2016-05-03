@@ -736,5 +736,5 @@ class TestScatterPlotMatrix(TestCase):
         }
 
         self.maxDiff = None
-        self.assertEqual(test_scatter_plot_matrix.data,
+        self.assertEqual(test_scatter_plot_matrix,
                          exp_scatter_plot_matrix)
