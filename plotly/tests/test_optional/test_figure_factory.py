@@ -735,10 +735,6 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
                                   'title': 'Numbers'}}
         }
 
-        #self.maxDiff = None
-        #self.assertEqual(test_scatter_plot_matrix,
-        #                 exp_scatter_plot_matrix)
-
         self.assert_dict_equal(test_scatter_plot_matrix['layout'],
                                exp_scatter_plot_matrix['layout'])
 

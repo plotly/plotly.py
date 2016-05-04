@@ -1762,13 +1762,15 @@ class FigureFactory(object):
                 for listx in dataframe:
                     # create a dictionary for index_vals
                     unique_index_vals = {}
+                    unique_index_vals_list = []
                     for name in index_vals:
                         if name not in unique_index_vals:
                             unique_index_vals[name] = []
+                            unique_index_vals_list.append(name)
 
                     c_indx = 0  # color index
                     # Fill all the rest of the names into the dictionary
-                    for name in unique_index_vals:
+                    for name in unique_index_vals_list:
                         new_listx = []
                         new_listy = []
                         for j in range(len(index_vals)):
@@ -1880,6 +1882,7 @@ class FigureFactory(object):
             for j in range(dim):
                 xaxis_key = 'xaxis{}'.format((dim * dim) - dim + 1 + j)
                 fig['layout'][xaxis_key].update(title=headers[j])
+
             for j in range(dim):
                 yaxis_key = 'yaxis{}'.format(1 + (dim * j))
                 fig['layout'][yaxis_key].update(title=headers[j])
