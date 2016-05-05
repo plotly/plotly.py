@@ -735,8 +735,11 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
                                   'title': 'Numbers'}}
         }
 
-        self.assert_dict_equal(test_scatter_plot_matrix['layout'],
-                               exp_scatter_plot_matrix['layout'])
-
         self.assert_dict_equal(test_scatter_plot_matrix['data'][0],
                                exp_scatter_plot_matrix['data'][0])
+
+        self.assert_dict_equal(test_scatter_plot_matrix['data'][1],
+                               exp_scatter_plot_matrix['data'][1])
+
+        self.assert_dict_equal(test_scatter_plot_matrix['layout'],
+                               exp_scatter_plot_matrix['layout'])

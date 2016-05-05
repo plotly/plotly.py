@@ -1762,15 +1762,13 @@ class FigureFactory(object):
                 for listx in dataframe:
                     # create a dictionary for index_vals
                     unique_index_vals = {}
-                    unique_index_vals_list = []
                     for name in index_vals:
                         if name not in unique_index_vals:
                             unique_index_vals[name] = []
-                            unique_index_vals_list.append(name)
 
                     c_indx = 0  # color index
                     # Fill all the rest of the names into the dictionary
-                    for name in unique_index_vals_list:
+                    for name in sorted(unique_index_vals.keys()):
                         new_listx = []
                         new_listy = []
                         for j in range(len(index_vals)):
@@ -1871,7 +1869,7 @@ class FigureFactory(object):
             indices = range(1, dim + 1)
             for y_index in indices:
                 for x_index in indices:
-                    for name in trace_list[trace_index]:
+                    for name in sorted(trace_list[trace_index].keys()):
                         fig.append_trace(
                             trace_list[trace_index][name],
                             y_index,
