@@ -8,6 +8,7 @@ import math
 from nose.tools import raises
 
 import numpy as np
+from scipy.spatial import Delaunay
 
 
 class TestDistplot(TestCase):
@@ -529,3 +530,309 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
         self.assert_dict_equal(dendro['data'][0], expected_dendro['data'][0])
         self.assert_dict_equal(dendro['data'][1], expected_dendro['data'][1])
         self.assert_dict_equal(dendro['data'][2], expected_dendro['data'][2])
+
+
+class TestTrisurf(NumpyTestUtilsMixin, TestCase):
+
+    def test_vmin_and_vmax(self):
+
+        # check if vmin is greater than or equal to vmax
+        u = np.linspace(0, 2, 2)
+        v = np.linspace(0, 2, 2)
+        u, v = np.meshgrid(u, v)
+        u = u.flatten()
+        v = v.flatten()
+
+        x = u
+        y = v
+        z = u*v
+
+        points2D = np.vstack([u, v]).T
+        tri = Delaunay(points2D)
+        simplices = tri.simplices
+
+        pattern = (
+            "Incorrect relation between vmin and vmax. The vmin value cannot "
+            "be bigger than or equal to the value of vmax."
+        )
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                tls.FigureFactory.create_trisurf,
+                                x, y, z, simplices)
+
+    def test_valid_colormap(self):
+
+        # create data for trisurf plot
+        u = np.linspace(-np.pi, np.pi, 3)
+        v = np.linspace(-np.pi, np.pi, 3)
+        u, v = np.meshgrid(u, v)
+        u = u.flatten()
+        v = v.flatten()
+
+        x = u
+        y = u*np.cos(v)
+        z = u*np.sin(v)
+
+        points2D = np.vstack([u, v]).T
+        tri = Delaunay(points2D)
+        simplices = tri.simplices
+
+        # check that a valid plotly colorscale name is entered
+        self.assertRaises(PlotlyError, tls.FigureFactory.create_trisurf,
+                          x, y, z, simplices, colormap='foo')
+
+        # check that colormap is a list, if not a string
+
+        pattern1 = (
+            "If 'colormap' is a list, then its items must be tripets of the "
+            "form a,b,c or 'rgbx,y,z' where a,b,c are between 0 and 1 "
+            "inclusive and x,y,z are between 0 and 255 inclusive."
+        )
+
+        self.assertRaisesRegexp(PlotlyError, pattern1,
+                                tls.FigureFactory.create_trisurf,
+                                x, y, z, simplices, colormap=3)
+
+        # check: if colormap is a list of rgb color strings, make sure the
+        # entries of each color are no greater than 255.0
+
+        pattern2 = (
+            "Whoops! The elements in your rgb colormap tuples "
+            "cannot exceed 255.0."
+        )
+
+        self.assertRaisesRegexp(PlotlyError, pattern2,
+                                tls.FigureFactory.create_trisurf,
+                                x, y, z, simplices,
+                                colormap=['rgb(1, 2, 3)', 'rgb(4, 5, 600)'])
+
+        # check: if colormap is a list of tuple colors, make sure the entries
+        # of each tuple are no greater than 1.0
+
+        pattern3 = (
+            "Whoops! The elements in your rgb colormap tuples "
+            "cannot exceed 1.0."
+        )
+
+        self.assertRaisesRegexp(PlotlyError, pattern3,
+                                tls.FigureFactory.create_trisurf,
+                                x, y, z, simplices,
+                                colormap=[(0.2, 0.4, 0.6), (0.8, 1.0, 1.2)])
+
+    def test_trisurf_all_args(self):
+
+        # check if trisurf plot matches with expected output
+        u = np.linspace(-np.pi, np.pi, 3)
+        v = np.linspace(-np.pi, np.pi, 3)
+        u, v = np.meshgrid(u, v)
+        u = u.flatten()
+        v = v.flatten()
+
+        x = u
+        y = u*np.cos(v)
+        z = u*np.sin(v)
+
+        points2D = np.vstack([u, v]).T
+        tri = Delaunay(points2D)
+        simplices = tri.simplices
+
+        test_trisurf_plot = tls.FigureFactory.create_trisurf(
+            x, y, z, simplices, colormap='Blues',
+            title='Fun',
+            showbackground=False,
+            backgroundcolor='rgb(1, 20, 10)',
+            gridcolor='rgb(0, 20, 50)',
+            zerolinecolor='rgb(25, 255, 15)',
+            height=500, width=500,
+            aspectratio=dict(x=0.7, y=0.6, z=1.2)
+        )
+
+        exp_trisurf_plot = {
+            'data': [{'facecolor': ['rgb(112.5, 115.00000000000001, 196.0)',
+                      'rgb(220.0, 220.0, 220.0)',
+                      'rgb(112.5, 115.00000000000001, 196.0)',
+                      'rgb(5.0, 10.0, 172.0)',
+                      'rgb(112.5, 115.00000000000001, 196.0)',
+                      'rgb(5.0, 10.0, 172.0)',
+                      'rgb(112.5, 115.00000000000001, 196.0)',
+                      'rgb(220.0, 220.0, 220.0)'],
+                      'i': [3, 1, 1, 5, 7, 3, 5, 7],
+                      'j': [1, 3, 5, 1, 3, 7, 7, 5],
+                      'k': [4, 0, 4, 2, 4, 6, 4, 8],
+                      'name': '',
+                      'type': 'mesh3d',
+                      'x': np.array([-3.14159265,
+                                     0.,
+                                     3.14159265,
+                                     -3.14159265,
+                                     0.,
+                                     3.14159265,
+                                     -3.14159265,
+                                     0.,
+                                     3.14159265]),
+                      'y': np.array([3.14159265,
+                                     -0.,
+                                     -3.14159265,
+                                     -3.14159265,
+                                     0.,
+                                     3.14159265,
+                                     3.14159265,
+                                     -0.,
+                                     -3.14159265]),
+                      'z': np.array([3.84734139e-16,
+                                     -0.00000000e+00,
+                                     -3.84734139e-16,
+                                     -0.00000000e+00,
+                                     0.00000000e+00,
+                                     0.00000000e+00,
+                                     -3.84734139e-16,
+                                     0.00000000e+00,
+                                     3.84734139e-16])},
+                     {'line': {'color': 'rgb(50, 50, 50)', 'width': 1.5},
+                      'mode': 'lines',
+                      'type': 'scatter3d',
+                      'x': [-3.1415926535897931,
+                            0.0,
+                            0.0,
+                            -3.1415926535897931,
+                            None,
+                            0.0,
+                            -3.1415926535897931,
+                            -3.1415926535897931,
+                            0.0,
+                            None,
+                            0.0,
+                            3.1415926535897931,
+                            0.0,
+                            0.0,
+                            None,
+                            3.1415926535897931,
+                            0.0,
+                            3.1415926535897931,
+                            3.1415926535897931,
+                            None,
+                            0.0,
+                            -3.1415926535897931,
+                            0.0,
+                            0.0,
+                            None,
+                            -3.1415926535897931,
+                            0.0,
+                            -3.1415926535897931,
+                            -3.1415926535897931,
+                            None,
+                            3.1415926535897931,
+                            0.0,
+                            0.0,
+                            3.1415926535897931,
+                            None,
+                            0.0,
+                            3.1415926535897931,
+                            3.1415926535897931,
+                            0.0,
+                            None],
+                      'y': [-3.1415926535897931,
+                            -0.0,
+                            0.0,
+                            -3.1415926535897931,
+                            None,
+                            -0.0,
+                            -3.1415926535897931,
+                            3.1415926535897931,
+                            -0.0,
+                            None,
+                            -0.0,
+                            3.1415926535897931,
+                            0.0,
+                            -0.0,
+                            None,
+                            3.1415926535897931,
+                            -0.0,
+                            -3.1415926535897931,
+                            3.1415926535897931,
+                            None,
+                            -0.0,
+                            -3.1415926535897931,
+                            0.0,
+                            -0.0,
+                            None,
+                            -3.1415926535897931,
+                            -0.0,
+                            3.1415926535897931,
+                            -3.1415926535897931,
+                            None,
+                            3.1415926535897931,
+                            -0.0,
+                            0.0,
+                            3.1415926535897931,
+                            None,
+                            -0.0,
+                            3.1415926535897931,
+                            -3.1415926535897931,
+                            -0.0,
+                            None],
+                      'z': [-0.0,
+                            -0.0,
+                            0.0,
+                            -0.0,
+                            None,
+                            -0.0,
+                            -0.0,
+                            3.8473413874435795e-16,
+                            -0.0,
+                            None,
+                            -0.0,
+                            0.0,
+                            0.0,
+                            -0.0,
+                            None,
+                            0.0,
+                            -0.0,
+                            -3.8473413874435795e-16,
+                            0.0,
+                            None,
+                            0.0,
+                            -0.0,
+                            0.0,
+                            0.0,
+                            None,
+                            -0.0,
+                            0.0,
+                            -3.8473413874435795e-16,
+                            -0.0,
+                            None,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            None,
+                            0.0,
+                            0.0,
+                            3.8473413874435795e-16,
+                            0.0,
+                            None]}],
+            'layout': {'height': 500,
+                       'scene': {'aspectratio': {'x': 0.7, 'y': 0.6, 'z': 1.2},
+                                 'xaxis': {'backgroundcolor': 'rgb(1, 20, 10)',
+                                           'gridcolor': 'rgb(0, 20, 50)',
+                                           'showbackground': False,
+                                           'zerolinecolor': 'rgb(25, 255, 15)'},
+                                 'yaxis': {'backgroundcolor': 'rgb(1, 20, 10)',
+                                           'gridcolor': 'rgb(0, 20, 50)',
+                                           'showbackground': False,
+                                           'zerolinecolor': 'rgb(25, 255, 15)'},
+                                 'zaxis': {'backgroundcolor': 'rgb(1, 20, 10)',
+                                           'gridcolor': 'rgb(0, 20, 50)',
+                                           'showbackground': False,
+                                           'zerolinecolor': 'rgb(25, 255, 15)'}},
+                       'title': 'Fun',
+                                'width': 500}}
+
+        self.assert_dict_equal(test_trisurf_plot['data'][0],
+                               exp_trisurf_plot['data'][0])
+
+        self.assert_dict_equal(test_trisurf_plot['data'][1],
+                               exp_trisurf_plot['data'][1])
+
+        self.assert_dict_equal(test_trisurf_plot['layout'],
+                               exp_trisurf_plot['layout'])
