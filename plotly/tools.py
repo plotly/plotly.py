@@ -1583,17 +1583,20 @@ class FigureFactory(object):
         lists_coord = ([[[T[k % 3][c] for k in range(4)]+[None]
                         for T in tri_vertices] for c in range(3)])
 
-        Xe = lists_coord[0][0] + lists_coord[0][1]
-        for index in range(2, len(lists_coord[0])):
-            Xe = Xe + lists_coord[0][index]
+        Xe = []
+        for array in lists_coord[0]:
+            for item in array:
+                Xe.append(item)
 
-        Ye = lists_coord[1][0] + lists_coord[1][1]
-        for index in range(2, len(lists_coord[1])):
-            Ye = Ye + lists_coord[1][index]
+        Ye = []
+        for array in lists_coord[1]:
+            for item in array:
+                Ye.append(item)
 
-        Ze = lists_coord[2][0] + lists_coord[2][1]
-        for index in range(2, len(lists_coord[2])):
-            Ze = Ze + lists_coord[2][index]
+        Ze = []
+        for array in lists_coord[2]:
+            for item in array:
+                Ze.append(item)
 
         # define the lines to be plotted
         lines = graph_objs.Scatter3d(
