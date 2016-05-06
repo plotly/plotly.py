@@ -14,6 +14,7 @@ import warnings
 
 import six
 import math
+from functools import reduce
 
 from plotly import utils
 from plotly import exceptions
@@ -1582,23 +1583,26 @@ class FigureFactory(object):
         # None separates data corresponding to two consecutive triangles
         lists_coord = ([[[T[k % 3][c] for k in range(4)]+[None]
                         for T in tri_vertices] for c in range(3)])
-        if Xe is None:
-            Xe = []
-        for array in lists_coord[0]:
-            for item in array:
-                Xe.append(item)
+        #if Xe is None:
+        #    Xe = []
+        #for array in lists_coord[0]:
+        #    for item in array:
+        #        Xe.append(item)
 
-        if Ye is None:
-            Ye = []
-        for array in lists_coord[1]:
-            for item in array:
-                Ye.append(item)
+        #if Ye is None:
+        #    Ye = []
+        #for array in lists_coord[1]:
+        #    for item in array:
+        #        Ye.append(item)
 
-        if Ze is None:
-            Ze = []
-        for array in lists_coord[2]:
-            for item in array:
-                Ze.append(item)
+        #if Ze is None:
+        #    Ze = []
+        #for array in lists_coord[2]:
+        #    for item in array:
+        #        Ze.append(item)
+
+        Xe, Ye, Ze = ([reduce(lambda x, y: x+y,
+                       lists_coord[k]) for k in range(3)])
 
         # define the lines to be plotted
         lines = graph_objs.Scatter3d(
