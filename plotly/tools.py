@@ -14,7 +14,6 @@ import warnings
 
 import six
 import math
-from functools import reduce
 
 from plotly import utils
 from plotly import exceptions
