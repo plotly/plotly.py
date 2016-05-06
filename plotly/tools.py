@@ -1549,7 +1549,7 @@ class FigureFactory(object):
 
     @staticmethod
     def _trisurf(x, y, z, simplices, colormap=None,
-                 plot_edges=None):
+                 plot_edges=None, Xe=None, Ye=None, Ze=None):
         """
         Refer to FigureFactory.create_trisurf() for docstring
         """
@@ -1582,18 +1582,20 @@ class FigureFactory(object):
         # None separates data corresponding to two consecutive triangles
         lists_coord = ([[[T[k % 3][c] for k in range(4)]+[None]
                         for T in tri_vertices] for c in range(3)])
-
-        Xe = []
+        if Xe is None:
+            Xe = []
         for array in lists_coord[0]:
             for item in array:
                 Xe.append(item)
 
-        Ye = []
+        if Ye is None:
+            Ye = []
         for array in lists_coord[1]:
             for item in array:
                 Ye.append(item)
 
-        Ze = []
+        if Ze is None:
+            Ze = []
         for array in lists_coord[2]:
             for item in array:
                 Ze.append(item)
