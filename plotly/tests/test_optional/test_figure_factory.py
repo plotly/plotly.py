@@ -966,6 +966,10 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
                               'width': 500}}
         """
 
+        print(test_trisurf_plot)
+
+        print(exp_trisurf_plot)
+
         self.assert_dict_equal(test_trisurf_plot['layout'],
                                exp_trisurf_plot['layout'])
 
