@@ -2453,8 +2453,8 @@ class FigureFactory(object):
         FigureFactory._validate_distplot(hist_data, curve_type)
         FigureFactory._validate_equal_length(hist_data, group_labels)
 
-        if isinstance(bin_size, float):
-            bin_size = [bin_size]
+        if isinstance(bin_size, (float, int)):
+            bin_size = [bin_size]*len(hist_data)
 
         hist = _Distplot(
             hist_data, group_labels, bin_size,
