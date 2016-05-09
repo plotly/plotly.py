@@ -2332,7 +2332,7 @@ class FigureFactory(object):
 
     @staticmethod
     def create_distplot(hist_data, group_labels,
-                        bin_size=1., curve_type='kde',
+                        bin_size=[1.], curve_type='kde',
                         colors=[], rug_text=[],
                         show_hist=True, show_curve=True,
                         show_rug=True):
@@ -2347,7 +2347,7 @@ class FigureFactory(object):
         :param (list[list]) hist_data: Use list of lists to plot multiple data
             sets on the same plot.
         :param (list[str]) group_labels: Names for each data set.
-        :param (float) bin_size: Size of histogram bins. Default = 1.
+        :param (list[float]) bin_size: Size of histogram bins. Default = [1.]
         :param (str) curve_type: 'kde' or 'normal'. Default = 'kde'
         :param (bool) show_hist: Add histogram to distplot? Default = True
         :param (bool) show_curve: Add curve to distplot? Default = True
@@ -2450,7 +2450,7 @@ class FigureFactory(object):
         """
         # TODO: protected until #282
         from plotly.graph_objs import graph_objs
-        FigureFactory._validate_distplot(hist_data, curve_type)
+        FigureFactory._validate_distplot(hist_data, curve_type)    #<--- working on this right now
         FigureFactory._validate_equal_length(hist_data, group_labels)
 
         hist = _Distplot(
@@ -3398,7 +3398,7 @@ class _Distplot(FigureFactory):
                                autobinx=False,
                                xbins=dict(start=self.start[index],
                                           end=self.end[index],
-                                          size=self.bin_size),
+                                          size=self.bin_size[index]),
                                opacity=.7)
         return hist
 
@@ -3418,7 +3418,7 @@ class _Distplot(FigureFactory):
             self.curve_y[index] = (scipy.stats.gaussian_kde
                                    (self.hist_data[index])
                                    (self.curve_x[index]))
-            self.curve_y[index] *= self.bin_size
+            self.curve_y[index] *= self.bin_size[index]
 
         for index in range(self.trace_number):
             curve[index] = dict(type='scatter',
@@ -3453,7 +3453,7 @@ class _Distplot(FigureFactory):
                                    / 500 for x in range(500)]
             self.curve_y[index] = scipy.stats.norm.pdf(
                 self.curve_x[index], loc=mean[index], scale=sd[index])
-            self.curve_y[index] *= self.bin_size
+            self.curve_y[index] *= self.bin_size[index]
 
         for index in range(self.trace_number):
             curve[index] = dict(type='scatter',
@@ -3931,4 +3931,3 @@ class _Table(FigureFactory):
                         font=dict(color=font_color),
                         showarrow=False))
         return annotations
-
