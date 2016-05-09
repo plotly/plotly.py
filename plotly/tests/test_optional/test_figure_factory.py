@@ -149,6 +149,53 @@ class TestDistplot(TestCase):
                                    'yaxis': 'y1'}
         self.assertEqual(dp['data'][1], expected_dp_data_hist_2)
 
+        def test_distplot_binsize_array(self):
+            hist1_x = [0.8, 1.2, 0.2, 0.6, 1.6,
+                       -0.9, -0.07, 1.95, 0.9, -0.2,
+                       -0.5, 0.3, 0.4, -0.37, 0.6]
+            hist2_x = [0.8, 1.5, 1.5, 0.6, 0.59,
+                       1.0, 0.8, 1.7, 0.5, 0.8,
+                       -0.3, 1.2, 0.56, 0.3, 2.2]
+
+            hist_data = [hist1_x] + [hist2_x]
+            group_labels = ['2012', '2013']
+
+            dp = tls.FigureFactory.create_distplot(hist_data, group_labels,
+                                                   show_rug=False,
+                                                   bin_size=[.2, .2])
+
+            expected_dp_data_hist_1 = {'autobinx': False,
+                                       'histnorm': 'probability',
+                                       'legendgroup': '2012',
+                                       'marker': {'color': 'rgb(31, 119, 180)'},
+                                       'name': '2012',
+                                       'opacity': 0.7,
+                                       'type': 'histogram',
+                                       'x': [0.8, 1.2, 0.2, 0.6, 1.6, -0.9, -0.07,
+                                             1.95, 0.9, -0.2, -0.5, 0.3, 0.4,
+                                             -0.37, 0.6],
+                                       'xaxis': 'x1',
+                                       'xbins': {'end': 1.95, 'size': 0.2,
+                                                 'start': -0.9},
+                                       'yaxis': 'y1'}
+            self.assertEqual(dp['data'][0], expected_dp_data_hist_1)
+
+            expected_dp_data_hist_2 = {'autobinx': False,
+                                       'histnorm': 'probability',
+                                       'legendgroup': '2013',
+                                       'marker': {'color': 'rgb(255, 127, 14)'},
+                                       'name': '2013',
+                                       'opacity': 0.7,
+                                       'type': 'histogram',
+                                       'x': [0.8, 1.5, 1.5, 0.6, 0.59, 1.0, 0.8,
+                                             1.7, 0.5, 0.8, -0.3, 1.2, 0.56, 0.3,
+                                             2.2],
+                                       'xaxis': 'x1',
+                                       'xbins': {'end': 2.2, 'size': 0.2,
+                                                 'start': -0.3},
+                                       'yaxis': 'y1'}
+            self.assertEqual(dp['data'][1], expected_dp_data_hist_2)
+
 
 class TestStreamline(TestCase):
 
@@ -422,7 +469,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
         self.assert_dict_equal(dendro['layout'], expected_dendro['layout'])
 
     def test_dendrogram_orientation(self):
-        X = np.random.rand(5, 5) 
+        X = np.random.rand(5, 5)
 
         dendro_left = tls.FigureFactory.create_dendrogram(
                        X, orientation='left')
