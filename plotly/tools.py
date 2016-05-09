@@ -2450,8 +2450,11 @@ class FigureFactory(object):
         """
         # TODO: protected until #282
         from plotly.graph_objs import graph_objs
-        FigureFactory._validate_distplot(hist_data, curve_type)    #<--- working on this right now
+        FigureFactory._validate_distplot(hist_data, curve_type)
         FigureFactory._validate_equal_length(hist_data, group_labels)
+
+        if isinstance(bin_size, float):
+            bin_size = [bin_size]
 
         hist = _Distplot(
             hist_data, group_labels, bin_size,
