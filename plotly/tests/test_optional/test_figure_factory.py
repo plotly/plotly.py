@@ -803,11 +803,11 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
                               'title': 'Fun',
                               'width': 500}}
 
+        self.assert_dict_equal(test_trisurf_plot['layout'],
+                               exp_trisurf_plot['layout'])
+
         self.assert_dict_equal(test_trisurf_plot['data'][0],
                                exp_trisurf_plot['data'][0])
 
-        #self.assert_dict_equal(test_trisurf_plot['data'][1],
-        #                       exp_trisurf_plot['data'][1])
-
-        self.assert_dict_equal(test_trisurf_plot['layout'],
-                               exp_trisurf_plot['layout'])
+        self.assert_dict_equal(test_trisurf_plot['data'][1],
+                               exp_trisurf_plot['data'][1])
