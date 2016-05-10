@@ -1600,7 +1600,7 @@ class FigureFactory(object):
             for item in array:
                 Ze.append(item)
 
-        # define the lines to be plotted
+        # define the lines for plotting
         lines = graph_objs.Scatter3d(
             x=Xe, y=Ye, z=Ze, mode='lines',
             line=graph_objs.Line(color='rgb(50, 50, 50)',
