@@ -1562,7 +1562,7 @@ class FigureFactory(object):
         points3D = np.vstack((x, y, z)).T
 
         # vertices of the surface triangles
-        tri_vertices = map(lambda index: points3D[index], simplices)
+        tri_vertices = list(map(lambda index: points3D[index], simplices))
         # mean values of z-coordinates of triangle vertices
         zmean = [np.mean(tri[:, 2]) for tri in tri_vertices]
         min_zmean = np.min(zmean)
