@@ -22,6 +22,11 @@ from plotly import session
 from plotly.files import (CONFIG_FILE, CREDENTIALS_FILE, FILE_CONTENT,
                           GRAPH_REFERENCE_FILE, check_file_permissions)
 
+DEFAULT_PLOTLY_COLORS = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
+                         'rgb(44, 160, 44)', 'rgb(214, 39, 40)',
+                         'rgb(148, 103, 189)', 'rgb(140, 86, 75)',
+                         'rgb(227, 119, 194)', 'rgb(127, 127, 127)',
+                         'rgb(188, 189, 34)', 'rgb(23, 190, 207)']
 
 # Warning format
 def warning_on_one_line(message, category, filename, lineno,
@@ -1425,12 +1430,6 @@ def return_figure_from_figure_or_data(figure_or_data, validate_figure):
 _DEFAULT_INCREASING_COLOR = '#3D9970'  # http://clrs.cc
 _DEFAULT_DECREASING_COLOR = '#FF4136'
 
-DEFAULT_PLOTLY_COLORS = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
-                         'rgb(44, 160, 44)', 'rgb(214, 39, 40)',
-                         'rgb(148, 103, 189)', 'rgb(140, 86, 75)',
-                         'rgb(227, 119, 194)', 'rgb(127, 127, 127)',
-                         'rgb(188, 189, 34)', 'rgb(23, 190, 207)']
-
 DIAG_CHOICES = ['scatter', 'histogram', 'box']
 
 
@@ -1455,6 +1454,11 @@ class FigureFactory(object):
                      diag, size,
                      height, width,
                      title, **kwargs):
+        """
+        Returns fig for scatterplotmatrix without index or theme.
+        Refer to FigureFactory.create_scatterplotmatrix() for docstring.
+        """
+
         from plotly.graph_objs import graph_objs
         dim = len(dataframe)
         fig = make_subplots(rows=dim, cols=dim)
@@ -1527,6 +1531,10 @@ class FigureFactory(object):
                            title,
                            index, index_vals,
                            **kwargs):
+        """
+        Returns fig for scatterplotmatrix with an index and no theme.
+        Refer to FigureFactory.create_scatterplotmatrix() for docstring.
+        """
         from plotly.graph_objs import graph_objs
         dim = len(dataframe)
         fig = make_subplots(rows=dim, cols=dim)
@@ -1690,6 +1698,13 @@ class FigureFactory(object):
     def _scatterplot_theme(dataframe, headers, diag, size, height, width,
                            title, index, index_vals, endpts,
                            palette, **kwargs):
+        """
+        Returns fig for scatterplotmatrix with both index and theme.
+        Refer to FigureFactory.create_scatterplotmatrix() for docstring.
+
+        :raises: (PlotlyError) If palette string is not a Plotly colorscale
+        :raises: (PlotlyError) If palette is not a string or list
+        """
         from plotly.graph_objs import graph_objs
         plotly_scales = {'Greys': ['rgb(0,0,0)', 'rgb(255,255,255)'],
                          'YlGnBu': ['rgb(8,29,88)', 'rgb(255,255,217)'],
@@ -1864,6 +1879,7 @@ class FigureFactory(object):
                         c_indx += 1
                     trace_list.append(unique_index_vals)
                     legend_param += 1
+            #return trace_list
 
             trace_index = 0
             indices = range(1, dim + 1)
@@ -2246,6 +2262,12 @@ class FigureFactory(object):
 
     @staticmethod
     def _validate_index(index_vals):
+        """
+        Validates if a list contains all numbers or all strings.
+
+        :raises: (PlotlyError) If there are any two items in the list whose
+            types differ
+        """
         from numbers import Number
         if isinstance(index_vals[0], Number):
             if not all(isinstance(item, Number) for item in index_vals):
@@ -2263,6 +2285,13 @@ class FigureFactory(object):
 
     @staticmethod
     def _validate_dataframe(array):
+        """
+        Validates if for the lists in a dataframe, they contain all numbers
+            or all strings.
+
+        :raises: (PlotlyError) If there are any two items in any list whose
+            types differ
+        """
         from numbers import Number
         for vector in array:
             if isinstance(vector[0], Number):
@@ -2280,6 +2309,17 @@ class FigureFactory(object):
 
     @staticmethod
     def _validate_scatterplotmatrix(df, index, diag, **kwargs):
+        """
+        Validates basic inputs for FigureFactory.create_scatterplotmatrix()
+
+        :raises: (PlotlyError) If pandas is not imported
+        :raises: (PlotlyError) If pandas dataframe is not inputted
+        :raises: (PlotlyError) If pandas dataframe has <= 1 columns
+        :raises: (PlotlyError) If diagonal plot choice (diag) is not one of
+            the viable options
+        :raises: (PlotlyError) If kwargs contains 'size', 'color' or
+            'colorscale'
+        """
         if _pandas_imported is False:
             raise ImportError("FigureFactory.scatterplotmatrix requires "
                               "a pandas DataFrame.")
@@ -2316,6 +2356,16 @@ class FigureFactory(object):
 
     @staticmethod
     def _endpts_to_intervals(endpts):
+        """
+        Accepts a list or tuple of sequentially increasing numbers and returns
+        a list representation of the mathematical intervals with these numbers
+        as endpoints. For example, [1, 4, 6] returns [[1, 4], [4, 6]]
+
+        :raises: (PlotlyError) If input is not a list or tuple
+        :raises: (PlotlyError) If the input contains a string
+        :raises: (PlotlyError) If any number does not increase after the
+            previous one in the sequence
+        """
         length = len(endpts)
         # Check if endpts is a list or tuple
         if not (isinstance(endpts, (tuple)) or isinstance(endpts, (list))):
@@ -2351,8 +2401,11 @@ class FigureFactory(object):
 
     @staticmethod
     def _convert_to_RGB_255(colors):
-        # convert a list of color tuples in normalized space to
-        # to a list of RGB_255 converted tuples
+        """
+        Takes a list of color tuples where each element is between 0 and 1
+        and returns the same list where each tuple element is normalized to be
+        between 0 and 255
+        """
         colors_255 = []
 
         for color in colors:
@@ -2362,8 +2415,10 @@ class FigureFactory(object):
 
     @staticmethod
     def _n_colors(tuple1, tuple2, n_colors):
-        # Split two color tuples in normalized
-        # space into n_colors # of intermediate color tuples
+        """
+        Accepts two color tuples and returns a list of n_colors colors
+        which form the intermediate points between tuple1 and tuple2
+        """
         diff_0 = float(tuple2[0] - tuple1[0])
         incr_0 = diff_0/(n_colors - 1)
         diff_1 = float(tuple2[1] - tuple1[1])
@@ -2382,6 +2437,10 @@ class FigureFactory(object):
 
     @staticmethod
     def _label_rgb(colors):
+        """
+        Takes a list of two color tuples of the form (a, b, c) and returns the
+        same list with each tuple replaced by a string 'rgb(a, b, c)'
+        """
         colors_label = []
         for color in colors:
             color_label = 'rgb{}'.format(color)
@@ -2391,6 +2450,12 @@ class FigureFactory(object):
 
     @staticmethod
     def _unlabel_rgb(colors):
+        """
+        This function takes a list of two 'rgb(a, b, c)' color strings and
+        returns a list of the color tuples in tuple form without the 'rgb'
+        label. In particular, the output is a list of two tuples of the form
+        (a, b, c)
+        """
         unlabelled_colors = []
         for color in colors:
             str_vals = ''

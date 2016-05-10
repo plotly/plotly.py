@@ -693,11 +693,11 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
                                 df, use_theme=True, index='a',
                                 palette='Blues', endpts=[2, 1])
 
+    """
     def test_scatter_plot_matrix_kwargs(self):
 
         # check if test scatter plot matrix matches with
         # the expected output
-
         df = pd.DataFrame([[2, 'Apple'], [6, 'Pear'],
                           [-15, 'Apple'], [5, 'Pear'],
                           [-2, 'Apple'], [0, 'Apple']],
@@ -733,6 +733,77 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
                        'yaxis1': {'anchor': 'x1',
                                   'domain': [0.0, 1.0],
                                   'title': 'Numbers'}}
+        }
+
+        self.assert_dict_equal(test_scatter_plot_matrix['data'][0],
+                               exp_scatter_plot_matrix['data'][0])
+
+        self.assert_dict_equal(test_scatter_plot_matrix['data'][1],
+                               exp_scatter_plot_matrix['data'][1])
+
+        self.assert_dict_equal(test_scatter_plot_matrix['layout'],
+                               exp_scatter_plot_matrix['layout'])
+    """
+
+    def test_scatter_plot_matrix(self):
+
+        # check if test scatter plot matrix without index or theme matches
+        # with the expected output
+        df = pd.DataFrame([[2, 'Apple'], [6, 'Pear'],
+                          [-15, 'Apple'], [5, 'Pear'],
+                          [-2, 'Apple'], [0, 'Apple']],
+                          columns=['Numbers', 'Fruit'])
+
+        test_scatter_plot_matrix = tls.FigureFactory.create_scatterplotmatrix(
+            df, diag='scatter', height=1000, width=1000, size=13,
+            title='Scatterplot Matrix', use_theme=False
+        )
+
+        exp_scatter_plot_matrix = {
+            'data': [{'marker': {'size': 13},
+                     'mode': 'markers',
+                     'showlegend': False,
+                     'type': 'scatter',
+                     'x': [2, 6, -15, 5, -2, 0],
+                     'xaxis': 'x1',
+                     'y': [2, 6, -15, 5, -2, 0],
+                     'yaxis': 'y1'},
+                    {'marker': {'size': 13},
+                     'mode': 'markers',
+                     'showlegend': False,
+                     'type': 'scatter',
+                     'x': ['Apple', 'Pear', 'Apple', 'Pear', 'Apple', 'Apple'],
+                     'xaxis': 'x2',
+                     'y': [2, 6, -15, 5, -2, 0],
+                     'yaxis': 'y2'},
+                    {'marker': {'size': 13},
+                     'mode': 'markers',
+                     'showlegend': False,
+                     'type': 'scatter',
+                     'x': [2, 6, -15, 5, -2, 0],
+                     'xaxis': 'x3',
+                     'y': ['Apple', 'Pear', 'Apple', 'Pear', 'Apple', 'Apple'],
+                     'yaxis': 'y3'},
+                    {'marker': {'size': 13},
+                     'mode': 'markers',
+                     'showlegend': False,
+                     'type': 'scatter',
+                     'x': ['Apple', 'Pear', 'Apple', 'Pear', 'Apple', 'Apple'],
+                     'xaxis': 'x4',
+                     'y': ['Apple', 'Pear', 'Apple', 'Pear', 'Apple', 'Apple'],
+                     'yaxis': 'y4'}],
+                   'layout': {'height': 1000,
+                    'showlegend': True,
+                    'title': 'Scatterplot Matrix',
+                    'width': 1000,
+                    'xaxis1': {'anchor': 'y1', 'domain': [0.0, 0.45]},
+                    'xaxis2': {'anchor': 'y2', 'domain': [0.55, 1.0]},
+                    'xaxis3': {'anchor': 'y3', 'domain': [0.0, 0.45], 'title': 'Numbers'},
+                    'xaxis4': {'anchor': 'y4', 'domain': [0.55, 1.0], 'title': 'Fruit'},
+                    'yaxis1': {'anchor': 'x1', 'domain': [0.575, 1.0], 'title': 'Numbers'},
+                    'yaxis2': {'anchor': 'x2', 'domain': [0.575, 1.0]},
+                    'yaxis3': {'anchor': 'x3', 'domain': [0.0, 0.425], 'title': 'Fruit'},
+                    'yaxis4': {'anchor': 'x4', 'domain': [0.0, 0.425]}}
         }
 
         self.assert_dict_equal(test_scatter_plot_matrix['data'][0],
