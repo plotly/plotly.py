@@ -1451,21 +1451,24 @@ class FigureFactory(object):
     @staticmethod
     def _unlabel_rgb(colors):
         """
+        Takes rgb colors 'rgb(a, b, c)' and returns the tuples (a, b, c)
+
         This function takes a list of two 'rgb(a, b, c)' color strings and
         returns a list of the color tuples in tuple form without the 'rgb'
         label. In particular, the output is a list of two tuples of the form
         (a, b, c)
+
         """
         unlabelled_colors = []
-        for color in colors:
+        for character in colors:
             str_vals = ''
-            for index in range(len(color)):
+            for index in range(len(character)):
                 try:
-                    float(color[index])
-                    str_vals = str_vals + color[index]
+                    float(character[index])
+                    str_vals = str_vals + character[index]
                 except ValueError:
-                    if (color[index] == ',') or (color[index] == '.'):
-                        str_vals = str_vals + color[index]
+                    if (character[index] == ',') or (character[index] == '.'):
+                        str_vals = str_vals + character[index]
 
             str_vals = str_vals + ','
             numbers = []
@@ -1482,28 +1485,34 @@ class FigureFactory(object):
         return unlabelled_colors
 
     @staticmethod
-    def _find_intermediate_color(tuple1, tuple2, t):
+    def _find_intermediate_color(lowcolor, highcolor, intermed):
         """
-        This function takes two color tuples, where each element is between 0
-        and 1, along with a value 0 < t < 1 and returns a color that is
-        t percent from tuple1 to tuple2, where t = 1 is 100 percent
-        """
-        diff_0 = float(tuple2[0] - tuple1[0])
-        diff_1 = float(tuple2[1] - tuple1[1])
-        diff_2 = float(tuple2[2] - tuple1[2])
+        Returns the color at a given distance between two colors
 
-        new_tuple = (tuple1[0] + t*diff_0,
-                     tuple1[1] + t*diff_1,
-                     tuple1[2] + t*diff_2)
+        This function takes two color tuples, where each element is between 0
+        and 1, along with a value 0 < intermed < 1 and returns a color that is
+        intermed-percent from lowcolor to highcolor
+
+        """
+        diff_0 = float(highcolor[0] - lowcolor[0])
+        diff_1 = float(highcolor[1] - lowcolor[1])
+        diff_2 = float(highcolor[2] - lowcolor[2])
+
+        new_tuple = (lowcolor[0] + intermed*diff_0,
+                     lowcolor[1] + intermed*diff_1,
+                     lowcolor[2] + intermed*diff_2)
 
         return new_tuple
 
     @staticmethod
     def _unconvert_from_RGB_255(colors):
         """
+        Return a tuple where each element gets divided by 255
+
         Takes a list of color tuples where each element is between 0 and 255
         and returns the same list where each tuple element is normalized to be
         between 0 and 1
+
         """
         un_rgb_colors = []
         for color in colors:
@@ -1518,10 +1527,13 @@ class FigureFactory(object):
     @staticmethod
     def _map_z2color(zval, colormap, vmin, vmax):
         """
+        Returns the color corresponding zval's place between vmin and vmax
+
         This function takes a z value (zval) along with a colormap and a
         minimum (vmin) and maximum (vmax) range of possible z values for the
         given parametrized surface. It returns an rgb color based on the
         relative position of zval between vmin and vmax
+
         """
         if vmin >= vmax:
             raise exceptions.PlotlyError("Incorrect relation between vmin "
@@ -1542,14 +1554,13 @@ class FigureFactory(object):
     @staticmethod
     def _tri_indices(simplices):
         """
-        Returns a triplet of 3 lists such that each list contains the kth
-        index of each triplet of the simplicies, where k is 0, 1 and 2
+        Returns a triplet of lists containing simplex coordinates
         """
         return ([triplet[c] for triplet in simplices] for c in range(3))
 
     @staticmethod
     def _trisurf(x, y, z, simplices, colormap=None,
-                 plot_edges=None, Xe=None, Ye=None, Ze=None):
+                 plot_edges=None, x_edge=None, y_edge=None, z_edge=None):
         """
         Refer to FigureFactory.create_trisurf() for docstring
         """
@@ -1569,40 +1580,40 @@ class FigureFactory(object):
         max_zmean = np.max(zmean)
         facecolor = ([FigureFactory._map_z2color(zz,  colormap, min_zmean,
                       max_zmean) for zz in zmean])
-        I, J, K = FigureFactory._tri_indices(simplices)
+        ii, jj, kk = FigureFactory._tri_indices(simplices)
 
         triangles = graph_objs.Mesh3d(x=x, y=y, z=z, facecolor=facecolor,
-                                      i=I, j=J, k=K, name='')
+                                      i=ii, j=jj, k=kk, name='')
 
         if plot_edges is None:  # the triangle sides are not plotted
             return graph_objs.Data([triangles])
 
-        # define the lists Xe, Ye, Ze, of x, y, resp z coordinates of
-        # edge end points for each triangle
+        # define the lists x_edge, y_edge and z_edge, of x, y, resp z
+        # coordinates of edge end points for each triangle
         # None separates data corresponding to two consecutive triangles
         lists_coord = ([[[T[k % 3][c] for k in range(4)]+[None]
                         for T in tri_vertices] for c in range(3)])
-        if Xe is None:
-            Xe = []
+        if x_edge is None:
+            x_edge = []
         for array in lists_coord[0]:
             for item in array:
-                Xe.append(item)
+                x_edge.append(item)
 
-        if Ye is None:
-            Ye = []
+        if y_edge is None:
+            y_edge = []
         for array in lists_coord[1]:
             for item in array:
-                Ye.append(item)
+                y_edge.append(item)
 
-        if Ze is None:
-            Ze = []
+        if z_edge is None:
+            z_edge = []
         for array in lists_coord[2]:
             for item in array:
-                Ze.append(item)
+                z_edge.append(item)
 
         # define the lines for plotting
         lines = graph_objs.Scatter3d(
-            x=Xe, y=Ye, z=Ze, mode='lines',
+            x=x_edge, y=y_edge, z=z_edge, mode='lines',
             line=graph_objs.Line(color='rgb(50, 50, 50)',
                                  width=1.5)
         )
@@ -1773,13 +1784,12 @@ class FigureFactory(object):
 
         if isinstance(colormap, str):
             if colormap not in plotly_scales:
+                scale_keys = list(plotly_scales.keys())
                 raise exceptions.PlotlyError("You must pick a valid "
                                              "plotly colorscale "
-                                             "name from {}"
-                                             .format(
-                                                 list(plotly_scales.keys())
-                                             )
-                                             )
+                                             "name from "
+                                             "{}".format(scale_keys))
+
             colormap = [plotly_scales[colormap][0],
                         plotly_scales[colormap][1]]
             colormap = FigureFactory._unlabel_rgb(colormap)
