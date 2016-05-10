@@ -1561,7 +1561,7 @@ class FigureFactory(object):
         from plotly.graph_objs import graph_objs
         points3D = np.vstack((x, y, z)).T
 
-        # list of the surface triangles vertices
+        # vertices of the surface triangles
         tri_vertices = list(map(lambda index: points3D[index], simplices))
         # mean values of z-coordinates of triangle vertices
         zmean = [np.mean(tri[:, 2]) for tri in tri_vertices]
