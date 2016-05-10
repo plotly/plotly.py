@@ -1561,8 +1561,8 @@ class FigureFactory(object):
         from plotly.graph_objs import graph_objs
         points3D = np.vstack((x, y, z)).T
 
-        # vertices of the surface triangles
-        tri_vertices = map(lambda index: points3D[index], simplices)
+        # list of the surface triangles vertices
+        tri_vertices = list(map(lambda index: points3D[index], simplices))
         # mean values of z-coordinates of triangle vertices
         zmean = [np.mean(tri[:, 2]) for tri in tri_vertices]
         min_zmean = np.min(zmean)
@@ -1599,9 +1599,6 @@ class FigureFactory(object):
         for array in lists_coord[2]:
             for item in array:
                 Ze.append(item)
-
-        #Xe, Ye, Ze = ([reduce(lambda x, y: x+y,
-        #               lists_coord[k]) for k in range(3)])
 
         # define the lines to be plotted
         lines = graph_objs.Scatter3d(
