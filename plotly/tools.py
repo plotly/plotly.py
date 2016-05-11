@@ -1559,7 +1559,7 @@ class FigureFactory(object):
         return ([triplet[c] for triplet in simplices] for c in range(3))
 
     @staticmethod
-    def _trisurf(x, y, z, simplices, colormap=None,
+    def _trisurf(x, y, z, simplices, colormap=None, dist_func=None,
                  plot_edges=None, x_edge=None, y_edge=None, z_edge=None):
         """
         Refer to FigureFactory.create_trisurf() for docstring
@@ -1574,12 +1574,27 @@ class FigureFactory(object):
 
         # vertices of the surface triangles
         tri_vertices = list(map(lambda index: points3D[index], simplices))
-        # mean values of z-coordinates of triangle vertices
-        zmean = [np.mean(tri[:, 2]) for tri in tri_vertices]
-        min_zmean = np.min(zmean)
-        max_zmean = np.max(zmean)
-        facecolor = ([FigureFactory._map_z2color(zz,  colormap, min_zmean,
-                      max_zmean) for zz in zmean])
+
+        if not dist_func:
+            # mean values of z-coordinates of triangle vertices
+            mean_dists = [np.mean(tri[:, 2]) for tri in tri_vertices]
+        else:
+            # apply user inputted function to calculate
+            # custom coloring for triangle vertices
+            mean_dists = []
+
+            for triangle in tri_vertices:
+                dists = []
+                for vertex in triangle:
+                    dist = dist_func(vertex[0], vertex[1], vertex[2])
+                    dists.append(dist)
+
+                mean_dists.append(np.mean(dists))
+
+        min_mean_dists = np.min(mean_dists)
+        max_mean_dists = np.max(mean_dists)
+        facecolor = ([FigureFactory._map_z2color(zz, colormap, min_mean_dists,
+                      max_mean_dists) for zz in mean_dists])
         ii, jj, kk = FigureFactory._tri_indices(simplices)
 
         triangles = graph_objs.Mesh3d(x=x, y=y, z=z, facecolor=facecolor,
@@ -1622,7 +1637,7 @@ class FigureFactory(object):
 
     @staticmethod
     def create_trisurf(x, y, z, simplices, colormap=None,
-                       title='Trisurf Plot',
+                       dist_func=None, title='Trisurf Plot',
                        showbackground=True,
                        backgroundcolor='rgb(230, 230, 230)',
                        gridcolor='rgb(255, 255, 255)',
@@ -1642,6 +1657,11 @@ class FigureFactory(object):
             containing 2 triplets. These triplets must be of the form (a,b,c)
             or 'rgb(x,y,z)' where a,b,c belong to the interval [0,1] and x,y,z
             belong to [0,255]
+        :param (function) dist_func: The function that determines how the
+            coloring of the surface changes. It takes 3 arguments x, y, z and
+            must return a formula of these variables which can include numpy
+            functions (eg. np.sqrt). If set to None, color will only depend on
+            the z axis.
         :param (str) title: title of the plot
         :param (bool) showbackground: makes background in plot visible
         :param (str) backgroundcolor: color of background. Takes a string of
@@ -1755,6 +1775,44 @@ class FigureFactory(object):
         # Plot the data
         py.iplot(fig1, filename='Trisurf Plot - Mobius Band')
         ```
+
+        Example 4: Using a Custom Colormap Function with Light Cone
+        ```
+        # Necessary Imports for Trisurf
+        import numpy as np
+        from scipy.spatial import Delaunay
+
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+        from plotly.graph_objs import graph_objs
+
+        # Make data for plot
+        u=np.linspace(-np.pi, np.pi, 30)
+        v=np.linspace(-np.pi, np.pi, 30)
+        u,v=np.meshgrid(u,v)
+        u=u.flatten()
+        v=v.flatten()
+
+        x = u
+        y = u*np.cos(v)
+        z = u*np.sin(v)
+
+        points2D = np.vstack([u,v]).T
+        tri = Delaunay(points2D)
+        simplices = tri.simplices
+
+        # Define distance function
+        def dist_origin(x, y, z):
+            return np.sqrt((1.0 * x)**2 + (1.0 * y)**2 + (1.0 * z)**2)
+
+        # Create a figure
+        fig1 = FF.create_trisurf(x=x, y=y, z=z,
+                                 colormap="Blues",
+                                 simplices=simplices,
+                                 dist_func=dist_origin)
+        # Plot the data
+        py.iplot(fig1, filename='Trisurf Plot - Custom Coloring')
+        ```
         """
         from plotly.graph_objs import graph_objs
         plotly_scales = {'Greys': ['rgb(0,0,0)', 'rgb(255,255,255)'],
@@ -1826,6 +1884,7 @@ class FigureFactory(object):
                                                          "exceed 1.0.")
 
         data1 = FigureFactory._trisurf(x, y, z, simplices,
+                                       dist_func=dist_func,
                                        colormap=colormap,
                                        plot_edges=True)
         axis = dict(
