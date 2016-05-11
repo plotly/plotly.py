@@ -796,7 +796,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
                           columns=['Numbers', 'Fruit'])
 
         test_scatter_plot_matrix = tls.FigureFactory.create_scatterplotmatrix(
-            df, index='Fruit', endpts=[-10, -1], diag='scatter',
+            df, index='Fruit', endpts=[-10, -1], diag='box',
             height=1000, width=1000, size=13, title='Scatterplot Matrix',
             use_theme=True, palette='YlOrRd', marker=dict(symbol=136)
         )
@@ -829,32 +829,26 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
         """
 
         exp_scatter_plot_matrix = {
-            'data': [{'marker': {'color': 'rgb(128.0, 0.0, 38.0)',
-                      'size': 13,
-                      'symbol': 136},
-                     'mode': 'markers',
-                     'name': 'Apple',
-                     'showlegend': False,
-                     'type': 'scatter',
-                     'x': [2, -15, -2, 0],
-                     'xaxis': 'x1',
-                     'y': [2, -15, -2, 0],
-                     'yaxis': 'y1'},
-                    {'marker': {'color': 'rgb(255.0, 255.0, 204.0)', 'size': 13, 'symbol': 136},
-                     'mode': 'markers',
-                     'name': 'Pear',
-                     'showlegend': False,
-                     'type': 'scatter',
-                     'x': [6, 5],
-                     'xaxis': 'x1',
-                     'y': [6, 5],
-                     'yaxis': 'y1'}],
-                   'layout': {'height': 1000,
-                    'showlegend': True,
-                    'title': 'Scatterplot Matrix',
-                    'width': 1000,
-                    'xaxis1': {'anchor': 'y1', 'domain': [0.0, 1.0], 'title': 'Numbers'},
-                    'yaxis1': {'anchor': 'x1', 'domain': [0.0, 1.0], 'title': 'Numbers'}}
+            'data': [{'marker': {'color': 'rgb(128.0, 0.0, 38.0)'},
+               'name': None,
+               'showlegend': False,
+               'type': 'box',
+               'xaxis': 'x1',
+               'y': [2, -15, -2, 0],
+               'yaxis': 'y1'},
+              {'marker': {'color': 'rgb(255.0, 255.0, 204.0)'},
+               'name': None,
+               'showlegend': False,
+               'type': 'box',
+               'xaxis': 'x1',
+               'y': [6, 5],
+               'yaxis': 'y1'}],
+             'layout': {'height': 1000,
+              'showlegend': True,
+              'title': 'Scatterplot Matrix',
+              'width': 1000,
+              'xaxis1': {'anchor': 'y1', 'domain': [0.0, 1.0], 'title': 'Numbers'},
+              'yaxis1': {'anchor': 'x1', 'domain': [0.0, 1.0], 'title': 'Numbers'}}
         }
 
         self.assert_dict_equal(test_scatter_plot_matrix['data'][0],
