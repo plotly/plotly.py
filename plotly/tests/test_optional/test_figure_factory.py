@@ -796,7 +796,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
                           columns=['Numbers', 'Fruit'])
 
         test_scatter_plot_matrix = tls.FigureFactory.create_scatterplotmatrix(
-            df, index='Fruit', endpts=[-10, -1], diag='box',
+            df, index='Fruit', endpts=[-10, -1], diag='histogram',
             height=1000, width=1000, size=13, title='Scatterplot Matrix',
             use_theme=True, palette='YlOrRd', marker=dict(symbol=136)
         )
@@ -830,20 +830,19 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
 
         exp_scatter_plot_matrix = {
             'data': [{'marker': {'color': 'rgb(128.0, 0.0, 38.0)'},
-               'name': None,
                'showlegend': False,
-               'type': 'box',
+               'type': 'histogram',
+               'x': [2, -15, -2, 0],
                'xaxis': 'x1',
-               'y': [2, -15, -2, 0],
                'yaxis': 'y1'},
               {'marker': {'color': 'rgb(255.0, 255.0, 204.0)'},
-               'name': None,
                'showlegend': False,
-               'type': 'box',
+               'type': 'histogram',
+               'x': [6, 5],
                'xaxis': 'x1',
-               'y': [6, 5],
                'yaxis': 'y1'}],
-             'layout': {'height': 1000,
+             'layout': {'barmode': 'stack',
+              'height': 1000,
               'showlegend': True,
               'title': 'Scatterplot Matrix',
               'width': 1000,
