@@ -1455,8 +1455,10 @@ class FigureFactory(object):
                      height, width,
                      title, **kwargs):
         """
-        Returns fig for scatterplotmatrix without index or theme.
         Refer to FigureFactory.create_scatterplotmatrix() for docstring.
+
+        Returns fig for scatterplotmatrix without index or theme.
+
         """
 
         from plotly.graph_objs import graph_objs
@@ -1532,8 +1534,10 @@ class FigureFactory(object):
                            index, index_vals,
                            **kwargs):
         """
-        Returns fig for scatterplotmatrix with an index and no theme.
         Refer to FigureFactory.create_scatterplotmatrix() for docstring.
+
+        Returns fig for scatterplotmatrix with an index and no theme.
+
         """
         from plotly.graph_objs import graph_objs
         dim = len(dataframe)
@@ -1699,8 +1703,9 @@ class FigureFactory(object):
                            title, index, index_vals, endpts,
                            palette, **kwargs):
         """
-        Returns fig for scatterplotmatrix with both index and theme.
         Refer to FigureFactory.create_scatterplotmatrix() for docstring.
+
+        Returns fig for scatterplotmatrix with both index and theme.
 
         :raises: (PlotlyError) If palette string is not a Plotly colorscale
         :raises: (PlotlyError) If palette is not a string or list
@@ -2263,7 +2268,7 @@ class FigureFactory(object):
     @staticmethod
     def _validate_index(index_vals):
         """
-        Validates if a list contains all numbers or all strings.
+        Validates if a list contains all numbers or all strings
 
         :raises: (PlotlyError) If there are any two items in the list whose
             types differ
@@ -2286,8 +2291,7 @@ class FigureFactory(object):
     @staticmethod
     def _validate_dataframe(array):
         """
-        Validates if for the lists in a dataframe, they contain all numbers
-            or all strings.
+        Validates all strings or numbers in each dataframe column
 
         :raises: (PlotlyError) If there are any two items in any list whose
             types differ
@@ -2357,6 +2361,8 @@ class FigureFactory(object):
     @staticmethod
     def _endpts_to_intervals(endpts):
         """
+        Returns a list of intervals for categorical colormaps
+
         Accepts a list or tuple of sequentially increasing numbers and returns
         a list representation of the mathematical intervals with these numbers
         as endpoints. For example, [1, 4, 6] returns [[1, 4], [4, 6]]
@@ -2402,6 +2408,8 @@ class FigureFactory(object):
     @staticmethod
     def _convert_to_RGB_255(colors):
         """
+        Return a list of tuples where each element gets multiplied by 255
+
         Takes a list of color tuples where each element is between 0 and 1
         and returns the same list where each tuple element is normalized to be
         between 0 and 255
@@ -2414,23 +2422,26 @@ class FigureFactory(object):
         return colors_255
 
     @staticmethod
-    def _n_colors(tuple1, tuple2, n_colors):
+    def _n_colors(lowcolor, highcolor, n_colors):
         """
+        Splits a low and high color into a list of #n_colors colors
+
         Accepts two color tuples and returns a list of n_colors colors
-        which form the intermediate points between tuple1 and tuple2
+        which form the intermediate colors between lowcolor and highcolor
+
         """
-        diff_0 = float(tuple2[0] - tuple1[0])
+        diff_0 = float(highcolor[0] - lowcolor[0])
         incr_0 = diff_0/(n_colors - 1)
-        diff_1 = float(tuple2[1] - tuple1[1])
+        diff_1 = float(highcolor[1] - lowcolor[1])
         incr_1 = diff_1/(n_colors - 1)
-        diff_2 = float(tuple2[2] - tuple1[2])
+        diff_2 = float(highcolor[2] - lowcolor[2])
         incr_2 = diff_2/(n_colors - 1)
         color_tuples = []
 
         for index in range(n_colors):
-            new_tuple = (tuple1[0] + (index * incr_0),
-                         tuple1[1] + (index * incr_1),
-                         tuple1[2] + (index * incr_2))
+            new_tuple = (lowcolor[0] + (index * incr_0),
+                         lowcolor[1] + (index * incr_1),
+                         lowcolor[2] + (index * incr_2))
             color_tuples.append(new_tuple)
 
         return color_tuples
@@ -2438,8 +2449,11 @@ class FigureFactory(object):
     @staticmethod
     def _label_rgb(colors):
         """
+        Takes colors (a, b, c) and returns tuples 'rgb(a, b, c)'
+
         Takes a list of two color tuples of the form (a, b, c) and returns the
         same list with each tuple replaced by a string 'rgb(a, b, c)'
+
         """
         colors_label = []
         for color in colors:
@@ -2451,21 +2465,24 @@ class FigureFactory(object):
     @staticmethod
     def _unlabel_rgb(colors):
         """
+        Takes rgb colors 'rgb(a, b, c)' and returns the tuples (a, b, c)
+
         This function takes a list of two 'rgb(a, b, c)' color strings and
         returns a list of the color tuples in tuple form without the 'rgb'
         label. In particular, the output is a list of two tuples of the form
         (a, b, c)
+
         """
         unlabelled_colors = []
-        for color in colors:
+        for character in colors:
             str_vals = ''
-            for index in range(len(color)):
+            for index in range(len(character)):
                 try:
-                    float(color[index])
-                    str_vals = str_vals + color[index]
+                    float(character[index])
+                    str_vals = str_vals + character[index]
                 except ValueError:
-                    if (color[index] == ',') or (color[index] == '.'):
-                        str_vals = str_vals + color[index]
+                    if (character[index] == ',') or (character[index] == '.'):
+                        str_vals = str_vals + character[index]
 
             str_vals = str_vals + ','
             numbers = []
