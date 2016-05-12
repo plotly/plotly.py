@@ -4,6 +4,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.9.11] - 2016-05-02
+### Added
+- The FigureFactory can now create scatter plot matrices with `.create_scatterplotmatrix`. Check it out with:
+```
+import plotly.tools as tls
+help(tls.FigureFactory.create_scatterplotmatrix)
+```
+
 ## [1.9.10] - 2016-04-27
 ### Updated
 - Updated plotly.min.js so the offline mode is using plotly.js v1.10.0

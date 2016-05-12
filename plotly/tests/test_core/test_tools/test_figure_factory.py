@@ -1143,4 +1143,3 @@ class TestTable(TestCase):
 #                                 "FigureFactory.create_distplot requires scipy",
 #                                 tls.FigureFactory.create_distplot,
 #                                 hist_data, group_labels)
-
