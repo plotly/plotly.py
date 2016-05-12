@@ -880,7 +880,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
                           columns=['Numbers', 'Fruit'])
 
         test_scatter_plot_matrix = tls.FigureFactory.create_scatterplotmatrix(
-            df, diag='scatter', height=1000, width=1000, size=13,
+            df=df, diag='scatter', height=1000, width=1000, size=13,
             title='Scatterplot Matrix', use_theme=False
         )
 
@@ -1012,4 +1012,3 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
 
         self.assert_dict_equal(test_scatter_plot_matrix['layout'],
                                exp_scatter_plot_matrix['layout'])
-

@@ -1875,6 +1875,7 @@ class FigureFactory(object):
         )
         return graph_objs.Figure(data=data1, layout=layout)
 
+    @staticmethod
     def _scatterplot(dataframe, headers,
                      diag, size,
                      height, width,
