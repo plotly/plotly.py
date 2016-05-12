@@ -1431,6 +1431,8 @@ def return_figure_from_figure_or_data(figure_or_data, validate_figure):
 _DEFAULT_INCREASING_COLOR = '#3D9970'  # http://clrs.cc
 _DEFAULT_DECREASING_COLOR = '#FF4136'
 
+DIAG_CHOICES = ['scatter', 'histogram', 'box']
+
 
 class FigureFactory(object):
     """
@@ -1447,42 +1449,6 @@ class FigureFactory(object):
     FigureFactory.create_annotated_heatmap, or FigureFactory.create_table for
     more information and examples of a specific chart type.
     """
-
-    @staticmethod
-    def _unlabel_rgb(colors):
-        """
-        Takes rgb colors 'rgb(a, b, c)' and returns the tuples (a, b, c)
-
-        This function takes a list of two 'rgb(a, b, c)' color strings and
-        returns a list of the color tuples in tuple form without the 'rgb'
-        label. In particular, the output is a list of two tuples of the form
-        (a, b, c)
-
-        """
-        unlabelled_colors = []
-        for character in colors:
-            str_vals = ''
-            for index in range(len(character)):
-                try:
-                    float(character[index])
-                    str_vals = str_vals + character[index]
-                except ValueError:
-                    if (character[index] == ',') or (character[index] == '.'):
-                        str_vals = str_vals + character[index]
-
-            str_vals = str_vals + ','
-            numbers = []
-            str_num = ''
-            for char in str_vals:
-                if char != ',':
-                    str_num = str_num + char
-                else:
-                    numbers.append(float(str_num))
-                    str_num = ''
-            unlabelled_tuple = (numbers[0], numbers[1], numbers[2])
-            unlabelled_colors.append(unlabelled_tuple)
-
-        return unlabelled_colors
 
     @staticmethod
     def _find_intermediate_color(lowcolor, highcolor, intermed):
@@ -1908,6 +1874,1258 @@ class FigureFactory(object):
                 )
         )
         return graph_objs.Figure(data=data1, layout=layout)
+
+    def _scatterplot(dataframe, headers,
+                     diag, size,
+                     height, width,
+                     title, **kwargs):
+        """
+        Refer to FigureFactory.create_scatterplotmatrix() for docstring.
+
+        Returns fig for scatterplotmatrix without index or theme.
+
+        """
+
+        from plotly.graph_objs import graph_objs
+        dim = len(dataframe)
+        fig = make_subplots(rows=dim, cols=dim)
+        trace_list = []
+        # Insert traces into trace_list
+        for listy in dataframe:
+            for listx in dataframe:
+                if (listx == listy) and (diag == 'histogram'):
+                    trace = graph_objs.Histogram(
+                        x=listx,
+                        showlegend=False
+                    )
+                elif (listx == listy) and (diag == 'box'):
+                    trace = graph_objs.Box(
+                        y=listx,
+                        name=None,
+                        showlegend=False
+                    )
+                else:
+                    if 'marker' in kwargs:
+                        kwargs['marker']['size'] = size
+                        trace = graph_objs.Scatter(
+                            x=listx,
+                            y=listy,
+                            mode='markers',
+                            showlegend=False,
+                            **kwargs
+                        )
+                        trace_list.append(trace)
+                    else:
+                        trace = graph_objs.Scatter(
+                            x=listx,
+                            y=listy,
+                            mode='markers',
+                            marker=dict(
+                                size=size),
+                            showlegend=False,
+                            **kwargs
+                        )
+                trace_list.append(trace)
+
+        trace_index = 0
+        indices = range(1, dim + 1)
+        for y_index in indices:
+            for x_index in indices:
+                fig.append_trace(trace_list[trace_index],
+                                 y_index,
+                                 x_index)
+                trace_index += 1
+
+        # Insert headers into the figure
+        for j in range(dim):
+            xaxis_key = 'xaxis{}'.format((dim * dim) - dim + 1 + j)
+            fig['layout'][xaxis_key].update(title=headers[j])
+        for j in range(dim):
+            yaxis_key = 'yaxis{}'.format(1 + (dim * j))
+            fig['layout'][yaxis_key].update(title=headers[j])
+
+        fig['layout'].update(
+            height=height, width=width,
+            title=title,
+            showlegend=True
+        )
+        return fig
+
+    @staticmethod
+    def _scatterplot_index(dataframe, headers,
+                           diag, size,
+                           height, width,
+                           title,
+                           index, index_vals,
+                           **kwargs):
+        """
+        Refer to FigureFactory.create_scatterplotmatrix() for docstring.
+
+        Returns fig for scatterplotmatrix with an index and no theme.
+
+        """
+        from plotly.graph_objs import graph_objs
+        dim = len(dataframe)
+        fig = make_subplots(rows=dim, cols=dim)
+        trace_list = []
+
+        legend_param = 0
+        # Work over all permutations of list pairs
+        for listy in dataframe:
+            for listx in dataframe:
+                # create a dictionary for index_vals
+                unique_index_vals = {}
+                for name in index_vals:
+                    if name not in unique_index_vals:
+                        unique_index_vals[name] = []
+
+                c_indx = 0  # color index
+                # Fill all the rest of the names into the dictionary
+                for name in unique_index_vals:
+                    new_listx = []
+                    new_listy = []
+
+                    for j in range(len(index_vals)):
+                        if index_vals[j] == name:
+                            new_listx.append(listx[j])
+                            new_listy.append(listy[j])
+
+                    # Generate trace with VISIBLE icon
+                    if legend_param == 1:
+                        if (listx == listy) and (diag == 'histogram'):
+                            trace = graph_objs.Histogram(
+                                x=new_listx,
+                                marker=dict(
+                                    color=DEFAULT_PLOTLY_COLORS[c_indx]),
+                                showlegend=True
+                            )
+                        elif (listx == listy) and (diag == 'box'):
+                            trace = graph_objs.Box(
+                                y=new_listx,
+                                name=None,
+                                marker=dict(
+                                    color=DEFAULT_PLOTLY_COLORS[c_indx]),
+                                showlegend=True
+                            )
+                        else:
+                            if 'marker' in kwargs:
+                                kwargs['marker']['size'] = size
+                                (kwargs['marker']
+                                    ['color']) = DEFAULT_PLOTLY_COLORS[c_indx]
+                                trace = graph_objs.Scatter(
+                                    x=new_listx,
+                                    y=new_listy,
+                                    mode='markers',
+                                    name=name,
+                                    showlegend=True,
+                                    **kwargs
+                                )
+                            else:
+                                trace = graph_objs.Scatter(
+                                    x=new_listx,
+                                    y=new_listy,
+                                    mode='markers',
+                                    name=name,
+                                    marker=dict(
+                                        size=size,
+                                        color=DEFAULT_PLOTLY_COLORS[c_indx]),
+                                    showlegend=True,
+                                    **kwargs
+                                )
+                    # Generate trace with INVISIBLE icon
+                    else:
+                        if (listx == listy) and (diag == 'histogram'):
+                            trace = graph_objs.Histogram(
+                                x=new_listx,
+                                marker=dict(
+                                    color=DEFAULT_PLOTLY_COLORS[c_indx]),
+                                showlegend=False
+                            )
+                        elif (listx == listy) and (diag == 'box'):
+                            trace = graph_objs.Box(
+                                y=new_listx,
+                                name=None,
+                                marker=dict(
+                                    color=DEFAULT_PLOTLY_COLORS[c_indx]),
+                                showlegend=False
+                            )
+                        else:
+                            if 'marker' in kwargs:
+                                kwargs['marker']['size'] = size
+                                (kwargs['marker']
+                                    ['color']) = DEFAULT_PLOTLY_COLORS[c_indx]
+                                trace = graph_objs.Scatter(
+                                    x=new_listx,
+                                    y=new_listy,
+                                    mode='markers',
+                                    name=name,
+                                    showlegend=False,
+                                    **kwargs
+                                )
+                            else:
+                                trace = graph_objs.Scatter(
+                                    x=new_listx,
+                                    y=new_listy,
+                                    mode='markers',
+                                    name=name,
+                                    marker=dict(
+                                        size=size,
+                                        color=DEFAULT_PLOTLY_COLORS[c_indx]),
+                                    showlegend=False,
+                                    **kwargs
+                                )
+                    # Push the trace into dictionary
+                    unique_index_vals[name] = trace
+                    if c_indx >= (len(DEFAULT_PLOTLY_COLORS) - 1):
+                        c_indx = -1
+                    c_indx += 1
+                trace_list.append(unique_index_vals)
+                legend_param += 1
+
+        trace_index = 0
+        indices = range(1, dim + 1)
+        for y_index in indices:
+            for x_index in indices:
+                for name in trace_list[trace_index]:
+                    fig.append_trace(
+                        trace_list[trace_index][name],
+                        y_index,
+                        x_index)
+                trace_index += 1
+
+        # Insert headers into the figure
+        for j in range(dim):
+            xaxis_key = 'xaxis{}'.format((dim * dim) - dim + 1 + j)
+            fig['layout'][xaxis_key].update(title=headers[j])
+        for j in range(dim):
+            yaxis_key = 'yaxis{}'.format(1 + (dim * j))
+            fig['layout'][yaxis_key].update(title=headers[j])
+
+        if diag == 'histogram':
+            fig['layout'].update(
+                height=height, width=width,
+                title=title,
+                showlegend=True,
+                barmode="stack")
+            return fig
+
+        elif diag == 'box':
+            fig['layout'].update(
+                height=height, width=width,
+                title=title,
+                showlegend=True)
+            return fig
+
+        else:
+            fig['layout'].update(
+                height=height, width=width,
+                title=title,
+                showlegend=True)
+            return fig
+
+    @staticmethod
+    def _scatterplot_theme(dataframe, headers, diag, size, height, width,
+                           title, index, index_vals, endpts,
+                           palette, **kwargs):
+        """
+        Refer to FigureFactory.create_scatterplotmatrix() for docstring.
+
+        Returns fig for scatterplotmatrix with both index and theme.
+
+        :raises: (PlotlyError) If palette string is not a Plotly colorscale
+        :raises: (PlotlyError) If palette is not a string or list
+        """
+        from plotly.graph_objs import graph_objs
+        plotly_scales = {'Greys': ['rgb(0,0,0)', 'rgb(255,255,255)'],
+                         'YlGnBu': ['rgb(8,29,88)', 'rgb(255,255,217)'],
+                         'Greens': ['rgb(0,68,27)', 'rgb(247,252,245)'],
+                         'YlOrRd': ['rgb(128,0,38)', 'rgb(255,255,204)'],
+                         'Bluered': ['rgb(0,0,255)', 'rgb(255,0,0)'],
+                         'RdBu': ['rgb(5,10,172)', 'rgb(178,10,28)'],
+                         'Reds': ['rgb(220,220,220)', 'rgb(178,10,28)'],
+                         'Blues': ['rgb(5,10,172)', 'rgb(220,220,220)'],
+                         'Picnic': ['rgb(0,0,255)', 'rgb(255,0,0)'],
+                         'Rainbow': ['rgb(150,0,90)', 'rgb(255,0,0)'],
+                         'Portland': ['rgb(12,51,131)', 'rgb(217,30,30)'],
+                         'Jet': ['rgb(0,0,131)', 'rgb(128,0,0)'],
+                         'Hot': ['rgb(0,0,0)', 'rgb(255,255,255)'],
+                         'Blackbody': ['rgb(0,0,0)', 'rgb(160,200,255)'],
+                         'Earth': ['rgb(0,0,130)', 'rgb(255,255,255)'],
+                         'Electric': ['rgb(0,0,0)', 'rgb(255,250,220)'],
+                         'Viridis': ['rgb(68,1,84)', 'rgb(253,231,37)']}
+
+        # Validate choice of palette
+        if isinstance(palette, str):
+            if palette not in plotly_scales:
+                raise exceptions.PlotlyError("You must pick a valid "
+                                             "plotly colorscale name.")
+        else:
+            if not isinstance(palette, list):
+                raise exceptions.PlotlyError("The items of 'palette' must be "
+                                             "tripets of the form a,b,c or "
+                                             "'rgbx,y,z' where a,b,c belong "
+                                             "to the interval 0,1 and x,y,z "
+                                             "belong to 0,255.")
+
+        # Check if index is made of string values
+        if isinstance(index_vals[0], str):
+            unique_index_vals = []
+            for name in index_vals:
+                if name not in unique_index_vals:
+                    unique_index_vals.append(name)
+            n_colors_len = len(unique_index_vals)
+
+            # Convert palette to list of n RGB tuples
+            if isinstance(palette, str):
+                if palette in plotly_scales:
+                    foo = FigureFactory._unlabel_rgb(plotly_scales[palette])
+                    foo = FigureFactory._n_colors(foo[0],
+                                                  foo[1],
+                                                  n_colors_len)
+                    theme = FigureFactory._label_rgb(foo)
+
+            if isinstance(palette, list):
+                if 'rgb' in palette[0]:
+                    foo = FigureFactory._unlabel_rgb(palette)
+                    foo = FigureFactory._n_colors(foo[0],
+                                                  foo[1],
+                                                  n_colors_len)
+                    theme = FigureFactory._label_rgb(foo)
+                else:
+                    foo = FigureFactory._convert_to_RGB_255(palette)
+                    foo = FigureFactory._n_colors(foo[0],
+                                                  foo[1],
+                                                  n_colors_len)
+                    theme = FigureFactory._label_rgb(foo)
+
+            dim = len(dataframe)
+            fig = make_subplots(rows=dim, cols=dim)
+            trace_list = []
+            legend_param = 0
+            # Work over all permutations of list pairs
+            for listy in dataframe:
+                for listx in dataframe:
+                    # create a dictionary for index_vals
+                    unique_index_vals = {}
+                    for name in index_vals:
+                        if name not in unique_index_vals:
+                            unique_index_vals[name] = []
+
+                    c_indx = 0  # color index
+                    # Fill all the rest of the names into the dictionary
+                    for name in sorted(unique_index_vals.keys()):
+                        new_listx = []
+                        new_listy = []
+                        for j in range(len(index_vals)):
+                            if index_vals[j] == name:
+                                new_listx.append(listx[j])
+                                new_listy.append(listy[j])
+                        # Generate trace with VISIBLE icon
+                        if legend_param == 1:
+                            if (listx == listy) and (diag == 'histogram'):
+                                trace = graph_objs.Histogram(
+                                    x=new_listx,
+                                    marker=dict(
+                                        color=theme[c_indx]),
+                                    showlegend=True
+                                )
+                            elif (listx == listy) and (diag == 'box'):
+                                trace = graph_objs.Box(
+                                    y=new_listx,
+                                    name=None,
+                                    marker=dict(
+                                        color=theme[c_indx]),
+                                    showlegend=True
+                                )
+                            else:
+                                if 'marker' in kwargs:
+                                    kwargs['marker']['size'] = size
+                                    kwargs['marker']['color'] = theme[c_indx]
+                                    trace = graph_objs.Scatter(
+                                        x=new_listx,
+                                        y=new_listy,
+                                        mode='markers',
+                                        name=name,
+                                        showlegend=True,
+                                        **kwargs
+                                    )
+                                else:
+                                    trace = graph_objs.Scatter(
+                                        x=new_listx,
+                                        y=new_listy,
+                                        mode='markers',
+                                        name=name,
+                                        marker=dict(
+                                            size=size,
+                                            color=theme[c_indx]),
+                                        showlegend=True,
+                                        **kwargs
+                                    )
+                        # Generate trace with INVISIBLE icon
+                        else:
+                            if (listx == listy) and (diag == 'histogram'):
+                                trace = graph_objs.Histogram(
+                                    x=new_listx,
+                                    marker=dict(
+                                        color=theme[c_indx]),
+                                    showlegend=False
+                                    )
+                            elif (listx == listy) and (diag == 'box'):
+                                trace = graph_objs.Box(
+                                    y=new_listx,
+                                    name=None,
+                                    marker=dict(
+                                        color=theme[c_indx]),
+                                    showlegend=False
+                                )
+                            else:
+                                if 'marker' in kwargs:
+                                    kwargs['marker']['size'] = size
+                                    kwargs['marker']['color'] = theme[c_indx]
+                                    trace = graph_objs.Scatter(
+                                        x=new_listx,
+                                        y=new_listy,
+                                        mode='markers',
+                                        name=name,
+                                        showlegend=False,
+                                        **kwargs
+                                    )
+                                else:
+                                    trace = graph_objs.Scatter(
+                                        x=new_listx,
+                                        y=new_listy,
+                                        mode='markers',
+                                        name=name,
+                                        marker=dict(
+                                            size=size,
+                                            color=theme[c_indx]),
+                                        showlegend=False,
+                                        **kwargs
+                                    )
+                        # Push the trace into dictionary
+                        unique_index_vals[name] = trace
+                        if c_indx >= (len(theme) - 1):
+                            c_indx = -1
+                        c_indx += 1
+                    trace_list.append(unique_index_vals)
+                    legend_param += 1
+            #return trace_list
+
+            trace_index = 0
+            indices = range(1, dim + 1)
+            for y_index in indices:
+                for x_index in indices:
+                    for name in sorted(trace_list[trace_index].keys()):
+                        fig.append_trace(
+                            trace_list[trace_index][name],
+                            y_index,
+                            x_index)
+                    trace_index += 1
+
+            # Insert headers into the figure
+            for j in range(dim):
+                xaxis_key = 'xaxis{}'.format((dim * dim) - dim + 1 + j)
+                fig['layout'][xaxis_key].update(title=headers[j])
+
+            for j in range(dim):
+                yaxis_key = 'yaxis{}'.format(1 + (dim * j))
+                fig['layout'][yaxis_key].update(title=headers[j])
+
+            if diag == 'histogram':
+                fig['layout'].update(
+                    height=height, width=width,
+                    title=title,
+                    showlegend=True,
+                    barmode='stack')
+                return fig
+
+            elif diag == 'box':
+                fig['layout'].update(
+                    height=height, width=width,
+                    title=title,
+                    showlegend=True)
+                return fig
+
+            else:
+                fig['layout'].update(
+                    height=height, width=width,
+                    title=title,
+                    showlegend=True)
+                return fig
+
+        else:
+            if endpts:
+                intervals = FigureFactory._endpts_to_intervals(endpts)
+
+                # Convert palette to list of n RGB tuples
+                if isinstance(palette, str):
+                    if palette in plotly_scales:
+                        foo = FigureFactory._unlabel_rgb(
+                            plotly_scales[palette]
+                        )
+                        foo = FigureFactory._n_colors(foo[0],
+                                                      foo[1],
+                                                      len(intervals))
+                        theme = FigureFactory._label_rgb(foo)
+
+                if isinstance(palette, list):
+                    if 'rgb' in palette[0]:
+                        foo = FigureFactory._unlabel_rgb(palette)
+                        foo = FigureFactory._n_colors(foo[0],
+                                                      foo[1],
+                                                      len(intervals))
+                        theme = FigureFactory._label_rgb(foo)
+                    else:
+                        foo = FigureFactory._convert_to_RGB_255(palette)
+                        foo = FigureFactory._n_colors(foo[0],
+                                                      foo[1],
+                                                      len(intervals))
+                        theme = FigureFactory._label_rgb(foo)
+
+                dim = len(dataframe)
+                fig = make_subplots(rows=dim, cols=dim)
+                trace_list = []
+                legend_param = 0
+                # Work over all permutations of list pairs
+                for listy in dataframe:
+                    for listx in dataframe:
+                        interval_labels = {}
+                        for interval in intervals:
+                            interval_labels[str(interval)] = []
+
+                        c_indx = 0  # color index
+                        # Fill all the rest of the names into the dictionary
+                        for interval in intervals:
+                            new_listx = []
+                            new_listy = []
+                            for j in range(len(index_vals)):
+                                if interval[0] < index_vals[j] <= interval[1]:
+                                    new_listx.append(listx[j])
+                                    new_listy.append(listy[j])
+                            # Generate trace with VISIBLE icon
+                            if legend_param == 1:
+                                if (listx == listy) and (diag == 'histogram'):
+                                    trace = graph_objs.Histogram(
+                                        x=new_listx,
+                                        marker=dict(
+                                            color=theme[c_indx]),
+                                        showlegend=True
+                                    )
+                                elif (listx == listy) and (diag == 'box'):
+                                    trace = graph_objs.Box(
+                                        y=new_listx,
+                                        name=None,
+                                        marker=dict(
+                                            color=theme[c_indx]),
+                                        showlegend=True
+                                    )
+                                else:
+                                    if 'marker' in kwargs:
+                                        kwargs['marker']['size'] = size
+                                        (kwargs['marker']
+                                            ['color']) = theme[c_indx]
+                                        trace = graph_objs.Scatter(
+                                            x=new_listx,
+                                            y=new_listy,
+                                            mode='markers',
+                                            name=str(interval),
+                                            showlegend=True,
+                                            **kwargs
+                                        )
+                                    else:
+                                        trace = graph_objs.Scatter(
+                                            x=new_listx,
+                                            y=new_listy,
+                                            mode='markers',
+                                            name=str(interval),
+                                            marker=dict(
+                                                size=size,
+                                                color=theme[c_indx]),
+                                            showlegend=True,
+                                            **kwargs
+                                        )
+                            # Generate trace with INVISIBLE icon
+                            else:
+                                if (listx == listy) and (diag == 'histogram'):
+                                    trace = graph_objs.Histogram(
+                                        x=new_listx,
+                                        marker=dict(
+                                            color=theme[c_indx]),
+                                        showlegend=False
+                                    )
+                                elif (listx == listy) and (diag == 'box'):
+                                    trace = graph_objs.Box(
+                                        y=new_listx,
+                                        name=None,
+                                        marker=dict(
+                                            color=theme[c_indx]),
+                                        showlegend=False
+                                    )
+                                else:
+                                    if 'marker' in kwargs:
+                                        kwargs['marker']['size'] = size
+                                        (kwargs['marker']
+                                            ['color']) = theme[c_indx]
+                                        trace = graph_objs.Scatter(
+                                            x=new_listx,
+                                            y=new_listy,
+                                            mode='markers',
+                                            name=str(interval),
+                                            showlegend=False,
+                                            **kwargs
+                                        )
+                                    else:
+                                        trace = graph_objs.Scatter(
+                                            x=new_listx,
+                                            y=new_listy,
+                                            mode='markers',
+                                            name=str(interval),
+                                            marker=dict(
+                                                size=size,
+                                                color=theme[c_indx]),
+                                            showlegend=False,
+                                            **kwargs
+                                        )
+                            # Push the trace into dictionary
+                            interval_labels[str(interval)] = trace
+                            if c_indx >= (len(theme) - 1):
+                                c_indx = -1
+                            c_indx += 1
+                        trace_list.append(interval_labels)
+                        legend_param += 1
+
+                trace_index = 0
+                indices = range(1, dim + 1)
+                for y_index in indices:
+                    for x_index in indices:
+                        for interval in intervals:
+                            fig.append_trace(
+                                trace_list[trace_index][str(interval)],
+                                y_index,
+                                x_index)
+                        trace_index += 1
+
+                # Insert headers into the figure
+                for j in range(dim):
+                    xaxis_key = 'xaxis{}'.format((dim * dim) - dim + 1 + j)
+                    fig['layout'][xaxis_key].update(title=headers[j])
+                for j in range(dim):
+                    yaxis_key = 'yaxis{}'.format(1 + (dim * j))
+                    fig['layout'][yaxis_key].update(title=headers[j])
+
+                if diag == 'histogram':
+                    fig['layout'].update(
+                        height=height, width=width,
+                        title=title,
+                        showlegend=True,
+                        barmode='stack')
+                    return fig
+
+                elif diag == 'box':
+                    fig['layout'].update(
+                        height=height, width=width,
+                        title=title,
+                        showlegend=True)
+                    return fig
+
+                else:
+                    fig['layout'].update(
+                        height=height, width=width,
+                        title=title,
+                        showlegend=True)
+                    return fig
+
+            else:
+                # Convert palette to list of 2 RGB tuples
+                if isinstance(palette, str):
+                    if palette in plotly_scales:
+                        theme = plotly_scales[palette]
+
+                if isinstance(palette, list):
+                    if 'rgb' in palette[0]:
+                        theme = palette
+                    else:
+                        foo = FigureFactory._convert_to_RGB_255(palette)
+                        theme = FigureFactory._label_rgb(foo)
+
+                dim = len(dataframe)
+                fig = make_subplots(rows=dim, cols=dim)
+                trace_list = []
+                legend_param = 0
+                # Run through all permutations of list pairs
+                for listy in dataframe:
+                    for listx in dataframe:
+                        # Generate trace with VISIBLE icon
+                        if legend_param == 1:
+                            if (listx == listy) and (diag == 'histogram'):
+                                trace = graph_objs.Histogram(
+                                    x=listx,
+                                    marker=dict(
+                                        color=theme[0]),
+                                    showlegend=False
+                                )
+                            elif (listx == listy) and (diag == 'box'):
+                                trace = graph_objs.Box(
+                                    y=listx,
+                                    marker=dict(
+                                        color=theme[0]),
+                                    showlegend=False
+                                )
+                            else:
+                                if 'marker' in kwargs:
+                                    kwargs['marker']['size'] = size
+                                    kwargs['marker']['color'] = index_vals
+                                    kwargs['marker']['colorscale'] = [
+                                        [0, theme[0]],
+                                        [1, theme[1]]
+                                    ]
+                                    kwargs['marker']['showscale'] = True
+                                    trace = graph_objs.Scatter(
+                                        x=listx,
+                                        y=listy,
+                                        mode='markers',
+                                        showlegend=False,
+                                        **kwargs
+                                    )
+                                else:
+                                    trace = graph_objs.Scatter(
+                                        x=listx,
+                                        y=listy,
+                                        mode='markers',
+                                        marker=dict(
+                                            size=size,
+                                            color=index_vals,
+                                            colorscale=[[0, theme[0]],
+                                                        [1, theme[1]]],
+                                            showscale=True),
+                                        showlegend=False,
+                                        **kwargs
+                                    )
+                        # Generate trace with INVISIBLE icon
+                        else:
+                            if (listx == listy) and (diag == 'histogram'):
+                                trace = graph_objs.Histogram(
+                                    x=listx,
+                                    marker=dict(
+                                        color=theme[0]),
+                                    showlegend=False
+                                )
+                            elif (listx == listy) and (diag == 'box'):
+                                trace = graph_objs.Box(
+                                    y=listx,
+                                    marker=dict(
+                                        color=theme[0]),
+                                    showlegend=False
+                                )
+                            else:
+                                if 'marker' in kwargs:
+                                    kwargs['marker']['size'] = size
+                                    kwargs['marker']['color'] = index_vals
+                                    kwargs['marker']['colorscale'] = [
+                                        [0, theme[0]],
+                                        [1, theme[1]]
+                                    ]
+                                    kwargs['marker']['showscale'] = False
+                                    trace = graph_objs.Scatter(
+                                        x=listx,
+                                        y=listy,
+                                        mode='markers',
+                                        showlegend=False,
+                                        **kwargs
+                                    )
+                                else:
+                                    trace = graph_objs.Scatter(
+                                        x=listx,
+                                        y=listy,
+                                        mode='markers',
+                                        marker=dict(
+                                            size=size,
+                                            color=index_vals,
+                                            colorscale=[[0, theme[0]],
+                                                        [1, theme[1]]],
+                                            showscale=False),
+                                        showlegend=False,
+                                        **kwargs
+                                    )
+                        # Push the trace into list
+                        trace_list.append(trace)
+                        legend_param += 1
+
+                trace_index = 0
+                indices = range(1, dim + 1)
+                for y_index in indices:
+                    for x_index in indices:
+                        fig.append_trace(trace_list[trace_index],
+                                         y_index,
+                                         x_index)
+                        trace_index += 1
+
+                # Insert headers into the figure
+                for j in range(dim):
+                    xaxis_key = 'xaxis{}'.format((dim * dim) - dim + 1 + j)
+                    fig['layout'][xaxis_key].update(title=headers[j])
+                for j in range(dim):
+                    yaxis_key = 'yaxis{}'.format(1 + (dim * j))
+                    fig['layout'][yaxis_key].update(title=headers[j])
+
+                if diag == 'histogram':
+                    fig['layout'].update(
+                        height=height, width=width,
+                        title=title,
+                        showlegend=True,
+                        barmode='stack')
+                    return fig
+
+                elif diag == 'box':
+                    fig['layout'].update(
+                        height=height, width=width,
+                        title=title,
+                        showlegend=True)
+                    return fig
+
+                else:
+                    fig['layout'].update(
+                        height=height, width=width,
+                        title=title,
+                        showlegend=True)
+                    return fig
+
+    @staticmethod
+    def _validate_index(index_vals):
+        """
+        Validates if a list contains all numbers or all strings
+
+        :raises: (PlotlyError) If there are any two items in the list whose
+            types differ
+        """
+        from numbers import Number
+        if isinstance(index_vals[0], Number):
+            if not all(isinstance(item, Number) for item in index_vals):
+                raise exceptions.PlotlyError("Error in indexing column. "
+                                             "Make sure all entries of each "
+                                             "column are all numbers or "
+                                             "all strings.")
+
+        elif isinstance(index_vals[0], str):
+            if not all(isinstance(item, str) for item in index_vals):
+                raise exceptions.PlotlyError("Error in indexing column. "
+                                             "Make sure all entries of each "
+                                             "column are all numbers or "
+                                             "all strings.")
+
+    @staticmethod
+    def _validate_dataframe(array):
+        """
+        Validates all strings or numbers in each dataframe column
+
+        :raises: (PlotlyError) If there are any two items in any list whose
+            types differ
+        """
+        from numbers import Number
+        for vector in array:
+            if isinstance(vector[0], Number):
+                if not all(isinstance(item, Number) for item in vector):
+                    raise exceptions.PlotlyError("Error in dataframe. "
+                                                 "Make sure all entries of "
+                                                 "each column are either "
+                                                 "numbers or strings.")
+            elif isinstance(vector[0], str):
+                if not all(isinstance(item, str) for item in vector):
+                    raise exceptions.PlotlyError("Error in dataframe. "
+                                                 "Make sure all entries of "
+                                                 "each column are either "
+                                                 "numbers or strings.")
+
+    @staticmethod
+    def _validate_scatterplotmatrix(df, index, diag, **kwargs):
+        """
+        Validates basic inputs for FigureFactory.create_scatterplotmatrix()
+
+        :raises: (PlotlyError) If pandas is not imported
+        :raises: (PlotlyError) If pandas dataframe is not inputted
+        :raises: (PlotlyError) If pandas dataframe has <= 1 columns
+        :raises: (PlotlyError) If diagonal plot choice (diag) is not one of
+            the viable options
+        :raises: (PlotlyError) If kwargs contains 'size', 'color' or
+            'colorscale'
+        """
+        if _pandas_imported is False:
+            raise ImportError("FigureFactory.scatterplotmatrix requires "
+                              "a pandas DataFrame.")
+
+        # Check if pandas dataframe
+        if not isinstance(df, pd.core.frame.DataFrame):
+            raise exceptions.PlotlyError("Dataframe not inputed. Please "
+                                         "use a pandas dataframe to pro"
+                                         "duce a scatterplot matrix.")
+
+        # Check if dataframe is 1 column or less
+        if len(df.columns) <= 1:
+            raise exceptions.PlotlyError("Dataframe has only one column. To "
+                                         "use the scatterplot matrix, use at "
+                                         "least 2 columns.")
+
+        # Check that diag parameter is selected properly
+        if diag not in DIAG_CHOICES:
+            raise exceptions.PlotlyError("Make sure diag is set to "
+                                         "one of {}".format(DIAG_CHOICES))
+
+        # Check for not 'size' or 'color' in 'marker' of **kwargs
+        if 'marker' in kwargs:
+            FORBIDDEN_PARAMS = ['size', 'color', 'colorscale']
+            if any(param in kwargs['marker'] for param in FORBIDDEN_PARAMS):
+                raise exceptions.PlotlyError("Your kwargs dictionary cannot "
+                                             "include the 'size', 'color' or "
+                                             "'colorscale' key words inside "
+                                             "the marker dict since 'size' is "
+                                             "already an argument of the "
+                                             "scatterplot matrix function and "
+                                             "both 'color' and 'colorscale "
+                                             "are set internally.")
+
+    @staticmethod
+    def _endpts_to_intervals(endpts):
+        """
+        Returns a list of intervals for categorical colormaps
+
+        Accepts a list or tuple of sequentially increasing numbers and returns
+        a list representation of the mathematical intervals with these numbers
+        as endpoints. For example, [1, 4, 6] returns [[1, 4], [4, 6]]
+
+        :raises: (PlotlyError) If input is not a list or tuple
+        :raises: (PlotlyError) If the input contains a string
+        :raises: (PlotlyError) If any number does not increase after the
+            previous one in the sequence
+        """
+        length = len(endpts)
+        # Check if endpts is a list or tuple
+        if not (isinstance(endpts, (tuple)) or isinstance(endpts, (list))):
+            raise exceptions.PlotlyError("The intervals_endpts argument must "
+                                         "be a list or tuple of a sequence "
+                                         "of increasing numbers.")
+        # Check if endpts contains only numbers
+        for item in endpts:
+            if isinstance(item, str):
+                raise exceptions.PlotlyError("The intervals_endpts argument "
+                                             "must be a list or tuple of a "
+                                             "sequence of increasing "
+                                             "numbers.")
+        # Check if numbers in endpts are increasing
+        for k in range(length-1):
+            if endpts[k] >= endpts[k+1]:
+                raise exceptions.PlotlyError("The intervals_endpts argument "
+                                             "must be a list or tuple of a "
+                                             "sequence of increasing "
+                                             "numbers.")
+        else:
+            intervals = []
+            # add -inf to intervals
+            intervals.append([float('-inf'), endpts[0]])
+            for k in range(length - 1):
+                interval = []
+                interval.append(endpts[k])
+                interval.append(endpts[k + 1])
+                intervals.append(interval)
+            # add +inf to intervals
+            intervals.append([endpts[length - 1], float('inf')])
+            return intervals
+
+    @staticmethod
+    def _convert_to_RGB_255(colors):
+        """
+        Return a list of tuples where each element gets multiplied by 255
+
+        Takes a list of color tuples where each element is between 0 and 1
+        and returns the same list where each tuple element is normalized to be
+        between 0 and 255
+        """
+        colors_255 = []
+
+        for color in colors:
+            rgb_color = (color[0]*255.0, color[1]*255.0, color[2]*255.0)
+            colors_255.append(rgb_color)
+        return colors_255
+
+    @staticmethod
+    def _n_colors(lowcolor, highcolor, n_colors):
+        """
+        Splits a low and high color into a list of #n_colors colors
+
+        Accepts two color tuples and returns a list of n_colors colors
+        which form the intermediate colors between lowcolor and highcolor
+
+        """
+        diff_0 = float(highcolor[0] - lowcolor[0])
+        incr_0 = diff_0/(n_colors - 1)
+        diff_1 = float(highcolor[1] - lowcolor[1])
+        incr_1 = diff_1/(n_colors - 1)
+        diff_2 = float(highcolor[2] - lowcolor[2])
+        incr_2 = diff_2/(n_colors - 1)
+        color_tuples = []
+
+        for index in range(n_colors):
+            new_tuple = (lowcolor[0] + (index * incr_0),
+                         lowcolor[1] + (index * incr_1),
+                         lowcolor[2] + (index * incr_2))
+            color_tuples.append(new_tuple)
+
+        return color_tuples
+
+    @staticmethod
+    def _label_rgb(colors):
+        """
+        Takes colors (a, b, c) and returns tuples 'rgb(a, b, c)'
+
+        Takes a list of two color tuples of the form (a, b, c) and returns the
+        same list with each tuple replaced by a string 'rgb(a, b, c)'
+
+        """
+        colors_label = []
+        for color in colors:
+            color_label = 'rgb{}'.format(color)
+            colors_label.append(color_label)
+
+        return colors_label
+
+    @staticmethod
+    def _unlabel_rgb(colors):
+        """
+        Takes rgb colors 'rgb(a, b, c)' and returns the tuples (a, b, c)
+
+        This function takes a list of two 'rgb(a, b, c)' color strings and
+        returns a list of the color tuples in tuple form without the 'rgb'
+        label. In particular, the output is a list of two tuples of the form
+        (a, b, c)
+
+        """
+        unlabelled_colors = []
+        for character in colors:
+            str_vals = ''
+            for index in range(len(character)):
+                try:
+                    float(character[index])
+                    str_vals = str_vals + character[index]
+                except ValueError:
+                    if (character[index] == ',') or (character[index] == '.'):
+                        str_vals = str_vals + character[index]
+
+            str_vals = str_vals + ','
+            numbers = []
+            str_num = ''
+            for char in str_vals:
+                if char != ',':
+                    str_num = str_num + char
+                else:
+                    numbers.append(float(str_num))
+                    str_num = ''
+            unlabelled_tuple = (numbers[0], numbers[1], numbers[2])
+            unlabelled_colors.append(unlabelled_tuple)
+
+        return unlabelled_colors
+
+    @staticmethod
+    def create_scatterplotmatrix(df, dataframe=None, headers=None,
+                                 index_vals=None, index=None, endpts=None,
+                                 diag='scatter', height=500, width=500, size=6,
+                                 title='Scatterplot Matrix', use_theme=False,
+                                 palette=None, **kwargs):
+        """
+        Returns data for a scatterplot matrix.
+
+        :param (array) df: array of the data with column headers
+        :param (str) index: name of the index column in data array
+        :param (list|tuple) endpts: this param takes an increasing sequece
+            of numbers that form intervals on the real line. They are used
+            to make a numeric index categorical under 'theme = True' by
+            grouping the data into these intervals. It only affects the non-
+            diagonal plots
+        :param (str) diag: sets graph type for the main diagonal plots
+        :param (int|float) height: sets the height of the graph
+        :param (int|float) width: sets the width of the graph
+        :param (int or float >= 0) size: sets the marker size (in px)
+        :param (str) title: the title label of the scatterplot matrix
+        :param (bool) use_theme: determines if a theme is applied
+        :param (str|list) palette: either a plotly scale name, or a list
+            containing 2 triplets. These triplets must be of the form (a,b,c)
+            or 'rgb(x,y,z)' where a,b,c belong to the interval [0,1] and x,y,z
+            belong to [0,255]
+        :param (dict) **kwargs: a dictionary of scatterplot arguments
+            The only forbidden parameters are 'size', 'color' and
+            'colorscale' in 'marker'
+
+        Example 1: Vanilla Scatterplot Matrix
+        ```
+        import plotly.plotly as py
+        from plotly.graph_objs import graph_objs
+        from plotly.tools import FigureFactory as FF
+
+        import numpy as np
+        import pandas as pd
+
+        # Create dataframe
+        df = pd.DataFrame(np.random.randn(10, 2),
+                        columns=['Column 1', 'Column 2'])
+
+        # Create scatterplot matrix
+        fig = FF.create_scatterplotmatrix(df)
+
+        # Plot
+        py.iplot(fig, filename='Scatterplot Matrix')
+        ```
+
+        Example 2: Indexing a Column
+        ```
+        import plotly.plotly as py
+        from plotly.graph_objs import graph_objs
+        from plotly.tools import FigureFactory as FF
+
+        import numpy as np
+        import pandas as pd
+
+        # Create dataframe with index
+        df = pd.DataFrame(np.random.randn(10, 2),
+                           columns=['A', 'B'])
+
+        # Add another column of strings to the dataframe
+        df['Fruit'] = pd.Series(['apple', 'apple', 'grape', 'apple', 'apple',
+                                 'grape', 'pear', 'pear', 'apple', 'pear'])
+
+        # Create scatterplot matrix
+        fig = FF.create_scatterplotmatrix(df, index = 'Fruit', size = 10)
+
+        # Plot
+        py.iplot(fig, filename = 'Scatterplot Matrix')
+        ```
+
+        Example 3: Styling the diagonal subplots
+        ```
+        import plotly.plotly as py
+        from plotly.graph_objs import graph_objs
+        from plotly.tools import FigureFactory as FF
+
+        import numpy as np
+        import pandas as pd
+
+        # Create dataframe with index
+        df = pd.DataFrame(np.random.randn(10, 4),
+                           columns=['A', 'B', 'C', 'D'])
+
+        # Add another column of strings to the dataframe
+        df['Fruit'] = pd.Series(['apple', 'apple', 'grape', 'apple', 'apple',
+                                 'grape', 'pear', 'pear', 'apple', 'pear'])
+
+        # Create scatterplot matrix
+        fig = FF.create_scatterplotmatrix(df, diag = 'box', index = 'Fruit',
+                                          height = 1000, width = 1000)
+
+        # Plot
+        py.iplot(fig, filename = 'Scatterplot Matrix')
+        ```
+
+        Example 4: Use a theme to Styling the subplots
+        ```
+        import plotly.plotly as py
+        from plotly.graph_objs import graph_objs
+        from plotly.tools import FigureFactory as FF
+
+        import numpy as np
+        import pandas as pd
+
+        # Create dataframe with random data
+        df = pd.DataFrame(np.random.randn(100, 3),
+                           columns=['A', 'B', 'C'])
+
+        # Create scatterplot matrix using a built-in
+        # Plotly palette scale and indexing column 'A'
+        fig = FF.create_scatterplotmatrix(df, diag = 'histogram', index = 'A',
+                                          use_theme=True, palette = 'Blues',
+                                          height = 800, width = 800)
+
+        # Plot
+        py.iplot(fig, filename = 'Scatterplot Matrix')
+        ```
+
+        Example 5: Example 4 with interval factoring
+        ```
+        import plotly.plotly as py
+        from plotly.graph_objs import graph_objs
+        from plotly.tools import FigureFactory as FF
+
+        import numpy as np
+        import pandas as pd
+
+        # Create dataframe with random data
+        df = pd.DataFrame(np.random.randn(100, 3),
+                           columns=['A', 'B', 'C'])
+
+        # Create scatterplot matrix using a list of 2 rgb tuples
+        # and endpoints at -1, 0 and 1
+        fig = FF.create_scatterplotmatrix(df, diag = 'histogram', index = 'A',
+                                          use_theme=True,
+                                          palette = ['rgb(140, 255, 50)',
+                                                     'rgb(170, 60, 115)'],
+                                          endpts = [-1, 0, 1],
+                                          height = 800, width = 800)
+
+        # Plot
+        py.iplot(fig, filename = 'Scatterplot Matrix')
+        ```
+        """
+        # TODO: protected until #282
+        if dataframe is None:
+            dataframe = []
+        if headers is None:
+            headers = []
+        if index_vals is None:
+            index_vals = []
+
+        FigureFactory._validate_scatterplotmatrix(df, index, diag,
+                                                  **kwargs)
+        if not index:
+            for name in df:
+                headers.append(name)
+            for name in headers:
+                dataframe.append(df[name].values.tolist())
+            # Check for same data-type in df columns
+            FigureFactory._validate_dataframe(dataframe)
+            figure = FigureFactory._scatterplot(dataframe, headers, diag,
+                                                size, height, width, title,
+                                                **kwargs)
+            return figure
+        else:
+            # Validate index selection
+            if index not in df:
+                raise exceptions.PlotlyError("Make sure you set the index "
+                                             "input variable to one of the "
+                                             "column names of your "
+                                             "dataframe.")
+            index_vals = df[index].values.tolist()
+            for name in df:
+                if name != index:
+                    headers.append(name)
+            for name in headers:
+                dataframe.append(df[name].values.tolist())
+            # Check for same data-type in df columns
+            FigureFactory._validate_dataframe(dataframe)
+            FigureFactory._validate_index(index_vals)
+
+            if use_theme is False:
+                figure = FigureFactory._scatterplot_index(dataframe, headers,
+                                                          diag, size,
+                                                          height, width,
+                                                          title, index,
+                                                          index_vals,
+                                                          **kwargs)
+                return figure
+            else:
+                figure = FigureFactory._scatterplot_theme(dataframe, headers,
+                                                          diag, size,
+                                                          height, width,
+                                                          title, index,
+                                                          index_vals,
+                                                          endpts, palette,
+                                                          **kwargs)
+                return figure
 
     @staticmethod
     def _validate_equal_length(*args):
