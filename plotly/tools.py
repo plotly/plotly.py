@@ -3935,3 +3935,4 @@ class _Table(FigureFactory):
                         font=dict(color=font_color),
                         showarrow=False))
         return annotations
+
