@@ -2332,7 +2332,7 @@ class FigureFactory(object):
 
     @staticmethod
     def create_distplot(hist_data, group_labels,
-                        bin_size=[1.], curve_type='kde',
+                        bin_size=1., curve_type='kde',
                         colors=[], rug_text=[],
                         show_hist=True, show_curve=True,
                         show_rug=True):
@@ -2347,7 +2347,8 @@ class FigureFactory(object):
         :param (list[list]) hist_data: Use list of lists to plot multiple data
             sets on the same plot.
         :param (list[str]) group_labels: Names for each data set.
-        :param (list[float]) bin_size: Size of histogram bins. Default = [1.]
+        :param (list[float]|float) bin_size: Size of histogram bins.
+            Default = 1.
         :param (str) curve_type: 'kde' or 'normal'. Default = 'kde'
         :param (bool) show_hist: Add histogram to distplot? Default = True
         :param (bool) show_curve: Add curve to distplot? Default = True

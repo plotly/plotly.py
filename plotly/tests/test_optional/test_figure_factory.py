@@ -150,14 +150,12 @@ class TestDistplot(TestCase):
         self.assertEqual(dp['data'][1], expected_dp_data_hist_2)
 
         def test_distplot_binsize_array(self):
-            hist1_x = [0.8, 1.2, 0.2, 0.6, 1.6,
-                       -0.9, -0.07, 1.95, 0.9, -0.2,
+            hist1_x = [0.8, 1.2, 0.2, 0.6, 1.6, -0.9, -0.07, 1.95, 0.9, -0.2,
                        -0.5, 0.3, 0.4, -0.37, 0.6]
-            hist2_x = [0.8, 1.5, 1.5, 0.6, 0.59,
-                       1.0, 0.8, 1.7, 0.5, 0.8,
-                       -0.3, 1.2, 0.56, 0.3, 2.2]
+            hist2_x = [0.8, 1.5, 1.5, 0.6, 0.59, 1.0, 0.8, 1.7, 0.5, 0.8, -0.3,
+                       1.2, 0.56, 0.3, 2.2]
 
-            hist_data = [hist1_x] + [hist2_x]
+            hist_data = [hist1_x, hist2_x]
             group_labels = ['2012', '2013']
 
             dp = tls.FigureFactory.create_distplot(hist_data, group_labels,
