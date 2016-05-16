@@ -10,7 +10,7 @@ from __future__ import absolute_import
 import time
 
 from nose.plugins.attrib import attr
-from nose.tools import raises
+from nose.tools import raises, eq_
 
 import plotly.plotly as py
 from plotly.graph_objs import (Layout, Scatter, Stream)
@@ -123,3 +123,63 @@ def test_stream_unstreamable():
     my_stream.open()
     my_stream.write(Scatter(x=1, y=10, name='nope'))
     my_stream.close()
+
+
+def test_stream_no_scheme():
+
+    # If no scheme is used in the plotly_streaming_domain, port 80
+    # should be used for streaming and ssl_enabled should be False
+
+    py.sign_in(un, ak, **{'plotly_streaming_domain': 'stream.plot.ly'})
+    my_stream = py.Stream(tk)
+    expected_streaming_specs = {
+        'server': 'stream.plot.ly',
+        'port': 80,
+        'ssl_enabled': False,
+        'headers': {
+            'Host': 'stream.plot.ly',
+            'plotly-streamtoken': tk
+        }
+    }
+    actual_streaming_specs = my_stream.get_streaming_specs()
+    eq_(expected_streaming_specs, actual_streaming_specs)
+
+
+def test_stream_http():
+
+    # If the http scheme is used in the plotly_streaming_domain, port 80
+    # should be used for streaming and ssl_enabled should be False
+
+    py.sign_in(un, ak, **{'plotly_streaming_domain': 'http://stream.plot.ly'})
+    my_stream = py.Stream(tk)
+    expected_streaming_specs = {
+        'server': 'stream.plot.ly',
+        'port': 80,
+        'ssl_enabled': False,
+        'headers': {
+            'Host': 'stream.plot.ly',
+            'plotly-streamtoken': tk
+        }
+    }
+    actual_streaming_specs = my_stream.get_streaming_specs()
+    eq_(expected_streaming_specs, actual_streaming_specs)
+
+
+def test_stream_https():
+
+    # If the https scheme is used in the plotly_streaming_domain, port 443
+    # should be used for streaming and ssl_enabled should be True
+
+    py.sign_in(un, ak, **{'plotly_streaming_domain': 'https://stream.plot.ly'})
+    my_stream = py.Stream(tk)
+    expected_streaming_specs = {
+        'server': 'stream.plot.ly',
+        'port': 443,
+        'ssl_enabled': True,
+        'headers': {
+            'Host': 'stream.plot.ly',
+            'plotly-streamtoken': tk
+        }
+    }
+    actual_streaming_specs = my_stream.get_streaming_specs()
+    eq_(expected_streaming_specs, actual_streaming_specs)
