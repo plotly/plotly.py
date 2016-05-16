@@ -27,7 +27,6 @@ import six
 import six.moves
 
 from requests.auth import HTTPBasicAuth
-from urlparse import urlparse
 
 from plotly import exceptions, tools, utils, version, files
 from plotly.plotly import chunked_requests
