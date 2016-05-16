@@ -4,6 +4,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.1.0] - 2016-05-16
+### Added
+SSL support for streaming. Requires the SSL module, which was backported in
+Python v2.7.9, via chunked_requests submodule.
+
 ## [1.9.11] - 2016-05-02
 ### Added
 - The FigureFactory can now create scatter plot matrices with `.create_scatterplotmatrix`. Check it out with:
