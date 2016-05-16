@@ -469,7 +469,8 @@ class Stream:
 
         # If no scheme (https/https) is included in the streaming_url, the
         # host will be None. Use streaming_url in this case.
-        host = urlparse(streaming_url).hostname or streaming_url
+        host = (six.moves.urllib.parse.urlparse(streaming_url).hostname or
+                streaming_url)
 
         headers = {'Host': host, 'plotly-streamtoken': self.stream_id}
         streaming_specs = {
