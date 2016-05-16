@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-## [1.1.0] - 2016-05-16
+## [1.10.0] - 2016-05-16
 ### Added
 SSL support for streaming. Requires the SSL module, which was backported in
 Python v2.7.9, via chunked_requests submodule.
