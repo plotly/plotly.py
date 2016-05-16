@@ -3,10 +3,12 @@ import six
 import os
 from six.moves import http_client
 from six.moves.urllib.parse import urlparse
+from ssl import SSLWantReadError
+
 
 class Stream:
-    def __init__(self, server, port=80, headers={}, url='/'):
-        ''' Initialize a stream object and an HTTP Connection
+    def __init__(self, server, port=80, headers={}, url='/', ssl_enabled=False):
+        ''' Initialize a stream object and an HTTP or HTTPS connection
         with chunked Transfer-Encoding to server:port with optional headers.
         '''
         self.maxtries = 5
@@ -17,6 +19,7 @@ class Stream:
         self._port = port
         self._headers = headers
         self._url = url
+        self._ssl_enabled = ssl_enabled
         self._connect()
 
     def write(self, data, reconnect_on=('', 200, )):
@@ -73,17 +76,21 @@ class Stream:
     def _get_proxy_config(self):
         """
         Determine if self._url should be passed through a proxy. If so, return
-        the appropriate proxy_server and proxy_port
+        the appropriate proxy_server and proxy_port. Assumes https_proxy is used
+        when ssl_enabled=True.
 
         """
 
         proxy_server = None
         proxy_port = None
+        ssl_enabled = self._ssl_enabled
 
-        ## only doing HTTPConnection, so only use http_proxy
-        proxy = os.environ.get("http_proxy")
+        if ssl_enabled:
+            proxy = os.environ.get("https_proxy")
+        else:
+            proxy = os.environ.get("http_proxy")
         no_proxy = os.environ.get("no_proxy")
-        no_proxy_url = no_proxy and self._url in no_proxy
+        no_proxy_url = no_proxy and self._server in no_proxy
 
         if proxy and not no_proxy_url:
             p = urlparse(proxy)
@@ -93,19 +100,30 @@ class Stream:
         return proxy_server, proxy_port
 
     def _connect(self):
-        ''' Initialize an HTTP connection with chunked Transfer-Encoding
+        ''' Initialize an HTTP/HTTPS connection with chunked Transfer-Encoding
         to server:port with optional headers.
         '''
         server = self._server
         port = self._port
         headers = self._headers
+        ssl_enabled = self._ssl_enabled
         proxy_server, proxy_port = self._get_proxy_config()
 
         if (proxy_server and proxy_port):
-            self._conn = http_client.HTTPConnection(proxy_server, proxy_port)
+            if ssl_enabled:
+                self._conn = http_client.HTTPSConnection(
+                    proxy_server, proxy_port
+                )
+            else:
+                self._conn = http_client.HTTPConnection(
+                    proxy_server, proxy_port
+                )
             self._conn.set_tunnel(server, port)
         else:
-            self._conn = http_client.HTTPConnection(server, port)
+            if ssl_enabled:
+                self._conn = http_client.HTTPSConnection(server, port)
+            else:
+                self._conn = http_client.HTTPConnection(server, port)
 
         self._conn.putrequest('POST', self._url)
         self._conn.putheader('Transfer-Encoding', 'chunked')
@@ -235,6 +253,13 @@ class Stream:
                 # want to see if a response is currently available. So
                 # let's just assume that we're still connected and
                 # hopefully recieve some data on the next try.
+                return True
+            elif isinstance(e, SSLWantReadError):
+                # From: https://docs.python.org/3/library/ssl.html
+                # This is raised when trying to read or write data, but more
+                # data needs to be received on the underlying TCP transport
+                # before the request can be fulfilled. The socket is still
+                # connected to the server in this case.
                 return True
             else:
                 # Unknown scenario
