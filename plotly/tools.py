@@ -1688,6 +1688,20 @@ class FigureFactory(object):
                 )
             )
 
+        # generate dummy data for colorscale visibility
+        data.append(
+            dict(
+                x=[tasks[index]['x0'], tasks[index]['x0']],
+                y=[index, index],
+                name='',
+                marker={'color': 'white',
+                        'colorscale': [[0, colors[0]], [1, colors[1]]],
+                        'showscale': True,
+                        'cmax': 100,
+                        'cmin': 0}
+            )
+        )
+
         layout = dict(
             title=title,
             showlegend=False,
