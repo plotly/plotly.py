@@ -13,7 +13,8 @@ dependencies:
   override:
 
     # run all the pre-written installers (this will take a *while*)
-    - bash circle/setup.sh:
+    - bash circle/setup.sh
+    
     # install testing tools for circle's version of things
     - pip install nose coverage
     - pip install -I .
