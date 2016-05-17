@@ -1583,7 +1583,7 @@ class FigureFactory(object):
             yaxis=dict(
                 showgrid=showgrid_y,
                 ticktext=task_names,
-                tickvals=range(len(tasks)),
+                tickvals=list(range(len(tasks))),
                 range=[-1, len(tasks) + 1],
                 autorange=False,
                 zeroline=False,
@@ -1698,7 +1698,7 @@ class FigureFactory(object):
             yaxis=dict(
                 showgrid=showgrid_y,
                 ticktext=task_names,
-                tickvals=range(len(tasks)),
+                tickvals=list(range(len(tasks))),
                 range=[-1, len(tasks) + 1],
                 autorange=False,
                 zeroline=False,
