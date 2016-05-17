@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.9.12] - 2016-05-16
+### Added
+SSL support for streaming.
+
 ## [1.9.11] - 2016-05-02
 ### Added
 - The FigureFactory can now create scatter plot matrices with `.create_scatterplotmatrix`. Check it out with:
