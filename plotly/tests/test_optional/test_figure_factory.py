@@ -1012,3 +1012,21 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
 
         self.assert_dict_equal(test_scatter_plot_matrix['layout'],
                                exp_scatter_plot_matrix['layout'])
+
+
+class TestGantt(TestCase):
+
+    def test_df_dataframe(self):
+
+        # validate df when it is a dataframe
+
+        df1 = pd.DataFrame([[2, 'Apple']], columns=['Numbers', 'Fruit'])
+        self.assertRaises(PlotlyError, tls.FigureFactory.create_gantt, df1)
+
+        df2 = pd.DataFrame([['Job A', '2009-01-01', '2009-02-30', 25],
+                            ['Job B', '2009-01-01', '2009-02-30', '25']],
+                           columns=['Task', 'Start', 'Finish', 'Complete'])
+        self.assertRaisesRegexp(PlotlyError,
+                                "The values in the 'Complete' column must "
+                                "be between 0 and 100.",
+                                tls.FigureFactory.create_gantt, df2)

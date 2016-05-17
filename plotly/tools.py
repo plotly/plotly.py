@@ -1455,27 +1455,21 @@ class FigureFactory(object):
         """
         Validates the inputted dataframe or list
         """
-        # check if pandas dataframe
+        from numbers import Number
+        REQ_GANTT_KEYS = ['Task', 'Start', 'Finish']
+
         if isinstance(df, pd.core.frame.DataFrame):
-            # extract data into list of dictionaries
-            if ('Task' not in df):
-                raise exceptions.PlotlyError("Your dataframe must have the "
-                                             "columns 'Task', 'Start' and "
-                                             "'Finish', with 'Complete' as "
-                                             "an optional column.")
-            if ('Start' not in df):
-                raise exceptions.PlotlyError("Your dataframe must have the "
-                                             "columns 'Task', 'Start' and "
-                                             "'Finish', with 'Complete' as "
-                                             "an optional column.")
-            if ('Finish' not in df):
-                raise exceptions.PlotlyError("Your dataframe must have the "
-                                             "columns 'Task', 'Start' and "
-                                             "'Finish', with 'Complete' as "
-                                             "an optional column.")
+            # validate if df is a dataframe
+            for key in REQ_GANTT_KEYS:
+                if key not in df:
+                    raise exceptions.PlotlyError("The columns in your data"
+                                                 "frame must be one "
+                                                 "of".format(REQ_GANTT_KEYS))
+            # check if 'Complete' column has 'nan' values
+            # or fall outside the [0, 100] interval
             if 'Complete' in df:
                 for percentage in df['Complete']:
-                    if (percentage < 0.0) or (percentage > 100.0):
+                    if not isinstance(percentage, Number):
                         raise exceptions.PlotlyError("The values in the "
                                                      "'Complete' column must "
                                                      "be between 0 and 100.")
@@ -1495,23 +1489,32 @@ class FigureFactory(object):
         if not isinstance(df, list):
             raise exceptions.PlotlyError("You must input either a dataframe "
                                          "or a list of dictionaries.")
-
+        # validate if df is a list
         if len(df) <= 0:
             raise exceptions.PlotlyError("Your list is empty. It must contain "
                                          "at least one dictionary.")
-
         if not isinstance(df[0], dict):
             raise exceptions.PlotlyError("Your list must only "
                                          "include dictionaries.")
-
-        if 'Complete' in df[0]:
+        for key in REQ_GANTT_KEYS:
             for dictionary in df:
-                if 'Complete' not in dictionary:
-                    raise exceptions.PlotlyError("If you are using 'Complete' "
-                                                 "as a dictionary key, make "
-                                                 "sure each dictionary has "
-                                                 "this key with an assigned "
-                                                 "value between 0 and 100.")
+                if key not in dictionary:
+                    raise exceptions.PlotlyError("The columns in your data"
+                                                 "frame must be one "
+                                                 "of".format(REQ_GANTT_KEYS))
+        if any('Complete' in dictionary for dictionary in df):
+            if not all('Complete' in dictionary for dictionary in df):
+                raise exceptions.PlotlyError("If you are using 'Complete' "
+                                             "as a dictionary key, make "
+                                             "sure each dictionary has "
+                                             "this key with an assigned "
+                                             "value between 0 and 100.")
+        if 'Complete' in df[0]:
+            for dictioanry in df:
+                    if not isinstance(dictionary['Complete'], Number):
+                        raise exceptions.PlotlyError("The values in the "
+                                                     "'Complete' column must "
+                                                     "be between 0 and 100.")
         return df
 
     @staticmethod
@@ -1765,6 +1768,43 @@ class FigureFactory(object):
         :param (float) height: the height of the chart
         :param (float) width: the width of the chart
 
+        Example 1: Simple Gantt Chart
+        ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+
+        # Make data for chart
+        df = [dict(Task="Job A", Start='2009-01-01', Finish='2009-02-30'),
+              dict(Task="Job B", Start='2009-03-05', Finish='2009-04-15'),
+              dict(Task="Job C", Start='2009-02-20', Finish='2009-05-30')]
+
+        # Create a figure
+        fig = FF.create_gantt(df)
+
+        # Plot the data
+        py.iplot(fig, filename='Gantt Chart', world_readable=True)
+        ```
+
+        Example 2: Colormap by 'Complete' Variable
+        ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+
+        # Make data for chart
+        df = [dict(Task="Job A", Start='2009-01-01',
+                   Finish='2009-02-30', Complete=10),
+              dict(Task="Job B", Start='2009-03-05',
+                   Finish='2009-04-15', Complete=60),
+              dict(Task="Job C", Start='2009-02-20',
+                   Finish='2009-05-30', Complete=95)]
+
+        # Create a figure with Plotly colorscale
+        fig = FF.create_gantt(df, use_colorscale=True, colors='Blues',
+                              bar_width=0.5, showgrid_x=True, showgrid_y=True)
+
+        # Plot the data
+        py.iplot(fig, filename='Colormap Gantt Chart', world_readable=True)
+        ```
         """
         plotly_scales = {'Greys': ['rgb(0,0,0)', 'rgb(255,255,255)'],
                          'YlGnBu': ['rgb(8,29,88)', 'rgb(255,255,217)'],
@@ -1849,7 +1889,7 @@ class FigureFactory(object):
         else:
             if 'Complete' not in chart[0]:
                 raise exceptions.PlotlyError("In order to use colorscale "
-                                             "there must be a 'complete' "
+                                             "there must be a 'Complete' "
                                              "column in the chart.")
 
             fig = FigureFactory._gantt_colorscale(chart, colors,
