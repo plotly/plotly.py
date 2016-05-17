@@ -3,7 +3,7 @@ import six
 import os
 from six.moves import http_client
 from six.moves.urllib.parse import urlparse
-from ssl import SSLWantReadError
+from ssl import SSLError
 
 
 class Stream:
@@ -254,13 +254,16 @@ class Stream:
                 # let's just assume that we're still connected and
                 # hopefully recieve some data on the next try.
                 return True
-            elif isinstance(e, SSLWantReadError):
-                # From: https://docs.python.org/3/library/ssl.html
-                # This is raised when trying to read or write data, but more
-                # data needs to be received on the underlying TCP transport
-                # before the request can be fulfilled. The socket is still
-                # connected to the server in this case.
-                return True
+            elif isinstance(e, SSLError):
+                if e.errno == 2:
+                    # errno 2 occurs when trying to read or write data, but more
+                    # data needs to be received on the underlying TCP transport
+                    # before the request can be fulfilled.
+                    #
+                    # Python 2.7.9+ and Python 3.3+ give this its own exception,
+                    # SSLWantReadError
+                    return True
+                raise e
             else:
                 # Unknown scenario
                 raise e
