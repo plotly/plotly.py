@@ -13,8 +13,9 @@ dependencies:
   override:
 
     # run all the pre-written installers (this will take a *while*)
-    - bash circle/setup.sh
-
+    # todo: remove timeout (revert to default of 600s)
+    - bash circle/setup.sh:
+      timeout: 3600
     # install testing tools for circle's version of things
     - pip install nose coverage
     - pip install -I .
