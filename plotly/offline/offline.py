@@ -177,7 +177,7 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
 
     Example:
     ```
-    from plotly.offline import, iplot
+    from plotly.offline import iplot
 
     iplot([{'x': [1, 2, 3], 'y': [5, 2, 7]}])
     ```
