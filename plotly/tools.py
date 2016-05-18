@@ -1632,6 +1632,8 @@ class FigureFactory(object):
                          'Earth': ['rgb(0,0,130)', 'rgb(255,255,255)'],
                          'Electric': ['rgb(0,0,0)', 'rgb(255,250,220)'],
                          'Viridis': ['rgb(68,1,84)', 'rgb(253,231,37)']}
+        if colors is None:
+            colors = DEFAULT_PLOTLY_COLORS
 
         if use_colorscale is False:
             # accepts rgb-strings, hex-strings, plotly_colorscale names
@@ -1646,6 +1648,7 @@ class FigureFactory(object):
                                                      "either be a Plotly "
                                                      "colorscale, an 'rgb' "
                                                      "color, or a Hex color.")
+                    # put single-color 'colors' into a list
                     colors_list = []
                     colors_list.append(colors)
                     colors = colors_list
@@ -1672,44 +1675,47 @@ class FigureFactory(object):
 
         # now validate data
         if isinstance(data, pd.core.frame.DataFrame):
-            
+            if len(data.columns) <= 1:
+                data = data['Score'].values.tolist()
 
+                plot_data, plot_xrange = FigureFactory._violinplot(
+                    data, fillcolor=colors[0]
+                )
+                layout = graph_objs.Layout(
+                    title=title,
+                    autosize=False,
+                    font=graph_objs.Font(size=11),
+                    height=450,
+                    showlegend=False,
+                    width=350,
+                    xaxis=FigureFactory._make_XAxis('', plot_xrange),
+                    yaxis=FigureFactory._make_YAxis(''),
+                    hovermode='closest'
+                )
+                layout['yaxis'].update(dict(showline=False,
+                                            showticklabels=False,
+                                            ticks=''))
 
+                fig = graph_objs.Figure(data=graph_objs.Data(plot_data),
+                                        layout=layout)
+                return fig
 
+            else:
+                #import pandas as pd
+                # collect all group names
+                group_name = []
+                for name in data['Group']:
+                    if name not in group_name:
+                        group_name.append(name)
 
+                gb = data.groupby(['Group'])
+                L = len(group_name)
 
-
-
-        if isinstance(data, list):
-
-            if color is None:
-                color = DEFAULT_PLOTLY_COLORS[0]
-
-            plot_data, plot_xrange = FigureFactory._violinplot(data,
-                                                               fillcolor=color)
-
-            layout = graph_objs.Layout(
-                title=title,
-                autosize=False,
-                font=graph_objs.Font(size=11),
-                height=450,
-                showlegend=False,
-                width=350,
-                xaxis=FigureFactory._make_XAxis('', plot_xrange),
-                yaxis=FigureFactory._make_YAxis(''),
-                hovermode='closest'
-            )
-            layout['yaxis'].update(dict(showline=False,
-                                        showticklabels=False,
-                                        ticks=''))
-
-            fig = graph_objs.Figure(data=graph_objs.Data(plot_data),
-                                    layout=layout)
-            return fig
-
-        if isinstance(data, pd.core.frame.DataFrame):
-            if 'Group' not in data:
-                raise exceptions.PlotlyError("")
+                fig = py.plotly.tools.make_subplots(rows=1, cols=L,
+                    shared_yaxes=True, 
+                                    horizontal_spacing=0.025,                      
+                                    print_grid=True)
+                            
 
     @staticmethod
     def _find_intermediate_color(lowcolor, highcolor, intermed):
