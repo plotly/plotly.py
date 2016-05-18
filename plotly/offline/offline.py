@@ -14,23 +14,11 @@ import webbrowser
 
 import plotly
 from plotly import tools, utils
-from plotly.exceptions import PlotlyError
 
+import IPython
+from IPython.display import HTML, display
 
-try:
-    import IPython
-    _ipython_imported = True
-except ImportError:
-    _ipython_imported = False
-
-try:
-    import matplotlib
-    _matplotlib_imported = True
-except ImportError:
-    _matplotlib_imported = False
-
-
-__PLOTLY_OFFLINE_INITIALIZED = False
+import matplotlib
 
 
 def download_plotlyjs(download_url):
@@ -79,21 +67,13 @@ def init_notebook_mode():
     to load the necessary javascript files for creating
     Plotly graphs with plotly.offline.iplot.
     """
-    if not tools._ipython_imported:
-        raise ImportError('`iplot` can only run inside an IPython Notebook.')
-    from IPython.display import HTML, display
-
-    global __PLOTLY_OFFLINE_INITIALIZED
-    if not __PLOTLY_OFFLINE_INITIALIZED:
-        display(HTML("<script type='text/javascript'>" +
-                     "define('plotly', function(require, exports, module) {" +
-                     get_plotlyjs() +
-                     "});" +
-                     "require(['plotly'], function(Plotly) {" +
-                     "window.Plotly = Plotly;" +
-                     "});" +
-                     "</script>"))
-    __PLOTLY_OFFLINE_INITIALIZED = True
+    warnings.warn('''
+        `init_notebook_mode` is deprecated and will be removed in the
+        next release. Notebook mode is now automatically initialized when
+        notebook methods are invoked, so it is no
+        longer necessary to manually initialize.
+    ''', DeprecationWarning)
+    pass
 
 
 def _plot_html(figure_or_data, show_link, link_text,
@@ -433,10 +413,8 @@ def iplot_mpl(mpl_fig, resize=False, strip_style=False,
 
     Example:
     ```
-    from plotly.offline import init_notebook_mode, iplot_mpl
+    from plotly.offline import iplot_mpl
     import matplotlib.pyplot as plt
-
-    init_notebook_mode()
 
     fig = plt.figure()
     x = [10, 15, 20, 25, 30]
@@ -468,10 +446,9 @@ def enable_mpl_offline(resize=False, strip_style=False,
 
     Example:
     ```
-    from plotly.offline import init_notebook_mode, enable_mpl_offline
+    from plotly.offline import enable_mpl_offline
     import matplotlib.pyplot as plt
 
-    init_notebook_mode()
     enable_mpl_offline()
 
     fig = plt.figure()
