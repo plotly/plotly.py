@@ -48,6 +48,30 @@ def get_plotlyjs():
     return plotlyjs
 
 
+def load_plotlyjs():
+    """
+    Initialize plotly.js in the browser if it hasn't been loaded into the DOM
+    yet. This is an idempotent method and can and should be called from any
+    offline methods that require plotly.js to be loaded into the notebook dom.
+    """
+    script_inject = (
+        ''
+        '<script type=\'text/javascript\'>'
+        'if(!window.Plotly){{'
+        'define(\'plotly\', function(require, exports, module) {{'
+        '{script}'
+        '}});'
+        'require([\'plotly\'], function(Plotly) {{'
+        'console.log(Plotly);'
+        'window.Plotly = Plotly;'
+        '}});'
+        '}}'
+        '</script>'
+        '').format(script=get_plotlyjs())
+
+    display(HTML(script_inject))
+
+
 def init_notebook_mode():
     """
     Initialize Plotly Offline mode in an IPython Notebook.
@@ -171,25 +195,13 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
 
     Example:
     ```
-    from plotly.offline import init_notebook_mode, iplot
-    init_notebook_mode()
+    from plotly.offline import, iplot
 
     iplot([{'x': [1, 2, 3], 'y': [5, 2, 7]}])
     ```
     """
-    if not __PLOTLY_OFFLINE_INITIALIZED:
-        raise PlotlyError('\n'.join([
-            'Plotly Offline mode has not been initialized in this notebook. '
-            'Run: ',
-            '',
-            'import plotly',
-            'plotly.offline.init_notebook_mode() '
-            '# run at the start of every ipython notebook',
-        ]))
-    if not tools._ipython_imported:
-        raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
-    from IPython.display import HTML, display
+    load_plotlyjs()
 
     plot_html, plotdivid, width, height = _plot_html(
         figure_or_data, show_link, link_text, validate,
@@ -434,6 +446,8 @@ def iplot_mpl(mpl_fig, resize=False, strip_style=False,
     iplot_mpl(fig)
     ```
     """
+    load_plotlyjs()
+
     plotly_plot = tools.mpl_to_plotly(mpl_fig, resize, strip_style, verbose)
     return iplot(plotly_plot, show_link, link_text, validate)
 
@@ -467,8 +481,8 @@ def enable_mpl_offline(resize=False, strip_style=False,
     fig
     ```
     """
-    if not __PLOTLY_OFFLINE_INITIALIZED:
-        init_notebook_mode()
+    load_plotlyjs()
+
     ip = IPython.core.getipython.get_ipython()
     formatter = ip.display_formatter.formatters['text/html']
     formatter.for_type(matplotlib.figure.Figure,
