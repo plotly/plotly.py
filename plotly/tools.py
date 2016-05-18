@@ -1609,7 +1609,7 @@ class FigureFactory(object):
         return plot_data, plot_xrange
 
     @staticmethod
-    def create_violin(data, color=None, colorscale=None,
+    def create_violin(data, colors=None, use_colorscale=False,
                       title='Violin and Rug Plot'):
         """
         Doc String Goes Here
@@ -1633,12 +1633,60 @@ class FigureFactory(object):
                          'Electric': ['rgb(0,0,0)', 'rgb(255,250,220)'],
                          'Viridis': ['rgb(68,1,84)', 'rgb(253,231,37)']}
 
+        if use_colorscale is False:
+            # accepts rgb-strings, hex-strings, plotly_colorscale names
+            # all in addition to lists containing colors
+            if isinstance(colors, str):
+                if colors in plotly_scales:
+                    colors = plotly_scales[colors]
+                else:
+                    if ('rgb' not in colors) and ('#' not in colors):
+                        raise exceptions.PlotlyError("If you input a string "
+                                                     "for 'colors', it must "
+                                                     "either be a Plotly "
+                                                     "colorscale, an 'rgb' "
+                                                     "color, or a Hex color.")
+                    colors_list = []
+                    colors_list.append(colors)
+                    colors = colors_list
+
+            if not isinstance(colors, list):
+                raise exceptions.PlotlyError("'colors' must be either a "
+                                             "string or a list of colors.")
+            if len(colors) <= 0:
+                raise exceptions.PlotlyError("Empty list of colors.")
+
+        else:
+            # must receive either a plotly colorscale name or a list with
+            # at least 2 colors. Will use first 2 in list for colorscale
+            if not isinstance(colors, list):
+                raise exceptions.PlotlyError("'colors' needs to be either a "
+                                             "plotly colorscale string or a "
+                                             "list of at least two colors if "
+                                             "use_colorscale is True.")
+            if len(colors) < 2:
+                raise exceptions.PlotlyError("'colors' needs to be either a "
+                                             "plotly colorscale string or a "
+                                             "list of at least two colors if "
+                                             "use_colorscale is True.")
+
+        # now validate data
+        if isinstance(data, pd.core.frame.DataFrame):
+            
+
+
+
+
+
+
+
         if isinstance(data, list):
 
             if color is None:
                 color = DEFAULT_PLOTLY_COLORS[0]
 
-            plot_data, plot_xrange = FigureFactory._violinplot(data, fillcolor=color)
+            plot_data, plot_xrange = FigureFactory._violinplot(data,
+                                                               fillcolor=color)
 
             layout = graph_objs.Layout(
                 title=title,
@@ -1659,8 +1707,9 @@ class FigureFactory(object):
                                     layout=layout)
             return fig
 
-        else:
-            pass
+        if isinstance(data, pd.core.frame.DataFrame):
+            if 'Group' not in data:
+                raise exceptions.PlotlyError("")
 
     @staticmethod
     def _find_intermediate_color(lowcolor, highcolor, intermed):
