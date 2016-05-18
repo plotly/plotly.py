@@ -1451,6 +1451,218 @@ class FigureFactory(object):
     """
 
     @staticmethod
+    def _calc_stats(data):
+        import numpy as np
+
+        x = np.asarray(data, np.float)
+        vals_min = np.min(x)
+        vals_max = np.max(x)
+        q2 = np.percentile(x, 50, interpolation='linear')
+        q1 = np.percentile(x, 25, interpolation='lower')
+        q3 = np.percentile(x, 75, interpolation='higher')
+        IQR = q3 - q1
+        whisker_dist = 1.5 * IQR
+
+        # in order to prevent drawing whiskers outside the interval
+        # of data one defines the whisker positions as:
+        d1 = np.min(x[x >= (q1 - whisker_dist)])
+        d2 = np.max(x[x <= (q3 + whisker_dist)])
+        return vals_min, vals_max, q1, q2, q3, d1, d2
+
+    @staticmethod
+    def _make_half_violin(x, y, fillcolor='#1f77b4',  linecolor='rgb(50,50,50)'):
+        from plotly.graph_objs import graph_objs
+
+        text = ['(pdf(y), y)=(' + '{:0.2f}'.format(x[i]) + ', ' + '{:0.2f}'.format(y[i]) + ')'
+                for i in range(len(x))]
+        return graph_objs.Scatter(
+            x=x,
+            y=y, mode='lines',
+            name='',
+            text=text,
+            fill='tonextx',
+            fillcolor=fillcolor,
+            line=graph_objs.Line(width=0.5, color=linecolor, shape='spline'),
+            hoverinfo='text',
+            opacity=0.5
+        )
+
+    @staticmethod
+    def _make_rugplot(vals, pdf_max, distance, color='#1f77b4'):
+        from plotly.graph_objs import graph_objs
+
+        return graph_objs.Scatter(
+            y=vals,
+            x=[-pdf_max-distance]*len(vals),
+            marker=graph_objs.Marker(
+                color=color,
+                symbol='line-ew-open'
+            ),
+            mode='markers',
+            name='',
+            showlegend=False,
+            hoverinfo='y'
+        )
+
+    @staticmethod
+    def _make_quartiles(q1, q3):
+        from plotly.graph_objs import graph_objs
+
+        return graph_objs.Scatter(
+            x=[0, 0],
+            y=[q1, q3],
+            text=['lower-quartile: ' + '{:0.2f}'.format(q1),
+                  'upper-quartile: ' + '{:0.2f}'.format(q3)],
+            mode='lines',
+            line=graph_objs.Line(
+                width=4,
+                color='rgb(0,0,0)'
+            ),
+            hoverinfo='text'
+        )
+
+    @staticmethod
+    def _make_median(q2):
+        from plotly.graph_objs import graph_objs
+
+        return graph_objs.Scatter(
+            x=[0],
+            y=[q2],
+            text=['median: ' + '{:0.2f}'.format(q2)],
+            mode='markers',
+            marker=dict(symbol='square',
+                        color='rgb(255,255,255)'),
+            hoverinfo='text'
+        )
+
+    @staticmethod
+    def _make_non_outlier_interval(d1, d2):
+        from plotly.graph_objs import graph_objs
+
+        return graph_objs.Scatter(
+            x=[0, 0],
+            y=[d1, d2],
+            name='',
+            mode='lines',
+            line=graph_objs.Line(width=1.5,
+                                 color='rgb(0,0,0)')
+        )
+
+    @staticmethod
+    def _make_XAxis(xaxis_title, xaxis_range):
+        from plotly.graph_objs import graph_objs
+
+        xaxis = graph_objs.XAxis(title=xaxis_title,
+                                 range=xaxis_range,
+                                 showgrid=False,
+                                 zeroline=False,
+                                 showline=False,
+                                 mirror=False,
+                                 ticks='',
+                                 showticklabels=False,
+                                 )
+        return xaxis
+
+    @staticmethod
+    def _make_YAxis(yaxis_title):
+        from plotly.graph_objs import graph_objs
+
+        yaxis = graph_objs.YAxis(title=yaxis_title,
+                                 showticklabels=True,
+                                 autorange=True,
+                                 ticklen=4,
+                                 showline=True,
+                                 zeroline=False,
+                                 showgrid=False,
+                                 mirror=False)
+        return yaxis
+
+    @staticmethod
+    def _violinplot(vals, fillcolor='#1f77b4', rugplot=True):
+        import numpy as np
+        from scipy import stats
+
+        vals = np.asarray(vals, np.float)
+        #  summary statistics
+        vals_min, vals_max, q1, q2, q3, d1, d2 = FigureFactory._calc_stats(vals)
+        # kernel density estimation of pdf
+        pdf = stats.gaussian_kde(vals)
+        # grid over the data interval
+        xx = np.linspace(vals_min, vals_max, 100)
+        # evaluate the pdf at the grid xx
+        yy = pdf(xx)
+        max_pdf = np.max(yy)
+        # distance from the violin plot to rugplot
+        distance = 2.0*max_pdf/10 if rugplot else 0
+        # range for x values in the plot
+        plot_xrange = [-max_pdf-distance-0.1, max_pdf+0.1]
+        plot_data = [FigureFactory._make_half_violin(-yy, xx, fillcolor=fillcolor),
+                     FigureFactory._make_half_violin(yy, xx, fillcolor=fillcolor),
+                     FigureFactory._make_non_outlier_interval(d1, d2),
+                     FigureFactory._make_quartiles(q1, q3),
+                     FigureFactory._make_median(q2)]
+        if rugplot:
+            plot_data.append(FigureFactory._make_rugplot(vals,
+                                                         max_pdf,
+                                                         distance=distance,
+                                                         color=fillcolor))
+        return plot_data, plot_xrange
+
+    @staticmethod
+    def create_violin(data, color=None, colorscale=None,
+                      title='Violin and Rug Plot'):
+        """
+        Doc String Goes Here
+        """
+        from plotly.graph_objs import graph_objs
+        plotly_scales = {'Greys': ['rgb(0,0,0)', 'rgb(255,255,255)'],
+                         'YlGnBu': ['rgb(8,29,88)', 'rgb(255,255,217)'],
+                         'Greens': ['rgb(0,68,27)', 'rgb(247,252,245)'],
+                         'YlOrRd': ['rgb(128,0,38)', 'rgb(255,255,204)'],
+                         'Bluered': ['rgb(0,0,255)', 'rgb(255,0,0)'],
+                         'RdBu': ['rgb(5,10,172)', 'rgb(178,10,28)'],
+                         'Reds': ['rgb(220,220,220)', 'rgb(178,10,28)'],
+                         'Blues': ['rgb(5,10,172)', 'rgb(220,220,220)'],
+                         'Picnic': ['rgb(0,0,255)', 'rgb(255,0,0)'],
+                         'Rainbow': ['rgb(150,0,90)', 'rgb(255,0,0)'],
+                         'Portland': ['rgb(12,51,131)', 'rgb(217,30,30)'],
+                         'Jet': ['rgb(0,0,131)', 'rgb(128,0,0)'],
+                         'Hot': ['rgb(0,0,0)', 'rgb(255,255,255)'],
+                         'Blackbody': ['rgb(0,0,0)', 'rgb(160,200,255)'],
+                         'Earth': ['rgb(0,0,130)', 'rgb(255,255,255)'],
+                         'Electric': ['rgb(0,0,0)', 'rgb(255,250,220)'],
+                         'Viridis': ['rgb(68,1,84)', 'rgb(253,231,37)']}
+
+        if isinstance(data, list):
+
+            if color is None:
+                color = DEFAULT_PLOTLY_COLORS[0]
+
+            plot_data, plot_xrange = FigureFactory._violinplot(data, fillcolor=color)
+
+            layout = graph_objs.Layout(
+                title=title,
+                autosize=False,
+                font=graph_objs.Font(size=11),
+                height=450,
+                showlegend=False,
+                width=350,
+                xaxis=FigureFactory._make_XAxis('', plot_xrange),
+                yaxis=FigureFactory._make_YAxis(''),
+                hovermode='closest'
+            )
+            layout['yaxis'].update(dict(showline=False,
+                                        showticklabels=False,
+                                        ticks=''))
+
+            fig = graph_objs.Figure(data=graph_objs.Data(plot_data),
+                                    layout=layout)
+            return fig
+
+        else:
+            pass
+
+    @staticmethod
     def _find_intermediate_color(lowcolor, highcolor, intermed):
         """
         Returns the color at a given distance between two colors
