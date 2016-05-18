@@ -712,7 +712,8 @@
                             "mollweide",
                             "hammer",
                             "transverse mercator",
-                            "albers usa"
+                            "albers usa",
+                            "winkel tripel"
                         ]
                     }
                 },
@@ -838,6 +839,114 @@
                     false
                 ]
             },
+            "images": {
+                "items": {
+                    "image": {
+                        "layer": {
+                            "description": "Specifies whether images are drawn below or above traces. When `xref` and `yref` are both set to `paper`, image is drawn below the entire plot area.",
+                            "dflt": "above",
+                            "role": "info",
+                            "valType": "enumerated",
+                            "values": [
+                                "below",
+                                "above"
+                            ]
+                        },
+                        "opacity": {
+                            "description": "Sets the opacity of the image.",
+                            "dflt": 1,
+                            "max": 1,
+                            "min": 0,
+                            "role": "info",
+                            "valType": "number"
+                        },
+                        "role": "object",
+                        "sizex": {
+                            "description": "Sets the image container size horizontally. The image will be sized based on the `position` value. When `xref` is set to `paper`, units are sized relative to the plot width.",
+                            "dflt": 0,
+                            "role": "info",
+                            "valType": "number"
+                        },
+                        "sizey": {
+                            "description": "Sets the image container size vertically. The image will be sized based on the `position` value. When `yref` is set to `paper`, units are sized relative to the plot height.",
+                            "dflt": 0,
+                            "role": "info",
+                            "valType": "number"
+                        },
+                        "sizing": {
+                            "description": "Specifies which dimension of the image to constrain.",
+                            "dflt": "contain",
+                            "role": "info",
+                            "valType": "enumerated",
+                            "values": [
+                                "fill",
+                                "contain",
+                                "stretch"
+                            ]
+                        },
+                        "source": {
+                            "description": "Specifies the URL of the image to be used. The URL must be accessible from the domain where the plot code is run, and can be either relative or absolute.",
+                            "role": "info",
+                            "valType": "string"
+                        },
+                        "x": {
+                            "description": "Sets the image's x position. When `xref` is set to `paper`, units are sized relative to the plot height. See `xref` for more info",
+                            "dflt": 0,
+                            "role": "info",
+                            "valType": "number"
+                        },
+                        "xanchor": {
+                            "description": "Sets the anchor for the x position",
+                            "dflt": "left",
+                            "role": "info",
+                            "valType": "enumerated",
+                            "values": [
+                                "left",
+                                "center",
+                                "right"
+                            ]
+                        },
+                        "xref": {
+                            "description": "Sets the images's x coordinate axis. If set to a x axis id (e.g. *x* or *x2*), the `x` position refers to an x data coordinate If set to *paper*, the `x` position refers to the distance from the left of plot in normalized coordinates where *0* (*1*) corresponds to the left (right).",
+                            "dflt": "paper",
+                            "role": "info",
+                            "valType": "enumerated",
+                            "values": [
+                                "paper",
+                                "/^x([2-9]|[1-9][0-9]+)?$/"
+                            ]
+                        },
+                        "y": {
+                            "description": "Sets the image's y position. When `yref` is set to `paper`, units are sized relative to the plot height. See `yref` for more info",
+                            "dflt": 0,
+                            "role": "info",
+                            "valType": "number"
+                        },
+                        "yanchor": {
+                            "description": "Sets the anchor for the y position.",
+                            "dflt": "top",
+                            "role": "info",
+                            "valType": "enumerated",
+                            "values": [
+                                "top",
+                                "middle",
+                                "bottom"
+                            ]
+                        },
+                        "yref": {
+                            "description": "Sets the images's y coordinate axis. If set to a y axis id (e.g. *y* or *y2*), the `y` position refers to a y data coordinate. If set to *paper*, the `y` position refers to the distance from the bottom of the plot in normalized coordinates where *0* (*1*) corresponds to the bottom (top).",
+                            "dflt": "paper",
+                            "role": "info",
+                            "valType": "enumerated",
+                            "values": [
+                                "paper",
+                                "/^y([2-9]|[1-9][0-9]+)?$/"
+                            ]
+                        }
+                    }
+                },
+                "role": "object"
+            },
             "legend": {
                 "bgcolor": {
                     "description": "Sets the legend background color.",
@@ -876,6 +985,16 @@
                         "role": "style",
                         "valType": "number"
                     }
+                },
+                "orientation": {
+                    "description": "Sets the orientation of the legend.",
+                    "dflt": "v",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "v",
+                        "h"
+                    ]
                 },
                 "role": "object",
                 "tracegroupgap": {
@@ -6018,14 +6137,15 @@
                     "valType": "number"
                 },
                 "barmode": {
-                    "description": "Determines how bars at the same location coordinate are displayed on the graph. With *stack*, the bars are stacked on top of one another With *group*, the bars are plotted next to one another centered around the shared location. With *overlay*, the bars are plotted over one another, you might need to an *opacity* to see multiple bars.",
+                    "description": "Determines how bars at the same location coordinate are displayed on the graph. With *stack*, the bars are stacked on top of one another With *relative*, the bars are stacked on top of one another, with negative values below the axis, positive values above With *group*, the bars are plotted next to one another centered around the shared location. With *overlay*, the bars are plotted over one another, you might need to an *opacity* to see multiple bars.",
                     "dflt": "group",
                     "role": "info",
                     "valType": "enumerated",
                     "values": [
                         "stack",
                         "group",
-                        "overlay"
+                        "overlay",
+                        "relative"
                     ]
                 },
                 "barnorm": {
@@ -9298,14 +9418,15 @@
                     "valType": "number"
                 },
                 "barmode": {
-                    "description": "Determines how bars at the same location coordinate are displayed on the graph. With *stack*, the bars are stacked on top of one another With *group*, the bars are plotted next to one another centered around the shared location. With *overlay*, the bars are plotted over one another, you might need to an *opacity* to see multiple bars.",
+                    "description": "Determines how bars at the same location coordinate are displayed on the graph. With *stack*, the bars are stacked on top of one another With *relative*, the bars are stacked on top of one another, with negative values below the axis, positive values above With *group*, the bars are plotted next to one another centered around the shared location. With *overlay*, the bars are plotted over one another, you might need to an *opacity* to see multiple bars.",
                     "dflt": "group",
                     "role": "info",
                     "valType": "enumerated",
                     "values": [
                         "stack",
                         "group",
-                        "overlay"
+                        "overlay",
+                        "relative"
                     ]
                 },
                 "barnorm": {
@@ -15156,6 +15277,12 @@
         },
         "scattergl": {
             "attributes": {
+                "connectgaps": {
+                    "description": "Determines whether or not gaps (i.e. {nan} or missing values) in the provided data arrays are connected.",
+                    "dflt": false,
+                    "role": "info",
+                    "valType": "boolean"
+                },
                 "dx": {
                     "description": "Sets the x coordinate step. See `x0` for more info.",
                     "dflt": 1,
