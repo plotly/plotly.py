@@ -16,9 +16,9 @@ import plotly
 from plotly import tools, utils
 from plotly.exceptions import PlotlyError
 
-
 try:
     import IPython
+    from IPython.display import HTML, display
     _ipython_imported = True
 except ImportError:
     _ipython_imported = False
@@ -29,9 +29,7 @@ try:
 except ImportError:
     _matplotlib_imported = False
 
-
 __PLOTLY_OFFLINE_INITIALIZED = False
-
 
 def download_plotlyjs(download_url):
     warnings.warn('''
@@ -50,25 +48,30 @@ def get_plotlyjs():
 
 def init_notebook_mode():
     """
-    Initialize Plotly Offline mode in an IPython Notebook.
-    Run this function at the start of an IPython notebook
-    to load the necessary javascript files for creating
-    Plotly graphs with plotly.offline.iplot.
+    Initialize plotly.js in the browser if it hasn't been loaded into the DOM
+    yet. This is an idempotent method and can and should be called from any
+    offline methods that require plotly.js to be loaded into the notebook dom.
     """
-    if not tools._ipython_imported:
+    if not _ipython_imported:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
-    from IPython.display import HTML, display
 
     global __PLOTLY_OFFLINE_INITIALIZED
     # Inject plotly.js into the output cell
-    display(HTML("<script type='text/javascript'>" +
-                 "define('plotly', function(require, exports, module) {" +
-                 get_plotlyjs() +
-                 "});" +
-                 "require(['plotly'], function(Plotly) {" +
-                 "window.Plotly = Plotly;" +
-                 "});" +
-                 "</script>"))
+    script_inject = (
+        ''
+        '<script type=\'text/javascript\'>'
+        'if(!window.Plotly){{'
+        'define(\'plotly\', function(require, exports, module) {{'
+        '{script}'
+        '}});'
+        'require([\'plotly\'], function(Plotly) {{'
+        'window.Plotly = Plotly;'
+        '}});'
+        '}}'
+        '</script>'
+        '').format(script=get_plotlyjs())
+
+    display(HTML(script_inject))
     __PLOTLY_OFFLINE_INITIALIZED = True
 
 
@@ -173,7 +176,6 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     ```
     from plotly.offline import init_notebook_mode, iplot
     init_notebook_mode()
-
     iplot([{'x': [1, 2, 3], 'y': [5, 2, 7]}])
     ```
     """
@@ -188,8 +190,6 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         ]))
     if not tools._ipython_imported:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
-
-    from IPython.display import HTML, display
 
     plot_html, plotdivid, width, height = _plot_html(
         figure_or_data, show_link, link_text, validate,
@@ -424,13 +424,12 @@ def iplot_mpl(mpl_fig, resize=False, strip_style=False,
     from plotly.offline import init_notebook_mode, iplot_mpl
     import matplotlib.pyplot as plt
 
-    init_notebook_mode()
-
     fig = plt.figure()
     x = [10, 15, 20, 25, 30]
     y = [100, 250, 200, 150, 300]
     plt.plot(x, y, "o")
 
+    init_notebook_mode()
     iplot_mpl(fig)
     ```
     """
@@ -454,10 +453,9 @@ def enable_mpl_offline(resize=False, strip_style=False,
 
     Example:
     ```
-    from plotly.offline import init_notebook_mode, enable_mpl_offline
+    from plotly.offline import enable_mpl_offline
     import matplotlib.pyplot as plt
 
-    init_notebook_mode()
     enable_mpl_offline()
 
     fig = plt.figure()
@@ -467,8 +465,8 @@ def enable_mpl_offline(resize=False, strip_style=False,
     fig
     ```
     """
-    if not __PLOTLY_OFFLINE_INITIALIZED:
-        init_notebook_mode()
+    init_notebook_mode()
+
     ip = IPython.core.getipython.get_ipython()
     formatter = ip.display_formatter.formatters['text/html']
     formatter.for_type(matplotlib.figure.Figure,
