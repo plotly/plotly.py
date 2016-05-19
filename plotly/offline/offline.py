@@ -60,6 +60,8 @@ def init_notebook_mode():
     if not _ipython_imported:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
+    global __PLOTLY_OFFLINE_INITIALIZED
+    # ALways display the script so that init_notebook_mode is idempotent
     script_inject = (
         ''
         '<script type=\'text/javascript\'>'
@@ -76,7 +78,7 @@ def init_notebook_mode():
         '').format(script=get_plotlyjs())
 
     display(HTML(script_inject))
-
+    __PLOTLY_OFFLINE_INITIALIZED = True
 
 def _plot_html(figure_or_data, show_link, link_text,
                validate, default_width, default_height, global_requirejs):
@@ -182,8 +184,6 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     iplot([{'x': [1, 2, 3], 'y': [5, 2, 7]}])
     ```
     """
-
-    init_notebook_mode()
 
     plot_html, plotdivid, width, height = _plot_html(
         figure_or_data, show_link, link_text, validate,
@@ -426,7 +426,6 @@ def iplot_mpl(mpl_fig, resize=False, strip_style=False,
     iplot_mpl(fig)
     ```
     """
-    init_notebook_mode()
 
     plotly_plot = tools.mpl_to_plotly(mpl_fig, resize, strip_style, verbose)
     return iplot(plotly_plot, show_link, link_text, validate)
