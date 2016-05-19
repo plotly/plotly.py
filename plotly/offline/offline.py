@@ -60,15 +60,15 @@ def init_notebook_mode():
     from IPython.display import HTML, display
 
     global __PLOTLY_OFFLINE_INITIALIZED
-    if not __PLOTLY_OFFLINE_INITIALIZED:
-        display(HTML("<script type='text/javascript'>" +
-                     "define('plotly', function(require, exports, module) {" +
-                     get_plotlyjs() +
-                     "});" +
-                     "require(['plotly'], function(Plotly) {" +
-                     "window.Plotly = Plotly;" +
-                     "});" +
-                     "</script>"))
+    # Inject plotly.js into the output cell
+    display(HTML("<script type='text/javascript'>" +
+                 "define('plotly', function(require, exports, module) {" +
+                 get_plotlyjs() +
+                 "});" +
+                 "require(['plotly'], function(Plotly) {" +
+                 "window.Plotly = Plotly;" +
+                 "});" +
+                 "</script>"))
     __PLOTLY_OFFLINE_INITIALIZED = True
 
 
