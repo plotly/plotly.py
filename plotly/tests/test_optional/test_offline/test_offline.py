@@ -27,10 +27,9 @@ PLOTLYJS = plotly.offline.offline.get_plotlyjs()
 
 class PlotlyOfflineTestCase(TestCase):
     def setUp(self):
-        plotly.offline.offline.__PLOTLY_OFFLINE_INITIALIZED = False
+        pass
 
-    @raises(plotly.exceptions.PlotlyError)
-    def test_iplot_doesnt_work_before_you_call_init_notebook_mode(self):
+    def test_iplot_works_wihout_calling_init_notebook_mode(self):
         plotly.offline.iplot([{}])
 
     def test_iplot_works_after_you_call_init_notebook_mode(self):
