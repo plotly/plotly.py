@@ -63,7 +63,7 @@ class TestDistplot(TestCase):
         self.assertEqual(dp['layout'], expected_dp_layout)
 
         expected_dp_data_hist = {'autobinx': False,
-                                 'histnorm': 'probability',
+                                 'histnorm': 'probability density',
                                  'legendgroup': 'distplot',
                                  'marker': {'color': 'rgb(31, 119, 180)'},
                                  'name': 'distplot',
@@ -120,7 +120,7 @@ class TestDistplot(TestCase):
         self.assertEqual(dp['layout'], expected_dp_layout)
 
         expected_dp_data_hist_1 = {'autobinx': False,
-                                   'histnorm': 'probability',
+                                   'histnorm': 'probability density',
                                    'legendgroup': '2012',
                                    'marker': {'color': 'rgb(31, 119, 180)'},
                                    'name': '2012',
@@ -136,7 +136,7 @@ class TestDistplot(TestCase):
         self.assertEqual(dp['data'][0], expected_dp_data_hist_1)
 
         expected_dp_data_hist_2 = {'autobinx': False,
-                                   'histnorm': 'probability',
+                                   'histnorm': 'probability density',
                                    'legendgroup': '2013',
                                    'marker': {'color': 'rgb(255, 127, 14)'},
                                    'name': '2013',
@@ -165,7 +165,7 @@ class TestDistplot(TestCase):
                                                    bin_size=[.2, .2])
 
             expected_dp_data_hist_1 = {'autobinx': False,
-                                       'histnorm': 'probability',
+                                       'histnorm': 'probability density',
                                        'legendgroup': '2012',
                                        'marker': {'color': 'rgb(31, 119, 180)'},
                                        'name': '2012',
@@ -181,7 +181,7 @@ class TestDistplot(TestCase):
             self.assertEqual(dp['data'][0], expected_dp_data_hist_1)
 
             expected_dp_data_hist_2 = {'autobinx': False,
-                                       'histnorm': 'probability',
+                                       'histnorm': 'probability density',
                                        'legendgroup': '2013',
                                        'marker': {'color': 'rgb(255, 127, 14)'},
                                        'name': '2013',
