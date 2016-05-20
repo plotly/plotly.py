@@ -5081,7 +5081,7 @@ class _Distplot(FigureFactory):
                                x=self.hist_data[index],
                                xaxis='x1',
                                yaxis='y1',
-                               histnorm='probability',
+                               histnorm='probability density',
                                name=self.group_labels[index],
                                legendgroup=self.group_labels[index],
                                marker=dict(color=self.colors[index]),
@@ -5108,7 +5108,7 @@ class _Distplot(FigureFactory):
             self.curve_y[index] = (scipy.stats.gaussian_kde
                                    (self.hist_data[index])
                                    (self.curve_x[index]))
-            self.curve_y[index] *= self.bin_size[index]
+            # self.curve_y[index] *= self.bin_size[index]
 
         for index in range(self.trace_number):
             curve[index] = dict(type='scatter',
@@ -5143,7 +5143,7 @@ class _Distplot(FigureFactory):
                                    / 500 for x in range(500)]
             self.curve_y[index] = scipy.stats.norm.pdf(
                 self.curve_x[index], loc=mean[index], scale=sd[index])
-            self.curve_y[index] *= self.bin_size[index]
+            # self.curve_y[index] *= self.bin_size[index]
 
         for index in range(self.trace_number):
             curve[index] = dict(type='scatter',
@@ -5621,4 +5621,3 @@ class _Table(FigureFactory):
                         font=dict(color=font_color),
                         showarrow=False))
         return annotations
-
