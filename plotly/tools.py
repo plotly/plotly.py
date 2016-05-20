@@ -1697,6 +1697,7 @@ class FigureFactory(object):
 
         return fig
 
+    @staticmethod
     def _violin_colorscale(data, data_header, colors, use_colorscale,
                            group_header, height, width, title):
         """
@@ -1705,7 +1706,6 @@ class FigureFactory(object):
         Returns fig for violin plot with colorscale.
 
         """
-
         from plotly.graph_objs import graph_objs
         import numpy as np
 
@@ -1751,6 +1751,22 @@ class FigureFactory(object):
             fig['layout'].update({'xaxis{}'.format(k + 1):
                                   FigureFactory._make_XAxis(group_name[k],
                                                             plot_xrange)})
+        # add colorbar to plot
+        trace_dummy = graph_objs.Scatter(
+            x=[24],
+            y=[10],
+            mode='markers',
+            marker=dict(
+                size=2,
+                cmin=0,
+                cmax=100,
+                colorscale=[[0, colors[0]],
+                            [1, colors[1]]],
+                showscale=True),
+            showlegend=False,
+        )
+        fig.append_trace(trace_dummy, 1, L)
+
         # set the sharey axis style
         fig['layout'].update(
             {'yaxis{}'.format(1): FigureFactory._make_YAxis('')}
@@ -1791,6 +1807,56 @@ class FigureFactory(object):
         :param (float) height: the height of the violin plot
         :param (float) width: the width of the violin plot
         :param (str) title: the title of the violin plot
+
+        Example 1: Single Violin Plot
+        ```
+        import numpy as np
+        from scipy import stats
+
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+        from plotly.graph_objs import graph_objs
+
+        # create list of random values
+        data_list = np.random.randn(100)
+        data_list.tolist()
+
+        # create violin fig
+        fig = FF.create_violin(data_list, colors='#1f77b4')
+
+        # plot
+        py.iplot(fig, filename='Violin Plot')
+        ```
+
+        Example 2: Multiple Violin Plots with Colorscale
+        ```
+        import numpy as np
+        import pandas as pd
+        from scipy import stats
+
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+        from plotly.graph_objs import graph_objs
+
+        # create dataframe
+        np.random.seed(619517)
+        Nr=250
+        y = np.random.randn(Nr)
+        gr = np.random.choice(list("ABCDE"), Nr)
+        norm_params=[(0, 1.2), (0.7, 1), (-0.5, 1.4), (0.3, 1), (0.8, 0.9)]
+
+        for i, letter in enumerate("ABCDE"):
+            y[gr == letter] *=norm_params[i][1]+ norm_params[i][0]
+        df = pd.DataFrame(dict(Score=y, Group=gr))
+
+        # create violin fig
+        fig = FF.create_violin(df, data_header='Score', group_header='Group',
+                               use_colorscale=True, colors='Blues',
+                               height=600, width=1000)
+
+        # plot
+        py.iplot(fig, filename='Violin Plot with Colorscale')
+        ```
         """
         # numpy import check
         if _numpy_imported is False:
