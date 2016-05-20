@@ -1452,6 +1452,9 @@ class FigureFactory(object):
 
     @staticmethod
     def _calc_stats(data):
+        """
+        Calculate statistics for use in violin plot.
+        """
         import numpy as np
 
         x = np.asarray(data, np.float)
@@ -1470,10 +1473,16 @@ class FigureFactory(object):
         return vals_min, vals_max, q1, q2, q3, d1, d2
 
     @staticmethod
-    def _make_half_violin(x, y, fillcolor='#1f77b4',  linecolor='rgb(50,50,50)'):
+    def _make_half_violin(x, y, fillcolor='#1f77b4', linecolor='rgb(0,0,0)'):
+        """
+        Produces a sideways probability distribution fig violin plot.
+        """
+
+
         from plotly.graph_objs import graph_objs
 
-        text = ['(pdf(y), y)=(' + '{:0.2f}'.format(x[i]) + ', ' + '{:0.2f}'.format(y[i]) + ')'
+        text = ['(pdf(y), y)=(' + '{:0.2f}'.format(x[i]) +
+                ', ' + '{:0.2f}'.format(y[i]) + ')'
                 for i in range(len(x))]
         return graph_objs.Scatter(
             x=x,
@@ -1489,6 +1498,9 @@ class FigureFactory(object):
 
     @staticmethod
     def _make_rugplot(vals, pdf_max, distance, color='#1f77b4'):
+        """
+        Returns a rugplot fig for a violin plot.
+        """
         from plotly.graph_objs import graph_objs
 
         return graph_objs.Scatter(
@@ -1506,6 +1518,9 @@ class FigureFactory(object):
 
     @staticmethod
     def _make_quartiles(q1, q3):
+        """
+        Makes the upper and lower quartiles for a violin plot.
+        """
         from plotly.graph_objs import graph_objs
 
         return graph_objs.Scatter(
@@ -1523,6 +1538,9 @@ class FigureFactory(object):
 
     @staticmethod
     def _make_median(q2):
+        """
+        Formats the 'median' hovertext for a violin plot.
+        """
         from plotly.graph_objs import graph_objs
 
         return graph_objs.Scatter(
@@ -1537,6 +1555,10 @@ class FigureFactory(object):
 
     @staticmethod
     def _make_non_outlier_interval(d1, d2):
+        """
+        Returns the scatterplot fig of most of a violin plot.
+
+        """
         from plotly.graph_objs import graph_objs
 
         return graph_objs.Scatter(
@@ -1550,6 +1572,10 @@ class FigureFactory(object):
 
     @staticmethod
     def _make_XAxis(xaxis_title, xaxis_range):
+        """
+        Makes the x-axis for a violin plot.
+
+        """
         from plotly.graph_objs import graph_objs
 
         xaxis = graph_objs.XAxis(title=xaxis_title,
@@ -1565,6 +1591,10 @@ class FigureFactory(object):
 
     @staticmethod
     def _make_YAxis(yaxis_title):
+        """
+        Makes the y-axis for a violin plot.
+
+        """
         from plotly.graph_objs import graph_objs
 
         yaxis = graph_objs.YAxis(title=yaxis_title,
@@ -1579,6 +1609,9 @@ class FigureFactory(object):
 
     @staticmethod
     def _violinplot(vals, fillcolor='#1f77b4', rugplot=True):
+        """
+        Refer to FigureFactory.create_violin() for docstring.
+        """
         import numpy as np
         from scipy import stats
 
@@ -1593,9 +1626,9 @@ class FigureFactory(object):
         yy = pdf(xx)
         max_pdf = np.max(yy)
         # distance from the violin plot to rugplot
-        distance = 2.0*max_pdf/10 if rugplot else 0
+        distance = (2.0 * max_pdf)/10 if rugplot else 0
         # range for x values in the plot
-        plot_xrange = [-max_pdf-distance-0.1, max_pdf+0.1]
+        plot_xrange = [-max_pdf - distance - 0.1, max_pdf + 0.1]
         plot_data = [FigureFactory._make_half_violin(-yy, xx, fillcolor=fillcolor),
                      FigureFactory._make_half_violin(yy, xx, fillcolor=fillcolor),
                      FigureFactory._make_non_outlier_interval(d1, d2),
@@ -1609,12 +1642,162 @@ class FigureFactory(object):
         return plot_data, plot_xrange
 
     @staticmethod
-    def create_violin(data, colors=None, use_colorscale=False,
+    def _violin_no_colorscale(data, data_header, colors, use_colorscale,
+                              group_header, height, width, title):
+        """
+        Refer to FigureFactory.create_violin() for docstring.
+
+        Returns fig for violin plot without colorscale.
+
+        """
+
+        from plotly.graph_objs import graph_objs
+        import numpy as np
+
+        # collect all group names
+        group_name = []
+        for name in data[group_header]:
+            if name not in group_name:
+                group_name.append(name)
+        group_name.sort()
+
+        gb = data.groupby([group_header])
+        L = len(group_name)
+
+        fig = make_subplots(rows=1, cols=L,
+                            shared_yaxes=True,
+                            horizontal_spacing=0.025,
+                            print_grid=True)
+        color_index = 0
+        for k, gr in enumerate(group_name):
+            vals = np.asarray(gb.get_group(gr)[data_header], np.float)
+            if color_index >= len(colors):
+                color_index = 0
+            plot_data, plot_xrange = FigureFactory._violinplot(
+                vals,
+                fillcolor=colors[color_index]
+            )
+            layout = graph_objs.Layout()
+
+            for item in plot_data:
+                fig.append_trace(item, 1, k + 1)
+            color_index += 1
+        # set the sharey axis style
+        fig['layout'].update(
+            {'yaxis{}'.format(1): FigureFactory._make_YAxis('')}
+        )
+        fig['layout'].update(
+            title=title,
+            showlegend=False,
+            hovermode='closest',
+            autosize=False,
+            height=height,
+            width=width
+        )
+
+        return fig
+
+    def _violin_colorscale(data, data_header, colors, use_colorscale,
+                           group_header, height, width, title):
+        """
+        Refer to FigureFactory.create_violin() for docstring.
+
+        Returns fig for violin plot with colorscale.
+
+        """
+
+        from plotly.graph_objs import graph_objs
+        import numpy as np
+
+        # collect all group names
+        group_name = []
+        for name in data[group_header]:
+            if name not in group_name:
+                group_name.append(name)
+        group_name.sort()
+
+        gb = data.groupby([group_header])
+        L = len(group_name)
+
+        fig = make_subplots(rows=1, cols=L,
+                            shared_yaxes=True,
+                            horizontal_spacing=0.025,
+                            print_grid=True)
+        for k, gr in enumerate(group_name):
+            vals = np.asarray(gb.get_group(gr)[data_header], np.float)
+            # find colorscale color
+            if '#' in colors[0]:
+                foo1 = FigureFactory._hex_to_rgb(colors[0])
+            else:
+                foo1 = FigureFactory._unlabel_rgb(colors[0])
+            if '#' in colors[1]:
+                foo2 = FigureFactory._hex_to_rgb(colors[1])
+            else:
+                foo2 = FigureFactory._unlabel_rgb(colors[1])
+
+            foo_color = FigureFactory._find_intermediate_color(
+                foo1, foo2, k/float(L)
+            )
+            intermed_color = 'rgb{}'.format(foo_color)
+
+            plot_data, plot_xrange = FigureFactory._violinplot(
+                vals,
+                fillcolor=intermed_color
+            )
+            layout = graph_objs.Layout()
+
+            for item in plot_data:
+                fig.append_trace(item, 1, k + 1)
+            fig['layout'].update({'xaxis{}'.format(k + 1):
+                                  FigureFactory._make_XAxis(group_name[k],
+                                                            plot_xrange)})
+        # set the sharey axis style
+        fig['layout'].update(
+            {'yaxis{}'.format(1): FigureFactory._make_YAxis('')}
+        )
+        fig['layout'].update(
+            title=title,
+            showlegend=False,
+            hovermode='closest',
+            autosize=False,
+            height=height,
+            width=width
+        )
+
+        return fig
+
+    @staticmethod
+    def create_violin(data, data_header=None, colors=None,
+                      use_colorscale=False, group_header=None,
+                      height=450, width=600,
                       title='Violin and Rug Plot'):
         """
-        Doc String Goes Here
+        Returns figure for a violin plot
+
+        :param (list|array) data: accepts either a list of numerical values,
+            a list of dictionaries all with identical keys and at least one
+            column of numeric values, or a pandas dataframe with at least one
+            column of numbers
+        :param (str) data_header: the header of the data column to be used
+            from an inputted pandas dataframe. Not applicable if 'data' is
+            a list of numeric values
+        :param (str|list) colors: either a rgb or hex color-string or a list
+            of color-strings
+        :param (bool) use_colorscale: will implement a colorscale based on the
+            first 2 color strings of 'colors' if a list. Only applicable if
+            grouping by another variable
+        :param (str) group_header: applicable if grouping data by a variable.
+            'group_header' must be set to the name of the grouping variable.
+        :param (float) height: the height of the violin plot
+        :param (float) width: the width of the violin plot
+        :param (str) title: the title of the violin plot
         """
+        # numpy import check
+        if _numpy_imported is False:
+            raise ImportError("FigureFactory.create_violin() requires "
+                              "numpy to be imported.")
         from plotly.graph_objs import graph_objs
+        from numbers import Number
         plotly_scales = {'Greys': ['rgb(0,0,0)', 'rgb(255,255,255)'],
                          'YlGnBu': ['rgb(8,29,88)', 'rgb(255,255,217)'],
                          'Greens': ['rgb(0,68,27)', 'rgb(247,252,245)'],
@@ -1632,90 +1815,119 @@ class FigureFactory(object):
                          'Earth': ['rgb(0,0,130)', 'rgb(255,255,255)'],
                          'Electric': ['rgb(0,0,0)', 'rgb(255,250,220)'],
                          'Viridis': ['rgb(68,1,84)', 'rgb(253,231,37)']}
+
+        # validate colors
         if colors is None:
             colors = DEFAULT_PLOTLY_COLORS
 
-        if use_colorscale is False:
-            # accepts rgb-strings, hex-strings, plotly_colorscale names
-            # all in addition to lists containing colors
-            if isinstance(colors, str):
-                if colors in plotly_scales:
-                    colors = plotly_scales[colors]
-                else:
-                    if ('rgb' not in colors) and ('#' not in colors):
-                        raise exceptions.PlotlyError("If you input a string "
-                                                     "for 'colors', it must "
-                                                     "either be a Plotly "
-                                                     "colorscale, an 'rgb' "
-                                                     "color, or a Hex color.")
-                    # put single-color 'colors' into a list
-                    colors_list = []
-                    colors_list.append(colors)
-                    colors = colors_list
+        if isinstance(colors, str):
+            if colors in plotly_scales:
+                colors = plotly_scales[colors]
+            else:
+                if ('rgb' not in colors) and ('#' not in colors):
+                    raise exceptions.PlotlyError("If you input a string "
+                                                 "for 'colors', it must "
+                                                 "either be a Plotly "
+                                                 "colorscale, an 'rgb' "
+                                                 "color, or a hex color.")
+                colors_list = []
+                colors_list.append(colors)
+                colors = colors_list
 
-            if not isinstance(colors, list):
-                raise exceptions.PlotlyError("'colors' must be either a "
-                                             "string or a list of colors.")
-            if len(colors) <= 0:
-                raise exceptions.PlotlyError("Empty list of colors.")
+        if not isinstance(colors, list):
+            raise exceptions.PlotlyError("'colors' needs to be either a "
+                                         "plotly colorscale string or a "
+                                         "list of at least two colors if "
+                                         "use_colorscale is True.")
+        if len(colors) <= 0:
+            raise exceptions.PlotlyError("Empty list of colors.")
+
+        if (not isinstance(data, list)) and data_header is None:
+            raise exceptions.PlotlyError("Please enter a string name for "
+                                         "data_header")
+
+        # validate data and choose plot type
+        if group_header is None:
+            if isinstance(data, list):
+                if len(data) <= 0:
+                    raise exceptions.PlotlyError("If data is a list, it must be "
+                                                 "nonempty and contain either "
+                                                 "numbers or dictionaries.")
+
+                if isinstance(data[0], dict):
+                    data_list = []
+                    for dictionary in data:
+                        data_list.append(dictionary[data_header])
+                    data = data_list
+
+                if not isinstance(data[0], Number):
+                    raise exceptions.PlotlyError("If data is a list, it must "
+                                                 "contain either numbers or "
+                                                 "dictionaries.")
+
+            if isinstance(data, pd.core.frame.DataFrame):
+                data = data[data_header].values.tolist()
+
+            # call the plotting functions
+            plot_data, plot_xrange = FigureFactory._violinplot(
+                data, fillcolor=colors[0]
+            )
+            layout = graph_objs.Layout(
+                title=title,
+                autosize=False,
+                font=graph_objs.Font(size=11),
+                height=height,
+                showlegend=False,
+                width=width,
+                xaxis=FigureFactory._make_XAxis('', plot_xrange),
+                yaxis=FigureFactory._make_YAxis(''),
+                hovermode='closest'
+            )
+            layout['yaxis'].update(dict(showline=False,
+                                        showticklabels=False,
+                                        ticks=''))
+
+            fig = graph_objs.Figure(data=graph_objs.Data(plot_data),
+                                    layout=layout)
+            return fig
 
         else:
-            # must receive either a plotly colorscale name or a list with
-            # at least 2 colors. Will use first 2 in list for colorscale
-            if not isinstance(colors, list):
-                raise exceptions.PlotlyError("'colors' needs to be either a "
-                                             "plotly colorscale string or a "
-                                             "list of at least two colors if "
-                                             "use_colorscale is True.")
-            if len(colors) < 2:
-                raise exceptions.PlotlyError("'colors' needs to be either a "
-                                             "plotly colorscale string or a "
-                                             "list of at least two colors if "
-                                             "use_colorscale is True.")
+            if isinstance(data, list):
+                if len(data) <= 0:
+                    raise exceptions.PlotlyError("If data is a list and "
+                                                 "group_by is not None, then "
+                                                 "data must be either a list "
+                                                 "of dictionaries or a data"
+                                                 "frame.")
 
-        # now validate data
-        if isinstance(data, pd.core.frame.DataFrame):
-            if len(data.columns) <= 1:
-                data = data['Score'].values.tolist()
+            if isinstance(data, pd.core.frame.DataFrame):
+                if use_colorscale is False:
+                    fig = FigureFactory._violin_no_colorscale(data,
+                                                              data_header,
+                                                              colors,
+                                                              use_colorscale,
+                                                              group_header,
+                                                              height,
+                                                              width,
+                                                              title)
+                    return fig
 
-                plot_data, plot_xrange = FigureFactory._violinplot(
-                    data, fillcolor=colors[0]
-                )
-                layout = graph_objs.Layout(
-                    title=title,
-                    autosize=False,
-                    font=graph_objs.Font(size=11),
-                    height=450,
-                    showlegend=False,
-                    width=350,
-                    xaxis=FigureFactory._make_XAxis('', plot_xrange),
-                    yaxis=FigureFactory._make_YAxis(''),
-                    hovermode='closest'
-                )
-                layout['yaxis'].update(dict(showline=False,
-                                            showticklabels=False,
-                                            ticks=''))
-
-                fig = graph_objs.Figure(data=graph_objs.Data(plot_data),
-                                        layout=layout)
-                return fig
-
-            else:
-                #import pandas as pd
-                # collect all group names
-                group_name = []
-                for name in data['Group']:
-                    if name not in group_name:
-                        group_name.append(name)
-
-                gb = data.groupby(['Group'])
-                L = len(group_name)
-
-                fig = py.plotly.tools.make_subplots(rows=1, cols=L,
-                    shared_yaxes=True, 
-                                    horizontal_spacing=0.025,                      
-                                    print_grid=True)
-                            
+                else:
+                    # check if colors is a list of at least two colors
+                    if len(colors) < 2:
+                        raise exceptions.PlotlyError("If you are using color"
+                                                     "scale, 'colors' must "
+                                                     "be a list of at least "
+                                                     "2 color-strings.")
+                    fig = FigureFactory._violin_colorscale(data,
+                                                           data_header,
+                                                           colors,
+                                                           use_colorscale,
+                                                           group_header,
+                                                           height,
+                                                           width,
+                                                           title)
+                    return fig
 
     @staticmethod
     def _find_intermediate_color(lowcolor, highcolor, intermed):
@@ -3166,16 +3378,17 @@ class FigureFactory(object):
         (a, b, c)
 
         """
-        unlabelled_colors = []
-        for character in colors:
+        KEY_INDICES = [',', '.']
+
+        if not isinstance(colors, list):
             str_vals = ''
-            for index in range(len(character)):
+            for index in range(len(colors)):
                 try:
-                    float(character[index])
-                    str_vals = str_vals + character[index]
+                    float(colors[index])
+                    str_vals = str_vals + colors[index]
                 except ValueError:
-                    if (character[index] == ',') or (character[index] == '.'):
-                        str_vals = str_vals + character[index]
+                    if colors[index] in KEY_INDICES:
+                        str_vals = str_vals + colors[index]
 
             str_vals = str_vals + ','
             numbers = []
@@ -3187,9 +3400,34 @@ class FigureFactory(object):
                     numbers.append(float(str_num))
                     str_num = ''
             unlabelled_tuple = (numbers[0], numbers[1], numbers[2])
-            unlabelled_colors.append(unlabelled_tuple)
 
-        return unlabelled_colors
+            return unlabelled_tuple
+
+        else:
+            unlabelled_colors = []
+            for character in colors:
+                str_vals = ''
+                for index in range(len(character)):
+                    try:
+                        float(character[index])
+                        str_vals = str_vals + character[index]
+                    except ValueError:
+                        if character[index] in KEY_INDICES:
+                            str_vals = str_vals + character[index]
+
+                str_vals = str_vals + ','
+                numbers = []
+                str_num = ''
+                for char in str_vals:
+                    if char != ',':
+                        str_num = str_num + char
+                    else:
+                        numbers.append(float(str_num))
+                        str_num = ''
+                unlabelled_tuple = (numbers[0], numbers[1], numbers[2])
+                unlabelled_colors.append(unlabelled_tuple)
+
+            return unlabelled_colors
 
     @staticmethod
     def create_scatterplotmatrix(df, dataframe=None, headers=None,
