@@ -4,6 +4,22 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.10.0] - 2016-05-19
+### Fixed
+Version 1.9.13 fixed an issue in offline mode where if you ran `init_notebook_mode`
+more than once the function would skip importing (because it saw that it had
+already imported the library) but then accidentally clear plotly.js from the DOM.
+This meant that if you ran `init_notebook_mode` more than once, your graphs would
+not appear when you refreshed the page.
+Version 1.9.13 solved this issue by injecting plotly.js with every iplot call.
+While this works, it also injects the library excessively, causing notebooks
+to have multiple versions of plotly.js inline in the DOM, potentially making
+notebooks with many `iplot` calls very large.
+Version 1.10.0 brings back the requirement to call `init_notebook_mode` before
+making an `iplot` call. It makes `init_notebook_mode` idempotent: you can call
+it multiple times without worrying about losing your plots on refresh.
+
+
 ## [1.9.13] - 2016-05-19
 ### Fixed
 - Fixed issue in offline mode related to the inability to reload plotly.js on page refresh and extra init_notebook_mode calls.

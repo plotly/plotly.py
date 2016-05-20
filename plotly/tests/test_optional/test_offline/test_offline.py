@@ -29,7 +29,8 @@ class PlotlyOfflineTestCase(TestCase):
     def setUp(self):
         pass
 
-    def test_iplot_works_wihout_calling_init_notebook_mode(self):
+    @raises(plotly.exceptions.PlotlyError)
+    def test_iplot_doesnt_work_before_you_call_init_notebook_mode(self):
         plotly.offline.iplot([{}])
 
     def test_iplot_works_after_you_call_init_notebook_mode(self):
@@ -86,4 +87,3 @@ class PlotlyOfflineMPLTestCase(TestCase):
         self.assertTrue(PLOTLYJS in html)         # and the source code
         # and it's an <html> doc
         self.assertTrue(html.startswith('<html>') and html.endswith('</html>'))
-
