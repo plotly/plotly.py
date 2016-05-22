@@ -30,6 +30,8 @@ except ImportError:
     _matplotlib_imported = False
 
 __PLOTLY_OFFLINE_INITIALIZED = False
+__PLOTLY_USE_CDN = False
+
 
 def download_plotlyjs(download_url):
     warnings.warn('''
@@ -46,7 +48,7 @@ def get_plotlyjs():
     return plotlyjs
 
 
-def init_notebook_mode():
+def init_notebook_mode(connected=False):
     """
     Initialize plotly.js in the browser if it hasn't been loaded into the DOM
     yet. This is an idempotent method and can and should be called from any
@@ -56,20 +58,32 @@ def init_notebook_mode():
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
     global __PLOTLY_OFFLINE_INITIALIZED
-    # Inject plotly.js into the output cell
-    script_inject = (
-        ''
-        '<script type=\'text/javascript\'>'
-        'if(!window.Plotly){{'
-        'define(\'plotly\', function(require, exports, module) {{'
-        '{script}'
-        '}});'
-        'require([\'plotly\'], function(Plotly) {{'
-        'window.Plotly = Plotly;'
-        '}});'
-        '}}'
-        '</script>'
-        '').format(script=get_plotlyjs())
+    global __PLOTLY_USE_CDN
+
+    __PLOTLY_USE_CDN = connected
+
+    if connected:
+        # Inject plotly.js into the output cell
+        script_inject = (
+            ''
+            '<script '
+            'src=\'https://cdn.plot.ly/plotly-latest.min.js\'></script>'
+        )
+    else:
+        # Inject plotly.js into the output cell
+        script_inject = (
+            ''
+            '<script type=\'text/javascript\'>'
+            'if(!window.Plotly){{'
+            'define(\'plotly\', function(require, exports, module) {{'
+            '{script}'
+            '}});'
+            'require([\'plotly\'], function(Plotly) {{'
+            'window.Plotly = Plotly;'
+            '}});'
+            '}}'
+            '</script>'
+            '').format(script=get_plotlyjs())
 
     display(HTML(script_inject))
     __PLOTLY_OFFLINE_INITIALIZED = True
@@ -193,7 +207,7 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
 
     plot_html, plotdivid, width, height = _plot_html(
         figure_or_data, show_link, link_text, validate,
-        '100%', 525, global_requirejs=True)
+        '100%', 525, global_requirejs=__PLOTLY_USE_CDN)
 
     display(HTML(plot_html))
 
