@@ -1509,9 +1509,27 @@ class FigureFactory(object):
         # find distance t of zval from vmin to vmax where the distance
         # is normalized to be between 0 and 1
         t = (zval - vmin)/float((vmax - vmin))
-        t_color = FigureFactory._find_intermediate_color(colormap[0],
-                                                         colormap[1],
-                                                         t)
+
+        # for colormaps of more than 2 colors, find adjacent colors in color
+        # map that the intermediate color is between
+        num_steps = len(colormap) - 1
+        step = 1./num_steps
+
+        if t == 1.0:
+            t_color = FigureFactory._find_intermediate_color(
+                colormap[int(t/step) - 1],
+                colormap[int(t/step)],
+                t
+            )
+        else:
+            new_t = (t - int(t/step)*step)/float(step)
+
+            t_color = FigureFactory._find_intermediate_color(
+                colormap[int(t/step)],
+                colormap[int(t/step) + 1],
+                new_t
+            )
+
         t_color = (t_color[0]*255.0, t_color[1]*255.0, t_color[2]*255.0)
         labelled_color = 'rgb{}'.format(t_color)
 
