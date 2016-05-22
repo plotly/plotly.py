@@ -139,8 +139,9 @@ def _plot_html(figure_or_data, show_link, link_text,
         config=jconfig)
 
     optional_line1 = ('require(["plotly"], function(Plotly) {{ '
-                      if global_requirejs else '')
-    optional_line2 = '}});' if global_requirejs else ''
+                      if (global_requirejs and (not __PLOTLY_USE_CDN)) else '')
+    optional_line2 = ('}});' if (global_requirejs and (not __PLOTLY_USE_CDN))
+                      else '')
 
     plotly_html_div = (
         ''
