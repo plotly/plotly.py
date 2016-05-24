@@ -1817,12 +1817,67 @@ class FigureFactory(object):
                          'Electric': ['rgb(0,0,0)', 'rgb(255,250,220)'],
                          'Viridis': ['rgb(68,1,84)', 'rgb(253,231,37)']}
 
+        if isinstance(colors, str):
+            if colors in plotly_scales:
+                colors = plotly_scales[colors]
+            else:
+                if ('rgb' not in colors) and ('#' not in colors):
+                    raise exceptions.PlotlyError("If you input a string "
+                                                 "for 'colors', it must "
+                                                 "either be a Plotly "
+                                                 "colorscale, an 'rgb' "
+                                                 "color, or a hex color.")
+                colors_list = []
+                colors_list.append(colors)
+                colors = colors_list
+
+        if not isinstance(colors, list):
+            raise exceptions.PlotlyError("'colors' needs to be either a "
+                                         "plotly colorscale string or a "
+                                         "list of at least two colors if "
+                                         "use_colorscale is True.")
+        if len(colors) <= 0:
+            raise exceptions.PlotlyError("Empty list of colors.")
+
+        if (not isinstance(data, list)) and data_header is None:
+            raise exceptions.PlotlyError("Please enter a string name for "
+                                         "data_header")
+
+
         # Validate colormap
         if colormap is None:
             colormap = [DEFAULT_PLOTLY_COLORS[0],
                         DEFAULT_PLOTLY_COLORS[1]]
             colormap = FigureFactory._unlabel_rgb(colormap)
             colormap = FigureFactory._unconvert_from_RGB_255(colormap)
+
+        if isinstance(colormap, str):
+            if colormap in plotly_scales:
+                colormap = plotly_scales[colormap]
+                colormap = FigureFactory._unlabel_rgb(colormap)
+                colormap = FigureFactory._unconvert_from_RGB_255(colormap)
+            else:
+                if ('rgb' not in colors) and ('#' not in colors):
+                    scale_keys = list(plotly_scales.keys())
+                    raise exceptions.PlotlyError("If you input a string "
+                                                 "for 'colormap', it must "
+                                                 "either be a Plotly "
+                                                 "colorscale, an 'rgb' "
+                                                 "color or a hex color."
+                                                 "Valud plotly colorscale "
+                                                 "names are {}".format(scale_keys))
+                # put colormap string into a list
+                colors_list = []
+                colors_list.append(colormap)
+                colormap = colors_list
+
+
+
+
+
+
+
+
 
         if isinstance(colormap, str):
             if colormap not in plotly_scales:
