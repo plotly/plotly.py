@@ -1480,15 +1480,24 @@ class FigureFactory(object):
         between 0 and 1
 
         """
-        un_rgb_colors = []
-        for color in colors:
-            un_rgb_color = (color[0]/(255.0),
-                            color[1]/(255.0),
-                            color[2]/(255.0))
+        if isinstance(colors, tuple):
 
-            un_rgb_colors.append(un_rgb_color)
+            un_rgb_color = (colors[0]/(255.0),
+                            colors[1]/(255.0),
+                            colors[2]/(255.0))
 
-        return un_rgb_colors
+            return un_rgb_color
+
+        if isinstance(colors, list):
+            un_rgb_colors = []
+            for color in colors:
+                un_rgb_color = (color[0]/(255.0),
+                                color[1]/(255.0),
+                                color[2]/(255.0))
+
+                un_rgb_colors.append(un_rgb_color)
+
+            return un_rgb_colors
 
     @staticmethod
     def _map_z2color(zval, colormap, vmin, vmax):
@@ -1640,10 +1649,11 @@ class FigureFactory(object):
         :param (array) simplices: an array of shape (ntri, 3) where ntri is
             the number of triangles in the triangularization. Each row of the
             array contains the indicies of the verticies of each triangle.
-        :param (str|list) colormap: either a plotly scale name, or a list
-            containing 2 triplets. These triplets must be of the form (a,b,c)
-            or 'rgb(x,y,z)' where a,b,c belong to the interval [0,1] and x,y,z
-            belong to [0,255]
+        :param (str|tuple|list) colormap: takes a plotly scale, an rgb or hex
+            string, a tuple, or a list of colors of the aforementioned rgb,
+            hex or tuple types. An rgb/triplet color type is a triplet of the
+            form (a,b,c) or 'rgb(x,y,z)' respectively where a,b,c belong to
+            the interval [0,1] and x,y,z belong to [0,255]
         :param (function) dist_func: The function that determines how the
             coloring of the surface changes. It takes 3 arguments x, y, z and
             must return a formula of these variables which can include numpy
@@ -1794,7 +1804,9 @@ class FigureFactory(object):
 
         # Create a figure
         fig1 = FF.create_trisurf(x=x, y=y, z=z,
-                                 colormap="Blues",
+                                 colormap=['#604d9e',
+                                           'rgb(50, 150, 255)',
+                                           (0.2, 0.2, 0.8)],
                                  simplices=simplices,
                                  dist_func=dist_origin)
         # Plot the data
@@ -1832,52 +1844,76 @@ class FigureFactory(object):
                 colormap = plotly_scales[colormap]
                 colormap = FigureFactory._unlabel_rgb(colormap)
                 colormap = FigureFactory._unconvert_from_RGB_255(colormap)
-            else:
-                if ('rgb' not in colormap) and ('#' not in colormap):
-                    scale_keys = list(plotly_scales.keys())
-                    raise exceptions.PlotlyError("If you input a string "
-                                                 "for 'colormap', it must "
-                                                 "either be a Plotly "
-                                                 "colorscale, an 'rgb' "
-                                                 "color or a hex color."
-                                                 "Valud plotly colorscale "
-                                                 "names are {}".format(scale_keys))
-                # put colormap string into a list
+
+            elif 'rgb' in colormap:
+                # put colormap in list
                 colors_list = []
                 colors_list.append(colormap)
                 colormap = colors_list
+
                 colormap = FigureFactory._unlabel_rgb(colormap)
                 colormap = FigureFactory._unconvert_from_RGB_255(colormap)
 
-        else:
-            if not isinstance(colormap, list):
-                raise exceptions.PlotlyError("If 'colormap' is a list, then "
-                                             "its items must be tripets of "
-                                             "the form a,b,c or 'rgbx,y,z' "
-                                             "where a,b,c are between 0 and "
-                                             "1 inclusive and x,y,z are "
-                                             "between 0 and 255 inclusive.")
-            if 'rgb' in colormap[0]:
-                colormap = FigureFactory._unlabel_rgb(colormap)
-                for color in colormap:
-                    for index in range(3):
-                        if color[index] > 255.0:
+            elif '#' in colormap:
+                colormap = FigureFactory._hex_to_rgb(colormap)
+                colormap = FigureFactory._unconvert_from_RGB_255(colormap)
+
+                # put colormap in list
+                colors_list = []
+                colors_list.append(colormap)
+                colormap = colors_list
+
+            else:
+                scale_keys = list(plotly_scales.keys())
+                raise exceptions.PlotlyError("If you input a string "
+                                             "for 'colormap', it must "
+                                             "either be a Plotly "
+                                             "colorscale, an 'rgb' "
+                                             "color or a hex color."
+                                             "Valud plotly colorscale "
+                                             "names are {}".format(scale_keys))
+        elif isinstance(colormap, tuple):
+            colors_list = []
+            colors_list.append(colormap)
+            colormap = colors_list
+
+        elif isinstance(colormap, list):
+            new_colormap = []
+            for color in colormap:
+                if 'rgb' in color:
+                    color = FigureFactory._unlabel_rgb(color)
+
+                    for value in color:
+                        if value > 255.0:
                             raise exceptions.PlotlyError("Whoops! The "
                                                          "elements in your "
                                                          "rgb colormap "
                                                          "tuples cannot "
                                                          "exceed 255.0.")
-                colormap = FigureFactory._unconvert_from_RGB_255(colormap)
 
-            if isinstance(colormap[0], tuple):
-                for color in colormap:
-                    for index in range(3):
-                        if color[index] > 1.0:
+                    color = FigureFactory._unconvert_from_RGB_255(color)
+                    new_colormap.append(color)
+                elif '#' in color:
+                    color = FigureFactory._hex_to_rgb(color)
+                    color = FigureFactory._unconvert_from_RGB_255(color)
+                    new_colormap.append(color)
+                elif isinstance(color, tuple):
+
+                    for value in color:
+                        if value > 1.0:
                             raise exceptions.PlotlyError("Whoops! The "
-                                                         "elements in your "
-                                                         "rgb colormap "
+                                                         "elements in "
+                                                         "your colormap "
                                                          "tuples cannot "
                                                          "exceed 1.0.")
+                    new_colormap.append(color)
+            colormap = new_colormap
+
+        else:
+            raise exceptions.PlotlyError("You must input a valid colormap. "
+                                         "Valid types include a plotly scale, "
+                                         "rgb, hex or tuple color, or lastly "
+                                         "a list of any color types.")
 
         data1 = FigureFactory._trisurf(x, y, z, simplices,
                                        dist_func=dist_func,
@@ -2907,16 +2943,20 @@ class FigureFactory(object):
         """
         Takes colors (a, b, c) and returns tuples 'rgb(a, b, c)'
 
-        Takes a list of two color tuples of the form (a, b, c) and returns the
-        same list with each tuple replaced by a string 'rgb(a, b, c)'
+        Takes either a list or a single color tuple of the form (a, b, c) and
+        returns the same colors(s) with each tuple replaced by a string
+        'rgb(a, b, c)'
 
         """
-        colors_label = []
-        for color in colors:
-            color_label = 'rgb{}'.format(color)
-            colors_label.append(color_label)
+        if isinstance(colors, tuple):
+            return 'rgb{}'.format(colors)
+        else:
+            colors_label = []
+            for color in colors:
+                color_label = 'rgb{}'.format(color)
+                colors_label.append(color_label)
 
-        return colors_label
+            return colors_label
 
     @staticmethod
     def _unlabel_rgb(colors):
@@ -2929,16 +2969,15 @@ class FigureFactory(object):
         (a, b, c)
 
         """
-        unlabelled_colors = []
-        for character in colors:
+        if isinstance(colors, str):
             str_vals = ''
-            for index in range(len(character)):
+            for index in range(len(colors)):
                 try:
-                    float(character[index])
-                    str_vals = str_vals + character[index]
+                    float(colors[index])
+                    str_vals = str_vals + colors[index]
                 except ValueError:
-                    if (character[index] == ',') or (character[index] == '.'):
-                        str_vals = str_vals + character[index]
+                    if (colors[index] == ',') or (colors[index] == '.'):
+                        str_vals = str_vals + colors[index]
 
             str_vals = str_vals + ','
             numbers = []
@@ -2949,10 +2988,33 @@ class FigureFactory(object):
                 else:
                     numbers.append(float(str_num))
                     str_num = ''
-            unlabelled_tuple = (numbers[0], numbers[1], numbers[2])
-            unlabelled_colors.append(unlabelled_tuple)
+            return (numbers[0], numbers[1], numbers[2])
 
-        return unlabelled_colors
+        if isinstance(colors, list):
+            unlabelled_colors = []
+            for color in colors:
+                str_vals = ''
+                for index in range(len(color)):
+                    try:
+                        float(color[index])
+                        str_vals = str_vals + color[index]
+                    except ValueError:
+                        if (color[index] == ',') or (color[index] == '.'):
+                            str_vals = str_vals + color[index]
+
+                str_vals = str_vals + ','
+                numbers = []
+                str_num = ''
+                for char in str_vals:
+                    if char != ',':
+                        str_num = str_num + char
+                    else:
+                        numbers.append(float(str_num))
+                        str_num = ''
+                unlabelled_tuple = (numbers[0], numbers[1], numbers[2])
+                unlabelled_colors.append(unlabelled_tuple)
+
+            return unlabelled_colors
 
     @staticmethod
     def create_scatterplotmatrix(df, dataframe=None, headers=None,

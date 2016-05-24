@@ -627,18 +627,6 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
         self.assertRaises(PlotlyError, tls.FigureFactory.create_trisurf,
                           x, y, z, simplices, colormap='foo')
 
-        # check that colormap is a list, if not a string
-
-        pattern1 = (
-            "If 'colormap' is a list, then its items must be tripets of the "
-            "form a,b,c or 'rgbx,y,z' where a,b,c are between 0 and 1 "
-            "inclusive and x,y,z are between 0 and 255 inclusive."
-        )
-
-        self.assertRaisesRegexp(PlotlyError, pattern1,
-                                tls.FigureFactory.create_trisurf,
-                                x, y, z, simplices, colormap=3)
-
         # check: if colormap is a list of rgb color strings, make sure the
         # entries of each color are no greater than 255.0
 
@@ -650,20 +638,31 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
         self.assertRaisesRegexp(PlotlyError, pattern2,
                                 tls.FigureFactory.create_trisurf,
                                 x, y, z, simplices,
-                                colormap=['rgb(1, 2, 3)', 'rgb(4, 5, 600)'])
+                                colormap=['rgb(4, 5, 600)'])
 
         # check: if colormap is a list of tuple colors, make sure the entries
         # of each tuple are no greater than 1.0
 
         pattern3 = (
-            "Whoops! The elements in your rgb colormap tuples "
-            "cannot exceed 1.0."
+            "Whoops! The elements in your colormap tuples cannot exceed 1.0."
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern3,
                                 tls.FigureFactory.create_trisurf,
                                 x, y, z, simplices,
-                                colormap=[(0.2, 0.4, 0.6), (0.8, 1.0, 1.2)])
+                                colormap=[(0.8, 1.0, 1.2)])
+
+        # check:
+
+        pattern4 = (
+            "You must input a valid colormap. Valid types include a plotly "
+            "scale, rgb, hex or tuple color, or lastly a list of any color "
+            "types."
+        )
+
+        self.assertRaisesRegexp(PlotlyError, pattern4,
+                                tls.FigureFactory.create_trisurf,
+                                x, y, z, simplices, colormap=1)
 
     def test_trisurf_all_args(self):
 
