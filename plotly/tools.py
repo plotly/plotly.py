@@ -4019,7 +4019,7 @@ class FigureFactory(object):
     @staticmethod
     def create_distplot(hist_data, group_labels,
                         bin_size=1., curve_type='kde',
-                        colors=[], rug_text=[], histnorm='probability density',
+                        colors=[], rug_text=[], histnorm='probability',
                         show_hist=True, show_curve=True,
                         show_rug=True):
         """
