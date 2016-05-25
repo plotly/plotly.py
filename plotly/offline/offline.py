@@ -67,10 +67,15 @@ def init_notebook_mode(connected=False):
         script_inject = (
             ''
             '<script>'
-            'if(!window.Plotly) {{'
-            'require([\'https://cdn.plot.ly/plotly-latest.min.js\'],'
+            # 'if(!window.Plotly) {{'
+            'requirejs.config({'
+            'paths: { '
+            '\'plotly\': [\'https://cdn.plot.ly/plotly-latest.min\']},'
+            '});'
+            'require([\'plotly\'],'
             'function(plotly) {window.Plotly=plotly;});'
-            '}} </script>'
+            # '}}'
+            '</script>'
             )
     else:
         # Inject plotly.js into the output cell
@@ -142,9 +147,8 @@ def _plot_html(figure_or_data, show_link, link_text,
         config=jconfig)
 
     optional_line1 = ('require(["plotly"], function(Plotly) {{ '
-                      if (global_requirejs and (not __PLOTLY_USE_CDN)) else '')
-    optional_line2 = ('}});' if (global_requirejs and (not __PLOTLY_USE_CDN))
-                      else '')
+                      if global_requirejs else '')
+    optional_line2 = ('}});' if global_requirejs else '')
 
     plotly_html_div = (
         ''
