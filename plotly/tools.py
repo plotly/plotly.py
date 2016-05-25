@@ -1533,9 +1533,14 @@ class FigureFactory(object):
         # vertices of the surface triangles
         tri_vertices = points3D[simplices]
 
-        if not color_func:
+        if color_func is None:
             # mean values of z-coordinates of triangle vertices
             mean_dists = tri_vertices[:, :, 2].mean(-1)
+        elif isinstance(color_func, (list, np.ndarray)):
+            if len(color_func) != len(simplices):
+                raise ValueError('If color_func is a list/array, must'
+                                 ' be the same length as simplices')
+            mean_dists = color_func
         else:
             # apply user inputted function to calculate
             # custom coloring for triangle vertices
@@ -1548,13 +1553,15 @@ class FigureFactory(object):
                     dists.append(dist)
 
                 mean_dists.append(np.mean(dists))
-
-        min_mean_dists = np.min(mean_dists)
-        max_mean_dists = np.max(mean_dists)
-        facecolor = FigureFactory._map_z2color(mean_dists,
-                                               colormap,
-                                               min_mean_dists,
-                                               max_mean_dists)
+        if isinstance(mean_dists[0], str):
+            facecolor = mean_dists
+        else:
+            min_mean_dists = np.min(mean_dists)
+            max_mean_dists = np.max(mean_dists)
+            facecolor = FigureFactory._map_z2color(mean_dists,
+                                                   colormap,
+                                                   min_mean_dists,
+                                                   max_mean_dists)
 
         ii, jj, kk = zip(*simplices)
         triangles = graph_objs.Mesh3d(x=x, y=y, z=z, facecolor=facecolor,
