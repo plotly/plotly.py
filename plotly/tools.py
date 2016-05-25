@@ -4036,6 +4036,8 @@ class FigureFactory(object):
         :param (list[float]|float) bin_size: Size of histogram bins.
             Default = 1.
         :param (str) curve_type: 'kde' or 'normal'. Default = 'kde'
+        :param (str) histnorm: 'probability density' or 'probability'
+            Default = 'probability'
         :param (bool) show_hist: Add histogram to distplot? Default = True
         :param (bool) show_curve: Add curve to distplot? Default = True
         :param (bool) show_rug: Add rug to distplot? Default = True
