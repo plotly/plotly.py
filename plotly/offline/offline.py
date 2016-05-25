@@ -407,9 +407,6 @@ def iplot_mpl(mpl_fig, resize=False, strip_style=False,
     strip_style (default=False) -- allow plotly to choose style options.
     verbose (default=False) -- print message.
     show_link (default=True) -- display a link in the bottom-right corner of
-        of the chart that will export the chart to Plotly Cloud or
-        Plotly Enterprise
-    show_link (default=True) -- display a link in the bottom-right corner of
                                 of the chart that will export the chart to
                                 Plotly Cloud or Plotly Enterprise
     link_text (default='Export to plot.ly') -- the text of export link
