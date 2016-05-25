@@ -1555,7 +1555,7 @@ class FigureFactory(object):
         return ([triplet[c] for triplet in simplices] for c in range(3))
 
     @staticmethod
-    def _trisurf(x, y, z, simplices, colormap=None, dist_func=None,
+    def _trisurf(x, y, z, simplices, colormap=None, color_func=None,
                  plot_edges=None, x_edge=None, y_edge=None, z_edge=None):
         """
         Refer to FigureFactory.create_trisurf() for docstring
@@ -1571,7 +1571,7 @@ class FigureFactory(object):
         # vertices of the surface triangles
         tri_vertices = list(map(lambda index: points3D[index], simplices))
 
-        if not dist_func:
+        if not color_func:
             # mean values of z-coordinates of triangle vertices
             mean_dists = [np.mean(tri[:, 2]) for tri in tri_vertices]
         else:
@@ -1582,7 +1582,7 @@ class FigureFactory(object):
             for triangle in tri_vertices:
                 dists = []
                 for vertex in triangle:
-                    dist = dist_func(vertex[0], vertex[1], vertex[2])
+                    dist = color_func(vertex[0], vertex[1], vertex[2])
                     dists.append(dist)
 
                 mean_dists.append(np.mean(dists))
@@ -1633,7 +1633,7 @@ class FigureFactory(object):
 
     @staticmethod
     def create_trisurf(x, y, z, simplices, colormap=None,
-                       dist_func=None, title='Trisurf Plot',
+                       color_func=None, title='Trisurf Plot',
                        showbackground=True,
                        backgroundcolor='rgb(230, 230, 230)',
                        gridcolor='rgb(255, 255, 255)',
@@ -1654,7 +1654,7 @@ class FigureFactory(object):
             hex or tuple types. An rgb/triplet color type is a triplet of the
             form (a,b,c) or 'rgb(x,y,z)' respectively where a,b,c belong to
             the interval [0,1] and x,y,z belong to [0,255]
-        :param (function) dist_func: The function that determines how the
+        :param (function) color_func: The function that determines how the
             coloring of the surface changes. It takes 3 arguments x, y, z and
             must return a formula of these variables which can include numpy
             functions (eg. np.sqrt). If set to None, color will only depend on
@@ -1808,7 +1808,7 @@ class FigureFactory(object):
                                            'rgb(50, 150, 255)',
                                            (0.2, 0.2, 0.8)],
                                  simplices=simplices,
-                                 dist_func=dist_origin)
+                                 color_func=dist_origin)
         # Plot the data
         py.iplot(fig1, filename='Trisurf Plot - Custom Coloring')
         ```
@@ -1916,7 +1916,7 @@ class FigureFactory(object):
                                          "a list of any color types.")
 
         data1 = FigureFactory._trisurf(x, y, z, simplices,
-                                       dist_func=dist_func,
+                                       color_func=color_func,
                                        colormap=colormap,
                                        plot_edges=True)
         axis = dict(
