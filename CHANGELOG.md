@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.10.0] - 2016-05-19
 ### Fixed
-Version 1.9.13 fixed an issue in offline mode where if you ran `init_notebook_mode`
+- Version 1.9.13 fixed an issue in offline mode where if you ran `init_notebook_mode`
 more than once the function would skip importing (because it saw that it had
 already imported the library) but then accidentally clear plotly.js from the DOM.
 This meant that if you ran `init_notebook_mode` more than once, your graphs would
@@ -26,7 +26,7 @@ it multiple times without worrying about losing your plots on refresh.
 
 ## [1.9.12] - 2016-05-16
 ### Added
-SSL support for streaming.
+- SSL support for streaming.
 
 ## [1.9.11] - 2016-05-02
 ### Added
