@@ -1517,8 +1517,8 @@ class FigureFactory(object):
         return labelled_colors
 
     @staticmethod
-    def _trisurf(x, y, z, simplices, colormap=None, dist_func=None,
-                 plot_edges=None, x_edge=None, y_edge=None, z_edge=None):
+    def _trisurf(x, y, z, simplices, colormap=None, color_func=None,
+                 plot_edges=False, x_edge=None, y_edge=None, z_edge=None):
         """
         Refer to FigureFactory.create_trisurf() for docstring
         """
@@ -1533,7 +1533,7 @@ class FigureFactory(object):
         # vertices of the surface triangles
         tri_vertices = points3D[simplices]
 
-        if not dist_func:
+        if not color_func:
             # mean values of z-coordinates of triangle vertices
             mean_dists = tri_vertices[:, :, 2].mean(-1)
         else:
@@ -1544,17 +1544,19 @@ class FigureFactory(object):
             for triangle in tri_vertices:
                 dists = []
                 for vertex in triangle:
-                    dist = dist_func(vertex[0], vertex[1], vertex[2])
+                    dist = color_func(vertex[0], vertex[1], vertex[2])
                     dists.append(dist)
 
                 mean_dists.append(np.mean(dists))
 
         min_mean_dists = np.min(mean_dists)
         max_mean_dists = np.max(mean_dists)
-        facecolor = FigureFactory._map_z2color(mean_dists, colormap,
-                                               min_mean_dists, max_mean_dists)
-        ii, jj, kk = zip(*simplices)
+        facecolor = FigureFactory._map_z2color(mean_dists,
+                                               colormap,
+                                               min_mean_dists,
+                                               max_mean_dists)
 
+        ii, jj, kk = zip(*simplices)
         triangles = graph_objs.Mesh3d(x=x, y=y, z=z, facecolor=facecolor,
                                       i=ii, j=jj, k=kk, name='')
 
@@ -1603,8 +1605,8 @@ class FigureFactory(object):
         return graph_objs.Data([triangles, lines])
 
     @staticmethod
-    def create_trisurf(x, y, z, simplices, colormap=None,
-                       dist_func=None, title='Trisurf Plot',
+    def create_trisurf(x, y, z, simplices, colormap=None, color_func=None,
+                       title='Trisurf Plot', plot_edges=True,
                        showbackground=True,
                        backgroundcolor='rgb(230, 230, 230)',
                        gridcolor='rgb(255, 255, 255)',
@@ -1624,12 +1626,13 @@ class FigureFactory(object):
             containing 2 triplets. These triplets must be of the form (a,b,c)
             or 'rgb(x,y,z)' where a,b,c belong to the interval [0,1] and x,y,z
             belong to [0,255]
-        :param (function) dist_func: The function that determines how the
-            coloring of the surface changes. It takes 3 arguments x, y, z and
-            must return a formula of these variables which can include numpy
-            functions (eg. np.sqrt). If set to None, color will only depend on
-            the z axis.
+        :param (function|list) color_func: The parameter that determines the
+            coloring of the surface. Takes either a function with 3 arguments
+            x, y, z or a list/array of color values the same length as
+            simplices. If set to None, color will only depend on the z axis.
         :param (str) title: title of the plot
+        :param (bool) plot_edges: determines if the triangles on the trisurf
+            are visible
         :param (bool) showbackground: makes background in plot visible
         :param (str) backgroundcolor: color of background. Takes a string of
             the form 'rgb(x,y,z)' x,y,z are between 0 and 255 inclusive.
@@ -1776,7 +1779,7 @@ class FigureFactory(object):
         fig1 = FF.create_trisurf(x=x, y=y, z=z,
                                  colormap="Blues",
                                  simplices=simplices,
-                                 dist_func=dist_origin)
+                                 color_func=dist_origin)
         # Plot the data
         py.iplot(fig1, filename='Trisurf Plot - Custom Coloring')
         ```
@@ -1851,9 +1854,9 @@ class FigureFactory(object):
                                                          "exceed 1.0.")
 
         data1 = FigureFactory._trisurf(x, y, z, simplices,
-                                       dist_func=dist_func,
+                                       color_func=color_func,
                                        colormap=colormap,
-                                       plot_edges=True)
+                                       plot_edges=plot_edges)
         axis = dict(
             showbackground=showbackground,
             backgroundcolor=backgroundcolor,
