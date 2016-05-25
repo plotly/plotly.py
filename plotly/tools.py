@@ -1567,8 +1567,8 @@ class FigureFactory(object):
         is_none = [ii is None for ii in [x_edge, y_edge, z_edge]]
         if any(is_none):
             if not all(is_none):
-                raise ValueError('If any (x_edge, y_edge, z_edge) is None,'
-                                 ' all must be None')
+                raise ValueError("If any (x_edge, y_edge, z_edge) is None, "
+                                 "all must be None")
             else:
                 x_edge = []
                 y_edge = []

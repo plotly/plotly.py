@@ -689,14 +689,14 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
         exp_trisurf_plot = {
         'data': [
             {
-                'facecolor': ['rgb(143.0, 123.0, 97.000000000000014)',
-                              'rgb(255.0, 127.0, 14.000000000000007)',
-                              'rgb(143.0, 123.0, 97.000000000000014)',
+                'facecolor': ['rgb(143.0, 123.0, 97.0)',
+                              'rgb(255.0, 127.0, 14.0)',
+                              'rgb(143.0, 123.0, 97.0)',
                               'rgb(31.0, 119.0, 180.0)',
-                              'rgb(143.0, 123.0, 97.000000000000014)',
+                              'rgb(143.0, 123.0, 97.0)',
                               'rgb(31.0, 119.0, 180.0)',
-                              'rgb(143.0, 123.0, 97.000000000000014)',
-                              'rgb(255.0, 127.0, 14.000000000000007)'],
+                              'rgb(143.0, 123.0, 97.0)',
+                              'rgb(255.0, 127.0, 14.0)'],
                 'i': [3, 1, 1, 5, 7, 3, 5, 7],
                 'j': [1, 3, 5, 1, 3, 7, 7, 5],
                 'k': [4, 0, 4, 2, 4, 6, 4, 8],
@@ -752,6 +752,17 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
 
         self.assert_dict_equal(test_trisurf_plot['data'][1],
                                exp_trisurf_plot['data'][1])
+
+    def test_optimize_trisurf(self):
+
+      # check that trisurf will give warnings if the plotting will take
+      # a long time
+
+      pass
+
+
+
+
 
 
 class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
