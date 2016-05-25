@@ -66,9 +66,12 @@ def init_notebook_mode(connected=False):
         # Inject plotly.js into the output cell
         script_inject = (
             ''
-            '<script '
-            'src=\'https://cdn.plot.ly/plotly-latest.min.js\'></script>'
-        )
+            '<script>'
+            'if(!window.Plotly) {{'
+            'require([\'https://cdn.plot.ly/plotly-latest.min.js\'],'
+            'function(plotly) {window.Plotly=plotly;});'
+            '}} </script>'
+            )
     else:
         # Inject plotly.js into the output cell
         script_inject = (
@@ -208,7 +211,7 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
 
     plot_html, plotdivid, width, height = _plot_html(
         figure_or_data, show_link, link_text, validate,
-        '100%', 525, global_requirejs=__PLOTLY_USE_CDN)
+        '100%', 525, global_requirejs=True)
 
     display(HTML(plot_html))
 
