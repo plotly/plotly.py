@@ -2,7 +2,12 @@ import time
 import six
 import os
 from six.moves import http_client
-from six.moves.urllib.parse import urlparse
+from platform import python_version
+version = python_version()
+if version[0] == '2':
+    import urlparse
+else:
+    from six.moves.urllib.parse import urlparse
 from ssl import SSLError
 
 
