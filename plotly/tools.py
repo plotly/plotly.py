@@ -1589,6 +1589,10 @@ class FigureFactory(object):
         y_edge = np.hstack([y_edge, y_edge_pull.reshape([1, -1])[0]])
         z_edge = np.hstack([z_edge, z_edge_pull.reshape([1, -1])[0]])
 
+        if not (len(x_edge) == len(y_edge) == len(z_edge)):
+            raise exceptions.PlotlyError("The lengths of x_edge, y_edge and "
+                                         "z_edge are not the same.")
+
         # define the lines for plotting
         lines = graph_objs.Scatter3d(
             x=x_edge, y=y_edge, z=z_edge, mode='lines',

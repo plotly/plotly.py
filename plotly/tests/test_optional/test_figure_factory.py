@@ -753,17 +753,6 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
         self.assert_dict_equal(test_trisurf_plot['data'][1],
                                exp_trisurf_plot['data'][1])
 
-    def test_optimize_trisurf(self):
-
-      # check that trisurf will give warnings if the plotting will take
-      # a long time
-
-      pass
-
-
-
-
-
 
 class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
 
