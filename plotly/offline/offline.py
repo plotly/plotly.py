@@ -67,14 +67,14 @@ def init_notebook_mode(connected=False):
         script_inject = (
             ''
             '<script>'
-            # 'if(!window.Plotly) {{'
             'requirejs.config({'
             'paths: { '
             '\'plotly\': [\'https://cdn.plot.ly/plotly-latest.min\']},'
             '});'
+            'if(!window.Plotly) {{'
             'require([\'plotly\'],'
             'function(plotly) {window.Plotly=plotly;});'
-            # '}}'
+            '}}'
             '</script>'
             )
     else:
