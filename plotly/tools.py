@@ -28,6 +28,9 @@ DEFAULT_PLOTLY_COLORS = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
                          'rgb(227, 119, 194)', 'rgb(127, 127, 127)',
                          'rgb(188, 189, 34)', 'rgb(23, 190, 207)']
 
+DEFAULT_HISTNORM = 'probability density'
+ALTERNATIVE_HISTNORM = 'probability'
+
 
 # Warning format
 def warning_on_one_line(message, category, filename, lineno,
@@ -4019,7 +4022,7 @@ class FigureFactory(object):
     @staticmethod
     def create_distplot(hist_data, group_labels,
                         bin_size=1., curve_type='kde',
-                        colors=[], rug_text=[], histnorm='probability density',
+                        colors=[], rug_text=[], histnorm=DEFAULT_HISTNORM,
                         show_hist=True, show_curve=True,
                         show_rug=True):
         """
@@ -5112,7 +5115,7 @@ class _Distplot(FigureFactory):
                                    (self.hist_data[index])
                                    (self.curve_x[index]))
 
-            if self.histnorm == 'probability':
+            if self.histnorm == ALTERNATIVE_HISTNORM:
                 self.curve_y[index] *= self.bin_size[index]
 
         for index in range(self.trace_number):
@@ -5149,7 +5152,7 @@ class _Distplot(FigureFactory):
             self.curve_y[index] = scipy.stats.norm.pdf(
                 self.curve_x[index], loc=mean[index], scale=sd[index])
 
-            if self.histnorm == 'probability':
+            if self.histnorm == ALTERNATIVE_HISTNORM:
                 self.curve_y[index] *= self.bin_size[index]
 
         for index in range(self.trace_number):
