@@ -215,6 +215,7 @@ class TestDistplot(TestCase):
         group_labels = ['2012', '2013']
 
         dp = tls.FigureFactory.create_distplot(hist_data, group_labels,
+                                               histnorm='probability',
                                                show_rug=False, bin_size=.2)
         dp['layout'].update(title='Dist Plot')
 
@@ -270,6 +271,7 @@ class TestDistplot(TestCase):
             group_labels = ['2012', '2013']
 
             dp = tls.FigureFactory.create_distplot(hist_data, group_labels,
+                                                   histnorm='probability',
                                                    show_rug=False,
                                                    bin_size=[.2, .2])
 
@@ -317,6 +319,7 @@ class TestDistplot(TestCase):
             group_labels = ['2012', '2013']
 
             dp = tls.FigureFactory.create_distplot(hist_data, group_labels,
+                                                   histnorm='probability',
                                                    show_rug=False,
                                                    bin_size=[.2, .2])
 
