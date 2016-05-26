@@ -4037,7 +4037,7 @@ class FigureFactory(object):
             Default = 1.
         :param (str) curve_type: 'kde' or 'normal'. Default = 'kde'
         :param (str) histnorm: 'probability density' or 'probability'
-            Default = 'probability'
+            Default = 'probability density'
         :param (bool) show_hist: Add histogram to distplot? Default = True
         :param (bool) show_curve: Add curve to distplot? Default = True
         :param (bool) show_rug: Add rug to distplot? Default = True
