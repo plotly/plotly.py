@@ -13,6 +13,17 @@ Note: This is a backwards incompatible change.
 	- Light position is now configurable in surface traces
 	- surface and mesh3d lighting attributes are now accompanied with comprehensive descriptions
 
+- Allowed `create_scatterplotmatrix` and `create_trisurf` to use divergent and categorical colormaps. The parameter `palette` has been replaced by `colormap` and `use_palette` has been removed. In `create_scatterplotmatrix`, users can now:
+	- Input a list of different color types (hex, tuple, rgb) to `colormap` to map colors divergently
+	- Use the same list to categorically group the items in the index column
+	- Pass a singlton color type to `colormap` to color all the data with one color
+	- Input a dictionary to `colormap` to map index values to a specific color
+	- 'cat' and 'seq' are valid options for `colormap_type`, which specify the type of colormap being used
+
+-In `create_trisurf`, the parameter `dist_func` has been replaced by `color_func`. Users can now:
+	-Input a list of different color types (hex, tuple, rgb) to `colormap` to map colors divergently
+	-Input a list|array of hex and rgb colors to `color_func` to assign each simplex to a color 
+
 ### Added
 - Added the option to load plotly.js from a CDN by setting the parameter `connected=True`
  in the `init_notebook_mode()` function call
