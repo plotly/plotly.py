@@ -1500,11 +1500,11 @@ class FigureFactory(object):
             return un_rgb_colors
 
     @staticmethod
-    def _map_z2color(zvals, colormap, vmin, vmax):
+    def _map_array2color(array, colormap, vmin, vmax):
         """
-        Returns the color corresponding zval's place between vmin and vmax
+        Normalize values in array by vmin/vmax and return plotly color strings.
 
-        This function takes a z value (zval) along with a colormap and a
+        This function takes an array of values along with a colormap and a
         minimum (vmin) and maximum (vmax) range of possible z values for the
         given parametrized surface. It returns an rgb color based on the
         relative position of zval between vmin and vmax
@@ -1517,7 +1517,7 @@ class FigureFactory(object):
                                          "of vmax.")
         # find distance t of zval from vmin to vmax where the distance
         # is normalized to be between 0 and 1
-        t = (zvals - vmin) / float((vmax - vmin))
+        t = (array - vmin) / float((vmax - vmin))
         t_colors = FigureFactory._find_intermediate_color(colormap[0],
                                                           colormap[1],
                                                           t)
@@ -1539,34 +1539,46 @@ class FigureFactory(object):
         import numpy as np
         from plotly.graph_objs import graph_objs
         points3D = np.vstack((x, y, z)).T
+        simplices = np.atleast_2d(simplices)
 
         # vertices of the surface triangles
         tri_vertices = points3D[simplices]
 
-        if not color_func:
+        # Define colors for the triangle faces
+        if color_func is None:
             # mean values of z-coordinates of triangle vertices
             mean_dists = tri_vertices[:, :, 2].mean(-1)
+        elif isinstance(color_func, (list, np.ndarray)):
+            # Pre-computed list / array of values to map onto color
+            if len(color_func) != len(simplices):
+                raise ValueError('If color_func is a list/array, must'
+                                 ' be the same length as simplices')
+            mean_dists = np.asarray(color_func)
         else:
             # apply user inputted function to calculate
             # custom coloring for triangle vertices
             mean_dists = []
-
             for triangle in tri_vertices:
                 dists = []
                 for vertex in triangle:
                     dist = color_func(vertex[0], vertex[1], vertex[2])
                     dists.append(dist)
-
                 mean_dists.append(np.mean(dists))
+            mean_dists = np.asarray(mean_dists)
 
-        min_mean_dists = np.min(mean_dists)
-        max_mean_dists = np.max(mean_dists)
-        facecolor = FigureFactory._map_z2color(mean_dists,
-                                               colormap,
-                                               min_mean_dists,
-                                               max_mean_dists)
-
-        ii, jj, kk = zip(*simplices)
+        # Check if facecolors are already strings and can be skipped
+        if isinstance(mean_dists[0], str):
+            facecolor = mean_dists
+        else:
+            min_mean_dists = np.min(mean_dists)
+            max_mean_dists = np.max(mean_dists)
+            facecolor = FigureFactory._map_array2color(mean_dists,
+                                                       colormap,
+                                                       min_mean_dists,
+                                                       max_mean_dists)
+        # Make sure we have arrays to speed up plotting
+        facecolor = np.asarray(facecolor)
+        ii, jj, kk = simplices.T
         triangles = graph_objs.Mesh3d(x=x, y=y, z=z, facecolor=facecolor,
                                       i=ii, j=jj, k=kk, name='')
 
