@@ -913,6 +913,26 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
         self.assert_dict_equal(test_trisurf_plot['data'][1],
                                exp_trisurf_plot['data'][1])
 
+        # Test passing custom colors
+        colors_raw = np.random.randn(simplices.shape[0])
+        colors_str = ['rgb(%s, %s, %s)' % (i, j, k)
+                      for i, j, k in np.random.randn(simplices.shape[0], 3)]
+
+        # Color == strings should be kept the same
+        test_colors_plot = tls.FigureFactory.create_trisurf(
+            x, y, z, simplices, color_func=colors_str)
+        self.assertListEqual(list(test_colors_plot['data'][0]['facecolor']),
+                             list(colors_str))
+        # Colors must match length of simplices
+        colors_bad = colors_str[:-1]
+        self.assertRaises(ValueError, tls.FigureFactory.create_trisurf, x, y,
+                          z, simplices, color_func=colors_bad)
+        # Check converting custom colors to strings
+        test_colors_plot = tls.FigureFactory.create_trisurf(
+                    x, y, z, simplices, color_func=colors_raw)
+        self.assertTrue(isinstance(test_colors_plot['data'][0]['facecolor'][0],
+                                   str))
+
 
 class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
 

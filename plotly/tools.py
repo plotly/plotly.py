@@ -1503,11 +1503,11 @@ class FigureFactory(object):
             return un_rgb_colors
 
     @staticmethod
-    def _map_z2color(zvals, colormap, vmin, vmax):
+    def _map_array2color(array, colormap, vmin, vmax):
         """
-        Returns the color corresponding zval's place between vmin and vmax
+        Normalize values in array by vmin/vmax and return plotly color strings.
 
-        This function takes a z value (zval) along with a colormap and a
+        This function takes an array of values along with a colormap and a
         minimum (vmin) and maximum (vmax) range of possible z values for the
         given parametrized surface. It returns an rgb color based on the
         relative position of zval between vmin and vmax
@@ -1520,7 +1520,7 @@ class FigureFactory(object):
                                          "of vmax.")
         # find distance t of zval from vmin to vmax where the distance
         # is normalized to be between 0 and 1
-        t = (zvals - vmin) / float((vmax - vmin))
+        t = (array - vmin) / float((vmax - vmin))
         t_colors = FigureFactory._find_intermediate_color(colormap[0],
                                                           colormap[1],
                                                           t)
@@ -1542,34 +1542,46 @@ class FigureFactory(object):
         import numpy as np
         from plotly.graph_objs import graph_objs
         points3D = np.vstack((x, y, z)).T
+        simplices = np.atleast_2d(simplices)
 
         # vertices of the surface triangles
         tri_vertices = points3D[simplices]
 
-        if not color_func:
+        # Define colors for the triangle faces
+        if color_func is None:
             # mean values of z-coordinates of triangle vertices
             mean_dists = tri_vertices[:, :, 2].mean(-1)
+        elif isinstance(color_func, (list, np.ndarray)):
+            # Pre-computed list / array of values to map onto color
+            if len(color_func) != len(simplices):
+                raise ValueError("If color_func is a list/array, it must "
+                                 "be the same length as simplices.")
+            mean_dists = np.asarray(color_func)
         else:
             # apply user inputted function to calculate
             # custom coloring for triangle vertices
             mean_dists = []
-
             for triangle in tri_vertices:
                 dists = []
                 for vertex in triangle:
                     dist = color_func(vertex[0], vertex[1], vertex[2])
                     dists.append(dist)
-
                 mean_dists.append(np.mean(dists))
+            mean_dists = np.asarray(mean_dists)
 
-        min_mean_dists = np.min(mean_dists)
-        max_mean_dists = np.max(mean_dists)
-        facecolor = FigureFactory._map_z2color(mean_dists,
-                                               colormap,
-                                               min_mean_dists,
-                                               max_mean_dists)
-
-        ii, jj, kk = zip(*simplices)
+        # Check if facecolors are already strings and can be skipped
+        if isinstance(mean_dists[0], str):
+            facecolor = mean_dists
+        else:
+            min_mean_dists = np.min(mean_dists)
+            max_mean_dists = np.max(mean_dists)
+            facecolor = FigureFactory._map_array2color(mean_dists,
+                                                       colormap,
+                                                       min_mean_dists,
+                                                       max_mean_dists)
+        # Make sure we have arrays to speed up plotting
+        facecolor = np.asarray(facecolor)
+        ii, jj, kk = simplices.T
         triangles = graph_objs.Mesh3d(x=x, y=y, z=z, facecolor=facecolor,
                                       i=ii, j=jj, k=kk, name='')
 
@@ -1634,7 +1646,7 @@ class FigureFactory(object):
         :param (array) z: data values of z in a 1D array
         :param (array) simplices: an array of shape (ntri, 3) where ntri is
             the number of triangles in the triangularization. Each row of the
-            array contains the indicies of the verticies of each triangle.
+            array contains the indicies of the verticies of each triangle
         :param (str|list) colormap: either a plotly scale name, or a list
             containing 2 triplets. These triplets must be of the form (a,b,c)
             or 'rgb(x,y,z)' where a,b,c belong to the interval [0,1] and x,y,z
@@ -1642,22 +1654,22 @@ class FigureFactory(object):
         :param (function|list) color_func: The parameter that determines the
             coloring of the surface. Takes either a function with 3 arguments
             x, y, z or a list/array of color values the same length as
-            simplices. If set to None, color will only depend on the z axis.
+            simplices. If set to None, color will only depend on the z axis
         :param (str) title: title of the plot
         :param (bool) plot_edges: determines if the triangles on the trisurf
             are visible
         :param (bool) showbackground: makes background in plot visible
         :param (str) backgroundcolor: color of background. Takes a string of
-            the form 'rgb(x,y,z)' x,y,z are between 0 and 255 inclusive.
+            the form 'rgb(x,y,z)' x,y,z are between 0 and 255 inclusive
         :param (str) gridcolor: color of the gridlines besides the axes. Takes
             a string of the form 'rgb(x,y,z)' x,y,z are between 0 and 255
-            inclusive.
+            inclusive
         :param (str) zerolinecolor: color of the axes. Takes a string of the
-            form 'rgb(x,y,z)' x,y,z are between 0 and 255 inclusive.
+            form 'rgb(x,y,z)' x,y,z are between 0 and 255 inclusive
         :param (int|float) height: the height of the plot (in pixels)
         :param (int|float) width: the width of the plot (in pixels)
         :param (dict) aspectratio: a dictionary of the aspect ratio values for
-            the x, y and z axes. 'x', 'y' and 'z' take (int|float) values.
+            the x, y and z axes. 'x', 'y' and 'z' take (int|float) values
 
         Example 1: Sphere
         ```
