@@ -28,6 +28,9 @@ DEFAULT_PLOTLY_COLORS = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
                          'rgb(227, 119, 194)', 'rgb(127, 127, 127)',
                          'rgb(188, 189, 34)', 'rgb(23, 190, 207)']
 
+DEFAULT_HISTNORM = 'probability density'
+ALTERNATIVE_HISTNORM = 'probability'
+
 
 # Warning format
 def warning_on_one_line(message, category, filename, lineno,
@@ -4245,7 +4248,7 @@ class FigureFactory(object):
     @staticmethod
     def create_distplot(hist_data, group_labels,
                         bin_size=1., curve_type='kde',
-                        colors=[], rug_text=[],
+                        colors=[], rug_text=[], histnorm=DEFAULT_HISTNORM,
                         show_hist=True, show_curve=True,
                         show_rug=True):
         """
@@ -4262,6 +4265,8 @@ class FigureFactory(object):
         :param (list[float]|float) bin_size: Size of histogram bins.
             Default = 1.
         :param (str) curve_type: 'kde' or 'normal'. Default = 'kde'
+        :param (str) histnorm: 'probability density' or 'probability'
+            Default = 'probability density'
         :param (bool) show_hist: Add histogram to distplot? Default = True
         :param (bool) show_curve: Add curve to distplot? Default = True
         :param (bool) show_rug: Add rug to distplot? Default = True
@@ -4370,23 +4375,23 @@ class FigureFactory(object):
             bin_size = [bin_size]*len(hist_data)
 
         hist = _Distplot(
-            hist_data, group_labels, bin_size,
+            hist_data, histnorm, group_labels, bin_size,
             curve_type, colors, rug_text,
             show_hist, show_curve).make_hist()
 
         if curve_type == 'normal':
             curve = _Distplot(
-                hist_data, group_labels, bin_size,
+                hist_data, histnorm, group_labels, bin_size,
                 curve_type, colors, rug_text,
                 show_hist, show_curve).make_normal()
         else:
             curve = _Distplot(
-                hist_data, group_labels, bin_size,
+                hist_data, histnorm, group_labels, bin_size,
                 curve_type, colors, rug_text,
                 show_hist, show_curve).make_kde()
 
         rug = _Distplot(
-            hist_data, group_labels, bin_size,
+            hist_data, histnorm, group_labels, bin_size,
             curve_type, colors, rug_text,
             show_hist, show_curve).make_rug()
 
@@ -5262,10 +5267,11 @@ class _Distplot(FigureFactory):
     """
     Refer to TraceFactory.create_distplot() for docstring
     """
-    def __init__(self, hist_data, group_labels,
+    def __init__(self, hist_data, histnorm, group_labels,
                  bin_size, curve_type, colors,
                  rug_text, show_hist, show_curve):
         self.hist_data = hist_data
+        self.histnorm = histnorm
         self.group_labels = group_labels
         self.bin_size = bin_size
         self.show_hist = show_hist
@@ -5307,7 +5313,7 @@ class _Distplot(FigureFactory):
                                x=self.hist_data[index],
                                xaxis='x1',
                                yaxis='y1',
-                               histnorm='probability',
+                               histnorm=self.histnorm,
                                name=self.group_labels[index],
                                legendgroup=self.group_labels[index],
                                marker=dict(color=self.colors[index]),
@@ -5334,7 +5340,9 @@ class _Distplot(FigureFactory):
             self.curve_y[index] = (scipy.stats.gaussian_kde
                                    (self.hist_data[index])
                                    (self.curve_x[index]))
-            self.curve_y[index] *= self.bin_size[index]
+
+            if self.histnorm == ALTERNATIVE_HISTNORM:
+                self.curve_y[index] *= self.bin_size[index]
 
         for index in range(self.trace_number):
             curve[index] = dict(type='scatter',
@@ -5369,7 +5377,9 @@ class _Distplot(FigureFactory):
                                    / 500 for x in range(500)]
             self.curve_y[index] = scipy.stats.norm.pdf(
                 self.curve_x[index], loc=mean[index], scale=sd[index])
-            self.curve_y[index] *= self.bin_size[index]
+
+            if self.histnorm == ALTERNATIVE_HISTNORM:
+                self.curve_y[index] *= self.bin_size[index]
 
         for index in range(self.trace_number):
             curve[index] = dict(type='scatter',
