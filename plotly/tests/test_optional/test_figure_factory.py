@@ -864,27 +864,55 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
                                 tls.FigureFactory.create_scatterplotmatrix,
                                 df, index='apple')
 
-    def test_valid_palette(self):
+    def test_valid_colormap(self):
 
-        # check: the palette argument is in a acceptable form
+        # check: the colormap argument is in a valid form
         df = pd.DataFrame([[1, 2, 3], [4, 5, 6], [7, 8, 9]],
                           columns=['a', 'b', 'c'])
 
-        self.assertRaisesRegexp(PlotlyError, "You must pick a valid "
-                                             "plotly colorscale name.",
-                                tls.FigureFactory.create_scatterplotmatrix,
-                                df, use_theme=True, index='a',
-                                palette='fake_scale')
+        # check: valid plotly scalename is entered
+        self.assertRaises(PlotlyError,
+                          tls.FigureFactory.create_scatterplotmatrix,
+                          df, index='a', colormap='fake_scale')
 
         pattern = (
-            "The items of 'palette' must be tripets of the form a,b,c or "
-            "'rgbx,y,z' where a,b,c belong to the interval 0,1 and x,y,z "
-            "belong to 0,255."
+            "You must input a valid colormap. Valid types include a plotly "
+            "scale, rgb, hex or tuple color, a list of any color types, or a "
+            "dictionary with index names each assigned to a color."
         )
 
+        # check: accepted data type for colormap
         self.assertRaisesRegexp(PlotlyError, pattern,
                                 tls.FigureFactory.create_scatterplotmatrix,
-                                df, use_theme=True, palette=1, index='c')
+                                df, colormap=1)
+
+        pattern_rgb = (
+            "Whoops! The elements in your rgb colormap tuples cannot "
+            "exceed 255.0."
+        )
+
+        # check: proper 'rgb' color
+        self.assertRaisesRegexp(PlotlyError, pattern_rgb,
+                                tls.FigureFactory.create_scatterplotmatrix,
+                                df, colormap='rgb(500, 1, 1)', index='c')
+
+        self.assertRaisesRegexp(PlotlyError, pattern_rgb,
+                                tls.FigureFactory.create_scatterplotmatrix,
+                                df, colormap=['rgb(500, 1, 1)'], index='c')
+
+        pattern_tuple = (
+            "Whoops! The elements in your colormap tuples cannot "
+            "exceed 1.0."
+        )
+
+        # check: proper color tuple
+        self.assertRaisesRegexp(PlotlyError, pattern_tuple,
+                                tls.FigureFactory.create_scatterplotmatrix,
+                                df, colormap=(2, 1, 1), index='c')
+
+        self.assertRaisesRegexp(PlotlyError, pattern_tuple,
+                                tls.FigureFactory.create_scatterplotmatrix,
+                                df, colormap=[(2, 1, 1)], index='c')
 
     def test_valid_endpts(self):
 
@@ -899,20 +927,35 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
 
         self.assertRaisesRegexp(PlotlyError, pattern,
                                 tls.FigureFactory.create_scatterplotmatrix,
-                                df, use_theme=True, index='a',
-                                palette='Blues', endpts='foo')
+                                df, index='a', colormap='Hot', endpts='foo')
 
         # check: the endpts are a list of numbers
         self.assertRaisesRegexp(PlotlyError, pattern,
                                 tls.FigureFactory.create_scatterplotmatrix,
-                                df, use_theme=True, index='a',
-                                palette='Blues', endpts=['a'])
+                                df, index='a', colormap='Hot', endpts=['a'])
 
         # check: endpts is a list of INCREASING numbers
         self.assertRaisesRegexp(PlotlyError, pattern,
                                 tls.FigureFactory.create_scatterplotmatrix,
-                                df, use_theme=True, index='a',
-                                palette='Blues', endpts=[2, 1])
+                                df, index='a', colormap='Hot', endpts=[2, 1])
+
+    def test_dictionary_colormap(self):
+
+        # if colormap is a dictionary, make sure it all the values in the
+        # index column are keys in colormap
+        df = pd.DataFrame([['apple', 'happy'], ['pear', 'sad']],
+                          columns=['Fruit', 'Emotion'])
+
+        colormap = {'happy': 'rgb(5, 5, 5)'}
+
+        pattern = (
+            "If colormap is a dictionary, all the names in the index "
+            "must be keys."
+        )
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                tls.FigureFactory.create_scatterplotmatrix,
+                                df, index='Emotion', colormap=colormap)
 
     def test_scatter_plot_matrix(self):
 
@@ -925,7 +968,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
 
         test_scatter_plot_matrix = tls.FigureFactory.create_scatterplotmatrix(
             df=df, diag='scatter', height=1000, width=1000, size=13,
-            title='Scatterplot Matrix', use_theme=False
+            title='Scatterplot Matrix'
         )
 
         exp_scatter_plot_matrix = {
@@ -1019,17 +1062,17 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
         test_scatter_plot_matrix = tls.FigureFactory.create_scatterplotmatrix(
             df, index='Fruit', endpts=[-10, -1], diag='histogram',
             height=1000, width=1000, size=13, title='Scatterplot Matrix',
-            use_theme=True, palette='YlOrRd', marker=dict(symbol=136)
+            colormap='YlOrRd', marker=dict(symbol=136)
         )
 
         exp_scatter_plot_matrix = {
-            'data': [{'marker': {'color': 'rgb(128.0, 0.0, 38.0)'},
+            'data': [{'marker': {'color': 'rgb(128,0,38)'},
                       'showlegend': False,
                       'type': 'histogram',
                       'x': [2, -15, -2, 0],
                       'xaxis': 'x1',
                       'yaxis': 'y1'},
-                     {'marker': {'color': 'rgb(255.0, 255.0, 204.0)'},
+                     {'marker': {'color': 'rgb(255,255,204)'},
                       'showlegend': False,
                       'type': 'histogram',
                       'x': [6, 5],
