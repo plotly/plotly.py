@@ -1556,6 +1556,12 @@ class FigureFactory(object):
             if len(color_func) != len(simplices):
                 raise ValueError("If color_func is a list/array, it must "
                                  "be the same length as simplices.")
+                # convert all colors to rgb
+                for index in range(len(color_func)):
+                    if '#' in color_func[index]:
+                        foo = FigureFactory._hex_to_rgb(color_func[index])
+                        color_func[index] = FigureFactory._label_rgb(foo)
+
             mean_dists = np.asarray(color_func)
         else:
             # apply user inputted function to calculate
@@ -1809,6 +1815,48 @@ class FigureFactory(object):
                                  color_func=dist_origin)
         # Plot the data
         py.iplot(fig1, filename='Trisurf Plot - Custom Coloring')
+        ```
+
+        Example 5: Enter color_func as a list of colors
+        ```
+        # Necessary Imports for Trisurf
+        import numpy as np
+        from scipy.spatial import Delaunay
+        import random
+
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+        from plotly.graph_objs import graph_objs
+
+        # Make data for plot
+        u=np.linspace(-np.pi, np.pi, 30)
+        v=np.linspace(-np.pi, np.pi, 30)
+        u,v=np.meshgrid(u,v)
+        u=u.flatten()
+        v=v.flatten()
+
+        x = u
+        y = u*np.cos(v)
+        z = u*np.sin(v)
+
+        points2D = np.vstack([u,v]).T
+        tri = Delaunay(points2D)
+        simplices = tri.simplices
+
+
+        colors = []
+        color_choices = ['rgb(0, 0, 0)', '#6c4774', '#d6c7dd']
+
+        for index in range(len(simplices)):
+            colors.append(random.choice(color_choices))
+
+        fig = FF.create_trisurf(
+            x, y, z, simplices,
+            color_func=colors,
+            title=' Modern Art'
+        )
+
+        py.iplot(fig, filename="Modern Art")
         ```
         """
         from plotly.graph_objs import graph_objs
