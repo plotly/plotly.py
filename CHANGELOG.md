@@ -6,13 +6,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.11.0] - 2016-05-27
 ### Updated
-- Changed the default option for `create_distplot` in the figure factory from `probability` to `probability density` and also added the `histnorm` parameter to allow the user to choose between the two options. 
-Note: This is a backwards incompatible change. 
+- Changed the default option for `create_distplot` in the figure factory from `probability` to `probability density` and also added the `histnorm` parameter to allow the user to choose between the two options.
+Note: This is a backwards incompatible change.
 
 - Updated plotly.min.js so the offline mode is using plotly.js v1.12.0
 	- Light position is now configurable in surface traces
 	- surface and mesh3d lighting attributes are now accompanied with comprehensive descriptions
-	
+
+### Added
+- Added the option to load plotly.js from a CDN by setting the parameter `connected=True`
+ in the `init_notebook_mode()` function call
+ 
+
 ## [1.10.0] - 2016-05-19
 ### Fixed
 - Version 1.9.13 fixed an issue in offline mode where if you ran `init_notebook_mode`
