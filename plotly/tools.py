@@ -1551,8 +1551,8 @@ class FigureFactory(object):
         elif isinstance(color_func, (list, np.ndarray)):
             # Pre-computed list / array of values to map onto color
             if len(color_func) != len(simplices):
-                raise ValueError('If color_func is a list/array, must'
-                                 ' be the same length as simplices')
+                raise ValueError("If color_func is a list/array, it must "
+                                 "be the same length as simplices.")
             mean_dists = np.asarray(color_func)
         else:
             # apply user inputted function to calculate
@@ -1643,7 +1643,7 @@ class FigureFactory(object):
         :param (array) z: data values of z in a 1D array
         :param (array) simplices: an array of shape (ntri, 3) where ntri is
             the number of triangles in the triangularization. Each row of the
-            array contains the indicies of the verticies of each triangle.
+            array contains the indicies of the verticies of each triangle
         :param (str|list) colormap: either a plotly scale name, or a list
             containing 2 triplets. These triplets must be of the form (a,b,c)
             or 'rgb(x,y,z)' where a,b,c belong to the interval [0,1] and x,y,z
@@ -1651,22 +1651,22 @@ class FigureFactory(object):
         :param (function|list) color_func: The parameter that determines the
             coloring of the surface. Takes either a function with 3 arguments
             x, y, z or a list/array of color values the same length as
-            simplices. If set to None, color will only depend on the z axis.
+            simplices. If set to None, color will only depend on the z axis
         :param (str) title: title of the plot
         :param (bool) plot_edges: determines if the triangles on the trisurf
             are visible
         :param (bool) showbackground: makes background in plot visible
         :param (str) backgroundcolor: color of background. Takes a string of
-            the form 'rgb(x,y,z)' x,y,z are between 0 and 255 inclusive.
+            the form 'rgb(x,y,z)' x,y,z are between 0 and 255 inclusive
         :param (str) gridcolor: color of the gridlines besides the axes. Takes
             a string of the form 'rgb(x,y,z)' x,y,z are between 0 and 255
-            inclusive.
+            inclusive
         :param (str) zerolinecolor: color of the axes. Takes a string of the
-            form 'rgb(x,y,z)' x,y,z are between 0 and 255 inclusive.
+            form 'rgb(x,y,z)' x,y,z are between 0 and 255 inclusive
         :param (int|float) height: the height of the plot (in pixels)
         :param (int|float) width: the width of the plot (in pixels)
         :param (dict) aspectratio: a dictionary of the aspect ratio values for
-            the x, y and z axes. 'x', 'y' and 'z' take (int|float) values.
+            the x, y and z axes. 'x', 'y' and 'z' take (int|float) values
 
         Example 1: Sphere
         ```
