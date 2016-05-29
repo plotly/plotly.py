@@ -83,7 +83,7 @@ def get_config():
 def _plot_option_logic(plot_options_from_call_signature):
     """
     Given some plot_options as part of a plot call, decide on final options.
-    Precendence:
+    Precedence:
         1 - Start with DEFAULT_PLOT_OPTIONS
         2 - Update each key with ~/.plotly/.config options (tls.get_config)
         3 - Update each key with session plot options (set by py.sign_in)
