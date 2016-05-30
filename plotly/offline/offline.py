@@ -55,9 +55,23 @@ def init_notebook_mode(connected=False):
 
     Keyword arguments:
 
-    connected (default=False) -- if connected is True, this means that the
-    plotly.js library will be loaded from a CDN(online) rather than the
-    local file from pip.
+    connected (default=False) -- If True, the plotly.js library will be loaded
+    from an online CDN. If False, the plotly.js library will be loaded locally
+    from the plotly python package
+
+    Use `connected=True` if you want your notebooks to have smaller file sizes.
+    In the case where `connected=False`, the entirety of the plotly.js library
+    will be loaded into the notebook, which will result in a file-size increase
+    of a couple megabytes. Additionally, because the library will be downloaded
+    from the web, you and your viewers must be connected to the internet to be
+    able to view charts within this notebook.
+
+    Use `connected=False` if you want you and your collaborators to be able to
+    create and view these charts regardless of the availability of an internet
+    connection. This is the default option since it is the most predictable.
+    Note that under this setting the library will be included inline inside
+    your notebook, resulting in much larger notebook sizes compared to the case
+    where `connected=True`.
     """
     if not _ipython_imported:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
@@ -71,6 +85,7 @@ def init_notebook_mode(connected=False):
             '<script>'
             'requirejs.config({'
             'paths: { '
+            # Note we omit the extension .js because require will include it.
             '\'plotly\': [\'https://cdn.plot.ly/plotly-latest.min\']},'
             '});'
             'if(!window.Plotly) {{'
