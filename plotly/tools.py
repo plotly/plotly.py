@@ -1468,9 +1468,9 @@ class FigureFactory(object):
         diff_1 = float(highcolor[1] - lowcolor[1])
         diff_2 = float(highcolor[2] - lowcolor[2])
 
-        inter_colors = np.array([lowcolor[0] + intermed * diff_0,
-                                 lowcolor[1] + intermed * diff_1,
-                                 lowcolor[2] + intermed * diff_2])
+        inter_colors = (lowcolor[0] + intermed * diff_0,
+                        lowcolor[1] + intermed * diff_1,
+                        lowcolor[2] + intermed * diff_2)
         return inter_colors
 
     @staticmethod
@@ -1503,14 +1503,14 @@ class FigureFactory(object):
             return un_rgb_colors
 
     @staticmethod
-    def _map_array2color(array, colormap, vmin, vmax):
+    def _map_face2color(face, colormap, vmin, vmax):
         """
-        Normalize values in array by vmin/vmax and return plotly color strings.
+        Normalize facecolor values by vmin/vmax and return rgb-color strings
 
-        This function takes an array of values along with a colormap and a
-        minimum (vmin) and maximum (vmax) range of possible z values for the
-        given parametrized surface. It returns an rgb color based on the
-        relative position of zval between vmin and vmax
+        This function takes a tuple color with elements between 0 and 1, along
+        with a colormap and a minimum (vmin) and maximum (vmax) range of
+        possible mean distances for the given parametrized surface. It returns
+        an rgb color based on the mean distance between vmin and vmax
 
         """
         if vmin >= vmax:
@@ -1518,20 +1518,38 @@ class FigureFactory(object):
                                          "and vmax. The vmin value cannot be "
                                          "bigger than or equal to the value "
                                          "of vmax.")
-        # find distance t of zval from vmin to vmax where the distance
-        # is normalized to be between 0 and 1
-        t = (array - vmin) / float((vmax - vmin))
-        t_colors = FigureFactory._find_intermediate_color(colormap[0],
-                                                          colormap[1],
-                                                          t)
-        t_colors = t_colors * 255.
-        labelled_colors = ['rgb(%s, %s, %s)' % (i, j, k)
-                           for i, j, k in t_colors.T]
-        return labelled_colors
+        # find the normalized distance t of a triangle face between vmin and
+        #vmax where the distance is normalized between 0 and 1
+        t = (face - vmin) / float((vmax - vmin))
+
+        if len(colormap) <= 1:
+            t_color = colormap[0]
+            color = FigureFactory._convert_to_RGB_255(t_color)
+            color = FigureFactory._label_rgb(color)
+        else:
+            # account for colormaps with more than one color
+            incr = 1./(len(colormap) - 1)
+            low_color_index = int(t/incr)
+
+            if t == 1:
+                t_color = colormap[low_color_index]
+                color = FigureFactory._convert_to_RGB_255(t_color)
+                color = FigureFactory._label_rgb(color)
+
+            else:
+                t_color = FigureFactory._find_intermediate_color(
+                    colormap[low_color_index],
+                    colormap[low_color_index + 1],
+                    (t - low_color_index * incr) / incr)
+                color = FigureFactory._convert_to_RGB_255(t_color)
+                color = FigureFactory._label_rgb(color)
+
+        return color
 
     @staticmethod
     def _trisurf(x, y, z, simplices, colormap=None, color_func=None,
-                 plot_edges=False, x_edge=None, y_edge=None, z_edge=None):
+                 plot_edges=False, x_edge=None, y_edge=None, z_edge=None,
+                 facecolor=None):
         """
         Refer to FigureFactory.create_trisurf() for docstring
         """
@@ -1556,11 +1574,11 @@ class FigureFactory(object):
             if len(color_func) != len(simplices):
                 raise ValueError("If color_func is a list/array, it must "
                                  "be the same length as simplices.")
-                # convert all colors to rgb
-                for index in range(len(color_func)):
-                    if '#' in color_func[index]:
-                        foo = FigureFactory._hex_to_rgb(color_func[index])
-                        color_func[index] = FigureFactory._label_rgb(foo)
+            # convert all colors to rgb
+            for index in range(len(color_func)):
+                if '#' in color_func[index]:
+                    foo = FigureFactory._hex_to_rgb(color_func[index])
+                    color_func[index] = FigureFactory._label_rgb(foo)
 
             mean_dists = np.asarray(color_func)
         else:
@@ -1581,10 +1599,16 @@ class FigureFactory(object):
         else:
             min_mean_dists = np.min(mean_dists)
             max_mean_dists = np.max(mean_dists)
-            facecolor = FigureFactory._map_array2color(mean_dists,
-                                                       colormap,
-                                                       min_mean_dists,
-                                                       max_mean_dists)
+
+            if facecolor is None:
+                facecolor = []
+            for index in range(len(mean_dists)):
+                color = FigureFactory._map_face2color(mean_dists[index],
+                                                      colormap,
+                                                      min_mean_dists,
+                                                      max_mean_dists)
+                facecolor.append(color)
+
         # Make sure we have arrays to speed up plotting
         facecolor = np.asarray(facecolor)
         ii, jj, kk = simplices.T
@@ -2931,11 +2955,13 @@ class FigureFactory(object):
 
         """
         if isinstance(colors, tuple):
-            return 'rgb{}'.format(colors)
+            return ('rgb(%s, %s, %s)' % (colors[0], colors[1], colors[2]))
         else:
             colors_label = []
             for color in colors:
-                color_label = 'rgb{}'.format(color)
+                color_label = ('rgb(%s, %s, %s)' % (color[0],
+                                                    color[1],
+                                                    color[2]))
                 colors_label.append(color_label)
 
             return colors_label
