@@ -1507,10 +1507,10 @@ class FigureFactory(object):
         """
         Normalize facecolor values by vmin/vmax and return rgb-color strings
 
-        This function takes a tuple color with elements between 0 and 1, along
-        with a colormap and a minimum (vmin) and maximum (vmax) range of
-        possible mean distances for the given parametrized surface. It returns
-        an rgb color based on the mean distance between vmin and vmax
+        This function takes a tuple color along with a colormap and a minimum
+        (vmin) and maximum (vmax) range of possible mean distances for the
+        given parametrized surface. It returns an rgb color based on the mean
+        distance between vmin and vmax
 
         """
         if vmin >= vmax:
@@ -1679,10 +1679,12 @@ class FigureFactory(object):
         :param (array) simplices: an array of shape (ntri, 3) where ntri is
             the number of triangles in the triangularization. Each row of the
             array contains the indicies of the verticies of each triangle
-        :param (str|list) colormap: either a plotly scale name, or a list
-            containing 2 triplets. These triplets must be of the form (a,b,c)
-            or 'rgb(x,y,z)' where a,b,c belong to the interval [0,1] and x,y,z
-            belong to [0,255]
+        :param (str|tuple|list) colormap: either a plotly scale name, an rgb
+            or hex color, a color tuple or a list of colors. An rgb color is
+            of the form 'rgb(x, y, z)' where x, y, z belong to the interval
+            [0, 255] and a color tuple is a tuple of the form (a, b, c) where
+            a, b and c belong to [0, 1]. If colormap is a list, it must
+            contain the valid color types aforementioned as its members.
         :param (function|list) color_func: The parameter that determines the
             coloring of the surface. Takes either a function with 3 arguments
             x, y, z or a list/array of color values the same length as
