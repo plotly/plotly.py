@@ -30,7 +30,6 @@ except ImportError:
     _matplotlib_imported = False
 
 __PLOTLY_OFFLINE_INITIALIZED = False
-__PLOTLY_USE_CDN = False
 
 
 def download_plotlyjs(download_url):
@@ -53,14 +52,17 @@ def init_notebook_mode(connected=False):
     Initialize plotly.js in the browser if it hasn't been loaded into the DOM
     yet. This is an idempotent method and can and should be called from any
     offline methods that require plotly.js to be loaded into the notebook dom.
+
+    Keyword arguments:
+
+    connected (default=False) -- if connected is True, this means that the
+    plotly.js library will be loaded from a CDN(online) rather than the
+    local file from pip.
     """
     if not _ipython_imported:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
     global __PLOTLY_OFFLINE_INITIALIZED
-    global __PLOTLY_USE_CDN
-
-    __PLOTLY_USE_CDN = connected
 
     if connected:
         # Inject plotly.js into the output cell
@@ -76,7 +78,7 @@ def init_notebook_mode(connected=False):
             'function(plotly) {window.Plotly=plotly;});'
             '}}'
             '</script>'
-            )
+        )
     else:
         # Inject plotly.js into the output cell
         script_inject = (
