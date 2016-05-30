@@ -11230,6 +11230,7 @@
                 },
                 "lighting": {
                     "ambient": {
+                        "description": "Ambient light increases overall color visibility but can wash out the image.",
                         "dflt": 0.8,
                         "max": 1,
                         "min": 0,
@@ -11237,13 +11238,23 @@
                         "valType": "number"
                     },
                     "diffuse": {
+                        "description": "Represents the extent that incident rays are reflected in a range of angles.",
                         "dflt": 0.8,
                         "max": 1,
                         "min": 0,
                         "role": "style",
                         "valType": "number"
                     },
+                    "facenormalsepsilon": {
+                        "description": "Epsilon for face normals calculation avoids math issues arising from degenerate geometry.",
+                        "dflt": 1e-06,
+                        "max": 1,
+                        "min": 0,
+                        "role": "style",
+                        "valType": "number"
+                    },
                     "fresnel": {
+                        "description": "Represents the reflectance as a dependency of the viewing angle; e.g. paper is reflective when viewing it from the edge of the paper (almost 90 degrees), causing shine.",
                         "dflt": 0.2,
                         "max": 5,
                         "min": 0,
@@ -11252,6 +11263,7 @@
                     },
                     "role": "object",
                     "roughness": {
+                        "description": "Alters specular reflection; the rougher the surface, the wider and less contrasty the shine.",
                         "dflt": 0.5,
                         "max": 1,
                         "min": 0,
@@ -11259,9 +11271,45 @@
                         "valType": "number"
                     },
                     "specular": {
+                        "description": "Represents the level that incident rays are reflected in a single direction, causing shine.",
                         "dflt": 0.05,
                         "max": 2,
                         "min": 0,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "vertexnormalsepsilon": {
+                        "description": "Epsilon for vertex normals calculation avoids math issues arising from degenerate geometry.",
+                        "dflt": 1e-12,
+                        "max": 1,
+                        "min": 0,
+                        "role": "style",
+                        "valType": "number"
+                    }
+                },
+                "lightposition": {
+                    "role": "object",
+                    "x": {
+                        "description": "Numeric vector, representing the X coordinate for each vertex.",
+                        "dflt": 100000,
+                        "max": 100000,
+                        "min": -100000,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "y": {
+                        "description": "Numeric vector, representing the Y coordinate for each vertex.",
+                        "dflt": 100000,
+                        "max": 100000,
+                        "min": -100000,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "z": {
+                        "description": "Numeric vector, representing the Z coordinate for each vertex.",
+                        "dflt": 0,
+                        "max": 100000,
+                        "min": -100000,
                         "role": "style",
                         "valType": "number"
                     }
@@ -17937,6 +17985,7 @@
                 },
                 "lighting": {
                     "ambient": {
+                        "description": "Ambient light increases overall color visibility but can wash out the image.",
                         "dflt": 0.8,
                         "max": 1,
                         "min": 0,
@@ -17944,6 +17993,7 @@
                         "valType": "number"
                     },
                     "diffuse": {
+                        "description": "Represents the extent that incident rays are reflected in a range of angles.",
                         "dflt": 0.8,
                         "max": 1,
                         "min": 0,
@@ -17951,6 +18001,7 @@
                         "valType": "number"
                     },
                     "fresnel": {
+                        "description": "Represents the reflectance as a dependency of the viewing angle; e.g. paper is reflective when viewing it from the edge of the paper (almost 90 degrees), causing shine.",
                         "dflt": 0.2,
                         "max": 5,
                         "min": 0,
@@ -17959,6 +18010,7 @@
                     },
                     "role": "object",
                     "roughness": {
+                        "description": "Alters specular reflection; the rougher the surface, the wider and less contrasty the shine.",
                         "dflt": 0.5,
                         "max": 1,
                         "min": 0,
@@ -17966,9 +18018,37 @@
                         "valType": "number"
                     },
                     "specular": {
+                        "description": "Represents the level that incident rays are reflected in a single direction, causing shine.",
                         "dflt": 0.05,
                         "max": 2,
                         "min": 0,
+                        "role": "style",
+                        "valType": "number"
+                    }
+                },
+                "lightposition": {
+                    "role": "object",
+                    "x": {
+                        "description": "Numeric vector, representing the X coordinate for each vertex.",
+                        "dflt": 10,
+                        "max": 100000,
+                        "min": -100000,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "y": {
+                        "description": "Numeric vector, representing the Y coordinate for each vertex.",
+                        "dflt": 100000,
+                        "max": 100000,
+                        "min": -100000,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "z": {
+                        "description": "Numeric vector, representing the Z coordinate for each vertex.",
+                        "dflt": 0,
+                        "max": 100000,
+                        "min": -100000,
                         "role": "style",
                         "valType": "number"
                     }

@@ -929,7 +929,8 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
                           z, simplices, color_func=colors_bad)
         # Check converting custom colors to strings
         test_colors_plot = tls.FigureFactory.create_trisurf(
-                    x, y, z, simplices, color_func=colors_raw)
+            x, y, z, simplices, color_func=colors_raw
+        )
         self.assertTrue(isinstance(test_colors_plot['data'][0]['facecolor'][0],
                                    str))
 

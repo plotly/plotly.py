@@ -1574,11 +1574,13 @@ class FigureFactory(object):
             if len(color_func) != len(simplices):
                 raise ValueError("If color_func is a list/array, it must "
                                  "be the same length as simplices.")
+
             # convert all colors to rgb
             for index in range(len(color_func)):
-                if '#' in color_func[index]:
-                    foo = FigureFactory._hex_to_rgb(color_func[index])
-                    color_func[index] = FigureFactory._label_rgb(foo)
+                if isinstance(color_func[index], str):
+                    if '#' in color_func[index]:
+                        foo = FigureFactory._hex_to_rgb(color_func[index])
+                        color_func[index] = FigureFactory._label_rgb(foo)
 
             mean_dists = np.asarray(color_func)
         else:
