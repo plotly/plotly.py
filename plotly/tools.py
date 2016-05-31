@@ -2093,20 +2093,29 @@ class FigureFactory(object):
         """
         Return a tuple where each element gets divided by 255
 
-        Takes a list of color tuples where each element is between 0 and 255
-        and returns the same list where each tuple element is normalized to be
-        between 0 and 1
+        Takes a (list of) color tuple(s) where each element is between 0 and
+        255. Returns the same tuples where each tuple element is normalized to
+        a value between 0 and 1
 
         """
-        un_rgb_colors = []
-        for color in colors:
-            un_rgb_color = (color[0]/(255.0),
-                            color[1]/(255.0),
-                            color[2]/(255.0))
+        if isinstance(colors, tuple):
 
-            un_rgb_colors.append(un_rgb_color)
+            un_rgb_color = (colors[0]/(255.0),
+                            colors[1]/(255.0),
+                            colors[2]/(255.0))
 
-        return un_rgb_colors
+            return un_rgb_color
+
+        if isinstance(colors, list):
+            un_rgb_colors = []
+            for color in colors:
+                un_rgb_color = (color[0]/(255.0),
+                                color[1]/(255.0),
+                                color[2]/(255.0))
+
+                un_rgb_colors.append(un_rgb_color)
+
+            return un_rgb_colors
 
     @staticmethod
     def _map_z2color(zval, colormap, vmin, vmax):
