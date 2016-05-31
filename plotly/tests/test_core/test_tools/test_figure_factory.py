@@ -1126,6 +1126,114 @@ class TestTable(TestCase):
         self.assertEqual(index_table, exp_index_table)
 
 
+class TestGantt(TestCase):
+
+    def test_validate_gantt(self):
+
+        # checks if gantt is of valid form
+        df = [dict(Task="Job A")]
+
+        self.assertRaises(PlotlyError, tls.FigureFactory.create_gantt,
+                          df)
+
+        df = [dict(Task='Job A',
+                   Start='2009-02-01',
+                   Finish='2009-08-30',
+                   Complete='a')]
+
+        pattern2 = ("In order to use an indexing column and assign colors to "
+                    "the values of the index, you must choose an actual "
+                    "column name in the dataframe or key if a list of "
+                    "dictionaries is being used.")
+
+        self.assertRaisesRegexp(PlotlyError, pattern2,
+                                tls.FigureFactory.create_gantt,
+                                df, index_col='foo')
+
+        df = 'foo'
+
+        pattern3 = ("You must input either a dataframe or a list of "
+                    "dictionaries.")
+
+        self.assertRaisesRegexp(PlotlyError, pattern3,
+                                tls.FigureFactory.create_gantt, df)
+
+        df = []
+
+        pattern4 = ("Your list is empty. It must contain at least one "
+                    "dictionary.")
+
+        self.assertRaisesRegexp(PlotlyError, pattern4,
+                                tls.FigureFactory.create_gantt, df)
+
+        df = ['foo']
+
+        pattern5 = ("Your list must only include dictionaries.")
+
+        self.assertRaisesRegexp(PlotlyError, pattern5,
+                                tls.FigureFactory.create_gantt, df)
+
+    def test_gantt_index(self):
+
+        df = [dict(Task='Job A',
+                   Start='2009-02-01',
+                   Finish='2009-08-30',
+                   Complete=50)]
+
+        pattern = ("In order to use an indexing column and assign colors to "
+                   "the values of the index, you must choose an actual "
+                   "column name in the dataframe or key if a list of "
+                   "dictionaries is being used.")
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                tls.FigureFactory.create_gantt,
+                                df, index_col='foo')
+
+        df = [dict(Task='Job A', Start='2009-02-01',
+                   Finish='2009-08-30', Complete='a'),
+              dict(Task='Job A', Start='2009-02-01',
+                   Finish='2009-08-30', Complete=50)]
+
+        pattern2 = ("Error in indexing column. Make sure all entries of each "
+                    "column are all numbers or all strings.")
+
+        self.assertRaisesRegexp(PlotlyError, pattern2,
+                                tls.FigureFactory.create_gantt,
+                                df, index_col='Complete')
+
+    def test_gantt_validate_colors(self):
+
+        df = [dict(Task='Job A', Start='2009-02-01',
+                   Finish='2009-08-30', Complete=75),
+              dict(Task='Job B', Start='2009-02-01',
+                   Finish='2009-08-30', Complete=50)]
+
+        pattern = ("Whoops! The elements in your rgb colors tuples cannot "
+                   "exceed 255.0.")
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                tls.FigureFactory.create_gantt, df,
+                                index_col='Complete', colors='rgb(300,1,1)')
+
+        self.assertRaises(PlotlyError, tls.FigureFactory.create_gantt,
+                          df, index_col='Complete', colors='foo')
+
+        pattern2 = ("Whoops! The elements in your colors tuples cannot "
+                    "exceed 1.0.")
+
+        self.assertRaisesRegexp(PlotlyError, pattern2,
+                                tls.FigureFactory.create_gantt, df,
+                                index_col='Complete', colors=(2, 1, 1))
+
+        pattern3 = ("You must input a valid colors. Valid types include a "
+                    "plotly scale, rgb, hex or tuple color, a list of any "
+                    "color types, or a dictionary with index names each "
+                    "assigned to a color.")
+
+        self.assertRaisesRegexp(PlotlyError, pattern3,
+                                tls.FigureFactory.create_gantt, df,
+                                index_col='Complete', colors=5)
+
 # class TestDistplot(TestCase):
 
 #     def test_scipy_import_error(self):

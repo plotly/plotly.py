@@ -28,6 +28,8 @@ DEFAULT_PLOTLY_COLORS = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
                          'rgb(227, 119, 194)', 'rgb(127, 127, 127)',
                          'rgb(188, 189, 34)', 'rgb(23, 190, 207)']
 
+REQ_GANTT_KEYS = ['Task', 'Start', 'Finish']
+
 
 # Warning format
 def warning_on_one_line(message, category, filename, lineno,
@@ -1451,13 +1453,10 @@ class FigureFactory(object):
     """
 
     @staticmethod
-    def _validate_gantt(df, index_col):
+    def _validate_gantt(df):
         """
         Validates the inputted dataframe or list
         """
-        from numbers import Number
-        REQ_GANTT_KEYS = ['Task', 'Start', 'Finish']
-
         if isinstance(df, pd.core.frame.DataFrame):
             # validate if df is a dataframe
             for key in REQ_GANTT_KEYS:
@@ -1465,14 +1464,6 @@ class FigureFactory(object):
                     raise exceptions.PlotlyError("The columns in your data"
                                                  "frame must include the "
                                                  "keys".format(REQ_GANTT_KEYS))
-            # check if 'Complete' column has 'nan' values
-            # or fall outside the [0, 100] interval
-            if 'Complete' in df:
-                for percentage in df['Complete']:
-                    if not isinstance(percentage, Number):
-                        raise exceptions.PlotlyError("The values in the "
-                                                     "'Complete' column must "
-                                                     "be between 0 and 100.")
 
             num_of_rows = len(df.index)
             chart = []
@@ -1480,19 +1471,15 @@ class FigureFactory(object):
                 task_dict = {}
                 for key in df:
                     task_dict[key] = df.ix[index][key]
-
-                    #task_dict['Task'] = df.ix[index]['Task']
-                    #task_dict['Start'] = df.ix[index]['Start']
-                    #task_dict['Finish'] = df.ix[index]['Finish']
-                    #if 'Complete' in df:
-                    #    task_dict['Complete'] = df.ix[index]['Complete']
                 chart.append(task_dict)
+
             return chart
 
+        # validate if df is a list
         if not isinstance(df, list):
             raise exceptions.PlotlyError("You must input either a dataframe "
                                          "or a list of dictionaries.")
-        # validate if df is a list
+        # validate if df is empty
         if len(df) <= 0:
             raise exceptions.PlotlyError("Your list is empty. It must contain "
                                          "at least one dictionary.")
@@ -1505,14 +1492,6 @@ class FigureFactory(object):
                     raise exceptions.PlotlyError("The columns in your data"
                                                  "frame must be one "
                                                  "of".format(REQ_GANTT_KEYS))
-        #if index_col in df[0]:
-        #    for dictioanry in df:
-        #            if not isinstance(dictionary[index_col], Number):
-        #                raise exceptions.PlotlyError("The values in the "
-        #                                             "'Complete' column must "
-        #                                             "be between 0 and 100.")
-
-        # validate index column is all strings or all numbers
         return df
 
     @staticmethod
@@ -1653,16 +1632,16 @@ class FigureFactory(object):
             'yref': 'y',
         }
 
-        for index in range(len(tasks)):
-            tn = tasks[index]['name']
-            task_names.append(tn)
-            del tasks[index]['name']
-            tasks[index].update(shape_template)
-            tasks[index]['y0'] = index - bar_width
-            tasks[index]['y1'] = index + bar_width
+        # compute the color for task based on indexing column
+        if isinstance(chart[0][index_col], Number):
+            for index in range(len(tasks)):
+                tn = tasks[index]['name']
+                task_names.append(tn)
+                del tasks[index]['name']
+                tasks[index].update(shape_template)
+                tasks[index]['y0'] = index - bar_width
+                tasks[index]['y1'] = index + bar_width
 
-            # compute the color for task based on indexing column
-            if isinstance(chart[index][index_col], Number):
                 colors = FigureFactory._unlabel_rgb(colors)
                 lowcolor = colors[0]
                 highcolor = colors[1]
@@ -1685,11 +1664,35 @@ class FigureFactory(object):
                         marker={'color': 'white'}
                     )
                 )
-            if isinstance(chart[index][index_col], str):
-                color = colors[0]
-                tasks[index]['fillcolor'] = color
-                # relabel colors with 'rgb'
-                colors = FigureFactory._label_rgb(colors)
+        if isinstance(chart[0][index_col], str):
+            index_vals = []
+            for row in range(len(tasks)):
+                if chart[row][index_col] not in index_vals:
+                    index_vals.append(chart[row][index_col])
+
+            index_vals.sort()
+
+            # make a dictionary assignment to each index value
+            index_vals_dict = {}
+            # define color index
+            c_index = 0
+            for key in index_vals:
+                if c_index > len(colors) - 1:
+                    c_index = 0
+                index_vals_dict[key] = colors[c_index]
+                c_index += 1
+
+            for index in range(len(tasks)):
+                tn = tasks[index]['name']
+                task_names.append(tn)
+                del tasks[index]['name']
+                tasks[index].update(shape_template)
+                tasks[index]['y0'] = index - bar_width
+                tasks[index]['y1'] = index + bar_width
+
+                tasks[index]['fillcolor'] = index_vals_dict[
+                    chart[index][index_col]
+                ]
 
                 # add a line for hover text and autorange
                 data.append(
@@ -1851,7 +1854,22 @@ class FigureFactory(object):
                          'Viridis': ['rgb(68,1,84)', 'rgb(253,231,37)']}
 
         # validate gantt input data
-        chart = FigureFactory._validate_gantt(df, index_col)
+        chart = FigureFactory._validate_gantt(df)
+
+        if index_col:
+            if index_col not in chart[0]:
+                raise exceptions.PlotlyError("In order to use an indexing "
+                                             "column and assign colors to "
+                                             "the values of the index, you "
+                                             "must choose an actual column "
+                                             "name in the dataframe or key "
+                                             "if a list of dictionaries is "
+                                             "being used.")
+            # validate gantt index column
+            index_list = []
+            for dictionary in chart:
+                index_list.append(dictionary[index_col])
+            FigureFactory._validate_index(index_list)
 
         # Validate colors
         if colors is None:
@@ -1981,67 +1999,6 @@ class FigureFactory(object):
                                          "with index names each assigned "
                                          "to a color.")
 
-
-
-
-
-
-
-
-
-        """
-        if colors is None:
-            colors = DEFAULT_PLOTLY_COLORS
-
-        # validate color choice
-        if isinstance(colors, str):
-            if colors not in plotly_scales:
-                scale_keys = list(plotly_scales.keys())
-                raise exceptions.PlotlyError("You must pick a valid "
-                                             "plotly colorscale "
-                                             "name from "
-                                             "{}".format(scale_keys))
-
-            colors = [plotly_scales[colors][0],
-                      plotly_scales[colors][1]]
-
-        else:
-            if not isinstance(colors, list):
-                raise exceptions.PlotlyError("If 'colors' is a list then "
-                                             "its items must be either "
-                                             "tuples of the forms "
-                                             "'rgbx,y,z' where a,b,c are "
-                                             "between 0 and 1 inclusive "
-                                             "and x,y,z are between 0 "
-                                             "and 255 inclusive, or a hex "
-                                             "color string.")
-            if 'rgb' in colors[0]:
-                colors = FigureFactory._unlabel_rgb(colors)
-                for color in colors:
-                    for index in range(3):
-                        if color[index] > 255.0:
-                            raise exceptions.PlotlyError("Whoops! The "
-                                                         "elements in your "
-                                                         "rgb colors "
-                                                         "tuples cannot "
-                                                         "exceed 255.0.")
-                colors = FigureFactory._label_rgb(colors)
-
-            #if isinstance(colors[0], hex)
-
-            if isinstance(colors[0], tuple):
-                for color in colors:
-                    for index in range(3):
-                        if color[index] > 1.0:
-                            raise exceptions.PlotlyError("Whoops! The "
-                                                         "elements in your "
-                                                         "rgb colors "
-                                                         "tuples cannot "
-                                                         "exceed 1.0.")
-                colors = FigureFactory._convert_to_RGB_255(colors)
-                colors = FigureFactory._label_rgb(colors)
-        """
-
         if reverse_colors is True:
             colors.reverse()
 
@@ -2053,12 +2010,6 @@ class FigureFactory(object):
             return fig
 
         else:
-            if index_col not in chart[0]:
-                raise exceptions.PlotlyError("In order to use a colormap on "
-                                             "categorical or sequential data "
-                                             "the indexing column must be in "
-                                             "the chart.")
-
             fig = FigureFactory._gantt_colorscale(chart, colors,
                                                   title, index_col,
                                                   show_colorbar,
@@ -2937,7 +2888,6 @@ class FigureFactory(object):
                         c_indx += 1
                     trace_list.append(unique_index_vals)
                     legend_param += 1
-            #return trace_list
 
             trace_index = 0
             indices = range(1, dim + 1)
@@ -3461,26 +3411,31 @@ class FigureFactory(object):
     @staticmethod
     def _convert_to_RGB_255(colors):
         """
-        Return a list of tuples where each element gets multiplied by 255
+        Return a (list of) tuple(s) where each element is multiplied by 255
 
-        Takes a list of color tuples where each element is between 0 and 1
-        and returns the same list where each tuple element is normalized to be
-        between 0 and 255
+        Takes a tuple or a list of tuples where each element of each tuple is
+        between 0 and 1. Returns the same tuple(s) where each tuple element is
+        multiplied by 255
         """
-        colors_255 = []
 
-        for color in colors:
-            rgb_color = (color[0]*255.0, color[1]*255.0, color[2]*255.0)
-            colors_255.append(rgb_color)
-        return colors_255
+        if isinstance(colors, tuple):
+            return (colors[0]*255.0, colors[1]*255.0, colors[2]*255.0)
+
+        else:
+            colors_255 = []
+            for color in colors:
+                rgb_color = (color[0]*255.0, color[1]*255.0, color[2]*255.0)
+                colors_255.append(rgb_color)
+            return colors_255
 
     @staticmethod
     def _n_colors(lowcolor, highcolor, n_colors):
         """
-        Splits a low and high color into a list of #n_colors colors
+        Splits a low and high color into a list of n_colors colors in it
 
         Accepts two color tuples and returns a list of n_colors colors
         which form the intermediate colors between lowcolor and highcolor
+        from linearly interpolating through RGB space
 
         """
         diff_0 = float(highcolor[0] - lowcolor[0])
@@ -3502,18 +3457,21 @@ class FigureFactory(object):
     @staticmethod
     def _label_rgb(colors):
         """
-        Takes colors (a, b, c) and returns tuples 'rgb(a, b, c)'
+        Takes tuple(s) (a, b, c) and returns rgb color(s) 'rgb(a, b, c)'
 
-        Takes a list of two color tuples of the form (a, b, c) and returns the
-        same list with each tuple replaced by a string 'rgb(a, b, c)'
+        Takes either a list or a single color tuple of the form (a, b, c) and
+        returns the same color(s) with each tuple replaced by a string
+        'rgb(a, b, c)'
 
         """
         if isinstance(colors, tuple):
-            return 'rgb{}'.format(colors)
+            return ('rgb(%s, %s, %s)' % (colors[0], colors[1], colors[2]))
         else:
             colors_label = []
             for color in colors:
-                color_label = 'rgb{}'.format(color)
+                color_label = ('rgb(%s, %s, %s)' % (color[0],
+                                                    color[1],
+                                                    color[2]))
                 colors_label.append(color_label)
 
             return colors_label
@@ -3521,24 +3479,21 @@ class FigureFactory(object):
     @staticmethod
     def _unlabel_rgb(colors):
         """
-        Takes rgb colors 'rgb(a, b, c)' and returns the tuples (a, b, c)
+        Takes rgb color(s) 'rgb(a, b, c)' and returns tuple(s) (a, b, c)
 
-        This function takes a list of two 'rgb(a, b, c)' color strings and
-        returns a list of the color tuples in tuple form without the 'rgb'
-        label. In particular, the output is a list of two tuples of the form
-        (a, b, c)
+        This function takes either an 'rgb(a, b, c)' color or a list of
+        such colors and returns the color tuples in tuple(s) (a, b, c)
 
         """
-        unlabelled_colors = []
-        for character in colors:
+        if isinstance(colors, str):
             str_vals = ''
-            for index in range(len(character)):
+            for index in range(len(colors)):
                 try:
-                    float(character[index])
-                    str_vals = str_vals + character[index]
+                    float(colors[index])
+                    str_vals = str_vals + colors[index]
                 except ValueError:
-                    if (character[index] == ',') or (character[index] == '.'):
-                        str_vals = str_vals + character[index]
+                    if (colors[index] == ',') or (colors[index] == '.'):
+                        str_vals = str_vals + colors[index]
 
             str_vals = str_vals + ','
             numbers = []
@@ -3549,10 +3504,33 @@ class FigureFactory(object):
                 else:
                     numbers.append(float(str_num))
                     str_num = ''
-            unlabelled_tuple = (numbers[0], numbers[1], numbers[2])
-            unlabelled_colors.append(unlabelled_tuple)
+            return (numbers[0], numbers[1], numbers[2])
 
-        return unlabelled_colors
+        if isinstance(colors, list):
+            unlabelled_colors = []
+            for color in colors:
+                str_vals = ''
+                for index in range(len(color)):
+                    try:
+                        float(color[index])
+                        str_vals = str_vals + color[index]
+                    except ValueError:
+                        if (color[index] == ',') or (color[index] == '.'):
+                            str_vals = str_vals + color[index]
+
+                str_vals = str_vals + ','
+                numbers = []
+                str_num = ''
+                for char in str_vals:
+                    if char != ',':
+                        str_num = str_num + char
+                    else:
+                        numbers.append(float(str_num))
+                        str_num = ''
+                unlabelled_tuple = (numbers[0], numbers[1], numbers[2])
+                unlabelled_colors.append(unlabelled_tuple)
+
+            return unlabelled_colors
 
     @staticmethod
     def create_scatterplotmatrix(df, dataframe=None, headers=None,
