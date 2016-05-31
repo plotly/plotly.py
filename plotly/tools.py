@@ -1451,7 +1451,7 @@ class FigureFactory(object):
     """
 
     @staticmethod
-    def _validate_gantt(df):
+    def _validate_gantt(df, index_col):
         """
         Validates the inputted dataframe or list
         """
@@ -1463,8 +1463,8 @@ class FigureFactory(object):
             for key in REQ_GANTT_KEYS:
                 if key not in df:
                     raise exceptions.PlotlyError("The columns in your data"
-                                                 "frame must be one "
-                                                 "of".format(REQ_GANTT_KEYS))
+                                                 "frame must include the "
+                                                 "keys".format(REQ_GANTT_KEYS))
             # check if 'Complete' column has 'nan' values
             # or fall outside the [0, 100] interval
             if 'Complete' in df:
@@ -1478,11 +1478,14 @@ class FigureFactory(object):
             chart = []
             for index in range(num_of_rows):
                 task_dict = {}
-                task_dict['Task'] = df.ix[index]['Task']
-                task_dict['Start'] = df.ix[index]['Start']
-                task_dict['Finish'] = df.ix[index]['Finish']
-                if 'Complete' in df:
-                    task_dict['Complete'] = df.ix[index]['Complete']
+                for key in df:
+                    task_dict[key] = df.ix[index][key]
+
+                    #task_dict['Task'] = df.ix[index]['Task']
+                    #task_dict['Start'] = df.ix[index]['Start']
+                    #task_dict['Finish'] = df.ix[index]['Finish']
+                    #if 'Complete' in df:
+                    #    task_dict['Complete'] = df.ix[index]['Complete']
                 chart.append(task_dict)
             return chart
 
@@ -1502,24 +1505,18 @@ class FigureFactory(object):
                     raise exceptions.PlotlyError("The columns in your data"
                                                  "frame must be one "
                                                  "of".format(REQ_GANTT_KEYS))
-        if any('Complete' in dictionary for dictionary in df):
-            if not all('Complete' in dictionary for dictionary in df):
-                raise exceptions.PlotlyError("If you are using 'Complete' "
-                                             "as a dictionary key, make "
-                                             "sure each dictionary has "
-                                             "this key with an assigned "
-                                             "value between 0 and 100.")
-        if 'Complete' in df[0]:
-            for dictioanry in df:
-                    if not isinstance(dictionary['Complete'], Number):
-                        raise exceptions.PlotlyError("The values in the "
-                                                     "'Complete' column must "
-                                                     "be between 0 and 100.")
+        #if index_col in df[0]:
+        #    for dictioanry in df:
+        #            if not isinstance(dictionary[index_col], Number):
+        #                raise exceptions.PlotlyError("The values in the "
+        #                                             "'Complete' column must "
+        #                                             "be between 0 and 100.")
+
+        # validate index column is all strings or all numbers
         return df
 
     @staticmethod
-    def _gantt(chart, colors, use_colorscale, title,
-               bar_width, showgrid_x, showgrid_y,
+    def _gantt(chart, colors, title, bar_width, showgrid_x, showgrid_y,
                height, width, tasks=None,
                task_names=None, data=None):
         """
@@ -1625,13 +1622,13 @@ class FigureFactory(object):
         return fig
 
     @staticmethod
-    def _gantt_colorscale(chart, colors, use_colorscale, title,
-                          bar_width, showgrid_x, showgrid_y,
-                          height, width, tasks=None,
-                          task_names=None, data=None):
+    def _gantt_colorscale(chart, colors, title, index_col, show_colorbar,
+                          bar_width, showgrid_x, showgrid_y, height,
+                          width, tasks=None, task_names=None, data=None):
         """
         Refer to FigureFactory.create_gantt() for docstring
         """
+        from numbers import Number
         if tasks is None:
             tasks = []
         if task_names is None:
@@ -1664,43 +1661,60 @@ class FigureFactory(object):
             tasks[index]['y0'] = index - bar_width
             tasks[index]['y1'] = index + bar_width
 
-            # compute the color for task based on 'Completed' column
-            colors = FigureFactory._unlabel_rgb(colors)
-            lowcolor = colors[0]
-            highcolor = colors[1]
+            # compute the color for task based on indexing column
+            if isinstance(chart[index][index_col], Number):
+                colors = FigureFactory._unlabel_rgb(colors)
+                lowcolor = colors[0]
+                highcolor = colors[1]
 
-            intermed = (chart[index]['Complete'])/100.0
-            intermed_color = FigureFactory._find_intermediate_color(lowcolor,
-                                                                    highcolor,
-                                                                    intermed)
-            intermed_color = FigureFactory._label_rgb(intermed_color)
-            tasks[index]['fillcolor'] = intermed_color
-            # relabel colors with 'rgb'
-            colors = FigureFactory._label_rgb(colors)
+                intermed = (chart[index][index_col])/100.0
+                intermed_color = FigureFactory._find_intermediate_color(lowcolor,
+                                                                        highcolor,
+                                                                        intermed)
+                intermed_color = FigureFactory._label_rgb(intermed_color)
+                tasks[index]['fillcolor'] = intermed_color
+                # relabel colors with 'rgb'
+                colors = FigureFactory._label_rgb(colors)
 
-            # add a line for hover text and autorange
+                # add a line for hover text and autorange
+                data.append(
+                    dict(
+                        x=[tasks[index]['x0'], tasks[index]['x1']],
+                        y=[index, index],
+                        name='',
+                        marker={'color': 'white'}
+                    )
+                )
+            if isinstance(chart[index][index_col], str):
+                color = colors[0]
+                tasks[index]['fillcolor'] = color
+                # relabel colors with 'rgb'
+                colors = FigureFactory._label_rgb(colors)
+
+                # add a line for hover text and autorange
+                data.append(
+                    dict(
+                        x=[tasks[index]['x0'], tasks[index]['x1']],
+                        y=[index, index],
+                        name='',
+                        marker={'color': 'white'}
+                    )
+                )
+
+        if show_colorbar is True:
+        # generate dummy data for colorscale visibility
             data.append(
                 dict(
-                    x=[tasks[index]['x0'], tasks[index]['x1']],
+                    x=[tasks[index]['x0'], tasks[index]['x0']],
                     y=[index, index],
                     name='',
-                    marker={'color': 'white'}
+                    marker={'color': 'white',
+                            'colorscale': [[0, colors[0]], [1, colors[1]]],
+                            'showscale': True,
+                            'cmax': 100,
+                            'cmin': 0}
                 )
             )
-
-        # generate dummy data for colorscale visibility
-        data.append(
-            dict(
-                x=[tasks[index]['x0'], tasks[index]['x0']],
-                y=[index, index],
-                name='',
-                marker={'color': 'white',
-                        'colorscale': [[0, colors[0]], [1, colors[1]]],
-                        'showscale': True,
-                        'cmax': 100,
-                        'cmin': 0}
-            )
-        )
 
         layout = dict(
             title=title,
@@ -1754,7 +1768,7 @@ class FigureFactory(object):
         return fig
 
     @staticmethod
-    def create_gantt(df, colors=None, use_colorscale=False,
+    def create_gantt(df, colors=None, index_col=None, show_colorbar=False,
                      reverse_colors=False, title='Gantt Chart',
                      bar_width=0.2, showgrid_x=False, showgrid_y=False,
                      height=600, width=900, tasks=None,
@@ -1772,8 +1786,6 @@ class FigureFactory(object):
             are between 0 and 255. Can also be a Plotly colorscale but this is
             will result in only a 2-color cycle. If number of colors is less
             than the total number of tasks, colors will cycle
-        :param (bool) use_colorscale: enables colorscale with 'Complete' as
-            the index
         :param (bool) reverse_colors: reverses the order of selected colors
         :param (str) title: the title of the chart
         :param (float) bar_width: the width of the horizontal bars in the plot
@@ -1813,7 +1825,7 @@ class FigureFactory(object):
                    Finish='2009-05-30', Complete=95)]
 
         # Create a figure with Plotly colorscale
-        fig = FF.create_gantt(df, use_colorscale=True, colors='Blues',
+        fig = FF.create_gantt(df, colors='Blues',
                               bar_width=0.5, showgrid_x=True, showgrid_y=True)
 
         # Plot the data
@@ -1839,7 +1851,7 @@ class FigureFactory(object):
                          'Viridis': ['rgb(68,1,84)', 'rgb(253,231,37)']}
 
         # validate gantt input data
-        chart = FigureFactory._validate_gantt(df)
+        chart = FigureFactory._validate_gantt(df, index_col)
 
         if colors is None:
             colors = DEFAULT_PLOTLY_COLORS
@@ -1859,12 +1871,13 @@ class FigureFactory(object):
         else:
             if not isinstance(colors, list):
                 raise exceptions.PlotlyError("If 'colors' is a list then "
-                                             "its items must be tripets "
-                                             "of the form a,b,c or "
+                                             "its items must be either "
+                                             "tuples of the forms "
                                              "'rgbx,y,z' where a,b,c are "
                                              "between 0 and 1 inclusive "
                                              "and x,y,z are between 0 "
-                                             "and 255 inclusive.")
+                                             "and 255 inclusive, or a hex "
+                                             "color string.")
             if 'rgb' in colors[0]:
                 colors = FigureFactory._unlabel_rgb(colors)
                 for color in colors:
@@ -1876,6 +1889,8 @@ class FigureFactory(object):
                                                          "tuples cannot "
                                                          "exceed 255.0.")
                 colors = FigureFactory._label_rgb(colors)
+
+            #if isinstance(colors[0], hex)
 
             if isinstance(colors[0], tuple):
                 for color in colors:
@@ -1889,25 +1904,26 @@ class FigureFactory(object):
                 colors = FigureFactory._convert_to_RGB_255(colors)
                 colors = FigureFactory._label_rgb(colors)
 
-        # reverse colors if 'reverse_colors' is True
         if reverse_colors is True:
             colors.reverse()
 
-        if use_colorscale is False:
-            fig = FigureFactory._gantt(chart, colors, use_colorscale, title,
+        if not index_col:
+            fig = FigureFactory._gantt(chart, colors, title,
                                        bar_width, showgrid_x, showgrid_y,
                                        height, width, tasks=None,
                                        task_names=None, data=None)
             return fig
 
         else:
-            if 'Complete' not in chart[0]:
-                raise exceptions.PlotlyError("In order to use colorscale "
-                                             "there must be a 'Complete' "
-                                             "column in the chart.")
+            if index_col not in chart[0]:
+                raise exceptions.PlotlyError("In order to use a colormap on "
+                                             "categorical or sequential data "
+                                             "the indexing column must be in "
+                                             "the chart.")
 
             fig = FigureFactory._gantt_colorscale(chart, colors,
-                                                  use_colorscale, title,
+                                                  title, index_col,
+                                                  show_colorbar,
                                                   bar_width, showgrid_x,
                                                   showgrid_y, height,
                                                   width, tasks=None,
