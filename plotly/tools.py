@@ -1457,8 +1457,8 @@ class FigureFactory(object):
         """
         Validates the inputted dataframe or list
         """
-        if isinstance(df, pd.core.frame.DataFrame):
-            # validate if df is a dataframe
+        if _pandas_imported and isinstance(df, pd.core.frame.DataFrame):
+            # validate that df has all the required keys
             for key in REQ_GANTT_KEYS:
                 if key not in df:
                     raise exceptions.PlotlyError("The columns in your data"
@@ -1479,6 +1479,7 @@ class FigureFactory(object):
         if not isinstance(df, list):
             raise exceptions.PlotlyError("You must input either a dataframe "
                                          "or a list of dictionaries.")
+
         # validate if df is empty
         if len(df) <= 0:
             raise exceptions.PlotlyError("Your list is empty. It must contain "
@@ -1486,12 +1487,6 @@ class FigureFactory(object):
         if not isinstance(df[0], dict):
             raise exceptions.PlotlyError("Your list must only "
                                          "include dictionaries.")
-        for key in REQ_GANTT_KEYS:
-            for dictionary in df:
-                if key not in dictionary:
-                    raise exceptions.PlotlyError("The columns in your data"
-                                                 "frame must be one "
-                                                 "of".format(REQ_GANTT_KEYS))
         return df
 
     @staticmethod

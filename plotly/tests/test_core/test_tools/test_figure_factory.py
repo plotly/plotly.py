@@ -1130,12 +1130,6 @@ class TestGantt(TestCase):
 
     def test_validate_gantt(self):
 
-        # checks if gantt is of valid form
-        df = [dict(Task="Job A")]
-
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_gantt,
-                          df)
-
         df = [dict(Task='Job A',
                    Start='2009-02-01',
                    Finish='2009-08-30',
