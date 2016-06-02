@@ -511,7 +511,18 @@ def enable_mpl_offline(resize=False, strip_style=False,
 
 def download_notebook_image(format='png', height=600, width=800,
                             filename='newplot'):
+    """
+    Download an image of the most recent plot. This function should be
+    called in a cell following the output cell that includes the plot.
 
+    Keyword arguments:
+    format -- sets the image format for the saved file (default='png')
+    Accepts formats include: .jpeg, .png, .svg, .webp
+    height -- sets the height of the image in px (default=600)
+    width -- sets the width of the image in px (default=800)
+    filename -- the name of the saved file without format extension
+    (default='newplot')
+    """
     script = ('<script>'
               'function downloadimage(format, height, width,'
               ' filename) {{'
