@@ -1518,33 +1518,32 @@ class FigureFactory(object):
                                          "and vmax. The vmin value cannot be "
                                          "bigger than or equal to the value "
                                          "of vmax.")
-        # find the normalized distance t of a triangle face between vmin and
-        #vmax where the distance is normalized between 0 and 1
-        t = (face - vmin) / float((vmax - vmin))
 
-        if len(colormap) <= 1:
-            t_color = colormap[0]
-            color = FigureFactory._convert_to_RGB_255(t_color)
-            color = FigureFactory._label_rgb(color)
+        if len(colormap) == 1:
+            # color each triangle face with the same color in colormap
+            face_color = colormap[0]
+            face_color = FigureFactory._convert_to_RGB_255(face_color)
+            face_color = FigureFactory._label_rgb(face_color)
         else:
-            # account for colormaps with more than one color
-            incr = 1./(len(colormap) - 1)
-            low_color_index = int(t/incr)
+            # find the normalized distance t of a triangle face between vmin
+            # and vmax where the distance is normalized between 0 and 1
+            t = (face - vmin) / float((vmax - vmin))
+            low_color_index = int(t / (1./(len(colormap) - 1)))
 
             if t == 1:
-                t_color = colormap[low_color_index]
-                color = FigureFactory._convert_to_RGB_255(t_color)
-                color = FigureFactory._label_rgb(color)
+                face_color = colormap[low_color_index]
+                face_color = FigureFactory._convert_to_RGB_255(face_color)
+                face_color = FigureFactory._label_rgb(face_color)
 
             else:
-                t_color = FigureFactory._find_intermediate_color(
+                face_color = FigureFactory._find_intermediate_color(
                     colormap[low_color_index],
                     colormap[low_color_index + 1],
-                    (t - low_color_index * incr) / incr)
-                color = FigureFactory._convert_to_RGB_255(t_color)
-                color = FigureFactory._label_rgb(color)
+                    t * (len(colormap) - 1) - low_color_index)
+                face_color = FigureFactory._convert_to_RGB_255(face_color)
+                face_color = FigureFactory._label_rgb(face_color)
 
-        return color
+        return face_color
 
     @staticmethod
     def _trisurf(x, y, z, simplices, colormap=None, color_func=None,
