@@ -508,3 +508,39 @@ def enable_mpl_offline(resize=False, strip_style=False,
     formatter.for_type(matplotlib.figure.Figure,
                        lambda fig: iplot_mpl(fig, resize, strip_style, verbose,
                                              show_link, link_text, validate))
+
+def downloadImage(format='png', height=600, width=800,
+                            filename='newplot'):
+
+    script = ('<script>'
+              'function downloadimage(format, width, height,'
+              ' filename) {{'
+              'var elementsList = document.querySelectorAll(\'.code_cell\');'
+              'var selected = null;'
+              'var new_list = new Array();'
+              'for(var i=0; i < elementsList.length; i++) {{'
+              'if(elementsList[i].classList.contains(\'selected\')) {{'
+              'selected = i;'
+              'break;'
+              '}};'
+              'var temp = elementsList[i].getElementsByClassName'
+              '(\'plot-container plotly\');'
+              'if (temp.length > 0) {{'
+              'new_list.push(elementsList[i].getElementsByClassName'
+              '(\'plot-container plotly\')[0]);'
+              '}}'
+              '}}'
+              'if (new_list.length>0) {{'
+              'var pre_div = new_list.slice(-1)[0];'
+              'var p = document.getElementById(pre_div.parentElement.id);'
+              'Plotly.downloadImage(p, {{format: format, height: height, '
+              'width: width, filename: `filename}});'
+              '}}'
+              '}}'
+              'downloadimage(\'{format}\', {height}, {width}, \'{filename}\');'
+              'alert(\'ran\');'
+              '</script>'
+              ).format(format=format, height=height, width=width,
+                       filename=filename)
+
+    display(HTML(script))
