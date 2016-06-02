@@ -1766,6 +1766,123 @@ class FigureFactory(object):
         return fig
 
     @staticmethod
+    def _gantt_dict(chart, colors, title, index_col, show_colorbar, bar_width,
+                    showgrid_x, showgrid_y, height, width, tasks=None,
+                    task_names=None, data=None):
+        """
+        Refer to FigureFactory.create_gantt() for docstring
+        """
+        if tasks is None:
+            tasks = []
+        if task_names is None:
+            task_names = []
+        if data is None:
+            data = []
+
+        for index in range(len(chart)):
+            task = dict(x0=chart[index]['Start'],
+                        x1=chart[index]['Finish'],
+                        name=chart[index]['Task'])
+            tasks.append(task)
+
+        shape_template = {
+            'type': 'rect',
+            'xref': 'x',
+            'yref': 'y',
+            'opacity': 1,
+            'line': {
+                'width': 0,
+            },
+            'yref': 'y',
+        }
+
+        index_vals = []
+        for row in range(len(tasks)):
+            if chart[row][index_col] not in index_vals:
+                index_vals.append(chart[row][index_col])
+
+        index_vals.sort()
+
+        # verify each value in index column appears in colors dictionary
+        for key in index_vals:
+            if key not in colors:
+                raise exceptions.PlotlyError("If you are using colors as a "
+                                             "dictionary, all of its keys "
+                                             "must be all the values in the "
+                                             "index column.")
+
+        for index in range(len(tasks)):
+            tn = tasks[index]['name']
+            task_names.append(tn)
+            del tasks[index]['name']
+            tasks[index].update(shape_template)
+            tasks[index]['y0'] = index - bar_width
+            tasks[index]['y1'] = index + bar_width
+
+            tasks[index]['fillcolor'] = colors[chart[index][index_col]]
+
+            # add a line for hover text and autorange
+            data.append(
+                dict(
+                    x=[tasks[index]['x0'], tasks[index]['x1']],
+                    y=[index, index],
+                    name='',
+                    marker={'color': 'white'}
+                )
+            )
+
+        layout = dict(
+            title=title,
+            showlegend=False,
+            height=height,
+            width=width,
+            shapes=[],
+            hovermode='closest',
+            yaxis=dict(
+                showgrid=showgrid_y,
+                ticktext=task_names,
+                tickvals=list(range(len(tasks))),
+                range=[-1, len(tasks) + 1],
+                autorange=False,
+                zeroline=False,
+            ),
+            xaxis=dict(
+                showgrid=showgrid_x,
+                zeroline=False,
+                rangeselector=dict(
+                    buttons=list([
+                        dict(count=7,
+                             label='1w',
+                             step='day',
+                             stepmode='backward'),
+                        dict(count=1,
+                             label='1m',
+                             step='month',
+                             stepmode='backward'),
+                        dict(count=6,
+                             label='6m',
+                             step='month',
+                             stepmode='backward'),
+                        dict(count=1,
+                             label='YTD',
+                             step='year',
+                             stepmode='todate'),
+                        dict(count=1,
+                             label='1y',
+                             step='year',
+                             stepmode='backward'),
+                        dict(step='all')
+                    ])
+                ),
+                type='date'
+            )
+        )
+        layout['shapes'] = tasks
+
+        fig = dict(data=data, layout=layout)
+        return fig
+
+    @staticmethod
     def create_gantt(df, colors=None, index_col=None, show_colorbar=False,
                      reverse_colors=False, title='Gantt Chart',
                      bar_width=0.2, showgrid_x=False, showgrid_y=False,
@@ -1776,11 +1893,11 @@ class FigureFactory(object):
 
         :param (array|list) df: input data for gantt chart. Must be either a
             a dataframe or a list. If dataframe, the columns must include
-            'Task', 'Start' and 'Finish'; 'Complete' is optional and is used
-            to colorscale the bars. If a list, it must contain dictionaries
-            with the same required column headers, with 'Complete' optional
-            in the same way as the dataframe
-        :param (list) colors: a list of 'rgb(a, b, c)' colors where a, b and c
+            'Task', 'Start' and 'Finish'. Other columns can be included and
+            used for indexing. If a list, its elements must be dictionaries
+            with the same required column headers: 'Task', 'Start' and
+            'Finish'.
+        :param (str|list|dict) colors: a list of 'rgb(a, b, c)' colors where a, b and c
             are between 0 and 255. Can also be a Plotly colorscale but this is
             will result in only a 2-color cycle. If number of colors is less
             than the total number of tasks, colors will cycle
@@ -2005,14 +2122,24 @@ class FigureFactory(object):
             return fig
 
         else:
-            fig = FigureFactory._gantt_colorscale(chart, colors,
-                                                  title, index_col,
-                                                  show_colorbar,
-                                                  bar_width, showgrid_x,
-                                                  showgrid_y, height,
-                                                  width, tasks=None,
-                                                  task_names=None, data=None)
-            return fig
+            if not isinstance(colors, dict):
+                fig = FigureFactory._gantt_colorscale(chart, colors,
+                                                      title, index_col,
+                                                      show_colorbar,
+                                                      bar_width, showgrid_x,
+                                                      showgrid_y, height,
+                                                      width, tasks=None,
+                                                      task_names=None,
+                                                      data=None)
+                return fig
+            else:
+                fig = FigureFactory._gantt_dict(chart, colors, title,
+                                                index_col, show_colorbar,
+                                                bar_width, showgrid_x,
+                                                showgrid_y, height, width,
+                                                tasks=None, task_names=None,
+                                                data=None)
+                return fig
 
     @staticmethod
     def _find_intermediate_color(lowcolor, highcolor, intermed):

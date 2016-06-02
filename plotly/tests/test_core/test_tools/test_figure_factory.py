@@ -1130,6 +1130,8 @@ class TestGantt(TestCase):
 
     def test_validate_gantt(self):
 
+        # validate the basic gantt inputs
+
         df = [dict(Task='Job A',
                    Start='2009-02-01',
                    Finish='2009-08-30',
@@ -1169,6 +1171,8 @@ class TestGantt(TestCase):
 
     def test_gantt_index(self):
 
+        # validate the index used for gantt
+
         df = [dict(Task='Job A',
                    Start='2009-02-01',
                    Finish='2009-08-30',
@@ -1196,6 +1200,8 @@ class TestGantt(TestCase):
                                 df, index_col='Complete')
 
     def test_gantt_validate_colors(self):
+
+        # validate the gantt colors variable
 
         df = [dict(Task='Job A', Start='2009-02-01',
                    Finish='2009-08-30', Complete=75),
@@ -1227,6 +1233,17 @@ class TestGantt(TestCase):
         self.assertRaisesRegexp(PlotlyError, pattern3,
                                 tls.FigureFactory.create_gantt, df,
                                 index_col='Complete', colors=5)
+
+        # verify that if colors is a dictionary, its keys span all the
+        # values in the index column
+        colors_dict = {75: 'rgb(1, 2, 3)'}
+
+        pattern4 = ("If you are using colors as a dictionary, all of its "
+                    "keys must be all the values in the index column.")
+
+        self.assertRaisesRegexp(PlotlyError, pattern4,
+                                tls.FigureFactory.create_gantt, df,
+                                index_col='Complete', colors=colors_dict)
 
     def test_gantt_all_args(self):
 
