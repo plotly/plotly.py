@@ -3379,26 +3379,31 @@ class FigureFactory(object):
     @staticmethod
     def _convert_to_RGB_255(colors):
         """
-        Return a list of tuples where each element gets multiplied by 255
+        Return a (list of) tuple(s) where each element is multiplied by 255
 
-        Takes a list of color tuples where each element is between 0 and 1
-        and returns the same list where each tuple element is normalized to be
-        between 0 and 255
+        Takes a tuple or a list of tuples where each element of each tuple is
+        between 0 and 1. Returns the same tuple(s) where each tuple element is
+        multiplied by 255
         """
-        colors_255 = []
 
-        for color in colors:
-            rgb_color = (color[0]*255.0, color[1]*255.0, color[2]*255.0)
-            colors_255.append(rgb_color)
-        return colors_255
+        if isinstance(colors, tuple):
+            return (colors[0]*255.0, colors[1]*255.0, colors[2]*255.0)
+
+        else:
+            colors_255 = []
+            for color in colors:
+                rgb_color = (color[0]*255.0, color[1]*255.0, color[2]*255.0)
+                colors_255.append(rgb_color)
+            return colors_255
 
     @staticmethod
     def _n_colors(lowcolor, highcolor, n_colors):
         """
-        Splits a low and high color into a list of #n_colors colors
+        Splits a low and high color into a list of n_colors colors in it
 
         Accepts two color tuples and returns a list of n_colors colors
         which form the intermediate colors between lowcolor and highcolor
+        from linearly interpolating through RGB space
 
         """
         diff_0 = float(highcolor[0] - lowcolor[0])
@@ -3420,40 +3425,42 @@ class FigureFactory(object):
     @staticmethod
     def _label_rgb(colors):
         """
-        Takes colors (a, b, c) and returns tuples 'rgb(a, b, c)'
+        Takes tuple(s) (a, b, c) and returns rgb color(s) 'rgb(a, b, c)'
 
-        Takes a list of two color tuples of the form (a, b, c) and returns the
-        same list with each tuple replaced by a string 'rgb(a, b, c)'
+        Takes either a list or a single color tuple of the form (a, b, c) and
+        returns the same color(s) with each tuple replaced by a string
+        'rgb(a, b, c)'
 
         """
-        colors_label = []
-        for color in colors:
-            color_label = 'rgb{}'.format(color)
-            colors_label.append(color_label)
+        if isinstance(colors, tuple):
+            return ('rgb(%s, %s, %s)' % (colors[0], colors[1], colors[2]))
+        else:
+            colors_label = []
+            for color in colors:
+                color_label = ('rgb(%s, %s, %s)' % (color[0],
+                                                    color[1],
+                                                    color[2]))
+                colors_label.append(color_label)
 
-        return colors_label
+            return colors_label
 
     @staticmethod
     def _unlabel_rgb(colors):
         """
-        Takes rgb colors 'rgb(a, b, c)' and returns the tuples (a, b, c)
+        Takes rgb color(s) 'rgb(a, b, c)' and returns tuple(s) (a, b, c)
 
-        This function takes a list of two 'rgb(a, b, c)' color strings and
-        returns a list of the color tuples in tuple form without the 'rgb'
-        label. In particular, the output is a list of two tuples of the form
-        (a, b, c)
+        This function takes either an 'rgb(a, b, c)' color or a list of
+        such colors and returns the color tuples in tuple(s) (a, b, c)
 
         """
-        KEY_INDICES = [',', '.']
-
-        if not isinstance(colors, list):
+        if isinstance(colors, str):
             str_vals = ''
             for index in range(len(colors)):
                 try:
                     float(colors[index])
                     str_vals = str_vals + colors[index]
                 except ValueError:
-                    if colors[index] in KEY_INDICES:
+                    if (colors[index] == ',') or (colors[index] == '.'):
                         str_vals = str_vals + colors[index]
 
             str_vals = str_vals + ','
@@ -3465,21 +3472,19 @@ class FigureFactory(object):
                 else:
                     numbers.append(float(str_num))
                     str_num = ''
-            unlabelled_tuple = (numbers[0], numbers[1], numbers[2])
+            return (numbers[0], numbers[1], numbers[2])
 
-            return unlabelled_tuple
-
-        else:
+        if isinstance(colors, list):
             unlabelled_colors = []
-            for character in colors:
+            for color in colors:
                 str_vals = ''
-                for index in range(len(character)):
+                for index in range(len(color)):
                     try:
-                        float(character[index])
-                        str_vals = str_vals + character[index]
+                        float(color[index])
+                        str_vals = str_vals + color[index]
                     except ValueError:
-                        if character[index] in KEY_INDICES:
-                            str_vals = str_vals + character[index]
+                        if (color[index] == ',') or (color[index] == '.'):
+                            str_vals = str_vals + color[index]
 
                 str_vals = str_vals + ','
                 numbers = []
