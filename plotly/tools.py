@@ -1897,10 +1897,19 @@ class FigureFactory(object):
             used for indexing. If a list, its elements must be dictionaries
             with the same required column headers: 'Task', 'Start' and
             'Finish'.
-        :param (str|list|dict) colors: a list of 'rgb(a, b, c)' colors where a, b and c
-            are between 0 and 255. Can also be a Plotly colorscale but this is
-            will result in only a 2-color cycle. If number of colors is less
-            than the total number of tasks, colors will cycle
+        :param (str|list|dict) colors: either a plotly scale name, an rgb
+            or hex color, a color tuple or a list of colors. An rgb color is
+            of the form 'rgb(x, y, z)' where x, y, z belong to the interval
+            [0, 255] and a color tuple is a tuple of the form (a, b, c) where
+            a, b and c belong to [0, 1]. If colors is a list, it must
+            contain the valid color types aforementioned as its members.
+            If a dictionary, all values of the indexing column must be keys in
+            colors.
+        :param (str|float) index_col: the column header (if df is a data
+            frame) that will function as the indexing column. If df is a list,
+            index_col must be one of the keys in all the items of df.
+        :param (bool) show_colorbar: determines if colorbar will be visible.
+            Only applies if values in the index column are numeric.
         :param (bool) reverse_colors: reverses the order of selected colors
         :param (str) title: the title of the chart
         :param (float) bar_width: the width of the horizontal bars in the plot
@@ -1923,10 +1932,10 @@ class FigureFactory(object):
         fig = FF.create_gantt(df)
 
         # Plot the data
-        py.iplot(fig, filename='Gantt Chart', world_readable=True)
+        py.iplot(fig, filename='Simple Gantt Chart', world_readable=True)
         ```
 
-        Example 2: Colormap by 'Complete' Variable
+        Example 2: Index by Column with Numerical Entries
         ```
         import plotly.plotly as py
         from plotly.tools import FigureFactory as FF
@@ -1940,11 +1949,61 @@ class FigureFactory(object):
                    Finish='2009-05-30', Complete=95)]
 
         # Create a figure with Plotly colorscale
-        fig = FF.create_gantt(df, colors='Blues',
-                              bar_width=0.5, showgrid_x=True, showgrid_y=True)
+        fig = FF.create_gantt(df, colors='Blues', index_col='Complete',
+                              show_colorbar=True, bar_width=0.5,
+                              showgrid_x=True, showgrid_y=True)
 
         # Plot the data
-        py.iplot(fig, filename='Colormap Gantt Chart', world_readable=True)
+        py.iplot(fig, filename='Numerical Entries', world_readable=True)
+        ```
+
+        Example 3: Index by Column with String Entries
+        ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+
+        # Make data for chart
+        df = [dict(Task="Job A", Start='2009-01-01',
+                   Finish='2009-02-30', Resource='Apple'),
+              dict(Task="Job B", Start='2009-03-05',
+                   Finish='2009-04-15', Resource='Grape'),
+              dict(Task="Job C", Start='2009-02-20',
+                   Finish='2009-05-30', Resource='Banana')]
+
+        # Create a figure with Plotly colorscale
+        fig = FF.create_gantt(df, colors=['rgb(200, 50, 25)',
+                                          (1, 0, 1),
+                                          '#6c4774'],
+                              index_col='Resource',
+                              reverse_colors=True)
+
+        # Plot the data
+        py.iplot(fig, filename='String Entries', world_readable=True)
+        ```
+
+        Example 4: Use a dictionary for colors
+        ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+
+        # Make data for chart
+        df = [dict(Task="Job A", Start='2009-01-01',
+                   Finish='2009-02-30', Resource='Apple'),
+              dict(Task="Job B", Start='2009-03-05',
+                   Finish='2009-04-15', Resource='Grape'),
+              dict(Task="Job C", Start='2009-02-20',
+                   Finish='2009-05-30', Resource='Banana')]
+
+        # Make a dictionary of colors
+        colors = {'Apple': 'rgb(255, 0, 0)',
+                  'Grape': 'rgb(170, 14, 200)',
+                  'Banana': (1, 1, 0.2)}
+
+        # Create a figure with Plotly colorscale
+        fig = FF.create_gantt(df, colors=colors, index_col='Resource')
+
+        # Plot the data
+        py.iplot(fig, filename='dictioanry colors', world_readable=True)
         ```
         """
         plotly_scales = {'Greys': ['rgb(0,0,0)', 'rgb(255,255,255)'],
@@ -2115,10 +2174,17 @@ class FigureFactory(object):
             colors.reverse()
 
         if not index_col:
-            fig = FigureFactory._gantt(chart, colors, title,
-                                       bar_width, showgrid_x, showgrid_y,
-                                       height, width, tasks=None,
-                                       task_names=None, data=None)
+            if isinstance(colors, dict):
+                raise exceptions.PlotlyError("Error. You have set colors to "
+                                             "a dictionary but have not "
+                                             "picked an index. An index is "
+                                             "required if you are assigning "
+                                             "colors to particular values "
+                                             "in a dictioanry.")
+
+            fig = FigureFactory._gantt(chart, colors, title, bar_width,
+                                       showgrid_x, showgrid_y, height, width,
+                                       tasks=None, task_names=None, data=None)
             return fig
 
         else:

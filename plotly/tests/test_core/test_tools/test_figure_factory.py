@@ -1245,6 +1245,17 @@ class TestGantt(TestCase):
                                 tls.FigureFactory.create_gantt, df,
                                 index_col='Complete', colors=colors_dict)
 
+        # check: index is set if colors is a dictionary
+        colors_dict_good = {50: 'rgb(1, 2, 3)', 75: 'rgb(5, 10, 15)'}
+
+        pattern5 = ("Error. You have set colors to a dictionary but have not "
+                    "picked an index. An index is required if you are "
+                    "assigning colors to particular values in a dictioanry.")
+
+        self.assertRaisesRegexp(PlotlyError, pattern5,
+                                tls.FigureFactory.create_gantt, df,
+                                colors=colors_dict_good)
+
     def test_gantt_all_args(self):
 
         # check if gantt chart matches with expected output
