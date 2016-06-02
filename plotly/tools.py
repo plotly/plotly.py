@@ -1785,8 +1785,7 @@ class FigureFactory(object):
     @staticmethod
     def create_violin(data, data_header=None, colors=None,
                       use_colorscale=False, group_header=None,
-                      height=450, width=600,
-                      title='Violin and Rug Plot'):
+                      height=450, width=600, title='Violin and Rug Plot'):
         """
         Returns figure for a violin plot
 
@@ -2009,31 +2008,39 @@ class FigureFactory(object):
         diff_1 = float(highcolor[1] - lowcolor[1])
         diff_2 = float(highcolor[2] - lowcolor[2])
 
-        new_tuple = (lowcolor[0] + intermed*diff_0,
-                     lowcolor[1] + intermed*diff_1,
-                     lowcolor[2] + intermed*diff_2)
-
-        return new_tuple
+        inter_colors = (lowcolor[0] + intermed * diff_0,
+                        lowcolor[1] + intermed * diff_1,
+                        lowcolor[2] + intermed * diff_2)
+        return inter_colors
 
     @staticmethod
     def _unconvert_from_RGB_255(colors):
         """
         Return a tuple where each element gets divided by 255
 
-        Takes a list of color tuples where each element is between 0 and 255
-        and returns the same list where each tuple element is normalized to be
-        between 0 and 1
+        Takes a (list of) color tuple(s) where each element is between 0 and
+        255. Returns the same tuples where each tuple element is normalized to
+        a value between 0 and 1
 
         """
-        un_rgb_colors = []
-        for color in colors:
-            un_rgb_color = (color[0]/(255.0),
-                            color[1]/(255.0),
-                            color[2]/(255.0))
+        if isinstance(colors, tuple):
 
-            un_rgb_colors.append(un_rgb_color)
+            un_rgb_color = (colors[0]/(255.0),
+                            colors[1]/(255.0),
+                            colors[2]/(255.0))
 
-        return un_rgb_colors
+            return un_rgb_color
+
+        if isinstance(colors, list):
+            un_rgb_colors = []
+            for color in colors:
+                un_rgb_color = (color[0]/(255.0),
+                                color[1]/(255.0),
+                                color[2]/(255.0))
+
+                un_rgb_colors.append(un_rgb_color)
+
+            return un_rgb_colors
 
     @staticmethod
     def _map_z2color(zval, colormap, vmin, vmax):
