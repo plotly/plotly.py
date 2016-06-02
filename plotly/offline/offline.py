@@ -514,6 +514,8 @@ def download_notebook_image(format='png', height=600, width=800,
     """
     Download an image of the most recent plot. This function should be
     called in a cell following the output cell that includes the plot.
+    In other words, do not run this functon in the same cell as your
+    iplot call.
 
     Keyword arguments:
     format -- sets the image format for the saved file (default='png')
