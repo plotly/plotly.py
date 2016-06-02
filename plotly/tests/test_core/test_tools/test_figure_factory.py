@@ -1228,6 +1228,102 @@ class TestGantt(TestCase):
                                 tls.FigureFactory.create_gantt, df,
                                 index_col='Complete', colors=5)
 
+    def test_gantt_all_args(self):
+
+        # check if gantt chart matches with expected output
+
+        df = [dict(Task="Run",
+                   Start='2010-01-01',
+                   Finish='2011-02-02',
+                   Complete=0),
+              dict(Task="Fast",
+                   Start='2011-01-01',
+                   Finish='2012-06-05',
+                   Complete=25)]
+
+        test_gantt_chart = tls.FigureFactory.create_gantt(
+            df, colors='Blues', index_col='Complete', reverse_colors=True,
+            title='Title', bar_width=0.5, showgrid_x=True, showgrid_y=True,
+            height=500, width=500
+        )
+
+        exp_gantt_chart = {
+            'data': [{'marker': {'color': 'white'},
+                      'name': '',
+                      'x': ['2010-01-01', '2011-02-02'],
+                      'y': [0, 0]},
+                     {'marker': {'color': 'white'},
+                      'name': '',
+                      'x': ['2011-01-01', '2012-06-05'],
+                      'y': [1, 1]}],
+            'layout': {'height': 500,
+                       'hovermode': 'closest',
+                       'shapes': [{'fillcolor': 'rgb(220.0, 220.0, 220.0)',
+                                   'line': {'width': 0},
+                                   'opacity': 1,
+                                   'type': 'rect',
+                                   'x0': '2010-01-01',
+                                   'x1': '2011-02-02',
+                                   'xref': 'x',
+                                   'y0': -0.5,
+                                   'y1': 0.5,
+                                   'yref': 'y'},
+                                  {'fillcolor': 'rgb(166.25, 167.5, 208.0)',
+                                   'line': {'width': 0},
+                                   'opacity': 1,
+                                   'type': 'rect',
+                                   'x0': '2011-01-01',
+                                   'x1': '2012-06-05',
+                                   'xref': 'x',
+                                   'y0': 0.5,
+                                   'y1': 1.5,
+                                   'yref': 'y'}],
+                       'showlegend': False,
+                       'title': 'Title',
+                       'width': 500,
+                       'xaxis': {'rangeselector': {'buttons': [
+                           {'count': 7,
+                            'label': '1w',
+                            'step': 'day',
+                            'stepmode': 'backward'},
+                           {'count': 1,
+                            'label': '1m',
+                            'step': 'month',
+                            'stepmode': 'backward'},
+                           {'count': 6,
+                            'label': '6m',
+                            'step': 'month',
+                            'stepmode': 'backward'},
+                           {'count': 1,
+                            'label': 'YTD',
+                            'step': 'year',
+                            'stepmode': 'todate'},
+                           {'count': 1,
+                            'label': '1y',
+                            'step': 'year',
+                            'stepmode': 'backward'},
+                           {'step': 'all'}
+                           ]},
+                           'showgrid': True,
+                           'type': 'date',
+                           'zeroline': False},
+                       'yaxis': {'autorange': False,
+                                 'range': [-1, 3],
+                                 'showgrid': True,
+                                 'ticktext': ['Run', 'Fast'],
+                                 'tickvals': [0, 1],
+                                 'zeroline': False}}
+        }
+
+        self.assertEqual(test_gantt_chart['data'][0],
+                         exp_gantt_chart['data'][0])
+
+        self.assertEqual(test_gantt_chart['data'][1],
+                         exp_gantt_chart['data'][1])
+
+        self.assertEqual(test_gantt_chart['layout'],
+                         exp_gantt_chart['layout'])
+
 # class TestDistplot(TestCase):
 
 #     def test_scipy_import_error(self):
