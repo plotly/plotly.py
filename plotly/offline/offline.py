@@ -232,7 +232,7 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     if not tools._ipython_imported:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
-    plot_html, plotdivid, width, height, plot_id = _plot_html(
+    plot_html, plotdivid, _width, _height, plot_id = _plot_html(
         figure_or_data, show_link, link_text, validate,
         '100%', 525, global_requirejs=True, download=download_image)
 
@@ -241,11 +241,12 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     # Use the plot id to download the image now:
 
     script = ('<script>'
-              'Plotly.downloadImage(\'{plot_id}\', {{format: \'{format}\', '
-              'height: {height}, width: {width}, filename: \'{filename}\'}});'
+              'var div_id = document.getElementById(\'{plot_id}\');'
+              'setTimeout(function() {{Plotly.downloadImage(div_id, {{format: \'{format}\', '
+              'height: {height}, width: {width}, filename: \'{filename}\'}});}}, 500);'
               '</script>'
-             ).format(format=format, width=width, height=height,
-                      filename=filename, plot_id=plot_id)
+              ).format(format=format, width=width, height=height,
+                       filename=filename, plot_id=plot_id)
 
     display(HTML(script))
 
