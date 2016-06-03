@@ -1525,17 +1525,17 @@ class FigureFactory(object):
             face_color = FigureFactory._convert_to_RGB_255(face_color)
             face_color = FigureFactory._label_rgb(face_color)
         else:
-            # find the normalized distance t of a triangle face between vmin
-            # and vmax where the distance is normalized between 0 and 1
-            t = (face - vmin) / float((vmax - vmin))
-            low_color_index = int(t / (1./(len(colormap) - 1)))
-
-            if t == 1:
-                face_color = colormap[low_color_index]
+            if face == vmax:
+                # pick last color in colormap
+                face_color = colormap[-1]
                 face_color = FigureFactory._convert_to_RGB_255(face_color)
                 face_color = FigureFactory._label_rgb(face_color)
-
             else:
+                # find the normalized distance t of a triangle face between
+                # vmin and vmax where the distance is between 0 and 1
+                t = (face - vmin) / float((vmax - vmin))
+                low_color_index = int(t / (1./(len(colormap) - 1)))
+
                 face_color = FigureFactory._find_intermediate_color(
                     colormap[low_color_index],
                     colormap[low_color_index + 1],
