@@ -1775,6 +1775,7 @@ class FigureFactory(object):
         """
         Refer to FigureFactory.create_gantt() for docstring
         """
+        from plotly.graph_objs import graph_objs 
         if tasks is None:
             tasks = []
         if task_names is None:
@@ -1833,6 +1834,22 @@ class FigureFactory(object):
                     marker={'color': 'white'}
                 )
             )
+
+        if show_colorbar is True:
+        # generate dummy data for colorscale visibility
+            trace2 = dict(
+                #x=[tasks[0]['x0'], tasks[0]['x0']],
+                x=[2, 6],
+                y=[4, 2],
+                name='asdf',
+                visible='legendonly',
+                marker=dict(
+                    size=10,
+                    color='rgb(25, 50, 150)'),
+                showlegend=True
+            )
+
+            data.append(trace2)
 
         layout = dict(
             title=title,
