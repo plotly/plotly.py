@@ -189,7 +189,7 @@ def _plot_html(figure_or_data, show_link, link_text, validate,
 
 def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
           validate=True, download_image=False, format='png',
-          width=800, height=600, filename='newplot'):
+          _width=800, _height=600, filename='newplot'):
     """
     Draw plotly graphs inside an IPython notebook without
     connecting to an external server.
@@ -232,7 +232,7 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     if not tools._ipython_imported:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
-    plot_html, plotdivid, _width, _height, plot_id = _plot_html(
+    plot_html, plotdivid, width, height, plot_id = _plot_html(
         figure_or_data, show_link, link_text, validate,
         '100%', 525, global_requirejs=True, download=download_image)
 
@@ -245,7 +245,7 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
               'setTimeout(function() {{Plotly.downloadImage(div_id, {{format: \'{format}\', '
               'height: {height}, width: {width}, filename: \'{filename}\'}});}}, 500);'
               '</script>'
-              ).format(format=format, width=width, height=height,
+              ).format(format=format, width=_width, height=_height,
                        filename=filename, plot_id=plot_id)
 
     display(HTML(script))
