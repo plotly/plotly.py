@@ -1783,6 +1783,62 @@ class FigureFactory(object):
         return fig
 
     @staticmethod
+    def _violin_dict(data, data_header, colors, use_colorscale,
+                     group_header, height, width, title):
+        """
+        Refer to FigureFactory.create_violin() for docstring.
+
+        Returns fig for violin plot without colorscale.
+
+        """
+
+        from plotly.graph_objs import graph_objs
+        import numpy as np
+
+        # collect all group names
+        group_name = []
+        for name in data[group_header]:
+            if name not in group_name:
+                group_name.append(name)
+        group_name.sort()
+
+        gb = data.groupby([group_header])
+        L = len(group_name)
+
+        fig = make_subplots(rows=1, cols=L,
+                            shared_yaxes=True,
+                            horizontal_spacing=0.025,
+                            print_grid=True)
+        color_index = 0
+        for k, gr in enumerate(group_name):
+            vals = np.asarray(gb.get_group(gr)[data_header], np.float)
+            if color_index >= len(colors):
+                color_index = 0
+            plot_data, plot_xrange = FigureFactory._violinplot(
+                vals,
+                fillcolor=colors[color_index]
+            )
+            layout = graph_objs.Layout()
+
+            for item in plot_data:
+                fig.append_trace(item, 1, k + 1)
+            color_index += 1
+        # set the sharey axis style
+        fig['layout'].update(
+            {'yaxis{}'.format(1): FigureFactory._make_YAxis('')}
+        )
+        fig['layout'].update(
+            title=title,
+            showlegend=False,
+            hovermode='closest',
+            autosize=False,
+            height=height,
+            width=width
+        )
+
+        return fig
+
+    @staticmethod
     def create_violin(data, data_header=None, colors=None,
                       use_colorscale=False, group_header=None,
                       height=450, width=600, title='Violin and Rug Plot'):
