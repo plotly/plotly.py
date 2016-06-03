@@ -114,8 +114,9 @@ def init_notebook_mode(connected=False):
     __PLOTLY_OFFLINE_INITIALIZED = True
 
 
-def _plot_html(figure_or_data, show_link, link_text,
-               validate, default_width, default_height, global_requirejs):
+def _plot_html(figure_or_data, show_link, link_text, validate,
+               default_width, default_height, global_requirejs,
+               download=False):
 
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
 
@@ -183,11 +184,12 @@ def _plot_html(figure_or_data, show_link, link_text,
         id=plotdivid, script=script,
         height=height, width=width)
 
-    return plotly_html_div, plotdivid, width, height
+    return plotly_html_div, plotdivid, width, height, plotdivid
 
 
 def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
-          validate=True):
+          validate=True, download_image=False, format='png',
+          width=800, height=600, filename='newplot'):
     """
     Draw plotly graphs inside an IPython notebook without
     connecting to an external server.
@@ -230,12 +232,22 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     if not tools._ipython_imported:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
-    plot_html, plotdivid, width, height = _plot_html(
+    plot_html, plotdivid, width, height, plot_id = _plot_html(
         figure_or_data, show_link, link_text, validate,
-        '100%', 525, global_requirejs=True)
+        '100%', 525, global_requirejs=True, download=download_image)
 
     display(HTML(plot_html))
 
+    # Use the plot id to download the image now:
+
+    script = ('<script>'
+              'Plotly.downloadImage(\'{plot_id}\', {{format: \'{format}\', '
+              'height: {height}, width: {width}, filename: \'{filename}\'}});'
+              '</script>'
+             ).format(format=format, width=width, height=height,
+                      filename=filename, plot_id=plot_id)
+
+    display(HTML(script))
 
 def plot(figure_or_data,
          show_link=True, link_text='Export to plot.ly',
