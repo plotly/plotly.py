@@ -1477,8 +1477,6 @@ class FigureFactory(object):
         """
         Produces a sideways probability distribution fig violin plot.
         """
-
-
         from plotly.graph_objs import graph_objs
 
         text = ['(pdf(y), y)=(' + '{:0.2f}'.format(x[i]) +
@@ -1650,7 +1648,6 @@ class FigureFactory(object):
         Returns fig for violin plot without colorscale.
 
         """
-
         from plotly.graph_objs import graph_objs
         import numpy as np
 
@@ -1791,7 +1788,6 @@ class FigureFactory(object):
         Returns fig for violin plot without colorscale.
 
         """
-
         from plotly.graph_objs import graph_objs
         import numpy as np
 
@@ -1809,20 +1805,17 @@ class FigureFactory(object):
                             shared_yaxes=True,
                             horizontal_spacing=0.025,
                             print_grid=True)
-        color_index = 0
+
         for k, gr in enumerate(group_name):
             vals = np.asarray(gb.get_group(gr)[data_header], np.float)
-            if color_index >= len(colors):
-                color_index = 0
             plot_data, plot_xrange = FigureFactory._violinplot(
                 vals,
-                fillcolor=colors[color_index]
+                fillcolor=colors[gr]
             )
             layout = graph_objs.Layout()
 
             for item in plot_data:
                 fig.append_trace(item, 1, k + 1)
-            color_index += 1
         # set the sharey axis style
         fig['layout'].update(
             {'yaxis{}'.format(1): FigureFactory._make_YAxis('')}
@@ -1852,8 +1845,7 @@ class FigureFactory(object):
         :param (str) data_header: the header of the data column to be used
             from an inputted pandas dataframe. Not applicable if 'data' is
             a list of numeric values
-        :param (str|list) colors: either a rgb or hex color-string or a list
-            of color-strings
+        :param (str|list|dict) colors: **import proper doc string description**
         :param (bool) use_colorscale: will implement a colorscale based on the
             first 2 color strings of 'colors' if a list. Only applicable if
             grouping by another variable
@@ -1937,35 +1929,106 @@ class FigureFactory(object):
                          'Electric': ['rgb(0,0,0)', 'rgb(255,250,220)'],
                          'Viridis': ['rgb(68,1,84)', 'rgb(253,231,37)']}
 
-        # validate colors
+        # Validate colors
         if colors is None:
             colors = DEFAULT_PLOTLY_COLORS
 
         if isinstance(colors, str):
             if colors in plotly_scales:
                 colors = plotly_scales[colors]
-            else:
-                if ('rgb' not in colors) and ('#' not in colors):
-                    raise exceptions.PlotlyError("If you input a string "
-                                                 "for 'colors', it must "
-                                                 "either be a Plotly "
-                                                 "colorscale, an 'rgb' "
-                                                 "color, or a hex color.")
+
+            elif 'rgb' in colors:
+                # validate rgb color
+                colors = FigureFactory._unlabel_rgb(colors)
+                for value in colors:
+                    if value > 255.0:
+                        raise exceptions.PlotlyError("Whoops! The "
+                                                     "elements in your "
+                                                     "rgb colors "
+                                                     "tuples cannot "
+                                                     "exceed 255.0.")
+                colors = FigureFactory._label_rgb(colors)
+
+                # put colors in list
                 colors_list = []
                 colors_list.append(colors)
                 colors = colors_list
 
-        if not isinstance(colors, list):
-            raise exceptions.PlotlyError("'colors' needs to be either a "
-                                         "plotly colorscale string or a "
-                                         "list of at least two colors if "
-                                         "use_colorscale is True.")
-        if len(colors) <= 0:
-            raise exceptions.PlotlyError("Empty list of colors.")
+            elif '#' in colors:
+                colors = FigureFactory._hex_to_rgb(colors)
+                colors = FigureFactory._label_rgb(colors)
 
-        if (not isinstance(data, list)) and data_header is None:
-            raise exceptions.PlotlyError("Please enter a string name for "
-                                         "data_header")
+                # put colors in list
+                colors_list = []
+                colors_list.append(colors)
+                colors = colors_list
+
+            else:
+                scale_keys = list(plotly_scales.keys())
+                raise exceptions.PlotlyError("If you input a string "
+                                             "for 'colors', it must "
+                                             "either be a Plotly "
+                                             "colorscale, an 'rgb' "
+                                             "color or a hex color."
+                                             "Valid plotly colorscale "
+                                             "names are {}".format(scale_keys))
+        elif isinstance(colors, tuple):
+            # validate tuple color
+            for value in colors:
+                if value > 1.0:
+                    raise exceptions.PlotlyError("Whoops! The "
+                                                 "elements in "
+                                                 "your colors "
+                                                 "tuples cannot "
+                                                 "exceed 1.0.")
+
+            colors = FigureFactory._convert_to_RGB_255(colors)
+            colors = FigureFactory._label_rgb(colors)
+
+            colors_list = []
+            colors_list.append(colors)
+            colors = colors_list
+
+        elif isinstance(colors, list):
+            new_colormap = []
+            for color in colors:
+                if 'rgb' in color:
+                    color = FigureFactory._unlabel_rgb(color)
+                    for value in color:
+                        if value > 255.0:
+                            raise exceptions.PlotlyError("Whoops! The "
+                                                         "elements in your "
+                                                         "rgb colors "
+                                                         "tuples cannot "
+                                                         "exceed 255.0.")
+
+                    color = FigureFactory._label_rgb(color)
+                    new_colormap.append(color)
+                elif '#' in color:
+                    color = FigureFactory._hex_to_rgb(color)
+                    color = FigureFactory._label_rgb(color)
+                    new_colormap.append(color)
+                elif isinstance(color, tuple):
+                    for value in color:
+                        if value > 1.0:
+                            raise exceptions.PlotlyError("Whoops! The "
+                                                         "elements in "
+                                                         "your colors "
+                                                         "tuples cannot "
+                                                         "exceed 1.0.")
+                    new_colormap.append(color)
+            colors = new_colormap
+
+        elif isinstance(colors, dict):
+            pass
+            # validate dict
+
+        else:
+            raise exceptions.PlotlyError("You must input a valid colors "
+                                         "choice. Valid types include a "
+                                         "plotly scale, rgb, hex or tuple "
+                                         "color, a list of any color types "
+                                         "or a dictionary.")
 
         # validate data and choose plot type
         if group_header is None:
@@ -1975,17 +2038,10 @@ class FigureFactory(object):
                                                  "nonempty and contain either "
                                                  "numbers or dictionaries.")
 
-                if isinstance(data[0], dict):
-                    data_list = []
-                    for dictionary in data:
-                        data_list.append(dictionary[data_header])
-                    data = data_list
-
                 if not isinstance(data[0], Number):
                     raise exceptions.PlotlyError("If data is a list, it must "
-                                                 "contain either numbers or "
-                                                 "dictionaries.")
-
+                                                 "contain only numbers.")
+            # fix up for test: add 'if pandas_imported', etc
             if isinstance(data, pd.core.frame.DataFrame):
                 data = data[data_header].values.tolist()
 
@@ -2013,42 +2069,44 @@ class FigureFactory(object):
             return fig
 
         else:
-            if isinstance(data, list):
-                if len(data) <= 0:
-                    raise exceptions.PlotlyError("If data is a list and "
-                                                 "group_by is not None, then "
-                                                 "data must be either a list "
-                                                 "of dictionaries or a data"
-                                                 "frame.")
+            if not isinstance(data, pd.core.frame.DataFrame):
+                raise exceptions.PlotlyError("Error.")
 
-            if isinstance(data, pd.core.frame.DataFrame):
-                if use_colorscale is False:
-                    fig = FigureFactory._violin_no_colorscale(data,
-                                                              data_header,
-                                                              colors,
-                                                              use_colorscale,
-                                                              group_header,
-                                                              height,
-                                                              width,
-                                                              title)
-                    return fig
+            if isinstance(colors, dict):
+                # validate colors dict choice below
 
-                else:
-                    # check if colors is a list of at least two colors
-                    if len(colors) < 2:
-                        raise exceptions.PlotlyError("If you are using color"
-                                                     "scale, 'colors' must "
-                                                     "be a list of at least "
-                                                     "2 color-strings.")
-                    fig = FigureFactory._violin_colorscale(data,
-                                                           data_header,
-                                                           colors,
-                                                           use_colorscale,
-                                                           group_header,
-                                                           height,
-                                                           width,
-                                                           title)
-                    return fig
+                fig = FigureFactory._violin_dict(data, data_header, colors,
+                                                 use_colorscale, group_header,
+                                                 height, width, title)
+                return fig
+
+            if use_colorscale is False:
+                fig = FigureFactory._violin_no_colorscale(data,
+                                                          data_header,
+                                                          colors,
+                                                          use_colorscale,
+                                                          group_header,
+                                                          height,
+                                                          width,
+                                                          title)
+                return fig
+
+            else:
+                # check if colors is a list of at least two colors
+                if len(colors) < 2:
+                    raise exceptions.PlotlyError("If you are using color"
+                                                 "scale, 'colors' must "
+                                                 "be a list of at least "
+                                                 "2 color-strings.")
+                fig = FigureFactory._violin_colorscale(data,
+                                                       data_header,
+                                                       colors,
+                                                       use_colorscale,
+                                                       group_header,
+                                                       height,
+                                                       width,
+                                                       title)
+                return fig
 
     @staticmethod
     def _find_intermediate_color(lowcolor, highcolor, intermed):
