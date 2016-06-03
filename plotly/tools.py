@@ -28,7 +28,7 @@ DEFAULT_PLOTLY_COLORS = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
                          'rgb(227, 119, 194)', 'rgb(127, 127, 127)',
                          'rgb(188, 189, 34)', 'rgb(23, 190, 207)']
 
-REQ_GANTT_KEYS = ['Task', 'Start', 'Finish']
+REQUIRED_GANTT_KEYS = ['Task', 'Start', 'Finish']
 
 
 # Warning format
@@ -1459,11 +1459,14 @@ class FigureFactory(object):
         """
         if _pandas_imported and isinstance(df, pd.core.frame.DataFrame):
             # validate that df has all the required keys
-            for key in REQ_GANTT_KEYS:
+            for key in REQUIRED_GANTT_KEYS:
                 if key not in df:
                     raise exceptions.PlotlyError("The columns in your data"
                                                  "frame must include the "
-                                                 "keys".format(REQ_GANTT_KEYS))
+                                                 "keys".format(
+                                                     REQUIRED_GANTT_KEYS
+                                                 )
+                                                 )
 
             num_of_rows = len(df.index)
             chart = []
