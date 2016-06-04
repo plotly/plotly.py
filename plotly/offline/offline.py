@@ -184,7 +184,7 @@ def _plot_html(figure_or_data, show_link, link_text, validate,
         id=plotdivid, script=script,
         height=height, width=width)
 
-    return plotly_html_div, plotdivid, width, height, plotdivid
+    return plotly_html_div, plotdivid, width, height
 
 
 def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
@@ -232,7 +232,7 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     if not tools._ipython_imported:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
-    plot_html, plotdivid, width, height, plot_id = _plot_html(
+    plot_html, plotdivid, width, height = _plot_html(
         figure_or_data, show_link, link_text, validate,
         '100%', 525, global_requirejs=True, download=download_image)
 
@@ -251,7 +251,7 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
               '}}'
               '</script>'
               ).format(format=format, width=_width, height=_height,
-                       filename=filename, plot_id=plot_id)
+                       filename=filename, plot_id=plotdivid)
     # allow time for the plot to draw
     import time
     time.sleep(1)
