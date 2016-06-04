@@ -184,7 +184,10 @@ def _plot_html(figure_or_data, show_link, link_text, validate,
         id=plotdivid, script=script,
         height=height, width=width)
 
-    return plotly_html_div, plotdivid, width, height, plotdivid
+    if download:
+        return plotly_html_div, plotdivid, width, height, plotdivid
+    else:
+        return plotly_html_div, plotdivid, width, height
 
 
 def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
@@ -232,31 +235,39 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     if not tools._ipython_imported:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
-    plot_html, plotdivid, width, height, plot_id = _plot_html(
-        figure_or_data, show_link, link_text, validate,
-        '100%', 525, global_requirejs=True, download=download_image)
+    def inject():
+        display(HTML(plot_html))
 
-    display(HTML(plot_html))
+        # Write script to download image of the plot
+        script = ('<script>'
+                  'function downloadimage(format, height, width,'
+                  ' filename) {{'
+                  'var p = document.getElementById(\'{plot_id}\');'
+                  'Plotly.downloadImage(p, {{format: format, height: height, '
+                  'width: width, filename: filename}});'
+                  '}};'
+                  'if(document.readyState == \'complete\') {{'
+                  'downloadimage(\'{format}\', {height}, {width}, \'{filename}\');'
+                  '}}'
+                  '</script>'
+                  ).format(format=format, width=_width, height=_height,
+                           filename=filename, plot_id=plot_id)
+        # allow time for the plot to draw
+        import time
+        time.sleep(1)
+        #inject code to download an image of the plot
+        display(HTML(script))
 
-    # Write script to download image of the plot
-    script = ('<script>'
-              'function downloadimage(format, height, width,'
-              ' filename) {{'
-              'var p = document.getElementById(\'{plot_id}\');'
-              'Plotly.downloadImage(p, {{format: format, height: height, '
-              'width: width, filename: filename}});'
-              '}};'
-              'if(document.readyState == \'complete\') {{'
-              'downloadimage(\'{format}\', {height}, {width}, \'{filename}\');'
-              '}}'
-              '</script>'
-              ).format(format=format, width=_width, height=_height,
-                       filename=filename, plot_id=plot_id)
-    # allow time for the plot to draw
-    import time
-    time.sleep(1)
-    #inject code to download an image of the plot
-    display(HTML(script))
+    if download_image:
+        plot_html, plotdivid, width, height, plot_id = _plot_html(
+            figure_or_data, show_link, link_text, validate,
+            '100%', 525, global_requirejs=True, download=download_image)
+        inject()
+    else:
+        plot_html, plotdivid, width, height = _plot_html(
+            figure_or_data, show_link, link_text, validate,
+            '100%', 525, global_requirejs=True, download=download_image)
+        inject()
 
 
 def plot(figure_or_data,
