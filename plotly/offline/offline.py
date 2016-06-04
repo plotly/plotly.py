@@ -115,8 +115,7 @@ def init_notebook_mode(connected=False):
 
 
 def _plot_html(figure_or_data, show_link, link_text, validate,
-               default_width, default_height, global_requirejs,
-               download=False):
+               default_width, default_height, global_requirejs):
 
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
 
@@ -234,29 +233,30 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
 
     plot_html, plotdivid, width, height = _plot_html(
         figure_or_data, show_link, link_text, validate,
-        '100%', 525, global_requirejs=True, download=download_image)
+        '100%', 525, global_requirejs=True)
 
     display(HTML(plot_html))
 
-    # Write script to download image of the plot
-    script = ('<script>'
-              'function downloadimage(format, height, width,'
-              ' filename) {{'
-              'var p = document.getElementById(\'{plot_id}\');'
-              'Plotly.downloadImage(p, {{format: format, height: height, '
-              'width: width, filename: filename}});'
-              '}};'
-              'if(document.readyState == \'complete\') {{'
-              'downloadimage(\'{format}\', {height}, {width}, \'{filename}\');'
-              '}}'
-              '</script>'
-              ).format(format=format, width=_width, height=_height,
-                       filename=filename, plot_id=plotdivid)
-    # allow time for the plot to draw
-    import time
-    time.sleep(1)
-    #inject code to download an image of the plot
-    display(HTML(script))
+    if download_image:
+        # Write script to download image of the plot
+        script = ('<script>'
+                  'function downloadimage(format, height, width,'
+                  ' filename) {{'
+                  'var p = document.getElementById(\'{plot_id}\');'
+                  'Plotly.downloadImage(p, {{format: format, height: height, '
+                  'width: width, filename: filename}});'
+                  '}};'
+                  'if(document.readyState == \'complete\') {{'
+                  'downloadimage(\'{format}\', {height}, {width}, '
+                  '\'{filename}\');}}'
+                  '</script>'
+                  ).format(format=format, width=_width, height=_height,
+                           filename=filename, plot_id=plotdivid)
+        # allow time for the plot to draw
+        import time
+        time.sleep(1)
+        # inject code to download an image of the plot
+        display(HTML(script))
 
 
 def plot(figure_or_data,
