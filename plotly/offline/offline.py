@@ -240,10 +240,23 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
 
     # Use the plot id to download the image now:
 
-    script = ('<script>'
+    script = ('<script id=\'download-script-{plot_id}\'>'
+              'var completed = document.getElementById(\'downloaded-plot-{plot_id}\');'
+              'alert(completed);'
+              'if(!completed) {{'
+              'console.log(completed);'
               'var div_id = document.getElementById(\'{plot_id}\');'
               'setTimeout(function() {{Plotly.downloadImage(div_id, {{format: \'{format}\', '
-              'height: {height}, width: {width}, filename: \'{filename}\'}});}}, 500);'
+              'height: {height}, width: {width}, filename: \'{filename}\'}})'
+              '.then(function(){{'
+              'var complete = document.createElement(\'span\');'
+              'complete.id = \'downloaded-plot-{plot_id}\';'
+              'var thisScript = document.getElementById(\'download-script-{plot_id}\');'
+              'console.log(complete);'
+              'thisScript.parentNode.insertBefore(complete, thisScript.nextSibling);'
+              '}})'
+              ';}}, 500);'
+              '}}'
               '</script>'
               ).format(format=format, width=_width, height=_height,
                        filename=filename, plot_id=plot_id)
