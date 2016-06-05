@@ -1012,3 +1012,24 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
 
         self.assert_dict_equal(test_scatter_plot_matrix['layout'],
                                exp_scatter_plot_matrix['layout'])
+
+
+class TestViolin(NumpyTestUtilsMixin, TestCase):
+
+    def test_colors_dict(self):
+
+        # check: if colorscale is True, make sure colors is not a dictionary
+
+        data = pd.DataFrame([['apple', 2], ['pear', 4]],
+                            columns=['a', 'b'])
+
+        pattern = ("You cannot use a dictionary if you are using a "
+                   "colorscale.")
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                tls.FigureFactory.create_violin, data,
+                                group_header='a', use_colorscale=True,
+                                colors={'a': 'rgb(1, 2, 3)'})
+
+
+

@@ -1720,26 +1720,19 @@ class FigureFactory(object):
                             shared_yaxes=True,
                             horizontal_spacing=0.025,
                             print_grid=True)
+
         for k, gr in enumerate(group_name):
             vals = np.asarray(gb.get_group(gr)[data_header], np.float)
             # find colorscale color
-            if '#' in colors[0]:
-                foo1 = FigureFactory._hex_to_rgb(colors[0])
-            else:
-                foo1 = FigureFactory._unlabel_rgb(colors[0])
-            if '#' in colors[1]:
-                foo2 = FigureFactory._hex_to_rgb(colors[1])
-            else:
-                foo2 = FigureFactory._unlabel_rgb(colors[1])
+            lowcolor = FigureFactory._unlabel_rgb(colors[0])
+            highcolor = FigureFactory._unlabel_rgb(colors[1])
 
-            foo_color = FigureFactory._find_intermediate_color(
-                foo1, foo2, k/float(L)
+            intermed_color = FigureFactory._find_intermediate_color(
+                lowcolor, highcolor, k/float(L)
             )
-            intermed_color = 'rgb{}'.format(foo_color)
-
             plot_data, plot_xrange = FigureFactory._violinplot(
                 vals,
-                fillcolor=intermed_color
+                fillcolor='rgb{}'.format(intermed_color)
             )
             layout = graph_objs.Layout()
 
@@ -1919,6 +1912,11 @@ class FigureFactory(object):
         if _numpy_imported is False:
             raise ImportError("FigureFactory.create_violin() requires "
                               "numpy to be imported.")
+
+        if _scipy_imported is False:
+            raise ImportError("FigureFactory.create_violin() requires "
+                              "scipy to be imported.")
+
         from plotly.graph_objs import graph_objs
         from numbers import Number
         plotly_scales = {'Greys': ['rgb(0,0,0)', 'rgb(255,255,255)'],
@@ -2040,7 +2038,7 @@ class FigureFactory(object):
                         if value > 255.0:
                             raise exceptions.PlotlyError("Whoops! The "
                                                          "elements in your "
-                                                         "rgb color "
+                                                         "rgb colors "
                                                          "tuples cannot "
                                                          "exceed 255.0.")
 
@@ -2054,7 +2052,7 @@ class FigureFactory(object):
                         if value > 1.0:
                             raise exceptions.PlotlyError("Whoops! The "
                                                          "elements in "
-                                                         "your color "
+                                                         "your colors "
                                                          "tuples cannot "
                                                          "exceed 1.0.")
 
@@ -2076,11 +2074,11 @@ class FigureFactory(object):
                                                  "nonempty and contain either "
                                                  "numbers or dictionaries.")
 
-                if not isinstance(data[0], Number):
+                if not all(isinstance(element, Number) for element in data):
                     raise exceptions.PlotlyError("If data is a list, it must "
                                                  "contain only numbers.")
-            # fix up for test: add 'if pandas_imported', etc
-            if isinstance(data, pd.core.frame.DataFrame):
+
+            if _pandas_imported and isinstance(data, pd.core.frame.DataFrame):
                 data = data[data_header].values.tolist()
 
             # call the plotting functions
@@ -2111,9 +2109,7 @@ class FigureFactory(object):
                 raise exceptions.PlotlyError("Error. You must use a pandas "
                                              "DataFrame if you are using a "
                                              "group header.")
-
             if use_colorscale is False:
-
                 if isinstance(colors, dict):
                     # validate colors dict choice below
                     fig = FigureFactory._violin_dict(data, data_header,
@@ -2121,7 +2117,6 @@ class FigureFactory(object):
                                                      group_header, height,
                                                      width, title)
                     return fig
-
                 else:
                     fig = FigureFactory._violin_no_colorscale(data,
                                                               data_header,
@@ -2131,13 +2126,11 @@ class FigureFactory(object):
                                                               height, width,
                                                               title)
                 return fig
-
             else:
                 if isinstance(colors, dict):
                     raise exceptions.PlotlyError("You cannot use a "
                                                  "dictionary if you are "
                                                  "using a colorscale.")
-
                 fig = FigureFactory._violin_colorscale(data,
                                                        data_header,
                                                        colors,

@@ -1126,6 +1126,90 @@ class TestTable(TestCase):
         self.assertEqual(index_table, exp_index_table)
 
 
+class TestViolin(TestCase):
+
+    def test_colors_validation(self):
+
+        # check: colors is in an acceptable form
+        data = [1, 5, 8]
+
+        pattern = ("Whoops! The elements in your rgb colors tuples cannot "
+                   "exceed 255.0.")
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                tls.FigureFactory.create_violin,
+                                data, colors='rgb(300, 2, 3)')
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                tls.FigureFactory.create_violin,
+                                data, colors=['rgb(300, 2, 3)'])
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                tls.FigureFactory.create_violin,
+                                data, colors={'apple': 'rgb(300, 2, 3)'})
+
+        pattern2 = ("Whoops! The elements in your colors tuples cannot "
+                    "exceed 1.0.")
+
+        self.assertRaisesRegexp(PlotlyError, pattern2,
+                                tls.FigureFactory.create_violin,
+                                data, colors=(1.1, 1, 1))
+
+        self.assertRaisesRegexp(PlotlyError, pattern2,
+                                tls.FigureFactory.create_violin,
+                                data, colors=[(1.1, 1, 1)])
+
+        self.assertRaisesRegexp(PlotlyError, pattern2,
+                                tls.FigureFactory.create_violin,
+                                data, colors={'apple': (1.1, 1, 1)})
+
+        # check: if valid string color is inputted
+        self.assertRaises(PlotlyError, tls.FigureFactory.create_violin,
+                          data, colors='foo')
+
+        # error message if colors is no good
+        pattern3 = ("You must input a valid colors choice. Valid types "
+                    "include a plotly scale, rgb, hex or tuple color, a list "
+                    "of any color types or a dictionary.")
+
+        self.assertRaisesRegexp(PlotlyError, pattern3,
+                                tls.FigureFactory.create_violin,
+                                data, colors=5)
+
+    def test_data_as_list(self):
+
+        # check: data is a non empty list of numbers
+
+        data = []
+
+        pattern = ("If data is a list, it must be nonempty and contain "
+                   "either numbers or dictionaries.")
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                tls.FigureFactory.create_violin,
+                                data)
+
+        data = [1, 'foo']
+
+        pattern2 = ("If data is a list, it must contain only numbers.")
+
+        self.assertRaisesRegexp(PlotlyError, pattern2,
+                                tls.FigureFactory.create_violin, data)
+
+    def test_dataframe_input(self):
+
+        # check: dataframe is entered if group_header is True
+
+        data = [1, 2, 3]
+
+        pattern = ("Error. You must use a pandas DataFrame if you are using "
+                   "a group header.")
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                tls.FigureFactory.create_violin, data,
+                                group_header=True)
+
+
 # class TestDistplot(TestCase):
 
 #     def test_scipy_import_error(self):
