@@ -263,8 +263,9 @@ def plot(figure_or_data,
          show_link=True, link_text='Export to plot.ly',
          validate=True, output_type='file',
          include_plotlyjs=True,
-         filename='temp-plot.html',
-         auto_open=True):
+         filename='temp-plot.html', auto_open=True,
+         download_image=False, image_filename='plot', format='png',
+         _width = 800, _height=600):
     """ Create a plotly graph locally as an HTML document or string.
 
     Example:
@@ -347,6 +348,24 @@ def plot(figure_or_data,
             else:
                 plotly_js_script = ''
 
+            # write the download script:
+            if download_image:
+                script = ('<script>'
+                          'function downloadimage(format, height, width,'
+                          ' filename) {{'
+                          'var p = document.getElementById(\'{plot_id}\');'
+                          'Plotly.downloadImage(p, {{format: format, height: height, '
+                          'width: width, filename: filename}});'
+                          '}};'
+                          'if(confirm(\'Do you want to save this image?\')) {{'
+                          'downloadimage(\'{format}\', {height}, {width}, '
+                          '\'{filename}\');}}'
+                          '</script>'
+                          ).format(format=format, width=_width, height=_height,
+                                   filename=image_filename, plot_id=plotdivid)
+            else:
+                script = ''
+
             f.write(''.join([
                 '<html>',
                 '<head><meta charset="utf-8" /></head>',
@@ -354,6 +373,7 @@ def plot(figure_or_data,
                 plotly_js_script,
                 plot_html,
                 resize_script,
+                script,
                 '</body>',
                 '</html>']))
 
@@ -380,7 +400,9 @@ def plot(figure_or_data,
 def plot_mpl(mpl_fig, resize=False, strip_style=False,
              verbose=False, show_link=True, link_text='Export to plot.ly',
              validate=True, output_type='file', include_plotlyjs=True,
-             filename='temp-plot.html', auto_open=True):
+             filename='temp-plot.html', auto_open=True,
+             download_image=False, image_filename='plot', format='png',
+             _height=600, _width=800):
     """
     Convert a matplotlib figure to a Plotly graph stored locally as HTML.
 
@@ -442,12 +464,15 @@ def plot_mpl(mpl_fig, resize=False, strip_style=False,
     """
     plotly_plot = tools.mpl_to_plotly(mpl_fig, resize, strip_style, verbose)
     return plot(plotly_plot, show_link, link_text, validate, output_type,
-                include_plotlyjs, filename, auto_open)
+                include_plotlyjs, filename, auto_open, download_image,
+                image_filename, format, _height, _width)
 
 
 def iplot_mpl(mpl_fig, resize=False, strip_style=False,
               verbose=False, show_link=True,
-              link_text='Export to plot.ly', validate=True):
+              link_text='Export to plot.ly', validate=True,
+              donwload_image=False, image_filename='plot', format='png',
+              _height=600, _width=800):
     """
     Convert a matplotlib figure to a plotly graph and plot inside an IPython
     notebook without connecting to an external server.
@@ -492,7 +517,9 @@ def iplot_mpl(mpl_fig, resize=False, strip_style=False,
     ```
     """
     plotly_plot = tools.mpl_to_plotly(mpl_fig, resize, strip_style, verbose)
-    return iplot(plotly_plot, show_link, link_text, validate)
+    return iplot(plotly_plot, show_link, link_text, validate,
+                 download_image=download_image, image_filename=image_filename,
+                 format=format, _height=_height, _width=_width)
 
 
 def enable_mpl_offline(resize=False, strip_style=False,
