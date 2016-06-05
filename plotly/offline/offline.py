@@ -188,7 +188,7 @@ def _plot_html(figure_or_data, show_link, link_text, validate,
 
 def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
           validate=True, download_image=False, format='png',
-          _width=800, _height=600, filename='newplot'):
+          _width=800, _height=600, filename='plot'):
     """
     Draw plotly graphs inside an IPython notebook without
     connecting to an external server.
@@ -211,6 +211,14 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                                has become outdated with your version of
                                graph_reference.json or if you need to include
                                extra, unnecessary keys in your figure.
+    downloage_image (default=False) -- If True, the image of the current plot
+        will be downloaded.
+    format (default='png') -- Specifies the format of the image to be
+        downloaded if `downlowad_image` is True.
+    filename (default='plot') -- Sets the name of the file your image
+        will be saved to. The extension should not be included.
+    _height (default=600) -- Specifies the height of the image in `px`.
+    _width (default=800) -- Specifies the width of the image in `px`.
 
     Example:
     ```
@@ -311,6 +319,14 @@ def plot(figure_or_data,
     auto_open (default=True) -- If True, open the saved file in a
         web browser after saving.
         This argument only applies if `output_type` is 'file'.
+    downloage_image (default=False) -- If True, the image of the current plot
+        will be downloaded.
+    format (default='png') -- Specifies the format of the image to be
+        downloaded if `downlowad_image` is True.
+    image_filename (default='plot') -- Sets the name of the file your image
+        will be saved to. The extension should not be included.
+    _height (default=600) -- Specifies the height of the image in `px`.
+    _width (default=800) -- Specifies the width of the image in `px`.
     """
     if output_type not in ['div', 'file']:
         raise ValueError(
@@ -447,6 +463,14 @@ def plot_mpl(mpl_fig, resize=False, strip_style=False,
     auto_open (default=True) -- If True, open the saved file in a
         web browser after saving.
         This argument only applies if `output_type` is 'file'.
+    downloage_image (default=False) -- If True, the image of the current plot
+        will be downloaded.
+    format (default='png') -- Specifies the format of the image to be
+        downloaded if `downlowad_image` is True.
+    image_filename (default='plot') -- Sets the name of the file your image
+        will be saved to. The extension should not be included.
+    _height (default=600) -- Specifies the height of the image in `px`.
+    _width (default=800) -- Specifies the width of the image in `px`.       
 
     Example:
     ```
@@ -503,6 +527,14 @@ def iplot_mpl(mpl_fig, resize=False, strip_style=False,
                                has become outdated with your version of
                                graph_reference.json or if you need to include
                                extra, unnecessary keys in your figure.
+    downloage_image (default=False) -- If True, the image of the current plot
+        will be downloaded.
+    _format (default='png') -- Specifies the format of the image to be
+        downloaded if `downlowad_image` is True.
+    image_filename (default='plot') -- Sets the name of the file your image
+        will be saved to. The extension should not be included.
+    _height (default=600) -- Specifies the height of the image in `px`.
+    _width (default=800) -- Specifies the width of the image in `px`.
 
     Example:
     ```
