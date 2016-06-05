@@ -265,7 +265,7 @@ def plot(figure_or_data,
          include_plotlyjs=True,
          filename='temp-plot.html', auto_open=True,
          download_image=False, image_filename='plot', format='png',
-         _width = 800, _height=600):
+         _width=800, _height=600):
     """ Create a plotly graph locally as an HTML document or string.
 
     Example:
@@ -354,10 +354,11 @@ def plot(figure_or_data,
                           'function downloadimage(format, height, width,'
                           ' filename) {{'
                           'var p = document.getElementById(\'{plot_id}\');'
-                          'Plotly.downloadImage(p, {{format: format, height: height, '
-                          'width: width, filename: filename}});'
+                          'Plotly.downloadImage(p, {{format: format, height: '
+                          'height, width: width, filename: filename}});'
                           '}};'
-                          'if(confirm(\'Do you want to save this image?\')) {{'
+                          'if(confirm(\'Do you want to save this image as '
+                          '{filename}.{format}?\')) {{'
                           'downloadimage(\'{format}\', {height}, {width}, '
                           '\'{filename}\');}}'
                           '</script>'
@@ -557,6 +558,7 @@ def enable_mpl_offline(resize=False, strip_style=False,
     formatter.for_type(matplotlib.figure.Figure,
                        lambda fig: iplot_mpl(fig, resize, strip_style, verbose,
                                              show_link, link_text, validate))
+
 
 def download_notebook_image(format='png', height=600, width=800,
                             filename='newplot'):
