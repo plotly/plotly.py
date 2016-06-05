@@ -1798,6 +1798,11 @@ class FigureFactory(object):
                 group_name.append(name)
         group_name.sort()
 
+        # check if all group names appear in colors dict
+        for group in group_name:
+            if group not in colors:
+                raise exceptions.PlotlyError("A")
+
         gb = data.groupby([group_header])
         L = len(group_name)
 
@@ -1845,7 +1850,13 @@ class FigureFactory(object):
         :param (str) data_header: the header of the data column to be used
             from an inputted pandas dataframe. Not applicable if 'data' is
             a list of numeric values
-        :param (str|list|dict) colors: **import proper doc string description**
+        :param (str|tuple|list|dict) colors: either a plotly scale name,
+            an rgb or hex color, a color tuple, a list of colors or a
+            dictionary. An rgb color is of the form 'rgb(x, y, z)' where
+            x, y and z belong to the interval [0, 255] and a color tuple is a
+            tuple of the form (a, b, c) where a, b and c belong to [0, 1].
+            If colors is a list, it must contain valid color types as its
+            members.
         :param (bool) use_colorscale: will implement a colorscale based on the
             first 2 color strings of 'colors' if a list. Only applicable if
             grouping by another variable
@@ -1905,7 +1916,6 @@ class FigureFactory(object):
         py.iplot(fig, filename='Violin Plot with Colorscale')
         ```
         """
-        # numpy import check
         if _numpy_imported is False:
             raise ImportError("FigureFactory.create_violin() requires "
                               "numpy to be imported.")
@@ -2016,13 +2026,41 @@ class FigureFactory(object):
                                                          "your colors "
                                                          "tuples cannot "
                                                          "exceed 1.0.")
+
+                    color = FigureFactory._convert_to_RGB_255(color)
+                    color = FigureFactory._label_rgb(color)
                     new_colormap.append(color)
             colors = new_colormap
 
         elif isinstance(colors, dict):
-            pass
-            # validate dict
+            for name in colors:
+                if 'rgb' in colors[name]:
+                    color = FigureFactory._unlabel_rgb(colors[name])
+                    for value in color:
+                        if value > 255.0:
+                            raise exceptions.PlotlyError("Whoops! The "
+                                                         "elements in your "
+                                                         "rgb color "
+                                                         "tuples cannot "
+                                                         "exceed 255.0.")
 
+                elif '#' in colors[name]:
+                    color = FigureFactory._hex_to_rgb(colors[name])
+                    color = FigureFactory._label_rgb(color)
+                    colors[name] = color
+
+                elif isinstance(colors[name], tuple):
+                    for value in colors[name]:
+                        if value > 1.0:
+                            raise exceptions.PlotlyError("Whoops! The "
+                                                         "elements in "
+                                                         "your color "
+                                                         "tuples cannot "
+                                                         "exceed 1.0.")
+
+                    color = FigureFactory._convert_to_RGB_255(colors[name])
+                    color = FigureFactory._label_rgb(color)
+                    colors[name] = color
         else:
             raise exceptions.PlotlyError("You must input a valid colors "
                                          "choice. Valid types include a "
@@ -2070,34 +2108,36 @@ class FigureFactory(object):
 
         else:
             if not isinstance(data, pd.core.frame.DataFrame):
-                raise exceptions.PlotlyError("Error.")
-
-            if isinstance(colors, dict):
-                # validate colors dict choice below
-
-                fig = FigureFactory._violin_dict(data, data_header, colors,
-                                                 use_colorscale, group_header,
-                                                 height, width, title)
-                return fig
+                raise exceptions.PlotlyError("Error. You must use a pandas "
+                                             "DataFrame if you are using a "
+                                             "group header.")
 
             if use_colorscale is False:
-                fig = FigureFactory._violin_no_colorscale(data,
-                                                          data_header,
-                                                          colors,
-                                                          use_colorscale,
-                                                          group_header,
-                                                          height,
-                                                          width,
-                                                          title)
+
+                if isinstance(colors, dict):
+                    # validate colors dict choice below
+                    fig = FigureFactory._violin_dict(data, data_header,
+                                                     colors, use_colorscale,
+                                                     group_header, height,
+                                                     width, title)
+                    return fig
+
+                else:
+                    fig = FigureFactory._violin_no_colorscale(data,
+                                                              data_header,
+                                                              colors,
+                                                              use_colorscale,
+                                                              group_header,
+                                                              height, width,
+                                                              title)
                 return fig
 
             else:
-                # check if colors is a list of at least two colors
-                if len(colors) < 2:
-                    raise exceptions.PlotlyError("If you are using color"
-                                                 "scale, 'colors' must "
-                                                 "be a list of at least "
-                                                 "2 color-strings.")
+                if isinstance(colors, dict):
+                    raise exceptions.PlotlyError("You cannot use a "
+                                                 "dictionary if you are "
+                                                 "using a colorscale.")
+
                 fig = FigureFactory._violin_colorscale(data,
                                                        data_header,
                                                        colors,
