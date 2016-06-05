@@ -27,6 +27,12 @@ Note: This is a backwards incompatible change.
 ### Added
 - Added the option to load plotly.js from a CDN by setting the parameter `connected=True`
  in the `init_notebook_mode()` function call
+- The FigureFactory can now create trisurf plots with `.create_trisurf`. Check it out with:
+```
+import plotly.tools as tls
+help(tls.FigureFactory.create_trisurf)
+```
+
  
 
 ## [1.10.0] - 2016-05-19
