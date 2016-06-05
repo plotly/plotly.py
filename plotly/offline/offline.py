@@ -472,7 +472,7 @@ def plot_mpl(mpl_fig, resize=False, strip_style=False,
 def iplot_mpl(mpl_fig, resize=False, strip_style=False,
               verbose=False, show_link=True,
               link_text='Export to plot.ly', validate=True,
-              donwload_image=False, image_filename='plot', format='png',
+              download_image=False, image_filename='plot', _format='png',
               _height=600, _width=800):
     """
     Convert a matplotlib figure to a plotly graph and plot inside an IPython
@@ -520,7 +520,7 @@ def iplot_mpl(mpl_fig, resize=False, strip_style=False,
     plotly_plot = tools.mpl_to_plotly(mpl_fig, resize, strip_style, verbose)
     return iplot(plotly_plot, show_link, link_text, validate,
                  download_image=download_image, image_filename=image_filename,
-                 format=format, _height=_height, _width=_width)
+                 format=_format, _height=_height, _width=_width)
 
 
 def enable_mpl_offline(resize=False, strip_style=False,
