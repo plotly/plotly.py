@@ -1019,6 +1019,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
     def test_colors_validation(self):
 
         # check: colors is in an acceptable form
+
         data = [1, 5, 8]
 
         pattern = ("Whoops! The elements in your rgb colors tuples cannot "
@@ -1113,6 +1114,8 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
                                 colors={'a': 'rgb(1, 2, 3)'})
 
     def test_violin_fig(self):
+
+        # check: test violin fig matches expected fig
 
         test_violin = tls.FigureFactory.create_violin(data=[1, 2])
 
