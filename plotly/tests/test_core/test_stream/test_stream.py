@@ -18,7 +18,8 @@ ak = 'ubpiol2cve'
 tk = 'vaia8trjjb'
 config = {'plotly_domain': 'https://plot.ly',
           'plotly_streaming_domain': 'stream.plot.ly',
-          'plotly_api_domain': 'https://api.plot.ly'}
+          'plotly_api_domain': 'https://api.plot.ly', 
+          'plotly_ssl_verification': False}
 
 
 class TestStreaming(TestCase):
@@ -127,6 +128,7 @@ class TestStreaming(TestCase):
             'server': 'stream.plot.ly',
             'port': 80,
             'ssl_enabled': False,
+            'ssl_verification_enabled': False,
             'headers': {
                 'Host': 'stream.plot.ly',
                 'plotly-streamtoken': tk
@@ -147,6 +149,7 @@ class TestStreaming(TestCase):
             'server': 'stream.plot.ly',
             'port': 80,
             'ssl_enabled': False,
+            'ssl_verification_enabled': False, 
             'headers': {
                 'Host': 'stream.plot.ly',
                 'plotly-streamtoken': tk
@@ -158,15 +161,20 @@ class TestStreaming(TestCase):
     def test_stream_https(self):
 
         # If the https scheme is used in the plotly_streaming_domain, port 443
-        # should be used for streaming and ssl_enabled should be True
+        # should be used for streaming, ssl_enabled should be True,
+        # and ssl_verification_enabled should equal plotly_ssl_verification
 
-        py.sign_in(un, ak,
-                   **{'plotly_streaming_domain': 'https://stream.plot.ly'})
+        ssl_stream_config = {
+            'plotly_streaming_domain': 'https://stream.plot.ly',
+            'plotly_ssl_verification': True
+        }
+        py.sign_in(un, ak, **ssl_stream_config)
         my_stream = py.Stream(tk)
         expected_streaming_specs = {
             'server': 'stream.plot.ly',
             'port': 443,
             'ssl_enabled': True,
+            'ssl_verification_enabled': True, 
             'headers': {
                 'Host': 'stream.plot.ly',
                 'plotly-streamtoken': tk

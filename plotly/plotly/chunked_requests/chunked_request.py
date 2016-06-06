@@ -1,13 +1,15 @@
 import time
 import six
 import os
+import ssl
+
 from six.moves import http_client
 from six.moves.urllib.parse import urlparse
-from ssl import SSLError
 
 
 class Stream:
-    def __init__(self, server, port=80, headers={}, url='/', ssl_enabled=False):
+    def __init__(self, server, port=80, headers={}, url='/', ssl_enabled=False,
+                 ssl_verification_enabled=True):
         ''' Initialize a stream object and an HTTP or HTTPS connection
         with chunked Transfer-Encoding to server:port with optional headers.
         '''
@@ -20,6 +22,7 @@ class Stream:
         self._headers = headers
         self._url = url
         self._ssl_enabled = ssl_enabled
+        self._ssl_verification_enabled = ssl_verification_enabled
         self._connect()
 
     def write(self, data, reconnect_on=('', 200, )):
@@ -99,6 +102,19 @@ class Stream:
 
         return proxy_server, proxy_port
 
+    def _get_ssl_context(self):
+        """
+        Return an unverified context if ssl verification is disabled.
+
+        """
+
+        context = None
+
+        if not self._ssl_verification_enabled:
+            context = ssl._create_unverified_context()
+
+        return context
+
     def _connect(self):
         ''' Initialize an HTTP/HTTPS connection with chunked Transfer-Encoding
         to server:port with optional headers.
@@ -111,8 +127,9 @@ class Stream:
 
         if (proxy_server and proxy_port):
             if ssl_enabled:
+                context = self._get_ssl_context()
                 self._conn = http_client.HTTPSConnection(
-                    proxy_server, proxy_port
+                    proxy_server, proxy_port, context=context
                 )
             else:
                 self._conn = http_client.HTTPConnection(
@@ -121,7 +138,10 @@ class Stream:
             self._conn.set_tunnel(server, port)
         else:
             if ssl_enabled:
-                self._conn = http_client.HTTPSConnection(server, port)
+                context = self._get_ssl_context()
+                self._conn = http_client.HTTPSConnection(
+                    server, port, context=context
+                )
             else:
                 self._conn = http_client.HTTPConnection(server, port)
 
@@ -254,7 +274,7 @@ class Stream:
                 # let's just assume that we're still connected and
                 # hopefully recieve some data on the next try.
                 return True
-            elif isinstance(e, SSLError):
+            elif isinstance(e, ssl.SSLError):
                 if e.errno == 2:
                     # errno 2 occurs when trying to read or write data, but more
                     # data needs to be received on the underlying TCP transport

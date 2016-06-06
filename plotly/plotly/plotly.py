@@ -463,6 +463,7 @@ class Stream:
 
         """
         streaming_url = get_config()['plotly_streaming_domain']
+        ssl_verification_enabled = get_config()['plotly_ssl_verification']
         ssl_enabled = 'https' in streaming_url
         port = self.HTTPS_PORT if ssl_enabled else self.HTTP_PORT
 
@@ -476,6 +477,7 @@ class Stream:
             'server': host,
             'port': port,
             'ssl_enabled': ssl_enabled,
+            'ssl_verification_enabled': ssl_verification_enabled,
             'headers': headers
         }
 
