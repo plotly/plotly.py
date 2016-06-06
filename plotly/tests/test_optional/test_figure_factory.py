@@ -1065,6 +1065,20 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
                                 tls.FigureFactory.create_violin,
                                 data, colors=5)
 
+    def test_data_header(self):
+
+        # make sure data_header is entered
+
+        data = pd.DataFrame([['apple', 2], ['pear', 4]],
+                            columns=['a', 'b'])
+
+        pattern = ("data_header must be the column name with the desired "
+                   "numeric data for the violin plot.")
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                tls.FigureFactory.create_violin, data,
+                                group_header='a', colors=['rgb(1, 2, 3)'])
+
     def test_data_as_list(self):
 
         # check: data is a non empty list of numbers
@@ -1105,14 +1119,70 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
         data = pd.DataFrame([['apple', 2], ['pear', 4]],
                             columns=['a', 'b'])
 
-        pattern = ("You cannot use a dictionary if you are using a "
-                   "colorscale.")
+        pattern = ("The colors param cannot be a dictionary if you are "
+                   "using a colorscale.")
 
         self.assertRaisesRegexp(PlotlyError, pattern,
                                 tls.FigureFactory.create_violin, data,
-                                group_header='a', use_colorscale=True,
+                                data_header='b', group_header='a',
+                                use_colorscale=True,
                                 colors={'a': 'rgb(1, 2, 3)'})
 
+        # check: colors contains all group names as keys
+
+        pattern2 = ("If colors is a dictionary, all the group names must "
+                    "appear as keys in colors.")
+
+        self.assertRaisesRegexp(PlotlyError, pattern2,
+                                tls.FigureFactory.create_violin, data,
+                                data_header='b', group_header='a',
+                                use_colorscale=False,
+                                colors={'a': 'rgb(1, 2, 3)'})
+
+    def test_valid_colorscale(self):
+
+        # check: if colorscale is enabled, colors is a list with 2+ items
+
+        data = pd.DataFrame([['apple', 2], ['pear', 4]],
+                            columns=['a', 'b'])
+
+        pattern = ("colors must be a list with at least 2 colors. A Plotly "
+                   "scale is allowed.")
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                tls.FigureFactory.create_violin, data,
+                                data_header='b', group_header='a',
+                                use_colorscale=True,
+                                colors='rgb(1, 2, 3)')
+
+    def test_group_stats(self):
+
+        # check: group_stats is a dictionary
+
+        data = pd.DataFrame([['apple', 2], ['pear', 4]],
+                            columns=['a', 'b'])
+
+        pattern = ("Your group_stats param must be a dictionary.")
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                tls.FigureFactory.create_violin, data,
+                                data_header='b', group_header='a',
+                                use_colorscale=True,
+                                colors=['rgb(1, 2, 3)', 'rgb(4, 5, 6)'],
+                                group_stats=1)
+
+        # check: all groups are represented as keys in group_stats
+
+        pattern2 = ("All values/groups in the index column must be "
+                    "represented as a key in group_stats.")
+
+        self.assertRaisesRegexp(PlotlyError, pattern2,
+                                tls.FigureFactory.create_violin, data,
+                                data_header='b', group_header='a',
+                                use_colorscale=True,
+                                colors=['rgb(1, 2, 3)', 'rgb(4, 5, 6)'],
+                                group_stats={'apple': 1})
+"""
     def test_violin_fig(self):
 
         # check: test violin fig matches expected fig
@@ -1541,3 +1611,5 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
 
         self.assert_dict_equal(test_violin['layout'],
                                exp_violin['layout'])
+
+"""

@@ -28,6 +28,10 @@ DEFAULT_PLOTLY_COLORS = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
                          'rgb(227, 119, 194)', 'rgb(127, 127, 127)',
                          'rgb(188, 189, 34)', 'rgb(23, 190, 207)']
 
+#color constants for violin plot
+fillcolor = '#1f77b4'
+
+
 
 # Warning format
 def warning_on_one_line(message, category, filename, lineno,
@@ -1463,17 +1467,25 @@ class FigureFactory(object):
         q2 = np.percentile(x, 50, interpolation='linear')
         q1 = np.percentile(x, 25, interpolation='lower')
         q3 = np.percentile(x, 75, interpolation='higher')
-        IQR = q3 - q1
-        whisker_dist = 1.5 * IQR
+        iqr = q3 - q1
+        whisker_dist = 1.5 * iqr
 
         # in order to prevent drawing whiskers outside the interval
         # of data one defines the whisker positions as:
         d1 = np.min(x[x >= (q1 - whisker_dist)])
         d2 = np.max(x[x <= (q3 + whisker_dist)])
-        return vals_min, vals_max, q1, q2, q3, d1, d2
+        return {
+            'min': vals_min,
+            'max': vals_max,
+            'q1': q1,
+            'q2': q2,
+            'q3': q3,
+            'd1': d1,
+            'd2': d2
+        }
 
     @staticmethod
-    def _make_half_violin(x, y, fillcolor='#1f77b4', linecolor='rgb(0,0,0)'):
+    def _make_half_violin(x, y, fillcolor=fillcolor, linecolor='rgb(0, 0, 0)'):
         """
         Produces a sideways probability distribution fig violin plot.
         """
@@ -1482,9 +1494,11 @@ class FigureFactory(object):
         text = ['(pdf(y), y)=(' + '{:0.2f}'.format(x[i]) +
                 ', ' + '{:0.2f}'.format(y[i]) + ')'
                 for i in range(len(x))]
+
         return graph_objs.Scatter(
             x=x,
-            y=y, mode='lines',
+            y=y,
+            mode='lines',
             name='',
             text=text,
             fill='tonextx',
@@ -1495,7 +1509,7 @@ class FigureFactory(object):
         )
 
     @staticmethod
-    def _make_rugplot(vals, pdf_max, distance, color='#1f77b4'):
+    def _make_violin_rugplot(vals, pdf_max, distance, color=fillcolor):
         """
         Returns a rugplot fig for a violin plot.
         """
@@ -1555,7 +1569,6 @@ class FigureFactory(object):
     def _make_non_outlier_interval(d1, d2):
         """
         Returns the scatterplot fig of most of a violin plot.
-
         """
         from plotly.graph_objs import graph_objs
 
@@ -1572,7 +1585,6 @@ class FigureFactory(object):
     def _make_XAxis(xaxis_title, xaxis_range):
         """
         Makes the x-axis for a violin plot.
-
         """
         from plotly.graph_objs import graph_objs
 
@@ -1591,7 +1603,6 @@ class FigureFactory(object):
     def _make_YAxis(yaxis_title):
         """
         Makes the y-axis for a violin plot.
-
         """
         from plotly.graph_objs import graph_objs
 
@@ -1606,7 +1617,7 @@ class FigureFactory(object):
         return yaxis
 
     @staticmethod
-    def _violinplot(vals, fillcolor='#1f77b4', rugplot=True):
+    def _violinplot(vals, fillcolor=fillcolor, rugplot=True):
         """
         Refer to FigureFactory.create_violin() for docstring.
         """
@@ -1615,7 +1626,14 @@ class FigureFactory(object):
 
         vals = np.asarray(vals, np.float)
         #  summary statistics
-        vals_min, vals_max, q1, q2, q3, d1, d2 = FigureFactory._calc_stats(vals)
+        vals_min = FigureFactory._calc_stats(vals)['min']
+        vals_max = FigureFactory._calc_stats(vals)['max']
+        q1 = FigureFactory._calc_stats(vals)['q1']
+        q2 = FigureFactory._calc_stats(vals)['q2']
+        q3 = FigureFactory._calc_stats(vals)['q3']
+        d1 = FigureFactory._calc_stats(vals)['d1']
+        d2 = FigureFactory._calc_stats(vals)['d2']
+
         # kernel density estimation of pdf
         pdf = stats.gaussian_kde(vals)
         # grid over the data interval
@@ -1627,21 +1645,26 @@ class FigureFactory(object):
         distance = (2.0 * max_pdf)/10 if rugplot else 0
         # range for x values in the plot
         plot_xrange = [-max_pdf - distance - 0.1, max_pdf + 0.1]
-        plot_data = [FigureFactory._make_half_violin(-yy, xx, fillcolor=fillcolor),
-                     FigureFactory._make_half_violin(yy, xx, fillcolor=fillcolor),
+        plot_data = [FigureFactory._make_half_violin(-yy, xx,
+                                                     fillcolor=fillcolor),
+                     FigureFactory._make_half_violin(yy, xx,
+                                                     fillcolor=fillcolor),
                      FigureFactory._make_non_outlier_interval(d1, d2),
                      FigureFactory._make_quartiles(q1, q3),
                      FigureFactory._make_median(q2)]
         if rugplot:
-            plot_data.append(FigureFactory._make_rugplot(vals,
-                                                         max_pdf,
-                                                         distance=distance,
-                                                         color=fillcolor))
+            plot_data.append(FigureFactory._make_violin_rugplot(
+                vals,
+                max_pdf,
+                distance=distance,
+                color=fillcolor)
+            )
         return plot_data, plot_xrange
 
     @staticmethod
-    def _violin_no_colorscale(data, data_header, colors, use_colorscale,
-                              group_header, height, width, title):
+    def _violin_no_colorscale(data, data_header, group_header, colors,
+                              use_colorscale, group_stats,
+                              height, width, title):
         """
         Refer to FigureFactory.create_violin() for docstring.
 
@@ -1679,6 +1702,12 @@ class FigureFactory(object):
             for item in plot_data:
                 fig.append_trace(item, 1, k + 1)
             color_index += 1
+
+            # add violin plot labels
+            fig['layout'].update({'xaxis{}'.format(k + 1):
+                                  FigureFactory._make_XAxis(group_name[k],
+                                                            plot_xrange)})
+
         # set the sharey axis style
         fig['layout'].update(
             {'yaxis{}'.format(1): FigureFactory._make_YAxis('')}
@@ -1695,8 +1724,8 @@ class FigureFactory(object):
         return fig
 
     @staticmethod
-    def _violin_colorscale(data, data_header, colors, use_colorscale,
-                           group_header, height, width, title):
+    def _violin_colorscale(data, data_header, group_header, colors,
+                           use_colorscale, group_stats, height, width, title):
         """
         Refer to FigureFactory.create_violin() for docstring.
 
@@ -1713,6 +1742,13 @@ class FigureFactory(object):
                 group_name.append(name)
         group_name.sort()
 
+        # make sure all group names are keys in group_stats
+        for group in group_name:
+            if group not in group_stats:
+                raise exceptions.PlotlyError("All values/groups in the index "
+                                             "column must be represented "
+                                             "as a key in group_stats.")
+
         gb = data.groupby([group_header])
         L = len(group_name)
 
@@ -1721,15 +1757,27 @@ class FigureFactory(object):
                             horizontal_spacing=0.025,
                             print_grid=True)
 
+        # prepare low and high color for colorscale
+        lowcolor = FigureFactory._unlabel_rgb(colors[0])
+        highcolor = FigureFactory._unlabel_rgb(colors[1])
+
+        # find min and max values in group_stats
+        group_stats_values = []
+        for key in group_stats:
+            group_stats_values.append(group_stats[key])
+
+        max_value = max(group_stats_values)
+        min_value = min(group_stats_values)
+
         for k, gr in enumerate(group_name):
             vals = np.asarray(gb.get_group(gr)[data_header], np.float)
-            # find colorscale color
-            lowcolor = FigureFactory._unlabel_rgb(colors[0])
-            highcolor = FigureFactory._unlabel_rgb(colors[1])
 
+            # find intermediate color from colorscale
+            intermed = (group_stats[gr] - min_value) / (max_value - min_value)
             intermed_color = FigureFactory._find_intermediate_color(
-                lowcolor, highcolor, k/float(L)
+                lowcolor, highcolor, intermed
             )
+
             plot_data, plot_xrange = FigureFactory._violinplot(
                 vals,
                 fillcolor='rgb{}'.format(intermed_color)
@@ -1743,8 +1791,8 @@ class FigureFactory(object):
                                                             plot_xrange)})
         # add colorbar to plot
         trace_dummy = graph_objs.Scatter(
-            x=[24],
-            y=[10],
+            x=[0],
+            y=[0],
             mode='markers',
             marker=dict(
                 size=2,
@@ -1773,8 +1821,8 @@ class FigureFactory(object):
         return fig
 
     @staticmethod
-    def _violin_dict(data, data_header, colors, use_colorscale,
-                     group_header, height, width, title):
+    def _violin_dict(data, data_header, group_header, colors, use_colorscale,
+                     group_stats, height, width, title):
         """
         Refer to FigureFactory.create_violin() for docstring.
 
@@ -1794,7 +1842,9 @@ class FigureFactory(object):
         # check if all group names appear in colors dict
         for group in group_name:
             if group not in colors:
-                raise exceptions.PlotlyError("A")
+                raise exceptions.PlotlyError("If colors is a dictionary, all "
+                                             "the group names must appear as "
+                                             "keys in colors.")
 
         gb = data.groupby([group_header])
         L = len(group_name)
@@ -1814,6 +1864,12 @@ class FigureFactory(object):
 
             for item in plot_data:
                 fig.append_trace(item, 1, k + 1)
+
+            # add violin plot labels
+            fig['layout'].update({'xaxis{}'.format(k + 1):
+                                  FigureFactory._make_XAxis(group_name[k],
+                                                            plot_xrange)})
+
         # set the sharey axis style
         fig['layout'].update(
             {'yaxis{}'.format(1): FigureFactory._make_YAxis('')}
@@ -1830,8 +1886,8 @@ class FigureFactory(object):
         return fig
 
     @staticmethod
-    def create_violin(data, data_header=None, colors=None,
-                      use_colorscale=False, group_header=None,
+    def create_violin(data, data_header=None, group_header=None,
+                      colors=None, use_colorscale=False, group_stats=None,
                       height=450, width=600, title='Violin and Rug Plot'):
         """
         Returns figure for a violin plot
@@ -1843,6 +1899,8 @@ class FigureFactory(object):
         :param (str) data_header: the header of the data column to be used
             from an inputted pandas dataframe. Not applicable if 'data' is
             a list of numeric values
+        :param (str) group_header: applicable if grouping data by a variable.
+            'group_header' must be set to the name of the grouping variable.
         :param (str|tuple|list|dict) colors: either a plotly scale name,
             an rgb or hex color, a color tuple, a list of colors or a
             dictionary. An rgb color is of the form 'rgb(x, y, z)' where
@@ -1850,11 +1908,15 @@ class FigureFactory(object):
             tuple of the form (a, b, c) where a, b and c belong to [0, 1].
             If colors is a list, it must contain valid color types as its
             members.
-        :param (bool) use_colorscale: will implement a colorscale based on the
-            first 2 color strings of 'colors' if a list. Only applicable if
-            grouping by another variable
-        :param (str) group_header: applicable if grouping data by a variable.
-            'group_header' must be set to the name of the grouping variable.
+        :param (bool) use_colorscale: Only applicable if grouping by another
+            variable. Will implement a colorscale based on the first 2 colors
+            of param colors. This means colors must be a list with at least 2
+            colors in it (Plotly colorscales are accepted since they map to a
+            list of two rgb colors)
+        :param (dict) group_stats: a dictioanry where each key is a unique
+            value from the group_header column in data. Each value must be a
+            number and will be used to color the violin plots if a colorscale
+            is being used
         :param (float) height: the height of the violin plot
         :param (float) width: the width of the violin plot
         :param (str) title: the title of the violin plot
@@ -2079,6 +2141,12 @@ class FigureFactory(object):
                                                  "contain only numbers.")
 
             if _pandas_imported and isinstance(data, pd.core.frame.DataFrame):
+                if data_header is None:
+                    raise exceptions.PlotlyError("data_header must be the "
+                                                 "column name with the "
+                                                 "desired numeric data for "
+                                                 "the violin plot.")
+
                 data = data[data_header].values.tolist()
 
             # call the plotting functions
@@ -2109,33 +2177,52 @@ class FigureFactory(object):
                 raise exceptions.PlotlyError("Error. You must use a pandas "
                                              "DataFrame if you are using a "
                                              "group header.")
+
+            if data_header is None:
+                raise exceptions.PlotlyError("data_header must be the column "
+                                             "name with the desired numeric "
+                                             "data for the violin plot.")
+
             if use_colorscale is False:
                 if isinstance(colors, dict):
                     # validate colors dict choice below
                     fig = FigureFactory._violin_dict(data, data_header,
-                                                     colors, use_colorscale,
-                                                     group_header, height,
-                                                     width, title)
+                                                     group_header, colors,
+                                                     use_colorscale,
+                                                     group_stats,
+                                                     height, width, title)
                     return fig
                 else:
                     fig = FigureFactory._violin_no_colorscale(data,
                                                               data_header,
+                                                              group_header,
                                                               colors,
                                                               use_colorscale,
-                                                              group_header,
+                                                              group_stats,
                                                               height, width,
                                                               title)
                 return fig
             else:
                 if isinstance(colors, dict):
-                    raise exceptions.PlotlyError("You cannot use a "
-                                                 "dictionary if you are "
+                    raise exceptions.PlotlyError("The colors param cannot be "
+                                                 "a dictionary if you are "
                                                  "using a colorscale.")
+
+                if len(colors) < 2:
+                    raise exceptions.PlotlyError("colors must be a list with "
+                                                 "at least 2 colors. A "
+                                                 "Plotly scale is allowed.")
+
+                if not isinstance(group_stats, dict):
+                    raise exceptions.PlotlyError("Your group_stats param "
+                                                 "must be a dictionary.")
+
                 fig = FigureFactory._violin_colorscale(data,
                                                        data_header,
+                                                       group_header,
                                                        colors,
                                                        use_colorscale,
-                                                       group_header,
+                                                       group_stats,
                                                        height,
                                                        width,
                                                        title)
