@@ -1796,8 +1796,8 @@ class FigureFactory(object):
             mode='markers',
             marker=dict(
                 size=2,
-                cmin=0,
-                cmax=100,
+                cmin=min_value,
+                cmax=max_value,
                 colorscale=[[0, colors[0]],
                             [1, colors[1]]],
                 showscale=True),
