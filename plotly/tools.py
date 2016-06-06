@@ -1923,33 +1923,33 @@ class FigureFactory(object):
 
         Example 1: Single Violin Plot
         ```
-        import numpy as np
-        from scipy import stats
-
         import plotly.plotly as py
         from plotly.tools import FigureFactory as FF
         from plotly.graph_objs import graph_objs
+
+        import numpy as np
+        from scipy import stats
 
         # create list of random values
         data_list = np.random.randn(100)
         data_list.tolist()
 
         # create violin fig
-        fig = FF.create_violin(data_list, colors='#1f77b4')
+        fig = FF.create_violin(data_list, colors='#604d9e')
 
         # plot
         py.iplot(fig, filename='Violin Plot')
         ```
 
-        Example 2: Multiple Violin Plots with Colorscale
+        Example 2: Multiple Violin Plots with Qualitative Coloring
         ```
-        import numpy as np
-        import pandas as pd
-        from scipy import stats
-
         import plotly.plotly as py
         from plotly.tools import FigureFactory as FF
         from plotly.graph_objs import graph_objs
+
+        import numpy as np
+        import pandas as pd
+        from scipy import stats
 
         # create dataframe
         np.random.seed(619517)
@@ -1964,8 +1964,51 @@ class FigureFactory(object):
 
         # create violin fig
         fig = FF.create_violin(df, data_header='Score', group_header='Group',
-                               use_colorscale=True, colors='Blues',
                                height=600, width=1000)
+
+        # plot
+        py.iplot(fig, filename='Violin Plot with Coloring')
+        ```
+
+        Example 3: Violin Plots with Colorscale
+        ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+        from plotly.graph_objs import graph_objs
+
+        import numpy as np
+        import pandas as pd
+        from scipy import stats
+
+        # create dataframe
+        np.random.seed(619517)
+        Nr=250
+        y = np.random.randn(Nr)
+        gr = np.random.choice(list("ABCDE"), Nr)
+        norm_params=[(0, 1.2), (0.7, 1), (-0.5, 1.4), (0.3, 1), (0.8, 0.9)]
+
+        for i, letter in enumerate("ABCDE"):
+            y[gr == letter] *=norm_params[i][1]+ norm_params[i][0]
+        df = pd.DataFrame(dict(Score=y, Group=gr))
+
+        # define header params
+        data_header = 'Score'
+        group_header = 'Group'
+
+        # make groupby object with pandas
+        groupby_data = df.groupby([group_header])
+
+        for group in "ABCDE":
+            data_from_group = groupby_data.get_group(group)[data_header]
+            # take a stat of the grouped data
+            stat = np.median(data_from_group)
+            # add to dictionary
+            group_stats[group] = stat
+
+        # create violin fig
+        fig = FF.create_violin(df, data_header='Score', group_header='Group',
+                               height=600, width=1000, use_colorscale=True,
+                              group_stats=group_stats)
 
         # plot
         py.iplot(fig, filename='Violin Plot with Colorscale')
