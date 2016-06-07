@@ -187,7 +187,7 @@ def _plot_html(figure_or_data, show_link, link_text, validate,
 
 
 def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
-          validate=True, download_image=False, format='png',
+          validate=True, image=False, format='png',
           _width=800, _height=600, filename='plot'):
     """
     Draw plotly graphs inside an IPython notebook without
@@ -245,7 +245,7 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
 
     display(HTML(plot_html))
 
-    if download_image:
+    if image:
         # Write script to download image of the plot
         script = ('<script>'
                   'function downloadimage(format, height, width,'
@@ -272,7 +272,7 @@ def plot(figure_or_data,
          validate=True, output_type='file',
          include_plotlyjs=True,
          filename='temp-plot.html', auto_open=True,
-         download_image=False, image_filename='plot', format='png',
+         image=False, image_filename='plot', format='png',
          _width=800, _height=600):
     """ Create a plotly graph locally as an HTML document or string.
 
@@ -365,7 +365,7 @@ def plot(figure_or_data,
                 plotly_js_script = ''
 
             # write the download script:
-            if download_image:
+            if image:
                 script = ('<script>'
                           'function downloadimage(format, height, width,'
                           ' filename) {{'
@@ -418,7 +418,7 @@ def plot_mpl(mpl_fig, resize=False, strip_style=False,
              verbose=False, show_link=True, link_text='Export to plot.ly',
              validate=True, output_type='file', include_plotlyjs=True,
              filename='temp-plot.html', auto_open=True,
-             download_image=False, image_filename='plot', format='png',
+             image=False, image_filename='plot', format='png',
              _height=600, _width=800):
     """
     Convert a matplotlib figure to a Plotly graph stored locally as HTML.
@@ -470,7 +470,7 @@ def plot_mpl(mpl_fig, resize=False, strip_style=False,
     image_filename (default='plot') -- Sets the name of the file your image
         will be saved to. The extension should not be included.
     _height (default=600) -- Specifies the height of the image in `px`.
-    _width (default=800) -- Specifies the width of the image in `px`.       
+    _width (default=800) -- Specifies the width of the image in `px`.
 
     Example:
     ```
@@ -490,14 +490,14 @@ def plot_mpl(mpl_fig, resize=False, strip_style=False,
     plotly_plot = tools.mpl_to_plotly(mpl_fig, resize, strip_style, verbose)
     return plot(plotly_plot, show_link, link_text, validate, output_type,
                 include_plotlyjs, filename, auto_open,
-                download_image=download_image, image_filename=image_filename,
+                image=image, image_filename=image_filename,
                 format=format, _height=_height, _width=_width)
 
 
 def iplot_mpl(mpl_fig, resize=False, strip_style=False,
               verbose=False, show_link=True,
               link_text='Export to plot.ly', validate=True,
-              download_image=False, image_filename='plot', _format='png',
+              image=False, image_filename='plot', _format='png',
               _height=600, _width=800):
     """
     Convert a matplotlib figure to a plotly graph and plot inside an IPython
@@ -552,7 +552,7 @@ def iplot_mpl(mpl_fig, resize=False, strip_style=False,
     """
     plotly_plot = tools.mpl_to_plotly(mpl_fig, resize, strip_style, verbose)
     return iplot(plotly_plot, show_link, link_text, validate,
-                 download_image=download_image, filename=image_filename,
+                 image=image, filename=image_filename,
                  format=_format, _height=_height, _width=_width)
 
 
