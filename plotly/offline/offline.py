@@ -225,6 +225,8 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     from plotly.offline import init_notebook_mode, iplot
     init_notebook_mode()
     iplot([{'x': [1, 2, 3], 'y': [5, 2, 7]}])
+    # We can also download an image of the plot by setting `image=True`
+    iplot([{'x': [1, 2, 3], 'y': [5, 2, 7]}], image=True)
     ```
     """
     if not __PLOTLY_OFFLINE_INITIALIZED:
@@ -286,6 +288,9 @@ def plot(figure_or_data,
     import plotly.graph_objs as go
 
     plot([go.Scatter(x=[1, 2, 3], y=[3, 2, 6])], filename='my-graph.html')
+    # We can also download an image of the plot by setting `image=True`
+    plot([go.Scatter(x=[1, 2, 3], y=[3, 2, 6])], filename='my-graph.html'
+         image=True)
     ```
     More examples below.
 
@@ -536,12 +541,12 @@ def iplot_mpl(mpl_fig, resize=False, strip_style=False,
                                has become outdated with your version of
                                graph_reference.json or if you need to include
                                extra, unnecessary keys in your figure.
-    downloage_image (default=False) -- If True, the image of the current plot
-        will be downloaded.
+    image (default=False) -- If True, the image of the current plot will be
+        downloaded.
     _format (default='png') -- Specifies the format of the image to be
         downloaded if `downlowad_image` is True.
-    image_filename (default='plot_image') -- Sets the name of the file your image
-        will be saved to. The extension should not be included.
+    image_filename (default='plot_image') -- Sets the name of the file your
+        image will be saved to. The extension should not be included.
     _height (default=600) -- Specifies the height of the image in `px`.
     _width (default=800) -- Specifies the width of the image in `px`.
 
@@ -616,7 +621,7 @@ def download_notebook_image(format='png', height=600, width=800,
     height -- sets the height of the image in px (default=600)
     width -- sets the width of the image in px (default=800)
     filename -- the name of the saved file without format extension
-    (default='newplot')
+    (default='plot_image')
     """
     script = ('<script>'
               'function downloadimage(format, height, width,'
