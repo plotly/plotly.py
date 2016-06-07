@@ -272,7 +272,7 @@ def plot(figure_or_data,
          validate=True, output_type='file',
          include_plotlyjs=True,
          filename='temp-plot.html', auto_open=True,
-         image=False, image_filename='plot', format='png',
+         image=False, image_filename='plot_image', format='png',
          _width=800, _height=600):
     """ Create a plotly graph locally as an HTML document or string.
 
@@ -323,7 +323,7 @@ def plot(figure_or_data,
         will be downloaded.
     format (default='png') -- Specifies the format of the image to be
         downloaded if `downlowad_image` is True.
-    image_filename (default='plot') -- Sets the name of the file your image
+    image_filename (default='plot_image') -- Sets the name of the file your image
         will be saved to. The extension should not be included.
     _height (default=600) -- Specifies the height of the image in `px`.
     _width (default=800) -- Specifies the width of the image in `px`.
@@ -418,7 +418,7 @@ def plot_mpl(mpl_fig, resize=False, strip_style=False,
              verbose=False, show_link=True, link_text='Export to plot.ly',
              validate=True, output_type='file', include_plotlyjs=True,
              filename='temp-plot.html', auto_open=True,
-             image=False, image_filename='plot', format='png',
+             image=False, image_filename='plot_image', format='png',
              _height=600, _width=800):
     """
     Convert a matplotlib figure to a Plotly graph stored locally as HTML.
@@ -467,7 +467,7 @@ def plot_mpl(mpl_fig, resize=False, strip_style=False,
         will be downloaded.
     format (default='png') -- Specifies the format of the image to be
         downloaded if `downlowad_image` is True.
-    image_filename (default='plot') -- Sets the name of the file your image
+    image_filename (default='plot_image') -- Sets the name of the file your image
         will be saved to. The extension should not be included.
     _height (default=600) -- Specifies the height of the image in `px`.
     _width (default=800) -- Specifies the width of the image in `px`.
@@ -497,7 +497,7 @@ def plot_mpl(mpl_fig, resize=False, strip_style=False,
 def iplot_mpl(mpl_fig, resize=False, strip_style=False,
               verbose=False, show_link=True,
               link_text='Export to plot.ly', validate=True,
-              image=False, image_filename='plot', _format='png',
+              image=False, image_filename='plot_image', _format='png',
               _height=600, _width=800):
     """
     Convert a matplotlib figure to a plotly graph and plot inside an IPython
@@ -531,7 +531,7 @@ def iplot_mpl(mpl_fig, resize=False, strip_style=False,
         will be downloaded.
     _format (default='png') -- Specifies the format of the image to be
         downloaded if `downlowad_image` is True.
-    image_filename (default='plot') -- Sets the name of the file your image
+    image_filename (default='plot_image') -- Sets the name of the file your image
         will be saved to. The extension should not be included.
     _height (default=600) -- Specifies the height of the image in `px`.
     _width (default=800) -- Specifies the width of the image in `px`.
