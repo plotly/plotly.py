@@ -10,6 +10,5 @@ from . offline import (
     iplot,
     iplot_mpl,
     plot,
-    plot_mpl,
-    download_notebook_image,
+    plot_mpl
 )
