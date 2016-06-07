@@ -211,7 +211,7 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                                has become outdated with your version of
                                graph_reference.json or if you need to include
                                extra, unnecessary keys in your figure.
-    downloage_image (default=False) -- If True, the image of the current plot
+    image (default=False) -- If True, the image of the current plot
         will be downloaded.
     format (default='png') -- Specifies the format of the image to be
         downloaded if `downlowad_image` is True.
@@ -328,7 +328,7 @@ def plot(figure_or_data,
     auto_open (default=True) -- If True, open the saved file in a
         web browser after saving.
         This argument only applies if `output_type` is 'file'.
-    downloage_image (default=False) -- If True, the image of the current plot
+    image (default=False) -- If True, the image of the current plot
         will be downloaded.
     format (default='png') -- Specifies the format of the image to be
         downloaded if `downlowad_image` is True.
@@ -477,12 +477,12 @@ def plot_mpl(mpl_fig, resize=False, strip_style=False,
     auto_open (default=True) -- If True, open the saved file in a
         web browser after saving.
         This argument only applies if `output_type` is 'file'.
-    downloage_image (default=False) -- If True, the image of the current plot
+    image (default=False) -- If True, the image of the current plot
         will be downloaded.
     format (default='png') -- Specifies the format of the image to be
         downloaded if `downlowad_image` is True.
-    image_filename (default='plot_image') -- Sets the name of the file your image
-        will be saved to. The extension should not be included.
+    image_filename (default='plot_image') -- Sets the name of the file your
+    image will be saved to. The extension should not be included.
     _height (default=600) -- Specifies the height of the image in `px`.
     _width (default=800) -- Specifies the width of the image in `px`.
 
@@ -499,6 +499,8 @@ def plot_mpl(mpl_fig, resize=False, strip_style=False,
     plt.plot(x, y, "o")
 
     plot_mpl(fig)
+    # If you want to to download an image of the figure as well
+    plot_mpl(fig, image=True)
     ```
     """
     plotly_plot = tools.mpl_to_plotly(mpl_fig, resize, strip_style, verbose)
@@ -562,6 +564,8 @@ def iplot_mpl(mpl_fig, resize=False, strip_style=False,
 
     init_notebook_mode()
     iplot_mpl(fig)
+    # and if you want to download an image of the figure as well
+    iplot_mpl(fig, image=True)
     ```
     """
     plotly_plot = tools.mpl_to_plotly(mpl_fig, resize, strip_style, verbose)
