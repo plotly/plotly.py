@@ -603,7 +603,7 @@ def enable_mpl_offline(resize=False, strip_style=False,
 
 
 def download_notebook_image(format='png', height=600, width=800,
-                            filename='newplot'):
+                            filename='plot_image'):
     """
     Download an image of the most recent plot. This function should be
     called in a cell following the output cell that includes the plot.
