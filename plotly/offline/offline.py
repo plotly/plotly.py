@@ -246,6 +246,10 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     display(HTML(plot_html))
 
     if image:
+        warnings.warn('For higher resolution images and more export '
+                      'options, consider making requests to the '
+                      'Plotly image servers. Type help(\'py.image\') '
+                      'for more details.', UserWarning)
         # Write script to download image of the plot
         script = ('<script>'
                   'function downloadimage(format, height, width,'
@@ -364,8 +368,13 @@ def plot(figure_or_data,
             else:
                 plotly_js_script = ''
 
-            # write the download script:
             if image:
+                warnings.warn('For higher resolution images and more export '
+                              'options, consider making requests to the '
+                              'Plotly image servers. Type help(\'py.image\') '
+                              'for more details.', UserWarning)
+
+                # write the download script:
                 script = ('<script>'
                           'function downloadimage(format, height, width,'
                           ' filename) {{'
