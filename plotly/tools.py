@@ -2156,8 +2156,7 @@ class FigureFactory(object):
             raise exceptions.PlotlyError(
                 "You must input a valid colors choice. Valid types include a "
                 "plotly scale, rgb, hex or tuple color, a list of any color "
-                "types or a dictionary."
-            )
+                "types or a dictionary.")
 
         # validate data and choose plot type
         if group_header is None:
