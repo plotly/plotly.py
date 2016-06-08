@@ -2268,6 +2268,30 @@ class FigureFactory(object):
         return inter_colors
 
     @staticmethod
+    def _color_parser(colors, function):
+        """
+        Takes color(s) and a function and applys the function on the color(s)
+
+        In particular, this function identifies whether the given color object
+        is an iterable or not and applies the given color-parsing function to
+        the color or iterable of colors
+
+        """
+        if hasattr(colors[0], '__iter__') or isinstance(colors[0], str):
+            if isinstance(colors, tuple):
+                new_color_tuple = (
+                    function(colors[0]),
+                    function(colors[1]),
+                    function(colors[2])
+                )
+                return new_color_tuple
+            for index, color in enumerate(colors):
+                colors[index] = function(color)
+            return colors
+        else:
+            return function(colors)
+
+    @staticmethod
     def _unconvert_from_RGB_255(colors):
         """
         Return a tuple where each element gets divided by 255
@@ -2277,24 +2301,11 @@ class FigureFactory(object):
         a value between 0 and 1
 
         """
-        if isinstance(colors, tuple):
+        un_rgb_color = (colors[0]/(255.0),
+                        colors[1]/(255.0),
+                        colors[2]/(255.0))
 
-            un_rgb_color = (colors[0]/(255.0),
-                            colors[1]/(255.0),
-                            colors[2]/(255.0))
-
-            return un_rgb_color
-
-        if isinstance(colors, list):
-            un_rgb_colors = []
-            for color in colors:
-                un_rgb_color = (color[0]/(255.0),
-                                color[1]/(255.0),
-                                color[2]/(255.0))
-
-                un_rgb_colors.append(un_rgb_color)
-
-            return un_rgb_colors
+        return un_rgb_color
 
     @staticmethod
     def _map_z2color(zval, colormap, vmin, vmax):
@@ -3082,7 +3093,6 @@ class FigureFactory(object):
                         c_indx += 1
                     trace_list.append(unique_index_vals)
                     legend_param += 1
-            #return trace_list
 
             trace_index = 0
             indices = range(1, dim + 1)
@@ -3606,22 +3616,10 @@ class FigureFactory(object):
     @staticmethod
     def _convert_to_RGB_255(colors):
         """
-        Return a (list of) tuple(s) where each element is multiplied by 255
-
-        Takes a tuple or a list of tuples where each element of each tuple is
-        between 0 and 1. Returns the same tuple(s) where each tuple element is
-        multiplied by 255
+        Multiplies each element of a triplet by 255
         """
 
-        if isinstance(colors, tuple):
-            return (colors[0]*255.0, colors[1]*255.0, colors[2]*255.0)
-
-        else:
-            colors_255 = []
-            for color in colors:
-                rgb_color = (color[0]*255.0, color[1]*255.0, color[2]*255.0)
-                colors_255.append(rgb_color)
-            return colors_255
+        return (colors[0]*255.0, colors[1]*255.0, colors[2]*255.0)
 
     @staticmethod
     def _n_colors(lowcolor, highcolor, n_colors):
@@ -3652,24 +3650,9 @@ class FigureFactory(object):
     @staticmethod
     def _label_rgb(colors):
         """
-        Takes tuple(s) (a, b, c) and returns rgb color(s) 'rgb(a, b, c)'
-
-        Takes either a list or a single color tuple of the form (a, b, c) and
-        returns the same color(s) with each tuple replaced by a string
-        'rgb(a, b, c)'
-
+        Takes tuple (a, b, c) and returns an rgb color 'rgb(a, b, c)'
         """
-        if isinstance(colors, tuple):
-            return ('rgb(%s, %s, %s)' % (colors[0], colors[1], colors[2]))
-        else:
-            colors_label = []
-            for color in colors:
-                color_label = ('rgb(%s, %s, %s)' % (color[0],
-                                                    color[1],
-                                                    color[2]))
-                colors_label.append(color_label)
-
-            return colors_label
+        return ('rgb(%s, %s, %s)' % (colors[0], colors[1], colors[2]))
 
     @staticmethod
     def _unlabel_rgb(colors):
@@ -3680,52 +3663,25 @@ class FigureFactory(object):
         such colors and returns the color tuples in tuple(s) (a, b, c)
 
         """
-        if isinstance(colors, str):
-            str_vals = ''
-            for index in range(len(colors)):
-                try:
-                    float(colors[index])
+        str_vals = ''
+        for index in range(len(colors)):
+            try:
+                float(colors[index])
+                str_vals = str_vals + colors[index]
+            except ValueError:
+                if (colors[index] == ',') or (colors[index] == '.'):
                     str_vals = str_vals + colors[index]
-                except ValueError:
-                    if (colors[index] == ',') or (colors[index] == '.'):
-                        str_vals = str_vals + colors[index]
 
-            str_vals = str_vals + ','
-            numbers = []
-            str_num = ''
-            for char in str_vals:
-                if char != ',':
-                    str_num = str_num + char
-                else:
-                    numbers.append(float(str_num))
-                    str_num = ''
-            return (numbers[0], numbers[1], numbers[2])
-
-        if isinstance(colors, list):
-            unlabelled_colors = []
-            for color in colors:
-                str_vals = ''
-                for index in range(len(color)):
-                    try:
-                        float(color[index])
-                        str_vals = str_vals + color[index]
-                    except ValueError:
-                        if (color[index] == ',') or (color[index] == '.'):
-                            str_vals = str_vals + color[index]
-
-                str_vals = str_vals + ','
-                numbers = []
+        str_vals = str_vals + ','
+        numbers = []
+        str_num = ''
+        for char in str_vals:
+            if char != ',':
+                str_num = str_num + char
+            else:
+                numbers.append(float(str_num))
                 str_num = ''
-                for char in str_vals:
-                    if char != ',':
-                        str_num = str_num + char
-                    else:
-                        numbers.append(float(str_num))
-                        str_num = ''
-                unlabelled_tuple = (numbers[0], numbers[1], numbers[2])
-                unlabelled_colors.append(unlabelled_tuple)
-
-            return unlabelled_colors
+        return (numbers[0], numbers[1], numbers[2])
 
     @staticmethod
     def create_scatterplotmatrix(df, dataframe=None, headers=None,
