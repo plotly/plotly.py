@@ -2033,14 +2033,6 @@ class FigureFactory(object):
         py.iplot(fig, filename='Violin Plot with Colorscale')
         ```
         """
-        if _numpy_imported is False:
-            raise ImportError("FigureFactory.create_violin() requires "
-                              "numpy to be imported.")
-
-        if _scipy_imported is False:
-            raise ImportError("FigureFactory.create_violin() requires "
-                              "scipy to be imported.")
-
         from plotly.graph_objs import graph_objs
         from numbers import Number
 
@@ -2161,11 +2153,11 @@ class FigureFactory(object):
                     color = FigureFactory._label_rgb(color)
                     colors[name] = color
         else:
-            raise exceptions.PlotlyError("You must input a valid colors "
-                                         "choice. Valid types include a "
-                                         "plotly scale, rgb, hex or tuple "
-                                         "color, a list of any color types "
-                                         "or a dictionary.")
+            raise exceptions.PlotlyError(
+                "You must input a valid colors choice. Valid types include a "
+                "plotly scale, rgb, hex or tuple color, a list of any color "
+                "types or a dictionary."
+            )
 
         # validate data and choose plot type
         if group_header is None:
