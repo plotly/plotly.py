@@ -28,6 +28,24 @@ DEFAULT_PLOTLY_COLORS = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
                          'rgb(227, 119, 194)', 'rgb(127, 127, 127)',
                          'rgb(188, 189, 34)', 'rgb(23, 190, 207)']
 
+PLOTLY_SCALES = {'Greys': ['rgb(0,0,0)', 'rgb(255,255,255)'],
+                 'YlGnBu': ['rgb(8,29,88)', 'rgb(255,255,217)'],
+                 'Greens': ['rgb(0,68,27)', 'rgb(247,252,245)'],
+                 'YlOrRd': ['rgb(128,0,38)', 'rgb(255,255,204)'],
+                 'Bluered': ['rgb(0,0,255)', 'rgb(255,0,0)'],
+                 'RdBu': ['rgb(5,10,172)', 'rgb(178,10,28)'],
+                 'Reds': ['rgb(220,220,220)', 'rgb(178,10,28)'],
+                 'Blues': ['rgb(5,10,172)', 'rgb(220,220,220)'],
+                 'Picnic': ['rgb(0,0,255)', 'rgb(255,0,0)'],
+                 'Rainbow': ['rgb(150,0,90)', 'rgb(255,0,0)'],
+                 'Portland': ['rgb(12,51,131)', 'rgb(217,30,30)'],
+                 'Jet': ['rgb(0,0,131)', 'rgb(128,0,0)'],
+                 'Hot': ['rgb(0,0,0)', 'rgb(255,255,255)'],
+                 'Blackbody': ['rgb(0,0,0)', 'rgb(160,200,255)'],
+                 'Earth': ['rgb(0,0,130)', 'rgb(255,255,255)'],
+                 'Electric': ['rgb(0,0,0)', 'rgb(255,250,220)'],
+                 'Viridis': ['rgb(68,1,84)', 'rgb(253,231,37)']}
+
 DEFAULT_HISTNORM = 'probability density'
 ALTERNATIVE_HISTNORM = 'probability'
 
@@ -1455,6 +1473,61 @@ class FigureFactory(object):
     """
 
     @staticmethod
+    def _validate_colors(colors, colortype='tuple'):
+        """
+        Validates color(s) and returns a list of color(s) in a specified type
+        """
+        if colors is None:
+            colors = [DEFAULT_PLOTLY_COLORS[0], DEFAULT_PLOTLY_COLORS[1]]
+
+        elif isinstance(colors, (str, tuple)):
+            if colors in PLOTLY_SCALES:
+                colors = PLOTLY_SCALES[colors]
+                colors = FigureFactory._unlabel_rgb(colors)
+                colors = FigureFactory._unconvert_from_RGB_255(colors)
+            else:
+                colors = [colors]
+
+        # convert elements in list to tuple
+        for j, color in enumerate(colors):
+            if 'rgb' in color:
+                color = FigureFactory._unlabel_rgb(color)
+                for value in color:
+                    if value > 255.0:
+                        raise exceptions.PlotlyError(
+                            "Whoops! The elements in your rgb colors tuples "
+                            "cannot exceed 255.0."
+                        )
+                color = FigureFactory._unconvert_from_RGB_255(color)
+                colors[j] = color
+
+            elif '#' in color:
+                color = FigureFactory._hex_to_rgb(color)
+                color = FigureFactory._unconvert_from_RGB_255(color)
+                colors[j] = color
+
+            elif isinstance(color, tuple):
+                for value in color:
+                    if value > 1.0:
+                        raise exceptions.PlotlyError(
+                            "Whoops! The elements in your colors tuples "
+                            "cannot exceed 1.0."
+                        )
+                colors[j] = color
+
+        if colortype == 'rgb':
+            for j, color in enumerate(colors):
+                color = FigureFactory._convert_to_RGB_255(color)
+                colors[j] = FigureFactory._label_rgb(color)
+
+        if colortype == 'tuple':
+            for j, color in enumerate(colors):
+                color = FigureFactory._convert_to_RGB_255(color)
+                colors[j] = FigureFactory._label_rgb(color)
+
+        return colors
+
+    @staticmethod
     def _find_intermediate_color(lowcolor, highcolor, intermed):
         """
         Returns the color at a given distance between two colors
@@ -1955,7 +2028,6 @@ class FigureFactory(object):
             for color in colormap:
                 if 'rgb' in color:
                     color = FigureFactory._unlabel_rgb(color)
-
                     for value in color:
                         if value > 255.0:
                             raise exceptions.PlotlyError("Whoops! The "
@@ -1971,7 +2043,6 @@ class FigureFactory(object):
                     color = FigureFactory._unconvert_from_RGB_255(color)
                     new_colormap.append(color)
                 elif isinstance(color, tuple):
-
                     for value in color:
                         if value > 1.0:
                             raise exceptions.PlotlyError("Whoops! The "
