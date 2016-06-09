@@ -7,6 +7,7 @@ from __future__ import absolute_import
 
 import json
 import os
+import shutil
 import uuid
 import warnings
 from pkg_resources import resource_string
@@ -42,8 +43,9 @@ def download_plotlyjs(download_url):
 
 
 def get_plotlyjs():
-    path = os.path.join('offline', 'plotly.min.js')
-    plotlyjs = resource_string('plotly', path).decode('utf-8')
+    # path = os.path.join('offline', 'plotly.min.js')
+    # plotlyjs = resource_string('plotly', path).decode('utf-8')
+    plotlyjs = '</script><script src="plotly.min.js">'
     return plotlyjs
 
 
@@ -315,6 +317,14 @@ def plot(figure_or_data,
         ).format(id=plotdivid)
 
     if output_type == 'file':
+        src_path = os.path.join(
+            os.path.dirname(__file__), 'plotly.min.js'
+        )
+        # src_path = resource_string('plotly', path)
+        dest_path = os.path.join( os.path.dirname( filename ), 'plotly.min.js')
+        if os.path.exists( dest_path ) is False:
+            shutil.copy( src_path, dest_path )
+
         with open(filename, 'w') as f:
             if include_plotlyjs:
                 plotly_js_script = ''.join([
