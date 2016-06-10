@@ -31,6 +31,8 @@ except ImportError:
 
 __PLOTLY_OFFLINE_INITIALIZED = False
 
+__IMAGE_FORMATS = ['jpeg', 'svg', 'webp', 'svg']
+
 
 def download_plotlyjs(download_url):
     warnings.warn('''
@@ -248,6 +250,10 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     display(HTML(plot_html))
 
     if image:
+        if image not in __IMAGE_FORMATS:
+            raise ValueError('The image parameter takes only the following'
+                             'format types: `png`, `jpeg`, `webp`, `svg`')
+        # if the check passes then download script injection will commence.
         warnings.warn('For higher resolution images and more export '
                       'options, consider making requests to the '
                       'Plotly image servers. Type help(\'py.image\') '
@@ -376,6 +382,11 @@ def plot(figure_or_data,
                 plotly_js_script = ''
 
             if image:
+                if image not in __IMAGE_FORMATS:
+                    raise ValueError('The image parameter takes only the
+                                     'following format types: `png`, `jpeg`, '
+                                     '`webp`, `svg`')
+                # if the check passes then download script is injected.
                 warnings.warn('For higher resolution images and more export '
                               'options, consider making requests to the '
                               'Plotly image servers. Type help(\'py.image\') '
@@ -484,10 +495,8 @@ def plot_mpl(mpl_fig, resize=False, strip_style=False,
         the format of the image to be downloaded, if we choose to download an
         image. This parameter has a default value of None indicating that no
         image should be downloaded.
-    format (default='png') -- Specifies the format of the image to be
-        downloaded if `downlowad_image` is True.
     image_filename (default='plot_image') -- Sets the name of the file your
-    image will be saved to. The extension should not be included.
+        image will be saved to. The extension should not be included.
     image_height (default=600) -- Specifies the height of the image in `px`.
     image_width (default=800) -- Specifies the width of the image in `px`.
 
