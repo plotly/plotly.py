@@ -286,10 +286,6 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                              'following format types: `png`, `jpeg`, '
                              '`webp`, `svg`')
         # if the check passes then download script injection will commence.
-        warnings.warn('For higher resolution images and more export '
-                      'options, consider making requests to the '
-                      'Plotly image servers. Type help(\'py.image\') '
-                      'for more details.', UserWarning)
         # Write script to download image of the plot
         script = image_download_script('iplot').format(format=image,
                                                        width=image_width,
@@ -410,11 +406,6 @@ def plot(figure_or_data,
                                      'following format types: `png`, `jpeg`, '
                                      '`webp`, `svg`')
                 # if the check passes then download script is injected.
-                warnings.warn('For higher resolution images and more export '
-                              'options, consider making requests to the '
-                              'Plotly image servers. Type help(\'py.image\') '
-                              'for more details.', UserWarning)
-
                 # write the download script:
                 script = image_download_script('plot')
                 script = script.format(format=image,
