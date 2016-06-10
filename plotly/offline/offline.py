@@ -48,6 +48,37 @@ def get_plotlyjs():
     plotlyjs = resource_string('plotly', path).decode('utf-8')
     return plotlyjs
 
+def image_download_script(type):
+
+    if type == 'iplot':
+        check_start = 'if(document.readyState == \'complete\') {{'
+        check_end = '}}'
+    elif type == 'plot':
+        check_start = ''
+        check_end = ''
+
+    return(
+             ('<script>'
+              'function downloadimage(format, height, width,'
+              ' filename) {{'
+              'var p = document.getElementById(\'{plot_id}\');'
+              'Plotly.downloadImage(p, {{format: format, height: height, '
+              'width: width, filename: filename}});'
+              '}};' +
+              check_start +
+              'if(confirm(\'Do you want to save this image as '
+              '{filename}.{format}?\\n\\n'
+              'For higher resolution images and more export options, '
+              'consider making requests to our image servers. Type: '
+              'help(py.image) for more details.'
+              '\')) {{'
+              'downloadimage(\'{format}\', {height}, {width}, '
+              '\'{filename}\');}}' +
+              check_end +
+              '</script>'
+              )
+    )
+
 
 def init_notebook_mode(connected=False):
     """
@@ -269,7 +300,11 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                   '}};'
                   'if(document.readyState == \'complete\') {{'
                   'if(confirm(\'Do you want to save this image as '
-                  '{filename}.{format}?\')) {{'
+                  '{filename}.{format}?\\n\\n\\n\\n'
+                  'For higher resolution images and more export options, '
+                  'consider making requests to our image servers. Type: '
+                  'help(py.image) for more details.'
+                  '\')) {{'
                   'downloadimage(\'{format}\', {height}, {width}, '
                   '\'{filename}\');}}'
                   '}}'
@@ -277,6 +312,11 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                   ).format(format=image, width=image_width,
                            height=image_height, filename=filename,
                            plot_id=plotdivid)
+        script = image_download_script('iplot').format(format=image,
+                                                       width=image_width,
+                                                       height=image_height,
+                                                       filename=filename,
+                                                       plot_id=plotdivid)
         # allow time for the plot to draw
         import time
         time.sleep(1)
@@ -412,6 +452,13 @@ def plot(figure_or_data,
                           ).format(format=image, width=image_width,
                                    height=image_height,
                                    filename=image_filename, plot_id=plotdivid)
+
+                script = image_download_script('plot')
+                script = script.format(format=image,
+                                       width=image_width,
+                                       height=image_height,
+                                       filename=image_filename,
+                                       plot_id=plotdivid)
             else:
                 script = ''
 
