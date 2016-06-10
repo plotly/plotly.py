@@ -251,10 +251,9 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
 
     if image:
         if image not in __IMAGE_FORMATS:
-            raise ValueError(''.join(['The image parameter takes only the'
-                             'following format types: `png`, `jpeg`, `webp`,'
-                             ' `svg`']
-                            ))
+            raise ValueError('The image parameter takes only the '
+                             'following format types: `png`, `jpeg`, '
+                             '`webp`, `svg`')
         # if the check passes then download script injection will commence.
         warnings.warn('For higher resolution images and more export '
                       'options, consider making requests to the '
@@ -269,8 +268,8 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                   'width: width, filename: filename}});'
                   '}};'
                   'if(document.readyState == \'complete\') {{'
-                      'if(confirm(\'Do you want to save this image as '
-                      '{filename}.{format}?\')) {{'
+                  'if(confirm(\'Do you want to save this image as '
+                  '{filename}.{format}?\')) {{'
                   'downloadimage(\'{format}\', {height}, {width}, '
                   '\'{filename}\');}}'
                   '}}'
