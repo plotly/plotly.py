@@ -31,7 +31,7 @@ except ImportError:
 
 __PLOTLY_OFFLINE_INITIALIZED = False
 
-__IMAGE_FORMATS = ['jpeg', 'svg', 'webp', 'svg']
+__IMAGE_FORMATS = ['jpeg', 'png', 'webp', 'svg']
 
 
 def download_plotlyjs(download_url):
@@ -251,8 +251,10 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
 
     if image:
         if image not in __IMAGE_FORMATS:
-            raise ValueError('The image parameter takes only the following'
-                             'format types: `png`, `jpeg`, `webp`, `svg`')
+            raise ValueError(''.join(['The image parameter takes only the'
+                             'following format types: `png`, `jpeg`, `webp`,'
+                             ' `svg`']
+                            ))
         # if the check passes then download script injection will commence.
         warnings.warn('For higher resolution images and more export '
                       'options, consider making requests to the '
@@ -270,12 +272,12 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                   'downloadimage(\'{format}\', {height}, {width}, '
                   '\'{filename}\');}}'
                   '</script>'
-                  ).format(format=format, width=image_width,
+                  ).format(format=image, width=image_width,
                            height=image_height, filename=filename,
                            plot_id=plotdivid)
         # allow time for the plot to draw
         import time
-        time.sleep(0.1)
+        time.sleep(1)
         # inject code to download an image of the plot
         display(HTML(script))
 
@@ -383,7 +385,7 @@ def plot(figure_or_data,
 
             if image:
                 if image not in __IMAGE_FORMATS:
-                    raise ValueError('The image parameter takes only the
+                    raise ValueError('The image parameter takes only the '
                                      'following format types: `png`, `jpeg`, '
                                      '`webp`, `svg`')
                 # if the check passes then download script is injected.
@@ -405,7 +407,7 @@ def plot(figure_or_data,
                           'downloadimage(\'{format}\', {height}, {width}, '
                           '\'{filename}\');}}'
                           '</script>'
-                          ).format(format=format, width=image_width,
+                          ).format(format=image, width=image_width,
                                    height=image_height,
                                    filename=image_filename, plot_id=plotdivid)
             else:
@@ -521,8 +523,7 @@ def plot_mpl(mpl_fig, resize=False, strip_style=False,
     return plot(plotly_plot, show_link, link_text, validate, output_type,
                 include_plotlyjs, filename, auto_open,
                 image=image, image_filename=image_filename,
-                format=format, image_height=image_height,
-                image_width=image_width)
+                image_height=image_height, image_width=image_width)
 
 
 def iplot_mpl(mpl_fig, resize=False, strip_style=False,
