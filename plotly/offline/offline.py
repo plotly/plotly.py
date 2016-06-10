@@ -291,27 +291,6 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                       'Plotly image servers. Type help(\'py.image\') '
                       'for more details.', UserWarning)
         # Write script to download image of the plot
-        script = ('<script>'
-                  'function downloadimage(format, height, width,'
-                  ' filename) {{'
-                  'var p = document.getElementById(\'{plot_id}\');'
-                  'Plotly.downloadImage(p, {{format: format, height: height, '
-                  'width: width, filename: filename}});'
-                  '}};'
-                  'if(document.readyState == \'complete\') {{'
-                  'if(confirm(\'Do you want to save this image as '
-                  '{filename}.{format}?\\n\\n\\n\\n'
-                  'For higher resolution images and more export options, '
-                  'consider making requests to our image servers. Type: '
-                  'help(py.image) for more details.'
-                  '\')) {{'
-                  'downloadimage(\'{format}\', {height}, {width}, '
-                  '\'{filename}\');}}'
-                  '}}'
-                  '</script>'
-                  ).format(format=image, width=image_width,
-                           height=image_height, filename=filename,
-                           plot_id=plotdivid)
         script = image_download_script('iplot').format(format=image,
                                                        width=image_width,
                                                        height=image_height,
@@ -437,22 +416,6 @@ def plot(figure_or_data,
                               'for more details.', UserWarning)
 
                 # write the download script:
-                script = ('<script>'
-                          'function downloadimage(format, height, width,'
-                          ' filename) {{'
-                          'var p = document.getElementById(\'{plot_id}\');'
-                          'Plotly.downloadImage(p, {{format: format, height: '
-                          'height, width: width, filename: filename}});'
-                          '}};'
-                          'if(confirm(\'Do you want to save this image as '
-                          '{filename}.{format}?\')) {{'
-                          'downloadimage(\'{format}\', {height}, {width}, '
-                          '\'{filename}\');}}'
-                          '</script>'
-                          ).format(format=image, width=image_width,
-                                   height=image_height,
-                                   filename=image_filename, plot_id=plotdivid)
-
                 script = image_download_script('plot')
                 script = script.format(format=image,
                                        width=image_width,
