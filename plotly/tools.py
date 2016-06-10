@@ -1472,6 +1472,76 @@ class FigureFactory(object):
     """
 
     @staticmethod
+    def _validate_colors(colors, colortype='tuple'):
+        """
+        Validates color(s) and returns a list of color(s) of a specified type
+        """
+        # needs to be able to convert a tuple of colors to a list of colors
+        # currently uses index assignment, which doesn't work on a tuple
+        from numbers import Number
+        if colors is None:
+            colors = DEFAULT_PLOTLY_COLORS
+
+        if isinstance(colors, str):
+            if colors in PLOTLY_SCALES:
+                colors = PLOTLY_SCALES[colors]
+            else:
+                colors = [colors]
+
+        elif isinstance(colors, tuple):
+            if isinstance(colors[0], Number):
+                colors = [colors]
+            else:
+                colors = list(colors)
+
+        # convert color elements in list to tuple color
+        for j, color_type in enumerate(colors):
+            if 'rgb' in color_type:
+                color_type = FigureFactory._color_parser(
+                    color_type, FigureFactory._unlabel_rgb
+                )
+                for value in color_type:
+                    if value > 255.0:
+                        raise exceptions.PlotlyError(
+                            "Whoops! The elements in your rgb colors "
+                            "tuples cannot exceed 255.0."
+                        )
+                color_type = FigureFactory._color_parser(
+                    color_type, FigureFactory._unconvert_from_RGB_255
+                )
+                colors[j] = color_type
+
+            if '#' in color_type:
+                color_type = FigureFactory._color_parser(
+                    color_type, FigureFactory._hex_to_rgb
+                )
+                color_type = FigureFactory._color_parser(
+                    color_type, FigureFactory._unconvert_from_RGB_255
+                )
+
+                colors[j] = color_type
+
+            if isinstance(color_type, tuple):
+                for value in color_type:
+                    if value > 1.0:
+                        raise exceptions.PlotlyError(
+                            "Whoops! The elements in your colors tuples "
+                            "cannot exceed 1.0."
+                        )
+                colors[j] = color_type
+
+        if colortype == 'rgb':
+            for j, color_type in enumerate(colors):
+                rgb_color = FigureFactory._color_parser(
+                    color_type, FigureFactory._convert_to_RGB_255
+                )
+                colors[j] = FigureFactory._color_parser(
+                    rgb_color, FigureFactory._label_rgb
+                )
+
+        return colors
+
+    @staticmethod
     def _calc_stats(data):
         """
         Calculate statistics for use in violin plot.
@@ -1502,7 +1572,7 @@ class FigureFactory(object):
         }
 
     @staticmethod
-    def _make_half_violin(x, y, fillcolor=DEFAULT_FILLCOLOR,
+    def _make_half_violin(x, y, fillcolor='#1f77b4',
                           linecolor='rgb(0, 0, 0)'):
         """
         Produces a sideways probability distribution fig violin plot.
@@ -1520,7 +1590,7 @@ class FigureFactory(object):
             name='',
             text=text,
             fill='tonextx',
-            fillcolor=DEFAULT_FILLCOLOR,
+            fillcolor='#1f77b4',
             line=graph_objs.Line(width=0.5, color=linecolor, shape='spline'),
             hoverinfo='text',
             opacity=0.5
@@ -1528,7 +1598,7 @@ class FigureFactory(object):
 
     @staticmethod
     def _make_violin_rugplot(vals, pdf_max, distance,
-                             color=DEFAULT_FILLCOLOR):
+                             color='#1f77b4'):
         """
         Returns a rugplot fig for a violin plot.
         """
@@ -1636,7 +1706,7 @@ class FigureFactory(object):
         return yaxis
 
     @staticmethod
-    def _violinplot(vals, fillcolor=DEFAULT_FILLCOLOR, rugplot=True):
+    def _violinplot(vals, fillcolor='#1f77b4', rugplot=True):
         """
         Refer to FigureFactory.create_violin() for docstring.
         """
@@ -1665,9 +1735,9 @@ class FigureFactory(object):
         # range for x values in the plot
         plot_xrange = [-max_pdf - distance - 0.1, max_pdf + 0.1]
         plot_data = [FigureFactory._make_half_violin(
-                     -yy, xx, fillcolor=DEFAULT_FILLCOLOR),
+                     -yy, xx, fillcolor='#1f77b4'),
                      FigureFactory._make_half_violin(
-                         yy, xx, fillcolor=DEFAULT_FILLCOLOR),
+                         yy, xx, fillcolor='#1f77b4'),
                      FigureFactory._make_non_outlier_interval(d1, d2),
                      FigureFactory._make_quartiles(q1, q3),
                      FigureFactory._make_median(q2)]
@@ -1676,7 +1746,7 @@ class FigureFactory(object):
                 vals,
                 max_pdf,
                 distance=distance,
-                color=DEFAULT_FILLCOLOR)
+                color='#1f77b4')
             )
         return plot_data, plot_xrange
 
@@ -1777,8 +1847,12 @@ class FigureFactory(object):
                             print_grid=True)
 
         # prepare low and high color for colorscale
-        lowcolor = FigureFactory._unlabel_rgb(colors[0])
-        highcolor = FigureFactory._unlabel_rgb(colors[1])
+        lowcolor = FigureFactory._color_parser(
+            colors[0], FigureFactory._unlabel_rgb
+        )
+        highcolor = FigureFactory._color_parser(
+            colors[1], FigureFactory._unlabel_rgb
+        )
 
         # find min and max values in group_stats
         group_stats_values = []
@@ -2037,126 +2111,7 @@ class FigureFactory(object):
         from numbers import Number
 
         # Validate colors
-        if colors is None:
-            colors = DEFAULT_PLOTLY_COLORS
-
-        if isinstance(colors, str):
-            if colors in PLOTLY_SCALES:
-                colors = PLOTLY_SCALES[colors]
-
-            elif 'rgb' in colors:
-                # validate rgb color
-                colors = FigureFactory._unlabel_rgb(colors)
-                for value in colors:
-                    if value > 255.0:
-                        raise exceptions.PlotlyError(
-                            "Whoops! The elements in your rgb colors "
-                            "tuples cannot exceed 255.0."
-                        )
-
-                colors = FigureFactory._label_rgb(colors)
-
-                # put colors in list
-                colors_list = []
-                colors_list.append(colors)
-                colors = colors_list
-
-            elif '#' in colors:
-                colors = FigureFactory._hex_to_rgb(colors)
-                colors = FigureFactory._label_rgb(colors)
-
-                # put colors in list
-                colors_list = []
-                colors_list.append(colors)
-                colors = colors_list
-
-            else:
-                scale_keys = list(PLOTLY_SCALES.keys())
-                raise exceptions.PlotlyError(
-                    "If you input a string for 'colors', it must either be "
-                    "a Plotly colorscale, an 'rgb' color or a hex color. "
-                    "Valid plotly colorscale names are {}".format(scale_keys)
-                )
-
-        elif isinstance(colors, tuple):
-            # validate tuple color
-            for value in colors:
-                if value > 1.0:
-                    raise exceptions.PlotlyError(
-                        "Whoops! The elements in your colors tuples cannot "
-                        "exceed 1.0."
-                    )
-
-            colors = FigureFactory._convert_to_RGB_255(colors)
-            colors = FigureFactory._label_rgb(colors)
-
-            colors_list = []
-            colors_list.append(colors)
-            colors = colors_list
-
-        elif isinstance(colors, list):
-            new_colormap = []
-            for color in colors:
-                if 'rgb' in color:
-                    color = FigureFactory._unlabel_rgb(color)
-                    for value in color:
-                        if value > 255.0:
-                            raise exceptions.PlotlyError(
-                                "Whoops! The elements in your rgb colors "
-                                "tuples cannot exceed 255.0."
-                            )
-
-                    color = FigureFactory._label_rgb(color)
-                    new_colormap.append(color)
-                elif '#' in color:
-                    color = FigureFactory._hex_to_rgb(color)
-                    color = FigureFactory._label_rgb(color)
-                    new_colormap.append(color)
-                elif isinstance(color, tuple):
-                    for value in color:
-                        if value > 1.0:
-                            raise exceptions.PlotlyError(
-                                "Whoops! The elements in your colors "
-                                "tuples cannot exceed 1.0."
-                            )
-
-                    color = FigureFactory._convert_to_RGB_255(color)
-                    color = FigureFactory._label_rgb(color)
-                    new_colormap.append(color)
-            colors = new_colormap
-
-        elif isinstance(colors, dict):
-            for name in colors:
-                if 'rgb' in colors[name]:
-                    color = FigureFactory._unlabel_rgb(colors[name])
-                    for value in color:
-                        if value > 255.0:
-                            raise exceptions.PlotlyError(
-                                "Whoops! The elements in your rgb colors "
-                                "tuples cannot exceed 255.0."
-                            )
-
-                elif '#' in colors[name]:
-                    color = FigureFactory._hex_to_rgb(colors[name])
-                    color = FigureFactory._label_rgb(color)
-                    colors[name] = color
-
-                elif isinstance(colors[name], tuple):
-                    for value in colors[name]:
-                        if value > 1.0:
-                            raise exceptions.PlotlyError(
-                                "Whoops! The elements in your colors "
-                                "tuples cannot exceed 1.0."
-                            )
-
-                    color = FigureFactory._convert_to_RGB_255(colors[name])
-                    color = FigureFactory._label_rgb(color)
-                    colors[name] = color
-        else:
-            raise exceptions.PlotlyError(
-                "You must input a valid colors choice. Valid types include a "
-                "plotly scale, rgb, hex or tuple color, a list of any color "
-                "types or a dictionary.")
+        valid_colors = FigureFactory._validate_colors(colors, 'rgb')
 
         # validate data and choose plot type
         if group_header is None:
@@ -2181,8 +2136,9 @@ class FigureFactory(object):
 
             # call the plotting functions
             plot_data, plot_xrange = FigureFactory._violinplot(
-                data, fillcolor=colors[0]
+                data, fillcolor=valid_colors[0]
             )
+
             layout = graph_objs.Layout(
                 title=title,
                 autosize=False,
@@ -2200,6 +2156,7 @@ class FigureFactory(object):
 
             fig = graph_objs.Figure(data=graph_objs.Data(plot_data),
                                     layout=layout)
+
             return fig
 
         else:
@@ -2214,26 +2171,26 @@ class FigureFactory(object):
                                              "data for the violin plot.")
 
             if use_colorscale is False:
-                if isinstance(colors, dict):
+                if isinstance(valid_colors, dict):
                     # validate colors dict choice below
                     fig = FigureFactory._violin_dict(
-                        data, data_header, group_header, colors,
+                        data, data_header, group_header, valid_colors,
                         use_colorscale, group_stats, height, width, title
                     )
                     return fig
                 else:
                     fig = FigureFactory._violin_no_colorscale(
-                        data, data_header, group_header, colors,
+                        data, data_header, group_header, valid_colors,
                         use_colorscale, group_stats, height, width, title
                     )
-                return fig
+                    return fig
             else:
-                if isinstance(colors, dict):
+                if isinstance(valid_colors, dict):
                     raise exceptions.PlotlyError("The colors param cannot be "
                                                  "a dictionary if you are "
                                                  "using a colorscale.")
 
-                if len(colors) < 2:
+                if len(valid_colors) < 2:
                     raise exceptions.PlotlyError("colors must be a list with "
                                                  "at least 2 colors. A "
                                                  "Plotly scale is allowed.")
@@ -2243,8 +2200,8 @@ class FigureFactory(object):
                                                  "must be a dictionary.")
 
                 fig = FigureFactory._violin_colorscale(
-                    data, data_header, group_header, colors, use_colorscale,
-                    group_stats, height, width, title
+                    data, data_header, group_header, valid_colors,
+                    use_colorscale, group_stats, height, width, title
                 )
                 return fig
 
@@ -2274,22 +2231,26 @@ class FigureFactory(object):
 
         In particular, this function identifies whether the given color object
         is an iterable or not and applies the given color-parsing function to
-        the color or iterable of colors
+        the color or iterable of colors. If given an iterable, it will only be
+        able to work with it if all items in the iterable are of the same type
+        - rgb string, hex string or tuple
 
         """
-        if hasattr(colors[0], '__iter__') or isinstance(colors[0], str):
-            if isinstance(colors, tuple):
-                new_color_tuple = (
-                    function(colors[0]),
-                    function(colors[1]),
-                    function(colors[2])
-                )
-                return new_color_tuple
-            for index, color in enumerate(colors):
-                colors[index] = function(color)
-            return colors
-        else:
+        from numbers import Number
+        if isinstance(colors, str):
             return function(colors)
+
+        if isinstance(colors, tuple) and isinstance(colors[0], Number):
+            return function(colors)
+
+        if hasattr(colors, '__iter__'):
+            if isinstance(colors, tuple):
+                new_color_tuple = tuple(function(item) for item in colors)
+                return new_color_tuple
+
+            else:
+                new_color_list = [function(item) for item in colors]
+                return new_color_list
 
     @staticmethod
     def _unconvert_from_RGB_255(colors):
