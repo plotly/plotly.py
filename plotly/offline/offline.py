@@ -269,8 +269,11 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                   'width: width, filename: filename}});'
                   '}};'
                   'if(document.readyState == \'complete\') {{'
+                      'if(confirm(\'Do you want to save this image as '
+                      '{filename}.{format}?\')) {{'
                   'downloadimage(\'{format}\', {height}, {width}, '
                   '\'{filename}\');}}'
+                  '}}'
                   '</script>'
                   ).format(format=image, width=image_width,
                            height=image_height, filename=filename,
