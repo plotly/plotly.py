@@ -136,4 +136,23 @@ You're *strongly* encouraged to write tests that check your added functionality.
 
 When you write a new test anywhere under the `tests` directory, if your PR gets accepted, that test will run in a virtual machine to ensure that future changes don't break your contributions!
 
+#### Publishing to Pip
+
+You'll need the credentials file `~/.pypirc`. Request access from @theengineear and @chriddyp. Then, from inside the repository:
+
+```
+(plotly.py) $ git checkout master
+(plotly.py) $ git stash
+(plotly.py) $ git pull origin master
+(plotly.py) $ python setup.py sdist upload # upload to pip
+```
+
+After it has uploaded, move to another directly and double+triple check that you are able to upgrade ok:
+```
+$ pip install plotly --upgrade
+```
+
+And ask one of your friends to do it too. Our tests should catch any issues, but you never know.
+
+
 <3 Team Plotly

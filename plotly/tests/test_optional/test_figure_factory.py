@@ -44,13 +44,60 @@ class TestDistplot(TestCase):
         self.assertRaises(PlotlyError, tls.FigureFactory.create_distplot,
                           **kwargs)
 
-    def test_simple_distplot(self):
+    def test_simple_distplot_prob_density(self):
 
         # we should be able to create a single distplot with a simple dataset
         # and default kwargs
 
         dp = tls.FigureFactory.create_distplot(hist_data=[[1, 2, 2, 3]],
-                                               group_labels=['distplot'])
+                                               group_labels=['distplot'],
+                                               histnorm='probability density')
+        expected_dp_layout = {'barmode': 'overlay',
+                              'hovermode': 'closest',
+                              'legend': {'traceorder': 'reversed'},
+                              'xaxis1': {'anchor': 'y2', 'domain': [0.0, 1.0], 'zeroline': False},
+                              'yaxis1': {'anchor': 'free', 'domain': [0.35, 1], 'position': 0.0},
+                              'yaxis2': {'anchor': 'x1',
+                                         'domain': [0, 0.25],
+                                         'dtick': 1,
+                                         'showticklabels': False}}
+        self.assertEqual(dp['layout'], expected_dp_layout)
+
+        expected_dp_data_hist = {'autobinx': False,
+                                 'histnorm': 'probability density',
+                                 'legendgroup': 'distplot',
+                                 'marker': {'color': 'rgb(31, 119, 180)'},
+                                 'name': 'distplot',
+                                 'opacity': 0.7,
+                                 'type': 'histogram',
+                                 'x': [1, 2, 2, 3],
+                                 'xaxis': 'x1',
+                                 'xbins': {'end': 3.0, 'size': 1.0, 'start': 1.0},
+                                 'yaxis': 'y1'}
+        self.assertEqual(dp['data'][0], expected_dp_data_hist)
+
+        expected_dp_data_rug = {'legendgroup': 'distplot',
+                                'marker': {'color': 'rgb(31, 119, 180)',
+                                           'symbol': 'line-ns-open'},
+                                'mode': 'markers',
+                                'name': 'distplot',
+                                'showlegend': False,
+                                'text': None,
+                                'type': 'scatter',
+                                'x': [1, 2, 2, 3],
+                                'xaxis': 'x1',
+                                'y': ['distplot', 'distplot',
+                                      'distplot', 'distplot'],
+                                'yaxis': 'y2'}
+        self.assertEqual(dp['data'][2], expected_dp_data_rug)
+
+    def test_simple_distplot_prob(self):
+
+        # we should be able to create a single distplot with a simple dataset
+        # and default kwargs
+
+        dp = tls.FigureFactory.create_distplot(hist_data=[[1, 2, 2, 3]],
+                                               group_labels=['distplot'], histnorm='probability')
         expected_dp_layout = {'barmode': 'overlay',
                               'hovermode': 'closest',
                               'legend': {'traceorder': 'reversed'},
@@ -90,7 +137,7 @@ class TestDistplot(TestCase):
                                 'yaxis': 'y2'}
         self.assertEqual(dp['data'][2], expected_dp_data_rug)
 
-    def test_distplot_more_args(self):
+    def test_distplot_more_args_prob_dens(self):
 
         # we should be able to create a distplot with 2 datasets no
         # rugplot, defined bin_size, and added title
@@ -106,6 +153,69 @@ class TestDistplot(TestCase):
         group_labels = ['2012', '2013']
 
         dp = tls.FigureFactory.create_distplot(hist_data, group_labels,
+                                               histnorm='probability density',
+                                               show_rug=False, bin_size=.2)
+        dp['layout'].update(title='Dist Plot')
+
+        expected_dp_layout = {'barmode': 'overlay',
+                              'hovermode': 'closest',
+                              'legend': {'traceorder': 'reversed'},
+                              'title': 'Dist Plot',
+                              'xaxis1': {'anchor': 'y2', 'domain': [0.0, 1.0],
+                                         'zeroline': False},
+                              'yaxis1': {'anchor': 'free', 'domain': [0.0, 1],
+                                         'position': 0.0}}
+        self.assertEqual(dp['layout'], expected_dp_layout)
+
+        expected_dp_data_hist_1 = {'autobinx': False,
+                                   'histnorm': 'probability density',
+                                   'legendgroup': '2012',
+                                   'marker': {'color': 'rgb(31, 119, 180)'},
+                                   'name': '2012',
+                                   'opacity': 0.7,
+                                   'type': 'histogram',
+                                   'x': [0.8, 1.2, 0.2, 0.6, 1.6, -0.9, -0.07,
+                                         1.95, 0.9, -0.2, -0.5, 0.3, 0.4,
+                                         -0.37, 0.6],
+                                   'xaxis': 'x1',
+                                   'xbins': {'end': 1.95, 'size': 0.2,
+                                             'start': -0.9},
+                                   'yaxis': 'y1'}
+        self.assertEqual(dp['data'][0], expected_dp_data_hist_1)
+
+        expected_dp_data_hist_2 = {'autobinx': False,
+                                   'histnorm': 'probability density',
+                                   'legendgroup': '2013',
+                                   'marker': {'color': 'rgb(255, 127, 14)'},
+                                   'name': '2013',
+                                   'opacity': 0.7,
+                                   'type': 'histogram',
+                                   'x': [0.8, 1.5, 1.5, 0.6, 0.59, 1.0, 0.8,
+                                         1.7, 0.5, 0.8, -0.3, 1.2, 0.56, 0.3,
+                                         2.2],
+                                   'xaxis': 'x1',
+                                   'xbins': {'end': 2.2, 'size': 0.2,
+                                             'start': -0.3},
+                                   'yaxis': 'y1'}
+        self.assertEqual(dp['data'][1], expected_dp_data_hist_2)
+
+    def test_distplot_more_args_prob(self):
+
+        # we should be able to create a distplot with 2 datasets no
+        # rugplot, defined bin_size, and added title
+
+        hist1_x = [0.8, 1.2, 0.2, 0.6, 1.6,
+                   -0.9, -0.07, 1.95, 0.9, -0.2,
+                   -0.5, 0.3, 0.4, -0.37, 0.6]
+        hist2_x = [0.8, 1.5, 1.5, 0.6, 0.59,
+                   1.0, 0.8, 1.7, 0.5, 0.8,
+                   -0.3, 1.2, 0.56, 0.3, 2.2]
+
+        hist_data = [hist1_x] + [hist2_x]
+        group_labels = ['2012', '2013']
+
+        dp = tls.FigureFactory.create_distplot(hist_data, group_labels,
+                                               histnorm='probability',
                                                show_rug=False, bin_size=.2)
         dp['layout'].update(title='Dist Plot')
 
@@ -150,6 +260,102 @@ class TestDistplot(TestCase):
                                              'start': -0.3},
                                    'yaxis': 'y1'}
         self.assertEqual(dp['data'][1], expected_dp_data_hist_2)
+
+        def test_distplot_binsize_array_prob(self):
+            hist1_x = [0.8, 1.2, 0.2, 0.6, 1.6, -0.9, -0.07, 1.95, 0.9, -0.2,
+                       -0.5, 0.3, 0.4, -0.37, 0.6]
+            hist2_x = [0.8, 1.5, 1.5, 0.6, 0.59, 1.0, 0.8, 1.7, 0.5, 0.8, -0.3,
+                       1.2, 0.56, 0.3, 2.2]
+
+            hist_data = [hist1_x, hist2_x]
+            group_labels = ['2012', '2013']
+
+            dp = tls.FigureFactory.create_distplot(hist_data, group_labels,
+                                                   histnorm='probability',
+                                                   show_rug=False,
+                                                   bin_size=[.2, .2])
+
+            expected_dp_data_hist_1 = {'autobinx': False,
+                                       'histnorm': 'probability density',
+                                       'legendgroup': '2012',
+                                       'marker':
+                                       {'color': 'rgb(31, 119, 180)'},
+                                       'name': '2012',
+                                       'opacity': 0.7,
+                                       'type': 'histogram',
+                                       'x': [0.8, 1.2, 0.2, 0.6, 1.6, -0.9,
+                                             -0.07, 1.95, 0.9, -0.2, -0.5, 0.3,
+                                             0.4, -0.37, 0.6],
+                                       'xaxis': 'x1',
+                                       'xbins': {'end': 1.95, 'size': 0.2,
+                                                 'start': -0.9},
+                                       'yaxis': 'y1'}
+            self.assertEqual(dp['data'][0], expected_dp_data_hist_1)
+
+            expected_dp_data_hist_2 = {'autobinx': False,
+                                       'histnorm': 'probability density',
+                                       'legendgroup': '2013',
+                                       'marker':
+                                       {'color': 'rgb(255, 127, 14)'},
+                                       'name': '2013',
+                                       'opacity': 0.7,
+                                       'type': 'histogram',
+                                       'x': [0.8, 1.5, 1.5, 0.6, 0.59, 1.0,
+                                             0.8, 1.7, 0.5, 0.8, -0.3, 1.2,
+                                             0.56, 0.3, 2.2],
+                                       'xaxis': 'x1',
+                                       'xbins': {'end': 2.2, 'size': 0.2,
+                                                 'start': -0.3},
+                                       'yaxis': 'y1'}
+            self.assertEqual(dp['data'][1], expected_dp_data_hist_2)
+
+        def test_distplot_binsize_array_prob_density(self):
+            hist1_x = [0.8, 1.2, 0.2, 0.6, 1.6, -0.9, -0.07, 1.95, 0.9, -0.2,
+                       -0.5, 0.3, 0.4, -0.37, 0.6]
+            hist2_x = [0.8, 1.5, 1.5, 0.6, 0.59, 1.0, 0.8, 1.7, 0.5, 0.8, -0.3,
+                       1.2, 0.56, 0.3, 2.2]
+
+            hist_data = [hist1_x, hist2_x]
+            group_labels = ['2012', '2013']
+
+            dp = tls.FigureFactory.create_distplot(hist_data, group_labels,
+                                                   histnorm='probability',
+                                                   show_rug=False,
+                                                   bin_size=[.2, .2])
+
+            expected_dp_data_hist_1 = {'autobinx': False,
+                                       'histnorm': 'probability density',
+                                       'legendgroup': '2012',
+                                       'marker':
+                                       {'color': 'rgb(31, 119, 180)'},
+                                       'name': '2012',
+                                       'opacity': 0.7,
+                                       'type': 'histogram',
+                                       'x': [0.8, 1.2, 0.2, 0.6, 1.6, -0.9,
+                                             -0.07, 1.95, 0.9, -0.2, -0.5, 0.3,
+                                             0.4, -0.37, 0.6],
+                                       'xaxis': 'x1',
+                                       'xbins': {'end': 1.95, 'size': 0.2,
+                                                 'start': -0.9},
+                                       'yaxis': 'y1'}
+            self.assertEqual(dp['data'][0], expected_dp_data_hist_1)
+
+            expected_dp_data_hist_2 = {'autobinx': False,
+                                       'histnorm': 'probability density',
+                                       'legendgroup': '2013',
+                                       'marker':
+                                       {'color': 'rgb(255, 127, 14)'},
+                                       'name': '2013',
+                                       'opacity': 0.7,
+                                       'type': 'histogram',
+                                       'x': [0.8, 1.5, 1.5, 0.6, 0.59, 1.0,
+                                             0.8, 1.7, 0.5, 0.8, -0.3, 1.2,
+                                             0.56, 0.3, 2.2],
+                                       'xaxis': 'x1',
+                                       'xbins': {'end': 2.2, 'size': 0.2,
+                                                 'start': -0.3},
+                                       'yaxis': 'y1'}
+            self.assertEqual(dp['data'][1], expected_dp_data_hist_2)
 
 
 class TestStreamline(TestCase):
@@ -424,7 +630,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
         self.assert_dict_equal(dendro['layout'], expected_dendro['layout'])
 
     def test_dendrogram_orientation(self):
-        X = np.random.rand(5, 5) 
+        X = np.random.rand(5, 5)
 
         dendro_left = tls.FigureFactory.create_dendrogram(
                        X, orientation='left')
@@ -582,18 +788,6 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
         self.assertRaises(PlotlyError, tls.FigureFactory.create_trisurf,
                           x, y, z, simplices, colormap='foo')
 
-        # check that colormap is a list, if not a string
-
-        pattern1 = (
-            "If 'colormap' is a list, then its items must be tripets of the "
-            "form a,b,c or 'rgbx,y,z' where a,b,c are between 0 and 1 "
-            "inclusive and x,y,z are between 0 and 255 inclusive."
-        )
-
-        self.assertRaisesRegexp(PlotlyError, pattern1,
-                                tls.FigureFactory.create_trisurf,
-                                x, y, z, simplices, colormap=3)
-
         # check: if colormap is a list of rgb color strings, make sure the
         # entries of each color are no greater than 255.0
 
@@ -605,20 +799,31 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
         self.assertRaisesRegexp(PlotlyError, pattern2,
                                 tls.FigureFactory.create_trisurf,
                                 x, y, z, simplices,
-                                colormap=['rgb(1, 2, 3)', 'rgb(4, 5, 600)'])
+                                colormap=['rgb(4, 5, 600)'])
 
         # check: if colormap is a list of tuple colors, make sure the entries
         # of each tuple are no greater than 1.0
 
         pattern3 = (
-            "Whoops! The elements in your rgb colormap tuples "
-            "cannot exceed 1.0."
+            "Whoops! The elements in your colormap tuples cannot exceed 1.0."
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern3,
                                 tls.FigureFactory.create_trisurf,
                                 x, y, z, simplices,
-                                colormap=[(0.2, 0.4, 0.6), (0.8, 1.0, 1.2)])
+                                colormap=[(0.8, 1.0, 1.2)])
+
+        # check:
+
+        pattern4 = (
+            "You must input a valid colormap. Valid types include a plotly "
+            "scale, rgb, hex or tuple color, or lastly a list of any color "
+            "types."
+        )
+
+        self.assertRaisesRegexp(PlotlyError, pattern4,
+                                tls.FigureFactory.create_trisurf,
+                                x, y, z, simplices, colormap=1)
 
     def test_trisurf_all_args(self):
 
@@ -644,14 +849,14 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
         exp_trisurf_plot = {
         'data': [
             {
-                'facecolor': ['rgb(143.0, 123.0, 97.000000000000014)',
-                              'rgb(255.0, 127.0, 14.000000000000007)',
-                              'rgb(143.0, 123.0, 97.000000000000014)',
+                'facecolor': ['rgb(143.0, 123.0, 97.0)',
+                              'rgb(255.0, 127.0, 14.0)',
+                              'rgb(143.0, 123.0, 97.0)',
                               'rgb(31.0, 119.0, 180.0)',
-                              'rgb(143.0, 123.0, 97.000000000000014)',
+                              'rgb(143.0, 123.0, 97.0)',
                               'rgb(31.0, 119.0, 180.0)',
-                              'rgb(143.0, 123.0, 97.000000000000014)',
-                              'rgb(255.0, 127.0, 14.000000000000007)'],
+                              'rgb(143.0, 123.0, 97.0)',
+                              'rgb(255.0, 127.0, 14.0)'],
                 'i': [3, 1, 1, 5, 7, 3, 5, 7],
                 'j': [1, 3, 5, 1, 3, 7, 7, 5],
                 'k': [4, 0, 4, 2, 4, 6, 4, 8],
@@ -707,6 +912,27 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
 
         self.assert_dict_equal(test_trisurf_plot['data'][1],
                                exp_trisurf_plot['data'][1])
+
+        # Test passing custom colors
+        colors_raw = np.random.randn(simplices.shape[0])
+        colors_str = ['rgb(%s, %s, %s)' % (i, j, k)
+                      for i, j, k in np.random.randn(simplices.shape[0], 3)]
+
+        # Color == strings should be kept the same
+        test_colors_plot = tls.FigureFactory.create_trisurf(
+            x, y, z, simplices, color_func=colors_str)
+        self.assertListEqual(list(test_colors_plot['data'][0]['facecolor']),
+                             list(colors_str))
+        # Colors must match length of simplices
+        colors_bad = colors_str[:-1]
+        self.assertRaises(ValueError, tls.FigureFactory.create_trisurf, x, y,
+                          z, simplices, color_func=colors_bad)
+        # Check converting custom colors to strings
+        test_colors_plot = tls.FigureFactory.create_trisurf(
+            x, y, z, simplices, color_func=colors_raw
+        )
+        self.assertTrue(isinstance(test_colors_plot['data'][0]['facecolor'][0],
+                                   str))
 
 
 class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
@@ -820,27 +1046,55 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
                                 tls.FigureFactory.create_scatterplotmatrix,
                                 df, index='apple')
 
-    def test_valid_palette(self):
+    def test_valid_colormap(self):
 
-        # check: the palette argument is in a acceptable form
+        # check: the colormap argument is in a valid form
         df = pd.DataFrame([[1, 2, 3], [4, 5, 6], [7, 8, 9]],
                           columns=['a', 'b', 'c'])
 
-        self.assertRaisesRegexp(PlotlyError, "You must pick a valid "
-                                             "plotly colorscale name.",
-                                tls.FigureFactory.create_scatterplotmatrix,
-                                df, use_theme=True, index='a',
-                                palette='fake_scale')
+        # check: valid plotly scalename is entered
+        self.assertRaises(PlotlyError,
+                          tls.FigureFactory.create_scatterplotmatrix,
+                          df, index='a', colormap='fake_scale')
 
         pattern = (
-            "The items of 'palette' must be tripets of the form a,b,c or "
-            "'rgbx,y,z' where a,b,c belong to the interval 0,1 and x,y,z "
-            "belong to 0,255."
+            "You must input a valid colormap. Valid types include a plotly "
+            "scale, rgb, hex or tuple color, a list of any color types, or a "
+            "dictionary with index names each assigned to a color."
         )
 
+        # check: accepted data type for colormap
         self.assertRaisesRegexp(PlotlyError, pattern,
                                 tls.FigureFactory.create_scatterplotmatrix,
-                                df, use_theme=True, palette=1, index='c')
+                                df, colormap=1)
+
+        pattern_rgb = (
+            "Whoops! The elements in your rgb colormap tuples cannot "
+            "exceed 255.0."
+        )
+
+        # check: proper 'rgb' color
+        self.assertRaisesRegexp(PlotlyError, pattern_rgb,
+                                tls.FigureFactory.create_scatterplotmatrix,
+                                df, colormap='rgb(500, 1, 1)', index='c')
+
+        self.assertRaisesRegexp(PlotlyError, pattern_rgb,
+                                tls.FigureFactory.create_scatterplotmatrix,
+                                df, colormap=['rgb(500, 1, 1)'], index='c')
+
+        pattern_tuple = (
+            "Whoops! The elements in your colormap tuples cannot "
+            "exceed 1.0."
+        )
+
+        # check: proper color tuple
+        self.assertRaisesRegexp(PlotlyError, pattern_tuple,
+                                tls.FigureFactory.create_scatterplotmatrix,
+                                df, colormap=(2, 1, 1), index='c')
+
+        self.assertRaisesRegexp(PlotlyError, pattern_tuple,
+                                tls.FigureFactory.create_scatterplotmatrix,
+                                df, colormap=[(2, 1, 1)], index='c')
 
     def test_valid_endpts(self):
 
@@ -855,20 +1109,35 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
 
         self.assertRaisesRegexp(PlotlyError, pattern,
                                 tls.FigureFactory.create_scatterplotmatrix,
-                                df, use_theme=True, index='a',
-                                palette='Blues', endpts='foo')
+                                df, index='a', colormap='Hot', endpts='foo')
 
         # check: the endpts are a list of numbers
         self.assertRaisesRegexp(PlotlyError, pattern,
                                 tls.FigureFactory.create_scatterplotmatrix,
-                                df, use_theme=True, index='a',
-                                palette='Blues', endpts=['a'])
+                                df, index='a', colormap='Hot', endpts=['a'])
 
         # check: endpts is a list of INCREASING numbers
         self.assertRaisesRegexp(PlotlyError, pattern,
                                 tls.FigureFactory.create_scatterplotmatrix,
-                                df, use_theme=True, index='a',
-                                palette='Blues', endpts=[2, 1])
+                                df, index='a', colormap='Hot', endpts=[2, 1])
+
+    def test_dictionary_colormap(self):
+
+        # if colormap is a dictionary, make sure it all the values in the
+        # index column are keys in colormap
+        df = pd.DataFrame([['apple', 'happy'], ['pear', 'sad']],
+                          columns=['Fruit', 'Emotion'])
+
+        colormap = {'happy': 'rgb(5, 5, 5)'}
+
+        pattern = (
+            "If colormap is a dictionary, all the names in the index "
+            "must be keys."
+        )
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                tls.FigureFactory.create_scatterplotmatrix,
+                                df, index='Emotion', colormap=colormap)
 
     def test_scatter_plot_matrix(self):
 
@@ -881,7 +1150,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
 
         test_scatter_plot_matrix = tls.FigureFactory.create_scatterplotmatrix(
             df=df, diag='scatter', height=1000, width=1000, size=13,
-            title='Scatterplot Matrix', use_theme=False
+            title='Scatterplot Matrix'
         )
 
         exp_scatter_plot_matrix = {
@@ -975,17 +1244,17 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
         test_scatter_plot_matrix = tls.FigureFactory.create_scatterplotmatrix(
             df, index='Fruit', endpts=[-10, -1], diag='histogram',
             height=1000, width=1000, size=13, title='Scatterplot Matrix',
-            use_theme=True, palette='YlOrRd', marker=dict(symbol=136)
+            colormap='YlOrRd', marker=dict(symbol=136)
         )
 
         exp_scatter_plot_matrix = {
-            'data': [{'marker': {'color': 'rgb(128.0, 0.0, 38.0)'},
+            'data': [{'marker': {'color': 'rgb(128,0,38)'},
                       'showlegend': False,
                       'type': 'histogram',
                       'x': [2, -15, -2, 0],
                       'xaxis': 'x1',
                       'yaxis': 'y1'},
-                     {'marker': {'color': 'rgb(255.0, 255.0, 204.0)'},
+                     {'marker': {'color': 'rgb(255,255,204)'},
                       'showlegend': False,
                       'type': 'histogram',
                       'x': [6, 5],

@@ -4,6 +4,65 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.12.0] - 2016-06-06
+### Added
+- Added ability to enable/disable SSL certificate verification for streaming. Disabling SSL certification verification requires Python v2.7.9 / v3.4.3 (or above). This feature can be toggled via the `plotly_ssl_verification` configuration setting. 
+
+## [1.11.0] - 2016-05-27
+### Updated
+- Changed the default option for `create_distplot` in the figure factory from `probability` to `probability density` and also added the `histnorm` parameter to allow the user to choose between the two options.
+Note: This is a backwards incompatible change.
+
+- Updated plotly.min.js so the offline mode is using plotly.js v1.12.0
+	- Light position is now configurable in surface traces
+	- surface and mesh3d lighting attributes are now accompanied with comprehensive descriptions
+
+- Allowed `create_scatterplotmatrix` and `create_trisurf` to use divergent and categorical colormaps. The parameter `palette` has been replaced by `colormap` and `use_palette` has been removed. In `create_scatterplotmatrix`, users can now:
+	- Input a list of different color types (hex, tuple, rgb) to `colormap` to map colors divergently
+	- Use the same list to categorically group the items in the index column
+	- Pass a singlton color type to `colormap` to color all the data with one color
+	- Input a dictionary to `colormap` to map index values to a specific color
+	- 'cat' and 'seq' are valid options for `colormap_type`, which specify the type of colormap being used
+
+- In `create_trisurf`, the parameter `dist_func` has been replaced by `color_func`. Users can now:
+	- Input a list of different color types (hex, tuple, rgb) to `colormap` to map colors divergently
+	- Input a list|array of hex and rgb colors to `color_func` to assign each simplex to a color 
+
+### Added
+- Added the option to load plotly.js from a CDN by setting the parameter `connected=True`
+ in the `init_notebook_mode()` function call
+- The FigureFactory can now create trisurf plots with `.create_trisurf`. Check it out with:
+```
+import plotly.tools as tls
+help(tls.FigureFactory.create_trisurf)
+```
+
+ 
+
+## [1.10.0] - 2016-05-19
+### Fixed
+- Version 1.9.13 fixed an issue in offline mode where if you ran `init_notebook_mode`
+more than once the function would skip importing (because it saw that it had
+already imported the library) but then accidentally clear plotly.js from the DOM.
+This meant that if you ran `init_notebook_mode` more than once, your graphs would
+not appear when you refreshed the page.
+Version 1.9.13 solved this issue by injecting plotly.js with every iplot call.
+While this works, it also injects the library excessively, causing notebooks
+to have multiple versions of plotly.js inline in the DOM, potentially making
+notebooks with many `iplot` calls very large.
+Version 1.10.0 brings back the requirement to call `init_notebook_mode` before
+making an `iplot` call. It makes `init_notebook_mode` idempotent: you can call
+it multiple times without worrying about losing your plots on refresh.
+
+
+## [1.9.13] - 2016-05-19
+### Fixed
+- Fixed issue in offline mode related to the inability to reload plotly.js on page refresh and extra init_notebook_mode calls.
+
+## [1.9.12] - 2016-05-16
+### Added
+- SSL support for streaming.
+
 ## [1.9.11] - 2016-05-02
 ### Added
 - The FigureFactory can now create scatter plot matrices with `.create_scatterplotmatrix`. Check it out with:

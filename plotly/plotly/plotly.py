@@ -83,7 +83,7 @@ def get_config():
 def _plot_option_logic(plot_options_from_call_signature):
     """
     Given some plot_options as part of a plot call, decide on final options.
-    Precendence:
+    Precedence:
         1 - Start with DEFAULT_PLOT_OPTIONS
         2 - Update each key with ~/.plotly/.config options (tls.get_config)
         3 - Update each key with session plot options (set by py.sign_in)
@@ -439,6 +439,9 @@ class Stream:
 
     """
 
+    HTTP_PORT = 80
+    HTTPS_PORT = 443
+
     @utils.template_doc(**tools.get_config_file())
     def __init__(self, stream_id):
         """
@@ -453,6 +456,32 @@ class Stream:
         self.stream_id = stream_id
         self.connected = False
         self._stream = None
+
+    def get_streaming_specs(self):
+        """
+        Returns the streaming server, port, ssl_enabled flag, and headers.
+
+        """
+        streaming_url = get_config()['plotly_streaming_domain']
+        ssl_verification_enabled = get_config()['plotly_ssl_verification']
+        ssl_enabled = 'https' in streaming_url
+        port = self.HTTPS_PORT if ssl_enabled else self.HTTP_PORT
+
+        # If no scheme (https/https) is included in the streaming_url, the
+        # host will be None. Use streaming_url in this case.
+        host = (six.moves.urllib.parse.urlparse(streaming_url).hostname or
+                streaming_url)
+
+        headers = {'Host': host, 'plotly-streamtoken': self.stream_id}
+        streaming_specs = {
+            'server': host,
+            'port': port,
+            'ssl_enabled': ssl_enabled,
+            'ssl_verification_enabled': ssl_verification_enabled,
+            'headers': headers
+        }
+
+        return streaming_specs
 
     def heartbeat(self, reconnect_on=(200, '', 408)):
         """
@@ -481,10 +510,8 @@ class Stream:
         https://plot.ly/python/streaming/
 
         """
-        streaming_url = get_config()['plotly_streaming_domain']
-        self._stream = chunked_requests.Stream(
-            streaming_url, 80, {'Host': streaming_url,
-                                'plotly-streamtoken': self.stream_id})
+        streaming_specs = self.get_streaming_specs()
+        self._stream = chunked_requests.Stream(**streaming_specs)
 
     def write(self, trace, layout=None, validate=True,
               reconnect_on=(200, '', 408)):
