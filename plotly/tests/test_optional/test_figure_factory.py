@@ -784,15 +784,22 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
         tri = Delaunay(points2D)
         simplices = tri.simplices
 
-        # check that a valid plotly colorscale name is entered
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_trisurf,
-                          x, y, z, simplices, colormap='foo')
+        # check that a valid plotly colorscale string is entered
+
+        pattern = (
+            "If your colors variable is a string, it must be a Plotly scale, "
+            "an rgb color or a hex color."
+        )
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                tls.FigureFactory.create_trisurf,
+                                x, y, z, simplices, colormap='foo')
 
         # check: if colormap is a list of rgb color strings, make sure the
         # entries of each color are no greater than 255.0
 
         pattern2 = (
-            "Whoops! The elements in your rgb colormap tuples "
+            "Whoops! The elements in your rgb colors tuples "
             "cannot exceed 255.0."
         )
 
@@ -805,25 +812,13 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
         # of each tuple are no greater than 1.0
 
         pattern3 = (
-            "Whoops! The elements in your colormap tuples cannot exceed 1.0."
+            "Whoops! The elements in your colors tuples cannot exceed 1.0."
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern3,
                                 tls.FigureFactory.create_trisurf,
                                 x, y, z, simplices,
                                 colormap=[(0.8, 1.0, 1.2)])
-
-        # check:
-
-        pattern4 = (
-            "You must input a valid colormap. Valid types include a plotly "
-            "scale, rgb, hex or tuple color, or lastly a list of any color "
-            "types."
-        )
-
-        self.assertRaisesRegexp(PlotlyError, pattern4,
-                                tls.FigureFactory.create_trisurf,
-                                x, y, z, simplices, colormap=1)
 
     def test_trisurf_all_args(self):
 
@@ -849,14 +844,14 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
         exp_trisurf_plot = {
         'data': [
             {
-                'facecolor': ['rgb(143.0, 123.0, 97.0)',
-                              'rgb(255.0, 127.0, 14.0)',
-                              'rgb(143.0, 123.0, 97.0)',
+                'facecolor': ['rgb(144.0, 94.5, 132.0)',
+                              'rgb(23.0, 190.0, 207.0)',
+                              'rgb(144.0, 94.5, 132.0)',
                               'rgb(31.0, 119.0, 180.0)',
-                              'rgb(143.0, 123.0, 97.0)',
+                              'rgb(144.0, 94.5, 132.0)',
                               'rgb(31.0, 119.0, 180.0)',
-                              'rgb(143.0, 123.0, 97.0)',
-                              'rgb(255.0, 127.0, 14.0)'],
+                              'rgb(144.0, 94.5, 132.0)',
+                              'rgb(23.0, 190.0, 207.0)'],
                 'i': [3, 1, 1, 5, 7, 3, 5, 7],
                 'j': [1, 3, 5, 1, 3, 7, 7, 5],
                 'k': [4, 0, 4, 2, 4, 6, 4, 8],
@@ -1325,15 +1320,6 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
         self.assertRaises(PlotlyError, tls.FigureFactory.create_violin,
                           data, colors='foo')
 
-        # error message if colors is no good
-        pattern3 = ("You must input a valid colors choice. Valid types "
-                    "include a plotly scale, rgb, hex or tuple color, a list "
-                    "of any color types or a dictionary.")
-
-        self.assertRaisesRegexp(PlotlyError, pattern3,
-                                tls.FigureFactory.create_violin,
-                                data, colors=5)
-
     def test_data_header(self):
 
         # make sure data_header is entered
@@ -1451,7 +1437,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
                                 use_colorscale=True,
                                 colors=['rgb(1, 2, 3)', 'rgb(4, 5, 6)'],
                                 group_stats={'apple': 1})
-"""
+
     def test_violin_fig(self):
 
         # check: test violin fig matches expected fig
@@ -1462,7 +1448,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
             'data': [{'fill': 'tonextx',
                      'fillcolor': 'rgb(31.0, 119.0, 180.0)',
                      'hoverinfo': 'text',
-                     'line': {'color': 'rgb(0,0,0)',
+                     'line': {'color': 'rgb(0, 0, 0)',
                               'shape': 'spline',
                               'width': 0.5},
                      'mode': 'lines',
@@ -1640,7 +1626,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
                      {'fill': 'tonextx',
                       'fillcolor': 'rgb(31.0, 119.0, 180.0)',
                       'hoverinfo': 'text',
-                      'line': {'color': 'rgb(0,0,0)',
+                      'line': {'color': 'rgb(0, 0, 0)',
                                'shape': 'spline',
                                'width': 0.5},
                       'mode': 'lines',
@@ -1880,5 +1866,3 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
 
         self.assert_dict_equal(test_violin['layout'],
                                exp_violin['layout'])
-
-"""

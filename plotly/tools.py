@@ -1482,12 +1482,18 @@ class FigureFactory(object):
         from numbers import Number
         if colors is None:
             colors = DEFAULT_PLOTLY_COLORS
+            #colors = [DEFAULT_PLOTLY_COLORS[0],
+            #          DEFAULT_PLOTLY_COLORS[1]]
 
         if isinstance(colors, str):
             if colors in PLOTLY_SCALES:
                 colors = PLOTLY_SCALES[colors]
-            else:
+            if 'rgb' in colors or '#' in colors:
                 colors = [colors]
+            else:
+                raise exceptions.PlotlyError(
+                    "If your colors variable is a string, it must be a "
+                    "Plotly scale, an rgb color or a hex color.")
 
         elif isinstance(colors, tuple):
             if isinstance(colors[0], Number):
