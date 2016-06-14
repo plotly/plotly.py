@@ -1052,19 +1052,8 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
                           tls.FigureFactory.create_scatterplotmatrix,
                           df, index='a', colormap='fake_scale')
 
-        pattern = (
-            "You must input a valid colormap. Valid types include a plotly "
-            "scale, rgb, hex or tuple color, a list of any color types, or a "
-            "dictionary with index names each assigned to a color."
-        )
-
-        # check: accepted data type for colormap
-        self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_scatterplotmatrix,
-                                df, colormap=1)
-
         pattern_rgb = (
-            "Whoops! The elements in your rgb colormap tuples cannot "
+            "Whoops! The elements in your rgb colors tuples cannot "
             "exceed 255.0."
         )
 
@@ -1078,7 +1067,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
                                 df, colormap=['rgb(500, 1, 1)'], index='c')
 
         pattern_tuple = (
-            "Whoops! The elements in your colormap tuples cannot "
+            "Whoops! The elements in your colors tuples cannot "
             "exceed 1.0."
         )
 
@@ -1243,13 +1232,13 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
         )
 
         exp_scatter_plot_matrix = {
-            'data': [{'marker': {'color': 'rgb(128,0,38)'},
+            'data': [{'marker': {'color': 'rgb(128.0, 0.0, 38.0)'},
                       'showlegend': False,
                       'type': 'histogram',
                       'x': [2, -15, -2, 0],
                       'xaxis': 'x1',
                       'yaxis': 'y1'},
-                     {'marker': {'color': 'rgb(255,255,204)'},
+                     {'marker': {'color': 'rgb(255.0, 255.0, 204.0)'},
                       'showlegend': False,
                       'type': 'histogram',
                       'x': [6, 5],

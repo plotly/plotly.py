@@ -1482,13 +1482,11 @@ class FigureFactory(object):
         from numbers import Number
         if colors is None:
             colors = DEFAULT_PLOTLY_COLORS
-            #colors = [DEFAULT_PLOTLY_COLORS[0],
-            #          DEFAULT_PLOTLY_COLORS[1]]
 
         if isinstance(colors, str):
             if colors in PLOTLY_SCALES:
                 colors = PLOTLY_SCALES[colors]
-            if 'rgb' in colors or '#' in colors:
+            elif 'rgb' in colors or '#' in colors:
                 colors = [colors]
             else:
                 raise exceptions.PlotlyError(
@@ -3004,11 +3002,16 @@ class FigureFactory(object):
 
             # Convert colormap to list of n RGB tuples
             if colormap_type == 'seq':
-                foo = FigureFactory._unlabel_rgb(colormap)
+                foo = FigureFactory._color_parser(
+                    colormap, FigureFactory._unlabel_rgb
+                )
                 foo = FigureFactory._n_colors(foo[0],
                                               foo[1],
                                               n_colors_len)
-                theme = FigureFactory._label_rgb(foo)
+                theme = FigureFactory._color_parser(
+                    foo, FigureFactory._label_rgb
+                )
+
             if colormap_type == 'cat':
                 # leave list of colors the same way
                 theme = colormap
@@ -3173,11 +3176,22 @@ class FigureFactory(object):
 
                 # Convert colormap to list of n RGB tuples
                 if colormap_type == 'seq':
-                    foo = FigureFactory._unlabel_rgb(colormap)
+                    foo = FigureFactory._color_parser(
+                        colormap, FigureFactory._unlabel_rgb
+                    )
                     foo = FigureFactory._n_colors(foo[0],
                                                   foo[1],
                                                   len(intervals))
-                    theme = FigureFactory._label_rgb(foo)
+                    theme = FigureFactory._color_parser(
+                        foo, FigureFactory._label_rgb
+                    )
+
+
+                    #foo = FigureFactory._unlabel_rgb(colormap)
+                    #foo = FigureFactory._n_colors(foo[0],
+                    #                              foo[1],
+                    #                              len(intervals))
+                    #theme = FigureFactory._label_rgb(foo)
                 if colormap_type == 'cat':
                     # leave list of colors the same way
                     theme = colormap
@@ -3908,154 +3922,16 @@ class FigureFactory(object):
             headers = []
         if index_vals is None:
             index_vals = []
-        plotly_scales = {'Greys': ['rgb(0,0,0)', 'rgb(255,255,255)'],
-                         'YlGnBu': ['rgb(8,29,88)', 'rgb(255,255,217)'],
-                         'Greens': ['rgb(0,68,27)', 'rgb(247,252,245)'],
-                         'YlOrRd': ['rgb(128,0,38)', 'rgb(255,255,204)'],
-                         'Bluered': ['rgb(0,0,255)', 'rgb(255,0,0)'],
-                         'RdBu': ['rgb(5,10,172)', 'rgb(178,10,28)'],
-                         'Reds': ['rgb(220,220,220)', 'rgb(178,10,28)'],
-                         'Blues': ['rgb(5,10,172)', 'rgb(220,220,220)'],
-                         'Picnic': ['rgb(0,0,255)', 'rgb(255,0,0)'],
-                         'Rainbow': ['rgb(150,0,90)', 'rgb(255,0,0)'],
-                         'Portland': ['rgb(12,51,131)', 'rgb(217,30,30)'],
-                         'Jet': ['rgb(0,0,131)', 'rgb(128,0,0)'],
-                         'Hot': ['rgb(0,0,0)', 'rgb(255,255,255)'],
-                         'Blackbody': ['rgb(0,0,0)', 'rgb(160,200,255)'],
-                         'Earth': ['rgb(0,0,130)', 'rgb(255,255,255)'],
-                         'Electric': ['rgb(0,0,0)', 'rgb(255,250,220)'],
-                         'Viridis': ['rgb(68,1,84)', 'rgb(253,231,37)']}
 
         FigureFactory._validate_scatterplotmatrix(df, index, diag,
                                                   colormap_type, **kwargs)
 
         # Validate colormap
-        if colormap is None:
-            colormap = DEFAULT_PLOTLY_COLORS
-
-        if isinstance(colormap, str):
-            if colormap in plotly_scales:
-                colormap = plotly_scales[colormap]
-
-            elif 'rgb' in colormap:
-                colormap = FigureFactory._unlabel_rgb(colormap)
-                for value in colormap:
-                    if value > 255.0:
-                        raise exceptions.PlotlyError("Whoops! The "
-                                                     "elements in your "
-                                                     "rgb colormap "
-                                                     "tuples cannot "
-                                                     "exceed 255.0.")
-                colormap = FigureFactory._label_rgb(colormap)
-
-                # put colormap in list
-                colors_list = []
-                colors_list.append(colormap)
-                colormap = colors_list
-
-            elif '#' in colormap:
-                colormap = FigureFactory._hex_to_rgb(colormap)
-                colormap = FigureFactory._label_rgb(colormap)
-
-                # put colormap in list
-                colors_list = []
-                colors_list.append(colormap)
-                colormap = colors_list
-
-            else:
-                scale_keys = list(plotly_scales.keys())
-                raise exceptions.PlotlyError("If you input a string "
-                                             "for 'colormap', it must "
-                                             "either be a Plotly "
-                                             "colorscale, an 'rgb' "
-                                             "color or a hex color."
-                                             "Valid plotly colorscale "
-                                             "names are {}".format(scale_keys))
-        elif isinstance(colormap, tuple):
-            for value in colormap:
-                if value > 1.0:
-                    raise exceptions.PlotlyError("Whoops! The "
-                                                 "elements in "
-                                                 "your colormap "
-                                                 "tuples cannot "
-                                                 "exceed 1.0.")
-
-            colors_list = []
-            colors_list.append(colormap)
-            colormap = colors_list
-
-            colormap = FigureFactory._convert_to_RGB_255(colormap)
-            colormap = FigureFactory._label_rgb(colormap)
-
-        elif isinstance(colormap, list):
-            new_colormap = []
-            for color in colormap:
-                if 'rgb' in color:
-                    color = FigureFactory._unlabel_rgb(color)
-
-                    for value in color:
-                        if value > 255.0:
-                            raise exceptions.PlotlyError("Whoops! The "
-                                                         "elements in your "
-                                                         "rgb colormap "
-                                                         "tuples cannot "
-                                                         "exceed 255.0.")
-
-                    color = FigureFactory._label_rgb(color)
-                    new_colormap.append(color)
-                elif '#' in color:
-                    color = FigureFactory._hex_to_rgb(color)
-                    color = FigureFactory._label_rgb(color)
-                    new_colormap.append(color)
-                elif isinstance(color, tuple):
-                    for value in color:
-                        if value > 1.0:
-                            raise exceptions.PlotlyError("Whoops! The "
-                                                         "elements in "
-                                                         "your colormap "
-                                                         "tuples cannot "
-                                                         "exceed 1.0.")
-                    color = FigureFactory._convert_to_RGB_255(color)
-                    color = FigureFactory._label_rgb(color)
-                    new_colormap.append(color)
-            colormap = new_colormap
-
-        elif isinstance(colormap, dict):
-            for name in colormap:
-                if 'rgb' in colormap[name]:
-                    color = FigureFactory._unlabel_rgb(colormap[name])
-                    for value in color:
-                        if value > 255.0:
-                            raise exceptions.PlotlyError("Whoops! The "
-                                                         "elements in your "
-                                                         "rgb colormap "
-                                                         "tuples cannot "
-                                                         "exceed 255.0.")
-
-                elif '#' in colormap[name]:
-                    color = FigureFactory._hex_to_rgb(colormap[name])
-                    color = FigureFactory._label_rgb(color)
-                    colormap[name] = color
-
-                elif isinstance(colormap[name], tuple):
-                    for value in colormap[name]:
-                        if value > 1.0:
-                            raise exceptions.PlotlyError("Whoops! The "
-                                                         "elements in "
-                                                         "your colormap "
-                                                         "tuples cannot "
-                                                         "exceed 1.0.")
-                    color = FigureFactory._convert_to_RGB_255(colormap[name])
-                    color = FigureFactory._label_rgb(color)
-                    colormap[name] = color
-
+        if isinstance(colormap, dict):
+            colormap = FigureFactory._validate_colors_dict(colormap, 'rgb')
         else:
-            raise exceptions.PlotlyError("You must input a valid colormap. "
-                                         "Valid types include a plotly scale, "
-                                         "rgb, hex or tuple color, a list of "
-                                         "any color types, or a dictionary "
-                                         "with index names each assigned "
-                                         "to a color.")
+            colormap = FigureFactory._validate_colors(colormap, 'rgb')
+
         if not index:
             for name in df:
                 headers.append(name)
@@ -4094,29 +3970,19 @@ class FigureFactory(object):
                                                      "dictionary, all the "
                                                      "names in the index "
                                                      "must be keys.")
-
-                figure = FigureFactory._scatterplot_dict(dataframe,
-                                                         headers,
-                                                         diag,
-                                                         size, height,
-                                                         width, title,
-                                                         index,
-                                                         index_vals,
-                                                         endpts,
-                                                         colormap,
-                                                         colormap_type,
-                                                         **kwargs)
+                figure = FigureFactory._scatterplot_dict(
+                    dataframe, headers, diag, size, height, width, title,
+                    index, index_vals, endpts, colormap, colormap_type,
+                    **kwargs
+                )
                 return figure
 
             else:
-                figure = FigureFactory._scatterplot_theme(dataframe, headers,
-                                                          diag, size,
-                                                          height, width,
-                                                          title, index,
-                                                          index_vals,
-                                                          endpts, colormap,
-                                                          colormap_type,
-                                                          **kwargs)
+                figure = FigureFactory._scatterplot_theme(
+                    dataframe, headers, diag, size, height, width, title,
+                    index, index_vals, endpts, colormap, colormap_type,
+                    **kwargs
+                )
                 return figure
 
     @staticmethod
