@@ -3186,12 +3186,6 @@ class FigureFactory(object):
                         foo, FigureFactory._label_rgb
                     )
 
-
-                    #foo = FigureFactory._unlabel_rgb(colormap)
-                    #foo = FigureFactory._n_colors(foo[0],
-                    #                              foo[1],
-                    #                              len(intervals))
-                    #theme = FigureFactory._label_rgb(foo)
                 if colormap_type == 'cat':
                     # leave list of colors the same way
                     theme = colormap
@@ -3698,7 +3692,7 @@ class FigureFactory(object):
                 float(colors[index])
                 str_vals = str_vals + colors[index]
             except ValueError:
-                if (colors[index] == ',') or (colors[index] == '.'):
+                if colors[index] == ',' or colors[index] == '.':
                     str_vals = str_vals + colors[index]
 
         str_vals = str_vals + ','
