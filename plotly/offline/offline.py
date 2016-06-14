@@ -10,6 +10,7 @@ import os
 import uuid
 import warnings
 from pkg_resources import resource_string
+import time
 import webbrowser
 
 import plotly
@@ -48,14 +49,26 @@ def get_plotlyjs():
     plotlyjs = resource_string('plotly', path).decode('utf-8')
     return plotlyjs
 
-def image_download_script(type):
+def get_image_download_script(caller):
+    '''
+    This function will return a script that will download an image of a Plotly
+    plot.
 
-    if type == 'iplot':
+    Keyword Arguments:
+    caller ('plot', 'iplot') -- specifies which function made the call for the
+        download script. If `iplot`, then an extra condition is added into the
+        download script to ensure that download prompts aren't iniitated on
+        page reloads.
+    '''
+
+    if caller == 'iplot':
         check_start = 'if(document.readyState == \'complete\') {{'
         check_end = '}}'
-    elif type == 'plot':
+    elif caller == 'plot':
         check_start = ''
         check_end = ''
+    else:
+        raise ValueError('caller should only be one of `iplot` or `plot`')
 
     return(
              ('<script>'
@@ -258,7 +271,7 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     init_notebook_mode()
     iplot([{'x': [1, 2, 3], 'y': [5, 2, 7]}])
     # We can also download an image of the plot by setting the image to the
-    format you want ie: `image='png'`
+    format you want. e.g. `image='png'`
     iplot([{'x': [1, 2, 3], 'y': [5, 2, 7]}], image='png')
     ```
     """
@@ -282,18 +295,20 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
 
     if image:
         if image not in __IMAGE_FORMATS:
+            img_n = len(__IMAGE_FORMATS)
             raise ValueError('The image parameter takes only the '
-                             'following format types: `png`, `jpeg`, '
-                             '`webp`, `svg`')
-        # if the check passes then download script injection will commence.
-        # Write script to download image of the plot
+                             'following format types: `{}`, `{}`, '
+                             '`{}`, `{}`'.format(*[__IMAGE_FORMATS[i]
+                                                 for i in range(img_n)]
+                                                 )
+                             )
+        # if image is given, and is a valid format, we will download the image
         script = image_download_script('iplot').format(format=image,
                                                        width=image_width,
                                                        height=image_height,
                                                        filename=filename,
                                                        plot_id=plotdivid)
         # allow time for the plot to draw
-        import time
         time.sleep(1)
         # inject code to download an image of the plot
         display(HTML(script))
@@ -402,9 +417,13 @@ def plot(figure_or_data,
 
             if image:
                 if image not in __IMAGE_FORMATS:
+                    img_n = len(__IMAGE_FORMATS)
                     raise ValueError('The image parameter takes only the '
-                                     'following format types: `png`, `jpeg`, '
-                                     '`webp`, `svg`')
+                                     'following format types: `{}`, `{}`, '
+                                     '`{}`, `{}`'.format(*[__IMAGE_FORMATS[i]
+                                                         for i in range(img_n)]
+                                                         )
+                                     )
                 # if the check passes then download script is injected.
                 # write the download script:
                 script = image_download_script('plot')
