@@ -50,16 +50,16 @@ def get_plotlyjs():
     return plotlyjs
 
 def get_image_download_script(caller):
-    '''
+    """
     This function will return a script that will download an image of a Plotly
     plot.
 
     Keyword Arguments:
     caller ('plot', 'iplot') -- specifies which function made the call for the
         download script. If `iplot`, then an extra condition is added into the
-        download script to ensure that download prompts aren't iniitated on
+        download script to ensure that download prompts aren't initiated on
         page reloads.
-    '''
+    """
 
     if caller == 'iplot':
         check_start = 'if(document.readyState == \'complete\') {{'
@@ -303,7 +303,7 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                                                  )
                              )
         # if image is given, and is a valid format, we will download the image
-        script = image_download_script('iplot').format(format=image,
+        script = get_image_download_script('iplot').format(format=image,
                                                        width=image_width,
                                                        height=image_height,
                                                        filename=filename,
@@ -426,7 +426,7 @@ def plot(figure_or_data,
                                      )
                 # if the check passes then download script is injected.
                 # write the download script:
-                script = image_download_script('plot')
+                script = get_image_download_script('plot')
                 script = script.format(format=image,
                                        width=image_width,
                                        height=image_height,
