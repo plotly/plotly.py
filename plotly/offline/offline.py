@@ -7,6 +7,7 @@ from __future__ import absolute_import
 
 import json
 import os
+import shutil
 import uuid
 import warnings
 from pkg_resources import resource_string
@@ -41,9 +42,12 @@ def download_plotlyjs(download_url):
     pass
 
 
-def get_plotlyjs():
-    path = os.path.join('offline', 'plotly.min.js')
-    plotlyjs = resource_string('plotly', path).decode('utf-8')
+def get_plotlyjs( outsource_plotly = False ):
+    if outsource_plotly:
+        plotlyjs = '</script><script src="plotly.min.js">'
+    else:
+        path = os.path.join('offline', 'plotly.min.js')
+        plotlyjs = resource_string('plotly', path).decode('utf-8')
     return plotlyjs
 
 
@@ -242,7 +246,8 @@ def plot(figure_or_data,
          validate=True, output_type='file',
          include_plotlyjs=True,
          filename='temp-plot.html',
-         auto_open=True):
+         auto_open=True,
+         outsource_plotly=False):
     """ Create a plotly graph locally as an HTML document or string.
 
     Example:
@@ -288,6 +293,10 @@ def plot(figure_or_data,
     auto_open (default=True) -- If True, open the saved file in a
         web browser after saving.
         This argument only applies if `output_type` is 'file'.
+    outsource_plotly (default=False) -- If True, the javascript library will
+        be copied into a separate file, thereby reducing the file size for the
+        actual plat significantly. This is handy if several plots are created
+        in the same folder.
     """
     if output_type not in ['div', 'file']:
         raise ValueError(
@@ -315,11 +324,19 @@ def plot(figure_or_data,
         ).format(id=plotdivid)
 
     if output_type == 'file':
+        src_path = os.path.join(
+            os.path.dirname(__file__), 'plotly.min.js'
+        )
+        # src_path = resource_string('plotly', path)
+        dest_path = os.path.join( os.path.dirname( filename ), 'plotly.min.js')
+        if os.path.exists( dest_path ) is False:
+            shutil.copy( src_path, dest_path )
+
         with open(filename, 'w') as f:
             if include_plotlyjs:
                 plotly_js_script = ''.join([
                     '<script type="text/javascript">',
-                    get_plotlyjs(),
+                    get_plotlyjs(outsource_plotly=outsource_plotly),
                     '</script>',
                 ])
             else:
@@ -346,7 +363,7 @@ def plot(figure_or_data,
             return ''.join([
                 '<div>',
                 '<script type="text/javascript">',
-                get_plotlyjs(),
+                get_plotlyjs(outsource_plotly=outsource_plotly),
                 '</script>',
                 plot_html,
                 '</div>'
