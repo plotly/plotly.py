@@ -1125,7 +1125,6 @@ class TestTable(TestCase):
                                                 'zeroline': False}}}
         self.assertEqual(index_table, exp_index_table)
 
-
 # class TestDistplot(TestCase):
 
 #     def test_scipy_import_error(self):
