@@ -295,12 +295,8 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
 
     if image:
         if image not in __IMAGE_FORMATS:
-            img_n = len(__IMAGE_FORMATS)
-            raise ValueError('The image parameter takes only the '
-                             'following format types: `{}`, `{}`, '
-                             '`{}`, `{}`'.format(*[__IMAGE_FORMATS[i]
-                                                 for i in range(img_n)]
-                                                 )
+            raise ValueError('The image parameter must be one of the following'
+                             ': {}'.format(__IMAGE_FORMATS)
                              )
         # if image is given, and is a valid format, we will download the image
         script = get_image_download_script('iplot').format(format=image,
@@ -417,12 +413,8 @@ def plot(figure_or_data,
 
             if image:
                 if image not in __IMAGE_FORMATS:
-                    img_n = len(__IMAGE_FORMATS)
-                    raise ValueError('The image parameter takes only the '
-                                     'following format types: `{}`, `{}`, '
-                                     '`{}`, `{}`'.format(*[__IMAGE_FORMATS[i]
-                                                         for i in range(img_n)]
-                                                         )
+                    raise ValueError('The image parameter must be one of the '
+                                     'following: {}'.format(__IMAGE_FORMATS)
                                      )
                 # if the check passes then download script is injected.
                 # write the download script:
