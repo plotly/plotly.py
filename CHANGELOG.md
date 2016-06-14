@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- The FigureFactory can now create violin plots with `.create_violin`. Check it out with:
+```
+import plotly.tools as tls
+help(tls.FigureFactory.create_violin)
+```
 
 ## [1.12.0] - 2016-06-06
 ### Added
