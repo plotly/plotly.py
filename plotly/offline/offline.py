@@ -11,7 +11,6 @@ import uuid
 import warnings
 from pkg_resources import resource_string
 import time
-import sys
 import webbrowser
 
 import plotly
@@ -50,13 +49,17 @@ def get_plotlyjs():
     plotlyjs = resource_string('plotly', path).decode('utf-8')
     return plotlyjs
 
-def get_image_download_script():
+def get_image_download_script(caller):
     '''
-    This function will return a script that will download an image of the
-    most recently rendered Plotly plot
+    This function will return a script that will download an image of a Plotly
+    plot.
+
+    Keyword Arguments:
+    caller ('plot', 'iplot') -- specifies which function made the call for the
+        download script. If `iplot`, then an extra condition is added into the
+        download script to ensure that download prompts aren't iniitated on
+        page reloads.
     '''
-    # get the name of the function that called `get_image_download_script`
-    caller = sys._getframe(1).f_code.co_name
 
     if caller == 'iplot':
         check_start = 'if(document.readyState == \'complete\') {{'
@@ -300,11 +303,11 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                                                  )
                              )
         # if image is given, and is a valid format, we will download the image
-        script = get_image_download_script().format(format=image,
-                                                    width=image_width,
-                                                    height=image_height,
-                                                    filename=filename,
-                                                    plot_id=plotdivid)
+        script = image_download_script('iplot').format(format=image,
+                                                       width=image_width,
+                                                       height=image_height,
+                                                       filename=filename,
+                                                       plot_id=plotdivid)
         # allow time for the plot to draw
         time.sleep(1)
         # inject code to download an image of the plot
@@ -423,7 +426,7 @@ def plot(figure_or_data,
                                      )
                 # if the check passes then download script is injected.
                 # write the download script:
-                script = get_image_download_script()
+                script = image_download_script('plot')
                 script = script.format(format=image,
                                        width=image_width,
                                        height=image_height,
