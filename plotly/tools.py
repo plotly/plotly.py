@@ -1517,8 +1517,7 @@ class FigureFactory(object):
 
     @staticmethod
     def _gantt(chart, colors, title, bar_width, showgrid_x, showgrid_y,
-               height, width, tasks=None,
-               task_names=None, data=None):
+               height, width, tasks=None, task_names=None, data=None):
         """
         Refer to FigureFactory.create_gantt() for docstring
         """
@@ -1636,6 +1635,8 @@ class FigureFactory(object):
         if data is None:
             data = []
 
+        #if chart[index_col]
+
         for index in range(len(chart)):
             task = dict(x0=chart[index]['Start'],
                         x1=chart[index]['Finish'],
@@ -1663,18 +1664,25 @@ class FigureFactory(object):
                 tasks[index]['y0'] = index - bar_width
                 tasks[index]['y1'] = index + bar_width
 
-                colors = FigureFactory._unlabel_rgb(colors)
+                # unlabel color
+                colors = FigureFactory._color_parser(
+                    colors, FigureFactory._unlabel_rgb
+                )
                 lowcolor = colors[0]
                 highcolor = colors[1]
 
                 intermed = (chart[index][index_col])/100.0
-                intermed_color = FigureFactory._find_intermediate_color(lowcolor,
-                                                                        highcolor,
-                                                                        intermed)
-                intermed_color = FigureFactory._label_rgb(intermed_color)
+                intermed_color = FigureFactory._find_intermediate_color(
+                    lowcolor, highcolor, intermed
+                )
+                intermed_color = FigureFactory._color_parser(
+                    intermed_color, FigureFactory._label_rgb
+                )
                 tasks[index]['fillcolor'] = intermed_color
                 # relabel colors with 'rgb'
-                colors = FigureFactory._label_rgb(colors)
+                colors = FigureFactory._color_parser(
+                    colors, FigureFactory._label_rgb
+                )
 
                 # add a line for hover text and autorange
                 data.append(
@@ -1798,7 +1806,6 @@ class FigureFactory(object):
         """
         Refer to FigureFactory.create_gantt() for docstring
         """
-        from plotly.graph_objs import graph_objs 
         if tasks is None:
             tasks = []
         if task_names is None:
@@ -1833,10 +1840,10 @@ class FigureFactory(object):
         # verify each value in index column appears in colors dictionary
         for key in index_vals:
             if key not in colors:
-                raise exceptions.PlotlyError("If you are using colors as a "
-                                             "dictionary, all of its keys "
-                                             "must be all the values in the "
-                                             "index column.")
+                raise exceptions.PlotlyError(
+                    "If you are using colors as a dictionary, all of its "
+                    "keys must be all the values in the index column."
+                )
 
         for index in range(len(tasks)):
             tn = tasks[index]['name']
@@ -1858,21 +1865,20 @@ class FigureFactory(object):
                 )
             )
 
-        if show_colorbar is True:
+        #if show_colorbar is True:
         # generate dummy data for colorscale visibility
-            trace2 = dict(
-                #x=[tasks[0]['x0'], tasks[0]['x0']],
-                x=[2, 6],
-                y=[4, 2],
-                name='asdf',
-                visible='legendonly',
-                marker=dict(
-                    size=10,
-                    color='rgb(25, 50, 150)'),
-                showlegend=True
-            )
-
-            data.append(trace2)
+        #    trace2 = dict(
+        #        #x=[tasks[0]['x0'], tasks[0]['x0']],
+        #        x=[2, 6],
+        #        y=[4, 2],
+        #        name='asdf',
+        #        visible='legendonly',
+        #        marker=dict(
+        #            size=10,
+        #            color='rgb(25, 50, 150)'),
+        #        showlegend=True
+        #    )
+        #    data.append(trace2)
 
         layout = dict(
             title=title,
@@ -2049,36 +2055,17 @@ class FigureFactory(object):
         py.iplot(fig, filename='dictioanry colors', world_readable=True)
         ```
         """
-        plotly_scales = {'Greys': ['rgb(0,0,0)', 'rgb(255,255,255)'],
-                         'YlGnBu': ['rgb(8,29,88)', 'rgb(255,255,217)'],
-                         'Greens': ['rgb(0,68,27)', 'rgb(247,252,245)'],
-                         'YlOrRd': ['rgb(128,0,38)', 'rgb(255,255,204)'],
-                         'Bluered': ['rgb(0,0,255)', 'rgb(255,0,0)'],
-                         'RdBu': ['rgb(5,10,172)', 'rgb(178,10,28)'],
-                         'Reds': ['rgb(220,220,220)', 'rgb(178,10,28)'],
-                         'Blues': ['rgb(5,10,172)', 'rgb(220,220,220)'],
-                         'Picnic': ['rgb(0,0,255)', 'rgb(255,0,0)'],
-                         'Rainbow': ['rgb(150,0,90)', 'rgb(255,0,0)'],
-                         'Portland': ['rgb(12,51,131)', 'rgb(217,30,30)'],
-                         'Jet': ['rgb(0,0,131)', 'rgb(128,0,0)'],
-                         'Hot': ['rgb(0,0,0)', 'rgb(255,255,255)'],
-                         'Blackbody': ['rgb(0,0,0)', 'rgb(160,200,255)'],
-                         'Earth': ['rgb(0,0,130)', 'rgb(255,255,255)'],
-                         'Electric': ['rgb(0,0,0)', 'rgb(255,250,220)'],
-                         'Viridis': ['rgb(68,1,84)', 'rgb(253,231,37)']}
-
         # validate gantt input data
         chart = FigureFactory._validate_gantt(df)
 
         if index_col:
             if index_col not in chart[0]:
-                raise exceptions.PlotlyError("In order to use an indexing "
-                                             "column and assign colors to "
-                                             "the values of the index, you "
-                                             "must choose an actual column "
-                                             "name in the dataframe or key "
-                                             "if a list of dictionaries is "
-                                             "being used.")
+                raise exceptions.PlotlyError(
+                    "In order to use an indexing column and assign colors to "
+                    "the values of the index, you must choose an actual "
+                    "column name in the dataframe or key if a list of "
+                    "dictionaries is being used.")
+
             # validate gantt index column
             index_list = []
             for dictionary in chart:
@@ -2086,169 +2073,51 @@ class FigureFactory(object):
             FigureFactory._validate_index(index_list)
 
         # Validate colors
-        if colors is None:
-            colors = DEFAULT_PLOTLY_COLORS
-
-        if isinstance(colors, str):
-            if colors in plotly_scales:
-                colors = plotly_scales[colors]
-
-            elif 'rgb' in colors:
-                colors = FigureFactory._unlabel_rgb(colors)
-                for value in colors:
-                    if value > 255.0:
-                        raise exceptions.PlotlyError("Whoops! The "
-                                                     "elements in your "
-                                                     "rgb colors "
-                                                     "tuples cannot "
-                                                     "exceed 255.0.")
-                colors = FigureFactory._label_rgb(colors)
-
-                # put colors in list
-                colors_list = []
-                colors_list.append(colors)
-                colors = colors_list
-
-            elif '#' in colors:
-                colors = FigureFactory._hex_to_rgb(colors)
-                colors = FigureFactory._label_rgb(colors)
-
-                # put colors in list
-                colors_list = []
-                colors_list.append(colors)
-                colors = colors_list
-
-            else:
-                scale_keys = list(plotly_scales.keys())
-                raise exceptions.PlotlyError("If you input a string "
-                                             "for 'colors', it must "
-                                             "either be a Plotly "
-                                             "colorscale, an 'rgb' "
-                                             "color or a hex color."
-                                             "Valid plotly colorscale "
-                                             "names are {}".format(scale_keys))
-        elif isinstance(colors, tuple):
-            for value in colors:
-                if value > 1.0:
-                    raise exceptions.PlotlyError("Whoops! The "
-                                                 "elements in "
-                                                 "your colors "
-                                                 "tuples cannot "
-                                                 "exceed 1.0.")
-
-            colors_list = []
-            colors_list.append(colors)
-            colors = colors_list
-
-            colors = FigureFactory._convert_to_RGB_255(colors)
-            colors = FigureFactory._label_rgb(colors)
-
-        elif isinstance(colors, list):
-            new_colormap = []
-            for color in colors:
-                if 'rgb' in color:
-                    color = FigureFactory._unlabel_rgb(color)
-
-                    for value in color:
-                        if value > 255.0:
-                            raise exceptions.PlotlyError("Whoops! The "
-                                                         "elements in your "
-                                                         "rgb colors "
-                                                         "tuples cannot "
-                                                         "exceed 255.0.")
-
-                    color = FigureFactory._label_rgb(color)
-                    new_colormap.append(color)
-                elif '#' in color:
-                    color = FigureFactory._hex_to_rgb(color)
-                    color = FigureFactory._label_rgb(color)
-                    new_colormap.append(color)
-                elif isinstance(color, tuple):
-                    for value in color:
-                        if value > 1.0:
-                            raise exceptions.PlotlyError("Whoops! The "
-                                                         "elements in "
-                                                         "your colors "
-                                                         "tuples cannot "
-                                                         "exceed 1.0.")
-                    color = FigureFactory._convert_to_RGB_255(color)
-                    color = FigureFactory._label_rgb(color)
-                    new_colormap.append(color)
-            colors = new_colormap
-
-        elif isinstance(colors, dict):
-            for name in colors:
-                if 'rgb' in colors[name]:
-                    color = FigureFactory._unlabel_rgb(colors[name])
-                    for value in color:
-                        if value > 255.0:
-                            raise exceptions.PlotlyError("Whoops! The "
-                                                         "elements in your "
-                                                         "rgb colors "
-                                                         "tuples cannot "
-                                                         "exceed 255.0.")
-
-                elif '#' in colors[name]:
-                    color = FigureFactory._hex_to_rgb(colors[name])
-                    color = FigureFactory._label_rgb(color)
-                    colors[name] = color
-
-                elif isinstance(colors[name], tuple):
-                    for value in colors[name]:
-                        if value > 1.0:
-                            raise exceptions.PlotlyError("Whoops! The "
-                                                         "elements in "
-                                                         "your colors "
-                                                         "tuples cannot "
-                                                         "exceed 1.0.")
-                    color = FigureFactory._convert_to_RGB_255(colors[name])
-                    color = FigureFactory._label_rgb(color)
-                    colors[name] = color
-
+        if isinstance(colors, dict):
+            colors = FigureFactory._validate_colors_dict(colors, 'rgb')
         else:
-            raise exceptions.PlotlyError("You must input a valid colors. "
-                                         "Valid types include a plotly scale, "
-                                         "rgb, hex or tuple color, a list of "
-                                         "any color types, or a dictionary "
-                                         "with index names each assigned "
-                                         "to a color.")
+            colors = FigureFactory._validate_colors(colors, 'rgb')
 
         if reverse_colors is True:
             colors.reverse()
 
         if not index_col:
             if isinstance(colors, dict):
-                raise exceptions.PlotlyError("Error. You have set colors to "
-                                             "a dictionary but have not "
-                                             "picked an index. An index is "
-                                             "required if you are assigning "
-                                             "colors to particular values "
-                                             "in a dictioanry.")
-
-            fig = FigureFactory._gantt(chart, colors, title, bar_width,
-                                       showgrid_x, showgrid_y, height, width,
-                                       tasks=None, task_names=None, data=None)
+                raise exceptions.PlotlyError(
+                    "Error. You have set colors to a dictionary but have not "
+                    "picked an index. An index is required if you are "
+                    "assigning colors to particular values in a dictioanry."
+                )
+            fig = FigureFactory._gantt(
+                chart, colors, title, bar_width, showgrid_x, showgrid_y,
+                height, width, tasks=None, task_names=None, data=None
+            )
             return fig
-
         else:
             if not isinstance(colors, dict):
-                fig = FigureFactory._gantt_colorscale(chart, colors,
-                                                      title, index_col,
-                                                      show_colorbar,
-                                                      bar_width, showgrid_x,
-                                                      showgrid_y, height,
-                                                      width, tasks=None,
-                                                      task_names=None,
-                                                      data=None)
+                # check that colors has at least 2 colors
+                if len(colors) < 2:
+                    raise exceptions.PlotlyError(
+                        "You must use at least 2 colors in 'colors' if you "
+                        "are using a colorscale. However only the first two "
+                        "colors given will be used for the lower and upper "
+                        "bounds on the colormap."
+                    )
+                fig = FigureFactory._gantt_colorscale(
+                    chart, colors, title, index_col, show_colorbar, bar_width,
+                    showgrid_x, showgrid_y, height, width,
+                    tasks=None, task_names=None, data=None
+                )
                 return fig
             else:
-                fig = FigureFactory._gantt_dict(chart, colors, title,
-                                                index_col, show_colorbar,
-                                                bar_width, showgrid_x,
-                                                showgrid_y, height, width,
-                                                tasks=None, task_names=None,
-                                                data=None)
+                fig = FigureFactory._gantt_dict(
+                    chart, colors, title, index_col, show_colorbar, bar_width,
+                    showgrid_x, showgrid_y, height, width,
+                    tasks=None, task_names=None, data=None
+                )
+                return fig
 
+    @staticmethod
     def _validate_colors(colors, colortype='tuple'):
         """
         Validates color(s) and returns a list of color(s) of a specified type
