@@ -2142,6 +2142,7 @@ class FigureFactory(object):
         group_header = 'Group'
 
         # make groupby object with pandas
+        group_stats = {}
         groupby_data = df.groupby([group_header])
 
         for group in "ABCDE":
