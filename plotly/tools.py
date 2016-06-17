@@ -2093,6 +2093,34 @@ class FigureFactory(object):
         # Plot the data
         py.iplot(fig, filename='dictioanry colors', world_readable=True)
         ```
+
+        Example 5: Use a pandas dataframe
+        ```
+        import plotly.plotly as py
+        from plotly.tools import FigureFactory as FF
+
+        # Make data as a dataframe
+        df = [{'Task': 'Run',
+               'Start': '2010-01-01',
+               'Finish': '2011-02-02',
+               'Complete': 10},
+              {'Task': 'Fast',
+               'Start': '2011-01-01',
+               'Finish': '2012-06-05',
+               'Complete': 55},
+               {'Task': 'Eat',
+                'Start': '2012-01-05',
+                'Finish': '2013-07-05',
+                'Complete': 94}]
+
+        # Create a figure with Plotly colorscale
+        fig = FF.create_gantt(df, colors='Blues', index_col='Complete',
+                              show_colorbar=True, bar_width=0.5,
+                              showgrid_x=True, showgrid_y=True)
+
+        # Plot the data
+        py.iplot(fig, filename='data with dataframe', world_readable=True)
+        ```
         """
         # validate gantt input data
         chart = FigureFactory._validate_gantt(df)

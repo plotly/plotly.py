@@ -1132,15 +1132,15 @@ class TestGantt(TestCase):
 
         # validate the basic gantt inputs
 
-        df = [dict(Task='Job A',
-                   Start='2009-02-01',
-                   Finish='2009-08-30',
-                   Complete='a')]
+        df = [{'Task': 'Job A',
+               'Start': '2009-02-01',
+               'Finish': '2009-08-30',
+               'Complete': 'a'}]
 
-        pattern2 = ("In order to use an indexing column and assign colors to "
-                    "the values of the index, you must choose an actual "
-                    "column name in the dataframe or key if a list of "
-                    "dictionaries is being used.")
+        pattern2 = ('In order to use an indexing column and assign colors to '
+                    'the values of the index, you must choose an actual '
+                    'column name in the dataframe or key if a list of '
+                    'dictionaries is being used.')
 
         self.assertRaisesRegexp(PlotlyError, pattern2,
                                 tls.FigureFactory.create_gantt,
@@ -1148,23 +1148,23 @@ class TestGantt(TestCase):
 
         df = 'foo'
 
-        pattern3 = ("You must input either a dataframe or a list of "
-                    "dictionaries.")
+        pattern3 = ('You must input either a dataframe or a list of '
+                    'dictionaries.')
 
         self.assertRaisesRegexp(PlotlyError, pattern3,
                                 tls.FigureFactory.create_gantt, df)
 
         df = []
 
-        pattern4 = ("Your list is empty. It must contain at least one "
-                    "dictionary.")
+        pattern4 = ('Your list is empty. It must contain at least one '
+                    'dictionary.')
 
         self.assertRaisesRegexp(PlotlyError, pattern4,
                                 tls.FigureFactory.create_gantt, df)
 
         df = ['foo']
 
-        pattern5 = ("Your list must only include dictionaries.")
+        pattern5 = ('Your list must only include dictionaries.')
 
         self.assertRaisesRegexp(PlotlyError, pattern5,
                                 tls.FigureFactory.create_gantt, df)
@@ -1173,27 +1173,27 @@ class TestGantt(TestCase):
 
         # validate the index used for gantt
 
-        df = [dict(Task='Job A',
-                   Start='2009-02-01',
-                   Finish='2009-08-30',
-                   Complete=50)]
+        df = [{'Task': 'Job A',
+               'Start': '2009-02-01',
+               'Finish': '2009-08-30',
+               'Complete': 50}]
 
-        pattern = ("In order to use an indexing column and assign colors to "
-                   "the values of the index, you must choose an actual "
-                   "column name in the dataframe or key if a list of "
-                   "dictionaries is being used.")
+        pattern = ('In order to use an indexing column and assign colors to '
+                   'the values of the index, you must choose an actual '
+                   'column name in the dataframe or key if a list of '
+                   'dictionaries is being used.')
 
         self.assertRaisesRegexp(PlotlyError, pattern,
                                 tls.FigureFactory.create_gantt,
                                 df, index_col='foo')
 
-        df = [dict(Task='Job A', Start='2009-02-01',
-                   Finish='2009-08-30', Complete='a'),
-              dict(Task='Job A', Start='2009-02-01',
-                   Finish='2009-08-30', Complete=50)]
+        df = [{'Task': 'Job A', 'Start': '2009-02-01',
+               'Finish': '2009-08-30', 'Complete': 'a'},
+              {'Task': 'Job A', 'Start': '2009-02-01',
+               'Finish': '2009-08-30', 'Complete': 50}]
 
-        pattern2 = ("Error in indexing column. Make sure all entries of each "
-                    "column are all numbers or all strings.")
+        pattern2 = ('Error in indexing column. Make sure all entries of each '
+                    'column are all numbers or all strings.')
 
         self.assertRaisesRegexp(PlotlyError, pattern2,
                                 tls.FigureFactory.create_gantt,
@@ -1203,13 +1203,13 @@ class TestGantt(TestCase):
 
         # validate the gantt colors variable
 
-        df = [dict(Task='Job A', Start='2009-02-01',
-                   Finish='2009-08-30', Complete=75, Resource='A'),
-              dict(Task='Job B', Start='2009-02-01',
-                   Finish='2009-08-30', Complete=50, Resource='B')]
+        df = [{'Task': 'Job A', 'Start': '2009-02-01',
+               'Finish': '2009-08-30', 'Complete': 75, 'Resource': 'A'},
+              {'Task': 'Job B', 'Start': '2009-02-01',
+               'Finish': '2009-08-30', 'Complete': 50, 'Resource': 'B'}]
 
-        pattern = ("Whoops! The elements in your rgb colors tuples cannot "
-                   "exceed 255.0.")
+        pattern = ('Whoops! The elements in your rgb colors tuples cannot '
+                   'exceed 255.0.')
 
         self.assertRaisesRegexp(PlotlyError, pattern,
                                 tls.FigureFactory.create_gantt, df,
@@ -1218,8 +1218,8 @@ class TestGantt(TestCase):
         self.assertRaises(PlotlyError, tls.FigureFactory.create_gantt,
                           df, index_col='Complete', colors='foo')
 
-        pattern2 = ("Whoops! The elements in your colors tuples cannot "
-                    "exceed 1.0.")
+        pattern2 = ('Whoops! The elements in your colors tuples cannot '
+                    'exceed 1.0.')
 
         self.assertRaisesRegexp(PlotlyError, pattern2,
                                 tls.FigureFactory.create_gantt, df,
@@ -1229,8 +1229,8 @@ class TestGantt(TestCase):
         # values in the index column
         colors_dict = {75: 'rgb(1, 2, 3)'}
 
-        pattern3 = ("If you are using colors as a dictionary, all of its "
-                    "keys must be all the values in the index column.")
+        pattern3 = ('If you are using colors as a dictionary, all of its '
+                    'keys must be all the values in the index column.')
 
         self.assertRaisesRegexp(PlotlyError, pattern3,
                                 tls.FigureFactory.create_gantt, df,
@@ -1239,9 +1239,9 @@ class TestGantt(TestCase):
         # check: index is set if colors is a dictionary
         colors_dict_good = {50: 'rgb(1, 2, 3)', 75: 'rgb(5, 10, 15)'}
 
-        pattern4 = ("Error. You have set colors to a dictionary but have not "
-                    "picked an index. An index is required if you are "
-                    "assigning colors to particular values in a dictioanry.")
+        pattern4 = ('Error. You have set colors to a dictionary but have not '
+                    'picked an index. An index is required if you are '
+                    'assigning colors to particular values in a dictioanry.')
 
         self.assertRaisesRegexp(PlotlyError, pattern4,
                                 tls.FigureFactory.create_gantt, df,
@@ -1272,14 +1272,15 @@ class TestGantt(TestCase):
     def test_gantt_all_args(self):
 
         # check if gantt chart matches with expected output
-        df = [dict(Task="Run",
-                   Start='2010-01-01',
-                   Finish='2011-02-02',
-                   Complete=0),
-              dict(Task="Fast",
-                   Start='2011-01-01',
-                   Finish='2012-06-05',
-                   Complete=25)]
+
+        df = [{'Task': 'Run',
+               'Start': '2010-01-01',
+               'Finish': '2011-02-02',
+               'Complete': 0},
+              {'Task': 'Fast',
+               'Start': '2011-01-01',
+               'Finish': '2012-06-05',
+               'Complete': 25}]
 
         test_gantt_chart = tls.FigureFactory.create_gantt(
             df, colors='Blues', index_col='Complete', reverse_colors=True,
