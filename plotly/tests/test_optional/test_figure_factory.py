@@ -1364,6 +1364,8 @@ class TestGantt(NumpyTestUtilsMixin, TestCase):
         self.assertEqual(test_gantt_chart['layout'],
                          exp_gantt_chart['layout'])
 
+        self.maxDiff = None
+
 
 class TestViolin(NumpyTestUtilsMixin, TestCase):
 
