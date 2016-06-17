@@ -53,6 +53,7 @@ DEFAULT_FILLCOLOR = '#1f77b4'
 DEFAULT_HISTNORM = 'probability density'
 ALTERNATIVE_HISTNORM = 'probability'
 
+
 # Warning format
 def warning_on_one_line(message, category, filename, lineno,
                         file=None, line=None):
@@ -1484,12 +1485,10 @@ class FigureFactory(object):
             # validate that df has all the required keys
             for key in REQUIRED_GANTT_KEYS:
                 if key not in df:
-                    raise exceptions.PlotlyError("The columns in your data"
-                                                 "frame must include the "
-                                                 "keys".format(
-                                                     REQUIRED_GANTT_KEYS
-                                                 )
-                                                 )
+                    raise exceptions.PlotlyError(
+                        "The columns in your dataframe must include the "
+                        "keys".format(REQUIRED_GANTT_KEYS)
+                    )
 
             num_of_rows = len(df.index)
             chart = []
@@ -1634,8 +1633,7 @@ class FigureFactory(object):
             task_names = []
         if data is None:
             data = []
-
-        #if chart[index_col]
+        showlegend = False
 
         for index in range(len(chart)):
             task = dict(x0=chart[index]['Start'],
@@ -1656,6 +1654,14 @@ class FigureFactory(object):
 
         # compute the color for task based on indexing column
         if isinstance(chart[0][index_col], Number):
+            # check that colors has at least 2 colors
+            if len(colors) < 2:
+                raise exceptions.PlotlyError(
+                    "You must use at least 2 colors in 'colors' if you "
+                    "are using a colorscale. However only the first two "
+                    "colors given will be used for the lower and upper "
+                    "bounds on the colormap."
+                )
             for index in range(len(tasks)):
                 tn = tasks[index]['name']
                 task_names.append(tn)
@@ -1693,6 +1699,22 @@ class FigureFactory(object):
                         marker={'color': 'white'}
                     )
                 )
+
+            if show_colorbar is True:
+            # generate dummy data for colorscale visibility
+                data.append(
+                    dict(
+                        x=[tasks[index]['x0'], tasks[index]['x0']],
+                        y=[index, index],
+                        name='',
+                        marker={'color': 'white',
+                                'colorscale': [[0, colors[0]], [1, colors[1]]],
+                                'showscale': True,
+                                'cmax': 100,
+                                'cmin': 0}
+                    )
+                )
+
         if isinstance(chart[0][index_col], str):
             index_vals = []
             for row in range(len(tasks)):
@@ -1700,6 +1722,13 @@ class FigureFactory(object):
                     index_vals.append(chart[row][index_col])
 
             index_vals.sort()
+
+            if len(colors) < len(index_vals):
+                raise exceptions.PlotlyError(
+                    "Error. The number of colors in 'colors' must be no less "
+                    "than the number of unique index values in your group "
+                    "column."
+                )
 
             # make a dictionary assignment to each index value
             index_vals_dict = {}
@@ -1733,24 +1762,27 @@ class FigureFactory(object):
                     )
                 )
 
-        if show_colorbar is True:
-        # generate dummy data for colorscale visibility
-            data.append(
-                dict(
-                    x=[tasks[index]['x0'], tasks[index]['x0']],
-                    y=[index, index],
-                    name='',
-                    marker={'color': 'white',
-                            'colorscale': [[0, colors[0]], [1, colors[1]]],
-                            'showscale': True,
-                            'cmax': 100,
-                            'cmin': 0}
-                )
-            )
+            if show_colorbar is True:
+            # generate dummy data to generate legend
+                showlegend = True
+                for k, index_value in enumerate(index_vals):
+                    data.append(
+                        dict(
+                            x=[tasks[index]['x0'], tasks[index]['x0']],
+                            y=[k, k],
+                            showlegend=True,
+                            name=str(index_value),
+                            hoverinfo='none',
+                            marker=dict(
+                                color=colors[k],
+                                size=1
+                            )
+                        )
+                    )
 
         layout = dict(
             title=title,
-            showlegend=False,
+            showlegend=showlegend,
             height=height,
             width=width,
             shapes=[],
@@ -1812,6 +1844,7 @@ class FigureFactory(object):
             task_names = []
         if data is None:
             data = []
+        showlegend = False
 
         for index in range(len(chart)):
             task = dict(x0=chart[index]['Start'],
@@ -1865,24 +1898,27 @@ class FigureFactory(object):
                 )
             )
 
-        #if show_colorbar is True:
-        # generate dummy data for colorscale visibility
-        #    trace2 = dict(
-        #        #x=[tasks[0]['x0'], tasks[0]['x0']],
-        #        x=[2, 6],
-        #        y=[4, 2],
-        #        name='asdf',
-        #        visible='legendonly',
-        #        marker=dict(
-        #            size=10,
-        #            color='rgb(25, 50, 150)'),
-        #        showlegend=True
-        #    )
-        #    data.append(trace2)
+        if show_colorbar is True:
+        # generate dummy data to generate legend
+            showlegend = True
+            for k, index_value in enumerate(index_vals):
+                data.append(
+                    dict(
+                        x=[tasks[index]['x0'], tasks[index]['x0']],
+                        y=[k, k],
+                        showlegend=True,
+                        hoverinfo='none',
+                        name=str(index_value),
+                        marker=dict(
+                            color=colors[index_value],
+                            size=1
+                        )
+                    )
+                )
 
         layout = dict(
             title=title,
-            showlegend=False,
+            showlegend=showlegend,
             height=height,
             width=width,
             shapes=[],
@@ -1946,9 +1982,9 @@ class FigureFactory(object):
             used for indexing. If a list, its elements must be dictionaries
             with the same required column headers: 'Task', 'Start' and
             'Finish'.
-        :param (str|list|dict) colors: either a plotly scale name, an rgb
-            or hex color, a color tuple or a list of colors. An rgb color is
-            of the form 'rgb(x, y, z)' where x, y, z belong to the interval
+        :param (str|list|dict|tuple) colors: either a plotly scale name, an
+            rgb or hex color, a color tuple or a list of colors. An rgb color
+            is of the form 'rgb(x, y, z)' where x, y, z belong to the interval
             [0, 255] and a color tuple is a tuple of the form (a, b, c) where
             a, b and c belong to [0, 1]. If colors is a list, it must
             contain the valid color types aforementioned as its members.
@@ -2024,7 +2060,8 @@ class FigureFactory(object):
                                           (1, 0, 1),
                                           '#6c4774'],
                               index_col='Resource',
-                              reverse_colors=True)
+                              reverse_colors=True,
+                              show_colorbar=True)
 
         # Plot the data
         py.iplot(fig, filename='String Entries', world_readable=True)
@@ -2049,7 +2086,9 @@ class FigureFactory(object):
                   'Banana': (1, 1, 0.2)}
 
         # Create a figure with Plotly colorscale
-        fig = FF.create_gantt(df, colors=colors, index_col='Resource')
+        fig = FF.create_gantt(df, colors=colors,
+                              index_col='Resource',
+                              show_colorbar=True)
 
         # Plot the data
         py.iplot(fig, filename='dictioanry colors', world_readable=True)
@@ -2095,14 +2134,6 @@ class FigureFactory(object):
             return fig
         else:
             if not isinstance(colors, dict):
-                # check that colors has at least 2 colors
-                if len(colors) < 2:
-                    raise exceptions.PlotlyError(
-                        "You must use at least 2 colors in 'colors' if you "
-                        "are using a colorscale. However only the first two "
-                        "colors given will be used for the lower and upper "
-                        "bounds on the colormap."
-                    )
                 fig = FigureFactory._gantt_colorscale(
                     chart, colors, title, index_col, show_colorbar, bar_width,
                     showgrid_x, showgrid_y, height, width,

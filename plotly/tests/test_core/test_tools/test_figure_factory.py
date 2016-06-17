@@ -1204,9 +1204,9 @@ class TestGantt(TestCase):
         # validate the gantt colors variable
 
         df = [dict(Task='Job A', Start='2009-02-01',
-                   Finish='2009-08-30', Complete=75),
+                   Finish='2009-08-30', Complete=75, Resource='A'),
               dict(Task='Job B', Start='2009-02-01',
-                   Finish='2009-08-30', Complete=50)]
+                   Finish='2009-08-30', Complete=50, Resource='B')]
 
         pattern = ("Whoops! The elements in your rgb colors tuples cannot "
                    "exceed 255.0.")
@@ -1225,41 +1225,53 @@ class TestGantt(TestCase):
                                 tls.FigureFactory.create_gantt, df,
                                 index_col='Complete', colors=(2, 1, 1))
 
-        pattern3 = ("You must input a valid colors. Valid types include a "
-                    "plotly scale, rgb, hex or tuple color, a list of any "
-                    "color types, or a dictionary with index names each "
-                    "assigned to a color.")
-
-        self.assertRaisesRegexp(PlotlyError, pattern3,
-                                tls.FigureFactory.create_gantt, df,
-                                index_col='Complete', colors=5)
-
         # verify that if colors is a dictionary, its keys span all the
         # values in the index column
         colors_dict = {75: 'rgb(1, 2, 3)'}
 
-        pattern4 = ("If you are using colors as a dictionary, all of its "
+        pattern3 = ("If you are using colors as a dictionary, all of its "
                     "keys must be all the values in the index column.")
 
-        self.assertRaisesRegexp(PlotlyError, pattern4,
+        self.assertRaisesRegexp(PlotlyError, pattern3,
                                 tls.FigureFactory.create_gantt, df,
                                 index_col='Complete', colors=colors_dict)
 
         # check: index is set if colors is a dictionary
         colors_dict_good = {50: 'rgb(1, 2, 3)', 75: 'rgb(5, 10, 15)'}
 
-        pattern5 = ("Error. You have set colors to a dictionary but have not "
+        pattern4 = ("Error. You have set colors to a dictionary but have not "
                     "picked an index. An index is required if you are "
                     "assigning colors to particular values in a dictioanry.")
 
-        self.assertRaisesRegexp(PlotlyError, pattern5,
+        self.assertRaisesRegexp(PlotlyError, pattern4,
                                 tls.FigureFactory.create_gantt, df,
                                 colors=colors_dict_good)
+
+        # check: number of colors is equal to or greater than number of
+        # unique index string values
+        pattern5 = ("Error. The number of colors in 'colors' must be no less "
+                    "than the number of unique index values in your group "
+                    "column.")
+
+        self.assertRaisesRegexp(PlotlyError, pattern5,
+                                tls.FigureFactory.create_gantt, df,
+                                index_col='Resource',
+                                colors=['#ffffff'])
+
+        # check: if index is numeric, colors has at least 2 colors in it
+        pattern6 = ("You must use at least 2 colors in 'colors' if you "
+                    "are using a colorscale. However only the first two "
+                    "colors given will be used for the lower and upper "
+                    "bounds on the colormap.")
+
+        self.assertRaisesRegexp(PlotlyError, pattern6,
+                                tls.FigureFactory.create_gantt, df,
+                                index_col='Complete',
+                                colors=['#ffffff'])
 
     def test_gantt_all_args(self):
 
         # check if gantt chart matches with expected output
-
         df = [dict(Task="Run",
                    Start='2010-01-01',
                    Finish='2011-02-02',
