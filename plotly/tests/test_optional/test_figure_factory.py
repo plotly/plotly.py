@@ -1267,6 +1267,85 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
                                exp_scatter_plot_matrix['layout'])
 
 
+class TestGantt(NumpyTestUtilsMixin, TestCase):
+
+    def test_df_dataframe(self):
+
+        # validate dataframe has correct column names
+        df1 = pd.DataFrame([[2, 'Apple']], columns=['Numbers', 'Fruit'])
+        self.assertRaises(PlotlyError, tls.FigureFactory.create_gantt, df1)
+
+    def test_df_dataframe_all_args(self):
+
+        # check if gantt chart matches with expected output
+
+        df = pd.DataFrame([['Job A', '2009-01-01', '2009-02-30'],
+                           ['Job B', '2009-03-05', '2009-04-15']],
+                          columns=['Task', 'Start', 'Finish'])
+
+        test_gantt_chart = tls.FigureFactory.create_gantt(df)
+
+        exp_gantt_chart = {
+            'data': [{'marker': {'color': 'white'},
+                      'name': '',
+                      'x': ['2009-01-01', '2009-02-30'],
+                      'y': [0, 0]}],
+            'layout': {'height': 600,
+                       'hovermode': 'closest',
+                       'shapes': [{'opacity': 1,
+                                   'y1': 0.2,
+                                   'xref': 'x',
+                                   'fillcolor': 'rgb(31.0, 119.0, 180.0)',
+                                   'yref': 'y',
+                                   'y0': -0.2,
+                                   'x0': '2009-01-01',
+                                   'x1': '2009-02-30',
+                                   'type': 'rect',
+                                   'line': {'width': 0}},
+                                  {'opacity': 1,
+                                   'y1': 1.2,
+                                   'xref': 'x',
+                                   'fillcolor': 'rgb(255.0, 127.0, 14.0)',
+                                   'yref': 'y',
+                                   'y0': 0.8,
+                                   'x0': '2009-03-05',
+                                   'x1': '2009-04-15',
+                                   'type': 'rect',
+                                   'line': {'width': 0}}],
+                       'showlegend': False,
+                       'title': 'Gantt Chart',
+                       'width': 900,
+                       'xaxis': {'rangeselector': {'buttons': [
+                           {'count': 7, 'label': '1w',
+                            'step': 'day', 'stepmode': 'backward'},
+                           {'count': 1, 'label': '1m',
+                            'step': 'month', 'stepmode': 'backward'},
+                           {'count': 6, 'label': '6m',
+                            'step': 'month', 'stepmode': 'backward'},
+                           {'count': 1, 'label': 'YTD',
+                            'step': 'year', 'stepmode': 'todate'},
+                           {'count': 1, 'label': '1y',
+                            'step': 'year', 'stepmode': 'backward'},
+                           {'step': 'all'}
+                           ]},
+                           'showgrid': False,
+                           'type': 'date',
+                           'zeroline': False},
+                       'yaxis': {'autorange': False,
+                                 'range': [-1, 3],
+                                 'showgrid': False,
+                                 'ticktext': ['Job A', 'Job B'],
+                                 'tickvals': [0, 1],
+                                 'zeroline': False}}
+        }
+
+        self.assertEqual(test_gantt_chart['data'][0],
+                         exp_gantt_chart['data'][0])
+
+        self.assert_dict_equal(test_gantt_chart['layout'],
+                               exp_gantt_chart['layout'])
+
+
 class TestViolin(NumpyTestUtilsMixin, TestCase):
 
     def test_colors_validation(self):
