@@ -1283,9 +1283,7 @@ class TestGantt(NumpyTestUtilsMixin, TestCase):
                            ['Job B', '2009-03-05', '2009-04-15']],
                           columns=['Task', 'Start', 'Finish'])
 
-        test_gantt_chart = tls.FigureFactory.create_gantt(
-            df, colors='Blues'
-        )
+        test_gantt_chart = tls.FigureFactory.create_gantt(df)
 
         exp_gantt_chart = {
 
@@ -1331,15 +1329,6 @@ class TestGantt(NumpyTestUtilsMixin, TestCase):
 
         self.assertEqual(test_gantt_chart['data'][0],
                          exp_gantt_chart['data'][0])
-
-        self.assertEqual(test_gantt_chart['data'][1],
-                         exp_gantt_chart['data'][1])
-
-        #self.assert_dict_equal(test_gantt_chart['layout']['shapes'][0],
-        #                       exp_gantt_chart['layout']['shapes'][0])
-
-        #self.assert_dict_equal(test_gantt_chart['layout']['shapes'][1],
-        #                       exp_gantt_chart['layout']['shapes'][1])
 
         self.assert_dict_equal(test_gantt_chart['layout'],
                                exp_gantt_chart['layout'])
