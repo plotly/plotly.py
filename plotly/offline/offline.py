@@ -176,11 +176,11 @@ def _plot_html(figure_or_data, show_link, link_text, validate,
         width = str(width) + 'px'
 
     try:
-        float(width)
+        float(height)
     except (ValueError, TypeError):
         pass
     else:
-        width = str(width) + 'px'
+        height = str(height) + 'px'
 
     plotdivid = uuid.uuid4()
     jdata = json.dumps(figure.get('data', []), cls=utils.PlotlyJSONEncoder)
@@ -202,6 +202,7 @@ def _plot_html(figure_or_data, show_link, link_text, validate,
             .replace('https://', '')\
             .replace('http://', '')
         link_text = link_text.replace('plot.ly', link_domain)
+        config['linkText'] = link_text
 
     script = 'Plotly.newPlot("{id}", {data}, {layout}, {config})'.format(
         id=plotdivid,
