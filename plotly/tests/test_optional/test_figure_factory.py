@@ -1292,14 +1292,10 @@ class TestGantt(NumpyTestUtilsMixin, TestCase):
             'data': [{'marker': {'color': 'white'},
                'name': '',
                'x': ['2009-01-01', '2009-02-30'],
-               'y': [0, 0]},
-              {'marker': {'color': 'white'},
-               'name': '',
-               'x': ['2009-03-05', '2009-04-15'],
-               'y': [1, 1]}],
+               'y': [0, 0]}],
              'layout': {'height': 600,
               'hovermode': 'closest',
-              'shapes': [{'fillcolor': 'rgb(5.0, 10.0, 172.0)',
+              'shapes': [{'fillcolor': 'rgb(31.0, 119.0, 180.0)',
                 'line': {'width': 0},
                 'opacity': 1,
                 'type': 'rect',
@@ -1308,16 +1304,6 @@ class TestGantt(NumpyTestUtilsMixin, TestCase):
                 'xref': 'x',
                 'y0': -0.2,
                 'y1': 0.2,
-                'yref': 'y'},
-               {'fillcolor': 'rgb(220.0, 220.0, 220.0)',
-                'line': {'width': 0},
-                'opacity': 1,
-                'type': 'rect',
-                'x0': '2009-03-05',
-                'x1': '2009-04-15',
-                'xref': 'x',
-                'y0': 0.8,
-                'y1': 1.2,
                 'yref': 'y'}],
               'showlegend': False,
               'title': 'Gantt Chart',
@@ -1335,11 +1321,12 @@ class TestGantt(NumpyTestUtilsMixin, TestCase):
                'type': 'date',
                'zeroline': False},
               'yaxis': {'autorange': False,
-               'range': [-1, 3],
+               'range': [-1, 2],
                'showgrid': False,
-               'ticktext': ['Job A', 'Job B'],
-               'tickvals': [0, 1],
+               'ticktext': ['Job A'],
+               'tickvals': [0],
                'zeroline': False}}
+
         }
 
         self.assertEqual(test_gantt_chart['data'][0],
@@ -1354,8 +1341,8 @@ class TestGantt(NumpyTestUtilsMixin, TestCase):
         #self.assert_dict_equal(test_gantt_chart['layout']['shapes'][1],
         #                       exp_gantt_chart['layout']['shapes'][1])
 
-        #self.assert_dict_equal(test_gantt_chart['layout'],
-        #                       exp_gantt_chart['layout'])
+        self.assert_dict_equal(test_gantt_chart['layout'],
+                               exp_gantt_chart['layout'])
 
 
 class TestViolin(NumpyTestUtilsMixin, TestCase):
