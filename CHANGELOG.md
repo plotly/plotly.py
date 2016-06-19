@@ -9,6 +9,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 import plotly.tools as tls
 help(tls.FigureFactory.create_gantt)
 ```
+- Ability to download images in offline mode. By providing an extra keyword `image` to the existing plot calls, you can now download the images of the plots youmake in offline mode.
+
 
 ## [1.12.1] - 2016-06-19
 ### Added
