@@ -2,7 +2,15 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [1.12.2] - 2016-06-19
+### Added
+- The FigureFactory can now create gantt charts with `.create_gantt`. Check it out with:
+```
+import plotly.tools as tls
+help(tls.FigureFactory.create_gantt)
+```
+
+## [1.12.1] - 2016-06-19
 ### Added
 - The FigureFactory can now create violin plots with `.create_violin`. Check it out with:
 ```
