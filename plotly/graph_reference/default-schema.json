@@ -1699,7 +1699,7 @@
                         "valType": "string"
                     },
                     "ticktext": {
-                        "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
+                        "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `tickvals`.",
                         "role": "data",
                         "valType": "data_array"
                     },
@@ -2104,7 +2104,7 @@
                         "valType": "string"
                     },
                     "ticktext": {
-                        "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
+                        "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `tickvals`.",
                         "role": "data",
                         "valType": "data_array"
                     },
@@ -2509,7 +2509,7 @@
                         "valType": "string"
                     },
                     "ticktext": {
-                        "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
+                        "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `tickvals`.",
                         "role": "data",
                         "valType": "data_array"
                     },
@@ -2940,7 +2940,7 @@
                         "valType": "string"
                     },
                     "ticktext": {
-                        "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
+                        "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `tickvals`.",
                         "role": "data",
                         "valType": "data_array"
                     },
@@ -3204,7 +3204,7 @@
                         "valType": "string"
                     },
                     "ticktext": {
-                        "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
+                        "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `tickvals`.",
                         "role": "data",
                         "valType": "data_array"
                     },
@@ -3474,7 +3474,7 @@
                         "valType": "string"
                     },
                     "ticktext": {
-                        "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
+                        "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `tickvals`.",
                         "role": "data",
                         "valType": "data_array"
                     },
@@ -4141,7 +4141,7 @@
                     "valType": "string"
                 },
                 "ticktext": {
-                    "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
+                    "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `tickvals`.",
                     "role": "data",
                     "valType": "data_array"
                 },
@@ -4751,7 +4751,7 @@
                     "valType": "string"
                 },
                 "ticktext": {
-                    "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
+                    "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `tickvals`.",
                     "role": "data",
                     "valType": "data_array"
                 },
@@ -5537,7 +5537,7 @@
                     "cauto": {
                         "description": "Has an effect only if `marker.color` is set to a numerical array. Determines the whether or not the color domain is computed automatically.",
                         "dflt": true,
-                        "role": "style",
+                        "role": "info",
                         "valType": "boolean"
                     },
                     "cmax": {
@@ -5780,7 +5780,7 @@
                             "valType": "string"
                         },
                         "ticktext": {
-                            "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
+                            "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `tickvals`.",
                             "role": "data",
                             "valType": "data_array"
                         },
@@ -5908,15 +5908,15 @@
                     },
                     "line": {
                         "autocolorscale": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines whether or not the colorscale is picked using the sign of values inside `marker.line.color`.",
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines whether or not the colorscale is picked using values inside `marker.line.color`.",
                             "dflt": true,
                             "role": "style",
                             "valType": "boolean"
                         },
                         "cauto": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines the whether or not the color domain is computed with respect to the input data.",
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines the whether or not the color domain is computed automatically.",
                             "dflt": true,
-                            "role": "style",
+                            "role": "info",
                             "valType": "boolean"
                         },
                         "cmax": {
@@ -5933,7 +5933,7 @@
                         },
                         "color": {
                             "arrayOk": true,
-                            "description": "Sets the marker outline color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
+                            "description": "Sets the marker.line color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                             "role": "style",
                             "valType": "color"
                         },
@@ -6246,7 +6246,7 @@
                     "line": {
                         "color": {
                             "arrayOk": false,
-                            "description": "Sets the marker outline color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
+                            "description": "Sets the marker.line color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                             "dflt": "#444",
                             "role": "style",
                             "valType": "color"
@@ -6970,7 +6970,7 @@
                         "valType": "string"
                     },
                     "ticktext": {
-                        "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
+                        "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `tickvals`.",
                         "role": "data",
                         "valType": "data_array"
                     },
@@ -7144,7 +7144,7 @@
                     "line": {
                         "color": {
                             "arrayOk": true,
-                            "description": "Sets the marker outline color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
+                            "description": "Sets the marker.line color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                             "role": "style",
                             "valType": "color"
                         },
@@ -7283,7 +7283,7 @@
                     "valType": "boolean"
                 },
                 "autocontour": {
-                    "description": "Determines whether of not the contour level attributes at picked by an algorithm. If *true*, the number of contour levels can be set in `ncontours`. If *false*, set the contour level attributes in `contours`.",
+                    "description": "Determines whether or not the contour level attributes are picked by an algorithm. If *true*, the number of contour levels can be set in `ncontours`. If *false*, set the contour level attributes in `contours`.",
                     "dflt": true,
                     "role": "style",
                     "valType": "boolean"
@@ -7510,7 +7510,7 @@
                         "valType": "string"
                     },
                     "ticktext": {
-                        "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
+                        "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `tickvals`.",
                         "role": "data",
                         "valType": "data_array"
                     },
@@ -7639,7 +7639,7 @@
                 },
                 "contours": {
                     "coloring": {
-                        "description": "Determines the coloring method showing the contour values. If *fill*, coloring is done evenly between each contour level If *heatmap*, a heatmap gradient is coloring is applied between each contour level. If *lines*, coloring is done on the contour lines. If *none*, no coloring is applied on this trace.",
+                        "description": "Determines the coloring method showing the contour values. If *fill*, coloring is done evenly between each contour level If *heatmap*, a heatmap gradient coloring is applied between each contour level. If *lines*, coloring is done on the contour lines. If *none*, no coloring is applied on this trace.",
                         "dflt": "fill",
                         "role": "style",
                         "valType": "enumerated",
@@ -7754,7 +7754,7 @@
                     "valType": "string"
                 },
                 "ncontours": {
-                    "description": "Sets the number of contour levels.",
+                    "description": "Sets the number of contour levels. Has an effect only if `autocontour` is *true*.",
                     "dflt": 0,
                     "role": "style",
                     "valType": "integer"
@@ -8157,7 +8157,7 @@
                         "valType": "string"
                     },
                     "ticktext": {
-                        "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
+                        "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `tickvals`.",
                         "role": "data",
                         "valType": "data_array"
                     },
@@ -8517,13 +8517,13 @@
                     }
                 },
                 "autobinx": {
-                    "description": "Determines whether or not the x axis bin attributes are picked by an algorithm.",
+                    "description": "Determines whether or not the x axis bin attributes are picked by an algorithm. Note that this should be set to false if you want to manually set the number of bins using the attributes in xbins.",
                     "dflt": true,
                     "role": "style",
                     "valType": "boolean"
                 },
                 "autobiny": {
-                    "description": "Determines whether or not the y axis bin attributes are picked by an algorithm.",
+                    "description": "Determines whether or not the y axis bin attributes are picked by an algorithm. Note that this should be set to false if you want to manually set the number of bins using the attributes in ybins.",
                     "dflt": true,
                     "role": "style",
                     "valType": "boolean"
@@ -8793,7 +8793,7 @@
                     "cauto": {
                         "description": "Has an effect only if `marker.color` is set to a numerical array. Determines the whether or not the color domain is computed automatically.",
                         "dflt": true,
-                        "role": "style",
+                        "role": "info",
                         "valType": "boolean"
                     },
                     "cmax": {
@@ -9036,7 +9036,7 @@
                             "valType": "string"
                         },
                         "ticktext": {
-                            "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
+                            "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `tickvals`.",
                             "role": "data",
                             "valType": "data_array"
                         },
@@ -9164,15 +9164,15 @@
                     },
                     "line": {
                         "autocolorscale": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines whether or not the colorscale is picked using the sign of values inside `marker.line.color`.",
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines whether or not the colorscale is picked using values inside `marker.line.color`.",
                             "dflt": true,
                             "role": "style",
                             "valType": "boolean"
                         },
                         "cauto": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines the whether or not the color domain is computed with respect to the input data.",
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines the whether or not the color domain is computed automatically.",
                             "dflt": true,
-                            "role": "style",
+                            "role": "info",
                             "valType": "boolean"
                         },
                         "cmax": {
@@ -9189,7 +9189,7 @@
                         },
                         "color": {
                             "arrayOk": true,
-                            "description": "Sets the marker outline color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
+                            "description": "Sets the marker.line color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                             "role": "style",
                             "valType": "color"
                         },
@@ -9244,14 +9244,14 @@
                     "valType": "string"
                 },
                 "nbinsx": {
-                    "description": "Sets the number of x axis bins.",
+                    "description": "Specifies the maximum number of desired bins. This value will be used in an algorithm that will decide the optimal bin size such that the histogram best visualizes the distribution of the data.",
                     "dflt": 0,
                     "min": 0,
                     "role": "style",
                     "valType": "integer"
                 },
                 "nbinsy": {
-                    "description": "Sets the number of y axis bins.",
+                    "description": "Specifies the maximum number of desired bins. This value will be used in an algorithm that will decide the optimal bin size such that the histogram best visualizes the distribution of the data.",
                     "dflt": 0,
                     "min": 0,
                     "role": "style",
@@ -9445,13 +9445,13 @@
         "histogram2d": {
             "attributes": {
                 "autobinx": {
-                    "description": "Determines whether or not the x axis bin attributes are picked by an algorithm.",
+                    "description": "Determines whether or not the x axis bin attributes are picked by an algorithm. Note that this should be set to false if you want to manually set the number of bins using the attributes in xbins.",
                     "dflt": true,
                     "role": "style",
                     "valType": "boolean"
                 },
                 "autobiny": {
-                    "description": "Determines whether or not the y axis bin attributes are picked by an algorithm.",
+                    "description": "Determines whether or not the y axis bin attributes are picked by an algorithm. Note that this should be set to false if you want to manually set the number of bins using the attributes in ybins.",
                     "dflt": true,
                     "role": "style",
                     "valType": "boolean"
@@ -9684,7 +9684,7 @@
                         "valType": "string"
                     },
                     "ticktext": {
-                        "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
+                        "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `tickvals`.",
                         "role": "data",
                         "valType": "data_array"
                     },
@@ -9873,14 +9873,14 @@
                     "valType": "string"
                 },
                 "nbinsx": {
-                    "description": "Sets the number of x axis bins.",
+                    "description": "Specifies the maximum number of desired bins. This value will be used in an algorithm that will decide the optimal bin size such that the histogram best visualizes the distribution of the data.",
                     "dflt": 0,
                     "min": 0,
                     "role": "style",
                     "valType": "integer"
                 },
                 "nbinsy": {
-                    "description": "Sets the number of y axis bins.",
+                    "description": "Specifies the maximum number of desired bins. This value will be used in an algorithm that will decide the optimal bin size such that the histogram best visualizes the distribution of the data.",
                     "dflt": 0,
                     "min": 0,
                     "role": "style",
@@ -10065,25 +10065,25 @@
         "histogram2dcontour": {
             "attributes": {
                 "autobinx": {
-                    "description": "Determines whether or not the x axis bin attributes are picked by an algorithm.",
+                    "description": "Determines whether or not the x axis bin attributes are picked by an algorithm. Note that this should be set to false if you want to manually set the number of bins using the attributes in xbins.",
                     "dflt": true,
                     "role": "style",
                     "valType": "boolean"
                 },
                 "autobiny": {
-                    "description": "Determines whether or not the y axis bin attributes are picked by an algorithm.",
+                    "description": "Determines whether or not the y axis bin attributes are picked by an algorithm. Note that this should be set to false if you want to manually set the number of bins using the attributes in ybins.",
                     "dflt": true,
                     "role": "style",
                     "valType": "boolean"
                 },
                 "autocolorscale": {
                     "description": "Determines whether or not the colorscale is picked using the sign of the input z values.",
-                    "dflt": false,
+                    "dflt": true,
                     "role": "style",
                     "valType": "boolean"
                 },
                 "autocontour": {
-                    "description": "Determines whether of not the contour level attributes at picked by an algorithm. If *true*, the number of contour levels can be set in `ncontours`. If *false*, set the contour level attributes in `contours`.",
+                    "description": "Determines whether or not the contour level attributes are picked by an algorithm. If *true*, the number of contour levels can be set in `ncontours`. If *false*, set the contour level attributes in `contours`.",
                     "dflt": true,
                     "role": "style",
                     "valType": "boolean"
@@ -10310,7 +10310,7 @@
                         "valType": "string"
                     },
                     "ticktext": {
-                        "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
+                        "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `tickvals`.",
                         "role": "data",
                         "valType": "data_array"
                     },
@@ -10433,7 +10433,7 @@
                 },
                 "contours": {
                     "coloring": {
-                        "description": "Determines the coloring method showing the contour values. If *fill*, coloring is done evenly between each contour level If *heatmap*, a heatmap gradient is coloring is applied between each contour level. If *lines*, coloring is done on the contour lines. If *none*, no coloring is applied on this trace.",
+                        "description": "Determines the coloring method showing the contour values. If *fill*, coloring is done evenly between each contour level If *heatmap*, a heatmap gradient coloring is applied between each contour level. If *lines*, coloring is done on the contour lines. If *none*, no coloring is applied on this trace.",
                         "dflt": "fill",
                         "role": "style",
                         "valType": "enumerated",
@@ -10575,21 +10575,21 @@
                     "valType": "string"
                 },
                 "nbinsx": {
-                    "description": "Sets the number of x axis bins.",
+                    "description": "Specifies the maximum number of desired bins. This value will be used in an algorithm that will decide the optimal bin size such that the histogram best visualizes the distribution of the data.",
                     "dflt": 0,
                     "min": 0,
                     "role": "style",
                     "valType": "integer"
                 },
                 "nbinsy": {
-                    "description": "Sets the number of y axis bins.",
+                    "description": "Specifies the maximum number of desired bins. This value will be used in an algorithm that will decide the optimal bin size such that the histogram best visualizes the distribution of the data.",
                     "dflt": 0,
                     "min": 0,
                     "role": "style",
                     "valType": "integer"
                 },
                 "ncontours": {
-                    "description": "Sets the number of contour levels.",
+                    "description": "Sets the number of contour levels. Has an effect only if `autocontour` is *true*.",
                     "dflt": 0,
                     "role": "style",
                     "valType": "integer"
@@ -10762,7 +10762,7 @@
         "mesh3d": {
             "attributes": {
                 "alphahull": {
-                    "description": "Sets the shape of the mesh If *-1*, Delaunay triangulation is used If *>0*, the alpha-shape algorithm is used If *0*,  the convex-hull algorithm is used An alternative to the `i`, `j`, `k` indices triplets.",
+                    "description": "Determines how the mesh surface triangles are derived from the set of vertices (points) represented by the `x`, `y` and `z` arrays, if the `i`, `j`, `k` arrays are not supplied. For general use of `mesh3d` it is preferred that `i`, `j`, `k` are supplied. If *-1*, Delaunay triangulation is used, which is mainly suitable if the mesh is a single, more or less layer surface that is perpendicular to `delaunayaxis`. In case the `delaunayaxis` intersects the mesh surface at more than one point it will result triangles that are very long in the dimension of `delaunayaxis`. If *>0*, the alpha-shape algorithm is used. In this case, the positive `alphahull` value signals the use of the alpha-shape algorithm, _and_ its value acts as the parameter for the mesh fitting. If *0*,  the convex-hull algorithm is used. It is suitable for convex bodies or if the intention is to enclose the `x`, `y` and `z` point set into a convex hull.",
                     "dflt": -1,
                     "role": "style",
                     "valType": "number"
@@ -10994,7 +10994,7 @@
                         "valType": "string"
                     },
                     "ticktext": {
-                        "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
+                        "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `tickvals`.",
                         "role": "data",
                         "valType": "data_array"
                     },
@@ -11139,7 +11139,7 @@
                     }
                 },
                 "delaunayaxis": {
-                    "description": "Sets the Delaunay axis from which the triangulation of the mesh takes place. An alternative to setting the `i`, `j`, `k` indices triplets.",
+                    "description": "Sets the Delaunay axis, which is the axis that is perpendicular to the surface of the Delaunay triangulation. It has an effect if `i`, `j`, `k` are not provided and `alphahull` is set to indicate Delaunay triangulation.",
                     "dflt": "z",
                     "role": "info",
                     "valType": "enumerated",
@@ -11160,7 +11160,7 @@
                     "valType": "string"
                 },
                 "flatshading": {
-                    "description": "Determines whether or not normal smoothing is applied to the meshes, creating meshes with a low-poly look.",
+                    "description": "Determines whether or not normal smoothing is applied to the meshes, creating meshes with an angular, low-poly look via flat reflections.",
                     "dflt": false,
                     "role": "style",
                     "valType": "boolean"
@@ -11183,7 +11183,7 @@
                     "valType": "flaglist"
                 },
                 "i": {
-                    "description": "Sets the indices of x coordinates of the vertices",
+                    "description": "A vector of vertex indices, i.e. integer values between 0 and the length of the vertex vectors, representing the *first* vertex of a triangle. For example, `{i[m], j[m], k[m]}` together represent face m (triangle m) in the mesh, where `i[m] = n` points to the triplet `{x[n], y[n], z[n]}` in the vertex arrays. Therefore, each element in `i` represents a point in space, which is the first vertex of a triangle.",
                     "role": "data",
                     "valType": "data_array"
                 },
@@ -11203,7 +11203,7 @@
                     "valType": "string"
                 },
                 "j": {
-                    "description": "Sets the indices of y coordinates of the vertices",
+                    "description": "A vector of vertex indices, i.e. integer values between 0 and the length of the vertex vectors, representing the *second* vertex of a triangle. For example, `{i[m], j[m], k[m]}`  together represent face m (triangle m) in the mesh, where `j[m] = n` points to the triplet `{x[n], y[n], z[n]}` in the vertex arrays. Therefore, each element in `j` represents a point in space, which is the second vertex of a triangle.",
                     "role": "data",
                     "valType": "data_array"
                 },
@@ -11213,7 +11213,7 @@
                     "valType": "string"
                 },
                 "k": {
-                    "description": "Sets the indices of z coordinates of the vertices",
+                    "description": "A vector of vertex indices, i.e. integer values between 0 and the length of the vertex vectors, representing the *third* vertex of a triangle. For example, `{i[m], j[m], k[m]}` together represent face m (triangle m) in the mesh, where `k[m] = n` points to the triplet  `{x[n], y[n], z[n]}` in the vertex arrays. Therefore, each element in `k` represents a point in space, which is the third vertex of a triangle.",
                     "role": "data",
                     "valType": "data_array"
                 },
@@ -11395,7 +11395,7 @@
                     ]
                 },
                 "x": {
-                    "description": "Sets the x coordinates of the vertices",
+                    "description": "Sets the X coordinates of the vertices. The nth element of vectors `x`, `y` and `z` jointly represent the X, Y and Z coordinates of the nth vertex.",
                     "role": "data",
                     "valType": "data_array"
                 },
@@ -11405,7 +11405,7 @@
                     "valType": "string"
                 },
                 "y": {
-                    "description": "Sets the y coordinates of the vertices",
+                    "description": "Sets the Y coordinates of the vertices. The nth element of vectors `x`, `y` and `z` jointly represent the X, Y and Z coordinates of the nth vertex.",
                     "role": "data",
                     "valType": "data_array"
                 },
@@ -11415,7 +11415,7 @@
                     "valType": "string"
                 },
                 "z": {
-                    "description": "Sets the z coordinates of the vertices",
+                    "description": "Sets the Z coordinates of the vertices. The nth element of vectors `x`, `y` and `z` jointly represent the X, Y and Z coordinates of the nth vertex.",
                     "role": "data",
                     "valType": "data_array"
                 },
@@ -12120,7 +12120,7 @@
                     "cauto": {
                         "description": "Has an effect only if `marker.color` is set to a numerical array. Determines the whether or not the color domain is computed automatically.",
                         "dflt": true,
-                        "role": "style",
+                        "role": "info",
                         "valType": "boolean"
                     },
                     "cmax": {
@@ -12363,7 +12363,7 @@
                             "valType": "string"
                         },
                         "ticktext": {
-                            "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
+                            "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `tickvals`.",
                             "role": "data",
                             "valType": "data_array"
                         },
@@ -12491,15 +12491,15 @@
                     },
                     "line": {
                         "autocolorscale": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines whether or not the colorscale is picked using the sign of values inside `marker.line.color`.",
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines whether or not the colorscale is picked using values inside `marker.line.color`.",
                             "dflt": true,
                             "role": "style",
                             "valType": "boolean"
                         },
                         "cauto": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines the whether or not the color domain is computed with respect to the input data.",
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines the whether or not the color domain is computed automatically.",
                             "dflt": true,
-                            "role": "style",
+                            "role": "info",
                             "valType": "boolean"
                         },
                         "cmax": {
@@ -12516,7 +12516,7 @@
                         },
                         "color": {
                             "arrayOk": true,
-                            "description": "Sets the marker outline color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
+                            "description": "Sets the marker.line color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                             "role": "style",
                             "valType": "color"
                         },
@@ -13501,7 +13501,7 @@
                     "cauto": {
                         "description": "Has an effect only if `marker.color` is set to a numerical array. Determines the whether or not the color domain is computed automatically.",
                         "dflt": true,
-                        "role": "style",
+                        "role": "info",
                         "valType": "boolean"
                     },
                     "cmax": {
@@ -13744,7 +13744,7 @@
                             "valType": "string"
                         },
                         "ticktext": {
-                            "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
+                            "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `tickvals`.",
                             "role": "data",
                             "valType": "data_array"
                         },
@@ -13872,15 +13872,15 @@
                     },
                     "line": {
                         "autocolorscale": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines whether or not the colorscale is picked using the sign of values inside `marker.line.color`.",
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines whether or not the colorscale is picked using values inside `marker.line.color`.",
                             "dflt": true,
                             "role": "style",
                             "valType": "boolean"
                         },
                         "cauto": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines the whether or not the color domain is computed with respect to the input data.",
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines the whether or not the color domain is computed automatically.",
                             "dflt": true,
-                            "role": "style",
+                            "role": "info",
                             "valType": "boolean"
                         },
                         "cmax": {
@@ -13897,7 +13897,7 @@
                         },
                         "color": {
                             "arrayOk": true,
-                            "description": "Sets the marker outline color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
+                            "description": "Sets the marker.line color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                             "role": "style",
                             "valType": "color"
                         },
@@ -14390,7 +14390,7 @@
                     "cauto": {
                         "description": "Has an effect only if `marker.color` is set to a numerical array. Determines the whether or not the color domain is computed automatically.",
                         "dflt": true,
-                        "role": "style",
+                        "role": "info",
                         "valType": "boolean"
                     },
                     "cmax": {
@@ -14633,7 +14633,7 @@
                             "valType": "string"
                         },
                         "ticktext": {
-                            "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
+                            "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `tickvals`.",
                             "role": "data",
                             "valType": "data_array"
                         },
@@ -14761,15 +14761,15 @@
                     },
                     "line": {
                         "autocolorscale": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines whether or not the colorscale is picked using the sign of values inside `marker.line.color`.",
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines whether or not the colorscale is picked using values inside `marker.line.color`.",
                             "dflt": true,
                             "role": "style",
                             "valType": "boolean"
                         },
                         "cauto": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines the whether or not the color domain is computed with respect to the input data.",
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines the whether or not the color domain is computed automatically.",
                             "dflt": true,
-                            "role": "style",
+                            "role": "info",
                             "valType": "boolean"
                         },
                         "cmax": {
@@ -14786,7 +14786,7 @@
                         },
                         "color": {
                             "arrayOk": true,
-                            "description": "Sets the marker outline color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
+                            "description": "Sets the marker.line color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                             "role": "style",
                             "valType": "color"
                         },
@@ -15627,7 +15627,7 @@
                     "cauto": {
                         "description": "Has an effect only if `marker.color` is set to a numerical array. Determines the whether or not the color domain is computed automatically.",
                         "dflt": true,
-                        "role": "style",
+                        "role": "info",
                         "valType": "boolean"
                     },
                     "cmax": {
@@ -15870,7 +15870,7 @@
                             "valType": "string"
                         },
                         "ticktext": {
-                            "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
+                            "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `tickvals`.",
                             "role": "data",
                             "valType": "data_array"
                         },
@@ -15998,15 +15998,15 @@
                     },
                     "line": {
                         "autocolorscale": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines whether or not the colorscale is picked using the sign of values inside `marker.line.color`.",
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines whether or not the colorscale is picked using values inside `marker.line.color`.",
                             "dflt": true,
                             "role": "style",
                             "valType": "boolean"
                         },
                         "cauto": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines the whether or not the color domain is computed with respect to the input data.",
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines the whether or not the color domain is computed automatically.",
                             "dflt": true,
-                            "role": "style",
+                            "role": "info",
                             "valType": "boolean"
                         },
                         "cmax": {
@@ -16023,7 +16023,7 @@
                         },
                         "color": {
                             "arrayOk": true,
-                            "description": "Sets the marker outline color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
+                            "description": "Sets the marker.line color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                             "role": "style",
                             "valType": "color"
                         },
@@ -16399,7 +16399,7 @@
                     "cauto": {
                         "description": "Has an effect only if `marker.color` is set to a numerical array. Determines the whether or not the color domain is computed automatically.",
                         "dflt": true,
-                        "role": "style",
+                        "role": "info",
                         "valType": "boolean"
                     },
                     "cmax": {
@@ -16642,7 +16642,7 @@
                             "valType": "string"
                         },
                         "ticktext": {
-                            "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
+                            "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `tickvals`.",
                             "role": "data",
                             "valType": "data_array"
                         },
@@ -16770,37 +16770,37 @@
                     },
                     "line": {
                         "autocolorscale": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines whether or not the colorscale is picked using the sign of values inside `marker.line.color`.",
+                            "description": "Has an effect only if `.color` is set to a numerical array. Determines whether or not the colorscale is picked using values inside `.color`.",
                             "dflt": true,
                             "role": "style",
                             "valType": "boolean"
                         },
                         "cauto": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines the whether or not the color domain is computed with respect to the input data.",
+                            "description": "Has an effect only if `.color` is set to a numerical array. Determines the whether or not the color domain is computed automatically.",
                             "dflt": true,
-                            "role": "style",
+                            "role": "info",
                             "valType": "boolean"
                         },
                         "cmax": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Sets the upper bound of the color domain. Value should be associated to the `marker.line.color` array index, and if set, `marker.line.cmin` must be set as well.",
+                            "description": "Has an effect only if `.color` is set to a numerical array. Sets the upper bound of the color domain. Value should be associated to the `.color` array index, and if set, `.cmin` must be set as well.",
                             "dflt": null,
                             "role": "info",
                             "valType": "number"
                         },
                         "cmin": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Sets the lower bound of the color domain. Value should be associated to the `marker.line.color` array index, and if set, `marker.line.cmax` must be set as well.",
+                            "description": "Has an effect only if `.color` is set to a numerical array. Sets the lower bound of the color domain. Value should be associated to the `.color` array index, and if set, `.cmax` must be set as well.",
                             "dflt": null,
                             "role": "info",
                             "valType": "number"
                         },
                         "color": {
                             "arrayOk": true,
-                            "description": "Sets the marker outline color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
+                            "description": "Sets the  color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                             "role": "style",
                             "valType": "color"
                         },
                         "colorscale": {
-                            "description": "Sets the colorscale and only has an effect if `marker.line.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.line.cmin` and `marker.line.cmax`.",
+                            "description": "Sets the colorscale and only has an effect if `.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `.cmin` and `.cmax`.",
                             "role": "style",
                             "valType": "colorscale"
                         },
@@ -16810,7 +16810,7 @@
                             "valType": "string"
                         },
                         "reversescale": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Reverses the colorscale.",
+                            "description": "Has an effect only if `.color` is set to a numerical array. Reverses the colorscale.",
                             "dflt": false,
                             "role": "style",
                             "valType": "boolean"
@@ -17620,7 +17620,7 @@
                         "valType": "string"
                     },
                     "ticktext": {
-                        "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
+                        "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `tickvals`.",
                         "role": "data",
                         "valType": "data_array"
                     },
@@ -18038,7 +18038,7 @@
                     },
                     "y": {
                         "description": "Numeric vector, representing the Y coordinate for each vertex.",
-                        "dflt": 100000,
+                        "dflt": 10000,
                         "max": 100000,
                         "min": -100000,
                         "role": "style",
