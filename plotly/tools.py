@@ -2100,18 +2100,10 @@ class FigureFactory(object):
         from plotly.tools import FigureFactory as FF
 
         # Make data as a dataframe
-        df = [{'Task': 'Run',
-               'Start': '2010-01-01',
-               'Finish': '2011-02-02',
-               'Complete': 10},
-              {'Task': 'Fast',
-               'Start': '2011-01-01',
-               'Finish': '2012-06-05',
-               'Complete': 55},
-               {'Task': 'Eat',
-                'Start': '2012-01-05',
-                'Finish': '2013-07-05',
-                'Complete': 94}]
+        df = pd.DataFrame([['Run', '2010-01-01', '2011-02-02', 10],
+                           ['Fast', '2011-01-01', '2012-06-05', 55],
+                           ['Eat', '2012-01-05', '2013-07-05', 94]],
+                          columns=['Task', 'Start', 'Finish', 'Complete'])
 
         # Create a figure with Plotly colorscale
         fig = FF.create_gantt(df, colors='Blues', index_col='Complete',
