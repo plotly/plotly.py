@@ -2099,6 +2099,8 @@ class FigureFactory(object):
         import plotly.plotly as py
         from plotly.tools import FigureFactory as FF
 
+        import pandas as pd
+
         # Make data as a dataframe
         df = pd.DataFrame([['Run', '2010-01-01', '2011-02-02', 10],
                            ['Fast', '2011-01-01', '2012-06-05', 55],
