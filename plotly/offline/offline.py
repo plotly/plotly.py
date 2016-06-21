@@ -62,7 +62,7 @@ def get_image_download_script(caller):
     """
 
     if caller == 'iplot':
-        check_start = 'if(document.readyState == \'complete\') {{'
+        check_start = 'if(window.is_loaded==true){{'
         check_end = '}}'
     elif caller == 'plot':
         check_start = ''
@@ -129,6 +129,8 @@ def init_notebook_mode(connected=False):
         script_inject = (
             ''
             '<script>'
+            'window.is_loaded = false;'
+            'setTimeout(function(){{window.is_loaded=true}},100);'
             'requirejs.config({'
             'paths: { '
             # Note we omit the extension .js because require will include it.
@@ -145,6 +147,8 @@ def init_notebook_mode(connected=False):
         script_inject = (
             ''
             '<script type=\'text/javascript\'>'
+            'window.is_loaded = false;'
+            'setTimeout(function(){{window.is_loaded=true}},100);'
             'if(!window.Plotly){{'
             'define(\'plotly\', function(require, exports, module) {{'
             '{script}'
