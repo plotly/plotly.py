@@ -62,7 +62,9 @@ def get_image_download_script(caller):
     """
 
     if caller == 'iplot':
-        check_start = 'if(window.is_loaded==true){{'
+        # note: 5500/5.5s is a handpicked delay. The script will not run again
+        # once this time has elapsed after the timestamp is instantiated.
+        check_start = 'var d=(new Date()).getTime();if(!(d>{utime}+5500)){{'
         check_end = '}}'
     elif caller == 'plot':
         check_start = ''
@@ -129,8 +131,6 @@ def init_notebook_mode(connected=False):
         script_inject = (
             ''
             '<script>'
-            'window.is_loaded = false;'
-            'setTimeout(function(){{window.is_loaded=true}},100);'
             'requirejs.config({'
             'paths: { '
             # Note we omit the extension .js because require will include it.
@@ -147,8 +147,6 @@ def init_notebook_mode(connected=False):
         script_inject = (
             ''
             '<script type=\'text/javascript\'>'
-            'window.is_loaded = false;'
-            'setTimeout(function(){{window.is_loaded=true}},100);'
             'if(!window.Plotly){{'
             'define(\'plotly\', function(require, exports, module) {{'
             '{script}'
@@ -304,11 +302,13 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                              ': {}'.format(__IMAGE_FORMATS)
                              )
         # if image is given, and is a valid format, we will download the image
+        utime = time.time()*1000 # make a timestamp for the injected code
         script = get_image_download_script('iplot').format(format=image,
                                                        width=image_width,
                                                        height=image_height,
                                                        filename=filename,
-                                                       plot_id=plotdivid)
+                                                       plot_id=plotdivid,
+                                                       utime = utime)
         # allow time for the plot to draw
         time.sleep(1)
         # inject code to download an image of the plot
