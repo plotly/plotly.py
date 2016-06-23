@@ -64,7 +64,7 @@ def get_image_download_script(caller):
     if caller == 'iplot':
         # note: 5500/5.5s is a handpicked delay. The script will not run again
         # once this time has elapsed after the timestamp is instantiated.
-        check_start = 'var d=(new Date()).getTime();if(!(d>{utime}+5500)){{'
+        check_start = 'if(!((new Date()).getTime()>{utime}+5500)){{'
         check_end = '}}'
     elif caller == 'plot':
         check_start = ''
