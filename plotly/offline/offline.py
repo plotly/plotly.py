@@ -293,6 +293,8 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         will be saved to. The extension should not be included.
     image_height (default=600) -- Specifies the height of the image in `px`.
     image_width (default=800) -- Specifies the width of the image in `px`.
+    image_delay (default=10000) -- The image of your plot will only be saved
+        if it's rendered within the time set by image_delay.
 
     Example:
     ```
@@ -323,6 +325,7 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                              ': {}'.format(__IMAGE_FORMATS)
                              )
         # if image is given, and is a valid format, we will download the image
+        # Note we now pass a dictionary of images specs to _plot_html
         image_info = dict(width=image_width, height=image_height,
                           filename=filename, extension=image,
                           image_delay=image_delay)
@@ -398,6 +401,8 @@ def plot(figure_or_data,
         will be saved to. The extension should not be included.
     image_height (default=600) -- Specifies the height of the image in `px`.
     image_width (default=800) -- Specifies the width of the image in `px`.
+    image_delay (default=10000) -- If your plot renders within this time span
+        after the plot function, then your image will be saved.
     """
     if output_type not in ['div', 'file']:
         raise ValueError(
@@ -415,6 +420,7 @@ def plot(figure_or_data,
                              ': {}'.format(__IMAGE_FORMATS)
                              )
         # if image is given, and is a valid format, we will download the image
+        # Note: we now pass a dictionary of image specs to _plot_html
         image_info = dict(width=image_width, height=image_height,
                           filename=image_filename, extension=image,
                           image_delay=image_delay)
