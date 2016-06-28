@@ -129,6 +129,8 @@ def init_notebook_mode(connected=False):
         script_inject = (
             ''
             '<script>'
+            'window.isLoaded = false;'
+            'setTimeout(function(){{window.isLoaded=true}},200);'
             'requirejs.config({'
             'paths: { '
             # Note we omit the extension .js because require will include it.
@@ -145,6 +147,8 @@ def init_notebook_mode(connected=False):
         script_inject = (
             ''
             '<script type=\'text/javascript\'>'
+            'window.isLoaded = false;'
+            'setTimeout(function(){{window.isLoaded=true}},200);'
             'if(!window.Plotly){{'
             'define(\'plotly\', function(require, exports, module) {{'
             '{script}'
@@ -161,7 +165,7 @@ def init_notebook_mode(connected=False):
 
 
 def _plot_html(figure_or_data, show_link, link_text, validate,
-               default_width, default_height, global_requirejs):
+               default_width, default_height, global_requirejs, image):
 
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
 
@@ -204,11 +208,28 @@ def _plot_html(figure_or_data, show_link, link_text, validate,
         link_text = link_text.replace('plot.ly', link_domain)
         config['linkText'] = link_text
 
-    script = 'Plotly.newPlot("{id}", {data}, {layout}, {config})'.format(
-        id=plotdivid,
-        data=jdata,
-        layout=jlayout,
-        config=jconfig)
+    if image:
+        # import pdb; pdb.set_trace()
+        download = ('.then(function(gd){{'
+                    # 'if(!((new Date()).getTime()>{utime}+3000)) {{'
+                    # 'if(window.isLoaded == true) {{ alert(\'HALP!\');'
+                    'Plotly.downloadImage(gd, {{'
+                    'format: \'{extension}\', filename: \'{filename}\', '
+                    'height: {height}, width: {width} }} ); }} )'
+                    '').format(extension=image['extension'],
+                               filename=image['filename'],
+                               height=image['height'],
+                               width=image['width'],
+                               utime=time.time()*1000)
+    else:
+        download = ''
+    script = (''
+              'Plotly.newPlot("{id}", {data}, {layout}, {config})'
+              '{download}').format(id=plotdivid,
+                                   data=jdata,
+                                   layout=jlayout,
+                                   config=jconfig,
+                                   download=download)
 
     optional_line1 = ('require(["plotly"], function(Plotly) {{ '
                       if global_requirejs else '')
@@ -288,27 +309,21 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     if not tools._ipython_imported:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
-    plot_html, plotdivid, width, height = _plot_html(
-        figure_or_data, show_link, link_text, validate,
-        '100%', 525, global_requirejs=True)
-
-    display(HTML(plot_html))
-
+    # check if the user wants to download an image
     if image:
         if image not in __IMAGE_FORMATS:
             raise ValueError('The image parameter must be one of the following'
                              ': {}'.format(__IMAGE_FORMATS)
                              )
         # if image is given, and is a valid format, we will download the image
-        script = get_image_download_script('iplot').format(format=image,
-                                                       width=image_width,
-                                                       height=image_height,
-                                                       filename=filename,
-                                                       plot_id=plotdivid)
-        # allow time for the plot to draw
-        time.sleep(1)
-        # inject code to download an image of the plot
-        display(HTML(script))
+        image_info = dict(width=image_width, height=image_height,
+                          filename=filename, extension=image)
+
+    plot_html, plotdivid, width, height = _plot_html(
+        figure_or_data, show_link, link_text, validate,
+        '100%', 525, global_requirejs=True, image=image_info)
+
+    display(HTML(plot_html))
 
 
 def plot(figure_or_data,
@@ -388,7 +403,7 @@ def plot(figure_or_data,
 
     plot_html, plotdivid, width, height = _plot_html(
         figure_or_data, show_link, link_text, validate,
-        '100%', '100%', global_requirejs=False)
+        '100%', '100%', global_requirejs=False, image=None)
 
     resize_script = ''
     if width == '100%' or height == '100%':
