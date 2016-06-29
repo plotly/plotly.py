@@ -437,8 +437,8 @@ def plot(figure_or_data,
             global_requirejs=False, image=image_info, caller="plot")
     else:
         plot_html, plotdivid, width, height = _plot_html(
-            figure_or_data, show_link, link_text, validate, '100%', 525,
-            global_requirejs=True)
+            figure_or_data, show_link, link_text, validate, '100%', '100%',
+            global_requirejs=False)
 
     resize_script = ''
     if width == '100%' or height == '100%':
