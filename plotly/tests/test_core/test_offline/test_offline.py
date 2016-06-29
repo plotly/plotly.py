@@ -81,17 +81,18 @@ class PlotlyOfflineTestCase(TestCase):
             self.assertTrue(resize_code_string not in html)
 
     # test for output of offline mode
-    def test_default_plot_generates_expected_html(self):
+    def test_if_image_is_downloaded(self):
         data_json = json.dumps(fig['data'], cls=plotly.utils.PlotlyJSONEncoder)
         layout_json = json.dumps(
             fig['layout'],
             cls=plotly.utils.PlotlyJSONEncoder)
 
         plotly.offline.plot(fig, image='png',
-                            filename='test-image'.)
+                            image_filename='test-image')
 
         def find(name, path):
             for root, dirs, files in os.walk(path):
                 if name in files:
                     return os.path.join(root, name)
-        self.assertTrue(find('test-image.png', '/home/ubuntu'))
+
+        self.assertTrue(find('test-image.png', '/home/ubuntu/'))
