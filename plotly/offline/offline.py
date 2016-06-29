@@ -129,8 +129,6 @@ def init_notebook_mode(connected=False):
         script_inject = (
             ''
             '<script>'
-            'window.isLoaded = false;'
-            'setTimeout(function(){{window.isLoaded=true}},200);'
             'requirejs.config({'
             'paths: { '
             # Note we omit the extension .js because require will include it.
@@ -147,8 +145,6 @@ def init_notebook_mode(connected=False):
         script_inject = (
             ''
             '<script type=\'text/javascript\'>'
-            'window.isLoaded = false;'
-            'setTimeout(function(){{window.isLoaded=true}},200);'
             'if(!window.Plotly){{'
             'define(\'plotly\', function(require, exports, module) {{'
             '{script}'
@@ -165,7 +161,7 @@ def init_notebook_mode(connected=False):
 
 
 def _plot_html(figure_or_data, show_link, link_text, validate, default_width,
-               default_height, global_requirejs, image, caller):
+               default_height, global_requirejs, **image_settings):
 
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
 
@@ -207,6 +203,12 @@ def _plot_html(figure_or_data, show_link, link_text, validate, default_width,
             .replace('http://', '')
         link_text = link_text.replace('plot.ly', link_domain)
         config['linkText'] = link_text
+
+    if 'image' in image_settings and 'caller' in image_settings:
+        image = image_settings['image']
+        caller = image_settings['caller']
+    else:
+        image = None
 
     if image:
         if caller == 'iplot':
@@ -330,9 +332,14 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                           filename=filename, extension=image,
                           image_delay=image_delay)
 
-    plot_html, plotdivid, width, height = _plot_html(
-        figure_or_data, show_link, link_text, validate, '100%', 525,
-        global_requirejs=True, image=image_info, caller="iplot")
+        plot_html, plotdivid, width, height = _plot_html(
+            figure_or_data, show_link, link_text, validate, '100%', 525,
+            global_requirejs=True, image=image_info, caller="iplot")
+
+    else:
+        plot_html, plotdivid, width, height = _plot_html(
+            figure_or_data, show_link, link_text, validate, '100%', 525,
+            global_requirejs=True)
 
     display(HTML(plot_html))
 
@@ -425,9 +432,13 @@ def plot(figure_or_data,
                           filename=image_filename, extension=image,
                           image_delay=image_delay)
 
-    plot_html, plotdivid, width, height = _plot_html(
-        figure_or_data, show_link, link_text, validate, '100%', '100%',
-        global_requirejs=False, image=image_info, caller="plot")
+        plot_html, plotdivid, width, height = _plot_html(
+            figure_or_data, show_link, link_text, validate, '100%', '100%',
+            global_requirejs=False, image=image_info, caller="plot")
+    else:
+        plot_html, plotdivid, width, height = _plot_html(
+            figure_or_data, show_link, link_text, validate, '100%', 525,
+            global_requirejs=True)
 
     resize_script = ''
     if width == '100%' or height == '100%':
