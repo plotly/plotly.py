@@ -253,16 +253,36 @@
                             "valType": "number"
                         },
                         "ax": {
-                            "description": "Sets the x component of the arrow tail about the arrow head. A positive (negative) component corresponds to an arrow pointing from right to left (left to right)",
+                            "description": "Sets the x component of the arrow tail about the arrow head. If `axref` is `pixel`, a positive (negative)  component corresponds to an arrow pointing from right to left (left to right). If `axref` is an axis, this is a value on that axis.",
                             "dflt": -10,
                             "role": "info",
                             "valType": "number"
                         },
+                        "axref": {
+                            "description": "Indicates in what terms the tail of the annotation (ax,ay)  is specified. If `pixel`, `ax` is a relative offset in pixels  from `x`. If set to an x axis id (e.g. *x* or *x2*), `ax` is  specified in the same terms as that axis. This is useful  for trendline annotations which should continue to indicate  the correct trend when zoomed.",
+                            "dflt": "pixel",
+                            "role": "info",
+                            "valType": "enumerated",
+                            "values": [
+                                "pixel",
+                                "/^x([2-9]|[1-9][0-9]+)?$/"
+                            ]
+                        },
                         "ay": {
-                            "description": "Sets the y component of the arrow tail about the arrow head. A positive (negative) component corresponds to an arrow pointing from bottom to top (top to bottom)",
+                            "description": "Sets the y component of the arrow tail about the arrow head. If `ayref` is `pixel`, a positive (negative)  component corresponds to an arrow pointing from bottom to top (top to bottom). If `ayref` is an axis, this is a value on that axis.",
                             "dflt": -30,
                             "role": "info",
                             "valType": "number"
+                        },
+                        "ayref": {
+                            "description": "Indicates in what terms the tail of the annotation (ax,ay)  is specified. If `pixel`, `ay` is a relative offset in pixels  from `y`. If set to a y axis id (e.g. *y* or *y2*), `ay` is  specified in the same terms as that axis. This is useful  for trendline annotations which should continue to indicate  the correct trend when zoomed.",
+                            "dflt": "pixel",
+                            "role": "info",
+                            "valType": "enumerated",
+                            "values": [
+                                "pixel",
+                                "/^y([2-9]|[1-9][0-9]+)?$/"
+                            ]
                         },
                         "bgcolor": {
                             "description": "Sets the background color of the annotation.",
@@ -1494,7 +1514,7 @@
                         ]
                     },
                     "nticks": {
-                        "description": "Sets the number of ticks. Has an effect only if `tickmode` is set to *auto*.",
+                        "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*.",
                         "dflt": 0,
                         "min": 0,
                         "role": "style",
@@ -1899,7 +1919,7 @@
                         ]
                     },
                     "nticks": {
-                        "description": "Sets the number of ticks. Has an effect only if `tickmode` is set to *auto*.",
+                        "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*.",
                         "dflt": 0,
                         "min": 0,
                         "role": "style",
@@ -2304,7 +2324,7 @@
                         ]
                     },
                     "nticks": {
-                        "description": "Sets the number of ticks. Has an effect only if `tickmode` is set to *auto*.",
+                        "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*.",
                         "dflt": 0,
                         "min": 0,
                         "role": "style",
@@ -2795,7 +2815,7 @@
                         "valType": "number"
                     },
                     "nticks": {
-                        "description": "Sets the number of ticks. Has an effect only if `tickmode` is set to *auto*.",
+                        "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*.",
                         "dflt": 6,
                         "min": 1,
                         "role": "style",
@@ -3059,7 +3079,7 @@
                         "valType": "number"
                     },
                     "nticks": {
-                        "description": "Sets the number of ticks. Has an effect only if `tickmode` is set to *auto*.",
+                        "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*.",
                         "dflt": 6,
                         "min": 1,
                         "role": "style",
@@ -3329,7 +3349,7 @@
                         "valType": "number"
                     },
                     "nticks": {
-                        "description": "Sets the number of ticks. Has an effect only if `tickmode` is set to *auto*.",
+                        "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*.",
                         "dflt": 6,
                         "min": 1,
                         "role": "style",
@@ -3764,7 +3784,7 @@
                     ]
                 },
                 "nticks": {
-                    "description": "Sets the number of ticks. Has an effect only if `tickmode` is set to *auto*.",
+                    "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*.",
                     "dflt": 0,
                     "min": 0,
                     "role": "style",
@@ -4374,7 +4394,7 @@
                     ]
                 },
                 "nticks": {
-                    "description": "Sets the number of ticks. Has an effect only if `tickmode` is set to *auto*.",
+                    "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*.",
                     "dflt": 0,
                     "min": 0,
                     "role": "style",
@@ -4864,7 +4884,7 @@
                 "marker": {
                     "color": {
                         "arrayOk": true,
-                        "description": "Sets the marker color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
+                        "description": "Sets the marker color. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                         "role": "style",
                         "valType": "color"
                     },
@@ -5529,13 +5549,13 @@
                 },
                 "marker": {
                     "autocolorscale": {
-                        "description": "Has an effect only if `marker.color` is set to a numerical array. Determines whether or not the colorscale is picked using values inside `marker.color`.",
+                        "description": "Has an effect only if `marker.color` is set to a numerical array. Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `marker.colorscale`. In case `colorscale` is unspecified or `autocolorscale` is true, the default  palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
                         "dflt": true,
                         "role": "style",
                         "valType": "boolean"
                     },
                     "cauto": {
-                        "description": "Has an effect only if `marker.color` is set to a numerical array. Determines the whether or not the color domain is computed automatically.",
+                        "description": "Has an effect only if `marker.color` is set to a numerical array and `cmin`, `cmax` are set by the user. In this case, it controls whether the range of colors in `colorscale` is mapped to the range of values in the `color` array (`cauto: true`), or the `cmin`/`cmax` values (`cauto: false`). Defaults to `false` when `cmin`, `cmax` are set by the user.",
                         "dflt": true,
                         "role": "info",
                         "valType": "boolean"
@@ -5554,7 +5574,7 @@
                     },
                     "color": {
                         "arrayOk": true,
-                        "description": "Sets the marker color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
+                        "description": "Sets the marker color. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                         "role": "style",
                         "valType": "color"
                     },
@@ -5616,7 +5636,7 @@
                             ]
                         },
                         "nticks": {
-                            "description": "Sets the number of ticks. Has an effect only if `tickmode` is set to *auto*.",
+                            "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*.",
                             "dflt": 0,
                             "min": 0,
                             "role": "style",
@@ -5897,7 +5917,7 @@
                         }
                     },
                     "colorscale": {
-                        "description": "Sets the colorscale and only has an effect if `marker.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.cmin` and `marker.cmax`.",
+                        "description": "Sets the colorscale and only has an effect if `marker.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.cmin` and `marker.cmax`. Alternatively, `colorscale` may be a palette name string of the following list: Greys, YlGnBu, Greens, YlOrRd, Bluered, RdBu, Reds, Blues, Picnic, Rainbow, Portland, Jet, Hot, Blackbody, Earth, Electric, Viridis",
                         "role": "style",
                         "valType": "colorscale"
                     },
@@ -5908,13 +5928,13 @@
                     },
                     "line": {
                         "autocolorscale": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines whether or not the colorscale is picked using values inside `marker.line.color`.",
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `marker.line.colorscale`. In case `colorscale` is unspecified or `autocolorscale` is true, the default  palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
                             "dflt": true,
                             "role": "style",
                             "valType": "boolean"
                         },
                         "cauto": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines the whether or not the color domain is computed automatically.",
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array and `cmin`, `cmax` are set by the user. In this case, it controls whether the range of colors in `colorscale` is mapped to the range of values in the `color` array (`cauto: true`), or the `cmin`/`cmax` values (`cauto: false`). Defaults to `false` when `cmin`, `cmax` are set by the user.",
                             "dflt": true,
                             "role": "info",
                             "valType": "boolean"
@@ -5933,12 +5953,12 @@
                         },
                         "color": {
                             "arrayOk": true,
-                            "description": "Sets the marker.line color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
+                            "description": "Sets the marker.line color. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                             "role": "style",
                             "valType": "color"
                         },
                         "colorscale": {
-                            "description": "Sets the colorscale and only has an effect if `marker.line.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.line.cmin` and `marker.line.cmax`.",
+                            "description": "Sets the colorscale and only has an effect if `marker.line.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.line.cmin` and `marker.line.cmax`. Alternatively, `colorscale` may be a palette name string of the following list: Greys, YlGnBu, Greens, YlOrRd, Bluered, RdBu, Reds, Blues, Picnic, Rainbow, Portland, Jet, Hot, Blackbody, Earth, Electric, Viridis",
                             "role": "style",
                             "valType": "colorscale"
                         },
@@ -5948,7 +5968,7 @@
                             "valType": "string"
                         },
                         "reversescale": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Reverses the colorscale.",
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Reverses the color mapping if true (`cmin` will correspond to the last color in the array and `cmax` will correspond to the first color).",
                             "dflt": false,
                             "role": "style",
                             "valType": "boolean"
@@ -5968,7 +5988,7 @@
                         }
                     },
                     "reversescale": {
-                        "description": "Has an effect only if `marker.color` is set to a numerical array. Reverses the colorscale.",
+                        "description": "Has an effect only if `marker.color` is set to a numerical array. Reverses the color mapping if true (`cmin` will correspond to the last color in the array and `cmax` will correspond to the first color).",
                         "dflt": false,
                         "role": "style",
                         "valType": "boolean"
@@ -6239,14 +6259,14 @@
                 "marker": {
                     "color": {
                         "arrayOk": false,
-                        "description": "Sets the marker color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
+                        "description": "Sets the marker color. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                         "role": "style",
                         "valType": "color"
                     },
                     "line": {
                         "color": {
                             "arrayOk": false,
-                            "description": "Sets the marker.line color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
+                            "description": "Sets the marker.line color. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                             "dflt": "#444",
                             "role": "style",
                             "valType": "color"
@@ -6806,7 +6826,7 @@
                         ]
                     },
                     "nticks": {
-                        "description": "Sets the number of ticks. Has an effect only if `tickmode` is set to *auto*.",
+                        "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*.",
                         "dflt": 0,
                         "min": 0,
                         "role": "style",
@@ -7144,7 +7164,7 @@
                     "line": {
                         "color": {
                             "arrayOk": true,
-                            "description": "Sets the marker.line color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
+                            "description": "Sets the marker.line color. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                             "role": "style",
                             "valType": "color"
                         },
@@ -7346,7 +7366,7 @@
                         ]
                     },
                     "nticks": {
-                        "description": "Sets the number of ticks. Has an effect only if `tickmode` is set to *auto*.",
+                        "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*.",
                         "dflt": 0,
                         "min": 0,
                         "role": "style",
@@ -7754,7 +7774,7 @@
                     "valType": "string"
                 },
                 "ncontours": {
-                    "description": "Sets the number of contour levels. Has an effect only if `autocontour` is *true*.",
+                    "description": "Sets the maximum number of contour levels. The actual number of contours will be chosen automatically to be less than or equal to the value of `ncontours`. Has an effect only if `autocontour` is *true*.",
                     "dflt": 0,
                     "role": "style",
                     "valType": "integer"
@@ -7993,7 +8013,7 @@
                         ]
                     },
                     "nticks": {
-                        "description": "Sets the number of ticks. Has an effect only if `tickmode` is set to *auto*.",
+                        "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*.",
                         "dflt": 0,
                         "min": 0,
                         "role": "style",
@@ -8785,13 +8805,13 @@
                 },
                 "marker": {
                     "autocolorscale": {
-                        "description": "Has an effect only if `marker.color` is set to a numerical array. Determines whether or not the colorscale is picked using values inside `marker.color`.",
+                        "description": "Has an effect only if `marker.color` is set to a numerical array. Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `marker.colorscale`. In case `colorscale` is unspecified or `autocolorscale` is true, the default  palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
                         "dflt": true,
                         "role": "style",
                         "valType": "boolean"
                     },
                     "cauto": {
-                        "description": "Has an effect only if `marker.color` is set to a numerical array. Determines the whether or not the color domain is computed automatically.",
+                        "description": "Has an effect only if `marker.color` is set to a numerical array and `cmin`, `cmax` are set by the user. In this case, it controls whether the range of colors in `colorscale` is mapped to the range of values in the `color` array (`cauto: true`), or the `cmin`/`cmax` values (`cauto: false`). Defaults to `false` when `cmin`, `cmax` are set by the user.",
                         "dflt": true,
                         "role": "info",
                         "valType": "boolean"
@@ -8810,7 +8830,7 @@
                     },
                     "color": {
                         "arrayOk": true,
-                        "description": "Sets the marker color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
+                        "description": "Sets the marker color. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                         "role": "style",
                         "valType": "color"
                     },
@@ -8872,7 +8892,7 @@
                             ]
                         },
                         "nticks": {
-                            "description": "Sets the number of ticks. Has an effect only if `tickmode` is set to *auto*.",
+                            "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*.",
                             "dflt": 0,
                             "min": 0,
                             "role": "style",
@@ -9153,7 +9173,7 @@
                         }
                     },
                     "colorscale": {
-                        "description": "Sets the colorscale and only has an effect if `marker.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.cmin` and `marker.cmax`.",
+                        "description": "Sets the colorscale and only has an effect if `marker.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.cmin` and `marker.cmax`. Alternatively, `colorscale` may be a palette name string of the following list: Greys, YlGnBu, Greens, YlOrRd, Bluered, RdBu, Reds, Blues, Picnic, Rainbow, Portland, Jet, Hot, Blackbody, Earth, Electric, Viridis",
                         "role": "style",
                         "valType": "colorscale"
                     },
@@ -9164,13 +9184,13 @@
                     },
                     "line": {
                         "autocolorscale": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines whether or not the colorscale is picked using values inside `marker.line.color`.",
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `marker.line.colorscale`. In case `colorscale` is unspecified or `autocolorscale` is true, the default  palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
                             "dflt": true,
                             "role": "style",
                             "valType": "boolean"
                         },
                         "cauto": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines the whether or not the color domain is computed automatically.",
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array and `cmin`, `cmax` are set by the user. In this case, it controls whether the range of colors in `colorscale` is mapped to the range of values in the `color` array (`cauto: true`), or the `cmin`/`cmax` values (`cauto: false`). Defaults to `false` when `cmin`, `cmax` are set by the user.",
                             "dflt": true,
                             "role": "info",
                             "valType": "boolean"
@@ -9189,12 +9209,12 @@
                         },
                         "color": {
                             "arrayOk": true,
-                            "description": "Sets the marker.line color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
+                            "description": "Sets the marker.line color. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                             "role": "style",
                             "valType": "color"
                         },
                         "colorscale": {
-                            "description": "Sets the colorscale and only has an effect if `marker.line.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.line.cmin` and `marker.line.cmax`.",
+                            "description": "Sets the colorscale and only has an effect if `marker.line.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.line.cmin` and `marker.line.cmax`. Alternatively, `colorscale` may be a palette name string of the following list: Greys, YlGnBu, Greens, YlOrRd, Bluered, RdBu, Reds, Blues, Picnic, Rainbow, Portland, Jet, Hot, Blackbody, Earth, Electric, Viridis",
                             "role": "style",
                             "valType": "colorscale"
                         },
@@ -9204,7 +9224,7 @@
                             "valType": "string"
                         },
                         "reversescale": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Reverses the colorscale.",
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Reverses the color mapping if true (`cmin` will correspond to the last color in the array and `cmax` will correspond to the first color).",
                             "dflt": false,
                             "role": "style",
                             "valType": "boolean"
@@ -9225,7 +9245,7 @@
                         }
                     },
                     "reversescale": {
-                        "description": "Has an effect only if `marker.color` is set to a numerical array. Reverses the colorscale.",
+                        "description": "Has an effect only if `marker.color` is set to a numerical array. Reverses the color mapping if true (`cmin` will correspond to the last color in the array and `cmax` will correspond to the first color).",
                         "dflt": false,
                         "role": "style",
                         "valType": "boolean"
@@ -9520,7 +9540,7 @@
                         ]
                     },
                     "nticks": {
-                        "description": "Sets the number of ticks. Has an effect only if `tickmode` is set to *auto*.",
+                        "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*.",
                         "dflt": 0,
                         "min": 0,
                         "role": "style",
@@ -10146,7 +10166,7 @@
                         ]
                     },
                     "nticks": {
-                        "description": "Sets the number of ticks. Has an effect only if `tickmode` is set to *auto*.",
+                        "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*.",
                         "dflt": 0,
                         "min": 0,
                         "role": "style",
@@ -10589,7 +10609,7 @@
                     "valType": "integer"
                 },
                 "ncontours": {
-                    "description": "Sets the number of contour levels. Has an effect only if `autocontour` is *true*.",
+                    "description": "Sets the maximum number of contour levels. The actual number of contours will be chosen automatically to be less than or equal to the value of `ncontours`. Has an effect only if `autocontour` is *true*.",
                     "dflt": 0,
                     "role": "style",
                     "valType": "integer"
@@ -10830,7 +10850,7 @@
                         ]
                     },
                     "nticks": {
-                        "description": "Sets the number of ticks. Has an effect only if `tickmode` is set to *auto*.",
+                        "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*.",
                         "dflt": 0,
                         "min": 0,
                         "role": "style",
@@ -12053,6 +12073,15 @@
                     "role": "info",
                     "valType": "flaglist"
                 },
+                "hoveron": {
+                    "description": "Do the hover effects highlight individual points (markers or line points) or do they highlight filled regions? If the fill is *toself* or *tonext* and there are no markers or text, then the default is *fills*, otherwise it is *points*.",
+                    "flags": [
+                        "points",
+                        "fills"
+                    ],
+                    "role": "info",
+                    "valType": "flaglist"
+                },
                 "legendgroup": {
                     "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
                     "dflt": "",
@@ -12112,13 +12141,13 @@
                 },
                 "marker": {
                     "autocolorscale": {
-                        "description": "Has an effect only if `marker.color` is set to a numerical array. Determines whether or not the colorscale is picked using values inside `marker.color`.",
+                        "description": "Has an effect only if `marker.color` is set to a numerical array. Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `marker.colorscale`. In case `colorscale` is unspecified or `autocolorscale` is true, the default  palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
                         "dflt": true,
                         "role": "style",
                         "valType": "boolean"
                     },
                     "cauto": {
-                        "description": "Has an effect only if `marker.color` is set to a numerical array. Determines the whether or not the color domain is computed automatically.",
+                        "description": "Has an effect only if `marker.color` is set to a numerical array and `cmin`, `cmax` are set by the user. In this case, it controls whether the range of colors in `colorscale` is mapped to the range of values in the `color` array (`cauto: true`), or the `cmin`/`cmax` values (`cauto: false`). Defaults to `false` when `cmin`, `cmax` are set by the user.",
                         "dflt": true,
                         "role": "info",
                         "valType": "boolean"
@@ -12137,7 +12166,7 @@
                     },
                     "color": {
                         "arrayOk": true,
-                        "description": "Sets the marker color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
+                        "description": "Sets the marker color. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                         "role": "style",
                         "valType": "color"
                     },
@@ -12199,7 +12228,7 @@
                             ]
                         },
                         "nticks": {
-                            "description": "Sets the number of ticks. Has an effect only if `tickmode` is set to *auto*.",
+                            "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*.",
                             "dflt": 0,
                             "min": 0,
                             "role": "style",
@@ -12480,7 +12509,7 @@
                         }
                     },
                     "colorscale": {
-                        "description": "Sets the colorscale and only has an effect if `marker.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.cmin` and `marker.cmax`.",
+                        "description": "Sets the colorscale and only has an effect if `marker.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.cmin` and `marker.cmax`. Alternatively, `colorscale` may be a palette name string of the following list: Greys, YlGnBu, Greens, YlOrRd, Bluered, RdBu, Reds, Blues, Picnic, Rainbow, Portland, Jet, Hot, Blackbody, Earth, Electric, Viridis",
                         "role": "style",
                         "valType": "colorscale"
                     },
@@ -12491,13 +12520,13 @@
                     },
                     "line": {
                         "autocolorscale": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines whether or not the colorscale is picked using values inside `marker.line.color`.",
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `marker.line.colorscale`. In case `colorscale` is unspecified or `autocolorscale` is true, the default  palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
                             "dflt": true,
                             "role": "style",
                             "valType": "boolean"
                         },
                         "cauto": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines the whether or not the color domain is computed automatically.",
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array and `cmin`, `cmax` are set by the user. In this case, it controls whether the range of colors in `colorscale` is mapped to the range of values in the `color` array (`cauto: true`), or the `cmin`/`cmax` values (`cauto: false`). Defaults to `false` when `cmin`, `cmax` are set by the user.",
                             "dflt": true,
                             "role": "info",
                             "valType": "boolean"
@@ -12516,12 +12545,12 @@
                         },
                         "color": {
                             "arrayOk": true,
-                            "description": "Sets the marker.line color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
+                            "description": "Sets the marker.line color. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                             "role": "style",
                             "valType": "color"
                         },
                         "colorscale": {
-                            "description": "Sets the colorscale and only has an effect if `marker.line.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.line.cmin` and `marker.line.cmax`.",
+                            "description": "Sets the colorscale and only has an effect if `marker.line.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.line.cmin` and `marker.line.cmax`. Alternatively, `colorscale` may be a palette name string of the following list: Greys, YlGnBu, Greens, YlOrRd, Bluered, RdBu, Reds, Blues, Picnic, Rainbow, Portland, Jet, Hot, Blackbody, Earth, Electric, Viridis",
                             "role": "style",
                             "valType": "colorscale"
                         },
@@ -12531,7 +12560,7 @@
                             "valType": "string"
                         },
                         "reversescale": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Reverses the colorscale.",
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Reverses the color mapping if true (`cmin` will correspond to the last color in the array and `cmax` will correspond to the first color).",
                             "dflt": false,
                             "role": "style",
                             "valType": "boolean"
@@ -12571,7 +12600,7 @@
                         "valType": "string"
                     },
                     "reversescale": {
-                        "description": "Has an effect only if `marker.color` is set to a numerical array. Reverses the colorscale.",
+                        "description": "Has an effect only if `marker.color` is set to a numerical array. Reverses the color mapping if true (`cmin` will correspond to the last color in the array and `cmax` will correspond to the first color).",
                         "dflt": false,
                         "role": "style",
                         "valType": "boolean"
@@ -13463,10 +13492,45 @@
                     "valType": "string"
                 },
                 "line": {
+                    "autocolorscale": {
+                        "description": "Has an effect only if `line.color` is set to a numerical array. Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `line.colorscale`. In case `colorscale` is unspecified or `autocolorscale` is true, the default  palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
+                        "dflt": true,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
+                    "cauto": {
+                        "description": "Has an effect only if `line.color` is set to a numerical array and `cmin`, `cmax` are set by the user. In this case, it controls whether the range of colors in `colorscale` is mapped to the range of values in the `color` array (`cauto: true`), or the `cmin`/`cmax` values (`cauto: false`). Defaults to `false` when `cmin`, `cmax` are set by the user.",
+                        "dflt": true,
+                        "role": "info",
+                        "valType": "boolean"
+                    },
+                    "cmax": {
+                        "description": "Has an effect only if `line.color` is set to a numerical array. Sets the upper bound of the color domain. Value should be associated to the `line.color` array index, and if set, `line.cmin` must be set as well.",
+                        "dflt": null,
+                        "role": "info",
+                        "valType": "number"
+                    },
+                    "cmin": {
+                        "description": "Has an effect only if `line.color` is set to a numerical array. Sets the lower bound of the color domain. Value should be associated to the `line.color` array index, and if set, `line.cmax` must be set as well.",
+                        "dflt": null,
+                        "role": "info",
+                        "valType": "number"
+                    },
                     "color": {
-                        "description": "Sets the line color.",
+                        "arrayOk": true,
+                        "description": "Sets the line color. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                         "role": "style",
                         "valType": "color"
+                    },
+                    "colorscale": {
+                        "description": "Sets the colorscale and only has an effect if `line.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `line.cmin` and `line.cmax`. Alternatively, `colorscale` may be a palette name string of the following list: Greys, YlGnBu, Greens, YlOrRd, Bluered, RdBu, Reds, Blues, Picnic, Rainbow, Portland, Jet, Hot, Blackbody, Earth, Electric, Viridis",
+                        "role": "style",
+                        "valType": "colorscale"
+                    },
+                    "colorsrc": {
+                        "description": "Sets the source reference on plot.ly for  color .",
+                        "role": "info",
+                        "valType": "string"
                     },
                     "dash": {
                         "description": "Sets the style of the lines. Set to a dash string type or a dash length in px.",
@@ -13482,7 +13546,19 @@
                             "longdashdot"
                         ]
                     },
+                    "reversescale": {
+                        "description": "Has an effect only if `line.color` is set to a numerical array. Reverses the color mapping if true (`cmin` will correspond to the last color in the array and `cmax` will correspond to the first color).",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
                     "role": "object",
+                    "showscale": {
+                        "description": "Has an effect only if `line.color` is set to a numerical array. Determines whether or not a colorbar is displayed.",
+                        "dflt": false,
+                        "role": "info",
+                        "valType": "boolean"
+                    },
                     "width": {
                         "description": "Sets the line width (in px).",
                         "dflt": 2,
@@ -13493,13 +13569,13 @@
                 },
                 "marker": {
                     "autocolorscale": {
-                        "description": "Has an effect only if `marker.color` is set to a numerical array. Determines whether or not the colorscale is picked using values inside `marker.color`.",
+                        "description": "Has an effect only if `marker.color` is set to a numerical array. Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `marker.colorscale`. In case `colorscale` is unspecified or `autocolorscale` is true, the default  palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
                         "dflt": true,
                         "role": "style",
                         "valType": "boolean"
                     },
                     "cauto": {
-                        "description": "Has an effect only if `marker.color` is set to a numerical array. Determines the whether or not the color domain is computed automatically.",
+                        "description": "Has an effect only if `marker.color` is set to a numerical array and `cmin`, `cmax` are set by the user. In this case, it controls whether the range of colors in `colorscale` is mapped to the range of values in the `color` array (`cauto: true`), or the `cmin`/`cmax` values (`cauto: false`). Defaults to `false` when `cmin`, `cmax` are set by the user.",
                         "dflt": true,
                         "role": "info",
                         "valType": "boolean"
@@ -13518,7 +13594,7 @@
                     },
                     "color": {
                         "arrayOk": true,
-                        "description": "Sets the marker color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
+                        "description": "Sets the marker color. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                         "role": "style",
                         "valType": "color"
                     },
@@ -13580,7 +13656,7 @@
                             ]
                         },
                         "nticks": {
-                            "description": "Sets the number of ticks. Has an effect only if `tickmode` is set to *auto*.",
+                            "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*.",
                             "dflt": 0,
                             "min": 0,
                             "role": "style",
@@ -13861,7 +13937,7 @@
                         }
                     },
                     "colorscale": {
-                        "description": "Sets the colorscale and only has an effect if `marker.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.cmin` and `marker.cmax`.",
+                        "description": "Sets the colorscale and only has an effect if `marker.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.cmin` and `marker.cmax`. Alternatively, `colorscale` may be a palette name string of the following list: Greys, YlGnBu, Greens, YlOrRd, Bluered, RdBu, Reds, Blues, Picnic, Rainbow, Portland, Jet, Hot, Blackbody, Earth, Electric, Viridis",
                         "role": "style",
                         "valType": "colorscale"
                     },
@@ -13872,13 +13948,13 @@
                     },
                     "line": {
                         "autocolorscale": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines whether or not the colorscale is picked using values inside `marker.line.color`.",
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `marker.line.colorscale`. In case `colorscale` is unspecified or `autocolorscale` is true, the default  palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
                             "dflt": true,
                             "role": "style",
                             "valType": "boolean"
                         },
                         "cauto": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines the whether or not the color domain is computed automatically.",
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array and `cmin`, `cmax` are set by the user. In this case, it controls whether the range of colors in `colorscale` is mapped to the range of values in the `color` array (`cauto: true`), or the `cmin`/`cmax` values (`cauto: false`). Defaults to `false` when `cmin`, `cmax` are set by the user.",
                             "dflt": true,
                             "role": "info",
                             "valType": "boolean"
@@ -13897,12 +13973,12 @@
                         },
                         "color": {
                             "arrayOk": true,
-                            "description": "Sets the marker.line color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
+                            "description": "Sets the marker.line color. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                             "role": "style",
                             "valType": "color"
                         },
                         "colorscale": {
-                            "description": "Sets the colorscale and only has an effect if `marker.line.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.line.cmin` and `marker.line.cmax`.",
+                            "description": "Sets the colorscale and only has an effect if `marker.line.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.line.cmin` and `marker.line.cmax`. Alternatively, `colorscale` may be a palette name string of the following list: Greys, YlGnBu, Greens, YlOrRd, Bluered, RdBu, Reds, Blues, Picnic, Rainbow, Portland, Jet, Hot, Blackbody, Earth, Electric, Viridis",
                             "role": "style",
                             "valType": "colorscale"
                         },
@@ -13912,7 +13988,7 @@
                             "valType": "string"
                         },
                         "reversescale": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Reverses the colorscale.",
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Reverses the color mapping if true (`cmin` will correspond to the last color in the array and `cmax` will correspond to the first color).",
                             "dflt": false,
                             "role": "style",
                             "valType": "boolean"
@@ -13935,7 +14011,7 @@
                         "valType": "number"
                     },
                     "reversescale": {
-                        "description": "Has an effect only if `marker.color` is set to a numerical array. Reverses the colorscale.",
+                        "description": "Has an effect only if `marker.color` is set to a numerical array. Reverses the color mapping if true (`cmin` will correspond to the last color in the array and `cmax` will correspond to the first color).",
                         "dflt": false,
                         "role": "style",
                         "valType": "boolean"
@@ -14382,13 +14458,13 @@
                 },
                 "marker": {
                     "autocolorscale": {
-                        "description": "Has an effect only if `marker.color` is set to a numerical array. Determines whether or not the colorscale is picked using values inside `marker.color`.",
+                        "description": "Has an effect only if `marker.color` is set to a numerical array. Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `marker.colorscale`. In case `colorscale` is unspecified or `autocolorscale` is true, the default  palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
                         "dflt": true,
                         "role": "style",
                         "valType": "boolean"
                     },
                     "cauto": {
-                        "description": "Has an effect only if `marker.color` is set to a numerical array. Determines the whether or not the color domain is computed automatically.",
+                        "description": "Has an effect only if `marker.color` is set to a numerical array and `cmin`, `cmax` are set by the user. In this case, it controls whether the range of colors in `colorscale` is mapped to the range of values in the `color` array (`cauto: true`), or the `cmin`/`cmax` values (`cauto: false`). Defaults to `false` when `cmin`, `cmax` are set by the user.",
                         "dflt": true,
                         "role": "info",
                         "valType": "boolean"
@@ -14407,7 +14483,7 @@
                     },
                     "color": {
                         "arrayOk": true,
-                        "description": "Sets the marker color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
+                        "description": "Sets the marker color. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                         "role": "style",
                         "valType": "color"
                     },
@@ -14469,7 +14545,7 @@
                             ]
                         },
                         "nticks": {
-                            "description": "Sets the number of ticks. Has an effect only if `tickmode` is set to *auto*.",
+                            "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*.",
                             "dflt": 0,
                             "min": 0,
                             "role": "style",
@@ -14750,7 +14826,7 @@
                         }
                     },
                     "colorscale": {
-                        "description": "Sets the colorscale and only has an effect if `marker.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.cmin` and `marker.cmax`.",
+                        "description": "Sets the colorscale and only has an effect if `marker.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.cmin` and `marker.cmax`. Alternatively, `colorscale` may be a palette name string of the following list: Greys, YlGnBu, Greens, YlOrRd, Bluered, RdBu, Reds, Blues, Picnic, Rainbow, Portland, Jet, Hot, Blackbody, Earth, Electric, Viridis",
                         "role": "style",
                         "valType": "colorscale"
                     },
@@ -14761,13 +14837,13 @@
                     },
                     "line": {
                         "autocolorscale": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines whether or not the colorscale is picked using values inside `marker.line.color`.",
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `marker.line.colorscale`. In case `colorscale` is unspecified or `autocolorscale` is true, the default  palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
                             "dflt": true,
                             "role": "style",
                             "valType": "boolean"
                         },
                         "cauto": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines the whether or not the color domain is computed automatically.",
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array and `cmin`, `cmax` are set by the user. In this case, it controls whether the range of colors in `colorscale` is mapped to the range of values in the `color` array (`cauto: true`), or the `cmin`/`cmax` values (`cauto: false`). Defaults to `false` when `cmin`, `cmax` are set by the user.",
                             "dflt": true,
                             "role": "info",
                             "valType": "boolean"
@@ -14786,12 +14862,12 @@
                         },
                         "color": {
                             "arrayOk": true,
-                            "description": "Sets the marker.line color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
+                            "description": "Sets the marker.line color. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                             "role": "style",
                             "valType": "color"
                         },
                         "colorscale": {
-                            "description": "Sets the colorscale and only has an effect if `marker.line.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.line.cmin` and `marker.line.cmax`.",
+                            "description": "Sets the colorscale and only has an effect if `marker.line.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.line.cmin` and `marker.line.cmax`. Alternatively, `colorscale` may be a palette name string of the following list: Greys, YlGnBu, Greens, YlOrRd, Bluered, RdBu, Reds, Blues, Picnic, Rainbow, Portland, Jet, Hot, Blackbody, Earth, Electric, Viridis",
                             "role": "style",
                             "valType": "colorscale"
                         },
@@ -14801,7 +14877,7 @@
                             "valType": "string"
                         },
                         "reversescale": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Reverses the colorscale.",
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Reverses the color mapping if true (`cmin` will correspond to the last color in the array and `cmax` will correspond to the first color).",
                             "dflt": false,
                             "role": "style",
                             "valType": "boolean"
@@ -14834,7 +14910,7 @@
                         "valType": "string"
                     },
                     "reversescale": {
-                        "description": "Has an effect only if `marker.color` is set to a numerical array. Reverses the colorscale.",
+                        "description": "Has an effect only if `marker.color` is set to a numerical array. Reverses the color mapping if true (`cmin` will correspond to the last color in the array and `cmax` will correspond to the first color).",
                         "dflt": false,
                         "role": "style",
                         "valType": "boolean"
@@ -15619,13 +15695,13 @@
                 },
                 "marker": {
                     "autocolorscale": {
-                        "description": "Has an effect only if `marker.color` is set to a numerical array. Determines whether or not the colorscale is picked using values inside `marker.color`.",
+                        "description": "Has an effect only if `marker.color` is set to a numerical array. Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `marker.colorscale`. In case `colorscale` is unspecified or `autocolorscale` is true, the default  palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
                         "dflt": true,
                         "role": "style",
                         "valType": "boolean"
                     },
                     "cauto": {
-                        "description": "Has an effect only if `marker.color` is set to a numerical array. Determines the whether or not the color domain is computed automatically.",
+                        "description": "Has an effect only if `marker.color` is set to a numerical array and `cmin`, `cmax` are set by the user. In this case, it controls whether the range of colors in `colorscale` is mapped to the range of values in the `color` array (`cauto: true`), or the `cmin`/`cmax` values (`cauto: false`). Defaults to `false` when `cmin`, `cmax` are set by the user.",
                         "dflt": true,
                         "role": "info",
                         "valType": "boolean"
@@ -15644,7 +15720,7 @@
                     },
                     "color": {
                         "arrayOk": true,
-                        "description": "Sets the marker color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
+                        "description": "Sets the marker color. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                         "role": "style",
                         "valType": "color"
                     },
@@ -15706,7 +15782,7 @@
                             ]
                         },
                         "nticks": {
-                            "description": "Sets the number of ticks. Has an effect only if `tickmode` is set to *auto*.",
+                            "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*.",
                             "dflt": 0,
                             "min": 0,
                             "role": "style",
@@ -15987,7 +16063,7 @@
                         }
                     },
                     "colorscale": {
-                        "description": "Sets the colorscale and only has an effect if `marker.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.cmin` and `marker.cmax`.",
+                        "description": "Sets the colorscale and only has an effect if `marker.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.cmin` and `marker.cmax`. Alternatively, `colorscale` may be a palette name string of the following list: Greys, YlGnBu, Greens, YlOrRd, Bluered, RdBu, Reds, Blues, Picnic, Rainbow, Portland, Jet, Hot, Blackbody, Earth, Electric, Viridis",
                         "role": "style",
                         "valType": "colorscale"
                     },
@@ -15998,13 +16074,13 @@
                     },
                     "line": {
                         "autocolorscale": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines whether or not the colorscale is picked using values inside `marker.line.color`.",
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `marker.line.colorscale`. In case `colorscale` is unspecified or `autocolorscale` is true, the default  palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
                             "dflt": true,
                             "role": "style",
                             "valType": "boolean"
                         },
                         "cauto": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines the whether or not the color domain is computed automatically.",
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array and `cmin`, `cmax` are set by the user. In this case, it controls whether the range of colors in `colorscale` is mapped to the range of values in the `color` array (`cauto: true`), or the `cmin`/`cmax` values (`cauto: false`). Defaults to `false` when `cmin`, `cmax` are set by the user.",
                             "dflt": true,
                             "role": "info",
                             "valType": "boolean"
@@ -16023,12 +16099,12 @@
                         },
                         "color": {
                             "arrayOk": true,
-                            "description": "Sets the marker.line color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
+                            "description": "Sets the marker.line color. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                             "role": "style",
                             "valType": "color"
                         },
                         "colorscale": {
-                            "description": "Sets the colorscale and only has an effect if `marker.line.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.line.cmin` and `marker.line.cmax`.",
+                            "description": "Sets the colorscale and only has an effect if `marker.line.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.line.cmin` and `marker.line.cmax`. Alternatively, `colorscale` may be a palette name string of the following list: Greys, YlGnBu, Greens, YlOrRd, Bluered, RdBu, Reds, Blues, Picnic, Rainbow, Portland, Jet, Hot, Blackbody, Earth, Electric, Viridis",
                             "role": "style",
                             "valType": "colorscale"
                         },
@@ -16038,7 +16114,7 @@
                             "valType": "string"
                         },
                         "reversescale": {
-                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Reverses the colorscale.",
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Reverses the color mapping if true (`cmin` will correspond to the last color in the array and `cmax` will correspond to the first color).",
                             "dflt": false,
                             "role": "style",
                             "valType": "boolean"
@@ -16071,7 +16147,7 @@
                         "valType": "string"
                     },
                     "reversescale": {
-                        "description": "Has an effect only if `marker.color` is set to a numerical array. Reverses the colorscale.",
+                        "description": "Has an effect only if `marker.color` is set to a numerical array. Reverses the color mapping if true (`cmin` will correspond to the last color in the array and `cmax` will correspond to the first color).",
                         "dflt": false,
                         "role": "style",
                         "valType": "boolean"
@@ -16336,6 +16412,15 @@
                     "role": "info",
                     "valType": "flaglist"
                 },
+                "hoveron": {
+                    "description": "Do the hover effects highlight individual points (markers or line points) or do they highlight filled regions? If the fill is *toself* or *tonext* and there are no markers or text, then the default is *fills*, otherwise it is *points*.",
+                    "flags": [
+                        "points",
+                        "fills"
+                    ],
+                    "role": "info",
+                    "valType": "flaglist"
+                },
                 "legendgroup": {
                     "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
                     "dflt": "",
@@ -16391,13 +16476,13 @@
                 },
                 "marker": {
                     "autocolorscale": {
-                        "description": "Has an effect only if `marker.color` is set to a numerical array. Determines whether or not the colorscale is picked using values inside `marker.color`.",
+                        "description": "Has an effect only if `marker.color` is set to a numerical array. Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `marker.colorscale`. In case `colorscale` is unspecified or `autocolorscale` is true, the default  palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
                         "dflt": true,
                         "role": "style",
                         "valType": "boolean"
                     },
                     "cauto": {
-                        "description": "Has an effect only if `marker.color` is set to a numerical array. Determines the whether or not the color domain is computed automatically.",
+                        "description": "Has an effect only if `marker.color` is set to a numerical array and `cmin`, `cmax` are set by the user. In this case, it controls whether the range of colors in `colorscale` is mapped to the range of values in the `color` array (`cauto: true`), or the `cmin`/`cmax` values (`cauto: false`). Defaults to `false` when `cmin`, `cmax` are set by the user.",
                         "dflt": true,
                         "role": "info",
                         "valType": "boolean"
@@ -16416,7 +16501,7 @@
                     },
                     "color": {
                         "arrayOk": true,
-                        "description": "Sets the marker color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
+                        "description": "Sets the marker color. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                         "role": "style",
                         "valType": "color"
                     },
@@ -16478,7 +16563,7 @@
                             ]
                         },
                         "nticks": {
-                            "description": "Sets the number of ticks. Has an effect only if `tickmode` is set to *auto*.",
+                            "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*.",
                             "dflt": 0,
                             "min": 0,
                             "role": "style",
@@ -16759,7 +16844,7 @@
                         }
                     },
                     "colorscale": {
-                        "description": "Sets the colorscale and only has an effect if `marker.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.cmin` and `marker.cmax`.",
+                        "description": "Sets the colorscale and only has an effect if `marker.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.cmin` and `marker.cmax`. Alternatively, `colorscale` may be a palette name string of the following list: Greys, YlGnBu, Greens, YlOrRd, Bluered, RdBu, Reds, Blues, Picnic, Rainbow, Portland, Jet, Hot, Blackbody, Earth, Electric, Viridis",
                         "role": "style",
                         "valType": "colorscale"
                     },
@@ -16770,13 +16855,13 @@
                     },
                     "line": {
                         "autocolorscale": {
-                            "description": "Has an effect only if `.color` is set to a numerical array. Determines whether or not the colorscale is picked using values inside `.color`.",
+                            "description": "Has an effect only if `.color` is set to a numerical array. Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `.colorscale`. In case `colorscale` is unspecified or `autocolorscale` is true, the default  palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
                             "dflt": true,
                             "role": "style",
                             "valType": "boolean"
                         },
                         "cauto": {
-                            "description": "Has an effect only if `.color` is set to a numerical array. Determines the whether or not the color domain is computed automatically.",
+                            "description": "Has an effect only if `.color` is set to a numerical array and `cmin`, `cmax` are set by the user. In this case, it controls whether the range of colors in `colorscale` is mapped to the range of values in the `color` array (`cauto: true`), or the `cmin`/`cmax` values (`cauto: false`). Defaults to `false` when `cmin`, `cmax` are set by the user.",
                             "dflt": true,
                             "role": "info",
                             "valType": "boolean"
@@ -16795,12 +16880,12 @@
                         },
                         "color": {
                             "arrayOk": true,
-                            "description": "Sets the  color. It accepts either a specific color or an array of values that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
+                            "description": "Sets the  color. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
                             "role": "style",
                             "valType": "color"
                         },
                         "colorscale": {
-                            "description": "Sets the colorscale and only has an effect if `.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `.cmin` and `.cmax`.",
+                            "description": "Sets the colorscale and only has an effect if `.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `.cmin` and `.cmax`. Alternatively, `colorscale` may be a palette name string of the following list: Greys, YlGnBu, Greens, YlOrRd, Bluered, RdBu, Reds, Blues, Picnic, Rainbow, Portland, Jet, Hot, Blackbody, Earth, Electric, Viridis",
                             "role": "style",
                             "valType": "colorscale"
                         },
@@ -16810,7 +16895,7 @@
                             "valType": "string"
                         },
                         "reversescale": {
-                            "description": "Has an effect only if `.color` is set to a numerical array. Reverses the colorscale.",
+                            "description": "Has an effect only if `.color` is set to a numerical array. Reverses the color mapping if true (`cmin` will correspond to the last color in the array and `cmax` will correspond to the first color).",
                             "dflt": false,
                             "role": "style",
                             "valType": "boolean"
@@ -16850,7 +16935,7 @@
                         "valType": "string"
                     },
                     "reversescale": {
-                        "description": "Has an effect only if `marker.color` is set to a numerical array. Reverses the colorscale.",
+                        "description": "Has an effect only if `marker.color` is set to a numerical array. Reverses the color mapping if true (`cmin` will correspond to the last color in the array and `cmax` will correspond to the first color).",
                         "dflt": false,
                         "role": "style",
                         "valType": "boolean"
@@ -17456,7 +17541,7 @@
                         ]
                     },
                     "nticks": {
-                        "description": "Sets the number of ticks. Has an effect only if `tickmode` is set to *auto*.",
+                        "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*.",
                         "dflt": 0,
                         "min": 0,
                         "role": "style",
@@ -17773,19 +17858,19 @@
                         "project": {
                             "role": "object",
                             "x": {
-                                "description": "Determines whether or not these contour lines are projected on the x axis walls. If `highlight` is set to *true* (the default), the projected lines are shown on hover. If `show` is set to *true*, the projected lines are shown in permanence.",
+                                "description": "Determines whether or not these contour lines are projected on the x plane. If `highlight` is set to *true* (the default), the projected lines are shown on hover. If `show` is set to *true*, the projected lines are shown in permanence.",
                                 "dflt": false,
                                 "role": "info",
                                 "valType": "boolean"
                             },
                             "y": {
-                                "description": "Determines whether or not these contour lines are projected on the y axis walls. If `highlight` is set to *true* (the default), the projected lines are shown on hover. If `show` is set to *true*, the projected lines are shown in permanence.",
+                                "description": "Determines whether or not these contour lines are projected on the y plane. If `highlight` is set to *true* (the default), the projected lines are shown on hover. If `show` is set to *true*, the projected lines are shown in permanence.",
                                 "dflt": false,
                                 "role": "info",
                                 "valType": "boolean"
                             },
                             "z": {
-                                "description": "Determines whether or not these contour lines are projected on the z axis walls. If `highlight` is set to *true* (the default), the projected lines are shown on hover. If `show` is set to *true*, the projected lines are shown in permanence.",
+                                "description": "Determines whether or not these contour lines are projected on the z plane. If `highlight` is set to *true* (the default), the projected lines are shown on hover. If `show` is set to *true*, the projected lines are shown in permanence.",
                                 "dflt": false,
                                 "role": "info",
                                 "valType": "boolean"
@@ -17843,19 +17928,19 @@
                         "project": {
                             "role": "object",
                             "x": {
-                                "description": "Determines whether or not these contour lines are projected on the x axis walls. If `highlight` is set to *true* (the default), the projected lines are shown on hover. If `show` is set to *true*, the projected lines are shown in permanence.",
+                                "description": "Determines whether or not these contour lines are projected on the x plane. If `highlight` is set to *true* (the default), the projected lines are shown on hover. If `show` is set to *true*, the projected lines are shown in permanence.",
                                 "dflt": false,
                                 "role": "info",
                                 "valType": "boolean"
                             },
                             "y": {
-                                "description": "Determines whether or not these contour lines are projected on the y axis walls. If `highlight` is set to *true* (the default), the projected lines are shown on hover. If `show` is set to *true*, the projected lines are shown in permanence.",
+                                "description": "Determines whether or not these contour lines are projected on the y plane. If `highlight` is set to *true* (the default), the projected lines are shown on hover. If `show` is set to *true*, the projected lines are shown in permanence.",
                                 "dflt": false,
                                 "role": "info",
                                 "valType": "boolean"
                             },
                             "z": {
-                                "description": "Determines whether or not these contour lines are projected on the z axis walls. If `highlight` is set to *true* (the default), the projected lines are shown on hover. If `show` is set to *true*, the projected lines are shown in permanence.",
+                                "description": "Determines whether or not these contour lines are projected on the z plane. If `highlight` is set to *true* (the default), the projected lines are shown on hover. If `show` is set to *true*, the projected lines are shown in permanence.",
                                 "dflt": false,
                                 "role": "info",
                                 "valType": "boolean"
@@ -17913,19 +17998,19 @@
                         "project": {
                             "role": "object",
                             "x": {
-                                "description": "Determines whether or not these contour lines are projected on the x axis walls. If `highlight` is set to *true* (the default), the projected lines are shown on hover. If `show` is set to *true*, the projected lines are shown in permanence.",
+                                "description": "Determines whether or not these contour lines are projected on the x plane. If `highlight` is set to *true* (the default), the projected lines are shown on hover. If `show` is set to *true*, the projected lines are shown in permanence.",
                                 "dflt": false,
                                 "role": "info",
                                 "valType": "boolean"
                             },
                             "y": {
-                                "description": "Determines whether or not these contour lines are projected on the y axis walls. If `highlight` is set to *true* (the default), the projected lines are shown on hover. If `show` is set to *true*, the projected lines are shown in permanence.",
+                                "description": "Determines whether or not these contour lines are projected on the y plane. If `highlight` is set to *true* (the default), the projected lines are shown on hover. If `show` is set to *true*, the projected lines are shown in permanence.",
                                 "dflt": false,
                                 "role": "info",
                                 "valType": "boolean"
                             },
                             "z": {
-                                "description": "Determines whether or not these contour lines are projected on the z axis walls. If `highlight` is set to *true* (the default), the projected lines are shown on hover. If `show` is set to *true*, the projected lines are shown in permanence.",
+                                "description": "Determines whether or not these contour lines are projected on the z plane. If `highlight` is set to *true* (the default), the projected lines are shown on hover. If `show` is set to *true*, the projected lines are shown in permanence.",
                                 "dflt": false,
                                 "role": "info",
                                 "valType": "boolean"
