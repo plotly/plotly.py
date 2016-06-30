@@ -59,14 +59,14 @@ pull_chunked : submodules/chunked_requests
 	cd submodules/chunked_requests; git pull origin master
 
 update_offline :
-	@echo "Updating plotly.js"
+	@echo "Updating plotly.js for Offline Mode"
 	@echo "------------------"
 	python -c "import urllib2;\
-						 cdn_url = 'https://cdn.plot.ly/plotly-latest.min.js';\
-						 response = urllib2.urlopen(cdn_url);\
-						 html = response.read();\
-						 f = open('./plotly/offline/plotly.min.js', 'w');\
-    		 		 f.write(html);\
-						 f.close()"
-	@echo ""
+						  cdn_url = 'https://cdn.plot.ly/plotly-latest.min.js';\
+						  response = urllib2.urlopen(cdn_url);\
+						  html = response.read();\
+						  f = open('./plotly/offline/plotly.min.js', 'w');\
+    		 		  f.write(html);\
+						  f.close()"
+	@echo "---------------------------------"
 	@echo "Remember to update the CHANGELOG!"
