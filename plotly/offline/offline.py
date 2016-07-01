@@ -49,49 +49,6 @@ def get_plotlyjs():
     plotlyjs = resource_string('plotly', path).decode('utf-8')
     return plotlyjs
 
-def get_image_download_script(caller):
-    """
-    This function will return a script that will download an image of a Plotly
-    plot.
-
-    Keyword Arguments:
-    caller ('plot', 'iplot') -- specifies which function made the call for the
-        download script. If `iplot`, then an extra condition is added into the
-        download script to ensure that download prompts aren't initiated on
-        page reloads.
-    """
-
-    if caller == 'iplot':
-        check_start = 'if(document.readyState == \'complete\') {{'
-        check_end = '}}'
-    elif caller == 'plot':
-        check_start = ''
-        check_end = ''
-    else:
-        raise ValueError('caller should only be one of `iplot` or `plot`')
-
-    return(
-             ('<script>'
-              'function downloadimage(format, height, width,'
-              ' filename) {{'
-              'var p = document.getElementById(\'{plot_id}\');'
-              'Plotly.downloadImage(p, {{format: format, height: height, '
-              'width: width, filename: filename}});'
-              '}};' +
-              check_start +
-              'if(confirm(\'Do you want to save this image as '
-              '{filename}.{format}?\\n\\n'
-              'For higher resolution images and more export options, '
-              'consider making requests to our image servers. Type: '
-              'help(py.image) for more details.'
-              '\')) {{'
-              'downloadimage(\'{format}\', {height}, {width}, '
-              '\'{filename}\');}}' +
-              check_end +
-              '</script>'
-              )
-    )
-
 
 def init_notebook_mode(connected=False):
     """
