@@ -3434,6 +3434,13 @@ class FigureFactory(object):
                     z=aspectratio['z']),
                 )
         )
+
+        #data1[0]['colorscale'] = [[0, colormap[0]], [1, colormap[1]]]
+        #data1[0]['marker'] = {'colorscale': [[0, 'rgb(255, 0, 0)'], [1, 'rgb(5, 5, 255)']],
+        #                      'showscale': True}
+        data1[0]['colorscale'] = [[0, 'rgb(255, 0, 0)'], [1, 'rgb(5, 5, 255)']]
+        data1[0]['showscale'] = True
+
         return graph_objs.Figure(data=data1, layout=layout)
 
     @staticmethod
