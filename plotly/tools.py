@@ -3132,8 +3132,19 @@ class FigureFactory(object):
         # Make sure we have arrays to speed up plotting
         facecolor = np.asarray(facecolor)
         ii, jj, kk = simplices.T
+
+        # Adding intensity to Mesh3D Data
+        intensity = [j for j in range(len(x))]
+
+        colorscale_numbered = FigureFactory._make
+
         triangles = graph_objs.Mesh3d(x=x, y=y, z=z, facecolor=facecolor,
-                                      i=ii, j=jj, k=kk, name='')
+                                      i=ii, j=jj, k=kk, name='',
+                                      intensity=intensity,
+                                      colorscale=[[0, 'rgb(255, 0, 0)'],
+                                                  [0.5, 'rgb(0, 255, 0)'],
+                                                  [1, 'rgb(0, 0, 255)']],
+                                      showscale=True)
 
         if plot_edges is not True:  # the triangle sides are not plotted
             return graph_objs.Data([triangles])
@@ -3434,12 +3445,6 @@ class FigureFactory(object):
                     z=aspectratio['z']),
                 )
         )
-
-        #data1[0]['colorscale'] = [[0, colormap[0]], [1, colormap[1]]]
-        #data1[0]['marker'] = {'colorscale': [[0, 'rgb(255, 0, 0)'], [1, 'rgb(5, 5, 255)']],
-        #                      'showscale': True}
-        data1[0]['colorscale'] = [[0, 'rgb(255, 0, 0)'], [1, 'rgb(5, 5, 255)']]
-        data1[0]['showscale'] = True
 
         return graph_objs.Figure(data=data1, layout=layout)
 
