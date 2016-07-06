@@ -1477,30 +1477,26 @@ class FigureFactory(object):
     """
 
     @staticmethod
-    def _make_colorscale(colors):
+    def _make_linear_colorscale(colors):
         """
         Makes a list of colors into a colorscale-acceptable form
 
         For documentation regarding to the form of the output, see
         https://plot.ly/python/reference/#mesh3d-colorscale
         """
-        colorscale = []
-        diff = 1./(len(colors) - 1)
-
-        for j in range(len(colors)):
-            colorscale.append([j * diff, colors[j]])
-        return colorscale
+        scale = 1./(len(colors) - 1)
+        return[[i * scale, color] for i, color in enumerate(colors)]
 
     @staticmethod
     def create_2D_density(x, y, colorscale='Earth', ncontours=20,
-                          hist_color=(0, 0, 0.5), pt_color=(0, 0, 0.5),
-                          pt_size=2, height=600, width=600):
+                          hist_color=(0, 0, 0.5), point_color=(0, 0, 0.5),
+                          point_size=2, height=600, width=600):
         """
         Returns figure for a 2D density plot
 
         :param (list) x: x-axis data for plot generation
         :param (list) y: y-axis data for plot generation
-        :param (str|tuple|list) colormap: either a plotly scale name, an rgb
+        :param (str|tuple|list) colorscale: either a plotly scale name, an rgb
             or hex color, a color tuple or a list or tuple of colors. An rgb
             color is of the form 'rgb(x, y, z)' where x, y, z belong to the
             interval [0, 255] and a color tuple is a tuple of the form
@@ -1509,8 +1505,8 @@ class FigureFactory(object):
             members.
         :param (int) ncontours: the number of 2D contours to draw on the plot
         :param (str) hist_color: the color of the plotted histograms
-        :param (str) pt_color: the color of the scatter points
-        :param (str) pt_size: the color of the scatter points
+        :param (str) point_color: the color of the scatter points
+        :param (str) point_size: the color of the scatter points
         :param (float) height: the height of the chart
         :param (float) width: the width of the chart
 
@@ -1547,7 +1543,8 @@ class FigureFactory(object):
 
         # Create a figure
         fig = FF.create_2D_density(
-            x, y, colorscale=colorscale, hist_color='rgb(255, 237, 222)', pt_size=3)
+            x, y, colorscale=colorscale,
+            hist_color='rgb(255, 237, 222)', point_size=3)
 
         # Plot the data
         py.iplot(fig, filename='use-parameters')
@@ -1555,17 +1552,17 @@ class FigureFactory(object):
         """
         from plotly.graph_objs import graph_objs
         colorscale = FigureFactory._validate_colors(colorscale, 'rgb')
-        colorscale = FigureFactory._make_colorscale(colorscale)
+        colorscale = FigureFactory._make_linear_colorscale(colorscale)
 
-        # validate hist_color and pt_color
+        # validate hist_color and point_color
         hist_color = FigureFactory._validate_colors(hist_color, 'rgb')
-        pt_color = FigureFactory._validate_colors(pt_color, 'rgb')
+        point_color = FigureFactory._validate_colors(point_color, 'rgb')
 
         trace1 = graph_objs.Scatter(
             x=x, y=y, mode='markers', name='points',
             marker=dict(
-                color=pt_color[0],
-                size=pt_size,
+                color=point_color[0],
+                size=point_size,
                 opacity=0.4
             )
         )
