@@ -46,7 +46,8 @@ PLOTLY_SCALES = {'Greys': ['rgb(0,0,0)', 'rgb(255,255,255)'],
                  'Blackbody': ['rgb(0,0,0)', 'rgb(160,200,255)'],
                  'Earth': ['rgb(0,0,130)', 'rgb(255,255,255)'],
                  'Electric': ['rgb(0,0,0)', 'rgb(255,250,220)'],
-                 'Viridis': ['rgb(68,1,84)', 'rgb(253,231,37)']}
+                 'Viridis': 'Viridis'}
+#['rgb(68,1,84)', 'rgb(253,231,37)']}
 
 # color constants for violin plot
 DEFAULT_FILLCOLOR = '#1f77b4'
@@ -1475,6 +1476,21 @@ class FigureFactory(object):
     FigureFactory.create_annotated_heatmap, or FigureFactory.create_table for
     more information and examples of a specific chart type.
     """
+
+    @staticmethod
+    def _make_colorscale(colors):
+        """
+        Makes a list of colors into a colorscale-acceptable form
+
+        For documentation regarding to the form of the output, see
+        https://plot.ly/python/reference/#mesh3d-colorscale
+        """
+        colorscale = []
+        diff = 1./(len(colors) - 1)
+
+        for j in range(len(colors)):
+            colorscale.append([j * diff, colors[j]])
+        return colorscale
 
     @staticmethod
     def _validate_gantt(df):
@@ -3134,16 +3150,21 @@ class FigureFactory(object):
         ii, jj, kk = simplices.T
 
         # Adding intensity to Mesh3D Data
-        intensity = [j for j in range(len(x))]
+        intensity = [0]
 
-        colorscale_numbered = FigureFactory._make
+        div = 1./(len(x) - 1)
+
+        for j in range(1, len(x)+1):
+            intensity.append(j * div)
+        #print intensity
+        #intensity = [0 for j in range(len(x))]
+
+        colorscale_numbered = FigureFactory._make_colorscale(colormap)
 
         triangles = graph_objs.Mesh3d(x=x, y=y, z=z, facecolor=facecolor,
                                       i=ii, j=jj, k=kk, name='',
                                       intensity=intensity,
-                                      colorscale=[[0, 'rgb(255, 0, 0)'],
-                                                  [0.5, 'rgb(0, 255, 0)'],
-                                                  [1, 'rgb(0, 0, 255)']],
+                                      colorscale=colorscale_numbered,
                                       showscale=True)
 
         if plot_edges is not True:  # the triangle sides are not plotted
