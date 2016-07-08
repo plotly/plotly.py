@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Added `update_plotlyjs_for_offline` in makefile in order to automate updating `plotly.min.js` for offline mode
 - Updated `default-schema`
 
+
 ## [1.12.2] - 2016-06-20
 ### Updated
 - Updated plotly.min.js so the offline mode is using plotly.js v1.13.0
