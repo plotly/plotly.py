@@ -2,6 +2,17 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.12.3] - 2016-06-30
+### Updated
+- Updated `plotly.min.js` from 1.13.0 to 1.14.1
+	- Numerous additions and changes where made to the mapbox layout layers attributes
+	- Attribute line.color in scatter3d traces now support color scales
+	- Layout shapes can now be moved and resized (except for 'path' shapes) in editable contexts
+	- See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1141----2016-06-28) for additional information regarding the updates
+- Added `update_plotlyjs_for_offline` in makefile in order to automate updating `plotly.min.js` for offline mode
+- Updated `default-schema`
+
+
 ## [1.12.2] - 2016-06-20
 ### Updated
 - Updated plotly.min.js so the offline mode is using plotly.js v1.13.0
