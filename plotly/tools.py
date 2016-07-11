@@ -1494,8 +1494,8 @@ class FigureFactory(object):
         """
         Returns figure for a 2D density plot
 
-        :param (list) x: x-axis data for plot generation
-        :param (list) y: y-axis data for plot generation
+        :param (list|array) x: x-axis data for plot generation
+        :param (list|array) y: y-axis data for plot generation
         :param (str|tuple|list) colorscale: either a plotly scale name, an rgb
             or hex color, a color tuple or a list or tuple of colors. An rgb
             color is of the form 'rgb(x, y, z)' where x, y, z belong to the
@@ -1527,7 +1527,7 @@ class FigureFactory(object):
         py.iplot(fig, filename='simple-2d-density')
         ```
 
-        Example 2: Use Parameters
+        Example 2: Using Parameters
         ```
         import plotly.plotly as py
         from plotly.tools import FigureFactory as FF
@@ -1551,6 +1551,21 @@ class FigureFactory(object):
         ```
         """
         from plotly.graph_objs import graph_objs
+        from numbers import Number
+
+        # validate x and y are filled with numbers only
+        for array in [x, y]:
+            if not all(isinstance(element, Number) for element in array):
+                raise exceptions.PlotlyError(
+                    "All elements of your 'x' and 'y' lists must be numbers."
+                )
+
+        # validate x and y are the same length
+        if len(x) != len(y):
+            raise exceptions.PlotlyError(
+                "Both lists 'x' and 'y' must be the same length."
+            )
+
         colorscale = FigureFactory._validate_colors(colorscale, 'rgb')
         colorscale = FigureFactory._make_linear_colorscale(colorscale)
 
