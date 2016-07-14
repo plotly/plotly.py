@@ -5977,6 +5977,7 @@
                         "width": {
                             "arrayOk": true,
                             "description": "Sets the width (in px) of the lines bounding the marker points.",
+                            "dflt": 0,
                             "min": 0,
                             "role": "style",
                             "valType": "number"
