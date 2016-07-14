@@ -1365,6 +1365,111 @@ class TestGantt(TestCase):
         self.assertEqual(test_gantt_chart['layout'],
                          exp_gantt_chart['layout'])
 
+
+class Test2D_Density(TestCase):
+
+    def test_validate_2D_density(self):
+
+        # validate that x and y contain only numbers
+        x = [1, 2]
+        y = ['a', 2]
+
+        pattern = ("All elements of your 'x' and 'y' lists must be numbers.")
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                tls.FigureFactory.create_2D_density, x, y)
+
+        # validate that x and y are the same length
+        x2 = [1]
+        y2 = [1, 2]
+
+        pattern2 = ("Both lists 'x' and 'y' must be the same length.")
+
+        self.assertRaisesRegexp(PlotlyError, pattern2,
+                                tls.FigureFactory.create_2D_density, x2, y2)
+
+    def test_2D_density_all_args(self):
+
+        # check if 2D_density data matches with expected output
+        x = [1, 2]
+        y = [2, 4]
+
+        colorscale = ['#7A4579', '#D56073', 'rgb(236,158,105)',
+                      (1, 1, 0.2), (0.98, 0.98, 0.98)]
+
+        test_2D_density_chart = tls.FigureFactory.create_2D_density(
+            x, y, colorscale=colorscale, hist_color='rgb(255, 237, 222)',
+            point_size=3, height=800, width=800)
+
+        exp_2D_density_chart = {
+            'data': [{'marker': {'color': 'rgb(0.0, 0.0, 127.5)',
+                      'opacity': 0.4,
+                      'size': 3},
+                      'mode': 'markers',
+                      'name': 'points',
+                      'type': 'scatter',
+                      'x': [1, 2],
+                      'y': [2, 4]},
+                     {'colorscale': [[0.0, 'rgb(122.0, 69.0, 121.0)'],
+                                     [0.25, 'rgb(213.0, 96.0, 115.0)'],
+                                     [0.5, 'rgb(236.0, 158.0, 105.0)'],
+                                     [0.75, 'rgb(255.0, 255.0, 51.0)'],
+                                     [1.0, 'rgb(249.9, 249.9, 249.9)']],
+                      'name': 'density',
+                      'ncontours': 20,
+                      'reversescale': True,
+                      'showscale': False,
+                      'type': 'histogram2dcontour',
+                      'x': [1, 2],
+                      'y': [2, 4]},
+                     {'marker': {'color': 'rgb(255.0, 237.0, 222.0)'},
+                      'name': 'x density',
+                      'type': 'histogram',
+                      'x': [1, 2],
+                      'yaxis': 'y2'},
+                     {'marker': {'color': 'rgb(255.0, 237.0, 222.0)'},
+                      'name': 'y density',
+                      'type': 'histogram',
+                      'xaxis': 'x2',
+                      'y': [2, 4]}],
+            'layout': {'autosize': False,
+                       'bargap': 0,
+                       'height': 800,
+                       'hovermode': 'closest',
+                       'margin': {'t': 50},
+                       'showlegend': False,
+                       'title': 'Love',
+                       'width': 800,
+                       'xaxis': {'domain': [0, 0.85],
+                                 'showgrid': False,
+                                 'zeroline': False},
+                       'xaxis2': {'domain': [0.85, 1],
+                                  'showgrid': False,
+                                  'zeroline': False},
+                       'yaxis': {'domain': [0, 0.85],
+                                 'showgrid': False,
+                                 'zeroline': False},
+                       'yaxis2': {'domain': [0.85, 1],
+                                  'showgrid': False,
+                                  'zeroline': False}}
+        }
+
+        self.assertEqual(test_2D_density_chart['data'][0],
+                         exp_2D_density_chart['data'][0])
+
+        self.assertEqual(test_2D_density_chart['data'][1],
+                         exp_2D_density_chart['data'][1])
+
+        self.assertEqual(test_2D_density_chart['data'][2],
+                         exp_2D_density_chart['data'][2])
+
+        self.assertEqual(test_2D_density_chart['data'][3],
+                         exp_2D_density_chart['data'][3])
+
+        self.assertEqual(test_2D_density_chart['layout'],
+                         exp_2D_density_chart['layout'])
+
+
 # class TestDistplot(TestCase):
 
 #     def test_scipy_import_error(self):
