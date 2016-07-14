@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.12.4] - 2016-07-14
+### Added
+- The FigureFactory can now create 2D-density charts with `.create_2D_density`. Check it out with:
+```
+import plotly.tools as tls
+help(tls.FigureFactory.create_2D_density)
+```
+
 ## [1.12.3] - 2016-06-30
 ### Updated
 - Updated `plotly.min.js` from 1.13.0 to 1.14.1
@@ -13,12 +21,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - Added `update_plotlyjs_for_offline` in makefile in order to automate updating `plotly.min.js` for offline mode
-- The FigureFactory can now create 2D-density charts with `.create_2D_density`. Check it out with:
-```
-import plotly.tools as tls
-help(tls.FigureFactory.create_2D_density)
-```
-
 
 ## [1.12.2] - 2016-06-20
 ### Updated
