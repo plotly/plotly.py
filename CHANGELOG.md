@@ -13,7 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - Added `update_plotlyjs_for_offline` in makefile in order to automate updating `plotly.min.js` for offline mode
-- The FigureFactory can now create gantt charts with `.create_2D_density`. Check it out with:
+- The FigureFactory can now create 2D-density charts with `.create_2D_density`. Check it out with:
 ```
 import plotly.tools as tls
 help(tls.FigureFactory.create_2D_density)
