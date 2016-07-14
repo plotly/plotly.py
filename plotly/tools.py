@@ -1515,6 +1515,8 @@ class FigureFactory(object):
         import plotly.plotly as py
         from plotly.tools import FigureFactory as FF
 
+        import numpy as np
+
         # Make data points
         t = np.linspace(-1,1.2,2000)
         x = (t**3)+(0.3*np.random.randn(2000))
@@ -1531,6 +1533,8 @@ class FigureFactory(object):
         ```
         import plotly.plotly as py
         from plotly.tools import FigureFactory as FF
+
+        import numpy as np
 
         # Make data points
         t = np.linspace(-1,1.2,2000)
