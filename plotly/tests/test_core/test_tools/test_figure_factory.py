@@ -1371,9 +1371,7 @@ class Test2D_Density(TestCase):
     def test_validate_2D_density(self):
 
         # validate that x and y contain only numbers
-
         x = [1, 2]
-
         y = ['a', 2]
 
         pattern = ("All elements of your 'x' and 'y' lists must be numbers.")
@@ -1382,9 +1380,7 @@ class Test2D_Density(TestCase):
                                 tls.FigureFactory.create_2D_density, x, y)
 
         # validate that x and y are the same length
-
         x2 = [1]
-
         y2 = [1, 2]
 
         pattern2 = ("Both lists 'x' and 'y' must be the same length.")
@@ -1395,7 +1391,6 @@ class Test2D_Density(TestCase):
     def test_2D_density_all_args(self):
 
         # check if 2D_density data matches with expected output
-
         x = [1, 2]
         y = [2, 4]
 
