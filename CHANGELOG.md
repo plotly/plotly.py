@@ -9,8 +9,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 	- Attribute line.color in scatter3d traces now support color scales
 	- Layout shapes can now be moved and resized (except for 'path' shapes) in editable contexts
 	- See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1141----2016-06-28) for additional information regarding the updates
-- Added `update_plotlyjs_for_offline` in makefile in order to automate updating `plotly.min.js` for offline mode
 - Updated `default-schema`
+
+### Added
+- Added `update_plotlyjs_for_offline` in makefile in order to automate updating `plotly.min.js` for offline mode
+- The FigureFactory can now create gantt charts with `.create_2D_density`. Check it out with:
+```
+import plotly.tools as tls
+help(tls.FigureFactory.create_2D_density)
+```
 
 
 ## [1.12.2] - 2016-06-20
