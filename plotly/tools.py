@@ -1490,7 +1490,8 @@ class FigureFactory(object):
     @staticmethod
     def create_2D_density(x, y, colorscale='Earth', ncontours=20,
                           hist_color=(0, 0, 0.5), point_color=(0, 0, 0.5),
-                          point_size=2, height=600, width=600):
+                          point_size=2, title='2D Density Plot',
+                          height=600, width=600):
         """
         Returns figure for a 2D density plot
 
@@ -1507,6 +1508,7 @@ class FigureFactory(object):
         :param (str) hist_color: the color of the plotted histograms
         :param (str) point_color: the color of the scatter points
         :param (str) point_size: the color of the scatter points
+        :param (str) title: set the title for the plot
         :param (float) height: the height of the chart
         :param (float) width: the width of the chart
 
@@ -1602,7 +1604,7 @@ class FigureFactory(object):
         layout = graph_objs.Layout(
             showlegend=False,
             autosize=False,
-            title='Love',
+            title=title,
             height=height,
             width=width,
             xaxis=dict(
