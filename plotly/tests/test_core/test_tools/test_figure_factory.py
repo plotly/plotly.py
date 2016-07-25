@@ -1438,7 +1438,7 @@ class Test2D_Density(TestCase):
                        'hovermode': 'closest',
                        'margin': {'t': 50},
                        'showlegend': False,
-                       'title': 'Love',
+                       'title': '2D Density Plot',
                        'width': 800,
                        'xaxis': {'domain': [0, 0.85],
                                  'showgrid': False,
