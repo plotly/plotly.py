@@ -1,0 +1,44 @@
+package:
+  name: plotly
+  version: "1.9.3"
+
+source:
+  fn: plotly-1.9.3.tar.gz
+  url: https://pypi.python.org/packages/source/p/plotly/plotly-1.9.3.tar.gz
+  md5: f40ac2d3f0b1212f59c9a74d8f44067a
+
+build:
+  # noarch_python: True
+  number: 0
+
+requirements:
+  build:
+    - python
+    - setuptools
+    - requests
+    - six
+    - pytz
+
+  run:
+    - python
+    - requests
+    - six
+    - pytz
+
+test:
+  imports:
+    - plotly
+    - plotly/graph_objs
+    - plotly/grid_objs
+    - plotly/matplotlylib
+    - plotly/matplotlylib/mplexporter
+    - plotly/matplotlylib/mplexporter/renderers
+    - plotly/offline
+    - plotly/plotly
+    - plotly/plotly/chunked_requests
+    - plotly/widgets
+
+about:
+  home: https://plot.ly/python/
+  license: MIT
+  summary: 'Python plotting library for collaborative, interactive, publication-quality graphs.'
