@@ -46,8 +46,7 @@ PLOTLY_SCALES = {'Greys': ['rgb(0,0,0)', 'rgb(255,255,255)'],
                  'Blackbody': ['rgb(0,0,0)', 'rgb(160,200,255)'],
                  'Earth': ['rgb(0,0,130)', 'rgb(255,255,255)'],
                  'Electric': ['rgb(0,0,0)', 'rgb(255,250,220)'],
-                 'Viridis': 'Viridis'}
-#['rgb(68,1,84)', 'rgb(253,231,37)']}
+                 'Viridis': ['rgb(68,1,84)', 'rgb(253,231,37)']}
 
 # color constants for violin plot
 DEFAULT_FILLCOLOR = '#1f77b4'
@@ -1478,18 +1477,42 @@ class FigureFactory(object):
     """
 
     @staticmethod
-    def _make_colorscale(colors):
+    def _make_colorscale(colors, scale=None):
         """
-        Makes a list of colors into a colorscale-acceptable form
+        Makes a colorscale from a list of colors and scale
 
+        Takes a list of colors and scales and constructs a colorscale based
+        on the colors in sequential order. If 'scale' is left empty, a linear-
+        interpolated colorscale will be generated. If 'scale' is a specificed
+        list, it must be the same legnth as colors and must contain all floats
         For documentation regarding to the form of the output, see
         https://plot.ly/python/reference/#mesh3d-colorscale
         """
         colorscale = []
-        diff = 1./(len(colors) - 1)
 
-        for j in range(len(colors)):
-            colorscale.append([j * diff, colors[j]])
+        if not scale:
+            for j in range(len(colors)):
+                colorscale.append([j * 1./(len(colors) - 1), colors[j]])
+            return colorscale
+
+        else:
+            colorscale = [[scale[j], colors[j]] for j in range(len(colors))]
+            return colorscale
+
+    @staticmethod
+    def _convert_colorscale_to_rgb(colorscale):
+        """
+        Converts the colors in a colorscale to rgb colors
+        """
+        for index in range(len(colorscale)):
+            colorscale[index][1] = FigureFactory._convert_to_RGB_255(
+                colorscale[index][1]
+            )
+
+        for index in range(len(colorscale)):
+            colorscale[index][1] = FigureFactory._label_rgb(
+                colorscale[index][1]
+            )
         return colorscale
 
     @staticmethod
@@ -2996,7 +3019,7 @@ class FigureFactory(object):
     @staticmethod
     def _color_parser(colors, function):
         """
-        Takes color(s) and a function and applys the function on the color(s)
+        Takes color(s) and a function and applies the function on the color(s)
 
         In particular, this function identifies whether the given color object
         is an iterable or not and applies the given color-parsing function to
@@ -3081,9 +3104,9 @@ class FigureFactory(object):
         return face_color
 
     @staticmethod
-    def _trisurf(x, y, z, simplices, colormap=None, color_func=None,
-                 plot_edges=False, x_edge=None, y_edge=None, z_edge=None,
-                 facecolor=None):
+    def _trisurf(x, y, z, simplices, show_colorbar, colormap=None,
+                 color_func=None, plot_edges=False, x_edge=None, y_edge=None,
+                 z_edge=None, facecolor=None):
         """
         Refer to FigureFactory.create_trisurf() for docstring
         """
@@ -3149,26 +3172,25 @@ class FigureFactory(object):
         facecolor = np.asarray(facecolor)
         ii, jj, kk = simplices.T
 
-        # Adding intensity to Mesh3D Data
-        intensity = [0]
-
-        div = 1./(len(x) - 1)
-
-        for j in range(1, len(x)+1):
-            intensity.append(j * div)
-        #print intensity
-        #intensity = [0 for j in range(len(x))]
-
-        colorscale_numbered = FigureFactory._make_colorscale(colormap)
+        # make a colorscale from the colors
+        colorscale = FigureFactory._make_colorscale(colormap)
+        colorscale = FigureFactory._convert_colorscale_to_rgb(colorscale)
 
         triangles = graph_objs.Mesh3d(x=x, y=y, z=z, facecolor=facecolor,
-                                      i=ii, j=jj, k=kk, name='',
-                                      intensity=intensity,
-                                      colorscale=colorscale_numbered,
-                                      showscale=True)
+                                      i=ii, j=jj, k=kk, name='')
 
-        if plot_edges is not True:  # the triangle sides are not plotted
-            return graph_objs.Data([triangles])
+        colorbar = graph_objs.Mesh3d(x=[0, 1], y=[0, 1], z=[0, 1],
+                                     colorscale=colorscale,
+                                     intensity=[0, 1],
+                                     showscale=True)
+
+        # the triangle sides are not plotted
+        if plot_edges is not True:
+            if show_colorbar is True:
+                return graph_objs.Data([triangles, colorbar])
+            else:
+                return graph_objs.Data([triangles])
+
 
         # define the lists x_edge, y_edge and z_edge, of x, y, resp z
         # coordinates of edge end points for each triangle
@@ -3208,12 +3230,14 @@ class FigureFactory(object):
             line=graph_objs.Line(color='rgb(50, 50, 50)',
                                  width=1.5)
         )
-
-        return graph_objs.Data([triangles, lines])
+        if show_colorbar is True:
+            return graph_objs.Data([triangles, lines, colorbar])
+        else:
+            return graph_objs.Data([triangles, lines])
 
     @staticmethod
-    def create_trisurf(x, y, z, simplices, colormap=None, color_func=None,
-                       title='Trisurf Plot', plot_edges=True,
+    def create_trisurf(x, y, z, simplices, colormap=None, show_colorbar=True,
+                       color_func=None, title='Trisurf Plot', plot_edges=True,
                        showbackground=True,
                        backgroundcolor='rgb(230, 230, 230)',
                        gridcolor='rgb(255, 255, 255)',
@@ -3234,7 +3258,8 @@ class FigureFactory(object):
             of the form 'rgb(x, y, z)' where x, y, z belong to the interval
             [0, 255] and a color tuple is a tuple of the form (a, b, c) where
             a, b and c belong to [0, 1]. If colormap is a list, it must
-            contain the valid color types aforementioned as its members.
+            contain the valid color types aforementioned as its members
+        :param (bool) show_colorbar: determines if colorbar is visible
         :param (function|list) color_func: The parameter that determines the
             coloring of the surface. Takes either a function with 3 arguments
             x, y, z or a list/array of color values the same length as
@@ -3443,6 +3468,7 @@ class FigureFactory(object):
         colormap = FigureFactory._validate_colors(colormap, 'tuple')
 
         data1 = FigureFactory._trisurf(x, y, z, simplices,
+                                       show_colorbar=show_colorbar,
                                        color_func=color_func,
                                        colormap=colormap,
                                        plot_edges=plot_edges)
