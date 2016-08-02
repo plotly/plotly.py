@@ -1515,6 +1515,7 @@ class FigureFactory(object):
             )
         return colorscale
 
+    @staticmethod
     def _make_linear_colorscale(colors):
         """
         Makes a list of colors into a colorscale-acceptable form
