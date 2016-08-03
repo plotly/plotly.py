@@ -1491,27 +1491,32 @@ class FigureFactory(object):
         colorscale = []
 
         if not scale:
-            for j in range(len(colors)):
-                colorscale.append([j * 1./(len(colors) - 1), colors[j]])
+            for j, color in enumerate(colors):
+                colorscale.append([j * 1./(len(colors) - 1), color])
             return colorscale
 
         else:
-            colorscale = [[scale[j], colors[j]] for j in range(len(colors))]
+            colorscale = [list(tup) for tup in zip(scale, colors)]
             return colorscale
 
     @staticmethod
     def _convert_colorscale_to_rgb(colorscale):
         """
         Converts the colors in a colorscale to rgb colors
+
+        A colorscale is an array of arrays, each with a numeric value as the
+        first item and a color as the second. This function specifically is
+        converting a colorscale with tuple colors (each coordinate between 0
+        and 1) into a colorscale with the colors transformed into rgb colors
         """
-        for index in range(len(colorscale)):
-            colorscale[index][1] = FigureFactory._convert_to_RGB_255(
-                colorscale[index][1]
+        for color in colorscale:
+            color[1] = FigureFactory._convert_to_RGB_255(
+                color[1]
             )
 
-        for index in range(len(colorscale)):
-            colorscale[index][1] = FigureFactory._label_rgb(
-                colorscale[index][1]
+        for color in colorscale:
+            color[1] = FigureFactory._label_rgb(
+                color[1]
             )
         return colorscale
 
