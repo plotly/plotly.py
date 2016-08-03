@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.12.5] - 2016-08-03
+### Updated
+- `.create_trisurf` now supports making a visible colorbar for the chart. Check out the docs with:
+```
+import plotly.tools as tls
+help(tls.FigureFactory.create_trisurf)
+```
+
 ## [1.12.4] - 2016-07-14
 ### Added
 - The FigureFactory can now create 2D-density charts with `.create_2D_density`. Check it out with:
