@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.12.5] - 2016-08-03
 ### Updated
-- `.create_trisurf` now supports making a visible colorbar for the chart. Check out the docs with:
+- `.create_trisurf` now supports a visible colorbar for the trisurf plotschart. Check out the docs with:
 ```
 import plotly.tools as tls
 help(tls.FigureFactory.create_trisurf)
