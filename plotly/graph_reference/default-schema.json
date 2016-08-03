@@ -112,11 +112,11 @@
                 "requiredOpts": []
             },
             "subplotid": {
-                "description": "An id string of a subplot type (given by dflt), optionally followed by an integer >1. e.g. if dflt='geo', we can  have 'geo', 'geo2', 'geo3', ...",
-                "otherOpts": [
+                "description": "An id string of a subplot type (given by dflt), optionally followed by an integer >1. e.g. if dflt='geo', we can have 'geo', 'geo2', 'geo3', ...",
+                "otherOpts": [],
+                "requiredOpts": [
                     "dflt"
-                ],
-                "requiredOpts": []
+                ]
             }
         }
     },
@@ -18262,5 +18262,6 @@
             },
             "description": "The data the describes the coordinates of the surface is set in `z`. Data in `z` should be a {2D array}. Coordinates in `x` and `y` can either be 1D {arrays} or {2D arrays} (e.g. to graph parametric surfaces). If not provided in `x` and `y`, the x and y coordinates are assumed to be linear starting at 0 with a unit step. The color scale corresponds to the `z` values by default. For custom color scales, use `surfacecolor` which should be a {2D array}, where its bounds can be controlled using `cmin` and `cmax`."
         }
-    }
+    },
+    "transforms": {}
 }
