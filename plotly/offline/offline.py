@@ -49,49 +49,6 @@ def get_plotlyjs():
     plotlyjs = resource_string('plotly', path).decode('utf-8')
     return plotlyjs
 
-def get_image_download_script(caller):
-    """
-    This function will return a script that will download an image of a Plotly
-    plot.
-
-    Keyword Arguments:
-    caller ('plot', 'iplot') -- specifies which function made the call for the
-        download script. If `iplot`, then an extra condition is added into the
-        download script to ensure that download prompts aren't initiated on
-        page reloads.
-    """
-
-    if caller == 'iplot':
-        check_start = 'if(document.readyState == \'complete\') {{'
-        check_end = '}}'
-    elif caller == 'plot':
-        check_start = ''
-        check_end = ''
-    else:
-        raise ValueError('caller should only be one of `iplot` or `plot`')
-
-    return(
-             ('<script>'
-              'function downloadimage(format, height, width,'
-              ' filename) {{'
-              'var p = document.getElementById(\'{plot_id}\');'
-              'Plotly.downloadImage(p, {{format: format, height: height, '
-              'width: width, filename: filename}});'
-              '}};' +
-              check_start +
-              'if(confirm(\'Do you want to save this image as '
-              '{filename}.{format}?\\n\\n'
-              'For higher resolution images and more export options, '
-              'consider making requests to our image servers. Type: '
-              'help(py.image) for more details.'
-              '\')) {{'
-              'downloadimage(\'{format}\', {height}, {width}, '
-              '\'{filename}\');}}' +
-              check_end +
-              '</script>'
-              )
-    )
-
 
 def init_notebook_mode(connected=False):
     """
@@ -160,8 +117,8 @@ def init_notebook_mode(connected=False):
     __PLOTLY_OFFLINE_INITIALIZED = True
 
 
-def _plot_html(figure_or_data, show_link, link_text, validate,
-               default_width, default_height, global_requirejs):
+def _plot_html(figure_or_data, show_link, link_text, validate, default_width,
+               default_height, global_requirejs, **image_settings):
 
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
 
@@ -204,11 +161,41 @@ def _plot_html(figure_or_data, show_link, link_text, validate,
         link_text = link_text.replace('plot.ly', link_domain)
         config['linkText'] = link_text
 
-    script = 'Plotly.newPlot("{id}", {data}, {layout}, {config})'.format(
-        id=plotdivid,
-        data=jdata,
-        layout=jlayout,
-        config=jconfig)
+    if 'image' in image_settings and 'caller' in image_settings:
+        image = image_settings['image']
+        caller = image_settings['caller']
+    else:
+        image = None
+
+    if image:
+        if caller == 'iplot':
+            start_if = 'if(!((new Date()).getTime()>{utime}+{delay})) {{'
+            end_if = '}}'
+        else:
+            start_if = ''
+            end_if = ''
+        download = ('.then(function(gd){{' +
+                    start_if +
+                    'Plotly.downloadImage(gd, {{'
+                    'format: \'{extension}\', filename: \'{filename}\', '
+                    'height: {height}, width: {width} }} ); }}' +
+                    end_if +
+                    ')'
+                    '').format(extension=image['extension'],
+                               filename=image['filename'],
+                               height=image['height'],
+                               width=image['width'],
+                               utime=time.time()*1000,
+                               delay=image['image_delay'])
+    else:
+        download = ''
+    script = (''
+              'Plotly.newPlot("{id}", {data}, {layout}, {config})'
+              '{download}').format(id=plotdivid,
+                                   data=jdata,
+                                   layout=jlayout,
+                                   config=jconfig,
+                                   download=download)
 
     optional_line1 = ('require(["plotly"], function(Plotly) {{ '
                       if global_requirejs else '')
@@ -234,7 +221,7 @@ def _plot_html(figure_or_data, show_link, link_text, validate,
 
 def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
           validate=True, image=None, filename='plot_image', image_width=800,
-          image_height=600):
+          image_height=600, image_delay=10000):
     """
     Draw plotly graphs inside an IPython notebook without
     connecting to an external server.
@@ -265,6 +252,8 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         will be saved to. The extension should not be included.
     image_height (default=600) -- Specifies the height of the image in `px`.
     image_width (default=800) -- Specifies the width of the image in `px`.
+    image_delay (default=10000) -- The image of your plot will only be saved
+        if it's rendered within the time set by image_delay.
 
     Example:
     ```
@@ -288,27 +277,28 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     if not tools._ipython_imported:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
-    plot_html, plotdivid, width, height = _plot_html(
-        figure_or_data, show_link, link_text, validate,
-        '100%', 525, global_requirejs=True)
-
-    display(HTML(plot_html))
-
+    # check if the user wants to download an image
     if image:
         if image not in __IMAGE_FORMATS:
             raise ValueError('The image parameter must be one of the following'
                              ': {}'.format(__IMAGE_FORMATS)
                              )
         # if image is given, and is a valid format, we will download the image
-        script = get_image_download_script('iplot').format(format=image,
-                                                       width=image_width,
-                                                       height=image_height,
-                                                       filename=filename,
-                                                       plot_id=plotdivid)
-        # allow time for the plot to draw
-        time.sleep(1)
-        # inject code to download an image of the plot
-        display(HTML(script))
+        # Note we now pass a dictionary of images specs to _plot_html
+        image_info = dict(width=image_width, height=image_height,
+                          filename=filename, extension=image,
+                          image_delay=image_delay)
+
+        plot_html, plotdivid, width, height = _plot_html(
+            figure_or_data, show_link, link_text, validate, '100%', 525,
+            global_requirejs=True, image=image_info, caller="iplot")
+
+    else:
+        plot_html, plotdivid, width, height = _plot_html(
+            figure_or_data, show_link, link_text, validate, '100%', 525,
+            global_requirejs=True)
+
+    display(HTML(plot_html))
 
 
 def plot(figure_or_data,
@@ -317,7 +307,7 @@ def plot(figure_or_data,
          include_plotlyjs=True,
          filename='temp-plot.html', auto_open=True,
          image=None, image_filename='plot_image',
-         image_width=800, image_height=600):
+         image_width=800, image_height=600, image_delay=10000):
     """ Create a plotly graph locally as an HTML document or string.
 
     Example:
@@ -375,6 +365,8 @@ def plot(figure_or_data,
         will be saved to. The extension should not be included.
     image_height (default=600) -- Specifies the height of the image in `px`.
     image_width (default=800) -- Specifies the width of the image in `px`.
+    image_delay (default=10000) -- If your plot renders within this time span
+        after the plot function, then your image will be saved.
     """
     if output_type not in ['div', 'file']:
         raise ValueError(
@@ -385,10 +377,25 @@ def plot(figure_or_data,
             "Your filename `" + filename + "` didn't end with .html. "
             "Adding .html to the end of your file.")
         filename += '.html'
+    # check if the user wants to download an image
+    if image:
+        if image not in __IMAGE_FORMATS:
+            raise ValueError('The image parameter must be one of the following'
+                             ': {}'.format(__IMAGE_FORMATS)
+                             )
+        # if image is given, and is a valid format, we will download the image
+        # Note: we now pass a dictionary of image specs to _plot_html
+        image_info = dict(width=image_width, height=image_height,
+                          filename=image_filename, extension=image,
+                          image_delay=image_delay)
 
-    plot_html, plotdivid, width, height = _plot_html(
-        figure_or_data, show_link, link_text, validate,
-        '100%', '100%', global_requirejs=False)
+        plot_html, plotdivid, width, height = _plot_html(
+            figure_or_data, show_link, link_text, validate, '100%', '100%',
+            global_requirejs=False, image=image_info, caller="plot")
+    else:
+        plot_html, plotdivid, width, height = _plot_html(
+            figure_or_data, show_link, link_text, validate, '100%', '100%',
+            global_requirejs=False)
 
     resize_script = ''
     if width == '100%' or height == '100%':
@@ -412,22 +419,6 @@ def plot(figure_or_data,
             else:
                 plotly_js_script = ''
 
-            if image:
-                if image not in __IMAGE_FORMATS:
-                    raise ValueError('The image parameter must be one of the '
-                                     'following: {}'.format(__IMAGE_FORMATS)
-                                     )
-                # if the check passes then download script is injected.
-                # write the download script:
-                script = get_image_download_script('plot')
-                script = script.format(format=image,
-                                       width=image_width,
-                                       height=image_height,
-                                       filename=image_filename,
-                                       plot_id=plotdivid)
-            else:
-                script = ''
-
             f.write(''.join([
                 '<html>',
                 '<head><meta charset="utf-8" /></head>',
@@ -435,7 +426,6 @@ def plot(figure_or_data,
                 plotly_js_script,
                 plot_html,
                 resize_script,
-                script,
                 '</body>',
                 '</html>']))
 
@@ -464,7 +454,7 @@ def plot_mpl(mpl_fig, resize=False, strip_style=False,
              validate=True, output_type='file', include_plotlyjs=True,
              filename='temp-plot.html', auto_open=True,
              image=None, image_filename='plot_image',
-             image_height=600, image_width=800):
+             image_height=600, image_width=800, image_delay=10000):
     """
     Convert a matplotlib figure to a Plotly graph stored locally as HTML.
 
@@ -538,14 +528,15 @@ def plot_mpl(mpl_fig, resize=False, strip_style=False,
     return plot(plotly_plot, show_link, link_text, validate, output_type,
                 include_plotlyjs, filename, auto_open,
                 image=image, image_filename=image_filename,
-                image_height=image_height, image_width=image_width)
+                image_height=image_height, image_width=image_width,
+                image_delay=image_delay)
 
 
 def iplot_mpl(mpl_fig, resize=False, strip_style=False,
               verbose=False, show_link=True,
               link_text='Export to plot.ly', validate=True,
               image=None, image_filename='plot_image',
-              image_height=600, image_width=800):
+              image_height=600, image_width=800, image_delay=10000):
     """
     Convert a matplotlib figure to a plotly graph and plot inside an IPython
     notebook without connecting to an external server.
@@ -602,7 +593,8 @@ def iplot_mpl(mpl_fig, resize=False, strip_style=False,
     plotly_plot = tools.mpl_to_plotly(mpl_fig, resize, strip_style, verbose)
     return iplot(plotly_plot, show_link, link_text, validate,
                  image=image, filename=image_filename,
-                 image_height=image_height, image_width=image_width)
+                 image_height=image_height, image_width=image_width,
+                 image_delay=image_delay)
 
 
 def enable_mpl_offline(resize=False, strip_style=False,
