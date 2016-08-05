@@ -3622,6 +3622,7 @@ class FigureFactory(object):
         fig = FF.create_trisurf(
             x, y, z, simplices,
             color_func=colors,
+            show_colorbar=True,
             title=' Modern Art'
         )
 
