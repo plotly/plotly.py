@@ -1,7 +1,7 @@
 import os
 
 # file structure
-PLOTLY_DIR = os.path.join(os.path.expanduser("~"), ".plotly")
+PLOTLY_DIR = os.environ.get("PLOTLY_DIR", os.path.join(os.path.expanduser("~"), ".plotly"))
 CREDENTIALS_FILE = os.path.join(PLOTLY_DIR, ".credentials")
 CONFIG_FILE = os.path.join(PLOTLY_DIR, ".config")
 GRAPH_REFERENCE_FILE = os.path.join(PLOTLY_DIR, ".graph_reference")
