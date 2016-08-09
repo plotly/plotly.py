@@ -18,7 +18,8 @@
             "any": {
                 "description": "Any type.",
                 "otherOpts": [
-                    "dflt"
+                    "dflt",
+                    "values"
                 ],
                 "requiredOpts": []
             },
@@ -75,7 +76,8 @@
             "info_array": {
                 "description": "An {array} of plot information.",
                 "otherOpts": [
-                    "dflt"
+                    "dflt",
+                    "freeLength"
                 ],
                 "requiredOpts": [
                     "items"
@@ -1075,6 +1077,258 @@
                         "middle",
                         "bottom"
                     ]
+                }
+            },
+            "mapbox": {
+                "_isSubplotObj": true,
+                "accesstoken": {
+                    "description": "Sets the mapbox access token to be used for this mapbox map. Alternatively, the mapbox access token can be set in the configuration options under `mapboxAccessToken`.",
+                    "noBlank": true,
+                    "role": "info",
+                    "strict": true,
+                    "valType": "string"
+                },
+                "bearing": {
+                    "description": "Sets the bearing angle of the map (in degrees counter-clockwise from North).",
+                    "dflt": 0,
+                    "role": "info",
+                    "valType": "number"
+                },
+                "center": {
+                    "lat": {
+                        "description": "Sets the latitude of the center of the map (in degrees North).",
+                        "dflt": 0,
+                        "role": "info",
+                        "valType": "number"
+                    },
+                    "lon": {
+                        "description": "Sets the longitude of the center of the map (in degrees East).",
+                        "dflt": 0,
+                        "role": "info",
+                        "valType": "number"
+                    },
+                    "role": "object"
+                },
+                "domain": {
+                    "role": "object",
+                    "x": {
+                        "description": "Sets the horizontal domain of this subplot (in plot fraction).",
+                        "dflt": [
+                            0,
+                            1
+                        ],
+                        "items": [
+                            {
+                                "max": 1,
+                                "min": 0,
+                                "valType": "number"
+                            },
+                            {
+                                "max": 1,
+                                "min": 0,
+                                "valType": "number"
+                            }
+                        ],
+                        "role": "info",
+                        "valType": "info_array"
+                    },
+                    "y": {
+                        "description": "Sets the vertical domain of this subplot (in plot fraction).",
+                        "dflt": [
+                            0,
+                            1
+                        ],
+                        "items": [
+                            {
+                                "max": 1,
+                                "min": 0,
+                                "valType": "number"
+                            },
+                            {
+                                "max": 1,
+                                "min": 0,
+                                "valType": "number"
+                            }
+                        ],
+                        "role": "info",
+                        "valType": "info_array"
+                    }
+                },
+                "layers": {
+                    "items": {
+                        "layer": {
+                            "below": {
+                                "description": "Determines if the layer will be inserted before the layer with the specified ID. If omitted or set to '', the layer will be inserted above every existing layer.",
+                                "dflt": "",
+                                "role": "info",
+                                "valType": "string"
+                            },
+                            "circle": {
+                                "radius": {
+                                    "description": "Sets the circle radius. Has an effect only when `type` is set to *circle*.",
+                                    "dflt": 15,
+                                    "role": "style",
+                                    "valType": "number"
+                                },
+                                "role": "object"
+                            },
+                            "color": {
+                                "description": "Sets the primary layer color. If `type` is *circle*, color corresponds to the circle color If `type` is *line*, color corresponds to the line color If `type` is *fill*, color corresponds to the fill color If `type` is *symbol*, color corresponds to the icon color",
+                                "dflt": "#444",
+                                "role": "style",
+                                "valType": "color"
+                            },
+                            "fill": {
+                                "outlinecolor": {
+                                    "description": "Sets the fill outline color. Has an effect only when `type` is set to *fill*.",
+                                    "dflt": "#444",
+                                    "role": "style",
+                                    "valType": "color"
+                                },
+                                "role": "object"
+                            },
+                            "line": {
+                                "role": "object",
+                                "width": {
+                                    "description": "Sets the line width. Has an effect only when `type` is set to *line*.",
+                                    "dflt": 2,
+                                    "role": "style",
+                                    "valType": "number"
+                                }
+                            },
+                            "opacity": {
+                                "description": "Sets the opacity of the layer.",
+                                "dflt": 1,
+                                "max": 1,
+                                "min": 0,
+                                "role": "info",
+                                "valType": "number"
+                            },
+                            "role": "object",
+                            "source": {
+                                "description": "Sets the source data for this layer. Source can be either a URL, a geojson object (with `sourcetype` set to *geojson*) or an array of tile URLS (with `sourcetype` set to *vector*).",
+                                "role": "info",
+                                "valType": "any"
+                            },
+                            "sourcelayer": {
+                                "description": "Specifies the layer to use from a vector tile source. Required for *vector* source type that supports multiple layers.",
+                                "dflt": "",
+                                "role": "info",
+                                "valType": "string"
+                            },
+                            "sourcetype": {
+                                "description": "Sets the source type for this layer. Support for *raster*, *image* and *video* source types is coming soon.",
+                                "dflt": "geojson",
+                                "role": "info",
+                                "valType": "enumerated",
+                                "values": [
+                                    "geojson",
+                                    "vector"
+                                ]
+                            },
+                            "symbol": {
+                                "icon": {
+                                    "description": "Sets the symbol icon image. Full list: https://www.mapbox.com/maki-icons/",
+                                    "dflt": "marker",
+                                    "role": "style",
+                                    "valType": "string"
+                                },
+                                "iconsize": {
+                                    "description": "Sets the symbol icon size. Has an effect only when `type` is set to *symbol*.",
+                                    "dflt": 10,
+                                    "role": "style",
+                                    "valType": "number"
+                                },
+                                "role": "object",
+                                "text": {
+                                    "description": "Sets the symbol text.",
+                                    "dflt": "",
+                                    "role": "info",
+                                    "valType": "string"
+                                },
+                                "textfont": {
+                                    "color": {
+                                        "role": "style",
+                                        "valType": "color"
+                                    },
+                                    "description": "Sets the icon text font. Has an effect only when `type` is set to *symbol*.",
+                                    "family": {
+                                        "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                                        "dflt": "Open Sans Regular, Arial Unicode MS Regular",
+                                        "noBlank": true,
+                                        "role": "style",
+                                        "strict": true,
+                                        "valType": "string"
+                                    },
+                                    "role": "object",
+                                    "size": {
+                                        "min": 1,
+                                        "role": "style",
+                                        "valType": "number"
+                                    }
+                                },
+                                "textposition": {
+                                    "arrayOk": false,
+                                    "description": "Sets the positions of the `text` elements with respects to the (x,y) coordinates.",
+                                    "dflt": "middle center",
+                                    "role": "style",
+                                    "valType": "enumerated",
+                                    "values": [
+                                        "top left",
+                                        "top center",
+                                        "top right",
+                                        "middle left",
+                                        "middle center",
+                                        "middle right",
+                                        "bottom left",
+                                        "bottom center",
+                                        "bottom right"
+                                    ]
+                                }
+                            },
+                            "type": {
+                                "description": "Sets the layer type. Support for *raster*, *background* types is coming soon. Note that *line* and *fill* are not compatible with Point GeoJSON geometries.",
+                                "dflt": "circle",
+                                "role": "info",
+                                "valType": "enumerated",
+                                "values": [
+                                    "circle",
+                                    "line",
+                                    "fill",
+                                    "symbol"
+                                ]
+                            }
+                        }
+                    },
+                    "role": "object"
+                },
+                "pitch": {
+                    "description": "Sets the pitch angle of the map (in degrees, where *0* means perpendicular to the surface of the map).",
+                    "dflt": 0,
+                    "role": "info",
+                    "valType": "number"
+                },
+                "role": "object",
+                "style": {
+                    "description": "Sets the Mapbox map style. Either input one of the default Mapbox style names or the URL to a custom style or a valid Mapbox style JSON.",
+                    "dflt": "basic",
+                    "role": "style",
+                    "valType": "any",
+                    "values": [
+                        "basic",
+                        "streets",
+                        "outdoors",
+                        "light",
+                        "dark",
+                        "satellite",
+                        "satellite-streets"
+                    ]
+                },
+                "zoom": {
+                    "description": "Sets the zoom level of the map.",
+                    "dflt": 1,
+                    "role": "info",
+                    "valType": "number"
                 }
             },
             "margin": {
@@ -3626,6 +3880,145 @@
                     "valType": "number"
                 }
             },
+            "updatemenus": {
+                "items": {
+                    "updatemenu": {
+                        "active": {
+                            "description": "Determines which button (by index starting from 0) is considered active.",
+                            "dflt": 0,
+                            "min": -1,
+                            "role": "info",
+                            "valType": "integer"
+                        },
+                        "bgcolor": {
+                            "description": "Sets the background color of the update menu buttons.",
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "bordercolor": {
+                            "description": "Sets the color of the border enclosing the update menu.",
+                            "dflt": "#BEC8D9",
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "borderwidth": {
+                            "description": "Sets the width (in px) of the border enclosing the update menu.",
+                            "dflt": 1,
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "buttons": {
+                            "items": {
+                                "button": {
+                                    "args": {
+                                        "description": "Sets the arguments values to be passed to the Plotly method set in `method` on click.",
+                                        "freeLength": true,
+                                        "items": [
+                                            {
+                                                "valType": "any"
+                                            },
+                                            {
+                                                "valType": "any"
+                                            },
+                                            {
+                                                "valType": "any"
+                                            }
+                                        ],
+                                        "role": "info",
+                                        "valType": "info_array"
+                                    },
+                                    "label": {
+                                        "description": "Sets the text label to appear on the button.",
+                                        "dflt": "",
+                                        "role": "info",
+                                        "valType": "string"
+                                    },
+                                    "method": {
+                                        "description": "Sets the Plotly method to be called on click.",
+                                        "dflt": "restyle",
+                                        "role": "info",
+                                        "valType": "enumerated",
+                                        "values": [
+                                            "restyle",
+                                            "relayout"
+                                        ]
+                                    },
+                                    "role": "object"
+                                }
+                            },
+                            "role": "object"
+                        },
+                        "font": {
+                            "color": {
+                                "role": "style",
+                                "valType": "color"
+                            },
+                            "description": "Sets the font of the update menu button text.",
+                            "family": {
+                                "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                                "noBlank": true,
+                                "role": "style",
+                                "strict": true,
+                                "valType": "string"
+                            },
+                            "role": "object",
+                            "size": {
+                                "min": 1,
+                                "role": "style",
+                                "valType": "number"
+                            }
+                        },
+                        "role": "object",
+                        "visible": {
+                            "description": "Determines whether or not the update menu is visible.",
+                            "role": "info",
+                            "valType": "boolean"
+                        },
+                        "x": {
+                            "description": "Sets the x position (in normalized coordinates) of the update menu.",
+                            "dflt": -0.05,
+                            "max": 3,
+                            "min": -2,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "xanchor": {
+                            "description": "Sets the update menu's horizontal position anchor. This anchor binds the `x` position to the *left*, *center* or *right* of the range selector.",
+                            "dflt": "right",
+                            "role": "info",
+                            "valType": "enumerated",
+                            "values": [
+                                "auto",
+                                "left",
+                                "center",
+                                "right"
+                            ]
+                        },
+                        "y": {
+                            "description": "Sets the y position (in normalized coordinates) of the update menu.",
+                            "dflt": 1,
+                            "max": 3,
+                            "min": -2,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "yanchor": {
+                            "description": "Sets the update menu's vertical position anchor This anchor binds the `y` position to the *top*, *middle* or *bottom* of the range selector.",
+                            "dflt": "bottom",
+                            "role": "info",
+                            "valType": "enumerated",
+                            "values": [
+                                "auto",
+                                "top",
+                                "middle",
+                                "bottom"
+                            ]
+                        }
+                    }
+                },
+                "role": "object"
+            },
             "width": {
                 "description": "Sets the plot's width (in px).",
                 "dflt": 700,
@@ -3833,6 +4226,11 @@
                     ]
                 },
                 "rangeselector": {
+                    "activecolor": {
+                        "description": "Sets the background color of the active range selector button.",
+                        "role": "style",
+                        "valType": "color"
+                    },
                     "bgcolor": {
                         "description": "Sets the background color of the range selector buttons.",
                         "dflt": "#eee",
@@ -4443,6 +4841,11 @@
                     ]
                 },
                 "rangeselector": {
+                    "activecolor": {
+                        "description": "Sets the background color of the active range selector button.",
+                        "role": "style",
+                        "valType": "color"
+                    },
                     "bgcolor": {
                         "description": "Sets the background color of the range selector buttons.",
                         "dflt": "#eee",
@@ -16341,6 +16744,676 @@
                 }
             },
             "description": "The data visualized as scatter point or lines is set in `x` and `y` using the WebGl plotting engine. Bubble charts are achieved by setting `marker.size` and/or `marker.color` to a numerical arrays."
+        },
+        "scattermapbox": {
+            "attributes": {
+                "connectgaps": {
+                    "description": "Determines whether or not gaps (i.e. {nan} or missing values) in the provided data arrays are connected.",
+                    "dflt": false,
+                    "role": "info",
+                    "valType": "boolean"
+                },
+                "fill": {
+                    "description": "Sets the area to fill with a solid color. Use with `fillcolor` if not *none*. *toself* connects the endpoints of the trace (or each segment of the trace if it has gaps) into a closed shape.",
+                    "dflt": "none",
+                    "role": "style",
+                    "valType": "enumerated",
+                    "values": [
+                        "none",
+                        "toself"
+                    ]
+                },
+                "fillcolor": {
+                    "description": "Sets the fill color. Defaults to a half-transparent variant of the line color, marker color, or marker line color, whichever is available.",
+                    "role": "style",
+                    "valType": "color"
+                },
+                "hoverinfo": {
+                    "description": "Determines which trace information appear on hover.",
+                    "dflt": "all",
+                    "extras": [
+                        "all",
+                        "none"
+                    ],
+                    "flags": [
+                        "lon",
+                        "lat",
+                        "text",
+                        "name"
+                    ],
+                    "role": "info",
+                    "valType": "flaglist"
+                },
+                "lat": {
+                    "description": "Sets the latitude coordinates (in degrees North).",
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "latsrc": {
+                    "description": "Sets the source reference on plot.ly for  lat .",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "legendgroup": {
+                    "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
+                    "dflt": "",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "line": {
+                    "color": {
+                        "description": "Sets the line color.",
+                        "role": "style",
+                        "valType": "color"
+                    },
+                    "dash": {
+                        "description": "Sets the style of the lines. Set to a dash string type or a dash length in px.",
+                        "dflt": "solid",
+                        "role": "style",
+                        "valType": "string",
+                        "values": [
+                            "solid",
+                            "dot",
+                            "dash",
+                            "longdash",
+                            "dashdot",
+                            "longdashdot"
+                        ]
+                    },
+                    "role": "object",
+                    "width": {
+                        "description": "Sets the line width (in px).",
+                        "dflt": 2,
+                        "min": 0,
+                        "role": "style",
+                        "valType": "number"
+                    }
+                },
+                "lon": {
+                    "description": "Sets the longitude coordinates (in degrees East).",
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "lonsrc": {
+                    "description": "Sets the source reference on plot.ly for  lon .",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "marker": {
+                    "autocolorscale": {
+                        "description": "Has an effect only if `marker.color` is set to a numerical array. Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `marker.colorscale`. In case `colorscale` is unspecified or `autocolorscale` is true, the default  palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
+                        "dflt": true,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
+                    "cauto": {
+                        "description": "Has an effect only if `marker.color` is set to a numerical array and `cmin`, `cmax` are set by the user. In this case, it controls whether the range of colors in `colorscale` is mapped to the range of values in the `color` array (`cauto: true`), or the `cmin`/`cmax` values (`cauto: false`). Defaults to `false` when `cmin`, `cmax` are set by the user.",
+                        "dflt": true,
+                        "role": "info",
+                        "valType": "boolean"
+                    },
+                    "cmax": {
+                        "description": "Has an effect only if `marker.color` is set to a numerical array. Sets the upper bound of the color domain. Value should be associated to the `marker.color` array index, and if set, `marker.cmin` must be set as well.",
+                        "dflt": null,
+                        "role": "info",
+                        "valType": "number"
+                    },
+                    "cmin": {
+                        "description": "Has an effect only if `marker.color` is set to a numerical array. Sets the lower bound of the color domain. Value should be associated to the `marker.color` array index, and if set, `marker.cmax` must be set as well.",
+                        "dflt": null,
+                        "role": "info",
+                        "valType": "number"
+                    },
+                    "color": {
+                        "arrayOk": true,
+                        "description": "Sets the marker color. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
+                        "role": "style",
+                        "valType": "color"
+                    },
+                    "colorbar": {
+                        "bgcolor": {
+                            "description": "Sets the color of padded area.",
+                            "dflt": "rgba(0,0,0,0)",
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "bordercolor": {
+                            "description": "Sets the axis line color.",
+                            "dflt": "#444",
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "borderwidth": {
+                            "description": "Sets the width (in px) or the border enclosing this color bar.",
+                            "dflt": 0,
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "dtick": {
+                            "description": "Sets the step in-between ticks on this axis Use with `tick0`. If the axis `type` is *log*, then ticks are set every 10^(n*dtick) where n is the tick number. For example, to set a tick mark at 1, 10, 100, 1000, ... set dtick to 1. To set tick marks at 1, 100, 10000, ... set dtick to 2. To set tick marks at 1, 5, 25, 125, 625, 3125, ... set dtick to log_10(5), or 0.69897000433. If the axis `type` is *date*, then you must convert the time to milliseconds. For example, to set the interval between ticks to one day, set `dtick` to 86400000.0.",
+                            "dflt": 1,
+                            "role": "style",
+                            "valType": "any"
+                        },
+                        "exponentformat": {
+                            "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B.",
+                            "dflt": "B",
+                            "role": "style",
+                            "valType": "enumerated",
+                            "values": [
+                                "none",
+                                "e",
+                                "E",
+                                "power",
+                                "SI",
+                                "B"
+                            ]
+                        },
+                        "len": {
+                            "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
+                            "dflt": 1,
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "lenmode": {
+                            "description": "Determines whether this color bar's length (i.e. the measure in the color variation direction) is set in units of plot *fraction* or in *pixels. Use `len` to set the value.",
+                            "dflt": "fraction",
+                            "role": "info",
+                            "valType": "enumerated",
+                            "values": [
+                                "fraction",
+                                "pixels"
+                            ]
+                        },
+                        "nticks": {
+                            "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*.",
+                            "dflt": 0,
+                            "min": 0,
+                            "role": "style",
+                            "valType": "integer"
+                        },
+                        "outlinecolor": {
+                            "description": "Sets the axis line color.",
+                            "dflt": "#444",
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "outlinewidth": {
+                            "description": "Sets the width (in px) of the axis line.",
+                            "dflt": 1,
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "role": "object",
+                        "showexponent": {
+                            "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
+                            "dflt": "all",
+                            "role": "style",
+                            "valType": "enumerated",
+                            "values": [
+                                "all",
+                                "first",
+                                "last",
+                                "none"
+                            ]
+                        },
+                        "showticklabels": {
+                            "description": "Determines whether or not the tick labels are drawn.",
+                            "dflt": true,
+                            "role": "style",
+                            "valType": "boolean"
+                        },
+                        "showtickprefix": {
+                            "description": "If *all*, all tick labels are displayed with a prefix. If *first*, only the first tick is displayed with a prefix. If *last*, only the last tick is displayed with a suffix. If *none*, tick prefixes are hidden.",
+                            "dflt": "all",
+                            "role": "style",
+                            "valType": "enumerated",
+                            "values": [
+                                "all",
+                                "first",
+                                "last",
+                                "none"
+                            ]
+                        },
+                        "showticksuffix": {
+                            "description": "Same as `showtickprefix` but for tick suffixes.",
+                            "dflt": "all",
+                            "role": "style",
+                            "valType": "enumerated",
+                            "values": [
+                                "all",
+                                "first",
+                                "last",
+                                "none"
+                            ]
+                        },
+                        "thickness": {
+                            "description": "Sets the thickness of the color bar This measure excludes the size of the padding, ticks and labels.",
+                            "dflt": 30,
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "thicknessmode": {
+                            "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels*. Use `thickness` to set the value.",
+                            "dflt": "pixels",
+                            "role": "style",
+                            "valType": "enumerated",
+                            "values": [
+                                "fraction",
+                                "pixels"
+                            ]
+                        },
+                        "tick0": {
+                            "description": "Sets the placement of the first tick on this axis. Use with `dtick`. If the axis `type` is *log*, then you must take the log of your starting tick (e.g. to set the starting tick to 100, set the `tick0` to 2). If the axis `type` is *date*, then you must convert the date to unix time in milliseconds (the number of milliseconds since January 1st, 1970). For example, to set the starting tick to November 4th, 2013, set the range to 1380844800000.0.",
+                            "dflt": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "tickangle": {
+                            "description": "Sets the angle of the tick labels with respect to the horizontal. For example, a `tickangle` of -90 draws the tick labels vertically.",
+                            "dflt": "auto",
+                            "role": "style",
+                            "valType": "angle"
+                        },
+                        "tickcolor": {
+                            "description": "Sets the tick color.",
+                            "dflt": "#444",
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "tickfont": {
+                            "color": {
+                                "role": "style",
+                                "valType": "color"
+                            },
+                            "description": "Sets the tick font.",
+                            "family": {
+                                "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                                "noBlank": true,
+                                "role": "style",
+                                "strict": true,
+                                "valType": "string"
+                            },
+                            "role": "object",
+                            "size": {
+                                "min": 1,
+                                "role": "style",
+                                "valType": "number"
+                            }
+                        },
+                        "tickformat": {
+                            "description": "Sets the tick label formatting rule using the python/d3 number formatting language. See https://github.com/mbostock/d3/wiki/Formatting#numbers or https://docs.python.org/release/3.1.3/library/string.html#formatspec for more info.",
+                            "dflt": "",
+                            "role": "style",
+                            "valType": "string"
+                        },
+                        "ticklen": {
+                            "description": "Sets the tick length (in px).",
+                            "dflt": 5,
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "tickmode": {
+                            "description": "Sets the tick mode for this axis. If *auto*, the number of ticks is set via `nticks`. If *linear*, the placement of the ticks is determined by a starting position `tick0` and a tick step `dtick` (*linear* is the default value if `tick0` and `dtick` are provided). If *array*, the placement of the ticks is set via `tickvals` and the tick text is `ticktext`. (*array* is the default value if `tickvals` is provided).",
+                            "role": "info",
+                            "valType": "enumerated",
+                            "values": [
+                                "auto",
+                                "linear",
+                                "array"
+                            ]
+                        },
+                        "tickprefix": {
+                            "description": "Sets a tick label prefix.",
+                            "dflt": "",
+                            "role": "style",
+                            "valType": "string"
+                        },
+                        "ticks": {
+                            "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
+                            "dflt": "",
+                            "role": "style",
+                            "valType": "enumerated",
+                            "values": [
+                                "outside",
+                                "inside",
+                                ""
+                            ]
+                        },
+                        "ticksuffix": {
+                            "description": "Sets a tick label suffix.",
+                            "dflt": "",
+                            "role": "style",
+                            "valType": "string"
+                        },
+                        "ticktext": {
+                            "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `tickvals`.",
+                            "role": "data",
+                            "valType": "data_array"
+                        },
+                        "ticktextsrc": {
+                            "description": "Sets the source reference on plot.ly for  ticktext .",
+                            "role": "info",
+                            "valType": "string"
+                        },
+                        "tickvals": {
+                            "description": "Sets the values at which ticks on this axis appear. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
+                            "role": "data",
+                            "valType": "data_array"
+                        },
+                        "tickvalssrc": {
+                            "description": "Sets the source reference on plot.ly for  tickvals .",
+                            "role": "info",
+                            "valType": "string"
+                        },
+                        "tickwidth": {
+                            "description": "Sets the tick width (in px).",
+                            "dflt": 1,
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "title": {
+                            "description": "Sets the title of the color bar.",
+                            "dflt": "Click to enter colorscale title",
+                            "role": "info",
+                            "valType": "string"
+                        },
+                        "titlefont": {
+                            "color": {
+                                "role": "style",
+                                "valType": "color"
+                            },
+                            "description": "Sets this color bar's title font.",
+                            "family": {
+                                "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                                "noBlank": true,
+                                "role": "style",
+                                "strict": true,
+                                "valType": "string"
+                            },
+                            "role": "object",
+                            "size": {
+                                "min": 1,
+                                "role": "style",
+                                "valType": "number"
+                            }
+                        },
+                        "titleside": {
+                            "description": "Determines the location of the colorbar title with respect to the color bar.",
+                            "dflt": "top",
+                            "role": "style",
+                            "valType": "enumerated",
+                            "values": [
+                                "right",
+                                "top",
+                                "bottom"
+                            ]
+                        },
+                        "x": {
+                            "description": "Sets the x position of the color bar (in plot fraction).",
+                            "dflt": 1.02,
+                            "max": 3,
+                            "min": -2,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "xanchor": {
+                            "description": "Sets this color bar's horizontal position anchor. This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
+                            "dflt": "left",
+                            "role": "style",
+                            "valType": "enumerated",
+                            "values": [
+                                "left",
+                                "center",
+                                "right"
+                            ]
+                        },
+                        "xpad": {
+                            "description": "Sets the amount of padding (in px) along the x direction.",
+                            "dflt": 10,
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "y": {
+                            "description": "Sets the y position of the color bar (in plot fraction).",
+                            "dflt": 0.5,
+                            "max": 3,
+                            "min": -2,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "yanchor": {
+                            "description": "Sets this color bar's vertical position anchor This anchor binds the `y` position to the *top*, *middle* or *bottom* of the color bar.",
+                            "dflt": "middle",
+                            "role": "style",
+                            "valType": "enumerated",
+                            "values": [
+                                "top",
+                                "middle",
+                                "bottom"
+                            ]
+                        },
+                        "ypad": {
+                            "description": "Sets the amount of padding (in px) along the y direction.",
+                            "dflt": 10,
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        }
+                    },
+                    "colorscale": {
+                        "description": "Sets the colorscale and only has an effect if `marker.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.cmin` and `marker.cmax`. Alternatively, `colorscale` may be a palette name string of the following list: Greys, YlGnBu, Greens, YlOrRd, Bluered, RdBu, Reds, Blues, Picnic, Rainbow, Portland, Jet, Hot, Blackbody, Earth, Electric, Viridis",
+                        "role": "style",
+                        "valType": "colorscale"
+                    },
+                    "colorsrc": {
+                        "description": "Sets the source reference on plot.ly for  color .",
+                        "role": "info",
+                        "valType": "string"
+                    },
+                    "opacity": {
+                        "arrayOk": false,
+                        "description": "Sets the marker opacity.",
+                        "max": 1,
+                        "min": 0,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "reversescale": {
+                        "description": "Has an effect only if `marker.color` is set to a numerical array. Reverses the color mapping if true (`cmin` will correspond to the last color in the array and `cmax` will correspond to the first color).",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
+                    "role": "object",
+                    "showscale": {
+                        "description": "Has an effect only if `marker.color` is set to a numerical array. Determines whether or not a colorbar is displayed.",
+                        "dflt": false,
+                        "role": "info",
+                        "valType": "boolean"
+                    },
+                    "size": {
+                        "arrayOk": true,
+                        "description": "Sets the marker size (in px).",
+                        "dflt": 6,
+                        "min": 0,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "sizemin": {
+                        "description": "Has an effect only if `marker.size` is set to a numerical array. Sets the minimum size (in px) of the rendered marker points.",
+                        "dflt": 0,
+                        "min": 0,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "sizemode": {
+                        "description": "Has an effect only if `marker.size` is set to a numerical array. Sets the rule for which the data in `size` is converted to pixels.",
+                        "dflt": "diameter",
+                        "role": "info",
+                        "valType": "enumerated",
+                        "values": [
+                            "diameter",
+                            "area"
+                        ]
+                    },
+                    "sizeref": {
+                        "description": "Has an effect only if `marker.size` is set to a numerical array. Sets the scale factor used to determine the rendered size of marker points. Use with `sizemin` and `sizemode`.",
+                        "dflt": 1,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "sizesrc": {
+                        "description": "Sets the source reference on plot.ly for  size .",
+                        "role": "info",
+                        "valType": "string"
+                    },
+                    "symbol": {
+                        "arrayOk": true,
+                        "description": "Sets the marker symbol. Full list: https://www.mapbox.com/maki-icons/ Note that the array `marker.color` and `marker.size` are only available for *circle* symbols.",
+                        "dflt": "circle",
+                        "role": "style",
+                        "valType": "string"
+                    },
+                    "symbolsrc": {
+                        "description": "Sets the source reference on plot.ly for  symbol .",
+                        "role": "info",
+                        "valType": "string"
+                    }
+                },
+                "mode": {
+                    "description": "Determines the drawing mode for this scatter trace. If the provided `mode` includes *text* then the `text` elements appear at the coordinates. Otherwise, the `text` elements appear on hover.",
+                    "dflt": "markers",
+                    "extras": [
+                        "none"
+                    ],
+                    "flags": [
+                        "lines",
+                        "markers",
+                        "text"
+                    ],
+                    "role": "info",
+                    "valType": "flaglist"
+                },
+                "name": {
+                    "description": "Sets the trace name. The trace name appear as the legend item and on hover.",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "opacity": {
+                    "description": "Sets the opacity of the trace.",
+                    "dflt": 1,
+                    "max": 1,
+                    "min": 0,
+                    "role": "style",
+                    "valType": "number"
+                },
+                "showlegend": {
+                    "description": "Determines whether or not an item corresponding to this trace is shown in the legend.",
+                    "dflt": true,
+                    "role": "info",
+                    "valType": "boolean"
+                },
+                "stream": {
+                    "maxpoints": {
+                        "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot.",
+                        "min": 0,
+                        "role": "info",
+                        "valType": "number"
+                    },
+                    "role": "object",
+                    "token": {
+                        "description": "The stream id number links a data trace on a plot with a stream. See https://plot.ly/settings for more details.",
+                        "noBlank": true,
+                        "role": "info",
+                        "strict": true,
+                        "valType": "string"
+                    }
+                },
+                "subplot": {
+                    "description": "Sets a reference between this trace's data coordinates and a mapbox subplot. If *mapbox* (the default value), the data refer to `layout.mapbox`. If *mapbox2*, the data refer to `layout.mapbox2`, and so on.",
+                    "dflt": "mapbox",
+                    "role": "info",
+                    "valType": "subplotid"
+                },
+                "text": {
+                    "arrayOk": true,
+                    "description": "Sets text elements associated with each (lon,lat) pair If a single string, the same string appears over all the data points. If an array of string, the items are mapped in order to the this trace's (lon,lat) coordinates.",
+                    "dflt": "",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "textfont": {
+                    "color": {
+                        "role": "style",
+                        "valType": "color"
+                    },
+                    "description": "Sets the icon text font. Has an effect only when `type` is set to *symbol*.",
+                    "family": {
+                        "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                        "dflt": "Open Sans Regular, Arial Unicode MS Regular",
+                        "noBlank": true,
+                        "role": "style",
+                        "strict": true,
+                        "valType": "string"
+                    },
+                    "role": "object",
+                    "size": {
+                        "min": 1,
+                        "role": "style",
+                        "valType": "number"
+                    }
+                },
+                "textposition": {
+                    "arrayOk": false,
+                    "description": "Sets the positions of the `text` elements with respects to the (x,y) coordinates.",
+                    "dflt": "middle center",
+                    "role": "style",
+                    "valType": "enumerated",
+                    "values": [
+                        "top left",
+                        "top center",
+                        "top right",
+                        "middle left",
+                        "middle center",
+                        "middle right",
+                        "bottom left",
+                        "bottom center",
+                        "bottom right"
+                    ]
+                },
+                "textsrc": {
+                    "description": "Sets the source reference on plot.ly for  text .",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "type": "scattermapbox",
+                "uid": {
+                    "dflt": "",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "visible": {
+                    "description": "Determines whether or not this trace is visible. If *legendonly*, the trace is not drawn, but can appear as a legend item (provided that the legend itself is visible).",
+                    "dflt": true,
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        true,
+                        false,
+                        "legendonly"
+                    ]
+                }
+            },
+            "description": "The data visualized as scatter point, lines or marker symbols on a Mapbox GL geographic map is provided by longitude/latitude pairs in `lon` and `lat`.",
+            "hrName": "scatter_mapbox"
         },
         "scatterternary": {
             "attributes": {
