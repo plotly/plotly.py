@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.12.6] - 2016-08-09
+### Updated
+- Updated `plotly.min.js` from 1.14.1 to 1.16.2
+	- Trace type scattermapbox is now part of the main bundle
+	- Add updatemenus (aka dropdowns) layout components
+	- See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md) for additional information regarding the updates
+
 ## [1.12.5] - 2016-08-03
 ### Updated
 - `.create_trisurf` now supports a visible colorbar for the trisurf plots. Check out the docs for help:
