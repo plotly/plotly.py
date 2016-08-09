@@ -3227,47 +3227,60 @@ class FigureFactory(object):
         return un_rgb_color
 
     @staticmethod
-    def _map_face2color(face, colormap, vmin, vmax):
+    def _map_faces2color(faces, colormap):
         """
-        Normalize facecolor values by vmin/vmax and return rgb-color strings
+        Normalize facecolors by their min/max and return rgb-color strings.
 
-        This function takes a tuple color along with a colormap and a minimum
-        (vmin) and maximum (vmax) range of possible mean distances for the
-        given parametrized surface. It returns an rgb color based on the mean
-        distance between vmin and vmax
-
+        This function takes a tuple color along with a colormap.
+        It returns an rgb color based on the mean distance between the
+        minimum and maximum value of faces.
         """
-        if vmin >= vmax:
-            raise exceptions.PlotlyError("Incorrect relation between vmin "
-                                         "and vmax. The vmin value cannot be "
-                                         "bigger than or equal to the value "
-                                         "of vmax.")
-
-        if len(colormap) == 1:
+        colormap = np.atleast_2d(colormap)
+        if colormap.shape[0] == 1:
             # color each triangle face with the same color in colormap
-            face_color = colormap[0]
-            face_color = FigureFactory._convert_to_RGB_255(face_color)
-            face_color = FigureFactory._label_rgb(face_color)
+            face_colors = colormap
         else:
-            if face == vmax:
-                # pick last color in colormap
-                face_color = colormap[-1]
-                face_color = FigureFactory._convert_to_RGB_255(face_color)
-                face_color = FigureFactory._label_rgb(face_color)
-            else:
-                # find the normalized distance t of a triangle face between
-                # vmin and vmax where the distance is between 0 and 1
-                t = (face - vmin) / float((vmax - vmin))
-                low_color_index = int(t / (1./(len(colormap) - 1)))
+            # Convert face values to between 0 and 1
+            vmin = faces.min()
+            vmax = faces.max()
+            if vmin >= vmax:
+                raise exceptions.PlotlyError("Incorrect relation between vmin"
+                                             " and vmax. The vmin value cannot"
+                                             " be bigger than or equal to the"
+                                             " value of vmax.")
+            # Scale t to between 0 and 1
+            t = (faces - vmin) / float((vmax - vmin))
+            t_ixs = np.round(t * 255).astype(int)
 
-                face_color = FigureFactory._find_intermediate_color(
-                    colormap[low_color_index],
-                    colormap[low_color_index + 1],
-                    t * (len(colormap) - 1) - low_color_index)
-                face_color = FigureFactory._convert_to_RGB_255(face_color)
-                face_color = FigureFactory._label_rgb(face_color)
+            # If a list of colors is given, interpolate between them.
+            color_range = FigureFactory._blend_colors(colormap)
+            face_colors = color_range[t_ixs]
 
-        return face_color
+        # Convert to 255 scale, and round to nearest integer
+        face_colors = np.round(face_colors * 255., 0)
+        face_colors = FigureFactory._label_rgb(face_colors)
+        return face_colors
+
+    @staticmethod
+    def _blend_colors(colormap, n_colors=255.):
+        if len(colormap) == 1:
+            raise ValueError('Cannot blend a colormap with only one color')
+        # Figure out how many splits we need
+        n_split = np.floor(n_colors / (len(colormap) - 1)).astype(int)
+        n_remain = np.mod(n_colors, len(colormap))
+
+        # Iterate through pairs of colors
+        color_range = []
+        for ii in range(len(colormap) - 1):
+            # For each channel (r, g, b)
+            this_interp = []
+            for cstt, cstp in zip(colormap[ii], colormap[ii + 1]):
+                # If it's not an even split, add req'd amount on first iter
+                n_interp = n_split + n_remain if ii == 0 else n_split
+                this_interp.append(np.linspace(cstt, cstp, n_interp))
+            color_range.append(np.vstack(this_interp).T)
+        color_range = np.vstack(color_range)
+        return color_range
 
     @staticmethod
     def _trisurf(x, y, z, simplices, show_colorbar, colormap=None,
@@ -3322,17 +3335,12 @@ class FigureFactory(object):
         if isinstance(mean_dists[0], str):
             facecolor = mean_dists
         else:
-            min_mean_dists = np.min(mean_dists)
-            max_mean_dists = np.max(mean_dists)
-
-            if facecolor is None:
-                facecolor = []
-            for index in range(len(mean_dists)):
-                color = FigureFactory._map_face2color(mean_dists[index],
-                                                      colormap,
-                                                      min_mean_dists,
-                                                      max_mean_dists)
-                facecolor.append(color)
+            # Map distances to color using the given cmap
+            dist_colors = FigureFactory._map_faces2color(mean_dists, colormap)
+            if facecolor is not None:
+                facecolor = np.vstack([facecolor, dist_colors])
+            else:
+                facecolor = dist_colors
 
         # Make sure we have arrays to speed up plotting
         facecolor = np.asarray(facecolor)
@@ -4564,8 +4572,17 @@ class FigureFactory(object):
         """
         Multiplies each element of a triplet by 255
         """
-
-        return (colors[0]*255.0, colors[1]*255.0, colors[2]*255.0)
+        if isinstance(colors, tuple):
+            return (colors[0]*255.0, colors[1]*255.0, colors[2]*255.0)
+        elif isinstance(colors, np.ndarray):
+            # Vectorize the multiplication and return a list of tuples
+            return [tuple(ii) for ii in colors * 255.0]
+        else:
+            colors_255 = []
+            for color in colors:
+                rgb_color = (color[0]*255.0, color[1]*255.0, color[2]*255.0)
+                colors_255.append(rgb_color)
+            return colors_255
 
     @staticmethod
     def _n_colors(lowcolor, highcolor, n_colors):
@@ -4598,7 +4615,12 @@ class FigureFactory(object):
         """
         Takes tuple (a, b, c) and returns an rgb color 'rgb(a, b, c)'
         """
-        return ('rgb(%s, %s, %s)' % (colors[0], colors[1], colors[2]))
+        if isinstance(colors, tuple):
+            return ('rgb(%s, %s, %s)' % (colors[0], colors[1], colors[2]))
+        else:
+            colors_label = ['rgb(%s, %s, %s)' % (r, g, b)
+                            for r, g, b in colors]
+            return colors_label
 
     @staticmethod
     def _unlabel_rgb(colors):
