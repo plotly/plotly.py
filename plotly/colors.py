@@ -19,6 +19,7 @@ floats between 0 and 1 inclusive.
 """
 from __future__ import absolute_import
 from plotly import exceptions
+from numbers import Number
 
 DEFAULT_PLOTLY_COLORS = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
                          'rgb(44, 160, 44)', 'rgb(214, 39, 40)',
@@ -157,7 +158,6 @@ def color_parser(colors, function):
     - rgb string, hex string or tuple
 
     """
-    from numbers import Number
     if isinstance(colors, str):
         return function(colors)
 
@@ -178,7 +178,6 @@ def validate_colors(colors):
     """
     Validates color(s) and returns an error for invalid colors
     """
-    from numbers import Number
     colors_list = []
 
     if isinstance(colors, str):
@@ -199,8 +198,7 @@ def validate_colors(colors):
             colors_list = list(colors)
 
     if isinstance(colors, dict):
-        for color in colors.values():
-            colors_list.append(color)
+        colors_list.extend(colors.values())
 
     elif isinstance(colors, list):
         colors_list = colors
@@ -242,7 +240,6 @@ def convert_colors_to_same_type(colors, colortype='rgb'):
     Plotly Scale name then the cooresponding colorscale will be outputted and
     colortype will not be applicable
     """
-    from numbers import Number
     colors_list = []
 
     if isinstance(colors, str):
