@@ -230,6 +230,7 @@ def validate_colors(colors):
                         "Whoops! The elements in your colors tuples "
                         "cannot exceed 1.0."
                     )
+    return colors
 
 
 def convert_colors_to_same_type(colors, colortype='rgb'):
@@ -343,7 +344,7 @@ def convert_dict_colors_to_same_type(colors, colortype='rgb'):
 
 def make_colorscale(colors, scale=None):
     """
-    Makes a colorscale from a list of colors and scale
+    Makes a colorscale from a list of colors and a scale
 
     Takes a list of colors and scales and constructs a colorscale based
     on the colors in sequential order. If 'scale' is left empty, a linear-
@@ -354,16 +355,16 @@ def make_colorscale(colors, scale=None):
     """
     colorscale = []
 
+    # validate minimum colors length of 2
+    if len(colors) < 2:
+        raise exceptions.PlotlyError("You must input a list of colors that "
+                                     "has at least two colors.")
+
     if not scale:
         scale_incr = 1./(len(colors) - 1)
         return [[i * scale_incr, color] for i, color in enumerate(colors)]
 
     else:
-        # validate minimum colors length of 2
-        if len(colors) < 2:
-            raise exceptions.PlotlyError("You must input a list of colors "
-                                         "that has at least two colors.")
-
         # validate scale
         if len(colors) != len(scale):
             raise exceptions.PlotlyError("The length of colors and scale "
@@ -504,3 +505,13 @@ def hex_to_rgb(value):
     rgb_section_length = hex_total_length // 3
     return tuple(int(value[i:i + rgb_section_length], 16)
                  for i in range(0, hex_total_length, rgb_section_length))
+
+
+def colorscale_to_colors(colorscale):
+    """
+    Converts a colorscale into a list of colors
+    """
+    color_list = []
+    for color in colorscale:
+        color_list.append(color[1])
+    return color_list
