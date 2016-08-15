@@ -842,71 +842,100 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
         )
 
         exp_trisurf_plot = {
-        'data': [
-            {
-                'facecolor': ['rgb(144.0, 94.5, 132.0)',
-                              'rgb(23.0, 190.0, 207.0)',
-                              'rgb(144.0, 94.5, 132.0)',
-                              'rgb(31.0, 119.0, 180.0)',
-                              'rgb(144.0, 94.5, 132.0)',
-                              'rgb(31.0, 119.0, 180.0)',
-                              'rgb(144.0, 94.5, 132.0)',
-                              'rgb(23.0, 190.0, 207.0)'],
-                'i': [3, 1, 1, 5, 7, 3, 5, 7],
-                'j': [1, 3, 5, 1, 3, 7, 7, 5],
-                'k': [4, 0, 4, 2, 4, 6, 4, 8],
-                'name': '',
-                'type': 'mesh3d',
-                'x': np.array([-1.,  0.,  1., -1.,  0.,  1., -1.,  0.,  1.]),
-                'y': np.array([-1., -1., -1.,  0.,  0.,  0.,  1.,  1.,  1.]),
-                'z': np.array([ 1., -0., -1., -0.,  0.,  0., -1.,  0.,  1.])
-            },
-            {
-                'line': {'color': 'rgb(50, 50, 50)', 'width': 1.5},
-                'mode': 'lines',
-                'type': 'scatter3d',
-                'x': [-1.0, 0.0, 0.0, -1.0, None, 0.0, -1.0, -1.0, 0.0, None,
-                      0.0, 1.0, 0.0, 0.0, None, 1.0, 0.0, 1.0, 1.0, None, 0.0,
-                      -1.0, 0.0, 0.0, None, -1.0, 0.0, -1.0, -1.0, None, 1.0,
-                      0.0, 0.0, 1.0, None, 0.0, 1.0, 1.0, 0.0, None],
-                'y': [0.0, -1.0, 0.0, 0.0, None, -1.0, 0.0, -1.0, -1.0, None,
-                      -1.0, 0.0, 0.0, -1.0, None, 0.0, -1.0, -1.0, 0.0, None,
-                      1.0, 0.0, 0.0, 1.0, None, 0.0, 1.0, 1.0, 0.0, None, 0.0,
-                      1.0, 0.0, 0.0, None, 1.0, 0.0, 1.0, 1.0, None],
-                'z': [-0.0, -0.0, 0.0, -0.0, None, -0.0, -0.0, 1.0, -0.0,
-                      None, -0.0, 0.0, 0.0, -0.0, None, 0.0, -0.0, -1.0, 0.0,
-                      None, 0.0, -0.0, 0.0, 0.0, None, -0.0, 0.0, -1.0, -0.0,
-                      None, 0.0, 0.0, 0.0, 0.0, None, 0.0, 0.0, 1.0, 0.0, None]
-            }
-        ],
-        'layout': {
-            'height': 800,
-            'scene': {'aspectratio': {'x': 1, 'y': 1, 'z': 1},
-            'xaxis': {'backgroundcolor': 'rgb(230, 230, 230)',
-            'gridcolor': 'rgb(255, 255, 255)',
-            'showbackground': True,
-            'zerolinecolor': 'rgb(255, 255, 255)'},
-            'yaxis': {'backgroundcolor': 'rgb(230, 230, 230)',
-            'gridcolor': 'rgb(255, 255, 255)',
-            'showbackground': True,
-            'zerolinecolor': 'rgb(255, 255, 255)'},
-            'zaxis': {'backgroundcolor': 'rgb(230, 230, 230)',
-            'gridcolor': 'rgb(255, 255, 255)',
-            'showbackground': True,
-            'zerolinecolor': 'rgb(255, 255, 255)'}},
-            'title': 'Trisurf Plot',
-            'width': 800
+            'data': [{'facecolor': np.array(
+                      ['rgb(145.0, 96.0, 143.0)',
+                       'rgb(29.0, 190.0, 201.0)',
+                       'rgb(145.0, 96.0, 143.0)',
+                       'rgb(31.0, 119.0, 180.0)',
+                       'rgb(145.0, 96.0, 143.0)',
+                       'rgb(31.0, 119.0, 180.0)',
+                       'rgb(145.0, 96.0, 143.0)',
+                       'rgb(29.0, 190.0, 201.0)'],
+                      ),
+                      'i': np.array([3, 1, 1, 5, 7, 3, 5, 7]),
+                      'j': np.array([1, 3, 5, 1, 3, 7, 7, 5]),
+                      'k': np.array([4, 0, 4, 2, 4, 6, 4, 8]),
+                      'name': '',
+                      'type': 'mesh3d',
+                      'x': np.array([-1.,  0.,  1., -1.,  0.,  1.,
+                                     -1.,  0.,  1.]),
+                      'y': np.array([-1., -1., -1.,  0.,  0.,  0.,
+                                     1.,  1.,  1.]),
+                      'z': np.array([1., -0., -1., -0.,  0.,  0.,
+                                     -1.,  0.,  1.])},
+                     {'line': {'color': 'rgb(50, 50, 50)', 'width': 1.5},
+                      'mode': 'lines',
+                      'type': 'scatter3d',
+                      'x': np.array([-1.0, 0.0, 0.0, -1.0, None, 0.0, -1.0,
+                                     -1.0, 0.0, None, 0.0, 1.0, 0.0, 0.0,
+                                     None, 1.0, 0.0, 1.0, 1.0, None, 0.0,
+                                     -1.0, 0.0, 0.0, None, -1.0, 0.0, -1.0,
+                                     -1.0, None, 1.0, 0.0, 0.0, 1.0, None,
+                                     0.0, 1.0, 1.0, 0.0, None]),
+                      'y': np.array([0.0, -1.0, 0.0, 0.0, None, -1.0, 0.0,
+                                     -1.0, -1.0, None, -1.0, 0.0, 0.0, -1.0,
+                                     None, 0.0, -1.0, -1.0, 0.0, None, 1.0,
+                                     0.0, 0.0, 1.0, None, 0.0, 1.0, 1.0, 0.0,
+                                     None, 0.0, 1.0, 0.0, 0.0, None, 1.0, 0.0,
+                                     1.0, 1.0, None]),
+                      'z': np.array([-0.0, -0.0, 0.0, -0.0, None, -0.0, -0.0,
+                                     1.0, -0.0, None, -0.0, 0.0, 0.0, -0.0,
+                                     None, 0.0, -0.0, -1.0, 0.0, None, 0.0,
+                                     -0.0, 0.0, 0.0, None, -0.0, 0.0, -1.0,
+                                     -0.0, None, 0.0, 0.0, 0.0, 0.0, None,
+                                     0.0, 0.0, 1.0, 0.0, None])},
+                     {'colorscale': [[0.0, 'rgb(31.0, 119.0, 180.0)'],
+                      [0.1111111111111111, 'rgb(255.0, 127.0, 14.0)'],
+                      [0.2222222222222222, 'rgb(44.0, 160.0, 44.0)'],
+                      [0.3333333333333333, 'rgb(214.0, 39.0, 40.0)'],
+                      [0.4444444444444444, 'rgb(148.0, 103.0, 189.0)'],
+                      [0.5555555555555556, 'rgb(140.0, 86.0, 75.0)'],
+                      [0.6666666666666666, 'rgb(227.0, 119.0, 194.0)'],
+                      [0.7777777777777778, 'rgb(127.0, 127.0, 127.0)'],
+                      [0.8888888888888888, 'rgb(188.0, 189.0, 34.0)'],
+                      [1.0, 'rgb(23.0, 190.0, 207.0)']],
+                      'intensity': [0, 1],
+                      'showscale': True,
+                      'type': 'mesh3d',
+                      'x': [0, 1],
+                      'y': [0, 1],
+                      'z': [0, 1]}],
+            'layout': {'height': 800,
+                       'scene': {'aspectratio': {'x': 1, 'y': 1, 'z': 1},
+                                 'xaxis': {'backgroundcolor':
+                                           'rgb(230, 230, 230)',
+                                           'gridcolor':
+                                           'rgb(255, 255, 255)',
+                                           'showbackground': True,
+                                           'zerolinecolor':
+                                           'rgb(255, 255, 255)'},
+                                 'yaxis': {'backgroundcolor':
+                                           'rgb(230, 230, 230)',
+                                           'gridcolor': 'rgb(255, 255, 255)',
+                                           'showbackground': True,
+                                           'zerolinecolor':
+                                           'rgb(255, 255, 255)'},
+                                 'zaxis': {'backgroundcolor':
+                                           'rgb(230, 230, 230)',
+                                           'gridcolor': 'rgb(255, 255, 255)',
+                                           'showbackground': True,
+                                           'zerolinecolor':
+                                           'rgb(255, 255, 255)'}},
+                       'title': 'Trisurf Plot',
+                       'width': 800}
         }
-        }
-
-        self.assert_dict_equal(test_trisurf_plot['layout'],
-                               exp_trisurf_plot['layout'])
 
         self.assert_dict_equal(test_trisurf_plot['data'][0],
                                exp_trisurf_plot['data'][0])
 
         self.assert_dict_equal(test_trisurf_plot['data'][1],
                                exp_trisurf_plot['data'][1])
+
+        self.assert_dict_equal(test_trisurf_plot['data'][2],
+                               exp_trisurf_plot['data'][2])
+
+        self.assert_dict_equal(test_trisurf_plot['layout'],
+                               exp_trisurf_plot['layout'])
 
         # Test passing custom colors
         colors_raw = np.random.randn(simplices.shape[0])
