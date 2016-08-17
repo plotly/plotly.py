@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.12.7] - 2016-08-17
+### Fixed
+- Edited `plotly.min.js` due to issue using `iplot` to plot offline in Jupyter Notebooks
+	- Please note that `plotly.min.js` may be cached in your Jupyter Notebook. Therefore, if you continue to experience this issue after upgrading the Plotly package please open a new notebook or clear the cache to ensure the correct `plotly.min.js` is referenced. 
+
 ## [1.12.6] - 2016-08-09
 ### Updated
 - Updated `plotly.min.js` from 1.14.1 to 1.16.2
