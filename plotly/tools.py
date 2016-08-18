@@ -4566,9 +4566,9 @@ class FigureFactory(object):
         then is turned into an integer
         """
 
-        return (round(int(colors[0]*255.0)),
-                round(int(colors[1]*255.0)),
-                round(int(colors[2]*255.0)))
+        return (int(round(colors[0]*255.0)),
+                int(round(colors[1]*255.0)),
+                int(round(colors[2]*255.0)))
 
     @staticmethod
     def _n_colors(lowcolor, highcolor, n_colors):
