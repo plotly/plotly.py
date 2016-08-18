@@ -3220,11 +3220,9 @@ class FigureFactory(object):
         a value between 0 and 1
 
         """
-        un_rgb_color = (colors[0]/(255.0),
-                        colors[1]/(255.0),
-                        colors[2]/(255.0))
-
-        return un_rgb_color
+        return (colors[0]/(255.0),
+                colors[1]/(255.0),
+                colors[2]/(255.0))
 
     @staticmethod
     def _map_face2color(face, colormap, vmin, vmax):
@@ -4562,12 +4560,15 @@ class FigureFactory(object):
     @staticmethod
     def _convert_to_RGB_255(colors):
         """
-        Multiplies each element of a triplet by 255 and rounds to floor int
+        Multiplies each element of a triplet by 255
+
+        Each coordinate of the color tuple is rounded to the nearest float and
+        then is turned into an integer
         """
 
-        return (int(colors[0]*255.0),
-                int(colors[1]*255.0),
-                int(colors[2]*255.0))
+        return (round(int(colors[0]*255.0)),
+                round(int(colors[1]*255.0)),
+                round(int(colors[2]*255.0)))
 
     @staticmethod
     def _n_colors(lowcolor, highcolor, n_colors):
