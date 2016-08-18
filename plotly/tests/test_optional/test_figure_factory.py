@@ -843,13 +843,13 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
 
         exp_trisurf_plot = {
             'data': [{'facecolor': np.array(
-                      ['rgb(144, 95, 132)',
+                      ['rgb(144, 94, 132)',
                        'rgb(23, 190, 207)',
-                       'rgb(144, 95, 132)',
+                       'rgb(144, 94, 132)',
                        'rgb(31, 119, 180)',
-                       'rgb(144, 95, 132)',
+                       'rgb(144, 94, 132)',
                        'rgb(31, 119, 180)',
-                       'rgb(144, 95, 132)',
+                       'rgb(144, 94, 132)',
                        'rgb(23, 190, 207)']
                       ),
                       'i': np.array([3, 1, 1, 5, 7, 3, 5, 7]),

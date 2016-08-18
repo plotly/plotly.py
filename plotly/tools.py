@@ -14,6 +14,7 @@ import warnings
 
 import six
 import math
+import decimal
 
 from plotly import utils
 from plotly import exceptions
@@ -3177,10 +3178,9 @@ class FigureFactory(object):
         diff_1 = float(highcolor[1] - lowcolor[1])
         diff_2 = float(highcolor[2] - lowcolor[2])
 
-        inter_colors = (lowcolor[0] + intermed * diff_0,
-                        lowcolor[1] + intermed * diff_1,
-                        lowcolor[2] + intermed * diff_2)
-        return inter_colors
+        return (lowcolor[0] + intermed * diff_0,
+                lowcolor[1] + intermed * diff_1,
+                lowcolor[2] + intermed * diff_2)
 
     @staticmethod
     def _color_parser(colors, function):
@@ -3261,10 +3261,11 @@ class FigureFactory(object):
                 face_color = FigureFactory._find_intermediate_color(
                     colormap[low_color_index],
                     colormap[low_color_index + 1],
-                    t * (len(colormap) - 1) - low_color_index)
+                    t * (len(colormap) - 1) - low_color_index
+                )
+
                 face_color = FigureFactory._convert_to_RGB_255(face_color)
                 face_color = FigureFactory._label_rgb(face_color)
-
         return face_color
 
     @staticmethod
@@ -3333,7 +3334,7 @@ class FigureFactory(object):
                 facecolor.append(color)
 
         # Make sure we have arrays to speed up plotting
-        facecolor = np.asarray(facecolor)
+        facecolor = list(facecolor)
         ii, jj, kk = simplices.T
 
         # make a colorscale from the colors
@@ -4563,12 +4564,22 @@ class FigureFactory(object):
         Multiplies each element of a triplet by 255
 
         Each coordinate of the color tuple is rounded to the nearest float and
-        then is turned into an integer
+        then is turned into an integer. If a number is of the form x.5, then
+        if x is odd, the number rounds up to (x+1). Otherwise, it rounds down
+        to just x. This is the way rounding works in Python 3 and in current
+        statistical analysis to avoid rounding bias
         """
+        rgb_components = []
 
-        return (int(round(colors[0]*255.0)),
-                int(round(colors[1]*255.0)),
-                int(round(colors[2]*255.0)))
+        for component in colors:
+            rounded_num = decimal.Decimal(str(component*255.0)).quantize(
+                decimal.Decimal('1'), rounding=decimal.ROUND_HALF_EVEN
+            )
+            # convert rounded number to an integer from 'Decimal' form
+            rounded_num = int(rounded_num)
+            rgb_components.append(rounded_num)
+
+        return (rgb_components[0], rgb_components[1], rgb_components[2])
 
     @staticmethod
     def _n_colors(lowcolor, highcolor, n_colors):
