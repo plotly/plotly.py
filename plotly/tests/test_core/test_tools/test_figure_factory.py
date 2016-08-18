@@ -1402,7 +1402,7 @@ class Test2D_Density(TestCase):
             point_size=3, height=800, width=800)
 
         exp_2D_density_chart = {
-            'data': [{'marker': {'color': 'rgb(0.0, 0.0, 127.5)',
+            'data': [{'marker': {'color': 'rgb(0.0, 0.0, 127)',
                       'opacity': 0.4,
                       'size': 3},
                       'mode': 'markers',
