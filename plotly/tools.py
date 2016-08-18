@@ -4562,7 +4562,7 @@ class FigureFactory(object):
     @staticmethod
     def _convert_to_RGB_255(colors):
         """
-        Multiplies each element of a triplet by 255 and rounds to nearest int
+        Multiplies each element of a triplet by 255 and rounds to floor int
         """
 
         return (int(colors[0]*255.0),
