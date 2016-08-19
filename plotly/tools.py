@@ -3269,9 +3269,9 @@ class FigureFactory(object):
         return face_color
 
     @staticmethod
-    def _trisurf(x, y, z, simplices, show_colorbar, colormap=None,
-                 color_func=None, plot_edges=False, x_edge=None, y_edge=None,
-                 z_edge=None, facecolor=None):
+    def _trisurf(x, y, z, simplices, show_colorbar, edges_color,
+                 colormap=None, color_func=None, plot_edges=False,
+                 x_edge=None, y_edge=None, z_edge=None, facecolor=None):
         """
         Refer to FigureFactory.create_trisurf() for docstring
         """
@@ -3305,7 +3305,7 @@ class FigureFactory(object):
                         color_func[index] = FigureFactory._label_rgb(foo)
 
             mean_dists = np.asarray(color_func)
-        else:
+        elif hasattr(color_func, '__call__'):
             # apply user inputted function to calculate
             # custom coloring for triangle vertices
             mean_dists = []
@@ -3333,29 +3333,38 @@ class FigureFactory(object):
                                                       max_mean_dists)
                 facecolor.append(color)
 
-        # Make sure we have arrays to speed up plotting
+        # Make sure facecolor is a list so output is consistent across Pythons
         facecolor = list(facecolor)
         ii, jj, kk = simplices.T
-
-        # make a colorscale from the colors
-        colorscale = FigureFactory._make_colorscale(colormap)
-        colorscale = FigureFactory._convert_colorscale_to_rgb(colorscale)
 
         triangles = graph_objs.Mesh3d(x=x, y=y, z=z, facecolor=facecolor,
                                       i=ii, j=jj, k=kk, name='')
 
-        colorbar = graph_objs.Mesh3d(x=[0, 1], y=[0, 1], z=[0, 1],
-                                     colorscale=colorscale,
-                                     intensity=[0, 1],
-                                     showscale=True)
+        if not isinstance(mean_dists[0], str) and show_colorbar is True:
+            # make a colorscale from the colors
+            colorscale = FigureFactory._make_colorscale(colormap)
+            colorscale = FigureFactory._convert_colorscale_to_rgb(colorscale)
+
+            colorbar = graph_objs.Scatter3d(
+                x=x[:2],
+                y=y[:2],
+                z=z[:2],
+                mode='markers',
+                marker=dict(
+                    size=0.1,
+                    color=[min_mean_dists, max_mean_dists],
+                    colorscale=colorscale,
+                    showscale=True),
+                hoverinfo='None',
+                showlegend=False
+            )
 
         # the triangle sides are not plotted
-        if plot_edges is not True:
-            if show_colorbar is True:
+        if plot_edges is False:
+            if not isinstance(mean_dists[0], str) and show_colorbar is True:
                 return graph_objs.Data([triangles, colorbar])
             else:
                 return graph_objs.Data([triangles])
-
 
         # define the lists x_edge, y_edge and z_edge, of x, y, resp z
         # coordinates of edge end points for each triangle
@@ -3392,10 +3401,14 @@ class FigureFactory(object):
         # define the lines for plotting
         lines = graph_objs.Scatter3d(
             x=x_edge, y=y_edge, z=z_edge, mode='lines',
-            line=graph_objs.Line(color='rgb(50, 50, 50)',
-                                 width=1.5)
+            line=graph_objs.Line(
+                color=edges_color,
+                width=1.5
+            ),
+            showlegend=False
         )
-        if show_colorbar is True:
+
+        if not isinstance(mean_dists[0], str) and show_colorbar is True:
             return graph_objs.Data([triangles, lines, colorbar])
         else:
             return graph_objs.Data([triangles, lines])
@@ -3407,6 +3420,7 @@ class FigureFactory(object):
                        backgroundcolor='rgb(230, 230, 230)',
                        gridcolor='rgb(255, 255, 255)',
                        zerolinecolor='rgb(255, 255, 255)',
+                       edges_color='rgb(50, 50, 50)',
                        height=800, width=800,
                        aspectratio=dict(x=1, y=1, z=1)):
         """
@@ -3440,6 +3454,7 @@ class FigureFactory(object):
             inclusive
         :param (str) zerolinecolor: color of the axes. Takes a string of the
             form 'rgb(x,y,z)' x,y,z are between 0 and 255 inclusive
+        :param (str) edges_color: color of the edges, if plot_edges is True
         :param (int|float) height: the height of the plot (in pixels)
         :param (int|float) width: the width of the plot (in pixels)
         :param (dict) aspectratio: a dictionary of the aspect ratio values for
@@ -3622,6 +3637,7 @@ class FigureFactory(object):
             x, y, z, simplices,
             color_func=colors,
             show_colorbar=True,
+            edges_color='rgb(2,85,180)',
             title=' Modern Art'
         )
 
@@ -3637,6 +3653,7 @@ class FigureFactory(object):
                                        show_colorbar=show_colorbar,
                                        color_func=color_func,
                                        colormap=colormap,
+                                       edges_color=edges_color,
                                        plot_edges=plot_edges)
         axis = dict(
             showbackground=showbackground,
