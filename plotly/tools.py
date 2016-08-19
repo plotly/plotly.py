@@ -3269,7 +3269,7 @@ class FigureFactory(object):
         return face_color
 
     @staticmethod
-    def _trisurf(x, y, z, simplices, show_colorbar, colormap=None,
+    def _trisurf(x, y, z, simplices, show_colorbar=True, colormap=None,
                  color_func=None, plot_edges=False, x_edge=None, y_edge=None,
                  z_edge=None, facecolor=None):
         """
