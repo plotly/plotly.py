@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.12.9] - 2016-08-22
+### Updated
+- the colorbar in `.create_trisurf` now displays the appropriate max and min values on the ends of the bar which corresponding to the coloring metric of the figure 
+- `edges_color` is now a param in `.create_trisurf` which only takes `rgb` values at the moment
+- updated the doc strings in `.create_trisurf` to reflect the changes above
+
 ## [1.12.8] - 2016-08-18
 ### Fixed
 - Fixed color bug with trisurf plots where certain triangles were colored strangely. The coordinates of `rgb(...)` are now rounded to their nearest integer (using Python3 method of rounding), then placed in the color string to fix the issue.   
