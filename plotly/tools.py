@@ -3297,15 +3297,19 @@ class FigureFactory(object):
                 raise ValueError("If color_func is a list/array, it must "
                                  "be the same length as simplices.")
 
-            # convert all colors to rgb
+            # convert all colors in color_func to rgb
             for index in range(len(color_func)):
                 if isinstance(color_func[index], str):
                     if '#' in color_func[index]:
                         foo = FigureFactory._hex_to_rgb(color_func[index])
                         color_func[index] = FigureFactory._label_rgb(foo)
 
+                if isinstance(color_func[index], tuple):
+                    foo = FigureFactory._convert_to_RGB_255(color_func[index])
+                    color_func[index] = FigureFactory._label_rgb(foo)
+
             mean_dists = np.asarray(color_func)
-        elif hasattr(color_func, '__call__'):
+        else:
             # apply user inputted function to calculate
             # custom coloring for triangle vertices
             mean_dists = []
@@ -3340,15 +3344,17 @@ class FigureFactory(object):
         triangles = graph_objs.Mesh3d(x=x, y=y, z=z, facecolor=facecolor,
                                       i=ii, j=jj, k=kk, name='')
 
-        if not isinstance(mean_dists[0], str) and show_colorbar is True:
+        mean_dists_are_numbers = not isinstance(mean_dists[0], str)
+
+        if mean_dists_are_numbers and show_colorbar is True:
             # make a colorscale from the colors
             colorscale = FigureFactory._make_colorscale(colormap)
             colorscale = FigureFactory._convert_colorscale_to_rgb(colorscale)
 
             colorbar = graph_objs.Scatter3d(
-                x=x[:2],
-                y=y[:2],
-                z=z[:2],
+                x=x[0],
+                y=y[0],
+                z=z[0],
                 mode='markers',
                 marker=dict(
                     size=0.1,
@@ -3361,7 +3367,7 @@ class FigureFactory(object):
 
         # the triangle sides are not plotted
         if plot_edges is False:
-            if not isinstance(mean_dists[0], str) and show_colorbar is True:
+            if mean_dists_are_numbers and show_colorbar is True:
                 return graph_objs.Data([triangles, colorbar])
             else:
                 return graph_objs.Data([triangles])
@@ -3408,7 +3414,7 @@ class FigureFactory(object):
             showlegend=False
         )
 
-        if not isinstance(mean_dists[0], str) and show_colorbar is True:
+        if mean_dists_are_numbers and show_colorbar is True:
             return graph_objs.Data([triangles, lines, colorbar])
         else:
             return graph_objs.Data([triangles, lines])
@@ -3442,7 +3448,7 @@ class FigureFactory(object):
         :param (function|list) color_func: The parameter that determines the
             coloring of the surface. Takes either a function with 3 arguments
             x, y, z or a list/array of color values the same length as
-            simplices. If set to None, color will only depend on the z axis
+            simplices. If None, coloring will only depend on the z axis
         :param (str) title: title of the plot
         :param (bool) plot_edges: determines if the triangles on the trisurf
             are visible
@@ -3490,7 +3496,7 @@ class FigureFactory(object):
                                  colormap="Blues",
                                  simplices=simplices)
         # Plot the data
-        py.iplot(fig1, filename='Trisurf Plot - Sphere')
+        py.iplot(fig1, filename='trisurf-plot-sphere')
         ```
 
         Example 2: Torus
@@ -3520,10 +3526,10 @@ class FigureFactory(object):
 
         # Create a figure
         fig1 = FF.create_trisurf(x=x, y=y, z=z,
-                                 colormap="Portland",
+                                 colormap="Greys",
                                  simplices=simplices)
         # Plot the data
-        py.iplot(fig1, filename='Trisurf Plot - Torus')
+        py.iplot(fig1, filename='trisurf-plot-torus')
         ```
 
         Example 3: Mobius Band
@@ -3554,10 +3560,10 @@ class FigureFactory(object):
 
         # Create a figure
         fig1 = FF.create_trisurf(x=x, y=y, z=z,
-                                 colormap=[(0.2, 0.4, 0.6),(1, 1, 1)],
+                                 colormap=[(0.2, 0.4, 0.6), (1, 1, 1)],
                                  simplices=simplices)
         # Plot the data
-        py.iplot(fig1, filename='Trisurf Plot - Mobius Band')
+        py.iplot(fig1, filename='trisurf-plot-mobius-band')
         ```
 
         Example 4: Using a Custom Colormap Function with Light Cone
@@ -3597,7 +3603,7 @@ class FigureFactory(object):
                                  simplices=simplices,
                                  color_func=dist_origin)
         # Plot the data
-        py.iplot(fig1, filename='Trisurf Plot - Custom Coloring')
+        py.iplot(fig1, filename='trisurf-plot-custom-coloring')
         ```
 
         Example 5: Enter color_func as a list of colors
@@ -3637,11 +3643,11 @@ class FigureFactory(object):
             x, y, z, simplices,
             color_func=colors,
             show_colorbar=True,
-            edges_color='rgb(2,85,180)',
+            edges_color='rgb(2, 85, 180)',
             title=' Modern Art'
         )
 
-        py.iplot(fig, filename="Modern Art")
+        py.iplot(fig, filename="trisurf-plot-modern-art")
         ```
         """
         from plotly.graph_objs import graph_objs
