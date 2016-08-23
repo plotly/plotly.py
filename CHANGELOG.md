@@ -6,7 +6,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Updated
 - the colorbar in `.create_trisurf` now displays the appropriate max and min values on the ends of the bar which corresponding to the coloring metric of the figure 
 - `edges_color` is now a param in `.create_trisurf` which only takes `rgb` values at the moment
-- updated the doc strings in `.create_trisurf` to reflect the changes above
 
 ## [1.12.8] - 2016-08-18
 ### Fixed
