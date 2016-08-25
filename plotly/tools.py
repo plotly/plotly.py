@@ -3352,9 +3352,9 @@ class FigureFactory(object):
             colorscale = FigureFactory._convert_colorscale_to_rgb(colorscale)
 
             colorbar = graph_objs.Scatter3d(
-                x=x[0:1],
-                y=y[0:1],
-                z=z[0:1],
+                x=x[:1],
+                y=y[:1],
+                z=z[:1],
                 mode='markers',
                 marker=dict(
                     size=0.1,
