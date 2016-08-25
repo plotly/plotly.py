@@ -3338,7 +3338,7 @@ class FigureFactory(object):
                 facecolor.append(color)
 
         # Make sure facecolor is a list so output is consistent across Pythons
-        facecolor = list(facecolor)
+        facecolor = np.asarray(facecolor)
         ii, jj, kk = simplices.T
 
         triangles = graph_objs.Mesh3d(x=x, y=y, z=z, facecolor=facecolor,
