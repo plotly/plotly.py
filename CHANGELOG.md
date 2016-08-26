@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.12.10] - 2016-08-26
+### Fixed
+- the colorbar in `.create_trisurf` now displays properly in `offline mode`.
+
 ## [1.12.9] - 2016-08-22
 ### Updated
 - the colorbar in `.create_trisurf` now displays the appropriate max and min values on the ends of the bar which corresponding to the coloring metric of the figure 
