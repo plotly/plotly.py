@@ -2731,7 +2731,7 @@ class FigureFactory(object):
         fig = make_subplots(rows=1, cols=L,
                             shared_yaxes=True,
                             horizontal_spacing=0.025,
-                            print_grid=True)
+                            print_grid=False)
         color_index = 0
         for k, gr in enumerate(group_name):
             vals = np.asarray(gb.get_group(gr)[data_header], np.float)
@@ -2769,7 +2769,8 @@ class FigureFactory(object):
 
     @staticmethod
     def _violin_colorscale(data, data_header, group_header, colors,
-                           use_colorscale, group_stats, height, width, title):
+                           use_colorscale, group_stats, height, width,
+                           title):
         """
         Refer to FigureFactory.create_violin() for docstring.
 
@@ -2799,7 +2800,7 @@ class FigureFactory(object):
         fig = make_subplots(rows=1, cols=L,
                             shared_yaxes=True,
                             horizontal_spacing=0.025,
-                            print_grid=True)
+                            print_grid=False)
 
         # prepare low and high color for colorscale
         lowcolor = FigureFactory._color_parser(
@@ -2900,7 +2901,7 @@ class FigureFactory(object):
         fig = make_subplots(rows=1, cols=L,
                             shared_yaxes=True,
                             horizontal_spacing=0.025,
-                            print_grid=True)
+                            print_grid=False)
 
         for k, gr in enumerate(group_name):
             vals = np.asarray(gb.get_group(gr)[data_header], np.float)
