@@ -3696,7 +3696,7 @@ class FigureFactory(object):
         """
         from plotly.graph_objs import graph_objs
         dim = len(dataframe)
-        fig = make_subplots(rows=dim, cols=dim)
+        fig = make_subplots(rows=dim, cols=dim, print_grid=False)
         trace_list = []
         # Insert traces into trace_list
         for listy in dataframe:
@@ -3777,7 +3777,7 @@ class FigureFactory(object):
 
         theme = colormap
         dim = len(dataframe)
-        fig = make_subplots(rows=dim, cols=dim)
+        fig = make_subplots(rows=dim, cols=dim, print_grid=False)
         trace_list = []
         legend_param = 0
         # Work over all permutations of list pairs
@@ -3963,7 +3963,7 @@ class FigureFactory(object):
                 theme = colormap
 
             dim = len(dataframe)
-            fig = make_subplots(rows=dim, cols=dim)
+            fig = make_subplots(rows=dim, cols=dim, print_grid=False)
             trace_list = []
             legend_param = 0
             # Work over all permutations of list pairs
@@ -4137,7 +4137,7 @@ class FigureFactory(object):
                     theme = colormap
 
                 dim = len(dataframe)
-                fig = make_subplots(rows=dim, cols=dim)
+                fig = make_subplots(rows=dim, cols=dim, print_grid=False)
                 trace_list = []
                 legend_param = 0
                 # Work over all permutations of list pairs
@@ -4301,7 +4301,7 @@ class FigureFactory(object):
                     color.append([1./(len(theme)-1)*incr, theme[incr]])
 
                 dim = len(dataframe)
-                fig = make_subplots(rows=dim, cols=dim)
+                fig = make_subplots(rows=dim, cols=dim, print_grid=False)
                 trace_list = []
                 legend_param = 0
                 # Run through all permutations of list pairs
