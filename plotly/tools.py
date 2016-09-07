@@ -1211,7 +1211,7 @@ def make_subplots(rows=1, cols=1,
     empty_str = '    (empty) '   # empty cell string
 
     # Init grid_str with intro message
-    grid_str = "This is the formats of your plot grid:\n"
+    grid_str = "This is the format of your plot grid:\n"
 
     # Init tmp list of lists of strings (sorta like 'grid_ref' but w/ strings)
     _tmp = [['' for c in range(cols)] for r in range(rows)]
@@ -2708,7 +2708,7 @@ class FigureFactory(object):
     @staticmethod
     def _violin_no_colorscale(data, data_header, group_header, colors,
                               use_colorscale, group_stats,
-                              height, width, title, print_grid):
+                              height, width, title):
         """
         Refer to FigureFactory.create_violin() for docstring.
 
@@ -2731,7 +2731,7 @@ class FigureFactory(object):
         fig = make_subplots(rows=1, cols=L,
                             shared_yaxes=True,
                             horizontal_spacing=0.025,
-                            print_grid=print_grid)
+                            print_grid=False)
         color_index = 0
         for k, gr in enumerate(group_name):
             vals = np.asarray(gb.get_group(gr)[data_header], np.float)
@@ -2770,7 +2770,7 @@ class FigureFactory(object):
     @staticmethod
     def _violin_colorscale(data, data_header, group_header, colors,
                            use_colorscale, group_stats, height, width,
-                           title, print_grid):
+                           title):
         """
         Refer to FigureFactory.create_violin() for docstring.
 
@@ -2800,7 +2800,7 @@ class FigureFactory(object):
         fig = make_subplots(rows=1, cols=L,
                             shared_yaxes=True,
                             horizontal_spacing=0.025,
-                            print_grid=print_grid)
+                            print_grid=False)
 
         # prepare low and high color for colorscale
         lowcolor = FigureFactory._color_parser(
@@ -2871,7 +2871,7 @@ class FigureFactory(object):
 
     @staticmethod
     def _violin_dict(data, data_header, group_header, colors, use_colorscale,
-                     group_stats, height, width, title, print_grid):
+                     group_stats, height, width, title):
         """
         Refer to FigureFactory.create_violin() for docstring.
 
@@ -2901,7 +2901,7 @@ class FigureFactory(object):
         fig = make_subplots(rows=1, cols=L,
                             shared_yaxes=True,
                             horizontal_spacing=0.025,
-                            print_grid=print_grid)
+                            print_grid=False)
 
         for k, gr in enumerate(group_name):
             vals = np.asarray(gb.get_group(gr)[data_header], np.float)
@@ -2937,8 +2937,7 @@ class FigureFactory(object):
     @staticmethod
     def create_violin(data, data_header=None, group_header=None,
                       colors=None, use_colorscale=False, group_stats=None,
-                      height=450, width=600, title='Violin and Rug Plot',
-                      print_grid=True):
+                      height=450, width=600, title='Violin and Rug Plot'):
         """
         Returns figure for a violin plot
 
@@ -2970,8 +2969,6 @@ class FigureFactory(object):
         :param (float) height: the height of the violin plot
         :param (float) width: the width of the violin plot
         :param (str) title: the title of the violin plot
-        :param (str) print_grid: determines if make_subplots() returns a
-            printed string displaying the rows/columns dimensions
 
         Example 1: Single Violin Plot
         ```
@@ -3138,15 +3135,13 @@ class FigureFactory(object):
                     # validate colors dict choice below
                     fig = FigureFactory._violin_dict(
                         data, data_header, group_header, valid_colors,
-                        use_colorscale, group_stats, height, width, title,
-                        print_grid
+                        use_colorscale, group_stats, height, width, title
                     )
                     return fig
                 else:
                     fig = FigureFactory._violin_no_colorscale(
                         data, data_header, group_header, valid_colors,
-                        use_colorscale, group_stats, height, width, title,
-                        print_grid
+                        use_colorscale, group_stats, height, width, title
                     )
                     return fig
             else:
@@ -3166,8 +3161,7 @@ class FigureFactory(object):
 
                 fig = FigureFactory._violin_colorscale(
                     data, data_header, group_header, valid_colors,
-                    use_colorscale, group_stats, height, width, title,
-                    print_grid
+                    use_colorscale, group_stats, height, width, title
                 )
                 return fig
 
