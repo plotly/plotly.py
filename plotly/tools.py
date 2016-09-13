@@ -16,6 +16,7 @@ import six
 import math
 import decimal
 
+from plotly import colors
 from plotly import utils
 from plotly import exceptions
 from plotly import graph_reference
@@ -3226,7 +3227,7 @@ class FigureFactory(object):
                 colors[2]/(255.0))
 
     @staticmethod
-    def _map_face2color(face, colormap, vmin, vmax):
+    def _map_face2color(face, colormap, scale, vmin, vmax):
         """
         Normalize facecolor values by vmin/vmax and return rgb-color strings
 
@@ -3241,36 +3242,58 @@ class FigureFactory(object):
                                          "and vmax. The vmin value cannot be "
                                          "bigger than or equal to the value "
                                          "of vmax.")
-
         if len(colormap) == 1:
             # color each triangle face with the same color in colormap
             face_color = colormap[0]
-            face_color = FigureFactory._convert_to_RGB_255(face_color)
-            face_color = FigureFactory._label_rgb(face_color)
+            face_color = colors.convert_to_RGB_255(face_color)
+            face_color = colors.label_rgb(face_color)
+            return face_color
+        if face == vmax:
+            # pick last color in colormap
+            face_color = colormap[-1]
+            face_color = colors.convert_to_RGB_255(face_color)
+            face_color = colors.label_rgb(face_color)
+            return face_color
         else:
-            if face == vmax:
-                # pick last color in colormap
-                face_color = colormap[-1]
-                face_color = FigureFactory._convert_to_RGB_255(face_color)
-                face_color = FigureFactory._label_rgb(face_color)
-            else:
+            if scale is None:
                 # find the normalized distance t of a triangle face between
                 # vmin and vmax where the distance is between 0 and 1
                 t = (face - vmin) / float((vmax - vmin))
                 low_color_index = int(t / (1./(len(colormap) - 1)))
 
-                face_color = FigureFactory._find_intermediate_color(
+                face_color = colors.find_intermediate_color(
                     colormap[low_color_index],
                     colormap[low_color_index + 1],
                     t * (len(colormap) - 1) - low_color_index
                 )
 
-                face_color = FigureFactory._convert_to_RGB_255(face_color)
-                face_color = FigureFactory._label_rgb(face_color)
-        return face_color
+                face_color = colors.convert_to_RGB_255(face_color)
+                face_color = colors.label_rgb(face_color)
+            else:
+                # find the face color for a non-linearly interpolated scale
+                t = (face - vmin) / float((vmax - vmin))
+
+                low_color_index = 0
+                for k in range(len(scale) - 1):
+                    if scale[k] <= t < scale[k+1]:
+                        break
+                    low_color_index += 1
+
+                low_scale_val = scale[low_color_index]
+                high_scale_val = scale[low_color_index + 1]
+
+                face_color = colors.find_intermediate_color(
+                    colormap[low_color_index],
+                    colormap[low_color_index + 1],
+                    (t - low_scale_val)/(high_scale_val - low_scale_val)
+                )
+
+                face_color = colors.convert_to_RGB_255(face_color)
+                face_color = colors.label_rgb(face_color)
+            return face_color
 
     @staticmethod
-    def _trisurf(x, y, z, simplices, show_colorbar, edges_color,
+    def _trisurf(x, y, z, simplices, show_colorbar, edges_color, scale,
                  colormap=None, color_func=None, plot_edges=False,
                  x_edge=None, y_edge=None, z_edge=None, facecolor=None):
         """
@@ -3302,12 +3325,12 @@ class FigureFactory(object):
             for index in range(len(color_func)):
                 if isinstance(color_func[index], str):
                     if '#' in color_func[index]:
-                        foo = FigureFactory._hex_to_rgb(color_func[index])
-                        color_func[index] = FigureFactory._label_rgb(foo)
+                        foo = colors.hex_to_rgb(color_func[index])
+                        color_func[index] = colors.label_rgb(foo)
 
                 if isinstance(color_func[index], tuple):
-                    foo = FigureFactory._convert_to_RGB_255(color_func[index])
-                    color_func[index] = FigureFactory._label_rgb(foo)
+                    foo = colors.convert_to_RGB_255(color_func[index])
+                    color_func[index] = colors.label_rgb(foo)
 
             mean_dists = np.asarray(color_func)
         else:
@@ -3334,6 +3357,7 @@ class FigureFactory(object):
             for index in range(len(mean_dists)):
                 color = FigureFactory._map_face2color(mean_dists[index],
                                                       colormap,
+                                                      scale,
                                                       min_mean_dists,
                                                       max_mean_dists)
                 facecolor.append(color)
@@ -3349,8 +3373,8 @@ class FigureFactory(object):
 
         if mean_dists_are_numbers and show_colorbar is True:
             # make a colorscale from the colors
-            colorscale = FigureFactory._make_colorscale(colormap)
-            colorscale = FigureFactory._convert_colorscale_to_rgb(colorscale)
+            colorscale = colors.make_colorscale(colormap, scale)
+            colorscale = colors.convert_colorscale_to_rgb(colorscale)
 
             colorbar = graph_objs.Scatter3d(
                 x=x[:1],
@@ -3422,8 +3446,8 @@ class FigureFactory(object):
 
     @staticmethod
     def create_trisurf(x, y, z, simplices, colormap=None, show_colorbar=True,
-                       color_func=None, title='Trisurf Plot', plot_edges=True,
-                       showbackground=True,
+                       scale=None, color_func=None, title='Trisurf Plot',
+                       plot_edges=True, showbackground=True,
                        backgroundcolor='rgb(230, 230, 230)',
                        gridcolor='rgb(255, 255, 255)',
                        zerolinecolor='rgb(255, 255, 255)',
@@ -3446,6 +3470,9 @@ class FigureFactory(object):
             a, b and c belong to [0, 1]. If colormap is a list, it must
             contain the valid color types aforementioned as its members
         :param (bool) show_colorbar: determines if colorbar is visible
+        :param (list|array) scale: sets the scale values to be used if a non-
+            linearly interpolated colormap is desired. If left as None, a
+            linear interpolation between the colors will be excecuted
         :param (function|list) color_func: The parameter that determines the
             coloring of the surface. Takes either a function with 3 arguments
             x, y, z or a list/array of color values the same length as
@@ -3654,14 +3681,19 @@ class FigureFactory(object):
         from plotly.graph_objs import graph_objs
 
         # Validate colormap
-        colormap = FigureFactory._validate_colors(colormap, 'tuple')
+        colors.validate_colors(colormap)
+        colormap, scale = colors.convert_colors_to_same_type(
+            colormap, colortype='tuple', scale=scale
+        )
 
         data1 = FigureFactory._trisurf(x, y, z, simplices,
                                        show_colorbar=show_colorbar,
                                        color_func=color_func,
                                        colormap=colormap,
+                                       scale=scale,
                                        edges_color=edges_color,
                                        plot_edges=plot_edges)
+
         axis = dict(
             showbackground=showbackground,
             backgroundcolor=backgroundcolor,
