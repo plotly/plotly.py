@@ -3683,7 +3683,8 @@ class FigureFactory(object):
         # Validate colormap
         colors.validate_colors(colormap)
         colormap, scale = colors.convert_colors_to_same_type(
-            colormap, colortype='tuple', scale=scale
+            colormap, colortype='tuple',
+            return_default_colors=True, scale=scale
         )
 
         data1 = FigureFactory._trisurf(x, y, z, simplices,

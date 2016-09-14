@@ -233,8 +233,10 @@ def validate_colors(colors, colors_list=None):
     return
 
 
-def convert_colors_to_same_type(colors, colortype='rgb',
-                                scale=None, colors_list=None):
+def convert_colors_to_same_type(colors, colortype='rgb', scale=None,
+                                return_default_colors=False,
+                                num_of_defualt_colors=2,
+                                colors_list=None):
     """
     Converts color(s) to the specified color type
 
@@ -243,10 +245,14 @@ def convert_colors_to_same_type(colors, colortype='rgb',
     rgb or tuple color type, aswell as the scale as the second element. If
     colors is a Plotly Scale name, then 'scale' will be forced to the scale
     from the respective colorscale and the colors in that colorscale will also
-    be coverted to the selected colortype.
+    be coverted to the selected colortype. If colors is None, then there is an
+    option to return portion of the DEFAULT_PLOTLY_COLORS
     """
     if colors_list is None:
         colors_list = []
+
+    if colors is None and return_default_colors is True:
+        colors_list = DEFAULT_PLOTLY_COLORS[0:num_of_defualt_colors]
 
     if isinstance(colors, str):
         if colors in PLOTLY_SCALES:
