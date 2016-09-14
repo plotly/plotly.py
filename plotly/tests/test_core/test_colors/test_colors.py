@@ -95,8 +95,8 @@ class TestColors(TestCase):
         # test numbers increase
         scale = [0, 2, 1]
 
-        pattern = ("'scale' must be a list that contains an increasing "
-                   "sequence of numbers.")
+        pattern = ("'scale' must be a list that contains a strictly "
+                   "increasing sequence of numbers.")
 
         self.assertRaisesRegexp(PlotlyError, pattern,
                                 colors.validate_scale_values,
