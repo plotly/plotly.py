@@ -180,13 +180,16 @@ def validate_colors(colors, colors_list=None):
     """
     Validates color(s) and returns an error for invalid color(s)
 
-    :param (list) colors_list: whether a singleton color or a list/tuple of
+    :param (str|tuple|list) colors: either a plotly scale name, an rgb or hex
+        color, a color tuple or a list/tuple of colors
+    :param (list) colors_list: whether a single color or a list/tuple of
         colors is inputted, all the color types are appended to colors_list
         so they can be easily iterated through for validation
     """
     if colors_list is None:
         colors_list = []
 
+    # if colors is a single color, put into colors_list
     if isinstance(colors, str):
         if colors in PLOTLY_SCALES:
             return
@@ -250,6 +253,8 @@ def convert_colors_to_same_type(colors, colortype='rgb', scale=None,
     be coverted to the selected colortype. If colors is None, then there is an
     option to return portion of the DEFAULT_PLOTLY_COLORS
 
+    :param (str|tuple|list) colors: either a plotly scale name, an rgb or hex
+        color, a color tuple or a list/tuple of colors
     :param (list) colors_list: see docs for validate_colors()
     :param (list) scale: see docs for validate_scale_values()
 
@@ -327,42 +332,40 @@ def convert_colors_to_same_type(colors, colortype='rgb', scale=None,
                                      'for your colortype variable.')
 
 
-def convert_dict_colors_to_same_type(colors, colortype='rgb'):
+def convert_dict_colors_to_same_type(colors_dict, colortype='rgb'):
     """
-    Converts color(s) to the specified color type
+    Converts a colors in a dictioanry of colors to the specified color type
 
-    Takes a single color or an iterable of colors and outputs a list of the
-    color(s) converted all to an rgb or tuple color type. If colors is a
-    Plotly Scale name then the cooresponding colorscale will be outputted
+    :param (dict) colors_dict: a dictioanry whose values are single colors
     """
-    for key in colors:
-        if '#' in colors[key]:
-            colors[key] = color_parser(
-                colors[key], hex_to_rgb
+    for key in colors_dict:
+        if '#' in colors_dict[key]:
+            colors_dict[key] = color_parser(
+                colors_dict[key], hex_to_rgb
             )
-            colors[key] = color_parser(
-                colors[key], label_rgb
+            colors_dict[key] = color_parser(
+                colors_dict[key], label_rgb
             )
 
-        elif isinstance(colors[key], tuple):
-            colors[key] = color_parser(
-                colors[key], convert_to_RGB_255
+        elif isinstance(colors_dict[key], tuple):
+            colors_dict[key] = color_parser(
+                colors_dict[key], convert_to_RGB_255
             )
-            colors[key] = color_parser(
-                colors[key], label_rgb
+            colors_dict[key] = color_parser(
+                colors_dict[key], label_rgb
             )
 
     if colortype == 'rgb':
-        return colors
+        return colors_dict
     elif colortype == 'tuple':
-        for key in colors:
-            colors[key] = color_parser(
-                colors[key], unlabel_rgb
+        for key in colors_dict:
+            colors_dict[key] = color_parser(
+                colors_dict[key], unlabel_rgb
             )
-            colors[key] = color_parser(
-                colors[key], unconvert_from_RGB_255
+            colors_dict[key] = color_parser(
+                colors_dict[key], unconvert_from_RGB_255
             )
-        return colors
+        return colors_dict
     else:
         raise exceptions.PlotlyError('You must select either rgb or tuple '
                                      'for your colortype variable.')
@@ -406,6 +409,8 @@ def make_colorscale(colors, scale=None, colorscale=None):
     list, it must be the same legnth as colors and must contain all floats
     For documentation regarding to the form of the output, see
     https://plot.ly/python/reference/#mesh3d-colorscale
+
+    :param (list) colors: a list of single colors
     """
     if colorscale is None:
         colorscale = []

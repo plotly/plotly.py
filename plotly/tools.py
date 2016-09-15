@@ -3521,7 +3521,7 @@ class FigureFactory(object):
 
         # Create a figure
         fig1 = FF.create_trisurf(x=x, y=y, z=z,
-                                 colormap="Blues",
+                                 colormap="Rainbow",
                                  simplices=simplices)
         # Plot the data
         py.iplot(fig1, filename='trisurf-plot-sphere')
@@ -3554,7 +3554,7 @@ class FigureFactory(object):
 
         # Create a figure
         fig1 = FF.create_trisurf(x=x, y=y, z=z,
-                                 colormap="Greys",
+                                 colormap="Viridis",
                                  simplices=simplices)
         # Plot the data
         py.iplot(fig1, filename='trisurf-plot-torus')
@@ -3625,9 +3625,10 @@ class FigureFactory(object):
 
         # Create a figure
         fig1 = FF.create_trisurf(x=x, y=y, z=z,
-                                 colormap=['#604d9e',
-                                           'rgb(50, 150, 255)',
-                                           (0.2, 0.2, 0.8)],
+                                 colormap=['#FFFFFF', '#E4FFFE',
+                                           '#A4F6F9', '#FF99FE',
+                                           '#BA52ED'],
+                                 scale=[0, 0.6, 0.71, 0.89, 1],
                                  simplices=simplices,
                                  color_func=dist_origin)
         # Plot the data
