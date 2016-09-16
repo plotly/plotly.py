@@ -393,7 +393,7 @@ def validate_scale_values(scale):
             )
 
 
-def make_colorscale(colors, scale=None, colorscale=None):
+def make_colorscale(colors, scale=None):
     """
     Makes a colorscale from a list of colors and a scale
 
@@ -406,8 +406,7 @@ def make_colorscale(colors, scale=None, colorscale=None):
 
     :param (list) colors: a list of single colors
     """
-    if colorscale is None:
-        colorscale = []
+    colorscale = []
 
     # validate minimum colors length of 2
     if len(colors) < 2:
@@ -459,7 +458,7 @@ def unconvert_from_RGB_255(colors):
             colors[2]/(255.0))
 
 
-def convert_to_RGB_255(colors, rgb_components=None):
+def convert_to_RGB_255(colors):
     """
     Multiplies each element of a triplet by 255
 
@@ -472,8 +471,7 @@ def convert_to_RGB_255(colors, rgb_components=None):
     :param (list) rgb_components: grabs the three R, G and B values to be
         returned as computed in the function
     """
-    if rgb_components is None:
-        rgb_components = []
+    rgb_components = []
 
     for component in colors:
         rounded_num = decimal.Decimal(str(component*255.0)).quantize(
@@ -561,23 +559,21 @@ def hex_to_rgb(value):
                  for i in range(0, hex_total_length, rgb_section_length))
 
 
-def colorscale_to_colors(colorscale, color_list=None):
+def colorscale_to_colors(colorscale):
     """
     Extracts the colors from colorscale as a list
     """
-    if color_list is None:
-        color_list = []
+    color_list = []
     for item in colorscale:
         color_list.append(item[1])
     return color_list
 
 
-def colorscale_to_scale(colorscale, scale_list=None):
+def colorscale_to_scale(colorscale):
     """
     Extracts the interpolation scale values from colorscale as a list
     """
-    if scale_list is None:
-        scale_list = []
+    scale_list = []
     for item in colorscale:
         scale_list.append(item[0])
     return scale_list
