@@ -176,18 +176,14 @@ def color_parser(colors, function):
             return new_color_list
 
 
-def validate_colors(colors, colors_list=None):
+def validate_colors(colors):
     """
     Validates color(s) and returns an error for invalid color(s)
 
     :param (str|tuple|list) colors: either a plotly scale name, an rgb or hex
         color, a color tuple or a list/tuple of colors
-    :param (list) colors_list: whether a single color or a list/tuple of
-        colors is inputted, all the color types are appended to colors_list
-        so they can be easily iterated through for validation
     """
-    if colors_list is None:
-        colors_list = []
+    colors_list = []
 
     # if colors is a single color, put into colors_list
     if isinstance(colors, str):
@@ -240,8 +236,7 @@ def validate_colors(colors, colors_list=None):
 
 def convert_colors_to_same_type(colors, colortype='rgb', scale=None,
                                 return_default_colors=False,
-                                num_of_defualt_colors=2,
-                                colors_list=None):
+                                num_of_defualt_colors=2):
     """
     Converts color(s) to the specified color type
 
@@ -255,14 +250,13 @@ def convert_colors_to_same_type(colors, colortype='rgb', scale=None,
 
     :param (str|tuple|list) colors: either a plotly scale name, an rgb or hex
         color, a color tuple or a list/tuple of colors
-    :param (list) colors_list: see docs for validate_colors()
     :param (list) scale: see docs for validate_scale_values()
 
     :rtype (tuple) (colors_list, scale) if scale is None in the function call,
         then scale will remain None in the returned tuple
     """
-    if colors_list is None:
-        colors_list = []
+    #if colors_list is None:
+    colors_list = []
 
     if colors is None and return_default_colors is True:
         colors_list = DEFAULT_PLOTLY_COLORS[0:num_of_defualt_colors]
