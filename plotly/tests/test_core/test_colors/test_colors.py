@@ -39,15 +39,12 @@ class TestColors(TestCase):
 
     def test_convert_colors_to_same_type(self):
 
-        # test string input
-        color_string = 'foo'
+        # test colortype
+        color_tuple = ['#aaaaaa', '#bbbbbb', '#cccccc']
+        scale = [0, 1]
 
-        pattern = ("If your colors variable is a string, it must be a "
-                   "Plotly scale, an rgb color or a hex color.")
-
-        self.assertRaisesRegexp(PlotlyError, pattern,
-                                colors.convert_colors_to_same_type,
-                                color_string)
+        self.assertRaises(PlotlyError, colors.convert_colors_to_same_type,
+                          color_tuple, scale=scale)
 
         # test colortype
         color_tuple = (1, 1, 1)
@@ -73,6 +70,38 @@ class TestColors(TestCase):
                                 colors.convert_dict_colors_to_same_type,
                                 color_dict, colortype)
 
+    def test_validate_scale_values(self):
+
+        # test that scale length is at least 2
+        scale = [0]
+
+        pattern = ("You must input a list of scale values that has at least "
+                   "two values.")
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                colors.validate_scale_values,
+                                scale)
+
+        # test if first and last number is 0 and 1 respectively
+        scale = [0, 1.1]
+
+        pattern = ("The first and last number in your scale must be 0.0 and "
+                   "1.0 respectively.")
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                colors.validate_scale_values,
+                                scale)
+
+        # test numbers increase
+        scale = [0, 2, 1]
+
+        pattern = ("'scale' must be a list that contains a strictly "
+                   "increasing sequence of numbers.")
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                colors.validate_scale_values,
+                                scale)
+
     def test_make_colorscale(self):
 
         # test minimum colors length
@@ -93,23 +122,3 @@ class TestColors(TestCase):
 
         self.assertRaisesRegexp(PlotlyError, pattern2, colors.make_colorscale,
                                 color_list2, scale)
-
-        # test first and last number of scale
-        scale2 = [0, 2]
-
-        pattern3 = ("The first and last number in scale must be 0.0 and 1.0 "
-                    "respectively.")
-
-        self.assertRaisesRegexp(PlotlyError, pattern3, colors.make_colorscale,
-                                color_list2, scale2)
-
-        # test for strictly increasing scale
-        color_list3 = [(0, 0, 0), (0.5, 0.5, 0.5), (1, 1, 1)]
-        scale3 = [0, 1, 1]
-
-        pattern4 = ("'scale' must be a list that contains an increasing "
-                    "sequence of numbers where the first and last number are"
-                    "0.0 and 1.0 respectively.")
-
-        self.assertRaisesRegexp(PlotlyError, pattern4, colors.make_colorscale,
-                                color_list3, scale3)

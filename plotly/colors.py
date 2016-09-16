@@ -2,24 +2,27 @@
 colors
 =====
 
-Functions that manipulate colors and arrays of colors
+Functions that manipulate colors and arrays of colors.
 
 There are three basic types of color types: rgb, hex and tuple:
 
 rgb - An rgb color is a string of the form 'rgb(a,b,c)' where a, b and c are
-floats between 0 and 255 inclusive.
+integers between 0 and 255 inclusive.
 
 hex - A hex color is a string of the form '#xxxxxx' where each x is a
 character that belongs to the set [0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f]. This is
-just the list of characters used in the hexadecimal numeric system.
+just the set of characters used in the hexadecimal numeric system.
 
 tuple - A tuple color is a 3-tuple of the form (a,b,c) where a, b and c are
 floats between 0 and 1 inclusive.
 
 """
 from __future__ import absolute_import
-from plotly import exceptions
+
+import decimal
 from numbers import Number
+
+from plotly import exceptions
 
 DEFAULT_PLOTLY_COLORS = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
                          'rgb(44, 160, 44)', 'rgb(214, 39, 40)',
@@ -156,7 +159,6 @@ def color_parser(colors, function):
     the color or iterable of colors. If given an iterable, it will only be
     able to work with it if all items in the iterable are of the same type
     - rgb string, hex string or tuple
-
     """
     if isinstance(colors, str):
         return function(colors)
@@ -176,19 +178,23 @@ def color_parser(colors, function):
 
 def validate_colors(colors):
     """
-    Validates color(s) and returns an error for invalid colors
+    Validates color(s) and returns an error for invalid color(s)
+
+    :param (str|tuple|list) colors: either a plotly scale name, an rgb or hex
+        color, a color tuple or a list/tuple of colors
     """
     colors_list = []
 
+    # if colors is a single color, put into colors_list
     if isinstance(colors, str):
         if colors in PLOTLY_SCALES:
             return
         elif 'rgb' in colors or '#' in colors:
-            colors_list = [colors]
+            colors_list.append(colors)
         else:
             raise exceptions.PlotlyError(
-                "If your colors variable is a string, it must be a "
-                "Plotly scale, an rgb color or a hex color."
+                'If your colors variable is a string, it must be a '
+                'Plotly scale, an rgb color or a hex color.'
             )
 
     elif isinstance(colors, tuple):
@@ -212,45 +218,57 @@ def validate_colors(colors):
             for value in each_color:
                 if value > 255.0:
                     raise exceptions.PlotlyError(
-                        "Whoops! The elements in your rgb colors "
-                        "tuples cannot exceed 255.0."
+                        'Whoops! The elements in your rgb colors '
+                        'tuples cannot exceed 255.0.'
                     )
-
         elif '#' in each_color:
             each_color = color_parser(
                 each_color, hex_to_rgb
             )
-
         elif isinstance(each_color, tuple):
             for value in each_color:
                 if value > 1.0:
                     raise exceptions.PlotlyError(
-                        "Whoops! The elements in your colors tuples "
-                        "cannot exceed 1.0."
+                        'Whoops! The elements in your colors tuples '
+                        'cannot exceed 1.0.'
                     )
-    return colors
 
 
-def convert_colors_to_same_type(colors, colortype='rgb'):
+def convert_colors_to_same_type(colors, colortype='rgb', scale=None,
+                                return_default_colors=False,
+                                num_of_defualt_colors=2):
     """
     Converts color(s) to the specified color type
 
-    Takes a single color or an iterable of colors and outputs a list of the
-    color(s) converted all to an rgb or tuple color type. If colors is a
-    Plotly Scale name then the cooresponding colorscale will be outputted and
-    colortype will not be applicable
+    Takes a single color or an iterable of colors, as well as a list of scale
+    values, and outputs a 2-pair of the list of color(s) converted all to an
+    rgb or tuple color type, aswell as the scale as the second element. If
+    colors is a Plotly Scale name, then 'scale' will be forced to the scale
+    from the respective colorscale and the colors in that colorscale will also
+    be coverted to the selected colortype. If colors is None, then there is an
+    option to return portion of the DEFAULT_PLOTLY_COLORS
+
+    :param (str|tuple|list) colors: either a plotly scale name, an rgb or hex
+        color, a color tuple or a list/tuple of colors
+    :param (list) scale: see docs for validate_scale_values()
+
+    :rtype (tuple) (colors_list, scale) if scale is None in the function call,
+        then scale will remain None in the returned tuple
     """
+    #if colors_list is None:
     colors_list = []
+
+    if colors is None and return_default_colors is True:
+        colors_list = DEFAULT_PLOTLY_COLORS[0:num_of_defualt_colors]
 
     if isinstance(colors, str):
         if colors in PLOTLY_SCALES:
-            return PLOTLY_SCALES[colors]
+            colors_list = colorscale_to_colors(PLOTLY_SCALES[colors])
+            if scale is None:
+                scale = colorscale_to_scale(PLOTLY_SCALES[colors])
+
         elif 'rgb' in colors or '#' in colors:
             colors_list = [colors]
-        else:
-            raise exceptions.PlotlyError(
-                "If your colors variable is a string, it must be a Plotly "
-                "scale, an rgb color or a hex color.")
 
     elif isinstance(colors, tuple):
         if isinstance(colors[0], Number):
@@ -260,6 +278,16 @@ def convert_colors_to_same_type(colors, colortype='rgb'):
 
     elif isinstance(colors, list):
         colors_list = colors
+
+    # validate scale
+    if scale is not None:
+        validate_scale_values(scale)
+
+        if len(colors_list) != len(scale):
+            raise exceptions.PlotlyError(
+                'Make sure that the length of your scale matches the length '
+                'of your list of colors which is {}.'.format(len(colors_list))
+            )
 
     # convert all colors to rgb
     for j, each_color in enumerate(colors_list):
@@ -282,7 +310,7 @@ def convert_colors_to_same_type(colors, colortype='rgb'):
             colors_list[j] = each_color
 
     if colortype == 'rgb':
-        return colors_list
+        return (colors_list, scale)
     elif colortype == 'tuple':
         for j, each_color in enumerate(colors_list):
             each_color = color_parser(
@@ -292,51 +320,77 @@ def convert_colors_to_same_type(colors, colortype='rgb'):
                 each_color, unconvert_from_RGB_255
             )
             colors_list[j] = each_color
-        return colors_list
+        return (colors_list, scale)
     else:
-        raise exceptions.PlotlyError("You must select either rgb or tuple "
-                                     "for your colortype variable.")
+        raise exceptions.PlotlyError('You must select either rgb or tuple '
+                                     'for your colortype variable.')
 
 
-def convert_dict_colors_to_same_type(colors, colortype='rgb'):
+def convert_dict_colors_to_same_type(colors_dict, colortype='rgb'):
     """
-    Converts color(s) to the specified color type
+    Converts a colors in a dictioanry of colors to the specified color type
 
-    Takes a single color or an iterable of colors and outputs a list of the
-    color(s) converted all to an rgb or tuple color type. If colors is a
-    Plotly Scale name then the cooresponding colorscale will be outputted
+    :param (dict) colors_dict: a dictioanry whose values are single colors
     """
-    for key in colors:
-        if '#' in colors[key]:
-            colors[key] = color_parser(
-                colors[key], hex_to_rgb
+    for key in colors_dict:
+        if '#' in colors_dict[key]:
+            colors_dict[key] = color_parser(
+                colors_dict[key], hex_to_rgb
             )
-            colors[key] = color_parser(
-                colors[key], label_rgb
+            colors_dict[key] = color_parser(
+                colors_dict[key], label_rgb
             )
 
-        elif isinstance(colors[key], tuple):
-            colors[key] = color_parser(
-                colors[key], convert_to_RGB_255
+        elif isinstance(colors_dict[key], tuple):
+            colors_dict[key] = color_parser(
+                colors_dict[key], convert_to_RGB_255
             )
-            colors[key] = color_parser(
-                colors[key], label_rgb
+            colors_dict[key] = color_parser(
+                colors_dict[key], label_rgb
             )
 
     if colortype == 'rgb':
-        return colors
+        return colors_dict
     elif colortype == 'tuple':
-        for key in colors:
-            colors[key] = color_parser(
-                colors[key], unlabel_rgb
+        for key in colors_dict:
+            colors_dict[key] = color_parser(
+                colors_dict[key], unlabel_rgb
             )
-            colors[key] = color_parser(
-                colors[key], unconvert_from_RGB_255
+            colors_dict[key] = color_parser(
+                colors_dict[key], unconvert_from_RGB_255
             )
-        return colors
+        return colors_dict
     else:
-        raise exceptions.PlotlyError("You must select either rgb or tuple "
-                                     "for your colortype variable.")
+        raise exceptions.PlotlyError('You must select either rgb or tuple '
+                                     'for your colortype variable.')
+
+
+def validate_scale_values(scale):
+    """
+    Validates scale values from a colorscale
+
+    :param (list) scale: a strictly increasing list of floats that begins
+        with 0 and ends with 1. Its usage derives from a colorscale which is
+        a list of two-lists (a list with two elements) of the form
+        [value, color] which are used to determine how interpolation weighting
+        works between the colors in the colorscale. Therefore scale is just
+        the extraction of these values from the two-lists in order
+    """
+    if len(scale) < 2:
+        raise exceptions.PlotlyError('You must input a list of scale values '
+                                     'that has at least two values.')
+
+    if (scale[0] != 0) or (scale[-1] != 1):
+        raise exceptions.PlotlyError(
+            'The first and last number in your scale must be 0.0 and 1.0 '
+            'respectively.'
+        )
+
+    if not all(x < y for x, y in zip(scale, scale[1:])):
+            raise exceptions.PlotlyError(
+                "'scale' must be a list that contains a strictly increasing "
+                "sequence of numbers."
+            )
 
 
 def make_colorscale(colors, scale=None):
@@ -349,37 +403,26 @@ def make_colorscale(colors, scale=None):
     list, it must be the same legnth as colors and must contain all floats
     For documentation regarding to the form of the output, see
     https://plot.ly/python/reference/#mesh3d-colorscale
+
+    :param (list) colors: a list of single colors
     """
     colorscale = []
 
     # validate minimum colors length of 2
     if len(colors) < 2:
-        raise exceptions.PlotlyError("You must input a list of colors that "
-                                     "has at least two colors.")
+        raise exceptions.PlotlyError('You must input a list of colors that '
+                                     'has at least two colors.')
 
-    if not scale:
+    if scale is None:
         scale_incr = 1./(len(colors) - 1)
         return [[i * scale_incr, color] for i, color in enumerate(colors)]
 
     else:
-        # validate scale
         if len(colors) != len(scale):
-            raise exceptions.PlotlyError("The length of colors and scale "
-                                         "must be the same.")
+            raise exceptions.PlotlyError('The length of colors and scale '
+                                         'must be the same.')
 
-        if (scale[0] != 0) or (scale[-1] != 1):
-            raise exceptions.PlotlyError(
-                "The first and last number in scale must be 0.0 and 1.0 "
-                "respectively."
-            )
-
-        for j in range(1, len(scale)):
-            if scale[j] <= scale[j-1]:
-                raise exceptions.PlotlyError(
-                    "'scale' must be a list that contains an increasing "
-                    "sequence of numbers where the first and last number are"
-                    "0.0 and 1.0 respectively."
-                )
+        validate_scale_values(scale)
 
         colorscale = [list(tup) for tup in zip(scale, colors)]
         return colorscale
@@ -392,16 +435,14 @@ def find_intermediate_color(lowcolor, highcolor, intermed):
     This function takes two color tuples, where each element is between 0
     and 1, along with a value 0 < intermed < 1 and returns a color that is
     intermed-percent from lowcolor to highcolor
-
     """
     diff_0 = float(highcolor[0] - lowcolor[0])
     diff_1 = float(highcolor[1] - lowcolor[1])
     diff_2 = float(highcolor[2] - lowcolor[2])
 
-    inter_colors = (lowcolor[0] + intermed * diff_0,
-                    lowcolor[1] + intermed * diff_1,
-                    lowcolor[2] + intermed * diff_2)
-    return inter_colors
+    return (lowcolor[0] + intermed * diff_0,
+            lowcolor[1] + intermed * diff_1,
+            lowcolor[2] + intermed * diff_2)
 
 
 def unconvert_from_RGB_255(colors):
@@ -411,20 +452,36 @@ def unconvert_from_RGB_255(colors):
     Takes a (list of) color tuple(s) where each element is between 0 and
     255. Returns the same tuples where each tuple element is normalized to
     a value between 0 and 1
-
     """
-    un_rgb_color = (colors[0]/(255.0),
-                    colors[1]/(255.0),
-                    colors[2]/(255.0))
-
-    return un_rgb_color
+    return (colors[0]/(255.0),
+            colors[1]/(255.0),
+            colors[2]/(255.0))
 
 
 def convert_to_RGB_255(colors):
     """
     Multiplies each element of a triplet by 255
+
+    Each coordinate of the color tuple is rounded to the nearest float and
+    then is turned into an integer. If a number is of the form x.5, then
+    if x is odd, the number rounds up to (x+1). Otherwise, it rounds down
+    to just x. This is the way rounding works in Python 3 and in current
+    statistical analysis to avoid rounding bias
+
+    :param (list) rgb_components: grabs the three R, G and B values to be
+        returned as computed in the function
     """
-    return (colors[0]*255.0, colors[1]*255.0, colors[2]*255.0)
+    rgb_components = []
+
+    for component in colors:
+        rounded_num = decimal.Decimal(str(component*255.0)).quantize(
+            decimal.Decimal('1'), rounding=decimal.ROUND_HALF_EVEN
+        )
+        # convert rounded number to an integer from 'Decimal' form
+        rounded_num = int(rounded_num)
+        rgb_components.append(rounded_num)
+
+    return (rgb_components[0], rgb_components[1], rgb_components[2])
 
 
 def n_colors(lowcolor, highcolor, n_colors):
@@ -434,7 +491,6 @@ def n_colors(lowcolor, highcolor, n_colors):
     Accepts two color tuples and returns a list of n_colors colors
     which form the intermediate colors between lowcolor and highcolor
     from linearly interpolating through RGB space
-
     """
     diff_0 = float(highcolor[0] - lowcolor[0])
     incr_0 = diff_0/(n_colors - 1)
@@ -466,7 +522,6 @@ def unlabel_rgb(colors):
 
     This function takes either an 'rgb(a, b, c)' color or a list of
     such colors and returns the color tuples in tuple(s) (a, b, c)
-
     """
     str_vals = ''
     for index in range(len(colors)):
@@ -506,9 +561,36 @@ def hex_to_rgb(value):
 
 def colorscale_to_colors(colorscale):
     """
-    Converts a colorscale into a list of colors
+    Extracts the colors from colorscale as a list
     """
     color_list = []
-    for color in colorscale:
-        color_list.append(color[1])
+    for item in colorscale:
+        color_list.append(item[1])
     return color_list
+
+
+def colorscale_to_scale(colorscale):
+    """
+    Extracts the interpolation scale values from colorscale as a list
+    """
+    scale_list = []
+    for item in colorscale:
+        scale_list.append(item[0])
+    return scale_list
+
+
+def convert_colorscale_to_rgb(colorscale):
+    """
+    Converts the colors in a colorscale to rgb colors
+
+    A colorscale is an array of arrays, each with a numeric value as the
+    first item and a color as the second. This function specifically is
+    converting a colorscale with tuple colors (each coordinate between 0
+    and 1) into a colorscale with the colors transformed into rgb colors
+    """
+    for color in colorscale:
+        color[1] = convert_to_RGB_255(color[1])
+
+    for color in colorscale:
+        color[1] = label_rgb(color[1])
+    return colorscale
