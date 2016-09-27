@@ -24,3 +24,6 @@ pandas
 ## scipy deps for some FigureFactory functions ##
 scipy
 
+## jupyter ##
+jupyter
+ipykernel
