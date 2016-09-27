@@ -2,27 +2,48 @@ var http = require('http');
 var url = require('url');
 var fs = require('fs');
 var path = require('path');
+
 var ecstatic = require('ecstatic');
 var browserify = require('browserify');
 var cheerio = require('cheerio');
-var chrome = require('chrome-launch');
 var tapParser = require('tap-parser');
+var chrome = require('chrome-launch');
 
 var PORT = 8080;
 var PATH_ROOT = path.join(__dirname, '..');
-var PATH_FIXTURES = path.join(PATH_ROOT, 'fixtures');
-var PATH_INDEX = path.join(PATH_FIXTURES, 'test.html');
-var PATH_INDEX_STUB = path.join(PATH_FIXTURES, 'test.tmp.html');
-var PATH_TEST_FILE = path.join(PATH_ROOT, 'test.js');
+var PATH_INDEX_STUB = path.join(PATH_ROOT, 'index.tmp.html');
 var PATH_TEST_BUNDLE = path.join(PATH_ROOT, 'test.tmp.js');
-var URL = 'http://localhost:' + PORT + '/fixtures/test.tmp.html';
+
+var URL = 'http://localhost:' + PORT + '/index.tmp.html';
 var EXIT_CODE = 0;
 
-// main
-stubIndex()
-    .then(bundleTests)
-    .then(startServer)
-    .then(launch)
+if(process.argv.length !== 4) {
+    throw new Error('must provide path to html and js files');
+}
+
+var PATH_INDEX = process.argv[2];
+var PATH_TEST_FILE = process.argv[3];
+
+main();
+
+function main() {
+    scanInput();
+
+    stubIndex()
+        .then(bundleTests)
+        .then(startServer)
+        .then(launch);
+}
+
+function scanInput() {
+    var reqFiles = [PATH_INDEX, PATH_TEST_FILE];
+
+    reqFiles.forEach(function(filePath) {
+        if(!doesFileExist(filePath)) {
+            throw new Error(filePath + ' does not exist');
+        }
+    });
+}
 
 function stubIndex() {
     return new Promise(function(resolve, reject) {
@@ -90,4 +111,15 @@ function launch() {
 function removeBuildFiles() {
     fs.unlinkSync(PATH_INDEX_STUB);
     fs.unlinkSync(PATH_TEST_BUNDLE);
+}
+
+function doesFileExist(filePath) {
+    try {
+        if(fs.statSync(filePath).isFile()) return true;
+    }
+    catch(e) {
+        return false;
+    }
+
+    return false;
 }

@@ -2,40 +2,49 @@
 test__jupyter
 
 """
-from __future__ import absolute_import
-
 import nbformat
 from nbconvert import HTMLExporter
 from nbconvert.preprocessors import ExecutePreprocessor
+from ipykernel import kernelspec
 
 from unittest import TestCase
 from os import path
 import subprocess
 
-import plotly
-
 PATH_ROOT = path.dirname(__file__)
 PATH_FIXTURES = path.join(PATH_ROOT, 'fixtures')
-PATH_TEST_NB = path.join(PATH_FIXTURES, 'test.ipynb')
-PATH_TEST_HTML = path.join(PATH_FIXTURES, 'test.html')
+PATH_JS_TESTS = path.join(PATH_ROOT, 'js_tests')
 
 
-class PlotlyJupyterTestCase(TestCase):
+class Common(TestCase):
+    __test__ = False
+    name = None
+
     def setUp(self):
-        with open(PATH_TEST_NB, 'r') as f:
+        self.path_test_nb = path.join(PATH_FIXTURES, self.name + '.ipynb')
+        self.path_test_html = path.join(PATH_FIXTURES, self.name + '.html')
+        self.path_test_js = path.join(PATH_JS_TESTS, self.name + '.js')
+
+        self.kernel_name = kernelspec.KERNEL_NAME
+
+        with open(self.path_test_nb, 'r') as f:
             self.nb = nbformat.read(f, as_version=4)
 
-        self.ep = ExecutePreprocessor(timeout=600)
+        self.ep = ExecutePreprocessor(timeout=600,
+                                      kernel_name=self.kernel_name)
+
         self.html_exporter = HTMLExporter()
 
         self.ep.preprocess(self.nb, {'metadata': {'path': '.'}})
         (self.body, _) = self.html_exporter.from_notebook_node(self.nb)
 
-        with open(PATH_TEST_HTML, 'w') as f:
+        with open(self.path_test_html, 'w') as f:
             f.write(self.body)
 
-    def test_one(self):
-        proc = subprocess.Popen(['npm', 'test'],
+    def test_js(self):
+        cmd = ['npm', 'test', '--', self.path_test_html, self.path_test_js]
+
+        proc = subprocess.Popen(cmd,
                                 cwd=PATH_ROOT,
                                 stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE)
@@ -44,3 +53,13 @@ class PlotlyJupyterTestCase(TestCase):
 
         if stderr:
             self.fail('One or more javascript test failed')
+
+
+class PlotlyJupyterConnectedFalseTestCase(Common):
+    __test__ = True
+    name = 'connected_false'
+
+
+class PlotlyJupyterConnectedTrueTestCase(Common):
+    __test__ = True
+    name = 'connected_true'

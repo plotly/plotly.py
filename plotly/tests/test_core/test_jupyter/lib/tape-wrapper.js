@@ -1,5 +1,8 @@
+'use strict';
+
 var test = require('tape');
 var xhr = require('xhr');
+var domready = require('domready');
 
 var cnt = 0;
 var noop = function() {};
@@ -17,6 +20,14 @@ ws.on('data', function(data) {
 
 test.onFinish(function() {
     post('done');
+});
+
+test('should not crash browser', function(t) {
+    t.plan(1);
+
+    domready(function() {
+        t.pass('domready');
+    });
 });
 
 module.exports = test;
