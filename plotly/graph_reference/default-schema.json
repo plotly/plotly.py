@@ -1799,6 +1799,12 @@
                         ]
                     },
                     "role": "object",
+                    "separatethousands": {
+                        "description": "If \"true\", even 4-digit integers are separated",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
                     "showaxeslabels": {
                         "description": "Sets whether or not this axis is labeled",
                         "dflt": true,
@@ -2204,6 +2210,12 @@
                         ]
                     },
                     "role": "object",
+                    "separatethousands": {
+                        "description": "If \"true\", even 4-digit integers are separated",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
                     "showaxeslabels": {
                         "description": "Sets whether or not this axis is labeled",
                         "dflt": true,
@@ -2609,6 +2621,12 @@
                         ]
                     },
                     "role": "object",
+                    "separatethousands": {
+                        "description": "If \"true\", even 4-digit integers are separated",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
                     "showaxeslabels": {
                         "description": "Sets whether or not this axis is labeled",
                         "dflt": true,
@@ -3076,6 +3094,12 @@
                         "valType": "integer"
                     },
                     "role": "object",
+                    "separatethousands": {
+                        "description": "If \"true\", even 4-digit integers are separated",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
                     "showexponent": {
                         "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                         "dflt": "all",
@@ -3340,6 +3364,12 @@
                         "valType": "integer"
                     },
                     "role": "object",
+                    "separatethousands": {
+                        "description": "If \"true\", even 4-digit integers are separated",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
                     "showexponent": {
                         "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                         "dflt": "all",
@@ -3610,6 +3640,12 @@
                         "valType": "integer"
                     },
                     "role": "object",
+                    "separatethousands": {
+                        "description": "If \"true\", even 4-digit integers are separated",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
                     "showexponent": {
                         "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                         "dflt": "all",
@@ -3941,7 +3977,8 @@
                                         "valType": "enumerated",
                                         "values": [
                                             "restyle",
-                                            "relayout"
+                                            "relayout",
+                                            "animate"
                                         ]
                                     },
                                     "role": "object"
@@ -4005,7 +4042,7 @@
                         },
                         "yanchor": {
                             "description": "Sets the update menu's vertical position anchor This anchor binds the `y` position to the *top*, *middle* or *bottom* of the range selector.",
-                            "dflt": "bottom",
+                            "dflt": "top",
                             "role": "info",
                             "valType": "enumerated",
                             "values": [
@@ -4411,6 +4448,12 @@
                     }
                 },
                 "role": "object",
+                "separatethousands": {
+                    "description": "If \"true\", even 4-digit integers are separated",
+                    "dflt": false,
+                    "role": "style",
+                    "valType": "boolean"
+                },
                 "showexponent": {
                     "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                     "dflt": "all",
@@ -5026,6 +5069,12 @@
                     }
                 },
                 "role": "object",
+                "separatethousands": {
+                    "description": "If \"true\", even 4-digit integers are separated",
+                    "dflt": false,
+                    "role": "style",
+                    "valType": "boolean"
+                },
                 "showexponent": {
                     "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                     "dflt": "all",
@@ -5262,11 +5311,12 @@
         "area": {
             "attributes": {
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "x",
@@ -5928,11 +5978,12 @@
                     }
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "x",
@@ -6059,6 +6110,12 @@
                             "valType": "number"
                         },
                         "role": "object",
+                        "separatethousands": {
+                            "description": "If \"true\", even 4-digit integers are separated",
+                            "dflt": false,
+                            "role": "style",
+                            "valType": "boolean"
+                        },
                         "showexponent": {
                             "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                             "dflt": "all",
@@ -6616,11 +6673,12 @@
                     "valType": "color"
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "x",
@@ -7250,6 +7308,12 @@
                         "valType": "number"
                     },
                     "role": "object",
+                    "separatethousands": {
+                        "description": "If \"true\", even 4-digit integers are separated",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
                     "showexponent": {
                         "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                         "dflt": "all",
@@ -7522,11 +7586,12 @@
                     "valType": "subplotid"
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "location",
@@ -7790,6 +7855,12 @@
                         "valType": "number"
                     },
                     "role": "object",
+                    "separatethousands": {
+                        "description": "If \"true\", even 4-digit integers are separated",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
                     "showexponent": {
                         "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                         "dflt": "all",
@@ -8113,11 +8184,12 @@
                     "valType": "number"
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "x",
@@ -8437,6 +8509,12 @@
                         "valType": "number"
                     },
                     "role": "object",
+                    "separatethousands": {
+                        "description": "If \"true\", even 4-digit integers are separated",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
                     "showexponent": {
                         "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                         "dflt": "all",
@@ -8721,11 +8799,12 @@
                     "valType": "number"
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "x",
@@ -8840,6 +8919,13 @@
                     "role": "info",
                     "valType": "subplotid"
                 },
+                "xgap": {
+                    "description": "Sets the horizontal gap (in pixels) between bricks.",
+                    "dflt": 0,
+                    "min": 0,
+                    "role": "style",
+                    "valType": "number"
+                },
                 "xsrc": {
                     "description": "Sets the source reference on plot.ly for  x .",
                     "role": "info",
@@ -8870,6 +8956,13 @@
                     "dflt": "y",
                     "role": "info",
                     "valType": "subplotid"
+                },
+                "ygap": {
+                    "description": "Sets the vertical gap (in pixels) between bricks.",
+                    "dflt": 0,
+                    "min": 0,
+                    "role": "style",
+                    "valType": "number"
                 },
                 "ysrc": {
                     "description": "Sets the source reference on plot.ly for  y .",
@@ -9185,11 +9278,12 @@
                     ]
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "x",
@@ -9316,6 +9410,12 @@
                             "valType": "number"
                         },
                         "role": "object",
+                        "separatethousands": {
+                            "description": "If \"true\", even 4-digit integers are separated",
+                            "dflt": false,
+                            "role": "style",
+                            "valType": "boolean"
+                        },
                         "showexponent": {
                             "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                             "dflt": "all",
@@ -9964,6 +10064,12 @@
                         "valType": "number"
                     },
                     "role": "object",
+                    "separatethousands": {
+                        "description": "If \"true\", even 4-digit integers are separated",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
                     "showexponent": {
                         "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                         "dflt": "all",
@@ -10256,11 +10362,12 @@
                     ]
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "x",
@@ -10401,6 +10508,13 @@
                         "valType": "number"
                     }
                 },
+                "xgap": {
+                    "description": "Sets the horizontal gap (in pixels) between bricks.",
+                    "dflt": 0,
+                    "min": 0,
+                    "role": "style",
+                    "valType": "number"
+                },
                 "xsrc": {
                     "description": "Sets the source reference on plot.ly for  x .",
                     "role": "info",
@@ -10437,6 +10551,13 @@
                         "role": "style",
                         "valType": "number"
                     }
+                },
+                "ygap": {
+                    "description": "Sets the vertical gap (in pixels) between bricks.",
+                    "dflt": 0,
+                    "min": 0,
+                    "role": "style",
+                    "valType": "number"
                 },
                 "ysrc": {
                     "description": "Sets the source reference on plot.ly for  y .",
@@ -10590,6 +10711,12 @@
                         "valType": "number"
                     },
                     "role": "object",
+                    "separatethousands": {
+                        "description": "If \"true\", even 4-digit integers are separated",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
                     "showexponent": {
                         "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                         "dflt": "all",
@@ -10921,11 +11048,12 @@
                     ]
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "x",
@@ -11274,6 +11402,12 @@
                         "valType": "number"
                     },
                     "role": "object",
+                    "separatethousands": {
+                        "description": "If \"true\", even 4-digit integers are separated",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
                     "showexponent": {
                         "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                         "dflt": "all",
@@ -11590,11 +11724,12 @@
                     "valType": "boolean"
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "x",
@@ -11923,11 +12058,12 @@
                     "valType": "number"
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "label",
@@ -12214,6 +12350,227 @@
                 }
             }
         },
+        "pointcloud": {
+            "attributes": {
+                "hoverinfo": {
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
+                    "dflt": "all",
+                    "extras": [
+                        "all",
+                        "none",
+                        "skip"
+                    ],
+                    "flags": [
+                        "x",
+                        "y",
+                        "z",
+                        "text",
+                        "name"
+                    ],
+                    "role": "info",
+                    "valType": "flaglist"
+                },
+                "indices": {
+                    "description": "A sequential value, 0..n, supply it to avoid creating this array inside plotting. If specified, it must be a typed `Int32Array` array. Its length must be equal to or greater than the number of points. For the best performance and memory use, create one large `indices` typed array that is guaranteed to be at least as long as the largest number of points during use, and reuse it on each `Plotly.restyle()` call.",
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "indicessrc": {
+                    "description": "Sets the source reference on plot.ly for  indices .",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "legendgroup": {
+                    "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
+                    "dflt": "",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "marker": {
+                    "blend": {
+                        "description": "Determines if colors are blended together for a translucency effect in case `opacity` is specified as a value less then `1`. Setting `blend` to `true` reduces zoom/pan speed if used with large numbers of points.",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
+                    "border": {
+                        "arearatio": {
+                            "description": "Specifies what fraction of the marker area is covered with the border.",
+                            "dflt": 0,
+                            "max": 1,
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "color": {
+                            "arrayOk": false,
+                            "description": "Sets the stroke color. It accepts a specific color. If the color is not fully opaque and there are hundreds of thousands of points, it may cause slower zooming and panning.",
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "role": "object"
+                    },
+                    "color": {
+                        "arrayOk": false,
+                        "description": "Sets the marker fill color. It accepts a specific color.If the color is not fully opaque and there are hundreds of thousandsof points, it may cause slower zooming and panning.",
+                        "role": "style",
+                        "valType": "color"
+                    },
+                    "opacity": {
+                        "arrayOk": false,
+                        "description": "Sets the marker opacity. The default value is `1` (fully opaque). If the markers are not fully opaque and there are hundreds of thousands of points, it may cause slower zooming and panning. Opacity fades the color even if `blend` is left on `false` even if there is no translucency effect in that case.",
+                        "dflt": 1,
+                        "max": 1,
+                        "min": 0,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "role": "object",
+                    "sizemax": {
+                        "description": "Sets the maximum size (in px) of the rendered marker points. Effective when the `pointcloud` shows only few points.",
+                        "dflt": 20,
+                        "min": 0.1,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "sizemin": {
+                        "description": "Sets the minimum size (in px) of the rendered marker points, effective when the `pointcloud` shows a million or more points.",
+                        "dflt": 0.5,
+                        "max": 2,
+                        "min": 0.1,
+                        "role": "style",
+                        "valType": "number"
+                    }
+                },
+                "name": {
+                    "description": "Sets the trace name. The trace name appear as the legend item and on hover.",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "opacity": {
+                    "description": "Sets the opacity of the trace.",
+                    "dflt": 1,
+                    "max": 1,
+                    "min": 0,
+                    "role": "style",
+                    "valType": "number"
+                },
+                "showlegend": {
+                    "description": "Determines whether or not an item corresponding to this trace is shown in the legend.",
+                    "dflt": true,
+                    "role": "info",
+                    "valType": "boolean"
+                },
+                "stream": {
+                    "maxpoints": {
+                        "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot.",
+                        "min": 0,
+                        "role": "info",
+                        "valType": "number"
+                    },
+                    "role": "object",
+                    "token": {
+                        "description": "The stream id number links a data trace on a plot with a stream. See https://plot.ly/settings for more details.",
+                        "noBlank": true,
+                        "role": "info",
+                        "strict": true,
+                        "valType": "string"
+                    }
+                },
+                "text": {
+                    "arrayOk": true,
+                    "description": "Sets text elements associated with each (x,y) pair to appear on hover. If a single string, the same string appears over all the data points. If an array of string, the items are mapped in order to the this trace's (x,y) coordinates.",
+                    "dflt": "",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "textsrc": {
+                    "description": "Sets the source reference on plot.ly for  text .",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "type": "pointcloud",
+                "uid": {
+                    "dflt": "",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "visible": {
+                    "description": "Determines whether or not this trace is visible. If *legendonly*, the trace is not drawn, but can appear as a legend item (provided that the legend itself is visible).",
+                    "dflt": true,
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        true,
+                        false,
+                        "legendonly"
+                    ]
+                },
+                "x": {
+                    "description": "Sets the x coordinates.",
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "xaxis": {
+                    "description": "Sets a reference between this trace's x coordinates and a 2D cartesian x axis. If *x* (the default value), the x coordinates refer to `layout.xaxis`. If *x2*, the x coordinates refer to `layout.xaxis2`, and so on.",
+                    "dflt": "x",
+                    "role": "info",
+                    "valType": "subplotid"
+                },
+                "xbounds": {
+                    "description": "Specify `xbounds` in the shape of `[xMin, xMax] to avoid looping through the `xy` typed array. Use it in conjunction with `xy` and `ybounds` for the performance benefits.",
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "xboundssrc": {
+                    "description": "Sets the source reference on plot.ly for  xbounds .",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "xsrc": {
+                    "description": "Sets the source reference on plot.ly for  x .",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "xy": {
+                    "description": "Faster alternative to specifying `x` and `y` separately. If supplied, it must be a typed `Float32Array` array that represents points such that `xy[i * 2] = x[i]` and `xy[i * 2 + 1] = y[i]`",
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "xysrc": {
+                    "description": "Sets the source reference on plot.ly for  xy .",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "y": {
+                    "description": "Sets the y coordinates.",
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "yaxis": {
+                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.xaxis2`, and so on.",
+                    "dflt": "y",
+                    "role": "info",
+                    "valType": "subplotid"
+                },
+                "ybounds": {
+                    "description": "Specify `ybounds` in the shape of `[yMin, yMax] to avoid looping through the `xy` typed array. Use it in conjunction with `xy` and `xbounds` for the performance benefits.",
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "yboundssrc": {
+                    "description": "Sets the source reference on plot.ly for  ybounds .",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "ysrc": {
+                    "description": "Sets the source reference on plot.ly for  y .",
+                    "role": "info",
+                    "valType": "string"
+                }
+            },
+            "description": "The data visualized as a point cloud set in `x` and `y` using the WebGl plotting engine."
+        },
         "scatter": {
             "attributes": {
                 "connectgaps": {
@@ -12461,11 +12818,12 @@
                     "valType": "color"
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "x",
@@ -12485,6 +12843,16 @@
                     ],
                     "role": "info",
                     "valType": "flaglist"
+                },
+                "ids": {
+                    "description": "A list of keys for object constancy of data points during animation",
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "idssrc": {
+                    "description": "Sets the source reference on plot.ly for  ids .",
+                    "role": "info",
+                    "valType": "string"
                 },
                 "legendgroup": {
                     "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
@@ -12526,6 +12894,12 @@
                             "hvh",
                             "vhv"
                         ]
+                    },
+                    "simplify": {
+                        "description": "Simplifies lines by removing nearly-collinear points. When transitioning lines, it may be desirable to disable this so that the number of points along the resulting SVG path is unaffected.",
+                        "dflt": true,
+                        "role": "info",
+                        "valType": "boolean"
                     },
                     "smoothing": {
                         "description": "Has an effect only if `shape` is set to *spline* Sets the amount of smoothing. *0* corresponds to no smoothing (equivalent to a *linear* shape).",
@@ -12652,6 +13026,12 @@
                             "valType": "number"
                         },
                         "role": "object",
+                        "separatethousands": {
+                            "description": "If \"true\", even 4-digit integers are separated",
+                            "dflt": false,
+                            "role": "style",
+                            "valType": "boolean"
+                        },
                         "showexponent": {
                             "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                             "dflt": "all",
@@ -13873,11 +14253,12 @@
                     }
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "x",
@@ -14080,6 +14461,12 @@
                             "valType": "number"
                         },
                         "role": "object",
+                        "separatethousands": {
+                            "description": "If \"true\", even 4-digit integers are separated",
+                            "dflt": false,
+                            "role": "style",
+                            "valType": "boolean"
+                        },
                         "showexponent": {
                             "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                             "dflt": "all",
@@ -14768,11 +15155,12 @@
                     "valType": "subplotid"
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "lon",
@@ -14969,6 +15357,12 @@
                             "valType": "number"
                         },
                         "role": "object",
+                        "separatethousands": {
+                            "description": "If \"true\", even 4-digit integers are separated",
+                            "dflt": false,
+                            "role": "style",
+                            "valType": "boolean"
+                        },
                         "showexponent": {
                             "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                             "dflt": "all",
@@ -16046,11 +16440,12 @@
                     "valType": "color"
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "x",
@@ -16206,6 +16601,12 @@
                             "valType": "number"
                         },
                         "role": "object",
+                        "separatethousands": {
+                            "description": "If \"true\", even 4-digit integers are separated",
+                            "dflt": false,
+                            "role": "style",
+                            "valType": "boolean"
+                        },
                         "showexponent": {
                             "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                             "dflt": "all",
@@ -16769,11 +17170,12 @@
                     "valType": "color"
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "lon",
@@ -16948,6 +17350,12 @@
                             "valType": "number"
                         },
                         "role": "object",
+                        "separatethousands": {
+                            "description": "If \"true\", even 4-digit integers are separated",
+                            "dflt": false,
+                            "role": "style",
+                            "valType": "boolean"
+                        },
                         "showexponent": {
                             "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                             "dflt": "all",
@@ -17470,11 +17878,12 @@
                     "valType": "color"
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "a",
@@ -17657,6 +18066,12 @@
                             "valType": "number"
                         },
                         "role": "object",
+                        "separatethousands": {
+                            "description": "If \"true\", even 4-digit integers are separated",
+                            "dflt": false,
+                            "role": "style",
+                            "valType": "boolean"
+                        },
                         "showexponent": {
                             "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                             "dflt": "all",
@@ -18635,6 +19050,12 @@
                         "valType": "number"
                     },
                     "role": "object",
+                    "separatethousands": {
+                        "description": "If \"true\", even 4-digit integers are separated",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
                     "showexponent": {
                         "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                         "dflt": "all",
@@ -19120,11 +19541,12 @@
                     "valType": "boolean"
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "x",
