@@ -702,12 +702,12 @@ class image:
                         'json' in headers['content-type']):
                     return_data = json.loads(res.content)
                 else:
-                    return_data = {'error': res.content}
+                    return_data = {'detail': res.content}
             except:
                 raise exceptions.PlotlyError("The response "
                                              "from plotly could "
                                              "not be translated.")
-            raise exceptions.PlotlyError(return_data['error'])
+            raise exceptions.PlotlyError(return_data['detail'])
 
     @classmethod
     def ishow(cls, figure_or_data, format='png', width=None, height=None,
