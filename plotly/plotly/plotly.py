@@ -209,6 +209,9 @@ def plot(figure_or_data, validate=True, **plot_options):
                                      Make this figure private/public
 
     """
+    #if 'frames' in figure_or_data:
+    #    figure = tools.return_figure_from_figure_or_data(figure_or_data, False)
+    #else:
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
 
     for entry in figure['data']:

@@ -38,6 +38,7 @@ _BACKWARDS_COMPAT_CLASS_NAMES = {
     'ErrorZ': {'object_name': 'error_z', 'base_type': dict},
     'Figure': {'object_name': 'figure', 'base_type': dict},
     'Font': {'object_name': 'font', 'base_type': dict},
+    'Frames': {'object_name': 'frames', 'base_type': dict},
     'Heatmap': {'object_name': 'heatmap', 'base_type': dict},
     'Histogram': {'object_name': 'histogram', 'base_type': dict},
     'Histogram2d': {'object_name': 'histogram2d', 'base_type': dict},
@@ -87,7 +88,6 @@ def get_graph_reference():
 
     graph_reference_url = '{}{}?sha1={}'.format(plotly_api_domain,
                                                 GRAPH_REFERENCE_PATH, sha1)
-
     try:
         response = requests.get(graph_reference_url,
                                 timeout=GRAPH_REFERENCE_DOWNLOAD_TIMEOUT)
@@ -196,11 +196,9 @@ def get_valid_attributes(object_name, parent_object_names=()):
     # These are for documentation and quick lookups. They're just strings.
     valid_attributes = set()
     for attributes_dict in attributes.values():
-
         for key, val in attributes_dict.items():
             if key not in GRAPH_REFERENCE['defs']['metaKeys']:
                 valid_attributes.add(key)
-
         deprecated_attributes = attributes_dict.get('_deprecated', {})
         for key, val in deprecated_attributes.items():
             if key not in GRAPH_REFERENCE['defs']['metaKeys']:
