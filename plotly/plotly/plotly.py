@@ -213,7 +213,6 @@ def plot(figure_or_data, validate=True, **plot_options):
     #    figure = tools.return_figure_from_figure_or_data(figure_or_data, False)
     #else:
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
-
     for entry in figure['data']:
         if ('type' in entry) and (entry['type'] == 'scattergl'):
             continue
@@ -1402,6 +1401,7 @@ def _send_to_plotly(figure, **plot_options):
     fig = tools._replace_newline(figure)  # does not mutate figure
     data = json.dumps(fig['data'] if 'data' in fig else [],
                       cls=utils.PlotlyJSONEncoder)
+
     credentials = get_credentials()
     validate_credentials(credentials)
     username = credentials['username']
@@ -1422,12 +1422,19 @@ def _send_to_plotly(figure, **plot_options):
                    key=api_key,
                    origin='plot',
                    kwargs=kwargs)
+    print payload
+    print ' '
 
     url = get_config()['plotly_domain'] + "/clientresp"
+
+    print url
 
     r = requests.post(url, data=payload,
                       verify=get_config()['plotly_ssl_verification'])
     r.raise_for_status()
+
+    print r.text
+
     r = json.loads(r.text)
 
     if 'error' in r and r['error'] != '':
