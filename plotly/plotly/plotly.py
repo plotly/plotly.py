@@ -454,7 +454,6 @@ class Stream:
 
         """
         self.stream_id = stream_id
-        self.connected = False
         self._stream = None
 
     def get_streaming_specs(self):
@@ -500,6 +499,13 @@ class Stream:
                 "cannot write to a closed connection. "
                 "Call `open()` on the stream to open the stream."
             )
+   
+    @property
+    def connected(self):
+        if self._stream is None:
+            return False
+
+        return self._stream._isconnected()
 
     def open(self):
         """
