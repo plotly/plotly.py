@@ -1739,6 +1739,8 @@ class FigureFactory(object):
             task = dict(x0=chart[index]['Start'],
                         x1=chart[index]['Finish'],
                         name=chart[index]['Task'])
+            if 'Description' in chart[index]:
+                task['description'] = chart[index]['Description']
             tasks.append(task)
 
         shape_template = {
@@ -1781,14 +1783,16 @@ class FigureFactory(object):
                 color_index = 0
             tasks[index]['fillcolor'] = colors[color_index]
             # Add a line for hover text and autorange
-            data.append(
-                dict(
+            entry = dict(
                     x=[tasks[index]['x0'], tasks[index]['x1']],
                     y=[groupID, groupID],
                     name='',
                     marker={'color': 'white'}
                 )
-            )
+            if "description" in tasks[index]:
+                entry['text'] = tasks[index]['description']
+                del tasks[index]['description']
+            data.append(entry)
             color_index += 1
 
         layout = dict(
@@ -1862,6 +1866,8 @@ class FigureFactory(object):
             task = dict(x0=chart[index]['Start'],
                         x1=chart[index]['Finish'],
                         name=chart[index]['Task'])
+            if 'Description' in chart[index]:
+                task['description'] = chart[index]['Description']
             tasks.append(task)
 
         shape_template = {
@@ -1930,14 +1936,17 @@ class FigureFactory(object):
                 )
 
                 # add a line for hover text and autorange
-                data.append(
-                    dict(
+                entry = dict(
                         x=[tasks[index]['x0'], tasks[index]['x1']],
                         y=[groupID, groupID],
                         name='',
                         marker={'color': 'white'}
                     )
-                )
+                if "description" in tasks[index]:
+                    entry['text'] = tasks[index]['description']
+                    del tasks[index]['description']
+                data.append(entry)
+
 
             if show_colorbar is True:
             # generate dummy data for colorscale visibility
@@ -2006,14 +2015,16 @@ class FigureFactory(object):
                 ]
 
                 # add a line for hover text and autorange
-                data.append(
-                    dict(
+                entry = dict(
                         x=[tasks[index]['x0'], tasks[index]['x1']],
                         y=[groupID, groupID],
                         name='',
                         marker={'color': 'white'}
                     )
-                )
+                if "description" in tasks[index]:
+                    entry['text'] = tasks[index]['description']
+                    del tasks[index]['description']
+                data.append(entry)
 
             if show_colorbar is True:
             # generate dummy data to generate legend
@@ -2103,6 +2114,8 @@ class FigureFactory(object):
             task = dict(x0=chart[index]['Start'],
                         x1=chart[index]['Finish'],
                         name=chart[index]['Task'])
+            if 'Description' in chart[index]:
+                task['description'] = chart[index]['Description']
             tasks.append(task)
 
         shape_template = {
@@ -2157,14 +2170,16 @@ class FigureFactory(object):
             tasks[index]['fillcolor'] = colors[chart[index][index_col]]
 
             # add a line for hover text and autorange
-            data.append(
-                dict(
+            entry = dict(
                     x=[tasks[index]['x0'], tasks[index]['x1']],
                     y=[groupID, groupID],
                     name='',
                     marker={'color': 'white'}
                 )
-            )
+            if "description" in tasks[index]:
+                entry['text'] = tasks[index]['description']
+                del tasks[index]['description']
+            data.append(entry)
 
         if show_colorbar is True:
         # generate dummy data to generate legend
