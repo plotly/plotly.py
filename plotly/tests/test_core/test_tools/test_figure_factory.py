@@ -1269,6 +1269,181 @@ class TestGantt(TestCase):
                                 index_col='Complete',
                                 colors=['#ffffff'])
 
+
+    def test_gannt_groups_and_descriptions(self):
+
+        # check if grouped gantt chart matches with expected output
+
+        df = [
+            dict(Task='Task A', Description='Task A - 1', Start='2008-10-05',
+                 Finish='2009-04-15', IndexCol = 'TA'),
+            dict(Task="Task B", Description='Task B - 1', Start='2008-12-06',
+                 Finish='2009-03-15', IndexCol = 'TB'),
+            dict(Task="Task C", Description='Task C - 1', Start='2008-09-07',
+                 Finish='2009-03-15', IndexCol = 'TC'),
+            dict(Task="Task C", Description='Task C - 2', Start='2009-05-08',
+                 Finish='2009-04-15', IndexCol = 'TC'),
+            dict(Task="Task A", Description='Task A - 2', Start='2009-04-20',
+                 Finish='2009-05-30', IndexCol = 'TA')
+        ]
+
+        test_gantt_chart = tls.FigureFactory.create_gantt(
+            df, colors=dict(TA='rgb(220, 0, 0)', TB='rgb(170, 14, 200)',
+            TC=(1, 0.9, 0.16)), show_colorbar=True, index_col='IndexCol',
+            group_tasks=True
+        )
+
+        exp_gantt_chart = {
+            'data': [{'marker': {'color': 'white'},
+               'name': '',
+               'text': 'Task A - 1',
+               'x': ['2008-10-05', '2009-04-15'],
+               'y': [2, 2]},
+              {'marker': {'color': 'white'},
+               'name': '',
+               'text': 'Task B - 1',
+               'x': ['2008-12-06', '2009-03-15'],
+               'y': [1, 1]},
+              {'marker': {'color': 'white'},
+               'name': '',
+               'text': 'Task C - 1',
+               'x': ['2008-09-07', '2009-03-15'],
+               'y': [0, 0]},
+              {'marker': {'color': 'white'},
+               'name': '',
+               'text': 'Task C - 2',
+               'x': ['2009-05-08', '2009-04-15'],
+               'y': [0, 0]},
+              {'marker': {'color': 'white'},
+               'name': '',
+               'text': 'Task A - 2',
+               'x': ['2009-04-20', '2009-05-30'],
+               'y': [2, 2]},
+              {'hoverinfo': 'none',
+               'marker': {'color': 'rgb(220, 0, 0)', 'size': 1},
+               'name': 'TA',
+               'showlegend': True,
+               'x': ['2009-04-20', '2009-04-20'],
+               'y': [0, 0]},
+              {'hoverinfo': 'none',
+               'marker': {'color': 'rgb(170, 14, 200)', 'size': 1},
+               'name': 'TB',
+               'showlegend': True,
+               'x': ['2009-04-20', '2009-04-20'],
+               'y': [1, 1]},
+              {'hoverinfo': 'none',
+               'marker': {'color': 'rgb(255, 230, 41)', 'size': 1},
+               'name': 'TC',
+               'showlegend': True,
+               'x': ['2009-04-20', '2009-04-20'],
+               'y': [2, 2]}],
+            'layout': {'height': 600,
+                'hovermode': 'closest',
+                'shapes': [{'fillcolor': 'rgb(220, 0, 0)',
+                            'line': {'width': 0},
+                            'opacity': 1,
+                            'type': 'rect',
+                            'x0': '2008-10-05',
+                            'x1': '2009-04-15',
+                            'xref': 'x',
+                            'y0': 1.8,
+                            'y1': 2.2,
+                            'yref': 'y'},
+                           {'fillcolor': 'rgb(170, 14, 200)',
+                            'line': {'width': 0},
+                            'opacity': 1,
+                            'type': 'rect',
+                            'x0': '2008-12-06',
+                            'x1': '2009-03-15',
+                            'xref': 'x',
+                            'y0': 0.8,
+                            'y1': 1.2,
+                            'yref': 'y'},
+                           {'fillcolor': 'rgb(255, 230, 41)',
+                            'line': {'width': 0},
+                            'opacity': 1,
+                            'type': 'rect',
+                            'x0': '2008-09-07',
+                            'x1': '2009-03-15',
+                            'xref': 'x',
+                            'y0': -0.2,
+                            'y1': 0.2,
+                            'yref': 'y'},
+                           {'fillcolor': 'rgb(255, 230, 41)',
+                            'line': {'width': 0},
+                            'opacity': 1,
+                            'type': 'rect',
+                            'x0': '2009-05-08',
+                            'x1': '2009-04-15',
+                            'xref': 'x',
+                            'y0': -0.2,
+                            'y1': 0.2,
+                            'yref': 'y'},
+                           {'fillcolor': 'rgb(220, 0, 0)',
+                            'line': {'width': 0},
+                            'opacity': 1,
+                            'type': 'rect',
+                            'x0': '2009-04-20',
+                            'x1': '2009-05-30',
+                            'xref': 'x',
+                            'y0': 1.8,
+                            'y1': 2.2,
+                            'yref': 'y'}],
+                'showlegend': True,
+                'title': 'Gantt Chart',
+                'width': 900,
+                'xaxis': {'rangeselector': {'buttons': [{'count': 7,
+                                                         'label': '1w',
+                                                         'step': 'day',
+                                                         'stepmode': 'backward'},
+                                                        {'count': 1,
+                                                         'label': '1m',
+                                                         'step': 'month',
+                                                         'stepmode': 'backward'},
+                                                        {'count': 6,
+                                                         'label': '6m',
+                                                         'step': 'month',
+                                                         'stepmode': 'backward'},
+                                                        {'count': 1,
+                                                         'label': 'YTD',
+                                                         'step': 'year',
+                                                         'stepmode': 'todate'},
+                                                        {'count': 1,
+                                                         'label': '1y',
+                                                         'step': 'year',
+                                                         'stepmode': 'backward'},
+                                                        {'step': 'all'}]},
+                          'showgrid': False,
+                          'type': 'date',
+                          'zeroline': False},
+                'yaxis': {'autorange': False,
+                          'range': [-1, 4],
+                          'showgrid': False,
+                          'ticktext': ['Task C', 'Task B', 'Task A'],
+                          'tickvals': [0, 1, 2],
+                          'zeroline': False}}
+        }
+
+        self.assertEqual(test_gantt_chart['data'][0],
+                         exp_gantt_chart['data'][0])
+
+        self.assertEqual(test_gantt_chart['data'][1],
+                         exp_gantt_chart['data'][1])
+
+        self.assertEqual(test_gantt_chart['data'][2],
+                         exp_gantt_chart['data'][2])
+
+        self.assertEqual(test_gantt_chart['data'][3],
+                         exp_gantt_chart['data'][3])
+
+        self.assertEqual(test_gantt_chart['data'][4],
+                         exp_gantt_chart['data'][4])
+
+        self.assertEqual(test_gantt_chart['layout'],
+                         exp_gantt_chart['layout'])
+
+
+
     def test_gantt_all_args(self):
 
         # check if gantt chart matches with expected output
