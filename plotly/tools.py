@@ -1724,7 +1724,7 @@ class FigureFactory(object):
 
     @staticmethod
     def _gantt(chart, colors, title, bar_width, showgrid_x, showgrid_y,
-               height, width, tasks=None, task_names=None, data=None):
+               height, width, tasks=None, task_names=None, data=None, group_tasks=False):
         """
         Refer to FigureFactory.create_gantt() for docstring
         """
@@ -1739,6 +1739,8 @@ class FigureFactory(object):
             task = dict(x0=chart[index]['Start'],
                         x1=chart[index]['Finish'],
                         name=chart[index]['Task'])
+            if 'Description' in chart[index]:
+                task['description'] = chart[index]['Description']
             tasks.append(task)
 
         shape_template = {
@@ -1751,29 +1753,49 @@ class FigureFactory(object):
             },
             'yref': 'y',
         }
+        # create the list of task names
+        for index in range(len(tasks)):
+            tn = tasks[index]['name']
+            # Is added to task_names if group_tasks is set to False,
+            # or if the option is used (True) it only adds them if the
+            # name is not already in the list
+            if not group_tasks or tn not in task_names:
+                task_names.append(tn)
+        # Guarantees that for grouped tasks the tasks that are inserted first
+        # are shown at the top
+        if group_tasks:
+            task_names.reverse()
+
 
         color_index = 0
         for index in range(len(tasks)):
             tn = tasks[index]['name']
-            task_names.append(tn)
             del tasks[index]['name']
             tasks[index].update(shape_template)
-            tasks[index]['y0'] = index - bar_width
-            tasks[index]['y1'] = index + bar_width
+
+            # If group_tasks is True, all tasks with the same name belong
+            # to the same row.
+            groupID = index
+            if group_tasks:
+                groupID = task_names.index(tn)
+            tasks[index]['y0'] = groupID - bar_width
+            tasks[index]['y1'] = groupID + bar_width
 
             # check if colors need to be looped
             if color_index >= len(colors):
                 color_index = 0
             tasks[index]['fillcolor'] = colors[color_index]
             # Add a line for hover text and autorange
-            data.append(
-                dict(
+            entry = dict(
                     x=[tasks[index]['x0'], tasks[index]['x1']],
-                    y=[index, index],
+                    y=[groupID, groupID],
                     name='',
                     marker={'color': 'white'}
                 )
-            )
+            if "description" in tasks[index]:
+                entry['text'] = tasks[index]['description']
+                del tasks[index]['description']
+            data.append(entry)
             color_index += 1
 
         layout = dict(
@@ -1786,8 +1808,8 @@ class FigureFactory(object):
             yaxis=dict(
                 showgrid=showgrid_y,
                 ticktext=task_names,
-                tickvals=list(range(len(tasks))),
-                range=[-1, len(tasks) + 1],
+                tickvals=list(range(len(task_names))),
+                range=[-1, len(task_names) + 1],
                 autorange=False,
                 zeroline=False,
             ),
@@ -1830,7 +1852,7 @@ class FigureFactory(object):
     @staticmethod
     def _gantt_colorscale(chart, colors, title, index_col, show_colorbar,
                           bar_width, showgrid_x, showgrid_y, height,
-                          width, tasks=None, task_names=None, data=None):
+                          width, tasks=None, task_names=None, data=None, group_tasks=False):
         """
         Refer to FigureFactory.create_gantt() for docstring
         """
@@ -1847,6 +1869,8 @@ class FigureFactory(object):
             task = dict(x0=chart[index]['Start'],
                         x1=chart[index]['Finish'],
                         name=chart[index]['Task'])
+            if 'Description' in chart[index]:
+                task['description'] = chart[index]['Description']
             tasks.append(task)
 
         shape_template = {
@@ -1870,13 +1894,32 @@ class FigureFactory(object):
                     "colors given will be used for the lower and upper "
                     "bounds on the colormap."
                 )
+
+            # create the list of task names
             for index in range(len(tasks)):
                 tn = tasks[index]['name']
-                task_names.append(tn)
+                # Is added to task_names if group_tasks is set to False,
+                # or if the option is used (True) it only adds them if the
+                # name is not already in the list
+                if not group_tasks or tn not in task_names:
+                    task_names.append(tn)
+            # Guarantees that for grouped tasks the tasks that are inserted
+            # first are shown at the top
+            if group_tasks:
+                task_names.reverse()
+
+            for index in range(len(tasks)):
+                tn = tasks[index]['name']
                 del tasks[index]['name']
                 tasks[index].update(shape_template)
-                tasks[index]['y0'] = index - bar_width
-                tasks[index]['y1'] = index + bar_width
+
+                # If group_tasks is True, all tasks with the same name belong
+                # to the same row.
+                groupID = index
+                if group_tasks:
+                    groupID = task_names.index(tn)
+                tasks[index]['y0'] = groupID - bar_width
+                tasks[index]['y1'] = groupID + bar_width
 
                 # unlabel color
                 colors = FigureFactory._color_parser(
@@ -1899,14 +1942,17 @@ class FigureFactory(object):
                 )
 
                 # add a line for hover text and autorange
-                data.append(
-                    dict(
+                entry = dict(
                         x=[tasks[index]['x0'], tasks[index]['x1']],
-                        y=[index, index],
+                        y=[groupID, groupID],
                         name='',
                         marker={'color': 'white'}
                     )
-                )
+                if "description" in tasks[index]:
+                    entry['text'] = tasks[index]['description']
+                    del tasks[index]['description']
+                data.append(entry)
+
 
             if show_colorbar is True:
             # generate dummy data for colorscale visibility
@@ -1948,27 +1994,46 @@ class FigureFactory(object):
                 index_vals_dict[key] = colors[c_index]
                 c_index += 1
 
+            # create the list of task names
             for index in range(len(tasks)):
                 tn = tasks[index]['name']
-                task_names.append(tn)
+                # Is added to task_names if group_tasks is set to False,
+                # or if the option is used (True) it only adds them if the
+                # name is not already in the list
+                if not group_tasks or tn not in task_names:
+                    task_names.append(tn)
+            # Guarantees that for grouped tasks the tasks that are inserted
+            # first are shown at the top
+            if group_tasks:
+                task_names.reverse()
+
+            for index in range(len(tasks)):
+                tn = tasks[index]['name']
                 del tasks[index]['name']
                 tasks[index].update(shape_template)
-                tasks[index]['y0'] = index - bar_width
-                tasks[index]['y1'] = index + bar_width
+                # If group_tasks is True, all tasks with the same name belong
+                # to the same row.
+                groupID = index
+                if group_tasks:
+                    groupID = task_names.index(tn)
+                tasks[index]['y0'] = groupID - bar_width
+                tasks[index]['y1'] = groupID + bar_width
 
                 tasks[index]['fillcolor'] = index_vals_dict[
                     chart[index][index_col]
                 ]
 
                 # add a line for hover text and autorange
-                data.append(
-                    dict(
+                entry = dict(
                         x=[tasks[index]['x0'], tasks[index]['x1']],
-                        y=[index, index],
+                        y=[groupID, groupID],
                         name='',
                         marker={'color': 'white'}
                     )
-                )
+                if "description" in tasks[index]:
+                    entry['text'] = tasks[index]['description']
+                    del tasks[index]['description']
+                data.append(entry)
 
             if show_colorbar is True:
             # generate dummy data to generate legend
@@ -1998,8 +2063,8 @@ class FigureFactory(object):
             yaxis=dict(
                 showgrid=showgrid_y,
                 ticktext=task_names,
-                tickvals=list(range(len(tasks))),
-                range=[-1, len(tasks) + 1],
+                tickvals=list(range(len(task_names))),
+                range=[-1, len(task_names) + 1],
                 autorange=False,
                 zeroline=False,
             ),
@@ -2042,7 +2107,7 @@ class FigureFactory(object):
     @staticmethod
     def _gantt_dict(chart, colors, title, index_col, show_colorbar, bar_width,
                     showgrid_x, showgrid_y, height, width, tasks=None,
-                    task_names=None, data=None):
+                    task_names=None, data=None, group_tasks=False):
         """
         Refer to FigureFactory.create_gantt() for docstring
         """
@@ -2058,6 +2123,8 @@ class FigureFactory(object):
             task = dict(x0=chart[index]['Start'],
                         x1=chart[index]['Finish'],
                         name=chart[index]['Task'])
+            if 'Description' in chart[index]:
+                task['description'] = chart[index]['Description']
             tasks.append(task)
 
         shape_template = {
@@ -2086,25 +2153,45 @@ class FigureFactory(object):
                     "keys must be all the values in the index column."
                 )
 
+        # create the list of task names
         for index in range(len(tasks)):
             tn = tasks[index]['name']
-            task_names.append(tn)
+            # Is added to task_names if group_tasks is set to False,
+            # or if the option is used (True) it only adds them if the
+            # name is not already in the list
+            if not group_tasks or tn not in task_names:
+                task_names.append(tn)
+        # Guarantees that for grouped tasks the tasks that are inserted first
+        # are shown at the top
+        if group_tasks:
+            task_names.reverse()
+
+        for index in range(len(tasks)):
+            tn = tasks[index]['name']
             del tasks[index]['name']
             tasks[index].update(shape_template)
-            tasks[index]['y0'] = index - bar_width
-            tasks[index]['y1'] = index + bar_width
+
+            # If group_tasks is True, all tasks with the same name belong
+            # to the same row.
+            groupID = index
+            if group_tasks:
+                groupID = task_names.index(tn)
+            tasks[index]['y0'] = groupID - bar_width
+            tasks[index]['y1'] = groupID + bar_width
 
             tasks[index]['fillcolor'] = colors[chart[index][index_col]]
 
             # add a line for hover text and autorange
-            data.append(
-                dict(
+            entry = dict(
                     x=[tasks[index]['x0'], tasks[index]['x1']],
-                    y=[index, index],
+                    y=[groupID, groupID],
                     name='',
                     marker={'color': 'white'}
                 )
-            )
+            if "description" in tasks[index]:
+                entry['text'] = tasks[index]['description']
+                del tasks[index]['description']
+            data.append(entry)
 
         if show_colorbar is True:
         # generate dummy data to generate legend
@@ -2134,8 +2221,8 @@ class FigureFactory(object):
             yaxis=dict(
                 showgrid=showgrid_y,
                 ticktext=task_names,
-                tickvals=list(range(len(tasks))),
-                range=[-1, len(tasks) + 1],
+                tickvals=list(range(len(task_names))),
+                range=[-1, len(task_names) + 1],
                 autorange=False,
                 zeroline=False,
             ),
@@ -2180,7 +2267,7 @@ class FigureFactory(object):
                      reverse_colors=False, title='Gantt Chart',
                      bar_width=0.2, showgrid_x=False, showgrid_y=False,
                      height=600, width=900, tasks=None,
-                     task_names=None, data=None):
+                     task_names=None, data=None, group_tasks=False):
         """
         Returns figure for a gantt chart
 
@@ -2359,7 +2446,8 @@ class FigureFactory(object):
                 )
             fig = FigureFactory._gantt(
                 chart, colors, title, bar_width, showgrid_x, showgrid_y,
-                height, width, tasks=None, task_names=None, data=None
+                height, width, tasks=None, task_names=None, data=None,
+                group_tasks=group_tasks
             )
             return fig
         else:
@@ -2367,14 +2455,14 @@ class FigureFactory(object):
                 fig = FigureFactory._gantt_colorscale(
                     chart, colors, title, index_col, show_colorbar, bar_width,
                     showgrid_x, showgrid_y, height, width,
-                    tasks=None, task_names=None, data=None
+                    tasks=None, task_names=None, data=None, group_tasks=group_tasks
                 )
                 return fig
             else:
                 fig = FigureFactory._gantt_dict(
                     chart, colors, title, index_col, show_colorbar, bar_width,
                     showgrid_x, showgrid_y, height, width,
-                    tasks=None, task_names=None, data=None
+                    tasks=None, task_names=None, data=None, group_tasks=group_tasks
                 )
                 return fig
 
@@ -2402,6 +2490,7 @@ class FigureFactory(object):
                 colors = [colors]
             else:
                 colors = list(colors)
+
 
         # convert color elements in list to tuple color
         for j, each_color in enumerate(colors):
