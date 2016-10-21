@@ -1761,7 +1761,7 @@ class FigureFactory(object):
             # name is not already in the list
             if not group_tasks or tn not in task_names:
                 task_names.append(tn)
-        # Gurantees that for grouped tasks the tasks that are inserted first
+        # Guarantees that for grouped tasks the tasks that are inserted first
         # are shown at the top
         if group_tasks:
             task_names.reverse()
@@ -1903,8 +1903,8 @@ class FigureFactory(object):
                 # name is not already in the list
                 if not group_tasks or tn not in task_names:
                     task_names.append(tn)
-            # Gurantees that for grouped tasks the tasks that are inserted first
-            # are shown at the top
+            # Guarantees that for grouped tasks the tasks that are inserted
+            # first are shown at the top
             if group_tasks:
                 task_names.reverse()
 
@@ -2002,8 +2002,8 @@ class FigureFactory(object):
                 # name is not already in the list
                 if not group_tasks or tn not in task_names:
                     task_names.append(tn)
-            # Gurantees that for grouped tasks the tasks that are inserted first
-            # are shown at the top
+            # Guarantees that for grouped tasks the tasks that are inserted
+            # first are shown at the top
             if group_tasks:
                 task_names.reverse()
 
@@ -2161,7 +2161,7 @@ class FigureFactory(object):
             # name is not already in the list
             if not group_tasks or tn not in task_names:
                 task_names.append(tn)
-        # Gurantees that for grouped tasks the tasks that are inserted first
+        # Guarantees that for grouped tasks the tasks that are inserted first
         # are shown at the top
         if group_tasks:
             task_names.reverse()
