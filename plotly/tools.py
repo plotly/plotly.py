@@ -6061,7 +6061,7 @@ class FigureFactory(object):
         :param (list) labels: List of axis category labels(observation labels)
         :param (list) colorscale: Optional colorscale for dendrogram tree
         :param (function) distfun: Function to compute the pairwise distance from the observations
-        :param (function) linkagefun: Funktion to compute the linkage matrix from the pairwise distances
+        :param (function) linkagefun: Function to compute the linkage matrix from the pairwise distances
 
             clusters
 
@@ -7186,7 +7186,7 @@ class _Dendrogram(FigureFactory):
         :param (ndarray) X: Matrix of observations as array of arrays
         :param (list) colorscale: Color scale for dendrogram tree clusters
         :param (function) distfun: Function to compute the pairwise distance from the observations
-        :param (function) linkagefun: Funktion to compute the linkage matrix from the pairwise distances
+        :param (function) linkagefun: Function to compute the linkage matrix from the pairwise distances
         :rtype (tuple): Contains all the traces in the following order:
             (a) trace_list: List of Plotly trace objects for dendrogram tree
             (b) icoord: All X points of the dendrogram tree as array of arrays
