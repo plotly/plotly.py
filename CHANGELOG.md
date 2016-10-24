@@ -5,7 +5,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - Plot configuration options for offline plots. See the list of [configuration options](https://github.com/Rikorose/plotly.py/blob/master/plotly/offline/offline.py#L189) and [examples](https://plot.ly/javascript/configuration-options/) for more information. 
-	- Please note that these configuration options are for offline plots ONLY. For configuration options when embedding online plots please see our [embed tutorial](http://help.plot.ly/embed-graphs-in-websites/#step-8-customize-the-iframe).  
+	- Please note that these configuration options are for offline plots ONLY. For configuration options when embedding online plots please see our [embed tutorial](http://help.plot.ly/embed-graphs-in-websites/#step-8-customize-the-iframe).
+- `colors.py` file which contains functions for manipulating and validating colors and arrays of colors
+- 'scale' param in `FF.create_trisurf` which now can set the interpolation on the colorscales
+
+### Fixed
+- Trisurf now uses correct `Plotly Colorscales` when called
 
 ## [1.12.9] - 2016-08-22
 ### Fixed
