@@ -1695,7 +1695,7 @@ class FigureFactory(object):
                 if key not in df:
                     raise exceptions.PlotlyError(
                         "The columns in your dataframe must include the "
-                        "keys".format(REQUIRED_GANTT_KEYS)
+                        "following keys: {0}".format(', '.join(REQUIRED_GANTT_KEYS))
                     )
 
             num_of_rows = len(df.index)
