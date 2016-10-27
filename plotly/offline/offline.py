@@ -62,7 +62,9 @@ def get_image_download_script(caller):
     """
 
     if caller == 'iplot':
-        check_start = 'if(document.readyState == \'complete\') {{'
+        # note: 20000(20s) is a handpicked delay. The script will not run again
+        # once this time has elapsed after the timestamp is instantiated.
+        check_start = 'if(!((new Date()).getTime()>{utime}+20000)){{'
         check_end = '}}'
     elif caller == 'plot':
         check_start = ''
@@ -320,11 +322,13 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                              ': {}'.format(__IMAGE_FORMATS)
                              )
         # if image is given, and is a valid format, we will download the image
+        utime = time.time()*1000 # make a timestamp for the injected code
         script = get_image_download_script('iplot').format(format=image,
                                                        width=image_width,
                                                        height=image_height,
                                                        filename=filename,
-                                                       plot_id=plotdivid)
+                                                       plot_id=plotdivid,
+                                                       utime = utime)
         # allow time for the plot to draw
         time.sleep(1)
         # inject code to download an image of the plot
