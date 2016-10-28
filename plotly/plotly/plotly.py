@@ -209,9 +209,6 @@ def plot(figure_or_data, validate=True, **plot_options):
                                      Make this figure private/public
 
     """
-    #if 'frames' in figure_or_data:
-    #    figure = tools.return_figure_from_figure_or_data(figure_or_data, False)
-    #else:
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
     for entry in figure['data']:
         if ('type' in entry) and (entry['type'] == 'scattergl'):
@@ -1410,8 +1407,8 @@ def _send_to_plotly(figure, **plot_options):
                              fileopt=plot_options['fileopt'],
                              world_readable=plot_options['world_readable'],
                              sharing=plot_options['sharing'],
-                             layout=fig['layout'] if 'layout' in fig
-                             else {}),
+                             layout=fig['layout'] if 'layout' in fig else {},
+                             frames=fig['frames'] if 'frames' in fig else {}),
                         cls=utils.PlotlyJSONEncoder)
 
     # TODO: It'd be cool to expose the platform for RaspPi and others
@@ -1422,20 +1419,14 @@ def _send_to_plotly(figure, **plot_options):
                    key=api_key,
                    origin='plot',
                    kwargs=kwargs)
-    print payload
-    print ' '
+
+    if 'frames' in kwargs:
+        r = create_animations(fig, kwargs, payload)
 
     url = get_config()['plotly_domain'] + "/clientresp"
 
-    print url
-
     r = requests.post(url, data=payload,
                       verify=get_config()['plotly_ssl_verification'])
-    r.raise_for_status()
-
-    print r.text
-
-    r = json.loads(r.text)
 
     if 'error' in r and r['error'] != '':
         raise exceptions.PlotlyError(r['error'])
@@ -1455,6 +1446,76 @@ def _send_to_plotly(figure, **plot_options):
         print(r['message'])
 
     return r
+
+
+def create_animations(fig, kwargs, payload):
+    """
+    The plan is to create a grid then a plot by deconstructing the fig if
+    frames is found in the kwargs.
+    """
+    url_v2_plot = "https://api.plot.ly/v2/plots"
+    url_v2_grid = "https://api.plot.ly/v2/grids"
+    auth = HTTPBasicAuth(str(payload['un']), str(payload['key']))
+    headers = {'Plotly-Client-Platform': 'python'}
+
+    # add layout if not in fig
+    if 'layout' not in fig:
+        fig['layout'] = {}
+
+    # make grid
+    cols_dict = {}
+    counter = 0
+    trace_num = 0
+    for trace in fig['data']:
+        for var in ['x', 'y']:
+            if 'name' in trace:
+                cols_dict["{name}, {x_or_y}".format(name=trace['name'],
+                                                    x_or_y=var)] = {
+                    "data": list(trace[var]), "order": counter
+                }
+            else:
+                cols_dict["Trace {num}, {x_or_y}".format(num=trace_num,
+                                                         x_or_y=var)] = {
+                    "data": list(trace[var]), "order": counter
+                }
+            counter += 1
+        trace_num += 1
+
+    grid_info = {
+        "data": {"cols": cols_dict},
+        "world_readable": True
+    }
+
+    r = requests.post('https://api.plot.ly/v2/grids', auth=auth,
+                      headers=headers, json=grid_info)
+    r_dict = json.loads(r.text)
+    # make a copy of the fig so that we not altering the original fig
+    fig_copy = copy.deepcopy(fig)
+
+    # make plot
+    fid = r_dict['file']['fid']
+    cols_index = 0
+    for trace in fig_copy['data']:
+        if 'x' in trace:
+            del trace['x']
+        if 'y' in trace:
+            del trace['y']
+
+        trace["xsrc"] = "{fid}:{idlocal}".format(
+            fid=fid, idlocal=r_dict['file']['cols'][cols_index]['uid']
+        )
+        trace["ysrc"] = "{fid}:{idlocal}".format(
+            fid=fid, idlocal=r_dict['file']['cols'][cols_index + 1]['uid']
+        )
+        cols_index += 2
+
+    plots_info = {
+        "figure": fig_copy,
+        "world_readable": True
+    }
+
+    return requests.post('https://api.plot.ly/v2/plots', auth=auth,
+                         headers=headers, json=plots_info)
 
 
 def _open_url(url):
