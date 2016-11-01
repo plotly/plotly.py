@@ -1799,6 +1799,12 @@
                         ]
                     },
                     "role": "object",
+                    "separatethousands": {
+                        "description": "If \"true\", even 4-digit integers are separated",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
                     "showaxeslabels": {
                         "description": "Sets whether or not this axis is labeled",
                         "dflt": true,
@@ -2204,6 +2210,12 @@
                         ]
                     },
                     "role": "object",
+                    "separatethousands": {
+                        "description": "If \"true\", even 4-digit integers are separated",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
                     "showaxeslabels": {
                         "description": "Sets whether or not this axis is labeled",
                         "dflt": true,
@@ -2609,6 +2621,12 @@
                         ]
                     },
                     "role": "object",
+                    "separatethousands": {
+                        "description": "If \"true\", even 4-digit integers are separated",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
                     "showaxeslabels": {
                         "description": "Sets whether or not this axis is labeled",
                         "dflt": true,
@@ -2992,6 +3010,336 @@
                 "role": "info",
                 "valType": "boolean"
             },
+            "sliders": {
+                "active": {
+                    "description": "Determines which button (by index starting from 0) is considered active.",
+                    "dflt": 0,
+                    "min": -10,
+                    "role": "info",
+                    "valType": "number"
+                },
+                "activebgcolor": {
+                    "description": "Sets the background color of the slider grip while dragging.",
+                    "dflt": "#dbdde0",
+                    "role": "style",
+                    "valType": "color"
+                },
+                "bgcolor": {
+                    "description": "Sets the background color of the slider.",
+                    "dflt": "#f8fafc",
+                    "role": "style",
+                    "valType": "color"
+                },
+                "bordercolor": {
+                    "description": "Sets the color of the border enclosing the slider.",
+                    "dflt": "#bec8d9",
+                    "role": "style",
+                    "valType": "color"
+                },
+                "borderwidth": {
+                    "description": "Sets the width (in px) of the border enclosing the slider.",
+                    "dflt": 1,
+                    "min": 0,
+                    "role": "style",
+                    "valType": "number"
+                },
+                "currentvalue": {
+                    "font": {
+                        "color": {
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "description": "Sets the font of the current value label text.",
+                        "family": {
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                            "noBlank": true,
+                            "role": "style",
+                            "strict": true,
+                            "valType": "string"
+                        },
+                        "role": "object",
+                        "size": {
+                            "min": 1,
+                            "role": "style",
+                            "valType": "number"
+                        }
+                    },
+                    "offset": {
+                        "description": "The amount of space, in pixels, between the current value label and the slider.",
+                        "dflt": 10,
+                        "role": "info",
+                        "valType": "number"
+                    },
+                    "prefix": {
+                        "description": "When currentvalue.visible is true, this sets the prefix of the label.",
+                        "role": "info",
+                        "valType": "string"
+                    },
+                    "role": "object",
+                    "suffix": {
+                        "description": "When currentvalue.visible is true, this sets the suffix of the label.",
+                        "role": "info",
+                        "valType": "string"
+                    },
+                    "visible": {
+                        "description": "Shows the currently-selected value above the slider.",
+                        "dflt": true,
+                        "role": "info",
+                        "valType": "boolean"
+                    },
+                    "xanchor": {
+                        "description": "The alignment of the value readout relative to the length of the slider.",
+                        "dflt": "left",
+                        "role": "info",
+                        "valType": "enumerated",
+                        "values": [
+                            "left",
+                            "center",
+                            "right"
+                        ]
+                    }
+                },
+                "font": {
+                    "color": {
+                        "role": "style",
+                        "valType": "color"
+                    },
+                    "description": "Sets the font of the slider step labels.",
+                    "family": {
+                        "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                        "noBlank": true,
+                        "role": "style",
+                        "strict": true,
+                        "valType": "string"
+                    },
+                    "role": "object",
+                    "size": {
+                        "min": 1,
+                        "role": "style",
+                        "valType": "number"
+                    }
+                },
+                "len": {
+                    "description": "Sets the length of the slider This measure excludes the padding of both ends. That is, the slider's length is this length minus the padding on both ends.",
+                    "dflt": 1,
+                    "min": 0,
+                    "role": "style",
+                    "valType": "number"
+                },
+                "lenmode": {
+                    "description": "Determines whether this slider length is set in units of plot *fraction* or in *pixels. Use `len` to set the value.",
+                    "dflt": "fraction",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "fraction",
+                        "pixels"
+                    ]
+                },
+                "minorticklen": {
+                    "description": "Sets the length in pixels of minor step tick marks",
+                    "dflt": 4,
+                    "min": 0,
+                    "role": "style",
+                    "valType": "number"
+                },
+                "pad": {
+                    "b": {
+                        "description": "The amount of padding (in px) along the bottom of the component.",
+                        "dflt": 0,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "description": "Set the padding of the slider component along each side.",
+                    "l": {
+                        "description": "The amount of padding (in px) on the left side of the component.",
+                        "dflt": 0,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "r": {
+                        "description": "The amount of padding (in px) on the right side of the component.",
+                        "dflt": 0,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "role": "object",
+                    "t": {
+                        "description": "The amount of padding (in px) along the top of the component.",
+                        "dflt": 20,
+                        "role": "style",
+                        "valType": "number"
+                    }
+                },
+                "role": "object",
+                "steps": {
+                    "items": {
+                        "step": {
+                            "args": {
+                                "description": "Sets the arguments values to be passed to the Plotly method set in `method` on slide.",
+                                "freeLength": true,
+                                "items": [
+                                    {
+                                        "valType": "any"
+                                    },
+                                    {
+                                        "valType": "any"
+                                    },
+                                    {
+                                        "valType": "any"
+                                    }
+                                ],
+                                "role": "info",
+                                "valType": "info_array"
+                            },
+                            "label": {
+                                "description": "Sets the text label to appear on the slider",
+                                "role": "info",
+                                "valType": "string"
+                            },
+                            "method": {
+                                "description": "Sets the Plotly method to be called when the slider value is changed.",
+                                "dflt": "restyle",
+                                "role": "info",
+                                "valType": "enumerated",
+                                "values": [
+                                    "restyle",
+                                    "relayout",
+                                    "animate",
+                                    "update"
+                                ]
+                            },
+                            "role": "object",
+                            "value": {
+                                "description": "Sets the value of the slider step, used to refer to the step programatically. Defaults to the slider label if not provided.",
+                                "role": "info",
+                                "valType": "string"
+                            }
+                        }
+                    },
+                    "role": "object"
+                },
+                "tickcolor": {
+                    "description": "Sets the color of the border enclosing the slider.",
+                    "dflt": "#333",
+                    "role": "style",
+                    "valType": "color"
+                },
+                "ticklen": {
+                    "description": "Sets the length in pixels of step tick marks",
+                    "dflt": 7,
+                    "min": 0,
+                    "role": "style",
+                    "valType": "number"
+                },
+                "tickwidth": {
+                    "description": "Sets the tick width (in px).",
+                    "dflt": 1,
+                    "min": 0,
+                    "role": "style",
+                    "valType": "number"
+                },
+                "transition": {
+                    "duration": {
+                        "description": "Sets the duration of the slider transition",
+                        "dflt": 150,
+                        "min": 0,
+                        "role": "info",
+                        "valType": "number"
+                    },
+                    "easing": {
+                        "description": "Sets the easing function of the slider transition",
+                        "dflt": "cubic-in-out",
+                        "role": "info",
+                        "valType": "enumerated",
+                        "values": [
+                            "linear",
+                            "quad",
+                            "cubic",
+                            "sin",
+                            "exp",
+                            "circle",
+                            "elastic",
+                            "back",
+                            "bounce",
+                            "linear-in",
+                            "quad-in",
+                            "cubic-in",
+                            "sin-in",
+                            "exp-in",
+                            "circle-in",
+                            "elastic-in",
+                            "back-in",
+                            "bounce-in",
+                            "linear-out",
+                            "quad-out",
+                            "cubic-out",
+                            "sin-out",
+                            "exp-out",
+                            "circle-out",
+                            "elastic-out",
+                            "back-out",
+                            "bounce-out",
+                            "linear-in-out",
+                            "quad-in-out",
+                            "cubic-in-out",
+                            "sin-in-out",
+                            "exp-in-out",
+                            "circle-in-out",
+                            "elastic-in-out",
+                            "back-in-out",
+                            "bounce-in-out"
+                        ]
+                    },
+                    "role": "object"
+                },
+                "visible": {
+                    "description": "Determines whether or not the slider is visible.",
+                    "dflt": true,
+                    "role": "info",
+                    "valType": "boolean"
+                },
+                "x": {
+                    "description": "Sets the x position (in normalized coordinates) of the slider.",
+                    "dflt": 0,
+                    "max": 3,
+                    "min": -2,
+                    "role": "style",
+                    "valType": "number"
+                },
+                "xanchor": {
+                    "description": "Sets the slider's horizontal position anchor. This anchor binds the `x` position to the *left*, *center* or *right* of the range selector.",
+                    "dflt": "left",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "auto",
+                        "left",
+                        "center",
+                        "right"
+                    ]
+                },
+                "y": {
+                    "description": "Sets the y position (in normalized coordinates) of the slider.",
+                    "dflt": 0,
+                    "max": 3,
+                    "min": -2,
+                    "role": "style",
+                    "valType": "number"
+                },
+                "yanchor": {
+                    "description": "Sets the slider's vertical position anchor This anchor binds the `y` position to the *top*, *middle* or *bottom* of the range selector.",
+                    "dflt": "top",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "auto",
+                        "top",
+                        "middle",
+                        "bottom"
+                    ]
+                }
+            },
             "smith": {
                 "dflt": false,
                 "role": "info",
@@ -3076,6 +3424,12 @@
                         "valType": "integer"
                     },
                     "role": "object",
+                    "separatethousands": {
+                        "description": "If \"true\", even 4-digit integers are separated",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
                     "showexponent": {
                         "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                         "dflt": "all",
@@ -3340,6 +3694,12 @@
                         "valType": "integer"
                     },
                     "role": "object",
+                    "separatethousands": {
+                        "description": "If \"true\", even 4-digit integers are separated",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
                     "showexponent": {
                         "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                         "dflt": "all",
@@ -3610,6 +3970,12 @@
                         "valType": "integer"
                     },
                     "role": "object",
+                    "separatethousands": {
+                        "description": "If \"true\", even 4-digit integers are separated",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
                     "showexponent": {
                         "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                         "dflt": "all",
@@ -3941,13 +4307,27 @@
                                         "valType": "enumerated",
                                         "values": [
                                             "restyle",
-                                            "relayout"
+                                            "relayout",
+                                            "animate",
+                                            "update"
                                         ]
                                     },
                                     "role": "object"
                                 }
                             },
                             "role": "object"
+                        },
+                        "direction": {
+                            "description": "Determines the direction in which the buttons are laid out, whether in a dropdown menu or a row/column of buttons. For `left` and `up`, the buttons will still appear in left-to-right or top-to-bottom order respectively.",
+                            "dflt": "down",
+                            "role": "info",
+                            "valType": "enumerated",
+                            "values": [
+                                "left",
+                                "right",
+                                "up",
+                                "down"
+                            ]
                         },
                         "font": {
                             "color": {
@@ -3969,7 +4349,51 @@
                                 "valType": "number"
                             }
                         },
+                        "pad": {
+                            "b": {
+                                "description": "The amount of padding (in px) along the bottom of the component.",
+                                "dflt": 0,
+                                "role": "style",
+                                "valType": "number"
+                            },
+                            "description": "Sets the padding around the buttons or dropdown menu.",
+                            "l": {
+                                "description": "The amount of padding (in px) on the left side of the component.",
+                                "dflt": 0,
+                                "role": "style",
+                                "valType": "number"
+                            },
+                            "r": {
+                                "description": "The amount of padding (in px) on the right side of the component.",
+                                "dflt": 0,
+                                "role": "style",
+                                "valType": "number"
+                            },
+                            "role": "object",
+                            "t": {
+                                "description": "The amount of padding (in px) along the top of the component.",
+                                "dflt": 0,
+                                "role": "style",
+                                "valType": "number"
+                            }
+                        },
                         "role": "object",
+                        "showactive": {
+                            "description": "Highlights active dropdown item or active button if true.",
+                            "dflt": true,
+                            "role": "info",
+                            "valType": "boolean"
+                        },
+                        "type": {
+                            "description": "Determines whether the buttons are accessible via a dropdown menu or whether the buttons are stacked horizontally or vertically",
+                            "dflt": "dropdown",
+                            "role": "info",
+                            "valType": "enumerated",
+                            "values": [
+                                "dropdown",
+                                "buttons"
+                            ]
+                        },
                         "visible": {
                             "description": "Determines whether or not the update menu is visible.",
                             "role": "info",
@@ -4005,7 +4429,7 @@
                         },
                         "yanchor": {
                             "description": "Sets the update menu's vertical position anchor This anchor binds the `y` position to the *top*, *middle* or *bottom* of the range selector.",
-                            "dflt": "bottom",
+                            "dflt": "top",
                             "role": "info",
                             "valType": "enumerated",
                             "values": [
@@ -4411,6 +4835,12 @@
                     }
                 },
                 "role": "object",
+                "separatethousands": {
+                    "description": "If \"true\", even 4-digit integers are separated",
+                    "dflt": false,
+                    "role": "style",
+                    "valType": "boolean"
+                },
                 "showexponent": {
                     "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                     "dflt": "all",
@@ -5026,6 +5456,12 @@
                     }
                 },
                 "role": "object",
+                "separatethousands": {
+                    "description": "If \"true\", even 4-digit integers are separated",
+                    "dflt": false,
+                    "role": "style",
+                    "valType": "boolean"
+                },
                 "showexponent": {
                     "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                     "dflt": "all",
@@ -5262,11 +5698,12 @@
         "area": {
             "attributes": {
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "x",
@@ -5654,6 +6091,8 @@
                 "stream": {
                     "maxpoints": {
                         "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot.",
+                        "dflt": 500,
+                        "max": 10000,
                         "min": 0,
                         "role": "info",
                         "valType": "number"
@@ -5928,11 +6367,12 @@
                     }
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "x",
@@ -6059,6 +6499,12 @@
                             "valType": "number"
                         },
                         "role": "object",
+                        "separatethousands": {
+                            "description": "If \"true\", even 4-digit integers are separated",
+                            "dflt": false,
+                            "role": "style",
+                            "valType": "boolean"
+                        },
                         "showexponent": {
                             "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                             "dflt": "all",
@@ -6446,6 +6892,8 @@
                 "stream": {
                     "maxpoints": {
                         "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot.",
+                        "dflt": 500,
+                        "max": 10000,
                         "min": 0,
                         "role": "info",
                         "valType": "number"
@@ -6616,11 +7064,12 @@
                     "valType": "color"
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "x",
@@ -7053,6 +7502,8 @@
                 "stream": {
                     "maxpoints": {
                         "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot.",
+                        "dflt": 500,
+                        "max": 10000,
                         "min": 0,
                         "role": "info",
                         "valType": "number"
@@ -7164,6 +7615,255 @@
                 }
             }
         },
+        "candlestick": {
+            "attributes": {
+                "close": {
+                    "description": "Sets the close values.",
+                    "dflt": [],
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "closesrc": {
+                    "description": "Sets the source reference on plot.ly for  close .",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "decreasing": {
+                    "fillcolor": {
+                        "description": "Sets the fill color. Defaults to a half-transparent variant of the line color, marker color, or marker line color, whichever is available.",
+                        "role": "style",
+                        "valType": "color"
+                    },
+                    "line": {
+                        "color": {
+                            "description": "Sets the color of line bounding the box(es).",
+                            "dflt": "#FF4136",
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "role": "object",
+                        "width": {
+                            "description": "Sets the width (in px) of line bounding the box(es).",
+                            "dflt": 2,
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        }
+                    },
+                    "name": {
+                        "description": "Sets the segment name. The segment name appear as the legend item and on hover.",
+                        "role": "info",
+                        "valType": "string"
+                    },
+                    "role": "object",
+                    "showlegend": {
+                        "description": "Determines whether or not an item corresponding to this segment is shown in the legend.",
+                        "dflt": true,
+                        "role": "info",
+                        "valType": "boolean"
+                    }
+                },
+                "high": {
+                    "description": "Sets the high values.",
+                    "dflt": [],
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "highsrc": {
+                    "description": "Sets the source reference on plot.ly for  high .",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "hoverinfo": {
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
+                    "dflt": "all",
+                    "extras": [
+                        "all",
+                        "none",
+                        "skip"
+                    ],
+                    "flags": [
+                        "x",
+                        "y",
+                        "z",
+                        "text",
+                        "name"
+                    ],
+                    "role": "info",
+                    "valType": "flaglist"
+                },
+                "increasing": {
+                    "fillcolor": {
+                        "description": "Sets the fill color. Defaults to a half-transparent variant of the line color, marker color, or marker line color, whichever is available.",
+                        "role": "style",
+                        "valType": "color"
+                    },
+                    "line": {
+                        "color": {
+                            "description": "Sets the color of line bounding the box(es).",
+                            "dflt": "#3D9970",
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "role": "object",
+                        "width": {
+                            "description": "Sets the width (in px) of line bounding the box(es).",
+                            "dflt": 2,
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        }
+                    },
+                    "name": {
+                        "description": "Sets the segment name. The segment name appear as the legend item and on hover.",
+                        "role": "info",
+                        "valType": "string"
+                    },
+                    "role": "object",
+                    "showlegend": {
+                        "description": "Determines whether or not an item corresponding to this segment is shown in the legend.",
+                        "dflt": true,
+                        "role": "info",
+                        "valType": "boolean"
+                    }
+                },
+                "legendgroup": {
+                    "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
+                    "dflt": "",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "line": {
+                    "role": "object",
+                    "width": {
+                        "description": "Sets the width (in px) of line bounding the box(es). Note that this style setting can also be set per direction via `increasing.line.width` and `decreasing.line.width`.",
+                        "dflt": 2,
+                        "min": 0,
+                        "role": "style",
+                        "valType": "number"
+                    }
+                },
+                "low": {
+                    "description": "Sets the low values.",
+                    "dflt": [],
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "lowsrc": {
+                    "description": "Sets the source reference on plot.ly for  low .",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "name": {
+                    "description": "Sets the trace name. The trace name appear as the legend item and on hover.",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "opacity": {
+                    "description": "Sets the opacity of the trace.",
+                    "dflt": 1,
+                    "max": 1,
+                    "min": 0,
+                    "role": "style",
+                    "valType": "number"
+                },
+                "open": {
+                    "description": "Sets the open values.",
+                    "dflt": [],
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "opensrc": {
+                    "description": "Sets the source reference on plot.ly for  open .",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "showlegend": {
+                    "description": "Determines whether or not an item corresponding to this trace is shown in the legend.",
+                    "dflt": true,
+                    "role": "info",
+                    "valType": "boolean"
+                },
+                "stream": {
+                    "maxpoints": {
+                        "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot.",
+                        "dflt": 500,
+                        "max": 10000,
+                        "min": 0,
+                        "role": "info",
+                        "valType": "number"
+                    },
+                    "role": "object",
+                    "token": {
+                        "description": "The stream id number links a data trace on a plot with a stream. See https://plot.ly/settings for more details.",
+                        "noBlank": true,
+                        "role": "info",
+                        "strict": true,
+                        "valType": "string"
+                    }
+                },
+                "text": {
+                    "arrayOk": true,
+                    "description": "Sets hover text elements associated with each sample point. If a single string, the same string appears over all the data points. If an array of string, the items are mapped in order to this trace's sample points.",
+                    "dflt": "",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "textsrc": {
+                    "description": "Sets the source reference on plot.ly for  text .",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "type": "candlestick",
+                "uid": {
+                    "dflt": "",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "visible": {
+                    "description": "Determines whether or not this trace is visible. If *legendonly*, the trace is not drawn, but can appear as a legend item (provided that the legend itself is visible).",
+                    "dflt": true,
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        true,
+                        false,
+                        "legendonly"
+                    ]
+                },
+                "whiskerwidth": {
+                    "description": "Sets the width of the whiskers relative to the box' width. For example, with 1, the whiskers are as wide as the box(es).",
+                    "dflt": 0,
+                    "max": 1,
+                    "min": 0,
+                    "role": "style",
+                    "valType": "number"
+                },
+                "x": {
+                    "description": "Sets the x coordinates. If absent, linear coordinate will be generated.",
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "xaxis": {
+                    "description": "Sets a reference between this trace's x coordinates and a 2D cartesian x axis. If *x* (the default value), the x coordinates refer to `layout.xaxis`. If *x2*, the x coordinates refer to `layout.xaxis2`, and so on.",
+                    "dflt": "x",
+                    "role": "info",
+                    "valType": "subplotid"
+                },
+                "xsrc": {
+                    "description": "Sets the source reference on plot.ly for  x .",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "yaxis": {
+                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.xaxis2`, and so on.",
+                    "dflt": "y",
+                    "role": "info",
+                    "valType": "subplotid"
+                }
+            },
+            "description": "The candlestick is a style of financial chart describing open, high, low and close for a given `x` coordinate (most likely time). The boxes represent the spread between the `open` and `close` values and the lines represent the spread between the `low` and `high` values Sample points where the close value is higher (lower) then the open value are called increasing (decreasing). By default, increasing candles are drawn in green whereas decreasing are drawn in red."
+        },
         "choropleth": {
             "attributes": {
                 "autocolorscale": {
@@ -7250,6 +7950,12 @@
                         "valType": "number"
                     },
                     "role": "object",
+                    "separatethousands": {
+                        "description": "If \"true\", even 4-digit integers are separated",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
                     "showexponent": {
                         "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                         "dflt": "all",
@@ -7522,11 +8228,12 @@
                     "valType": "subplotid"
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "location",
@@ -7627,6 +8334,8 @@
                 "stream": {
                     "maxpoints": {
                         "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot.",
+                        "dflt": 500,
+                        "max": 10000,
                         "min": 0,
                         "role": "info",
                         "valType": "number"
@@ -7790,6 +8499,12 @@
                         "valType": "number"
                     },
                     "role": "object",
+                    "separatethousands": {
+                        "description": "If \"true\", even 4-digit integers are separated",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
                     "showexponent": {
                         "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                         "dflt": "all",
@@ -8113,11 +8828,12 @@
                     "valType": "number"
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "x",
@@ -8212,6 +8928,8 @@
                 "stream": {
                     "maxpoints": {
                         "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot.",
+                        "dflt": 500,
+                        "max": 10000,
                         "min": 0,
                         "role": "info",
                         "valType": "number"
@@ -8437,6 +9155,12 @@
                         "valType": "number"
                     },
                     "role": "object",
+                    "separatethousands": {
+                        "description": "If \"true\", even 4-digit integers are separated",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
                     "showexponent": {
                         "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                         "dflt": "all",
@@ -8721,11 +9445,12 @@
                     "valType": "number"
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "x",
@@ -8777,6 +9502,8 @@
                 "stream": {
                     "maxpoints": {
                         "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot.",
+                        "dflt": 500,
+                        "max": 10000,
                         "min": 0,
                         "role": "info",
                         "valType": "number"
@@ -8840,6 +9567,13 @@
                     "role": "info",
                     "valType": "subplotid"
                 },
+                "xgap": {
+                    "description": "Sets the horizontal gap (in pixels) between bricks.",
+                    "dflt": 0,
+                    "min": 0,
+                    "role": "style",
+                    "valType": "number"
+                },
                 "xsrc": {
                     "description": "Sets the source reference on plot.ly for  x .",
                     "role": "info",
@@ -8870,6 +9604,13 @@
                     "dflt": "y",
                     "role": "info",
                     "valType": "subplotid"
+                },
+                "ygap": {
+                    "description": "Sets the vertical gap (in pixels) between bricks.",
+                    "dflt": 0,
+                    "min": 0,
+                    "role": "style",
+                    "valType": "number"
                 },
                 "ysrc": {
                     "description": "Sets the source reference on plot.ly for  y .",
@@ -9185,11 +9926,12 @@
                     ]
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "x",
@@ -9316,6 +10058,12 @@
                             "valType": "number"
                         },
                         "role": "object",
+                        "separatethousands": {
+                            "description": "If \"true\", even 4-digit integers are separated",
+                            "dflt": false,
+                            "role": "style",
+                            "valType": "boolean"
+                        },
                         "showexponent": {
                             "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                             "dflt": "all",
@@ -9707,6 +10455,8 @@
                 "stream": {
                     "maxpoints": {
                         "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot.",
+                        "dflt": 500,
+                        "max": 10000,
                         "min": 0,
                         "role": "info",
                         "valType": "number"
@@ -9964,6 +10714,12 @@
                         "valType": "number"
                     },
                     "role": "object",
+                    "separatethousands": {
+                        "description": "If \"true\", even 4-digit integers are separated",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
                     "showexponent": {
                         "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                         "dflt": "all",
@@ -10256,11 +11012,12 @@
                     ]
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "x",
@@ -10339,6 +11096,8 @@
                 "stream": {
                     "maxpoints": {
                         "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot.",
+                        "dflt": 500,
+                        "max": 10000,
                         "min": 0,
                         "role": "info",
                         "valType": "number"
@@ -10401,6 +11160,13 @@
                         "valType": "number"
                     }
                 },
+                "xgap": {
+                    "description": "Sets the horizontal gap (in pixels) between bricks.",
+                    "dflt": 0,
+                    "min": 0,
+                    "role": "style",
+                    "valType": "number"
+                },
                 "xsrc": {
                     "description": "Sets the source reference on plot.ly for  x .",
                     "role": "info",
@@ -10437,6 +11203,13 @@
                         "role": "style",
                         "valType": "number"
                     }
+                },
+                "ygap": {
+                    "description": "Sets the vertical gap (in pixels) between bricks.",
+                    "dflt": 0,
+                    "min": 0,
+                    "role": "style",
+                    "valType": "number"
                 },
                 "ysrc": {
                     "description": "Sets the source reference on plot.ly for  y .",
@@ -10590,6 +11363,12 @@
                         "valType": "number"
                     },
                     "role": "object",
+                    "separatethousands": {
+                        "description": "If \"true\", even 4-digit integers are separated",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
                     "showexponent": {
                         "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                         "dflt": "all",
@@ -10921,11 +11700,12 @@
                     ]
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "x",
@@ -11047,6 +11827,8 @@
                 "stream": {
                     "maxpoints": {
                         "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot.",
+                        "dflt": 500,
+                        "max": 10000,
                         "min": 0,
                         "role": "info",
                         "valType": "number"
@@ -11274,6 +12056,12 @@
                         "valType": "number"
                     },
                     "role": "object",
+                    "separatethousands": {
+                        "description": "If \"true\", even 4-digit integers are separated",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
                     "showexponent": {
                         "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                         "dflt": "all",
@@ -11590,11 +12378,12 @@
                     "valType": "boolean"
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "x",
@@ -11778,6 +12567,8 @@
                 "stream": {
                     "maxpoints": {
                         "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot.",
+                        "dflt": 500,
+                        "max": 10000,
                         "min": 0,
                         "role": "info",
                         "valType": "number"
@@ -11851,6 +12642,287 @@
             },
             "description": "Draws sets of triangles with coordinates given by three 1-dimensional arrays in `x`, `y`, `z` and (1) a sets of `i`, `j`, `k` indices (2) Delaunay triangulation or (3) the Alpha-shape algorithm or (4) the Convex-hull algorithm"
         },
+        "ohlc": {
+            "attributes": {
+                "close": {
+                    "description": "Sets the close values.",
+                    "dflt": [],
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "closesrc": {
+                    "description": "Sets the source reference on plot.ly for  close .",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "decreasing": {
+                    "line": {
+                        "color": {
+                            "description": "Sets the line color.",
+                            "dflt": "#FF4136",
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "dash": {
+                            "description": "Sets the style of the lines. Set to a dash string type or a dash length in px.",
+                            "dflt": "solid",
+                            "role": "style",
+                            "valType": "string",
+                            "values": [
+                                "solid",
+                                "dot",
+                                "dash",
+                                "longdash",
+                                "dashdot",
+                                "longdashdot"
+                            ]
+                        },
+                        "role": "object",
+                        "width": {
+                            "description": "Sets the line width (in px).",
+                            "dflt": 2,
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        }
+                    },
+                    "name": {
+                        "description": "Sets the segment name. The segment name appear as the legend item and on hover.",
+                        "role": "info",
+                        "valType": "string"
+                    },
+                    "role": "object",
+                    "showlegend": {
+                        "description": "Determines whether or not an item corresponding to this segment is shown in the legend.",
+                        "dflt": true,
+                        "role": "info",
+                        "valType": "boolean"
+                    }
+                },
+                "high": {
+                    "description": "Sets the high values.",
+                    "dflt": [],
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "highsrc": {
+                    "description": "Sets the source reference on plot.ly for  high .",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "hoverinfo": {
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
+                    "dflt": "all",
+                    "extras": [
+                        "all",
+                        "none",
+                        "skip"
+                    ],
+                    "flags": [
+                        "x",
+                        "y",
+                        "z",
+                        "text",
+                        "name"
+                    ],
+                    "role": "info",
+                    "valType": "flaglist"
+                },
+                "increasing": {
+                    "line": {
+                        "color": {
+                            "description": "Sets the line color.",
+                            "dflt": "#3D9970",
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "dash": {
+                            "description": "Sets the style of the lines. Set to a dash string type or a dash length in px.",
+                            "dflt": "solid",
+                            "role": "style",
+                            "valType": "string",
+                            "values": [
+                                "solid",
+                                "dot",
+                                "dash",
+                                "longdash",
+                                "dashdot",
+                                "longdashdot"
+                            ]
+                        },
+                        "role": "object",
+                        "width": {
+                            "description": "Sets the line width (in px).",
+                            "dflt": 2,
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        }
+                    },
+                    "name": {
+                        "description": "Sets the segment name. The segment name appear as the legend item and on hover.",
+                        "role": "info",
+                        "valType": "string"
+                    },
+                    "role": "object",
+                    "showlegend": {
+                        "description": "Determines whether or not an item corresponding to this segment is shown in the legend.",
+                        "dflt": true,
+                        "role": "info",
+                        "valType": "boolean"
+                    }
+                },
+                "legendgroup": {
+                    "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
+                    "dflt": "",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "line": {
+                    "dash": {
+                        "description": "[object Object] Note that this style setting can also be set per direction via `increasing.line.dash` and `decreasing.line.dash`.",
+                        "dflt": "solid",
+                        "role": "style",
+                        "valType": "string",
+                        "values": [
+                            "solid",
+                            "dot",
+                            "dash",
+                            "longdash",
+                            "dashdot",
+                            "longdashdot"
+                        ]
+                    },
+                    "role": "object",
+                    "width": {
+                        "description": "[object Object] Note that this style setting can also be set per direction via `increasing.line.width` and `decreasing.line.width`.",
+                        "dflt": 2,
+                        "min": 0,
+                        "role": "style",
+                        "valType": "number"
+                    }
+                },
+                "low": {
+                    "description": "Sets the low values.",
+                    "dflt": [],
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "lowsrc": {
+                    "description": "Sets the source reference on plot.ly for  low .",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "name": {
+                    "description": "Sets the trace name. The trace name appear as the legend item and on hover.",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "opacity": {
+                    "description": "Sets the opacity of the trace.",
+                    "dflt": 1,
+                    "max": 1,
+                    "min": 0,
+                    "role": "style",
+                    "valType": "number"
+                },
+                "open": {
+                    "description": "Sets the open values.",
+                    "dflt": [],
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "opensrc": {
+                    "description": "Sets the source reference on plot.ly for  open .",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "showlegend": {
+                    "description": "Determines whether or not an item corresponding to this trace is shown in the legend.",
+                    "dflt": true,
+                    "role": "info",
+                    "valType": "boolean"
+                },
+                "stream": {
+                    "maxpoints": {
+                        "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot.",
+                        "dflt": 500,
+                        "max": 10000,
+                        "min": 0,
+                        "role": "info",
+                        "valType": "number"
+                    },
+                    "role": "object",
+                    "token": {
+                        "description": "The stream id number links a data trace on a plot with a stream. See https://plot.ly/settings for more details.",
+                        "noBlank": true,
+                        "role": "info",
+                        "strict": true,
+                        "valType": "string"
+                    }
+                },
+                "text": {
+                    "arrayOk": true,
+                    "description": "Sets hover text elements associated with each sample point. If a single string, the same string appears over all the data points. If an array of string, the items are mapped in order to this trace's sample points.",
+                    "dflt": "",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "textsrc": {
+                    "description": "Sets the source reference on plot.ly for  text .",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "tickwidth": {
+                    "description": "Sets the width of the open/close tick marks relative to the *x* minimal interval.",
+                    "dflt": 0.3,
+                    "max": 0.5,
+                    "min": 0,
+                    "role": "style",
+                    "valType": "number"
+                },
+                "type": "ohlc",
+                "uid": {
+                    "dflt": "",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "visible": {
+                    "description": "Determines whether or not this trace is visible. If *legendonly*, the trace is not drawn, but can appear as a legend item (provided that the legend itself is visible).",
+                    "dflt": true,
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        true,
+                        false,
+                        "legendonly"
+                    ]
+                },
+                "x": {
+                    "description": "Sets the x coordinates. If absent, linear coordinate will be generated.",
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "xaxis": {
+                    "description": "Sets a reference between this trace's x coordinates and a 2D cartesian x axis. If *x* (the default value), the x coordinates refer to `layout.xaxis`. If *x2*, the x coordinates refer to `layout.xaxis2`, and so on.",
+                    "dflt": "x",
+                    "role": "info",
+                    "valType": "subplotid"
+                },
+                "xsrc": {
+                    "description": "Sets the source reference on plot.ly for  x .",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "yaxis": {
+                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.xaxis2`, and so on.",
+                    "dflt": "y",
+                    "role": "info",
+                    "valType": "subplotid"
+                }
+            },
+            "description": "The ohlc (short for Open-High-Low-Close) is a style of financial chart describing open, high, low and close for a given `x` coordinate (most likely time). The tip of the lines represent the `low` and `high` values and the horizontal segments represent the `open` and `close` values. Sample points where the close value is higher (lower) then the open value are called increasing (decreasing). By default, increasing candles are drawn in green whereas decreasing are drawn in red."
+        },
         "pie": {
             "attributes": {
                 "direction": {
@@ -11923,11 +12995,12 @@
                     "valType": "number"
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "label",
@@ -12098,6 +13171,8 @@
                 "stream": {
                     "maxpoints": {
                         "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot.",
+                        "dflt": 500,
+                        "max": 10000,
                         "min": 0,
                         "role": "info",
                         "valType": "number"
@@ -12213,6 +13288,229 @@
                     "valType": "string"
                 }
             }
+        },
+        "pointcloud": {
+            "attributes": {
+                "hoverinfo": {
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
+                    "dflt": "all",
+                    "extras": [
+                        "all",
+                        "none",
+                        "skip"
+                    ],
+                    "flags": [
+                        "x",
+                        "y",
+                        "z",
+                        "text",
+                        "name"
+                    ],
+                    "role": "info",
+                    "valType": "flaglist"
+                },
+                "indices": {
+                    "description": "A sequential value, 0..n, supply it to avoid creating this array inside plotting. If specified, it must be a typed `Int32Array` array. Its length must be equal to or greater than the number of points. For the best performance and memory use, create one large `indices` typed array that is guaranteed to be at least as long as the largest number of points during use, and reuse it on each `Plotly.restyle()` call.",
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "indicessrc": {
+                    "description": "Sets the source reference on plot.ly for  indices .",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "legendgroup": {
+                    "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
+                    "dflt": "",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "marker": {
+                    "blend": {
+                        "description": "Determines if colors are blended together for a translucency effect in case `opacity` is specified as a value less then `1`. Setting `blend` to `true` reduces zoom/pan speed if used with large numbers of points.",
+                        "dflt": null,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
+                    "border": {
+                        "arearatio": {
+                            "description": "Specifies what fraction of the marker area is covered with the border.",
+                            "dflt": 0,
+                            "max": 1,
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "color": {
+                            "arrayOk": false,
+                            "description": "Sets the stroke color. It accepts a specific color. If the color is not fully opaque and there are hundreds of thousands of points, it may cause slower zooming and panning.",
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "role": "object"
+                    },
+                    "color": {
+                        "arrayOk": false,
+                        "description": "Sets the marker fill color. It accepts a specific color.If the color is not fully opaque and there are hundreds of thousandsof points, it may cause slower zooming and panning.",
+                        "role": "style",
+                        "valType": "color"
+                    },
+                    "opacity": {
+                        "arrayOk": false,
+                        "description": "Sets the marker opacity. The default value is `1` (fully opaque). If the markers are not fully opaque and there are hundreds of thousands of points, it may cause slower zooming and panning. Opacity fades the color even if `blend` is left on `false` even if there is no translucency effect in that case.",
+                        "dflt": 1,
+                        "max": 1,
+                        "min": 0,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "role": "object",
+                    "sizemax": {
+                        "description": "Sets the maximum size (in px) of the rendered marker points. Effective when the `pointcloud` shows only few points.",
+                        "dflt": 20,
+                        "min": 0.1,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "sizemin": {
+                        "description": "Sets the minimum size (in px) of the rendered marker points, effective when the `pointcloud` shows a million or more points.",
+                        "dflt": 0.5,
+                        "max": 2,
+                        "min": 0.1,
+                        "role": "style",
+                        "valType": "number"
+                    }
+                },
+                "name": {
+                    "description": "Sets the trace name. The trace name appear as the legend item and on hover.",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "opacity": {
+                    "description": "Sets the opacity of the trace.",
+                    "dflt": 1,
+                    "max": 1,
+                    "min": 0,
+                    "role": "style",
+                    "valType": "number"
+                },
+                "showlegend": {
+                    "description": "Determines whether or not an item corresponding to this trace is shown in the legend.",
+                    "dflt": true,
+                    "role": "info",
+                    "valType": "boolean"
+                },
+                "stream": {
+                    "maxpoints": {
+                        "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot.",
+                        "dflt": 500,
+                        "max": 10000,
+                        "min": 0,
+                        "role": "info",
+                        "valType": "number"
+                    },
+                    "role": "object",
+                    "token": {
+                        "description": "The stream id number links a data trace on a plot with a stream. See https://plot.ly/settings for more details.",
+                        "noBlank": true,
+                        "role": "info",
+                        "strict": true,
+                        "valType": "string"
+                    }
+                },
+                "text": {
+                    "arrayOk": true,
+                    "description": "Sets text elements associated with each (x,y) pair to appear on hover. If a single string, the same string appears over all the data points. If an array of string, the items are mapped in order to the this trace's (x,y) coordinates.",
+                    "dflt": "",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "textsrc": {
+                    "description": "Sets the source reference on plot.ly for  text .",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "type": "pointcloud",
+                "uid": {
+                    "dflt": "",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "visible": {
+                    "description": "Determines whether or not this trace is visible. If *legendonly*, the trace is not drawn, but can appear as a legend item (provided that the legend itself is visible).",
+                    "dflt": true,
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        true,
+                        false,
+                        "legendonly"
+                    ]
+                },
+                "x": {
+                    "description": "Sets the x coordinates.",
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "xaxis": {
+                    "description": "Sets a reference between this trace's x coordinates and a 2D cartesian x axis. If *x* (the default value), the x coordinates refer to `layout.xaxis`. If *x2*, the x coordinates refer to `layout.xaxis2`, and so on.",
+                    "dflt": "x",
+                    "role": "info",
+                    "valType": "subplotid"
+                },
+                "xbounds": {
+                    "description": "Specify `xbounds` in the shape of `[xMin, xMax] to avoid looping through the `xy` typed array. Use it in conjunction with `xy` and `ybounds` for the performance benefits.",
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "xboundssrc": {
+                    "description": "Sets the source reference on plot.ly for  xbounds .",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "xsrc": {
+                    "description": "Sets the source reference on plot.ly for  x .",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "xy": {
+                    "description": "Faster alternative to specifying `x` and `y` separately. If supplied, it must be a typed `Float32Array` array that represents points such that `xy[i * 2] = x[i]` and `xy[i * 2 + 1] = y[i]`",
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "xysrc": {
+                    "description": "Sets the source reference on plot.ly for  xy .",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "y": {
+                    "description": "Sets the y coordinates.",
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "yaxis": {
+                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.xaxis2`, and so on.",
+                    "dflt": "y",
+                    "role": "info",
+                    "valType": "subplotid"
+                },
+                "ybounds": {
+                    "description": "Specify `ybounds` in the shape of `[yMin, yMax] to avoid looping through the `xy` typed array. Use it in conjunction with `xy` and `xbounds` for the performance benefits.",
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "yboundssrc": {
+                    "description": "Sets the source reference on plot.ly for  ybounds .",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "ysrc": {
+                    "description": "Sets the source reference on plot.ly for  y .",
+                    "role": "info",
+                    "valType": "string"
+                }
+            },
+            "description": "The data visualized as a point cloud set in `x` and `y` using the WebGl plotting engine."
         },
         "scatter": {
             "attributes": {
@@ -12461,11 +13759,12 @@
                     "valType": "color"
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "x",
@@ -12485,6 +13784,16 @@
                     ],
                     "role": "info",
                     "valType": "flaglist"
+                },
+                "ids": {
+                    "description": "A list of keys for object constancy of data points during animation",
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "idssrc": {
+                    "description": "Sets the source reference on plot.ly for  ids .",
+                    "role": "info",
+                    "valType": "string"
                 },
                 "legendgroup": {
                     "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
@@ -12526,6 +13835,12 @@
                             "hvh",
                             "vhv"
                         ]
+                    },
+                    "simplify": {
+                        "description": "Simplifies lines by removing nearly-collinear points. When transitioning lines, it may be desirable to disable this so that the number of points along the resulting SVG path is unaffected.",
+                        "dflt": true,
+                        "role": "info",
+                        "valType": "boolean"
                     },
                     "smoothing": {
                         "description": "Has an effect only if `shape` is set to *spline* Sets the amount of smoothing. *0* corresponds to no smoothing (equivalent to a *linear* shape).",
@@ -12652,6 +13967,12 @@
                             "valType": "number"
                         },
                         "role": "object",
+                        "separatethousands": {
+                            "description": "If \"true\", even 4-digit integers are separated",
+                            "dflt": false,
+                            "role": "style",
+                            "valType": "boolean"
+                        },
                         "showexponent": {
                             "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                             "dflt": "all",
@@ -13396,6 +14717,8 @@
                 "stream": {
                     "maxpoints": {
                         "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot.",
+                        "dflt": 500,
+                        "max": 10000,
                         "min": 0,
                         "role": "info",
                         "valType": "number"
@@ -13873,11 +15196,12 @@
                     }
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "x",
@@ -14080,6 +15404,12 @@
                             "valType": "number"
                         },
                         "role": "object",
+                        "separatethousands": {
+                            "description": "If \"true\", even 4-digit integers are separated",
+                            "dflt": false,
+                            "role": "style",
+                            "valType": "boolean"
+                        },
                         "showexponent": {
                             "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                             "dflt": "all",
@@ -14606,6 +15936,8 @@
                 "stream": {
                     "maxpoints": {
                         "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot.",
+                        "dflt": 500,
+                        "max": 10000,
                         "min": 0,
                         "role": "info",
                         "valType": "number"
@@ -14761,6 +16093,27 @@
         },
         "scattergeo": {
             "attributes": {
+                "connectgaps": {
+                    "description": "Determines whether or not gaps (i.e. {nan} or missing values) in the provided data arrays are connected.",
+                    "dflt": false,
+                    "role": "info",
+                    "valType": "boolean"
+                },
+                "fill": {
+                    "description": "Sets the area to fill with a solid color. Use with `fillcolor` if not *none*. *toself* connects the endpoints of the trace (or each segment of the trace if it has gaps) into a closed shape.",
+                    "dflt": "none",
+                    "role": "style",
+                    "valType": "enumerated",
+                    "values": [
+                        "none",
+                        "toself"
+                    ]
+                },
+                "fillcolor": {
+                    "description": "Sets the fill color. Defaults to a half-transparent variant of the line color, marker color, or marker line color, whichever is available.",
+                    "role": "style",
+                    "valType": "color"
+                },
                 "geo": {
                     "description": "Sets a reference between this trace's geospatial coordinates and a geographic map. If *geo* (the default value), the geospatial coordinates refer to `layout.geo`. If *geo2*, the geospatial coordinates refer to `layout.geo2`, and so on.",
                     "dflt": "geo",
@@ -14768,11 +16121,12 @@
                     "valType": "subplotid"
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "lon",
@@ -14969,6 +16323,12 @@
                             "valType": "number"
                         },
                         "role": "object",
+                        "separatethousands": {
+                            "description": "If \"true\", even 4-digit integers are separated",
+                            "dflt": false,
+                            "role": "style",
+                            "valType": "boolean"
+                        },
                         "showexponent": {
                             "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                             "dflt": "all",
@@ -15697,6 +17057,8 @@
                 "stream": {
                     "maxpoints": {
                         "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot.",
+                        "dflt": 500,
+                        "max": 10000,
                         "min": 0,
                         "role": "info",
                         "valType": "number"
@@ -16046,11 +17408,12 @@
                     "valType": "color"
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "x",
@@ -16206,6 +17569,12 @@
                             "valType": "number"
                         },
                         "role": "object",
+                        "separatethousands": {
+                            "description": "If \"true\", even 4-digit integers are separated",
+                            "dflt": false,
+                            "role": "style",
+                            "valType": "boolean"
+                        },
                         "showexponent": {
                             "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                             "dflt": "all",
@@ -16656,6 +18025,8 @@
                 "stream": {
                     "maxpoints": {
                         "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot.",
+                        "dflt": 500,
+                        "max": 10000,
                         "min": 0,
                         "role": "info",
                         "valType": "number"
@@ -16769,11 +18140,12 @@
                     "valType": "color"
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "lon",
@@ -16948,6 +18320,12 @@
                             "valType": "number"
                         },
                         "role": "object",
+                        "separatethousands": {
+                            "description": "If \"true\", even 4-digit integers are separated",
+                            "dflt": false,
+                            "role": "style",
+                            "valType": "boolean"
+                        },
                         "showexponent": {
                             "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                             "dflt": "all",
@@ -17324,6 +18702,8 @@
                 "stream": {
                     "maxpoints": {
                         "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot.",
+                        "dflt": 500,
+                        "max": 10000,
                         "min": 0,
                         "role": "info",
                         "valType": "number"
@@ -17470,11 +18850,12 @@
                     "valType": "color"
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "a",
@@ -17657,6 +19038,12 @@
                             "valType": "number"
                         },
                         "role": "object",
+                        "separatethousands": {
+                            "description": "If \"true\", even 4-digit integers are separated",
+                            "dflt": false,
+                            "role": "style",
+                            "valType": "boolean"
+                        },
                         "showexponent": {
                             "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                             "dflt": "all",
@@ -18392,6 +19779,8 @@
                 "stream": {
                     "maxpoints": {
                         "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot.",
+                        "dflt": 500,
+                        "max": 10000,
                         "min": 0,
                         "role": "info",
                         "valType": "number"
@@ -18635,6 +20024,12 @@
                         "valType": "number"
                     },
                     "role": "object",
+                    "separatethousands": {
+                        "description": "If \"true\", even 4-digit integers are separated",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
                     "showexponent": {
                         "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
                         "dflt": "all",
@@ -19120,11 +20515,12 @@
                     "valType": "boolean"
                 },
                 "hoverinfo": {
-                    "description": "Determines which trace information appear on hover.",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
                     "dflt": "all",
                     "extras": [
                         "all",
-                        "none"
+                        "none",
+                        "skip"
                     ],
                     "flags": [
                         "x",
@@ -19252,6 +20648,8 @@
                 "stream": {
                     "maxpoints": {
                         "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot.",
+                        "dflt": 500,
+                        "max": 10000,
                         "min": 0,
                         "role": "info",
                         "valType": "number"
@@ -19336,5 +20734,80 @@
             "description": "The data the describes the coordinates of the surface is set in `z`. Data in `z` should be a {2D array}. Coordinates in `x` and `y` can either be 1D {arrays} or {2D arrays} (e.g. to graph parametric surfaces). If not provided in `x` and `y`, the x and y coordinates are assumed to be linear starting at 0 with a unit step. The color scale corresponds to the `z` values by default. For custom color scales, use `surfacecolor` which should be a {2D array}, where its bounds can be controlled using `cmin` and `cmax`."
         }
     },
-    "transforms": {}
+    "transforms": {
+        "candlestick": {
+            "attributes": {}
+        },
+        "filter": {
+            "attributes": {
+                "enabled": {
+                    "description": "Determines whether this filter transform is enabled or disabled.",
+                    "dflt": true,
+                    "valType": "boolean"
+                },
+                "filtersrc": {
+                    "description": "Sets the variable in the parent trace object by which the filter will be applied. To filter about nested variables, use *.* to access them. For example, set `filtersrc` to *marker.color* to filter about the marker color array.",
+                    "dflt": "x",
+                    "noBlank": true,
+                    "strict": true,
+                    "valType": "string"
+                },
+                "operation": {
+                    "description": "Sets the filter operation. *=* keeps items equal to `value` *<* keeps items less than `value` *<=* keeps items less than or equal to `value` *>* keeps items greater than `value` *>=* keeps items greater than or equal to `value` *[]* keeps items inside `value[0]` to value[1]` including both bounds` *()* keeps items inside `value[0]` to value[1]` excluding both bounds` *[)* keeps items inside `value[0]` to value[1]` including `value[0]` but excluding `value[1] *(]* keeps items inside `value[0]` to value[1]` excluding `value[0]` but including `value[1] *][* keeps items outside `value[0]` to value[1]` and equal to both bounds` *)(* keeps items outside `value[0]` to value[1]` *](* keeps items outside `value[0]` to value[1]` and equal to `value[0]` *)[* keeps items outside `value[0]` to value[1]` and equal to `value[1]` *{}* keeps items present in a set of values *}{* keeps items not present in a set of values",
+                    "dflt": "=",
+                    "valType": "enumerated",
+                    "values": [
+                        "=",
+                        "<",
+                        ">=",
+                        ">",
+                        "<=",
+                        "[]",
+                        "()",
+                        "[)",
+                        "(]",
+                        "][",
+                        ")(",
+                        "](",
+                        ")[",
+                        "{}",
+                        "}{"
+                    ]
+                },
+                "value": {
+                    "description": "Sets the value or values by which to filter by. Values are expected to be in the same type as the data linked to *filtersrc*. When `operation` is set to one of the inequality values (=,<,>=,>,<=) *value* is expected to be a number or a string. When `operation` is set to one of the interval value ([],(),[),(],][,)(,](,)[) *value* is expected to be 2-item array where the first item is the lower bound and the second item is the upper bound. When `operation`, is set to one of the set value ({},}{) *value* is expected to be an array with as many items as the desired set elements.",
+                    "dflt": 0,
+                    "valType": "any"
+                }
+            }
+        },
+        "groupby": {
+            "attributes": {
+                "enabled": {
+                    "description": "Determines whether this group-by transform is enabled or disabled.",
+                    "dflt": true,
+                    "valType": "boolean"
+                },
+                "groups": {
+                    "description": "Sets the groups in which the trace data will be split. For example, with `x` set to *[1, 2, 3, 4]* and `groups` set to *['a', 'b', 'a', 'b']*, the groupby transform with split in one trace with `x` [1, 3] and one trace with `x` [2, 4].",
+                    "dflt": [],
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "groupssrc": {
+                    "description": "Sets the source reference on plot.ly for  groups .",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "style": {
+                    "description": "Sets each group style. For example, with `groups` set to *['a', 'b', 'a', 'b']* and `style` set to *{ a: { marker: { color: 'red' } }} marker points in group *'a'* will be drawn in red.",
+                    "dflt": {},
+                    "valType": "any"
+                }
+            }
+        },
+        "ohlc": {
+            "attributes": {}
+        }
+    }
 }
