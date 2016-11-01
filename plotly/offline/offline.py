@@ -211,6 +211,12 @@ def _plot_html(figure_or_data, config, validate, default_width,
 
     jconfig = json.dumps(config_clean)
 
+    #config = {}
+    #config['showLink'] = show_link
+    #config['linkText'] = link_text
+    #jconfig = json.dumps(config)
+    #print jconfig
+
     # TODO: The get_config 'source of truth' should
     # really be somewhere other than plotly.plotly
     plotly_platform_url = plotly.plotly.get_config().get('plotly_domain',
@@ -308,9 +314,19 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     if not tools._ipython_imported:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
+    #plot_html, plotdivid, width, height = _plot_html(
+    #    figure_or_data, show_link, link_text, validate,
+    #    '100%', 525, global_requirejs=True)
+
     plot_html, plotdivid, width, height = _plot_html(
-        figure_or_data, show_link, link_text, validate,
-        '100%', 525, global_requirejs=True)
+        figure_or_data=figure_or_data,
+        config={},
+        #show_link,
+        #link_text,
+        validate=validate,
+        default_width='100%',
+        default_height=525,
+        global_requirejs=True)
 
     display(HTML(plot_html))
 
