@@ -187,35 +187,30 @@ def _plot_html(figure_or_data, config, validate, default_width,
     jlayout = json.dumps(figure.get('layout', {}), cls=utils.PlotlyJSONEncoder)
 
     configkeys = (
-    'editable',
-    'autosizable',
-    'fillFrame',
-    'frameMargins',
-    'scrollZoom',
-    'doubleClick',
-    'showTips',
-    'showLink',
-    'sendData',
-    'linkText',
-    'showSources',
-    'displayModeBar',
-    'modeBarButtonsToRemove',
-    'modeBarButtonsToAdd',
-    'modeBarButtons',
-    'displaylogo',
-    'plotGlPixelRatio',
-    'setBackground',
-    'topojsonURL')
+        'editable',
+        'autosizable',
+        'fillFrame',
+        'frameMargins',
+        'scrollZoom',
+        'doubleClick',
+        'showTips',
+        'showLink',
+        'sendData',
+        'linkText',
+        'showSources',
+        'displayModeBar',
+        'modeBarButtonsToRemove',
+        'modeBarButtonsToAdd',
+        'modeBarButtons',
+        'displaylogo',
+        'plotGlPixelRatio',
+        'setBackground',
+        'topojsonURL'
+    )
 
-    config_clean = dict((k,config[k]) for k in configkeys if k in config)
+    config_clean = dict((k, config[k]) for k in configkeys if k in config)
 
     jconfig = json.dumps(config_clean)
-
-    #config = {}
-    #config['showLink'] = show_link
-    #config['linkText'] = link_text
-    #jconfig = json.dumps(config)
-    #print jconfig
 
     # TODO: The get_config 'source of truth' should
     # really be somewhere other than plotly.plotly
@@ -314,19 +309,9 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     if not tools._ipython_imported:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
-    #plot_html, plotdivid, width, height = _plot_html(
-    #    figure_or_data, show_link, link_text, validate,
-    #    '100%', 525, global_requirejs=True)
-
     plot_html, plotdivid, width, height = _plot_html(
-        figure_or_data=figure_or_data,
-        config={},
-        #show_link,
-        #link_text,
-        validate=validate,
-        default_width='100%',
-        default_height=525,
-        global_requirejs=True)
+        figure_or_data, {}, validate, '100%', 525, True
+    )
 
     display(HTML(plot_html))
 
@@ -337,10 +322,10 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                              )
         # if image is given, and is a valid format, we will download the image
         script = get_image_download_script('iplot').format(format=image,
-                                                       width=image_width,
-                                                       height=image_height,
-                                                       filename=filename,
-                                                       plot_id=plotdivid)
+                                                           width=image_width,
+                                                           height=image_height,
+                                                           filename=filename,
+                                                           plot_id=plotdivid)
         # allow time for the plot to draw
         time.sleep(1)
         # inject code to download an image of the plot
