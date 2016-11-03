@@ -238,6 +238,7 @@ def plot(figure_or_data, validate=True, **plot_options):
 
     plot_options = _plot_option_logic(plot_options)
     res = _send_to_plotly(figure, **plot_options)
+
     if res['error'] == '':
         if plot_options['auto_open']:
             _open_url(res['url'])
@@ -1299,7 +1300,7 @@ class _api_v2:
                     "Plotly On-Premise server to request against this endpoint or "
                     "this endpoint may not be available yet.\nQuestions? "
                     "Visit community.plot.ly, contact your plotly administrator "
-                    "or upgrade to a Pro account for 1-1 help: https://goo.gl/1YUVu9 " 
+                    "or upgrade to a Pro account for 1-1 help: https://goo.gl/1YUVu9 "
                     .format(url=get_config()['plotly_api_domain'])
                 )
             else:
@@ -1425,7 +1426,8 @@ def _send_to_plotly(figure, **plot_options):
                    key=api_key,
                    origin='plot',
                    kwargs=kwargs)
-    #print fig
+
+    print payload
     #if 'frames' in fig:
     #    r = create_animations(fig, kwargs, payload)
 
