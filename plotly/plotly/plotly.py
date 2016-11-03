@@ -453,7 +453,6 @@ class Stream:
 
         """
         self.stream_id = stream_id
-        self.connected = False
         self._stream = None
 
     def get_streaming_specs(self):
@@ -499,6 +498,13 @@ class Stream:
                 "cannot write to a closed connection. "
                 "Call `open()` on the stream to open the stream."
             )
+   
+    @property
+    def connected(self):
+        if self._stream is None:
+            return False
+
+        return self._stream._isconnected()
 
     def open(self):
         """
@@ -1289,10 +1295,11 @@ class _api_v2:
                     != tools.get_config_defaults()['plotly_api_domain']):
                 raise exceptions.PlotlyError(
                     "This endpoint is unavailable at {url}. If you are using "
-                    "Plotly Enterprise, you may need to upgrade your Plotly "
-                    "Enterprise server to request against this endpoint or "
+                    "Plotly On-Premise, you may need to upgrade your Plotly "
+                    "Plotly On-Premise server to request against this endpoint or "
                     "this endpoint may not be available yet.\nQuestions? "
-                    "support@plot.ly or your plotly administrator."
+                    "Visit community.plot.ly, contact your plotly administrator "
+                    "or upgrade to a Pro account for 1-1 help: https://goo.gl/1YUVu9 " 
                     .format(url=get_config()['plotly_api_domain'])
                 )
             else:
