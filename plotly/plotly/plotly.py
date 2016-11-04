@@ -1400,13 +1400,9 @@ def add_share_key_to_url(plot_url, attempt=0):
 
 
 def _send_to_plotly(figure, **plot_options):
-    """
-
-    """
     fig = tools._replace_newline(figure)  # does not mutate figure
     data = json.dumps(fig['data'] if 'data' in fig else [],
                       cls=utils.PlotlyJSONEncoder)
-
     credentials = get_credentials()
     validate_credentials(credentials)
     username = credentials['username']
@@ -1427,14 +1423,15 @@ def _send_to_plotly(figure, **plot_options):
                    origin='plot',
                    kwargs=kwargs)
 
-    print payload
-    #if 'frames' in fig:
-    #    r = create_animations(fig, kwargs, payload)
+    if 'frames' in fig:
+        r = create_animations(fig, kwargs, payload)
+    else:
+        url = get_config()['plotly_domain'] + "/clientresp"
 
-    url = get_config()['plotly_domain'] + "/clientresp"
-
-    r = requests.post(url, data=payload,
-                      verify=get_config()['plotly_ssl_verification'])
+        r = requests.post(url, data=payload,
+                          verify=get_config()['plotly_ssl_verification'])
+        r.raise_for_status()
+        r = json.loads(r.text)
 
     if 'error' in r and r['error'] != '':
         raise exceptions.PlotlyError(r['error'])
@@ -1457,6 +1454,14 @@ def _send_to_plotly(figure, **plot_options):
 
 
 def create_animations(fig, kwargs, payload):
+    """
+    Makes a post to GRIDS and PLOTS if frames is in the figure.
+
+    This function bypasses the current '/clientresp' route  of making a POST
+    request to return back a url. Instead, the V2 REST API is used if frames
+    is part of the figure's keys. Currently, 'error', 'message' and 'warning'
+    are hard codded to the empty string.
+    """
     url_v2_plot = "https://api.plot.ly/v2/plots"
     url_v2_grid = "https://api.plot.ly/v2/grids"
     auth = HTTPBasicAuth(str(payload['un']), str(payload['key']))
@@ -1467,7 +1472,7 @@ def create_animations(fig, kwargs, payload):
         fig['layout'] = {}
 
     # make a copy of fig
-    fig_copy = copy.deepcopy(fig)
+    fig_with_uids = copy.deepcopy(fig)
 
     # make grid
     cols_dict = {}
@@ -1493,14 +1498,18 @@ def create_animations(fig, kwargs, payload):
     for j in range(len(fig['frames'])):
         for var in ['x', 'y']:
             if 'name' in fig['frames'][j]['data']:
-                cols_dict["{name}, {x_or_y}".format(name=fig['frames'][j]['data'][0]['name'],
-                                                    x_or_y=var)] = {
-                    "data": list(fig['frames'][j]['data'][0][var]), "order": counter
+                cols_dict["{name}, {x_or_y}".format(
+                    name=fig['frames'][j]['data'][0]['name'], x_or_y=var
+                    )] = {
+                    "data": list(fig['frames'][j]['data'][0][var]),
+                    "order": counter
                 }
             else:
-                cols_dict["Trace {num}, {x_or_y}".format(num=trace_num,
-                                                         x_or_y=var)] = {
-                    "data": list(fig['frames'][j]['data'][0][var]), "order": counter
+                cols_dict["Trace {num}, {x_or_y}".format(
+                    num=trace_num, x_or_y=var
+                    )] = {
+                    "data": list(fig['frames'][j]['data'][0][var]),
+                    "order": counter
                 }
             counter += 1
         trace_num += 1
@@ -1510,14 +1519,14 @@ def create_animations(fig, kwargs, payload):
         "world_readable": True
     }
 
-    r = requests.post('https://api.plot.ly/v2/grids', auth=auth,
+    r = requests.post(url_v2_grid, auth=auth,
                       headers=headers, json=grid_info)
     r_dict = json.loads(r.text)
 
     # make plot
     fid = r_dict['file']['fid']
     cols_index = 0
-    for trace in fig_copy['data']:
+    for trace in fig_with_uids['data']:
         if 'x' in trace:
             del trace['x']
         if 'y' in trace:
@@ -1533,27 +1542,38 @@ def create_animations(fig, kwargs, payload):
 
     # replace data in frames by grid ids
     for j in range(len(fig['frames'])):
-        if 'x' in fig_copy['frames'][j]['data'][0]:
-            del fig_copy['frames'][j]['data'][0]['x']
-        if 'y' in fig_copy['frames'][j]['data'][0]:
-            del fig_copy['frames'][j]['data'][0]['y']
+        if 'x' in fig_with_uids['frames'][j]['data'][0]:
+            del fig_with_uids['frames'][j]['data'][0]['x']
+        if 'y' in fig_with_uids['frames'][j]['data'][0]:
+            del fig_with_uids['frames'][j]['data'][0]['y']
 
-        fig_copy['frames'][j]['data'][0]["xsrc"] = "{fid}:{idlocal}".format(
+        fig_with_uids['frames'][j]['data'][0]["xsrc"] = "{fid}:{idlocal}".format(
             fid=fid, idlocal=r_dict['file']['cols'][cols_index]['uid']
         )
-        fig_copy['frames'][j]['data'][0]["ysrc"] = "{fid}:{idlocal}".format(
+        fig_with_uids['frames'][j]['data'][0]["ysrc"] = "{fid}:{idlocal}".format(
             fid=fid, idlocal=r_dict['file']['cols'][cols_index + 1]['uid']
         )
         cols_index += 2
 
     plots_info = {
-        "figure": fig_copy,
-        "world_readable": True
+        "figure": fig_with_uids,
+        "world_readable": json.loads(kwargs)['world_readable']
     }
 
-    requests.post('https://api.plot.ly/v2/plots', auth=auth,
-                  headers=headers, json=plots_info)
+    r = requests.post(url_v2_plot, auth=auth,
+                      headers=headers, json=plots_info)
 
+    r_json = json.loads(r.text)
+
+    r_dict = {
+        'error': '',
+        'filename': json.loads(kwargs)['filename'],
+        'message': '',
+        'url': r_json['file']['web_url'],
+        'warning': ''
+    }
+
+    return r_dict
 
 
 def _open_url(url):
