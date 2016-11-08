@@ -22,5 +22,5 @@ from . plotly import (
     meta_ops,
     file_ops,
     get_config,
-    create_animations
+    bad_create_animations
 )

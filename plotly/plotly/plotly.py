@@ -1423,15 +1423,15 @@ def _send_to_plotly(figure, **plot_options):
                    origin='plot',
                    kwargs=kwargs)
 
-    if 'frames' in fig:
-        r = create_animations(fig, kwargs, payload)
-    else:
-        url = get_config()['plotly_domain'] + "/clientresp"
+    #if 'frames' in fig:
+    #    r = create_animations(fig, kwargs, payload)
+    #else:
+    url = get_config()['plotly_domain'] + "/clientresp"
 
-        r = requests.post(url, data=payload,
-                          verify=get_config()['plotly_ssl_verification'])
-        r.raise_for_status()
-        r = json.loads(r.text)
+    r = requests.post(url, data=payload,
+                      verify=get_config()['plotly_ssl_verification'])
+    r.raise_for_status()
+    r = json.loads(r.text)
 
     if 'error' in r and r['error'] != '':
         raise exceptions.PlotlyError(r['error'])
@@ -1453,7 +1453,7 @@ def _send_to_plotly(figure, **plot_options):
     return r
 
 
-def create_animations(fig, kwargs, payload):
+def bad_create_animations(fig, kwargs, payload):
     """
     Makes a post to GRIDS and PLOTS if frames is in the figure.
 
