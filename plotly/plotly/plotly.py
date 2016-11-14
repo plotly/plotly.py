@@ -499,7 +499,7 @@ class Stream:
                 "cannot write to a closed connection. "
                 "Call `open()` on the stream to open the stream."
             )
-   
+
     @property
     def connected(self):
         if self._stream is None:
@@ -939,6 +939,7 @@ class grid_ops:
 
         paths = filename.split('/')
         parent_path = '/'.join(paths[0:-1])
+
         filename = paths[-1]
 
         if parent_path != '':
@@ -959,6 +960,7 @@ class grid_ops:
             payload['parent_path'] = parent_path
 
         upload_url = _api_v2.api_url('grids')
+
         req = requests.post(upload_url, data=payload,
                             headers=_api_v2.headers(),
                             verify=get_config()['plotly_ssl_verification'])
@@ -1423,9 +1425,6 @@ def _send_to_plotly(figure, **plot_options):
                    origin='plot',
                    kwargs=kwargs)
 
-    #if 'frames' in fig:
-    #    r = create_animations(fig, kwargs, payload)
-    #else:
     url = get_config()['plotly_domain'] + "/clientresp"
 
     r = requests.post(url, data=payload,
@@ -1574,6 +1573,39 @@ def bad_create_animations(fig, kwargs, payload):
     }
 
     return r_dict
+
+
+def get_uid_by_col_name(grid_url, col_name):
+    """
+    Search for a column of a grid by name and return the uid of the column.
+    """
+    credentials = get_credentials()
+    validate_credentials(credentials)
+    auth = HTTPBasicAuth(credentials['username'], credentials['api_key'])
+    headers = {'Plotly-Client-Platform': 'python'}
+    upload_url = _api_v2.api_url('grids')
+
+    tilda_index = grid_url.find('~')
+    fid_in_url = grid_url[tilda_index + 1: -1].replace('/', ':')
+    get_url = upload_url + '/' + fid_in_url
+
+    r = requests.get(get_url, auth=auth, headers=headers)
+    r_text = json.loads(r.text)
+
+    col_uid = ''
+    for col in r_text['cols']:
+        if col_name == col['name']:
+            col_uid = col['uid']
+            break
+
+    all_col_names = ([r_text['cols'][j]['name'] for j in
+                     range(len(r_text['cols']))])
+    if col_uid == '':
+        raise exceptions.PlotlyError(
+            'The col_name does not match with any column name in your grid. '
+            'The column names in your grid are {}'.format(all_col_names))
+    else:
+        return col_uid
 
 
 def _open_url(url):
