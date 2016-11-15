@@ -33,6 +33,7 @@ from plotly.plotly import chunked_requests
 from plotly.session import (sign_in, update_session_plot_options,
                             get_session_plot_options, get_session_credentials,
                             get_session_config)
+from plotly.grid_objs import grid_objs
 
 __all__ = None
 
@@ -384,6 +385,7 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
         raise exceptions.PlotlyError(
             "The 'file_id' argument must be a non-negative number."
         )
+
     response = requests.get(plotly_rest_url + resource,
                             headers=headers,
                             verify=get_config()['plotly_ssl_verification'])
@@ -1452,160 +1454,44 @@ def _send_to_plotly(figure, **plot_options):
     return r
 
 
-def bad_create_animations(fig, kwargs, payload):
+def get_grid(grid_url, raw=False):
     """
-    Makes a post to GRIDS and PLOTS if frames is in the figure.
+    Returns a JSON figure representation for the specified grid.
 
-    This function bypasses the current '/clientresp' route  of making a POST
-    request to return back a url. Instead, the V2 REST API is used if frames
-    is part of the figure's keys. Currently, 'error', 'message' and 'warning'
-    are hard codded to the empty string.
-    """
-    url_v2_plot = "https://api.plot.ly/v2/plots"
-    url_v2_grid = "https://api.plot.ly/v2/grids"
-    auth = HTTPBasicAuth(str(payload['un']), str(payload['key']))
-    headers = {'Plotly-Client-Platform': 'python'}
-
-    # add layout if not in fig
-    if 'layout' not in fig:
-        fig['layout'] = {}
-
-    # make a copy of fig
-    fig_with_uids = copy.deepcopy(fig)
-
-    # make grid
-    cols_dict = {}
-    frames_cols_dict = {}
-    counter = 0
-    trace_num = 0
-    for trace in fig['data']:
-        for var in ['x', 'y']:
-            if 'name' in trace:
-                cols_dict["{name}, {x_or_y}".format(name=trace['name'],
-                                                    x_or_y=var)] = {
-                    "data": list(trace[var]), "order": counter
-                }
-            else:
-                cols_dict["Trace {num}, {x_or_y}".format(num=trace_num,
-                                                         x_or_y=var)] = {
-                    "data": list(trace[var]), "order": counter
-                }
-            counter += 1
-        trace_num += 1
-
-    # add frames data to grid
-    for j in range(len(fig['frames'])):
-        for var in ['x', 'y']:
-            if 'name' in fig['frames'][j]['data']:
-                cols_dict["{name}, {x_or_y}".format(
-                    name=fig['frames'][j]['data'][0]['name'], x_or_y=var
-                    )] = {
-                    "data": list(fig['frames'][j]['data'][0][var]),
-                    "order": counter
-                }
-            else:
-                cols_dict["Trace {num}, {x_or_y}".format(
-                    num=trace_num, x_or_y=var
-                    )] = {
-                    "data": list(fig['frames'][j]['data'][0][var]),
-                    "order": counter
-                }
-            counter += 1
-        trace_num += 1
-
-    grid_info = {
-        "data": {"cols": cols_dict},
-        "world_readable": True
-    }
-
-    r = requests.post(url_v2_grid, auth=auth,
-                      headers=headers, json=grid_info)
-    r_dict = json.loads(r.text)
-
-    # make plot
-    fid = r_dict['file']['fid']
-    cols_index = 0
-    for trace in fig_with_uids['data']:
-        if 'x' in trace:
-            del trace['x']
-        if 'y' in trace:
-            del trace['y']
-
-        trace["xsrc"] = "{fid}:{idlocal}".format(
-            fid=fid, idlocal=r_dict['file']['cols'][cols_index]['uid']
-        )
-        trace["ysrc"] = "{fid}:{idlocal}".format(
-            fid=fid, idlocal=r_dict['file']['cols'][cols_index + 1]['uid']
-        )
-        cols_index += 2
-
-    # replace data in frames by grid ids
-    for j in range(len(fig['frames'])):
-        if 'x' in fig_with_uids['frames'][j]['data'][0]:
-            del fig_with_uids['frames'][j]['data'][0]['x']
-        if 'y' in fig_with_uids['frames'][j]['data'][0]:
-            del fig_with_uids['frames'][j]['data'][0]['y']
-
-        fig_with_uids['frames'][j]['data'][0]["xsrc"] = "{fid}:{idlocal}".format(
-            fid=fid, idlocal=r_dict['file']['cols'][cols_index]['uid']
-        )
-        fig_with_uids['frames'][j]['data'][0]["ysrc"] = "{fid}:{idlocal}".format(
-            fid=fid, idlocal=r_dict['file']['cols'][cols_index + 1]['uid']
-        )
-        cols_index += 2
-
-    plots_info = {
-        "figure": fig_with_uids,
-        "world_readable": json.loads(kwargs)['world_readable']
-    }
-
-    r = requests.post(url_v2_plot, auth=auth,
-                      headers=headers, json=plots_info)
-
-    r_json = json.loads(r.text)
-
-    r_dict = {
-        'error': '',
-        'filename': json.loads(kwargs)['filename'],
-        'message': '',
-        'url': r_json['file']['web_url'],
-        'warning': ''
-    }
-
-    return r_dict
-
-
-def get_uid_by_col_name(grid_url, col_name):
-    """
-    Search for a column of a grid by name and return the uid of the column.
+    :param (bool) raw: if False, will output a Grid instance of the JSON grid
+    being retrieved. If True, raw JSON will be returned.
     """
     credentials = get_credentials()
     validate_credentials(credentials)
-    auth = HTTPBasicAuth(credentials['username'], credentials['api_key'])
-    headers = {'Plotly-Client-Platform': 'python'}
+    username, api_key = credentials['username'], credentials['api_key']
+    headers = {'plotly-username': username,
+               'plotly-apikey': api_key,
+               'plotly-version': version.__version__,
+               'plotly-platform': 'python'}
     upload_url = _api_v2.api_url('grids')
 
     tilda_index = grid_url.find('~')
-    fid_in_url = grid_url[tilda_index + 1: -1].replace('/', ':')
-    get_url = upload_url + '/' + fid_in_url
-
-    r = requests.get(get_url, auth=auth, headers=headers)
-    r_text = json.loads(r.text)
-
-    col_uid = ''
-    for col in r_text['cols']:
-        if col_name == col['name']:
-            col_uid = col['uid']
-            break
-
-    all_col_names = ([r_text['cols'][j]['name'] for j in
-                     range(len(r_text['cols']))])
-    if col_uid == '':
-        raise exceptions.PlotlyError(
-            'The col_name does not match with any column name in your grid. '
-            'The column names in your grid are {}'.format(all_col_names))
+    if grid_url[-1] == '/':
+        fid_in_url = grid_url[tilda_index + 1: -1].replace('/', ':')
     else:
-        return col_uid
+        fid_in_url = grid_url[tilda_index + 1: len(grid_url)]
+        fid_in_url = fid_in_url.replace('/', ':')
+    get_url = upload_url + '/' + fid_in_url + '/content'
+
+    r = requests.get(get_url, headers=headers)
+    json_res = json.loads(r.text)
+    if raw is False:
+        # create a new grid
+        new_grid = grid_objs.Grid(
+            [grid_objs.Column(json_res['cols'][column]['data'], column)
+             for column in json_res['cols']]
+        )
+        # fill in uids
+        for column in new_grid:
+            column.id = json_res['cols'][column.name]['uid']
+        return new_grid
+    else:
+        return json_res
 
 
 def _open_url(url):

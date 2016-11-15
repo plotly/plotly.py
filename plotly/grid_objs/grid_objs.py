@@ -187,3 +187,17 @@ class Grid(MutableSequence):
         for column in self._columns:
             if column.name == column_name:
                 return column
+
+    def get_uid(self, column_name):
+        """
+        Return uid of given column name in grid.
+
+        Returns an empty string if either the column name does not exist in
+        the grid or if the id of the specified column has the empty string id.
+        """
+        uid = ''
+        for column in self._columns:
+            if column.name == column_name:
+                uid = column.id
+                break
+        return uid
