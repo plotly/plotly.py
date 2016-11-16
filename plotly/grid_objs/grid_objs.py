@@ -118,29 +118,63 @@ class Grid(MutableSequence):
     py.plot([trace], filename='graph from grid')
     ```
     """
-    def __init__(self, iterable_of_columns):
+    def __init__(self, columns_or_json):
         """
-        Initialize a grid with an iterable of
-        `plotly.grid_objs.Column objects
+        Initialize a grid with an iterable of `plotly.grid_objs.Column`
+        objects or a json/dict describing a grid. See second usage example
+        below for the necessary structure of the dict.
 
-        Usage example:
+        Example from iterable of columns:
         ```
         column_1 = Column([1, 2, 3], 'time')
         column_2 = Column([4, 2, 5], 'voltage')
         grid = Grid([column_1, column_2])
         ```
+        Example from json grid
+        ```
+        grid_json = {
+            'cols': {
+                'time': {'data': [1, 2, 3], 'order': 0, 'uid': '4cd7fc'},
+                'voltage': {'data': [4, 2, 5], 'order': 1, 'uid': u'2744be'}
+            }
+        }
+        grid = Grid(grid_json)
+        ```
         """
 
         # TODO: verify that columns are actually columns
+        if isinstance(columns_or_json, (list, tuple)):
+            column_names = [column.name for column in columns_or_json]
+            duplicate_name = utils.get_first_duplicate(column_names)
+            if duplicate_name:
+                err = exceptions.NON_UNIQUE_COLUMN_MESSAGE.format(duplicate_name)
+                raise exceptions.InputError(err)
 
-        column_names = [column.name for column in iterable_of_columns]
-        duplicate_name = utils.get_first_duplicate(column_names)
-        if duplicate_name:
-            err = exceptions.NON_UNIQUE_COLUMN_MESSAGE.format(duplicate_name)
-            raise exceptions.InputError(err)
+            self._columns = list(columns_or_json)
+            self.id = ''
+        elif isinstance(columns_or_json, dict):
+            # check if 'cols' is only root key
+            if 'cols' not in columns_or_json:
+                raise exceptions.PlotlyError(
+                    "'cols' must be the one and only key in your json grid."
+                )
 
-        self._columns = list(iterable_of_columns)
-        self.id = ''
+            # check if 'data', 'order' and 'uid' are not in columns
+            grid_col_keys = ['data', 'order', 'uid']
+
+            for column_name in columns_or_json['cols']:
+                for key in grid_col_keys:
+                    if key not in columns_or_json['cols'][column_name]:
+                        raise exceptions.PlotlyError(
+                            "Each column name of your dictionary must have "
+                            "'data', 'order' and 'uid' as keys."
+                        )
+
+            self._columns = [Column(columns_or_json['cols'][column_name]['data'], column_name)
+                             for column_name in columns_or_json['cols']]
+            # fill in uids
+            for column in self:
+                column.id = columns_or_json['cols'][column.name]['uid']
 
     def __repr__(self):
         return self._columns.__repr__()

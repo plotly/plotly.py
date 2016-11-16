@@ -33,7 +33,7 @@ from plotly.plotly import chunked_requests
 from plotly.session import (sign_in, update_session_plot_options,
                             get_session_plot_options, get_session_credentials,
                             get_session_config)
-from plotly.grid_objs import grid_objs
+from plotly.grid_objs import Grid, Column
 
 __all__ = None
 
@@ -1470,26 +1470,17 @@ def get_grid(grid_url, raw=False):
                'plotly-platform': 'python'}
     upload_url = _api_v2.api_url('grids')
 
-    tilda_index = grid_url.find('~')
-    if grid_url[-1] == '/':
-        fid_in_url = grid_url[tilda_index + 1: -1].replace('/', ':')
-    else:
-        fid_in_url = grid_url[tilda_index + 1: len(grid_url)]
-        fid_in_url = fid_in_url.replace('/', ':')
-    get_url = upload_url + '/' + fid_in_url + '/content'
+    # extract path in grid url
+    url_path = six.moves.urllib.parse.urlparse(grid_url)[2][2:]
+    if url_path[-1] == '/':
+        url_path = url_path[0: -1]
+    url_path = url_path.replace('/', ':')
+    get_url = upload_url + '/' + url_path + '/content'
 
     r = requests.get(get_url, headers=headers)
     json_res = json.loads(r.text)
     if raw is False:
-        # create a new grid
-        new_grid = grid_objs.Grid(
-            [grid_objs.Column(json_res['cols'][column]['data'], column)
-             for column in json_res['cols']]
-        )
-        # fill in uids
-        for column in new_grid:
-            column.id = json_res['cols'][column.name]['uid']
-        return new_grid
+        return Grid(json_res)
     else:
         return json_res
 
