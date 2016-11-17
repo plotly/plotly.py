@@ -143,20 +143,11 @@ class Grid(MutableSequence):
         """
 
         # TODO: verify that columns are actually columns
-        if isinstance(columns_or_json, (list, tuple)):
-            column_names = [column.name for column in columns_or_json]
-            duplicate_name = utils.get_first_duplicate(column_names)
-            if duplicate_name:
-                err = exceptions.NON_UNIQUE_COLUMN_MESSAGE.format(duplicate_name)
-                raise exceptions.InputError(err)
-
-            self._columns = list(columns_or_json)
-            self.id = ''
-        elif isinstance(columns_or_json, dict):
-            # check if 'cols' is only root key
+        if isinstance(columns_or_json, dict):
+            # check if 'cols' is a root key
             if 'cols' not in columns_or_json:
                 raise exceptions.PlotlyError(
-                    "'cols' must be the one and only key in your json grid."
+                    "'cols' must be a root key in your json grid."
                 )
 
             # check if 'data', 'order' and 'uid' are not in columns
@@ -169,12 +160,31 @@ class Grid(MutableSequence):
                             "Each column name of your dictionary must have "
                             "'data', 'order' and 'uid' as keys."
                         )
+            # order columns in a list before putting inside the grid
+            ordered_columns = []
+            for order in range(len(columns_or_json['cols'])):
+                for column_name in columns_or_json['cols'].keys():
+                    if columns_or_json['cols'][column_name]['order'] == order:
+                        break
 
-            self._columns = [Column(columns_or_json['cols'][column_name]['data'], column_name)
-                             for column_name in columns_or_json['cols']]
+                ordered_columns.append(Column(
+                    columns_or_json['cols'][column_name]['data'],
+                    column_name)
+                )
+            self._columns = ordered_columns
+
             # fill in uids
             for column in self:
                 column.id = columns_or_json['cols'][column.name]['uid']
+        else:
+            column_names = [column.name for column in columns_or_json]
+            duplicate_name = utils.get_first_duplicate(column_names)
+            if duplicate_name:
+                err = exceptions.NON_UNIQUE_COLUMN_MESSAGE.format(duplicate_name)
+                raise exceptions.InputError(err)
+
+            self._columns = list(columns_or_json)
+            self.id = ''
 
     def __repr__(self):
         return self._columns.__repr__()
