@@ -160,9 +160,16 @@ class Grid(MutableSequence):
                             "Each column name of your dictionary must have "
                             "'data', 'order' and 'uid' as keys."
                         )
-            # order columns in a list before putting inside the grid
+            # collect and sort all orders in case orders do not start
+            # at zero or there are jump discontinuities between them
+            all_orders = []
             ordered_columns = []
-            for order in range(len(columns_or_json['cols'])):
+            for column_name in columns_or_json['cols'].keys():
+                all_orders.append(columns_or_json['cols'][column_name]['order'])
+            all_orders.sort()
+
+            # put columns in order in a list
+            for order in all_orders:
                 for column_name in columns_or_json['cols'].keys():
                     if columns_or_json['cols'][column_name]['order'] == order:
                         break
