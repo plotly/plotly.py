@@ -408,7 +408,7 @@ def plot(figure_or_data,
         filename += '.html'
 
     plot_html, plotdivid, width, height = _plot_html(
-        figure_or_data, show_link, link_text, validate,
+        figure_or_data, config, validate,
         '100%', '100%', global_requirejs=False)
 
     resize_script = ''

@@ -1402,10 +1402,10 @@ def _send_to_plotly(figure, **plot_options):
     fig = tools._replace_newline(figure)  # does not mutate figure
 
     # replace '/' with ':' for errorless response
-    if 'data' in fig:
-        for item in fig['data']:
-            for key in ['xsrc', 'ysrc']:
-                item[key] = item[key].replace('/', ':')
+    #if 'data' in fig:
+    #    for item in fig['data']:
+    #        for key in ['xsrc', 'ysrc']:
+    #            item[key] = item[key].replace('/', ':')
 
     data = json.dumps(fig['data'] if 'data' in fig else [],
                       cls=utils.PlotlyJSONEncoder)
