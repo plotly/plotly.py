@@ -309,8 +309,12 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     if not tools._ipython_imported:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
+    config = {}
+    config['showLink'] = show_link
+    config['linkText'] = link_text
+
     plot_html, plotdivid, width, height = _plot_html(
-        figure_or_data, {}, validate, '100%', 525, True
+        figure_or_data, config, validate, '100%', 525, True
     )
 
     display(HTML(plot_html))
@@ -406,6 +410,10 @@ def plot(figure_or_data,
             "Your filename `" + filename + "` didn't end with .html. "
             "Adding .html to the end of your file.")
         filename += '.html'
+
+    config = {}
+    config['showLink'] = show_link
+    config['linkText'] = link_text
 
     plot_html, plotdivid, width, height = _plot_html(
         figure_or_data, config, validate,
