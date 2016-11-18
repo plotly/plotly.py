@@ -19,7 +19,8 @@
                 "description": "Any type.",
                 "otherOpts": [
                     "dflt",
-                    "values"
+                    "values",
+                    "arrayOk"
                 ],
                 "requiredOpts": []
             },
@@ -415,14 +416,10 @@
                 "role": "object"
             },
             "autosize": {
-                "description": "Determines whether or not the dimensions of the figure are computed as a function of the display size.",
+                "description": "Determines whether or not a layout width or height that has been left undefined by the user is initialized on each relayout. Note that, regardless of this attribute, an undefined layout width or height is always initialized on the first call to plot.",
+                "dflt": false,
                 "role": "info",
-                "valType": "enumerated",
-                "values": [
-                    true,
-                    false,
-                    "initial"
-                ]
+                "valType": "boolean"
             },
             "direction": {
                 "description": "For polar plots only. Sets the direction corresponding to positive angles.",
@@ -3014,7 +3011,7 @@
                 "active": {
                     "description": "Determines which button (by index starting from 0) is considered active.",
                     "dflt": 0,
-                    "min": -10,
+                    "min": 0,
                     "role": "info",
                     "valType": "number"
                 },
@@ -6148,6 +6145,18 @@
                         ]
                     }
                 },
+                "base": {
+                    "arrayOk": true,
+                    "description": "Sets where the bar base is drawn (in position axis units). In *stack* or *relative* barmode, traces that set *base* will be excluded and drawn in *overlay* mode instead.",
+                    "dflt": null,
+                    "role": "info",
+                    "valType": "any"
+                },
+                "basesrc": {
+                    "description": "Sets the source reference on plot.ly for  base .",
+                    "role": "info",
+                    "valType": "string"
+                },
                 "dx": {
                     "description": "Sets the x coordinate step. See `x0` for more info.",
                     "dflt": 1,
@@ -6856,6 +6865,18 @@
                     "role": "info",
                     "valType": "string"
                 },
+                "offset": {
+                    "arrayOk": true,
+                    "description": "Shifts the position where the bar is drawn (in position axis units). In *group* barmode, traces that set *offset* will be excluded and drawn in *overlay* mode instead.",
+                    "dflt": null,
+                    "role": "info",
+                    "valType": "number"
+                },
+                "offsetsrc": {
+                    "description": "Sets the source reference on plot.ly for  offset .",
+                    "role": "info",
+                    "valType": "string"
+                },
                 "opacity": {
                     "description": "Sets the opacity of the trace.",
                     "dflt": 1,
@@ -6945,6 +6966,19 @@
                         false,
                         "legendonly"
                     ]
+                },
+                "width": {
+                    "arrayOk": true,
+                    "description": "Sets the bar width (in position axis units).",
+                    "dflt": null,
+                    "min": 0,
+                    "role": "info",
+                    "valType": "number"
+                },
+                "widthsrc": {
+                    "description": "Sets the source reference on plot.ly for  width .",
+                    "role": "info",
+                    "valType": "string"
                 },
                 "x": {
                     "description": "Sets the x coordinates.",
@@ -20745,13 +20779,6 @@
                     "dflt": true,
                     "valType": "boolean"
                 },
-                "filtersrc": {
-                    "description": "Sets the variable in the parent trace object by which the filter will be applied. To filter about nested variables, use *.* to access them. For example, set `filtersrc` to *marker.color* to filter about the marker color array.",
-                    "dflt": "x",
-                    "noBlank": true,
-                    "strict": true,
-                    "valType": "string"
-                },
                 "operation": {
                     "description": "Sets the filter operation. *=* keeps items equal to `value` *<* keeps items less than `value` *<=* keeps items less than or equal to `value` *>* keeps items greater than `value` *>=* keeps items greater than or equal to `value` *[]* keeps items inside `value[0]` to value[1]` including both bounds` *()* keeps items inside `value[0]` to value[1]` excluding both bounds` *[)* keeps items inside `value[0]` to value[1]` including `value[0]` but excluding `value[1] *(]* keeps items inside `value[0]` to value[1]` excluding `value[0]` but including `value[1] *][* keeps items outside `value[0]` to value[1]` and equal to both bounds` *)(* keeps items outside `value[0]` to value[1]` *](* keeps items outside `value[0]` to value[1]` and equal to `value[0]` *)[* keeps items outside `value[0]` to value[1]` and equal to `value[1]` *{}* keeps items present in a set of values *}{* keeps items not present in a set of values",
                     "dflt": "=",
@@ -20774,8 +20801,21 @@
                         "}{"
                     ]
                 },
+                "target": {
+                    "arrayOk": true,
+                    "description": "Sets the filter target by which the filter is applied. If a string, *target* is assumed to be a reference to a data array in the parent trace object. To filter about nested variables, use *.* to access them. For example, set `target` to *marker.color* to filter about the marker color array. If an array, *target* is then the data array by which the filter is applied.",
+                    "dflt": "x",
+                    "noBlank": true,
+                    "strict": true,
+                    "valType": "string"
+                },
+                "targetsrc": {
+                    "description": "Sets the source reference on plot.ly for  target .",
+                    "role": "info",
+                    "valType": "string"
+                },
                 "value": {
-                    "description": "Sets the value or values by which to filter by. Values are expected to be in the same type as the data linked to *filtersrc*. When `operation` is set to one of the inequality values (=,<,>=,>,<=) *value* is expected to be a number or a string. When `operation` is set to one of the interval value ([],(),[),(],][,)(,](,)[) *value* is expected to be 2-item array where the first item is the lower bound and the second item is the upper bound. When `operation`, is set to one of the set value ({},}{) *value* is expected to be an array with as many items as the desired set elements.",
+                    "description": "Sets the value or values by which to filter by. Values are expected to be in the same type as the data linked to *target*. When `operation` is set to one of the inequality values (=,<,>=,>,<=) *value* is expected to be a number or a string. When `operation` is set to one of the interval value ([],(),[),(],][,)(,](,)[) *value* is expected to be 2-item array where the first item is the lower bound and the second item is the upper bound. When `operation`, is set to one of the set value ({},}{) *value* is expected to be an array with as many items as the desired set elements.",
                     "dflt": 0,
                     "valType": "any"
                 }
