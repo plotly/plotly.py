@@ -868,7 +868,7 @@ class grid_ops:
         for req_col in request_columns:
             for resp_col in response_columns:
                 if resp_col['name'] == req_col.name:
-                    req_col.id = '{0}/{1}'.format(grid_id, resp_col['uid'])
+                    req_col.id = '{0}:{1}'.format(grid_id, resp_col['uid'])
                     response_columns.remove(resp_col)
 
     @classmethod
