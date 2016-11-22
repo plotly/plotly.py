@@ -90,6 +90,7 @@ except ImportError:
 
 try:
     import scipy as scp
+    import scipy.stats
     _scipy_imported = True
 except ImportError:
     _scipy_imported = False
@@ -106,12 +107,12 @@ try:
 except ImportError:
     _scipy__cluster__hierarchy_imported = False
 
-try:
-    import scipy
-    import scipy.stats
-    _scipy_imported = True
-except ImportError:
-    _scipy_imported = False
+#try:
+#    import scipy
+#    import scipy.stats
+#    _scipy_imported = True
+#except ImportError:
+#    _scipy_imported = False
 
 
 def get_config_defaults():
@@ -6137,7 +6138,6 @@ class FigureFactory(object):
 
         data = sum(data, [])
         return graph_objs.Figure(data=data, layout=layout)
-
 
     @staticmethod
     def create_dendrogram(X, orientation="bottom", labels=None,
