@@ -6141,7 +6141,7 @@ class FigureFactory(object):
 
     @staticmethod
     def create_dendrogram(X, orientation="bottom", labels=None,
-                          colorscale=None, distfun=2,
+                          colorscale=None, distfun=None,
                           linkagefun=lambda x: sch.linkage(x, 'complete')):
         """
         BETA function that returns a dendrogram Plotly figure object.
@@ -7139,7 +7139,7 @@ class _Dendrogram(FigureFactory):
 
     def __init__(self, X, orientation='bottom', labels=None, colorscale=None,
                  width="100%", height="100%", xaxis='xaxis', yaxis='yaxis',
-                 distfun=scs.distance.pdist, linkagefun=lambda x: sch.linkage(x, 'complete')):
+                 distfun=None, linkagefun=lambda x: sch.linkage(x, 'complete')):
         # TODO: protected until #282
         from plotly.graph_objs import graph_objs
         self.orientation = orientation
@@ -7160,6 +7160,7 @@ class _Dendrogram(FigureFactory):
             self.sign[self.yaxis] = 1
         else:
             self.sign[self.yaxis] = -1
+        distfun = scs.distance.pdist
 
         (dd_traces, xvals, yvals,
             ordered_labels, leaves) = self.get_dendrogram_traces(X, colorscale, distfun, linkagefun)
