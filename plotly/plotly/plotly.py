@@ -210,7 +210,6 @@ def plot(figure_or_data, validate=True, **plot_options):
 
     """
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
-
     for entry in figure['data']:
         if ('type' in entry) and (entry['type'] == 'scattergl'):
             continue
@@ -499,7 +498,7 @@ class Stream:
                 "cannot write to a closed connection. "
                 "Call `open()` on the stream to open the stream."
             )
-   
+
     @property
     def connected(self):
         if self._stream is None:
@@ -869,7 +868,7 @@ class grid_ops:
         for req_col in request_columns:
             for resp_col in response_columns:
                 if resp_col['name'] == req_col.name:
-                    req_col.id = '{0}/{1}'.format(grid_id, resp_col['uid'])
+                    req_col.id = '{0}:{1}'.format(grid_id, resp_col['uid'])
                     response_columns.remove(resp_col)
 
     @classmethod
@@ -1400,9 +1399,6 @@ def add_share_key_to_url(plot_url, attempt=0):
 
 
 def _send_to_plotly(figure, **plot_options):
-    """
-
-    """
     fig = tools._replace_newline(figure)  # does not mutate figure
     data = json.dumps(fig['data'] if 'data' in fig else [],
                       cls=utils.PlotlyJSONEncoder)
@@ -1414,8 +1410,7 @@ def _send_to_plotly(figure, **plot_options):
                              fileopt=plot_options['fileopt'],
                              world_readable=plot_options['world_readable'],
                              sharing=plot_options['sharing'],
-                             layout=fig['layout'] if 'layout' in fig
-                             else {}),
+                             layout=fig['layout'] if 'layout' in fig else {}),
                         cls=utils.PlotlyJSONEncoder)
 
     # TODO: It'd be cool to expose the platform for RaspPi and others
