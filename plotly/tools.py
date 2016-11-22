@@ -6208,7 +6208,8 @@ class FigureFactory(object):
         if len(s) != 2:
             exceptions.PlotlyError("X should be 2-dimensional array.")
 
-        distfun = scs.distance.pdist
+        if distfun is None:
+            distfun = scs.distance.pdist
 
         dendrogram = _Dendrogram(X, orientation, labels, colorscale,
                                  distfun=distfun, linkagefun=linkagefun)
@@ -7160,7 +7161,9 @@ class _Dendrogram(FigureFactory):
             self.sign[self.yaxis] = 1
         else:
             self.sign[self.yaxis] = -1
-        distfun = scs.distance.pdist
+
+        if distfun is None:
+            distfun = scs.distance.pdist
 
         (dd_traces, xvals, yvals,
             ordered_labels, leaves) = self.get_dendrogram_traces(X, colorscale, distfun, linkagefun)
