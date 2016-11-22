@@ -6140,9 +6140,9 @@ class FigureFactory(object):
         return graph_objs.Figure(data=data, layout=layout)
 
     @staticmethod
-    def create_dendrogram(X, orientation="bottom", labels=None,
-                          colorscale=None, distfun=scs.distance.pdist,
-                          linkagefun=lambda x: sch.linkage(x, 'complete')):
+    def create_dendrogram(X, orientation="bottom", labels=None, 
+                          colorscale=None, distfun=2,
+                          linkagefun=lambda x: sch.linkage(x, 'complete')): #scs.distance.pdist,
         """
         BETA function that returns a dendrogram Plotly figure object.
 
@@ -6207,6 +6207,8 @@ class FigureFactory(object):
         s = X.shape
         if len(s) != 2:
             exceptions.PlotlyError("X should be 2-dimensional array.")
+
+        distfun = scs.distance.pdist
 
         dendrogram = _Dendrogram(X, orientation, labels, colorscale,
                                  distfun=distfun, linkagefun=linkagefun)
