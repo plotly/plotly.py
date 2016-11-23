@@ -14,6 +14,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - Trisurf now uses correct `Plotly Colorscales` when called
+- `iplot()` and `plot()` now work offline
+- uploading grids via `py.upload()` now replaces columns in grid with `id` of the form `fid:uid`, not `fid/uid`
 
 ## [1.12.9] - 2016-08-22
 ### Fixed
