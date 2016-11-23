@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [1.12.10] - 2016-11-23
 ### Updated
 - `FF.create_violin` and `FF.create_scatterplotmatrix` now by default do not print subplot grid information in output
 
