@@ -16,7 +16,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - Trisurf now uses correct `Plotly Colorscales` when called
-- list of `configkeys` added to hidden function `plotly.offline._plot_html` in addition to `show_link` and `link_text` which can be set in the function signatures of the functions in `plotly.offline`. No change for the user.
 - Fixed a bug in the format of unique-identifiers in columns of grids that are uploaded to plotly via `plotly.plotly.upload`. See https://github.com/plotly/plotly.py/pull/599 for details. In particular, creating plots that are based off of plotly grids is no longer broken. Here is an example:
 
 ```
