@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [1.12.10] - 2016-11-23
 ### Updated
 - `FF.create_violin` and `FF.create_scatterplotmatrix` now by default do not print subplot grid information in output
 
@@ -14,8 +16,24 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - Trisurf now uses correct `Plotly Colorscales` when called
-- `iplot()` and `plot()` now work offline
-- uploading grids via `py.upload()` now replaces columns in grid with `id` of the form `fid:uid`, not `fid/uid`
+- Fixed a bug in the format of unique-identifiers in columns of grids that are uploaded to plotly via `plotly.plotly.upload`. See https://github.com/plotly/plotly.py/pull/599 for details. In particular, creating plots that are based off of plotly grids is no longer broken. Here is an example:
+
+```
+import plotly.plotly as py
+from plotly.grid_objs import Grid, Column
+
+c1 = Column([6, 6, 6, 5], 'column 1')
+c2 = Column(['a', 'b', 'c', 'd'], 'column 2')
+g = Grid([c1, c2])
+
+# Upload the grid 
+py.grid_ops.upload(g, 'my-grid', auto_open=False)
+
+# Make a graph that with data that is referenced from that grid
+trace = Scatter(xsrc=g[0], ysrc=g[1])
+url = py.plot([trace], filename='my-plot')
+```
+Then, whenever you update the data in `'my-grid'`, the associated plot will update too. See https://plot.ly/python/data-api for more details on usage and examples.
 
 ## [1.12.9] - 2016-08-22
 ### Fixed
