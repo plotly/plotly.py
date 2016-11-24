@@ -218,7 +218,7 @@ def _plot_html(figure_or_data, config, validate, default_width,
         'topojsonURL'
     )
 
-    config_clean = dict((k,config[k]) for k in configkeys if k in config)
+    config_clean = dict((k, config[k]) for k in configkeys if k in config)
 
     jconfig = json.dumps(config_clean)
 
@@ -339,9 +339,13 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     if not tools._ipython_imported:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
+    config = {}
+    config['showLink'] = show_link
+    config['linkText'] = link_text
+
     plot_html, plotdivid, width, height = _plot_html(
-        figure_or_data, show_link, link_text, validate,
-        '100%', 525, global_requirejs=True)
+        figure_or_data, config, validate, '100%', 525, True
+    )
 
     display(HTML(plot_html))
 
@@ -437,8 +441,12 @@ def plot(figure_or_data,
             "Adding .html to the end of your file.")
         filename += '.html'
 
+    config = {}
+    config['showLink'] = show_link
+    config['linkText'] = link_text
+
     plot_html, plotdivid, width, height = _plot_html(
-        figure_or_data, show_link, link_text, validate,
+        figure_or_data, config, validate,
         '100%', '100%', global_requirejs=False)
 
     resize_script = ''
