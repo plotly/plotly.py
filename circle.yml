@@ -4,7 +4,7 @@ machine:
 
     PLOTLY_PACKAGE_ROOT: /home/ubuntu/${CIRCLE_PROJECT_REPONAME}
     PLOTLY_CONFIG_DIR: ${HOME}/.plotly
-    PLOTLY_PYTHON_VERSIONS: 2.7.8 3.3.3 3.4.1
+    PLOTLY_PYTHON_VERSIONS: 2.7.10 3.3.3 3.4.3
     PLOTLY_CORE_REQUIREMENTS_FILE: ${PLOTLY_PACKAGE_ROOT}/requirements.txt
     PLOTLY_OPTIONAL_REQUIREMENTS_FILE: ${PLOTLY_PACKAGE_ROOT}/optional-requirements.txt
 
@@ -13,7 +13,8 @@ dependencies:
   override:
 
     # run all the pre-written installers (this will take a *while*)
-    - bash circle/setup.sh
+    - bash circle/setup.sh:
+        timeout: 1200
 
     # install testing tools for circle's version of things
     - pip install nose coverage
