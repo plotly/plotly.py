@@ -1476,6 +1476,7 @@ def get_grid(grid_url, raw=False):
         url_path = url_path[0: -1]
     url_path = url_path.replace('/', ':')
     get_url = upload_url + '/' + url_path + '/content'
+    print url_path
 
     r = requests.get(get_url, headers=headers)
     json_res = json.loads(r.text)
