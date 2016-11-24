@@ -1455,3 +1455,28 @@ def _open_url(url):
         wbopen(url)
     except:  # TODO: what should we except here? this is dangerous
         pass
+
+
+def get_plot_url_by_path(path, user=None, parent=None):
+    """
+    Get the share url of a plot based on the path of the file.
+
+    THIS FUNCTION IS IN BETA! It may change or move without warning.
+
+    :param (str) path: Partial file path (can just be the filename)
+    :param (str) user: The username of the plotly user who owns the file.
+    :param (int) parent: The id of the parent folder. E.g, home folder is `-1`.
+    :raises: (PlotlyError) If underlying api request fails.
+    :return: (str) The url for the plot. This can be passed to get_figure()
+
+    """
+    url = _api_v2.api_url('plots/lookup')
+    query_string = '?path={}'.format(path)
+    if user is not None:
+        query_string += '&user={}'.format(user)
+    if parent is not None:
+        query_string == '&parent={}'.format(parent)
+    headers = _api_v2.headers()
+    response = requests.get('{}{}'.format(url, query_string), headers=headers)
+    response_dict = _api_v2.response_handler(response)
+    return response_dict['web_url']
