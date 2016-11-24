@@ -966,6 +966,10 @@ class grid_ops:
         req = requests.post(upload_url, data=payload,
                             headers=_api_v2.headers(),
                             verify=get_config()['plotly_ssl_verification'])
+        print payload
+        print ''
+        print ''
+        print _api_v2.headers()
 
         res = _api_v2.response_handler(req)
 
@@ -977,6 +981,7 @@ class grid_ops:
         cls._fill_in_response_column_ids(grid, response_columns, grid_id)
 
         grid.id = grid_id
+        #grid._fid = res['file']['fid']
 
         if meta is not None:
             meta_ops.upload(meta, grid=grid)

@@ -193,6 +193,8 @@ class Grid(MutableSequence):
             self._columns = list(columns_or_json)
             self.id = ''
 
+        #self._fid = ''
+
     def __repr__(self):
         return self._columns.__repr__()
 
@@ -241,7 +243,7 @@ class Grid(MutableSequence):
 
     def get_uid(self, column_name):
         """
-        Return uid of given column name in grid.
+        Return uid of given column name in the grid by column name.
 
         Returns an empty string if either the column name does not exist in
         the grid or if the id of the specified column has the empty string id.
@@ -252,3 +254,16 @@ class Grid(MutableSequence):
                 uid = column.id
                 break
         return uid
+
+#    def get_fid_uid(self, column_name):
+#        """
+#        Return the fid:uid string of given column in the grid by column name.
+#
+#        Returns just the fid: string if the column name is not in the grid.
+#        """
+#        uid = ''
+#        for column in self._columns:
+#            if column.name == column_name:
+#                uid = column.id
+#                break
+#        return self._fid + ':' + uid
