@@ -268,16 +268,3 @@ class Grid(MutableSequence):
                 uid = column.id
                 break
         return uid
-
-#    def get_fid_uid(self, column_name):
-#        """
-#        Return the fid:uid string of given column in the grid by column name.
-#
-#        Returns just the fid: string if the column name is not in the grid.
-#        """
-#        uid = ''
-#        for column in self._columns:
-#            if column.name == column_name:
-#                uid = column.id
-#                break
-#        return self._fid + ':' + uid
