@@ -977,7 +977,6 @@ class grid_ops:
         cls._fill_in_response_column_ids(grid, response_columns, grid_id)
 
         grid.id = grid_id
-        #grid._fid = res['file']['fid']
 
         if meta is not None:
             meta_ops.upload(meta, grid=grid)
@@ -1476,13 +1475,20 @@ def get_grid(grid_url, raw=False):
     if url_path[-1] == '/':
         url_path = url_path[0: -1]
     url_path = url_path.replace('/', ':')
-    get_url = upload_url + '/' + url_path + '/content'
-    print url_path
+
+    meta_get_url = upload_url + '/' + url_path
+    get_url = meta_get_url + '/content'
 
     r = requests.get(get_url, headers=headers)
     json_res = json.loads(r.text)
+
+    # make request to grab the grid id (fid)
+    r_meta = requests.get(meta_get_url, headers=headers)
+    json_res_meta = json.loads(r_meta.text)
+    retrieved_grid_id = json_res_meta['fid']
+
     if raw is False:
-        return Grid(json_res)
+        return Grid(json_res, retrieved_grid_id)
     else:
         return json_res
 

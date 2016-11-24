@@ -118,11 +118,16 @@ class Grid(MutableSequence):
     py.plot([trace], filename='graph from grid')
     ```
     """
-    def __init__(self, columns_or_json):
+    def __init__(self, columns_or_json, grid_id=None):
         """
         Initialize a grid with an iterable of `plotly.grid_objs.Column`
         objects or a json/dict describing a grid. See second usage example
         below for the necessary structure of the dict.
+
+        :param (str|bool) grid_id: should not be accessible to users. Default
+            is 'None' but if a grid is retrieved via `py.get_grid()` then the
+            retrieved grid response will contain the grid_id which will be
+            necessary to set `self.id` and `self._columns.id` below.
 
         Example from iterable of columns:
         ```
@@ -141,9 +146,19 @@ class Grid(MutableSequence):
         grid = Grid(grid_json)
         ```
         """
-
         # TODO: verify that columns are actually columns
         if isinstance(columns_or_json, dict):
+            # check that grid_id is entered
+            if grid_id is None:
+                raise exceptions.PlotlyError(
+                    "If you are manually converting a raw json/dict grid "
+                    "into a Grid instance, you must ensure that make "
+                    "'grid_id' is set to your file ID. This looks like "
+                    "'username:187'."
+                )
+            # TODO: verify that grid_id is a correct fid if a string
+            self.id = grid_id
+
             # check if 'cols' is a root key
             if 'cols' not in columns_or_json:
                 raise exceptions.PlotlyError(
@@ -182,7 +197,8 @@ class Grid(MutableSequence):
 
             # fill in uids
             for column in self:
-                column.id = columns_or_json['cols'][column.name]['uid']
+                column.id = self.id + ':' + columns_or_json['cols'][column.name]['uid']
+
         else:
             column_names = [column.name for column in columns_or_json]
             duplicate_name = utils.get_first_duplicate(column_names)
@@ -192,8 +208,6 @@ class Grid(MutableSequence):
 
             self._columns = list(columns_or_json)
             self.id = ''
-
-        #self._fid = ''
 
     def __repr__(self):
         return self._columns.__repr__()
@@ -241,7 +255,7 @@ class Grid(MutableSequence):
             if column.name == column_name:
                 return column
 
-    def get_uid(self, column_name):
+    def get_fid_uid(self, column_name):
         """
         Return uid of given column name in the grid by column name.
 
