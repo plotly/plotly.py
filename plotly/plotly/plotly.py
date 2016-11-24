@@ -1493,6 +1493,42 @@ def get_grid(grid_url, raw=False):
         return json_res
 
 
+def create_animations(figure, filename=None, sharing='public'):
+    """
+    Put description here.
+
+    For parameter descriptions, see the doc string for `py.plot()`.
+    `private` is not supported currently for param 'sharing'. Returns the
+    url for the plot if response is ok.
+    """
+    credentials = get_credentials()
+    validate_credentials(credentials)
+    username, api_key = credentials['username'], credentials['api_key']
+    auth = HTTPBasicAuth(str(username), str(api_key))
+    headers = {'Plotly-Client-Platform': 'python'}
+
+    json = {
+        'figure': figure,
+        'world_readable': 'true'
+    }
+
+    # set filename if specified
+    if filename:
+        json['filename'] = filename
+
+    # set sharing
+    if sharing == 'public':
+        json['world_readable'] = 'true'
+    elif sharing == 'private':
+        json['world_readable'] = 'false'
+
+    api_url = _api_v2.api_url('plots')
+    r = requests.post(api_url, auth=auth, headers=headers, json=json)
+
+    json_r = json.loads(r.text)
+    return json_r['file']['web_url']
+
+
 def _open_url(url):
     try:
         from webbrowser import open as wbopen
