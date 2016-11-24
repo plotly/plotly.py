@@ -966,10 +966,6 @@ class grid_ops:
         req = requests.post(upload_url, data=payload,
                             headers=_api_v2.headers(),
                             verify=get_config()['plotly_ssl_verification'])
-        print payload
-        print ''
-        print ''
-        print _api_v2.headers()
 
         res = _api_v2.response_handler(req)
 
