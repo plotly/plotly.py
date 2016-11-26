@@ -118,15 +118,15 @@ class Grid(MutableSequence):
     py.plot([trace], filename='graph from grid')
     ```
     """
-    def __init__(self, columns_or_json, grid_id=None):
+    def __init__(self, columns_or_json, fid=None):
         """
         Initialize a grid with an iterable of `plotly.grid_objs.Column`
         objects or a json/dict describing a grid. See second usage example
         below for the necessary structure of the dict.
 
-        :param (str|bool) grid_id: should not be accessible to users. Default
+        :param (str|bool) fid: should not be accessible to users. Default
             is 'None' but if a grid is retrieved via `py.get_grid()` then the
-            retrieved grid response will contain the grid_id which will be
+            retrieved grid response will contain the fid which will be
             necessary to set `self.id` and `self._columns.id` below.
 
         Example from iterable of columns:
@@ -148,16 +148,16 @@ class Grid(MutableSequence):
         """
         # TODO: verify that columns are actually columns
         if isinstance(columns_or_json, dict):
-            # check that grid_id is entered
-            if grid_id is None:
+            # check that fid is entered
+            if fid is None:
                 raise exceptions.PlotlyError(
                     "If you are manually converting a raw json/dict grid "
                     "into a Grid instance, you must ensure that make "
-                    "'grid_id' is set to your file ID. This looks like "
+                    "'fid' is set to your file ID. This looks like "
                     "'username:187'."
                 )
-            # TODO: verify that grid_id is a correct fid if a string
-            self.id = grid_id
+            # TODO: verify that fid is a correct fid if a string
+            self.id = fid
 
             # check if 'cols' is a root key
             if 'cols' not in columns_or_json:
@@ -255,16 +255,26 @@ class Grid(MutableSequence):
             if column.name == column_name:
                 return column
 
-    def get_fid_uid(self, column_name):
+    def get_column_reference(self, column_name):
         """
-        Return uid of given column name in the grid by column name.
+        Returns the column reference of given column in the grid by its name.
 
-        Returns an empty string if either the column name does not exist in
-        the grid or if the id of the specified column has the empty string id.
+        Raises an error if the column name is not in the grid. Otherwise,
+        returns the fid:uid pair, which may be the empty string.
         """
-        uid = ''
+        col_names = []
+        for column in self._columns:
+            col_names.append(column.name)
+
+        column_id = None
         for column in self._columns:
             if column.name == column_name:
-                uid = column.id
+                column_id = column.id
                 break
-        return uid
+
+        if column_id is None:
+            raise exceptions.PlotlyError(
+                "Whoops, that column name doesn't match any of the column "
+                "names in your grid. You must pick from {cols}".format(col_names)
+            )
+        return column_id

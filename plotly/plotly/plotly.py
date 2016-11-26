@@ -1456,7 +1456,7 @@ def _send_to_plotly(figure, **plot_options):
 
 def get_grid(grid_url, raw=False):
     """
-    Returns a JSON figure representation for the specified grid.
+    Returns the specified grid as a Grid instance or in JSON/dict form.
 
     :param (bool) raw: if False, will output a Grid instance of the JSON grid
     being retrieved. If True, raw JSON will be returned.
@@ -1502,7 +1502,7 @@ def create_animations(figure, filename=None, sharing='public', auto_open=True):
     to `plotly.plotly.plot`, folder-creation and overwriting are not supported
     but creating a plot with or without animations via frames is supported.
 
-    :param (str) filename: if set to 'None', an automatically generated plot
+    :param (str) filename: if set to 'None', an automatically-generated plot
         name will be created. Does not support folder creation, meaning that
         a folder of the form 'folder/name' will NOT create a the folder and
         place the plot in it.
@@ -1526,8 +1526,8 @@ def create_animations(figure, filename=None, sharing='public', auto_open=True):
     figure = {
         'data': [
             {
-                'xsrc': grid.get_fid_uid('x'),
-                'ysrc': grid.get_fid_uid('y')
+                'xsrc': grid.get_column_reference('x'),
+                'ysrc': grid.get_column_reference('y')
             }
         ],
         'layout': {'title': 'First Title'},
@@ -1535,8 +1535,8 @@ def create_animations(figure, filename=None, sharing='public', auto_open=True):
             {
                 'data': [
                     {
-                        'xsrc': grid.get_fid_uid('new x'),
-                        'ysrc': grid.get_fid_uid('new y')
+                        'xsrc': grid.get_column_reference('new x'),
+                        'ysrc': grid.get_column_reference('new y')
                     }
                 ],
                 'layout': {'title': 'Second Title'}
@@ -1615,6 +1615,7 @@ def icreate_animations(figure, filename=None, sharing='public', auto_open=False)
     This function is based off `plotly.plotly.iplot`. See `plotly.plotly.
     create_animations` Doc String for param descriptions.
     """
+    # TODO - create a wrapper for iplot and icreate_animations
     url = create_animations(figure, filename, sharing, auto_open)
 
     if isinstance(figure, dict):
