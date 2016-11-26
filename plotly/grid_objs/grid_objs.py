@@ -152,11 +152,10 @@ class Grid(MutableSequence):
             if fid is None:
                 raise exceptions.PlotlyError(
                     "If you are manually converting a raw json/dict grid "
-                    "into a Grid instance, you must ensure that make "
-                    "'fid' is set to your file ID. This looks like "
-                    "'username:187'."
+                    "into a Grid instance, you must ensure that 'fid' is "
+                    "set to your file ID. This looks like 'username:187'."
                 )
-            # TODO: verify that fid is a correct fid if a string
+
             self.id = fid
 
             # check if 'cols' is a root key
@@ -195,7 +194,7 @@ class Grid(MutableSequence):
                 )
             self._columns = ordered_columns
 
-            # fill in uids
+            # fill in column_ids
             for column in self:
                 column.id = self.id + ':' + columns_or_json['cols'][column.name]['uid']
 
@@ -262,10 +261,6 @@ class Grid(MutableSequence):
         Raises an error if the column name is not in the grid. Otherwise,
         returns the fid:uid pair, which may be the empty string.
         """
-        col_names = []
-        for column in self._columns:
-            col_names.append(column.name)
-
         column_id = None
         for column in self._columns:
             if column.name == column_name:
@@ -273,8 +268,11 @@ class Grid(MutableSequence):
                 break
 
         if column_id is None:
+            col_names = []
+            for column in self._columns:
+                col_names.append(column.name)
             raise exceptions.PlotlyError(
                 "Whoops, that column name doesn't match any of the column "
-                "names in your grid. You must pick from {cols}".format(col_names)
+                "names in your grid. You must pick from {cols}".format(cols=col_names)
             )
         return column_id

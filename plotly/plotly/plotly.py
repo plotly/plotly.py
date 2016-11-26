@@ -1594,7 +1594,7 @@ def create_animations(figure, filename=None, sharing='public', auto_open=True):
         parsed_response = r.content
 
     if 'error' in r and r['error'] != '':
-        raise exceptions.PlotlyError(r['message'])
+        raise exceptions.PlotlyError(r['error'])
 
     if sharing == 'secret':
         web_url = (parsed_response['file']['web_url'][:-1] +
@@ -1615,7 +1615,7 @@ def icreate_animations(figure, filename=None, sharing='public', auto_open=False)
     This function is based off `plotly.plotly.iplot`. See `plotly.plotly.
     create_animations` Doc String for param descriptions.
     """
-    # TODO - create a wrapper for iplot and icreate_animations
+    # Still needs doing: create a wrapper for iplot and icreate_animations
     url = create_animations(figure, filename, sharing, auto_open)
 
     if isinstance(figure, dict):
