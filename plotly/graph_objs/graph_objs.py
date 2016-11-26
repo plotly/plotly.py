@@ -836,6 +836,22 @@ def _patch_figure_class(figure_class):
                                                   _parent_key='data')
     figure_class.__init__ = __init__
 
+    # TODO better integrate frames into Figure - #604
+    def __setitem__(self, key, value, **kwargs):
+        if key == 'frames':
+            super(PlotlyDict, self).__setitem__(key, value)
+        else:
+            super(figure_class, self).__setitem__(key, value, **kwargs)
+    figure_class.__setitem__ = __setitem__
+
+    def _get_valid_attributes(self):
+        super(figure_class, self)._get_valid_attributes()
+        # TODO better integrate frames into Figure - #604
+        if 'frames' not in self._valid_attributes:
+            self._valid_attributes.add('frames')
+        return self._valid_attributes
+    figure_class._get_valid_attributes = _get_valid_attributes
+
     def get_data(self, flatten=False):
         """
         Returns the JSON for the plot with non-data elements stripped.

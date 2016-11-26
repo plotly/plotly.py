@@ -118,29 +118,95 @@ class Grid(MutableSequence):
     py.plot([trace], filename='graph from grid')
     ```
     """
-    def __init__(self, iterable_of_columns):
+    def __init__(self, columns_or_json, fid=None):
         """
-        Initialize a grid with an iterable of
-        `plotly.grid_objs.Column objects
+        Initialize a grid with an iterable of `plotly.grid_objs.Column`
+        objects or a json/dict describing a grid. See second usage example
+        below for the necessary structure of the dict.
 
-        Usage example:
+        :param (str|bool) fid: should not be accessible to users. Default
+            is 'None' but if a grid is retrieved via `py.get_grid()` then the
+            retrieved grid response will contain the fid which will be
+            necessary to set `self.id` and `self._columns.id` below.
+
+        Example from iterable of columns:
         ```
         column_1 = Column([1, 2, 3], 'time')
         column_2 = Column([4, 2, 5], 'voltage')
         grid = Grid([column_1, column_2])
         ```
+        Example from json grid
+        ```
+        grid_json = {
+            'cols': {
+                'time': {'data': [1, 2, 3], 'order': 0, 'uid': '4cd7fc'},
+                'voltage': {'data': [4, 2, 5], 'order': 1, 'uid': u'2744be'}
+            }
+        }
+        grid = Grid(grid_json)
+        ```
         """
-
         # TODO: verify that columns are actually columns
+        if isinstance(columns_or_json, dict):
+            # check that fid is entered
+            if fid is None:
+                raise exceptions.PlotlyError(
+                    "If you are manually converting a raw json/dict grid "
+                    "into a Grid instance, you must ensure that 'fid' is "
+                    "set to your file ID. This looks like 'username:187'."
+                )
 
-        column_names = [column.name for column in iterable_of_columns]
-        duplicate_name = utils.get_first_duplicate(column_names)
-        if duplicate_name:
-            err = exceptions.NON_UNIQUE_COLUMN_MESSAGE.format(duplicate_name)
-            raise exceptions.InputError(err)
+            self.id = fid
 
-        self._columns = list(iterable_of_columns)
-        self.id = ''
+            # check if 'cols' is a root key
+            if 'cols' not in columns_or_json:
+                raise exceptions.PlotlyError(
+                    "'cols' must be a root key in your json grid."
+                )
+
+            # check if 'data', 'order' and 'uid' are not in columns
+            grid_col_keys = ['data', 'order', 'uid']
+
+            for column_name in columns_or_json['cols']:
+                for key in grid_col_keys:
+                    if key not in columns_or_json['cols'][column_name]:
+                        raise exceptions.PlotlyError(
+                            "Each column name of your dictionary must have "
+                            "'data', 'order' and 'uid' as keys."
+                        )
+            # collect and sort all orders in case orders do not start
+            # at zero or there are jump discontinuities between them
+            all_orders = []
+            for column_name in columns_or_json['cols'].keys():
+                all_orders.append(columns_or_json['cols'][column_name]['order'])
+            all_orders.sort()
+
+            # put columns in order in a list
+            ordered_columns = []
+            for order in all_orders:
+                for column_name in columns_or_json['cols'].keys():
+                    if columns_or_json['cols'][column_name]['order'] == order:
+                        break
+
+                ordered_columns.append(Column(
+                    columns_or_json['cols'][column_name]['data'],
+                    column_name)
+                )
+            self._columns = ordered_columns
+
+            # fill in column_ids
+            for column in self:
+                column.id = self.id + ':' + columns_or_json['cols'][column.name]['uid']
+
+        else:
+            column_names = [column.name for column in columns_or_json]
+            duplicate_name = utils.get_first_duplicate(column_names)
+            if duplicate_name:
+                err = exceptions.NON_UNIQUE_COLUMN_MESSAGE.format(duplicate_name)
+                raise exceptions.InputError(err)
+
+            self._columns = list(columns_or_json)
+            self.id = ''
 
     def __repr__(self):
         return self._columns.__repr__()
@@ -187,3 +253,26 @@ class Grid(MutableSequence):
         for column in self._columns:
             if column.name == column_name:
                 return column
+
+    def get_column_reference(self, column_name):
+        """
+        Returns the column reference of given column in the grid by its name.
+
+        Raises an error if the column name is not in the grid. Otherwise,
+        returns the fid:uid pair, which may be the empty string.
+        """
+        column_id = None
+        for column in self._columns:
+            if column.name == column_name:
+                column_id = column.id
+                break
+
+        if column_id is None:
+            col_names = []
+            for column in self._columns:
+                col_names.append(column.name)
+            raise exceptions.PlotlyError(
+                "Whoops, that column name doesn't match any of the column "
+                "names in your grid. You must pick from {cols}".format(cols=col_names)
+            )
+        return column_id

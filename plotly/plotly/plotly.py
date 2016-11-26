@@ -33,6 +33,7 @@ from plotly.plotly import chunked_requests
 from plotly.session import (sign_in, update_session_plot_options,
                             get_session_plot_options, get_session_credentials,
                             get_session_config)
+from plotly.grid_objs import Grid, Column
 
 __all__ = None
 
@@ -238,6 +239,7 @@ def plot(figure_or_data, validate=True, **plot_options):
 
     plot_options = _plot_option_logic(plot_options)
     res = _send_to_plotly(figure, **plot_options)
+
     if res['error'] == '':
         if plot_options['auto_open']:
             _open_url(res['url'])
@@ -383,6 +385,7 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
         raise exceptions.PlotlyError(
             "The 'file_id' argument must be a non-negative number."
         )
+
     response = requests.get(plotly_rest_url + resource,
                             headers=headers,
                             verify=get_config()['plotly_ssl_verification'])
@@ -938,6 +941,7 @@ class grid_ops:
 
         paths = filename.split('/')
         parent_path = '/'.join(paths[0:-1])
+
         filename = paths[-1]
 
         if parent_path != '':
@@ -958,6 +962,7 @@ class grid_ops:
             payload['parent_path'] = parent_path
 
         upload_url = _api_v2.api_url('grids')
+
         req = requests.post(upload_url, data=payload,
                             headers=_api_v2.headers(),
                             verify=get_config()['plotly_ssl_verification'])
@@ -1299,7 +1304,7 @@ class _api_v2:
                     "Plotly On-Premise server to request against this endpoint or "
                     "this endpoint may not be available yet.\nQuestions? "
                     "Visit community.plot.ly, contact your plotly administrator "
-                    "or upgrade to a Pro account for 1-1 help: https://goo.gl/1YUVu9 " 
+                    "or upgrade to a Pro account for 1-1 help: https://goo.gl/1YUVu9 "
                     .format(url=get_config()['plotly_api_domain'])
                 )
             else:
@@ -1447,6 +1452,195 @@ def _send_to_plotly(figure, **plot_options):
         print(r['message'])
 
     return r
+
+
+def get_grid(grid_url, raw=False):
+    """
+    Returns the specified grid as a Grid instance or in JSON/dict form.
+
+    :param (bool) raw: if False, will output a Grid instance of the JSON grid
+    being retrieved. If True, raw JSON will be returned.
+    """
+    credentials = get_credentials()
+    validate_credentials(credentials)
+    username, api_key = credentials['username'], credentials['api_key']
+    headers = {'plotly-username': username,
+               'plotly-apikey': api_key,
+               'plotly-version': version.__version__,
+               'plotly-platform': 'python'}
+    upload_url = _api_v2.api_url('grids')
+
+    # extract path in grid url
+    url_path = six.moves.urllib.parse.urlparse(grid_url)[2][2:]
+    if url_path[-1] == '/':
+        url_path = url_path[0: -1]
+    url_path = url_path.replace('/', ':')
+
+    meta_get_url = upload_url + '/' + url_path
+    get_url = meta_get_url + '/content'
+
+    r = requests.get(get_url, headers=headers)
+    json_res = json.loads(r.text)
+
+    # make request to grab the grid id (fid)
+    r_meta = requests.get(meta_get_url, headers=headers)
+    json_res_meta = json.loads(r_meta.text)
+    retrieved_grid_id = json_res_meta['fid']
+
+    if raw is False:
+        return Grid(json_res, retrieved_grid_id)
+    else:
+        return json_res
+
+
+def create_animations(figure, filename=None, sharing='public', auto_open=True):
+    """
+    BETA function that creates plots with animations via `frames`.
+
+    Creates an animated plot using 'frames' alongside 'data' and 'layout'.
+    This BETA endpoint is subject to deprecation in the future. In relation
+    to `plotly.plotly.plot`, folder-creation and overwriting are not supported
+    but creating a plot with or without animations via frames is supported.
+
+    :param (str) filename: if set to 'None', an automatically-generated plot
+        name will be created. Does not support folder creation, meaning that
+        a folder of the form 'folder/name' will NOT create a the folder and
+        place the plot in it.
+    :param (str) sharing: see `plotly.plotly.plot()` doc string.
+    :param (bool) auto_open: if True, opens plot in the browser. If False,
+        returns the url for the plot instead.
+
+    Example 1: Simple Animation
+    ```
+    import plotly.plotly as py
+    from plotly.grid_objs import Grid, Column
+
+    column_1 = Column([1, 2, 3], 'x')
+    column_2 = Column([1, 3, 6], 'y')
+    column_3 = Column([2, 4, 6], 'new x')
+    column_4 = Column([1, 1, 5], 'new y')
+    grid = Grid([column_1, column_2, column_3, column_4])
+    py.grid_ops.upload(grid, 'animations_grid', auto_open=False)
+
+    # create figure
+    figure = {
+        'data': [
+            {
+                'xsrc': grid.get_column_reference('x'),
+                'ysrc': grid.get_column_reference('y')
+            }
+        ],
+        'layout': {'title': 'First Title'},
+        'frames': [
+            {
+                'data': [
+                    {
+                        'xsrc': grid.get_column_reference('new x'),
+                        'ysrc': grid.get_column_reference('new y')
+                    }
+                ],
+                'layout': {'title': 'Second Title'}
+            }
+        ]
+    }
+
+    py.create_animations(figure, 'new_plot_with_animations')
+    ```
+    """
+    credentials = get_credentials()
+    validate_credentials(credentials)
+    username, api_key = credentials['username'], credentials['api_key']
+    auth = HTTPBasicAuth(str(username), str(api_key))
+    headers = {'Plotly-Client-Platform': 'python',
+               'content-type': 'application/json'}
+
+    json = {
+        'figure': figure,
+        'world_readable': True
+    }
+
+    # set filename if specified
+    if filename:
+        # warn user that creating folders isn't support in this version
+        if '/' in filename:
+            warnings.warn(
+                "This BETA version of 'create_animations' does not support "
+                "automatic folder creation. This means a filename of the form "
+                "'name1/name2' will just create the plot with that name only."
+            )
+        json['filename'] = filename
+
+    # set sharing
+    if sharing == 'public':
+        json['world_readable'] = True
+    elif sharing == 'private':
+        json['world_readable'] = False
+    elif sharing == 'secret':
+        json['world_readable'] = False
+        json['share_key_enabled'] = True
+    else:
+        raise exceptions.PlotlyError(
+            "Whoops, sharing can only be set to either 'public', 'private', "
+            "or 'secret'."
+        )
+
+    api_url = _api_v2.api_url('plots')
+    r = requests.post(api_url, auth=auth, headers=headers, json=json)
+    r.raise_for_status()
+
+    try:
+        parsed_response = r.json()
+    except:
+        parsed_response = r.content
+
+    if 'error' in r and r['error'] != '':
+        raise exceptions.PlotlyError(r['error'])
+
+    if sharing == 'secret':
+        web_url = (parsed_response['file']['web_url'][:-1] +
+                   '?share_key=' + parsed_response['file']['share_key'])
+    else:
+        web_url = parsed_response['file']['web_url']
+
+    if auto_open:
+        _open_url(web_url)
+
+    return web_url
+
+
+def icreate_animations(figure, filename=None, sharing='public', auto_open=False):
+    """
+    Create a unique url for this animated plot in Plotly and open in IPython.
+
+    This function is based off `plotly.plotly.iplot`. See `plotly.plotly.
+    create_animations` Doc String for param descriptions.
+    """
+    # Still needs doing: create a wrapper for iplot and icreate_animations
+    url = create_animations(figure, filename, sharing, auto_open)
+
+    if isinstance(figure, dict):
+        layout = figure.get('layout', {})
+    else:
+        layout = {}
+
+    embed_options = dict()
+    embed_options['width'] = layout.get('width', '100%')
+    embed_options['height'] = layout.get('height', 525)
+    try:
+        float(embed_options['width'])
+    except (ValueError, TypeError):
+        pass
+    else:
+        embed_options['width'] = str(embed_options['width']) + 'px'
+
+    try:
+        float(embed_options['height'])
+    except (ValueError, TypeError):
+        pass
+    else:
+        embed_options['height'] = str(embed_options['height']) + 'px'
+
+    return tools.embed(url, **embed_options)
 
 
 def _open_url(url):

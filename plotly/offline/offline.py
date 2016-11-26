@@ -162,8 +162,16 @@ def init_notebook_mode(connected=False):
 
 def _plot_html(figure_or_data, config, validate, default_width,
                default_height, global_requirejs):
-
-    figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
+    # force no validation if frames is in the call
+    # TODO - add validation for frames in call - #605
+    if 'frames' in figure_or_data:
+        figure = tools.return_figure_from_figure_or_data(
+            figure_or_data, False
+        )
+    else:
+        figure = tools.return_figure_from_figure_or_data(
+            figure_or_data, validate
+        )
 
     width = figure.get('layout', {}).get('width', default_width)
     height = figure.get('layout', {}).get('height', default_height)
@@ -185,6 +193,8 @@ def _plot_html(figure_or_data, config, validate, default_width,
     plotdivid = uuid.uuid4()
     jdata = json.dumps(figure.get('data', []), cls=utils.PlotlyJSONEncoder)
     jlayout = json.dumps(figure.get('layout', {}), cls=utils.PlotlyJSONEncoder)
+    if 'frames' in figure_or_data:
+        jframes = json.dumps(figure.get('frames', {}), cls=utils.PlotlyJSONEncoder)
 
     configkeys = (
         'editable',
@@ -225,11 +235,30 @@ def _plot_html(figure_or_data, config, validate, default_width,
         link_text = link_text.replace('plot.ly', link_domain)
         config['linkText'] = link_text
 
-    script = 'Plotly.newPlot("{id}", {data}, {layout}, {config})'.format(
-        id=plotdivid,
-        data=jdata,
-        layout=jlayout,
-        config=jconfig)
+    if 'frames' in figure_or_data:
+        script = '''
+        Plotly.plot(
+            '{id}',
+            {data},
+            {layout},
+            {config}
+        ).then(function () {add_frames}).then(function(){animate})
+        '''.format(
+            id=plotdivid,
+            data=jdata,
+            layout=jlayout,
+            config=jconfig,
+            add_frames="{" + "return Plotly.addFrames('{id}',{frames}".format(
+                id=plotdivid, frames=jframes
+            ) + ");}",
+            animate="{" + "Plotly.animate('{id}');".format(id=plotdivid) + "}"
+        )
+    else:
+        script = 'Plotly.newPlot("{id}", {data}, {layout}, {config})'.format(
+            id=plotdivid,
+            data=jdata,
+            layout=jlayout,
+            config=jconfig)
 
     optional_line1 = ('require(["plotly"], function(Plotly) {{ '
                       if global_requirejs else '')
