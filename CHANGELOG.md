@@ -3,8 +3,6 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-
-## [1.12.10] - 2016-11-23
 ### Updated
 - `FF.create_violin` and `FF.create_scatterplotmatrix` now by default do not print subplot grid information in output
 
@@ -13,6 +11,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 	- Please note that these configuration options are for offline plots ONLY. For configuration options when embedding online plots please see our [embed tutorial](http://help.plot.ly/embed-graphs-in-websites/#step-8-customize-the-iframe).
 - `colors.py` file which contains functions for manipulating and validating colors and arrays of colors
 - 'scale' param in `FF.create_trisurf` which now can set the interpolation on the colorscales
+- animations now work in offline mode. By running `plotly.offline.plot()` and `plotly.offline.iplot()` with a a `fig` with `frames`, the resulting plt will cycle through the figures defined in `frames` either in the browser or in an ipython notebook respectively.
+- Upcoming animations in online mode: use `plotly.plotly.create_animations()` and `plotly.plotly.icreate_animations()` which animate a figure with the `frames` argument.
 
 ### Fixed
 - Trisurf now uses correct `Plotly Colorscales` when called
