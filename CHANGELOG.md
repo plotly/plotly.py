@@ -3,8 +3,6 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-
-## [1.12.10] - 2016-11-23
 ### Updated
 - `FF.create_violin` and `FF.create_scatterplotmatrix` now by default do not print subplot grid information in output
 
@@ -13,6 +11,27 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 	- Please note that these configuration options are for offline plots ONLY. For configuration options when embedding online plots please see our [embed tutorial](http://help.plot.ly/embed-graphs-in-websites/#step-8-customize-the-iframe).
 - `colors.py` file which contains functions for manipulating and validating colors and arrays of colors
 - 'scale' param in `FF.create_trisurf` which now can set the interpolation on the colorscales
+- animations now work in offline mode. By running `plotly.offline.plot()` and `plotly.offline.iplot()` with a `fig` with `frames`, the resulting plot will cycle through the figures defined in `frames` either in the browser or in an ipython notebook respectively. Here's an example
+```
+import IPython.display
+from IPython.display import display, HTML
+from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
+init_notebook_mode(connected=True)
+
+figure_or_data = {'data': [{'x': [1, 2], 'y': [0, 1]}],
+                  'layout': {'xaxis': {'range': [0, 3], 'autorange': False},
+                             'yaxis': {'range': [0, 20], 'autorange': False},
+                  'title': 'First Title'},
+                  'frames': [{'data': [{'x': [1, 2], 'y': [5, 7]}]},
+                             {'data': [{'x': [-1, 3], 'y': [3, 9]}]},
+                             {'data': [{'x': [2, 2.6], 'y': [7, 5]}]},
+                             {'data': [{'x': [1.5, 3], 'y': [7.5, 4]}]},
+                             {'data': [{'x': [1, 2], 'y': [0, 1]}],
+                              'layout': {'title': 'End Title'}}]}
+iplot(figure_or_data)
+```
+More examples can be found at https://plot.ly/python/animations/.
+- Upcoming animations in online mode: use `plotly.plotly.create_animations()` and `plotly.plotly.icreate_animations()` which animate a figure with the `frames` argument.
 
 ### Fixed
 - Trisurf now uses correct `Plotly Colorscales` when called
