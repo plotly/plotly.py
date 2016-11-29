@@ -78,3 +78,11 @@ class PlotlyOfflineTestCase(TestCase):
         })
         for resize_code_string in resize_code_strings:
             self.assertTrue(resize_code_string not in html)
+
+    #def test_plot_rendered_if_non_plotly_domain(self):
+    #    plotly.tools.set_config_file(plotly_domain='https://stage.plot.ly',
+    #                                 plotly_api_domain='https://api-stage.plot.ly')
+
+        
+
+
