@@ -3,12 +3,14 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [1.12.10] - 2016-11-28
 ### Updated
 - `FF.create_violin` and `FF.create_scatterplotmatrix` now by default do not print subplot grid information in output
 - Removed alert that occured when downloading plot images offline. Please note: for higher resolution images and more export options, consider making requests to our image servers. See: `help(py.image)` for more details.
 
 ### Added
-- Plot configuration options for offline plots. See the list of [configuration options](https://github.com/Rikorose/plotly.py/blob/master/plotly/offline/offline.py#L189) and [examples](https://plot.ly/javascript/configuration-options/) for more information. 
+- Plot configuration options for offline plots. See the list of [configuration options](https://github.com/Rikorose/plotly.py/blob/master/plotly/offline/offline.py#L189) and [examples](https://plot.ly/javascript/configuration-options/) for more information.
 	- Please note that these configuration options are for offline plots ONLY. For configuration options when embedding online plots please see our [embed tutorial](http://help.plot.ly/embed-graphs-in-websites/#step-8-customize-the-iframe).
 - `colors.py` file which contains functions for manipulating and validating colors and arrays of colors
 - 'scale' param in `FF.create_trisurf` which now can set the interpolation on the colorscales
@@ -46,7 +48,7 @@ c1 = Column([6, 6, 6, 5], 'column 1')
 c2 = Column(['a', 'b', 'c', 'd'], 'column 2')
 g = Grid([c1, c2])
 
-# Upload the grid 
+# Upload the grid
 py.grid_ops.upload(g, 'my-grid', auto_open=False)
 
 # Make a graph that with data that is referenced from that grid
@@ -60,17 +62,17 @@ Then, whenever you update the data in `'my-grid'`, the associated plot will upda
 - the colorbar in `.create_trisurf` now displays properly in `offline mode`.
 
 ### Updated
-- the colorbar in `.create_trisurf` now displays the appropriate max and min values on the ends of the bar which corresponding to the coloring metric of the figure 
+- the colorbar in `.create_trisurf` now displays the appropriate max and min values on the ends of the bar which corresponding to the coloring metric of the figure
 - `edges_color` is now a param in `.create_trisurf` which only takes `rgb` values at the moment
 
 ## [1.12.8] - 2016-08-18
 ### Fixed
-- Fixed color bug with trisurf plots where certain triangles were colored strangely. The coordinates of `rgb(...)` are now rounded to their nearest integer (using Python3 method of rounding), then placed in the color string to fix the issue.   
+- Fixed color bug with trisurf plots where certain triangles were colored strangely. The coordinates of `rgb(...)` are now rounded to their nearest integer (using Python3 method of rounding), then placed in the color string to fix the issue.
 
 ## [1.12.7] - 2016-08-17
 ### Fixed
 - Edited `plotly.min.js` due to issue using `iplot` to plot offline in Jupyter Notebooks
-	- Please note that `plotly.min.js` may be cached in your Jupyter Notebook. Therefore, if you continue to experience this issue after upgrading the Plotly package please open a new notebook or clear the cache to ensure the correct `plotly.min.js` is referenced. 
+	- Please note that `plotly.min.js` may be cached in your Jupyter Notebook. Therefore, if you continue to experience this issue after upgrading the Plotly package please open a new notebook or clear the cache to ensure the correct `plotly.min.js` is referenced.
 
 ## [1.12.6] - 2016-08-09
 ### Updated
