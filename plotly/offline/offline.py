@@ -71,25 +71,17 @@ def get_image_download_script(caller):
         raise ValueError('caller should only be one of `iplot` or `plot`')
 
     return(
-             ('<script>'
-              'function downloadimage(format, height, width,'
-              ' filename) {{'
-              'var p = document.getElementById(\'{plot_id}\');'
-              'Plotly.downloadImage(p, {{format: format, height: height, '
-              'width: width, filename: filename}});'
-              '}};' +
-              check_start +
-              'if(confirm(\'Do you want to save this image as '
-              '{filename}.{format}?\\n\\n'
-              'For higher resolution images and more export options, '
-              'consider making requests to our image servers. Type: '
-              'help(py.image) for more details.'
-              '\')) {{'
-              'downloadimage(\'{format}\', {height}, {width}, '
-              '\'{filename}\');}}' +
-              check_end +
-              '</script>'
-              )
+        ('<script>'
+         'function downloadimage(format, height, width,'
+         ' filename) {{'
+         'var p = document.getElementById(\'{plot_id}\');'
+         'Plotly.downloadImage(p, {{format: format, height: height, '
+         'width: width, filename: filename}});}};' +
+         check_start +
+         '{{downloadimage(\'{format}\', {height}, {width}, '
+         '\'{filename}\');}}' +
+         check_end +
+         '</script>')
     )
 
 
@@ -311,7 +303,9 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     image (default=None |'png' |'jpeg' |'svg' |'webp') -- This parameter sets
         the format of the image to be downloaded, if we choose to download an
         image. This parameter has a default value of None indicating that no
-        image should be downloaded.
+        image should be downloaded. Please note: for higher resolution images
+        and more export options, consider making requests to our image servers.
+        Type: `help(py.image)` for more details.
     filename (default='plot') -- Sets the name of the file your image
         will be saved to. The extension should not be included.
     image_height (default=600) -- Specifies the height of the image in `px`.
@@ -422,9 +416,11 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     image (default=None |'png' |'jpeg' |'svg' |'webp') -- This parameter sets
         the format of the image to be downloaded, if we choose to download an
         image. This parameter has a default value of None indicating that no
-        image should be downloaded.
-    image_filename (default='plot_image') -- Sets the name of the file your image
-        will be saved to. The extension should not be included.
+        image should be downloaded. Please note: for higher resolution images
+        and more export options, consider making requests to our image servers.
+        Type: `help(py.image)` for more details.
+    image_filename (default='plot_image') -- Sets the name of the file your
+        image will be saved to. The extension should not be included.
     image_height (default=600) -- Specifies the height of the image in `px`.
     image_width (default=800) -- Specifies the width of the image in `px`.
     """
