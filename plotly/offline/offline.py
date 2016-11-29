@@ -219,7 +219,6 @@ def _plot_html(figure_or_data, config, validate, default_width,
     )
 
     config_clean = dict((k, config[k]) for k in configkeys if k in config)
-
     jconfig = json.dumps(config_clean)
 
     # TODO: The get_config 'source of truth' should
@@ -234,6 +233,7 @@ def _plot_html(figure_or_data, config, validate, default_width,
             .replace('http://', '')
         link_text = config['linkText'].replace('plot.ly', link_domain)
         config['linkText'] = link_text
+        jconfig = jconfig.replace('Export to plot.ly', link_text)
 
     if 'frames' in figure_or_data:
         script = '''
