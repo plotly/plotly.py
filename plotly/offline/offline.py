@@ -211,7 +211,6 @@ def _plot_html(figure_or_data, config, validate, default_width,
     )
 
     config_clean = dict((k, config[k]) for k in configkeys if k in config)
-
     jconfig = json.dumps(config_clean)
 
     # TODO: The get_config 'source of truth' should
@@ -219,13 +218,14 @@ def _plot_html(figure_or_data, config, validate, default_width,
     plotly_platform_url = plotly.plotly.get_config().get('plotly_domain',
                                                          'https://plot.ly')
     if (plotly_platform_url != 'https://plot.ly' and
-            link_text == 'Export to plot.ly'):
+            config['linkText'] == 'Export to plot.ly'):
 
         link_domain = plotly_platform_url\
             .replace('https://', '')\
             .replace('http://', '')
-        link_text = link_text.replace('plot.ly', link_domain)
+        link_text = config['linkText'].replace('plot.ly', link_domain)
         config['linkText'] = link_text
+        jconfig = jconfig.replace('Export to plot.ly', link_text)
 
     if 'frames' in figure_or_data:
         script = '''
@@ -360,13 +360,10 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         display(HTML(script))
 
 
-def plot(figure_or_data,
-         show_link=True, link_text='Export to plot.ly',
-         validate=True, output_type='file',
-         include_plotlyjs=True,
-         filename='temp-plot.html', auto_open=True,
-         image=None, image_filename='plot_image',
-         image_width=800, image_height=600):
+def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
+         validate=True, output_type='file', include_plotlyjs=True,
+         filename='temp-plot.html', auto_open=True, image=None,
+         image_filename='plot_image', image_width=800, image_height=600):
     """ Create a plotly graph locally as an HTML document or string.
 
     Example:
