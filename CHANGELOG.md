@@ -2,9 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [1.12.11]
+## [1.12.11] - 2016-12-01
 ### Fixed
-- Offline plotting now works in other domains besides `plot.ly`. In addition, the `link text` in the bottom right corner of the offline plots properly display `Export to [Domain Name]` for the given Domain name of the server.
+- The `link text` in the bottom right corner of the offline plots now properly displays `Export to [Domain Name]` for the given domain name set in the users' `.config` file.
 
 ## [1.12.10] - 2016-11-28
 ### Updated
