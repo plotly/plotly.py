@@ -3881,6 +3881,9 @@ class FigureFactory(object):
             title=title,
             showlegend=True
         )
+
+        FigureFactory._hide_tick_labels_from_box_subplots(fig)
+
         return fig
 
     @staticmethod
@@ -4028,19 +4031,14 @@ class FigureFactory(object):
             yaxis_key = 'yaxis{}'.format(1 + (dim * j))
             fig['layout'][yaxis_key].update(title=headers[j])
 
+        FigureFactory._hide_tick_labels_from_box_subplots(fig)
+
         if diag == 'histogram':
             fig['layout'].update(
                 height=height, width=width,
                 title=title,
                 showlegend=True,
                 barmode='stack')
-            return fig
-
-        elif diag == 'box':
-            fig['layout'].update(
-                height=height, width=width,
-                title=title,
-                showlegend=True)
             return fig
 
         else:
@@ -4218,6 +4216,8 @@ class FigureFactory(object):
                 yaxis_key = 'yaxis{}'.format(1 + (dim * j))
                 fig['layout'][yaxis_key].update(title=headers[j])
 
+            FigureFactory._hide_tick_labels_from_box_subplots(fig)
+
             if diag == 'histogram':
                 fig['layout'].update(
                     height=height, width=width,
@@ -4391,6 +4391,8 @@ class FigureFactory(object):
                     yaxis_key = 'yaxis{}'.format(1 + (dim * j))
                     fig['layout'][yaxis_key].update(title=headers[j])
 
+                FigureFactory._hide_tick_labels_from_box_subplots(fig)
+
                 if diag == 'histogram':
                     fig['layout'].update(
                         height=height, width=width,
@@ -4536,6 +4538,8 @@ class FigureFactory(object):
                     yaxis_key = 'yaxis{}'.format(1 + (dim * j))
                     fig['layout'][yaxis_key].update(title=headers[j])
 
+                FigureFactory._hide_tick_labels_from_box_subplots(fig)
+
                 if diag == 'histogram':
                     fig['layout'].update(
                         height=height, width=width,
@@ -4557,6 +4561,22 @@ class FigureFactory(object):
                         title=title,
                         showlegend=True)
                     return fig
+
+    @staticmethod
+    def _hide_tick_labels_from_box_subplots(fig):
+        """
+        Hides tick labels for box plots in scatterplotmatrix subplots.
+        """
+        boxplot_xaxes = []
+        for trace in fig['data']:
+            if trace['type'] == 'box':
+                # stores the xaxes which correspond to boxplot subplots
+                # since we use xaxis1, xaxis2, etc, in plotly.py
+                boxplot_xaxes.append(
+                    'xaxis{}'.format(trace['xaxis'][-1])
+                )
+        for xaxis in boxplot_xaxes:
+            fig['layout'][xaxis]['showticklabels'] = False
 
     @staticmethod
     def _validate_index(index_vals):
@@ -4806,7 +4826,8 @@ class FigureFactory(object):
             that defines intervals on the real line. They are used to group
             the entries in an index of numbers into their corresponding
             interval and therefore can be treated as categorical data
-        :param (str) diag: sets the chart type for the main diagonal plots
+        :param (str) diag: sets the chart type for the main diagonal plots.
+            The options are 'scatter', 'histogram' and 'box'.
         :param (int|float) height: sets the height of the chart
         :param (int|float) width: sets the width of the chart
         :param (float) size: sets the marker size (in px)
