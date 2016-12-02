@@ -3882,7 +3882,7 @@ class FigureFactory(object):
             showlegend=True
         )
 
-        fig = FigureFactory._hide_tick_labels_from_box_subplots(fig)
+        FigureFactory._hide_tick_labels_from_box_subplots(fig)
 
         return fig
 
@@ -4031,7 +4031,7 @@ class FigureFactory(object):
             yaxis_key = 'yaxis{}'.format(1 + (dim * j))
             fig['layout'][yaxis_key].update(title=headers[j])
 
-        fig = FigureFactory._hide_tick_labels_from_box_subplots(fig)
+        FigureFactory._hide_tick_labels_from_box_subplots(fig)
 
         if diag == 'histogram':
             fig['layout'].update(
@@ -4216,7 +4216,7 @@ class FigureFactory(object):
                 yaxis_key = 'yaxis{}'.format(1 + (dim * j))
                 fig['layout'][yaxis_key].update(title=headers[j])
 
-            fig = FigureFactory._hide_tick_labels_from_box_subplots(fig)
+            FigureFactory._hide_tick_labels_from_box_subplots(fig)
 
             if diag == 'histogram':
                 fig['layout'].update(
@@ -4391,7 +4391,7 @@ class FigureFactory(object):
                     yaxis_key = 'yaxis{}'.format(1 + (dim * j))
                     fig['layout'][yaxis_key].update(title=headers[j])
 
-                fig = FigureFactory._hide_tick_labels_from_box_subplots(fig)
+                FigureFactory._hide_tick_labels_from_box_subplots(fig)
 
                 if diag == 'histogram':
                     fig['layout'].update(
@@ -4538,7 +4538,7 @@ class FigureFactory(object):
                     yaxis_key = 'yaxis{}'.format(1 + (dim * j))
                     fig['layout'][yaxis_key].update(title=headers[j])
 
-                fig = FigureFactory._hide_tick_labels_from_box_subplots(fig)
+                FigureFactory._hide_tick_labels_from_box_subplots(fig)
 
                 if diag == 'histogram':
                     fig['layout'].update(
@@ -4568,16 +4568,15 @@ class FigureFactory(object):
         Hides tick labels for box plots in scatterplotmatrix subplots.
         """
         boxplot_xaxes = []
-        for j, plot_data in enumerate(fig['data']):
-            if plot_data['type'] == 'box':
+        for trace in fig['data']:
+            if trace['type'] == 'box':
+                # stores the xaxes which correspond to boxplot subplots
+                # since we use xaxis1, xaxis2, etc, in plotly.py
                 boxplot_xaxes.append(
-                    'xaxis{}'.format(plot_data['xaxis'][-1])
+                    'xaxis{}'.format(trace['xaxis'][-1])
                 )
-
         for xaxis in boxplot_xaxes:
             fig['layout'][xaxis]['showticklabels'] = False
-
-        return fig
 
     @staticmethod
     def _validate_index(index_vals):
