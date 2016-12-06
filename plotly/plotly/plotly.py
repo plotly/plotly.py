@@ -1586,15 +1586,15 @@ def create_animations(figure, filename=None, sharing='public', auto_open=True):
 
     api_url = _api_v2.api_url('plots')
     r = requests.post(api_url, auth=auth, headers=headers, json=json)
-    r.raise_for_status()
 
     try:
         parsed_response = r.json()
     except:
         parsed_response = r.content
 
-    if 'error' in r and r['error'] != '':
-        raise exceptions.PlotlyError(r['error'])
+    # raise error message
+    if r.ok is False:
+        raise exceptions.PlotlyError(parsed_response['errors'][-1]['message'])
 
     if sharing == 'secret':
         web_url = (parsed_response['file']['web_url'][:-1] +
