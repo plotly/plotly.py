@@ -1593,8 +1593,17 @@ def create_animations(figure, filename=None, sharing='public', auto_open=True):
         parsed_response = r.content
 
     # raise error message
-    if r.ok is False:
-        raise exceptions.PlotlyError(parsed_response['errors'][-1]['message'])
+    if not r.ok:
+        message = ''
+        if isinstance(parsed_response, dict):
+            errors = parsed_response.get('errors')
+            if errors and errors[-1].get('message'):
+                message = errors[-1]['message']
+        if message:
+            raise exceptions.PlotlyError(message)
+        else:
+            # shucks, we're stuck with a generic error...
+            r.raise_for_status()
 
     if sharing == 'secret':
         web_url = (parsed_response['file']['web_url'][:-1] +
