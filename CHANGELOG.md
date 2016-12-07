@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Updated
+- `plotly.plotly.create_animations` and `plotly.plotly.icreate_animations` now return appropriate error messages if the response is not successful.
 
 ## [1.12.12] - 2016-12-06
 ### Updated
@@ -44,7 +46,7 @@ figure_or_data = {'data': [{'x': [1, 2], 'y': [0, 1]}],
 iplot(figure_or_data)
 ```
 More examples can be found at https://plot.ly/python/animations/.
-- Upcoming animations in online mode: use `plotly.plotly.create_animations()` and `plotly.plotly.icreate_animations()` which animate a figure with the `frames` argument.
+- Upcoming animations in online mode: use `plotly.plotly.create_animations` and `plotly.plotly.icreate_animations` which animate a figure with the `frames` argument.
 
 ### Fixed
 - Trisurf now uses correct `Plotly Colorscales` when called
