@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-[1.12.12] - 2016-12-06
+## [1.12.12] - 2016-12-06
 ### Updated
 - Updated `plotly.min.js` to version 1.20.5 for `plotly.offline`.
 	- See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md) for additional information regarding the updates
