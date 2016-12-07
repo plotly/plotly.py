@@ -1484,15 +1484,7 @@ def get_grid(grid_url, raw=False):
 
     # make request to grab the grid id (fid)
     r_meta = requests.get(meta_get_url, headers=headers)
-
-    # check if request is ok
-    if not r_meta.ok:
-        raise exceptions.PlotlyError(
-            "Whoops, you got a 404 response. {} may be "
-            "pointing to a plot rather than a grid. If it is a grid, make "
-            "sure your grid is 'public' and not 'private' or "
-            "'secret'.".format(grid_url)
-        )
+    r_meta.raise_for_status()
 
     json_res_meta = json.loads(r_meta.text)
     retrieved_grid_id = json_res_meta['fid']
