@@ -1484,6 +1484,8 @@ def get_grid(grid_url, raw=False):
 
     # make request to grab the grid id (fid)
     r_meta = requests.get(meta_get_url, headers=headers)
+    r_meta.raise_for_status()
+
     json_res_meta = json.loads(r_meta.text)
     retrieved_grid_id = json_res_meta['fid']
 
