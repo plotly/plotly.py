@@ -26,7 +26,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 	- Please note that these configuration options are for offline plots ONLY. For configuration options when embedding online plots please see our [embed tutorial](http://help.plot.ly/embed-graphs-in-websites/#step-8-customize-the-iframe).
 - `colors.py` file which contains functions for manipulating and validating colors and arrays of colors
 - 'scale' param in `FF.create_trisurf` which now can set the interpolation on the colorscales
-- animations now work in offline mode. By running `plotly.offline.plot()` and `plotly.offline.iplot()` with a `fig` with `frames`, the resulting plot will cycle through the figures defined in `frames` either in the browser or in an ipython notebook respectively. Here's an example
+- animations now work in offline mode. By running `plotly.offline.plot()` and `plotly.offline.iplot()` with a `fig` with `frames`, the resulting plot will cycle through the figures defined in `frames` either in the browser or in an ipython notebook respectively. Here's an example:
 ```
 import IPython.display
 from IPython.display import display, HTML
@@ -46,7 +46,65 @@ figure_or_data = {'data': [{'x': [1, 2], 'y': [0, 1]}],
 iplot(figure_or_data)
 ```
 More examples can be found at https://plot.ly/python/animations/.
-- Upcoming animations in online mode: use `plotly.plotly.create_animations` and `plotly.plotly.icreate_animations` which animate a figure with the `frames` argument.
+- animations now work in online mode: use `plotly.plotly.create_animations` and `plotly.plotly.icreate_animations` which animate a figure with the `frames` argument. Here is a simple example:
+```
+import plotly.plotly as py
+from plotly.grid_objs import Grid, Column
+
+column_1 = Column([0.5], 'x')
+column_2 = Column([0.5], 'y')
+column_3 = Column([1.5], 'x2')
+column_4 = Column([1.5], 'y2')
+
+grid = Grid([column_1, column_2, column_3, column_4])
+py.grid_ops.upload(grid, 'ping_pong_grid', auto_open=False)
+
+# create figure
+figure = {
+    'data': [
+        {
+            'xsrc': grid.get_column_reference('x'),
+            'ysrc': grid.get_column_reference('y'),
+            'mode': 'markers',
+        }
+    ],
+    'layout': {'title': 'Ping Pong Animation',
+               'xaxis': {'range': [0, 2], 'autorange': False},
+               'yaxis': {'range': [0, 2], 'autorange': False},
+               'updatemenus': [{
+                   'buttons': [
+                       {'args': [None],
+                        'label': u'Play',
+                        'method': u'animate'}
+               ],
+               'pad': {'r': 10, 't': 87},
+               'showactive': False,
+               'type': 'buttons'
+                }]},
+    'frames': [
+        {
+            'data': [
+                {
+                    'xsrc': grid.get_column_reference('x2'),
+                    'ysrc': grid.get_column_reference('y2'),
+                    'mode': 'markers',
+                }
+            ]
+        },
+        {
+            'data': [
+                {
+                    'xsrc': grid.get_column_reference('x'),
+                    'ysrc': grid.get_column_reference('y'),
+                    'mode': 'markers',
+                }
+            ]
+        }
+    ]
+}
+
+py.create_animations(figure, 'ping_pong')
+```
 
 ### Fixed
 - Trisurf now uses correct `Plotly Colorscales` when called
