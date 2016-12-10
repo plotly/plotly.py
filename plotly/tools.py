@@ -4573,7 +4573,7 @@ class FigureFactory(object):
                 # stores the xaxes which correspond to boxplot subplots
                 # since we use xaxis1, xaxis2, etc, in plotly.py
                 boxplot_xaxes.append(
-                    'xaxis{}'.format(trace['xaxis'][-1])
+                    'xaxis{}'.format(trace['xaxis'][1:])
                 )
         for xaxis in boxplot_xaxes:
             fig['layout'][xaxis]['showticklabels'] = False
