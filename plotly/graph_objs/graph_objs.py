@@ -370,7 +370,7 @@ class PlotlyDict(dict, PlotlyBase):
             self['type'] = self._name
 
         # force key-value pairs to go through validation
-        d = {key: val for key, val in dict(*args, **kwargs).items()}
+        d = dict((key, val) for key, val in dict(*args, **kwargs).items())
         for key, val in d.items():
             self.__setitem__(key, val, _raise=_raise)
 
