@@ -58,7 +58,7 @@ def load_json_dict(filename, *args):
                 data = {}  # TODO: issue a warning and bubble it up
         lock.release()
         if args:
-            return {key: data[key] for key in args if key in data}
+            return dict((key, data[key]) for key in args if key in data)
     return data
 
 
