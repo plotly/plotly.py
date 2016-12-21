@@ -1308,7 +1308,19 @@ class _api_v2:
                     .format(url=get_config()['plotly_api_domain'])
                 )
             else:
-                raise requests_exception
+                try:
+                    parsed_response = response.json()
+                except:
+                    parsed_response = response.content
+
+                try:
+                    # try get a friendly error message
+                    errors = parsed_response.get('errors')
+                    message = errors[-1]['message']
+                except:
+                    raise requests_exception
+
+                raise exceptions.PlotlyError(message)
 
         if ('content-type' in response.headers and
                 'json' in response.headers['content-type'] and
@@ -1701,23 +1713,7 @@ def create_animations(figure, filename=None, sharing='public', auto_open=True):
     api_url = _api_v2.api_url('plots')
     r = requests.post(api_url, auth=auth, headers=headers, json=json)
 
-    try:
-        parsed_response = r.json()
-    except:
-        parsed_response = r.content
-
-    # raise error message
-    if not r.ok:
-        message = ''
-        if isinstance(parsed_response, dict):
-            errors = parsed_response.get('errors')
-            if errors and errors[-1].get('message'):
-                message = errors[-1]['message']
-        if message:
-            raise exceptions.PlotlyError(message)
-        else:
-            # shucks, we're stuck with a generic error...
-            r.raise_for_status()
+    parsed_response = _api_v2.response_handler(r)
 
     if sharing == 'secret':
         web_url = (parsed_response['file']['web_url'][:-1] +
@@ -1738,7 +1734,7 @@ def icreate_animations(figure, filename=None, sharing='public', auto_open=False)
     This function is based off `plotly.plotly.iplot`. See `plotly.plotly.
     create_animations` Doc String for param descriptions.
     """
-    # Still needs doing: create a wrapper for iplot and icreate_animations
+    # TODO: create a wrapper for iplot and icreate_animations
     url = create_animations(figure, filename, sharing, auto_open)
 
     if isinstance(figure, dict):
