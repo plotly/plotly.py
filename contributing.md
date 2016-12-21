@@ -14,7 +14,7 @@ git clone https://github.com/plotly/python-api.git
 
 ###Submodules
 
-Second, this project uses git submodules! There both helpful and, at times, difficult to work with. The good news is you probably don't need to think about them! Just run the following shell command to make sure that your local repo is wired properly:
+Second, this project uses git submodules! They're both helpful and, at times, difficult to work with. The good news is you probably don't need to think about them! Just run the following shell command to make sure that your local repo is wired properly:
 
 **DO THIS (run this command in your new `plotly-api` directory)**
 
