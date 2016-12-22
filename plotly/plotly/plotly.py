@@ -1318,9 +1318,11 @@ class _api_v2:
                     errors = parsed_response.get('errors')
                     message = errors[-1]['message']
                 except:
-                    raise requests_exception
-
-                raise exceptions.PlotlyError(message)
+                    # otherwise raise a generic error
+                    raise exceptions.PlotlyRequestError(requests_exception)
+                else:
+                    requests_exception.message = message
+                    raise exceptions.PlotlyRequestError(requests_exception)
 
         if ('content-type' in response.headers and
                 'json' in response.headers['content-type'] and
