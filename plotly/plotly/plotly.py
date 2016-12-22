@@ -35,6 +35,9 @@ from plotly.session import (sign_in, update_session_plot_options,
                             get_session_config)
 from plotly.grid_objs import Grid, Column
 
+# This is imported like this for backwards compat. Careful if changing.
+from plotly.config import get_config, get_credentials
+
 __all__ = None
 
 DEFAULT_PLOT_OPTIONS = {
@@ -53,32 +56,6 @@ tools.ensure_local_plotly_files()
 # don't break backwards compatibility
 sign_in = sign_in
 update_plot_options = update_session_plot_options
-
-
-def get_credentials():
-    """Returns the credentials that will be sent to plotly."""
-    credentials = tools.get_credentials_file()
-    session_credentials = get_session_credentials()
-    for credentials_key in credentials:
-
-        # checking for not false, but truthy value here is the desired behavior
-        session_value = session_credentials.get(credentials_key)
-        if session_value is False or session_value:
-            credentials[credentials_key] = session_value
-    return credentials
-
-
-def get_config():
-    """Returns either module config or file config."""
-    config = tools.get_config_file()
-    session_config = get_session_config()
-    for config_key in config:
-
-        # checking for not false, but truthy value here is the desired behavior
-        session_value = session_config.get(config_key)
-        if session_value is False or session_value:
-            config[config_key] = session_value
-    return config
 
 
 def _plot_option_logic(plot_options_from_call_signature):
