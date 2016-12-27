@@ -1296,10 +1296,17 @@ class _api_v2:
                     message = errors[-1]['message']
                 except:
                     # otherwise raise a generic error
-                    raise exceptions.PlotlyRequestError(requests_exception)
+                    message = 'No content'
+                    status_code = requests_exception.status_code
+                    content = requests_exception.content
+                    raise exceptions.PlotlyRequestError(message, status_code,
+                                                        content)
                 else:
-                    requests_exception.message = message
-                    raise exceptions.PlotlyRequestError(requests_exception)
+                    message = requests_exception.message
+                    status_code = requests_exception.status_code
+                    content = requests_exception.content
+                    raise exceptions.PlotlyRequestError(message, status_code,
+                                                        content)
 
         if ('content-type' in response.headers and
                 'json' in response.headers['content-type'] and
