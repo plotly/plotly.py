@@ -16,23 +16,19 @@ and ploty's servers.
 """
 from __future__ import absolute_import
 
-import base64
 import copy
 import json
 import os
 import warnings
 
-import requests
 import six
 import six.moves
 
-from requests.auth import HTTPBasicAuth
-
-from plotly import exceptions, tools, utils, version, files
+from plotly import exceptions, tools, utils, files
+from plotly.api import v1, v2
 from plotly.plotly import chunked_requests
 from plotly.session import (sign_in, update_session_plot_options,
-                            get_session_plot_options, get_session_credentials,
-                            get_session_config)
+                            get_session_plot_options)
 from plotly.grid_objs import Grid, Column
 
 # This is imported like this for backwards compat. Careful if changing.
@@ -215,15 +211,22 @@ def plot(figure_or_data, validate=True, **plot_options):
                 pass
 
     plot_options = _plot_option_logic(plot_options)
-    res = _send_to_plotly(figure, **plot_options)
 
-    if res['error'] == '':
-        if plot_options['auto_open']:
-            _open_url(res['url'])
+    fig = tools._replace_newline(figure)  # does not mutate figure
+    data = fig.get('data', [])
+    response = v1.clientresp(data, **plot_options)
 
-        return res['url']
-    else:
-        raise exceptions.PlotlyAccountError(res['error'])
+    # Check if the url needs a secret key
+    url = response.json()['url']
+    if plot_options['sharing'] == 'secret':
+        if 'share_key=' not in url:
+            # add_share_key_to_url updates the url to include the share_key
+            url = add_share_key_to_url(url)
+
+    if plot_options['auto_open']:
+        _open_url(url)
+
+    return url
 
 
 def iplot_mpl(fig, resize=True, strip_style=False, update=None,
@@ -293,6 +296,64 @@ def plot_mpl(fig, resize=True, strip_style=False, update=None, **plot_options):
     return plot(fig, **plot_options)
 
 
+def _swap_keys(obj, key1, key2):
+    """Swap obj[key1] with obj[key2]"""
+    val1, val2 = None, None
+    try:
+        val2 = obj.pop(key1)
+    except KeyError:
+        pass
+    try:
+        val1 = obj.pop(key2)
+    except KeyError:
+        pass
+    if val2 is not None:
+        obj[key2] = val2
+    if val1 is not None:
+        obj[key1] = val1
+
+
+def _swap_xy_data(data_obj):
+    """Swap x and y data and references"""
+    swaps = [('x', 'y'),
+             ('x0', 'y0'),
+             ('dx', 'dy'),
+             ('xbins', 'ybins'),
+             ('nbinsx', 'nbinsy'),
+             ('autobinx', 'autobiny'),
+             ('error_x', 'error_y')]
+    for swap in swaps:
+        _swap_keys(data_obj, swap[0], swap[1])
+    try:
+        rows = len(data_obj['z'])
+        cols = len(data_obj['z'][0])
+        for row in data_obj['z']:
+            if len(row) != cols:
+                raise TypeError
+
+        # if we can't do transpose, we hit an exception before here
+        z = data_obj.pop('z')
+        data_obj['z'] = [[0 for rrr in range(rows)] for ccc in range(cols)]
+        for iii in range(rows):
+            for jjj in range(cols):
+                data_obj['z'][jjj][iii] = z[iii][jjj]
+    except (KeyError, TypeError, IndexError) as err:
+        warn = False
+        try:
+            if data_obj['z'] is not None:
+                warn = True
+            if len(data_obj['z']) == 0:
+                warn = False
+        except (KeyError, TypeError):
+            pass
+        if warn:
+            warnings.warn(
+                "Data in this file required an 'xy' swap but the 'z' matrix "
+                "in one of the data objects could not be transposed. Here's "
+                "why:\n\n{}".format(repr(err))
+            )
+
+
 def get_figure(file_owner_or_url, file_id=None, raw=False):
     """Returns a JSON figure representation for the specified file
 
@@ -340,15 +401,6 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
         file_id = url.replace(head, "").split('/')[1]
     else:
         file_owner = file_owner_or_url
-    resource = "/apigetfile/{username}/{file_id}".format(username=file_owner,
-                                                         file_id=file_id)
-    credentials = get_credentials()
-    validate_credentials(credentials)
-    username, api_key = credentials['username'], credentials['api_key']
-    headers = {'plotly-username': username,
-               'plotly-apikey': api_key,
-               'plotly-version': version.__version__,
-               'plotly-platform': 'python'}
     try:
         int(file_id)
     except ValueError:
@@ -363,28 +415,49 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
             "The 'file_id' argument must be a non-negative number."
         )
 
-    response = requests.get(plotly_rest_url + resource,
-                            headers=headers,
-                            verify=get_config()['plotly_ssl_verification'])
-    if response.status_code == 200:
-        if six.PY3:
-            content = json.loads(response.content.decode('utf-8'))
-        else:
-            content = json.loads(response.content)
-        response_payload = content['payload']
-        figure = response_payload['figure']
-        utils.decode_unicode(figure)
-        if raw:
-            return figure
-        else:
-            return tools.get_valid_graph_obj(figure, obj_type='Figure')
-    else:
+    fid = '{}:{}'.format(file_owner, file_id)
+    response = v2.plots.content(fid, inline_data=True)
+    figure = response.json()
+
+    # Fix 'histogramx', 'histogramy', and 'bardir' stuff
+    for index, entry in enumerate(figure['data']):
         try:
-            content = json.loads(response.content)
-            raise exceptions.PlotlyError(content)
-        except:
-            raise exceptions.PlotlyError(
-                "There was an error retrieving this file")
+            # Use xbins to bin data in x, and ybins to bin data in y
+            if all((entry['type'] == 'histogramy', 'xbins' in entry,
+                    'ybins' not in entry)):
+                entry['ybins'] = entry.pop('xbins')
+
+            # Convert bardir to orientation, and put the data into the axes
+            # it's eventually going to be used with
+            if entry['type'] in ['histogramx', 'histogramy']:
+                entry['type'] = 'histogram'
+            if 'bardir' in entry:
+                entry['orientation'] = entry.pop('bardir')
+                if entry['type'] == 'bar':
+                    if entry['orientation'] == 'h':
+                        _swap_xy_data(entry)
+                if entry['type'] == 'histogram':
+                    if ('x' in entry) and ('y' not in entry):
+                        if entry['orientation'] == 'h':
+                            _swap_xy_data(entry)
+                        del entry['orientation']
+                    if ('y' in entry) and ('x' not in entry):
+                        if entry['orientation'] == 'v':
+                            _swap_xy_data(entry)
+                        del entry['orientation']
+            figure['data'][index] = entry
+        except KeyError:
+            pass
+
+    # Remove stream dictionary if found in a data trace
+    # (it has private tokens in there we need to hide!)
+    for index, entry in enumerate(figure['data']):
+        if 'stream' in entry:
+            del figure['data'][index]['stream']
+
+    if raw:
+        return figure
+    return tools.get_valid_graph_obj(figure, obj_type='Figure')
 
 
 @utils.template_doc(**tools.get_config_file())
@@ -650,10 +723,6 @@ class image:
                     "Invalid scale parameter. Scale must be a number."
                 )
 
-        headers = _api_v2.headers()
-        headers['plotly_version'] = version.__version__
-        headers['content-type'] = 'application/json'
-
         payload = {'figure': figure, 'format': format}
         if width is not None:
             payload['width'] = width
@@ -661,38 +730,18 @@ class image:
             payload['height'] = height
         if scale is not None:
             payload['scale'] = scale
-        url = _api_v2.api_url('images/')
 
-        res = requests.post(
-            url, data=json.dumps(payload, cls=utils.PlotlyJSONEncoder),
-            headers=headers, verify=get_config()['plotly_ssl_verification'],
-        )
+        response = v2.images.create(payload)
 
-        headers = res.headers
-
-        if res.status_code == 200:
-            if ('content-type' in headers and
-                headers['content-type'] in ['image/png', 'image/jpeg',
-                                            'application/pdf',
-                                            'image/svg+xml']):
-                return res.content
-
-            elif ('content-type' in headers and
-                  'json' in headers['content-type']):
-                return_data = json.loads(res.content)
-                return return_data['image']
-        else:
-            try:
-                if ('content-type' in headers and
-                        'json' in headers['content-type']):
-                    return_data = json.loads(res.content)
-                else:
-                    return_data = {'error': res.content}
-            except:
-                raise exceptions.PlotlyError("The response "
-                                             "from plotly could "
-                                             "not be translated.")
-            raise exceptions.PlotlyError(return_data['error'])
+        headers = response.headers
+        if ('content-type' in headers and
+            headers['content-type'] in ['image/png', 'image/jpeg',
+                                        'application/pdf',
+                                        'image/svg+xml']):
+            return response.content
+        elif ('content-type' in headers and
+              'json' in headers['content-type']):
+            return response.json()['image']
 
     @classmethod
     def ishow(cls, figure_or_data, format='png', width=None, height=None,
@@ -806,22 +855,8 @@ class file_ops:
         >> mkdirs('new/folder/path')
 
         """
-        # trim trailing slash TODO: necessesary?
-        if folder_path[-1] == '/':
-            folder_path = folder_path[0:-1]
-
-        payload = {
-            'path': folder_path
-        }
-
-        url = _api_v2.api_url('folders')
-
-        res = requests.post(url, data=payload, headers=_api_v2.headers(),
-                            verify=get_config()['plotly_ssl_verification'])
-
-        _api_v2.response_handler(res)
-
-        return res.status_code
+        response = v2.folders.create({'path': folder_path})
+        return response.status_code
 
 
 class grid_ops:
@@ -850,6 +885,15 @@ class grid_ops:
                 if resp_col['name'] == req_col.name:
                     req_col.id = '{0}:{1}'.format(grid_id, resp_col['uid'])
                     response_columns.remove(resp_col)
+
+    @staticmethod
+    def ensure_uploaded(fid):
+        if fid:
+            return
+        raise exceptions.PlotlyError(
+            'This operation requires that the grid has already been uploaded '
+            'to Plotly. Try `uploading` first.'
+        )
 
     @classmethod
     def upload(cls, grid, filename,
@@ -931,37 +975,32 @@ class grid_ops:
 
         payload = {
             'filename': filename,
-            'data': json.dumps(grid_json, cls=utils.PlotlyJSONEncoder),
+            'data': grid_json,
             'world_readable': world_readable
         }
 
         if parent_path != '':
             payload['parent_path'] = parent_path
 
-        upload_url = _api_v2.api_url('grids')
+        response = v2.grids.create(payload)
 
-        req = requests.post(upload_url, data=payload,
-                            headers=_api_v2.headers(),
-                            verify=get_config()['plotly_ssl_verification'])
-
-        res = _api_v2.response_handler(req)
-
-        response_columns = res['file']['cols']
-        grid_id = res['file']['fid']
-        grid_url = res['file']['web_url']
+        parsed_content = response.json()
+        cols = parsed_content['file']['cols']
+        fid = parsed_content['file']['fid']
+        web_url = parsed_content['file']['web_url']
 
         # mutate the grid columns with the id's returned from the server
-        cls._fill_in_response_column_ids(grid, response_columns, grid_id)
+        cls._fill_in_response_column_ids(grid, cols, fid)
 
-        grid.id = grid_id
+        grid.id = fid
 
         if meta is not None:
             meta_ops.upload(meta, grid=grid)
 
         if auto_open:
-            _open_url(grid_url)
+            _open_url(web_url)
 
-        return grid_url
+        return web_url
 
     @classmethod
     def append_columns(cls, columns, grid=None, grid_url=None):
@@ -1001,7 +1040,9 @@ class grid_ops:
         ```
 
         """
-        grid_id = _api_v2.parse_grid_id_args(grid, grid_url)
+        grid_id = parse_grid_id_args(grid, grid_url)
+
+        grid_ops.ensure_uploaded(grid_id)
 
         # Verify unique column names
         column_names = [c.name for c in columns]
@@ -1013,17 +1054,15 @@ class grid_ops:
             err = exceptions.NON_UNIQUE_COLUMN_MESSAGE.format(duplicate_name)
             raise exceptions.InputError(err)
 
-        payload = {
+        # This is sorta gross, we need to double-encode this.
+        body = {
             'cols': json.dumps(columns, cls=utils.PlotlyJSONEncoder)
         }
+        fid = grid_id
+        response = v2.grids.col_create(fid, body)
+        parsed_content = response.json()
 
-        api_url = (_api_v2.api_url('grids') +
-                   '/{grid_id}/col'.format(grid_id=grid_id))
-        res = requests.post(api_url, data=payload, headers=_api_v2.headers(),
-                            verify=get_config()['plotly_ssl_verification'])
-        res = _api_v2.response_handler(res)
-
-        cls._fill_in_response_column_ids(columns, res['cols'], grid_id)
+        cls._fill_in_response_column_ids(columns, parsed_content['cols'], fid)
 
         if grid:
             grid.extend(columns)
@@ -1073,7 +1112,9 @@ class grid_ops:
         ```
 
         """
-        grid_id = _api_v2.parse_grid_id_args(grid, grid_url)
+        grid_id = parse_grid_id_args(grid, grid_url)
+
+        grid_ops.ensure_uploaded(grid_id)
 
         if grid:
             n_columns = len([column for column in grid])
@@ -1089,15 +1130,8 @@ class grid_ops:
                                 n_columns,
                                 'column' if n_columns == 1 else 'columns'))
 
-        payload = {
-            'rows': json.dumps(rows, cls=utils.PlotlyJSONEncoder)
-        }
-
-        api_url = (_api_v2.api_url('grids') +
-                   '/{grid_id}/row'.format(grid_id=grid_id))
-        res = requests.post(api_url, data=payload, headers=_api_v2.headers(),
-                            verify=get_config()['plotly_ssl_verification'])
-        _api_v2.response_handler(res)
+        fid = grid_id
+        v2.grids.row(fid, {'rows': rows})
 
         if grid:
             longest_column_length = max([len(col.data) for col in grid])
@@ -1145,11 +1179,10 @@ class grid_ops:
         ```
 
         """
-        grid_id = _api_v2.parse_grid_id_args(grid, grid_url)
-        api_url = _api_v2.api_url('grids') + '/' + grid_id
-        res = requests.delete(api_url, headers=_api_v2.headers(),
-                              verify=get_config()['plotly_ssl_verification'])
-        _api_v2.response_handler(res)
+        fid = parse_grid_id_args(grid, grid_url)
+        grid_ops.ensure_uploaded(fid)
+        v2.grids.trash(fid)
+        v2.grids.permanent_delete(fid)
 
 
 class meta_ops:
@@ -1207,290 +1240,99 @@ class meta_ops:
         ```
 
         """
-        grid_id = _api_v2.parse_grid_id_args(grid, grid_url)
-
-        payload = {
-            'metadata': json.dumps(meta, cls=utils.PlotlyJSONEncoder)
-        }
-
-        api_url = _api_v2.api_url('grids') + '/{grid_id}'.format(grid_id=grid_id)
-
-        res = requests.patch(api_url, data=payload, headers=_api_v2.headers(),
-                             verify=get_config()['plotly_ssl_verification'])
-
-        return _api_v2.response_handler(res)
+        fid = parse_grid_id_args(grid, grid_url)
+        return v2.grids.update(fid, {'metadata': meta}).json()
 
 
-class _api_v2:
+def parse_grid_id_args(grid, grid_url):
     """
-    Request and response helper class for communicating with Plotly's v2 API
+    Return the grid_id from the non-None input argument.
+
+    Raise an error if more than one argument was supplied.
 
     """
-    @classmethod
-    def parse_grid_id_args(cls, grid, grid_url):
-        """
-        Return the grid_id from the non-None input argument.
+    if grid is not None:
+        id_from_grid = grid.id
+    else:
+        id_from_grid = None
+    args = [id_from_grid, grid_url]
+    arg_names = ('grid', 'grid_url')
 
-        Raise an error if more than one argument was supplied.
+    supplied_arg_names = [arg_name for arg_name, arg
+                          in zip(arg_names, args) if arg is not None]
 
-        """
-        if grid is not None:
-            id_from_grid = grid.id
+    if not supplied_arg_names:
+        raise exceptions.InputError(
+            "One of the two keyword arguments is required:\n"
+            "    `grid` or `grid_url`\n\n"
+            "grid: a plotly.graph_objs.Grid object that has already\n"
+            "    been uploaded to Plotly.\n\n"
+            "grid_url: the url where the grid can be accessed on\n"
+            "    Plotly, e.g. 'https://plot.ly/~chris/3043'\n\n"
+        )
+    elif len(supplied_arg_names) > 1:
+        raise exceptions.InputError(
+            "Only one of `grid` or `grid_url` is required. \n"
+            "You supplied both. \n"
+        )
+    else:
+        supplied_arg_name = supplied_arg_names.pop()
+        if supplied_arg_name == 'grid_url':
+            path = six.moves.urllib.parse.urlparse(grid_url).path
+            file_owner, file_id = path.replace("/~", "").split('/')[0:2]
+            return '{0}:{1}'.format(file_owner, file_id)
         else:
-            id_from_grid = None
-        args = [id_from_grid, grid_url]
-        arg_names = ('grid', 'grid_url')
-
-        supplied_arg_names = [arg_name for arg_name, arg
-                              in zip(arg_names, args) if arg is not None]
-
-        if not supplied_arg_names:
-            raise exceptions.InputError(
-                "One of the two keyword arguments is required:\n"
-                "    `grid` or `grid_url`\n\n"
-                "grid: a plotly.graph_objs.Grid object that has already\n"
-                "    been uploaded to Plotly.\n\n"
-                "grid_url: the url where the grid can be accessed on\n"
-                "    Plotly, e.g. 'https://plot.ly/~chris/3043'\n\n"
-            )
-        elif len(supplied_arg_names) > 1:
-            raise exceptions.InputError(
-                "Only one of `grid` or `grid_url` is required. \n"
-                "You supplied both. \n"
-            )
-        else:
-            supplied_arg_name = supplied_arg_names.pop()
-            if supplied_arg_name == 'grid_url':
-                path = six.moves.urllib.parse.urlparse(grid_url).path
-                file_owner, file_id = path.replace("/~", "").split('/')[0:2]
-                return '{0}:{1}'.format(file_owner, file_id)
-            else:
-                return grid.id
-
-    @classmethod
-    def response_handler(cls, response):
-        try:
-            response.raise_for_status()
-        except requests.exceptions.HTTPError as requests_exception:
-            if (response.status_code == 404 and
-                    get_config()['plotly_api_domain']
-                    != tools.get_config_defaults()['plotly_api_domain']):
-                raise exceptions.PlotlyError(
-                    "This endpoint is unavailable at {url}. If you are using "
-                    "Plotly On-Premise, you may need to upgrade your Plotly "
-                    "Plotly On-Premise server to request against this endpoint or "
-                    "this endpoint may not be available yet.\nQuestions? "
-                    "Visit community.plot.ly, contact your plotly administrator "
-                    "or upgrade to a Pro account for 1-1 help: https://goo.gl/1YUVu9 "
-                    .format(url=get_config()['plotly_api_domain'])
-                )
-            else:
-                try:
-                    parsed_response = response.json()
-                except:
-                    parsed_response = response.content
-
-                try:
-                    # try get a friendly error message
-                    errors = parsed_response.get('errors')
-                    message = errors[-1]['message']
-                except:
-                    # otherwise raise a generic error
-                    message = 'No content'
-                    status_code = requests_exception.status_code
-                    content = requests_exception.content
-                    raise exceptions.PlotlyRequestError(message, status_code,
-                                                        content)
-                else:
-                    message = requests_exception.message
-                    status_code = requests_exception.status_code
-                    content = requests_exception.content
-                    raise exceptions.PlotlyRequestError(message, status_code,
-                                                        content)
-
-        if ('content-type' in response.headers and
-                'json' in response.headers['content-type'] and
-                len(response.content) > 0):
-
-            response_dict = json.loads(response.content.decode('utf8'))
-
-            if 'warnings' in response_dict and len(response_dict['warnings']):
-                warnings.warn('\n'.join(response_dict['warnings']))
-
-            return response_dict
-
-    @classmethod
-    def api_url(cls, resource):
-        return ('{0}/v2/{1}'.format(get_config()['plotly_api_domain'],
-                resource))
-
-    @classmethod
-    def headers(cls):
-        credentials = get_credentials()
-
-        # todo, validate here?
-        username, api_key = credentials['username'], credentials['api_key']
-        encoded_api_auth = base64.b64encode(six.b('{0}:{1}'.format(
-            username, api_key))).decode('utf8')
-
-        headers = {
-            'plotly-client-platform': 'python {0}'.format(version.__version__)
-        }
-
-        if get_config()['plotly_proxy_authorization']:
-            proxy_username = credentials['proxy_username']
-            proxy_password = credentials['proxy_password']
-            encoded_proxy_auth = base64.b64encode(six.b('{0}:{1}'.format(
-                proxy_username, proxy_password))).decode('utf8')
-            headers['authorization'] = 'Basic ' + encoded_proxy_auth
-            headers['plotly-authorization'] = 'Basic ' + encoded_api_auth
-        else:
-            headers['authorization'] = 'Basic ' + encoded_api_auth
-
-        return headers
+            return grid.id
 
 
-def validate_credentials(credentials):
-    """
-    Currently only checks for truthy username and api_key
-
-    """
-    username = credentials.get('username')
-    api_key = credentials.get('api_key')
-    if not username or not api_key:
-        raise exceptions.PlotlyLocalCredentialsError()
-
-
-def add_share_key_to_url(plot_url, attempt=0):
+def add_share_key_to_url(plot_url):
     """
     Update plot's url to include the secret key
 
     """
     urlsplit = six.moves.urllib.parse.urlparse(plot_url)
-    file_owner = urlsplit.path.split('/')[1].split('~')[1]
-    file_id = urlsplit.path.split('/')[2]
+    username = urlsplit.path.split('/')[1].split('~')[1]
+    idlocal = urlsplit.path.split('/')[2]
+    fid = '{}:{}'.format(username, idlocal)
 
-    url = _api_v2.api_url("files/") + file_owner + ":" + file_id
-    new_response = requests.patch(url,
-                                  headers=_api_v2.headers(),
-                                  data={"share_key_enabled":
-                                        "True",
-                                        "world_readable":
-                                        "False"})
+    body = {'share_key_enabled': True, 'world_readable': False}
+    response = v2.files.update(fid, body)
 
-    _api_v2.response_handler(new_response)
-
-    # decode bytes for python 3.3: https://bugs.python.org/issue10976
-    str_content = new_response.content.decode('utf-8')
-
-    new_response_data = json.loads(str_content)
-
-    plot_url += '?share_key=' + new_response_data['share_key']
-
-    # sometimes a share key is added, but access is still denied
-    # check for access, and retry a couple of times if this is the case
-    # https://github.com/plotly/streambed/issues/4089
-    embed_url = plot_url.split('?')[0] + '.embed' + plot_url.split('?')[1]
-    access_res = requests.get(embed_url)
-    if access_res.status_code == 404:
-        attempt += 1
-        if attempt == 5:
-            return plot_url
-        plot_url = add_share_key_to_url(plot_url.split('?')[0], attempt)
-
-    return plot_url
+    return plot_url + '?share_key=' + response.json()['share_key']
 
 
 def _send_to_plotly(figure, **plot_options):
     fig = tools._replace_newline(figure)  # does not mutate figure
-    data = json.dumps(fig['data'] if 'data' in fig else [],
-                      cls=utils.PlotlyJSONEncoder)
-    credentials = get_credentials()
-    validate_credentials(credentials)
-    username = credentials['username']
-    api_key = credentials['api_key']
-    kwargs = json.dumps(dict(filename=plot_options['filename'],
-                             fileopt=plot_options['fileopt'],
-                             world_readable=plot_options['world_readable'],
-                             sharing=plot_options['sharing'],
-                             layout=fig['layout'] if 'layout' in fig else {}),
-                        cls=utils.PlotlyJSONEncoder)
+    data = fig.get('data', [])
+    response = v1.clientresp(data, **plot_options)
 
-    # TODO: It'd be cool to expose the platform for RaspPi and others
-    payload = dict(platform='python',
-                   version=version.__version__,
-                   args=data,
-                   un=username,
-                   key=api_key,
-                   origin='plot',
-                   kwargs=kwargs)
-
-    url = get_config()['plotly_domain'] + "/clientresp"
-
-    r = requests.post(url, data=payload,
-                      verify=get_config()['plotly_ssl_verification'])
-    r.raise_for_status()
-    r = json.loads(r.text)
-
-    if 'error' in r and r['error'] != '':
-        raise exceptions.PlotlyError(r['error'])
+    parsed_content = response.json()
 
     # Check if the url needs a secret key
-    if (plot_options['sharing'] == 'secret' and
-            'share_key=' not in r['url']):
+    if plot_options['sharing'] == 'secret':
+        url = parsed_content['url']
+        if 'share_key=' not in url:
+            # add_share_key_to_url updates the url to include the share_key
+            parsed_content['url'] = add_share_key_to_url(url)
 
-        # add_share_key_to_url updates the url to include the share_key
-        r['url'] = add_share_key_to_url(r['url'])
-
-    if 'error' in r and r['error'] != '':
-        print(r['error'])
-    if 'warning' in r and r['warning'] != '':
-        warnings.warn(r['warning'])
-    if 'message' in r and r['message'] != '':
-        print(r['message'])
-
-    return r
+    return parsed_content
 
 
 def get_grid(grid_url, raw=False):
     """
     Returns the specified grid as a Grid instance or in JSON/dict form.
 
+    :param (str) grid_url: The web_url which locates a Plotly grid.
     :param (bool) raw: if False, will output a Grid instance of the JSON grid
     being retrieved. If True, raw JSON will be returned.
     """
-    credentials = get_credentials()
-    validate_credentials(credentials)
-    username, api_key = credentials['username'], credentials['api_key']
-    headers = {'plotly-username': username,
-               'plotly-apikey': api_key,
-               'plotly-version': version.__version__,
-               'plotly-platform': 'python'}
-    upload_url = _api_v2.api_url('grids')
+    fid = parse_grid_id_args(None, grid_url)
+    response = v2.grids.content(fid)
+    parsed_content = response.json()
 
-    # extract path in grid url
-    url_path = six.moves.urllib.parse.urlparse(grid_url)[2][2:]
-    if url_path[-1] == '/':
-        url_path = url_path[0: -1]
-    url_path = url_path.replace('/', ':')
-
-    meta_get_url = upload_url + '/' + url_path
-    get_url = meta_get_url + '/content'
-
-    r = requests.get(get_url, headers=headers)
-    json_res = json.loads(r.text)
-
-    # make request to grab the grid id (fid)
-    r_meta = requests.get(meta_get_url, headers=headers)
-    r_meta.raise_for_status()
-
-    json_res_meta = json.loads(r_meta.text)
-    retrieved_grid_id = json_res_meta['fid']
-
-    if raw is False:
-        return Grid(json_res, retrieved_grid_id)
-    else:
-        return json_res
+    if raw:
+        return parsed_content
+    return Grid(parsed_content, fid)
 
 
 def create_animations(figure, filename=None, sharing='public', auto_open=True):
@@ -1659,14 +1501,7 @@ def create_animations(figure, filename=None, sharing='public', auto_open=True):
     py.create_animations(figure, 'growing_circles')
     ```
     """
-    credentials = get_credentials()
-    validate_credentials(credentials)
-    username, api_key = credentials['username'], credentials['api_key']
-    auth = HTTPBasicAuth(str(username), str(api_key))
-    headers = {'Plotly-Client-Platform': 'python',
-               'content-type': 'application/json'}
-
-    json = {
+    body = {
         'figure': figure,
         'world_readable': True
     }
@@ -1680,32 +1515,30 @@ def create_animations(figure, filename=None, sharing='public', auto_open=True):
                 "automatic folder creation. This means a filename of the form "
                 "'name1/name2' will just create the plot with that name only."
             )
-        json['filename'] = filename
+        body['filename'] = filename
 
     # set sharing
     if sharing == 'public':
-        json['world_readable'] = True
+        body['world_readable'] = True
     elif sharing == 'private':
-        json['world_readable'] = False
+        body['world_readable'] = False
     elif sharing == 'secret':
-        json['world_readable'] = False
-        json['share_key_enabled'] = True
+        body['world_readable'] = False
+        body['share_key_enabled'] = True
     else:
         raise exceptions.PlotlyError(
             "Whoops, sharing can only be set to either 'public', 'private', "
             "or 'secret'."
         )
 
-    api_url = _api_v2.api_url('plots')
-    r = requests.post(api_url, auth=auth, headers=headers, json=json)
-
-    parsed_response = _api_v2.response_handler(r)
+    response = v2.plots.create(body)
+    parsed_content = response.json()
 
     if sharing == 'secret':
-        web_url = (parsed_response['file']['web_url'][:-1] +
-                   '?share_key=' + parsed_response['file']['share_key'])
+        web_url = (parsed_content['file']['web_url'][:-1] +
+                   '?share_key=' + parsed_content['file']['share_key'])
     else:
-        web_url = parsed_response['file']['web_url']
+        web_url = parsed_content['file']['web_url']
 
     if auto_open:
         _open_url(web_url)

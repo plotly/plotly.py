@@ -9,7 +9,6 @@ from __future__ import absolute_import
 
 import random
 import string
-import requests
 
 from nose import with_setup
 from nose.plugins.attrib import attr
@@ -17,10 +16,10 @@ from nose.tools import raises
 from unittest import skip
 
 import plotly.plotly as py
-from plotly.exceptions import InputError, PlotlyRequestError
+from plotly.exceptions import InputError, PlotlyRequestError, PlotlyError
 from plotly.graph_objs import Scatter
 from plotly.grid_objs import Column, Grid
-from plotly.plotly.plotly import _api_v2
+from plotly.plotly.plotly import parse_grid_id_args
 
 
 def random_filename():
@@ -124,19 +123,18 @@ _grid_url = 'https://plot.ly/~chris/3043/my-grid'
 
 def test_grid_id_args():
     assert(
-        _api_v2.parse_grid_id_args(_grid, None) ==
-        _api_v2.parse_grid_id_args(None, _grid_url)
+        parse_grid_id_args(_grid, None) == parse_grid_id_args(None, _grid_url)
     )
 
 
 @raises(InputError)
 def test_no_grid_id_args():
-    _api_v2.parse_grid_id_args(None, None)
+    parse_grid_id_args(None, None)
 
 
 @raises(InputError)
 def test_overspecified_grid_args():
-    _api_v2.parse_grid_id_args(_grid, _grid_url)
+    parse_grid_id_args(_grid, _grid_url)
 
 
 # Out of order usage
@@ -149,8 +147,7 @@ def test_scatter_from_non_uploaded_grid():
     Scatter(xsrc=g[0], ysrc=g[1])
 
 
-@attr('slow')
-@raises(requests.exceptions.HTTPError)
+@raises(PlotlyError)
 def test_column_append_of_non_uploaded_grid():
     c1 = Column([1, 2, 3, 4], 'first column')
     c2 = Column(['a', 'b', 'c', 'd'], 'second column')
@@ -158,8 +155,7 @@ def test_column_append_of_non_uploaded_grid():
     py.grid_ops.append_columns([c2], grid=g)
 
 
-@attr('slow')
-@raises(requests.exceptions.HTTPError)
+@raises(PlotlyError)
 def test_row_append_of_non_uploaded_grid():
     c1 = Column([1, 2, 3, 4], 'first column')
     rows = [[1], [2]]
