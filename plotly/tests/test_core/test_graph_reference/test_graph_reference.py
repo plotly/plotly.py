@@ -9,27 +9,22 @@ import os
 from pkg_resources import resource_string
 from unittest import TestCase
 
-import requests
-import six
 from nose.plugins.attrib import attr
 
-from plotly import files, graph_reference as gr
+from plotly import graph_reference as gr
+from plotly.api import v2
 from plotly.graph_reference import string_to_class_name, get_role
 from plotly.tests.utils import PlotlyTestCase
+
+FAKE_API_DOMAIN = 'https://api.am.not.here.ly'
 
 
 class TestGraphReferenceCaching(PlotlyTestCase):
 
     @attr('slow')
     def test_default_schema_is_up_to_date(self):
-        api_domain = files.FILE_CONTENT[files.CONFIG_FILE]['plotly_api_domain']
-        graph_reference_url = '{}{}?sha1'.format(api_domain, '/v2/plot-schema')
-        response = requests.get(graph_reference_url)
-        if six.PY3:
-            content = str(response.content, encoding='utf-8')
-        else:
-            content = response.content
-        schema = json.loads(content)['schema']
+        response = v2.plot_schema.retrieve('')
+        schema = response.json()['schema']
 
         path = os.path.join('package_data', 'default-schema.json')
         s = resource_string('plotly', path).decode('utf-8')
