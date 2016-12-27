@@ -26,6 +26,7 @@ import six.moves
 
 from plotly import exceptions, tools, utils, files
 from plotly.api import v1, v2
+from plotly.graph_reference import GRAPH_REFERENCE
 from plotly.plotly import chunked_requests
 from plotly.session import (sign_in, update_session_plot_options,
                             get_session_plot_options)
@@ -46,7 +47,7 @@ DEFAULT_PLOT_OPTIONS = {
 }
 
 # test file permissions and make sure nothing is corrupted
-tools.ensure_local_plotly_files()
+tools.ensure_local_plotly_files(graph_reference=GRAPH_REFERENCE)
 
 
 # don't break backwards compatibility
