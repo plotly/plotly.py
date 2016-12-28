@@ -565,6 +565,30 @@
                 "role": "info",
                 "valType": "boolean"
             },
+            "calendar": {
+                "description": "Sets the default calendar system to use for interpreting and displaying dates throughout the plot.",
+                "dflt": "gregorian",
+                "role": "info",
+                "valType": "enumerated",
+                "values": [
+                    "gregorian",
+                    "chinese",
+                    "coptic",
+                    "discworld",
+                    "ethiopian",
+                    "hebrew",
+                    "islamic",
+                    "julian",
+                    "mayan",
+                    "nanakshahi",
+                    "nepali",
+                    "persian",
+                    "jalali",
+                    "taiwan",
+                    "thai",
+                    "ummalqura"
+                ]
+            },
             "direction": {
                 "description": "For polar plots only. Sets the direction corresponding to positive angles.",
                 "role": "info",
@@ -1815,6 +1839,30 @@
                         "role": "style",
                         "valType": "color"
                     },
+                    "calendar": {
+                        "description": "Sets the calendar system to use for `range` and `tick0` if this is a date axis. This does not set the calendar for interpreting data on this axis, that's specified in the trace or via the global `layout.calendar`",
+                        "dflt": "gregorian",
+                        "role": "info",
+                        "valType": "enumerated",
+                        "values": [
+                            "gregorian",
+                            "chinese",
+                            "coptic",
+                            "discworld",
+                            "ethiopian",
+                            "hebrew",
+                            "islamic",
+                            "julian",
+                            "mayan",
+                            "nanakshahi",
+                            "nepali",
+                            "persian",
+                            "jalali",
+                            "taiwan",
+                            "thai",
+                            "ummalqura"
+                        ]
+                    },
                     "categoryarray": {
                         "description": "Sets the order in which categories on this axis appear. Only has an effect if `categoryorder` is set to *array*. Used with `categoryorder`.",
                         "role": "data",
@@ -2224,6 +2272,30 @@
                         "role": "style",
                         "valType": "color"
                     },
+                    "calendar": {
+                        "description": "Sets the calendar system to use for `range` and `tick0` if this is a date axis. This does not set the calendar for interpreting data on this axis, that's specified in the trace or via the global `layout.calendar`",
+                        "dflt": "gregorian",
+                        "role": "info",
+                        "valType": "enumerated",
+                        "values": [
+                            "gregorian",
+                            "chinese",
+                            "coptic",
+                            "discworld",
+                            "ethiopian",
+                            "hebrew",
+                            "islamic",
+                            "julian",
+                            "mayan",
+                            "nanakshahi",
+                            "nepali",
+                            "persian",
+                            "jalali",
+                            "taiwan",
+                            "thai",
+                            "ummalqura"
+                        ]
+                    },
                     "categoryarray": {
                         "description": "Sets the order in which categories on this axis appear. Only has an effect if `categoryorder` is set to *array*. Used with `categoryorder`.",
                         "role": "data",
@@ -2632,6 +2704,30 @@
                         "dflt": "rgba(204, 204, 204, 0.5)",
                         "role": "style",
                         "valType": "color"
+                    },
+                    "calendar": {
+                        "description": "Sets the calendar system to use for `range` and `tick0` if this is a date axis. This does not set the calendar for interpreting data on this axis, that's specified in the trace or via the global `layout.calendar`",
+                        "dflt": "gregorian",
+                        "role": "info",
+                        "valType": "enumerated",
+                        "values": [
+                            "gregorian",
+                            "chinese",
+                            "coptic",
+                            "discworld",
+                            "ethiopian",
+                            "hebrew",
+                            "islamic",
+                            "julian",
+                            "mayan",
+                            "nanakshahi",
+                            "nepali",
+                            "persian",
+                            "jalali",
+                            "taiwan",
+                            "thai",
+                            "ummalqura"
+                        ]
                     },
                     "categoryarray": {
                         "description": "Sets the order in which categories on this axis appear. Only has an effect if `categoryorder` is set to *array*. Used with `categoryorder`.",
@@ -4626,6 +4722,30 @@
                         "reversed"
                     ]
                 },
+                "calendar": {
+                    "description": "Sets the calendar system to use for `range` and `tick0` if this is a date axis. This does not set the calendar for interpreting data on this axis, that's specified in the trace or via the global `layout.calendar`",
+                    "dflt": "gregorian",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "gregorian",
+                        "chinese",
+                        "coptic",
+                        "discworld",
+                        "ethiopian",
+                        "hebrew",
+                        "islamic",
+                        "julian",
+                        "mayan",
+                        "nanakshahi",
+                        "nepali",
+                        "persian",
+                        "jalali",
+                        "taiwan",
+                        "thai",
+                        "ummalqura"
+                    ]
+                },
                 "categoryarray": {
                     "description": "Sets the order in which categories on this axis appear. Only has an effect if `categoryorder` is set to *array*. Used with `categoryorder`.",
                     "role": "data",
@@ -4852,7 +4972,7 @@
                                     ]
                                 },
                                 "stepmode": {
-                                    "description": "Sets the range update mode. If *backward*, the range update shifts the start of range back *count* times *step* milliseconds. If *todate*, the range update shifts the start of range back to the first timestamp from *count* times *step* milliseconds back. For example, with `step` set to *year* and `count` set to *1* the range update shifts the start of the range back to January 01 of the current year.",
+                                    "description": "Sets the range update mode. If *backward*, the range update shifts the start of range back *count* times *step* milliseconds. If *todate*, the range update shifts the start of range back to the first timestamp from *count* times *step* milliseconds back. For example, with `step` set to *year* and `count` set to *1* the range update shifts the start of the range back to January 01 of the current year. Month and year *todate* are currently available only for the built-in (Gregorian) calendar.",
                                     "dflt": "backward",
                                     "role": "info",
                                     "valType": "enumerated",
@@ -5243,6 +5363,30 @@
                         true,
                         false,
                         "reversed"
+                    ]
+                },
+                "calendar": {
+                    "description": "Sets the calendar system to use for `range` and `tick0` if this is a date axis. This does not set the calendar for interpreting data on this axis, that's specified in the trace or via the global `layout.calendar`",
+                    "dflt": "gregorian",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "gregorian",
+                        "chinese",
+                        "coptic",
+                        "discworld",
+                        "ethiopian",
+                        "hebrew",
+                        "islamic",
+                        "julian",
+                        "mayan",
+                        "nanakshahi",
+                        "nepali",
+                        "persian",
+                        "jalali",
+                        "taiwan",
+                        "thai",
+                        "ummalqura"
                     ]
                 },
                 "categoryarray": {
@@ -6354,6 +6498,44 @@
                     "role": "info",
                     "valType": "flaglist"
                 },
+                "insidetextfont": {
+                    "color": {
+                        "arrayOk": true,
+                        "role": "style",
+                        "valType": "color"
+                    },
+                    "colorsrc": {
+                        "description": "Sets the source reference on plot.ly for  color .",
+                        "role": "info",
+                        "valType": "string"
+                    },
+                    "description": "Sets the font used for `text` lying inside the bar.",
+                    "family": {
+                        "arrayOk": true,
+                        "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                        "noBlank": true,
+                        "role": "style",
+                        "strict": true,
+                        "valType": "string"
+                    },
+                    "familysrc": {
+                        "description": "Sets the source reference on plot.ly for  family .",
+                        "role": "info",
+                        "valType": "string"
+                    },
+                    "role": "object",
+                    "size": {
+                        "arrayOk": true,
+                        "min": 1,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "sizesrc": {
+                        "description": "Sets the source reference on plot.ly for  size .",
+                        "role": "info",
+                        "valType": "string"
+                    }
+                },
                 "legendgroup": {
                     "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
                     "dflt": "",
@@ -6853,6 +7035,44 @@
                         "h"
                     ]
                 },
+                "outsidetextfont": {
+                    "color": {
+                        "arrayOk": true,
+                        "role": "style",
+                        "valType": "color"
+                    },
+                    "colorsrc": {
+                        "description": "Sets the source reference on plot.ly for  color .",
+                        "role": "info",
+                        "valType": "string"
+                    },
+                    "description": "Sets the font used for `text` lying outside the bar.",
+                    "family": {
+                        "arrayOk": true,
+                        "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                        "noBlank": true,
+                        "role": "style",
+                        "strict": true,
+                        "valType": "string"
+                    },
+                    "familysrc": {
+                        "description": "Sets the source reference on plot.ly for  family .",
+                        "role": "info",
+                        "valType": "string"
+                    },
+                    "role": "object",
+                    "size": {
+                        "arrayOk": true,
+                        "min": 1,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "sizesrc": {
+                        "description": "Sets the source reference on plot.ly for  size .",
+                        "role": "info",
+                        "valType": "string"
+                    }
+                },
                 "r": {
                     "description": "For polar chart only.Sets the radial coordinates.",
                     "role": "data",
@@ -6896,6 +7116,62 @@
                     "arrayOk": true,
                     "description": "Sets text elements associated with each (x,y) pair. If a single string, the same string appears over all the data points. If an array of string, the items are mapped in order to the this trace's (x,y) coordinates.",
                     "dflt": "",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "textfont": {
+                    "color": {
+                        "arrayOk": true,
+                        "role": "style",
+                        "valType": "color"
+                    },
+                    "colorsrc": {
+                        "description": "Sets the source reference on plot.ly for  color .",
+                        "role": "info",
+                        "valType": "string"
+                    },
+                    "description": "Sets the font used for `text`.",
+                    "family": {
+                        "arrayOk": true,
+                        "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                        "noBlank": true,
+                        "role": "style",
+                        "strict": true,
+                        "valType": "string"
+                    },
+                    "familysrc": {
+                        "description": "Sets the source reference on plot.ly for  family .",
+                        "role": "info",
+                        "valType": "string"
+                    },
+                    "role": "object",
+                    "size": {
+                        "arrayOk": true,
+                        "min": 1,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "sizesrc": {
+                        "description": "Sets the source reference on plot.ly for  size .",
+                        "role": "info",
+                        "valType": "string"
+                    }
+                },
+                "textposition": {
+                    "arrayOk": true,
+                    "description": "Specifies the location of the `text`. *inside* positions `text` inside, next to the bar end (rotated and scaled if needed). *outside* positions `text` outside, next to the bar end (scaled if needed). *auto* positions `text` inside or outside so that `text` size is maximized.",
+                    "dflt": "none",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "inside",
+                        "outside",
+                        "auto",
+                        "none"
+                    ]
+                },
+                "textpositionsrc": {
+                    "description": "Sets the source reference on plot.ly for  textposition .",
                     "role": "info",
                     "valType": "string"
                 },
@@ -6956,6 +7232,30 @@
                     "role": "info",
                     "valType": "subplotid"
                 },
+                "xcalendar": {
+                    "description": "Sets the calendar system to use with `x` date data.",
+                    "dflt": "gregorian",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "gregorian",
+                        "chinese",
+                        "coptic",
+                        "discworld",
+                        "ethiopian",
+                        "hebrew",
+                        "islamic",
+                        "julian",
+                        "mayan",
+                        "nanakshahi",
+                        "nepali",
+                        "persian",
+                        "jalali",
+                        "taiwan",
+                        "thai",
+                        "ummalqura"
+                    ]
+                },
                 "xsrc": {
                     "description": "Sets the source reference on plot.ly for  x .",
                     "role": "info",
@@ -6977,6 +7277,30 @@
                     "dflt": "y",
                     "role": "info",
                     "valType": "subplotid"
+                },
+                "ycalendar": {
+                    "description": "Sets the calendar system to use with `y` date data.",
+                    "dflt": "gregorian",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "gregorian",
+                        "chinese",
+                        "coptic",
+                        "discworld",
+                        "ethiopian",
+                        "hebrew",
+                        "islamic",
+                        "julian",
+                        "mayan",
+                        "nanakshahi",
+                        "nepali",
+                        "persian",
+                        "jalali",
+                        "taiwan",
+                        "thai",
+                        "ummalqura"
+                    ]
                 },
                 "ysrc": {
                     "description": "Sets the source reference on plot.ly for  y .",
@@ -7846,6 +8170,30 @@
                     "dflt": "x",
                     "role": "info",
                     "valType": "subplotid"
+                },
+                "xcalendar": {
+                    "description": "Sets the calendar system to use with `x` date data.",
+                    "dflt": "gregorian",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "gregorian",
+                        "chinese",
+                        "coptic",
+                        "discworld",
+                        "ethiopian",
+                        "hebrew",
+                        "islamic",
+                        "julian",
+                        "mayan",
+                        "nanakshahi",
+                        "nepali",
+                        "persian",
+                        "jalali",
+                        "taiwan",
+                        "thai",
+                        "ummalqura"
+                    ]
                 },
                 "xsrc": {
                     "description": "Sets the source reference on plot.ly for  x .",
@@ -8991,6 +9339,30 @@
                     "role": "info",
                     "valType": "subplotid"
                 },
+                "xcalendar": {
+                    "description": "Sets the calendar system to use with `x` date data.",
+                    "dflt": "gregorian",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "gregorian",
+                        "chinese",
+                        "coptic",
+                        "discworld",
+                        "ethiopian",
+                        "hebrew",
+                        "islamic",
+                        "julian",
+                        "mayan",
+                        "nanakshahi",
+                        "nepali",
+                        "persian",
+                        "jalali",
+                        "taiwan",
+                        "thai",
+                        "ummalqura"
+                    ]
+                },
                 "xsrc": {
                     "description": "Sets the source reference on plot.ly for  x .",
                     "role": "info",
@@ -9021,6 +9393,30 @@
                     "dflt": "y",
                     "role": "info",
                     "valType": "subplotid"
+                },
+                "ycalendar": {
+                    "description": "Sets the calendar system to use with `y` date data.",
+                    "dflt": "gregorian",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "gregorian",
+                        "chinese",
+                        "coptic",
+                        "discworld",
+                        "ethiopian",
+                        "hebrew",
+                        "islamic",
+                        "julian",
+                        "mayan",
+                        "nanakshahi",
+                        "nepali",
+                        "persian",
+                        "jalali",
+                        "taiwan",
+                        "thai",
+                        "ummalqura"
+                    ]
                 },
                 "ysrc": {
                     "description": "Sets the source reference on plot.ly for  y .",
@@ -9565,6 +9961,30 @@
                     "role": "info",
                     "valType": "subplotid"
                 },
+                "xcalendar": {
+                    "description": "Sets the calendar system to use with `x` date data.",
+                    "dflt": "gregorian",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "gregorian",
+                        "chinese",
+                        "coptic",
+                        "discworld",
+                        "ethiopian",
+                        "hebrew",
+                        "islamic",
+                        "julian",
+                        "mayan",
+                        "nanakshahi",
+                        "nepali",
+                        "persian",
+                        "jalali",
+                        "taiwan",
+                        "thai",
+                        "ummalqura"
+                    ]
+                },
                 "xgap": {
                     "description": "Sets the horizontal gap (in pixels) between bricks.",
                     "dflt": 0,
@@ -9602,6 +10022,30 @@
                     "dflt": "y",
                     "role": "info",
                     "valType": "subplotid"
+                },
+                "ycalendar": {
+                    "description": "Sets the calendar system to use with `y` date data.",
+                    "dflt": "gregorian",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "gregorian",
+                        "chinese",
+                        "coptic",
+                        "discworld",
+                        "ethiopian",
+                        "hebrew",
+                        "islamic",
+                        "julian",
+                        "mayan",
+                        "nanakshahi",
+                        "nepali",
+                        "persian",
+                        "jalali",
+                        "taiwan",
+                        "thai",
+                        "ummalqura"
+                    ]
                 },
                 "ygap": {
                     "description": "Sets the vertical gap (in pixels) between bricks.",
@@ -9666,6 +10110,574 @@
             },
             "meta": {
                 "description": "The data that describes the heatmap value-to-color mapping is set in `z`. Data in `z` can either be a {2D array} of values (ragged or not) or a 1D array of values. In the case where `z` is a {2D array}, say that `z` has N rows and M columns. Then, by default, the resulting heatmap will have N partitions along the y axis and M partitions along the x axis. In other words, the i-th row/ j-th column cell in `z` is mapped to the i-th partition of the y axis (starting from the bottom of the plot) and the j-th partition of the x-axis (starting from the left of the plot). This behavior can be flipped by using `transpose`. Moreover, `x` (`y`) can be provided with M or M+1 (N or N+1) elements. If M (N), then the coordinates correspond to the center of the heatmap cells and the cells have equal width. If M+1 (N+1), then the coordinates correspond to the edges of the heatmap cells. In the case where `z` is a 1D {array}, the x and y coordinates must be provided in `x` and `y` respectively to form data triplets."
+            }
+        },
+        "heatmapgl": {
+            "attributes": {
+                "autocolorscale": {
+                    "description": "Determines whether or not the colorscale is picked using the sign of the input z values.",
+                    "dflt": false,
+                    "role": "style",
+                    "valType": "boolean"
+                },
+                "colorbar": {
+                    "bgcolor": {
+                        "description": "Sets the color of padded area.",
+                        "dflt": "rgba(0,0,0,0)",
+                        "role": "style",
+                        "valType": "color"
+                    },
+                    "bordercolor": {
+                        "description": "Sets the axis line color.",
+                        "dflt": "#444",
+                        "role": "style",
+                        "valType": "color"
+                    },
+                    "borderwidth": {
+                        "description": "Sets the width (in px) or the border enclosing this color bar.",
+                        "dflt": 0,
+                        "min": 0,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "dtick": {
+                        "description": "Sets the step in-between ticks on this axis. Use with `tick0`. Must be a positive number, or special strings available to *log* and *date* axes. If the axis `type` is *log*, then ticks are set every 10^(n*dtick) where n is the tick number. For example, to set a tick mark at 1, 10, 100, 1000, ... set dtick to 1. To set tick marks at 1, 100, 10000, ... set dtick to 2. To set tick marks at 1, 5, 25, 125, 625, 3125, ... set dtick to log_10(5), or 0.69897000433. *log* has several special values; *L<f>*, where `f` is a positive number, gives ticks linearly spaced in value (but not position). For example `tick0` = 0.1, `dtick` = *L0.5* will put ticks at 0.1, 0.6, 1.1, 1.6 etc. To show powers of 10 plus small digits between, use *D1* (all digits) or *D2* (only 2 and 5). `tick0` is ignored for *D1* and *D2*. If the axis `type` is *date*, then you must convert the time to milliseconds. For example, to set the interval between ticks to one day, set `dtick` to 86400000.0. *date* also has special values *M<n>* gives ticks spaced by a number of months. `n` must be a positive integer. To set ticks on the 15th of every third month, set `tick0` to *2000-01-15* and `dtick` to *M3*. To set ticks every 4 years, set `dtick` to *M48*",
+                        "role": "style",
+                        "valType": "any"
+                    },
+                    "exponentformat": {
+                        "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B.",
+                        "dflt": "B",
+                        "role": "style",
+                        "valType": "enumerated",
+                        "values": [
+                            "none",
+                            "e",
+                            "E",
+                            "power",
+                            "SI",
+                            "B"
+                        ]
+                    },
+                    "len": {
+                        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
+                        "dflt": 1,
+                        "min": 0,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "lenmode": {
+                        "description": "Determines whether this color bar's length (i.e. the measure in the color variation direction) is set in units of plot *fraction* or in *pixels. Use `len` to set the value.",
+                        "dflt": "fraction",
+                        "role": "info",
+                        "valType": "enumerated",
+                        "values": [
+                            "fraction",
+                            "pixels"
+                        ]
+                    },
+                    "nticks": {
+                        "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*.",
+                        "dflt": 0,
+                        "min": 0,
+                        "role": "style",
+                        "valType": "integer"
+                    },
+                    "outlinecolor": {
+                        "description": "Sets the axis line color.",
+                        "dflt": "#444",
+                        "role": "style",
+                        "valType": "color"
+                    },
+                    "outlinewidth": {
+                        "description": "Sets the width (in px) of the axis line.",
+                        "dflt": 1,
+                        "min": 0,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "role": "object",
+                    "separatethousands": {
+                        "description": "If \"true\", even 4-digit integers are separated",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
+                    "showexponent": {
+                        "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
+                        "dflt": "all",
+                        "role": "style",
+                        "valType": "enumerated",
+                        "values": [
+                            "all",
+                            "first",
+                            "last",
+                            "none"
+                        ]
+                    },
+                    "showticklabels": {
+                        "description": "Determines whether or not the tick labels are drawn.",
+                        "dflt": true,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
+                    "showtickprefix": {
+                        "description": "If *all*, all tick labels are displayed with a prefix. If *first*, only the first tick is displayed with a prefix. If *last*, only the last tick is displayed with a suffix. If *none*, tick prefixes are hidden.",
+                        "dflt": "all",
+                        "role": "style",
+                        "valType": "enumerated",
+                        "values": [
+                            "all",
+                            "first",
+                            "last",
+                            "none"
+                        ]
+                    },
+                    "showticksuffix": {
+                        "description": "Same as `showtickprefix` but for tick suffixes.",
+                        "dflt": "all",
+                        "role": "style",
+                        "valType": "enumerated",
+                        "values": [
+                            "all",
+                            "first",
+                            "last",
+                            "none"
+                        ]
+                    },
+                    "thickness": {
+                        "description": "Sets the thickness of the color bar This measure excludes the size of the padding, ticks and labels.",
+                        "dflt": 30,
+                        "min": 0,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "thicknessmode": {
+                        "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels*. Use `thickness` to set the value.",
+                        "dflt": "pixels",
+                        "role": "style",
+                        "valType": "enumerated",
+                        "values": [
+                            "fraction",
+                            "pixels"
+                        ]
+                    },
+                    "tick0": {
+                        "description": "Sets the placement of the first tick on this axis. Use with `dtick`. If the axis `type` is *log*, then you must take the log of your starting tick (e.g. to set the starting tick to 100, set the `tick0` to 2) except when `dtick`=*L<f>* (see `dtick` for more info). If the axis `type` is *date*, it should be a date string, like date data. If the axis `type` is *category*, it should be a number, using the scale where each category is assigned a serial number from zero in the order it appears.",
+                        "role": "style",
+                        "valType": "any"
+                    },
+                    "tickangle": {
+                        "description": "Sets the angle of the tick labels with respect to the horizontal. For example, a `tickangle` of -90 draws the tick labels vertically.",
+                        "dflt": "auto",
+                        "role": "style",
+                        "valType": "angle"
+                    },
+                    "tickcolor": {
+                        "description": "Sets the tick color.",
+                        "dflt": "#444",
+                        "role": "style",
+                        "valType": "color"
+                    },
+                    "tickfont": {
+                        "color": {
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "description": "Sets the tick font.",
+                        "family": {
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                            "noBlank": true,
+                            "role": "style",
+                            "strict": true,
+                            "valType": "string"
+                        },
+                        "role": "object",
+                        "size": {
+                            "min": 1,
+                            "role": "style",
+                            "valType": "number"
+                        }
+                    },
+                    "tickformat": {
+                        "description": "Sets the tick label formatting rule using d3 formatting mini-languages which are very similar to those in Python. For numbers, see: https://github.com/d3/d3-format/blob/master/README.md#locale_format And for dates see: https://github.com/d3/d3-time-format/blob/master/README.md#locale_format We add one item to d3's date formatter: *%{n}f* for fractional seconds with n digits. For example, *2016-10-13 09:15:23.456* with tickformat *%H~%M~%S.%2f* would display *09~15~23.46*",
+                        "dflt": "",
+                        "role": "style",
+                        "valType": "string"
+                    },
+                    "ticklen": {
+                        "description": "Sets the tick length (in px).",
+                        "dflt": 5,
+                        "min": 0,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "tickmode": {
+                        "description": "Sets the tick mode for this axis. If *auto*, the number of ticks is set via `nticks`. If *linear*, the placement of the ticks is determined by a starting position `tick0` and a tick step `dtick` (*linear* is the default value if `tick0` and `dtick` are provided). If *array*, the placement of the ticks is set via `tickvals` and the tick text is `ticktext`. (*array* is the default value if `tickvals` is provided).",
+                        "role": "info",
+                        "valType": "enumerated",
+                        "values": [
+                            "auto",
+                            "linear",
+                            "array"
+                        ]
+                    },
+                    "tickprefix": {
+                        "description": "Sets a tick label prefix.",
+                        "dflt": "",
+                        "role": "style",
+                        "valType": "string"
+                    },
+                    "ticks": {
+                        "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
+                        "dflt": "",
+                        "role": "style",
+                        "valType": "enumerated",
+                        "values": [
+                            "outside",
+                            "inside",
+                            ""
+                        ]
+                    },
+                    "ticksuffix": {
+                        "description": "Sets a tick label suffix.",
+                        "dflt": "",
+                        "role": "style",
+                        "valType": "string"
+                    },
+                    "ticktext": {
+                        "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `tickvals`.",
+                        "role": "data",
+                        "valType": "data_array"
+                    },
+                    "ticktextsrc": {
+                        "description": "Sets the source reference on plot.ly for  ticktext .",
+                        "role": "info",
+                        "valType": "string"
+                    },
+                    "tickvals": {
+                        "description": "Sets the values at which ticks on this axis appear. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
+                        "role": "data",
+                        "valType": "data_array"
+                    },
+                    "tickvalssrc": {
+                        "description": "Sets the source reference on plot.ly for  tickvals .",
+                        "role": "info",
+                        "valType": "string"
+                    },
+                    "tickwidth": {
+                        "description": "Sets the tick width (in px).",
+                        "dflt": 1,
+                        "min": 0,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "title": {
+                        "description": "Sets the title of the color bar.",
+                        "dflt": "Click to enter colorscale title",
+                        "role": "info",
+                        "valType": "string"
+                    },
+                    "titlefont": {
+                        "color": {
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "description": "Sets this color bar's title font.",
+                        "family": {
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                            "noBlank": true,
+                            "role": "style",
+                            "strict": true,
+                            "valType": "string"
+                        },
+                        "role": "object",
+                        "size": {
+                            "min": 1,
+                            "role": "style",
+                            "valType": "number"
+                        }
+                    },
+                    "titleside": {
+                        "description": "Determines the location of the colorbar title with respect to the color bar.",
+                        "dflt": "top",
+                        "role": "style",
+                        "valType": "enumerated",
+                        "values": [
+                            "right",
+                            "top",
+                            "bottom"
+                        ]
+                    },
+                    "x": {
+                        "description": "Sets the x position of the color bar (in plot fraction).",
+                        "dflt": 1.02,
+                        "max": 3,
+                        "min": -2,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "xanchor": {
+                        "description": "Sets this color bar's horizontal position anchor. This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
+                        "dflt": "left",
+                        "role": "style",
+                        "valType": "enumerated",
+                        "values": [
+                            "left",
+                            "center",
+                            "right"
+                        ]
+                    },
+                    "xpad": {
+                        "description": "Sets the amount of padding (in px) along the x direction.",
+                        "dflt": 10,
+                        "min": 0,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "y": {
+                        "description": "Sets the y position of the color bar (in plot fraction).",
+                        "dflt": 0.5,
+                        "max": 3,
+                        "min": -2,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "yanchor": {
+                        "description": "Sets this color bar's vertical position anchor This anchor binds the `y` position to the *top*, *middle* or *bottom* of the color bar.",
+                        "dflt": "middle",
+                        "role": "style",
+                        "valType": "enumerated",
+                        "values": [
+                            "top",
+                            "middle",
+                            "bottom"
+                        ]
+                    },
+                    "ypad": {
+                        "description": "Sets the amount of padding (in px) along the y direction.",
+                        "dflt": 10,
+                        "min": 0,
+                        "role": "style",
+                        "valType": "number"
+                    }
+                },
+                "colorscale": {
+                    "description": "Sets the colorscale. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in z space, use zmin and zmax",
+                    "role": "style",
+                    "valType": "colorscale"
+                },
+                "dx": {
+                    "description": "Sets the x coordinate step. See `x0` for more info.",
+                    "dflt": 1,
+                    "role": "info",
+                    "valType": "number"
+                },
+                "dy": {
+                    "description": "Sets the y coordinate step. See `y0` for more info.",
+                    "dflt": 1,
+                    "role": "info",
+                    "valType": "number"
+                },
+                "hoverinfo": {
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
+                    "dflt": "all",
+                    "extras": [
+                        "all",
+                        "none",
+                        "skip"
+                    ],
+                    "flags": [
+                        "x",
+                        "y",
+                        "z",
+                        "text",
+                        "name"
+                    ],
+                    "role": "info",
+                    "valType": "flaglist"
+                },
+                "legendgroup": {
+                    "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
+                    "dflt": "",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "name": {
+                    "description": "Sets the trace name. The trace name appear as the legend item and on hover.",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "opacity": {
+                    "description": "Sets the opacity of the trace.",
+                    "dflt": 1,
+                    "max": 1,
+                    "min": 0,
+                    "role": "style",
+                    "valType": "number"
+                },
+                "reversescale": {
+                    "description": "Reverses the colorscale.",
+                    "dflt": false,
+                    "role": "style",
+                    "valType": "boolean"
+                },
+                "showlegend": {
+                    "description": "Determines whether or not an item corresponding to this trace is shown in the legend.",
+                    "dflt": true,
+                    "role": "info",
+                    "valType": "boolean"
+                },
+                "showscale": {
+                    "description": "Determines whether or not a colorbar is displayed for this trace.",
+                    "dflt": true,
+                    "role": "info",
+                    "valType": "boolean"
+                },
+                "stream": {
+                    "maxpoints": {
+                        "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot.",
+                        "dflt": 500,
+                        "max": 10000,
+                        "min": 0,
+                        "role": "info",
+                        "valType": "number"
+                    },
+                    "role": "object",
+                    "token": {
+                        "description": "The stream id number links a data trace on a plot with a stream. See https://plot.ly/settings for more details.",
+                        "noBlank": true,
+                        "role": "info",
+                        "strict": true,
+                        "valType": "string"
+                    }
+                },
+                "text": {
+                    "description": "Sets the text elements associated with each z value.",
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "textsrc": {
+                    "description": "Sets the source reference on plot.ly for  text .",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "transpose": {
+                    "description": "Transposes the z data.",
+                    "dflt": false,
+                    "role": "info",
+                    "valType": "boolean"
+                },
+                "type": "heatmapgl",
+                "uid": {
+                    "dflt": "",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "visible": {
+                    "description": "Determines whether or not this trace is visible. If *legendonly*, the trace is not drawn, but can appear as a legend item (provided that the legend itself is visible).",
+                    "dflt": true,
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        true,
+                        false,
+                        "legendonly"
+                    ]
+                },
+                "x": {
+                    "description": "Sets the x coordinates.",
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "x0": {
+                    "description": "Alternate to `x`. Builds a linear space of x coordinates. Use with `dx` where `x0` is the starting coordinate and `dx` the step.",
+                    "dflt": 0,
+                    "role": "info",
+                    "valType": "any"
+                },
+                "xaxis": {
+                    "description": "Sets a reference between this trace's x coordinates and a 2D cartesian x axis. If *x* (the default value), the x coordinates refer to `layout.xaxis`. If *x2*, the x coordinates refer to `layout.xaxis2`, and so on.",
+                    "dflt": "x",
+                    "role": "info",
+                    "valType": "subplotid"
+                },
+                "xsrc": {
+                    "description": "Sets the source reference on plot.ly for  x .",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "xtype": {
+                    "description": "If *array*, the heatmap's x coordinates are given by *x* (the default behavior when `x` is provided). If *scaled*, the heatmap's x coordinates are given by *x0* and *dx* (the default behavior when `x` is not provided).",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "array",
+                        "scaled"
+                    ]
+                },
+                "y": {
+                    "description": "Sets the y coordinates.",
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "y0": {
+                    "description": "Alternate to `y`. Builds a linear space of y coordinates. Use with `dy` where `y0` is the starting coordinate and `dy` the step.",
+                    "dflt": 0,
+                    "role": "info",
+                    "valType": "any"
+                },
+                "yaxis": {
+                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.xaxis2`, and so on.",
+                    "dflt": "y",
+                    "role": "info",
+                    "valType": "subplotid"
+                },
+                "ysrc": {
+                    "description": "Sets the source reference on plot.ly for  y .",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "ytype": {
+                    "description": "If *array*, the heatmap's y coordinates are given by *y* (the default behavior when `y` is provided) If *scaled*, the heatmap's y coordinates are given by *y0* and *dy* (the default behavior when `y` is not provided)",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "array",
+                        "scaled"
+                    ]
+                },
+                "z": {
+                    "description": "Sets the z data.",
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "zauto": {
+                    "description": "Determines the whether or not the color domain is computed with respect to the input data.",
+                    "dflt": true,
+                    "role": "info",
+                    "valType": "boolean"
+                },
+                "zmax": {
+                    "description": "Sets the upper bound of color domain.",
+                    "dflt": null,
+                    "role": "info",
+                    "valType": "number"
+                },
+                "zmin": {
+                    "description": "Sets the lower bound of color domain.",
+                    "dflt": null,
+                    "role": "info",
+                    "valType": "number"
+                },
+                "zsrc": {
+                    "description": "Sets the source reference on plot.ly for  z .",
+                    "role": "info",
+                    "valType": "string"
+                }
+            },
+            "meta": {
+                "description": "WebGL version of the heatmap trace type."
             }
         },
         "histogram": {
@@ -10529,6 +11541,30 @@
                         "valType": "any"
                     }
                 },
+                "xcalendar": {
+                    "description": "Sets the calendar system to use with `x` date data.",
+                    "dflt": "gregorian",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "gregorian",
+                        "chinese",
+                        "coptic",
+                        "discworld",
+                        "ethiopian",
+                        "hebrew",
+                        "islamic",
+                        "julian",
+                        "mayan",
+                        "nanakshahi",
+                        "nepali",
+                        "persian",
+                        "jalali",
+                        "taiwan",
+                        "thai",
+                        "ummalqura"
+                    ]
+                },
                 "xsrc": {
                     "description": "Sets the source reference on plot.ly for  x .",
                     "role": "info",
@@ -10565,6 +11601,30 @@
                         "role": "style",
                         "valType": "any"
                     }
+                },
+                "ycalendar": {
+                    "description": "Sets the calendar system to use with `y` date data.",
+                    "dflt": "gregorian",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "gregorian",
+                        "chinese",
+                        "coptic",
+                        "discworld",
+                        "ethiopian",
+                        "hebrew",
+                        "islamic",
+                        "julian",
+                        "mayan",
+                        "nanakshahi",
+                        "nepali",
+                        "persian",
+                        "jalali",
+                        "taiwan",
+                        "thai",
+                        "ummalqura"
+                    ]
                 },
                 "ysrc": {
                     "description": "Sets the source reference on plot.ly for  y .",
@@ -11158,6 +12218,30 @@
                         "valType": "any"
                     }
                 },
+                "xcalendar": {
+                    "description": "Sets the calendar system to use with `x` date data.",
+                    "dflt": "gregorian",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "gregorian",
+                        "chinese",
+                        "coptic",
+                        "discworld",
+                        "ethiopian",
+                        "hebrew",
+                        "islamic",
+                        "julian",
+                        "mayan",
+                        "nanakshahi",
+                        "nepali",
+                        "persian",
+                        "jalali",
+                        "taiwan",
+                        "thai",
+                        "ummalqura"
+                    ]
+                },
                 "xgap": {
                     "description": "Sets the horizontal gap (in pixels) between bricks.",
                     "dflt": 0,
@@ -11201,6 +12285,30 @@
                         "role": "style",
                         "valType": "any"
                     }
+                },
+                "ycalendar": {
+                    "description": "Sets the calendar system to use with `y` date data.",
+                    "dflt": "gregorian",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "gregorian",
+                        "chinese",
+                        "coptic",
+                        "discworld",
+                        "ethiopian",
+                        "hebrew",
+                        "islamic",
+                        "julian",
+                        "mayan",
+                        "nanakshahi",
+                        "nepali",
+                        "persian",
+                        "jalali",
+                        "taiwan",
+                        "thai",
+                        "ummalqura"
+                    ]
                 },
                 "ygap": {
                     "description": "Sets the vertical gap (in pixels) between bricks.",
@@ -11889,6 +12997,30 @@
                         "valType": "any"
                     }
                 },
+                "xcalendar": {
+                    "description": "Sets the calendar system to use with `x` date data.",
+                    "dflt": "gregorian",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "gregorian",
+                        "chinese",
+                        "coptic",
+                        "discworld",
+                        "ethiopian",
+                        "hebrew",
+                        "islamic",
+                        "julian",
+                        "mayan",
+                        "nanakshahi",
+                        "nepali",
+                        "persian",
+                        "jalali",
+                        "taiwan",
+                        "thai",
+                        "ummalqura"
+                    ]
+                },
                 "xsrc": {
                     "description": "Sets the source reference on plot.ly for  x .",
                     "role": "info",
@@ -11925,6 +13057,30 @@
                         "role": "style",
                         "valType": "any"
                     }
+                },
+                "ycalendar": {
+                    "description": "Sets the calendar system to use with `y` date data.",
+                    "dflt": "gregorian",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "gregorian",
+                        "chinese",
+                        "coptic",
+                        "discworld",
+                        "ethiopian",
+                        "hebrew",
+                        "islamic",
+                        "julian",
+                        "mayan",
+                        "nanakshahi",
+                        "nepali",
+                        "persian",
+                        "jalali",
+                        "taiwan",
+                        "thai",
+                        "ummalqura"
+                    ]
                 },
                 "ysrc": {
                     "description": "Sets the source reference on plot.ly for  y .",
@@ -12612,6 +13768,30 @@
                     "role": "data",
                     "valType": "data_array"
                 },
+                "xcalendar": {
+                    "description": "Sets the calendar system to use with `x` date data.",
+                    "dflt": "gregorian",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "gregorian",
+                        "chinese",
+                        "coptic",
+                        "discworld",
+                        "ethiopian",
+                        "hebrew",
+                        "islamic",
+                        "julian",
+                        "mayan",
+                        "nanakshahi",
+                        "nepali",
+                        "persian",
+                        "jalali",
+                        "taiwan",
+                        "thai",
+                        "ummalqura"
+                    ]
+                },
                 "xsrc": {
                     "description": "Sets the source reference on plot.ly for  x .",
                     "role": "info",
@@ -12622,6 +13802,30 @@
                     "role": "data",
                     "valType": "data_array"
                 },
+                "ycalendar": {
+                    "description": "Sets the calendar system to use with `y` date data.",
+                    "dflt": "gregorian",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "gregorian",
+                        "chinese",
+                        "coptic",
+                        "discworld",
+                        "ethiopian",
+                        "hebrew",
+                        "islamic",
+                        "julian",
+                        "mayan",
+                        "nanakshahi",
+                        "nepali",
+                        "persian",
+                        "jalali",
+                        "taiwan",
+                        "thai",
+                        "ummalqura"
+                    ]
+                },
                 "ysrc": {
                     "description": "Sets the source reference on plot.ly for  y .",
                     "role": "info",
@@ -12631,6 +13835,30 @@
                     "description": "Sets the Z coordinates of the vertices. The nth element of vectors `x`, `y` and `z` jointly represent the X, Y and Z coordinates of the nth vertex.",
                     "role": "data",
                     "valType": "data_array"
+                },
+                "zcalendar": {
+                    "description": "Sets the calendar system to use with `z` date data.",
+                    "dflt": "gregorian",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "gregorian",
+                        "chinese",
+                        "coptic",
+                        "discworld",
+                        "ethiopian",
+                        "hebrew",
+                        "islamic",
+                        "julian",
+                        "mayan",
+                        "nanakshahi",
+                        "nepali",
+                        "persian",
+                        "jalali",
+                        "taiwan",
+                        "thai",
+                        "ummalqura"
+                    ]
                 },
                 "zsrc": {
                     "description": "Sets the source reference on plot.ly for  z .",
@@ -12908,6 +14136,30 @@
                     "dflt": "x",
                     "role": "info",
                     "valType": "subplotid"
+                },
+                "xcalendar": {
+                    "description": "Sets the calendar system to use with `x` date data.",
+                    "dflt": "gregorian",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "gregorian",
+                        "chinese",
+                        "coptic",
+                        "discworld",
+                        "ethiopian",
+                        "hebrew",
+                        "islamic",
+                        "julian",
+                        "mayan",
+                        "nanakshahi",
+                        "nepali",
+                        "persian",
+                        "jalali",
+                        "taiwan",
+                        "thai",
+                        "ummalqura"
+                    ]
                 },
                 "xsrc": {
                     "description": "Sets the source reference on plot.ly for  x .",
@@ -14852,6 +16104,30 @@
                     "role": "info",
                     "valType": "subplotid"
                 },
+                "xcalendar": {
+                    "description": "Sets the calendar system to use with `x` date data.",
+                    "dflt": "gregorian",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "gregorian",
+                        "chinese",
+                        "coptic",
+                        "discworld",
+                        "ethiopian",
+                        "hebrew",
+                        "islamic",
+                        "julian",
+                        "mayan",
+                        "nanakshahi",
+                        "nepali",
+                        "persian",
+                        "jalali",
+                        "taiwan",
+                        "thai",
+                        "ummalqura"
+                    ]
+                },
                 "xsrc": {
                     "description": "Sets the source reference on plot.ly for  x .",
                     "role": "info",
@@ -14873,6 +16149,30 @@
                     "dflt": "y",
                     "role": "info",
                     "valType": "subplotid"
+                },
+                "ycalendar": {
+                    "description": "Sets the calendar system to use with `y` date data.",
+                    "dflt": "gregorian",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "gregorian",
+                        "chinese",
+                        "coptic",
+                        "discworld",
+                        "ethiopian",
+                        "hebrew",
+                        "islamic",
+                        "julian",
+                        "mayan",
+                        "nanakshahi",
+                        "nepali",
+                        "persian",
+                        "jalali",
+                        "taiwan",
+                        "thai",
+                        "ummalqura"
+                    ]
                 },
                 "ysrc": {
                     "description": "Sets the source reference on plot.ly for  y .",
@@ -16066,6 +17366,30 @@
                     "role": "data",
                     "valType": "data_array"
                 },
+                "xcalendar": {
+                    "description": "Sets the calendar system to use with `x` date data.",
+                    "dflt": "gregorian",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "gregorian",
+                        "chinese",
+                        "coptic",
+                        "discworld",
+                        "ethiopian",
+                        "hebrew",
+                        "islamic",
+                        "julian",
+                        "mayan",
+                        "nanakshahi",
+                        "nepali",
+                        "persian",
+                        "jalali",
+                        "taiwan",
+                        "thai",
+                        "ummalqura"
+                    ]
+                },
                 "xsrc": {
                     "description": "Sets the source reference on plot.ly for  x .",
                     "role": "info",
@@ -16076,6 +17400,30 @@
                     "role": "data",
                     "valType": "data_array"
                 },
+                "ycalendar": {
+                    "description": "Sets the calendar system to use with `y` date data.",
+                    "dflt": "gregorian",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "gregorian",
+                        "chinese",
+                        "coptic",
+                        "discworld",
+                        "ethiopian",
+                        "hebrew",
+                        "islamic",
+                        "julian",
+                        "mayan",
+                        "nanakshahi",
+                        "nepali",
+                        "persian",
+                        "jalali",
+                        "taiwan",
+                        "thai",
+                        "ummalqura"
+                    ]
+                },
                 "ysrc": {
                     "description": "Sets the source reference on plot.ly for  y .",
                     "role": "info",
@@ -16085,6 +17433,30 @@
                     "description": "Sets the z coordinates.",
                     "role": "data",
                     "valType": "data_array"
+                },
+                "zcalendar": {
+                    "description": "Sets the calendar system to use with `z` date data.",
+                    "dflt": "gregorian",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "gregorian",
+                        "chinese",
+                        "coptic",
+                        "discworld",
+                        "ethiopian",
+                        "hebrew",
+                        "islamic",
+                        "julian",
+                        "mayan",
+                        "nanakshahi",
+                        "nepali",
+                        "persian",
+                        "jalali",
+                        "taiwan",
+                        "thai",
+                        "ummalqura"
+                    ]
                 },
                 "zsrc": {
                     "description": "Sets the source reference on plot.ly for  z .",
@@ -18090,6 +19462,30 @@
                     "role": "info",
                     "valType": "subplotid"
                 },
+                "xcalendar": {
+                    "description": "Sets the calendar system to use with `x` date data.",
+                    "dflt": "gregorian",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "gregorian",
+                        "chinese",
+                        "coptic",
+                        "discworld",
+                        "ethiopian",
+                        "hebrew",
+                        "islamic",
+                        "julian",
+                        "mayan",
+                        "nanakshahi",
+                        "nepali",
+                        "persian",
+                        "jalali",
+                        "taiwan",
+                        "thai",
+                        "ummalqura"
+                    ]
+                },
                 "xsrc": {
                     "description": "Sets the source reference on plot.ly for  x .",
                     "role": "info",
@@ -18111,6 +19507,30 @@
                     "dflt": "y",
                     "role": "info",
                     "valType": "subplotid"
+                },
+                "ycalendar": {
+                    "description": "Sets the calendar system to use with `y` date data.",
+                    "dflt": "gregorian",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "gregorian",
+                        "chinese",
+                        "coptic",
+                        "discworld",
+                        "ethiopian",
+                        "hebrew",
+                        "islamic",
+                        "julian",
+                        "mayan",
+                        "nanakshahi",
+                        "nepali",
+                        "persian",
+                        "jalali",
+                        "taiwan",
+                        "thai",
+                        "ummalqura"
+                    ]
                 },
                 "ysrc": {
                     "description": "Sets the source reference on plot.ly for  y .",
@@ -20710,6 +22130,30 @@
                     "role": "data",
                     "valType": "data_array"
                 },
+                "xcalendar": {
+                    "description": "Sets the calendar system to use with `x` date data.",
+                    "dflt": "gregorian",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "gregorian",
+                        "chinese",
+                        "coptic",
+                        "discworld",
+                        "ethiopian",
+                        "hebrew",
+                        "islamic",
+                        "julian",
+                        "mayan",
+                        "nanakshahi",
+                        "nepali",
+                        "persian",
+                        "jalali",
+                        "taiwan",
+                        "thai",
+                        "ummalqura"
+                    ]
+                },
                 "xsrc": {
                     "description": "Sets the source reference on plot.ly for  x .",
                     "role": "info",
@@ -20720,6 +22164,30 @@
                     "role": "data",
                     "valType": "data_array"
                 },
+                "ycalendar": {
+                    "description": "Sets the calendar system to use with `y` date data.",
+                    "dflt": "gregorian",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "gregorian",
+                        "chinese",
+                        "coptic",
+                        "discworld",
+                        "ethiopian",
+                        "hebrew",
+                        "islamic",
+                        "julian",
+                        "mayan",
+                        "nanakshahi",
+                        "nepali",
+                        "persian",
+                        "jalali",
+                        "taiwan",
+                        "thai",
+                        "ummalqura"
+                    ]
+                },
                 "ysrc": {
                     "description": "Sets the source reference on plot.ly for  y .",
                     "role": "info",
@@ -20729,6 +22197,30 @@
                     "description": "Sets the z coordinates.",
                     "role": "data",
                     "valType": "data_array"
+                },
+                "zcalendar": {
+                    "description": "Sets the calendar system to use with `z` date data.",
+                    "dflt": "gregorian",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "gregorian",
+                        "chinese",
+                        "coptic",
+                        "discworld",
+                        "ethiopian",
+                        "hebrew",
+                        "islamic",
+                        "julian",
+                        "mayan",
+                        "nanakshahi",
+                        "nepali",
+                        "persian",
+                        "jalali",
+                        "taiwan",
+                        "thai",
+                        "ummalqura"
+                    ]
                 },
                 "zsrc": {
                     "description": "Sets the source reference on plot.ly for  z .",
@@ -20782,6 +22274,30 @@
                     "strict": true,
                     "valType": "string"
                 },
+                "targetcalendar": {
+                    "description": "Sets the calendar system to use for `target`, if it is an array of dates. If `target` is a string (eg *x*) we use the corresponding trace attribute (eg `xcalendar`) if it exists, even if `targetcalendar` is provided.",
+                    "dflt": "gregorian",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "gregorian",
+                        "chinese",
+                        "coptic",
+                        "discworld",
+                        "ethiopian",
+                        "hebrew",
+                        "islamic",
+                        "julian",
+                        "mayan",
+                        "nanakshahi",
+                        "nepali",
+                        "persian",
+                        "jalali",
+                        "taiwan",
+                        "thai",
+                        "ummalqura"
+                    ]
+                },
                 "targetsrc": {
                     "description": "Sets the source reference on plot.ly for  target .",
                     "role": "info",
@@ -20791,6 +22307,30 @@
                     "description": "Sets the value or values by which to filter by. Values are expected to be in the same type as the data linked to *target*. When `operation` is set to one of the inequality values (=,<,>=,>,<=) *value* is expected to be a number or a string. When `operation` is set to one of the interval value ([],(),[),(],][,)(,](,)[) *value* is expected to be 2-item array where the first item is the lower bound and the second item is the upper bound. When `operation`, is set to one of the set value ({},}{) *value* is expected to be an array with as many items as the desired set elements.",
                     "dflt": 0,
                     "valType": "any"
+                },
+                "valuecalendar": {
+                    "description": "Sets the calendar system to use for `value`, if it is a date.",
+                    "dflt": "gregorian",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "gregorian",
+                        "chinese",
+                        "coptic",
+                        "discworld",
+                        "ethiopian",
+                        "hebrew",
+                        "islamic",
+                        "julian",
+                        "mayan",
+                        "nanakshahi",
+                        "nepali",
+                        "persian",
+                        "jalali",
+                        "taiwan",
+                        "thai",
+                        "ummalqura"
+                    ]
                 }
             }
         },
