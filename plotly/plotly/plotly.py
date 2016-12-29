@@ -17,12 +17,12 @@ and ploty's servers.
 from __future__ import absolute_import
 
 import copy
-import json
 import os
 import warnings
 
 import six
 import six.moves
+from requests.compat import json as _json
 
 from plotly import exceptions, tools, utils, files
 from plotly.api import v1, v2
@@ -643,7 +643,7 @@ class Stream:
             stream_object.update(dict(layout=layout))
 
         # TODO: allow string version of this?
-        jdata = json.dumps(stream_object, cls=utils.PlotlyJSONEncoder)
+        jdata = _json.dumps(stream_object, cls=utils.PlotlyJSONEncoder)
         jdata += "\n"
 
         try:
@@ -1057,7 +1057,7 @@ class grid_ops:
 
         # This is sorta gross, we need to double-encode this.
         body = {
-            'cols': json.dumps(columns, cls=utils.PlotlyJSONEncoder)
+            'cols': _json.dumps(columns, cls=utils.PlotlyJSONEncoder)
         }
         fid = grid_id
         response = v2.grids.col_create(fid, body)

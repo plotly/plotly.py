@@ -7,13 +7,14 @@ Low-level functionality NOT intended for users to EVER use.
 """
 from __future__ import absolute_import
 
-import json
 import os.path
 import re
 import sys
 import threading
 
 import pytz
+
+from requests.compat import json as _json
 
 
 from . exceptions import PlotlyError
@@ -50,7 +51,7 @@ def load_json_dict(filename, *args):
         lock.acquire()
         with open(filename, "r") as f:
             try:
-                data = json.load(f)
+                data = _json.load(f)
                 if not isinstance(data, dict):
                     data = {}
             except:
@@ -65,7 +66,7 @@ def save_json_dict(filename, json_dict):
     """Save json to file. Error if path DNE, not a dict, or invalid json."""
     if isinstance(json_dict, dict):
         # this will raise a TypeError if something goes wrong
-        json_string = json.dumps(json_dict, indent=4)
+        json_string = _json.dumps(json_dict, indent=4)
         lock.acquire()
         with open(filename, "w") as f:
             f.write(json_string)
@@ -111,7 +112,7 @@ class NotEncodable(Exception):
     pass
 
 
-class PlotlyJSONEncoder(json.JSONEncoder):
+class PlotlyJSONEncoder(_json.JSONEncoder):
     """
     Meant to be passed as the `cls` kwarg to json.dumps(obj, cls=..)
 
@@ -148,7 +149,8 @@ class PlotlyJSONEncoder(json.JSONEncoder):
         #    1. `loads` to switch Infinity, -Infinity, NaN to None
         #    2. `dumps` again so you get 'null' instead of extended JSON
         try:
-            new_o = json.loads(encoded_o, parse_constant=self.coerce_to_strict)
+            new_o = _json.loads(encoded_o,
+                                parse_constant=self.coerce_to_strict)
         except ValueError:
 
             # invalid separators will fail here. raise a helpful exception
@@ -157,10 +159,10 @@ class PlotlyJSONEncoder(json.JSONEncoder):
                 "valid JSON separators?"
             )
         else:
-            return json.dumps(new_o, sort_keys=self.sort_keys,
-                              indent=self.indent,
-                              separators=(self.item_separator,
-                                          self.key_separator))
+            return _json.dumps(new_o, sort_keys=self.sort_keys,
+                               indent=self.indent,
+                               separators=(self.item_separator,
+                                           self.key_separator))
 
     def default(self, obj):
         """
@@ -208,7 +210,7 @@ class PlotlyJSONEncoder(json.JSONEncoder):
                 return encoding_method(obj)
             except NotEncodable:
                 pass
-        return json.JSONEncoder.default(self, obj)
+        return _json.JSONEncoder.default(self, obj)
 
     @staticmethod
     def encode_as_plotly(obj):

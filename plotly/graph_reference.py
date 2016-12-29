@@ -5,12 +5,12 @@ This module handles accessing, storing, and managing the graph reference.
 from __future__ import absolute_import
 
 import hashlib
-import json
 import os
 import re
 from pkg_resources import resource_string
 
 import six
+from requests.compat import json as _json
 
 from plotly import exceptions, files, utils
 from plotly.api import v2
@@ -86,7 +86,7 @@ def get_graph_reference():
         if not graph_reference:
             path = os.path.join('graph_reference', 'default-schema.json')
             s = resource_string('plotly', path).decode('utf-8')
-            graph_reference = json.loads(s)
+            graph_reference = _json.loads(s)
     else:
         data = response.json()
         if data['modified']:
