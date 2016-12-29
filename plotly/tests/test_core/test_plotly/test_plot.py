@@ -7,9 +7,9 @@ A module intended for use with Nose.
 """
 from __future__ import absolute_import
 
-import json
 import requests
 import six
+from requests.compat import json as _json
 
 from unittest import TestCase
 from nose.plugins.attrib import attr
@@ -296,10 +296,10 @@ def generate_conflicting_plot_options_with_json_writes_of_config():
     """
     def gen_test(plot_options):
         def test(self):
-            config = json.load(open(CONFIG_FILE))
+            config = _json.load(open(CONFIG_FILE))
             with open(CONFIG_FILE, 'w') as f:
                 config.update(plot_options)
-                f.write(json.dumps(config))
+                f.write(_json.dumps(config))
             self.assertRaises(PlotlyError, py._plot_option_logic, {})
         return test
 

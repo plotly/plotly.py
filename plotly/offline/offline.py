@@ -5,13 +5,14 @@
 """
 from __future__ import absolute_import
 
-import json
 import os
 import uuid
 import warnings
 from pkg_resources import resource_string
 import time
 import webbrowser
+
+from requests.compat import json as _json
 
 import plotly
 from plotly import tools, utils
@@ -183,10 +184,12 @@ def _plot_html(figure_or_data, config, validate, default_width,
         height = str(height) + 'px'
 
     plotdivid = uuid.uuid4()
-    jdata = json.dumps(figure.get('data', []), cls=utils.PlotlyJSONEncoder)
-    jlayout = json.dumps(figure.get('layout', {}), cls=utils.PlotlyJSONEncoder)
+    jdata = _json.dumps(figure.get('data', []), cls=utils.PlotlyJSONEncoder)
+    jlayout = _json.dumps(figure.get('layout', {}),
+                          cls=utils.PlotlyJSONEncoder)
     if 'frames' in figure_or_data:
-        jframes = json.dumps(figure.get('frames', {}), cls=utils.PlotlyJSONEncoder)
+        jframes = _json.dumps(figure.get('frames', {}),
+                              cls=utils.PlotlyJSONEncoder)
 
     configkeys = (
         'editable',
@@ -211,7 +214,7 @@ def _plot_html(figure_or_data, config, validate, default_width,
     )
 
     config_clean = dict((k, config[k]) for k in configkeys if k in config)
-    jconfig = json.dumps(config_clean)
+    jconfig = _json.dumps(config_clean)
 
     # TODO: The get_config 'source of truth' should
     # really be somewhere other than plotly.plotly

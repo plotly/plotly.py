@@ -4,12 +4,12 @@ A module to test functionality related to *using* the graph reference.
 """
 from __future__ import absolute_import
 
-import json
 import os
 from pkg_resources import resource_string
 from unittest import TestCase
 
 from nose.plugins.attrib import attr
+from requests.compat import json as _json
 
 from plotly import graph_reference as gr
 from plotly.api import v2
@@ -28,7 +28,7 @@ class TestGraphReferenceCaching(PlotlyTestCase):
 
         path = os.path.join('package_data', 'default-schema.json')
         s = resource_string('plotly', path).decode('utf-8')
-        default_schema = json.loads(s)
+        default_schema = _json.loads(s)
 
         msg = (
             'The default, hard-coded plot schema we ship with pip is out of '
