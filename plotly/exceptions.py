@@ -5,7 +5,9 @@ exceptions
 A module that contains plotly's exception hierarchy.
 
 """
-import json
+from __future__ import absolute_import
+
+from plotly.api.utils import to_native_utf8_string
 
 
 # Base Plotly Error
@@ -21,7 +23,7 @@ class PlotlyRequestError(PlotlyError):
     """General API error. Raised for *all* failed requests."""
 
     def __init__(self, message, status_code, content):
-        self.message = message
+        self.message = to_native_utf8_string(message)
         self.status_code = status_code
         self.content = content
 
