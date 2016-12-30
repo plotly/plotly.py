@@ -5,8 +5,9 @@ grid_objs
 """
 from __future__ import absolute_import
 
-import json
 from collections import MutableSequence
+
+from requests.compat import json as _json
 
 from plotly import exceptions, utils
 
@@ -66,7 +67,7 @@ class Column(object):
 
     def __str__(self):
         max_chars = 10
-        jdata = json.dumps(self.data, cls=utils.PlotlyJSONEncoder)
+        jdata = _json.dumps(self.data, cls=utils.PlotlyJSONEncoder)
         if len(jdata) > max_chars:
             data_string = jdata[:max_chars] + "...]"
         else:
