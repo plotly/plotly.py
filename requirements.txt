@@ -6,10 +6,10 @@
 ###################################################
 
 ## http request dependencies ##
-requests==2.3.0
+requests==2.12.4
 
 ## python 2 to 3 compatibility ##
-six==1.8.0
+six==1.10.0
 
 ## timezone definitions ##
-pytz==2014.9
+pytz==2016.10
