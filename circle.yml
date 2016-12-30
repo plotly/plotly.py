@@ -16,7 +16,7 @@ dependencies:
     - bash circle/setup.sh
 
     # install testing tools for circle's version of things
-    - pip install nose coverage
+    - pip install nose coverage mock
     - pip install -I .
 
     # we need to cd out of the project root to ensure the install worked

@@ -6,9 +6,9 @@ from __future__ import absolute_import
 
 from nose.tools import raises
 from nose.plugins.attrib import attr
+from requests.compat import json as _json
 
 from unittest import TestCase
-import json
 
 import plotly
 
@@ -75,8 +75,8 @@ class PlotlyOfflineMPLTestCase(TestCase):
         figure = plotly.tools.mpl_to_plotly(fig)
         data = figure['data']
         layout = figure['layout']
-        data_json = json.dumps(data, cls=plotly.utils.PlotlyJSONEncoder)
-        layout_json = json.dumps(layout, cls=plotly.utils.PlotlyJSONEncoder)
+        data_json = _json.dumps(data, cls=plotly.utils.PlotlyJSONEncoder)
+        layout_json = _json.dumps(layout, cls=plotly.utils.PlotlyJSONEncoder)
         html = self._read_html(plotly.offline.plot_mpl(fig))
 
         # just make sure a few of the parts are in here
