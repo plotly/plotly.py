@@ -11,12 +11,10 @@ from unittest import TestCase
 from nose.plugins.attrib import attr
 from requests.compat import json as _json
 
-from plotly import files, graph_reference as gr, tools, utils
+from plotly import files, graph_reference as gr, utils
 from plotly.api import v2
 from plotly.graph_reference import string_to_class_name, get_role
 from plotly.tests.utils import PlotlyTestCase
-
-FAKE_API_DOMAIN = 'https://api.am.not.here.ly'
 
 
 class TestGraphReferenceCaching(PlotlyTestCase):
@@ -25,33 +23,10 @@ class TestGraphReferenceCaching(PlotlyTestCase):
         if files.check_file_permissions():
             utils.save_json_dict(files.GRAPH_REFERENCE_FILE, graph_reference)
 
-    @attr('slow')
-    def test_get_graph_reference_outdated(self):
-
-        # if the hash of the current graph reference doesn't match the hash of
-        # the graph reference a Plotly server has, we should update!
-
-        outdated_graph_reference = {'real': 'old'}
-        self.set_graph_reference(outdated_graph_reference)
-        graph_reference = gr.get_graph_reference()
-        self.assertNotEqual(graph_reference, outdated_graph_reference)
-
-    def test_get_graph_reference_bad_request_local_copy(self):
-
-        # if the request fails (mocked by using a bad url here) and a local
-        # copy of the graph reference exists, we can just use that.
-
-        tools.set_config_file(plotly_api_domain=FAKE_API_DOMAIN)
-        local_graph_reference = {'real': 'local'}
-        self.set_graph_reference(local_graph_reference)
-        graph_reference = gr.get_graph_reference()
-        self.assertEqual(graph_reference, local_graph_reference)
-
-    def test_get_graph_reference_bad_request_no_copy(self):
+    def test_get_graph_reference(self):
 
         # if we don't have a graph reference we load an outdated default
 
-        tools.set_config_file(plotly_api_domain=FAKE_API_DOMAIN)
         empty_graph_reference = {}  # set it to a false-y value.
         self.set_graph_reference(empty_graph_reference)
         path = os.path.join('graph_reference', 'default-schema.json')

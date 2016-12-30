@@ -18,7 +18,7 @@ class PlotSchemaTest(PlotlyApiTestCase):
 
     def test_retrieve(self):
 
-        plot_schema.retrieve('some-hash', timeout=400)
+        plot_schema.retrieve('some-hash')
         self.request_mock.assert_called_once()
         args, kwargs = self.request_mock.call_args
         method, url = args
@@ -26,5 +26,4 @@ class PlotSchemaTest(PlotlyApiTestCase):
         self.assertEqual(
             url, '{}/v2/plot-schema'.format(self.plotly_api_domain)
         )
-        self.assertTrue(kwargs['timeout'])
         self.assertEqual(kwargs['params'], {'sha1': 'some-hash'})

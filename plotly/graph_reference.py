@@ -4,7 +4,6 @@ This module handles accessing, storing, and managing the graph reference.
 """
 from __future__ import absolute_import
 
-import hashlib
 import os
 import re
 from pkg_resources import resource_string
@@ -12,10 +11,7 @@ from pkg_resources import resource_string
 import six
 from requests.compat import json as _json
 
-from plotly import exceptions, files, utils
-from plotly.api import v2
-
-GRAPH_REFERENCE_DOWNLOAD_TIMEOUT = 5  # seconds
+from plotly import utils
 
 
 # For backwards compat, we keep this list of previously known objects.
@@ -65,32 +61,14 @@ _BACKWARDS_COMPAT_CLASS_NAMES = {
 
 def get_graph_reference():
     """
-    Attempts to load local copy of graph reference or makes GET request if DNE.
+    Load graph reference JSON (aka plot-schema)
 
     :return: (dict) The graph reference.
-    :raises: (PlotlyError) When graph reference DNE and GET request fails.
 
     """
-    if files.check_file_permissions():
-        graph_reference = utils.load_json_dict(files.GRAPH_REFERENCE_FILE)
-    else:
-        graph_reference = {}
-
-    sha1 = hashlib.sha1(six.b(str(graph_reference))).hexdigest()
-
-    try:
-        response = v2.plot_schema.retrieve(
-            sha1, timeout=GRAPH_REFERENCE_DOWNLOAD_TIMEOUT
-        )
-    except exceptions.PlotlyRequestError:
-        if not graph_reference:
-            path = os.path.join('graph_reference', 'default-schema.json')
-            s = resource_string('plotly', path).decode('utf-8')
-            graph_reference = _json.loads(s)
-    else:
-        data = response.json()
-        if data['modified']:
-            graph_reference = data['schema']
+    path = os.path.join('graph_reference', 'default-schema.json')
+    s = resource_string('plotly', path).decode('utf-8')
+    graph_reference = _json.loads(s)
 
     return utils.decode_unicode(graph_reference)
 
