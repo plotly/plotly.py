@@ -31,6 +31,9 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
     echo "${SIG} python -c 'import sys; print(sys.version)'"
     python -c 'import sys; print(sys.version)'
 
+    # upgrade the pip used in this virtualenv
+    pip install --upgrade pip
+
     # install core requirements all versions need
     pip install -r ${PLOTLY_CORE_REQUIREMENTS_FILE} ||
         error_exit "${SIG} ${LINENO}: can't install core reqs for Python ${version}."

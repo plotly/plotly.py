@@ -12,6 +12,8 @@ dependencies:
 
   override:
 
+    - pip install --upgrade pip
+
     # run all the pre-written installers (this will take a *while*)
     - bash circle/setup.sh
 
