@@ -25,6 +25,8 @@ update_default_schema :
                _json.dump(response.json()['schema'], f, indent=4,\
                           sort_keys=True, separators=(',', ': '));\
                f.close()"
+	@echo "Auto-generating graph objects based on updated default-schema."
+	python update_graph_objs.py
 
 install : sync_subs
 	@echo ""
