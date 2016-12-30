@@ -18,11 +18,12 @@ setup_subs :
 
 update_default_schema :
 	@echo "Making sure the default-schema.json file is up to date"
-	python -c "import json;\
-               from plotly.graph_reference import GRAPH_REFERENCE;\
+	python -c "import requests;/
+               from requests.compat import json as _json;\
+               response = requests.get('https://api.plot.ly/v2/plot-schema?sha1';/
                f = open('plotly/graph_reference/default-schema.json', 'w');\
-               json.dump(GRAPH_REFERENCE, f, indent=4, sort_keys=True,\
-                   separators=(',', ': '));\
+               _json.dump(response.json()['schema'], f, indent=4,\
+                          sort_keys=True, separators=(',', ': '));\
                f.close()"
 
 install : sync_subs

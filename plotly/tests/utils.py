@@ -37,8 +37,6 @@ class PlotlyTestCase(TestCase):
         if files.check_file_permissions():
             self._credentials = utils.load_json_dict(files.CREDENTIALS_FILE)
             self._config = utils.load_json_dict(files.CONFIG_FILE)
-            self._graph_reference = \
-                utils.load_json_dict(files.GRAPH_REFERENCE_FILE)
 
     def restore_files(self):
         if files.check_file_permissions():
@@ -46,9 +44,6 @@ class PlotlyTestCase(TestCase):
                 utils.save_json_dict(files.CREDENTIALS_FILE, self._credentials)
             if self._config is not None:
                 utils.save_json_dict(files.CONFIG_FILE, self._config)
-            if self._graph_reference is not None:
-                utils.save_json_dict(files.GRAPH_REFERENCE_FILE,
-                                     self._graph_reference)
 
     def stash_session(self):
         self._session = copy.deepcopy(session._session)

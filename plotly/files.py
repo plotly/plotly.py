@@ -4,7 +4,6 @@ import os
 PLOTLY_DIR = os.path.join(os.path.expanduser("~"), ".plotly")
 CREDENTIALS_FILE = os.path.join(PLOTLY_DIR, ".credentials")
 CONFIG_FILE = os.path.join(PLOTLY_DIR, ".config")
-GRAPH_REFERENCE_FILE = os.path.join(PLOTLY_DIR, ".graph_reference")
 TEST_DIR = os.path.join(os.path.expanduser("~"), ".test")
 TEST_FILE = os.path.join(PLOTLY_DIR, ".permission_test")
 
