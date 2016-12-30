@@ -2,20 +2,15 @@ machine:
 
   environment:
 
-    PLOTLY_PACKAGE_ROOT: /home/ubuntu/${CIRCLE_PROJECT_REPONAME}
     PLOTLY_CONFIG_DIR: ${HOME}/.plotly
-    PLOTLY_PYTHON_VERSIONS: 2.7.10 3.4.3
-    PLOTLY_CORE_REQUIREMENTS_FILE: ${PLOTLY_PACKAGE_ROOT}/requirements.txt
-    PLOTLY_OPTIONAL_REQUIREMENTS_FILE: ${PLOTLY_PACKAGE_ROOT}/optional-requirements.txt
 
 dependencies:
 
   override:
 
-    - pip install --upgrade pip
+    - pip install tox
 
-    # run all the pre-written installers (this will take a *while*)
-    - bash circle/setup.sh
+    - tox --notest
 
     # install testing tools for circle's version of things
     - pip install nose coverage mock
@@ -26,14 +21,18 @@ dependencies:
 
   cache_directories:
 
-    - "~/.pyenv/versions"  # attempt to just cache installed pyenv things
+    # cache *everything* that tox installs for us.
+    - .tox
 
 test:
 
   override:
 
-    # run test suite in all our python versions
-    - bash circle/test.sh
+    # let tox do it's thing and run all our tests.
+    - tox
+
+    # import it once normally (ensures .plotly exists)
+    - python -c "import plotly"
 
     # test that it imports when you don't have write permissions
     - sudo chmod -R 444 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
@@ -45,4 +44,4 @@ test:
     # test core things in the general 2.7 version that circle has
     - nosetests -x plotly/tests/test_core --with-coverage --cover-package=plotly
     - mkdir "${CIRCLE_ARTIFACTS}/2.7" || true
-    - coverage html -d "${CIRCLE_ARTIFACTS}/2.7" --title=2.7
+    - coverage html --omit="*/tests*" -d "${CIRCLE_ARTIFACTS}/2.7" --title=2.7
