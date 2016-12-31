@@ -6,11 +6,11 @@ A module intended for use with Nose.
 
 """
 import copy
-import json
-import requests
 
+import requests
 import six
 from nose.plugins.attrib import attr
+from requests.compat import json as _json
 
 
 default_headers = {'plotly-username': '',
@@ -37,9 +37,9 @@ def test_user_does_not_exist():
     resource = "/apigetfile/{0}/{1}/".format(file_owner, file_id)
     response = requests.get(server + resource, headers=hd)
     if six.PY3:
-        content = json.loads(response.content.decode('unicode_escape'))
+        content = _json.loads(response.content.decode('unicode_escape'))
     else:
-        content = json.loads(response.content)
+        content = _json.loads(response.content)
     print(response.status_code)
     print(content)
     assert response.status_code == 404
@@ -60,9 +60,9 @@ def test_file_does_not_exist():
     resource = "/apigetfile/{0}/{1}/".format(file_owner, file_id)
     response = requests.get(server + resource, headers=hd)
     if six.PY3:
-        content = json.loads(response.content.decode('unicode_escape'))
+        content = _json.loads(response.content.decode('unicode_escape'))
     else:
-        content = json.loads(response.content)
+        content = _json.loads(response.content)
     print(response.status_code)
     print(content)
     assert response.status_code == 404
@@ -100,9 +100,9 @@ def test_private_permission_defined():
     resource = "/apigetfile/{0}/{1}/".format(file_owner, file_id)
     response = requests.get(server + resource, headers=hd)
     if six.PY3:
-        content = json.loads(response.content.decode('unicode_escape'))
+        content = _json.loads(response.content.decode('unicode_escape'))
     else:
-        content = json.loads(response.content)
+        content = _json.loads(response.content)
     print(response.status_code)
     print(content)
     assert response.status_code == 403
@@ -122,9 +122,9 @@ def test_missing_headers():
         del hd[header]
         response = requests.get(server + resource, headers=hd)
         if six.PY3:
-            content = json.loads(response.content.decode('unicode_escape'))
+            content = _json.loads(response.content.decode('unicode_escape'))
         else:
-            content = json.loads(response.content)
+            content = _json.loads(response.content)
         print(response.status_code)
         print(content)
         assert response.status_code == 422
@@ -142,13 +142,13 @@ def test_valid_request():
     resource = "/apigetfile/{0}/{1}/".format(file_owner, file_id)
     response = requests.get(server + resource, headers=hd)
     if six.PY3:
-        content = json.loads(response.content.decode('unicode_escape'))
+        content = _json.loads(response.content.decode('unicode_escape'))
     else:
-        content = json.loads(response.content)
+        content = _json.loads(response.content)
     print(response.status_code)
     print(content)
     assert response.status_code == 200
-    # content = json.loads(res.content)
+    # content = _json.loads(res.content)
     # response_payload = content['payload']
     # figure = response_payload['figure']
     # if figure['data'][0]['x'] != [u'1', u'2', u'3']:

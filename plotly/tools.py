@@ -19,7 +19,6 @@ import decimal
 from plotly import colors
 from plotly import utils
 from plotly import exceptions
-from plotly import graph_reference
 from plotly import session
 from plotly.files import (CONFIG_FILE, CREDENTIALS_FILE, FILE_CONTENT,
                           GRAPH_REFERENCE_FILE, check_file_permissions)
@@ -127,7 +126,7 @@ def get_config_defaults():
     return dict(FILE_CONTENT[CONFIG_FILE])  # performs a shallow copy
 
 
-def ensure_local_plotly_files():
+def ensure_local_plotly_files(graph_reference=None):
     """Ensure that filesystem is setup/filled out in a valid way.
     If the config or credential files aren't filled out, then write them
     to the disk.
@@ -148,8 +147,9 @@ def ensure_local_plotly_files():
 
         # make a request to get graph reference if DNE.
         utils.ensure_file_exists(GRAPH_REFERENCE_FILE)
-        utils.save_json_dict(GRAPH_REFERENCE_FILE,
-                             graph_reference.GRAPH_REFERENCE)
+        if graph_reference is not None:
+            # This is a workaround to keep from having weird circular imports.
+            utils.save_json_dict(GRAPH_REFERENCE_FILE, graph_reference)
 
     else:
         warnings.warn("Looks like you don't have 'read-write' permission to "
@@ -1362,6 +1362,7 @@ def validate(obj, obj_type):
 
     """
     # TODO: Deprecate or move. #283
+    from plotly import graph_reference
     from plotly.graph_objs import graph_objs
 
     if obj_type not in graph_reference.CLASSES:
