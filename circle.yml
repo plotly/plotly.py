@@ -3,7 +3,7 @@ machine:
   environment:
 
     PLOTLY_CONFIG_DIR: ${HOME}/.plotly
-    TOX_TESTENV_PASSENV: PLOTLY_TOX_*
+    PLOTLY_TOX_PYTHON_26: /home/ubuntu/.pyenv/versions/2.6.8/bin/python2.6
     PLOTLY_TOX_PYTHON_27: /home/ubuntu/.pyenv/versions/2.7.10/bin/python2.7
     PLOTLY_TOX_PYTHON_33: /home/ubuntu/.pyenv/versions/3.3.3/bin/python3.3
     PLOTLY_TOX_PYTHON_34: /home/ubuntu/.pyenv/versions/3.4.3/bin/python3.4
