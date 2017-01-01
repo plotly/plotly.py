@@ -115,12 +115,12 @@ def _dict_attribute_help(object_name, path, parent_object_names, attribute):
             if object_name in trace_names and attribute == 'type':
                 d = {'role': 'info'}
             else:
-                d = {k: v for k, v in attribute_dict[attribute].items()
-                     if k in meta_keys and not k.startswith('_')}
+                d = dict((k, v) for k, v in attribute_dict[attribute].items()
+                         if k in meta_keys and not k.startswith('_'))
         elif attribute in attribute_dict.get('_deprecated', {}):
             deprecate_attribute_dict = attribute_dict['_deprecated'][attribute]
-            d = {k: v for k, v in deprecate_attribute_dict.items()
-                 if k in meta_keys and not k.startswith('_')}
+            d = dict((k, v) for k, v in deprecate_attribute_dict.items()
+                     if k in meta_keys and not k.startswith('_'))
             d['deprecated'] = True
         else:
             continue
