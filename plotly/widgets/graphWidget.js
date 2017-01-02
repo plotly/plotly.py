@@ -5,15 +5,24 @@ window.genUID = function() {
     });
 };
 
-var IPYTHON_VERSION = '3';
+// The following 8 lines of code are taken from https://github.com/quantopian/qgrid/.
+if (IPython.version[0] === '4' && parseInt(IPython.version[2]) >= 2) {
+    var path = 'jupyter-js-widgets';
+} else {
+    var path = 'widgets/js/widget';
+    if (IPython.version[0] !== '3') {
+        path = 'nbextensions/widgets/' + path;
+    }
+}
 
-require(["widgets/js/widget", "widgets/js/manager"], function (widget, manager) {
+define('GraphViewModule', [path], function (widget) {
+    var IPYTHON_VERSION = '3';
+
     if (!('DOMWidgetView' in widget)) {
 
         // we're in IPython2, things moved a bit from 2 --> 3.
         // construct the expected IPython3 widget API
         IPYTHON_VERSION = '2';
-        manager = {WidgetManager: widget};
         widget = {DOMWidgetView: IPython.DOMWidgetView};
     }
 
@@ -157,10 +166,10 @@ require(["widgets/js/widget", "widgets/js/manager"], function (widget, manager) 
             plot.fadeTo(message.duration, message.opacity);
         }
     });
-
-    // Register the GraphView with the widget manager.
-    manager.WidgetManager.register_widget_view('GraphView', GraphView);
-
+    
+    return {
+        GraphView: GraphView
+    }
 });
 
-//@ sourceURL=graphWidget.js
+//# sourceURL=graphWidget.js
