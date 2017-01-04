@@ -68,7 +68,7 @@ update_plotlyjs_for_offline :
 				cdn_url = 'https://cdn.plot.ly/plotly-latest.min.js';\
 				response = urllib2.urlopen(cdn_url);\
 				html = response.read();\
-				f = open('./plotly/offline/plotly.min.js', 'w');\
+				f = open('./plotly/package_data/plotly.min.js', 'w');\
     		 	f.write(html);\
 				f.close()"
 	@echo "---------------------------------"
