@@ -40,6 +40,8 @@ setup(name='plotly',
                 'plotly/matplotlylib',
                 'plotly/matplotlylib/mplexporter',
                 'plotly/matplotlylib/mplexporter/renderers'],
-      package_data={'plotly': ['graph_reference/*.json', 'widgets/*.js', 'offline/*.js']},
+      package_data={
+          'plotly': ['package_data/*.json', 'widgets/*.js', 'offline/*.js']
+      },
       install_requires=['requests', 'six', 'pytz'],
       zip_safe=False)

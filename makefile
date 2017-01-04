@@ -21,7 +21,7 @@ update_default_schema :
 	python -c "import requests;/
                from requests.compat import json as _json;\
                response = requests.get('https://api.plot.ly/v2/plot-schema?sha1';/
-               f = open('plotly/graph_reference/default-schema.json', 'w');\
+               f = open('plotly/package_data/default-schema.json', 'w');\
                _json.dump(response.json()['schema'], f, indent=4,\
                           sort_keys=True, separators=(',', ': '));\
                f.close()"

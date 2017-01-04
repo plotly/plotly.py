@@ -24,7 +24,7 @@ class TestGraphReferenceCaching(PlotlyTestCase):
 
         # if we don't have a graph reference we load an outdated default
 
-        path = os.path.join('graph_reference', 'default-schema.json')
+        path = os.path.join('package_data', 'default-schema.json')
         s = resource_string('plotly', path).decode('utf-8')
         default_graph_reference = json.loads(s)
         graph_reference = gr.get_graph_reference()
@@ -41,7 +41,7 @@ class TestGraphReferenceCaching(PlotlyTestCase):
             content = response.content
         schema = json.loads(content)['schema']
 
-        path = os.path.join('graph_reference', 'default-schema.json')
+        path = os.path.join('package_data', 'default-schema.json')
         s = resource_string('plotly', path).decode('utf-8')
         default_schema = json.loads(s)
 
