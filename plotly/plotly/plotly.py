@@ -1553,7 +1553,6 @@ def icreate_animations(figure, filename=None, sharing='public', auto_open=False)
     This function is based off `plotly.plotly.iplot`. See `plotly.plotly.
     create_animations` Doc String for param descriptions.
     """
-    # TODO: create a wrapper for iplot and icreate_animations
     url = create_animations(figure, filename, sharing, auto_open)
 
     if isinstance(figure, dict):
