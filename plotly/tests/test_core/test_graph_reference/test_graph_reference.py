@@ -13,47 +13,18 @@ import requests
 import six
 from nose.plugins.attrib import attr
 
-from plotly import files, graph_reference as gr, tools, utils
+from plotly import files, graph_reference as gr
 from plotly.graph_reference import string_to_class_name, get_role
 from plotly.tests.utils import PlotlyTestCase
 
 
 class TestGraphReferenceCaching(PlotlyTestCase):
 
-    def set_graph_reference(self, graph_reference):
-        if files.check_file_permissions():
-            utils.save_json_dict(files.GRAPH_REFERENCE_FILE, graph_reference)
-
-    @attr('slow')
-    def test_get_graph_reference_outdated(self):
-
-        # if the hash of the current graph reference doesn't match the hash of
-        # the graph reference a Plotly server has, we should update!
-
-        outdated_graph_reference = {'real': 'old'}
-        self.set_graph_reference(outdated_graph_reference)
-        graph_reference = gr.get_graph_reference()
-        self.assertNotEqual(graph_reference, outdated_graph_reference)
-
-    def test_get_graph_reference_bad_request_local_copy(self):
-
-        # if the request fails (mocked by using a bad url here) and a local
-        # copy of the graph reference exists, we can just use that.
-
-        tools.set_config_file(plotly_api_domain='api.am.not.here.ly')
-        local_graph_reference = {'real': 'local'}
-        self.set_graph_reference(local_graph_reference)
-        graph_reference = gr.get_graph_reference()
-        self.assertEqual(graph_reference, local_graph_reference)
-
-    def test_get_graph_reference_bad_request_no_copy(self):
+    def test_get_graph_reference(self):
 
         # if we don't have a graph reference we load an outdated default
 
-        tools.set_config_file(plotly_api_domain='api.am.not.here.ly')
-        empty_graph_reference = {}  # set it to a false-y value.
-        self.set_graph_reference(empty_graph_reference)
-        path = os.path.join('graph_reference', 'default-schema.json')
+        path = os.path.join('package_data', 'default-schema.json')
         s = resource_string('plotly', path).decode('utf-8')
         default_graph_reference = json.loads(s)
         graph_reference = gr.get_graph_reference()
@@ -62,8 +33,7 @@ class TestGraphReferenceCaching(PlotlyTestCase):
     @attr('slow')
     def test_default_schema_is_up_to_date(self):
         api_domain = files.FILE_CONTENT[files.CONFIG_FILE]['plotly_api_domain']
-        graph_reference_url = '{}{}?sha1'.format(api_domain,
-                                                 gr.GRAPH_REFERENCE_PATH)
+        graph_reference_url = '{}{}?sha1'.format(api_domain, '/v2/plot-schema')
         response = requests.get(graph_reference_url)
         if six.PY3:
             content = str(response.content, encoding='utf-8')
@@ -71,7 +41,7 @@ class TestGraphReferenceCaching(PlotlyTestCase):
             content = response.content
         schema = json.loads(content)['schema']
 
-        path = os.path.join('graph_reference', 'default-schema.json')
+        path = os.path.join('package_data', 'default-schema.json')
         s = resource_string('plotly', path).decode('utf-8')
         default_schema = json.loads(s)
 

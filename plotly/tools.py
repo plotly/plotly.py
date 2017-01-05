@@ -22,7 +22,7 @@ from plotly import exceptions
 from plotly import graph_reference
 from plotly import session
 from plotly.files import (CONFIG_FILE, CREDENTIALS_FILE, FILE_CONTENT,
-                          GRAPH_REFERENCE_FILE, check_file_permissions)
+                          check_file_permissions)
 
 DEFAULT_PLOTLY_COLORS = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
                          'rgb(44, 160, 44)', 'rgb(214, 39, 40)',
@@ -145,11 +145,6 @@ def ensure_local_plotly_files():
                 if key not in FILE_CONTENT[fn]:
                     del contents[key]
             utils.save_json_dict(fn, contents)
-
-        # make a request to get graph reference if DNE.
-        utils.ensure_file_exists(GRAPH_REFERENCE_FILE)
-        utils.save_json_dict(GRAPH_REFERENCE_FILE,
-                             graph_reference.GRAPH_REFERENCE)
 
     else:
         warnings.warn("Looks like you don't have 'read-write' permission to "

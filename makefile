@@ -18,12 +18,15 @@ setup_subs :
 
 update_default_schema :
 	@echo "Making sure the default-schema.json file is up to date"
-	python -c "import json;\
-               from plotly.graph_reference import GRAPH_REFERENCE;\
-               f = open('plotly/graph_reference/default-schema.json', 'w');\
-               json.dump(GRAPH_REFERENCE, f, indent=4, sort_keys=True,\
-                   separators=(',', ': '));\
+	python -c "import requests;\
+               from requests.compat import json as _json;\
+               response = requests.get('https://api.plot.ly/v2/plot-schema?sha1');\
+               f = open('plotly/package_data/default-schema.json', 'w');\
+               _json.dump(response.json()['schema'], f, indent=4,\
+                          sort_keys=True, separators=(',', ': '));\
                f.close()"
+	@echo "Auto-generating graph objects based on updated default-schema."
+	python update_graph_objs.py
 
 install : sync_subs
 	@echo ""
@@ -65,7 +68,7 @@ update_plotlyjs_for_offline :
 				cdn_url = 'https://cdn.plot.ly/plotly-latest.min.js';\
 				response = urllib2.urlopen(cdn_url);\
 				html = response.read();\
-				f = open('./plotly/offline/plotly.min.js', 'w');\
+				f = open('./plotly/package_data/plotly.min.js', 'w');\
     		 	f.write(html);\
 				f.close()"
 	@echo "---------------------------------"

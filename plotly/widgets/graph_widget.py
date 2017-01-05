@@ -21,7 +21,7 @@ from plotly.graph_objs import Figure
 # No officially recommended way to do this in any other way
 # http://mail.scipy.org/pipermail/ipython-dev/2014-April/013835.html
 js_widget_code = resource_string('plotly',
-                                 'widgets/graphWidget.js').decode('utf-8')
+                                 'package_data/graphWidget.js').decode('utf-8')
 
 display(Javascript(js_widget_code))
 

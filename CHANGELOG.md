@@ -2,9 +2,15 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [1.13.0]
+### Added
+- Python 3.5 has been added as a tested environment for this package.
+
 ### Updated
 - `plotly.plotly.create_animations` and `plotly.plotly.icreate_animations` now return appropriate error messages if the response is not successful.
+
+### Changed
+- The plot-schema from `https://api.plot.ly/plot-schema` is no longer updated on import.
 
 ## [1.12.12] - 2016-12-06
 ### Updated

@@ -45,7 +45,7 @@ def download_plotlyjs(download_url):
 
 
 def get_plotlyjs():
-    path = os.path.join('offline', 'plotly.min.js')
+    path = os.path.join('package_data', 'plotly.min.js')
     plotlyjs = resource_string('plotly', path).decode('utf-8')
     return plotlyjs
 
