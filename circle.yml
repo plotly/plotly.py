@@ -11,7 +11,8 @@ machine:
     PLOTLY_JUPYTER_TEST_DIR: /home/ubuntu/${CIRCLE_PROJECT_REPONAME}/plotly/tests/test_optional/test_jupyter
 
   node:
-    version: 4.2.1
+    # use a pre-installed version of node so we don't need to download it.
+    version: 4.2.2
 
 dependencies:
 
