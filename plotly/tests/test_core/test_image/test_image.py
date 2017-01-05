@@ -5,9 +5,11 @@ import imghdr
 import tempfile
 import os
 import itertools
+import warnings
 
 from nose.plugins.attrib import attr
 
+from plotly import exceptions
 from plotly.plotly import plotly as py
 
 
@@ -24,9 +26,20 @@ class TestImage(TestCase):
 def _generate_image_get_returns_valid_image_test(image_format,
                                                  width, height, scale):
     def test(self):
-        image = py.image.get(self.data, image_format, width, height, scale)
-        if image_format in ['png', 'jpeg']:
-            assert imghdr.what('', image) == image_format
+        # TODO: better understand why this intermittently fails. See #649
+        num_attempts = 5
+        for i in range(num_attempts):
+            if i > 0:
+                warnings.warn('image test intermittently failed, retrying...')
+            try:
+                image = py.image.get(self.data, image_format, width, height,
+                                     scale)
+                if image_format in ['png', 'jpeg']:
+                    assert imghdr.what('', image) == image_format
+                return
+            except (KeyError, exceptions.PlotlyError):
+                if i == num_attempts - 1:
+                    raise
 
     return test
 

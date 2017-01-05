@@ -8,6 +8,11 @@ machine:
     PLOTLY_TOX_PYTHON_33: /home/ubuntu/.pyenv/versions/3.3.3/bin/python3.3
     PLOTLY_TOX_PYTHON_34: /home/ubuntu/.pyenv/versions/3.4.3/bin/python3.4
     PLOTLY_TOX_PYTHON_35: /home/ubuntu/.pyenv/versions/3.5.0/bin/python3.5
+    PLOTLY_JUPYTER_TEST_DIR: /home/ubuntu/${CIRCLE_PROJECT_REPONAME}/plotly/tests/test_optional/test_jupyter
+
+  node:
+    # use a pre-installed version of node so we don't need to download it.
+    version: 4.2.2
 
 dependencies:
 
@@ -21,10 +26,14 @@ dependencies:
     # we need to cd out of the project root to ensure the install worked
     - cd ~ && python -c "import plotly"
 
+    # install jupyter test JS requirements
+    - cd ${PLOTLY_JUPYTER_TEST_DIR} && npm i
+
   cache_directories:
 
     # cache everything that tox installs for us.
     - .tox
+    - ${PLOTLY_JUPYTER_TEST_DIR}/node_modules
 
 test:
 
