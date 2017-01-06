@@ -33,7 +33,7 @@ Run the tests:
 - Save the resulting `.ipynb` file in `fixtures/` (e.g. `my_test.ipynb`)
 
 - Add a JavaScript test file in `js_tests/` by first requiring the in-house
-  [`tape`](https://github.com/substack/tape) test wrapper found in `lib/tape-wrapper.js`. 
+  [`tape`](https://github.com/substack/tape) test wrapper found in `lib/tape-wrapper.js`.
 
 For example,
 
@@ -48,13 +48,13 @@ test('should have one plotly.js graph', function(t) {
 });
 ```
 
-asserts that one plotly graph is present in the notebook. 
+asserts that one plotly graph is present in the notebook.
 
-At the moment, it is highly recommended that the js test file has the same name
+At the moment, it is highly recommended that the `js` test file has the same name
 (minus the extension) as the `.ipynb` fixture (i.e. `my_test.js` in this
 example).
 
-- Add a test case in `test_jupyter.py`. If both the fixture and js test file
+- Add a test case in `test_jupyter.py`. If both the fixture and `js` test file
 have the same name, simply add:
 
 ```py
@@ -70,12 +70,12 @@ to `test_jupyter.py` and you're done :beers:
 
 The `Common` test class in `test_jupyter.py`:
 
-- Loads up a given `ipynb` fixture
+- Loads up a given `.ipynb` fixture
 
-- Executes all code cells and converts it to HTML using the
+- Executes all code cells and converts them to HTML using the
 [`nbconvert`](https://nbconvert.readthedocs.io/en/latest/) and
 [`ipykernel`](http://ipython.readthedocs.io/en/stable/install/kernel_install.html)
-modules. 
+modules.
 
 - Saves the resulting HTML file is saved in `fixtures/` but is git-ignored.
 
@@ -85,22 +85,22 @@ Then, `Common` runs an `npm` command in the shell:
 npm test -- <path-to-html-fixture> <path-to-js-test-file>
 ```
 
-which runs a minimal server using `lib/server.js`. 
+which runs a minimal server using `lib/server.js`.
 
 In details, `lib/server.js`:
 
--  bundles up the js test code into a single bundle using
+-  bundles up the `js` test code into a single bundle using
 [`browserify`](https://github.com/substack/node-browserify)
 
-- stubs in a `<script>` tag to include the js test bundle in the fixture HTML 
+- stubs in a `<script>` tag to include the `js` test bundle in the fixture HTML
 
 - starts a simple http server
 
 - launches Chrome at the HTML fixture URL
 
-- once the page is loaded, the js tests are run and results are logged in the
+- once the page is loaded, the `js` tests are run and results are logged in the
 terminal
 
 
-See PR [#540](https://github.com/plotly/plotly.py/pull/549) for the details on
+See PR [#549](https://github.com/plotly/plotly.py/pull/549) for the details on
 how this suite was first implemented.
