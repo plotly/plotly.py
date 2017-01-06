@@ -2,6 +2,7 @@ from __future__ import absolute_import
 
 from plotly import exceptions
 from plotly.figure_factory import utils
+from plotly.graph_objs import graph_objs
 from plotly.tools import _numpy_imported, _pandas_imported, _scipy_imported
 
 if _numpy_imported:
@@ -27,12 +28,6 @@ def validate_distplot(hist_data, curve_type):
     :raises: (PlotlyError) If curve_type is not valid (i.e. not 'kde' or
         'normal').
     """
-    try:
-        import pandas as pd
-        _pandas_imported = True
-    except ImportError:
-        _pandas_imported = False
-
     hist_data_types = (list,)
     if _numpy_imported:
         hist_data_types += (np.ndarray,)
@@ -174,8 +169,6 @@ def create_distplot(hist_data, group_labels, bin_size=1., curve_type='kde',
                                 validate=False)
     ```
     """
-    # TODO: protected until #282
-    from plotly.graph_objs import graph_objs
     validate_distplot(hist_data, curve_type)
     utils.validate_equal_length(hist_data, group_labels)
 

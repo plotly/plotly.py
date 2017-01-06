@@ -4,6 +4,7 @@ from plotly.figure_factory import utils
 from plotly.figure_factory._ohlc import (_DEFAULT_INCREASING_COLOR,
                                          _DEFAULT_DECREASING_COLOR,
                                          validate_ohlc)
+from plotly.graph_objs import graph_objs
 
 
 def make_increasing_candle(open, high, low, close, dates, **kwargs):
@@ -204,8 +205,6 @@ def create_candlestick(open, high, low, close, dates=None, direction='both',
     py.iplot(fig, filename='finance/simple-candlestick', validate=False)
     ```
     """
-    # TODO: protected until #282
-    from plotly.graph_objs import graph_objs
     if dates is not None:
         utils.validate_equal_length(open, high, low, close, dates)
     else:

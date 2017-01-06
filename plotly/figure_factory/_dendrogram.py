@@ -5,6 +5,7 @@ from __future__ import absolute_import
 from collections import OrderedDict
 
 from plotly import exceptions
+from plotly.graph_objs import graph_objs
 from plotly.tools import (_numpy_imported, _scipy_imported,
                           _scipy__cluster__hierarchy_imported,
                           _scipy__spatial_imported)
@@ -106,8 +107,6 @@ class _Dendrogram(object):
     def __init__(self, X, orientation='bottom', labels=None, colorscale=None,
                  width="100%", height="100%", xaxis='xaxis', yaxis='yaxis',
                  distfun=None, linkagefun=lambda x: sch.linkage(x, 'complete')):
-        # TODO: protected until #282
-        from plotly.graph_objs import graph_objs
         self.orientation = orientation
         self.labels = labels
         self.xaxis = xaxis
@@ -259,8 +258,6 @@ class _Dendrogram(object):
             (e) P['leaves']: left-to-right traversal of the leaves
 
         """
-        # TODO: protected until #282
-        from plotly.graph_objs import graph_objs
         d = distfun(X)
         Z = linkagefun(d)
         P = sch.dendrogram(Z, orientation=self.orientation,

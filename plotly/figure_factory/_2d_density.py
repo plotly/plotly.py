@@ -1,7 +1,10 @@
 from __future__ import absolute_import
 
+from numbers import Number
+
 from plotly import exceptions
 from plotly.figure_factory import utils
+from plotly.graph_objs import graph_objs
 
 
 def make_linear_colorscale(colors):
@@ -83,8 +86,6 @@ def create_2d_density(x, y, colorscale='Earth', ncontours=20,
     py.iplot(fig, filename='use-parameters')
     ```
     """
-    from plotly.graph_objs import graph_objs
-    from numbers import Number
 
     # validate x and y are filled with numbers only
     for array in [x, y]:

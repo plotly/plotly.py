@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 
 from plotly import colors, exceptions
+from plotly.graph_objs import graph_objs
 from plotly.tools import _numpy_imported
 
 if _numpy_imported:
@@ -83,7 +84,6 @@ def trisurf(x, y, z, simplices, show_colorbar, edges_color, scale,
     if _numpy_imported is False:
         raise ImportError("FigureFactory._trisurf() requires "
                           "numpy imported.")
-    from plotly.graph_objs import graph_objs
     points3D = np.vstack((x, y, z)).T
     simplices = np.atleast_2d(simplices)
 
@@ -455,7 +455,6 @@ def create_trisurf(x, y, z, simplices, colormap=None, show_colorbar=True,
     py.iplot(fig, filename="trisurf-plot-modern-art")
     ```
     """
-    from plotly.graph_objs import graph_objs
 
     # Validate colormap
     colors.validate_colors(colormap)

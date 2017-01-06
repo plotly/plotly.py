@@ -4,6 +4,7 @@ import math
 
 from plotly import exceptions
 from plotly.figure_factory import utils
+from plotly.graph_objs import graph_objs
 from plotly.tools import _numpy_imported
 
 if _numpy_imported:
@@ -118,8 +119,6 @@ def create_streamline(x, y, u, v, density=1, angle=math.pi / 9,
     py.plot(fig, filename='streamline')
     ```
     """
-    # TODO: protected until #282
-    from plotly.graph_objs import graph_objs
     utils.validate_equal_length(x, y)
     utils.validate_equal_length(u, v)
     validate_streamline(x, y)

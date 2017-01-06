@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 
 from plotly import exceptions
+from plotly.graph_objs import graph_objs
 from plotly.tools import _pandas_imported
 
 if _pandas_imported:
@@ -97,8 +98,6 @@ def create_table(table_text, colorscale=None, font_colors=None,
     py.iplot(table_simple)
     ```
     """
-    # TODO: protected until #282
-    from plotly.graph_objs import graph_objs
 
     # Avoiding mutables in the call signature
     colorscale = \
@@ -139,7 +138,6 @@ class _Table(object):
     """
     def __init__(self, table_text, colorscale, font_colors, index,
                  index_title, annotation_offset, **kwargs):
-        from plotly.graph_objs import graph_objs
         if _pandas_imported and isinstance(table_text, pd.DataFrame):
             headers = table_text.columns.tolist()
             table_text_index = table_text.index.tolist()
@@ -211,7 +209,6 @@ class _Table(object):
         :rtype (list) annotations: list of annotations for each cell of the
             table.
         """
-        from plotly.graph_objs import graph_objs
         table_matrix = _Table.get_table_matrix(self)
         all_font_colors = _Table.get_table_font_color(self)
         annotations = []

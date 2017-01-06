@@ -3,6 +3,7 @@ from __future__ import absolute_import
 import math
 
 from plotly import exceptions
+from plotly.graph_objs import graph_objs
 from plotly.figure_factory import utils
 
 
@@ -88,8 +89,6 @@ def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
     py.plot(fig, filename='quiver')
     ```
     """
-    # TODO: protected until #282
-    from plotly.graph_objs import graph_objs
     utils.validate_equal_length(x, y, u, v)
     utils.validate_positive_scalars(arrow_scale=arrow_scale, scale=scale)
 
