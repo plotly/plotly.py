@@ -3805,7 +3805,7 @@ class FigureFactory(object):
         return graph_objs.Figure(data=data1, layout=layout)
 
     @staticmethod
-    def _scatterplot(dataframe, headers, diag, size,
+    def _scatterplot(dataframe, headers, diag, size, webgl,
                      height, width, title, **kwargs):
         """
         Refer to FigureFactory.create_scatterplotmatrix() for docstring
@@ -3879,10 +3879,13 @@ class FigureFactory(object):
 
         FigureFactory._hide_tick_labels_from_box_subplots(fig)
 
+        if webgl is True:
+            FigureFactory._change_figure_to_webgl(fig)
+
         return fig
 
     @staticmethod
-    def _scatterplot_dict(dataframe, headers, diag, size,
+    def _scatterplot_dict(dataframe, headers, diag, size, webgl,
                           height, width, title, index, index_vals,
                           endpts, colormap, colormap_type, **kwargs):
         """
@@ -4028,6 +4031,9 @@ class FigureFactory(object):
 
         FigureFactory._hide_tick_labels_from_box_subplots(fig)
 
+        if webgl is True:
+            FigureFactory._change_figure_to_webgl(fig)
+
         if diag == 'histogram':
             fig['layout'].update(
                 height=height, width=width,
@@ -4044,7 +4050,7 @@ class FigureFactory(object):
             return fig
 
     @staticmethod
-    def _scatterplot_theme(dataframe, headers, diag, size, height,
+    def _scatterplot_theme(dataframe, headers, diag, size, webgl, height,
                            width, title, index, index_vals, endpts,
                            colormap, colormap_type, **kwargs):
         """
@@ -4212,6 +4218,9 @@ class FigureFactory(object):
                 fig['layout'][yaxis_key].update(title=headers[j])
 
             FigureFactory._hide_tick_labels_from_box_subplots(fig)
+
+            if webgl is True:
+                FigureFactory._change_figure_to_webgl(fig)
 
             if diag == 'histogram':
                 fig['layout'].update(
@@ -4388,6 +4397,9 @@ class FigureFactory(object):
 
                 FigureFactory._hide_tick_labels_from_box_subplots(fig)
 
+                if webgl is True:
+                    FigureFactory._change_figure_to_webgl(fig)
+
                 if diag == 'histogram':
                     fig['layout'].update(
                         height=height, width=width,
@@ -4535,6 +4547,9 @@ class FigureFactory(object):
 
                 FigureFactory._hide_tick_labels_from_box_subplots(fig)
 
+                if webgl is True:
+                    FigureFactory._change_figure_to_webgl(fig)
+
                 if diag == 'histogram':
                     fig['layout'].update(
                         height=height, width=width,
@@ -4558,10 +4573,20 @@ class FigureFactory(object):
                     return fig
 
     @staticmethod
+    def _change_figure_to_webgl(fig):
+        """
+        Changes all scatter traces in figure to 'scattergl' type.
+
+        Only works if all traces are of type 'scatter'.
+        """
+        if all(trace['type'] == 'scatter' for trace in fig['data']):
+            for trace in fig['data']:
+                if trace['type'] == 'scatter':
+                    trace['type'] = 'scattergl'
+
+    @staticmethod
     def _hide_tick_labels_from_box_subplots(fig):
-        """
-        Hides tick labels for box plots in scatterplotmatrix subplots.
-        """
+        """Hides tick labels for box plots in scatterplotmatrix subplots."""
         boxplot_xaxes = []
         for trace in fig['data']:
             if trace['type'] == 'box':
@@ -4808,24 +4833,25 @@ class FigureFactory(object):
 
     @staticmethod
     def create_scatterplotmatrix(df, index=None, endpts=None, diag='scatter',
-                                 height=500, width=500, size=6,
+                                 height=500, width=500, size=6, webgl=False,
                                  title='Scatterplot Matrix', colormap=None,
                                  colormap_type='cat', dataframe=None,
                                  headers=None, index_vals=None, **kwargs):
         """
         Returns data for a scatterplot matrix.
 
-        :param (array) df: array of the data with column headers
-        :param (str) index: name of the index column in data array
+        :param (array) df: array of the data with column headers.
+        :param (str) index: name of the index column in data array.
         :param (list|tuple) endpts: takes an increasing sequece of numbers
             that defines intervals on the real line. They are used to group
             the entries in an index of numbers into their corresponding
-            interval and therefore can be treated as categorical data
+            interval and therefore can be treated as categorical data.
         :param (str) diag: sets the chart type for the main diagonal plots.
             The options are 'scatter', 'histogram' and 'box'.
-        :param (int|float) height: sets the height of the chart
-        :param (int|float) width: sets the width of the chart
-        :param (float) size: sets the marker size (in px)
+        :param (int|float) height: sets the height of the chart.
+        :param (int|float) width: sets the width of the chart.
+        :param (float) size: sets the marker size (in px).
+        :param (bool) webgl: if True, plots all scatterplots with WebGL.
         :param (str) title: the title label of the scatterplot matrix
         :param (str|tuple|list|dict) colormap: either a plotly scale name,
             an rgb or hex color, a color tuple, a list of colors or a
@@ -4836,7 +4862,7 @@ class FigureFactory(object):
             members.
             If colormap is a dictionary, all the string entries in
             the index column must be a key in colormap. In this case, the
-            colormap_type is forced to 'cat' or categorical
+            colormap_type is forced to 'cat' or categorical.
         :param (str) colormap_type: determines how colormap is interpreted.
             Valid choices are 'seq' (sequential) and 'cat' (categorical). If
             'seq' is selected, only the first two colors in colormap will be
@@ -4845,10 +4871,10 @@ class FigureFactory(object):
             forced if all index values are numeric.
             If 'cat' is selected, a color from colormap will be assigned to
             each category from index, including the intervals if endpts is
-            being used
+            being used.
         :param (dict) **kwargs: a dictionary of scatterplot arguments
             The only forbidden parameters are 'size', 'color' and
-            'colorscale' in 'marker'
+            'colorscale' in 'marker'.
 
         Example 1: Vanilla Scatterplot Matrix
         ```
@@ -5035,8 +5061,8 @@ class FigureFactory(object):
             # Check for same data-type in df columns
             FigureFactory._validate_dataframe(dataframe)
             figure = FigureFactory._scatterplot(dataframe, headers, diag,
-                                                size, height, width, title,
-                                                **kwargs)
+                                                size, webgl, height, width,
+                                                title, **kwargs)
             return figure
         else:
             # Validate index selection
@@ -5066,16 +5092,16 @@ class FigureFactory(object):
                                                      "names in the index "
                                                      "must be keys.")
                 figure = FigureFactory._scatterplot_dict(
-                    dataframe, headers, diag, size, height, width, title,
-                    index, index_vals, endpts, colormap, colormap_type,
+                    dataframe, headers, diag, size, webgl, height, width,
+                    title, index, index_vals, endpts, colormap, colormap_type,
                     **kwargs
                 )
                 return figure
 
             else:
                 figure = FigureFactory._scatterplot_theme(
-                    dataframe, headers, diag, size, height, width, title,
-                    index, index_vals, endpts, colormap, colormap_type,
+                    dataframe, headers, diag, size, webgl, height, width,
+                    title, index, index_vals, endpts, colormap, colormap_type,
                     **kwargs
                 )
                 return figure
