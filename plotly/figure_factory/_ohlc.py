@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 
 from plotly import exceptions
+from plotly.graph_objs import graph_objs
 from plotly.figure_factory import utils
 
 
@@ -254,8 +255,6 @@ def create_ohlc(open, high, low, close, dates=None, direction='both',
     py.iplot(fig, filename='finance/simple-ohlc', validate=False)
     ```
     """
-    # TODO: protected until #282
-    from plotly.graph_objs import graph_objs
     if dates is not None:
         utils.validate_equal_length(open, high, low, close, dates)
     else:

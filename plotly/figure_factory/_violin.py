@@ -1,19 +1,27 @@
 from __future__ import absolute_import
 
+from numbers import Number
+
 from plotly import exceptions
 from plotly.figure_factory import utils
-from plotly.tools import _pandas_imported, make_subplots
+from plotly.graph_objs import graph_objs
+from plotly.tools import (_numpy_imported, _pandas_imported, _scipy_imported,
+                          make_subplots)
 
 if _pandas_imported:
     import pandas as pd
+
+if _numpy_imported:
+    import numpy as np
+
+if _scipy_imported:
+    from scipy import stats
 
 
 def calc_stats(data):
     """
     Calculate statistics for use in violin plot.
     """
-    import numpy as np
-
     x = np.asarray(data, np.float)
     vals_min = np.min(x)
     vals_max = np.max(x)
@@ -42,8 +50,6 @@ def make_half_violin(x, y, fillcolor='#1f77b4', linecolor='rgb(0, 0, 0)'):
     """
     Produces a sideways probability distribution fig violin plot.
     """
-    from plotly.graph_objs import graph_objs
-
     text = ['(pdf(y), y)=(' + '{:0.2f}'.format(x[i]) +
             ', ' + '{:0.2f}'.format(y[i]) + ')'
             for i in range(len(x))]
@@ -66,8 +72,6 @@ def make_violin_rugplot(vals, pdf_max, distance, color='#1f77b4'):
     """
     Returns a rugplot fig for a violin plot.
     """
-    from plotly.graph_objs import graph_objs
-
     return graph_objs.Scatter(
         y=vals,
         x=[-pdf_max-distance]*len(vals),
@@ -86,8 +90,6 @@ def make_non_outlier_interval(d1, d2):
     """
     Returns the scatterplot fig of most of a violin plot.
     """
-    from plotly.graph_objs import graph_objs
-
     return graph_objs.Scatter(
         x=[0, 0],
         y=[d1, d2],
@@ -102,8 +104,6 @@ def make_quartiles(q1, q3):
     """
     Makes the upper and lower quartiles for a violin plot.
     """
-    from plotly.graph_objs import graph_objs
-
     return graph_objs.Scatter(
         x=[0, 0],
         y=[q1, q3],
@@ -122,8 +122,6 @@ def make_median(q2):
     """
     Formats the 'median' hovertext for a violin plot.
     """
-    from plotly.graph_objs import graph_objs
-
     return graph_objs.Scatter(
         x=[0],
         y=[q2],
@@ -139,8 +137,6 @@ def make_XAxis(xaxis_title, xaxis_range):
     """
     Makes the x-axis for a violin plot.
     """
-    from plotly.graph_objs import graph_objs
-
     xaxis = graph_objs.XAxis(title=xaxis_title,
                              range=xaxis_range,
                              showgrid=False,
@@ -156,8 +152,6 @@ def make_YAxis(yaxis_title):
     """
     Makes the y-axis for a violin plot.
     """
-    from plotly.graph_objs import graph_objs
-
     yaxis = graph_objs.YAxis(title=yaxis_title,
                              showticklabels=True,
                              autorange=True,
@@ -173,9 +167,6 @@ def violinplot(vals, fillcolor='#1f77b4', rugplot=True):
     """
     Refer to FigureFactory.create_violin() for docstring.
     """
-    import numpy as np
-    from scipy import stats
-
     vals = np.asarray(vals, np.float)
     #  summary statistics
     vals_min = calc_stats(vals)['min']
@@ -217,8 +208,6 @@ def violin_no_colorscale(data, data_header, group_header, colors,
     Returns fig for violin plot without colorscale.
 
     """
-    from plotly.graph_objs import graph_objs
-    import numpy as np
 
     # collect all group names
     group_name = []
@@ -274,8 +263,6 @@ def violin_colorscale(data, data_header, group_header, colors, use_colorscale,
     Returns fig for violin plot with colorscale.
 
     """
-    from plotly.graph_objs import graph_objs
-    import numpy as np
 
     # collect all group names
     group_name = []
@@ -369,8 +356,6 @@ def violin_dict(data, data_header, group_header, colors, use_colorscale,
     Returns fig for violin plot without colorscale.
 
     """
-    from plotly.graph_objs import graph_objs
-    import numpy as np
 
     # collect all group names
     group_name = []
@@ -550,8 +535,6 @@ def create_violin(data, data_header=None, group_header=None, colors=None,
     py.iplot(fig, filename='Violin Plot with Colorscale')
     ```
     """
-    from plotly.graph_objs import graph_objs
-    from numbers import Number
 
     # Validate colors
     if isinstance(colors, dict):

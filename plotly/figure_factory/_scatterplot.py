@@ -2,6 +2,7 @@ from __future__ import absolute_import
 
 from plotly import exceptions
 from plotly.figure_factory import utils
+from plotly.graph_objs import graph_objs
 from plotly.tools import _pandas_imported, make_subplots
 
 if _pandas_imported:
@@ -137,7 +138,6 @@ def scatterplot(dataframe, headers, diag, size, height, width, title,
     Returns fig for scatterplotmatrix without index
 
     """
-    from plotly.graph_objs import graph_objs
     dim = len(dataframe)
     fig = make_subplots(rows=dim, cols=dim, print_grid=False)
     trace_list = []
@@ -219,7 +219,6 @@ def scatterplot_dict(dataframe, headers, diag, size,
     implies that a categorical approach should be taken
 
     """
-    from plotly.graph_objs import graph_objs
 
     theme = colormap
     dim = len(dataframe)
@@ -377,7 +376,6 @@ def scatterplot_theme(dataframe, headers, diag, size, height, width, title,
     Returns fig for scatterplotmatrix with both index and colormap picked
 
     """
-    from plotly.graph_objs import graph_objs
 
     # Check if index is made of string values
     if isinstance(index_vals[0], str):

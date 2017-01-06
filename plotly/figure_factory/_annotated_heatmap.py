@@ -2,6 +2,7 @@ from __future__ import absolute_import
 
 from plotly import exceptions
 from plotly.figure_factory import utils
+from plotly.graph_objs import graph_objs
 from plotly.tools import _numpy_imported
 
 if _numpy_imported:
@@ -82,8 +83,6 @@ def create_annotated_heatmap(z, x=None, y=None, annotation_text=None,
     py.iplot(figure)
     ```
     """
-    # TODO: protected until #282
-    from plotly.graph_objs import graph_objs
 
     # Avoiding mutables in the call signature
     font_colors = font_colors if font_colors is not None else []
@@ -120,7 +119,6 @@ class _AnnotatedHeatmap(object):
     """
     def __init__(self, z, x, y, annotation_text, colorscale,
                  font_colors, reversescale, **kwargs):
-        from plotly.graph_objs import graph_objs
 
         self.z = z
         if x:
@@ -224,7 +222,6 @@ class _AnnotatedHeatmap(object):
         :rtype (list[dict]) annotations: list of annotations for each cell of
             the heatmap
         """
-        from plotly.graph_objs import graph_objs
         min_text_color, max_text_color = _AnnotatedHeatmap.get_text_color(self)
         z_mid = _AnnotatedHeatmap.get_z_mid(self)
         annotations = []

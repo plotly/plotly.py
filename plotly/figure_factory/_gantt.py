@@ -1,5 +1,7 @@
 from __future__ import absolute_import
 
+from numbers import Number
+
 from plotly import exceptions
 from plotly.figure_factory import utils
 from plotly.tools import _pandas_imported
@@ -181,7 +183,6 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
     """
     Refer to FigureFactory.create_gantt() for docstring
     """
-    from numbers import Number
     if tasks is None:
         tasks = []
     if task_names is None:
