@@ -229,7 +229,7 @@ def create_trisurf(x, y, z, simplices, colormap=None, show_colorbar=True,
                    zerolinecolor='rgb(255, 255, 255)',
                    edges_color='rgb(50, 50, 50)',
                    height=800, width=800,
-                   aspectratio=dict(x=1, y=1, z=1)):
+                   aspectratio=None):
     """
     Returns figure for a triangulated surface plot
 
@@ -452,6 +452,8 @@ def create_trisurf(x, y, z, simplices, colormap=None, show_colorbar=True,
     py.iplot(fig, filename="trisurf-plot-modern-art")
     ```
     """
+    if aspectratio is None:
+        aspectratio = {'x': 1, 'y': 1, 'z': 1}
 
     # Validate colormap
     colors.validate_colors(colormap)

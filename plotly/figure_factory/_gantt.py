@@ -78,8 +78,7 @@ def gantt(chart, colors, title, bar_width, showgrid_x, showgrid_y, height,
         'opacity': 1,
         'line': {
             'width': 0,
-        },
-        'yref': 'y',
+        }
     }
     # create the list of task names
     for index in range(len(tasks)):
@@ -206,8 +205,7 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
         'opacity': 1,
         'line': {
             'width': 0,
-        },
-        'yref': 'y',
+        }
     }
 
     # compute the color for task based on indexing column
@@ -455,8 +453,7 @@ def gantt_dict(chart, colors, title, index_col, show_colorbar, bar_width,
         'opacity': 1,
         'line': {
             'width': 0,
-        },
-        'yref': 'y',
+        }
     }
 
     index_vals = []

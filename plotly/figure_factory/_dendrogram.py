@@ -33,8 +33,10 @@ def create_dendrogram(X, orientation="bottom", labels=None,
     :param (str) orientation: 'top', 'right', 'bottom', or 'left'
     :param (list) labels: List of axis category labels(observation labels)
     :param (list) colorscale: Optional colorscale for dendrogram tree
-    :param (function) distfun: Function to compute the pairwise distance from the observations
-    :param (function) linkagefun: Function to compute the linkage matrix from the pairwise distances
+    :param (function) distfun: Function to compute the pairwise distance from
+                               the observations
+    :param (function) linkagefun: Function to compute the linkage matrix from
+                                  the pairwise distances
 
         clusters
 
@@ -106,7 +108,8 @@ class _Dendrogram(object):
 
     def __init__(self, X, orientation='bottom', labels=None, colorscale=None,
                  width="100%", height="100%", xaxis='xaxis', yaxis='yaxis',
-                 distfun=None, linkagefun=lambda x: sch.linkage(x, 'complete')):
+                 distfun=None,
+                 linkagefun=lambda x: sch.linkage(x, 'complete')):
         self.orientation = orientation
         self.labels = labels
         self.xaxis = xaxis
@@ -130,7 +133,9 @@ class _Dendrogram(object):
             distfun = scs.distance.pdist
 
         (dd_traces, xvals, yvals,
-            ordered_labels, leaves) = self.get_dendrogram_traces(X, colorscale, distfun, linkagefun)
+            ordered_labels, leaves) = self.get_dendrogram_traces(X, colorscale,
+                                                                 distfun,
+                                                                 linkagefun)
 
         self.labels = ordered_labels
         self.leaves = leaves
@@ -245,8 +250,10 @@ class _Dendrogram(object):
 
         :param (ndarray) X: Matrix of observations as array of arrays
         :param (list) colorscale: Color scale for dendrogram tree clusters
-        :param (function) distfun: Function to compute the pairwise distance from the observations
-        :param (function) linkagefun: Function to compute the linkage matrix from the pairwise distances
+        :param (function) distfun: Function to compute the pairwise distance
+                                   from the observations
+        :param (function) linkagefun: Function to compute the linkage matrix
+                                      from the pairwise distances
         :rtype (tuple): Contains all the traces in the following order:
             (a) trace_list: List of Plotly trace objects for dendrogram tree
             (b) icoord: All X points of the dendrogram tree as array of arrays

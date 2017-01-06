@@ -52,7 +52,7 @@ def validate_distplot(hist_data, curve_type):
 
 
 def create_distplot(hist_data, group_labels, bin_size=1., curve_type='kde',
-                    colors=[], rug_text=[], histnorm=DEFAULT_HISTNORM,
+                    colors=None, rug_text=None, histnorm=DEFAULT_HISTNORM,
                     show_hist=True, show_curve=True, show_rug=True):
     """
     BETA function that creates a distplot similar to seaborn.distplot
@@ -169,6 +169,11 @@ def create_distplot(hist_data, group_labels, bin_size=1., curve_type='kde',
                              validate=False)
     ```
     """
+    if colors is None:
+        colors = []
+    if rug_text is None:
+        rug_text = []
+
     validate_distplot(hist_data, curve_type)
     utils.validate_equal_length(hist_data, group_labels)
 
