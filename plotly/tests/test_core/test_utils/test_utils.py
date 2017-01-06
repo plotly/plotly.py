@@ -1,7 +1,8 @@
 from __future__ import absolute_import
 
-import json
 from unittest import TestCase
+
+from requests.compat import json as _json
 
 from plotly.utils import PlotlyJSONEncoder, get_by_path, node_generator
 
@@ -10,7 +11,7 @@ class TestJSONEncoder(TestCase):
 
     def test_nan_to_null(self):
         array = [1, float('NaN'), float('Inf'), float('-Inf'), 'platypus']
-        result = json.dumps(array, cls=PlotlyJSONEncoder)
+        result = _json.dumps(array, cls=PlotlyJSONEncoder)
         expected_result = '[1, null, null, null, "platypus"]'
         self.assertEqual(result, expected_result)
 

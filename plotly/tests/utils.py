@@ -1,5 +1,4 @@
 import copy
-import json
 from numbers import Number as Num
 from unittest import TestCase
 
