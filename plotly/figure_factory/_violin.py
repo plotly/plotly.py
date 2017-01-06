@@ -444,7 +444,7 @@ def create_violin(data, data_header=None, group_header=None, colors=None,
     Example 1: Single Violin Plot
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_violin
     from plotly.graph_objs import graph_objs
 
     import numpy as np
@@ -455,7 +455,7 @@ def create_violin(data, data_header=None, group_header=None, colors=None,
     data_list.tolist()
 
     # create violin fig
-    fig = FF.create_violin(data_list, colors='#604d9e')
+    fig = create_violin(data_list, colors='#604d9e')
 
     # plot
     py.iplot(fig, filename='Violin Plot')
@@ -464,7 +464,7 @@ def create_violin(data, data_header=None, group_header=None, colors=None,
     Example 2: Multiple Violin Plots with Qualitative Coloring
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_violin
     from plotly.graph_objs import graph_objs
 
     import numpy as np
@@ -483,8 +483,8 @@ def create_violin(data, data_header=None, group_header=None, colors=None,
     df = pd.DataFrame(dict(Score=y, Group=gr))
 
     # create violin fig
-    fig = FF.create_violin(df, data_header='Score', group_header='Group',
-                           height=600, width=1000)
+    fig = create_violin(df, data_header='Score', group_header='Group',
+                        height=600, width=1000)
 
     # plot
     py.iplot(fig, filename='Violin Plot with Coloring')
@@ -493,7 +493,7 @@ def create_violin(data, data_header=None, group_header=None, colors=None,
     Example 3: Violin Plots with Colorscale
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_violin
     from plotly.graph_objs import graph_objs
 
     import numpy as np
@@ -527,9 +527,9 @@ def create_violin(data, data_header=None, group_header=None, colors=None,
         group_stats[group] = stat
 
     # create violin fig
-    fig = FF.create_violin(df, data_header='Score', group_header='Group',
-                           height=600, width=1000, use_colorscale=True,
-                           group_stats=group_stats)
+    fig = create_violin(df, data_header='Score', group_header='Group',
+                        height=600, width=1000, use_colorscale=True,
+                        group_stats=group_stats)
 
     # plot
     py.iplot(fig, filename='Violin Plot with Colorscale')

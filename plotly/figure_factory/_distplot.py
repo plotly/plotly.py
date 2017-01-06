@@ -80,7 +80,7 @@ def create_distplot(hist_data, group_labels, bin_size=1., curve_type='kde',
     Example 1: Simple distplot of 1 data set
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_distplot
 
     hist_data = [[1.1, 1.1, 2.5, 3.0, 3.5,
                   3.5, 4.1, 4.4, 4.5, 4.5,
@@ -89,7 +89,7 @@ def create_distplot(hist_data, group_labels, bin_size=1., curve_type='kde',
 
     group_labels = ['distplot example']
 
-    fig = FF.create_distplot(hist_data, group_labels)
+    fig = create_distplot(hist_data, group_labels)
 
     url = py.plot(fig, filename='Simple distplot', validate=False)
     ```
@@ -97,7 +97,7 @@ def create_distplot(hist_data, group_labels, bin_size=1., curve_type='kde',
     Example 2: Two data sets and added rug text
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_distplot
 
     # Add histogram data
     hist1_x = [0.8, 1.2, 0.2, 0.6, 1.6,
@@ -125,7 +125,7 @@ def create_distplot(hist_data, group_labels, bin_size=1., curve_type='kde',
     rug_text_all = [rug_text_1, rug_text_2]
 
     # Create distplot
-    fig = FF.create_distplot(
+    fig = create_distplot(
         hist_data, group_labels, rug_text=rug_text_all, bin_size=.2)
 
     # Add title
@@ -138,7 +138,7 @@ def create_distplot(hist_data, group_labels, bin_size=1., curve_type='kde',
     Example 3: Plot with normal curve and hide rug plot
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_distplot
     import numpy as np
 
     x1 = np.random.randn(190)
@@ -149,7 +149,7 @@ def create_distplot(hist_data, group_labels, bin_size=1., curve_type='kde',
     hist_data = [x1, x2, x3, x4]
     group_labels = ['2012', '2013', '2014', '2015']
 
-    fig = FF.create_distplot(
+    fig = create_distplot(
         hist_data, group_labels, curve_type='normal',
         show_rug=False, bin_size=.4)
 
@@ -158,15 +158,15 @@ def create_distplot(hist_data, group_labels, bin_size=1., curve_type='kde',
     Example 4: Distplot with Pandas
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_distplot
     import numpy as np
     import pandas as pd
 
     df = pd.DataFrame({'2012': np.random.randn(200),
                        '2013': np.random.randn(200)+1})
-    py.iplot(FF.create_distplot([df[c] for c in df.columns], df.columns),
-                                filename='examples/distplot with pandas',
-                                validate=False)
+    py.iplot(create_distplot([df[c] for c in df.columns], df.columns),
+                             filename='examples/distplot with pandas',
+                             validate=False)
     ```
     """
     validate_distplot(hist_data, curve_type)

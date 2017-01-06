@@ -915,7 +915,7 @@ def create_scatterplotmatrix(df, index=None, endpts=None, diag='scatter',
     ```
     import plotly.plotly as py
     from plotly.graph_objs import graph_objs
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_scatterplotmatrix
 
     import numpy as np
     import pandas as pd
@@ -925,7 +925,7 @@ def create_scatterplotmatrix(df, index=None, endpts=None, diag='scatter',
                     columns=['Column 1', 'Column 2'])
 
     # Create scatterplot matrix
-    fig = FF.create_scatterplotmatrix(df)
+    fig = create_scatterplotmatrix(df)
 
     # Plot
     py.iplot(fig, filename='Vanilla Scatterplot Matrix')
@@ -935,7 +935,7 @@ def create_scatterplotmatrix(df, index=None, endpts=None, diag='scatter',
     ```
     import plotly.plotly as py
     from plotly.graph_objs import graph_objs
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_scatterplotmatrix
 
     import numpy as np
     import pandas as pd
@@ -949,7 +949,7 @@ def create_scatterplotmatrix(df, index=None, endpts=None, diag='scatter',
                              'grape', 'pear', 'pear', 'apple', 'pear'])
 
     # Create scatterplot matrix
-    fig = FF.create_scatterplotmatrix(df, index='Fruit', size=10)
+    fig = create_scatterplotmatrix(df, index='Fruit', size=10)
 
     # Plot
     py.iplot(fig, filename = 'Scatterplot Matrix with Index')
@@ -959,7 +959,7 @@ def create_scatterplotmatrix(df, index=None, endpts=None, diag='scatter',
     ```
     import plotly.plotly as py
     from plotly.graph_objs import graph_objs
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_scatterplotmatrix
 
     import numpy as np
     import pandas as pd
@@ -973,8 +973,8 @@ def create_scatterplotmatrix(df, index=None, endpts=None, diag='scatter',
                              'grape', 'pear', 'pear', 'apple', 'pear'])
 
     # Create scatterplot matrix
-    fig = FF.create_scatterplotmatrix(df, diag='box', index='Fruit',
-                                      height=1000, width=1000)
+    fig = create_scatterplotmatrix(df, diag='box', index='Fruit', height=1000,
+                                   width=1000)
 
     # Plot
     py.iplot(fig, filename = 'Scatterplot Matrix - Diagonal Styling')
@@ -984,7 +984,7 @@ def create_scatterplotmatrix(df, index=None, endpts=None, diag='scatter',
     ```
     import plotly.plotly as py
     from plotly.graph_objs import graph_objs
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_scatterplotmatrix
 
     import numpy as np
     import pandas as pd
@@ -995,9 +995,8 @@ def create_scatterplotmatrix(df, index=None, endpts=None, diag='scatter',
 
     # Create scatterplot matrix using a built-in
     # Plotly palette scale and indexing column 'A'
-    fig = FF.create_scatterplotmatrix(df, diag='histogram',
-                                      index='A', colormap='Blues',
-                                      height=800, width=800)
+    fig = create_scatterplotmatrix(df, diag='histogram', index='A',
+                                   colormap='Blues', height=800, width=800)
 
     # Plot
     py.iplot(fig, filename = 'Scatterplot Matrix - Colormap Theme')
@@ -1007,7 +1006,7 @@ def create_scatterplotmatrix(df, index=None, endpts=None, diag='scatter',
     ```
     import plotly.plotly as py
     from plotly.graph_objs import graph_objs
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_scatterplotmatrix
 
     import numpy as np
     import pandas as pd
@@ -1018,13 +1017,11 @@ def create_scatterplotmatrix(df, index=None, endpts=None, diag='scatter',
 
     # Create scatterplot matrix using a list of 2 rgb tuples
     # and endpoints at -1, 0 and 1
-    fig = FF.create_scatterplotmatrix(df, diag='histogram', index='A',
-                                      colormap=['rgb(140, 255, 50)',
-                                                'rgb(170, 60, 115)',
-                                               '#6c4774',
-                                                (0.5, 0.1, 0.8)],
-                                      endpts=[-1, 0, 1],
-                                      height=800, width=800)
+    fig = create_scatterplotmatrix(df, diag='histogram', index='A',
+                                   colormap=['rgb(140, 255, 50)',
+                                             'rgb(170, 60, 115)', '#6c4774',
+                                             (0.5, 0.1, 0.8)],
+                                   endpts=[-1, 0, 1], height=800, width=800)
 
     # Plot
     py.iplot(fig, filename = 'Scatterplot Matrix - Intervals')
@@ -1034,7 +1031,7 @@ def create_scatterplotmatrix(df, index=None, endpts=None, diag='scatter',
     ```
     import plotly.plotly as py
     from plotly.graph_objs import graph_objs
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_scatterplotmatrix
 
     import numpy as np
     import pandas as pd
@@ -1056,7 +1053,7 @@ def create_scatterplotmatrix(df, index=None, endpts=None, diag='scatter',
 
     # Create scatterplot matrix using a dictionary of hex color values
     # which correspond to actual color names in 'Colors' column
-    fig = FF.create_scatterplotmatrix(
+    fig = create_scatterplotmatrix(
         df, diag='box', index='Colors',
         colormap= dict(
             turquoise = '#00F5FF',

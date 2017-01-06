@@ -53,7 +53,7 @@ def create_table(table_text, colorscale=None, font_colors=None,
     Example 1: Simple Plotly Table
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_table
 
     text = [['Country', 'Year', 'Population'],
             ['US', 2000, 282200000],
@@ -61,14 +61,14 @@ def create_table(table_text, colorscale=None, font_colors=None,
             ['US', 2010, 309000000],
             ['Canada', 2010, 34000000]]
 
-    table = FF.create_table(text)
+    table = create_table(text)
     py.iplot(table)
     ```
 
     Example 2: Table with Custom Coloring
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_table
 
     text = [['Country', 'Year', 'Population'],
             ['US', 2000, 282200000],
@@ -76,25 +76,25 @@ def create_table(table_text, colorscale=None, font_colors=None,
             ['US', 2010, 309000000],
             ['Canada', 2010, 34000000]]
 
-    table = FF.create_table(text,
-                          colorscale=[[0, '#000000'],
-                                      [.5, '#80beff'],
-                                      [1, '#cce5ff']],
-                          font_colors=['#ffffff', '#000000',
-                                     '#000000'])
+    table = create_table(text,
+                         colorscale=[[0, '#000000'],
+                                     [.5, '#80beff'],
+                                     [1, '#cce5ff']],
+                         font_colors=['#ffffff', '#000000',
+                                    '#000000'])
     py.iplot(table)
     ```
     Example 3: Simple Plotly Table with Pandas
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_table
 
     import pandas as pd
 
     df = pd.read_csv('http://www.stat.ubc.ca/~jenny/notOcto/STAT545A/examples/gapminder/data/gapminderDataFiveYear.txt', sep='\t')
     df_p = df[0:25]
 
-    table_simple = FF.create_table(df_p)
+    table_simple = create_table(df_p)
     py.iplot(table_simple)
     ```
     """

@@ -30,14 +30,12 @@ def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
     Example 1: Trivial Quiver
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_quiver
 
     import math
 
     # 1 Arrow from (0,0) to (1,1)
-    fig = FF.create_quiver(x=[0], y=[0],
-                           u=[1], v=[1],
-                           scale=1)
+    fig = create_quiver(x=[0], y=[0], u=[1], v=[1], scale=1)
 
     py.plot(fig, filename='quiver')
     ```
@@ -45,7 +43,7 @@ def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
     Example 2: Quiver plot using meshgrid
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_quiver
 
     import numpy as np
     import math
@@ -56,7 +54,7 @@ def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
     v = np.sin(x)*y
 
     #Create quiver
-    fig = FF.create_quiver(x, y, u, v)
+    fig = create_quiver(x, y, u, v)
 
     # Plot
     py.plot(fig, filename='quiver')
@@ -65,7 +63,7 @@ def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
     Example 3: Styling the quiver plot
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_quiver
     import numpy as np
     import math
 
@@ -76,11 +74,8 @@ def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
     v = np.sin(x)*y
 
     # Create quiver
-    fig = FF.create_quiver(x, y, u, v, scale=.2,
-                           arrow_scale=.3,
-                           angle=math.pi/6,
-                           name='Wind Velocity',
-                           line=Line(width=1))
+    fig = create_quiver(x, y, u, v, scale=.2, arrow_scale=.3, angle=math.pi/6,
+                        name='Wind Velocity', line=Line(width=1))
 
     # Add title to layout
     fig['layout'].update(title='Quiver Plot')

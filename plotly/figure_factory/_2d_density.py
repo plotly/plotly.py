@@ -45,7 +45,7 @@ def create_2d_density(x, y, colorscale='Earth', ncontours=20,
     Example 1: Simple 2D Density Plot
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory create_2d_density
 
     import numpy as np
 
@@ -55,7 +55,7 @@ def create_2d_density(x, y, colorscale='Earth', ncontours=20,
     y = (t**6)+(0.3*np.random.randn(2000))
 
     # Create a figure
-    fig = FF.create_2D_density(x, y)
+    fig = create_2D_density(x, y)
 
     # Plot the data
     py.iplot(fig, filename='simple-2d-density')
@@ -64,7 +64,7 @@ def create_2d_density(x, y, colorscale='Earth', ncontours=20,
     Example 2: Using Parameters
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory create_2d_density
 
     import numpy as np
 
@@ -78,7 +78,7 @@ def create_2d_density(x, y, colorscale='Earth', ncontours=20,
                   (1, 1, 0.2), (0.98,0.98,0.98)]
 
     # Create a figure
-    fig = FF.create_2D_density(
+    fig = create_2D_density(
         x, y, colorscale=colorscale,
         hist_color='rgb(255, 237, 222)', point_size=3)
 

@@ -41,12 +41,12 @@ def create_dendrogram(X, orientation="bottom", labels=None,
     Example 1: Simple bottom oriented dendrogram
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_dendrogram
 
     import numpy as np
 
     X = np.random.rand(10,10)
-    dendro = FF.create_dendrogram(X)
+    dendro = create_dendrogram(X)
     plot_url = py.plot(dendro, filename='simple-dendrogram')
 
     ```
@@ -54,13 +54,13 @@ def create_dendrogram(X, orientation="bottom", labels=None,
     Example 2: Dendrogram to put on the left of the heatmap
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_dendrogram
 
     import numpy as np
 
     X = np.random.rand(5,5)
     names = ['Jack', 'Oxana', 'John', 'Chelsea', 'Mark']
-    dendro = FF.create_dendrogram(X, orientation='right', labels=names)
+    dendro = create_dendrogram(X, orientation='right', labels=names)
     dendro['layout'].update({'width':700, 'height':500})
 
     py.iplot(dendro, filename='vertical-dendrogram')
@@ -69,14 +69,14 @@ def create_dendrogram(X, orientation="bottom", labels=None,
     Example 3: Dendrogram with Pandas
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_dendrogram
 
     import numpy as np
     import pandas as pd
 
     Index= ['A','B','C','D','E','F','G','H','I','J']
     df = pd.DataFrame(abs(np.random.randn(10, 10)), index=Index)
-    fig = FF.create_dendrogram(df, labels=Index)
+    fig = create_dendrogram(df, labels=Index)
     url = py.plot(fig, filename='pandas-dendrogram')
     ```
     """
