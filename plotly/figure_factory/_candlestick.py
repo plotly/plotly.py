@@ -117,19 +117,19 @@ def create_candlestick(open, high, low, close, dates=None, direction='both',
     Example 1: Simple candlestick chart from a Pandas DataFrame
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_candlestick
     from datetime import datetime
 
     import pandas.io.data as web
 
     df = web.DataReader("aapl", 'yahoo', datetime(2007, 10, 1), datetime(2009, 4, 1))
-    fig = FF.create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index)
+    fig = create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index)
     py.plot(fig, filename='finance/aapl-candlestick', validate=False)
     ```
 
     Example 2: Add text and annotations to the candlestick chart
     ```
-    fig = FF.create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index)
+    fig = create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index)
     # Update the fig - all options here: https://plot.ly/python/reference/#Layout
     fig['layout'].update({
         'title': 'The Great Recession',
@@ -151,7 +151,7 @@ def create_candlestick(open, high, low, close, dates=None, direction='both',
     Example 3: Customize the candlestick colors
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_candlestick
     from plotly.graph_objs import Line, Marker
     from datetime import datetime
 
@@ -160,13 +160,13 @@ def create_candlestick(open, high, low, close, dates=None, direction='both',
     df = web.DataReader("aapl", 'yahoo', datetime(2008, 1, 1), datetime(2009, 4, 1))
 
     # Make increasing candlesticks and customize their color and name
-    fig_increasing = FF.create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index,
+    fig_increasing = create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index,
         direction='increasing', name='AAPL',
         marker=Marker(color='rgb(150, 200, 250)'),
         line=Line(color='rgb(150, 200, 250)'))
 
     # Make decreasing candlesticks and customize their color and name
-    fig_decreasing = FF.create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index,
+    fig_decreasing = create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index,
         direction='decreasing',
         marker=Marker(color='rgb(128, 128, 128)'),
         line=Line(color='rgb(128, 128, 128)'))
@@ -183,7 +183,7 @@ def create_candlestick(open, high, low, close, dates=None, direction='both',
     Example 4: Candlestick chart with datetime objects
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_candlestick
 
     from datetime import datetime
 
@@ -199,7 +199,7 @@ def create_candlestick(open, high, low, close, dates=None, direction='both',
              datetime(year=2014, month=2, day=10)]
 
     # Create ohlc
-    fig = FF.create_candlestick(open_data, high_data,
+    fig = create_candlestick(open_data, high_data,
         low_data, close_data, dates=dates)
 
     py.iplot(fig, filename='finance/simple-candlestick', validate=False)

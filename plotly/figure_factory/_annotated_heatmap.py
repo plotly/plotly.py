@@ -72,14 +72,14 @@ def create_annotated_heatmap(z, x=None, y=None, annotation_text=None,
     Example 1: Simple annotated heatmap with default configuration
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory create_annotated_heatmap
 
     z = [[0.300000, 0.00000, 0.65, 0.300000],
          [1, 0.100005, 0.45, 0.4300],
          [0.300000, 0.00000, 0.65, 0.300000],
          [1, 0.100005, 0.45, 0.00000]]
 
-    figure = FF.create_annotated_heatmap(z)
+    figure = create_annotated_heatmap(z)
     py.iplot(figure)
     ```
     """

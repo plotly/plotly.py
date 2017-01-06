@@ -621,7 +621,7 @@ def create_gantt(df, colors=None, index_col=None, show_colorbar=False,
     Example 1: Simple Gantt Chart
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_gantt
 
     # Make data for chart
     df = [dict(Task="Job A", Start='2009-01-01', Finish='2009-02-30'),
@@ -629,7 +629,7 @@ def create_gantt(df, colors=None, index_col=None, show_colorbar=False,
           dict(Task="Job C", Start='2009-02-20', Finish='2009-05-30')]
 
     # Create a figure
-    fig = FF.create_gantt(df)
+    fig = create_gantt(df)
 
     # Plot the data
     py.iplot(fig, filename='Simple Gantt Chart', world_readable=True)
@@ -638,7 +638,7 @@ def create_gantt(df, colors=None, index_col=None, show_colorbar=False,
     Example 2: Index by Column with Numerical Entries
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_gantt
 
     # Make data for chart
     df = [dict(Task="Job A", Start='2009-01-01',
@@ -649,9 +649,9 @@ def create_gantt(df, colors=None, index_col=None, show_colorbar=False,
                Finish='2009-05-30', Complete=95)]
 
     # Create a figure with Plotly colorscale
-    fig = FF.create_gantt(df, colors='Blues', index_col='Complete',
-                          show_colorbar=True, bar_width=0.5,
-                          showgrid_x=True, showgrid_y=True)
+    fig = create_gantt(df, colors='Blues', index_col='Complete',
+                       show_colorbar=True, bar_width=0.5,
+                       showgrid_x=True, showgrid_y=True)
 
     # Plot the data
     py.iplot(fig, filename='Numerical Entries', world_readable=True)
@@ -660,7 +660,7 @@ def create_gantt(df, colors=None, index_col=None, show_colorbar=False,
     Example 3: Index by Column with String Entries
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_gantt
 
     # Make data for chart
     df = [dict(Task="Job A", Start='2009-01-01',
@@ -671,12 +671,9 @@ def create_gantt(df, colors=None, index_col=None, show_colorbar=False,
                Finish='2009-05-30', Resource='Banana')]
 
     # Create a figure with Plotly colorscale
-    fig = FF.create_gantt(df, colors=['rgb(200, 50, 25)',
-                                      (1, 0, 1),
-                                      '#6c4774'],
-                          index_col='Resource',
-                          reverse_colors=True,
-                          show_colorbar=True)
+    fig = create_gantt(df, colors=['rgb(200, 50, 25)', (1, 0, 1), '#6c4774'],
+                       index_col='Resource', reverse_colors=True,
+                       show_colorbar=True)
 
     # Plot the data
     py.iplot(fig, filename='String Entries', world_readable=True)
@@ -685,7 +682,7 @@ def create_gantt(df, colors=None, index_col=None, show_colorbar=False,
     Example 4: Use a dictionary for colors
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_gantt
 
     # Make data for chart
     df = [dict(Task="Job A", Start='2009-01-01',
@@ -701,9 +698,8 @@ def create_gantt(df, colors=None, index_col=None, show_colorbar=False,
               'Banana': (1, 1, 0.2)}
 
     # Create a figure with Plotly colorscale
-    fig = FF.create_gantt(df, colors=colors,
-                          index_col='Resource',
-                          show_colorbar=True)
+    fig = create_gantt(df, colors=colors, index_col='Resource',
+                       show_colorbar=True)
 
     # Plot the data
     py.iplot(fig, filename='dictioanry colors', world_readable=True)
@@ -712,7 +708,7 @@ def create_gantt(df, colors=None, index_col=None, show_colorbar=False,
     Example 5: Use a pandas dataframe
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_gantt
 
     import pandas as pd
 
@@ -723,9 +719,9 @@ def create_gantt(df, colors=None, index_col=None, show_colorbar=False,
                       columns=['Task', 'Start', 'Finish', 'Complete'])
 
     # Create a figure with Plotly colorscale
-    fig = FF.create_gantt(df, colors='Blues', index_col='Complete',
-                          show_colorbar=True, bar_width=0.5,
-                          showgrid_x=True, showgrid_y=True)
+    fig = create_gantt(df, colors='Blues', index_col='Complete',
+                       show_colorbar=True, bar_width=0.5,
+                       showgrid_x=True, showgrid_y=True)
 
     # Plot the data
     py.iplot(fig, filename='data with dataframe', world_readable=True)

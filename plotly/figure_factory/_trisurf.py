@@ -277,7 +277,7 @@ def create_trisurf(x, y, z, simplices, colormap=None, show_colorbar=True,
     from scipy.spatial import Delaunay
 
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_trisurf
     from plotly.graph_objs import graph_objs
 
     # Make data for plot
@@ -296,9 +296,8 @@ def create_trisurf(x, y, z, simplices, colormap=None, show_colorbar=True,
     simplices = tri.simplices
 
     # Create a figure
-    fig1 = FF.create_trisurf(x=x, y=y, z=z,
-                             colormap="Rainbow",
-                             simplices=simplices)
+    fig1 = create_trisurf(x=x, y=y, z=z, colormap="Rainbow",
+                          simplices=simplices)
     # Plot the data
     py.iplot(fig1, filename='trisurf-plot-sphere')
     ```
@@ -310,7 +309,7 @@ def create_trisurf(x, y, z, simplices, colormap=None, show_colorbar=True,
     from scipy.spatial import Delaunay
 
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_trisurf
     from plotly.graph_objs import graph_objs
 
     # Make data for plot
@@ -329,9 +328,8 @@ def create_trisurf(x, y, z, simplices, colormap=None, show_colorbar=True,
     simplices = tri.simplices
 
     # Create a figure
-    fig1 = FF.create_trisurf(x=x, y=y, z=z,
-                             colormap="Viridis",
-                             simplices=simplices)
+    fig1 = create_trisurf(x=x, y=y, z=z, colormap="Viridis",
+                          simplices=simplices)
     # Plot the data
     py.iplot(fig1, filename='trisurf-plot-torus')
     ```
@@ -343,7 +341,7 @@ def create_trisurf(x, y, z, simplices, colormap=None, show_colorbar=True,
     from scipy.spatial import Delaunay
 
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_trisurf
     from plotly.graph_objs import graph_objs
 
     # Make data for plot
@@ -363,9 +361,8 @@ def create_trisurf(x, y, z, simplices, colormap=None, show_colorbar=True,
     simplices = tri.simplices
 
     # Create a figure
-    fig1 = FF.create_trisurf(x=x, y=y, z=z,
-                             colormap=[(0.2, 0.4, 0.6), (1, 1, 1)],
-                             simplices=simplices)
+    fig1 = create_trisurf(x=x, y=y, z=z, colormap=[(0.2, 0.4, 0.6), (1, 1, 1)],
+                          simplices=simplices)
     # Plot the data
     py.iplot(fig1, filename='trisurf-plot-mobius-band')
     ```
@@ -377,7 +374,7 @@ def create_trisurf(x, y, z, simplices, colormap=None, show_colorbar=True,
     from scipy.spatial import Delaunay
 
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_trisurf
     from plotly.graph_objs import graph_objs
 
     # Make data for plot
@@ -400,13 +397,13 @@ def create_trisurf(x, y, z, simplices, colormap=None, show_colorbar=True,
         return np.sqrt((1.0 * x)**2 + (1.0 * y)**2 + (1.0 * z)**2)
 
     # Create a figure
-    fig1 = FF.create_trisurf(x=x, y=y, z=z,
-                             colormap=['#FFFFFF', '#E4FFFE',
-                                       '#A4F6F9', '#FF99FE',
-                                       '#BA52ED'],
-                             scale=[0, 0.6, 0.71, 0.89, 1],
-                             simplices=simplices,
-                             color_func=dist_origin)
+    fig1 = create_trisurf(x=x, y=y, z=z,
+                          colormap=['#FFFFFF', '#E4FFFE',
+                                    '#A4F6F9', '#FF99FE',
+                                    '#BA52ED'],
+                          scale=[0, 0.6, 0.71, 0.89, 1],
+                          simplices=simplices,
+                          color_func=dist_origin)
     # Plot the data
     py.iplot(fig1, filename='trisurf-plot-custom-coloring')
     ```
@@ -419,7 +416,7 @@ def create_trisurf(x, y, z, simplices, colormap=None, show_colorbar=True,
     import random
 
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_trisurf
     from plotly.graph_objs import graph_objs
 
     # Make data for plot
@@ -444,7 +441,7 @@ def create_trisurf(x, y, z, simplices, colormap=None, show_colorbar=True,
     for index in range(len(simplices)):
         colors.append(random.choice(color_choices))
 
-    fig = FF.create_trisurf(
+    fig = create_trisurf(
         x, y, z, simplices,
         color_func=colors,
         show_colorbar=True,

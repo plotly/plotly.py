@@ -62,7 +62,7 @@ def create_streamline(x, y, u, v, density=1, angle=math.pi / 9,
     Example 1: Plot simple streamline and increase arrow size
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_streamline
 
     import numpy as np
     import math
@@ -77,8 +77,7 @@ def create_streamline(x, y, u, v, density=1, angle=math.pi / 9,
     v = v.T  # Transpose
 
     # Create streamline
-    fig = FF.create_streamline(x, y, u, v,
-                               arrow_scale=.1)
+    fig = create_streamline(x, y, u, v, arrow_scale=.1)
 
     # Plot
     py.plot(fig, filename='streamline')
@@ -87,7 +86,7 @@ def create_streamline(x, y, u, v, density=1, angle=math.pi / 9,
     Example 2: from nbviewer.ipython.org/github/barbagroup/AeroPython
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_streamline
 
     import numpy as np
     import math
@@ -107,8 +106,7 @@ def create_streamline(x, y, u, v, density=1, angle=math.pi / 9,
     v_s = ss/(2*np.pi) * (Y-y_s)/((X-x_s)**2 + (Y-y_s)**2)
 
     # Create streamline
-    fig = FF.create_streamline(x, y, u_s, v_s,
-                               density=2, name='streamline')
+    fig = create_streamline(x, y, u_s, v_s, density=2, name='streamline')
 
     # Add source point
     point = Scatter(x=[x_s], y=[y_s], mode='markers',

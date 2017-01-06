@@ -158,13 +158,14 @@ def create_ohlc(open, high, low, close, dates=None, direction='both',
     Example 1: Simple OHLC chart from a Pandas DataFrame
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_ohlc
     from datetime import datetime
 
     import pandas.io.data as web
 
-    df = web.DataReader("aapl", 'yahoo', datetime(2008, 8, 15), datetime(2008, 10, 15))
-    fig = FF.create_ohlc(df.Open, df.High, df.Low, df.Close, dates=df.index)
+    df = web.DataReader("aapl", 'yahoo', datetime(2008, 8, 15),
+                        datetime(2008, 10, 15))
+    fig = create_ohlc(df.Open, df.High, df.Low, df.Close, dates=df.index)
 
     py.plot(fig, filename='finance/aapl-ohlc')
     ```
@@ -172,15 +173,16 @@ def create_ohlc(open, high, low, close, dates=None, direction='both',
     Example 2: Add text and annotations to the OHLC chart
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_ohlc
     from datetime import datetime
 
     import pandas.io.data as web
 
-    df = web.DataReader("aapl", 'yahoo', datetime(2008, 8, 15), datetime(2008, 10, 15))
-    fig = FF.create_ohlc(df.Open, df.High, df.Low, df.Close, dates=df.index)
+    df = web.DataReader("aapl", 'yahoo', datetime(2008, 8, 15),
+                        datetime(2008, 10, 15))
+    fig = create_ohlc(df.Open, df.High, df.Low, df.Close, dates=df.index)
 
-    # Update the fig - all options here: https://plot.ly/python/reference/#Layout
+    # Update the fig - options here: https://plot.ly/python/reference/#Layout
     fig['layout'].update({
         'title': 'The Great Recession',
         'yaxis': {'title': 'AAPL Stock'},
@@ -203,23 +205,25 @@ def create_ohlc(open, high, low, close, dates=None, direction='both',
     Example 3: Customize the OHLC colors
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_ohlc
     from plotly.graph_objs import Line, Marker
     from datetime import datetime
 
     import pandas.io.data as web
 
-    df = web.DataReader("aapl", 'yahoo', datetime(2008, 1, 1), datetime(2009, 4, 1))
+    df = web.DataReader("aapl", 'yahoo', datetime(2008, 1, 1),
+                        datetime(2009, 4, 1))
 
     # Make increasing ohlc sticks and customize their color and name
-    fig_increasing = FF.create_ohlc(df.Open, df.High, df.Low, df.Close, dates=df.index,
-        direction='increasing', name='AAPL',
-        line=Line(color='rgb(150, 200, 250)'))
+    fig_increasing = create_ohlc(df.Open, df.High, df.Low, df.Close,
+                                 dates=df.index, direction='increasing',
+                                 name='AAPL',
+                                 line=Line(color='rgb(150, 200, 250)'))
 
     # Make decreasing ohlc sticks and customize their color and name
-    fig_decreasing = FF.create_ohlc(df.Open, df.High, df.Low, df.Close, dates=df.index,
-        direction='decreasing',
-        line=Line(color='rgb(128, 128, 128)'))
+    fig_decreasing = create_ohlc(df.Open, df.High, df.Low, df.Close,
+                                 dates=df.index, direction='decreasing',
+                                 line=Line(color='rgb(128, 128, 128)'))
 
     # Initialize the figure
     fig = fig_increasing
@@ -233,7 +237,7 @@ def create_ohlc(open, high, low, close, dates=None, direction='both',
     Example 4: OHLC chart with datetime objects
     ```
     import plotly.plotly as py
-    from plotly.tools import FigureFactory as FF
+    from plotly.figure_factory import create_ohlc
 
     from datetime import datetime
 
@@ -249,8 +253,7 @@ def create_ohlc(open, high, low, close, dates=None, direction='both',
              datetime(year=2014, month=2, day=10)]
 
     # Create ohlc
-    fig = FF.create_ohlc(open_data, high_data,
-        low_data, close_data, dates=dates)
+    fig = create_ohlc(open_data, high_data, low_data, close_data, dates=dates)
 
     py.iplot(fig, filename='finance/simple-ohlc', validate=False)
     ```
