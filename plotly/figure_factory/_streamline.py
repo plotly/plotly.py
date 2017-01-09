@@ -2,13 +2,11 @@ from __future__ import absolute_import
 
 import math
 
-from plotly import exceptions
+from plotly import exceptions, optional_imports
 from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
-from plotly.tools import _numpy_imported
 
-if _numpy_imported:
-    import numpy as np
+np = optional_imports.get_module('numpy')
 
 
 def validate_streamline(x, y):
@@ -24,7 +22,7 @@ def validate_streamline(x, y):
     :raises: (PlotlyError) If x is not evenly spaced.
     :raises: (PlotlyError) If y is not evenly spaced.
     """
-    if _numpy_imported is False:
+    if np is False:
         raise ImportError("FigureFactory.create_streamline requires numpy")
     for index in range(len(x) - 1):
         if ((x[index + 1] - x[index]) - (x[1] - x[0])) > .0001:

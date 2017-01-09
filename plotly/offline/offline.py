@@ -15,21 +15,12 @@ import webbrowser
 from requests.compat import json as _json
 
 import plotly
-from plotly import tools, utils
+from plotly import optional_imports, tools, utils
 from plotly.exceptions import PlotlyError
 
-try:
-    import IPython
-    from IPython.display import HTML, display
-    _ipython_imported = True
-except ImportError:
-    _ipython_imported = False
-
-try:
-    import matplotlib
-    _matplotlib_imported = True
-except ImportError:
-    _matplotlib_imported = False
+ipython = optional_imports.get_module('IPython')
+ipython_display = optional_imports.get_module('IPython.display')
+matplotlib = optional_imports.get_module('matplotlib')
 
 __PLOTLY_OFFLINE_INITIALIZED = False
 
@@ -112,7 +103,7 @@ def init_notebook_mode(connected=False):
     your notebook, resulting in much larger notebook sizes compared to the case
     where `connected=True`.
     """
-    if not _ipython_imported:
+    if not ipython:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
     global __PLOTLY_OFFLINE_INITIALIZED
@@ -149,7 +140,7 @@ def init_notebook_mode(connected=False):
             '</script>'
             '').format(script=get_plotlyjs())
 
-    display(HTML(script_inject))
+    ipython_display.display(ipython_display.HTML(script_inject))
     __PLOTLY_OFFLINE_INITIALIZED = True
 
 
@@ -333,7 +324,7 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
             'plotly.offline.init_notebook_mode() '
             '# run at the start of every ipython notebook',
         ]))
-    if not tools._ipython_imported:
+    if not ipython:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
     config = {}
@@ -344,7 +335,7 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         figure_or_data, config, validate, '100%', 525, True
     )
 
-    display(HTML(plot_html))
+    ipython_display.display(ipython_display.HTML(plot_html))
 
     if image:
         if image not in __IMAGE_FORMATS:
@@ -360,7 +351,7 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         # allow time for the plot to draw
         time.sleep(1)
         # inject code to download an image of the plot
-        display(HTML(script))
+        ipython_display.display(ipython_display.HTML(script))
 
 
 def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
@@ -690,7 +681,7 @@ def enable_mpl_offline(resize=False, strip_style=False,
     """
     init_notebook_mode()
 
-    ip = IPython.core.getipython.get_ipython()
+    ip = ipython.core.getipython.get_ipython()
     formatter = ip.display_formatter.formatters['text/html']
     formatter.for_type(matplotlib.figure.Figure,
                        lambda fig: iplot_mpl(fig, resize, strip_style, verbose,

@@ -1,19 +1,14 @@
 from __future__ import absolute_import
 
-from plotly import exceptions
+from plotly import exceptions, optional_imports
 from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
-from plotly.tools import _numpy_imported, _pandas_imported, _scipy_imported
 
-if _numpy_imported:
-    import numpy as np
-
-if _pandas_imported:
-    import pandas as pd
-
-if _scipy_imported:
-    import scipy
-    import scipy.stats
+# Optional imports, may be None for users that only use our core functionality.
+np = optional_imports.get_module('numpy')
+pd = optional_imports.get_module('pandas')
+scipy = optional_imports.get_module('scipy')
+scipy_stats = optional_imports.get_module('scipy.stats')
 
 
 DEFAULT_HISTNORM = 'probability density'
@@ -29,9 +24,9 @@ def validate_distplot(hist_data, curve_type):
         'normal').
     """
     hist_data_types = (list,)
-    if _numpy_imported:
+    if np:
         hist_data_types += (np.ndarray,)
-    if _pandas_imported:
+    if pd:
         hist_data_types += (pd.core.series.Series,)
 
     if not isinstance(hist_data[0], hist_data_types):
@@ -47,7 +42,7 @@ def validate_distplot(hist_data, curve_type):
         raise exceptions.PlotlyError("curve_type must be defined as "
                                      "'kde' or 'normal'")
 
-    if _scipy_imported is False:
+    if not scipy:
         raise ImportError("FigureFactory.create_distplot requires scipy")
 
 
@@ -312,7 +307,7 @@ class _Distplot(object):
             self.curve_x[index] = [self.start[index] +
                                    x * (self.end[index] - self.start[index])
                                    / 500 for x in range(500)]
-            self.curve_y[index] = (scipy.stats.gaussian_kde
+            self.curve_y[index] = (scipy_stats.gaussian_kde
                                    (self.hist_data[index])
                                    (self.curve_x[index]))
 
@@ -345,12 +340,12 @@ class _Distplot(object):
         sd = [None] * self.trace_number
 
         for index in range(self.trace_number):
-            mean[index], sd[index] = (scipy.stats.norm.fit
+            mean[index], sd[index] = (scipy_stats.norm.fit
                                       (self.hist_data[index]))
             self.curve_x[index] = [self.start[index] +
                                    x * (self.end[index] - self.start[index])
                                    / 500 for x in range(500)]
-            self.curve_y[index] = scipy.stats.norm.pdf(
+            self.curve_y[index] = scipy_stats.norm.pdf(
                 self.curve_x[index], loc=mean[index], scale=sd[index])
 
             if self.histnorm == ALTERNATIVE_HISTNORM:

@@ -2,20 +2,14 @@ from __future__ import absolute_import
 
 from numbers import Number
 
-from plotly import exceptions
+from plotly import exceptions, optional_imports
 from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
-from plotly.tools import (_numpy_imported, _pandas_imported, _scipy_imported,
-                          make_subplots)
+from plotly.tools import make_subplots
 
-if _pandas_imported:
-    import pandas as pd
-
-if _numpy_imported:
-    import numpy as np
-
-if _scipy_imported:
-    from scipy import stats
+pd = optional_imports.get_module('pandas')
+np = optional_imports.get_module('numpy')
+scipy_stats = optional_imports.get_module('scipy.stats')
 
 
 def calc_stats(data):
@@ -178,7 +172,7 @@ def violinplot(vals, fillcolor='#1f77b4', rugplot=True):
     d2 = calc_stats(vals)['d2']
 
     # kernel density estimation of pdf
-    pdf = stats.gaussian_kde(vals)
+    pdf = scipy_stats.gaussian_kde(vals)
     # grid over the data interval
     xx = np.linspace(vals_min, vals_max, 100)
     # evaluate the pdf at the grid xx
@@ -554,7 +548,7 @@ def create_violin(data, data_header=None, group_header=None, colors=None,
                 raise exceptions.PlotlyError("If data is a list, it must "
                                              "contain only numbers.")
 
-        if _pandas_imported and isinstance(data, pd.core.frame.DataFrame):
+        if pd and isinstance(data, pd.core.frame.DataFrame):
             if data_header is None:
                 raise exceptions.PlotlyError("data_header must be the "
                                              "column name with the "

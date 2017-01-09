@@ -1,11 +1,9 @@
 from __future__ import absolute_import
 
-from plotly import colors, exceptions
+from plotly import colors, exceptions, optional_imports
 from plotly.graph_objs import graph_objs
-from plotly.tools import _numpy_imported
 
-if _numpy_imported:
-    import numpy as np
+np = optional_imports.get_module('numpy')
 
 
 def map_face2color(face, colormap, scale, vmin, vmax):
@@ -81,7 +79,7 @@ def trisurf(x, y, z, simplices, show_colorbar, edges_color, scale,
     Refer to FigureFactory.create_trisurf() for docstring
     """
     # numpy import check
-    if _numpy_imported is False:
+    if not np:
         raise ImportError("FigureFactory._trisurf() requires "
                           "numpy imported.")
     points3D = np.vstack((x, y, z)).T

@@ -2,12 +2,13 @@ from __future__ import absolute_import
 
 import numpy as np
 
+from plotly import optional_imports
 from plotly.tests.utils import is_num_list
 from plotly.utils import get_by_path, node_generator
 
-# TODO: matplotlib-build-wip
-from plotly.tools import _matplotlylib_imported
-if _matplotlylib_imported:
+matplotlylib = optional_imports.get_module('plotly.matplotlylib')
+
+if matplotlylib:
     import matplotlib
     # Force matplotlib to not use any Xwindows backend.
     matplotlib.use('Agg')
