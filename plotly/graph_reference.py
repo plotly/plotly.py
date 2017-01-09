@@ -33,7 +33,7 @@ _BACKWARDS_COMPAT_CLASS_NAMES = {
     'ErrorZ': {'object_name': 'error_z', 'base_type': dict},
     'Figure': {'object_name': 'figure', 'base_type': dict},
     'Font': {'object_name': 'font', 'base_type': dict},
-    'Frames': {'object_name': 'frames', 'base_type': dict},
+    'Frames': {'object_name': 'frames', 'base_type': list},
     'Heatmap': {'object_name': 'heatmap', 'base_type': dict},
     'Histogram': {'object_name': 'histogram', 'base_type': dict},
     'Histogram2d': {'object_name': 'histogram2d', 'base_type': dict},
@@ -68,9 +68,62 @@ def get_graph_reference():
     """
     path = os.path.join('package_data', 'default-schema.json')
     s = resource_string('plotly', path).decode('utf-8')
-    graph_reference = _json.loads(s)
+    graph_reference = utils.decode_unicode(_json.loads(s))
 
-    return utils.decode_unicode(graph_reference)
+    # TODO: Patch in frames info until it hits streambed. See #659
+    graph_reference['frames'] = {
+          "items": {
+              "frames_entry": {
+                  "baseframe": {
+                      "description": "The name of the frame into which this "
+                                     "frame's properties are merged before "
+                                     "applying. This is used to unify "
+                                     "properties and avoid needing to specify "
+                                     "the same values for the same properties "
+                                     "in multiple frames.",
+                      "role": "info",
+                      "valType": "string"
+                  },
+                  "data": {
+                      "description": "A list of traces this frame modifies. "
+                                     "The format is identical to the normal "
+                                     "trace definition.",
+                      "role": "object",
+                      "valType": "any"
+                  },
+                  "group": {
+                      "description": "An identifier that specifies the group "
+                                     "to which the frame belongs, used by "
+                                     "animate to select a subset of frames.",
+                      "role": "info",
+                      "valType": "string"
+                  },
+                  "layout": {
+                      "role": "object",
+                      "description": "Layout properties which this frame "
+                                     "modifies. The format is identical to "
+                                     "the normal layout definition.",
+                      "valType": "any"
+                  },
+                  "name": {
+                      "description": "A label by which to identify the frame",
+                      "role": "info",
+                      "valType": "string"
+                  },
+                  "role": "object",
+                  "traces": {
+                      "description": "A list of trace indices that identify "
+                                     "the respective traces in the data "
+                                     "attribute",
+                      "role": "info",
+                      "valType": "info_array"
+                  }
+              }
+          },
+          "role": "object"
+    }
+
+    return graph_reference
 
 
 def string_to_class_name(string):
@@ -135,6 +188,27 @@ def get_attributes_dicts(object_name, parent_object_names=()):
 
     # We should also one or more paths where attributes are defined.
     attribute_paths = list(object_dict['attribute_paths'])  # shallow copy
+
+    # Map frame 'data' and 'layout' to previously-defined figure attributes.
+    # Examples of parent_object_names changes:
+    #   ['figure', 'frames'] --> ['figure', 'frames']
+    #   ['figure', 'frames', FRAME_NAME] --> ['figure']
+    #   ['figure', 'frames', FRAME_NAME, 'data'] --> ['figure', 'data']
+    #   ['figure', 'frames', FRAME_NAME, 'layout'] --> ['figure', 'layout']
+    #   ['figure', 'frames', FRAME_NAME, 'foo'] -->
+    #     ['figure', 'frames', FRAME_NAME, 'foo']
+    #   [FRAME_NAME, 'layout'] --> ['figure', 'layout']
+    if FRAME_NAME in parent_object_names:
+        len_parent_object_names = len(parent_object_names)
+        index = parent_object_names.index(FRAME_NAME)
+        if len_parent_object_names == index + 1:
+            if object_name in ('data', 'layout'):
+                parent_object_names = ['figure', object_name]
+        elif len_parent_object_names > index + 1:
+            if parent_object_names[index + 1] in ('data', 'layout'):
+                parent_object_names = (
+                    ['figure'] + list(parent_object_names)[index + 1:]
+                )
 
     # If we have parent_names, some of these attribute paths may be invalid.
     for parent_object_name in reversed(parent_object_names):
@@ -410,8 +484,11 @@ def _patch_objects():
                          'attribute_paths': layout_attribute_paths,
                          'additional_attributes': {}}
 
-    figure_attributes = {'layout': {'role': 'object'},
-                         'data': {'role': 'object', '_isLinkedToArray': True}}
+    figure_attributes = {
+        'layout': {'role': 'object'},
+        'data': {'role': 'object', '_isLinkedToArray': True},
+        'frames': {'role': 'object', '_isLinkedToArray': True}
+    }
     OBJECTS['figure'] = {'meta_paths': [],
                          'attribute_paths': [],
                          'additional_attributes': figure_attributes}
@@ -478,6 +555,8 @@ def _get_classes():
 
 # The ordering here is important.
 GRAPH_REFERENCE = get_graph_reference()
+
+FRAME_NAME = list(GRAPH_REFERENCE['frames']['items'].keys())[0]
 
 # See http://blog.labix.org/2008/06/27/watch-out-for-listdictkeys-in-python-3
 TRACE_NAMES = list(GRAPH_REFERENCE['traces'].keys())
