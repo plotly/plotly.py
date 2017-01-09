@@ -2,11 +2,11 @@
 Module to allow Plotly graphs to interact with IPython widgets.
 
 """
-import json
 import uuid
 from collections import deque
 from pkg_resources import resource_string
 
+from requests.compat import json as _json
 
 # TODO: protected imports?
 from IPython.html import widgets
@@ -93,7 +93,7 @@ class GraphWidget(widgets.DOMWidget):
             while self._clientMessages:
                 _message = self._clientMessages.popleft()
                 _message['graphId'] = self._graphId
-                _message = json.dumps(_message)
+                _message = _json.dumps(_message)
                 self._message = _message
 
         if content.get('event', '') in ['click', 'hover', 'zoom']:
@@ -131,7 +131,7 @@ class GraphWidget(widgets.DOMWidget):
         else:
             message['graphId'] = self._graphId
             message['uid'] = str(uuid.uuid4())
-            self._message = json.dumps(message, cls=utils.PlotlyJSONEncoder)
+            self._message = _json.dumps(message, cls=utils.PlotlyJSONEncoder)
 
     def on_click(self, callback, remove=False):
         """ Assign a callback to click events propagated

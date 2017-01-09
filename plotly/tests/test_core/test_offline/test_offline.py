@@ -4,12 +4,13 @@ test__offline
 """
 from __future__ import absolute_import
 
-from nose.tools import raises
 from unittest import TestCase
-from plotly.tests.utils import PlotlyTestCase
-import json
+
+from requests.compat import json as _json
 
 import plotly
+from plotly.tests.utils import PlotlyTestCase
+
 
 fig = {
     'data': [
@@ -35,8 +36,9 @@ class PlotlyOfflineTestCase(TestCase):
             return f.read()
 
     def test_default_plot_generates_expected_html(self):
-        data_json = json.dumps(fig['data'], cls=plotly.utils.PlotlyJSONEncoder)
-        layout_json = json.dumps(
+        data_json = _json.dumps(fig['data'],
+                                cls=plotly.utils.PlotlyJSONEncoder)
+        layout_json = _json.dumps(
             fig['layout'],
             cls=plotly.utils.PlotlyJSONEncoder)
 

@@ -19,7 +19,6 @@ import decimal
 from plotly import colors
 from plotly import utils
 from plotly import exceptions
-from plotly import graph_reference
 from plotly import session
 from plotly.files import (CONFIG_FILE, CREDENTIALS_FILE, FILE_CONTENT,
                           check_file_permissions)
@@ -1357,6 +1356,7 @@ def validate(obj, obj_type):
 
     """
     # TODO: Deprecate or move. #283
+    from plotly import graph_reference
     from plotly.graph_objs import graph_objs
 
     if obj_type not in graph_reference.CLASSES:
