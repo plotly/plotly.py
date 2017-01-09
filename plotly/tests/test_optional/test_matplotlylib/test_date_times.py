@@ -8,10 +8,11 @@ import pandas as pd
 from nose.plugins.attrib import attr
 
 import plotly.tools as tls
+from plotly import optional_imports
 
-# TODO: matplotlib-build-wip
-from plotly.tools import _matplotlylib_imported
-if _matplotlylib_imported:
+matplotlylib = optional_imports.get_module('plotly.matplotlylib')
+
+if matplotlylib:
     import matplotlib
 
     # Force matplotlib to not use any Xwindows backend.

@@ -2,10 +2,11 @@ from __future__ import absolute_import
 
 from nose.plugins.attrib import attr
 
-# TODO: matplotlib-build-wip
-from plotly.tools import _matplotlylib_imported
+from plotly import optional_imports
 
-if _matplotlylib_imported:
+matplotlylib = optional_imports.get_module('plotly.matplotlylib')
+
+if matplotlylib:
     import matplotlib
     # Force matplotlib to not use any Xwindows backend.
     matplotlib.use('Agg')

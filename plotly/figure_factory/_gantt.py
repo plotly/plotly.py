@@ -2,12 +2,10 @@ from __future__ import absolute_import
 
 from numbers import Number
 
-from plotly import exceptions
+from plotly import exceptions, optional_imports
 from plotly.figure_factory import utils
-from plotly.tools import _pandas_imported
 
-if _pandas_imported:
-    import pandas as pd
+pd = optional_imports.get_module('pandas')
 
 REQUIRED_GANTT_KEYS = ['Task', 'Start', 'Finish']
 
@@ -16,7 +14,7 @@ def validate_gantt(df):
     """
     Validates the inputted dataframe or list
     """
-    if _pandas_imported and isinstance(df, pd.core.frame.DataFrame):
+    if pd and isinstance(df, pd.core.frame.DataFrame):
         # validate that df has all the required keys
         for key in REQUIRED_GANTT_KEYS:
             if key not in df:

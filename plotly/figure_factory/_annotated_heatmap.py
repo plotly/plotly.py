@@ -1,12 +1,11 @@
 from __future__ import absolute_import
 
-from plotly import exceptions
+from plotly import exceptions, optional_imports
 from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
-from plotly.tools import _numpy_imported
 
-if _numpy_imported:
-    import numpy as np
+# Optional imports, may be None for users that only use our core functionality.
+np = optional_imports.get_module('numpy')
 
 
 def validate_annotated_heatmap(z, x, y, annotation_text):
@@ -206,7 +205,7 @@ class _AnnotatedHeatmap(object):
 
         :rtype (float) z_avg: average val from z matrix
         """
-        if _numpy_imported and isinstance(self.z, np.ndarray):
+        if np and isinstance(self.z, np.ndarray):
             z_min = np.amin(self.z)
             z_max = np.amax(self.z)
         else:
