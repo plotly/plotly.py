@@ -13,9 +13,7 @@ import warnings
 
 import six
 
-from plotly import utils
-from plotly import exceptions
-from plotly import session
+from plotly import exceptions, optional_imports, session, utils
 from plotly.files import (CONFIG_FILE, CREDENTIALS_FILE, FILE_CONTENT,
                           check_file_permissions)
 
@@ -58,55 +56,9 @@ def warning_on_one_line(message, category, filename, lineno,
                                      message)
 warnings.formatwarning = warning_on_one_line
 
-try:
-    from . import matplotlylib
-    _matplotlylib_imported = True
-except ImportError:
-    _matplotlylib_imported = False
-
-try:
-    import IPython
-    import IPython.core.display
-    _ipython_imported = True
-except ImportError:
-    _ipython_imported = False
-
-try:
-    import numpy as np
-    _numpy_imported = True
-except ImportError:
-    _numpy_imported = False
-
-try:
-    import pandas as pd
-    _pandas_imported = True
-except ImportError:
-    _pandas_imported = False
-
-try:
-    import scipy as scp
-    _scipy_imported = True
-except ImportError:
-    _scipy_imported = False
-
-try:
-    import scipy.spatial as scs
-    _scipy__spatial_imported = True
-except ImportError:
-    _scipy__spatial_imported = False
-
-try:
-    import scipy.cluster.hierarchy as sch
-    _scipy__cluster__hierarchy_imported = True
-except ImportError:
-    _scipy__cluster__hierarchy_imported = False
-
-try:
-    import scipy
-    import scipy.stats
-    _scipy_imported = True
-except ImportError:
-    _scipy_imported = False
+ipython_core_display = optional_imports.get_module('IPython.core.display')
+matplotlylib = optional_imports.get_module('plotly.matplotlylib')
+sage_salvus = optional_imports.get_module('sage_salvus')
 
 
 def get_config_defaults():
@@ -414,11 +366,11 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
                       height=height)
 
         # see if we are in the SageMath Cloud
-        from sage_salvus import html
-        return html(s, hide=False)
+        if sage_salvus:
+            return sage_salvus.html(s, hide=False)
     except:
         pass
-    if _ipython_imported:
+    if ipython_core_display:
         if file_id:
             plotly_domain = (
                 session.get_session_config().get('plotly_domain') or
@@ -497,7 +449,7 @@ def mpl_to_plotly(fig, resize=False, strip_style=False, verbose=False):
     {plotly_domain}/python/getting-started
 
     """
-    if _matplotlylib_imported:
+    if matplotlylib:
         renderer = matplotlylib.PlotlyRenderer()
         matplotlylib.Exporter(renderer).run(fig)
         if resize:
@@ -1393,8 +1345,8 @@ def _replace_newline(obj):
         return obj  # we return the actual reference... but DON'T mutate.
 
 
-if _ipython_imported:
-    class PlotlyDisplay(IPython.core.display.HTML):
+if ipython_core_display:
+    class PlotlyDisplay(ipython_core_display.HTML):
         """An IPython display object for use with plotly urls
 
         PlotlyDisplay objects should be instantiated with a url for a plot.

@@ -4,23 +4,14 @@ from __future__ import absolute_import
 
 from collections import OrderedDict
 
-from plotly import exceptions
+from plotly import exceptions, optional_imports
 from plotly.graph_objs import graph_objs
-from plotly.tools import (_numpy_imported, _scipy_imported,
-                          _scipy__cluster__hierarchy_imported,
-                          _scipy__spatial_imported)
 
-if _numpy_imported:
-    import numpy as np
-
-if _scipy_imported:
-    import scipy as scp
-
-if _scipy__cluster__hierarchy_imported:
-    import scipy.cluster.hierarchy as sch
-
-if _scipy__spatial_imported:
-    import scipy.spatial as scs
+# Optional imports, may be None for users that only use our core functionality.
+np = optional_imports.get_module('numpy')
+scp = optional_imports.get_module('scipy')
+sch = optional_imports.get_module('scipy.cluster.hierarchy')
+scs = optional_imports.get_module('scipy.spatial')
 
 
 def create_dendrogram(X, orientation="bottom", labels=None,
@@ -82,10 +73,7 @@ def create_dendrogram(X, orientation="bottom", labels=None,
     url = py.plot(fig, filename='pandas-dendrogram')
     ```
     """
-    dependencies = (_scipy_imported and _scipy__spatial_imported and
-                    _scipy__cluster__hierarchy_imported)
-
-    if dependencies is False:
+    if not scp or not scs or not sch:
         raise ImportError("FigureFactory.create_dendrogram requires scipy, \
                             scipy.spatial and scipy.hierarchy")
 

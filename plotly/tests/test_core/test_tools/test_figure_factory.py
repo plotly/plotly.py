@@ -1649,8 +1649,6 @@ class Test2D_Density(TestCase):
 
 #     def test_scipy_import_error(self):
 
-#         # make sure Import Error is raised when _scipy_imported = False
-
 #         hist_data = [[1.1, 1.1, 2.5, 3.0, 3.5,
 #                       3.5, 4.1, 4.4, 4.5, 4.5,
 #                       5.0, 5.0, 5.2, 5.5, 5.5,

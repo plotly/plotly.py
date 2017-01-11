@@ -1,11 +1,9 @@
 from __future__ import absolute_import
 
-from plotly import exceptions
+from plotly import exceptions, optional_imports
 from plotly.graph_objs import graph_objs
-from plotly.tools import _pandas_imported
 
-if _pandas_imported:
-    import pandas as pd
+pd = optional_imports.get_module('pandas')
 
 
 def validate_table(table_text, font_colors):
@@ -138,7 +136,7 @@ class _Table(object):
     """
     def __init__(self, table_text, colorscale, font_colors, index,
                  index_title, annotation_offset, **kwargs):
-        if _pandas_imported and isinstance(table_text, pd.DataFrame):
+        if pd and isinstance(table_text, pd.DataFrame):
             headers = table_text.columns.tolist()
             table_text_index = table_text.index.tolist()
             table_text = table_text.values.tolist()

@@ -17,13 +17,13 @@ from nose.plugins.attrib import attr
 from pandas.util.testing import assert_series_equal
 from requests.compat import json as _json
 
-from plotly import utils
+from plotly import optional_imports, utils
 from plotly.graph_objs import Scatter, Scatter3d, Figure, Data
 from plotly.grid_objs import Column
 
-# TODO: matplotlib-build-wip
-from plotly.tools import _matplotlylib_imported
-if _matplotlylib_imported:
+matplotlylib = optional_imports.get_module('plotly.matplotlylib')
+
+if matplotlylib:
     import matplotlib.pyplot as plt
     from plotly.matplotlylib import Exporter, PlotlyRenderer
 

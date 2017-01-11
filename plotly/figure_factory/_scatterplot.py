@@ -1,12 +1,11 @@
 from __future__ import absolute_import
 
-from plotly import exceptions
+from plotly import exceptions, optional_imports
 from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
-from plotly.tools import _pandas_imported, make_subplots
+from plotly.tools import make_subplots
 
-if _pandas_imported:
-    import pandas as pd
+pd = optional_imports.get_module('pandas')
 
 DIAG_CHOICES = ['scatter', 'histogram', 'box']
 VALID_COLORMAP_TYPES = ['cat', 'seq']
@@ -88,7 +87,7 @@ def validate_scatterplotmatrix(df, index, diag, colormap_type, **kwargs):
     :raises: (PlotlyError) If kwargs contains 'size', 'color' or
         'colorscale'
     """
-    if _pandas_imported is False:
+    if not pd:
         raise ImportError("FigureFactory.scatterplotmatrix requires "
                           "a pandas DataFrame.")
 
