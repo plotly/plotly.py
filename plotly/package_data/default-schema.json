@@ -9136,7 +9136,7 @@
                         ]
                     },
                     "end": {
-                        "description": "Sets the end contour level value.",
+                        "description": "Sets the end contour level value. Must be more than `contours.start`",
                         "dflt": null,
                         "role": "style",
                         "valType": "number"
@@ -9149,13 +9149,14 @@
                         "valType": "boolean"
                     },
                     "size": {
-                        "description": "Sets the step between each contour level.",
+                        "description": "Sets the step between each contour level. Must be positive.",
                         "dflt": null,
+                        "min": 0,
                         "role": "style",
                         "valType": "number"
                     },
                     "start": {
-                        "description": "Sets the starting contour level value.",
+                        "description": "Sets the starting contour level value. Must be less than `contours.end`",
                         "dflt": null,
                         "role": "style",
                         "valType": "number"
@@ -9240,8 +9241,9 @@
                     "valType": "string"
                 },
                 "ncontours": {
-                    "description": "Sets the maximum number of contour levels. The actual number of contours will be chosen automatically to be less than or equal to the value of `ncontours`. Has an effect only if `autocontour` is *true*.",
-                    "dflt": 0,
+                    "description": "Sets the maximum number of contour levels. The actual number of contours will be chosen automatically to be less than or equal to the value of `ncontours`. Has an effect only if `autocontour` is *true* or if `contours.size` is missing.",
+                    "dflt": 15,
+                    "min": 1,
                     "role": "style",
                     "valType": "integer"
                 },
@@ -12754,7 +12756,7 @@
                         ]
                     },
                     "end": {
-                        "description": "Sets the end contour level value.",
+                        "description": "Sets the end contour level value. Must be more than `contours.start`",
                         "dflt": null,
                         "role": "style",
                         "valType": "number"
@@ -12767,13 +12769,14 @@
                         "valType": "boolean"
                     },
                     "size": {
-                        "description": "Sets the step between each contour level.",
+                        "description": "Sets the step between each contour level. Must be positive.",
                         "dflt": null,
+                        "min": 0,
                         "role": "style",
                         "valType": "number"
                     },
                     "start": {
-                        "description": "Sets the starting contour level value.",
+                        "description": "Sets the starting contour level value. Must be less than `contours.end`",
                         "dflt": null,
                         "role": "style",
                         "valType": "number"
@@ -12899,8 +12902,9 @@
                     "valType": "integer"
                 },
                 "ncontours": {
-                    "description": "Sets the maximum number of contour levels. The actual number of contours will be chosen automatically to be less than or equal to the value of `ncontours`. Has an effect only if `autocontour` is *true*.",
-                    "dflt": 0,
+                    "description": "Sets the maximum number of contour levels. The actual number of contours will be chosen automatically to be less than or equal to the value of `ncontours`. Has an effect only if `autocontour` is *true* or if `contours.size` is missing.",
+                    "dflt": 15,
+                    "min": 1,
                     "role": "style",
                     "valType": "integer"
                 },

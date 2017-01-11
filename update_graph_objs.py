@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 from plotly.graph_objs import graph_objs_tools
 from plotly.graph_reference import ARRAYS, CLASSES
 
@@ -35,22 +37,7 @@ def print_figure_patch(f):
     def __init__(self, *args, **kwargs):
         super(Figure, self).__init__(*args, **kwargs)
         if 'data' not in self:
-            self.data = GraphObjectFactory.create('data', _parent=self,
-                                                  _parent_key='data')
-
-    # TODO better integrate frames into Figure - #604
-    def __setitem__(self, key, value, **kwargs):
-        if key == 'frames':
-            super(PlotlyDict, self).__setitem__(key, value)
-        else:
-            super(Figure, self).__setitem__(key, value, **kwargs)
-
-    def _get_valid_attributes(self):
-        super(Figure, self)._get_valid_attributes()
-        # TODO better integrate frames into Figure - #604
-        if 'frames' not in self._valid_attributes:
-            self._valid_attributes.add('frames')
-        return self._valid_attributes
+            self.data = Data(_parent=self, _parent_key='data')
 
     def get_data(self, flatten=False):
         """
@@ -221,6 +208,45 @@ def print_data_patch(f):
     )
 
 
+def print_frames_patch(f):
+    """Print a patch to our Frames object into the given open file."""
+    print(
+        '''
+    def _value_to_graph_object(self, index, value, _raise=True):
+        if isinstance(value, six.string_types):
+            return value
+        return super(Frames, self)._value_to_graph_object(index, value,
+                                                          _raise=_raise)
+
+    def to_string(self, level=0, indent=4, eol='\\n',
+                  pretty=True, max_chars=80):
+        """Get formatted string by calling `to_string` on children items."""
+        if not len(self):
+            return "{name}()".format(name=self._get_class_name())
+        string = "{name}([{eol}{indent}".format(
+            name=self._get_class_name(),
+            eol=eol,
+            indent=' ' * indent * (level + 1))
+        for index, entry in enumerate(self):
+            if isinstance(entry, six.string_types):
+                string += repr(entry)
+            else:
+                string += entry.to_string(level=level+1,
+                                          indent=indent,
+                                          eol=eol,
+                                          pretty=pretty,
+                                          max_chars=max_chars)
+            if index < len(self) - 1:
+                string += ",{eol}{indent}".format(
+                    eol=eol,
+                    indent=' ' * indent * (level + 1))
+        string += (
+            "{eol}{indent}])").format(eol=eol, indent=' ' * indent * level)
+        return string
+''', file=f, end=''
+    )
+
+
 def print_class(name, f):
     class_dict = CLASSES[name]
     print('\n', file=f)
@@ -250,6 +276,8 @@ def print_class(name, f):
         print_figure_patch(f)
     elif name == 'Data':
         print_data_patch(f)
+    elif name == 'Frames':
+        print_frames_patch(f)
 
 copied_lines = get_non_generated_file_lines()
 with open('./plotly/graph_objs/graph_objs.py', 'w') as graph_objs_file:
