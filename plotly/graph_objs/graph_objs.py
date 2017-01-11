@@ -787,7 +787,7 @@ class GraphObjectFactory(object):
 
         # We patch Figure and Data, so they actually require the subclass.
         class_name = graph_reference.OBJECT_NAME_TO_CLASS_NAME.get(object_name)
-        if class_name in ['Figure', 'Data']:
+        if class_name in ['Figure', 'Data', 'Frames']:
             return globals()[class_name](*args, **kwargs)
         else:
             kwargs['_name'] = object_name
@@ -1097,7 +1097,7 @@ class Figure(PlotlyDict):
     """
     Valid attributes for 'figure' at path [] under parents ():
     
-        ['data', 'layout']
+        ['data', 'frames', 'layout']
     
     Run `<figure-object>.help('attribute')` on any of the above.
     '<figure-object>' is the object at []
@@ -1108,22 +1108,7 @@ class Figure(PlotlyDict):
     def __init__(self, *args, **kwargs):
         super(Figure, self).__init__(*args, **kwargs)
         if 'data' not in self:
-            self.data = GraphObjectFactory.create('data', _parent=self,
-                                                  _parent_key='data')
-
-    # TODO better integrate frames into Figure - #604
-    def __setitem__(self, key, value, **kwargs):
-        if key == 'frames':
-            super(PlotlyDict, self).__setitem__(key, value)
-        else:
-            super(Figure, self).__setitem__(key, value, **kwargs)
-
-    def _get_valid_attributes(self):
-        super(Figure, self)._get_valid_attributes()
-        # TODO better integrate frames into Figure - #604
-        if 'frames' not in self._valid_attributes:
-            self._valid_attributes.add('frames')
-        return self._valid_attributes
+            self.data = Data(_parent=self, _parent_key='data')
 
     def get_data(self, flatten=False):
         """
@@ -1241,8 +1226,45 @@ class Font(PlotlyDict):
     _name = 'font'
 
 
-class Frames(dict):
-    pass
+class Frames(PlotlyList):
+    """
+    Valid items for 'frames' at path [] under parents ():
+        ['dict']
+
+    """
+    _name = 'frames'
+
+    def _value_to_graph_object(self, index, value, _raise=True):
+        if isinstance(value, six.string_types):
+            return value
+        return super(Frames, self)._value_to_graph_object(index, value,
+                                                          _raise=_raise)
+
+    def to_string(self, level=0, indent=4, eol='\n',
+                  pretty=True, max_chars=80):
+        """Get formatted string by calling `to_string` on children items."""
+        if not len(self):
+            return "{name}()".format(name=self._get_class_name())
+        string = "{name}([{eol}{indent}".format(
+            name=self._get_class_name(),
+            eol=eol,
+            indent=' ' * indent * (level + 1))
+        for index, entry in enumerate(self):
+            if isinstance(entry, six.string_types):
+                string += repr(entry)
+            else:
+                string += entry.to_string(level=level+1,
+                                          indent=indent,
+                                          eol=eol,
+                                          pretty=pretty,
+                                          max_chars=max_chars)
+            if index < len(self) - 1:
+                string += ",{eol}{indent}".format(
+                    eol=eol,
+                    indent=' ' * indent * (level + 1))
+        string += (
+            "{eol}{indent}])").format(eol=eol, indent=' ' * indent * level)
+        return string
 
 
 class Heatmap(PlotlyDict):

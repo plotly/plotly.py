@@ -35,8 +35,14 @@ def get_help(object_name, path=(), parent_object_names=(), attribute=None):
 def _list_help(object_name, path=(), parent_object_names=()):
     """See get_help()."""
     items = graph_reference.ARRAYS[object_name]['items']
-    items_classes = [graph_reference.string_to_class_name(item)
-                     for item in items]
+    items_classes = set()
+    for item in items:
+        if item in graph_reference.OBJECT_NAME_TO_CLASS_NAME:
+            items_classes.add(graph_reference.string_to_class_name(item))
+        else:
+            # There are no lists objects which can contain list entries.
+            items_classes.add('dict')
+    items_classes = list(items_classes)
     items_classes.sort()
     lines = textwrap.wrap(repr(items_classes), width=LINE_SIZE-TAB_SIZE-1)
 

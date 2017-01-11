@@ -24,6 +24,7 @@ gone.
 
 ### Updated
 - `plotly.plotly.create_animations` and `plotly.plotly.icreate_animations` now return appropriate error messages if the response is not successful.
+- `frames` are now integrated into GRAPH_REFERENCE and figure validation.
 
 ### Changed
 - The plot-schema from `https://api.plot.ly/plot-schema` is no longer updated on import.

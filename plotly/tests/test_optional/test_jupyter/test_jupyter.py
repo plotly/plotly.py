@@ -12,8 +12,15 @@ from os import path
 import subprocess
 
 PATH_ROOT = path.dirname(__file__)
+PATH_NODE_MODULES = path.join(PATH_ROOT, 'node_modules')
 PATH_FIXTURES = path.join(PATH_ROOT, 'fixtures')
 PATH_JS_TESTS = path.join(PATH_ROOT, 'js_tests')
+
+
+class PlotlyJupyterTestDeps(TestCase):
+
+    def test_node_modules(self):
+        self.assertTrue(path.isdir(PATH_NODE_MODULES))
 
 
 class Common(TestCase):

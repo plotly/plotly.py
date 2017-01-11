@@ -21,16 +21,6 @@ FAKE_API_DOMAIN = 'https://api.am.not.here.ly'
 
 class TestGraphReferenceCaching(PlotlyTestCase):
 
-    def test_get_graph_reference(self):
-
-        # if we don't have a graph reference we load an outdated default
-
-        path = os.path.join('package_data', 'default-schema.json')
-        s = resource_string('plotly', path).decode('utf-8')
-        default_graph_reference = _json.loads(s)
-        graph_reference = gr.get_graph_reference()
-        self.assertEqual(graph_reference, default_graph_reference)
-
     @attr('slow')
     def test_default_schema_is_up_to_date(self):
         response = v2.plot_schema.retrieve('')
