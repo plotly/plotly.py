@@ -2,10 +2,21 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [2.0.0]
+
+### Changed
+- `plotly.exceptions.PlotlyRequestException` is *always* raised for network
+failures. Previously either a `PlotlyError`, `PlotlyRequestException`, or a
+`requests.exceptions.ReqestException` could be raised. In particular, scripts
+which depend on `try-except` blocks containing network requests should be
+revisited.
 
 ### Deprecated
 - `plotly.tools.FigureFactory`. Use `plotly.figure_factory.*`.
+- (optional imports) `plotly.tools._*_imported` It was private anyhow, but now
+it's gone. (e.g., `_numpy_imported`)
+- (plotly v2 helper) `plotly.py._api_v2` It was private anyhow, but now it's
+gone.
 
 ## [1.13.0] - 2016-01-17
 ### Added
