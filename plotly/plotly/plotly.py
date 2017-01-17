@@ -214,6 +214,7 @@ def plot(figure_or_data, validate=True, **plot_options):
 
     fig = tools._replace_newline(figure)  # does not mutate figure
     data = fig.get('data', [])
+    plot_options['layout'] = fig.get('layout', {})
     response = v1.clientresp(data, **plot_options)
 
     # Check if the url needs a secret key
