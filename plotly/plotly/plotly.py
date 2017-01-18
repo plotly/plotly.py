@@ -24,11 +24,9 @@ import six
 import six.moves
 from requests.compat import json as _json
 
-from plotly import exceptions, tools, utils, files
+from plotly import exceptions, files, session, tools, utils
 from plotly.api import v1, v2
 from plotly.plotly import chunked_requests
-from plotly.session import (sign_in, update_session_plot_options,
-                            get_session_plot_options)
 from plotly.grid_objs import Grid, Column
 
 # This is imported like this for backwards compat. Careful if changing.
@@ -50,8 +48,16 @@ tools.ensure_local_plotly_files()
 
 
 # don't break backwards compatibility
-sign_in = sign_in
-update_plot_options = update_session_plot_options
+def sign_in(username, api_key, **kwargs):
+    session.sign_in(username, api_key, **kwargs)
+    try:
+        # The only way this can succeed is if the user can be authenticated
+        # with the given, username, api_key, and plotly_api_domain.
+        v2.users.current()
+    except exceptions.PlotlyRequestError:
+        raise exceptions.PlotlyError('Sign in failed.')
+
+update_plot_options = session.update_session_plot_options
 
 
 def _plot_option_logic(plot_options_from_call_signature):
@@ -66,7 +72,7 @@ def _plot_option_logic(plot_options_from_call_signature):
     """
     default_plot_options = copy.deepcopy(DEFAULT_PLOT_OPTIONS)
     file_options = tools.get_config_file()
-    session_options = get_session_plot_options()
+    session_options = session.get_session_plot_options()
     plot_options_from_call_signature = copy.deepcopy(plot_options_from_call_signature)
 
     # Validate options and fill in defaults w world_readable and sharing
