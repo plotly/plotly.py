@@ -1,5 +1,8 @@
 from __future__ import absolute_import
 
+# Require that numpy exists for figure_factory
+import numpy
+
 from plotly.figure_factory._2d_density import create_2d_density
 from plotly.figure_factory._annotated_heatmap import create_annotated_heatmap
 from plotly.figure_factory._candlestick import create_candlestick
