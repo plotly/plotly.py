@@ -48,7 +48,15 @@ tools.ensure_local_plotly_files()
 
 
 # don't break backwards compatibility
-sign_in = session.sign_in
+def sign_in(username, api_key, **kwargs):
+    session.sign_in(username, api_key, **kwargs)
+    try:
+        # The only way this can succeed is if the user can be authenticated
+        # with the given, username, api_key, and plotly_api_domain.
+        v2.users.current()
+    except exceptions.PlotlyRequestError:
+        raise exceptions.PlotlyError('Sign in failed.')
+
 update_plot_options = session.update_session_plot_options
 
 

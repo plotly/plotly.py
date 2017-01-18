@@ -12,6 +12,7 @@ import six
 from requests.compat import json as _json
 
 from unittest import TestCase
+from mock import patch
 from nose.plugins.attrib import attr
 from nose.tools import raises
 
@@ -227,6 +228,14 @@ class TestPlotOptionLogic(PlotlyTestCase):
         {'world_readable': True, 'sharing': 'private'},
         {'world_readable': False, 'sharing': 'public'}
     )
+
+    def setUp(self):
+        super(TestPlotOptionLogic, self).setUp()
+
+        # Make sure we don't hit sign-in validation failures.
+        patcher = patch('plotly.api.v2.users.current')
+        self.users_current_mock = patcher.start()
+        self.addCleanup(patcher.stop)
 
     def test_default_options(self):
         options = py._plot_option_logic({})
