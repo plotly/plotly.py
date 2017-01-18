@@ -1,39 +1,43 @@
 from __future__ import absolute_import
 
-from unittest import TestCase
+from mock import patch
 
 import plotly.plotly.plotly as py
 import plotly.session as session
 import plotly.tools as tls
+from plotly import exceptions
+from plotly.tests.utils import PlotlyTestCase
 
 
-def test_get_credentials():
-    session_credentials = session.get_session_credentials()
-    if 'username' in session_credentials:
-        del session._session['credentials']['username']
-    if 'api_key' in session_credentials:
-        del session._session['credentials']['api_key']
-    creds = py.get_credentials()
-    file_creds = tls.get_credentials_file()
-    print(creds)
-    print(file_creds)
-    assert creds == file_creds
+class TestSignIn(PlotlyTestCase):
 
+    def setUp(self):
+        super(TestSignIn, self).setUp()
+        patcher = patch('plotly.api.v2.users.current')
+        self.users_current_mock = patcher.start()
+        self.addCleanup(patcher.stop)
 
-def test_sign_in():
-    un = 'anyone'
-    ak = 'something'
-    # TODO, add this!
-    # si = ['this', 'and-this']
-    py.sign_in(un, ak)
-    creds = py.get_credentials()
-    assert creds['username'] == un
-    assert creds['api_key'] == ak
-    # TODO, and check it!
-    # assert creds['stream_ids'] == si
+    def test_get_credentials(self):
+        session_credentials = session.get_session_credentials()
+        if 'username' in session_credentials:
+            del session._session['credentials']['username']
+        if 'api_key' in session_credentials:
+            del session._session['credentials']['api_key']
+        creds = py.get_credentials()
+        file_creds = tls.get_credentials_file()
+        self.assertEqual(creds, file_creds)
 
-
-class TestSignIn(TestCase):
+    def test_sign_in(self):
+        un = 'anyone'
+        ak = 'something'
+        # TODO, add this!
+        # si = ['this', 'and-this']
+        py.sign_in(un, ak)
+        creds = py.get_credentials()
+        self.assertEqual(creds['username'], un)
+        self.assertEqual(creds['api_key'], ak)
+        # TODO, and check it!
+        # assert creds['stream_ids'] == si
 
     def test_get_config(self):
         plotly_domain = 'test domain'
@@ -74,3 +78,10 @@ class TestSignIn(TestCase):
         self.assertEqual(
             config['plotly_ssl_verification'], plotly_ssl_verification
         )
+
+    def test_sign_in_cannot_validate(self):
+        self.users_current_mock.side_effect = exceptions.PlotlyRequestError(
+            'msg', 400, 'foobar'
+        )
+        with self.assertRaisesRegexp(exceptions.PlotlyError, 'Sign in failed'):
+            py.sign_in('foo', 'bar')

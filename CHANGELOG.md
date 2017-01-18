@@ -10,6 +10,8 @@ failures. Previously either a `PlotlyError`, `PlotlyRequestException`, or a
 `requests.exceptions.ReqestException` could be raised. In particular, scripts
 which depend on `try-except` blocks containing network requests should be
 revisited.
+- `plotly.py:sign_in` now validates to the plotly server specified in your
+  config. If it cannot make a successful request, it raises a `PlotlyError`.
 
 ### Deprecated
 - `plotly.tools.FigureFactory`. Use `plotly.figure_factory.*`.
