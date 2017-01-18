@@ -41,9 +41,14 @@ class TestPlot(TestCase):
                     'x': [1, 2, 3],
                     'y': [2, 1, 2]
                 }
-            ]
+            ],
+            'layout': {'title': 'simple'}
         }
-        py.plot(fig, auto_open=False, filename='plot_valid')
+        url = py.plot(fig, auto_open=False, filename='plot_valid')
+        saved_fig = py.get_figure(url)
+        self.assertEqual(saved_fig['data'][0]['x'], fig['data'][0]['x'])
+        self.assertEqual(saved_fig['data'][0]['y'], fig['data'][0]['y'])
+        self.assertEqual(saved_fig['layout']['title'], fig['layout']['title'])
 
     @raises(PlotlyError)
     def test_plot_invalid(self):
