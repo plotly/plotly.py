@@ -2,6 +2,26 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.0.0]
+
+### Changed
+- `plotly.exceptions.PlotlyRequestException` is *always* raised for network
+failures. Previously either a `PlotlyError`, `PlotlyRequestException`, or a
+`requests.exceptions.ReqestException` could be raised. In particular, scripts
+which depend on `try-except` blocks containing network requests should be
+revisited.
+- `plotly.py:sign_in` now validates to the plotly server specified in your
+  config. If it cannot make a successful request, it raises a `PlotlyError`.
+- `plotly.figure_factory` will raise an `ImportError` if `numpy` is not
+  installed.
+
+### Deprecated
+- `plotly.tools.FigureFactory`. Use `plotly.figure_factory.*`.
+- (optional imports) `plotly.tools._*_imported` It was private anyhow, but now
+it's gone. (e.g., `_numpy_imported`)
+- (plotly v2 helper) `plotly.py._api_v2` It was private anyhow, but now it's
+gone.
+
 ## [1.13.0] - 2016-01-17
 ### Added
 - Python 3.5 has been added as a tested environment for this package.

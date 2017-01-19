@@ -7,11 +7,12 @@ A module intended for use with Nose.
 """
 from __future__ import absolute_import
 
-import json
 import requests
 import six
+from requests.compat import json as _json
 
 from unittest import TestCase
+from mock import patch
 from nose.plugins.attrib import attr
 from nose.tools import raises
 
@@ -40,9 +41,14 @@ class TestPlot(TestCase):
                     'x': [1, 2, 3],
                     'y': [2, 1, 2]
                 }
-            ]
+            ],
+            'layout': {'title': 'simple'}
         }
-        py.plot(fig, auto_open=False, filename='plot_valid')
+        url = py.plot(fig, auto_open=False, filename='plot_valid')
+        saved_fig = py.get_figure(url)
+        self.assertEqual(saved_fig['data'][0]['x'], fig['data'][0]['x'])
+        self.assertEqual(saved_fig['data'][0]['y'], fig['data'][0]['y'])
+        self.assertEqual(saved_fig['layout']['title'], fig['layout']['title'])
 
     @raises(PlotlyError)
     def test_plot_invalid(self):
@@ -223,6 +229,14 @@ class TestPlotOptionLogic(PlotlyTestCase):
         {'world_readable': False, 'sharing': 'public'}
     )
 
+    def setUp(self):
+        super(TestPlotOptionLogic, self).setUp()
+
+        # Make sure we don't hit sign-in validation failures.
+        patcher = patch('plotly.api.v2.users.current')
+        self.users_current_mock = patcher.start()
+        self.addCleanup(patcher.stop)
+
     def test_default_options(self):
         options = py._plot_option_logic({})
         config_options = tls.get_config_file()
@@ -296,10 +310,10 @@ def generate_conflicting_plot_options_with_json_writes_of_config():
     """
     def gen_test(plot_options):
         def test(self):
-            config = json.load(open(CONFIG_FILE))
+            config = _json.load(open(CONFIG_FILE))
             with open(CONFIG_FILE, 'w') as f:
                 config.update(plot_options)
-                f.write(json.dumps(config))
+                f.write(_json.dumps(config))
             self.assertRaises(PlotlyError, py._plot_option_logic, {})
         return test
 
