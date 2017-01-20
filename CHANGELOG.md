@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+### Updated
+- `plotly.figure_factory.create_violin()` now has a `rugplot` parameter which determines whether or not a rugplot is draw beside each violin plot.
+
 ## [2.0.0]
 
 ### Changed
