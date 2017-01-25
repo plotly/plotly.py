@@ -2,11 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## Unreleased
-### Updated
-- `plotly.figure_factory.create_violin()` now has a `rugplot` parameter which determines whether or not a rugplot is draw beside each violin plot.
-
-## [2.0.0]
+## [2.0.0] - 2017-01-25
 
 ### Changed
 - `plotly.exceptions.PlotlyRequestException` is *always* raised for network
@@ -18,6 +14,8 @@ revisited.
   config. If it cannot make a successful request, it raises a `PlotlyError`.
 - `plotly.figure_factory` will raise an `ImportError` if `numpy` is not
   installed.
+- `plotly.figure_factory.create_violin()` now has a `rugplot` parameter which
+  determines whether or not a rugplot is draw beside each violin plot.
 
 ### Deprecated
 - `plotly.tools.FigureFactory`. Use `plotly.figure_factory.*`.
@@ -26,7 +24,7 @@ it's gone. (e.g., `_numpy_imported`)
 - (plotly v2 helper) `plotly.py._api_v2` It was private anyhow, but now it's
 gone.
 
-## [1.13.0] - 2016-01-17
+## [1.13.0] - 2016-12-17
 ### Added
 - Python 3.5 has been added as a tested environment for this package.
 
