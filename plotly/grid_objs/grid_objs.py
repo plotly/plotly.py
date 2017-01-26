@@ -151,17 +151,16 @@ class Grid(MutableSequence):
         """
         # TODO: verify that columns are actually columns
         if pd and isinstance(columns_or_json, pd.DataFrame):
-            column_names = [name for name in columns_or_json.columns]
-            duplicate_name = utils.get_first_duplicate(column_names)
+            duplicate_name = utils.get_first_duplicate(columns_or_json.columns)
             if duplicate_name:
                 err = exceptions.NON_UNIQUE_COLUMN_MESSAGE.format(duplicate_name)
                 raise exceptions.InputError(err)
 
             # create columns from dataframe
             all_columns = []
-            for name in column_names:
+            for name in columns_or_json.columns:
                 all_columns.append(Column(columns_or_json[name].tolist(), name))
-            self._columns = list(all_columns)
+            self._columns = all_columns
             self.id = ''
 
         elif isinstance(columns_or_json, dict):
