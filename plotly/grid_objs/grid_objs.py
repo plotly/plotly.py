@@ -9,7 +9,9 @@ from collections import MutableSequence
 
 from requests.compat import json as _json
 
-from plotly import exceptions, utils
+from plotly import exceptions, optional_imports, utils
+
+pd = optional_imports.get_module('pandas')
 
 __all__ = None
 
@@ -148,7 +150,21 @@ class Grid(MutableSequence):
         ```
         """
         # TODO: verify that columns are actually columns
-        if isinstance(columns_or_json, dict):
+        if pd and isinstance(columns_or_json, pd.DataFrame):
+            column_names = [name for name in columns_or_json.columns]
+            duplicate_name = utils.get_first_duplicate(column_names)
+            if duplicate_name:
+                err = exceptions.NON_UNIQUE_COLUMN_MESSAGE.format(duplicate_name)
+                raise exceptions.InputError(err)
+
+            # create columns from dataframe
+            all_columns = []
+            for name in column_names:
+                all_columns.append(Column(columns_or_json[name].tolist(), name))
+            self._columns = list(all_columns)
+            self.id = ''
+
+        elif isinstance(columns_or_json, dict):
             # check that fid is entered
             if fid is None:
                 raise exceptions.PlotlyError(
