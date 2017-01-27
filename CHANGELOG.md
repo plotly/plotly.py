@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+
+### Updated
+- a `Grid` from `plotly.grid_objs` now accepts a `pandas.Dataframe` as its argument.
+
 ## [2.0.0] - 2017-01-25
 
 ### Changed
