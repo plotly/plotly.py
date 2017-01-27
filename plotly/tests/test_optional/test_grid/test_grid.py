@@ -15,18 +15,18 @@ from plotly.grid_objs import Grid
 import pandas as pd
 
 
-class Test_Dataframe_to_Grid(TestCase):
+class TestDataframeToGrid(TestCase):
 
     # Test duplicate columns
     def test_duplicate_columns(self):
-        df = pd.DataFrame([[1, 'a'],
-                           [2, 'b']], columns=['col_1', 'col_1'])
+        df = pd.DataFrame([[1, 'a'], [2, 'b']],
+                          columns=['col_1', 'col_1'])
 
-        NON_UNIQUE_COLUMN_MESSAGE = (
+        expected_message = (
             "Yikes, plotly grids currently "
             "can't have duplicate column names. Rename "
             "the column \"{}\" and try again.".format('col_1')
         )
 
-        with self.assertRaisesRegexp(InputError, NON_UNIQUE_COLUMN_MESSAGE):
+        with self.assertRaisesRegexp(InputError, expected_message):
             Grid(df)
