@@ -229,7 +229,7 @@ def get_attributes_dicts(object_name, parent_object_names=()):
     return attributes_dicts
 
 
-def get_valid_attributes(object_name, parent_object_names=()):
+def _get_valid_attributes(object_name, parent_object_names):
     attributes = get_attributes_dicts(object_name, parent_object_names)
     # These are for documentation and quick lookups. They're just strings.
     valid_attributes = set()
@@ -243,6 +243,11 @@ def get_valid_attributes(object_name, parent_object_names=()):
                 valid_attributes.add(key)
 
     return valid_attributes
+
+
+def get_valid_attributes(object_name, parent_object_names=()):
+    # Enforce that parent_object_names is hashable (a tuple).
+    return _get_valid_attributes(object_name, tuple(parent_object_names))
 
 
 def get_deprecated_attributes(object_name, parent_object_names=()):
@@ -340,21 +345,9 @@ def attribute_path_to_object_names(attribute_container_path):
     return tuple(object_names)
 
 
-def get_role(object_name, attribute, value=None, parent_object_names=()):
-    """
-    Values have types associated with them based on graph_reference.
-
-    'data' type values are always kept
-    'style' values are kept if they're sequences (but not strings)
-
-    :param (str) object_name: The name of the object containing 'attribute'.
-    :param (str) attribute: The attribute we want the `role` of.
-    :param (*) value: If the value is an array, the return can be different.
-    :param parent_object_names: An iterable of obj names from graph reference.
-    :returns: (str) This will be 'data', 'style', or 'info'.
-
-    """
-    if object_name in TRACE_NAMES and attribute == 'type':
+def _get_role(object_name, attribute, value_type, parent_object_names=()):
+    """Private, more easily memoized version of get_role."""
+    if attribute == 'type' and object_name in TRACE_NAMES:
         return 'info'
     attributes_dicts = get_attributes_dicts(object_name, parent_object_names)
     matches = []
@@ -372,12 +365,8 @@ def get_role(object_name, attribute, value=None, parent_object_names=()):
     for match in matches:
         role = match['role']
         array_ok = match.get('arrayOk')
-        if value is not None and array_ok:
-            iterable = hasattr(value, '__iter__')
-            stringy = isinstance(value, six.string_types)
-            dicty = isinstance(value, dict)
-            if iterable and not stringy and not dicty:
-                role = 'data'
+        if array_ok and value_type == 'array':
+            role = 'data'
         roles.append(role)
 
     # TODO: this is ambiguous until the figure is in place...
@@ -386,6 +375,36 @@ def get_role(object_name, attribute, value=None, parent_object_names=()):
     else:
         role = roles[0]
     return role
+
+
+def get_role(object_name, attribute, value=None, parent_object_names=()):
+    """
+    Values have types associated with them based on graph_reference.
+
+    'data' type values are always kept
+    'style' values are kept if they're sequences (but not strings)
+
+    :param (str) object_name: The name of the object containing 'attribute'.
+    :param (str) attribute: The attribute we want the `role` of.
+    :param (*) value: If the value is an array, the return can be different.
+    :param parent_object_names: An iterable of obj names from graph reference.
+    :returns: (str) This will be 'data', 'style', or 'info'.
+
+    """
+    if value is None:
+        value_type = 'none'
+    elif isinstance(value, dict):
+        value_type = 'dict'
+    elif isinstance(value, six.string_types):
+        value_type = 'string'
+    elif hasattr(value, '__iter__'):
+        value_type = 'array'
+    else:
+        value_type = 'unknown'
+
+    # Enforce that parent_object_names is hashable (a tuple).
+    return _get_role(object_name, attribute, value_type,
+                     tuple(parent_object_names))
 
 
 def _is_valid_sub_path(path, parent_paths):
