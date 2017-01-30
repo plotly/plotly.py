@@ -229,6 +229,7 @@ def get_attributes_dicts(object_name, parent_object_names=()):
     return attributes_dicts
 
 
+@utils.memoize()
 def _get_valid_attributes(object_name, parent_object_names):
     attributes = get_attributes_dicts(object_name, parent_object_names)
     # These are for documentation and quick lookups. They're just strings.
@@ -345,6 +346,7 @@ def attribute_path_to_object_names(attribute_container_path):
     return tuple(object_names)
 
 
+@utils.memoize()
 def _get_role(object_name, attribute, value_type, parent_object_names=()):
     """Private, more easily memoized version of get_role."""
     if attribute == 'type' and object_name in TRACE_NAMES:
