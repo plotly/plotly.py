@@ -45,5 +45,5 @@ setup(name='plotly',
                 'plotly/matplotlylib/mplexporter',
                 'plotly/matplotlylib/mplexporter/renderers'],
       package_data={'plotly': ['package_data/*']},
-      install_requires=['requests', 'six', 'pytz'],
+      install_requires=['decorator', 'requests', 'six', 'pytz'],
       zip_safe=False)
