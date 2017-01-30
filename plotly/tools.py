@@ -1000,8 +1000,7 @@ def make_subplots(rows=1, cols=1,
     # Function pasting x/y domains in layout object (2d case)
     def _add_domain(layout, x_or_y, label, domain, anchor, position):
         name = label[0] + 'axis' + label[1:]
-        graph_obj = '{X_or_Y}Axis'.format(X_or_Y=x_or_y.upper())
-        axis = getattr(graph_objs, graph_obj)(domain=domain)
+        axis = {'domain': domain}
         if anchor:
             axis['anchor'] = anchor
         if isinstance(position, float):
