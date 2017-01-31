@@ -4,6 +4,7 @@ test__offline
 """
 from __future__ import absolute_import
 
+import os
 from unittest import TestCase
 
 from requests.compat import json as _json
@@ -24,7 +25,16 @@ fig = {
 PLOTLYJS = plotly.offline.offline.get_plotlyjs()
 
 
-class PlotlyOfflineTestCase(TestCase):
+class PlotlyOfflineBaseTestCase(TestCase):
+    def tearDown(self):
+        # Some offline tests produce an html file. Make sure we clean up :)
+        try:
+            os.remove('temp-plot.html')
+        except OSError:
+            pass
+
+
+class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
     def setUp(self):
         pass
 
@@ -42,7 +52,7 @@ class PlotlyOfflineTestCase(TestCase):
             fig['layout'],
             cls=plotly.utils.PlotlyJSONEncoder)
 
-        html = self._read_html(plotly.offline.plot(fig))
+        html = self._read_html(plotly.offline.plot(fig, auto_open=False))
 
         # I don't really want to test the entire script output, so
         # instead just make sure a few of the parts are in here?
@@ -54,11 +64,12 @@ class PlotlyOfflineTestCase(TestCase):
         self.assertTrue(html.startswith('<html>') and html.endswith('</html>'))
 
     def test_including_plotlyjs(self):
-        html = self._read_html(plotly.offline.plot(fig, include_plotlyjs=False))
+        html = self._read_html(plotly.offline.plot(fig, include_plotlyjs=False,
+                                                   auto_open=False))
         self.assertTrue(PLOTLYJS not in html)
 
     def test_div_output(self):
-        html = plotly.offline.plot(fig, output_type='div')
+        html = plotly.offline.plot(fig, output_type='div', auto_open=False)
 
         self.assertTrue('<html>' not in html and '</html>' not in html)
         self.assertTrue(html.startswith('<div>') and html.endswith('</div>'))
@@ -69,7 +80,7 @@ class PlotlyOfflineTestCase(TestCase):
             'Plotly.Plots.resize('
         ]
         # If width or height wasn't specified, then we add a window resizer
-        html = self._read_html(plotly.offline.plot(fig))
+        html = self._read_html(plotly.offline.plot(fig, auto_open=False))
         for resize_code_string in resize_code_strings:
             self.assertTrue(resize_code_string in html)
 
@@ -79,12 +90,12 @@ class PlotlyOfflineTestCase(TestCase):
             'layout': {
                 'width': 500, 'height': 500
             }
-        })
+        }, auto_open=False)
         for resize_code_string in resize_code_strings:
             self.assertTrue(resize_code_string not in html)
 
 
-class PlotlyOfflineOtherDomainTestCase(PlotlyTestCase):
+class PlotlyOfflineOtherDomainTestCase(PlotlyOfflineBaseTestCase):
     def setUp(self):
         super(PlotlyOfflineOtherDomainTestCase, self).setUp()
         plotly.tools.set_config_file(plotly_domain='https://stage.plot.ly',
