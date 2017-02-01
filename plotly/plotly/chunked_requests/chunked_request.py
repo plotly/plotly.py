@@ -69,8 +69,12 @@ class Stream:
             msglen = format(len(msg), 'x')  # msg length in hex
             # Send the message in chunk-encoded form
             self._conn.sock.setblocking(1)
-            self._conn.send('{msglen}\r\n{msg}\r\n'
-                            .format(msglen=msglen, msg=msg).encode('utf-8'))
+            formatted_message = '{msglen}\r\n{msg}\r\n'.format(
+                msglen=msglen, msg=msg)
+            if not msg:
+                # Send heartbeat
+                formatted_message = '\r\n'
+            self._conn.send(formatted_message.encode('utf-8'))
             self._conn.sock.setblocking(0)
         except http_client.socket.error:
             self._reconnect()
