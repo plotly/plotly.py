@@ -386,17 +386,17 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
     else:
         if (get_config_defaults()['plotly_domain']
                 != session.get_session_config()['plotly_domain']):
-            feedback_email = 'feedback@plot.ly'
+            feedback_contact = 'Visit support.plot.ly'
         else:
 
             # different domain likely means enterprise
-            feedback_email = 'support@plot.ly'
+            feedback_contact = 'Contact your On-Premise account executive'
 
         warnings.warn(
             "Looks like you're not using IPython or Sage to embed this "
             "plot. If you just want the *embed code*,\ntry using "
             "`get_embed()` instead."
-            '\nQuestions? {}'.format(feedback_email))
+            '\nQuestions? {}'.format(feedback_contact))
 
 
 ### mpl-related tools ###
@@ -1393,7 +1393,7 @@ def return_figure_from_figure_or_data(figure_or_data, validate_figure):
             raise exceptions.PlotlyEmptyDataError(
                 "Empty data list found. Make sure that you populated the "
                 "list of data objects you're sending and try again.\n"
-                "Questions? support@plot.ly"
+                "Questions? Visit support.plot.ly"
             )
 
     return figure
