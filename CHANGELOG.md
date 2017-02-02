@@ -4,8 +4,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Added
+- `memoize` decorator added to `plotly.utils`
+
 ### Changed
 - a `Grid` from `plotly.grid_objs` now accepts a `pandas.Dataframe` as its argument.
+- computationally-intensive `graph_reference` functions are memoized.
 
 ## [2.0.0] - 2017-01-25
 
