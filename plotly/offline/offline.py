@@ -273,7 +273,7 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
           validate=True, image=None, filename='plot_image', image_width=800,
           image_height=600):
     """
-    Draw plotly graphs inside an IPython or Jupter notebook without
+    Draw plotly graphs inside an IPython or Jupyter notebook without
     connecting to an external server.
     To save the chart to Plotly Cloud or Plotly Enterprise, use
     `plotly.plotly.iplot`.
@@ -337,22 +337,9 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
 
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
 
-    # Display 2 versions of the figure:
-    # - The raw HTML is the "old-school" style - we just throw in a JS script
-    #   inside the cell. This works for a lot of environments but some JS is
-    #   stripped out in some rendering environments / platforms like
-    #   GitHub, nteract, and eventually Plotly
-    # - The custom `mime-types` is the new-school way. nteract supports
-    #   rendering plotly graphs this way (see https://github.com/nteract/nteract/pull/662)
-    #   and others will hopefully follow suite.
-    # Both of these bundles will be saved as part of the notebook. The renderer
-    # will choose which one to render. So 'text/html' is like a fallback for
-    # any environment that doesn't have the 'application/json+plotly.v1'
-    # renderer available.
-    # The bummer is that we're injecting the figure JSON in here twice, so
-    # notebooks that are pretty big are about to get a lot bigger.
-    # The upside is that we're dropping any compatability for older notebook
-    # versions
+    # Though it can add quite a bit to the display-bundle size, we include
+    # multiple representations of the plot so that the display environment can
+    # choose which one to act on.
     data = _json.loads(_json.dumps(figure['data'],
                                    cls=plotly.utils.PlotlyJSONEncoder))
     layout = _json.loads(_json.dumps(figure.get('layout', {}),
