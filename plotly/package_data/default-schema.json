@@ -223,45 +223,42 @@
         }
     },
     "frames": {
-        "baseframe": {
-            "description": "The name of the frame into which this frame's properties are merged before applying. This is used to unify properties and avoid needing to specify the same values for the same properties in multiple frames.",
-            "role": "info",
-            "valType": "string"
+        "items": {
+            "frames_entry": {
+                "baseframe": {
+                    "description": "The name of the frame into which this frame's properties are merged before applying. This is used to unify properties and avoid needing to specify the same values for the same properties in multiple frames.",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "data": {
+                    "description": "A list of traces this frame modifies. The format is identical to the normal trace definition.",
+                    "role": "object",
+                    "valType": "any"
+                },
+                "group": {
+                    "description": "An identifier that specifies the group to which the frame belongs, used by animate to select a subset of frames.",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "layout": {
+                    "description": "Layout properties which this frame modifies. The format is identical to the normal layout definition.",
+                    "role": "object",
+                    "valType": "any"
+                },
+                "name": {
+                    "description": "A label by which to identify the frame",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "role": "object",
+                "traces": {
+                    "description": "A list of trace indices that identify the respective traces in the data attribute",
+                    "role": "info",
+                    "valType": "any"
+                }
+            }
         },
-        "data": {
-            "description": "A list of traces this frame modifies. The format is identical to the normal trace definition.",
-            "role": "data",
-            "valType": "data_array"
-        },
-        "datasrc": {
-            "description": "Sets the source reference on plot.ly for  data .",
-            "role": "info",
-            "valType": "string"
-        },
-        "group": {
-            "description": "An identifier that specifies the group to which the frame belongs, used by animate to select a subset of frames.",
-            "role": "info",
-            "valType": "string"
-        },
-        "layout": {
-            "description": "Layout properties which this frame modifies. The format is identical to the normal layout definition.",
-            "valType": "any"
-        },
-        "name": {
-            "description": "A label by which to identify the frame",
-            "role": "info",
-            "valType": "string"
-        },
-        "traces": {
-            "description": "A list of trace indices that identify the respective traces in the data attribute",
-            "role": "data",
-            "valType": "data_array"
-        },
-        "tracessrc": {
-            "description": "Sets the source reference on plot.ly for  traces .",
-            "role": "info",
-            "valType": "string"
-        }
+        "role": "object"
     },
     "layout": {
         "layoutAttributes": {
@@ -451,6 +448,17 @@
                             "role": "style",
                             "valType": "number"
                         },
+                        "clicktoshow": {
+                            "description": "Makes this annotation respond to clicks on the plot. If you click a data point that exactly matches the `x` and `y` values of this annotation, and it is hidden (visible: false), it will appear. In *onoff* mode, you must click the same point again to make it disappear, so if you click multiple points, you can show multiple annotations. In *onout* mode, a click anywhere else in the plot (on another data point or not) will hide this annotation. If you need to show/hide this annotation in response to different `x` or `y` values, you can set `xclick` and/or `yclick`. This is useful for example to label the side of a bar. To label markers though, `standoff` is preferred over `xclick` and `yclick`.",
+                            "dflt": false,
+                            "role": "style",
+                            "valType": "enumerated",
+                            "values": [
+                                false,
+                                "onoff",
+                                "onout"
+                            ]
+                        },
                         "font": {
                             "color": {
                                 "role": "style",
@@ -486,6 +494,13 @@
                             "role": "style",
                             "valType": "boolean"
                         },
+                        "standoff": {
+                            "description": "Sets a distance, in pixels, to move the arrowhead away from the position it is pointing at, for example to point at the edge of a marker independent of zoom.",
+                            "dflt": 0,
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
                         "text": {
                             "description": "Sets the text associated with this annotation. Plotly uses a subset of HTML tags to do things like newline (<br>), bold (<b></b>), italics (<i></i>), hyperlinks (<a href='...'></a>). Tags <em>, <sup>, <sub> <span> are also supported.",
                             "role": "info",
@@ -509,7 +524,7 @@
                             "valType": "any"
                         },
                         "xanchor": {
-                            "description": "Sets the annotation's horizontal position anchor This anchor binds the `x` position to the *left*, *center* or *right* of the annotation. For example, if `x` is set to 1, `xref` to *paper* and `xanchor` to *right* then the right-most portion of the annotation lines up with the right-most edge of the plotting area. If *auto*, the anchor is equivalent to *center* for data-referenced annotations whereas for paper-referenced, the anchor picked corresponds to the closest side.",
+                            "description": "Sets the text box's horizontal position anchor This anchor binds the `x` position to the *left*, *center* or *right* of the annotation. For example, if `x` is set to 1, `xref` to *paper* and `xanchor` to *right* then the right-most portion of the annotation lines up with the right-most edge of the plotting area. If *auto*, the anchor is equivalent to *center* for data-referenced annotations or if there is an arrow, whereas for paper-referenced with no arrow, the anchor picked corresponds to the closest side.",
                             "dflt": "auto",
                             "role": "info",
                             "valType": "enumerated",
@@ -519,6 +534,11 @@
                                 "center",
                                 "right"
                             ]
+                        },
+                        "xclick": {
+                            "description": "Toggle this annotation when clicking a data point whose `x` value is `xclick` rather than the annotation's `x` value.",
+                            "role": "info",
+                            "valType": "any"
                         },
                         "xref": {
                             "description": "Sets the annotation's x coordinate axis. If set to an x axis id (e.g. *x* or *x2*), the `x` position refers to an x coordinate If set to *paper*, the `x` position refers to the distance from the left side of the plotting area in normalized coordinates where 0 (1) corresponds to the left (right) side.",
@@ -535,7 +555,7 @@
                             "valType": "any"
                         },
                         "yanchor": {
-                            "description": "Sets the annotation's vertical position anchor This anchor binds the `y` position to the *top*, *middle* or *bottom* of the annotation. For example, if `y` is set to 1, `yref` to *paper* and `yanchor` to *top* then the top-most portion of the annotation lines up with the top-most edge of the plotting area. If *auto*, the anchor is equivalent to *middle* for data-referenced annotations whereas for paper-referenced, the anchor picked corresponds to the closest side.",
+                            "description": "Sets the text box's vertical position anchor This anchor binds the `y` position to the *top*, *middle* or *bottom* of the annotation. For example, if `y` is set to 1, `yref` to *paper* and `yanchor` to *top* then the top-most portion of the annotation lines up with the top-most edge of the plotting area. If *auto*, the anchor is equivalent to *middle* for data-referenced annotations or if there is an arrow, whereas for paper-referenced with no arrow, the anchor picked corresponds to the closest side.",
                             "dflt": "auto",
                             "role": "info",
                             "valType": "enumerated",
@@ -545,6 +565,11 @@
                                 "middle",
                                 "bottom"
                             ]
+                        },
+                        "yclick": {
+                            "description": "Toggle this annotation when clicking a data point whose `y` value is `yclick` rather than the annotation's `y` value.",
+                            "role": "info",
+                            "valType": "any"
                         },
                         "yref": {
                             "description": "Sets the annotation's y coordinate axis. If set to an y axis id (e.g. *y* or *y2*), the `y` position refers to an y coordinate If set to *paper*, the `y` position refers to the distance from the bottom of the plotting area in normalized coordinates where 0 (1) corresponds to the bottom (top).",
@@ -1910,12 +1935,6 @@
                             "B"
                         ]
                     },
-                    "fixedrange": {
-                        "description": "Determines whether or not this axis is zoom-able. If true, then zoom is disabled.",
-                        "dflt": false,
-                        "role": "info",
-                        "valType": "boolean"
-                    },
                     "gridcolor": {
                         "description": "Sets the color of the grid lines.",
                         "dflt": "rgb(204, 204, 204)",
@@ -2343,12 +2362,6 @@
                             "B"
                         ]
                     },
-                    "fixedrange": {
-                        "description": "Determines whether or not this axis is zoom-able. If true, then zoom is disabled.",
-                        "dflt": false,
-                        "role": "info",
-                        "valType": "boolean"
-                    },
                     "gridcolor": {
                         "description": "Sets the color of the grid lines.",
                         "dflt": "rgb(204, 204, 204)",
@@ -2775,12 +2788,6 @@
                             "SI",
                             "B"
                         ]
-                    },
-                    "fixedrange": {
-                        "description": "Determines whether or not this axis is zoom-able. If true, then zoom is disabled.",
-                        "dflt": false,
-                        "role": "info",
-                        "valType": "boolean"
                     },
                     "gridcolor": {
                         "description": "Sets the color of the grid lines.",
@@ -10707,6 +10714,36 @@
                     "role": "style",
                     "valType": "boolean"
                 },
+                "cumulative": {
+                    "currentbin": {
+                        "description": "Only applies if cumulative is enabled. Sets whether the current bin is included, excluded, or has half of its value included in the current cumulative value. *include* is the default for compatibility with various other tools, however it introduces a half-bin bias to the results. *exclude* makes the opposite half-bin bias, and *half* removes it.",
+                        "dflt": "include",
+                        "role": "info",
+                        "valType": "enumerated",
+                        "values": [
+                            "include",
+                            "exclude",
+                            "half"
+                        ]
+                    },
+                    "direction": {
+                        "description": "Only applies if cumulative is enabled. If *increasing* (default) we sum all prior bins, so the result increases from left to right. If *decreasing* we sum later bins so the result decreases from left to right.",
+                        "dflt": "increasing",
+                        "role": "info",
+                        "valType": "enumerated",
+                        "values": [
+                            "increasing",
+                            "decreasing"
+                        ]
+                    },
+                    "enabled": {
+                        "description": "If true, display the cumulative distribution by summing the binned values. Use the `direction` and `centralbin` attributes to tune the accumulation method. Note: in this mode, the *density* `histnorm` settings behave the same as their equivalents without *density*: ** and *density* both rise to the number of data points, and *probability* and *probability density* both rise to the number of sample points.",
+                        "dflt": false,
+                        "role": "info",
+                        "valType": "boolean"
+                    },
+                    "role": "object"
+                },
                 "error_x": {
                     "_deprecated": {
                         "opacity": {
@@ -10927,7 +10964,7 @@
                     ]
                 },
                 "histnorm": {
-                    "description": "Specifies the type of normalization used for this histogram trace. If **, the span of each bar corresponds to the number of occurrences (i.e. the number of data points lying inside the bins). If *percent*, the span of each bar corresponds to the percentage of occurrences with respect to the total number of sample points (here, the sum of all bin area equals 100%). If *density*, the span of each bar corresponds to the number of occurrences in a bin divided by the size of the bin interval (here, the sum of all bin area equals the total number of sample points). If *probability density*, the span of each bar corresponds to the probability that an event will fall into the corresponding bin (here, the sum of all bin area equals 1).",
+                    "description": "Specifies the type of normalization used for this histogram trace. If **, the span of each bar corresponds to the number of occurrences (i.e. the number of data points lying inside the bins). If *percent* / *probability*, the span of each bar corresponds to the percentage / fraction of occurrences with respect to the total number of sample points (here, the sum of all bin HEIGHTS equals 100% / 1). If *density*, the span of each bar corresponds to the number of occurrences in a bin divided by the size of the bin interval (here, the sum of all bin AREAS equals the total number of sample points). If *probability density*, the area of each bar corresponds to the probability that an event will fall into the corresponding bin (here, the sum of all bin AREAS equals 1).",
                     "dflt": "",
                     "role": "style",
                     "valType": "enumerated",
@@ -12059,7 +12096,7 @@
                     ]
                 },
                 "histnorm": {
-                    "description": "Specifies the type of normalization used for this histogram trace. If **, the span of each bar corresponds to the number of occurrences (i.e. the number of data points lying inside the bins). If *percent*, the span of each bar corresponds to the percentage of occurrences with respect to the total number of sample points (here, the sum of all bin area equals 100%). If *density*, the span of each bar corresponds to the number of occurrences in a bin divided by the size of the bin interval (here, the sum of all bin area equals the total number of sample points). If *probability density*, the span of each bar corresponds to the probability that an event will fall into the corresponding bin (here, the sum of all bin area equals 1).",
+                    "description": "Specifies the type of normalization used for this histogram trace. If **, the span of each bar corresponds to the number of occurrences (i.e. the number of data points lying inside the bins). If *percent* / *probability*, the span of each bar corresponds to the percentage / fraction of occurrences with respect to the total number of sample points (here, the sum of all bin HEIGHTS equals 100% / 1). If *density*, the span of each bar corresponds to the number of occurrences in a bin divided by the size of the bin interval (here, the sum of all bin AREAS equals the total number of sample points). If *probability density*, the area of each bar corresponds to the probability that an event will fall into the corresponding bin (here, the sum of all bin AREAS equals 1).",
                     "dflt": "",
                     "role": "style",
                     "valType": "enumerated",
@@ -12796,7 +12833,7 @@
                     ]
                 },
                 "histnorm": {
-                    "description": "Specifies the type of normalization used for this histogram trace. If **, the span of each bar corresponds to the number of occurrences (i.e. the number of data points lying inside the bins). If *percent*, the span of each bar corresponds to the percentage of occurrences with respect to the total number of sample points (here, the sum of all bin area equals 100%). If *density*, the span of each bar corresponds to the number of occurrences in a bin divided by the size of the bin interval (here, the sum of all bin area equals the total number of sample points). If *probability density*, the span of each bar corresponds to the probability that an event will fall into the corresponding bin (here, the sum of all bin area equals 1).",
+                    "description": "Specifies the type of normalization used for this histogram trace. If **, the span of each bar corresponds to the number of occurrences (i.e. the number of data points lying inside the bins). If *percent* / *probability*, the span of each bar corresponds to the percentage / fraction of occurrences with respect to the total number of sample points (here, the sum of all bin HEIGHTS equals 100% / 1). If *density*, the span of each bar corresponds to the number of occurrences in a bin divided by the size of the bin interval (here, the sum of all bin AREAS equals the total number of sample points). If *probability density*, the area of each bar corresponds to the probability that an event will fall into the corresponding bin (here, the sum of all bin AREAS equals 1).",
                     "dflt": "",
                     "role": "style",
                     "valType": "enumerated",
