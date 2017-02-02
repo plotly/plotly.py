@@ -822,8 +822,9 @@ class Annotation(PlotlyDict):
     
         ['align', 'arrowcolor', 'arrowhead', 'arrowsize', 'arrowwidth', 'ax',
         'axref', 'ay', 'ayref', 'bgcolor', 'bordercolor', 'borderpad',
-        'borderwidth', 'font', 'opacity', 'ref', 'showarrow', 'text',
-        'textangle', 'visible', 'x', 'xanchor', 'xref', 'y', 'yanchor', 'yref']
+        'borderwidth', 'clicktoshow', 'font', 'opacity', 'ref', 'showarrow',
+        'standoff', 'text', 'textangle', 'visible', 'x', 'xanchor', 'xclick',
+        'xref', 'y', 'yanchor', 'yclick', 'yref']
     
     Run `<annotation-object>.help('attribute')` on any of the above.
     '<annotation-object>' is the object at []
@@ -1308,10 +1309,10 @@ class Histogram(PlotlyDict):
     """
     Valid attributes for 'histogram' at path [] under parents ():
     
-        ['autobinx', 'autobiny', 'bardir', 'error_x', 'error_y', 'histfunc',
-        'histnorm', 'hoverinfo', 'legendgroup', 'marker', 'name', 'nbinsx',
-        'nbinsy', 'opacity', 'orientation', 'showlegend', 'stream', 'text',
-        'textsrc', 'type', 'uid', 'visible', 'x', 'xaxis', 'xbins',
+        ['autobinx', 'autobiny', 'bardir', 'cumulative', 'error_x', 'error_y',
+        'histfunc', 'histnorm', 'hoverinfo', 'legendgroup', 'marker', 'name',
+        'nbinsx', 'nbinsy', 'opacity', 'orientation', 'showlegend', 'stream',
+        'text', 'textsrc', 'type', 'uid', 'visible', 'x', 'xaxis', 'xbins',
         'xcalendar', 'xsrc', 'y', 'yaxis', 'ybins', 'ycalendar', 'ysrc']
     
     Run `<histogram-object>.help('attribute')` on any of the above.
@@ -1777,9 +1778,9 @@ class ZAxis(PlotlyDict):
     
         ['autorange', 'backgroundcolor', 'calendar', 'categoryarray',
         'categoryarraysrc', 'categoryorder', 'color', 'dtick',
-        'exponentformat', 'fixedrange', 'gridcolor', 'gridwidth',
-        'hoverformat', 'linecolor', 'linewidth', 'mirror', 'nticks', 'range',
-        'rangemode', 'separatethousands', 'showaxeslabels', 'showbackground',
+        'exponentformat', 'gridcolor', 'gridwidth', 'hoverformat', 'linecolor',
+        'linewidth', 'mirror', 'nticks', 'range', 'rangemode',
+        'separatethousands', 'showaxeslabels', 'showbackground',
         'showexponent', 'showgrid', 'showline', 'showspikes', 'showticklabels',
         'showtickprefix', 'showticksuffix', 'spikecolor', 'spikesides',
         'spikethickness', 'tick0', 'tickangle', 'tickcolor', 'tickfont',
