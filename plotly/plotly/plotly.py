@@ -588,15 +588,15 @@ class Stream:
 
         positional arguments:
         trace - A valid plotly trace object (e.g., Scatter, Heatmap, etc.).
-                Not all keys in these are `stremable` run help(Obj) on the type
-                of trace your trying to stream, for each valid key, if the key
+                Not all keys among these are `streamable`. Run help(Obj) on the type
+                of trace you are trying to stream. For each valid key, if the key
                 is streamable, it will say 'streamable = True'. Trace objects
                 must be dictionary-like.
 
         keyword arguments:
         layout (default=None) - A valid Layout object
                                 Run help(plotly.graph_objs.Layout)
-        validate (default = True) - Validate this stream before sending?
+        validate (default=True) - Validate this stream before sending?
                                     This will catch local errors if set to
                                     True.
 
