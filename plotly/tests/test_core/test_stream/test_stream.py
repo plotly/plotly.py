@@ -5,13 +5,13 @@ Streaming tests.
 from __future__ import absolute_import
 
 import time
-from unittest import TestCase
 
 from nose.plugins.attrib import attr
 
 import plotly.plotly as py
 from plotly.graph_objs import (Layout, Scatter, Stream)
 from plotly import exceptions
+from plotly.tests.utils import PlotlyTestCase
 
 un = 'PythonAPI'
 ak = 'ubpiol2cve'
@@ -22,9 +22,10 @@ config = {'plotly_domain': 'https://plot.ly',
           'plotly_ssl_verification': False}
 
 
-class TestStreaming(TestCase):
+class TestStreaming(PlotlyTestCase):
 
     def setUp(self):
+        super(TestStreaming, self).setUp()
         py.sign_in(un, ak, **config)
 
     @attr('slow')
