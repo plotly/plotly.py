@@ -2,15 +2,15 @@ from __future__ import absolute_import
 
 from nose.plugins.attrib import attr
 
+from plotly import optional_imports
 from plotly.tests.utils import compare_dict
 from plotly.tests.test_optional.optional_utils import run_fig
 from plotly.tests.test_optional.test_matplotlylib.data.bars import *
 
-# TODO: matplotlib-build-wip
-from plotly.tools import _matplotlylib_imported
-if _matplotlylib_imported:
-    import matplotlib
+matplotlylib = optional_imports.get_module('plotly.matplotlylib')
 
+if matplotlylib:
+    import matplotlib
     # Force matplotlib to not use any Xwindows backend.
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt

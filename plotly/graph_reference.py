@@ -4,19 +4,14 @@ This module handles accessing, storing, and managing the graph reference.
 """
 from __future__ import absolute_import
 
-import hashlib
-import json
 import os
 import re
 from pkg_resources import resource_string
 
-import requests
 import six
+from requests.compat import json as _json
 
-from plotly import files, utils
-
-GRAPH_REFERENCE_PATH = '/v2/plot-schema'
-GRAPH_REFERENCE_DOWNLOAD_TIMEOUT = 5  # seconds
+from plotly import utils
 
 
 # For backwards compat, we keep this list of previously known objects.
@@ -38,6 +33,7 @@ _BACKWARDS_COMPAT_CLASS_NAMES = {
     'ErrorZ': {'object_name': 'error_z', 'base_type': dict},
     'Figure': {'object_name': 'figure', 'base_type': dict},
     'Font': {'object_name': 'font', 'base_type': dict},
+    'Frames': {'object_name': 'frames', 'base_type': list},
     'Heatmap': {'object_name': 'heatmap', 'base_type': dict},
     'Histogram': {'object_name': 'histogram', 'base_type': dict},
     'Histogram2d': {'object_name': 'histogram2d', 'base_type': dict},
@@ -65,48 +61,69 @@ _BACKWARDS_COMPAT_CLASS_NAMES = {
 
 def get_graph_reference():
     """
-    Attempts to load local copy of graph reference or makes GET request if DNE.
+    Load graph reference JSON (aka plot-schema)
 
     :return: (dict) The graph reference.
-    :raises: (PlotlyError) When graph reference DNE and GET request fails.
 
     """
-    default_config = files.FILE_CONTENT[files.CONFIG_FILE]
-    if files.check_file_permissions():
-        graph_reference = utils.load_json_dict(files.GRAPH_REFERENCE_FILE)
-        config = utils.load_json_dict(files.CONFIG_FILE)
+    path = os.path.join('package_data', 'default-schema.json')
+    s = resource_string('plotly', path).decode('utf-8')
+    graph_reference = utils.decode_unicode(_json.loads(s))
 
-        # TODO: https://github.com/plotly/python-api/issues/293
-        plotly_api_domain = config.get('plotly_api_domain',
-                                       default_config['plotly_api_domain'])
-    else:
-        graph_reference = {}
-        plotly_api_domain = default_config['plotly_api_domain']
+    # TODO: Patch in frames info until it hits streambed. See #659
+    graph_reference['frames'] = {
+          "items": {
+              "frames_entry": {
+                  "baseframe": {
+                      "description": "The name of the frame into which this "
+                                     "frame's properties are merged before "
+                                     "applying. This is used to unify "
+                                     "properties and avoid needing to specify "
+                                     "the same values for the same properties "
+                                     "in multiple frames.",
+                      "role": "info",
+                      "valType": "string"
+                  },
+                  "data": {
+                      "description": "A list of traces this frame modifies. "
+                                     "The format is identical to the normal "
+                                     "trace definition.",
+                      "role": "object",
+                      "valType": "any"
+                  },
+                  "group": {
+                      "description": "An identifier that specifies the group "
+                                     "to which the frame belongs, used by "
+                                     "animate to select a subset of frames.",
+                      "role": "info",
+                      "valType": "string"
+                  },
+                  "layout": {
+                      "role": "object",
+                      "description": "Layout properties which this frame "
+                                     "modifies. The format is identical to "
+                                     "the normal layout definition.",
+                      "valType": "any"
+                  },
+                  "name": {
+                      "description": "A label by which to identify the frame",
+                      "role": "info",
+                      "valType": "string"
+                  },
+                  "role": "object",
+                  "traces": {
+                      "description": "A list of trace indices that identify "
+                                     "the respective traces in the data "
+                                     "attribute",
+                      "role": "info",
+                      "valType": "info_array"
+                  }
+              }
+          },
+          "role": "object"
+    }
 
-    sha1 = hashlib.sha1(six.b(str(graph_reference))).hexdigest()
-
-    graph_reference_url = '{}{}?sha1={}'.format(plotly_api_domain,
-                                                GRAPH_REFERENCE_PATH, sha1)
-
-    try:
-        response = requests.get(graph_reference_url,
-                                timeout=GRAPH_REFERENCE_DOWNLOAD_TIMEOUT)
-        response.raise_for_status()
-    except requests.exceptions.RequestException:
-        if not graph_reference:
-            path = os.path.join('graph_reference', 'default-schema.json')
-            s = resource_string('plotly', path).decode('utf-8')
-            graph_reference = json.loads(s)
-    else:
-        if six.PY3:
-            content = str(response.content, encoding='utf-8')
-        else:
-            content = response.content
-        data = json.loads(content)
-        if data['modified']:
-            graph_reference = data['schema']
-
-    return utils.decode_unicode(graph_reference)
+    return graph_reference
 
 
 def string_to_class_name(string):
@@ -172,6 +189,27 @@ def get_attributes_dicts(object_name, parent_object_names=()):
     # We should also one or more paths where attributes are defined.
     attribute_paths = list(object_dict['attribute_paths'])  # shallow copy
 
+    # Map frame 'data' and 'layout' to previously-defined figure attributes.
+    # Examples of parent_object_names changes:
+    #   ['figure', 'frames'] --> ['figure', 'frames']
+    #   ['figure', 'frames', FRAME_NAME] --> ['figure']
+    #   ['figure', 'frames', FRAME_NAME, 'data'] --> ['figure', 'data']
+    #   ['figure', 'frames', FRAME_NAME, 'layout'] --> ['figure', 'layout']
+    #   ['figure', 'frames', FRAME_NAME, 'foo'] -->
+    #     ['figure', 'frames', FRAME_NAME, 'foo']
+    #   [FRAME_NAME, 'layout'] --> ['figure', 'layout']
+    if FRAME_NAME in parent_object_names:
+        len_parent_object_names = len(parent_object_names)
+        index = parent_object_names.index(FRAME_NAME)
+        if len_parent_object_names == index + 1:
+            if object_name in ('data', 'layout'):
+                parent_object_names = ['figure', object_name]
+        elif len_parent_object_names > index + 1:
+            if parent_object_names[index + 1] in ('data', 'layout'):
+                parent_object_names = (
+                    ['figure'] + list(parent_object_names)[index + 1:]
+                )
+
     # If we have parent_names, some of these attribute paths may be invalid.
     for parent_object_name in reversed(parent_object_names):
         if parent_object_name in ARRAYS:
@@ -191,22 +229,26 @@ def get_attributes_dicts(object_name, parent_object_names=()):
     return attributes_dicts
 
 
-def get_valid_attributes(object_name, parent_object_names=()):
+@utils.memoize()
+def _get_valid_attributes(object_name, parent_object_names):
     attributes = get_attributes_dicts(object_name, parent_object_names)
     # These are for documentation and quick lookups. They're just strings.
     valid_attributes = set()
     for attributes_dict in attributes.values():
-
         for key, val in attributes_dict.items():
             if key not in GRAPH_REFERENCE['defs']['metaKeys']:
                 valid_attributes.add(key)
-
         deprecated_attributes = attributes_dict.get('_deprecated', {})
         for key, val in deprecated_attributes.items():
             if key not in GRAPH_REFERENCE['defs']['metaKeys']:
                 valid_attributes.add(key)
 
     return valid_attributes
+
+
+def get_valid_attributes(object_name, parent_object_names=()):
+    # Enforce that parent_object_names is hashable (a tuple).
+    return _get_valid_attributes(object_name, tuple(parent_object_names))
 
 
 def get_deprecated_attributes(object_name, parent_object_names=()):
@@ -304,21 +346,10 @@ def attribute_path_to_object_names(attribute_container_path):
     return tuple(object_names)
 
 
-def get_role(object_name, attribute, value=None, parent_object_names=()):
-    """
-    Values have types associated with them based on graph_reference.
-
-    'data' type values are always kept
-    'style' values are kept if they're sequences (but not strings)
-
-    :param (str) object_name: The name of the object containing 'attribute'.
-    :param (str) attribute: The attribute we want the `role` of.
-    :param (*) value: If the value is an array, the return can be different.
-    :param parent_object_names: An iterable of obj names from graph reference.
-    :returns: (str) This will be 'data', 'style', or 'info'.
-
-    """
-    if object_name in TRACE_NAMES and attribute == 'type':
+@utils.memoize()
+def _get_role(object_name, attribute, value_type, parent_object_names=()):
+    """Private, more easily memoized version of get_role."""
+    if attribute == 'type' and object_name in TRACE_NAMES:
         return 'info'
     attributes_dicts = get_attributes_dicts(object_name, parent_object_names)
     matches = []
@@ -336,12 +367,8 @@ def get_role(object_name, attribute, value=None, parent_object_names=()):
     for match in matches:
         role = match['role']
         array_ok = match.get('arrayOk')
-        if value is not None and array_ok:
-            iterable = hasattr(value, '__iter__')
-            stringy = isinstance(value, six.string_types)
-            dicty = isinstance(value, dict)
-            if iterable and not stringy and not dicty:
-                role = 'data'
+        if array_ok and value_type == 'array':
+            role = 'data'
         roles.append(role)
 
     # TODO: this is ambiguous until the figure is in place...
@@ -350,6 +377,36 @@ def get_role(object_name, attribute, value=None, parent_object_names=()):
     else:
         role = roles[0]
     return role
+
+
+def get_role(object_name, attribute, value=None, parent_object_names=()):
+    """
+    Values have types associated with them based on graph_reference.
+
+    'data' type values are always kept
+    'style' values are kept if they're sequences (but not strings)
+
+    :param (str) object_name: The name of the object containing 'attribute'.
+    :param (str) attribute: The attribute we want the `role` of.
+    :param (*) value: If the value is an array, the return can be different.
+    :param parent_object_names: An iterable of obj names from graph reference.
+    :returns: (str) This will be 'data', 'style', or 'info'.
+
+    """
+    if value is None:
+        value_type = 'none'
+    elif isinstance(value, dict):
+        value_type = 'dict'
+    elif isinstance(value, six.string_types):
+        value_type = 'string'
+    elif hasattr(value, '__iter__'):
+        value_type = 'array'
+    else:
+        value_type = 'unknown'
+
+    # Enforce that parent_object_names is hashable (a tuple).
+    return _get_role(object_name, attribute, value_type,
+                     tuple(parent_object_names))
 
 
 def _is_valid_sub_path(path, parent_paths):
@@ -448,8 +505,11 @@ def _patch_objects():
                          'attribute_paths': layout_attribute_paths,
                          'additional_attributes': {}}
 
-    figure_attributes = {'layout': {'role': 'object'},
-                         'data': {'role': 'object', '_isLinkedToArray': True}}
+    figure_attributes = {
+        'layout': {'role': 'object'},
+        'data': {'role': 'object', '_isLinkedToArray': True},
+        'frames': {'role': 'object', '_isLinkedToArray': True}
+    }
     OBJECTS['figure'] = {'meta_paths': [],
                          'attribute_paths': [],
                          'additional_attributes': figure_attributes}
@@ -516,6 +576,8 @@ def _get_classes():
 
 # The ordering here is important.
 GRAPH_REFERENCE = get_graph_reference()
+
+FRAME_NAME = list(GRAPH_REFERENCE['frames']['items'].keys())[0]
 
 # See http://blog.labix.org/2008/06/27/watch-out-for-listdictkeys-in-python-3
 TRACE_NAMES = list(GRAPH_REFERENCE['traces'].keys())

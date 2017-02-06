@@ -14,7 +14,7 @@ git clone https://github.com/plotly/python-api.git
 
 ###Submodules
 
-Second, this project uses git submodules! There both helpful and, at times, difficult to work with. The good news is you probably don't need to think about them! Just run the following shell command to make sure that your local repo is wired properly:
+Second, this project uses git submodules! They're both helpful and, at times, difficult to work with. The good news is you probably don't need to think about them! Just run the following shell command to make sure that your local repo is wired properly:
 
 **DO THIS (run this command in your new `plotly-api` directory)**
 
@@ -100,9 +100,12 @@ pip install -r optional-requirements.txt
 
 ##Testing
 
-Our API uses Nose to run tests. (https://nose.readthedocs.org/en/latest/)
+We take advantage of two tools to run tests:
 
-###Running Tests
+* [`tox`](https://tox.readthedocs.io/en/latest/), which is both a virtualenv management and test tool.
+* [`nose`](https://nose.readthedocs.org/en/latest/), which is is an extension of Python's unittest
+
+###Running Tests with `nose`
 
 Since our tests cover *all* the functionality, to prevent tons of errors from showing up and having to parse through a messy output, you'll need to install `optional-requirements.txt` as explained above.
 
@@ -128,6 +131,47 @@ nosetests -w plotly/tests/test_plotly
 
 ```bash
 nosetests plotly/tests/test_plotly/test_plot.py
+```
+
+###Running tests with `tox`
+
+Running tests with tox is much more powerful, but requires a bit more setup.
+
+You'll need to export an environment variable for *each* tox environment you wish to test with. For example, if you want to test with `Python 2.7` and
+`Python 3.4`, but only care to check the `core` specs, you would need to ensure that the following variables are exported:
+
+```
+export PLOTLY_TOX_PYTHON_27=<python binary>
+export PLOTLY_TOX_PYTHON_34=<python binary>
+```
+
+Where the `<python binary` is going to be specific to your development setup. As a more complete example, you might have this loaded in a `.bash_profile` (or equivalent shell loader):
+
+```bash
+############
+# tox envs #
+############
+
+export PLOTLY_TOX_PYTHON_27=python2.7
+export PLOTLY_TOX_PYTHON_34=python3.4
+export TOXENV=py27-core,py34-core
+```
+
+Where `TOXENV` is the environment list you want to use when invoking `tox` from the command line. Note that the `PLOTLY_TOX_*` pattern is used to pass in variables for use in the `tox.ini` file. Though this is a little setup, intensive, you'll get the following benefits:
+
+* `tox` will automatically manage a virtual env for each environment you want to test in.
+* You only have to run `tox` and know that the module is working in both `Python 2` and `Python 3`.
+
+Finally, `tox` allows you to pass in additional command line arguments that are formatted in (by us) in the `tox.ini` file, see `{posargs}`. This is setup to help with our `nose attr` configuration. To run only tests that are *not* tagged with `slow`, you could use the following command:
+
+```bash
+tox -- -a '!slow'
+```
+
+Note that anything after `--` is substituted in for `{posargs}` in the tox.ini. For completeness, because it's reasonably confusing, if you want to force a match for *multiple* `nose attr` tags, you comma-separate the tags like so:
+
+```bash
+tox -- -a '!slow','!matplotlib'
 ```
 
 ###Writing Tests

@@ -7,19 +7,19 @@ A module intended for use with Nose.
 """
 import random
 import string
-import requests
-from unittest import TestCase
 
 from nose.plugins.attrib import attr
 
 import plotly.plotly as py
 from plotly.exceptions import PlotlyRequestError
+from plotly.tests.utils import PlotlyTestCase
 
 
 @attr('slow')
-class FolderAPITestCase(TestCase):
+class FolderAPITestCase(PlotlyTestCase):
 
     def setUp(self):
+        super(FolderAPITestCase, self).setUp()
         py.sign_in('PythonTest', '9v9f20pext')
 
     def _random_filename(self):
@@ -49,7 +49,7 @@ class FolderAPITestCase(TestCase):
         py.file_ops.mkdirs(first_folder)
         try:
             py.file_ops.mkdirs(first_folder)
-        except requests.exceptions.RequestException as e:
-            self.assertTrue(400 <= e.response.status_code < 500)
+        except PlotlyRequestError as e:
+            self.assertTrue(400 <= e.status_code < 500)
         else:
             self.fail('Expected this to fail!')

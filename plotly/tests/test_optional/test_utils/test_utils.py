@@ -5,8 +5,8 @@ Module to test plotly.utils with optional dependencies.
 from __future__ import absolute_import
 
 import datetime
-import json
 import math
+import decimal
 from datetime import datetime as dt
 from unittest import TestCase
 
@@ -15,14 +15,15 @@ import pandas as pd
 import pytz
 from nose.plugins.attrib import attr
 from pandas.util.testing import assert_series_equal
+from requests.compat import json as _json
 
-from plotly import utils
+from plotly import optional_imports, utils
 from plotly.graph_objs import Scatter, Scatter3d, Figure, Data
 from plotly.grid_objs import Column
 
-# TODO: matplotlib-build-wip
-from plotly.tools import _matplotlylib_imported
-if _matplotlylib_imported:
+matplotlylib = optional_imports.get_module('plotly.matplotlylib')
+
+if matplotlylib:
     import matplotlib.pyplot as plt
     from plotly.matplotlylib import Exporter, PlotlyRenderer
 
@@ -149,6 +150,13 @@ class TestJSONEncoder(TestCase):
         )
         self.assertEqual(res, '2013-10-01 00:00:00.000010')
 
+    def test_encode_as_decimal(self):
+
+        # should work with decimal values
+        res = utils.PlotlyJSONEncoder.encode_as_decimal(decimal.Decimal(1.023452))
+
+        self.assertAlmostEqual(res, 1.023452) # Checks upto 7 decimal places
+        self.assertIsInstance(res, float)
 
 ## JSON encoding
 numeric_list = [1, 2, 3]
@@ -171,7 +179,7 @@ def test_column_json_encoding():
         Column(mixed_list, 'col 2'),
         Column(np_list, 'col 3')
     ]
-    json_columns = json.dumps(
+    json_columns = _json.dumps(
         columns, cls=utils.PlotlyJSONEncoder, sort_keys=True
     )
     assert('[{"data": [1, 2, 3], "name": "col 1"}, '
@@ -190,8 +198,8 @@ def test_figure_json_encoding():
     data = Data([s1, s2])
     figure = Figure(data=data)
 
-    js1 = json.dumps(s1, cls=utils.PlotlyJSONEncoder, sort_keys=True)
-    js2 = json.dumps(s2, cls=utils.PlotlyJSONEncoder, sort_keys=True)
+    js1 = _json.dumps(s1, cls=utils.PlotlyJSONEncoder, sort_keys=True)
+    js2 = _json.dumps(s2, cls=utils.PlotlyJSONEncoder, sort_keys=True)
 
     assert(js1 == '{"type": "scatter3d", "x": [1, 2, 3], '
                   '"y": [1, 2, 3, null, null, null, "2014-01-05"], '
@@ -200,8 +208,8 @@ def test_figure_json_encoding():
     assert(js2 == '{"type": "scatter", "x": [1, 2, 3]}')
 
     # Test JSON encoding works
-    json.dumps(data, cls=utils.PlotlyJSONEncoder, sort_keys=True)
-    json.dumps(figure, cls=utils.PlotlyJSONEncoder, sort_keys=True)
+    _json.dumps(data, cls=utils.PlotlyJSONEncoder, sort_keys=True)
+    _json.dumps(figure, cls=utils.PlotlyJSONEncoder, sort_keys=True)
 
     # Test data wasn't mutated
     assert(bool(np.asarray(np_list ==
@@ -213,18 +221,18 @@ def test_figure_json_encoding():
 
 
 def test_datetime_json_encoding():
-    j1 = json.dumps(dt_list, cls=utils.PlotlyJSONEncoder)
+    j1 = _json.dumps(dt_list, cls=utils.PlotlyJSONEncoder)
     assert(j1 == '["2014-01-05", '
                  '"2014-01-05 01:01:01", '
                  '"2014-01-05 01:01:01.000001"]')
-    j2 = json.dumps({"x": dt_list}, cls=utils.PlotlyJSONEncoder)
+    j2 = _json.dumps({"x": dt_list}, cls=utils.PlotlyJSONEncoder)
     assert(j2 == '{"x": ["2014-01-05", '
                  '"2014-01-05 01:01:01", '
                  '"2014-01-05 01:01:01.000001"]}')
 
 
 def test_pandas_json_encoding():
-    j1 = json.dumps(df['col 1'], cls=utils.PlotlyJSONEncoder)
+    j1 = _json.dumps(df['col 1'], cls=utils.PlotlyJSONEncoder)
     assert(j1 == '[1, 2, 3, "2014-01-05", null, null, null]')
 
     # Test that data wasn't mutated
@@ -232,28 +240,28 @@ def test_pandas_json_encoding():
                         pd.Series([1, 2, 3, dt(2014, 1, 5),
                                    pd.NaT, np.NaN, np.Inf], name='col 1'))
 
-    j2 = json.dumps(df.index, cls=utils.PlotlyJSONEncoder)
+    j2 = _json.dumps(df.index, cls=utils.PlotlyJSONEncoder)
     assert(j2 == '[0, 1, 2, 3, 4, 5, 6]')
 
     nat = [pd.NaT]
-    j3 = json.dumps(nat, cls=utils.PlotlyJSONEncoder)
+    j3 = _json.dumps(nat, cls=utils.PlotlyJSONEncoder)
     assert(j3 == '[null]')
     assert(nat[0] is pd.NaT)
 
-    j4 = json.dumps(rng, cls=utils.PlotlyJSONEncoder)
+    j4 = _json.dumps(rng, cls=utils.PlotlyJSONEncoder)
     assert(j4 == '["2011-01-01", "2011-01-01 01:00:00"]')
 
-    j5 = json.dumps(ts, cls=utils.PlotlyJSONEncoder)
+    j5 = _json.dumps(ts, cls=utils.PlotlyJSONEncoder)
     assert(j5 == '[1.5, 2.5]')
     assert_series_equal(ts, pd.Series([1.5, 2.5], index=rng))
 
-    j6 = json.dumps(ts.index, cls=utils.PlotlyJSONEncoder)
+    j6 = _json.dumps(ts.index, cls=utils.PlotlyJSONEncoder)
     assert(j6 == '["2011-01-01", "2011-01-01 01:00:00"]')
 
 
 def test_numpy_masked_json_encoding():
     l = [1, 2, np.ma.core.masked]
-    j1 = json.dumps(l, cls=utils.PlotlyJSONEncoder)
+    j1 = _json.dumps(l, cls=utils.PlotlyJSONEncoder)
     print(j1)
     assert(j1 == '[1, 2, null]')
 
@@ -277,18 +285,18 @@ def test_masked_constants_example():
     renderer = PlotlyRenderer()
     Exporter(renderer).run(fig)
 
-    json.dumps(renderer.plotly_fig, cls=utils.PlotlyJSONEncoder)
+    _json.dumps(renderer.plotly_fig, cls=utils.PlotlyJSONEncoder)
 
-    jy = json.dumps(renderer.plotly_fig['data'][1]['y'],
+    jy = _json.dumps(renderer.plotly_fig['data'][1]['y'],
                     cls=utils.PlotlyJSONEncoder)
     print(jy)
-    array = json.loads(jy)
+    array = _json.loads(jy)
     assert(array == [-398.11793027, -398.11792966, -398.11786308, None])
 
 
 def test_numpy_dates():
     a = np.arange(np.datetime64('2011-07-11'), np.datetime64('2011-07-18'))
-    j1 = json.dumps(a, cls=utils.PlotlyJSONEncoder)
+    j1 = _json.dumps(a, cls=utils.PlotlyJSONEncoder)
     assert(j1 == '["2011-07-11", "2011-07-12", "2011-07-13", '
                  '"2011-07-14", "2011-07-15", "2011-07-16", '
                  '"2011-07-17"]')
@@ -296,5 +304,5 @@ def test_numpy_dates():
 
 def test_datetime_dot_date():
     a = [datetime.date(2014, 1, 1), datetime.date(2014, 1, 2)]
-    j1 = json.dumps(a, cls=utils.PlotlyJSONEncoder)
+    j1 = _json.dumps(a, cls=utils.PlotlyJSONEncoder)
     assert(j1 == '["2014-01-01", "2014-01-02"]')

@@ -8,6 +8,8 @@
 
 *.coverage
 
+*.tox
+
 build
 
 dist

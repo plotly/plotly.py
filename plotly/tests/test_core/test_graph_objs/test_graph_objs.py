@@ -6,7 +6,7 @@ import plotly.graph_reference as gr
 OLD_CLASS_NAMES = ['AngularAxis', 'Annotation', 'Annotations', 'Area',
                    'Bar', 'Box', 'ColorBar', 'Contour', 'Contours',
                    'Data', 'ErrorX', 'ErrorY', 'ErrorZ', 'Figure',
-                   'Font', 'Heatmap', 'Histogram', 'Histogram2d',
+                   'Font', 'Frames', 'Heatmap', 'Histogram', 'Histogram2d',
                    'Histogram2dContour', 'Layout', 'Legend', 'Line',
                    'Margin', 'Marker', 'RadialAxis', 'Scatter',
                    'Scatter3d', 'Scene', 'Stream', 'Surface', 'Trace',
