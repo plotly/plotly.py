@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [2.0.1] - 2017-02-07
 ### Added
 - Support for rendering plots in [nteract](https://nteract.io/)!
   See [https://github.com/nteract/nteract/pull/662](https://github.com/nteract/nteract/pull/662)
@@ -16,7 +18,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - computationally-intensive `graph_reference` functions are memoized.
 
 ## [2.0.0] - 2017-01-25
-
 ### Changed
 - `plotly.exceptions.PlotlyRequestException` is *always* raised for network
 failures. Previously either a `PlotlyError`, `PlotlyRequestException`, or a
