@@ -213,7 +213,7 @@ help(tls.FigureFactory.create_2D_density)
 ## [1.12.3] - 2016-06-30
 ### Updated
 - Updated `plotly.min.js` from 1.13.0 to 1.14.1
-	- Numerous additions and changes where made to the mapbox layout layers attributes
+	- Numerous additions and changes were made to the mapbox layout layers attributes
 	- Attribute line.color in scatter3d traces now support color scales
 	- Layout shapes can now be moved and resized (except for 'path' shapes) in editable contexts
 	- See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1141----2016-06-28) for additional information regarding the updates
