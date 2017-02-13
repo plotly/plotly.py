@@ -277,7 +277,7 @@ class _Distplot(object):
         :rtype (list) hist: list of histogram representations
         """
         hist = [None] * self.trace_number
-
+        print 'crapola'
         for index in range(self.trace_number):
             hist[index] = dict(type='histogram',
                                x=self.hist_data[index],
@@ -286,7 +286,7 @@ class _Distplot(object):
                                histnorm=self.histnorm,
                                name=self.group_labels[index],
                                legendgroup=self.group_labels[index],
-                               marker=dict(color=self.colors[index]),
+                               marker=dict(color=self.colors[index % len(self.colors)]),
                                autobinx=False,
                                xbins=dict(start=self.start[index],
                                           end=self.end[index],
