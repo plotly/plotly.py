@@ -286,7 +286,7 @@ class _Distplot(object):
                                histnorm=self.histnorm,
                                name=self.group_labels[index],
                                legendgroup=self.group_labels[index],
-                               marker=dict(color=self.colors[index]),
+                               marker=dict(color=self.colors[index % len(self.colors)]),
                                autobinx=False,
                                xbins=dict(start=self.start[index],
                                           end=self.end[index],
@@ -324,7 +324,7 @@ class _Distplot(object):
                                 name=self.group_labels[index],
                                 legendgroup=self.group_labels[index],
                                 showlegend=False if self.show_hist else True,
-                                marker=dict(color=self.colors[index]))
+                                marker=dict(color=self.colors[index % len(self.colors)]))
         return curve
 
     def make_normal(self):
@@ -361,7 +361,7 @@ class _Distplot(object):
                                 name=self.group_labels[index],
                                 legendgroup=self.group_labels[index],
                                 showlegend=False if self.show_hist else True,
-                                marker=dict(color=self.colors[index]))
+                                marker=dict(color=self.colors[index % len(self.colors)]))
         return curve
 
     def make_rug(self):
@@ -385,6 +385,6 @@ class _Distplot(object):
                               showlegend=(False if self.show_hist or
                                           self.show_curve else True),
                               text=self.rug_text[index],
-                              marker=dict(color=self.colors[index],
+                              marker=dict(color=self.colors[index % len(self.colors)],
                                           symbol='line-ns-open'))
         return rug

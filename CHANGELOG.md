@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Fixed
+- `plotly.figure_factory.create_distplot` now can support more than 10 traces without raising an error. Updated so that if the list of `colors` (default colors too) is less than your number of traces, the color for your traces will loop around to start when it hits the end.
 
 ## [2.0.1] - 2017-02-07
 ### Added
