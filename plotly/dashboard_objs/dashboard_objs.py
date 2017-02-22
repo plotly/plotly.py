@@ -56,6 +56,7 @@ class Dashboard(dict):
                  boxHeaderBackgroundColor='#f8f8f8', foregroundColor='#333333',
                  headerBackgroundColor='#2E3A46', headerForegroundColor='#FFFFFF',
                  links=[], logoUrl='', title='Untitled Dashboard'):
+        # TODO: change name to box_id_to_path
         self.box_ids_dict = {}
         if not dashboard_json:
             self['layout'] = EmptyBox()
@@ -72,30 +73,33 @@ class Dashboard(dict):
                 'logoUrl': logoUrl,
                 'title': title
             }
-            # TODO: change name to box_id_to_path
         else:
             self['layout'] = dashboard_json['layout']
-            self['version'] = dashboard_json['layout']
+            self['version'] = dashboard_json['version']
             self['settings'] = dashboard_json['settings']
 
-            all_nodes = []
-            node_gen = node_generator(dashboard_json['layout'])
+            self._assign_boxes_to_ids()
 
-            finished_iteration = False
-            while not finished_iteration:
+    def _assign_boxes_to_ids(self):
+        self.box_ids_dict = {}
+        all_nodes = []
+        node_gen = node_generator(self['layout'])
+
+        finished_iteration = False
+        while not finished_iteration:
+            try:
+                all_nodes.append(node_gen.next())
+            except StopIteration:
+                finished_iteration = True
+
+        for node in all_nodes:
+            if (node[1] != () and node[0]['type'] == 'box'
+                    and node[0]['boxType'] != 'empty'):
                 try:
-                    all_nodes.append(node_gen.next())
-                except StopIteration:
-                    finished_iteration = True
-
-            for node in all_nodes:
-                if (node[1] != () and node[0]['type'] == 'box' and
-                    node[0]['boxType'] != 'empty'):
-                    try:
-                        max_id = max(self.box_ids_dict.keys())
-                    except ValueError:
-                        max_id = 0
-                    self.box_ids_dict[max_id + 1] = list(node[1])
+                    max_id = max(self.box_ids_dict.keys())
+                except ValueError:
+                    max_id = 0
+                self.box_ids_dict[max_id + 1] = list(node[1])
 
     def _insert(self, box_or_container, array_of_paths):
         """Performs user-unfriendly box and container manipulations."""
@@ -195,10 +199,10 @@ class Dashboard(dict):
                 )
             if box_id not in self.box_ids_dict:
                 raise exceptions.PlotlyError(
-                    "Your box_id must a number which is pointing to a box in "
-                    "your dashboard."
+                    "Your box_id must a number in your dashboard. To view a "
+                    "representation of your dashboard run 'get_preview()'."
                 )
-
+            #self._assign_boxes_to_ids()
             if side == 'above':
                 old_box = self._get_box(box_id)
                 self._insert(
@@ -222,6 +226,12 @@ class Dashboard(dict):
                 self._insert(
                     Container(old_box, box, direction='horizontal'),
                     self.box_ids_dict[box_id]
+                )
+            else:
+                raise exceptions.PlotlyError(
+                    "If there is at least one box in your dashboard, you "
+                    "must specify a valid side value. You must choose from "
+                    "'above', 'below', 'left', and 'right'."
                 )
 
 
@@ -255,48 +265,3 @@ def upload_dashboard(dashboard_object, filename, world_readable,
     url = res.json()['web_url']
     webbrowser.open_new(res.json()['web_url'])
     return url
-
-
-# little wrapper around requests.get
-def get(*args, **kwargs):
-    return requests.get(
-        *args, auth=(username, api_key), headers=headers, **kwargs
-    )
-
-
-def _get_all_dashboards():
-    """Grab a list of all users' dashboards."""
-    dashboards = []
-    res = get(build_url('dashboards')).json()
-
-    for dashboard in res['results']:
-        if not dashboard['deleted']:
-            dashboards.append(dashboard)
-    while res['next']:
-        res = get(res['next']).json()
-
-        for dashboard in res['results']:
-            if not dashboard['deleted']:
-                dashboards.append(dashboard)
-    return dashboards
-
-
-def _get_dashboard_json(dashboard_name):
-    dashboards = _get_all_dashboards()
-    for index, dboard in enumerate(dashboards):
-        if dboard['filename'] == dashboard_name:
-            break
-
-    dashboard = get(dashboards[index]['api_urls']['dashboards']).json()
-    dashboard_json = json.loads(dashboard['content'])
-    return dashboard_json
-
-
-def get_dashboard_names():
-    dashboards = _get_all_dashboards()
-    return [str(dboard['filename']) for dboard in dashboards]
-
-
-def get_dashboard(dashboard_name):
-    dashboard_json = _get_dashboard_json(dashboard_name)
-    return Dashboard(dashboard_json)
