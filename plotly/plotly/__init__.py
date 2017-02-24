@@ -23,10 +23,6 @@ from . plotly import (
     file_ops,
     get_config,
     get_grid,
-    _get_all_dashboards,
-    _get_dashboard_json,
-    get_dashboard,
-    get_dashboard_names,
     dashboard_ops,
     create_animations,
     icreate_animations

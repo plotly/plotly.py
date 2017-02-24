@@ -2,86 +2,152 @@
 dashboard_objs
 ==========
 
-A module which is used to create dashboard objects, manipulate them and then
-upload them.
-
+A module which is meant to create and manipulate dashboard content.
 """
 
-import copy
-import json
-import requests
 import pprint
-import webbrowser
-
-import plotly
+import copy
+from IPython import display
 
 from plotly import exceptions
 from plotly.utils import node_generator
-from plotly.api.v2.utils import build_url
-
-username = plotly.tools.get_credentials_file()['username']
-api_key = plotly.tools.get_credentials_file()['api_key']
-headers = {'Plotly-Client-Platform': 'nteract'}
 
 
-class EmptyBox(dict):
-    def __init__(self):
-        self['type'] = 'box'
-        self['boxType'] = 'empty'
+# default variables
+master_width = 400
+master_height = 400
+container_size = master_height
+font_size = 10
 
 
-class Box(dict):
-    def __init__(self, fileId='', shareKey=None, title=''):
-        self['type'] = 'box'
-        self['boxType'] = 'plot'
-        self['fileId'] = fileId
-        self['shareKey'] = shareKey
-        self['title'] = title
+def _empty_box():
+    empty_box = {
+        'type': 'box',
+        'boxType': 'empty'
+    }
+    return empty_box
 
 
-class Container(dict):
-    def __init__(self, box_1=EmptyBox(), box_2=EmptyBox(), size=400,
-                 sizeUnit='px', direction='vertical'):
-        self['type'] = 'split'
-        self['size'] = size
-        self['sizeUnit'] = sizeUnit
-        self['direction'] = direction
-        self['first'] = box_1
-        self['second'] = box_2
+def _box(fileId='', shareKey=None, title=''):
+    box = {
+        'type': 'box',
+        'boxType': 'plot',
+        'fileId': fileId,
+        'shareKey': shareKey,
+        'title': title
+    }
+    return box
+
+
+def _container(box_1=_empty_box(), box_2=_empty_box(), size=container_size,
+               sizeUnit='px', direction='vertical'):
+    container = {
+        'type': 'split',
+        'size': size,
+        'sizeUnit': sizeUnit,
+        'direction': direction,
+        'first': box_1,
+        'second': box_2
+    }
+    return container
+
+dashboard_html = ("""
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {{
+        margin: 0px;
+        padding: 0px;
+      /}}
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="400" height="400"></canvas>
+    <script>
+      var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
+      <!-- Dashboard -->
+      context.beginPath();
+      context.rect(0, 0, {width}, {height});
+      context.lineWidth = 2;
+      context.strokeStyle = 'black';
+      context.stroke();
+      </script>
+  </body>
+</html>
+""".format(width=master_width, height=master_height))
+
+
+def draw_line_through_box(dashboard_html, top_left_x, top_left_y, box_w,
+                          box_h, direction='vertical', size=200):
+    """
+    Draw a line to divide a box rendered in the HTML preview of dashboard.
+
+    :param (str) direction: is the opposite of the direction of the line that
+        is draw in the HTML representation. It represents the direction that
+        will result from the two boxes resulting in the line dividing up an
+        HTML box in the preview of the dashboard.
+    :param (float) size: determins how big the first of the two boxes that
+        result in a split will be. This is in units of pixels.
+    """
+    is_horizontal = (direction == 'horizontal')
+    new_top_left_x = top_left_x + is_horizontal*0.5*box_w
+    new_top_left_y = top_left_y + (not is_horizontal)*0.5*box_h
+    new_box_w = (not is_horizontal)*box_w + is_horizontal
+    new_box_h = (not is_horizontal) + is_horizontal*box_h
+
+    html_box = """<!-- Draw some lines in -->
+          context.beginPath();
+          context.rect({top_left_x}, {top_left_y}, {box_w}, {box_h});
+          context.lineWidth = 1;
+          context.strokeStyle = 'black';
+          context.stroke();
+    """.format(top_left_x=new_top_left_x, top_left_y=new_top_left_y,
+               box_w=new_box_w, box_h=new_box_h)
+
+    index_for_new_box = dashboard_html.find('</script>') - 1
+    dashboard_html = (dashboard_html[:index_for_new_box] + html_box +
+                      dashboard_html[index_for_new_box:])
+    return dashboard_html
+
+
+def add_html_text(dashboard_html, text, top_left_x, top_left_y, box_w, box_h):
+    """
+    Add a number to the middle of an HTML box.
+    """
+    html_text = """<!-- Insert box numbers -->
+          context.font = '{font_size}pt Times New Roman';
+          context.textAlign = 'center';
+          context.fillText({text}, {top_left_x} + 0.5*{box_w}, {top_left_y} + 0.5*{box_h});
+    """.format(text=text, top_left_x=top_left_x, top_left_y=top_left_y,
+               box_w=box_w, box_h=box_h, font_size=font_size)
+
+    index_to_add_text = dashboard_html.find('</script>') - 1
+    dashboard_html = (dashboard_html[:index_to_add_text] + html_text +
+                      dashboard_html[index_to_add_text:])
+    return dashboard_html
 
 
 class Dashboard(dict):
-    def __init__(self, dashboard_json=None, backgroundColor='#FFFFFF',
-                 boxBackgroundColor='#ffffff', boxBorderColor='#d8d8d8',
-                 boxHeaderBackgroundColor='#f8f8f8', foregroundColor='#333333',
-                 headerBackgroundColor='#2E3A46', headerForegroundColor='#FFFFFF',
-                 links=[], logoUrl='', title='Untitled Dashboard'):
-        # TODO: change name to box_id_to_path
-        self.box_ids_dict = {}
-        if not dashboard_json:
-            self['layout'] = EmptyBox()
+    def __init__(self, content=None):
+        if content is None:
+            content = {}
+
+        self.box_ids_to_path = {}
+        if not content:
+            self['layout'] = _empty_box()
             self['version'] = 2
-            self['settings'] = {
-                'backgroundColor': backgroundColor,
-                'boxBackgroundColor': boxBackgroundColor,
-                'boxBorderColor': boxBorderColor,
-                'boxHeaderBackgroundColor': boxHeaderBackgroundColor,
-                'foregroundColor': foregroundColor,
-                'headerBackgroundColor': headerBackgroundColor,
-                'headerForegroundColor': headerForegroundColor,
-                'links': links,
-                'logoUrl': logoUrl,
-                'title': title
-            }
+            self['settings'] = {}
         else:
-            self['layout'] = dashboard_json['layout']
-            self['version'] = dashboard_json['version']
-            self['settings'] = dashboard_json['settings']
+            self['layout'] = content['layout']
+            self['version'] = content['version']
+            self['settings'] = content['settings']
 
             self._assign_boxes_to_ids()
 
     def _assign_boxes_to_ids(self):
-        self.box_ids_dict = {}
+        self.box_ids_to_path = {}
         all_nodes = []
         node_gen = node_generator(self['layout'])
 
@@ -96,100 +162,173 @@ class Dashboard(dict):
             if (node[1] != () and node[0]['type'] == 'box'
                     and node[0]['boxType'] != 'empty'):
                 try:
-                    max_id = max(self.box_ids_dict.keys())
+                    max_id = max(self.box_ids_to_path.keys())
                 except ValueError:
                     max_id = 0
-                self.box_ids_dict[max_id + 1] = list(node[1])
+                self.box_ids_to_path[max_id + 1] = list(node[1])
 
-    def _insert(self, box_or_container, array_of_paths):
+    def _insert(self, box_or_container, path):
         """Performs user-unfriendly box and container manipulations."""
-        if any(path not in ['first', 'second'] for path in array_of_paths):
+        if any(first_second not in ['first', 'second'] for first_second in path):
             raise exceptions.PlotlyError(
-                "Invalid path. Your 'array_of_paths' list must only contain "
+                "Invalid path. Your 'path' list must only contain "
                 "the strings 'first' and 'second'."
             )
 
         if 'first' in self['layout']:
             loc_in_dashboard = self['layout']
-            for index, path in enumerate(array_of_paths):
-                if index != len(array_of_paths) - 1:
-                    loc_in_dashboard = loc_in_dashboard[path]
+            for index, first_second in enumerate(path):
+                if index != len(path) - 1:
+                    loc_in_dashboard = loc_in_dashboard[first_second]
                 else:
-                    loc_in_dashboard[path] = box_or_container
+                    loc_in_dashboard[first_second] = box_or_container
 
         else:
             self['layout'] = box_or_container
 
-        # update box_ids
-        if isinstance(box_or_container, Box):
-            # box -> container
-            # if replacing a container, remove box_ids for
-            # the boxes that belong there
-            for first_or_second in ['first', 'second']:
-                extended_box_path = copy.deepcopy(array_of_paths)
-                extended_box_path.append(first_or_second)
-                for key in self.box_ids_dict.keys():
-                    if self.box_ids_dict[key] == extended_box_path:
-                        self.box_ids_dict.pop(key)
-
-            # box -> box
-            for key in self.box_ids_dict.keys():
-                if self.box_ids_dict[key] == array_of_paths:
-                    self.box_ids_dict.pop(key)
-            try:
-                max_id = max(self.box_ids_dict.keys())
-            except ValueError:
-                max_id = 0
-            self.box_ids_dict[max_id + 1] = array_of_paths
-
-        elif isinstance(box_or_container, Container):
-            # container -> box
-            for key in self.box_ids_dict.keys():
-                if self.box_ids_dict[key] == array_of_paths:
-                    self.box_ids_dict.pop(key)
-
-            # handles boxes already in container
-            for first_or_second in ['first', 'second']:
-                if box_or_container[first_or_second] != EmptyBox():
-                    path_to_box = copy.deepcopy(array_of_paths)
-                    path_to_box.append(first_or_second)
-                    for key in self.box_ids_dict.keys():
-                        if self.box_ids_dict[key] == path_to_box:
-                            self.box_ids_dict.pop(key)
-
-                    try:
-                        max_id = max(self.box_ids_dict.keys())
-                    except ValueError:
-                        max_id = 0
-                    self.box_ids_dict[max_id + 1] = path_to_box
-
-    def _get_box(self, box_id):
+    def get_box(self, box_id):
         """Returns box from box_id number."""
+        self._assign_boxes_to_ids()
 
         loc_in_dashboard = self['layout']
-        for path in self.box_ids_dict[box_id]:
-            loc_in_dashboard = loc_in_dashboard[path]
+        for first_second in self.box_ids_to_path[box_id]:
+            loc_in_dashboard = loc_in_dashboard[first_second]
+        return loc_in_dashboard
+
+    def _path_to_box(self, path):
+        """Returns box from specified path."""
+        self._assign_boxes_to_ids()
+
+        loc_in_dashboard = self['layout']
+        for first_second in path:
+            loc_in_dashboard = loc_in_dashboard[first_second]
         return loc_in_dashboard
 
     def get_preview(self):
-        """
-        Returns JSON and HTML respresentation of the dashboard.
+        """Returns JSON and HTML respresentation of the dashboard."""
+        # assign box_ids
+        self._assign_boxes_to_ids()
 
-        HTML coming soon to a theater near you.
-        """
-        # print JSON figure
+        # print JSON
         pprint.pprint(self)
 
-    def insert(self, box, box_id=None, side='above'):
+        # construct HTML dashboard
+        x = 0
+        y = 0
+        box_w = master_width
+        box_h = master_height
+        html_figure = copy.deepcopy(dashboard_html)
+        path_to_box_specs = {}  # used to store info about box dimensions
+        # add first path
+        first_box_specs = {
+            'top_left_x': x,
+            'top_left_y': y,
+            'box_w': box_w,
+            'box_h': box_h
+        }
+        path_to_box_specs[tuple(['first'])] = first_box_specs
+
+        # generate all paths
+        all_nodes = []
+        node_gen = node_generator(self['layout'])
+
+        finished_iteration = False
+        while not finished_iteration:
+            try:
+                all_nodes.append(node_gen.next())
+            except StopIteration:
+                finished_iteration = True
+
+        all_paths = []
+        for node in all_nodes:
+            all_paths.append(list(node[1]))
+        if ['second'] in all_paths:
+            all_paths.remove(['second'])
+
+        max_path_len = max(len(path) for path in all_paths)
+        # search all paths of the same length
+        for path_len in range(1, max_path_len + 1):
+            for path in [path for path in all_paths if len(path) == path_len]:
+                current_box_specs = path_to_box_specs[tuple(path)]
+
+                if self._path_to_box(path)['type'] == 'split':
+                    html_figure = draw_line_through_box(
+                        html_figure,
+                        current_box_specs['top_left_x'],
+                        current_box_specs['top_left_y'],
+                        current_box_specs['box_w'],
+                        current_box_specs['box_h'],
+                        direction=self._path_to_box(path)['direction']
+                    )
+
+                    # determine the specs for resulting two boxes from split
+                    is_horizontal = (
+                        self._path_to_box(path)['direction'] == 'horizontal'
+                    )
+                    x = current_box_specs['top_left_x']
+                    y = current_box_specs['top_left_y']
+                    box_w = current_box_specs['box_w']
+                    box_h = current_box_specs['box_h']
+
+                    new_box_w = box_w*(1 - is_horizontal*0.5)
+                    new_box_h = box_h*(1 - (not is_horizontal)*0.5)
+
+                    box_1_specs = {
+                        'top_left_x': x,
+                        'top_left_y': y,
+                        'box_w': new_box_w,
+                        'box_h': new_box_h
+                    }
+                    box_2_specs = {
+                        'top_left_x': (x + is_horizontal*0.5*box_w),
+                        'top_left_y': (y + (not is_horizontal)*0.5*box_h),
+                        'box_w': new_box_w,
+                        'box_h': new_box_h
+                    }
+
+                    path_to_box_specs[tuple(path) + ('first',)] = box_1_specs
+                    path_to_box_specs[tuple(path) + ('second',)] = box_2_specs
+
+                elif self._path_to_box(path)['type'] == 'box':
+                    for box_id in self.box_ids_to_path:
+                        if self.box_ids_to_path[box_id] == path:
+                            number = box_id
+
+                    html_figure = add_html_text(
+                        html_figure, number,
+                        path_to_box_specs[tuple(path)]['top_left_x'],
+                        path_to_box_specs[tuple(path)]['top_left_y'],
+                        path_to_box_specs[tuple(path)]['box_w'],
+                        path_to_box_specs[tuple(path)]['box_h'],
+                    )
+
+        # display HTML representation
+        return display.HTML(html_figure)
+
+    def insert(self, box, side='above', box_id=None):
         """
         The user-friendly method for inserting boxes into the Dashboard.
 
         box: the box you are inserting into the dashboard.
         box_id: pre-existing box you use as a reference point.
         """
-        # doesn't need box_id or side specified
+        self._assign_boxes_to_ids()
+        init_box = {
+            'type': 'box',
+            'boxType': 'plot',
+            'fileId': '',
+            'shareKey': None,
+            'title': ''
+        }
+
+        # force box to have all valid box keys
+        for key in init_box.keys():
+            if key not in box.keys():
+                box[key] = init_box[key]
+
+        # doesn't need box_id or side specified for first box
         if 'first' not in self['layout']:
-            self._insert(Container(), [])
+            self._insert(_container(), [])
             self._insert(box, ['first'])
         else:
             if box_id is None:
@@ -197,35 +336,34 @@ class Dashboard(dict):
                     "Make sure the box_id is specfied if there is at least "
                     "one box in your dashboard."
                 )
-            if box_id not in self.box_ids_dict:
+            if box_id not in self.box_ids_to_path:
                 raise exceptions.PlotlyError(
                     "Your box_id must a number in your dashboard. To view a "
                     "representation of your dashboard run 'get_preview()'."
                 )
-            #self._assign_boxes_to_ids()
             if side == 'above':
-                old_box = self._get_box(box_id)
+                old_box = self.get_box(box_id)
                 self._insert(
-                    Container(box, old_box, direction='vertical'),
-                    self.box_ids_dict[box_id]
+                    _container(box, old_box, direction='vertical'),
+                    self.box_ids_to_path[box_id]
                 )
             elif side == 'below':
-                old_box = self._get_box(box_id)
+                old_box = self.get_box(box_id)
                 self._insert(
-                    Container(old_box, box, direction='vertical'),
-                    self.box_ids_dict[box_id]
+                    _container(old_box, box, direction='vertical'),
+                    self.box_ids_to_path[box_id]
                 )
             elif side == 'left':
-                old_box = self._get_box(box_id)
+                old_box = self.get_box(box_id)
                 self._insert(
-                    Container(box, old_box, direction='horizontal'),
-                    self.box_ids_dict[box_id]
+                    _container(box, old_box, direction='horizontal'),
+                    self.box_ids_to_path[box_id]
                 )
             elif side == 'right':
-                old_box = self._get_box(box_id)
+                old_box = self.get_box(box_id)
                 self._insert(
-                    Container(old_box, box, direction='horizontal'),
-                    self.box_ids_dict[box_id]
+                    _container(old_box, box, direction='horizontal'),
+                    self.box_ids_to_path[box_id]
                 )
             else:
                 raise exceptions.PlotlyError(
@@ -234,34 +372,18 @@ class Dashboard(dict):
                     "'above', 'below', 'left', and 'right'."
                 )
 
+    def swap(self, box_id_1, box_id_2):
+        """Swap two boxes with their specified ids."""
+        self._assign_boxes_to_ids()
 
-def upload_dashboard(dashboard_object, filename, world_readable,
-                     auto_open=True):
-    """
-    BETA function for uploading dashboards.
+        box_1 = self.get_box(box_id_1)
+        box_2 = self.get_box(box_id_2)
 
-    Functionality that we may need to consider adding:
-    - filename needs to be able to support `/` to create or use folders.
-      This'll require a few API calls.
-    - this function only works if the filename is unique. Need to call
-      `update` if this file already exists to overwrite the file.
-    - world_readable really should be `sharing` and allow `public`, `private`,
-      or `secret` like in `py.plot`.
-    - auto_open parameter for opening the result.
-    """
-    res = requests.post(
-        build_url('dashboards'),
-        auth=(username, api_key),
-        headers=headers,
-        data = {
-            'content': json.dumps(dashboard_object),
-            'filename': filename,
-            'world_readable': world_readable
-        }
-    )
+        box_1_path = self.box_ids_to_path[box_id_1]
+        box_2_path = self.box_ids_to_path[box_id_2]
 
-    res.raise_for_status()
-
-    url = res.json()['web_url']
-    webbrowser.open_new(res.json()['web_url'])
-    return url
+        for pairs in [(box_1_path, box_2), (box_2_path, box_1)]:
+            loc_in_dashboard = self['layout']
+            for first_second in pairs[0][:-1]:
+                loc_in_dashboard = loc_in_dashboard[first_second]
+            loc_in_dashboard[pairs[0][-1]] = pairs[1]

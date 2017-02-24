@@ -1345,49 +1345,6 @@ def get_grid(grid_url, raw=False):
     return Grid(parsed_content, fid)
 
 
-def _get_all_dashboards():
-    """Grab a list of all users' dashboards."""
-    dashboards = []
-    res = v2.dashboards.list().json()
-
-    for dashboard in res['results']:
-        if not dashboard['deleted']:
-            dashboards.append(dashboard)
-    while res['next']:
-        res = v2.utils.request('get', res['next']).json()
-
-        for dashboard in res['results']:
-            if not dashboard['deleted']:
-                dashboards.append(dashboard)
-    return dashboards
-
-
-def _get_dashboard_json(dashboard_name):
-    dashboards = _get_all_dashboards()
-    for index, dboard in enumerate(dashboards):
-        if dboard['filename'] == dashboard_name:
-            break
-
-    dashboard = v2.utils.request('get', dashboards[index]['api_urls']['dashboards']).json()
-    dashboard_json = json.loads(dashboard['content'])
-    return dashboard_json
-
-
-def get_dashboard(dashboard_name):
-    """
-    Some BETA pass of getting a dashboard from Plotly.
-
-    May need to put in dashboard_ops.
-    """
-    dashboard_json = _get_dashboard_json(dashboard_name)
-    return dashboard.Dashboard(dashboard_json)
-
-
-def get_dashboard_names():
-    dashboards = _get_all_dashboards()
-    return [str(dboard['filename']) for dboard in dashboards]
-
-
 class dashboard_ops:
     """
     Interface to Plotly's Dashboards API.
@@ -1395,8 +1352,7 @@ class dashboard_ops:
     containers which contain either empty boxes or boxes with file urls.
     """
     @classmethod
-    def upload(cls, dashboard, filename,
-               sharing='public', auto_open=True):
+    def upload(cls, dashboard, filename, sharing='public', auto_open=True):
         """
         BETA function for uploading dashboards to Plotly.
 
@@ -1405,8 +1361,6 @@ class dashboard_ops:
           This'll require a few API calls.
         - this function only works if the filename is unique. Need to call
           `update` if this file already exists to overwrite the file.
-        - world_readable really should be `sharing` and allow `public`,
-          `private`, or `secret` like in `py.plot`.
         - auto_open parameter for opening the result.
         """
         if sharing == 'public':
@@ -1434,6 +1388,51 @@ class dashboard_ops:
             url = add_share_key_to_url(url)
 
         return url
+
+    @classmethod
+    def _get_all_dashboards(cls):
+        """Grab a list of all users' dashboards."""
+        dashboards = []
+        res = v2.dashboards.list().json()
+
+        for dashboard in res['results']:
+            if not dashboard['deleted']:
+                dashboards.append(dashboard)
+        while res['next']:
+            res = v2.utils.request('get', res['next']).json()
+
+            for dashboard in res['results']:
+                if not dashboard['deleted']:
+                    dashboards.append(dashboard)
+        return dashboards
+
+    @classmethod
+    def _get_dashboard_json(cls, dashboard_name):
+        dashboards = cls._get_all_dashboards()
+        for index, dboard in enumerate(dashboards):
+            if dboard['filename'] == dashboard_name:
+                break
+
+        dashboard = v2.utils.request(
+            'get', dashboards[index]['api_urls']['dashboards']
+        ).json()
+        dashboard_json = json.loads(dashboard['content'])
+        return dashboard_json
+
+    @classmethod
+    def get_dashboard(cls, dashboard_name):
+        """
+        BETA pass of getting a dashboard from Plotly.
+
+        May need to put in dashboard_ops.
+        """
+        dashboard_json = cls._get_dashboard_json(dashboard_name)
+        return dashboard.Dashboard(dashboard_json)
+
+    @classmethod
+    def get_dashboard_names(cls):
+        dashboards = cls._get_all_dashboards()
+        return [str(dboard['filename']) for dboard in dashboards]
 
 
 def create_animations(figure, filename=None, sharing='public', auto_open=True):
