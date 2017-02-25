@@ -7,11 +7,12 @@ A module which is meant to create and manipulate dashboard content.
 
 import pprint
 import copy
-from IPython import display
+#from IPython import display
 
-from plotly import exceptions
+from plotly import exceptions, optional_imports
 from plotly.utils import node_generator
 
+IPython = optional_imports.get_module('IPython')
 
 # default variables
 master_width = 400
@@ -303,7 +304,8 @@ class Dashboard(dict):
                     )
 
         # display HTML representation
-        return display.HTML(html_figure)
+        if ipython:
+            return IPython.display.HTML(html_figure)
 
     def insert(self, box, side='above', box_id=None):
         """
