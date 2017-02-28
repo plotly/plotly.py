@@ -1376,6 +1376,7 @@ class dashboard_ops:
             'world_readable': world_readable
         }
 
+        #res = v2.dashboards.update(data)
         res = v2.dashboards.create(data)
         res.raise_for_status()
 

@@ -23,25 +23,19 @@ def list():
     return request('get', url)
 
 
-def retrieve(fid, share_key=None):
+def retrieve(fid):
     """Retrieve a dashboard from Plotly."""
     url = build_url(RESOURCE, id=fid)
     return request('get', url)
 
 
-def update(fid):
+def update(fid, content):
     """Completely update the writable."""
     url = build_url(RESOURCE, id=fid)
     return request('put', url)
 
 
-def partial_update(fid):
-    """Partially update the writable."""
-    url = build_url(RESOURCE, id=fid)
-    return request('patch', url)
-
-
 def schema():
     """Retrieve the dashboard schema."""
-    url = build_url(RESOURCE, id='schema')
+    url = build_url(RESOURCE, route='schema')
     return request('get', url)

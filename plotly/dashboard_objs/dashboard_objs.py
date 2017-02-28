@@ -2,12 +2,12 @@
 dashboard_objs
 ==========
 
-A module which is meant to create and manipulate dashboard content.
+A module for creating and manipulating dashboard content. You can create
+a Dashboard object, insert boxes, swap boxes, remove a box and get an HTML
+preview of the Dashboard.
 """
 
 import pprint
-import copy
-#from IPython import display
 
 from plotly import exceptions, optional_imports
 from plotly.utils import node_generator
@@ -15,10 +15,13 @@ from plotly.utils import node_generator
 IPython = optional_imports.get_module('IPython')
 
 # default variables
-master_width = 400
-master_height = 400
-container_size = master_height
-font_size = 10
+MASTER_WIDTH = 400
+MASTER_HEIGHT = 400
+FONT_SIZE = 10
+ID_NOT_VALID_MESSAGE = (
+    "Your box_id must a number in your dashboard. To view a "
+    "representation of your dashboard run 'get_preview()'."
+)
 
 
 def _empty_box():
@@ -40,8 +43,13 @@ def _box(fileId='', shareKey=None, title=''):
     return box
 
 
-def _container(box_1=_empty_box(), box_2=_empty_box(), size=container_size,
+def _container(box_1=None, box_2=None, size=MASTER_HEIGHT,
                sizeUnit='px', direction='vertical'):
+    if box_1 is None:
+        box_1 = _empty_box()
+    if box_2 is None:
+        box_2 = _empty_box()
+
     container = {
         'type': 'split',
         'size': size,
@@ -60,7 +68,7 @@ dashboard_html = ("""
       body {{
         margin: 0px;
         padding: 0px;
-      /}}
+      }}
     </style>
   </head>
   <body>
@@ -77,26 +85,28 @@ dashboard_html = ("""
       </script>
   </body>
 </html>
-""".format(width=master_width, height=master_height))
+""".format(width=MASTER_WIDTH, height=MASTER_HEIGHT))
 
 
-def draw_line_through_box(dashboard_html, top_left_x, top_left_y, box_w,
-                          box_h, direction='vertical', size=200):
-    """
-    Draw a line to divide a box rendered in the HTML preview of dashboard.
-
-    :param (str) direction: is the opposite of the direction of the line that
-        is draw in the HTML representation. It represents the direction that
-        will result from the two boxes resulting in the line dividing up an
-        HTML box in the preview of the dashboard.
-    :param (float) size: determins how big the first of the two boxes that
-        result in a split will be. This is in units of pixels.
-    """
+def _draw_line_through_box(dashboard_html, top_left_x, top_left_y, box_w,
+                           box_h, direction='vertical'):
     is_horizontal = (direction == 'horizontal')
-    new_top_left_x = top_left_x + is_horizontal*0.5*box_w
-    new_top_left_y = top_left_y + (not is_horizontal)*0.5*box_h
-    new_box_w = (not is_horizontal)*box_w + is_horizontal
-    new_box_h = (not is_horizontal) + is_horizontal*box_h
+
+    if is_horizontal:
+        new_top_left_x = top_left_x + box_w / 2
+        new_top_left_y = top_left_y
+        new_box_w = 1
+        new_box_h = box_h
+    else:
+        new_top_left_x = top_left_x
+        new_top_left_y = top_left_y + box_h / 2
+        new_box_w = box_w
+        new_box_h = 1
+
+    #new_top_left_x = top_left_x + is_horizontal * 0.5 * box_w
+    #new_top_left_y = top_left_y + (not is_horizontal) * 0.5 * box_h
+    #new_box_w = (not is_horizontal) * box_w + is_horizontal
+    #new_box_h = (not is_horizontal) + is_horizontal * box_h
 
     html_box = """<!-- Draw some lines in -->
           context.beginPath();
@@ -113,16 +123,13 @@ def draw_line_through_box(dashboard_html, top_left_x, top_left_y, box_w,
     return dashboard_html
 
 
-def add_html_text(dashboard_html, text, top_left_x, top_left_y, box_w, box_h):
-    """
-    Add a number to the middle of an HTML box.
-    """
+def _add_html_text(dashboard_html, text, top_left_x, top_left_y, box_w, box_h):
     html_text = """<!-- Insert box numbers -->
           context.font = '{font_size}pt Times New Roman';
           context.textAlign = 'center';
           context.fillText({text}, {top_left_x} + 0.5*{box_w}, {top_left_y} + 0.5*{box_h});
     """.format(text=text, top_left_x=top_left_x, top_left_y=top_left_y,
-               box_w=box_w, box_h=box_h, font_size=font_size)
+               box_w=box_w, box_h=box_h, font_size=FONT_SIZE)
 
     index_to_add_text = dashboard_html.find('</script>') - 1
     dashboard_html = (dashboard_html[:index_to_add_text] + html_text +
@@ -135,7 +142,6 @@ class Dashboard(dict):
         if content is None:
             content = {}
 
-        self.box_ids_to_path = {}
         if not content:
             self['layout'] = _empty_box()
             self['version'] = 2
@@ -145,31 +151,24 @@ class Dashboard(dict):
             self['version'] = content['version']
             self['settings'] = content['settings']
 
-            self._assign_boxes_to_ids()
+        self._set_container_sizes()
 
-    def _assign_boxes_to_ids(self):
-        self.box_ids_to_path = {}
-        all_nodes = []
-        node_gen = node_generator(self['layout'])
-
-        finished_iteration = False
-        while not finished_iteration:
-            try:
-                all_nodes.append(node_gen.next())
-            except StopIteration:
-                finished_iteration = True
+    def _compute_box_ids(self):
+        box_ids_to_path = {}
+        all_nodes = list(node_generator(self['layout']))
 
         for node in all_nodes:
             if (node[1] != () and node[0]['type'] == 'box'
                     and node[0]['boxType'] != 'empty'):
                 try:
-                    max_id = max(self.box_ids_to_path.keys())
+                    max_id = max(box_ids_to_path.keys())
                 except ValueError:
                     max_id = 0
-                self.box_ids_to_path[max_id + 1] = list(node[1])
+                box_ids_to_path[max_id + 1] = list(node[1])
+
+        return box_ids_to_path
 
     def _insert(self, box_or_container, path):
-        """Performs user-unfriendly box and container manipulations."""
         if any(first_second not in ['first', 'second'] for first_second in path):
             raise exceptions.PlotlyError(
                 "Invalid path. Your 'path' list must only contain "
@@ -187,58 +186,8 @@ class Dashboard(dict):
         else:
             self['layout'] = box_or_container
 
-    def get_box(self, box_id):
-        """Returns box from box_id number."""
-        self._assign_boxes_to_ids()
-
-        loc_in_dashboard = self['layout']
-        for first_second in self.box_ids_to_path[box_id]:
-            loc_in_dashboard = loc_in_dashboard[first_second]
-        return loc_in_dashboard
-
-    def _path_to_box(self, path):
-        """Returns box from specified path."""
-        self._assign_boxes_to_ids()
-
-        loc_in_dashboard = self['layout']
-        for first_second in path:
-            loc_in_dashboard = loc_in_dashboard[first_second]
-        return loc_in_dashboard
-
-    def get_preview(self):
-        """Returns JSON and HTML respresentation of the dashboard."""
-        # assign box_ids
-        self._assign_boxes_to_ids()
-
-        # print JSON
-        pprint.pprint(self)
-
-        # construct HTML dashboard
-        x = 0
-        y = 0
-        box_w = master_width
-        box_h = master_height
-        html_figure = copy.deepcopy(dashboard_html)
-        path_to_box_specs = {}  # used to store info about box dimensions
-        # add first path
-        first_box_specs = {
-            'top_left_x': x,
-            'top_left_y': y,
-            'box_w': box_w,
-            'box_h': box_h
-        }
-        path_to_box_specs[tuple(['first'])] = first_box_specs
-
-        # generate all paths
-        all_nodes = []
-        node_gen = node_generator(self['layout'])
-
-        finished_iteration = False
-        while not finished_iteration:
-            try:
-                all_nodes.append(node_gen.next())
-            except StopIteration:
-                finished_iteration = True
+    def _set_container_sizes(self):
+        all_nodes = list(node_generator(self['layout']))
 
         all_paths = []
         for node in all_nodes:
@@ -247,13 +196,86 @@ class Dashboard(dict):
             all_paths.remove(['second'])
 
         max_path_len = max(len(path) for path in all_paths)
-        # search all paths of the same length
+        for path_len in range(1, max_path_len + 1):
+            for path in [path for path in all_paths if len(path) == path_len]:
+                if self._path_to_box(path)['type'] == 'split':
+                    if self._path_to_box(path)['direction'] == 'horizontal':
+                        new_size = MASTER_WIDTH / (2**path_len)
+                    elif self._path_to_box(path)['direction'] == 'vertical':
+                        new_size = MASTER_HEIGHT / (2**path_len)
+
+                    self._path_to_box(path)['size'] = new_size
+
+    def _path_to_box(self, path):
+        loc_in_dashboard = self['layout']
+        for first_second in path:
+            loc_in_dashboard = loc_in_dashboard[first_second]
+        return loc_in_dashboard
+
+    def get_box(self, box_id):
+        """Returns box from box_id number."""
+        box_ids_to_path = self._compute_box_ids()
+        loc_in_dashboard = self['layout']
+
+        if box_id not in box_ids_to_path.keys():
+            raise exceptions.PlotlyError(ID_NOT_VALID_MESSAGE)
+        for first_second in box_ids_to_path[box_id]:
+            loc_in_dashboard = loc_in_dashboard[first_second]
+        return loc_in_dashboard
+
+    def get_preview(self):
+        """
+        Returns JSON or HTML respresentation of the dashboard.
+
+        If IPython is not imported, returns a pretty print of the dashboard
+        dict. Otherwise, returns an IPython.core.display.HTML display of the
+        dashboard.
+
+        The algorithm - iteratively go through all paths of the dashboards
+        moving from shorter to longer paths. Checking the box or container
+        that sits at the end each path, if you find a container, draw a line
+        to divide the current box into two, and record the top-left
+        coordinates and box width and height resulting from the two boxes
+        along with the corresponding path. When the path points to a box,
+        draw the number associated with that box in the center of the box.
+        """
+        if IPython is None:
+            pprint.pprint(self)
+            return
+
+        x = 0
+        y = 0
+        box_w = MASTER_WIDTH
+        box_h = MASTER_HEIGHT
+        html_figure = dashboard_html
+        box_ids_to_path = self._compute_box_ids()
+        # used to store info about box dimensions
+        path_to_box_specs = {}
+        first_box_specs = {
+            'top_left_x': x,
+            'top_left_y': y,
+            'box_w': box_w,
+            'box_h': box_h
+        }
+        # uses tuples to store paths as for hashable keys
+        path_to_box_specs[('first',)] = first_box_specs
+
+        # generate all paths
+        all_nodes = list(node_generator(self['layout']))
+
+        all_paths = []
+        for node in all_nodes:
+            all_paths.append(list(node[1]))
+        if ['second'] in all_paths:
+            all_paths.remove(['second'])
+
+        max_path_len = max(len(path) for path in all_paths)
         for path_len in range(1, max_path_len + 1):
             for path in [path for path in all_paths if len(path) == path_len]:
                 current_box_specs = path_to_box_specs[tuple(path)]
 
                 if self._path_to_box(path)['type'] == 'split':
-                    html_figure = draw_line_through_box(
+                    html_figure = _draw_line_through_box(
                         html_figure,
                         current_box_specs['top_left_x'],
                         current_box_specs['top_left_y'],
@@ -271,8 +293,17 @@ class Dashboard(dict):
                     box_w = current_box_specs['box_w']
                     box_h = current_box_specs['box_h']
 
-                    new_box_w = box_w*(1 - is_horizontal*0.5)
-                    new_box_h = box_h*(1 - (not is_horizontal)*0.5)
+                    if is_horizontal:
+                        new_box_w = box_w / 2
+                        new_box_h = box_h
+                        new_top_left_x = x + box_w / 2
+                        new_top_left_y = y
+
+                    else:
+                        new_box_w = box_w
+                        new_box_h = box_h / 2
+                        new_top_left_x = x
+                        new_top_left_y = y + box_h / 2
 
                     box_1_specs = {
                         'top_left_x': x,
@@ -281,8 +312,8 @@ class Dashboard(dict):
                         'box_h': new_box_h
                     }
                     box_2_specs = {
-                        'top_left_x': (x + is_horizontal*0.5*box_w),
-                        'top_left_y': (y + (not is_horizontal)*0.5*box_h),
+                        'top_left_x': new_top_left_x,
+                        'top_left_y': new_top_left_y,
                         'box_w': new_box_w,
                         'box_h': new_box_h
                     }
@@ -291,11 +322,11 @@ class Dashboard(dict):
                     path_to_box_specs[tuple(path) + ('second',)] = box_2_specs
 
                 elif self._path_to_box(path)['type'] == 'box':
-                    for box_id in self.box_ids_to_path:
-                        if self.box_ids_to_path[box_id] == path:
+                    for box_id in box_ids_to_path:
+                        if box_ids_to_path[box_id] == path:
                             number = box_id
 
-                    html_figure = add_html_text(
+                    html_figure = _add_html_text(
                         html_figure, number,
                         path_to_box_specs[tuple(path)]['top_left_x'],
                         path_to_box_specs[tuple(path)]['top_left_y'],
@@ -304,17 +335,20 @@ class Dashboard(dict):
                     )
 
         # display HTML representation
-        if ipython:
-            return IPython.display.HTML(html_figure)
+        return IPython.display.HTML(html_figure)
 
     def insert(self, box, side='above', box_id=None):
         """
-        The user-friendly method for inserting boxes into the Dashboard.
+        Insert a box into your dashboard layout.
 
-        box: the box you are inserting into the dashboard.
-        box_id: pre-existing box you use as a reference point.
+        :param (dict) box: the box you are inserting into the dashboard.
+        :param (str) side: specifies where your new box is going to be placed
+            relative to the given 'box_id'. Valid values are 'above', 'below',
+            'left', and 'right'.
+        :param (int) box_id: the box id which is used as the reference box for
+            the insertion of the box.
         """
-        self._assign_boxes_to_ids()
+        box_ids_to_path = self._compute_box_ids()
         init_box = {
             'type': 'box',
             'boxType': 'plot',
@@ -338,34 +372,31 @@ class Dashboard(dict):
                     "Make sure the box_id is specfied if there is at least "
                     "one box in your dashboard."
                 )
-            if box_id not in self.box_ids_to_path:
-                raise exceptions.PlotlyError(
-                    "Your box_id must a number in your dashboard. To view a "
-                    "representation of your dashboard run 'get_preview()'."
-                )
+            if box_id not in box_ids_to_path:
+                raise exceptions.PlotlyError(ID_NOT_VALID_MESSAGE)
             if side == 'above':
                 old_box = self.get_box(box_id)
                 self._insert(
                     _container(box, old_box, direction='vertical'),
-                    self.box_ids_to_path[box_id]
+                    box_ids_to_path[box_id]
                 )
             elif side == 'below':
                 old_box = self.get_box(box_id)
                 self._insert(
                     _container(old_box, box, direction='vertical'),
-                    self.box_ids_to_path[box_id]
+                    box_ids_to_path[box_id]
                 )
             elif side == 'left':
                 old_box = self.get_box(box_id)
                 self._insert(
                     _container(box, old_box, direction='horizontal'),
-                    self.box_ids_to_path[box_id]
+                    box_ids_to_path[box_id]
                 )
             elif side == 'right':
                 old_box = self.get_box(box_id)
                 self._insert(
                     _container(old_box, box, direction='horizontal'),
-                    self.box_ids_to_path[box_id]
+                    box_ids_to_path[box_id]
                 )
             else:
                 raise exceptions.PlotlyError(
@@ -374,18 +405,42 @@ class Dashboard(dict):
                     "'above', 'below', 'left', and 'right'."
                 )
 
+        self._set_container_sizes()
+
+    def remove(self, box_id):
+        """Remove a box from the dashboard by its box_id."""
+        box_ids_to_path = self._compute_box_ids()
+        if box_id not in box_ids_to_path:
+            raise exceptions.PlotlyError(ID_NOT_VALID_MESSAGE)
+
+        path = box_ids_to_path[box_id]
+        if path != ['first']:
+            container_for_box_id = self._path_to_box(path[:-1])
+            if path[-1] == 'first':
+                adjacent_path = 'second'
+            elif path[-1] == 'second':
+                adjacent_path = 'first'
+            adjacent_box = container_for_box_id[adjacent_path]
+
+            self._insert(adjacent_box, path[:-1])
+        else:
+            self['layout'] = _empty_box()
+
+        self._set_container_sizes()
+
     def swap(self, box_id_1, box_id_2):
         """Swap two boxes with their specified ids."""
-        self._assign_boxes_to_ids()
-
+        box_ids_to_path = self._compute_box_ids()
         box_1 = self.get_box(box_id_1)
         box_2 = self.get_box(box_id_2)
 
-        box_1_path = self.box_ids_to_path[box_id_1]
-        box_2_path = self.box_ids_to_path[box_id_2]
+        box_1_path = box_ids_to_path[box_id_1]
+        box_2_path = box_ids_to_path[box_id_2]
 
         for pairs in [(box_1_path, box_2), (box_2_path, box_1)]:
             loc_in_dashboard = self['layout']
             for first_second in pairs[0][:-1]:
                 loc_in_dashboard = loc_in_dashboard[first_second]
             loc_in_dashboard[pairs[0][-1]] = pairs[1]
+
+        self._set_container_sizes()
