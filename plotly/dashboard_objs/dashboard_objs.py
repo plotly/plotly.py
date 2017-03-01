@@ -14,13 +14,14 @@ from plotly.utils import node_generator
 
 IPython = optional_imports.get_module('IPython')
 
-# default variables
+# default HTML parameters
 MASTER_WIDTH = 400
 MASTER_HEIGHT = 400
 FONT_SIZE = 10
+
 ID_NOT_VALID_MESSAGE = (
-    "Your box_id must a number in your dashboard. To view a "
-    "representation of your dashboard run 'get_preview()'."
+    "Your box_id must be a number in your dashboard. To view a "
+    "representation of your dashboard run get_preview()."
 )
 
 
@@ -103,11 +104,6 @@ def _draw_line_through_box(dashboard_html, top_left_x, top_left_y, box_w,
         new_box_w = box_w
         new_box_h = 1
 
-    #new_top_left_x = top_left_x + is_horizontal * 0.5 * box_w
-    #new_top_left_y = top_left_y + (not is_horizontal) * 0.5 * box_h
-    #new_box_w = (not is_horizontal) * box_w + is_horizontal
-    #new_box_h = (not is_horizontal) + is_horizontal * box_h
-
     html_box = """<!-- Draw some lines in -->
           context.beginPath();
           context.rect({top_left_x}, {top_left_y}, {box_w}, {box_h});
@@ -169,7 +165,8 @@ class Dashboard(dict):
         return box_ids_to_path
 
     def _insert(self, box_or_container, path):
-        if any(first_second not in ['first', 'second'] for first_second in path):
+        if any(first_second not in ['first', 'second']
+               for first_second in path):
             raise exceptions.PlotlyError(
                 "Invalid path. Your 'path' list must only contain "
                 "the strings 'first' and 'second'."
@@ -195,16 +192,17 @@ class Dashboard(dict):
         if ['second'] in all_paths:
             all_paths.remove(['second'])
 
+        # set dashboard_height proportional to max_path_len
         max_path_len = max(len(path) for path in all_paths)
-        for path_len in range(1, max_path_len + 1):
-            for path in [path for path in all_paths if len(path) == path_len]:
-                if self._path_to_box(path)['type'] == 'split':
-                    if self._path_to_box(path)['direction'] == 'horizontal':
-                        new_size = MASTER_WIDTH / (2**path_len)
-                    elif self._path_to_box(path)['direction'] == 'vertical':
-                        new_size = MASTER_HEIGHT / (2**path_len)
+        dashboard_height = 500 + 250 * max_path_len
+        self['layout']['size'] = dashboard_height
+        self['layout']['sizeUnit'] = 'px'
 
-                    self._path_to_box(path)['size'] = new_size
+        for path in all_paths:
+            if len(path) != 0:
+                if self._path_to_box(path)['type'] == 'split':
+                    self._path_to_box(path)['size'] = 50
+                    self._path_to_box(path)['sizeUnit'] = '%'
 
     def _path_to_box(self, path):
         loc_in_dashboard = self['layout']
@@ -364,8 +362,7 @@ class Dashboard(dict):
 
         # doesn't need box_id or side specified for first box
         if 'first' not in self['layout']:
-            self._insert(_container(), [])
-            self._insert(box, ['first'])
+            self._insert(_container(box, _empty_box()), [])
         else:
             if box_id is None:
                 raise exceptions.PlotlyError(

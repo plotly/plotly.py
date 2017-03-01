@@ -1376,7 +1376,6 @@ class dashboard_ops:
             'world_readable': world_readable
         }
 
-        #res = v2.dashboards.update(data)
         res = v2.dashboards.create(data)
         res.raise_for_status()
 
@@ -1392,7 +1391,6 @@ class dashboard_ops:
 
     @classmethod
     def _get_all_dashboards(cls):
-        """Grab a list of all users' dashboards."""
         dashboards = []
         res = v2.dashboards.list().json()
 
@@ -1422,16 +1420,13 @@ class dashboard_ops:
 
     @classmethod
     def get_dashboard(cls, dashboard_name):
-        """
-        BETA pass of getting a dashboard from Plotly.
-
-        May need to put in dashboard_ops.
-        """
+        """Returns a Dashboard object from a dashboard name."""
         dashboard_json = cls._get_dashboard_json(dashboard_name)
         return dashboard.Dashboard(dashboard_json)
 
     @classmethod
     def get_dashboard_names(cls):
+        """Return list of all active dashboard names from users' account."""
         dashboards = cls._get_all_dashboards()
         return [str(dboard['filename']) for dboard in dashboards]
 
