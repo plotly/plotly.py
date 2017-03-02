@@ -32,7 +32,6 @@ def retrieve(fid):
 def update(fid, content):
     """Completely update the writable."""
     url = build_url(RESOURCE, id=fid)
-    print url
     return request('put', url, json=content)
 
 

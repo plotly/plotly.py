@@ -1356,12 +1356,10 @@ class dashboard_ops:
         """
         BETA function for uploading dashboards to Plotly.
 
-        Functionality that we may need to consider adding:
-        - filename needs to be able to support `/` to create or use folders.
-          This'll require a few API calls.
-        - this function only works if the filename is unique. Need to call
-          `update` if this file already exists to overwrite the file.
-        - auto_open parameter for opening the result.
+        :param (dict) dashboard:
+        :param (str) filename:
+        :param (str) sharing:
+        :param (bool) auto_open:
         """
         if sharing == 'public':
             world_readable = True
@@ -1376,7 +1374,17 @@ class dashboard_ops:
             'world_readable': world_readable
         }
 
-        res = v2.dashboards.create(data)
+        # check if pre-existing filename already exists
+        filenames = cls.get_dashboard_names()
+        if filename in filenames:
+            matching_dashboard = cls._get_dashboard_json(
+                filename, False
+            )
+            fid = matching_dashboard['fid']
+            res = v2.dashboards.update(fid, data)
+
+        else:
+            res = v2.dashboards.create(data)
         res.raise_for_status()
 
         url = res.json()['web_url']
@@ -1406,7 +1414,7 @@ class dashboard_ops:
         return dashboards
 
     @classmethod
-    def _get_dashboard_json(cls, dashboard_name):
+    def _get_dashboard_json(cls, dashboard_name, only_content=True):
         dashboards = cls._get_all_dashboards()
         for index, dboard in enumerate(dashboards):
             if dboard['filename'] == dashboard_name:
@@ -1415,8 +1423,11 @@ class dashboard_ops:
         dashboard = v2.utils.request(
             'get', dashboards[index]['api_urls']['dashboards']
         ).json()
-        dashboard_json = json.loads(dashboard['content'])
-        return dashboard_json
+        if only_content:
+            dashboard_json = json.loads(dashboard['content'])
+            return dashboard_json
+        else:
+            return dashboard
 
     @classmethod
     def get_dashboard(cls, dashboard_name):
