@@ -113,45 +113,15 @@ class TestDashboard(TestCase):
         dash = dashboard.Dashboard()
         dash.insert(my_box, '', 0)
         dash.insert(my_box, 'above', 1)
-        dash.insert(my_box, 'left', 2)
-        dash.insert(my_box, 'right', 2)
-        dash.insert(my_box, 'below', 4)
 
         expected_dashboard = {
             'layout': {'direction': 'vertical',
                        'first': {'direction': 'vertical',
-                                 'first': {'direction': 'horizontal',
-                                           'first': {'direction': 'vertical',
-                                                     'first': {'boxType': 'plot',
-                                                               'fileId': 'AdamKulidjian:327',
-                                                               'shareKey': None,
-                                                               'title': 'box 1',
-                                                               'type': 'box'},
-                                                     'second': {'boxType': 'plot',
-                                                                'fileId': 'AdamKulidjian:327',
-                                                                'shareKey': None,
-                                                                'title': 'box 1',
-                                                                'type': 'box'},
-                                                     'size': 50,
-                                                     'sizeUnit': '%',
-                                                     'type': 'split'},
-                                           'second': {'direction': 'horizontal',
-                                                      'first': {'boxType': 'plot',
-                                                                'fileId': 'AdamKulidjian:327',
-                                                                'shareKey': None,
-                                                                'title': 'box 1',
-                                                                'type': 'box'},
-                                                      'second': {'boxType': 'plot',
-                                                                 'fileId': 'AdamKulidjian:327',
-                                                                 'shareKey': None,
-                                                                 'title': 'box 1',
-                                                                 'type': 'box'},
-                                                      'size': 50,
-                                                      'sizeUnit': '%',
-                                                      'type': 'split'},
-                                           'size': 50,
-                                           'sizeUnit': '%',
-                                           'type': 'split'},
+                                 'first': {'boxType': 'plot',
+                                           'fileId': 'AdamKulidjian:327',
+                                           'shareKey': None,
+                                           'title': 'box 1',
+                                           'type': 'box'},
                                  'second': {'boxType': 'plot',
                                             'fileId': 'AdamKulidjian:327',
                                             'shareKey': None,
@@ -161,11 +131,11 @@ class TestDashboard(TestCase):
                                  'sizeUnit': '%',
                                  'type': 'split'},
                        'second': {'boxType': 'empty', 'type': 'box'},
-                       'size': 1500,
+                       'size': 1000,
                        'sizeUnit': 'px',
                        'type': 'split'},
             'settings': {},
             'version': 2
         }
 
-        self.assertEqual(dash, expected_dashboard)
+        self.assertEqual(dash['layout'], expected_dashboard['layout'])
