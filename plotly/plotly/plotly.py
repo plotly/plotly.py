@@ -1354,12 +1354,21 @@ class dashboard_ops:
     @classmethod
     def upload(cls, dashboard, filename, sharing='public', auto_open=True):
         """
-        BETA function for uploading dashboards to Plotly.
+        BETA function for uploading/overwriting dashboards to Plotly.
 
-        :param (dict) dashboard:
-        :param (str) filename:
-        :param (str) sharing:
-        :param (bool) auto_open:
+        :param (dict) dashboard: the JSON dashboard to be uploaded. Use
+            plotly.dashboard_objs.dashboard_objs to create a Dashboard
+            object.
+        :param (str) filename: the name of the dashboard to be saved in
+            your Plotly account. Will overwrite a dashboard of the same
+            name if it already exists in your files.
+        :param (str) sharing: can be set to either 'public', 'private'
+            or 'secret'. If 'public', your dashboard will be viewable by
+            all other users. If 'secret', only you can see your dashboard.
+            If 'secret', the url will be returned with a sharekey appended
+            to the url. Anyone with the url may view the dashboard.
+        :param (bool) auto_open: automatically opens the dashboard in the
+            browser.
         """
         if sharing == 'public':
             world_readable = True
@@ -1374,16 +1383,18 @@ class dashboard_ops:
             'world_readable': world_readable
         }
 
-        # check if pre-existing filename already exists
-        filenames = cls.get_dashboard_names()
-        if filename in filenames:
+        # lookup if pre-existing filename already exists
+        try:
+            v2.files.lookup(filename)
             matching_dashboard = cls._get_dashboard_json(
                 filename, False
             )
-            fid = matching_dashboard['fid']
-            res = v2.dashboards.update(fid, data)
 
-        else:
+            if matching_dashboard['filetype'] == 'dashboard':
+                old_fid = matching_dashboard['fid']
+                res = v2.dashboards.update(old_fid, data)
+
+        except exceptions.PlotlyRequestError:
             res = v2.dashboards.create(data)
         res.raise_for_status()
 

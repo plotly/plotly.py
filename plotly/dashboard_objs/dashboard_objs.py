@@ -139,7 +139,7 @@ class Dashboard(dict):
             content = {}
 
         if not content:
-            self['layout'] = _empty_box()
+            self['layout'] = None
             self['version'] = 2
             self['settings'] = {}
         else:
@@ -160,7 +160,7 @@ class Dashboard(dict):
                     max_id = max(box_ids_to_path.keys())
                 except ValueError:
                     max_id = 0
-                box_ids_to_path[max_id + 1] = list(node[1])
+                box_ids_to_path[max_id + 1] = node[1]  # list(...)
 
         return box_ids_to_path
 
@@ -183,14 +183,23 @@ class Dashboard(dict):
         else:
             self['layout'] = box_or_container
 
-    def _set_container_sizes(self):
+    def _make_all_nodes_and_paths(self):
         all_nodes = list(node_generator(self['layout']))
 
+        # remove path 'second' as it's always an empty box
         all_paths = []
         for node in all_nodes:
-            all_paths.append(list(node[1]))
-        if ['second'] in all_paths:
-            all_paths.remove(['second'])
+            all_paths.append(node[1])
+        path_second = ('second',)
+        if path_second in all_paths:
+            all_paths.remove(path_second)
+        return all_nodes, all_paths
+
+    def _set_container_sizes(self):
+        if self['layout'] is None:
+            return
+
+        all_nodes, all_paths = self._make_all_nodes_and_paths()
 
         # set dashboard_height proportional to max_path_len
         max_path_len = max(len(path) for path in all_paths)
@@ -229,13 +238,20 @@ class Dashboard(dict):
         dict. Otherwise, returns an IPython.core.display.HTML display of the
         dashboard.
 
-        The algorithm - iteratively go through all paths of the dashboards
-        moving from shorter to longer paths. Checking the box or container
-        that sits at the end each path, if you find a container, draw a line
-        to divide the current box into two, and record the top-left
-        coordinates and box width and height resulting from the two boxes
-        along with the corresponding path. When the path points to a box,
-        draw the number associated with that box in the center of the box.
+        The algorithm used to build the HTML preview involves going through
+        the paths of the node generator of the dashboard. The paths of the
+        dashboard are sequenced through from shorter to longer and whether
+        it's a box or container that lies at the end of the path determines
+        the action.
+
+        If it's a container, draw a line in the figure to divide the current
+        box into two and store the specs of the resulting two boxes. If the
+        path points to a terminal box (often containing a plot), then draw
+        the box id in the center of the box.
+
+        It's important to note that these box ids are generated on-the-fly and
+        they do not necessarily stay assigned to the boxes they were once
+        assigned to.
         """
         if IPython is None:
             pprint.pprint(self)
@@ -259,18 +275,12 @@ class Dashboard(dict):
         path_to_box_specs[('first',)] = first_box_specs
 
         # generate all paths
-        all_nodes = list(node_generator(self['layout']))
-
-        all_paths = []
-        for node in all_nodes:
-            all_paths.append(list(node[1]))
-        if ['second'] in all_paths:
-            all_paths.remove(['second'])
+        all_nodes, all_paths = self._make_all_nodes_and_paths()
 
         max_path_len = max(len(path) for path in all_paths)
         for path_len in range(1, max_path_len + 1):
             for path in [path for path in all_paths if len(path) == path_len]:
-                current_box_specs = path_to_box_specs[tuple(path)]
+                current_box_specs = path_to_box_specs[path]
 
                 if self._path_to_box(path)['type'] == 'split':
                     html_figure = _draw_line_through_box(
@@ -316,8 +326,8 @@ class Dashboard(dict):
                         'box_h': new_box_h
                     }
 
-                    path_to_box_specs[tuple(path) + ('first',)] = box_1_specs
-                    path_to_box_specs[tuple(path) + ('second',)] = box_2_specs
+                    path_to_box_specs[path + ('first',)] = box_1_specs
+                    path_to_box_specs[path + ('second',)] = box_2_specs
 
                 elif self._path_to_box(path)['type'] == 'box':
                     for box_id in box_ids_to_path:
@@ -326,10 +336,10 @@ class Dashboard(dict):
 
                     html_figure = _add_html_text(
                         html_figure, number,
-                        path_to_box_specs[tuple(path)]['top_left_x'],
-                        path_to_box_specs[tuple(path)]['top_left_y'],
-                        path_to_box_specs[tuple(path)]['box_w'],
-                        path_to_box_specs[tuple(path)]['box_h'],
+                        path_to_box_specs[path]['top_left_x'],
+                        path_to_box_specs[path]['top_left_y'],
+                        path_to_box_specs[path]['box_w'],
+                        path_to_box_specs[path]['box_h'],
                     )
 
         # display HTML representation
@@ -347,22 +357,10 @@ class Dashboard(dict):
             the insertion of the box.
         """
         box_ids_to_path = self._compute_box_ids()
-        init_box = {
-            'type': 'box',
-            'boxType': 'plot',
-            'fileId': '',
-            'shareKey': None,
-            'title': ''
-        }
-
-        # force box to have all valid box keys
-        for key in init_box.keys():
-            if key not in box.keys():
-                box[key] = init_box[key]
 
         # doesn't need box_id or side specified for first box
-        if 'first' not in self['layout']:
-            self._insert(_container(box, _empty_box()), [])
+        if self['layout'] is None:
+            self['layout'] = _container(box, _empty_box())
         else:
             if box_id is None:
                 raise exceptions.PlotlyError(
