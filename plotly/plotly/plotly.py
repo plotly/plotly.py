@@ -1348,8 +1348,50 @@ def get_grid(grid_url, raw=False):
 class dashboard_ops:
     """
     Interface to Plotly's Dashboards API.
+
     Plotly Dashboards are JSON blobs. They are made up by a bunch of
     containers which contain either empty boxes or boxes with file urls.
+    For more info on Dashboard objects themselves, run
+    `help(plotly.dashboard_objs)`.
+
+    Example 1: Upload Simple Dashboard
+    ```
+    import plotly.plotly as py
+    import plotly.dashboard_objs as dashboard
+    box_1 = {
+        'type': 'box',
+        'boxType': 'plot',
+        'fileId': 'username:123',
+        'title': 'box 1'
+    }
+
+    box_2 = {
+        'type': 'box',
+        'boxType': 'plot',
+        'fileId': 'username:456',
+        'title': 'box 2'
+    }
+
+    my_dboard = dashboard.Dashboard()
+    my_dboard.insert(box_1)
+    # my_dboard.get_preview()
+    my_dboard.insert(box_2, 'above', 1)
+    # my_dboard.get_preview()
+
+    py.dashboard_ops.upload(my_dboard)
+    ```
+
+    Example 2: Retreive Dashboard from Plotly
+    ```
+    # works if you have at least one dashboard in your files
+    import plotly.plotly as py
+    import plotly.dashboard_objs as dashboard
+
+    dboard_names = get_dashboard_names()
+    first_dboard = get_dashboard(dboard_names[0])
+
+    first_dboard.get_preview()
+    ```
     """
     @classmethod
     def upload(cls, dashboard, filename, sharing='public', auto_open=True):
@@ -1364,7 +1406,7 @@ class dashboard_ops:
             name if it already exists in your files.
         :param (str) sharing: can be set to either 'public', 'private'
             or 'secret'. If 'public', your dashboard will be viewable by
-            all other users. If 'secret', only you can see your dashboard.
+            all other users. If 'private' only you can see your dashboard.
             If 'secret', the url will be returned with a sharekey appended
             to the url. Anyone with the url may view the dashboard.
         :param (bool) auto_open: automatically opens the dashboard in the
@@ -1385,14 +1427,23 @@ class dashboard_ops:
 
         # lookup if pre-existing filename already exists
         try:
-            v2.files.lookup(filename)
-            matching_dashboard = cls._get_dashboard_json(
-                filename, False
-            )
+            lookup_res = v2.files.lookup(filename)
+            matching_file = json.loads(lookup_res.content)
 
-            if matching_dashboard['filetype'] == 'dashboard':
-                old_fid = matching_dashboard['fid']
+            if matching_file['filetype'] == 'dashboard':
+                old_fid = matching_file['fid']
                 res = v2.dashboards.update(old_fid, data)
+            else:
+                raise exceptions.PlotlyError(
+                    "'{filename}' is already a {filetype} in your account. "
+                    "While you can overwrite dashboards with the same name, "
+                    "you can't change overwrite files with a different type. "
+                    "Try deleting '{filename}' in your account or changing "
+                    "the filename.".format(
+                        filename=filename,
+                        filetype=matching_file['filetype']
+                    )
+                )
 
         except exceptions.PlotlyRequestError:
             res = v2.dashboards.create(data)
@@ -1400,11 +1451,11 @@ class dashboard_ops:
 
         url = res.json()['web_url']
 
-        if auto_open:
-            webbrowser.open_new(res.json()['web_url'])
-
         if sharing == 'secret':
             url = add_share_key_to_url(url)
+
+        if auto_open:
+            webbrowser.open_new(res.json()['web_url'])
 
         return url
 

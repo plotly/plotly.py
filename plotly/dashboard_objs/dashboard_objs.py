@@ -5,6 +5,69 @@ dashboard_objs
 A module for creating and manipulating dashboard content. You can create
 a Dashboard object, insert boxes, swap boxes, remove a box and get an HTML
 preview of the Dashboard.
+
+The current workflow for making and manipulating dashboard follows:
+1) Create a Dashboard
+2) Modify the Dashboard (insert, swap, remove, etc)
+3) Preview the Dashboard (run `.get_preview()`)
+4) Repeat steps 2) and 3) as long as desired
+
+The basic box object that your insert into a dashboard is just a `dict`.
+The minimal dict for a box is:
+
+```
+{
+    'type': 'box',
+    'boxType': 'plot'
+}
+```
+
+where 'fileId' can be set to the 'username:#' of your plot. The other
+parameters
+a box takes are `shareKey` (default is None) and `title` (default is '').
+
+You will need to use the `.get_preview()` method quite regularly as this will
+return an HTML representation of the dashboard in which the boxes in the HTML
+are labelled with on-the-fly-generated numbers which change after each
+modification to the dashboard.
+
+Example: Create a simple Dashboard object
+```
+import plotly.dashboard_objs as dashboard
+
+box_1 = {
+    'type': 'box',
+    'boxType': 'plot',
+    'fileId': 'username:some#',
+    'title': 'box 1'
+}
+
+box_2 = {
+    'type': 'box',
+    'boxType': 'plot',
+    'fileId': 'username:some#',
+    'title': 'box 2'
+}
+
+box_3 = {
+    'type': 'box',
+    'boxType': 'plot',
+    'fileId': 'username:some#',
+    'title': 'box 3'
+}
+
+my_dboard = dashboard.Dashboard()
+my_dboard.insert(box_1)
+# my_dboard.get_preview()
+my_dboard.insert(box_2, 'above', 1)
+# my_dboard.get_preview()
+my_dboard.insert(box_3, 'left', 2)
+# my_dboard.get_preview()
+my_dboard.swap(1, 2)
+# my_dboard.get_preview()
+my_dboard.remove(1)
+# my_dboard.get_preview()
+```
 """
 
 import pprint
@@ -134,6 +197,70 @@ def _add_html_text(dashboard_html, text, top_left_x, top_left_y, box_w, box_h):
 
 
 class Dashboard(dict):
+    """
+    Dashboard class for creating interactive dashboard objects.
+
+    Dashboards are dicts that contain boxes which hold plot information.
+    These boxes can be arranged in various ways. The most basic form of
+    a box is:
+
+    ```
+    {
+        'type': 'box',
+        'boxType': 'plot'
+    }
+    ```
+
+    where 'fileId' can be set to the 'username:#' of your plot. The other
+    parameters a box takes are `shareKey` (default is None) and `title`
+    (default is '').
+
+    `.get_preview()` should be called quite regularly to get an HTML
+    representation of the dashboard in which the boxes in the HTML
+    are labelled with on-the-fly-generated numbers or box ids which
+    change after each modification to the dashboard.
+
+    `.get_box()` returns the box located in the dashboard by calling
+    its box id as displayed via `.get_preview()`.
+
+    Example: Create a simple Dashboard object
+    ```
+    import plotly.dashboard_objs as dashboard
+
+    box_1 = {
+        'type': 'box',
+        'boxType': 'plot',
+        'fileId': 'username:some#',
+        'title': 'box 1'
+    }
+
+    box_2 = {
+        'type': 'box',
+        'boxType': 'plot',
+        'fileId': 'username:some#',
+        'title': 'box 2'
+    }
+
+    box_3 = {
+        'type': 'box',
+        'boxType': 'plot',
+        'fileId': 'username:some#',
+        'title': 'box 3'
+    }
+
+    my_dboard = dashboard.Dashboard()
+    my_dboard.insert(box_1)
+    # my_dboard.get_preview()
+    my_dboard.insert(box_2, 'above', 1)
+    # my_dboard.get_preview()
+    my_dboard.insert(box_3, 'left', 2)
+    # my_dboard.get_preview()
+    my_dboard.swap(1, 2)
+    # my_dboard.get_preview()
+    my_dboard.remove(1)
+    # my_dboard.get_preview()
+    ```
+    """
     def __init__(self, content=None):
         if content is None:
             content = {}
@@ -160,7 +287,7 @@ class Dashboard(dict):
                     max_id = max(box_ids_to_path.keys())
                 except ValueError:
                     max_id = 0
-                box_ids_to_path[max_id + 1] = node[1]  # list(...)
+                box_ids_to_path[max_id + 1] = node[1]
 
         return box_ids_to_path
 
@@ -355,6 +482,27 @@ class Dashboard(dict):
             'left', and 'right'.
         :param (int) box_id: the box id which is used as the reference box for
             the insertion of the box.
+
+        Example:
+        ```
+        import plotly.dashboard_objs as dashboard
+
+        box_1 = {
+            'type': 'box',
+            'boxType': 'plot',
+            'fileId': 'username:some#',
+            'title': 'box 1'
+        }
+
+        my_dboard = dashboard.Dashboard()
+        my_dboard.insert(box_1)
+        my_dboard.insert(box_1, 'left', 1)
+        my_dboard.insert(box_1, 'below', 2)
+        my_dboard.insert(box_1, 'right', 3)
+        my_dboard.insert(box_1, 'above', 4)
+
+        my_dboard.get_preview()
+        ```
         """
         box_ids_to_path = self._compute_box_ids()
 
@@ -403,7 +551,27 @@ class Dashboard(dict):
         self._set_container_sizes()
 
     def remove(self, box_id):
-        """Remove a box from the dashboard by its box_id."""
+        """
+        Remove a box from the dashboard by its box_id.
+
+        Example:
+        ```
+        import plotly.dashboard_objs as dashboard
+
+        box_1 = {
+            'type': 'box',
+            'boxType': 'plot',
+            'fileId': 'username:some#',
+            'title': 'box 1'
+        }
+
+        my_dboard = dashboard.Dashboard()
+        my_dboard.insert(box_1)
+        my_dboard.remove(1)
+
+        my_dboard.get_preview()
+        ```
+        """
         box_ids_to_path = self._compute_box_ids()
         if box_id not in box_ids_to_path:
             raise exceptions.PlotlyError(ID_NOT_VALID_MESSAGE)
@@ -424,7 +592,41 @@ class Dashboard(dict):
         self._set_container_sizes()
 
     def swap(self, box_id_1, box_id_2):
-        """Swap two boxes with their specified ids."""
+        """
+        Swap two boxes with their specified ids.
+
+        Example:
+        ```
+        import plotly.dashboard_objs as dashboard
+
+        box_1 = {
+            'type': 'box',
+            'boxType': 'plot',
+            'fileId': 'username:first#',
+            'title': 'first box'
+        }
+
+        box_2 = {
+            'type': 'box',
+            'boxType': 'plot',
+            'fileId': 'username:second#',
+            'title': 'second box'
+        }
+
+        my_dboard = dashboard.Dashboard()
+        my_dboard.insert(box_1)
+        my_dboard.insert(box_2, 'above', 1)
+
+        # check box at box id 1
+        box_at_1 = my_dboard.get_box(1)
+        print(box_at_1)
+
+        my_dboard.swap(1, 2)
+
+        box_after_swap = my_dboard.get_box(1)
+        print(box_after_swap)
+        ```
+        """
         box_ids_to_path = self._compute_box_ids()
         box_1 = self.get_box(box_id_1)
         box_2 = self.get_box(box_id_2)
