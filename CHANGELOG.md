@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Support for rendering plots in [nteract](https://nteract.io/)!
   See [https://github.com/nteract/nteract/pull/662](https://github.com/nteract/nteract/pull/662)
   for the associated PR in nteract.
+- As part of the above, plotly output now prints with a [custom mimetype](https://github.com/plotly/plotly.py/blob/f65724f06b894a5db94245ee4889c632b887d8ce/plotly/offline/offline.py#L348) - `application/vnd.plotly.v1+json`
 
 ### Added
 - `memoize` decorator added to `plotly.utils`
