@@ -17,8 +17,10 @@ and ploty's servers.
 from __future__ import absolute_import
 
 import copy
+import json
 import os
 import warnings
+import webbrowser
 
 import six
 import six.moves
@@ -28,6 +30,7 @@ from plotly import exceptions, files, session, tools, utils
 from plotly.api import v1, v2
 from plotly.plotly import chunked_requests
 from plotly.grid_objs import Grid, Column
+from plotly.dashboard_objs import dashboard_objs as dashboard
 
 # This is imported like this for backwards compat. Careful if changing.
 from plotly.config import get_config, get_credentials
@@ -1340,6 +1343,165 @@ def get_grid(grid_url, raw=False):
     if raw:
         return parsed_content
     return Grid(parsed_content, fid)
+
+
+class dashboard_ops:
+    """
+    Interface to Plotly's Dashboards API.
+
+    Plotly Dashboards are JSON blobs. They are made up by a bunch of
+    containers which contain either empty boxes or boxes with file urls.
+    For more info on Dashboard objects themselves, run
+    `help(plotly.dashboard_objs)`.
+
+    Example 1: Upload Simple Dashboard
+    ```
+    import plotly.plotly as py
+    import plotly.dashboard_objs as dashboard
+    box_1 = {
+        'type': 'box',
+        'boxType': 'plot',
+        'fileId': 'username:123',
+        'title': 'box 1'
+    }
+
+    box_2 = {
+        'type': 'box',
+        'boxType': 'plot',
+        'fileId': 'username:456',
+        'title': 'box 2'
+    }
+
+    my_dboard = dashboard.Dashboard()
+    my_dboard.insert(box_1)
+    # my_dboard.get_preview()
+    my_dboard.insert(box_2, 'above', 1)
+    # my_dboard.get_preview()
+
+    py.dashboard_ops.upload(my_dboard)
+    ```
+
+    Example 2: Retreive Dashboard from Plotly
+    ```
+    # works if you have at least one dashboard in your files
+    import plotly.plotly as py
+    import plotly.dashboard_objs as dashboard
+
+    dboard_names = get_dashboard_names()
+    first_dboard = get_dashboard(dboard_names[0])
+
+    first_dboard.get_preview()
+    ```
+    """
+    @classmethod
+    def upload(cls, dashboard, filename, sharing='public', auto_open=True):
+        """
+        BETA function for uploading/overwriting dashboards to Plotly.
+
+        :param (dict) dashboard: the JSON dashboard to be uploaded. Use
+            plotly.dashboard_objs.dashboard_objs to create a Dashboard
+            object.
+        :param (str) filename: the name of the dashboard to be saved in
+            your Plotly account. Will overwrite a dashboard of the same
+            name if it already exists in your files.
+        :param (str) sharing: can be set to either 'public', 'private'
+            or 'secret'. If 'public', your dashboard will be viewable by
+            all other users. If 'private' only you can see your dashboard.
+            If 'secret', the url will be returned with a sharekey appended
+            to the url. Anyone with the url may view the dashboard.
+        :param (bool) auto_open: automatically opens the dashboard in the
+            browser.
+        """
+        if sharing == 'public':
+            world_readable = True
+        elif sharing == 'private':
+            world_readable = False
+        elif sharing == 'secret':
+            world_readable = False
+
+        data = {
+            'content': json.dumps(dashboard),
+            'filename': filename,
+            'world_readable': world_readable
+        }
+
+        # lookup if pre-existing filename already exists
+        try:
+            lookup_res = v2.files.lookup(filename)
+            matching_file = json.loads(lookup_res.content)
+
+            if matching_file['filetype'] == 'dashboard':
+                old_fid = matching_file['fid']
+                res = v2.dashboards.update(old_fid, data)
+            else:
+                raise exceptions.PlotlyError(
+                    "'{filename}' is already a {filetype} in your account. "
+                    "While you can overwrite dashboards with the same name, "
+                    "you can't change overwrite files with a different type. "
+                    "Try deleting '{filename}' in your account or changing "
+                    "the filename.".format(
+                        filename=filename,
+                        filetype=matching_file['filetype']
+                    )
+                )
+
+        except exceptions.PlotlyRequestError:
+            res = v2.dashboards.create(data)
+        res.raise_for_status()
+
+        url = res.json()['web_url']
+
+        if sharing == 'secret':
+            url = add_share_key_to_url(url)
+
+        if auto_open:
+            webbrowser.open_new(res.json()['web_url'])
+
+        return url
+
+    @classmethod
+    def _get_all_dashboards(cls):
+        dashboards = []
+        res = v2.dashboards.list().json()
+
+        for dashboard in res['results']:
+            if not dashboard['deleted']:
+                dashboards.append(dashboard)
+        while res['next']:
+            res = v2.utils.request('get', res['next']).json()
+
+            for dashboard in res['results']:
+                if not dashboard['deleted']:
+                    dashboards.append(dashboard)
+        return dashboards
+
+    @classmethod
+    def _get_dashboard_json(cls, dashboard_name, only_content=True):
+        dashboards = cls._get_all_dashboards()
+        for index, dboard in enumerate(dashboards):
+            if dboard['filename'] == dashboard_name:
+                break
+
+        dashboard = v2.utils.request(
+            'get', dashboards[index]['api_urls']['dashboards']
+        ).json()
+        if only_content:
+            dashboard_json = json.loads(dashboard['content'])
+            return dashboard_json
+        else:
+            return dashboard
+
+    @classmethod
+    def get_dashboard(cls, dashboard_name):
+        """Returns a Dashboard object from a dashboard name."""
+        dashboard_json = cls._get_dashboard_json(dashboard_name)
+        return dashboard.Dashboard(dashboard_json)
+
+    @classmethod
+    def get_dashboard_names(cls):
+        """Return list of all active dashboard names from users' account."""
+        dashboards = cls._get_all_dashboards()
+        return [str(dboard['filename']) for dboard in dashboards]
 
 
 def create_animations(figure, filename=None, sharing='public', auto_open=True):
