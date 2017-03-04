@@ -2,8 +2,30 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [2.0.0]
+## [Unreleased]
+## Added
+- dashboards can now be created using the API. Use `plotly.dashboard_objs`
 
+## [2.0.2] - 2017-02-20
+### Fixed
+- Offline plots created with `plotly.offline.plot` now resize as expected when the window is resized.
+- `plotly.figure_factory.create_distplot` now can support more than 10 traces without raising an error. Updated so that if the list of `colors` (default colors too) is less than your number of traces, the color for your traces will loop around to start when it hits the end.
+
+## [2.0.1] - 2017-02-07
+### Added
+- Support for rendering plots in [nteract](https://nteract.io/)!
+  See [https://github.com/nteract/nteract/pull/662](https://github.com/nteract/nteract/pull/662)
+  for the associated PR in nteract.
+- As part of the above, plotly output now prints with a [custom mimetype](https://github.com/plotly/plotly.py/blob/f65724f06b894a5db94245ee4889c632b887d8ce/plotly/offline/offline.py#L348) - `application/vnd.plotly.v1+json`
+
+### Added
+- `memoize` decorator added to `plotly.utils`
+
+### Changed
+- a `Grid` from `plotly.grid_objs` now accepts a `pandas.Dataframe` as its argument.
+- computationally-intensive `graph_reference` functions are memoized.
+
+## [2.0.0] - 2017-01-25
 ### Changed
 - `plotly.exceptions.PlotlyRequestException` is *always* raised for network
 failures. Previously either a `PlotlyError`, `PlotlyRequestException`, or a
@@ -14,6 +36,8 @@ revisited.
   config. If it cannot make a successful request, it raises a `PlotlyError`.
 - `plotly.figure_factory` will raise an `ImportError` if `numpy` is not
   installed.
+- `plotly.figure_factory.create_violin()` now has a `rugplot` parameter which
+  determines whether or not a rugplot is draw beside each violin plot.
 
 ### Deprecated
 - `plotly.tools.FigureFactory`. Use `plotly.figure_factory.*`.
@@ -22,7 +46,7 @@ it's gone. (e.g., `_numpy_imported`)
 - (plotly v2 helper) `plotly.py._api_v2` It was private anyhow, but now it's
 gone.
 
-## [1.13.0] - 2016-01-17
+## [1.13.0] - 2016-12-17
 ### Added
 - Python 3.5 has been added as a tested environment for this package.
 
@@ -36,7 +60,7 @@ gone.
 ## [1.12.12] - 2016-12-06
 ### Updated
 - Updated `plotly.min.js` to version 1.20.5 for `plotly.offline`.
-	- See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md) for additional information regarding the updates
+  - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md) for additional information regarding the updates
 - `FF.create_scatterplotmatrix` now by default does not show the trace labels for the box plots, only if `diag=box` is selected for the diagonal subplot type.
 
 ## [1.12.11] - 2016-12-01
@@ -50,7 +74,7 @@ gone.
 
 ### Added
 - Plot configuration options for offline plots. See the list of [configuration options](https://github.com/Rikorose/plotly.py/blob/master/plotly/offline/offline.py#L189) and [examples](https://plot.ly/javascript/configuration-options/) for more information.
-	- Please note that these configuration options are for offline plots ONLY. For configuration options when embedding online plots please see our [embed tutorial](http://help.plot.ly/embed-graphs-in-websites/#step-8-customize-the-iframe).
+  - Please note that these configuration options are for offline plots ONLY. For configuration options when embedding online plots please see our [embed tutorial](http://help.plot.ly/embed-graphs-in-websites/#step-8-customize-the-iframe).
 - `colors.py` file which contains functions for manipulating and validating colors and arrays of colors
 - 'scale' param in `FF.create_trisurf` which now can set the interpolation on the colorscales
 - animations now work in offline mode. By running `plotly.offline.plot()` and `plotly.offline.iplot()` with a `fig` with `frames`, the resulting plot will cycle through the figures defined in `frames` either in the browser or in an ipython notebook respectively. Here's an example:
@@ -169,14 +193,14 @@ Then, whenever you update the data in `'my-grid'`, the associated plot will upda
 ## [1.12.7] - 2016-08-17
 ### Fixed
 - Edited `plotly.min.js` due to issue using `iplot` to plot offline in Jupyter Notebooks
-	- Please note that `plotly.min.js` may be cached in your Jupyter Notebook. Therefore, if you continue to experience this issue after upgrading the Plotly package please open a new notebook or clear the cache to ensure the correct `plotly.min.js` is referenced.
+  - Please note that `plotly.min.js` may be cached in your Jupyter Notebook. Therefore, if you continue to experience this issue after upgrading the Plotly package please open a new notebook or clear the cache to ensure the correct `plotly.min.js` is referenced.
 
 ## [1.12.6] - 2016-08-09
 ### Updated
 - Updated `plotly.min.js` from 1.14.1 to 1.16.2
-	- Trace type scattermapbox is now part of the main bundle
-	- Add updatemenus (aka dropdowns) layout components
-	- See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md) for additional information regarding the updates
+  - Trace type scattermapbox is now part of the main bundle
+  - Add updatemenus (aka dropdowns) layout components
+  - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md) for additional information regarding the updates
 
 ## [1.12.5] - 2016-08-03
 ### Updated
@@ -197,10 +221,10 @@ help(tls.FigureFactory.create_2D_density)
 ## [1.12.3] - 2016-06-30
 ### Updated
 - Updated `plotly.min.js` from 1.13.0 to 1.14.1
-	- Numerous additions and changes where made to the mapbox layout layers attributes
-	- Attribute line.color in scatter3d traces now support color scales
-	- Layout shapes can now be moved and resized (except for 'path' shapes) in editable contexts
-	- See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1141----2016-06-28) for additional information regarding the updates
+  - Numerous additions and changes where made to the mapbox layout layers attributes
+  - Attribute line.color in scatter3d traces now support color scales
+  - Layout shapes can now be moved and resized (except for 'path' shapes) in editable contexts
+  - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1141----2016-06-28) for additional information regarding the updates
 - Updated `default-schema`
 
 ### Added
@@ -209,9 +233,9 @@ help(tls.FigureFactory.create_2D_density)
 ## [1.12.2] - 2016-06-20
 ### Updated
 - Updated plotly.min.js so the offline mode is using plotly.js v1.13.0
-	- Fix `Plotly.toImage` and `Plotly.downloadImage` bug specific to Chrome 51 on OSX
-	- Beta version of the scattermapbox trace type - which allows users to create mapbox-gl maps using the plotly.js API. Note that scattermapbox is only available through custom bundling in this release.
-	- See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1130----2016-05-26) for additional additions and updates.
+  - Fix `Plotly.toImage` and `Plotly.downloadImage` bug specific to Chrome 51 on OSX
+  - Beta version of the scattermapbox trace type - which allows users to create mapbox-gl maps using the plotly.js API. Note that scattermapbox is only available through custom bundling in this release.
+  - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1130----2016-05-26) for additional additions and updates.
 
 ### Added
 - The FigureFactory can now create gantt charts with `.create_gantt`. Check it out with:
@@ -244,19 +268,19 @@ help(tls.FigureFactory.create_violin)
 Note: This is a backwards incompatible change.
 
 - Updated plotly.min.js so the offline mode is using plotly.js v1.12.0
-	- Light position is now configurable in surface traces
-	- surface and mesh3d lighting attributes are now accompanied with comprehensive descriptions
+  - Light position is now configurable in surface traces
+  - surface and mesh3d lighting attributes are now accompanied with comprehensive descriptions
 
 - Allowed `create_scatterplotmatrix` and `create_trisurf` to use divergent and categorical colormaps. The parameter `palette` has been replaced by `colormap` and `use_palette` has been removed. In `create_scatterplotmatrix`, users can now:
-	- Input a list of different color types (hex, tuple, rgb) to `colormap` to map colors divergently
-	- Use the same list to categorically group the items in the index column
-	- Pass a singlton color type to `colormap` to color all the data with one color
-	- Input a dictionary to `colormap` to map index values to a specific color
-	- 'cat' and 'seq' are valid options for `colormap_type`, which specify the type of colormap being used
+  - Input a list of different color types (hex, tuple, rgb) to `colormap` to map colors divergently
+  - Use the same list to categorically group the items in the index column
+  - Pass a singlton color type to `colormap` to color all the data with one color
+  - Input a dictionary to `colormap` to map index values to a specific color
+  - 'cat' and 'seq' are valid options for `colormap_type`, which specify the type of colormap being used
 
 - In `create_trisurf`, the parameter `dist_func` has been replaced by `color_func`. Users can now:
-	- Input a list of different color types (hex, tuple, rgb) to `colormap` to map colors divergently
-	- Input a list|array of hex and rgb colors to `color_func` to assign each simplex to a color
+  - Input a list of different color types (hex, tuple, rgb) to `colormap` to map colors divergently
+  - Input a list|array of hex and rgb colors to `color_func` to assign each simplex to a color
 
 ### Added
 - Added the option to load plotly.js from a CDN by setting the parameter `connected=True`
@@ -304,9 +328,9 @@ help(tls.FigureFactory.create_scatterplotmatrix)
 ## [1.9.10] - 2016-04-27
 ### Updated
 - Updated plotly.min.js so the offline mode is using plotly.js v1.10.0
-	- Added beta versions of two new 2D WebGL trace types: heatmapgl, contourgl
-	- Added fills for scatterternary traces
-	- Added configurable shapes layer positioning with the shape attribute: `layer`
+  - Added beta versions of two new 2D WebGL trace types: heatmapgl, contourgl
+  - Added fills for scatterternary traces
+  - Added configurable shapes layer positioning with the shape attribute: `layer`
 
 ## [1.9.9] - 2016-04-15
 ### Fixed
@@ -318,8 +342,8 @@ help(tls.FigureFactory.create_scatterplotmatrix)
 
 ### Updated
 - Updated plotly.min.js so offline is using plotly.js v1.9.0
-	- Added Ternary plots with support for scatter traces (trace type `scatterternary`, currently only available in offline mode)
-	- For comprehensive update list see the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md)
+  - Added Ternary plots with support for scatter traces (trace type `scatterternary`, currently only available in offline mode)
+  - For comprehensive update list see the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md)
 
 ## [1.9.7] - 2016-04-04
 ### Fixed
@@ -327,11 +351,11 @@ help(tls.FigureFactory.create_scatterplotmatrix)
 
 ### Updated
 - Updated plotly.min.js so offline is using plotly.js v1.8.0
-	- Added range selector functionality for cartesian plots
-	- Added range slider functionality for scatter traces
-	- Added custom surface color functionality
-	- Added ability to subplot multiple graph types (SVG cartesian, 3D, maps, pie charts)
-	- For comprehensive update list see the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md)
+  - Added range selector functionality for cartesian plots
+  - Added range slider functionality for scatter traces
+  - Added custom surface color functionality
+  - Added ability to subplot multiple graph types (SVG cartesian, 3D, maps, pie charts)
+  - For comprehensive update list see the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md)
 
 ## [1.9.6] - 2016-02-18
 ### Updated
@@ -506,18 +530,18 @@ it does.
 ### Removed
 - `height` and `width` are no longer accepted in `iplot`. Just stick them into your figure's layout instead, it'll be more consistent when you view it outside of the IPython notebook environment. So, instead of this:
 
-	```
-	py.iplot([{'x': [1, 2, 3], 'y': [3, 1, 5]}], height=800)
-	```
+  ```
+  py.iplot([{'x': [1, 2, 3], 'y': [3, 1, 5]}], height=800)
+  ```
 
-	do this:
+  do this:
 
-	```
-	py.iplot({
-		'data': [{'x': [1, 2, 3], 'y': [3, 1, 5]}],
-		'layout': {'height': 800}
-	})
-	```
+  ```
+  py.iplot({
+    'data': [{'x': [1, 2, 3], 'y': [3, 1, 5]}],
+    'layout': {'height': 800}
+  })
+  ```
 
 ### Fixed
 - The height of the graph in `iplot` respects the figure's height in layout
