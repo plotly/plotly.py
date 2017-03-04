@@ -273,7 +273,7 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
           validate=True, image=None, filename='plot_image', image_width=800,
           image_height=600):
     """
-    Draw plotly graphs inside an IPython notebook without
+    Draw plotly graphs inside an IPython or Jupyter notebook without
     connecting to an external server.
     To save the chart to Plotly Cloud or Plotly Enterprise, use
     `plotly.plotly.iplot`.
@@ -335,7 +335,20 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         figure_or_data, config, validate, '100%', 525, True
     )
 
-    ipython_display.display(ipython_display.HTML(plot_html))
+    figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
+
+    # Though it can add quite a bit to the display-bundle size, we include
+    # multiple representations of the plot so that the display environment can
+    # choose which one to act on.
+    data = _json.loads(_json.dumps(figure['data'],
+                                   cls=plotly.utils.PlotlyJSONEncoder))
+    layout = _json.loads(_json.dumps(figure.get('layout', {}),
+                                     cls=plotly.utils.PlotlyJSONEncoder))
+    display_bundle = {
+        'application/vnd.plotly.v1+json': {'data': data, 'layout': layout},
+        'text/html': plot_html
+    }
+    ipython_display.display(display_bundle, raw=True)
 
     if image:
         if image not in __IMAGE_FORMATS:
@@ -441,7 +454,6 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         resize_script = (
             ''
             '<script type="text/javascript">'
-            'window.removeEventListener("resize");'
             'window.addEventListener("resize", function(){{'
             'Plotly.Plots.resize(document.getElementById("{id}"));}});'
             '</script>'

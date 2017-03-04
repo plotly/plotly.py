@@ -2,11 +2,16 @@ from __future__ import absolute_import
 
 from plotly.tests.utils import PlotlyTestCase
 
+from plotly import session
 from plotly.session import update_session_plot_options, SHARING_OPTIONS
 from plotly.exceptions import PlotlyError
 
 
 class TestSession(PlotlyTestCase):
+
+    def setUp(self):
+        super(TestSession, self).setUp()
+        session._session['plot_options'].clear()
 
     def test_update_session_plot_options_invalid_sharing_argument(self):
 

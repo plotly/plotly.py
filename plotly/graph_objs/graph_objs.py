@@ -34,6 +34,8 @@ import six
 from plotly import exceptions, graph_reference
 from plotly.graph_objs import graph_objs_tools
 
+_subplot_regex = re.compile(r'(?P<digits>\d+$)')
+
 
 class PlotlyBase(object):
     """
@@ -506,7 +508,7 @@ class PlotlyDict(dict, PlotlyBase):
 
     def _get_subplot_key(self, key):
         """Some keys can have appended integers, this handles that."""
-        match = re.search(r'(?P<digits>\d+$)', key)
+        match = _subplot_regex.search(key)
         if match:
             root_key = key[:match.start()]
             if (root_key in self._get_subplot_attributes() and

@@ -12,8 +12,10 @@ import re
 import sys
 import threading
 import decimal
+from collections import deque
 
 import pytz
+from decorator import decorator
 from requests.compat import json as _json
 
 from plotly.optional_imports import get_module
@@ -444,3 +446,47 @@ def set_sharing_and_world_readable(option_set):
             option_set['world_readable'] = True
         else:
             option_set['world_readable'] = False
+
+
+def _default_memoize_key_function(*args, **kwargs):
+    """Factored out in case we want to allow callers to specify this func."""
+    if kwargs:
+        # frozenset is used to ensure hashability
+        return args, frozenset(kwargs.items())
+    else:
+        return args
+
+
+def memoize(maxsize=128):
+    """
+    Memoize a function by its arguments. Note, if the wrapped function returns
+    a mutable result, the caller is responsible for *not* mutating the result
+    as it will mutate the cache itself.
+
+    :param (int|None) maxsize: Limit the number of cached results. This is a
+                               simple way to prevent memory leaks. Setting this
+                               to `None` will remember *all* calls. The 128
+                               number is used for parity with the Python 3.2
+                               `functools.lru_cache` tool.
+
+    """
+    keys = deque()
+    cache = {}
+
+    def _memoize(*all_args, **kwargs):
+        func = all_args[0]
+        args = all_args[1:]
+        key = _default_memoize_key_function(*args, **kwargs)
+
+        if key in keys:
+            return cache[key]
+
+        if maxsize is not None and len(keys) == maxsize:
+            cache.pop(keys.pop())
+
+        result = func(*args, **kwargs)
+        keys.appendleft(key)
+        cache[key] = result
+        return result
+
+    return decorator(_memoize)

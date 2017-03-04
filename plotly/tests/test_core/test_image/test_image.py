@@ -1,6 +1,5 @@
 from __future__ import absolute_import
 
-from unittest import TestCase
 import imghdr
 import tempfile
 import os
@@ -11,15 +10,15 @@ from nose.plugins.attrib import attr
 
 from plotly import exceptions
 from plotly.plotly import plotly as py
+from plotly.tests.utils import PlotlyTestCase
 
 
 @attr('slow')
-class TestImage(TestCase):
-    def setUp(self):
-        py.sign_in('PlotlyImageTest', '786r5mecv0',
-                   plotly_domain='https://plot.ly',
-                   plotly_api_domain='https://api.plot.ly')
+class TestImage(PlotlyTestCase):
 
+    def setUp(self):
+        super(TestImage, self).setUp()
+        py.sign_in('PlotlyImageTest', '786r5mecv0')
         self.data = [{'x': [1, 2, 3], 'y': [3, 1, 6]}]
 
 
