@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## Added
 - dashboards can now be created using the API and uploaded to Plotly. Use `import plotly.dashboard_objs` to be create a dashboard a `Dashboard` object. You can learn more about `Dashboard` objects by running `help(plotly.dashboard_objs.Dashboard)` and `help(plotly.plotly.plotly.dashboard_ops)` for uploading and retrieving dashboards from the cloud.
 
+
 ## [2.0.2] - 2017-02-20
 ### Fixed
 - Offline plots created with `plotly.offline.plot` now resize as expected when the window is resized.
