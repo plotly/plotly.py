@@ -145,7 +145,7 @@ def init_notebook_mode(connected=False):
 
 
 def _plot_html(figure_or_data, config, validate, default_width,
-               default_height, global_requirejs):
+               default_height, global_requirejs, output_type):
     # force no validation if frames is in the call
     # TODO - add validation for frames in call - #605
     if 'frames' in figure_or_data:
@@ -206,6 +206,13 @@ def _plot_html(figure_or_data, config, validate, default_width,
 
     config_clean = dict((k, config[k]) for k in configkeys if k in config)
     jconfig = _json.dumps(config_clean)
+
+    if output_type == 'json':
+        if 'frames' in figure_or_data:
+            return (jdata, jlayout, jconfig, jframes)
+        else:
+            return (jdata, jlayout, jconfig)
+
 
     # TODO: The get_config 'source of truth' should
     # really be somewhere other than plotly.plotly
@@ -332,7 +339,7 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     config['linkText'] = link_text
 
     plot_html, plotdivid, width, height = _plot_html(
-        figure_or_data, config, validate, '100%', 525, True
+        figure_or_data, config, validate, '100%', 525, True, output_type='html'
     )
 
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
@@ -400,12 +407,14 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         are valid? omit if your version of plotly.js has become outdated
         with your version of graph_reference.json or if you need to include
         extra, unnecessary keys in your figure.
-    output_type ('file' | 'div' - default 'file') -- if 'file', then
+    output_type ('file' | 'div' | 'json' - default 'file') -- if 'file', then
         the graph is saved as a standalone HTML file and `plot`
         returns None.
         If 'div', then `plot` returns a string that just contains the
         HTML <div> that contains the graph and the script to generate the
         graph.
+        If 'json' then `plot` returns a tuple of JSON strings in the form of
+        (data, layout, config).
         Use 'file' if you want to save and view a single graph at a time
         in a standalone HTML file.
         Use 'div' if you are embedding these graphs in an HTML file with
@@ -431,9 +440,9 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     image_height (default=600) -- Specifies the height of the image in `px`.
     image_width (default=800) -- Specifies the width of the image in `px`.
     """
-    if output_type not in ['div', 'file']:
+    if output_type not in ['div', 'file', 'json']:
         raise ValueError(
-            "`output_type` argument must be 'div' or 'file'. "
+            "`output_type` argument must be 'div', 'file', or 'json'. "
             "You supplied `" + output_type + "``")
     if not filename.endswith('.html') and output_type == 'file':
         warnings.warn(
@@ -445,9 +454,13 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     config['showLink'] = show_link
     config['linkText'] = link_text
 
+    if output_type == 'json':
+        return _plot_html(figure_or_data, config, validate,
+                          '100%', '100%', global_requirejs=False, output_type=output_type)
+
     plot_html, plotdivid, width, height = _plot_html(
         figure_or_data, config, validate,
-        '100%', '100%', global_requirejs=False)
+        '100%', '100%', global_requirejs=False, output_type=output_type)
 
     resize_script = ''
     if width == '100%' or height == '100%':
