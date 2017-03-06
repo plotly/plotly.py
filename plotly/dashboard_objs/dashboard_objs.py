@@ -322,6 +322,9 @@ class Dashboard(dict):
             pprint.pprint(self)
             return
 
+        elif self['layout'] is None:
+            return IPython.display.HTML(dashboard_html)
+
         x = 0
         y = 0
         box_w = MASTER_WIDTH
@@ -445,7 +448,7 @@ class Dashboard(dict):
         box_ids_to_path = self._compute_box_ids()
 
         # doesn't need box_id or side specified for first box
-        if self['layout'] is None:
+        if self['layout'] is None:  # or
             self['layout'] = _container(box, _empty_box())
         else:
             if box_id is None:
@@ -515,7 +518,7 @@ class Dashboard(dict):
             raise exceptions.PlotlyError(ID_NOT_VALID_MESSAGE)
 
         path = box_ids_to_path[box_id]
-        if path != ['first']:
+        if path != ('first',):
             container_for_box_id = self._path_to_box(path[:-1])
             if path[-1] == 'first':
                 adjacent_path = 'second'
@@ -525,7 +528,7 @@ class Dashboard(dict):
 
             self._insert(adjacent_box, path[:-1])
         else:
-            self['layout'] = _empty_box()
+            self['layout'] = None
 
         self._set_container_sizes()
 
