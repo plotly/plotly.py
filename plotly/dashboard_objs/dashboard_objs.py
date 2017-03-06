@@ -448,7 +448,7 @@ class Dashboard(dict):
         box_ids_to_path = self._compute_box_ids()
 
         # doesn't need box_id or side specified for first box
-        if self['layout'] is None:  # or
+        if self['layout'] is None:
             self['layout'] = _container(box, _empty_box())
         else:
             if box_id is None:
