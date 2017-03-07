@@ -4,7 +4,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-## [2.0.3] - 2017-03-06
+## [2.0.5] - 2017-03-07
+## Fixed
+- `import plotly` was broken in `2.0.3` and `2.0.2` because the new `dashboard_objs` wasn't included in our `setup.py`'s "`packages`". Now it is and `import plotly` and the other features introduced in `2.0.3` and `2.0.2` should work.
+
+## [2.0.4] - 2017-03-07 [YANKED]
+Note: This release's installation was broken. It has been removed from PyPI
+## Added
+- Added `dashboard_objs` to top level import.
+
+## [2.0.3] - 2017-03-06 [YANKED]
+Note: This release's installation was broken. It has been removed from PyPI
 ## Added
 - Dashboards can now be created using the API and uploaded to Plotly. Use `import plotly.dashboard_objs` to create a `Dashboard` object. You can learn more about `Dashboard` objects by running `help(plotly.dashboard_objs)` and `help(plotly.plotly.plotly.dashboard_ops)` for uploading and retrieving dashboards from the cloud.
 
