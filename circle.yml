@@ -58,3 +58,13 @@ test:
     # since optional requirements is part of the test suite, we don't need to
     # worry about testing that it *can* be imported in this case.
     - $(! python -c "import plotly.figure_factory")
+
+    # test the distribution and a basic import
+    - rm -rf dist/ &&
+      python setup.py sdist &&
+      mkdir test_install &&
+      cd test_install &&
+      virtualenv venv &&
+      source venv/bin/activate &&
+      pip install ../dist/* &&
+      python -c "import plotly"
