@@ -94,6 +94,15 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
         for resize_code_string in resize_code_strings:
             self.assertTrue(resize_code_string not in html)
 
+    def test_config(self):
+        config = dict(linkText='Plotly rocks!',
+                      editable=True)
+        html = self._read_html(plotly.offline.plot(fig, config=config,
+                                                   auto_open=False))
+        self.assertIn('"linkText": "Plotly rocks!"', html)
+        self.assertIn('"showLink": true', html)
+        self.assertIn('"editable": true', html)
+
 
 class PlotlyOfflineOtherDomainTestCase(PlotlyOfflineBaseTestCase):
     def setUp(self):
