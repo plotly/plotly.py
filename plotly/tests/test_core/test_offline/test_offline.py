@@ -85,12 +85,12 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
             self.assertTrue(resize_code_string in html)
 
         # If width or height was specified, then we don't resize
-        html = plotly.offline.plot({
+        html = self._read_html(plotly.offline.plot({
             'data': fig['data'],
             'layout': {
                 'width': 500, 'height': 500
             }
-        }, auto_open=False)
+        }, auto_open=False))
         for resize_code_string in resize_code_strings:
             self.assertTrue(resize_code_string not in html)
 
