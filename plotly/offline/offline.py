@@ -511,7 +511,8 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                 get_plotlyjs(),
                 '</script>',
                 plot_html,
-                '</div>'
+                resize_script,
+                '</div>',
             ])
         else:
             return plot_html
