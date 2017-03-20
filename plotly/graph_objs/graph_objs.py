@@ -983,9 +983,9 @@ class Data(PlotlyList):
     Valid items for 'data' at path [] under parents ():
         ['Area', 'Bar', 'Box', 'Candlestick', 'Choropleth', 'Contour',
         'Heatmap', 'Heatmapgl', 'Histogram', 'Histogram2d',
-        'Histogram2dcontour', 'Mesh3d', 'Ohlc', 'Pie', 'Pointcloud', 'Scatter',
-        'Scatter3d', 'Scattergeo', 'Scattergl', 'Scattermapbox',
-        'Scatterternary', 'Surface']
+        'Histogram2dcontour', 'Mesh3d', 'Ohlc', 'Parcoords', 'Pie',
+        'Pointcloud', 'Scatter', 'Scatter3d', 'Scattergeo', 'Scattergl',
+        'Scattermapbox', 'Scatterternary', 'Surface']
 
     """
     _name = 'data'
@@ -1416,9 +1416,10 @@ class Line(PlotlyDict):
     """
     Valid attributes for 'line' at path [] under parents ():
     
-        ['autocolorscale', 'cauto', 'cmax', 'cmin', 'color', 'colorscale',
-        'colorsrc', 'dash', 'outliercolor', 'outlierwidth', 'reversescale',
-        'shape', 'showscale', 'simplify', 'smoothing', 'width', 'widthsrc']
+        ['autocolorscale', 'cauto', 'cmax', 'cmin', 'color', 'colorbar',
+        'colorscale', 'colorsrc', 'dash', 'outliercolor', 'outlierwidth',
+        'reversescale', 'shape', 'showscale', 'simplify', 'smoothing', 'width',
+        'widthsrc']
     
     Run `<line-object>.help('attribute')` on any of the above.
     '<line-object>' is the object at []
@@ -1494,6 +1495,20 @@ class Ohlc(PlotlyDict):
     _name = 'ohlc'
 
 
+class Parcoords(PlotlyDict):
+    """
+    Valid attributes for 'parcoords' at path [] under parents ():
+    
+        ['dimensions', 'domain', 'hoverinfo', 'legendgroup', 'line', 'name',
+        'opacity', 'showlegend', 'stream', 'type', 'uid', 'visible']
+    
+    Run `<parcoords-object>.help('attribute')` on any of the above.
+    '<parcoords-object>' is the object at []
+
+    """
+    _name = 'parcoords'
+
+
 class Pie(PlotlyDict):
     """
     Valid attributes for 'pie' at path [] under parents ():
@@ -1547,12 +1562,13 @@ class Scatter(PlotlyDict):
     """
     Valid attributes for 'scatter' at path [] under parents ():
     
-        ['connectgaps', 'dx', 'dy', 'error_x', 'error_y', 'fill', 'fillcolor',
-        'hoverinfo', 'hoveron', 'ids', 'idssrc', 'legendgroup', 'line',
-        'marker', 'mode', 'name', 'opacity', 'r', 'rsrc', 'showlegend',
-        'stream', 't', 'text', 'textfont', 'textposition', 'textpositionsrc',
-        'textsrc', 'tsrc', 'type', 'uid', 'visible', 'x', 'x0', 'xaxis',
-        'xcalendar', 'xsrc', 'y', 'y0', 'yaxis', 'ycalendar', 'ysrc']
+        ['connectgaps', 'customdata', 'customdatasrc', 'dx', 'dy', 'error_x',
+        'error_y', 'fill', 'fillcolor', 'hoverinfo', 'hoveron', 'ids',
+        'idssrc', 'legendgroup', 'line', 'marker', 'mode', 'name', 'opacity',
+        'r', 'rsrc', 'showlegend', 'stream', 't', 'text', 'textfont',
+        'textposition', 'textpositionsrc', 'textsrc', 'tsrc', 'type', 'uid',
+        'visible', 'x', 'x0', 'xaxis', 'xcalendar', 'xsrc', 'y', 'y0', 'yaxis',
+        'ycalendar', 'ysrc']
     
     Run `<scatter-object>.help('attribute')` on any of the above.
     '<scatter-object>' is the object at []
