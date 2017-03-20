@@ -140,7 +140,11 @@ def init_notebook_mode(connected=False):
             '</script>'
             '').format(script=get_plotlyjs())
 
-    ipython_display.display(ipython_display.HTML(script_inject))
+    display_bundle = {
+        'text/html': script_inject,
+        'text/vnd.plotly.v1+html': script_inject
+    }
+    ipython_display.display(display_bundle, raw=True)
     __PLOTLY_OFFLINE_INITIALIZED = True
 
 
@@ -346,7 +350,8 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                                      cls=plotly.utils.PlotlyJSONEncoder))
     display_bundle = {
         'application/vnd.plotly.v1+json': {'data': data, 'layout': layout},
-        'text/html': plot_html
+        'text/html': plot_html,
+        'text/vnd.plotly.v1+html': plot_html
     }
     ipython_display.display(display_bundle, raw=True)
 

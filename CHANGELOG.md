@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [2.0.6] - 2017-03-20
+## Added
+- Added a new mimetype 'text/vnd.plotly.v1+html' for `iplot` outputs.
+
 ## [2.0.5] - 2017-03-07
 ## Fixed
 - `import plotly` was broken in `2.0.3` and `2.0.2` because the new `dashboard_objs` wasn't included in our `setup.py`'s "`packages`". Now it is and `import plotly` and the other features introduced in `2.0.3` and `2.0.2` should work.

@@ -102,6 +102,7 @@
         "metaKeys": [
             "_isSubplotObj",
             "_isLinkedToArray",
+            "_arrayAttrRegexps",
             "_deprecated",
             "description",
             "role"
@@ -925,7 +926,9 @@
                             "hammer",
                             "transverse mercator",
                             "albers usa",
-                            "winkel tripel"
+                            "winkel tripel",
+                            "aitoff",
+                            "sinusoidal"
                         ]
                     }
                 },
@@ -1276,6 +1279,9 @@
                 }
             },
             "mapbox": {
+                "_arrayAttrRegexps": [
+                    {}
+                ],
                 "_isSubplotObj": true,
                 "accesstoken": {
                     "description": "Sets the mapbox access token to be used for this mapbox map. Alternatively, the mapbox access token can be set in the configuration options under `mapboxAccessToken`.",
@@ -1832,7 +1838,8 @@
                         "orbit",
                         "turntable",
                         "zoom",
-                        "pan"
+                        "pan",
+                        false
                     ]
                 },
                 "hovermode": {
@@ -4498,6 +4505,9 @@
             "updatemenus": {
                 "items": {
                     "updatemenu": {
+                        "_arrayAttrRegexps": [
+                            {}
+                        ],
                         "active": {
                             "description": "Determines which button (by index starting from 0) is considered active.",
                             "dflt": 0,
@@ -5058,6 +5068,12 @@
                     }
                 },
                 "rangeslider": {
+                    "autorange": {
+                        "description": "Determines whether or not the range slider range is computed in relation to the input data. If `range` is provided, then `autorange` is set to *false*.",
+                        "dflt": true,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
                     "bgcolor": {
                         "description": "Sets the background color of the range slider.",
                         "dflt": "#fff",
@@ -14219,6 +14235,686 @@
                 "description": "The ohlc (short for Open-High-Low-Close) is a style of financial chart describing open, high, low and close for a given `x` coordinate (most likely time). The tip of the lines represent the `low` and `high` values and the horizontal segments represent the `open` and `close` values. Sample points where the close value is higher (lower) then the open value are called increasing (decreasing). By default, increasing candles are drawn in green whereas decreasing are drawn in red."
             }
         },
+        "parcoords": {
+            "attributes": {
+                "dimensions": {
+                    "items": {
+                        "dimension": {
+                            "constraintrange": {
+                                "description": "The domain range to which the filter on the dimension is constrained. Must be an array of `[fromValue, toValue]` with finite numbers as elements.",
+                                "items": [
+                                    {
+                                        "valType": "number"
+                                    },
+                                    {
+                                        "valType": "number"
+                                    }
+                                ],
+                                "role": "info",
+                                "valType": "info_array"
+                            },
+                            "description": "The dimensions (variables) of the parallel coordinates chart. 2..60 dimensions are supported.",
+                            "label": {
+                                "description": "The shown name of the dimension.",
+                                "role": "info",
+                                "valType": "string"
+                            },
+                            "range": {
+                                "description": "The domain range that represents the full, shown axis extent. Defaults to the `values` extent. Must be an array of `[fromValue, toValue]` with finite numbers as elements.",
+                                "items": [
+                                    {
+                                        "valType": "number"
+                                    },
+                                    {
+                                        "valType": "number"
+                                    }
+                                ],
+                                "role": "info",
+                                "valType": "info_array"
+                            },
+                            "role": "object",
+                            "tickformat": {
+                                "description": "Sets the tick label formatting rule using d3 formatting mini-language which is similar to those of Python. See https://github.com/d3/d3-format/blob/master/README.md#locale_format",
+                                "dflt": "3s",
+                                "role": "style",
+                                "valType": "string"
+                            },
+                            "ticktext": {
+                                "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `tickvals`.",
+                                "role": "data",
+                                "valType": "data_array"
+                            },
+                            "ticktextsrc": {
+                                "description": "Sets the source reference on plot.ly for  ticktext .",
+                                "role": "info",
+                                "valType": "string"
+                            },
+                            "tickvals": {
+                                "description": "Sets the values at which ticks on this axis appear. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
+                                "role": "data",
+                                "valType": "data_array"
+                            },
+                            "tickvalssrc": {
+                                "description": "Sets the source reference on plot.ly for  tickvals .",
+                                "role": "info",
+                                "valType": "string"
+                            },
+                            "values": {
+                                "description": "Dimension values. `values[n]` represents the value of the `n`th point in the dataset, therefore the `values` vector for all dimensions must be the same (longer vectors will be truncated). Each value must be a finite number.",
+                                "dflt": [],
+                                "role": "data",
+                                "valType": "data_array"
+                            },
+                            "valuessrc": {
+                                "description": "Sets the source reference on plot.ly for  values .",
+                                "role": "info",
+                                "valType": "string"
+                            },
+                            "visible": {
+                                "description": "Shows the dimension when set to `true` (the default). Hides the dimension for `false`.",
+                                "dflt": true,
+                                "role": "info",
+                                "valType": "boolean"
+                            }
+                        }
+                    },
+                    "role": "object"
+                },
+                "domain": {
+                    "role": "object",
+                    "x": {
+                        "description": "Sets the horizontal domain of this `parcoords` trace (in plot fraction).",
+                        "dflt": [
+                            0,
+                            1
+                        ],
+                        "items": [
+                            {
+                                "max": 1,
+                                "min": 0,
+                                "valType": "number"
+                            },
+                            {
+                                "max": 1,
+                                "min": 0,
+                                "valType": "number"
+                            }
+                        ],
+                        "role": "info",
+                        "valType": "info_array"
+                    },
+                    "y": {
+                        "description": "Sets the vertical domain of this `parcoords` trace (in plot fraction).",
+                        "dflt": [
+                            0,
+                            1
+                        ],
+                        "items": [
+                            {
+                                "max": 1,
+                                "min": 0,
+                                "valType": "number"
+                            },
+                            {
+                                "max": 1,
+                                "min": 0,
+                                "valType": "number"
+                            }
+                        ],
+                        "role": "info",
+                        "valType": "info_array"
+                    }
+                },
+                "hoverinfo": {
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
+                    "dflt": "all",
+                    "extras": [
+                        "all",
+                        "none",
+                        "skip"
+                    ],
+                    "flags": [
+                        "x",
+                        "y",
+                        "z",
+                        "text",
+                        "name"
+                    ],
+                    "role": "info",
+                    "valType": "flaglist"
+                },
+                "legendgroup": {
+                    "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
+                    "dflt": "",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "line": {
+                    "autocolorscale": {
+                        "description": "Has an effect only if line.color` is set to a numerical array. Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `line.colorscale`. In case `colorscale` is unspecified or `autocolorscale` is true, the default  palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed. The default value is false, so that `parcoords` colorscale can default to `Viridis`.",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
+                    "cauto": {
+                        "description": "Has an effect only if `line.color` is set to a numerical array and `cmin`, `cmax` are set by the user. In this case, it controls whether the range of colors in `colorscale` is mapped to the range of values in the `color` array (`cauto: true`), or the `cmin`/`cmax` values (`cauto: false`). Defaults to `false` when `cmin`, `cmax` are set by the user.",
+                        "dflt": true,
+                        "role": "info",
+                        "valType": "boolean"
+                    },
+                    "cmax": {
+                        "description": "Has an effect only if `line.color` is set to a numerical array. Sets the upper bound of the color domain. Value should be associated to the `line.color` array index, and if set, `line.cmin` must be set as well.",
+                        "dflt": null,
+                        "role": "info",
+                        "valType": "number"
+                    },
+                    "cmin": {
+                        "description": "Has an effect only if `line.color` is set to a numerical array. Sets the lower bound of the color domain. Value should be associated to the `line.color` array index, and if set, `line.cmax` must be set as well.",
+                        "dflt": null,
+                        "role": "info",
+                        "valType": "number"
+                    },
+                    "color": {
+                        "arrayOk": true,
+                        "description": "Sets the line color. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
+                        "role": "style",
+                        "valType": "color"
+                    },
+                    "colorbar": {
+                        "bgcolor": {
+                            "description": "Sets the color of padded area.",
+                            "dflt": "rgba(0,0,0,0)",
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "bordercolor": {
+                            "description": "Sets the axis line color.",
+                            "dflt": "#444",
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "borderwidth": {
+                            "description": "Sets the width (in px) or the border enclosing this color bar.",
+                            "dflt": 0,
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "dtick": {
+                            "description": "Sets the step in-between ticks on this axis. Use with `tick0`. Must be a positive number, or special strings available to *log* and *date* axes. If the axis `type` is *log*, then ticks are set every 10^(n*dtick) where n is the tick number. For example, to set a tick mark at 1, 10, 100, 1000, ... set dtick to 1. To set tick marks at 1, 100, 10000, ... set dtick to 2. To set tick marks at 1, 5, 25, 125, 625, 3125, ... set dtick to log_10(5), or 0.69897000433. *log* has several special values; *L<f>*, where `f` is a positive number, gives ticks linearly spaced in value (but not position). For example `tick0` = 0.1, `dtick` = *L0.5* will put ticks at 0.1, 0.6, 1.1, 1.6 etc. To show powers of 10 plus small digits between, use *D1* (all digits) or *D2* (only 2 and 5). `tick0` is ignored for *D1* and *D2*. If the axis `type` is *date*, then you must convert the time to milliseconds. For example, to set the interval between ticks to one day, set `dtick` to 86400000.0. *date* also has special values *M<n>* gives ticks spaced by a number of months. `n` must be a positive integer. To set ticks on the 15th of every third month, set `tick0` to *2000-01-15* and `dtick` to *M3*. To set ticks every 4 years, set `dtick` to *M48*",
+                            "role": "style",
+                            "valType": "any"
+                        },
+                        "exponentformat": {
+                            "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B.",
+                            "dflt": "B",
+                            "role": "style",
+                            "valType": "enumerated",
+                            "values": [
+                                "none",
+                                "e",
+                                "E",
+                                "power",
+                                "SI",
+                                "B"
+                            ]
+                        },
+                        "len": {
+                            "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
+                            "dflt": 1,
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "lenmode": {
+                            "description": "Determines whether this color bar's length (i.e. the measure in the color variation direction) is set in units of plot *fraction* or in *pixels. Use `len` to set the value.",
+                            "dflt": "fraction",
+                            "role": "info",
+                            "valType": "enumerated",
+                            "values": [
+                                "fraction",
+                                "pixels"
+                            ]
+                        },
+                        "nticks": {
+                            "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*.",
+                            "dflt": 0,
+                            "min": 0,
+                            "role": "style",
+                            "valType": "integer"
+                        },
+                        "outlinecolor": {
+                            "description": "Sets the axis line color.",
+                            "dflt": "#444",
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "outlinewidth": {
+                            "description": "Sets the width (in px) of the axis line.",
+                            "dflt": 1,
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "role": "object",
+                        "separatethousands": {
+                            "description": "If \"true\", even 4-digit integers are separated",
+                            "dflt": false,
+                            "role": "style",
+                            "valType": "boolean"
+                        },
+                        "showexponent": {
+                            "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
+                            "dflt": "all",
+                            "role": "style",
+                            "valType": "enumerated",
+                            "values": [
+                                "all",
+                                "first",
+                                "last",
+                                "none"
+                            ]
+                        },
+                        "showticklabels": {
+                            "description": "Determines whether or not the tick labels are drawn.",
+                            "dflt": true,
+                            "role": "style",
+                            "valType": "boolean"
+                        },
+                        "showtickprefix": {
+                            "description": "If *all*, all tick labels are displayed with a prefix. If *first*, only the first tick is displayed with a prefix. If *last*, only the last tick is displayed with a suffix. If *none*, tick prefixes are hidden.",
+                            "dflt": "all",
+                            "role": "style",
+                            "valType": "enumerated",
+                            "values": [
+                                "all",
+                                "first",
+                                "last",
+                                "none"
+                            ]
+                        },
+                        "showticksuffix": {
+                            "description": "Same as `showtickprefix` but for tick suffixes.",
+                            "dflt": "all",
+                            "role": "style",
+                            "valType": "enumerated",
+                            "values": [
+                                "all",
+                                "first",
+                                "last",
+                                "none"
+                            ]
+                        },
+                        "thickness": {
+                            "description": "Sets the thickness of the color bar This measure excludes the size of the padding, ticks and labels.",
+                            "dflt": 30,
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "thicknessmode": {
+                            "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels*. Use `thickness` to set the value.",
+                            "dflt": "pixels",
+                            "role": "style",
+                            "valType": "enumerated",
+                            "values": [
+                                "fraction",
+                                "pixels"
+                            ]
+                        },
+                        "tick0": {
+                            "description": "Sets the placement of the first tick on this axis. Use with `dtick`. If the axis `type` is *log*, then you must take the log of your starting tick (e.g. to set the starting tick to 100, set the `tick0` to 2) except when `dtick`=*L<f>* (see `dtick` for more info). If the axis `type` is *date*, it should be a date string, like date data. If the axis `type` is *category*, it should be a number, using the scale where each category is assigned a serial number from zero in the order it appears.",
+                            "role": "style",
+                            "valType": "any"
+                        },
+                        "tickangle": {
+                            "description": "Sets the angle of the tick labels with respect to the horizontal. For example, a `tickangle` of -90 draws the tick labels vertically.",
+                            "dflt": "auto",
+                            "role": "style",
+                            "valType": "angle"
+                        },
+                        "tickcolor": {
+                            "description": "Sets the tick color.",
+                            "dflt": "#444",
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "tickfont": {
+                            "color": {
+                                "role": "style",
+                                "valType": "color"
+                            },
+                            "description": "Sets the tick font.",
+                            "family": {
+                                "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                                "noBlank": true,
+                                "role": "style",
+                                "strict": true,
+                                "valType": "string"
+                            },
+                            "role": "object",
+                            "size": {
+                                "min": 1,
+                                "role": "style",
+                                "valType": "number"
+                            }
+                        },
+                        "tickformat": {
+                            "description": "Sets the tick label formatting rule using d3 formatting mini-languages which are very similar to those in Python. For numbers, see: https://github.com/d3/d3-format/blob/master/README.md#locale_format And for dates see: https://github.com/d3/d3-time-format/blob/master/README.md#locale_format We add one item to d3's date formatter: *%{n}f* for fractional seconds with n digits. For example, *2016-10-13 09:15:23.456* with tickformat *%H~%M~%S.%2f* would display *09~15~23.46*",
+                            "dflt": "",
+                            "role": "style",
+                            "valType": "string"
+                        },
+                        "ticklen": {
+                            "description": "Sets the tick length (in px).",
+                            "dflt": 5,
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "tickmode": {
+                            "description": "Sets the tick mode for this axis. If *auto*, the number of ticks is set via `nticks`. If *linear*, the placement of the ticks is determined by a starting position `tick0` and a tick step `dtick` (*linear* is the default value if `tick0` and `dtick` are provided). If *array*, the placement of the ticks is set via `tickvals` and the tick text is `ticktext`. (*array* is the default value if `tickvals` is provided).",
+                            "role": "info",
+                            "valType": "enumerated",
+                            "values": [
+                                "auto",
+                                "linear",
+                                "array"
+                            ]
+                        },
+                        "tickprefix": {
+                            "description": "Sets a tick label prefix.",
+                            "dflt": "",
+                            "role": "style",
+                            "valType": "string"
+                        },
+                        "ticks": {
+                            "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
+                            "dflt": "",
+                            "role": "style",
+                            "valType": "enumerated",
+                            "values": [
+                                "outside",
+                                "inside",
+                                ""
+                            ]
+                        },
+                        "ticksuffix": {
+                            "description": "Sets a tick label suffix.",
+                            "dflt": "",
+                            "role": "style",
+                            "valType": "string"
+                        },
+                        "ticktext": {
+                            "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `tickvals`.",
+                            "role": "data",
+                            "valType": "data_array"
+                        },
+                        "ticktextsrc": {
+                            "description": "Sets the source reference on plot.ly for  ticktext .",
+                            "role": "info",
+                            "valType": "string"
+                        },
+                        "tickvals": {
+                            "description": "Sets the values at which ticks on this axis appear. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
+                            "role": "data",
+                            "valType": "data_array"
+                        },
+                        "tickvalssrc": {
+                            "description": "Sets the source reference on plot.ly for  tickvals .",
+                            "role": "info",
+                            "valType": "string"
+                        },
+                        "tickwidth": {
+                            "description": "Sets the tick width (in px).",
+                            "dflt": 1,
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "title": {
+                            "description": "Sets the title of the color bar.",
+                            "dflt": "Click to enter colorscale title",
+                            "role": "info",
+                            "valType": "string"
+                        },
+                        "titlefont": {
+                            "color": {
+                                "role": "style",
+                                "valType": "color"
+                            },
+                            "description": "Sets this color bar's title font.",
+                            "family": {
+                                "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                                "noBlank": true,
+                                "role": "style",
+                                "strict": true,
+                                "valType": "string"
+                            },
+                            "role": "object",
+                            "size": {
+                                "min": 1,
+                                "role": "style",
+                                "valType": "number"
+                            }
+                        },
+                        "titleside": {
+                            "description": "Determines the location of the colorbar title with respect to the color bar.",
+                            "dflt": "top",
+                            "role": "style",
+                            "valType": "enumerated",
+                            "values": [
+                                "right",
+                                "top",
+                                "bottom"
+                            ]
+                        },
+                        "x": {
+                            "description": "Sets the x position of the color bar (in plot fraction).",
+                            "dflt": 1.02,
+                            "max": 3,
+                            "min": -2,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "xanchor": {
+                            "description": "Sets this color bar's horizontal position anchor. This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
+                            "dflt": "left",
+                            "role": "style",
+                            "valType": "enumerated",
+                            "values": [
+                                "left",
+                                "center",
+                                "right"
+                            ]
+                        },
+                        "xpad": {
+                            "description": "Sets the amount of padding (in px) along the x direction.",
+                            "dflt": 10,
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "y": {
+                            "description": "Sets the y position of the color bar (in plot fraction).",
+                            "dflt": 0.5,
+                            "max": 3,
+                            "min": -2,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "yanchor": {
+                            "description": "Sets this color bar's vertical position anchor This anchor binds the `y` position to the *top*, *middle* or *bottom* of the color bar.",
+                            "dflt": "middle",
+                            "role": "style",
+                            "valType": "enumerated",
+                            "values": [
+                                "top",
+                                "middle",
+                                "bottom"
+                            ]
+                        },
+                        "ypad": {
+                            "description": "Sets the amount of padding (in px) along the y direction.",
+                            "dflt": 10,
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        }
+                    },
+                    "colorscale": {
+                        "description": "Sets the colorscale and only has an effect if `line.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `line.cmin` and `line.cmax`. Alternatively, `colorscale` may be a palette name string of the following list: Greys, YlGnBu, Greens, YlOrRd, Bluered, RdBu, Reds, Blues, Picnic, Rainbow, Portland, Jet, Hot, Blackbody, Earth, Electric, Viridis",
+                        "dflt": [
+                            [
+                                0,
+                                "#440154"
+                            ],
+                            [
+                                0.06274509803921569,
+                                "#48186a"
+                            ],
+                            [
+                                0.12549019607843137,
+                                "#472d7b"
+                            ],
+                            [
+                                0.18823529411764706,
+                                "#424086"
+                            ],
+                            [
+                                0.25098039215686274,
+                                "#3b528b"
+                            ],
+                            [
+                                0.3137254901960784,
+                                "#33638d"
+                            ],
+                            [
+                                0.3764705882352941,
+                                "#2c728e"
+                            ],
+                            [
+                                0.4392156862745098,
+                                "#26828e"
+                            ],
+                            [
+                                0.5019607843137255,
+                                "#21918c"
+                            ],
+                            [
+                                0.5647058823529412,
+                                "#1fa088"
+                            ],
+                            [
+                                0.6274509803921569,
+                                "#28ae80"
+                            ],
+                            [
+                                0.6901960784313725,
+                                "#3fbc73"
+                            ],
+                            [
+                                0.7529411764705882,
+                                "#5ec962"
+                            ],
+                            [
+                                0.8156862745098039,
+                                "#84d44b"
+                            ],
+                            [
+                                0.8784313725490196,
+                                "#addc30"
+                            ],
+                            [
+                                0.9411764705882353,
+                                "#d8e219"
+                            ],
+                            [
+                                1,
+                                "#fde725"
+                            ]
+                        ],
+                        "role": "style",
+                        "valType": "colorscale"
+                    },
+                    "colorsrc": {
+                        "description": "Sets the source reference on plot.ly for  color .",
+                        "role": "info",
+                        "valType": "string"
+                    },
+                    "reversescale": {
+                        "description": "Has an effect only if `line.color` is set to a numerical array. Reverses the color mapping if true (`cmin` will correspond to the last color in the array and `cmax` will correspond to the first color).",
+                        "dflt": false,
+                        "role": "style",
+                        "valType": "boolean"
+                    },
+                    "role": "object",
+                    "showscale": {
+                        "description": "Has an effect only if `line.color` is set to a numerical array. Determines whether or not a colorbar is displayed.",
+                        "dflt": false,
+                        "role": "info",
+                        "valType": "boolean"
+                    }
+                },
+                "name": {
+                    "description": "Sets the trace name. The trace name appear as the legend item and on hover.",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "opacity": {
+                    "description": "Sets the opacity of the trace.",
+                    "dflt": 1,
+                    "max": 1,
+                    "min": 0,
+                    "role": "style",
+                    "valType": "number"
+                },
+                "showlegend": {
+                    "description": "Determines whether or not an item corresponding to this trace is shown in the legend.",
+                    "dflt": true,
+                    "role": "info",
+                    "valType": "boolean"
+                },
+                "stream": {
+                    "maxpoints": {
+                        "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot.",
+                        "dflt": 500,
+                        "max": 10000,
+                        "min": 0,
+                        "role": "info",
+                        "valType": "number"
+                    },
+                    "role": "object",
+                    "token": {
+                        "description": "The stream id number links a data trace on a plot with a stream. See https://plot.ly/settings for more details.",
+                        "noBlank": true,
+                        "role": "info",
+                        "strict": true,
+                        "valType": "string"
+                    }
+                },
+                "type": "parcoords",
+                "uid": {
+                    "dflt": "",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "visible": {
+                    "description": "Determines whether or not this trace is visible. If *legendonly*, the trace is not drawn, but can appear as a legend item (provided that the legend itself is visible).",
+                    "dflt": true,
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        true,
+                        false,
+                        "legendonly"
+                    ]
+                }
+            },
+            "meta": {
+                "description": "Parallel coordinates for multidimensional exploratory data analysis. The samples are specified in `dimensions`. The colors are set in `line.color`."
+            }
+        },
         "pie": {
             "attributes": {
                 "direction": {
@@ -14459,7 +15155,7 @@
                     "valType": "boolean"
                 },
                 "sort": {
-                    "description": "Determines whether or not the sectors of reordered from largest to smallest.",
+                    "description": "Determines whether or not the sectors are reordered from largest to smallest.",
                     "dflt": true,
                     "role": "style",
                     "valType": "boolean"
@@ -14819,6 +15515,16 @@
                     "dflt": false,
                     "role": "info",
                     "valType": "boolean"
+                },
+                "customdata": {
+                    "description": "Assigns extra data to each scatter point DOM element",
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "customdatasrc": {
+                    "description": "Sets the source reference on plot.ly for  customdata .",
+                    "role": "info",
+                    "valType": "string"
                 },
                 "dx": {
                     "description": "Sets the x coordinate step. See `x0` for more info.",
