@@ -2,24 +2,27 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [2.0.7] - [Unreleased]
+### Updated
+- Updated `plotly.min.js` to version 1.25.0 for `plotly.offline`.
+  - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md) for additional information regarding the updates.
 
 ## [2.0.6] - 2017-03-20
-## Added
+### Added
 - Added a new mimetype 'text/vnd.plotly.v1+html' for `iplot` outputs.
 
 ## [2.0.5] - 2017-03-07
-## Fixed
+### Fixed
 - `import plotly` was broken in `2.0.3` and `2.0.2` because the new `dashboard_objs` wasn't included in our `setup.py`'s "`packages`". Now it is and `import plotly` and the other features introduced in `2.0.3` and `2.0.2` should work.
 
 ## [2.0.4] - 2017-03-07 [YANKED]
 Note: This release's installation was broken. It has been removed from PyPI
-## Added
+### Added
 - Added `dashboard_objs` to top level import.
 
 ## [2.0.3] - 2017-03-06 [YANKED]
 Note: This release's installation was broken. It has been removed from PyPI
-## Added
+### Added
 - Dashboards can now be created using the API and uploaded to Plotly. Use `import plotly.dashboard_objs` to create a `Dashboard` object. You can learn more about `Dashboard` objects by running `help(plotly.dashboard_objs)` and `help(plotly.plotly.plotly.dashboard_ops)` for uploading and retrieving dashboards from the cloud.
 
 
@@ -77,7 +80,7 @@ gone.
 ## [1.12.12] - 2016-12-06
 ### Updated
 - Updated `plotly.min.js` to version 1.20.5 for `plotly.offline`.
-  - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md) for additional information regarding the updates
+  - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md) for additional information regarding the updates.
 - `FF.create_scatterplotmatrix` now by default does not show the trace labels for the box plots, only if `diag=box` is selected for the diagonal subplot type.
 
 ## [1.12.11] - 2016-12-01
