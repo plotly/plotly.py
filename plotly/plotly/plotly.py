@@ -1295,9 +1295,9 @@ def parse_grid_id_args(grid, grid_url):
             return grid.id
 
 
-def add_share_key_to_url(plot_url):
+def add_share_key_to_url(plot_url, attempt=0):
     """
-    Update plot's url to include the secret key
+    Check that share key is enabled and update url to include the secret key
 
     """
     urlsplit = six.moves.urllib.parse.urlparse(plot_url)
@@ -1308,7 +1308,14 @@ def add_share_key_to_url(plot_url):
     body = {'share_key_enabled': True, 'world_readable': False}
     response = v2.files.update(fid, body)
 
-    return plot_url + '?share_key=' + response.json()['share_key']
+    if not v2.files.retrieve(fid).json()['share_key_enabled']:
+        attempt += 1
+        if attempt == 10:
+            raise Exception
+        add_share_key_to_url(plot_url, attempt)
+
+    url_share_key = plot_url + '?share_key=' + response.json()['share_key']
+    return url_share_key
 
 
 def _send_to_plotly(figure, **plot_options):
