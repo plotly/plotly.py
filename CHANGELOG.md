@@ -2,10 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [2.0.7] - [Unreleased]
+## [2.0.7] - 2017-04-07
 ### Updated
 - Updated `plotly.min.js` to version 1.25.0 for `plotly.offline`.
   - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md) for additional information regarding the updates.
+
+### Added
+- Added check to verify the share key is enabled when secret charts are created.
 
 ## [2.0.6] - 2017-03-20
 ### Added
@@ -37,8 +40,6 @@ Note: This release's installation was broken. It has been removed from PyPI
   See [https://github.com/nteract/nteract/pull/662](https://github.com/nteract/nteract/pull/662)
   for the associated PR in nteract.
 - As part of the above, plotly output now prints with a [custom mimetype](https://github.com/plotly/plotly.py/blob/f65724f06b894a5db94245ee4889c632b887d8ce/plotly/offline/offline.py#L348) - `application/vnd.plotly.v1+json`
-
-### Added
 - `memoize` decorator added to `plotly.utils`
 
 ### Changed

@@ -1308,10 +1308,17 @@ def add_share_key_to_url(plot_url, attempt=0):
     body = {'share_key_enabled': True, 'world_readable': False}
     response = v2.files.update(fid, body)
 
+    # Sometimes a share key is added, but access is still denied.
+    # Check that share_key_enabled is set to true and
+    # retry if this is not the case
+    # https://github.com/plotly/streambed/issues/4089
     if not v2.files.retrieve(fid).json()['share_key_enabled']:
         attempt += 1
-        if attempt == 10:
-            raise Exception
+        if attempt == 50:
+            raise exceptions.PlotlyError(
+                "The sharekey could not be enabled at this time so the graph "
+                "is saved as private. Try again to save as 'secret' later."
+            )
         add_share_key_to_url(plot_url, attempt)
 
     url_share_key = plot_url + '?share_key=' + response.json()['share_key']
