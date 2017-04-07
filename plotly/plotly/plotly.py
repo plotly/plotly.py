@@ -1295,9 +1295,9 @@ def parse_grid_id_args(grid, grid_url):
             return grid.id
 
 
-def add_share_key_to_url(plot_url):
+def add_share_key_to_url(plot_url, attempt=0):
     """
-    Update plot's url to include the secret key
+    Check that share key is enabled and update url to include the secret key
 
     """
     urlsplit = six.moves.urllib.parse.urlparse(plot_url)
@@ -1308,7 +1308,21 @@ def add_share_key_to_url(plot_url):
     body = {'share_key_enabled': True, 'world_readable': False}
     response = v2.files.update(fid, body)
 
-    return plot_url + '?share_key=' + response.json()['share_key']
+    # Sometimes a share key is added, but access is still denied.
+    # Check that share_key_enabled is set to true and
+    # retry if this is not the case
+    # https://github.com/plotly/streambed/issues/4089
+    if not v2.files.retrieve(fid).json()['share_key_enabled']:
+        attempt += 1
+        if attempt == 50:
+            raise exceptions.PlotlyError(
+                "The sharekey could not be enabled at this time so the graph "
+                "is saved as private. Try again to save as 'secret' later."
+            )
+        add_share_key_to_url(plot_url, attempt)
+
+    url_share_key = plot_url + '?share_key=' + response.json()['share_key']
+    return url_share_key
 
 
 def _send_to_plotly(figure, **plot_options):
