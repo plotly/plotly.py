@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Fixed
+-offline embedded plots are now responsive to window resizing when `output_type == "div"` is set in `plotly.offline.iplot()`.
+
 ## [2.0.7] - 2017-04-07
 ### Updated
 - Updated `plotly.min.js` to version 1.25.0 for `plotly.offline`.
