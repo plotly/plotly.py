@@ -15,7 +15,7 @@ def create(body):
 
 
 def retrieve(fid):
-    """Retrieve a dashboard from Plotly."""
+    """Retrieve a dash app from Plotly."""
     url = build_url(RESOURCE, id=fid)
     return request('get', url)
 
