@@ -100,8 +100,7 @@ def ensure_local_plotly_files():
                       "local configuration files. No problem though! You'll "
                       "just have to sign-in using 'plotly.plotly.sign_in()'. "
                       "For help with that: 'help(plotly.plotly.sign_in)'."
-                      "\nQuestions? Visit community.plot.ly or upgrade to a "
-                      "Pro plan for 1-1 help: https://goo.gl/1YUVu9")
+                      "\nQuestions? Visit https://support.plot.ly")
 
 
 ### credentials tools ###
