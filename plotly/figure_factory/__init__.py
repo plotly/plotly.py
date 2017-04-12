@@ -16,3 +16,4 @@ from plotly.figure_factory._streamline import create_streamline
 from plotly.figure_factory._table import create_table
 from plotly.figure_factory._trisurf import create_trisurf
 from plotly.figure_factory._violin import create_violin
+from plotly.figure_factory._facet_grid import create_facet_grid
