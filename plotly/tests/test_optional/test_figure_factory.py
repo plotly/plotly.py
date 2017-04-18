@@ -3,6 +3,7 @@ from plotly.graph_objs import graph_objs as go
 from plotly.exceptions import PlotlyError
 
 import plotly.tools as tls
+import plotly.figure_factory as ff
 from plotly.tests.test_optional.optional_utils import NumpyTestUtilsMixin
 import math
 from nose.tools import raises
@@ -23,7 +24,7 @@ class TestDistplot(TestCase):
                   'curve_type': 'curve'}
         self.assertRaisesRegexp(PlotlyError, "curve_type must be defined as "
                                              "'kde' or 'normal'",
-                                tls.FigureFactory.create_distplot, **kwargs)
+                                ff.create_distplot, **kwargs)
 
     def test_wrong_histdata_format(self):
 
@@ -32,16 +33,16 @@ class TestDistplot(TestCase):
         # will fail)
 
         kwargs = {'hist_data': [1, 2, 3], 'group_labels': ['group']}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_distplot,
+        self.assertRaises(PlotlyError, ff.create_distplot,
                           **kwargs)
 
     def test_unequal_data_label_length(self):
         kwargs = {'hist_data': [[1, 2]], 'group_labels': ['group', 'group2']}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_distplot,
+        self.assertRaises(PlotlyError, ff.create_distplot,
                           **kwargs)
 
         kwargs = {'hist_data': [[1, 2], [1, 2, 3]], 'group_labels': ['group']}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_distplot,
+        self.assertRaises(PlotlyError, ff.create_distplot,
                           **kwargs)
 
     def test_simple_distplot_prob_density(self):
@@ -49,7 +50,7 @@ class TestDistplot(TestCase):
         # we should be able to create a single distplot with a simple dataset
         # and default kwargs
 
-        dp = tls.FigureFactory.create_distplot(hist_data=[[1, 2, 2, 3]],
+        dp = ff.create_distplot(hist_data=[[1, 2, 2, 3]],
                                                group_labels=['distplot'],
                                                histnorm='probability density')
         expected_dp_layout = {'barmode': 'overlay',
@@ -96,7 +97,7 @@ class TestDistplot(TestCase):
         # we should be able to create a single distplot with a simple dataset
         # and default kwargs
 
-        dp = tls.FigureFactory.create_distplot(hist_data=[[1, 2, 2, 3]],
+        dp = ff.create_distplot(hist_data=[[1, 2, 2, 3]],
                                                group_labels=['distplot'], histnorm='probability')
         expected_dp_layout = {'barmode': 'overlay',
                               'hovermode': 'closest',
@@ -152,7 +153,7 @@ class TestDistplot(TestCase):
         hist_data = [hist1_x] + [hist2_x]
         group_labels = ['2012', '2013']
 
-        dp = tls.FigureFactory.create_distplot(hist_data, group_labels,
+        dp = ff.create_distplot(hist_data, group_labels,
                                                histnorm='probability density',
                                                show_rug=False, bin_size=.2)
         dp['layout'].update(title='Dist Plot')
@@ -214,7 +215,7 @@ class TestDistplot(TestCase):
         hist_data = [hist1_x] + [hist2_x]
         group_labels = ['2012', '2013']
 
-        dp = tls.FigureFactory.create_distplot(hist_data, group_labels,
+        dp = ff.create_distplot(hist_data, group_labels,
                                                histnorm='probability',
                                                show_rug=False, bin_size=.2)
         dp['layout'].update(title='Dist Plot')
@@ -270,7 +271,7 @@ class TestDistplot(TestCase):
             hist_data = [hist1_x, hist2_x]
             group_labels = ['2012', '2013']
 
-            dp = tls.FigureFactory.create_distplot(hist_data, group_labels,
+            dp = ff.create_distplot(hist_data, group_labels,
                                                    histnorm='probability',
                                                    show_rug=False,
                                                    bin_size=[.2, .2])
@@ -318,7 +319,7 @@ class TestDistplot(TestCase):
             hist_data = [hist1_x, hist2_x]
             group_labels = ['2012', '2013']
 
-            dp = tls.FigureFactory.create_distplot(hist_data, group_labels,
+            dp = ff.create_distplot(hist_data, group_labels,
                                                    histnorm='probability',
                                                    show_rug=False,
                                                    bin_size=[.2, .2])
@@ -368,7 +369,7 @@ class TestStreamline(TestCase):
                   'u': [[-1, -5], [-1, -5]],
                   'v': [[1, 1], [-3, -3]],
                   'arrow_scale': 0}
-        self.assertRaises(ValueError, tls.FigureFactory.create_streamline,
+        self.assertRaises(ValueError, ff.create_streamline,
                           **kwargs)
 
     def test_wrong_density(self):
@@ -379,7 +380,7 @@ class TestStreamline(TestCase):
                   'u': [[-1, -5], [-1, -5]],
                   'v': [[1, 1], [-3, -3]],
                   'density': 0}
-        self.assertRaises(ValueError, tls.FigureFactory.create_streamline,
+        self.assertRaises(ValueError, ff.create_streamline,
                           **kwargs)
 
     def test_uneven_x(self):
@@ -389,7 +390,7 @@ class TestStreamline(TestCase):
         kwargs = {'x': [0, 2, 7, 9], 'y': [0, 2, 4, 6],
                   'u': [[-1, -5], [-1, -5]],
                   'v': [[1, 1], [-3, -3]]}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_streamline,
+        self.assertRaises(PlotlyError, ff.create_streamline,
                           **kwargs)
 
     def test_uneven_y(self):
@@ -399,7 +400,7 @@ class TestStreamline(TestCase):
         kwargs = {'x': [0, 2, 4, 6], 'y': [1.5, 2, 3, 3.5],
                   'u': [[-1, -5], [-1, -5]],
                   'v': [[1, 1], [-3, -3]]}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_streamline,
+        self.assertRaises(PlotlyError, ff.create_streamline,
                           **kwargs)
 
     def test_unequal_length_xy(self):
@@ -409,7 +410,7 @@ class TestStreamline(TestCase):
         kwargs = {'x': [0, 2, 4, 6], 'y': [1.5, 2, 3.5],
                   'u': [[-1, -5], [-1, -5]],
                   'v': [[1, 1], [-3, -3]]}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_streamline,
+        self.assertRaises(PlotlyError, ff.create_streamline,
                           **kwargs)
 
     def test_unequal_length_uv(self):
@@ -419,7 +420,7 @@ class TestStreamline(TestCase):
         kwargs = {'x': [0, 2, 4, 6], 'y': [1.5, 2, 3, 3.5],
                   'u': [[-1, -5], [-1, -5], [-1, -5]],
                   'v': [[1, 1], [-3, -3]]}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_streamline,
+        self.assertRaises(PlotlyError, ff.create_streamline,
                           **kwargs)
 
     def test_simple_streamline(self):
@@ -435,7 +436,7 @@ class TestStreamline(TestCase):
         # u = u.T #transpose
         # v = v.T #transpose
 
-        strln = tls.FigureFactory.create_streamline(x=[-1., 0., 1.],
+        strln = ff.create_streamline(x=[-1., 0., 1.],
                                                     y=[-1., 0., 1.],
                                                     u=[[1., 0., 1.],
                                                        [1., 0., 1.],
@@ -459,7 +460,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
 
     def test_default_dendrogram(self):
         X = np.array([[1, 2, 3, 4], [1, 1, 3, 4], [1, 2, 1, 4], [1, 2, 3, 1]])
-        dendro = tls.FigureFactory.create_dendrogram(X=X)
+        dendro = ff.create_dendrogram(X=X)
 
         expected_dendro = go.Figure(
             data=go.Data([
@@ -538,7 +539,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
         X[2, :] = sum(X, 0)
 
         names = ['Jack', 'Oxana', 'John', 'Chelsea', 'Mark']
-        dendro = tls.FigureFactory.create_dendrogram(X, labels=names)
+        dendro = ff.create_dendrogram(X, labels=names)
 
         expected_dendro = go.Figure(
             data=go.Data([
@@ -632,18 +633,18 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
     def test_dendrogram_orientation(self):
         X = np.random.rand(5, 5)
 
-        dendro_left = tls.FigureFactory.create_dendrogram(
+        dendro_left = ff.create_dendrogram(
                        X, orientation='left')
         self.assertEqual(len(dendro_left['layout']['yaxis']['ticktext']), 5)
         tickvals_left = np.array(dendro_left['layout']['yaxis']['tickvals'])
         self.assertTrue((tickvals_left <= 0).all())
 
-        dendro_right = tls.FigureFactory.create_dendrogram(
+        dendro_right = ff.create_dendrogram(
                         X, orientation='right')
         tickvals_right = np.array(dendro_right['layout']['yaxis']['tickvals'])
         self.assertTrue((tickvals_right >= 0).all())
 
-        dendro_bottom = tls.FigureFactory.create_dendrogram(
+        dendro_bottom = ff.create_dendrogram(
                         X, orientation='bottom')
         self.assertEqual(len(dendro_bottom['layout']['xaxis']['ticktext']), 5)
         tickvals_bottom = np.array(
@@ -651,7 +652,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
         )
         self.assertTrue((tickvals_bottom >= 0).all())
 
-        dendro_top = tls.FigureFactory.create_dendrogram(X, orientation='top')
+        dendro_top = ff.create_dendrogram(X, orientation='top')
         tickvals_top = np.array(dendro_top['layout']['xaxis']['tickvals'])
         self.assertTrue((tickvals_top <= 0).all())
 
@@ -670,7 +671,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
                 'rgb(220,220,220)',  # gainsboro
                 'rgb(245,245,245)']  # white smoke
 
-        dendro = tls.FigureFactory.create_dendrogram(X, colorscale=greyscale)
+        dendro = ff.create_dendrogram(X, colorscale=greyscale)
 
         expected_dendro = go.Figure(
             data=go.Data([
@@ -764,7 +765,7 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_trisurf,
+                                ff.create_trisurf,
                                 x, y, z, simplices)
 
     def test_valid_colormap(self):
@@ -792,7 +793,7 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_trisurf,
+                                ff.create_trisurf,
                                 x, y, z, simplices, colormap='foo')
 
         # check: if colormap is a list of rgb color strings, make sure the
@@ -804,7 +805,7 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern2,
-                                tls.FigureFactory.create_trisurf,
+                                ff.create_trisurf,
                                 x, y, z, simplices,
                                 colormap=['rgb(4, 5, 600)'])
 
@@ -816,7 +817,7 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern3,
-                                tls.FigureFactory.create_trisurf,
+                                ff.create_trisurf,
                                 x, y, z, simplices,
                                 colormap=[(0.8, 1.0, 1.2)])
 
@@ -837,7 +838,7 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
         tri = Delaunay(points2D)
         simplices = tri.simplices
 
-        test_trisurf_plot = tls.FigureFactory.create_trisurf(
+        test_trisurf_plot = ff.create_trisurf(
             x, y, z, simplices
         )
 
@@ -922,16 +923,16 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
                       for i, j, k in np.random.randn(simplices.shape[0], 3)]
 
         # Color == strings should be kept the same
-        test_colors_plot = tls.FigureFactory.create_trisurf(
+        test_colors_plot = ff.create_trisurf(
             x, y, z, simplices, color_func=colors_str)
         self.assertListEqual(list(test_colors_plot['data'][0]['facecolor']),
                              list(colors_str))
         # Colors must match length of simplices
         colors_bad = colors_str[:-1]
-        self.assertRaises(ValueError, tls.FigureFactory.create_trisurf, x, y,
+        self.assertRaises(ValueError, ff.create_trisurf, x, y,
                           z, simplices, color_func=colors_bad)
         # Check converting custom colors to strings
-        test_colors_plot = tls.FigureFactory.create_trisurf(
+        test_colors_plot = ff.create_trisurf(
             x, y, z, simplices, color_func=colors_raw
         )
         self.assertTrue(isinstance(test_colors_plot['data'][0]['facecolor'][0],
@@ -951,7 +952,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_scatterplotmatrix,
+                                ff.create_scatterplotmatrix,
                                 df)
 
     def test_one_column_dataframe(self):
@@ -965,7 +966,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_scatterplotmatrix,
+                                ff.create_scatterplotmatrix,
                                 df)
 
     def test_valid_diag_choice(self):
@@ -974,7 +975,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
         df = pd.DataFrame([[1, 2, 3], [4, 5, 6]])
 
         self.assertRaises(PlotlyError,
-                          tls.FigureFactory.create_scatterplotmatrix,
+                          ff.create_scatterplotmatrix,
                           df, diag='foo')
 
     def test_forbidden_params(self):
@@ -992,7 +993,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_scatterplotmatrix,
+                                ff.create_scatterplotmatrix,
                                 df, **kwargs)
 
     def test_valid_index_choice(self):
@@ -1006,7 +1007,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_scatterplotmatrix,
+                                ff.create_scatterplotmatrix,
                                 df, index='grape')
 
     def test_same_data_in_dataframe_columns(self):
@@ -1020,13 +1021,13 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_scatterplotmatrix,
+                                ff.create_scatterplotmatrix,
                                 df)
 
         df = pd.DataFrame([[1, 2], ['a', 4]])
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_scatterplotmatrix,
+                                ff.create_scatterplotmatrix,
                                 df)
 
     def test_same_data_in_index(self):
@@ -1040,13 +1041,13 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_scatterplotmatrix,
+                                ff.create_scatterplotmatrix,
                                 df, index='apple')
 
         df = pd.DataFrame([[1, 2], ['a', 4]], columns=['apple', 'pear'])
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_scatterplotmatrix,
+                                ff.create_scatterplotmatrix,
                                 df, index='apple')
 
     def test_valid_colormap(self):
@@ -1057,7 +1058,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
 
         # check: valid plotly scalename is entered
         self.assertRaises(PlotlyError,
-                          tls.FigureFactory.create_scatterplotmatrix,
+                          ff.create_scatterplotmatrix,
                           df, index='a', colormap='fake_scale')
 
         pattern_rgb = (
@@ -1067,11 +1068,11 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
 
         # check: proper 'rgb' color
         self.assertRaisesRegexp(PlotlyError, pattern_rgb,
-                                tls.FigureFactory.create_scatterplotmatrix,
+                                ff.create_scatterplotmatrix,
                                 df, colormap='rgb(500, 1, 1)', index='c')
 
         self.assertRaisesRegexp(PlotlyError, pattern_rgb,
-                                tls.FigureFactory.create_scatterplotmatrix,
+                                ff.create_scatterplotmatrix,
                                 df, colormap=['rgb(500, 1, 1)'], index='c')
 
         pattern_tuple = (
@@ -1081,11 +1082,11 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
 
         # check: proper color tuple
         self.assertRaisesRegexp(PlotlyError, pattern_tuple,
-                                tls.FigureFactory.create_scatterplotmatrix,
+                                ff.create_scatterplotmatrix,
                                 df, colormap=(2, 1, 1), index='c')
 
         self.assertRaisesRegexp(PlotlyError, pattern_tuple,
-                                tls.FigureFactory.create_scatterplotmatrix,
+                                ff.create_scatterplotmatrix,
                                 df, colormap=[(2, 1, 1)], index='c')
 
     def test_valid_endpts(self):
@@ -1100,17 +1101,17 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_scatterplotmatrix,
+                                ff.create_scatterplotmatrix,
                                 df, index='a', colormap='Hot', endpts='foo')
 
         # check: the endpts are a list of numbers
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_scatterplotmatrix,
+                                ff.create_scatterplotmatrix,
                                 df, index='a', colormap='Hot', endpts=['a'])
 
         # check: endpts is a list of INCREASING numbers
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_scatterplotmatrix,
+                                ff.create_scatterplotmatrix,
                                 df, index='a', colormap='Hot', endpts=[2, 1])
 
     def test_dictionary_colormap(self):
@@ -1128,7 +1129,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_scatterplotmatrix,
+                                ff.create_scatterplotmatrix,
                                 df, index='Emotion', colormap=colormap)
 
     def test_scatter_plot_matrix(self):
@@ -1140,7 +1141,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
                           [-2, 'Apple'], [0, 'Apple']],
                           columns=['Numbers', 'Fruit'])
 
-        test_scatter_plot_matrix = tls.FigureFactory.create_scatterplotmatrix(
+        test_scatter_plot_matrix = ff.create_scatterplotmatrix(
             df=df, diag='box', height=1000, width=1000, size=13,
             title='Scatterplot Matrix'
         )
@@ -1223,7 +1224,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
                           [-2, 'Apple'], [0, 'Apple']],
                           columns=['Numbers', 'Fruit'])
 
-        test_scatter_plot_matrix = tls.FigureFactory.create_scatterplotmatrix(
+        test_scatter_plot_matrix = ff.create_scatterplotmatrix(
             df, index='Fruit', endpts=[-10, -1], diag='histogram',
             height=1000, width=1000, size=13, title='Scatterplot Matrix',
             colormap='YlOrRd', marker=dict(symbol=136)
@@ -1271,7 +1272,7 @@ class TestGantt(NumpyTestUtilsMixin, TestCase):
 
         # validate dataframe has correct column names
         df1 = pd.DataFrame([[2, 'Apple']], columns=['Numbers', 'Fruit'])
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_gantt, df1)
+        self.assertRaises(PlotlyError, ff.create_gantt, df1)
 
     def test_df_dataframe_all_args(self):
 
@@ -1281,7 +1282,7 @@ class TestGantt(NumpyTestUtilsMixin, TestCase):
                            ['Job B', '2009-03-05', '2009-04-15']],
                           columns=['Task', 'Start', 'Finish'])
 
-        test_gantt_chart = tls.FigureFactory.create_gantt(df)
+        test_gantt_chart = ff.create_gantt(df)
 
         exp_gantt_chart = {
             'data': [{'marker': {'color': 'white'},
@@ -1356,34 +1357,34 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
                    "exceed 255.0.")
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_violin,
+                                ff.create_violin,
                                 data, colors='rgb(300, 2, 3)')
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_violin,
+                                ff.create_violin,
                                 data, colors=['rgb(300, 2, 3)'])
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_violin,
+                                ff.create_violin,
                                 data, colors={'apple': 'rgb(300, 2, 3)'})
 
         pattern2 = ("Whoops! The elements in your colors tuples cannot "
                     "exceed 1.0.")
 
         self.assertRaisesRegexp(PlotlyError, pattern2,
-                                tls.FigureFactory.create_violin,
+                                ff.create_violin,
                                 data, colors=(1.1, 1, 1))
 
         self.assertRaisesRegexp(PlotlyError, pattern2,
-                                tls.FigureFactory.create_violin,
+                                ff.create_violin,
                                 data, colors=[(1.1, 1, 1)])
 
         self.assertRaisesRegexp(PlotlyError, pattern2,
-                                tls.FigureFactory.create_violin,
+                                ff.create_violin,
                                 data, colors={'apple': (1.1, 1, 1)})
 
         # check: if valid string color is inputted
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_violin,
+        self.assertRaises(PlotlyError, ff.create_violin,
                           data, colors='foo')
 
     def test_data_header(self):
@@ -1397,7 +1398,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
                    "numeric data for the violin plot.")
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_violin, data,
+                                ff.create_violin, data,
                                 group_header='a', colors=['rgb(1, 2, 3)'])
 
     def test_data_as_list(self):
@@ -1410,7 +1411,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
                    "either numbers or dictionaries.")
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_violin,
+                                ff.create_violin,
                                 data)
 
         data = [1, 'foo']
@@ -1418,7 +1419,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
         pattern2 = ("If data is a list, it must contain only numbers.")
 
         self.assertRaisesRegexp(PlotlyError, pattern2,
-                                tls.FigureFactory.create_violin, data)
+                                ff.create_violin, data)
 
     def test_dataframe_input(self):
 
@@ -1430,7 +1431,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
                    "a group header.")
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_violin, data,
+                                ff.create_violin, data,
                                 group_header=True)
 
     def test_colors_dict(self):
@@ -1444,7 +1445,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
                    "using a colorscale.")
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_violin, data,
+                                ff.create_violin, data,
                                 data_header='b', group_header='a',
                                 use_colorscale=True,
                                 colors={'a': 'rgb(1, 2, 3)'})
@@ -1455,7 +1456,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
                     "appear as keys in colors.")
 
         self.assertRaisesRegexp(PlotlyError, pattern2,
-                                tls.FigureFactory.create_violin, data,
+                                ff.create_violin, data,
                                 data_header='b', group_header='a',
                                 use_colorscale=False,
                                 colors={'a': 'rgb(1, 2, 3)'})
@@ -1471,7 +1472,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
                    "scale is allowed.")
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_violin, data,
+                                ff.create_violin, data,
                                 data_header='b', group_header='a',
                                 use_colorscale=True,
                                 colors='rgb(1, 2, 3)')
@@ -1486,7 +1487,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
         pattern = ("Your group_stats param must be a dictionary.")
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_violin, data,
+                                ff.create_violin, data,
                                 data_header='b', group_header='a',
                                 use_colorscale=True,
                                 colors=['rgb(1, 2, 3)', 'rgb(4, 5, 6)'],
@@ -1498,7 +1499,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
                     "represented as a key in group_stats.")
 
         self.assertRaisesRegexp(PlotlyError, pattern2,
-                                tls.FigureFactory.create_violin, data,
+                                ff.create_violin, data,
                                 data_header='b', group_header='a',
                                 use_colorscale=True,
                                 colors=['rgb(1, 2, 3)', 'rgb(4, 5, 6)'],
@@ -1508,7 +1509,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
 
         # check: test violin fig matches expected fig
 
-        test_violin = tls.FigureFactory.create_violin(data=[1, 2])
+        test_violin = ff.create_violin(data=[1, 2])
 
         exp_violin = {
             'data': [{'fill': 'tonextx',
@@ -1943,5 +1944,60 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
         pattern = ('data must be a dataframe.')
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_facet_grid,
-                                data)
+                                ff.create_facet_grid,
+                                data, 'a', 'b')
+
+    def test_valid_col_selection(self):
+
+        data = pd.DataFrame([[0, 0], [1, 1]], columns=['a', 'b'])
+
+        pattern = (
+            "x, y, facet_row, facet_col and color must be keys in "
+            "your pandas DataFrame, where facet_row, facet_col and "
+            "color should be categorical variables."
+        )
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                ff.create_facet_grid,
+                                data, 'a', 'c')
+
+    def test_valid_plotly_scale_name(self):
+
+        data = pd.DataFrame([[0, 0], [1, 1]], columns=['a', 'b'])
+
+        self.assertRaises(PlotlyError, ff.create_facet_grid,
+                          data, 'a', 'b', color='a', colorscale='wrong one')
+
+    def test_valid_colorscale(self):
+
+        data = pd.DataFrame([[0, 0], [1, 1]], columns=['a', 'b'])
+
+        pattern = (
+            "If your color variable contains numeric values, you "
+            "need to set the 'colorscale' param to either the name "
+            "of a Plotly colorscale or a colorscale list."
+        )
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                ff.create_facet_grid,
+                                data, 'a', 'b', color='a')
+
+    def test_valid_color_dict(self):
+
+        data = pd.DataFrame([[0, 0, 'foo'], [1, 1, 'foo']],
+                            columns=['a', 'b', 'foo'])
+
+        pattern = (
+            "If using a color_dict, make sure all the values "
+            "of the color column are in the keys of your "
+            "color_dict."
+        )
+
+        color_dict = {'bar': '#ffffff'}
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                ff.create_facet_grid,
+                                data, 'a', 'b', color='foo',
+                                color_dict=color_dict)
+
+        
