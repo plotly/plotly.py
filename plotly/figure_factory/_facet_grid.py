@@ -653,7 +653,7 @@ def create_facet_grid(data, x, y, facet_row=None, facet_col=None, color=None,
     ```
     """
     if not pd:
-        raise exceptions.PlotlyError(
+        raise exceptions.ImportError(
             "'pandas' must be imported for this FigureFactory."
         )
 
@@ -669,7 +669,7 @@ def create_facet_grid(data, x, y, facet_row=None, facet_col=None, color=None,
         if key is not None:
             try:
                 data[key]
-            except ValueError:
+            except KeyError:
                 raise exceptions.PlotlyError(
                     "x, y, facet_row, facet_col and color must be keys in "
                     "your pandas DataFrame, where facet_row, facet_col and "
