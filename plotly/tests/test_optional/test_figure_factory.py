@@ -1932,3 +1932,16 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
 
         self.assert_dict_equal(test_violin['layout'],
                                exp_violin['layout'])
+
+
+class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
+
+    def test_data_must_be_dataframe(self):
+
+        data = []
+
+        pattern = ('data must be a dataframe.')
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                tls.FigureFactory.create_facet_grid,
+                                data)

@@ -26,7 +26,7 @@ def _annotation_dict(text, lane, num_of_lanes, row_col='col'):
         l = 0.05
         w = (1 - (num_of_lanes - 1) * l) / num_of_lanes
         x = ((2 * lane - 1) * w + (2 * lane - 2) * l) / 2.
-        y = 1.03  # 1.07
+        y = 1.03
         textangle = 0
     elif row_col == 'row':
         l = 0.03
@@ -247,7 +247,7 @@ def _facet_grid_color_numerical(data, x, y, facet_row, facet_col, color,
                 y=group[1][y].tolist(),
                 mode='markers',
                 marker=dict(
-                    color=data[color],
+                    color=data[color].tolist(),
                     colorscale=colorscale,
                     showscale=True,
                     colorbar=dict(x=1.15)
@@ -265,11 +265,11 @@ def _facet_grid_color_numerical(data, x, y, facet_row, facet_col, color,
         groups_by_facet_col = list(data.groupby(facet_col))
         for j, group in enumerate(groups_by_facet_col):
             trace = graph_objs.Scatter(
-                x=groups_by_facet_col[j][1][x].tolist(),
-                y=groups_by_facet_col[j][1][y].tolist(),
+                x=group[1][x].tolist(),
+                y=group[1][y].tolist(),
                 mode='markers',
                 marker=dict(
-                    color=data[color],
+                    color=data[color].tolist(),
                     colorscale=colorscale,
                     showscale=True,
                     colorbar=dict(x=1.15)
@@ -282,6 +282,56 @@ def _facet_grid_color_numerical(data, x, y, facet_row, facet_col, color,
                 _annotation_dict(group[0], j + 1, num_of_cols, row_col='col')
             )
 
+    elif facet_row and facet_col:
+        groups_by_facets = list(data.groupby([facet_row, facet_col]))
+        tuple_to_facet_group = {item[0]: item[1] for
+                                item in groups_by_facets}
+
+        row_values = data[facet_row].unique()
+        col_values = data[facet_col].unique()
+        for row_count, x_val in enumerate(row_values):
+            for col_count, y_val in enumerate(col_values):
+                try:
+                    group = tuple_to_facet_group[(x_val, y_val)]
+                except KeyError:
+                    group = pd.DataFrame([[None, None, None]],
+                                         columns=[x, y, color])
+
+                if group.values.tolist() != [[None, None, None]]:
+                    trace = graph_objs.Scatter(
+                        x=group[x].tolist(),
+                        y=group[y].tolist(),
+                        mode='markers',
+                        marker=dict(
+                            color=data[color].tolist(),
+                            colorscale=colorscale,
+                            showscale=(row_count == 0),
+                            colorbar=dict(x=1.15)
+                        ),
+                        **kwargs
+                    )
+                else:
+                    trace = graph_objs.Scatter(
+                        x=group[x].tolist(),
+                        y=group[y].tolist(),
+                        mode='markers',
+                        showlegend=False,
+                        **kwargs
+                    )
+                fig.append_trace(trace, row_count + 1, col_count + 1)
+                if row_count == 0:
+                    annotations.append(
+                        _annotation_dict(col_values[col_count],
+                                         col_count + 1,
+                                         num_of_cols,
+                                         row_col='col')
+                        )
+            annotations.append(
+                _annotation_dict(row_values[row_count],
+                                 num_of_rows - row_count,
+                                 num_of_rows,
+                                 row_col='row')
+                )
 
     # add annotations
     fig['layout']['annotations'] = annotations
@@ -412,29 +462,205 @@ def create_facet_grid(data, x, y, facet_row=None, facet_col=None, color=None,
 
     Example 1: Facet Grid with no filtering
     ```
+    import plotly.plotly as py
+    import plotly.figure_factory as ff
 
+    import pandas as pd
+    import random
+
+    tot_length = 40
+    data_list = []
+    for _ in range(tot_length):
+        data_list.append([10*random.random() for _ in range(2)])
+    data = pd.DataFrame(data_list, columns=['column a', 'column b'])
+
+    my_grid = ff.create_facet_grid(
+        data,
+        x='column a',
+        y='column b',
+    )
+
+    py.iplot(my_grid, filename='facet_grid_no_filtering')
     ```
 
     Example 2: Facet Grid with row filtering
     ```
+    import plotly.plotly as py
+    import plotly.figure_factory as ff
 
+    import pandas as pd
+    import random
+
+    tot_length = 40
+    data_list = []
+    for _ in range(tot_length):
+        data_list.append([10*random.random() for _ in range(2)])
+    data = pd.DataFrame(data_list, columns=['column a', 'column b'])
+
+    row_list = []
+    for _ in range(tot_length):
+        row_list.append(random.choice(['apple', 'orange']))
+    data['fruit'] = row_list
+
+    my_grid = ff.create_facet_grid(
+        data,
+        x='column a',
+        y='column b',
+        facet_row='fruit'
+    )
+
+    py.iplot(my_grid, filename='facet_grid_row_facet')
     ```
 
-    Example 3: Facet Grid with no column filtering
+    Example 3: Facet Grid with column filtering
     ```
+    import plotly.plotly as py
+    import plotly.figure_factory as ff
 
+    import pandas as pd
+    import random
+
+    tot_length = 40
+    data_list = []
+    for _ in range(tot_length):
+        data_list.append([10*random.random() for _ in range(2)])
+    data = pd.DataFrame(data_list, columns=['column a', 'column b'])
+
+    row_list = []
+    for _ in range(tot_length):
+        row_list.append(random.choice(['apple', 'orange']))
+    data['fruit'] = row_list
+
+    my_grid = ff.create_facet_grid(
+        data,
+        x='column a',
+        y='column b',
+        facet_col='fruit'
+    )
+
+    py.iplot(my_grid, filename='facet_grid_col_facet')
     ```
 
     Example 4: Facet Grid with row and column filtering
     ```
+    import plotly.plotly as py
+    import plotly.figure_factory as ff
 
+    import pandas as pd
+    import random
+
+    tot_length = 40
+    data_list = []
+    for _ in range(tot_length):
+        data_list.append([10*random.random() for _ in range(2)])
+    data = pd.DataFrame(data_list, columns=['column a', 'column b'])
+
+    row_list = []
+    col_list = []
+    for _ in range(tot_length):
+        row_list.append(random.choice(['apple', 'orange']))
+        col_list.append(random.choice(['dog', 'cat', 'bunny']))
+    data['fruit'] = row_list
+    data['animal'] = col_list
+
+    my_grid = ff.create_facet_grid(
+        data,
+        x='column a',
+        y='column b',
+        facet_row='fruit',
+        facet_col='animal'
+    )
+
+    py.iplot(my_grid, filename='facet_grid_row_and_col_facet')
     ```
 
-    Example 5: Facet Grid with heatmap variable
+    Example 5: Facet Grid with categorical color variable
+    ```
+    import plotly.plotly as py
+    import plotly.figure_factory as ff
+
+    import pandas as pd
+    import random
+
+    tot_length = 40
+    data_list = []
+    for _ in range(tot_length):
+        data_list.append([10*random.random() for _ in range(2)])
+    data = pd.DataFrame(data_list, columns=['column a', 'column b'])
+
+    row_list = []
+    col_list = []
+    for _ in range(tot_length):
+        row_list.append(random.choice(['apple', 'orange']))
+        col_list.append(random.choice(['dog', 'cat', 'bunny']))
+    data['fruit'] = row_list
+    data['animal'] = col_list
+
+    color_dict = {'dog': 'rgb(255,0,0)',
+                  'cat':'rgb(44,210,40)',
+                  'bunny':'rgb(0,0,255)'}
+    my_grid = ff.create_facet_grid(
+        data,
+        x='column a',
+        y='column b',
+        facet_row='fruit',
+        facet_col='animal',
+        color='animal',
+        color_dict=color_dict
+    )
+
+    py.iplot(my_grid, filename='facet_grid_cat_color')
     ```
 
+    Example 6: Facet Grid with numerical color variable
+    ```
+    import plotly.plotly as py
+    import plotly.figure_factory as ff
+
+    import pandas as pd
+    import random
+
+    tot_length = 40
+    data_list = []
+    for _ in range(tot_length):
+        data_list.append([10*random.random() for _ in range(3)])
+    data = pd.DataFrame(data_list, columns=['column a',
+                                            'column b',
+                                            'column c'])
+
+    row_list = []
+    col_list = []
+    for _ in range(tot_length):
+        row_list.append(random.choice(['apple', 'orange']))
+        col_list.append(random.choice(['dog', 'cat', 'bunny']))
+    data['fruit'] = row_list
+    data['animal'] = col_list
+
+    color_dict = {'dog': 'rgb(255,0,0)',
+                  'cat':'rgb(44,210,40)',
+                  'bunny':'rgb(0,0,255)'}
+    my_grid = ff.create_facet_grid(
+        data,
+        x='column a',
+        y='column b',
+        facet_row='fruit',
+        facet_col='animal',
+        color='column c',
+        colorscale='Viridis'
+    )
+
+    py.iplot(my_grid, filename='facet_grid_numerical_color')
     ```
     """
+    if not pd:
+        raise exceptions.PlotlyError(
+            "'pandas' must be imported for this FigureFactory."
+        )
+
+    if not isinstance(data, pd.DataFrame):
+        raise exceptions.PlotlyError(
+            "data must be a dataframe."
+        )
 
     # make sure all columns are of homogenous datatype
     utils.validate_dataframe(data)
@@ -554,7 +780,7 @@ def create_facet_grid(data, x, y, facet_row=None, facet_col=None, color=None,
     fig['layout']['legend']['y'] = 0.5
     fig['layout']['legend']['x'] = 1.15
 
-    # add rectangle areas behind axis titles
+    # add shaded regions behind axis titles
     _add_shapes_to_fig(fig)
 
     return fig
