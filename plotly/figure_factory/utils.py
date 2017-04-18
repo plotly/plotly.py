@@ -10,6 +10,8 @@ DEFAULT_PLOTLY_COLORS = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
                          'rgb(227, 119, 194)', 'rgb(127, 127, 127)',
                          'rgb(188, 189, 34)', 'rgb(23, 190, 207)']
 
+# TODO: make PLOTLY_SCALES below like version in plotly.colors
+# requires rewritting scatterplot_matrix code
 PLOTLY_SCALES = {
     'Greys': ['rgb(0,0,0)', 'rgb(255,255,255)'],
     'YlGnBu': ['rgb(8,29,88)', 'rgb(255,255,217)'],
