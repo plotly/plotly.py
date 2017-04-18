@@ -1999,5 +1999,3 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
                                 ff.create_facet_grid,
                                 data, 'a', 'b', color='foo',
                                 color_dict=color_dict)
-
-        

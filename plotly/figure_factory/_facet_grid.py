@@ -2,6 +2,7 @@ from __future__ import absolute_import
 
 from plotly import exceptions, optional_imports
 from plotly.figure_factory import utils
+import plotly.colors as colors
 
 from plotly.graph_objs import graph_objs
 from plotly.tools import make_subplots
@@ -689,13 +690,13 @@ def create_facet_grid(data, x, y, facet_row=None, facet_col=None, color=None,
             show_legend = False
             # numerical color variable
             if isinstance(colorscale, str):
-                if colorscale in utils.PLOTLY_SCALES.keys():
-                    colorscale_list = utils.PLOTLY_SCALES[colorscale]
+                if colorscale in colors.PLOTLY_SCALES.keys():
+                    colorscale_list = colors.PLOTLY_SCALES[colorscale]
                 else:
                     raise exceptions.PlotlyError(
                         "If 'colorscale' is a string, it must be the name "
                         "of a Plotly Colorscale. The available colorscale "
-                        "names are {}".format(utils.PLOTLY_SCALES.keys())
+                        "names are {}".format(colors.PLOTLY_SCALES.keys())
                     )
             elif isinstance(colorscale, list):
                 colorscale_list = colorscale
