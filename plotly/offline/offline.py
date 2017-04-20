@@ -275,7 +275,7 @@ def _plot_html(figure_or_data, config, validate, default_width,
 
 def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
           validate=True, image=None, filename='plot_image', image_width=800,
-          image_height=600):
+          image_height=600, config=None):
     """
     Draw plotly graphs inside an IPython or Jupyter notebook without
     connecting to an external server.
@@ -308,6 +308,9 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         will be saved to. The extension should not be included.
     image_height (default=600) -- Specifies the height of the image in `px`.
     image_width (default=800) -- Specifies the width of the image in `px`.
+    config (default=None) -- Plot view options dictionary. Keyword arguments
+        `show_link` and `link_text` set the associated options in this
+        dictionary if it doesn't contain them already.
 
     Example:
     ```
@@ -331,9 +334,9 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     if not ipython:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
-    config = {}
-    config['showLink'] = show_link
-    config['linkText'] = link_text
+    config = dict(config) if config else {}
+    config.setdefault('showLink', show_link)
+    config.setdefault('linkText', link_text)
 
     plot_html, plotdivid, width, height = _plot_html(
         figure_or_data, config, validate, '100%', 525, True
@@ -375,7 +378,8 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
 def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
          validate=True, output_type='file', include_plotlyjs=True,
          filename='temp-plot.html', auto_open=True, image=None,
-         image_filename='plot_image', image_width=800, image_height=600):
+         image_filename='plot_image', image_width=800, image_height=600,
+         config=None):
     """ Create a plotly graph locally as an HTML document or string.
 
     Example:
@@ -435,6 +439,9 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         image will be saved to. The extension should not be included.
     image_height (default=600) -- Specifies the height of the image in `px`.
     image_width (default=800) -- Specifies the width of the image in `px`.
+    config (default=None) -- Plot view options dictionary. Keyword arguments
+        `show_link` and `link_text` set the associated options in this
+        dictionary if it doesn't contain them already.
     """
     if output_type not in ['div', 'file']:
         raise ValueError(
@@ -446,9 +453,9 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
             "Adding .html to the end of your file.")
         filename += '.html'
 
-    config = {}
-    config['showLink'] = show_link
-    config['linkText'] = link_text
+    config = dict(config) if config else {}
+    config.setdefault('showLink', show_link)
+    config.setdefault('linkText', link_text)
 
     plot_html, plotdivid, width, height = _plot_html(
         figure_or_data, config, validate,
