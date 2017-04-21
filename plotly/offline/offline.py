@@ -351,8 +351,15 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                                    cls=plotly.utils.PlotlyJSONEncoder))
     layout = _json.loads(_json.dumps(figure.get('layout', {}),
                                      cls=plotly.utils.PlotlyJSONEncoder))
+    frames = _json.loads(_json.dumps(figure.get('frames', None),
+                                     cls=plotly.utils.PlotlyJSONEncoder))
+
+    fig = {'data': data, 'layout': layout}
+    if frames:
+        fig['frames'] = frames
+
     display_bundle = {
-        'application/vnd.plotly.v1+json': {'data': data, 'layout': layout},
+        'application/vnd.plotly.v1+json': fig,
         'text/html': plot_html,
         'text/vnd.plotly.v1+html': plot_html
     }
