@@ -1504,6 +1504,77 @@ class dashboard_ops:
         return [str(dboard['filename']) for dboard in dashboards]
 
 
+class presentation_ops:
+    """
+    Interface to Plotly's Spectacle-Presentations API.
+    """
+    @classmethod
+    def upload(cls, presentation, filename, sharing='public', auto_open=True):
+        """
+        BETA function for uploading/overwriting dashboards to Plotly.
+
+        :param (dict) dashboard: the JSON dashboard to be uploaded. Use
+            plotly.dashboard_objs.dashboard_objs to create a Dashboard
+            object.
+        :param (str) filename: the name of the dashboard to be saved in
+            your Plotly account. Will overwrite a dashboard of the same
+            name if it already exists in your files.
+        :param (str) sharing: can be set to either 'public', 'private'
+            or 'secret'. If 'public', your dashboard will be viewable by
+            all other users. If 'private' only you can see your dashboard.
+            If 'secret', the url will be returned with a sharekey appended
+            to the url. Anyone with the url may view the dashboard.
+        :param (bool) auto_open: automatically opens the dashboard in the
+            browser.
+        """
+        if sharing == 'public':
+            world_readable = True
+        elif sharing == 'private':
+            world_readable = False
+        elif sharing == 'secret':
+            world_readable = False
+
+        data = {
+            'content': json.dumps(presentation),
+            'filename': filename,
+            'world_readable': world_readable
+        }
+
+        # lookup if pre-existing filename already exists
+        try:
+            lookup_res = v2.files.lookup(filename)
+            matching_file = json.loads(lookup_res.content)
+
+            if matching_file['filetype'] == 'presentation':
+                old_fid = matching_file['fid']
+                res = v2.spectacle_presentations.update(old_fid, data)
+            else:
+                raise exceptions.PlotlyError(
+                    "'{filename}' is already a {filetype} in your account. "
+                    "While you can overwrite presentation with the same name, "
+                    "you can't change overwrite files with a different type. "
+                    "Try deleting '{filename}' in your account or changing "
+                    "the filename.".format(
+                        filename=filename,
+                        filetype=matching_file['filetype']
+                    )
+                )
+
+        except exceptions.PlotlyRequestError:
+            res = v2.spectacle_presentations.create(data)
+        res.raise_for_status()
+
+        url = res.json()['web_url']
+
+        if sharing == 'secret':
+            url = add_share_key_to_url(url)
+
+        if auto_open:
+            webbrowser.open_new(res.json()['web_url'])
+
+        return url
+
+
 def create_animations(figure, filename=None, sharing='public', auto_open=True):
     """
     BETA function that creates plots with animations via `frames`.
