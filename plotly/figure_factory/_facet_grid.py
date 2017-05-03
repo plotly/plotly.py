@@ -1,9 +1,7 @@
 from __future__ import absolute_import
 
-from plotly import exceptions, optional_imports
+from plotly import colors, exceptions, optional_imports
 from plotly.figure_factory import utils
-import plotly.colors as colors
-
 from plotly.graph_objs import graph_objs
 from plotly.tools import make_subplots
 
@@ -53,6 +51,7 @@ def _annotation_dict(text, lane, num_of_lanes, row_col='col'):
     )
 
     return annotation_dict
+
 
 def _add_shapes_to_fig(fig):
     fig['layout']['shapes'] = []
@@ -438,11 +437,12 @@ def _facet_grid(data, x, y, facet_row, facet_col, title, height, width,
 
     return fig
 
+
 def create_facet_grid(data, x, y, facet_row=None, facet_col=None, color=None,
                       colorscale=None, color_dict=None, title='facet grid',
                       height=600, width=600, **kwargs):
     """
-    Returns data for a facet grid.
+    Returns figure for facet grid.
 
     :param (pd.DataFrame) data: the DataFrame of columns for the facet grid.
     :param (str) x: the key of the DataFrame to be used as the x axis data.
@@ -655,7 +655,7 @@ def create_facet_grid(data, x, y, facet_row=None, facet_col=None, color=None,
     """
     if not pd:
         raise exceptions.ImportError(
-            "'pandas' must be imported for this FigureFactory."
+            "'pandas' must be imported for this figure_factory."
         )
 
     if not isinstance(data, pd.DataFrame):
