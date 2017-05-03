@@ -1,4 +1,14 @@
+# Contributing
+
 The bottom line. Follow your Nose, or our Nose. Write-run-love tests :fist:.
+
+## Code of Conduct
+
+Check out the [Code of Conduct](CODE_OF_CONDUCT.md). Don't tl:dr; it, but the general idea is to be nice.
+
+## Got Questions?
+
+Open an issue! Go to https://github.com/plotly/plotly.py/issues. It's possible that your issue was already addressed. If it wasn't, open it. We also accept PRs; take a look at the steps below for instructions on how to do this.
 
 ## Setup
 
@@ -53,7 +63,7 @@ Once you've made your changes (and hopefully written some tests...), make that p
 ## Suggestions
 
 ### Local Python
-Setting up Python versions that *don't* require you to use `sudo` is a good idea. In addition, the core Python on your machine may not be the Python that we've developed in! Here are some nice guides for Mac, Windows, and Linux: 
+Setting up Python versions that *don't* require you to use `sudo` is a good idea. In addition, the core Python on your machine may not be the Python that we've developed in! Here are some nice guides for Mac, Windows, and Linux:
 - http://docs.python-guide.org/en/latest/starting/install/osx/
 - http://docs.python-guide.org/en/latest/starting/install/win/
 - http://docs.python-guide.org/en/latest/starting/install/linux/
@@ -82,7 +92,7 @@ export PYTHONPATH="/path/to/local/repo:$PYTHONPATH"
 
 ## Dependencies
 
-There's a short list of core dependencies you'll need installed in your Python environment to have any sort of fun with Plotly's Python API (see `requirements.txt`). Additionally, you're likely to have even more fun if you install some other requirements (see `optional-requirements.txt`). 
+There's a short list of core dependencies you'll need installed in your Python environment to have any sort of fun with Plotly's Python API (see `requirements.txt`). Additionally, you're likely to have even more fun if you install some other requirements (see `optional-requirements.txt`).
 
 ### Dependencies and Virtualenv
 
@@ -176,7 +186,7 @@ tox -- -a '!slow','!matplotlib'
 
 ### Writing Tests
 
-You're *strongly* encouraged to write tests that check your added functionality. 
+You're *strongly* encouraged to write tests that check your added functionality.
 
 When you write a new test anywhere under the `tests` directory, if your PR gets accepted, that test will run in a virtual machine to ensure that future changes don't break your contributions!
 
@@ -184,7 +194,7 @@ When you write a new test anywhere under the `tests` directory, if your PR gets 
 
 You'll need the credentials file `~/.pypirc`. Request access from @theengineear and @chriddyp. Then, from inside the repository:
 
-```
+```bash
 (plotly.py) $ git checkout master
 (plotly.py) $ git stash
 (plotly.py) $ git pull origin master
@@ -192,11 +202,10 @@ You'll need the credentials file `~/.pypirc`. Request access from @theengineear 
 ```
 
 After it has uploaded, move to another directly and double+triple check that you are able to upgrade ok:
-```
+```bash
 $ pip install plotly --upgrade
 ```
 
 And ask one of your friends to do it too. Our tests should catch any issues, but you never know.
-
 
 <3 Team Plotly
