@@ -140,7 +140,11 @@ def init_notebook_mode(connected=False):
             '</script>'
             '').format(script=get_plotlyjs())
 
-    ipython_display.display(ipython_display.HTML(script_inject))
+    display_bundle = {
+        'text/html': script_inject,
+        'text/vnd.plotly.v1+html': script_inject
+    }
+    ipython_display.display(display_bundle, raw=True)
     __PLOTLY_OFFLINE_INITIALIZED = True
 
 
@@ -271,7 +275,7 @@ def _plot_html(figure_or_data, config, validate, default_width,
 
 def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
           validate=True, image=None, filename='plot_image', image_width=800,
-          image_height=600):
+          image_height=600, config=None):
     """
     Draw plotly graphs inside an IPython or Jupyter notebook without
     connecting to an external server.
@@ -304,6 +308,9 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         will be saved to. The extension should not be included.
     image_height (default=600) -- Specifies the height of the image in `px`.
     image_width (default=800) -- Specifies the width of the image in `px`.
+    config (default=None) -- Plot view options dictionary. Keyword arguments
+        `show_link` and `link_text` set the associated options in this
+        dictionary if it doesn't contain them already.
 
     Example:
     ```
@@ -327,9 +334,9 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     if not ipython:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
-    config = {}
-    config['showLink'] = show_link
-    config['linkText'] = link_text
+    config = dict(config) if config else {}
+    config.setdefault('showLink', show_link)
+    config.setdefault('linkText', link_text)
 
     plot_html, plotdivid, width, height = _plot_html(
         figure_or_data, config, validate, '100%', 525, True
@@ -344,9 +351,17 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                                    cls=plotly.utils.PlotlyJSONEncoder))
     layout = _json.loads(_json.dumps(figure.get('layout', {}),
                                      cls=plotly.utils.PlotlyJSONEncoder))
+    frames = _json.loads(_json.dumps(figure.get('frames', None),
+                                     cls=plotly.utils.PlotlyJSONEncoder))
+
+    fig = {'data': data, 'layout': layout}
+    if frames:
+        fig['frames'] = frames
+
     display_bundle = {
-        'application/vnd.plotly.v1+json': {'data': data, 'layout': layout},
-        'text/html': plot_html
+        'application/vnd.plotly.v1+json': fig,
+        'text/html': plot_html,
+        'text/vnd.plotly.v1+html': plot_html
     }
     ipython_display.display(display_bundle, raw=True)
 
@@ -370,7 +385,8 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
 def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
          validate=True, output_type='file', include_plotlyjs=True,
          filename='temp-plot.html', auto_open=True, image=None,
-         image_filename='plot_image', image_width=800, image_height=600):
+         image_filename='plot_image', image_width=800, image_height=600,
+         config=None):
     """ Create a plotly graph locally as an HTML document or string.
 
     Example:
@@ -430,6 +446,9 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         image will be saved to. The extension should not be included.
     image_height (default=600) -- Specifies the height of the image in `px`.
     image_width (default=800) -- Specifies the width of the image in `px`.
+    config (default=None) -- Plot view options dictionary. Keyword arguments
+        `show_link` and `link_text` set the associated options in this
+        dictionary if it doesn't contain them already.
     """
     if output_type not in ['div', 'file']:
         raise ValueError(
@@ -441,9 +460,9 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
             "Adding .html to the end of your file.")
         filename += '.html'
 
-    config = {}
-    config['showLink'] = show_link
-    config['linkText'] = link_text
+    config = dict(config) if config else {}
+    config.setdefault('showLink', show_link)
+    config.setdefault('linkText', link_text)
 
     plot_html, plotdivid, width, height = _plot_html(
         figure_or_data, config, validate,
@@ -511,7 +530,8 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                 get_plotlyjs(),
                 '</script>',
                 plot_html,
-                '</div>'
+                resize_script,
+                '</div>',
             ])
         else:
             return plot_html
