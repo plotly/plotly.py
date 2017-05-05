@@ -30,7 +30,6 @@ would naturally use a categorical colormap. You can choose however to use a
 categorical colormap with a column of numbers. Be careful though, as if you
 have a large set of unique numbers in your column you'll get a lot of colors.
 
------
 """
 from __future__ import absolute_import
 
