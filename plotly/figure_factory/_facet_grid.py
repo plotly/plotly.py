@@ -10,11 +10,11 @@ from numbers import Number
 pd = optional_imports.get_module('pandas')
 
 TICK_COLOR = '#969696'
-AXIS_TITLE_COLOR = '#323232'
+AXIS_TITLE_COLOR = '#0f0f0f'
 GRID_COLOR = '#ffffff'
 LEGEND_COLOR = '#efefef'
-PLOT_BGCOLOR = '#d7d7d7'
-ANNOT_COLOR = '#c7c7c7'
+PLOT_BGCOLOR = '#f5f5f5'
+ANNOT_RECT_COLOR = '#d0d0d0'
 HORIZONTAL_SPACING = 0.015
 VERTICAL_SPACING = 0.015
 LEGEND_BORDER_WIDTH = 1
@@ -60,9 +60,9 @@ def _add_shapes_to_fig(fig):
             if fig['layout'][key]['domain'] != [0.0, 1.0]:
                 if 'xaxis' in key:
                     fig['layout']['shapes'].append(
-                        {'fillcolor': 'rgb(170,170,170)',
+                        {'fillcolor': ANNOT_RECT_COLOR,
                        'layer': 'below',
-                       'line': {'color': 'rgb(170,170,170)', 'width': 1},
+                       'line': {'color': ANNOT_RECT_COLOR, 'width': 1},
                        'type': 'rect',
                        'x0': fig['layout'][key]['domain'][0],
                        'x1': fig['layout'][key]['domain'][1],
@@ -73,9 +73,9 @@ def _add_shapes_to_fig(fig):
                     )
                 elif 'yaxis' in key:
                     fig['layout']['shapes'].append(
-                        {'fillcolor': 'rgb(170,170,170)',
+                        {'fillcolor': ANNOT_RECT_COLOR,
                          'layer': 'below',
-                         'line': {'color': 'rgb(170,170,170)', 'width': 1},
+                         'line': {'color': ANNOT_RECT_COLOR, 'width': 1},
                          'type': 'rect',
                          'x0': 1.005,
                          'x1': 1.05,
@@ -86,9 +86,9 @@ def _add_shapes_to_fig(fig):
                     )
 
 
-def _facet_grid_color_categorical(data, x, y, facet_row, facet_col, color,
-                                  colorscale, color_dict, title, height,
-                                  width, num_of_rows, num_of_cols, **kwargs):
+def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
+                                  color, title, height, width, num_of_rows,
+                                  num_of_cols, **kwargs):
     fig = make_subplots(rows=num_of_rows, cols=num_of_cols,
                         shared_xaxes=True, shared_yaxes=True,
                         horizontal_spacing=HORIZONTAL_SPACING,
@@ -96,7 +96,7 @@ def _facet_grid_color_categorical(data, x, y, facet_row, facet_col, color,
 
     annotations = []
     if not facet_row and not facet_col:
-        color_groups = list(data.groupby(color))
+        color_groups = list(df.groupby(color))
         for group in color_groups:
             trace = graph_objs.Scatter(
                 x=group[1][x].tolist(),
@@ -111,9 +111,9 @@ def _facet_grid_color_categorical(data, x, y, facet_row, facet_col, color,
             fig.append_trace(trace, 1, 1)
 
     elif facet_row and not facet_col:
-        groups_by_facet_row = list(data.groupby(facet_row))
+        groups_by_facet_row = list(df.groupby(facet_row))
         for j, group in enumerate(groups_by_facet_row):
-            for color_val in data[color].unique():
+            for color_val in df[color].unique():
                 data_by_color = group[1][group[1][color] == color_val]
                 trace = graph_objs.Scatter(
                     x=data_by_color[x].tolist(),
@@ -133,9 +133,9 @@ def _facet_grid_color_categorical(data, x, y, facet_row, facet_col, color,
             )
 
     elif not facet_row and facet_col:
-        groups_by_facet_col = list(data.groupby(facet_col))
+        groups_by_facet_col = list(df.groupby(facet_col))
         for j, group in enumerate(groups_by_facet_col):
-            for color_val in data[color].unique():
+            for color_val in df[color].unique():
                 data_by_color = group[1][group[1][color] == color_val]
                 trace = graph_objs.Scatter(
                     x=data_by_color[x].tolist(),
@@ -154,13 +154,13 @@ def _facet_grid_color_categorical(data, x, y, facet_row, facet_col, color,
             )
 
     elif facet_row and facet_col:
-        groups_by_facets = list(data.groupby([facet_row, facet_col]))
+        groups_by_facets = list(df.groupby([facet_row, facet_col]))
         tuple_to_facet_group = {item[0]: item[1] for
                                 item in groups_by_facets}
 
-        row_values = data[facet_row].unique()
-        col_values = data[facet_col].unique()
-        color_vals = data[color].unique()
+        row_values = df[facet_row].unique()
+        col_values = df[facet_col].unique()
+        color_vals = df[color].unique()
         for row_count, x_val in enumerate(row_values):
             for col_count, y_val in enumerate(col_values):
                 try:
@@ -216,7 +216,7 @@ def _facet_grid_color_categorical(data, x, y, facet_row, facet_col, color,
     return fig
 
 
-def _facet_grid_color_numerical(data, x, y, facet_row, facet_col, color,
+def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color,
                                 colorscale, color_dict, title, height, width,
                                 num_of_rows, num_of_cols, **kwargs):
     fig = make_subplots(rows=num_of_rows, cols=num_of_cols,
@@ -227,11 +227,11 @@ def _facet_grid_color_numerical(data, x, y, facet_row, facet_col, color,
     annotations = []
     if not facet_row and not facet_col:
         trace = graph_objs.Scatter(
-            x=data[x].tolist(),
-            y=data[y].tolist(),
+            x=df[x].tolist(),
+            y=df[y].tolist(),
             mode='markers',
             marker=dict(
-                color=data[color],
+                color=df[color],
                 colorscale=colorscale,
                 showscale=True
             ),
@@ -240,14 +240,14 @@ def _facet_grid_color_numerical(data, x, y, facet_row, facet_col, color,
         fig.append_trace(trace, 1, 1)
 
     elif facet_row and not facet_col:
-        groups_by_facet_row = list(data.groupby(facet_row))
+        groups_by_facet_row = list(df.groupby(facet_row))
         for j, group in enumerate(groups_by_facet_row):
             trace = graph_objs.Scatter(
                 x=group[1][x].tolist(),
                 y=group[1][y].tolist(),
                 mode='markers',
                 marker=dict(
-                    color=data[color].tolist(),
+                    color=df[color].tolist(),
                     colorscale=colorscale,
                     showscale=True,
                     colorbar=dict(x=1.15)
@@ -262,14 +262,14 @@ def _facet_grid_color_numerical(data, x, y, facet_row, facet_col, color,
             )
 
     elif not facet_row and facet_col:
-        groups_by_facet_col = list(data.groupby(facet_col))
+        groups_by_facet_col = list(df.groupby(facet_col))
         for j, group in enumerate(groups_by_facet_col):
             trace = graph_objs.Scatter(
                 x=group[1][x].tolist(),
                 y=group[1][y].tolist(),
                 mode='markers',
                 marker=dict(
-                    color=data[color].tolist(),
+                    color=df[color].tolist(),
                     colorscale=colorscale,
                     showscale=True,
                     colorbar=dict(x=1.15)
@@ -283,12 +283,12 @@ def _facet_grid_color_numerical(data, x, y, facet_row, facet_col, color,
             )
 
     elif facet_row and facet_col:
-        groups_by_facets = list(data.groupby([facet_row, facet_col]))
+        groups_by_facets = list(df.groupby([facet_row, facet_col]))
         tuple_to_facet_group = {item[0]: item[1] for
                                 item in groups_by_facets}
 
-        row_values = data[facet_row].unique()
-        col_values = data[facet_col].unique()
+        row_values = df[facet_row].unique()
+        col_values = df[facet_col].unique()
         for row_count, x_val in enumerate(row_values):
             for col_count, y_val in enumerate(col_values):
                 try:
@@ -303,7 +303,7 @@ def _facet_grid_color_numerical(data, x, y, facet_row, facet_col, color,
                         y=group[y].tolist(),
                         mode='markers',
                         marker=dict(
-                            color=data[color].tolist(),
+                            color=df[color].tolist(),
                             colorscale=colorscale,
                             showscale=(row_count == 0),
                             colorbar=dict(x=1.15)
@@ -339,7 +339,7 @@ def _facet_grid_color_numerical(data, x, y, facet_row, facet_col, color,
     return fig
 
 
-def _facet_grid(data, x, y, facet_row, facet_col, title, height, width,
+def _facet_grid(df, x, y, facet_row, facet_col, title, height, width,
                 num_of_rows, num_of_cols, **kwargs):
     fig = make_subplots(rows=num_of_rows, cols=num_of_cols,
                         shared_xaxes=True, shared_yaxes=True,
@@ -348,8 +348,8 @@ def _facet_grid(data, x, y, facet_row, facet_col, title, height, width,
     annotations = []
     if not facet_row and not facet_col:
         trace = graph_objs.Scatter(
-            x=data[x].tolist(),
-            y=data[y].tolist(),
+            x=df[x].tolist(),
+            y=df[y].tolist(),
             mode='markers',
             marker=dict(
                 color='#000000'
@@ -359,7 +359,7 @@ def _facet_grid(data, x, y, facet_row, facet_col, title, height, width,
         fig.append_trace(trace, 1, 1)
 
     elif facet_row and not facet_col:
-        groups_by_facet_row = list(data.groupby(facet_row))
+        groups_by_facet_row = list(df.groupby(facet_row))
         for j, group in enumerate(groups_by_facet_row):
             trace = graph_objs.Scatter(
                 x=group[1][x].tolist(),
@@ -378,7 +378,7 @@ def _facet_grid(data, x, y, facet_row, facet_col, title, height, width,
             )
 
     elif not facet_row and facet_col:
-        groups_by_facet_col = list(data.groupby(facet_col))
+        groups_by_facet_col = list(df.groupby(facet_col))
         for j, group in enumerate(groups_by_facet_col):
             trace = graph_objs.Scatter(
                 x=group[1][x].tolist(),
@@ -396,12 +396,12 @@ def _facet_grid(data, x, y, facet_row, facet_col, title, height, width,
             )
 
     elif facet_row and facet_col:
-        groups_by_facets = list(data.groupby([facet_row, facet_col]))
+        groups_by_facets = list(df.groupby([facet_row, facet_col]))
         tuple_to_facet_group = {item[0]: item[1] for
                                 item in groups_by_facets}
 
-        row_values = data[facet_row].unique()
-        col_values = data[facet_col].unique()
+        row_values = df[facet_row].unique()
+        col_values = df[facet_col].unique()
         for row_count, x_val in enumerate(row_values):
             for col_count, y_val in enumerate(col_values):
                 try:
@@ -438,25 +438,27 @@ def _facet_grid(data, x, y, facet_row, facet_col, title, height, width,
     return fig
 
 
-def create_facet_grid(data, x, y, facet_row=None, facet_col=None, color=None,
-                      colorscale=None, color_dict=None, title='facet grid',
-                      height=600, width=600, **kwargs):
+def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
+                      color_name=None, color=None, title='facet grid',
+                      height=800, width=800, **kwargs):
     """
     Returns figure for facet grid.
 
-    :param (pd.DataFrame) data: the DataFrame of columns for the facet grid.
-    :param (str) x: the key of the DataFrame to be used as the x axis data.
-    :param (str) y: the key of the DataFrame to be used as the y axis data.
+    :param (pd.DataFrame) df: the dataFrame of columns for the facet grid.
+    :param (str) x: the key of the dataFrame to be used as the x axis df.
+    :param (str) y: the key of the dataFrame to be used as the y axis df.
     :param (str) facet_row: the key of the row filter column for the facet
         grid. The column must be categorical.
     :param (str) facet_col: the key of the column filter column for the facet
         grid. The column must be categorical.
-    :param (str) color: the key that will function as the heatmap variable.
-    :param (str|list) colorscale: either the name of a plotly colorscale
-        name or a custom colorscale list.
-    :param (dict) color_dict: a dictionary that maps the values of the color
-        variable column values to color values. Colors can be tuples, rgb
-        tuples or hex strings. Run 'help(plotly.colors)' for information.
+    :param (str) color_name: the name of your dataframe column that will
+        function as the heatmap variable.
+    :param (str|list|dict) color: the param that determines how the color_name
+        column (the heatmap variable) colors the data. If the dataframe
+        contains numeric data, then a dictionary of colors will group the data
+        categorically while a Plotly Colorscale name or a custom colorscale
+        will treat it numerically. To learn more about colors and types of
+        heatmaps, run `help(plotly.colors)`
     :param (str) title: the title of the facet grid figure.
     :param (int) height: the height of the facet grid figure.
     :param (int) width: the width of the facet grid figure.
@@ -473,10 +475,10 @@ def create_facet_grid(data, x, y, facet_row=None, facet_col=None, color=None,
     data_list = []
     for _ in range(tot_length):
         data_list.append([10*random.random() for _ in range(2)])
-    data = pd.DataFrame(data_list, columns=['column a', 'column b'])
+    df = pd.DataFrame(data_list, columns=['column a', 'column b'])
 
     my_grid = ff.create_facet_grid(
-        data,
+        df,
         x='column a',
         y='column b',
     )
@@ -496,15 +498,15 @@ def create_facet_grid(data, x, y, facet_row=None, facet_col=None, color=None,
     data_list = []
     for _ in range(tot_length):
         data_list.append([10*random.random() for _ in range(2)])
-    data = pd.DataFrame(data_list, columns=['column a', 'column b'])
+    df = pd.DataFrame(data_list, columns=['column a', 'column b'])
 
     row_list = []
     for _ in range(tot_length):
         row_list.append(random.choice(['apple', 'orange']))
-    data['fruit'] = row_list
+    df['fruit'] = row_list
 
     my_grid = ff.create_facet_grid(
-        data,
+        df,
         x='column a',
         y='column b',
         facet_row='fruit'
@@ -525,15 +527,15 @@ def create_facet_grid(data, x, y, facet_row=None, facet_col=None, color=None,
     data_list = []
     for _ in range(tot_length):
         data_list.append([10*random.random() for _ in range(2)])
-    data = pd.DataFrame(data_list, columns=['column a', 'column b'])
+    df = pd.DataFrame(data_list, columns=['column a', 'column b'])
 
     row_list = []
     for _ in range(tot_length):
         row_list.append(random.choice(['apple', 'orange']))
-    data['fruit'] = row_list
+    df['fruit'] = row_list
 
     my_grid = ff.create_facet_grid(
-        data,
+        df,
         x='column a',
         y='column b',
         facet_col='fruit'
@@ -554,18 +556,18 @@ def create_facet_grid(data, x, y, facet_row=None, facet_col=None, color=None,
     data_list = []
     for _ in range(tot_length):
         data_list.append([10*random.random() for _ in range(2)])
-    data = pd.DataFrame(data_list, columns=['column a', 'column b'])
+    df = pd.DataFrame(data_list, columns=['column a', 'column b'])
 
     row_list = []
     col_list = []
     for _ in range(tot_length):
         row_list.append(random.choice(['apple', 'orange']))
         col_list.append(random.choice(['dog', 'cat', 'bunny']))
-    data['fruit'] = row_list
-    data['animal'] = col_list
+    df['fruit'] = row_list
+    df['animal'] = col_list
 
     my_grid = ff.create_facet_grid(
-        data,
+        df,
         x='column a',
         y='column b',
         facet_row='fruit',
@@ -587,21 +589,21 @@ def create_facet_grid(data, x, y, facet_row=None, facet_col=None, color=None,
     data_list = []
     for _ in range(tot_length):
         data_list.append([10*random.random() for _ in range(2)])
-    data = pd.DataFrame(data_list, columns=['column a', 'column b'])
+    df = pd.DataFrame(data_list, columns=['column a', 'column b'])
 
     row_list = []
     col_list = []
     for _ in range(tot_length):
         row_list.append(random.choice(['apple', 'orange']))
         col_list.append(random.choice(['dog', 'cat', 'bunny']))
-    data['fruit'] = row_list
-    data['animal'] = col_list
+    df['fruit'] = row_list
+    df['animal'] = col_list
 
     color_dict = {'dog': 'rgb(255,0,0)',
                   'cat':'rgb(44,210,40)',
                   'bunny':'rgb(0,0,255)'}
     my_grid = ff.create_facet_grid(
-        data,
+        df,
         x='column a',
         y='column b',
         facet_row='fruit',
@@ -625,7 +627,7 @@ def create_facet_grid(data, x, y, facet_row=None, facet_col=None, color=None,
     data_list = []
     for _ in range(tot_length):
         data_list.append([10*random.random() for _ in range(3)])
-    data = pd.DataFrame(data_list, columns=['column a',
+    df = pd.DataFrame(data_list, columns=['column a',
                                             'column b',
                                             'column c'])
 
@@ -634,14 +636,14 @@ def create_facet_grid(data, x, y, facet_row=None, facet_col=None, color=None,
     for _ in range(tot_length):
         row_list.append(random.choice(['apple', 'orange']))
         col_list.append(random.choice(['dog', 'cat', 'bunny']))
-    data['fruit'] = row_list
-    data['animal'] = col_list
+    df['fruit'] = row_list
+    df['animal'] = col_list
 
     color_dict = {'dog': 'rgb(255,0,0)',
                   'cat':'rgb(44,210,40)',
                   'bunny':'rgb(0,0,255)'}
     my_grid = ff.create_facet_grid(
-        data,
+        df,
         x='column a',
         y='column b',
         facet_row='fruit',
@@ -658,18 +660,18 @@ def create_facet_grid(data, x, y, facet_row=None, facet_col=None, color=None,
             "'pandas' must be imported for this figure_factory."
         )
 
-    if not isinstance(data, pd.DataFrame):
+    if not isinstance(df, pd.DataFrame):
         raise exceptions.PlotlyError(
-            "data must be a dataframe."
+            "df must be a dataframe."
         )
 
     # make sure all columns are of homogenous datatype
-    utils.validate_dataframe(data)
+    utils.validate_dataframe(df)
 
     for key in [x, y, facet_row, facet_col, color]:
         if key is not None:
             try:
-                data[key]
+                df[key]
             except KeyError:
                 raise exceptions.PlotlyError(
                     "x, y, facet_row, facet_col and color must be keys in "
@@ -677,16 +679,90 @@ def create_facet_grid(data, x, y, facet_row=None, facet_col=None, color=None,
                     "color should be categorical variables."
                 )
 
+    # make sure dataframe index starts at 0
+    df.index = range(len(df))
+
     num_of_rows = 1
     num_of_cols = 1
 
     if facet_row:
-        num_of_rows = len(data[facet_row].unique())
+        num_of_rows = len(df[facet_row].unique())
     if facet_col:
-        num_of_cols = len(data[facet_col].unique())
+        num_of_cols = len(df[facet_col].unique())
+
+    if color_name:
+        if isinstance(df[color_name][0], str):
+            show_legend = False
+            if isinstance(color, dict):
+                utils.validate_colors_dict(color, 'rgb')
+
+                for val in df[color_name].unique():
+                    if val not in color_dict.keys():
+                        raise exceptions.PlotlyError(
+                            "If using 'color' as a dictionary, make sure all "
+                            "the values of the color column are in the keys "
+                            "of your dictionary."
+                        )
+            else:
+                # use default plotly colors for dictionary
+                default_colors = utils.DEFAULT_PLOTLY_COLORS
+                color = {}
+                j = 0
+                for val in df[color_name].unique():
+                    if j >= len(default_colors):
+                        j = 0
+                    color[val] = default_colors[j]
+                    j += 1
+
+            fig = _facet_grid_color_categorical(df, x, y, facet_row,
+                                                facet_col, color_name, color,
+                                                title, height, width,
+                                                num_of_rows, num_of_cols,
+                                                **kwargs)
+
+
+        elif isinstance(df[color_name][0], Number):
+            if isinstance(color, dict):
+                show_legend = False
+                utils.validate_colors_dict(color, 'rgb')
+
+                for val in df[color_name].unique():
+                    if val not in color_dict.keys():
+                        raise exceptions.PlotlyError(
+                            "If using 'color' as a dictionary, make sure all "
+                            "the values of the color column are in the keys "
+                            "of your dictionary."
+                        )
+
+            elif isinstance(color, list):
+                colorscale_list = color
+                utils.validate_colorscale(colorscale_list)
+
+            elif isinstance(color, str):
+                if color in colors.PLOTLY_SCALES.keys():
+                    colorscale_list = colors.PLOTLY_SCALES[color]
+                else:
+                    raise exceptions.PlotlyError(
+                        "If 'color' is a string, it must be the name "
+                        "of a Plotly Colorscale. The available colorscale "
+                        "names are {}".format(colors.PLOTLY_SCALES.keys())
+                    )
+            else:
+                colorscale_list = colors.PLOTLY_SCALES['Reds']
+
+
+
+
+
+
+
+
+
+
+
 
     if color:
-        if isinstance(data[color][0], Number):
+        if isinstance(df[color][0], Number):
             show_legend = False
             # numerical color variable
             if isinstance(colorscale, str):
@@ -703,25 +779,23 @@ def create_facet_grid(data, x, y, facet_row=None, facet_col=None, color=None,
                 utils.validate_colorscale(colorscale_list)
 
             else:
-                raise exceptions.PlotlyError(
-                    "If your color variable contains numeric values, you "
-                    "need to set the 'colorscale' param to either the name "
-                    "of a Plotly colorscale or a colorscale list."
-                )
-            fig = _facet_grid_color_numerical(data, x, y, facet_row,
+                # select default colorscale if not picked
+                colorscale_list = colors.PLOTLY_SCALES['Reds']
+
+            fig = _facet_grid_color_numerical(df, x, y, facet_row,
                                               facet_col, color,
                                               colorscale_list,
                                               color_dict, title,
                                               height, width, num_of_rows,
                                               num_of_cols, **kwargs)
 
-        elif isinstance(data[color][0], str):
+        elif isinstance(df[color][0], str):
             show_legend = True
             # categorical color variable
             if isinstance(color_dict, dict):
                 utils.validate_colors_dict(color_dict, 'rgb')
 
-                for val in data[color].unique():
+                for val in df[color].unique():
                     if val not in color_dict.keys():
                         raise exceptions.PlotlyError(
                             "If using a color_dict, make sure all the values "
@@ -733,13 +807,13 @@ def create_facet_grid(data, x, y, facet_row=None, facet_col=None, color=None,
                 default_colors = utils.DEFAULT_PLOTLY_COLORS
                 color_dict = {}
                 j = 0
-                for val in data[color].unique():
+                for val in df[color].unique():
                     if j >= len(default_colors):
                         j = 0
                     color_dict[val] = default_colors[j]
                     j += 1
 
-            fig = _facet_grid_color_categorical(data, x, y, facet_row,
+            fig = _facet_grid_color_categorical(df, x, y, facet_row,
                                                 facet_col, color, [],
                                                 color_dict, title,
                                                 height, width, num_of_rows,
@@ -747,7 +821,7 @@ def create_facet_grid(data, x, y, facet_row=None, facet_col=None, color=None,
 
     else:
         show_legend = False
-        fig = _facet_grid(data, x, y, facet_row, facet_col, title, height,
+        fig = _facet_grid(df, x, y, facet_row, facet_col, title, height,
                           width, num_of_rows, num_of_cols, **kwargs)
 
     fig['layout'].update(height=height, width=width, title=title)
