@@ -49,8 +49,29 @@ def _annotation_dict(text, lane, num_of_lanes, row_col='col'):
             color=AXIS_TITLE_COLOR
         )
     )
-
     return annotation_dict
+
+def _axis_title_annotation(text, x_or_y_axis):
+    if x_or_y_axis == 'x':
+        x_pos = 0.5
+        y_pos = -0.1
+        textangle = 0
+    elif x_or_y_axis == 'y':
+        x_pos = -0.1
+        y_pos = 0.5
+        textangle = 270
+
+    annot = {'font': {'color': '#000000', 'size': 16},
+             'showarrow': False,
+             'text': text,
+             'textangle': textangle,
+             'x': x_pos,
+             'xanchor': 'center',
+             'xref': 'paper',
+             'y': y_pos,
+             'yanchor': 'middle',
+             'yref': 'paper'}
+    return annot
 
 
 def _add_shapes_to_fig(fig, annot_rect_color):
@@ -439,14 +460,14 @@ def _facet_grid(df, x, y, facet_row, facet_col, title, height, width,
 
 
 def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
-                      color_name=None, colormap=None, title='facet grid',
-                      height=800, width=800, **kwargs):
+                      color_name=None, colormap=None, labeller=None,
+                      title='facet grid', height=800, width=800, **kwargs):
     """
     Returns figure for facet grid.
 
-    :param (pd.DataFrame) df: the dataFrame of columns for the facet grid.
-    :param (str) x: the key of the dataFrame to be used as the x axis df.
-    :param (str) y: the key of the dataFrame to be used as the y axis df.
+    :param (pd.DataFrame) df: the dataframe of columns for the facet grid.
+    :param (str) x: the key of the dataframe to be used as the x axis df.
+    :param (str) y: the key of the dataframe to be used as the y axis df.
     :param (str) facet_row: the key for row filter column for the facet grid.
     :param (str) facet_col: the key for the column filter column for the facet
         grid.
@@ -470,7 +491,7 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
 
     if not isinstance(df, pd.DataFrame):
         raise exceptions.PlotlyError(
-            "df must be a dataframe."
+            "You must input a pandas DataFrame."
         )
 
     # make sure all columns are of homogenous datatype
@@ -483,7 +504,7 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
             except KeyError:
                 raise exceptions.PlotlyError(
                     "x, y, facet_row, facet_col and color_name must be keys "
-                    "in your pandas DataFrame."
+                    "in your dataframe."
                 )
 
     # make sure dataframe index starts at 0
@@ -507,9 +528,9 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                 for val in df[color_name].unique():
                     if val not in colormap.keys():
                         raise exceptions.PlotlyError(
-                            "If using 'colormap' as a dictionary, make sure all "
-                            "the values of the colormap column are in the "
-                            "keys of your dictionary."
+                            "If using 'colormap' as a dictionary, make sure "
+                            "all the values of the colormap column are in "
+                            "the keys of your dictionary."
                         )
             else:
                 # use default plotly colors for dictionary
@@ -595,13 +616,10 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
             fig['layout'][key]['zeroline'] = False
 
     # axis titles
-    axis_titles = {'xaxis': x, 'yaxis': y}
-    for axis in axis_titles.keys():
-        xkeys = [key for key in all_axis_keys if axis in key]
-        max_index = max(int(xkey[-1]) for xkey in xkeys)
-        index_for_title = max_index // 2 + 1
-        axis_key = '{}{}'.format(axis, index_for_title)
-        fig['layout'][axis_key]['title'] = axis_titles[axis]
+    x_title_annot = _axis_title_annotation(x, 'x')
+    y_title_annot = _axis_title_annotation(y, 'y')
+    fig['layout']['annotations'].append(x_title_annot)
+    fig['layout']['annotations'].append(y_title_annot)
 
     # legend
     fig['layout']['showlegend'] = show_legend
@@ -612,5 +630,8 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
 
     # add shaded regions behind axis titles
     _add_shapes_to_fig(fig, ANNOT_RECT_COLOR)
+
+    # fix ranges for subplots in same facet row/col
+
 
     return fig
