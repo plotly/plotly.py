@@ -632,6 +632,20 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
     _add_shapes_to_fig(fig, ANNOT_RECT_COLOR)
 
     # fix ranges for subplots in same facet row/col
+    axis_labels = {'x': [], 'y': []}
 
+    for key in fig['layout']:
+        if 'xaxis' in key:
+            axis_labels['x'].append(key)
+        elif 'yaxis' in key:
+            axis_labels['y'].append(key)
+
+    for axis in ['x', 'y']:
+        if len(axis_labels[axis]) > 1:
+            min_range = min([min(trace[axis]) for trace in fig['data']]) - 1
+            max_range = max([max(trace[axis]) for trace in fig['data']]) + 1
+            for key in fig['layout']:
+                if '{}axis'.format(axis) in key:
+                    fig['layout'][key]['range'] = [min_range, max_range]
 
     return fig
