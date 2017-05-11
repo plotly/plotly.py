@@ -6,6 +6,7 @@ from plotly.graph_objs import graph_objs
 from plotly.tools import make_subplots
 
 from numbers import Number
+import math
 
 pd = optional_imports.get_module('pandas')
 
@@ -642,8 +643,13 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
 
     for axis in ['x', 'y']:
         if len(axis_labels[axis]) > 1:
-            min_range = min([min(trace[axis]) for trace in fig['data']]) - 1
-            max_range = max([max(trace[axis]) for trace in fig['data']]) + 1
+            min_range = min([min(trace[axis]) for trace in fig['data']])
+            max_range = max([max(trace[axis]) for trace in fig['data']])
+
+            min_range = math.floor(min_range)
+            max_range = math.ceil(max_range)
+
+            # insert ranges into fig
             for key in fig['layout']:
                 if '{}axis'.format(axis) in key:
                     fig['layout'][key]['range'] = [min_range, max_range]
