@@ -462,7 +462,7 @@ def _facet_grid(df, x, y, facet_row, facet_col, title, height, width,
 
 def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                       color_name=None, colormap=None, labeller=None,
-                      title='facet grid', height=800, width=800, **kwargs):
+                      title='facet grid', height=600, width=600, **kwargs):
     """
     Returns figure for facet grid.
 
@@ -641,17 +641,31 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
         elif 'yaxis' in key:
             axis_labels['y'].append(key)
 
-    for axis in ['x', 'y']:
-        if len(axis_labels[axis]) > 1:
-            min_range = min([min(trace[axis]) for trace in fig['data']])
-            max_range = max([max(trace[axis]) for trace in fig['data']])
+    for x_y in ['x', 'y']:
+        if len(axis_labels[x_y]) > 1:
+            min_ranges = []
+            max_ranges = []
+            for trace in fig['data']:
+                if len(trace[x_y]) > 0:
+                    min_ranges.append(min(trace[x_y]))
+                    max_ranges.append(max(trace[x_y]))
+            while None in min_ranges:
+                min_ranges.remove(None)
+            while None in max_ranges:
+                max_ranges.remove(None)
 
-            min_range = math.floor(min_range)
-            max_range = math.ceil(max_range)
+            min_range = min(min_ranges)
+            max_range = max(max_ranges)
+
+            range_are_numbers = (isinstance(min_range, Number) and
+                                 isinstance(max_range, Number))
+            if range_are_numbers:
+                min_range = math.floor(min_range)
+                max_range = math.ceil(max_range)
 
             # insert ranges into fig
             for key in fig['layout']:
-                if '{}axis'.format(axis) in key:
+                if '{}axis'.format(x_y) in key and range_are_numbers:
                     fig['layout'][key]['range'] = [min_range, max_range]
 
     return fig
