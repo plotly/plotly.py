@@ -131,7 +131,8 @@ def _add_shapes_to_fig(fig, annot_rect_color):
 
 def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
                                   colormap, title, height, width, num_of_rows,
-                                  num_of_cols, **kwargs):
+                                  num_of_cols, facet_row_labels,
+                                  facet_col_labels, **kwargs):
     fig = make_subplots(rows=num_of_rows, cols=num_of_cols,
                         shared_xaxes=True, shared_yaxes=True,
                         horizontal_spacing=HORIZONTAL_SPACING,
@@ -261,7 +262,8 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
 
 def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
                                 colormap, title, height, width,
-                                num_of_rows, num_of_cols, **kwargs):
+                                num_of_rows, num_of_cols, facet_row_labels,
+                                facet_col_labels, **kwargs):
     fig = make_subplots(rows=num_of_rows, cols=num_of_cols,
                         shared_xaxes=True, shared_yaxes=True,
                         horizontal_spacing=HORIZONTAL_SPACING,
@@ -383,7 +385,8 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
 
 
 def _facet_grid(df, x, y, facet_row, facet_col, title, height, width,
-                num_of_rows, num_of_cols, **kwargs):
+                num_of_rows, num_of_cols, facet_row_labels, facet_col_labels,
+                **kwargs):
     fig = make_subplots(rows=num_of_rows, cols=num_of_cols,
                         shared_xaxes=True, shared_yaxes=True,
                         horizontal_spacing=HORIZONTAL_SPACING,
@@ -482,8 +485,9 @@ def _facet_grid(df, x, y, facet_row, facet_col, title, height, width,
 
 
 def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
-                      color_name=None, colormap=None, labeller=None,
-                      title='facet grid', height=600, width=600, **kwargs):
+                      color_name=None, colormap=None, facet_row_labels=None,
+                      facet_col_labels=None, title='facet grid', height=600,
+                      width=600, **kwargs):
     """
     Returns figure for facet grid.
 
@@ -501,6 +505,12 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
         while a Plotly Colorscale name or a custom colorscale will treat it
         numerically. To learn more about colors and types of colormap, run
         `help(plotly.colors)`.
+    :param (str|dict) facet_row_labels: set to either 'name' or a dictionary
+        of all the values in the facetting row mapped to some text to show up
+        in the label annotations. If None, labelling works like usual.
+    :param (str|dict) facet_col_labels: set to either 'name' or a dictionary
+        of all the values in the facetting row mapped to some text to show up
+        in the label annotations. If None, labelling works like usual.
     :param (str) title: the title of the facet grid figure.
     :param (int) height: the height of the facet grid figure.
     :param (int) width: the width of the facet grid figure.
@@ -537,9 +547,28 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
 
     if facet_row:
         num_of_rows = len(df[facet_row].unique())
+        if isinstance(facet_row_labels, dict):
+            for key in df[facet_row].unique():
+                if key not in facet_row_labels.keys():
+                    unique_keys = df[facet_row].unique().tolist()
+                    raise exceptions.PlotlyError(
+                        "If you are using a dictioanry for custom labels for "
+                        "the facet row, make sure each key in that column of "
+                        "the dataframe is in 'facet_row_labels'. The keys "
+                        "you need are {}".format(unique_keys)
+                    )
     if facet_col:
         num_of_cols = len(df[facet_col].unique())
-
+        if isinstance(facet_col_labels, dict):
+            for key in df[facet_col].unique():
+                if key not in facet_col_labels.keys():
+                    unique_keys = df[facet_col].unique().tolist()
+                    raise exceptions.PlotlyError(
+                        "If you are using a dictioanry for custom labels for "
+                        "the facet column, make sure each key in that column "
+                        "of the dataframe is in 'facet_col_labels'. The keys "
+                        "you need are {}".format(unique_keys)
+                    )
     show_legend = False
     if color_name:
         if isinstance(df[color_name][0], str):
@@ -568,7 +597,8 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                                                 facet_col, color_name,
                                                 colormap, title, height,
                                                 width, num_of_rows,
-                                                num_of_cols, **kwargs)
+                                                num_of_cols, facet_row_labels,
+                                                facet_col_labels, **kwargs)
 
         elif isinstance(df[color_name][0], Number):
             if isinstance(colormap, dict):
@@ -586,7 +616,10 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                                                     facet_col, color_name,
                                                     colormap, title, height,
                                                     width, num_of_rows,
-                                                    num_of_cols, **kwargs)
+                                                    num_of_cols,
+                                                    facet_row_labels,
+                                                    facet_col_labels,
+                                                    **kwargs)
 
             elif isinstance(colormap, list):
                 colorscale_list = colormap
@@ -596,7 +629,10 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                                                   facet_col, color_name,
                                                   colorscale_list, title,
                                                   height, width, num_of_rows,
-                                                  num_of_cols, **kwargs)
+                                                  num_of_cols,
+                                                  facet_row_labels,
+                                                  facet_col_labels,
+                                                  **kwargs)
             elif isinstance(colormap, str):
                 if colormap in colors.PLOTLY_SCALES.keys():
                     colorscale_list = colors.PLOTLY_SCALES[colormap]
@@ -610,18 +646,25 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                                                   facet_col, color_name,
                                                   colorscale_list, title,
                                                   height, width, num_of_rows,
-                                                  num_of_cols, **kwargs)
+                                                  num_of_cols,
+                                                  facet_row_labels,
+                                                  facet_col_labels,
+                                                  **kwargs)
             else:
                 colorscale_list = colors.PLOTLY_SCALES['Reds']
                 fig = _facet_grid_color_numerical(df, x, y, facet_row,
                                                   facet_col, color_name,
                                                   colorscale_list, title,
                                                   height, width, num_of_rows,
-                                                  num_of_cols, **kwargs)
+                                                  num_of_cols,
+                                                  facet_row_labels,
+                                                  facet_col_labels,
+                                                  **kwargs)
 
     else:
         fig = _facet_grid(df, x, y, facet_row, facet_col, title, height,
-                          width, num_of_rows, num_of_cols, **kwargs)
+                          width, num_of_rows, num_of_cols, facet_row_labels,
+                          facet_col_labels, **kwargs)
 
     fig['layout'].update(height=height, width=width, title=title)
     fig['layout'].update(plot_bgcolor=PLOT_BGCOLOR)
