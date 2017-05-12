@@ -20,6 +20,27 @@ ANNOT_RECT_COLOR = '#d0d0d0'
 HORIZONTAL_SPACING = 0.015
 VERTICAL_SPACING = 0.015
 LEGEND_BORDER_WIDTH = 1
+LEGEND_ANNOT_X = 1.05
+LEGEND_ANNOT_Y = 0.5
+
+def _legend_annotation(color_name):
+    legend_title = dict(
+        textangle=0,
+        xanchor='left',
+        yanchor='middle',
+        x=LEGEND_ANNOT_X,
+        y=LEGEND_ANNOT_Y + 0.1,
+        showarrow=False,
+        xref='paper',
+        yref='paper',
+        text='factor({})'.format(color_name),
+        font=dict(
+            size=13,
+            color='#000000'
+        )
+    )
+    return legend_title
+
 
 def _annotation_dict(text, lane, num_of_lanes, row_col='col'):
     if row_col == 'col':
@@ -626,8 +647,13 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
     fig['layout']['showlegend'] = show_legend
     fig['layout']['legend']['bgcolor'] = LEGEND_COLOR
     fig['layout']['legend']['borderwidth'] = LEGEND_BORDER_WIDTH
+    fig['layout']['legend']['x'] = 1.05 #1.15
     fig['layout']['legend']['y'] = 0.5
-    fig['layout']['legend']['x'] = 1.15
+
+    if show_legend:
+        legend_annot = _legend_annotation(color_name)
+        fig['layout']['annotations'].append(legend_annot)
+        fig['layout']['margin']['r'] = 150
 
     # add shaded regions behind axis titles
     _add_shapes_to_fig(fig, ANNOT_RECT_COLOR)
@@ -659,6 +685,7 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
 
             range_are_numbers = (isinstance(min_range, Number) and
                                  isinstance(max_range, Number))
+            # floor and ceiling the range endpoints
             if range_are_numbers:
                 min_range = math.floor(min_range)
                 max_range = math.ceil(max_range)
