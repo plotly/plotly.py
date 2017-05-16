@@ -15,13 +15,24 @@ TICK_COLOR = '#969696'
 AXIS_TITLE_COLOR = '#0f0f0f'
 GRID_COLOR = '#ffffff'
 LEGEND_COLOR = '#efefef'
-PLOT_BGCOLOR = '#f5f5f5'
+PLOT_BGCOLOR = '#e0e0e0'
 ANNOT_RECT_COLOR = '#d0d0d0'
-HORIZONTAL_SPACING = 0.015
-VERTICAL_SPACING = 0.015
+HORIZONTAL_SPACING = 0.02
+VERTICAL_SPACING = 0.02
 LEGEND_BORDER_WIDTH = 1
 LEGEND_ANNOT_X = 1.05
 LEGEND_ANNOT_Y = 0.5
+
+
+def _return_label(original_label, facet_labels, facet_var):
+    if isinstance(facet_labels, dict):
+        label = facet_labels[original_label]
+    elif isinstance(facet_labels, str):
+        label = '{}: {}'.format(facet_var, original_label)
+    else:
+        label = original_label
+    return label
+
 
 def _legend_annotation(color_name):
     legend_title = dict(
@@ -29,7 +40,7 @@ def _legend_annotation(color_name):
         xanchor='left',
         yanchor='middle',
         x=LEGEND_ANNOT_X,
-        y=LEGEND_ANNOT_Y + 0.1,
+        y=1.03,
         showarrow=False,
         xref='paper',
         yref='paper',
@@ -171,8 +182,10 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
                 )
                 fig.append_trace(trace, j + 1, 1)
 
+            label = _return_label(group[0], facet_row_labels, facet_row)
+
             annotations.append(
-                _annotation_dict(group[0], num_of_rows - j, num_of_rows,
+                _annotation_dict(label, num_of_rows - j, num_of_rows,
                                  row_col='row')
             )
 
@@ -193,8 +206,10 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
                 )
                 fig.append_trace(trace, 1, j + 1)
 
+            label = _return_label(group[0], facet_col_labels, facet_col)
+
             annotations.append(
-                _annotation_dict(group[0], j + 1, num_of_cols, row_col='col')
+                _annotation_dict(label, j + 1, num_of_cols, row_col='col')
             )
 
     elif facet_row and facet_col:
@@ -240,19 +255,23 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
                             **kwargs
                         )
                     fig.append_trace(trace, row_count + 1, col_count + 1)
-                    if row_count == 0:
-                        annotations.append(
-                            _annotation_dict(col_values[col_count],
-                                             col_count + 1,
-                                             num_of_cols,
-                                             row_col='col')
-                            )
-                annotations.append(
-                    _annotation_dict(row_values[row_count],
-                                     num_of_rows - row_count,
-                                     num_of_rows,
-                                     row_col='row')
-                    )
+                if row_count == 0:
+                    label = _return_label(col_values[col_count],
+                                          facet_col_labels, facet_col)
+                    annotations.append(
+                        _annotation_dict(label,
+                                         col_count + 1,
+                                         num_of_cols,
+                                         row_col='col')
+                        )
+            label = _return_label(row_values[row_count],
+                                  facet_row_labels, facet_row)
+            annotations.append(
+                _annotation_dict(label,
+                                 num_of_rows - row_count,
+                                 num_of_rows,
+                                 row_col='row')
+                )
 
     # add annotations
     fig['layout']['annotations'] = annotations
@@ -301,8 +320,10 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
             )
             fig.append_trace(trace, j + 1, 1)
 
+            label = _return_label(group[0], facet_row_labels, facet_row)
+
             annotations.append(
-                _annotation_dict(group[0], num_of_rows - j,
+                _annotation_dict(label, num_of_rows - j,
                                  num_of_rows, row_col='row')
             )
 
@@ -323,8 +344,10 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
             )
             fig.append_trace(trace, 1, j + 1)
 
+            label = _return_label(group[0], facet_col_labels, facet_col)
+
             annotations.append(
-                _annotation_dict(group[0], j + 1, num_of_cols, row_col='col')
+                _annotation_dict(label, j + 1, num_of_cols, row_col='col')
             )
 
     elif facet_row and facet_col:
@@ -365,12 +388,16 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
                     )
                 fig.append_trace(trace, row_count + 1, col_count + 1)
                 if row_count == 0:
+                    label = _return_label(col_values[col_count],
+                                          facet_col_labels, facet_col)
                     annotations.append(
-                        _annotation_dict(col_values[col_count],
+                        _annotation_dict(label,
                                          col_count + 1,
                                          num_of_cols,
                                          row_col='col')
                         )
+            label = _return_label(row_values[row_count],
+                                  facet_row_labels, facet_row)
             annotations.append(
                 _annotation_dict(row_values[row_count],
                                  num_of_rows - row_count,
@@ -418,8 +445,18 @@ def _facet_grid(df, x, y, facet_row, facet_col, title, height, width,
             )
             fig.append_trace(trace, j + 1, 1)
 
+            # custom labels
+            if isinstance(facet_row_labels, dict):
+                label = facet_row_labels[group[0]]
+            elif isinstance(facet_row_labels, str):
+                label = '{}: {}'.format(facet_row, group[0])
+            else:
+                label = group[0]
+
+            label = _return_label(group[0], facet_row_labels, facet_row)
+
             annotations.append(
-                _annotation_dict(group[0], num_of_rows - j,
+                _annotation_dict(label, num_of_rows - j,
                                  num_of_rows, row_col='row')
             )
 
@@ -437,8 +474,10 @@ def _facet_grid(df, x, y, facet_row, facet_col, title, height, width,
             )
             fig.append_trace(trace, 1, j + 1)
 
+            label = _return_label(group[0], facet_col_labels, facet_col)
+
             annotations.append(
-                _annotation_dict(group[0], j + 1, num_of_cols, row_col='col')
+                _annotation_dict(label, j + 1, num_of_cols, row_col='col')
             )
 
     elif facet_row and facet_col:
@@ -465,14 +504,21 @@ def _facet_grid(df, x, y, facet_row, facet_col, title, height, width,
                 )
                 fig.append_trace(trace, row_count + 1, col_count + 1)
                 if row_count == 0:
+                    label = _return_label(col_values[col_count],
+                                          facet_col_labels,
+                                          facet_col)
                     annotations.append(
-                        _annotation_dict(col_values[col_count],
+                        _annotation_dict(label,
                                          col_count + 1,
                                          num_of_cols,
                                          row_col='col')
                         )
+
+            label = _return_label(row_values[row_count],
+                                  facet_row_labels,
+                                  facet_row)
             annotations.append(
-                _annotation_dict(row_values[row_count],
+                _annotation_dict(label,
                                  num_of_rows - row_count,
                                  num_of_rows,
                                  row_col='row')
@@ -669,13 +715,14 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
     fig['layout'].update(height=height, width=width, title=title)
     fig['layout'].update(plot_bgcolor=PLOT_BGCOLOR)
 
-    # color the axes
+    # style the axes
     all_axis_keys = []
     for key in fig['layout']:
         if 'xaxis' in key or 'yaxis' in key:
             all_axis_keys.append(key)
-            fig['layout'][key]['titlefont']['color'] = AXIS_TITLE_COLOR
-            fig['layout'][key]['tickfont']['color'] = TICK_COLOR
+            fig['layout'][key]['tickfont'] = {
+                'color': TICK_COLOR, 'size': 10
+            }
             fig['layout'][key]['gridcolor'] = GRID_COLOR
             fig['layout'][key]['gridwidth'] = 2
             fig['layout'][key]['zeroline'] = False
@@ -690,8 +737,9 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
     fig['layout']['showlegend'] = show_legend
     fig['layout']['legend']['bgcolor'] = LEGEND_COLOR
     fig['layout']['legend']['borderwidth'] = LEGEND_BORDER_WIDTH
-    fig['layout']['legend']['x'] = 1.05 #1.15
-    fig['layout']['legend']['y'] = 0.5
+    fig['layout']['legend']['x'] = 1.05
+    fig['layout']['legend']['y'] = 1
+    fig['layout']['legend']['yanchor'] = 'top'
 
     if show_legend:
         legend_annot = _legend_annotation(color_name)
@@ -728,10 +776,11 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
 
             range_are_numbers = (isinstance(min_range, Number) and
                                  isinstance(max_range, Number))
+
             # floor and ceiling the range endpoints
             if range_are_numbers:
-                min_range = math.floor(min_range)
-                max_range = math.ceil(max_range)
+                min_range = math.floor(min_range) - 1
+                max_range = math.ceil(max_range) + 1
 
             # insert ranges into fig
             for key in fig['layout']:
