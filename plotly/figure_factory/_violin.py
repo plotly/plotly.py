@@ -434,13 +434,14 @@ def create_violin(data, data_header=None, group_header=None, colors=None,
         variable. Will implement a colorscale based on the first 2 colors
         of param colors. This means colors must be a list with at least 2
         colors in it (Plotly colorscales are accepted since they map to a
-        list of two rgb colors).
+        list of two rgb colors). Default = False
     :param (dict) group_stats: a dictioanry where each key is a unique
         value from the group_header column in data. Each value must be a
         number and will be used to color the violin plots if a colorscale
         is being used.
     :param (bool) rugplot: determines if a rugplot is draw on violin plot.
-    :param (bool) sort: determines if violins are sorted.
+        Default = True
+    :param (bool) sort: determines if violins are sorted. Default = False
         alphabetically (True) or by inputted order (False).
     :param (float) height: the height of the violin plot.
     :param (float) width: the width of the violin plot.
