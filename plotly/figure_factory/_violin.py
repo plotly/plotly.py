@@ -441,8 +441,8 @@ def create_violin(data, data_header=None, group_header=None, colors=None,
         is being used.
     :param (bool) rugplot: determines if a rugplot is draw on violin plot.
         Default = True
-    :param (bool) sort: determines if violins are sorted. Default = False
-        alphabetically (True) or by inputted order (False).
+    :param (bool) sort: determines if violins are sorted
+        alphabetically (True) or by input order (False). Default = False
     :param (float) height: the height of the violin plot.
     :param (float) width: the width of the violin plot.
     :param (str) title: the title of the violin plot.
