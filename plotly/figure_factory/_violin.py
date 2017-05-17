@@ -636,7 +636,7 @@ def create_violin(data, data_header=None, group_header=None, colors=None,
 
             fig = violin_colorscale(
                 data, data_header, group_header, valid_colors,
-                use_colorscale, group_stats, rugplot, forced_order, height,
+                use_colorscale, group_stats, rugplot, sort, height,
                 width, title
             )
             return fig
