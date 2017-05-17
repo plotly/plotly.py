@@ -1927,23 +1927,20 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
 class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
 
     def test_data_must_be_dataframe(self):
-
         data = []
 
-        pattern = ('data must be a dataframe.')
+        pattern = ('You must input a pandas DataFrame.')
 
         self.assertRaisesRegexp(PlotlyError, pattern,
                                 ff.create_facet_grid,
                                 data, 'a', 'b')
 
     def test_valid_col_selection(self):
-
         data = pd.DataFrame([[0, 0], [1, 1]], columns=['a', 'b'])
 
         pattern = (
-            "x, y, facet_row, facet_col and color must be keys in "
-            "your pandas DataFrame, where facet_row, facet_col and "
-            "color should be categorical variables."
+            "x, y, facet_row, facet_col and color_name must be keys in your "
+            "dataframe."
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern,
@@ -1951,40 +1948,42 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
                                 data, 'a', 'c')
 
     def test_valid_plotly_scale_name(self):
-
         data = pd.DataFrame([[0, 0], [1, 1]], columns=['a', 'b'])
 
         self.assertRaises(PlotlyError, ff.create_facet_grid,
-                          data, 'a', 'b', color='a', colorscale='wrong one')
+                          data, 'a', 'b', color_name='a', colormap='wrong one')
 
-    def test_valid_colorscale(self):
+    def test_facet_labels(self):
+        data = pd.DataFrame([['a1', 0], ['a2', 1]], columns=['a', 'b'])
 
-        data = pd.DataFrame([[0, 0], [1, 1]], columns=['a', 'b'])
+        self.assertRaises(PlotlyError, ff.create_facet_grid,
+                          data, 'a', 'b', facet_row='a', facet_row_labels={})
 
-        pattern = (
-            "If your color variable contains numeric values, you "
-            "need to set the 'colorscale' param to either the name "
-            "of a Plotly colorscale or a colorscale list."
-        )
-
-        self.assertRaisesRegexp(PlotlyError, pattern,
-                                ff.create_facet_grid,
-                                data, 'a', 'b', color='a')
+        self.assertRaises(PlotlyError, ff.create_facet_grid,
+                          data, 'a', 'b', facet_col='a', facet_col_labels={})
 
     def test_valid_color_dict(self):
-
         data = pd.DataFrame([[0, 0, 'foo'], [1, 1, 'foo']],
                             columns=['a', 'b', 'foo'])
 
         pattern = (
-            "If using a color_dict, make sure all the values "
-            "of the color column are in the keys of your "
-            "color_dict."
+            "If using 'colormap' as a dictionary, make sure "
+            "all the values of the colormap column are in "
+            "the keys of your dictionary."
         )
 
         color_dict = {'bar': '#ffffff'}
 
         self.assertRaisesRegexp(PlotlyError, pattern,
                                 ff.create_facet_grid,
-                                data, 'a', 'b', color='foo',
-                                color_dict=color_dict)
+                                data, 'a', 'b', color_name='a',
+                                colormap=color_dict)
+
+    def test_valid_colorscale_name(self):
+        data = pd.DataFrame([[0, 1, 2], [3, 4, 5]],
+                            columns=['a', 'b', 'c'])
+
+        colormap='bar'
+
+        self.assertRaises(PlotlyError, ff.create_facet_grid, data, 'a', 'b',
+                          color_name='c', colormap=colormap)
