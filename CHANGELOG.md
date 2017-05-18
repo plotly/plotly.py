@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- 'sort' parameter to `FF.create_violin` to control whether violin plots are sorted alphabetically.
 
 ## [2.0.8] - 2017-04-21
 ### Added
