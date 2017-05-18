@@ -1,4 +1,4 @@
-sortfrom __future__ import absolute_import
+from __future__ import absolute_import
 
 from numbers import Number
 
@@ -570,7 +570,8 @@ def create_violin(data, data_header=None, group_header=None, colors=None,
             data = data[data_header].values.tolist()
 
         # call the plotting functions
-        plot_data, plot_xrange = violinplot(data, fillcolor=valid_colors[0])
+        plot_data, plot_xrange = violinplot(data, fillcolor=valid_colors[0],
+                                            rugplot=rugplot)
 
         layout = graph_objs.Layout(
             title=title,
