@@ -5,16 +5,44 @@ dashboard_objs
 A module for creating and manipulating spectacle-presentation dashboards.
 """
 
+import copy
 import random
 import string
 import pprint
 
-from plotly import exceptions, optional_imports
+from plotly import colors, exceptions, optional_imports
 
 IPython = optional_imports.get_module('IPython')
 
 HEIGHT = 700
 WIDTH = 1000
+
+CODEPANE_THEMES = ['tomorrow', 'tomorrowNight']
+VALID_STYLE_KEYS = ['fontFamily', 'fontSize', 'margin', 'position',
+                    'textAlign', 'opacity', 'color', 'fontStyle',
+                    'fontWeight', 'lineHeight', 'minWidth', 'textDecoration',
+                    'wordBreak']
+VALID_PROPS_KEYS = ['theme', 'listType', 'href']
+NEEDED_STYLE_KEYS = ['left', 'top', 'height', 'width']
+VALID_LANGUAGES = ['cpp', 'cs', 'css', 'fsharp', 'go', 'haskell', 'java',
+                   'javascript', 'jsx', 'julia', 'xml', 'matlab', 'php',
+                   'python', 'r', 'ruby', 'scala', 'sql', 'yaml']
+
+fontWeight_dict = {
+    'Thin': {'fontWeight': 100},
+    'Thin Italic': {'fontWeight': 100, 'fontStyle': 'italic'},
+    'Light': {'fontWeight': 300},
+    'Light Italic': {'fontWeight': 300, 'fontStyle': 'italic'},
+    'Regular': {'fontWeight': 400},
+    'Regular Italic': {'fontWeight': 400, 'fontStyle': 'italic'},
+    'Medium': {'fontWeight': 500},
+    'Medium Italic': {'fontWeight': 500, 'fontStyle': 'italic'},
+    'Bold': {'fontWeight': 700},
+    'Bold Italic': {'fontWeight': 700, 'fontStyle': 'italic'},
+    'Black': {'fontWeight': 900},
+    'Black Italic': {'fontWeight': 900, 'fontStyle': 'italic'},
+}
+
 
 def _generate_id(size):
     letters_and_numbers = string.ascii_letters
@@ -99,7 +127,6 @@ def _empty_slide(transition, id):
 def _box(boxtype, text_or_url, left, top, height, width, id, props_attr,
          style_attr):
     children_list = []
-    code_themes = ['tomorrow', 'tomorrowNight']
     fontFamily = "Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace"
     if boxtype == 'Text':
         children_list = text_or_url.split('\n')
@@ -164,10 +191,6 @@ def _box(boxtype, text_or_url, left, top, height, width, id, props_attr,
                       'width': width},
             'theme': 'tomorrowNight'
         }
-    else:
-        raise exceptions.PlotlyError(
-            "boxtype must be either 'Text', 'Image', 'Plotly' or 'CodePane'."
-        )
 
     # update props and style attributes
     for item in props_attr.items():
@@ -192,34 +215,54 @@ def _box(boxtype, text_or_url, left, top, height, width, id, props_attr,
     return child
 
 
-def _return_specs_for_insertion(box, position, size, margin):
-    if box != 'Text':
-        if size == 'small':
-            scaling_factor = 4
-        elif size == 'medium':
-            scaling_factor = 3
-        elif size == 'large':
-            scaling_factor = 2
-    else:
-        scaling_factor = 2
+def _return_box_position(left, top, height, width):
+    scaled_top = HEIGHT * (0.01 * top)
+    scaled_left = WIDTH * (0.01 * left)
+    scaled_height = HEIGHT * (0.01 * height)
+    scaled_width = WIDTH * (0.01 * width)
 
-    height = HEIGHT / scaling_factor
-    width = WIDTH / scaling_factor
+    return scaled_left, scaled_top, scaled_height, scaled_width
 
-    position_to_left_top = {
-        'topleft': (0 + margin, 0 + margin),
-        'topright': (WIDTH - width - margin, 0 + margin),
-        'bottomleft': (0 + margin, HEIGHT - height - margin),
-        'bottomright': (WIDTH - width - margin, HEIGHT - height - margin),
-        'center': (WIDTH / 2 - width / 2, HEIGHT / 2 - height / 2),
-        'left': (0 + margin, HEIGHT / 2 - height / 2),
-        'right': (WIDTH - width - margin, HEIGHT / 2 - height / 2),
-        'top': (WIDTH / 2 - width / 2, 0 + margin),
-        'bottom':(WIDTH / 2 - width / 2, HEIGHT - height - margin),
-    }
 
-    left, top = position_to_left_top[position]
-    return left, top, height, width
+def _remove_extra_whitespace_from_line(line):
+    while line.startswith('\n') or line.startswith(' '):
+        line = line[1: ]
+    while line.endswith('\n') or line.endswith(' '):
+        line = line[: -1]
+    return line
+
+
+def _boxes_in_slide(slide):
+    boxes = []
+    slide_copy = copy.deepcopy(slide)
+    prop_split = ';'
+    prop_val_sep = '='
+
+    while '.left' in slide_copy:
+        prop_dict = {}
+        left_idx = slide_copy.find('.left')
+        l_brace_idx = slide_copy[left_idx: ].find('{{') + left_idx
+        properties = slide_copy[left_idx + 1 : l_brace_idx].split(
+            prop_split
+        )
+
+        for prop in properties:
+            prop_name = prop.split(prop_val_sep)[0]
+            prop_val = prop.split(prop_val_sep)[1]
+
+            try:
+                prop_val = int(prop_val)
+            except ValueError:
+                pass
+            prop_dict[prop_name] = prop_val
+
+        r_brace_idx = slide_copy[l_brace_idx: ].find('}}') + l_brace_idx
+        box = slide_copy[l_brace_idx + 2 : r_brace_idx]
+        box_no_breaks = _remove_extra_whitespace_from_line(box)
+        boxes.append((box_no_breaks, prop_dict))
+
+        slide_copy = slide_copy[r_brace_idx + 2: ]
+    return boxes
 
 
 class Presentation(dict):
@@ -254,114 +297,178 @@ class Presentation(dict):
             if not all(char == '\n' for char in text):
                 list_of_slides.append(text)
 
-        hashes_to_fontsize = {
-            '#': 45,
-            '##': 35,
-            '###': 30,
-            '####': 25,
-        }
         for slide_num, slide in enumerate(list_of_slides):
             lines_in_slide = slide.split('\n')
+            boxes = _boxes_in_slide(slide)
 
-            # find code snippets
-            code_markers = []
-            for j, line in enumerate(lines_in_slide):
-                if line[0 : 3] == '```' and len(line) > 3:
-                    language = line[3 : ]
-                    code_start = j + 1
-                if line == '```':
-                    code_end = j
-                    code_markers.append((code_start, code_end, language))
+            # background image properties
+            bkrd_image_dict = {}
+            for line in lines_in_slide:
+                # transition
+                if 'transition:' in line:
+                    index = line.find('transition:')
+                    transition_text = line[index + len('transition:'): ]
+                    transitions = transition_text.split(';')
 
-            # insert code snippets
-            for endpts in code_markers:
-                code_block = ''
-                for j in range(endpts[0], endpts[1]):
-                    code_block += lines_in_slide[j]
-                    code_block += '\n'
-                self._insert(box='CodePane',
-                             text_or_url=code_block,
-                             position='right', slide=slide_num,
-                             size='medium', margin=40,
-                             props_attr={'language': endpts[2]})
+                    while '' in transitions:
+                        transitions.remove('')
 
-            # find markdown titles
-            hashlines = []
-            hashlines_indices = []
-            for k, line in enumerate(lines_in_slide):
-                not_in_code = (not any(k in range(endpts[0] - 1, endpts[1] + 1)
-                               for endpts in code_markers))
-                if '#' in line and not_in_code:
-                    hash_at_line_start = False
-                    for idx in range(len(line)):
-                        if line[idx] == ' ':
-                            pass
-                        elif line[idx] == '#':
-                            hash_at_line_start = True
-                            break
+                    for j, item in enumerate(transitions):
+                        transitions[j] = _remove_extra_whitespace_from_line(
+                            item
+                        )
+
+                    self._set_transition(transitions, slide_num)
+
+                if 'background-image:' in line:
+                    if 'url(' in line:
+                        url_index = line.find('url(')
+                        bkrd_url = line[url_index + len('url('): -1]
+
+                        bkrd_image_dict['background-image:'] = bkrd_url
+
+                for property_name in ['background-position:',
+                                      'background-repeat:',
+                                      'background-size:']:
+                    if property_name in line:
+                        index = line.find(property_name)
+                        prop = line[index + len(property_name): ]
+                        prop = _remove_extra_whitespace_from_line(prop)
+                        bkrd_image_dict[property_name] = prop
+
+            if 'background-image:' in bkrd_image_dict:
+                self._background_image(
+                    bkrd_image_dict['background-image:'],
+                    slide_num,
+                    bkrd_image_dict
+                )
+
+            for box in boxes:
+                # missing necessary style
+                for nec_key in NEEDED_STYLE_KEYS:
+                    if nec_key not in box[1].keys():
+                        raise exceptions.PlotlyError(
+                            "You are missing '{}' as one of the necessary "
+                            "style keys in your line. All the necessary "
+                            "style keys are {}".format(NEEDED_STYLE_KEYS)
+                        )
+
+                # default settings
+                style_attr = {}
+                props_attr = {}
+                for key in box[1].keys():
+                    if key in VALID_STYLE_KEYS:
+                        if key == 'fontWeight' and type(box[1][key]) == str:
+                            try:
+                                params = fontWeight_dict[box[1][key]]
+                                for item in params.items():
+                                    style_attr[item[0]] = item[1]
+                            except KeyError:
+                                raise exceptions.PlotlyError(
+                                    "If 'fontWeight' is a string, it must "
+                                    "belong to the values in {}".format(
+                                        fontWeight_dict.keys()
+                                    )
+                                )
                         else:
-                            hash_at_line_start = False
-                            break
-                    if hash_at_line_start:
-                        hashlines.append(lines_in_slide[k])
-                        hashlines_indices.append(k)
+                            style_attr[key] = box[1][key]
 
-            try:
-                min_hashtitle_index = min(hashlines_indices)
-            except ValueError:
-                min_hashtitle_index = 0
+                    elif key in VALID_PROPS_KEYS:
+                        props_attr[key] = box[1][key]
+                    elif key not in NEEDED_STYLE_KEYS:
+                        raise exceptions.PlotlyError(
+                            "{} is not a valid styling key. The list of "
+                            "valid style keys are {}".format(
+                                key, VALID_STYLE_KEYS + VALID_PROPS_KEYS
+                            )
+                        )
 
-            # insert markdown titles
-            for h_line in hashlines:
-                first_hash_index = h_line.find('#')
-                last_hash_index = first_hash_index
-                while h_line[last_hash_index] == '#':
-                    last_hash_index += 1
+                # code
+                if box[0][ : 3] == '```':
+                    box_lines = box[0].split('\n')
+                    language = _remove_extra_whitespace_from_line(
+                        box_lines[0][3 : ]
+                    ).lower()
+                    if language == '' or lanugage not in VALID_LANGUAGES:
+                        raise exceptions.PlotlyError(
+                            "The language of your code block should be "
+                            "clearly indicated after the first ``` that "
+                            "begins the code block. The valid languages to "
+                            "choose from are in {}".format(VALID_LANGUAGES)
+                        )
+                    codebox = ''
+                    for line in box_lines:
+                        if line[0 : 3] != '```':
+                            codebox += line
+                            codebox += '\n'
 
-                hashkey = h_line[first_hash_index : last_hash_index]
-                title_fontsize = hashes_to_fontsize[hashkey]
-                self._insert(box='Text',
-                             text_or_url=h_line[last_hash_index + 1 : ],
-                             position='top', slide=slide_num,
-                             size='large', margin=40,
-                             style_attr={'fontSize': title_fontsize})
+                    props_attr['language'] = language
 
-            # insert images or plotly charts
-            for j, line in enumerate(lines_in_slide):
-                if line[0 : 2] == '![':
-                    url_index = line.find('](')
-                    url = line[url_index + 2 : -1]
+                    self._insert(box='CodePane',
+                                 text_or_url=codebox,
+                                 left=box[1]['left'],
+                                 top=box[1]['top'],
+                                 height=box[1]['height'],
+                                 width=box[1]['width'],
+                                 slide=slide_num,
+                                 props_attr=props_attr,
+                                 style_attr=style_attr)
+
+                # image or plotly
+                elif box[0][: 4] == 'url(':
+                    url = box[0][4 : -1]
+
+                    # TODO: needs to support on-prem server name
                     if 'https://plot.ly' in url:
                         self._insert(box='Plotly', text_or_url=url,
-                                     position='bottomleft', slide=slide_num,
-                                     size='large', margin=40)
+                                     left=box[1]['left'], top=box[1]['top'],
+                                     height=box[1]['height'],
+                                     width=box[1]['width'],
+                                     slide=slide_num,
+                                     props_attr=props_attr,
+                                     style_attr=style_attr)
                     else:
                         self._insert(box='Image', text_or_url=url,
-                                     position='bottomleft', slide=slide_num,
-                                     size='large', margin=40)
+                                     left=box[1]['left'], top=box[1]['top'],
+                                     height=box[1]['height'],
+                                     width=box[1]['width'],
+                                     slide=slide_num, props_attr=props_attr,
+                                     style_attr=style_attr)
 
-            # TODO: add position, repeat and size features
-            for line in lines_in_slide[0 : min_hashtitle_index]:
-                if line.startswith('background-image:'):
-                    bkgd_url = line[line.find('url(') + 4 : -1 ]
-                    self._background_image(bkgd_url, slide_num,
-                                           size='stretch')
+                # text
+                else:
+                    box_lines = box[0].split('\n')
+                    text = box[0]
 
-            # insert text
-            text = ''
-            for k, line in enumerate(lines_in_slide):
-                not_in_code = (not any(k in range(endpts[0] - 1, endpts[1] + 1)
-                               for endpts in code_markers))
-                if (k > hashlines_indices[0] and '!' not in line and
-                    not_in_code):
-                    text += line
-                    text += '\n'
-            self._insert(box='Text', text_or_url=text,
-                         position='left', slide=slide_num,
-                         size='small', margin=100,
-                         style_attr={'fontSize': 14, 'textAlign': 'left'})
+                    # hyperlink
+                    first_line = _remove_extra_whitespace_from_line(box[0])
+                    if first_line[0] == '[' and first_line[-1] == ')':
+                        # extract only hypertext from text lines
+                        r_bracket_idx = first_line[1 : ].find(']') + 1
+                        l_paran_idx = first_line.find('(')
+                        if l_paran_idx == -1:
+                            raise exceptions.PlotlyError(
+                                "If you are trying to place hypertext in "
+                                "your presentation slide, be sure that "
+                                "your text has the form '[text](url)'. "
+                                "All other text outside the hypertext is "
+                                "ignored if you use the the []() "
+                                "notation."
+                            )
 
-            self._color_background('#C8C8AE', slide_num)
+                        text = first_line[1 : r_bracket_idx]
+                        url = first_line[l_paran_idx + 1 : -1]
+                        props_attr['href'] = url
+
+                    self._insert(box='Text',
+                                 text_or_url=text,
+                                 left=box[1]['left'],
+                                 top=box[1]['top'],
+                                 height=box[1]['height'],
+                                 width=box[1]['width'],
+                                 slide=slide_num,
+                                 props_attr=props_attr,
+                                 style_attr=style_attr)
 
 
     def _add_empty_slide(self):
@@ -378,12 +485,12 @@ class Presentation(dict):
             for _ in range(slide - num_of_slides + 1):
                 self._add_empty_slide()
 
-    def _insert(self, box, text_or_url, position, slide=0, size='small',
-                margin=0, props_attr={}, style_attr={}):
+    def _insert(self, box, text_or_url, left, top, height, width, slide=0,
+                props_attr={}, style_attr={}):
         self._add_missing_slides(slide)
 
-        left, top, height, width = _return_specs_for_insertion(box, position,
-                                                               size, margin)
+        left, top, height, width = _return_box_position(left, top, height,
+                                                        width)
         new_id = _generate_id(9)
         child = _box(box, text_or_url, left, top, height, width, new_id,
                      props_attr, style_attr)
@@ -396,10 +503,19 @@ class Presentation(dict):
         loc = self['presentation']['slides'][slide]
         loc['props']['style']['backgroundColor'] = color
 
-    def _background_image(self, url, slide, size='stretch'):
+    def _background_image(self, url, slide, bkrd_image_dict):
         self._add_missing_slides(slide)
 
         loc = self['presentation']['slides'][slide]['props']
+
+        # default settings
+        size = 'stretch'
+        repeat = 'no-repeat'
+
+        if 'background-size:' in bkrd_image_dict:
+            size = bkrd_image_dict['background-size:']
+        if 'background-repeat:' in bkrd_image_dict:
+            repeat = bkrd_image_dict['background-repeat:']
 
         if size == 'stretch':
             backgroundSize = '100% 100%'
@@ -413,7 +529,7 @@ class Presentation(dict):
         style = {
             'backgroundImage': 'url({})'.format(url),
             'backgroundPosition': 'center center',
-            'backgroundRepeat': 'no-repeat',
+            'backgroundRepeat': repeat,
             'backgroundSize': backgroundSize
         }
 
