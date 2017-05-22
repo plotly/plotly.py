@@ -143,7 +143,7 @@ def _add_shapes_to_fig(fig, annot_rect_color):
 def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
                                   colormap, title, height, width, num_of_rows,
                                   num_of_cols, facet_row_labels,
-                                  facet_col_labels, scattergl, **kwargs):
+                                  facet_col_labels, trace_type, **kwargs):
     fig = make_subplots(rows=num_of_rows, cols=num_of_cols,
                         shared_xaxes=True, shared_yaxes=True,
                         horizontal_spacing=HORIZONTAL_SPACING,
@@ -157,7 +157,7 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
                 x=group[1][x].tolist(),
                 y=group[1][y].tolist(),
                 mode='markers',
-                type='scatter' + scattergl * 'gl',
+                type=trace_type,
                 name=group[0],
                 marker=dict(
                     color=colormap[group[0]]
@@ -175,7 +175,7 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
                     x=data_by_color[x].tolist(),
                     y=data_by_color[y].tolist(),
                     mode='markers',
-                    type='scatter' + scattergl * 'gl',
+                    type=trace_type,
                     name=color_val,
                     marker=dict(
                         color=colormap[color_val]
@@ -200,7 +200,7 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
                     x=data_by_color[x].tolist(),
                     y=data_by_color[y].tolist(),
                     mode='markers',
-                    type='scatter' + scattergl * 'gl',
+                    type=trace_type,
                     name=color_val,
                     marker=dict(
                         color=colormap[color_val]
@@ -239,7 +239,7 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
                             x=group_filtered[x].tolist(),
                             y=group_filtered[y].tolist(),
                             mode='markers',
-                            type='scatter' + scattergl * 'gl',
+                            type=trace_type,
                             name=color_val,
                             marker=dict(
                                 color=colormap[color_val]
@@ -251,7 +251,7 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
                             x=group[x].tolist(),
                             y=group[y].tolist(),
                             mode='markers',
-                            type='scatter' + scattergl * 'gl',
+                            type=trace_type,
                             name=color_val,
                             marker=dict(
                                 color=colormap[color_val]
@@ -287,7 +287,7 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
 def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
                                 colormap, title, height, width,
                                 num_of_rows, num_of_cols, facet_row_labels,
-                                facet_col_labels, scattergl, **kwargs):
+                                facet_col_labels, trace_type, **kwargs):
     fig = make_subplots(rows=num_of_rows, cols=num_of_cols,
                         shared_xaxes=True, shared_yaxes=True,
                         horizontal_spacing=HORIZONTAL_SPACING,
@@ -299,7 +299,7 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
             x=df[x].tolist(),
             y=df[y].tolist(),
             mode='markers',
-            type='scatter' + scattergl * 'gl',
+            type=trace_type,
             marker=dict(
                 color=df[color_name],
                 colorscale=colormap,
@@ -316,7 +316,7 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
                 x=group[1][x].tolist(),
                 y=group[1][y].tolist(),
                 mode='markers',
-                type='scatter' + scattergl * 'gl',
+                type=trace_type,
                 marker=dict(
                     color=df[color_name].tolist(),
                     colorscale=colormap,
@@ -341,7 +341,7 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
                 x=group[1][x].tolist(),
                 y=group[1][y].tolist(),
                 mode='markers',
-                type='scatter' + scattergl * 'gl',
+                type=trace_type,
                 marker=dict(
                     color=df[color_name].tolist(),
                     colorscale=colormap,
@@ -378,7 +378,7 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
                         x=group[x].tolist(),
                         y=group[y].tolist(),
                         mode='markers',
-                        type='scatter' + scattergl * 'gl',
+                        type=trace_type,
                         marker=dict(
                             color=df[color_name].tolist(),
                             colorscale=colormap,
@@ -392,7 +392,7 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
                         x=group[x].tolist(),
                         y=group[y].tolist(),
                         mode='markers',
-                        type='scatter' + scattergl * 'gl',
+                        type=trace_type,
                         showlegend=False,
                         **kwargs
                     )
@@ -423,7 +423,7 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
 
 def _facet_grid(df, x, y, facet_row, facet_col, title, height, width,
                 num_of_rows, num_of_cols, facet_row_labels, facet_col_labels,
-                scattergl, **kwargs):
+                trace_type, **kwargs):
     fig = make_subplots(rows=num_of_rows, cols=num_of_cols,
                         shared_xaxes=True, shared_yaxes=True,
                         horizontal_spacing=HORIZONTAL_SPACING,
@@ -434,7 +434,7 @@ def _facet_grid(df, x, y, facet_row, facet_col, title, height, width,
             x=df[x].tolist(),
             y=df[y].tolist(),
             mode='markers',
-            type='scatter' + scattergl * 'gl',
+            type=trace_type,
             marker=dict(
                 color=DEFUALT_MARKER_COLOR
             ),
@@ -449,7 +449,7 @@ def _facet_grid(df, x, y, facet_row, facet_col, title, height, width,
                 x=group[1][x].tolist(),
                 y=group[1][y].tolist(),
                 mode='markers',
-                type='scatter' + scattergl * 'gl',
+                type=trace_type,
                 marker=dict(
                     color=DEFUALT_MARKER_COLOR
                 ),
@@ -479,7 +479,7 @@ def _facet_grid(df, x, y, facet_row, facet_col, title, height, width,
                 x=group[1][x].tolist(),
                 y=group[1][y].tolist(),
                 mode='markers',
-                type='scatter' + scattergl * 'gl',
+                type=trace_type,
                 marker=dict(
                     color=DEFUALT_MARKER_COLOR
                 ),
@@ -510,7 +510,7 @@ def _facet_grid(df, x, y, facet_row, facet_col, title, height, width,
                     x=group[x].tolist(),
                     y=group[y].tolist(),
                     mode='markers',
-                    type='scatter' + scattergl * 'gl',
+                    type=trace_type,
                     marker=dict(
                         color=DEFUALT_MARKER_COLOR
                     ),
@@ -547,7 +547,7 @@ def _facet_grid(df, x, y, facet_row, facet_col, title, height, width,
 def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                       color_name=None, colormap=None, facet_row_labels=None,
                       facet_col_labels=None, title='facet grid', height=600,
-                      width=600, scattergl=False, **kwargs):
+                      width=600, trace_type='scatter', **kwargs):
     """
     Returns figure for facet grid.
 
@@ -574,8 +574,8 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
     :param (str) title: the title of the facet grid figure.
     :param (int) height: the height of the facet grid figure.
     :param (int) width: the width of the facet grid figure.
-    :param (bool) scattergl: enables whether or not scattergl points are
-        plotted. Default = False
+    :param (str) trace_type: decides the type of plot to appear in the
+        facet grid. The defualt is 'scatter'.
     :param (dict) kwargs: a dictionary of scatterplot arguments.
 
     """
@@ -661,7 +661,7 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                                                 colormap, title, height,
                                                 width, num_of_rows,
                                                 num_of_cols, facet_row_labels,
-                                                facet_col_labels, scattergl,
+                                                facet_col_labels, trace_type,
                                                 **kwargs)
 
         elif isinstance(df[color_name][0], Number):
@@ -683,7 +683,7 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                                                     num_of_cols,
                                                     facet_row_labels,
                                                     facet_col_labels,
-                                                    scattergl, **kwargs)
+                                                    trace_type, **kwargs)
 
             elif isinstance(colormap, list):
                 colorscale_list = colormap
@@ -696,7 +696,7 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                                                   num_of_cols,
                                                   facet_row_labels,
                                                   facet_col_labels,
-                                                  scattergl, **kwargs)
+                                                  trace_type, **kwargs)
             elif isinstance(colormap, str):
                 if colormap in colors.PLOTLY_SCALES.keys():
                     colorscale_list = colors.PLOTLY_SCALES[colormap]
@@ -713,7 +713,7 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                                                   num_of_cols,
                                                   facet_row_labels,
                                                   facet_col_labels,
-                                                  scattergl, **kwargs)
+                                                  trace_type, **kwargs)
             else:
                 colorscale_list = colors.PLOTLY_SCALES['Reds']
                 fig = _facet_grid_color_numerical(df, x, y, facet_row,
@@ -723,12 +723,12 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                                                   num_of_cols,
                                                   facet_row_labels,
                                                   facet_col_labels,
-                                                  scattergl, **kwargs)
+                                                  trace_type, **kwargs)
 
     else:
         fig = _facet_grid(df, x, y, facet_row, facet_col, title, height,
                           width, num_of_rows, num_of_cols, facet_row_labels,
-                          facet_col_labels, scattergl, **kwargs)
+                          facet_col_labels, trace_type, **kwargs)
 
     fig['layout'].update(height=height, width=width, title=title)
     fig['layout'].update(plot_bgcolor=PLOT_BGCOLOR)
