@@ -13,16 +13,17 @@ pd = optional_imports.get_module('pandas')
 DEFUALT_MARKER_COLOR = '#000000'
 TICK_COLOR = '#969696'
 AXIS_TITLE_COLOR = '#0f0f0f'
+AXIS_TITLE_SIZE = 12
 GRID_COLOR = '#ffffff'
 LEGEND_COLOR = '#efefef'
-PLOT_BGCOLOR = '#e0e0e0'
+PLOT_BGCOLOR = '#ededed'
 ANNOT_RECT_COLOR = '#d0d0d0'
-HORIZONTAL_SPACING = 0.02
-VERTICAL_SPACING = 0.02
+HORIZONTAL_SPACING = 0.015
+VERTICAL_SPACING = 0.015
 LEGEND_BORDER_WIDTH = 1
 LEGEND_ANNOT_X = 1.05
 LEGEND_ANNOT_Y = 0.5
-
+DTICK = 1
 
 def _return_label(original_label, facet_labels, facet_var):
     if isinstance(facet_labels, dict):
@@ -94,7 +95,7 @@ def _axis_title_annotation(text, x_or_y_axis):
         y_pos = 0.5
         textangle = 270
 
-    annot = {'font': {'color': '#000000', 'size': 16},
+    annot = {'font': {'color': '#000000', 'size': AXIS_TITLE_SIZE},
              'showarrow': False,
              'text': text,
              'textangle': textangle,
@@ -143,7 +144,9 @@ def _add_shapes_to_fig(fig, annot_rect_color):
 def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
                                   colormap, title, height, width, num_of_rows,
                                   num_of_cols, facet_row_labels,
-                                  facet_col_labels, trace_type, **kwargs):
+                                  facet_col_labels, trace_type, size,
+                                  **kwargs):
+
     fig = make_subplots(rows=num_of_rows, cols=num_of_cols,
                         shared_xaxes=True, shared_yaxes=True,
                         horizontal_spacing=HORIZONTAL_SPACING,
@@ -160,7 +163,8 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
                 type=trace_type,
                 name=group[0],
                 marker=dict(
-                    color=colormap[group[0]]
+                    color=colormap[group[0]],
+                    size=size
                 ),
                 **kwargs
             )
@@ -178,7 +182,8 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
                     type=trace_type,
                     name=color_val,
                     marker=dict(
-                        color=colormap[color_val]
+                        color=colormap[color_val],
+                        size=size
                     ),
                     **kwargs
                 )
@@ -203,7 +208,8 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
                     type=trace_type,
                     name=color_val,
                     marker=dict(
-                        color=colormap[color_val]
+                        color=colormap[color_val],
+                        size=size
                     ),
                     **kwargs
                 )
@@ -242,7 +248,8 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
                             type=trace_type,
                             name=color_val,
                             marker=dict(
-                                color=colormap[color_val]
+                                color=colormap[color_val],
+                                size=size
                             ),
                             **kwargs
                         )
@@ -254,7 +261,8 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
                             type=trace_type,
                             name=color_val,
                             marker=dict(
-                                color=colormap[color_val]
+                                color=colormap[color_val],
+                                size=size
                             ),
                             showlegend=False,
                             **kwargs
@@ -287,7 +295,8 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
 def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
                                 colormap, title, height, width,
                                 num_of_rows, num_of_cols, facet_row_labels,
-                                facet_col_labels, trace_type, **kwargs):
+                                facet_col_labels, trace_type, size, **kwargs):
+
     fig = make_subplots(rows=num_of_rows, cols=num_of_cols,
                         shared_xaxes=True, shared_yaxes=True,
                         horizontal_spacing=HORIZONTAL_SPACING,
@@ -302,8 +311,9 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
             type=trace_type,
             marker=dict(
                 color=df[color_name],
+                size=size,
                 colorscale=colormap,
-                showscale=True
+                showscale=True,
             ),
             **kwargs
         )
@@ -319,6 +329,7 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
                 type=trace_type,
                 marker=dict(
                     color=df[color_name].tolist(),
+                    size=size,
                     colorscale=colormap,
                     showscale=True,
                     colorbar=dict(x=1.15)
@@ -344,6 +355,7 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
                 type=trace_type,
                 marker=dict(
                     color=df[color_name].tolist(),
+                    size=size,
                     colorscale=colormap,
                     showscale=True,
                     colorbar=dict(x=1.15)
@@ -381,6 +393,7 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
                         type=trace_type,
                         marker=dict(
                             color=df[color_name].tolist(),
+                            size=size,
                             colorscale=colormap,
                             showscale=(row_count == 0),
                             colorbar=dict(x=1.15)
@@ -423,7 +436,8 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
 
 def _facet_grid(df, x, y, facet_row, facet_col, title, height, width,
                 num_of_rows, num_of_cols, facet_row_labels, facet_col_labels,
-                trace_type, **kwargs):
+                trace_type, size, **kwargs):
+
     fig = make_subplots(rows=num_of_rows, cols=num_of_cols,
                         shared_xaxes=True, shared_yaxes=True,
                         horizontal_spacing=HORIZONTAL_SPACING,
@@ -436,7 +450,8 @@ def _facet_grid(df, x, y, facet_row, facet_col, title, height, width,
             mode='markers',
             type=trace_type,
             marker=dict(
-                color=DEFUALT_MARKER_COLOR
+                color=DEFUALT_MARKER_COLOR,
+                size=size,
             ),
             **kwargs
         )
@@ -451,7 +466,8 @@ def _facet_grid(df, x, y, facet_row, facet_col, title, height, width,
                 mode='markers',
                 type=trace_type,
                 marker=dict(
-                    color=DEFUALT_MARKER_COLOR
+                    color=DEFUALT_MARKER_COLOR,
+                    size=size,
                 ),
                 **kwargs
             )
@@ -481,7 +497,8 @@ def _facet_grid(df, x, y, facet_row, facet_col, title, height, width,
                 mode='markers',
                 type=trace_type,
                 marker=dict(
-                    color=DEFUALT_MARKER_COLOR
+                    color=DEFUALT_MARKER_COLOR,
+                    size=size,
                 ),
                 **kwargs
             )
@@ -512,7 +529,8 @@ def _facet_grid(df, x, y, facet_row, facet_col, title, height, width,
                     mode='markers',
                     type=trace_type,
                     marker=dict(
-                        color=DEFUALT_MARKER_COLOR
+                        color=DEFUALT_MARKER_COLOR,
+                        size=size,
                     ),
                     **kwargs
                 )
@@ -546,8 +564,9 @@ def _facet_grid(df, x, y, facet_row, facet_col, title, height, width,
 
 def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                       color_name=None, colormap=None, facet_row_labels=None,
-                      facet_col_labels=None, title='facet grid', height=600,
-                      width=600, trace_type='scatter', **kwargs):
+                      facet_col_labels=None, title='facet grid', height=700,
+                      width=700, trace_type='scatter', binwidth=2,
+                      scales='fixed', size=5, **kwargs):
     """
     Returns figure for facet grid.
 
@@ -575,7 +594,12 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
     :param (int) height: the height of the facet grid figure.
     :param (int) width: the width of the facet grid figure.
     :param (str) trace_type: decides the type of plot to appear in the
-        facet grid. The defualt is 'scatter'.
+        facet grid. The options are 'scatter' and 'scattergl'. The defualt is
+        'scatter'.
+    :param (str) scales: determines if axes have fixed ranges or not. Valid
+        settings are 'fixed' (all axes fixed), 'free_x' (x axis free only),
+        'free_y' (y axis free only) or 'free' (both axes free).
+    :param (int) size: scatterplot size.
     :param (dict) kwargs: a dictionary of scatterplot arguments.
 
     """
@@ -601,6 +625,17 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                     "x, y, facet_row, facet_col and color_name must be keys "
                     "in your dataframe."
                 )
+
+    # validate scales
+    if scales not in ['fixed', 'free_x', 'free_y', 'free']:
+        raise exceptions.PlotlyError(
+            "'scales' must be set to 'fixed', 'free_x', 'free_y' and 'free'."
+        )
+
+    #if trace_type not in ['scatter', 'scattergl']:
+    #    raise exceptions.PlotlyError(
+    #        "'trace_type' must be either 'scatter' or 'scattergl'."
+    #    )
 
     # make sure dataframe index starts at 0
     df.index = range(len(df))
@@ -662,7 +697,7 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                                                 width, num_of_rows,
                                                 num_of_cols, facet_row_labels,
                                                 facet_col_labels, trace_type,
-                                                **kwargs)
+                                                size, **kwargs)
 
         elif isinstance(df[color_name][0], Number):
             if isinstance(colormap, dict):
@@ -683,7 +718,8 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                                                     num_of_cols,
                                                     facet_row_labels,
                                                     facet_col_labels,
-                                                    trace_type, **kwargs)
+                                                    trace_type, size,
+                                                    **kwargs)
 
             elif isinstance(colormap, list):
                 colorscale_list = colormap
@@ -696,7 +732,7 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                                                   num_of_cols,
                                                   facet_row_labels,
                                                   facet_col_labels,
-                                                  trace_type, **kwargs)
+                                                  trace_type, size, **kwargs)
             elif isinstance(colormap, str):
                 if colormap in colors.PLOTLY_SCALES.keys():
                     colorscale_list = colors.PLOTLY_SCALES[colormap]
@@ -713,7 +749,7 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                                                   num_of_cols,
                                                   facet_row_labels,
                                                   facet_col_labels,
-                                                  trace_type, **kwargs)
+                                                  trace_type, size, **kwargs)
             else:
                 colorscale_list = colors.PLOTLY_SCALES['Reds']
                 fig = _facet_grid_color_numerical(df, x, y, facet_row,
@@ -723,12 +759,12 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                                                   num_of_cols,
                                                   facet_row_labels,
                                                   facet_col_labels,
-                                                  trace_type, **kwargs)
+                                                  trace_type, size, **kwargs)
 
     else:
         fig = _facet_grid(df, x, y, facet_row, facet_col, title, height,
                           width, num_of_rows, num_of_cols, facet_row_labels,
-                          facet_col_labels, trace_type, **kwargs)
+                          facet_col_labels, trace_type, size, **kwargs)
 
     fig['layout'].update(height=height, width=width, title=title)
     fig['layout'].update(plot_bgcolor=PLOT_BGCOLOR)
@@ -767,42 +803,57 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
     # add shaded regions behind axis titles
     _add_shapes_to_fig(fig, ANNOT_RECT_COLOR)
 
-    # fix ranges for subplots in same facet row/col
     axis_labels = {'x': [], 'y': []}
-
     for key in fig['layout']:
         if 'xaxis' in key:
             axis_labels['x'].append(key)
         elif 'yaxis' in key:
             axis_labels['y'].append(key)
 
+    # ticks
     for x_y in ['x', 'y']:
-        if len(axis_labels[x_y]) > 1:
-            min_ranges = []
-            max_ranges = []
-            for trace in fig['data']:
-                if len(trace[x_y]) > 0:
-                    min_ranges.append(min(trace[x_y]))
-                    max_ranges.append(max(trace[x_y]))
-            while None in min_ranges:
-                min_ranges.remove(None)
-            while None in max_ranges:
-                max_ranges.remove(None)
+        for key in fig['layout']:
+            if '{}axis'.format(x_y) in key:
+                fig['layout'][key]['dtick'] = DTICK
+                fig['layout'][key]['tickwidth'] = 1
+                fig['layout'][key]['ticklen'] = 4
 
-            min_range = min(min_ranges)
-            max_range = max(max_ranges)
+    # fixed ranges
+    if scales in ['fixed', 'free_x', 'free_y']:
+        if scales == 'fixed':
+            fixed_axes = ['x', 'y']
+        elif scales == 'free_x':
+            fixed_axes = ['y']
+        elif scales == 'free_y':
+            fixed_axes = ['x']
 
-            range_are_numbers = (isinstance(min_range, Number) and
-                                 isinstance(max_range, Number))
+        for x_y in fixed_axes:
+            if len(axis_labels[x_y]) > 1:
+                min_ranges = []
+                max_ranges = []
+                for trace in fig['data']:
+                    if len(trace[x_y]) > 0:
+                        min_ranges.append(min(trace[x_y]))
+                        max_ranges.append(max(trace[x_y]))
+                while None in min_ranges:
+                    min_ranges.remove(None)
+                while None in max_ranges:
+                    max_ranges.remove(None)
 
-            # floor and ceiling the range endpoints
-            if range_are_numbers:
-                min_range = math.floor(min_range) - 1
-                max_range = math.ceil(max_range) + 1
+                min_range = min(min_ranges)
+                max_range = max(max_ranges)
 
-            # insert ranges into fig
-            for key in fig['layout']:
-                if '{}axis'.format(x_y) in key and range_are_numbers:
-                    fig['layout'][key]['range'] = [min_range, max_range]
+                range_are_numbers = (isinstance(min_range, Number) and
+                                     isinstance(max_range, Number))
+
+                # floor and ceiling the range endpoints
+                if range_are_numbers:
+                    min_range = math.floor(min_range) #- 1
+                    max_range = math.ceil(max_range) #+ 1
+
+                # insert ranges into fig
+                for key in fig['layout']:
+                    if '{}axis'.format(x_y) in key and range_are_numbers:
+                        fig['layout'][key]['range'] = [min_range, max_range]
 
     return fig
