@@ -28,7 +28,7 @@ a box takes are `shareKey` (default is None) and `title` (default is '').
 
 You will need to use the `.get_preview()` method quite regularly as this will
 return an HTML representation of the dashboard in which the boxes in the HTML
-are labelled with on-the-fly-generated numbers which change after each
+are labelled with on-the-fly-generated lookup keys which change after each
 modification to the dashboard.
 
 Example: Create a simple Dashboard object
@@ -59,13 +59,13 @@ box_3 = {
 my_dboard = dashboard.Dashboard()
 my_dboard.insert(box_1)
 # my_dboard.get_preview()
-my_dboard.insert(box_2, 'above', 1)
+my_dboard.insert(box_2, 'above', 'a')
 # my_dboard.get_preview()
-my_dboard.insert(box_3, 'left', 2)
+my_dboard.insert(box_3, 'left', 'b')
 # my_dboard.get_preview()
-my_dboard.swap(1, 2)
+my_dboard.swap('a', 'b')
 # my_dboard.get_preview()
-my_dboard.remove(1)
+my_dboard.remove('a')
 # my_dboard.get_preview()
 ```
 """
