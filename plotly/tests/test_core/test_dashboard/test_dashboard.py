@@ -64,7 +64,7 @@ class TestDashboard(TestCase):
         }
 
         message = (
-            "Your box_id must be a number in your dashboard. To view a "
+            "Your box_id must be a letter in your dashboard. To view a "
             "representation of your dashboard run get_preview()."
         )
 
@@ -96,10 +96,10 @@ class TestDashboard(TestCase):
         )
 
         dash = dashboard.Dashboard()
-        dash.insert(my_box, 'above', 0)
+        dash.insert(my_box, 'above')
 
         self.assertRaisesRegexp(PlotlyError, message, dash.insert,
-                                my_box, 'somewhere', 1)
+                                my_box, 'somewhere', 'a')
 
     def test_dashboard_dict(self):
         my_box = {
@@ -111,8 +111,8 @@ class TestDashboard(TestCase):
         }
 
         dash = dashboard.Dashboard()
-        dash.insert(my_box, '', 0)
-        dash.insert(my_box, 'above', 1)
+        dash.insert(my_box, '')
+        dash.insert(my_box, 'above', 'a')
 
         expected_dashboard = {
             'layout': {'direction': 'vertical',

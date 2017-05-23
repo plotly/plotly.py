@@ -6,6 +6,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - 'sort' parameter to `FF.create_violin` to control whether violin plots are sorted alphabetically.
 
+### Updated
+-API dashboards from `plotly.dashboard_objs` now use letters rather than numbers in the HTML representations to represent the box ids. The box ids are not fixed to each box dictionary that is inserted to the dashboard but are rather used as lookup keys when wanting to see the contents of a particular box, i.e. `my_dboard.get_box('a')`. See the updated [documentation](https://plot.ly/python/create-online-dashboard/) for more information about box ids.
+
 ## [2.0.8] - 2017-04-21
 ### Added
 - Beta: Added API methods that wrap the API endpoint for managing Dash objects on plot.ly. The API interface is under `plotly.api.v2.dash_apps`

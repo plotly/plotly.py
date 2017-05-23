@@ -9,6 +9,7 @@ preview of the Dashboard.
 """
 
 import pprint
+import string
 
 from plotly import exceptions, optional_imports
 from plotly.utils import node_generator
@@ -20,8 +21,10 @@ MASTER_WIDTH = 400
 MASTER_HEIGHT = 400
 FONT_SIZE = 10
 
+letters = string.ascii_lowercase
+
 ID_NOT_VALID_MESSAGE = (
-    "Your box_id must be a number in your dashboard. To view a "
+    "Your box_id must be a letter in your dashboard. To view a "
     "representation of your dashboard run get_preview()."
 )
 
@@ -121,7 +124,7 @@ def _draw_line_through_box(dashboard_html, top_left_x, top_left_y, box_w,
 
 
 def _add_html_text(dashboard_html, text, top_left_x, top_left_y, box_w, box_h):
-    html_text = """<!-- Insert box numbers -->
+    html_text = """<!-- Insert box letters -->
           context.font = '{font_size}pt Times New Roman';
           context.textAlign = 'center';
           context.fillText({text}, {top_left_x} + 0.5*{box_w}, {top_left_y} + 0.5*{box_h});
@@ -155,11 +158,13 @@ class Dashboard(dict):
 
     `.get_preview()` should be called quite regularly to get an HTML
     representation of the dashboard in which the boxes in the HTML
-    are labelled with on-the-fly-generated numbers or box ids which
-    change after each modification to the dashboard.
+    are labelled with on-the-fly-generated letters or box ids which
+    change after each modification to the dashboard. They are essentially
+    lookup keys that are meant to differentiate the different boxes when
+    one wants to be looked up.
 
-    `.get_box()` returns the box located in the dashboard by calling
-    its box id as displayed via `.get_preview()`.
+    `.get_box()` looks up the box located in the dashboard by calling
+    its box id as displayed via `.get_preview()` and returning its dict.
 
     Example: Create a simple Dashboard object
     ```
@@ -189,13 +194,13 @@ class Dashboard(dict):
     my_dboard = dashboard.Dashboard()
     my_dboard.insert(box_1)
     # my_dboard.get_preview()
-    my_dboard.insert(box_2, 'above', 1)
+    my_dboard.insert(box_2, 'above', 'a')
     # my_dboard.get_preview()
-    my_dboard.insert(box_3, 'left', 2)
+    my_dboard.insert(box_3, 'left', 'b')
     # my_dboard.get_preview()
-    my_dboard.swap(1, 2)
+    my_dboard.swap('a', 'b')
     # my_dboard.get_preview()
-    my_dboard.remove(1)
+    my_dboard.remove(a)
     # my_dboard.get_preview()
     ```
     """
@@ -214,20 +219,25 @@ class Dashboard(dict):
 
         self._set_container_sizes()
 
+
     def _compute_box_ids(self):
         box_ids_to_path = {}
         all_nodes = list(node_generator(self['layout']))
 
+        max_id_index = 0
         for node in all_nodes:
             if (node[1] != () and node[0]['type'] == 'box'
                     and node[0]['boxType'] != 'empty'):
                 try:
-                    max_id = max(box_ids_to_path.keys())
-                except ValueError:
-                    max_id = 0
-                box_ids_to_path[max_id + 1] = node[1]
+                    box_ids_to_path[letters[max_id_index]] = node[1]
+                except IndexError:
+                    z_num = max_id_index - len(letters) + 1
+                    box_ids_to_path['z' + str(z_num)] = node[1]
+
+                max_id_index += 1
 
         return box_ids_to_path
+
 
     def _insert(self, box_or_container, path):
         if any(first_second not in ['first', 'second']
@@ -285,7 +295,7 @@ class Dashboard(dict):
         return loc_in_dashboard
 
     def get_box(self, box_id):
-        """Returns box from box_id number."""
+        """Returns box from box_id letter."""
         box_ids_to_path = self._compute_box_ids()
         loc_in_dashboard = self['layout']
 
@@ -400,10 +410,10 @@ class Dashboard(dict):
                 elif self._path_to_box(path)['type'] == 'box':
                     for box_id in box_ids_to_path:
                         if box_ids_to_path[box_id] == path:
-                            number = box_id
+                            letter = box_id
 
                     html_figure = _add_html_text(
-                        html_figure, number,
+                        html_figure, "'{}'".format(letter),
                         path_to_box_specs[path]['top_left_x'],
                         path_to_box_specs[path]['top_left_y'],
                         path_to_box_specs[path]['box_w'],
