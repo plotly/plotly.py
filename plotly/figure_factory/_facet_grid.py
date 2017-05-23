@@ -23,7 +23,7 @@ VERTICAL_SPACING = 0.015
 LEGEND_BORDER_WIDTH = 1
 LEGEND_ANNOT_X = 1.05
 LEGEND_ANNOT_Y = 0.5
-DTICK = 1
+MAX_TICKS_PER_AXIS = 10
 
 def _return_label(original_label, facet_labels, facet_var):
     if isinstance(facet_labels, dict):
@@ -594,8 +594,8 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
     :param (int) height: the height of the facet grid figure.
     :param (int) width: the width of the facet grid figure.
     :param (str) trace_type: decides the type of plot to appear in the
-        facet grid. The options are 'scatter' and 'scattergl'. The defualt is
-        'scatter'.
+        facet grid. The options are 'scatter', 'scattergl' and 'bar'. The
+        defualt trace type is 'scatter'.
     :param (str) scales: determines if axes have fixed ranges or not. Valid
         settings are 'fixed' (all axes fixed), 'free_x' (x axis free only),
         'free_y' (y axis free only) or 'free' (both axes free).
@@ -632,10 +632,10 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
             "'scales' must be set to 'fixed', 'free_x', 'free_y' and 'free'."
         )
 
-    #if trace_type not in ['scatter', 'scattergl']:
-    #    raise exceptions.PlotlyError(
-    #        "'trace_type' must be either 'scatter' or 'scattergl'."
-    #    )
+    if trace_type not in ['scatter', 'scattergl', 'bar']:
+        raise exceptions.PlotlyError(
+            "'trace_type' must be either 'scatter', 'scattergl' or 'bar'."
+        )
 
     # make sure dataframe index starts at 0
     df.index = range(len(df))
@@ -810,48 +810,53 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
         elif 'yaxis' in key:
             axis_labels['y'].append(key)
 
-    # ticks
-    for x_y in ['x', 'y']:
-        for key in fig['layout']:
-            if '{}axis'.format(x_y) in key:
-                fig['layout'][key]['dtick'] = DTICK
-                fig['layout'][key]['tickwidth'] = 1
-                fig['layout'][key]['ticklen'] = 4
+    if scales == 'fixed':
+        fixed_axes = ['x', 'y']
+    elif scales == 'free_x':
+        fixed_axes = ['y']
+    elif scales == 'free_y':
+        fixed_axes = ['x']
+    else:
+        fixed_axes = []
 
     # fixed ranges
-    if scales in ['fixed', 'free_x', 'free_y']:
-        if scales == 'fixed':
-            fixed_axes = ['x', 'y']
-        elif scales == 'free_x':
-            fixed_axes = ['y']
-        elif scales == 'free_y':
-            fixed_axes = ['x']
+    for x_y in ['x', 'y']:
+        if len(axis_labels[x_y]) > 1:
+            min_ranges = []
+            max_ranges = []
+            for trace in fig['data']:
+                if len(trace[x_y]) > 0:
+                    min_ranges.append(min(trace[x_y]))
+                    max_ranges.append(max(trace[x_y]))
+            while None in min_ranges:
+                min_ranges.remove(None)
+            while None in max_ranges:
+                max_ranges.remove(None)
 
-        for x_y in fixed_axes:
-            if len(axis_labels[x_y]) > 1:
-                min_ranges = []
-                max_ranges = []
-                for trace in fig['data']:
-                    if len(trace[x_y]) > 0:
-                        min_ranges.append(min(trace[x_y]))
-                        max_ranges.append(max(trace[x_y]))
-                while None in min_ranges:
-                    min_ranges.remove(None)
-                while None in max_ranges:
-                    max_ranges.remove(None)
+            min_range = min(min_ranges)
+            max_range = max(max_ranges)
 
-                min_range = min(min_ranges)
-                max_range = max(max_ranges)
+            range_are_numbers = (isinstance(min_range, Number) and
+                                 isinstance(max_range, Number))
 
-                range_are_numbers = (isinstance(min_range, Number) and
-                                     isinstance(max_range, Number))
+            # floor and ceiling the range endpoints
+            if range_are_numbers:
+                min_range = math.floor(min_range) - 1
+                max_range = math.ceil(max_range) + 1
 
-                # floor and ceiling the range endpoints
-                if range_are_numbers:
-                    min_range = math.floor(min_range) #- 1
-                    max_range = math.ceil(max_range) #+ 1
+            # dtick depends on number of points
+            if range_are_numbers:
+                dtick = int( (max_range - min_range) / MAX_TICKS_PER_AXIS )
+            else:
+                dtick = 1
+            for key in fig['layout']:
+                if '{}axis'.format(x_y) in key:
+                    fig['layout'][key]['dtick'] = dtick
+                    fig['layout'][key]['tickwidth'] = 1
+                    fig['layout'][key]['ticklen'] = 4
 
-                # insert ranges into fig
+            # insert ranges into fig
+            if x_y in fixed_axes:
                 for key in fig['layout']:
                     if '{}axis'.format(x_y) in key and range_are_numbers:
                         fig['layout'][key]['range'] = [min_range, max_range]
