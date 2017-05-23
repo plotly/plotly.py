@@ -159,12 +159,12 @@ class Dashboard(dict):
     `.get_preview()` should be called quite regularly to get an HTML
     representation of the dashboard in which the boxes in the HTML
     are labelled with on-the-fly-generated letters or box ids which
-    change after each modification to the dashboard. They are temporary
-    keys that are just meant to notate the different boxes for use with
-    `.get_box()`.
+    change after each modification to the dashboard. They are essentially
+    lookup keys that are meant to differentiate the different boxes when
+    one wants to be looked up.
 
-    `.get_box()` returns the box located in the dashboard by calling
-    its box id as displayed via `.get_preview()`.
+    `.get_box()` looks up the box located in the dashboard by calling
+    its box id as displayed via `.get_preview()` and returning its dict.
 
     Example: Create a simple Dashboard object
     ```
@@ -194,13 +194,13 @@ class Dashboard(dict):
     my_dboard = dashboard.Dashboard()
     my_dboard.insert(box_1)
     # my_dboard.get_preview()
-    my_dboard.insert(box_2, 'above', 1)
+    my_dboard.insert(box_2, 'above', 'a')
     # my_dboard.get_preview()
-    my_dboard.insert(box_3, 'left', 2)
+    my_dboard.insert(box_3, 'left', 'b')
     # my_dboard.get_preview()
-    my_dboard.swap(1, 2)
+    my_dboard.swap('a', 'b')
     # my_dboard.get_preview()
-    my_dboard.remove(1)
+    my_dboard.remove(a)
     # my_dboard.get_preview()
     ```
     """
