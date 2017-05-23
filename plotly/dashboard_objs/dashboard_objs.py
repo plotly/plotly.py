@@ -9,6 +9,7 @@ preview of the Dashboard.
 """
 
 import pprint
+import string
 
 from plotly import exceptions, optional_imports
 from plotly.utils import node_generator
@@ -19,6 +20,8 @@ IPython = optional_imports.get_module('IPython')
 MASTER_WIDTH = 400
 MASTER_HEIGHT = 400
 FONT_SIZE = 10
+
+letters = string.ascii_lowercase
 
 ID_NOT_VALID_MESSAGE = (
     "Your box_id must be a number in your dashboard. To view a "
@@ -213,6 +216,22 @@ class Dashboard(dict):
             self['settings'] = content['settings']
 
         self._set_container_sizes()
+
+    def _compute_box_ids(self):
+        box_ids_to_path = {}
+        all_nodes = list(node_generator(self['layout']))
+
+        for node in all_nodes:
+            if (node[1] != () and node[0]['type'] == 'box'
+                    and node[0]['boxType'] != 'empty'):
+                try:
+                    max_id = max(box_ids_to_path.keys())
+                except ValueError:
+                    max_id = 0
+                box_ids_to_path[max_id + 1] = node[1]
+
+        return box_ids_to_path
+
 
     def _compute_box_ids(self):
         box_ids_to_path = {}
