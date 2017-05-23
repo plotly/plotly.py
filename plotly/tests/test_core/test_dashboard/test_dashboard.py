@@ -64,7 +64,7 @@ class TestDashboard(TestCase):
         }
 
         message = (
-            "Your box_id must be a number in your dashboard. To view a "
+            "Your box_id must be a letter in your dashboard. To view a "
             "representation of your dashboard run get_preview()."
         )
 
