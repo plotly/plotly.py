@@ -24,6 +24,16 @@ LEGEND_BORDER_WIDTH = 1
 LEGEND_ANNOT_X = 1.05
 LEGEND_ANNOT_Y = 0.5
 MAX_TICKS_PER_AXIS = 10
+THRES_FOR_FLIPPED_FACET_TITLES = 10
+GRID_WIDTH = 1
+
+def _is_flipped(num):
+    if num >= THRES_FOR_FLIPPED_FACET_TITLES:
+        flipped = True
+    else:
+        flipped = False
+    return flipped
+
 
 def _return_label(original_label, facet_labels, facet_var):
     if isinstance(facet_labels, dict):
@@ -54,24 +64,42 @@ def _legend_annotation(color_name):
     return legend_title
 
 
-def _annotation_dict(text, lane, num_of_lanes, row_col='col'):
-    if row_col == 'col':
-        l = 0.05
-        w = (1 - (num_of_lanes - 1) * l) / num_of_lanes
-        x = ((2 * lane - 1) * w + (2 * lane - 2) * l) / 2.
-        y = 1.03
-        textangle = 0
-    elif row_col == 'row':
-        l = 0.03
-        w = (1 - (num_of_lanes - 1) * l) / num_of_lanes
-        x = 1.03
-        y = ((2 * lane - 1) * w + (2 * lane - 2) * l) / 2.
-        textangle = 90
+def _annotation_dict(text, lane, num_of_lanes, row_col='col', flipped=True):
+    if not flipped:
+        xanchor = 'center'
+        yanchor = 'middle'
+        if row_col == 'col':
+            l = 0.05
+            w = (1 - (num_of_lanes - 1) * l) / num_of_lanes
+            x = ((2 * lane - 1) * w + (2 * lane - 2) * l) / 2.
+            y = 1.03
+            textangle = 0
+        elif row_col == 'row':
+            l = 0.03
+            w = (1 - (num_of_lanes - 1) * l) / num_of_lanes
+            x = 1.03
+            y = ((2 * lane - 1) * w + (2 * lane - 2) * l) / 2.
+            textangle = 90
+    else:
+        yanchor = 'bottom'
+        xanchor = 'left'
+        if row_col == 'col':
+            l = 0.05
+            w = (1 - (num_of_lanes - 1) * l) / num_of_lanes
+            x = ((2 * lane - 1) * w + (2 * lane - 2) * l) / 2.
+            y = 1.0
+            textangle = 270
+        elif row_col == 'row':
+            l = 0.03
+            w = (1 - (num_of_lanes - 1) * l) / num_of_lanes
+            x = 1.0
+            y = ((2 * lane - 1) * w + (2 * lane - 2) * l) / 2.
+            textangle = 0
 
     annotation_dict = dict(
         textangle=textangle,
-        xanchor='center',
-        yanchor='middle',
+        xanchor=xanchor,
+        yanchor=yanchor,
         x=x,
         y=y,
         showarrow=False,
@@ -84,6 +112,7 @@ def _annotation_dict(text, lane, num_of_lanes, row_col='col'):
         )
     )
     return annotation_dict
+
 
 def _axis_title_annotation(text, x_or_y_axis):
     if x_or_y_axis == 'x':
@@ -108,11 +137,11 @@ def _axis_title_annotation(text, x_or_y_axis):
     return annot
 
 
-def _add_shapes_to_fig(fig, annot_rect_color):
+def _add_shapes_to_fig(fig, annot_rect_color, flipped=False):
     fig['layout']['shapes'] = []
     for key in fig['layout'].keys():
-        if 'xaxis' in key or 'yaxis' in key:
-            if fig['layout'][key]['domain'] != [0.0, 1.0]:
+        if 'axis' in key and fig['layout'][key]['domain'] != [0.0, 1.0]:
+            if not flipped:
                 if 'xaxis' in key:
                     fig['layout']['shapes'].append(
                         {'fillcolor': annot_rect_color,
@@ -139,13 +168,40 @@ def _add_shapes_to_fig(fig, annot_rect_color):
                          'y1': fig['layout'][key]['domain'][1],
                          'yref': 'paper'}
                     )
+            else:
+                if 'xaxis' in key:
+                    fig['layout']['shapes'].append(
+                        {'fillcolor': annot_rect_color,
+                       'layer': 'below',
+                       'line': {'color': annot_rect_color, 'width': 1},
+                       'type': 'rect',
+                       'x0': fig['layout'][key]['domain'][0],
+                       'x1': fig['layout'][key]['domain'][1],
+                       'xref': 'paper',
+                       'y0': 1.005 + 2,
+                       'y1': 1.05,
+                       'yref': 'paper'}
+                    )
+                elif 'yaxis' in key:
+                    fig['layout']['shapes'].append(
+                        {'fillcolor': annot_rect_color,
+                         'layer': 'below',
+                         'line': {'color': annot_rect_color, 'width': 1},
+                         'type': 'rect',
+                         'x0': 1.005,
+                         'x1': 1.05 + 1,
+                         'xref': 'paper',
+                         'y0': fig['layout'][key]['domain'][0],
+                         'y1': fig['layout'][key]['domain'][1],
+                         'yref': 'paper'}
+                    )
 
 
 def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
                                   colormap, title, height, width, num_of_rows,
                                   num_of_cols, facet_row_labels,
                                   facet_col_labels, trace_type, size,
-                                  **kwargs):
+                                  flipped_rows, flipped_cols, **kwargs):
 
     fig = make_subplots(rows=num_of_rows, cols=num_of_cols,
                         shared_xaxes=True, shared_yaxes=True,
@@ -193,7 +249,7 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
 
             annotations.append(
                 _annotation_dict(label, num_of_rows - j, num_of_rows,
-                                 row_col='row')
+                                 row_col='row', flipped=flipped)
             )
 
     elif not facet_row and facet_col:
@@ -218,7 +274,8 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
             label = _return_label(group[0], facet_col_labels, facet_col)
 
             annotations.append(
-                _annotation_dict(label, j + 1, num_of_cols, row_col='col')
+                _annotation_dict(label, j + 1, num_of_cols, row_col='col',
+                                 flipped=flipped)
             )
 
     elif facet_row and facet_col:
@@ -272,18 +329,14 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
                     label = _return_label(col_values[col_count],
                                           facet_col_labels, facet_col)
                     annotations.append(
-                        _annotation_dict(label,
-                                         col_count + 1,
-                                         num_of_cols,
-                                         row_col='col')
+                        _annotation_dict(label, col_count + 1, num_of_cols,
+                                         row_col='col', flipped=flipped)
                         )
             label = _return_label(row_values[row_count],
                                   facet_row_labels, facet_row)
             annotations.append(
-                _annotation_dict(label,
-                                 num_of_rows - row_count,
-                                 num_of_rows,
-                                 row_col='row')
+                _annotation_dict(label, num_of_rows - row_count, num_of_rows,
+                                 row_col='row', flipped=flipped)
                 )
 
     # add annotations
@@ -293,9 +346,10 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
 
 
 def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
-                                colormap, title, height, width,
-                                num_of_rows, num_of_cols, facet_row_labels,
-                                facet_col_labels, trace_type, size, **kwargs):
+                                colormap, title, height, width, num_of_rows,
+                                num_of_cols, facet_row_labels,
+                                facet_col_labels, trace_type, size,
+                                flipped_rows, flipped_cols, **kwargs):
 
     fig = make_subplots(rows=num_of_rows, cols=num_of_cols,
                         shared_xaxes=True, shared_yaxes=True,
@@ -341,8 +395,8 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
             label = _return_label(group[0], facet_row_labels, facet_row)
 
             annotations.append(
-                _annotation_dict(label, num_of_rows - j,
-                                 num_of_rows, row_col='row')
+                _annotation_dict(label, num_of_rows - j, num_of_rows,
+                                 row_col='row', flipped=flipped)
             )
 
     elif not facet_row and facet_col:
@@ -367,7 +421,8 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
             label = _return_label(group[0], facet_col_labels, facet_col)
 
             annotations.append(
-                _annotation_dict(label, j + 1, num_of_cols, row_col='col')
+                _annotation_dict(label, j + 1, num_of_cols, row_col='col',
+                                 flipped=flipped)
             )
 
     elif facet_row and facet_col:
@@ -414,18 +469,15 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
                     label = _return_label(col_values[col_count],
                                           facet_col_labels, facet_col)
                     annotations.append(
-                        _annotation_dict(label,
-                                         col_count + 1,
-                                         num_of_cols,
-                                         row_col='col')
+                        _annotation_dict(label, col_count + 1, num_of_cols,
+                                         row_col='col', flipped=flipped)
                         )
             label = _return_label(row_values[row_count],
                                   facet_row_labels, facet_row)
             annotations.append(
                 _annotation_dict(row_values[row_count],
-                                 num_of_rows - row_count,
-                                 num_of_rows,
-                                 row_col='row')
+                                 num_of_rows - row_count, num_of_rows,
+                                 row_col='row', flipped=flipped)
                 )
 
     # add annotations
@@ -436,7 +488,7 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
 
 def _facet_grid(df, x, y, facet_row, facet_col, title, height, width,
                 num_of_rows, num_of_cols, facet_row_labels, facet_col_labels,
-                trace_type, size, **kwargs):
+                trace_type, size, flipped_rows, flipped_cols, **kwargs):
 
     fig = make_subplots(rows=num_of_rows, cols=num_of_cols,
                         shared_xaxes=True, shared_yaxes=True,
@@ -485,7 +537,7 @@ def _facet_grid(df, x, y, facet_row, facet_col, title, height, width,
 
             annotations.append(
                 _annotation_dict(label, num_of_rows - j,
-                                 num_of_rows, row_col='row')
+                                 num_of_rows, row_col='row', flipped=flipped_rows)
             )
 
     elif not facet_row and facet_col:
@@ -507,7 +559,8 @@ def _facet_grid(df, x, y, facet_row, facet_col, title, height, width,
             label = _return_label(group[0], facet_col_labels, facet_col)
 
             annotations.append(
-                _annotation_dict(label, j + 1, num_of_cols, row_col='col')
+                _annotation_dict(label, j + 1, num_of_cols, row_col='col',
+                                 flipped=flipped_cols)
             )
 
     elif facet_row and facet_col:
@@ -540,20 +593,16 @@ def _facet_grid(df, x, y, facet_row, facet_col, title, height, width,
                                           facet_col_labels,
                                           facet_col)
                     annotations.append(
-                        _annotation_dict(label,
-                                         col_count + 1,
-                                         num_of_cols,
-                                         row_col='col')
+                        _annotation_dict(label, col_count + 1, num_of_cols,
+                                         row_col='col', flipped=flipped_cols)
                         )
 
             label = _return_label(row_values[row_count],
                                   facet_row_labels,
                                   facet_row)
             annotations.append(
-                _annotation_dict(label,
-                                 num_of_rows - row_count,
-                                 num_of_rows,
-                                 row_col='row')
+                _annotation_dict(label, num_of_rows - row_count, num_of_rows,
+                                 row_col='row', flipped=flipped_rows)
                 )
 
     # add annotations
@@ -642,9 +691,11 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
 
     num_of_rows = 1
     num_of_cols = 1
-
+    flipped_rows = False
+    flipped_cols = False
     if facet_row:
         num_of_rows = len(df[facet_row].unique())
+        flipped_rows = _is_flipped(num_of_rows)
         if isinstance(facet_row_labels, dict):
             for key in df[facet_row].unique():
                 if key not in facet_row_labels.keys():
@@ -657,6 +708,7 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                     )
     if facet_col:
         num_of_cols = len(df[facet_col].unique())
+        flipped_cols = _is_flipped(num_of_cols)
         if isinstance(facet_col_labels, dict):
             for key in df[facet_col].unique():
                 if key not in facet_col_labels.keys():
@@ -697,7 +749,8 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                                                 width, num_of_rows,
                                                 num_of_cols, facet_row_labels,
                                                 facet_col_labels, trace_type,
-                                                size, **kwargs)
+                                                size, flipped_rows,
+                                                flipped_cols, **kwargs)
 
         elif isinstance(df[color_name][0], Number):
             if isinstance(colormap, dict):
@@ -719,6 +772,8 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                                                     facet_row_labels,
                                                     facet_col_labels,
                                                     trace_type, size,
+                                                    flipped_rows,
+                                                    flipped_cols,
                                                     **kwargs)
 
             elif isinstance(colormap, list):
@@ -732,7 +787,9 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                                                   num_of_cols,
                                                   facet_row_labels,
                                                   facet_col_labels,
-                                                  trace_type, size, **kwargs)
+                                                  trace_type, size,
+                                                  flipped_rows, flipped_cols,
+                                                  **kwargs)
             elif isinstance(colormap, str):
                 if colormap in colors.PLOTLY_SCALES.keys():
                     colorscale_list = colors.PLOTLY_SCALES[colormap]
@@ -749,7 +806,9 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                                                   num_of_cols,
                                                   facet_row_labels,
                                                   facet_col_labels,
-                                                  trace_type, size, **kwargs)
+                                                  trace_type, size,
+                                                  flipped_rows, flipped_cols,
+                                                  **kwargs)
             else:
                 colorscale_list = colors.PLOTLY_SCALES['Reds']
                 fig = _facet_grid_color_numerical(df, x, y, facet_row,
@@ -759,12 +818,15 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                                                   num_of_cols,
                                                   facet_row_labels,
                                                   facet_col_labels,
-                                                  trace_type, size, **kwargs)
+                                                  trace_type, size,
+                                                  flipped_rows, flipped_cols,
+                                                  **kwargs)
 
     else:
         fig = _facet_grid(df, x, y, facet_row, facet_col, title, height,
                           width, num_of_rows, num_of_cols, facet_row_labels,
-                          facet_col_labels, trace_type, size, **kwargs)
+                          facet_col_labels, trace_type, size, flipped_rows,
+                          flipped_cols, **kwargs)
 
     fig['layout'].update(height=height, width=width, title=title)
     fig['layout'].update(plot_bgcolor=PLOT_BGCOLOR)
@@ -821,44 +883,44 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
 
     # fixed ranges
     for x_y in ['x', 'y']:
-        if len(axis_labels[x_y]) > 1:
-            min_ranges = []
-            max_ranges = []
-            for trace in fig['data']:
-                if len(trace[x_y]) > 0:
-                    min_ranges.append(min(trace[x_y]))
-                    max_ranges.append(max(trace[x_y]))
-            while None in min_ranges:
-                min_ranges.remove(None)
-            while None in max_ranges:
-                max_ranges.remove(None)
+        min_ranges = []
+        max_ranges = []
+        for trace in fig['data']:
+            if len(trace[x_y]) > 0:
+                min_ranges.append(min(trace[x_y]))
+                max_ranges.append(max(trace[x_y]))
+        while None in min_ranges:
+            min_ranges.remove(None)
+        while None in max_ranges:
+            max_ranges.remove(None)
 
-            min_range = min(min_ranges)
-            max_range = max(max_ranges)
+        min_range = min(min_ranges)
+        max_range = max(max_ranges)
 
-            range_are_numbers = (isinstance(min_range, Number) and
-                                 isinstance(max_range, Number))
+        range_are_numbers = (isinstance(min_range, Number) and
+                             isinstance(max_range, Number))
 
-            # floor and ceiling the range endpoints
-            if range_are_numbers:
-                min_range = math.floor(min_range) - 1
-                max_range = math.ceil(max_range) + 1
+        # floor and ceiling the range endpoints
+        if range_are_numbers:
+            min_range = math.floor(min_range)  # - 1
+            max_range = math.ceil(max_range)  # + 1
 
-            # dtick depends on number of points
-            if range_are_numbers:
-                dtick = int( (max_range - min_range) / MAX_TICKS_PER_AXIS )
-            else:
-                dtick = 1
+        # dtick depends on number of points
+        if range_are_numbers:
+            dtick = math.floor( (max_range - min_range) / MAX_TICKS_PER_AXIS )
+        else:
+            dtick = 1
+
+        for axis_title in axis_labels[x_y]:
+            fig['layout'][axis_title]['dtick'] = dtick
+            fig['layout'][axis_title]['tickwidth'] = 1
+            fig['layout'][axis_title]['ticklen'] = 4
+            fig['layout'][axis_title]['gridwidth'] = GRID_WIDTH
+
+        # insert ranges into fig
+        if x_y in fixed_axes:
             for key in fig['layout']:
-                if '{}axis'.format(x_y) in key:
-                    fig['layout'][key]['dtick'] = dtick
-                    fig['layout'][key]['tickwidth'] = 1
-                    fig['layout'][key]['ticklen'] = 4
-
-            # insert ranges into fig
-            if x_y in fixed_axes:
-                for key in fig['layout']:
-                    if '{}axis'.format(x_y) in key and range_are_numbers:
-                        fig['layout'][key]['range'] = [min_range, max_range]
+                if '{}axis'.format(x_y) in key and range_are_numbers:
+                    fig['layout'][key]['range'] = [min_range, max_range]
 
     return fig
