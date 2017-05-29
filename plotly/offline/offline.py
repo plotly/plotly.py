@@ -116,7 +116,7 @@ def init_notebook_mode(connected=False):
             'requirejs.config({'
             'paths: { '
             # Note we omit the extension .js because require will include it.
-            '\'plotly\': [\'https://cdn.plot.ly/plotly-latest.min\']},'
+            '\'plotly\': [\'https://cdn.plot.ly/plotly-latest.min.js\']},'
             '});'
             'if(!window.Plotly) {{'
             'require([\'plotly\'],'
