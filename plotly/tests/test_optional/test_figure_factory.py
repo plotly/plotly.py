@@ -2091,8 +2091,8 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
                      'layer': 'below',
                      'line': {'color': '#d0d0d0', 'width': 1},
                      'type': 'rect',
-                     'x0': 0.5075,
-                     'x1': 1.0,
+                     'x0': 0.0,
+                     'x1': 0.4925,
                      'xref': 'paper',
                      'y0': 1.005,
                      'y1': 1.05,
@@ -2101,12 +2101,12 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
                      'layer': 'below',
                      'line': {'color': '#d0d0d0', 'width': 1},
                      'type': 'rect',
-                     'x0': 0.0,
-                     'x1': 0.4925,
+                     'x0': 0.5075,
+                     'x1': 1.0,
                      'xref': 'paper',
                      'y0': 1.005,
                      'y1': 1.05,
-                     'yref': 'paper'}
+                     'yref': 'paper'},
                ],
               'showlegend': False,
               'title': '',
@@ -2146,4 +2146,4 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
         }
 
         self.assertEqual(test_facet_grid['data'], exp_facet_grid['data'])
-        self.assertEqual(test_facet_grid['layout'], exp_facet_grid['layout'])
+        self.assert_dict_equal(test_facet_grid['layout'], exp_facet_grid['layout'])
