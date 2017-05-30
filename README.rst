@@ -74,7 +74,7 @@ plotly figures, with a one-liner::
 
     py.plot_mpl(fig)
 
-Checkout the `Plotly and mpld3`_ IPython notebook for more infomataion.
+Checkout the `Plotly and mpld3`_ IPython notebook for more information.
 
 Introduction to working with out API
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
