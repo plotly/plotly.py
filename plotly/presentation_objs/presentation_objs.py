@@ -389,7 +389,7 @@ class Presentation(dict):
                     language = _remove_extra_whitespace_from_line(
                         box_lines[0][3 : ]
                     ).lower()
-                    if language == '' or lanugage not in VALID_LANGUAGES:
+                    if language == '' or language not in VALID_LANGUAGES:
                         raise exceptions.PlotlyError(
                             "The language of your code block should be "
                             "clearly indicated after the first ``` that "
