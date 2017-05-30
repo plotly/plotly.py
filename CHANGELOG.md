@@ -2,10 +2,31 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [2.0.7] - [Unreleased]
+## [Unreleased]
+### Added
+- 'sort' parameter to `FF.create_violin` to control whether violin plots are sorted alphabetically.
+
+## [2.0.8] - 2017-04-21
+### Added
+- Beta: Added API methods that wrap the API endpoint for managing Dash objects on plot.ly. The API interface is under `plotly.api.v2.dash_apps`
+- offline embedded plots are now responsive to window resizing when `output_type == "div"` is set in `plotly.offline.iplot()`.
+- Offline embedded plots are now responsive to window resizing when `output_type == "div"` is set in `plotly.offline.iplot()`.
+- Offline animations are now supported on Plotly Cloud.
+
+### Updated
+- Updated `plotly.min.js` to version 1.26.0 for `plotly.offline`.
+  - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md) for additional information regarding the updates.
+
+### Updated
+- `plotly.offline.plot` and `plotly.offline.iplot` now accept various [configuration options](https://plot.ly/javascript/configuration-options/) for their arguments.
+
+## [2.0.7] - 2017-04-07
 ### Updated
 - Updated `plotly.min.js` to version 1.25.0 for `plotly.offline`.
   - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md) for additional information regarding the updates.
+
+### Added
+- Added check to verify the share key is enabled when secret charts are created.
 
 ## [2.0.6] - 2017-03-20
 ### Added
@@ -37,8 +58,6 @@ Note: This release's installation was broken. It has been removed from PyPI
   See [https://github.com/nteract/nteract/pull/662](https://github.com/nteract/nteract/pull/662)
   for the associated PR in nteract.
 - As part of the above, plotly output now prints with a [custom mimetype](https://github.com/plotly/plotly.py/blob/f65724f06b894a5db94245ee4889c632b887d8ce/plotly/offline/offline.py#L348) - `application/vnd.plotly.v1+json`
-
-### Added
 - `memoize` decorator added to `plotly.utils`
 
 ### Changed
