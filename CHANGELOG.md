@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - 'sort' parameter to `FF.create_violin` to control whether violin plots are sorted alphabetically.
 - `plotly.figure_factory.create_facet_grid` joins the figure factory. For more information run `help(plotly.figure_factory.create_facet_grid)`.
 
+
 ## [2.0.8] - 2017-04-21
 ### Added
 - Beta: Added API methods that wrap the API endpoint for managing Dash objects on plot.ly. The API interface is under `plotly.api.v2.dash_apps`
