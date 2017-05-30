@@ -1947,7 +1947,27 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
                                 ff.create_facet_grid,
                                 data, 'a', 'c')
 
-    def test_valid_plotly_scale_name(self):
+    def test_valid_trace_type(self):
+        data = pd.DataFrame([[0, 0], [1, 1]], columns=['a', 'b'])
+
+        pattern = "'trace_type' must be 'scatter' or 'scattergl'."
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                ff.create_facet_grid,
+                                data, 'a', 'b', trace_type='bar')
+
+    def test_valid_scales(self):
+        data = pd.DataFrame([[0, 0], [1, 1]], columns=['a', 'b'])
+
+        pattern = (
+            "'scales' must be set to 'fixed', 'free_x', 'free_y' and 'free'."
+        )
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                ff.create_facet_grid,
+                                data, 'a', 'b', scales='not_free')
+
+    def test_valid_plotly_color_scale_name(self):
         data = pd.DataFrame([[0, 0], [1, 1]], columns=['a', 'b'])
 
         self.assertRaises(PlotlyError, ff.create_facet_grid,
@@ -1983,7 +2003,147 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
         data = pd.DataFrame([[0, 1, 2], [3, 4, 5]],
                             columns=['a', 'b', 'c'])
 
-        colormap='bar'
+        colormap='foo'
 
         self.assertRaises(PlotlyError, ff.create_facet_grid, data, 'a', 'b',
                           color_name='c', colormap=colormap)
+
+    def test_valid_facet_grid_fig(self):
+        mpg = pd.read_table('https://raw.githubusercontent.com/plotly/datasets/master/mpg_2017.txt')
+        df = mpg.head(10)
+
+        test_facet_grid = ff.create_facet_grid(
+            df,
+            x='displ',
+            y='cty',
+            facet_col='cyl',
+        )
+
+        exp_facet_grid = {
+            'data': [
+                {'marker': {'color': '#000000', 'size': 5},
+                 'mode': 'markers',
+                 'type': 'scatter',
+                 'x': [1.8, 1.8, 2.0, 2.0, 1.8, 1.8, 2.0],
+                 'xaxis': 'x1',
+                 'y': [18, 21, 20, 21, 18, 16, 20],
+                 'yaxis': 'y1'},
+                {'marker': {'color': '#000000', 'size': 5},
+                 'mode': 'markers',
+                 'type': 'scatter',
+                 'x': [2.8, 2.8, 3.1],
+                 'xaxis': 'x2',
+                 'y': [16, 18, 18],
+                 'yaxis': 'y1'}
+            ],
+            'layout': {
+                'annotations': [
+                    {'font': {'color': '#0f0f0f', 'size': 13},
+                     'showarrow': False,
+                     'text': 4,
+                     'textangle': 0,
+                     'x': 0.24625,
+                     'xanchor': 'center',
+                     'xref': 'paper',
+                     'y': 1.03,
+                     'yanchor': 'middle',
+                     'yref': 'paper'},
+                    {'font': {'color': '#0f0f0f', 'size': 13},
+                     'showarrow': False,
+                     'text': 6,
+                     'textangle': 0,
+                     'x': 0.7537499999999999,
+                     'xanchor': 'center',
+                     'xref': 'paper',
+                     'y': 1.03,
+                     'yanchor': 'middle',
+                     'yref': 'paper'},
+                     {'font': {'color': '#000000', 'size': 12},
+                     'showarrow': False,
+                    'text': 'displ',
+                    'textangle': 0,
+                    'x': 0.5,
+                    'xanchor': 'center',
+                    'xref': 'paper',
+                    'y': -0.1,
+                    'yanchor': 'middle',
+                    'yref': 'paper'},
+                   {'font': {'color': '#000000', 'size': 12},
+                    'showarrow': False,
+                    'text': 'cty',
+                    'textangle': 270,
+                    'x': -0.1,
+                    'xanchor': 'center',
+                    'xref': 'paper',
+                    'y': 0.5,
+                    'yanchor': 'middle',
+                    'yref': 'paper'}
+                ],
+                'height': 700,
+                'legend': {'bgcolor': '#efefef',
+                           'borderwidth': 1,
+                           'x': 1.05,
+                           'y': 1,
+                           'yanchor': 'top'},
+                'plot_bgcolor': '#ededed',
+                'shapes': [
+                    {'fillcolor': '#d0d0d0',
+                     'layer': 'below',
+                     'line': {'color': '#d0d0d0', 'width': 1},
+                     'type': 'rect',
+                     'x0': 0.5075,
+                     'x1': 1.0,
+                     'xref': 'paper',
+                     'y0': 1.005,
+                     'y1': 1.05,
+                     'yref': 'paper'},
+                    {'fillcolor': '#d0d0d0',
+                     'layer': 'below',
+                     'line': {'color': '#d0d0d0', 'width': 1},
+                     'type': 'rect',
+                     'x0': 0.0,
+                     'x1': 0.4925,
+                     'xref': 'paper',
+                     'y0': 1.005,
+                     'y1': 1.05,
+                     'yref': 'paper'}
+               ],
+              'showlegend': False,
+              'title': '',
+              'width': 700,
+              'xaxis1': {'anchor': 'y1',
+                         'domain': [0.0, 0.4925],
+                         'dtick': 0.0,
+                         'gridcolor': '#ffffff',
+                         'gridwidth': 1,
+                         'range': [1.0, 4.0],
+                         'tickfont': {'color': '#969696', 'size': 10},
+                         'ticklen': 4,
+                         'tickwidth': 1,
+                         'zeroline': False},
+              'xaxis2': {'anchor': 'free',
+                         'domain': [0.5075, 1.0],
+                         'dtick': 0.0,
+                         'gridcolor': '#ffffff',
+                         'gridwidth': 1,
+                         'position': 0.0,
+                         'range': [1.0, 4.0],
+                         'tickfont': {'color': '#969696', 'size': 10},
+                         'ticklen': 4,
+                         'tickwidth': 1,
+                         'zeroline': False},
+              'yaxis1': {'anchor': 'x1',
+                         'domain': [0.0, 1.0],
+                         'dtick': 0.0,
+                         'gridcolor': '#ffffff',
+                         'gridwidth': 1,
+                         'range': [16.0, 21.0],
+                         'tickfont': {'color': '#969696', 'size': 10},
+                         'ticklen': 4,
+                         'tickwidth': 1,
+                         'zeroline': False}
+            }
+        }
+
+        self.assertEqual(test_facet_grid['data'], exp_facet_grid['data'])
+        self.assertEqual(test_facet_grid['layout'], exp_facet_grid['layout'])
