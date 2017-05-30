@@ -1004,9 +1004,10 @@ class Contourcarpet(PlotlyDict):
 class Contours(PlotlyDict):
     """
     Valid attributes for 'contours' at path [] under parents ():
-
+    
         ['coloring', 'end', 'operation', 'showlines', 'size', 'start', 'type',
         'value', 'x', 'y', 'z']
+    
 
     Run `<contours-object>.help('attribute')` on any of the above.
     '<contours-object>' is the object at []

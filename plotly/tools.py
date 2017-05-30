@@ -83,6 +83,7 @@ def ensure_local_plotly_files():
         for fn in [CREDENTIALS_FILE, CONFIG_FILE]:
             utils.ensure_file_exists(fn)
             contents = utils.load_json_dict(fn)
+            contents_orig = contents.copy()
             for key, val in list(FILE_CONTENT[fn].items()):
                 # TODO: removed type checking below, may want to revisit
                 if key not in contents:
@@ -91,7 +92,12 @@ def ensure_local_plotly_files():
             for key in contents_keys:
                 if key not in FILE_CONTENT[fn]:
                     del contents[key]
-            utils.save_json_dict(fn, contents)
+            # save only if contents has changed. 
+            # This is to avoid .credentials or .config file to be overwritten randomly,
+            # which we constantly keep experiencing 
+            # (sync issues? the file might be locked for writing by other process in file._permissions)
+            if contents_orig.keys() != contents.keys():
+                utils.save_json_dict(fn, contents)
 
     else:
         warnings.warn("Looks like you don't have 'read-write' permission to "
@@ -100,8 +106,7 @@ def ensure_local_plotly_files():
                       "local configuration files. No problem though! You'll "
                       "just have to sign-in using 'plotly.plotly.sign_in()'. "
                       "For help with that: 'help(plotly.plotly.sign_in)'."
-                      "\nQuestions? Visit community.plot.ly or upgrade to a "
-                      "Pro plan for 1-1 help: https://goo.gl/1YUVu9")
+                      "\nQuestions? Visit https://support.plot.ly")
 
 
 ### credentials tools ###
