@@ -43,6 +43,16 @@ fontWeight_dict = {
     'Black Italic': {'fontWeight': 900, 'fontStyle': 'italic'},
 }
 
+NEEDED_STYLE_ERROR_MESSAGE = (
+    "'left', 'top', 'width', and 'height' parameters must be "
+    "set equal to a number (percentage) or a number with "
+    "'px' at the end of it. For example in "
+    "\n\n.left=10;top=50px{{TEXT}}\n\n the top left corner of "
+    "the TEXT block will be set 10 percent from the left of "
+    "the presentation boarder, and 50 pixels from the top."
+
+)
+
 
 def _generate_id(size):
     letters_and_numbers = string.ascii_letters
@@ -215,13 +225,43 @@ def _box(boxtype, text_or_url, left, top, height, width, id, props_attr,
     return child
 
 
-def _return_box_position(left, top, height, width):
-    scaled_top = HEIGHT * (0.01 * top)
-    scaled_left = WIDTH * (0.01 * left)
-    scaled_height = HEIGHT * (0.01 * height)
-    scaled_width = WIDTH * (0.01 * width)
+def _percentage_to_pixel(value, side):
+    if side == 'left':
+        return WIDTH * (0.01 * value)
+    elif side == 'top':
+        return HEIGHT * (0.01 * value)
+    elif side == 'height':
+        return HEIGHT * (0.01 * value)
+    elif side == 'width':
+        return WIDTH * (0.01 * value)
 
-    return scaled_left, scaled_top, scaled_height, scaled_width
+
+def _return_box_position(left, top, height, width):
+    values_dict = {
+        'left':left,
+        'top':top,
+        'height':height,
+        'width':width,
+    }
+    for key in values_dict.keys():
+        if isinstance(values_dict[key], str):
+            if values_dict[key][-2 : ] != 'px':
+                raise exceptions.PlotlyError(
+                    NEEDED_STYLE_ERROR_MESSAGE
+                )
+            try:
+                var = float(values_dict[key][ : -2])
+            except ValueError:
+                raise exceptions.PlotlyError(
+                    NEEDED_STYLE_ERROR_MESSAGE
+                )
+
+        else:
+            var = _percentage_to_pixel(values_dict[key], key)
+        values_dict[key] = var
+
+    return (values_dict['left'], values_dict['top'],
+            values_dict['height'], values_dict['width'])
 
 
 def _remove_extra_whitespace_from_line(line):
@@ -246,12 +286,21 @@ def _boxes_in_slide(slide):
             prop_split
         )
 
+        # remove white chars from properties
+        empty_props = []
+        for prop in properties:
+            if all(char == ' ' for char in prop):
+                empty_props.append(prop)
+
+        for prop in empty_props:
+            properties.remove(prop)
+
         for prop in properties:
             prop_name = prop.split(prop_val_sep)[0]
             prop_val = prop.split(prop_val_sep)[1]
 
             try:
-                prop_val = int(prop_val)
+                prop_val = float(prop_val)
             except ValueError:
                 pass
             prop_dict[prop_name] = prop_val
@@ -374,6 +423,10 @@ class Presentation(dict):
                             style_attr[key] = box[1][key]
 
                     elif key in VALID_PROPS_KEYS:
+                        if key == 'theme' and box[1][key] not in CODEPANE_THEMES:
+                            raise exceptions.PlotlyError(
+                                "Your 'theme' must be in {}".format(CODEPANE_THEMES)
+                            )
                         props_attr[key] = box[1][key]
                     elif key not in NEEDED_STYLE_KEYS:
                         raise exceptions.PlotlyError(
