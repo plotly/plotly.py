@@ -272,6 +272,28 @@ def _remove_extra_whitespace_from_line(line):
     return line
 
 
+def _list_of_slides(markdown_string):
+    # parse out list of slides
+    index = -1
+    has_final_line = False
+    while markdown_string[index] in ['\n', '-']:
+        if markdown_string[index] == '-':
+            has_final_line = True
+            break
+        index -= 1
+
+    if not has_final_line:
+        markdown_string += '\n---\n'
+
+    text_blocks = markdown_string.split('\n---\n')
+    list_of_slides = []
+    for j, text in enumerate(text_blocks):
+        if not all(char == '\n' for char in text):
+            list_of_slides.append(text)
+
+    return list_of_slides
+
+
 def _boxes_in_slide(slide):
     boxes = []
     slide_copy = copy.deepcopy(slide)
@@ -289,7 +311,8 @@ def _boxes_in_slide(slide):
         # remove white chars from properties
         empty_props = []
         for prop in properties:
-            if all(char == ' ' for char in prop):
+            if (all(char == ' ' for char in prop) or
+                all(char == '\n' for char in prop)):
                 empty_props.append(prop)
 
         for prop in empty_props:
@@ -315,7 +338,7 @@ def _boxes_in_slide(slide):
 
 
 class Presentation(dict):
-    def __init__(self, markdown_string=None):
+    def __init__(self, markdown_string=None, simple=True):
         self['presentation'] = {
             'slides': [],
             'slidePreviews': [None for _ in range(496)],
@@ -323,28 +346,26 @@ class Presentation(dict):
             'paragraphStyles': _paragraph_styles
         }
         if markdown_string:
-            self._markdown_to_presentation(markdown_string)
+            if simple:
+                self._markdown_to_presentation_simple(markdown_string)
+            else:
+                self._markdown_to_presentation(markdown_string)
         else:
             self._add_empty_slide()
 
+    def _markdown_to_presentation_simple(self, markdown_string):
+        list_of_slides = _list_of_slides(markdown_string)
+
+        for slide_num, slide in enumerate(list_of_slides):
+            lines_in_slide = slide.split('\n')
+
+            # each slide
+            for line in lines_in_slide:
+                if len(line) > 0 and line[0] == '#':
+                    print line
+
     def _markdown_to_presentation(self, markdown_string):
-        # parse out list of slides
-        index = -1
-        has_final_line = False
-        while markdown_string[index] in ['\n', '-']:
-            if markdown_string[index] == '-':
-                has_final_line = True
-                break
-            index -= 1
-
-        if not has_final_line:
-            markdown_string += '\n---\n'
-
-        text_blocks = markdown_string.split('\n---\n')
-        list_of_slides = []
-        for j, text in enumerate(text_blocks):
-            if not all(char == '\n' for char in text):
-                list_of_slides.append(text)
+        list_of_slides = _list_of_slides(markdown_string)
 
         for slide_num, slide in enumerate(list_of_slides):
             lines_in_slide = slide.split('\n')
@@ -423,10 +444,12 @@ class Presentation(dict):
                             style_attr[key] = box[1][key]
 
                     elif key in VALID_PROPS_KEYS:
-                        if key == 'theme' and box[1][key] not in CODEPANE_THEMES:
-                            raise exceptions.PlotlyError(
-                                "Your 'theme' must be in {}".format(CODEPANE_THEMES)
-                            )
+                        if key == 'theme':
+                            if box[1][key] not in CODEPANE_THEMES:
+                                raise exceptions.PlotlyError(
+                                    "Your 'theme' must be "
+                                    "in {}".format(CODEPANE_THEMES)
+                                )
                         props_attr[key] = box[1][key]
                     elif key not in NEEDED_STYLE_KEYS:
                         raise exceptions.PlotlyError(
