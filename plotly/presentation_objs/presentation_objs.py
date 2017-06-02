@@ -356,13 +356,41 @@ class Presentation(dict):
     def _markdown_to_presentation_simple(self, markdown_string):
         list_of_slides = _list_of_slides(markdown_string)
 
+        title_style_attr = {
+            'fontFamily': 'Roboto',
+            'fontWeight': 'Black',
+            'textAlign': 'left',
+            'fontSize': 90,
+        }
+
         for slide_num, slide in enumerate(list_of_slides):
             lines_in_slide = slide.split('\n')
 
             # each slide
+            text_block = []
             for line in lines_in_slide:
-                if len(line) > 0 and line[0] == '#':
-                    print line
+                if len(line) > 0:
+                    if line[0] == '#':
+                        # remove #s
+                        while '#' in line:
+                            line = line[1:]
+                        line = _remove_extra_whitespace_from_line(line)
+                        self._insert(box='Text', text_or_url=line,
+                                     left=50, top=5, height=30,
+                                     width=50, slide=slide_num,
+                                     style_attr=title_style_attr)
+                    if line[: 4] == 'url(':
+                        url = line[4 : -1]
+                        if 'https://plot.ly' in url:
+                            box_name = 'Plotly'
+                        else:
+                            box_name = 'Image'
+                        self._insert(box=box_name, text_or_url=url,
+                                     left=0, top=0, height=100,
+                                     width=50, slide=slide_num,)
+                                     #props_attr=props_attr,
+                                     #style_attr=style_attr)
+
 
     def _markdown_to_presentation(self, markdown_string):
         list_of_slides = _list_of_slides(markdown_string)
@@ -496,20 +524,14 @@ class Presentation(dict):
 
                     # TODO: needs to support on-prem server name
                     if 'https://plot.ly' in url:
-                        self._insert(box='Plotly', text_or_url=url,
-                                     left=box[1]['left'], top=box[1]['top'],
-                                     height=box[1]['height'],
-                                     width=box[1]['width'],
-                                     slide=slide_num,
-                                     props_attr=props_attr,
-                                     style_attr=style_attr)
+                        box_name = 'Plotly'
                     else:
-                        self._insert(box='Image', text_or_url=url,
-                                     left=box[1]['left'], top=box[1]['top'],
-                                     height=box[1]['height'],
-                                     width=box[1]['width'],
-                                     slide=slide_num, props_attr=props_attr,
-                                     style_attr=style_attr)
+                        box_name = 'Image'
+                    self._insert(box=box_name, text_or_url=url,
+                                 left=box[1]['left'], top=box[1]['top'],
+                                 height=box[1]['height'],
+                                 width=box[1]['width'], slide=slide_num,
+                                 props_attr=props_attr, style_attr=style_attr)
 
                 # text
                 else:
