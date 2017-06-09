@@ -550,16 +550,17 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                       facet_row_labels=None, facet_col_labels=None,
                       height=None, width=None, trace_type='scatter',
                       scales='fixed', dtick_x=None, dtick_y=None,
-                      show_boxes=True, ggplot2=False, **kwargs):
+                      show_boxes=True, ggplot2=False, binsize=1, **kwargs):
     """
     Returns figure for facet grid.
 
     :param (pd.DataFrame) df: the dataframe of columns for the facet grid.
-    :param (str) x: the key of the dataframe to be used as the x axis df.
-    :param (str) y: the key of the dataframe to be used as the y axis df.
-    :param (str) facet_row: the key for row filter column for the facet grid.
-    :param (str) facet_col: the key for the column filter column for the facet
-        grid.
+    :param (str) x: the name of the dataframe column for the x axis data.
+    :param (str) y: the name of the dataframe column for the y axis data.
+    :param (str) facet_row: the name of the dataframe column that is used to
+        facet the grid into row panels.
+    :param (str) facet_col: the name of the dataframe column that is used to
+        facet the grid into column panels.
     :param (str) color_name: the name of your dataframe column that will
         function as the colormap variable.
     :param (str|list|dict) colormap: the param that determines how the
@@ -593,6 +594,7 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
     :param (bool) ggplot2: draws the facet grid in the style of `ggplot2`. See
         http://ggplot2.tidyverse.org/reference/facet_grid.html for reference.
         Default = False
+    :param (int) binsize: groups all data into bins of a given length.
     :param (dict) kwargs: a dictionary of scatterplot arguments.
 
     Examples 1: One Way Faceting
