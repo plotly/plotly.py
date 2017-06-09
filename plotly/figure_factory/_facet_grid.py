@@ -21,7 +21,7 @@ SUBPLOT_SPACING = 0.015
 LEGEND_BORDER_WIDTH = 1
 LEGEND_ANNOT_X = 1.05
 LEGEND_ANNOT_Y = 0.5
-MAX_TICKS_PER_AXIS = 10
+MAX_TICKS_PER_AXIS = 5
 THRES_FOR_FLIPPED_FACET_TITLES = 10
 GRID_WIDTH = 1
 
@@ -965,7 +965,6 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                              isinstance(max_range, Number))
 
         if range_are_numbers:
-            # modify ranges
             min_range = math.floor(min_range)
             max_range = math.ceil(max_range)
 
