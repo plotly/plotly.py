@@ -2124,11 +2124,18 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
                'ticklen': 0,
                'zeroline': False}}}
 
-        self.assert_dict_equal(test_facet_grid['data'][0],
-                               exp_facet_grid['data'][0])
+        # data
+        data_keys = test_facet_grid['data'][0].keys()
 
-        self.assert_dict_equal(test_facet_grid['data'][1],
-                               exp_facet_grid['data'][1])
+        for j in range(len(test_facet_grid['data'])):
+            for key in data_keys:
+                if key != 'x' and key != 'y':
+                    self.assertEqual(test_facet_grid['data'][j][key],
+                                     exp_facet_grid['data'][j][key])
+                else:
+                    self.assertEqual(list(test_facet_grid['data'][j][key]),
+                                     list(exp_facet_grid['data'][j][key]))
 
+        # layout
         self.assert_dict_equal(test_facet_grid['layout'],
                                exp_facet_grid['layout'])
