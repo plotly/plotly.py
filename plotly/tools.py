@@ -1453,6 +1453,12 @@ class FigureFactory(object):
         return create_distplot(*args, **kwargs)
 
     @staticmethod
+    def create_facet_grid(*args, **kwargs):
+        FigureFactory._deprecated('create_facet_grid')
+        from plotly.figure_factory import create_facet_grid
+        return create_facet_grid(*args, **kwargs)
+
+    @staticmethod
     def create_gantt(*args, **kwargs):
         FigureFactory._deprecated('create_gantt')
         from plotly.figure_factory import create_gantt
