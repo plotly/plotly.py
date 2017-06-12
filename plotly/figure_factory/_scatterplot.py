@@ -552,7 +552,7 @@ def scatterplot_theme(dataframe, headers, diag, size, height, width, title,
 
     else:
         if endpts:
-            intervals = endpts_to_intervals(endpts)
+            intervals = utils.endpts_to_intervals(endpts)
 
             # Convert colormap to list of n RGB tuples
             if colormap_type == 'seq':
