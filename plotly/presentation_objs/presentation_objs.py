@@ -356,40 +356,148 @@ class Presentation(dict):
     def _markdown_to_presentation_simple(self, markdown_string):
         list_of_slides = _list_of_slides(markdown_string)
 
+        moods_bkgd_color = '#C7C8CA'
+        moods_font_color = '#000014'
+
         title_style_attr = {
+            'color': moods_font_color,
             'fontFamily': 'Roboto',
-            'fontWeight': 'Black',
-            'textAlign': 'left',
+            'fontWeight': fontWeight_dict['Black']['fontWeight'],
+            'textAlign': 'center',
             'fontSize': 90,
+        }
+
+        caption_style_attr = {
+            'color': moods_font_color,
+            'fontFamily': 'Roboto',
+            'fontWeight': fontWeight_dict['Black']['fontWeight'],
+            'textAlign': 'left',
+            'fontSize': 20,
         }
 
         for slide_num, slide in enumerate(list_of_slides):
             lines_in_slide = slide.split('\n')
+            title_lines = []
 
-            # each slide
-            text_block = []
+            # validate blocks of code
+            if slide.count('```') % 2 != 0:
+                raise exceptions.PlotlyError(
+                    "If you are putting a block of code into your markdown "
+                    "presentation, make sure your denote the start and end "
+                    "of the code environment with the '```' characters. For "
+                    "example, your markdown string would include something "
+                    "like:\n\n```python\nx = 2\ny = 1\nprint x + y\n```\n\n"
+                    "Notice how the language that you want the code to be "
+                    "displayed in is immediately to the right of first "
+                    "entering '```', i.e. '```python'."
+                )
+
+            # find code blocks
+            code_indices = []
+            code_blocks = []
+            wdw_size = len('```')
+            for j in range(len(slide) - wdw_size):
+                if slide[j:j+wdw_size] == '```':
+                    code_indices.append(j)
+
+            for k in range(len(code_indices) / 2):
+                l = 2 * k
+                code_blocks.append(
+                    slide[code_indices[l]:code_indices[l + 1]]
+                )
+
+            lang_and_code_tuples = []
+            for code_block in code_blocks:
+                # validate code blocks
+                code_by_lines = code_block.split('\n')
+                language = _remove_extra_whitespace_from_line(
+                    code_by_lines[0][3 : ]
+                ).lower()
+                if language == '' or language not in VALID_LANGUAGES:
+                    raise exceptions.PlotlyError(
+                        "The language of your code block should be "
+                        "clearly indicated after the first ``` that "
+                        "begins the code block. The valid languages to "
+                        "choose from are in {}".format(VALID_LANGUAGES)
+                    )
+                lang_and_code_tuples.append(
+                    (language, string.join(code_by_lines[1:], '\n'))
+                )
+
+            # background color
+            self._color_background(moods_bkgd_color, slide_num)
+
+            # collect text, code and urls
+            inCode = False
+            title_lines = []
+            url_lines = []
+            text_lines = []
             for line in lines_in_slide:
-                if len(line) > 0:
-                    if line[0] == '#':
-                        # remove #s
-                        while '#' in line:
-                            line = line[1:]
-                        line = _remove_extra_whitespace_from_line(line)
-                        self._insert(box='Text', text_or_url=line,
-                                     left=50, top=5, height=30,
-                                     width=50, slide=slide_num,
-                                     style_attr=title_style_attr)
-                    if line[: 4] == 'url(':
-                        url = line[4 : -1]
-                        if 'https://plot.ly' in url:
-                            box_name = 'Plotly'
-                        else:
-                            box_name = 'Image'
-                        self._insert(box=box_name, text_or_url=url,
-                                     left=0, top=0, height=100,
-                                     width=50, slide=slide_num,)
-                                     #props_attr=props_attr,
-                                     #style_attr=style_attr)
+                # inCode handling
+                if line[ : 3] == '```' and len(line) > 3:
+                    inCode = True
+                if line == '```':
+                    inCode = False
+
+                if not inCode:
+                    if len(line) > 0 and line[0] == '#':
+                        title_lines.append(line)
+                    elif line[ : 4] == 'url(':
+                        if line[-1] != ')':
+                            raise exceptions.PlotlyError(
+                                "If you are trying to put a url of a Plotly "
+                                "graph or an image into your presentation, "
+                                "make sure that you are writing a line of "
+                                "the form\nurl(https://...)."
+                            )
+                        url_lines.append(line)
+                    else:
+                        text_lines.append(line)
+
+            # insert objects in slide
+            num_of_boxes = len(url_lines) + len(lang_and_code_tuples)
+            if num_of_boxes == 0:
+                pass
+            if num_of_boxes == 1:
+                if len(title_lines) > 0:
+                    title = title_lines[0]
+                    while '#' in title:
+                        title = title[1:]
+                    title = _remove_extra_whitespace_from_line(title)
+                    self._insert(box='Text', text_or_url=title,
+                                 left=50, top=10, height=20,
+                                 width=50, slide=slide_num,
+                                 style_attr=title_style_attr)
+
+                if len(url_lines) > 0:
+                    url = url_lines[0][4 : -1]
+                    if 'https://plot.ly' in url:
+                        box_name = 'Plotly'
+                    else:
+                        box_name = 'Image'
+                    self._insert(box=box_name, text_or_url=url,
+                                 left=0, top=0, height=100,
+                                 width=50, slide=slide_num)
+                if len(lang_and_code_tuples) > 0:
+                    language = lang_and_code_tuples[0][0]
+                    code = lang_and_code_tuples[0][1]
+                    box_name = 'CodePane'
+
+                    props_attr = {}
+                    props_attr['language'] = language
+
+                    self._insert(box=box_name, text_or_url=code,
+                                 left=0, top=0, height=100,
+                                 width=50, slide=slide_num,
+                                 props_attr=props_attr)
+
+
+                if len(text_lines) > 0:
+                    text_block = string.join(text_lines, '\n')
+                    self._insert(box='Text', text_or_url=text_block,
+                                 left=52, top=60, height=65,
+                                 width=46, slide=slide_num,
+                                 style_attr=caption_style_attr)
 
 
     def _markdown_to_presentation(self, markdown_string):
