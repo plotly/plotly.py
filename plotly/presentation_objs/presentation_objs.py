@@ -27,6 +27,8 @@ NEEDED_STYLE_KEYS = ['left', 'top', 'height', 'width']
 VALID_LANGUAGES = ['cpp', 'cs', 'css', 'fsharp', 'go', 'haskell', 'java',
                    'javascript', 'jsx', 'julia', 'xml', 'matlab', 'php',
                    'python', 'r', 'ruby', 'scala', 'sql', 'yaml']
+VALID_SLIDE_STYLES = ['pictureleft', 'pictureright', 'picturemiddle',
+                      'pictureleft_tiled', 'pictureright_tiled']
 
 fontWeight_dict = {
     'Thin': {'fontWeight': 100},
@@ -273,22 +275,13 @@ def _remove_extra_whitespace_from_line(line):
 
 
 def _list_of_slides(markdown_string):
-    # parse out list of slides
-    index = -1
-    has_final_line = False
-    while markdown_string[index] in ['\n', '-']:
-        if markdown_string[index] == '-':
-            has_final_line = True
-            break
-        index -= 1
-
-    if not has_final_line:
+    if not markdown_string.endswith('\n---\n'):
         markdown_string += '\n---\n'
 
     text_blocks = markdown_string.split('\n---\n')
     list_of_slides = []
     for j, text in enumerate(text_blocks):
-        if not all(char == '\n' for char in text):
+        if not all(char in ['\n', '-', ' '] for char in text):
             list_of_slides.append(text)
 
     return list_of_slides
@@ -337,8 +330,61 @@ def _boxes_in_slide(slide):
     return boxes
 
 
+def _return_layout_specs(num_of_boxes, style='pictureleft'):
+    # spec = (left, top, height, width)
+    specs_for_boxes = []
+
+    if num_of_boxes == 0:
+        specs_for_title = (0, 50, 20, 100)
+        specs_for_text = (15, 70, 50, 70)
+    else:
+        if 'pictureleft' in style:
+            specs_for_title = (50, 0, 20, 50)
+            specs_for_text = (52, 60, 65, 46)
+
+            if style == 'pictureleft_tiled' and (num_of_boxes % 2 == 0):
+                for left in [0, 25]:
+                    height = 100 / (num_of_boxes / 2)
+                    for j in range(num_of_boxes / 2):
+                        specs = (
+                            left, j * height, height, 25
+                        )
+                    specs_for_boxes.append(specs)
+            else:
+                for k in range(num_of_boxes):
+                    specs = (
+                        0, k * 100 / num_of_boxes, 100 / num_of_boxes, 50
+                    )
+                    specs_for_boxes.append(specs)
+        elif style == 'pictureright':
+            specs_for_title = (0, 0, 20, 50)
+            specs_for_text = (2, 60, 65, 46)
+
+            if style == 'pictureright_tiled' and (num_of_boxes % 2 == 0):
+                pass
+            else:
+                for k in range(num_of_boxes):
+                    specs = (
+                        50, k * 100 / num_of_boxes, 100 / num_of_boxes, 50
+                    )
+                    specs_for_boxes.append(specs)
+        elif style == 'picturemiddle':
+            specs_for_title = (0, 0, 20, 100)
+            specs_for_text = (27, 70, 65, 46)
+
+            for k in range(num_of_boxes):
+                w = 4
+                box_width = (100 - w * (1 + num_of_boxes)) / num_of_boxes
+                left = (k + 1) * w + k * box_width
+
+                specs = (left, 20, 40, box_width)
+                specs_for_boxes.append(specs)
+
+    return specs_for_boxes, specs_for_title, specs_for_text
+
+
 class Presentation(dict):
-    def __init__(self, markdown_string=None, simple=True):
+    def __init__(self, markdown_string=None, simple=True, style='pictureleft'):
         self['presentation'] = {
             'slides': [],
             'slidePreviews': [None for _ in range(496)],
@@ -347,13 +393,13 @@ class Presentation(dict):
         }
         if markdown_string:
             if simple:
-                self._markdown_to_presentation_simple(markdown_string)
+                self._markdown_to_presentation_simple(markdown_string, style)
             else:
                 self._markdown_to_presentation(markdown_string)
         else:
             self._add_empty_slide()
 
-    def _markdown_to_presentation_simple(self, markdown_string):
+    def _markdown_to_presentation_simple(self, markdown_string, style):
         list_of_slides = _list_of_slides(markdown_string)
 
         moods_bkgd_color = '#C7C8CA'
@@ -367,10 +413,10 @@ class Presentation(dict):
             'fontSize': 90,
         }
 
-        caption_style_attr = {
+        text_style_attr = {
             'color': moods_font_color,
             'fontFamily': 'Roboto',
-            'fontWeight': fontWeight_dict['Black']['fontWeight'],
+            'fontWeight': fontWeight_dict['Regular']['fontWeight'],
             'textAlign': 'left',
             'fontSize': 20,
         }
@@ -428,10 +474,10 @@ class Presentation(dict):
             self._color_background(moods_bkgd_color, slide_num)
 
             # collect text, code and urls
-            inCode = False
             title_lines = []
             url_lines = []
             text_lines = []
+            inCode = False
             for line in lines_in_slide:
                 # inCode handling
                 if line[ : 3] == '```' and len(line) > 3:
@@ -439,7 +485,7 @@ class Presentation(dict):
                 if line == '```':
                     inCode = False
 
-                if not inCode:
+                if not inCode and line != '```':
                     if len(line) > 0 and line[0] == '#':
                         title_lines.append(line)
                     elif line[ : 4] == 'url(':
@@ -454,50 +500,71 @@ class Presentation(dict):
                     else:
                         text_lines.append(line)
 
+            # clean titles
+            for title_index, title in enumerate(title_lines):
+                while '#' in title:
+                    title = title[1:]
+                title = _remove_extra_whitespace_from_line(title)
+                title_lines[title_index] = title
+
             # insert objects in slide
             num_of_boxes = len(url_lines) + len(lang_and_code_tuples)
-            if num_of_boxes == 0:
-                pass
-            if num_of_boxes == 1:
-                if len(title_lines) > 0:
-                    title = title_lines[0]
-                    while '#' in title:
-                        title = title[1:]
-                    title = _remove_extra_whitespace_from_line(title)
-                    self._insert(box='Text', text_or_url=title,
-                                 left=50, top=10, height=20,
-                                 width=50, slide=slide_num,
-                                 style_attr=title_style_attr)
+            all_specs = _return_layout_specs(
+                num_of_boxes, style
+            )
 
-                if len(url_lines) > 0:
-                    url = url_lines[0][4 : -1]
-                    if 'https://plot.ly' in url:
-                        box_name = 'Plotly'
-                    else:
-                        box_name = 'Image'
-                    self._insert(box=box_name, text_or_url=url,
-                                 left=0, top=0, height=100,
-                                 width=50, slide=slide_num)
-                if len(lang_and_code_tuples) > 0:
-                    language = lang_and_code_tuples[0][0]
-                    code = lang_and_code_tuples[0][1]
+            specs_for_boxes = all_specs[0]
+            specs_for_title = all_specs[1]
+            specs_for_text = all_specs[2]
+
+            # title
+            if len(title_lines) > 0:
+                title = title_lines[0]
+                self._insert(
+                    box='Text', text_or_url=title, left=specs_for_title[0],
+                    top=specs_for_title[1], height=specs_for_title[2],
+                    width=specs_for_title[3], slide=slide_num,
+                    style_attr=title_style_attr
+                )
+
+            # text
+            if len(text_lines) > 0:
+                text_block = string.join(text_lines, '\n')
+                self._insert(
+                    box='Text', text_or_url=text_block,
+                    left=specs_for_text[0], top=specs_for_text[1],
+                    height=specs_for_text[2], width=specs_for_text[3],
+                    slide=slide_num, style_attr=text_style_attr
+                )
+
+            url_and_code_blocks = list(url_lines + lang_and_code_tuples)
+            for k, specs in enumerate(specs_for_boxes):
+                url_or_code = url_and_code_blocks[k]
+                if isinstance(url_or_code, tuple):
+                    # code
+                    language = url_or_code[0]
+                    code = url_or_code[1]
                     box_name = 'CodePane'
 
                     props_attr = {}
                     props_attr['language'] = language
 
                     self._insert(box=box_name, text_or_url=code,
-                                 left=0, top=0, height=100,
-                                 width=50, slide=slide_num,
-                                 props_attr=props_attr)
+                                 left=specs[0], top=specs[1],
+                                 height=specs[2], width=specs[3],
+                                 slide=slide_num, props_attr=props_attr)
+                else:
+                    # url
+                    url = url_or_code[4 : -1]
+                    if 'https://plot.ly' in url:
+                        box_name = 'Plotly'
+                    else:
+                        box_name = 'Image'
 
-
-                if len(text_lines) > 0:
-                    text_block = string.join(text_lines, '\n')
-                    self._insert(box='Text', text_or_url=text_block,
-                                 left=52, top=60, height=65,
-                                 width=46, slide=slide_num,
-                                 style_attr=caption_style_attr)
+                    self._insert(box=box_name, text_or_url=url,
+                                 left=specs[0], top=specs[1],
+                                 height=specs[2], width=specs[3],
+                                 slide=slide_num)
 
 
     def _markdown_to_presentation(self, markdown_string):
