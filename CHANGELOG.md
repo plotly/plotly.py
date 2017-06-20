@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
-- `.create_facet_grid` now supports histogram traces.
+- `figure_factory.create_facet_grid` now supports histogram traces.
 
 ## [2.0.10] - 2017-06-12
 ### Added
