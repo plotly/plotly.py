@@ -25,6 +25,7 @@ MAX_TICKS_PER_AXIS = 5
 THRES_FOR_FLIPPED_FACET_TITLES = 10
 GRID_WIDTH = 1
 
+VALID_TRACE_TYPES = ['scatter', 'scattergl', 'histogram']
 
 CUSTOM_LABEL_ERROR = (
     "If you are using a dictionary for custom labels for the facet row/col, "
@@ -176,7 +177,7 @@ def _add_shapes_to_fig(fig, annot_rect_color, flipped_rows=False,
 def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
                                   colormap, num_of_rows,
                                   num_of_cols, facet_row_labels,
-                                  facet_col_labels, trace_type,
+                                  facet_col_labels, temp_trace,
                                   flipped_rows, flipped_cols, show_boxes,
                                   marker_color, kwargs_trace, kwargs_marker):
 
@@ -193,7 +194,7 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
                 x=group[1][x],
                 y=group[1][y],
                 mode='markers',
-                type=trace_type,
+                type=temp_trace,
                 name=group[0],
                 marker=dict(
                     color=colormap[group[0]],
@@ -214,7 +215,7 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
                     x=data_by_color[x],
                     y=data_by_color[y],
                     mode='markers',
-                    type=trace_type,
+                    type=temp_trace,
                     name=color_val,
                     marker=dict(
                         color=colormap[color_val],
@@ -265,7 +266,7 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
                             x=group_filtered[x],
                             y=group_filtered[y],
                             mode='markers',
-                            type=trace_type,
+                            type=temp_trace,
                             name=color_val,
                             marker=dict(
                                 color=colormap[color_val],
@@ -278,7 +279,7 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
                             x=group[x],
                             y=group[y],
                             mode='markers',
-                            type=trace_type,
+                            type=temp_trace,
                             name=color_val,
                             marker=dict(
                                 color=colormap[color_val],
@@ -311,7 +312,7 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
 def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
                                 colormap, num_of_rows,
                                 num_of_cols, facet_row_labels,
-                                facet_col_labels, trace_type,
+                                facet_col_labels, temp_trace,
                                 flipped_rows, flipped_cols, show_boxes,
                                 marker_color, kwargs_trace, kwargs_marker):
 
@@ -326,7 +327,7 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
             x=df[x],
             y=df[y],
             mode='markers',
-            type=trace_type,
+            type=temp_trace,
             marker=dict(
                 color=df[color_name],
                 colorscale=colormap,
@@ -346,7 +347,7 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
                 x=group[1][x],
                 y=group[1][y],
                 mode='markers',
-                type=trace_type,
+                type=temp_trace,
                 marker=dict(
                     color=df[color_name],
                     colorscale=colormap,
@@ -396,7 +397,7 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
                         x=group[x],
                         y=group[y],
                         mode='markers',
-                        type=trace_type,
+                        type=temp_trace,
                         marker=dict(
                             color=df[color_name],
                             colorscale=colormap,
@@ -411,7 +412,7 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
                         x=group[x],
                         y=group[y],
                         mode='markers',
-                        type=trace_type,
+                        type=temp_trace,
                         showlegend=False,
                         **kwargs
                     )
@@ -439,7 +440,7 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
 
 def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
                 num_of_cols, facet_row_labels, facet_col_labels,
-                trace_type, flipped_rows, flipped_cols, show_boxes,
+                temp_trace, flipped_rows, flipped_cols, show_boxes,
                 marker_color, kwargs_trace, kwargs_marker):
 
     fig = make_subplots(rows=num_of_rows, cols=num_of_cols,
@@ -452,7 +453,7 @@ def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
             x=df[x],
             y=df[y],
             mode='markers',
-            type=trace_type,
+            type=temp_trace,
             marker=dict(
                 color=marker_color,
                 **kwargs_marker
@@ -470,7 +471,7 @@ def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
                 x=group[1][x],
                 y=group[1][y],
                 mode='markers',
-                type=trace_type,
+                type=temp_trace,
                 marker=dict(
                     color=marker_color,
                     **kwargs_marker
@@ -514,7 +515,7 @@ def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
                     x=group[x],
                     y=group[y],
                     mode='markers',
-                    type=trace_type,
+                    type=temp_trace,
                     marker=dict(
                         color=marker_color,
                         **kwargs_marker
@@ -581,7 +582,7 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
     :param (int) height: the height of the facet grid figure.
     :param (int) width: the width of the facet grid figure.
     :param (str) trace_type: decides the type of plot to appear in the
-        facet grid. The options are 'scatter' and 'scattergl'.
+        facet grid. The options are 'scatter', 'scattergl' and 'histogram'.
         Default = 'scatter'.
     :param (str) scales: determines if axes have fixed ranges or not. Valid
         settings are 'fixed' (all axes fixed), 'free_x' (x axis free only),
@@ -726,10 +727,12 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
             "'scales' must be set to 'fixed', 'free_x', 'free_y' and 'free'."
         )
 
-    if trace_type not in ['scatter', 'scattergl']:
+    if trace_type not in VALID_TRACE_TYPES:
         raise exceptions.PlotlyError(
-            "'trace_type' must be 'scatter' or 'scattergl'."
+            "'trace_type' must be in {}".format(VALID_TRACE_TYPES)
         )
+
+    temp_trace = 'scatter' if (trace_type == 'histogram') else trace_type
 
     # seperate kwargs for marker and else
     if 'marker' in kwargs:
@@ -808,7 +811,7 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
             fig = _facet_grid_color_categorical(
                 df, x, y, facet_row, facet_col, color_name, colormap,
                 num_of_rows, num_of_cols, facet_row_labels, facet_col_labels,
-                trace_type, flipped_rows, flipped_cols, show_boxes,
+                temp_trace, flipped_rows, flipped_cols, show_boxes,
                 marker_color, kwargs_trace, kwargs_marker
             )
 
@@ -827,7 +830,7 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                 fig = _facet_grid_color_categorical(
                     df, x, y, facet_row, facet_col, color_name, colormap,
                     num_of_rows, num_of_cols, facet_row_labels,
-                    facet_col_labels, trace_type, flipped_rows,
+                    facet_col_labels, temp_trace, flipped_rows,
                     flipped_cols, show_boxes, marker_color, kwargs_trace,
                     kwargs_marker
                 )
@@ -839,7 +842,7 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                 fig = _facet_grid_color_numerical(
                     df, x, y, facet_row, facet_col, color_name,
                     colorscale_list, num_of_rows, num_of_cols,
-                    facet_row_labels, facet_col_labels, trace_type,
+                    facet_row_labels, facet_col_labels, temp_trace,
                     flipped_rows, flipped_cols, show_boxes, marker_color,
                     kwargs_trace, kwargs_marker
                 )
@@ -855,7 +858,7 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                 fig = _facet_grid_color_numerical(
                     df, x, y, facet_row, facet_col, color_name,
                     colorscale_list, num_of_rows, num_of_cols,
-                    facet_row_labels, facet_col_labels, trace_type,
+                    facet_row_labels, facet_col_labels, temp_trace,
                     flipped_rows, flipped_cols, show_boxes, marker_color,
                     kwargs_trace, kwargs_marker
                 )
@@ -864,7 +867,7 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                 fig = _facet_grid_color_numerical(
                     df, x, y, facet_row, facet_col, color_name,
                     colorscale_list, num_of_rows, num_of_cols,
-                    facet_row_labels, facet_col_labels, trace_type,
+                    facet_row_labels, facet_col_labels, temp_trace,
                     flipped_rows, flipped_cols, show_boxes, marker_color,
                     kwargs_trace, kwargs_marker
                 )
@@ -872,7 +875,7 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
     else:
         fig = _facet_grid(
             df, x, y, facet_row, facet_col, num_of_rows, num_of_cols,
-            facet_row_labels, facet_col_labels, trace_type, flipped_rows,
+            facet_row_labels, facet_col_labels, temp_trace, flipped_rows,
             flipped_cols, show_boxes, marker_color, kwargs_trace,
             kwargs_marker
         )
@@ -1011,5 +1014,11 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
             for key in fig['layout']:
                 if '{}axis'.format(x_y) in key and range_are_numbers:
                     fig['layout'][key]['range'] = [min_range, max_range]
+
+    if trace_type == 'histogram':
+        for trace in fig['data']:
+            trace['type'] = trace_type
+            del trace['marker']['size']
+            del trace['mode']
 
     return fig
