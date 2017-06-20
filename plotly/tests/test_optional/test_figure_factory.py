@@ -1950,11 +1950,8 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
     def test_valid_trace_type(self):
         data = pd.DataFrame([[0, 0], [1, 1]], columns=['a', 'b'])
 
-        pattern = "'trace_type' must be 'scatter' or 'scattergl'."
-
-        self.assertRaisesRegexp(PlotlyError, pattern,
-                                ff.create_facet_grid,
-                                data, 'a', 'b', trace_type='bar')
+        self.assertRaises(PlotlyError, ff.create_facet_grid,
+                          data, 'a', 'b', trace_type='foo')
 
     def test_valid_scales(self):
         data = pd.DataFrame([[0, 0], [1, 1]], columns=['a', 'b'])
