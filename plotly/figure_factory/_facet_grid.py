@@ -484,6 +484,7 @@ def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
             type=trace_type,
             marker=dict(
                 color=marker_color,
+                line=kwargs_marker['line']
             ),
             **kwargs_trace
         )
@@ -504,6 +505,7 @@ def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
                 type=trace_type,
                 marker=dict(
                     color=marker_color,
+                    line=kwargs_marker['line']
                 ),
                 **kwargs_trace
             )
@@ -550,6 +552,7 @@ def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
                     type=trace_type,
                     marker=dict(
                         color=marker_color,
+                        line=kwargs_marker['line']
                     ),
                     **kwargs_trace
                 )
