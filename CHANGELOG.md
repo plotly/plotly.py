@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.0.11] - 2017-06-20
+### Updated
+- Updated `plotly.min.js` to version 1.28.1 for `plotly.offline`.
+  - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1281----2017-06-20) for additional information regarding the updates.
+
 ## [2.0.10] - 2017-06-12
 ### Added
 - The figure_factory can now create facet grids with `.create_facet_grid`. Check it out with:
