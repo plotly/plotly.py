@@ -413,7 +413,7 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
                         mode='markers',
                         type=trace_type,
                         showlegend=False,
-                        **kwargs
+                        **kwargs_trace
                     )
                 fig.append_trace(trace, row_count + 1, col_count + 1)
                 if row_count == 0:
