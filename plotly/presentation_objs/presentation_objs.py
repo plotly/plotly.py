@@ -65,6 +65,7 @@ def _generate_id(size):
     id_str = ''
     for _ in range(size):
         id_str += random.choice(list(letters_and_numbers))
+
     return id_str
 
 _paragraph_styles = {'Body': {'color': '#3d3d3d',
