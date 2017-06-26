@@ -817,6 +817,8 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
     if 'line' not in kwargs_marker:
         if not ggplot2:
             kwargs_marker['line'] = {'color': 'darkgrey', 'width': 1}
+        else:
+            kwargs_marker['line'] = {}
 
     # default marker size
     if not ggplot2:
