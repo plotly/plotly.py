@@ -812,7 +812,7 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                 marker_color, kwargs_trace, kwargs_marker
             )
 
-        elif isinstance(df[color_name][0], Number):
+        elif isinstance(df[color_name].iloc[0], Number):
             if isinstance(colormap, dict):
                 show_legend = True
                 utils.validate_colors_dict(colormap, 'rgb')
