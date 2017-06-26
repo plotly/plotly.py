@@ -350,19 +350,26 @@ def _return_layout_specs(num_of_boxes, style='pictureleft'):
                         specs = (
                             left, j * height, height, 25
                         )
-                    specs_for_boxes.append(specs)
+                        specs_for_boxes.append(specs)
             else:
                 for k in range(num_of_boxes):
                     specs = (
                         0, k * 100 / num_of_boxes, 100 / num_of_boxes, 50
                     )
                     specs_for_boxes.append(specs)
+
         elif style == 'pictureright':
             specs_for_title = (0, 0, 20, 50)
             specs_for_text = (2, 60, 65, 46)
 
             if style == 'pictureright_tiled' and (num_of_boxes % 2 == 0):
-                pass
+                for left in [50, 75]:
+                    height = 100 / (num_of_boxes / 2)
+                    for j in range(num_of_boxes / 2):
+                        specs = (
+                            left, j * height, height, 25
+                        )
+                        specs_for_boxes.append(specs)
             else:
                 for k in range(num_of_boxes):
                     specs = (
@@ -385,7 +392,7 @@ def _return_layout_specs(num_of_boxes, style='pictureleft'):
 
 
 class Presentation(dict):
-    def __init__(self, markdown_string=None, simple=True, style='pictureleft'):
+    def __init__(self, markdown_string=None, style='pictureleft'):
         self['presentation'] = {
             'slides': [],
             'slidePreviews': [None for _ in range(496)],
@@ -393,10 +400,7 @@ class Presentation(dict):
             'paragraphStyles': _paragraph_styles
         }
         if markdown_string:
-            if simple:
                 self._markdown_to_presentation_simple(markdown_string, style)
-            else:
-                self._markdown_to_presentation(markdown_string)
         else:
             self._add_empty_slide()
 
@@ -566,183 +570,6 @@ class Presentation(dict):
                                  left=specs[0], top=specs[1],
                                  height=specs[2], width=specs[3],
                                  slide=slide_num)
-
-
-    def _markdown_to_presentation(self, markdown_string):
-        list_of_slides = _list_of_slides(markdown_string)
-
-        for slide_num, slide in enumerate(list_of_slides):
-            lines_in_slide = slide.split('\n')
-            boxes = _boxes_in_slide(slide)
-
-            # background image properties
-            bkrd_image_dict = {}
-            for line in lines_in_slide:
-                # transition
-                if 'transition:' in line:
-                    index = line.find('transition:')
-                    transition_text = line[index + len('transition:'): ]
-                    transitions = transition_text.split(';')
-
-                    while '' in transitions:
-                        transitions.remove('')
-
-                    for j, item in enumerate(transitions):
-                        transitions[j] = _remove_extra_whitespace_from_line(
-                            item
-                        )
-
-                    self._set_transition(transitions, slide_num)
-
-                if 'background-image:' in line:
-                    if 'url(' in line:
-                        url_index = line.find('url(')
-                        bkrd_url = line[url_index + len('url('): -1]
-
-                        bkrd_image_dict['background-image:'] = bkrd_url
-
-                for property_name in ['background-position:',
-                                      'background-repeat:',
-                                      'background-size:']:
-                    if property_name in line:
-                        index = line.find(property_name)
-                        prop = line[index + len(property_name): ]
-                        prop = _remove_extra_whitespace_from_line(prop)
-                        bkrd_image_dict[property_name] = prop
-
-            if 'background-image:' in bkrd_image_dict:
-                self._background_image(
-                    bkrd_image_dict['background-image:'],
-                    slide_num,
-                    bkrd_image_dict
-                )
-
-            for box in boxes:
-                # missing necessary style
-                for nec_key in NEEDED_STYLE_KEYS:
-                    if nec_key not in box[1].keys():
-                        raise exceptions.PlotlyError(
-                            "You are missing '{}' as one of the necessary "
-                            "style keys in your line. All the necessary "
-                            "style keys are {}".format(NEEDED_STYLE_KEYS)
-                        )
-
-                # default settings
-                style_attr = {}
-                props_attr = {}
-                for key in box[1].keys():
-                    if key in VALID_STYLE_KEYS:
-                        if key == 'fontWeight' and type(box[1][key]) == str:
-                            try:
-                                params = fontWeight_dict[box[1][key]]
-                                for item in params.items():
-                                    style_attr[item[0]] = item[1]
-                            except KeyError:
-                                raise exceptions.PlotlyError(
-                                    "If 'fontWeight' is a string, it must "
-                                    "belong to the values in {}".format(
-                                        fontWeight_dict.keys()
-                                    )
-                                )
-                        else:
-                            style_attr[key] = box[1][key]
-
-                    elif key in VALID_PROPS_KEYS:
-                        if key == 'theme':
-                            if box[1][key] not in CODEPANE_THEMES:
-                                raise exceptions.PlotlyError(
-                                    "Your 'theme' must be "
-                                    "in {}".format(CODEPANE_THEMES)
-                                )
-                        props_attr[key] = box[1][key]
-                    elif key not in NEEDED_STYLE_KEYS:
-                        raise exceptions.PlotlyError(
-                            "{} is not a valid styling key. The list of "
-                            "valid style keys are {}".format(
-                                key, VALID_STYLE_KEYS + VALID_PROPS_KEYS
-                            )
-                        )
-
-                # code
-                if box[0][ : 3] == '```':
-                    box_lines = box[0].split('\n')
-                    language = _remove_extra_whitespace_from_line(
-                        box_lines[0][3 : ]
-                    ).lower()
-                    if language == '' or language not in VALID_LANGUAGES:
-                        raise exceptions.PlotlyError(
-                            "The language of your code block should be "
-                            "clearly indicated after the first ``` that "
-                            "begins the code block. The valid languages to "
-                            "choose from are in {}".format(VALID_LANGUAGES)
-                        )
-                    codebox = ''
-                    for line in box_lines:
-                        if line[0 : 3] != '```':
-                            codebox += line
-                            codebox += '\n'
-
-                    props_attr['language'] = language
-
-                    self._insert(box='CodePane',
-                                 text_or_url=codebox,
-                                 left=box[1]['left'],
-                                 top=box[1]['top'],
-                                 height=box[1]['height'],
-                                 width=box[1]['width'],
-                                 slide=slide_num,
-                                 props_attr=props_attr,
-                                 style_attr=style_attr)
-
-                # image or plotly
-                elif box[0][: 4] == 'url(':
-                    url = box[0][4 : -1]
-
-                    # TODO: needs to support on-prem server name
-                    if 'https://plot.ly' in url:
-                        box_name = 'Plotly'
-                    else:
-                        box_name = 'Image'
-                    self._insert(box=box_name, text_or_url=url,
-                                 left=box[1]['left'], top=box[1]['top'],
-                                 height=box[1]['height'],
-                                 width=box[1]['width'], slide=slide_num,
-                                 props_attr=props_attr, style_attr=style_attr)
-
-                # text
-                else:
-                    box_lines = box[0].split('\n')
-                    text = box[0]
-
-                    # hyperlink
-                    first_line = _remove_extra_whitespace_from_line(box[0])
-                    if first_line[0] == '[' and first_line[-1] == ')':
-                        # extract only hypertext from text lines
-                        r_bracket_idx = first_line[1 : ].find(']') + 1
-                        l_paran_idx = first_line.find('(')
-                        if l_paran_idx == -1:
-                            raise exceptions.PlotlyError(
-                                "If you are trying to place hypertext in "
-                                "your presentation slide, be sure that "
-                                "your text has the form '[text](url)'. "
-                                "All other text outside the hypertext is "
-                                "ignored if you use the the []() "
-                                "notation."
-                            )
-
-                        text = first_line[1 : r_bracket_idx]
-                        url = first_line[l_paran_idx + 1 : -1]
-                        props_attr['href'] = url
-
-                    self._insert(box='Text',
-                                 text_or_url=text,
-                                 left=box[1]['left'],
-                                 top=box[1]['top'],
-                                 height=box[1]['height'],
-                                 width=box[1]['width'],
-                                 slide=slide_num,
-                                 props_attr=props_attr,
-                                 style_attr=style_attr)
 
 
     def _add_empty_slide(self):
