@@ -488,6 +488,7 @@ def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
             ),
             **kwargs_trace
         )
+
         if trace_type in ['scatter', 'scattergl']:
             trace['mode'] = 'markers'
             trace['marker'] = dict(color=marker_color, **kwargs_marker)
@@ -770,10 +771,10 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
             "'scales' must be set to 'fixed', 'free_x', 'free_y' and 'free'."
         )
 
-    if trace_type not in VALID_TRACE_TYPES:
-        raise exceptions.PlotlyError(
-            "'trace_type' must be in {}".format(VALID_TRACE_TYPES)
-        )
+    #if trace_type not in VALID_TRACE_TYPES:
+    #    raise exceptions.PlotlyError(
+    #        "'trace_type' must be in {}".format(VALID_TRACE_TYPES)
+    #    )
 
     # seperate kwargs for marker and else
     if 'marker' in kwargs:
@@ -988,15 +989,15 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
         fixed_axes = ['y']
     elif scales == 'free_y':
         fixed_axes = ['x']
-    else:
+    elif scales == 'free':
         fixed_axes = []
 
     # fixed ranges
-    for x_y in ['x', 'y']:
+    for x_y in fixed_axes:
         min_ranges = []
         max_ranges = []
         for trace in fig['data']:
-            if len(trace[x_y]) > 0:
+            if trace[x_y] is not None and len(trace[x_y]) > 0:
                 min_ranges.append(min(trace[x_y]))
                 max_ranges.append(max(trace[x_y]))
         while None in min_ranges:
