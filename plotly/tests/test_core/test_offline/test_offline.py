@@ -110,7 +110,7 @@ class PlotlyOfflineOtherDomainTestCase(PlotlyOfflineBaseTestCase):
         super(PlotlyOfflineOtherDomainTestCase, self).setUp()
         plotly.tools.set_config_file(plotly_domain='https://stage.plot.ly',
                                      plotly_api_domain='https://api-stage.plot.ly')
-        plotly.plotly.sign_in('PlotlyTestShark', 'kI2H0E7sTZ5RM9yoaK4X')
+        plotly.plotly.sign_in('PlotlyTestShark', 'YVsAvsGcGVxw11ct6Dff')
 
     def test_plot_rendered_if_non_plotly_domain(self):
         html = plotly.offline.plot(fig, output_type='div')
