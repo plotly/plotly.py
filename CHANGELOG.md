@@ -6,6 +6,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - `figure_factory.create_facet_grid` now supports histogram traces.
 
+## [2.0.12] - UNRELEASED
+### Updated
+- Updated `plotly.min.js` to version 1.28.2 for `plotly.offline`.
+  - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1282----2017-06-21) for additional information regarding the updates.
+
+## [2.0.11] - 2017-06-20
+### Updated
+- Updated `plotly.min.js` to version 1.28.1 for `plotly.offline`.
+  - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1281----2017-06-20) for additional information regarding the updates.
+
 ## [2.0.10] - 2017-06-12
 ### Added
 - The figure_factory can now create facet grids with `.create_facet_grid`. Check it out with:
