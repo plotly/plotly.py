@@ -331,7 +331,7 @@ def _boxes_in_slide(slide):
     return boxes
 
 
-def _return_layout_specs(num_of_boxes, style='pictureleft'):
+def _return_layout_specs(num_of_boxes, style, text_line_count):
     # spec = (left, top, height, width)
     specs_for_boxes = []
 
@@ -358,7 +358,7 @@ def _return_layout_specs(num_of_boxes, style='pictureleft'):
                     )
                     specs_for_boxes.append(specs)
 
-        elif style == 'pictureright':
+        elif 'pictureright' in style:
             specs_for_title = (0, 0, 20, 50)
             specs_for_text = (2, 60, 65, 46)
 
@@ -392,7 +392,7 @@ def _return_layout_specs(num_of_boxes, style='pictureleft'):
 
 
 class Presentation(dict):
-    def __init__(self, markdown_string=None, style='pictureleft'):
+    def __init__(self, markdown_string=None):
         self['presentation'] = {
             'slides': [],
             'slidePreviews': [None for _ in range(496)],
@@ -400,11 +400,11 @@ class Presentation(dict):
             'paragraphStyles': _paragraph_styles
         }
         if markdown_string:
-                self._markdown_to_presentation_simple(markdown_string, style)
+            self._markdown_to_presentation_simple(markdown_string)
         else:
             self._add_empty_slide()
 
-    def _markdown_to_presentation_simple(self, markdown_string, style):
+    def _markdown_to_presentation_simple(self, markdown_string):
         list_of_slides = _list_of_slides(markdown_string)
 
         moods_bkgd_color = '#C7C8CA'
@@ -415,7 +415,7 @@ class Presentation(dict):
             'fontFamily': 'Roboto',
             'fontWeight': fontWeight_dict['Black']['fontWeight'],
             'textAlign': 'center',
-            'fontSize': 90,
+            'fontSize': 62,
         }
 
         text_style_attr = {
@@ -425,6 +425,9 @@ class Presentation(dict):
             'textAlign': 'left',
             'fontSize': 20,
         }
+
+        caption_style_attr = copy.copy(text_style_attr)
+        caption_style_attr['textAlign'] = 'center'
 
         for slide_num, slide in enumerate(list_of_slides):
             lines_in_slide = slide.split('\n')
@@ -483,7 +486,8 @@ class Presentation(dict):
             url_lines = []
             text_lines = []
             inCode = False
-            for line in lines_in_slide:
+            slidestyle = None
+            for index, line in enumerate(lines_in_slide):
                 # inCode handling
                 if line[ : 3] == '```' and len(line) > 3:
                     inCode = True
@@ -493,7 +497,7 @@ class Presentation(dict):
                 if not inCode and line != '```':
                     if len(line) > 0 and line[0] == '#':
                         title_lines.append(line)
-                    elif line[ : 4] == 'url(':
+                    elif line.startswith('url('):
                         if line[-1] != ')':
                             raise exceptions.PlotlyError(
                                 "If you are trying to put a url of a Plotly "
@@ -503,7 +507,22 @@ class Presentation(dict):
                             )
                         url_lines.append(line)
                     else:
-                        text_lines.append(line)
+                        # find and set slide properties
+                        if line.startswith('class:') and title_lines == []:
+                            slidestyle = line[len('class:'):]
+                            slidestyle = _remove_extra_whitespace_from_line(
+                                slidestyle
+                            )
+                            if slidestyle not in VALID_SLIDE_STYLES:
+                                raise exceptions.PlotlyError(
+                                    "Your 'class: _____' at the top of your "
+                                    "slide must be in {}".format(
+                                        VALID_SLIDE_STYLES
+                                    )
+                                )
+
+                        elif line not in ['\n', ' '] and title_lines != []:
+                            text_lines.append(line)
 
             # clean titles
             for title_index, title in enumerate(title_lines):
@@ -512,10 +531,24 @@ class Presentation(dict):
                 title = _remove_extra_whitespace_from_line(title)
                 title_lines[title_index] = title
 
-            # insert objects in slide
-            num_of_boxes = len(url_lines) + len(lang_and_code_tuples)
+            # text block
+            text_block = string.join(text_lines, '\n')
+            text_line_count = text_block.count('\n') + 1
+
+            print text_line_count
+
+            # pick slide styles
+            if not slidestyle:
+                num_of_boxes = len(url_lines) + len(lang_and_code_tuples)
+                if num_of_boxes == 3:
+                    slidestyle = 'picturemiddle'
+                elif slide_num % 2 == 0:
+                    slidestyle = 'pictureleft_tiled'
+                elif slide_num % 2 == 1:
+                    slidestyle = 'pictureright_tiled'
+
             all_specs = _return_layout_specs(
-                num_of_boxes, style
+                num_of_boxes, slidestyle, text_line_count
             )
 
             specs_for_boxes = all_specs[0]
@@ -524,17 +557,15 @@ class Presentation(dict):
 
             # title
             if len(title_lines) > 0:
-                title = title_lines[0]
                 self._insert(
-                    box='Text', text_or_url=title, left=specs_for_title[0],
-                    top=specs_for_title[1], height=specs_for_title[2],
-                    width=specs_for_title[3], slide=slide_num,
-                    style_attr=title_style_attr
+                    box='Text', text_or_url=title_lines[0],
+                    left=specs_for_title[0], top=specs_for_title[1],
+                    height=specs_for_title[2], width=specs_for_title[3],
+                    slide=slide_num, style_attr=title_style_attr
                 )
 
             # text
             if len(text_lines) > 0:
-                text_block = string.join(text_lines, '\n')
                 self._insert(
                     box='Text', text_or_url=text_block,
                     left=specs_for_text[0], top=specs_for_text[1],
