@@ -488,7 +488,8 @@ def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
             type=trace_type,
             marker=dict(
                 color=marker_color,
-                line=kwargs_marker['line']
+                line=kwargs_marker['line'],
+                #opacity=kwargs_marker['opacity'],
             ),
             **kwargs_trace
         )
@@ -512,7 +513,8 @@ def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
                 type=trace_type,
                 marker=dict(
                     color=marker_color,
-                    line=kwargs_marker['line']
+                    line=kwargs_marker['line'],
+                    #opacity=kwargs_marker['opacity'],
                 ),
                 **kwargs_trace
             )
@@ -562,7 +564,8 @@ def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
                     type=trace_type,
                     marker=dict(
                         color=marker_color,
-                        line=kwargs_marker['line']
+                        line=kwargs_marker['line'],
+                        #opacity=kwargs_marker['opacity'],
                     ),
                     **kwargs_trace
                 )
@@ -812,7 +815,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
 
     if 'opacity' not in kwargs_marker:
         if not ggplot2:
-            kwargs_marker['opacity'] = 0.75
+            kwargs_trace['opacity'] = 0.6
 
     if 'line' not in kwargs_marker:
         if not ggplot2:
