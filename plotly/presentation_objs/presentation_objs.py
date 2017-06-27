@@ -331,7 +331,7 @@ def _boxes_in_slide(slide):
     return boxes
 
 
-def _return_layout_specs(num_of_boxes, style, text_line_count):
+def _return_layout_specs(num_of_boxes, style):
     # spec = (left, top, height, width)
     specs_for_boxes = []
 
@@ -535,8 +535,6 @@ class Presentation(dict):
             text_block = string.join(text_lines, '\n')
             text_line_count = text_block.count('\n') + 1
 
-            print text_line_count
-
             # pick slide styles
             if not slidestyle:
                 num_of_boxes = len(url_lines) + len(lang_and_code_tuples)
@@ -548,7 +546,7 @@ class Presentation(dict):
                     slidestyle = 'pictureright_tiled'
 
             all_specs = _return_layout_specs(
-                num_of_boxes, slidestyle, text_line_count
+                num_of_boxes, slidestyle
             )
 
             specs_for_boxes = all_specs[0]
