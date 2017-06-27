@@ -1999,6 +1999,15 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
                                 data, 'a', 'b', color_name='a',
                                 colormap=color_dict)
 
+
+    def test_valid_index(self):
+        data = pd.DataFrame([[2, 3, 4], [4, 5, 6]],
+                            columns=['a', 'b', 'c'])
+
+        self.assertRaises(KeyError, ff.create_facet_grid, data, 'a', 'b',
+                          color_name='c')
+
+
     def test_valid_colorscale_name(self):
         data = pd.DataFrame([[0, 1, 2], [3, 4, 5]],
                             columns=['a', 'b', 'c'])
