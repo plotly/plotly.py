@@ -896,6 +896,27 @@ class grid_ops:
                     req_col.id = '{0}:{1}'.format(grid_id, resp_col['uid'])
                     response_columns.remove(resp_col)
 
+    @classmethod
+    def _return_rows_as_string_if_contains_strings(cls, rows):
+        hasStrings = False
+        if isinstance(rows, list):
+            for row in rows:
+                if any(isinstance(item, str) for item in row):
+                    hasStrings = True
+                    break
+
+        if hasStrings:
+            all_row_strings = []
+            for row in rows:
+                row_string = '[' + (len(row) - 1) * '"{}",' + '"{}"' + ']'
+                row_string = row_string.format(*row)
+                all_row_strings.append(row_string)
+
+            rows_template = '[' + (len(rows) - 1) * '{},' + '{}' + ']'
+            rows_string = rows_template.format(*all_row_strings)
+
+        return rows_string
+
     @staticmethod
     def ensure_uploaded(fid):
         if fid:
@@ -1141,6 +1162,7 @@ class grid_ops:
                                 'column' if n_columns == 1 else 'columns'))
 
         fid = grid_id
+        rows = cls._return_rows_as_string_if_contains_strings(rows)
         v2.grids.row(fid, {'rows': rows})
 
         if grid:
