@@ -898,22 +898,14 @@ class grid_ops:
 
     @classmethod
     def _return_rows_as_string_if_contains_strings(cls, rows):
-        hasStrings = False
-        if isinstance(rows, list):
-            for row in rows:
-                if any(isinstance(item, str) for item in row):
-                    hasStrings = True
-                    break
+        all_row_strings = []
+        for row in rows:
+            row_string = '[' + (len(row) - 1) * '"{}",' + '"{}"' + ']'
+            row_string = row_string.format(*row)
+            all_row_strings.append(row_string)
 
-        if hasStrings:
-            all_row_strings = []
-            for row in rows:
-                row_string = '[' + (len(row) - 1) * '"{}",' + '"{}"' + ']'
-                row_string = row_string.format(*row)
-                all_row_strings.append(row_string)
-
-            rows_template = '[' + (len(rows) - 1) * '{},' + '{}' + ']'
-            rows_string = rows_template.format(*all_row_strings)
+        rows_template = '[' + (len(rows) - 1) * '{},' + '{}' + ']'
+        rows_string = rows_template.format(*all_row_strings)
 
         return rows_string
 
@@ -1162,8 +1154,17 @@ class grid_ops:
                                 'column' if n_columns == 1 else 'columns'))
 
         fid = grid_id
-        rows = cls._return_rows_as_string_if_contains_strings(rows)
-        v2.grids.row(fid, {'rows': rows})
+        hasStrings = False
+        if isinstance(rows, list):
+            for row in rows:
+                if any(isinstance(item, str) for item in row):
+                    hasStrings = True
+                    break
+        if hasStrings:
+            rows_string = cls._return_rows_as_string_if_contains_strings(rows)
+            v2.grids.row(fid, {'rows': rows_string})
+        else:
+            v2.grids.row(fid, {'rows': rows})
 
         if grid:
             longest_column_length = max([len(col.data) for col in grid])
