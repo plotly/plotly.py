@@ -637,7 +637,8 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
     :param (int) height: the height of the facet grid figure.
     :param (int) width: the width of the facet grid figure.
     :param (str) trace_type: decides the type of plot to appear in the
-        facet grid. The options are 'scatter', 'scattergl' and 'histogram'.
+        facet grid. The options are 'scatter', 'scattergl', 'histogram',
+        'bar', and 'box'.
         Default = 'scatter'.
     :param (str) scales: determines if axes have fixed ranges or not. Valid
         settings are 'fixed' (all axes fixed), 'free_x' (x axis free only),
@@ -668,7 +669,6 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
         y='cty',
         facet_col='cyl',
     )
-
     py.iplot(fig, filename='facet_grid_mpg_one_way_facet')
     ```
 
@@ -688,7 +688,6 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
         facet_row='drv',
         facet_col='cyl',
     )
-
     py.iplot(fig, filename='facet_grid_mpg_two_way_facet')
     ```
 
@@ -751,6 +750,26 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
     )
 
     py.iplot(fig, filename='facet_grid_mtcars_custom_labels')
+    ```
+
+    Example 6: Other Trace Type
+    ```
+    import plotly.plotly as py
+    import plotly.figure_factory as ff
+
+    import pandas as pd
+
+    mtcars = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/mtcars.csv')
+
+    fig = ff.create_facet_grid(
+        mtcars,
+        x='wt',
+        y='mpg',
+        facet_col='cyl',
+        trace_type='histogram',
+    )
+
+    py.iplot(fig, filename='facet_grid_mtcars_other_trace_type')
     ```
     """
     if not pd:
