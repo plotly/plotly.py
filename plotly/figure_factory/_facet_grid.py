@@ -815,10 +815,10 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
             "'scales' must be set to 'fixed', 'free_x', 'free_y' and 'free'."
         )
 
-    if trace_type not in VALID_TRACE_TYPES:
-        raise exceptions.PlotlyError(
-            "'trace_type' must be in {}".format(VALID_TRACE_TYPES)
-        )
+    #if trace_type not in VALID_TRACE_TYPES:
+    #    raise exceptions.PlotlyError(
+    #        "'trace_type' must be in {}".format(VALID_TRACE_TYPES)
+    #    )
 
     if trace_type == 'histogram':
         SUBPLOT_SPACING = 0.06
