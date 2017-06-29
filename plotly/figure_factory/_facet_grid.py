@@ -5,8 +5,9 @@ from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
 from plotly.tools import make_subplots
 
-from numbers import Number
 import math
+import copy
+from numbers import Number
 
 pd = optional_imports.get_module('pandas')
 
@@ -489,7 +490,6 @@ def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
             marker=dict(
                 color=marker_color,
                 line=kwargs_marker['line'],
-                #opacity=kwargs_marker['opacity'],
             ),
             **kwargs_trace
         )
@@ -514,7 +514,6 @@ def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
                 marker=dict(
                     color=marker_color,
                     line=kwargs_marker['line'],
-                    #opacity=kwargs_marker['opacity'],
                 ),
                 **kwargs_trace
             )
@@ -565,7 +564,6 @@ def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
                     marker=dict(
                         color=marker_color,
                         line=kwargs_marker['line'],
-                        #opacity=kwargs_marker['opacity'],
                     ),
                     **kwargs_trace
                 )
@@ -818,14 +816,15 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
 
     # seperate kwargs for marker and else
     if 'marker' in kwargs:
-        kwargs_marker = kwargs['marker']
+        kwargs_marker = copy.copy(kwargs['marker'])
     else:
         kwargs_marker = {}
-    for param in ['color']:
-        kwargs_marker.pop(param, None)
+    marker_color = kwargs_marker.pop('color', None)
     kwargs.pop('marker', None)
-    kwargs_trace = kwargs
+    kwargs_trace = copy.copy(kwargs)
 
+    print kwargs_marker
+    print kwargs_trace
     if 'size' not in kwargs_marker:
         if ggplot2:
             kwargs_marker['size'] = 5
@@ -844,7 +843,8 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
 
     # default marker size
     if not ggplot2:
-        marker_color = 'rgb(31, 119, 180)'
+        if not marker_color:
+            marker_color = 'rgb(31, 119, 180)'
     else:
         marker_color = 'rgb(0, 0, 0)'
 
