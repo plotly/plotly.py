@@ -18,7 +18,6 @@ GRID_COLOR = '#ffffff'
 LEGEND_COLOR = '#efefef'
 PLOT_BGCOLOR = '#ededed'
 ANNOT_RECT_COLOR = '#d0d0d0'
-SUBPLOT_SPACING = 0.015
 LEGEND_BORDER_WIDTH = 1
 LEGEND_ANNOT_X = 1.05
 LEGEND_ANNOT_Y = 0.5
@@ -72,7 +71,8 @@ def _legend_annotation(color_name):
     return legend_title
 
 
-def _annotation_dict(text, lane, num_of_lanes, row_col='col', flipped=True):
+def _annotation_dict(text, lane, num_of_lanes, SUBPLOT_SPACING, row_col='col',
+                     flipped=True):
     l = (1 - (num_of_lanes - 1) * SUBPLOT_SPACING) / (num_of_lanes)
     if not flipped:
         xanchor = 'center'
@@ -189,8 +189,8 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
                                   colormap, num_of_rows, num_of_cols,
                                   facet_row_labels, facet_col_labels,
                                   trace_type, flipped_rows, flipped_cols,
-                                  show_boxes, marker_color, kwargs_trace,
-                                  kwargs_marker):
+                                  show_boxes, SUBPLOT_SPACING, marker_color,
+                                  kwargs_trace, kwargs_marker):
 
     fig = make_subplots(rows=num_of_rows, cols=num_of_cols,
                         shared_xaxes=True, shared_yaxes=True,
@@ -257,6 +257,7 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
                     label,
                     num_of_rows - j if facet_row else j + 1,
                     num_of_rows if facet_row else num_of_cols,
+                    SUBPLOT_SPACING,
                     'row' if facet_row else 'col',
                     flipped_rows)
             )
@@ -319,12 +320,14 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
                                           facet_col_labels, facet_col)
                     annotations.append(
                         _annotation_dict(label, col_count + 1, num_of_cols,
+                                         SUBPLOT_SPACING,
                                          row_col='col', flipped=flipped_cols)
                         )
             label = _return_label(row_values[row_count],
                                   facet_row_labels, facet_row)
             annotations.append(
                 _annotation_dict(label, num_of_rows - row_count, num_of_rows,
+                                 SUBPLOT_SPACING,
                                  row_col='row', flipped=flipped_rows)
             )
 
@@ -339,7 +342,8 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
                                 num_of_cols, facet_row_labels,
                                 facet_col_labels, trace_type,
                                 flipped_rows, flipped_cols, show_boxes,
-                                marker_color, kwargs_trace, kwargs_marker):
+                                SUBPLOT_SPACING, marker_color, kwargs_trace,
+                                kwargs_marker):
 
     fig = make_subplots(rows=num_of_rows, cols=num_of_cols,
                         shared_xaxes=True, shared_yaxes=True,
@@ -406,6 +410,7 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
                     label,
                     num_of_rows - j if facet_row else j + 1,
                     num_of_rows if facet_row else num_of_cols,
+                    SUBPLOT_SPACING,
                     'row' if facet_row else 'col',
                     flipped=flipped_rows)
             )
@@ -458,13 +463,14 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
                                           facet_col_labels, facet_col)
                     annotations.append(
                         _annotation_dict(label, col_count + 1, num_of_cols,
+                                         SUBPLOT_SPACING,
                                          row_col='col', flipped=flipped_cols)
                         )
             label = _return_label(row_values[row_count],
                                   facet_row_labels, facet_row)
             annotations.append(
                 _annotation_dict(row_values[row_count],
-                                 num_of_rows - row_count, num_of_rows,
+                                 num_of_rows - row_count, num_of_rows, SUBPLOT_SPACING,
                                  row_col='row', flipped=flipped_rows)
             )
 
@@ -477,7 +483,7 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
 def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
                 num_of_cols, facet_row_labels, facet_col_labels,
                 trace_type, flipped_rows, flipped_cols, show_boxes,
-                marker_color, kwargs_trace, kwargs_marker):
+                SUBPLOT_SPACING, marker_color, kwargs_trace, kwargs_marker):
 
     fig = make_subplots(rows=num_of_rows, cols=num_of_cols,
                         shared_xaxes=True, shared_yaxes=True,
@@ -541,6 +547,7 @@ def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
                     label,
                     num_of_rows - j if facet_row else j + 1,
                     num_of_rows if facet_row else num_of_cols,
+                    SUBPLOT_SPACING,
                     'row' if facet_row else 'col',
                     flipped_rows
                 )
@@ -581,7 +588,7 @@ def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
                                           facet_col_labels,
                                           facet_col)
                     annotations.append(
-                        _annotation_dict(label, col_count + 1, num_of_cols,
+                        _annotation_dict(label, col_count + 1, num_of_cols, SUBPLOT_SPACING,
                                          row_col='col', flipped=flipped_cols)
                         )
 
@@ -589,7 +596,7 @@ def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
                                   facet_row_labels,
                                   facet_row)
             annotations.append(
-                _annotation_dict(label, num_of_rows - row_count, num_of_rows,
+                _annotation_dict(label, num_of_rows - row_count, num_of_rows, SUBPLOT_SPACING,
                                  row_col='row', flipped=flipped_rows)
             )
 
@@ -762,7 +769,6 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
     fig = ff.create_facet_grid(
         mtcars,
         x='wt',
-        y='mpg',
         facet_col='cyl',
         trace_type='histogram',
     )
@@ -814,17 +820,20 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
             "'trace_type' must be in {}".format(VALID_TRACE_TYPES)
         )
 
+    if trace_type == 'histogram':
+        SUBPLOT_SPACING = 0.06
+    else:
+        SUBPLOT_SPACING = 0.015
+
     # seperate kwargs for marker and else
     if 'marker' in kwargs:
-        kwargs_marker = copy.copy(kwargs['marker'])
+        kwargs_marker = kwargs['marker']
     else:
         kwargs_marker = {}
     marker_color = kwargs_marker.pop('color', None)
     kwargs.pop('marker', None)
-    kwargs_trace = copy.copy(kwargs)
+    kwargs_trace = kwargs
 
-    print kwargs_marker
-    print kwargs_trace
     if 'size' not in kwargs_marker:
         if ggplot2:
             kwargs_marker['size'] = 5
@@ -900,7 +909,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
                 df, x, y, facet_row, facet_col, color_name, colormap,
                 num_of_rows, num_of_cols, facet_row_labels, facet_col_labels,
                 trace_type, flipped_rows, flipped_cols, show_boxes,
-                marker_color, kwargs_trace, kwargs_marker
+                SUBPLOT_SPACING, marker_color, kwargs_trace, kwargs_marker
             )
 
         elif isinstance(df[color_name][0], Number):
@@ -919,8 +928,8 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
                     df, x, y, facet_row, facet_col, color_name, colormap,
                     num_of_rows, num_of_cols, facet_row_labels,
                     facet_col_labels, trace_type, flipped_rows,
-                    flipped_cols, show_boxes, marker_color, kwargs_trace,
-                    kwargs_marker
+                    flipped_cols, show_boxes, SUBPLOT_SPACING, marker_color,
+                    kwargs_trace, kwargs_marker
                 )
 
             elif isinstance(colormap, list):
@@ -931,8 +940,8 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
                     df, x, y, facet_row, facet_col, color_name,
                     colorscale_list, num_of_rows, num_of_cols,
                     facet_row_labels, facet_col_labels, trace_type,
-                    flipped_rows, flipped_cols, show_boxes, marker_color,
-                    kwargs_trace, kwargs_marker
+                    flipped_rows, flipped_cols, show_boxes, SUBPLOT_SPACING,
+                    marker_color, kwargs_trace, kwargs_marker
                 )
             elif isinstance(colormap, str):
                 if colormap in colors.PLOTLY_SCALES.keys():
@@ -947,8 +956,8 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
                     df, x, y, facet_row, facet_col, color_name,
                     colorscale_list, num_of_rows, num_of_cols,
                     facet_row_labels, facet_col_labels, trace_type,
-                    flipped_rows, flipped_cols, show_boxes, marker_color,
-                    kwargs_trace, kwargs_marker
+                    flipped_rows, flipped_cols, show_boxes, SUBPLOT_SPACING,
+                    marker_color, kwargs_trace, kwargs_marker
                 )
             else:
                 colorscale_list = colors.PLOTLY_SCALES['Reds']
@@ -956,16 +965,16 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
                     df, x, y, facet_row, facet_col, color_name,
                     colorscale_list, num_of_rows, num_of_cols,
                     facet_row_labels, facet_col_labels, trace_type,
-                    flipped_rows, flipped_cols, show_boxes, marker_color,
-                    kwargs_trace, kwargs_marker
+                    flipped_rows, flipped_cols, show_boxes, SUBPLOT_SPACING,
+                    marker_color, kwargs_trace, kwargs_marker
                 )
 
     else:
         fig = _facet_grid(
             df, x, y, facet_row, facet_col, num_of_rows, num_of_cols,
             facet_row_labels, facet_col_labels, trace_type, flipped_rows,
-            flipped_cols, show_boxes, marker_color, kwargs_trace,
-            kwargs_marker
+            flipped_cols, show_boxes, SUBPLOT_SPACING, marker_color,
+            kwargs_trace, kwargs_marker
         )
 
     if not height:
