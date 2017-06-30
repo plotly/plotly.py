@@ -446,7 +446,7 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
                     trace = dict(
                         type=trace_type,
                         showlegend=False,
-                        **kwargs
+                        **kwargs_trace
                     )
 
                 if x:
@@ -883,7 +883,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
                     )
     show_legend = False
     if color_name:
-        if isinstance(df[color_name][0], str) or color_is_cat:
+        if isinstance(df[color_name].iloc[0], str) or color_is_cat:
             show_legend = True
             if isinstance(colormap, dict):
                 utils.validate_colors_dict(colormap, 'rgb')
@@ -912,7 +912,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
                 SUBPLOT_SPACING, marker_color, kwargs_trace, kwargs_marker
             )
 
-        elif isinstance(df[color_name][0], Number):
+        elif isinstance(df[color_name].iloc[0], Number):
             if isinstance(colormap, dict):
                 show_legend = True
                 utils.validate_colors_dict(colormap, 'rgb')
