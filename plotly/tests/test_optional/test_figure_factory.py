@@ -1935,6 +1935,19 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
                                 ff.create_facet_grid,
                                 data, 'a', 'b')
 
+    def test_x_and_y_for_scatter(self):
+        data = pd.DataFrame([[0, 0], [1, 1]], columns=['a', 'b'])
+
+        pattern = (
+            "You need to input 'x' and 'y' if you are you are using a "
+            "trace_type of 'scatter' or 'scattergl'."
+        )
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                ff.create_facet_grid,
+                                data, 'a')
+
+
     def test_valid_col_selection(self):
         data = pd.DataFrame([[0, 0], [1, 1]], columns=['a', 'b'])
 
@@ -1950,11 +1963,8 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
     def test_valid_trace_type(self):
         data = pd.DataFrame([[0, 0], [1, 1]], columns=['a', 'b'])
 
-        pattern = "'trace_type' must be 'scatter' or 'scattergl'."
-
-        self.assertRaisesRegexp(PlotlyError, pattern,
-                                ff.create_facet_grid,
-                                data, 'a', 'b', trace_type='bar')
+        self.assertRaises(PlotlyError, ff.create_facet_grid,
+                          data, 'a', 'b', trace_type='foo')
 
     def test_valid_scales(self):
         data = pd.DataFrame([[0, 0], [1, 1]], columns=['a', 'b'])
@@ -2021,10 +2031,11 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
         )
 
         exp_facet_grid = {
-            'data': [{'marker': {'color': 'rgba(31, 119, 180, 0.5)',
+            'data': [{'marker': {'color': 'rgb(31, 119, 180)',
                 'line': {'color': 'darkgrey', 'width': 1},
                 'size': 8},
                'mode': 'markers',
+               'opacity': 0.6,
                'type': 'scatter',
                'x': [1.8,
                     1.8,
@@ -2042,10 +2053,11 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
                     16,
                     20],
                'yaxis': 'y1'},
-              {'marker': {'color': 'rgba(31, 119, 180, 0.5)',
+              {'marker': {'color': 'rgb(31, 119, 180)',
                 'line': {'color': 'darkgrey', 'width': 1},
                 'size': 8},
                'mode': 'markers',
+               'opacity': 0.6,
                'type': 'scatter',
                'x':     [2.8,
                    2.8,

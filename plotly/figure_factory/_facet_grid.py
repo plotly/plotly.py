@@ -5,8 +5,9 @@ from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
 from plotly.tools import make_subplots
 
-from numbers import Number
 import math
+import copy
+from numbers import Number
 
 pd = optional_imports.get_module('pandas')
 
@@ -17,7 +18,6 @@ GRID_COLOR = '#ffffff'
 LEGEND_COLOR = '#efefef'
 PLOT_BGCOLOR = '#ededed'
 ANNOT_RECT_COLOR = '#d0d0d0'
-SUBPLOT_SPACING = 0.015
 LEGEND_BORDER_WIDTH = 1
 LEGEND_ANNOT_X = 1.05
 LEGEND_ANNOT_Y = 0.5
@@ -25,6 +25,7 @@ MAX_TICKS_PER_AXIS = 5
 THRES_FOR_FLIPPED_FACET_TITLES = 10
 GRID_WIDTH = 1
 
+VALID_TRACE_TYPES = ['scatter', 'scattergl', 'histogram', 'bar', 'box']
 
 CUSTOM_LABEL_ERROR = (
     "If you are using a dictionary for custom labels for the facet row/col, "
@@ -70,7 +71,8 @@ def _legend_annotation(color_name):
     return legend_title
 
 
-def _annotation_dict(text, lane, num_of_lanes, row_col='col', flipped=True):
+def _annotation_dict(text, lane, num_of_lanes, SUBPLOT_SPACING, row_col='col',
+                     flipped=True):
     l = (1 - (num_of_lanes - 1) * SUBPLOT_SPACING) / (num_of_lanes)
     if not flipped:
         xanchor = 'center'
@@ -125,6 +127,9 @@ def _axis_title_annotation(text, x_or_y_axis):
         y_pos = 0.5
         textangle = 270
 
+    if not text:
+        text = ''
+
     annot = {'font': {'color': '#000000', 'size': AXIS_TITLE_SIZE},
              'showarrow': False,
              'text': text,
@@ -173,12 +178,19 @@ def _add_shapes_to_fig(fig, annot_rect_color, flipped_rows=False,
                 fig['layout']['shapes'].append(shape)
 
 
+def _make_trace_for_scatter(trace, trace_type, color, **kwargs_marker):
+    if trace_type in ['scatter', 'scattergl']:
+        trace['mode'] = 'markers'
+        trace['marker'] = dict(color=color, **kwargs_marker)
+    return trace
+
+
 def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
-                                  colormap, num_of_rows,
-                                  num_of_cols, facet_row_labels,
-                                  facet_col_labels, trace_type,
-                                  flipped_rows, flipped_cols, show_boxes,
-                                  marker_color, kwargs_trace, kwargs_marker):
+                                  colormap, num_of_rows, num_of_cols,
+                                  facet_row_labels, facet_col_labels,
+                                  trace_type, flipped_rows, flipped_cols,
+                                  show_boxes, SUBPLOT_SPACING, marker_color,
+                                  kwargs_trace, kwargs_marker):
 
     fig = make_subplots(rows=num_of_rows, cols=num_of_cols,
                         shared_xaxes=True, shared_yaxes=True,
@@ -189,18 +201,22 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
     if not facet_row and not facet_col:
         color_groups = list(df.groupby(color_name))
         for group in color_groups:
-            trace = graph_objs.Scatter(
-                x=group[1][x],
-                y=group[1][y],
-                mode='markers',
+            trace = dict(
                 type=trace_type,
                 name=group[0],
                 marker=dict(
                     color=colormap[group[0]],
-                    **kwargs_marker
                 ),
                 **kwargs_trace
             )
+            if x:
+                trace['x'] = group[1][x]
+            if y:
+                trace['y'] = group[1][y]
+            trace = _make_trace_for_scatter(
+                trace, trace_type, colormap[group[0]], **kwargs_marker
+            )
+
             fig.append_trace(trace, 1, 1)
 
     elif (facet_row and not facet_col) or (not facet_row and facet_col):
@@ -210,18 +226,22 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
         for j, group in enumerate(groups_by_facet):
             for color_val in df[color_name].unique():
                 data_by_color = group[1][group[1][color_name] == color_val]
-                trace = graph_objs.Scatter(
-                    x=data_by_color[x],
-                    y=data_by_color[y],
-                    mode='markers',
+                trace = dict(
                     type=trace_type,
                     name=color_val,
                     marker=dict(
                         color=colormap[color_val],
-                        **kwargs_marker
                     ),
                     **kwargs_trace
                 )
+                if x:
+                    trace['x'] = data_by_color[x]
+                if y:
+                    trace['y'] = data_by_color[y]
+                trace = _make_trace_for_scatter(
+                    trace, trace_type, colormap[color_val], **kwargs_marker
+                )
+
                 fig.append_trace(trace,
                                  j + 1 if facet_row else 1,
                                  1 if facet_row else j + 1)
@@ -237,6 +257,7 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
                     label,
                     num_of_rows - j if facet_row else j + 1,
                     num_of_rows if facet_row else num_of_cols,
+                    SUBPLOT_SPACING,
                     'row' if facet_row else 'col',
                     flipped_rows)
             )
@@ -261,44 +282,52 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
                     if group.values.tolist() != [[None, None, None]]:
                         group_filtered = group[group[color_name] == color_val]
 
-                        trace = graph_objs.Scatter(
-                            x=group_filtered[x],
-                            y=group_filtered[y],
-                            mode='markers',
+                        trace = dict(
                             type=trace_type,
                             name=color_val,
                             marker=dict(
                                 color=colormap[color_val],
-                                **kwargs_marker
                             ),
                             **kwargs_trace
                         )
+                        new_x = group_filtered[x]
+                        new_y = group_filtered[y]
                     else:
-                        trace = graph_objs.Scatter(
-                            x=group[x],
-                            y=group[y],
-                            mode='markers',
+                        trace = dict(
                             type=trace_type,
                             name=color_val,
                             marker=dict(
                                 color=colormap[color_val],
-                                **kwargs_marker
                             ),
                             showlegend=False,
                             **kwargs_trace
                         )
+                        new_x = group[x]
+                        new_y = group[y]
+
+                    if x:
+                        trace['x'] = new_x
+                    if y:
+                        trace['y'] = new_y
+                    trace = _make_trace_for_scatter(
+                        trace, trace_type, colormap[color_val],
+                        **kwargs_marker
+                    )
+
                     fig.append_trace(trace, row_count + 1, col_count + 1)
                 if row_count == 0:
                     label = _return_label(col_values[col_count],
                                           facet_col_labels, facet_col)
                     annotations.append(
                         _annotation_dict(label, col_count + 1, num_of_cols,
+                                         SUBPLOT_SPACING,
                                          row_col='col', flipped=flipped_cols)
                         )
             label = _return_label(row_values[row_count],
                                   facet_row_labels, facet_row)
             annotations.append(
                 _annotation_dict(label, num_of_rows - row_count, num_of_rows,
+                                 SUBPLOT_SPACING,
                                  row_col='row', flipped=flipped_rows)
             )
 
@@ -313,7 +342,8 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
                                 num_of_cols, facet_row_labels,
                                 facet_col_labels, trace_type,
                                 flipped_rows, flipped_cols, show_boxes,
-                                marker_color, kwargs_trace, kwargs_marker):
+                                SUBPLOT_SPACING, marker_color, kwargs_trace,
+                                kwargs_marker):
 
     fig = make_subplots(rows=num_of_rows, cols=num_of_cols,
                         shared_xaxes=True, shared_yaxes=True,
@@ -322,19 +352,23 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
 
     annotations = []
     if not facet_row and not facet_col:
-        trace = graph_objs.Scatter(
-            x=df[x],
-            y=df[y],
-            mode='markers',
+        trace = dict(
             type=trace_type,
             marker=dict(
                 color=df[color_name],
                 colorscale=colormap,
                 showscale=True,
-                **kwargs_marker
             ),
             **kwargs_trace
         )
+        if x:
+            trace['x'] = df[x]
+        if y:
+            trace['y'] = df[y]
+        trace = _make_trace_for_scatter(
+            trace, trace_type, df[color_name], **kwargs_marker
+        )
+
         fig.append_trace(trace, 1, 1)
 
     if (facet_row and not facet_col) or (not facet_row and facet_col):
@@ -342,20 +376,24 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
             df.groupby(facet_row if facet_row else facet_col)
         )
         for j, group in enumerate(groups_by_facet):
-            trace = graph_objs.Scatter(
-                x=group[1][x],
-                y=group[1][y],
-                mode='markers',
+            trace = dict(
                 type=trace_type,
                 marker=dict(
                     color=df[color_name],
                     colorscale=colormap,
                     showscale=True,
                     colorbar=dict(x=1.15),
-                    **kwargs_marker
                 ),
                 **kwargs_trace
             )
+            if x:
+                trace['x'] = group[1][x]
+            if y:
+                trace['y'] = group[1][y]
+            trace = _make_trace_for_scatter(
+                trace, trace_type, df[color_name], **kwargs_marker
+            )
+
             fig.append_trace(
                 trace,
                 j + 1 if facet_row else 1,
@@ -372,6 +410,7 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
                     label,
                     num_of_rows - j if facet_row else j + 1,
                     num_of_rows if facet_row else num_of_cols,
+                    SUBPLOT_SPACING,
                     'row' if facet_row else 'col',
                     flipped=flipped_rows)
             )
@@ -392,42 +431,46 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
                                          columns=[x, y, color_name])
 
                 if group.values.tolist() != [[None, None, None]]:
-                    trace = graph_objs.Scatter(
-                        x=group[x],
-                        y=group[y],
-                        mode='markers',
+                    trace = dict(
                         type=trace_type,
                         marker=dict(
                             color=df[color_name],
                             colorscale=colormap,
                             showscale=(row_count == 0),
                             colorbar=dict(x=1.15),
-                            **kwargs_marker
                         ),
                         **kwargs_trace
                     )
+
                 else:
-                    trace = graph_objs.Scatter(
-                        x=group[x],
-                        y=group[y],
-                        mode='markers',
+                    trace = dict(
                         type=trace_type,
                         showlegend=False,
                         **kwargs_trace
                     )
+
+                if x:
+                    trace['x'] = group[x]
+                if y:
+                    trace['y'] = group[y]
+                trace = _make_trace_for_scatter(
+                    trace, trace_type, df[color_name], **kwargs_marker
+                )
+
                 fig.append_trace(trace, row_count + 1, col_count + 1)
                 if row_count == 0:
                     label = _return_label(col_values[col_count],
                                           facet_col_labels, facet_col)
                     annotations.append(
                         _annotation_dict(label, col_count + 1, num_of_cols,
+                                         SUBPLOT_SPACING,
                                          row_col='col', flipped=flipped_cols)
                         )
             label = _return_label(row_values[row_count],
                                   facet_row_labels, facet_row)
             annotations.append(
                 _annotation_dict(row_values[row_count],
-                                 num_of_rows - row_count, num_of_rows,
+                                 num_of_rows - row_count, num_of_rows, SUBPLOT_SPACING,
                                  row_col='row', flipped=flipped_rows)
             )
 
@@ -440,7 +483,7 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
 def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
                 num_of_cols, facet_row_labels, facet_col_labels,
                 trace_type, flipped_rows, flipped_cols, show_boxes,
-                marker_color, kwargs_trace, kwargs_marker):
+                SUBPLOT_SPACING, marker_color, kwargs_trace, kwargs_marker):
 
     fig = make_subplots(rows=num_of_rows, cols=num_of_cols,
                         shared_xaxes=True, shared_yaxes=True,
@@ -448,17 +491,23 @@ def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
                         vertical_spacing=SUBPLOT_SPACING, print_grid=False)
     annotations = []
     if not facet_row and not facet_col:
-        trace = graph_objs.Scatter(
-            x=df[x],
-            y=df[y],
-            mode='markers',
+        trace = dict(
             type=trace_type,
             marker=dict(
                 color=marker_color,
-                **kwargs_marker
+                line=kwargs_marker['line'],
             ),
             **kwargs_trace
         )
+
+        if x:
+            trace['x'] = df[x]
+        if y:
+            trace['y'] = df[y]
+        trace = _make_trace_for_scatter(
+            trace, trace_type, marker_color, **kwargs_marker
+        )
+
         fig.append_trace(trace, 1, 1)
 
     elif (facet_row and not facet_col) or (not facet_row and facet_col):
@@ -466,17 +515,23 @@ def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
             df.groupby(facet_row if facet_row else facet_col)
         )
         for j, group in enumerate(groups_by_facet):
-            trace = graph_objs.Scatter(
-                x=group[1][x],
-                y=group[1][y],
-                mode='markers',
+            trace = dict(
                 type=trace_type,
                 marker=dict(
                     color=marker_color,
-                    **kwargs_marker
+                    line=kwargs_marker['line'],
                 ),
                 **kwargs_trace
             )
+
+            if x:
+                trace['x'] = group[1][x]
+            if y:
+                trace['y'] = group[1][y]
+            trace = _make_trace_for_scatter(
+                trace, trace_type, marker_color, **kwargs_marker
+            )
+
             fig.append_trace(trace,
                              j + 1 if facet_row else 1,
                              1 if facet_row else j + 1)
@@ -492,6 +547,7 @@ def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
                     label,
                     num_of_rows - j if facet_row else j + 1,
                     num_of_rows if facet_row else num_of_cols,
+                    SUBPLOT_SPACING,
                     'row' if facet_row else 'col',
                     flipped_rows
                 )
@@ -510,24 +566,29 @@ def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
                     group = tuple_to_facet_group[(x_val, y_val)]
                 except KeyError:
                     group = pd.DataFrame([[None, None]], columns=[x, y])
-                trace = graph_objs.Scatter(
-                    x=group[x],
-                    y=group[y],
-                    mode='markers',
+                trace = dict(
                     type=trace_type,
                     marker=dict(
                         color=marker_color,
-                        **kwargs_marker
+                        line=kwargs_marker['line'],
                     ),
                     **kwargs_trace
                 )
+                if x:
+                    trace['x'] = group[x]
+                if y:
+                    trace['y'] = group[y]
+                trace = _make_trace_for_scatter(
+                    trace, trace_type, marker_color, **kwargs_marker
+                )
+
                 fig.append_trace(trace, row_count + 1, col_count + 1)
                 if row_count == 0:
                     label = _return_label(col_values[col_count],
                                           facet_col_labels,
                                           facet_col)
                     annotations.append(
-                        _annotation_dict(label, col_count + 1, num_of_cols,
+                        _annotation_dict(label, col_count + 1, num_of_cols, SUBPLOT_SPACING,
                                          row_col='col', flipped=flipped_cols)
                         )
 
@@ -535,7 +596,7 @@ def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
                                   facet_row_labels,
                                   facet_row)
             annotations.append(
-                _annotation_dict(label, num_of_rows - row_count, num_of_rows,
+                _annotation_dict(label, num_of_rows - row_count, num_of_rows, SUBPLOT_SPACING,
                                  row_col='row', flipped=flipped_rows)
             )
 
@@ -545,7 +606,7 @@ def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
     return fig
 
 
-def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
+def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
                       color_name=None, colormap=None, color_is_cat=False,
                       facet_row_labels=None, facet_col_labels=None,
                       height=None, width=None, trace_type='scatter',
@@ -581,7 +642,8 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
     :param (int) height: the height of the facet grid figure.
     :param (int) width: the width of the facet grid figure.
     :param (str) trace_type: decides the type of plot to appear in the
-        facet grid. The options are 'scatter' and 'scattergl'.
+        facet grid. The options are 'scatter', 'scattergl', 'histogram',
+        'bar', and 'box'.
         Default = 'scatter'.
     :param (str) scales: determines if axes have fixed ranges or not. Valid
         settings are 'fixed' (all axes fixed), 'free_x' (x axis free only),
@@ -612,7 +674,6 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
         y='cty',
         facet_col='cyl',
     )
-
     py.iplot(fig, filename='facet_grid_mpg_one_way_facet')
     ```
 
@@ -632,7 +693,6 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
         facet_row='drv',
         facet_col='cyl',
     )
-
     py.iplot(fig, filename='facet_grid_mpg_two_way_facet')
     ```
 
@@ -696,6 +756,25 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
 
     py.iplot(fig, filename='facet_grid_mtcars_custom_labels')
     ```
+
+    Example 6: Other Trace Type
+    ```
+    import plotly.plotly as py
+    import plotly.figure_factory as ff
+
+    import pandas as pd
+
+    mtcars = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/mtcars.csv')
+
+    fig = ff.create_facet_grid(
+        mtcars,
+        x='wt',
+        facet_col='cyl',
+        trace_type='histogram',
+    )
+
+    py.iplot(fig, filename='facet_grid_mtcars_other_trace_type')
+    ```
     """
     if not pd:
         raise exceptions.ImportError(
@@ -710,6 +789,13 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
     # make sure all columns are of homogenous datatype
     utils.validate_dataframe(df)
 
+    if trace_type in ['scatter', 'scattergl']:
+        if not x or not y:
+            raise exceptions.PlotlyError(
+                "You need to input 'x' and 'y' if you are you are using a "
+                "trace_type of 'scatter' or 'scattergl'."
+            )
+
     for key in [x, y, facet_row, facet_col, color_name]:
         if key is not None:
             try:
@@ -719,6 +805,9 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                     "x, y, facet_row, facet_col and color_name must be keys "
                     "in your dataframe."
                 )
+    # autoscale histogram bars
+    if trace_type not in ['scatter', 'scattergl']:
+        scales = 'free'
 
     # validate scales
     if scales not in ['fixed', 'free_x', 'free_y', 'free']:
@@ -726,18 +815,22 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
             "'scales' must be set to 'fixed', 'free_x', 'free_y' and 'free'."
         )
 
-    if trace_type not in ['scatter', 'scattergl']:
+    if trace_type not in VALID_TRACE_TYPES:
         raise exceptions.PlotlyError(
-            "'trace_type' must be 'scatter' or 'scattergl'."
+            "'trace_type' must be in {}".format(VALID_TRACE_TYPES)
         )
+
+    if trace_type == 'histogram':
+        SUBPLOT_SPACING = 0.06
+    else:
+        SUBPLOT_SPACING = 0.015
 
     # seperate kwargs for marker and else
     if 'marker' in kwargs:
         kwargs_marker = kwargs['marker']
     else:
         kwargs_marker = {}
-    for param in ['color']:
-        kwargs_marker.pop(param, None)
+    marker_color = kwargs_marker.pop('color', None)
     kwargs.pop('marker', None)
     kwargs_trace = kwargs
 
@@ -747,13 +840,20 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
         else:
             kwargs_marker['size'] = 8
 
+    if 'opacity' not in kwargs_marker:
+        if not ggplot2:
+            kwargs_trace['opacity'] = 0.6
+
     if 'line' not in kwargs_marker:
         if not ggplot2:
             kwargs_marker['line'] = {'color': 'darkgrey', 'width': 1}
+        else:
+            kwargs_marker['line'] = {}
 
     # default marker size
     if not ggplot2:
-        marker_color = 'rgba(31, 119, 180, 0.5)'
+        if not marker_color:
+            marker_color = 'rgb(31, 119, 180)'
     else:
         marker_color = 'rgb(0, 0, 0)'
 
@@ -809,7 +909,7 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                 df, x, y, facet_row, facet_col, color_name, colormap,
                 num_of_rows, num_of_cols, facet_row_labels, facet_col_labels,
                 trace_type, flipped_rows, flipped_cols, show_boxes,
-                marker_color, kwargs_trace, kwargs_marker
+                SUBPLOT_SPACING, marker_color, kwargs_trace, kwargs_marker
             )
 
         elif isinstance(df[color_name].iloc[0], Number):
@@ -828,8 +928,8 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                     df, x, y, facet_row, facet_col, color_name, colormap,
                     num_of_rows, num_of_cols, facet_row_labels,
                     facet_col_labels, trace_type, flipped_rows,
-                    flipped_cols, show_boxes, marker_color, kwargs_trace,
-                    kwargs_marker
+                    flipped_cols, show_boxes, SUBPLOT_SPACING, marker_color,
+                    kwargs_trace, kwargs_marker
                 )
 
             elif isinstance(colormap, list):
@@ -840,8 +940,8 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                     df, x, y, facet_row, facet_col, color_name,
                     colorscale_list, num_of_rows, num_of_cols,
                     facet_row_labels, facet_col_labels, trace_type,
-                    flipped_rows, flipped_cols, show_boxes, marker_color,
-                    kwargs_trace, kwargs_marker
+                    flipped_rows, flipped_cols, show_boxes, SUBPLOT_SPACING,
+                    marker_color, kwargs_trace, kwargs_marker
                 )
             elif isinstance(colormap, str):
                 if colormap in colors.PLOTLY_SCALES.keys():
@@ -856,8 +956,8 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                     df, x, y, facet_row, facet_col, color_name,
                     colorscale_list, num_of_rows, num_of_cols,
                     facet_row_labels, facet_col_labels, trace_type,
-                    flipped_rows, flipped_cols, show_boxes, marker_color,
-                    kwargs_trace, kwargs_marker
+                    flipped_rows, flipped_cols, show_boxes, SUBPLOT_SPACING,
+                    marker_color, kwargs_trace, kwargs_marker
                 )
             else:
                 colorscale_list = colors.PLOTLY_SCALES['Reds']
@@ -865,16 +965,16 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
                     df, x, y, facet_row, facet_col, color_name,
                     colorscale_list, num_of_rows, num_of_cols,
                     facet_row_labels, facet_col_labels, trace_type,
-                    flipped_rows, flipped_cols, show_boxes, marker_color,
-                    kwargs_trace, kwargs_marker
+                    flipped_rows, flipped_cols, show_boxes, SUBPLOT_SPACING,
+                    marker_color, kwargs_trace, kwargs_marker
                 )
 
     else:
         fig = _facet_grid(
             df, x, y, facet_row, facet_col, num_of_rows, num_of_cols,
             facet_row_labels, facet_col_labels, trace_type, flipped_rows,
-            flipped_cols, show_boxes, marker_color, kwargs_trace,
-            kwargs_marker
+            flipped_cols, show_boxes, SUBPLOT_SPACING, marker_color,
+            kwargs_trace, kwargs_marker
         )
 
     if not height:
@@ -924,7 +1024,7 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
             axis_labels['y'].append(key)
 
     string_number_in_data = False
-    for var in [x, y]:
+    for var in [v for v in [x, y] if v]:
         if isinstance(df[var].tolist()[0], str):
             for item in df[var]:
                 try:
@@ -944,15 +1044,15 @@ def create_facet_grid(df, x, y, facet_row=None, facet_col=None,
         fixed_axes = ['y']
     elif scales == 'free_y':
         fixed_axes = ['x']
-    else:
+    elif scales == 'free':
         fixed_axes = []
 
     # fixed ranges
-    for x_y in ['x', 'y']:
+    for x_y in fixed_axes:
         min_ranges = []
         max_ranges = []
         for trace in fig['data']:
-            if len(trace[x_y]) > 0:
+            if trace[x_y] is not None and len(trace[x_y]) > 0:
                 min_ranges.append(min(trace[x_y]))
                 max_ranges.append(max(trace[x_y]))
         while None in min_ranges:
