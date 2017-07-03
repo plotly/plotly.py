@@ -91,6 +91,12 @@ class GridTest(PlotlyTestCase):
         py.grid_ops.append_rows(new_rows, grid=g)
 
     @attr('slow')
+    def test_row_append_string(self):
+        g = self.upload_and_return_grid()
+        new_rows = [['a', 'b'], ['c', 'd']]
+        py.grid_ops.append_rows(new_rows, grid=g)
+
+    @attr('slow')
     def test_plot_from_grid(self):
         g = self.upload_and_return_grid()
         url = py.plot([Scatter(xsrc=g[0], ysrc=g[1])],
