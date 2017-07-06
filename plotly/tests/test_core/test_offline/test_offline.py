@@ -75,6 +75,13 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
         self.assertNotIn('</html>', html)
         self.assertTrue(html.startswith('<div>') and html.endswith('</div>'))
 
+    def test_json_output(self):
+        data, layout, config = plotly.offline.plot(fig, output_type='json', auto_open=False)
+
+        self.assertEqual(data, '[{"type": "scatter", "x": [1, 2, 3], "y": [10, 20, 30]}]')
+        self.assertEqual(layout, '{"title": "offline plot"}')
+        self.assertEqual(config, '{"showLink": true, "linkText": "Export to plot.ly"}')
+
     def test_autoresizing(self):
         resize_code_strings = [
             'window.addEventListener("resize", ',
