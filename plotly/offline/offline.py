@@ -322,25 +322,12 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     iplot([{'x': [1, 2, 3], 'y': [5, 2, 7]}], image='png')
     ```
     """
-    if not __PLOTLY_OFFLINE_INITIALIZED:
-        raise PlotlyError('\n'.join([
-            'Plotly Offline mode has not been initialized in this notebook. '
-            'Run: ',
-            '',
-            'import plotly',
-            'plotly.offline.init_notebook_mode() '
-            '# run at the start of every ipython notebook',
-        ]))
     if not ipython:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
     config = dict(config) if config else {}
     config.setdefault('showLink', show_link)
     config.setdefault('linkText', link_text)
-
-    plot_html, plotdivid, width, height = _plot_html(
-        figure_or_data, config, validate, '100%', 525, True
-    )
 
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
 
@@ -358,14 +345,27 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     if frames:
         fig['frames'] = frames
 
-    display_bundle = {
-        'application/vnd.plotly.v1+json': fig,
-        'text/html': plot_html,
-        'text/vnd.plotly.v1+html': plot_html
-    }
+    display_bundle = {'application/vnd.plotly.v1+json': fig}
+
+    if __PLOTLY_OFFLINE_INITIALIZED:
+        plot_html, plotdivid, width, height = _plot_html(
+            figure_or_data, config, validate, '100%', 525, True
+        )
+        display_bundle['text/html'] = plot_html
+        display_bundle['text/vnd.plotly.v1+html'] = plot_html
+
     ipython_display.display(display_bundle, raw=True)
 
     if image:
+        if not __PLOTLY_OFFLINE_INITIALIZED:
+            raise PlotlyError('\n'.join([
+                'Plotly Offline mode has not been initialized in this notebook. '
+                'Run: ',
+                '',
+                'import plotly',
+                'plotly.offline.init_notebook_mode() '
+                '# run at the start of every ipython notebook',
+            ]))
         if image not in __IMAGE_FORMATS:
             raise ValueError('The image parameter must be one of the following'
                              ': {}'.format(__IMAGE_FORMATS)

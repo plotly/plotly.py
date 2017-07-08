@@ -29,16 +29,19 @@ class PlotlyOfflineTestCase(TestCase):
     def setUp(self):
         pass
 
-    @raises(plotly.exceptions.PlotlyError)
-    def test_iplot_doesnt_work_before_you_call_init_notebook_mode(self):
+    def test_iplot_works_without_init_notebook_mode(self):
         plotly.offline.iplot([{}])
+
+    @raises(plotly.exceptions.PlotlyError)
+    def test_iplot_doesnt_work_before_you_call_init_notebook_mode_when_requesting_download(self):
+        plotly.offline.iplot([{}], image='png')
 
     def test_iplot_works_after_you_call_init_notebook_mode(self):
         plotly.offline.init_notebook_mode()
         plotly.offline.iplot([{}])
 
     @attr('matplotlib')
-    def test_iplot_mpl_works_after_you_call_init_notebook_mode(self):
+    def test_iplot_mpl_works(self):
         # Generate matplotlib plot for tests
         fig = plt.figure()
 
@@ -46,7 +49,6 @@ class PlotlyOfflineTestCase(TestCase):
         y = [100, 200, 300]
         plt.plot(x, y, "o")
 
-        plotly.offline.init_notebook_mode()
         plotly.offline.iplot_mpl(fig)
 
 
