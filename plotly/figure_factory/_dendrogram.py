@@ -16,7 +16,8 @@ scs = optional_imports.get_module('scipy.spatial')
 
 def create_dendrogram(X, orientation="bottom", labels=None,
                       colorscale=None, distfun=None,
-                      linkagefun=lambda x: sch.linkage(x, 'complete')):
+                      linkagefun=lambda x: sch.linkage(x, 'complete'),
+                      annotation=None):
     """
     BETA function that returns a dendrogram Plotly figure object.
 
@@ -85,7 +86,8 @@ def create_dendrogram(X, orientation="bottom", labels=None,
         distfun = scs.distance.pdist
 
     dendrogram = _Dendrogram(X, orientation, labels, colorscale,
-                             distfun=distfun, linkagefun=linkagefun)
+                             distfun=distfun, linkagefun=linkagefun,
+                             annotation=annotation)
 
     return {'layout': dendrogram.layout,
             'data': dendrogram.data}
@@ -97,7 +99,8 @@ class _Dendrogram(object):
     def __init__(self, X, orientation='bottom', labels=None, colorscale=None,
                  width="100%", height="100%", xaxis='xaxis', yaxis='yaxis',
                  distfun=None,
-                 linkagefun=lambda x: sch.linkage(x, 'complete')):
+                 linkagefun=lambda x: sch.linkage(x, 'complete'),
+                 annotation=None):
         self.orientation = orientation
         self.labels = labels
         self.xaxis = xaxis
@@ -123,7 +126,8 @@ class _Dendrogram(object):
         (dd_traces, xvals, yvals,
             ordered_labels, leaves) = self.get_dendrogram_traces(X, colorscale,
                                                                  distfun,
-                                                                 linkagefun)
+                                                                 linkagefun, 
+                                                                 annotation)
 
         self.labels = ordered_labels
         self.leaves = leaves
@@ -232,7 +236,7 @@ class _Dendrogram(object):
 
         return self.layout
 
-    def get_dendrogram_traces(self, X, colorscale, distfun, linkagefun):
+    def get_dendrogram_traces(self, X, colorscale, distfun, linkagefun, annotation):
         """
         Calculates all the elements needed for plotting a dendrogram.
 
@@ -279,11 +283,16 @@ class _Dendrogram(object):
             else:
                 ys = icoord[i]
             color_key = color_list[i]
+            text_annotation = None
+            if annotation:
+                text_annotation = annotation[i]
             trace = graph_objs.Scatter(
                 x=np.multiply(self.sign[self.xaxis], xs),
                 y=np.multiply(self.sign[self.yaxis], ys),
                 mode='lines',
-                marker=graph_objs.Marker(color=colors[color_key])
+                marker=graph_objs.Marker(color=colors[color_key]),
+                text=text_annotation,
+                hoverinfo='text'
             )
 
             try:
