@@ -224,7 +224,8 @@ def violin_no_colorscale(data, data_header, group_header, colors,
         if color_index >= len(colors):
             color_index = 0
         plot_data, plot_xrange = violinplot(vals,
-                                            fillcolor=colors[color_index])
+                                            fillcolor=colors[color_index],
+                                            rugplot=rugplot)
         layout = graph_objs.Layout()
 
         for item in plot_data:
