@@ -99,6 +99,28 @@
         }
     },
     "defs": {
+        "editTypes": {
+            "layout": {
+                "docalc": false,
+                "docamera": false,
+                "dolayoutstyle": false,
+                "dolegend": false,
+                "domodebar": false,
+                "doplot": false,
+                "doticks": false,
+                "layoutReplot": false
+            },
+            "traces": {
+                "autorangeOn": false,
+                "clearCalc": false,
+                "docalc": false,
+                "docalcAutorange": false,
+                "docolorbars": false,
+                "doplot": false,
+                "dostyle": false,
+                "fullReplot": false
+            }
+        },
         "metaKeys": [
             "_isSubplotObj",
             "_isLinkedToArray",
@@ -190,7 +212,8 @@
                 "otherOpts": [
                     "dflt",
                     "min",
-                    "max"
+                    "max",
+                    "arrayOk"
                 ],
                 "requiredOpts": []
             },
@@ -1155,6 +1178,13 @@
                         "role": "style",
                         "valType": "number"
                     }
+                },
+                "namelength": {
+                    "description": "Sets the default length (in number of characters) of the trace name in the hover labels for all traces. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis.",
+                    "dflt": 15,
+                    "min": -1,
+                    "role": "style",
+                    "valType": "integer"
                 },
                 "role": "object"
             },
@@ -5284,6 +5314,16 @@
                     "role": "style",
                     "valType": "string"
                 },
+                "layer": {
+                    "description": "Sets the layer on which this axis is displayed. If *above traces*, this axis is displayed above all the subplot's traces If *below traces*, this axis is displayed below all the subplot's traces, but above the grid lines. Useful when used together with scatter-like traces with `cliponaxis` set to *false* to show markers and/or text nodes above this axis.",
+                    "dflt": "above traces",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "above traces",
+                        "below traces"
+                    ]
+                },
                 "linecolor": {
                     "description": "Sets the axis line color.",
                     "dflt": "#444",
@@ -6020,6 +6060,16 @@
                     "role": "style",
                     "valType": "string"
                 },
+                "layer": {
+                    "description": "Sets the layer on which this axis is displayed. If *above traces*, this axis is displayed above all the subplot's traces If *below traces*, this axis is displayed below all the subplot's traces, but above the grid lines. Useful when used together with scatter-like traces with `cliponaxis` set to *false* to show markers and/or text nodes above this axis.",
+                    "dflt": "above traces",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "above traces",
+                        "below traces"
+                    ]
+                },
                 "linecolor": {
                     "description": "Sets the axis line color.",
                     "dflt": "#444",
@@ -6493,6 +6543,18 @@
                             "role": "info",
                             "valType": "string"
                         }
+                    },
+                    "namelength": {
+                        "arrayOk": true,
+                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis.",
+                        "min": -1,
+                        "role": "style",
+                        "valType": "integer"
+                    },
+                    "namelengthsrc": {
+                        "description": "Sets the source reference on plot.ly for  namelength .",
+                        "role": "info",
+                        "valType": "string"
                     },
                     "role": "object"
                 },
@@ -7263,6 +7325,18 @@
                             "role": "info",
                             "valType": "string"
                         }
+                    },
+                    "namelength": {
+                        "arrayOk": true,
+                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis.",
+                        "min": -1,
+                        "role": "style",
+                        "valType": "integer"
+                    },
+                    "namelengthsrc": {
+                        "description": "Sets the source reference on plot.ly for  namelength .",
+                        "role": "info",
+                        "valType": "string"
                     },
                     "role": "object"
                 },
@@ -8266,6 +8340,18 @@
                             "valType": "string"
                         }
                     },
+                    "namelength": {
+                        "arrayOk": true,
+                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis.",
+                        "min": -1,
+                        "role": "style",
+                        "valType": "integer"
+                    },
+                    "namelengthsrc": {
+                        "description": "Sets the source reference on plot.ly for  namelength .",
+                        "role": "info",
+                        "valType": "string"
+                    },
                     "role": "object"
                 },
                 "ids": {
@@ -8966,6 +9052,18 @@
                             "role": "info",
                             "valType": "string"
                         }
+                    },
+                    "namelength": {
+                        "arrayOk": true,
+                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis.",
+                        "min": -1,
+                        "role": "style",
+                        "valType": "integer"
+                    },
+                    "namelengthsrc": {
+                        "description": "Sets the source reference on plot.ly for  namelength .",
+                        "role": "info",
+                        "valType": "string"
                     },
                     "role": "object"
                 },
@@ -10180,6 +10278,18 @@
                             "valType": "string"
                         }
                     },
+                    "namelength": {
+                        "arrayOk": true,
+                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis.",
+                        "min": -1,
+                        "role": "style",
+                        "valType": "integer"
+                    },
+                    "namelengthsrc": {
+                        "description": "Sets the source reference on plot.ly for  namelength .",
+                        "role": "info",
+                        "valType": "string"
+                    },
                     "role": "object"
                 },
                 "ids": {
@@ -10744,6 +10854,18 @@
                             "valType": "string"
                         }
                     },
+                    "namelength": {
+                        "arrayOk": true,
+                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis.",
+                        "min": -1,
+                        "role": "style",
+                        "valType": "integer"
+                    },
+                    "namelengthsrc": {
+                        "description": "Sets the source reference on plot.ly for  namelength .",
+                        "role": "info",
+                        "valType": "string"
+                    },
                     "role": "object"
                 },
                 "ids": {
@@ -10933,6 +11055,7 @@
                 "autocontour": {
                     "description": "Determines whether or not the contour level attributes are picked by an algorithm. If *true*, the number of contour levels can be set in `ncontours`. If *false*, set the contour level attributes in `contours`.",
                     "dflt": true,
+                    "editType": "docalc",
                     "role": "style",
                     "valType": "boolean"
                 },
@@ -11293,6 +11416,7 @@
                     "coloring": {
                         "description": "Determines the coloring method showing the contour values. If *fill*, coloring is done evenly between each contour level If *heatmap*, a heatmap gradient coloring is applied between each contour level. If *lines*, coloring is done on the contour lines. If *none*, no coloring is applied on this trace.",
                         "dflt": "fill",
+                        "editType": "docalc",
                         "role": "style",
                         "valType": "enumerated",
                         "values": [
@@ -11305,19 +11429,59 @@
                     "end": {
                         "description": "Sets the end contour level value. Must be more than `contours.start`",
                         "dflt": null,
+                        "editType": "doplot",
                         "role": "style",
                         "valType": "number"
                     },
+                    "labelfont": {
+                        "color": {
+                            "editType": "dostyle",
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "description": "Sets the font used for labeling the contour levels. The default color comes from the lines, if shown. The default family and size come from `layout.font`.",
+                        "family": {
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                            "editType": "doplot",
+                            "noBlank": true,
+                            "role": "style",
+                            "strict": true,
+                            "valType": "string"
+                        },
+                        "role": "object",
+                        "size": {
+                            "editType": "doplot",
+                            "min": 1,
+                            "role": "style",
+                            "valType": "number"
+                        }
+                    },
+                    "labelformat": {
+                        "description": "Sets the contour label formatting rule using d3 formatting mini-language which is very similar to Python, see: https://github.com/d3/d3-format/blob/master/README.md#locale_format.",
+                        "dflt": "",
+                        "editType": "doplot",
+                        "role": "style",
+                        "valType": "string"
+                    },
                     "role": "object",
+                    "showlabels": {
+                        "description": "Determines whether to label the contour lines with their values.",
+                        "dflt": false,
+                        "editType": "doplot",
+                        "role": "style",
+                        "valType": "boolean"
+                    },
                     "showlines": {
-                        "description": "Determines whether or not the contour lines are drawn. Has only an effect if `contours.coloring` is set to *fill*.",
+                        "description": "Determines whether or not the contour lines are drawn. Has an effect only if `contours.coloring` is set to *fill*.",
                         "dflt": true,
+                        "editType": "doplot",
                         "role": "style",
                         "valType": "boolean"
                     },
                     "size": {
                         "description": "Sets the step between each contour level. Must be positive.",
                         "dflt": null,
+                        "editType": "doplot",
                         "min": 0,
                         "role": "style",
                         "valType": "number"
@@ -11325,6 +11489,7 @@
                     "start": {
                         "description": "Sets the starting contour level value. Must be less than `contours.end`",
                         "dflt": null,
+                        "editType": "doplot",
                         "role": "style",
                         "valType": "number"
                     }
@@ -11435,6 +11600,18 @@
                             "valType": "string"
                         }
                     },
+                    "namelength": {
+                        "arrayOk": true,
+                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis.",
+                        "min": -1,
+                        "role": "style",
+                        "valType": "integer"
+                    },
+                    "namelengthsrc": {
+                        "description": "Sets the source reference on plot.ly for  namelength .",
+                        "role": "info",
+                        "valType": "string"
+                    },
                     "role": "object"
                 },
                 "ids": {
@@ -11455,7 +11632,7 @@
                 },
                 "line": {
                     "color": {
-                        "description": "Sets the color of the contour level. Has no if `contours.coloring` is set to *lines*.",
+                        "description": "Sets the color of the contour level. Has no effect if `contours.coloring` is set to *lines*.",
                         "role": "style",
                         "valType": "color"
                     },
@@ -11498,6 +11675,7 @@
                 "ncontours": {
                     "description": "Sets the maximum number of contour levels. The actual number of contours will be chosen automatically to be less than or equal to the value of `ncontours`. Has an effect only if `autocontour` is *true* or if `contours.size` is missing.",
                     "dflt": 15,
+                    "editType": "docalc",
                     "min": 1,
                     "role": "style",
                     "valType": "integer"
@@ -11760,6 +11938,7 @@
                 "autocontour": {
                     "description": "Determines whether or not the contour level attributes are picked by an algorithm. If *true*, the number of contour levels can be set in `ncontours`. If *false*, set the contour level attributes in `contours`.",
                     "dflt": true,
+                    "editType": "docalc",
                     "role": "style",
                     "valType": "boolean"
                 },
@@ -12150,6 +12329,7 @@
                     "coloring": {
                         "description": "Determines the coloring method showing the contour values. If *fill*, coloring is done evenly between each contour level If *lines*, coloring is done on the contour lines. If *none*, no coloring is applied on this trace.",
                         "dflt": "fill",
+                        "editType": "docalc",
                         "role": "style",
                         "valType": "enumerated",
                         "values": [
@@ -12161,12 +12341,44 @@
                     "end": {
                         "description": "Sets the end contour level value. Must be more than `contours.start`",
                         "dflt": null,
+                        "editType": "doplot",
                         "role": "style",
                         "valType": "number"
+                    },
+                    "labelfont": {
+                        "color": {
+                            "editType": "dostyle",
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "description": "Sets the font used for labeling the contour levels. The default color comes from the lines, if shown. The default family and size come from `layout.font`.",
+                        "family": {
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                            "editType": "doplot",
+                            "noBlank": true,
+                            "role": "style",
+                            "strict": true,
+                            "valType": "string"
+                        },
+                        "role": "object",
+                        "size": {
+                            "editType": "doplot",
+                            "min": 1,
+                            "role": "style",
+                            "valType": "number"
+                        }
+                    },
+                    "labelformat": {
+                        "description": "Sets the contour label formatting rule using d3 formatting mini-language which is very similar to Python, see: https://github.com/d3/d3-format/blob/master/README.md#locale_format.",
+                        "dflt": "",
+                        "editType": "doplot",
+                        "role": "style",
+                        "valType": "string"
                     },
                     "operation": {
                         "description": "Sets the filter operation. *=* keeps items equal to `value` *<* keeps items less than `value` *<=* keeps items less than or equal to `value` *>* keeps items greater than `value` *>=* keeps items greater than or equal to `value` *[]* keeps items inside `value[0]` to value[1]` including both bounds` *()* keeps items inside `value[0]` to value[1]` excluding both bounds` *[)* keeps items inside `value[0]` to value[1]` including `value[0]` but excluding `value[1] *(]* keeps items inside `value[0]` to value[1]` excluding `value[0]` but including `value[1] *][* keeps items outside `value[0]` to value[1]` and equal to both bounds` *)(* keeps items outside `value[0]` to value[1]` *](* keeps items outside `value[0]` to value[1]` and equal to `value[0]` *)[* keeps items outside `value[0]` to value[1]` and equal to `value[1]`",
                         "dflt": "=",
+                        "editType": "docalc",
                         "role": "info",
                         "valType": "enumerated",
                         "values": [
@@ -12188,15 +12400,24 @@
                         ]
                     },
                     "role": "object",
+                    "showlabels": {
+                        "description": "Determines whether to label the contour lines with their values.",
+                        "dflt": false,
+                        "editType": "doplot",
+                        "role": "style",
+                        "valType": "boolean"
+                    },
                     "showlines": {
-                        "description": "Determines whether or not the contour lines are drawn. Has only an effect if `contours.coloring` is set to *fill*.",
+                        "description": "Determines whether or not the contour lines are drawn. Has an effect only if `contours.coloring` is set to *fill*.",
                         "dflt": true,
+                        "editType": "doplot",
                         "role": "style",
                         "valType": "boolean"
                     },
                     "size": {
                         "description": "Sets the step between each contour level. Must be positive.",
                         "dflt": null,
+                        "editType": "doplot",
                         "min": 0,
                         "role": "style",
                         "valType": "number"
@@ -12204,12 +12425,14 @@
                     "start": {
                         "description": "Sets the starting contour level value. Must be less than `contours.end`",
                         "dflt": null,
+                        "editType": "doplot",
                         "role": "style",
                         "valType": "number"
                     },
                     "type": {
                         "description": "If `levels`, the data is represented as a contour plot with multiple levels displayed. If `constraint`, the data is represented as constraints with the invalid region shaded as specified by the `operation` and `value` parameters.",
                         "dflt": "levels",
+                        "editType": "docalc",
                         "role": "info",
                         "valType": "enumerated",
                         "values": [
@@ -12220,6 +12443,7 @@
                     "value": {
                         "description": "Sets the value or values by which to filter by. Values are expected to be in the same type as the data linked to *target*. When `operation` is set to one of the inequality values (=,<,>=,>,<=) *value* is expected to be a number or a string. When `operation` is set to one of the interval value ([],(),[),(],][,)(,](,)[) *value* is expected to be 2-item array where the first item is the lower bound and the second item is the upper bound. When `operation`, is set to one of the set value ({},}{) *value* is expected to be an array with as many items as the desired set elements.",
                         "dflt": 0,
+                        "editType": "docalc",
                         "role": "info",
                         "valType": "any"
                     }
@@ -12335,6 +12559,18 @@
                             "valType": "string"
                         }
                     },
+                    "namelength": {
+                        "arrayOk": true,
+                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis.",
+                        "min": -1,
+                        "role": "style",
+                        "valType": "integer"
+                    },
+                    "namelengthsrc": {
+                        "description": "Sets the source reference on plot.ly for  namelength .",
+                        "role": "info",
+                        "valType": "string"
+                    },
                     "role": "object"
                 },
                 "ids": {
@@ -12410,6 +12646,7 @@
                 "ncontours": {
                     "description": "Sets the maximum number of contour levels. The actual number of contours will be chosen automatically to be less than or equal to the value of `ncontours`. Has an effect only if `autocontour` is *true* or if `contours.size` is missing.",
                     "dflt": 15,
+                    "editType": "docalc",
                     "min": 1,
                     "role": "style",
                     "valType": "integer"
@@ -13003,6 +13240,18 @@
                             "role": "info",
                             "valType": "string"
                         }
+                    },
+                    "namelength": {
+                        "arrayOk": true,
+                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis.",
+                        "min": -1,
+                        "role": "style",
+                        "valType": "integer"
+                    },
+                    "namelengthsrc": {
+                        "description": "Sets the source reference on plot.ly for  namelength .",
+                        "role": "info",
+                        "valType": "string"
                     },
                     "role": "object"
                 },
@@ -13733,6 +13982,18 @@
                             "valType": "string"
                         }
                     },
+                    "namelength": {
+                        "arrayOk": true,
+                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis.",
+                        "min": -1,
+                        "role": "style",
+                        "valType": "integer"
+                    },
+                    "namelengthsrc": {
+                        "description": "Sets the source reference on plot.ly for  namelength .",
+                        "role": "info",
+                        "valType": "string"
+                    },
                     "role": "object"
                 },
                 "ids": {
@@ -14308,6 +14569,18 @@
                             "role": "info",
                             "valType": "string"
                         }
+                    },
+                    "namelength": {
+                        "arrayOk": true,
+                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis.",
+                        "min": -1,
+                        "role": "style",
+                        "valType": "integer"
+                    },
+                    "namelengthsrc": {
+                        "description": "Sets the source reference on plot.ly for  namelength .",
+                        "role": "info",
+                        "valType": "string"
                     },
                     "role": "object"
                 },
@@ -15529,6 +15802,18 @@
                             "valType": "string"
                         }
                     },
+                    "namelength": {
+                        "arrayOk": true,
+                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis.",
+                        "min": -1,
+                        "role": "style",
+                        "valType": "integer"
+                    },
+                    "namelengthsrc": {
+                        "description": "Sets the source reference on plot.ly for  namelength .",
+                        "role": "info",
+                        "valType": "string"
+                    },
                     "role": "object"
                 },
                 "ids": {
@@ -15844,6 +16129,7 @@
                 "autocontour": {
                     "description": "Determines whether or not the contour level attributes are picked by an algorithm. If *true*, the number of contour levels can be set in `ncontours`. If *false*, set the contour level attributes in `contours`.",
                     "dflt": true,
+                    "editType": "docalc",
                     "role": "style",
                     "valType": "boolean"
                 },
@@ -16198,6 +16484,7 @@
                     "coloring": {
                         "description": "Determines the coloring method showing the contour values. If *fill*, coloring is done evenly between each contour level If *heatmap*, a heatmap gradient coloring is applied between each contour level. If *lines*, coloring is done on the contour lines. If *none*, no coloring is applied on this trace.",
                         "dflt": "fill",
+                        "editType": "docalc",
                         "role": "style",
                         "valType": "enumerated",
                         "values": [
@@ -16210,19 +16497,59 @@
                     "end": {
                         "description": "Sets the end contour level value. Must be more than `contours.start`",
                         "dflt": null,
+                        "editType": "doplot",
                         "role": "style",
                         "valType": "number"
                     },
+                    "labelfont": {
+                        "color": {
+                            "editType": "dostyle",
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "description": "Sets the font used for labeling the contour levels. The default color comes from the lines, if shown. The default family and size come from `layout.font`.",
+                        "family": {
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                            "editType": "doplot",
+                            "noBlank": true,
+                            "role": "style",
+                            "strict": true,
+                            "valType": "string"
+                        },
+                        "role": "object",
+                        "size": {
+                            "editType": "doplot",
+                            "min": 1,
+                            "role": "style",
+                            "valType": "number"
+                        }
+                    },
+                    "labelformat": {
+                        "description": "Sets the contour label formatting rule using d3 formatting mini-language which is very similar to Python, see: https://github.com/d3/d3-format/blob/master/README.md#locale_format.",
+                        "dflt": "",
+                        "editType": "doplot",
+                        "role": "style",
+                        "valType": "string"
+                    },
                     "role": "object",
+                    "showlabels": {
+                        "description": "Determines whether to label the contour lines with their values.",
+                        "dflt": false,
+                        "editType": "doplot",
+                        "role": "style",
+                        "valType": "boolean"
+                    },
                     "showlines": {
-                        "description": "Determines whether or not the contour lines are drawn. Has only an effect if `contours.coloring` is set to *fill*.",
+                        "description": "Determines whether or not the contour lines are drawn. Has an effect only if `contours.coloring` is set to *fill*.",
                         "dflt": true,
+                        "editType": "doplot",
                         "role": "style",
                         "valType": "boolean"
                     },
                     "size": {
                         "description": "Sets the step between each contour level. Must be positive.",
                         "dflt": null,
+                        "editType": "doplot",
                         "min": 0,
                         "role": "style",
                         "valType": "number"
@@ -16230,6 +16557,7 @@
                     "start": {
                         "description": "Sets the starting contour level value. Must be less than `contours.end`",
                         "dflt": null,
+                        "editType": "doplot",
                         "role": "style",
                         "valType": "number"
                     }
@@ -16354,6 +16682,18 @@
                             "valType": "string"
                         }
                     },
+                    "namelength": {
+                        "arrayOk": true,
+                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis.",
+                        "min": -1,
+                        "role": "style",
+                        "valType": "integer"
+                    },
+                    "namelengthsrc": {
+                        "description": "Sets the source reference on plot.ly for  namelength .",
+                        "role": "info",
+                        "valType": "string"
+                    },
                     "role": "object"
                 },
                 "ids": {
@@ -16374,7 +16714,7 @@
                 },
                 "line": {
                     "color": {
-                        "description": "Sets the color of the contour level. Has no if `contours.coloring` is set to *lines*.",
+                        "description": "Sets the color of the contour level. Has no effect if `contours.coloring` is set to *lines*.",
                         "role": "style",
                         "valType": "color"
                     },
@@ -16444,6 +16784,7 @@
                 "ncontours": {
                     "description": "Sets the maximum number of contour levels. The actual number of contours will be chosen automatically to be less than or equal to the value of `ncontours`. Has an effect only if `autocontour` is *true* or if `contours.size` is missing.",
                     "dflt": 15,
+                    "editType": "docalc",
                     "min": 1,
                     "role": "style",
                     "valType": "integer"
@@ -17195,6 +17536,18 @@
                             "valType": "string"
                         }
                     },
+                    "namelength": {
+                        "arrayOk": true,
+                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis.",
+                        "min": -1,
+                        "role": "style",
+                        "valType": "integer"
+                    },
+                    "namelengthsrc": {
+                        "description": "Sets the source reference on plot.ly for  namelength .",
+                        "role": "info",
+                        "valType": "string"
+                    },
                     "role": "object"
                 },
                 "i": {
@@ -17690,6 +18043,18 @@
                             "valType": "string"
                         }
                     },
+                    "namelength": {
+                        "arrayOk": true,
+                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis.",
+                        "min": -1,
+                        "role": "style",
+                        "valType": "integer"
+                    },
+                    "namelengthsrc": {
+                        "description": "Sets the source reference on plot.ly for  namelength .",
+                        "role": "info",
+                        "valType": "string"
+                    },
                     "role": "object"
                 },
                 "ids": {
@@ -18146,6 +18511,18 @@
                             "role": "info",
                             "valType": "string"
                         }
+                    },
+                    "namelength": {
+                        "arrayOk": true,
+                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis.",
+                        "min": -1,
+                        "role": "style",
+                        "valType": "integer"
+                    },
+                    "namelengthsrc": {
+                        "description": "Sets the source reference on plot.ly for  namelength .",
+                        "role": "info",
+                        "valType": "string"
                     },
                     "role": "object"
                 },
@@ -18916,6 +19293,18 @@
                             "valType": "string"
                         }
                     },
+                    "namelength": {
+                        "arrayOk": true,
+                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis.",
+                        "min": -1,
+                        "role": "style",
+                        "valType": "integer"
+                    },
+                    "namelengthsrc": {
+                        "description": "Sets the source reference on plot.ly for  namelength .",
+                        "role": "info",
+                        "valType": "string"
+                    },
                     "role": "object"
                 },
                 "hovertext": {
@@ -19315,6 +19704,18 @@
                             "valType": "string"
                         }
                     },
+                    "namelength": {
+                        "arrayOk": true,
+                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis.",
+                        "min": -1,
+                        "role": "style",
+                        "valType": "integer"
+                    },
+                    "namelengthsrc": {
+                        "description": "Sets the source reference on plot.ly for  namelength .",
+                        "role": "info",
+                        "valType": "string"
+                    },
                     "role": "object"
                 },
                 "ids": {
@@ -19685,6 +20086,18 @@
                             "valType": "string"
                         }
                     },
+                    "namelength": {
+                        "arrayOk": true,
+                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis.",
+                        "min": -1,
+                        "role": "style",
+                        "valType": "integer"
+                    },
+                    "namelengthsrc": {
+                        "description": "Sets the source reference on plot.ly for  namelength .",
+                        "role": "info",
+                        "valType": "string"
+                    },
                     "role": "object"
                 },
                 "ids": {
@@ -19964,6 +20377,13 @@
         },
         "scatter": {
             "attributes": {
+                "cliponaxis": {
+                    "description": "Determines whether or not markers and text nodes are clipped about the subplot axes. To show markers and text nodes above axis lines and tick labels, make sure to set `xaxis.layer` and `yaxis.layer` to *below traces*.",
+                    "dflt": true,
+                    "editType": "doplot",
+                    "role": "info",
+                    "valType": "boolean"
+                },
                 "connectgaps": {
                     "description": "Determines whether or not gaps (i.e. {nan} or missing values) in the provided data arrays are connected.",
                     "dflt": false,
@@ -20301,6 +20721,18 @@
                             "role": "info",
                             "valType": "string"
                         }
+                    },
+                    "namelength": {
+                        "arrayOk": true,
+                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis.",
+                        "min": -1,
+                        "role": "style",
+                        "valType": "integer"
+                    },
+                    "namelengthsrc": {
+                        "description": "Sets the source reference on plot.ly for  namelength .",
+                        "role": "info",
+                        "valType": "string"
                     },
                     "role": "object"
                 },
@@ -21909,6 +22341,18 @@
                             "valType": "string"
                         }
                     },
+                    "namelength": {
+                        "arrayOk": true,
+                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis.",
+                        "min": -1,
+                        "role": "style",
+                        "valType": "integer"
+                    },
+                    "namelengthsrc": {
+                        "description": "Sets the source reference on plot.ly for  namelength .",
+                        "role": "info",
+                        "valType": "string"
+                    },
                     "role": "object"
                 },
                 "hovertext": {
@@ -23025,6 +23469,18 @@
                             "role": "info",
                             "valType": "string"
                         }
+                    },
+                    "namelength": {
+                        "arrayOk": true,
+                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis.",
+                        "min": -1,
+                        "role": "style",
+                        "valType": "integer"
+                    },
+                    "namelengthsrc": {
+                        "description": "Sets the source reference on plot.ly for  namelength .",
+                        "role": "info",
+                        "valType": "string"
                     },
                     "role": "object"
                 },
@@ -24231,6 +24687,18 @@
                             "role": "info",
                             "valType": "string"
                         }
+                    },
+                    "namelength": {
+                        "arrayOk": true,
+                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis.",
+                        "min": -1,
+                        "role": "style",
+                        "valType": "integer"
+                    },
+                    "namelengthsrc": {
+                        "description": "Sets the source reference on plot.ly for  namelength .",
+                        "role": "info",
+                        "valType": "string"
                     },
                     "role": "object"
                 },
@@ -25651,6 +26119,18 @@
                             "valType": "string"
                         }
                     },
+                    "namelength": {
+                        "arrayOk": true,
+                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis.",
+                        "min": -1,
+                        "role": "style",
+                        "valType": "integer"
+                    },
+                    "namelengthsrc": {
+                        "description": "Sets the source reference on plot.ly for  namelength .",
+                        "role": "info",
+                        "valType": "string"
+                    },
                     "role": "object"
                 },
                 "ids": {
@@ -26567,6 +27047,18 @@
                             "valType": "string"
                         }
                     },
+                    "namelength": {
+                        "arrayOk": true,
+                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis.",
+                        "min": -1,
+                        "role": "style",
+                        "valType": "integer"
+                    },
+                    "namelengthsrc": {
+                        "description": "Sets the source reference on plot.ly for  namelength .",
+                        "role": "info",
+                        "valType": "string"
+                    },
                     "role": "object"
                 },
                 "hovertext": {
@@ -27016,12 +27508,17 @@
                         "valType": "string"
                     },
                     "opacity": {
-                        "arrayOk": false,
+                        "arrayOk": true,
                         "description": "Sets the marker opacity.",
                         "max": 1,
                         "min": 0,
                         "role": "style",
                         "valType": "number"
+                    },
+                    "opacitysrc": {
+                        "description": "Sets the source reference on plot.ly for  opacity .",
+                        "role": "info",
+                        "valType": "string"
                     },
                     "reversescale": {
                         "description": "Has an effect only if `marker.color` is set to a numerical array. Reverses the color mapping if true (`cmin` will correspond to the last color in the array and `cmax` will correspond to the first color).",
@@ -27243,6 +27740,13 @@
                     "role": "data",
                     "valType": "data_array"
                 },
+                "cliponaxis": {
+                    "description": "Determines whether or not markers and text nodes are clipped about the subplot axes. To show markers and text nodes above axis lines and tick labels, make sure to set `xaxis.layer` and `yaxis.layer` to *below traces*.",
+                    "dflt": true,
+                    "editType": "doplot",
+                    "role": "info",
+                    "valType": "boolean"
+                },
                 "connectgaps": {
                     "description": "Determines whether or not gaps (i.e. {nan} or missing values) in the provided data arrays are connected.",
                     "dflt": false,
@@ -27363,6 +27867,18 @@
                             "role": "info",
                             "valType": "string"
                         }
+                    },
+                    "namelength": {
+                        "arrayOk": true,
+                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis.",
+                        "min": -1,
+                        "role": "style",
+                        "valType": "integer"
+                    },
+                    "namelengthsrc": {
+                        "description": "Sets the source reference on plot.ly for  namelength .",
+                        "role": "info",
+                        "valType": "string"
                     },
                     "role": "object"
                 },
@@ -29158,6 +29674,18 @@
                             "role": "info",
                             "valType": "string"
                         }
+                    },
+                    "namelength": {
+                        "arrayOk": true,
+                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis.",
+                        "min": -1,
+                        "role": "style",
+                        "valType": "integer"
+                    },
+                    "namelengthsrc": {
+                        "description": "Sets the source reference on plot.ly for  namelength .",
+                        "role": "info",
+                        "valType": "string"
                     },
                     "role": "object"
                 },
