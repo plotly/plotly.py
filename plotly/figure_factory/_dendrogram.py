@@ -87,8 +87,7 @@ def create_dendrogram(X, orientation="bottom", labels=None,
     dendrogram = _Dendrogram(X, orientation, labels, colorscale,
                              distfun=distfun, linkagefun=linkagefun)
 
-    return {'layout': dendrogram.layout,
-            'data': dendrogram.data}
+    return graph_objs.Figure(data=dendrogram.data, layout=dendrogram.layout)
 
 
 class _Dendrogram(object):
