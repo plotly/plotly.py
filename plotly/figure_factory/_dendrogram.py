@@ -17,7 +17,7 @@ scs = optional_imports.get_module('scipy.spatial')
 def create_dendrogram(X, orientation="bottom", labels=None,
                       colorscale=None, distfun=None,
                       linkagefun=lambda x: sch.linkage(x, 'complete'),
-                      annotation=None):
+                      hovertext=None):
     """
     BETA function that returns a dendrogram Plotly figure object.
 
@@ -29,6 +29,7 @@ def create_dendrogram(X, orientation="bottom", labels=None,
                                the observations
     :param (function) linkagefun: Function to compute the linkage matrix from
                                   the pairwise distances
+    :param (list[list]) hovertext: List of hovertext for constituent traces of dendrogram
 
         clusters
 
@@ -87,7 +88,7 @@ def create_dendrogram(X, orientation="bottom", labels=None,
 
     dendrogram = _Dendrogram(X, orientation, labels, colorscale,
                              distfun=distfun, linkagefun=linkagefun,
-                             annotation=annotation)
+                             hovertext=hovertext)
 
     return {'layout': dendrogram.layout,
             'data': dendrogram.data}
@@ -100,7 +101,7 @@ class _Dendrogram(object):
                  width="100%", height="100%", xaxis='xaxis', yaxis='yaxis',
                  distfun=None,
                  linkagefun=lambda x: sch.linkage(x, 'complete'),
-                 annotation=None):
+                 hovertext=None):
         self.orientation = orientation
         self.labels = labels
         self.xaxis = xaxis
@@ -127,7 +128,7 @@ class _Dendrogram(object):
             ordered_labels, leaves) = self.get_dendrogram_traces(X, colorscale,
                                                                  distfun,
                                                                  linkagefun, 
-                                                                 annotation)
+                                                                 hovertext)
 
         self.labels = ordered_labels
         self.leaves = leaves
@@ -236,7 +237,7 @@ class _Dendrogram(object):
 
         return self.layout
 
-    def get_dendrogram_traces(self, X, colorscale, distfun, linkagefun, annotation):
+    def get_dendrogram_traces(self, X, colorscale, distfun, linkagefun, hovertext):
         """
         Calculates all the elements needed for plotting a dendrogram.
 
@@ -246,6 +247,7 @@ class _Dendrogram(object):
                                    from the observations
         :param (function) linkagefun: Function to compute the linkage matrix
                                       from the pairwise distances
+        :param (list) hovertext: List of hovertext for constituent traces of dendrogram
         :rtype (tuple): Contains all the traces in the following order:
             (a) trace_list: List of Plotly trace objects for dendrogram tree
             (b) icoord: All X points of the dendrogram tree as array of arrays
@@ -283,15 +285,15 @@ class _Dendrogram(object):
             else:
                 ys = icoord[i]
             color_key = color_list[i]
-            text_annotation = None
-            if annotation:
-                text_annotation = annotation[i]
+            hovertext_label = None
+            if hovertext:
+                hovertext_label = hovertext[i]
             trace = graph_objs.Scatter(
                 x=np.multiply(self.sign[self.xaxis], xs),
                 y=np.multiply(self.sign[self.yaxis], ys),
                 mode='lines',
                 marker=graph_objs.Marker(color=colors[color_key]),
-                text=text_annotation,
+                text=hovertext_label,
                 hoverinfo='text'
             )
 
