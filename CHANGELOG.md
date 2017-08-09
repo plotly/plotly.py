@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.0.14] - 2017-08-09
+### Fixed
+- [Sharekey enabling issue](https://github.com/plotly/plotly.py/issues/719) where plots were made private instead of secret.
+- Issue removing rug plots from violin plots with multiple traces.
+
 ## [2.0.13] - 2017-08-04
 ### Updated
 - Updated `plotly.min.js` to version 1.29.1 for `plotly.offline`.
