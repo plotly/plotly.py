@@ -1317,7 +1317,6 @@ def add_share_key_to_url(plot_url, attempt=0):
     if not share_key_enabled:
         attempt += 1
         if attempt == 50:
-            print('Raising exception')
             raise exceptions.PlotlyError(
                 "The sharekey could not be enabled at this time so the graph "
                 "is saved as private. Try again to save as 'secret' later."
