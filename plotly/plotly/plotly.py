@@ -19,6 +19,7 @@ from __future__ import absolute_import
 import copy
 import json
 import os
+import time
 import warnings
 import webbrowser
 
@@ -1304,7 +1305,6 @@ def add_share_key_to_url(plot_url, attempt=0):
     username = urlsplit.path.split('/')[1].split('~')[1]
     idlocal = urlsplit.path.split('/')[2]
     fid = '{}:{}'.format(username, idlocal)
-
     body = {'share_key_enabled': True, 'world_readable': False}
     response = v2.files.update(fid, body)
 
@@ -1312,7 +1312,9 @@ def add_share_key_to_url(plot_url, attempt=0):
     # Check that share_key_enabled is set to true and
     # retry if this is not the case
     # https://github.com/plotly/streambed/issues/4089
-    if not v2.files.retrieve(fid).json()['share_key_enabled']:
+    time.sleep(4)
+    share_key_enabled = v2.files.retrieve(fid).json()['share_key_enabled']
+    if not share_key_enabled:
         attempt += 1
         if attempt == 50:
             raise exceptions.PlotlyError(
