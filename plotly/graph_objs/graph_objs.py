@@ -864,14 +864,15 @@ class Bar(PlotlyDict):
     """
     Valid attributes for 'bar' at path [] under parents ():
     
-        ['bardir', 'base', 'basesrc', 'customdata', 'customdatasrc', 'dx',
-        'dy', 'error_x', 'error_y', 'hoverinfo', 'hoverinfosrc', 'hoverlabel',
-        'hovertext', 'hovertextsrc', 'ids', 'idssrc', 'insidetextfont',
-        'legendgroup', 'marker', 'name', 'offset', 'offsetsrc', 'opacity',
-        'orientation', 'outsidetextfont', 'r', 'rsrc', 'showlegend', 'stream',
-        't', 'text', 'textfont', 'textposition', 'textpositionsrc', 'textsrc',
-        'tsrc', 'type', 'uid', 'visible', 'width', 'widthsrc', 'x', 'x0',
-        'xaxis', 'xcalendar', 'xsrc', 'y', 'y0', 'yaxis', 'ycalendar', 'ysrc']
+        ['bardir', 'base', 'basesrc', 'constraintext', 'customdata',
+        'customdatasrc', 'dx', 'dy', 'error_x', 'error_y', 'hoverinfo',
+        'hoverinfosrc', 'hoverlabel', 'hovertext', 'hovertextsrc', 'ids',
+        'idssrc', 'insidetextfont', 'legendgroup', 'marker', 'name', 'offset',
+        'offsetsrc', 'opacity', 'orientation', 'outsidetextfont', 'r', 'rsrc',
+        'showlegend', 'stream', 't', 'text', 'textfont', 'textposition',
+        'textpositionsrc', 'textsrc', 'tsrc', 'type', 'uid', 'visible',
+        'width', 'widthsrc', 'x', 'x0', 'xaxis', 'xcalendar', 'xsrc', 'y',
+        'y0', 'yaxis', 'ycalendar', 'ysrc']
     
     Run `<bar-object>.help('attribute')` on any of the above.
     '<bar-object>' is the object at []
