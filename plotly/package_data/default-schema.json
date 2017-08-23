@@ -4085,6 +4085,16 @@
                         "role": "style",
                         "valType": "string"
                     },
+                    "layer": {
+                        "description": "Sets the layer on which this axis is displayed. If *above traces*, this axis is displayed above all the subplot's traces If *below traces*, this axis is displayed below all the subplot's traces, but above the grid lines. Useful when used together with scatter-like traces with `cliponaxis` set to *false* to show markers and/or text nodes above this axis.",
+                        "dflt": "above traces",
+                        "role": "info",
+                        "valType": "enumerated",
+                        "values": [
+                            "above traces",
+                            "below traces"
+                        ]
+                    },
                     "linecolor": {
                         "description": "Sets the axis line color.",
                         "dflt": "#444",
@@ -4352,6 +4362,16 @@
                         "dflt": "",
                         "role": "style",
                         "valType": "string"
+                    },
+                    "layer": {
+                        "description": "Sets the layer on which this axis is displayed. If *above traces*, this axis is displayed above all the subplot's traces If *below traces*, this axis is displayed below all the subplot's traces, but above the grid lines. Useful when used together with scatter-like traces with `cliponaxis` set to *false* to show markers and/or text nodes above this axis.",
+                        "dflt": "above traces",
+                        "role": "info",
+                        "valType": "enumerated",
+                        "values": [
+                            "above traces",
+                            "below traces"
+                        ]
                     },
                     "linecolor": {
                         "description": "Sets the axis line color.",
@@ -4626,6 +4646,16 @@
                         "dflt": "",
                         "role": "style",
                         "valType": "string"
+                    },
+                    "layer": {
+                        "description": "Sets the layer on which this axis is displayed. If *above traces*, this axis is displayed above all the subplot's traces If *below traces*, this axis is displayed below all the subplot's traces, but above the grid lines. Useful when used together with scatter-like traces with `cliponaxis` set to *false* to show markers and/or text nodes above this axis.",
+                        "dflt": "above traces",
+                        "role": "info",
+                        "valType": "enumerated",
+                        "values": [
+                            "above traces",
+                            "below traces"
+                        ]
                     },
                     "linecolor": {
                         "description": "Sets the axis line color.",
@@ -7013,6 +7043,18 @@
                     "description": "Sets the source reference on plot.ly for  base .",
                     "role": "info",
                     "valType": "string"
+                },
+                "constraintext": {
+                    "description": "Constrain the size of text inside or outside a bar to be no larger than the bar itself.",
+                    "dflt": "both",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "inside",
+                        "outside",
+                        "both",
+                        "none"
+                    ]
                 },
                 "customdata": {
                     "description": "Assigns extra data each datum. This may be useful when listening to hover, click and selection events. Note that, *scatter* traces also appends customdata items in the markers DOM elements",
@@ -29976,6 +30018,75 @@
         }
     },
     "transforms": {
+        "aggregate": {
+            "attributes": {
+                "aggregations": {
+                    "items": {
+                        "aggregation": {
+                            "enabled": {
+                                "description": "Determines whether this aggregation function is enabled or disabled.",
+                                "dflt": true,
+                                "valType": "boolean"
+                            },
+                            "func": {
+                                "description": "Sets the aggregation function. All values from the linked `target`, corresponding to the same value in the `groups` array, are collected and reduced by this function. *count* is simply the number of values in the `groups` array, so does not even require the linked array to exist. *first* (*last*) is just the first (last) linked value. Invalid values are ignored, so for example in *avg* they do not contribute to either the numerator or the denominator. Any data type (numeric, date, category) may be aggregated with any function, even though in certain cases it is unlikely to make sense, for example a sum of dates or average of categories. *median* will return the average of the two central values if there is an even count. *mode* will return the first value to reach the maximum count, in case of a tie.",
+                                "dflt": "first",
+                                "role": "info",
+                                "valType": "enumerated",
+                                "values": [
+                                    "count",
+                                    "sum",
+                                    "avg",
+                                    "median",
+                                    "mode",
+                                    "rms",
+                                    "stddev",
+                                    "min",
+                                    "max",
+                                    "first",
+                                    "last"
+                                ]
+                            },
+                            "funcmode": {
+                                "description": "*stddev* supports two formula variants: *sample* (normalize by N-1) and *population* (normalize by N).",
+                                "dflt": "sample",
+                                "role": "info",
+                                "valType": "enumerated",
+                                "values": [
+                                    "sample",
+                                    "population"
+                                ]
+                            },
+                            "role": "object",
+                            "target": {
+                                "description": "A reference to the data array in the parent trace to aggregate. To aggregate by nested variables, use *.* to access them. For example, set `groups` to *marker.color* to aggregate over the marker color array. The referenced array must already exist, unless `func` is *count*, and each array may only be referenced once.",
+                                "role": "info",
+                                "valType": "string"
+                            }
+                        }
+                    },
+                    "role": "object"
+                },
+                "enabled": {
+                    "description": "Determines whether this aggregate transform is enabled or disabled.",
+                    "dflt": true,
+                    "valType": "boolean"
+                },
+                "groups": {
+                    "arrayOk": true,
+                    "description": "Sets the grouping target to which the aggregation is applied. Data points with matching group values will be coalesced into one point, using the supplied aggregation functions to reduce data in other data arrays. If a string, `groups` is assumed to be a reference to a data array in the parent trace object. To aggregate by nested variables, use *.* to access them. For example, set `groups` to *marker.color* to aggregate about the marker color array. If an array, `groups` is itself the data array by which we aggregate.",
+                    "dflt": "x",
+                    "noBlank": true,
+                    "strict": true,
+                    "valType": "string"
+                },
+                "groupssrc": {
+                    "description": "Sets the source reference on plot.ly for  groups .",
+                    "role": "info",
+                    "valType": "string"
+                }
+            }
+        },
         "candlestick": {
             "attributes": {}
         },
@@ -30016,7 +30127,7 @@
                 },
                 "target": {
                     "arrayOk": true,
-                    "description": "Sets the filter target by which the filter is applied. If a string, *target* is assumed to be a reference to a data array in the parent trace object. To filter about nested variables, use *.* to access them. For example, set `target` to *marker.color* to filter about the marker color array. If an array, *target* is then the data array by which the filter is applied.",
+                    "description": "Sets the filter target by which the filter is applied. If a string, `target` is assumed to be a reference to a data array in the parent trace object. To filter about nested variables, use *.* to access them. For example, set `target` to *marker.color* to filter about the marker color array. If an array, `target` is then the data array by which the filter is applied.",
                     "dflt": "x",
                     "noBlank": true,
                     "strict": true,
@@ -30052,7 +30163,7 @@
                     "valType": "string"
                 },
                 "value": {
-                    "description": "Sets the value or values by which to filter by. Values are expected to be in the same type as the data linked to *target*. When `operation` is set to one of the comparison values (=,!=,<,>=,>,<=) *value* is expected to be a number or a string. When `operation` is set to one of the interval values ([],(),[),(],][,)(,](,)[) *value* is expected to be 2-item array where the first item is the lower bound and the second item is the upper bound. When `operation`, is set to one of the set values ({},}{) *value* is expected to be an array with as many items as the desired set elements.",
+                    "description": "Sets the value or values by which to filter. Values are expected to be in the same type as the data linked to `target`. When `operation` is set to one of the comparison values (=,!=,<,>=,>,<=) `value` is expected to be a number or a string. When `operation` is set to one of the interval values ([],(),[),(],][,)(,](,)[) `value` is expected to be 2-item array where the first item is the lower bound and the second item is the upper bound. When `operation`, is set to one of the set values ({},}{) `value` is expected to be an array with as many items as the desired set elements.",
                     "dflt": 0,
                     "valType": "any"
                 },
@@ -30098,6 +30209,10 @@
                 "groupssrc": {
                     "description": "Sets the source reference on plot.ly for  groups .",
                     "role": "info",
+                    "valType": "string"
+                },
+                "nameformat": {
+                    "description": "Pattern by which grouped traces are named. If only one trace is present, defaults to the group name (`\"%{group}\"`), otherwise defaults to the group name with trace name (`\"%{group} (%{trace})\"`). Available escape sequences are `%{group}`, which inserts the group name, and `%{trace}`, which inserts the trace name. If grouping GDP data by country when more than one trace is present, for example, the default \"%{group} (%{trace})\" would return \"Monaco (GDP per capita)\".",
                     "valType": "string"
                 },
                 "styles": {
