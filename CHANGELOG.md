@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.0.15] - 2017-08-22
+### Updated
+- Updated `plotly.min.js` to version 1.30.0 for `plotly.offline`.
+  - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1300----2017-08-21) for additional information regarding the updates.
+
 ## [2.0.14] - 2017-08-09
 ### Fixed
 - [Sharekey enabling issue](https://github.com/plotly/plotly.py/issues/719) where plots were made private instead of secret.
@@ -10,7 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [2.0.13] - 2017-08-04
 ### Updated
 - Updated `plotly.min.js` to version 1.29.1 for `plotly.offline`.
-  - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1291----2017-07-25) for additional information regarding the updates.
+  - See [the plotly.js CHANGELOG]() for additional information regarding the updates.
 - `figure_factory.create_gantt` and `figure_factory.create_dendrogram` now return a Plotly figure (consistent with other figure factory chart types).
 - `offline.init_notebook_mode()` is now optional when using `offline.iplot()`.
 
