@@ -6,9 +6,13 @@ The bottom line. Follow your Nose, or our Nose. Write-run-love tests :fist:.
 
 Check out the [Code of Conduct](CODE_OF_CONDUCT.md). Don't tl:dr; it, but the general idea is to be nice.
 
-## Got Questions?
+## Have a Bug Report?
 
 Open an issue! Go to https://github.com/plotly/plotly.py/issues. It's possible that your issue was already addressed. If it wasn't, open it. We also accept PRs; take a look at the steps below for instructions on how to do this.
+
+## Have Questions about Plotly?
+
+Check out our Support App: https://support.plot.ly/libraries/python or Community Forum: https://community.plot.ly/.
 
 ## Setup
 
@@ -189,6 +193,8 @@ tox -- -a '!slow','!matplotlib'
 You're *strongly* encouraged to write tests that check your added functionality.
 
 When you write a new test anywhere under the `tests` directory, if your PR gets accepted, that test will run in a virtual machine to ensure that future changes don't break your contributions!
+
+Test accounts include: `PythonTest`, `PlotlyImageTest`, and  `PlotlyStageTest`. 
 
 #### Publishing to Pip
 

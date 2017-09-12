@@ -2,7 +2,49 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [2.0.15] - 2017-08-22
+### Updated
+- Updated `plotly.min.js` to version 1.30.0 for `plotly.offline`.
+  - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1300----2017-08-21) for additional information regarding the updates.
+
+## [2.0.14] - 2017-08-09
+### Fixed
+- [Sharekey enabling issue](https://github.com/plotly/plotly.py/issues/719) where plots were made private instead of secret.
+- Issue removing rug plots from violin plots with multiple traces.
+
+## [2.0.13] - 2017-08-04
+### Updated
+- Updated `plotly.min.js` to version 1.29.1 for `plotly.offline`.
+  - See [the plotly.js CHANGELOG]() for additional information regarding the updates.
+- `figure_factory.create_gantt` and `figure_factory.create_dendrogram` now return a Plotly figure (consistent with other figure factory chart types).
+- `offline.init_notebook_mode()` is now optional when using `offline.iplot()`.
+
+## [2.0.12] - 2017-06-30
+### Updated
+- Updated `plotly.min.js` to version 1.28.3 for `plotly.offline`.
+  - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1283----2017-06-26) for additional information regarding the updates.
+### Added
+- `figure_factory.create_facet_grid` now supports histogram, bar, and box traces.
+
+## [2.0.11] - 2017-06-20
+### Updated
+- Updated `plotly.min.js` to version 1.28.1 for `plotly.offline`.
+  - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1281----2017-06-20) for additional information regarding the updates.
+
+## [2.0.10] - 2017-06-12
+### Added
+- The figure_factory can now create facet grids with `.create_facet_grid`. Check it out with:
+```
+import plotly.figure_factory as ff
+help(ff.create_facet_grid)
+```
+
+## [2.0.9] - 2017-05-30
+### Fixed
+- Fixes issue [https://github.com/plotly/plotly.py/issues/721](https://github.com/plotly/plotly.py/issues/721). There was an issue when running `import plotly` with old versions of the `decorator` package. We now require installations to use at least version `4.0.6` of the `decorator` package. See [https://github.com/micheles/decorator/blob/master/CHANGES.md](https://github.com/micheles/decorator/blob/master/CHANGES.md) for the `decorator` package changelog.
+
+### Added
+- 'sort' parameter to `FF.create_violin` to control whether violin plots are sorted alphabetically.
 
 ## [2.0.8] - 2017-04-21
 ### Added

@@ -4,6 +4,7 @@ from numbers import Number
 
 from plotly import exceptions, optional_imports
 from plotly.figure_factory import utils
+from plotly.graph_objs import graph_objs
 
 pd = optional_imports.get_module('pandas')
 
@@ -170,7 +171,7 @@ def gantt(chart, colors, title, bar_width, showgrid_x, showgrid_y, height,
     )
     layout['shapes'] = tasks
 
-    fig = dict(data=data, layout=layout)
+    fig = graph_objs.Figure(data=data, layout=layout)
     return fig
 
 

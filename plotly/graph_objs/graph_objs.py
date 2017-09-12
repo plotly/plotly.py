@@ -825,7 +825,8 @@ class Annotation(PlotlyDict):
         'borderwidth', 'captureevents', 'clicktoshow', 'font', 'height',
         'hoverlabel', 'hovertext', 'opacity', 'ref', 'showarrow', 'standoff',
         'text', 'textangle', 'valign', 'visible', 'width', 'x', 'xanchor',
-        'xclick', 'xref', 'xshift', 'y', 'yanchor', 'yclick', 'yref', 'yshift']
+        'xclick', 'xref', 'xshift', 'y', 'yanchor', 'yclick', 'yref', 'yshift',
+        'z']
     
     Run `<annotation-object>.help('attribute')` on any of the above.
     '<annotation-object>' is the object at []
@@ -847,8 +848,10 @@ class Area(PlotlyDict):
     """
     Valid attributes for 'area' at path [] under parents ():
     
-        ['hoverinfo', 'legendgroup', 'marker', 'name', 'opacity', 'r', 'rsrc',
-        'showlegend', 'stream', 't', 'tsrc', 'type', 'uid', 'visible']
+        ['customdata', 'customdatasrc', 'hoverinfo', 'hoverinfosrc',
+        'hoverlabel', 'ids', 'idssrc', 'legendgroup', 'marker', 'name',
+        'opacity', 'r', 'rsrc', 'showlegend', 'stream', 't', 'tsrc', 'type',
+        'uid', 'visible']
     
     Run `<area-object>.help('attribute')` on any of the above.
     '<area-object>' is the object at []
@@ -861,13 +864,15 @@ class Bar(PlotlyDict):
     """
     Valid attributes for 'bar' at path [] under parents ():
     
-        ['bardir', 'base', 'basesrc', 'dx', 'dy', 'error_x', 'error_y',
-        'hoverinfo', 'hovertext', 'hovertextsrc', 'insidetextfont',
-        'legendgroup', 'marker', 'name', 'offset', 'offsetsrc', 'opacity',
-        'orientation', 'outsidetextfont', 'r', 'rsrc', 'showlegend', 'stream',
-        't', 'text', 'textfont', 'textposition', 'textpositionsrc', 'textsrc',
-        'tsrc', 'type', 'uid', 'visible', 'width', 'widthsrc', 'x', 'x0',
-        'xaxis', 'xcalendar', 'xsrc', 'y', 'y0', 'yaxis', 'ycalendar', 'ysrc']
+        ['bardir', 'base', 'basesrc', 'constraintext', 'customdata',
+        'customdatasrc', 'dx', 'dy', 'error_x', 'error_y', 'hoverinfo',
+        'hoverinfosrc', 'hoverlabel', 'hovertext', 'hovertextsrc', 'ids',
+        'idssrc', 'insidetextfont', 'legendgroup', 'marker', 'name', 'offset',
+        'offsetsrc', 'opacity', 'orientation', 'outsidetextfont', 'r', 'rsrc',
+        'showlegend', 'stream', 't', 'text', 'textfont', 'textposition',
+        'textpositionsrc', 'textsrc', 'tsrc', 'type', 'uid', 'visible',
+        'width', 'widthsrc', 'x', 'x0', 'xaxis', 'xcalendar', 'xsrc', 'y',
+        'y0', 'yaxis', 'ycalendar', 'ysrc']
     
     Run `<bar-object>.help('attribute')` on any of the above.
     '<bar-object>' is the object at []
@@ -880,7 +885,8 @@ class Box(PlotlyDict):
     """
     Valid attributes for 'box' at path [] under parents ():
     
-        ['boxmean', 'boxpoints', 'fillcolor', 'hoverinfo', 'jitter',
+        ['boxmean', 'boxpoints', 'customdata', 'customdatasrc', 'fillcolor',
+        'hoverinfo', 'hoverinfosrc', 'hoverlabel', 'ids', 'idssrc', 'jitter',
         'legendgroup', 'line', 'marker', 'name', 'opacity', 'orientation',
         'pointpos', 'showlegend', 'stream', 'type', 'uid', 'visible',
         'whiskerwidth', 'x', 'x0', 'xaxis', 'xsrc', 'y', 'y0', 'yaxis', 'ysrc']
@@ -896,8 +902,9 @@ class Candlestick(PlotlyDict):
     """
     Valid attributes for 'candlestick' at path [] under parents ():
     
-        ['close', 'closesrc', 'decreasing', 'high', 'highsrc', 'hoverinfo',
-        'increasing', 'legendgroup', 'line', 'low', 'lowsrc', 'name',
+        ['close', 'closesrc', 'customdata', 'customdatasrc', 'decreasing',
+        'high', 'highsrc', 'hoverinfo', 'hoverinfosrc', 'hoverlabel', 'ids',
+        'idssrc', 'increasing', 'legendgroup', 'line', 'low', 'lowsrc', 'name',
         'opacity', 'open', 'opensrc', 'showlegend', 'stream', 'text',
         'textsrc', 'type', 'uid', 'visible', 'whiskerwidth', 'x', 'xaxis',
         'xcalendar', 'xsrc', 'yaxis']
@@ -914,7 +921,8 @@ class Carpet(PlotlyDict):
     Valid attributes for 'carpet' at path [] under parents ():
     
         ['a', 'a0', 'aaxis', 'asrc', 'b', 'b0', 'baxis', 'bsrc', 'carpet',
-        'cheaterslope', 'color', 'da', 'db', 'font', 'hoverinfo',
+        'cheaterslope', 'color', 'customdata', 'customdatasrc', 'da', 'db',
+        'font', 'hoverinfo', 'hoverinfosrc', 'hoverlabel', 'ids', 'idssrc',
         'legendgroup', 'name', 'opacity', 'showlegend', 'stream', 'type',
         'uid', 'visible', 'x', 'xaxis', 'xsrc', 'y', 'yaxis', 'ysrc']
     
@@ -929,11 +937,12 @@ class Choropleth(PlotlyDict):
     """
     Valid attributes for 'choropleth' at path [] under parents ():
     
-        ['autocolorscale', 'colorbar', 'colorscale', 'geo', 'hoverinfo',
-        'legendgroup', 'locationmode', 'locations', 'locationssrc', 'marker',
-        'name', 'opacity', 'reversescale', 'showlegend', 'showscale', 'stream',
-        'text', 'textsrc', 'type', 'uid', 'visible', 'z', 'zauto', 'zmax',
-        'zmin', 'zsrc']
+        ['autocolorscale', 'colorbar', 'colorscale', 'customdata',
+        'customdatasrc', 'geo', 'hoverinfo', 'hoverinfosrc', 'hoverlabel',
+        'ids', 'idssrc', 'legendgroup', 'locationmode', 'locations',
+        'locationssrc', 'marker', 'name', 'opacity', 'reversescale',
+        'showlegend', 'showscale', 'stream', 'text', 'textsrc', 'type', 'uid',
+        'visible', 'z', 'zauto', 'zmax', 'zmin', 'zsrc']
     
     Run `<choropleth-object>.help('attribute')` on any of the above.
     '<choropleth-object>' is the object at []
@@ -968,12 +977,13 @@ class Contour(PlotlyDict):
     Valid attributes for 'contour' at path [] under parents ():
     
         ['autocolorscale', 'autocontour', 'colorbar', 'colorscale',
-        'connectgaps', 'contours', 'dx', 'dy', 'hoverinfo', 'legendgroup',
-        'line', 'name', 'ncontours', 'opacity', 'reversescale', 'showlegend',
-        'showscale', 'stream', 'text', 'textsrc', 'transpose', 'type', 'uid',
-        'visible', 'x', 'x0', 'xaxis', 'xcalendar', 'xsrc', 'xtype', 'y', 'y0',
-        'yaxis', 'ycalendar', 'ysrc', 'ytype', 'z', 'zauto', 'zmax', 'zmin',
-        'zsrc']
+        'connectgaps', 'contours', 'customdata', 'customdatasrc', 'dx', 'dy',
+        'hoverinfo', 'hoverinfosrc', 'hoverlabel', 'ids', 'idssrc',
+        'legendgroup', 'line', 'name', 'ncontours', 'opacity', 'reversescale',
+        'showlegend', 'showscale', 'stream', 'text', 'textsrc', 'transpose',
+        'type', 'uid', 'visible', 'x', 'x0', 'xaxis', 'xcalendar', 'xsrc',
+        'xtype', 'y', 'y0', 'yaxis', 'ycalendar', 'ysrc', 'ytype', 'z',
+        'zauto', 'zmax', 'zmin', 'zsrc']
     
     Run `<contour-object>.help('attribute')` on any of the above.
     '<contour-object>' is the object at []
@@ -988,11 +998,12 @@ class Contourcarpet(PlotlyDict):
     
         ['a', 'a0', 'asrc', 'atype', 'autocolorscale', 'autocontour', 'b',
         'b0', 'bsrc', 'btype', 'carpet', 'colorbar', 'colorscale',
-        'connectgaps', 'contours', 'da', 'db', 'fillcolor', 'hoverinfo',
-        'legendgroup', 'line', 'mode', 'name', 'ncontours', 'opacity',
-        'reversescale', 'showlegend', 'showscale', 'stream', 'text', 'textsrc',
-        'transpose', 'type', 'uid', 'visible', 'xaxis', 'yaxis', 'z', 'zauto',
-        'zmax', 'zmin', 'zsrc']
+        'connectgaps', 'contours', 'customdata', 'customdatasrc', 'da', 'db',
+        'fillcolor', 'hoverinfo', 'hoverinfosrc', 'hoverlabel', 'ids',
+        'idssrc', 'legendgroup', 'line', 'mode', 'name', 'ncontours',
+        'opacity', 'reversescale', 'showlegend', 'showscale', 'stream', 'text',
+        'textsrc', 'transpose', 'type', 'uid', 'visible', 'xaxis', 'yaxis',
+        'z', 'zauto', 'zmax', 'zmin', 'zsrc']
     
     Run `<contourcarpet-object>.help('attribute')` on any of the above.
     '<contourcarpet-object>' is the object at []
@@ -1005,8 +1016,9 @@ class Contours(PlotlyDict):
     """
     Valid attributes for 'contours' at path [] under parents ():
     
-        ['coloring', 'end', 'operation', 'showlines', 'size', 'start', 'type',
-        'value', 'x', 'y', 'z']
+        ['coloring', 'end', 'labelfont', 'labelformat', 'operation',
+        'showlabels', 'showlines', 'size', 'start', 'type', 'value', 'x', 'y',
+        'z']
     
     Run `<contours-object>.help('attribute')` on any of the above.
     '<contours-object>' is the object at []
@@ -1021,7 +1033,7 @@ class Data(PlotlyList):
         ['Area', 'Bar', 'Box', 'Candlestick', 'Carpet', 'Choropleth',
         'Contour', 'Contourcarpet', 'Heatmap', 'Heatmapgl', 'Histogram',
         'Histogram2d', 'Histogram2dcontour', 'Mesh3d', 'Ohlc', 'Parcoords',
-        'Pie', 'Pointcloud', 'Scatter', 'Scatter3d', 'Scattercarpet',
+        'Pie', 'Pointcloud', 'Sankey', 'Scatter', 'Scatter3d', 'Scattercarpet',
         'Scattergeo', 'Scattergl', 'Scattermapbox', 'Scatterternary',
         'Surface']
 
@@ -1258,7 +1270,7 @@ class Font(PlotlyDict):
     """
     Valid attributes for 'font' at path [] under parents ():
     
-        ['color', 'family', 'size']
+        ['color', 'colorsrc', 'family', 'familysrc', 'size', 'sizesrc']
     
     Run `<font-object>.help('attribute')` on any of the above.
     '<font-object>' is the object at []
@@ -1312,12 +1324,13 @@ class Heatmap(PlotlyDict):
     """
     Valid attributes for 'heatmap' at path [] under parents ():
     
-        ['autocolorscale', 'colorbar', 'colorscale', 'connectgaps', 'dx', 'dy',
-        'hoverinfo', 'legendgroup', 'name', 'opacity', 'reversescale',
-        'showlegend', 'showscale', 'stream', 'text', 'textsrc', 'transpose',
-        'type', 'uid', 'visible', 'x', 'x0', 'xaxis', 'xcalendar', 'xgap',
-        'xsrc', 'xtype', 'y', 'y0', 'yaxis', 'ycalendar', 'ygap', 'ysrc',
-        'ytype', 'z', 'zauto', 'zmax', 'zmin', 'zsmooth', 'zsrc']
+        ['autocolorscale', 'colorbar', 'colorscale', 'connectgaps',
+        'customdata', 'customdatasrc', 'dx', 'dy', 'hoverinfo', 'hoverinfosrc',
+        'hoverlabel', 'ids', 'idssrc', 'legendgroup', 'name', 'opacity',
+        'reversescale', 'showlegend', 'showscale', 'stream', 'text', 'textsrc',
+        'transpose', 'type', 'uid', 'visible', 'x', 'x0', 'xaxis', 'xcalendar',
+        'xgap', 'xsrc', 'xtype', 'y', 'y0', 'yaxis', 'ycalendar', 'ygap',
+        'ysrc', 'ytype', 'z', 'zauto', 'zmax', 'zmin', 'zsmooth', 'zsrc']
     
     Run `<heatmap-object>.help('attribute')` on any of the above.
     '<heatmap-object>' is the object at []
@@ -1330,11 +1343,12 @@ class Heatmapgl(PlotlyDict):
     """
     Valid attributes for 'heatmapgl' at path [] under parents ():
     
-        ['autocolorscale', 'colorbar', 'colorscale', 'dx', 'dy', 'hoverinfo',
-        'legendgroup', 'name', 'opacity', 'reversescale', 'showlegend',
-        'showscale', 'stream', 'text', 'textsrc', 'transpose', 'type', 'uid',
-        'visible', 'x', 'x0', 'xaxis', 'xsrc', 'xtype', 'y', 'y0', 'yaxis',
-        'ysrc', 'ytype', 'z', 'zauto', 'zmax', 'zmin', 'zsrc']
+        ['autocolorscale', 'colorbar', 'colorscale', 'customdata',
+        'customdatasrc', 'dx', 'dy', 'hoverinfo', 'hoverinfosrc', 'hoverlabel',
+        'ids', 'idssrc', 'legendgroup', 'name', 'opacity', 'reversescale',
+        'showlegend', 'showscale', 'stream', 'text', 'textsrc', 'transpose',
+        'type', 'uid', 'visible', 'x', 'x0', 'xaxis', 'xsrc', 'xtype', 'y',
+        'y0', 'yaxis', 'ysrc', 'ytype', 'z', 'zauto', 'zmax', 'zmin', 'zsrc']
     
     Run `<heatmapgl-object>.help('attribute')` on any of the above.
     '<heatmapgl-object>' is the object at []
@@ -1347,11 +1361,13 @@ class Histogram(PlotlyDict):
     """
     Valid attributes for 'histogram' at path [] under parents ():
     
-        ['autobinx', 'autobiny', 'bardir', 'cumulative', 'error_x', 'error_y',
-        'histfunc', 'histnorm', 'hoverinfo', 'legendgroup', 'marker', 'name',
-        'nbinsx', 'nbinsy', 'opacity', 'orientation', 'showlegend', 'stream',
-        'text', 'textsrc', 'type', 'uid', 'visible', 'x', 'xaxis', 'xbins',
-        'xcalendar', 'xsrc', 'y', 'yaxis', 'ybins', 'ycalendar', 'ysrc']
+        ['autobinx', 'autobiny', 'bardir', 'cumulative', 'customdata',
+        'customdatasrc', 'error_x', 'error_y', 'histfunc', 'histnorm',
+        'hoverinfo', 'hoverinfosrc', 'hoverlabel', 'ids', 'idssrc',
+        'legendgroup', 'marker', 'name', 'nbinsx', 'nbinsy', 'opacity',
+        'orientation', 'showlegend', 'stream', 'text', 'textsrc', 'type',
+        'uid', 'visible', 'x', 'xaxis', 'xbins', 'xcalendar', 'xsrc', 'y',
+        'yaxis', 'ybins', 'ycalendar', 'ysrc']
     
     Run `<histogram-object>.help('attribute')` on any of the above.
     '<histogram-object>' is the object at []
@@ -1365,8 +1381,9 @@ class Histogram2d(PlotlyDict):
     Valid attributes for 'histogram2d' at path [] under parents ():
     
         ['autobinx', 'autobiny', 'autocolorscale', 'colorbar', 'colorscale',
-        'histfunc', 'histnorm', 'hoverinfo', 'legendgroup', 'marker', 'name',
-        'nbinsx', 'nbinsy', 'opacity', 'reversescale', 'showlegend',
+        'customdata', 'customdatasrc', 'histfunc', 'histnorm', 'hoverinfo',
+        'hoverinfosrc', 'hoverlabel', 'ids', 'idssrc', 'legendgroup', 'marker',
+        'name', 'nbinsx', 'nbinsy', 'opacity', 'reversescale', 'showlegend',
         'showscale', 'stream', 'type', 'uid', 'visible', 'x', 'xaxis', 'xbins',
         'xcalendar', 'xgap', 'xsrc', 'y', 'yaxis', 'ybins', 'ycalendar',
         'ygap', 'ysrc', 'z', 'zauto', 'zmax', 'zmin', 'zsmooth', 'zsrc']
@@ -1383,7 +1400,8 @@ class Histogram2dContour(PlotlyDict):
     Valid attributes for 'histogram2dcontour' at path [] under parents ():
     
         ['autobinx', 'autobiny', 'autocolorscale', 'autocontour', 'colorbar',
-        'colorscale', 'contours', 'histfunc', 'histnorm', 'hoverinfo',
+        'colorscale', 'contours', 'customdata', 'customdatasrc', 'histfunc',
+        'histnorm', 'hoverinfo', 'hoverinfosrc', 'hoverlabel', 'ids', 'idssrc',
         'legendgroup', 'line', 'marker', 'name', 'nbinsx', 'nbinsy',
         'ncontours', 'opacity', 'reversescale', 'showlegend', 'showscale',
         'stream', 'type', 'uid', 'visible', 'x', 'xaxis', 'xbins', 'xcalendar',
@@ -1402,7 +1420,8 @@ class Histogram2dcontour(PlotlyDict):
     Valid attributes for 'histogram2dcontour' at path [] under parents ():
     
         ['autobinx', 'autobiny', 'autocolorscale', 'autocontour', 'colorbar',
-        'colorscale', 'contours', 'histfunc', 'histnorm', 'hoverinfo',
+        'colorscale', 'contours', 'customdata', 'customdatasrc', 'histfunc',
+        'histnorm', 'hoverinfo', 'hoverinfosrc', 'hoverlabel', 'ids', 'idssrc',
         'legendgroup', 'line', 'marker', 'name', 'nbinsx', 'nbinsy',
         'ncontours', 'opacity', 'reversescale', 'showlegend', 'showscale',
         'stream', 'type', 'uid', 'visible', 'x', 'xaxis', 'xbins', 'xcalendar',
@@ -1423,11 +1442,11 @@ class Layout(PlotlyDict):
         ['angularaxis', 'annotations', 'autosize', 'bargap', 'bargroupgap',
         'barmode', 'barnorm', 'boxgap', 'boxgroupgap', 'boxmode', 'calendar',
         'direction', 'dragmode', 'font', 'geo', 'height', 'hiddenlabels',
-        'hiddenlabelssrc', 'hidesources', 'hovermode', 'images', 'legend',
-        'mapbox', 'margin', 'orientation', 'paper_bgcolor', 'plot_bgcolor',
-        'radialaxis', 'scene', 'separators', 'shapes', 'showlegend', 'sliders',
-        'smith', 'ternary', 'title', 'titlefont', 'updatemenus', 'width',
-        'xaxis', 'yaxis']
+        'hiddenlabelssrc', 'hidesources', 'hoverlabel', 'hovermode', 'images',
+        'legend', 'mapbox', 'margin', 'orientation', 'paper_bgcolor',
+        'plot_bgcolor', 'radialaxis', 'scene', 'separators', 'shapes',
+        'showlegend', 'sliders', 'smith', 'ternary', 'title', 'titlefont',
+        'updatemenus', 'width', 'xaxis', 'yaxis']
     
     Run `<layout-object>.help('attribute')` on any of the above.
     '<layout-object>' is the object at []
@@ -1484,10 +1503,10 @@ class Marker(PlotlyDict):
     Valid attributes for 'marker' at path [] under parents ():
     
         ['autocolorscale', 'blend', 'border', 'cauto', 'cmax', 'cmin', 'color',
-        'colorbar', 'colors', 'colorscale', 'colorsrc', 'colorssrc', 'line',
-        'maxdisplayed', 'opacity', 'opacitysrc', 'outliercolor',
-        'reversescale', 'showscale', 'size', 'sizemax', 'sizemin', 'sizemode',
-        'sizeref', 'sizesrc', 'symbol', 'symbolsrc']
+        'colorbar', 'colors', 'colorscale', 'colorsrc', 'colorssrc',
+        'gradient', 'line', 'maxdisplayed', 'opacity', 'opacitysrc',
+        'outliercolor', 'reversescale', 'showscale', 'size', 'sizemax',
+        'sizemin', 'sizemode', 'sizeref', 'sizesrc', 'symbol', 'symbolsrc']
     
     Run `<marker-object>.help('attribute')` on any of the above.
     '<marker-object>' is the object at []
@@ -1500,14 +1519,15 @@ class Mesh3d(PlotlyDict):
     """
     Valid attributes for 'mesh3d' at path [] under parents ():
     
-        ['alphahull', 'color', 'colorbar', 'colorscale', 'contour',
+        ['alphahull', 'autocolorscale', 'cauto', 'cmax', 'cmin', 'color',
+        'colorbar', 'colorscale', 'contour', 'customdata', 'customdatasrc',
         'delaunayaxis', 'facecolor', 'facecolorsrc', 'flatshading',
-        'hoverinfo', 'i', 'intensity', 'intensitysrc', 'isrc', 'j', 'jsrc',
-        'k', 'ksrc', 'legendgroup', 'lighting', 'lightposition', 'name',
-        'opacity', 'reversescale', 'scene', 'showlegend', 'showscale',
-        'stream', 'type', 'uid', 'vertexcolor', 'vertexcolorsrc', 'visible',
-        'x', 'xcalendar', 'xsrc', 'y', 'ycalendar', 'ysrc', 'z', 'zcalendar',
-        'zsrc']
+        'hoverinfo', 'hoverinfosrc', 'hoverlabel', 'i', 'ids', 'idssrc',
+        'intensity', 'intensitysrc', 'isrc', 'j', 'jsrc', 'k', 'ksrc',
+        'legendgroup', 'lighting', 'lightposition', 'name', 'opacity',
+        'reversescale', 'scene', 'showlegend', 'showscale', 'stream', 'type',
+        'uid', 'vertexcolor', 'vertexcolorsrc', 'visible', 'x', 'xcalendar',
+        'xsrc', 'y', 'ycalendar', 'ysrc', 'z', 'zcalendar', 'zsrc']
     
     Run `<mesh3d-object>.help('attribute')` on any of the above.
     '<mesh3d-object>' is the object at []
@@ -1520,8 +1540,9 @@ class Ohlc(PlotlyDict):
     """
     Valid attributes for 'ohlc' at path [] under parents ():
     
-        ['close', 'closesrc', 'decreasing', 'high', 'highsrc', 'hoverinfo',
-        'increasing', 'legendgroup', 'line', 'low', 'lowsrc', 'name',
+        ['close', 'closesrc', 'customdata', 'customdatasrc', 'decreasing',
+        'high', 'highsrc', 'hoverinfo', 'hoverinfosrc', 'hoverlabel', 'ids',
+        'idssrc', 'increasing', 'legendgroup', 'line', 'low', 'lowsrc', 'name',
         'opacity', 'open', 'opensrc', 'showlegend', 'stream', 'text',
         'textsrc', 'tickwidth', 'type', 'uid', 'visible', 'x', 'xaxis',
         'xcalendar', 'xsrc', 'yaxis']
@@ -1537,8 +1558,10 @@ class Parcoords(PlotlyDict):
     """
     Valid attributes for 'parcoords' at path [] under parents ():
     
-        ['dimensions', 'domain', 'hoverinfo', 'legendgroup', 'line', 'name',
-        'opacity', 'showlegend', 'stream', 'type', 'uid', 'visible']
+        ['customdata', 'customdatasrc', 'dimensions', 'domain', 'hoverinfo',
+        'hoverinfosrc', 'hoverlabel', 'ids', 'idssrc', 'labelfont',
+        'legendgroup', 'line', 'name', 'opacity', 'rangefont', 'showlegend',
+        'stream', 'tickfont', 'type', 'uid', 'visible']
     
     Run `<parcoords-object>.help('attribute')` on any of the above.
     '<parcoords-object>' is the object at []
@@ -1551,12 +1574,14 @@ class Pie(PlotlyDict):
     """
     Valid attributes for 'pie' at path [] under parents ():
     
-        ['direction', 'dlabel', 'domain', 'hole', 'hoverinfo', 'hovertext',
-        'hovertextsrc', 'insidetextfont', 'label0', 'labels', 'labelssrc',
-        'legendgroup', 'marker', 'name', 'opacity', 'outsidetextfont', 'pull',
-        'pullsrc', 'rotation', 'scalegroup', 'showlegend', 'sort', 'stream',
-        'text', 'textfont', 'textinfo', 'textposition', 'textpositionsrc',
-        'textsrc', 'type', 'uid', 'values', 'valuessrc', 'visible']
+        ['customdata', 'customdatasrc', 'direction', 'dlabel', 'domain',
+        'hole', 'hoverinfo', 'hoverinfosrc', 'hoverlabel', 'hovertext',
+        'hovertextsrc', 'ids', 'idssrc', 'insidetextfont', 'label0', 'labels',
+        'labelssrc', 'legendgroup', 'marker', 'name', 'opacity',
+        'outsidetextfont', 'pull', 'pullsrc', 'rotation', 'scalegroup',
+        'showlegend', 'sort', 'stream', 'text', 'textfont', 'textinfo',
+        'textposition', 'textpositionsrc', 'textsrc', 'type', 'uid', 'values',
+        'valuessrc', 'visible']
     
     Run `<pie-object>.help('attribute')` on any of the above.
     '<pie-object>' is the object at []
@@ -1569,10 +1594,11 @@ class Pointcloud(PlotlyDict):
     """
     Valid attributes for 'pointcloud' at path [] under parents ():
     
-        ['hoverinfo', 'indices', 'indicessrc', 'legendgroup', 'marker', 'name',
-        'opacity', 'showlegend', 'stream', 'text', 'textsrc', 'type', 'uid',
-        'visible', 'x', 'xaxis', 'xbounds', 'xboundssrc', 'xsrc', 'xy',
-        'xysrc', 'y', 'yaxis', 'ybounds', 'yboundssrc', 'ysrc']
+        ['customdata', 'customdatasrc', 'hoverinfo', 'hoverinfosrc',
+        'hoverlabel', 'ids', 'idssrc', 'indices', 'indicessrc', 'legendgroup',
+        'marker', 'name', 'opacity', 'showlegend', 'stream', 'text', 'textsrc',
+        'type', 'uid', 'visible', 'x', 'xaxis', 'xbounds', 'xboundssrc',
+        'xsrc', 'xy', 'xysrc', 'y', 'yaxis', 'ybounds', 'yboundssrc', 'ysrc']
     
     Run `<pointcloud-object>.help('attribute')` on any of the above.
     '<pointcloud-object>' is the object at []
@@ -1596,17 +1622,34 @@ class RadialAxis(PlotlyDict):
     _name = 'radialaxis'
 
 
+class Sankey(PlotlyDict):
+    """
+    Valid attributes for 'sankey' at path [] under parents ():
+    
+        ['arrangement', 'customdata', 'customdatasrc', 'domain', 'hoverinfo',
+        'hoverinfosrc', 'hoverlabel', 'ids', 'idssrc', 'legendgroup', 'link',
+        'name', 'node', 'opacity', 'orientation', 'showlegend', 'stream',
+        'textfont', 'type', 'uid', 'valueformat', 'valuesuffix', 'visible']
+    
+    Run `<sankey-object>.help('attribute')` on any of the above.
+    '<sankey-object>' is the object at []
+
+    """
+    _name = 'sankey'
+
+
 class Scatter(PlotlyDict):
     """
     Valid attributes for 'scatter' at path [] under parents ():
     
-        ['connectgaps', 'customdata', 'customdatasrc', 'dx', 'dy', 'error_x',
-        'error_y', 'fill', 'fillcolor', 'hoverinfo', 'hoveron', 'hovertext',
-        'hovertextsrc', 'ids', 'idssrc', 'legendgroup', 'line', 'marker',
-        'mode', 'name', 'opacity', 'r', 'rsrc', 'showlegend', 'stream', 't',
-        'text', 'textfont', 'textposition', 'textpositionsrc', 'textsrc',
-        'tsrc', 'type', 'uid', 'visible', 'x', 'x0', 'xaxis', 'xcalendar',
-        'xsrc', 'y', 'y0', 'yaxis', 'ycalendar', 'ysrc']
+        ['cliponaxis', 'connectgaps', 'customdata', 'customdatasrc', 'dx',
+        'dy', 'error_x', 'error_y', 'fill', 'fillcolor', 'hoverinfo',
+        'hoverinfosrc', 'hoverlabel', 'hoveron', 'hovertext', 'hovertextsrc',
+        'ids', 'idssrc', 'legendgroup', 'line', 'marker', 'mode', 'name',
+        'opacity', 'r', 'rsrc', 'showlegend', 'stream', 't', 'text',
+        'textfont', 'textposition', 'textpositionsrc', 'textsrc', 'tsrc',
+        'type', 'uid', 'visible', 'x', 'x0', 'xaxis', 'xcalendar', 'xsrc', 'y',
+        'y0', 'yaxis', 'ycalendar', 'ysrc']
     
     Run `<scatter-object>.help('attribute')` on any of the above.
     '<scatter-object>' is the object at []
@@ -1619,12 +1662,13 @@ class Scatter3d(PlotlyDict):
     """
     Valid attributes for 'scatter3d' at path [] under parents ():
     
-        ['connectgaps', 'error_x', 'error_y', 'error_z', 'hoverinfo',
-        'hovertext', 'hovertextsrc', 'legendgroup', 'line', 'marker', 'mode',
-        'name', 'opacity', 'projection', 'scene', 'showlegend', 'stream',
-        'surfaceaxis', 'surfacecolor', 'text', 'textfont', 'textposition',
-        'textpositionsrc', 'textsrc', 'type', 'uid', 'visible', 'x',
-        'xcalendar', 'xsrc', 'y', 'ycalendar', 'ysrc', 'z', 'zcalendar',
+        ['connectgaps', 'customdata', 'customdatasrc', 'error_x', 'error_y',
+        'error_z', 'hoverinfo', 'hoverinfosrc', 'hoverlabel', 'hovertext',
+        'hovertextsrc', 'ids', 'idssrc', 'legendgroup', 'line', 'marker',
+        'mode', 'name', 'opacity', 'projection', 'scene', 'showlegend',
+        'stream', 'surfaceaxis', 'surfacecolor', 'text', 'textfont',
+        'textposition', 'textpositionsrc', 'textsrc', 'type', 'uid', 'visible',
+        'x', 'xcalendar', 'xsrc', 'y', 'ycalendar', 'ysrc', 'z', 'zcalendar',
         'zsrc']
     
     Run `<scatter3d-object>.help('attribute')` on any of the above.
@@ -1638,11 +1682,12 @@ class Scattercarpet(PlotlyDict):
     """
     Valid attributes for 'scattercarpet' at path [] under parents ():
     
-        ['a', 'asrc', 'b', 'bsrc', 'carpet', 'connectgaps', 'fill',
-        'fillcolor', 'hoverinfo', 'hoveron', 'legendgroup', 'line', 'marker',
-        'mode', 'name', 'opacity', 'showlegend', 'stream', 'sum', 'text',
-        'textfont', 'textposition', 'textpositionsrc', 'textsrc', 'type',
-        'uid', 'visible', 'xaxis', 'yaxis']
+        ['a', 'asrc', 'b', 'bsrc', 'carpet', 'connectgaps', 'customdata',
+        'customdatasrc', 'fill', 'fillcolor', 'hoverinfo', 'hoverinfosrc',
+        'hoverlabel', 'hoveron', 'ids', 'idssrc', 'legendgroup', 'line',
+        'marker', 'mode', 'name', 'opacity', 'showlegend', 'stream', 'sum',
+        'text', 'textfont', 'textposition', 'textpositionsrc', 'textsrc',
+        'type', 'uid', 'visible', 'xaxis', 'yaxis']
     
     Run `<scattercarpet-object>.help('attribute')` on any of the above.
     '<scattercarpet-object>' is the object at []
@@ -1655,11 +1700,13 @@ class Scattergeo(PlotlyDict):
     """
     Valid attributes for 'scattergeo' at path [] under parents ():
     
-        ['connectgaps', 'fill', 'fillcolor', 'geo', 'hoverinfo', 'hovertext',
-        'hovertextsrc', 'lat', 'latsrc', 'legendgroup', 'line', 'locationmode',
-        'locations', 'locationssrc', 'lon', 'lonsrc', 'marker', 'mode', 'name',
-        'opacity', 'showlegend', 'stream', 'text', 'textfont', 'textposition',
-        'textpositionsrc', 'textsrc', 'type', 'uid', 'visible']
+        ['connectgaps', 'customdata', 'customdatasrc', 'fill', 'fillcolor',
+        'geo', 'hoverinfo', 'hoverinfosrc', 'hoverlabel', 'hovertext',
+        'hovertextsrc', 'ids', 'idssrc', 'lat', 'latsrc', 'legendgroup',
+        'line', 'locationmode', 'locations', 'locationssrc', 'lon', 'lonsrc',
+        'marker', 'mode', 'name', 'opacity', 'showlegend', 'stream', 'text',
+        'textfont', 'textposition', 'textpositionsrc', 'textsrc', 'type',
+        'uid', 'visible']
     
     Run `<scattergeo-object>.help('attribute')` on any of the above.
     '<scattergeo-object>' is the object at []
@@ -1672,11 +1719,12 @@ class Scattergl(PlotlyDict):
     """
     Valid attributes for 'scattergl' at path [] under parents ():
     
-        ['connectgaps', 'dx', 'dy', 'error_x', 'error_y', 'fill', 'fillcolor',
-        'hoverinfo', 'legendgroup', 'line', 'marker', 'mode', 'name',
-        'opacity', 'showlegend', 'stream', 'text', 'textsrc', 'type', 'uid',
-        'visible', 'x', 'x0', 'xaxis', 'xcalendar', 'xsrc', 'y', 'y0', 'yaxis',
-        'ycalendar', 'ysrc']
+        ['connectgaps', 'customdata', 'customdatasrc', 'dx', 'dy', 'error_x',
+        'error_y', 'fill', 'fillcolor', 'hoverinfo', 'hoverinfosrc',
+        'hoverlabel', 'ids', 'idssrc', 'legendgroup', 'line', 'marker', 'mode',
+        'name', 'opacity', 'showlegend', 'stream', 'text', 'textsrc', 'type',
+        'uid', 'visible', 'x', 'x0', 'xaxis', 'xcalendar', 'xsrc', 'y', 'y0',
+        'yaxis', 'ycalendar', 'ysrc']
     
     Run `<scattergl-object>.help('attribute')` on any of the above.
     '<scattergl-object>' is the object at []
@@ -1689,8 +1737,9 @@ class Scattermapbox(PlotlyDict):
     """
     Valid attributes for 'scattermapbox' at path [] under parents ():
     
-        ['connectgaps', 'fill', 'fillcolor', 'hoverinfo', 'hovertext',
-        'hovertextsrc', 'lat', 'latsrc', 'legendgroup', 'line', 'lon',
+        ['connectgaps', 'customdata', 'customdatasrc', 'fill', 'fillcolor',
+        'hoverinfo', 'hoverinfosrc', 'hoverlabel', 'hovertext', 'hovertextsrc',
+        'ids', 'idssrc', 'lat', 'latsrc', 'legendgroup', 'line', 'lon',
         'lonsrc', 'marker', 'mode', 'name', 'opacity', 'showlegend', 'stream',
         'subplot', 'text', 'textfont', 'textposition', 'textsrc', 'type',
         'uid', 'visible']
@@ -1706,11 +1755,13 @@ class Scatterternary(PlotlyDict):
     """
     Valid attributes for 'scatterternary' at path [] under parents ():
     
-        ['a', 'asrc', 'b', 'bsrc', 'c', 'connectgaps', 'csrc', 'fill',
-        'fillcolor', 'hoverinfo', 'hoveron', 'hovertext', 'hovertextsrc',
-        'legendgroup', 'line', 'marker', 'mode', 'name', 'opacity',
-        'showlegend', 'stream', 'subplot', 'sum', 'text', 'textfont',
-        'textposition', 'textpositionsrc', 'textsrc', 'type', 'uid', 'visible']
+        ['a', 'asrc', 'b', 'bsrc', 'c', 'cliponaxis', 'connectgaps', 'csrc',
+        'customdata', 'customdatasrc', 'fill', 'fillcolor', 'hoverinfo',
+        'hoverinfosrc', 'hoverlabel', 'hoveron', 'hovertext', 'hovertextsrc',
+        'ids', 'idssrc', 'legendgroup', 'line', 'marker', 'mode', 'name',
+        'opacity', 'showlegend', 'stream', 'subplot', 'sum', 'text',
+        'textfont', 'textposition', 'textpositionsrc', 'textsrc', 'type',
+        'uid', 'visible']
     
     Run `<scatterternary-object>.help('attribute')` on any of the above.
     '<scatterternary-object>' is the object at []
@@ -1723,8 +1774,9 @@ class Scene(PlotlyDict):
     """
     Valid attributes for 'scene' at path [] under parents ():
     
-        ['aspectmode', 'aspectratio', 'bgcolor', 'camera', 'cameraposition',
-        'domain', 'dragmode', 'hovermode', 'xaxis', 'yaxis', 'zaxis']
+        ['annotations', 'aspectmode', 'aspectratio', 'bgcolor', 'camera',
+        'cameraposition', 'domain', 'dragmode', 'hovermode', 'xaxis', 'yaxis',
+        'zaxis']
     
     Run `<scene-object>.help('attribute')` on any of the above.
     '<scene-object>' is the object at []
@@ -1751,12 +1803,13 @@ class Surface(PlotlyDict):
     Valid attributes for 'surface' at path [] under parents ():
     
         ['autocolorscale', 'cauto', 'cmax', 'cmin', 'colorbar', 'colorscale',
-        'contours', 'hidesurface', 'hoverinfo', 'legendgroup', 'lighting',
-        'lightposition', 'name', 'opacity', 'reversescale', 'scene',
-        'showlegend', 'showscale', 'stream', 'surfacecolor', 'surfacecolorsrc',
-        'text', 'textsrc', 'type', 'uid', 'visible', 'x', 'xcalendar', 'xsrc',
-        'y', 'ycalendar', 'ysrc', 'z', 'zauto', 'zcalendar', 'zmax', 'zmin',
-        'zsrc']
+        'contours', 'customdata', 'customdatasrc', 'hidesurface', 'hoverinfo',
+        'hoverinfosrc', 'hoverlabel', 'ids', 'idssrc', 'legendgroup',
+        'lighting', 'lightposition', 'name', 'opacity', 'reversescale',
+        'scene', 'showlegend', 'showscale', 'stream', 'surfacecolor',
+        'surfacecolorsrc', 'text', 'textsrc', 'type', 'uid', 'visible', 'x',
+        'xcalendar', 'xsrc', 'y', 'ycalendar', 'ysrc', 'z', 'zauto',
+        'zcalendar', 'zmax', 'zmin', 'zsrc']
     
     Run `<surface-object>.help('attribute')` on any of the above.
     '<surface-object>' is the object at []
@@ -1775,11 +1828,11 @@ class XAxis(PlotlyDict):
     
         ['anchor', 'autorange', 'autotick', 'backgroundcolor', 'calendar',
         'categoryarray', 'categoryarraysrc', 'categoryorder', 'color',
-        'domain', 'dtick', 'exponentformat', 'fixedrange', 'gridcolor',
-        'gridwidth', 'hoverformat', 'linecolor', 'linewidth', 'mirror',
-        'nticks', 'overlaying', 'position', 'range', 'rangemode',
-        'rangeselector', 'rangeslider', 'scaleanchor', 'scaleratio',
-        'separatethousands', 'showaxeslabels', 'showbackground',
+        'constrain', 'constraintoward', 'domain', 'dtick', 'exponentformat',
+        'fixedrange', 'gridcolor', 'gridwidth', 'hoverformat', 'layer',
+        'linecolor', 'linewidth', 'mirror', 'nticks', 'overlaying', 'position',
+        'range', 'rangemode', 'rangeselector', 'rangeslider', 'scaleanchor',
+        'scaleratio', 'separatethousands', 'showaxeslabels', 'showbackground',
         'showexponent', 'showgrid', 'showline', 'showspikes', 'showticklabels',
         'showtickprefix', 'showticksuffix', 'side', 'spikecolor', 'spikedash',
         'spikemode', 'spikesides', 'spikethickness', 'tick0', 'tickangle',
@@ -1814,18 +1867,18 @@ class YAxis(PlotlyDict):
     
         ['anchor', 'autorange', 'autotick', 'backgroundcolor', 'calendar',
         'categoryarray', 'categoryarraysrc', 'categoryorder', 'color',
-        'domain', 'dtick', 'exponentformat', 'fixedrange', 'gridcolor',
-        'gridwidth', 'hoverformat', 'linecolor', 'linewidth', 'mirror',
-        'nticks', 'overlaying', 'position', 'range', 'rangemode',
-        'scaleanchor', 'scaleratio', 'separatethousands', 'showaxeslabels',
-        'showbackground', 'showexponent', 'showgrid', 'showline', 'showspikes',
-        'showticklabels', 'showtickprefix', 'showticksuffix', 'side',
-        'spikecolor', 'spikedash', 'spikemode', 'spikesides', 'spikethickness',
-        'tick0', 'tickangle', 'tickcolor', 'tickfont', 'tickformat', 'ticklen',
-        'tickmode', 'tickprefix', 'ticks', 'ticksuffix', 'ticktext',
-        'ticktextsrc', 'tickvals', 'tickvalssrc', 'tickwidth', 'title',
-        'titlefont', 'type', 'visible', 'zeroline', 'zerolinecolor',
-        'zerolinewidth']
+        'constrain', 'constraintoward', 'domain', 'dtick', 'exponentformat',
+        'fixedrange', 'gridcolor', 'gridwidth', 'hoverformat', 'layer',
+        'linecolor', 'linewidth', 'mirror', 'nticks', 'overlaying', 'position',
+        'range', 'rangemode', 'scaleanchor', 'scaleratio', 'separatethousands',
+        'showaxeslabels', 'showbackground', 'showexponent', 'showgrid',
+        'showline', 'showspikes', 'showticklabels', 'showtickprefix',
+        'showticksuffix', 'side', 'spikecolor', 'spikedash', 'spikemode',
+        'spikesides', 'spikethickness', 'tick0', 'tickangle', 'tickcolor',
+        'tickfont', 'tickformat', 'ticklen', 'tickmode', 'tickprefix', 'ticks',
+        'ticksuffix', 'ticktext', 'ticktextsrc', 'tickvals', 'tickvalssrc',
+        'tickwidth', 'title', 'titlefont', 'type', 'visible', 'zeroline',
+        'zerolinecolor', 'zerolinewidth']
     
     Run `<yaxis-object>.help('attribute')` on any of the above.
     '<yaxis-object>' is the object at []

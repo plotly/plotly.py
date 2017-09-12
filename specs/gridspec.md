@@ -100,24 +100,24 @@ py.file_ops.delete(file_path=None, fid=None, url=None)
 ### Appearance and Access
 
 ```python
->> print Column([1,2,3], 'column 1')
+>> print(Column([1,2,3], 'column 1'))
 <Column "column 1": [1, 2, 3]>
 ```
 
 ```python
->> print Grid(col1, col2)
+>> print(Grid(col1, col2))
 <Grid: [<Column "column 1": [1, 2, 3]>, <Column "column 2": ["a", "b", "c"]>]>
 ```
 
 ```python
 >> grid = Grid(col1, col2)
->> print grid[0]
+>> print(grid[0])
 <Column "column 1": [1, 2, 3]>
 ```
 
 ```python
 >> grid = Grid(col1, col2)
->> print grid.get_column('column 1')
+>> print(grid.get_column('column 1'))
 <Column "column 1": [1, 2, 3]>
 ```
 
@@ -130,7 +130,7 @@ If you have the grid
 >> grid.upload(grid, 'experimental data')
 
 >> fig_data = [Scatter(xsrc=grid[0], ysrc=grid[0])]
->> print Scatter(xsrc=grid[0], ysrc=grid[1])
+>> print(Scatter(xsrc=grid[0], ysrc=grid[1]))
 [{"xsrc": "chris/8:3dkb", "ysrc": "chris/8:cbk8", "type": "scatter"}]
 >> py.plot(fig_data)
 
@@ -145,7 +145,7 @@ If you have the grid
 >>  Scatter(x=grid[0], y=grid[1])
 "PlotlyTypeException: Yikes, column objects aren't currently supported here."
 "x must be an array of strings, numbers, or datetimes."
->> print Scatter(xsrc=grid[0], yscr=grid[1])
+>> print(Scatter(xsrc=grid[0], yscr=grid[1]))
 {"xsrc": "chris/3:3dfbk", "ysrc": "chris/3:dk3c"}
 ```
 
