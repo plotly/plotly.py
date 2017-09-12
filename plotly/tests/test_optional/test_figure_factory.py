@@ -3,6 +3,7 @@ from plotly.graph_objs import graph_objs as go
 from plotly.exceptions import PlotlyError
 
 import plotly.tools as tls
+import plotly.figure_factory as ff
 from plotly.tests.test_optional.optional_utils import NumpyTestUtilsMixin
 import math
 from nose.tools import raises
@@ -23,7 +24,7 @@ class TestDistplot(TestCase):
                   'curve_type': 'curve'}
         self.assertRaisesRegexp(PlotlyError, "curve_type must be defined as "
                                              "'kde' or 'normal'",
-                                tls.FigureFactory.create_distplot, **kwargs)
+                                ff.create_distplot, **kwargs)
 
     def test_wrong_histdata_format(self):
 
@@ -32,26 +33,23 @@ class TestDistplot(TestCase):
         # will fail)
 
         kwargs = {'hist_data': [1, 2, 3], 'group_labels': ['group']}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_distplot,
-                          **kwargs)
+        self.assertRaises(PlotlyError, ff.create_distplot, **kwargs)
 
     def test_unequal_data_label_length(self):
         kwargs = {'hist_data': [[1, 2]], 'group_labels': ['group', 'group2']}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_distplot,
-                          **kwargs)
+        self.assertRaises(PlotlyError, ff.create_distplot, **kwargs)
 
         kwargs = {'hist_data': [[1, 2], [1, 2, 3]], 'group_labels': ['group']}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_distplot,
-                          **kwargs)
+        self.assertRaises(PlotlyError, ff.create_distplot, **kwargs)
 
     def test_simple_distplot_prob_density(self):
 
         # we should be able to create a single distplot with a simple dataset
         # and default kwargs
 
-        dp = tls.FigureFactory.create_distplot(hist_data=[[1, 2, 2, 3]],
-                                               group_labels=['distplot'],
-                                               histnorm='probability density')
+        dp = ff.create_distplot(hist_data=[[1, 2, 2, 3]],
+                                group_labels=['distplot'],
+                                histnorm='probability density')
         expected_dp_layout = {'barmode': 'overlay',
                               'hovermode': 'closest',
                               'legend': {'traceorder': 'reversed'},
@@ -96,8 +94,8 @@ class TestDistplot(TestCase):
         # we should be able to create a single distplot with a simple dataset
         # and default kwargs
 
-        dp = tls.FigureFactory.create_distplot(hist_data=[[1, 2, 2, 3]],
-                                               group_labels=['distplot'], histnorm='probability')
+        dp = ff.create_distplot(hist_data=[[1, 2, 2, 3]],
+                                group_labels=['distplot'], histnorm='probability')
         expected_dp_layout = {'barmode': 'overlay',
                               'hovermode': 'closest',
                               'legend': {'traceorder': 'reversed'},
@@ -152,9 +150,9 @@ class TestDistplot(TestCase):
         hist_data = [hist1_x] + [hist2_x]
         group_labels = ['2012', '2013']
 
-        dp = tls.FigureFactory.create_distplot(hist_data, group_labels,
-                                               histnorm='probability density',
-                                               show_rug=False, bin_size=.2)
+        dp = ff.create_distplot(hist_data, group_labels,
+                                histnorm='probability density',
+                                show_rug=False, bin_size=.2)
         dp['layout'].update(title='Dist Plot')
 
         expected_dp_layout = {'barmode': 'overlay',
@@ -214,9 +212,9 @@ class TestDistplot(TestCase):
         hist_data = [hist1_x] + [hist2_x]
         group_labels = ['2012', '2013']
 
-        dp = tls.FigureFactory.create_distplot(hist_data, group_labels,
-                                               histnorm='probability',
-                                               show_rug=False, bin_size=.2)
+        dp = ff.create_distplot(hist_data, group_labels,
+                                histnorm='probability',
+                                show_rug=False, bin_size=.2)
         dp['layout'].update(title='Dist Plot')
 
         expected_dp_layout = {'barmode': 'overlay',
@@ -270,10 +268,10 @@ class TestDistplot(TestCase):
             hist_data = [hist1_x, hist2_x]
             group_labels = ['2012', '2013']
 
-            dp = tls.FigureFactory.create_distplot(hist_data, group_labels,
-                                                   histnorm='probability',
-                                                   show_rug=False,
-                                                   bin_size=[.2, .2])
+            dp = ff.create_distplot(hist_data, group_labels,
+                                    histnorm='probability',
+                                    show_rug=False,
+                                    bin_size=[.2, .2])
 
             expected_dp_data_hist_1 = {'autobinx': False,
                                        'histnorm': 'probability density',
@@ -318,10 +316,10 @@ class TestDistplot(TestCase):
             hist_data = [hist1_x, hist2_x]
             group_labels = ['2012', '2013']
 
-            dp = tls.FigureFactory.create_distplot(hist_data, group_labels,
-                                                   histnorm='probability',
-                                                   show_rug=False,
-                                                   bin_size=[.2, .2])
+            dp = ff.create_distplot(hist_data, group_labels,
+                                    histnorm='probability',
+                                    show_rug=False,
+                                    bin_size=[.2, .2])
 
             expected_dp_data_hist_1 = {'autobinx': False,
                                        'histnorm': 'probability density',
@@ -368,8 +366,7 @@ class TestStreamline(TestCase):
                   'u': [[-1, -5], [-1, -5]],
                   'v': [[1, 1], [-3, -3]],
                   'arrow_scale': 0}
-        self.assertRaises(ValueError, tls.FigureFactory.create_streamline,
-                          **kwargs)
+        self.assertRaises(ValueError, ff.create_streamline, **kwargs)
 
     def test_wrong_density(self):
 
@@ -379,8 +376,7 @@ class TestStreamline(TestCase):
                   'u': [[-1, -5], [-1, -5]],
                   'v': [[1, 1], [-3, -3]],
                   'density': 0}
-        self.assertRaises(ValueError, tls.FigureFactory.create_streamline,
-                          **kwargs)
+        self.assertRaises(ValueError, ff.create_streamline, **kwargs)
 
     def test_uneven_x(self):
 
@@ -389,8 +385,7 @@ class TestStreamline(TestCase):
         kwargs = {'x': [0, 2, 7, 9], 'y': [0, 2, 4, 6],
                   'u': [[-1, -5], [-1, -5]],
                   'v': [[1, 1], [-3, -3]]}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_streamline,
-                          **kwargs)
+        self.assertRaises(PlotlyError, ff.create_streamline, **kwargs)
 
     def test_uneven_y(self):
 
@@ -399,8 +394,7 @@ class TestStreamline(TestCase):
         kwargs = {'x': [0, 2, 4, 6], 'y': [1.5, 2, 3, 3.5],
                   'u': [[-1, -5], [-1, -5]],
                   'v': [[1, 1], [-3, -3]]}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_streamline,
-                          **kwargs)
+        self.assertRaises(PlotlyError, ff.create_streamline, **kwargs)
 
     def test_unequal_length_xy(self):
 
@@ -409,8 +403,7 @@ class TestStreamline(TestCase):
         kwargs = {'x': [0, 2, 4, 6], 'y': [1.5, 2, 3.5],
                   'u': [[-1, -5], [-1, -5]],
                   'v': [[1, 1], [-3, -3]]}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_streamline,
-                          **kwargs)
+        self.assertRaises(PlotlyError, ff.create_streamline, **kwargs)
 
     def test_unequal_length_uv(self):
 
@@ -419,8 +412,7 @@ class TestStreamline(TestCase):
         kwargs = {'x': [0, 2, 4, 6], 'y': [1.5, 2, 3, 3.5],
                   'u': [[-1, -5], [-1, -5], [-1, -5]],
                   'v': [[1, 1], [-3, -3]]}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_streamline,
-                          **kwargs)
+        self.assertRaises(PlotlyError, ff.create_streamline, **kwargs)
 
     def test_simple_streamline(self):
 
@@ -435,14 +427,14 @@ class TestStreamline(TestCase):
         # u = u.T #transpose
         # v = v.T #transpose
 
-        strln = tls.FigureFactory.create_streamline(x=[-1., 0., 1.],
-                                                    y=[-1., 0., 1.],
-                                                    u=[[1., 0., 1.],
-                                                       [1., 0., 1.],
-                                                       [1., 0., 1.]],
-                                                    v=[[1., 1., 1.],
-                                                       [0., 0., 0.],
-                                                       [1., 1., 1.]])
+        strln = ff.create_streamline(x=[-1., 0., 1.],
+                                     y=[-1., 0., 1.],
+                                     u=[[1., 0., 1.],
+                                        [1., 0., 1.],
+                                        [1., 0., 1.]],
+                                     v=[[1., 1., 1.],
+                                        [0., 0., 0.],
+                                        [1., 1., 1.]])
         expected_strln_0_100 = {
             'y': [-1.0, -0.9788791845863757, -0.9579399744939614, -0.9371777642073374, -0.9165881396413338, -0.8961668671832106, -0.8759098835283448, -0.8558132862403048, -0.835873324973195, -0.8160863933003534, -0.7964490210989816, -0.7769578674451656, -0.7576097139780906, -0.7384014586961288, -0.7193301101509343, -0.7003927820087748, -0.681586687951103, -0.6629091368888596, -0.64435752846723, -0.6259293488396024, -0.6076221666912738, -0.5894336294951057, -0.5713614599827976, -0.5534034528167977, -0.5355574714490806, -0.5178214451541254, -0.5001933662244311, -0.4826712873178177, -0.4652533189465894, -0.44793762709939944, -0.4307224309873414, -0.4136060009064273, -0.39658665620919065, -0.3796627633786812, -0.3628327341986042, -0.34609502401380254, -0.3294481300756896, -0.31289058996761565, -0.2964209801054992, -0.28003791430937197, -0.2637400424417804, -0.24752604910925968, -0.23139465242334434, -0.21534460281781365, -0.19937468191908325, -0.18348370146685278, -0.1676705022823033, -0.15193395328130999, -0.13627295053029143, -0.1206864163424669, -0.10517329841242584, -0.08973256898704507, -0.07436322407090357, -0.05906428266445696, -0.04383478603333624, -0.028673797007230273, -0.013580399306900914, 0.0014484211645073852, 0.01648792568956914, 0.03159429687713278, 0.04676843461935776, 0.062011259175942746, 0.07732371182540754, 0.09270675554339824, 0.10816137570939799, 0.12368858084331191, 0.1392894033734846, 0.1549649004378033, 0.1707161547196483, 0.1865442753205595, 0.20245039867161063, 0.21843568948560943, 0.23450134175238246, 0.25064857977955146, 0.26687865928136767, 0.2831928685183458, 0.29959252949062387, 0.3160789991881776, 0.33265367090123643, 0.3493179755944802, 0.366073383348855, 0.3829214048751186, 0.39986359310352526, 0.41690154485438513, 0.4340369025945845, 0.4512713562855355, 0.46860664532844054, 0.4860445606132082, 0.5035869466778524, 0.5212357039857456, 0.5389927913286829, 0.5568602283643591, 0.5748400982975623, 0.5929345507151613, 0.6111458045858065, 0.6294761514361948, 0.6479279587167714, 0.6665036733708583, 0.6852058256224467, 0.704037032999252],
             'x': [-1.0, -0.9788791845863756, -0.9579399744939614, -0.9371777642073374, -0.9165881396413338, -0.8961668671832106, -0.8759098835283448, -0.8558132862403048, -0.835873324973195, -0.8160863933003534, -0.7964490210989816, -0.7769578674451656, -0.7576097139780906, -0.7384014586961289, -0.7193301101509344, -0.7003927820087748, -0.6815866879511031, -0.6629091368888596, -0.6443575284672302, -0.6259293488396025, -0.6076221666912739, -0.5894336294951058, -0.5713614599827976, -0.5534034528167978, -0.5355574714490807, -0.5178214451541254, -0.5001933662244312, -0.4826712873178177, -0.4652533189465894, -0.44793762709939944, -0.4307224309873414, -0.4136060009064273, -0.39658665620919065, -0.3796627633786812, -0.3628327341986042, -0.34609502401380254, -0.3294481300756896, -0.31289058996761565, -0.2964209801054992, -0.28003791430937197, -0.2637400424417804, -0.24752604910925968, -0.23139465242334434, -0.21534460281781365, -0.19937468191908325, -0.18348370146685278, -0.1676705022823033, -0.15193395328130999, -0.13627295053029143, -0.1206864163424669, -0.10517329841242584, -0.08973256898704507, -0.07436322407090357, -0.05906428266445696, -0.04383478603333624, -0.028673797007230273, -0.013580399306900914, 0.0014484211645073852, 0.01648792568956914, 0.03159429687713278, 0.04676843461935776, 0.062011259175942746, 0.07732371182540754, 0.09270675554339824, 0.10816137570939799, 0.12368858084331191, 0.1392894033734846, 0.1549649004378033, 0.1707161547196483, 0.1865442753205595, 0.20245039867161063, 0.21843568948560943, 0.23450134175238246, 0.25064857977955146, 0.26687865928136767, 0.2831928685183458, 0.29959252949062387, 0.3160789991881776, 0.33265367090123643, 0.3493179755944802, 0.366073383348855, 0.3829214048751186, 0.39986359310352526, 0.41690154485438513, 0.4340369025945845, 0.4512713562855355, 0.46860664532844054, 0.4860445606132082, 0.5035869466778524, 0.5212357039857456, 0.5389927913286829, 0.5568602283643591, 0.5748400982975623, 0.5929345507151613, 0.6111458045858065, 0.6294761514361948, 0.6479279587167714, 0.6665036733708583, 0.6852058256224467, 0.704037032999252],
@@ -459,7 +451,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
 
     def test_default_dendrogram(self):
         X = np.array([[1, 2, 3, 4], [1, 1, 3, 4], [1, 2, 1, 4], [1, 2, 3, 1]])
-        dendro = tls.FigureFactory.create_dendrogram(X=X)
+        dendro = ff.create_dendrogram(X=X)
 
         expected_dendro = go.Figure(
             data=go.Data([
@@ -538,7 +530,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
         X[2, :] = sum(X, 0)
 
         names = ['Jack', 'Oxana', 'John', 'Chelsea', 'Mark']
-        dendro = tls.FigureFactory.create_dendrogram(X, labels=names)
+        dendro = ff.create_dendrogram(X, labels=names)
 
         expected_dendro = go.Figure(
             data=go.Data([
@@ -632,26 +624,23 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
     def test_dendrogram_orientation(self):
         X = np.random.rand(5, 5)
 
-        dendro_left = tls.FigureFactory.create_dendrogram(
-                       X, orientation='left')
+        dendro_left = ff.create_dendrogram(X, orientation='left')
         self.assertEqual(len(dendro_left['layout']['yaxis']['ticktext']), 5)
         tickvals_left = np.array(dendro_left['layout']['yaxis']['tickvals'])
         self.assertTrue((tickvals_left <= 0).all())
 
-        dendro_right = tls.FigureFactory.create_dendrogram(
-                        X, orientation='right')
+        dendro_right = ff.create_dendrogram(X, orientation='right')
         tickvals_right = np.array(dendro_right['layout']['yaxis']['tickvals'])
         self.assertTrue((tickvals_right >= 0).all())
 
-        dendro_bottom = tls.FigureFactory.create_dendrogram(
-                        X, orientation='bottom')
+        dendro_bottom = ff.create_dendrogram(X, orientation='bottom')
         self.assertEqual(len(dendro_bottom['layout']['xaxis']['ticktext']), 5)
         tickvals_bottom = np.array(
             dendro_bottom['layout']['xaxis']['tickvals']
         )
         self.assertTrue((tickvals_bottom >= 0).all())
 
-        dendro_top = tls.FigureFactory.create_dendrogram(X, orientation='top')
+        dendro_top = ff.create_dendrogram(X, orientation='top')
         tickvals_top = np.array(dendro_top['layout']['xaxis']['tickvals'])
         self.assertTrue((tickvals_top <= 0).all())
 
@@ -670,7 +659,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
                 'rgb(220,220,220)',  # gainsboro
                 'rgb(245,245,245)']  # white smoke
 
-        dendro = tls.FigureFactory.create_dendrogram(X, colorscale=greyscale)
+        dendro = ff.create_dendrogram(X, colorscale=greyscale)
 
         expected_dendro = go.Figure(
             data=go.Data([
@@ -764,7 +753,7 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_trisurf,
+                                ff.create_trisurf,
                                 x, y, z, simplices)
 
     def test_valid_colormap(self):
@@ -792,7 +781,7 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_trisurf,
+                                ff.create_trisurf,
                                 x, y, z, simplices, colormap='foo')
 
         # check: if colormap is a list of rgb color strings, make sure the
@@ -804,7 +793,7 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern2,
-                                tls.FigureFactory.create_trisurf,
+                                ff.create_trisurf,
                                 x, y, z, simplices,
                                 colormap=['rgb(4, 5, 600)'])
 
@@ -816,7 +805,7 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern3,
-                                tls.FigureFactory.create_trisurf,
+                                ff.create_trisurf,
                                 x, y, z, simplices,
                                 colormap=[(0.8, 1.0, 1.2)])
 
@@ -837,7 +826,7 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
         tri = Delaunay(points2D)
         simplices = tri.simplices
 
-        test_trisurf_plot = tls.FigureFactory.create_trisurf(
+        test_trisurf_plot = ff.create_trisurf(
             x, y, z, simplices
         )
 
@@ -922,16 +911,17 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
                       for i, j, k in np.random.randn(simplices.shape[0], 3)]
 
         # Color == strings should be kept the same
-        test_colors_plot = tls.FigureFactory.create_trisurf(
-            x, y, z, simplices, color_func=colors_str)
+        test_colors_plot = ff.create_trisurf(
+            x, y, z, simplices, color_func=colors_str
+        )
         self.assertListEqual(list(test_colors_plot['data'][0]['facecolor']),
                              list(colors_str))
         # Colors must match length of simplices
         colors_bad = colors_str[:-1]
-        self.assertRaises(ValueError, tls.FigureFactory.create_trisurf, x, y,
+        self.assertRaises(ValueError, ff.create_trisurf, x, y,
                           z, simplices, color_func=colors_bad)
         # Check converting custom colors to strings
-        test_colors_plot = tls.FigureFactory.create_trisurf(
+        test_colors_plot = ff.create_trisurf(
             x, y, z, simplices, color_func=colors_raw
         )
         self.assertTrue(isinstance(test_colors_plot['data'][0]['facecolor'][0],
@@ -951,7 +941,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_scatterplotmatrix,
+                                ff.create_scatterplotmatrix,
                                 df)
 
     def test_one_column_dataframe(self):
@@ -965,7 +955,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_scatterplotmatrix,
+                                ff.create_scatterplotmatrix,
                                 df)
 
     def test_valid_diag_choice(self):
@@ -974,7 +964,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
         df = pd.DataFrame([[1, 2, 3], [4, 5, 6]])
 
         self.assertRaises(PlotlyError,
-                          tls.FigureFactory.create_scatterplotmatrix,
+                          ff.create_scatterplotmatrix,
                           df, diag='foo')
 
     def test_forbidden_params(self):
@@ -992,7 +982,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_scatterplotmatrix,
+                                ff.create_scatterplotmatrix,
                                 df, **kwargs)
 
     def test_valid_index_choice(self):
@@ -1006,7 +996,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_scatterplotmatrix,
+                                ff.create_scatterplotmatrix,
                                 df, index='grape')
 
     def test_same_data_in_dataframe_columns(self):
@@ -1020,13 +1010,13 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_scatterplotmatrix,
+                                ff.create_scatterplotmatrix,
                                 df)
 
         df = pd.DataFrame([[1, 2], ['a', 4]])
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_scatterplotmatrix,
+                                ff.create_scatterplotmatrix,
                                 df)
 
     def test_same_data_in_index(self):
@@ -1040,13 +1030,13 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_scatterplotmatrix,
+                                ff.create_scatterplotmatrix,
                                 df, index='apple')
 
         df = pd.DataFrame([[1, 2], ['a', 4]], columns=['apple', 'pear'])
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_scatterplotmatrix,
+                                ff.create_scatterplotmatrix,
                                 df, index='apple')
 
     def test_valid_colormap(self):
@@ -1057,7 +1047,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
 
         # check: valid plotly scalename is entered
         self.assertRaises(PlotlyError,
-                          tls.FigureFactory.create_scatterplotmatrix,
+                          ff.create_scatterplotmatrix,
                           df, index='a', colormap='fake_scale')
 
         pattern_rgb = (
@@ -1067,11 +1057,11 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
 
         # check: proper 'rgb' color
         self.assertRaisesRegexp(PlotlyError, pattern_rgb,
-                                tls.FigureFactory.create_scatterplotmatrix,
+                                ff.create_scatterplotmatrix,
                                 df, colormap='rgb(500, 1, 1)', index='c')
 
         self.assertRaisesRegexp(PlotlyError, pattern_rgb,
-                                tls.FigureFactory.create_scatterplotmatrix,
+                                ff.create_scatterplotmatrix,
                                 df, colormap=['rgb(500, 1, 1)'], index='c')
 
         pattern_tuple = (
@@ -1081,11 +1071,11 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
 
         # check: proper color tuple
         self.assertRaisesRegexp(PlotlyError, pattern_tuple,
-                                tls.FigureFactory.create_scatterplotmatrix,
+                                ff.create_scatterplotmatrix,
                                 df, colormap=(2, 1, 1), index='c')
 
         self.assertRaisesRegexp(PlotlyError, pattern_tuple,
-                                tls.FigureFactory.create_scatterplotmatrix,
+                                ff.create_scatterplotmatrix,
                                 df, colormap=[(2, 1, 1)], index='c')
 
     def test_valid_endpts(self):
@@ -1100,17 +1090,17 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_scatterplotmatrix,
+                                ff.create_scatterplotmatrix,
                                 df, index='a', colormap='Hot', endpts='foo')
 
         # check: the endpts are a list of numbers
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_scatterplotmatrix,
+                                ff.create_scatterplotmatrix,
                                 df, index='a', colormap='Hot', endpts=['a'])
 
         # check: endpts is a list of INCREASING numbers
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_scatterplotmatrix,
+                                ff.create_scatterplotmatrix,
                                 df, index='a', colormap='Hot', endpts=[2, 1])
 
     def test_dictionary_colormap(self):
@@ -1128,7 +1118,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
         )
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_scatterplotmatrix,
+                                ff.create_scatterplotmatrix,
                                 df, index='Emotion', colormap=colormap)
 
     def test_scatter_plot_matrix(self):
@@ -1140,7 +1130,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
                           [-2, 'Apple'], [0, 'Apple']],
                           columns=['Numbers', 'Fruit'])
 
-        test_scatter_plot_matrix = tls.FigureFactory.create_scatterplotmatrix(
+        test_scatter_plot_matrix = ff.create_scatterplotmatrix(
             df=df, diag='box', height=1000, width=1000, size=13,
             title='Scatterplot Matrix'
         )
@@ -1223,7 +1213,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
                           [-2, 'Apple'], [0, 'Apple']],
                           columns=['Numbers', 'Fruit'])
 
-        test_scatter_plot_matrix = tls.FigureFactory.create_scatterplotmatrix(
+        test_scatter_plot_matrix = ff.create_scatterplotmatrix(
             df, index='Fruit', endpts=[-10, -1], diag='histogram',
             height=1000, width=1000, size=13, title='Scatterplot Matrix',
             colormap='YlOrRd', marker=dict(symbol=136)
@@ -1271,7 +1261,7 @@ class TestGantt(NumpyTestUtilsMixin, TestCase):
 
         # validate dataframe has correct column names
         df1 = pd.DataFrame([[2, 'Apple']], columns=['Numbers', 'Fruit'])
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_gantt, df1)
+        self.assertRaises(PlotlyError, ff.create_gantt, df1)
 
     def test_df_dataframe_all_args(self):
 
@@ -1281,61 +1271,73 @@ class TestGantt(NumpyTestUtilsMixin, TestCase):
                            ['Job B', '2009-03-05', '2009-04-15']],
                           columns=['Task', 'Start', 'Finish'])
 
-        test_gantt_chart = tls.FigureFactory.create_gantt(df)
+        test_gantt_chart = ff.create_gantt(df)
 
-        exp_gantt_chart = {
-            'data': [{'marker': {'color': 'white'},
-                      'name': '',
-                      'x': ['2009-01-01', '2009-02-30'],
-                      'y': [0, 0]}],
-            'layout': {'height': 600,
-                       'hovermode': 'closest',
-                       'shapes': [{'opacity': 1,
-                                   'y1': 0.2,
-                                   'xref': 'x',
-                                   'fillcolor': 'rgb(31, 119, 180)',
-                                   'yref': 'y',
-                                   'y0': -0.2,
-                                   'x0': '2009-01-01',
-                                   'x1': '2009-02-30',
-                                   'type': 'rect',
-                                   'line': {'width': 0}},
-                                  {'opacity': 1,
-                                   'y1': 1.2,
-                                   'xref': 'x',
-                                   'fillcolor': 'rgb(255, 127, 14)',
-                                   'yref': 'y',
-                                   'y0': 0.8,
-                                   'x0': '2009-03-05',
-                                   'x1': '2009-04-15',
-                                   'type': 'rect',
-                                   'line': {'width': 0}}],
-                       'showlegend': False,
-                       'title': 'Gantt Chart',
-                       'width': 900,
-                       'xaxis': {'rangeselector': {'buttons': [
-                           {'count': 7, 'label': '1w',
-                            'step': 'day', 'stepmode': 'backward'},
-                           {'count': 1, 'label': '1m',
-                            'step': 'month', 'stepmode': 'backward'},
-                           {'count': 6, 'label': '6m',
-                            'step': 'month', 'stepmode': 'backward'},
-                           {'count': 1, 'label': 'YTD',
-                            'step': 'year', 'stepmode': 'todate'},
-                           {'count': 1, 'label': '1y',
-                            'step': 'year', 'stepmode': 'backward'},
-                           {'step': 'all'}
-                           ]},
-                           'showgrid': False,
-                           'type': 'date',
-                           'zeroline': False},
-                       'yaxis': {'autorange': False,
-                                 'range': [-1, 3],
-                                 'showgrid': False,
-                                 'ticktext': ['Job A', 'Job B'],
-                                 'tickvals': [0, 1],
-                                 'zeroline': False}}
-        }
+        exp_gantt_chart = {'data': [{'marker': {'color': 'white'},
+                                     'name': '',
+                                     'type': 'scatter',
+                                     'x': ['2009-01-01', '2009-02-30'],
+                                     'y': [0, 0]},
+                                    {'marker': {'color': 'white'},
+                                    'name': '',
+                                    'type': 'scatter',
+                                    'x': ['2009-03-05', '2009-04-15'],
+                                    'y': [1, 1]}],
+                            'layout': {'height': 600,
+                                       'hovermode': 'closest',
+                                       'shapes': [{'fillcolor': 'rgb(31, 119, 180)',
+                                                   'line': {'width': 0},
+                                                   'opacity': 1,
+                                                   'type': 'rect',
+                                                   'x0': '2009-01-01',
+                                                   'x1': '2009-02-30',
+                                                   'xref': 'x',
+                                                   'y0': -0.2,
+                                                   'y1': 0.2,
+                                                   'yref': 'y'},
+                                                  {'fillcolor': 'rgb(255, 127, 14)',
+                                                   'line': {'width': 0},
+                                                   'opacity': 1,
+                                                   'type': 'rect',
+                                                   'x0': '2009-03-05',
+                                                   'x1': '2009-04-15',
+                                                   'xref': 'x',
+                                                   'y0': 0.8,
+                                                   'y1': 1.2,
+                                                   'yref': 'y'}],
+                                       'showlegend': False,
+                                       'title': 'Gantt Chart',
+                                       'width': 900,
+                                       'xaxis': {'rangeselector': {'buttons': [{'count': 7,
+                                       'label': '1w',
+                                       'step': 'day',
+                                       'stepmode': 'backward'},
+                                       {'count': 1,
+                                        'label': '1m',
+                                        'step': 'month',
+                                        'stepmode': 'backward'},
+                                       {'count': 6,
+                                        'label': '6m',
+                                        'step': 'month',
+                                        'stepmode': 'backward'},
+                                       {'count': 1,
+                                        'label': 'YTD',
+                                        'step': 'year',
+                                        'stepmode': 'todate'},
+                                       {'count': 1,
+                                        'label': '1y',
+                                        'step': 'year',
+                                        'stepmode': 'backward'},
+                                       {'step': 'all'}]},
+                                       'showgrid': False,
+                                       'type': 'date',
+                                       'zeroline': False},
+                                       'yaxis': {'autorange': False,
+                                       'range': [-1, 3],
+                                       'showgrid': False,
+                                       'ticktext': ['Job A', 'Job B'],
+                                       'tickvals': [0, 1],
+                                       'zeroline': False}}}
 
         self.assertEqual(test_gantt_chart['data'][0],
                          exp_gantt_chart['data'][0])
@@ -1356,34 +1358,34 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
                    "exceed 255.0.")
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_violin,
+                                ff.create_violin,
                                 data, colors='rgb(300, 2, 3)')
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_violin,
+                                ff.create_violin,
                                 data, colors=['rgb(300, 2, 3)'])
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_violin,
+                                ff.create_violin,
                                 data, colors={'apple': 'rgb(300, 2, 3)'})
 
         pattern2 = ("Whoops! The elements in your colors tuples cannot "
                     "exceed 1.0.")
 
         self.assertRaisesRegexp(PlotlyError, pattern2,
-                                tls.FigureFactory.create_violin,
+                                ff.create_violin,
                                 data, colors=(1.1, 1, 1))
 
         self.assertRaisesRegexp(PlotlyError, pattern2,
-                                tls.FigureFactory.create_violin,
+                                ff.create_violin,
                                 data, colors=[(1.1, 1, 1)])
 
         self.assertRaisesRegexp(PlotlyError, pattern2,
-                                tls.FigureFactory.create_violin,
+                                ff.create_violin,
                                 data, colors={'apple': (1.1, 1, 1)})
 
         # check: if valid string color is inputted
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_violin,
+        self.assertRaises(PlotlyError, ff.create_violin,
                           data, colors='foo')
 
     def test_data_header(self):
@@ -1397,7 +1399,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
                    "numeric data for the violin plot.")
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_violin, data,
+                                ff.create_violin, data,
                                 group_header='a', colors=['rgb(1, 2, 3)'])
 
     def test_data_as_list(self):
@@ -1410,7 +1412,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
                    "either numbers or dictionaries.")
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_violin,
+                                ff.create_violin,
                                 data)
 
         data = [1, 'foo']
@@ -1418,7 +1420,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
         pattern2 = ("If data is a list, it must contain only numbers.")
 
         self.assertRaisesRegexp(PlotlyError, pattern2,
-                                tls.FigureFactory.create_violin, data)
+                                ff.create_violin, data)
 
     def test_dataframe_input(self):
 
@@ -1430,7 +1432,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
                    "a group header.")
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_violin, data,
+                                ff.create_violin, data,
                                 group_header=True)
 
     def test_colors_dict(self):
@@ -1444,7 +1446,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
                    "using a colorscale.")
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_violin, data,
+                                ff.create_violin, data,
                                 data_header='b', group_header='a',
                                 use_colorscale=True,
                                 colors={'a': 'rgb(1, 2, 3)'})
@@ -1455,7 +1457,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
                     "appear as keys in colors.")
 
         self.assertRaisesRegexp(PlotlyError, pattern2,
-                                tls.FigureFactory.create_violin, data,
+                                ff.create_violin, data,
                                 data_header='b', group_header='a',
                                 use_colorscale=False,
                                 colors={'a': 'rgb(1, 2, 3)'})
@@ -1471,7 +1473,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
                    "scale is allowed.")
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_violin, data,
+                                ff.create_violin, data,
                                 data_header='b', group_header='a',
                                 use_colorscale=True,
                                 colors='rgb(1, 2, 3)')
@@ -1486,7 +1488,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
         pattern = ("Your group_stats param must be a dictionary.")
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_violin, data,
+                                ff.create_violin, data,
                                 data_header='b', group_header='a',
                                 use_colorscale=True,
                                 colors=['rgb(1, 2, 3)', 'rgb(4, 5, 6)'],
@@ -1498,7 +1500,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
                     "represented as a key in group_stats.")
 
         self.assertRaisesRegexp(PlotlyError, pattern2,
-                                tls.FigureFactory.create_violin, data,
+                                ff.create_violin, data,
                                 data_header='b', group_header='a',
                                 use_colorscale=True,
                                 colors=['rgb(1, 2, 3)', 'rgb(4, 5, 6)'],
@@ -1508,7 +1510,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
 
         # check: test violin fig matches expected fig
 
-        test_violin = tls.FigureFactory.create_violin(data=[1, 2])
+        test_violin = ff.create_violin(data=[1, 2])
 
         exp_violin = {
             'data': [{'fill': 'tonextx',
@@ -1932,3 +1934,233 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
 
         self.assert_dict_equal(test_violin['layout'],
                                exp_violin['layout'])
+
+
+class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
+
+    def test_data_must_be_dataframe(self):
+        data = []
+
+        pattern = ('You must input a pandas DataFrame.')
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                ff.create_facet_grid,
+                                data, 'a', 'b')
+
+    def test_x_and_y_for_scatter(self):
+        data = pd.DataFrame([[0, 0], [1, 1]], columns=['a', 'b'])
+
+        pattern = (
+            "You need to input 'x' and 'y' if you are you are using a "
+            "trace_type of 'scatter' or 'scattergl'."
+        )
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                ff.create_facet_grid,
+                                data, 'a')
+
+
+    def test_valid_col_selection(self):
+        data = pd.DataFrame([[0, 0], [1, 1]], columns=['a', 'b'])
+
+        pattern = (
+            "x, y, facet_row, facet_col and color_name must be keys in your "
+            "dataframe."
+        )
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                ff.create_facet_grid,
+                                data, 'a', 'c')
+
+    def test_valid_trace_type(self):
+        data = pd.DataFrame([[0, 0], [1, 1]], columns=['a', 'b'])
+
+        self.assertRaises(PlotlyError, ff.create_facet_grid,
+                          data, 'a', 'b', trace_type='foo')
+
+    def test_valid_scales(self):
+        data = pd.DataFrame([[0, 0], [1, 1]], columns=['a', 'b'])
+
+        pattern = (
+            "'scales' must be set to 'fixed', 'free_x', 'free_y' and 'free'."
+        )
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                ff.create_facet_grid,
+                                data, 'a', 'b', scales='not_free')
+
+    def test_valid_plotly_color_scale_name(self):
+        data = pd.DataFrame([[0, 0], [1, 1]], columns=['a', 'b'])
+
+        self.assertRaises(PlotlyError, ff.create_facet_grid,
+                          data, 'a', 'b', color_name='a', colormap='wrong one')
+
+    def test_facet_labels(self):
+        data = pd.DataFrame([['a1', 0], ['a2', 1]], columns=['a', 'b'])
+
+        self.assertRaises(PlotlyError, ff.create_facet_grid,
+                          data, 'a', 'b', facet_row='a', facet_row_labels={})
+
+        self.assertRaises(PlotlyError, ff.create_facet_grid,
+                          data, 'a', 'b', facet_col='a', facet_col_labels={})
+
+    def test_valid_color_dict(self):
+        data = pd.DataFrame([[0, 0, 'foo'], [1, 1, 'foo']],
+                            columns=['a', 'b', 'foo'])
+
+        pattern = (
+            "If using 'colormap' as a dictionary, make sure "
+            "all the values of the colormap column are in "
+            "the keys of your dictionary."
+        )
+
+        color_dict = {'bar': '#ffffff'}
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                ff.create_facet_grid,
+                                data, 'a', 'b', color_name='a',
+                                colormap=color_dict)
+
+
+    def test_valid_colorscale_name(self):
+        data = pd.DataFrame([[0, 1, 2], [3, 4, 5]],
+                            columns=['a', 'b', 'c'])
+
+        colormap='foo'
+
+        self.assertRaises(PlotlyError, ff.create_facet_grid, data, 'a', 'b',
+                          color_name='c', colormap=colormap)
+
+    def test_valid_facet_grid_fig(self):
+        mpg = pd.read_table('https://raw.githubusercontent.com/plotly/datasets/master/mpg_2017.txt')
+        df = mpg.head(10)
+
+        test_facet_grid = ff.create_facet_grid(
+            df,
+            x='displ',
+            y='cty',
+            facet_col='cyl',
+        )
+
+        exp_facet_grid = {
+            'data': [{'marker': {'color': 'rgb(31, 119, 180)',
+                'line': {'color': 'darkgrey', 'width': 1},
+                'size': 8},
+               'mode': 'markers',
+               'opacity': 0.6,
+               'type': 'scatter',
+               'x': [1.8,
+                    1.8,
+                    2.0,
+                    2.0,
+                    1.8,
+                    1.8,
+                    2.0],
+               'xaxis': 'x1',
+               'y': [18,
+                    21,
+                    20,
+                    21,
+                    18,
+                    16,
+                    20],
+               'yaxis': 'y1'},
+              {'marker': {'color': 'rgb(31, 119, 180)',
+                'line': {'color': 'darkgrey', 'width': 1},
+                'size': 8},
+               'mode': 'markers',
+               'opacity': 0.6,
+               'type': 'scatter',
+               'x':     [2.8,
+                   2.8,
+                   3.1],
+               'xaxis': 'x2',
+               'y':    [16,
+                   18,
+                   18],
+               'yaxis': 'y1'}],
+             'layout': {'annotations': [{'font': {'color': '#0f0f0f', 'size': 13},
+                'showarrow': False,
+                'text': 4,
+                'textangle': 0,
+                'x': 0.24625,
+                'xanchor': 'center',
+                'xref': 'paper',
+                'y': 1.03,
+                'yanchor': 'middle',
+                'yref': 'paper'},
+               {'font': {'color': '#0f0f0f', 'size': 13},
+                'showarrow': False,
+                'text': 6,
+                'textangle': 0,
+                'x': 0.7537499999999999,
+                'xanchor': 'center',
+                'xref': 'paper',
+                'y': 1.03,
+                'yanchor': 'middle',
+                'yref': 'paper'},
+               {'font': {'color': '#000000', 'size': 12},
+                'showarrow': False,
+                'text': 'displ',
+                'textangle': 0,
+                'x': 0.5,
+                'xanchor': 'center',
+                'xref': 'paper',
+                'y': -0.1,
+                'yanchor': 'middle',
+                'yref': 'paper'},
+               {'font': {'color': '#000000', 'size': 12},
+                'showarrow': False,
+                'text': 'cty',
+                'textangle': 270,
+                'x': -0.1,
+                'xanchor': 'center',
+                'xref': 'paper',
+                'y': 0.5,
+                'yanchor': 'middle',
+                'yref': 'paper'}],
+              'height': 600,
+              'legend': {'bgcolor': '#efefef',
+               'borderwidth': 1,
+               'x': 1.05,
+               'y': 1,
+               'yanchor': 'top'},
+              'paper_bgcolor': 'rgb(251, 251, 251)',
+              'showlegend': False,
+              'title': '',
+              'width': 600,
+              'xaxis1': {'anchor': 'y1',
+               'domain': [0.0, 0.4925],
+               'dtick': 0.0,
+               'range': [0.85, 4.1575],
+               'ticklen': 0,
+               'zeroline': False},
+              'xaxis2': {'anchor': 'free',
+               'domain': [0.5075, 1.0],
+               'dtick': 0.0,
+               'position': 0.0,
+               'range': [0.85, 4.1575],
+               'ticklen': 0,
+               'zeroline': False},
+              'yaxis1': {'anchor': 'x1',
+               'domain': [0.0, 1.0],
+               'dtick': 1.0,
+               'range': [15.75, 21.2625],
+               'ticklen': 0,
+               'zeroline': False}}}
+
+        # data
+        data_keys = test_facet_grid['data'][0].keys()
+
+        for j in range(len(test_facet_grid['data'])):
+            for key in data_keys:
+                if key != 'x' and key != 'y':
+                    self.assertEqual(test_facet_grid['data'][j][key],
+                                     exp_facet_grid['data'][j][key])
+                else:
+                    self.assertEqual(list(test_facet_grid['data'][j][key]),
+                                     list(exp_facet_grid['data'][j][key]))
+
+        # layout
+        self.assert_dict_equal(test_facet_grid['layout'],
+                               exp_facet_grid['layout'])

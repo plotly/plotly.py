@@ -4,6 +4,7 @@ colors
 
 Functions that manipulate colors and arrays of colors.
 
+-----
 There are three basic types of color types: rgb, hex and tuple:
 
 rgb - An rgb color is a string of the form 'rgb(a,b,c)' where a, b and c are
@@ -15,6 +16,19 @@ just the set of characters used in the hexadecimal numeric system.
 
 tuple - A tuple color is a 3-tuple of the form (a,b,c) where a, b and c are
 floats between 0 and 1 inclusive.
+
+-----
+Types of colormap:
+There are typically two main types of colormaps that exist: numerical and
+categorical colormaps.
+
+Numerical colormaps are used when a the coloring column being used takes a
+spectrum of values or numbers. Alternatively, a categorical colormap is used
+to assign a specific value in a color column to a specific color everytime it
+appears in the plot at hand. For instance, a column of strings in a dataframe
+would naturally use a categorical colormap. You can choose however to use a
+categorical colormap with a column of numbers. Be careful though, as if you
+have a large set of unique numbers in your column you'll get a lot of colors.
 
 """
 from __future__ import absolute_import

@@ -27,9 +27,15 @@ NEEDED_STYLE_KEYS = ['left', 'top', 'height', 'width']
 VALID_LANGUAGES = ['cpp', 'cs', 'css', 'fsharp', 'go', 'haskell', 'java',
                    'javascript', 'jsx', 'julia', 'xml', 'matlab', 'php',
                    'python', 'r', 'ruby', 'scala', 'sql', 'yaml']
+
 VALID_SLIDE_STYLES = ['pictureleft', 'pictureright', 'picturemiddle',
                       'pictureleft_tiled', 'pictureright_tiled']
+VALID_CLASS_STYLES = ['pictureleft', 'pictureright', 'picturemiddle',
+                      'pictureleft_tiled', 'pictureright_tiled']
 
+VALID_SLIDE_PROPS = ['class', 'transition', 'background-image',
+                     'background-position', 'background-repeat',
+                     'background-size', 'background_color']
 fontWeight_dict = {
     'Thin': {'fontWeight': 100},
     'Thin Italic': {'fontWeight': 100, 'fontStyle': 'italic'},
@@ -61,7 +67,6 @@ def _generate_id(size):
     for num in range(10):
         letters_and_numbers += str(num)
     letters_and_numbers += str(num)
-
     id_str = ''
     for _ in range(size):
         id_str += random.choice(list(letters_and_numbers))
@@ -384,7 +389,6 @@ def _return_layout_specs(num_of_boxes, style):
                 w = 4
                 box_width = (100 - w * (1 + num_of_boxes)) / num_of_boxes
                 left = (k + 1) * w + k * box_width
-
                 specs = (left, 20, 40, box_width)
                 specs_for_boxes.append(specs)
 
@@ -487,6 +491,7 @@ class Presentation(dict):
             text_lines = []
             inCode = False
             slidestyle = None
+
             for index, line in enumerate(lines_in_slide):
                 # inCode handling
                 if line[ : 3] == '```' and len(line) > 3:

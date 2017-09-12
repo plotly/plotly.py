@@ -194,7 +194,7 @@ def violinplot(vals, fillcolor='#1f77b4', rugplot=True):
 
 
 def violin_no_colorscale(data, data_header, group_header, colors,
-                         use_colorscale, group_stats, rugplot,
+                         use_colorscale, group_stats, rugplot, sort,
                          height, width, title):
     """
     Refer to FigureFactory.create_violin() for docstring.
@@ -208,7 +208,8 @@ def violin_no_colorscale(data, data_header, group_header, colors,
     for name in data[group_header]:
         if name not in group_name:
             group_name.append(name)
-    group_name.sort()
+    if sort:
+        group_name.sort()
 
     gb = data.groupby([group_header])
     L = len(group_name)
@@ -251,7 +252,8 @@ def violin_no_colorscale(data, data_header, group_header, colors,
 
 
 def violin_colorscale(data, data_header, group_header, colors, use_colorscale,
-                      group_stats, rugplot, height, width, title):
+                      group_stats, rugplot, sort, height, width,
+                      title):
     """
     Refer to FigureFactory.create_violin() for docstring.
 
@@ -264,7 +266,8 @@ def violin_colorscale(data, data_header, group_header, colors, use_colorscale,
     for name in data[group_header]:
         if name not in group_name:
             group_name.append(name)
-    group_name.sort()
+    if sort:
+        group_name.sort()
 
     # make sure all group names are keys in group_stats
     for group in group_name:
@@ -345,7 +348,7 @@ def violin_colorscale(data, data_header, group_header, colors, use_colorscale,
 
 
 def violin_dict(data, data_header, group_header, colors, use_colorscale,
-                group_stats, rugplot, height, width, title):
+                group_stats, rugplot, sort, height, width, title):
     """
     Refer to FigureFactory.create_violin() for docstring.
 
@@ -358,7 +361,9 @@ def violin_dict(data, data_header, group_header, colors, use_colorscale,
     for name in data[group_header]:
         if name not in group_name:
             group_name.append(name)
-    group_name.sort()
+
+    if sort:
+        group_name.sort()
 
     # check if all group names appear in colors dict
     for group in group_name:
@@ -405,7 +410,8 @@ def violin_dict(data, data_header, group_header, colors, use_colorscale,
 
 def create_violin(data, data_header=None, group_header=None, colors=None,
                   use_colorscale=False, group_stats=None, rugplot=True,
-                  height=450, width=600, title='Violin and Rug Plot'):
+                  sort=False, height=450, width=600,
+                  title='Violin and Rug Plot'):
     """
     Returns figure for a violin plot
 
@@ -429,12 +435,15 @@ def create_violin(data, data_header=None, group_header=None, colors=None,
         variable. Will implement a colorscale based on the first 2 colors
         of param colors. This means colors must be a list with at least 2
         colors in it (Plotly colorscales are accepted since they map to a
-        list of two rgb colors).
+        list of two rgb colors). Default = False
     :param (dict) group_stats: a dictioanry where each key is a unique
         value from the group_header column in data. Each value must be a
         number and will be used to color the violin plots if a colorscale
         is being used.
     :param (bool) rugplot: determines if a rugplot is draw on violin plot.
+        Default = True
+    :param (bool) sort: determines if violins are sorted
+        alphabetically (True) or by input order (False). Default = False
     :param (float) height: the height of the violin plot.
     :param (float) width: the width of the violin plot.
     :param (str) title: the title of the violin plot.
@@ -482,7 +491,7 @@ def create_violin(data, data_header=None, group_header=None, colors=None,
 
     # create violin fig
     fig = create_violin(df, data_header='Score', group_header='Group',
-                        height=600, width=1000)
+                        sort=True, height=600, width=1000)
 
     # plot
     py.iplot(fig, filename='Violin Plot with Coloring')
@@ -601,13 +610,15 @@ def create_violin(data, data_header=None, group_header=None, colors=None,
                 # validate colors dict choice below
                 fig = violin_dict(
                     data, data_header, group_header, valid_colors,
-                    use_colorscale, group_stats, rugplot, height, width, title
+                    use_colorscale, group_stats, rugplot, sort,
+                    height, width, title
                 )
                 return fig
             else:
                 fig = violin_no_colorscale(
                     data, data_header, group_header, valid_colors,
-                    use_colorscale, group_stats, rugplot, height, width, title
+                    use_colorscale, group_stats, rugplot, sort,
+                    height, width, title
                 )
                 return fig
         else:
@@ -627,6 +638,7 @@ def create_violin(data, data_header=None, group_header=None, colors=None,
 
             fig = violin_colorscale(
                 data, data_header, group_header, valid_colors,
-                use_colorscale, group_stats, rugplot, height, width, title
+                use_colorscale, group_stats, rugplot, sort, height,
+                width, title
             )
             return fig

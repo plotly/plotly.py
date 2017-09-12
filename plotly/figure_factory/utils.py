@@ -10,23 +10,27 @@ DEFAULT_PLOTLY_COLORS = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
                          'rgb(227, 119, 194)', 'rgb(127, 127, 127)',
                          'rgb(188, 189, 34)', 'rgb(23, 190, 207)']
 
-PLOTLY_SCALES = {'Greys': ['rgb(0,0,0)', 'rgb(255,255,255)'],
-                 'YlGnBu': ['rgb(8,29,88)', 'rgb(255,255,217)'],
-                 'Greens': ['rgb(0,68,27)', 'rgb(247,252,245)'],
-                 'YlOrRd': ['rgb(128,0,38)', 'rgb(255,255,204)'],
-                 'Bluered': ['rgb(0,0,255)', 'rgb(255,0,0)'],
-                 'RdBu': ['rgb(5,10,172)', 'rgb(178,10,28)'],
-                 'Reds': ['rgb(220,220,220)', 'rgb(178,10,28)'],
-                 'Blues': ['rgb(5,10,172)', 'rgb(220,220,220)'],
-                 'Picnic': ['rgb(0,0,255)', 'rgb(255,0,0)'],
-                 'Rainbow': ['rgb(150,0,90)', 'rgb(255,0,0)'],
-                 'Portland': ['rgb(12,51,131)', 'rgb(217,30,30)'],
-                 'Jet': ['rgb(0,0,131)', 'rgb(128,0,0)'],
-                 'Hot': ['rgb(0,0,0)', 'rgb(255,255,255)'],
-                 'Blackbody': ['rgb(0,0,0)', 'rgb(160,200,255)'],
-                 'Earth': ['rgb(0,0,130)', 'rgb(255,255,255)'],
-                 'Electric': ['rgb(0,0,0)', 'rgb(255,250,220)'],
-                 'Viridis': ['rgb(68,1,84)', 'rgb(253,231,37)']}
+# TODO: make PLOTLY_SCALES below like version in plotly.colors
+# requires rewritting scatterplot_matrix code
+PLOTLY_SCALES = {
+    'Greys': ['rgb(0,0,0)', 'rgb(255,255,255)'],
+    'YlGnBu': ['rgb(8,29,88)', 'rgb(255,255,217)'],
+    'Greens': ['rgb(0,68,27)', 'rgb(247,252,245)'],
+    'YlOrRd': ['rgb(128,0,38)', 'rgb(255,255,204)'],
+    'Bluered': ['rgb(0,0,255)', 'rgb(255,0,0)'],
+    'RdBu': ['rgb(5,10,172)', 'rgb(178,10,28)'],
+    'Reds': ['rgb(220,220,220)', 'rgb(178,10,28)'],
+    'Blues': ['rgb(5,10,172)', 'rgb(220,220,220)'],
+    'Picnic': ['rgb(0,0,255)', 'rgb(255,0,0)'],
+    'Rainbow': ['rgb(150,0,90)', 'rgb(255,0,0)'],
+    'Portland': ['rgb(12,51,131)', 'rgb(217,30,30)'],
+    'Jet': ['rgb(0,0,131)', 'rgb(128,0,0)'],
+    'Hot': ['rgb(0,0,0)', 'rgb(255,255,255)'],
+    'Blackbody': ['rgb(0,0,0)', 'rgb(160,200,255)'],
+    'Earth': ['rgb(0,0,130)', 'rgb(255,255,255)'],
+    'Electric': ['rgb(0,0,0)', 'rgb(255,250,220)'],
+    'Viridis': ['#440154', '#fde725']
+}
 
 
 def validate_index(index_vals):
@@ -374,3 +378,113 @@ def validate_colors_dict(colors, colortype='tuple'):
             colors[key] = color_parser(colors[key], label_rgb)
 
     return colors
+
+def colorscale_to_colors(colorscale):
+    """
+    Extracts the colors from colorscale as a list
+    """
+    color_list = []
+    for item in colorscale:
+        color_list.append(item[1])
+    return color_list
+
+
+def colorscale_to_scale(colorscale):
+    """
+    Extracts the interpolation scale values from colorscale as a list
+    """
+    scale_list = []
+    for item in colorscale:
+        scale_list.append(item[0])
+    return scale_list
+
+
+def validate_scale_values(scale):
+    """
+    Validates scale values from a colorscale
+
+    :param (list) scale: a strictly increasing list of floats that begins
+        with 0 and ends with 1. Its usage derives from a colorscale which is
+        a list of two-lists (a list with two elements) of the form
+        [value, color] which are used to determine how interpolation weighting
+        works between the colors in the colorscale. Therefore scale is just
+        the extraction of these values from the two-lists in order
+    """
+    if len(scale) < 2:
+        raise exceptions.PlotlyError('You must input a list of scale values '
+                                     'that has at least two values.')
+
+    if (scale[0] != 0) or (scale[-1] != 1):
+        raise exceptions.PlotlyError(
+            'The first and last number in your scale must be 0.0 and 1.0 '
+            'respectively.'
+        )
+
+    if not all(x < y for x, y in zip(scale, scale[1:])):
+            raise exceptions.PlotlyError(
+                "'scale' must be a list that contains a strictly increasing "
+                "sequence of numbers."
+            )
+
+
+def validate_colorscale(colorscale):
+    """Validate the structure, scale values and colors of colorscale."""
+    if not isinstance(colorscale, list):
+        #TODO Write tests for these exceptions
+        raise exceptions.PlotlyError("A valid colorscale must be a list.")
+    if not all(isinstance(innerlist, list) for innerlist in colorscale):
+        raise exceptions.PlotlyError(
+            "A valid colorscale must be a list of lists."
+        )
+    colorscale_colors = colorscale_to_colors(colorscale)
+    scale_values = colorscale_to_scale(colorscale)
+
+    validate_scale_values(scale_values)
+    validate_colors(colorscale_colors)
+
+
+def endpts_to_intervals(endpts):
+    """
+    Returns a list of intervals for categorical colormaps
+
+    Accepts a list or tuple of sequentially increasing numbers and returns
+    a list representation of the mathematical intervals with these numbers
+    as endpoints. For example, [1, 6] returns [[-inf, 1], [1, 6], [6, inf]]
+
+    :raises: (PlotlyError) If input is not a list or tuple
+    :raises: (PlotlyError) If the input contains a string
+    :raises: (PlotlyError) If any number does not increase after the
+        previous one in the sequence
+    """
+    length = len(endpts)
+    # Check if endpts is a list or tuple
+    if not (isinstance(endpts, (tuple)) or isinstance(endpts, (list))):
+        raise exceptions.PlotlyError("The intervals_endpts argument must "
+                                     "be a list or tuple of a sequence "
+                                     "of increasing numbers.")
+    # Check if endpts contains only numbers
+    for item in endpts:
+        if isinstance(item, str):
+            raise exceptions.PlotlyError("The intervals_endpts argument "
+                                         "must be a list or tuple of a "
+                                         "sequence of increasing "
+                                         "numbers.")
+    # Check if numbers in endpts are increasing
+    for k in range(length - 1):
+        if endpts[k] >= endpts[k + 1]:
+            raise exceptions.PlotlyError("The intervals_endpts argument "
+                                         "must be a list or tuple of a "
+                                         "sequence of increasing "
+                                         "numbers.")
+    else:
+        intervals = []
+        # add -inf to intervals
+        intervals.append([float('-inf'), endpts[0]])
+        for k in range(length - 1):
+            interval = []
+            interval.append(endpts[k])
+            interval.append(endpts[k + 1])
+            intervals.append(interval)
+        # add +inf to intervals
+        intervals.append([endpts[length - 1], float('inf')])
+        return intervals
