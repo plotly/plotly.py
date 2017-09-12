@@ -864,14 +864,15 @@ class Bar(PlotlyDict):
     """
     Valid attributes for 'bar' at path [] under parents ():
     
-        ['bardir', 'base', 'basesrc', 'customdata', 'customdatasrc', 'dx',
-        'dy', 'error_x', 'error_y', 'hoverinfo', 'hoverinfosrc', 'hoverlabel',
-        'hovertext', 'hovertextsrc', 'ids', 'idssrc', 'insidetextfont',
-        'legendgroup', 'marker', 'name', 'offset', 'offsetsrc', 'opacity',
-        'orientation', 'outsidetextfont', 'r', 'rsrc', 'showlegend', 'stream',
-        't', 'text', 'textfont', 'textposition', 'textpositionsrc', 'textsrc',
-        'tsrc', 'type', 'uid', 'visible', 'width', 'widthsrc', 'x', 'x0',
-        'xaxis', 'xcalendar', 'xsrc', 'y', 'y0', 'yaxis', 'ycalendar', 'ysrc']
+        ['bardir', 'base', 'basesrc', 'constraintext', 'customdata',
+        'customdatasrc', 'dx', 'dy', 'error_x', 'error_y', 'hoverinfo',
+        'hoverinfosrc', 'hoverlabel', 'hovertext', 'hovertextsrc', 'ids',
+        'idssrc', 'insidetextfont', 'legendgroup', 'marker', 'name', 'offset',
+        'offsetsrc', 'opacity', 'orientation', 'outsidetextfont', 'r', 'rsrc',
+        'showlegend', 'stream', 't', 'text', 'textfont', 'textposition',
+        'textpositionsrc', 'textsrc', 'tsrc', 'type', 'uid', 'visible',
+        'width', 'widthsrc', 'x', 'x0', 'xaxis', 'xcalendar', 'xsrc', 'y',
+        'y0', 'yaxis', 'ycalendar', 'ysrc']
     
     Run `<bar-object>.help('attribute')` on any of the above.
     '<bar-object>' is the object at []
@@ -1015,8 +1016,9 @@ class Contours(PlotlyDict):
     """
     Valid attributes for 'contours' at path [] under parents ():
     
-        ['coloring', 'end', 'operation', 'showlines', 'size', 'start', 'type',
-        'value', 'x', 'y', 'z']
+        ['coloring', 'end', 'labelfont', 'labelformat', 'operation',
+        'showlabels', 'showlines', 'size', 'start', 'type', 'value', 'x', 'y',
+        'z']
     
     Run `<contours-object>.help('attribute')` on any of the above.
     '<contours-object>' is the object at []
@@ -1640,14 +1642,14 @@ class Scatter(PlotlyDict):
     """
     Valid attributes for 'scatter' at path [] under parents ():
     
-        ['connectgaps', 'customdata', 'customdatasrc', 'dx', 'dy', 'error_x',
-        'error_y', 'fill', 'fillcolor', 'hoverinfo', 'hoverinfosrc',
-        'hoverlabel', 'hoveron', 'hovertext', 'hovertextsrc', 'ids', 'idssrc',
-        'legendgroup', 'line', 'marker', 'mode', 'name', 'opacity', 'r',
-        'rsrc', 'showlegend', 'stream', 't', 'text', 'textfont',
-        'textposition', 'textpositionsrc', 'textsrc', 'tsrc', 'type', 'uid',
-        'visible', 'x', 'x0', 'xaxis', 'xcalendar', 'xsrc', 'y', 'y0', 'yaxis',
-        'ycalendar', 'ysrc']
+        ['cliponaxis', 'connectgaps', 'customdata', 'customdatasrc', 'dx',
+        'dy', 'error_x', 'error_y', 'fill', 'fillcolor', 'hoverinfo',
+        'hoverinfosrc', 'hoverlabel', 'hoveron', 'hovertext', 'hovertextsrc',
+        'ids', 'idssrc', 'legendgroup', 'line', 'marker', 'mode', 'name',
+        'opacity', 'r', 'rsrc', 'showlegend', 'stream', 't', 'text',
+        'textfont', 'textposition', 'textpositionsrc', 'textsrc', 'tsrc',
+        'type', 'uid', 'visible', 'x', 'x0', 'xaxis', 'xcalendar', 'xsrc', 'y',
+        'y0', 'yaxis', 'ycalendar', 'ysrc']
     
     Run `<scatter-object>.help('attribute')` on any of the above.
     '<scatter-object>' is the object at []
@@ -1753,12 +1755,13 @@ class Scatterternary(PlotlyDict):
     """
     Valid attributes for 'scatterternary' at path [] under parents ():
     
-        ['a', 'asrc', 'b', 'bsrc', 'c', 'connectgaps', 'csrc', 'customdata',
-        'customdatasrc', 'fill', 'fillcolor', 'hoverinfo', 'hoverinfosrc',
-        'hoverlabel', 'hoveron', 'hovertext', 'hovertextsrc', 'ids', 'idssrc',
-        'legendgroup', 'line', 'marker', 'mode', 'name', 'opacity',
-        'showlegend', 'stream', 'subplot', 'sum', 'text', 'textfont',
-        'textposition', 'textpositionsrc', 'textsrc', 'type', 'uid', 'visible']
+        ['a', 'asrc', 'b', 'bsrc', 'c', 'cliponaxis', 'connectgaps', 'csrc',
+        'customdata', 'customdatasrc', 'fill', 'fillcolor', 'hoverinfo',
+        'hoverinfosrc', 'hoverlabel', 'hoveron', 'hovertext', 'hovertextsrc',
+        'ids', 'idssrc', 'legendgroup', 'line', 'marker', 'mode', 'name',
+        'opacity', 'showlegend', 'stream', 'subplot', 'sum', 'text',
+        'textfont', 'textposition', 'textpositionsrc', 'textsrc', 'type',
+        'uid', 'visible']
     
     Run `<scatterternary-object>.help('attribute')` on any of the above.
     '<scatterternary-object>' is the object at []
@@ -1826,9 +1829,9 @@ class XAxis(PlotlyDict):
         ['anchor', 'autorange', 'autotick', 'backgroundcolor', 'calendar',
         'categoryarray', 'categoryarraysrc', 'categoryorder', 'color',
         'constrain', 'constraintoward', 'domain', 'dtick', 'exponentformat',
-        'fixedrange', 'gridcolor', 'gridwidth', 'hoverformat', 'linecolor',
-        'linewidth', 'mirror', 'nticks', 'overlaying', 'position', 'range',
-        'rangemode', 'rangeselector', 'rangeslider', 'scaleanchor',
+        'fixedrange', 'gridcolor', 'gridwidth', 'hoverformat', 'layer',
+        'linecolor', 'linewidth', 'mirror', 'nticks', 'overlaying', 'position',
+        'range', 'rangemode', 'rangeselector', 'rangeslider', 'scaleanchor',
         'scaleratio', 'separatethousands', 'showaxeslabels', 'showbackground',
         'showexponent', 'showgrid', 'showline', 'showspikes', 'showticklabels',
         'showtickprefix', 'showticksuffix', 'side', 'spikecolor', 'spikedash',
@@ -1865,9 +1868,9 @@ class YAxis(PlotlyDict):
         ['anchor', 'autorange', 'autotick', 'backgroundcolor', 'calendar',
         'categoryarray', 'categoryarraysrc', 'categoryorder', 'color',
         'constrain', 'constraintoward', 'domain', 'dtick', 'exponentformat',
-        'fixedrange', 'gridcolor', 'gridwidth', 'hoverformat', 'linecolor',
-        'linewidth', 'mirror', 'nticks', 'overlaying', 'position', 'range',
-        'rangemode', 'scaleanchor', 'scaleratio', 'separatethousands',
+        'fixedrange', 'gridcolor', 'gridwidth', 'hoverformat', 'layer',
+        'linecolor', 'linewidth', 'mirror', 'nticks', 'overlaying', 'position',
+        'range', 'rangemode', 'scaleanchor', 'scaleratio', 'separatethousands',
         'showaxeslabels', 'showbackground', 'showexponent', 'showgrid',
         'showline', 'showspikes', 'showticklabels', 'showtickprefix',
         'showticksuffix', 'side', 'spikecolor', 'spikedash', 'spikemode',
