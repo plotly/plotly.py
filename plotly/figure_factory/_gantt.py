@@ -583,7 +583,8 @@ def gantt_dict(chart, colors, title, index_col, show_colorbar, bar_width,
 def create_gantt(df, colors=None, index_col=None, show_colorbar=False,
                  reverse_colors=False, title='Gantt Chart', bar_width=0.2,
                  showgrid_x=False, showgrid_y=False, height=600, width=900,
-                 tasks=None, task_names=None, data=None, group_tasks=False):
+                 lmargin=80, tasks=None, task_names=None, data=None,
+                 group_tasks=False):
     """
     Returns figure for a gantt chart
 
@@ -613,6 +614,8 @@ def create_gantt(df, colors=None, index_col=None, show_colorbar=False,
     :param (bool) showgrid_y: show/hide the y-axis grid
     :param (float) height: the height of the chart
     :param (float) width: the width of the chart
+    :param (float) lmargin: width of the left margin of the chart (px).
+        Default = 80.
 
     Example 1: Simple Gantt Chart
     ```
@@ -761,6 +764,9 @@ def create_gantt(df, colors=None, index_col=None, show_colorbar=False,
             height, width, tasks=None, task_names=None, data=None,
             group_tasks=group_tasks
         )
+
+        # margin adjust
+        fig['layout']['margin']['l'] = lmargin
         return fig
     else:
         if not isinstance(colors, dict):
@@ -769,6 +775,9 @@ def create_gantt(df, colors=None, index_col=None, show_colorbar=False,
                 showgrid_x, showgrid_y, height, width,
                 tasks=None, task_names=None, data=None, group_tasks=group_tasks
             )
+
+            # margin adjust
+            fig['layout']['margin']['l'] = lmargin
             return fig
         else:
             fig = gantt_dict(
@@ -776,4 +785,7 @@ def create_gantt(df, colors=None, index_col=None, show_colorbar=False,
                 showgrid_x, showgrid_y, height, width,
                 tasks=None, task_names=None, data=None, group_tasks=group_tasks
             )
+
+            # margin adjust
+            fig['layout']['margin']['l'] = lmargin
             return fig
