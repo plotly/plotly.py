@@ -43,6 +43,7 @@ from plotly.figure_factory._foo import create_foo
 ```
 
 2. Imports
+
 In `_foo.py` write
 
 ```
