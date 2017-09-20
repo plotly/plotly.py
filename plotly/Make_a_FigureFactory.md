@@ -54,6 +54,7 @@ from plotly.figure_factory._foo import create_foo
 ```
 
 3. Imports
+
 In `_foo.py` write
 
 ```
