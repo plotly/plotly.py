@@ -5,17 +5,8 @@ window.genUID = function() {
     });
 };
 
-var IPYTHON_VERSION = '3';
 
-require(["widgets/js/widget", "widgets/js/manager"], function (widget, manager) {
-    if (!('DOMWidgetView' in widget)) {
-
-        // we're in IPython2, things moved a bit from 2 --> 3.
-        // construct the expected IPython3 widget API
-        IPYTHON_VERSION = '2';
-        manager = {WidgetManager: widget};
-        widget = {DOMWidgetView: IPython.DOMWidgetView};
-    }
+define('graphWidget', ["@jupyter-widgets/base"], function (widget) {
 
     var GraphView = widget.DOMWidgetView.extend({
         render: function(){
@@ -159,7 +150,9 @@ require(["widgets/js/widget", "widgets/js/manager"], function (widget, manager) 
     });
 
     // Register the GraphView with the widget manager.
-    manager.WidgetManager.register_widget_view('GraphView', GraphView);
+    return {
+        GraphView: GraphView
+    }
 
 });
 
