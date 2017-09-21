@@ -411,7 +411,7 @@ class Presentation(dict):
     def _markdown_to_presentation_simple(self, markdown_string):
         list_of_slides = _list_of_slides(markdown_string)
 
-        moods_bkgd_color = '#C7C8CA'
+        moods_bkgd_color = '#E3E8EA'
         moods_font_color = '#000014'
 
         title_style_attr = {
@@ -557,6 +557,8 @@ class Presentation(dict):
             specs_for_boxes = all_specs[0]
             specs_for_title = all_specs[1]
             specs_for_text = all_specs[2]
+
+            # insert title, text, code, and images
 
             # title
             if len(title_lines) > 0:
