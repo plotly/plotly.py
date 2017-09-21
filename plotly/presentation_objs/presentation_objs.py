@@ -336,6 +336,29 @@ def _boxes_in_slide(slide):
     return boxes
 
 
+def _return_layout_specs_horizontal(num_of_boxes):
+    # spec = (left, top, height, width)
+    specs_for_boxes = []
+    if num_of_boxes == 0:
+        specs_for_title = (0, 50, 20, 100)
+        specs_for_text = (15, 60, 50, 70)
+    else:
+        specs_for_title = (0, 0, 20, 100)
+        specs_for_text = (15, 70, 10, 70)
+        if num_of_boxes == 1:
+            specs = (30, 20, 40, 40)
+            specs_for_boxes.append(specs)
+        else:
+            for k in range(num_of_boxes):
+                w = 4
+                box_width = (100 - w * (1 + num_of_boxes)) / num_of_boxes
+                left = (k + 1) * w + k * box_width
+                specs = (left, 20, 40, min(box_width, 40))
+                specs_for_boxes.append(specs)
+
+    return specs_for_boxes, specs_for_title, specs_for_text
+
+
 def _return_layout_specs(num_of_boxes, style):
     # spec = (left, top, height, width)
     specs_for_boxes = []
@@ -550,9 +573,11 @@ class Presentation(dict):
                 elif slide_num % 2 == 1:
                     slidestyle = 'pictureright_tiled'
 
-            all_specs = _return_layout_specs(
-                num_of_boxes, slidestyle
-            )
+            #all_specs = _return_layout_specs(
+            #    num_of_boxes, slidestyle
+            #)
+
+            all_specs = _return_layout_specs_horizontal(num_of_boxes)
 
             specs_for_boxes = all_specs[0]
             specs_for_title = all_specs[1]
@@ -568,6 +593,13 @@ class Presentation(dict):
                     height=specs_for_title[2], width=specs_for_title[3],
                     slide=slide_num, style_attr=title_style_attr
                 )
+
+            # remove extra blank lines in text_block
+            while '\n\n' in text_block:
+                text_block = text_block.replace('\n\n', '\n')
+
+            if text_block[0] == '\n':
+                text_block = text_block[1:]
 
             # text
             if len(text_lines) > 0:
