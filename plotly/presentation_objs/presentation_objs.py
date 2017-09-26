@@ -8,9 +8,8 @@ A module for creating and manipulating spectacle-presentation dashboards.
 import copy
 import random
 import string
-import pprint
 
-from plotly import colors, exceptions, optional_imports
+from plotly import exceptions, optional_imports
 
 IPython = optional_imports.get_module('IPython')
 
@@ -36,6 +35,11 @@ VALID_CLASS_STYLES = ['pictureleft', 'pictureright', 'picturemiddle',
 VALID_SLIDE_PROPS = ['class', 'transition', 'background-image',
                      'background-position', 'background-repeat',
                      'background-size', 'background_color']
+
+VALID_TRANSITIONS = ['slide',  'zoom', 'fade', 'spin']
+
+PRES_THEMES = ['moods2', 'martik']
+
 fontWeight_dict = {
     'Thin': {'fontWeight': 100},
     'Thin Italic': {'fontWeight': 100, 'fontStyle': 'italic'},
@@ -58,7 +62,6 @@ NEEDED_STYLE_ERROR_MESSAGE = (
     "\n\n.left=10;top=50px{{TEXT}}\n\n the top left corner of "
     "the TEXT block will be set 10 percent from the left of "
     "the presentation boarder, and 50 pixels from the top."
-
 )
 
 
@@ -83,7 +86,7 @@ _paragraph_styles = {'Body': {'color': '#3d3d3d',
                               'opacity': 1,
                               'textAlign': 'center',
                               'textDecoration': 'none'},
-                    'Body Small': {'color': '#3d3d3d',
+                     'Body Small': {'color': '#3d3d3d',
                                     'fontFamily': 'Open Sans',
                                     'fontSize': 10,
                                     'fontStyle': 'normal',
@@ -93,7 +96,7 @@ _paragraph_styles = {'Body': {'color': '#3d3d3d',
                                     'opacity': 1,
                                     'textAlign': 'center',
                                     'textDecoration': 'none'},
-                    'Caption': {'color': '#3d3d3d',
+                     'Caption': {'color': '#3d3d3d',
                                  'fontFamily': 'Open Sans',
                                  'fontSize': 11,
                                  'fontStyle': 'italic',
@@ -103,7 +106,7 @@ _paragraph_styles = {'Body': {'color': '#3d3d3d',
                                  'opacity': 1,
                                  'textAlign': 'center',
                                  'textDecoration': 'none'},
-                    'Heading 1': {'color': '#3d3d3d',
+                     'Heading 1': {'color': '#3d3d3d',
                                    'fontFamily': 'Open Sans',
                                    'fontSize': 26,
                                    'fontStyle': 'normal',
@@ -113,32 +116,32 @@ _paragraph_styles = {'Body': {'color': '#3d3d3d',
                                    'opacity': 1,
                                    'textAlign': 'center',
                                    'textDecoration': 'none'},
-                 'Heading 2': {'color': '#3d3d3d',
-                                'fontFamily': 'Open Sans',
-                                'fontSize': 20,
-                                'fontStyle': 'normal',
-                                'fontWeight': 400,
-                                'lineHeight': 'normal',
-                                'minWidth': 20,
-                                'opacity': 1,
-                                'textAlign': 'center',
-                                'textDecoration': 'none'},
-                 'Heading 3': {'color': '#3d3d3d',
-                                'fontFamily': 'Open Sans',
-                                'fontSize': 11,
-                                'fontStyle': 'normal',
-                                'fontWeight': 700,
-                                'lineHeight': 'normal',
-                                'minWidth': 20,
-                                'opacity': 1,
-                                'textAlign': 'center',
-                                'textDecoration': 'none'}}
+                     'Heading 2': {'color': '#3d3d3d',
+                                   'fontFamily': 'Open Sans',
+                                   'fontSize': 20,
+                                   'fontStyle': 'normal',
+                                   'fontWeight': 400,
+                                   'lineHeight': 'normal',
+                                   'minWidth': 20,
+                                   'opacity': 1,
+                                   'textAlign': 'center',
+                                   'textDecoration': 'none'},
+                     'Heading 3': {'color': '#3d3d3d',
+                                   'fontFamily': 'Open Sans',
+                                   'fontSize': 11,
+                                   'fontStyle': 'normal',
+                                   'fontWeight': 700,
+                                   'lineHeight': 'normal',
+                                   'minWidth': 20,
+                                   'opacity': 1,
+                                   'textAlign': 'center',
+                                   'textDecoration': 'none'}}
 
 
 def _empty_slide(transition, id):
     empty_slide = {'children': [],
-                  'id': id,
-                  'props': {'style': {}, 'transition': transition}}
+                   'id': id,
+                   'props': {'style': {}, 'transition': transition}}
     return empty_slide
 
 
@@ -246,19 +249,19 @@ def _percentage_to_pixel(value, side):
 
 def _return_box_position(left, top, height, width):
     values_dict = {
-        'left':left,
-        'top':top,
-        'height':height,
-        'width':width,
+        'left': left,
+        'top': top,
+        'height': height,
+        'width': width,
     }
     for key in values_dict.keys():
         if isinstance(values_dict[key], str):
-            if values_dict[key][-2 : ] != 'px':
+            if values_dict[key][-2:] != 'px':
                 raise exceptions.PlotlyError(
                     NEEDED_STYLE_ERROR_MESSAGE
                 )
             try:
-                var = float(values_dict[key][ : -2])
+                var = float(values_dict[key][: -2])
             except ValueError:
                 raise exceptions.PlotlyError(
                     NEEDED_STYLE_ERROR_MESSAGE
@@ -274,7 +277,7 @@ def _return_box_position(left, top, height, width):
 
 def _remove_extra_whitespace_from_line(line):
     while line.startswith('\n') or line.startswith(' '):
-        line = line[1: ]
+        line = line[1:]
     while line.endswith('\n') or line.endswith(' '):
         line = line[: -1]
     return line
@@ -302,16 +305,15 @@ def _boxes_in_slide(slide):
     while '.left' in slide_copy:
         prop_dict = {}
         left_idx = slide_copy.find('.left')
-        l_brace_idx = slide_copy[left_idx: ].find('{{') + left_idx
-        properties = slide_copy[left_idx + 1 : l_brace_idx].split(
+        l_brace_idx = slide_copy[left_idx:].find('{{') + left_idx
+        properties = slide_copy[left_idx + 1: l_brace_idx].split(
             prop_split
         )
 
         # remove white chars from properties
         empty_props = []
         for prop in properties:
-            if (all(char == ' ' for char in prop) or
-                all(char == '\n' for char in prop)):
+            if all(char in [' ', '\n'] for char in prop):
                 empty_props.append(prop)
 
         for prop in empty_props:
@@ -327,39 +329,125 @@ def _boxes_in_slide(slide):
                 pass
             prop_dict[prop_name] = prop_val
 
-        r_brace_idx = slide_copy[l_brace_idx: ].find('}}') + l_brace_idx
-        box = slide_copy[l_brace_idx + 2 : r_brace_idx]
+        r_brace_idx = slide_copy[l_brace_idx:].find('}}') + l_brace_idx
+        box = slide_copy[l_brace_idx + 2: r_brace_idx]
         box_no_breaks = _remove_extra_whitespace_from_line(box)
         boxes.append((box_no_breaks, prop_dict))
 
-        slide_copy = slide_copy[r_brace_idx + 2: ]
+        slide_copy = slide_copy[r_brace_idx + 2:]
     return boxes
 
 
-def _return_layout_specs_horizontal(num_of_boxes):
-    # spec = (left, top, height, width)
-    specs_for_boxes = []
-    if num_of_boxes == 0:
-        specs_for_title = (0, 50, 20, 100)
-        specs_for_text = (15, 60, 50, 70)
-    else:
-        specs_for_title = (0, 0, 20, 100)
-        specs_for_text = (15, 70, 10, 70)
-        if num_of_boxes == 1:
-            specs = (30, 20, 40, 40)
-            specs_for_boxes.append(specs)
+def _return_layout_specs(num_of_boxes, slide_num, style):
+    # returns specs of the form (left, top, height, width)
+    if style == 'moods2':
+        bkgd_color = '#E3E8EA'
+        font_color = '#000014'
+
+        # set title and text style attributes
+        if num_of_boxes == 0 and slide_num == 0:
+            text_textAlign = 'center'
         else:
-            for k in range(num_of_boxes):
-                w = 4
-                box_width = (100 - w * (1 + num_of_boxes)) / num_of_boxes
-                left = (k + 1) * w + k * box_width
-                specs = (left, 20, 40, min(box_width, 40))
+            text_textAlign = 'left'
+
+        title_style_attr = {
+            'color': font_color,
+            'fontFamily': 'Roboto',
+            'fontWeight': fontWeight_dict['Black']['fontWeight'],
+            'textAlign': 'center',
+            'fontSize': 60,
+        }
+
+        text_style_attr = {
+            'color': font_color,
+            'fontFamily': 'Roboto',
+            'fontWeight': fontWeight_dict['Regular']['fontWeight'],
+            'textAlign': text_textAlign,
+            'fontSize': 20,
+        }
+
+        specs_for_boxes = []
+        if num_of_boxes == 0:
+            specs_for_title = (0, 50, 20, 100)
+            specs_for_text = (15, 60, 50, 70)
+        else:
+            specs_for_title = (0, 0, 20, 100)
+            specs_for_text = (5, 85, 15, 90)
+
+            box_top = 18
+            box_height = 60
+            if num_of_boxes == 1:
+                specs = (30, box_top, box_height, 40)
                 specs_for_boxes.append(specs)
+            else:
+                for k in range(num_of_boxes):
+                    w = 4
+                    box_width = (100 - w * (1 + num_of_boxes)) / num_of_boxes
+                    left = (k + 1) * w + k * box_width
+                    specs = (left, box_top, box_height, min(box_width, 40))
+                    specs_for_boxes.append(specs)
 
-    return specs_for_boxes, specs_for_title, specs_for_text
+    if style == 'martik':
+        if num_of_boxes == 0 and slide_num == 0:
+            text_textAlign = 'center'
+        else:
+            text_textAlign = 'left'
+
+        specs_for_boxes = []
+        margin = 3
+        title_fontSize = 40
+        if num_of_boxes == 0:
+            specs_for_title = (0, 50, 20, 100)
+            specs_for_text = (15, 60, 50, 70)
+            bkgd_color = '#0D0A1E'
+            title_font_color = '#F4FAFB'
+            text_font_color = title_font_color
+            title_fontSize = 55
+        elif num_of_boxes == 1:
+            title_fontSize = 40
+            bkgd_color = '#F4FAFB'
+            title_font_color = '#0D0A1E'
+            text_font_color = '#96969C'
+            if slide_num % 2 == 0:
+                # image on left side
+                specs_for_title = (50, 3, 20, 50)
+                specs_for_text = (50 + margin, 80, 50, 50 - 2 * margin)
+
+                specs_for_boxes.append((0, 0, 100, 50))
+            else:
+                # image on right side
+                specs_for_title = (0, 3, 20, 50)
+                specs_for_text = (margin, 80, 50, 50 - 2 * margin)
+
+                specs_for_boxes.append((50, 0, 100, 50))
+        else:
+            bkgd_color = '#0D0A1E'
+            title_font_color = '#F4FAFB'
+            text_font_color = title_font_color
+            specs_for_title = (0, 50, 20, 100)
+            specs_for_text = (15, 60, 50, 70)
+
+        # set title and text style attributes
+        title_style_attr = {
+            'color': title_font_color,
+            'fontFamily': 'Raleway',
+            'fontWeight': fontWeight_dict['Bold']['fontWeight'],
+            'textAlign': 'center',
+            'fontSize': title_fontSize,
+        }
+
+        text_style_attr = {
+            'color': text_font_color,
+            'fontFamily': 'Roboto',
+            'fontWeight': fontWeight_dict['Regular']['fontWeight'],
+            'textAlign': text_textAlign,
+            'fontSize': 16,
+        }
+    return (specs_for_boxes, specs_for_title, specs_for_text, bkgd_color,
+            title_style_attr, text_style_attr)
 
 
-def _return_layout_specs(num_of_boxes, style):
+def _return_layout_specs_old(num_of_boxes, style):
     # spec = (left, top, height, width)
     specs_for_boxes = []
 
@@ -419,7 +507,7 @@ def _return_layout_specs(num_of_boxes, style):
 
 
 class Presentation(dict):
-    def __init__(self, markdown_string=None):
+    def __init__(self, markdown_string=None, style='moods2'):
         self['presentation'] = {
             'slides': [],
             'slidePreviews': [None for _ in range(496)],
@@ -427,34 +515,16 @@ class Presentation(dict):
             'paragraphStyles': _paragraph_styles
         }
         if markdown_string:
-            self._markdown_to_presentation_simple(markdown_string)
+            if style not in PRES_THEMES:
+                raise exceptions.PlotlyError(
+                    "Your presentation style must belond to {}".format(PRES_THEMES)
+                )
+            self._markdown_to_presentation(markdown_string, style)
         else:
             self._add_empty_slide()
 
-    def _markdown_to_presentation_simple(self, markdown_string):
+    def _markdown_to_presentation(self, markdown_string, style):
         list_of_slides = _list_of_slides(markdown_string)
-
-        moods_bkgd_color = '#E3E8EA'
-        moods_font_color = '#000014'
-
-        title_style_attr = {
-            'color': moods_font_color,
-            'fontFamily': 'Roboto',
-            'fontWeight': fontWeight_dict['Black']['fontWeight'],
-            'textAlign': 'center',
-            'fontSize': 62,
-        }
-
-        text_style_attr = {
-            'color': moods_font_color,
-            'fontFamily': 'Roboto',
-            'fontWeight': fontWeight_dict['Regular']['fontWeight'],
-            'textAlign': 'left',
-            'fontSize': 20,
-        }
-
-        caption_style_attr = copy.copy(text_style_attr)
-        caption_style_attr['textAlign'] = 'center'
 
         for slide_num, slide in enumerate(list_of_slides):
             lines_in_slide = slide.split('\n')
@@ -492,7 +562,7 @@ class Presentation(dict):
                 # validate code blocks
                 code_by_lines = code_block.split('\n')
                 language = _remove_extra_whitespace_from_line(
-                    code_by_lines[0][3 : ]
+                    code_by_lines[0][3:]
                 ).lower()
                 if language == '' or language not in VALID_LANGUAGES:
                     raise exceptions.PlotlyError(
@@ -505,9 +575,6 @@ class Presentation(dict):
                     (language, string.join(code_by_lines[1:], '\n'))
                 )
 
-            # background color
-            self._color_background(moods_bkgd_color, slide_num)
-
             # collect text, code and urls
             title_lines = []
             url_lines = []
@@ -517,7 +584,7 @@ class Presentation(dict):
 
             for index, line in enumerate(lines_in_slide):
                 # inCode handling
-                if line[ : 3] == '```' and len(line) > 3:
+                if line[:3] == '```' and len(line) > 3:
                     inCode = True
                 if line == '```':
                     inCode = False
@@ -549,6 +616,8 @@ class Presentation(dict):
                                     )
                                 )
 
+                        # add slide transition here
+
                         elif line not in ['\n', ' '] and title_lines != []:
                             text_lines.append(line)
 
@@ -563,25 +632,22 @@ class Presentation(dict):
             text_block = string.join(text_lines, '\n')
             text_line_count = text_block.count('\n') + 1
 
-            # pick slide styles
-            if not slidestyle:
-                num_of_boxes = len(url_lines) + len(lang_and_code_tuples)
-                if num_of_boxes == 3:
-                    slidestyle = 'picturemiddle'
-                elif slide_num % 2 == 0:
-                    slidestyle = 'pictureleft_tiled'
-                elif slide_num % 2 == 1:
-                    slidestyle = 'pictureright_tiled'
+            while '\n\n' in text_block:
+                text_block = text_block.replace('\n\n', '\n')
 
-            #all_specs = _return_layout_specs(
-            #    num_of_boxes, slidestyle
-            #)
+            if len(text_block) > 0:
+                if text_block[0] == '\n':
+                    text_block = text_block[1:]
 
-            all_specs = _return_layout_specs_horizontal(num_of_boxes)
+            num_of_boxes = len(url_lines) + len(lang_and_code_tuples)
 
-            specs_for_boxes = all_specs[0]
-            specs_for_title = all_specs[1]
-            specs_for_text = all_specs[2]
+            (specs_for_boxes, specs_for_title, specs_for_text, bkgd_color,
+             title_style_attr, text_style_attr) = _return_layout_specs(
+                num_of_boxes, slide_num, style
+            )
+
+            # background color
+            self._color_background(bkgd_color, slide_num)
 
             # insert title, text, code, and images
 
@@ -593,13 +659,6 @@ class Presentation(dict):
                     height=specs_for_title[2], width=specs_for_title[3],
                     slide=slide_num, style_attr=title_style_attr
                 )
-
-            # remove extra blank lines in text_block
-            while '\n\n' in text_block:
-                text_block = text_block.replace('\n\n', '\n')
-
-            if text_block[0] == '\n':
-                text_block = text_block[1:]
 
             # text
             if len(text_lines) > 0:
@@ -628,7 +687,7 @@ class Presentation(dict):
                                  slide=slide_num, props_attr=props_attr)
                 else:
                     # url
-                    url = url_or_code[4 : -1]
+                    url = url_or_code[4: -1]
                     if 'https://plot.ly' in url:
                         box_name = 'Plotly'
                     else:
@@ -638,7 +697,6 @@ class Presentation(dict):
                                  left=specs[0], top=specs[1],
                                  height=specs[2], width=specs[3],
                                  slide=slide_num)
-
 
     def _add_empty_slide(self):
         self['presentation']['slides'].append(
@@ -710,7 +768,5 @@ class Presentation(dict):
 
     def _set_transition(self, transition, slide):
         self._add_missing_slides(slide)
-
-        valid_transitions = ['slide',  'zoom', 'fade', 'spin']
         loc = self['presentation']['slides'][slide]['props']
         loc['transition'] = transition
