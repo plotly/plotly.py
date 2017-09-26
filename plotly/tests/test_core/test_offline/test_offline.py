@@ -103,23 +103,3 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
         self.assertIn('"linkText": "Plotly rocks!"', html)
         self.assertIn('"showLink": true', html)
         self.assertIn('"editable": true', html)
-
-
-class PlotlyOfflineOtherDomainTestCase(PlotlyOfflineBaseTestCase):
-    def setUp(self):
-        super(PlotlyOfflineOtherDomainTestCase, self).setUp()
-        plotly.tools.set_config_file(plotly_domain='https://stage.plot.ly',
-                                     plotly_api_domain='https://api-stage.plot.ly')
-        plotly.plotly.sign_in('PlotlyStageTest', 'rs3GA48WfFKUX4JpVL07')
-
-    def test_plot_rendered_if_non_plotly_domain(self):
-        html = plotly.offline.plot(fig, output_type='div')
-
-        # test that 'Export to stage.plot.ly' is in the html
-        self.assertIn('Export to stage.plot.ly', html)
-
-    def tearDown(self):
-        plotly.tools.set_config_file(plotly_domain='https://plot.ly',
-                                     plotly_api_domain='https://api.plot.ly')
-        plotly.plotly.sign_in('PythonTest', '9v9f20pext')
-        super(PlotlyOfflineOtherDomainTestCase, self).tearDown()
