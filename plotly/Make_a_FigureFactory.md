@@ -1,6 +1,28 @@
 # Add A Figure Factory to the Plotly [Python Library](https://plot.ly/python/)
 
-If you have ever wanted to contribute to the Plotly Python Library by adding a new chart type we don't have, now you can! This README will help you get started cloning the plotly.py repo, forking a new branch, creating a new figure factory, and creatng a new Pull Request to get feedback for merging. Just follow all these steps and you'll be ready to go.
+## What is a Figure Factory?
+In the Python Plotly Library, we have very basic plot types that are created using the `plotly.graph_objs` module. These plot types include Scatter, Box and Bar types. They are the basis of the plots and charts instatiated by Plotly.
+
+To create a basic chart like this, first we create the `data` using the tools in `plotly.graph_objs` and then we plot it. For example:
+
+```
+import plotly.plotly as py
+import plotly.graph_objs as go
+
+trace = go.Scatter(
+    x = [1, 2, 3],
+    y = [4, 5, 6],
+    mode = 'markers',
+)
+
+data = [trace]
+
+py.iplot(data, filename='new-scatter-plot')
+```
+
+There is another type of chart which uses these basic plot types to make other types of graphs, and this is the figure factories. These are wrappers that utilize the code from `plotly.graph_objs` to build charts that can use their structures. A good example of a figure factory is the [Scatterplot Matrix](https://plot.ly/python/scatterplot-matrix/) as it utilizes `go.Scatter`, `go.Box` and `go.Histogram`.
+
+So if you have ever wanted to contribute to the Plotly Python Library by adding a new chart type we don't have, now you can! This README will help you get started by cloning the plotly.py repo, forking a new branch, creating a new figure factory, and creatng a new Pull Request to get feedback for merging. Just follow all these steps and you'll be ready to go.
 
 ## Getting Started:
 1. In the Terminal, clone the `plotly.py` repo locally and then check out the master branch.
