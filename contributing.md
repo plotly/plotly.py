@@ -215,3 +215,6 @@ $ pip install plotly --upgrade
 And ask one of your friends to do it too. Our tests should catch any issues, but you never know.
 
 <3 Team Plotly
+
+# Contributing to the Figure Factories
+If you are interested in contributing to the ever-growing Plotly figure factory library in Python, check out the [documentation](https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/README.md) to learn how.
