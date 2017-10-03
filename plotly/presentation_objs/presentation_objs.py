@@ -358,9 +358,9 @@ def _boxes_in_slide(slide):
     return boxes
 
 
-def _top_spec_for_text_at_bottom(text_block, width_per, per_from_bottom=0):
+def _top_spec_for_text_at_bottom(text_block, width_per, per_from_bottom=0,
+                                 min_top=30):
     # TODO: customize this function for different fonts/sizes
-    # note: does not put above 30%
     max_lines = 37
     one_char_percent_width = 0.764
     chars_in_full_line = width_per / one_char_percent_width
@@ -378,12 +378,12 @@ def _top_spec_for_text_at_bottom(text_block, width_per, per_from_bottom=0):
             else:
                 char_group += 1
 
+    num_of_lines += 1
     top_frac = (max_lines - num_of_lines) / float(max_lines)
     top = top_frac * 100 - per_from_bottom
 
     # to be safe
-    num_of_lines += 5
-    return max(top, 30)
+    return max(top, min_top)
 
 
 def _box_specs_gen(num_of_boxes, grouptype='leftgroup_v', width_range=50,
@@ -503,6 +503,8 @@ def _box_specs_gen(num_of_boxes, grouptype='leftgroup_v', width_range=50,
 def _return_layout_specs(num_of_boxes, url_lines, text_block, code_blocks,
                          slide_num, style):
     # returns specs of the form (left, top, height, width)
+
+    # default settings
     code_theme = 'tomorrowNight'
     if style == 'moods2':
         bkgd_color = '#E3E8EA'
@@ -554,7 +556,7 @@ def _return_layout_specs(num_of_boxes, url_lines, text_block, code_blocks,
     if style == 'martik':
         specs_for_boxes = []
         title_fontSize = 40
-        margin = 18  # pxs
+        margin = 18  # in pxs
 
         if num_of_boxes == 0 and slide_num == 0:
             text_textAlign = 'center'
@@ -576,8 +578,12 @@ def _return_layout_specs(num_of_boxes, url_lines, text_block, code_blocks,
                     w_range = 40
                 else:
                     w_range = 60
+                text_top = _top_spec_for_text_at_bottom(
+                    text_block, 80,
+                    per_from_bottom=(margin / HEIGHT) * 100
+                )
                 specs_for_title = (0, 3, 20, 100)
-                specs_for_text = (20, 82, 30, 60)
+                specs_for_text = (10, text_top, 30, 80)
                 specs_for_boxes = _box_specs_gen(
                     num_of_boxes, grouptype='middle', width_range=w_range,
                     height_range=60, margin=margin, betw_boxes=4
@@ -594,7 +600,6 @@ def _return_layout_specs(num_of_boxes, url_lines, text_block, code_blocks,
                     text_block, title_text_width,
                     per_from_bottom=(margin / HEIGHT) * 100
                 )
-
                 specs_for_title = (60, 3, 20, 40)
                 specs_for_text = (60, text_top, 1, title_text_width)
                 specs_for_boxes = _box_specs_gen(
@@ -606,8 +611,12 @@ def _return_layout_specs(num_of_boxes, url_lines, text_block, code_blocks,
                 title_font_color = '#0D0A1E'
                 text_font_color = '#96969C'
         elif num_of_boxes == 2 and url_lines != []:
+            text_top = _top_spec_for_text_at_bottom(
+                text_block, 46, per_from_bottom=(margin / HEIGHT) * 100,
+                min_top=50
+            )
             specs_for_title = (0, 3, 20, 50)
-            specs_for_text = (50, 65, 40, 50)
+            specs_for_text = (52, text_top, 40, 46)
             specs_for_boxes = _box_specs_gen(
                 num_of_boxes, grouptype='checkerboard_topright'
             )
@@ -617,18 +626,24 @@ def _return_layout_specs(num_of_boxes, url_lines, text_block, code_blocks,
             text_font_color = '#96969C'
         elif num_of_boxes >= 2 and url_lines == []:
             text_top = _top_spec_for_text_at_bottom(
-                text_block, 80, per_from_bottom= 0 #(margin / HEIGHT) * 100
+                text_block, 92, per_from_bottom=(margin / HEIGHT) * 100,
+                min_top=15
             )
+            if num_of_boxes == 2:
+                betw_boxes = 90
+            else:
+                betw_boxes = 10
             specs_for_title = (0, 3, 20, 100)
-            specs_for_text = (10, text_top, 1, 80)
+            specs_for_text = (4, text_top, 1, 92)
             specs_for_boxes = _box_specs_gen(
-                num_of_boxes, grouptype='middle', width_range=80,
-                height_range=60, margin=margin, betw_boxes=5
+                num_of_boxes, grouptype='middle', width_range=92,
+                height_range=60, margin=margin, betw_boxes=betw_boxes
             )
             title_fontSize = 40
             bkgd_color = '#0D0A1E'
             title_font_color = '#F4FAFB'
             text_font_color = '#96969C'
+            code_theme = 'tomorrow'
         else:
             text_top = _top_spec_for_text_at_bottom(
                 text_block, 40 - (margin / WIDTH) * 100,
@@ -818,7 +833,6 @@ class Presentation(dict):
                     pass
 
             text_block = string.join(text_lines, '\n')
-
             num_of_boxes = len(url_lines) + len(lang_and_code_tuples)
 
             (specs_for_boxes, specs_for_title, specs_for_text, bkgd_color,
@@ -858,9 +872,10 @@ class Presentation(dict):
                     code = url_or_code[1]
                     box_name = 'CodePane'
 
+                    # code style
                     props_attr = {}
                     props_attr['language'] = language
-                    props_attr['theme'] = 'tomorrow'
+                    props_attr['theme'] = code_theme
 
                     self._insert(box=box_name, text_or_url=code,
                                  left=specs[0], top=specs[1],
