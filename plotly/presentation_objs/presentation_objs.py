@@ -38,7 +38,7 @@ VALID_SLIDE_PROPS = ['class', 'transition', 'background-image',
 
 VALID_TRANSITIONS = ['slide',  'zoom', 'fade', 'spin']
 
-PRES_THEMES = ['moods2', 'martik']
+PRES_THEMES = ['moods', 'martik']
 
 VALID_GROUPTYPES = [
     'leftgroup_v', 'rightgroup_v', 'middle', 'checkerboard_topleft',
@@ -500,63 +500,22 @@ def _box_specs_gen(num_of_boxes, grouptype='leftgroup_v', width_range=50,
     return specs_for_boxes
 
 
-def _return_layout_specs(num_of_boxes, url_lines, text_block, code_blocks,
-                         slide_num, style):
+def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
+                         code_blocks, slide_num, style):
     # returns specs of the form (left, top, height, width)
 
     # default settings
     code_theme = 'tomorrowNight'
-    if style == 'moods2':
-        bkgd_color = '#E3E8EA'
-        font_color = '#000014'
-
-        # set title and text style attributes
-        if num_of_boxes == 0 and slide_num == 0:
-            text_textAlign = 'center'
-        else:
-            text_textAlign = 'left'
-
-        title_style_attr = {
-            'color': font_color,
-            'fontFamily': 'Roboto',
-            'fontWeight': fontWeight_dict['Black']['fontWeight'],
-            'textAlign': 'center',
-            'fontSize': 60,
-        }
-
-        text_style_attr = {
-            'color': font_color,
-            'fontFamily': 'Roboto',
-            'fontWeight': fontWeight_dict['Regular']['fontWeight'],
-            'textAlign': text_textAlign,
-            'fontSize': 20,
-        }
-
-        specs_for_boxes = []
-        if num_of_boxes == 0:
-            specs_for_title = (0, 50, 20, 100)
-            specs_for_text = (15, 60, 50, 70)
-        else:
-            specs_for_title = (0, 0, 20, 100)
-            specs_for_text = (5, 85, 15, 90)
-
-            box_top = 18
-            box_height = 60
-            if num_of_boxes == 1:
-                specs = (30, box_top, box_height, 40)
-                specs_for_boxes.append(specs)
-            else:
-                for k in range(num_of_boxes):
-                    w = 4
-                    box_width = (100 - w * (1 + num_of_boxes)) / num_of_boxes
-                    left = (k + 1) * w + k * box_width
-                    specs = (left, box_top, box_height, min(box_width, 40))
-                    specs_for_boxes.append(specs)
+    if style == 'moods':
+        pass
 
     if style == 'martik':
         specs_for_boxes = []
         title_fontSize = 40
         margin = 18  # in pxs
+        bkgd_color = '#F4FAFB'
+        title_font_color = '#0D0A1E'
+        text_font_color = '#96969C'
 
         if num_of_boxes == 0 and slide_num == 0:
             text_textAlign = 'center'
@@ -588,11 +547,17 @@ def _return_layout_specs(num_of_boxes, url_lines, text_block, code_blocks,
                     num_of_boxes, grouptype='middle', width_range=w_range,
                     height_range=60, margin=margin, betw_boxes=4
                 )
-                title_fontSize = 40
                 bkgd_color = '#0D0A1E'
                 title_font_color = '#F4FAFB'
                 text_font_color = title_font_color
                 code_theme = 'tomorrow'
+            elif title_lines == [] and text_block == '':
+                specs_for_title = (0, 50, 20, 100)
+                specs_for_text = (15, 60, 50, 70)
+                specs_for_boxes = _box_specs_gen(
+                    num_of_boxes, grouptype='middle', width_range=50,
+                    height_range=80, margin=0, betw_boxes=0
+                )
             else:
                 title_text_width = 40 - (margin / WIDTH) * 100
 
@@ -606,7 +571,6 @@ def _return_layout_specs(num_of_boxes, url_lines, text_block, code_blocks,
                     num_of_boxes, grouptype='leftgroup_v', width_range=60,
                     margin=margin, betw_boxes=4
                 )
-                title_fontSize = 40
                 bkgd_color = '#F4FAFB'
                 title_font_color = '#0D0A1E'
                 text_font_color = '#96969C'
@@ -620,7 +584,6 @@ def _return_layout_specs(num_of_boxes, url_lines, text_block, code_blocks,
             specs_for_boxes = _box_specs_gen(
                 num_of_boxes, grouptype='checkerboard_topright'
             )
-            title_fontSize = 40
             bkgd_color = '#F4FAFB'
             title_font_color = '#0D0A1E'
             text_font_color = '#96969C'
@@ -639,7 +602,6 @@ def _return_layout_specs(num_of_boxes, url_lines, text_block, code_blocks,
                 num_of_boxes, grouptype='middle', width_range=92,
                 height_range=60, margin=margin, betw_boxes=betw_boxes
             )
-            title_fontSize = 40
             bkgd_color = '#0D0A1E'
             title_font_color = '#F4FAFB'
             text_font_color = '#96969C'
@@ -658,7 +620,6 @@ def _return_layout_specs(num_of_boxes, url_lines, text_block, code_blocks,
                 num_of_boxes, grouptype='rightgroup_v', width_range=60,
                 margin=margin, betw_boxes=4
             )
-            title_fontSize = 40
             bkgd_color = '#F4FAFB'
             title_font_color = '#0D0A1E'
             text_font_color = '#96969C'
@@ -838,8 +799,8 @@ class Presentation(dict):
             (specs_for_boxes, specs_for_title, specs_for_text, bkgd_color,
              title_style_attr, text_style_attr,
              code_theme) = _return_layout_specs(
-                num_of_boxes, url_lines, text_block, code_blocks, slide_num,
-                style
+                num_of_boxes, url_lines, title_lines, text_block, code_blocks,
+                slide_num, style
             )
 
             # background color
