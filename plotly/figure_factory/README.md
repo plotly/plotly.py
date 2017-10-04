@@ -168,8 +168,8 @@ $ git push origin add-ff-type
 Go check out your newly pushed branch at https://github.com/plotly/plotly.py. If you have any other questions, check out the [Plotly Contributing Page](https://github.com/plotly/plotly.py/blob/master/contributing.md). Thanks for contributing to Plotly's Graphing Library!
 
 ### Table of Current Figure Factories
-| Name              | Documentation                             | In GitHub|
-| ------------------|:-------------:                            | -----:   |
+| Name              | Documentation                             | In GitHub     |
+| ------------------|:-----------------------------------------:| :---------:   |
 | 2D Density        | https://plot.ly/python/density-plots/     |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_2d_density.py|
 | Annotated Heatmap | https://plot.ly/python/annotated_heatmap/ |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_annotated_heatmap.py|
 | Candlestick       | https://plot.ly/python/candlestick-charts/|https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_candlestick.py|
