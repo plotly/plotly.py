@@ -169,7 +169,7 @@ Go check out your newly pushed branch at https://github.com/plotly/plotly.py. If
 
 ### Table of Current Figure Factories
 | Name              | Documentation                             | In GitHub     |
-| ------------------|:-----------------------------------------:| :---------:   |
+| ----------------- | ----------------------------------------- | ------------- |
 | 2D Density        | https://plot.ly/python/density-plots/     |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_2d_density.py|
 | Annotated Heatmap | https://plot.ly/python/annotated_heatmap/ |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_annotated_heatmap.py|
 | Candlestick       | https://plot.ly/python/candlestick-charts/|https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_candlestick.py|
