@@ -387,7 +387,7 @@ def _top_spec_for_text_at_bottom(text_block, width_per, per_from_bottom=0,
 
 
 def _box_specs_gen(num_of_boxes, grouptype='leftgroup_v', width_range=50,
-                   height_range=50, margin=2, betw_boxes=4):
+                   height_range=50, margin=2, betw_boxes=4, middle_center=50):
     # the (l, t, w, h) specs are added to 'specs_for_boxes'
     specs_for_boxes = []
     if num_of_boxes == 1 and grouptype in ['leftgroup_v', 'rightgroup_v']:
@@ -456,8 +456,9 @@ def _box_specs_gen(num_of_boxes, grouptype='leftgroup_v', width_range=50,
                 specs_for_boxes.append(specs)
 
     elif grouptype == 'middle':
-        # margin param is not used
-        top = (100 - float(height_range)) / 2
+        # margin is not used
+        #top = (100 - float(height_range)) / 2
+        top = float(middle_center - (height_range / 2))
         height = height_range
         width = (1 / float(num_of_boxes)) * (
             width_range - (num_of_boxes - 1) * (100*betw_boxes/WIDTH)
@@ -470,7 +471,6 @@ def _box_specs_gen(num_of_boxes, grouptype='leftgroup_v', width_range=50,
             specs_for_boxes.append(specs)
 
     elif 'checkerboard' in grouptype and num_of_boxes == 2:
-        # margin = betw_boxes = 0
         if grouptype == 'checkerboard_topleft':
             for j in range(2):
                 left = j * 50
@@ -507,15 +507,28 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
     # default settings
     code_theme = 'tomorrowNight'
     if style == 'moods':
-        pass
+        margin = 18
 
     if style == 'martik':
+        martik_colors = {
+            'darkslide': {
+                'bkgd_color': '#0D0A1E',
+                'title_font_color': '#F4FAFB',
+                'text_font_color': '#F4FAFB',
+            },
+            'lightslide': {
+                'bkgd_color': '#F4FAFB',
+                'title_font_color': '#0D0A1E',
+                'text_font_color': '#96969C',
+            }
+        }
         specs_for_boxes = []
         title_fontSize = 40
         margin = 18  # in pxs
-        bkgd_color = '#F4FAFB'
-        title_font_color = '#0D0A1E'
-        text_font_color = '#96969C'
+
+        bkgd_color = martik_colors['lightslide']['bkgd_color']
+        title_font_color = martik_colors['lightslide']['title_font_color']
+        text_font_color = martik_colors['lightslide']['text_font_color']
 
         if num_of_boxes == 0 and slide_num == 0:
             text_textAlign = 'center'
@@ -525,9 +538,9 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
         if num_of_boxes == 0:
             specs_for_title = (0, 50, 20, 100)
             specs_for_text = (15, 60, 50, 70)
-            bkgd_color = '#0D0A1E'
-            title_font_color = '#F4FAFB'
-            text_font_color = title_font_color
+            bkgd_color = martik_colors['darkslide']['bkgd_color']
+            title_font_color = martik_colors['darkslide']['title_font_color']
+            text_font_color = martik_colors['darkslide']['text_font_color']
             title_fontSize = 55
         elif num_of_boxes == 1:
             if code_blocks != [] or (
@@ -547,9 +560,9 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
                     num_of_boxes, grouptype='middle', width_range=w_range,
                     height_range=60, margin=margin, betw_boxes=4
                 )
-                bkgd_color = '#0D0A1E'
-                title_font_color = '#F4FAFB'
-                text_font_color = title_font_color
+                bkgd_color = martik_colors['darkslide']['bkgd_color']
+                title_font_color = martik_colors['darkslide']['title_font_color']
+                text_font_color = martik_colors['darkslide']['text_font_color']
                 code_theme = 'tomorrow'
             elif title_lines == [] and text_block == '':
                 specs_for_title = (0, 50, 20, 100)
@@ -571,9 +584,9 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
                     num_of_boxes, grouptype='leftgroup_v', width_range=60,
                     margin=margin, betw_boxes=4
                 )
-                bkgd_color = '#F4FAFB'
-                title_font_color = '#0D0A1E'
-                text_font_color = '#96969C'
+                bkgd_color = martik_colors['lightslide']['bkgd_color']
+                title_font_color = martik_colors['lightslide']['title_font_color']
+                text_font_color = martik_colors['lightslide']['text_font_color']
         elif num_of_boxes == 2 and url_lines != []:
             text_top = _top_spec_for_text_at_bottom(
                 text_block, 46, per_from_bottom=(margin / HEIGHT) * 100,
@@ -584,9 +597,9 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
             specs_for_boxes = _box_specs_gen(
                 num_of_boxes, grouptype='checkerboard_topright'
             )
-            bkgd_color = '#F4FAFB'
-            title_font_color = '#0D0A1E'
-            text_font_color = '#96969C'
+            bkgd_color = martik_colors['lightslide']['bkgd_color']
+            title_font_color = martik_colors['lightslide']['title_font_color']
+            text_font_color = martik_colors['lightslide']['text_font_color']
         elif num_of_boxes >= 2 and url_lines == []:
             text_top = _top_spec_for_text_at_bottom(
                 text_block, 92, per_from_bottom=(margin / HEIGHT) * 100,
@@ -602,9 +615,9 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
                 num_of_boxes, grouptype='middle', width_range=92,
                 height_range=60, margin=margin, betw_boxes=betw_boxes
             )
-            bkgd_color = '#0D0A1E'
-            title_font_color = '#F4FAFB'
-            text_font_color = '#96969C'
+            bkgd_color = martik_colors['lightslide']['bkgd_color']
+            title_font_color = martik_colors['lightslide']['title_font_color']
+            text_font_color = martik_colors['lightslide']['text_font_color']
             code_theme = 'tomorrow'
         else:
             text_top = _top_spec_for_text_at_bottom(
@@ -620,9 +633,9 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
                 num_of_boxes, grouptype='rightgroup_v', width_range=60,
                 margin=margin, betw_boxes=4
             )
-            bkgd_color = '#F4FAFB'
-            title_font_color = '#0D0A1E'
-            text_font_color = '#96969C'
+            bkgd_color = martik_colors['lightslide']['bkgd_color']
+            title_font_color = martik_colors['lightslide']['title_font_color']
+            text_font_color = martik_colors['lightslide']['text_font_color']
 
         # set title and text style attributes
         title_style_attr = {
