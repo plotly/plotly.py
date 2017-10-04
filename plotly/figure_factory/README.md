@@ -166,3 +166,21 @@ $ git push origin add-ff-type
 ## Be Part of the Discussion
 
 Go check out your newly pushed branch at https://github.com/plotly/plotly.py. If you have any other questions, check out the [Plotly Contributing Page](https://github.com/plotly/plotly.py/blob/master/contributing.md). Thanks for contributing to Plotly's Graphing Library!
+
+### Table of Current Figure Factories
+| Name              | Documentation                             | In GitHub     |
+| ----------------- | ----------------------------------------- | ------------- |
+| 2D Density        | https://plot.ly/python/density-plots/     |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_2d_density.py|
+| Annotated Heatmap | https://plot.ly/python/annotated_heatmap/ |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_annotated_heatmap.py|
+| Candlestick       | https://plot.ly/python/candlestick-charts/|https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_candlestick.py|
+| Dendrogram        | https://plot.ly/python/dendrogram/        |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_dendrogram.py|
+| Distplot          | https://plot.ly/python/distplot/          |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_distplot.py|
+| Facet Grid        | https://plot.ly/python/facet-plots/       |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_facet_grid.py|
+| Gantt             | https://plot.ly/python/gantt/             |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_gantt.py|
+| Ohlc              | https://plot.ly/python/ohlc-charts/       |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_ohlc.py|
+| Quiver            | https://plot.ly/python/quiver-plots/      |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_quiver.py|
+| Scatterplot Matrix| https://plot.ly/python/scatterplot-matrix/|https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_scatterplot.py|
+| Streamline        | https://plot.ly/python/streamline-plots/  |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_streamline.py|
+| Table             | https://plot.ly/python/table/             |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_table.py|
+| Trisurf           | https://plot.ly/python/trisurf/           |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_trisurf.py|
+| Violin            | https://plot.ly/python/violin-plot/       |https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/_violin.py|
