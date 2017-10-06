@@ -15,7 +15,7 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 [Contact us](https://plot.ly/products/consulting-and-oem/) for Plotly.js consulting, dashboard development, application integration, and feature additions. Sharing your graphs online or in dashboards? Consider a [plot.ly subscription](https://plot.ly/products/cloud).
 
 <p align="center">
-    <a href="https://www.plot.ly/javascript" target="_blank">
+    <a href="https://plot.ly/python" target="_blank">
     <img src="https://raw.githubusercontent.com/cldougl/plot_images/add_r_img/plotly_2017.png">
 </a></p>
 
