@@ -22,12 +22,12 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 ***
 
 - [Online Documentation](https://plot.ly/python)
-- [`contributing.md`](https://github.com/plotly/python-api/blob/master/contributing.md).
-- [Code of Conduct](CODE_OF_CONDUCT.md).
+- [`contributing.md`](https://github.com/plotly/python-api/blob/master/contributing.md)
+- [Code of Conduct](CODE_OF_CONDUCT.md)
 - [New! Announcing Dash](https://medium.com/@plotlygraphs/introducing-dash-5ecf7191b503)
 - [Community](https://community.plot.ly/c/api/python)
 
-## Copyright and license
+***
 
 Code and documentation copyright 2017 Plotly, Inc.
 
