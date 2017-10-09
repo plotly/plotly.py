@@ -889,7 +889,8 @@ class Box(PlotlyDict):
         'hoverinfo', 'hoverinfosrc', 'hoverlabel', 'ids', 'idssrc', 'jitter',
         'legendgroup', 'line', 'marker', 'name', 'opacity', 'orientation',
         'pointpos', 'showlegend', 'stream', 'type', 'uid', 'visible',
-        'whiskerwidth', 'x', 'x0', 'xaxis', 'xsrc', 'y', 'y0', 'yaxis', 'ysrc']
+        'whiskerwidth', 'x', 'x0', 'xaxis', 'xcalendar', 'xsrc', 'y', 'y0',
+        'yaxis', 'ycalendar', 'ysrc']
     
     Run `<box-object>.help('attribute')` on any of the above.
     '<box-object>' is the object at []
@@ -1035,7 +1036,7 @@ class Data(PlotlyList):
         'Histogram2d', 'Histogram2dcontour', 'Mesh3d', 'Ohlc', 'Parcoords',
         'Pie', 'Pointcloud', 'Sankey', 'Scatter', 'Scatter3d', 'Scattercarpet',
         'Scattergeo', 'Scattergl', 'Scattermapbox', 'Scatterternary',
-        'Surface']
+        'Surface', 'Table']
 
     """
     _name = 'data'
@@ -1685,9 +1686,9 @@ class Scattercarpet(PlotlyDict):
         ['a', 'asrc', 'b', 'bsrc', 'carpet', 'connectgaps', 'customdata',
         'customdatasrc', 'fill', 'fillcolor', 'hoverinfo', 'hoverinfosrc',
         'hoverlabel', 'hoveron', 'ids', 'idssrc', 'legendgroup', 'line',
-        'marker', 'mode', 'name', 'opacity', 'showlegend', 'stream', 'sum',
-        'text', 'textfont', 'textposition', 'textpositionsrc', 'textsrc',
-        'type', 'uid', 'visible', 'xaxis', 'yaxis']
+        'marker', 'mode', 'name', 'opacity', 'showlegend', 'stream', 'text',
+        'textfont', 'textposition', 'textpositionsrc', 'textsrc', 'type',
+        'uid', 'visible', 'xaxis', 'yaxis']
     
     Run `<scattercarpet-object>.help('attribute')` on any of the above.
     '<scattercarpet-object>' is the object at []
@@ -1816,6 +1817,23 @@ class Surface(PlotlyDict):
 
     """
     _name = 'surface'
+
+
+class Table(PlotlyDict):
+    """
+    Valid attributes for 'table' at path [] under parents ():
+    
+        ['cells', 'columnorder', 'columnordersrc', 'columnwidth',
+        'columnwidthsrc', 'customdata', 'customdatasrc', 'domain', 'header',
+        'hoverinfo', 'hoverinfosrc', 'hoverlabel', 'ids', 'idssrc',
+        'legendgroup', 'name', 'opacity', 'showlegend', 'stream', 'type',
+        'uid', 'visible']
+    
+    Run `<table-object>.help('attribute')` on any of the above.
+    '<table-object>' is the object at []
+
+    """
+    _name = 'table'
 
 
 class Trace(dict):
