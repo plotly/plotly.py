@@ -506,42 +506,35 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
 
     # default settings
     code_theme = 'tomorrowNight'
-    if style == 'moods':
-        margin = 18
-
     if style == 'martik':
-        martik_colors = {
-            'darkslide': {
-                'bkgd_color': '#0D0A1E',
-                'title_font_color': '#F4FAFB',
-                'text_font_color': '#F4FAFB',
-            },
-            'lightslide': {
-                'bkgd_color': '#F4FAFB',
-                'title_font_color': '#0D0A1E',
-                'text_font_color': '#96969C',
-            }
-        }
-        specs_for_boxes = []
+        title_fontFamily = 'Raleway'
+        text_fontFamily = 'Roboto'
+        title_fontWeight = fontWeight_dict['Bold']['fontWeight']
+        text_fontWeight = fontWeight_dict['Regular']['fontWeight']
         title_fontSize = 40
+        specs_for_boxes = []
         margin = 18  # in pxs
 
-        bkgd_color = martik_colors['lightslide']['bkgd_color']
-        title_font_color = martik_colors['lightslide']['title_font_color']
-        text_font_color = martik_colors['lightslide']['text_font_color']
+        # order is bkgd_color, title_font_color, text_font_color
+        colors_dict = {
+            'darkslide': ('#0D0A1E', '#F4FAFB', '#F4FAFB'),
+            'lightslide': ('#F4FAFB', '#0D0A1E', '#96969C')
+        }
 
+        (bkgd_color,
+         title_font_color,
+         text_font_color) = colors_dict['lightslide']
         if num_of_boxes == 0 and slide_num == 0:
             text_textAlign = 'center'
         else:
             text_textAlign = 'left'
-
         if num_of_boxes == 0:
             specs_for_title = (0, 50, 20, 100)
             specs_for_text = (15, 60, 50, 70)
-            bkgd_color = martik_colors['darkslide']['bkgd_color']
-            title_font_color = martik_colors['darkslide']['title_font_color']
-            text_font_color = martik_colors['darkslide']['text_font_color']
             title_fontSize = 55
+            (bkgd_color,
+             title_font_color,
+             text_font_color) = colors_dict['darkslide']
         elif num_of_boxes == 1:
             if code_blocks != [] or (
                 url_lines != [] and 'https://plot.ly' in url_lines[0]
@@ -560,9 +553,9 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
                     num_of_boxes, grouptype='middle', width_range=w_range,
                     height_range=60, margin=margin, betw_boxes=4
                 )
-                bkgd_color = martik_colors['darkslide']['bkgd_color']
-                title_font_color = martik_colors['darkslide']['title_font_color']
-                text_font_color = martik_colors['darkslide']['text_font_color']
+                (bkgd_color,
+                 title_font_color,
+                 text_font_color) = colors_dict['darkslide']
                 code_theme = 'tomorrow'
             elif title_lines == [] and text_block == '':
                 specs_for_title = (0, 50, 20, 100)
@@ -584,9 +577,9 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
                     num_of_boxes, grouptype='leftgroup_v', width_range=60,
                     margin=margin, betw_boxes=4
                 )
-                bkgd_color = martik_colors['lightslide']['bkgd_color']
-                title_font_color = martik_colors['lightslide']['title_font_color']
-                text_font_color = martik_colors['lightslide']['text_font_color']
+                (bkgd_color,
+                 title_font_color,
+                 text_font_color) = colors_dict['darkslide']
         elif num_of_boxes == 2 and url_lines != []:
             text_top = _top_spec_for_text_at_bottom(
                 text_block, 46, per_from_bottom=(margin / HEIGHT) * 100,
@@ -597,9 +590,9 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
             specs_for_boxes = _box_specs_gen(
                 num_of_boxes, grouptype='checkerboard_topright'
             )
-            bkgd_color = martik_colors['lightslide']['bkgd_color']
-            title_font_color = martik_colors['lightslide']['title_font_color']
-            text_font_color = martik_colors['lightslide']['text_font_color']
+            (bkgd_color,
+             title_font_color,
+             text_font_color) = colors_dict['lightslide']
         elif num_of_boxes >= 2 and url_lines == []:
             text_top = _top_spec_for_text_at_bottom(
                 text_block, 92, per_from_bottom=(margin / HEIGHT) * 100,
@@ -615,9 +608,9 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
                 num_of_boxes, grouptype='middle', width_range=92,
                 height_range=60, margin=margin, betw_boxes=betw_boxes
             )
-            bkgd_color = martik_colors['lightslide']['bkgd_color']
-            title_font_color = martik_colors['lightslide']['title_font_color']
-            text_font_color = martik_colors['lightslide']['text_font_color']
+            (bkgd_color,
+             title_font_color,
+             text_font_color) = colors_dict['lightslide']
             code_theme = 'tomorrow'
         else:
             text_top = _top_spec_for_text_at_bottom(
@@ -633,26 +626,103 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
                 num_of_boxes, grouptype='rightgroup_v', width_range=60,
                 margin=margin, betw_boxes=4
             )
-            bkgd_color = martik_colors['lightslide']['bkgd_color']
-            title_font_color = martik_colors['lightslide']['title_font_color']
-            text_font_color = martik_colors['lightslide']['text_font_color']
+            (bkgd_color,
+             title_font_color,
+             text_font_color) = colors_dict['lightslide']
 
-        # set title and text style attributes
-        title_style_attr = {
-            'color': title_font_color,
-            'fontFamily': 'Raleway',
-            'fontWeight': fontWeight_dict['Bold']['fontWeight'],
-            'textAlign': 'center',
-            'fontSize': title_fontSize,
+    elif style == 'moods':
+        specs_for_boxes = []
+        margin = 18
+        code_theme = 'tomorrowNight'
+        title_fontFamily = 'Roboto'
+        text_fontFamily = 'Roboto'
+        title_fontWeight = fontWeight_dict['Black']['fontWeight']
+        text_fontWeight = fontWeight_dict['Thin']['fontWeight']
+        title_fontSize = 42
+        # order is bkgd_color, title_font_color, text_font_color
+        colors_dict = {
+            'darkslide': ('#F7F7F7', '#000016', '#000016'),
+            'lightslide': ('#FFFFFF', '#000016', '#000016')
         }
 
-        text_style_attr = {
-            'color': text_font_color,
-            'fontFamily': 'Roboto',
-            'fontWeight': fontWeight_dict['Regular']['fontWeight'],
-            'textAlign': text_textAlign,
-            'fontSize': 16,
-        }
+        # besides first page
+        (bkgd_color,
+         title_font_color,
+         text_font_color) = colors_dict['lightslide']
+        if num_of_boxes == 0 and slide_num == 0:
+            text_textAlign = 'center'
+        else:
+            text_textAlign = 'left'
+        if num_of_boxes == slide_num == 0:
+            (bkgd_color,
+             title_font_color,
+             text_font_color) = colors_dict['darkslide']
+            specs_for_title = (0, 50, 20, 100)
+            specs_for_text = (15, 60, 50, 70)
+            title_fontSize = 55
+        elif num_of_boxes == 1:
+            if code_blocks != []:
+                # code
+                if slide_num % 2 == 0:
+                # text_block, width_per, per_from_bottom=0, min_top=30
+                    width_per = 90
+                    text_top = _top_spec_for_text_at_bottom(
+                        text_block, width_per=width_per,
+                        per_from_bottom=(margin / HEIGHT) * 100,
+                        min_top=85
+                    )
+                    specs_for_boxes = _box_specs_gen(
+                        num_of_boxes, grouptype='middle',
+                        width_range=58, height_range=70, margin=margin,
+                    )
+                    specs_for_title = (0, 3, 20, 100)
+                    specs_for_text = (
+                        5, text_top, 2, width_per
+                    )
+                else:
+                    width_per = 50
+                    text_top = _top_spec_for_text_at_bottom(
+                        text_block, width_per=width_per,
+                        per_from_bottom=(margin / HEIGHT) * 100,
+                        min_top=30
+                    )
+                    specs_for_boxes = _box_specs_gen(
+                        num_of_boxes, grouptype='rightgroup_v',
+                        width_range=50, margin=200,
+                    )
+                    specs_for_title = (0, 3, 20, 50)
+                    specs_for_text = (
+                        0, text_top, 2, width_per
+                    )
+            elif url_lines != [] and 'https://plot.ly' in url_lines[0]:
+                # url
+                if slide_num % 2 == 0:
+                    pass
+                else:
+                    pass
+            else:
+                # image
+                if slide_num % 2 == 0:
+                    pass
+                else:
+                    pass
+
+    # set title and text style attributes
+    title_style_attr = {
+        'color': title_font_color,
+        'fontFamily': title_fontFamily,
+        'fontWeight': title_fontWeight,
+        'textAlign': 'center',
+        'fontSize': title_fontSize,
+    }
+
+    text_style_attr = {
+        'color': text_font_color,
+        'fontFamily': text_fontFamily,
+        'fontWeight': text_fontWeight,
+        'textAlign': text_textAlign,
+        'fontSize': 16,
+    }
     return (specs_for_boxes, specs_for_title, specs_for_text, bkgd_color,
             title_style_attr, text_style_attr, code_theme)
 
@@ -701,7 +771,7 @@ class Presentation(dict):
             code_indices = []
             code_blocks = []
             wdw_size = len('```')
-            for j in range(len(slide) - wdw_size):
+            for j in range(len(slide)):
                 if slide[j:j+wdw_size] == '```':
                     code_indices.append(j)
 
