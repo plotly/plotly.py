@@ -309,7 +309,6 @@ def _list_of_slides(markdown_string):
     if not markdown_string.endswith('\n---\n'):
         markdown_string += '\n---\n'
 
-    #text_blocks = markdown_string.split('\n---\n')
     text_blocks = re.split(
         '\n--\n|\n---\n|\n----\n|\n-----\n|\n------\n', markdown_string
     )
