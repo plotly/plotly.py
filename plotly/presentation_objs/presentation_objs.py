@@ -7,7 +7,9 @@ A module for creating and manipulating spectacle-presentation dashboards.
 
 import copy
 import random
+import re
 import string
+import warnings
 
 from plotly import exceptions, optional_imports
 
@@ -307,11 +309,21 @@ def _list_of_slides(markdown_string):
     if not markdown_string.endswith('\n---\n'):
         markdown_string += '\n---\n'
 
-    text_blocks = markdown_string.split('\n---\n')
+    #text_blocks = markdown_string.split('\n---\n')
+    text_blocks = re.split(
+        '\n--\n|\n---\n|\n----\n|\n-----\n|\n------\n', markdown_string
+    )
     list_of_slides = []
     for j, text in enumerate(text_blocks):
         if not all(char in ['\n', '-', ' '] for char in text):
             list_of_slides.append(text)
+
+    if '\n-\n' in markdown_string:
+        msg = ("You have at least one '-' by itself on its own line in your "
+               "markdown string. If you are trying to denote a new slide, "
+               "make sure that the line has 3 '-'s like this: \n\n---\n\n"
+               "A new slide will NOT be created here.")
+        warnings.warn(msg)
 
     return list_of_slides
 
@@ -653,33 +665,57 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
             text_textAlign = 'center'
         else:
             text_textAlign = 'left'
-        if num_of_boxes == slide_num == 0:
-            (bkgd_color,
-             title_font_color,
-             text_font_color) = colors_dict['darkslide']
-            specs_for_title = (0, 50, 20, 100)
-            specs_for_text = (15, 60, 50, 70)
+        if num_of_boxes == 0:
             title_fontSize = 55
+            if slide_num == 0 or text_block == '':
+                (bkgd_color,
+                 title_font_color,
+                 text_font_color) = colors_dict['darkslide']
+                specs_for_title = (0, 50, 20, 100)
+                specs_for_text = (15, 60, 50, 70)
+            else:
+                (bkgd_color,
+                 title_font_color,
+                 text_font_color) = colors_dict['darkslide']
+                text_top = _top_spec_for_text_at_bottom(
+                    text_block, width_per=90,
+                    per_from_bottom=(margin / HEIGHT) * 100,
+                    min_top=20
+                )
+                specs_for_title = (0, 2, 20, 100)
+                specs_for_text = (5, text_top, 50, 90)
+
         elif num_of_boxes == 1:
             if code_blocks != []:
                 # code
-                if slide_num % 2 == 0:
-                # text_block, width_per, per_from_bottom=0, min_top=30
+                if text_block == '':
+                    margin = 5
+                    specs_for_title = (0, 3, 20, 100)
+                    specs_for_text = (0, 0, 0, 0)
+                    top = 12
+                    specs_for_boxes = [
+                        (margin, top, 100 - top - margin, 100 - 2 * margin)
+                    ]
+
+                elif slide_num % 2 == 0:
+                    # middle center
                     width_per = 90
+                    height_range = 60
                     text_top = _top_spec_for_text_at_bottom(
                         text_block, width_per=width_per,
                         per_from_bottom=(margin / HEIGHT) * 100,
-                        min_top=85
+                        min_top=100 - height_range / 2.
                     )
                     specs_for_boxes = _box_specs_gen(
                         num_of_boxes, grouptype='middle',
-                        width_range=58, height_range=70, margin=margin,
+                        width_range=50, height_range=60, margin=margin,
                     )
                     specs_for_title = (0, 3, 20, 100)
                     specs_for_text = (
                         5, text_top, 2, width_per
                     )
                 else:
+                    # right
                     width_per = 50
                     text_top = _top_spec_for_text_at_bottom(
                         text_block, width_per=width_per,
@@ -688,24 +724,127 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
                     )
                     specs_for_boxes = _box_specs_gen(
                         num_of_boxes, grouptype='rightgroup_v',
-                        width_range=50, margin=200,
+                        width_range=50, margin=40,
                     )
                     specs_for_title = (0, 3, 20, 50)
                     specs_for_text = (
-                        0, text_top, 2, width_per
+                        2, text_top, 2, width_per - 2
                     )
             elif url_lines != [] and 'https://plot.ly' in url_lines[0]:
                 # url
                 if slide_num % 2 == 0:
-                    pass
+                    # top half
+                    width_per = 95
+                    text_top = _top_spec_for_text_at_bottom(
+                        text_block, width_per=width_per,
+                        per_from_bottom=(margin / HEIGHT) * 100,
+                        min_top=60
+                    )
+                    specs_for_boxes = _box_specs_gen(
+                        num_of_boxes, grouptype='middle',
+                        width_range=100, height_range=60,
+                        middle_center=30
+                    )
+                    specs_for_title = (0, 60, 20, 100)
+                    specs_for_text = (
+                        2.5, text_top, 2, width_per
+                    )
                 else:
-                    pass
+                    # middle across
+                    width_per = 95
+                    text_top = _top_spec_for_text_at_bottom(
+                        text_block, width_per=width_per,
+                        per_from_bottom=(margin / HEIGHT) * 100,
+                        min_top=60
+                    )
+                    specs_for_boxes = _box_specs_gen(
+                        num_of_boxes, grouptype='middle',
+                        width_range=100, height_range=60
+                    )
+                    specs_for_title = (0, 3, 20, 100)
+                    specs_for_text = (
+                        2.5, text_top, 2, width_per
+                    )
             else:
                 # image
                 if slide_num % 2 == 0:
-                    pass
+                    # right
+                    width_per = 50
+                    text_top = _top_spec_for_text_at_bottom(
+                        text_block, width_per=width_per,
+                        per_from_bottom=(margin / HEIGHT) * 100,
+                        min_top=30
+                    )
+                    specs_for_boxes = _box_specs_gen(
+                        num_of_boxes, grouptype='rightgroup_v',
+                        width_range=50, margin=0,
+                    )
+                    specs_for_title = (0, 3, 20, 50)
+                    specs_for_text = (
+                        2, text_top, 2, width_per - 2
+                    )
                 else:
-                    pass
+                    # left
+                    width_per = 50
+                    text_top = _top_spec_for_text_at_bottom(
+                        text_block, width_per=width_per,
+                        per_from_bottom=(margin / HEIGHT) * 100,
+                        min_top=30
+                    )
+                    specs_for_boxes = _box_specs_gen(
+                        num_of_boxes, grouptype='leftgroup_v',
+                        width_range=50, margin=0,
+                    )
+                    specs_for_title = (50, 3, 20, 50)
+                    specs_for_text = (
+                        52, text_top, 2, width_per - 2
+                    )
+        elif num_of_boxes == 2:
+            # right stack
+            width_per = 50
+            text_top = _top_spec_for_text_at_bottom(
+                text_block, width_per=width_per,
+                per_from_bottom=(margin / HEIGHT) * 100,
+                min_top=30
+            )
+            specs_for_boxes = [(50, 0, 50, 50), (50, 50, 50, 50)]
+            specs_for_title = (0, 3, 20, 50)
+            specs_for_text = (
+                2, text_top, 2, width_per - 2
+            )
+        elif num_of_boxes == 3:
+            # middle top
+            width_per = 95
+            text_top = _top_spec_for_text_at_bottom(
+                text_block, width_per=width_per,
+                per_from_bottom=(margin / HEIGHT) * 100,
+                min_top=40
+            )
+            specs_for_boxes = _box_specs_gen(
+                num_of_boxes, grouptype='middle',
+                width_range=100, height_range=40, middle_center=30
+            )
+            specs_for_title = (0, 3, 20, 100)
+            specs_for_text = (
+                2.5, text_top, 2, width_per
+            )
+        else:
+            # right stack
+            width_per = 40
+            text_top = _top_spec_for_text_at_bottom(
+                text_block, width_per=width_per,
+                per_from_bottom=(margin / HEIGHT) * 100,
+                min_top=30
+            )
+            specs_for_boxes = _box_specs_gen(
+                num_of_boxes, grouptype='rightgroup_v',
+                width_range=60, margin=0,
+            )
+            specs_for_title = (0, 3, 20, 40)
+            specs_for_text = (
+                2, text_top, 2, width_per - 2
+            )
+
 
     # set title and text style attributes
     title_style_attr = {
@@ -728,7 +867,7 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
 
 
 class Presentation(dict):
-    def __init__(self, markdown_string=None, style='moods2'):
+    def __init__(self, markdown_string=None, style='moods'):
         self['presentation'] = {
             'slides': [],
             'slidePreviews': [None for _ in range(496)],
@@ -739,8 +878,8 @@ class Presentation(dict):
         if markdown_string:
             if style not in PRES_THEMES:
                 raise exceptions.PlotlyError(
-                    "Your presentation style must belond to {}".format(
-                        PRES_THEMES
+                    "Your presentation style must be {}".format(
+                        list_of_options(PRES_THEMES, conj='or', period=True)
                     )
                 )
             self._markdown_to_presentation(markdown_string, style)
