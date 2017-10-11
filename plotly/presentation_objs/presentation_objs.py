@@ -28,9 +28,6 @@ NEEDED_STYLE_KEYS = ['left', 'top', 'height', 'width']
 VALID_LANGUAGES = ['cpp', 'cs', 'css', 'fsharp', 'go', 'haskell', 'java',
                    'javascript', 'jsx', 'julia', 'xml', 'matlab', 'php',
                    'python', 'r', 'ruby', 'scala', 'sql', 'yaml']
-
-VALID_SLIDE_STYLES = ['pictureleft', 'pictureright', 'picturemiddle',
-                      'pictureleft_tiled', 'pictureright_tiled']
 VALID_CLASS_STYLES = ['pictureleft', 'pictureright', 'picturemiddle',
                       'pictureleft_tiled', 'pictureright_tiled']
 
@@ -899,7 +896,7 @@ class Presentation(dict):
                     "presentation, make sure your denote the start and end "
                     "of the code environment with the '```' characters. For "
                     "example, your markdown string would include something "
-                    "like:\n\n```python\nx = 2\ny = 1\nprint x + y\n```\n\n"
+                    "like:\n\n```python\nx = 2\ny = 1\nprint x\n```\n\n"
                     "Notice how the language that you want the code to be "
                     "displayed in is immediately to the right of first "
                     "entering '```', i.e. '```python'."
@@ -957,28 +954,9 @@ class Presentation(dict):
                     if len(line) > 0 and line[0] == '#':
                         title_lines.append(line)
                     elif line.startswith('url('):
-                        if line[-1] != ')':
-                            raise exceptions.PlotlyError(
-                                "If you are trying to put a url of a Plotly "
-                                "graph or an image into your presentation, "
-                                "make sure that you are writing a line of "
-                                "the form\nurl(https://...)"
-                            )
                         url_lines.append(line)
                     else:
-                        # find and set slide properties
-                        if line.startswith('class:') and title_lines == []:
-                            slidestyle = line[len('class:'):]
-                            slidestyle = _remove_extra_whitespace_from_line(
-                                slidestyle
-                            )
-                            if slidestyle not in VALID_SLIDE_STYLES:
-                                raise exceptions.PlotlyError(
-                                    "Your 'class: _____' at the top of your "
-                                    "slide must be " + list_of_options(
-                                        VALID_SLIDE_STYLES
-                                    )
-                                )
+                        # find and set transition properties
                         trans = 'transition:'
                         if line.startswith(trans) and title_lines == []:
                             slide_trans = line[len(trans):]
