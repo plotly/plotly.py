@@ -433,7 +433,7 @@ def _box_specs_gen(num_of_boxes, grouptype='leftgroup_v', width_range=50,
                 ((margin + betw_boxes) / WIDTH) * 100 + box_width
             )
             for left in [left1, left2]:
-                for j in range(num_of_boxes / 2):
+                for j in range(int(num_of_boxes / 2)):
                     top = (margin * 100 / HEIGHT) + j * (
                         height + (betw_boxes * 100 / HEIGHT)
                     )
@@ -909,7 +909,7 @@ class Presentation(dict):
                 if slide[j:j+wdw_size] == '```':
                     code_indices.append(j)
 
-            for k in range(len(code_indices) / 2):
+            for k in range(int(len(code_indices) / 2)):
                 l = 2 * k
                 code_blocks.append(
                     slide[code_indices[l]:code_indices[l + 1]]
@@ -932,7 +932,7 @@ class Presentation(dict):
                         )
                     )
                 lang_and_code_tuples.append(
-                    (language, string.join(code_by_lines[1:], '\n'))
+                    (language, '\n'.join(code_by_lines[1:]))
                 )
 
             # collect text, code and urls
@@ -990,7 +990,7 @@ class Presentation(dict):
                 except IndexError:
                     pass
 
-            text_block = string.join(text_lines, '\n')
+            text_block = '\n'.join(text_lines)
             num_of_boxes = len(url_lines) + len(lang_and_code_tuples)
 
             (specs_for_boxes, specs_for_title, specs_for_text, bkgd_color,
