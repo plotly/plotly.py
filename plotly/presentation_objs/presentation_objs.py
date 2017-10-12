@@ -841,7 +841,6 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
                 2, text_top, 2, width_per - 2
             )
 
-
     # set title and text style attributes
     title_style_attr = {
         'color': title_font_color,
@@ -941,7 +940,6 @@ class Presentation(dict):
             url_lines = []
             text_lines = []
             inCode = False
-            slidestyle = None
 
             for index, line in enumerate(lines_in_slide):
                 # inCode handling
