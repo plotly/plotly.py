@@ -1543,7 +1543,7 @@ class presentation_ops:
         :param (bool) auto_open: automatically opens the dashboard in the
             browser.
 
-        See the documentation for examples.
+        See the documentation online for examples.
         """
         if sharing == 'public':
             world_readable = True
