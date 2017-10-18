@@ -861,6 +861,10 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
             title_style_attr, text_style_attr, code_theme)
 
 
+def _url_parens_contained(url_name, line):
+    return line.startswith(url_name + '(') and line.endswith(')')
+
+
 class Presentation(dict):
     def __init__(self, markdown_string=None, style='moods'):
         self['presentation'] = {
@@ -951,7 +955,14 @@ class Presentation(dict):
                 if not inCode and line != '```':
                     if len(line) > 0 and line[0] == '#':
                         title_lines.append(line)
-                    elif line.startswith('url('):
+                    elif (_url_parens_contained('Plotly', line) or
+                          _url_parens_contained('Image', line)):
+                        if line.startswith('Plotly(') and 'plot.ly' not in line:
+                            raise exceptions.PlotlyError(
+                                "You are attempting to insert a Plotly Chart "
+                                "in your slide but your url does not have "
+                                "plot.ly in it."
+                            )
                         url_lines.append(line)
                     else:
                         # find and set transition properties
