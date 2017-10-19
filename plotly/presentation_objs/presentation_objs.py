@@ -165,33 +165,27 @@ def _empty_slide(transition, id):
 
 
 def _box(boxtype, text_or_url, left, top, height, width, id, props_attr,
-         style_attr):
+         style_attr, paragraphStyle):
     children_list = []
     fontFamily = "Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace"
     if boxtype == 'Text':
         children_list = text_or_url.split('\n')
+
         props = {
             'isQuote': False,
             'listType': None,
-            'paragraphStyle': 'Body',
+            'paragraphStyle': paragraphStyle,
             'size': 4,
-            'style': {'color': '#3d3d3d',
-                      'fontFamily': 'Open Sans',
-                      'fontSize': 11,
-                      'fontStyle': 'normal',
-                      'fontWeight': 400,
-                      'height': height,
-                      'left': left,
-                      'lineHeight': 'normal',
-                      'minWidth': 20,
-                      'opacity': 1,
-                      'position': 'absolute',
-                      'textAlign': 'center',
-                      'textDecoration': 'none',
-                      'top': top,
-                      'width': width,
-                      'wordBreak': 'break-word'}
+            'style': copy.deepcopy(_paragraph_styles[paragraphStyle])
         }
+
+        props['style'].update(
+            {'height': height,
+             'left': left,
+             'top': top,
+             'width': width}
+        )
+
     elif boxtype == 'Image':
         props = {
             'height': 512,
@@ -396,7 +390,8 @@ def _top_spec_for_text_at_bottom(text_block, width_per, per_from_bottom=0,
 
 def _box_specs_gen(num_of_boxes, grouptype='leftgroup_v', width_range=50,
                    height_range=50, margin=2, betw_boxes=4, middle_center=50):
-    # the (l, t, w, h) specs are added to 'specs_for_boxes'
+    # the (left, top, width, height) specs
+    # are added to specs_for_boxes
     specs_for_boxes = []
     if num_of_boxes == 1 and grouptype in ['leftgroup_v', 'rightgroup_v']:
         if grouptype == 'rightgroup_v':
@@ -464,8 +459,6 @@ def _box_specs_gen(num_of_boxes, grouptype='leftgroup_v', width_range=50,
                 specs_for_boxes.append(specs)
 
     elif grouptype == 'middle':
-        # margin is not used
-        #top = (100 - float(height_range)) / 2
         top = float(middle_center - (height_range / 2))
         height = height_range
         width = (1 / float(num_of_boxes)) * (
@@ -511,27 +504,39 @@ def _box_specs_gen(num_of_boxes, grouptype='leftgroup_v', width_range=50,
 def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
                          code_blocks, slide_num, style):
     # returns specs of the form (left, top, height, width)
-
-    # default settings
     code_theme = 'tomorrowNight'
     if style == 'martik':
-        title_fontFamily = 'Raleway'
-        text_fontFamily = 'Roboto'
-        title_fontWeight = fontWeight_dict['Bold']['fontWeight']
-        text_fontWeight = fontWeight_dict['Regular']['fontWeight']
-        title_fontSize = 40
         specs_for_boxes = []
         margin = 18  # in pxs
 
-        # order is bkgd_color, title_font_color, text_font_color
-        colors_dict = {
-            'darkslide': ('#0D0A1E', '#F4FAFB', '#F4FAFB'),
-            'lightslide': ('#F4FAFB', '#0D0A1E', '#96969C')
-        }
+        # set Headings styles
+        _paragraph_styles['Heading 1'].update(
+            {'color': '#0D0A1E',
+             'fontFamily': 'Raleway',
+             'fontSize': 55,
+             'fontWeight': fontWeight_dict['Bold']['fontWeight']}
+        )
 
-        (bkgd_color,
-         title_font_color,
-         text_font_color) = colors_dict['lightslide']
+        _paragraph_styles['Heading 2'] = copy.deepcopy(
+            _paragraph_styles['Heading 1']
+        )
+        _paragraph_styles['Heading 2'].update({'fontSize': 36})
+        _paragraph_styles['Heading 3'] = copy.deepcopy(
+            _paragraph_styles['Heading 1']
+        )
+        _paragraph_styles['Heading 3'].update({'fontSize': 30})
+
+        # set Body style
+        _paragraph_styles['Body'].update(
+            {'color': '#96969C',
+             'fontFamily': 'Roboto',
+             'fontSize': 16,
+             'fontWeight': fontWeight_dict['Regular']['fontWeight']}
+        )
+
+        bkgd_color = '#F4FAFB'
+        title_font_color = '#0D0A1E'
+        text_font_color = '#96969C'
         if num_of_boxes == 0 and slide_num == 0:
             text_textAlign = 'center'
         else:
@@ -539,10 +544,10 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
         if num_of_boxes == 0:
             specs_for_title = (0, 50, 20, 100)
             specs_for_text = (15, 60, 50, 70)
-            title_fontSize = 55
-            (bkgd_color,
-             title_font_color,
-             text_font_color) = colors_dict['darkslide']
+
+            bkgd_color = '#0D0A1E'
+            title_font_color = '#F4FAFB'
+            text_font_color = '#F4FAFB'
         elif num_of_boxes == 1:
             if code_blocks != [] or (
                 url_lines != [] and 'https://plot.ly' in url_lines[0]
@@ -561,9 +566,9 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
                     num_of_boxes, grouptype='middle', width_range=w_range,
                     height_range=60, margin=margin, betw_boxes=4
                 )
-                (bkgd_color,
-                 title_font_color,
-                 text_font_color) = colors_dict['darkslide']
+                bkgd_color = '#0D0A1E'
+                title_font_color = '#F4FAFB'
+                text_font_color = '#F4FAFB'
                 code_theme = 'tomorrow'
             elif title_lines == [] and text_block == '':
                 specs_for_title = (0, 50, 20, 100)
@@ -585,9 +590,9 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
                     num_of_boxes, grouptype='leftgroup_v', width_range=60,
                     margin=margin, betw_boxes=4
                 )
-                (bkgd_color,
-                 title_font_color,
-                 text_font_color) = colors_dict['darkslide']
+                bkgd_color = '#0D0A1E'
+                title_font_color = '#F4FAFB'
+                text_font_color = '#F4FAFB'
         elif num_of_boxes == 2 and url_lines != []:
             text_top = _top_spec_for_text_at_bottom(
                 text_block, 46, per_from_bottom=(margin / HEIGHT) * 100,
@@ -598,9 +603,6 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
             specs_for_boxes = _box_specs_gen(
                 num_of_boxes, grouptype='checkerboard_topright'
             )
-            (bkgd_color,
-             title_font_color,
-             text_font_color) = colors_dict['lightslide']
         elif num_of_boxes >= 2 and url_lines == []:
             text_top = _top_spec_for_text_at_bottom(
                 text_block, 92, per_from_bottom=(margin / HEIGHT) * 100,
@@ -616,9 +618,6 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
                 num_of_boxes, grouptype='middle', width_range=92,
                 height_range=60, margin=margin, betw_boxes=betw_boxes
             )
-            (bkgd_color,
-             title_font_color,
-             text_font_color) = colors_dict['lightslide']
             code_theme = 'tomorrow'
         else:
             text_top = _top_spec_for_text_at_bottom(
@@ -634,45 +633,51 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
                 num_of_boxes, grouptype='rightgroup_v', width_range=60,
                 margin=margin, betw_boxes=4
             )
-            (bkgd_color,
-             title_font_color,
-             text_font_color) = colors_dict['lightslide']
 
     elif style == 'moods':
         specs_for_boxes = []
         margin = 18
         code_theme = 'tomorrowNight'
-        title_fontFamily = 'Roboto'
-        text_fontFamily = 'Roboto'
-        title_fontWeight = fontWeight_dict['Black']['fontWeight']
-        text_fontWeight = fontWeight_dict['Thin']['fontWeight']
-        title_fontSize = 42
-        # order is bkgd_color, title_font_color, text_font_color
-        colors_dict = {
-            'darkslide': ('#F7F7F7', '#000016', '#000016'),
-            'lightslide': ('#FFFFFF', '#000016', '#000016')
-        }
 
-        # besides first page
-        (bkgd_color,
-         title_font_color,
-         text_font_color) = colors_dict['lightslide']
+        # set Headings styles
+        _paragraph_styles['Heading 1'].update(
+            {'color': '#000016',
+             'fontFamily': 'Roboto',
+             'fontSize': 55,
+             'fontWeight': fontWeight_dict['Black']['fontWeight']}
+        )
+
+        _paragraph_styles['Heading 2'] = copy.deepcopy(
+            _paragraph_styles['Heading 1']
+        )
+        _paragraph_styles['Heading 2'].update({'fontSize': 36})
+        _paragraph_styles['Heading 3'] = copy.deepcopy(
+            _paragraph_styles['Heading 1']
+        )
+        _paragraph_styles['Heading 3'].update({'fontSize': 30})
+
+        # set Body style
+        _paragraph_styles['Body'].update(
+            {'color': '#000016',
+             'fontFamily': 'Roboto',
+             'fontSize': 16,
+             'fontWeight': fontWeight_dict['Thin']['fontWeight']}
+        )
+
+        bkgd_color = '#FFFFFF'
+        title_font_color = None
+        text_font_color = None
         if num_of_boxes == 0 and slide_num == 0:
             text_textAlign = 'center'
         else:
             text_textAlign = 'left'
         if num_of_boxes == 0:
-            title_fontSize = 55
             if slide_num == 0 or text_block == '':
-                (bkgd_color,
-                 title_font_color,
-                 text_font_color) = colors_dict['darkslide']
+                bkgd_color = '#F7F7F7'
                 specs_for_title = (0, 50, 20, 100)
                 specs_for_text = (15, 60, 50, 70)
             else:
-                (bkgd_color,
-                 title_font_color,
-                 text_font_color) = colors_dict['darkslide']
+                bkgd_color = '#F7F7F7'
                 text_top = _top_spec_for_text_at_bottom(
                     text_block, width_per=90,
                     per_from_bottom=(margin / HEIGHT) * 100,
@@ -841,22 +846,16 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
                 2, text_top, 2, width_per - 2
             )
 
-    # set title and text style attributes
-    title_style_attr = {
-        'color': title_font_color,
-        'fontFamily': title_fontFamily,
-        'fontWeight': title_fontWeight,
-        'textAlign': 'center',
-        'fontSize': title_fontSize,
-    }
+    # set text style attributes
 
-    text_style_attr = {
-        'color': text_font_color,
-        'fontFamily': text_fontFamily,
-        'fontWeight': text_fontWeight,
-        'textAlign': text_textAlign,
-        'fontSize': 16,
-    }
+    title_style_attr = {}
+    text_style_attr = {'textAlign': text_textAlign}
+
+    if text_font_color:
+        text_style_attr['color'] = text_font_color
+    if title_font_color:
+        title_style_attr['color'] = title_font_color
+
     return (specs_for_boxes, specs_for_title, specs_for_text, bkgd_color,
             title_style_attr, text_style_attr, code_theme)
 
@@ -986,13 +985,6 @@ class Presentation(dict):
                         else:
                             text_lines.append(line)
 
-            # clean titles
-            for title_index, title in enumerate(title_lines):
-                while '#' in title:
-                    title = title[1:]
-                title = _remove_extra_whitespace_from_line(title)
-                title_lines[title_index] = title
-
             # make text block
             for i in range(2):
                 try:
@@ -1005,8 +997,7 @@ class Presentation(dict):
             num_of_boxes = len(url_lines) + len(lang_and_code_tuples)
 
             (specs_for_boxes, specs_for_title, specs_for_text, bkgd_color,
-             title_style_attr, text_style_attr,
-             code_theme) = _return_layout_specs(
+             title_style_attr, text_style_attr, code_theme) = _return_layout_specs(
                 num_of_boxes, url_lines, title_lines, text_block, code_blocks,
                 slide_num, style
             )
@@ -1016,11 +1007,23 @@ class Presentation(dict):
 
             # insert title, text, code, and images
             if len(title_lines) > 0:
+
+                # clean titles
+                title = title_lines[0]
+                num_hashes = 0
+                while title[0] == '#':
+                    title = title[1:]
+                    num_hashes += 1
+                title = _remove_extra_whitespace_from_line(title)
+
                 self._insert(
-                    box='Text', text_or_url=title_lines[0],
+                    box='Text', text_or_url=title,
                     left=specs_for_title[0], top=specs_for_title[1],
                     height=specs_for_title[2], width=specs_for_title[3],
-                    slide=slide_num, style_attr=title_style_attr
+                    slide=slide_num, style_attr=title_style_attr,
+                    paragraphStyle='Heading {}'.format(
+                        min(num_hashes, 3)
+                    )
                 )
 
             # text
@@ -1029,7 +1032,8 @@ class Presentation(dict):
                     box='Text', text_or_url=text_block,
                     left=specs_for_text[0], top=specs_for_text[1],
                     height=specs_for_text[2], width=specs_for_text[3],
-                    slide=slide_num, style_attr=text_style_attr
+                    slide=slide_num, style_attr=text_style_attr,
+                    paragraphStyle='Body'
                 )
 
             url_and_code_blocks = list(url_lines + lang_and_code_tuples)
@@ -1052,11 +1056,11 @@ class Presentation(dict):
                                  slide=slide_num, props_attr=props_attr)
                 else:
                     # url
-                    url = url_or_code[4: -1]
-                    if 'https://plot.ly' in url:
+                    if 'https://plot.ly' in url_or_code:
                         box_name = 'Plotly'
                     else:
                         box_name = 'Image'
+                    url = url_or_code[len(box_name) + 1: -1]
 
                     self._insert(box=box_name, text_or_url=url,
                                  left=specs[0], top=specs[1],
@@ -1078,14 +1082,14 @@ class Presentation(dict):
                 self._add_empty_slide()
 
     def _insert(self, box, text_or_url, left, top, height, width, slide=0,
-                props_attr={}, style_attr={}):
+                props_attr={}, style_attr={}, paragraphStyle='Body'):
         self._add_missing_slides(slide)
 
         left, top, height, width = _return_box_position(left, top, height,
                                                         width)
         new_id = _generate_id(9)
         child = _box(box, text_or_url, left, top, height, width, new_id,
-                     props_attr, style_attr)
+                     props_attr, style_attr, paragraphStyle)
 
         self['presentation']['slides'][slide]['children'].append(child)
 
