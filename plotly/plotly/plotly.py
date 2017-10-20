@@ -1527,20 +1527,20 @@ class presentation_ops:
     @classmethod
     def upload(cls, presentation, filename, sharing='public', auto_open=True):
         """
-        BETA function for uploading dashboards to Plotly.
+        BETA function for uploading presentations to Plotly.
 
-        :param (dict) dashboard: the JSON dashboard to be uploaded. Use
-            plotly.dashboard_objs.dashboard_objs to create a Dashboard
-            object.
-        :param (str) filename: the name of the dashboard to be saved in
-            your Plotly account. Will overwrite a dashboard of the same
+        :param (dict) presentation: the JSON presentation to be uploaded. Use
+            plotly.presentation_objs.Presentation to create the presentation
+            from a string.
+        :param (str) filename: the name of the presentation to be saved in
+            your Plotly account. Will overwrite a presentation of the same
             name if it already exists in your files.
         :param (str) sharing: can be set to either 'public', 'private'
-            or 'secret'. If 'public', your dashboard will be viewable by
-            all other users. If 'private' only you can see your dashboard.
+            or 'secret'. If 'public', your presentation will be viewable by
+            all other users. If 'private' only you can see your presentation.
             If 'secret', the url will be returned with a sharekey appended
-            to the url. Anyone with the url may view the dashboard.
-        :param (bool) auto_open: automatically opens the dashboard in the
+            to the url. Anyone with the url may view the presentation.
+        :param (bool) auto_open: automatically opens the presentation in the
             browser.
 
         See the documentation online for examples.

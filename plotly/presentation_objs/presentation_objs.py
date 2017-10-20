@@ -865,7 +865,52 @@ def _url_parens_contained(url_name, line):
 
 
 class Presentation(dict):
-    def __init__(self, markdown_string=None, style='moods'):
+    """
+    The Presentation class for creating spectacle-presentations.
+
+    The Presentations API is a means for creating JSON blobs which are then
+    converted Spectacle Presentations. To use the API you only need to define
+    a block string and define your slides using markdown. Then you can upload
+    your presentation to the Plotly Server.
+
+    Rules for your presentation string:
+    - use '---' to denote a slide break.
+    - headers work as per usual, where if '#' is used before a line of text
+      then it is interpretted as a header. Only the first header in a slide is
+      displayed on the slide. There are only 3 heading sizes: #, ## and ###.
+      4 or more hashes will be interpretted as ###.
+    - you can set the type of slide transition you want by writing a line that
+      starts with 'transition: ' before your first header line in the slide,
+      and write the types of transition you want after. Your transition to
+      choose from are 'slide',  'zoom', 'fade' and 'spin'.
+    - to insert a Plotly chart into your slide, write a line that has the form
+      Plotly(url) with your url pointing to your chart. Note that it is
+      STRONGLY advised that your chart has fig['layout']['autosize'] = True.
+    - to insert an image from the web, write a line with the form Image(url)
+    - to insert a block of text, begin with a line that denotes the code
+      envoronment '```lang' where lang is a valid programming language. To find
+      the valid languages run:\n
+      'plotly.presentation_objs.presentation_objs.VALID_LANGUAGES'\n
+      To end the code block environment,
+      write a single '```' line. All Plotly(url) and Image(url) lines will NOT
+      be interpretted as a Plotly or Image url if they are in the code block.
+
+    :param (str) markdown_string: the block string that denotes the slides,
+        slide properties, and images to be placed in the presentation. If
+        'markdown_string' is set to 'None', the JSON for a presentation with
+        one empty slide will be created.
+    :param (str) style: the theme that the presentation will take on. The
+        themes that are available now are 'martik' and 'moods'.
+        Default = 'moods'.
+    :param (bool) max_w_and_h: if set to True, all images in the presentation
+        will not have heights and widths that will not exceed the parent
+        container they belong to. In other words, images will keep their
+        original aspect ratios.
+        Default = False.
+
+    For examples see the documentation: https://plot.ly/python/presentations-api/
+    """
+    def __init__(self, markdown_string=None, style='moods', max_hw=False):
         self['presentation'] = {
             'slides': [],
             'slidePreviews': [None for _ in range(496)],
