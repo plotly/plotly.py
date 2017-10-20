@@ -902,7 +902,7 @@ class Presentation(dict):
     :param (str) style: the theme that the presentation will take on. The
         themes that are available now are 'martik' and 'moods'.
         Default = 'moods'.
-    :param (bool) max_w_and_h: if set to True, all images in the presentation
+    :param (bool) imgStretch: if set to True, all images in the presentation
         will not have heights and widths that will not exceed the parent
         container they belong to. In other words, images will keep their
         original aspect ratios.
@@ -910,7 +910,7 @@ class Presentation(dict):
 
     For examples see the documentation: https://plot.ly/python/presentations-api/
     """
-    def __init__(self, markdown_string=None, style='moods', max_hw=False):
+    def __init__(self, markdown_string=None, style='moods', imgStretch=False):
         self['presentation'] = {
             'slides': [],
             'slidePreviews': [None for _ in range(496)],
@@ -925,11 +925,11 @@ class Presentation(dict):
                         list_of_options(PRES_THEMES, conj='or', period=True)
                     )
                 )
-            self._markdown_to_presentation(markdown_string, style)
+            self._markdown_to_presentation(markdown_string, style, imgStretch)
         else:
             self._add_empty_slide()
 
-    def _markdown_to_presentation(self, markdown_string, style):
+    def _markdown_to_presentation(self, markdown_string, style, imgStretch):
         list_of_slides = _list_of_slides(markdown_string)
 
         for slide_num, slide in enumerate(list_of_slides):
@@ -1111,6 +1111,19 @@ class Presentation(dict):
                                  left=specs[0], top=specs[1],
                                  height=specs[2], width=specs[3],
                                  slide=slide_num)
+
+        if imgStretch:
+            for slide in self['presentation']['slides']:
+                for child in slide['children']:
+                    if child['type'] in ['Image', 'Plotly']:
+                        deep_child = child['props']['style']
+                        width = deep_child['width']
+                        height = deep_child['height']
+
+                        if width >= height:
+                            deep_child['max-width'] = deep_child.pop('width')
+                        else:
+                            deep_child['max-height'] = deep_child.pop('height')
 
     def _add_empty_slide(self):
         self['presentation']['slides'].append(
