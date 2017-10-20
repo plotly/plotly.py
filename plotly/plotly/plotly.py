@@ -1527,7 +1527,7 @@ class presentation_ops:
     @classmethod
     def upload(cls, presentation, filename, sharing='public', auto_open=True):
         """
-        BETA function for uploading presentations to Plotly.
+        Function for uploading presentations to Plotly.
 
         :param (dict) presentation: the JSON presentation to be uploaded. Use
             plotly.presentation_objs.Presentation to create the presentation
@@ -1563,20 +1563,18 @@ class presentation_ops:
             lookup_res = v2.files.lookup(filename)
             matching_file = json.loads(lookup_res.content)
 
-            if matching_file['filetype'] == 'presentation':
-                old_fid = matching_file['fid']
-                res = v2.spectacle_presentations.update(old_fid, data)
-            else:
+            if matching_file['filetype'] != 'spectacle_presentation':
                 raise exceptions.PlotlyError(
                     "'{filename}' is already a {filetype} in your account. "
-                    "While you can overwrite presentation with the same name, "
-                    "you can't change overwrite files with a different type. "
-                    "Try deleting '{filename}' in your account or changing "
-                    "the filename.".format(
+                    "You can't overwrite a file that is not a spectacle_"
+                    "presentation. Please pick another filename.".format(
                         filename=filename,
                         filetype=matching_file['filetype']
                     )
                 )
+            else:
+                old_fid = matching_file['fid']
+                res = v2.spectacle_presentations.update(old_fid, data)
 
         except exceptions.PlotlyRequestError:
             res = v2.spectacle_presentations.create(data)
