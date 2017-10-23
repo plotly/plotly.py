@@ -113,7 +113,7 @@ class PlotlyBase(object):
         pass
 
     def validate(self):
-        """Everything is *always* validated now. keep for backwards compat."""
+        """Everything is *always* validated now. Keep for backwards compat."""
         pass
 
 
