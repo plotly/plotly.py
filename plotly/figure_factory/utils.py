@@ -3,6 +3,7 @@ from __future__ import absolute_import
 import decimal
 
 from plotly import exceptions
+from numbers import Number
 
 DEFAULT_PLOTLY_COLORS = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
                          'rgb(44, 160, 44)', 'rgb(214, 39, 40)',
@@ -40,7 +41,6 @@ def validate_index(index_vals):
     :raises: (PlotlyError) If there are any two items in the list whose
         types differ
     """
-    from numbers import Number
     if isinstance(index_vals[0], Number):
         if not all(isinstance(item, Number) for item in index_vals):
             raise exceptions.PlotlyError("Error in indexing column. "
@@ -63,7 +63,6 @@ def validate_dataframe(array):
     :raises: (PlotlyError) If there are any two items in any list whose
         types differ
     """
-    from numbers import Number
     for vector in array:
         if isinstance(vector[0], Number):
             if not all(isinstance(item, Number) for item in vector):
@@ -267,7 +266,6 @@ def color_parser(colors, function):
     - rgb string, hex string or tuple
 
     """
-    from numbers import Number
     if isinstance(colors, str):
         return function(colors)
 
@@ -288,7 +286,6 @@ def validate_colors(colors, colortype='tuple'):
     """
     Validates color(s) and returns a list of color(s) of a specified type
     """
-    from numbers import Number
     if colors is None:
         colors = DEFAULT_PLOTLY_COLORS
 
