@@ -180,9 +180,9 @@ def _box(boxtype, text_or_url, left, top, height, width, id, props_attr,
             'isQuote': False,
             'listType': None,
             'paragraphStyle': paragraphStyle,
-            'defaultText':['Text'],
             'size': 4,
-            'style': copy.deepcopy(paragraph_styles[paragraphStyle])
+            #'style': copy.deepcopy(paragraph_styles[paragraphStyle])
+            'style': paragraph_styles[paragraphStyle]
         }
 
         props['style'].update(
@@ -193,7 +193,6 @@ def _box(boxtype, text_or_url, left, top, height, width, id, props_attr,
         )
 
     elif boxtype == 'Image':
-        # default height and width of Presentation Image are 512
         props = {
             'height': 512,
             'imageName': None,
