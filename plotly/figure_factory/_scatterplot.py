@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 
-from plotly import exceptions, optional_imports
+from plotly import colors, exceptions, optional_imports
 from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
 from plotly.tools import make_subplots
@@ -386,9 +386,9 @@ def scatterplot_theme(dataframe, headers, diag, size, height, width, title,
 
         # Convert colormap to list of n RGB tuples
         if colormap_type == 'seq':
-            foo = utils.color_parser(colormap, utils.unlabel_rgb)
+            foo = colors.color_parser(colormap, colors.unlabel_rgb)
             foo = utils.n_colors(foo[0], foo[1], n_colors_len)
-            theme = utils.color_parser(foo, utils.label_rgb)
+            theme = colors.color_parser(foo, colors.label_rgb)
 
         if colormap_type == 'cat':
             # leave list of colors the same way
@@ -556,9 +556,9 @@ def scatterplot_theme(dataframe, headers, diag, size, height, width, title,
 
             # Convert colormap to list of n RGB tuples
             if colormap_type == 'seq':
-                foo = utils.color_parser(colormap, utils.unlabel_rgb)
+                foo = colors.color_parser(colormap, colors.unlabel_rgb)
                 foo = utils.n_colors(foo[0], foo[1], len(intervals))
-                theme = utils.color_parser(foo, utils.label_rgb)
+                theme = colors.color_parser(foo, colors.label_rgb)
 
             if colormap_type == 'cat':
                 # leave list of colors the same way

@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [2.1.1] - 2017-10-20
+## [2.2.0] - 2017-10-20
 ### Added
 - NEW Presentations API for Python! Run `help(plotly.presentation_objs.Presentations)` for help or check out the new [documentation](https://plot.ly/python/presentations-api/)
 

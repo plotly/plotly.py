@@ -47,6 +47,11 @@ DEFAULT_PLOT_OPTIONS = {
     'sharing': files.FILE_CONTENT[files.CONFIG_FILE]['sharing']
 }
 
+SHARING_ERROR_MSG = (
+    "Whoops, sharing can only be set to either 'public', 'private', or "
+    "'secret'."
+)
+
 # test file permissions and make sure nothing is corrupted
 tools.ensure_local_plotly_files()
 
@@ -1530,16 +1535,18 @@ class presentation_ops:
         Function for uploading presentations to Plotly.
 
         :param (dict) presentation: the JSON presentation to be uploaded. Use
-            plotly.presentation_objs.Presentation to create the presentation
-            from a string.
+            plotly.presentation_objs.Presentation to create presentations
+            from a Markdown-like string.
         :param (str) filename: the name of the presentation to be saved in
             your Plotly account. Will overwrite a presentation of the same
             name if it already exists in your files.
         :param (str) sharing: can be set to either 'public', 'private'
             or 'secret'. If 'public', your presentation will be viewable by
             all other users. If 'private' only you can see your presentation.
-            If 'secret', the url will be returned with a sharekey appended
-            to the url. Anyone with the url may view the presentation.
+            If it is set to 'secret', the url will be returned with a string
+            of random characters appended to the url which is called a
+            sharekey. The point of a sharekey is that it makes the url very
+            hard to guess, but anyone with the url can view the presentation.
         :param (bool) auto_open: automatically opens the presentation in the
             browser.
 
@@ -1547,11 +1554,12 @@ class presentation_ops:
         """
         if sharing == 'public':
             world_readable = True
-        elif sharing == 'private':
+        elif sharing in ['private', 'secret']:
             world_readable = False
-        elif sharing == 'secret':
-            world_readable = False
-
+        else:
+            raise exceptions.PlotlyError(
+                SHARING_ERROR_MSG
+            )
         data = {
             'content': json.dumps(presentation),
             'filename': filename,
@@ -1561,6 +1569,7 @@ class presentation_ops:
         # lookup if pre-existing filename already exists
         try:
             lookup_res = v2.files.lookup(filename)
+            lookup_res.raise_for_status()
             matching_file = json.loads(lookup_res.content)
 
             if matching_file['filetype'] != 'spectacle_presentation':
@@ -1783,8 +1792,7 @@ def create_animations(figure, filename=None, sharing='public', auto_open=True):
         body['share_key_enabled'] = True
     else:
         raise exceptions.PlotlyError(
-            "Whoops, sharing can only be set to either 'public', 'private', "
-            "or 'secret'."
+            SHARING_ERROR_MSG
         )
 
     response = v2.plots.create(body)

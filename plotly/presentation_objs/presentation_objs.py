@@ -11,9 +11,7 @@ import re
 import string
 import warnings
 
-from plotly import exceptions, optional_imports
-
-IPython = optional_imports.get_module('IPython')
+from plotly import exceptions
 
 HEIGHT = 700.0
 WIDTH = 1000.0
@@ -35,7 +33,7 @@ VALID_SLIDE_PROPS = ['class', 'transition', 'background-image',
                      'background-position', 'background-repeat',
                      'background-size', 'background_color']
 
-VALID_TRANSITIONS = ['slide',  'zoom', 'fade', 'spin']
+VALID_TRANSITIONS = ['slide', 'zoom', 'fade', 'spin']
 
 PRES_THEMES = ['moods', 'martik']
 
@@ -58,15 +56,6 @@ fontWeight_dict = {
     'Black': {'fontWeight': 900},
     'Black Italic': {'fontWeight': 900, 'fontStyle': 'italic'},
 }
-
-NEEDED_STYLE_ERROR_MESSAGE = (
-    "'left', 'top', 'width', and 'height' parameters must be "
-    "set equal to a number (percentage) or a number with "
-    "'px' at the end of it. For example in "
-    "\n\n.left=10;top=50px{{TEXT}}\n\n the top left corner of "
-    "the TEXT block will be set 10 percent from the left of "
-    "the presentation boarder, and 50 pixels from the top."
-)
 
 
 def list_of_options(iterable, conj='and', period=True):
@@ -95,66 +84,82 @@ def _generate_id(size):
 
     return id_str
 
-_paragraph_styles = {'Body': {'color': '#3d3d3d',
-                              'fontFamily': 'Open Sans',
-                              'fontSize': 11,
-                              'fontStyle': 'normal',
-                              'fontWeight': 400,
-                              'lineHeight': 'normal',
-                              'minWidth': 20,
-                              'opacity': 1,
-                              'textAlign': 'center',
-                              'textDecoration': 'none'},
-                     'Body Small': {'color': '#3d3d3d',
-                                    'fontFamily': 'Open Sans',
-                                    'fontSize': 10,
-                                    'fontStyle': 'normal',
-                                    'fontWeight': 400,
-                                    'lineHeight': 'normal',
-                                    'minWidth': 20,
-                                    'opacity': 1,
-                                    'textAlign': 'center',
-                                    'textDecoration': 'none'},
-                     'Caption': {'color': '#3d3d3d',
-                                 'fontFamily': 'Open Sans',
-                                 'fontSize': 11,
-                                 'fontStyle': 'italic',
-                                 'fontWeight': 400,
-                                 'lineHeight': 'normal',
-                                 'minWidth': 20,
-                                 'opacity': 1,
-                                 'textAlign': 'center',
-                                 'textDecoration': 'none'},
-                     'Heading 1': {'color': '#3d3d3d',
-                                   'fontFamily': 'Open Sans',
-                                   'fontSize': 26,
-                                   'fontStyle': 'normal',
-                                   'fontWeight': 400,
-                                   'lineHeight': 'normal',
-                                   'minWidth': 20,
-                                   'opacity': 1,
-                                   'textAlign': 'center',
-                                   'textDecoration': 'none'},
-                     'Heading 2': {'color': '#3d3d3d',
-                                   'fontFamily': 'Open Sans',
-                                   'fontSize': 20,
-                                   'fontStyle': 'normal',
-                                   'fontWeight': 400,
-                                   'lineHeight': 'normal',
-                                   'minWidth': 20,
-                                   'opacity': 1,
-                                   'textAlign': 'center',
-                                   'textDecoration': 'none'},
-                     'Heading 3': {'color': '#3d3d3d',
-                                   'fontFamily': 'Open Sans',
-                                   'fontSize': 11,
-                                   'fontStyle': 'normal',
-                                   'fontWeight': 700,
-                                   'lineHeight': 'normal',
-                                   'minWidth': 20,
-                                   'opacity': 1,
-                                   'textAlign': 'center',
-                                   'textDecoration': 'none'}}
+
+paragraph_styles = {
+    'Body': {
+        'color': '#3d3d3d',
+        'fontFamily': 'Open Sans',
+        'fontSize': 11,
+        'fontStyle': 'normal',
+        'fontWeight': 400,
+        'lineHeight': 'normal',
+        'minWidth': 20,
+        'opacity': 1,
+        'textAlign': 'center',
+        'textDecoration': 'none',
+        'wordBreak': 'break-word'
+    },
+    'Body Small': {
+        'color': '#3d3d3d',
+        'fontFamily': 'Open Sans',
+        'fontSize': 10,
+        'fontStyle': 'normal',
+        'fontWeight': 400,
+        'lineHeight': 'normal',
+        'minWidth': 20,
+        'opacity': 1,
+        'textAlign': 'center',
+        'textDecoration': 'none'
+    },
+    'Caption': {
+        'color': '#3d3d3d',
+        'fontFamily': 'Open Sans',
+        'fontSize': 11,
+        'fontStyle': 'italic',
+        'fontWeight': 400,
+        'lineHeight': 'normal',
+        'minWidth': 20,
+        'opacity': 1,
+        'textAlign': 'center',
+        'textDecoration': 'none'
+    },
+    'Heading 1': {
+        'color': '#3d3d3d',
+        'fontFamily': 'Open Sans',
+        'fontSize': 26,
+        'fontStyle': 'normal',
+        'fontWeight': 400,
+        'lineHeight': 'normal',
+        'minWidth': 20,
+        'opacity': 1,
+        'textAlign': 'center',
+        'textDecoration': 'none',
+    },
+    'Heading 2': {
+        'color': '#3d3d3d',
+        'fontFamily': 'Open Sans',
+        'fontSize': 20,
+        'fontStyle': 'normal',
+        'fontWeight': 400,
+        'lineHeight': 'normal',
+        'minWidth': 20,
+        'opacity': 1,
+        'textAlign': 'center',
+        'textDecoration': 'none'
+    },
+    'Heading 3': {
+        'color': '#3d3d3d',
+        'fontFamily': 'Open Sans',
+        'fontSize': 11,
+        'fontStyle': 'normal',
+        'fontWeight': 700,
+        'lineHeight': 'normal',
+        'minWidth': 20,
+        'opacity': 1,
+        'textAlign': 'center',
+        'textDecoration': 'none'
+    }
+}
 
 
 def _empty_slide(transition, id):
@@ -175,8 +180,9 @@ def _box(boxtype, text_or_url, left, top, height, width, id, props_attr,
             'isQuote': False,
             'listType': None,
             'paragraphStyle': paragraphStyle,
+            'defaultText':['Text'],
             'size': 4,
-            'style': copy.deepcopy(_paragraph_styles[paragraphStyle])
+            'style': copy.deepcopy(paragraph_styles[paragraphStyle])
         }
 
         props['style'].update(
@@ -187,6 +193,7 @@ def _box(boxtype, text_or_url, left, top, height, width, id, props_attr,
         )
 
     elif boxtype == 'Image':
+        # default height and width of Presentation Image are 512
         props = {
             'height': 512,
             'imageName': None,
@@ -200,10 +207,14 @@ def _box(boxtype, text_or_url, left, top, height, width, id, props_attr,
             'width': 512
         }
     elif boxtype == 'Plotly':
+        if '?share_key' in text_or_url:
+            src = text_or_url
+        else:
+            src = text_or_url + '.embed?link=false'
         props = {
             'frameBorder': 0,
             'scrolling': 'no',
-            'src': text_or_url + '.embed?link=false',
+            'src': src,
             'style': {'height': height,
                       'left': left,
                       'position': 'absolute',
@@ -267,19 +278,9 @@ def _return_box_position(left, top, height, width):
         'height': height,
         'width': width,
     }
-    for key in values_dict.keys():
+    for key in iter(values_dict):
         if isinstance(values_dict[key], str):
-            if values_dict[key][-2:] != 'px':
-                raise exceptions.PlotlyError(
-                    NEEDED_STYLE_ERROR_MESSAGE
-                )
-            try:
-                var = float(values_dict[key][: -2])
-            except ValueError:
-                raise exceptions.PlotlyError(
-                    NEEDED_STYLE_ERROR_MESSAGE
-                )
-
+            var = float(values_dict[key][: -2])
         else:
             var = _percentage_to_pixel(values_dict[key], key)
         values_dict[key] = var
@@ -289,10 +290,8 @@ def _return_box_position(left, top, height, width):
 
 
 def _remove_extra_whitespace_from_line(line):
-    while line.startswith('\n') or line.startswith(' '):
-        line = line[1:]
-    while line.endswith('\n') or line.endswith(' '):
-        line = line[: -1]
+    line = line.lstrip()
+    line = line.rstrip()
     return line
 
 
@@ -304,7 +303,7 @@ def _list_of_slides(markdown_string):
         '\n--\n|\n---\n|\n----\n|\n-----\n|\n------\n', markdown_string
     )
     list_of_slides = []
-    for j, text in enumerate(text_blocks):
+    for text in text_blocks:
         if not all(char in ['\n', '-', ' '] for char in text):
             list_of_slides.append(text)
 
@@ -510,24 +509,24 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
         margin = 18  # in pxs
 
         # set Headings styles
-        _paragraph_styles['Heading 1'].update(
+        paragraph_styles['Heading 1'].update(
             {'color': '#0D0A1E',
              'fontFamily': 'Raleway',
              'fontSize': 55,
              'fontWeight': fontWeight_dict['Bold']['fontWeight']}
         )
 
-        _paragraph_styles['Heading 2'] = copy.deepcopy(
-            _paragraph_styles['Heading 1']
+        paragraph_styles['Heading 2'] = copy.deepcopy(
+            paragraph_styles['Heading 1']
         )
-        _paragraph_styles['Heading 2'].update({'fontSize': 36})
-        _paragraph_styles['Heading 3'] = copy.deepcopy(
-            _paragraph_styles['Heading 1']
+        paragraph_styles['Heading 2'].update({'fontSize': 36})
+        paragraph_styles['Heading 3'] = copy.deepcopy(
+            paragraph_styles['Heading 1']
         )
-        _paragraph_styles['Heading 3'].update({'fontSize': 30})
+        paragraph_styles['Heading 3'].update({'fontSize': 30})
 
         # set Body style
-        _paragraph_styles['Body'].update(
+        paragraph_styles['Body'].update(
             {'color': '#96969C',
              'fontFamily': 'Roboto',
              'fontSize': 16,
@@ -549,9 +548,8 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
             title_font_color = '#F4FAFB'
             text_font_color = '#F4FAFB'
         elif num_of_boxes == 1:
-            if code_blocks != [] or (
-                url_lines != [] and 'https://plot.ly' in url_lines[0]
-            ):
+            if code_blocks != [] or (url_lines != [] and
+                                     'https://plot.ly' in url_lines[0]):
                 if code_blocks != []:
                     w_range = 40
                 else:
@@ -640,24 +638,24 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
         code_theme = 'tomorrowNight'
 
         # set Headings styles
-        _paragraph_styles['Heading 1'].update(
+        paragraph_styles['Heading 1'].update(
             {'color': '#000016',
              'fontFamily': 'Roboto',
              'fontSize': 55,
              'fontWeight': fontWeight_dict['Black']['fontWeight']}
         )
 
-        _paragraph_styles['Heading 2'] = copy.deepcopy(
-            _paragraph_styles['Heading 1']
+        paragraph_styles['Heading 2'] = copy.deepcopy(
+            paragraph_styles['Heading 1']
         )
-        _paragraph_styles['Heading 2'].update({'fontSize': 36})
-        _paragraph_styles['Heading 3'] = copy.deepcopy(
-            _paragraph_styles['Heading 1']
+        paragraph_styles['Heading 2'].update({'fontSize': 36})
+        paragraph_styles['Heading 3'] = copy.deepcopy(
+            paragraph_styles['Heading 1']
         )
-        _paragraph_styles['Heading 3'].update({'fontSize': 30})
+        paragraph_styles['Heading 3'].update({'fontSize': 30})
 
         # set Body style
-        _paragraph_styles['Body'].update(
+        paragraph_styles['Body'].update(
             {'color': '#000016',
              'fontFamily': 'Roboto',
              'fontSize': 16,
@@ -847,7 +845,6 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
             )
 
     # set text style attributes
-
     title_style_attr = {}
     text_style_attr = {'textAlign': text_textAlign}
 
@@ -908,14 +905,15 @@ class Presentation(dict):
         original aspect ratios.
         Default = False.
 
-    For examples see the documentation: https://plot.ly/python/presentations-api/
+    For examples see the documentation:\n
+    https://plot.ly/python/presentations-api/
     """
     def __init__(self, markdown_string=None, style='moods', imgStretch=False):
         self['presentation'] = {
             'slides': [],
             'slidePreviews': [None for _ in range(496)],
             'version': '0.1.3',
-            'paragraphStyles': _paragraph_styles
+            'paragraphStyles': paragraph_styles
         }
 
         if markdown_string:
@@ -958,9 +956,8 @@ class Presentation(dict):
                     code_indices.append(j)
 
             for k in range(int(len(code_indices) / 2)):
-                l = 2 * k
                 code_blocks.append(
-                    slide[code_indices[l]:code_indices[l + 1]]
+                    slide[code_indices[2 * k]:code_indices[(2 * k) + 1]]
                 )
 
             lang_and_code_tuples = []
@@ -989,7 +986,7 @@ class Presentation(dict):
             text_lines = []
             inCode = False
 
-            for index, line in enumerate(lines_in_slide):
+            for line in lines_in_slide:
                 # inCode handling
                 if line[:3] == '```' and len(line) > 3:
                     inCode = True
@@ -1042,10 +1039,9 @@ class Presentation(dict):
             num_of_boxes = len(url_lines) + len(lang_and_code_tuples)
 
             (specs_for_boxes, specs_for_title, specs_for_text, bkgd_color,
-             title_style_attr, text_style_attr, code_theme) = _return_layout_specs(
-                num_of_boxes, url_lines, title_lines, text_block, code_blocks,
-                slide_num, style
-            )
+             title_style_attr, text_style_attr,
+             code_theme) = _return_layout_specs(num_of_boxes, url_lines,
+                title_lines, text_block, code_blocks, slide_num, style)
 
             # background color
             self._color_background(bkgd_color, slide_num)
@@ -1112,18 +1108,18 @@ class Presentation(dict):
                                  height=specs[2], width=specs[3],
                                  slide=slide_num)
 
-        if imgStretch:
-            for slide in self['presentation']['slides']:
-                for child in slide['children']:
-                    if child['type'] in ['Image', 'Plotly']:
-                        deep_child = child['props']['style']
-                        width = deep_child['width']
-                        height = deep_child['height']
-
-                        if width >= height:
-                            deep_child['max-width'] = deep_child.pop('width')
-                        else:
-                            deep_child['max-height'] = deep_child.pop('height')
+        #if imgStretch:
+        #    for slide in self['presentation']['slides']:
+        #        for child in slide['children']:
+        #            if child['type'] in ['Image', 'Plotly']:
+        #                deep_child = child['props']['style']
+        #                width = deep_child['width']
+        #                height = deep_child['height']
+#
+#                        if width >= height:
+#                            deep_child['max-width'] = deep_child.pop('width')
+#                        else:
+#                            deep_child['max-height'] = deep_child.pop('height')
 
     def _add_empty_slide(self):
         self['presentation']['slides'].append(
