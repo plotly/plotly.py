@@ -35081,6 +35081,7 @@
                             "role": "info",
                             "valType": "string"
                         },
+                        "description": "",
                         "editType": "calc",
                         "family": {
                             "arrayOk": true,
@@ -35101,6 +35102,7 @@
                         "size": {
                             "arrayOk": true,
                             "editType": "calc",
+                            "min": 1,
                             "role": "style",
                             "valType": "number"
                         },
@@ -35134,6 +35136,7 @@
                     "line": {
                         "color": {
                             "arrayOk": true,
+                            "dflt": "grey",
                             "editType": "calc",
                             "role": "style",
                             "valType": "color"
@@ -35148,6 +35151,7 @@
                         "role": "object",
                         "width": {
                             "arrayOk": true,
+                            "dflt": 1,
                             "editType": "calc",
                             "role": "style",
                             "valType": "number"
@@ -35216,7 +35220,7 @@
                 },
                 "columnwidth": {
                     "arrayOk": true,
-                    "description": "The width of cells.",
+                    "description": "The width of columns expressed as a ratio. Columns fill the available width in proportion of their specified column widths.",
                     "dflt": null,
                     "editType": "calc",
                     "role": "style",
@@ -35345,6 +35349,7 @@
                             "role": "info",
                             "valType": "string"
                         },
+                        "description": "",
                         "editType": "calc",
                         "family": {
                             "arrayOk": true,
@@ -35365,6 +35370,7 @@
                         "size": {
                             "arrayOk": true,
                             "editType": "calc",
+                            "min": 1,
                             "role": "style",
                             "valType": "number"
                         },
@@ -35398,6 +35404,7 @@
                     "line": {
                         "color": {
                             "arrayOk": true,
+                            "dflt": "grey",
                             "editType": "calc",
                             "role": "style",
                             "valType": "color"
@@ -35412,6 +35419,7 @@
                         "role": "object",
                         "width": {
                             "arrayOk": true,
+                            "dflt": 1,
                             "editType": "calc",
                             "role": "style",
                             "valType": "number"
