@@ -53,37 +53,10 @@ class TestPresentation(TestCase):
 
 
     def test_expected_pres(self):
-        md_string = """
-        # title
-        ---
-        transition: zoom, fade, fade
-        # Colors
-        Colors are everywhere around us.
-        Plotly(https://plot.ly/~AdamKulidjian/3564/)
-        Image(https://raw.githubusercontent.com/jackparmer/gradient-backgrounds/master/moods1.png)
-        ```python
-        x=1
-        ```
-        ---
-        Plotly(https://plot.ly/~AdamKulidjian/3564/)
-        Plotly(https://plot.ly/~AdamKulidjian/3564/)
-        Plotly(https://plot.ly/~AdamKulidjian/3564/)
-        Plotly(https://plot.ly/~AdamKulidjian/3564/)
-        Plotly(https://plot.ly/~AdamKulidjian/3564/)
-        Plotly(https://plot.ly/~AdamKulidjian/3564/)
-        Plotly(https://plot.ly/~AdamKulidjian/3564/)
-        ---
-        """
-
-        markdown_string = """
-        # things
-        happy happy joy joy
-        ---
-        # yes
-        """
+        markdown_string = "# title\n---\ntransition: zoom, fade, fade\n# Colors\nColors are everywhere around us.\nPlotly(https://plot.ly/~AdamKulidjian/3564/)\nImage(https://raw.githubusercontent.com/jackparmer/gradient-backgrounds/master/moods1.png)\n```python\nx=1\n```\n---\nPlotly(https://plot.ly/~AdamKulidjian/3564/)\nPlotly(https://plot.ly/~AdamKulidjian/3564/)\nPlotly(https://plot.ly/~AdamKulidjian/3564/)\nPlotly(https://plot.ly/~AdamKulidjian/3564/)\nPlotly(https://plot.ly/~AdamKulidjian/3564/)\nPlotly(https://plot.ly/~AdamKulidjian/3564/)\nPlotly(https://plot.ly/~AdamKulidjian/3564/)\n---\n"
 
         my_pres = pres.Presentation(
-            md_string, style='moods', imgStretch=False
+            markdown_string, style='moods', imgStretch=False
         )
 
         exp_pres = {'presentation': {'paragraphStyles': {'Body': {'color': '#000016',
@@ -358,9 +331,33 @@ class TestPresentation(TestCase):
                 exp_pres['presentation'][k]
             )
 
-        #self.assertEqual(
-        #    my_pres['presentation']['slides'][0],
-        #    exp_pres['presentation']['slides'][0]
-        #)
+        self.assertEqual(
+            len(my_pres['presentation']['slides']),
+            len(exp_pres['presentation']['slides'])
+        )
 
-        self.assertEqual(len(my_pres['presentation']['slides']), 1)
+        for slide_idx in range(len(my_pres['presentation']['slides'])):
+            childs = my_pres['presentation']['slides'][slide_idx]['children']
+            # transitions and background color
+            self.assertEqual(
+                my_pres['presentation']['slides'][slide_idx]['props'],
+                exp_pres['presentation']['slides'][slide_idx]['props']
+            )
+            for child_idx in range(len(childs)):
+                # check urls
+                if (my_pres['presentation']['slides'][slide_idx]['children']
+                    [child_idx]['type'] in ['Image', 'Plotly']):
+                    self.assertEqual(
+                        (my_pres['presentation']['slides'][slide_idx]
+                         ['children'][child_idx]['props']),
+                        (exp_pres['presentation']['slides'][slide_idx]
+                         ['children'][child_idx]['props'])
+                    )
+
+                # styles in children
+                self.assertEqual(
+                    (my_pres['presentation']['slides'][slide_idx]
+                     ['children'][child_idx]['props']),
+                    (exp_pres['presentation']['slides'][slide_idx]
+                     ['children'][child_idx]['props'])
+                )

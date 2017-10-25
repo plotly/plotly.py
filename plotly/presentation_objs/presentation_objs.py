@@ -63,6 +63,7 @@ def list_of_options(iterable, conj='and', period=True):
     template = (len(iterable) - 2)*'{}, ' + '{} ' + conj + ' {}' + period*'.'
     return template.format(*iterable)
 
+
 # Error Messages
 STYLE_ERROR = "Your presentation style must be {}".format(
     list_of_options(PRES_THEMES, conj='or', period=True)
@@ -87,6 +88,7 @@ LANG_ERROR = (
         VALID_LANGUAGES
     )
 )
+
 
 def _generate_id(size):
     letters_and_numbers = string.ascii_letters
@@ -208,6 +210,8 @@ def _box(boxtype, text_or_url, left, top, height, width, id, props_attr,
         )
 
     elif boxtype == 'Image':
+        # height, width are set to default 512
+        # as set by the Presentation Editor
         props = {
             'height': 512,
             'imageName': None,
@@ -1017,8 +1021,10 @@ class Presentation(dict):
 
             (specs_for_boxes, specs_for_title, specs_for_text, bkgd_color,
              title_style_attr, text_style_attr,
-             code_theme) = _return_layout_specs(num_of_boxes, url_lines,
-                title_lines, text_block, code_blocks, slide_num, style)
+             code_theme) = _return_layout_specs(
+                num_of_boxes, url_lines, title_lines, text_block, code_blocks,
+                slide_num, style
+            )
 
             # background color
             self._color_background(bkgd_color, slide_num)
