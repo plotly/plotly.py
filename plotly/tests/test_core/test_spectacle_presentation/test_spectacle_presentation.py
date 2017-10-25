@@ -19,10 +19,10 @@ class TestPresentation(TestCase):
         # one slide
         """
 
-        message = 'Your presentation style must be moods or martik.'
-
-        self.assertRaisesRegexp(PlotlyError, message, pres.Presentation,
-                                markdown_string, style='foo')
+        self.assertRaisesRegexp(
+            PlotlyError, pres.presentation_objs.STYLE_ERROR,
+            pres.Presentation, markdown_string, style='foo'
+        )
 
     def test_open_code_block(self):
         markdown_string = """
@@ -33,19 +33,10 @@ class TestPresentation(TestCase):
         print x
         """
 
-        message = (
-            "If you are putting a block of code into your markdown "
-            "presentation, make sure your denote the start and end "
-            "of the code environment with the '```' characters. For "
-            "example, your markdown string would include something "
-            "like:\n\n```python\nx = 2\ny = 1\nprint x\n```\n\n"
-            "Notice how the language that you want the code to be "
-            "displayed in is immediately to the right of first "
-            "entering '```', i.e. '```python'."
+        self.assertRaisesRegexp(
+            PlotlyError, pres.presentation_objs.CODE_ENV_ERROR,
+            pres.Presentation, markdown_string, style='moods'
         )
-
-        self.assertRaisesRegexp(PlotlyError, message, pres.Presentation,
-                                markdown_string, style='moods')
 
     def test_invalid_code_language(self):
         markdown_string = """
@@ -55,22 +46,26 @@ class TestPresentation(TestCase):
         ```
         """
 
-        message = (
-            "The language of your code block should be "
-            "clearly indicated after the first ``` that "
-            "begins the code block. The valid languages to "
-            "choose from are" + pres.presentation_objs.list_of_options(
-                pres.presentation_objs.VALID_LANGUAGES
-            )
+        self.assertRaisesRegexp(
+            PlotlyError, pres.presentation_objs.LANG_ERROR, pres.Presentation,
+            markdown_string, style='moods'
         )
 
-        self.assertRaisesRegexp(PlotlyError, message, pres.Presentation,
-                                markdown_string, style='moods')
 
     def test_expected_pres(self):
-        markdown_string_empty = "\n#title\n"
+        markdown_string = """
+        # title
+        ---
+        # Colors
+        Colors are everywhere around us.
+        Plotly(https://plot.ly/~AdamKulidjian/3564/)
+        Image(https://raw.githubusercontent.com/jackparmer/gradient-backgrounds/master/moods1.png)
+        ```python
+        x=1
+        ```
+        """
 
-        my_pres = pres.Presentation(markdown_string_empty, style='moods')
+        my_pres = pres.Presentation(markdown_string, style='moods')
 
         exp_pres = {
             'presentation': {'paragraphStyles': {
