@@ -202,14 +202,14 @@ def _box(boxtype, text_or_url, left, top, height, width, id, props_attr,
           'fontStyle': 'normal',
           'fontWeight': 400,
           'height': height,
-          'left': 0.0,
+          'left': left,
           'lineHeight': 'normal',
           'minWidth': 20,
           'opacity': 1,
           'textAlign': 'center',
           'textDecoration': 'none',
-          'top': 350.0,
-          'width': 1000.0}}
+          'top': top,
+          'width': width}}
 
     elif boxtype == 'Image':
         props = {
@@ -333,48 +333,6 @@ def _list_of_slides(markdown_string):
         warnings.warn(msg)
 
     return list_of_slides
-
-
-def _boxes_in_slide(slide):
-    boxes = []
-    slide_copy = copy.deepcopy(slide)
-    prop_split = ';'
-    prop_val_sep = '='
-
-    while '.left' in slide_copy:
-        prop_dict = {}
-        left_idx = slide_copy.find('.left')
-        l_brace_idx = slide_copy[left_idx:].find('{{') + left_idx
-        properties = slide_copy[left_idx + 1: l_brace_idx].split(
-            prop_split
-        )
-
-        # remove white chars from properties
-        empty_props = []
-        for prop in properties:
-            if all(char in [' ', '\n'] for char in prop):
-                empty_props.append(prop)
-
-        for prop in empty_props:
-            properties.remove(prop)
-
-        for prop in properties:
-            prop_name = prop.split(prop_val_sep)[0]
-            prop_val = prop.split(prop_val_sep)[1]
-
-            try:
-                prop_val = float(prop_val)
-            except ValueError:
-                pass
-            prop_dict[prop_name] = prop_val
-
-        r_brace_idx = slide_copy[l_brace_idx:].find('}}') + l_brace_idx
-        box = slide_copy[l_brace_idx + 2: r_brace_idx]
-        box_no_breaks = _remove_extra_whitespace_from_line(box)
-        boxes.append((box_no_breaks, prop_dict))
-
-        slide_copy = slide_copy[r_brace_idx + 2:]
-    return boxes
 
 
 def _top_spec_for_text_at_bottom(text_block, width_per, per_from_bottom=0,
@@ -1058,7 +1016,7 @@ class Presentation(dict):
                     box='Text', text_or_url=title,
                     left=specs_for_title[0], top=specs_for_title[1],
                     height=specs_for_title[2], width=specs_for_title[3],
-                    slide=slide_num, style_attr=title_style_attr,
+                    slide=slide_num, #style_attr=title_style_attr,
                     paragraphStyle='Heading {}'.format(
                         min(num_hashes, 3)
                     )
