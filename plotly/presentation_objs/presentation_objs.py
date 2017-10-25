@@ -12,6 +12,7 @@ import string
 import warnings
 
 from plotly import exceptions
+from plotly.config import get_config
 
 HEIGHT = 700.0
 WIDTH = 1000.0
@@ -47,6 +48,7 @@ fontWeight_dict = {
 }
 
 
+
 def list_of_options(iterable, conj='and', period=True):
     """
     Returns an English listing of objects seperated by commas ','
@@ -61,6 +63,30 @@ def list_of_options(iterable, conj='and', period=True):
     template = (len(iterable) - 2)*'{}, ' + '{} ' + conj + ' {}' + period*'.'
     return template.format(*iterable)
 
+# Error Messages
+STYLE_ERROR = "Your presentation style must be {}".format(
+    list_of_options(PRES_THEMES, conj='or', period=True)
+)
+
+CODE_ENV_ERROR = (
+    "If you are putting a block of code into your markdown "
+    "presentation, make sure your denote the start and end "
+    "of the code environment with the '```' characters. For "
+    "example, your markdown string would include something "
+    "like:\n\n```python\nx = 2\ny = 1\nprint x\n```\n\n"
+    "Notice how the language that you want the code to be "
+    "displayed in is immediately to the right of first "
+    "entering '```', i.e. '```python'."
+)
+
+LANG_ERROR = (
+    "The language of your code block should be "
+    "clearly indicated after the first ``` that "
+    "begins the code block. The valid languages to "
+    "choose from are" + list_of_options(
+        VALID_LANGUAGES
+    )
+)
 
 def _generate_id(size):
     letters_and_numbers = string.ascii_letters
@@ -287,9 +313,8 @@ def _list_of_slides(markdown_string):
     if not markdown_string.endswith('\n---\n'):
         markdown_string += '\n---\n'
 
-    text_blocks = re.split(
-        '\n--\n|\n---\n|\n----\n|\n-----\n|\n------\n', markdown_string
-    )
+    text_blocks = re.split('\n-{2,}\n', markdown_string)
+
     list_of_slides = []
     for text in text_blocks:
         if not all(char in ['\n', '-', ' '] for char in text):
@@ -307,6 +332,16 @@ def _list_of_slides(markdown_string):
 
 def _top_spec_for_text_at_bottom(text_block, width_per, per_from_bottom=0,
                                  min_top=30):
+    # This function ensures that if there is a large block of
+    # text in your slide it will not overflow off the bottom
+    # of the slide.
+    # The input for this function are a block of text and the
+    # params that define where it will be placed in the slide.
+    # The function makes some calculations and will output a
+    # 'top' value (i.e. the left, top, height, width css params)
+    # so that the text block will come down to some specified
+    # distance from the bottom of the page.
+
     # TODO: customize this function for different fonts/sizes
     max_lines = 37
     one_char_percent_width = 0.764
@@ -495,7 +530,8 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
             text_font_color = '#F4FAFB'
         elif num_of_boxes == 1:
             if code_blocks != [] or (url_lines != [] and
-                                     'https://plot.ly' in url_lines[0]):
+                                     get_config()['plotly_domain'] in
+                                     url_lines[0]):
                 if code_blocks != []:
                     w_range = 40
                 else:
@@ -675,7 +711,8 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
                     specs_for_text = (
                         2, text_top, 2, width_per - 2
                     )
-            elif url_lines != [] and 'https://plot.ly' in url_lines[0]:
+            elif (url_lines != [] and
+                  get_config()['plotly_domain'] in url_lines[0]):
                 # url
                 if slide_num % 2 == 0:
                     # top half
@@ -769,7 +806,7 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
                 num_of_boxes, grouptype='middle',
                 width_range=100, height_range=40, middle_center=30
             )
-            specs_for_title = (0, 3, 20, 100)
+            specs_for_title = (0, 0, 20, 100)
             specs_for_text = (
                 2.5, text_top, 2, width_per
             )
@@ -882,16 +919,7 @@ class Presentation(dict):
 
             # validate blocks of code
             if slide.count('```') % 2 != 0:
-                raise exceptions.PlotlyError(
-                    "If you are putting a block of code into your markdown "
-                    "presentation, make sure your denote the start and end "
-                    "of the code environment with the '```' characters. For "
-                    "example, your markdown string would include something "
-                    "like:\n\n```python\nx = 2\ny = 1\nprint x\n```\n\n"
-                    "Notice how the language that you want the code to be "
-                    "displayed in is immediately to the right of first "
-                    "entering '```', i.e. '```python'."
-                )
+                raise exceptions.PlotlyError(CODE_ENV_ERROR)
 
             # find code blocks
             code_indices = []
@@ -944,11 +972,14 @@ class Presentation(dict):
                         title_lines.append(line)
                     elif (_url_parens_contained('Plotly', line) or
                           _url_parens_contained('Image', line)):
-                        if line.startswith('Plotly(') and 'plot.ly' not in line:
+                        if (line.startswith('Plotly(') and
+                            get_config()['plotly_domain'] not in line):
                             raise exceptions.PlotlyError(
                                 "You are attempting to insert a Plotly Chart "
                                 "in your slide but your url does not have "
-                                "plot.ly in it."
+                                "your plotly domain '{}' in it.".format(
+                                    get_config()['plotly_domain']
+                                )
                             )
                         url_lines.append(line)
                     else:
@@ -1042,7 +1073,7 @@ class Presentation(dict):
                                  slide=slide_num, props_attr=props_attr)
                 else:
                     # url
-                    if 'https://plot.ly' in url_or_code:
+                    if get_config()['plotly_domain'] in url_or_code:
                         box_name = 'Plotly'
                     else:
                         box_name = 'Image'
@@ -1053,18 +1084,18 @@ class Presentation(dict):
                                  height=specs[2], width=specs[3],
                                  slide=slide_num)
 
-        #if imgStretch:
-        #    for slide in self['presentation']['slides']:
-        #        for child in slide['children']:
-        #            if child['type'] in ['Image', 'Plotly']:
-        #                deep_child = child['props']['style']
-        #                width = deep_child['width']
-        #                height = deep_child['height']
-#
-#                        if width >= height:
-#                            deep_child['max-width'] = deep_child.pop('width')
-#                        else:
-#                            deep_child['max-height'] = deep_child.pop('height')
+        if imgStretch:
+            for slide in self['presentation']['slides']:
+                for child in slide['children']:
+                    if child['type'] in ['Image', 'Plotly']:
+                        deep_child = child['props']['style']
+                        width = deep_child['width']
+                        height = deep_child['height']
+
+                        if width >= height:
+                            deep_child['max-width'] = deep_child.pop('width')
+                        else:
+                            deep_child['max-height'] = deep_child.pop('height')
 
     def _add_empty_slide(self):
         self['presentation']['slides'].append(
