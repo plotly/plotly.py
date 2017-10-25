@@ -17,21 +17,10 @@ HEIGHT = 700.0
 WIDTH = 1000.0
 
 CODEPANE_THEMES = ['tomorrow', 'tomorrowNight']
-VALID_STYLE_KEYS = ['fontFamily', 'fontSize', 'margin', 'position',
-                    'textAlign', 'opacity', 'color', 'fontStyle',
-                    'fontWeight', 'lineHeight', 'minWidth', 'textDecoration',
-                    'wordBreak']
-VALID_PROPS_KEYS = ['theme', 'listType', 'href']
-NEEDED_STYLE_KEYS = ['left', 'top', 'height', 'width']
+
 VALID_LANGUAGES = ['cpp', 'cs', 'css', 'fsharp', 'go', 'haskell', 'java',
                    'javascript', 'jsx', 'julia', 'xml', 'matlab', 'php',
                    'python', 'r', 'ruby', 'scala', 'sql', 'yaml']
-VALID_CLASS_STYLES = ['pictureleft', 'pictureright', 'picturemiddle',
-                      'pictureleft_tiled', 'pictureright_tiled']
-
-VALID_SLIDE_PROPS = ['class', 'transition', 'background-image',
-                     'background-position', 'background-repeat',
-                     'background-size', 'background_color']
 
 VALID_TRANSITIONS = ['slide', 'zoom', 'fade', 'spin']
 
@@ -176,40 +165,21 @@ def _box(boxtype, text_or_url, left, top, height, width, id, props_attr,
     if boxtype == 'Text':
         children_list = text_or_url.split('\n')
 
-        #props = {
-        #    'isQuote': False,
-        #    'listType': None,
-        #    'paragraphStyle': paragraphStyle,
-        #    'size': 4,
-        #    'style': copy.deepcopy(paragraph_styles[paragraphStyle])
-        #    #'style': paragraph_styles[paragraphStyle]
-        #}
+        props = {
+            'isQuote': False,
+            'listType': None,
+            'paragraphStyle': paragraphStyle,
+            'size': 4,
+            'style': copy.deepcopy(paragraph_styles[paragraphStyle])
+        }
 
-        #props['style'].update(
-        #    {'height': height,
-        #     'left': left,
-        #     'top': top,
-        #     'width': width}
-        #)
-
-        props = {'isQuote': False,
-         'listType': None,
-         'paragraphStyle': 'Heading 1',
-         'size': 4,
-         'style': {'color': '#3d3d3d',
-          'fontFamily': 'Open Sans',
-          'fontSize': 26,
-          'fontStyle': 'normal',
-          'fontWeight': 400,
-          'height': height,
-          'left': left,
-          'lineHeight': 'normal',
-          'minWidth': 20,
-          'opacity': 1,
-          'textAlign': 'center',
-          'textDecoration': 'none',
-          'top': top,
-          'width': width}}
+        props['style'].update(
+            {'height': height,
+             'left': left,
+             'top': top,
+             'width': width,
+             'position': 'absolute'}
+        )
 
     elif boxtype == 'Image':
         props = {
@@ -268,10 +238,10 @@ def _box(boxtype, text_or_url, left, top, height, width, id, props_attr,
         'type': boxtype
     }
 
-    #if boxtype == 'Text':
-    #    child['defaultHeight'] = 36
-    #    child['defaultWidth'] = 52
-    #    child['resizeVertical'] = False
+    if boxtype == 'Text':
+        child['defaultHeight'] = 36
+        child['defaultWidth'] = 52
+        child['resizeVertical'] = False
     if boxtype == 'CodePane':
         child['defaultText'] = 'Code'
 
@@ -613,7 +583,30 @@ def _return_layout_specs(num_of_boxes, url_lines, title_lines, text_block,
         margin = 18
         code_theme = 'tomorrowNight'
 
-        # fill back
+        # set Headings styles
+        paragraph_styles['Heading 1'].update(
+            {'color': '#000016',
+             'fontFamily': 'Roboto',
+             'fontSize': 55,
+             'fontWeight': fontWeight_dict['Black']['fontWeight']}
+        )
+
+        paragraph_styles['Heading 2'] = copy.deepcopy(
+            paragraph_styles['Heading 1']
+        )
+        paragraph_styles['Heading 2'].update({'fontSize': 36})
+        paragraph_styles['Heading 3'] = copy.deepcopy(
+            paragraph_styles['Heading 1']
+        )
+        paragraph_styles['Heading 3'].update({'fontSize': 30})
+
+        # set Body style
+        paragraph_styles['Body'].update(
+            {'color': '#000016',
+             'fontFamily': 'Roboto',
+             'fontSize': 16,
+             'fontWeight': fontWeight_dict['Thin']['fontWeight']}
+        )
 
         bkgd_color = '#FFFFFF'
         title_font_color = None
@@ -996,8 +989,6 @@ class Presentation(dict):
              code_theme) = _return_layout_specs(num_of_boxes, url_lines,
                 title_lines, text_block, code_blocks, slide_num, style)
 
-            print specs_for_title
-
             # background color
             self._color_background(bkgd_color, slide_num)
 
@@ -1011,13 +1002,12 @@ class Presentation(dict):
                     num_hashes += 1
                 title = _remove_extra_whitespace_from_line(title)
 
-                print specs_for_title
                 self._insert(
                     box='Text', text_or_url=title,
                     left=specs_for_title[0], top=specs_for_title[1],
                     height=specs_for_title[2], width=specs_for_title[3],
-                    slide=slide_num, #style_attr=title_style_attr,
-                    paragraphStyle='Heading {}'.format(
+                    slide=slide_num, style_attr=title_style_attr,
+                    paragraphStyle='Heading 1'.format(
                         min(num_hashes, 3)
                     )
                 )
