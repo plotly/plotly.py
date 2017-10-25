@@ -35220,7 +35220,7 @@
                 },
                 "columnwidth": {
                     "arrayOk": true,
-                    "description": "The width of cells.",
+                    "description": "The width of columns expressed as a ratio. Columns fill the available width in proportion of their specified column widths.",
                     "dflt": null,
                     "editType": "calc",
                     "role": "style",
