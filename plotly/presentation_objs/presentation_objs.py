@@ -1098,11 +1098,9 @@ class Presentation(dict):
                         height = deep_child['height']
 
                         if width >= height:
-                            self['presentation']['slides'][s]['children'][c]['props']['style']['max-width'] = self['presentation']['slides'][s]['children'][c]['props']['style'].pop('width')
-                            #deep_child['max-width'] = deep_child.pop('width')
+                            deep_child['max-width'] = deep_child.pop('width')
                         else:
-                            self['presentation']['slides'][s]['children'][c]['props']['style']['max-height'] = self['presentation']['slides'][s]['children'][c]['props']['style'].pop('height')
-                            #deep_child['max-height'] = deep_child.pop('height')
+                            deep_child['max-height'] = deep_child.pop('height')
 
     def _add_empty_slide(self):
         self['presentation']['slides'].append(
