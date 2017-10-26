@@ -47,6 +47,11 @@ DEFAULT_PLOT_OPTIONS = {
     'sharing': files.FILE_CONTENT[files.CONFIG_FILE]['sharing']
 }
 
+SHARING_ERROR_MSG = (
+    "Whoops, sharing can only be set to either 'public', 'private', or "
+    "'secret'."
+)
+
 # test file permissions and make sure nothing is corrupted
 tools.ensure_local_plotly_files()
 
@@ -1520,6 +1525,81 @@ class dashboard_ops:
         return [str(dboard['filename']) for dboard in dashboards]
 
 
+class presentation_ops:
+    """
+    Interface to Plotly's Spectacle-Presentations API.
+    """
+    @classmethod
+    def upload(cls, presentation, filename, sharing='public', auto_open=True):
+        """
+        Function for uploading presentations to Plotly.
+
+        :param (dict) presentation: the JSON presentation to be uploaded. Use
+            plotly.presentation_objs.Presentation to create presentations
+            from a Markdown-like string.
+        :param (str) filename: the name of the presentation to be saved in
+            your Plotly account. Will overwrite a presentation of the same
+            name if it already exists in your files.
+        :param (str) sharing: can be set to either 'public', 'private'
+            or 'secret'. If 'public', your presentation will be viewable by
+            all other users. If 'private' only you can see your presentation.
+            If it is set to 'secret', the url will be returned with a string
+            of random characters appended to the url which is called a
+            sharekey. The point of a sharekey is that it makes the url very
+            hard to guess, but anyone with the url can view the presentation.
+        :param (bool) auto_open: automatically opens the presentation in the
+            browser.
+
+        See the documentation online for examples.
+        """
+        if sharing == 'public':
+            world_readable = True
+        elif sharing in ['private', 'secret']:
+            world_readable = False
+        else:
+            raise exceptions.PlotlyError(
+                SHARING_ERROR_MSG
+            )
+        data = {
+            'content': json.dumps(presentation),
+            'filename': filename,
+            'world_readable': world_readable
+        }
+
+        # lookup if pre-existing filename already exists
+        try:
+            lookup_res = v2.files.lookup(filename)
+            lookup_res.raise_for_status()
+            matching_file = json.loads(lookup_res.content)
+
+            if matching_file['filetype'] != 'spectacle_presentation':
+                raise exceptions.PlotlyError(
+                    "'{filename}' is already a {filetype} in your account. "
+                    "You can't overwrite a file that is not a spectacle_"
+                    "presentation. Please pick another filename.".format(
+                        filename=filename,
+                        filetype=matching_file['filetype']
+                    )
+                )
+            else:
+                old_fid = matching_file['fid']
+                res = v2.spectacle_presentations.update(old_fid, data)
+
+        except exceptions.PlotlyRequestError:
+            res = v2.spectacle_presentations.create(data)
+        res.raise_for_status()
+
+        url = res.json()['web_url']
+
+        if sharing == 'secret':
+            url = add_share_key_to_url(url)
+
+        if auto_open:
+            webbrowser.open_new(res.json()['web_url'])
+
+        return url
+
+
 def create_animations(figure, filename=None, sharing='public', auto_open=True):
     """
     BETA function that creates plots with animations via `frames`.
@@ -1712,8 +1792,7 @@ def create_animations(figure, filename=None, sharing='public', auto_open=True):
         body['share_key_enabled'] = True
     else:
         raise exceptions.PlotlyError(
-            "Whoops, sharing can only be set to either 'public', 'private', "
-            "or 'secret'."
+            SHARING_ERROR_MSG
         )
 
     response = v2.plots.create(body)

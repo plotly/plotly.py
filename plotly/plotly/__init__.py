@@ -24,6 +24,7 @@ from . plotly import (
     get_config,
     get_grid,
     dashboard_ops,
+    presentation_ops,
     create_animations,
     icreate_animations
 )
