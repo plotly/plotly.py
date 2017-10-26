@@ -51,12 +51,11 @@ class TestPresentation(TestCase):
             markdown_string, style='moods'
         )
 
-
     def test_expected_pres(self):
         markdown_string = "# title\n---\ntransition: zoom, fade, fade\n# Colors\nColors are everywhere around us.\nPlotly(https://plot.ly/~AdamKulidjian/3564/)\nImage(https://raw.githubusercontent.com/jackparmer/gradient-backgrounds/master/moods1.png)\n```python\nx=1\n```\n---\nPlotly(https://plot.ly/~AdamKulidjian/3564/)\nPlotly(https://plot.ly/~AdamKulidjian/3564/)\nPlotly(https://plot.ly/~AdamKulidjian/3564/)\nPlotly(https://plot.ly/~AdamKulidjian/3564/)\nPlotly(https://plot.ly/~AdamKulidjian/3564/)\nPlotly(https://plot.ly/~AdamKulidjian/3564/)\nPlotly(https://plot.ly/~AdamKulidjian/3564/)\n---\n"
 
         my_pres = pres.Presentation(
-            markdown_string, style='moods', imgStretch=False
+            markdown_string, style='moods', imgStretch=True
         )
 
         exp_pres = {'presentation': {'paragraphStyles': {'Body': {'color': '#000016',
