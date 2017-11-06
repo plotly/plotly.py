@@ -20,7 +20,7 @@ SUBPLOT_SPACING = 0.015
 VALID_KEYS = ['title', 'subtitle', 'ranges', 'measures', 'markers']
 
 # add shapes
-def shape(color, x0, x1, y0, y1, xref, yref, layer):
+def rectangle(color, x0, x1, y0, y1, xref, yref, layer):
     return {
         'fillcolor': color,
         'line': {'width': 0},
@@ -37,12 +37,13 @@ def shape(color, x0, x1, y0, y1, xref, yref, layer):
 
 
 def _bullet_rows(df, marker_symbol):
-    num_of_rows = len(df.columns)
+    num_of_rows = len(df)
     fig = plotly.tools.make_subplots(
         num_of_rows, 1, print_grid=False, horizontal_spacing=SUBPLOT_SPACING,
         vertical_spacing=SUBPLOT_SPACING
     )
 
+    # layout
     fig['layout'].update(
         dict(shapes=[]),
         showlegend=False,
@@ -50,104 +51,96 @@ def _bullet_rows(df, marker_symbol):
         margin=dict(l=120),
     )
 
-    # add marker symbol
+    for key in fig['layout'].keys():
+        if 'axis' in key:
+            fig['layout'][key]['showgrid'] = False
+            fig['layout'][key]['zeroline'] = False
+        if 'xaxis' in key:
+            fig['layout'][key]['tickwidth'] = 1
+        if 'yaxis' in key:
+            fig['layout'][key]['showticklabels'] = False
+            fig['layout'][key]['range'] = [0, 1]
+
+    # marker symbol size
     if num_of_rows <= 3:
         marker_size = 14
     else:
         marker_size = 10
-    # marker
-    for index in range(num_of_rows):
+    for idx in range(num_of_rows):
+        # marker
         fig['data'].append(
             go.Scatter(
-                x=df.iloc[index]['markers'],
+                x=df.iloc[idx]['markers'],
                 y=[0.5],
                 marker=dict(
                     size=marker_size,
                     color='rgb(0, 0, 0)',
                     symbol=marker_symbol
                 ),
-                xaxis='x{}'.format(index + 1),
-                yaxis='y{}'.format(index + 1)
+                xaxis='x{}'.format(idx + 1),
+                yaxis='y{}'.format(idx + 1)
             )
         )
 
-    for key in fig['layout'].keys():
-        if 'xaxis' in key:
-            fig['layout'][key]['showgrid'] = False
-            fig['layout'][key]['zeroline'] = False
-            fig['layout'][key]['tickwidth'] = 1
-        elif 'yaxis' in key:
-            fig['layout'][key]['showgrid'] = False
-            fig['layout'][key]['zeroline'] = False
-            fig['layout'][key]['showticklabels'] = False
-            fig['layout'][key]['range'] = [0, 1]
+        # ranges
+        y0_ranges = 0.35
+        y1_ranges = 0.65
+        ranges_len = len(df.iloc[idx]['ranges'])
+        color_incr = 36.0 / max(1, ranges_len - 1)
+        for range_idx in range(ranges_len):
+            rgb_val = 198 + range_idx * color_incr
+            grey_color = 'rgb(' + 3 * '{},'.format(rgb_val)  + ')'
+            if range_idx == 0:
+                start_range = 0
+            else:
+                start_range = df.iloc[idx]['ranges'][range_idx - 1]
+            end_range = df.iloc[idx]['ranges'][range_idx]
+            fig['layout']['shapes'].append(
+                rectangle(
+                    grey_color, start_range, end_range, y0_ranges, y1_ranges,
+                    'x{}'.format(idx + 1),
+                    'y{}'.format(idx + 1),
+                    'below'
+                )
+            )
 
-    # ranges
-    y0 = 0.35
-    y1 = 0.65
-    for axis_num in range(num_of_rows):
+        # measures
+        y0_measures = 0.45
+        y1_measures = 0.55
+        darkblue_len = df.iloc[idx]['measures'][0]
+        lightblue_len = df.iloc[idx]['measures'][1]
         fig['layout']['shapes'].append(
-            shape(
-                BAD_COLOR, 0, df.iloc[axis_num]['ranges'][0], y0, y1,
-                'x{}'.format(axis_num + 1),
-                'y{}'.format(axis_num + 1),
+            rectangle(
+                DARK_BLUE, 0, darkblue_len, y0_measures, y1_measures,
+                'x{}'.format(idx + 1),
+                'y{}'.format(idx + 1),
                 'below'
             )
         )
         fig['layout']['shapes'].append(
-            shape(
-                OK_COLOR, df.iloc[axis_num]['ranges'][0],
-                df.iloc[axis_num]['ranges'][1], y0, y1,
-                'x{}'.format(axis_num + 1),
-                'y{}'.format(axis_num + 1),
-                'below'
-            )
-        )
-        fig['layout']['shapes'].append(
-            shape(
-                GOOD_COLOR, df.iloc[axis_num]['ranges'][1],
-                df.iloc[axis_num]['ranges'][2], y0, y1,
-                'x{}'.format(axis_num + 1),
-                'y{}'.format(axis_num + 1),
-                'below'
-            )
-        )
-
-    # measures
-    y0 = 0.45
-    y1 = 0.55
-    for axis_num in range(num_of_rows):
-        darkblue_len = df.iloc[axis_num]['measures'][0]
-        lightblue_len = df.iloc[axis_num]['measures'][1]
-        fig['layout']['shapes'].append(
-            shape(
-                DARK_BLUE, 0, darkblue_len, y0, y1,
-                'x{}'.format(axis_num + 1),
-                'y{}'.format(axis_num + 1),
-                'below'
-            )
-        )
-        fig['layout']['shapes'].append(
-                shape(
-                    LIGHT_BLUE, darkblue_len, lightblue_len, y0, y1,
-                    'x{}'.format(axis_num + 1),
-                    'y{}'.format(axis_num + 1),
+                rectangle(
+                    LIGHT_BLUE, darkblue_len, lightblue_len,
+                    y0_measures, y1_measures,
+                    'x{}'.format(idx + 1),
+                    'y{}'.format(idx + 1),
                     'below'
                 )
         )
 
-    # labels
-    fig['layout']['annotations'] = []
-    for k in range(num_of_rows):
-        title = df.iloc[k]['title']
-        subtitle = df.iloc[k]['subtitle']
-
-        label = '<b>{}</b><br>{}'.format(title, subtitle)
+        # labels
+        title = df.iloc[idx]['title']
+        if 'subtitle' in df:
+            subtitle = '<br>{}'.format(df.iloc[idx]['subtitle'])
+        else:
+            subtitle = ''
+        label = '<b>{}</b>'.format(title) + subtitle
         annot = utils.annotation_dict_for_label(
-            label, k + 1, num_of_rows, SUBPLOT_SPACING, 'row', True, False
+            label, num_of_rows - idx, num_of_rows, SUBPLOT_SPACING,
+            'row', True, False
         )
         fig['layout']['annotations'].append(annot)
     return fig
+
 
 def create_bullet(df, as_rows=True, marker_symbol='diamond-tall',
                   title='Bullet Chart', height=600, width=1000):
@@ -177,13 +170,13 @@ def create_bullet(df, as_rows=True, marker_symbol='diamond-tall',
             "You must input a pandas DataFrame or a list of dictionaries."
         )
 
-    # check for all keys
-    #for df_keys in list(df.columns):
+    # check for valid keys
     if any(key not in VALID_KEYS for key in df.columns):
         raise exceptions.PlotlyError(
-            "The valid keys you need are"
+            "Your headers/dict keys must be either {}".format(
+                utils.list_of_options(VALID_KEYS, 'or')
+            )
         )
-        #utils.list_of_options
 
     if as_rows:
         fig = _bullet_rows(df, marker_symbol)
