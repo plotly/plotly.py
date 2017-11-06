@@ -551,7 +551,7 @@ def annotation_dict_for_label(text, lane, num_of_lanes, subplot_spacing,
         text=text,
         font=dict(
             size=13,
-            color=axis_title_color
+            color=text_color
         )
     )
     return annotation_dict
