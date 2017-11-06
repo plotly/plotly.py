@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 
-from plotly import exceptions, optional_imports
+from plotly import colors, exceptions, optional_imports
 from plotly.figure_factory import utils
 
 import plotly
@@ -36,7 +36,7 @@ def rectangle(color, x0, x1, y0, y1, xref, yref, layer):
     }
 
 
-def _bullet_rows(df, marker_symbol):
+def _bullet_rows(df, marker_symbol, range_colors, measure_colors):
     num_of_rows = len(df)
     fig = plotly.tools.make_subplots(
         num_of_rows, 1, print_grid=False, horizontal_spacing=SUBPLOT_SPACING,
@@ -85,6 +85,8 @@ def _bullet_rows(df, marker_symbol):
         # ranges
         y0_ranges = 0.35
         y1_ranges = 0.65
+        if not range_colors:
+            range_colors = ['rgb(200,200,200)', 'rgb(245,245,245)']
         ranges_len = len(df.iloc[idx]['ranges'])
         color_incr = 36.0 / max(1, ranges_len - 1)
         for range_idx in range(ranges_len):
@@ -143,6 +145,7 @@ def _bullet_rows(df, marker_symbol):
 
 
 def create_bullet(df, as_rows=True, marker_symbol='diamond-tall',
+                  range_colors=None, measure_colors=None,
                   title='Bullet Chart', height=600, width=1000):
     """
     Returns figure for bullet chart.
@@ -150,6 +153,11 @@ def create_bullet(df, as_rows=True, marker_symbol='diamond-tall',
     :param (pd.DataFrame | list) df: either a JSON list of dicts or a pandas
         DataFrame. Must contain the keys 'title', 'subtitle', 'ranges',
         'measures', and 'markers'.
+    :param (list) range_colors: a list of two colors between which all
+        the range rectangles are drawn. These rectangles are meant to be
+        qualitative indicators against which the marker and measre bars are
+        compared.
+        Default=['rgb(198, 198, 198)', 'rgb(248, 248, 248)']
     :param (str) title: title of the bullet chart.
     """
     # validate df
@@ -178,8 +186,21 @@ def create_bullet(df, as_rows=True, marker_symbol='diamond-tall',
             )
         )
 
+    # validate custom colors
+    for colors_list in [range_colors, measure_colors]:
+        if colors_list:
+            if len(colors_list) != 2:
+                raise exceptions.PlotlyError(
+                    "Both 'range_colors' or 'measure_colors' must be a list "
+                    "of two valid colors."
+                )
+            colors.validate_colors(colors_list)
+            colors_list = colors.convert_colors_to_same_type(
+                colors_list, 'rgb'
+            )[0]
+
     if as_rows:
-        fig = _bullet_rows(df, marker_symbol)
+        fig = _bullet_rows(df, marker_symbol, range_colors, measure_colors)
     else:
         fig = _bullet_cols()
 
