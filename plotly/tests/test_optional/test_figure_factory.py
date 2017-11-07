@@ -4,6 +4,7 @@ from plotly.exceptions import PlotlyError
 
 import plotly.tools as tls
 import plotly.figure_factory as ff
+import plotly.figure_factory.utils as utils
 from plotly.tests.test_optional.optional_utils import NumpyTestUtilsMixin
 import math
 from nose.tools import raises
@@ -1979,7 +1980,6 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
                                 ff.create_facet_grid,
                                 data, 'a')
 
-
     def test_valid_col_selection(self):
         data = pd.DataFrame([[0, 0], [1, 1]], columns=['a', 'b'])
 
@@ -2040,7 +2040,6 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
                                 ff.create_facet_grid,
                                 data, 'a', 'b', color_name='a',
                                 colormap=color_dict)
-
 
     def test_valid_colorscale_name(self):
         data = pd.DataFrame([[0, 1, 2], [3, 4, 5]],
@@ -2184,3 +2183,50 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
         # layout
         self.assert_dict_equal(test_facet_grid['layout'],
                                exp_facet_grid['layout'])
+
+
+class TestBullet(NumpyTestUtilsMixin, TestCase):
+
+    def test_df_as_list(self):
+        df = [
+            {'title': 'Revenue'},
+            'foo'
+        ]
+
+        pattern = ('If your data is a list, all entries must be dictionaries.')
+        self.assertRaisesRegexp(PlotlyError, pattern, ff.create_bullet, df)
+
+    def test_not_df_or_list(self):
+        df = 'foo'
+
+        pattern = ('You must input a pandas DataFrame or a list of dictionaries.')
+        self.assertRaisesRegexp(PlotlyError, pattern, ff.create_bullet, df)
+
+    def test_valid_keys(self):
+        df = [{'title': 'Revenue', 'foo': 'bar'}]
+        VALID_KEYS = ['title', 'subtitle', 'ranges', 'measures', 'markers']
+
+        pattern = (
+            'Your headers/dict keys must be either {}'
+        ).format(utils.list_of_options(VALID_KEYS, 'or'))
+        self.assertRaisesRegexp(PlotlyError, pattern, ff.create_bullet, df)
+
+    def test_valid_color_lists_of_2_rgb_colors(self):
+        df = [
+            {'title': 'Revenue'}
+        ]
+
+        range_colors = ['rgb(0, 0, 0)']
+        measure_colors = ['rgb(0, 0, 0)']
+
+        pattern = ("Both 'range_colors' or 'measure_colors' must be a list "
+                   "of two valid colors.")
+        self.assertRaisesRegexp(
+            PlotlyError, pattern, ff.create_bullet, df,
+            range_colors=range_colors
+        )
+
+        self.assertRaisesRegexp(
+            PlotlyError, pattern, ff.create_bullet, df,
+            measure_colors=measure_colors
+        )
