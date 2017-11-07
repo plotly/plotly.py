@@ -1,23 +1,18 @@
 from __future__ import absolute_import
 
+import math
+
 from plotly import colors, exceptions, optional_imports
 from plotly.figure_factory import utils
 
 import plotly
 import plotly.graph_objs as go
 
-from numbers import Number
-import pandas as pd
-
 pd = optional_imports.get_module('pandas')
 
-DARK_BLUE = 'rgb(31, 119, 180)'
-LIGHT_BLUE = 'rgb(176, 196, 221)'
-BAD_COLOR ='rgb(204, 204, 204)'
-OK_COLOR = 'rgb(221, 221, 221)'
-GOOD_COLOR = 'rgb(238, 238, 238)'
 SUBPLOT_SPACING = 0.015
 VALID_KEYS = ['title', 'subtitle', 'ranges', 'measures', 'markers']
+
 
 # add shapes
 def rectangle(color, x0, x1, y0, y1, xref, yref, layer):
@@ -36,10 +31,14 @@ def rectangle(color, x0, x1, y0, y1, xref, yref, layer):
     }
 
 
-def _bullet_rows(df, marker_symbol, range_colors, measure_colors):
-    num_of_rows = len(df)
+def _bullet(df, as_rows, marker_size, marker_symbol, range_colors,
+            measure_colors):
+    num_of_lanes = len(df)
+    num_of_rows = num_of_lanes if as_rows else 1
+    num_of_cols = 1 if as_rows else num_of_lanes
     fig = plotly.tools.make_subplots(
-        num_of_rows, 1, print_grid=False, horizontal_spacing=SUBPLOT_SPACING,
+        num_of_rows, num_of_cols, print_grid=False,
+        horizontal_spacing=SUBPLOT_SPACING,
         vertical_spacing=SUBPLOT_SPACING
     )
 
@@ -48,30 +47,40 @@ def _bullet_rows(df, marker_symbol, range_colors, measure_colors):
         dict(shapes=[]),
         showlegend=False,
         annotations=[],
-        margin=dict(l=120),
+        margin=dict(l=120 if as_rows else 80),
     )
+
+    if as_rows:
+        length_axis = 'xaxis'
+        width_axis = 'yaxis'
+    else:
+        width_axis = 'xaxis'
+        length_axis = 'yaxis'
 
     for key in fig['layout'].keys():
         if 'axis' in key:
             fig['layout'][key]['showgrid'] = False
             fig['layout'][key]['zeroline'] = False
-        if 'xaxis' in key:
+        if length_axis in key:
             fig['layout'][key]['tickwidth'] = 1
-        if 'yaxis' in key:
+        if width_axis in key:
             fig['layout'][key]['showticklabels'] = False
             fig['layout'][key]['range'] = [0, 1]
 
     # marker symbol size
-    if num_of_rows <= 3:
-        marker_size = 14
-    else:
-        marker_size = 10
-    for idx in range(num_of_rows):
+    if not marker_size:
+        if num_of_lanes <= 3:
+            marker_size = 18
+        else:
+            marker_size = 12
+    for idx in range(num_of_lanes):
         # marker
+        x = df.iloc[idx]['markers'] if as_rows else [0.5]
+        y = [0.5] if as_rows else df.iloc[idx]['markers']
         fig['data'].append(
             go.Scatter(
-                x=df.iloc[idx]['markers'],
-                y=[0.5],
+                x=x,
+                y=y,
                 marker=dict(
                     size=marker_size,
                     color='rgb(0, 0, 0)',
@@ -86,20 +95,29 @@ def _bullet_rows(df, marker_symbol, range_colors, measure_colors):
         y0_ranges = 0.35
         y1_ranges = 0.65
         if not range_colors:
-            range_colors = ['rgb(200,200,200)', 'rgb(245,245,245)']
+            range_colors = ['rgb(200, 200, 200)', 'rgb(245, 245, 245)']
         ranges_len = len(df.iloc[idx]['ranges'])
-        color_incr = 36.0 / max(1, ranges_len - 1)
+        if ranges_len <= 1:
+            inter_colors = [range_colors[0]]
+        else:
+            inter_colors = colors.n_colors(
+                range_colors[0], range_colors[1], ranges_len, 'rgb'
+            )
         for range_idx in range(ranges_len):
-            rgb_val = 198 + range_idx * color_incr
-            grey_color = 'rgb(' + 3 * '{},'.format(rgb_val)  + ')'
+            color = inter_colors[range_idx]
             if range_idx == 0:
                 start_range = 0
             else:
                 start_range = df.iloc[idx]['ranges'][range_idx - 1]
             end_range = df.iloc[idx]['ranges'][range_idx]
+
+            x0 = start_range if as_rows else y0_ranges
+            x1 = end_range if as_rows else y1_ranges
+            y0 = y0_ranges if as_rows else start_range
+            y1 = y1_ranges if as_rows else end_range
             fig['layout']['shapes'].append(
                 rectangle(
-                    grey_color, start_range, end_range, y0_ranges, y1_ranges,
+                    color, x0, x1, y0, y1,
                     'x{}'.format(idx + 1),
                     'y{}'.format(idx + 1),
                     'below'
@@ -109,25 +127,35 @@ def _bullet_rows(df, marker_symbol, range_colors, measure_colors):
         # measures
         y0_measures = 0.45
         y1_measures = 0.55
-        darkblue_len = df.iloc[idx]['measures'][0]
-        lightblue_len = df.iloc[idx]['measures'][1]
-        fig['layout']['shapes'].append(
-            rectangle(
-                DARK_BLUE, 0, darkblue_len, y0_measures, y1_measures,
-                'x{}'.format(idx + 1),
-                'y{}'.format(idx + 1),
-                'below'
+        if not measure_colors:
+            measure_colors = ['rgb(31, 119, 180)', 'rgb(176, 196, 221)']
+        measures_len = len(df.iloc[idx]['measures'])
+        if measures_len <= 1:
+            inter_colors = [measure_colors[0]]
+        else:
+            inter_colors = colors.n_colors(
+                measure_colors[0], measure_colors[1], measures_len, 'rgb'
             )
-        )
-        fig['layout']['shapes'].append(
+        for range_idx in range(measures_len):
+            color = inter_colors[range_idx]
+            if range_idx == 0:
+                start_range = 0
+            else:
+                start_range = df.iloc[idx]['measures'][range_idx - 1]
+            end_range = df.iloc[idx]['measures'][range_idx]
+
+            x0 = start_range if as_rows else y0_measures
+            x1 = end_range if as_rows else y1_measures
+            y0 = y0_measures if as_rows else start_range
+            y1 = y1_measures if as_rows else end_range
+            fig['layout']['shapes'].append(
                 rectangle(
-                    LIGHT_BLUE, darkblue_len, lightblue_len,
-                    y0_measures, y1_measures,
+                    color, x0, x1, y0, y1,
                     'x{}'.format(idx + 1),
                     'y{}'.format(idx + 1),
                     'below'
                 )
-        )
+            )
 
         # labels
         title = df.iloc[idx]['title']
@@ -137,28 +165,42 @@ def _bullet_rows(df, marker_symbol, range_colors, measure_colors):
             subtitle = ''
         label = '<b>{}</b>'.format(title) + subtitle
         annot = utils.annotation_dict_for_label(
-            label, num_of_rows - idx, num_of_rows, SUBPLOT_SPACING,
-            'row', True, False
+            label, num_of_lanes - idx, num_of_lanes, SUBPLOT_SPACING,
+            'row' if as_rows else 'col',
+            True if as_rows else False,
+            False
         )
         fig['layout']['annotations'].append(annot)
+
     return fig
 
 
-def create_bullet(df, as_rows=True, marker_symbol='diamond-tall',
-                  range_colors=None, measure_colors=None,
-                  title='Bullet Chart', height=600, width=1000):
+def create_bullet(df, as_rows=True, marker_size=16,
+                  marker_symbol='diamond-tall', range_colors=None,
+                  measure_colors=None, title='Bullet Chart', height=600,
+                  width=1000):
     """
     Returns figure for bullet chart.
 
     :param (pd.DataFrame | list) df: either a JSON list of dicts or a pandas
-        DataFrame. Must contain the keys 'title', 'subtitle', 'ranges',
+        DataFrame. All keys must be one of 'title', 'subtitle', 'ranges',
         'measures', and 'markers'.
+    :param (bool) as_rows: if True, the bars are placed horizontally as rows.
+        If False, the bars are placed vertically in the chart.
+    :param (int) marker_size: sets the size of the markers in the chart.
+    :param (str | int) marker_symbol: the symbol of the markers in the chart.
+        Default='diamond-tall'
     :param (list) range_colors: a list of two colors between which all
-        the range rectangles are drawn. These rectangles are meant to be
-        qualitative indicators against which the marker and measre bars are
-        compared.
+        the rectangles for the range are drawn. These rectangles are meant to
+        be qualitative indicators against which the marker and measure bars
+        are compared.
         Default=['rgb(198, 198, 198)', 'rgb(248, 248, 248)']
+    :param (list) measure_colors: a list of two colors which is used to color
+        the thin quantitative bars in the bullet chart.
+        Default=['rgb(31, 119, 180)', 'rgb(176, 196, 221)']
     :param (str) title: title of the bullet chart.
+    :param (float) height: height of the chart.
+    :param (float) width width of the chart.
     """
     # validate df
     if not pd:
@@ -186,6 +228,25 @@ def create_bullet(df, as_rows=True, marker_symbol='diamond-tall',
             )
         )
 
+    # add necessary columns if missing
+    for key in VALID_KEYS:
+        if key not in df:
+            if key in ['title', 'subtitle']:
+                element = ''
+            else:
+                element = []
+            df[key] = [element for _ in range(len(df))]
+
+    # make sure ranges and measures are not NAN or NONE
+    for needed_key in ['ranges', 'measures']:
+        for idx, r in enumerate(df[needed_key]):
+            try:
+                r_is_nan = math.isnan(r)
+                if r_is_nan or r is None:
+                    df[needed_key][idx] = []
+            except TypeError:
+                pass
+
     # validate custom colors
     for colors_list in [range_colors, measure_colors]:
         if colors_list:
@@ -195,14 +256,12 @@ def create_bullet(df, as_rows=True, marker_symbol='diamond-tall',
                     "of two valid colors."
                 )
             colors.validate_colors(colors_list)
-            colors_list = colors.convert_colors_to_same_type(
-                colors_list, 'rgb'
-            )[0]
+            colors_list = colors.convert_colors_to_same_type(colors_list,
+                                                             'rgb')[0]
 
-    if as_rows:
-        fig = _bullet_rows(df, marker_symbol, range_colors, measure_colors)
-    else:
-        fig = _bullet_cols()
+    fig = _bullet(
+        df, as_rows, marker_size, marker_symbol, range_colors, measure_colors
+    )
 
     fig['layout'].update(
         title=title,
