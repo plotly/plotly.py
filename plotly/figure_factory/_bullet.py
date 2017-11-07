@@ -211,19 +211,19 @@ def create_bullet(df, as_rows=True, marker_size=16,
     if isinstance(df, list):
         if not all(isinstance(item, dict) for item in df):
             raise exceptions.PlotlyError(
-                "If your data is a list, all entries must be dictionaries."
+                'If your data is a list, all entries must be dictionaries.'
             )
         df = pd.DataFrame(df)
 
     elif not isinstance(df, pd.DataFrame):
         raise exceptions.PlotlyError(
-            "You must input a pandas DataFrame or a list of dictionaries."
+            'You must input a pandas DataFrame or a list of dictionaries.'
         )
 
     # check for valid keys
     if any(key not in VALID_KEYS for key in df.columns):
         raise exceptions.PlotlyError(
-            "Your headers/dict keys must be either {}".format(
+            'Your headers/dict keys must be either {}'.format(
                 utils.list_of_options(VALID_KEYS, 'or')
             )
         )
