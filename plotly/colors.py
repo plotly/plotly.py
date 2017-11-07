@@ -514,14 +514,20 @@ def convert_to_RGB_255(colors):
     return (rgb_components[0], rgb_components[1], rgb_components[2])
 
 
-def n_colors(lowcolor, highcolor, n_colors):
+def n_colors(lowcolor, highcolor, n_colors, colortype='tuple'):
     """
     Splits a low and high color into a list of n_colors colors in it
 
     Accepts two color tuples and returns a list of n_colors colors
     which form the intermediate colors between lowcolor and highcolor
-    from linearly interpolating through RGB space
+    from linearly interpolating through RGB space. If colortype is 'rgb'
+    the function will return a list of colors in the same form.
     """
+    if colortype == 'rgb':
+        # convert to tuple
+        lowcolor = unlabel_rgb(lowcolor)
+        highcolor = unlabel_rgb(highcolor)
+
     diff_0 = float(highcolor[0] - lowcolor[0])
     incr_0 = diff_0/(n_colors - 1)
     diff_1 = float(highcolor[1] - lowcolor[1])
@@ -535,6 +541,10 @@ def n_colors(lowcolor, highcolor, n_colors):
                      lowcolor[1] + (index * incr_1),
                      lowcolor[2] + (index * incr_2))
         color_tuples.append(new_tuple)
+
+    if colortype == 'rgb':
+        # convert back to rgb
+        color_tuples = color_parser(color_tuples, label_rgb)
 
     return color_tuples
 
