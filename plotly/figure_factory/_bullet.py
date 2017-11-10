@@ -10,49 +10,33 @@ import plotly.graph_objs as go
 
 pd = optional_imports.get_module('pandas')
 
-SUBPLOT_SPACING = 0.015
 VALID_KEYS = ['title', 'subtitle', 'ranges', 'measures', 'markers']
 
 
-# add shapes
-def rectangle(color, x0, x1, y0, y1, xref, yref, layer):
-    return {
-        'fillcolor': color,
-        'line': {'width': 0},
-        'opacity': 1,
-        'type': 'rect',
-        'x0': x0,
-        'x1':  x1,
-        'xref':  xref,
-        'y0': y0,
-        'y1': y1,
-        'yref': yref,
-        'layer': layer
-    }
-
-
 def _bullet(df, as_rows, marker_size, marker_symbol, range_colors,
-            measure_colors):
+            measure_colors, subplot_spacing):
     num_of_lanes = len(df)
     num_of_rows = num_of_lanes if as_rows else 1
     num_of_cols = 1 if as_rows else num_of_lanes
+    if not subplot_spacing:
+        subplot_spacing = 1./num_of_lanes
     fig = plotly.tools.make_subplots(
         num_of_rows, num_of_cols, print_grid=False,
-        horizontal_spacing=SUBPLOT_SPACING,
-        vertical_spacing=SUBPLOT_SPACING
+        horizontal_spacing=subplot_spacing,
+        vertical_spacing=subplot_spacing
     )
 
     # layout
     fig['layout'].update(
         dict(shapes=[]),
         showlegend=False,
-        annotations=[],
+        barmode='stack',
         margin=dict(l=120 if as_rows else 80),
     )
 
     if as_rows:
-        length_axis = 'xaxis'
         width_axis = 'yaxis'
+        length_axis = 'xaxis'
     else:
         width_axis = 'xaxis'
         length_axis = 'yaxis'
@@ -67,105 +51,102 @@ def _bullet(df, as_rows, marker_size, marker_symbol, range_colors,
             fig['layout'][key]['showticklabels'] = False
             fig['layout'][key]['range'] = [0, 1]
 
+    # narrow domain if 1 bar
+    if num_of_lanes <= 1:
+        fig['layout'][width_axis + '1']['domain'] = [0.4, 0.6]
+
     # marker symbol size
     if not marker_size:
-        if num_of_lanes <= 3:
+        if num_of_lanes <= 4:
             marker_size = 18
         else:
-            marker_size = 12
-    for idx in range(num_of_lanes):
-        # marker
-        x = df.iloc[idx]['markers'] if as_rows else [0.5]
-        y = [0.5] if as_rows else df.iloc[idx]['markers']
-        fig['data'].append(
-            go.Scatter(
+            marker_size = 8
+
+    if not range_colors:
+        range_colors = ['rgb(200, 200, 200)', 'rgb(245, 245, 245)']
+    if not measure_colors:
+        measure_colors = ['rgb(31, 119, 180)', 'rgb(176, 196, 221)']
+
+    for row in range(num_of_lanes):
+        # ranges bars
+        for idx in range(len(df.iloc[row]['ranges'])):
+            inter_colors = colors.n_colors(
+                range_colors[0], range_colors[1],
+                len(df.iloc[row]['ranges']), 'rgb'
+            )
+            x = [sorted(df.iloc[row]['ranges'])[-1 - idx]] if as_rows else [0]
+            y = [0] if as_rows else [sorted(df.iloc[row]['ranges'])[-1 - idx]]
+            bar = go.Bar(
                 x=x,
                 y=y,
                 marker=dict(
-                    size=marker_size,
-                    color='rgb(0, 0, 0)',
-                    symbol=marker_symbol
+                    color=inter_colors[-1 - idx]
                 ),
-                xaxis='x{}'.format(idx + 1),
-                yaxis='y{}'.format(idx + 1)
+                name='ranges',
+                hoverinfo='x' if as_rows else 'y',
+                orientation='h' if as_rows else 'v',
+                width=2,
+                base=0,
+                xaxis='x{}'.format(row + 1),
+                yaxis='y{}'.format(row + 1)
             )
+            fig['data'].append(bar)
+
+        # measures bars
+        for idx in range(len(df.iloc[row]['measures'])):
+            inter_colors = colors.n_colors(
+                measure_colors[0], measure_colors[1],
+                len(df.iloc[row]['measures']), 'rgb'
+            )
+            x = ([sorted(df.iloc[row]['measures'])[-1 - idx]] if as_rows
+                 else [0.5])
+            y = ([0.5] if as_rows
+                 else [sorted(df.iloc[row]['measures'])[-1 - idx]])
+            bar = go.Bar(
+                x=x,
+                y=y,
+                marker=dict(
+                    color=inter_colors[-1 - idx]
+                ),
+                name='measures',
+                hoverinfo='x' if as_rows else 'y',
+                orientation='h' if as_rows else 'v',
+                width=0.4,
+                base=0,
+                xaxis='x{}'.format(row + 1),
+                yaxis='y{}'.format(row + 1)
+            )
+            fig['data'].append(bar)
+
+        # markers
+        x = df.iloc[row]['markers'] if as_rows else [0.5]
+        y = [0.5] if as_rows else df.iloc[row]['markers']
+        markers = go.Scatter(
+            x=x,
+            y=y,
+            marker=dict(
+                color='rgb(0, 0, 0)',
+                symbol=marker_symbol,
+                size=marker_size
+            ),
+            name='markers',
+            hoverinfo='x' if as_rows else 'y',
+            xaxis='x{}'.format(row + 1),
+            yaxis='y{}'.format(row + 1)
         )
-
-        # ranges
-        y0_ranges = 0.35
-        y1_ranges = 0.65
-        if not range_colors:
-            range_colors = ['rgb(200, 200, 200)', 'rgb(245, 245, 245)']
-        ranges_len = len(df.iloc[idx]['ranges'])
-        if ranges_len <= 1:
-            inter_colors = [range_colors[0]]
-        else:
-            inter_colors = colors.n_colors(
-                range_colors[0], range_colors[1], ranges_len, 'rgb'
-            )
-        for range_idx in range(ranges_len):
-            color = inter_colors[range_idx]
-            if range_idx == 0:
-                start_range = 0
-            else:
-                start_range = df.iloc[idx]['ranges'][range_idx - 1]
-            end_range = df.iloc[idx]['ranges'][range_idx]
-
-            x0 = start_range if as_rows else y0_ranges
-            x1 = end_range if as_rows else y1_ranges
-            y0 = y0_ranges if as_rows else start_range
-            y1 = y1_ranges if as_rows else end_range
-            fig['layout']['shapes'].append(
-                rectangle(
-                    color, x0, x1, y0, y1,
-                    'x{}'.format(idx + 1),
-                    'y{}'.format(idx + 1),
-                    'below'
-                )
-            )
-
-        # measures
-        y0_measures = 0.45
-        y1_measures = 0.55
-        if not measure_colors:
-            measure_colors = ['rgb(31, 119, 180)', 'rgb(176, 196, 221)']
-        measures_len = len(df.iloc[idx]['measures'])
-        if measures_len <= 1:
-            inter_colors = [measure_colors[0]]
-        else:
-            inter_colors = colors.n_colors(
-                measure_colors[0], measure_colors[1], measures_len, 'rgb'
-            )
-        for range_idx in range(measures_len):
-            color = inter_colors[range_idx]
-            if range_idx == 0:
-                start_range = 0
-            else:
-                start_range = df.iloc[idx]['measures'][range_idx - 1]
-            end_range = df.iloc[idx]['measures'][range_idx]
-
-            x0 = start_range if as_rows else y0_measures
-            x1 = end_range if as_rows else y1_measures
-            y0 = y0_measures if as_rows else start_range
-            y1 = y1_measures if as_rows else end_range
-            fig['layout']['shapes'].append(
-                rectangle(
-                    color, x0, x1, y0, y1,
-                    'x{}'.format(idx + 1),
-                    'y{}'.format(idx + 1),
-                    'below'
-                )
-            )
+        fig['data'].append(markers)
 
         # labels
-        title = df.iloc[idx]['title']
+        title = df.iloc[row]['title']
         if 'subtitle' in df:
-            subtitle = '<br>{}'.format(df.iloc[idx]['subtitle'])
+            subtitle = '<br>{}'.format(df.iloc[row]['subtitle'])
         else:
             subtitle = ''
         label = '<b>{}</b>'.format(title) + subtitle
         annot = utils.annotation_dict_for_label(
-            label, num_of_lanes - idx, num_of_lanes, SUBPLOT_SPACING,
+            label,
+            (num_of_lanes - row if as_rows else row + 1),
+            num_of_lanes, subplot_spacing,
             'row' if as_rows else 'col',
             True if as_rows else False,
             False
@@ -177,8 +158,8 @@ def _bullet(df, as_rows, marker_size, marker_symbol, range_colors,
 
 def create_bullet(df, as_rows=True, marker_size=16,
                   marker_symbol='diamond-tall', range_colors=None,
-                  measure_colors=None, title='Bullet Chart', height=600,
-                  width=1000):
+                  measure_colors=None, subplot_spacing=None,
+                  title='Bullet Chart', height=600, width=1000):
     """
     Returns figure for bullet chart.
 
@@ -198,6 +179,9 @@ def create_bullet(df, as_rows=True, marker_size=16,
     :param (list) measure_colors: a list of two colors which is used to color
         the thin quantitative bars in the bullet chart.
         Default=['rgb(31, 119, 180)', 'rgb(176, 196, 221)']
+    :param (float) subplot_spacing: set the distance between each bar chart.
+        If not specified an automatic spacing is assigned based on the number
+        of bars to be plotted.
     :param (str) title: title of the bullet chart.
     :param (float) height: height of the chart.
     :param (float) width width of the chart.
@@ -260,7 +244,8 @@ def create_bullet(df, as_rows=True, marker_size=16,
                                                              'rgb')[0]
 
     fig = _bullet(
-        df, as_rows, marker_size, marker_symbol, range_colors, measure_colors
+        df, as_rows, marker_size, marker_symbol, range_colors, measure_colors,
+        subplot_spacing
     )
 
     fig['layout'].update(
