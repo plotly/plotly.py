@@ -453,7 +453,7 @@ def find_intermediate_color(lowcolor, highcolor, intermed, colortype='tuple'):
     intermediate color and return it as an rgb color.
     """
     if colortype == 'rgb':
-        # convert to tuple
+        # convert to tuple color, eg. (1, 0.45, 0.7)
         lowcolor = unlabel_rgb(lowcolor)
         highcolor = unlabel_rgb(highcolor)
 
@@ -468,7 +468,7 @@ def find_intermediate_color(lowcolor, highcolor, intermed, colortype='tuple'):
     )
 
     if colortype == 'rgb':
-        # covert back to rgb
+        # back to an rgb string, e.g. rgb(30, 20, 10)
         inter_med_rgb = label_rgb(inter_med_tuple)
         return inter_med_rgb
 
@@ -534,19 +534,19 @@ def n_colors(lowcolor, highcolor, n_colors, colortype='tuple'):
     incr_1 = diff_1/(n_colors - 1)
     diff_2 = float(highcolor[2] - lowcolor[2])
     incr_2 = diff_2/(n_colors - 1)
-    color_tuples = []
+    list_of_colors = []
 
     for index in range(n_colors):
         new_tuple = (lowcolor[0] + (index * incr_0),
                      lowcolor[1] + (index * incr_1),
                      lowcolor[2] + (index * incr_2))
-        color_tuples.append(new_tuple)
+        list_of_colors.append(new_tuple)
 
     if colortype == 'rgb':
-        # convert back to rgb
-        color_tuples = color_parser(color_tuples, label_rgb)
+        # back to an rgb string
+        list_of_colors = color_parser(list_of_colors, label_rgb)
 
-    return color_tuples
+    return list_of_colors
 
 
 def label_rgb(colors):
