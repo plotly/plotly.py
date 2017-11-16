@@ -13,17 +13,18 @@ pd = optional_imports.get_module('pandas')
 VALID_KEYS = ['title', 'subtitle', 'ranges', 'measures', 'markers']
 
 
-def _bullet(df, as_rows, marker_size, marker_symbol, range_colors,
-            measure_colors, subplot_spacing):
+def _bullet(df, markers, measures, ranges, subtitle, title, as_rows,
+            marker_size, marker_symbol, range_colors, measure_colors,
+            horizontal_spacing, vertical_spacing):
     num_of_lanes = len(df)
     num_of_rows = num_of_lanes if as_rows else 1
     num_of_cols = 1 if as_rows else num_of_lanes
-    if not subplot_spacing:
-        subplot_spacing = 1./num_of_lanes
+    if not horizontal_spacing and not vertical_spacing:
+        horizontal_spacing = vertical_spacing = 1./num_of_lanes
     fig = plotly.tools.make_subplots(
         num_of_rows, num_of_cols, print_grid=False,
-        horizontal_spacing=subplot_spacing,
-        vertical_spacing=subplot_spacing
+        horizontal_spacing=horizontal_spacing,
+        vertical_spacing=vertical_spacing
     )
 
     # layout
@@ -146,7 +147,7 @@ def _bullet(df, as_rows, marker_size, marker_symbol, range_colors,
         annot = utils.annotation_dict_for_label(
             label,
             (num_of_lanes - row if as_rows else row + 1),
-            num_of_lanes, subplot_spacing,
+            num_of_lanes, vertical_spacing if as_rows else horizontal_spacing,
             'row' if as_rows else 'col',
             True if as_rows else False,
             False
@@ -156,14 +157,16 @@ def _bullet(df, as_rows, marker_size, marker_symbol, range_colors,
     return fig
 
 
-def create_bullet(df, as_rows=True, marker_size=16,
+def create_bullet(data, markers=None, measures=None, ranges=None,
+                  subtitle=None, title=None, as_rows=True, marker_size=16,
                   marker_symbol='diamond-tall', range_colors=None,
-                  measure_colors=None, subplot_spacing=None,
-                  title='Bullet Chart', height=600, width=1000):
+                  measure_colors=None, horizontal_spacing=None,
+                  vertical_spacing=None, chart_title='Bullet Chart', height=600,
+                  width=1000):
     """
     Returns figure for bullet chart.
 
-    :param (pd.DataFrame | list) df: either a JSON list of dicts or a pandas
+    :param (pd.DataFrame | list) data: either a JSON list of dicts or a pandas
         DataFrame. All keys must be one of 'title', 'subtitle', 'ranges',
         'measures', and 'markers'.
     :param (bool) as_rows: if True, the bars are placed horizontally as rows.
@@ -179,9 +182,10 @@ def create_bullet(df, as_rows=True, marker_size=16,
     :param (list) measure_colors: a list of two colors which is used to color
         the thin quantitative bars in the bullet chart.
         Default=['rgb(31, 119, 180)', 'rgb(176, 196, 221)']
-    :param (float) subplot_spacing: set the distance between each bar chart.
-        If not specified an automatic spacing is assigned based on the number
-        of bars to be plotted.
+    :param (float) horizontal_spacing: see the 'horizontal_spacing' param in
+        plotly.tools.make_subplots. Ranges between 0 and 1.
+    :param (float) vertical_spacing: see the 'vertical_spacing' param in
+        plotly.tools.make_subplots. Ranges between 0 and 1.
     :param (str) title: title of the bullet chart.
     :param (float) height: height of the chart.
     :param (float) width width of the chart.
@@ -192,34 +196,42 @@ def create_bullet(df, as_rows=True, marker_size=16,
             "'pandas' must be imported for this figure_factory."
         )
 
-    if isinstance(df, list):
-        if not all(isinstance(item, dict) for item in df):
+    if isinstance(data, list):
+        if not all(isinstance(item, dict) for item in data):
             raise exceptions.PlotlyError(
                 'If your data is a list, all entries must be dictionaries.'
             )
-        df = pd.DataFrame(df)
 
-    elif not isinstance(df, pd.DataFrame):
+    elif not isinstance(data, pd.DataFrame):
         raise exceptions.PlotlyError(
             'You must input a pandas DataFrame or a list of dictionaries.'
         )
 
-    # check for valid keys
-    if any(key not in VALID_KEYS for key in df.columns):
-        raise exceptions.PlotlyError(
-            'Your headers/dict keys must be either {}'.format(
-                utils.list_of_options(VALID_KEYS, 'or')
-            )
+    # make DataFrame from data with correct column headers
+    col_names = ['title', 'subtitle', 'markers', 'measures', 'ranges']
+    if isinstance(data, list):
+        df = pd.DataFrame(
+            [
+                [d[title] for d in data] if title else [''] * len(data),
+                [d[subtitle] for d in data] if subtitle else [''] * len(data),
+                [d[markers] for d in data] if markers else [[]] * len(data),
+                [d[measures] for d in data] if measures else [[]] * len(data),
+                [d[ranges] for d in data] if ranges else [[]] * len(data),
+            ],
+            index=col_names
         )
-
-    # add necessary columns if missing
-    for key in VALID_KEYS:
-        if key not in df:
-            if key in ['title', 'subtitle']:
-                element = ''
-            else:
-                element = []
-            df[key] = [element for _ in range(len(df))]
+    elif isinstance(data, pd.DataFrame):
+        df = pd.DataFrame(
+            [
+                data[title].tolist() if title else [''] * len(data),
+                data[subtitle].tolist() if subtitle else [''] * len(data),
+                data[markers].tolist() if markers else [[]] * len(data),
+                data[measures].tolist() if measures else [[]] * len(data),
+                data[ranges].tolist() if ranges else [[]] * len(data),
+            ],
+            index=col_names
+        )
+    df = pd.DataFrame.transpose(df)
 
     # make sure ranges and measures are not NAN or NONE
     for needed_key in ['ranges', 'measures']:
@@ -244,12 +256,13 @@ def create_bullet(df, as_rows=True, marker_size=16,
                                                              'rgb')[0]
 
     fig = _bullet(
-        df, as_rows, marker_size, marker_symbol, range_colors, measure_colors,
-        subplot_spacing
+        df, markers, measures, ranges, subtitle, title, as_rows, marker_size,
+        marker_symbol, range_colors, measure_colors, horizontal_spacing,
+        vertical_spacing
     )
 
     fig['layout'].update(
-        title=title,
+        title=chart_title,
         height=height,
         width=width,
     )

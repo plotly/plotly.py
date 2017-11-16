@@ -2232,7 +2232,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
         )
 
     def test_full_bullet(self):
-        df = pd.read_json('https://cdn.rawgit.com/plotly/datasets/master/BulletData.json')
+        df = pd.read_json('BulletData.json')
 
         measure_colors = ['rgb(255, 127, 14)', 'rgb(44, 160, 44)']
         range_colors = ['rgb(255, 127, 14)', 'rgb(44, 160, 44)']
