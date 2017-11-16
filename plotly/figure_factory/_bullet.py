@@ -13,12 +13,12 @@ pd = optional_imports.get_module('pandas')
 VALID_KEYS = ['title', 'subtitle', 'ranges', 'measures', 'markers']
 
 
-def _bullet(df, markers, measures, ranges, subtitle, title, as_rows,
-            marker_size, marker_symbol, range_colors, measure_colors,
-            horizontal_spacing, vertical_spacing):
+def _bullet(df, markers, measures, ranges, subtitle, title, orientation,
+            range_colors, measure_colors, horizontal_spacing,
+            vertical_spacing, scatter_options):
     num_of_lanes = len(df)
-    num_of_rows = num_of_lanes if as_rows else 1
-    num_of_cols = 1 if as_rows else num_of_lanes
+    num_of_rows = num_of_lanes if orientation == 'h' else 1
+    num_of_cols = 1 if orientation == 'h' else num_of_lanes
     if not horizontal_spacing and not vertical_spacing:
         horizontal_spacing = vertical_spacing = 1./num_of_lanes
     fig = plotly.tools.make_subplots(
@@ -32,10 +32,10 @@ def _bullet(df, markers, measures, ranges, subtitle, title, as_rows,
         dict(shapes=[]),
         showlegend=False,
         barmode='stack',
-        margin=dict(l=120 if as_rows else 80),
+        margin=dict(l=120 if orientation == 'h' else 80),
     )
 
-    if as_rows:
+    if orientation == 'h':
         width_axis = 'yaxis'
         length_axis = 'xaxis'
     else:
@@ -56,13 +56,6 @@ def _bullet(df, markers, measures, ranges, subtitle, title, as_rows,
     if num_of_lanes <= 1:
         fig['layout'][width_axis + '1']['domain'] = [0.4, 0.6]
 
-    # marker symbol size
-    if not marker_size:
-        if num_of_lanes <= 4:
-            marker_size = 18
-        else:
-            marker_size = 8
-
     if not range_colors:
         range_colors = ['rgb(200, 200, 200)', 'rgb(245, 245, 245)']
     if not measure_colors:
@@ -75,8 +68,10 @@ def _bullet(df, markers, measures, ranges, subtitle, title, as_rows,
                 range_colors[0], range_colors[1],
                 len(df.iloc[row]['ranges']), 'rgb'
             )
-            x = [sorted(df.iloc[row]['ranges'])[-1 - idx]] if as_rows else [0]
-            y = [0] if as_rows else [sorted(df.iloc[row]['ranges'])[-1 - idx]]
+            x = ([sorted(df.iloc[row]['ranges'])[-1 - idx]] if
+                 orientation == 'h' else [0])
+            y = ([0] if orientation == 'h' else
+                 [sorted(df.iloc[row]['ranges'])[-1 - idx]])
             bar = go.Bar(
                 x=x,
                 y=y,
@@ -84,8 +79,8 @@ def _bullet(df, markers, measures, ranges, subtitle, title, as_rows,
                     color=inter_colors[-1 - idx]
                 ),
                 name='ranges',
-                hoverinfo='x' if as_rows else 'y',
-                orientation='h' if as_rows else 'v',
+                hoverinfo='x' if orientation == 'h' else 'y',
+                orientation=orientation,
                 width=2,
                 base=0,
                 xaxis='x{}'.format(row + 1),
@@ -99,9 +94,9 @@ def _bullet(df, markers, measures, ranges, subtitle, title, as_rows,
                 measure_colors[0], measure_colors[1],
                 len(df.iloc[row]['measures']), 'rgb'
             )
-            x = ([sorted(df.iloc[row]['measures'])[-1 - idx]] if as_rows
-                 else [0.5])
-            y = ([0.5] if as_rows
+            x = ([sorted(df.iloc[row]['measures'])[-1 - idx]] if
+                 orientation == 'h' else [0.5])
+            y = ([0.5] if orientation == 'h'
                  else [sorted(df.iloc[row]['measures'])[-1 - idx]])
             bar = go.Bar(
                 x=x,
@@ -110,8 +105,8 @@ def _bullet(df, markers, measures, ranges, subtitle, title, as_rows,
                     color=inter_colors[-1 - idx]
                 ),
                 name='measures',
-                hoverinfo='x' if as_rows else 'y',
-                orientation='h' if as_rows else 'v',
+                hoverinfo='x' if orientation == 'h' else 'y',
+                orientation=orientation,
                 width=0.4,
                 base=0,
                 xaxis='x{}'.format(row + 1),
@@ -120,8 +115,8 @@ def _bullet(df, markers, measures, ranges, subtitle, title, as_rows,
             fig['data'].append(bar)
 
         # markers
-        x = df.iloc[row]['markers'] if as_rows else [0.5]
-        y = [0.5] if as_rows else df.iloc[row]['markers']
+        x = df.iloc[row]['markers'] if orientation == 'h' else [0.5]
+        y = [0.5] if orientation == 'h' else df.iloc[row]['markers']
         markers = go.Scatter(
             x=x,
             y=y,
@@ -131,7 +126,7 @@ def _bullet(df, markers, measures, ranges, subtitle, title, as_rows,
                 size=marker_size
             ),
             name='markers',
-            hoverinfo='x' if as_rows else 'y',
+            hoverinfo='x' if orientation == 'h' else 'y',
             xaxis='x{}'.format(row + 1),
             yaxis='y{}'.format(row + 1)
         )
@@ -146,10 +141,11 @@ def _bullet(df, markers, measures, ranges, subtitle, title, as_rows,
         label = '<b>{}</b>'.format(title) + subtitle
         annot = utils.annotation_dict_for_label(
             label,
-            (num_of_lanes - row if as_rows else row + 1),
-            num_of_lanes, vertical_spacing if as_rows else horizontal_spacing,
-            'row' if as_rows else 'col',
-            True if as_rows else False,
+            (num_of_lanes - row if orientation == 'h' else row + 1),
+            num_of_lanes,
+            vertical_spacing if orientation == 'h' else horizontal_spacing,
+            'row' if orientation == 'h' else 'col',
+            True if orientation == 'h' else False,
             False
         )
         fig['layout']['annotations'].append(annot)
@@ -158,19 +154,18 @@ def _bullet(df, markers, measures, ranges, subtitle, title, as_rows,
 
 
 def create_bullet(data, markers=None, measures=None, ranges=None,
-                  subtitle=None, title=None, as_rows=True, marker_size=16,
-                  marker_symbol='diamond-tall', range_colors=None,
-                  measure_colors=None, horizontal_spacing=None,
-                  vertical_spacing=None, chart_title='Bullet Chart', height=600,
-                  width=1000):
+                  subtitle=None, title=None, orientation='h',
+                  range_colors=None, measure_colors=None, horizontal_spacing=None,
+                  vertical_spacing=None, chart_title='Bullet Chart',
+                  height=600, width=1000, **scatter_options):
     """
     Returns figure for bullet chart.
 
     :param (pd.DataFrame | list) data: either a JSON list of dicts or a pandas
         DataFrame. All keys must be one of 'title', 'subtitle', 'ranges',
         'measures', and 'markers'.
-    :param (bool) as_rows: if True, the bars are placed horizontally as rows.
-        If False, the bars are placed vertically in the chart.
+    :param (bool) orientation: if 'h', the bars are placed horizontally as
+        rows. If 'v' the bars are placed vertically in the chart.
     :param (int) marker_size: sets the size of the markers in the chart.
     :param (str | int) marker_symbol: the symbol of the markers in the chart.
         Default='diamond-tall'
@@ -233,8 +228,8 @@ def create_bullet(data, markers=None, measures=None, ranges=None,
         )
     df = pd.DataFrame.transpose(df)
 
-    # make sure ranges and measures are not NAN or NONE
-    for needed_key in ['ranges', 'measures']:
+    # make sure ranges, measures, 'markers' are not NAN or NONE
+    for needed_key in ['ranges', 'measures', 'markers']:
         for idx, r in enumerate(df[needed_key]):
             try:
                 r_is_nan = math.isnan(r)
@@ -255,10 +250,24 @@ def create_bullet(data, markers=None, measures=None, ranges=None,
             colors_list = colors.convert_colors_to_same_type(colors_list,
                                                              'rgb')[0]
 
+    # scatter options
+    default_scatter_options = {
+        'marker': {'size': 12,
+                   'symbol': 'diamond-tall',
+                   'color': 'rgb(0, 0, 0)'}
+    }
+    if scatter_options == {}:
+        scatter_options.update(default_scatter_options)
+    else:
+
+
+
+
+
     fig = _bullet(
-        df, markers, measures, ranges, subtitle, title, as_rows, marker_size,
-        marker_symbol, range_colors, measure_colors, horizontal_spacing,
-        vertical_spacing
+        df, markers, measures, ranges, subtitle, title, orientation,
+        range_colors, measure_colors, horizontal_spacing, vertical_spacing,
+        scatter_options
     )
 
     fig['layout'].update(
