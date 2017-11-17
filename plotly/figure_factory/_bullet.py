@@ -10,12 +10,11 @@ import plotly.graph_objs as go
 
 pd = optional_imports.get_module('pandas')
 
-VALID_KEYS = ['title', 'subtitle', 'ranges', 'measures', 'markers']
 
-
-def _bullet(df, markers, measures, ranges, subtitle, title, orientation,
+def _bullet(df, markers, measures, ranges, subtitles, titles, orientation,
             range_colors, measure_colors, horizontal_spacing,
-            vertical_spacing, scatter_options):
+            vertical_spacing, scatter_options, layout_options):
+
     num_of_lanes = len(df)
     num_of_rows = num_of_lanes if orientation == 'h' else 1
     num_of_cols = 1 if orientation == 'h' else num_of_lanes
@@ -30,10 +29,17 @@ def _bullet(df, markers, measures, ranges, subtitle, title, orientation,
     # layout
     fig['layout'].update(
         dict(shapes=[]),
+        title='Bullet Chart',
+        height=600,
+        width=1000,
         showlegend=False,
         barmode='stack',
+        annotations=[],
         margin=dict(l=120 if orientation == 'h' else 80),
     )
+
+    # update layout
+    fig['layout'].update(layout_options)
 
     if orientation == 'h':
         width_axis = 'yaxis'
@@ -120,22 +126,23 @@ def _bullet(df, markers, measures, ranges, subtitle, title, orientation,
         markers = go.Scatter(
             x=x,
             y=y,
-            marker=dict(
-                color='rgb(0, 0, 0)',
-                symbol=marker_symbol,
-                size=marker_size
-            ),
+            marker=scatter_options['marker'],
             name='markers',
             hoverinfo='x' if orientation == 'h' else 'y',
             xaxis='x{}'.format(row + 1),
             yaxis='y{}'.format(row + 1)
         )
+
+        for k in scatter_options:
+            if k != 'marker':
+                markers[k] = scatter_options[k]
+
         fig['data'].append(markers)
 
-        # labels
-        title = df.iloc[row]['title']
-        if 'subtitle' in df:
-            subtitle = '<br>{}'.format(df.iloc[row]['subtitle'])
+        # titles and subtitles
+        title = df.iloc[row]['titles']
+        if 'subtitles' in df:
+            subtitle = '<br>{}'.format(df.iloc[row]['subtitles'])
         else:
             subtitle = ''
         label = '<b>{}</b>'.format(title) + subtitle
@@ -154,16 +161,29 @@ def _bullet(df, markers, measures, ranges, subtitle, title, orientation,
 
 
 def create_bullet(data, markers=None, measures=None, ranges=None,
-                  subtitle=None, title=None, orientation='h',
-                  range_colors=None, measure_colors=None, horizontal_spacing=None,
-                  vertical_spacing=None, chart_title='Bullet Chart',
-                  height=600, width=1000, **scatter_options):
+                  subtitles=None, titles=None, orientation='h',
+                  range_colors=None, measure_colors=None,
+                  horizontal_spacing=None, vertical_spacing=None,
+                  scatter_options={}, **layout_options):
     """
     Returns figure for bullet chart.
 
     :param (pd.DataFrame | list) data: either a JSON list of dicts or a pandas
-        DataFrame. All keys must be one of 'title', 'subtitle', 'ranges',
-        'measures', and 'markers'.
+        DataFrame.
+    :param (str) markers: the column name or dictionary key for the markers in
+        each subplot.
+    :param (str) measures: the column name or dictionary key for the measure
+        bars in each subplot. This bar usually represents the quantitative
+        measure of performance, usually a list of two values [a, b] and are
+        the blue bars in the foreground of each subplot by default.
+    :param (str) ranges: the column name or dictionary key for the qualitative
+        ranges of performance, usually a 3-item list [bad, okay, good]. They
+        correspond to the grey bars in the background of each chart.
+    :param (str) subtitles: the column name or dictionary key for the subtitle
+        of each subplot chart. The subplots are displayed right underneath
+        each title.
+    :param (str) titles: the column name or dictionary key for the main label
+        of each subplot chart.
     :param (bool) orientation: if 'h', the bars are placed horizontally as
         rows. If 'v' the bars are placed vertically in the chart.
     :param (int) marker_size: sets the size of the markers in the chart.
@@ -181,9 +201,55 @@ def create_bullet(data, markers=None, measures=None, ranges=None,
         plotly.tools.make_subplots. Ranges between 0 and 1.
     :param (float) vertical_spacing: see the 'vertical_spacing' param in
         plotly.tools.make_subplots. Ranges between 0 and 1.
-    :param (str) title: title of the bullet chart.
-    :param (float) height: height of the chart.
-    :param (float) width width of the chart.
+    :param (dict) scatter_options: describes attributes for the scatter trace
+        in each subplot such as name and marker size. Call
+        help(plotly.graph_objs.Scatter) for more information on valid params.
+    :param layout_options: describes attributes for the layout of the figure
+        such as title, height and width. Call help(plotly.graph_objs.Layout)
+        for more information on valid params.
+
+    Example 1: Use a Dictionary
+    ```
+    import plotly
+    import plotly.plotly as py
+    import plotly.figure_factory as ff
+
+    data = [
+      {"e": "Revenue", "d": "US$, in thousands", "c": [150, 225, 300],
+       "b": [220,270], "a": [250]},
+      {"e": "Profit", "d": "%", "c": [20, 25, 30], "b": [21, 23], "a": [26]},
+      {"e": "Order Size", "d":"US$, average","c": [350, 500, 600],
+       "b": [100,320],"a": [550]},
+      {"e": "New Customers", "d": "count", "c": [1400, 2000, 2500],
+       "b": [1000,1650],"a": [2100]},
+      {"e": "Satisfaction", "d": "out of 5","c": [3.5, 4.25, 5],
+       "b": [3.2,4.7], "a": [4.4]}
+    ]
+
+    fig = ff.create_bullet(
+        data, titles='e', subtitles='d', markers='a', measures='b',
+        ranges='c', orientation='h', title='my simple bullet chart'
+    )
+    py.iplot(fig)
+    ```
+
+    Example 2: Use a DataFrame with Custom Colors
+    ```
+    import plotly.plotly as py
+    import plotly.figure_factory as ff
+
+    import pandas as pd
+
+    data = pd.read_json('https://cdn.rawgit.com/plotly/datasets/master/BulletData.json')
+
+    fig = ff.create_bullet(
+        data, titles='title', markers='markers', measures='measures',
+        orientation='v', measure_colors=['rgb(14, 52, 75)', 'rgb(31, 141, 127)'],
+        scatter_options={'marker': {'symbol': 'circle'}}, width=700
+
+    )
+    py.iplot(fig)
+    ```
     """
     # validate df
     if not pd:
@@ -203,12 +269,12 @@ def create_bullet(data, markers=None, measures=None, ranges=None,
         )
 
     # make DataFrame from data with correct column headers
-    col_names = ['title', 'subtitle', 'markers', 'measures', 'ranges']
+    col_names = ['titles', 'subtitle', 'markers', 'measures', 'ranges']
     if isinstance(data, list):
         df = pd.DataFrame(
             [
-                [d[title] for d in data] if title else [''] * len(data),
-                [d[subtitle] for d in data] if subtitle else [''] * len(data),
+                [d[titles] for d in data] if titles else [''] * len(data),
+                [d[subtitles] for d in data] if subtitles else [''] * len(data),
                 [d[markers] for d in data] if markers else [[]] * len(data),
                 [d[measures] for d in data] if measures else [[]] * len(data),
                 [d[ranges] for d in data] if ranges else [[]] * len(data),
@@ -218,8 +284,8 @@ def create_bullet(data, markers=None, measures=None, ranges=None,
     elif isinstance(data, pd.DataFrame):
         df = pd.DataFrame(
             [
-                data[title].tolist() if title else [''] * len(data),
-                data[subtitle].tolist() if subtitle else [''] * len(data),
+                data[titles].tolist() if titles else [''] * len(data),
+                data[subtitles].tolist() if subtitles else [''] * len(data),
                 data[markers].tolist() if markers else [[]] * len(data),
                 data[measures].tolist() if measures else [[]] * len(data),
                 data[ranges].tolist() if ranges else [[]] * len(data),
@@ -250,30 +316,25 @@ def create_bullet(data, markers=None, measures=None, ranges=None,
             colors_list = colors.convert_colors_to_same_type(colors_list,
                                                              'rgb')[0]
 
-    # scatter options
-    default_scatter_options = {
+    # default scatter options
+    default_scatter = {
         'marker': {'size': 12,
                    'symbol': 'diamond-tall',
                    'color': 'rgb(0, 0, 0)'}
     }
+
     if scatter_options == {}:
-        scatter_options.update(default_scatter_options)
+        scatter_options.update(default_scatter)
     else:
-
-
-
-
+        # add default options to scatter_options if they are not present
+        for k in default_scatter['marker']:
+            if k not in scatter_options['marker']:
+                scatter_options['marker'][k] = default_scatter['marker'][k]
 
     fig = _bullet(
-        df, markers, measures, ranges, subtitle, title, orientation,
+        df, markers, measures, ranges, subtitles, titles, orientation,
         range_colors, measure_colors, horizontal_spacing, vertical_spacing,
-        scatter_options
-    )
-
-    fig['layout'].update(
-        title=chart_title,
-        height=height,
-        width=width,
+        scatter_options, layout_options,
     )
 
     return fig

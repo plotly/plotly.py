@@ -2189,7 +2189,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
 
     def test_df_as_list(self):
         df = [
-            {'title': 'Revenue'},
+            {'titles': 'Revenue'},
             'foo'
         ]
 
@@ -2200,15 +2200,6 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
         df = 'foo'
 
         pattern = ('You must input a pandas DataFrame or a list of dictionaries.')
-        self.assertRaisesRegexp(PlotlyError, pattern, ff.create_bullet, df)
-
-    def test_valid_keys(self):
-        df = [{'title': 'Revenue', 'foo': 'bar'}]
-        VALID_KEYS = ['title', 'subtitle', 'ranges', 'measures', 'markers']
-
-        pattern = (
-            'Your headers/dict keys must be either {}'
-        ).format(utils.list_of_options(VALID_KEYS, 'or'))
         self.assertRaisesRegexp(PlotlyError, pattern, ff.create_bullet, df)
 
     def test_valid_color_lists_of_2_rgb_colors(self):
@@ -2238,9 +2229,12 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
         range_colors = ['rgb(255, 127, 14)', 'rgb(44, 160, 44)']
 
         fig = ff.create_bullet(
-            df, as_rows=False, marker_size=30, marker_symbol='hourglass',
+            df, orientation='v', markers='markers', measures='measures',
+            ranges='ranges', subtitles='subtitle', titles='title',
             range_colors=range_colors, measure_colors=measure_colors,
-            title='new title'
+            title='new title',
+            scatter_options={'marker': {'size': 30,
+                                        'symbol': 'hourglass'}}
         )
 
         exp_fig = {
@@ -2571,7 +2565,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                       'yaxis': 'y5'}],
             'layout': {'annotations': [{'font': {'color': '#0f0f0f', 'size': 13},
                                         'showarrow': False,
-                                        'text': '<b>Revenue</b><br>US$, in thousands',
+                                        'text': '<b>Revenue</b>',
                                         'textangle': 0,
                                         'x': 0.019999999999999997,
                                         'xanchor': 'center',
@@ -2581,7 +2575,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                                         'yref': 'paper'},
                                        {'font': {'color': '#0f0f0f', 'size': 13},
                                         'showarrow': False,
-                                        'text': '<b>Profit</b><br>%',
+                                        'text': '<b>Profit</b>',
                                         'textangle': 0,
                                         'x': 0.26,
                                         'xanchor': 'center',
@@ -2591,7 +2585,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                                         'yref': 'paper'},
                                        {'font': {'color': '#0f0f0f', 'size': 13},
                                         'showarrow': False,
-                                        'text': '<b>Order Size</b><br>US$, average',
+                                        'text': '<b>Order Size</b>',
                                         'textangle': 0,
                                         'x': 0.5,
                                         'xanchor': 'center',
@@ -2601,7 +2595,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                                         'yref': 'paper'},
                                        {'font': {'color': '#0f0f0f', 'size': 13},
                                         'showarrow': False,
-                                        'text': '<b>New Customers</b><br>count',
+                                        'text': '<b>New Customers</b>',
                                         'textangle': 0,
                                         'x': 0.74,
                                         'xanchor': 'center',
@@ -2611,7 +2605,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                                         'yref': 'paper'},
                                        {'font': {'color': '#0f0f0f', 'size': 13},
                                         'showarrow': False,
-                                        'text': '<b>Satisfaction</b><br>out of 5',
+                                        'text': '<b>Satisfaction</b>',
                                         'textangle': 0,
                                         'x': 0.98,
                                         'xanchor': 'center',
