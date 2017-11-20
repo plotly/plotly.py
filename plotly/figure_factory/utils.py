@@ -489,6 +489,7 @@ def endpts_to_intervals(endpts):
         intervals.append([endpts[length - 1], float('inf')])
         return intervals
 
+
 def annotation_dict_for_label(text, lane, num_of_lanes, subplot_spacing,
                               row_col='col', flipped=True, right_side=True,
                               text_color='#0f0f0f'):
@@ -508,7 +509,7 @@ def annotation_dict_for_label(text, lane, num_of_lanes, subplot_spacing,
     :param (bool) right_side: only applicable if row_col is set to 'row'.
     :param (str) text_color: color of the text.
     """
-    l = (1 - (num_of_lanes - 1) * subplot_spacing) / (num_of_lanes)
+    l = (1.0 - (num_of_lanes - 1) * subplot_spacing) / (num_of_lanes)
     if not flipped:
         xanchor = 'center'
         yanchor = 'middle'
