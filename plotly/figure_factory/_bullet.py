@@ -18,8 +18,10 @@ def _bullet(df, markers, measures, ranges, subtitles, titles, orientation,
     num_of_lanes = len(df)
     num_of_rows = num_of_lanes if orientation == 'h' else 1
     num_of_cols = 1 if orientation == 'h' else num_of_lanes
-    if not horizontal_spacing and not vertical_spacing:
-        horizontal_spacing = vertical_spacing = 1./num_of_lanes
+    if not horizontal_spacing:
+        horizontal_spacing = 1./num_of_lanes
+    if not vertical_spacing:
+        vertical_spacing = 1./num_of_lanes
     fig = plotly.tools.make_subplots(
         num_of_rows, num_of_cols, print_grid=False,
         horizontal_spacing=horizontal_spacing,
