@@ -807,7 +807,7 @@ def make_subplots(rows=1, cols=1,
 
     # Throw exception if non-valid kwarg is sent
     VALID_KWARGS = ['horizontal_spacing', 'vertical_spacing',
-                    'specs', 'insets', 'subplot_titles']
+                    'specs', 'insets', 'subplot_titles', 'column_width']
     for key in kwargs.keys():
         if key not in VALID_KWARGS:
             raise Exception("Invalid keyword argument: '{0}'".format(key))
