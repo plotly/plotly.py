@@ -807,7 +807,8 @@ def make_subplots(rows=1, cols=1,
 
     # Throw exception if non-valid kwarg is sent
     VALID_KWARGS = ['horizontal_spacing', 'vertical_spacing',
-                    'specs', 'insets', 'subplot_titles', 'column_width']
+                    'specs', 'insets', 'subplot_titles', 'column_width',
+                    'row_width']
     for key in kwargs.keys():
         if key not in VALID_KWARGS:
             raise Exception("Invalid keyword argument: '{0}'".format(key))
@@ -923,6 +924,9 @@ def make_subplots(rows=1, cols=1,
             for c in col_seq]
             for r in row_seq]
 
+    import pprint
+    pprint.pprint(grid)
+
     # [grid_ref] Initialize the grid and insets' axis-reference lists
     grid_ref = [[None for c in range(cols)] for r in range(rows)]
     insets_ref = [None for inset in range(len(insets))] if insets else None
@@ -1037,6 +1041,12 @@ def make_subplots(rows=1, cols=1,
             if r_spanned >= rows:
                 raise Exception("Some 'rowspan' value is too large for "
                                 "this subplot grid.")
+
+            print grid[r][c]
+            print grid[r][c_spanned]
+            print "width is {}".format(width)
+            print "height is {}".format(height)
+            print '\n\n'
 
             # Get x domain using grid and colspan
             x_s = grid[r][c][0] + spec['l']
