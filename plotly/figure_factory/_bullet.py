@@ -128,16 +128,12 @@ def _bullet(df, markers, measures, ranges, subtitles, titles, orientation,
         markers = go.Scatter(
             x=x,
             y=y,
-            marker=scatter_options['marker'],
             name='markers',
             hoverinfo='x' if orientation == 'h' else 'y',
             xaxis='x{}'.format(row + 1),
-            yaxis='y{}'.format(row + 1)
+            yaxis='y{}'.format(row + 1),
+            **scatter_options
         )
-
-        for k in scatter_options:
-            if k != 'marker':
-                markers[k] = scatter_options[k]
 
         fig['data'].append(markers)
 
@@ -188,9 +184,6 @@ def create_bullet(data, markers=None, measures=None, ranges=None,
         of each subplot chart.
     :param (bool) orientation: if 'h', the bars are placed horizontally as
         rows. If 'v' the bars are placed vertically in the chart.
-    :param (int) marker_size: sets the size of the markers in the chart.
-    :param (str | int) marker_symbol: the symbol of the markers in the chart.
-        Default='diamond-tall'
     :param (list) range_colors: a list of two colors between which all
         the rectangles for the range are drawn. These rectangles are meant to
         be qualitative indicators against which the marker and measure bars
