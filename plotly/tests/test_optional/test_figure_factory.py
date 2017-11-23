@@ -2193,7 +2193,10 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
             'foo'
         ]
 
-        pattern = ('If your data is a list, all entries must be dictionaries.')
+        pattern = (
+            'Every entry of the data argument (list, tuple, etc) must '
+            'be a dictionary.'
+        )
         self.assertRaisesRegexp(PlotlyError, pattern, ff.create_bullet, df)
 
     def test_not_df_or_list(self):

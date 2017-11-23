@@ -1,5 +1,6 @@
 from __future__ import absolute_import
 
+import collections
 import math
 
 from plotly import colors, exceptions, optional_imports
@@ -9,6 +10,11 @@ import plotly
 import plotly.graph_objs as go
 
 pd = optional_imports.get_module('pandas')
+
+
+def is_sequence(obj):
+    return (isinstance(obj, collections.Sequence) and
+            not isinstance(obj, basestring))
 
 
 def _bullet(df, markers, measures, ranges, subtitles, titles, orientation,
@@ -255,11 +261,11 @@ def create_bullet(data, markers=None, measures=None, ranges=None,
             "'pandas' must be installed for this figure factory."
         )
 
-    if isinstance(data, (tuple, list)):
+    if is_sequence(data):
         if not all(isinstance(item, dict) for item in data):
             raise exceptions.PlotlyError(
-                'Every entry of the data argument (a list or tuple) must be '
-                'a dictionary.'
+                'Every entry of the data argument (list, tuple, etc) must '
+                'be a dictionary.'
             )
 
     elif not isinstance(data, pd.DataFrame):
@@ -270,7 +276,7 @@ def create_bullet(data, markers=None, measures=None, ranges=None,
 
     # make DataFrame from data with correct column headers
     col_names = ['titles', 'subtitle', 'markers', 'measures', 'ranges']
-    if isinstance(data, (tuple, list)):
+    if is_sequence(data):
         df = pd.DataFrame(
             [
                 [d[titles] for d in data] if titles else [''] * len(data),
