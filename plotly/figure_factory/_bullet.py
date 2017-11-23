@@ -160,14 +160,15 @@ def _bullet(df, markers, measures, ranges, subtitles, titles, orientation,
 
 def create_bullet(data, markers=None, measures=None, ranges=None,
                   subtitles=None, titles=None, orientation='h',
-                  range_colors=None, measure_colors=None,
+                  range_colors=('rgb(200, 200, 200)', 'rgb(245, 245, 245)'),
+                  measure_colors=('rgb(31, 119, 180)', 'rgb(176, 196, 221)'),
                   horizontal_spacing=None, vertical_spacing=None,
                   scatter_options={}, **layout_options):
     """
     Returns figure for bullet chart.
 
-    :param (pd.DataFrame | list) data: either a JSON list of dicts or a pandas
-        DataFrame.
+    :param (pd.DataFrame | list | tuple) data: either a list/tuple of
+        dictionaries or a pandas DataFrame.
     :param (str) markers: the column name or dictionary key for the markers in
         each subplot.
     :param (str) measures: the column name or dictionary key for the measure
@@ -184,14 +185,14 @@ def create_bullet(data, markers=None, measures=None, ranges=None,
         of each subplot chart.
     :param (bool) orientation: if 'h', the bars are placed horizontally as
         rows. If 'v' the bars are placed vertically in the chart.
-    :param (list) range_colors: a list of two colors between which all
+    :param (list) range_colors: a tuple of two colors between which all
         the rectangles for the range are drawn. These rectangles are meant to
         be qualitative indicators against which the marker and measure bars
         are compared.
-        Default=['rgb(198, 198, 198)', 'rgb(248, 248, 248)']
-    :param (list) measure_colors: a list of two colors which is used to color
+        Default=('rgb(200, 200, 200)', 'rgb(245, 245, 245)')
+    :param (list) measure_colors: a tuple of two colors which is used to color
         the thin quantitative bars in the bullet chart.
-        Default=['rgb(31, 119, 180)', 'rgb(176, 196, 221)']
+        Default=('rgb(31, 119, 180)', 'rgb(176, 196, 221)')
     :param (float) horizontal_spacing: see the 'horizontal_spacing' param in
         plotly.tools.make_subplots. Ranges between 0 and 1.
     :param (float) vertical_spacing: see the 'vertical_spacing' param in
@@ -210,20 +211,22 @@ def create_bullet(data, markers=None, measures=None, ranges=None,
     import plotly.figure_factory as ff
 
     data = [
-      {"e": "Revenue", "d": "US$, in thousands", "c": [150, 225, 300],
-       "b": [220,270], "a": [250]},
-      {"e": "Profit", "d": "%", "c": [20, 25, 30], "b": [21, 23], "a": [26]},
-      {"e": "Order Size", "d":"US$, average","c": [350, 500, 600],
-       "b": [100,320],"a": [550]},
-      {"e": "New Customers", "d": "count", "c": [1400, 2000, 2500],
-       "b": [1000,1650],"a": [2100]},
-      {"e": "Satisfaction", "d": "out of 5","c": [3.5, 4.25, 5],
-       "b": [3.2,4.7], "a": [4.4]}
+      {"label": "Revenue", "sublabel": "US$, in thousands",
+       "range": [150, 225, 300], "performance": [220,270], "point": [250]},
+      {"label": "Profit", "sublabel": "%", "range": [20, 25, 30],
+       "performance": [21, 23], "point": [26]},
+      {"label": "Order Size", "sublabel":"US$, average","range": [350, 500, 600],
+       "performance": [100,320],"point": [550]},
+      {"label": "New Customers", "sublabel": "count", "range": [1400, 2000, 2500],
+       "performance": [1000, 1650],"point": [2100]},
+      {"label": "Satisfaction", "sublabel": "out of 5","range": [3.5, 4.25, 5],
+       "performance": [3.2, 4.7], "point": [4.4]}
     ]
 
     fig = ff.create_bullet(
-        data, titles='e', subtitles='d', markers='a', measures='b',
-        ranges='c', orientation='h', title='my simple bullet chart'
+        data, titles='label', subtitles='sublabel', markers='point',
+        measures='performance', ranges='range', orientation='h',
+        title='my simple bullet chart'
     )
     py.iplot(fig)
     ```
@@ -249,23 +252,25 @@ def create_bullet(data, markers=None, measures=None, ranges=None,
     # validate df
     if not pd:
         raise exceptions.ImportError(
-            "'pandas' must be imported for this figure_factory."
+            "'pandas' must be installed for this figure factory."
         )
 
-    if isinstance(data, list):
+    if isinstance(data, (tuple, list)):
         if not all(isinstance(item, dict) for item in data):
             raise exceptions.PlotlyError(
-                'If your data is a list, all entries must be dictionaries.'
+                'Every entry of the data argument (a list or tuple) must be '
+                'a dictionary.'
             )
 
     elif not isinstance(data, pd.DataFrame):
         raise exceptions.PlotlyError(
-            'You must input a pandas DataFrame or a list of dictionaries.'
+            'You must input a pandas DataFrame, or a list or tuple of '
+            'dictionaries.'
         )
 
     # make DataFrame from data with correct column headers
     col_names = ['titles', 'subtitle', 'markers', 'measures', 'ranges']
-    if isinstance(data, list):
+    if isinstance(data, (tuple, list)):
         df = pd.DataFrame(
             [
                 [d[titles] for d in data] if titles else [''] * len(data),
