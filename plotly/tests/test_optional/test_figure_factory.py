@@ -2202,7 +2202,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
     def test_not_df_or_list(self):
         df = 'foo'
 
-        pattern = ('You must input a pandas DataFrame or a list of dictionaries.')
+        pattern = ('You must input a pandas DataFrame, or a list of dictionaries.')
         self.assertRaisesRegexp(PlotlyError, pattern, ff.create_bullet, df)
 
     def test_valid_color_lists_of_2_rgb_colors(self):

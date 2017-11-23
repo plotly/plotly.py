@@ -264,14 +264,13 @@ def create_bullet(data, markers=None, measures=None, ranges=None,
     if is_sequence(data):
         if not all(isinstance(item, dict) for item in data):
             raise exceptions.PlotlyError(
-                'Every entry of the data argument (list, tuple, etc) must '
+                'Every entry of the data argument list, tuple, etc must '
                 'be a dictionary.'
             )
 
     elif not isinstance(data, pd.DataFrame):
         raise exceptions.PlotlyError(
-            'You must input a pandas DataFrame, or a list or tuple of '
-            'dictionaries.'
+            'You must input a pandas DataFrame, or a list of dictionaries.'
         )
 
     # make DataFrame from data with correct column headers
