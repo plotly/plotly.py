@@ -14,7 +14,7 @@ pd = optional_imports.get_module('pandas')
 
 def is_sequence(obj):
     return (isinstance(obj, collections.Sequence) and
-            not isinstance(obj, basestring))
+            not isinstance(obj, str))
 
 
 def _bullet(df, markers, measures, ranges, subtitles, titles, orientation,
