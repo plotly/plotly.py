@@ -807,8 +807,7 @@ def make_subplots(rows=1, cols=1,
 
     # Throw exception if non-valid kwarg is sent
     VALID_KWARGS = ['horizontal_spacing', 'vertical_spacing',
-                    'specs', 'insets', 'subplot_titles', 'column_width',
-                    'row_width']
+                    'specs', 'insets', 'subplot_titles', 'column_width']
     for key in kwargs.keys():
         if key not in VALID_KWARGS:
             raise Exception("Invalid keyword argument: '{0}'".format(key))
@@ -908,9 +907,28 @@ def make_subplots(rows=1, cols=1,
         )
         _check_keys_and_fill('insets', insets, INSET_defaults)
 
-    # Set width & height of each subplot cell (excluding padding)
-    width = (1. - horizontal_spacing * (cols - 1)) / cols
+    # Set height of each subplot cell (excluding padding)
     height = (1. - vertical_spacing * (rows - 1)) / rows
+
+    try:
+        column_width = kwargs['column_width']
+        if not isinstance(column_width, list) or len(column_width) != cols:
+            raise Exception(
+                "Keyword argument 'column_width' must be a list "
+                "containing the same number of floats as the number of cols."
+            )
+    except KeyError:
+        column_width = None
+
+    if column_width:
+        cum_sum = float(sum(column_width))
+        widths = []
+        for w in column_width:
+            widths.append(
+                (1. - horizontal_spacing * (cols - 1)) * (w / cum_sum)
+            )
+    else:
+        widths = [(1. - horizontal_spacing * (cols - 1)) / cols] * cols
 
     # Built row/col sequence using 'row_dir' and 'col_dir'
     COL_DIR = START_CELL['col_dir']
@@ -919,13 +937,14 @@ def make_subplots(rows=1, cols=1,
     row_seq = range(rows)[::ROW_DIR]
 
     # [grid] Build subplot grid (coord tuple of cell)
-    grid = [[((width + horizontal_spacing) * c,
-              (height + vertical_spacing) * r)
-            for c in col_seq]
-            for r in row_seq]
-
-    import pprint
-    pprint.pprint(grid)
+    grid = [
+        [
+            (
+                (sum(widths[:c]) + c * horizontal_spacing),
+                (height + vertical_spacing) * r
+            ) for c in col_seq
+        ] for r in row_seq
+    ]
 
     # [grid_ref] Initialize the grid and insets' axis-reference lists
     grid_ref = [[None for c in range(cols)] for r in range(rows)]
@@ -1042,15 +1061,9 @@ def make_subplots(rows=1, cols=1,
                 raise Exception("Some 'rowspan' value is too large for "
                                 "this subplot grid.")
 
-            print grid[r][c]
-            print grid[r][c_spanned]
-            print "width is {}".format(width)
-            print "height is {}".format(height)
-            print '\n\n'
-
             # Get x domain using grid and colspan
             x_s = grid[r][c][0] + spec['l']
-            x_e = grid[r][c_spanned][0] + width - spec['r']
+            x_e = grid[r][c_spanned][0] + widths[c] - spec['r']
             x_domain = [x_s, x_e]
 
             # Get y domain (dep. on row_dir) using grid & r_spanned
@@ -1118,11 +1131,11 @@ def make_subplots(rows=1, cols=1,
                                 "Note: the starting cell is (1, 1)")
 
             # Get inset x domain using grid
-            x_s = grid[r][c][0] + inset['l'] * width
+            x_s = grid[r][c][0] + inset['l'] * widths[c]
             if inset['w'] == 'to_end':
-                x_e = grid[r][c][0] + width
+                x_e = grid[r][c][0] + widths[c]
             else:
-                x_e = x_s + inset['w'] * width
+                x_e = x_s + inset['w'] * widths[c]
             x_domain = [x_s, x_e]
 
             # Get inset y domain using grid

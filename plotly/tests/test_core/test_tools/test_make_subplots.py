@@ -193,7 +193,7 @@ class TestMakeSubplots(TestCase):
                     anchor='y12'
                 ),
                 xaxis13=XAxis(
-                    domain=[0.7346938775510203, 0.8530612244897958],
+                    domain=[0.7346938775510204, 0.8530612244897959],
                     anchor='y13'
                 ),
                 xaxis14=XAxis(
@@ -225,7 +225,7 @@ class TestMakeSubplots(TestCase):
                     anchor='y2'
                 ),
                 xaxis20=XAxis(
-                    domain=[0.7346938775510203, 0.8530612244897958],
+                    domain=[0.7346938775510204, 0.8530612244897959],
                     anchor='y20'
                 ),
                 xaxis21=XAxis(
@@ -253,7 +253,7 @@ class TestMakeSubplots(TestCase):
                     anchor='y26'
                 ),
                 xaxis27=XAxis(
-                    domain=[0.7346938775510203, 0.8530612244897958],
+                    domain=[0.7346938775510204, 0.8530612244897959],
                     anchor='y27'
                 ),
                 xaxis28=XAxis(
@@ -273,7 +273,7 @@ class TestMakeSubplots(TestCase):
                     anchor='y5'
                 ),
                 xaxis6=XAxis(
-                    domain=[0.7346938775510203, 0.8530612244897958],
+                    domain=[0.7346938775510204, 0.8530612244897959],
                     anchor='y6'
                 ),
                 xaxis7=XAxis(
@@ -426,7 +426,7 @@ class TestMakeSubplots(TestCase):
                     anchor='y12'
                 ),
                 xaxis13=XAxis(
-                    domain=[0.7346938775510203, 0.8530612244897958],
+                    domain=[0.7346938775510204, 0.8530612244897959],
                     anchor='y13'
                 ),
                 xaxis14=XAxis(
@@ -458,7 +458,7 @@ class TestMakeSubplots(TestCase):
                     anchor='y2'
                 ),
                 xaxis20=XAxis(
-                    domain=[0.7346938775510203, 0.8530612244897958],
+                    domain=[0.7346938775510204, 0.8530612244897959],
                     anchor='y20'
                 ),
                 xaxis21=XAxis(
@@ -486,7 +486,7 @@ class TestMakeSubplots(TestCase):
                     anchor='y26'
                 ),
                 xaxis27=XAxis(
-                    domain=[0.7346938775510203, 0.8530612244897958],
+                    domain=[0.7346938775510204, 0.8530612244897959],
                     anchor='y27'
                 ),
                 xaxis28=XAxis(
@@ -506,7 +506,7 @@ class TestMakeSubplots(TestCase):
                     anchor='y5'
                 ),
                 xaxis6=XAxis(
-                    domain=[0.7346938775510203, 0.8530612244897958],
+                    domain=[0.7346938775510204, 0.8530612244897959],
                     anchor='y6'
                 ),
                 xaxis7=XAxis(
