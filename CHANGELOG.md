@@ -4,8 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased] - TBA
 ### Added
--`column_width` and `row_width` parameters for `plotly.tools.make_subplots`. Run `help(plotly.tools.make_subplots)` for documentation
-
+-`column_width` and `row_width` parameters for `plotly.tools.make_subplots`. Call `help(plotly.tools.make_subplots)` for documentation.
 
 ## [2.2.2] - 2017-11-23
 ### Added
