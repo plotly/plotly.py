@@ -89,7 +89,15 @@ class TestMakeSubplots(TestCase):
 
     def test_column_width_not_list_of_correct_numbers(self):
         with self.assertRaises(Exception):
-            tls.make_subplots(rows=2, cols=2, column_width=[1])
+            tls.make_subplots(rows=2, cols=2, column_width=[0])
+
+    def test_row_width_not_list(self):
+        with self.assertRaises(Exception):
+            tls.make_subplots(rows=2, cols=2, row_width='not gonna work')
+
+    def test_row_width_not_list_of_correct_numbers(self):
+        with self.assertRaises(Exception):
+            tls.make_subplots(rows=2, cols=2, row_width=[1])
 
     def test_single_plot(self):
         expected = Figure(
@@ -297,7 +305,7 @@ class TestMakeSubplots(TestCase):
                     anchor='y9'
                 ),
                 yaxis1=YAxis(
-                    domain=[0.8062499999999999, 0.9999999999999999],
+                    domain=[0.80625, 1.0],
                     anchor='x1'
                 ),
                 yaxis10=YAxis(
@@ -341,7 +349,7 @@ class TestMakeSubplots(TestCase):
                     anchor='x19'
                 ),
                 yaxis2=YAxis(
-                    domain=[0.8062499999999999, 0.9999999999999999],
+                    domain=[0.80625, 1.0],
                     anchor='x2'
                 ),
                 yaxis20=YAxis(
@@ -381,23 +389,23 @@ class TestMakeSubplots(TestCase):
                     anchor='x28'
                 ),
                 yaxis3=YAxis(
-                    domain=[0.8062499999999999, 0.9999999999999999],
+                    domain=[0.80625, 1.0],
                     anchor='x3'
                 ),
                 yaxis4=YAxis(
-                    domain=[0.8062499999999999, 0.9999999999999999],
+                    domain=[0.80625, 1.0],
                     anchor='x4'
                 ),
                 yaxis5=YAxis(
-                    domain=[0.8062499999999999, 0.9999999999999999],
+                    domain=[0.80625, 1.0],
                     anchor='x5'
                 ),
                 yaxis6=YAxis(
-                    domain=[0.8062499999999999, 0.9999999999999999],
+                    domain=[0.80625, 1.0],
                     anchor='x6'
                 ),
                 yaxis7=YAxis(
-                    domain=[0.8062499999999999, 0.9999999999999999],
+                    domain=[0.80625, 1.0],
                     anchor='x7'
                 ),
                 yaxis8=YAxis(
@@ -586,31 +594,31 @@ class TestMakeSubplots(TestCase):
                     anchor='x21'
                 ),
                 yaxis22=YAxis(
-                    domain=[0.8062499999999999, 0.9999999999999999],
+                    domain=[0.80625, 1.0],
                     anchor='x22'
                 ),
                 yaxis23=YAxis(
-                    domain=[0.8062499999999999, 0.9999999999999999],
+                    domain=[0.80625, 1.0],
                     anchor='x23'
                 ),
                 yaxis24=YAxis(
-                    domain=[0.8062499999999999, 0.9999999999999999],
+                    domain=[0.80625, 1.0],
                     anchor='x24'
                 ),
                 yaxis25=YAxis(
-                    domain=[0.8062499999999999, 0.9999999999999999],
+                    domain=[0.80625, 1.0],
                     anchor='x25'
                 ),
                 yaxis26=YAxis(
-                    domain=[0.8062499999999999, 0.9999999999999999],
+                    domain=[0.80625, 1.0],
                     anchor='x26'
                 ),
                 yaxis27=YAxis(
-                    domain=[0.8062499999999999, 0.9999999999999999],
+                    domain=[0.80625, 1.0],
                     anchor='x27'
                 ),
                 yaxis28=YAxis(
-                    domain=[0.8062499999999999, 0.9999999999999999],
+                    domain=[0.80625, 1.0],
                     anchor='x28'
                 ),
                 yaxis3=YAxis(
@@ -1316,7 +1324,7 @@ class TestMakeSubplots(TestCase):
                 xaxis4=XAxis(
                     domain=[0.55, 1.0],
                     anchor='free',
-                    position=0.636
+                    position=0.6359999999999999
                 ),
                 xaxis5=XAxis(
                     domain=[0.0, 0.45],
@@ -1345,7 +1353,7 @@ class TestMakeSubplots(TestCase):
                     anchor='x1'
                 ),
                 yaxis2=YAxis(
-                    domain=[0.636, 0.788],
+                    domain=[0.6359999999999999, 0.7879999999999999],
                     anchor='x3'
                 ),
                 yaxis3=YAxis(
