@@ -772,6 +772,13 @@ def make_subplots(rows=1, cols=1,
                   in fraction of cell height
             * h (float or 'to_end', default='to_end') inset height
                   in fraction of cell height ('to_end': to cell top edge)
+
+    column_width (kwarg, list of numbers)
+        Column_width specifications
+
+        ex1: column_width = [4, 1, 1, 2] and cols=4
+
+        Column_width functions similarly to `column_width` of `plotly.graph_objs.Table`
     """
     # TODO: protected until #282
     from plotly.graph_objs import graph_objs
@@ -914,8 +921,8 @@ def make_subplots(rows=1, cols=1,
         column_width = kwargs['column_width']
         if not isinstance(column_width, list) or len(column_width) != cols:
             raise Exception(
-                "Keyword argument 'column_width' must be a list "
-                "containing the same number of floats as the number of cols."
+                "Keyword argument 'column_width' must be a list with {} "
+                "numbers in it, the number of subplot columns.".format(cols)
             )
     except KeyError:
         column_width = None

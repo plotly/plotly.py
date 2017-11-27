@@ -83,6 +83,14 @@ class TestMakeSubplots(TestCase):
         with self.assertRaises(Exception):
             tls.make_subplots(insets=([{'cell': (1, 0)}]))
 
+    def test_column_width_not_list(self):
+        with self.assertRaises(Exception):
+            tls.make_subplots(rows=2, cols=2, column_width='not gonna work')
+
+    def test_column_width_not_list_of_correct_numbers(self):
+        with self.assertRaises(Exception):
+            tls.make_subplots(rows=2, cols=2, column_width=[1])
+
     def test_single_plot(self):
         expected = Figure(
             data=Data(),
