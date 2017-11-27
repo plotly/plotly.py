@@ -776,9 +776,28 @@ def make_subplots(rows=1, cols=1,
     column_width (kwarg, list of numbers)
         Column_width specifications
 
-        ex1: column_width = [4, 1, 1, 2] and cols=4
+        - Functions similarly to `column_width` of `plotly.graph_objs.Table`.
+          Specify a list that contains numbers where the amount of numbers in
+          the list is equal to `cols`.
 
-        Column_width functions similarly to `column_width` of `plotly.graph_objs.Table`
+        - The numbers in the list indicate the proportions that each column
+          domains take across the full horizontal domain excluding padding.
+
+        - For example, if columns_width=[3, 1], horizontal_spacing=0, and
+          cols=2, the domains for each column would be [0. 0.75] and [0.75, 1]
+
+    row_width (kwargs, list of numbers)
+        Row_width specifications
+
+        - Functions similarly to `column_width`. Specify a list that contains
+          numbers where the amount of numbers in the list is equal to `rows`.
+
+        - The numbers in the list indicate the proportions that each row
+          domains take along the full vertical domain excluding padding.
+
+        - For example, if row_width=[3, 1], vertical_spacing=0, and
+          cols=2, the domains for each row from top to botton would be
+          [0. 0.75] and [0.75, 1]
     """
     # TODO: protected until #282
     from plotly.graph_objs import graph_objs
@@ -814,7 +833,8 @@ def make_subplots(rows=1, cols=1,
 
     # Throw exception if non-valid kwarg is sent
     VALID_KWARGS = ['horizontal_spacing', 'vertical_spacing',
-                    'specs', 'insets', 'subplot_titles', 'column_width']
+                    'specs', 'insets', 'subplot_titles', 'column_width',
+                    'row_width']
     for key in kwargs.keys():
         if key not in VALID_KWARGS:
             raise Exception("Invalid keyword argument: '{0}'".format(key))
@@ -914,15 +934,13 @@ def make_subplots(rows=1, cols=1,
         )
         _check_keys_and_fill('insets', insets, INSET_defaults)
 
-    # Set height of each subplot cell (excluding padding)
-    height = (1. - vertical_spacing * (rows - 1)) / rows
-
+    # set heights (with 'column_width')
     try:
         column_width = kwargs['column_width']
         if not isinstance(column_width, list) or len(column_width) != cols:
             raise Exception(
                 "Keyword argument 'column_width' must be a list with {} "
-                "numbers in it, the number of subplot columns.".format(cols)
+                "numbers in it, the number of subplot cols.".format(cols)
             )
     except KeyError:
         column_width = None
@@ -937,6 +955,27 @@ def make_subplots(rows=1, cols=1,
     else:
         widths = [(1. - horizontal_spacing * (cols - 1)) / cols] * cols
 
+    # set widths (with 'row_width')
+    try:
+        row_width = kwargs['row_width']
+        if not isinstance(row_width, list) or len(row_width) != rows:
+            raise Exception(
+                "Keyword argument 'row_width' must be a list with {} "
+                "numbers in it, the number of subplot rows.".format(rows)
+            )
+    except KeyError:
+        row_width = None
+
+    if row_width:
+        cum_sum = float(sum(row_width))
+        heights = []
+        for h in row_width:
+            heights.append(
+                (1. - vertical_spacing * (rows - 1)) * (h / cum_sum)
+            )
+    else:
+        heights = [(1. - vertical_spacing * (rows - 1)) / rows] * rows
+
     # Built row/col sequence using 'row_dir' and 'col_dir'
     COL_DIR = START_CELL['col_dir']
     ROW_DIR = START_CELL['row_dir']
@@ -948,7 +987,7 @@ def make_subplots(rows=1, cols=1,
         [
             (
                 (sum(widths[:c]) + c * horizontal_spacing),
-                (height + vertical_spacing) * r
+                (sum(heights[:r]) + r * vertical_spacing)
             ) for c in col_seq
         ] for r in row_seq
     ]
@@ -1076,10 +1115,10 @@ def make_subplots(rows=1, cols=1,
             # Get y domain (dep. on row_dir) using grid & r_spanned
             if ROW_DIR > 0:
                 y_s = grid[r][c][1] + spec['b']
-                y_e = grid[r_spanned][c][1] + height - spec['t']
+                y_e = grid[r_spanned][c][1] + heights[-1 - r] - spec['t']
             else:
                 y_s = grid[r_spanned][c][1] + spec['b']
-                y_e = grid[r][c][1] + height - spec['t']
+                y_e = grid[r][c][1] + heights[-1 - r] - spec['t']
             y_domain = [y_s, y_e]
 
             if spec['is_3d']:
@@ -1146,11 +1185,11 @@ def make_subplots(rows=1, cols=1,
             x_domain = [x_s, x_e]
 
             # Get inset y domain using grid
-            y_s = grid[r][c][1] + inset['b'] * height
+            y_s = grid[r][c][1] + inset['b'] * heights[-1 - r]
             if inset['h'] == 'to_end':
-                y_e = grid[r][c][1] + height
+                y_e = grid[r][c][1] + heights[-1 - r]
             else:
-                y_e = y_s + inset['h'] * height
+                y_e = y_s + inset['h'] * heights[-1 - r]
             y_domain = [y_s, y_e]
 
             if inset['is_3d']:
