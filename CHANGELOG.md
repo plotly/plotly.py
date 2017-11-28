@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased] - TBA
+### Added
+-`column_width` and `row_width` parameters for `plotly.tools.make_subplots`. Call `help(plotly.tools.make_subplots)` for documentation.
+
 ## [2.2.2] - 2017-11-23
 ### Added
 - bullet chart figure factory. Call `help(plotly.figure_factory.create_bullet)` for examples and how to get started making bullet charts with the API.
