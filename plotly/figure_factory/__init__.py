@@ -5,6 +5,7 @@ import numpy
 
 from plotly.figure_factory._2d_density import create_2d_density
 from plotly.figure_factory._annotated_heatmap import create_annotated_heatmap
+from plotly.figure_factory._bullet import create_bullet
 from plotly.figure_factory._candlestick import create_candlestick
 from plotly.figure_factory._dendrogram import create_dendrogram
 from plotly.figure_factory._distplot import create_distplot

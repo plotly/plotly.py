@@ -442,21 +442,37 @@ def make_colorscale(colors, scale=None):
         return colorscale
 
 
-def find_intermediate_color(lowcolor, highcolor, intermed):
+def find_intermediate_color(lowcolor, highcolor, intermed, colortype='tuple'):
     """
     Returns the color at a given distance between two colors
 
     This function takes two color tuples, where each element is between 0
     and 1, along with a value 0 < intermed < 1 and returns a color that is
-    intermed-percent from lowcolor to highcolor
+    intermed-percent from lowcolor to highcolor. If colortype is set to 'rgb',
+    the function will automatically convert the rgb type to a tuple, find the
+    intermediate color and return it as an rgb color.
     """
+    if colortype == 'rgb':
+        # convert to tuple color, eg. (1, 0.45, 0.7)
+        lowcolor = unlabel_rgb(lowcolor)
+        highcolor = unlabel_rgb(highcolor)
+
     diff_0 = float(highcolor[0] - lowcolor[0])
     diff_1 = float(highcolor[1] - lowcolor[1])
     diff_2 = float(highcolor[2] - lowcolor[2])
 
-    return (lowcolor[0] + intermed * diff_0,
-            lowcolor[1] + intermed * diff_1,
-            lowcolor[2] + intermed * diff_2)
+    inter_med_tuple = (
+        lowcolor[0] + intermed * diff_0,
+        lowcolor[1] + intermed * diff_1,
+        lowcolor[2] + intermed * diff_2
+    )
+
+    if colortype == 'rgb':
+        # back to an rgb string, e.g. rgb(30, 20, 10)
+        inter_med_rgb = label_rgb(inter_med_tuple)
+        return inter_med_rgb
+
+    return inter_med_tuple
 
 
 def unconvert_from_RGB_255(colors):
@@ -498,29 +514,39 @@ def convert_to_RGB_255(colors):
     return (rgb_components[0], rgb_components[1], rgb_components[2])
 
 
-def n_colors(lowcolor, highcolor, n_colors):
+def n_colors(lowcolor, highcolor, n_colors, colortype='tuple'):
     """
     Splits a low and high color into a list of n_colors colors in it
 
     Accepts two color tuples and returns a list of n_colors colors
     which form the intermediate colors between lowcolor and highcolor
-    from linearly interpolating through RGB space
+    from linearly interpolating through RGB space. If colortype is 'rgb'
+    the function will return a list of colors in the same form.
     """
+    if colortype == 'rgb':
+        # convert to tuple
+        lowcolor = unlabel_rgb(lowcolor)
+        highcolor = unlabel_rgb(highcolor)
+
     diff_0 = float(highcolor[0] - lowcolor[0])
     incr_0 = diff_0/(n_colors - 1)
     diff_1 = float(highcolor[1] - lowcolor[1])
     incr_1 = diff_1/(n_colors - 1)
     diff_2 = float(highcolor[2] - lowcolor[2])
     incr_2 = diff_2/(n_colors - 1)
-    color_tuples = []
+    list_of_colors = []
 
     for index in range(n_colors):
         new_tuple = (lowcolor[0] + (index * incr_0),
                      lowcolor[1] + (index * incr_1),
                      lowcolor[2] + (index * incr_2))
-        color_tuples.append(new_tuple)
+        list_of_colors.append(new_tuple)
 
-    return color_tuples
+    if colortype == 'rgb':
+        # back to an rgb string
+        list_of_colors = color_parser(list_of_colors, label_rgb)
+
+    return list_of_colors
 
 
 def label_rgb(colors):
