@@ -12,6 +12,7 @@ import plotly.graph_objs as go
 pd = optional_imports.get_module('pandas')
 
 
+# TODO: replace by same function in plotly/figure_factory/utils.py
 def is_sequence(obj):
     return (isinstance(obj, collections.Sequence) and
             not isinstance(obj, str))
