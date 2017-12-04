@@ -2,17 +2,21 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased] - TBA
+## [2.2.3] - 2017-12-04
 ### Added
 -`column_width` and `row_width` parameters for `plotly.tools.make_subplots`. Call `help(plotly.tools.make_subplots)` for documentation.
+### Updated
+- Updated `plotly.min.js` to version 1.31.2.
+  - Fixes include adjustments to `table` trace for offline plotting.
+  - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1312----2017-10-23) for additional information regarding the updates.
 
 ## [2.2.2] - 2017-11-23
 ### Added
-- bullet chart figure factory. Call `help(plotly.figure_factory.create_bullet)` for examples and how to get started making bullet charts with the API.
+- Bullet chart figure factory. Call `help(plotly.figure_factory.create_bullet)` for examples and how to get started making bullet charts with the API.
 
 ## [2.2.1] - 2017-10-26
 ### Fixed
-- presentation objects now added to setup.py
+- Presentation objects now added to setup.py
 
 ## [2.2.0] - 2017-10-26
 ### Added
