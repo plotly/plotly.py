@@ -2,7 +2,7 @@
 
 > 📢  Announcement!  
 > Registration is open for a 2 day, Dash master class in Montreal, February 17-18.  
-> [Registration here](https://plotcon.plot.ly/workshops) 🎚 📈 🇨🇦
+> [Register online here](https://plotcon.plot.ly/workshops) 🎚 📈 🇨🇦
 
 ***
 
