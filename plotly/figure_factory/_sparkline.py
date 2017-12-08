@@ -15,7 +15,7 @@ VALID_CHART_TYPES = ('name', 'bullet', 'line', 'avg', 'bar')
 def create_sparkline(df, chart_types=VALID_CHART_TYPES,
                      colors=('rgb(181,221,232)', 'rgb(62,151,169)'),
                      column_width=None, show_titles=False, textalign='center',
-                     horizontal_spacing=0.03, vertical_spacing=0,
+                     horizontal_spacing=0.0, vertical_spacing=0.0,
                      alternate_row_color=True,
                      lane_colors=('rgba(249, 247, 244, 0.5)',
                                   'rgba(255, 253, 250, 0.5)'),
