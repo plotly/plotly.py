@@ -9,12 +9,16 @@ import plotly.graph_objs as go
 import numpy as np
 pd = optional_imports.get_module('pandas')
 
-VALID_CHART_TYPES = ['name', 'bullet', 'line', 'avg', 'bar']
+VALID_CHART_TYPES = ('name', 'bullet', 'line', 'avg', 'bar')
 
 
-def create_sparkline(df, chart_types=('name', 'bullet', 'line', 'avg', 'bar'),
+def create_sparkline(df, chart_types=VALID_CHART_TYPES,
                      colors=('rgb(181,221,232)', 'rgb(62,151,169)'),
-                     column_width=None, show_titles=True, left_aligned=False,
+                     column_width=None, show_titles=False, textalign='center',
+                     horizontal_spacing=0.03, vertical_spacing=0,
+                     alternate_row_color=True,
+                     lane_colors=('rgba(249, 247, 244, 0.5)',
+                                  'rgba(255, 253, 250, 0.5)'),
                      scatter_options=None, **layout_options):
     """
     Returns figure for sparkline.
@@ -33,8 +37,14 @@ def create_sparkline(df, chart_types=('name', 'bullet', 'line', 'avg', 'bar'),
         `help(plotly.tools.make_subplots)` for more info on this subplot param
     :param (bool) show_titles: determines if title of chart type is displayed
         above their respective column
-    :param (bool) left_aligned: determines if text cells are left-algined or
-        right-aligned
+    :param (str) textalign: aligns name and avg cells. Use either 'center',
+        'left', or 'right'. Default='center'.
+    :param (float) horizontal_spacing:
+    :param (float) vertical_spacing :
+    :param (float) alternate_row_color: set to True to enable the alternate
+        row coloring of the chart. Uses the colors from param 'lane_colors'
+    :param (list) lane_colors: a list/tuple of two colors that are used to
+        alternately color the rows of the chart.
     :param (dict) scatter_options: describes attributes for the scatter point
         in each bullet chart such as name and marker size. Call
         help(plotly.graph_objs.Scatter) for more information on valid params.
@@ -81,8 +91,8 @@ def create_sparkline(df, chart_types=('name', 'bullet', 'line', 'avg', 'bar'),
     fig = plotly.tools.make_subplots(
         len(df.columns), num_of_chart_types, print_grid=False,
         shared_xaxes=False, shared_yaxes=False,
-        horizontal_spacing=0, vertical_spacing=0,
-        column_width=column_width
+        horizontal_spacing=horizontal_spacing,
+        vertical_spacing=vertical_spacing, column_width=column_width
     )
 
     # layout options
@@ -103,16 +113,25 @@ def create_sparkline(df, chart_types=('name', 'bullet', 'line', 'avg', 'bar'),
                 showticklabels=False
             )
 
-    # left aligned
-    x = 0 if left_aligned else 1
-    xanchor = 'left' if left_aligned else 'right'
+    # text alignment
+    xanchor = textalign
+    if textalign == 'left':
+        x = 0
+    elif textalign == 'center':
+        x = 0.5
+    elif textalign == 'right':
+        x = 1
+    else:
+        raise exceptions.PlotlyError(
+            'textalign must be left, center or right'
+        )
 
     # scatter options
     default_scatter = {
         'mode': 'markers',
         'marker': {'size': 9,
                    'symbol': 'diamond-tall',
-                   'color': colors[0]}
+                   'color': colors[1]}
     }
 
     if not scatter_options:
@@ -149,37 +168,75 @@ def create_sparkline(df, chart_types=('name', 'bullet', 'line', 'avg', 'bar'),
                     y=[0],
                     visible=False
                 )
+                if alternate_row_color:
+                    bkgcolor = go.Scatter(
+                        x=[0, 1],
+                        y=[1.2, 1.2],
+                        fill='tozeroy',
+                        mode='line',
+                        hoverinfo='none',
+                        line=dict(
+                            color=(lane_colors[0] if (j + 1) % 2 == 0
+                                   else lane_colors[1]),
+                            width=0
+                        ),
+                    )
+                    fig.append_trace(bkgcolor, j + 1, c + 1)
                 fig.append_trace(empty_data, j + 1, c + 1)
 
             elif chart == 'bullet':
                 bullet_range = go.Bar(
                     x=[rounded_mean],
-                    y=[0],
+                    y=[0.5],
                     marker=dict(
                         color=colors[0]
                     ),
-                    orientation='h'
+                    hoverinfo='x',
+                    orientation='h',
+                    width=0.5
                 )
 
                 bullet_measure = go.Bar(
                     x=[list(df[key])[-1]],
-                    y=[0],
+                    y=[0.5],
                     marker=dict(
                         color=colors[1]
                     ),
+                    hoverinfo='x',
                     orientation='h',
-                    width=0.2,
-                    offset=-0.1
+                    width=0.14,
+                    offset=-0.07
                 )
 
                 bullet_pt = go.Scatter(
                     x=[max(df[key])],
-                    y=[0],
+                    y=[0.5],
+                    hoverinfo='x',
                     **scatter_options
                 )
+
+                if alternate_row_color:
+                    bkgcolor = go.Scatter(
+                        x=[0, 2 * max(df[key])],
+                        y=[1, 1],
+                        fill='tozeroy',
+                        mode='lines',
+                        hoverinfo='none',
+                        line=dict(
+                            color=(lane_colors[0] if (j + 1) % 2 == 0
+                                   else lane_colors[1]),
+                            width=0
+                        ),
+                    )
+
+                    fig.append_trace(bkgcolor, j + 1, c + 1)
                 fig.append_trace(bullet_range, j + 1, c + 1)
                 fig.append_trace(bullet_measure, j + 1, c + 1)
                 fig.append_trace(bullet_pt, j + 1, c + 1)
+
+                fig['layout']['yaxis{}'.format(
+                    j * num_of_chart_types + (c + 1)
+                    )]['range'] = [0, 1]
             elif chart == 'line':
                 trace_line = go.Scatter(
                     x=range(len(df[key])),
@@ -199,7 +256,26 @@ def create_sparkline(df, chart_types=('name', 'bullet', 'line', 'avg', 'bar'),
                         color=colors[1]
                     )
                 )
+
+                if alternate_row_color:
+                    bkgcolor = go.Scatter(
+                        x=[0, len(df[key])],
+                        y=[2 * max(df[key].tolist())] * 2,
+                        fill='tozeroy',
+                        mode='lines',
+                        hoverinfo='none',
+                        line=dict(
+                            color=(lane_colors[0] if (j + 1) % 2 == 0
+                                   else lane_colors[1]),
+                            width=0
+                        ),
+                    )
+                    fig.append_trace(bkgcolor, j + 1, c + 1)
                 fig.append_trace(trace_line_pt, j + 1, c + 1)
+
+                fig['layout']['yaxis{}'.format(
+                    j * num_of_chart_types + (c + 1)
+                )]['range'] = [0, 2 * max(df[key].tolist())]
             elif chart == 'avg':
                 fig['layout']['annotations'].append(
                     dict(
@@ -218,6 +294,21 @@ def create_sparkline(df, chart_types=('name', 'bullet', 'line', 'avg', 'bar'),
                     y=[0],
                     visible=False
                 )
+
+                if alternate_row_color:
+                    bkgcolor = go.Scatter(
+                        x=[0, 2],
+                        y=[1.2, 1.2],
+                        fill='tozeroy',
+                        mode='line',
+                        hoverinfo='none',
+                        line=dict(
+                            color=(lane_colors[0] if (j + 1) % 2 == 0
+                                   else lane_colors[1]),
+                            width=0
+                        ),
+                    )
+                    fig.append_trace(bkgcolor, j + 1, c + 1)
                 fig.append_trace(empty_data, j + 1, c + 1)
             elif chart == 'bar':
                 trace_bar = go.Bar(
@@ -228,7 +319,26 @@ def create_sparkline(df, chart_types=('name', 'bullet', 'line', 'avg', 'bar'),
                                range(len(df[key]) - 1)] + [colors[1]]
                     )
                 )
+
+                if alternate_row_color:
+                    bkgcolor = go.Scatter(
+                        x=[-1, len(df[key])],
+                        y=[2 * max(df[key].tolist())] * 2,
+                        fill='tozeroy',
+                        mode='lines',
+                        hoverinfo='none',
+                        line=dict(
+                            color=(lane_colors[0] if (j + 1) % 2 == 0
+                                   else lane_colors[1]),
+                            width=0
+                        ),
+                    )
+                    fig.append_trace(bkgcolor, j + 1, c + 1)
                 fig.append_trace(trace_bar, j + 1, c + 1)
+
+                fig['layout']['yaxis{}'.format(
+                    j * num_of_chart_types + (c + 1)
+                )]['range'] = [0, 2 * max(df[key].tolist())]
             else:
                 raise exceptions.PlotlyError(
                     'Your chart type must be a list and may only contain any '
@@ -254,4 +364,5 @@ def create_sparkline(df, chart_types=('name', 'bullet', 'line', 'avg', 'bar'),
                 fig['layout']['{}{}'.format(
                     axis, j * num_of_chart_types + idx + 1
                 )]['range'] = [0, 1]
+
     return fig
