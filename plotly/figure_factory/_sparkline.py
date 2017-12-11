@@ -162,7 +162,7 @@ def create_sparkline(df, chart_types=VALID_CHART_TYPES,
                         xanchor=xanchor,
                         text=key,
                         showarrow=False,
-                        font=dict(size=15),
+                        font=dict(size=12),
                     )
                 )
                 empty_data = go.Bar(
@@ -217,9 +217,10 @@ def create_sparkline(df, chart_types=VALID_CHART_TYPES,
                     **scatter_options
                 )
 
+                range_e = max(df[key]) + 0.5 * rounded_mean
                 if alternate_row_color:
                     bkgcolor = go.Scatter(
-                        x=[0, max(df[key])],
+                        x=[0, range_e],
                         y=[1, 1],
                         fill='tozeroy',
                         mode='lines',
@@ -236,6 +237,9 @@ def create_sparkline(df, chart_types=VALID_CHART_TYPES,
                 fig.append_trace(bullet_measure, j + 1, c + 1)
                 fig.append_trace(bullet_pt, j + 1, c + 1)
 
+                fig['layout']['xaxis{}'.format(
+                    j * num_of_chart_types + (c + 1)
+                )]['range'] = [0, range_e]
                 fig['layout']['yaxis{}'.format(
                     j * num_of_chart_types + (c + 1)
                 )]['range'] = [0, 1]
@@ -256,7 +260,8 @@ def create_sparkline(df, chart_types=VALID_CHART_TYPES,
                     mode='markers',
                     marker=dict(
                         color=colors[1]
-                    )
+                    ),
+                    **scatter_options
                 )
 
                 if alternate_row_color:
@@ -288,7 +293,7 @@ def create_sparkline(df, chart_types=VALID_CHART_TYPES,
                         xanchor=xanchor,
                         text='{}'.format(rounded_mean),
                         showarrow=False,
-                        font=dict(size=15),
+                        font=dict(size=12),
                     )
                 )
                 empty_data = go.Bar(
