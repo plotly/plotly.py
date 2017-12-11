@@ -17,8 +17,8 @@ def create_sparkline(df, chart_types=VALID_CHART_TYPES,
                      column_width=None, show_titles=False, textalign='center',
                      horizontal_spacing=0.0, vertical_spacing=0.0,
                      alternate_row_color=True,
-                     lane_colors=('rgba(249, 247, 244, 0.5)',
-                                  'rgba(255, 253, 250, 0.5)'),
+                     lane_colors=('rgba(249, 247, 244, 1.0)',
+                                  'rgba(255, 253, 250, 1.0)'),
                      scatter_options=None, **layout_options):
     """
     Returns figure for sparkline.
@@ -39,8 +39,10 @@ def create_sparkline(df, chart_types=VALID_CHART_TYPES,
         above their respective column
     :param (str) textalign: aligns name and avg cells. Use either 'center',
         'left', or 'right'. Default='center'.
-    :param (float) horizontal_spacing:
-    :param (float) vertical_spacing :
+    :param (float) horizontal_spacing: Space between subplot columns.
+        Applied to all columns
+    :param (float) vertical_spacing: Space between subplot rows.
+        Applied to all rows
     :param (float) alternate_row_color: set to True to enable the alternate
         row coloring of the chart. Uses the colors from param 'lane_colors'
     :param (list) lane_colors: a list/tuple of two colors that are used to
@@ -97,7 +99,7 @@ def create_sparkline(df, chart_types=VALID_CHART_TYPES,
 
     # layout options
     fig['layout'].update(
-        title='Sparkline Chart',
+        title='',
         annotations=[],
         showlegend=False
     )
@@ -217,7 +219,7 @@ def create_sparkline(df, chart_types=VALID_CHART_TYPES,
 
                 if alternate_row_color:
                     bkgcolor = go.Scatter(
-                        x=[0, 2 * max(df[key])],
+                        x=[0, max(df[key])],
                         y=[1, 1],
                         fill='tozeroy',
                         mode='lines',
@@ -236,7 +238,7 @@ def create_sparkline(df, chart_types=VALID_CHART_TYPES,
 
                 fig['layout']['yaxis{}'.format(
                     j * num_of_chart_types + (c + 1)
-                    )]['range'] = [0, 1]
+                )]['range'] = [0, 1]
             elif chart == 'line':
                 trace_line = go.Scatter(
                     x=range(len(df[key])),
@@ -347,6 +349,10 @@ def create_sparkline(df, chart_types=VALID_CHART_TYPES,
                             VALID_CHART_TYPES, 'or')
                     )
                 )
+            for x_y in ['xaxis', 'yaxis']:
+                fig['layout']['{}{}'.format(
+                    x_y, j * num_of_chart_types + (c + 1)
+                )]['fixedrange'] = True
 
     # show titles
     if show_titles:
