@@ -274,6 +274,7 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
 
         if show_colorbar is True:
             # generate dummy data for colorscale visibility
+            data=[]
             data.append(
                 dict(
                     x=[tasks[index]['x0'], tasks[index]['x0']],
@@ -355,6 +356,7 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
 
         if show_colorbar is True:
             # generate dummy data to generate legend
+            data=[]
             showlegend = True
             for k, index_value in enumerate(index_vals):
                 data.append(
@@ -512,6 +514,7 @@ def gantt_dict(chart, colors, title, index_col, show_colorbar, bar_width,
 
     if show_colorbar is True:
         # generate dummy data to generate legend
+        data=[]
         showlegend = True
         for k, index_value in enumerate(index_vals):
             data.append(
