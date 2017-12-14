@@ -274,8 +274,10 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
 
         if show_colorbar is True:
             # generate dummy data for colorscale visibility
-            data=[]
-            data.append(
+            datalisted = data
+            newentries = []
+            
+            newentries.append(
                 dict(
                     x=[tasks[index]['x0'], tasks[index]['x0']],
                     y=[index, index],
@@ -287,6 +289,7 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
                             'cmin': 0}
                 )
             )
+            data = newentries + datalisted
 
     if isinstance(chart[0][index_col], str):
         index_vals = []
@@ -356,10 +359,12 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
 
         if show_colorbar is True:
             # generate dummy data to generate legend
-            data=[]
+            datalisted = data
+            newentries = []
+            
             showlegend = True
             for k, index_value in enumerate(index_vals):
-                data.append(
+                newentries.append(
                     dict(
                         x=[tasks[index]['x0'], tasks[index]['x0']],
                         y=[k, k],
@@ -372,6 +377,7 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
                         )
                     )
                 )
+            data = newentries + datalisted
 
     layout = dict(
         title=title,
@@ -514,10 +520,12 @@ def gantt_dict(chart, colors, title, index_col, show_colorbar, bar_width,
 
     if show_colorbar is True:
         # generate dummy data to generate legend
-        data=[]
+        datalisted = data
+        newentries = []
+        
         showlegend = True
         for k, index_value in enumerate(index_vals):
-            data.append(
+            newentries.append(
                 dict(
                     x=[tasks[index]['x0'], tasks[index]['x0']],
                     y=[k, k],
@@ -530,6 +538,7 @@ def gantt_dict(chart, colors, title, index_col, show_colorbar, bar_width,
                     )
                 )
             )
+        data = newentries + datalisted
 
     layout = dict(
         title=title,
