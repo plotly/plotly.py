@@ -42,6 +42,7 @@ def create_sparkline(df, chart_types=VALID_CHART_TYPES, trace_colors=None,
     :param (list|tuple) chart_types: a sequence of any combination of valid
         chart types. The valid chart types are 'label', 'bullet', 'line', 'avg'
         and 'bar'
+        Default = ('label', 'bullet', 'line', 'avg', 'bar', 'area')
     :param (list|tuple) trace_colors: a list of colors or a list of lists of
         two colors. Each row uses two colors: a darker one and a lighter one.
         Options:
@@ -57,7 +58,7 @@ def create_sparkline(df, chart_types=VALID_CHART_TYPES, trace_colors=None,
               options
         Whenever trace_colors has fewer colors than the number of rows of the
         figure, the colors will repeat from the start of the list
-        Default = ('rgb(181,221,232)', 'rgb(62,151,169)')
+        Default = [['rgb(62,151,169)', 'rgb(181,221,232)']]
     :param (list) column_width: Specify a list that contains numbers where
         the amount of numbers in the list is equal to `chart_types`. Call
         `help(plotly.tools.make_subplots)` for more info on this subplot param
@@ -67,16 +68,21 @@ def create_sparkline(df, chart_types=VALID_CHART_TYPES, trace_colors=None,
         'left', or 'right'. Default='center'.
     :param (float) horizontal_spacing: Space between subplot columns.
         Applied to all columns
+        Default = 0.0
     :param (float) vertical_spacing: Space between subplot rows.
         Applied to all rows
-    :param (float) alternate_row_color: set to True to enable the alternate
+        Default = 0.0
+    :param (bool) alternate_row_color: set to True to enable the alternate
         row coloring of the chart. Uses the trace_colors from param 'row_colors'
+        Default = True
     :param (list) row_colors: a list/tuple of colors that are used to
         alternately color the rows of the chart. If the number of colors in the
         list is fewer than the number of rows, the active color for the layout
         will be looped back to the first in the list
+        Default = ('rgb(247, 247, 242)', 'rgb(255, 253, 250)')
     :param (float) line_width: sets the width of the lines used in 'area' or
         filled area line charts
+        Default = 2
     :param (dict) scatter_options: describes attributes for the scatter point
         in each bullet chart such as label and marker size. Call
         help(plotly.graph_objs.Scatter) for more information on valid params.
