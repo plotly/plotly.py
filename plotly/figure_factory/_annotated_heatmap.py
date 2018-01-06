@@ -180,8 +180,8 @@ class _AnnotatedHeatmap(object):
                 max_col = map(int,
                               self.colorscale[-1][1].strip('rgb()').split(','))
             elif '#' in self.colorscale[0][1]:
-                    min_col = utils.hex_to_rgb(self.colorscale[0][1])
-                    max_col = utils.hex_to_rgb(self.colorscale[-1][1])
+                min_col = utils.hex_to_rgb(self.colorscale[0][1])
+                max_col = utils.hex_to_rgb(self.colorscale[-1][1])
             else:
                 min_col = [255, 255, 255]
                 max_col = [255, 255, 255]
