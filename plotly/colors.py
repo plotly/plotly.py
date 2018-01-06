@@ -224,7 +224,7 @@ def validate_colors(colors):
         colors_list = colors
 
     # Validate colors in colors_list
-    for j, each_color in enumerate(colors_list):
+    for each_color in colors_list:
         if 'rgb' in each_color:
             each_color = color_parser(
                 each_color, unlabel_rgb

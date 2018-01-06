@@ -1,6 +1,6 @@
 from setuptools import setup
 
-exec (open('plotly/version.py').read())
+exec(open('plotly/version.py').read())
 
 
 def readme():
