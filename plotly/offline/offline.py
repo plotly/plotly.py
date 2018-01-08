@@ -6,12 +6,12 @@
 from __future__ import absolute_import
 
 import os
+import time
 import uuid
 import warnings
-from pkg_resources import resource_string
-import time
 import webbrowser
 
+from pkg_resources import resource_string
 from requests.compat import json as _json
 
 import plotly
@@ -40,6 +40,7 @@ def get_plotlyjs():
     path = os.path.join('package_data', 'plotly.min.js')
     plotlyjs = resource_string('plotly', path).decode('utf-8')
     return plotlyjs
+
 
 def get_image_download_script(caller):
     """
