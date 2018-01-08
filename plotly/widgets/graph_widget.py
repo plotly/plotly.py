@@ -121,7 +121,7 @@ class GraphWidget(widgets.DOMWidget):
         self._event_handlers[event_type].register_callback(callback,
                                                            remove=remove)
         event_callbacks = self._event_handlers[event_type].callbacks
-        if (event_callbacks and event_type not in self._listener_set):
+        if event_callbacks and event_type not in self._listener_set:
             self._listener_set.add(event_type)
             message = {'task': 'listen', 'events': list(self._listener_set)}
             self._handle_outgoing_message(message)
