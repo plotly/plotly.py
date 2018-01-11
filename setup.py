@@ -1,6 +1,7 @@
 from setuptools import setup
 
-exec(open('plotly/version.py').read())
+main_ns = {}
+exec(open('plotly/version.py').read(), main_ns)
 
 
 def readme():
@@ -9,7 +10,7 @@ def readme():
 
 
 setup(name='plotly',
-      version=__version__,
+      version=main_ns['__version__'],
       use_2to3=False,
       author='Chris P',
       author_email='chris@plot.ly',

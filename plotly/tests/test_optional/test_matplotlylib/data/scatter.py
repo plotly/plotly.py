@@ -4,7 +4,7 @@ from plotly.graph_objs import (Data, Figure, Font, Layout, Line, Margin,
                                Marker, Scatter, XAxis, YAxis)
 
 D = dict(
-    x1=[1, 2, 2, 4, 5, 6, 1, 7, 8, 5 ,3],
+    x1=[1, 2, 2, 4, 5, 6, 1, 7, 8, 5, 3],
     y1=[5, 3, 7, 2, 9, 7, 8, 4, 5, 9, 2],
     x2=[-1, 1, -0.3, -0.6, 0.4, 0.8, -0.1, 0.7],
     y2=[-0.5, 0.4, 0.7, -0.6, 0.3, -1, 0, 0.3]
