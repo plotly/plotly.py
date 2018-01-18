@@ -41,14 +41,19 @@ def validate_index(index_vals):
         types differ
     """
     from numbers import Number
-    if isinstance(index_vals[0], Number):
+    if isinstance(index_vals, (list, tuple)):
+        first_item = index_vals[0]
+    else:
+        # assume pandas Series
+        first_item = index_vals.iloc[0]
+    if isinstance(first_item, Number):
         if not all(isinstance(item, Number) for item in index_vals):
             raise exceptions.PlotlyError("Error in indexing column. "
                                          "Make sure all entries of each "
                                          "column are all numbers or "
                                          "all strings.")
 
-    elif isinstance(index_vals[0], str):
+    elif isinstance(first_item, str):
         if not all(isinstance(item, str) for item in index_vals):
             raise exceptions.PlotlyError("Error in indexing column. "
                                          "Make sure all entries of each "
