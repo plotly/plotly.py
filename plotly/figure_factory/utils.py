@@ -68,16 +68,22 @@ def validate_dataframe(array):
     :raises: (PlotlyError) If there are any two items in any list whose
         types differ
     """
+    # works with list of lists and/or dataframes
     from numbers import Number
-    for vector in array:
-        if isinstance(vector[0], Number):
-            if not all(isinstance(item, Number) for item in vector):
+    for col_name in array:
+        if isinstance(array[col_name], (list, tuple)):
+            first_item = array[col_name][0]
+        else:
+            # assume pandas Series
+            first_item = array[col_name].iloc[0]
+        if isinstance(first_item, Number):
+            if not all(isinstance(item, Number) for item in array[col_name]):
                 raise exceptions.PlotlyError("Error in dataframe. "
                                              "Make sure all entries of "
                                              "each column are either "
                                              "numbers or strings.")
-        elif isinstance(vector[0], str):
-            if not all(isinstance(item, str) for item in vector):
+        elif isinstance(first_item, str):
+            if not all(isinstance(item, str) for item in array[col_name]):
                 raise exceptions.PlotlyError("Error in dataframe. "
                                              "Make sure all entries of "
                                              "each column are either "
