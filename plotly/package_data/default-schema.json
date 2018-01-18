@@ -2978,6 +2978,38 @@
                         "role": "style",
                         "valType": "string"
                     },
+                    "tickformatstops": {
+                        "items": {
+                            "tickformatstop": {
+                                "dtickrange": {
+                                    "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*",
+                                    "editType": "plot",
+                                    "items": [
+                                        {
+                                            "editType": "plot",
+                                            "valType": "any"
+                                        },
+                                        {
+                                            "editType": "plot",
+                                            "valType": "any"
+                                        }
+                                    ],
+                                    "role": "info",
+                                    "valType": "info_array"
+                                },
+                                "editType": "plot",
+                                "role": "object",
+                                "value": {
+                                    "description": "string - dtickformat for described zoom level, the same as *tickformat*",
+                                    "dflt": "",
+                                    "editType": "plot",
+                                    "role": "style",
+                                    "valType": "string"
+                                }
+                            }
+                        },
+                        "role": "object"
+                    },
                     "ticklen": {
                         "description": "Sets the tick length (in px).",
                         "dflt": 5,
@@ -3489,6 +3521,38 @@
                         "role": "style",
                         "valType": "string"
                     },
+                    "tickformatstops": {
+                        "items": {
+                            "tickformatstop": {
+                                "dtickrange": {
+                                    "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*",
+                                    "editType": "plot",
+                                    "items": [
+                                        {
+                                            "editType": "plot",
+                                            "valType": "any"
+                                        },
+                                        {
+                                            "editType": "plot",
+                                            "valType": "any"
+                                        }
+                                    ],
+                                    "role": "info",
+                                    "valType": "info_array"
+                                },
+                                "editType": "plot",
+                                "role": "object",
+                                "value": {
+                                    "description": "string - dtickformat for described zoom level, the same as *tickformat*",
+                                    "dflt": "",
+                                    "editType": "plot",
+                                    "role": "style",
+                                    "valType": "string"
+                                }
+                            }
+                        },
+                        "role": "object"
+                    },
                     "ticklen": {
                         "description": "Sets the tick length (in px).",
                         "dflt": 5,
@@ -3999,6 +4063,38 @@
                         "editType": "plot",
                         "role": "style",
                         "valType": "string"
+                    },
+                    "tickformatstops": {
+                        "items": {
+                            "tickformatstop": {
+                                "dtickrange": {
+                                    "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*",
+                                    "editType": "plot",
+                                    "items": [
+                                        {
+                                            "editType": "plot",
+                                            "valType": "any"
+                                        },
+                                        {
+                                            "editType": "plot",
+                                            "valType": "any"
+                                        }
+                                    ],
+                                    "role": "info",
+                                    "valType": "info_array"
+                                },
+                                "editType": "plot",
+                                "role": "object",
+                                "value": {
+                                    "description": "string - dtickformat for described zoom level, the same as *tickformat*",
+                                    "dflt": "",
+                                    "editType": "plot",
+                                    "role": "style",
+                                    "valType": "string"
+                                }
+                            }
+                        },
+                        "role": "object"
                     },
                     "ticklen": {
                         "description": "Sets the tick length (in px).",
@@ -4690,15 +4786,6 @@
                 },
                 "role": "object"
             },
-            "smith": {
-                "dflt": false,
-                "editType": "none",
-                "role": "info",
-                "valType": "enumerated",
-                "values": [
-                    false
-                ]
-            },
             "ternary": {
                 "_isSubplotObj": true,
                 "aaxis": {
@@ -4919,6 +5006,38 @@
                         "editType": "plot",
                         "role": "style",
                         "valType": "string"
+                    },
+                    "tickformatstops": {
+                        "items": {
+                            "tickformatstop": {
+                                "dtickrange": {
+                                    "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*",
+                                    "editType": "plot",
+                                    "items": [
+                                        {
+                                            "editType": "plot",
+                                            "valType": "any"
+                                        },
+                                        {
+                                            "editType": "plot",
+                                            "valType": "any"
+                                        }
+                                    ],
+                                    "role": "info",
+                                    "valType": "info_array"
+                                },
+                                "editType": "plot",
+                                "role": "object",
+                                "value": {
+                                    "description": "string - dtickformat for described zoom level, the same as *tickformat*",
+                                    "dflt": "",
+                                    "editType": "plot",
+                                    "role": "style",
+                                    "valType": "string"
+                                }
+                            }
+                        },
+                        "role": "object"
                     },
                     "ticklen": {
                         "description": "Sets the tick length (in px).",
@@ -5246,6 +5365,38 @@
                         "editType": "plot",
                         "role": "style",
                         "valType": "string"
+                    },
+                    "tickformatstops": {
+                        "items": {
+                            "tickformatstop": {
+                                "dtickrange": {
+                                    "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*",
+                                    "editType": "plot",
+                                    "items": [
+                                        {
+                                            "editType": "plot",
+                                            "valType": "any"
+                                        },
+                                        {
+                                            "editType": "plot",
+                                            "valType": "any"
+                                        }
+                                    ],
+                                    "role": "info",
+                                    "valType": "info_array"
+                                },
+                                "editType": "plot",
+                                "role": "object",
+                                "value": {
+                                    "description": "string - dtickformat for described zoom level, the same as *tickformat*",
+                                    "dflt": "",
+                                    "editType": "plot",
+                                    "role": "style",
+                                    "valType": "string"
+                                }
+                            }
+                        },
+                        "role": "object"
                     },
                     "ticklen": {
                         "description": "Sets the tick length (in px).",
@@ -5580,6 +5731,38 @@
                         "editType": "plot",
                         "role": "style",
                         "valType": "string"
+                    },
+                    "tickformatstops": {
+                        "items": {
+                            "tickformatstop": {
+                                "dtickrange": {
+                                    "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*",
+                                    "editType": "plot",
+                                    "items": [
+                                        {
+                                            "editType": "plot",
+                                            "valType": "any"
+                                        },
+                                        {
+                                            "editType": "plot",
+                                            "valType": "any"
+                                        }
+                                    ],
+                                    "role": "info",
+                                    "valType": "info_array"
+                                },
+                                "editType": "plot",
+                                "role": "object",
+                                "value": {
+                                    "description": "string - dtickformat for described zoom level, the same as *tickformat*",
+                                    "dflt": "",
+                                    "editType": "plot",
+                                    "role": "style",
+                                    "valType": "string"
+                                }
+                            }
+                        },
+                        "role": "object"
                     },
                     "ticklen": {
                         "description": "Sets the tick length (in px).",
@@ -6746,6 +6929,38 @@
                     "role": "style",
                     "valType": "string"
                 },
+                "tickformatstops": {
+                    "items": {
+                        "tickformatstop": {
+                            "dtickrange": {
+                                "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*",
+                                "editType": "ticks",
+                                "items": [
+                                    {
+                                        "editType": "ticks",
+                                        "valType": "any"
+                                    },
+                                    {
+                                        "editType": "ticks",
+                                        "valType": "any"
+                                    }
+                                ],
+                                "role": "info",
+                                "valType": "info_array"
+                            },
+                            "editType": "ticks",
+                            "role": "object",
+                            "value": {
+                                "description": "string - dtickformat for described zoom level, the same as *tickformat*",
+                                "dflt": "",
+                                "editType": "ticks",
+                                "role": "style",
+                                "valType": "string"
+                            }
+                        }
+                    },
+                    "role": "object"
+                },
                 "ticklen": {
                     "description": "Sets the tick length (in px).",
                     "dflt": 5,
@@ -7391,6 +7606,38 @@
                     "editType": "ticks",
                     "role": "style",
                     "valType": "string"
+                },
+                "tickformatstops": {
+                    "items": {
+                        "tickformatstop": {
+                            "dtickrange": {
+                                "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*",
+                                "editType": "ticks",
+                                "items": [
+                                    {
+                                        "editType": "ticks",
+                                        "valType": "any"
+                                    },
+                                    {
+                                        "editType": "ticks",
+                                        "valType": "any"
+                                    }
+                                ],
+                                "role": "info",
+                                "valType": "info_array"
+                            },
+                            "editType": "ticks",
+                            "role": "object",
+                            "value": {
+                                "description": "string - dtickformat for described zoom level, the same as *tickformat*",
+                                "dflt": "",
+                                "editType": "ticks",
+                                "role": "style",
+                                "valType": "string"
+                            }
+                        }
+                    },
+                    "role": "object"
                 },
                 "ticklen": {
                     "description": "Sets the tick length (in px).",
@@ -8890,6 +9137,38 @@
                             "role": "style",
                             "valType": "string"
                         },
+                        "tickformatstops": {
+                            "items": {
+                                "tickformatstop": {
+                                    "dtickrange": {
+                                        "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*",
+                                        "editType": "colorbars",
+                                        "items": [
+                                            {
+                                                "editType": "colorbars",
+                                                "valType": "any"
+                                            },
+                                            {
+                                                "editType": "colorbars",
+                                                "valType": "any"
+                                            }
+                                        ],
+                                        "role": "info",
+                                        "valType": "info_array"
+                                    },
+                                    "editType": "colorbars",
+                                    "role": "object",
+                                    "value": {
+                                        "description": "string - dtickformat for described zoom level, the same as *tickformat*",
+                                        "dflt": "",
+                                        "editType": "colorbars",
+                                        "role": "style",
+                                        "valType": "string"
+                                    }
+                                }
+                            },
+                            "role": "object"
+                        },
                         "ticklen": {
                             "description": "Sets the tick length (in px).",
                             "dflt": 5,
@@ -9746,6 +10025,17 @@
                     },
                     "role": "object"
                 },
+                "hoveron": {
+                    "description": "Do the hover effects highlight individual boxes  or sample points or both?",
+                    "dflt": "boxes+points",
+                    "editType": "style",
+                    "flags": [
+                        "boxes",
+                        "points"
+                    ],
+                    "role": "info",
+                    "valType": "flaglist"
+                },
                 "ids": {
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation.",
                     "editType": "calc",
@@ -10217,6 +10507,20 @@
                         "strict": true,
                         "valType": "string"
                     }
+                },
+                "text": {
+                    "arrayOk": true,
+                    "description": "Sets the text elements associated with each sample value. If a single string, the same string appears over all the data points. If an array of string, the items are mapped in order to the this trace's (x,y) coordinates. To be seen, trace `hoverinfo` must contain a *text* flag.",
+                    "dflt": "",
+                    "editType": "calc",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "textsrc": {
+                    "description": "Sets the source reference on plot.ly for  text .",
+                    "editType": "none",
+                    "role": "info",
+                    "valType": "string"
                 },
                 "type": "box",
                 "uid": {
@@ -11209,6 +11513,38 @@
                         "role": "style",
                         "valType": "string"
                     },
+                    "tickformatstops": {
+                        "items": {
+                            "tickformatstop": {
+                                "dtickrange": {
+                                    "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*",
+                                    "editType": "calc",
+                                    "items": [
+                                        {
+                                            "editType": "calc",
+                                            "valType": "any"
+                                        },
+                                        {
+                                            "editType": "calc",
+                                            "valType": "any"
+                                        }
+                                    ],
+                                    "role": "info",
+                                    "valType": "info_array"
+                                },
+                                "editType": "calc",
+                                "role": "object",
+                                "value": {
+                                    "description": "string - dtickformat for described zoom level, the same as *tickformat*",
+                                    "dflt": "",
+                                    "editType": "calc",
+                                    "role": "style",
+                                    "valType": "string"
+                                }
+                            }
+                        },
+                        "role": "object"
+                    },
                     "tickmode": {
                         "dflt": "array",
                         "editType": "calc",
@@ -11701,6 +12037,38 @@
                         "editType": "calc",
                         "role": "style",
                         "valType": "string"
+                    },
+                    "tickformatstops": {
+                        "items": {
+                            "tickformatstop": {
+                                "dtickrange": {
+                                    "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*",
+                                    "editType": "calc",
+                                    "items": [
+                                        {
+                                            "editType": "calc",
+                                            "valType": "any"
+                                        },
+                                        {
+                                            "editType": "calc",
+                                            "valType": "any"
+                                        }
+                                    ],
+                                    "role": "info",
+                                    "valType": "info_array"
+                                },
+                                "editType": "calc",
+                                "role": "object",
+                                "value": {
+                                    "description": "string - dtickformat for described zoom level, the same as *tickformat*",
+                                    "dflt": "",
+                                    "editType": "calc",
+                                    "role": "style",
+                                    "valType": "string"
+                                }
+                            }
+                        },
+                        "role": "object"
                     },
                     "tickmode": {
                         "dflt": "array",
@@ -12345,6 +12713,38 @@
                         "editType": "colorbars",
                         "role": "style",
                         "valType": "string"
+                    },
+                    "tickformatstops": {
+                        "items": {
+                            "tickformatstop": {
+                                "dtickrange": {
+                                    "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*",
+                                    "editType": "colorbars",
+                                    "items": [
+                                        {
+                                            "editType": "colorbars",
+                                            "valType": "any"
+                                        },
+                                        {
+                                            "editType": "colorbars",
+                                            "valType": "any"
+                                        }
+                                    ],
+                                    "role": "info",
+                                    "valType": "info_array"
+                                },
+                                "editType": "colorbars",
+                                "role": "object",
+                                "value": {
+                                    "description": "string - dtickformat for described zoom level, the same as *tickformat*",
+                                    "dflt": "",
+                                    "editType": "colorbars",
+                                    "role": "style",
+                                    "valType": "string"
+                                }
+                            }
+                        },
+                        "role": "object"
                     },
                     "ticklen": {
                         "description": "Sets the tick length (in px).",
@@ -13118,6 +13518,38 @@
                         "role": "style",
                         "valType": "string"
                     },
+                    "tickformatstops": {
+                        "items": {
+                            "tickformatstop": {
+                                "dtickrange": {
+                                    "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*",
+                                    "editType": "colorbars",
+                                    "items": [
+                                        {
+                                            "editType": "colorbars",
+                                            "valType": "any"
+                                        },
+                                        {
+                                            "editType": "colorbars",
+                                            "valType": "any"
+                                        }
+                                    ],
+                                    "role": "info",
+                                    "valType": "info_array"
+                                },
+                                "editType": "colorbars",
+                                "role": "object",
+                                "value": {
+                                    "description": "string - dtickformat for described zoom level, the same as *tickformat*",
+                                    "dflt": "",
+                                    "editType": "colorbars",
+                                    "role": "style",
+                                    "valType": "string"
+                                }
+                            }
+                        },
+                        "role": "object"
+                    },
                     "ticklen": {
                         "description": "Sets the tick length (in px).",
                         "dflt": 5,
@@ -13870,6 +14302,13 @@
                     "role": "info",
                     "valType": "boolean"
                 },
+                "zhoverformat": {
+                    "description": "Sets the hover text formatting rule using d3 formatting mini-languages which are very similar to those in Python. See: https://github.com/d3/d3-format/blob/master/README.md#locale_format",
+                    "dflt": "",
+                    "editType": "none",
+                    "role": "style",
+                    "valType": "string"
+                },
                 "zmax": {
                     "description": "Sets the upper bound of color domain.",
                     "dflt": null,
@@ -14211,6 +14650,38 @@
                         "editType": "colorbars",
                         "role": "style",
                         "valType": "string"
+                    },
+                    "tickformatstops": {
+                        "items": {
+                            "tickformatstop": {
+                                "dtickrange": {
+                                    "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*",
+                                    "editType": "colorbars",
+                                    "items": [
+                                        {
+                                            "editType": "colorbars",
+                                            "valType": "any"
+                                        },
+                                        {
+                                            "editType": "colorbars",
+                                            "valType": "any"
+                                        }
+                                    ],
+                                    "role": "info",
+                                    "valType": "info_array"
+                                },
+                                "editType": "colorbars",
+                                "role": "object",
+                                "value": {
+                                    "description": "string - dtickformat for described zoom level, the same as *tickformat*",
+                                    "dflt": "",
+                                    "editType": "colorbars",
+                                    "role": "style",
+                                    "valType": "string"
+                                }
+                            }
+                        },
+                        "role": "object"
                     },
                     "ticklen": {
                         "description": "Sets the tick length (in px).",
@@ -15159,6 +15630,38 @@
                         "role": "style",
                         "valType": "string"
                     },
+                    "tickformatstops": {
+                        "items": {
+                            "tickformatstop": {
+                                "dtickrange": {
+                                    "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*",
+                                    "editType": "colorbars",
+                                    "items": [
+                                        {
+                                            "editType": "colorbars",
+                                            "valType": "any"
+                                        },
+                                        {
+                                            "editType": "colorbars",
+                                            "valType": "any"
+                                        }
+                                    ],
+                                    "role": "info",
+                                    "valType": "info_array"
+                                },
+                                "editType": "colorbars",
+                                "role": "object",
+                                "value": {
+                                    "description": "string - dtickformat for described zoom level, the same as *tickformat*",
+                                    "dflt": "",
+                                    "editType": "colorbars",
+                                    "role": "style",
+                                    "valType": "string"
+                                }
+                            }
+                        },
+                        "role": "object"
+                    },
                     "ticklen": {
                         "description": "Sets the tick length (in px).",
                         "dflt": 5,
@@ -15780,6 +16283,13 @@
                     "role": "info",
                     "valType": "boolean"
                 },
+                "zhoverformat": {
+                    "description": "Sets the hover text formatting rule using d3 formatting mini-languages which are very similar to those in Python. See: https://github.com/d3/d3-format/blob/master/README.md#locale_format",
+                    "dflt": "",
+                    "editType": "none",
+                    "role": "style",
+                    "valType": "string"
+                },
                 "zmax": {
                     "description": "Sets the upper bound of color domain.",
                     "dflt": null,
@@ -16049,6 +16559,38 @@
                         "editType": "calc",
                         "role": "style",
                         "valType": "string"
+                    },
+                    "tickformatstops": {
+                        "items": {
+                            "tickformatstop": {
+                                "dtickrange": {
+                                    "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*",
+                                    "editType": "calc",
+                                    "items": [
+                                        {
+                                            "editType": "calc",
+                                            "valType": "any"
+                                        },
+                                        {
+                                            "editType": "calc",
+                                            "valType": "any"
+                                        }
+                                    ],
+                                    "role": "info",
+                                    "valType": "info_array"
+                                },
+                                "editType": "calc",
+                                "role": "object",
+                                "value": {
+                                    "description": "string - dtickformat for described zoom level, the same as *tickformat*",
+                                    "dflt": "",
+                                    "editType": "calc",
+                                    "role": "style",
+                                    "valType": "string"
+                                }
+                            }
+                        },
+                        "role": "object"
                     },
                     "ticklen": {
                         "description": "Sets the tick length (in px).",
@@ -17370,6 +17912,38 @@
                             "role": "style",
                             "valType": "string"
                         },
+                        "tickformatstops": {
+                            "items": {
+                                "tickformatstop": {
+                                    "dtickrange": {
+                                        "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*",
+                                        "editType": "colorbars",
+                                        "items": [
+                                            {
+                                                "editType": "colorbars",
+                                                "valType": "any"
+                                            },
+                                            {
+                                                "editType": "colorbars",
+                                                "valType": "any"
+                                            }
+                                        ],
+                                        "role": "info",
+                                        "valType": "info_array"
+                                    },
+                                    "editType": "colorbars",
+                                    "role": "object",
+                                    "value": {
+                                        "description": "string - dtickformat for described zoom level, the same as *tickformat*",
+                                        "dflt": "",
+                                        "editType": "colorbars",
+                                        "role": "style",
+                                        "valType": "string"
+                                    }
+                                }
+                            },
+                            "role": "object"
+                        },
                         "ticklen": {
                             "description": "Sets the tick length (in px).",
                             "dflt": 5,
@@ -18224,6 +18798,38 @@
                         "role": "style",
                         "valType": "string"
                     },
+                    "tickformatstops": {
+                        "items": {
+                            "tickformatstop": {
+                                "dtickrange": {
+                                    "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*",
+                                    "editType": "colorbars",
+                                    "items": [
+                                        {
+                                            "editType": "colorbars",
+                                            "valType": "any"
+                                        },
+                                        {
+                                            "editType": "colorbars",
+                                            "valType": "any"
+                                        }
+                                    ],
+                                    "role": "info",
+                                    "valType": "info_array"
+                                },
+                                "editType": "colorbars",
+                                "role": "object",
+                                "value": {
+                                    "description": "string - dtickformat for described zoom level, the same as *tickformat*",
+                                    "dflt": "",
+                                    "editType": "colorbars",
+                                    "role": "style",
+                                    "valType": "string"
+                                }
+                            }
+                        },
+                        "role": "object"
+                    },
                     "ticklen": {
                         "description": "Sets the tick length (in px).",
                         "dflt": 5,
@@ -18889,6 +19495,13 @@
                     "role": "info",
                     "valType": "boolean"
                 },
+                "zhoverformat": {
+                    "description": "Sets the hover text formatting rule using d3 formatting mini-languages which are very similar to those in Python. See: https://github.com/d3/d3-format/blob/master/README.md#locale_format",
+                    "dflt": "",
+                    "editType": "none",
+                    "role": "style",
+                    "valType": "string"
+                },
                 "zmax": {
                     "description": "Sets the upper bound of color domain.",
                     "dflt": null,
@@ -19183,6 +19796,38 @@
                         "editType": "colorbars",
                         "role": "style",
                         "valType": "string"
+                    },
+                    "tickformatstops": {
+                        "items": {
+                            "tickformatstop": {
+                                "dtickrange": {
+                                    "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*",
+                                    "editType": "colorbars",
+                                    "items": [
+                                        {
+                                            "editType": "colorbars",
+                                            "valType": "any"
+                                        },
+                                        {
+                                            "editType": "colorbars",
+                                            "valType": "any"
+                                        }
+                                    ],
+                                    "role": "info",
+                                    "valType": "info_array"
+                                },
+                                "editType": "colorbars",
+                                "role": "object",
+                                "value": {
+                                    "description": "string - dtickformat for described zoom level, the same as *tickformat*",
+                                    "dflt": "",
+                                    "editType": "colorbars",
+                                    "role": "style",
+                                    "valType": "string"
+                                }
+                            }
+                        },
+                        "role": "object"
                     },
                     "ticklen": {
                         "description": "Sets the tick length (in px).",
@@ -19980,6 +20625,13 @@
                     "role": "info",
                     "valType": "boolean"
                 },
+                "zhoverformat": {
+                    "description": "Sets the hover text formatting rule using d3 formatting mini-languages which are very similar to those in Python. See: https://github.com/d3/d3-format/blob/master/README.md#locale_format",
+                    "dflt": "",
+                    "editType": "none",
+                    "role": "style",
+                    "valType": "string"
+                },
                 "zmax": {
                     "description": "Sets the upper bound of color domain.",
                     "dflt": null,
@@ -20279,6 +20931,38 @@
                         "editType": "colorbars",
                         "role": "style",
                         "valType": "string"
+                    },
+                    "tickformatstops": {
+                        "items": {
+                            "tickformatstop": {
+                                "dtickrange": {
+                                    "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*",
+                                    "editType": "colorbars",
+                                    "items": [
+                                        {
+                                            "editType": "colorbars",
+                                            "valType": "any"
+                                        },
+                                        {
+                                            "editType": "colorbars",
+                                            "valType": "any"
+                                        }
+                                    ],
+                                    "role": "info",
+                                    "valType": "info_array"
+                                },
+                                "editType": "colorbars",
+                                "role": "object",
+                                "value": {
+                                    "description": "string - dtickformat for described zoom level, the same as *tickformat*",
+                                    "dflt": "",
+                                    "editType": "colorbars",
+                                    "role": "style",
+                                    "valType": "string"
+                                }
+                            }
+                        },
+                        "role": "object"
                     },
                     "ticklen": {
                         "description": "Sets the tick length (in px).",
@@ -22084,6 +22768,38 @@
                             "role": "style",
                             "valType": "string"
                         },
+                        "tickformatstops": {
+                            "items": {
+                                "tickformatstop": {
+                                    "dtickrange": {
+                                        "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*",
+                                        "editType": "colorbars",
+                                        "items": [
+                                            {
+                                                "editType": "colorbars",
+                                                "valType": "any"
+                                            },
+                                            {
+                                                "editType": "colorbars",
+                                                "valType": "any"
+                                            }
+                                        ],
+                                        "role": "info",
+                                        "valType": "info_array"
+                                    },
+                                    "editType": "colorbars",
+                                    "role": "object",
+                                    "value": {
+                                        "description": "string - dtickformat for described zoom level, the same as *tickformat*",
+                                        "dflt": "",
+                                        "editType": "colorbars",
+                                        "role": "style",
+                                        "valType": "string"
+                                    }
+                                }
+                            },
+                            "role": "object"
+                        },
                         "ticklen": {
                             "description": "Sets the tick length (in px).",
                             "dflt": 5,
@@ -22747,7 +23463,7 @@
                     "valType": "number"
                 },
                 "labels": {
-                    "description": "Sets the sector labels.",
+                    "description": "Sets the sector labels. If `labels` entries are duplicated, we sum associated `values` or simply count occurrences if `values` is not provided. For other array attributes (including color) we use the first non-empty entry among all occurrences of the label.",
                     "editType": "calc",
                     "role": "data",
                     "valType": "data_array"
@@ -22999,7 +23715,7 @@
                     "valType": "string"
                 },
                 "values": {
-                    "description": "Sets the values of the sectors of this pie chart.",
+                    "description": "Sets the values of the sectors of this pie chart. If omitted, we count occurrences of each label.",
                     "editType": "calc",
                     "role": "data",
                     "valType": "data_array"
@@ -24722,6 +25438,38 @@
                             "editType": "colorbars",
                             "role": "style",
                             "valType": "string"
+                        },
+                        "tickformatstops": {
+                            "items": {
+                                "tickformatstop": {
+                                    "dtickrange": {
+                                        "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*",
+                                        "editType": "colorbars",
+                                        "items": [
+                                            {
+                                                "editType": "colorbars",
+                                                "valType": "any"
+                                            },
+                                            {
+                                                "editType": "colorbars",
+                                                "valType": "any"
+                                            }
+                                        ],
+                                        "role": "info",
+                                        "valType": "info_array"
+                                    },
+                                    "editType": "colorbars",
+                                    "role": "object",
+                                    "value": {
+                                        "description": "string - dtickformat for described zoom level, the same as *tickformat*",
+                                        "dflt": "",
+                                        "editType": "colorbars",
+                                        "role": "style",
+                                        "valType": "string"
+                                    }
+                                }
+                            },
+                            "role": "object"
                         },
                         "ticklen": {
                             "description": "Sets the tick length (in px).",
@@ -26602,6 +27350,38 @@
                             "role": "style",
                             "valType": "string"
                         },
+                        "tickformatstops": {
+                            "items": {
+                                "tickformatstop": {
+                                    "dtickrange": {
+                                        "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*",
+                                        "editType": "calc",
+                                        "items": [
+                                            {
+                                                "editType": "calc",
+                                                "valType": "any"
+                                            },
+                                            {
+                                                "editType": "calc",
+                                                "valType": "any"
+                                            }
+                                        ],
+                                        "role": "info",
+                                        "valType": "info_array"
+                                    },
+                                    "editType": "calc",
+                                    "role": "object",
+                                    "value": {
+                                        "description": "string - dtickformat for described zoom level, the same as *tickformat*",
+                                        "dflt": "",
+                                        "editType": "calc",
+                                        "role": "style",
+                                        "valType": "string"
+                                    }
+                                }
+                            },
+                            "role": "object"
+                        },
                         "ticklen": {
                             "description": "Sets the tick length (in px).",
                             "dflt": 5,
@@ -27886,6 +28666,38 @@
                             "editType": "colorbars",
                             "role": "style",
                             "valType": "string"
+                        },
+                        "tickformatstops": {
+                            "items": {
+                                "tickformatstop": {
+                                    "dtickrange": {
+                                        "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*",
+                                        "editType": "colorbars",
+                                        "items": [
+                                            {
+                                                "editType": "colorbars",
+                                                "valType": "any"
+                                            },
+                                            {
+                                                "editType": "colorbars",
+                                                "valType": "any"
+                                            }
+                                        ],
+                                        "role": "info",
+                                        "valType": "info_array"
+                                    },
+                                    "editType": "colorbars",
+                                    "role": "object",
+                                    "value": {
+                                        "description": "string - dtickformat for described zoom level, the same as *tickformat*",
+                                        "dflt": "",
+                                        "editType": "colorbars",
+                                        "role": "style",
+                                        "valType": "string"
+                                    }
+                                }
+                            },
+                            "role": "object"
                         },
                         "ticklen": {
                             "description": "Sets the tick length (in px).",
@@ -29298,6 +30110,38 @@
                             "editType": "calc",
                             "role": "style",
                             "valType": "string"
+                        },
+                        "tickformatstops": {
+                            "items": {
+                                "tickformatstop": {
+                                    "dtickrange": {
+                                        "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*",
+                                        "editType": "calc",
+                                        "items": [
+                                            {
+                                                "editType": "calc",
+                                                "valType": "any"
+                                            },
+                                            {
+                                                "editType": "calc",
+                                                "valType": "any"
+                                            }
+                                        ],
+                                        "role": "info",
+                                        "valType": "info_array"
+                                    },
+                                    "editType": "calc",
+                                    "role": "object",
+                                    "value": {
+                                        "description": "string - dtickformat for described zoom level, the same as *tickformat*",
+                                        "dflt": "",
+                                        "editType": "calc",
+                                        "role": "style",
+                                        "valType": "string"
+                                    }
+                                }
+                            },
+                            "role": "object"
                         },
                         "ticklen": {
                             "description": "Sets the tick length (in px).",
@@ -30877,6 +31721,38 @@
                             "role": "style",
                             "valType": "string"
                         },
+                        "tickformatstops": {
+                            "items": {
+                                "tickformatstop": {
+                                    "dtickrange": {
+                                        "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*",
+                                        "editType": "calc",
+                                        "items": [
+                                            {
+                                                "editType": "calc",
+                                                "valType": "any"
+                                            },
+                                            {
+                                                "editType": "calc",
+                                                "valType": "any"
+                                            }
+                                        ],
+                                        "role": "info",
+                                        "valType": "info_array"
+                                    },
+                                    "editType": "calc",
+                                    "role": "object",
+                                    "value": {
+                                        "description": "string - dtickformat for described zoom level, the same as *tickformat*",
+                                        "dflt": "",
+                                        "editType": "calc",
+                                        "role": "style",
+                                        "valType": "string"
+                                    }
+                                }
+                            },
+                            "role": "object"
+                        },
                         "ticklen": {
                             "description": "Sets the tick length (in px).",
                             "dflt": 5,
@@ -31985,6 +32861,38 @@
                             "role": "style",
                             "valType": "string"
                         },
+                        "tickformatstops": {
+                            "items": {
+                                "tickformatstop": {
+                                    "dtickrange": {
+                                        "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*",
+                                        "editType": "calc",
+                                        "items": [
+                                            {
+                                                "editType": "calc",
+                                                "valType": "any"
+                                            },
+                                            {
+                                                "editType": "calc",
+                                                "valType": "any"
+                                            }
+                                        ],
+                                        "role": "info",
+                                        "valType": "info_array"
+                                    },
+                                    "editType": "calc",
+                                    "role": "object",
+                                    "value": {
+                                        "description": "string - dtickformat for described zoom level, the same as *tickformat*",
+                                        "dflt": "",
+                                        "editType": "calc",
+                                        "role": "style",
+                                        "valType": "string"
+                                    }
+                                }
+                            },
+                            "role": "object"
+                        },
                         "ticklen": {
                             "description": "Sets the tick length (in px).",
                             "dflt": 5,
@@ -32968,6 +33876,38 @@
                             "editType": "colorbars",
                             "role": "style",
                             "valType": "string"
+                        },
+                        "tickformatstops": {
+                            "items": {
+                                "tickformatstop": {
+                                    "dtickrange": {
+                                        "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*",
+                                        "editType": "colorbars",
+                                        "items": [
+                                            {
+                                                "editType": "colorbars",
+                                                "valType": "any"
+                                            },
+                                            {
+                                                "editType": "colorbars",
+                                                "valType": "any"
+                                            }
+                                        ],
+                                        "role": "info",
+                                        "valType": "info_array"
+                                    },
+                                    "editType": "colorbars",
+                                    "role": "object",
+                                    "value": {
+                                        "description": "string - dtickformat for described zoom level, the same as *tickformat*",
+                                        "dflt": "",
+                                        "editType": "colorbars",
+                                        "role": "style",
+                                        "valType": "string"
+                                    }
+                                }
+                            },
+                            "role": "object"
                         },
                         "ticklen": {
                             "description": "Sets the tick length (in px).",
@@ -34131,6 +35071,38 @@
                         "editType": "calc",
                         "role": "style",
                         "valType": "string"
+                    },
+                    "tickformatstops": {
+                        "items": {
+                            "tickformatstop": {
+                                "dtickrange": {
+                                    "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*",
+                                    "editType": "calc",
+                                    "items": [
+                                        {
+                                            "editType": "calc",
+                                            "valType": "any"
+                                        },
+                                        {
+                                            "editType": "calc",
+                                            "valType": "any"
+                                        }
+                                    ],
+                                    "role": "info",
+                                    "valType": "info_array"
+                                },
+                                "editType": "calc",
+                                "role": "object",
+                                "value": {
+                                    "description": "string - dtickformat for described zoom level, the same as *tickformat*",
+                                    "dflt": "",
+                                    "editType": "calc",
+                                    "role": "style",
+                                    "valType": "string"
+                                }
+                            }
+                        },
+                        "role": "object"
                     },
                     "ticklen": {
                         "description": "Sets the tick length (in px).",
