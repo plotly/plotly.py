@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.3.4] - Unreleased
+### Fixed
+- `plotly.figure_factory.utils.validate_dataframe` and `plotly.figure_factory.utils.validate_index` now do not produce error when validating `pandas.DataFrames` and `pandas.Series` with any index.
+
 ## [2.3.4] - 2017-12-11
 ### Fixed
 - Merged [pull request](https://github.com/plotly/plotly.py/commit/a226e07393c158e01c34c050aaf492da9d77679a) that fixes `GraphWidget` for IPython > v6
