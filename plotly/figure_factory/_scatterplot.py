@@ -1101,12 +1101,15 @@ def create_scatterplotmatrix(df, index=None, endpts=None, diag='scatter',
                                          "column names of your "
                                          "dataframe.")
         index_vals = df[index].values.tolist()
+        print index_vals
         for name in df:
             if name != index:
                 headers.append(name)
         for name in headers:
             dataframe.append(df[name].values.tolist())
+        print headers
 
+        print dataframe
         # check for same data-type in each df column
         utils.validate_dataframe(dataframe)
         utils.validate_index(index_vals)

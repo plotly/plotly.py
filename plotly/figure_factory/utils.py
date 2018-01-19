@@ -70,24 +70,28 @@ def validate_dataframe(array):
     """
     # works with list of lists and/or dataframes
     from numbers import Number
-    for col_name in array:
-        if isinstance(array[col_name], (list, tuple)):
-            first_item = array[col_name][0]
+    error = False
+    for v in array:
+        if isinstance(v[0], (list, tuple)):
+            first_item = array[v].iloc[0]
+            all_num = all(isinstance(item, Number) for item in array[v])
+            all_str = all(isinstance(item, str) for item in array[v])
         else:
-            # assume pandas Series
-            first_item = array[col_name].iloc[0]
+            first_item = v[0]
+            all_num = all(isinstance(item, Number) for item in v)
+            all_str = all(isinstance(item, str) for item in v)
+
         if isinstance(first_item, Number):
-            if not all(isinstance(item, Number) for item in array[col_name]):
-                raise exceptions.PlotlyError("Error in dataframe. "
-                                             "Make sure all entries of "
-                                             "each column are either "
-                                             "numbers or strings.")
+            if not all_num:
+                error = True
         elif isinstance(first_item, str):
-            if not all(isinstance(item, str) for item in array[col_name]):
-                raise exceptions.PlotlyError("Error in dataframe. "
-                                             "Make sure all entries of "
-                                             "each column are either "
-                                             "numbers or strings.")
+            if not all_str:
+                error = True
+        if error:
+            raise exceptions.PlotlyError("Error in dataframe. "
+                                         "Make sure all entries of "
+                                         "each column are either "
+                                         "numbers or strings.")
 
 
 def validate_equal_length(*args):
