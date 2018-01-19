@@ -12,3 +12,5 @@ a clearer API for users.
 from __future__ import absolute_import
 
 from plotly.graph_objs.graph_objs import *  # this is protected with __all__
+
+from plotly.graph_objs.graph_objs_tools import attr

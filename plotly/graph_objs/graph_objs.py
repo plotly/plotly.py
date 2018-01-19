@@ -612,7 +612,12 @@ class PlotlyDict(dict, PlotlyBase):
                     else:
                         self[key] = val
                 else:
-                    self[key] = val
+                    # don't have this key -- might be using underscore magic
+                    graph_objs_tools._underscore_magic(key, val, self)
+
+        # return self so we can chain this method (e.g. Scatter().update(**)
+        # returns an instance of Scatter)
+        return self
 
     def strip_style(self):
         """

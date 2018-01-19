@@ -1,7 +1,8 @@
 from __future__ import absolute_import
-from unittest import skip
+from unittest import skip, TestCase
 
-from plotly.graph_objs import Data, Figure, Layout, Line, Scatter, XAxis
+from plotly.graph_objs import Data, Figure, Layout, Line, Scatter, XAxis, attr
+from plotly.exceptions import PlotlyDictKeyError
 
 
 def test_update_dict():
@@ -11,6 +12,46 @@ def test_update_dict():
     assert fig == Figure(layout=Layout(title=title))
     fig['layout'].update(xaxis=XAxis())
     assert fig == Figure(layout=Layout(title=title, xaxis=XAxis()))
+
+
+class TestMagicUpdates(TestCase):
+    def test_update_magic_kwargs(self):
+        have = Scatter(y=[1, 2, 3, 4])
+        have.update(
+            opacity=0.9, line_width=10,
+            hoverinfo_font_family="Times",
+            marker_colorbar_tickfont_size=10
+        )
+        want = Scatter({
+            "y": [1, 2, 3, 4],
+            "opacity": 0.9,
+            "line": {"width": 10},
+            "hoverinfo": {"font": {"family": "Times"}},
+            "marker": {"colorbar": {"tickfont": {"size": 10}}},
+        })
+        assert have == want
+
+        have2 = (Scatter(y=[1, 2, 3, 4])
+            .update(
+                opacity=0.9, line_width=10,
+                hoverinfo_font_family="Times",
+                marker_colorbar_tickfont_size=10
+            )
+        )
+        assert have2 == want
+
+    def test_update_magic_and_attr(self):
+        have = Scatter()
+        have.update(marker=attr(color="red", line_width=4))
+        want = Scatter({
+            "marker": {"color": "red", "line": {"width": 4}}
+        })
+        assert have == want
+
+    def test_cant_update_invalid_attribute(self):
+        have = Scatter()
+        with self.assertRaises(PlotlyDictKeyError):
+            have.update(marker_line_fuzz=42)
 
 
 def test_update_list():

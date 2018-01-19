@@ -1,4 +1,5 @@
 from __future__ import absolute_import
+import re
 import textwrap
 import six
 
@@ -268,3 +269,117 @@ def sort_keys(key):
     """
     is_special = key in 'rtxyz'
     return not is_special, key
+
+
+_underscore_attr_regex = re.compile(
+    "(" + "|".join(graph_reference.UNDERSCORE_ATTRS) + ")"
+)
+
+
+def _key_parts(key):
+    if "_" in key:
+        match = _underscore_attr_regex.search(key)
+        if match is not None:
+            if key in graph_reference.UNDERSCORE_ATTRS:
+                # we have _exactly_ one of the underscore
+                # attrs
+                return [key]
+            else:
+                # have one underscore in the UNDERSCORE_ATTR
+                # and then at least one underscore not part
+                # of the attr. Need to break out the attr
+                # and then split the other parts
+                parts = []
+                if match.start() == 0:
+                    # UNDERSCORE_ATTR is at start of key
+                    parts.append(match.group(1))
+                else:
+                    # something comes first
+                    before = key[0:match.start()-1]
+                    parts.extend(before.split("_"))
+                    parts.append(match.group(1))
+
+                # now take care of anything that might come
+                # after the underscore attr
+                if match.end() < len(key):
+                    parts.extend(key[match.end()+1:].split("_"))
+
+                return parts
+        else:  # no underscore attributes. just split on `_`
+            return key.split("_")
+
+    else:
+        return [key]
+
+
+def _underscore_magic(parts, val, obj=None, skip_dict_check=False):
+    if obj is None:
+        obj = {}
+
+    if isinstance(parts, str):
+        return _underscore_magic(_key_parts(parts), val, obj)
+
+    if isinstance(val, dict) and not skip_dict_check:
+        return _underscore_magic_dict(parts, val, obj)
+
+    if len(parts) == 1:
+        obj[parts[0]] = val
+
+    if len(parts) == 2:
+        k1, k2 = parts
+        d1 = obj.get(k1, dict())
+        d1[k2] = val
+        obj[k1] = d1
+
+    if len(parts) == 3:
+        k1, k2, k3 = parts
+        d1 = obj.get(k1, dict())
+        d2 = d1.get(k2, dict())
+        d2[k3] = val
+        d1[k2] = d2
+        obj[k1] = d1
+
+    if len(parts) == 4:
+        k1, k2, k3, k4 = parts
+        d1 = obj.get(k1, dict())
+        d2 = d1.get(k2, dict())
+        d3 = d2.get(k3, dict())
+        d3[k4] = val
+        d2[k3] = d3
+        d1[k2] = d2
+        obj[k1] = d1
+
+    if len(parts) > 4:
+        msg = (
+            "The plotly schema shouldn't have any attributes nested"
+            " beyond level 4. Check that you are setting a valid attribute"
+        )
+        raise ValueError(msg)
+
+    return obj
+
+
+def _underscore_magic_dict(parts, val, obj=None):
+    if obj is None:
+        obj = {}
+    if not isinstance(val, dict):
+        msg = "This function is only meant to be called when val is a dict"
+        raise ValueError(msg)
+
+    # make sure obj has the key all the way up to parts
+    _underscore_magic(parts, {}, obj, True)
+
+    for key, val2 in val.items():
+        _underscore_magic(parts + [key], val2, obj)
+
+    return obj
+
+
+def attr(obj=None, **kwargs):
+    if obj is None:
+        obj = dict()
+
+    for k, v in kwargs.items():
+        _underscore_magic(k, v, obj)
+
+    return obj

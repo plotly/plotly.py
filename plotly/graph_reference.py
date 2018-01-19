@@ -574,6 +574,26 @@ def _get_classes():
     return classes
 
 
+def _get_underscore_attrs():
+
+    nms = set()
+
+    def extract_keys(x):
+        if isinstance(x, dict):
+            for val in x.values():
+                if isinstance(val, dict):
+                    extract_keys(val)
+            list(map(extract_keys, x.keys()))
+        elif isinstance(x, str):
+            nms.add(x)
+        else:
+            pass
+
+    extract_keys(GRAPH_REFERENCE["layout"]["layoutAttributes"])
+    extract_keys(GRAPH_REFERENCE["traces"])
+    return list(filter(lambda x: "_" in x and x[0] != "_", nms))
+
+
 # The ordering here is important.
 GRAPH_REFERENCE = get_graph_reference()
 
@@ -592,3 +612,5 @@ CLASSES = _get_classes()
 OBJECT_NAME_TO_CLASS_NAME = {class_dict['object_name']: class_name
                              for class_name, class_dict in CLASSES.items()
                              if class_dict['object_name'] is not None}
+
+UNDERSCORE_ATTRS = _get_underscore_attrs()
