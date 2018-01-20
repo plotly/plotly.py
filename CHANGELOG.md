@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [2.3.0] - 2017-10-10
+## [2.3.0] - 2018-01-19
 ### Updated
 - Updated `plotly.min.js` to version 1.33.0.
   - New plot types include a `violin` trace type.
