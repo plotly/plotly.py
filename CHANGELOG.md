@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.3.0] - 2017-10-10
+### Updated
+- Updated `plotly.min.js` to version 1.33.0.
+  - New plot types include a `violin` trace type.
+  - New features include completely rewritten `scattergl` using `regl` and a completely rewritten polar chart renderer.
+  - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1330----2018-01-18) for additional information regarding the updates.
+
 ## [2.2.3] - 2017-12-04
 ### Added
 -`column_width` and `row_width` parameters for `plotly.tools.make_subplots`. Call `help(plotly.tools.make_subplots)` for documentation.
