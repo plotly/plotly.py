@@ -224,7 +224,7 @@ def validate_colors(colors):
         colors_list = colors
 
     # Validate colors in colors_list
-    for j, each_color in enumerate(colors_list):
+    for each_color in colors_list:
         if 'rgb' in each_color:
             each_color = color_parser(
                 each_color, unlabel_rgb
@@ -401,10 +401,10 @@ def validate_scale_values(scale):
         )
 
     if not all(x < y for x, y in zip(scale, scale[1:])):
-            raise exceptions.PlotlyError(
-                "'scale' must be a list that contains a strictly increasing "
-                "sequence of numbers."
-            )
+        raise exceptions.PlotlyError(
+            "'scale' must be a list that contains a strictly increasing "
+            "sequence of numbers."
+        )
 
 
 def make_colorscale(colors, scale=None):
@@ -553,7 +553,7 @@ def label_rgb(colors):
     """
     Takes tuple (a, b, c) and returns an rgb color 'rgb(a, b, c)'
     """
-    return ('rgb(%s, %s, %s)' % (colors[0], colors[1], colors[2]))
+    return 'rgb(%s, %s, %s)' % (colors[0], colors[1], colors[2])
 
 
 def unlabel_rgb(colors):
