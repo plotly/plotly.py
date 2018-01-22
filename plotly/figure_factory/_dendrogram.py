@@ -124,10 +124,10 @@ class _Dendrogram(object):
             distfun = scs.distance.pdist
 
         (dd_traces, xvals, yvals,
-            ordered_labels, leaves) = self.get_dendrogram_traces(X, colorscale,
-                                                                 distfun,
-                                                                 linkagefun, 
-                                                                 hovertext)
+         ordered_labels, leaves) = self.get_dendrogram_traces(X, colorscale,
+                                                              distfun,
+                                                              linkagefun,
+                                                              hovertext)
 
         self.labels = ordered_labels
         self.leaves = leaves
@@ -193,17 +193,17 @@ class _Dendrogram(object):
 
         """
         axis_defaults = {
-                'type': 'linear',
-                'ticks': 'outside',
-                'mirror': 'allticks',
-                'rangemode': 'tozero',
-                'showticklabels': True,
-                'zeroline': False,
-                'showgrid': False,
-                'showline': True,
+            'type': 'linear',
+            'ticks': 'outside',
+            'mirror': 'allticks',
+            'rangemode': 'tozero',
+            'showticklabels': True,
+            'zeroline': False,
+            'showgrid': False,
+            'showline': True,
             }
 
-        if len(self.labels) != 0:
+        if self.labels:
             axis_key_labels = self.xaxis
             if self.orientation in ['left', 'right']:
                 axis_key_labels = self.yaxis
