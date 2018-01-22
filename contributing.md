@@ -23,14 +23,14 @@ First, you'll need to *get* our project. This is the appropriate *clone* command
 **DO THIS (in the directory where you want the repo to live)**
 
 ```bash
-git clone https://github.com/plotly/python-api.git
+git clone https://github.com/your_github_username/plotly.py.git
 ```
 
 ### Submodules
 
 Second, this project uses git submodules! They're both helpful and, at times, difficult to work with. The good news is you probably don't need to think about them! Just run the following shell command to make sure that your local repo is wired properly:
 
-**DO THIS (run this command in your new `plotly-api` directory)**
+**DO THIS (run this command in your new `plotly.py` directory)**
 
 ```bash
 make setup_subs
