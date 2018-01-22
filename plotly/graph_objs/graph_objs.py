@@ -310,7 +310,7 @@ class PlotlyList(list, PlotlyBase):
     def to_string(self, level=0, indent=4, eol='\n',
                   pretty=True, max_chars=80):
         """Get formatted string by calling `to_string` on children items."""
-        if not len(self):
+        if not self:
             return "{name}()".format(name=self._get_class_name())
         string = "{name}([{eol}{indent}".format(
             name=self._get_class_name(),
@@ -691,7 +691,7 @@ class PlotlyDict(dict, PlotlyBase):
             print(obj.to_string())
 
         """
-        if not len(self):
+        if not self:
             return "{name}()".format(name=self._get_class_name())
         string = "{name}(".format(name=self._get_class_name())
         if self._name in graph_reference.TRACE_NAMES:
@@ -759,7 +759,7 @@ class PlotlyDict(dict, PlotlyBase):
             except AttributeError:
                 pass
             if isinstance(self[key], (dict, list)):
-                if len(self[key]) == 0:
+                if not self[key]:
                     del self[key]  # clears empty collections!
             elif self[key] is None:
                 del self[key]
