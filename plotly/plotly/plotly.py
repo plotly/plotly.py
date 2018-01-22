@@ -66,6 +66,7 @@ def sign_in(username, api_key, **kwargs):
     except exceptions.PlotlyRequestError:
         raise exceptions.PlotlyError('Sign in failed.')
 
+
 update_plot_options = session.update_session_plot_options
 
 
