@@ -72,55 +72,55 @@ def get_graph_reference():
 
     # TODO: Patch in frames info until it hits streambed. See #659
     graph_reference['frames'] = {
-          "items": {
-              "frames_entry": {
-                  "baseframe": {
-                      "description": "The name of the frame into which this "
-                                     "frame's properties are merged before "
-                                     "applying. This is used to unify "
-                                     "properties and avoid needing to specify "
-                                     "the same values for the same properties "
-                                     "in multiple frames.",
-                      "role": "info",
-                      "valType": "string"
-                  },
-                  "data": {
-                      "description": "A list of traces this frame modifies. "
-                                     "The format is identical to the normal "
-                                     "trace definition.",
-                      "role": "object",
-                      "valType": "any"
-                  },
-                  "group": {
-                      "description": "An identifier that specifies the group "
-                                     "to which the frame belongs, used by "
-                                     "animate to select a subset of frames.",
-                      "role": "info",
-                      "valType": "string"
-                  },
-                  "layout": {
-                      "role": "object",
-                      "description": "Layout properties which this frame "
-                                     "modifies. The format is identical to "
-                                     "the normal layout definition.",
-                      "valType": "any"
-                  },
-                  "name": {
-                      "description": "A label by which to identify the frame",
-                      "role": "info",
-                      "valType": "string"
-                  },
-                  "role": "object",
-                  "traces": {
-                      "description": "A list of trace indices that identify "
-                                     "the respective traces in the data "
-                                     "attribute",
-                      "role": "info",
-                      "valType": "info_array"
-                  }
-              }
-          },
-          "role": "object"
+        "items": {
+            "frames_entry": {
+                "baseframe": {
+                    "description": "The name of the frame into which this "
+                                   "frame's properties are merged before "
+                                   "applying. This is used to unify "
+                                   "properties and avoid needing to specify "
+                                   "the same values for the same properties "
+                                   "in multiple frames.",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "data": {
+                    "description": "A list of traces this frame modifies. "
+                                   "The format is identical to the normal "
+                                   "trace definition.",
+                    "role": "object",
+                    "valType": "any"
+                },
+                "group": {
+                    "description": "An identifier that specifies the group "
+                                   "to which the frame belongs, used by "
+                                   "animate to select a subset of frames.",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "layout": {
+                    "role": "object",
+                    "description": "Layout properties which this frame "
+                                   "modifies. The format is identical to "
+                                   "the normal layout definition.",
+                    "valType": "any"
+                },
+                "name": {
+                    "description": "A label by which to identify the frame",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "role": "object",
+                "traces": {
+                    "description": "A list of trace indices that identify "
+                                   "the respective traces in the data "
+                                   "attribute",
+                    "role": "info",
+                    "valType": "info_array"
+                }
+            }
+        },
+        "role": "object"
     }
 
     return graph_reference
@@ -223,7 +223,7 @@ def get_attributes_dicts(object_name, parent_object_names=()):
     # We return a dict mapping paths to attributes. We also add in additional
     # attributes if defined.
     attributes_dicts = {path: utils.get_by_path(GRAPH_REFERENCE, path)
-                  for path in attribute_paths}
+                        for path in attribute_paths}
     attributes_dicts['additional_attributes'] = additional_attributes
 
     return attributes_dicts

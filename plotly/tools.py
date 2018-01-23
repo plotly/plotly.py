@@ -326,9 +326,9 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
              "~{file_owner}/{file_id}.embed\" "
              "height=\"{iframe_height}\" width=\"{iframe_width}\">"
              "</iframe>").format(
-            plotly_rest_url=plotly_rest_url,
-            file_owner=file_owner, file_id=file_id,
-            iframe_height=height, iframe_width=width)
+                 plotly_rest_url=plotly_rest_url,
+                 file_owner=file_owner, file_id=file_id,
+                 iframe_height=height, iframe_width=width)
     else:
         s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\" "
              "seamless=\"seamless\" "
@@ -336,9 +336,9 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
              "~{file_owner}/{file_id}.embed?share_key={share_key}\" "
              "height=\"{iframe_height}\" width=\"{iframe_width}\">"
              "</iframe>").format(
-            plotly_rest_url=plotly_rest_url,
-            file_owner=file_owner, file_id=file_id, share_key=share_key,
-            iframe_height=height, iframe_width=width)
+                 plotly_rest_url=plotly_rest_url,
+                 file_owner=file_owner, file_id=file_id, share_key=share_key,
+                 iframe_height=height, iframe_width=width)
 
     return s
 
@@ -867,7 +867,7 @@ def make_subplots(rows=1, cols=1,
                     raise Exception(exception_msg)
     except KeyError:
         specs = [[{}
-                 for c in range(cols)]
+                  for c in range(cols)]
                  for r in range(rows)]     # default 'specs'
 
     # Throw exception if specs is over or under specified

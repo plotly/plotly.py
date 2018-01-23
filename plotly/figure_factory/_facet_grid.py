@@ -149,12 +149,12 @@ def _add_shapes_to_fig(fig, annot_rect_color, flipped_rows=False,
     for key in fig['layout'].keys():
         if 'axis' in key and fig['layout'][key]['domain'] != [0.0, 1.0]:
             shape = {
-               'fillcolor': annot_rect_color,
-               'layer': 'below',
-               'line': {'color': annot_rect_color, 'width': 1},
-               'type': 'rect',
-               'xref': 'paper',
-               'yref': 'paper'
+                'fillcolor': annot_rect_color,
+                'layer': 'below',
+                'line': {'color': annot_rect_color, 'width': 1},
+                'type': 'rect',
+                'xref': 'paper',
+                'yref': 'paper'
             }
 
             if 'xaxis' in key:
@@ -1052,7 +1052,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
         min_ranges = []
         max_ranges = []
         for trace in fig['data']:
-            if trace[x_y] is not None and len(trace[x_y]) > 0:
+            if trace[x_y] is not None and trace[x_y]:
                 min_ranges.append(min(trace[x_y]))
                 max_ranges.append(max(trace[x_y]))
         while None in min_ranges:
