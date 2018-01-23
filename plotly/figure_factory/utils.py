@@ -41,6 +41,7 @@ def validate_index(index_vals):
         types differ
     """
     from numbers import Number
+    error = False
     if isinstance(index_vals, (list, tuple)):
         first_item = index_vals[0]
     else:
@@ -48,17 +49,17 @@ def validate_index(index_vals):
         first_item = index_vals.iloc[0]
     if isinstance(first_item, Number):
         if not all(isinstance(item, Number) for item in index_vals):
-            raise exceptions.PlotlyError("Error in indexing column. "
-                                         "Make sure all entries of each "
-                                         "column are all numbers or "
-                                         "all strings.")
+            error = True
 
     elif isinstance(first_item, str):
         if not all(isinstance(item, str) for item in index_vals):
-            raise exceptions.PlotlyError("Error in indexing column. "
-                                         "Make sure all entries of each "
-                                         "column are all numbers or "
-                                         "all strings.")
+            error = True
+
+    if error:
+        raise exceptions.PlotlyError("Error in indexing column. "
+                                     "Make sure all entries of each "
+                                     "column are all numbers or "
+                                     "all strings.")
 
 
 def validate_dataframe(array):
@@ -71,27 +72,26 @@ def validate_dataframe(array):
     # works with list of lists and/or dataframes
     from numbers import Number
     error = False
-    for v in array:
-        if isinstance(v[0], (list, tuple)):
-            first_item = array[v].iloc[0]
-            all_num = all(isinstance(item, Number) for item in array[v])
-            all_str = all(isinstance(item, str) for item in array[v])
-        else:
-            first_item = v[0]
+    if isinstance(array, (list, tuple)):
+        for v in array:
             all_num = all(isinstance(item, Number) for item in v)
             all_str = all(isinstance(item, str) for item in v)
 
-        if isinstance(first_item, Number):
-            if not all_num:
+            if not all_num and not all_str:
                 error = True
-        elif isinstance(first_item, str):
-            if not all_str:
+    else:
+        # assume pandas DataFrame
+        for key in array:
+            all_num = all(isinstance(item, Number) for item in array[key])
+            all_str = all(isinstance(item, str) for item in array[key])
+
+            if not all_num and not all_str:
                 error = True
-        if error:
-            raise exceptions.PlotlyError("Error in dataframe. "
-                                         "Make sure all entries of "
-                                         "each column are either "
-                                         "numbers or strings.")
+    if error:
+        raise exceptions.PlotlyError("Error in dataframe. "
+                                     "Make sure all entries of "
+                                     "each column are either "
+                                     "numbers or strings.")
 
 
 def validate_equal_length(*args):
