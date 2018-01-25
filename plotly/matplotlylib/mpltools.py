@@ -292,7 +292,6 @@ def convert_path_array(path_array):
     else:
         return symbols
 
-
 def convert_linewidth_array(width_array):
     if len(width_array) == 1:
         return width_array[0]
@@ -309,7 +308,7 @@ def convert_size_array(size_array):
 
 
 def get_markerstyle_from_collection(props):
-    markerstyle = dict(
+    markerstyle=dict(
         alpha=None,
         facecolor=convert_rgba_array(props['styles']['facecolor']),
         marker=convert_path_array(props['paths']),
@@ -339,7 +338,6 @@ def get_rect_ymin(data):
 def get_rect_ymax(data):
     """Find maximum y value from four (x,y) vertices."""
     return max(data[0][1], data[1][1], data[2][1], data[3][1])
-
 
 def get_spine_visible(ax, spine_key):
     """Return some spine parameters for the spine, `spine_key`."""
@@ -395,7 +393,6 @@ def make_bar(**props):
         'zorder': props['style']['zorder']
     }
 
-
 def prep_ticks(ax, index, ax_type, props):
     """Prepare axis obj belonging to axes obj.
 
@@ -447,10 +444,10 @@ def prep_ticks(ax, index, ax_type, props):
         if base == 10:
             if ax_type == 'x':
                 axis_dict['range'] = [math.log10(props['xlim'][0]),
-                                      math.log10(props['xlim'][1])]
+                                 math.log10(props['xlim'][1])]
             elif ax_type == 'y':
                 axis_dict['range'] = [math.log10(props['ylim'][0]),
-                                      math.log10(props['ylim'][1])]
+                                 math.log10(props['ylim'][1])]
         else:
             axis_dict = dict(range=None, type='linear')
             warnings.warn("Converted non-base10 {0}-axis log scale to 'linear'"
