@@ -566,11 +566,22 @@ class PlotlyDict(dict, PlotlyBase):
 
     def update(self, dict1=None, **dict2):
         """
-        Update current dict with dict1 and then dict2.
+        Update current dict with dict1 and then dict2. Returns a modifed
+        version of self (updates are applied in place)
 
         This recursively updates the structure of the original dictionary-like
         object with the new entries in the second and third objects. This
         allows users to update with large, nested structures.
+
+        For all items in dict2, the "underscore magic" syntax for setting deep
+        attributes applies. To use this syntax, specify the path to the
+        attribute, separating each part of the path by an underscore. For
+        example, to set the "marker.line.color" attribute you can do
+        `obj.update(marker_line_color="red")` instead of
+        `obj.update(marker={"line": {"color": "red"}})`. Note that you can
+        use this in conjuction with the `plotly.graph_objs.attr` function to
+        set groups of deep attributes. See docstring for `attr` and the
+        examples below for more information.
 
         Note, because the dict2 packs up all the keyword arguments, you can
         specify the changes as a list of keyword agruments.
@@ -586,6 +597,19 @@ class PlotlyDict(dict, PlotlyBase):
         # update with list of keyword arguments
         obj = Layout(title='my title', xaxis=XAxis(range=[0,1], domain=[0,1]))
         obj.update(title='new title', xaxis=dict(domain=[0,.8]))
+        obj
+        {'title': 'new title', 'xaxis': {'range': [0,1], 'domain': [0,.8]}}
+
+        # Update with underscore magic syntax for xaxis.domain
+        obj = Layout(title='my title', xaxis=XAxis(range=[0,1], domain=[0,1]))
+        obj.update(title="new title", xaxis_domain=[0, 0.8])
+        obj
+        {'title': 'new title', 'xaxis': {'range': [0,1], 'domain': [0,.8]}}
+
+        # Use underscore magic and attr function for xaxis
+        obj = Layout().update(
+            title="new title",
+            xaxis=attr(range=[0, 1], domain=[0, 0.8]))
         obj
         {'title': 'new title', 'xaxis': {'range': [0,1], 'domain': [0,.8]}}
 
