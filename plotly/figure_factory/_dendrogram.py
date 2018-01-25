@@ -203,7 +203,7 @@ class _Dendrogram(object):
             'showline': True,
             }
 
-        if self.labels:
+        if len(self.labels) != 0:
             axis_key_labels = self.xaxis
             if self.orientation in ['left', 'right']:
                 axis_key_labels = self.yaxis
