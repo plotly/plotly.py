@@ -132,7 +132,7 @@ def update_session_plot_options(**kwargs):
                                          .format(key, PLOT_OPTIONS[key]))
 
         # raise exception if sharing is invalid
-        if key == 'sharing' and not (kwargs[key] in SHARING_OPTIONS):
+        if (key == 'sharing' and not (kwargs[key] in SHARING_OPTIONS)):
             raise exceptions.PlotlyError("'{0}' must be of either '{1}', '{2}'"
                                          " or '{3}'"
                                          .format(key, *SHARING_OPTIONS))

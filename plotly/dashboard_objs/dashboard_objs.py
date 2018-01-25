@@ -62,7 +62,6 @@ def _container(box_1=None, box_2=None, size=MASTER_HEIGHT,
     }
     return container
 
-
 dashboard_html = ("""
 <!DOCTYPE HTML>
 <html>
@@ -274,7 +273,7 @@ class Dashboard(dict):
         self['layout']['sizeUnit'] = 'px'
 
         for path in all_paths:
-            if path:
+            if len(path) != 0:
                 if self._path_to_box(path)['type'] == 'split':
                     self._path_to_box(path)['size'] = 50
                     self._path_to_box(path)['sizeUnit'] = '%'
