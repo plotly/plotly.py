@@ -206,8 +206,8 @@ def scatterplot(dataframe, headers, diag, size, height, width, title,
 
 
 def scatterplot_dict(dataframe, headers, diag, size,
-                     height, width, title, index, index_vals,
-                     endpts, colormap, colormap_type, **kwargs):
+                      height, width, title, index, index_vals,
+                      endpts, colormap, colormap_type, **kwargs):
     """
     Refer to FigureFactory.create_scatterplotmatrix() for docstring
 

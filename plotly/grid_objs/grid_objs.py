@@ -207,7 +207,7 @@ class Grid(MutableSequence):
                 ordered_columns.append(Column(
                     columns_or_json['cols'][column_name]['data'],
                     column_name)
-                                      )
+                )
             self._columns = ordered_columns
 
             # fill in column_ids
