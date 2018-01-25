@@ -277,6 +277,18 @@ _underscore_attr_regex = re.compile(
 
 
 def _key_parts(key):
+    """
+    Split a key containing undescores into all its parts.
+
+    This function is aware of attributes that have underscores in their
+    name (e.g. ``scatter.error_x``) and does not split them incorrectly.
+
+    Also, the function always returns a list, even if there is only one item
+    in that list (e.g. `_key_parts("marker")` would return `["marker"]`)
+
+    :param (str|unicode) key: the attribute name
+    :return: (list[str|unicode]): a list with all the parts of the attribute
+    """
     if "_" in key:
         match = _underscore_attr_regex.search(key)
         if match is not None:
@@ -313,6 +325,45 @@ def _key_parts(key):
 
 
 def _underscore_magic(parts, val, obj=None, skip_dict_check=False):
+    """
+    Set a potentially "deep" attribute of `obj` specified by a list of parent
+    keys (`parts`) to `val`.
+
+    :param (list[(str|unicode)] or str|unicode) parts: The path to the
+        attribute to be set on obj. If the argument is a string, then it will
+        first be passed to `_key_parts(key)` to construct the path and then
+        this function will be called again
+    :param val: The value the attribute should have
+    :param (dict_like) obj: A dict_like object that should have the attribute
+        set. If nothing is given, then an empty dictionary is created. If
+        a subtype of `plotly.graph_obsj.PlotlyDict` is passed, then the
+        setting of the attribute (and creation of parent nodes) will be
+        validated
+    :param (bool) skip_dict_check: Optional, default is False. If True and val
+        is a dict, then this funciton will ensure that all parent nodes are
+        created in `obj`.
+    :returns (dict_like) obj: an updated version of the `obj` argument (or
+        a newly created dict if `obj` was not passed).
+
+
+    Example:
+
+    ```
+    import plotly.graph_objs as go
+    from plotly.graph_objs.graph_objs_tools import _underscore_magic
+    layout = go.Layout()
+    _underscore_magic(["xaxis", "title"], "this is my xaxis", layout)
+    _underscore_magic("yaxis_titlefont", {"size": 10, "color": "red"}, layout)
+    print(layout)
+    ```
+
+    Results in
+
+    ```
+    {'xaxis': {'title': 'this is my xaxis'},
+     'yaxis': {'titlefont': {'color': 'red', 'size': 10}}}
+    ```
+    """
     if obj is None:
         obj = {}
 
@@ -376,6 +427,61 @@ def _underscore_magic_dict(parts, val, obj=None):
 
 
 def attr(obj=None, **kwargs):
+    """
+    Create a nested attribute using "magic underscore" behavior
+
+    :param (dict_like) obj: A dict like container on which to set the
+        attribute. This will be modified in place. If nothing is passed an
+        empty dict is constructed and then returned. If a plotly graph object
+        is passed, all attributes will be validated.
+    :kwargs: All attributes that should be set on obj
+    :returns (dict_like): A modified version of the object passed to this
+        function
+
+    Example 1:
+
+    ```
+    from plotly.graph_objs import attr, Scatter
+    my_trace = attr(Scatter(),
+        marker=attr(size=4, symbol="diamond", line_color="red"),
+        hoverlabel_bgcolor="grey"
+    )
+    ```
+
+    Returns the following:
+
+    ```
+    {'hoverlabel': {'bgcolor': 'grey'},
+     'marker': {'line': {'color': 'red'}, 'size': 4, 'symbol': 'diamond'},
+     'type': 'scatter'}
+    ```
+
+    Example 2: incorrect attribute leads to an error
+    ```
+    from plotly.graph_objs import attr, Scatter
+    my_trace = attr(Scatter(),
+        marker_mode="markers"  # incorrect, should just be mode
+    )
+    ```
+
+    Returns an error:
+
+    ```
+    PlotlyDictKeyError: 'mode' is not allowed in 'marker'
+
+    Path To Error: ['marker']['mode']
+
+    Valid attributes for 'marker' at path ['marker'] under parents ['scatter']:
+
+        ['autocolorscale', 'cauto', 'cmax', 'cmin', 'color', 'colorbar',
+        'colorscale', 'colorsrc', 'gradient', 'line', 'maxdisplayed',
+        'opacity', 'opacitysrc', 'reversescale', 'showscale', 'size',
+        'sizemin', 'sizemode', 'sizeref', 'sizesrc', 'symbol', 'symbolsrc']
+
+    Run `<marker-object>.help('attribute')` on any of the above.
+    '<marker-object>' is the object at ['marker']
+    ```
+    """
     if obj is None:
         obj = dict()
 

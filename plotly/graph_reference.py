@@ -575,6 +575,10 @@ def _get_classes():
 
 
 def _get_underscore_attrs():
+    """
+    Return a list of all figure attributes (on traces or layouts) that have
+    underscores in them
+    """
 
     nms = set()
 
