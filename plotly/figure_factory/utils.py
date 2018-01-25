@@ -421,10 +421,10 @@ def validate_scale_values(scale):
         )
 
     if not all(x < y for x, y in zip(scale, scale[1:])):
-        raise exceptions.PlotlyError(
-            "'scale' must be a list that contains a strictly increasing "
-            "sequence of numbers."
-        )
+            raise exceptions.PlotlyError(
+                "'scale' must be a list that contains a strictly increasing "
+                "sequence of numbers."
+            )
 
 
 def validate_colorscale(colorscale):

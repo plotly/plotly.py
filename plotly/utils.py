@@ -409,9 +409,9 @@ def get_by_path(obj, path):
 ### validation
 def validate_world_readable_and_sharing_settings(option_set):
     if ('world_readable' in option_set and
-            option_set['world_readable'] is True and
-            'sharing' in option_set and
-            option_set['sharing'] is not None and
+        option_set['world_readable'] is True and
+        'sharing' in option_set and
+        option_set['sharing'] is not None and
             option_set['sharing'] != 'public'):
         raise PlotlyError(
             "Looks like you are setting your plot privacy to both "

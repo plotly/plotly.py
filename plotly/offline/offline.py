@@ -6,12 +6,12 @@
 from __future__ import absolute_import
 
 import os
-import time
 import uuid
 import warnings
+from pkg_resources import resource_string
+import time
 import webbrowser
 
-from pkg_resources import resource_string
 from requests.compat import json as _json
 
 import plotly
@@ -40,7 +40,6 @@ def get_plotlyjs():
     path = os.path.join('package_data', 'plotly.min.js')
     plotlyjs = resource_string('plotly', path).decode('utf-8')
     return plotlyjs
-
 
 def get_image_download_script(caller):
     """
@@ -268,8 +267,8 @@ def _plot_html(figure_or_data, config, validate, default_width,
         optional_line2 +
         '</script>'
         '').format(
-            id=plotdivid, script=script,
-            height=height, width=width)
+        id=plotdivid, script=script,
+        height=height, width=width)
 
     return plotly_html_div, plotdivid, width, height
 
@@ -370,7 +369,7 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         if image not in __IMAGE_FORMATS:
             raise ValueError('The image parameter must be one of the following'
                              ': {}'.format(__IMAGE_FORMATS)
-                            )
+                             )
         # if image is given, and is a valid format, we will download the image
         script = get_image_download_script('iplot').format(format=image,
                                                            width=image_width,
@@ -494,7 +493,7 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                 if image not in __IMAGE_FORMATS:
                     raise ValueError('The image parameter must be one of the '
                                      'following: {}'.format(__IMAGE_FORMATS)
-                                    )
+                                     )
                 # if the check passes then download script is injected.
                 # write the download script:
                 script = get_image_download_script('plot')
