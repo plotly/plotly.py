@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+   <idinfo>
+      <citation>
+         <citeinfo>
+            <origin>U.S. Department of Commerce, U.S. Census Bureau, Geography Division, Cartographic Products and Services Branch</origin>
+            <pubdate>201703</pubdate>
+            <title>2016 Cartographic Boundary File, Current State and Equivalent for United States, 1:500,000</title>
+            <geoform>vector digital data</geoform>
+            <serinfo>
+               <sername>Cartographic Boundary Files</sername>
+               <issue>2016</issue>
+            </serinfo>
+            <onlink>https://www2.census.gov/geo/tiger/GENZ2016/shp/cb_2016_us_state_500k.zip</onlink>
+         </citeinfo>
+      </citation>
+      <descript>
+         <abstract>The 2016 cartographic boundary shapefiles are simplified representations of selected geographic areas from the U.S. Census Bureau's Master Address File / Topologically Integrated Geographic Encoding and Referencing (MAF/TIGER) Database (MTDB). These boundary files are specifically designed for small-scale thematic mapping. When possible, generalization is performed with the intent to maintain the hierarchical relationships among geographies and to maintain the alignment of geographies within a file set for a given year. Geographic areas may not align with the same areas from another year. Some geographies are available as nation-based files while others are available only as state-based files.
+
+States and equivalent entities are the primary governmental divisions of the United States. In addition to the fifty states, the Census Bureau treats the District of Columbia, Puerto Rico, and each of the Island Areas (American Samoa, the Commonwealth of the Northern Mariana Islands, Guam, and the U.S. Virgin Islands) as the statistical equivalents of states for the purpose of data presentation.</abstract>
+         <purpose>These files were specifically created to support small-scale thematic mapping. To improve the appearance of shapes at small scales, areas are represented with fewer vertices than detailed TIGER/Line Shapefiles. Cartographic boundary files take up less disk space than their ungeneralized counterparts. Cartographic boundary files take less time to render on screen than TIGER/Line Shapefiles. You can join this file with table data downloaded from American FactFinder by using the AFFGEOID field in the cartographic boundary file. If detailed boundaries are required, please use the TIGER/Line Shapefiles instead of the generalized cartographic boundary files.</purpose>
+      </descript>
+      <timeperd>
+         <timeinfo>
+            <rngdates>
+               <begdate>201703</begdate>
+               <enddate>201703</enddate>
+            </rngdates>
+         </timeinfo>
+         <current>publication date</current>
+      </timeperd>
+      <status>
+         <progress>Complete</progress>
+         <update>None planned. No changes or updates will be made to this version of the cartographic boundary files. New versions of the cartographic boundary files will be produced on an annual release schedule. Types of geography released may vary from year to year.</update>
+      </status>
+      <spdom>
+         <bounding>
+            <westbc>-179.148909</westbc>
+            <eastbc>179.77847</eastbc>
+            <northbc>71.365162</northbc>
+            <southbc>-14.548699</southbc>
+         </bounding>
+      </spdom>
+      <keywords>
+         <theme>
+            <themekt>ISO 19115 Topic Categories</themekt>
+            <themekey>Boundaries</themekey>
+         </theme>
+         <theme>
+            <themekt>None</themekt>
+            <themekey>2016</themekey>
+            <themekey>SHP</themekey>
+            <themekey>Cartographic Boundary</themekey>
+            <themekey>Generalized</themekey>
+            <themekey>State</themekey>
+         </theme>
+         <place>
+            <placekt>ISO 3166 Codes for the representation of names of countries and their subdivisions</placekt>
+            <placekey>United States</placekey>
+            <placekey>US</placekey>
+         </place>
+      </keywords>
+      <accconst>None</accconst>
+      <useconst>The intended display scale for this file is 1:500,000. This file should not be displayed at scales larger than 1:500,000.
+
+These products are free to use in a product or publication, however acknowledgement must be given to the U.S. Census Bureau as the source. The boundary information is for visual display at appropriate small scales only. Cartographic boundary files should not be used for geographic analysis including area or perimeter calculation. Files should not be used for geocoding addresses. Files should not be used for determining precise geographic area relationships.
+</useconst>
+      <ptcontac>
+         <cntinfo>
+            <cntorgp>
+               <cntorg>U.S. Department of Commerce, U.S. Census Bureau, Geography Division, Geographic Customer Services Branch</cntorg>
+            </cntorgp>
+            <cntaddr>
+               <addrtype>mailing</addrtype>
+               <address>4600 Silver Hill Road</address>
+               <city>Washington</city>
+               <state>DC</state>
+               <postal>20233-7400</postal>
+               <country>United States</country>
+            </cntaddr>
+            <cntvoice>301.763.1128</cntvoice>
+            <cntfax>301.763.4710</cntfax>
+            <cntemail>geo.geography@census.gov</cntemail>
+         </cntinfo>
+      </ptcontac>
+   </idinfo>
+   <dataqual>
+      <attracc>
+         <attraccr>Accurate against American National Standards Institute (ANSI) Publication INCITS 446-2008 (Geographic Names Information System (GNIS)) at the 100% level for the codes and base names present in the file. The remaining attribute information has been examined but has not been fully tested for accuracy.</attraccr>
+      </attracc>
+      <logic>The Census Bureau performed automated tests to ensure logical consistency of the source database. Segments making up the outer and inner boundaries of a polygon tie end-to-end to completely enclose the area. All polygons were tested for closure. The Census Bureau uses its internally developed geographic update system to enhance and modify spatial and attribute data in the Census MAF/TIGER database. Standard geographic codes, such as INCITS (formerly FIPS) codes for states, counties, municipalities, county subdivisions, places, American Indian/Alaska Native/Native Hawaiian areas, and congressional districts are used when encoding spatial entities. The Census Bureau performed spatial data tests for logical consistency of the codes during the compilation of the original Census MAF/TIGER database files. Feature attribute information has been examined but has not been fully tested for consistency.
+
+For the cartographic boundary files, the Point and Vector Object Count for the G-polygon SDTS Point and Vector Object Type reflects the number of records in the file's data table. For multi-polygon features, only one attribute record exists for each multi-polygon rather than one attribute record per individual G-polygon component of the multi-polygon feature. Cartographic Boundary File multi-polygons are an exception to the G-polygon object type classification. Therefore, when multi-polygons exist in a file, the object count will be less than the actual number of G-polygons.</logic>
+      <complete>The cartographic boundary files are generalized representations of extracts taken from the MAF/TIGER Database. Generalized boundary files are clipped to a simplified version of the U.S. outline. As a result, some off-shore areas may be excluded from the generalized files. Some small geographic areas, holes, or discontiguous parts of areas may not be included in generalized files if they are not visible at the target scale.</complete>
+      <posacc>
+         <horizpa>
+            <horizpar>Data are not accurate. Data are generalized representations of geographic boundaries at 1:500,000.</horizpar>
+         </horizpa>
+      </posacc>
+      <lineage>
+         <srcinfo>
+            <srccite>
+               <citeinfo>
+                  <origin>U.S. Department of Commerce, U.S. Census Bureau, Geography Division, Geographic Customer Services Branch</origin>
+                  <pubdate>Unpublished material</pubdate>
+                  <title>Census MAF/TIGER database</title>
+               </citeinfo>
+            </srccite>
+            <typesrc>Geo-spatial Relational Database</typesrc>
+            <srctime>
+               <timeinfo>
+                  <rngdates>
+                     <begdate>201506</begdate>
+                     <enddate>201605</enddate>
+                  </rngdates>
+               </timeinfo>
+               <srccurr>The dates describe the effective date of 2016 cartographic boundaries.</srccurr>
+            </srctime>
+            <srccitea>MAF/TIGER</srccitea>
+            <srccontr>All spatial and feature data</srccontr>
+         </srcinfo>
+         <procstep>
+            <procdesc>Spatial data were extracted from the MAF/TIGER database and processed through a U.S. Census Bureau batch generalization system.</procdesc>
+            <srcused>MAF/TIGER</srcused>
+            <procdate>201703</procdate>
+         </procstep>
+      </lineage>
+   </dataqual>
+   <spdoinfo>
+      <indspref>INCITS (formerly FIPS) codes</indspref>
+      <direct>Vector</direct>
+      <ptvctinf>
+         <sdtsterm>
+            <sdtstype>G-polygon</sdtstype>
+            <ptvctcnt>56</ptvctcnt>
+         </sdtsterm>
+      </ptvctinf>
+   </spdoinfo>
+   <spref>
+      <horizsys>
+         <geograph>
+            <latres>0.000458</latres>
+            <longres>0.000458</longres>
+            <geogunit>Decimal degrees</geogunit>
+         </geograph>
+         <geodetic>
+            <horizdn>North American Datum of 1983</horizdn>
+            <ellips>Geodetic Reference System 80</ellips>
+            <semiaxis>6378137.000000</semiaxis>
+            <denflat>298.257222</denflat>
+         </geodetic>
+      </horizsys>
+   </spref>
+   <eainfo>
+      <detailed>
+         <enttyp>
+            <enttypl>cb_2016_us_state_500k.shp</enttypl>
+            <enttypd>Current State and Equivalent (national)</enttypd>
+            <enttypds>U.S. Census Bureau</enttypds>
+         </enttyp>
+         <attr>
+            <attrlabl>STATEFP</attrlabl>
+            <attrdef>Current state Federal Information Processing Series (FIPS) code</attrdef>
+            <attrdefs>U.S. Census Bureau</attrdefs>
+            <attrdomv>
+               <codesetd>
+                  <codesetn>National Standard Codes (ANSI INCITS 38-2009), Federal Information Processing Series (FIPS) - States/State Equivalents</codesetn>
+                  <codesets>U.S. Census Bureau</codesets>
+               </codesetd>
+            </attrdomv>
+         </attr>
+         <attr>
+            <attrlabl>STATENS</attrlabl>
+            <attrdef>Current state Geographic Names Information System (GNIS) code</attrdef>
+            <attrdefs>U.S. Census Bureau</attrdefs>
+            <attrdomv>
+               <codesetd>
+                  <codesetn>INCITS 446:2008 (Geographic Names Information System (GNIS)), Identifying Attributes for Named Physical and Cultural Geographic Features (Except Roads and Highways) of the United States, Its Territories, Outlying Areas, and Freely Associated Areas, and the Waters of the Same to the Limit of the Twelve-Mile Statutory Zone</codesetn>
+                  <codesets>U.S. Geological Survey (USGS)</codesets>
+               </codesetd>
+            </attrdomv>
+         </attr>
+         <attr>
+            <attrlabl>AFFGEOID</attrlabl>
+            <attrdef>American FactFinder summary level code + geovariant code + '00US' + GEOID</attrdef>
+            <attrdefs>U.S. Census Bureau</attrdefs>
+            <attrdomv>
+               <codesetd>
+                  <codesetn>American FactFinder geographic identifier</codesetn>
+                  <codesets>U.S. Census Bureau</codesets>
+               </codesetd>
+            </attrdomv>
+         </attr>
+         <attr>
+            <attrlabl>GEOID</attrlabl>
+            <attrdef>State identifier; state FIPS code</attrdef>
+            <attrdefs>U.S. Census Bureau</attrdefs>
+            <attrdomv>
+               <codesetd>
+                  <codesetn>National Standard Codes (ANSI INCITS 38-2009), Federal Information Processing Series (FIPS) - States/State Equivalents</codesetn>
+                  <codesets>U.S. Census Bureau</codesets>
+               </codesetd>
+            </attrdomv>
+         </attr>
+         <attr>
+            <attrlabl>STUSPS</attrlabl>
+            <attrdef>Current United States Postal Service state abbreviation</attrdef>
+            <attrdefs>U.S. Postal Service</attrdefs>
+            <attrdomv>
+               <codesetd>
+                  <codesetn>Publication 28 - Postal Addressing Standards</codesetn>
+                  <codesets>U.S. Postal Service</codesets>
+               </codesetd>
+            </attrdomv>
+         </attr>
+         <attr>
+            <attrlabl>NAME</attrlabl>
+            <attrdef>Current State name</attrdef>
+            <attrdefs>U.S. Census Bureau</attrdefs>
+            <attrdomv>
+               <codesetd>
+                  <codesetn>National Standard Codes (ANSI INCITS 38-2009), Federal Information Processing Series (FIPS) - States/State Equivalents</codesetn>
+                  <codesets>U.S. Census Bureau</codesets>
+               </codesetd>
+            </attrdomv>
+         </attr>
+         <attr>
+            <attrlabl>LSAD</attrlabl>
+            <attrdef>Current legal/statistical area description code for state</attrdef>
+            <attrdefs>U.S. Census Bureau</attrdefs>
+            <attrdomv>
+               <edom>
+                  <edomv>00</edomv>
+                  <edomvd>Blank</edomvd>
+                  <edomvds>U.S. Census Bureau</edomvds>
+               </edom>
+            </attrdomv>
+         </attr>
+         <attr>
+            <attrlabl>ALAND</attrlabl>
+            <attrdef>Current land area (square meters)</attrdef>
+            <attrdefs>U.S. Census Bureau</attrdefs>
+            <attrdomv>
+               <rdom>
+                  <rdommin>0</rdommin>
+                  <rdommax>9,999,999,999,999</rdommax>
+                  <attrunit>square meters</attrunit>
+               </rdom>
+            </attrdomv>
+         </attr>
+         <attr>
+            <attrlabl>AWATER</attrlabl>
+            <attrdef>Current water area (square meters)</attrdef>
+            <attrdefs>U.S. Census Bureau</attrdefs>
+            <attrdomv>
+               <rdom>
+                  <rdommin>0</rdommin>
+                  <rdommax>9,999,999,999,999</rdommax>
+                  <attrunit>square meters</attrunit>
+               </rdom>
+            </attrdomv>
+         </attr>
+      </detailed>
+   </eainfo>
+   <distinfo>
+      <distrib>
+         <cntinfo>
+            <cntorgp>
+               <cntorg>U.S. Department of Commerce, U.S. Census Bureau, Geography Division, Geographic Customer Services Branch</cntorg>
+            </cntorgp>
+            <cntaddr>
+               <addrtype>mailing</addrtype>
+               <address>4600 Silver Hill Road</address>
+               <city>Washington</city>
+               <state>DC</state>
+               <postal>20233-7400</postal>
+               <country>United States</country>
+            </cntaddr>
+            <cntvoice>301.763.1128</cntvoice>
+            <cntfax>301.763.4710</cntfax>
+            <cntemail>geo.geography@census.gov</cntemail>
+         </cntinfo>
+      </distrib>
+      <distliab>No warranty, expressed or implied is made with regard to the accuracy of these data, and no liability is assumed by the U.S. Government in general or the U.S. Census Bureau in specific as to the spatial or attribute accuracy of the data. The act of distribution shall not constitute any such warranty and no responsibility is assumed by the U.S. government in the use of these files. The boundary information is for small-scale mapping purposes only; boundary depiction and designation for small-scale mapping purposes do not constitute a determination of jurisdictional authority or rights of ownership or entitlement and they are not legal land descriptions.</distliab>
+      <stdorder>
+         <digform>
+            <digtinfo>
+               <formname>SHP</formname>
+               <filedec>PK-ZIP, version 1.93A or higher</filedec>
+            </digtinfo>
+            <digtopt>
+               <onlinopt>
+                  <computer>
+                     <networka>
+                        <networkr>https://www2.census.gov/geo/tiger/GENZ2016/shp/cb_2016_us_state_500k.zip</networkr>
+                     </networka>
+                  </computer>
+               </onlinopt>
+            </digtopt>
+         </digform>
+         <fees>The online cartographic boundary files may be downloaded without charge.</fees>
+         <ordering>To obtain more information about ordering Cartographic Boundary Files visit https://www.census.gov/geo/www/tiger.</ordering>
+      </stdorder>
+      <techpreq>The cartographic boundary files contain geographic data only and do not include display mapping software or statistical data. For information on how to use cartographic boundary file data with specific software package users shall contact the company that produced the software.</techpreq>
+   </distinfo>
+   <metainfo>
+      <metd>201703</metd>
+      <metc>
+         <cntinfo>
+            <cntorgp>
+               <cntorg>U.S. Department of Commerce, U.S. Census Bureau, Geography Division, Geographic Customer Services Branch</cntorg>
+            </cntorgp>
+            <cntaddr>
+               <addrtype>mailing</addrtype>
+               <address>4600 Silver Hill Road</address>
+               <city>Washington</city>
+               <state>DC</state>
+               <postal>20233-7400</postal>
+               <country>United States</country>
+            </cntaddr>
+            <cntvoice>301.763.1128</cntvoice>
+            <cntfax>301.763.4710</cntfax>
+            <cntemail>geo.geography@census.gov</cntemail>
+         </cntinfo>
+      </metc>
+      <metstdn>Content Standard for Digital Geospatial Metadata</metstdn>
+      <metstdv>FGDC-STD-001-1998</metstdv>
+   </metainfo>
+</metadata>
