@@ -1,4 +1,5 @@
 from __future__ import absolute_import
+import itertools
 import textwrap
 import six
 
@@ -268,3 +269,88 @@ def sort_keys(key):
     """
     is_special = key in 'rtxyz'
     return not is_special, key
+
+
+class Cycler(object):
+    """
+    An object that repeats indefinitely by cycling through a collection of
+    values
+
+    Usually used in a PlotlyStyle to set things like a sequence of trace colors
+    that should be applied.
+    """
+    def __init__(self, vals):
+        self.vals = vals
+        self.n = len(vals)
+        self.cycler = itertools.cycle(vals)
+
+    def next(self):
+        return self.cycler.__next__()
+
+    def __getitem__(self, ix):
+        return self.vals[ix % self.n]
+
+    def reset(self):
+        self.cycler = itertools.cycle(self.vals)
+
+
+def _reset_cyclers(obj):
+    if isinstance(obj, Cycler):
+        obj.reset()
+        return
+
+    if isinstance(obj, dict):
+        for val in obj.values():
+            _reset_cyclers(val)
+
+    if isinstance(obj, (list, tuple)):
+        for val in obj:
+            _reset_cyclers(val)
+
+
+def _apply_style_axis(fig, style, ax, force):
+    long_ax = ax+"axis"
+
+    def apply_at_root(root):
+        ax_names = list(filter(lambda x: x.startswith(long_ax), root.keys()))
+
+        for ax_name in ax_names:
+            # update style with data from fig, so the fig data takes
+            # precedence
+            new = style.layout[long_ax].copy()
+            new.update(root[ax_name])
+            root[ax_name] = new
+
+        if len(ax_names) == 0:
+            root[long_ax] = style.layout[long_ax].copy()
+
+    if long_ax in style.layout or force:
+        apply_at_root(fig.layout)
+
+    if long_ax in style.layout.scene or force:
+        apply_at_root(fig.layout.scene)  # also apply to 3d scene
+
+
+def _maybe_set_attr(obj, key, val):
+    """
+    Set obj[key] = val _only_ when obj[key] is valid and blank
+
+    obj should be an instance of PlotlyDict. As this is an internal method
+    that should only be invoked by plotly.graph_objs.Figure.apply_style
+    this should never be an issue.
+    """
+    if isinstance(val, Cycler):
+        # if we have a cycler, extract the current value and apply it
+        _maybe_set_attr(obj, key, val.next())
+        return
+
+    if key in obj._get_valid_attributes():  # is valid
+        if isinstance(val, dict):  # recurse into dict
+            for new_key, new_val in val.items():
+                _maybe_set_attr(obj[key], new_key, new_val)
+
+        else:
+            # TODO: should probably enumerate more type checks, but hopefully
+            # at this point we can just set the value
+            if key not in obj:
+                obj[key] = val

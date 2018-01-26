@@ -799,6 +799,149 @@ class GraphObjectFactory(object):
                 return PlotlyDict(*args, **kwargs)
 
 
+class PlotlyStyle(object):
+    """
+    Give your plots a consistent style with default attribute arguments
+
+    A ``PlotlyStyle`` is composed of three main components:
+
+    - ``layout``: An instance of ``plotly.graph_objs.Layout`` that holds
+      default values for all layout attributes of a figure. If ``xaxis``,
+      ``yaxis``, or ``zaxis`` is set on the style's layout, then the
+      associated attributes will be applied to all axes in the Figure (e.g.
+      setting ``style.xaxis`` would set default values for properties on
+      ``fig.xaxis`` and ``fig.xaxis1``)
+    - ``global_trace``: This is a dict specifying values that should be
+      applied to traces of all types. The values contained in this dict will
+      only be applied if they are valid.
+    - ``by_trace_type``: This dict maps from trace types to default values for
+      attributes of traces of that type. For example
+      ``style.by_trace_type["scatter"]`` will supply default values for all
+      traces of type ``scatter``. The values of this dict are set using kewyord
+      arguments and must all be instances of the classes in
+      ``plotly.graph_objs``
+
+    To apply a style, call the ``apply_style`` figure method.
+
+    Examples:
+
+    .. code:: python
+
+        import plotly.graph_objs as go
+        my_style = go.PlotlyStyle(
+            global_trace=dict(marker={"color": "red"}),
+            scatter=go.Scatter(mode="markers")
+        )
+
+        fig = go.Figure(data=[
+                go.Scatter(y=[1, 2, 3], mode="lines", marker={"symbol": "square"}),
+                go.Scatter(y=[1, 4, 9]),
+                go.Bar(y=[2, 4, 5], marker={"color": "green"})
+            ])
+
+    At this stage fig looks like
+
+    .. code::
+
+        {'data': [{'marker': {'symbol': 'square'},
+           'mode': 'lines',
+           'type': 'scatter',
+           'y': [1, 2, 3]},
+          {'type': 'scatter', 'y': [1, 4, 9]},
+          {'marker': {'color': 'green'}, 'type': 'bar', 'y': [2, 4, 5]}]}
+
+    Now apply the style
+
+    .. code:: python
+
+        fig.apply_style(my_style)
+
+    And get back
+
+    .. code::
+
+        {'data': [{'marker': {'color': 'red', 'symbol': 'square'},
+           'mode': 'lines',
+           'type': 'scatter',
+           'y': [1, 2, 3]},
+          {'marker': {'color': 'red'},
+           'mode': 'markers',
+           'type': 'scatter',
+           'y': [1, 4, 9]},
+          {'marker': {'color': 'green'}, 'type': 'bar', 'y': [2, 4, 5]}]}
+
+    Notice that:
+
+    - On the first trace the marker color was set *alongside* the marker symbol
+    - On the first trace the mode was not chagned from "lines"
+    - On the second trace the mode was set to "markers" and the marker color
+      was set to "red"
+    - On third trace the marker color was not changed from "green" to "red"
+
+    """
+
+    def __init__(self, global_trace=None, layout=None, **kwargs):
+        self.global_trace = global_trace if global_trace is not None else {}
+        self.layout = layout if layout is not None else Layout({})
+        self.by_trace_type = dict(kwargs)
+
+    def __repr__(self):
+        msg = "Style with:"
+        if len(self.layout) > 0:
+            layout_attrs = ", ".join(self.layout.keys())
+            msg += "\n  - Layout fields: {}".format(layout_attrs)
+
+        if len(self.global_trace) > 0:
+            global_attrs = ", ".join(self.global_trace.keys())
+            msg += "\n  - Global trace attributes: {}".format(global_attrs)
+
+        for k, v in self.by_trace_type.items():
+            trace_attrs = ", ".join(_ for _ in v.keys() if _ != "type")
+            msg += " \n  - Trace type {} attributes: {}".format(k, trace_attrs)
+
+        if len(msg) == len("Style with:"):
+            msg = "Empty style"
+
+        return msg
+
+    def _reset_cyclers(self):
+        graph_objs_tools._reset_cyclers(self.global_trace)
+        graph_objs_tools._reset_cyclers(self.layout)
+        for val in self.by_trace_type.values():
+            graph_objs_tools._reset_cyclers(val)
+
+    @staticmethod
+    def from_other(other, global_trace=None, layout=None, **kwargs):
+        """
+        Create a style from another style. The arguments passed to this method
+        will take precedent over everything in ``other``, but ``other`` will be
+        used to supply default values
+        """
+        _global_trace = other.global_trace.copy()
+        _layout = other.layout.copy()
+        _by_trace_type = other.by_trace_type.copy()
+
+        if global_trace is not None:
+            _global_trace.update(global_trace)
+
+        if layout is not None:
+            _layout.upate(layout)
+
+        for k, v in kwargs.items():
+            if k in _by_trace_type:
+                _by_trace_type[k].update(v)
+            else:
+                _by_trace_type[k] = v
+
+        return PlotlyStyle(
+            global_trace=_global_trace, layout=_layout, **_by_trace_type
+        )
+
+    # TODO: write a context manager
+
+
+
+
 # AUTO-GENERATED BELOW. DO NOT EDIT! See makefile.
 
 
@@ -1265,6 +1408,68 @@ class Figure(PlotlyDict):
             trace['xaxis'] = ref[0]
             trace['yaxis'] = ref[1]
         self['data'] += [trace]
+
+    def apply_style(self, style):
+        """
+        Apply the ``PlotlyStyle`` in ``style`` to the figure
+
+        Styles can be thought of as default values -- filling in figure
+        attributes only when they don't already exist on the figure
+
+        Style application adheres to the following rules:
+
+        - Non-overwriting: a style attribute will never be applied when a
+          Figure attribute is already defined
+        - Non-destructive: styles that specify only some of the valid figure
+          attributes (e.g. only `layout.font.size`) will not overwrite already
+          specified figure parent, sibling, or children attributes. For example
+          if the style only has a value for `layout.font.size`, a figure's
+          `layout.font.family` or `layout.title` will not be altered.
+        - Attributes set on `style.layout.(x|y|z)axis` will be applied to all
+          axes found in the figure. For example, to set the tick length for
+          every xaxis in the figure, you would define
+          ``style.layout.xaxis.ticklen``
+
+        For more details on how to construct a ``PlotlyStyle`` see the
+        associated docstring
+
+        """
+        if not isinstance(style, PlotlyStyle):
+            msg = ("Sorry, we only know how to apply styles contained in a"
+                   "PlotlyStyle object. Checkout the docstring for PlotlyStyle"
+                   "and try again!")
+            raise ValueError(msg)
+
+        style._reset_cyclers()
+        is_3d = any("3d" in x.type for x in self.data)
+        if len(style.layout) > 0:
+            graph_objs_tools._apply_style_axis(self, style, "x", not is_3d)
+            graph_objs_tools._apply_style_axis(self, style, "y", not is_3d)
+            graph_objs_tools._apply_style_axis(self, style, "z", False)
+
+            # now we can let PlotlyDict.update apply the rest
+            new = style.layout.copy()
+
+            # need to remove (x|y|z)axis from the style so it doesn't ruin what
+            # we did above
+            new.pop("xaxis", None)
+            new.pop("yaxis", None)
+            new.pop("zaxis", None)
+
+            # update style with self, so style takes precedence
+            new.update(self.layout)
+            self.layout = new
+
+        for trace in self.data:
+            if len(style.global_trace) > 0:
+                for k, v in style.global_trace.items():
+                    graph_objs_tools._maybe_set_attr(trace, k, v)
+
+            if trace.type in style.by_trace_type:
+                for k, v in style.by_trace_type[trace.type].items():
+                    graph_objs_tools._maybe_set_attr(trace, k, v)
+
+        return self
 
 
 class Font(PlotlyDict):
@@ -1944,4 +2149,8 @@ class ZAxis(PlotlyDict):
     """
     _name = 'zaxis'
 
-__all__ = [cls for cls in graph_reference.CLASSES.keys() if cls in globals()]
+
+__all__ = (
+    [cls for cls in graph_reference.CLASSES.keys() if cls in globals()]
+    + ["PlotlyStyle"]
+)
