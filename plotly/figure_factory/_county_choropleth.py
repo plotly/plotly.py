@@ -1,6 +1,4 @@
-import plotly
-import plotly.plotly as py
-from plotly import colors
+from plotly import colors, exceptions, optional_imports
 from plotly.figure_factory import utils
 
 import array
@@ -10,12 +8,19 @@ import pandas as pd
 import numpy as np
 import geopandas as gp
 
-shape_path = 'data/cb_2016_us_county_500k/cb_2016_us_county_500k.shp'
-states_path = 'data/cb_2016_us_state_500k/cb_2016_us_state_500k.shp'
-csv_path = 'data/NCHS_-_Drug_Poisoning_Mortality_by_County__United_States.csv'
-full_data_path = 'data/df.feather'
-sf = shapefile.Reader(states_path)
+shape_path = 'cb_2016_us_county_500k/cb_2016_us_county_500k.shp'
+states_path = 'cb_2016_us_state_500k/cb_2016_us_state_500k.shp'
+csv_path = 'NCHS_-_Drug_Poisoning_Mortality_by_County__United_States.csv'
+full_data_path = 'df.feather'
 
+pre_url = 'plotly/package_data/data/'
+shape_path = pre_url + shape_path
+states_path = pre_url + states_path
+csv_path = pre_url + csv_path
+full_data_path = pre_url + full_data_path
+
+# create merged dataframe
+sf = shapefile.Reader(states_path)
 df_shape = gp.read_file(shape_path)
 df_shape['FIPS'] = df_shape['STATEFP'] + df_shape['COUNTYFP']
 df_shape['FIPS'] = pd.to_numeric(df_shape['FIPS'])
@@ -32,67 +37,21 @@ df_full_data = feather.read_dataframe(full_data_path)
 df_merged = pd.merge(df_shape, df_csv, on='FIPS')
 df_merged['Death Rate'] = df_merged[death_rate_col]
 
-code_to_country_name_dict = {
-    'AK': 'Alaska',
-    'AL': 'Alabama',
-    'AR': 'Arkansas',
-    'AZ': 'Arizona',
-    'CA': 'California',
-    'CO': 'Colorado',
-    'CT': 'Connecticut',
-    'DC': 'District of Columbia',
-    'DE': 'Delaware',
-    'FL': 'Florida',
-    'GA': 'Georgia',
-    'HI': 'Hawaii',
-    'IA': 'Iowa',
-    'ID': 'Idaho',
-    'IL': 'Illinois',
-    'IN': 'Indiana',
-    'KS': 'Kansas',
-    'KY': 'Kentucky',
-    'LA': 'Louisiana',
-    'MA': 'Massachusetts',
-    'MD': 'Maryland',
-    'ME': 'Maine',
-    'MI': 'Michigan',
-    'MN': 'Minnesota',
-    'MO': 'Missouri',
-    'MS': 'Mississippi',
-    'MT': 'Montana',
-    'NC': 'North Carolina',
-    'ND': 'North Dakota',
-    'NE': 'Nebraska',
-    'NH': 'New Hampshire',
-    'NJ': 'New Jersey',
-    'NM': 'New Mexico',
-    'NV': 'Nevada',
-    'NY': 'New York',
-    'OH': 'Ohio',
-    'OK': 'Oklahoma',
-    'OR': 'Oregon',
-    'PA': 'Pennsylvania',
-    'RI': 'Rhode Island',
-    'SC': 'South Carolina',
-    'SD': 'South Dakota',
-    'TN': 'Tennessee',
-    'TX': 'Texas',
-    'UT': 'Utah',
-    'VA': 'Virginia',
-    'VT': 'Vermont',
-    'WA': 'Washington',
-    'WI': 'Wisconsin',
-    'WV': 'West Virginia',
-    'WY': 'Wyoming'
-}
+ST = df_merged['ST'].unique()
+code_to_country_name_dict = {}
+for i in range(len(df_merged)):
+    row = df_merged.iloc[i]
+    if len(code_to_country_name_dict) == len(ST):
+        break
+    if row['ST'] not in code_to_country_name_dict:
+        code_to_country_name_dict[row['ST']] = row['State']
 
 YEARS = sorted(df_merged['Year'].unique())
-DEFAULT_YEAR = min(YEARS)
-DEFAULT_COLORSCALE = [
-    '#171c42', '#24327a', '#214ea5', '#006fbe', '#3f8eba',
-    '#76a9be', '#aac3cd', '#d2d7dd', '#e6d2d2', '#ddb2a4',
-    '#d08b73', '#c26245', '#b1392a', '#911a28', '#670d22',
-    '#3c0911'
+LEVELS = [
+    '0-2', '2.1-4', '4.1-6', '6.1-8',
+    '8.1-10', '10.1-12', '12.1-14', '14.1-16',
+    '16.1-18', '18.1-20', '20.1-22', '22.1-24',
+    '24.1-26', '26.1-28', '28.1-30', '>30'
 ]
 DEFAULT_LAYOUT = dict(
     hovermode='closest',
@@ -120,28 +79,80 @@ DEFAULT_LAYOUT = dict(
 )
 
 
-def intervals_to_strings(array_of_intervals):
+def intervals_as_labels(array_of_intervals):
+    """
+    Transform an interval [-inf, 30] to label <30
+    """
     string_intervals = []
     for interval in array_of_intervals:
-        if interval[0] == float('-inf'):
-            as_str = '<{}'.format(interval[1])
-        elif interval[1] == float('inf'):
-            as_str = '>{}'.format(interval[0])
+        # round to 2nd decimal place
+        rnd_interval = [round(interval[0], 2),
+                        round(interval[1], 2)]
+        if rnd_interval[0] == float('-inf'):
+            as_str = '<{}'.format(rnd_interval[1])
+        elif rnd_interval[1] == float('inf'):
+            as_str = '>{}'.format(rnd_interval[0])
         else:
-            as_str = '{}-{}'.format(interval[0], interval[1])
+            as_str = '{}-{}'.format(rnd_interval[0], rnd_interval[1])
         string_intervals.append(as_str)
     return string_intervals
 
 
-def get_figure(year, colorscale=DEFAULT_COLORSCALE, scope='usa', color_col=None,
-               show_hover=True, show_statedata=True, zoom=False, endpts=None):
+def _update_xaxis_range(x_traces, level, xaxis_range_low, xaxis_range_high):
+    if x_traces[level] != []:
+        x_len = len(x_traces[level])
+        mask = np.ones(x_len, dtype=bool)
+
+        indices = []
+        for i in range(x_len):
+            if not isinstance(x_traces[level][i], array.array):
+                indices.append(i)
+        mask[indices] = True
+
+        calc_x_min = min([x_traces[level][i] for i in indices])
+        calc_x_max = max([x_traces[level][i] for i in indices])
+
+        if calc_x_min < xaxis_range_low:
+            xaxis_range_low = calc_x_min
+        if calc_x_max > xaxis_range_high:
+            xaxis_range_high = calc_x_max
+
+    return xaxis_range_low, xaxis_range_high
+
+
+def _update_yaxis_range(y_traces, level, yaxis_range_low, yaxis_range_high):
+    if y_traces[level] != []:
+        y_len = len(y_traces[level])
+        mask = np.ones(y_len, dtype=bool)
+
+        indices = []
+        for i in range(y_len):
+            if not isinstance(y_traces[level][i], array.array):
+                indices.append(i)
+        mask[indices] = True
+
+        calc_y_min = min([y_traces[level][i] for i in indices])
+        calc_y_max = max([y_traces[level][i] for i in indices])
+
+        if calc_y_min < yaxis_range_low:
+            yaxis_range_low = calc_y_min
+        if calc_y_max > yaxis_range_high:
+            yaxis_range_high = calc_y_max
+
+    return yaxis_range_low, yaxis_range_high
+
+
+def get_figure(year, scope, show_hover, colorscale, color_col,
+               show_statedata, zoom, endpts):
     xaxis_range_low = 0
     xaxis_range_high = -1000
     yaxis_range_low = 1000
     yaxis_range_high = 0
 
     if year not in YEARS:
-        print "'year' must be an int in the range 1999-2015 inclusive"
+        raise exceptions.PlotlyError(
+            "'year' must be an int in the range 1999-2015 inclusive"
+        )
     df_single_year = df_merged[df_merged.Year == year]
 
     if not color_col:
@@ -152,21 +163,28 @@ def get_figure(year, colorscale=DEFAULT_COLORSCALE, scope='usa', color_col=None,
     # bin color data categorically
     if endpts:
         intervals = utils.endpts_to_intervals(endpts)
-        LEVELS = intervals_to_strings(intervals)
+        LEVELS = intervals_as_labels(intervals)
     else:
         LEVELS = sorted(df_merged[color_col].unique())
 
+    if not colorscale:
+        colorscale = colors.n_colors('rgb(23, 28, 66)', 'rgb(0, 128, 166)',
+                                     len(LEVELS), 'rgb')
+
     if len(colorscale) < len(LEVELS):
-        print (
+        raise exceptions.PlotlyError(
             "your number of colors in 'colorscale' must be "
             "at least the number of LEVELS: {}".format(min(LEVELS, LEVELS[:20]))
         )
-    color_lookup = dict(zip(LEVELS, colorscale))
 
+    color_lookup = dict(zip(LEVELS, colorscale))
     x_traces = dict(zip(LEVELS, [[] for i in range(len(LEVELS))]))
     y_traces = dict(zip(LEVELS, [[] for i in range(len(LEVELS))]))
 
-    SIMPLIFY_FACTOR = 0.05
+    if len(LEVELS) < 10:
+        SIMPLIFY_FACTOR = 0.005
+    else:
+        SIMPLIFY_FACTOR = 0.05
 
     # scope
     # TODO: change list to utils.sequence
@@ -195,55 +213,37 @@ def get_figure(year, colorscale=DEFAULT_COLORSCALE, scope='usa', color_col=None,
                 y_centroids.append(y_c[0])
                 centroid_text.append(t_c)
             elif df_single_year['geometry'][index].type == 'MultiPolygon':
-                x = [poly.simplify(SIMPLIFY_FACTOR).exterior.xy[0] for poly in df_single_year['geometry'][index]]
-                y = [poly.simplify(SIMPLIFY_FACTOR).exterior.xy[1] for poly in df_single_year['geometry'][index]]
+                x = ([poly.simplify(SIMPLIFY_FACTOR).exterior.xy[0] for
+                      poly in df_single_year['geometry'][index]])
+                y = ([poly.simplify(SIMPLIFY_FACTOR).exterior.xy[1] for
+                      poly in df_single_year['geometry'][index]])
                 x_c = [poly.centroid.xy[0] for poly in df_single_year['geometry'][index]]
                 y_c = [poly.centroid.xy[1] for poly in df_single_year['geometry'][index]]
-                text = row.NAME + '<br>' + color_col + ': ' + level + '<br>' + 'FIPS: ' + str(row.FIPS)
+                text = (row.NAME + '<br>' + color_col + ': ' + level +
+                        '<br>' + 'FIPS: ' + str(row.FIPS))
                 t_c = [text for poly in df_single_year['geometry'][index]]
                 x_centroids = x_c + x_centroids
                 y_centroids = y_c + y_centroids
                 centroid_text = t_c + centroid_text
-            else:
-                print('stop')
             x_traces[level] = x_traces[level] + x + [np.nan]
             y_traces[level] = y_traces[level] + y + [np.nan]
 
-            if x_traces[level] != []:
-                x_len = len(x_traces[level])
-                mask = np.ones(x_len, dtype=bool)
+            alaska_not_in_scope = 'AK' not in scope and 'Alaska' not in scope
+            hawaii_not_in_scope = 'HI' not in scope or 'Hawaii' not in scope
+            if (scope != 'usa' or (isinstance(scope, list) and
+               alaska_not_in_scope and hawaii_not_in_scope)):
+                xaxis_range_low, xaxis_range_high = _update_xaxis_range(
+                    x_traces, level, xaxis_range_low, xaxis_range_high
+                )
 
-                indices = []
-                for i in range(x_len):
-                    if not isinstance(x_traces[level][i], array.array):
-                        indices.append(i)
-                mask[indices] = True
-
-                calc_x_min = min([x_traces[level][i] for i in indices])
-                calc_x_max = max([x_traces[level][i] for i in indices])
-
-                if calc_x_min < xaxis_range_low:
-                    xaxis_range_low = calc_x_min
-                if calc_x_max > xaxis_range_high:
-                    xaxis_range_high = calc_x_max
-
-            if y_traces[level] != []:
-                y_len = len(y_traces[level])
-                mask = np.ones(y_len, dtype=bool)
-
-                indices = []
-                for i in range(y_len):
-                    if not isinstance(y_traces[level][i], array.array):
-                        indices.append(i)
-                mask[indices] = True
-
-                calc_y_min = min([y_traces[level][i] for i in indices])
-                calc_y_max = max([y_traces[level][i] for i in indices])
-
-                if calc_y_min < yaxis_range_low:
-                    yaxis_range_low = calc_y_min
-                if calc_y_max > yaxis_range_high:
-                    yaxis_range_high = calc_y_max
+                yaxis_range_low, yaxis_range_high = _update_yaxis_range(
+                    y_traces, level, yaxis_range_low, yaxis_range_high
+                )
+            else:
+                xaxis_range_low = -125
+                xaxis_range_high = -65
+                yaxis_range_low = 25
+                yaxis_range_high = 49
 
     else:
         for index, row in df_single_year.iterrows():
@@ -261,55 +261,37 @@ def get_figure(year, colorscale=DEFAULT_COLORSCALE, scope='usa', color_col=None,
                 y_centroids.append(y_c[0])
                 centroid_text.append(t_c)
             elif df_single_year['geometry'][index].type == 'MultiPolygon':
-                x = [poly.simplify(SIMPLIFY_FACTOR).exterior.xy[0] for poly in df_single_year['geometry'][index]]
-                y = [poly.simplify(SIMPLIFY_FACTOR).exterior.xy[1] for poly in df_single_year['geometry'][index]]
+                x = ([poly.simplify(SIMPLIFY_FACTOR).exterior.xy[0] for
+                      poly in df_single_year['geometry'][index]])
+                y = ([poly.simplify(SIMPLIFY_FACTOR).exterior.xy[1] for
+                      poly in df_single_year['geometry'][index]])
                 x_c = [poly.centroid.xy[0] for poly in df_single_year['geometry'][index]]
                 y_c = [poly.centroid.xy[1] for poly in df_single_year['geometry'][index]]
-                text = row.NAME + '<br>' + color_col + ': ' + str(row[color_col]) + '<br>' + 'FIPS: ' + str(row.FIPS)
+                text = (row.NAME + '<br>' + color_col + ': ' + str(row[color_col]) +
+                        '<br>' + 'FIPS: ' + str(row.FIPS))
                 t_c = [text for poly in df_single_year['geometry'][index]]
                 x_centroids = x_c + x_centroids
                 y_centroids = y_c + y_centroids
                 centroid_text = t_c + centroid_text
-            else:
-                print('stop')
             x_traces[level] = x_traces[level] + x + [np.nan]
             y_traces[level] = y_traces[level] + y + [np.nan]
 
-            if x_traces[level] != []:
-                x_len = len(x_traces[level])
-                mask = np.ones(x_len, dtype=bool)
+            alaska_not_in_scope = 'AK' not in scope and 'Alaska' not in scope
+            hawaii_not_in_scope = 'HI' not in scope or 'Hawaii' not in scope
+            if (scope != 'usa' or (isinstance(scope, list) and
+               alaska_not_in_scope and hawaii_not_in_scope)):
+                xaxis_range_low, xaxis_range_high = _update_xaxis_range(
+                    x_traces, level, xaxis_range_low, xaxis_range_high
+                )
 
-                indices = []
-                for i in range(x_len):
-                    if not isinstance(x_traces[level][i], array.array):
-                        indices.append(i)
-                mask[indices] = True
-
-                calc_x_min = min([x_traces[level][i] for i in indices])
-                calc_x_max = max([x_traces[level][i] for i in indices])
-
-                if calc_x_min < xaxis_range_low:
-                    xaxis_range_low = calc_x_min
-                if calc_x_max > xaxis_range_high:
-                    xaxis_range_high = calc_x_max
-
-            if y_traces[level] != []:
-                y_len = len(y_traces[level])
-                mask = np.ones(y_len, dtype=bool)
-
-                indices = []
-                for i in range(y_len):
-                    if not isinstance(y_traces[level][i], array.array):
-                        indices.append(i)
-                mask[indices] = True
-
-                calc_y_min = min([y_traces[level][i] for i in indices])
-                calc_y_max = max([y_traces[level][i] for i in indices])
-
-                if calc_y_min < yaxis_range_low:
-                    yaxis_range_low = calc_y_min
-                if calc_y_max > yaxis_range_high:
-                    yaxis_range_high = calc_y_max
+                yaxis_range_low, yaxis_range_high = _update_yaxis_range(
+                    y_traces, level, yaxis_range_low, yaxis_range_high
+                )
+            else:
+                xaxis_range_low = -125
+                xaxis_range_high = -65
+                yaxis_range_low = 25
+                yaxis_range_high = 49
 
     x_states = []
     y_states = []
@@ -321,18 +303,19 @@ def get_figure(year, colorscale=DEFAULT_COLORSCALE, scope='usa', color_col=None,
             x_states = x_states + x
             y_states = y_states + y
         elif df_state['geometry'][index].type == 'MultiPolygon':
-            x = [poly.simplify(SIMPLIFY_FACTOR).exterior.xy[0].tolist() for poly in df_state['geometry'][index]]
-            y = [poly.simplify(SIMPLIFY_FACTOR).exterior.xy[1].tolist() for poly in df_state['geometry'][index]]
+            x = ([poly.simplify(SIMPLIFY_FACTOR).exterior.xy[0].tolist() for
+                  poly in df_state['geometry'][index]])
+            y = ([poly.simplify(SIMPLIFY_FACTOR).exterior.xy[1].tolist() for
+                  poly in df_state['geometry'][index]])
             for segment in range(len(x)):
                 x_states = x_states + x[segment]
                 y_states = y_states + y[segment]
                 x_states.append(np.nan)
                 y_states.append(np.nan)
-        else:
-            print('stop')
         x_states.append(np.nan)
         y_states.append(np.nan)
 
+    # TODO: sort LEVELS if '<30' type
     for lev in LEVELS:
         county_outline = dict(
             type='scattergl',
@@ -381,25 +364,42 @@ def get_figure(year, colorscale=DEFAULT_COLORSCALE, scope='usa', color_col=None,
     fig['layout']['yaxis']['range'] = [yaxis_range_low, yaxis_range_high]
 
     # fix aspect ratio
-    orig_diff_x = float(-65 + 125)
-    orig_diff_y = float(49 - 25)
+    init_width = float(-65 + 125)
+    init_height = float(49 - 25)
 
-    diff_x = fig['layout']['xaxis']['range'][1] - fig['layout']['xaxis']['range'][0]
-    diff_y = fig['layout']['yaxis']['range'][1] - fig['layout']['yaxis']['range'][0]
-    if diff_x > diff_y:
-        pass
+    width = float(fig['layout']['xaxis']['range'][1] -
+                  fig['layout']['xaxis']['range'][0])
+    height = float(fig['layout']['yaxis']['range'][1] -
+                   fig['layout']['yaxis']['range'][0])
+
+    center = (sum(fig['layout']['xaxis']['range']) / 2,
+              sum(fig['layout']['yaxis']['range']) / 2)
+
+    if height / width > init_height / init_width:
+        new_width = (init_width / init_height) * height
+        fig['layout']['xaxis']['range'][0] = center[0] - new_width * 0.5
+        fig['layout']['xaxis']['range'][1] = center[0] + new_width * 0.5
     else:
-        pass
+        new_height = (init_height / init_width) * width
+        fig['layout']['yaxis']['range'][0] = center[1] - new_height * 0.5
+        fig['layout']['yaxis']['range'][1] = center[1] + new_height * 0.5
+
     return fig
 
 
-def create_county_choropleth(year, scope='usa', show_hover=True,
-                             colorscale=DEFAULT_COLORSCALE, ):
+def create_choropleth(year, scope='usa', show_hover=True,
+                      colorscale=None, color_col=None,
+                      show_statedata=True, zoom=False, endpts=None):
+    """
+    Returns figure for county choropleth. Uses data from package_data.
 
-    fig = get_figure(year)
+    :param (int) year: filters data by one year
+    :param (str|list) scope: accepts a list of states and/or state
+        abbreviations to be plotted. Selecting 'usa' shows the entire
+        USA map excluding Hawaii and Alaska.
+    :param ()
+    """
+
+    fig = get_figure(year, scope, show_hover, colorscale,
+                     color_col, show_statedata, zoom, endpts)
     return fig
-fig = get_figure(
-    2001, scope=['Texas'], show_hover=True,
-    colorscale=None, color_col='Death Rate',
-    show_statedata=True, endpts=None,
-)
