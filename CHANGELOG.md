@@ -2,9 +2,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [2.3.4] - 2017-12-11
+## [2.3.0] - 2018-01-25
 ### Fixed
 - Merged [pull request](https://github.com/plotly/plotly.py/commit/a226e07393c158e01c34c050aaf492da9d77679a) that fixes `GraphWidget` for IPython > v6
+### Updated
+- Updated `plotly.min.js` to version 1.33.1.
+  - New plot types include a `violin` trace type.
+  - New features include completely rewritten `scattergl` using `regl` and a completely rewritten polar chart renderer.
+  - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1331----2018-01-24) for additional information regarding the updates.
 
 ## [2.2.3] - 2017-12-04
 ### Added
