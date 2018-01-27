@@ -345,8 +345,9 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
             entry = dict(
                 x=[tasks[index]['x0'], tasks[index]['x1']],
                 y=[groupID, groupID],
-                name='',
-                marker={'color': 'white'}
+                name=chart[index][index_col],
+                marker={'color': 'white'},
+                showlegend=False
             )
             if "description" in tasks[index]:
                 entry['text'] = tasks[index]['description']
@@ -502,8 +503,9 @@ def gantt_dict(chart, colors, title, index_col, show_colorbar, bar_width,
         entry = dict(
             x=[tasks[index]['x0'], tasks[index]['x1']],
             y=[groupID, groupID],
-            name='',
-            marker={'color': 'white'}
+            name=chart[index][index_col],
+            marker={'color': 'white'},
+            showlegend=False
         )
         if "description" in tasks[index]:
             entry['text'] = tasks[index]['description']
