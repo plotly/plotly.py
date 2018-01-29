@@ -8,34 +8,41 @@ import pandas as pd
 import numpy as np
 import geopandas as gp
 
+from numbers import Number
+
 shape_path = 'cb_2016_us_county_500k/cb_2016_us_county_500k.shp'
 states_path = 'cb_2016_us_state_500k/cb_2016_us_state_500k.shp'
 csv_path = 'NCHS_-_Drug_Poisoning_Mortality_by_County__United_States.csv'
 full_data_path = 'df.feather'
 
 pre_url = 'plotly/package_data/data/'
+#pre_url = 'data/'
 shape_path = pre_url + shape_path
 states_path = pre_url + states_path
 csv_path = pre_url + csv_path
 full_data_path = pre_url + full_data_path
 
-# create merged dataframe
+# shape df
 sf = shapefile.Reader(states_path)
 df_shape = gp.read_file(shape_path)
 df_shape['FIPS'] = df_shape['STATEFP'] + df_shape['COUNTYFP']
 df_shape['FIPS'] = pd.to_numeric(df_shape['FIPS'])
 
-# read state and csv
+# state df
 df_state = gp.read_file(states_path)
-df_csv = pd.read_csv(csv_path)
 
-death_rate_col = 'Estimated Age-adjusted Death Rate, 16 Categories (in ranges)'
-death_rate = df_csv[death_rate_col].values
+# csv df
+df_csv = pd.read_csv(csv_path)
+DEATH_RATE_COL = (
+    'Estimated Age-adjusted Death Rate, 16 Categories (in ranges)'
+)
+death_rate = df_csv[DEATH_RATE_COL].values
 death_rate_min = [float(ea.strip('>').split('-')[0]) for ea in death_rate]
 df_csv['MIN_DEATH_RATE'] = death_rate_min
+
+# merge dfs
 df_full_data = feather.read_dataframe(full_data_path)
 df_merged = pd.merge(df_shape, df_csv, on='FIPS')
-df_merged['Death Rate'] = df_merged[death_rate_col]
 
 ST = df_merged['ST'].unique()
 code_to_country_name_dict = {}
@@ -136,21 +143,89 @@ def _update_yaxis_range(y_traces, level, yaxis_range_low, yaxis_range_high):
     return yaxis_range_low, yaxis_range_high
 
 
-def get_figure(year, scope, show_hover, colorscale, color_col, order,
-               show_statedata, zoom, endpts, SIMPLIFY_FACTOR):
+def create_choropleth(year, color_col, scope='usa', show_hover=True,
+                      colorscale=None, order=None,
+                      show_statedata=True, zoom=False, endpts=None,
+                      SIMPLIFY_FACTOR=None):
+    """
+    Returns figure for county choropleth. Uses data from package_data.
+
+    :param (int|list) year: filters data by year or years. Use a single
+        year (eg. year=2004) or a list of years (eg. [2004, 2005, 2007])
+    :param (str) color_col: the variable that the color indexing is based on.
+        Can be categorical or numerical values.
+    :param (str|list) scope: accepts a list of states and/or state
+        abbreviations to be plotted. Selecting 'usa' shows the entire
+        USA map excluding Hawaii and Alaska.
+        Default = 'usa'
+    :param (bool) show_hover: show county hover info
+    :param (list) colorscale: a list of colors with length equal to the
+        number of unique values in the color index `color_col`
+    :param (list) order: a list of unique values contained in the color
+        column 'color_col' provided, ordered however you want the order of
+        the colorscale to be
+    :param (bool) show_statedata: reveals hoverinfo for the state on hover
+    :param (bool) zoom: enables zoom
+    :param (list) endpts: creates bins from a color column of numbers to
+    :param (float) SIMPLIFY_FACTOR: determines how many edges and vertices
+        each county polygon has. The lower the number, the less simplified
+        Default = 0.05
+
+    Example 1:
+    ```
+
+    ```
+    Example 2: New England
+    import plotly.plotly as py
+    import plotly.figure_factory as ff
+
+    import numpy as np
+
+    endpts = list(np.mgrid[1000:1000000:3j])
+    scope = ['Maine', 'Vermont', 'MA', 'New Hampshire',
+             'Rhode Island', 'Connecticut']
+
+    fig = ff.create_choropleth(
+        2011, scope=scope, color_col='Population', endpts=endpts,
+    )
+    ```
+    Example 3: The entire USA
+    ```
+    import plotly.plotly as py
+    import plotly.figure_factory as ff
+
+    colorscale = ['#171c42', '#24327a', '#214ea5', '#006fbe', '#3f8eba',
+                  '#76a9be', '#aac3cd', '#d2d7dd', '#e6d2d2', '#ddb2a4',
+                  '#d08b73', '#c26245', '#b1392a', '#911a28', '#670d22',
+                  '#3c0911']
+
+    fig = ff.create_choropleth(
+        2000, scope='usa', color_col='Death Rate',
+        colorscale=colorscale, show_statedata=False
+    )
+    ```
+    """
     xaxis_range_low = 0
     xaxis_range_high = -1000
     yaxis_range_low = 1000
     yaxis_range_high = 0
 
-    if year not in YEARS:
-        raise exceptions.PlotlyError(
-            "'year' must be an int in the range 1999-2015 inclusive"
-        )
-    df_single_year = df_merged[df_merged.Year == year]
-
-    if not color_col:
-        color_col = 'Death Rate'
+    if isinstance(year, Number):
+        if year not in YEARS:
+            raise exceptions.PlotlyError(
+                "'year' must be a year (int) or a list of years all "
+                "in the {}-{} range".format(min(YEARS), max(YEARS))
+            )
+        # TODO: change df_single_year to df_years
+        df_single_year = df_merged[df_merged.Year == year]
+    else:
+        for y in year:
+            if y not in YEARS:
+                raise exceptions.PlotlyError(
+                    "'year' must be a year (int) or a list of years all "
+                    "in the {}-{} range".format(min(YEARS), max(YEARS))
+                )
+        df_single_year = df_merged[df_merged['Year'].isin(year)]
 
     if color_col not in df_single_year:
         raise exceptions.PlotlyError(
@@ -274,8 +349,10 @@ def get_figure(year, scope, show_hover, colorscale, color_col, order,
                 x = row.geometry.simplify(SIMPLIFY_FACTOR).exterior.xy[0].tolist()
                 y = row.geometry.simplify(SIMPLIFY_FACTOR).exterior.xy[1].tolist()
                 x_c, y_c = row.geometry.centroid.xy
-                t_c = (row.NAME + '<br>' + color_col + ': ' + str(row[color_col]) +
-                       '<br>State: ' + row.State + '<br>' + 'FIPS: ' + str(row.FIPS))
+                t_c = (
+                    row.NAME + '<br>' + color_col + ': ' + str(row[color_col]) +
+                    '<br>State: ' + row.State + '<br>' + 'FIPS: ' + str(row.FIPS)
+                )
                 x_centroids.append(x_c[0])
                 y_centroids.append(y_c[0])
                 centroid_text.append(t_c)
@@ -286,8 +363,10 @@ def get_figure(year, scope, show_hover, colorscale, color_col, order,
                       poly in df_single_year['geometry'][index]])
                 x_c = [poly.centroid.xy[0] for poly in df_single_year['geometry'][index]]
                 y_c = [poly.centroid.xy[1] for poly in df_single_year['geometry'][index]]
-                text = (row.NAME + '<br>' + color_col + ': ' + str(row[color_col]) +
-                        '<br>' + 'FIPS: ' + str(row.FIPS))
+                text = (
+                    row.NAME + '<br>' + color_col + ': ' + str(row[color_col]) +
+                    '<br>' + 'FIPS: ' + str(row.FIPS)
+                )
                 t_c = [text for poly in df_single_year['geometry'][index]]
                 x_centroids = x_c + x_centroids
                 y_centroids = y_c + y_centroids
@@ -311,17 +390,18 @@ def get_figure(year, scope, show_hover, colorscale, color_col, order,
 
     x_states = []
     y_states = []
-    SIMPLIFY_FACTOR2 = 0.1
+    #sim_fct_2 = 0.1
+    sim_fct_2 = 0.05
     for index, row in df_state.iterrows():
         if df_state['geometry'][index].type == 'Polygon':
-            x = row.geometry.simplify(SIMPLIFY_FACTOR2).exterior.xy[0].tolist()
-            y = row.geometry.simplify(SIMPLIFY_FACTOR2).exterior.xy[1].tolist()
+            x = row.geometry.simplify(sim_fct_2).exterior.xy[0].tolist()
+            y = row.geometry.simplify(sim_fct_2).exterior.xy[1].tolist()
             x_states = x_states + x
             y_states = y_states + y
         elif df_state['geometry'][index].type == 'MultiPolygon':
-            x = ([poly.simplify(SIMPLIFY_FACTOR2).exterior.xy[0].tolist() for
+            x = ([poly.simplify(sim_fct_2).exterior.xy[0].tolist() for
                   poly in df_state['geometry'][index]])
-            y = ([poly.simplify(SIMPLIFY_FACTOR2).exterior.xy[1].tolist() for
+            y = ([poly.simplify(sim_fct_2).exterior.xy[1].tolist() for
                   poly in df_state['geometry'][index]])
             for segment in range(len(x)):
                 x_states = x_states + x[segment]
@@ -406,70 +486,4 @@ def get_figure(year, scope, show_hover, colorscale, color_col, order,
         fig['layout']['yaxis']['range'][0] = center[1] - new_height * 0.5
         fig['layout']['yaxis']['range'][1] = center[1] + new_height * 0.5
 
-    return fig
-
-
-def create_choropleth(year, scope='usa', show_hover=True,
-                      colorscale=None, color_col=None, order=None,
-                      show_statedata=True, zoom=False, endpts=None,
-                      SIMPLIFY_FACTOR=None):
-    """
-    Returns figure for county choropleth. Uses data from package_data.
-
-    :param (int) year: filters data by one year
-    :param (str|list) scope: accepts a list of states and/or state
-        abbreviations to be plotted. Selecting 'usa' shows the entire
-        USA map excluding Hawaii and Alaska.
-    :param () show_hover:
-    :param () colorscale:
-    :param () color_col: the variable that the color indexing is based on.
-        Can be categorical or numerical values.
-        Default = 'Death Rate'
-    :param () order: a list of unique values contained in the color
-        column 'color_col' provided, ordered however you want the order of
-        the colorscale to be
-    :param (bool) show_statedata: reveals hoverinfo for the state on hover
-    :param (bool) zoom: enables zoom
-    :param (list) endpts: creates bins from a color column of numbers to
-    :param (float) SIMPLIFY_FACTOR: determines how many edges and vertices
-        each county polygon has. The lower the number, the less simplified
-        Default = 0.05
-
-    Example 1: Texas
-    ```
-
-    ```
-    Example 2: New England
-    import plotly.plotly as py
-    import plotly.figure_factory as ff
-
-    import numpy as np
-
-    endpts = list(np.mgrid[1000:1000000:3j])
-    scope = ['Maine', 'Vermont', 'MA', 'New Hampshire',
-             'Rhode Island', 'Connecticut']
-
-    fig = ff.create_choropleth(
-        2011, scope=scope, color_col='Population', endpts=endpts,
-    )
-    ```
-    Example 3: The entire USA
-    ```
-    import plotly.plotly as py
-    import plotly.figure_factory as ff
-
-    colorscale = ['#171c42', '#24327a', '#214ea5', '#006fbe', '#3f8eba',
-                  '#76a9be', '#aac3cd', '#d2d7dd', '#e6d2d2', '#ddb2a4',
-                  '#d08b73', '#c26245', '#b1392a', '#911a28', '#670d22',
-                  '#3c0911']
-
-    fig = ff.create_choropleth(
-        2000, scope='usa', color_col='Death Rate',
-        colorscale=colorscale, show_statedata=False
-    )
-    ```
-    """
-
-    fig = get_figure(year, scope, show_hover, colorscale, color_col, order,
-                     show_statedata, zoom, endpts, SIMPLIFY_FACTOR)
     return fig
