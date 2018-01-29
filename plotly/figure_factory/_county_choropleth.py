@@ -47,12 +47,6 @@ for i in range(len(df_merged)):
         code_to_country_name_dict[row['ST']] = row['State']
 
 YEARS = sorted(df_merged['Year'].unique())
-LEVELS = [
-    '0-2', '2.1-4', '4.1-6', '6.1-8',
-    '8.1-10', '10.1-12', '12.1-14', '14.1-16',
-    '16.1-18', '18.1-20', '20.1-22', '22.1-24',
-    '24.1-26', '26.1-28', '28.1-30', '>30'
-]
 DEFAULT_LAYOUT = dict(
     hovermode='closest',
     xaxis=dict(
@@ -79,7 +73,7 @@ DEFAULT_LAYOUT = dict(
 )
 
 
-def intervals_as_labels(array_of_intervals):
+def _intervals_as_labels(array_of_intervals):
     """
     Transform an interval [-inf, 30] to label <30
     """
@@ -142,8 +136,8 @@ def _update_yaxis_range(y_traces, level, yaxis_range_low, yaxis_range_high):
     return yaxis_range_low, yaxis_range_high
 
 
-def get_figure(year, scope, show_hover, colorscale, color_col,
-               show_statedata, zoom, endpts):
+def get_figure(year, scope, show_hover, colorscale, color_col, order,
+               show_statedata, zoom, endpts, SIMPLIFY_FACTOR):
     xaxis_range_low = 0
     xaxis_range_high = -1000
     yaxis_range_low = 1000
@@ -158,43 +152,71 @@ def get_figure(year, scope, show_hover, colorscale, color_col,
     if not color_col:
         color_col = 'Death Rate'
 
+    if color_col not in df_single_year:
+        raise exceptions.PlotlyError(
+            'your color_col must be one of the following '
+            'column keys: {}'.format(
+                utils.list_of_options(df_single_year.keys(), conj='or')
+            )
+        )
+
     # utils.validate_index(df_single_year[color_col])
 
     # bin color data categorically
     if endpts:
         intervals = utils.endpts_to_intervals(endpts)
-        LEVELS = intervals_as_labels(intervals)
+        LEVELS = _intervals_as_labels(intervals)
     else:
-        LEVELS = sorted(df_merged[color_col].unique())
+        if not order:
+            LEVELS = sorted(df_merged[color_col].unique())
+        else:
+            # check if order is permutation
+            # of unique color col values
+            same_sets = set(df_merged[color_col].unique()) == set(order)
+            no_duplicates = not any(order.count(x) > 1 for x in order)
+            if same_sets and no_duplicates:
+                LEVELS = order
+            else:
+                raise exceptions.PlotlyError(
+                    'if you are using a custom order of unique values from '
+                    'your color column, you must: have all the unique values '
+                    'in your order and have no duplicate items'
+                )
 
     if not colorscale:
-        colorscale = colors.n_colors('rgb(23, 28, 66)', 'rgb(0, 128, 166)',
-                                     len(LEVELS), 'rgb')
+        colorscale = colors.n_colors(
+            'rgb(0, 109, 44)', 'rgb(199, 233, 192)', len(LEVELS), 'rgb'
+        )
 
     if len(colorscale) < len(LEVELS):
         raise exceptions.PlotlyError(
             "your number of colors in 'colorscale' must be "
-            "at least the number of LEVELS: {}".format(min(LEVELS, LEVELS[:20]))
+            "at least the number of LEVELS: {}".format(
+                min(LEVELS, LEVELS[:20])
+            )
         )
 
     color_lookup = dict(zip(LEVELS, colorscale))
     x_traces = dict(zip(LEVELS, [[] for i in range(len(LEVELS))]))
     y_traces = dict(zip(LEVELS, [[] for i in range(len(LEVELS))]))
 
-    if len(LEVELS) < 10:
-        SIMPLIFY_FACTOR = 0.005
-    else:
-        SIMPLIFY_FACTOR = 0.05
-
     # scope
     # TODO: change list to utils.sequence
-    if scope != 'usa' and isinstance(scope, list):
+    if isinstance(scope, str):
+        scope = [scope]
+
+    if scope != ['usa']:
         scope_names = []
         for state in scope:
             if state in code_to_country_name_dict.keys():
                 state = code_to_country_name_dict[state]
             scope_names.append(state)
         df_single_year = df_single_year[df_single_year['State'].isin(scope_names)]
+    else:
+        scope_names = df_single_year['State'].unique()
+
+    if not SIMPLIFY_FACTOR:
+        SIMPLIFY_FACTOR = 0.05
 
     plot_data = []
     x_centroids = []
@@ -228,10 +250,12 @@ def get_figure(year, scope, show_hover, colorscale, color_col,
             x_traces[level] = x_traces[level] + x + [np.nan]
             y_traces[level] = y_traces[level] + y + [np.nan]
 
-            alaska_not_in_scope = 'AK' not in scope and 'Alaska' not in scope
-            hawaii_not_in_scope = 'HI' not in scope or 'Hawaii' not in scope
-            if (scope != 'usa' or (isinstance(scope, list) and
-               alaska_not_in_scope and hawaii_not_in_scope)):
+            if scope == ['usa']:
+                xaxis_range_low = -125
+                xaxis_range_high = -65
+                yaxis_range_low = 25
+                yaxis_range_high = 49
+            else:
                 xaxis_range_low, xaxis_range_high = _update_xaxis_range(
                     x_traces, level, xaxis_range_low, xaxis_range_high
                 )
@@ -239,11 +263,6 @@ def get_figure(year, scope, show_hover, colorscale, color_col,
                 yaxis_range_low, yaxis_range_high = _update_yaxis_range(
                     y_traces, level, yaxis_range_low, yaxis_range_high
                 )
-            else:
-                xaxis_range_low = -125
-                xaxis_range_high = -65
-                yaxis_range_low = 25
-                yaxis_range_high = 49
 
     else:
         for index, row in df_single_year.iterrows():
@@ -276,10 +295,12 @@ def get_figure(year, scope, show_hover, colorscale, color_col,
             x_traces[level] = x_traces[level] + x + [np.nan]
             y_traces[level] = y_traces[level] + y + [np.nan]
 
-            alaska_not_in_scope = 'AK' not in scope and 'Alaska' not in scope
-            hawaii_not_in_scope = 'HI' not in scope or 'Hawaii' not in scope
-            if (scope != 'usa' or (isinstance(scope, list) and
-               alaska_not_in_scope and hawaii_not_in_scope)):
+            if scope == ['usa']:
+                xaxis_range_low = -125
+                xaxis_range_high = -65
+                yaxis_range_low = 25
+                yaxis_range_high = 49
+            else:
                 xaxis_range_low, xaxis_range_high = _update_xaxis_range(
                     x_traces, level, xaxis_range_low, xaxis_range_high
                 )
@@ -287,25 +308,20 @@ def get_figure(year, scope, show_hover, colorscale, color_col,
                 yaxis_range_low, yaxis_range_high = _update_yaxis_range(
                     y_traces, level, yaxis_range_low, yaxis_range_high
                 )
-            else:
-                xaxis_range_low = -125
-                xaxis_range_high = -65
-                yaxis_range_low = 25
-                yaxis_range_high = 49
 
     x_states = []
     y_states = []
-    SIMPLIFY_FACTOR = 0.1
+    SIMPLIFY_FACTOR2 = 0.1
     for index, row in df_state.iterrows():
         if df_state['geometry'][index].type == 'Polygon':
-            x = row.geometry.simplify(SIMPLIFY_FACTOR).exterior.xy[0].tolist()
-            y = row.geometry.simplify(SIMPLIFY_FACTOR).exterior.xy[1].tolist()
+            x = row.geometry.simplify(SIMPLIFY_FACTOR2).exterior.xy[0].tolist()
+            y = row.geometry.simplify(SIMPLIFY_FACTOR2).exterior.xy[1].tolist()
             x_states = x_states + x
             y_states = y_states + y
         elif df_state['geometry'][index].type == 'MultiPolygon':
-            x = ([poly.simplify(SIMPLIFY_FACTOR).exterior.xy[0].tolist() for
+            x = ([poly.simplify(SIMPLIFY_FACTOR2).exterior.xy[0].tolist() for
                   poly in df_state['geometry'][index]])
-            y = ([poly.simplify(SIMPLIFY_FACTOR).exterior.xy[1].tolist() for
+            y = ([poly.simplify(SIMPLIFY_FACTOR2).exterior.xy[1].tolist() for
                   poly in df_state['geometry'][index]])
             for segment in range(len(x)):
                 x_states = x_states + x[segment]
@@ -318,7 +334,7 @@ def get_figure(year, scope, show_hover, colorscale, color_col,
     # TODO: sort LEVELS if '<30' type
     for lev in LEVELS:
         county_outline = dict(
-            type='scattergl',
+            type='scatter',
             mode='lines',
             x=x_traces[lev],
             y=y_traces[lev],
@@ -334,12 +350,18 @@ def get_figure(year, scope, show_hover, colorscale, color_col,
         hover_points = dict(
             type='scatter',
             showlegend=False,
-            legendgroup="centroids",
+            legendgroup='centroids',
             x=x_centroids,
             y=y_centroids,
             text=centroid_text,
-            hoverinfo='text',
-            marker=dict(size=2, color='white'),
+            name='US Counties',
+            #selected=dict(
+            #    marker=dict(size=2, color='white', opacity=1)
+            #),
+            #unselected=dict(
+            #    marker=dict(opacity=0)
+            #),
+            marker=dict(size=2, color='white', opacity=0),
             mode='markers'
         )
         plot_data.append(hover_points)
@@ -388,8 +410,9 @@ def get_figure(year, scope, show_hover, colorscale, color_col,
 
 
 def create_choropleth(year, scope='usa', show_hover=True,
-                      colorscale=None, color_col=None,
-                      show_statedata=True, zoom=False, endpts=None):
+                      colorscale=None, color_col=None, order=None,
+                      show_statedata=True, zoom=False, endpts=None,
+                      SIMPLIFY_FACTOR=None):
     """
     Returns figure for county choropleth. Uses data from package_data.
 
@@ -397,9 +420,56 @@ def create_choropleth(year, scope='usa', show_hover=True,
     :param (str|list) scope: accepts a list of states and/or state
         abbreviations to be plotted. Selecting 'usa' shows the entire
         USA map excluding Hawaii and Alaska.
-    :param ()
+    :param () show_hover:
+    :param () colorscale:
+    :param () color_col: the variable that the color indexing is based on.
+        Can be categorical or numerical values.
+        Default = 'Death Rate'
+    :param () order: a list of unique values contained in the color
+        column 'color_col' provided, ordered however you want the order of
+        the colorscale to be
+    :param (bool) show_statedata: reveals hoverinfo for the state on hover
+    :param (bool) zoom: enables zoom
+    :param (list) endpts: creates bins from a color column of numbers to
+    :param (float) SIMPLIFY_FACTOR: determines how many edges and vertices
+        each county polygon has. The lower the number, the less simplified
+        Default = 0.05
+
+    Example 1: Texas
+    ```
+
+    ```
+    Example 2: New England
+    import plotly.plotly as py
+    import plotly.figure_factory as ff
+
+    import numpy as np
+
+    endpts = list(np.mgrid[1000:1000000:3j])
+    scope = ['Maine', 'Vermont', 'MA', 'New Hampshire',
+             'Rhode Island', 'Connecticut']
+
+    fig = ff.create_choropleth(
+        2011, scope=scope, color_col='Population', endpts=endpts,
+    )
+    ```
+    Example 3: The entire USA
+    ```
+    import plotly.plotly as py
+    import plotly.figure_factory as ff
+
+    colorscale = ['#171c42', '#24327a', '#214ea5', '#006fbe', '#3f8eba',
+                  '#76a9be', '#aac3cd', '#d2d7dd', '#e6d2d2', '#ddb2a4',
+                  '#d08b73', '#c26245', '#b1392a', '#911a28', '#670d22',
+                  '#3c0911']
+
+    fig = ff.create_choropleth(
+        2000, scope='usa', color_col='Death Rate',
+        colorscale=colorscale, show_statedata=False
+    )
+    ```
     """
 
-    fig = get_figure(year, scope, show_hover, colorscale,
-                     color_col, show_statedata, zoom, endpts)
+    fig = get_figure(year, scope, show_hover, colorscale, color_col, order,
+                     show_statedata, zoom, endpts, SIMPLIFY_FACTOR)
     return fig
