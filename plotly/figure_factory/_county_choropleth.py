@@ -44,6 +44,7 @@ df_csv['MIN_DEATH_RATE'] = death_rate_min
 df_full_data = feather.read_dataframe(full_data_path)
 df_merged = pd.merge(df_shape, df_csv, on='FIPS')
 
+# create county code to county dict
 ST = df_merged['ST'].unique()
 code_to_country_name_dict = {}
 for i in range(len(df_merged)):
@@ -54,11 +55,20 @@ for i in range(len(df_merged)):
         code_to_country_name_dict[row['ST']] = row['State']
 
 YEARS = sorted(df_merged['Year'].unique())
+YEARS_ERROR_MESSAGE = (
+    "'year' must be a number or a list of numbers with "
+    "possible values {}".format(
+        utils.list_of_options(YEARS, conj='or')
+    )
+)
+
+USA_XRANGE = [-125.0, -65.0]
+USA_YRANGE = [25.0, 49.0]
 DEFAULT_LAYOUT = dict(
     hovermode='closest',
     xaxis=dict(
         autorange=False,
-        range=[-125, -65],
+        range=USA_XRANGE,
         showgrid=False,
         zeroline=False,
         fixedrange=True,
@@ -66,7 +76,7 @@ DEFAULT_LAYOUT = dict(
     ),
     yaxis=dict(
         autorange=False,
-        range=[25, 49],
+        range=USA_YRANGE,
         showgrid=False,
         zeroline=False,
         fixedrange=True,
@@ -143,10 +153,65 @@ def _update_yaxis_range(y_traces, level, yaxis_range_low, yaxis_range_high):
     return yaxis_range_low, yaxis_range_high
 
 
+def _add_break_to_color_column(color_col):
+    if isinstance(color_col, str) and len(color_col) >= 23:
+        words = color_col.split(' ')
+        color_col_with_br = (
+            ' '.join(words[:len(words)/2]) +
+            ' <br> ' + ' '.join(words[len(words)/2:])
+        )
+    else:
+        color_col_with_br = str(color_col)
+    return color_col_with_br
+
+
+def _calculations(df_years, index, row, color_col, simplify_county, level,
+                  x_centroids, y_centroids, centroid_text, x_traces, y_traces):
+    if df_years['geometry'][index].type == 'Polygon':
+        x = row.geometry.simplify(simplify_county).exterior.xy[0].tolist()
+        y = row.geometry.simplify(simplify_county).exterior.xy[1].tolist()
+        x_c, y_c = row.geometry.centroid.xy
+
+        # split color_col if too long
+        color_col_with_br = _add_break_to_color_column(color_col)
+
+        t_c = (row.NAME + '<br>' + color_col_with_br + ': ' +
+               str(level) + '<br>State: ' + str(row.State) + '<br>' +
+               'FIPS: ' + str(row.FIPS))
+        x_centroids.append(x_c[0])
+        y_centroids.append(y_c[0])
+        centroid_text.append(t_c)
+
+        x_traces[level] = x_traces[level] + x + [np.nan]
+        y_traces[level] = y_traces[level] + y + [np.nan]
+    elif df_years['geometry'][index].type == 'MultiPolygon':
+        x = ([poly.simplify(simplify_county).exterior.xy[0].tolist() for
+              poly in df_years['geometry'][index]])
+        y = ([poly.simplify(simplify_county).exterior.xy[1].tolist() for
+              poly in df_years['geometry'][index]])
+        x_c = [poly.centroid.xy[0].tolist() for poly in df_years['geometry'][index]]
+        y_c = [poly.centroid.xy[1].tolist() for poly in df_years['geometry'][index]]
+
+        # split color_col if too long
+        color_col_with_br = _add_break_to_color_column(color_col)
+        text = (row.NAME + '<br>' + color_col_with_br + ': ' +
+                str(level) + '<br>' + 'FIPS: ' + str(row.FIPS))
+        t_c = [text for poly in df_years['geometry'][index]]
+        x_centroids = x_c + x_centroids
+        y_centroids = y_c + y_centroids
+        centroid_text = t_c + centroid_text
+        for x_y_idx in range(len(x)):
+            x_traces[level] = x_traces[level] + x[x_y_idx] + [np.nan]
+            y_traces[level] = y_traces[level] + y[x_y_idx] + [np.nan]
+
+    return x_traces, y_traces, x_centroids, y_centroids, centroid_text
+
+
 def create_choropleth(year, color_col, scope='usa', show_hover=True,
                       colorscale=None, order=None,
                       show_statedata=True, zoom=False, endpts=None,
-                      SIMPLIFY_FACTOR=None):
+                      simplify_county=0.02, simplify_state=0.02,
+                      county_outline_color='#000', asp=None):
     """
     Returns figure for county choropleth. Uses data from package_data.
 
@@ -167,42 +232,75 @@ def create_choropleth(year, color_col, scope='usa', show_hover=True,
     :param (bool) show_statedata: reveals hoverinfo for the state on hover
     :param (bool) zoom: enables zoom
     :param (list) endpts: creates bins from a color column of numbers to
-    :param (float) SIMPLIFY_FACTOR: determines how many edges and vertices
-        each county polygon has. The lower the number, the less simplified
-        Default = 0.05
+    :param (float) simplify_county: determines the simplification factor
+        for the counties. The larger the number, the fewer vertices and edges
+        each polygon has. See
+        http://toblerity.org/shapely/manual.html#object.simplify for more
+        information.
+        Default = 0.02
+    :param (float) simplify_state: simplifies the state outline polygon.
+        See http://toblerity.org/shapely/manual.html#object.simplify for more
+        information.
+        Default = 0.02
+    :param (float) county_outline_color
+    :param (float) asp: the width-to-height aspect ratio for the camera.
+        Default = 2.5
 
-    Example 1:
+    Example 1: Texas
+    ```
+    import plotly.plotly as py
+    import plotly.figure_factory as ff
+
+    color_col = 'Population'
+    scope = 'Texas'
+    fig = ff.create_choropleth(
+        2008, color_col=color_col,
+        scope=scope, asp=2.0,
+        endpts=[100, 1000, 10000, 100000, 1000000]
+    )
+    py.iplot(fig, filename='my_choropleth_texas')
     ```
 
-    ```
     Example 2: New England
+    ```
     import plotly.plotly as py
     import plotly.figure_factory as ff
 
     import numpy as np
 
-    endpts = list(np.mgrid[1000:1000000:3j])
-    scope = ['Maine', 'Vermont', 'MA', 'New Hampshire',
-             'Rhode Island', 'Connecticut']
-
+    endpts = list(np.mgrid[100:100000:8j])
+    scope = ['ME', 'Vermont', 'MA', 'NH',
+             'Rhode Island', 'CT']
+    color_col = 'Population'
     fig = ff.create_choropleth(
-        2011, scope=scope, color_col='Population', endpts=endpts,
+        2003, color_col=color_col,
+        scope=scope,
     )
+    py.iplot(fig, filename='my_choropleth_new_england')
     ```
+
     Example 3: The entire USA
     ```
     import plotly.plotly as py
     import plotly.figure_factory as ff
 
+    import numpy as np
+
+    color_col = 'Estimated Age-adjusted Death Rate, 16 Categories (in ranges)'
     colorscale = ['#171c42', '#24327a', '#214ea5', '#006fbe', '#3f8eba',
                   '#76a9be', '#aac3cd', '#d2d7dd', '#e6d2d2', '#ddb2a4',
                   '#d08b73', '#c26245', '#b1392a', '#911a28', '#670d22',
                   '#3c0911']
-
+    order = ['0-2', '2.1-4', '4.1-6', '6.1-8',
+             '8.1-10', '10.1-12', '12.1-14', '14.1-16',
+             '16.1-18', '18.1-20', '20.1-22', '22.1-24',
+             '24.1-26', '26.1-28', '28.1-30', '>30']
     fig = ff.create_choropleth(
-        2000, scope='usa', color_col='Death Rate',
-        colorscale=colorscale, show_statedata=False
+        2015, color_col=color_col,
+        scope='usa', colorscale=colorscale,
+        order=order, show_hover=False
     )
+    py.iplot(fig, filename='my_choropleth_usa')
     ```
     """
     xaxis_range_low = 0
@@ -212,32 +310,23 @@ def create_choropleth(year, color_col, scope='usa', show_hover=True,
 
     if isinstance(year, Number):
         if year not in YEARS:
-            raise exceptions.PlotlyError(
-                "'year' must be a year (int) or a list of years all "
-                "in the {}-{} range".format(min(YEARS), max(YEARS))
-            )
-        # TODO: change df_single_year to df_years
-        df_single_year = df_merged[df_merged.Year == year]
+            raise exceptions.PlotlyError(YEARS_ERROR_MESSAGE)
+        # TODO: change df_years to df_years
+        df_years = df_merged[df_merged.Year == year]
     else:
         for y in year:
             if y not in YEARS:
-                raise exceptions.PlotlyError(
-                    "'year' must be a year (int) or a list of years all "
-                    "in the {}-{} range".format(min(YEARS), max(YEARS))
-                )
-        df_single_year = df_merged[df_merged['Year'].isin(year)]
+                raise exceptions.PlotlyError(YEARS_ERROR_MESSAGE)
+        df_years = df_merged[df_merged['Year'].isin(year)]
 
-    if color_col not in df_single_year:
+    if color_col not in df_years:
         raise exceptions.PlotlyError(
             'your color_col must be one of the following '
             'column keys: {}'.format(
-                utils.list_of_options(df_single_year.keys(), conj='or')
+                utils.list_of_options(df_years.keys(), conj='or')
             )
         )
 
-    # utils.validate_index(df_single_year[color_col])
-
-    # bin color data categorically
     if endpts:
         intervals = utils.endpts_to_intervals(endpts)
         LEVELS = _intervals_as_labels(intervals)
@@ -286,44 +375,23 @@ def create_choropleth(year, color_col, scope='usa', show_hover=True,
             if state in code_to_country_name_dict.keys():
                 state = code_to_country_name_dict[state]
             scope_names.append(state)
-        df_single_year = df_single_year[df_single_year['State'].isin(scope_names)]
+        df_years = df_years[df_years['State'].isin(scope_names)]
     else:
-        scope_names = df_single_year['State'].unique()
-
-    if not SIMPLIFY_FACTOR:
-        SIMPLIFY_FACTOR = 0.05
+        scope_names = df_years['State'].unique()
 
     plot_data = []
     x_centroids = []
     y_centroids = []
     centroid_text = []
     if not endpts:
-        for index, row in df_single_year.iterrows():
+        for index, row in df_years.iterrows():
             level = row[color_col]
-            if df_single_year['geometry'][index].type == 'Polygon':
-                x = row.geometry.simplify(SIMPLIFY_FACTOR).exterior.xy[0].tolist()
-                y = row.geometry.simplify(SIMPLIFY_FACTOR).exterior.xy[1].tolist()
-                x_c, y_c = row.geometry.centroid.xy
-                t_c = (row.NAME + '<br>' + color_col + ': ' + level + '<br>State: ' +
-                       row.State + '<br>' + 'FIPS: ' + str(row.FIPS))
-                x_centroids.append(x_c[0])
-                y_centroids.append(y_c[0])
-                centroid_text.append(t_c)
-            elif df_single_year['geometry'][index].type == 'MultiPolygon':
-                x = ([poly.simplify(SIMPLIFY_FACTOR).exterior.xy[0] for
-                      poly in df_single_year['geometry'][index]])
-                y = ([poly.simplify(SIMPLIFY_FACTOR).exterior.xy[1] for
-                      poly in df_single_year['geometry'][index]])
-                x_c = [poly.centroid.xy[0] for poly in df_single_year['geometry'][index]]
-                y_c = [poly.centroid.xy[1] for poly in df_single_year['geometry'][index]]
-                text = (row.NAME + '<br>' + color_col + ': ' + level +
-                        '<br>' + 'FIPS: ' + str(row.FIPS))
-                t_c = [text for poly in df_single_year['geometry'][index]]
-                x_centroids = x_c + x_centroids
-                y_centroids = y_c + y_centroids
-                centroid_text = t_c + centroid_text
-            x_traces[level] = x_traces[level] + x + [np.nan]
-            y_traces[level] = y_traces[level] + y + [np.nan]
+
+            (x_traces, y_traces, x_centroids,
+             y_centroids, centroid_text) = _calculations(
+                df_years, index, row, color_col, simplify_county, level,
+                x_centroids, y_centroids, centroid_text, x_traces, y_traces
+            )
 
             if scope == ['usa']:
                 xaxis_range_low = -125
@@ -340,39 +408,17 @@ def create_choropleth(year, color_col, scope='usa', show_hover=True,
                 )
 
     else:
-        for index, row in df_single_year.iterrows():
+        for index, row in df_years.iterrows():
             for j, inter in enumerate(intervals):
                 if row[color_col] > inter[0] and row[color_col] < inter[1]:
                     break
             level = LEVELS[j]
-            if df_single_year['geometry'][index].type == 'Polygon':
-                x = row.geometry.simplify(SIMPLIFY_FACTOR).exterior.xy[0].tolist()
-                y = row.geometry.simplify(SIMPLIFY_FACTOR).exterior.xy[1].tolist()
-                x_c, y_c = row.geometry.centroid.xy
-                t_c = (
-                    row.NAME + '<br>' + color_col + ': ' + str(row[color_col]) +
-                    '<br>State: ' + row.State + '<br>' + 'FIPS: ' + str(row.FIPS)
-                )
-                x_centroids.append(x_c[0])
-                y_centroids.append(y_c[0])
-                centroid_text.append(t_c)
-            elif df_single_year['geometry'][index].type == 'MultiPolygon':
-                x = ([poly.simplify(SIMPLIFY_FACTOR).exterior.xy[0] for
-                      poly in df_single_year['geometry'][index]])
-                y = ([poly.simplify(SIMPLIFY_FACTOR).exterior.xy[1] for
-                      poly in df_single_year['geometry'][index]])
-                x_c = [poly.centroid.xy[0] for poly in df_single_year['geometry'][index]]
-                y_c = [poly.centroid.xy[1] for poly in df_single_year['geometry'][index]]
-                text = (
-                    row.NAME + '<br>' + color_col + ': ' + str(row[color_col]) +
-                    '<br>' + 'FIPS: ' + str(row.FIPS)
-                )
-                t_c = [text for poly in df_single_year['geometry'][index]]
-                x_centroids = x_c + x_centroids
-                y_centroids = y_c + y_centroids
-                centroid_text = t_c + centroid_text
-            x_traces[level] = x_traces[level] + x + [np.nan]
-            y_traces[level] = y_traces[level] + y + [np.nan]
+
+            (x_traces, y_traces, x_centroids,
+             y_centroids, centroid_text) = _calculations(
+                df_years, index, row, color_col, simplify_county, level,
+                x_centroids, y_centroids, centroid_text, x_traces, y_traces
+            )
 
             if scope == ['usa']:
                 xaxis_range_low = -125
@@ -390,18 +436,16 @@ def create_choropleth(year, color_col, scope='usa', show_hover=True,
 
     x_states = []
     y_states = []
-    #sim_fct_2 = 0.1
-    sim_fct_2 = 0.05
     for index, row in df_state.iterrows():
         if df_state['geometry'][index].type == 'Polygon':
-            x = row.geometry.simplify(sim_fct_2).exterior.xy[0].tolist()
-            y = row.geometry.simplify(sim_fct_2).exterior.xy[1].tolist()
+            x = row.geometry.simplify(simplify_state).exterior.xy[0].tolist()
+            y = row.geometry.simplify(simplify_state).exterior.xy[1].tolist()
             x_states = x_states + x
             y_states = y_states + y
         elif df_state['geometry'][index].type == 'MultiPolygon':
-            x = ([poly.simplify(sim_fct_2).exterior.xy[0].tolist() for
+            x = ([poly.simplify(simplify_state).exterior.xy[0].tolist() for
                   poly in df_state['geometry'][index]])
-            y = ([poly.simplify(sim_fct_2).exterior.xy[1].tolist() for
+            y = ([poly.simplify(simplify_state).exterior.xy[1].tolist() for
                   poly in df_state['geometry'][index]])
             for segment in range(len(x)):
                 x_states = x_states + x[segment]
@@ -411,14 +455,14 @@ def create_choropleth(year, color_col, scope='usa', show_hover=True,
         x_states.append(np.nan)
         y_states.append(np.nan)
 
-    # TODO: sort LEVELS if '<30' type
     for lev in LEVELS:
         county_outline = dict(
             type='scatter',
             mode='lines',
             x=x_traces[lev],
             y=y_traces[lev],
-            line=dict(color='black', width=0.5),
+            line=dict(color=county_outline_color,
+                      width=0.5),
             fill='toself',
             fillcolor=color_lookup[lev],
             name=lev,
@@ -441,8 +485,8 @@ def create_choropleth(year, color_col, scope='usa', show_hover=True,
             #unselected=dict(
             #    marker=dict(opacity=0)
             #),
+            mode='markers',
             marker=dict(size=2, color='white', opacity=0),
-            mode='markers'
         )
         plot_data.append(hover_points)
 
@@ -461,28 +505,35 @@ def create_choropleth(year, color_col, scope='usa', show_hover=True,
 
     fig = dict(data=plot_data, layout=DEFAULT_LAYOUT)
 
+    # layout update
+    fig['layout'].update(
+        {'title': 'my choropleth',
+         'margin': dict(t=40)}
+    )
+
     # camera zoom
     fig['layout']['xaxis']['range'] = [xaxis_range_low, xaxis_range_high]
     fig['layout']['yaxis']['range'] = [yaxis_range_low, yaxis_range_high]
 
-    # fix aspect ratio
-    init_width = float(-65 + 125)
-    init_height = float(49 - 25)
+    # aspect ratio
+    if asp is None:
+        asp = (USA_XRANGE[1] - USA_XRANGE[0]) / (USA_YRANGE[1] - USA_YRANGE[0])
 
+    # based on your figure
     width = float(fig['layout']['xaxis']['range'][1] -
                   fig['layout']['xaxis']['range'][0])
     height = float(fig['layout']['yaxis']['range'][1] -
                    fig['layout']['yaxis']['range'][0])
 
-    center = (sum(fig['layout']['xaxis']['range']) / 2,
-              sum(fig['layout']['yaxis']['range']) / 2)
+    center = (sum(fig['layout']['xaxis']['range']) / 2.,
+              sum(fig['layout']['yaxis']['range']) / 2.)
 
-    if height / width > init_height / init_width:
-        new_width = (init_width / init_height) * height
+    if height / width > (1 / asp):
+        new_width = asp * height
         fig['layout']['xaxis']['range'][0] = center[0] - new_width * 0.5
         fig['layout']['xaxis']['range'][1] = center[0] + new_width * 0.5
     else:
-        new_height = (init_height / init_width) * width
+        new_height = (1 / asp) * width
         fig['layout']['yaxis']['range'][0] = center[1] - new_height * 0.5
         fig['layout']['yaxis']['range'][1] = center[1] + new_height * 0.5
 
