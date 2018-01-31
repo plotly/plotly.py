@@ -16,7 +16,6 @@ csv_path = 'NCHS_-_Drug_Poisoning_Mortality_by_County__United_States.csv'
 full_data_path = 'df.feather'
 
 pre_url = 'plotly/package_data/data/'
-#pre_url = 'data/'
 shape_path = pre_url + shape_path
 states_path = pre_url + states_path
 csv_path = pre_url + csv_path
@@ -211,7 +210,8 @@ def create_choropleth(year, color_col, scope='usa', show_hover=True,
                       colorscale=None, order=None,
                       show_statedata=True, zoom=False, endpts=None,
                       simplify_county=0.02, simplify_state=0.02,
-                      county_outline_color='#000', asp=None):
+                      county_outline_color='#000', asp=None,
+                      data_path=None):
     """
     Returns figure for county choropleth. Uses data from package_data.
 
@@ -365,7 +365,6 @@ def create_choropleth(year, color_col, scope='usa', show_hover=True,
     y_traces = dict(zip(LEVELS, [[] for i in range(len(LEVELS))]))
 
     # scope
-    # TODO: change list to utils.sequence
     if isinstance(scope, str):
         scope = [scope]
 
