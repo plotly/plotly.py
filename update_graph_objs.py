@@ -201,6 +201,8 @@ def print_figure_patch(f):
             if trace.type in theme.by_trace_type:
                 for k, v in theme.by_trace_type[trace.type].items():
                     graph_objs_tools._maybe_set_attr(trace, k, v)
+
+        return self
 ''', file=f, end=''
     )
 
