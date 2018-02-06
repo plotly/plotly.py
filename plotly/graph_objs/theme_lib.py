@@ -1,5 +1,5 @@
 #
-# Note that the following styles used values from the matplotlib style library
+# Note that the following themes used values from the matplotlib style library
 # (https://github.com/matplotlib/matplotlib/tree/master/lib/matplotlib/mpl-data/stylelib):
 #
 # - ggplot
@@ -11,7 +11,7 @@ from . import graph_objs as go
 from .graph_objs_tools import Cycler
 
 
-def ggplot_style():
+def ggplot_theme():
     axis = dict(showgrid=True, gridcolor="#cbcbcb",
                 linewidth=1.0, linecolor="#f0f0f0",
                 ticklen=0.0, tickcolor="#555555", ticks="outside",
@@ -26,10 +26,10 @@ def ggplot_style():
         "color": marker_color,
         "line": {"width": 0.5, "color": "#348ABD"}
     })
-    return go.PlotlyStyle(global_trace=global_trace, layout=layout)
+    return go.PlotlyTheme(global_trace=global_trace, layout=layout)
 
 
-def fivethirtyeight_style():
+def fivethirtyeight_theme():
     scatter = go.Scatter(line={"width": 4})
     axis = dict(showgrid=True, gridcolor="#cbcbcb",
                 linewidth=1.0, linecolor="#f0f0f0",
@@ -46,12 +46,12 @@ def fivethirtyeight_style():
     colors = ["#008fd5", "#fc4f30", "#e5ae38", "#6d904f",
               "#8b8b8b", "#810f7c"]
     global_trace = dict(marker={"color": Cycler(colors)})
-    return go.PlotlyStyle(
+    return go.PlotlyTheme(
         global_trace=global_trace, layout=layout, scatter=scatter
     )
 
 
-def seaborn_style():
+def seaborn_theme():
     heatmap = go.Heatmap(colorscale="Greys")
     scatter = go.Scatter(
         marker=dict(size=9, line={"width": 0}),
@@ -76,13 +76,13 @@ def seaborn_style():
         titlefont=dict(size=14))
     colors = ["#4C72B0", "#55A868", "#C44E52", "#8172B2", "#CCB974", "#64B5CD"]
     global_trace = {"marker": {"color": Cycler(colors)}}
-    return go.PlotlyStyle(
+    return go.PlotlyTheme(
         global_trace=global_trace, layout=layout, scatter=scatter,
         heatmap=heatmap
     )
 
 
-def tomorrow_night_eighties_style():
+def tomorrow_night_eighties_theme():
     bgcolor = "#2d2d2d"  # Background
     grid_color = "#515151"  # Selection
     label_color = "#cccccc"  # Comment
@@ -105,12 +105,12 @@ def tomorrow_night_eighties_style():
     )
 
     global_trace = {"marker": {"color": Cycler(colors)}}
-    return go.PlotlyStyle(global_trace=global_trace, layout=layout)
+    return go.PlotlyTheme(global_trace=global_trace, layout=layout)
 
 
-STYLES = {
-    "ggplot": ggplot_style(),
-    "tomorrow_night_eighties": tomorrow_night_eighties_style(),
-    "seaborn": seaborn_style(),
-    "fivethirtyeight": fivethirtyeight_style(),
+THEMES = {
+    "ggplot": ggplot_theme(),
+    "tomorrow_night_eighties": tomorrow_night_eighties_theme(),
+    "seaborn": seaborn_theme(),
+    "fivethirtyeight": fivethirtyeight_theme(),
 }

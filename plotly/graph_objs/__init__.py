@@ -13,4 +13,4 @@ from __future__ import absolute_import
 
 from plotly.graph_objs.graph_objs import *  # this is protected with __all__
 
-from plotly.graph_objs.style_lib import STYLES
+from plotly.graph_objs.theme_lib import THEMES

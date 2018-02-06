@@ -142,64 +142,64 @@ def print_figure_patch(f):
             trace['yaxis'] = ref[1]
         self['data'] += [trace]
 
-    def apply_style(self, style):
+    def apply_theme(self, theme):
         """
-        Apply the ``PlotlyStyle`` in ``style`` to the figure
+        Apply the ``PlotlyTheme`` in ``theme`` to the figure
 
-        Styles can be thought of as default values -- filling in figure
+        Themes can be thought of as default values -- filling in figure
         attributes only when they don't already exist on the figure
 
-        Style application adheres to the following rules:
+        Theme application adheres to the following rules:
 
-        - Non-overwriting: a style attribute will never be applied when a
+        - Non-overwriting: a theme attribute will never be applied when a
           Figure attribute is already defined
-        - Non-destructive: styles that specify only some of the valid figure
+        - Non-destructive: themes that specify only some of the valid figure
           attributes (e.g. only `layout.font.size`) will not overwrite already
           specified figure parent, sibling, or children attributes. For example
-          if the style only has a value for `layout.font.size`, a figure's
+          if the theme only has a value for `layout.font.size`, a figure's
           `layout.font.family` or `layout.title` will not be altered.
-        - Attributes set on `style.layout.(x|y|z)axis` will be applied to all
+        - Attributes set on `theme.layout.(x|y|z)axis` will be applied to all
           axes found in the figure. For example, to set the tick length for
           every xaxis in the figure, you would define
-          ``style.layout.xaxis.ticklen``
+          ``theme.layout.xaxis.ticklen``
 
-        For more details on how to construct a ``PlotlyStyle`` see the
+        For more details on how to construct a ``PlotlyTheme`` see the
         associated docstring
 
         """
-        if not isinstance(style, PlotlyStyle):
-            msg = ("Sorry, we only know how to apply styles contained in a"
-                   "PlotlyStyle object. Checkout the docstring for PlotlyStyle"
+        if not isinstance(theme, PlotlyTheme):
+            msg = ("Sorry, we only know how to apply themes contained in a"
+                   "PlotlyTheme object. Checkout the docstring for PlotlyTheme"
                    "and try again!")
             raise ValueError(msg)
 
-        style._reset_cyclers()
+        theme._reset_cyclers()
         is_3d = any("3d" in x.type for x in self.data)
-        if len(style.layout) > 0:
-            graph_objs_tools._apply_style_axis(self, style, "x", not is_3d)
-            graph_objs_tools._apply_style_axis(self, style, "y", not is_3d)
-            graph_objs_tools._apply_style_axis(self, style, "z", False)
+        if len(theme.layout) > 0:
+            graph_objs_tools._apply_theme_axis(self, theme, "x", not is_3d)
+            graph_objs_tools._apply_theme_axis(self, theme, "y", not is_3d)
+            graph_objs_tools._apply_theme_axis(self, theme, "z", False)
 
             # now we can let PlotlyDict.update apply the rest
-            new = style.layout.copy()
+            new = theme.layout.copy()
 
-            # need to remove (x|y|z)axis from the style so it doesn't ruin what
+            # need to remove (x|y|z)axis from the theme so it doesn't ruin what
             # we did above
             new.pop("xaxis", None)
             new.pop("yaxis", None)
             new.pop("zaxis", None)
 
-            # update style with self, so style takes precedence
+            # update theme with self, so theme takes precedence
             new.update(self.layout)
             self.layout = new
 
         for trace in self.data:
-            if len(style.global_trace) > 0:
-                for k, v in style.global_trace.items():
+            if len(theme.global_trace) > 0:
+                for k, v in theme.global_trace.items():
                     graph_objs_tools._maybe_set_attr(trace, k, v)
 
-            if trace.type in style.by_trace_type:
-                for k, v in style.by_trace_type[trace.type].items():
+            if trace.type in theme.by_trace_type:
+                for k, v in theme.by_trace_type[trace.type].items():
                     graph_objs_tools._maybe_set_attr(trace, k, v)
 ''', file=f, end=''
     )
@@ -359,6 +359,6 @@ with open('./plotly/graph_objs/graph_objs.py', 'w') as graph_objs_file:
     print(textwrap.dedent("""\n
     __all__ = (
         [cls for cls in graph_reference.CLASSES.keys() if cls in globals()]
-        + ["PlotlyStyle"]
+        + ["PlotlyTheme"]
     )
     """), file=graph_objs_file)

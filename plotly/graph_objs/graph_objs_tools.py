@@ -276,7 +276,7 @@ class Cycler(object):
     An object that repeats indefinitely by cycling through a collection of
     values
 
-    Usually used in a PlotlyStyle to set things like a sequence of trace colors
+    Usually used in a PlotlyTheme to set things like a sequence of trace colors
     that should be applied.
     """
     def __init__(self, vals):
@@ -308,26 +308,26 @@ def _reset_cyclers(obj):
             _reset_cyclers(val)
 
 
-def _apply_style_axis(fig, style, ax, force):
+def _apply_theme_axis(fig, theme, ax, force):
     long_ax = ax+"axis"
 
     def apply_at_root(root):
         ax_names = list(filter(lambda x: x.startswith(long_ax), root.keys()))
 
         for ax_name in ax_names:
-            # update style with data from fig, so the fig data takes
+            # update theme with data from fig, so the fig data takes
             # precedence
-            new = style.layout[long_ax].copy()
+            new = theme.layout[long_ax].copy()
             new.update(root[ax_name])
             root[ax_name] = new
 
         if len(ax_names) == 0:
-            root[long_ax] = style.layout[long_ax].copy()
+            root[long_ax] = theme.layout[long_ax].copy()
 
-    if long_ax in style.layout or force:
+    if long_ax in theme.layout or force:
         apply_at_root(fig.layout)
 
-    if long_ax in style.layout.scene or force:
+    if long_ax in theme.layout.scene or force:
         apply_at_root(fig.layout.scene)  # also apply to 3d scene
 
 
@@ -336,7 +336,7 @@ def _maybe_set_attr(obj, key, val):
     Set obj[key] = val _only_ when obj[key] is valid and blank
 
     obj should be an instance of PlotlyDict. As this is an internal method
-    that should only be invoked by plotly.graph_objs.Figure.apply_style
+    that should only be invoked by plotly.graph_objs.Figure.apply_theme
     this should never be an issue.
     """
     if isinstance(val, Cycler):
