@@ -29,11 +29,11 @@ def _create_us_counties_df(code_to_country_name_dict, state_to_st_dict):
     df_state = gp.read_file(states_path)
     df_state = df_state[['STATEFP', 'NAME', 'geometry']]
 
-    preurl = 'plotly/package_data/data/cb_2015_us_county_500k/'
-    filenames = ['cb_2015_us_county_500k.dbf',
-                 'cb_2015_us_county_500k.prj',
-                 'cb_2015_us_county_500k.shp',
-                 'cb_2015_us_county_500k.shx']
+    preurl = 'plotly/package_data/data/cb_2016_us_county_500k/'
+    filenames = ['cb_2016_us_county_500k.dbf',
+                 'cb_2016_us_county_500k.prj',
+                 'cb_2016_us_county_500k.shp',
+                 'cb_2016_us_county_500k.shx']
 
     for j in range(len(filenames)):
         filenames[j] = preurl + filenames[j]
