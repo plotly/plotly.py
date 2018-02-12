@@ -388,59 +388,19 @@ def create_choropleth(fips, values, scope='usa', colorscale=None, order=None,
 
     Example 1: Texas
     ```
-    import plotly.plotly as py
-    import plotly.figure_factory as ff
-
-    color_col = 'Population'
-    scope = 'Texas'
-    fig = ff.create_choropleth(
-        2008, color_col=color_col,
-        scope=scope, asp=2.0,
-        endpts=[100, 1000, 10000, 100000, 1000000]
-    )
-    py.iplot(fig, filename='my_choropleth_texas')
     ```
 
     Example 2: New England
     ```
-    import plotly.plotly as py
-    import plotly.figure_factory as ff
-
-    import numpy as np
-
-    endpts = list(np.mgrid[100:100000:8j])
-    scope = ['ME', 'Vermont', 'MA', 'NH',
-             'Rhode Island', 'CT']
-    color_col = 'Population'
-    fig = ff.create_choropleth(
-        2003, color_col=color_col,
-        scope=scope,
-    )
-    py.iplot(fig, filename='my_choropleth_new_england')
     ```
 
-    Example 3: The entire USA
+    Example 3: California and Surrounding States
     ```
-    import plotly.plotly as py
-    import plotly.figure_factory as ff
+    ```
 
-    import numpy as np
+    Example 4: USA
+    ```
 
-    color_col = 'Estimated Age-adjusted Death Rate, 16 Categories (in ranges)'
-    colorscale = ['#171c42', '#24327a', '#214ea5', '#006fbe', '#3f8eba',
-                  '#76a9be', '#aac3cd', '#d2d7dd', '#e6d2d2', '#ddb2a4',
-                  '#d08b73', '#c26245', '#b1392a', '#911a28', '#670d22',
-                  '#3c0911']
-    order = ['0-2', '2.1-4', '4.1-6', '6.1-8',
-             '8.1-10', '10.1-12', '12.1-14', '14.1-16',
-             '16.1-18', '18.1-20', '20.1-22', '22.1-24',
-             '24.1-26', '26.1-28', '28.1-30', '>30']
-    fig = ff.create_choropleth(
-        2015, color_col=color_col,
-        scope='usa', colorscale=colorscale,
-        order=order, show_hover=False
-    )
-    py.iplot(fig, filename='my_choropleth_usa')
     ```
     """
 
