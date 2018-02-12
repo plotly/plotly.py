@@ -5,38 +5,42 @@ from plotly.figure_factory import utils
 import array
 import geopandas as gp
 import numpy as np
+import os
 import pandas as pd
 import shapefile
+import warnings
 
 from shapely.geometry import MultiPolygon, Polygon, shape
+from math import log, floor
 from numbers import Number
 
+pd.options.mode.chained_assignment = None
 
 def _create_us_counties_df(code_to_country_name_dict, state_to_st_dict):
     # URLS
-    pre_url = 'plotly/package_data/data/'
+    data_url = 'plotly/package_data/data/'
 
     shape_pre2010 = 'gz_2010_us_050_00_500k/gz_2010_us_050_00_500k.shp'
-    shape_pre2010 = pre_url + shape_pre2010
+    shape_pre2010 = data_url + shape_pre2010
     df_shape_pre2010 = gp.read_file(shape_pre2010)
     df_shape_pre2010['FIPS'] = df_shape_pre2010['STATE'] + df_shape_pre2010['COUNTY']
     df_shape_pre2010['FIPS'] = pd.to_numeric(df_shape_pre2010['FIPS'])
 
     states_path = 'cb_2016_us_state_500k/cb_2016_us_state_500k.shp'
-    states_path = pre_url + states_path
+    states_path = data_url + states_path
 
     # state df
     df_state = gp.read_file(states_path)
     df_state = df_state[['STATEFP', 'NAME', 'geometry']]
 
-    preurl = 'plotly/package_data/data/cb_2016_us_county_500k/'
+    county_url = 'plotly/package_data/data/cb_2016_us_county_500k/'
     filenames = ['cb_2016_us_county_500k.dbf',
                  'cb_2016_us_county_500k.prj',
                  'cb_2016_us_county_500k.shp',
                  'cb_2016_us_county_500k.shx']
 
     for j in range(len(filenames)):
-        filenames[j] = preurl + filenames[j]
+        filenames[j] = county_url + filenames[j]
 
     dbf = open(filenames[0], 'r')
     prj = open(filenames[1], 'r')
@@ -243,147 +247,71 @@ fips_polygon_map = dict(
 
 USA_XRANGE = [-125.0, -65.0]
 USA_YRANGE = [25.0, 49.0]
-DEFAULT_LAYOUT = dict(
-    hovermode='closest',
-    xaxis=dict(
-        autorange=False,
-        range=USA_XRANGE,
-        showgrid=False,
-        zeroline=False,
-        fixedrange=True,
-        showticklabels=False
-    ),
-    yaxis=dict(
-        autorange=False,
-        range=USA_YRANGE,
-        showgrid=False,
-        zeroline=False,
-        fixedrange=True,
-        showticklabels=False
-    ),
-    margin=dict(t=20, b=20, r=20, l=20),
-    width=900,
-    height=450,
-    dragmode='select',
-    legend=dict(traceorder='reversed')
-)
+
+def _human_format(number):
+    units = ['', 'K', 'M', 'G', 'T', 'P']
+    k = 1000.0
+    magnitude = int(floor(log(number, k)))
+    return '%.2f%s' % (number / k**magnitude, units[magnitude])
 
 
-def _intervals_as_labels(array_of_intervals):
+def _intervals_as_labels(array_of_intervals, round_leg, exponent_format):
     """
-    Transform an interval [-inf, 30] to label <30
+    Transform an number interval to a clean string for legend
+
+    Example: [-inf, 30] to '< 30'
     """
+    infs = [float('-inf'), float('inf')]
     string_intervals = []
     for interval in array_of_intervals:
         # round to 2nd decimal place
-        rnd_interval = [round(interval[0], 2),
-                        round(interval[1], 2)]
-        if rnd_interval[0] == float('-inf'):
-            as_str = '<{}'.format(rnd_interval[1])
-        elif rnd_interval[1] == float('inf'):
-            as_str = '>{}'.format(rnd_interval[0])
+        if round_leg:
+            rnd_interval = [
+                (int(interval[i]) if interval[i] not in infs else
+                 interval[i])
+                for i in range(2)
+            ]
         else:
-            as_str = '{}-{}'.format(rnd_interval[0], rnd_interval[1])
+            rnd_interval = [round(interval[0], 2),
+                            round(interval[1], 2)]
+
+        num0 = rnd_interval[0]
+        num1 = rnd_interval[1]
+        if exponent_format:
+            if num0 not in infs:
+                num0 = _human_format(num0)
+            if num1 not in infs:
+                num1 = _human_format(num1)
+        else:
+            if num0 not in infs:
+                num0 = "{:,}".format(num0)
+            if num1 not in infs:
+                num1 = "{:,}".format(num1)
+
+        if num0 == float('-inf'):
+            as_str = '< {}'.format(num1)
+        elif num1 == float('inf'):
+            as_str = '> {}'.format(num0)
+        else:
+            as_str = '{} - {}'.format(num0, num1)
         string_intervals.append(as_str)
     return string_intervals
 
 
-def _update_xaxis_range(x_traces, level, xaxis_range_low, xaxis_range_high):
-    if x_traces[level] != []:
-        x_len = len(x_traces[level])
-        mask = np.ones(x_len, dtype=bool)
-
-        indices = []
-        for i in range(x_len):
-            if not isinstance(x_traces[level][i], array.array):
-                indices.append(i)
-        mask[indices] = True
-
-        calc_x_min = min([x_traces[level][i] for i in indices])
-        calc_x_max = max([x_traces[level][i] for i in indices])
-
-        if calc_x_min < xaxis_range_low:
-            xaxis_range_low = calc_x_min
-        if calc_x_max > xaxis_range_high:
-            xaxis_range_high = calc_x_max
-
-    return xaxis_range_low, xaxis_range_high
-
-
-def _update_yaxis_range(y_traces, level, yaxis_range_low, yaxis_range_high):
-    if y_traces[level] != []:
-        y_len = len(y_traces[level])
-        mask = np.ones(y_len, dtype=bool)
-
-        indices = []
-        for i in range(y_len):
-            if not isinstance(y_traces[level][i], array.array):
-                indices.append(i)
-        mask[indices] = True
-
-        calc_y_min = min([y_traces[level][i] for i in indices])
-        calc_y_max = max([y_traces[level][i] for i in indices])
-
-        if calc_y_min < yaxis_range_low:
-            yaxis_range_low = calc_y_min
-        if calc_y_max > yaxis_range_high:
-            yaxis_range_high = calc_y_max
-
-    return yaxis_range_low, yaxis_range_high
-
-
-def _calculations(df_years, index, row, color_col, simplify_county, level,
-                  x_centroids, y_centroids, centroid_text, x_traces, y_traces):
-    if df_years['geometry'][index].type == 'Polygon':
-        x = row.geometry.simplify(simplify_county).exterior.xy[0].tolist()
-        y = row.geometry.simplify(simplify_county).exterior.xy[1].tolist()
-        x_c, y_c = row.geometry.centroid.xy
-
-        # split color_col if too long
-        color_col_with_br = _add_break_to_color_column(color_col)
-
-        t_c = (row.NAME + '<br>' + color_col_with_br + ': ' +
-               str(level) + '<br>State: ' + str(row.State) + '<br>' +
-               'FIPS: ' + str(row.FIPS))
-        x_centroids.append(x_c[0])
-        y_centroids.append(y_c[0])
-        centroid_text.append(t_c)
-
-        x_traces[level] = x_traces[level] + x + [np.nan]
-        y_traces[level] = y_traces[level] + y + [np.nan]
-    elif df_years['geometry'][index].type == 'MultiPolygon':
-        x = ([poly.simplify(simplify_county).exterior.xy[0].tolist() for
-              poly in df_years['geometry'][index]])
-        y = ([poly.simplify(simplify_county).exterior.xy[1].tolist() for
-              poly in df_years['geometry'][index]])
-        x_c = [poly.centroid.xy[0].tolist() for poly in df_years['geometry'][index]]
-        y_c = [poly.centroid.xy[1].tolist() for poly in df_years['geometry'][index]]
-
-        # split color_col if too long
-        color_col_with_br = _add_break_to_color_column(color_col)
-        text = (row.NAME + '<br>' + color_col_with_br + ': ' +
-                str(level) + '<br>' + 'FIPS: ' + str(row.FIPS))
-        t_c = [text for poly in df_years['geometry'][index]]
-        x_centroids = x_c + x_centroids
-        y_centroids = y_c + y_centroids
-        centroid_text = t_c + centroid_text
-        for x_y_idx in range(len(x)):
-            x_traces[level] = x_traces[level] + x[x_y_idx] + [np.nan]
-            y_traces[level] = y_traces[level] + y[x_y_idx] + [np.nan]
-
-    return x_traces, y_traces, x_centroids, y_centroids, centroid_text
-
-
-def _calculations2(df, fips, values, index, f, simplify_county, level,
+def _calculations(df, fips, values, index, f, simplify_county, level,
                    x_centroids, y_centroids, centroid_text, x_traces, y_traces):
     if fips_polygon_map[f].type == 'Polygon':
-        x = fips_polygon_map[f].simplify(simplify_county).exterior.xy[0].tolist()
-        y = fips_polygon_map[f].simplify(simplify_county).exterior.xy[1].tolist()
+        x = fips_polygon_map[f].simplify(
+            simplify_county
+        ).exterior.xy[0].tolist()
+        y = fips_polygon_map[f].simplify(
+            simplify_county
+        ).exterior.xy[1].tolist() 
 
         x_c, y_c = fips_polygon_map[f].centroid.xy
         t_c = (
             'County: ' + df[df['FIPS'] == f]['NAME'].iloc[0] + '<br>' +
-            'FIPS: ' + str(f) + '<br>' + 'Value: ' + str(values[index])
+            'FIPS: ' + str(f) + '<br> Value: ' + str(values[index])
         )
 
         x_centroids.append(x_c[0])
@@ -403,7 +331,7 @@ def _calculations2(df, fips, values, index, f, simplify_county, level,
 
         text = (
             'County: ' + df[df['FIPS'] == f]['NAME'].iloc[0] + '<br>' +
-            'FIPS: ' + str(f) + '<br>' + 'Value: ' + str(values[index])
+            'FIPS: ' + str(f) + '<br> Value: ' + str(values[index])
         )
         t_c = [text for poly in fips_polygon_map[f]]
         x_centroids = x_c + x_centroids
@@ -416,25 +344,15 @@ def _calculations2(df, fips, values, index, f, simplify_county, level,
     return x_traces, y_traces, x_centroids, y_centroids, centroid_text
 
 
-def _add_break_to_color_column(color_col):
-    if isinstance(color_col, str) and len(color_col) >= 23:
-        words = color_col.split(' ')
-        color_col_with_br = (
-            ' '.join(words[:len(words)/2]) +
-            ' <br> ' + ' '.join(words[len(words)/2:])
-        )
-    else:
-        color_col_with_br = str(color_col)
-    return color_col_with_br
-
-
 def create_choropleth(fips, values, scope='usa', colorscale=None, order=None,
                       zoom=False, endpts=None, simplify_county=0.02,
                       simplify_state=0.02, asp=None, offline_mode=False,
                       show_hover=True, show_statedata=True,
                       state_outline_line=None, county_outline_line=None,
-                      centroid_marker=None, df=df, df_state=df_state,
-                      **layout_options):
+                      centroid_marker=None, round_leg=False,
+                      exponent_format=False,
+                      legend_title='', df=df,
+                      df_state=df_state, **layout_options):
     """
     Returns figure for county choropleth. Uses data from package_data.
 
@@ -464,6 +382,9 @@ def create_choropleth(fips, values, scope='usa', colorscale=None, order=None,
     :param (float) county_outline_color
     :param (float) asp: the width-to-height aspect ratio for the camera.
         Default = 2.5
+    :param (bool) round_leg: automatically round the numbers that appear in
+        the legend to the nearest integer.
+        Default = False
 
     Example 1: Texas
     ```
@@ -522,6 +443,7 @@ def create_choropleth(fips, values, scope='usa', colorscale=None, order=None,
     py.iplot(fig, filename='my_choropleth_usa')
     ```
     """
+
     if not state_outline_line:
         state_outline_line = {'color': 'rgb(240, 240, 240)',
                               'width': 1}
@@ -531,24 +453,25 @@ def create_choropleth(fips, values, scope='usa', colorscale=None, order=None,
     if not centroid_marker:
         centroid_marker = {'size': 2,
                            'color': 'rgb(255, 255, 255)',
-                           'opacity': 1}
-
-    xaxis_range_low = 0
-    xaxis_range_high = -1000
-    yaxis_range_low = 1000
-    yaxis_range_high = 0
+                           'opacity': 0}
 
     if len(fips) != len(values):
         raise exceptions.PlotlyError(
             'fips and values must be the same length'
         )
 
+    # make fips, values into lists
+    if isinstance(fips, pd.core.series.Series):
+        fips = fips.tolist()
+    if isinstance(values, pd.core.series.Series):
+        values = values.tolist()
+
     # make fips numeric
     fips = map(lambda x: int(x), fips)
 
     if endpts:
         intervals = utils.endpts_to_intervals(endpts)
-        LEVELS = _intervals_as_labels(intervals)
+        LEVELS = _intervals_as_labels(intervals, round_leg, exponent_format)
     else:
         if not order:
             LEVELS = sorted(list(set(values)))
@@ -577,7 +500,7 @@ def create_choropleth(fips, values, scope='usa', colorscale=None, order=None,
         viridis_colors = colors.color_parser(
             viridis_colors, colors.label_rgb
         )
-        viri_len = len(viridis_colors)
+        viri_len = len(viridis_colors) + 1
         viri_intervals = utils.endpts_to_intervals(
             list(np.linspace(0, 1, viri_len))
         )[1:-1]
@@ -588,19 +511,24 @@ def create_choropleth(fips, values, scope='usa', colorscale=None, order=None,
                     break
                 elif inter[0] < l <= inter[1]:
                     break
-            
+
             intermed = ((l - viri_intervals[idx][0]) /
                         (viri_intervals[idx][1] - viri_intervals[idx][0]))
-            colorscale.append(
-                colors.find_intermediate_color(
-                    viridis_colors[idx],
-                    viridis_colors[idx],
-                    intermed,
-                    colortype='rgb'
-                )
+            
+            float_color = colors.find_intermediate_color(
+                viridis_colors[idx],
+                viridis_colors[idx],
+                intermed,
+                colortype='rgb'
             )
-
-        print colorscale
+            
+            # make R,G,B into int values
+            float_color = colors.unlabel_rgb(float_color)
+            float_color = colors.unconvert_from_RGB_255(float_color)
+            int_rgb = colors.convert_to_RGB_255(float_color)
+            int_rgb = colors.label_rgb(int_rgb)
+            
+            colorscale.append(int_rgb)
 
     if len(colorscale) < len(LEVELS):
         raise exceptions.PlotlyError(
@@ -626,37 +554,30 @@ def create_choropleth(fips, values, scope='usa', colorscale=None, order=None,
             if state in code_to_country_name_dict.keys():
                 state = code_to_country_name_dict[state]
             scope_names.append(state)
-        df = df[df['NAME'].isin(scope_names)]
+        #df = df[df['NAME'].isin(scope_names)]
+        df_state = df_state = df_state[df_state['NAME'].isin(scope_names)]
     else:
         scope_names = df['NAME'].unique()
+        scope_names = df_state['NAME'].unique()
 
     plot_data = []
     x_centroids = []
     y_centroids = []
     centroid_text = []
+    fips_not_in_shapefile = []
     if not endpts:
         for index, f in enumerate(fips):
             level = values[index]
+            try:
+                fips_polygon_map[f].type
 
-            (x_traces, y_traces, x_centroids,
-             y_centroids, centroid_text) = _calculations2(
-                df, fips, values, index, f, simplify_county, level,
-                x_centroids, y_centroids, centroid_text, x_traces, y_traces
-            )
-
-            if scope == ['usa']:
-                xaxis_range_low = -125
-                xaxis_range_high = -65
-                yaxis_range_low = 25
-                yaxis_range_high = 49
-            else:
-                xaxis_range_low, xaxis_range_high = _update_xaxis_range(
-                    x_traces, level, xaxis_range_low, xaxis_range_high
+                (x_traces, y_traces, x_centroids,
+                 y_centroids, centroid_text) = _calculations(
+                    df, fips, values, index, f, simplify_county, level,
+                    x_centroids, y_centroids, centroid_text, x_traces, y_traces
                 )
-
-                yaxis_range_low, yaxis_range_high = _update_yaxis_range(
-                    y_traces, level, yaxis_range_low, yaxis_range_high
-                )
+            except KeyError:
+                fips_not_in_shapefile.append(f)
 
     else:
         for index, f in enumerate(fips):
@@ -665,25 +586,29 @@ def create_choropleth(fips, values, scope='usa', colorscale=None, order=None,
                     break
             level = LEVELS[j]
 
-            (x_traces, y_traces, x_centroids,
-             y_centroids, centroid_text) = _calculations2(
-                df, fips, values, index, f, simplify_county, level,
-                x_centroids, y_centroids, centroid_text, x_traces, y_traces
+            try:
+                fips_polygon_map[f].type
+
+                (x_traces, y_traces, x_centroids,
+                 y_centroids, centroid_text) = _calculations(
+                    df, fips, values, index, f, simplify_county, level,
+                    x_centroids, y_centroids, centroid_text, x_traces, y_traces
+                )
+            except KeyError:
+                fips_not_in_shapefile.append(f)
+
+    if len(fips_not_in_shapefile) > 0:
+        msg = (
+            'Unrecognized FIPS Values\n\nWhoops! It looks like you are '
+            'trying to pass at least one FIPS value that is not in '
+            'our shapefile of FIPS and data for the counties. Your '
+            'choropleth will still show up but these counties cannot '
+            'be shown.\nUnrecognized FIPS are: {}'.format(
+                fips_not_in_shapefile
             )
+        )
+        warnings.warn(msg)
 
-            if scope == ['usa']:
-                xaxis_range_low = -125
-                xaxis_range_high = -65
-                yaxis_range_low = 25
-                yaxis_range_high = 49
-            else:
-                xaxis_range_low, xaxis_range_high = _update_xaxis_range(
-                    x_traces, level, xaxis_range_low, xaxis_range_high
-                )
-
-                yaxis_range_low, yaxis_range_high = _update_yaxis_range(
-                    y_traces, level, yaxis_range_low, yaxis_range_high
-                )
 
     x_states = []
     y_states = []
@@ -716,7 +641,7 @@ def create_choropleth(fips, values, scope='usa', colorscale=None, order=None,
             fill='toself',
             fillcolor=color_lookup[lev],
             name=lev,
-            hoverinfo=None,
+            hoverinfo='text',
         )
         plot_data.append(county_outline)
 
@@ -731,6 +656,7 @@ def create_choropleth(fips, values, scope='usa', colorscale=None, order=None,
             name='US Counties',
             mode='markers',
             marker=centroid_marker,
+            hoverinfo='text'
         )
         if offline_mode:
             centroids_on_select = dict(
@@ -751,21 +677,82 @@ def create_choropleth(fips, values, scope='usa', colorscale=None, order=None,
             line=state_outline_line,
             x=x_states,
             y=y_states,
-            hoverinfo='none',
+            hoverinfo='text',
             showlegend=False,
             mode='lines'
         )
         plot_data.append(state_data)
 
-    fig = dict(data=plot_data, layout=DEFAULT_LAYOUT)
-
-
-    # layout options
-    fig['layout'].update(
-        title='',
-        margin=dict(t=40)
+    DEFAULT_LAYOUT = dict(
+        hovermode='closest',
+        xaxis=dict(
+            autorange=False,
+            range=USA_XRANGE,
+            showgrid=False,
+            zeroline=False,
+            fixedrange=True,
+            showticklabels=False
+        ),
+        yaxis=dict(
+            autorange=False,
+            range=USA_YRANGE,
+            showgrid=False,
+            zeroline=False,
+            fixedrange=True,
+            showticklabels=False
+        ),
+        margin=dict(t=40, b=20, r=20, l=20),
+        width=900,
+        height=450,
+        dragmode='select',
+        legend=dict(
+            traceorder='reversed',
+            xanchor='right',
+            yanchor='top',
+            x=1,
+            y=1
+        ),
+        annotations=[]
     )
+    fig = dict(data=plot_data, layout=DEFAULT_LAYOUT)
     fig['layout'].update(layout_options)
+    fig['layout']['annotations'].append(
+        dict(
+            x=1,
+            y=1.05,
+            xref='paper',
+            yref='paper',
+            xanchor='right',
+            showarrow=False,
+            text='<b>' + legend_title + '</b>'
+        )
+    )
+
+    if scope == 'usa':
+        xaxis_range_low = -125
+        xaxis_range_high = -65
+        yaxis_range_low = 25
+        yaxis_range_high = 49
+    else:
+        xaxis_range_low = 0
+        xaxis_range_high = -1000
+        yaxis_range_low = 1000
+        yaxis_range_high = 0
+        for trace in fig['data']:
+            if all(isinstance(n, Number) for n in trace['x']):
+                calc_x_min = min(trace['x'] or [float('inf')])
+                calc_x_max = max(trace['x'] or [float('-inf')])
+                if calc_x_min < xaxis_range_low:
+                    xaxis_range_low = calc_x_min
+                if calc_x_max > xaxis_range_high:
+                    xaxis_range_high = calc_x_max
+            if all(isinstance(n, Number) for n in trace['y']):
+                calc_y_min = min(trace['y'] or [float('inf')])
+                calc_y_max = max(trace['y'] or [float('-inf')])
+                if calc_y_min < yaxis_range_low:
+                    yaxis_range_low = calc_y_min
+                if calc_y_max > yaxis_range_high:
+                    yaxis_range_high = calc_y_max
 
     # camera zoom
     fig['layout']['xaxis']['range'] = [xaxis_range_low, xaxis_range_high]

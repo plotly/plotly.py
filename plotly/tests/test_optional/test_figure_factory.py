@@ -11,6 +11,7 @@ from nose.tools import raises
 
 import numpy as np
 from scipy.spatial import Delaunay
+import os
 import pandas as pd
 
 
@@ -2718,3 +2719,17 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                                   'zeroline': False}}
         }
         self.assert_dict_equal(fig, exp_fig)
+
+
+class TestChoropleth(NumpyTestUtilsMixin, TestCase):
+
+    def test_fips_values_same_len(self):
+        pattern = 'fips and values must be the same length'
+        self.assertRaisesRegexp(
+            PlotlyError, pattern, ff.create_choropleth, [1], [1, 2]
+        )
+
+
+
+
+
