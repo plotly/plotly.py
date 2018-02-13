@@ -6,7 +6,6 @@ import numpy as np
 import pandas as pd
 import warnings
 
-from shapely.geometry import shape
 from math import log, floor
 from numbers import Number
 
@@ -14,7 +13,7 @@ pd.options.mode.chained_assignment = None
 
 gp = optional_imports.get_module('geopandas')
 shapefile = optional_imports.get_module('shapefile')
-
+shapely = optional_imports.get_module('shapely')
 
 def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
     # URLS
@@ -51,7 +50,7 @@ def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
     attributes, geometry = [], []
     field_names = [field[0] for field in r.fields[1:]]
     for row in r.shapeRecords():
-        geometry.append(shape(row.shape.__geo_interface__))
+        geometry.append(shapely.geometry.shape(row.shape.__geo_interface__))
         attributes.append(dict(zip(field_names, row.record)))
 
     gdf = gp.GeoDataFrame(data=attributes, geometry=geometry)
@@ -552,6 +551,12 @@ def create_choropleth(fips, values, scope=['usa'], endpts=None,
     py.iplot(fig, filename='choropleth_full_usa')
     ```
     """
+    # ensure shapely imported
+    if not shapely:
+        raise exceptions.ImportError(
+            "'shapely' must be installed for this figure factory."
+        )
+
     # ensure geopandas imported
     if not gp:
         raise exceptions.ImportError(
