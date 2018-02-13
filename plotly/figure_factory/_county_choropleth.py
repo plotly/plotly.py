@@ -22,7 +22,8 @@ def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
     shape_pre2010 = 'gz_2010_us_050_00_500k/gz_2010_us_050_00_500k.shp'
     shape_pre2010 = data_url + shape_pre2010
     df_shape_pre2010 = gp.read_file(shape_pre2010)
-    df_shape_pre2010['FIPS'] = df_shape_pre2010['STATE'] + df_shape_pre2010['COUNTY']
+    df_shape_pre2010['FIPS'] = (df_shape_pre2010['STATE'] +
+                                df_shape_pre2010['COUNTY'])
     df_shape_pre2010['FIPS'] = pd.to_numeric(df_shape_pre2010['FIPS'])
 
     states_path = 'cb_2016_us_state_500k/cb_2016_us_state_500k.shp'
@@ -31,6 +32,7 @@ def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
     # state df
     df_state = gp.read_file(states_path)
     df_state = df_state[['STATEFP', 'NAME', 'geometry']]
+    df_state = df_state.rename(columns={'NAME': 'STATE_NAME'})
 
     county_url = 'plotly/package_data/data/cb_2016_us_county_500k/'
     filenames = ['cb_2016_us_county_500k.dbf',
@@ -65,9 +67,9 @@ def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
             [st_to_state_name_dict['SD'], 'SD',
              df_shape_pre2010[df_shape_pre2010['FIPS'] == f]['geometry'].iloc[0],
              df_shape_pre2010[df_shape_pre2010['FIPS'] == f]['FIPS'].iloc[0],
-             '46']
+             '46', 'Shannon']
         ],
-        columns=['State', 'ST', 'geometry', 'FIPS', 'STATEFP'],
+        columns=['State', 'ST', 'geometry', 'FIPS', 'STATEFP', 'NAME'],
         index=[max(gdf.index) + 1]
     )
     gdf = gdf.append(singlerow)
@@ -78,9 +80,9 @@ def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
             [st_to_state_name_dict['VA'], 'VA',
              df_shape_pre2010[df_shape_pre2010['FIPS'] == f]['geometry'].iloc[0],
              df_shape_pre2010[df_shape_pre2010['FIPS'] == f]['FIPS'].iloc[0],
-             '51']
+             '51', 'Bedford City']
         ],
-        columns=['State', 'ST', 'geometry', 'FIPS', 'STATEFP'],
+        columns=['State', 'ST', 'geometry', 'FIPS', 'STATEFP', 'NAME'],
         index=[max(gdf.index) + 1]
     )
     gdf = gdf.append(singlerow)
@@ -91,9 +93,9 @@ def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
             [st_to_state_name_dict['AK'], 'AK',
              df_shape_pre2010[df_shape_pre2010['FIPS'] == f]['geometry'].iloc[0],
              df_shape_pre2010[df_shape_pre2010['FIPS'] == f]['FIPS'].iloc[0],
-             '02']
+             '02', 'Wade Hampton']
         ],
-        columns=['State', 'ST', 'geometry', 'FIPS', 'STATEFP'],
+        columns=['State', 'ST', 'geometry', 'FIPS', 'STATEFP', 'NAME'],
         index=[max(gdf.index) + 1]
     )
     gdf = gdf.append(singlerow)
@@ -109,12 +111,14 @@ def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
     row_2105.loc[row_2105.index[0], 'FIPS'] = 2232
     row_2105.loc[row_2105.index[0], 'STATEFP'] = '02'
     gdf = gdf.append(row_2105)
+    gdf = gdf.rename(columns={'NAME': 'COUNTY_NAME'})
 
-    gdf_reduced = gdf[['FIPS', 'STATEFP', 'geometry']]
-    gdf_statefp = gdf_reduced.merge(df_state[['STATEFP', 'NAME']], on='STATEFP')
+    gdf_reduced = gdf[['FIPS', 'STATEFP', 'COUNTY_NAME', 'geometry']]
+    gdf_statefp = gdf_reduced.merge(df_state[['STATEFP', 'STATE_NAME']],
+                                    on='STATEFP')
 
     ST = []
-    for n in gdf_statefp['NAME']:
+    for n in gdf_statefp['STATE_NAME']:
         ST.append(state_to_st_dict[n])
 
     gdf_statefp['ST'] = ST
@@ -254,7 +258,7 @@ def _human_format(number):
     return '%.2f%s' % (number / k**magnitude, units[magnitude])
 
 
-def _intervals_as_labels(array_of_intervals, round_leg, exponent_format):
+def _intervals_as_labels(array_of_intervals, round_legend_values, exponent_format):
     """
     Transform an number interval to a clean string for legend
 
@@ -264,7 +268,7 @@ def _intervals_as_labels(array_of_intervals, round_leg, exponent_format):
     string_intervals = []
     for interval in array_of_intervals:
         # round to 2nd decimal place
-        if round_leg:
+        if round_legend_values:
             rnd_interval = [
                 (int(interval[i]) if interval[i] not in infs else
                  interval[i])
@@ -309,9 +313,12 @@ def _calculations(df, fips, values, index, f, simplify_county, level,
         ).exterior.xy[1].tolist()
 
         x_c, y_c = fips_polygon_map[f].centroid.xy
+        county_name_str = str(df[df['FIPS'] == f]['COUNTY_NAME'].iloc[0])
+        state_name_str = str(df[df['FIPS'] == f]['STATE_NAME'].iloc[0])
         t_c = (
-            'County: ' + df[df['FIPS'] == f]['NAME'].iloc[0] + '<br>' +
-            'FIPS: ' + str(f) + '<br> Value: ' + str(values[index])
+            'County: ' + county_name_str + '<br>' +
+            'State: ' + state_name_str + '<br>' +
+            'FIPS: ' + str(f) + '<br>Value: ' + str(values[index])
         )
 
         x_centroids.append(x_c[0])
@@ -330,8 +337,9 @@ def _calculations(df, fips, values, index, f, simplify_county, level,
         y_c = [poly.centroid.xy[1].tolist() for poly in fips_polygon_map[f]]
 
         text = (
-            'County: ' + df[df['FIPS'] == f]['NAME'].iloc[0] + '<br>' +
-            'FIPS: ' + str(f) + '<br> Value: ' + str(values[index])
+            'County: ' + df[df['FIPS'] == f]['COUNTY_NAME'].iloc[0] + '<br>' +
+            'State: ' + df[df['FIPS'] == f]['STATE_NAME'].iloc[0] + '<br>' +
+            'FIPS: ' + str(f) + '<br>Value: ' + str(values[index])
         )
         t_c = [text for poly in fips_polygon_map[f]]
         x_centroids = x_c + x_centroids
@@ -344,12 +352,12 @@ def _calculations(df, fips, values, index, f, simplify_county, level,
     return x_traces, y_traces, x_centroids, y_centroids, centroid_text
 
 
-def create_choropleth(fips, values, scope=['usa'], endpts=None,
+def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
                       colorscale=None, order=None, simplify_county=0.02,
                       simplify_state=0.02, asp=None, offline_mode=False,
-                      show_hover=True, show_statedata=True,
+                      show_hover=True, show_state_data=True,
                       state_outline=None, county_outline=None,
-                      centroid_marker=None, round_leg=False,
+                      centroid_marker=None, round_legend_values=False,
                       exponent_format=False, legend_title='', df=df,
                       df_state=df_state, **layout_options):
     """
@@ -368,15 +376,15 @@ def create_choropleth(fips, values, scope=['usa'], endpts=None,
         'United States Virgin Islands'. These must be added manually to the
         list.
         Default = ['usa']
-    :param (list) endpts: ascending numbers which implicitly define real
-        number intervals which are used as bins. The colorscale used must have
-        the same number of colors as the number of bins and this will result
-        in a categorical colormap.
+    :param (list) binning_endpoints: ascending numbers which implicitly define
+        real number intervals which are used as bins. The colorscale used must
+        have the same number of colors as the number of bins and this will
+        result in a categorical colormap.
     :param (list) colorscale: a list of colors with length equal to the
         number of categories of colors. The length must match either all
         unique numbers in the 'values' list or if endpoints is being used, the
         number of categories created by the endpoints.\n
-        For example, if endpts = [4, 6, 8], then there are 4 bins:
+        For example, if binning_endpoints = [4, 6, 8], then there are 4 bins:
         [-inf, 4), [4, 6), [6, 8), [8, inf)
     :param (list) order: a list of the unique categories (numbers/bins) in any
         desired order. This is helpful if you want to order string values to
@@ -400,7 +408,7 @@ def create_choropleth(fips, values, scope=['usa'], endpts=None,
         yet part of the plotly.py python library. Stay tuned for updates.
         Default = False
     :param (bool) show_hover: show county hover and centroid info
-    :param (bool) show_statedata: reveals state boundary lines
+    :param (bool) show_state_data: reveals state boundary lines
     :param (dict) state_outline: dict of attributes of the state outline
         including width and color. See
         https://plot.ly/python/reference/#scatter-marker-line for all valid
@@ -412,8 +420,8 @@ def create_choropleth(fips, values, scope=['usa'], endpts=None,
     :param (dict) centroid_marker: dict of attributes of the centroid marker.
         See https://plot.ly/python/reference/#scatter-marker for all valid
         params
-    :param (bool) round_leg: automatically round the numbers that appear in
-        the legend to the nearest integer.
+    :param (bool) round_legend_values: automatically round the numbers that
+        appear in the legend to the nearest integer.
         Default = False
     :param (bool) exponent_format: if set to True, puts numbers in the K, M,
         B number format. For example 4000.0 becomes 4.0K
@@ -438,15 +446,16 @@ def create_choropleth(fips, values, scope=['usa'], endpts=None,
     values = df_sample_r['TOT_POP'].tolist()
     fips = df_sample_r['FIPS'].tolist()
 
-    endpts = list(np.mgrid[min(values):max(values):4j])
+    binning_endpoints = list(np.mgrid[min(values):max(values):4j])
     colorscale = ["#030512","#1d1d3b","#323268","#3d4b94","#3e6ab0",
                   "#4989bc","#60a7c7","#85c5d3","#b7e0e4","#eafcfd"]
     fig = ff.create_choropleth(
-        fips=fips, values=values, scope=['Florida'], show_statedata=True,
-        colorscale=colorscale, endpts=endpts, round_leg=True,
-        plot_bgcolor='rgb(229,229,229)', paper_bgcolor='rgb(229,229,229)',
-        legend_title='Florida Population', exponent_format=True,
+        fips=fips, values=values, scope=['Florida'], show_state_data=True,
+        colorscale=colorscale, binning_endpoints=binning_endpoints,
+        round_legend_values=True, plot_bgcolor='rgb(229,229,229)',
+        paper_bgcolor='rgb(229,229,229)', legend_title='Florida Population',
         county_outline={'color': 'rgb(255,255,255)', 'width': 0.5},
+        exponent_format=True,
     )
     py.iplot(fig, filename='choropleth_florida')
     ```
@@ -473,7 +482,7 @@ def create_choropleth(fips, values, scope=['usa'], endpts=None,
     values = df_sample_r['TOT_POP'].tolist()
     fips = df_sample_r['FIPS'].tolist()
     fig = ff.create_choropleth(
-        fips=fips, values=values, scope=NE_states, show_statedata=True
+        fips=fips, values=values, scope=NE_states, show_state_data=True
     )
     py.iplot(fig, filename='choropleth_new_england')
     ```
@@ -505,7 +514,7 @@ def create_choropleth(fips, values, scope=['usa'], endpts=None,
     fig = ff.create_choropleth(
         fips=fips, values=values, colorscale=colorscale,
         scope=['CA', 'AZ', 'Nevada', 'Oregon', ' Idaho'],
-        endpts=[14348, 63983, 134827, 426762, 2081313],
+        binning_endpoints=[14348, 63983, 134827, 426762, 2081313],
         county_outline={'color': 'rgb(255,255,255)', 'width': 0.5},
         legend_title='California Counties',
         title='California and Nearby States'
@@ -534,15 +543,16 @@ def create_choropleth(fips, values, scope=['usa'], endpts=None,
         df_sample['State FIPS Code'] + df_sample['County FIPS Code']
     )
 
-    endpts = list(np.linspace(1, 12, len(colorscale) - 1))
-    colorscale = ["#f7fbff","#ebf3fb","#deebf7","#d2e3f3","#c6dbef","#b3d2e9",
-                  "#9ecae1", "#85bcdb","#6baed6","#57a0ce","#4292c6","#3082be",
-                  "#2171b5","#1361a9", "#08519c","#0b4083","#08306b"]
+    binning_endpoints = list(np.linspace(1, 12, len(colorscale) - 1))
+    colorscale = ["#f7fbff", "#ebf3fb", "#deebf7", "#d2e3f3", "#c6dbef",
+                  "#b3d2e9", "#9ecae1", "#85bcdb", "#6baed6", "#57a0ce",
+                  "#4292c6", "#3082be", "#2171b5", "#1361a9", "#08519c",
+                  "#0b4083","#08306b"]
     fips = df_sample['FIPS']
     values = df_sample['Unemployment Rate (%)']
     fig = ff.create_choropleth(
         fips=fips, values=values, scope=['usa'],
-        endpts=endpts, colorscale=colorscale,
+        binning_endpoints=binning_endpoints, colorscale=colorscale,
         show_hover=True, centroid_marker={'opacity': 0},
         asp=2.9, title='USA by Unemployment %',
         legend_title='Unemployment %'
@@ -581,9 +591,10 @@ def create_choropleth(fips, values, scope=['usa'], endpts=None,
     # make fips numeric
     fips = map(lambda x: int(x), fips)
 
-    if endpts:
-        intervals = utils.endpts_to_intervals(endpts)
-        LEVELS = _intervals_as_labels(intervals, round_leg, exponent_format)
+    if binning_endpoints:
+        intervals = utils.endpts_to_intervals(binning_endpoints)
+        LEVELS = _intervals_as_labels(intervals, round_legend_values,
+                                      exponent_format)
     else:
         if not order:
             LEVELS = sorted(list(set(values)))
@@ -646,8 +657,8 @@ def create_choropleth(fips, values, scope=['usa'], endpts=None,
         raise exceptions.PlotlyError(
             "You have {} LEVELS. Your number of colors in 'colorscale' must "
             "be at least the number of LEVELS: {}. If you are "
-            "using 'endpts' then 'colorscale' must have at "
-            "least len(endpts) + 2 colors".format(
+            "using 'binning_endpoints' then 'colorscale' must have at "
+            "least len(binning_endpoints) + 2 colors".format(
                 len(LEVELS), min(LEVELS, LEVELS[:20])
             )
         )
@@ -668,7 +679,7 @@ def create_choropleth(fips, values, scope=['usa'], endpts=None,
                     'American Samoa']
     for state in scope:
         if state.lower() == 'usa':
-            scope_names = df['NAME'].unique()
+            scope_names = df['STATE_NAME'].unique()
             scope_names = list(scope_names)
             for ex_st in extra_states:
                 try:
@@ -679,14 +690,14 @@ def create_choropleth(fips, values, scope=['usa'], endpts=None,
             if state in st_to_state_name_dict.keys():
                 state = st_to_state_name_dict[state]
             scope_names.append(state)
-    df_state = df_state[df_state['NAME'].isin(scope_names)]
+    df_state = df_state[df_state['STATE_NAME'].isin(scope_names)]
 
     plot_data = []
     x_centroids = []
     y_centroids = []
     centroid_text = []
     fips_not_in_shapefile = []
-    if not endpts:
+    if not binning_endpoints:
         for index, f in enumerate(fips):
             level = values[index]
             try:
@@ -695,7 +706,8 @@ def create_choropleth(fips, values, scope=['usa'], endpts=None,
                 (x_traces, y_traces, x_centroids,
                  y_centroids, centroid_text) = _calculations(
                     df, fips, values, index, f, simplify_county, level,
-                    x_centroids, y_centroids, centroid_text, x_traces, y_traces
+                    x_centroids, y_centroids, centroid_text, x_traces,
+                    y_traces
                 )
             except KeyError:
                 fips_not_in_shapefile.append(f)
@@ -713,7 +725,8 @@ def create_choropleth(fips, values, scope=['usa'], endpts=None,
                 (x_traces, y_traces, x_centroids,
                  y_centroids, centroid_text) = _calculations(
                     df, fips, values, index, f, simplify_county, level,
-                    x_centroids, y_centroids, centroid_text, x_traces, y_traces
+                    x_centroids, y_centroids, centroid_text, x_traces,
+                    y_traces
                 )
             except KeyError:
                 fips_not_in_shapefile.append(f)
@@ -790,7 +803,7 @@ def create_choropleth(fips, values, scope=['usa'], endpts=None,
             hover_points.update(centroids_on_select)
         plot_data.append(hover_points)
 
-    if show_statedata:
+    if show_state_data:
         state_data = dict(
             type='scatter',
             legendgroup='States',
@@ -880,7 +893,9 @@ def create_choropleth(fips, values, scope=['usa'], endpts=None,
 
     # aspect ratio
     if asp is None:
-        asp = (USA_XRANGE[1] - USA_XRANGE[0]) / (USA_YRANGE[1] - USA_YRANGE[0])
+        usa_x_range = USA_XRANGE[1] - USA_XRANGE[0]
+        usa_y_range = USA_YRANGE[1] - USA_YRANGE[0]
+        asp = usa_x_range / usa_y_range
 
     # based on your figure
     width = float(fig['layout']['xaxis']['range'][1] -
