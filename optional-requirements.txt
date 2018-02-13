@@ -31,5 +31,5 @@ ipykernel
 
 ## deps for _county_choropleth.py figure factory
 geopandas
-shapefile
+pyshp
 shapely
