@@ -2,13 +2,11 @@ from plotly import colors, exceptions, optional_imports
 
 from plotly.figure_factory import utils
 
-import array
 import numpy as np
-import os
 import pandas as pd
 import warnings
 
-from shapely.geometry import MultiPolygon, Polygon, shape
+from shapely.geometry import shape
 from math import log, floor
 from numbers import Number
 
@@ -45,7 +43,6 @@ def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
         filenames[j] = county_url + filenames[j]
 
     dbf = open(filenames[0], 'r')
-    prj = open(filenames[1], 'r')
     shp = open(filenames[2], 'r')
     shx = open(filenames[3], 'r')
 
@@ -85,7 +82,7 @@ def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
              '51']
         ],
         columns=['State', 'ST', 'geometry', 'FIPS', 'STATEFP'],
-        index = [max(gdf.index) + 1]
+        index=[max(gdf.index) + 1]
     )
     gdf = gdf.append(singlerow)
 
@@ -98,7 +95,7 @@ def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
              '02']
         ],
         columns=['State', 'ST', 'geometry', 'FIPS', 'STATEFP'],
-        index = [max(gdf.index) + 1]
+        index=[max(gdf.index) + 1]
     )
     gdf = gdf.append(singlerow)
 
@@ -250,6 +247,7 @@ fips_polygon_map = dict(
 USA_XRANGE = [-125.0, -65.0]
 USA_YRANGE = [25.0, 49.0]
 
+
 def _human_format(number):
     units = ['', 'K', 'M', 'G', 'T', 'P']
     k = 1000.0
@@ -301,14 +299,15 @@ def _intervals_as_labels(array_of_intervals, round_leg, exponent_format):
 
 
 def _calculations(df, fips, values, index, f, simplify_county, level,
-                   x_centroids, y_centroids, centroid_text, x_traces, y_traces):
+                  x_centroids, y_centroids, centroid_text, x_traces,
+                  y_traces):
     if fips_polygon_map[f].type == 'Polygon':
         x = fips_polygon_map[f].simplify(
             simplify_county
         ).exterior.xy[0].tolist()
         y = fips_polygon_map[f].simplify(
             simplify_county
-        ).exterior.xy[1].tolist() 
+        ).exterior.xy[1].tolist()
 
         x_c, y_c = fips_polygon_map[f].centroid.xy
         t_c = (
@@ -368,7 +367,7 @@ def create_choropleth(fips, values, scope=['usa'], endpts=None,
         does not include 'Alaska', 'Puerto Rico', 'American Samoa',
         'Commonwealth of the Northern Mariana Islands', 'Guam',
         'United States Virgin Islands'. These must be added manually to the
-        list.  
+        list.
         Default = ['usa']
     :param (list) endpts: ascending numbers which implicitly define real
         number intervals which are used as bins. The colorscale used must have
@@ -465,7 +464,7 @@ def create_choropleth(fips, values, scope=['usa'], endpts=None,
     df_sample = pd.read_csv(
         'https://raw.githubusercontent.com/plotly/datasets/master/minoritymajority.csv'
     )
-    df_sample_r = df_sample[df_sample['STNAME'].isin(NE_states)]    
+    df_sample_r = df_sample[df_sample['STNAME'].isin(NE_states)]
     colorscale = ['rgb(68.0, 1.0, 84.0)',
      'rgb(66.0, 64.0, 134.0)',
      'rgb(38.0, 130.0, 142.0)',
@@ -635,20 +634,20 @@ def create_choropleth(fips, values, scope=['usa'], endpts=None,
 
             intermed = ((l - viri_intervals[idx][0]) /
                         (viri_intervals[idx][1] - viri_intervals[idx][0]))
-            
+
             float_color = colors.find_intermediate_color(
                 viridis_colors[idx],
                 viridis_colors[idx],
                 intermed,
                 colortype='rgb'
             )
-            
+
             # make R,G,B into int values
             float_color = colors.unlabel_rgb(float_color)
             float_color = colors.unconvert_from_RGB_255(float_color)
             int_rgb = colors.convert_to_RGB_255(float_color)
             int_rgb = colors.label_rgb(int_rgb)
-            
+
             colorscale.append(int_rgb)
 
     if len(colorscale) < len(LEVELS):
@@ -739,7 +738,6 @@ def create_choropleth(fips, values, scope=['usa'], endpts=None,
         )
         warnings.warn(msg)
 
-
     x_states = []
     y_states = []
     for index, row in df_state.iterrows():
@@ -762,7 +760,7 @@ def create_choropleth(fips, values, scope=['usa'], endpts=None,
         y_states.append(np.nan)
 
     for lev in LEVELS:
-        county_outline = dict(
+        county_data = dict(
             type='scatter',
             mode='lines',
             x=x_traces[lev],
@@ -773,7 +771,7 @@ def create_choropleth(fips, values, scope=['usa'], endpts=None,
             name=lev,
             hoverinfo='text',
         )
-        plot_data.append(county_outline)
+        plot_data.append(county_data)
 
     if show_hover:
         hover_points = dict(
