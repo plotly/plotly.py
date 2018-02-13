@@ -552,22 +552,9 @@ def create_choropleth(fips, values, scope=['usa'], endpts=None,
     ```
     """
     # ensure shapely imported
-    if not shapely:
-        raise exceptions.ImportError(
-            "'shapely' must be installed for this figure factory."
-        )
-
-    # ensure geopandas imported
-    if not gp:
-        raise exceptions.ImportError(
-            "'geopandas' must be installed for this figure factory."
-        )
-
-    # ensure pandas imported
-    if not pd:
-        raise exceptions.ImportError(
-            "'shapefile' must be installed for this figure factory."
-        )
+    if not gp or not shapefile or not shapely:
+        raise ImportError("geopandas, shapefile and shapely must be "
+                          "installed for this figure factory")
 
     if not state_outline:
         state_outline = {'color': 'rgb(240, 240, 240)',
