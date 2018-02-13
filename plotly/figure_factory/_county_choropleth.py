@@ -3,11 +3,9 @@ from plotly import colors, exceptions, optional_imports
 from plotly.figure_factory import utils
 
 import array
-import geopandas as gp
 import numpy as np
 import os
 import pandas as pd
-import shapefile
 import warnings
 
 from shapely.geometry import MultiPolygon, Polygon, shape
@@ -16,7 +14,11 @@ from numbers import Number
 
 pd.options.mode.chained_assignment = None
 
-def _create_us_counties_df(code_to_country_name_dict, state_to_st_dict):
+gp = optional_imports.get_module('geopandas')
+shapefile = optional_imports.get_module('shapefile')
+
+
+def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
     # URLS
     data_url = 'plotly/package_data/data/'
 
@@ -64,7 +66,7 @@ def _create_us_counties_df(code_to_country_name_dict, state_to_st_dict):
     f = 46113
     singlerow = pd.DataFrame(
         [
-            [code_to_country_name_dict['SD'], 'SD',
+            [st_to_state_name_dict['SD'], 'SD',
              df_shape_pre2010[df_shape_pre2010['FIPS'] == f]['geometry'].iloc[0],
              df_shape_pre2010[df_shape_pre2010['FIPS'] == f]['FIPS'].iloc[0],
              '46']
@@ -77,7 +79,7 @@ def _create_us_counties_df(code_to_country_name_dict, state_to_st_dict):
     f = 51515
     singlerow = pd.DataFrame(
         [
-            [code_to_country_name_dict['VA'], 'VA',
+            [st_to_state_name_dict['VA'], 'VA',
              df_shape_pre2010[df_shape_pre2010['FIPS'] == f]['geometry'].iloc[0],
              df_shape_pre2010[df_shape_pre2010['FIPS'] == f]['FIPS'].iloc[0],
              '51']
@@ -90,7 +92,7 @@ def _create_us_counties_df(code_to_country_name_dict, state_to_st_dict):
     f = 2270
     singlerow = pd.DataFrame(
         [
-            [code_to_country_name_dict['AK'], 'AK',
+            [st_to_state_name_dict['AK'], 'AK',
              df_shape_pre2010[df_shape_pre2010['FIPS'] == f]['geometry'].iloc[0],
              df_shape_pre2010[df_shape_pre2010['FIPS'] == f]['FIPS'].iloc[0],
              '02']
@@ -122,7 +124,7 @@ def _create_us_counties_df(code_to_country_name_dict, state_to_st_dict):
     gdf_statefp['ST'] = ST
     return gdf_statefp, df_state
 
-code_to_country_name_dict = {
+st_to_state_name_dict = {
     'AK': 'Alaska',
     'AL': 'Alabama',
     'AR': 'Arkansas',
@@ -235,7 +237,7 @@ state_to_st_dict = {
     'Wyoming': 'WY'
 }
 
-df, df_state = _create_us_counties_df(code_to_country_name_dict, state_to_st_dict)
+df, df_state = _create_us_counties_df(st_to_state_name_dict, state_to_st_dict)
 
 
 fips_polygon_map = dict(
@@ -344,7 +346,7 @@ def _calculations(df, fips, values, index, f, simplify_county, level,
     return x_traces, y_traces, x_centroids, y_centroids, centroid_text
 
 
-def create_choropleth(fips, values, scope='usa', colorscale=None, order=None,
+def create_choropleth(fips, values, scope=['usa'], colorscale=None, order=None,
                       zoom=False, endpts=None, simplify_county=0.02,
                       simplify_state=0.02, asp=None, offline_mode=False,
                       show_hover=True, show_statedata=True,
@@ -403,6 +405,17 @@ def create_choropleth(fips, values, scope='usa', colorscale=None, order=None,
 
     ```
     """
+    # ensure geopandas imported
+    if not gp:
+        raise exceptions.ImportError(
+            "'geopandas' must be installed for this figure factory."
+        )
+
+    # ensure pandas imported
+    if not pd:
+        raise exceptions.ImportError(
+            "'shapefile' must be installed for this figure factory."
+        )
 
     if not state_outline_line:
         state_outline_line = {'color': 'rgb(240, 240, 240)',
@@ -506,19 +519,28 @@ def create_choropleth(fips, values, scope='usa', colorscale=None, order=None,
 
     # scope
     if isinstance(scope, str):
-        scope = [scope]
+        raise exceptions.PlotlyError(
+            "'scope' must be a list/tuple/sequence"
+        )
 
-    if scope != ['usa']:
-        scope_names = []
-        for state in scope:
-            if state in code_to_country_name_dict.keys():
-                state = code_to_country_name_dict[state]
+    scope_names = []
+    extra_states = ['Alaska', 'Commonwealth of the Northern Mariana Islands',
+                    'Puerto Rico', 'Guam', 'United States Virgin Islands',
+                    'American Samoa']
+    for state in scope:
+        if state.lower() == 'usa':
+            scope_names = df['NAME'].unique()
+            scope_names = list(scope_names)
+            for ex_st in extra_states:
+                try:
+                    scope_names.remove(ex_st)
+                except ValueError:
+                    pass
+        else:
+            if state in st_to_state_name_dict.keys():
+                state = st_to_state_name_dict[state]
             scope_names.append(state)
-        #df = df[df['NAME'].isin(scope_names)]
-        df_state = df_state = df_state[df_state['NAME'].isin(scope_names)]
-    else:
-        scope_names = df['NAME'].unique()
-        scope_names = df_state['NAME'].unique()
+    df_state = df_state[df_state['NAME'].isin(scope_names)]
 
     plot_data = []
     x_centroids = []
@@ -688,16 +710,16 @@ def create_choropleth(fips, values, scope='usa', colorscale=None, order=None,
         )
     )
 
-    if scope == 'usa':
-        xaxis_range_low = -125
-        xaxis_range_high = -65
-        yaxis_range_low = 25
-        yaxis_range_high = 49
+    if len(scope) == 1 and scope[0].lower() == 'usa':
+        xaxis_range_low = -125.0
+        xaxis_range_high = -55.0
+        yaxis_range_low = 25.0
+        yaxis_range_high = 49.0
     else:
-        xaxis_range_low = 0
-        xaxis_range_high = -1000
-        yaxis_range_low = 1000
-        yaxis_range_high = 0
+        xaxis_range_low = float('inf')
+        xaxis_range_high = float('-inf')
+        yaxis_range_low = float('inf')
+        yaxis_range_high = float('-inf')
         for trace in fig['data']:
             if all(isinstance(n, Number) for n in trace['x']):
                 calc_x_min = min(trace['x'] or [float('inf')])
