@@ -346,31 +346,43 @@ def _calculations(df, fips, values, index, f, simplify_county, level,
     return x_traces, y_traces, x_centroids, y_centroids, centroid_text
 
 
-def create_choropleth(fips, values, scope=['usa'], colorscale=None, order=None,
-                      zoom=False, endpts=None, simplify_county=0.02,
+def create_choropleth(fips, values, scope=['usa'], endpts=None,
+                      colorscale=None, order=None, simplify_county=0.02,
                       simplify_state=0.02, asp=None, offline_mode=False,
                       show_hover=True, show_statedata=True,
-                      state_outline_line=None, county_outline_line=None,
+                      state_outline=None, county_outline=None,
                       centroid_marker=None, round_leg=False,
-                      exponent_format=False,
-                      legend_title='', df=df,
+                      exponent_format=False, legend_title='', df=df,
                       df_state=df_state, **layout_options):
     """
     Returns figure for county choropleth. Uses data from package_data.
 
-    :param (str|list) scope: accepts a list of states and/or state
-        abbreviations to be plotted. Selecting 'usa' shows the entire
-        USA map excluding Hawaii and Alaska.
-        Default = 'usa'
-    :param (bool) show_hover: show county hover info
+    :param (list) fips: list of FIPS values which correspond to the con
+        catination of state and county ids. An example is '01001'.
+    :param (list) values: list of numbers/strings which correspond to the
+        fips list. These are the values that will determine how the counties
+        are colored.
+    :param (list) scope: list of states and/or states abbreviations. Fits
+        all states in the camera tightly. Selecting ['usa'] is the equivalent
+        of appending all 50 states into your scope list. Selecting only 'usa'
+        does not include 'Alaska', 'Puerto Rico', 'American Samoa',
+        'Commonwealth of the Northern Mariana Islands', 'Guam',
+        'United States Virgin Islands'. These must be added manually to the
+        list.  
+        Default = ['usa']
+    :param (list) endpts: ascending numbers which implicitly define real
+        number intervals which are used as bins. The colorscale used must have
+        the same number of colors as the number of bins and this will result
+        in a categorical colormap.
     :param (list) colorscale: a list of colors with length equal to the
-        number of unique values in the color index `color_col`
-    :param (list) order: a list of unique values contained in the color
-        column 'color_col' provided, ordered however you want the order of
-        the colorscale to be
-    :param (bool) show_statedata: reveals hoverinfo for the state on hover
-    :param (bool) zoom: enables zoom
-    :param (list) endpts: creates bins from a color column of numbers to
+        number of categories of colors. The length must match either all
+        unique numbers in the 'values' list or if endpoints is being used, the
+        number of categories created by the endpoints.\n
+        For example, if endpts = [4, 6, 8], then there are 4 bins:
+        [-inf, 4), [4, 6), [6, 8), [8, inf)
+    :param (list) order: a list of the unique categories (numbers/bins) in any
+        desired order. This is helpful if you want to order string values to
+        a chosen colorscale.
     :param (float) simplify_county: determines the simplification factor
         for the counties. The larger the number, the fewer vertices and edges
         each polygon has. See
@@ -381,28 +393,164 @@ def create_choropleth(fips, values, scope=['usa'], colorscale=None, order=None,
         See http://toblerity.org/shapely/manual.html#object.simplify for more
         information.
         Default = 0.02
-    :param (float) county_outline_color
     :param (float) asp: the width-to-height aspect ratio for the camera.
         Default = 2.5
+    :param (bool) offline_mode: if set to True, the centroids of each county
+        are invisible until selected over with a dragbox. Warning: this can
+        only be used if you are plotting in offline mode with validate set to
+        False as the params that are being added to the fig dictionary are not
+        yet part of the plotly.py python library. Stay tuned for updates.
+        Default = False
+    :param (bool) show_hover: show county hover and centroid info
+    :param (bool) show_statedata: reveals state boundary lines
+    :param (dict) state_outline: dict of attributes of the state outline
+        including width and color. See
+        https://plot.ly/python/reference/#scatter-marker-line for all valid
+        params
+    :param (dict) county_outline: dict of attributes of the county outline
+        including width and color. See
+        https://plot.ly/python/reference/#scatter-marker-line for all valid
+        params
+    :param (dict) centroid_marker: dict of attributes of the centroid marker.
+        See https://plot.ly/python/reference/#scatter-marker for all valid
+        params
     :param (bool) round_leg: automatically round the numbers that appear in
         the legend to the nearest integer.
         Default = False
+    :param (bool) exponent_format: if set to True, puts numbers in the K, M,
+        B number format. For example 4000.0 becomes 4.0K
+        Default = False
+    :param (str) legend_title: title that appears above the legend
+    :param **layout_options: a **kwargs argument for all layout parameters
 
-    Example 1: Texas
+
+    Example 1: Florida
     ```
+    import plotly.plotly as py
+    import plotly.figure_factory as ff
+
+    import numpy as np
+    import pandas as pd
+
+    df_sample = pd.read_csv(
+        'https://raw.githubusercontent.com/plotly/datasets/master/minoritymajority.csv'
+    )
+    df_sample_r = df_sample[df_sample['STNAME'] == 'Florida']
+
+    values = df_sample_r['TOT_POP'].tolist()
+    fips = df_sample_r['FIPS'].tolist()
+
+    endpts = list(np.mgrid[min(values):max(values):4j])
+    colorscale = ["#030512","#1d1d3b","#323268","#3d4b94","#3e6ab0",
+                  "#4989bc","#60a7c7","#85c5d3","#b7e0e4","#eafcfd"]
+    fig = ff.create_choropleth(
+        fips=fips, values=values, scope=['Florida'], show_statedata=True,
+        colorscale=colorscale, endpts=endpts, round_leg=True,
+        plot_bgcolor='rgb(229,229,229)', paper_bgcolor='rgb(229,229,229)',
+        legend_title='Florida Population', exponent_format=True,
+        county_outline={'color': 'rgb(255,255,255)', 'width': 0.5},
+    )
+    py.iplot(fig, filename='choropleth_florida')
     ```
 
     Example 2: New England
     ```
+    import plotly.plotly as py
+    import plotly.figure_factory as ff
+
+    import pandas as pd
+
+    NE_states = ['Connecticut', 'Maine', 'Massachusetts',
+                 'New Hampshire', 'Rhode Island']
+    df_sample = pd.read_csv(
+        'https://raw.githubusercontent.com/plotly/datasets/master/minoritymajority.csv'
+    )
+    df_sample_r = df_sample[df_sample['STNAME'].isin(NE_states)]    
+    colorscale = ['rgb(68.0, 1.0, 84.0)',
+     'rgb(66.0, 64.0, 134.0)',
+     'rgb(38.0, 130.0, 142.0)',
+     'rgb(63.0, 188.0, 115.0)',
+     'rgb(216.0, 226.0, 25.0)']
+
+    values = df_sample_r['TOT_POP'].tolist()
+    fips = df_sample_r['FIPS'].tolist()
+    fig = ff.create_choropleth(
+        fips=fips, values=values, scope=NE_states, show_statedata=True
+    )
+    py.iplot(fig, filename='choropleth_new_england')
     ```
 
     Example 3: California and Surrounding States
     ```
+    import plotly.plotly as py
+    import plotly.figure_factory as ff
+
+    import pandas as pd
+
+    df_sample = pd.read_csv(
+        'https://raw.githubusercontent.com/plotly/datasets/master/minoritymajority.csv'
+    )
+    df_sample_r = df_sample[df_sample['STNAME'] == 'California']
+
+    values = df_sample_r['TOT_POP'].tolist()
+    fips = df_sample_r['FIPS'].tolist()
+
+    colorscale = [
+        'rgb(193, 193, 193)',
+        'rgb(239,239,239)',
+        'rgb(195, 196, 222)',
+        'rgb(144,148,194)',
+        'rgb(101,104,168)',
+        'rgb(65, 53, 132)'
+    ]
+
+    fig = ff.create_choropleth(
+        fips=fips, values=values, colorscale=colorscale,
+        scope=['CA', 'AZ', 'Nevada', 'Oregon', ' Idaho'],
+        endpts=[14348, 63983, 134827, 426762, 2081313],
+        county_outline={'color': 'rgb(255,255,255)', 'width': 0.5},
+        legend_title='California Counties',
+        title='California and Nearby States'
+    )
+    py.iplot(fig, filename='choropleth_california_and_surr_states_outlines')
     ```
 
     Example 4: USA
     ```
+    import plotly.plotly as py
+    import plotly.figure_factory as ff
 
+    import numpy as np
+    import pandas as pd
+
+    df_sample = pd.read_csv(
+        'https://raw.githubusercontent.com/plotly/datasets/master/laucnty16.csv'
+    )
+    df_sample['State FIPS Code'] = df_sample['State FIPS Code'].apply(
+        lambda x: str(x).zfill(2)
+    )
+    df_sample['County FIPS Code'] = df_sample['County FIPS Code'].apply(
+        lambda x: str(x).zfill(3)
+    )
+    df_sample['FIPS'] = (
+        df_sample['State FIPS Code'] + df_sample['County FIPS Code']
+    )
+
+    endpts = list(np.linspace(1, 12, len(colorscale) - 1))
+    colorscale = ["#f7fbff","#ebf3fb","#deebf7","#d2e3f3","#c6dbef","#b3d2e9",
+                  "#9ecae1", "#85bcdb","#6baed6","#57a0ce","#4292c6","#3082be",
+                  "#2171b5","#1361a9", "#08519c","#0b4083","#08306b"]
+    fips = df_sample['FIPS']
+    values = df_sample['Unemployment Rate (%)']
+    fig = ff.create_choropleth(
+        fips=fips, values=values, scope=['usa'],
+        endpts=endpts, colorscale=colorscale,
+        show_hover=True, centroid_marker={'opacity': 0},
+        asp=2.9, title='USA by Unemployment %',
+        legend_title='Unemployment %'
+    )
+
+    py.iplot(fig, filename='choropleth_full_usa')
     ```
     """
     # ensure geopandas imported
@@ -417,12 +565,12 @@ def create_choropleth(fips, values, scope=['usa'], colorscale=None, order=None,
             "'shapefile' must be installed for this figure factory."
         )
 
-    if not state_outline_line:
-        state_outline_line = {'color': 'rgb(240, 240, 240)',
-                              'width': 1}
-    if not county_outline_line:
-        county_outline_line = {'color': 'rgb(0, 0, 0)',
-                               'width': 0}
+    if not state_outline:
+        state_outline = {'color': 'rgb(240, 240, 240)',
+                         'width': 1}
+    if not county_outline:
+        county_outline = {'color': 'rgb(0, 0, 0)',
+                          'width': 0}
     if not centroid_marker:
         centroid_marker = {'size': 2,
                            'color': 'rgb(255, 255, 255)',
@@ -619,7 +767,7 @@ def create_choropleth(fips, values, scope=['usa'], colorscale=None, order=None,
             mode='lines',
             x=x_traces[lev],
             y=y_traces[lev],
-            line=county_outline_line,
+            line=county_outline,
             fill='toself',
             fillcolor=color_lookup[lev],
             name=lev,
@@ -646,7 +794,7 @@ def create_choropleth(fips, values, scope=['usa'], colorscale=None, order=None,
                     marker=dict(size=2, color='white', opacity=1)
                 ),
                 unselected=dict(
-                    marker=Districtct(opacity=0)
+                    marker=dict(opacity=0)
                 )
             )
             hover_points.update(centroids_on_select)
@@ -656,7 +804,7 @@ def create_choropleth(fips, values, scope=['usa'], colorscale=None, order=None,
         state_data = dict(
             type='scatter',
             legendgroup='States',
-            line=state_outline_line,
+            line=state_outline,
             x=x_states,
             y=y_states,
             hoverinfo='text',
