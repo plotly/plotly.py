@@ -551,7 +551,7 @@ def create_choropleth(fips, values, scope=['usa'], endpts=None,
     py.iplot(fig, filename='choropleth_full_usa')
     ```
     """
-    # ensure shapely imported
+    # ensure optional modules imported
     if not gp or not shapefile or not shapely:
         raise ImportError("geopandas, shapefile and shapely must be "
                           "installed for this figure factory")
