@@ -11,9 +11,10 @@ from numbers import Number
 
 pd.options.mode.chained_assignment = None
 
-gp = optional_imports.get_module('geopandas')
-shapefile = optional_imports.get_module('shapefile')
 shapely = optional_imports.get_module('shapely')
+shapefile = optional_imports.get_module('shapefile')
+gp = optional_imports.get_module('geopandas')
+
 
 def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
     # URLS
@@ -123,6 +124,7 @@ def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
 
     gdf_statefp['ST'] = ST
     return gdf_statefp, df_state
+
 
 st_to_state_name_dict = {
     'AK': 'Alaska',
@@ -237,16 +239,6 @@ state_to_st_dict = {
     'Wyoming': 'WY'
 }
 
-df, df_state = _create_us_counties_df(st_to_state_name_dict, state_to_st_dict)
-
-
-fips_polygon_map = dict(
-    zip(
-        df['FIPS'].tolist(),
-        df['geometry'].tolist()
-    )
-)
-
 USA_XRANGE = [-125.0, -65.0]
 USA_YRANGE = [25.0, 49.0]
 
@@ -303,7 +295,7 @@ def _intervals_as_labels(array_of_intervals, round_legend_values, exponent_forma
 
 def _calculations(df, fips, values, index, f, simplify_county, level,
                   x_centroids, y_centroids, centroid_text, x_traces,
-                  y_traces):
+                  y_traces, fips_polygon_map):
     if fips_polygon_map[f].type == 'Polygon':
         x = fips_polygon_map[f].simplify(
             simplify_county
@@ -336,9 +328,11 @@ def _calculations(df, fips, values, index, f, simplify_county, level,
         x_c = [poly.centroid.xy[0].tolist() for poly in fips_polygon_map[f]]
         y_c = [poly.centroid.xy[1].tolist() for poly in fips_polygon_map[f]]
 
+        county_name_str = str(df[df['FIPS'] == f]['COUNTY_NAME'].iloc[0])
+        state_name_str = str(df[df['FIPS'] == f]['STATE_NAME'].iloc[0])
         text = (
-            'County: ' + df[df['FIPS'] == f]['COUNTY_NAME'].iloc[0] + '<br>' +
-            'State: ' + df[df['FIPS'] == f]['STATE_NAME'].iloc[0] + '<br>' +
+            'County: ' + county_name_str + '<br>' +
+            'State: ' + state_name_str + '<br>' +
             'FIPS: ' + str(f) + '<br>Value: ' + str(values[index])
         )
         t_c = [text for poly in fips_polygon_map[f]]
@@ -358,8 +352,8 @@ def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
                       show_hover=True, show_state_data=True,
                       state_outline=None, county_outline=None,
                       centroid_marker=None, round_legend_values=False,
-                      exponent_format=False, legend_title='', df=df,
-                      df_state=df_state, **layout_options):
+                      exponent_format=False, legend_title='',
+                      **layout_options):
     """
     Returns figure for county choropleth. Uses data from package_data.
 
@@ -566,6 +560,16 @@ def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
         raise ImportError("geopandas, shapefile and shapely must be "
                           "installed for this figure factory")
 
+    df, df_state = _create_us_counties_df(st_to_state_name_dict,
+                                          state_to_st_dict)
+
+    fips_polygon_map = dict(
+        zip(
+            df['FIPS'].tolist(),
+            df['geometry'].tolist()
+        )
+    )
+
     if not state_outline:
         state_outline = {'color': 'rgb(240, 240, 240)',
                          'width': 1}
@@ -707,7 +711,7 @@ def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
                  y_centroids, centroid_text) = _calculations(
                     df, fips, values, index, f, simplify_county, level,
                     x_centroids, y_centroids, centroid_text, x_traces,
-                    y_traces
+                    y_traces, fips_polygon_map
                 )
             except KeyError:
                 fips_not_in_shapefile.append(f)
@@ -726,7 +730,7 @@ def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
                  y_centroids, centroid_text) = _calculations(
                     df, fips, values, index, f, simplify_county, level,
                     x_centroids, y_centroids, centroid_text, x_traces,
-                    y_traces
+                    y_traces, fips_polygon_map
                 )
             except KeyError:
                 fips_not_in_shapefile.append(f)

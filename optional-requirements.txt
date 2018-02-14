@@ -30,6 +30,6 @@ jupyter
 ipykernel
 
 ## deps for _county_choropleth.py figure factory
-geopandas
 pyshp
+geopandas
 shapely
