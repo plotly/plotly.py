@@ -556,13 +556,6 @@ def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
     ```
     """
     # ensure optional modules imported
-    if not gp:
-        print 'np gp'
-    if not shapefile:
-        print 'no shapefile'
-    if not shapely:
-        print 'no shaply'
-
     if not gp or not shapefile or not shapely:
         raise ImportError("geopandas, shapefile and shapely must be "
                           "installed for this figure factory")
