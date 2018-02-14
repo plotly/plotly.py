@@ -896,11 +896,11 @@ class Box(PlotlyDict):
     
         ['boxmean', 'boxpoints', 'customdata', 'customdatasrc', 'fillcolor',
         'hoverinfo', 'hoverinfosrc', 'hoverlabel', 'hoveron', 'ids', 'idssrc',
-        'jitter', 'legendgroup', 'line', 'marker', 'name', 'opacity',
-        'orientation', 'pointpos', 'selected', 'selectedpoints', 'showlegend',
-        'stream', 'text', 'textsrc', 'type', 'uid', 'unselected', 'visible',
-        'whiskerwidth', 'x', 'x0', 'xaxis', 'xcalendar', 'xsrc', 'y', 'y0',
-        'yaxis', 'ycalendar', 'ysrc']
+        'jitter', 'legendgroup', 'line', 'marker', 'name', 'notched',
+        'notchwidth', 'opacity', 'orientation', 'pointpos', 'selected',
+        'selectedpoints', 'showlegend', 'stream', 'text', 'textsrc', 'type',
+        'uid', 'unselected', 'visible', 'whiskerwidth', 'x', 'x0', 'xaxis',
+        'xcalendar', 'xsrc', 'y', 'y0', 'yaxis', 'ycalendar', 'ysrc']
     
     Run `<box-object>.help('attribute')` on any of the above.
     '<box-object>' is the object at []
@@ -991,12 +991,12 @@ class Contour(PlotlyDict):
     
         ['autocolorscale', 'autocontour', 'colorbar', 'colorscale',
         'connectgaps', 'contours', 'customdata', 'customdatasrc', 'dx', 'dy',
-        'hoverinfo', 'hoverinfosrc', 'hoverlabel', 'ids', 'idssrc',
-        'legendgroup', 'line', 'name', 'ncontours', 'opacity', 'reversescale',
-        'selectedpoints', 'showlegend', 'showscale', 'stream', 'text',
-        'textsrc', 'transpose', 'type', 'uid', 'visible', 'x', 'x0', 'xaxis',
-        'xcalendar', 'xsrc', 'xtype', 'y', 'y0', 'yaxis', 'ycalendar', 'ysrc',
-        'ytype', 'z', 'zauto', 'zhoverformat', 'zmax', 'zmin', 'zsrc']
+        'fillcolor', 'hoverinfo', 'hoverinfosrc', 'hoverlabel', 'ids',
+        'idssrc', 'legendgroup', 'line', 'name', 'ncontours', 'opacity',
+        'reversescale', 'selectedpoints', 'showlegend', 'showscale', 'stream',
+        'text', 'textsrc', 'transpose', 'type', 'uid', 'visible', 'x', 'x0',
+        'xaxis', 'xcalendar', 'xsrc', 'xtype', 'y', 'y0', 'yaxis', 'ycalendar',
+        'ysrc', 'ytype', 'z', 'zauto', 'zhoverformat', 'zmax', 'zmin', 'zsrc']
     
     Run `<contour-object>.help('attribute')` on any of the above.
     '<contour-object>' is the object at []
@@ -1010,13 +1010,13 @@ class Contourcarpet(PlotlyDict):
     Valid attributes for 'contourcarpet' at path [] under parents ():
     
         ['a', 'a0', 'asrc', 'atype', 'autocolorscale', 'autocontour', 'b',
-        'b0', 'bsrc', 'btype', 'carpet', 'colorbar', 'colorscale',
-        'connectgaps', 'contours', 'customdata', 'customdatasrc', 'da', 'db',
-        'fillcolor', 'hoverinfo', 'hoverinfosrc', 'hoverlabel', 'ids',
-        'idssrc', 'legendgroup', 'line', 'mode', 'name', 'ncontours',
-        'opacity', 'reversescale', 'selectedpoints', 'showlegend', 'showscale',
-        'stream', 'text', 'textsrc', 'transpose', 'type', 'uid', 'visible',
-        'xaxis', 'yaxis', 'z', 'zauto', 'zmax', 'zmin', 'zsrc']
+        'b0', 'bsrc', 'btype', 'carpet', 'colorbar', 'colorscale', 'contours',
+        'customdata', 'customdatasrc', 'da', 'db', 'fillcolor', 'hoverinfo',
+        'hoverinfosrc', 'hoverlabel', 'ids', 'idssrc', 'legendgroup', 'line',
+        'name', 'ncontours', 'opacity', 'reversescale', 'selectedpoints',
+        'showlegend', 'showscale', 'stream', 'text', 'textsrc', 'transpose',
+        'type', 'uid', 'visible', 'xaxis', 'yaxis', 'z', 'zauto', 'zmax',
+        'zmin', 'zsrc']
     
     Run `<contourcarpet-object>.help('attribute')` on any of the above.
     '<contourcarpet-object>' is the object at []
@@ -1458,13 +1458,14 @@ class Layout(PlotlyDict):
     
         ['angularaxis', 'annotations', 'autosize', 'bargap', 'bargroupgap',
         'barmode', 'barnorm', 'boxgap', 'boxgroupgap', 'boxmode', 'calendar',
-        'colorway', 'direction', 'dragmode', 'font', 'geo', 'height',
-        'hiddenlabels', 'hiddenlabelssrc', 'hidesources', 'hoverdistance',
-        'hoverlabel', 'hovermode', 'images', 'legend', 'mapbox', 'margin',
-        'orientation', 'paper_bgcolor', 'plot_bgcolor', 'polar', 'radialaxis',
-        'scene', 'separators', 'shapes', 'showlegend', 'sliders',
-        'spikedistance', 'ternary', 'title', 'titlefont', 'updatemenus',
-        'violingap', 'violingroupgap', 'violinmode', 'width', 'xaxis', 'yaxis']
+        'colorway', 'datarevision', 'direction', 'dragmode', 'font', 'geo',
+        'height', 'hiddenlabels', 'hiddenlabelssrc', 'hidesources',
+        'hoverdistance', 'hoverlabel', 'hovermode', 'images', 'legend',
+        'mapbox', 'margin', 'orientation', 'paper_bgcolor', 'plot_bgcolor',
+        'polar', 'radialaxis', 'scene', 'separators', 'shapes', 'showlegend',
+        'sliders', 'spikedistance', 'ternary', 'title', 'titlefont',
+        'updatemenus', 'violingap', 'violingroupgap', 'violinmode', 'width',
+        'xaxis', 'yaxis']
     
     Run `<layout-object>.help('attribute')` on any of the above.
     '<layout-object>' is the object at []
@@ -1544,9 +1545,9 @@ class Mesh3d(PlotlyDict):
         'intensity', 'intensitysrc', 'isrc', 'j', 'jsrc', 'k', 'ksrc',
         'legendgroup', 'lighting', 'lightposition', 'name', 'opacity',
         'reversescale', 'scene', 'selectedpoints', 'showlegend', 'showscale',
-        'stream', 'type', 'uid', 'vertexcolor', 'vertexcolorsrc', 'visible',
-        'x', 'xcalendar', 'xsrc', 'y', 'ycalendar', 'ysrc', 'z', 'zcalendar',
-        'zsrc']
+        'stream', 'text', 'textsrc', 'type', 'uid', 'vertexcolor',
+        'vertexcolorsrc', 'visible', 'x', 'xcalendar', 'xsrc', 'y',
+        'ycalendar', 'ysrc', 'z', 'zcalendar', 'zsrc']
     
     Run `<mesh3d-object>.help('attribute')` on any of the above.
     '<mesh3d-object>' is the object at []
