@@ -557,8 +557,14 @@ def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
     """
     # ensure optional modules imported
     if not gp or not shapefile or not shapely:
-        raise ImportError("geopandas, pyshp and shapely must be "
-                          "installed for this figure factory")
+        raise ImportError(
+            "geopandas, pyshp and shapely must be installed for this figure "
+            "factory.\n\nRun the following commands in the terminal to "
+            "ensure that the correct versions of the modules are installed:\n"
+            "`pip install geopandas==0.3.0`\n"
+            "`pip install pyshp==1.2.10`\n"
+            "`pip install shapely==1.6.3`\n"
+        )
 
     df, df_state = _create_us_counties_df(st_to_state_name_dict,
                                           state_to_st_dict)
