@@ -2,6 +2,7 @@ from plotly import colors, exceptions, optional_imports
 
 from plotly.figure_factory import utils
 
+import io
 import numpy as np
 import pandas as pd
 import warnings
@@ -37,16 +38,15 @@ def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
 
     county_url = 'plotly/package_data/data/cb_2016_us_county_500k/'
     filenames = ['cb_2016_us_county_500k.dbf',
-                 'cb_2016_us_county_500k.prj',
                  'cb_2016_us_county_500k.shp',
                  'cb_2016_us_county_500k.shx']
 
     for j in range(len(filenames)):
         filenames[j] = county_url + filenames[j]
 
-    dbf = open(filenames[0], 'r')
-    shp = open(filenames[2], 'r')
-    shx = open(filenames[3], 'r')
+    dbf = io.open(filenames[0], 'rb')
+    shp = io.open(filenames[1], 'rb')
+    shx = io.open(filenames[2], 'rb')
 
     r = shapefile.Reader(shp=shp, shx=shx, dbf=dbf)
 
@@ -557,7 +557,7 @@ def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
     """
     # ensure optional modules imported
     if not gp or not shapefile or not shapely:
-        raise ImportError("geopandas, shapefile and shapely must be "
+        raise ImportError("geopandas, pyshp and shapely must be "
                           "installed for this figure factory")
 
     df, df_state = _create_us_counties_df(st_to_state_name_dict,
