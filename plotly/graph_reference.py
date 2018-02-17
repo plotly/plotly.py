@@ -557,8 +557,10 @@ def _get_classes():
 
     # add all the objects we had before, but mark them if they no longer
     # exist in the graph reference
+    backwards_compat_object_names = set()
     for class_name, class_dict in _BACKWARDS_COMPAT_CLASS_NAMES.items():
         object_name = class_dict['object_name']
+        backwards_compat_object_names.add(object_name)
         base_type = class_dict['base_type']
         if object_name in OBJECTS or object_name in ARRAYS:
             classes[class_name] = {'object_name': object_name,
@@ -568,8 +570,10 @@ def _get_classes():
 
     # always keep the trace dicts up to date
     for object_name in TRACE_NAMES:
-        class_name = string_to_class_name(object_name)
-        classes[class_name] = {'object_name': object_name, 'base_type': dict}
+        if object_name not in backwards_compat_object_names:
+            # Only add trace if it wasn't included in _BACKWARDS_COMPAT_CLASS_NAMES
+            class_name = string_to_class_name(object_name)
+            classes[class_name] = {'object_name': object_name, 'base_type': dict}
 
     return classes
 
