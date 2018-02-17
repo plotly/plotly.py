@@ -8,6 +8,7 @@ import io
 from copy import deepcopy
 
 import numpy as np
+import pandas as pd
 import re
 
 # Utility functions
@@ -19,6 +20,7 @@ def copy_to_contiguous_readonly_numpy_array(v, dtype=None, force_numeric=False):
     # If dtype was not specified then it will be passed to the numpy array constructor as None and the data type
     # will be inferred automatically
 
+    # TODO: support datetime dtype here and in widget serialization
     numeric_kinds = ['u', 'i', 'f']
 
     if not isinstance(v, np.ndarray):
@@ -28,7 +30,7 @@ def copy_to_contiguous_readonly_numpy_array(v, dtype=None, force_numeric=False):
     else:
         new_v = v.copy()
 
-        # Handle force numeric param
+    # Handle force numeric param
     # --------------------------
     if force_numeric and new_v.dtype.kind not in numeric_kinds:  # (un)signed int, or float
         raise ValueError('Input value is not numeric and force_numeric parameter set to True')
@@ -55,7 +57,9 @@ def copy_to_contiguous_readonly_numpy_array(v, dtype=None, force_numeric=False):
 
 
 def is_array(v):
-    return isinstance(v, (list, tuple)) or (isinstance(v, np.ndarray) and v.ndim == 1)
+    return (isinstance(v, (list, tuple)) or
+            (isinstance(v, np.ndarray) and v.ndim == 1) or
+            isinstance(v, pd.Series))
 
 
 def type_str(v):
