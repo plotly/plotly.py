@@ -16,6 +16,9 @@ coverage==4.3.1
 mock==2.0.0
 nose==1.3.3
 
+## codegen dependencies ##
+yapf
+
 ## ipython ##
 ipython
 
