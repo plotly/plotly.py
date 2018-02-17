@@ -944,6 +944,9 @@ class BaseFigure:
 
         return res
 
+    def to_plotly_json(self):
+        return self.to_dict()
+
     def save_html(self, filename, auto_open=False, responsive=False):
         data = self.to_dict()
         if responsive:
@@ -1282,6 +1285,9 @@ class BasePlotlyType:
         else:
             # Get data from parent's dict
             return self.parent._get_child_props(self)
+
+    def to_plotly_json(self):
+        return deepcopy(self._props)
 
     def _init_props(self):
         # Ensure that _data is initialized.
