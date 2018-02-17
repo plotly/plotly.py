@@ -1440,18 +1440,24 @@ if ipython_core_display:
 
 def return_figure_from_figure_or_data(figure_or_data, validate_figure):
     from plotly.graph_objs import graph_objs
+
+    validated = False
     if isinstance(figure_or_data, dict):
         figure = figure_or_data
     elif isinstance(figure_or_data, list):
         figure = {'data': figure_or_data}
+    elif isinstance(figure_or_data, graph_objs.Figure):
+        figure = figure_or_data.to_dict()
+        validated = True
     else:
         raise exceptions.PlotlyError("The `figure_or_data` positional "
-                                     "argument must be either "
-                                     "`dict`-like or `list`-like.")
-    if validate_figure:
+                                     "argument must be "
+                                     "`dict`-like, `list`-like, or an instance of plotly.graph_objs.Figure")
+
+    if validate_figure and not validated:
 
         try:
-            graph_objs.Figure(figure)
+            graph_objs.Figure(**figure)
         except exceptions.PlotlyError as err:
             raise exceptions.PlotlyError("Invalid 'figure_or_data' argument. "
                                          "Plotly will not be able to properly "
