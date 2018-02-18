@@ -112,6 +112,11 @@ To install the optional dependencies:
 pip install -r optional-requirements.txt
 ```
 
+## ipywidget development install
+    $ jupyter nbextension enable --py widgetsnbextension
+    $ jupyter nbextension install --py --symlink --sys-prefix plotlywidget
+    $ jupyter nbextension enable --py --sys-prefix plotlywidget
+
 ## Testing
 
 We take advantage of two tools to run tests:

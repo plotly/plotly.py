@@ -11,9 +11,9 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
     # Widget Traits
     # -------------
     _view_name = Unicode('FigureView').tag(sync=True)
-    _view_module = Unicode('plotly').tag(sync=True)
+    _view_module = Unicode('plotlywidget').tag(sync=True)
     _model_name = Unicode('FigureModel').tag(sync=True)
-    _model_module = Unicode('plotly').tag(sync=True)
+    _model_module = Unicode('plotlywidget').tag(sync=True)
 
     # Data properties for front end
     # Note: These are only automatically synced on full assignment, not on mutation

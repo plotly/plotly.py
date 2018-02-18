@@ -799,6 +799,9 @@ class GraphObjectFactory(object):
                 return PlotlyDict(*args, **kwargs)
 
 
+from plotly.datatypes import FigureWidget
+
+
 # AUTO-GENERATED BELOW. DO NOT EDIT! See makefile.
 class AngularAxis(dict):
     pass
@@ -995,4 +998,4 @@ class ZAxis(dict):
     pass
 
 
-__all__ = [cls for cls in graph_reference.CLASSES.keys() if cls in globals()]
+__all__ = [cls for cls in graph_reference.CLASSES.keys() if cls in globals()] + ["FigureWidget"]

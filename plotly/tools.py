@@ -1439,14 +1439,15 @@ if ipython_core_display:
 
 
 def return_figure_from_figure_or_data(figure_or_data, validate_figure):
-    from plotly.graph_objs import graph_objs
+    from plotly.datatypes import Figure
+    from plotly.basedatatypes import BaseFigure
 
     validated = False
     if isinstance(figure_or_data, dict):
         figure = figure_or_data
     elif isinstance(figure_or_data, list):
         figure = {'data': figure_or_data}
-    elif isinstance(figure_or_data, graph_objs.Figure):
+    elif isinstance(figure_or_data, BaseFigure):
         figure = figure_or_data.to_dict()
         validated = True
     else:
@@ -1457,7 +1458,7 @@ def return_figure_from_figure_or_data(figure_or_data, validate_figure):
     if validate_figure and not validated:
 
         try:
-            graph_objs.Figure(**figure)
+            Figure(**figure)
         except exceptions.PlotlyError as err:
             raise exceptions.PlotlyError("Invalid 'figure_or_data' argument. "
                                          "Plotly will not be able to properly "
