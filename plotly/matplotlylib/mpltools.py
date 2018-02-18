@@ -57,9 +57,21 @@ def convert_dash(mpl_dash):
     """Convert mpl line symbol to plotly line symbol and return symbol."""
     if mpl_dash in DASH_MAP:
         return DASH_MAP[mpl_dash]
-    else:
-        return 'solid'  # default
+    else:       
+        dash_array = mpl_dash.split(',')
 
+        if (len(dash_array) < 2):
+            return 'solid'
+
+        # Catch the exception where the off length is zero, in case
+        # matplotlib 'solid' changes from '10,0' to 'N,0'
+        if (math.isclose(float(dash_array[1]), 0.)):
+            return 'solid'
+
+        # If we can't find the dash pattern in the map, convert it
+        # into custom values in px, e.g. '7,5' -> '7px,5px'
+        dashpx=','.join([x + 'px' for x in dash_array])
+        return dashpx
 
 def convert_path(path):
     verts = path[0]  # may use this later
