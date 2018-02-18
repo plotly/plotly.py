@@ -2,9 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [2.4.0] - 2018-02-16
+## [2.4.0] - 2018-02-16 [SOON TO BE YANKED]
 ### Added
 - County Choropleth figure factory. Call `help(plotly.figure_factory.create_choropleth)` for examples and how to get started making choropleths of US counties with the Python API.
+
+Note: `import plotly.figure_factory as ff` is broken and 2.4.0 must be yanked ASAP. Efforts to fix this version are currently underway.
 
 
 ## [2.3.0] - 2018-01-25
