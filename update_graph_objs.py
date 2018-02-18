@@ -64,4 +64,4 @@ with open('./plotly/graph_objs/graph_objs.py', 'w') as graph_objs_file:
 
     # Finish off the file by only exporting plot-schema names.
     print('__all__ = [cls for cls in graph_reference.CLASSES.keys() '
-          'if cls in globals()]', file=graph_objs_file)
+          'if cls in globals()] + ["FigureWidget"]', file=graph_objs_file)

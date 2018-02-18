@@ -1,0 +1,41 @@
+{
+  "name": "plotlywidget",
+  "version": "0.1.0",
+  "description": "The plotly ipywidget library",
+  "author": "Jon Mease",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "jupyter",
+    "widgets",
+    "ipython",
+    "ipywidgets"
+  ],
+  "files": [
+    "src/**/*.js",
+    "dist/*.js"
+  ],
+  "scripts": {
+    "clean": "rimraf dist/ && rimraf ../plotlywidget/static",
+    "build": "webpack",
+    "prepublish": "npm run clean && npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "json-loader": "^0.5.4",
+    "webpack": "^3.5.5",
+    "rimraf": "^2.6.1",
+    "ify-loader": "^1.1.0"
+  },
+  "dependencies": {
+    "plotly.js": "^1.34.0",
+    "@jupyter-widgets/base": "^1.0.4",
+    "lodash": "^4.0"
+  },
+  "jupyterlab": {
+    "extension": "src/jupyterlab-plugin"
+  }
+}

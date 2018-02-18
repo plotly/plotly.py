@@ -27,3 +27,8 @@ plotly/datatypes
 plotly/validators
 
 .idea
+
+js/node_modules/
+
+# Compiled javascript
+plotlywidget/static/
