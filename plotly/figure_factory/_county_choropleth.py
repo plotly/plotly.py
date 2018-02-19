@@ -4,6 +4,7 @@ from plotly.figure_factory import utils
 
 import io
 import numpy as np
+import os
 import pandas as pd
 import warnings
 
@@ -19,17 +20,23 @@ gp = optional_imports.get_module('geopandas')
 
 def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
     # URLS
-    data_url = 'plotly/package_data/data/'
+    abs_file_path = os.path.realpath(__file__)
+    abs_dir_path = os.path.dirname(abs_file_path)
+
+    abs_plotly_dir_path = abs_dir_path[:abs_dir_path.find('/figure_factory')]
+    abs_data_dir_path = abs_plotly_dir_path + '/package_data/data/'
+
+    print abs_data_dir_path
 
     shape_pre2010 = 'gz_2010_us_050_00_500k/gz_2010_us_050_00_500k.shp'
-    shape_pre2010 = data_url + shape_pre2010
+    shape_pre2010 = abs_data_dir_path + shape_pre2010
     df_shape_pre2010 = gp.read_file(shape_pre2010)
     df_shape_pre2010['FIPS'] = (df_shape_pre2010['STATE'] +
                                 df_shape_pre2010['COUNTY'])
     df_shape_pre2010['FIPS'] = pd.to_numeric(df_shape_pre2010['FIPS'])
 
     states_path = 'cb_2016_us_state_500k/cb_2016_us_state_500k.shp'
-    states_path = data_url + states_path
+    states_path = abs_data_dir_path + states_path
 
     # state df
     df_state = gp.read_file(states_path)
