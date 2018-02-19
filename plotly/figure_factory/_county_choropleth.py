@@ -26,8 +26,6 @@ def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
     abs_plotly_dir_path = abs_dir_path[:abs_dir_path.find('/figure_factory')]
     abs_data_dir_path = abs_plotly_dir_path + '/package_data/data/'
 
-    print abs_data_dir_path
-
     shape_pre2010 = 'gz_2010_us_050_00_500k/gz_2010_us_050_00_500k.shp'
     shape_pre2010 = abs_data_dir_path + shape_pre2010
     df_shape_pre2010 = gp.read_file(shape_pre2010)
@@ -645,14 +643,14 @@ def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
             list(np.linspace(0, 1, viri_len))
         )[1:-1]
 
-        for l in np.linspace(0, 1, len(LEVELS)):
+        for L in np.linspace(0, 1, len(LEVELS)):
             for idx, inter in enumerate(viri_intervals):
-                if l == 0:
+                if L == 0:
                     break
-                elif inter[0] < l <= inter[1]:
+                elif inter[0] < L <= inter[1]:
                     break
 
-            intermed = ((l - viri_intervals[idx][0]) /
+            intermed = ((L - viri_intervals[idx][0]) /
                         (viri_intervals[idx][1] - viri_intervals[idx][0]))
 
             float_color = colors.find_intermediate_color(
