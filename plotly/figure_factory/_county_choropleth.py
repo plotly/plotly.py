@@ -4,6 +4,7 @@ from plotly.figure_factory import utils
 
 import io
 import numpy as np
+import os
 import pandas as pd
 import warnings
 
@@ -19,30 +20,33 @@ gp = optional_imports.get_module('geopandas')
 
 def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
     # URLS
-    data_url = 'plotly/package_data/data/'
+    abs_file_path = os.path.realpath(__file__)
+    abs_dir_path = os.path.dirname(abs_file_path)
 
-    shape_pre2010 = 'gz_2010_us_050_00_500k/gz_2010_us_050_00_500k.shp'
-    shape_pre2010 = data_url + shape_pre2010
+    abs_plotly_dir_path = abs_dir_path[:abs_dir_path.find('/figure_factory')]
+    abs_package_data_dir_path = abs_plotly_dir_path + '/package_data/'
+
+    shape_pre2010 = 'gz_2010_us_050_00_500k.shp'
+    shape_pre2010 = abs_package_data_dir_path + shape_pre2010
     df_shape_pre2010 = gp.read_file(shape_pre2010)
     df_shape_pre2010['FIPS'] = (df_shape_pre2010['STATE'] +
                                 df_shape_pre2010['COUNTY'])
     df_shape_pre2010['FIPS'] = pd.to_numeric(df_shape_pre2010['FIPS'])
 
-    states_path = 'cb_2016_us_state_500k/cb_2016_us_state_500k.shp'
-    states_path = data_url + states_path
+    states_path = 'cb_2016_us_state_500k.shp'
+    states_path = abs_package_data_dir_path + states_path
 
     # state df
     df_state = gp.read_file(states_path)
     df_state = df_state[['STATEFP', 'NAME', 'geometry']]
     df_state = df_state.rename(columns={'NAME': 'STATE_NAME'})
 
-    county_url = 'plotly/package_data/data/cb_2016_us_county_500k/'
     filenames = ['cb_2016_us_county_500k.dbf',
                  'cb_2016_us_county_500k.shp',
                  'cb_2016_us_county_500k.shx']
 
     for j in range(len(filenames)):
-        filenames[j] = county_url + filenames[j]
+        filenames[j] = abs_package_data_dir_path + filenames[j]
 
     dbf = io.open(filenames[0], 'rb')
     shp = io.open(filenames[1], 'rb')
@@ -638,14 +642,14 @@ def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
             list(np.linspace(0, 1, viri_len))
         )[1:-1]
 
-        for l in np.linspace(0, 1, len(LEVELS)):
+        for L in np.linspace(0, 1, len(LEVELS)):
             for idx, inter in enumerate(viri_intervals):
-                if l == 0:
+                if L == 0:
                     break
-                elif inter[0] < l <= inter[1]:
+                elif inter[0] < L <= inter[1]:
                     break
 
-            intermed = ((l - viri_intervals[idx][0]) /
+            intermed = ((L - viri_intervals[idx][0]) /
                         (viri_intervals[idx][1] - viri_intervals[idx][0]))
 
             float_color = colors.find_intermediate_color(
