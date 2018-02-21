@@ -4,13 +4,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [2.4.1] - 2018-02-21
 ### Fixed
-- `plotly.figure_factory.create_choropleth` was broken in version 2.4.0 due to Plotly not shipping with the required shapefiles to generate the choropleths. These files are now restored in the current version.
+- The required shapefiles to generate the choropleths via `plotly.figure_factory.create_choropleth` are now shipped in the package data.
 
-## [2.4.0] - 2018-02-16 [YANKED]
+## [2.4.0] - 2018-02-16
 ### Added
 - County Choropleth figure factory. Call `help(plotly.figure_factory.create_choropleth)` for examples and how to get started making choropleths of US counties with the Python API.
 
-Note: Calling `plotly.figure_factory.create_choropleth` is broken and fails with an IOError.
+Note: Calling `plotly.figure_factory.create_choropleth` will fail with an IOError due to missing shapefiles see: https://github.com/plotly/plotly.py/blob/master/CHANGELOG.md#241---2018-02-21
 
 ## [2.3.0] - 2018-01-25
 ### Fixed
