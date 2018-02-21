@@ -1414,6 +1414,16 @@ class BasePlotlyType:
     def _vals_equal(v1, v2):
         if isinstance(v1, np.ndarray) or isinstance(v2, np.ndarray):
             return np.array_equal(v1, v2)
+        elif isinstance(v1, (list, tuple)):
+            # Handle recursive equality on lists and tuples
+            return (isinstance(v2, (list, tuple)) and
+                    len(v1) == len(v2) and
+                    all(BasePlotlyType._vals_equal(e1, e2) for e1, e2 in zip(v1, v2)))
+        elif isinstance(v1, dict):
+            # Handle recursive equality on dicts
+            return (isinstance(v2, dict) and
+                    set(v1.keys()) == set(v2.keys()) and
+                    all(BasePlotlyType._vals_equal(v1[k], v2[k])) for k in v1)
         else:
             return v1 == v2
 
