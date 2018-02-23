@@ -44,9 +44,11 @@ def _box(fileId='', shareKey=None, title=''):
     }
     return box
 
-
-def _container(box_1=None, box_2=None, size=MASTER_HEIGHT,
-               sizeUnit='px', direction='vertical'):
+# old values
+# size=MASTER_HEIGHT, sizeUnit='px',
+def _container(box_1=None, box_2=None,
+               size=50, sizeUnit='%',
+               direction='vertical'):
     if box_1 is None:
         box_1 = _empty_box()
     if box_2 is None:
@@ -60,6 +62,7 @@ def _container(box_1=None, box_2=None, size=MASTER_HEIGHT,
         'first': box_1,
         'second': box_2
     }
+
     return container
 
 dashboard_html = ("""
@@ -260,6 +263,8 @@ class Dashboard(dict):
             all_paths.remove(path_second)
         return all_nodes, all_paths
 
+    # TODO: get rid by the end of PR
+    # change name to init_container_size ?
     def _set_container_sizes(self):
         if self['layout'] is None:
             return
@@ -273,10 +278,9 @@ class Dashboard(dict):
         self['layout']['sizeUnit'] = 'px'
 
         for path in all_paths:
-            if len(path) != 0:
-                if self._path_to_box(path)['type'] == 'split':
-                    self._path_to_box(path)['size'] = 50
-                    self._path_to_box(path)['sizeUnit'] = '%'
+            if len(path) != 0 and self._path_to_box(path)['type'] == 'split':
+                self._path_to_box(path)['size'] = 50
+                self._path_to_box(path)['sizeUnit'] = '%'
 
     def _path_to_box(self, path):
         loc_in_dashboard = self['layout']
@@ -294,6 +298,12 @@ class Dashboard(dict):
         for first_second in box_ids_to_path[box_id]:
             loc_in_dashboard = loc_in_dashboard[first_second]
         return loc_in_dashboard
+
+    def set_height(self, dashboard_height):
+        """Sets the height (in pixels) of dashboard"""
+        # problem when no box is inserted
+        self['layout']['size'] = dashboard_height
+        self['layout']['sizeUnit'] = 'px'
 
     def get_preview(self):
         """
@@ -413,7 +423,7 @@ class Dashboard(dict):
         # display HTML representation
         return IPython.display.HTML(html_figure)
 
-    def insert(self, box, side='above', box_id=None):
+    def insert(self, box, side='above', box_id=None, fill_percent=50):
         """
         Insert a box into your dashboard layout.
 
@@ -423,7 +433,11 @@ class Dashboard(dict):
             'left', and 'right'.
         :param (int) box_id: the box id which is used as the reference box for
             the insertion of the box.
-
+        :param (float) fill_percent: specifies the percentage of the box area
+            which the new box is occupying. The default is `fill_percent=50`
+            which splits the region into two equally sized pieces with `box`
+            and the box corresponding to `box_id` in this area of the layout.
+ 
         Example:
         ```
         import plotly.dashboard_objs as dashboard
@@ -449,7 +463,9 @@ class Dashboard(dict):
 
         # doesn't need box_id or side specified for first box
         if self['layout'] is None:
-            self['layout'] = _container(box, _empty_box())
+            self['layout'] = _container(
+                box, _empty_box(), size=MASTER_HEIGHT, sizeUnit='px'
+            )
         else:
             if box_id is None:
                 raise exceptions.PlotlyError(
@@ -458,28 +474,38 @@ class Dashboard(dict):
                 )
             if box_id not in box_ids_to_path:
                 raise exceptions.PlotlyError(ID_NOT_VALID_MESSAGE)
+
+            if fill_percent < 0 or fill_percent > 100:
+                raise exceptions.PlotlyError(
+                    'fill_percent must be a number between 0 and 100 '
+                    'inclusive'
+                )
             if side == 'above':
                 old_box = self.get_box(box_id)
                 self._insert(
-                    _container(box, old_box, direction='vertical'),
+                    _container(box, old_box, direction='vertical',
+                               size=fill_percent),
                     box_ids_to_path[box_id]
                 )
             elif side == 'below':
                 old_box = self.get_box(box_id)
                 self._insert(
-                    _container(old_box, box, direction='vertical'),
+                    _container(old_box, box, direction='vertical',
+                               size=100 - fill_percent),
                     box_ids_to_path[box_id]
                 )
             elif side == 'left':
                 old_box = self.get_box(box_id)
                 self._insert(
-                    _container(box, old_box, direction='horizontal'),
+                    _container(box, old_box, direction='horizontal',
+                               size=fill_percent),
                     box_ids_to_path[box_id]
                 )
             elif side == 'right':
                 old_box = self.get_box(box_id)
                 self._insert(
-                    _container(old_box, box, direction='horizontal'),
+                    _container(old_box, box, direction='horizontal',
+                               size=100 - fill_percent),
                     box_ids_to_path[box_id]
                 )
             else:
@@ -488,8 +514,6 @@ class Dashboard(dict):
                     "must specify a valid side value. You must choose from "
                     "'above', 'below', 'left', and 'right'."
                 )
-
-        self._set_container_sizes()
 
     def remove(self, box_id):
         """
@@ -529,8 +553,6 @@ class Dashboard(dict):
             self._insert(adjacent_box, path[:-1])
         else:
             self['layout'] = None
-
-        self._set_container_sizes()
 
     def swap(self, box_id_1, box_id_2):
         """
@@ -580,5 +602,3 @@ class Dashboard(dict):
             for first_second in pairs[0][:-1]:
                 loc_in_dashboard = loc_in_dashboard[first_second]
             loc_in_dashboard[pairs[0][-1]] = pairs[1]
-
-        self._set_container_sizes()
