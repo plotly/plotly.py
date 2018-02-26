@@ -97,17 +97,13 @@ dashboard_html = ("""
 def _draw_line_through_box(dashboard_html, top_left_x, top_left_y, box_w,
                            box_h, is_horizontal, direction, fill_percent=50):
     if is_horizontal:
-        print 'draw it hori'
-        print 'fill_percent: {}'.format(fill_percent)
-        print (fill_percent / 100.) 
-        new_top_left_x = box_w * (fill_percent / 100.)
-        print new_top_left_x
+        new_top_left_x = top_left_x + box_w * (fill_percent / 100.)
         new_top_left_y = top_left_y
         new_box_w = 1
         new_box_h = box_h
     else:
         new_top_left_x = top_left_x
-        new_top_left_y = top_left_y + box_h / 2
+        new_top_left_y = top_left_y + box_h * (fill_percent / 100.)
         new_box_w = box_w
         new_box_h = 1
 
@@ -364,7 +360,6 @@ class Dashboard(dict):
                 current_box_specs = path_to_box_specs[path]
 
                 if self._path_to_box(path)['type'] == 'split':
-                    print path
                     fill_percent = self._path_to_box(path)['size']
                     direction = self._path_to_box(path)['direction']
                     is_horizontal = (direction == 'horizontal')
@@ -385,7 +380,7 @@ class Dashboard(dict):
                         print 'is horizontal'
                         new_top_left_x = top_left_x
                         new_top_left_y = top_left_y
-                        new_box_w = box_w * ((fill_percent) / 100.)
+                        new_box_w = box_w * (fill_percent / 100.)
                         new_box_h = box_h
 
                         new_top_left_x_2 = top_left_x + new_box_w
@@ -394,15 +389,15 @@ class Dashboard(dict):
                         new_box_h_2 = box_h
                     else:
                         print 'is vertical'
-                        #new_box_w = box_w
-                        #new_box_h = box_h / 2
-                        #new_top_left_x = top_left_x
-                        #new_top_left_y = top_left_y + box_h / 2
-
+                        new_top_left_x = top_left_x
+                        new_top_left_y = top_left_y
                         new_box_w = box_w
                         new_box_h = box_h * (fill_percent / 100.)
-                        new_top_left_x = top_left_x
-                        new_top_left_y = top_left_y + box_h * (fill_percent / 100.)
+
+                        new_top_left_x_2 = top_left_x
+                        new_top_left_y_2 = top_left_y + box_h * (fill_percent / 100.)
+                        new_box_w_2 = box_w
+                        new_box_h_2 = box_h * ((100 - fill_percent) / 100.)
 
                     first_box_specs = {
                         'top_left_x': top_left_x,
