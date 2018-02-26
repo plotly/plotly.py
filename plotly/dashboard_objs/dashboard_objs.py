@@ -15,10 +15,11 @@ from plotly.utils import node_generator
 
 IPython = optional_imports.get_module('IPython')
 
-# default HTML parameters
-MASTER_WIDTH = 400
-MASTER_HEIGHT = 400
-FONT_SIZE = 10
+# default parameters for HTML preview
+MASTER_WIDTH = 500
+MASTER_HEIGHT = 500
+FONT_SIZE = 8
+
 
 ID_NOT_VALID_MESSAGE = (
     "Your box_id must be a number in your dashboard. To view a "
@@ -77,7 +78,7 @@ dashboard_html = ("""
     </style>
   </head>
   <body>
-    <canvas id="myCanvas" width="400" height="400"></canvas>
+    <canvas id="myCanvas" width="{width}" height="{height}"></canvas>
     <script>
       var canvas = document.getElementById('myCanvas');
       var context = canvas.getContext('2d');
@@ -94,11 +95,13 @@ dashboard_html = ("""
 
 
 def _draw_line_through_box(dashboard_html, top_left_x, top_left_y, box_w,
-                           box_h, direction='vertical'):
-    is_horizontal = (direction == 'horizontal')
-
+                           box_h, is_horizontal, direction, fill_percent=50):
     if is_horizontal:
-        new_top_left_x = top_left_x + box_w / 2
+        print 'draw it hori'
+        print 'fill_percent: {}'.format(fill_percent)
+        print (fill_percent / 100.) 
+        new_top_left_x = box_w * (fill_percent / 100.)
+        print new_top_left_x
         new_top_left_y = top_left_y
         new_box_w = 1
         new_box_h = box_h
@@ -299,9 +302,9 @@ class Dashboard(dict):
             loc_in_dashboard = loc_in_dashboard[first_second]
         return loc_in_dashboard
 
-    def set_height(self, dashboard_height):
+    def resize(self, dashboard_height):
         """Sets the height (in pixels) of dashboard"""
-        # problem when no box is inserted
+        # TODO: problem when no box is inserted
         self['layout']['size'] = dashboard_height
         self['layout']['sizeUnit'] = 'px'
 
@@ -335,8 +338,8 @@ class Dashboard(dict):
         elif self['layout'] is None:
             return IPython.display.HTML(dashboard_html)
 
-        x = 0
-        y = 0
+        top_left_x = 0
+        top_left_y = 0
         box_w = MASTER_WIDTH
         box_h = MASTER_HEIGHT
         html_figure = dashboard_html
@@ -344,8 +347,8 @@ class Dashboard(dict):
         # used to store info about box dimensions
         path_to_box_specs = {}
         first_box_specs = {
-            'top_left_x': x,
-            'top_left_y': y,
+            'top_left_x': top_left_x,
+            'top_left_y': top_left_y,
             'box_w': box_w,
             'box_h': box_h
         }
@@ -361,57 +364,66 @@ class Dashboard(dict):
                 current_box_specs = path_to_box_specs[path]
 
                 if self._path_to_box(path)['type'] == 'split':
-                    html_figure = _draw_line_through_box(
-                        html_figure,
-                        current_box_specs['top_left_x'],
-                        current_box_specs['top_left_y'],
-                        current_box_specs['box_w'],
-                        current_box_specs['box_h'],
-                        direction=self._path_to_box(path)['direction']
-                    )
+                    print path
+                    fill_percent = self._path_to_box(path)['size']
+                    direction = self._path_to_box(path)['direction']
+                    is_horizontal = (direction == 'horizontal')
 
-                    # determine the specs for resulting two boxes from split
-                    is_horizontal = (
-                        self._path_to_box(path)['direction'] == 'horizontal'
-                    )
-                    x = current_box_specs['top_left_x']
-                    y = current_box_specs['top_left_y']
+                    top_left_x = current_box_specs['top_left_x']
+                    top_left_y = current_box_specs['top_left_y']
                     box_w = current_box_specs['box_w']
                     box_h = current_box_specs['box_h']
 
+                    html_figure = _draw_line_through_box(
+                        html_figure, top_left_x, top_left_y, box_w, box_h,
+                        is_horizontal=is_horizontal, direction=direction,
+                        fill_percent=fill_percent
+                    )
+
+                    # determine the specs for resulting two box split
                     if is_horizontal:
-                        new_box_w = box_w / 2
+                        print 'is horizontal'
+                        new_top_left_x = top_left_x
+                        new_top_left_y = top_left_y
+                        new_box_w = box_w * ((fill_percent) / 100.)
                         new_box_h = box_h
-                        new_top_left_x = x + box_w / 2
-                        new_top_left_y = y
 
+                        new_top_left_x_2 = top_left_x + new_box_w
+                        new_top_left_y_2 = top_left_y
+                        new_box_w_2 = box_w * ((100 - fill_percent) / 100.)
+                        new_box_h_2 = box_h
                     else:
+                        print 'is vertical'
+                        #new_box_w = box_w
+                        #new_box_h = box_h / 2
+                        #new_top_left_x = top_left_x
+                        #new_top_left_y = top_left_y + box_h / 2
+
                         new_box_w = box_w
-                        new_box_h = box_h / 2
-                        new_top_left_x = x
-                        new_top_left_y = y + box_h / 2
+                        new_box_h = box_h * (fill_percent / 100.)
+                        new_top_left_x = top_left_x
+                        new_top_left_y = top_left_y + box_h * (fill_percent / 100.)
 
-                    box_1_specs = {
-                        'top_left_x': x,
-                        'top_left_y': y,
+                    first_box_specs = {
+                        'top_left_x': top_left_x,
+                        'top_left_y': top_left_y,
                         'box_w': new_box_w,
                         'box_h': new_box_h
                     }
-                    box_2_specs = {
-                        'top_left_x': new_top_left_x,
-                        'top_left_y': new_top_left_y,
-                        'box_w': new_box_w,
-                        'box_h': new_box_h
+                    second_box_specs = {
+                        'top_left_x': new_top_left_x_2,
+                        'top_left_y': new_top_left_y_2,
+                        'box_w': new_box_w_2,
+                        'box_h': new_box_h_2
                     }
 
-                    path_to_box_specs[path + ('first',)] = box_1_specs
-                    path_to_box_specs[path + ('second',)] = box_2_specs
+                    path_to_box_specs[path + ('first',)] = first_box_specs
+                    path_to_box_specs[path + ('second',)] = second_box_specs
 
                 elif self._path_to_box(path)['type'] == 'box':
                     for box_id in box_ids_to_path:
                         if box_ids_to_path[box_id] == path:
                             number = box_id
-
                     html_figure = _add_html_text(
                         html_figure, number,
                         path_to_box_specs[path]['top_left_x'],
@@ -505,7 +517,7 @@ class Dashboard(dict):
                 old_box = self.get_box(box_id)
                 self._insert(
                     _container(old_box, box, direction='horizontal',
-                               size=100 - fill_percent),
+                               size =100 - fill_percent),
                     box_ids_to_path[box_id]
                 )
             else:
