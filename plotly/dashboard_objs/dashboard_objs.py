@@ -377,7 +377,6 @@ class Dashboard(dict):
 
                     # determine the specs for resulting two box split
                     if is_horizontal:
-                        print 'is horizontal'
                         new_top_left_x = top_left_x
                         new_top_left_y = top_left_y
                         new_box_w = box_w * (fill_percent / 100.)
@@ -388,7 +387,6 @@ class Dashboard(dict):
                         new_box_w_2 = box_w * ((100 - fill_percent) / 100.)
                         new_box_h_2 = box_h
                     else:
-                        print 'is vertical'
                         new_top_left_x = top_left_x
                         new_top_left_y = top_left_y
                         new_box_w = box_w
@@ -440,11 +438,14 @@ class Dashboard(dict):
             'left', and 'right'.
         :param (int) box_id: the box id which is used as the reference box for
             the insertion of the box.
-        :param (float) fill_percent: specifies the percentage of the box area
-            which the new box is occupying. The default is `fill_percent=50`
-            which splits the region into two equally sized pieces with `box`
-            and the box corresponding to `box_id` in this area of the layout.
- 
+        :param (float) fill_percent: specifies the percentage of the container
+            box from the given 'side' that the new box occupies. For example
+            if you apply the method\n
+            .insert(box=new_box, box_id=2, side='left', fill_percent=20)\n
+            to a dashboard object, a new box is inserted 20% from the left side
+            of the box with id #2. Run .get_preview() to see the box ids
+            assigned to each box in the dashboard layout.
+            Default = 50
         Example:
         ```
         import plotly.dashboard_objs as dashboard
@@ -461,7 +462,7 @@ class Dashboard(dict):
         my_dboard.insert(box_1, 'left', 1)
         my_dboard.insert(box_1, 'below', 2)
         my_dboard.insert(box_1, 'right', 3)
-        my_dboard.insert(box_1, 'above', 4)
+        my_dboard.insert(box_1, 'above', 4, fill_percent=30)
 
         my_dboard.get_preview()
         ```
