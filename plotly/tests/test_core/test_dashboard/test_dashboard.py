@@ -131,11 +131,12 @@ class TestDashboard(TestCase):
                                  'sizeUnit': '%',
                                  'type': 'split'},
                        'second': {'boxType': 'empty', 'type': 'box'},
-                       'size': 1000,
-                       'sizeUnit': 'px',
-                       'type': 'split'},
+                   'size': 500,
+                   'sizeUnit': 'px',
+                   'type': 'split'},
             'settings': {},
             'version': 2
         }
+
 
         self.assertEqual(dash['layout'], expected_dashboard['layout'])
