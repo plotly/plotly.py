@@ -1,8 +1,10 @@
 from __future__ import absolute_import
 
+import collections
 import decimal
 
 from plotly import exceptions
+
 
 DEFAULT_PLOTLY_COLORS = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
                          'rgb(44, 160, 44)', 'rgb(214, 39, 40)',
@@ -31,6 +33,11 @@ PLOTLY_SCALES = {
     'Electric': ['rgb(0,0,0)', 'rgb(255,250,220)'],
     'Viridis': ['#440154', '#fde725']
 }
+
+
+def is_sequence(obj):
+    return (isinstance(obj, collections.Sequence) and
+            not isinstance(obj, str))
 
 
 def validate_index(index_vals):
