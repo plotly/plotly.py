@@ -18,7 +18,7 @@ IPython = optional_imports.get_module('IPython')
 # default parameters for HTML preview
 MASTER_WIDTH = 500
 MASTER_HEIGHT = 500
-FONT_SIZE = 8
+FONT_SIZE = 9
 
 
 ID_NOT_VALID_MESSAGE = (
@@ -45,8 +45,6 @@ def _box(fileId='', shareKey=None, title=''):
     }
     return box
 
-# old values
-# size=MASTER_HEIGHT, sizeUnit='px',
 def _container(box_1=None, box_2=None,
                size=50, sizeUnit='%',
                direction='vertical'):
@@ -122,13 +120,13 @@ def _draw_line_through_box(dashboard_html, top_left_x, top_left_y, box_w,
     return dashboard_html
 
 
-def _add_html_text(dashboard_html, text, top_left_x, top_left_y, box_w, box_h):
+def _add_html_text(dashboard_html, text, top_left_x, top_left_y, box_w,
+                   box_h):
     html_text = """<!-- Insert box numbers -->
-          context.font = '{font_size}pt Times New Roman';
+          context.font = '{}pt Times New Roman';
           context.textAlign = 'center';
-          context.fillText({text}, {top_left_x} + 0.5*{box_w}, {top_left_y} + 0.5*{box_h});
-    """.format(text=text, top_left_x=top_left_x, top_left_y=top_left_y,
-               box_w=box_w, box_h=box_h, font_size=FONT_SIZE)
+          context.fillText({}, {} + 0.5*{}, {} + 0.5*{});
+    """.format(FONT_SIZE, text, top_left_x, box_w, top_left_y, box_h)
 
     index_to_add_text = dashboard_html.find('</script>') - 1
     dashboard_html = (dashboard_html[:index_to_add_text] + html_text +
@@ -214,8 +212,6 @@ class Dashboard(dict):
             self['version'] = content['version']
             self['settings'] = content['settings']
 
-        self._set_container_sizes()
-
     def _compute_box_ids(self):
         box_ids_to_path = {}
         all_nodes = list(node_generator(self['layout']))
@@ -262,25 +258,6 @@ class Dashboard(dict):
             all_paths.remove(path_second)
         return all_nodes, all_paths
 
-    # TODO: get rid by the end of PR
-    # change name to init_container_size ?
-    def _set_container_sizes(self):
-        if self['layout'] is None:
-            return
-
-        all_nodes, all_paths = self._make_all_nodes_and_paths()
-
-        # set dashboard_height proportional to max_path_len
-        max_path_len = max(len(path) for path in all_paths)
-        dashboard_height = 500 + 250 * max_path_len
-        self['layout']['size'] = dashboard_height
-        self['layout']['sizeUnit'] = 'px'
-
-        for path in all_paths:
-            if len(path) != 0 and self._path_to_box(path)['type'] == 'split':
-                self._path_to_box(path)['size'] = 50
-                self._path_to_box(path)['sizeUnit'] = '%'
-
     def _path_to_box(self, path):
         loc_in_dashboard = self['layout']
         for first_second in path:
@@ -297,12 +274,6 @@ class Dashboard(dict):
         for first_second in box_ids_to_path[box_id]:
             loc_in_dashboard = loc_in_dashboard[first_second]
         return loc_in_dashboard
-
-    def resize(self, dashboard_height):
-        """Sets the height (in pixels) of dashboard"""
-        # TODO: problem when no box is inserted
-        self['layout']['size'] = dashboard_height
-        self['layout']['sizeUnit'] = 'px'
 
     def get_preview(self):
         """
@@ -393,7 +364,8 @@ class Dashboard(dict):
                         new_box_h = box_h * (fill_percent / 100.)
 
                         new_top_left_x_2 = top_left_x
-                        new_top_left_y_2 = top_left_y + box_h * (fill_percent / 100.)
+                        new_top_left_y_2 = (top_left_y +
+                                            box_h * (fill_percent / 100.))
                         new_box_w_2 = box_w
                         new_box_h_2 = box_h * ((100 - fill_percent) / 100.)
 
@@ -442,8 +414,8 @@ class Dashboard(dict):
             box from the given 'side' that the new box occupies. For example
             if you apply the method\n
             .insert(box=new_box, box_id=2, side='left', fill_percent=20)\n
-            to a dashboard object, a new box is inserted 20% from the left side
-            of the box with id #2. Run .get_preview() to see the box ids
+            to a dashboard object, a new box is inserted 20% from the left
+            side of the box with id #2. Run .get_preview() to see the box ids
             assigned to each box in the dashboard layout.
             Default = 50
         Example:
