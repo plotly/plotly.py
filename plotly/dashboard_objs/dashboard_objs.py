@@ -434,7 +434,7 @@ class Dashboard(dict):
         my_dboard.insert(box_1, 'left', 1)
         my_dboard.insert(box_1, 'below', 2)
         my_dboard.insert(box_1, 'right', 3)
-        my_dboard.insert(box_1, 'above', 4, fill_percent=30)
+        my_dboard.insert(box_1, 'above', 4, fill_percent=20)
 
         my_dboard.get_preview()
         ```
