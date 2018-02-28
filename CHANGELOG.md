@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.4.2] - UNRELEASED
+### Updated
+- `plotly.figure_factory.create_choropleth` has changed some of the default plotting options:
+  - 'offline_mode' param has been removed from call signature
+  - persistent selection api for the centroid points is automatically enabled. See https://plot.ly/python/reference/#scatter-selected and https://plot.ly/python/reference/#scatter-unselected for details
+  - FIPS values that appear on hover are 0-padded to ensure they are 5 digits
+  - for the county lines data `hover_info='none'` by default
+
 ## [2.4.1] - 2018-02-21
 ### Fixed
 - The required shapefiles to generate the choropleths via `plotly.figure_factory.create_choropleth` are now shipped in the package data.
