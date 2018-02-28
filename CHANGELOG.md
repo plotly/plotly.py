@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [2.4.2] - UNRELEASED
+## [2.5.0] - UNRELEASED
 ### Updated
 - `plotly.figure_factory.create_choropleth` has changed some of the default plotting options:
   - 'offline_mode' param has been removed from call signature
