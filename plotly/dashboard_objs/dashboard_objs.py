@@ -215,7 +215,7 @@ class Dashboard(dict):
     def _compute_box_ids(self):
         box_ids_to_path = {}
         all_nodes = list(node_generator(self['layout']))
-
+        all_nodes.sort(key=lambda x: x[1])
         for node in all_nodes:
             if (node[1] != () and node[0]['type'] == 'box'
                     and node[0]['boxType'] != 'empty'):
@@ -248,6 +248,7 @@ class Dashboard(dict):
 
     def _make_all_nodes_and_paths(self):
         all_nodes = list(node_generator(self['layout']))
+        all_nodes.sort(key=lambda x: x[1])
 
         # remove path 'second' as it's always an empty box
         all_paths = []
