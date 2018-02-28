@@ -788,7 +788,7 @@ def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
             fill='toself',
             fillcolor=color_lookup[lev],
             name=lev,
-            hoverinfo='text',
+            hoverinfo='none',
         )
         plot_data.append(county_data)
 
