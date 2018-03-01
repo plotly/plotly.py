@@ -351,6 +351,9 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         plot_html, plotdivid, width, height = _plot_html(
             figure_or_data, config, validate, '100%', 525, True
         )
+        for i, ele in enumerate(data):
+            if 'stream' in ele:
+                Stream.stream_tokens[ele['stream']['token']] = {'trace_id': i, 'graph_div': plotdivid}
         display_bundle['text/html'] = plot_html
         display_bundle['text/vnd.plotly.v1+html'] = plot_html
 
@@ -718,3 +721,24 @@ def enable_mpl_offline(resize=False, strip_style=False,
     formatter.for_type(matplotlib.figure.Figure,
                        lambda fig: iplot_mpl(fig, resize, strip_style, verbose,
                                              show_link, link_text, validate))
+
+class StreamRequester:
+    def __init__(self, trace_id, graph_div):
+        self.graph_div, self.trace_id = graph_div, trace_id
+
+    def write(self, data, reconnect_on=None):
+        # TODO generalize this
+        data = _json.loads(data)
+        x, y = data['x'], data['y']
+        js = f'Plotly.extendTraces("{self.graph_div}", {{y: [{y}], x: [{x}]}}, [{self.trace_id}])'
+        ipython_display.display_javascript(ipython_display.Javascript(js))
+
+    def close(self):
+        pass
+        
+class Stream(plotly.plotly.Stream):
+    stream_tokens = {}
+
+    def open(self):
+        stream_info = Stream.stream_tokens[self.stream_id]
+        self._stream = StreamRequester(**stream_info)

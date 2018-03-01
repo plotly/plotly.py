@@ -10,5 +10,6 @@ from . offline import (
     iplot,
     iplot_mpl,
     plot,
-    plot_mpl
+    plot_mpl,
+    Stream
 )
