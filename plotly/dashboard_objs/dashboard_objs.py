@@ -265,6 +265,21 @@ class Dashboard(dict):
             loc_in_dashboard = loc_in_dashboard[first_second]
         return loc_in_dashboard
 
+    def _set_dashboard_size(self):
+        # set dashboard size to keep consistent with GUI
+        num_of_boxes = len(self._compute_box_ids())
+        if num_of_boxes == 0:
+            pass
+        elif num_of_boxes == 1:
+            self['layout']['size'] = 800
+            self['layout']['sizeUnit'] = 'px'
+        elif num_of_boxes == 2:
+            self['layout']['size'] = 1500
+            self['layout']['sizeUnit'] = 'px'
+        else:
+            self['layout']['size'] = 1500 + 350 * (num_of_boxes - 2)
+            self['layout']['sizeUnit'] = 'px'
+
     def get_box(self, box_id):
         """Returns box from box_id number."""
         box_ids_to_path = self._compute_box_ids()
@@ -496,6 +511,8 @@ class Dashboard(dict):
                     "'above', 'below', 'left', and 'right'."
                 )
 
+        self._set_dashboard_size()
+
     def remove(self, box_id):
         """
         Remove a box from the dashboard by its box_id.
@@ -534,6 +551,8 @@ class Dashboard(dict):
             self._insert(adjacent_box, path[:-1])
         else:
             self['layout'] = None
+
+        self._set_dashboard_size()
 
     def swap(self, box_id_1, box_id_2):
         """
