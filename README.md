@@ -1,8 +1,8 @@
 # plotly.py
 
 > 📢  Announcement!  
-> Registration is open for a 2 day, Dash master class in Montreal, February 17-18.  
-> [Register online here](https://plotcon.plot.ly/workshops) 🎚📈  🇨🇦
+> Registration is open for a 2 day, Dash master class in Boston, April 14-15.  
+> [Register online here](https://plotcon.plot.ly/tickets/) 🎚📈⚾️ 
 
 ***
 
