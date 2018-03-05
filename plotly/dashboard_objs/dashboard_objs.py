@@ -161,7 +161,7 @@ class Dashboard(dict):
     `.get_box()` returns the box located in the dashboard by calling
     its box id as displayed via `.get_preview()`.
 
-    Example: Create a simple Dashboard object
+    Example 1: Create a simple Dashboard object
     ```
     import plotly.dashboard_objs as dashboard
 
@@ -196,6 +196,25 @@ class Dashboard(dict):
     my_dboard.swap(1, 2)
     # my_dboard.get_preview()
     my_dboard.remove(1)
+    # my_dboard.get_preview()
+    ```
+
+    Example 2: 4 vertical boxes of equal height
+    ```
+    import plotly.dashboard_objs as dashboard
+
+    box_1 = {
+        'type': 'box',
+        'boxType': 'plot',
+        'fileId': 'username:some#',
+        'title': 'box 1'
+    }
+
+    my_dboard = dashboard.Dashboard()
+    my_dboard.insert(box_1)
+    my_dboard.insert(box_1, 'below', 1)
+    my_dboard.insert(box_1, 'below', 1)
+    my_dboard.insert(box_1, 'below', 3)
     # my_dboard.get_preview()
     ```
     """
