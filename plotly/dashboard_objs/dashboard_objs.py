@@ -165,33 +165,33 @@ class Dashboard(dict):
     ```
     import plotly.dashboard_objs as dashboard
 
-    box_1 = {
+    box_a = {
         'type': 'box',
         'boxType': 'plot',
         'fileId': 'username:some#',
-        'title': 'box 1'
+        'title': 'box a'
     }
 
-    box_2 = {
+    box_b = {
         'type': 'box',
         'boxType': 'plot',
         'fileId': 'username:some#',
-        'title': 'box 2'
+        'title': 'box b'
     }
 
-    box_3 = {
+    box_c = {
         'type': 'box',
         'boxType': 'plot',
         'fileId': 'username:some#',
-        'title': 'box 3'
+        'title': 'box c'
     }
 
     my_dboard = dashboard.Dashboard()
-    my_dboard.insert(box_1)
+    my_dboard.insert(box_a)
     # my_dboard.get_preview()
-    my_dboard.insert(box_2, 'above', 1)
+    my_dboard.insert(box_b, 'above', 1)
     # my_dboard.get_preview()
-    my_dboard.insert(box_3, 'left', 2)
+    my_dboard.insert(box_c, 'left', 2)
     # my_dboard.get_preview()
     my_dboard.swap(1, 2)
     # my_dboard.get_preview()
@@ -203,18 +203,18 @@ class Dashboard(dict):
     ```
     import plotly.dashboard_objs as dashboard
 
-    box_1 = {
+    box_a = {
         'type': 'box',
         'boxType': 'plot',
         'fileId': 'username:some#',
-        'title': 'box 1'
+        'title': 'box a'
     }
 
     my_dboard = dashboard.Dashboard()
-    my_dboard.insert(box_1)
-    my_dboard.insert(box_1, 'below', 1)
-    my_dboard.insert(box_1, 'below', 1)
-    my_dboard.insert(box_1, 'below', 3)
+    my_dboard.insert(box_a)
+    my_dboard.insert(box_a, 'below', 1)
+    my_dboard.insert(box_a, 'below', 1)
+    my_dboard.insert(box_a, 'below', 3)
     # my_dboard.get_preview()
     ```
     """
@@ -443,8 +443,10 @@ class Dashboard(dict):
         :param (str) side: specifies where your new box is going to be placed
             relative to the given 'box_id'. Valid values are 'above', 'below',
             'left', and 'right'.
-        :param (int) box_id: the box id which is used as the reference box for
-            the insertion of the box.
+        :param (int) box_id: the box id which is used as a reference for the
+            insertion of the new box. Box ids are memoryless numbers that are
+            generated on-the-fly and assigned to boxes in the layout each time
+            .get_preview() is run.
         :param (float) fill_percent: specifies the percentage of the container
             box from the given 'side' that the new box occupies. For example
             if you apply the method\n
@@ -457,19 +459,19 @@ class Dashboard(dict):
         ```
         import plotly.dashboard_objs as dashboard
 
-        box_1 = {
+        box_a = {
             'type': 'box',
             'boxType': 'plot',
             'fileId': 'username:some#',
-            'title': 'box 1'
+            'title': 'box a'
         }
 
         my_dboard = dashboard.Dashboard()
-        my_dboard.insert(box_1)
-        my_dboard.insert(box_1, 'left', 1)
-        my_dboard.insert(box_1, 'below', 2)
-        my_dboard.insert(box_1, 'right', 3)
-        my_dboard.insert(box_1, 'above', 4, fill_percent=20)
+        my_dboard.insert(box_a)
+        my_dboard.insert(box_a, 'left', 1)
+        my_dboard.insert(box_a, 'below', 2)
+        my_dboard.insert(box_a, 'right', 3)
+        my_dboard.insert(box_a, 'above', 4, fill_percent=20)
 
         my_dboard.get_preview()
         ```
@@ -540,17 +542,16 @@ class Dashboard(dict):
         ```
         import plotly.dashboard_objs as dashboard
 
-        box_1 = {
+        box_a = {
             'type': 'box',
             'boxType': 'plot',
             'fileId': 'username:some#',
-            'title': 'box 1'
+            'title': 'box a'
         }
 
         my_dboard = dashboard.Dashboard()
-        my_dboard.insert(box_1)
+        my_dboard.insert(box_a)
         my_dboard.remove(1)
-
         my_dboard.get_preview()
         ```
         """
@@ -581,23 +582,23 @@ class Dashboard(dict):
         ```
         import plotly.dashboard_objs as dashboard
 
-        box_1 = {
+        box_a = {
             'type': 'box',
             'boxType': 'plot',
             'fileId': 'username:first#',
-            'title': 'first box'
+            'title': 'box a'
         }
 
-        box_2 = {
+        box_b = {
             'type': 'box',
             'boxType': 'plot',
             'fileId': 'username:second#',
-            'title': 'second box'
+            'title': 'box b'
         }
 
         my_dboard = dashboard.Dashboard()
-        my_dboard.insert(box_1)
-        my_dboard.insert(box_2, 'above', 1)
+        my_dboard.insert(box_a)
+        my_dboard.insert(box_b, 'above', 1)
 
         # check box at box id 1
         box_at_1 = my_dboard.get_box(1)
@@ -610,13 +611,13 @@ class Dashboard(dict):
         ```
         """
         box_ids_to_path = self._compute_box_ids()
-        box_1 = self.get_box(box_id_1)
-        box_2 = self.get_box(box_id_2)
+        box_a = self.get_box(box_id_1)
+        box_b = self.get_box(box_id_2)
 
-        box_1_path = box_ids_to_path[box_id_1]
-        box_2_path = box_ids_to_path[box_id_2]
+        box_a_path = box_ids_to_path[box_id_1]
+        box_b_path = box_ids_to_path[box_id_2]
 
-        for pairs in [(box_1_path, box_2), (box_2_path, box_1)]:
+        for pairs in [(box_a_path, box_b), (box_b_path, box_a)]:
             loc_in_dashboard = self['layout']
             for first_second in pairs[0][:-1]:
                 loc_in_dashboard = loc_in_dashboard[first_second]
