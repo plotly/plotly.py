@@ -18,16 +18,26 @@ dependencies:
 
   override:
 
+    # Temporary workaround
+    - mv plotly/graph_objs/graph_objs.py plotly/graph_objs/graph_objs_temp.py
+    - touch plotly/graph_objs/graph_objs.py
+    - mv plotly/graph_objs/graph_objs_temp.py plotly/graph_objs/graph_objs.py
+
     # install everything tox knows about and the plotly package.
+    - pip install -e .
     - pip install tox
     - tox --notest
+    - python setup.py codegen
     - pip install -I .
+    - jupyter nbextension enable --py widgetsnbextension
+    - jupyter nbextension install --py --symlink --sys-prefix plotlywidget
+    - jupyter nbextension enable --py --sys-prefix plotlywidget
 
     # we need to cd out of the project root to ensure the install worked
     - cd ~ && python -c "import plotly"
 
     # install jupyter test JS requirements
-    - cd ${PLOTLY_JUPYTER_TEST_DIR} && npm i
+    # - cd ${PLOTLY_JUPYTER_TEST_DIR} && npm i
 
   cache_directories:
 
