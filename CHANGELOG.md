@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [2.4.2] - UNRELEASED
+## [2.5.0] - UNRELEASED
 ### Added
 - New parameter `fill_percent` to the `.insert` method for the dashboards API. You can now insert a box into the dashboard layout and specify what proportion of the original container box it will occupy. Run `help(plotly.dashboard_objs.Dashboard.insert)` for more information on `fill_percent`.
 
