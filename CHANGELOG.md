@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.5.0] - UNRELEASED
+### Fixed
+- `import plotly.figure_factory` does not fail if `pandas` is not installed.
+
 ## [2.4.1] - 2018-02-21
 ### Fixed
 - The required shapefiles to generate the choropleths via `plotly.figure_factory.create_choropleth` are now shipped in the package data.
