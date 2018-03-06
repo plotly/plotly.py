@@ -32,7 +32,7 @@ dependencies:
     - pip install -e .
     - pip install tox
     - tox --notest
-    - python setup.py codegen
+    - python3.6 setup.py codegen
     - pip install -I .
     - jupyter nbextension enable --py widgetsnbextension
     - jupyter nbextension install --py --symlink --sys-prefix plotlywidget
