@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [2.5.0] - UNRELEASED
 ### Fixed
-- `import plotly.figure_factory` does not fail if `pandas` is not installed.
+- `import plotly.figure_factory` does not fail if `pandas` is not installed. See  https://github.com/plotly/plotly.py/pull/958
 
 ## [2.4.1] - 2018-02-21
 ### Fixed
