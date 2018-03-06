@@ -29,10 +29,11 @@ dependencies:
     - mv plotly/graph_objs/graph_objs_temp.py plotly/graph_objs/graph_objs.py
 
     # install everything tox knows about and the plotly package.
+    - pyenv local 3.6.4
     - pip install -e .
     - pip install tox
     - tox --notest
-    - ~/.pyenv/versions/3.6.4/bin/python3.6 setup.py codegen
+    - python setup.py codegen
     - pip install -I .
     - jupyter nbextension enable --py widgetsnbextension
     - jupyter nbextension install --py --symlink --sys-prefix plotlywidget
