@@ -1,5 +1,7 @@
 from __future__ import absolute_import
 
+from plotly import optional_imports
+
 # Require that numpy exists for figure_factory
 import numpy
 
@@ -18,4 +20,5 @@ from plotly.figure_factory._streamline import create_streamline
 from plotly.figure_factory._table import create_table
 from plotly.figure_factory._trisurf import create_trisurf
 from plotly.figure_factory._violin import create_violin
-from plotly.figure_factory._county_choropleth import create_choropleth
+if optional_imports.get_module('pandas') is not None:
+    from plotly.figure_factory._county_choropleth import create_choropleth
