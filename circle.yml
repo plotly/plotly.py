@@ -12,7 +12,7 @@ machine:
 
   node:
     # use a pre-installed version of node so we don't need to download it.
-    version: 6.0.0  # 4.2.2
+    version: 6.0.0
 
 dependencies:
 
