@@ -714,14 +714,7 @@ class image:
 
         """
         # TODO: format is a built-in name... we shouldn't really use it
-        if isinstance(figure_or_data, dict):
-            figure = figure_or_data
-        elif isinstance(figure_or_data, list):
-            figure = {'data': figure_or_data}
-        else:
-            raise exceptions.PlotlyEmptyDataError(
-                "`figure_or_data` must be a dict or a list."
-            )
+        figure = tools.return_figure_from_figure_or_data(figure_or_data, True)
 
         if format not in ['png', 'svg', 'jpeg', 'pdf']:
             raise exceptions.PlotlyError(

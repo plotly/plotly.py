@@ -1,5 +1,9 @@
 machine:
 
+  pre:
+    - cd /home/ubuntu/.pyenv/plugins/python-build/../.. && git pull && cd -
+    - pyenv install 3.6.4
+
   environment:
 
     PLOTLY_CONFIG_DIR: ${HOME}/.plotly
@@ -8,26 +12,38 @@ machine:
     PLOTLY_TOX_PYTHON_33: /home/ubuntu/.pyenv/versions/3.3.3/bin/python3.3
     PLOTLY_TOX_PYTHON_34: /home/ubuntu/.pyenv/versions/3.4.3/bin/python3.4
     PLOTLY_TOX_PYTHON_35: /home/ubuntu/.pyenv/versions/3.5.0/bin/python3.5
+    PLOTLY_TOX_PYTHON_36: /home/ubuntu/.pyenv/versions/3.6.4/bin/python3.6
     PLOTLY_JUPYTER_TEST_DIR: /home/ubuntu/${CIRCLE_PROJECT_REPONAME}/plotly/tests/test_optional/test_jupyter
 
   node:
     # use a pre-installed version of node so we don't need to download it.
-    version: 4.2.2
+    version: 6.11.1
 
 dependencies:
 
   override:
 
+    # Temporary workaround
+    - mv plotly/graph_objs/graph_objs.py plotly/graph_objs/graph_objs_temp.py
+    - touch plotly/graph_objs/graph_objs.py
+    - mv plotly/graph_objs/graph_objs_temp.py plotly/graph_objs/graph_objs.py
+
     # install everything tox knows about and the plotly package.
+    - pyenv local 3.6.4
+    - pip install -e .
     - pip install tox
     - tox --notest
+    - python setup.py codegen
     - pip install -I .
+    - jupyter nbextension enable --py widgetsnbextension
+    - jupyter nbextension install --py --symlink --sys-prefix plotlywidget
+    - jupyter nbextension enable --py --sys-prefix plotlywidget
 
     # we need to cd out of the project root to ensure the install worked
     - cd ~ && python -c "import plotly"
 
     # install jupyter test JS requirements
-    - cd ${PLOTLY_JUPYTER_TEST_DIR} && npm i
+    # - cd ${PLOTLY_JUPYTER_TEST_DIR} && npm i
 
   cache_directories:
 
