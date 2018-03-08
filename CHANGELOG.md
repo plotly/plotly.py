@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [2.5.0] - UNRELEASED
 ### Fixed
+- `plotly.figure_factory.utils.validate_dataframe` and `plotly.figure_factory.utils.validate_index` now do not produce error when validating `pandas.DataFrames` and `pandas.Series` with any index.
 - `import plotly.figure_factory` does not fail if `pandas` is not installed. See  https://github.com/plotly/plotly.py/pull/958
 ### Added
 - New parameter `fill_percent` to the `.insert` method for the dashboards API. You can now insert a box into the dashboard layout and specify what proportion of the original container box it will occupy. Run `help(plotly.dashboard_objs.Dashboard.insert)` for more information on `fill_percent`.
@@ -13,8 +14,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - persistent selection api for the centroid points is automatically enabled. See https://plot.ly/python/reference/#scatter-selected and https://plot.ly/python/reference/#scatter-unselected for details
   - FIPS values that appear on hover are 0-padded to ensure they are 5 digits
   - for the county lines data `hover_info='none'` by default
-### Fixed
-- `plotly.figure_factory.utils.validate_dataframe` and `plotly.figure_factory.utils.validate_index` now do not produce error when validating `pandas.DataFrames` and `pandas.Series` with any index.
 
 ## [2.4.1] - 2018-02-21
 ### Fixed
