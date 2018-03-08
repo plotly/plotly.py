@@ -2,13 +2,36 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [2.3.4] - Unreleased
+## [2.5.0] - UNRELEASED
+### Added
+- New parameter `fill_percent` to the `.insert` method for the dashboards API. You can now insert a box into the dashboard layout and specify what proportion of the original container box it will occupy. Run `help(plotly.dashboard_objs.Dashboard.insert)` for more information on `fill_percent`.
+### Updated
+- `plotly.figure_factory.create_choropleth` has changed some of the default plotting options:
+  - 'offline_mode' param has been removed from call signature
+  - persistent selection api for the centroid points is automatically enabled. See https://plot.ly/python/reference/#scatter-selected and https://plot.ly/python/reference/#scatter-unselected for details
+  - FIPS values that appear on hover are 0-padded to ensure they are 5 digits
+  - for the county lines data `hover_info='none'` by default
 ### Fixed
 - `plotly.figure_factory.utils.validate_dataframe` and `plotly.figure_factory.utils.validate_index` now do not produce error when validating `pandas.DataFrames` and `pandas.Series` with any index.
 
-## [2.3.4] - 2017-12-11
+## [2.4.1] - 2018-02-21
+### Fixed
+- The required shapefiles to generate the choropleths via `plotly.figure_factory.create_choropleth` are now shipped in the package data.
+
+## [2.4.0] - 2018-02-16
+### Added
+- County Choropleth figure factory. Call `help(plotly.figure_factory.create_choropleth)` for examples and how to get started making choropleths of US counties with the Python API.
+
+Note: Calling `plotly.figure_factory.create_choropleth` will fail with an IOError due to missing shapefiles see: https://github.com/plotly/plotly.py/blob/master/CHANGELOG.md#241---2018-02-21
+
+## [2.3.0] - 2018-01-25
 ### Fixed
 - Merged [pull request](https://github.com/plotly/plotly.py/commit/a226e07393c158e01c34c050aaf492da9d77679a) that fixes `GraphWidget` for IPython > v6
+### Updated
+- Updated `plotly.min.js` to version 1.33.1.
+  - New plot types include a `violin` trace type.
+  - New features include completely rewritten `scattergl` using `regl` and a completely rewritten polar chart renderer.
+  - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1331----2018-01-24) for additional information regarding the updates.
 
 ## [2.2.3] - 2017-12-04
 ### Added

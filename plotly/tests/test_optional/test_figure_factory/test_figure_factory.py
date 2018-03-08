@@ -2718,3 +2718,105 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                                   'zeroline': False}}
         }
         self.assert_dict_equal(fig, exp_fig)
+
+
+class TestChoropleth(NumpyTestUtilsMixin, TestCase):
+
+    def test_fips_values_same_length(self):
+        pattern = 'fips and values must be the same length'
+        self.assertRaisesRegexp(
+            PlotlyError, pattern, ff.create_choropleth,
+            fips=[1001], values=[4004, 40004]
+        )
+
+
+    def test_correct_order_param(self):
+        pattern = (
+            'if you are using a custom order of unique values from '
+            'your color column, you must: have all the unique values '
+            'in your order and have no duplicate items'
+        )
+
+        self.assertRaisesRegexp(
+            PlotlyError, pattern, ff.create_choropleth,
+            fips=[1], values=[1], order=[1, 1, 1]
+        )
+
+    def test_colorscale_and_levels_same_length(self):
+        self.assertRaises(
+            PlotlyError, ff.create_choropleth,
+            fips=[1001, 1003, 1005], values=[5, 2, 1],
+            colorscale=['rgb(0,0,0)']
+        )
+
+    def test_scope_is_not_list(self):
+
+        pattern = "'scope' must be a list/tuple/sequence"
+
+        self.assertRaisesRegexp(
+            PlotlyError, pattern, ff.create_choropleth,
+            fips=[1001, 1003], values=[5, 2], scope='foo',
+        )
+
+    def test_full_choropleth(self):
+        fips = [1001]
+        values = [1]
+        fig = ff.create_choropleth(
+            fips=fips, values=values,
+            simplify_county=1
+        )
+
+        exp_fig_head = [
+            -88.053375,
+            -88.02916499999999,
+            -88.02432999999999,
+            -88.04504299999999,
+            -88.053375,
+            np.nan,
+            -88.211209,
+            -88.209999,
+            -88.208733,
+            -88.209559,
+            -88.211209,
+            np.nan,
+            -88.22511999999999,
+            -88.22128099999999,
+            -88.218694,
+            -88.22465299999999,
+            -88.22511999999999,
+            np.nan,
+            -88.264659,
+            -88.25782699999999,
+            -88.25947,
+            -88.255659,
+            -88.264659,
+            np.nan,
+            -88.327302,
+            -88.20146799999999,
+            -88.141143,
+            -88.124658,
+            -88.074854,
+            -88.12493599999999,
+            -88.10665399999999,
+            -88.149812,
+            -88.327302,
+            np.nan,
+            -88.346745,
+            -88.341235,
+            -88.33288999999999,
+            -88.346823,
+            -88.346745,
+            np.nan,
+            -88.473227,
+            -88.097888,
+            -88.154617,
+            -88.20295899999999,
+            -85.605165,
+            -85.18440000000001,
+            -85.12218899999999,
+            -85.142567,
+            -85.113329,
+            -85.10533699999999
+        ] 
+                   
+        self.assertEqual(fig['data'][2]['x'][:50], exp_fig_head)
