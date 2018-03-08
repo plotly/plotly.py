@@ -33,3 +33,6 @@ ipykernel
 pyshp
 geopandas
 shapely
+
+## retrying requests
+retrying
