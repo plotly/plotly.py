@@ -901,7 +901,6 @@ class Box(PlotlyDict):
         'selectedpoints', 'showlegend', 'stream', 'text', 'textsrc', 'type',
         'uid', 'unselected', 'visible', 'whiskerwidth', 'x', 'x0', 'xaxis',
         'xcalendar', 'xsrc', 'y', 'y0', 'yaxis', 'ycalendar', 'ysrc']
-    
     Run `<box-object>.help('attribute')` on any of the above.
     '<box-object>' is the object at []
 
@@ -977,7 +976,6 @@ class ColorBar(PlotlyDict):
         'ticksuffix', 'ticktext', 'ticktextsrc', 'tickvals', 'tickvalssrc',
         'tickwidth', 'title', 'titlefont', 'titleside', 'x', 'xanchor', 'xpad',
         'y', 'yanchor', 'ypad']
-    
     Run `<colorbar-object>.help('attribute')` on any of the above.
     '<colorbar-object>' is the object at []
 
@@ -997,7 +995,6 @@ class Contour(PlotlyDict):
         'text', 'textsrc', 'transpose', 'type', 'uid', 'visible', 'x', 'x0',
         'xaxis', 'xcalendar', 'xsrc', 'xtype', 'y', 'y0', 'yaxis', 'ycalendar',
         'ysrc', 'ytype', 'z', 'zauto', 'zhoverformat', 'zmax', 'zmin', 'zsrc']
-    
     Run `<contour-object>.help('attribute')` on any of the above.
     '<contour-object>' is the object at []
 
@@ -1345,7 +1342,6 @@ class Heatmap(PlotlyDict):
         'xaxis', 'xcalendar', 'xgap', 'xsrc', 'xtype', 'y', 'y0', 'yaxis',
         'ycalendar', 'ygap', 'ysrc', 'ytype', 'z', 'zauto', 'zhoverformat',
         'zmax', 'zmin', 'zsmooth', 'zsrc']
-    
     Run `<heatmap-object>.help('attribute')` on any of the above.
     '<heatmap-object>' is the object at []
 
@@ -1404,7 +1400,6 @@ class Histogram2d(PlotlyDict):
         'visible', 'x', 'xaxis', 'xbins', 'xcalendar', 'xgap', 'xsrc', 'y',
         'yaxis', 'ybins', 'ycalendar', 'ygap', 'ysrc', 'z', 'zauto',
         'zhoverformat', 'zmax', 'zmin', 'zsmooth', 'zsrc']
-    
     Run `<histogram2d-object>.help('attribute')` on any of the above.
     '<histogram2d-object>' is the object at []
 
@@ -1424,7 +1419,6 @@ class Histogram2dContour(PlotlyDict):
         'showscale', 'stream', 'type', 'uid', 'visible', 'x', 'xaxis', 'xbins',
         'xcalendar', 'xsrc', 'y', 'yaxis', 'ybins', 'ycalendar', 'ysrc', 'z',
         'zauto', 'zhoverformat', 'zmax', 'zmin', 'zsrc']
-    
     Run `<histogram2dcontour-object>.help('attribute')` on any of the above.
     '<histogram2dcontour-object>' is the object at []
 
@@ -1444,7 +1438,6 @@ class Histogram2dcontour(PlotlyDict):
         'showscale', 'stream', 'type', 'uid', 'visible', 'x', 'xaxis', 'xbins',
         'xcalendar', 'xsrc', 'y', 'yaxis', 'ybins', 'ycalendar', 'ysrc', 'z',
         'zauto', 'zhoverformat', 'zmax', 'zmin', 'zsrc']
-    
     Run `<histogram2dcontour-object>.help('attribute')` on any of the above.
     '<histogram2dcontour-object>' is the object at []
 
@@ -1949,7 +1942,6 @@ class XAxis(PlotlyDict):
         'ticktextsrc', 'tickvals', 'tickvalssrc', 'tickwidth', 'title',
         'titlefont', 'type', 'visible', 'zeroline', 'zerolinecolor',
         'zerolinewidth']
-    
     Run `<xaxis-object>.help('attribute')` on any of the above.
     '<xaxis-object>' is the object at []
 
@@ -1989,7 +1981,6 @@ class YAxis(PlotlyDict):
         'ticktextsrc', 'tickvals', 'tickvalssrc', 'tickwidth', 'title',
         'titlefont', 'type', 'visible', 'zeroline', 'zerolinecolor',
         'zerolinewidth']
-    
     Run `<yaxis-object>.help('attribute')` on any of the above.
     '<yaxis-object>' is the object at []
 
@@ -2026,7 +2017,6 @@ class ZAxis(PlotlyDict):
         'ticks', 'ticksuffix', 'ticktext', 'ticktextsrc', 'tickvals',
         'tickvalssrc', 'tickwidth', 'title', 'titlefont', 'type', 'visible',
         'zeroline', 'zerolinecolor', 'zerolinewidth']
-    
     Run `<zaxis-object>.help('attribute')` on any of the above.
     '<zaxis-object>' is the object at []
 
