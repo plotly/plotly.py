@@ -3,6 +3,7 @@ from __future__ import absolute_import
 import requests
 from requests.compat import json as _json
 from requests.exceptions import RequestException
+from retrying import retry
 
 from plotly import config, exceptions, version, utils
 from plotly.api.utils import basic_auth
@@ -48,6 +49,8 @@ def build_url(resource, id='', route=''):
     return url
 
 
+@retry(wait_random_min=100, wait_random_max=1000, wait_exponential_max=10000,
+       stop_max_delay=30000)
 def validate_response(response):
     """
     Raise a helpful PlotlyRequestError for failed requests.

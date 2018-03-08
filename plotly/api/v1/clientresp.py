@@ -4,11 +4,10 @@ from __future__ import absolute_import
 import warnings
 
 from requests.compat import json as _json
+from retrying import retry
 
 from plotly import config, utils, version
 from plotly.api.v1.utils import request
-
-from retrying import retry
 
 
 @retry(wait_random_min=100, wait_random_max=1000, wait_exponential_max=10000,
