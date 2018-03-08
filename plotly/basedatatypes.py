@@ -30,6 +30,17 @@ class BaseFigure:
 
         layout = layout_plotly
 
+        # Handle case where data is a Figure or Figure-like dict
+        # ------------------------------------------------------
+        if isinstance(data, BaseFigure):
+            data, layout, frames = data.data, data.layout, data.frames
+
+        elif (isinstance(data, dict) and
+              ('data' in data or 'layout' in data or 'frames' in data)):
+            data, layout, frames = (data.get('data', None),
+                                    data.get('layout', None),
+                                    data.get('frames', None))
+
         # Traces
         # ------
         from plotly.validators import DataValidator
