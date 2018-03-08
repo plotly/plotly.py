@@ -8,7 +8,11 @@ from requests.compat import json as _json
 from plotly import config, utils, version
 from plotly.api.v1.utils import request
 
+from retrying import retry
 
+
+@retry(wait_random_min=100, wait_random_max=1000, wait_exponential_max=10000,
+       stop_max_delay=30000)
 def clientresp(data, **kwargs):
     """
     Deprecated endpoint, still used because it can parse data out of a plot.
