@@ -49,8 +49,6 @@ def build_url(resource, id='', route=''):
     return url
 
 
-#@retry(wait_random_min=100, wait_random_max=1000, wait_exponential_max=10000,
-#       stop_max_delay=30000)
 def validate_response(response):
     """
     Raise a helpful PlotlyRequestError for failed requests.
