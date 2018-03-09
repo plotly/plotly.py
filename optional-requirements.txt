@@ -29,10 +29,7 @@ scipy
 jupyter
 ipykernel
 
-## deps for _county_choropleth.py figure factory
+## deps for _county_choropleth.py figure factory ##
 pyshp
 geopandas
 shapely
-
-## retrying requests
-retrying
