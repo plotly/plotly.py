@@ -873,15 +873,16 @@ class Bar(PlotlyDict):
     """
     Valid attributes for 'bar' at path [] under parents ():
     
-        ['bardir', 'base', 'basesrc', 'constraintext', 'customdata',
-        'customdatasrc', 'dx', 'dy', 'error_x', 'error_y', 'hoverinfo',
-        'hoverinfosrc', 'hoverlabel', 'hovertext', 'hovertextsrc', 'ids',
-        'idssrc', 'insidetextfont', 'legendgroup', 'marker', 'name', 'offset',
-        'offsetsrc', 'opacity', 'orientation', 'outsidetextfont', 'r', 'rsrc',
-        'selected', 'selectedpoints', 'showlegend', 'stream', 't', 'text',
-        'textfont', 'textposition', 'textpositionsrc', 'textsrc', 'tsrc',
-        'type', 'uid', 'unselected', 'visible', 'width', 'widthsrc', 'x', 'x0',
-        'xaxis', 'xcalendar', 'xsrc', 'y', 'y0', 'yaxis', 'ycalendar', 'ysrc']
+        ['bardir', 'base', 'basesrc', 'cliponaxis', 'constraintext',
+        'customdata', 'customdatasrc', 'dx', 'dy', 'error_x', 'error_y',
+        'hoverinfo', 'hoverinfosrc', 'hoverlabel', 'hovertext', 'hovertextsrc',
+        'ids', 'idssrc', 'insidetextfont', 'legendgroup', 'marker', 'name',
+        'offset', 'offsetsrc', 'opacity', 'orientation', 'outsidetextfont',
+        'r', 'rsrc', 'selected', 'selectedpoints', 'showlegend', 'stream', 't',
+        'text', 'textfont', 'textposition', 'textpositionsrc', 'textsrc',
+        'tsrc', 'type', 'uid', 'unselected', 'visible', 'width', 'widthsrc',
+        'x', 'x0', 'xaxis', 'xcalendar', 'xsrc', 'y', 'y0', 'yaxis',
+        'ycalendar', 'ysrc']
     
     Run `<bar-object>.help('attribute')` on any of the above.
     '<bar-object>' is the object at []
@@ -1132,9 +1133,8 @@ class ErrorY(PlotlyDict):
     Valid attributes for 'error_y' at path [] under parents ():
     
         ['array', 'arrayminus', 'arrayminussrc', 'arraysrc', 'color',
-        'copy_ystyle', 'copy_zstyle', 'opacity', 'symmetric', 'thickness',
-        'traceref', 'tracerefminus', 'type', 'value', 'valueminus', 'visible',
-        'width']
+        'copy_zstyle', 'opacity', 'symmetric', 'thickness', 'traceref',
+        'tracerefminus', 'type', 'value', 'valueminus', 'visible', 'width']
     
     Run `<error_y-object>.help('attribute')` on any of the above.
     '<error_y-object>' is the object at []
@@ -1148,9 +1148,8 @@ class ErrorZ(PlotlyDict):
     Valid attributes for 'error_z' at path [] under parents ():
     
         ['array', 'arrayminus', 'arrayminussrc', 'arraysrc', 'color',
-        'copy_ystyle', 'copy_zstyle', 'opacity', 'symmetric', 'thickness',
-        'traceref', 'tracerefminus', 'type', 'value', 'valueminus', 'visible',
-        'width']
+        'opacity', 'symmetric', 'thickness', 'traceref', 'tracerefminus',
+        'type', 'value', 'valueminus', 'visible', 'width']
     
     Run `<error_z-object>.help('attribute')` on any of the above.
     '<error_z-object>' is the object at []
@@ -1459,7 +1458,7 @@ class Layout(PlotlyDict):
         ['angularaxis', 'annotations', 'autosize', 'bargap', 'bargroupgap',
         'barmode', 'barnorm', 'boxgap', 'boxgroupgap', 'boxmode', 'calendar',
         'colorway', 'datarevision', 'direction', 'dragmode', 'font', 'geo',
-        'height', 'hiddenlabels', 'hiddenlabelssrc', 'hidesources',
+        'grid', 'height', 'hiddenlabels', 'hiddenlabelssrc', 'hidesources',
         'hoverdistance', 'hoverlabel', 'hovermode', 'images', 'legend',
         'mapbox', 'margin', 'orientation', 'paper_bgcolor', 'plot_bgcolor',
         'polar', 'radialaxis', 'scene', 'separators', 'shapes', 'showlegend',
@@ -1934,18 +1933,19 @@ class XAxis(PlotlyDict):
     """
     Valid attributes for 'xaxis' at path [] under parents ():
     
-        ['anchor', 'autorange', 'autotick', 'backgroundcolor', 'calendar',
-        'categoryarray', 'categoryarraysrc', 'categoryorder', 'color',
-        'constrain', 'constraintoward', 'domain', 'dtick', 'exponentformat',
-        'fixedrange', 'gridcolor', 'gridwidth', 'hoverformat', 'layer',
-        'linecolor', 'linewidth', 'mirror', 'nticks', 'overlaying', 'position',
-        'range', 'rangemode', 'rangeselector', 'rangeslider', 'scaleanchor',
-        'scaleratio', 'separatethousands', 'showaxeslabels', 'showbackground',
-        'showexponent', 'showgrid', 'showline', 'showspikes', 'showticklabels',
-        'showtickprefix', 'showticksuffix', 'side', 'spikecolor', 'spikedash',
-        'spikemode', 'spikesides', 'spikesnap', 'spikethickness', 'tick0',
-        'tickangle', 'tickcolor', 'tickfont', 'tickformat', 'tickformatstops',
-        'ticklen', 'tickmode', 'tickprefix', 'ticks', 'ticksuffix', 'ticktext',
+        ['anchor', 'automargin', 'autorange', 'autotick', 'backgroundcolor',
+        'calendar', 'categoryarray', 'categoryarraysrc', 'categoryorder',
+        'color', 'constrain', 'constraintoward', 'domain', 'dtick',
+        'exponentformat', 'fixedrange', 'gridcolor', 'gridwidth',
+        'hoverformat', 'layer', 'linecolor', 'linewidth', 'mirror', 'nticks',
+        'overlaying', 'position', 'range', 'rangemode', 'rangeselector',
+        'rangeslider', 'scaleanchor', 'scaleratio', 'separatethousands',
+        'showaxeslabels', 'showbackground', 'showexponent', 'showgrid',
+        'showline', 'showspikes', 'showticklabels', 'showtickprefix',
+        'showticksuffix', 'side', 'spikecolor', 'spikedash', 'spikemode',
+        'spikesides', 'spikesnap', 'spikethickness', 'tick0', 'tickangle',
+        'tickcolor', 'tickfont', 'tickformat', 'tickformatstops', 'ticklen',
+        'tickmode', 'tickprefix', 'ticks', 'ticksuffix', 'ticktext',
         'ticktextsrc', 'tickvals', 'tickvalssrc', 'tickwidth', 'title',
         'titlefont', 'type', 'visible', 'zeroline', 'zerolinecolor',
         'zerolinewidth']
@@ -1974,18 +1974,18 @@ class YAxis(PlotlyDict):
     """
     Valid attributes for 'yaxis' at path [] under parents ():
     
-        ['anchor', 'autorange', 'autotick', 'backgroundcolor', 'calendar',
-        'categoryarray', 'categoryarraysrc', 'categoryorder', 'color',
-        'constrain', 'constraintoward', 'domain', 'dtick', 'exponentformat',
-        'fixedrange', 'gridcolor', 'gridwidth', 'hoverformat', 'layer',
-        'linecolor', 'linewidth', 'mirror', 'nticks', 'overlaying', 'position',
-        'range', 'rangemode', 'scaleanchor', 'scaleratio', 'separatethousands',
-        'showaxeslabels', 'showbackground', 'showexponent', 'showgrid',
-        'showline', 'showspikes', 'showticklabels', 'showtickprefix',
-        'showticksuffix', 'side', 'spikecolor', 'spikedash', 'spikemode',
-        'spikesides', 'spikesnap', 'spikethickness', 'tick0', 'tickangle',
-        'tickcolor', 'tickfont', 'tickformat', 'tickformatstops', 'ticklen',
-        'tickmode', 'tickprefix', 'ticks', 'ticksuffix', 'ticktext',
+        ['anchor', 'automargin', 'autorange', 'autotick', 'backgroundcolor',
+        'calendar', 'categoryarray', 'categoryarraysrc', 'categoryorder',
+        'color', 'constrain', 'constraintoward', 'domain', 'dtick',
+        'exponentformat', 'fixedrange', 'gridcolor', 'gridwidth',
+        'hoverformat', 'layer', 'linecolor', 'linewidth', 'mirror', 'nticks',
+        'overlaying', 'position', 'range', 'rangemode', 'scaleanchor',
+        'scaleratio', 'separatethousands', 'showaxeslabels', 'showbackground',
+        'showexponent', 'showgrid', 'showline', 'showspikes', 'showticklabels',
+        'showtickprefix', 'showticksuffix', 'side', 'spikecolor', 'spikedash',
+        'spikemode', 'spikesides', 'spikesnap', 'spikethickness', 'tick0',
+        'tickangle', 'tickcolor', 'tickfont', 'tickformat', 'tickformatstops',
+        'ticklen', 'tickmode', 'tickprefix', 'ticks', 'ticksuffix', 'ticktext',
         'ticktextsrc', 'tickvals', 'tickvalssrc', 'tickwidth', 'title',
         'titlefont', 'type', 'visible', 'zeroline', 'zerolinecolor',
         'zerolinewidth']
