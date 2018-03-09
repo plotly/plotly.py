@@ -1458,7 +1458,7 @@ def return_figure_from_figure_or_data(figure_or_data, validate_figure):
     if validate_figure and not validated:
 
         try:
-            Figure(**figure)
+            figure = Figure(**figure).to_dict()
         except exceptions.PlotlyError as err:
             raise exceptions.PlotlyError("Invalid 'figure_or_data' argument. "
                                          "Plotly will not be able to properly "
