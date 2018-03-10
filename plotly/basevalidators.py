@@ -983,8 +983,13 @@ class InfoArrayValidator(BaseValidator):
         self.items = items
 
         self.item_validators = []
-        for i, item in enumerate(self.items):
-            item_validator = InfoArrayValidator.build_validator(item, '{plotly_name}[{i}]'.format(plotly_name=plotly_name, i=i), parent_name)
+        info_array_items = (self.items if isinstance(self.items, list)
+                            else [self.items])
+
+        for i, item in enumerate(info_array_items):
+            item_validator = InfoArrayValidator.build_validator(
+                item, '{plotly_name}[{i}]'
+                    .format(plotly_name=plotly_name, i=i), parent_name)
             self.item_validators.append(item_validator)
 
         self.free_length = free_length
