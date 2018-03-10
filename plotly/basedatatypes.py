@@ -17,8 +17,9 @@ from traitlets import Undefined
 from plotly import animation
 from plotly.basevalidators import CompoundValidator, CompoundArrayValidator, BaseDataValidator
 from plotly.callbacks import Points, BoxSelector, LassoSelector, InputState
-from plotly.validators.layout import (XAxisValidator, YAxisValidator, GeoValidator,
-                                      TernaryValidator, SceneValidator)
+
+# from plotly.validators.layout import (XAxisValidator, YAxisValidator, GeoValidator,
+#                                       TernaryValidator, SceneValidator)
 
 
 class BaseFigure:
@@ -1806,14 +1807,23 @@ class BaseLayoutHierarchyType(BasePlotlyType):
 
 
 class BaseLayoutType(BaseLayoutHierarchyType):
+
+
     _subplotid_prop_names = ['xaxis', 'yaxis', 'geo', 'ternary', 'scene']
-    _subplotid_validators = {'xaxis': XAxisValidator,
-                             'yaxis': YAxisValidator,
-                             'geo': GeoValidator,
-                             'ternary': TernaryValidator,
-                             'scene': SceneValidator}
 
     _subplotid_prop_re = re.compile('(' + '|'.join(_subplotid_prop_names) + ')(\d+)')
+
+    @property
+    def _subplotid_validators(self):
+        from plotly.validators.layout import (XAxisValidator, YAxisValidator,
+                                              GeoValidator,
+                                              TernaryValidator, SceneValidator)
+
+        return {'xaxis': XAxisValidator,
+                'yaxis': YAxisValidator,
+                'geo': GeoValidator,
+                'ternary': TernaryValidator,
+                'scene': SceneValidator}
 
     def __init__(self, plotly_name, **kwargs):
         # Compute invalid kwargs. Pass to parent for error message
