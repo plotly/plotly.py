@@ -93,7 +93,7 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
                 trace_uids = [trace.uid for trace in self.data]
                 trace_index = trace_uids.index(trace_uid)
                 uid_trace = self.data[trace_index]
-                delta_transform = BaseFigure.transform_data(uid_trace._prop_defaults, delta)
+                delta_transform = BaseFigure._transform_data(uid_trace._prop_defaults, delta)
 
                 removed_props = self._remove_overlapping_props(uid_trace._props, uid_trace._prop_defaults)
 
@@ -118,7 +118,7 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         if not restyle_msg:
             return
 
-        self.restyle(*restyle_msg)
+        self.plotly_restyle(*restyle_msg)
 
     @observe('_js2py_update')
     def handler_js2py_update(self, change):
@@ -135,7 +135,7 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         trace_indexes = update_msg['data'][1]
         layout = update_msg['layout']
 
-        self.update(style=style, layout=layout, trace_indexes=trace_indexes)
+        self.plotly_update(style=style, layout=layout, trace_indexes=trace_indexes)
 
     @observe('_js2py_layoutDelta')
     def handler_plotly_layoutDelta(self, change):
@@ -151,7 +151,7 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
 
             # print('Processing layoutDelta')
             # print('layoutDelta: {deltas}'.format(deltas=delta))
-            delta_transform = self.transform_data(self._layout_defaults, delta)
+            delta_transform = self._transform_data(self._layout_defaults, delta)
             # print(f'delta_transform: {delta_transform}')
 
             # No relayout messages in process. Handle removing overlapping properties
@@ -182,7 +182,7 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
             # Remove 'lastInputTime'. Seems to be an internal plotly property that is introduced for some plot types
             relayout_data.pop('lastInputTime')
 
-        self.relayout(relayout_data)
+        self.plotly_relayout(relayout_data)
 
     @observe('_js2py_pointsCallback')
     def handler_plotly_pointsCallback(self, change):

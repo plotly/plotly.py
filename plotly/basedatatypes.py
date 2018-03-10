@@ -139,8 +139,51 @@ class BaseFigure:
         else:
             raise KeyError(prop)
 
+    def __iter__(self):
+        return iter(('data', 'layout', 'frames'))
+
     def __contains__(self, prop):
         return prop in ('data', 'layout', 'frames')
+
+    def __eq__(self, other):
+        if not isinstance(other, BaseFigure):
+            # Require objects to both be BaseFigure instances
+            return False
+        else:
+            # Compare plotly_json representations
+
+            # Use _vals_equal instead of `==` to handle cases where
+            # underlying dicts contain numpy arrays
+            return BasePlotlyType._vals_equal(
+                self.to_plotly_json(),
+                other.to_plotly_json())
+
+    def update(self, dict1=None, **dict2):
+        """
+        Update properties of object with dict1 and then dict2.
+
+        This recursively updates the structure of the original
+        object with the new entries in the second and third objects. This
+        allows users to update with large, nested structures.
+
+        Note, because the dict2 packs up all the keyword arguments, you can
+        specify the changes as a list of keyword agruments.
+
+        Parameters
+        ----------
+        dict1 : dict
+            Dictionary of properties to be updated
+        dict2 :
+
+        Returns
+        -------
+        None
+        """
+        with self.batch_update():
+            for d in [dict1, dict2]:
+                if d:
+                    for k, v in d.items():
+                        BaseFigure._perform_update(self[k], v)
 
     # Data
     # ----
@@ -254,7 +297,7 @@ class BaseFigure:
         self._data_defaults = [_trace for i, _trace in sorted(zip(new_inds, traces_prop_defaults_post_removal))]
         self._data_objs = tuple(new_data)
 
-    def restyle(self, style, trace_indexes=None):
+    def plotly_restyle(self, style, trace_indexes=None):
         if trace_indexes is None:
             trace_indexes = list(range(len(self.data)))
 
@@ -477,7 +520,13 @@ class BaseFigure:
 
     def _get_child_props(self, child):
         try:
-            trace_index = self.data.index(child)
+            trace_index_list = [i for i, curr_child in enumerate(self.data)
+                                if curr_child is child]
+            if not trace_index_list:
+                raise ValueError('Invalid child')
+
+            trace_index = trace_index_list[0]
+
         except ValueError as _:
             trace_index = None
 
@@ -556,7 +605,7 @@ class BaseFigure:
         self._py2js_relayout = None
 
 
-    def relayout(self, layout):
+    def plotly_relayout(self, layout):
         relayout_msg = self._perform_relayout_dict(layout)
         if relayout_msg:
             self._dispatch_change_callbacks_relayout(relayout_msg)
@@ -674,7 +723,7 @@ class BaseFigure:
 
     # Update
     # ------
-    def update(self, style=None, layout=None, trace_indexes=None):
+    def plotly_update(self, style=None, layout=None, trace_indexes=None):
 
         restyle_msg, relayout_msg, trace_indexes = self._perform_update_dict(style=style,
                                                                              layout=layout,
@@ -794,7 +843,7 @@ class BaseFigure:
 
     def _send_batch_update(self):
         style, layout, trace_indexes = self._build_update_params_from_batch()
-        self.update(style=style, layout=layout, trace_indexes=trace_indexes)
+        self.plotly_update(style=style, layout=layout, trace_indexes=trace_indexes)
         self._batch_layout_commands.clear()
         self._batch_style_commands.clear()
 
@@ -1162,9 +1211,10 @@ class BaseFigure:
         return removed
 
     @staticmethod
-    def transform_data(to_data, from_data, should_remove=True, relayout_path=()):
+    def _transform_data(to_data, from_data, should_remove=True, relayout_path=()):
         """
-        Transform to_data into from_data and return relayout style description of transformation
+        Transform to_data into from_data and return relayout-style
+        description of transformation
 
         Parameters
         ----------
@@ -1189,7 +1239,7 @@ class BaseFigure:
 
                     input_val = to_data[from_prop]
                     relayout_terms.update(
-                        BaseFigure.transform_data(
+                        BaseFigure._transform_data(
                             input_val,
                             from_val,
                             should_remove=should_remove,
@@ -1218,7 +1268,7 @@ class BaseFigure:
                 input_val = to_data[i]
                 if input_val is not None and isinstance(from_val, dict) or BaseFigure._is_object_list(from_val):
                     relayout_terms.update(
-                        BaseFigure.transform_data(
+                        BaseFigure._transform_data(
                             input_val,
                             from_val,
                             should_remove=should_remove,
@@ -1230,6 +1280,65 @@ class BaseFigure:
 
         return relayout_terms
 
+    @staticmethod
+    def _perform_update(plotly_obj, update_obj):
+        """
+        Helper to support the update() methods on :class:`BaseFigure` and
+        :class:`BasePlotlyType`
+
+        Parameters
+        ----------
+        plotly_obj : Union[BasePlotlyType, Tuple[BasePlotlyType]]
+            Object to up updated
+        update_obj : Union[dict, List[dict], Tuple[dict]]
+            When ``plotly_obj`` is an instance of :class:`BasePlotlyType`,
+            ``update_obj`` should be a dict
+
+            When ``plotly_obj`` is a tuple of instances of
+            :class:`BasePlotlyType`, ``update_obj`` should be a tuple or list
+            of dicts
+        """
+
+        if update_obj is None:
+            # Nothing to do
+            return
+        elif isinstance(plotly_obj, BasePlotlyType):
+
+            # Handle invalid properties
+            # -------------------------
+            invalid_props = [k for k in update_obj
+                             if k not in plotly_obj._validators]
+
+            plotly_obj._raise_on_invalid_property_error(*invalid_props)
+
+            # Process valid properties
+            # ------------------------
+            for key in update_obj:
+                val = update_obj[key]
+                validator = plotly_obj._validators[key]
+
+                if isinstance(validator, CompoundValidator):
+                    plotly_obj[key].update(val)
+                else:
+                    plotly_obj[key] = val
+
+        elif isinstance(plotly_obj, tuple):
+
+            # If update_obj is a dict, wrap in a list
+            if not isinstance(update_obj, (tuple, list)):
+                update_obj = [update_obj]
+
+            if len(update_obj) == 0:
+                # Nothing to do
+                return
+            else:
+                for i, plotly_element in enumerate(plotly_obj):
+                    update_element = update_obj[i % len(update_obj)]
+                    BaseFigure._perform_update(plotly_element, update_element)
+        else:
+            raise ValueError('Unexpected plotly object with type {typ}'
+                             .format(typ=type(plotly_obj)))
+
 
 class BasePlotlyType:
     _validators = None
@@ -1238,7 +1347,7 @@ class BasePlotlyType:
     def __init__(self, plotly_name, **kwargs):
 
         self._plotly_name = plotly_name
-        self._raise_on_invalid_property_error(**kwargs)
+        self._raise_on_invalid_property_error(*kwargs.keys())
         self._validators = {}
         self._compound_props = {}
         self._orphan_props = {}  # properties dict for use while object has no parent
@@ -1263,10 +1372,10 @@ class BasePlotlyType:
             super().__setattr__(prop, value)
         else:
             # Raise error on unknown public properties
-            self._raise_on_invalid_property_error(**{prop: value})
+            self._raise_on_invalid_property_error(prop)
 
-    def _raise_on_invalid_property_error(self, **kwargs):
-        invalid_props = list(kwargs.keys())
+    def _raise_on_invalid_property_error(self, *args):
+        invalid_props = args
         if invalid_props:
             if len(invalid_props) == 1:
                 prop_str = 'property'
@@ -1380,6 +1489,25 @@ class BasePlotlyType:
     def parent(self):
         return self._parent
 
+    @property
+    def figure(self):
+        """
+        Reference to the top-level Figure or FigureWidget that this object
+        belongs to. None if the object does not below to a Figure
+
+        Returns
+        -------
+        Union[BaseFigure, None]
+        """
+        top_parent = self
+        while top_parent is not None:
+            if isinstance(top_parent, BaseFigure):
+                break
+            else:
+                top_parent = top_parent.parent
+
+        return top_parent
+
     def __getitem__(self, prop):
         if isinstance(prop, tuple):
             res = self
@@ -1405,7 +1533,7 @@ class BasePlotlyType:
 
     def __setitem__(self, key, value):
         if key not in self._validators:
-            raise KeyError(key)
+            self._raise_on_invalid_property_error(key)
 
         validator = self._validators[key]
 
@@ -1416,6 +1544,51 @@ class BasePlotlyType:
         else:
             # Simple property
             self._set_prop(key, value)
+
+    def __iter__(self):
+        return iter(self._validators.keys())
+
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            # Require objects to be of the same plotly type
+            return False
+        else:
+            # Compare plotly_json representations
+
+            # Use _vals_equal instead of `==` to handle cases where
+            # underlying dicts contain numpy arrays
+            return BasePlotlyType._vals_equal(
+                self.to_plotly_json(),
+                other.to_plotly_json())
+
+    def update(self, dict1=None, **dict2):
+        """
+        Update properties of object with dict1 and then dict2.
+
+        This recursively updates the structure of the original
+        object with the new entries in the second and third objects. This
+        allows users to update with large, nested structures.
+
+        Note, because the dict2 packs up all the keyword arguments, you can
+        specify the changes as a list of keyword agruments.
+
+        Parameters
+        ----------
+        dict1 : dict
+            Dictionary of properties to be updated
+        dict2 :
+
+        Returns
+        -------
+        None
+        """
+        if self.figure:
+            with self.figure.batch_update():
+                BaseFigure._perform_update(self, dict1)
+                BaseFigure._perform_update(self, dict2)
+        else:
+            BaseFigure._perform_update(self, dict1)
+            BaseFigure._perform_update(self, dict2)
 
     @property
     def _in_batch_mode(self):
@@ -1429,12 +1602,13 @@ class BasePlotlyType:
             # Handle recursive equality on lists and tuples
             return (isinstance(v2, (list, tuple)) and
                     len(v1) == len(v2) and
-                    all(BasePlotlyType._vals_equal(e1, e2) for e1, e2 in zip(v1, v2)))
+                    all(BasePlotlyType._vals_equal(e1, e2)
+                        for e1, e2 in zip(v1, v2)))
         elif isinstance(v1, dict):
             # Handle recursive equality on dicts
             return (isinstance(v2, dict) and
                     set(v1.keys()) == set(v2.keys()) and
-                    all(BasePlotlyType._vals_equal(v1[k], v2[k])) for k in v1)
+                    all(BasePlotlyType._vals_equal(v1[k], v2[k]) for k in v1))
         else:
             return v1 == v2
 
@@ -1580,7 +1754,7 @@ class BasePlotlyType:
     # Callbacks
     # ---------
     def _dispatch_change_callbacks(self, changed_paths):
-        # print(f'Change callback: {self.prop_name} - {changed_paths}')
+        # print(f'Change callback: {self.plotly_name} - {changed_paths}')
         changed_paths = set(changed_paths)
         # pprint(changed_paths)
         for callback_paths, callback in self._change_callbacks.items():
@@ -1661,7 +1835,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
 
         # Add validator
         if prop not in self._validators:
-            validator = self._subplotid_validators[subplot_prop](prop_name=prop)
+            validator = self._subplotid_validators[subplot_prop](plotly_name=prop)
             self._validators[prop] = validator
 
         # Import value
