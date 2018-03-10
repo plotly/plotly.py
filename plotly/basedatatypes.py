@@ -1407,7 +1407,7 @@ class BasePlotlyType:
             return self.parent._get_child_props(self)
 
     def to_plotly_json(self):
-        return deepcopy(self._props)
+        return deepcopy(BaseFigure._remove_underscore_keys(self._props))
 
     def _init_props(self):
         # Ensure that _data is initialized.
