@@ -5,6 +5,7 @@ import shutil
 from codegen.graph_objs import (delete_graph_objs_non_generated_lines,
                                 append_graph_objs_generated_lines)
 
+
 def perform_codegen():
     outdir = 'plotly/'
 
