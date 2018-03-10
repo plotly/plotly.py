@@ -1138,7 +1138,7 @@ class CompoundValidator(BaseValidator):
         else:
             self.raise_invalid_val(v)
 
-        v._prop_name = self.plotly_name
+        v._plotly_name = self.plotly_name
         return v
 
 
