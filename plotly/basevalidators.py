@@ -1233,9 +1233,12 @@ class BaseDataValidator(BaseValidator):
             res = []
             invalid_els = []
             for v_el in v:
+
                 if isinstance(v_el, trace_classes):
-                    res.append(v_el)
-                elif isinstance(v_el, dict):
+                    # Clone input traces
+                    v_el = v_el.to_plotly_json()
+
+                if isinstance(v_el, dict):
                     v_copy = deepcopy(v_el)
 
                     if 'type' in v_copy:
@@ -1258,11 +1261,9 @@ class BaseDataValidator(BaseValidator):
 
             v = tuple(res)
 
-            # Add UIDs if not set.
-            # If UID is set then it's the users responsibility to make sure UIDs are unique
+            # Set new UIDs
             for trace in v:
-                if trace.uid is None:
-                    trace.uid = str(uuid.uuid1())
+                trace.uid = str(uuid.uuid1())
 
         else:
             self.raise_invalid_val(v)
