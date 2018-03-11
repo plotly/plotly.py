@@ -351,7 +351,17 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         plot_html, plotdivid, width, height = _plot_html(
             figure_or_data, config, validate, '100%', 525, True
         )
-        display_bundle['text/html'] = plot_html
+        resize_script = ''
+        if width == '100%' or height == '100%':
+            resize_script = (
+                ''
+                '<script type="text/javascript">'
+                'window.addEventListener("resize", function(){{'
+                'Plotly.Plots.resize(document.getElementById("{id}"));}});'
+                '</script>'
+            ).format(id=plotdivid)
+        
+        display_bundle['text/html'] = plot_html+resize_script
         display_bundle['text/vnd.plotly.v1+html'] = plot_html
 
     ipython_display.display(display_bundle, raw=True)
