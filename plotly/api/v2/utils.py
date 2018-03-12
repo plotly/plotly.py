@@ -112,8 +112,8 @@ def get_headers():
     return headers
 
 
-@retry(wait_random_min=20000, wait_random_max=30000,
-       stop_max_attempt_number=7)
+@retry(wait_random_min=100, wait_random_max=1000, wait_exponential_max=10000,
+       stop_max_delay=30000)
 def request(method, url, **kwargs):
     """
     Central place to make any api v2 api request.
