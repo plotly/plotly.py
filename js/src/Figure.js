@@ -53,6 +53,8 @@ var FigureModel = widgets.DOMWidgetModel.extend({
         FigureModel.__super__.initialize.apply(this, arguments);
         console.log(['FigureModel: initialize', this._data, this._layout]);
 
+        this.on('change:_data', this.do_data, this);
+        this.on('change:_layout', this.do_layout, this);
         this.on('change:_py2js_addTraces', this.do_addTraces, this);
         this.on('change:_py2js_deleteTraces', this.do_deleteTraces, this);
         this.on('change:_py2js_moveTraces', this.do_moveTraces, this);
@@ -106,6 +108,23 @@ var FigureModel = widgets.DOMWidgetModel.extend({
         return trace_indexes
     },
 
+    do_data: function () {
+        console.log('Figure Model: do_data');
+        var data = this.get('_data');
+
+        if (data !== null) {
+            console.log(data);
+        }
+    },
+
+    do_layout: function () {
+        console.log('Figure Model: do_layout');
+        var layout = this.get('_layout');
+
+        if (layout !== null) {
+            console.log(layout);
+        }
+    },
 
     do_addTraces: function () {
         // add trace to plot
@@ -122,7 +141,7 @@ var FigureModel = widgets.DOMWidgetModel.extend({
     },
 
     do_deleteTraces: function () {
-        // add trace to plot
+        // remove traces from plot
         var data = this.get('_py2js_deleteTraces');
         console.log('Figure Model: do_deleteTraces');
         if (data !== null) {
@@ -465,6 +484,9 @@ function js2py_serializer(v, widgetManager) {
     } else {
         res = v;
     }
+
+    // TODO: Add js->py typed array support
+    // Then points arrays can be sent back to Python as buffers
     return res
 }
 
@@ -478,8 +500,7 @@ function py2js_serializer(v, widgetManager) {
     } else if (_.isPlainObject(v)) {
         if (_.has(v, 'buffer') && _.has(v, 'dtype') && _.has(v, 'shape')) {
             var typedarray_type = numpy_dtype_to_typedarray_type[v.dtype];
-            var typedarray = new typedarray_type(v.buffer.buffer);
-            res = Array.from(typedarray);
+            res = new typedarray_type(v.buffer.buffer);
         } else {
             res = {};
             for (var p in v) {
@@ -494,6 +515,10 @@ function py2js_serializer(v, widgetManager) {
         res = v;
     }
     return res
+}
+
+function isTypedArray(a) {
+    return ArrayBuffer.isView(a) && !(a instanceof DataView)
 }
 
 // Figure View
@@ -536,13 +561,13 @@ var FigureView = widgets.DOMWidgetView.extend({
         console.log(this.model.get('_layout'));
 
         // Clone traces and layout so plotly instances in the views don't mutate the model
-        var initial_traces = JSON.parse(JSON.stringify(this.model.get('_data')));
-        var initial_layout = JSON.parse(JSON.stringify(this.model.get('_layout')));
+        var initial_traces = _.cloneDeep(this.model.get('_data'));
+        var initial_layout = _.cloneDeep(this.model.get('_layout'));
 
         Plotly.newPlot(this.el, initial_traces, initial_layout).then(function () {
 
             // Update layout
-            var relayoutDelta = that.create_delta_object(that.model.get('_layout'), that.getFullLayout());
+            var relayoutDelta = that.create_delta_object(that.getFullLayout(), that.model.get('_layout'));
             relayoutDelta['_relayout_msg_id'] = relayout_msg_id;
             that.model.set('_js2py_layoutDelta', relayoutDelta);
 
@@ -553,11 +578,12 @@ var FigureView = widgets.DOMWidgetView.extend({
             for(var i=0; i < initial_traces.length; i++) {
                 var fullTraceData = fullData[i];
                 var traceData = initial_traces[i];
-                traceDeltas[i] = that.create_delta_object(traceData, fullTraceData);
+                traceDeltas[i] = that.create_delta_object(fullTraceData, traceData);
                 traceDeltas[i]['_restyle_msg_id'] = restyle_msg_id;
             }
 
-            console.log(traceDeltas);
+            console.log(['fullData', fullData]);
+            console.log(['traceDeltas', traceDeltas]);
             that.model.set('_js2py_styleDelta', traceDeltas);
 
             // sync any/all changes back to model
@@ -583,11 +609,11 @@ var FigureView = widgets.DOMWidgetView.extend({
         // Merge so that we use .data properties if available.
         // e.g. colorscales can be stored by name in this.el.data (Viridis) but by array in el._fullData. We want
         // the string in this case
-        return _.merge(this.el._fullData, this.el.data);
+        return _.mergeWith(this.el._fullData, this.el.data, fullMergeCustomizer)
     },
 
     getFullLayout: function () {
-        return _.merge(this.el._fullLayout, this.el.layout);
+        return _.mergeWith(this.el._fullLayout, this.el.layout, fullMergeCustomizer);
     },
 
     buildPointsObject: function (data) {
@@ -869,7 +895,7 @@ var FigureView = widgets.DOMWidgetView.extend({
                 for(var i=0; i < data.length; i++) {
                     var fullTraceData = fullData[i + prev_num_traces];
                     var traceData = tracesData[i + prev_num_traces];
-                    traceDeltas[i] = that.create_delta_object(traceData, fullTraceData);
+                    traceDeltas[i] = that.create_delta_object(fullTraceData, traceData);
                     traceDeltas[i]['_restyle_msg_id'] = restyle_msg_id;
                 }
 
@@ -877,7 +903,7 @@ var FigureView = widgets.DOMWidgetView.extend({
 
 
                 // Update layout
-                var layoutDelta = that.create_delta_object(that.model.get('_layout'), that.getFullLayout());
+                var layoutDelta = that.create_delta_object(that.getFullLayout(), that.model.get('_layout'));
                 layoutDelta['_relayout_msg_id'] = relayout_msg_id;
                 that.model.set('_js2py_layoutDelta', layoutDelta);
                 console.log(layoutDelta);
@@ -898,7 +924,7 @@ var FigureView = widgets.DOMWidgetView.extend({
             var that = this;
             Plotly.deleteTraces(this.el, delete_inds).then(function () {
                 // Send back layout delta
-                var relayoutDelta = that.create_delta_object(that.model.get('_layout'), that.getFullLayout());
+                var relayoutDelta = that.create_delta_object(that.getFullLayout(), that.model.get('_layout'));
                 relayoutDelta['_relayout_msg_id'] = relayout_msg_id;
                 that.model.set('_js2py_layoutDelta', relayoutDelta);
                 that.touch();
@@ -951,15 +977,16 @@ var FigureView = widgets.DOMWidgetView.extend({
             var trace_data = this.model.get('_data');
             var fullData = this.getFullData();
             for (var i = 0; i < trace_indexes.length; i++) {
-                traceDeltas[i] = this.create_delta_object(trace_data[trace_indexes[i]], fullData[trace_indexes[i]]);
+                traceDeltas[i] = this.create_delta_object(fullData[trace_indexes[i]], trace_data[trace_indexes[i]]);
                 traceDeltas[i]['_restyle_msg_id'] = restyle_msg_id;
             }
 
+            console.log(['traceDeltas', traceDeltas]);
             this.model.set('_js2py_styleDelta', traceDeltas);
 
             // Send back layout delta
             var relayout_msg_id = style['_relayout_msg_id'];
-            var relayoutDelta = this.create_delta_object(this.model.get('_layout'), this.getFullLayout());
+            var relayoutDelta = this.create_delta_object(this.getFullLayout(), this.model.get('_layout'));
             relayoutDelta['_relayout_msg_id'] = relayout_msg_id;
             this.model.set('_js2py_layoutDelta', relayoutDelta);
 
@@ -983,7 +1010,7 @@ var FigureView = widgets.DOMWidgetView.extend({
             data['_doNotReportToPy'] = true;
             Plotly.relayout(this.el, data);
 
-            var layoutDelta = this.create_delta_object(this.model.get('_layout'), this.getFullLayout());
+            var layoutDelta = this.create_delta_object(this.getFullLayout(), this.model.get('_layout'));
 
             // Add message id
             layoutDelta['_relayout_msg_id'] = data['_relayout_msg_id'];
@@ -1024,14 +1051,14 @@ var FigureView = widgets.DOMWidgetView.extend({
             var trace_data = this.model.get('_data');
             var fullData = this.getFullData();
             for (var i = 0; i < trace_indexes.length; i++) {
-                traceDeltas[i] = this.create_delta_object(trace_data[trace_indexes[i]], fullData[trace_indexes[i]]);
+                traceDeltas[i] = this.create_delta_object(fullData[trace_indexes[i]], trace_data[trace_indexes[i]]);
                 traceDeltas[i]['_restyle_msg_id'] = restyle_msg_id;
             }
 
             this.model.set('_js2py_styleDelta', traceDeltas);
 
             // Send back layout delta
-            var relayoutDelta = this.create_delta_object(this.model.get('_layout'), this.getFullLayout());
+            var relayoutDelta = this.create_delta_object(this.getFullLayout(), this.model.get('_layout'));
             relayoutDelta['_relayout_msg_id'] = relayout_msg_id;
             this.model.set('_js2py_layoutDelta', relayoutDelta);
 
@@ -1061,7 +1088,7 @@ var FigureView = widgets.DOMWidgetView.extend({
                 var fullData = that.getFullData();
                 for (var i = 0; i < trace_indexes.length; i++) {
                     var restyle_msg_id = styles[i]['_restyle_msg_id'];
-                    traceDeltas[i] = that.create_delta_object(trace_data[trace_indexes[i]], fullData[trace_indexes[i]]);
+                    traceDeltas[i] = that.create_delta_object(fullData[trace_indexes[i]], trace_data[trace_indexes[i]]);
                     traceDeltas[i]['_restyle_msg_id'] = restyle_msg_id;
                 }
 
@@ -1069,7 +1096,7 @@ var FigureView = widgets.DOMWidgetView.extend({
 
                 // Send back layout delta
                 var relayout_msg_id = layout['_relayout_msg_id'];
-                var relayoutDelta = that.create_delta_object(that.model.get('_layout'), that.getFullLayout());
+                var relayoutDelta = that.create_delta_object(that.getFullLayout(), that.model.get('_layout'));
                 relayoutDelta['_relayout_msg_id'] = relayout_msg_id;
                 that.model.set('_js2py_layoutDelta', relayoutDelta);
 
@@ -1094,84 +1121,83 @@ var FigureView = widgets.DOMWidgetView.extend({
         }
     },
 
-    clone_fullLayout_data: function (fullLayout) {
-        var fullStr = JSON.stringify(fullLayout, function(k, v) {
-            if (k.length > 0 && k[0] === '_') {
-                return undefined
-            }
-            return v
-        });
-        return JSON.parse(fullStr)
-    },
+    /**
+     * Return object that contains all properties in fullObj that are not
+     * identical to corresponding properties in removeObj
+     *
+     * Properties of fullObj and removeObj may be object arrays
+     *
+     * Returned object is a deep clone of the properties of the input objects
+     *
+     * @param {Object} fullObj
+     * @param {Object} removeObj
+     */
+    create_delta_object: function (fullObj, removeObj) {
 
-    clone_fullData_metadata: function (fullData) {
-        var fullStr = JSON.stringify(fullData, function(k, v) {
-            if (k.length > 0 && k[0] === '_') {
-                return undefined
-            } else if (Array.isArray(v)) {
-                // For performance, we don't clone arrays
-                return undefined
-            }
-            return v
-        });
-        return JSON.parse(fullStr)
-    },
-
-    create_delta_object: function(data, fullData) {
+        // Initialize result as object or array
         var res;
-        if(Array.isArray(fullData)) {
-            res = new Array(fullData.length);
+        if(Array.isArray(fullObj)) {
+            res = new Array(fullObj.length);
         } else {
             res = {};
         }
 
-        if (data === null || data === undefined) {
-            data = {};
+        // Initialize removeObj to empty object if not specified
+        if (removeObj === null || removeObj === undefined) {
+            removeObj = {};
         }
-        for (var p in fullData) {
-            if (p[0] !== '_' && fullData.hasOwnProperty(p) && fullData[p] !== null) {
 
+        // Iterate over object properties or array indices
+        for (var p in fullObj) {
+            if (p[0] !== '_' &&  // Don't consider private properties
+                fullObj.hasOwnProperty(p) &&  // Exclude parent properties
+                fullObj[p] !== null  // Exclude cases where fullObj doesn't
+                                     // have the property
+            ) {
+                // Compute object equality
                 var props_equal;
-                if (data.hasOwnProperty(p) && Array.isArray(data[p]) && Array.isArray(fullData[p])) {
-                    props_equal = JSON.stringify(data[p]) === JSON.stringify(fullData[p]);
-                } else if (data.hasOwnProperty(p)) {
-                    props_equal = data[p] === fullData[p];
-                } else {
-                    props_equal = false;
-                }
+                props_equal = _.isEqual(removeObj[p], fullObj[p]);
 
+                // Perform recursive comparison if props are not equal
                 if (!props_equal || p === 'uid') {  // Let uids through
-                    // property has non-null value in fullData that doesn't match the value in
-                    var full_val = fullData[p];
-                    if (data.hasOwnProperty(p) && typeof full_val === 'object') {
-                        if(Array.isArray(full_val)) {
 
-                            if (full_val.length > 0 && typeof(full_val[0]) === 'object') {
+                    // property has non-null value in fullObj that doesn't
+                    // match the value in removeObj
+                    var fullVal = fullObj[p];
+                    if (removeObj.hasOwnProperty(p) && typeof fullVal === 'object') {
+                        // Recurse over object properties
+                        if(Array.isArray(fullVal)) {
+
+                            if (fullVal.length > 0 && typeof(fullVal[0]) === 'object') {
                                 // We have an object array
-                                res[p] = new Array(full_val.length);
-                                for (var i = 0; i < full_val.length; i++) {
-                                    if (!Array.isArray(data[p]) || data[p].length <= i) {
-                                        res[p][i] = full_val[i]
+                                res[p] = new Array(fullVal.length);
+                                for (var i = 0; i < fullVal.length; i++) {
+                                    if (!Array.isArray(removeObj[p]) || removeObj[p].length <= i) {
+                                        res[p][i] = fullVal[i]
                                     } else {
-                                        res[p][i] = this.create_delta_object(data[p][i], full_val[i]);
+                                        res[p][i] = this.create_delta_object(fullVal[i], removeObj[p][i]);
                                     }
                                 }
                             } else {
-                                // We have a primitive array
-                                res[p] = full_val;
+                                // We have a primitive array or typed array
+                                res[p] = fullVal;
                             }
                         } else { // object
-                            var full_obj = this.create_delta_object(data[p], full_val);
+                            var full_obj = this.create_delta_object(fullVal, removeObj[p]);
                             if (Object.keys(full_obj).length > 0) {
                                 // new object is not empty
                                 res[p] = full_obj;
                             }
                         }
-                    } else if (typeof full_val === 'object' && !Array.isArray(full_val)) {
-                        res[p] = this.create_delta_object({}, full_val);
+                    } else if (typeof fullVal === 'object' && !Array.isArray(fullVal)) {
+                        // Return 'clone' of fullVal
+                        // We don't use a standard clone method so that we keep
+                        // the special case handling of this method
+                        res[p] = this.create_delta_object(fullVal, {});
 
-                    } else if (full_val !== undefined) {
-                        res[p] = full_val;
+                    } else if (fullVal !== undefined) {
+                        // No recursion necessary, Just keep value from fullObj
+                        res[p] = fullVal;
                     }
                 }
             }
@@ -1220,7 +1246,19 @@ function randstr(existing, bits, base) {
         return randstr(existing, bits, base);
     }
     else return res;
-};
+}
+
+/**
+ * Customizer for use with lodash's mergeWith function
+ *
+ * See: https://lodash.com/docs/latest#mergeWith
+ */
+function fullMergeCustomizer(objValue, srcValue) {
+    if (isTypedArray(srcValue)) {
+        // Return typed arrays directly, don't recurse inside
+        return srcValue
+    }
+}
 
 module.exports = {
     FigureView : FigureView,
