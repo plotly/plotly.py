@@ -827,7 +827,7 @@ class SubplotidValidator(BaseValidator):
 
     def validate_coerce(self, v):
         if v is None:
-            v = self.base
+            pass
         elif not isinstance(v, str):
             self.raise_invalid_val(v)
         else:
