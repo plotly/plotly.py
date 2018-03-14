@@ -16,7 +16,7 @@ from traitlets import Undefined
 
 from plotly import animation
 from plotly.basevalidators import CompoundValidator, CompoundArrayValidator, BaseDataValidator
-from plotly.callbacks import Points, BoxSelector, LassoSelector, InputState
+from plotly.callbacks import Points, BoxSelector, LassoSelector, InputDeviceState
 
 # from plotly.validators.layout import (XAxisValidator, YAxisValidator, GeoValidator,
 #                                       TernaryValidator, SceneValidator)
@@ -90,13 +90,13 @@ class BaseFigure:
 
         # Message States
         # --------------
-        self._relayout_in_process = False
+        self._layout_edit_in_process = False
         self._waiting_relayout_callbacks = []
-        self._last_relayout_msg_id = 0
+        self._last_layout_edit_id = 0
 
-        self._restyle_in_process = False
+        self._trace_edit_in_process = False
         self._waiting_restyle_callbacks = []
-        self._last_restyle_msg_id = 0
+        self._last_trace_edit_id = 0
 
         # View count
         # ----------
@@ -240,9 +240,9 @@ class BaseFigure:
             del orig_uids_post_removal[i]
 
         if delete_inds:
-            relayout_msg_id = self._last_relayout_msg_id + 1
-            self._last_relayout_msg_id = relayout_msg_id
-            self._relayout_in_process = True
+            relayout_msg_id = self._last_layout_edit_id + 1
+            self._last_layout_edit_id = relayout_msg_id
+            self._layout_edit_in_process = True
 
             for di in reversed(delete_inds):
                 del self._data[di]  # Modify in-place so we don't trigger serialization
@@ -265,11 +265,10 @@ class BaseFigure:
 
         if not all([i1 == i2 for i1, i2 in zip(new_inds, current_inds)]):
 
-            move_msg = [current_inds, new_inds]
-
-            if self._log_plotly_commands:
-                print('Plotly.moveTraces')
-                pprint(move_msg, indent=4)
+            move_msg = {
+                'current_trace_inds': current_inds,
+                'new_trace_inds': new_inds
+            }
 
             self._py2js_moveTraces = move_msg
             self._py2js_moveTraces = None
@@ -298,7 +297,7 @@ class BaseFigure:
         self._data_defaults = [_trace for i, _trace in sorted(zip(new_inds, traces_prop_defaults_post_removal))]
         self._data_objs = tuple(new_data)
 
-    def plotly_restyle(self, style, trace_indexes=None):
+    def plotly_restyle(self, style, trace_indexes=None, source_view_id=None):
         if trace_indexes is None:
             trace_indexes = list(range(len(self.data)))
 
@@ -308,7 +307,9 @@ class BaseFigure:
         restyle_msg = self._perform_restyle_dict(style, trace_indexes)
         if restyle_msg:
             self._dispatch_change_callbacks_restyle(restyle_msg, trace_indexes)
-            self._send_restyle_msg(restyle_msg, trace_indexes=trace_indexes)
+            self._send_restyle_msg(restyle_msg,
+                                   trace_indexes=trace_indexes,
+                                   source_view_id=source_view_id)
 
     def _perform_restyle_dict(self, style, trace_indexes):
         # Make sure trace_indexes is an array
@@ -431,25 +432,28 @@ class BaseFigure:
                 changed_paths = p['changed_paths']
                 obj._dispatch_change_callbacks(changed_paths)
 
-    def _send_restyle_msg(self, style, trace_indexes=None):
+    def _send_restyle_msg(self, style,
+                          trace_indexes=None,
+                          source_view_id=None):
         if not isinstance(trace_indexes, (list, tuple)):
             trace_indexes = [trace_indexes]
 
         # Add and update message ids
-        relayout_msg_id = self._last_relayout_msg_id + 1
-        style['_relayout_msg_id'] = relayout_msg_id
-        self._last_relayout_msg_id = relayout_msg_id
-        self._relayout_in_process = True
+        layout_edit_id = self._last_layout_edit_id + 1
+        self._last_layout_edit_id = layout_edit_id
+        self._layout_edit_in_process = True
 
-        restyle_msg_id = self._last_restyle_msg_id + 1
-        style['_restyle_msg_id'] = restyle_msg_id
-        self._last_restyle_msg_id = restyle_msg_id
-        self._restyle_in_process = True
+        trace_edit_id = self._last_trace_edit_id + 1
+        self._last_trace_edit_id = trace_edit_id
+        self._trace_edit_in_process = True
 
-        restyle_msg = (style, trace_indexes)
-        if self._log_plotly_commands:
-            print('Plotly.restyle')
-            pprint(restyle_msg, indent=4)
+        restyle_msg = {
+            'restyle_data': style,
+            'restyle_traces': trace_indexes,
+            'trace_edit_id': trace_edit_id,
+            'layout_edit_id': layout_edit_id,
+            'source_view_id': source_view_id,
+        }
 
         self._py2js_restyle = restyle_msg
         self._py2js_restyle = None
@@ -490,30 +494,27 @@ class BaseFigure:
             trace._orphan_props.clear()
 
         # Update python side
-        self._data.extend(new_traces_data)  # append instead of assignment so we don't trigger serialization
+        #  Use extend instead of assignment so we don't trigger serialization
+        self._data.extend(new_traces_data)
         self._data_defaults = self._data_defaults + [{} for trace in data]
         self._data_objs = self._data_objs + data
 
         # Update messages
-        relayout_msg_id = self._last_relayout_msg_id + 1
-        self._last_relayout_msg_id = relayout_msg_id
-        self._relayout_in_process = True
+        layout_edit_id = self._last_layout_edit_id + 1
+        self._last_layout_edit_id = layout_edit_id
+        self._layout_edit_in_process = True
 
-        restyle_msg_id = self._last_restyle_msg_id + 1
-        self._last_restyle_msg_id = restyle_msg_id
-        self._restyle_in_process = True
-
-        # Add message ids
-        for traces_data in new_traces_data:
-            traces_data['_relayout_msg_id'] = relayout_msg_id
-            traces_data['_restyle_msg_id'] = restyle_msg_id
+        trace_edit_id = self._last_trace_edit_id + 1
+        self._last_trace_edit_id = trace_edit_id
+        self._trace_edit_in_process = True
 
         # Send to front end
-        if self._log_plotly_commands:
-            print('Plotly.addTraces')
-            pprint(new_traces_data, indent=4)
+        add_traces_msg = {
+            'trace_data': new_traces_data,
+            'trace_edit_id': trace_edit_id,
+            'layout_edit_id': layout_edit_id
+        }
 
-        add_traces_msg = new_traces_data
         self._py2js_addTraces = add_traces_msg
         self._py2js_addTraces = None
 
@@ -591,26 +592,27 @@ class BaseFigure:
         else:
             self._batch_layout_commands[prop] = send_val
 
-    def _send_relayout_msg(self, layout):
+    def _send_relayout_msg(self, layout, source_view_id=None):
 
-        if self._log_plotly_commands:
-            print('Plotly.relayout')
-            pprint(layout, indent=4)
+        # Update layout edit message id
+        layout_edit_id = self._last_layout_edit_id + 1
+        self._last_layout_edit_id = layout_edit_id
 
-        # Add message id
-        msg_id = self._last_relayout_msg_id + 1
-        layout['_relayout_msg_id'] = msg_id
-        self._last_relayout_msg_id = msg_id
+        msg_data = {
+            'relayout_data': layout,
+            'layout_edit_id': layout_edit_id,
+            'source_view_id': source_view_id
+        }
 
-        self._py2js_relayout = layout
+        self._py2js_relayout = msg_data
         self._py2js_relayout = None
 
-
-    def plotly_relayout(self, layout):
+    def plotly_relayout(self, layout, source_view_id=None):
         relayout_msg = self._perform_relayout_dict(layout)
         if relayout_msg:
             self._dispatch_change_callbacks_relayout(relayout_msg)
-            self._send_relayout_msg(relayout_msg)
+            self._send_relayout_msg(relayout_msg,
+                                    source_view_id=source_view_id)
 
     def _perform_relayout_dict(self, relayout_data):
         relayout_msg = {}  # relayout data to send to JS side as Plotly.relayout()
@@ -724,7 +726,9 @@ class BaseFigure:
 
     # Update
     # ------
-    def plotly_update(self, style=None, layout=None, trace_indexes=None):
+    def plotly_update(self, style=None, layout=None,
+                      trace_indexes=None,
+                      source_view_id=None):
 
         restyle_msg, relayout_msg, trace_indexes = self._perform_update_dict(style=style,
                                                                              layout=layout,
@@ -738,7 +742,9 @@ class BaseFigure:
             self._dispatch_change_callbacks_relayout(relayout_msg)
 
         if restyle_msg or relayout_msg:
-            self._send_update_msg(restyle_msg, relayout_msg, trace_indexes)
+            self._send_update_msg(restyle_msg, relayout_msg,
+                                  trace_indexes,
+                                  source_view_id=source_view_id)
 
     def _perform_update_dict(self, style=None, layout=None, trace_indexes=None):
         if not style and not layout:
@@ -763,27 +769,31 @@ class BaseFigure:
         # pprint(self._traces_data)
         return restyle_msg, relayout_msg, trace_indexes
 
-    def _send_update_msg(self, style, layout, trace_indexes=None):
+    def _send_update_msg(self, style, layout,
+                         trace_indexes=None,
+                         source_view_id=None):
+
         if not isinstance(trace_indexes, (list, tuple)):
             trace_indexes = [trace_indexes]
 
         # Add restyle message id
-        restyle_msg_id = self._last_restyle_msg_id + 1
-        style['_restyle_msg_id'] = restyle_msg_id
-        self._last_restyle_msg_id = restyle_msg_id
-        self._restyle_in_process = True
+        trace_edit_id = self._last_trace_edit_id + 1
+        self._last_trace_edit_id = trace_edit_id
+        self._trace_edit_in_process = True
 
         # Add relayout message id
-        relayout_msg_id = self._last_relayout_msg_id + 1
-        layout['_relayout_msg_id'] = relayout_msg_id
-        self._last_relayout_msg_id = relayout_msg_id
-        self._relayout_in_process = True
+        layout_edit_id = self._last_layout_edit_id + 1
+        self._last_layout_edit_id = layout_edit_id
+        self._layout_edit_in_process = True
 
-        update_msg = (style, layout, trace_indexes)
-
-        if self._log_plotly_commands:
-            print('Plotly.update')
-            pprint(update_msg, indent=4)
+        update_msg = {
+            'style_data': style,
+            'layout_data': layout,
+            'style_traces': trace_indexes,
+            'trace_edit_id': trace_edit_id,
+            'layout_edit_id': layout_edit_id,
+            'source_view_id': source_view_id
+        }
 
         self._py2js_update = update_msg
         self._py2js_update = None
@@ -791,13 +801,13 @@ class BaseFigure:
     # Callbacks
     # ---------
     def on_relayout_completed(self, fn):
-        if self._relayout_in_process:
+        if self._layout_edit_in_process:
             self._waiting_relayout_callbacks.append(fn)
         else:
             fn()
 
     def on_restyle_completed(self, fn):
-        if self._restyle_in_process:
+        if self._trace_edit_in_process:
             self._waiting_restyle_callbacks.append(fn)
         else:
             fn()
@@ -956,36 +966,27 @@ class BaseFigure:
             trace_indexes = [trace_indexes]
 
         # Add restyle message id
-        restyle_msg_id = self._last_restyle_msg_id + 1
-        for style in styles:
-            style['_restyle_msg_id'] = restyle_msg_id
-
-        self._last_restyle_msg_id = restyle_msg_id
-        self._restyle_in_process = True
+        trace_edit_id = self._last_trace_edit_id + 1
+        self._last_trace_edit_id = trace_edit_id
+        self._trace_edit_in_process = True
 
         # Add relayout message id
-        relayout_msg_id = self._last_relayout_msg_id + 1
-        layout['_relayout_msg_id'] = relayout_msg_id
-        self._last_relayout_msg_id = relayout_msg_id
-        self._relayout_in_process = True
+        layout_edit_id = self._last_layout_edit_id + 1
+        self._last_layout_edit_id = layout_edit_id
+        self._layout_edit_in_process = True
 
-        animate_msg = [{'data': styles,
-                        'layout': layout,
-                        'traces': trace_indexes},
-                       animation_opts]
-
-        if self._log_plotly_commands:
-            print('Plotly.animate')
-            pprint(animate_msg, indent=4)
+        animate_msg = {
+            'style_data': styles,
+            'layout_data': layout,
+            'style_traces': trace_indexes,
+            'animation_opts': animation_opts,
+            'trace_edit_id': trace_edit_id,
+            'layout_edit_id': layout_edit_id,
+            'source_view_id': None
+        }
 
         self._py2js_animate = animate_msg
         self._py2js_animate = None
-
-        # Remove message ids
-        for style in styles:
-            style.pop('_restyle_msg_id')
-
-        layout.pop('_relayout_msg_id')
 
     # Exports
     # -------
@@ -1906,7 +1907,7 @@ class BaseTraceType(BaseTraceHierarchyType):
     # Hover
     # -----
     def on_hover(self,
-                 callback: typ.Callable[['BaseTraceType', Points, InputState], None],
+                 callback: typ.Callable[['BaseTraceType', Points, InputDeviceState], None],
                  append=False):
         """
         Register callback to be called when the user hovers over a point from this trace
@@ -1932,32 +1933,32 @@ class BaseTraceType(BaseTraceHierarchyType):
         if callback:
             self._hover_callbacks.append(callback)
 
-    def _dispatch_on_hover(self, points: Points, state: InputState):
+    def _dispatch_on_hover(self, points: Points, state: InputDeviceState):
         for callback in self._hover_callbacks:
             callback(self, points, state)
 
     # Unhover
     # -------
-    def on_unhover(self, callback: typ.Callable[['BaseTraceType', Points, InputState], None], append=False):
+    def on_unhover(self, callback: typ.Callable[['BaseTraceType', Points, InputDeviceState], None], append=False):
         if not append:
             self._unhover_callbacks.clear()
 
         if callback:
             self._unhover_callbacks.append(callback)
 
-    def _dispatch_on_unhover(self, points: Points, state: InputState):
+    def _dispatch_on_unhover(self, points: Points, state: InputDeviceState):
         for callback in self._unhover_callbacks:
             callback(self, points, state)
 
     # Click
     # -----
-    def on_click(self, callback: typ.Callable[['BaseTraceType', Points, InputState], None], append=False):
+    def on_click(self, callback: typ.Callable[['BaseTraceType', Points, InputDeviceState], None], append=False):
         if not append:
             self._click_callbacks.clear()
         if callback:
             self._click_callbacks.append(callback)
 
-    def _dispatch_on_click(self, points: Points, state: InputState):
+    def _dispatch_on_click(self, points: Points, state: InputDeviceState):
         for callback in self._click_callbacks:
             callback(self, points, state)
 

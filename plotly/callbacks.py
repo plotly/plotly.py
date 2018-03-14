@@ -1,7 +1,7 @@
 import typing as typ
 
 
-class InputState:
+class InputDeviceState:
     def __init__(self, ctrl=None, alt=None, shift=None, meta=None, button=None, buttons=None, **_):
         self._ctrl = ctrl
         self._alt = alt
