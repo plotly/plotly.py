@@ -1,7 +1,9 @@
+from pprint import pprint
+
 import ipywidgets as widgets
 from traitlets import List, Unicode, Dict, observe, Integer, Undefined
 from plotly.basedatatypes import BaseFigure
-from plotly.callbacks import BoxSelector, LassoSelector, InputState, Points
+from plotly.callbacks import BoxSelector, LassoSelector, InputDeviceState, Points
 from plotly.serializers import custom_serializers
 
 
@@ -21,25 +23,28 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
     _data = List().tag(sync=True, **custom_serializers)
 
     # Python -> JS message properties
-    _py2js_addTraces = List(trait=Dict(),
-                            allow_none=True).tag(sync=True, **custom_serializers)
+    _py2js_addTraces = Dict(allow_none=True).tag(sync=True, **custom_serializers)
 
-    _py2js_restyle = List(allow_none=True).tag(sync=True, **custom_serializers)
+    _py2js_restyle = Dict(allow_none=True).tag(sync=True, **custom_serializers)
     _py2js_relayout = Dict(allow_none=True).tag(sync=True, **custom_serializers)
-    _py2js_update = List(allow_none=True).tag(sync=True, **custom_serializers)
-    _py2js_animate = List(allow_none=True).tag(sync=True, **custom_serializers)
+    _py2js_update = Dict(allow_none=True).tag(sync=True, **custom_serializers)
+    _py2js_animate = Dict(allow_none=True).tag(sync=True, **custom_serializers)
 
     _py2js_deleteTraces = Dict(allow_none=True).tag(sync=True, **custom_serializers)
-    _py2js_moveTraces = List(allow_none=True).tag(sync=True, **custom_serializers)
+    _py2js_moveTraces = Dict(allow_none=True).tag(sync=True,
+                                                  **custom_serializers)
 
-    _py2js_removeLayoutProps = List(allow_none=True).tag(sync=True, **custom_serializers)
-    _py2js_removeStyleProps = List(allow_none=True).tag(sync=True, **custom_serializers)
+    _py2js_removeLayoutProps = Dict(allow_none=True).tag(sync=True,
+                                                         **custom_serializers)
+    _py2js_removeTraceProps = Dict(allow_none=True).tag(sync=True,
+                                                        **custom_serializers)
     _py2js_requestSvg = Unicode(allow_none=True).tag(sync=True)
 
     # JS -> Python message properties
-    _js2py_styleDelta = List(allow_none=True).tag(sync=True, **custom_serializers)
+    _js2py_traceDeltas = Dict(allow_none=True).tag(sync=True,
+                                                   **custom_serializers)
     _js2py_layoutDelta = Dict(allow_none=True).tag(sync=True, **custom_serializers)
-    _js2py_restyle = List(allow_none=True).tag(sync=True, **custom_serializers)
+    _js2py_restyle = Dict(allow_none=True).tag(sync=True, **custom_serializers)
     _js2py_relayout = Dict(allow_none=True).tag(sync=True, **custom_serializers)
     _js2py_update = Dict(allow_none=True).tag(sync=True, **custom_serializers)
 
@@ -47,8 +52,8 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
     _js2py_pointsCallback = Dict(allow_none=True).tag(sync=True, **custom_serializers)
 
     # Message tracking
-    _last_relayout_msg_id = Integer(0).tag(sync=True)
-    _last_restyle_msg_id = Integer(0).tag(sync=True)
+    _last_layout_edit_id = Integer(0).tag(sync=True)
+    _last_trace_edit_id = Integer(0).tag(sync=True)
 
     # Constructor
     # -----------
@@ -72,35 +77,39 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         self.on_msg(self._handler_messages)
 
     # ### Trait methods ###
-    @observe('_js2py_styleDelta')
-    def handler_plotly_styleDelta(self, change):
-        deltas = change['new']
-        self._js2py_styleDelta = None
+    @observe('_js2py_traceDeltas')
+    def handler_plotly_traceDeltas(self, change):
 
-        if not deltas:
+        # Unpack message
+        msg_data = change['new']
+
+        if not msg_data:
             return
 
-        msg_id = deltas[0].get('_restyle_msg_id', None)
-        # print(f'styleDelta: {msg_id} == {self._last_restyle_msg_id}')
-        if msg_id == self._last_restyle_msg_id:
-            for delta in deltas:
-                trace_uid = delta['uid']
+        trace_deltas = msg_data['trace_deltas']
+        trace_edit_id = msg_data['trace_edit_id']
+        self._js2py_traceDeltas = None
 
-                # Remove message id
-                # pprint(delta)
-                # print('Processing styleDelta')
+        # print(f'traceDeltas: {trace_edit_id} == {self._last_trace_edit_id}')
+        if trace_edit_id == self._last_trace_edit_id:
+            for delta in trace_deltas:
+                trace_uid = delta['uid']
 
                 trace_uids = [trace.uid for trace in self.data]
                 trace_index = trace_uids.index(trace_uid)
                 uid_trace = self.data[trace_index]
                 delta_transform = BaseFigure._transform_data(uid_trace._prop_defaults, delta)
 
-                removed_props = self._remove_overlapping_props(uid_trace._props, uid_trace._prop_defaults)
+                remove_props = self._remove_overlapping_props(uid_trace._props, uid_trace._prop_defaults)
 
-                if removed_props:
-                    # print(f'Removed_props: {removed_props}')
-                    self._py2js_removeStyleProps = [removed_props, trace_index]
-                    self._py2js_removeStyleProps = None
+                if remove_props:
+                    # print(f'Removed_props: {remove_props}')
+                    remove_trace_props_msg = {
+                        'remove_trace': trace_index,
+                        'remove_props': remove_props
+                    }
+                    self._py2js_removeTraceProps = remove_trace_props_msg
+                    self._py2js_removeTraceProps = None
 
                 # print(delta_transform)
                 self._dispatch_change_callbacks_restyle(delta_transform, [trace_index])
@@ -118,7 +127,12 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         if not restyle_msg:
             return
 
-        self.plotly_restyle(*restyle_msg)
+        style_data = restyle_msg['style_data']
+        style_traces = restyle_msg['style_traces']
+        source_view_id = restyle_msg['source_view_id']
+        self.plotly_restyle(style=style_data,
+                            trace_indexes=style_traces,
+                            source_view_id=source_view_id)
 
     @observe('_js2py_update')
     def handler_js2py_update(self, change):
@@ -131,34 +145,47 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         # print('Update (JS->Py):')
         # pprint(update_msg)
 
-        style = update_msg['data'][0]
-        trace_indexes = update_msg['data'][1]
-        layout = update_msg['layout']
+        style = update_msg['style_data']
+        trace_indexes = update_msg['style_traces']
+        layout = update_msg['layout_data']
+        source_view_id = update_msg['source_view_id']
 
-        self.plotly_update(style=style, layout=layout, trace_indexes=trace_indexes)
+        self.plotly_update(style=style, layout=layout,
+                           trace_indexes=trace_indexes,
+                           source_view_id=source_view_id)
 
     @observe('_js2py_layoutDelta')
     def handler_plotly_layoutDelta(self, change):
-        delta = change['new']
+
+        # Unpack message
+        msg_data = change['new']
+
         self._js2py_layoutDelta = None
 
-        if not delta:
+        if not msg_data:
             return
 
-        msg_id = delta.get('_relayout_msg_id')
-        # print(f'layoutDelta: {msg_id} == {self._last_relayout_msg_id}')
-        if msg_id == self._last_relayout_msg_id:
+        layout_delta = msg_data['layout_delta']
+        layout_edit_id = msg_data['layout_edit_id']
+
+        # print(f'layoutDelta: {layout_edit_id} == {self._last_layout_edit_id}')
+        if layout_edit_id == self._last_layout_edit_id:
 
             # print('Processing layoutDelta')
-            # print('layoutDelta: {deltas}'.format(deltas=delta))
-            delta_transform = self._transform_data(self._layout_defaults, delta)
+            # print('layoutDelta: {deltas}'.format(deltas=layout_delta))
+            delta_transform = self._transform_data(self._layout_defaults, layout_delta)
             # print(f'delta_transform: {delta_transform}')
 
             # No relayout messages in process. Handle removing overlapping properties
             removed_props = self._remove_overlapping_props(self._layout, self._layout_defaults)
+
             if removed_props:
                 # print(f'Removed_props: {removed_props}')
-                self._py2js_removeLayoutProps = removed_props
+                remove_props_msg = {
+                    'remove_props': removed_props
+                }
+
+                self._py2js_removeLayoutProps = remove_props_msg
                 self._py2js_removeLayoutProps = None
 
             self._dispatch_change_callbacks_relayout(delta_transform)
@@ -169,20 +196,23 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
 
     @observe('_js2py_relayout')
     def handler_js2py_relayout(self, change):
-        relayout_data = change['new']
-        # print('Relayout (JS->Py):')
-        # pprint(relayout_data)
+        relayout_msg = change['new']
 
         self._js2py_relayout = None
 
-        if not relayout_data:
+        if not relayout_msg:
             return
 
+        relayout_data = relayout_msg['relayout_data']
+        source_view_id = relayout_msg['source_view_id']
+
         if 'lastInputTime' in relayout_data:
-            # Remove 'lastInputTime'. Seems to be an internal plotly property that is introduced for some plot types
+            # Remove 'lastInputTime'. Seems to be an internal plotly
+            # property that is introduced for some plot types
             relayout_data.pop('lastInputTime')
 
-        self.plotly_relayout(relayout_data)
+        self.plotly_relayout(layout=relayout_data,
+                             source_view_id=source_view_id)
 
     @observe('_js2py_pointsCallback')
     def handler_plotly_pointsCallback(self, change):
@@ -201,20 +231,21 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         if callback_data.get('selector', None):
             selector_data = callback_data['selector']
             selector_type = selector_data['type']
+            selector_state = selector_data['selector_state']
             if selector_type == 'box':
-                selector = BoxSelector(**selector_data)
+                selector = BoxSelector(**selector_state)
             elif selector_type == 'lasso':
-                selector = LassoSelector(**selector_data)
+                selector = LassoSelector(**selector_state)
             else:
                 raise ValueError('Unsupported selector type: %s' % selector_type)
         else:
             selector = None
 
-        # Build State Object
-        # ------------------
-        if callback_data.get('state', None):
-            state_data = callback_data['state']
-            state = InputState(**state_data)
+        # Build Input Device State Object
+        # -------------------------
+        if callback_data.get('device_state', None):
+            device_state_data = callback_data['device_state']
+            state = InputDeviceState(**device_state_data)
         else:
             state = None
 
@@ -230,8 +261,8 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
 
         for x, y, point_ind, trace_ind in zip(points_data['xs'],
                                               points_data['ys'],
-                                              points_data['pointNumbers'],
-                                              points_data['curveNumbers']):
+                                              points_data['point_indexes'],
+                                              points_data['trace_indexes']):
 
             trace_dict = trace_points[trace_ind]
             trace_dict['xs'].append(x)
@@ -251,6 +282,7 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
             elif event_type == 'plotly_unhover':
                 trace._dispatch_on_unhover(points, state)
             elif event_type == 'plotly_selected':
+                # TODO: check if state is valid for selections
                 trace._dispatch_on_selected(points, selector)
 
     # Custom Messages
