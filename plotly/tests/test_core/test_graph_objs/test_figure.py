@@ -16,7 +16,7 @@ class FigureTest(TestCase):
             'frames': []
         }
 
-        Figure(native_figure)
+        Figure(**native_figure)
         Figure()
 
     def test_access_top_level(self):
@@ -34,4 +34,5 @@ class FigureTest(TestCase):
         figure = Figure()
         figure.frames = [{}]
         with self.assertRaisesRegexp(exceptions.PlotlyDictKeyError, 'frames'):
-            figure.frames[0].frames = []
+            figure.to_plotly_json()['frames'][0]['frames'] = []
+            #figure.frames[0].frames = []
