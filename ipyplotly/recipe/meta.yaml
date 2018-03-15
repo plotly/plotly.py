@@ -1,0 +1,34 @@
+{% set name = "ipyplotly" %}
+{% set version = "0.1.0a2" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  path: ../
+
+requirements:
+  build:
+    - python
+    - setuptools
+
+  run:
+    - python >=3.5
+    - ipywidgets >=7.0
+    - numpy
+    - pandas >=0.20
+    - pillow >=4.2
+    - cairosvg >=2.0.0rc6
+    - plotly >=2.1
+
+build:
+  noarch: python
+
+test:
+  requires:
+    - pytest
+  imports:
+    - ipyplotly
+  source_files:
+    - test/
