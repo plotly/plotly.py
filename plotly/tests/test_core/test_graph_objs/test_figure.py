@@ -23,9 +23,9 @@ class FigureTest(TestCase):
 
         # Figure is special, we define top-level objects that always exist.
 
-        self.assertEqual(Figure().data, [])
-        self.assertEqual(Figure().layout, {})
-        self.assertEqual(Figure().frames, [])
+        self.assertEqual(Figure().data, ())
+        self.assertEqual(Figure().layout.to_plotly_json(), {})
+        self.assertEqual(Figure().frames, ())
 
     def test_nested_frames(self):
         with self.assertRaisesRegexp(exceptions.PlotlyDictKeyError, 'frames'):
