@@ -491,6 +491,9 @@ var FigureModel = widgets.DOMWidgetModel.extend({
         }
     },
 
+    /**
+     * Perform moveTraces operation on the model
+     */
     do_moveTraces: function () {
         console.log('Figure Model: do_moveTraces');
 
