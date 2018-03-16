@@ -16,8 +16,10 @@ from plotly.callbacks import Points, BoxSelector, LassoSelector, InputDeviceStat
 # from plotly.validators.layout import (XAxisValidator, YAxisValidator, GeoValidator,
 #                                       TernaryValidator, SceneValidator)
 
+from plotly.graph_objs.graph_objs import PlotlyBase
 
-class BaseFigure:
+
+class BaseFigure(PlotlyBase):
 
     # Constructor
     # -----------
@@ -1254,7 +1256,7 @@ class BaseFigure:
                              .format(typ=type(plotly_obj)))
 
 
-class BasePlotlyType:
+class BasePlotlyType(PlotlyBase):
     _validators = None
 
     # Defaults to help mocking
@@ -1267,6 +1269,17 @@ class BasePlotlyType:
         self._orphan_props = {}  # properties dict for use while object has no parent
         self._parent = None
         self._change_callbacks = {}  # type: typ.Dict[typ.Tuple, typ.Callable]
+
+    # test - add old PlotlyBase methods here
+    # eg. validate()
+    #def validate(self):
+    #    """Everything is *always* validated now. Keep for backwards compat."""
+    #    pass
+
+
+
+
+
 
     @property
     def plotly_name(self):

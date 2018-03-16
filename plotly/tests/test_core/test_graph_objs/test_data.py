@@ -31,7 +31,7 @@ def test_weird_instantiation():  # Python allows this...
 
 
 def test_default_scatter():
-    assert Data([{}]) == list([{'type': 'scatter'}])
+    assert Data([{}]) == list([{}])
 
 
 def test_dict_instantiation():

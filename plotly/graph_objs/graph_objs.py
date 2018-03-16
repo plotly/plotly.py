@@ -844,7 +844,7 @@ class Contours(dict):
     pass
 
 
-class Data(list):
+class Data(list, PlotlyBase):
     pass
 
 
