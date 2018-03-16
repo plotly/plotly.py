@@ -79,10 +79,6 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         # We map a layout_ipywidget property to the layout property of the ipywidget
         super().__init__(data=data, layout_plotly=layout)
 
-        # # Messages
-        # # --------
-        # self.on_msg(self._handler_messages)
-
     def save_image(self, filename, image_type=None, scale_factor=2):
         """
         Save figure to a static image file
