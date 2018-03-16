@@ -1,8 +1,8 @@
 {
   "name": "plotlywidget",
   "version": "0.1.0",
-  "description": "The plotly ipywidget library",
-  "author": "Jon Mease",
+  "description": "The plotly.py ipywidget library",
+  "author": "The plotly.py team",
   "main": "src/index.js",
   "repository": {
     "type": "git",
@@ -31,7 +31,7 @@
     "ify-loader": "^1.1.0"
   },
   "dependencies": {
-    "plotly.js": "^1.34.0",
+    "plotly.js": "^1.35.2",
     "@jupyter-widgets/base": "^1.0.4",
     "lodash": "^4.0"
   },

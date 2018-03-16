@@ -28,11 +28,15 @@ class FigureTest(TestCase):
         self.assertEqual(Figure().frames, ())
 
     def test_nested_frames(self):
-        with self.assertRaisesRegexp(exceptions.PlotlyDictKeyError, 'frames'):
+        with self.assertRaisesRegexp(ValueError, 'frames'):
             Figure({'frames': [{'frames': []}]})
 
         figure = Figure()
         figure.frames = [{}]
-        with self.assertRaisesRegexp(exceptions.PlotlyDictKeyError, 'frames'):
-            figure.to_plotly_json()['frames'][0]['frames'] = []
+        #with self.assertRaisesRegexp(exceptions.PlotlyDictKeyError, 'frames'):
+        #    figure.to_plotly_json()['frames'][0]['frames'] = []
             #figure.frames[0].frames = []
+
+        # jon's current thing
+        with self.assertRaisesRegexp(ValueError, 'frames'):
+            figure.frames[0].frames = []

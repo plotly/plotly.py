@@ -1,14 +1,9 @@
 import collections
-import numbers
-import os
 import re
 import typing as typ
-import uuid
 from contextlib import contextmanager
 from copy import deepcopy
-from importlib import import_module
 from pprint import pprint
-from urllib import parse
 
 import numpy as np
 from plotly.offline import plot as plotlypy_plot
@@ -16,9 +11,10 @@ from traitlets import Undefined
 
 from plotly import animation
 from plotly.basevalidators import CompoundValidator, CompoundArrayValidator, BaseDataValidator
-from plotly.callbacks import Points, BoxSelector, LassoSelector, InputState
-from plotly.validators.layout import (XAxisValidator, YAxisValidator, GeoValidator,
-                                      TernaryValidator, SceneValidator)
+from plotly.callbacks import Points, BoxSelector, LassoSelector, InputDeviceState
+
+# from plotly.validators.layout import (XAxisValidator, YAxisValidator, GeoValidator,
+#                                       TernaryValidator, SceneValidator)
 
 
 class BaseFigure:
@@ -29,6 +25,17 @@ class BaseFigure:
         super().__init__()
 
         layout = layout_plotly
+
+        # Handle case where data is a Figure or Figure-like dict
+        # ------------------------------------------------------
+        if isinstance(data, BaseFigure):
+            data, layout, frames = data.data, data.layout, data.frames
+
+        elif (isinstance(data, dict) and
+              ('data' in data or 'layout' in data or 'frames' in data)):
+            data, layout, frames = (data.get('data', None),
+                                    data.get('layout', None),
+                                    data.get('frames', None))
 
         # Traces
         # ------
@@ -78,13 +85,13 @@ class BaseFigure:
 
         # Message States
         # --------------
-        self._relayout_in_process = False
+        self._layout_edit_in_process = False
         self._waiting_relayout_callbacks = []
-        self._last_relayout_msg_id = 0
+        self._last_layout_edit_id = 0
 
-        self._restyle_in_process = False
+        self._trace_edit_in_process = False
         self._waiting_restyle_callbacks = []
-        self._last_restyle_msg_id = 0
+        self._last_trace_edit_id = 0
 
         # View count
         # ----------
@@ -128,8 +135,51 @@ class BaseFigure:
         else:
             raise KeyError(prop)
 
+    def __iter__(self):
+        return iter(('data', 'layout', 'frames'))
+
     def __contains__(self, prop):
         return prop in ('data', 'layout', 'frames')
+
+    def __eq__(self, other):
+        if not isinstance(other, BaseFigure):
+            # Require objects to both be BaseFigure instances
+            return False
+        else:
+            # Compare plotly_json representations
+
+            # Use _vals_equal instead of `==` to handle cases where
+            # underlying dicts contain numpy arrays
+            return BasePlotlyType._vals_equal(
+                self.to_plotly_json(),
+                other.to_plotly_json())
+
+    def update(self, dict1=None, **dict2):
+        """
+        Update properties of object with dict1 and then dict2.
+
+        This recursively updates the structure of the original
+        object with the new entries in the second and third objects. This
+        allows users to update with large, nested structures.
+
+        Note, because the dict2 packs up all the keyword arguments, you can
+        specify the changes as a list of keyword agruments.
+
+        Parameters
+        ----------
+        dict1 : dict
+            Dictionary of properties to be updated
+        dict2 :
+
+        Returns
+        -------
+        None
+        """
+        with self.batch_update():
+            for d in [dict1, dict2]:
+                if d:
+                    for k, v in d.items():
+                        BaseFigure._perform_update(self[k], v)
 
     # Data
     # ----
@@ -140,27 +190,44 @@ class BaseFigure:
     @data.setter
     def data(self, new_data):
 
-        # Validate new_data
-        new_data = self._data_validator.validate_coerce(new_data)
+        err_header = ('The data property of a figure may only be assigned '
+                      'a list or tuple that contains a permutation of a '
+                      'subset of itself\n')
 
+        if not isinstance(new_data, (list, tuple)):
+            err_msg = (err_header +
+                       '    Received value with type {typ}'
+                       .format(typ=type(new_data)))
+            raise ValueError(err_msg)
+
+        for trace in new_data:
+            if not isinstance(trace, BaseTraceType):
+                err_msg = (err_header +
+                           '    Received element value of type {typ}'
+                           .format(typ=type(trace)))
+                raise ValueError(err_msg)
 
         orig_uids = [_trace['uid'] for _trace in self._data]
         new_uids = [trace.uid for trace in new_data]
 
         invalid_uids = set(new_uids).difference(set(orig_uids))
         if invalid_uids:
-            raise ValueError(('The trace property of a figure may only be assigned to '
-                              'a permutation of a subset of itself\n'
-                              '    Invalid trace(s) with uid(s): {invalid_uids}').format(invalid_uids=invalid_uids))
+            err_msg = (err_header +
+                       '    Invalid trace(s) with uid(s): {invalid_uids}'
+                       .format(invalid_uids=invalid_uids))
+
+            raise ValueError(err_msg)
 
         # Check for duplicates
         uid_counter = collections.Counter(new_uids)
         duplicate_uids = [uid for uid, count in uid_counter.items() if count > 1]
         if duplicate_uids:
-            raise ValueError(('The trace property of a figure may not be assigned '
-                              'multiple copies of a trace\n'
-                              '    Duplicate trace uid(s): {duplicate_uids}'
-                              ).format(duplicate_uids=duplicate_uids))
+            err_msg = (
+                    err_header +
+                    '    Received duplicated traces with uid(s): ' +
+                    '{duplicate_uids}'.format(duplicate_uids=duplicate_uids))
+
+            raise ValueError(err_msg)
 
         # Compute traces to remove
         remove_uids = set(orig_uids).difference(set(new_uids))
@@ -185,9 +252,9 @@ class BaseFigure:
             del orig_uids_post_removal[i]
 
         if delete_inds:
-            relayout_msg_id = self._last_relayout_msg_id + 1
-            self._last_relayout_msg_id = relayout_msg_id
-            self._relayout_in_process = True
+            relayout_msg_id = self._last_layout_edit_id + 1
+            self._last_layout_edit_id = relayout_msg_id
+            self._layout_edit_in_process = True
 
             for di in reversed(delete_inds):
                 del self._data[di]  # Modify in-place so we don't trigger serialization
@@ -210,11 +277,10 @@ class BaseFigure:
 
         if not all([i1 == i2 for i1, i2 in zip(new_inds, current_inds)]):
 
-            move_msg = [current_inds, new_inds]
-
-            if self._log_plotly_commands:
-                print('Plotly.moveTraces')
-                pprint(move_msg, indent=4)
+            move_msg = {
+                'current_trace_inds': current_inds,
+                'new_trace_inds': new_inds
+            }
 
             self._py2js_moveTraces = move_msg
             self._py2js_moveTraces = None
@@ -243,7 +309,7 @@ class BaseFigure:
         self._data_defaults = [_trace for i, _trace in sorted(zip(new_inds, traces_prop_defaults_post_removal))]
         self._data_objs = tuple(new_data)
 
-    def restyle(self, style, trace_indexes=None):
+    def plotly_restyle(self, style, trace_indexes=None, source_view_id=None):
         if trace_indexes is None:
             trace_indexes = list(range(len(self.data)))
 
@@ -253,7 +319,9 @@ class BaseFigure:
         restyle_msg = self._perform_restyle_dict(style, trace_indexes)
         if restyle_msg:
             self._dispatch_change_callbacks_restyle(restyle_msg, trace_indexes)
-            self._send_restyle_msg(restyle_msg, trace_indexes=trace_indexes)
+            self._send_restyle_msg(restyle_msg,
+                                   trace_indexes=trace_indexes,
+                                   source_view_id=source_view_id)
 
     def _perform_restyle_dict(self, style, trace_indexes):
         # Make sure trace_indexes is an array
@@ -376,25 +444,28 @@ class BaseFigure:
                 changed_paths = p['changed_paths']
                 obj._dispatch_change_callbacks(changed_paths)
 
-    def _send_restyle_msg(self, style, trace_indexes=None):
+    def _send_restyle_msg(self, style,
+                          trace_indexes=None,
+                          source_view_id=None):
         if not isinstance(trace_indexes, (list, tuple)):
             trace_indexes = [trace_indexes]
 
         # Add and update message ids
-        relayout_msg_id = self._last_relayout_msg_id + 1
-        style['_relayout_msg_id'] = relayout_msg_id
-        self._last_relayout_msg_id = relayout_msg_id
-        self._relayout_in_process = True
+        layout_edit_id = self._last_layout_edit_id + 1
+        self._last_layout_edit_id = layout_edit_id
+        self._layout_edit_in_process = True
 
-        restyle_msg_id = self._last_restyle_msg_id + 1
-        style['_restyle_msg_id'] = restyle_msg_id
-        self._last_restyle_msg_id = restyle_msg_id
-        self._restyle_in_process = True
+        trace_edit_id = self._last_trace_edit_id + 1
+        self._last_trace_edit_id = trace_edit_id
+        self._trace_edit_in_process = True
 
-        restyle_msg = (style, trace_indexes)
-        if self._log_plotly_commands:
-            print('Plotly.restyle')
-            pprint(restyle_msg, indent=4)
+        restyle_msg = {
+            'restyle_data': style,
+            'restyle_traces': trace_indexes,
+            'trace_edit_id': trace_edit_id,
+            'layout_edit_id': layout_edit_id,
+            'source_view_id': source_view_id,
+        }
 
         self._py2js_restyle = restyle_msg
         self._py2js_restyle = None
@@ -435,30 +506,27 @@ class BaseFigure:
             trace._orphan_props.clear()
 
         # Update python side
-        self._data.extend(new_traces_data)  # append instead of assignment so we don't trigger serialization
+        #  Use extend instead of assignment so we don't trigger serialization
+        self._data.extend(new_traces_data)
         self._data_defaults = self._data_defaults + [{} for trace in data]
         self._data_objs = self._data_objs + data
 
         # Update messages
-        relayout_msg_id = self._last_relayout_msg_id + 1
-        self._last_relayout_msg_id = relayout_msg_id
-        self._relayout_in_process = True
+        layout_edit_id = self._last_layout_edit_id + 1
+        self._last_layout_edit_id = layout_edit_id
+        self._layout_edit_in_process = True
 
-        restyle_msg_id = self._last_restyle_msg_id + 1
-        self._last_restyle_msg_id = restyle_msg_id
-        self._restyle_in_process = True
-
-        # Add message ids
-        for traces_data in new_traces_data:
-            traces_data['_relayout_msg_id'] = relayout_msg_id
-            traces_data['_restyle_msg_id'] = restyle_msg_id
+        trace_edit_id = self._last_trace_edit_id + 1
+        self._last_trace_edit_id = trace_edit_id
+        self._trace_edit_in_process = True
 
         # Send to front end
-        if self._log_plotly_commands:
-            print('Plotly.addTraces')
-            pprint(new_traces_data, indent=4)
+        add_traces_msg = {
+            'trace_data': new_traces_data,
+            'trace_edit_id': trace_edit_id,
+            'layout_edit_id': layout_edit_id
+        }
 
-        add_traces_msg = new_traces_data
         self._py2js_addTraces = add_traces_msg
         self._py2js_addTraces = None
 
@@ -466,7 +534,13 @@ class BaseFigure:
 
     def _get_child_props(self, child):
         try:
-            trace_index = self.data.index(child)
+            trace_index_list = [i for i, curr_child in enumerate(self.data)
+                                if curr_child is child]
+            if not trace_index_list:
+                raise ValueError('Invalid child')
+
+            trace_index = trace_index_list[0]
+
         except ValueError as _:
             trace_index = None
 
@@ -530,26 +604,27 @@ class BaseFigure:
         else:
             self._batch_layout_commands[prop] = send_val
 
-    def _send_relayout_msg(self, layout):
+    def _send_relayout_msg(self, layout, source_view_id=None):
 
-        if self._log_plotly_commands:
-            print('Plotly.relayout')
-            pprint(layout, indent=4)
+        # Update layout edit message id
+        layout_edit_id = self._last_layout_edit_id + 1
+        self._last_layout_edit_id = layout_edit_id
 
-        # Add message id
-        msg_id = self._last_relayout_msg_id + 1
-        layout['_relayout_msg_id'] = msg_id
-        self._last_relayout_msg_id = msg_id
+        msg_data = {
+            'relayout_data': layout,
+            'layout_edit_id': layout_edit_id,
+            'source_view_id': source_view_id
+        }
 
-        self._py2js_relayout = layout
+        self._py2js_relayout = msg_data
         self._py2js_relayout = None
 
-
-    def relayout(self, layout):
+    def plotly_relayout(self, layout, source_view_id=None):
         relayout_msg = self._perform_relayout_dict(layout)
         if relayout_msg:
             self._dispatch_change_callbacks_relayout(relayout_msg)
-            self._send_relayout_msg(relayout_msg)
+            self._send_relayout_msg(relayout_msg,
+                                    source_view_id=source_view_id)
 
     def _perform_relayout_dict(self, relayout_data):
         relayout_msg = {}  # relayout data to send to JS side as Plotly.relayout()
@@ -663,7 +738,9 @@ class BaseFigure:
 
     # Update
     # ------
-    def update(self, style=None, layout=None, trace_indexes=None):
+    def plotly_update(self, style=None, layout=None,
+                      trace_indexes=None,
+                      source_view_id=None):
 
         restyle_msg, relayout_msg, trace_indexes = self._perform_update_dict(style=style,
                                                                              layout=layout,
@@ -677,7 +754,9 @@ class BaseFigure:
             self._dispatch_change_callbacks_relayout(relayout_msg)
 
         if restyle_msg or relayout_msg:
-            self._send_update_msg(restyle_msg, relayout_msg, trace_indexes)
+            self._send_update_msg(restyle_msg, relayout_msg,
+                                  trace_indexes,
+                                  source_view_id=source_view_id)
 
     def _perform_update_dict(self, style=None, layout=None, trace_indexes=None):
         if not style and not layout:
@@ -702,27 +781,31 @@ class BaseFigure:
         # pprint(self._traces_data)
         return restyle_msg, relayout_msg, trace_indexes
 
-    def _send_update_msg(self, style, layout, trace_indexes=None):
+    def _send_update_msg(self, style, layout,
+                         trace_indexes=None,
+                         source_view_id=None):
+
         if not isinstance(trace_indexes, (list, tuple)):
             trace_indexes = [trace_indexes]
 
         # Add restyle message id
-        restyle_msg_id = self._last_restyle_msg_id + 1
-        style['_restyle_msg_id'] = restyle_msg_id
-        self._last_restyle_msg_id = restyle_msg_id
-        self._restyle_in_process = True
+        trace_edit_id = self._last_trace_edit_id + 1
+        self._last_trace_edit_id = trace_edit_id
+        self._trace_edit_in_process = True
 
         # Add relayout message id
-        relayout_msg_id = self._last_relayout_msg_id + 1
-        layout['_relayout_msg_id'] = relayout_msg_id
-        self._last_relayout_msg_id = relayout_msg_id
-        self._relayout_in_process = True
+        layout_edit_id = self._last_layout_edit_id + 1
+        self._last_layout_edit_id = layout_edit_id
+        self._layout_edit_in_process = True
 
-        update_msg = (style, layout, trace_indexes)
-
-        if self._log_plotly_commands:
-            print('Plotly.update')
-            pprint(update_msg, indent=4)
+        update_msg = {
+            'style_data': style,
+            'layout_data': layout,
+            'style_traces': trace_indexes,
+            'trace_edit_id': trace_edit_id,
+            'layout_edit_id': layout_edit_id,
+            'source_view_id': source_view_id
+        }
 
         self._py2js_update = update_msg
         self._py2js_update = None
@@ -730,13 +813,13 @@ class BaseFigure:
     # Callbacks
     # ---------
     def on_relayout_completed(self, fn):
-        if self._relayout_in_process:
+        if self._layout_edit_in_process:
             self._waiting_relayout_callbacks.append(fn)
         else:
             fn()
 
     def on_restyle_completed(self, fn):
-        if self._restyle_in_process:
+        if self._trace_edit_in_process:
             self._waiting_restyle_callbacks.append(fn)
         else:
             fn()
@@ -783,7 +866,7 @@ class BaseFigure:
 
     def _send_batch_update(self):
         style, layout, trace_indexes = self._build_update_params_from_batch()
-        self.update(style=style, layout=layout, trace_indexes=trace_indexes)
+        self.plotly_update(style=style, layout=layout, trace_indexes=trace_indexes)
         self._batch_layout_commands.clear()
         self._batch_style_commands.clear()
 
@@ -895,36 +978,27 @@ class BaseFigure:
             trace_indexes = [trace_indexes]
 
         # Add restyle message id
-        restyle_msg_id = self._last_restyle_msg_id + 1
-        for style in styles:
-            style['_restyle_msg_id'] = restyle_msg_id
-
-        self._last_restyle_msg_id = restyle_msg_id
-        self._restyle_in_process = True
+        trace_edit_id = self._last_trace_edit_id + 1
+        self._last_trace_edit_id = trace_edit_id
+        self._trace_edit_in_process = True
 
         # Add relayout message id
-        relayout_msg_id = self._last_relayout_msg_id + 1
-        layout['_relayout_msg_id'] = relayout_msg_id
-        self._last_relayout_msg_id = relayout_msg_id
-        self._relayout_in_process = True
+        layout_edit_id = self._last_layout_edit_id + 1
+        self._last_layout_edit_id = layout_edit_id
+        self._layout_edit_in_process = True
 
-        animate_msg = [{'data': styles,
-                        'layout': layout,
-                        'traces': trace_indexes},
-                       animation_opts]
-
-        if self._log_plotly_commands:
-            print('Plotly.animate')
-            pprint(animate_msg, indent=4)
+        animate_msg = {
+            'style_data': styles,
+            'layout_data': layout,
+            'style_traces': trace_indexes,
+            'animation_opts': animation_opts,
+            'trace_edit_id': trace_edit_id,
+            'layout_edit_id': layout_edit_id,
+            'source_view_id': None
+        }
 
         self._py2js_animate = animate_msg
         self._py2js_animate = None
-
-        # Remove message ids
-        for style in styles:
-            style.pop('_restyle_msg_id')
-
-        layout.pop('_relayout_msg_id')
 
     # Exports
     # -------
@@ -960,106 +1034,6 @@ class BaseFigure:
             data['layout']['width'] = self.layout.width
 
         plotlypy_plot(data, filename=filename, show_link=False, auto_open=auto_open, validate=False)
-
-    def save_image(self, filename, image_type=None, scale_factor=2):
-        """
-        Save figure to a static image file
-
-        Parameters
-        ----------
-        filename : str
-            Image output file name
-        image_type : str
-            Image file type. One of: 'svg', 'png', 'pdf', or 'ps'. If not set, file type
-            is inferred from the filename extension
-        scale_factor : number
-            (For png image type) Factor by which to increase the number of pixels in each
-            dimension. A scale factor of 1 will result in a image with pixel dimensions
-            (layout.width, layout.height).  A scale factor of 2 will result in an image
-            with dimensions (2*layout.width, 2*layout.height), doubling image's DPI.
-            (Default 2)
-        """
-
-        # Validate / infer image_type
-        supported_image_types = ['svg', 'png', 'pdf', 'ps']
-        cairo_image_types = ['png', 'pdf', 'ps']
-        supported_types_csv = ', '.join(supported_image_types)
-
-        if not image_type:
-            # Infer image type from extension
-            _, extension = os.path.splitext(filename)
-
-            if not extension:
-                raise ValueError('No image_type specified and file extension has no extension '
-                                 'from which to infer an image type '
-                                 'Supported image types are: {image_types}'
-                                 .format(image_types=supported_types_csv))
-
-            image_type = extension[1:]
-
-        image_type = image_type.lower()
-        if image_type not in supported_image_types:
-            raise ValueError("Unsupported image type '{image_type}'\n"
-                             "Supported image types are: {image_types}"
-                             .format(image_type=image_type,
-                                     image_types=supported_types_csv))
-
-        # Validate cairo dependency
-        if image_type in cairo_image_types:
-            # Check whether we have cairosvg available
-            try:
-                import_module('cairosvg')
-            except ModuleNotFoundError:
-                raise ImportError('Exporting to {image_type} requires cairosvg'
-                                  .format(image_type=image_type))
-
-        # Validate scale_factor
-        if not isinstance(scale_factor, numbers.Number) or scale_factor <= 0:
-            raise ValueError('scale_factor must be a positive number.\n'
-                             '    Received: {scale_factor}'.format(scale_factor=scale_factor))
-
-        req_id = str(uuid.uuid1())
-
-        # Register request
-        self._svg_requests[req_id] = {'filename': filename,
-                                      'image_type': image_type,
-                                      'scale_factor': scale_factor}
-
-        self._py2js_requestSvg = req_id
-        self._py2js_requestSvg = None
-
-    def _do_save_image(self, req_id, svg_uri):
-        req_info = self._svg_requests.pop(req_id, None)
-        if not req_info:
-            return
-
-        # Remove svg header
-        if not svg_uri.startswith('data:image/svg+xml,'):
-            raise ValueError('Invalid svg data URI')
-
-        svg = svg_uri.replace('data:image/svg+xml,', '')
-
-        # Unquote characters (e.g. '%3Csvg%20' -> '<svg ')
-        svg_bytes = parse.unquote(svg).encode('utf-8')
-        filename = req_info['filename']
-        image_type = req_info['image_type']
-        scale_factor = req_info['scale_factor']
-        if image_type == 'svg':
-            with open(filename, 'wb') as f:
-                f.write(svg_bytes)
-        else:
-            # We already made sure cairosvg is available in save_image
-            cairosvg = import_module('cairosvg')
-
-            if image_type == 'png':
-                cairosvg.svg2png(
-                    bytestring=svg_bytes, write_to=filename, scale=scale_factor)
-            elif image_type == 'pdf':
-                cairosvg.svg2pdf(
-                    bytestring=svg_bytes, write_to=filename)
-            elif image_type == 'ps':
-                cairosvg.svg2ps(
-                    bytestring=svg_bytes, write_to=filename)
 
     # Static helpers
     # --------------
@@ -1151,9 +1125,10 @@ class BaseFigure:
         return removed
 
     @staticmethod
-    def transform_data(to_data, from_data, should_remove=True, relayout_path=()):
+    def _transform_data(to_data, from_data, should_remove=True, relayout_path=()):
         """
-        Transform to_data into from_data and return relayout style description of transformation
+        Transform to_data into from_data and return relayout-style
+        description of transformation
 
         Parameters
         ----------
@@ -1178,7 +1153,7 @@ class BaseFigure:
 
                     input_val = to_data[from_prop]
                     relayout_terms.update(
-                        BaseFigure.transform_data(
+                        BaseFigure._transform_data(
                             input_val,
                             from_val,
                             should_remove=should_remove,
@@ -1207,7 +1182,7 @@ class BaseFigure:
                 input_val = to_data[i]
                 if input_val is not None and isinstance(from_val, dict) or BaseFigure._is_object_list(from_val):
                     relayout_terms.update(
-                        BaseFigure.transform_data(
+                        BaseFigure._transform_data(
                             input_val,
                             from_val,
                             should_remove=should_remove,
@@ -1219,6 +1194,65 @@ class BaseFigure:
 
         return relayout_terms
 
+    @staticmethod
+    def _perform_update(plotly_obj, update_obj):
+        """
+        Helper to support the update() methods on :class:`BaseFigure` and
+        :class:`BasePlotlyType`
+
+        Parameters
+        ----------
+        plotly_obj : Union[BasePlotlyType, Tuple[BasePlotlyType]]
+            Object to up updated
+        update_obj : Union[dict, List[dict], Tuple[dict]]
+            When ``plotly_obj`` is an instance of :class:`BasePlotlyType`,
+            ``update_obj`` should be a dict
+
+            When ``plotly_obj`` is a tuple of instances of
+            :class:`BasePlotlyType`, ``update_obj`` should be a tuple or list
+            of dicts
+        """
+
+        if update_obj is None:
+            # Nothing to do
+            return
+        elif isinstance(plotly_obj, BasePlotlyType):
+
+            # Handle invalid properties
+            # -------------------------
+            invalid_props = [k for k in update_obj
+                             if k not in plotly_obj._validators]
+
+            plotly_obj._raise_on_invalid_property_error(*invalid_props)
+
+            # Process valid properties
+            # ------------------------
+            for key in update_obj:
+                val = update_obj[key]
+                validator = plotly_obj._validators[key]
+
+                if isinstance(validator, CompoundValidator):
+                    plotly_obj[key].update(val)
+                else:
+                    plotly_obj[key] = val
+
+        elif isinstance(plotly_obj, tuple):
+
+            # If update_obj is a dict, wrap in a list
+            if not isinstance(update_obj, (tuple, list)):
+                update_obj = [update_obj]
+
+            if len(update_obj) == 0:
+                # Nothing to do
+                return
+            else:
+                for i, plotly_element in enumerate(plotly_obj):
+                    update_element = update_obj[i % len(update_obj)]
+                    BaseFigure._perform_update(plotly_element, update_element)
+        else:
+            raise ValueError('Unexpected plotly object with type {typ}'
+                             .format(typ=type(plotly_obj)))
+
 
 class BasePlotlyType:
     _validators = None
@@ -1227,7 +1261,7 @@ class BasePlotlyType:
     def __init__(self, plotly_name, **kwargs):
 
         self._plotly_name = plotly_name
-        self._raise_on_invalid_property_error(**kwargs)
+        self._raise_on_invalid_property_error(*kwargs.keys())
         self._validators = {}
         self._compound_props = {}
         self._orphan_props = {}  # properties dict for use while object has no parent
@@ -1252,10 +1286,10 @@ class BasePlotlyType:
             super().__setattr__(prop, value)
         else:
             # Raise error on unknown public properties
-            self._raise_on_invalid_property_error(**{prop: value})
+            self._raise_on_invalid_property_error(prop)
 
-    def _raise_on_invalid_property_error(self, **kwargs):
-        invalid_props = list(kwargs.keys())
+    def _raise_on_invalid_property_error(self, *args):
+        invalid_props = args
         if invalid_props:
             if len(invalid_props) == 1:
                 prop_str = 'property'
@@ -1287,7 +1321,7 @@ class BasePlotlyType:
             return self.parent._get_child_props(self)
 
     def to_plotly_json(self):
-        return deepcopy(self._props)
+        return deepcopy(BaseFigure._remove_underscore_keys(self._props))
 
     def _init_props(self):
         # Ensure that _data is initialized.
@@ -1369,6 +1403,25 @@ class BasePlotlyType:
     def parent(self):
         return self._parent
 
+    @property
+    def figure(self):
+        """
+        Reference to the top-level Figure or FigureWidget that this object
+        belongs to. None if the object does not below to a Figure
+
+        Returns
+        -------
+        Union[BaseFigure, None]
+        """
+        top_parent = self
+        while top_parent is not None:
+            if isinstance(top_parent, BaseFigure):
+                break
+            else:
+                top_parent = top_parent.parent
+
+        return top_parent
+
     def __getitem__(self, prop):
         if isinstance(prop, tuple):
             res = self
@@ -1394,7 +1447,7 @@ class BasePlotlyType:
 
     def __setitem__(self, key, value):
         if key not in self._validators:
-            raise KeyError(key)
+            self._raise_on_invalid_property_error(key)
 
         validator = self._validators[key]
 
@@ -1405,6 +1458,51 @@ class BasePlotlyType:
         else:
             # Simple property
             self._set_prop(key, value)
+
+    def __iter__(self):
+        return iter(self._validators.keys())
+
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            # Require objects to be of the same plotly type
+            return False
+        else:
+            # Compare plotly_json representations
+
+            # Use _vals_equal instead of `==` to handle cases where
+            # underlying dicts contain numpy arrays
+            return BasePlotlyType._vals_equal(
+                self.to_plotly_json(),
+                other.to_plotly_json())
+
+    def update(self, dict1=None, **dict2):
+        """
+        Update properties of object with dict1 and then dict2.
+
+        This recursively updates the structure of the original
+        object with the new entries in the second and third objects. This
+        allows users to update with large, nested structures.
+
+        Note, because the dict2 packs up all the keyword arguments, you can
+        specify the changes as a list of keyword agruments.
+
+        Parameters
+        ----------
+        dict1 : dict
+            Dictionary of properties to be updated
+        dict2 :
+
+        Returns
+        -------
+        None
+        """
+        if self.figure:
+            with self.figure.batch_update():
+                BaseFigure._perform_update(self, dict1)
+                BaseFigure._perform_update(self, dict2)
+        else:
+            BaseFigure._perform_update(self, dict1)
+            BaseFigure._perform_update(self, dict2)
 
     @property
     def _in_batch_mode(self):
@@ -1418,12 +1516,13 @@ class BasePlotlyType:
             # Handle recursive equality on lists and tuples
             return (isinstance(v2, (list, tuple)) and
                     len(v1) == len(v2) and
-                    all(BasePlotlyType._vals_equal(e1, e2) for e1, e2 in zip(v1, v2)))
+                    all(BasePlotlyType._vals_equal(e1, e2)
+                        for e1, e2 in zip(v1, v2)))
         elif isinstance(v1, dict):
             # Handle recursive equality on dicts
             return (isinstance(v2, dict) and
                     set(v1.keys()) == set(v2.keys()) and
-                    all(BasePlotlyType._vals_equal(v1[k], v2[k])) for k in v1)
+                    all(BasePlotlyType._vals_equal(v1[k], v2[k]) for k in v1))
         else:
             return v1 == v2
 
@@ -1569,7 +1668,7 @@ class BasePlotlyType:
     # Callbacks
     # ---------
     def _dispatch_change_callbacks(self, changed_paths):
-        # print(f'Change callback: {self.prop_name} - {changed_paths}')
+        # print(f'Change callback: {self.plotly_name} - {changed_paths}')
         changed_paths = set(changed_paths)
         # pprint(changed_paths)
         for callback_paths, callback in self._change_callbacks.items():
@@ -1621,14 +1720,23 @@ class BaseLayoutHierarchyType(BasePlotlyType):
 
 
 class BaseLayoutType(BaseLayoutHierarchyType):
+
+
     _subplotid_prop_names = ['xaxis', 'yaxis', 'geo', 'ternary', 'scene']
-    _subplotid_validators = {'xaxis': XAxisValidator,
-                             'yaxis': YAxisValidator,
-                             'geo': GeoValidator,
-                             'ternary': TernaryValidator,
-                             'scene': SceneValidator}
 
     _subplotid_prop_re = re.compile('(' + '|'.join(_subplotid_prop_names) + ')(\d+)')
+
+    @property
+    def _subplotid_validators(self):
+        from plotly.validators.layout import (XAxisValidator, YAxisValidator,
+                                              GeoValidator,
+                                              TernaryValidator, SceneValidator)
+
+        return {'xaxis': XAxisValidator,
+                'yaxis': YAxisValidator,
+                'geo': GeoValidator,
+                'ternary': TernaryValidator,
+                'scene': SceneValidator}
 
     def __init__(self, plotly_name, **kwargs):
         # Compute invalid kwargs. Pass to parent for error message
@@ -1650,7 +1758,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
 
         # Add validator
         if prop not in self._validators:
-            validator = self._subplotid_validators[subplot_prop](prop_name=prop)
+            validator = self._subplotid_validators[subplot_prop](plotly_name=prop)
             self._validators[prop] = validator
 
         # Import value
@@ -1711,7 +1819,7 @@ class BaseTraceType(BaseTraceHierarchyType):
     # Hover
     # -----
     def on_hover(self,
-                 callback: typ.Callable[['BaseTraceType', Points, InputState], None],
+                 callback: typ.Callable[['BaseTraceType', Points, InputDeviceState], None],
                  append=False):
         """
         Register callback to be called when the user hovers over a point from this trace
@@ -1737,32 +1845,32 @@ class BaseTraceType(BaseTraceHierarchyType):
         if callback:
             self._hover_callbacks.append(callback)
 
-    def _dispatch_on_hover(self, points: Points, state: InputState):
+    def _dispatch_on_hover(self, points: Points, state: InputDeviceState):
         for callback in self._hover_callbacks:
             callback(self, points, state)
 
     # Unhover
     # -------
-    def on_unhover(self, callback: typ.Callable[['BaseTraceType', Points, InputState], None], append=False):
+    def on_unhover(self, callback: typ.Callable[['BaseTraceType', Points, InputDeviceState], None], append=False):
         if not append:
             self._unhover_callbacks.clear()
 
         if callback:
             self._unhover_callbacks.append(callback)
 
-    def _dispatch_on_unhover(self, points: Points, state: InputState):
+    def _dispatch_on_unhover(self, points: Points, state: InputDeviceState):
         for callback in self._unhover_callbacks:
             callback(self, points, state)
 
     # Click
     # -----
-    def on_click(self, callback: typ.Callable[['BaseTraceType', Points, InputState], None], append=False):
+    def on_click(self, callback: typ.Callable[['BaseTraceType', Points, InputDeviceState], None], append=False):
         if not append:
             self._click_callbacks.clear()
         if callback:
             self._click_callbacks.append(callback)
 
-    def _dispatch_on_click(self, points: Points, state: InputState):
+    def _dispatch_on_click(self, points: Points, state: InputDeviceState):
         for callback in self._click_callbacks:
             callback(self, points, state)
 

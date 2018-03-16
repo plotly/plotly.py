@@ -827,7 +827,7 @@ class SubplotidValidator(BaseValidator):
 
     def validate_coerce(self, v):
         if v is None:
-            v = self.base
+            pass
         elif not isinstance(v, str):
             self.raise_invalid_val(v)
         else:
@@ -983,8 +983,13 @@ class InfoArrayValidator(BaseValidator):
         self.items = items
 
         self.item_validators = []
-        for i, item in enumerate(self.items):
-            item_validator = InfoArrayValidator.build_validator(item, '{plotly_name}[{i}]'.format(plotly_name=plotly_name, i=i), parent_name)
+        info_array_items = (self.items if isinstance(self.items, list)
+                            else [self.items])
+
+        for i, item in enumerate(info_array_items):
+            item_validator = InfoArrayValidator.build_validator(
+                item, '{plotly_name}[{i}]'
+                    .format(plotly_name=plotly_name, i=i), parent_name)
             self.item_validators.append(item_validator)
 
         self.free_length = free_length
@@ -1138,7 +1143,7 @@ class CompoundValidator(BaseValidator):
         else:
             self.raise_invalid_val(v)
 
-        v._prop_name = self.plotly_name
+        v._plotly_name = self.plotly_name
         return v
 
 
@@ -1233,9 +1238,12 @@ class BaseDataValidator(BaseValidator):
             res = []
             invalid_els = []
             for v_el in v:
+
                 if isinstance(v_el, trace_classes):
-                    res.append(v_el)
-                elif isinstance(v_el, dict):
+                    # Clone input traces
+                    v_el = v_el.to_plotly_json()
+
+                if isinstance(v_el, dict):
                     v_copy = deepcopy(v_el)
 
                     if 'type' in v_copy:
@@ -1258,11 +1266,9 @@ class BaseDataValidator(BaseValidator):
 
             v = tuple(res)
 
-            # Add UIDs if not set.
-            # If UID is set then it's the users responsibility to make sure UIDs are unique
+            # Set new UIDs
             for trace in v:
-                if trace.uid is None:
-                    trace.uid = str(uuid.uuid1())
+                trace.uid = str(uuid.uuid1())
 
         else:
             self.raise_invalid_val(v)
