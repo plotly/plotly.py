@@ -1597,8 +1597,6 @@ var FigureView = widgets.DOMWidgetView.extend({
             Plotly.toImage(this.el, {format:'svg'}).then(function (svg_uri) {
                 console.log([msgData, svg_uri]);
 
-                // that.send({event: 'svg', req_id: req_id, svg_uri: svg_uri});
-
                 /** @type {Js2PySvgResponseMsg} */
                 var responseMsg = {
                     request_id: req_id,
