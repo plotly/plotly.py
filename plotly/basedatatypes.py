@@ -190,27 +190,44 @@ class BaseFigure:
     @data.setter
     def data(self, new_data):
 
-        # Validate new_data
-        new_data = self._data_validator.validate_coerce(new_data)
+        err_header = ('The data property of a figure may only be assigned '
+                      'a list or tuple that contains a permutation of a '
+                      'subset of itself\n')
 
+        if not isinstance(new_data, (list, tuple)):
+            err_msg = (err_header +
+                       '    Received value with type {typ}'
+                       .format(typ=type(new_data)))
+            raise ValueError(err_msg)
+
+        for trace in new_data:
+            if not isinstance(trace, BaseTraceType):
+                err_msg = (err_header +
+                           '    Received element value of type {typ}'
+                           .format(typ=type(trace)))
+                raise ValueError(err_msg)
 
         orig_uids = [_trace['uid'] for _trace in self._data]
         new_uids = [trace.uid for trace in new_data]
 
         invalid_uids = set(new_uids).difference(set(orig_uids))
         if invalid_uids:
-            raise ValueError(('The trace property of a figure may only be assigned to '
-                              'a permutation of a subset of itself\n'
-                              '    Invalid trace(s) with uid(s): {invalid_uids}').format(invalid_uids=invalid_uids))
+            err_msg = (err_header +
+                       '    Invalid trace(s) with uid(s): {invalid_uids}'
+                       .format(invalid_uids=invalid_uids))
+
+            raise ValueError(err_msg)
 
         # Check for duplicates
         uid_counter = collections.Counter(new_uids)
         duplicate_uids = [uid for uid, count in uid_counter.items() if count > 1]
         if duplicate_uids:
-            raise ValueError(('The trace property of a figure may not be assigned '
-                              'multiple copies of a trace\n'
-                              '    Duplicate trace uid(s): {duplicate_uids}'
-                              ).format(duplicate_uids=duplicate_uids))
+            err_msg = (
+                    err_header +
+                    '    Received duplicated traces with uid(s): ' +
+                    '{duplicate_uids}'.format(duplicate_uids=duplicate_uids))
+
+            raise ValueError(err_msg)
 
         # Compute traces to remove
         remove_uids = set(orig_uids).difference(set(new_uids))
