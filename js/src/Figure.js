@@ -380,7 +380,18 @@ var FigureModel = widgets.DOMWidgetModel.extend({
 
         // Message tracking
         // ----------------
+        /**
+         * @type {Number}
+         * layout_edit_id of the last layout modification operation
+         * requested by the Python side
+         */
         _last_layout_edit_id: 0,
+
+        /**
+         * @type {Number}
+         * trace_edit_id of the last trace modification operation
+         * requested by the Python side
+         */
         _last_trace_edit_id: 0
     }),
 
@@ -430,7 +441,11 @@ var FigureModel = widgets.DOMWidgetModel.extend({
         return trace_indexes
     },
 
-    /** Log changes to the _data trait */
+    /**
+     * Log changes to the _data trait
+     *
+     * This should only happed on FigureModel initialization
+     */
     do_data: function () {
         console.log('Figure Model: do_data');
         var data = this.get('_data');
@@ -440,7 +455,11 @@ var FigureModel = widgets.DOMWidgetModel.extend({
         }
     },
 
-    /** Log changes to the _layout trait */
+    /**
+     * Log changes to the _layout trait
+     *
+     * This should only happed on FigureModel initialization
+     */
     do_layout: function () {
         console.log('Figure Model: do_layout');
         var layout = this.get('_layout');
@@ -450,10 +469,8 @@ var FigureModel = widgets.DOMWidgetModel.extend({
         }
     },
 
-
-
     /**
-     * Perform addTraces operation on the model
+     * Handle addTraces message and perform operation on the model
      */
     do_addTraces: function () {
         // add trace to plot
@@ -473,7 +490,7 @@ var FigureModel = widgets.DOMWidgetModel.extend({
     },
 
     /**
-     * Perform the deleteTraces operation on the  model
+     * Handle deleteTraces message and perform operation on the model
      */
     do_deleteTraces: function () {
         // remove traces from plot
@@ -494,7 +511,7 @@ var FigureModel = widgets.DOMWidgetModel.extend({
     },
 
     /**
-     * Perform moveTraces operation on the model
+     * Handle moveTraces message and perform operation on the model
      */
     do_moveTraces: function () {
         console.log('Figure Model: do_moveTraces');
@@ -533,6 +550,9 @@ var FigureModel = widgets.DOMWidgetModel.extend({
         }
     },
 
+    /**
+     * Handle restyle message
+     */
     do_restyle: function () {
         console.log('FigureModel: do_restyle');
 
@@ -540,70 +560,59 @@ var FigureModel = widgets.DOMWidgetModel.extend({
         var msgData = this.get('_py2js_restyle');
         if (msgData !== null) {
             var restyleData = msgData.restyle_data;
-            var trace_indexes = this._normalize_trace_indexes(msgData.restyle_traces);
-            this._performRestyle(restyleData, trace_indexes)
+            var restyleTraces = this._normalize_trace_indexes(msgData.restyle_traces);
+            this._performRestyle(restyleData, restyleTraces)
         }
     },
 
-    _performRestyle: function (style, trace_indexes){
+    /**
+     * Perform the restyle operation on the model
+     * @param {Object} restyleData
+     *  Restyle data as accepted by Plotly.restyle
+     * @param {Array.<Number>} restyleTraces
+     *  Array of indexes of the traces that the resytle operation applies to
+     * @private
+     */
+    _performRestyle: function (restyleData, restyleTraces){
 
-        for (var rawKey in style) {
-            if (!style.hasOwnProperty(rawKey)) { continue }
-            var v = style[rawKey];
+        console.log(['_performRestyle', restyleData], this.get('_data'));
+        // Loop over the properties of restyleData
+        for (var rawKey in restyleData) {
+            if (!restyleData.hasOwnProperty(rawKey)) { continue }
 
-            if (!Array.isArray(v)) {
-                v = [v]
+            // Extract value for property and normalize into a value list
+            var val_array = restyleData[rawKey];
+            if (!Array.isArray(val_array)) {
+                val_array = [val_array]
             }
 
+            // Convert raw key string (e.g. 'marker.color') into a key path
+            // array (e.g. ['marker', 'color']
             var keyPath = flattenedKeyToObjectPath(rawKey);
 
-            for (var i = 0; i < trace_indexes.length; i++) {
-                var trace_ind = trace_indexes[i];
-                var valParent = this.get('_data')[trace_ind];
+            // Get key path of the object to which the new value will be
+            // assigned
+            var parentKeyPath = keyPath.slice(0, -1);
 
-                for (var kp = 0; kp < keyPath.length-1; kp++) {
-                    var keyPathEl = keyPath[kp];
+            // Get final propery / index key
+            var lastKey = keyPath[keyPath.length - 1];
 
-                    // Extend val_parent list if needed
-                    if (Array.isArray(valParent)) {
-                        if (typeof keyPathEl === 'number') {
-                            while (valParent.length <= keyPathEl) {
-                                valParent.push(null)
-                            }
-                        }
-                    } else { // object
-                        // Initialize child if needed
-                        if (valParent[keyPathEl] === undefined) {
-                            if (typeof keyPath[kp + 1] === 'number') {
-                                valParent[keyPathEl] = []
-                            } else {
-                                valParent[keyPathEl] = {}
-                            }
-                        }
-                    }
-                    valParent = valParent[keyPathEl];
-                }
+            // Loop over the indexes of the traces being restyled
+            for (var i = 0; i < restyleTraces.length; i++) {
+                var trace_ind = restyleTraces[i];
 
-                var lastKey = keyPath[keyPath.length-1];
-                var trace_v = v[i % v.length];
+                // valParent is a reference to the array or object that has
+                // lastKey as an index or property respectively.
+                var valParent = getOrInitNestedProperty(
+                    this.get('_data')[trace_ind], parentKeyPath);
 
-                if (trace_v === undefined) {
-                    // Nothing to do
-                } else if (trace_v === null){
-                    if(valParent.hasOwnProperty(lastKey)) {
-                        delete valParent[lastKey];
-                    }
-                } else {
-                    if (Array.isArray(valParent) && typeof lastKey === 'number') {
-                        while (valParent.length <= lastKey) {
-                            // Make sure array is long enough to assign into
-                            valParent.push(null)
-                        }
-                    }
-                    valParent[lastKey] = trace_v;
-                }
+                var single_val = val_array[i % val_array.length];
+
+                updateKeyValHandleDeleteExtend(valParent, lastKey, single_val)
             }
         }
+
+        console.log(['_performRestyle', this.get('_data')]);
     },
 
     do_relayout: function () {
@@ -1784,6 +1793,94 @@ function flattenedKeyToObjectPath(rawKey) {
         }
     }
     return keyPath2
+}
+
+/**
+ * Use an array of keys to perform nested indexing into an object or array,
+ * initializing the nested layers if needed.
+ *
+ * Examples:
+ *   valParent = {foo: {bar: [23]}}
+ *   getOrInitNestedProperty(valParent, ['foo', 'bar']) -> [23]
+ *      valParent unchanged
+ *
+ *   valParent = {foo: {bar: [23]}}
+ *   getOrInitNestedProperty(valParent, ['foo', 'bar', 0]) -> 23
+ *      valParent unchanged
+ *
+ *   valParent = {foo: {bar: [23]}}
+ *   getOrInitNestedProperty(valParent, ['foo', 'baz']) -> {}
+ *      valParent changed to {foo: {bar: [23], baz: {}}}
+ *
+ *   valParent = {foo: {bar: [23]}}
+ *   getOrInitNestedProperty(valParent, ['foo', 'bar', 3]) -> null
+ *      valParent changed to {foo: {bar: [23, null, null, null]}}
+ *
+ *   valParent = {foo: {bar: [23]}}
+ *   getOrInitNestedProperty(valParent, ['foo', 'baz', 1]) -> null
+ *      valParent changed to {foo: {bar: [23], baz: [null, null]}}
+ *
+ * @type {{FigureView: any, FigureModel: any}}
+ */
+function getOrInitNestedProperty(valParent, keyPath) {
+    // Loop over the keyPath elements
+    for (var kp = 0; kp < keyPath.length; kp++) {
+        var keyPathEl = keyPath[kp];
+
+        // Extend valParent array if needed
+        if (Array.isArray(valParent)) {
+            if (typeof keyPathEl === 'number') {
+                while (valParent.length <= keyPathEl) {
+                    valParent.push(null)
+                }
+            }
+        } else { // object
+            // Initialize child if needed
+            if (valParent[keyPathEl] === undefined) {
+                if (typeof keyPath[kp + 1] === 'number') {
+                    valParent[keyPathEl] = []
+                } else {
+                    valParent[keyPathEl] = {}
+                }
+            }
+        }
+
+        // Update valParent
+        valParent = valParent[keyPathEl];
+    }
+    return valParent;
+}
+
+/**
+ * Update the value associated with an index or property for a parent that
+ * is either an Object or an Array respectively.
+ *
+ * @param {Array|Object} valParent
+ *  Parent object or array
+ * @param {String|Number} key
+ *  Property name or array index of new value
+ * @param val
+ *  New value.
+ *    - If undefined, do nothing
+ *    - If null and the index/property is present, then delete it
+ *    - Otherwise assign the value at the index or property
+ */
+function updateKeyValHandleDeleteExtend(valParent, key, val) {
+    if (val === undefined) {
+        // Nothing to do
+    } else if (val === null){
+        if(valParent.hasOwnProperty(key)) {
+            delete valParent[key];
+        }
+    } else {
+        if (Array.isArray(valParent) && typeof key === 'number') {
+            while (valParent.length <= key) {
+                // Make sure array is long enough to assign into
+                valParent.push(null)
+            }
+        }
+        valParent[key] = val;
+    }
 }
 
 module.exports = {
