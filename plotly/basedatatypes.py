@@ -1270,16 +1270,6 @@ class BasePlotlyType(PlotlyBase):
         self._parent = None
         self._change_callbacks = {}  # type: typ.Dict[typ.Tuple, typ.Callable]
 
-    # test - add old PlotlyBase methods here
-    # eg. validate()
-    #def validate(self):
-    #    """Everything is *always* validated now. Keep for backwards compat."""
-    #    pass
-
-
-
-
-
 
     @property
     def plotly_name(self):
