@@ -19,6 +19,8 @@ var FigureModel = widgets.DOMWidgetModel.extend({
         _view_name: 'FigureView',
         _model_module: 'plotlywidget',
         _view_module: 'plotlywidget',
+        _view_module_version: '0.1.0',
+        _model_module_version: '0.1.0',
 
         // Data and Layout
         // ---------------
