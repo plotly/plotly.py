@@ -185,7 +185,13 @@ var FigureModel = widgets.DOMWidgetModel.extend({
         _py2js_removeTraceProps: null,
 
 
-        _py2js_requestSvg: null,
+        /**
+         * @typedef {null|Object} Py2JsSvgRequestMsg
+         * @property {String} request_id
+         *  Unique svg request identifier. This identifier is returned
+         *  along with the SVG image
+         */
+        _py2js_svgRequest: null,
 
         // JS -> Python messages
         // ---------------------
@@ -359,7 +365,16 @@ var FigureModel = widgets.DOMWidgetModel.extend({
 
         // SVG image request message
         // -------------------------
-        _js2py_svg: null,
+        /**
+         * @typedef {Object} Js2PySvgResponseMsg
+         * @property {String} request_id
+         *  Unique identifier of the Py2JsSvgRequestMsg message that
+         *  triggered this response
+         * @property {String} svg_uri
+         *  Response svg image encoded as a data uri string
+         *  e.g. 'data:image/svg+xml;base64,...'
+         */
+        _js2py_svgResponse: null,
 
         // Message tracking
         // ----------------
@@ -873,7 +888,7 @@ var FigureView = widgets.DOMWidgetView.extend({
         this.model.on("change:_py2js_relayout", this.do_relayout, this);
         this.model.on("change:_py2js_update", this.do_update, this);
         this.model.on("change:_py2js_animate", this.do_animate, this);
-        this.model.on("change:_py2js_requestSvg", this.do_requestSvg, this);
+        this.model.on("change:_py2js_svgRequest", this.do_svgRequest, this);
 
         // Increment message ids
         // ---------------------
@@ -1568,18 +1583,26 @@ var FigureView = widgets.DOMWidgetView.extend({
         }
     },
 
-    do_requestSvg: function() {
-        console.log('FigureView: do_requestSvg');
-        var req_id = this.model.get('_py2js_requestSvg');
+    do_svgRequest: function() {
+        console.log('FigureView: do_svgRequest');
+
+        /** @type {Py2JsSvgRequestMsg} */
+        var msgData = this.model.get('_py2js_svgRequest');
         var that = this;
-        if (req_id !== null) {
+        if (msgData !== null) {
+            var req_id = msgData.request_id;
             Plotly.toImage(this.el, {format:'svg'}).then(function (svg_uri) {
-                console.log([req_id, svg_uri]);
+                console.log([msgData, svg_uri]);
 
-                that.send({event: 'svg', req_id: req_id, svg_uri: svg_uri});
+                // that.send({event: 'svg', req_id: req_id, svg_uri: svg_uri});
 
-                // that.model.set('_js2py_svg', [req_id, svg_uri]);
-                // that.touch();
+                /** @type {Js2PySvgResponseMsg} */
+                var responseMsg = {
+                    request_id: req_id,
+                    svg_uri: svg_uri
+                };
+                that.model.set('_js2py_svgResponse', responseMsg);
+                that.touch();
             });
         }
     },

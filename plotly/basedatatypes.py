@@ -1,14 +1,9 @@
 import collections
-import numbers
-import os
 import re
 import typing as typ
-import uuid
 from contextlib import contextmanager
 from copy import deepcopy
-from importlib import import_module
 from pprint import pprint
-from urllib import parse
 
 import numpy as np
 from plotly.offline import plot as plotlypy_plot
@@ -1022,106 +1017,6 @@ class BaseFigure:
             data['layout']['width'] = self.layout.width
 
         plotlypy_plot(data, filename=filename, show_link=False, auto_open=auto_open, validate=False)
-
-    def save_image(self, filename, image_type=None, scale_factor=2):
-        """
-        Save figure to a static image file
-
-        Parameters
-        ----------
-        filename : str
-            Image output file name
-        image_type : str
-            Image file type. One of: 'svg', 'png', 'pdf', or 'ps'. If not set, file type
-            is inferred from the filename extension
-        scale_factor : number
-            (For png image type) Factor by which to increase the number of pixels in each
-            dimension. A scale factor of 1 will result in a image with pixel dimensions
-            (layout.width, layout.height).  A scale factor of 2 will result in an image
-            with dimensions (2*layout.width, 2*layout.height), doubling image's DPI.
-            (Default 2)
-        """
-
-        # Validate / infer image_type
-        supported_image_types = ['svg', 'png', 'pdf', 'ps']
-        cairo_image_types = ['png', 'pdf', 'ps']
-        supported_types_csv = ', '.join(supported_image_types)
-
-        if not image_type:
-            # Infer image type from extension
-            _, extension = os.path.splitext(filename)
-
-            if not extension:
-                raise ValueError('No image_type specified and file extension has no extension '
-                                 'from which to infer an image type '
-                                 'Supported image types are: {image_types}'
-                                 .format(image_types=supported_types_csv))
-
-            image_type = extension[1:]
-
-        image_type = image_type.lower()
-        if image_type not in supported_image_types:
-            raise ValueError("Unsupported image type '{image_type}'\n"
-                             "Supported image types are: {image_types}"
-                             .format(image_type=image_type,
-                                     image_types=supported_types_csv))
-
-        # Validate cairo dependency
-        if image_type in cairo_image_types:
-            # Check whether we have cairosvg available
-            try:
-                import_module('cairosvg')
-            except ModuleNotFoundError:
-                raise ImportError('Exporting to {image_type} requires cairosvg'
-                                  .format(image_type=image_type))
-
-        # Validate scale_factor
-        if not isinstance(scale_factor, numbers.Number) or scale_factor <= 0:
-            raise ValueError('scale_factor must be a positive number.\n'
-                             '    Received: {scale_factor}'.format(scale_factor=scale_factor))
-
-        req_id = str(uuid.uuid1())
-
-        # Register request
-        self._svg_requests[req_id] = {'filename': filename,
-                                      'image_type': image_type,
-                                      'scale_factor': scale_factor}
-
-        self._py2js_requestSvg = req_id
-        self._py2js_requestSvg = None
-
-    def _do_save_image(self, req_id, svg_uri):
-        req_info = self._svg_requests.pop(req_id, None)
-        if not req_info:
-            return
-
-        # Remove svg header
-        if not svg_uri.startswith('data:image/svg+xml,'):
-            raise ValueError('Invalid svg data URI')
-
-        svg = svg_uri.replace('data:image/svg+xml,', '')
-
-        # Unquote characters (e.g. '%3Csvg%20' -> '<svg ')
-        svg_bytes = parse.unquote(svg).encode('utf-8')
-        filename = req_info['filename']
-        image_type = req_info['image_type']
-        scale_factor = req_info['scale_factor']
-        if image_type == 'svg':
-            with open(filename, 'wb') as f:
-                f.write(svg_bytes)
-        else:
-            # We already made sure cairosvg is available in save_image
-            cairosvg = import_module('cairosvg')
-
-            if image_type == 'png':
-                cairosvg.svg2png(
-                    bytestring=svg_bytes, write_to=filename, scale=scale_factor)
-            elif image_type == 'pdf':
-                cairosvg.svg2pdf(
-                    bytestring=svg_bytes, write_to=filename)
-            elif image_type == 'ps':
-                cairosvg.svg2ps(
-                    bytestring=svg_bytes, write_to=filename)
 
     # Static helpers
     # --------------
