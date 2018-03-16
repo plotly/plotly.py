@@ -472,7 +472,7 @@ class BaseFigure:
 
     def _restyle_child(self, child, prop, val):
 
-        trace_index = self.data.index(child)
+        trace_index = BaseFigure._index_is(self.data, child)
 
         if not self._in_batch_mode:
             send_val = [val]
@@ -534,12 +534,7 @@ class BaseFigure:
 
     def _get_child_props(self, child):
         try:
-            trace_index_list = [i for i, curr_child in enumerate(self.data)
-                                if curr_child is child]
-            if not trace_index_list:
-                raise ValueError('Invalid child')
-
-            trace_index = trace_index_list[0]
+            trace_index = BaseFigure._index_is(self.data, child)
 
         except ValueError as _:
             trace_index = None
@@ -553,7 +548,7 @@ class BaseFigure:
 
     def _get_child_prop_defaults(self, child):
         try:
-            trace_index = self.data.index(child)
+            trace_index = BaseFigure._index_is(self.data, child)
         except ValueError as _:
             trace_index = None
 
@@ -1253,6 +1248,20 @@ class BaseFigure:
             raise ValueError('Unexpected plotly object with type {typ}'
                              .format(typ=type(plotly_obj)))
 
+    @staticmethod
+    def _index_is(iterable, val):
+        """
+        Return the index of a value in an iterable using object identity
+        (not object equality as is the case for list.index)
+
+        """
+        index_list = [i for i, curr_val in enumerate(iterable)
+                            if curr_val is val]
+        if not index_list:
+            raise ValueError('Invalid value')
+
+        return index_list[0]
+
 
 class BasePlotlyType:
     _validators = None
@@ -1342,7 +1351,7 @@ class BasePlotlyType:
             if child.plotly_name not in self_props:
                 self_props[child.plotly_name] = {}
         elif isinstance(child_or_children, (list, tuple)):
-            child_ind = child_or_children.index(child)
+            child_ind = BaseFigure._index_is(child_or_children, child)
             if child.plotly_name not in self_props:
                 # Initialize list
                 self_props[child.plotly_name] = []
@@ -1366,7 +1375,7 @@ class BasePlotlyType:
             if child is child_or_children:
                 return self_props.get(child.plotly_name, None)
             elif isinstance(child_or_children, (list, tuple)):
-                child_ind = child_or_children.index(child)
+                child_ind = BaseFigure._index_is(child_or_children, child)
                 children_props = self_props.get(child.plotly_name, None)
                 return children_props[child_ind] \
                     if children_props is not None and len(children_props) > child_ind \
@@ -1393,7 +1402,7 @@ class BasePlotlyType:
             if child is child_or_children:
                 return self_prop_defaults.get(child.plotly_name, None)
             elif isinstance(child_or_children, (list, tuple)):
-                child_ind = child_or_children.index(child)
+                child_ind = BaseFigure._index_is(child_or_children, child)
                 children_props = self_prop_defaults.get(child.plotly_name, None)
                 return children_props[child_ind] if children_props is not None else None
             else:
@@ -1649,7 +1658,7 @@ class BasePlotlyType:
     def _update_child(self, child, prop, val):
         child_prop_val = getattr(self, child.plotly_name)
         if isinstance(child_prop_val, (list, tuple)):
-            child_ind = child_prop_val.index(child)
+            child_ind = BaseFigure._index_is(child_prop_val, child)
             obj_path = '{child_name}.{child_ind}.{prop}'.format(
                 child_name=child.plotly_name,
                 child_ind=child_ind,
