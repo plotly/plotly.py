@@ -1670,11 +1670,6 @@ function performRemoveProps(parentObj, keyPaths) {
  * @param {Object} fullObj
  * @param {Object} removeObj
  *
- * TODO: investigate replacing with lodash's mergeWith and a customizer
- *       that nulls out identical properties
- *
- *       Would also need a recursive null property unsetter
- *
  * Examples:
  *
  */
@@ -1702,7 +1697,7 @@ function createDeltaObject (fullObj, removeObj) {
         ) {
             // Compute object equality
             var props_equal;
-            props_equal = _.isEqual(removeObj[p], fullObj[p]);
+            props_equal = _.isEqual(fullObj[p], removeObj[p]);
 
             // Perform recursive comparison if props are not equal
             if (!props_equal || p === 'uid') {  // Let uids through
