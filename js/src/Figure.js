@@ -1103,6 +1103,9 @@ var FigureView = widgets.DOMWidgetView.extend({
         }
     },
 
+    /**
+     * Handle Plotly.deleteTraces request
+     */
     do_deleteTraces: function () {
 
         /** @type {Py2JsDeleteTracesMsg} */
@@ -1123,6 +1126,9 @@ var FigureView = widgets.DOMWidgetView.extend({
         }
     },
 
+    /**
+     * Handle Plotly.moveTraces request
+     */
     do_moveTraces: function () {
 
         /** @type {Py2JsMoveTracesMsg} */
@@ -1144,6 +1150,9 @@ var FigureView = widgets.DOMWidgetView.extend({
         }
     },
 
+    /**
+     * Handle Plotly.restyle request
+     */
     do_restyle: function () {
         console.log('do_restyle');
 
@@ -1176,6 +1185,9 @@ var FigureView = widgets.DOMWidgetView.extend({
         }
     },
 
+    /**
+     * Handle Plotly.relayout request
+     */
     do_relayout: function () {
         console.log('FigureView: do_relayout');
 
@@ -1202,6 +1214,9 @@ var FigureView = widgets.DOMWidgetView.extend({
         }
     },
 
+    /**
+     * Handle Plotly.update request
+     */
     do_update: function () {
         console.log('FigureView: do_update');
 
@@ -1235,6 +1250,9 @@ var FigureView = widgets.DOMWidgetView.extend({
         }
     },
 
+    /**
+     * Handle Plotly.animate request
+     */
     do_animate: function() {
         console.log('FigureView: do_animate');
 
@@ -1282,6 +1300,9 @@ var FigureView = widgets.DOMWidgetView.extend({
         }
     },
 
+    /**
+     * Handle svg image request
+     */
     do_svgRequest: function() {
         console.log('FigureView: do_svgRequest');
 
@@ -1291,7 +1312,6 @@ var FigureView = widgets.DOMWidgetView.extend({
         if (msgData !== null) {
             var req_id = msgData.request_id;
             Plotly.toImage(this.el, {format:'svg'}).then(function (svg_uri) {
-                console.log([msgData, svg_uri]);
 
                 /** @type {Js2PySvgResponseMsg} */
                 var responseMsg = {
@@ -1356,90 +1376,6 @@ var FigureView = widgets.DOMWidgetView.extend({
         this.model.set('_js2py_traceDeltas', traceDeltasMsg);
         this.touch();
     },
-
-    /**
-     * Return object that contains all properties in fullObj that are not
-     * identical to corresponding properties in removeObj
-     *
-     * Properties of fullObj and removeObj may be object arrays
-     *
-     * Returned object is a deep clone of the properties of the input objects
-     *
-     * @param {Object} fullObj
-     * @param {Object} removeObj
-     */
-    createDeltaObject: function (fullObj, removeObj) {
-
-        // Initialize result as object or array
-        var res;
-        if(Array.isArray(fullObj)) {
-            res = new Array(fullObj.length);
-        } else {
-            res = {};
-        }
-
-        // Initialize removeObj to empty object if not specified
-        if (removeObj === null || removeObj === undefined) {
-            removeObj = {};
-        }
-
-        // Iterate over object properties or array indices
-        for (var p in fullObj) {
-            if (p[0] !== '_' &&  // Don't consider private properties
-                fullObj.hasOwnProperty(p) &&  // Exclude parent properties
-                fullObj[p] !== null  // Exclude cases where fullObj doesn't
-                                     // have the property
-            ) {
-                // Compute object equality
-                var props_equal;
-                props_equal = _.isEqual(removeObj[p], fullObj[p]);
-
-                // Perform recursive comparison if props are not equal
-                if (!props_equal || p === 'uid') {  // Let uids through
-
-                    // property has non-null value in fullObj that doesn't
-                    // match the value in removeObj
-                    var fullVal = fullObj[p];
-                    if (removeObj.hasOwnProperty(p) && typeof fullVal === 'object') {
-                        // Recurse over object properties
-                        if(Array.isArray(fullVal)) {
-
-                            if (fullVal.length > 0 && typeof(fullVal[0]) === 'object') {
-                                // We have an object array
-                                res[p] = new Array(fullVal.length);
-                                for (var i = 0; i < fullVal.length; i++) {
-                                    if (!Array.isArray(removeObj[p]) || removeObj[p].length <= i) {
-                                        res[p][i] = fullVal[i]
-                                    } else {
-                                        res[p][i] = this.createDeltaObject(fullVal[i], removeObj[p][i]);
-                                    }
-                                }
-                            } else {
-                                // We have a primitive array or typed array
-                                res[p] = fullVal;
-                            }
-                        } else { // object
-                            var full_obj = this.createDeltaObject(fullVal, removeObj[p]);
-                            if (Object.keys(full_obj).length > 0) {
-                                // new object is not empty
-                                res[p] = full_obj;
-                            }
-                        }
-                    } else if (typeof fullVal === 'object' && !Array.isArray(fullVal)) {
-                        // Return 'clone' of fullVal
-                        // We don't use a standard clone method so that we keep
-                        // the special case handling of this method
-                        res[p] = this.createDeltaObject(fullVal, {});
-
-                    } else if (fullVal !== undefined) {
-                        // No recursion necessary, Just keep value from fullObj
-                        res[p] = fullVal;
-                    }
-                }
-            }
-        }
-        return res
-    }
 });
 
 // Serialization
@@ -1636,6 +1572,8 @@ function flattenedKeyToObjectPath(rawKey) {
  * Use an array of keys to perform nested indexing into an object or array,
  * initializing the nested layers if needed. Function returns an object
  * that the last entry in keyPath can index into.
+ *
+ * TODO: Investigate replacing with lodash's set(With).
  *
  * Examples:
  *   valParent = {foo: {bar: [23]}}
@@ -1850,6 +1788,8 @@ function performMoveTracesLike(parentArray, currentInds, newInds) {
  *  is an array of properties names or array indexes that reference a
  *  property to be removed
  *
+ * TODO: Investigate replacing with lodash's unset(With).
+ *
  *  Examples:
  */
 function performRemoveProps(parentObj, keyPaths) {
@@ -1873,6 +1813,97 @@ function performRemoveProps(parentObj, keyPaths) {
             }
         }
     }
+}
+
+
+/**
+ * Return object that contains all properties in fullObj that are not
+ * identical to the corresponding properties in removeObj
+ *
+ * Properties of fullObj and removeObj may be objects or arrays of objects
+ *
+ * Returned object is a deep clone of the properties of the input objects
+ *
+ * @param {Object} fullObj
+ * @param {Object} removeObj
+ *
+ * TODO: investigate replacing with lodash's mergeWith and a customizer
+ *       that nulls out identical properties
+ *
+ * Examples:
+ *
+ */
+function createDeltaObject (fullObj, removeObj) {
+
+    // Initialize result as object or array
+    var res;
+    if(Array.isArray(fullObj)) {
+        res = new Array(fullObj.length);
+    } else {
+        res = {};
+    }
+
+    // Initialize removeObj to empty object if not specified
+    if (removeObj === null || removeObj === undefined) {
+        removeObj = {};
+    }
+
+    // Iterate over object properties or array indices
+    for (var p in fullObj) {
+        if (p[0] !== '_' &&  // Don't consider private properties
+            fullObj.hasOwnProperty(p) &&  // Exclude parent properties
+            fullObj[p] !== null  // Exclude cases where fullObj doesn't
+                                 // have the property
+        ) {
+            // Compute object equality
+            var props_equal;
+            props_equal = _.isEqual(removeObj[p], fullObj[p]);
+
+            // Perform recursive comparison if props are not equal
+            if (!props_equal || p === 'uid') {  // Let uids through
+
+                // property has non-null value in fullObj that doesn't
+                // match the value in removeObj
+                var fullVal = fullObj[p];
+                if (removeObj.hasOwnProperty(p) && typeof fullVal === 'object') {
+                    // Recurse over object properties
+                    if(Array.isArray(fullVal)) {
+
+                        if (fullVal.length > 0 && typeof(fullVal[0]) === 'object') {
+                            // We have an object array
+                            res[p] = new Array(fullVal.length);
+                            for (var i = 0; i < fullVal.length; i++) {
+                                if (!Array.isArray(removeObj[p]) || removeObj[p].length <= i) {
+                                    res[p][i] = fullVal[i]
+                                } else {
+                                    res[p][i] = createDeltaObject(fullVal[i], removeObj[p][i]);
+                                }
+                            }
+                        } else {
+                            // We have a primitive array or typed array
+                            res[p] = fullVal;
+                        }
+                    } else { // object
+                        var full_obj = createDeltaObject(fullVal, removeObj[p]);
+                        if (Object.keys(full_obj).length > 0) {
+                            // new object is not empty
+                            res[p] = full_obj;
+                        }
+                    }
+                } else if (typeof fullVal === 'object' && !Array.isArray(fullVal)) {
+                    // Return 'clone' of fullVal
+                    // We don't use a standard clone method so that we keep
+                    // the special case handling of this method
+                    res[p] = createDeltaObject(fullVal, {});
+
+                } else if (fullVal !== undefined) {
+                    // No recursion necessary, Just keep value from fullObj
+                    res[p] = fullVal;
+                }
+            }
+        }
+    }
+    return res
 }
 
 module.exports = {
