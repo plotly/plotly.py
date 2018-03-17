@@ -592,7 +592,7 @@ var FigureModel = widgets.DOMWidgetModel.extend({
 
             // Get key path of the object to which the new value will be
             // assigned
-            var parentKeyPath = keyPath.slice(0, -1);
+            // var parentKeyPath = keyPath.slice(0, -1);
 
             // Get final propery / index key
             var lastKey = keyPath[keyPath.length - 1];
@@ -604,11 +604,11 @@ var FigureModel = widgets.DOMWidgetModel.extend({
                 // valParent is a reference to the array or object that has
                 // lastKey as an index or property respectively.
                 var valParent = getOrInitNestedProperty(
-                    this.get('_data')[trace_ind], parentKeyPath);
+                    this.get('_data')[trace_ind], keyPath);
 
                 var single_val = val_array[i % val_array.length];
 
-                updateKeyValHandleDeleteExtend(valParent, lastKey, single_val)
+                updateKeyValHandleDeleteExtend(valParent, lastKey, single_val);
             }
         }
 
@@ -639,51 +639,22 @@ var FigureModel = widgets.DOMWidgetModel.extend({
                 continue
             }
 
-            var v = relayout_data[rawKey];
+            // Extract value for this key
+            var relayout_val = relayout_data[rawKey];
+
+            // Convert raw key string (e.g. 'xaxis.range') into a key path
+            // array (e.g. ['xaxis', 'range']
             var keyPath = flattenedKeyToObjectPath(rawKey);
 
-            var valParent = parent_data;
-
-            for (var kp = 0; kp < keyPath.length-1; kp++) {
-                var keyPathEl = keyPath[kp];
-
-                // Extend val_parent list if needed
-                if (Array.isArray(valParent)) {
-                    if(typeof keyPathEl === 'number') {
-                        while (valParent.length <= keyPathEl) {
-                            valParent.push(null)
-                        }
-                    }
-                } else {
-                    // Initialize child if needed
-                    if (valParent[keyPathEl] === undefined) {
-                        if (typeof keyPath[kp + 1] === 'number') {
-                            valParent[keyPathEl] = []
-                        } else {
-                            valParent[keyPathEl] = {}
-                        }
-                    }
-                }
-                valParent = valParent[keyPathEl];
-            }
-
+            // Get final propery / index key
             var lastKey = keyPath[keyPath.length-1];
 
-            if (v === undefined) {
-                // Nothing to do
-            } else if (v === null){
-                if(valParent.hasOwnProperty(lastKey)) {
-                    delete valParent[lastKey];
-                }
-            } else {
-                if (Array.isArray(valParent) && typeof lastKey === 'number') {
-                    while (valParent.length <= lastKey) {
-                        // Make sure array is long enough to assign into
-                        valParent.push(null)
-                    }
-                }
-                valParent[lastKey] = v;
-            }
+            // valParent is a reference to the array or object that has
+            // lastKey as an index or property respectively.
+            var valParent = getOrInitNestedProperty(parent_data, keyPath);
+
+            // Update valParent with relayout_val at lastKey
+            updateKeyValHandleDeleteExtend(valParent, lastKey, relayout_val);
         }
     },
 
@@ -1797,34 +1768,33 @@ function flattenedKeyToObjectPath(rawKey) {
 
 /**
  * Use an array of keys to perform nested indexing into an object or array,
- * initializing the nested layers if needed.
+ * initializing the nested layers if needed. Function returns an object
+ * that the last entry in keyPath can index into.
  *
  * Examples:
  *   valParent = {foo: {bar: [23]}}
- *   getOrInitNestedProperty(valParent, ['foo', 'bar']) -> [23]
+ *   getOrInitNestedProperty(valParent, ['foo', 'bar']) -> {bar: [23]}
  *      valParent unchanged
  *
  *   valParent = {foo: {bar: [23]}}
- *   getOrInitNestedProperty(valParent, ['foo', 'bar', 0]) -> 23
+ *   getOrInitNestedProperty(valParent, ['foo', 'bar', 0]) -> [23]
  *      valParent unchanged
  *
  *   valParent = {foo: {bar: [23]}}
- *   getOrInitNestedProperty(valParent, ['foo', 'baz']) -> {}
- *      valParent changed to {foo: {bar: [23], baz: {}}}
+ *   getOrInitNestedProperty(valParent, ['foo', 'baz']) -> {bar: [23]}
+ *      valParent unchanged
  *
  *   valParent = {foo: {bar: [23]}}
- *   getOrInitNestedProperty(valParent, ['foo', 'bar', 3]) -> null
- *      valParent changed to {foo: {bar: [23, null, null, null]}}
+ *   getOrInitNestedProperty(valParent, ['foo', 'bar', 2]) -> [23, null, null]
+ *      valParent changed to {foo: {bar: [23, null, null]}}
  *
  *   valParent = {foo: {bar: [23]}}
- *   getOrInitNestedProperty(valParent, ['foo', 'baz', 1]) -> null
+ *   getOrInitNestedProperty(valParent, ['foo', 'baz', 1]) -> [null, null]
  *      valParent changed to {foo: {bar: [23], baz: [null, null]}}
- *
- * @type {{FigureView: any, FigureModel: any}}
  */
 function getOrInitNestedProperty(valParent, keyPath) {
     // Loop over the keyPath elements
-    for (var kp = 0; kp < keyPath.length; kp++) {
+    for (var kp = 0; kp < keyPath.length-1; kp++) {
         var keyPathEl = keyPath[kp];
 
         // Extend valParent array if needed
