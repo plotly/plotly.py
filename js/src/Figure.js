@@ -1334,7 +1334,7 @@ var FigureView = widgets.DOMWidgetView.extend({
      */
     _sendLayoutDelta: function(layout_edit_id) {
         // ### Handle layout delta ###
-        var layout_delta = this.createDeltaObject(
+        var layout_delta = createDeltaObject(
             this.getFullLayout(),
             this.model.get('_layout'));
 
@@ -1363,7 +1363,7 @@ var FigureView = widgets.DOMWidgetView.extend({
         var fullData = this.getFullData();
         for (var i = 0; i < traceIndexes.length; i++) {
             var traceInd = traceIndexes[i];
-            trace_deltas[i] = this.createDeltaObject(
+            trace_deltas[i] = createDeltaObject(
                 fullData[traceInd], trace_data[traceInd]);
         }
 
@@ -1531,132 +1531,6 @@ function fullMergeCustomizer(objValue, srcValue) {
     }
 }
 
-
-/**
- * Convert a potentially flattened restyle/relayout-style key into an Array of
- * object keys and/or array indexes
- *
- * Example:  'foo.bar[0]' -> ['foo', 'bar', 0]
- */
-function flattenedKeyToObjectPath(rawKey) {
-
-    // Split string on periods. e.g. 'foo.bar[0]' -> ['foo', 'bar[0]']
-    var keyPath = rawKey.split('.');
-
-    // Split out bracket indexes. e.g. ['foo', 'bar[0]'] -> ['foo', 'bar', '0']
-    var regex = /(.*)\[(\d+)\]/;
-    var keyPath2 = [];
-    for (var k = 0; k < keyPath.length; k++) {
-        var key = keyPath[k];
-        var match = regex.exec(key);
-        if (match === null) {
-            keyPath2.push(key);
-        } else {
-            keyPath2.push(match[1]);
-            keyPath2.push(match[2]);
-        }
-    }
-
-    // Convert elements to ints if possible. e.g. ['foo', 'bar', '0'] -> ['foo', 'bar', 0]
-    for (k = 0; k < keyPath2.length; k++) {
-        key = keyPath2[k];
-        var potentialInt = parseInt(key);
-        if (!isNaN(potentialInt)) {
-            keyPath2[k] = potentialInt;
-        }
-    }
-    return keyPath2
-}
-
-/**
- * Use an array of keys to perform nested indexing into an object or array,
- * initializing the nested layers if needed. Function returns an object
- * that the last entry in keyPath can index into.
- *
- * TODO: Investigate replacing with lodash's set(With).
- *
- * Examples:
- *   valParent = {foo: {bar: [23]}}
- *   getOrInitNestedProperty(valParent, ['foo', 'bar']) -> {bar: [23]}
- *      valParent unchanged
- *
- *   valParent = {foo: {bar: [23]}}
- *   getOrInitNestedProperty(valParent, ['foo', 'bar', 0]) -> [23]
- *      valParent unchanged
- *
- *   valParent = {foo: {bar: [23]}}
- *   getOrInitNestedProperty(valParent, ['foo', 'baz']) -> {bar: [23]}
- *      valParent unchanged
- *
- *   valParent = {foo: {bar: [23]}}
- *   getOrInitNestedProperty(valParent, ['foo', 'bar', 2]) -> [23, null, null]
- *      valParent changed to {foo: {bar: [23, null, null]}}
- *
- *   valParent = {foo: {bar: [23]}}
- *   getOrInitNestedProperty(valParent, ['foo', 'baz', 1]) -> [null, null]
- *      valParent changed to {foo: {bar: [23], baz: [null, null]}}
- */
-function getOrInitNestedProperty(valParent, keyPath) {
-    // Loop over the keyPath elements
-    for (var kp = 0; kp < keyPath.length-1; kp++) {
-        var keyPathEl = keyPath[kp];
-
-        // Extend valParent array if needed
-        if (Array.isArray(valParent)) {
-            if (typeof keyPathEl === 'number') {
-                while (valParent.length <= keyPathEl) {
-                    valParent.push(null)
-                }
-            }
-        } else { // object
-            // Initialize child if needed
-            if (valParent[keyPathEl] === undefined) {
-                if (typeof keyPath[kp + 1] === 'number') {
-                    valParent[keyPathEl] = []
-                } else {
-                    valParent[keyPathEl] = {}
-                }
-            }
-        }
-
-        // Update valParent
-        valParent = valParent[keyPathEl];
-    }
-    return valParent;
-}
-
-/**
- * Update the value associated with an index or property for a parent that
- * is either an Object or an Array respectively.
- *
- * @param {Array|Object} valParent
- *  Parent object or array
- * @param {String|Number} key
- *  Property name or array index of new value
- * @param val
- *  New value.
- *    - If undefined, do nothing
- *    - If null and the index/property is present, then delete it
- *    - Otherwise assign the value at the index or property
- */
-function updateKeyValHandleDeleteExtend(valParent, key, val) {
-    if (val === undefined) {
-        // Nothing to do
-    } else if (val === null){
-        if(valParent.hasOwnProperty(key)) {
-            delete valParent[key];
-        }
-    } else {
-        if (Array.isArray(valParent) && typeof key === 'number') {
-            while (valParent.length <= key) {
-                // Make sure array is long enough to assign into
-                valParent.push(null)
-            }
-        }
-        valParent[key] = val;
-    }
-}
-
 /**
  * Reform a Plotly.relayout like operation on an input object
  *
@@ -1675,21 +1549,14 @@ function performRelayoutLike(parentObj, relayoutData) {
         }
 
         // Extract value for this key
-        var relayout_val = relayoutData[rawKey];
+        var relayoutVal = relayoutData[rawKey];
 
-        // Convert raw key string (e.g. 'xaxis.range') into a key path
-        // array (e.g. ['xaxis', 'range']
-        var keyPath = flattenedKeyToObjectPath(rawKey);
-
-        // Get final propery / index key
-        var lastKey = keyPath[keyPath.length-1];
-
-        // valParent is a reference to the array or object that has
-        // lastKey as an index or property respectively.
-        var valParent = getOrInitNestedProperty(parentObj, keyPath);
-
-        // Update valParent with relayout_val at lastKey
-        updateKeyValHandleDeleteExtend(valParent, lastKey, relayout_val);
+        // Set property value
+        if (relayoutVal === null) {
+            _.unset(parentObj, rawKey);
+        } else {
+            _.set(parentObj, rawKey, relayoutVal);
+        }
     }
 }
 
@@ -1711,34 +1578,27 @@ function performRestyleLike(parentArray, restyleData, restyleTraces) {
         if (!restyleData.hasOwnProperty(rawKey)) { continue }
 
         // Extract value for property and normalize into a value list
-        var val_array = restyleData[rawKey];
-        if (!Array.isArray(val_array)) {
-            val_array = [val_array]
+        var valArray = restyleData[rawKey];
+        if (!Array.isArray(valArray)) {
+            valArray = [valArray]
         }
-
-        // Convert raw key string (e.g. 'marker.color') into a key path
-        // array (e.g. ['marker', 'color']
-        var keyPath = flattenedKeyToObjectPath(rawKey);
-
-        // Get key path of the object to which the new value will be
-        // assigned
-        // var parentKeyPath = keyPath.slice(0, -1);
-
-        // Get final propery / index key
-        var lastKey = keyPath[keyPath.length - 1];
 
         // Loop over the indexes of the traces being restyled
         for (var i = 0; i < restyleTraces.length; i++) {
-            var trace_ind = restyleTraces[i];
 
-            // valParent is a reference to the array or object that has
-            // lastKey as an index or property respectively.
-            var valParent = getOrInitNestedProperty(
-                parentArray[trace_ind], keyPath);
+            // Get trace object
+            var traceInd = restyleTraces[i];
+            var trace = parentArray[traceInd];
 
-            var single_val = val_array[i % val_array.length];
+            // Extract value for this trace
+            var singleVal = valArray[i % valArray.length];
 
-            updateKeyValHandleDeleteExtend(valParent, lastKey, single_val);
+            // Set property value
+            if (singleVal === null) {
+                _.unset(trace, rawKey);
+            } else {
+                _.set(trace, rawKey, singleVal);
+            }
         }
     }
 }
@@ -1788,30 +1648,13 @@ function performMoveTracesLike(parentArray, currentInds, newInds) {
  *  is an array of properties names or array indexes that reference a
  *  property to be removed
  *
- * TODO: Investigate replacing with lodash's unset(With).
- *
  *  Examples:
  */
 function performRemoveProps(parentObj, keyPaths) {
-    var valParent = parentObj;
+
     for(var i=0; i < keyPaths.length; i++) {
-
         var keyPath = keyPaths[i];
-
-        for (var kp = 0; kp < keyPath.length - 1; kp++) {
-            var keyPathEl = keyPath[kp];
-            if (valParent[keyPathEl] === undefined) {
-                valParent = null;
-                break
-            }
-            valParent = valParent[keyPathEl];
-        }
-        if (valParent !== null) {
-            var lastKey = keyPath[keyPath.length - 1];
-            if (valParent.hasOwnProperty(lastKey)) {
-                delete valParent[lastKey];
-            }
-        }
+        _.unset(parentObj, keyPath);
     }
 }
 
@@ -1829,6 +1672,8 @@ function performRemoveProps(parentObj, keyPaths) {
  *
  * TODO: investigate replacing with lodash's mergeWith and a customizer
  *       that nulls out identical properties
+ *
+ *       Would also need a recursive null property unsetter
  *
  * Examples:
  *
