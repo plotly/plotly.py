@@ -18,7 +18,7 @@ ak = 'ubpiol2cve'
 tk = 'vaia8trjjb'
 config = {'plotly_domain': 'https://plot.ly',
           'plotly_streaming_domain': 'stream.plot.ly',
-          'plotly_api_domain': 'https://api.plot.ly', 
+          'plotly_api_domain': 'https://api.plot.ly',
           'plotly_ssl_verification': False}
 
 
@@ -150,7 +150,7 @@ class TestStreaming(PlotlyTestCase):
             'server': 'stream.plot.ly',
             'port': 80,
             'ssl_enabled': False,
-            'ssl_verification_enabled': False, 
+            'ssl_verification_enabled': False,
             'headers': {
                 'Host': 'stream.plot.ly',
                 'plotly-streamtoken': tk
@@ -175,7 +175,7 @@ class TestStreaming(PlotlyTestCase):
             'server': 'stream.plot.ly',
             'port': 443,
             'ssl_enabled': True,
-            'ssl_verification_enabled': True, 
+            'ssl_verification_enabled': True,
             'headers': {
                 'Host': 'stream.plot.ly',
                 'plotly-streamtoken': tk

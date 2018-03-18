@@ -2817,6 +2817,6 @@ class TestChoropleth(NumpyTestUtilsMixin, TestCase):
             -85.142567,
             -85.113329,
             -85.10533699999999
-        ] 
-                   
+        ]
+
         self.assertEqual(fig['data'][2]['x'][:50], exp_fig_head)
