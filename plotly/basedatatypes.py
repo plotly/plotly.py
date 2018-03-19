@@ -1901,4 +1901,3 @@ class BaseFrameHierarchyType(BasePlotlyType):
     def _send_update(self, prop, val):
         # Frames are not supported by FrameWidget and updates are not propagated to parents
         pass
-

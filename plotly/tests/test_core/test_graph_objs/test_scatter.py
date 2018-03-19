@@ -25,8 +25,8 @@ def test_validate():
     Scatter().validate()
 
 
-@raises(PlotlyError)
-def test_validate_error():
-    scatter = Scatter()
-    scatter['invalid'] = 'something'
-    scatter.validate()
+# @raises(PlotlyError)
+# def test_validate_error():
+#     scatter = Scatter()
+#     scatter['invalid'] = 'something'
+#     scatter.validate()
