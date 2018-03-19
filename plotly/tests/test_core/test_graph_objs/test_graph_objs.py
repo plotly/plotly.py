@@ -3,12 +3,13 @@ from unittest import TestCase
 import plotly.graph_objs as go
 import plotly.graph_reference as gr
 
+# added FigureWidget to OLD_CLASS_NAMES (v 2 and lower)
 OLD_CLASS_NAMES = ['AngularAxis', 'Annotation', 'Annotations', 'Area',
                    'Bar', 'Box', 'ColorBar', 'Contour', 'Contours',
                    'Data', 'ErrorX', 'ErrorY', 'ErrorZ', 'Figure',
-                   'Font', 'Frames', 'Heatmap', 'Histogram', 'Histogram2d',
-                   'Histogram2dContour', 'Layout', 'Legend', 'Line',
-                   'Margin', 'Marker', 'RadialAxis', 'Scatter',
+                   'FigureWidget', 'Font', 'Frames', 'Heatmap', 'Histogram',
+                   'Histogram2d', 'Histogram2dContour', 'Layout', 'Legend',
+                   'Line', 'Margin', 'Marker', 'RadialAxis', 'Scatter',
                    'Scatter3d', 'Scene', 'Stream', 'Surface', 'Trace',
                    'XAxis', 'XBins', 'YAxis', 'YBins', 'ZAxis']
 
