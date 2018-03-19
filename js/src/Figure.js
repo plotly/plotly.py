@@ -1534,12 +1534,24 @@ function fullMergeCustomizer(objValue, srcValue) {
 /**
  * Reform a Plotly.relayout like operation on an input object
  *
- * @param parentObj
+ * @param {Object} parentObj
  *  The object that the relayout operation should be applied to
- * @param relayoutData
+ * @param {Object} relayoutData
  *  An relayout object as accepted by Plotly.relayout
  *
  *  Examples:
+ *      var d = {foo {bar [5, 10]}};
+ *      performRelayoutLike(d, {'foo.bar': [0, 1]});
+ *      d -> {foo: {bar: [0, 1]}}
+ *
+ *      var d = {foo {bar [5, 10]}};
+ *      performRelayoutLike(d, {'baz': 34});
+ *      d -> {foo: {bar: [5, 10]}, baz: 34}
+ *
+ *      var d = {foo: {bar: [5, 10]};
+ *      performRelayoutLike(d, {'foo.baz[1]': 17});
+ *      d -> {foo: {bar: [5, 17]}}
+ *
  */
 function performRelayoutLike(parentObj, relayoutData) {
     // Perform a relayout style operation on a given parent object
@@ -1563,14 +1575,26 @@ function performRelayoutLike(parentObj, relayoutData) {
 /**
  * Perform a Plotly.restyle like operation on an input object array
  *
- * @param parentArray
- *  The object that the relayout operation should be applied to
- * @param restyleData
- *  An restyle object as accepted by Plotly.restyle
+ * @param {Array.<Object>} parentArray
+ *  The object that the restyle operation should be applied to
+ * @param {Object} restyleData
+ *  A restyle object as accepted by Plotly.restyle
  * @param {Array.<Number>} restyleTraces
  *  Array of indexes of the traces that the resytle operation applies to
  *
  *  Examples:
+ *      var d = [{foo: {bar: 1}}, {}, {}]
+ *      performRestyleLike(d, {'foo.bar': 2}, [0])
+ *      d -> [{foo: {bar: 2}}, {}, {}]
+ *
+ *      var d = [{foo: {bar: 1}}, {}, {}]
+ *      performRestyleLike(d, {'foo.bar': 2}, [0, 1, 2])
+ *      d -> [{foo: {bar: 2}}, {foo: {bar: 2}}, {foo: {bar: 2}}]
+ *
+ *      var d = [{foo: {bar: 1}}, {}, {}]
+ *      performRestyleLike(d, {'foo.bar': [2, 3, 4]}, [0, 1, 2])
+ *      d -> [{foo: {bar: 2}}, {foo: {bar: 3}}, {foo: {bar: 4}}]
+ *
  */
 function performRestyleLike(parentArray, restyleData, restyleTraces) {
     // Loop over the properties of restyleData
@@ -1610,9 +1634,17 @@ function performRestyleLike(parentArray, restyleData, restyleTraces) {
  * @param currentInds
  *  Array of the current indexes of traces to be moved
  * @param newInds
- *  Array of the new indexes that traces should be moved to.
+ *  Array of the new indexes that traces selected by currentInds should be
+ *  moved to.
  *
  *  Examples:
+ *      var d = [{foo: 0}, {foo: 1}, {foo: 2}]
+ *      performMoveTracesLike(d, [0, 1], [2, 0])
+ *      d -> [{foo: 1}, {foo: 2}, {foo: 0}]
+ *
+ *      var d = [{foo: 0}, {foo: 1}, {foo: 2}]
+ *      performMoveTracesLike(d, [0, 2], [1, 2])
+ *      d -> [{foo: 1}, {foo: 0}, {foo: 2}]
  */
 function performMoveTracesLike(parentArray, currentInds, newInds) {
 
@@ -1649,6 +1681,14 @@ function performMoveTracesLike(parentArray, currentInds, newInds) {
  *  property to be removed
  *
  *  Examples:
+ *      var d = {foo: [{bar: 0}, {bar: 1}], baz: 32}
+ *      performRemoveProps(d, ['baz'])
+ *      d -> {foo: [{bar: 0}, {bar: 1}]}
+ *
+ *      var d = {foo: [{bar: 0}, {bar: 1}], baz: 32}
+ *      performRemoveProps(d, ['foo[1].bar', 'baz'])
+ *      d -> {foo: [{bar: 0}, {}]}
+ *
  */
 function performRemoveProps(parentObj, keyPaths) {
 
@@ -1670,10 +1710,24 @@ function performRemoveProps(parentObj, keyPaths) {
  * @param {Object} fullObj
  * @param {Object} removeObj
  *
- * Examples:
+ *  Examples:
+ *      var fullD = {foo: [{bar: 0}, {bar: 1}], baz: 32}
+ *      var removeD = {baz: 32}
+ *      createDeltaObject(fullD, removeD)
+ *          -> {foo: [{bar: 0}, {bar: 1}]}
+ *
+ *      var fullD = {foo: [{bar: 0}, {bar: 1}], baz: 32}
+ *      var removeD = {baz: 45}
+ *      createDeltaObject(fullD, removeD)
+ *          -> {foo: [{bar: 0}, {bar: 1}], baz: 32}
+ *
+ *      var fullD = {foo: [{bar: 0}, {bar: 1}], baz: 32}
+ *      var removeD = {foo: [{bar: 0}, {bar: 1}]}
+ *      createDeltaObject(fullD, removeD)
+ *          -> {baz: 32}
  *
  */
-function createDeltaObject (fullObj, removeObj) {
+function createDeltaObject(fullObj, removeObj) {
 
     // Initialize result as object or array
     var res;
