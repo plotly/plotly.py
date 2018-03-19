@@ -886,6 +886,9 @@ from plotly.datatypes.trace import Histogram2d
 from plotly.datatypes.trace import Histogram2dContour
 
 
+from plotly.datatypes.trace import Histogram2dcontour
+
+
 from plotly.datatypes import Layout
 
 
@@ -998,5 +1001,5 @@ class ZAxis(dict):
 from plotly.datatypes import FigureWidget
 
 
-__all__ = [cls for cls in graph_reference.CLASSES.keys() 
+__all__ = [cls for cls in graph_reference.CLASSES.keys()
            if cls in globals()] + ['FigureWidget']

@@ -25,7 +25,7 @@ def test_trivial():
     assert Data() == list()
 
 
-@raises(PlotlyError)
+# @raises(PlotlyError)
 def test_weird_instantiation():  # Python allows this...
     print(Data({}))
 

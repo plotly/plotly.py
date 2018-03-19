@@ -9,14 +9,14 @@ import numpy as np
 from plotly.offline import plot as plotlypy_plot
 from traitlets import Undefined
 
-from plotly import animation
+from plotly import animation, graph_reference
 from plotly.basevalidators import CompoundValidator, CompoundArrayValidator, BaseDataValidator
 from plotly.callbacks import Points, BoxSelector, LassoSelector, InputDeviceState
 
 # from plotly.validators.layout import (XAxisValidator, YAxisValidator, GeoValidator,
 #                                       TernaryValidator, SceneValidator)
 
-from plotly.graph_objs.graph_objs import PlotlyBase
+from plotly.graph_objs.graph_objs import PlotlyBase, PlotlyList, PlotlyDict
 
 
 class BaseFigure(PlotlyBase):
@@ -114,6 +114,7 @@ class BaseFigure(PlotlyBase):
         # Logging
         # -------
         self._log_plotly_commands = False
+
 
     # Magic Methods
     # -------------
@@ -1257,6 +1258,8 @@ class BaseFigure(PlotlyBase):
 
 
 class BasePlotlyType(PlotlyBase):
+
+
     _validators = None
 
     # Defaults to help mocking
@@ -1269,7 +1272,6 @@ class BasePlotlyType(PlotlyBase):
         self._orphan_props = {}  # properties dict for use while object has no parent
         self._parent = None
         self._change_callbacks = {}  # type: typ.Dict[typ.Tuple, typ.Callable]
-
 
     @property
     def plotly_name(self):
