@@ -845,7 +845,32 @@ class Contours(dict):
 
 
 class Data(list, PlotlyBase):
-    pass
+    def update(self, changes, make_copies=False):
+        """
+        Update current list with changed_list, which must be iterable.
+
+        :param (dict|list[dict]) changes:
+        :param (bool) make_copies:
+
+        Because mutable objects contain references to their values, updating
+        multiple items in a list will cause the items to all reference the same
+        original set of objects. To change this behavior add
+        `make_copies=True` which makes deep copies of the update items and
+        therefore break references.
+
+        """
+        if isinstance(changes, dict):
+            changes = [changes]
+        for index in range(len(self)):
+            try:
+                update = changes[index % len(changes)]
+            except ZeroDivisionError:
+                pass
+            else:
+                if make_copies:
+                    self[index].update(copy.deepcopy(update))
+                else:
+                    self[index].update(update)
 
 
 class ErrorX(dict):

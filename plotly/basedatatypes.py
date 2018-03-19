@@ -115,7 +115,6 @@ class BaseFigure(PlotlyBase):
         # -------
         self._log_plotly_commands = False
 
-
     # Magic Methods
     # -------------
     def __setitem__(self, prop, value):
