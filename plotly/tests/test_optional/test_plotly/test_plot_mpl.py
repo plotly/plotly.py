@@ -30,29 +30,30 @@ class PlotMPLTest(TestCase):
         py.sign_in('PlotlyImageTest', '786r5mecv0',
                    plotly_domain='https://plot.ly')
 
-    @raises(exceptions.PlotlyError)
-    def test_update_type_error(self):
-        fig, ax = plt.subplots()
-        ax.plot([1, 2, 3])
-        update = []
-        py.plot_mpl(fig, update=update, filename="nosetests", auto_open=False)
+    if matplotlylib:
+        @raises(exceptions.PlotlyError)
+        def test_update_type_error(self):
+            fig, ax = plt.subplots()
+            ax.plot([1, 2, 3])
+            update = []
+            py.plot_mpl(fig, update=update, filename="nosetests", auto_open=False)
 
-    @raises(exceptions.PlotlyError)
-    def test_update_validation_error(self):
-        fig, ax = plt.subplots()
-        ax.plot([1, 2, 3])
-        update = {'invalid': 'anything'}
-        py.plot_mpl(fig, update=update, filename="nosetests", auto_open=False)
+        @raises(exceptions.PlotlyError)
+        def test_update_validation_error(self):
+            fig, ax = plt.subplots()
+            ax.plot([1, 2, 3])
+            update = {'invalid': 'anything'}
+            py.plot_mpl(fig, update=update, filename="nosetests", auto_open=False)
 
-    @attr('slow')
-    def test_update(self):
-        fig, ax = plt.subplots()
-        ax.plot([1, 2, 3])
-        title = 'new title'
-        update = {'layout': {'title': title}}
-        url = py.plot_mpl(fig, update=update, filename="nosetests",
-                          auto_open=False)
-        un = url.replace("https://plot.ly/~", "").split('/')[0]
-        fid = url.replace("https://plot.ly/~", "").split('/')[1]
-        pfig = py.get_figure(un, fid)
-        assert pfig['layout']['title'] == title
+        @attr('slow')
+        def test_update(self):
+            fig, ax = plt.subplots()
+            ax.plot([1, 2, 3])
+            title = 'new title'
+            update = {'layout': {'title': title}}
+            url = py.plot_mpl(fig, update=update, filename="nosetests",
+                              auto_open=False)
+            un = url.replace("https://plot.ly/~", "").split('/')[0]
+            fid = url.replace("https://plot.ly/~", "").split('/')[1]
+            pfig = py.get_figure(un, fid)
+            assert pfig['layout']['title'] == title
