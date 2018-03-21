@@ -584,7 +584,8 @@ class ColorValidator(BaseValidator):
 
     def description(self):
 
-        named_clrs_str = '\n'.join(textwrap.wrap(', '.join(self.named_colors), width=80, subsequent_indent=' ' * 12))
+        named_clrs_str = '\n'.join(textwrap.wrap(', '.join(
+            self.named_colors), width=79, subsequent_indent=' ' * 12))
 
         valid_color_description = """\
     The '{plotly_name}' property is a color and may be specified as:  
@@ -1090,38 +1091,60 @@ class ImageUriValidator(BaseValidator):
 class CompoundValidator(BaseValidator):
     def __init__(self, plotly_name, parent_name, data_class, data_docs):
         super().__init__(plotly_name=plotly_name, parent_name=parent_name)
-        self.data_class = data_class
+
+        # Save element class string
+        self.data_class_str = data_class
+        self._data_class = None
         self.data_docs = data_docs
+        self.module_str = CompoundValidator.compute_graph_obj_module_str(
+            self.data_class_str, parent_name)
 
     @staticmethod
-    def get_constructor_params_str(data_class):
-        params_match = re.search("Parameters\n\W*-+\n\W*(.*?)(Returns|$)",
-                                 str(data_class.__init__.__doc__),
-                                 flags=re.DOTALL)
+    def import_graph_objs_class(data_class_str, module_str):
+        # Import class module
+        module = import_module(module_str)
 
-        if params_match is not None:
-            param_descs = params_match.groups()[0]
+        # Get class reference
+        return getattr(module, data_class_str)
 
-            # Increase indent by 4 spaces
-            param_descs_indented = ('\n' + ' ' * 4).join(param_descs.split('\n'))
+    @staticmethod
+    def compute_graph_obj_module_str(data_class_str, parent_name):
+        if parent_name == 'frame' and data_class_str in ['Data', 'Layout']:
+            # Special case. There are no graph_objs.frame.Data or
+            # graph_objs.frame.Layout classes. These are remapped to
+            # graph_objs.Data and graph_objs.Layout
 
-            return param_descs_indented
+            parent_parts = parent_name.split('.')
+            module_str = '.'.join(['plotly.graph_objs'] + parent_parts[1:])
+        elif parent_name:
+            module_str = 'plotly.graph_objs.' + parent_name
         else:
-            return ''
+            module_str = 'plotly.graph_objs'
+
+        return  module_str
+
+    @property
+    def data_class(self):
+        if self._data_class is None:
+            self._data_class = CompoundValidator.import_graph_objs_class(
+                self.data_class_str, self.module_str)
+
+        return self._data_class
 
     def description(self):
 
         desc = ("""\
-    The '{plotly_name}' property is an instance of {data_class} 
+    The '{plotly_name}' property is an instance of {class_str} 
     that may be specified as:
-      - An instance of {data_class}
+      - An instance of {module_str}.{class_str}
       - A dict of string/value properties that will be passed to the 
-        {data_class} constructor
+        {class_str} constructor
       
         Supported dict properties:
             {constructor_params_str}"""
                 ).format(plotly_name=self.plotly_name,
-                         data_class=type_str(self.data_class),
+                         class_str=self.data_class_str,
+                         module_str=self.module_str,
                          constructor_params_str=self.data_docs)
 
         return desc
@@ -1150,29 +1173,44 @@ class CompoundValidator(BaseValidator):
 class CompoundArrayValidator(BaseValidator):
     def __init__(self, plotly_name, parent_name, element_class, element_docs):
         super().__init__(plotly_name=plotly_name, parent_name=parent_name)
-        self.data_class = element_class
+
+        # Save element class string
+        self.data_class_str = element_class
+        self._data_class = None
+
         self.data_docs = element_docs
+        self.module_str = CompoundValidator.compute_graph_obj_module_str(
+            self.data_class_str, parent_name)
 
     def description(self):
 
         desc = ("""\
-    The '{plotly_name}' property is a tuple of instances of {data_class} that may be specified as:
-      - A list or tuple of instances of {data_class}
-      - A list or tuple of dicts of string/value properties that will be passed to the {data_class} constructor
+    The '{plotly_name}' property is a tuple of instances of {class_str} that may be specified as:
+      - A list or tuple of instances of {module_str}.{class_str}
+      - A list or tuple of dicts of string/value properties that will be passed to the {class_str} constructor
 
         Supported dict properties:
             {constructor_params_str}"""
                 ).format(plotly_name=self.plotly_name,
-                         data_class=type_str(self.data_class),
+                         class_str=self.data_class_str,
+                         module_str=self.module_str,
                          constructor_params_str=self.data_docs)
 
         return desc
+
+    @property
+    def data_class(self):
+        if self._data_class is None:
+            self._data_class = CompoundValidator.import_graph_objs_class(
+                self.data_class_str, self.module_str)
+
+        return self._data_class
 
     def validate_coerce(self, v):
 
         if isinstance(self.data_class, str):
             raise ValueError("Invalid data_class of type 'string': {data_class}"
-                             .format(data_class = self.data_class))
+                             .format(data_class=self.data_class))
 
         if v is None:
             v = ()
@@ -1203,15 +1241,16 @@ class CompoundArrayValidator(BaseValidator):
 class BaseDataValidator(BaseValidator):
     def __init__(self, class_map, plotly_name, parent_name):
         super().__init__(plotly_name=plotly_name, parent_name=parent_name)
-        self.class_map = class_map
+        self.class_strs_map = class_map
+        self._class_map = None
 
     def description(self):
 
-        trace_types = str(list(self.class_map.keys()))
+        trace_types = str(list(self.class_strs_map.keys()))
 
         trace_types_wrapped = '\n'.join(textwrap.wrap(trace_types,
                                                       subsequent_indent=' ' * 21,
-                                                      width=80 - 8))
+                                                      width=79 - 8))
 
         desc = ("""\
     The '{plotly_name}' property is a tuple of trace instances that may be specified as:
@@ -1227,6 +1266,20 @@ class BaseDataValidator(BaseValidator):
                 ).format(plotly_name=self.plotly_name, trace_types=trace_types_wrapped)
 
         return desc
+
+    @property
+    def class_map(self):
+        if self._class_map is None:
+
+            # Initialize class map
+            self._class_map = {}
+
+            # Import trace classes
+            trace_module = import_module('plotly.graph_objs')
+            for k, class_str in self.class_strs_map.items():
+                self._class_map[k] = getattr(trace_module, class_str)
+
+        return self._class_map
 
     def validate_coerce(self, v):
 

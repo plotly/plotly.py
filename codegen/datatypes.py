@@ -1,11 +1,92 @@
-from io import StringIO
 import os
 import os.path as opath
 import textwrap
-import importlib
-from typing import List, Dict
+from io import StringIO
+from typing import List, Tuple
 
-from codegen.utils import TraceNode, format_source, PlotlyNode
+from codegen.utils import format_source, PlotlyNode, \
+    write_source_py, build_from_imports_py
+
+DEPRECATED_DATATYPES = {
+    # List types
+    'Data':
+        {'base_type': list,
+         'new': ['Scatter', 'Bar', 'Area', 'Histogram', 'etc.']},
+    'Annotations':
+        {'base_type': list,
+         'new': ['layout', 'layout.scene']},
+    'Frames':
+        {'base_type': list,
+         'new': ['Frame']},
+
+    # Dict types
+    'AngularAxis':
+        {'base_type': dict,
+         'new': ['layout', 'layout.polar']},
+    'Annotation':
+        {'base_type': dict,
+         'new': ['layout', 'layout.scene']},
+    'ColorBar':
+        {'base_type': dict,
+         'new': ['scatter.marker', 'surface', 'etc.']},
+    'Contours':
+        {'base_type': dict,
+         'new': ['contour', 'surface', 'etc.']},
+    'ErrorX':
+        {'base_type': dict,
+         'new': ['scatter', 'histogram', 'etc.']},
+    'ErrorY':
+        {'base_type': dict,
+         'new': ['scatter', 'histogram', 'etc.']},
+    'ErrorZ':
+        {'base_type': dict,
+         'new': ['scatter3d']},
+    'Font':
+        {'base_type': dict,
+         'new': ['layout', 'layout.hoverlabel', 'etc.']},
+    'Legend':
+        {'base_type': dict,
+         'new': ['layout']},
+    'Line':
+        {'base_type': dict,
+         'new': ['scatter', 'layout.shape', 'etc.']},
+    'Margin':
+        {'base_type': dict,
+         'new': ['layout']},
+    'Marker':
+        {'base_type': dict,
+         'new': ['scatter', 'histogram.selected', 'etc.']},
+    'RadialAxis':
+        {'base_type': dict,
+         'new': ['layout', 'layout.polar']},
+    'Scene':
+        {'base_type': dict,
+         'new': ['Scene']},
+    'Stream':
+        {'base_type': dict,
+         'new': ['scatter', 'area']},
+    'XAxis':
+        {'base_type': dict,
+         'new': ['layout', 'layout.scene']},
+    'YAxis':
+        {'base_type': dict,
+         'new': ['layout', 'layout.scene']},
+    'ZAxis':
+        {'base_type': dict,
+         'new': ['layout.scene']},
+    'XBins':
+        {'base_type': dict,
+         'new': ['histogram', 'histogram2d']},
+    'YBins':
+        {'base_type': dict,
+         'new': ['histogram', 'histogram2d']},
+    'Trace':
+        {'base_type': dict,
+         'new': ['Scatter', 'Bar', 'Area', 'Histogram', 'etc.']},
+    'Histogram2dcontour':
+        {'base_type': dict,
+         'new': ['Histogram2dContour']},
+}
 
 
 def get_typing_type(plotly_type, array_ok=False):
@@ -30,12 +111,7 @@ def get_typing_type(plotly_type, array_ok=False):
         return pytype
 
 
-def build_datatypes_py(parent_node: PlotlyNode,
-                       extra_nodes: Dict[str, 'PlotlyNode'] = {}):
-
-    compound_nodes = parent_node.child_compound_datatypes
-    if not compound_nodes:
-        return None
+def build_datatypes_py(compound_node: PlotlyNode):
 
     buffer = StringIO()
 
@@ -43,65 +119,68 @@ def build_datatypes_py(parent_node: PlotlyNode,
     # -------
     buffer.write('from typing import *\n')
     buffer.write('from numbers import Number\n')
-    buffer.write(f'from plotly.basedatatypes import {parent_node.base_datatype_class}\n')
+    buffer.write(
+        f'from plotly.basedatatypes import {compound_node.base_datatype_class}\n')
 
-    # ### Validators ###
-    validators_csv = ', '.join([f'{n.plotly_name} as v_{n.plotly_name}' for n in compound_nodes])
-    buffer.write(f'from plotly.validators{parent_node.pkg_str} import ({validators_csv})\n')
+    # ### Import type's validator package with rename ###
+    buffer.write(
+        f'from plotly.validators{compound_node.parent_pkg_str} import '
+        f'{compound_node.name_undercase} as v_{compound_node.name_undercase}\n')
 
-    # ### Datatypes ###
-    datatypes_csv = ', '.join([f'{n.plotly_name} as d_{n.plotly_name}' for n in compound_nodes if n.child_compound_datatypes])
-    if datatypes_csv:
-        buffer.write(f'from plotly.datatypes{parent_node.pkg_str} import ({datatypes_csv})\n')
+    # ### Import type's graph_objs package with rename ###
+    # If type has any compound children, then import that package that holds
+    #  them
+    if compound_node.child_compound_datatypes:
+        buffer.write(
+            f'from plotly.graph_objs{compound_node.parent_pkg_str} import '
+            f'{compound_node.name_undercase} as d_{compound_node.name_undercase}\n')
 
-    # Compound datatypes loop
-    # -----------------------
-    for compound_node in compound_nodes:
+    # Save literal nodes
+    # ------------------
+    literal_nodes = [n for n in compound_node.child_literals if
+                     n.plotly_name in ['type']]
 
-        # grab literals
-        literal_nodes = [n for n in compound_node.child_literals if n.plotly_name in ['type']]
+    # Write class definition
+    # ----------------------
+    buffer.write(f"""
 
-        # ### Class definition ###
-        buffer.write(f"""
+class {compound_node.name_class}({compound_node.base_datatype_class}):\n""")
 
-class {compound_node.name_class}({parent_node.base_datatype_class}):\n""")
+    # ### Property definitions ###
+    child_datatype_nodes = compound_node.child_datatypes
 
-        # ### Property definitions ###
-        child_datatype_nodes = compound_node.child_datatypes
-        extra_subtype_nodes = [node for node_name, node in
-                               extra_nodes.items() if
-                               node_name.startswith(compound_node.dir_str)]
+    subtype_nodes = child_datatype_nodes
+    for subtype_node in subtype_nodes:
+        if subtype_node.is_array_element:
+            prop_type = f'Tuple[d_{compound_node.plotly_name}.{subtype_node.name_class}]'
+        elif subtype_node.is_compound:
+            prop_type = f'd_{compound_node.plotly_name}.{subtype_node.name_class}'
+        else:
+            prop_type = get_typing_type(subtype_node.datatype)
 
-        subtype_nodes = child_datatype_nodes + extra_subtype_nodes
-        for subtype_node in subtype_nodes:
-            if subtype_node.is_array_element:
-                prop_type = f'Tuple[d_{compound_node.plotly_name}.{subtype_node.name_class}]'
-            elif subtype_node.is_compound:
-                prop_type = f'd_{compound_node.plotly_name}.{subtype_node.name_class}'
-            else:
-                prop_type = get_typing_type(subtype_node.datatype)
+        # #### Get property description ####
+        raw_description = subtype_node.description
+        property_description = '\n'.join(textwrap.wrap(raw_description,
+                                                       subsequent_indent=' ' * 8,
+                                                       width=79 - 8))
 
-
-            # #### Get property description ####
-            raw_description = subtype_node.description
-            property_description = '\n'.join(textwrap.wrap(raw_description,
-                                                           subsequent_indent=' ' * 8,
-                                                           width=80 - 8))
-
-            # #### Get validator description ####
-            validator = subtype_node.validator_instance
+        # # #### Get validator description ####
+        validator = subtype_node.get_validator_instance()
+        if validator:
             validator_description = reindent_validator_description(validator, 4)
 
             # #### Combine to form property docstring ####
             if property_description.strip():
-                property_docstring = f"""{property_description}  
-                
+                property_docstring = f"""{property_description}
+    
         {validator_description}"""
             else:
                 property_docstring = validator_description
+        else:
+            property_docstring = property_description
 
-            # #### Write property ###
-            buffer.write(f"""\
+        # #### Write property ###
+        buffer.write(f"""\
 
     # {subtype_node.name_property}
     # {'-' * len(subtype_node.name_property)}
@@ -112,16 +191,16 @@ class {compound_node.name_class}({parent_node.base_datatype_class}):\n""")
         \"\"\"
         return self['{subtype_node.name_property}']""")
 
-            # #### Set property ###
-            buffer.write(f"""
+        # #### Set property ###
+        buffer.write(f"""
 
     @{subtype_node.name_property}.setter
     def {subtype_node.name_property}(self, val):
         self['{subtype_node.name_property}'] = val\n""")
 
         # ### Literals ###
-        for literal_node in literal_nodes:
-            buffer.write(f"""\
+    for literal_node in literal_nodes:
+        buffer.write(f"""\
 
     # {literal_node.name_property}
     # {'-' * len(literal_node.name_property)}
@@ -129,8 +208,8 @@ class {compound_node.name_class}({parent_node.base_datatype_class}):\n""")
     def {literal_node.name_property}(self) -> {prop_type}:
         return self._props['{literal_node.name_property}']\n""")
 
-        # ### Self properties description ###
-        buffer.write(f"""
+    # ### Self properties description ###
+    buffer.write(f"""
 
     # property parent name
     # --------------------
@@ -144,47 +223,47 @@ class {compound_node.name_class}({parent_node.base_datatype_class}):\n""")
     def _prop_descriptions(self) -> str:
         return \"\"\"\\""")
 
-        buffer.write(compound_node.get_constructor_params_docstring(
-            indent=8,
-            extra_nodes=extra_subtype_nodes))
+    buffer.write(compound_node.get_constructor_params_docstring(
+        indent=8))
 
-        buffer.write(f"""
+    buffer.write(f"""
         \"\"\"""")
 
-        # ### Constructor ###
-        buffer.write(f"""
+    # ### Constructor ###
+    buffer.write(f"""
     def __init__(self""")
 
-        add_constructor_params(buffer, subtype_nodes)
-        add_docstring(buffer, compound_node, extra_subtype_nodes)
+    add_constructor_params(buffer, subtype_nodes)
+    header = f"Construct a new {compound_node.name_pascal_case} object"
+    add_docstring(buffer, compound_node, header=header)
 
-        buffer.write(f"""
+    buffer.write(f"""
         super().__init__('{compound_node.name_property}', **kwargs)
-        
+
         # Initialize validators
         # ---------------------""")
-        for subtype_node in subtype_nodes:
-
-            buffer.write(f"""
-        self._validators['{subtype_node.name_property}'] = v_{compound_node.plotly_name}.{subtype_node.name_validator}()""")
-
+    for subtype_node in subtype_nodes:
         buffer.write(f"""
-        
+        self._validators['{subtype_node.name_property}'] = v_{compound_node.name_undercase}.{subtype_node.name_validator}()""")
+
+    buffer.write(f"""
+
         # Populate data dict with properties
         # ----------------------------------""")
-        for subtype_node in subtype_nodes:
-            buffer.write(f"""
+    for subtype_node in subtype_nodes:
+        buffer.write(f"""
         self.{subtype_node.name_property} = {subtype_node.name_property}""")
 
-        # ### Literals ###
-        literal_nodes = [n for n in compound_node.child_literals if n.plotly_name in ['type']]
-        if literal_nodes:
-            buffer.write(f"""
+    # ### Literals ###
+    literal_nodes = [n for n in compound_node.child_literals if
+                     n.plotly_name in ['type']]
+    if literal_nodes:
+        buffer.write(f"""
 
         # Read-only literals
         # ------------------""")
-            for literal_node in literal_nodes:
-                buffer.write(f"""
+        for literal_node in literal_nodes:
+            buffer.write(f"""
         self._props['{literal_node.name_property}'] = '{literal_node.node_data}'""")
 
     return buffer.getvalue()
@@ -207,17 +286,26 @@ def add_constructor_params(buffer, subtype_nodes, colon=True):
         ){':' if colon else ''}""")
 
 
-def add_docstring(buffer, compound_node, extra_subtype_nodes=[]):
+def add_docstring(buffer, compound_node, header):
+
+    node_description = compound_node.description
+    if node_description:
+        description_lines = textwrap.wrap(
+            node_description,
+            width=79-8,
+            subsequent_indent=' ' * 8)
+
+        node_description = '\n'.join(description_lines) + '\n\n'
+
     # ### Docstring ###
     buffer.write(f"""
         \"\"\"
-        Construct a new {compound_node.name_pascal_case} object
+        {header}
         
-        Parameters
+        {node_description}        Parameters
         ----------""")
     buffer.write(compound_node.get_constructor_params_docstring(
-        indent=8,
-        extra_nodes=extra_subtype_nodes ))
+        indent=8))
 
     # #### close docstring ####
     buffer.write(f"""
@@ -228,12 +316,11 @@ def add_docstring(buffer, compound_node, extra_subtype_nodes=[]):
         \"\"\"""")
 
 
-def write_datatypes_py(outdir, node: PlotlyNode,
-                       extra_nodes: Dict[str, 'PlotlyNode']={}):
+def write_datatypes_py(outdir, node: PlotlyNode):
 
     # Generate source code
     # --------------------
-    datatype_source = build_datatypes_py(node, extra_nodes)
+    datatype_source = build_datatypes_py(node)
     if datatype_source:
         try:
             formatted_source = format_source(datatype_source)
@@ -243,20 +330,36 @@ def write_datatypes_py(outdir, node: PlotlyNode,
 
         # Write file
         # ----------
-        filedir = opath.join(outdir, 'datatypes', *node.dir_path)
+        filedir = opath.join(outdir, 'graph_objs', *node.parent_dir_path)
         os.makedirs(filedir, exist_ok=True)
-        filepath = opath.join(filedir, '__init__.py')
+        filepath = opath.join(filedir, '_' + node.name_undercase + '.py')
 
-        mode = 'at' if os.path.exists(filepath) else 'wt'
-        with open(filepath, mode) as f:
-            if mode == 'at':
-                f.write("\n\n")
+        with open(filepath, 'wt') as f:
             f.write(formatted_source)
-            f.flush()
-            os.fsync(f.fileno())
 
 
-def build_figure_py(trace_node, base_package, base_classname, fig_classname):
+def build_datatypes_init_py(root_dir: str, dir_path: Tuple[str], nodes: List['PlotlyNode']):
+    buffer = StringIO()
+    for node in nodes:
+        buffer.write(f"""\
+from ._{node.name_undercase} import {node.name_class}\n""")
+
+    return buffer.getvalue()
+
+
+def write_datatypes_init_py(outdir, dir_path, import_pairs):
+    # Generate source code
+    # --------------------
+    init_source = build_from_imports_py(import_pairs)
+
+    # Write file
+    # ----------
+    filepath = opath.join(outdir, 'graph_objs', *dir_path, '__init__.py')
+    write_source_py(init_source, filepath)
+
+
+def build_figure_py(trace_node, base_package, base_classname, fig_classname,
+                    data_validator, layout_validator, frame_validator):
     buffer = StringIO()
     trace_nodes = trace_node.child_compound_datatypes
 
@@ -265,28 +368,16 @@ def build_figure_py(trace_node, base_package, base_classname, fig_classname):
     buffer.write(f'from plotly.{base_package} import {base_classname}\n')
 
     trace_types_csv = ', '.join([n.name_pascal_case for n in trace_nodes])
-    buffer.write(f'from plotly.datatypes.trace import ({trace_types_csv})\n')
+    buffer.write(f'from plotly.graph_objs import ({trace_types_csv})\n')
 
     buffer.write(f"""
 
 class {fig_classname}({base_classname}):\n""")
 
-    # Reload validators and datatypes modules since we're appending
-    # Classes to them as we go
-    validators_module = importlib.import_module('plotly.validators')
-    importlib.reload(validators_module)
-    datatypes_module = importlib.import_module('plotly.datatypes')
-    importlib.reload(datatypes_module)
-
     # Build constructor description strings
-    data_validator = validators_module.DataValidator()
     data_description = reindent_validator_description(data_validator, 8)
-
-    layout_validator = validators_module.LayoutValidator()
     layout_description = reindent_validator_description(layout_validator, 8)
-
-    frames_validator = validators_module.FramesValidator()
-    frames_description = reindent_validator_description(frames_validator, 8)
+    frames_description = reindent_validator_description(frame_validator, 8)
 
     buffer.write(f"""
     def __init__(self, data=None, layout=None, frames=None):
@@ -314,7 +405,8 @@ class {fig_classname}({base_classname}):\n""")
     def add_{trace_node.plotly_name}(self""")
 
         add_constructor_params(buffer, trace_node.child_datatypes)
-        add_docstring(buffer, trace_node)
+        header = f"Add a new {trace_node.name_pascal_case} trace"
+        add_docstring(buffer, trace_node, header)
 
         # Function body
         # -------------
@@ -337,7 +429,10 @@ class {fig_classname}({base_classname}):\n""")
     return buffer.getvalue()
 
 
-def append_figure_class(outdir, trace_node):
+def write_figure_class(outdir, trace_node,
+                       data_validator,
+                       layout_validator,
+                       frame_validator):
 
     if trace_node.node_path:
         raise ValueError('Expected root trace node. Received node with path "%s"' % trace_node.dir_str)
@@ -346,15 +441,102 @@ def append_figure_class(outdir, trace_node):
                     ('basedatatypes', 'BaseFigure', 'Figure')]
 
     for base_package, base_classname, fig_classname in base_figures:
-        figure_source = build_figure_py(trace_node, base_package, base_classname, fig_classname)
+        figure_source = build_figure_py(trace_node,
+                                        base_package,
+                                        base_classname,
+                                        fig_classname,
+                                        data_validator,
+                                        layout_validator,
+                                        frame_validator)
         formatted_source = format_source(figure_source)
 
-        # Append to file
-        # --------------
-        filepath = opath.join(outdir, '__init__.py')
+        # Write to file
+        # -------------
+        filepath = opath.join(outdir, 'graph_objs', f'_{fig_classname.lower()}.py')
 
-        with open(filepath, 'a') as f:
-            f.write('\n\n')
+        with open(filepath, 'wt') as f:
             f.write(formatted_source)
-            f.flush()
-            os.fsync(f.fileno())
+
+
+def build_dict_deprecation_message(class_name, opts):
+    replacements = []
+    for repl in opts['new']:
+
+        if repl == 'etc.':
+            replacements.append(repl)
+        else:
+            repl_parts = repl.split('.')
+
+            # Add class_name if class not provided
+            repl_is_class = repl_parts[-1][0].isupper()
+            if not repl_is_class:
+                repl_parts.append(class_name)
+
+            # Add plotly.graph_objs prefix
+            full_class_str = '.'.join(['plotly', 'graph_objs'] + repl_parts)
+            replacements.append(full_class_str)
+
+    replacemens_str = '\n  - '.join(replacements)
+
+    if opts['base_type'] == list:
+        return f"""\
+plotly.graph_objs.{class_name} is deprecated.
+Please replace it with a list or tuple of instances of the following types
+  - {replacemens_str}
+"""
+    else:
+        return f"""\
+plotly.graph_objs.{class_name} is deprecated.
+Please replace it with one of the following more specific types
+  - {replacemens_str}
+"""
+
+
+def build_deprecated_datatypes_py():
+    buffer = StringIO()
+    buffer.write('import warnings\n')
+    buffer.write(r"""
+warnings.filterwarnings('default',
+                        r'plotly\.graph_objs\.\w+ is deprecated',
+                        DeprecationWarning)
+
+
+""")
+
+    for class_name, opts in DEPRECATED_DATATYPES.items():
+        base_class_name = opts['base_type'].__name__
+        depr_msg = build_dict_deprecation_message(class_name, opts)
+
+        buffer.write(f"""\
+class {class_name}({base_class_name}):
+    \"\"\"
+    {depr_msg}
+    \"\"\"
+    def __init__(self, *args, **kwargs):
+        \"\"\"
+        {depr_msg}
+        \"\"\"
+        warnings.warn(\"\"\"{depr_msg}\"\"\", DeprecationWarning)
+        super().__init__(*args, **kwargs)\n\n\n""")
+
+    return buffer.getvalue()
+
+
+def write_deprecated_datatypes(outdir):
+    formatted_source = format_source(build_deprecated_datatypes_py())
+
+    # Write to file
+    # -------------
+    filepath = opath.join(outdir, 'graph_objs', '_deprecations.py')
+
+    with open(filepath, 'wt') as f:
+        f.write(formatted_source)
+
+
+def write_graph_objs_graph_objs(outdir):
+    filepath = opath.join(outdir, 'graph_objs', 'graph_objs.py')
+    with open(filepath, 'wt') as f:
+        f.write("""\
+from plotly.graph_objs import *
+""")
+

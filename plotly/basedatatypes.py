@@ -10,11 +10,11 @@ from plotly.offline import plot as plotlypy_plot
 from traitlets import Undefined
 
 from plotly import animation
-from plotly.basevalidators import CompoundValidator, CompoundArrayValidator, BaseDataValidator
 from plotly.callbacks import Points, BoxSelector, LassoSelector, InputDeviceState
 
-# from plotly.validators.layout import (XAxisValidator, YAxisValidator, GeoValidator,
-#                                       TernaryValidator, SceneValidator)
+from _plotly_utils.basevalidators import (CompoundValidator,
+                                          CompoundArrayValidator,
+                                          BaseDataValidator)
 
 
 class BaseFigure:
@@ -61,7 +61,7 @@ class BaseFigure:
         from plotly.validators import LayoutValidator
         self._layout_validator = LayoutValidator()
 
-        from plotly.datatypes import Layout
+        from plotly.graph_objs import Layout
 
         if layout is None:
             layout = Layout()  # type: Layout
@@ -1307,16 +1307,20 @@ class BasePlotlyType:
                 prop_str = 'properties'
                 invalid_str = repr(invalid_props)
 
+            module_root = 'plotly.graph_objs.'
             if self._parent_path:
-                full_prop_name = self._parent_path + '.' + self.plotly_name
+                full_obj_name = (module_root +
+                                  self._parent_path + '.' +
+                                  self.__class__.__name__)
             else:
-                full_prop_name = self.plotly_name
+                full_obj_name = module_root + self.__class__.__name__
 
-            raise ValueError("Invalid {prop_str} specified for {full_prop_name}: {invalid_str}\n\n"
+            raise ValueError("Invalid {prop_str} specified for object of type "
+                             "{full_obj_name}: {invalid_str}\n\n"
                              "    Valid properties:\n"
                              "{prop_descriptions}"
                              .format(prop_str=prop_str,
-                                     full_prop_name=full_prop_name,
+                                     full_obj_name=full_obj_name,
                                      invalid_str=invalid_str,
                                      prop_descriptions=self._prop_descriptions))
 
