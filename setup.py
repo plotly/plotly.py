@@ -177,7 +177,8 @@ setup(name='plotly',
                 'plotly/offline',
                 'plotly/matplotlylib',
                 'plotly/matplotlylib/mplexporter',
-                'plotly/matplotlylib/mplexporter/renderers'],
+                'plotly/matplotlylib/mplexporter/renderers',
+                '_plotly_utils'],
       package_data={'plotly': ['package_data/*'], 'plotlywidget': ['static/*']},
       data_files=[
           ('share/jupyter/nbextensions/plotlywidget', [

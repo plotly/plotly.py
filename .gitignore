@@ -22,7 +22,7 @@ plotly/api/v2/spectacle_presentations.py
 
 plotly/presentation_objs/
 
-plotly/datatypes
+plotly/graph_objs
 
 plotly/validators
 

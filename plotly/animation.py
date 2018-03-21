@@ -1,4 +1,4 @@
-from plotly.basevalidators import EnumeratedValidator, NumberValidator
+from _plotly_utils.basevalidators import EnumeratedValidator, NumberValidator
 
 
 class EasingValidator(EnumeratedValidator):
