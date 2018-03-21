@@ -257,8 +257,6 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
     @staticmethod
     def encode_as_datetime(obj):
         """Attempt to convert to utc-iso time string using datetime methods."""
-
-        # first we need to get this into utc
         try:
             obj = obj.astimezone(pytz.utc)
         except ValueError:
