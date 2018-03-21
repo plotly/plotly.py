@@ -11,7 +11,7 @@ from requests.compat import json as _json
 
 import plotly
 from plotly.tests.utils import PlotlyTestCase
-
+from plotly.tests.test_core.test_stream.test_stream import TestStreaming
 
 fig = {
     'data': [
@@ -103,3 +103,16 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
         self.assertIn('"linkText": "Plotly rocks!"', html)
         self.assertIn('"showLink": true', html)
         self.assertIn('"editable": true', html)
+
+def TestOfflineStreaming(TestStreaming):
+    def sign_in(self, *args, **kwargs):
+        pass
+
+    def test_stream_no_scheme(self):
+        pass
+
+    def test_stream_http(self):
+        pass
+
+    def test_stream_https(self):
+        pass

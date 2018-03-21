@@ -23,14 +23,16 @@ config = {'plotly_domain': 'https://plot.ly',
 
 
 class TestStreaming(PlotlyTestCase):
-
+    def sign_in(self, *args, **kwargs):
+        py.sign_in(*args, **kwargs)
+    
     def setUp(self):
         super(TestStreaming, self).setUp()
-        py.sign_in(un, ak, **config)
+        self.sign_in(un, ak, **config)
 
     @attr('slow')
     def test_initialize_stream_plot(self):
-        py.sign_in(un, ak)
+        self.sign_in(un, ak)
         stream = Stream(token=tk, maxpoints=50)
         url = py.plot([Scatter(x=[], y=[], mode='markers', stream=stream)],
                       auto_open=False,
@@ -41,7 +43,7 @@ class TestStreaming(PlotlyTestCase):
 
     @attr('slow')
     def test_stream_single_points(self):
-        py.sign_in(un, ak)
+        self.sign_in(un, ak)
         stream = Stream(token=tk, maxpoints=50)
         res = py.plot([Scatter(x=[], y=[], mode='markers', stream=stream)],
                       auto_open=False,
@@ -56,7 +58,7 @@ class TestStreaming(PlotlyTestCase):
 
     @attr('slow')
     def test_stream_multiple_points(self):
-        py.sign_in(un, ak)
+        self.sign_in(un, ak)
         stream = Stream(token=tk, maxpoints=50)
         url = py.plot([Scatter(x=[], y=[], mode='markers', stream=stream)],
                       auto_open=False,
@@ -71,7 +73,7 @@ class TestStreaming(PlotlyTestCase):
 
     @attr('slow')
     def test_stream_layout(self):
-        py.sign_in(un, ak)
+        self.sign_in(un, ak)
         stream = Stream(token=tk, maxpoints=50)
         url = py.plot([Scatter(x=[], y=[], mode='markers', stream=stream)],
                       auto_open=False,
@@ -92,7 +94,7 @@ class TestStreaming(PlotlyTestCase):
     @attr('slow')
     def test_stream_validate_data(self):
         with self.assertRaises(exceptions.PlotlyError):
-            py.sign_in(un, ak)
+            self.sign_in(un, ak)
             my_stream = py.Stream(tk)
             my_stream.open()
             my_stream.write(dict(x=1, y=10, z=[1]))  # assumes scatter...
@@ -101,7 +103,7 @@ class TestStreaming(PlotlyTestCase):
     @attr('slow')
     def test_stream_validate_layout(self):
         with self.assertRaises(exceptions.PlotlyError):
-            py.sign_in(un, ak)
+            self.sign_in(un, ak)
             my_stream = py.Stream(tk)
             my_stream.open()
             my_stream.write(Scatter(x=1, y=10), layout=Layout(legend=True))
@@ -112,7 +114,7 @@ class TestStreaming(PlotlyTestCase):
 
         # even though `name` isn't streamable, we don't validate it --> pass
 
-        py.sign_in(un, ak)
+        self.sign_in(un, ak)
         my_stream = py.Stream(tk)
         my_stream.open()
         my_stream.write(Scatter(x=1, y=10, name='nope'))
@@ -123,7 +125,7 @@ class TestStreaming(PlotlyTestCase):
         # If no scheme is used in the plotly_streaming_domain, port 80
         # should be used for streaming and ssl_enabled should be False
 
-        py.sign_in(un, ak, **{'plotly_streaming_domain': 'stream.plot.ly'})
+        self.sign_in(un, ak, **{'plotly_streaming_domain': 'stream.plot.ly'})
         my_stream = py.Stream(tk)
         expected_streaming_specs = {
             'server': 'stream.plot.ly',
@@ -143,7 +145,7 @@ class TestStreaming(PlotlyTestCase):
         # If the http scheme is used in the plotly_streaming_domain, port 80
         # should be used for streaming and ssl_enabled should be False
 
-        py.sign_in(un, ak,
+        self.sign_in(un, ak,
                    **{'plotly_streaming_domain': 'http://stream.plot.ly'})
         my_stream = py.Stream(tk)
         expected_streaming_specs = {
@@ -169,7 +171,7 @@ class TestStreaming(PlotlyTestCase):
             'plotly_streaming_domain': 'https://stream.plot.ly',
             'plotly_ssl_verification': True
         }
-        py.sign_in(un, ak, **ssl_stream_config)
+        self.sign_in(un, ak, **ssl_stream_config)
         my_stream = py.Stream(tk)
         expected_streaming_specs = {
             'server': 'stream.plot.ly',
