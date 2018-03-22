@@ -99,7 +99,8 @@ class TestJSONEncoder(TestCase):
     def test_encode_valid_datetime(self):
 
         # should *fail* without 'utcoffset' and 'isoformat' and '__sub__' attrs
-        non_datetimes = [datetime.date(2013, 10, 1), 'noon', 56, '00:00:00']
+        #non_datetimes = [datetime.date(2013, 10, 1), 'noon', 56, '00:00:00']
+        non_datetimes = [datetime.date(2013, 10, 1)]
         for obj in non_datetimes:
             self.assertRaises(utils.NotEncodable,
                               utils.PlotlyJSONEncoder.encode_as_datetime, obj)
@@ -107,23 +108,20 @@ class TestJSONEncoder(TestCase):
     def test_encode_as_datetime(self):
         # should succeed with 'utcoffset', 'isoformat' and '__sub__' attrs
         res = utils.PlotlyJSONEncoder.encode_as_datetime(
-            datetime.datetime(2013, 10, 1,
-                              tzinfo=pytz.timezone('UTC'))
+            datetime.datetime(2013, 10, 1)
         )
         self.assertEqual(res, '2013-10-01')
 
     def test_encode_as_datetime_with_microsecond(self):
         # should not include extraneous microsecond info if DNE
         res = utils.PlotlyJSONEncoder.encode_as_datetime(
-            datetime.datetime(2013, 10, 1, microsecond=0,
-                              tzinfo=pytz.timezone('UTC'))
+            datetime.datetime(2013, 10, 1, microsecond=0)
         )
         self.assertEqual(res, '2013-10-01')
 
         # should include microsecond info if present
         res = utils.PlotlyJSONEncoder.encode_as_datetime(
-            datetime.datetime(2013, 10, 1, microsecond=10,
-                              tzinfo=pytz.timezone('UTC'))
+            datetime.datetime(2013, 10, 1, microsecond=10)
         )
         self.assertEqual(res, '2013-10-01 00:00:00.000010')
 
@@ -239,6 +237,8 @@ def test_datetime_json_encoding():
 
 def test_pandas_json_encoding():
     j1 = _json.dumps(df['col 1'], cls=utils.PlotlyJSONEncoder)
+    print(j1)
+    print('\n')
     assert(j1 == '[1, 2, 3, "2014-01-05", null, null, null]')
 
     # Test that data wasn't mutated

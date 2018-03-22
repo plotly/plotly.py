@@ -12,6 +12,7 @@ import re
 import sys
 import threading
 import decimal
+import datetime
 from collections import deque
 
 import pytz
@@ -30,6 +31,10 @@ sage_all = get_module('sage.all')
 
 ### incase people are using threading, we lock file reads
 lock = threading.Lock()
+
+PY36 = (
+    sys.version_info.major == 3 and sys.version_info.minor == 6
+)
 
 
 ### general file setup tools ###
@@ -257,17 +262,21 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
     @staticmethod
     def encode_as_datetime(obj):
         """Attempt to convert to utc-iso time string using datetime methods."""
-        try:
-            obj = obj.astimezone(pytz.utc)
-        except ValueError:
-            # we'll get a value error if trying to convert with naive datetime
-            pass
-        except TypeError:
-            # pandas throws a typeerror here instead of a value error, it's OK
-            pass
-        except AttributeError:
-            # we'll get an attribute error if astimezone DNE
-            raise NotEncodable
+        # In PY36, isoformat() converts UTC
+        # datetime.datetime objs to UTC T04:00:00
+        if not (PY36 and (isinstance(obj, datetime.datetime) and
+                obj.tzinfo is None)):
+            try:
+                obj = obj.astimezone(pytz.utc)
+            except ValueError:
+                # we'll get a value error if trying to convert with naive datetime
+                pass
+            except TypeError:
+                # pandas throws a typeerror here instead of a value error, it's OK
+                pass
+            except AttributeError:
+                # we'll get an attribute error if astimezone DNE
+                raise NotEncodable
 
         # now we need to get a nicely formatted time string
         try:
