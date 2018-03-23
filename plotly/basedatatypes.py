@@ -1258,7 +1258,6 @@ class BaseFigure(PlotlyBase):
 
 class BasePlotlyType(PlotlyBase):
 
-
     _validators = None
 
     # Defaults to help mocking
@@ -1450,6 +1449,12 @@ class BasePlotlyType(PlotlyBase):
         return prop in self._validators
 
     def __setitem__(self, key, value):
+        if 'xaxis' in key:
+            print('Key and Value')
+            print('KEY: {}'.format(key))
+            print('VALUE: {}'.format(value))
+            print(self._validators.keys())
+            print('\n')
         if key not in self._validators:
             self._raise_on_invalid_property_error(key)
 
