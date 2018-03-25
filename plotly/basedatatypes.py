@@ -26,9 +26,19 @@ class BaseFigure:
 
         layout = layout_plotly
 
+        # Subplots
+        # --------
+        self._grid_str = None
+        self._grid_ref = None
+
         # Handle case where data is a Figure or Figure-like dict
         # ------------------------------------------------------
         if isinstance(data, BaseFigure):
+            # Bring over subplot fields
+            self._grid_str = data._grid_str
+            self._grid_ref = data._grid_ref
+
+            # Extract data, layout, and frames
             data, layout, frames = data.data, data.layout, data.frames
 
         elif (isinstance(data, dict) and
@@ -36,6 +46,7 @@ class BaseFigure:
             data, layout, frames = (data.get('data', None),
                                     data.get('layout', None),
                                     data.get('frames', None))
+
 
         # Traces
         # ------
@@ -113,6 +124,8 @@ class BaseFigure:
         # -------
         self._log_plotly_commands = False
 
+
+
     # Magic Methods
     # -------------
     def __setitem__(self, prop, value):
@@ -180,6 +193,77 @@ class BaseFigure:
                 if d:
                     for k, v in d.items():
                         BaseFigure._perform_update(self[k], v)
+
+    # Subplots
+    # --------
+    def print_grid(self):
+        """
+        Print a visual layout of the figure's axes arrangement.
+        This is only valid for figures that are created
+        with plotly.tools.make_subplots.
+        """
+        if self._grid_str is None:
+            raise Exception("Use plotly.tools.make_subplots "
+                            "to create a subplot grid.")
+        print(self._grid_str)
+
+    def append_trace(self, trace, row, col):
+        """
+        Add a trace to your figure bound to axes at the row, col index.
+        The row, col index is generated from figures created with
+        plotly.tools.make_subplots and can be viewed with
+        Figure.print_grid.
+        :param (dict) trace: The data trace to be bound.
+        :param (int) row: Subplot row index (see Figure.print_grid).
+        :param (int) col: Subplot column index (see Figure.print_grid).
+        Example:
+        # stack two subplots vertically
+        fig = tools.make_subplots(rows=2)
+        This is the format of your plot grid:
+        [ (1,1) x1,y1 ]
+        [ (2,1) x2,y2 ]
+        fig.append_trace(Scatter(x=[1,2,3], y=[2,1,2]), 1, 1)
+        fig.append_trace(Scatter(x=[1,2,3], y=[2,1,2]), 2, 1)
+        """
+        try:
+            grid_ref = self._grid_ref
+        except AttributeError:
+            raise Exception("In order to use Figure.append_trace, "
+                            "you must first use "
+                            "plotly.tools.make_subplots "
+                            "to create a subplot grid.")
+        if row <= 0:
+            raise Exception("Row value is out of range. "
+                            "Note: the starting cell is (1, 1)")
+        if col <= 0:
+            raise Exception("Col value is out of range. "
+                            "Note: the starting cell is (1, 1)")
+        try:
+            ref = grid_ref[row - 1][col - 1]
+        except IndexError:
+            raise Exception("The (row, col) pair sent is out of "
+                            "range. Use Figure.print_grid to view the "
+                            "subplot grid. ")
+        if 'scene' in ref[0]:
+            trace['scene'] = ref[0]
+            if ref[0] not in self['layout']:
+                raise Exception("Something went wrong. "
+                                "The scene object for ({r},{c}) "
+                                "subplot cell "
+                                "got deleted.".format(r=row, c=col))
+        else:
+            xaxis_key = "xaxis{ref}".format(ref=ref[0][1:])
+            yaxis_key = "yaxis{ref}".format(ref=ref[1][1:])
+            if (xaxis_key not in self['layout']
+                    or yaxis_key not in self['layout']):
+                raise Exception("Something went wrong. "
+                                "An axis object for ({r},{c}) subplot "
+                                "cell got deleted."
+                                .format(r=row, c=col))
+            trace['xaxis'] = ref[0]
+            trace['yaxis'] = ref[1]
+
+        self.add_traces([trace])
 
     # Data
     # ----
@@ -1443,7 +1527,9 @@ class BasePlotlyType:
 
             return res
         else:
-            if prop not in self._validators:
+            if (prop not in self._validators and
+                    prop not in self._props and
+                    prop not in self._prop_defaults):
                 raise KeyError(prop)
 
             if prop in self._compound_props:
@@ -1765,11 +1851,17 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         match = self._subplotid_prop_re.fullmatch(prop)
         subplot_prop = match.group(1)
         suffix_digit = int(match.group(2))
-        if suffix_digit in [0, 1]:
-            raise TypeError('Subplot properties may only be suffixed by an integer > 1\n'
+        if suffix_digit == 0:
+            raise TypeError('Subplot properties may only be suffixed by an '
+                            'integer >= 1\n'
                             'Received {k}'.format(k=prop))
 
-        # Add validator
+        # Handle suffix_digit == 1
+        # In this case we remove suffix digit (e.g. xaxis1 -> xaxis)
+        if suffix_digit == 1:
+            prop = subplot_prop
+
+            # Add validator
         if prop not in self._validators:
             validator = self._subplotid_validators[subplot_prop](plotly_name=prop)
             self._validators[prop] = validator
@@ -1778,12 +1870,67 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         self._subplotid_props[prop] = self._set_compound_prop(prop, value)
 
     def __getattr__(self, item):
+
+        # Handle subplot suffix of 1
+        # Remove digit of 1 from subplot id (e.g.. xaxis1 -> xaxis)
+        match = self._subplotid_prop_re.fullmatch(item)
+        if match:
+            subplot_prop = match.group(1)
+            suffix_digit = int(match.group(2))
+            if subplot_prop and suffix_digit == 1:
+                item = subplot_prop
+
         # Check for subplot access (e.g. xaxis2)
         # Validate then call self._get_prop(item)
         if item in self._subplotid_props:
             return self._subplotid_props[item]
+        elif item in self._validators:
+            return self[item]
 
         raise AttributeError("'Layout' object has no attribute '{item}'".format(item=item))
+
+    def __getitem__(self, item):
+
+        # Handle subplot suffix of 1
+        # Remove digit of 1 from subplot id (e.g.. xaxis1 -> xaxis)
+        match = self._subplotid_prop_re.fullmatch(item)
+        if match:
+            subplot_prop = match.group(1)
+            suffix_digit = int(match.group(2))
+            if subplot_prop and suffix_digit == 1:
+                item = subplot_prop
+
+        # Check for subplot access (e.g. xaxis2)
+        # Validate then call self._get_prop(item)
+        if item in self._subplotid_props:
+            return self._subplotid_props[item]
+        elif item in self._validators:
+            return super().__getitem__(item)
+
+        raise AttributeError("'Layout' object has no attribute '{item}'".format(item=item))
+
+    def __contains__(self, prop):
+        if prop in self._validators:
+            return True
+        else:
+            # Check for subplot with suffix 1
+            match = self._subplotid_prop_re.fullmatch(prop)
+            if (match and
+                    match.group(1) in self._validators and
+                    match.group(2) == '1'):
+                return True
+            else:
+                return False
+
+    def __setitem__(self, prop, value):
+        # Check for subplot assignment (e.g. xaxis2)
+        # Call _set_compound_prop with the xaxis validator
+        match = self._subplotid_prop_re.fullmatch(prop)
+        if match is None:
+            # Try setting as ordinary property
+            super().__setitem__(prop, value)
+        else:
+            self._set_subplotid_prop(prop, value)
 
     def __setattr__(self, prop, value):
         # Check for subplot assignment (e.g. xaxis2)

@@ -172,14 +172,50 @@ class EnumeratedValidator(BaseValidator):
 
         # compile regexes
         self.val_regexs = []
+
+        # regex replacement that runs before the matching regex
+        # So far, this is only used to cast x1 -> x for anchor-style
+        # enumeration properties
+        self.regex_replacements = []
         for v in self.values:
             if v and isinstance(v, str) and v[0] == '/' and v[-1] == '/':
                 # String is regex with leading and trailing '/' character
-                self.val_regexs.append(re.compile(v[1:-1]))
+                regex_str = v[1:-1]
+                self.val_regexs.append(re.compile(regex_str))
+                self.regex_replacements.append(
+                    EnumeratedValidator.build_regex_replacement(regex_str))
             else:
                 self.val_regexs.append(None)
+                self.regex_replacements.append(None)
 
         self.array_ok = array_ok
+
+    @staticmethod
+    def build_regex_replacement(regex_str):
+        # regex_str = r"^y([2-9]|[1-9][0-9]+)?$"
+
+        # Remove id of 1 from subplotid-style anchors. The regular
+        # expressions forbid a suffix of 1. But we want just want to convert
+        # to by removing the 1 (e.g. turn x1 -> x).
+        #
+        # To be cautious, we only perform this conversion for enumerated
+        # values that match the anchor-style regex
+        match = re.match(r"\^(\w)\(\[2\-9\]\|\[1\-9\]\[0\-9\]\+\)\?\$",
+                         regex_str)
+
+        if match:
+            anchor_char = match.group(1)
+            return '^' + anchor_char + '1$', anchor_char
+        else:
+            return None
+
+
+    def perform_replacemenet(self, v):
+        for repl_args in self.regex_replacements:
+            if repl_args:
+                v = re.sub(repl_args[0], repl_args[1], v)
+
+        return v
 
     def description(self):
 
@@ -238,12 +274,15 @@ class EnumeratedValidator(BaseValidator):
             # Pass None through
             pass
         elif self.array_ok and is_array(v):
+            v = [self.perform_replacemenet(v_el) for v_el in v]
+
             invalid_els = [e for e in v if (not self.in_values(e))]
             if invalid_els:
                 self.raise_invalid_elements(invalid_els)
 
             v = copy_to_contiguous_readonly_numpy_array(v)
         else:
+            v = self.perform_replacemenet(v)
             if not self.in_values(v):
                 self.raise_invalid_val(v)
         return v
@@ -821,8 +860,8 @@ class SubplotidValidator(BaseValidator):
 
         desc = """\
     The '{plotly_name}' property is an identifier of a particular subplot, of type '{base}', that 
-    may be specified as the string '{base}' optionally followed by an integer > 1 
-    (e.g. '{base}', '{base}2', '{base}3', etc.)
+    may be specified as the string '{base}' optionally followed by an integer >= 1 
+    (e.g. '{base}', '{base}1', '{base}2', '{base}3', etc.)
         """.format(plotly_name=self.plotly_name, base=self.base)
         return desc
 
@@ -832,12 +871,17 @@ class SubplotidValidator(BaseValidator):
         elif not isinstance(v, str):
             self.raise_invalid_val(v)
         else:
-            if not re.fullmatch(self.regex, v):
+            match = re.fullmatch(self.regex, v)
+            if not match:
                 is_valid = False
             else:
-                digit_str = re.fullmatch(self.regex, v).group(1)
-                if len(digit_str) > 0 and int(digit_str) in [0, 1]:
+                digit_str = match.group(1)
+                if len(digit_str) > 0 and int(digit_str) == 0:
                     is_valid = False
+                elif len(digit_str) > 0 and int(digit_str) == 1:
+                    # Remove 1 suffix (e.g. x1 -> x)
+                    v = self.base
+                    is_valid = True
                 else:
                     is_valid = True
 
