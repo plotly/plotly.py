@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [2.5.1] - 2018-03-26
 ### Fixed
-- `plotly.figure_factory.create_choropleth` now works in Windows without raising an OSError. The module now uses intelligent path tools from `os` to manipulate and manage the shapefiles packaged with Plotly
+- `plotly.figure_factory.create_choropleth` now works in Windows without raising an OSError. The module now uses cross-platform path tools from `os` to manipulate and manage the shapefiles contained in this package.
 
 ## [2.5.0] - 2018-03-12
 ### Fixed
