@@ -76,9 +76,10 @@ def type_str(v):
 # Validators
 # ----------
 class BaseValidator:
-    def __init__(self, plotly_name, parent_name):
+    def __init__(self, plotly_name, parent_name, role=None, **_):
         self.parent_name = parent_name
         self.plotly_name = plotly_name
+        self.role = role
 
     def validate_coerce(self, v):
         raise NotImplementedError()
@@ -129,8 +130,9 @@ class DataArrayValidator(BaseValidator):
         },
     """
 
-    def __init__(self, plotly_name, parent_name, **_):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, plotly_name, parent_name, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
 
     def description(self):
         return ("""\
@@ -163,8 +165,12 @@ class EnumeratedValidator(BaseValidator):
             ]
         },
     """
-    def __init__(self, plotly_name, parent_name, values, array_ok=False, coerce_number=False, **_):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, plotly_name, parent_name, values,
+                 array_ok=False,
+                 coerce_number=False,
+                 **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
 
         # coerce_number is rarely used and not implemented
         self.coerce_number = coerce_number
@@ -298,8 +304,9 @@ class BooleanValidator(BaseValidator):
             ]
         },
     """
-    def __init__(self, plotly_name, parent_name, **_):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, plotly_name, parent_name, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
 
     def description(self):
         return ("""\
@@ -329,8 +336,10 @@ class NumberValidator(BaseValidator):
             ]
         },
     """
-    def __init__(self, plotly_name, parent_name, min=None, max=None, array_ok=False, **_):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, plotly_name, parent_name,
+                 min=None, max=None, array_ok=False, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
 
         # Handle min
         if min is None and max is not None:
@@ -417,8 +426,10 @@ class IntegerValidator(BaseValidator):
             ]
         },
     """
-    def __init__(self, plotly_name, parent_name, min=None, max=None, array_ok=False, **_):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, plotly_name, parent_name,
+                 min=None, max=None, array_ok=False, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
 
         # Handle min
         if min is None and max is not None:
@@ -512,8 +523,11 @@ class StringValidator(BaseValidator):
             ]
         },
     """
-    def __init__(self, plotly_name, parent_name, no_blank=False, strict=False, array_ok=False, values=None, **_):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, plotly_name, parent_name,
+                 no_blank=False, strict=False, array_ok=False, values=None,
+                 **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
         self.no_blank = no_blank
         self.strict = strict        # Not implemented. We're always strict
         self.array_ok = array_ok
@@ -613,8 +627,10 @@ class ColorValidator(BaseValidator):
         "slateblue", "slategray", "slategrey", "snow", "springgreen", "steelblue", "tan", "teal", "thistle", "tomato",
         "turquoise", "violet", "wheat", "white", "whitesmoke", "yellow", "yellowgreen"]
 
-    def __init__(self, plotly_name, parent_name, array_ok=False, colorscale_path=None, **_):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, plotly_name, parent_name,
+                 array_ok=False, colorscale_path=None, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
         self.colorscale_path = colorscale_path
         self.array_ok = array_ok
 
@@ -718,8 +734,9 @@ class ColorlistValidator(BaseValidator):
           ]
         }
     """
-    def __init__(self, plotly_name, parent_name, **_):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, plotly_name, parent_name, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
 
     def description(self):
         return ("""\
@@ -758,8 +775,9 @@ class ColorscaleValidator(BaseValidator):
     named_colorscales = ['Greys', 'YlGnBu', 'Greens', 'YlOrRd', 'Bluered', 'RdBu', 'Reds', 'Blues', 'Picnic',
                          'Rainbow', 'Portland', 'Jet', 'Hot', 'Blackbody', 'Earth', 'Electric', 'Viridis']
 
-    def __init__(self, plotly_name, parent_name, **_):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, plotly_name, parent_name, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
 
     def description(self):
         desc = """\
@@ -817,8 +835,9 @@ class AngleValidator(BaseValidator):
             ]
         },
     """
-    def __init__(self, plotly_name, parent_name, **_):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, plotly_name, parent_name, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
 
     def description(self):
         desc = """\
@@ -851,8 +870,9 @@ class SubplotidValidator(BaseValidator):
             "otherOpts": []
         },
     """
-    def __init__(self, plotly_name, parent_name, dflt, **_):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, plotly_name, parent_name, dflt, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
         self.base = dflt
         self.regex = dflt + "(\d*)"
 
@@ -904,8 +924,10 @@ class FlaglistValidator(BaseValidator):
             ]
         },
     """
-    def __init__(self, plotly_name, parent_name, flags, extras=None, array_ok=False, **_):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, plotly_name, parent_name, flags,
+                 extras=None, array_ok=False, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
         self.flags = flags
         self.extras = extras if extras is not None else []
         self.array_ok = array_ok
@@ -988,8 +1010,10 @@ class AnyValidator(BaseValidator):
             ]
         },
     """
-    def __init__(self, plotly_name, parent_name, values=None, array_ok=False, **_):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, plotly_name, parent_name,
+                 values=None, array_ok=False, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
         self.values = values
         self.array_ok = array_ok
 
@@ -1023,8 +1047,10 @@ class InfoArrayValidator(BaseValidator):
             ]
         }
     """
-    def __init__(self, plotly_name, parent_name, items, free_length=None, **_):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, plotly_name, parent_name,
+                 items, free_length=None, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
         self.items = items
 
         self.item_validators = []
@@ -1093,8 +1119,9 @@ class ImageUriValidator(BaseValidator):
     except ModuleNotFoundError:
         pass
 
-    def __init__(self, plotly_name, parent_name, **_):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, plotly_name, parent_name, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
 
     def description(self):
 
@@ -1133,11 +1160,13 @@ class ImageUriValidator(BaseValidator):
 
 
 class CompoundValidator(BaseValidator):
-    def __init__(self, plotly_name, parent_name, data_class, data_docs):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, plotly_name, parent_name,
+                 data_class_str, data_docs, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
 
         # Save element class string
-        self.data_class_str = data_class
+        self.data_class_str = data_class_str
         self._data_class = None
         self.data_docs = data_docs
         self.module_str = CompoundValidator.compute_graph_obj_module_str(
@@ -1215,14 +1244,16 @@ class CompoundValidator(BaseValidator):
 
 
 class CompoundArrayValidator(BaseValidator):
-    def __init__(self, plotly_name, parent_name, element_class, element_docs):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, plotly_name, parent_name,
+                 data_class_str, data_docs, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
 
         # Save element class string
-        self.data_class_str = element_class
+        self.data_class_str = data_class_str
         self._data_class = None
 
-        self.data_docs = element_docs
+        self.data_docs = data_docs
         self.module_str = CompoundValidator.compute_graph_obj_module_str(
             self.data_class_str, parent_name)
 
@@ -1283,8 +1314,9 @@ class CompoundArrayValidator(BaseValidator):
 
 
 class BaseDataValidator(BaseValidator):
-    def __init__(self, class_map, plotly_name, parent_name):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, class_map, plotly_name, parent_name, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
         self.class_strs_map = class_map
         self._class_map = None
 

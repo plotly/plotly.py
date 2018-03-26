@@ -4,40 +4,49 @@ import textwrap
 from collections import ChainMap
 from importlib import import_module
 from io import StringIO
-from typing import List, Tuple
+from typing import List
 
 from yapf.yapflib.yapf_api import FormatCode
 
-dict_like = (dict, ChainMap)
 
-# Import note
-# -----------
-# This file may not import anything from the plotly package
+# Source code utilities
+# =====================
+def format_source(input_source):
+    """
+    Use yapf to format a string containing Python source code
 
+    Parameters
+    ----------
+    input_source : str
+      String containing Python source code
 
-def format_source(validator_source):
-    formatted_source, _ = FormatCode(validator_source,
-                                     style_config={'based_on_style': 'google',
-                                                   'DEDENT_CLOSING_BRACKETS': True,
-                                                   'COLUMN_LIMIT': 79})
+    Returns
+    -------
+    String containing yapf-formatted python source code
+    """
+    style_config = {'based_on_style': 'google',
+                    'DEDENT_CLOSING_BRACKETS': True,
+                    'COLUMN_LIMIT': 79}
+    formatted_source, _ = FormatCode(input_source, style_config=style_config)
     return formatted_source
 
 
-def build_from_imports_py(import_pairs):
-    buffer = StringIO()
-    for from_pkg, class_name in import_pairs:
-        if isinstance(class_name, str):
-            class_name_str = class_name
-        else:
-            class_name_str = '(' + ', '.join(class_name) + ')'
+def format_and_write_source_py(py_source, filepath):
+    """
+    Format Python source code and write to a file, creating parent
+    directories as needed.
 
-        buffer.write(f"""\
-from {from_pkg} import {class_name_str}\n""")
-
-    return buffer.getvalue()
-
-
-def write_source_py(py_source, filepath):
+    Parameters
+    ----------
+    py_source : str
+        String containing valid Python source code. If string is empty,
+        no file will be written.
+    filepath : str
+        Full path to the file to be written
+    Returns
+    -------
+    None
+    """
     if py_source:
         try:
             formatted_source = format_source(py_source)
@@ -56,14 +65,76 @@ def write_source_py(py_source, filepath):
             f.write(formatted_source)
 
 
+def build_from_imports_py(import_pairs):
+    """
+    Build a string containing a series of `from X import Y` lines
+
+    Parameters
+    ----------
+    import_pairs : list of (str, str or list of str)
+          List of pairs where first entry is the package to be imported from.
+          The second entry is either a string of the single name to be
+          imported, or a list of names to be imported.
+    Returns
+    -------
+    str
+        String containing a series of imports
+    """
+    buffer = StringIO()
+    for from_pkg, class_name in import_pairs:
+        if isinstance(class_name, str):
+            class_name_str = class_name
+        else:
+            class_name_str = '(' + ', '.join(class_name) + ')'
+
+        buffer.write(f"""\
+from {from_pkg} import {class_name_str}\n""")
+
+    return buffer.getvalue()
+
+
+def write_init_py(pkg_root, path_parts, import_pairs):
+    """
+    Build __init__.py source code and write to a file
+
+    Parameters
+    ----------
+    pkg_root : str
+        Root package in which the top-level an __init__.py file with empty
+        path_parts should reside
+    path_parts : tuple of str
+        Tuple of sub-packages under pkg_root where the __init__.py
+        file should be written
+    import_pairs : list of (str, str or list of str)
+        List of pairs where first entry is the package to be imported from.
+        The second entry is either a string of the single name to be
+        imported, or a list of names to be imported.
+    Returns
+    -------
+    None
+    """
+    # Generate source code
+    # --------------------
+    init_source = build_from_imports_py(import_pairs)
+
+    # Write file
+    # ----------
+    filepath = opath.join(pkg_root, *path_parts, '__init__.py')
+    format_and_write_source_py(init_source, filepath)
+
+
+# Constants
+# =========
+# Mapping from full property paths to custom validator classes
 CUSTOM_VALIDATOR_DATATYPES = {
     'layout.image.source': '_plotly_utils.basevalidators.ImageUriValidator',
     'frame.data': 'plotly.validators.DataValidator',
     'frame.layout': 'plotly.validators.LayoutValidator'
 }
 
-# Use to customize generated class names. If not included, names are
-# converted to PascalCase and underscores are removed.
+# Mapping from property string (as found in default-schema.json) to a custom
+# class name. If not included here, names are converted to TitleCase and
+# underscores are removed.
 OBJECT_NAME_TO_CLASS_NAME = {
     'angularaxis': 'AngularAxis',
     'colorbar': 'ColorBar',
@@ -82,17 +153,47 @@ OBJECT_NAME_TO_CLASS_NAME = {
     'zaxis': 'ZAxis'
 }
 
+# Tuple of types to be considered dicts by PlotlyNode logic
+dict_like = (dict, ChainMap)
+
+
+# PlotlyNode classes
+# ==================
 class PlotlyNode:
+    """
+    Base class that represents a node in the default-schema.json file
+    """
 
     # Constructor
     # -----------
     def __init__(self, plotly_schema, node_path=(), parent=None):
+        """
+        Superclass constructor for all node types
+
+        Parameters
+        ----------
+        plotly_schema : dict
+            JSON-parsed version of the default-schema.xml file
+        node_path : str or tuple
+            Path of from the 'root' node for the current trace type to the
+            particular node that this instance represents
+        parent : PlotlyNode
+            Reference to the node's parent
+        """
+        # Save params
+        # -----------
         self.plotly_schema = plotly_schema
+        self._parent = parent
+
+        # ### Process node path ###
         if isinstance(node_path, str):
             node_path = (node_path,)
         self.node_path = node_path
 
         # Compute children
+        # ----------------
+        # Note the node_data is a property that must be computed by the
+        # subclass based on plotly_schema and node_path
         if isinstance(self.node_data, dict_like):
             self._children = [self.__class__(self.plotly_schema,
                                              node_path=self.node_path + (c,),
@@ -105,48 +206,99 @@ class PlotlyNode:
         else:
             self._children = []
 
-        # Parent
-        self._parent = parent
-
+    # Magic methods
+    # -------------
     def __repr__(self):
-        return self.dir_str
+        return self.path_str
 
     # Abstract methods
     # ----------------
     @property
-    def node_data(self) -> dict:
+    def node_data(self):
+        """
+        Dictionary of the subtree of the plotly_schema that this node
+        represents
+
+        Returns
+        -------
+        dict
+        """
         raise NotImplementedError()
 
     @property
-    def description(self) -> str:
+    def description(self):
+        """
+        Description of the node
+
+        Returns
+        -------
+        str or None
+        """
         raise NotImplementedError()
 
     @property
-    def base_datatype_class(self):
+    def name_base_datatype(self):
+        """
+        Superclass to use when generating a datatype class for this node
+
+        Returns
+        -------
+        str
+        """
         raise NotImplementedError
 
     # Names
     # -----
     @property
-    def base_name(self):
+    def root_name(self):
+        """
+        Name of the node with empty node_path
+
+        Returns
+        -------
+        str
+        """
         raise NotImplementedError()
 
     @property
-    def plotly_name(self) -> str:
+    def plotly_name(self) :
+        """
+        Name of the node. Either the base_name or the name directly out of
+        the plotly_schema
+
+        Returns
+        -------
+        str
+        """
         if len(self.node_path) == 0:
-            return self.base_name
+            return self.root_name
         else:
             return self.node_path[-1]
 
     @property
-    def name_pascal_case(self) -> str:
+    def name_datatype_class(self):
+        """
+        Name of the Python datatype class representing this node
+
+        Returns
+        -------
+        str
+        """
         if self.plotly_name in OBJECT_NAME_TO_CLASS_NAME:
             return OBJECT_NAME_TO_CLASS_NAME[self.plotly_name]
         else:
             return self.plotly_name.title().replace('_', '')
 
     @property
-    def name_undercase(self) -> str:
+    def name_undercase(self):
+        """
+        Name of node converted to undercase (all lowercase with underscores
+        separating words)
+
+        Returns
+        -------
+        str
+        """
         if not self.plotly_name:
             # Empty plotly_name
             return self.plotly_name
@@ -157,29 +309,444 @@ class PlotlyNode:
 
         # Replace capital chars by underscore-lower
         # -----------------------------------------
-        name2 = ''.join([('' if not c.isupper() else '_') + c.lower() for c in name1])
+        name2 = ''.join([('' if not c.isupper() else '_') + c.lower()
+                         for c in name1])
 
         return name2
 
     @property
-    def name_property(self) -> str:
-        return self.plotly_name + ('s' if self.is_array_element else '')
+    def name_property(self):
+        """
+        Name of the Python property corresponding to this node. This is the
+        same as `name_undercase` for compound nodes, but an 's' is appended
+        to the name for array nodes
+
+        Returns
+        -------
+        str
+        """
+        return self.name_undercase + ('s' if self.is_array_element else '')
 
     @property
-    def name_validator(self) -> str:
-        return self.name_pascal_case + ('s' if self.is_array_element else '') + 'Validator'
+    def name_validator_class(self) -> str:
+        """
+        Name of the Python validator class representing this node
+
+        Returns
+        -------
+        str
+        """
+        return (self.name_datatype_class +
+                ('s' if self.is_array_element else '') +
+                'Validator')
 
     @property
     def name_base_validator(self) -> str:
-        if self.dir_str in CUSTOM_VALIDATOR_DATATYPES:
-            validator_base = f"{CUSTOM_VALIDATOR_DATATYPES[self.dir_str]}"
+        """
+        Superclass to use when generating a validator class for this node
+
+        Returns
+        -------
+        str
+        """
+        if self.path_str in CUSTOM_VALIDATOR_DATATYPES:
+            validator_base = f"{CUSTOM_VALIDATOR_DATATYPES[self.path_str]}"
         else:
+            datatype_title_case = self.datatype.title().replace('_', '')
             validator_base = (f"_plotly_utils.basevalidators."
-                              f"{self.datatype_pascal_case}Validator")
+                              f"{datatype_title_case}Validator")
 
         return validator_base
 
+    # Validators
+    # ----------
+    def get_validator_params(self):
+        """
+        Get kwargs to pass to the constructor of this node's validator
+        superclass.
+
+        Returns
+        -------
+        dict
+            The keys are strings matching the names of the constructor
+            params of this node's validator superclass. The values are
+            repr-strings of the values to be passed to the constructor.
+            These values are ready to be used to code generate calls to the
+            constructor. The values should be evald before being passed to
+            the constructor directly.
+
+        """
+        params = {'plotly_name': repr(self.name_property),
+                  'parent_name': repr(self.parent_path_str)}
+
+        if self.is_compound:
+            params['data_class_str'] = repr(self.name_datatype_class)
+            params['data_docs'] = (
+                    '\"\"\"' +
+                    self.get_constructor_params_docstring() +
+                    '\"\"\"')
+        else:
+            assert self.is_simple
+
+            # Exclude general properties
+            excluded_props = ['valType', 'description', 'dflt']
+            if self.datatype == 'subplotid':
+                # Default is required for subplotid validator
+                excluded_props.remove('dflt')
+
+            attr_nodes = [n for n in self.simple_attrs
+                          if n.plotly_name not in excluded_props]
+
+            for node in attr_nodes:
+                params[node.name_undercase] = repr(node.node_data)
+
+            # Add extra properties
+            if self.datatype == 'color' and self.parent:
+                # Check for colorscale sibling. We use the presence of a
+                # colorscale sibling to determine whether numeric color
+                # values are permissible
+                colorscale_node_list = [node for node in
+                                        self.parent.child_datatypes
+                                        if node.datatype == 'colorscale']
+                if colorscale_node_list:
+                    colorscale_path = colorscale_node_list[0].path_str
+                    params['colorscale_path'] = repr(colorscale_path)
+
+        return params
+
+    def get_validator_instance(self):
+        """
+        Return a constructed validator for this node
+
+        Returns
+        -------
+        BaseValidator
+        """
+
+        # Evaluate validator params to convert repr strings into values
+        # e.g. '2' -> 2
+        params = {prop: eval(repr_val)
+                  for prop, repr_val in self.get_validator_params().items()}
+
+        validator_parts = self.name_base_validator.split('.')
+        if validator_parts[0] != '_plotly_utils':
+            return None
+        else:
+            validator_class_str = validator_parts[-1]
+            validator_module = '.'.join(validator_parts[:-1])
+
+            validator_class = getattr(import_module(validator_module),
+                                      validator_class_str)
+
+            return validator_class(**params)
+
+    # Datatypes
+    # ---------
+    @property
+    def datatype(self) -> str:
+        """
+        Datatype string for this node. One of 'compound_array', 'compound',
+        'literal', or the value of the 'valType' attribute
+
+        Returns
+        -------
+        str
+        """
+        if self.is_array_element:
+            return 'compound_array'
+        elif self.is_compound:
+            return 'compound'
+        elif self.is_simple:
+            return self.node_data.get('valType')
+        else:
+            return 'literal'
+
+    @property
+    def is_compound(self) -> bool:
+        """
+        Node has a compound (in contrast to simple) datatype.
+        Note: All array and array_element types are also considered compound
+
+        Returns
+        -------
+        bool
+        """
+        return (isinstance(self.node_data, dict_like) and
+                not self.is_simple and
+                self.plotly_name != 'impliedEdits')
+
+    @property
+    def is_literal(self) -> bool:
+        """
+        Node has a particular literal value (e.g. 'foo', or 23)
+
+        Returns
+        -------
+        bool
+        """
+        return isinstance(self.node_data, (str, int, float))
+
+    @property
+    def is_simple(self) -> bool:
+        """
+        Node has a simple datatype (e.g. boolean, color, colorscale, etc.)
+
+        Returns
+        -------
+        bool
+        """
+        return (isinstance(self.node_data, dict_like) and
+                'valType' in self.node_data)
+
+    @property
+    def is_array(self) -> bool:
+        """
+        Node has an array datatype
+
+        Returns
+        -------
+        bool
+        """
+        return (isinstance(self.node_data, dict_like) and
+                self.node_data.get('role', '') == 'object' and
+                'items' in self.node_data)
+
+    @property
+    def is_array_element(self):
+        """
+        Node has an array-element datatype
+
+        Returns
+        -------
+        bool
+        """
+        if self.parent and self.parent.parent:
+            return self.parent.parent.is_array
+        else:
+            return False
+
+    @property
+    def is_datatype(self) -> bool:
+        """
+        Node represents any kind of datatype
+
+        Returns
+        -------
+        bool
+        """
+        return self.is_simple or self.is_compound
+
+    # Node path
+    # ---------
+    def tidy_path_part(self, p):
+        """
+        Return a tidy version of raw path entry. This allows subclasses to
+        adjust the raw property names in the plotly_schema
+
+        Parameters
+        ----------
+        p : str
+            Path element string
+
+        Returns
+        -------
+        str
+        """
+        return p
+
+    @property
+    def path_parts(self):
+        """
+        Tuple of strings locating this node in the plotly_schema
+        e.g. ('layout', 'images', 'opacity')
+
+        Returns
+        -------
+        tuple of str
+        """
+        res = [self.root_name] if self.root_name else []
+        for i, p in enumerate(self.node_path):
+            # Handle array datatypes
+            if (p == 'items' or
+                    (i < len(self.node_path) - 1 and
+                     self.node_path[i+1] == 'items')):
+                # e.g. [parcoords, dimensions, items, dimension] ->
+                #      [parcoords, dimension]
+                pass
+            else:
+                res.append(self.tidy_path_part(p))
+        return tuple(res)
+
+    # Node path strings
+    # -----------------
+    @property
+    def path_str(self):
+        """
+        String containing path_parts joined on periods
+        e.g. 'layout.images.opacity'
+
+        Returns
+        -------
+        str
+        """
+        return '.'.join(self.path_parts)
+
+    @property
+    def dotpath_str(self):
+        """
+        path_str prefixed by a period if path_str is not empty, otherwise empty
+
+        Returns
+        -------
+        str
+        """
+        path_str = ''
+        for p in self.path_parts:
+            path_str += '.' + p
+        return path_str
+
+    @property
+    def parent_path_parts(self):
+        """
+        Tuple of strings locating this node's parent in the plotly_schema
+
+        Returns
+        -------
+        tuple of str
+        """
+        return self.path_parts[:-1]
+
+    @property
+    def parent_path_str(self):
+        """
+        String containing parent_path_parts joined on periods
+
+        Returns
+        -------
+        str
+        """
+        return '.'.join(self.path_parts[:-1])
+
+    @property
+    def parent_dotpath_str(self):
+        """
+        parent_path_str prefixed by a period if parent_path_str is not empty,
+        otherwise empty
+
+        Returns
+        -------
+        str
+        """
+        path_str = ''
+        for p in self.parent_path_parts:
+            path_str += '.' + p
+        return path_str
+
+    # Children
+    # --------
+    @property
+    def parent(self):
+        """
+        Parent node
+
+        Returns
+        -------
+        PlotlyNode
+        """
+        return self._parent
+
+    @property
+    def children(self):
+        """
+        List of all child nodes
+
+        Returns
+        -------
+        list of PlotlyNode
+        """
+        return self._children
+
+    @property
+    def simple_attrs(self):
+        """
+        List of simple attribute child nodes
+        (only valid when is_simple == True)
+
+        Returns
+        -------
+        list of PlotlyNode
+        """
+        if not self.is_simple:
+            raise ValueError(
+                f"Cannot get simple attributes of the simple object '{self.path_str}'")
+
+        return [n for n in self.children if n.plotly_name not in ['valType', 'description']]
+
+    @property
+    def child_datatypes(self):
+        """
+        List of all datatype child nodes
+
+        Returns
+        -------
+        list of PlotlyNode
+        """
+        nodes = []
+        for n in self.children:
+            if n.is_array:
+                nodes.append(n.children[0].children[0])
+            elif n.is_datatype:
+                nodes.append(n)
+
+        return nodes
+
+    @property
+    def child_compound_datatypes(self):
+        """
+        List of all compound datatype child nodes
+
+        Returns
+        -------
+        list of PlotlyNode
+        """
+        return [n for n in self.child_datatypes if n.is_compound]
+
+    @property
+    def child_simple_datatypes(self) -> List['PlotlyNode']:
+        """
+        List of all simple datatype child nodes
+
+        Returns
+        -------
+        list of PlotlyNode
+        """
+        return [n for n in self.child_datatypes if n.is_simple]
+
+    @property
+    def child_literals(self) -> List['PlotlyNode']:
+        """
+        List of all literal child nodes
+
+        Returns
+        -------
+        list of PlotlyNode
+        """
+        return [n for n in self.children if n.is_literal]
+
     def get_constructor_params_docstring(self, indent=12):
+        """
+        Return a docstring-style string containing the names and
+        descriptions of all of the node's child datatypes
+
+        Parameters
+        ----------
+        indent : int
+            Leading indent of the string
+
+        Returns
+        -------
+        str
+        """
         assert self.is_compound
 
         buffer = StringIO()
@@ -191,8 +758,8 @@ class PlotlyNode:
                 subtype_description = raw_description
             elif subtype_node.is_compound:
                 class_name = (f'plotly.graph_objs'
-                              f'{subtype_node.parent_pkg_str}.'
-                              f'{subtype_node.name_class}')
+                              f'{subtype_node.parent_dotpath_str}.'
+                              f'{subtype_node.name_datatype_class}')
 
                 subtype_description = (f'{class_name} instance or '
                                       'dict with compatible properties')
@@ -209,213 +776,25 @@ class PlotlyNode:
 
         return buffer.getvalue()
 
-    def get_validator_params(self):
-
-        params = {'plotly_name': repr(self.name_property),
-                  'parent_name': repr(self.parent_dir_str)}
-
-        if self.is_array_element:
-            params['element_class'] = repr(self.name_class)
-            params['element_docs'] = (
-                    '\"\"\"' +
-                    self.get_constructor_params_docstring() +
-                    '\"\"\"')
-
-        elif self.is_compound:
-            params['data_class'] = repr(self.name_class)
-            params['data_docs'] = (
-                    '\"\"\"' +
-                    self.get_constructor_params_docstring() +
-                    '\"\"\"')
-        else:
-            assert self.is_simple
-
-            # Exclude general properties
-            excluded_props = ['valType', 'description', 'role', 'dflt']
-            if self.datatype == 'subplotid':
-                # Default is required for subplotid validator
-                excluded_props.remove('dflt')
-
-            attr_nodes = [n for n in self.simple_attrs
-                          if n.plotly_name not in excluded_props]
-
-            for node in attr_nodes:
-                params[node.name_undercase] = repr(node.node_data)
-
-            # Add extra properties
-            if self.datatype == 'color' and self.parent:
-                # Check for colorscale sibling
-                colorscale_node_list = [node for node in
-                                        self.parent.child_datatypes
-                                        if node.datatype == 'colorscale']
-                if colorscale_node_list:
-                    colorscale_path = colorscale_node_list[0].dir_str
-                    params['colorscale_path'] = repr(colorscale_path)
-
-        return params
-
-    def get_validator_instance(self):
-        params = {prop: eval(repr_val)
-                  for prop, repr_val in self.get_validator_params().items()}
-
-        validator_parts = self.name_base_validator.split('.')
-        if validator_parts[0] != '_plotly_utils':
-            return None
-        else:
-            validator_class_str = validator_parts[-1]
-            validator_module = '.'.join(validator_parts[:-1])
-
-            validator_class = getattr(import_module(validator_module),
-                                      validator_class_str)
-
-            return validator_class(**params)
-
-    @property
-    def name_class(self) -> str:
-        return self.name_pascal_case
-
-    # Datatypes
-    # ---------
-    @property
-    def datatype(self) -> str:
-        if self.is_array_element:
-            return 'compound_array'
-        elif self.is_compound:
-            return 'compound'
-        elif self.is_simple:
-            return self.node_data.get('valType')
-        else:
-            return 'literal'
-
-    @property
-    def datatype_pascal_case(self) -> str:
-        return self.datatype.title().replace('_', '')
-
-    @property
-    def is_compound(self) -> bool:
-        return isinstance(self.node_data, dict_like) and not self.is_simple and self.plotly_name != 'impliedEdits'
-
-    @property
-    def is_literal(self) -> bool:
-        return isinstance(self.node_data, str)
-
-    @property
-    def is_simple(self) -> bool:
-        return isinstance(self.node_data, dict_like) and 'valType' in self.node_data
-
-    @property
-    def is_array(self) -> bool:
-        return isinstance(self.node_data, dict_like) and \
-               self.node_data.get('role', '') == 'object' and \
-               'items' in self.node_data
-
-    @property
-    def is_array_element(self):
-        if self.parent and self.parent.parent:
-            return self.parent.parent.is_array
-        else:
-            return False
-
-    @property
-    def is_datatype(self) -> bool:
-        return self.is_simple or self.is_compound
-
-    # Node path
-    # ---------
-    def tidy_dir_path(self, p):
-        return p
-
-    @property
-    def dir_path(self) -> Tuple[str]:
-        res = [self.base_name] if self.base_name else []
-        for i, p in enumerate(self.node_path):
-            if p == 'items' or \
-                    (i < len(self.node_path) - 1 and self.node_path[i+1] == 'items'):
-                # e.g. [parcoords, dimensions, items, dimension] -> [parcoords, dimension]
-                pass
-            else:
-                res.append(self.tidy_dir_path(p))
-        return tuple(res)
-
-    # Node path strings
-    # -----------------
-    @property
-    def dir_str(self) -> str:
-        return '.'.join(self.dir_path)
-
-    @property
-    def parent_dir_path(self) -> Tuple[str]:
-        return self.dir_path[:-1]
-
-    @property
-    def parent_dir_str(self) -> str:
-        return '.'.join(self.dir_path[:-1])
-
-    @property
-    def parent_pkg_str(self) -> str:
-        """Empty or has leading dot"""
-        path_str = ''
-        for p in self.dir_path[:-1]:
-            path_str += '.' + p
-        return path_str
-
-    @property
-    def pkg_str(self) -> str:
-        """Empty or has leading dot"""
-        path_str = ''
-        for p in self.dir_path:
-            path_str += '.' + p
-        return path_str
-
-    # Children
-    # --------
-    @property
-    def children(self) -> List['PlotlyNode']:
-        return self._children
-
-    @property
-    def simple_attrs(self) -> List['PlotlyNode']:
-        if not self.is_simple:
-            raise ValueError(f"Cannot get simple attributes of the simple object '{self.dir_str}'")
-
-        return [n for n in self.children if n.plotly_name not in ['valType', 'description', 'role']]
-
-    @property
-    def parent(self) -> 'PlotlyNode':
-        return self._parent
-
-    @property
-    def child_datatypes(self) -> List['PlotlyNode']:
-        """
-        Returns
-        -------
-        children: list of TraceNode
-        """
-        nodes = []
-        for n in self.children:
-            if n.is_array:
-                nodes.append(n.children[0].children[0])
-            elif n.is_datatype:
-                nodes.append(n)
-
-        return nodes
-
-    @property
-    def child_compound_datatypes(self) -> List['PlotlyNode']:
-        return [n for n in self.child_datatypes if n.is_compound]
-
-    @property
-    def child_simple_datatypes(self) -> List['PlotlyNode']:
-        return [n for n in self.child_datatypes if n.is_simple]
-
-    @property
-    def child_literals(self) -> List['PlotlyNode']:
-        return [n for n in self.children if n.is_literal]
-
     # Static helpers
     # --------------
     @staticmethod
-    def get_all_compound_datatype_nodes(plotly_schema, node_class) -> List['PlotlyNode']:
+    def get_all_compound_datatype_nodes(plotly_schema, node_class):
+        """
+        Build a list of the entire hierarchy of compound datatype nodes for
+        a given PlotlyNode subclass
+
+        Parameters
+        ----------
+        plotly_schema : dict
+            JSON-parsed version of the default-schema.xml file
+        node_class
+            PlotlyNode subclass
+
+        Returns
+        -------
+        list of PlotlyNode
+        """
         nodes = []
         nodes_to_process = [node_class(plotly_schema)]
 
@@ -430,7 +809,22 @@ class PlotlyNode:
         return nodes
 
     @staticmethod
-    def get_all_datatype_nodes(plotly_schema, node_class) -> List['PlotlyNode']:
+    def get_all_datatype_nodes(plotly_schema, node_class):
+        """
+        Build a list of the entire hierarchy of datatype nodes for a given
+        PlotlyNode subclass
+
+        Parameters
+        ----------
+        plotly_schema : dict
+            JSON-parsed version of the default-schema.xml file
+        node_class
+            PlotlyNode subclass
+
+        Returns
+        -------
+        list of PlotlyNode
+        """
         nodes = []
         nodes_to_process = [node_class(plotly_schema)]
 
@@ -446,6 +840,9 @@ class PlotlyNode:
 
 
 class TraceNode(PlotlyNode):
+    """
+    Class representing datatypes in the trace hierarchy
+    """
 
     # Constructor
     # -----------
@@ -453,14 +850,14 @@ class TraceNode(PlotlyNode):
         super().__init__(plotly_schema, node_path, parent)
 
     @property
-    def base_datatype_class(self):
+    def name_base_datatype(self):
         if len(self.node_path) <= 1:
             return 'BaseTraceType'
         else:
             return 'BaseTraceHierarchyType'
 
     @property
-    def base_name(self):
+    def root_name(self):
         return ''
 
     # Raw data
@@ -470,7 +867,8 @@ class TraceNode(PlotlyNode):
         if not self.node_path:
             node_data = self.plotly_schema['traces']
         else:
-            node_data = self.plotly_schema['traces'][self.node_path[0]]['attributes']
+            trace_name = self.node_path[0]
+            node_data = self.plotly_schema['traces'][trace_name]['attributes']
             for prop_name in self.node_path[1:]:
                 node_data = node_data[prop_name]
 
@@ -483,8 +881,12 @@ class TraceNode(PlotlyNode):
         if len(self.node_path) == 0:
             desc = ""
         elif len(self.node_path) == 1:
-            desc = self.plotly_schema['traces'][self.node_path[0]]['meta'].get('description', '')
+            # Get trace descriptions
+            trace_name = self.node_path[0]
+            desc = (self.plotly_schema['traces'][trace_name]
+                    ['meta'].get('description', ''))
         else:
+            # Get datatype description
             desc = self.node_data.get('description', '')
 
         if isinstance(desc, list):
@@ -494,6 +896,9 @@ class TraceNode(PlotlyNode):
 
 
 class LayoutNode(PlotlyNode):
+    """
+    Class representing datatypes in the layout hierarchy
+    """
 
     # Constructor
     # -----------
@@ -513,27 +918,22 @@ class LayoutNode(PlotlyNode):
         super().__init__(plotly_schema, node_path, parent)
 
     @property
-    def base_datatype_class(self):
+    def name_base_datatype(self):
         if len(self.node_path) == 0:
             return 'BaseLayoutType'
         else:
             return 'BaseLayoutHierarchyType'
 
     @property
-    def base_name(self):
+    def root_name(self):
         return 'layout'
 
     @property
     def plotly_name(self) -> str:
         if len(self.node_path) == 0:
-            return self.base_name
-        # elif len(self.node_path) == 1:
-        #     return 'layout'  # override 'layoutAttributes'
+            return self.root_name
         else:
             return self.node_path[-1]
-
-    # def tidy_dir_path(self, p):
-    #     return 'layout' if p == 'layoutAttributes' else p
 
     # Description
     # -----------
@@ -556,6 +956,9 @@ class LayoutNode(PlotlyNode):
 
 
 class FrameNode(PlotlyNode):
+    """
+    Class representing datatypes in the frames hierarchy
+    """
 
     # Constructor
     # -----------
@@ -563,23 +966,23 @@ class FrameNode(PlotlyNode):
         super().__init__(plotly_schema, node_path, parent)
 
     @property
-    def base_datatype_class(self):
+    def name_base_datatype(self):
         return 'BaseFrameHierarchyType'
 
     @property
-    def base_name(self):
+    def root_name(self):
         return ''
 
     @property
     def plotly_name(self) -> str:
         if len(self.node_path) < 2:
-            return self.base_name
+            return self.root_name
         elif len(self.node_path) == 2:
             return 'frame'  # override 'frames_entry'
         else:
             return self.node_path[-1]
 
-    def tidy_dir_path(self, p):
+    def tidy_path_part(self, p):
         return 'frame' if p == 'frames_entry' else p
 
     # Description

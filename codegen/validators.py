@@ -1,36 +1,56 @@
-import os
 import os.path as opath
-import shutil
 from io import StringIO
-from typing import Dict, Tuple, List
 
 import _plotly_utils.basevalidators
-from codegen.utils import format_source, PlotlyNode, TraceNode, \
-    write_source_py, build_from_imports_py
+from codegen.utils import (PlotlyNode, TraceNode,
+                           format_and_write_source_py)
 
 
-def build_validators_py(datatype_node: PlotlyNode):
+def build_validator_py(node: PlotlyNode):
+    """
+    Build validator class source code string for a datatype PlotlyNode
 
+    Parameters
+    ----------
+    node : PlotlyNode
+        The datatype node (node.is_datatype must evaluate to true) for which
+        to build the validator class
+    Returns
+    -------
+    str
+        String containing source code for the validator class definition
+    """
+
+    # Validate inputs
+    # ---------------
+    assert node.is_datatype
+
+    # Initialize source code buffer
+    # -----------------------------
     buffer = StringIO()
 
     # Imports
     # -------
-    # Compute base validator import
+    # ### Import package of the validator's superclass ###
     import_str = '.'.join(
-        datatype_node.name_base_validator.split('.')[:-1])
-
+        node.name_base_validator.split('.')[:-1])
     buffer.write(f'import {import_str }\n')
 
     # Build Validator
     # ---------------
-    params = datatype_node.get_validator_params()
+    # ### Get dict of validator's constructor params ###
+    params = node.get_validator_params()
 
+    # ### Write class definition ###
+    class_name = node.name_validator_class
+    superclass_name = node.name_base_validator
     buffer.write(f"""
 
-class {datatype_node.name_validator}({datatype_node.name_base_validator}):
+class {class_name}({superclass_name}):
     def __init__(self, plotly_name={params['plotly_name']},
                        parent_name={params['parent_name']}):""")
 
+    # ### Write constructor ###
     buffer.write(f"""
         super().__init__(plotly_name=plotly_name,
                          parent_name=parent_name""")
@@ -46,61 +66,76 @@ class {datatype_node.name_validator}({datatype_node.name_base_validator}):
 
     buffer.write(')')
 
+    # ### Return buffer's string ###
     return buffer.getvalue()
 
 
 def write_validator_py(outdir,
                        node: PlotlyNode):
+    """
+    Build validator source code and write to a file
 
+    Parameters
+    ----------
+    outdir : str
+        Root outdir in which the validators package should reside
+    node : PlotlyNode
+        The datatype node (node.is_datatype must evaluate to true) for which
+        to build a validator class
+    Returns
+    -------
+    None
+    """
     # Generate source code
     # --------------------
-    validator_source = build_validators_py(node)
-    if validator_source:
-        try:
-            formatted_source = format_source(validator_source)
-        except Exception as e:
-            print(validator_source)
-            raise e
-
-        # Write file
-        # ----------
-        filedir = opath.join(outdir, 'validators', *node.parent_dir_path)
-        os.makedirs(filedir, exist_ok=True)
-        filepath = opath.join(filedir, '_' + node.name_property + '.py')
-
-        with open(filepath, 'wt') as f:
-            f.write(formatted_source)
-
-
-def write_validators_init_py(outdir, dir_path, import_pairs):
-    # Generate source code
-    # --------------------
-    init_source = build_from_imports_py(import_pairs)
+    validator_source = build_validator_py(node)
 
     # Write file
     # ----------
-    filepath = opath.join(outdir, 'validators', *dir_path, '__init__.py')
-    write_source_py(init_source, filepath)
+    filepath = opath.join(outdir, 'validators',
+                          *node.parent_path_parts,
+                          '_' + node.name_property + '.py')
+
+    format_and_write_source_py(validator_source, filepath)
 
 
-def build_data_validator_params(base_node: TraceNode):
-    tracetype_nodes = base_node.child_compound_datatypes
+def build_data_validator_params(base_trace_node: TraceNode):
+    """
+    Build a dict of constructor params for the DataValidator.
+    (This is the validator that inputs a list of traces)
+    Parameters
+    ----------
+    base_trace_node : PlotlyNode
+        PlotlyNode that is the parent of all of the individual trace nodes
+    Returns
+    -------
+    dict
+        Mapping from property name to repr-string of property value.
+    """
+    # Get list of trace nodes
+    # -----------------------
+    tracetype_nodes = base_trace_node.child_compound_datatypes
 
-    # Build class_map repr string
+    # Build class_map_repr string
+    # ---------------------------
+    # This is the repr-form of a dict from trace propert name string
+    # to the name of the trace datatype class in the graph_objs package.
     buffer = StringIO()
     buffer.write('{\n')
     for i, tracetype_node in enumerate(tracetype_nodes):
         sfx = ',' if i < len(tracetype_nodes) else ''
-
+        trace_name = tracetype_node.name_property
+        trace_datatype_class = tracetype_node.name_datatype_class
         buffer.write(f"""
-            '{tracetype_node.name_property}': '{tracetype_node.name_class}'{sfx}""")
+            '{trace_name}': '{trace_datatype_class}'{sfx}""")
 
     buffer.write("""
         }""")
 
     class_map_repr = buffer.getvalue()
 
-    # Build params
+    # Build params dict
+    # -----------------
     params = {'class_map': class_map_repr,
               'plotly_name': repr('data'),
               'parent_name': repr('')}
@@ -108,9 +143,27 @@ def build_data_validator_params(base_node: TraceNode):
     return params
 
 
-def build_data_validator_py(base_node: TraceNode):
-    params = build_data_validator_params(base_node)
+def build_data_validator_py(base_trace_node: TraceNode):
+    """
+    Build source code for the DataValidator
+    (this is the validator that inputs a list of traces)
 
+    Parameters
+    ----------
+    base_trace_node : PlotlyNode
+        PlotlyNode that is the parent of all of the individual trace nodes
+    Returns
+    -------
+    str
+        Source code string for DataValidator class
+    """
+
+    # Get constructor params
+    # ----------------------
+    params = build_data_validator_params(base_trace_node)
+
+    # Build source code
+    # -----------------
     buffer = StringIO()
 
     buffer.write(f"""
@@ -129,24 +182,59 @@ class DataValidator(_plotly_utils.basevalidators.BaseDataValidator):
     return buffer.getvalue()
 
 
-def get_data_validator_instance(base_node: TraceNode):
-    params = build_data_validator_params(base_node)
+def get_data_validator_instance(base_trace_node: TraceNode):
+    """
+    Construct an instance of the DataValidator
+    (this is the validator that inputs a list of traces)
+
+    Parameters
+    ----------
+    base_trace_node :
+        PlotlyNode that is the parent of all of the individual trace nodes
+    Returns
+    -------
+    BaseDataValidator
+    """
+
+    # Build constructor params
+    # ------------------------
+    # We need to eval the values to convert out of the repr-form of the
+    # params. e.g. '3' -> 3
+    params = build_data_validator_params(base_trace_node)
     eval_params = {k: eval(repr_val) for k, repr_val in params.items()}
 
+    # Build and return BaseDataValidator instance
+    # -------------------------------------------
     return _plotly_utils.basevalidators.BaseDataValidator(**eval_params)
 
 
-def write_data_validator_py(outdir, base_node: TraceNode):
+def write_data_validator_py(outdir, base_trace_node: TraceNode):
+    """
+    Construct and write out the DataValidator
+    (this is the validator that inputs a list of traces)
 
-    if base_node.node_path:
-        raise ValueError('Expected root trace node. Received node with path "%s"' % base_node.dir_str)
+    Parameters
+    ----------
+    outdir : str
+        Root outdir in which the top-level validators package should reside
+    base_trace_node : PlotlyNode
+        PlotlyNode that is the parent of all of the individual trace nodes
+    Returns
+    -------
+    None
+    """
+    # Validate inputs
+    # ---------------
+    if base_trace_node.node_path:
+        raise ValueError('Expected root trace node.\n'
+                         'Received node with path "%s"'
+                         % base_trace_node.path_str)
 
-    source = build_data_validator_py(base_node)
-    formatted_source = format_source(source)
+    # Build Source
+    # ------------
+    source = build_data_validator_py(base_trace_node)
 
-    # Append to file
-    # --------------
+    # Write file
+    # ----------
     filepath = opath.join(outdir, 'validators', '_data.py')
-
-    with open(filepath, 'wt') as f:
-        f.write(formatted_source)
+    format_and_write_source_py(source, filepath)

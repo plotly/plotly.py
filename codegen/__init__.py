@@ -2,17 +2,16 @@ import json
 import os.path as opath
 import shutil
 
-from codegen.datatypes import (build_datatypes_py, write_datatypes_py,
-                               write_figure_class, write_deprecated_datatypes,
-                               write_graph_objs_graph_objs,
-                               DEPRECATED_DATATYPES)
-from codegen.datatypes import write_datatypes_init_py
-from codegen.utils import TraceNode, PlotlyNode, LayoutNode, FrameNode
+from codegen.datatypes import (build_datatype_py, write_datatype_py)
+from codegen.compatibility import (write_deprecated_datatypes,
+                                   write_graph_objs_graph_objs,
+                                   DEPRECATED_DATATYPES)
+from codegen.figure import write_figure_classes
+from codegen.utils import (TraceNode, PlotlyNode, LayoutNode, FrameNode,
+                           write_init_py)
 from codegen.validators import (write_validator_py,
                                 write_data_validator_py,
                                 get_data_validator_instance)
-from codegen.validators import write_validators_init_py
-
 
 # Import notes
 # ------------
@@ -22,8 +21,13 @@ from codegen.validators import write_validators_init_py
 # helpers that are only needed during code generation should reside in the
 # codegen/ package, and helpers used both during code generation and at
 # runtime should reside in the _plotly_utils/ package.
+# ----------------------------------------------------------------------------
+
 
 def perform_codegen():
+    # Set root codegen output directory
+    # ---------------------------------
+    # (relative to project root)
     outdir = 'plotly'
 
     # Delete prior codegen output
@@ -48,23 +52,36 @@ def perform_codegen():
     with open('plotly/package_data/default-schema.json', 'r') as f:
         plotly_schema = json.load(f)
 
-    # Compute property paths
-    # ----------------------
+    # Build node lists
+    # ----------------
+    # ### TraceNode ###
     base_traces_node = TraceNode(plotly_schema)
-    compound_trace_nodes = PlotlyNode.get_all_compound_datatype_nodes(plotly_schema, TraceNode)
-    all_trace_nodes = PlotlyNode.get_all_datatype_nodes(plotly_schema,
-                                                        TraceNode)
+    compound_trace_nodes = PlotlyNode.get_all_compound_datatype_nodes(
+        plotly_schema, TraceNode)
+    all_trace_nodes = PlotlyNode.get_all_datatype_nodes(
+        plotly_schema, TraceNode)
 
-    compound_layout_nodes = PlotlyNode.get_all_compound_datatype_nodes(plotly_schema, LayoutNode)
+    # ### LayoutNode ###
+    compound_layout_nodes = PlotlyNode.get_all_compound_datatype_nodes(
+        plotly_schema, LayoutNode)
     layout_node = compound_layout_nodes[0]
     all_layout_nodes = PlotlyNode.get_all_datatype_nodes(
         plotly_schema, LayoutNode)
 
-    compound_frame_nodes = PlotlyNode.get_all_compound_datatype_nodes(plotly_schema, FrameNode)
+    # ### FrameNode ###
+    compound_frame_nodes = PlotlyNode.get_all_compound_datatype_nodes(
+        plotly_schema, FrameNode)
     frame_node = compound_frame_nodes[0]
-    all_frame_nodes = PlotlyNode.get_all_datatype_nodes(plotly_schema, FrameNode)
+    all_frame_nodes = PlotlyNode.get_all_datatype_nodes(
+        plotly_schema, FrameNode)
 
-    all_datatype_nodes = (all_trace_nodes + all_layout_nodes + all_frame_nodes)
+    # ### All nodes ###
+    all_datatype_nodes = (all_trace_nodes +
+                          all_layout_nodes +
+                          all_frame_nodes)
+
+    all_compound_nodes = [node for node in all_datatype_nodes
+                          if node.is_compound]
 
     # Write out validators
     # --------------------
@@ -80,24 +97,25 @@ def perform_codegen():
     for node in all_frame_nodes:
         write_validator_py(outdir, node)
 
-    # ### Write data (traces) validator ###
+    # ### Data (traces) validator ###
     write_data_validator_py(outdir, base_traces_node)
 
     # Write out datatypes
     # -------------------
     # ### Layout ###
     for node in compound_layout_nodes:
-        write_datatypes_py(outdir, node)
+        write_datatype_py(outdir, node)
 
     # ### Trace ###
     for node in compound_trace_nodes:
-        write_datatypes_py(outdir, node)
+        write_datatype_py(outdir, node)
 
     # ### Frames ###
     for node in compound_frame_nodes:
-        write_datatypes_py(outdir, node)
+        write_datatype_py(outdir, node)
 
     # ### Deprecated ###
+    # These are deprecated legacy datatypes like graph_objs.Marker
     write_deprecated_datatypes(outdir)
 
     # Write figure class to graph_objs
@@ -106,60 +124,67 @@ def perform_codegen():
     layout_validator = layout_node.get_validator_instance()
     frame_validator = frame_node.get_validator_instance()
 
-    write_figure_class(outdir,
-                       base_traces_node,
-                       data_validator,
-                       layout_validator,
-                       frame_validator)
+    write_figure_classes(outdir,
+                         base_traces_node,
+                         data_validator,
+                         layout_validator,
+                         frame_validator)
 
-    # Write __init__.py files
-    # -----------------------
+    # Write validator __init__.py files
+    # ---------------------------------
     # ### Write __init__.py files for each validator package ###
     path_to_validator_import_info = {}
     for node in all_datatype_nodes:
-        key = node.parent_dir_path
+        key = node.parent_path_parts
         path_to_validator_import_info.setdefault(key, []).append(
-            (f"._{node.name_property}", node.name_validator)
+            (f"._{node.name_property}", node.name_validator_class)
         )
 
     # Add Data validator
     root_validator_pairs = path_to_validator_import_info[()]
     root_validator_pairs.append(('._data', 'DataValidator'))
 
-    for dir_path, import_pairs in path_to_validator_import_info.items():
-        write_validators_init_py(outdir, dir_path, import_pairs)
+    # Output validator __init__.py files
+    validators_pkg = opath.join(outdir, 'validators')
+    for path_parts, import_pairs in path_to_validator_import_info.items():
+        write_init_py(validators_pkg, path_parts, import_pairs)
 
-    # ### Write __init__.py files for each graph_objs package ###
-    all_compound_nodes = [node for node in all_datatype_nodes
-                          if node.is_compound]
-
+    # Write datatype __init__.py files
+    # --------------------------------
+    # ### Build mapping from parent package to datatype class ###
     path_to_datatype_import_info = {}
     for node in all_compound_nodes:
-        key = node.parent_dir_path
+        key = node.parent_path_parts
 
         # class import
         path_to_datatype_import_info.setdefault(key, []).append(
-            (f"._{node.name_undercase}", node.name_class)
+            (f"._{node.name_undercase}", node.name_datatype_class)
         )
 
         # submodule import
         if node.child_compound_datatypes:
             path_to_datatype_import_info.setdefault(key, []).append(
-                (f"plotly.graph_objs{node.parent_pkg_str}", node.name_undercase)
+                (f"plotly.graph_objs{node.parent_dotpath_str}",
+                 node.name_undercase)
             )
 
-    # ### Write plotly/graph_objs/graph_objs.py for backward compatibility
+    # ### Write plotly/graph_objs/graph_objs.py ###
+    # This if for backward compatibility. It just imports everything from
+    # graph_objs/__init__.py
     write_graph_objs_graph_objs(outdir)
 
-    # Add Figure and FigureWidget
+    # ### Add Figure and FigureWidget ###
     root_datatype_pairs = path_to_datatype_import_info[()]
     root_datatype_pairs.append(('._figure', 'Figure'))
     root_datatype_pairs.append(('._figurewidget', 'FigureWidget'))
 
-    # Add deprecations
+    # ### Add deprecations ###
     root_datatype_pairs.append(('._deprecations', DEPRECATED_DATATYPES.keys()))
-    for dir_path, import_pairs in path_to_datatype_import_info.items():
-        write_datatypes_init_py(outdir, dir_path, import_pairs)
+
+    # ### Output datatype __init__.py files ###
+    graph_objs_pkg = opath.join(outdir, 'graph_objs')
+    for path_parts, import_pairs in path_to_datatype_import_info.items():
+        write_init_py(graph_objs_pkg, path_parts, import_pairs)
 
 
 if __name__ == '__main__':
