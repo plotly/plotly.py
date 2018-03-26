@@ -23,18 +23,21 @@ def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
     abs_file_path = os.path.realpath(__file__)
     abs_dir_path = os.path.dirname(abs_file_path)
 
-    abs_plotly_dir_path = abs_dir_path[:abs_dir_path.find('/figure_factory')]
-    abs_package_data_dir_path = abs_plotly_dir_path + '/package_data/'
+    abs_plotly_dir_path = os.path.dirname(abs_dir_path)
+
+    abs_package_data_dir_path = os.path.join(abs_plotly_dir_path,
+                                             'package_data')
 
     shape_pre2010 = 'gz_2010_us_050_00_500k.shp'
-    shape_pre2010 = abs_package_data_dir_path + shape_pre2010
+    shape_pre2010 =  os.path.join(abs_package_data_dir_path, shape_pre2010)
+
     df_shape_pre2010 = gp.read_file(shape_pre2010)
     df_shape_pre2010['FIPS'] = (df_shape_pre2010['STATE'] +
                                 df_shape_pre2010['COUNTY'])
     df_shape_pre2010['FIPS'] = pd.to_numeric(df_shape_pre2010['FIPS'])
 
     states_path = 'cb_2016_us_state_500k.shp'
-    states_path = abs_package_data_dir_path + states_path
+    states_path =  os.path.join(abs_package_data_dir_path, states_path)
 
     # state df
     df_state = gp.read_file(states_path)
@@ -46,7 +49,7 @@ def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
                  'cb_2016_us_county_500k.shx']
 
     for j in range(len(filenames)):
-        filenames[j] = abs_package_data_dir_path + filenames[j]
+        filenames[j] = os.path.join(abs_package_data_dir_path, filenames[j])
 
     dbf = io.open(filenames[0], 'rb')
     shp = io.open(filenames[1], 'rb')
