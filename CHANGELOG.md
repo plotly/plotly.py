@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.5.1] - 2018-03-26
+### Fixed
+- `plotly.figure_factory.create_choropleth` now works in Windows without raising an OSError. The module now uses intelligent path tools from `os` to manipulate and manage the shapefiles packaged with Plotly
+
 ## [2.5.0] - 2018-03-12
 ### Fixed
 - `import plotly.figure_factory` does not fail if `pandas` is not installed. See  https://github.com/plotly/plotly.py/pull/958
