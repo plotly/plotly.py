@@ -26,7 +26,7 @@ update_default_schema :
                           sort_keys=True, separators=(',', ': '));\
                f.close()"
 	@echo "Auto-generating graph objects based on updated default-schema."
-	python update_graph_objs.py
+	python codegen/__init__.py
 
 install : sync_subs
 	@echo ""
