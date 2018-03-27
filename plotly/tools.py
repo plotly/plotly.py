@@ -1439,7 +1439,7 @@ if ipython_core_display:
 
 
 def return_figure_from_figure_or_data(figure_or_data, validate_figure):
-    from plotly.datatypes import Figure
+    from plotly.graph_objs import Figure
     from plotly.basedatatypes import BaseFigure
 
     validated = False

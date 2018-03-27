@@ -9,12 +9,12 @@ import numpy as np
 from plotly.offline import plot as plotlypy_plot
 from traitlets import Undefined
 
-from plotly import animation, graph_reference
-from plotly.basevalidators import CompoundValidator, CompoundArrayValidator, BaseDataValidator
+from plotly import animation
 from plotly.callbacks import Points, BoxSelector, LassoSelector, InputDeviceState
 
-# from plotly.validators.layout import (XAxisValidator, YAxisValidator, GeoValidator,
-#                                       TernaryValidator, SceneValidator)
+from _plotly_utils.basevalidators import (CompoundValidator,
+                                          CompoundArrayValidator,
+                                          BaseDataValidator)
 
 from plotly.graph_objs.graph_objs import PlotlyBase, PlotlyList, PlotlyDict
 
@@ -28,9 +28,19 @@ class BaseFigure(PlotlyBase):
 
         layout = layout_plotly
 
+        # Subplots
+        # --------
+        self._grid_str = None
+        self._grid_ref = None
+
         # Handle case where data is a Figure or Figure-like dict
         # ------------------------------------------------------
         if isinstance(data, BaseFigure):
+            # Bring over subplot fields
+            self._grid_str = data._grid_str
+            self._grid_ref = data._grid_ref
+
+            # Extract data, layout, and frames
             data, layout, frames = data.data, data.layout, data.frames
 
         elif (isinstance(data, dict) and
@@ -38,6 +48,7 @@ class BaseFigure(PlotlyBase):
             data, layout, frames = (data.get('data', None),
                                     data.get('layout', None),
                                     data.get('frames', None))
+
 
         # Traces
         # ------
@@ -63,7 +74,7 @@ class BaseFigure(PlotlyBase):
         from plotly.validators import LayoutValidator
         self._layout_validator = LayoutValidator()
 
-        from plotly.datatypes import Layout
+        from plotly.graph_objs import Layout
 
         if layout is None:
             layout = Layout()  # type: Layout
@@ -114,6 +125,8 @@ class BaseFigure(PlotlyBase):
         # Logging
         # -------
         self._log_plotly_commands = False
+
+
 
     # Magic Methods
     # -------------
@@ -182,6 +195,77 @@ class BaseFigure(PlotlyBase):
                 if d:
                     for k, v in d.items():
                         BaseFigure._perform_update(self[k], v)
+
+    # Subplots
+    # --------
+    def print_grid(self):
+        """
+        Print a visual layout of the figure's axes arrangement.
+        This is only valid for figures that are created
+        with plotly.tools.make_subplots.
+        """
+        if self._grid_str is None:
+            raise Exception("Use plotly.tools.make_subplots "
+                            "to create a subplot grid.")
+        print(self._grid_str)
+
+    def append_trace(self, trace, row, col):
+        """
+        Add a trace to your figure bound to axes at the row, col index.
+        The row, col index is generated from figures created with
+        plotly.tools.make_subplots and can be viewed with
+        Figure.print_grid.
+        :param (dict) trace: The data trace to be bound.
+        :param (int) row: Subplot row index (see Figure.print_grid).
+        :param (int) col: Subplot column index (see Figure.print_grid).
+        Example:
+        # stack two subplots vertically
+        fig = tools.make_subplots(rows=2)
+        This is the format of your plot grid:
+        [ (1,1) x1,y1 ]
+        [ (2,1) x2,y2 ]
+        fig.append_trace(Scatter(x=[1,2,3], y=[2,1,2]), 1, 1)
+        fig.append_trace(Scatter(x=[1,2,3], y=[2,1,2]), 2, 1)
+        """
+        try:
+            grid_ref = self._grid_ref
+        except AttributeError:
+            raise Exception("In order to use Figure.append_trace, "
+                            "you must first use "
+                            "plotly.tools.make_subplots "
+                            "to create a subplot grid.")
+        if row <= 0:
+            raise Exception("Row value is out of range. "
+                            "Note: the starting cell is (1, 1)")
+        if col <= 0:
+            raise Exception("Col value is out of range. "
+                            "Note: the starting cell is (1, 1)")
+        try:
+            ref = grid_ref[row - 1][col - 1]
+        except IndexError:
+            raise Exception("The (row, col) pair sent is out of "
+                            "range. Use Figure.print_grid to view the "
+                            "subplot grid. ")
+        if 'scene' in ref[0]:
+            trace['scene'] = ref[0]
+            if ref[0] not in self['layout']:
+                raise Exception("Something went wrong. "
+                                "The scene object for ({r},{c}) "
+                                "subplot cell "
+                                "got deleted.".format(r=row, c=col))
+        else:
+            xaxis_key = "xaxis{ref}".format(ref=ref[0][1:])
+            yaxis_key = "yaxis{ref}".format(ref=ref[1][1:])
+            if (xaxis_key not in self['layout']
+                    or yaxis_key not in self['layout']):
+                raise Exception("Something went wrong. "
+                                "An axis object for ({r},{c}) subplot "
+                                "cell got deleted."
+                                .format(r=row, c=col))
+            trace['xaxis'] = ref[0]
+            trace['yaxis'] = ref[1]
+
+        self.add_traces([trace])
 
     # Data
     # ----
@@ -474,7 +558,7 @@ class BaseFigure(PlotlyBase):
 
     def _restyle_child(self, child, prop, val):
 
-        trace_index = self.data.index(child)
+        trace_index = BaseFigure._index_is(self.data, child)
 
         if not self._in_batch_mode:
             send_val = [val]
@@ -536,12 +620,7 @@ class BaseFigure(PlotlyBase):
 
     def _get_child_props(self, child):
         try:
-            trace_index_list = [i for i, curr_child in enumerate(self.data)
-                                if curr_child is child]
-            if not trace_index_list:
-                raise ValueError('Invalid child')
-
-            trace_index = trace_index_list[0]
+            trace_index = BaseFigure._index_is(self.data, child)
 
         except ValueError as _:
             trace_index = None
@@ -555,7 +634,7 @@ class BaseFigure(PlotlyBase):
 
     def _get_child_prop_defaults(self, child):
         try:
-            trace_index = self.data.index(child)
+            trace_index = BaseFigure._index_is(self.data, child)
         except ValueError as _:
             trace_index = None
 
@@ -1255,6 +1334,20 @@ class BaseFigure(PlotlyBase):
             raise ValueError('Unexpected plotly object with type {typ}'
                              .format(typ=type(plotly_obj)))
 
+    @staticmethod
+    def _index_is(iterable, val):
+        """
+        Return the index of a value in an iterable using object identity
+        (not object equality as is the case for list.index)
+
+        """
+        index_list = [i for i, curr_val in enumerate(iterable)
+                            if curr_val is val]
+        if not index_list:
+            raise ValueError('Invalid value')
+
+        return index_list[0]
+
 
 class BasePlotlyType(PlotlyBase):
 
@@ -1301,16 +1394,20 @@ class BasePlotlyType(PlotlyBase):
                 prop_str = 'properties'
                 invalid_str = repr(invalid_props)
 
+            module_root = 'plotly.graph_objs.'
             if self._parent_path:
-                full_prop_name = self._parent_path + '.' + self.plotly_name
+                full_obj_name = (module_root +
+                                  self._parent_path + '.' +
+                                  self.__class__.__name__)
             else:
-                full_prop_name = self.plotly_name
+                full_obj_name = module_root + self.__class__.__name__
 
-            raise ValueError("Invalid {prop_str} specified for {full_prop_name}: {invalid_str}\n\n"
+            raise ValueError("Invalid {prop_str} specified for object of type "
+                             "{full_obj_name}: {invalid_str}\n\n"
                              "    Valid properties:\n"
                              "{prop_descriptions}"
                              .format(prop_str=prop_str,
-                                     full_prop_name=full_prop_name,
+                                     full_obj_name=full_obj_name,
                                      invalid_str=invalid_str,
                                      prop_descriptions=self._prop_descriptions))
 
@@ -1345,7 +1442,7 @@ class BasePlotlyType(PlotlyBase):
             if child.plotly_name not in self_props:
                 self_props[child.plotly_name] = {}
         elif isinstance(child_or_children, (list, tuple)):
-            child_ind = child_or_children.index(child)
+            child_ind = BaseFigure._index_is(child_or_children, child)
             if child.plotly_name not in self_props:
                 # Initialize list
                 self_props[child.plotly_name] = []
@@ -1369,7 +1466,7 @@ class BasePlotlyType(PlotlyBase):
             if child is child_or_children:
                 return self_props.get(child.plotly_name, None)
             elif isinstance(child_or_children, (list, tuple)):
-                child_ind = child_or_children.index(child)
+                child_ind = BaseFigure._index_is(child_or_children, child)
                 children_props = self_props.get(child.plotly_name, None)
                 return children_props[child_ind] \
                     if children_props is not None and len(children_props) > child_ind \
@@ -1396,7 +1493,7 @@ class BasePlotlyType(PlotlyBase):
             if child is child_or_children:
                 return self_prop_defaults.get(child.plotly_name, None)
             elif isinstance(child_or_children, (list, tuple)):
-                child_ind = child_or_children.index(child)
+                child_ind = BaseFigure._index_is(child_or_children, child)
                 children_props = self_prop_defaults.get(child.plotly_name, None)
                 return children_props[child_ind] if children_props is not None else None
             else:
@@ -1433,7 +1530,9 @@ class BasePlotlyType(PlotlyBase):
 
             return res
         else:
-            if prop not in self._validators:
+            if (prop not in self._validators and
+                    prop not in self._props and
+                    prop not in self._prop_defaults):
                 raise KeyError(prop)
 
             if prop in self._compound_props:
@@ -1658,7 +1757,7 @@ class BasePlotlyType(PlotlyBase):
     def _update_child(self, child, prop, val):
         child_prop_val = getattr(self, child.plotly_name)
         if isinstance(child_prop_val, (list, tuple)):
-            child_ind = child_prop_val.index(child)
+            child_ind = BaseFigure._index_is(child_prop_val, child)
             obj_path = '{child_name}.{child_ind}.{prop}'.format(
                 child_name=child.plotly_name,
                 child_ind=child_ind,
@@ -1761,11 +1860,17 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         match = self._subplotid_prop_re.fullmatch(prop)
         subplot_prop = match.group(1)
         suffix_digit = int(match.group(2))
-        if suffix_digit in [0, 1]:
-            raise TypeError('Subplot properties may only be suffixed by an integer > 1\n'
+        if suffix_digit == 0:
+            raise TypeError('Subplot properties may only be suffixed by an '
+                            'integer >= 1\n'
                             'Received {k}'.format(k=prop))
 
-        # Add validator
+        # Handle suffix_digit == 1
+        # In this case we remove suffix digit (e.g. xaxis1 -> xaxis)
+        if suffix_digit == 1:
+            prop = subplot_prop
+
+            # Add validator
         if prop not in self._validators:
             validator = self._subplotid_validators[subplot_prop](plotly_name=prop)
             self._validators[prop] = validator
@@ -1774,12 +1879,67 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         self._subplotid_props[prop] = self._set_compound_prop(prop, value)
 
     def __getattr__(self, item):
+
+        # Handle subplot suffix of 1
+        # Remove digit of 1 from subplot id (e.g.. xaxis1 -> xaxis)
+        match = self._subplotid_prop_re.fullmatch(item)
+        if match:
+            subplot_prop = match.group(1)
+            suffix_digit = int(match.group(2))
+            if subplot_prop and suffix_digit == 1:
+                item = subplot_prop
+
         # Check for subplot access (e.g. xaxis2)
         # Validate then call self._get_prop(item)
         if item in self._subplotid_props:
             return self._subplotid_props[item]
+        elif item in self._validators:
+            return self[item]
 
         raise AttributeError("'Layout' object has no attribute '{item}'".format(item=item))
+
+    def __getitem__(self, item):
+
+        # Handle subplot suffix of 1
+        # Remove digit of 1 from subplot id (e.g.. xaxis1 -> xaxis)
+        match = self._subplotid_prop_re.fullmatch(item)
+        if match:
+            subplot_prop = match.group(1)
+            suffix_digit = int(match.group(2))
+            if subplot_prop and suffix_digit == 1:
+                item = subplot_prop
+
+        # Check for subplot access (e.g. xaxis2)
+        # Validate then call self._get_prop(item)
+        if item in self._subplotid_props:
+            return self._subplotid_props[item]
+        elif item in self._validators:
+            return super().__getitem__(item)
+
+        raise AttributeError("'Layout' object has no attribute '{item}'".format(item=item))
+
+    def __contains__(self, prop):
+        if prop in self._validators:
+            return True
+        else:
+            # Check for subplot with suffix 1
+            match = self._subplotid_prop_re.fullmatch(prop)
+            if (match and
+                    match.group(1) in self._validators and
+                    match.group(2) == '1'):
+                return True
+            else:
+                return False
+
+    def __setitem__(self, prop, value):
+        # Check for subplot assignment (e.g. xaxis2)
+        # Call _set_compound_prop with the xaxis validator
+        match = self._subplotid_prop_re.fullmatch(prop)
+        if match is None:
+            # Try setting as ordinary property
+            super().__setitem__(prop, value)
+        else:
+            self._set_subplotid_prop(prop, value)
 
     def __setattr__(self, prop, value):
         # Check for subplot assignment (e.g. xaxis2)

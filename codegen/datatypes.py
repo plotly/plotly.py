@@ -1,14 +1,26 @@
-from io import StringIO
-import os
 import os.path as opath
 import textwrap
-import importlib
-from typing import List, Dict
+from io import StringIO
 
-from codegen.utils import TraceNode, format_source, PlotlyNode
+from codegen.utils import (PlotlyNode,
+                           format_and_write_source_py)
 
 
 def get_typing_type(plotly_type, array_ok=False):
+    """
+    Get Python type corresponding to a valType string from the plotly schema
+
+    Parameters
+    ----------
+    plotly_type : str
+        a plotly datatype string
+    array_ok : bool
+        Whether lists/arrays are permitted
+    Returns
+    -------
+    str
+        Python type string
+    """
     if plotly_type in ('data_array', 'info_array', 'colorlist'):
         pytype = 'List'
     elif plotly_type in ('string', 'color', 'colorscale', 'subplotid'):
@@ -30,78 +42,101 @@ def get_typing_type(plotly_type, array_ok=False):
         return pytype
 
 
-def build_datatypes_py(parent_node: PlotlyNode,
-                       extra_nodes: Dict[str, 'PlotlyNode'] = {}):
+def build_datatype_py(node):
+    """
+    Build datatype (graph_objs) class source code string for a datatype
+    PlotlyNode
 
-    compound_nodes = parent_node.child_compound_datatypes
-    if not compound_nodes:
-        return None
+    Parameters
+    ----------
+    node : PlotlyNode
+        The datatype node (node.is_datatype must evaluate to true) for which
+        to build the datatype class
+    Returns
+    -------
+    str
+        String containing source code for the datatype class definition
+    """
 
+    # Validate inputs
+    # ---------------
+    assert node.is_compound
+
+    # Extract node properties
+    # -----------------------
+    undercase = node.name_undercase
+    datatype_class = node.name_datatype_class
+    literal_nodes = [n for n in node.child_literals if
+                     n.plotly_name in ['type']]
+
+    # Initialze source code buffer
+    # ----------------------------
     buffer = StringIO()
 
     # Imports
     # -------
     buffer.write('from typing import *\n')
     buffer.write('from numbers import Number\n')
-    buffer.write(f'from plotly.basedatatypes import {parent_node.base_datatype_class}\n')
+    buffer.write(
+        f'from plotly.basedatatypes import {node.name_base_datatype}\n')
 
-    # ### Validators ###
-    validators_csv = ', '.join([f'{n.plotly_name} as v_{n.plotly_name}' for n in compound_nodes])
-    buffer.write(f'from plotly.validators{parent_node.pkg_str} import ({validators_csv})\n')
+    # ### Import type's validator package with rename ###
+    buffer.write(
+        f'from plotly.validators{node.parent_dotpath_str} import '
+        f'{undercase} as v_{undercase}\n')
 
-    # ### Datatypes ###
-    datatypes_csv = ', '.join([f'{n.plotly_name} as d_{n.plotly_name}' for n in compound_nodes if n.child_compound_datatypes])
-    if datatypes_csv:
-        buffer.write(f'from plotly.datatypes{parent_node.pkg_str} import ({datatypes_csv})\n')
+    # ### Import type's graph_objs package with rename ###
+    # If type has any compound children, then import that package that
+    # holds them
+    if node.child_compound_datatypes:
+        buffer.write(
+            f'from plotly.graph_objs{node.parent_dotpath_str} import '
+            f'{undercase} as d_{undercase}\n')
 
-    # Compound datatypes loop
-    # -----------------------
-    for compound_node in compound_nodes:
+    # Write class definition
+    # ----------------------
+    buffer.write(f"""
 
-        # grab literals
-        literal_nodes = [n for n in compound_node.child_literals if n.plotly_name in ['type']]
+class {datatype_class}({node.name_base_datatype}):\n""")
 
-        # ### Class definition ###
-        buffer.write(f"""
+    # ### Property definitions ###
+    child_datatype_nodes = node.child_datatypes
 
-class {compound_node.name_class}({parent_node.base_datatype_class}):\n""")
+    subtype_nodes = child_datatype_nodes
+    for subtype_node in subtype_nodes:
+        sub_datatype_class = subtype_node.name_datatype_class
+        if subtype_node.is_array_element:
+            prop_type = f'Tuple[d_{undercase}.{sub_datatype_class}]'
+        elif subtype_node.is_compound:
+            prop_type = f'd_{undercase}.{sub_datatype_class}'
+        else:
+            prop_type = get_typing_type(subtype_node.datatype)
 
-        # ### Property definitions ###
-        child_datatype_nodes = compound_node.child_datatypes
-        extra_subtype_nodes = [node for node_name, node in
-                               extra_nodes.items() if
-                               node_name.startswith(compound_node.dir_str)]
+        # #### Get property description ####
+        raw_description = subtype_node.description
+        property_description = '\n'.join(
+            textwrap.wrap(raw_description,
+                          subsequent_indent=' ' * 8,
+                          width=79 - 8))
 
-        subtype_nodes = child_datatype_nodes + extra_subtype_nodes
-        for subtype_node in subtype_nodes:
-            if subtype_node.is_array_element:
-                prop_type = f'Tuple[d_{compound_node.plotly_name}.{subtype_node.name_class}]'
-            elif subtype_node.is_compound:
-                prop_type = f'd_{compound_node.plotly_name}.{subtype_node.name_class}'
-            else:
-                prop_type = get_typing_type(subtype_node.datatype)
-
-
-            # #### Get property description ####
-            raw_description = subtype_node.description
-            property_description = '\n'.join(textwrap.wrap(raw_description,
-                                                           subsequent_indent=' ' * 8,
-                                                           width=80 - 8))
-
-            # #### Get validator description ####
-            validator = subtype_node.validator_instance
-            validator_description = reindent_validator_description(validator, 4)
+        # # #### Get validator description ####
+        validator = subtype_node.get_validator_instance()
+        if validator:
+            validator_description = reindent_validator_description(
+                validator, 4)
 
             # #### Combine to form property docstring ####
             if property_description.strip():
-                property_docstring = f"""{property_description}  
-                
+                property_docstring = f"""{property_description}
+    
         {validator_description}"""
             else:
                 property_docstring = validator_description
+        else:
+            property_docstring = property_description
 
-            # #### Write property ###
-            buffer.write(f"""\
+        # #### Write get property ####
+        buffer.write(f"""\
 
     # {subtype_node.name_property}
     # {'-' * len(subtype_node.name_property)}
@@ -112,16 +147,16 @@ class {compound_node.name_class}({parent_node.base_datatype_class}):\n""")
         \"\"\"
         return self['{subtype_node.name_property}']""")
 
-            # #### Set property ###
-            buffer.write(f"""
+        # #### Write set property ####
+        buffer.write(f"""
 
     @{subtype_node.name_property}.setter
     def {subtype_node.name_property}(self, val):
         self['{subtype_node.name_property}'] = val\n""")
 
         # ### Literals ###
-        for literal_node in literal_nodes:
-            buffer.write(f"""\
+    for literal_node in literal_nodes:
+        buffer.write(f"""\
 
     # {literal_node.name_property}
     # {'-' * len(literal_node.name_property)}
@@ -129,14 +164,14 @@ class {compound_node.name_class}({parent_node.base_datatype_class}):\n""")
     def {literal_node.name_property}(self) -> {prop_type}:
         return self._props['{literal_node.name_property}']\n""")
 
-        # ### Self properties description ###
-        buffer.write(f"""
+    # ### Private properties descriptions ###
+    buffer.write(f"""
 
     # property parent name
     # --------------------
     @property
     def _parent_path(self) -> str:
-        return '{compound_node.parent_dir_str}'
+        return '{node.parent_path_str}'
 
     # Self properties description
     # ---------------------------
@@ -144,217 +179,185 @@ class {compound_node.name_class}({parent_node.base_datatype_class}):\n""")
     def _prop_descriptions(self) -> str:
         return \"\"\"\\""")
 
-        buffer.write(compound_node.get_constructor_params_docstring(
-            indent=8,
-            extra_nodes=extra_subtype_nodes))
+    buffer.write(node.get_constructor_params_docstring(indent=8))
 
-        buffer.write(f"""
+    buffer.write(f"""
         \"\"\"""")
 
-        # ### Constructor ###
-        buffer.write(f"""
+    # ### Constructor ###
+    buffer.write(f"""
     def __init__(self""")
 
-        add_constructor_params(buffer, subtype_nodes)
-        add_docstring(buffer, compound_node, extra_subtype_nodes)
+    add_constructor_params(buffer, subtype_nodes)
+    header = f"Construct a new {datatype_class} object"
+    add_docstring(buffer, node, header=header)
 
-        buffer.write(f"""
-        super().__init__('{compound_node.name_property}', **kwargs)
-        
+    buffer.write(f"""
+        super().__init__('{node.name_property}', **kwargs)
+
         # Initialize validators
         # ---------------------""")
-        for subtype_node in subtype_nodes:
-
-            buffer.write(f"""
-        self._validators['{subtype_node.name_property}'] = v_{compound_node.plotly_name}.{subtype_node.name_validator}()""")
-
+    for subtype_node in subtype_nodes:
+        sub_name = subtype_node.name_property
+        sub_validator = subtype_node.name_validator_class
         buffer.write(f"""
-        
+        self._validators['{sub_name}'] = v_{undercase}.{sub_validator}()""")
+
+    buffer.write(f"""
+
         # Populate data dict with properties
         # ----------------------------------""")
-        for subtype_node in subtype_nodes:
-            buffer.write(f"""
+    for subtype_node in subtype_nodes:
+        buffer.write(f"""
         self.{subtype_node.name_property} = {subtype_node.name_property}""")
 
-        # ### Literals ###
-        literal_nodes = [n for n in compound_node.child_literals if n.plotly_name in ['type']]
-        if literal_nodes:
-            buffer.write(f"""
+    # ### Literals ###
+    literal_nodes = [n for n in node.child_literals if
+                     n.plotly_name in ['type']]
+    if literal_nodes:
+        buffer.write(f"""
 
         # Read-only literals
         # ------------------""")
-            for literal_node in literal_nodes:
-                buffer.write(f"""
-        self._props['{literal_node.name_property}'] = '{literal_node.node_data}'""")
+        for literal_node in literal_nodes:
+            lit_name = literal_node.name_property
+            lit_val = literal_node.node_data
+            buffer.write(f"""
+        self._props['{lit_name}'] = '{lit_val}'""")
 
+    # Return source string
+    # --------------------
     return buffer.getvalue()
 
 
 def reindent_validator_description(validator, extra_indent):
+    """
+    Return validator description with modified indenting. The string that is
+    returned has no leading indent, and the subsequent lines are indented by 4
+    spaces (the default for validator descriptions) plus `extra_indent` spaces
+
+    Parameters
+    ----------
+    validator : BaseValidator
+        Validator from which to extract the description
+    extra_indent : int
+        Number of spaces of indent to add to subsequent lines (those after
+        the first line). Validators description start with in indent of 4
+        spaces
+
+    Returns
+    -------
+    str
+        Validator description string
+    """
     # Remove leading indent and add extra spaces to subsequent indent
-    return ('\n' + ' ' * extra_indent).join(validator.description().strip().split('\n'))
+    return ('\n' + ' ' * extra_indent).join(
+        validator.description().strip().split('\n'))
 
 
-def add_constructor_params(buffer, subtype_nodes, colon=True):
+def add_constructor_params(buffer, subtype_nodes):
+    """
+    Write datatype constructor params to a buffer
+
+    Parameters
+    ----------
+    buffer : StringIO
+        Buffer to write to
+    subtype_nodes : list of PlotlyNode
+        List of datatype nodes to be written as constructor params
+    Returns
+    -------
+    None
+    """
     for i, subtype_node in enumerate(subtype_nodes):
-        dflt = None
         buffer.write(f""",
-            {subtype_node.name_property}={repr(dflt)}""")
+            {subtype_node.name_property}=None""")
 
     buffer.write(""",
             **kwargs""")
     buffer.write(f"""
-        ){':' if colon else ''}""")
+        ):""")
 
 
-def add_docstring(buffer, compound_node, extra_subtype_nodes=[]):
-    # ### Docstring ###
+def add_docstring(buffer, node, header):
+    """
+    Write docstring for a compound datatype node
+
+    Parameters
+    ----------
+    buffer : StringIO
+        Buffer to write to
+    node : PlotlyNode
+        Compound datatype plotly node for which to write docstring
+    header :
+        Top-level header for docstring that will preceded the input node's
+        own description. Header should be < 71 characters long
+    Returns
+    -------
+
+    """
+    # Validate inputs
+    # ---------------
+    assert node.is_compound
+
+    # Build wrapped description
+    # -------------------------
+    node_description = node.description
+    if node_description:
+        description_lines = textwrap.wrap(
+            node_description,
+            width=79-8,
+            subsequent_indent=' ' * 8)
+
+        node_description = '\n'.join(description_lines) + '\n\n'
+
+    # Write header and description
+    # ----------------------------
     buffer.write(f"""
         \"\"\"
-        Construct a new {compound_node.name_pascal_case} object
+        {header}
         
-        Parameters
+        {node_description}        Parameters
         ----------""")
-    buffer.write(compound_node.get_constructor_params_docstring(
-        indent=8,
-        extra_nodes=extra_subtype_nodes ))
 
-    # #### close docstring ####
+    # Write parameter descriptions
+    # ----------------------------
+    buffer.write(node.get_constructor_params_docstring(
+        indent=8))
+
+    # Write return block and close docstring
+    # --------------------------------------
     buffer.write(f"""
 
         Returns
         -------
-        {compound_node.name_pascal_case}
+        {node.name_datatype_class}
         \"\"\"""")
 
 
-def write_datatypes_py(outdir, node: PlotlyNode,
-                       extra_nodes: Dict[str, 'PlotlyNode']={}):
+def write_datatype_py(outdir, node):
+    """
+    Build datatype (graph_objs) class source code and write to a file
 
+    Parameters
+    ----------
+    outdir :
+        Root outdir in which the graph_objs package should reside
+    node :
+        The datatype node (node.is_datatype must evaluate to true) for which
+        to build the datatype class
+
+    Returns
+    -------
+    None
+    """
     # Generate source code
     # --------------------
-    datatype_source = build_datatypes_py(node, extra_nodes)
-    if datatype_source:
-        try:
-            formatted_source = format_source(datatype_source)
-        except Exception as e:
-            print(datatype_source)
-            raise e
+    datatype_source = build_datatype_py(node)
 
-        # Write file
-        # ----------
-        filedir = opath.join(outdir, 'datatypes', *node.dir_path)
-        os.makedirs(filedir, exist_ok=True)
-        filepath = opath.join(filedir, '__init__.py')
-
-        mode = 'at' if os.path.exists(filepath) else 'wt'
-        with open(filepath, mode) as f:
-            if mode == 'at':
-                f.write("\n\n")
-            f.write(formatted_source)
-            f.flush()
-            os.fsync(f.fileno())
-
-
-def build_figure_py(trace_node, base_package, base_classname, fig_classname):
-    buffer = StringIO()
-    trace_nodes = trace_node.child_compound_datatypes
-
-    # Imports
-    # -------
-    buffer.write(f'from plotly.{base_package} import {base_classname}\n')
-
-    trace_types_csv = ', '.join([n.name_pascal_case for n in trace_nodes])
-    buffer.write(f'from plotly.datatypes.trace import ({trace_types_csv})\n')
-
-    buffer.write(f"""
-
-class {fig_classname}({base_classname}):\n""")
-
-    # Reload validators and datatypes modules since we're appending
-    # Classes to them as we go
-    validators_module = importlib.import_module('plotly.validators')
-    importlib.reload(validators_module)
-    datatypes_module = importlib.import_module('plotly.datatypes')
-    importlib.reload(datatypes_module)
-
-    # Build constructor description strings
-    data_validator = validators_module.DataValidator()
-    data_description = reindent_validator_description(data_validator, 8)
-
-    layout_validator = validators_module.LayoutValidator()
-    layout_description = reindent_validator_description(layout_validator, 8)
-
-    frames_validator = validators_module.FramesValidator()
-    frames_description = reindent_validator_description(frames_validator, 8)
-
-    buffer.write(f"""
-    def __init__(self, data=None, layout=None, frames=None):
-        \"\"\"
-        Create a new {fig_classname} instance
-        
-        Parameters
-        ----------
-        data
-            {data_description}
-        layout
-            {layout_description}
-        frames
-            {frames_description}
-        \"\"\"
-        super().__init__(data, layout, frames)
-    """)
-
-    # add_trace methods
-    for trace_node in trace_nodes:
-
-        # Function signature
-        # ------------------
-        buffer.write(f"""
-    def add_{trace_node.plotly_name}(self""")
-
-        add_constructor_params(buffer, trace_node.child_datatypes)
-        add_docstring(buffer, trace_node)
-
-        # Function body
-        # -------------
-        buffer.write(f"""
-        new_trace = {trace_node.name_pascal_case}(
-        """)
-
-        for i, subtype_node in enumerate(trace_node.child_datatypes):
-            is_last = i == len(trace_node.child_datatypes) - 1
-            buffer.write(f"""
-                {subtype_node.name_property}={subtype_node.name_property}{'' if is_last else ','}""")
-
-        buffer.write(f""",
-            **kwargs)""")
-
-        buffer.write(f"""
-        return self.add_traces(new_trace)[0]""")
-
-    buffer.write('\n')
-    return buffer.getvalue()
-
-
-def append_figure_class(outdir, trace_node):
-
-    if trace_node.node_path:
-        raise ValueError('Expected root trace node. Received node with path "%s"' % trace_node.dir_str)
-
-    base_figures = [('basewidget', 'BaseFigureWidget', 'FigureWidget'),
-                    ('basedatatypes', 'BaseFigure', 'Figure')]
-
-    for base_package, base_classname, fig_classname in base_figures:
-        figure_source = build_figure_py(trace_node, base_package, base_classname, fig_classname)
-        formatted_source = format_source(figure_source)
-
-        # Append to file
-        # --------------
-        filepath = opath.join(outdir, '__init__.py')
-
-        with open(filepath, 'a') as f:
-            f.write('\n\n')
-            f.write(formatted_source)
-            f.flush()
-            os.fsync(f.fileno())
+    # Write file
+    # ----------
+    filepath = opath.join(outdir, 'graph_objs',
+                          *node.parent_path_parts,
+                          '_' + node.name_undercase + '.py')
+    format_and_write_source_py(datatype_source, filepath)

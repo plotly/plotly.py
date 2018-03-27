@@ -76,9 +76,10 @@ def type_str(v):
 # Validators
 # ----------
 class BaseValidator:
-    def __init__(self, plotly_name, parent_name):
+    def __init__(self, plotly_name, parent_name, role=None, **_):
         self.parent_name = parent_name
         self.plotly_name = plotly_name
+        self.role = role
 
     def validate_coerce(self, v):
         raise NotImplementedError()
@@ -129,8 +130,9 @@ class DataArrayValidator(BaseValidator):
         },
     """
 
-    def __init__(self, plotly_name, parent_name, **_):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, plotly_name, parent_name, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
 
     def description(self):
         return ("""\
@@ -163,8 +165,12 @@ class EnumeratedValidator(BaseValidator):
             ]
         },
     """
-    def __init__(self, plotly_name, parent_name, values, array_ok=False, coerce_number=False, **_):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, plotly_name, parent_name, values,
+                 array_ok=False,
+                 coerce_number=False,
+                 **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
 
         # coerce_number is rarely used and not implemented
         self.coerce_number = coerce_number
@@ -172,14 +178,50 @@ class EnumeratedValidator(BaseValidator):
 
         # compile regexes
         self.val_regexs = []
+
+        # regex replacement that runs before the matching regex
+        # So far, this is only used to cast x1 -> x for anchor-style
+        # enumeration properties
+        self.regex_replacements = []
         for v in self.values:
             if v and isinstance(v, str) and v[0] == '/' and v[-1] == '/':
                 # String is regex with leading and trailing '/' character
-                self.val_regexs.append(re.compile(v[1:-1]))
+                regex_str = v[1:-1]
+                self.val_regexs.append(re.compile(regex_str))
+                self.regex_replacements.append(
+                    EnumeratedValidator.build_regex_replacement(regex_str))
             else:
                 self.val_regexs.append(None)
+                self.regex_replacements.append(None)
 
         self.array_ok = array_ok
+
+    @staticmethod
+    def build_regex_replacement(regex_str):
+        # regex_str = r"^y([2-9]|[1-9][0-9]+)?$"
+
+        # Remove id of 1 from subplotid-style anchors. The regular
+        # expressions forbid a suffix of 1. But we want just want to convert
+        # to by removing the 1 (e.g. turn x1 -> x).
+        #
+        # To be cautious, we only perform this conversion for enumerated
+        # values that match the anchor-style regex
+        match = re.match(r"\^(\w)\(\[2\-9\]\|\[1\-9\]\[0\-9\]\+\)\?\$",
+                         regex_str)
+
+        if match:
+            anchor_char = match.group(1)
+            return '^' + anchor_char + '1$', anchor_char
+        else:
+            return None
+
+
+    def perform_replacemenet(self, v):
+        for repl_args in self.regex_replacements:
+            if repl_args:
+                v = re.sub(repl_args[0], repl_args[1], v)
+
+        return v
 
     def description(self):
 
@@ -238,12 +280,15 @@ class EnumeratedValidator(BaseValidator):
             # Pass None through
             pass
         elif self.array_ok and is_array(v):
+            v = [self.perform_replacemenet(v_el) for v_el in v]
+
             invalid_els = [e for e in v if (not self.in_values(e))]
             if invalid_els:
                 self.raise_invalid_elements(invalid_els)
 
             v = copy_to_contiguous_readonly_numpy_array(v)
         else:
+            v = self.perform_replacemenet(v)
             if not self.in_values(v):
                 self.raise_invalid_val(v)
         return v
@@ -259,8 +304,9 @@ class BooleanValidator(BaseValidator):
             ]
         },
     """
-    def __init__(self, plotly_name, parent_name, **_):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, plotly_name, parent_name, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
 
     def description(self):
         return ("""\
@@ -290,8 +336,10 @@ class NumberValidator(BaseValidator):
             ]
         },
     """
-    def __init__(self, plotly_name, parent_name, min=None, max=None, array_ok=False, **_):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, plotly_name, parent_name,
+                 min=None, max=None, array_ok=False, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
 
         # Handle min
         if min is None and max is not None:
@@ -378,8 +426,10 @@ class IntegerValidator(BaseValidator):
             ]
         },
     """
-    def __init__(self, plotly_name, parent_name, min=None, max=None, array_ok=False, **_):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, plotly_name, parent_name,
+                 min=None, max=None, array_ok=False, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
 
         # Handle min
         if min is None and max is not None:
@@ -473,8 +523,11 @@ class StringValidator(BaseValidator):
             ]
         },
     """
-    def __init__(self, plotly_name, parent_name, no_blank=False, strict=False, array_ok=False, values=None, **_):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, plotly_name, parent_name,
+                 no_blank=False, strict=False, array_ok=False, values=None,
+                 **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
         self.no_blank = no_blank
         self.strict = strict        # Not implemented. We're always strict
         self.array_ok = array_ok
@@ -574,8 +627,10 @@ class ColorValidator(BaseValidator):
         "slateblue", "slategray", "slategrey", "snow", "springgreen", "steelblue", "tan", "teal", "thistle", "tomato",
         "turquoise", "violet", "wheat", "white", "whitesmoke", "yellow", "yellowgreen"]
 
-    def __init__(self, plotly_name, parent_name, array_ok=False, colorscale_path=None, **_):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, plotly_name, parent_name,
+                 array_ok=False, colorscale_path=None, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
         self.colorscale_path = colorscale_path
         self.array_ok = array_ok
 
@@ -584,7 +639,8 @@ class ColorValidator(BaseValidator):
 
     def description(self):
 
-        named_clrs_str = '\n'.join(textwrap.wrap(', '.join(self.named_colors), width=80, subsequent_indent=' ' * 12))
+        named_clrs_str = '\n'.join(textwrap.wrap(', '.join(
+            self.named_colors), width=79, subsequent_indent=' ' * 12))
 
         valid_color_description = """\
     The '{plotly_name}' property is a color and may be specified as:  
@@ -678,8 +734,9 @@ class ColorlistValidator(BaseValidator):
           ]
         }
     """
-    def __init__(self, plotly_name, parent_name, **_):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, plotly_name, parent_name, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
 
     def description(self):
         return ("""\
@@ -718,8 +775,9 @@ class ColorscaleValidator(BaseValidator):
     named_colorscales = ['Greys', 'YlGnBu', 'Greens', 'YlOrRd', 'Bluered', 'RdBu', 'Reds', 'Blues', 'Picnic',
                          'Rainbow', 'Portland', 'Jet', 'Hot', 'Blackbody', 'Earth', 'Electric', 'Viridis']
 
-    def __init__(self, plotly_name, parent_name, **_):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, plotly_name, parent_name, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
 
     def description(self):
         desc = """\
@@ -777,8 +835,9 @@ class AngleValidator(BaseValidator):
             ]
         },
     """
-    def __init__(self, plotly_name, parent_name, **_):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, plotly_name, parent_name, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
 
     def description(self):
         desc = """\
@@ -811,8 +870,9 @@ class SubplotidValidator(BaseValidator):
             "otherOpts": []
         },
     """
-    def __init__(self, plotly_name, parent_name, dflt, **_):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, plotly_name, parent_name, dflt, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
         self.base = dflt
         self.regex = dflt + "(\d*)"
 
@@ -820,8 +880,8 @@ class SubplotidValidator(BaseValidator):
 
         desc = """\
     The '{plotly_name}' property is an identifier of a particular subplot, of type '{base}', that 
-    may be specified as the string '{base}' optionally followed by an integer > 1 
-    (e.g. '{base}', '{base}2', '{base}3', etc.)
+    may be specified as the string '{base}' optionally followed by an integer >= 1 
+    (e.g. '{base}', '{base}1', '{base}2', '{base}3', etc.)
         """.format(plotly_name=self.plotly_name, base=self.base)
         return desc
 
@@ -831,12 +891,17 @@ class SubplotidValidator(BaseValidator):
         elif not isinstance(v, str):
             self.raise_invalid_val(v)
         else:
-            if not re.fullmatch(self.regex, v):
+            match = re.fullmatch(self.regex, v)
+            if not match:
                 is_valid = False
             else:
-                digit_str = re.fullmatch(self.regex, v).group(1)
-                if len(digit_str) > 0 and int(digit_str) in [0, 1]:
+                digit_str = match.group(1)
+                if len(digit_str) > 0 and int(digit_str) == 0:
                     is_valid = False
+                elif len(digit_str) > 0 and int(digit_str) == 1:
+                    # Remove 1 suffix (e.g. x1 -> x)
+                    v = self.base
+                    is_valid = True
                 else:
                     is_valid = True
 
@@ -859,8 +924,10 @@ class FlaglistValidator(BaseValidator):
             ]
         },
     """
-    def __init__(self, plotly_name, parent_name, flags, extras=None, array_ok=False, **_):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, plotly_name, parent_name, flags,
+                 extras=None, array_ok=False, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
         self.flags = flags
         self.extras = extras if extras is not None else []
         self.array_ok = array_ok
@@ -943,8 +1010,10 @@ class AnyValidator(BaseValidator):
             ]
         },
     """
-    def __init__(self, plotly_name, parent_name, values=None, array_ok=False, **_):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, plotly_name, parent_name,
+                 values=None, array_ok=False, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
         self.values = values
         self.array_ok = array_ok
 
@@ -978,8 +1047,10 @@ class InfoArrayValidator(BaseValidator):
             ]
         }
     """
-    def __init__(self, plotly_name, parent_name, items, free_length=None, **_):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, plotly_name, parent_name,
+                 items, free_length=None, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
         self.items = items
 
         self.item_validators = []
@@ -1048,8 +1119,9 @@ class ImageUriValidator(BaseValidator):
     except ModuleNotFoundError:
         pass
 
-    def __init__(self, plotly_name, parent_name, **_):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
+    def __init__(self, plotly_name, parent_name, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
 
     def description(self):
 
@@ -1088,40 +1160,64 @@ class ImageUriValidator(BaseValidator):
 
 
 class CompoundValidator(BaseValidator):
-    def __init__(self, plotly_name, parent_name, data_class, data_docs):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
-        self.data_class = data_class
+    def __init__(self, plotly_name, parent_name,
+                 data_class_str, data_docs, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
+
+        # Save element class string
+        self.data_class_str = data_class_str
+        self._data_class = None
         self.data_docs = data_docs
+        self.module_str = CompoundValidator.compute_graph_obj_module_str(
+            self.data_class_str, parent_name)
 
     @staticmethod
-    def get_constructor_params_str(data_class):
-        params_match = re.search("Parameters\n\W*-+\n\W*(.*?)(Returns|$)",
-                                 str(data_class.__init__.__doc__),
-                                 flags=re.DOTALL)
+    def import_graph_objs_class(data_class_str, module_str):
+        # Import class module
+        module = import_module(module_str)
 
-        if params_match is not None:
-            param_descs = params_match.groups()[0]
+        # Get class reference
+        return getattr(module, data_class_str)
 
-            # Increase indent by 4 spaces
-            param_descs_indented = ('\n' + ' ' * 4).join(param_descs.split('\n'))
+    @staticmethod
+    def compute_graph_obj_module_str(data_class_str, parent_name):
+        if parent_name == 'frame' and data_class_str in ['Data', 'Layout']:
+            # Special case. There are no graph_objs.frame.Data or
+            # graph_objs.frame.Layout classes. These are remapped to
+            # graph_objs.Data and graph_objs.Layout
 
-            return param_descs_indented
+            parent_parts = parent_name.split('.')
+            module_str = '.'.join(['plotly.graph_objs'] + parent_parts[1:])
+        elif parent_name:
+            module_str = 'plotly.graph_objs.' + parent_name
         else:
-            return ''
+            module_str = 'plotly.graph_objs'
+
+        return  module_str
+
+    @property
+    def data_class(self):
+        if self._data_class is None:
+            self._data_class = CompoundValidator.import_graph_objs_class(
+                self.data_class_str, self.module_str)
+
+        return self._data_class
 
     def description(self):
 
         desc = ("""\
-    The '{plotly_name}' property is an instance of {data_class} 
+    The '{plotly_name}' property is an instance of {class_str} 
     that may be specified as:
-      - An instance of {data_class}
+      - An instance of {module_str}.{class_str}
       - A dict of string/value properties that will be passed to the 
-        {data_class} constructor
+        {class_str} constructor
       
         Supported dict properties:
             {constructor_params_str}"""
                 ).format(plotly_name=self.plotly_name,
-                         data_class=type_str(self.data_class),
+                         class_str=self.data_class_str,
+                         module_str=self.module_str,
                          constructor_params_str=self.data_docs)
 
         return desc
@@ -1148,31 +1244,48 @@ class CompoundValidator(BaseValidator):
 
 
 class CompoundArrayValidator(BaseValidator):
-    def __init__(self, plotly_name, parent_name, element_class, element_docs):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
-        self.data_class = element_class
-        self.data_docs = element_docs
+    def __init__(self, plotly_name, parent_name,
+                 data_class_str, data_docs, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
+
+        # Save element class string
+        self.data_class_str = data_class_str
+        self._data_class = None
+
+        self.data_docs = data_docs
+        self.module_str = CompoundValidator.compute_graph_obj_module_str(
+            self.data_class_str, parent_name)
 
     def description(self):
 
         desc = ("""\
-    The '{plotly_name}' property is a tuple of instances of {data_class} that may be specified as:
-      - A list or tuple of instances of {data_class}
-      - A list or tuple of dicts of string/value properties that will be passed to the {data_class} constructor
+    The '{plotly_name}' property is a tuple of instances of {class_str} that may be specified as:
+      - A list or tuple of instances of {module_str}.{class_str}
+      - A list or tuple of dicts of string/value properties that will be passed to the {class_str} constructor
 
         Supported dict properties:
             {constructor_params_str}"""
                 ).format(plotly_name=self.plotly_name,
-                         data_class=type_str(self.data_class),
+                         class_str=self.data_class_str,
+                         module_str=self.module_str,
                          constructor_params_str=self.data_docs)
 
         return desc
+
+    @property
+    def data_class(self):
+        if self._data_class is None:
+            self._data_class = CompoundValidator.import_graph_objs_class(
+                self.data_class_str, self.module_str)
+
+        return self._data_class
 
     def validate_coerce(self, v):
 
         if isinstance(self.data_class, str):
             raise ValueError("Invalid data_class of type 'string': {data_class}"
-                             .format(data_class = self.data_class))
+                             .format(data_class=self.data_class))
 
         if v is None:
             v = ()
@@ -1201,17 +1314,19 @@ class CompoundArrayValidator(BaseValidator):
 
 
 class BaseDataValidator(BaseValidator):
-    def __init__(self, class_map, plotly_name, parent_name):
-        super().__init__(plotly_name=plotly_name, parent_name=parent_name)
-        self.class_map = class_map
+    def __init__(self, class_map, plotly_name, parent_name, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name, **kwargs)
+        self.class_strs_map = class_map
+        self._class_map = None
 
     def description(self):
 
-        trace_types = str(list(self.class_map.keys()))
+        trace_types = str(list(self.class_strs_map.keys()))
 
         trace_types_wrapped = '\n'.join(textwrap.wrap(trace_types,
                                                       subsequent_indent=' ' * 21,
-                                                      width=80 - 8))
+                                                      width=79 - 8))
 
         desc = ("""\
     The '{plotly_name}' property is a tuple of trace instances that may be specified as:
@@ -1227,6 +1342,20 @@ class BaseDataValidator(BaseValidator):
                 ).format(plotly_name=self.plotly_name, trace_types=trace_types_wrapped)
 
         return desc
+
+    @property
+    def class_map(self):
+        if self._class_map is None:
+
+            # Initialize class map
+            self._class_map = {}
+
+            # Import trace classes
+            trace_module = import_module('plotly.graph_objs')
+            for k, class_str in self.class_strs_map.items():
+                self._class_map[k] = getattr(trace_module, class_str)
+
+        return self._class_map
 
     def validate_coerce(self, v):
 
