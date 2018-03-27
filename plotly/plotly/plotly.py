@@ -29,6 +29,7 @@ from requests.compat import json as _json
 
 from plotly import exceptions, files, session, tools, utils
 from plotly.api import v1, v2
+from plotly.basedatatypes import BaseTraceType
 from plotly.plotly import chunked_requests
 from plotly.grid_objs import Grid, Column
 from plotly.dashboard_objs import dashboard_objs as dashboard
@@ -628,6 +629,11 @@ class Stream:
         http://nbviewer.ipython.org/github/plotly/python-user-guide/blob/master/s7_streaming/s7_streaming.ipynb
 
         """
+
+        # Convert trace objects to dictionaries
+        if isinstance(trace, BaseTraceType):
+            trace = trace.to_plotly_json()
+
         stream_object = dict()
         stream_object.update(trace)
         if 'type' not in stream_object:
@@ -714,14 +720,7 @@ class image:
 
         """
         # TODO: format is a built-in name... we shouldn't really use it
-        if isinstance(figure_or_data, dict):
-            figure = figure_or_data
-        elif isinstance(figure_or_data, list):
-            figure = {'data': figure_or_data}
-        else:
-            raise exceptions.PlotlyEmptyDataError(
-                "`figure_or_data` must be a dict or a list."
-            )
+        figure = tools.return_figure_from_figure_or_data(figure_or_data, True)
 
         if format not in ['png', 'svg', 'jpeg', 'pdf']:
             raise exceptions.PlotlyError(
