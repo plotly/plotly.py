@@ -136,7 +136,7 @@ def build_data_validator_params(base_trace_node: TraceNode):
 
     # Build params dict
     # -----------------
-    params = {'class_map': class_map_repr,
+    params = {'class_strs_map': class_map_repr,
               'plotly_name': repr('data'),
               'parent_name': repr('')}
 
@@ -168,14 +168,13 @@ def build_data_validator_py(base_trace_node: TraceNode):
 
     buffer.write(f"""
 import _plotly_utils.basevalidators
-    
-    
+
 class DataValidator(_plotly_utils.basevalidators.BaseDataValidator):
 
     def __init__(self, plotly_name={params['plotly_name']},
                        parent_name={params['parent_name']}):
 
-        super().__init__(class_map={params['class_map']},
+        super().__init__(class_strs_map={params['class_strs_map']},
                          plotly_name=plotly_name,
                          parent_name=parent_name)""")
 

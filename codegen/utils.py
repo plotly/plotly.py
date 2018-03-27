@@ -768,11 +768,12 @@ class PlotlyNode:
 
             subtype_description = '\n'.join(
                 textwrap.wrap(subtype_description,
+                              initial_indent=' ' * (indent + 4),
                               subsequent_indent=' ' * (indent + 4),
                               width=79 - (indent + 4)))
 
             buffer.write('\n' + ' ' * indent + subtype_node.name_property)
-            buffer.write('\n' + ' ' * (indent + 4) + subtype_description)
+            buffer.write('\n' + subtype_description)
 
         return buffer.getvalue()
 
