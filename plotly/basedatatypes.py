@@ -16,10 +16,8 @@ from _plotly_utils.basevalidators import (CompoundValidator,
                                           CompoundArrayValidator,
                                           BaseDataValidator)
 
-from plotly.graph_objs.graph_objs import PlotlyBase, PlotlyList, PlotlyDict
 
-
-class BaseFigure(PlotlyBase):
+class BaseFigure:
 
     # Constructor
     # -----------
@@ -1349,8 +1347,7 @@ class BaseFigure(PlotlyBase):
         return index_list[0]
 
 
-class BasePlotlyType(PlotlyBase):
-
+class BasePlotlyType:
     _validators = None
 
     # Defaults to help mocking
@@ -1548,12 +1545,6 @@ class BasePlotlyType(PlotlyBase):
         return prop in self._validators
 
     def __setitem__(self, key, value):
-        if 'xaxis' in key:
-            print('Key and Value')
-            print('KEY: {}'.format(key))
-            print('VALUE: {}'.format(value))
-            print(self._validators.keys())
-            print('\n')
         if key not in self._validators:
             self._raise_on_invalid_property_error(key)
 
