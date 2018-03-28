@@ -29,6 +29,20 @@ class NumpyTestUtilsMixin(object):
         str_path = [repr(p) for p in path]
         return '[' + ']['.join(sp for sp in str_path) + ']'
 
+    def assert_fig_equal(self, d1, d2, msg=None):
+        """
+        Helper function for asser_dict_equal
+
+        Removes uid from d1 and/or d2 if present then
+        calls assert_dict_equal
+        """
+        if 'uid' in d1.keys():
+            del d1['uid']
+        if 'uid' in d2.keys():
+            del d2['uid']
+
+        assert_dict_equal(d1, d2, msg=None)
+
     def assert_dict_equal(self, d1, d2, msg=None):
         """
         Uses `np.allclose()` on number arrays.

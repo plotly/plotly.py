@@ -442,9 +442,9 @@ class TestStreamline(TestCase):
             'type': 'scatter',
             'mode': 'lines'
         }
-        self.assertListEqual(strln['data'][0]['y'][0:100],
-                             expected_strln_0_100['y'])
-        self.assertListEqual(strln['data'][0]['x'][0:100],
+        self.assertListEqual(list(strln['data'][0]['y'][0:100]),
+                                 expected_strln_0_100['y'])
+        self.assertListEqual(list(strln['data'][0]['x'][0:100]),
                              expected_strln_0_100['x'])
 
 
@@ -493,7 +493,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
                 hovermode='closest',
                 showlegend=False,
                 width='100%',
-                xaxis=go.XAxis(
+                xaxis=go.layout.XAxis(
                     mirror='allticks',
                     rangemode='tozero',
                     showgrid=False,
@@ -506,7 +506,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
                     type='linear',
                     zeroline=False
                 ),
-                yaxis=go.YAxis(
+                yaxis=go.layout.YAxis(
                     mirror='allticks',
                     rangemode='tozero',
                     showgrid=False,
@@ -582,7 +582,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
                 hovermode='closest',
                 showlegend=False,
                 width='100%',
-                xaxis=go.XAxis(
+                xaxis=go.layout.XAxis(
                     mirror='allticks',
                     rangemode='tozero',
                     showgrid=False,
@@ -594,7 +594,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
                     type='linear',
                     zeroline=False
                 ),
-                yaxis=go.YAxis(
+                yaxis=go.layout.YAxis(
                     mirror='allticks',
                     rangemode='tozero',
                     showgrid=False,
@@ -715,7 +715,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
                 hovermode='closest',
                 showlegend=False,
                 width='100%',
-                xaxis=go.XAxis(
+                xaxis=go.layout.XAxis(
                     mirror='allticks',
                     rangemode='tozero',
                     showgrid=False,
@@ -728,7 +728,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
                     type='linear',
                     zeroline=False
                 ),
-                yaxis=go.YAxis(
+                yaxis=go.layout.YAxis(
                     mirror='allticks',
                     rangemode='tozero',
                     showgrid=False,
@@ -1535,9 +1535,9 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
 
         exp_violin = {
             'data': [{'fill': 'tonextx',
-                     'fillcolor': 'rgb(31, 119, 180)',
+                     'fillcolor': 'rgb(31,119,180)',
                      'hoverinfo': 'text',
-                     'line': {'color': 'rgb(0, 0, 0)',
+                     'line': {'color': 'rgb(0,0,0)',
                               'shape': 'spline',
                               'width': 0.5},
                      'mode': 'lines',
@@ -1713,9 +1713,9 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
                                      1.96969697,  1.97979798,  1.98989899,
                                      2.])},
                      {'fill': 'tonextx',
-                      'fillcolor': 'rgb(31, 119, 180)',
+                      'fillcolor': 'rgb(31,119,180)',
                       'hoverinfo': 'text',
-                      'line': {'color': 'rgb(0, 0, 0)',
+                      'line': {'color': 'rgb(0,0,0)',
                                'shape': 'spline',
                                'width': 0.5},
                       'mode': 'lines',
@@ -1913,7 +1913,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
                       'x': [0],
                       'y': [1.5]},
                      {'hoverinfo': 'y',
-                      'marker': {'color': 'rgb(31, 119, 180)',
+                      'marker': {'color': 'rgb(31,119,180)',
                                  'symbol': 'line-ew-open'},
                       'mode': 'markers',
                       'name': '',
@@ -1947,14 +1947,18 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
                                  'title': '',
                                  'zeroline': False}}}
 
-        self.assert_dict_equal(test_violin['data'][0],
-                               exp_violin['data'][0])
+        for i in [0, 1]:
+            for key in test_violin.to_plotly_json()['data'][i]:
+                if key != 'uid':
+                    print(key)
+                    self.assertEqual(test_violin.to_plotly_json()['data'][i][key],
+                                           exp_violin['data'][i][key])
 
-        self.assert_dict_equal(test_violin['data'][1],
-                               exp_violin['data'][1])
+        #self.assert_dict_equal(test_violin.to_plotly_json()['data'][1],
+        #                       exp_violin['data'][1])
 
-        self.assert_dict_equal(test_violin['layout'],
-                               exp_violin['layout'])
+        #self.assert_dict_equal(test_violin.to_plotly_json()['layout'],
+        #                       exp_violin['layout'])
 
 
 class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
