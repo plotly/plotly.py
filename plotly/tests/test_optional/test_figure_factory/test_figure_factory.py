@@ -56,11 +56,11 @@ class TestDistplot(TestCase):
                               'legend': {'traceorder': 'reversed'},
                               'xaxis1': {'anchor': 'y2', 'domain': [0.0, 1.0], 'zeroline': False},
                               'yaxis1': {'anchor': 'free', 'domain': [0.35, 1], 'position': 0.0},
-                              'yaxis2': {'anchor': 'x1',
+                              'yaxis2': {'anchor': 'x',
                                          'domain': [0, 0.25],
                                          'dtick': 1,
                                          'showticklabels': False}}
-        self.assertEqual(dp['layout'], expected_dp_layout)
+        self.assertEqual(dp['layout'].to_plotly_json(), expected_dp_layout)
 
         expected_dp_data_hist = {'autobinx': False,
                                  'histnorm': 'probability density',
@@ -106,7 +106,7 @@ class TestDistplot(TestCase):
                                          'domain': [0, 0.25],
                                          'dtick': 1,
                                          'showticklabels': False}}
-        self.assertEqual(dp['layout'], expected_dp_layout)
+        self.assertEqual(dp.to_plotly_json()['layout'], expected_dp_layout)
 
         expected_dp_data_hist = {'autobinx': False,
                                  'histnorm': 'probability',
@@ -164,7 +164,7 @@ class TestDistplot(TestCase):
                                          'zeroline': False},
                               'yaxis1': {'anchor': 'free', 'domain': [0.0, 1],
                                          'position': 0.0}}
-        self.assertEqual(dp['layout'], expected_dp_layout)
+        self.assertEqual(dp.to_plotly_json()['layout'], expected_dp_layout)
 
         expected_dp_data_hist_1 = {'autobinx': False,
                                    'histnorm': 'probability density',
@@ -226,7 +226,7 @@ class TestDistplot(TestCase):
                                          'zeroline': False},
                               'yaxis1': {'anchor': 'free', 'domain': [0.0, 1],
                                          'position': 0.0}}
-        self.assertEqual(dp['layout'], expected_dp_layout)
+        self.assertEqual(dp.to_plotly_json()['layout'], expected_dp_layout)
 
         expected_dp_data_hist_1 = {'autobinx': False,
                                    'histnorm': 'probability',
@@ -1157,12 +1157,11 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
         )
 
         exp_scatter_plot_matrix = {
-            'data': [{'name': None,
-                      'showlegend': False,
+            'data': [{'showlegend': False,
                       'type': 'box',
-                      'xaxis': 'x1',
+                      'xaxis': 'x',
                       'y': [2, 6, -15, 5, -2, 0],
-                      'yaxis': 'y1'},
+                      'yaxis': 'y'},
                      {'marker': {'size': 13},
                       'mode': 'markers',
                       'showlegend': False,
@@ -1192,7 +1191,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
                        'showlegend': True,
                        'title': 'Scatterplot Matrix',
                        'width': 1000,
-                       'xaxis1': {'anchor': 'y1',
+                       'xaxis': {'anchor': 'y',
                                   'domain': [0.0, 0.45],
                                   'showticklabels': False},
                        'xaxis2': {'anchor': 'y2',
@@ -1204,7 +1203,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
                                   'domain': [0.55, 1.0],
                                   'showticklabels': False,
                                   'title': 'Fruit'},
-                       'yaxis1': {'anchor': 'x1',
+                       'yaxis': {'anchor': 'x',
                                   'domain': [0.575, 1.0],
                                   'title': 'Numbers'},
                        'yaxis2': {'anchor': 'x2',
@@ -1216,13 +1215,13 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
                                   'domain': [0.0, 0.425]}}
         }
 
-        self.assert_dict_equal(test_scatter_plot_matrix['data'][0],
+        self.assert_fig_equal(test_scatter_plot_matrix.to_plotly_json()['data'][0],
                                exp_scatter_plot_matrix['data'][0])
 
-        self.assert_dict_equal(test_scatter_plot_matrix['data'][1],
+        self.assert_fig_equal(test_scatter_plot_matrix.to_plotly_json()['data'][1],
                                exp_scatter_plot_matrix['data'][1])
 
-        self.assert_dict_equal(test_scatter_plot_matrix['layout'],
+        self.assert_dict_equal(test_scatter_plot_matrix.to_plotly_json()['layout'],
                                exp_scatter_plot_matrix['layout'])
 
     def test_scatter_plot_matrix_kwargs(self):
@@ -1241,38 +1240,38 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
         )
 
         exp_scatter_plot_matrix = {
-            'data': [{'marker': {'color': 'rgb(128, 0, 38)'},
+            'data': [{'marker': {'color': 'rgb(128,0,38)'},
                       'showlegend': False,
                       'type': 'histogram',
                       'x': [2, -15, -2, 0],
-                      'xaxis': 'x1',
-                      'yaxis': 'y1'},
-                     {'marker': {'color': 'rgb(255, 255, 204)'},
+                      'xaxis': 'x',
+                      'yaxis': 'y'},
+                     {'marker': {'color': 'rgb(255,255,204)'},
                       'showlegend': False,
                       'type': 'histogram',
                       'x': [6, 5],
-                      'xaxis': 'x1',
-                      'yaxis': 'y1'}],
+                      'xaxis': 'x',
+                      'yaxis': 'y'}],
             'layout': {'barmode': 'stack',
                        'height': 1000,
                        'showlegend': True,
                        'title': 'Scatterplot Matrix',
                        'width': 1000,
-                       'xaxis1': {'anchor': 'y1',
+                       'xaxis': {'anchor': 'y',
                                   'domain': [0.0, 1.0],
                                   'title': 'Numbers'},
-                       'yaxis1': {'anchor': 'x1',
+                       'yaxis': {'anchor': 'x',
                                   'domain': [0.0, 1.0],
                                   'title': 'Numbers'}}
         }
 
-        self.assert_dict_equal(test_scatter_plot_matrix['data'][0],
+        self.assert_fig_equal(test_scatter_plot_matrix.to_plotly_json()['data'][0],
                                exp_scatter_plot_matrix['data'][0])
 
-        self.assert_dict_equal(test_scatter_plot_matrix['data'][1],
+        self.assert_fig_equal(test_scatter_plot_matrix.to_plotly_json()['data'][1],
                                exp_scatter_plot_matrix['data'][1])
 
-        self.assert_dict_equal(test_scatter_plot_matrix['layout'],
+        self.assert_fig_equal(test_scatter_plot_matrix.to_plotly_json()['layout'],
                                exp_scatter_plot_matrix['layout'])
 
 
@@ -1306,7 +1305,7 @@ class TestGantt(NumpyTestUtilsMixin, TestCase):
                                     'y': [1, 1]}],
                             'layout': {'height': 600,
                                        'hovermode': 'closest',
-                                       'shapes': [{'fillcolor': 'rgb(31, 119, 180)',
+                                       'shapes': [{'fillcolor': 'rgb(31,119,180)',
                                                    'line': {'width': 0},
                                                    'opacity': 1,
                                                    'type': 'rect',
@@ -1316,7 +1315,7 @@ class TestGantt(NumpyTestUtilsMixin, TestCase):
                                                    'y0': -0.2,
                                                    'y1': 0.2,
                                                    'yref': 'y'},
-                                                  {'fillcolor': 'rgb(255, 127, 14)',
+                                                  {'fillcolor': 'rgb(255,127,14)',
                                                    'line': {'width': 0},
                                                    'opacity': 1,
                                                    'type': 'rect',
@@ -1360,10 +1359,10 @@ class TestGantt(NumpyTestUtilsMixin, TestCase):
                                        'tickvals': [0, 1],
                                        'zeroline': False}}}
 
-        self.assertEqual(test_gantt_chart['data'][0],
-                         exp_gantt_chart['data'][0])
+        self.assert_fig_equal(test_gantt_chart.to_plotly_json()['data'][0],
+                              exp_gantt_chart['data'][0])
 
-        self.assert_dict_equal(test_gantt_chart['layout'],
+        self.assert_dict_equal(test_gantt_chart.to_plotly_json()['layout'],
                                exp_gantt_chart['layout'])
 
 
@@ -1947,18 +1946,15 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
                                  'title': '',
                                  'zeroline': False}}}
 
+        # test both items in 'data'
         for i in [0, 1]:
-            for key in test_violin.to_plotly_json()['data'][i]:
-                if key != 'uid':
-                    print(key)
-                    self.assertEqual(test_violin.to_plotly_json()['data'][i][key],
-                                           exp_violin['data'][i][key])
+            self.assert_fig_equal(
+                test_violin.to_plotly_json()['data'][i],
+                exp_violin['data'][i]
+            )
 
-        #self.assert_dict_equal(test_violin.to_plotly_json()['data'][1],
-        #                       exp_violin['data'][1])
-
-        #self.assert_dict_equal(test_violin.to_plotly_json()['layout'],
-        #                       exp_violin['layout'])
+        self.assert_dict_equal(test_violin.to_plotly_json()['layout'],
+                               exp_violin['layout'])
 
 
 class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
@@ -2185,7 +2181,7 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
                                      list(exp_facet_grid['data'][j][key]))
 
         # layout
-        self.assert_dict_equal(test_facet_grid['layout'],
+        self.assert_dict_equal(test_facet_grid.to_plotly_json()['layout'],
                                exp_facet_grid['layout'])
 
 
@@ -2285,72 +2281,72 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
         exp_fig = {
             'data': [{'base': 0,
                       'hoverinfo': 'y',
-                      'marker': {'color': 'rgb(44.0, 160.0, 44.0)'},
+                      'marker': {'color': 'rgb(44.0,160.0,44.0)'},
                       'name': 'ranges',
                       'orientation': 'v',
                       'type': 'bar',
                       'width': 2,
                       'x': [0],
-                      'xaxis': 'x1',
+                      'xaxis': 'x',
                       'y': [300],
-                      'yaxis': 'y1'},
+                      'yaxis': 'y'},
                      {'base': 0,
                       'hoverinfo': 'y',
-                      'marker': {'color': 'rgb(149.5, 143.5, 29.0)'},
+                      'marker': {'color': 'rgb(149.5,143.5,29.0)'},
                       'name': 'ranges',
                       'orientation': 'v',
                       'type': 'bar',
                       'width': 2,
                       'x': [0],
-                      'xaxis': 'x1',
+                      'xaxis': 'x',
                       'y': [225],
-                      'yaxis': 'y1'},
+                      'yaxis': 'y'},
                      {'base': 0,
                       'hoverinfo': 'y',
-                      'marker': {'color': 'rgb(255.0, 127.0, 14.0)'},
+                      'marker': {'color': 'rgb(255.0,127.0,14.0)'},
                       'name': 'ranges',
                       'orientation': 'v',
                       'type': 'bar',
                       'width': 2,
                       'x': [0],
-                      'xaxis': 'x1',
+                      'xaxis': 'x',
                       'y': [150],
-                      'yaxis': 'y1'},
+                      'yaxis': 'y'},
                      {'base': 0,
                       'hoverinfo': 'y',
-                      'marker': {'color': 'rgb(44.0, 160.0, 44.0)'},
+                      'marker': {'color': 'rgb(44.0,160.0,44.0)'},
                       'name': 'measures',
                       'orientation': 'v',
                       'type': 'bar',
                       'width': 0.4,
                       'x': [0.5],
-                      'xaxis': 'x1',
+                      'xaxis': 'x',
                       'y': [270],
-                      'yaxis': 'y1'},
+                      'yaxis': 'y'},
                      {'base': 0,
                       'hoverinfo': 'y',
-                      'marker': {'color': 'rgb(255.0, 127.0, 14.0)'},
+                      'marker': {'color': 'rgb(255.0,127.0,14.0)'},
                       'name': 'measures',
                       'orientation': 'v',
                       'type': 'bar',
                       'width': 0.4,
                       'x': [0.5],
-                      'xaxis': 'x1',
+                      'xaxis': 'x',
                       'y': [220],
-                      'yaxis': 'y1'},
+                      'yaxis': 'y'},
                      {'hoverinfo': 'y',
-                      'marker': {'color': 'rgb(0, 0, 0)',
+                      'marker': {'color': 'rgb(0,0,0)',
                                  'size': 30,
                                  'symbol': 'hourglass'},
                       'name': 'markers',
                       'type': 'scatter',
                       'x': [0.5],
-                      'xaxis': 'x1',
+                      'xaxis': 'x',
                       'y': [250],
-                      'yaxis': 'y1'},
+                      'yaxis': 'y'},
                      {'base': 0,
                       'hoverinfo': 'y',
-                      'marker': {'color': 'rgb(44.0, 160.0, 44.0)'},
+                      'marker': {'color': 'rgb(44.0,160.0,44.0)'},
                       'name': 'ranges',
                       'orientation': 'v',
                       'type': 'bar',
@@ -2361,7 +2357,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                       'yaxis': 'y2'},
                      {'base': 0,
                       'hoverinfo': 'y',
-                      'marker': {'color': 'rgb(149.5, 143.5, 29.0)'},
+                      'marker': {'color': 'rgb(149.5,143.5,29.0)'},
                       'name': 'ranges',
                       'orientation': 'v',
                       'type': 'bar',
@@ -2372,7 +2368,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                       'yaxis': 'y2'},
                      {'base': 0,
                       'hoverinfo': 'y',
-                      'marker': {'color': 'rgb(255.0, 127.0, 14.0)'},
+                      'marker': {'color': 'rgb(255.0,127.0,14.0)'},
                       'name': 'ranges',
                       'orientation': 'v',
                       'type': 'bar',
@@ -2383,7 +2379,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                       'yaxis': 'y2'},
                      {'base': 0,
                       'hoverinfo': 'y',
-                      'marker': {'color': 'rgb(44.0, 160.0, 44.0)'},
+                      'marker': {'color': 'rgb(44.0,160.0,44.0)'},
                       'name': 'measures',
                       'orientation': 'v',
                       'type': 'bar',
@@ -2394,7 +2390,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                       'yaxis': 'y2'},
                      {'base': 0,
                       'hoverinfo': 'y',
-                      'marker': {'color': 'rgb(255.0, 127.0, 14.0)'},
+                      'marker': {'color': 'rgb(255.0,127.0,14.0)'},
                       'name': 'measures',
                       'orientation': 'v',
                       'type': 'bar',
@@ -2404,7 +2400,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                       'y': [21],
                       'yaxis': 'y2'},
                      {'hoverinfo': 'y',
-                      'marker': {'color': 'rgb(0, 0, 0)',
+                      'marker': {'color': 'rgb(0,0,0)',
                                  'size': 30,
                                  'symbol': 'hourglass'},
                       'name': 'markers',
@@ -2415,7 +2411,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                       'yaxis': 'y2'},
                      {'base': 0,
                       'hoverinfo': 'y',
-                      'marker': {'color': 'rgb(44.0, 160.0, 44.0)'},
+                      'marker': {'color': 'rgb(44.0,160.0,44.0)'},
                       'name': 'ranges',
                       'orientation': 'v',
                       'type': 'bar',
@@ -2426,7 +2422,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                       'yaxis': 'y3'},
                      {'base': 0,
                       'hoverinfo': 'y',
-                      'marker': {'color': 'rgb(149.5, 143.5, 29.0)'},
+                      'marker': {'color': 'rgb(149.5,143.5,29.0)'},
                       'name': 'ranges',
                       'orientation': 'v',
                       'type': 'bar',
@@ -2437,7 +2433,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                       'yaxis': 'y3'},
                      {'base': 0,
                       'hoverinfo': 'y',
-                      'marker': {'color': 'rgb(255.0, 127.0, 14.0)'},
+                      'marker': {'color': 'rgb(255.0,127.0,14.0)'},
                       'name': 'ranges',
                       'orientation': 'v',
                       'type': 'bar',
@@ -2448,7 +2444,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                       'yaxis': 'y3'},
                      {'base': 0,
                       'hoverinfo': 'y',
-                      'marker': {'color': 'rgb(44.0, 160.0, 44.0)'},
+                      'marker': {'color': 'rgb(44.0,160.0,44.0)'},
                       'name': 'measures',
                       'orientation': 'v',
                       'type': 'bar',
@@ -2459,7 +2455,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                       'yaxis': 'y3'},
                      {'base': 0,
                       'hoverinfo': 'y',
-                      'marker': {'color': 'rgb(255.0, 127.0, 14.0)'},
+                      'marker': {'color': 'rgb(255.0,127.0,14.0)'},
                       'name': 'measures',
                       'orientation': 'v',
                       'type': 'bar',
@@ -2469,7 +2465,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                       'y': [100],
                       'yaxis': 'y3'},
                      {'hoverinfo': 'y',
-                      'marker': {'color': 'rgb(0, 0, 0)',
+                      'marker': {'color': 'rgb(0,0,0)',
                                  'size': 30,
                                  'symbol': 'hourglass'},
                       'name': 'markers',
@@ -2480,7 +2476,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                       'yaxis': 'y3'},
                      {'base': 0,
                       'hoverinfo': 'y',
-                      'marker': {'color': 'rgb(44.0, 160.0, 44.0)'},
+                      'marker': {'color': 'rgb(44.0,160.0,44.0)'},
                       'name': 'ranges',
                       'orientation': 'v',
                       'type': 'bar',
@@ -2491,7 +2487,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                       'yaxis': 'y4'},
                      {'base': 0,
                       'hoverinfo': 'y',
-                      'marker': {'color': 'rgb(149.5, 143.5, 29.0)'},
+                      'marker': {'color': 'rgb(149.5,143.5,29.0)'},
                       'name': 'ranges',
                       'orientation': 'v',
                       'type': 'bar',
@@ -2502,7 +2498,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                       'yaxis': 'y4'},
                      {'base': 0,
                       'hoverinfo': 'y',
-                      'marker': {'color': 'rgb(255.0, 127.0, 14.0)'},
+                      'marker': {'color': 'rgb(255.0,127.0,14.0)'},
                       'name': 'ranges',
                       'orientation': 'v',
                       'type': 'bar',
@@ -2513,7 +2509,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                       'yaxis': 'y4'},
                      {'base': 0,
                       'hoverinfo': 'y',
-                      'marker': {'color': 'rgb(44.0, 160.0, 44.0)'},
+                      'marker': {'color': 'rgb(44.0,160.0,44.0)'},
                       'name': 'measures',
                       'orientation': 'v',
                       'type': 'bar',
@@ -2524,7 +2520,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                       'yaxis': 'y4'},
                      {'base': 0,
                       'hoverinfo': 'y',
-                      'marker': {'color': 'rgb(255.0, 127.0, 14.0)'},
+                      'marker': {'color': 'rgb(255.0,127.0,14.0)'},
                       'name': 'measures',
                       'orientation': 'v',
                       'type': 'bar',
@@ -2534,7 +2530,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                       'y': [1000],
                       'yaxis': 'y4'},
                      {'hoverinfo': 'y',
-                      'marker': {'color': 'rgb(0, 0, 0)',
+                      'marker': {'color': 'rgb(0,0,0)',
                                  'size': 30,
                                  'symbol': 'hourglass'},
                       'name': 'markers',
@@ -2545,7 +2541,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                       'yaxis': 'y4'},
                      {'base': 0,
                       'hoverinfo': 'y',
-                      'marker': {'color': 'rgb(44.0, 160.0, 44.0)'},
+                      'marker': {'color': 'rgb(44.0,160.0,44.0)'},
                       'name': 'ranges',
                       'orientation': 'v',
                       'type': 'bar',
@@ -2556,7 +2552,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                       'yaxis': 'y5'},
                      {'base': 0,
                       'hoverinfo': 'y',
-                      'marker': {'color': 'rgb(149.5, 143.5, 29.0)'},
+                      'marker': {'color': 'rgb(149.5,143.5,29.0)'},
                       'name': 'ranges',
                       'orientation': 'v',
                       'type': 'bar',
@@ -2567,7 +2563,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                       'yaxis': 'y5'},
                      {'base': 0,
                       'hoverinfo': 'y',
-                      'marker': {'color': 'rgb(255.0, 127.0, 14.0)'},
+                      'marker': {'color': 'rgb(255.0,127.0,14.0)'},
                       'name': 'ranges',
                       'orientation': 'v',
                       'type': 'bar',
@@ -2578,7 +2574,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                       'yaxis': 'y5'},
                      {'base': 0,
                       'hoverinfo': 'y',
-                      'marker': {'color': 'rgb(44.0, 160.0, 44.0)'},
+                      'marker': {'color': 'rgb(44.0,160.0,44.0)'},
                       'name': 'measures',
                       'orientation': 'v',
                       'type': 'bar',
@@ -2589,7 +2585,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                       'yaxis': 'y5'},
                      {'base': 0,
                       'hoverinfo': 'y',
-                      'marker': {'color': 'rgb(255.0, 127.0, 14.0)'},
+                      'marker': {'color': 'rgb(255.0,127.0,14.0)'},
                       'name': 'measures',
                       'orientation': 'v',
                       'type': 'bar',
@@ -2599,7 +2595,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                       'y': [3.2],
                       'yaxis': 'y5'},
                      {'hoverinfo': 'y',
-                      'marker': {'color': 'rgb(0, 0, 0)',
+                      'marker': {'color': 'rgb(0,0,0)',
                                  'size': 30,
                                  'symbol': 'hourglass'},
                       'name': 'markers',
@@ -2665,7 +2661,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                        'showlegend': False,
                        'title': 'new title',
                        'width': 1000,
-                       'xaxis1': {'anchor': 'y1',
+                       'xaxis1': {'anchor': 'y',
                                   'domain': [0.0, 0.039999999999999994],
                                   'range': [0, 1],
                                   'showgrid': False,
@@ -2695,7 +2691,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                                   'showgrid': False,
                                   'showticklabels': False,
                                   'zeroline': False},
-                       'yaxis1': {'anchor': 'x1',
+                       'yaxis1': {'anchor': 'x',
                                   'domain': [0.0, 1.0],
                                   'showgrid': False,
                                   'tickwidth': 1,
@@ -2721,7 +2717,11 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                                   'tickwidth': 1,
                                   'zeroline': False}}
         }
-        self.assert_dict_equal(fig, exp_fig)
+        #self.assert_fig_equal(fig.to_plotly_json(), exp_fig)
+
+        for i in range(len(fig.to_plotly_json()['data'])):
+            self.assert_fig_equal(fig.to_plotly_json()['data'][i],
+                                  exp_fig['data'][i])
 
 
 class TestChoropleth(NumpyTestUtilsMixin, TestCase):

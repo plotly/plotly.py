@@ -41,7 +41,7 @@ class NumpyTestUtilsMixin(object):
         if 'uid' in d2.keys():
             del d2['uid']
 
-        assert_dict_equal(d1, d2, msg=None)
+        self.assert_dict_equal(d1, d2, msg=None)
 
     def assert_dict_equal(self, d1, d2, msg=None):
         """
