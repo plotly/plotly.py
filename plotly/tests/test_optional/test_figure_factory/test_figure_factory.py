@@ -14,7 +14,7 @@ from scipy.spatial import Delaunay
 import pandas as pd
 
 
-class TestDistplot(TestCase):
+class TestDistplot(NumpyTestUtilsMixin, TestCase):
 
     def test_wrong_curve_type(self):
 
@@ -54,41 +54,38 @@ class TestDistplot(TestCase):
         expected_dp_layout = {'barmode': 'overlay',
                               'hovermode': 'closest',
                               'legend': {'traceorder': 'reversed'},
-                              'xaxis1': {'anchor': 'y2', 'domain': [0.0, 1.0], 'zeroline': False},
-                              'yaxis1': {'anchor': 'free', 'domain': [0.35, 1], 'position': 0.0},
                               'yaxis2': {'anchor': 'x',
                                          'domain': [0, 0.25],
                                          'dtick': 1,
                                          'showticklabels': False}}
-        self.assertEqual(dp['layout'].to_plotly_json(), expected_dp_layout)
+        self.assert_dict_equal(dp.to_plotly_json()['layout'], expected_dp_layout)
 
         expected_dp_data_hist = {'autobinx': False,
                                  'histnorm': 'probability density',
                                  'legendgroup': 'distplot',
-                                 'marker': {'color': 'rgb(31, 119, 180)'},
+                                 'marker': {'color': 'rgb(31,119,180)'},
                                  'name': 'distplot',
                                  'opacity': 0.7,
                                  'type': 'histogram',
                                  'x': [1, 2, 2, 3],
-                                 'xaxis': 'x1',
+                                 'xaxis': 'x',
                                  'xbins': {'end': 3.0, 'size': 1.0, 'start': 1.0},
-                                 'yaxis': 'y1'}
-        self.assertEqual(dp['data'][0], expected_dp_data_hist)
+                                 'yaxis': 'y'}
+        self.assert_fig_equal(dp.to_plotly_json()['data'][0], expected_dp_data_hist)
 
         expected_dp_data_rug = {'legendgroup': 'distplot',
-                                'marker': {'color': 'rgb(31, 119, 180)',
+                                'marker': {'color': 'rgb(31,119,180)',
                                            'symbol': 'line-ns-open'},
                                 'mode': 'markers',
                                 'name': 'distplot',
                                 'showlegend': False,
-                                'text': None,
                                 'type': 'scatter',
                                 'x': [1, 2, 2, 3],
-                                'xaxis': 'x1',
+                                'xaxis': 'x',
                                 'y': ['distplot', 'distplot',
                                       'distplot', 'distplot'],
                                 'yaxis': 'y2'}
-        self.assertEqual(dp['data'][2], expected_dp_data_rug)
+        self.assert_fig_equal(dp.to_plotly_json()['data'][2], expected_dp_data_rug)
 
     def test_simple_distplot_prob(self):
 
@@ -100,41 +97,38 @@ class TestDistplot(TestCase):
         expected_dp_layout = {'barmode': 'overlay',
                               'hovermode': 'closest',
                               'legend': {'traceorder': 'reversed'},
-                              'xaxis1': {'anchor': 'y2', 'domain': [0.0, 1.0], 'zeroline': False},
-                              'yaxis1': {'anchor': 'free', 'domain': [0.35, 1], 'position': 0.0},
-                              'yaxis2': {'anchor': 'x1',
+                              'yaxis2': {'anchor': 'x',
                                          'domain': [0, 0.25],
                                          'dtick': 1,
                                          'showticklabels': False}}
-        self.assertEqual(dp.to_plotly_json()['layout'], expected_dp_layout)
+        self.assert_fig_equal(dp.to_plotly_json()['layout'], expected_dp_layout)
 
         expected_dp_data_hist = {'autobinx': False,
                                  'histnorm': 'probability',
                                  'legendgroup': 'distplot',
-                                 'marker': {'color': 'rgb(31, 119, 180)'},
+                                 'marker': {'color': 'rgb(31,119,180)'},
                                  'name': 'distplot',
                                  'opacity': 0.7,
                                  'type': 'histogram',
                                  'x': [1, 2, 2, 3],
-                                 'xaxis': 'x1',
+                                 'xaxis': 'x',
                                  'xbins': {'end': 3.0, 'size': 1.0, 'start': 1.0},
-                                 'yaxis': 'y1'}
-        self.assertEqual(dp['data'][0], expected_dp_data_hist)
+                                 'yaxis': 'y'}
+        self.assert_fig_equal(dp.to_plotly_json()['data'][0], expected_dp_data_hist)
 
         expected_dp_data_rug = {'legendgroup': 'distplot',
-                                'marker': {'color': 'rgb(31, 119, 180)',
+                                'marker': {'color': 'rgb(31,119,180)',
                                            'symbol': 'line-ns-open'},
                                 'mode': 'markers',
                                 'name': 'distplot',
                                 'showlegend': False,
-                                'text': None,
                                 'type': 'scatter',
                                 'x': [1, 2, 2, 3],
-                                'xaxis': 'x1',
+                                'xaxis': 'x',
                                 'y': ['distplot', 'distplot',
                                       'distplot', 'distplot'],
                                 'yaxis': 'y2'}
-        self.assertEqual(dp['data'][2], expected_dp_data_rug)
+        self.assert_fig_equal(dp.to_plotly_json()['data'][2], expected_dp_data_rug)
 
     def test_distplot_more_args_prob_dens(self):
 
@@ -159,44 +153,40 @@ class TestDistplot(TestCase):
         expected_dp_layout = {'barmode': 'overlay',
                               'hovermode': 'closest',
                               'legend': {'traceorder': 'reversed'},
-                              'title': 'Dist Plot',
-                              'xaxis1': {'anchor': 'y2', 'domain': [0.0, 1.0],
-                                         'zeroline': False},
-                              'yaxis1': {'anchor': 'free', 'domain': [0.0, 1],
-                                         'position': 0.0}}
-        self.assertEqual(dp.to_plotly_json()['layout'], expected_dp_layout)
+                              'title': 'Dist Plot'}
+        self.assert_fig_equal(dp.to_plotly_json()['layout'], expected_dp_layout)
 
         expected_dp_data_hist_1 = {'autobinx': False,
                                    'histnorm': 'probability density',
                                    'legendgroup': '2012',
-                                   'marker': {'color': 'rgb(31, 119, 180)'},
+                                   'marker': {'color': 'rgb(31,119,180)'},
                                    'name': '2012',
                                    'opacity': 0.7,
                                    'type': 'histogram',
                                    'x': [0.8, 1.2, 0.2, 0.6, 1.6, -0.9, -0.07,
                                          1.95, 0.9, -0.2, -0.5, 0.3, 0.4,
                                          -0.37, 0.6],
-                                   'xaxis': 'x1',
+                                   'xaxis': 'x',
                                    'xbins': {'end': 1.95, 'size': 0.2,
                                              'start': -0.9},
-                                   'yaxis': 'y1'}
-        self.assertEqual(dp['data'][0], expected_dp_data_hist_1)
+                                   'yaxis': 'y'}
+        self.assert_fig_equal(dp.to_plotly_json()['data'][0], expected_dp_data_hist_1)
 
         expected_dp_data_hist_2 = {'autobinx': False,
                                    'histnorm': 'probability density',
                                    'legendgroup': '2013',
-                                   'marker': {'color': 'rgb(255, 127, 14)'},
+                                   'marker': {'color': 'rgb(255,127,14)'},
                                    'name': '2013',
                                    'opacity': 0.7,
                                    'type': 'histogram',
                                    'x': [0.8, 1.5, 1.5, 0.6, 0.59, 1.0, 0.8,
                                          1.7, 0.5, 0.8, -0.3, 1.2, 0.56, 0.3,
                                          2.2],
-                                   'xaxis': 'x1',
+                                   'xaxis': 'x',
                                    'xbins': {'end': 2.2, 'size': 0.2,
                                              'start': -0.3},
-                                   'yaxis': 'y1'}
-        self.assertEqual(dp['data'][1], expected_dp_data_hist_2)
+                                   'yaxis': 'y'}
+        self.assert_fig_equal(dp.to_plotly_json()['data'][1], expected_dp_data_hist_2)
 
     def test_distplot_more_args_prob(self):
 
@@ -221,44 +211,43 @@ class TestDistplot(TestCase):
         expected_dp_layout = {'barmode': 'overlay',
                               'hovermode': 'closest',
                               'legend': {'traceorder': 'reversed'},
-                              'title': 'Dist Plot',
-                              'xaxis1': {'anchor': 'y2', 'domain': [0.0, 1.0],
-                                         'zeroline': False},
-                              'yaxis1': {'anchor': 'free', 'domain': [0.0, 1],
-                                         'position': 0.0}}
-        self.assertEqual(dp.to_plotly_json()['layout'], expected_dp_layout)
+                              'title': 'Dist Plot'}
+        self.assert_fig_equal(dp.to_plotly_json()['layout'],
+                              expected_dp_layout)
 
         expected_dp_data_hist_1 = {'autobinx': False,
                                    'histnorm': 'probability',
                                    'legendgroup': '2012',
-                                   'marker': {'color': 'rgb(31, 119, 180)'},
+                                   'marker': {'color': 'rgb(31,119,180)'},
                                    'name': '2012',
                                    'opacity': 0.7,
                                    'type': 'histogram',
                                    'x': [0.8, 1.2, 0.2, 0.6, 1.6, -0.9, -0.07,
                                          1.95, 0.9, -0.2, -0.5, 0.3, 0.4,
                                          -0.37, 0.6],
-                                   'xaxis': 'x1',
+                                   'xaxis': 'x',
                                    'xbins': {'end': 1.95, 'size': 0.2,
                                              'start': -0.9},
-                                   'yaxis': 'y1'}
-        self.assertEqual(dp['data'][0], expected_dp_data_hist_1)
+                                   'yaxis': 'y'}
+        self.assert_fig_equal(dp.to_plotly_json()['data'][0],
+                               expected_dp_data_hist_1)
 
         expected_dp_data_hist_2 = {'autobinx': False,
                                    'histnorm': 'probability',
                                    'legendgroup': '2013',
-                                   'marker': {'color': 'rgb(255, 127, 14)'},
+                                   'marker': {'color': 'rgb(255,127,14)'},
                                    'name': '2013',
                                    'opacity': 0.7,
                                    'type': 'histogram',
                                    'x': [0.8, 1.5, 1.5, 0.6, 0.59, 1.0, 0.8,
                                          1.7, 0.5, 0.8, -0.3, 1.2, 0.56, 0.3,
                                          2.2],
-                                   'xaxis': 'x1',
+                                   'xaxis': 'x',
                                    'xbins': {'end': 2.2, 'size': 0.2,
                                              'start': -0.3},
-                                   'yaxis': 'y1'}
-        self.assertEqual(dp['data'][1], expected_dp_data_hist_2)
+                                   'yaxis': 'y'}
+        self.assert_fig_equal(dp.to_plotly_json()['data'][1],
+                               expected_dp_data_hist_2)
 
         def test_distplot_binsize_array_prob(self):
             hist1_x = [0.8, 1.2, 0.2, 0.6, 1.6, -0.9, -0.07, 1.95, 0.9, -0.2,
@@ -278,35 +267,35 @@ class TestDistplot(TestCase):
                                        'histnorm': 'probability density',
                                        'legendgroup': '2012',
                                        'marker':
-                                       {'color': 'rgb(31, 119, 180)'},
+                                       {'color': 'rgb(31,119,180)'},
                                        'name': '2012',
                                        'opacity': 0.7,
                                        'type': 'histogram',
                                        'x': [0.8, 1.2, 0.2, 0.6, 1.6, -0.9,
                                              -0.07, 1.95, 0.9, -0.2, -0.5, 0.3,
                                              0.4, -0.37, 0.6],
-                                       'xaxis': 'x1',
+                                       'xaxis': 'x',
                                        'xbins': {'end': 1.95, 'size': 0.2,
                                                  'start': -0.9},
-                                       'yaxis': 'y1'}
-            self.assertEqual(dp['data'][0], expected_dp_data_hist_1)
+                                       'yaxis': 'y'}
+            self.assert_fig_equal(dp.to_plotly_json()['data'][0], expected_dp_data_hist_1)
 
             expected_dp_data_hist_2 = {'autobinx': False,
                                        'histnorm': 'probability density',
                                        'legendgroup': '2013',
                                        'marker':
-                                       {'color': 'rgb(255, 127, 14)'},
+                                       {'color': 'rgb(255,127,14)'},
                                        'name': '2013',
                                        'opacity': 0.7,
                                        'type': 'histogram',
                                        'x': [0.8, 1.5, 1.5, 0.6, 0.59, 1.0,
                                              0.8, 1.7, 0.5, 0.8, -0.3, 1.2,
                                              0.56, 0.3, 2.2],
-                                       'xaxis': 'x1',
+                                       'xaxis': 'x',
                                        'xbins': {'end': 2.2, 'size': 0.2,
                                                  'start': -0.3},
-                                       'yaxis': 'y1'}
-            self.assertEqual(dp['data'][1], expected_dp_data_hist_2)
+                                       'yaxis': 'y'}
+            self.assert_fig_equal(dp.to_plotly_json()['data'][1], expected_dp_data_hist_2)
 
         def test_distplot_binsize_array_prob_density(self):
             hist1_x = [0.8, 1.2, 0.2, 0.6, 1.6, -0.9, -0.07, 1.95, 0.9, -0.2,
@@ -326,35 +315,35 @@ class TestDistplot(TestCase):
                                        'histnorm': 'probability density',
                                        'legendgroup': '2012',
                                        'marker':
-                                       {'color': 'rgb(31, 119, 180)'},
+                                       {'color': 'rgb(31,119,180)'},
                                        'name': '2012',
                                        'opacity': 0.7,
                                        'type': 'histogram',
                                        'x': [0.8, 1.2, 0.2, 0.6, 1.6, -0.9,
                                              -0.07, 1.95, 0.9, -0.2, -0.5, 0.3,
                                              0.4, -0.37, 0.6],
-                                       'xaxis': 'x1',
+                                       'xaxis': 'x',
                                        'xbins': {'end': 1.95, 'size': 0.2,
                                                  'start': -0.9},
-                                       'yaxis': 'y1'}
-            self.assertEqual(dp['data'][0], expected_dp_data_hist_1)
+                                       'yaxis': 'y'}
+            self.assert_fig_equal(dp.to_plotly_json()['data'][0], expected_dp_data_hist_1)
 
             expected_dp_data_hist_2 = {'autobinx': False,
                                        'histnorm': 'probability density',
                                        'legendgroup': '2013',
                                        'marker':
-                                       {'color': 'rgb(255, 127, 14)'},
+                                       {'color': 'rgb(255,127,14)'},
                                        'name': '2013',
                                        'opacity': 0.7,
                                        'type': 'histogram',
                                        'x': [0.8, 1.5, 1.5, 0.6, 0.59, 1.0,
                                              0.8, 1.7, 0.5, 0.8, -0.3, 1.2,
                                              0.56, 0.3, 2.2],
-                                       'xaxis': 'x1',
+                                       'xaxis': 'x',
                                        'xbins': {'end': 2.2, 'size': 0.2,
                                                  'start': -0.3},
-                                       'yaxis': 'y1'}
-            self.assertEqual(dp['data'][1], expected_dp_data_hist_2)
+                                       'yaxis': 'y'}
+            self.assert_fig_equal(dp.to_plotly_json()['data'][1], expected_dp_data_hist_2)
 
 
 class TestStreamline(TestCase):
@@ -522,9 +511,12 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
         self.assertEqual(len(dendro['data']), 3)
 
         # this is actually a bit clearer when debugging tests.
-        self.assert_dict_equal(dendro['data'][0], expected_dendro['data'][0])
-        self.assert_dict_equal(dendro['data'][1], expected_dendro['data'][1])
-        self.assert_dict_equal(dendro['data'][2], expected_dendro['data'][2])
+        self.assert_fig_equal(dendro.to_plotly_json()['data'][0],
+                              expected_dendro['data'][0])
+        self.assert_fig_equal(dendro.to_plotly_json()['data'][1],
+                              expected_dendro['data'][1])
+        self.assert_fig_equal(dendro.to_plotly_json()['data'][2],
+                              expected_dendro['data'][2])
 
         self.assert_dict_equal(dendro['layout'], expected_dendro['layout'])
 
@@ -864,7 +856,7 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
                      'x': [-1.,  0.,  1., -1.,  0.,  1., -1.,  0.,  1.],
                      'y': [-1., -1., -1.,  0.,  0.,  0.,  1.,  1.,  1.],
                      'z': [1., -0., -1., -0.,  0.,  0., -1.,  0.,  1.]},
-                     {'line': {'color': 'rgb(50, 50, 50)', 'width': 1.5},
+                     {'line': {'color': 'rgb(50,50,50)', 'width': 1.5},
                       'mode': 'lines',
                       'showlegend': False,
                       'type': 'scatter3d',
@@ -883,11 +875,11 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
                             -1.0, 0.0, None, 0.0, -0.0, 0.0, 0.0, None, -0.0,
                             0.0, -1.0, -0.0, None, 0.0, 0.0, 0.0, 0.0, None,
                             0.0, 0.0, 1.0, 0.0, None]},
-                     {'hoverinfo': 'None',
+                     {'hoverinfo': 'none',
                       'marker': {'color': [-0.33333333333333331,
                                            0.33333333333333331],
-                                 'colorscale': [[0.0, 'rgb(31, 119, 180)'],
-                                                [1.0, 'rgb(255, 127, 14)']],
+                                 'colorscale': ((0.0, 'rgb(31,119,180)'),
+                                                (1.0, 'rgb(255,127,14)')),
                                  'showscale': True,
                                  'size': 0.1},
                       'mode': 'markers',
@@ -898,32 +890,32 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
                       'z': [1.]}],
             'layout': {'height': 800,
                        'scene': {'aspectratio': {'x': 1, 'y': 1, 'z': 1},
-                                 'xaxis': {'backgroundcolor': 'rgb(230, 230, 230)',
-                                           'gridcolor': 'rgb(255, 255, 255)',
+                                 'xaxis': {'backgroundcolor': 'rgb(230,230,230)',
+                                           'gridcolor': 'rgb(255,255,255)',
                                            'showbackground': True,
-                                           'zerolinecolor': 'rgb(255, 255, 255)'},
-                                 'yaxis': {'backgroundcolor': 'rgb(230, 230, 230)',
-                                           'gridcolor': 'rgb(255, 255, 255)',
+                                           'zerolinecolor': 'rgb(255,255,255)'},
+                                 'yaxis': {'backgroundcolor': 'rgb(230,230,230)',
+                                           'gridcolor': 'rgb(255,255,255)',
                                            'showbackground': True,
-                                           'zerolinecolor': 'rgb(255, 255, 255)'},
-                                 'zaxis': {'backgroundcolor': 'rgb(230, 230, 230)',
-                                           'gridcolor': 'rgb(255, 255, 255)',
+                                           'zerolinecolor': 'rgb(255,255,255)'},
+                                 'zaxis': {'backgroundcolor': 'rgb(230,230,230)',
+                                           'gridcolor': 'rgb(255,255,255)',
                                            'showbackground': True,
-                                           'zerolinecolor': 'rgb(255, 255, 255)'}},
+                                           'zerolinecolor': 'rgb(255,255,255)'}},
                        'title': 'Trisurf Plot',
                        'width': 800}
         }
 
-        self.assert_dict_equal(test_trisurf_plot['data'][0],
+        self.assert_fig_equal(test_trisurf_plot.to_plotly_json()['data'][0],
                                exp_trisurf_plot['data'][0])
 
-        self.assert_dict_equal(test_trisurf_plot['data'][1],
+        self.assert_fig_equal(test_trisurf_plot.to_plotly_json()['data'][1],
                                exp_trisurf_plot['data'][1])
 
-        self.assert_dict_equal(test_trisurf_plot['data'][2],
+        self.assert_fig_equal(test_trisurf_plot.to_plotly_json()['data'][2],
                                exp_trisurf_plot['data'][2])
 
-        self.assert_dict_equal(test_trisurf_plot['layout'],
+        self.assert_fig_equal(test_trisurf_plot.to_plotly_json()['layout'],
                                exp_trisurf_plot['layout'])
 
         # Test passing custom colors
@@ -2725,6 +2717,8 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
 
 
 class TestChoropleth(NumpyTestUtilsMixin, TestCase):
+    # install required modules
+    #! pip install 
 
     def test_fips_values_same_length(self):
         pattern = 'fips and values must be the same length'
