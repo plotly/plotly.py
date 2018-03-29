@@ -90,7 +90,10 @@ def create_dendrogram(X, orientation="bottom", labels=None,
                              distfun=distfun, linkagefun=linkagefun,
                              hovertext=hovertext)
 
-    return graph_objs.Figure(data=dendrogram.data, layout=dendrogram.layout)
+    print(dendrogram)
+
+    return graph_objs.Figure(data=dendrogram.data,
+                             layout=dendrogram.layout)
 
 
 class _Dendrogram(object):
@@ -143,7 +146,7 @@ class _Dendrogram(object):
         self.zero_vals.sort()
 
         self.layout = self.set_figure_layout(width, height)
-        self.data = graph_objs.Data(dd_traces)
+        self.data = graph_objs.Scatter(dd_traces)
 
     def get_color_dict(self, colorscale):
         """
@@ -291,7 +294,7 @@ class _Dendrogram(object):
                 x=np.multiply(self.sign[self.xaxis], xs),
                 y=np.multiply(self.sign[self.yaxis], ys),
                 mode='lines',
-                marker=graph_objs.Marker(color=colors[color_key]),
+                marker=graph_objs.scatter.Marker(color=colors[color_key]),
                 text=hovertext_label,
                 hoverinfo='text'
             )
