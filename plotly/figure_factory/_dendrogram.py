@@ -90,10 +90,10 @@ def create_dendrogram(X, orientation="bottom", labels=None,
                              distfun=distfun, linkagefun=linkagefun,
                              hovertext=hovertext)
 
-    print(dendrogram)
-
-    return graph_objs.Figure(data=dendrogram.data,
-                             layout=dendrogram.layout)
+    print(dir(dendrogram))
+    return dendrogram
+    #return graph_objs.Figure(data=dendrogram.to_plotly_json().data,
+    #                         layout=dendrogram.to_plotly_json().layout)
 
 
 class _Dendrogram(object):
@@ -146,7 +146,7 @@ class _Dendrogram(object):
         self.zero_vals.sort()
 
         self.layout = self.set_figure_layout(width, height)
-        self.data = graph_objs.Scatter(dd_traces)
+        self.data = graph_objs.Data(dd_traces)
 
     def get_color_dict(self, colorscale):
         """

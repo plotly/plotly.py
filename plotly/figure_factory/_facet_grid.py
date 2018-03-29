@@ -2,11 +2,9 @@ from __future__ import absolute_import
 
 from plotly import colors, exceptions, optional_imports
 from plotly.figure_factory import utils
-from plotly.graph_objs import graph_objs
 from plotly.tools import make_subplots
 
 import math
-import copy
 from numbers import Number
 
 pd = optional_imports.get_module('pandas')
@@ -331,9 +329,6 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
                                  row_col='row', flipped=flipped_rows)
             )
 
-    # add annotations
-    #fig['layout']['annotations'] = annotations
-
     return fig, annotations
 
 
@@ -474,9 +469,6 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
                                  row_col='row', flipped=flipped_rows)
             )
 
-    # add annotations
-    #fig['layout']['annotations'] = annotations
-
     return fig, annotations
 
 
@@ -599,9 +591,6 @@ def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
                 _annotation_dict(label, num_of_rows - row_count, num_of_rows, SUBPLOT_SPACING,
                                  row_col='row', flipped=flipped_rows)
             )
-
-    # add annotations
-    #fig['layout']['annotations'] = annotations
 
     return fig, annotations
 
@@ -996,8 +985,6 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
     # annotations
     annotations.append(x_title_annot)
     annotations.append(y_title_annot)
-    #fig['layout']['annotations'].append(x_title_annot)
-    #fig['layout']['annotations'].append(y_title_annot)
 
     # legend
     fig['layout']['showlegend'] = show_legend
@@ -1013,7 +1000,6 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
             if color_name:
                 legend_annot = _legend_annotation(color_name)
                 annotations.append(legend_annot)
-                #fig['layout']['annotations'].append(legend_annot)
             fig['layout']['margin']['r'] = 150
 
     # assign annotations to figure
