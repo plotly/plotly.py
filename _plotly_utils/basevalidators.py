@@ -339,23 +339,25 @@ class EnumeratedValidator(BaseValidator):
             enum_vals_str = '\n'.join(
                 textwrap.wrap(
                     repr(enum_vals),
+                    initial_indent=' ' * 12,
                     subsequent_indent=' ' * 12,
                     break_on_hyphens=False))
 
             desc = desc + """
       - One of the following enumeration values:
-            {enum_vals_str}""".format(enum_vals_str=enum_vals_str)
+{enum_vals_str}""".format(enum_vals_str=enum_vals_str)
 
         if enum_regexs:
             enum_regexs_str = '\n'.join(
                 textwrap.wrap(
                     repr(enum_regexs),
+                    initial_indent=' ' * 12,
                     subsequent_indent=' ' * 12,
                     break_on_hyphens=False))
 
             desc = desc + """
       - A string that matches one of the following regular expressions:
-            {enum_vals_str}""".format(enum_vals_str=enum_regexs_str)
+{enum_regexs_str}""".format(enum_regexs_str=enum_regexs_str)
 
         if self.array_ok:
             desc = desc + """
@@ -681,12 +683,13 @@ class StringValidator(BaseValidator):
             valid_str = '\n'.join(
                 textwrap.wrap(
                     repr(self.values),
+                    initial_indent=' ' * 12,
                     subsequent_indent=' ' * 12,
                     break_on_hyphens=False))
 
             desc = desc + """
       - One of the following strings:
-            {valid_str}""".format(valid_str=valid_str)
+{valid_str}""".format(valid_str=valid_str)
         else:
             desc = desc + """
       - A string"""
@@ -1003,15 +1006,16 @@ class ColorscaleValidator(BaseValidator):
 
     def description(self):
         desc = """\
-    The '{plotly_name}' property is a colorscale and may be specified as:
-      - A list of 2-element lists where the first element is the normalized
-        color level value (starting at 0 and ending at 1), and the second
-        item is a valid color string.
+    The '{plotly_name}' property is a colorscale and may be
+    specified as:
+      - A list of 2-element lists where the first element is the
+        normalized color level value (starting at 0 and ending at 1), 
+        and the second item is a valid color string.
         (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
       - One of the following named colorscales:
             ['Greys', 'YlGnBu', 'Greens', 'YlOrRd', 'Bluered', 'RdBu',
-            'Reds', 'Blues', 'Picnic', 'Rainbow', 'Portland', 'Jet', 'Hot',
-            'Blackbody', 'Earth', 'Electric', 'Viridis']
+            'Reds', 'Blues', 'Picnic', 'Rainbow', 'Portland', 'Jet',
+            'Hot', 'Blackbody', 'Earth', 'Electric', 'Viridis']
         """.format(plotly_name=self.plotly_name)
 
         return desc
@@ -1489,8 +1493,8 @@ class CompoundValidator(BaseValidator):
     The '{plotly_name}' property is an instance of {class_str}
     that may be specified as:
       - An instance of {module_str}.{class_str}
-      - A dict of string/value properties that will be passed to the
-        {class_str} constructor
+      - A dict of string/value properties that will be passed
+        to the {class_str} constructor
 
         Supported dict properties:
             {constructor_params_str}""").format(
@@ -1539,8 +1543,8 @@ class CompoundArrayValidator(BaseValidator):
     The '{plotly_name}' property is a tuple of instances of
     {class_str} that may be specified as:
       - A list or tuple of instances of {module_str}.{class_str}
-      - A list or tuple of dicts of string/value properties that will be
-        passed to the {class_str} constructor
+      - A list or tuple of dicts of string/value properties that
+        will be passed to the {class_str} constructor
 
         Supported dict properties:
             {constructor_params_str}""").format(
@@ -1606,7 +1610,10 @@ class BaseDataValidator(BaseValidator):
 
         trace_types_wrapped = '\n'.join(
             textwrap.wrap(
-                trace_types, subsequent_indent=' ' * 21, width=79 - 12))
+                trace_types,
+                initial_indent='            One of: ',
+                subsequent_indent=' ' * 21,
+                width=79 - 12))
 
         desc = ("""\
     The '{plotly_name}' property is a tuple of trace instances
@@ -1615,10 +1622,10 @@ class BaseDataValidator(BaseValidator):
         (e.g. [Scatter(...), Bar(...)])
       - A list or tuple of dicts of string/value properties where:
         - The 'type' property specifies the trace type
-            One of: {trace_types}
+{trace_types}
 
-        - All remaining properties are passed to the constructor of the
-          specified trace type
+        - All remaining properties are passed to the constructor of
+          the specified trace type
 
         (e.g. [{{'type': 'scatter', ...}}, {{'type': 'bar, ...}}])""").format(
             plotly_name=self.plotly_name, trace_types=trace_types_wrapped)
