@@ -1628,7 +1628,7 @@ function performRestyleLike(parentArray, restyleData, restyleTraces) {
             // Set property value
             if (singleVal === null) {
                 _.unset(trace, rawKey);
-            } else {
+            } else if (singleVal !== undefined){
                 _.set(trace, rawKey, singleVal);
             }
         }

@@ -171,7 +171,7 @@ class {datatype_class}({node.name_base_datatype}):\n""")
     # property parent name
     # --------------------
     @property
-    def _parent_path(self) -> str:
+    def _parent_path_str(self) -> str:
         return '{node.parent_path_str}'
 
     # Self properties description
