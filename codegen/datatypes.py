@@ -116,6 +116,7 @@ class {datatype_class}({node.name_base_datatype}):\n""")
         raw_description = subtype_node.description
         property_description = '\n'.join(
             textwrap.wrap(raw_description,
+                          initial_indent=' ' * 8,
                           subsequent_indent=' ' * 8,
                           width=79 - 8))
 
@@ -131,7 +132,7 @@ class {datatype_class}({node.name_base_datatype}):\n""")
     
         {validator_description}"""
             else:
-                property_docstring = validator_description
+                property_docstring = f"        {validator_description}"
         else:
             property_docstring = property_description
 
@@ -143,7 +144,7 @@ class {datatype_class}({node.name_base_datatype}):\n""")
     @property
     def {subtype_node.name_property}(self) -> {prop_type}:
         \"\"\"
-        {property_docstring}
+{property_docstring}
         \"\"\"
         return self['{subtype_node.name_property}']""")
 
@@ -307,6 +308,7 @@ def add_docstring(buffer, node, header):
         description_lines = textwrap.wrap(
             node_description,
             width=79-8,
+            initial_indent=' ' * 8,
             subsequent_indent=' ' * 8)
 
         node_description = '\n'.join(description_lines) + '\n\n'
@@ -317,7 +319,7 @@ def add_docstring(buffer, node, header):
         \"\"\"
         {header}
         
-        {node_description}        Parameters
+{node_description}        Parameters
         ----------""")
 
     # Write parameter descriptions
