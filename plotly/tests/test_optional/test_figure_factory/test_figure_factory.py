@@ -678,14 +678,15 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
                       [1, 2, 1, 4],
                       [1, 2, 3, 1]])
         greyscale = [
-                'rgb(0,0,0)',  # black
-                'rgb(05,105,105)',  # dim grey
-                'rgb(128,128,128)',  # grey
-                'rgb(169,169,169)',  # dark grey
-                'rgb(192,192,192)',  # silver
-                'rgb(211,211,211)',  # light grey
-                'rgb(220,220,220)',  # gainsboro
-                'rgb(245,245,245)']  # white smoke
+            'rgb(0,0,0)',  # black
+            'rgb(05,105,105)',  # dim grey
+            'rgb(128,128,128)',  # grey
+            'rgb(169,169,169)',  # dark grey
+            'rgb(192,192,192)',  # silver
+            'rgb(211,211,211)',  # light grey
+            'rgb(220,220,220)',  # gainsboro
+            'rgb(245,245,245)'  # white smoke
+        ]
 
         dendro = ff.create_dendrogram(X, colorscale=greyscale)
 
