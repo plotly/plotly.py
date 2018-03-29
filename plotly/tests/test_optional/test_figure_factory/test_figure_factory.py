@@ -2717,8 +2717,6 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
 
 
 class TestChoropleth(NumpyTestUtilsMixin, TestCase):
-    # install required modules
-    #! pip install 
 
     def test_fips_values_same_length(self):
         pattern = 'fips and values must be the same length'
