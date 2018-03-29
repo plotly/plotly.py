@@ -90,17 +90,17 @@ def create_dendrogram(X, orientation="bottom", labels=None,
                              distfun=distfun, linkagefun=linkagefun,
                              hovertext=hovertext)
 
-    print(dir(dendrogram))
-    return dendrogram
-    #return graph_objs.Figure(data=dendrogram.to_plotly_json().data,
-    #                         layout=dendrogram.to_plotly_json().layout)
+    #print(dir(dendrogram))
+    #return dendrogram
+    return graph_objs.Figure(data=dendrogram.data,
+                             layout=dendrogram.layout)
 
 
 class _Dendrogram(object):
     """Refer to FigureFactory.create_dendrogram() for docstring."""
 
     def __init__(self, X, orientation='bottom', labels=None, colorscale=None,
-                 width="100%", height="100%", xaxis='xaxis', yaxis='yaxis',
+                 width=np.inf, height=np.inf, xaxis='xaxis', yaxis='yaxis',
                  distfun=None,
                  linkagefun=lambda x: sch.linkage(x, 'complete'),
                  hovertext=None):
@@ -129,7 +129,7 @@ class _Dendrogram(object):
         (dd_traces, xvals, yvals,
             ordered_labels, leaves) = self.get_dendrogram_traces(X, colorscale,
                                                                  distfun,
-                                                                 linkagefun, 
+                                                                 linkagefun,
                                                                  hovertext)
 
         self.labels = ordered_labels
