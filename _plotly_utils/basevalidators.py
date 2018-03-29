@@ -1565,11 +1565,6 @@ class CompoundArrayValidator(BaseValidator):
 
     def validate_coerce(self, v):
 
-        if isinstance(self.data_class, str):
-            raise ValueError(
-                "Invalid data_class of type 'string': {data_class}"
-                .format(data_class=self.data_class))
-
         if v is None:
             v = ()
 
