@@ -1,17 +1,19 @@
 from unittest import TestCase
+from plotly import optional_imports
 from plotly.graph_objs import graph_objs as go
 from plotly.exceptions import PlotlyError
 
-import plotly.tools as tls
 import plotly.figure_factory as ff
-import plotly.figure_factory.utils as utils
 from plotly.tests.test_optional.optional_utils import NumpyTestUtilsMixin
-import math
 from nose.tools import raises
 
 import numpy as np
 from scipy.spatial import Delaunay
 import pandas as pd
+
+shapely = optional_imports.get_module('shapely')
+shapefile = optional_imports.get_module('shapefile')
+gp = optional_imports.get_module('geopandas')
 
 
 class TestDistplot(NumpyTestUtilsMixin, TestCase):
@@ -2043,9 +2045,24 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
                           color_name='c', colormap=colormap)
 
     def test_valid_facet_grid_fig(self):
-        mpg = pd.read_table('https://raw.githubusercontent.com/plotly/datasets/master/mpg_2017.txt')
-        df = mpg.head(10)
+        mpg = [
+            ["audi", "a4", 1.8, 1999, 4, "auto(15)", "f", 18, 29, "p", "compact"],
+            ["audi", "a4", 1.8, 1999, 4, "auto(l5)", "f", 18, 29, "p", "compact"],
+            ["audi", "a4", 2, 2008, 4, "manual(m6)", "f", 20, 31, "p", "compact"],
+            ["audi", "a4", 2, 2008, 4, "auto(av)", "f", 21, 30, "p", "compact"],
+            ["audi", "a4", 2.8, 1999, 6, "auto(l5)", "f", 16, 26, "p", "compact"],
+            ["audi", "a4", 2.8, 1999, 6, "manual(m5)", "f", 18, 26, "p", "compact"],
+            ["audi", "a4", 3.1, 2008, 6, "auto(av)", "f", 18, 27, "p", "compact"],
+            ["audi", "a4 quattro", 1.8, 1999, 4, "manual(m5)", "4", 18, 26, "p", "compact"],
+            ["audi", "a4 quattro", 1.8, 1999, 4, "auto(l5)", "4", 16, 25, "p", "compact"],
+            ["audi", "a4 quattro", 2, 2008, 4, "manual(m6)", "4", 20, 28, "p", "compact"],
+        ]
 
+        df = pd.DataFrame(
+            mpg,
+            columns=["manufacturer", "model", "displ", "year", "cyl", "trans",
+                     "drv", "cty", "hwy", "fl", "class"]
+        )
         test_facet_grid = ff.create_facet_grid(
             df,
             x='displ',
@@ -2054,45 +2071,30 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
         )
 
         exp_facet_grid = {
-            'data': [{'marker': {'color': 'rgb(31, 119, 180)',
+            'data': [
+              {'marker': {'color': 'rgb(31,119,180)',
+               'line': {'color': 'darkgrey', 'width': 1},
+               'size': 8},
+               'mode': 'markers',
+               'opacity': 0.6,
+               'type': 'scatter',
+               'x': [1.8, 1.8, 2.0, 2.0, 1.8, 1.8, 2.0],
+               'xaxis': 'x',
+               'y': [18, 18, 20, 21, 18, 16, 20],
+               'yaxis': 'y'},
+              {'marker': {'color': 'rgb(31,119,180)',
                 'line': {'color': 'darkgrey', 'width': 1},
                 'size': 8},
                'mode': 'markers',
                'opacity': 0.6,
                'type': 'scatter',
-               'x': [1.8,
-                    1.8,
-                    2.0,
-                    2.0,
-                    1.8,
-                    1.8,
-                    2.0],
-               'xaxis': 'x1',
-               'y': [18,
-                    21,
-                    20,
-                    21,
-                    18,
-                    16,
-                    20],
-               'yaxis': 'y1'},
-              {'marker': {'color': 'rgb(31, 119, 180)',
-                'line': {'color': 'darkgrey', 'width': 1},
-                'size': 8},
-               'mode': 'markers',
-               'opacity': 0.6,
-               'type': 'scatter',
-               'x':     [2.8,
-                   2.8,
-                   3.1],
+               'x': [2.8, 2.8, 3.1],
                'xaxis': 'x2',
-               'y':    [16,
-                   18,
-                   18],
-               'yaxis': 'y1'}],
+               'y': [16, 18, 18],
+               'yaxis': 'y'}],
              'layout': {'annotations': [{'font': {'color': '#0f0f0f', 'size': 13},
                 'showarrow': False,
-                'text': 4,
+                'text': '4',
                 'textangle': 0,
                 'x': 0.24625,
                 'xanchor': 'center',
@@ -2102,7 +2104,7 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
                 'yref': 'paper'},
                {'font': {'color': '#0f0f0f', 'size': 13},
                 'showarrow': False,
-                'text': 6,
+                'text': '6',
                 'textangle': 0,
                 'x': 0.7537499999999999,
                 'xanchor': 'center',
@@ -2123,7 +2125,7 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
                {'font': {'color': '#000000', 'size': 12},
                 'showarrow': False,
                 'text': 'cty',
-                'textangle': 270,
+                'textangle': -90,
                 'x': -0.1,
                 'xanchor': 'center',
                 'xref': 'paper',
@@ -2136,11 +2138,11 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
                'x': 1.05,
                'y': 1,
                'yanchor': 'top'},
-              'paper_bgcolor': 'rgb(251, 251, 251)',
+              'paper_bgcolor': 'rgb(251,251,251)',
               'showlegend': False,
               'title': '',
               'width': 600,
-              'xaxis1': {'anchor': 'y1',
+              'xaxis': {'anchor': 'y',
                'domain': [0.0, 0.4925],
                'dtick': 0.0,
                'range': [0.85, 4.1575],
@@ -2153,28 +2155,23 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
                'range': [0.85, 4.1575],
                'ticklen': 0,
                'zeroline': False},
-              'yaxis1': {'anchor': 'x1',
+              'yaxis': {'anchor': 'x',
                'domain': [0.0, 1.0],
                'dtick': 1.0,
                'range': [15.75, 21.2625],
                'ticklen': 0,
                'zeroline': False}}}
 
-        # data
-        data_keys = test_facet_grid['data'][0].keys()
+        for j in [0, 1]:
+            self.assert_fig_equal(
+                test_facet_grid.to_plotly_json()['data'][j],
+                exp_facet_grid['data'][j]
+            )
 
-        for j in range(len(test_facet_grid['data'])):
-            for key in data_keys:
-                if key != 'x' and key != 'y':
-                    self.assertEqual(test_facet_grid['data'][j][key],
-                                     exp_facet_grid['data'][j][key])
-                else:
-                    self.assertEqual(list(test_facet_grid['data'][j][key]),
-                                     list(exp_facet_grid['data'][j][key]))
-
-        # layout
-        self.assert_dict_equal(test_facet_grid.to_plotly_json()['layout'],
-                               exp_facet_grid['layout'])
+        self.assert_fig_equal(
+            test_facet_grid.to_plotly_json()['layout'],
+            exp_facet_grid['layout']
+        )
 
 
 class TestBullet(NumpyTestUtilsMixin, TestCase):
@@ -2718,101 +2715,102 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
 
 class TestChoropleth(NumpyTestUtilsMixin, TestCase):
 
-    def test_fips_values_same_length(self):
-        pattern = 'fips and values must be the same length'
-        self.assertRaisesRegexp(
-            PlotlyError, pattern, ff.create_choropleth,
-            fips=[1001], values=[4004, 40004]
-        )
+    # run tests if required packages are installed
+    if shapely and shapefile and gp:
+        def test_fips_values_same_length(self):
+            pattern = 'fips and values must be the same length'
+            self.assertRaisesRegexp(
+                PlotlyError, pattern, ff.create_choropleth,
+                fips=[1001], values=[4004, 40004]
+            )
 
+        def test_correct_order_param(self):
+            pattern = (
+                'if you are using a custom order of unique values from '
+                'your color column, you must: have all the unique values '
+                'in your order and have no duplicate items'
+            )
 
-    def test_correct_order_param(self):
-        pattern = (
-            'if you are using a custom order of unique values from '
-            'your color column, you must: have all the unique values '
-            'in your order and have no duplicate items'
-        )
+            self.assertRaisesRegexp(
+                PlotlyError, pattern, ff.create_choropleth,
+                fips=[1], values=[1], order=[1, 1, 1]
+            )
 
-        self.assertRaisesRegexp(
-            PlotlyError, pattern, ff.create_choropleth,
-            fips=[1], values=[1], order=[1, 1, 1]
-        )
+        def test_colorscale_and_levels_same_length(self):
+            self.assertRaises(
+                PlotlyError, ff.create_choropleth,
+                fips=[1001, 1003, 1005], values=[5, 2, 1],
+                colorscale=['rgb(0,0,0)']
+            )
 
-    def test_colorscale_and_levels_same_length(self):
-        self.assertRaises(
-            PlotlyError, ff.create_choropleth,
-            fips=[1001, 1003, 1005], values=[5, 2, 1],
-            colorscale=['rgb(0,0,0)']
-        )
+        def test_scope_is_not_list(self):
 
-    def test_scope_is_not_list(self):
+            pattern = "'scope' must be a list/tuple/sequence"
 
-        pattern = "'scope' must be a list/tuple/sequence"
+            self.assertRaisesRegexp(
+                PlotlyError, pattern, ff.create_choropleth,
+                fips=[1001, 1003], values=[5, 2], scope='foo',
+            )
 
-        self.assertRaisesRegexp(
-            PlotlyError, pattern, ff.create_choropleth,
-            fips=[1001, 1003], values=[5, 2], scope='foo',
-        )
+        def test_full_choropleth(self):
+            fips = [1001]
+            values = [1]
+            fig = ff.create_choropleth(
+                fips=fips, values=values,
+                simplify_county=1
+            )
 
-    def test_full_choropleth(self):
-        fips = [1001]
-        values = [1]
-        fig = ff.create_choropleth(
-            fips=fips, values=values,
-            simplify_county=1
-        )
+            exp_fig_head = [
+                -88.053375,
+                -88.02916499999999,
+                -88.02432999999999,
+                -88.04504299999999,
+                -88.053375,
+                np.nan,
+                -88.211209,
+                -88.209999,
+                -88.208733,
+                -88.209559,
+                -88.211209,
+                np.nan,
+                -88.22511999999999,
+                -88.22128099999999,
+                -88.218694,
+                -88.22465299999999,
+                -88.22511999999999,
+                np.nan,
+                -88.264659,
+                -88.25782699999999,
+                -88.25947,
+                -88.255659,
+                -88.264659,
+                np.nan,
+                -88.327302,
+                -88.20146799999999,
+                -88.141143,
+                -88.124658,
+                -88.074854,
+                -88.12493599999999,
+                -88.10665399999999,
+                -88.149812,
+                -88.327302,
+                np.nan,
+                -88.346745,
+                -88.341235,
+                -88.33288999999999,
+                -88.346823,
+                -88.346745,
+                np.nan,
+                -88.473227,
+                -88.097888,
+                -88.154617,
+                -88.20295899999999,
+                -85.605165,
+                -85.18440000000001,
+                -85.12218899999999,
+                -85.142567,
+                -85.113329,
+                -85.10533699999999
+            ]
 
-        exp_fig_head = [
-            -88.053375,
-            -88.02916499999999,
-            -88.02432999999999,
-            -88.04504299999999,
-            -88.053375,
-            np.nan,
-            -88.211209,
-            -88.209999,
-            -88.208733,
-            -88.209559,
-            -88.211209,
-            np.nan,
-            -88.22511999999999,
-            -88.22128099999999,
-            -88.218694,
-            -88.22465299999999,
-            -88.22511999999999,
-            np.nan,
-            -88.264659,
-            -88.25782699999999,
-            -88.25947,
-            -88.255659,
-            -88.264659,
-            np.nan,
-            -88.327302,
-            -88.20146799999999,
-            -88.141143,
-            -88.124658,
-            -88.074854,
-            -88.12493599999999,
-            -88.10665399999999,
-            -88.149812,
-            -88.327302,
-            np.nan,
-            -88.346745,
-            -88.341235,
-            -88.33288999999999,
-            -88.346823,
-            -88.346745,
-            np.nan,
-            -88.473227,
-            -88.097888,
-            -88.154617,
-            -88.20295899999999,
-            -85.605165,
-            -85.18440000000001,
-            -85.12218899999999,
-            -85.142567,
-            -85.113329,
-            -85.10533699999999
-        ] 
-                   
-        self.assertEqual(fig['data'][2]['x'][:50], exp_fig_head)
+            self.assertEqual(fig['data'][2]['x'][:50], exp_fig_head)
