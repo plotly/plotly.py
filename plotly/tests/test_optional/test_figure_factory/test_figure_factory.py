@@ -480,10 +480,10 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
             ]),
             layout=go.Layout(
                 autosize=False,
-                height='100%',
+                height=np.inf,
                 hovermode='closest',
                 showlegend=False,
-                width='100%',
+                width=np.inf,
                 xaxis=go.layout.XAxis(
                     mirror='allticks',
                     rangemode='tozero',
@@ -514,13 +514,14 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
 
         # this is actually a bit clearer when debugging tests.
         self.assert_fig_equal(dendro.to_plotly_json()['data'][0],
-                              expected_dendro['data'][0])
+                              expected_dendro.to_plotly_json()['data'][0])
         self.assert_fig_equal(dendro.to_plotly_json()['data'][1],
-                              expected_dendro['data'][1])
+                              expected_dendro.to_plotly_json()['data'][1])
         self.assert_fig_equal(dendro.to_plotly_json()['data'][2],
-                              expected_dendro['data'][2])
+                              expected_dendro.to_plotly_json()['data'][2])
 
-        self.assert_dict_equal(dendro['layout'], expected_dendro['layout'])
+        self.assert_fig_equal(dendro.to_plotly_json()['layout'],
+                              expected_dendro.to_plotly_json()['layout'])
 
     def test_dendrogram_random_matrix(self):
 
@@ -572,10 +573,10 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
             ]),
             layout=go.Layout(
                 autosize=False,
-                height='100%',
+                height=np.inf,
                 hovermode='closest',
                 showlegend=False,
-                width='100%',
+                width=np.inf,
                 xaxis=go.layout.XAxis(
                     mirror='allticks',
                     rangemode='tozero',
@@ -604,31 +605,49 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
         self.assertEqual(len(dendro['data']), 4)
 
         # it's random, so we can only check that the values aren't equal
-        y_vals = [dendro['data'][0].pop('y'), dendro['data'][1].pop('y'),
-                  dendro['data'][2].pop('y'), dendro['data'][3].pop('y')]
+        y_vals = [dendro['data'][0].to_plotly_json().pop('y'),
+                  dendro['data'][1].to_plotly_json().pop('y'),
+                  dendro['data'][2].to_plotly_json().pop('y'),
+                  dendro['data'][3].to_plotly_json().pop('y')]
         for i in range(len(y_vals)):
             for j in range(len(y_vals)):
                 if i != j:
                     self.assertFalse(np.allclose(y_vals[i], y_vals[j]))
 
-        x_vals = [dendro['data'][0].pop('x'), dendro['data'][1].pop('x'),
-                  dendro['data'][2].pop('x'), dendro['data'][3].pop('x')]
+        x_vals = [dendro['data'][0].to_plotly_json().pop('x'), dendro['data'][1].to_plotly_json().pop('x'),
+                  dendro['data'][2].to_plotly_json().pop('x'), dendro['data'][3].to_plotly_json().pop('x')]
         for i in range(len(x_vals)):
             for j in range(len(x_vals)):
                 if i != j:
                     self.assertFalse(np.allclose(x_vals[i], x_vals[j]))
 
         # we also need to check the ticktext manually
-        xaxis_ticktext = dendro['layout']['xaxis'].pop('ticktext')
+        xaxis_ticktext = dendro['layout']['xaxis'].to_plotly_json().pop('ticktext')
         self.assertEqual(xaxis_ticktext[0], 'John')
 
         # this is actually a bit clearer when debugging tests.
-        self.assert_dict_equal(dendro['data'][0], expected_dendro['data'][0])
-        self.assert_dict_equal(dendro['data'][1], expected_dendro['data'][1])
-        self.assert_dict_equal(dendro['data'][2], expected_dendro['data'][2])
-        self.assert_dict_equal(dendro['data'][3], expected_dendro['data'][3])
+        self.assert_fig_equal(dendro['data'][0].to_plotly_json(),
+                              expected_dendro['data'][0].to_plotly_json(),
+                              ignore=['uid', 'x', 'y'])
+        self.assert_fig_equal(dendro['data'][1].to_plotly_json(),
+                              expected_dendro['data'][1].to_plotly_json(),
+                              ignore=['uid', 'x', 'y'])
+        self.assert_fig_equal(dendro['data'][2].to_plotly_json(),
+                              expected_dendro['data'][2].to_plotly_json(),
+                              ignore=['uid', 'x', 'y'])
+        self.assert_fig_equal(dendro['data'][3].to_plotly_json(),
+                              expected_dendro['data'][3].to_plotly_json(),
+                              ignore=['uid', 'x', 'y'])
 
-        self.assert_dict_equal(dendro['layout'], expected_dendro['layout'])
+        # layout except xaxis
+        self.assert_fig_equal(dendro['layout'].to_plotly_json(),
+                              expected_dendro['layout'].to_plotly_json(),
+                              ignore=['xaxis'])
+
+        # xaxis
+        self.assert_fig_equal(dendro['layout']['xaxis'].to_plotly_json(),
+                              expected_dendro['layout']['xaxis'].to_plotly_json(),
+                              ignore=['ticktext'])
 
     def test_dendrogram_orientation(self):
         X = np.random.rand(5, 5)
@@ -705,10 +724,10 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
             ]),
             layout=go.Layout(
                 autosize=False,
-                height='100%',
+                height=np.inf,
                 hovermode='closest',
                 showlegend=False,
-                width='100%',
+                width=np.inf,
                 xaxis=go.layout.XAxis(
                     mirror='allticks',
                     rangemode='tozero',
@@ -738,9 +757,9 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
         self.assertEqual(len(dendro['data']), 3)
 
         # this is actually a bit clearer when debugging tests.
-        self.assert_dict_equal(dendro['data'][0], expected_dendro['data'][0])
-        self.assert_dict_equal(dendro['data'][1], expected_dendro['data'][1])
-        self.assert_dict_equal(dendro['data'][2], expected_dendro['data'][2])
+        self.assert_fig_equal(dendro['data'][0].to_plotly_json(), expected_dendro['data'][0].to_plotly_json())
+        self.assert_fig_equal(dendro['data'][1].to_plotly_json(), expected_dendro['data'][1].to_plotly_json())
+        self.assert_fig_equal(dendro['data'][2].to_plotly_json(), expected_dendro['data'][2].to_plotly_json())
 
 
 class TestTrisurf(NumpyTestUtilsMixin, TestCase):

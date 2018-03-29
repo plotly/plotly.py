@@ -90,8 +90,6 @@ def create_dendrogram(X, orientation="bottom", labels=None,
                              distfun=distfun, linkagefun=linkagefun,
                              hovertext=hovertext)
 
-    #print(dir(dendrogram))
-    #return dendrogram
     return graph_objs.Figure(data=dendrogram.data,
                              layout=dendrogram.layout)
 

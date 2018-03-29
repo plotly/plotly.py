@@ -29,17 +29,22 @@ class NumpyTestUtilsMixin(object):
         str_path = [repr(p) for p in path]
         return '[' + ']['.join(sp for sp in str_path) + ']'
 
-    def assert_fig_equal(self, d1, d2, msg=None):
+    def assert_fig_equal(self, d1, d2, msg=None, ignore=['uid']):
         """
         Helper function for asser_dict_equal
 
-        Removes uid from d1 and/or d2 if present then
-        calls assert_dict_equal
+        By defualt removes uid from d1 and/or d2 if present
+        then calls assert_dict_equal.
+
+        :param (list|tuple) ignore: sequence of key names as
+            strings that are removed from both d1 and d2 if
+            they exist
         """
-        if 'uid' in d1.keys():
-            del d1['uid']
-        if 'uid' in d2.keys():
-            del d2['uid']
+        for key in ignore:
+            if key in d1.keys():
+                del d1[key]
+            if key in d2.keys():
+                del d2[key]
 
         self.assert_dict_equal(d1, d2, msg=None)
 
