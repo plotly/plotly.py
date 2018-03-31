@@ -2,13 +2,14 @@ import math
 from unittest import TestCase
 
 import datetime
-from nose.tools import raises
+#import plotly.figure_factory as ff
 import plotly.tools as tls
 from plotly.exceptions import PlotlyError
+from plotly.tests.test_optional.optional_utils import NumpyTestUtilsMixin
 from plotly.graph_objs import graph_objs
 
 
-class TestQuiver(TestCase):
+class TestQuiver(TestCase, NumpyTestUtilsMixin):
 
     def test_unequal_xy_length(self):
 
@@ -65,7 +66,10 @@ class TestQuiver(TestCase):
                       'y': [1, 2, None, 1.615486170766527, 2,
                             1.820698256761928, None]}],
             'layout': {'hovermode': 'closest'}}
-        self.assertEqual(quiver, expected_quiver)
+        self.assert_fig_equal(quiver.to_plotly_json()['data'][0],
+                              expected_quiver['data'][0])
+        self.assert_fig_equal(quiver.to_plotly_json()['layout'],
+                              expected_quiver['layout'])
 
     def test_more_kwargs(self):
 
@@ -114,10 +118,13 @@ class TestQuiver(TestCase):
                                            2.051107819102551,
                                            None]}],
                            'layout': {'hovermode': 'closest'}}
-        self.assertEqual(quiver, expected_quiver)
+        self.assert_fig_equal(quiver.to_plotly_json()['data'][0],
+                              expected_quiver['data'][0])
+        self.assert_fig_equal(quiver.to_plotly_json()['layout'],
+                              expected_quiver['layout'])
 
 
-class TestFinanceCharts(TestCase):
+class TestFinanceCharts(TestCase, NumpyTestUtilsMixin):
 
     def test_unequal_ohlc_length(self):
 
@@ -248,7 +255,7 @@ class TestFinanceCharts(TestCase):
                          'data': [{'y': [33.0, 33.0, 33.2, 32.7,
                                          33.1, 33.1, None],
                                    'line': {'width': 1,
-                                            'color': '#3D9970'},
+                                            'color': '#3d9970'},
                                    'showlegend': False,
                                    'name': 'Increasing',
                                    'text': ('Open', 'Open', 'High', 'Low',
@@ -256,13 +263,22 @@ class TestFinanceCharts(TestCase):
                                    'mode': 'lines', 'type': 'scatter',
                                    'x': [-0.2, 0, 0, 0, 0, 0.2, None]},
                                   {'y': [], 'line': {'width': 1,
-                                                     'color': '#FF4136'},
+                                                     'color': '#ff4136'},
                                    'showlegend': False,
                                    'name': 'Decreasing', 'text': (),
                                    'mode': 'lines', 'type': 'scatter',
                                    'x': []}]}
 
-        self.assertEqual(ohlc, expected_ohlc)
+        #self.assert_fig_equal(ohlc.to_plotly_json()['data'][0],
+        #                      expected_ohlc['data'][0])
+        for k in ohlc.to_plotly_json()['data'][1]:
+            if k != 'uid':
+                self.assertEqual(ohlc.to_plotly_json()['data'][1][k],
+                                 expected_ohlc['data'][1][k])
+        #self.assertEqual(ohlc.to_plotly_json()['data'][1],
+        #                 expected_ohlc['data'][1])
+        self.assertEqual(ohlc.to_plotly_json()['layout'],
+                         expected_ohlc['layout'])
 
     def test_one_ohlc_increase(self):
 
@@ -274,7 +290,7 @@ class TestFinanceCharts(TestCase):
                                                   close=[33.1],
                                                   direction="increasing")
 
-        expected_ohlc_incr = {'data': [{'line': {'color': '#3D9970',
+        expected_ohlc_incr = {'data': [{'line': {'color': '#3d9970',
                                                  'width': 1},
                                         'mode': 'lines',
                                         'name': 'Increasing',
@@ -287,7 +303,8 @@ class TestFinanceCharts(TestCase):
                                               33.1, None]}],
                               'layout': {'hovermode': 'closest',
                                          'xaxis': {'zeroline': False}}}
-        self.assertEqual(ohlc_incr, expected_ohlc_incr)
+        self.assert_fig_equal(ohlc_incr.to_plotly_json()['data'][0], expected_ohlc_incr['data'][0])
+        self.assert_fig_equal(ohlc_incr.to_plotly_json()['layout'], expected_ohlc_incr['layout'])
 
     def test_one_ohlc_decrease(self):
 
@@ -299,7 +316,7 @@ class TestFinanceCharts(TestCase):
                                                   close=[31.1],
                                                   direction="decreasing")
 
-        expected_ohlc_decr = {'data': [{'line': {'color': '#FF4136',
+        expected_ohlc_decr = {'data': [{'line': {'color': '#ff4136',
                                                  'width': 1},
                                         'mode': 'lines',
                                         'name': 'Decreasing',
@@ -312,7 +329,9 @@ class TestFinanceCharts(TestCase):
                                               31.1, None]}],
                               'layout': {'hovermode': 'closest',
                                          'xaxis': {'zeroline': False}}}
-        self.assertEqual(ohlc_decr, expected_ohlc_decr)
+
+        self.assert_fig_equal(ohlc_decr.to_plotly_json()['data'][0], expected_ohlc_decr['data'][0])
+        self.assert_fig_equal(ohlc_decr.to_plotly_json()['layout'], expected_ohlc_decr['layout'])
 
     # TO-DO: put expected fig in a different file and then call to compare
     def test_one_candlestick(self):
@@ -325,8 +344,8 @@ class TestFinanceCharts(TestCase):
                                                        close=[33.1])
 
         exp_can_inc = {'data': [{'boxpoints': False,
-                                 'fillcolor': '#3D9970',
-                                 'line': {'color': '#3D9970'},
+                                 'fillcolor': '#3d9970',
+                                 'line': {'color': '#3d9970'},
                                  'name': 'Increasing',
                                  'showlegend': False,
                                  'type': 'box',
@@ -334,8 +353,8 @@ class TestFinanceCharts(TestCase):
                                  'x': [0, 0, 0, 0, 0, 0],
                                  'y': [32.7, 33.0, 33.1, 33.1, 33.1, 33.2]},
                                 {'boxpoints': False,
-                                 'fillcolor': '#FF4136',
-                                 'line': {'color': '#FF4136'},
+                                 'fillcolor': '#ff4136',
+                                 'line': {'color': '#ff4136'},
                                  'name': 'Decreasing',
                                  'showlegend': False,
                                  'type': 'box',
@@ -344,7 +363,10 @@ class TestFinanceCharts(TestCase):
                                  'y': []}],
                        'layout': {}}
 
-        self.assertEqual(can_inc, exp_can_inc)
+        self.assert_fig_equal(can_inc.to_plotly_json()['data'][0],
+                              exp_can_inc['data'][0])
+        self.assert_fig_equal(can_inc.to_plotly_json()['layout'],
+                              exp_can_inc['layout'])
 
     def test_datetime_ohlc(self):
 
@@ -368,7 +390,7 @@ class TestFinanceCharts(TestCase):
                                                low_data, close_data,
                                                dates=x)
 
-        ex_ohlc_d = {'data': [{'line': {'color': '#3D9970', 'width': 1},
+        ex_ohlc_d = {'data': [{'line': {'color': '#3d9970', 'width': 1},
                                'mode': 'lines',
                                'name': 'Increasing',
                                'showlegend': False,
@@ -457,7 +479,7 @@ class TestFinanceCharts(TestCase):
                                      33.7,
                                      33.7,
                                      None]},
-                              {'line': {'color': '#FF4136', 'width': 1},
+                              {'line': {'color': '#ff4136', 'width': 1},
                                'mode': 'lines',
                                'name': 'Decreasing',
                                'showlegend': False,
@@ -548,7 +570,9 @@ class TestFinanceCharts(TestCase):
                                      None]}],
                      'layout': {'hovermode': 'closest',
                                 'xaxis': {'zeroline': False}}}
-        self.assertEqual(ohlc_d, ex_ohlc_d)
+        self.assert_fig_equal(ohlc_d.to_plotly_json()['data'][0], ex_ohlc_d['data'][0])
+        self.assert_fig_equal(ohlc_d.to_plotly_json()['data'][1], ex_ohlc_d['data'][1])
+        self.assert_fig_equal(ohlc_d.to_plotly_json()['layout'], ex_ohlc_d['layout'])
 
     def test_datetime_candlestick(self):
 
@@ -572,8 +596,8 @@ class TestFinanceCharts(TestCase):
                                                       low_data, close_data,
                                                       dates=x)
         exp_candle = {'data': [{'boxpoints': False,
-                                'fillcolor': '#3D9970',
-                                'line': {'color': '#3D9970'},
+                                'fillcolor': '#3d9970',
+                                'line': {'color': '#3d9970'},
                                 'name': 'Increasing',
                                 'showlegend': False,
                                 'type': 'box',
@@ -627,8 +651,8 @@ class TestFinanceCharts(TestCase):
                                      33.7,
                                      34.62]},
                                {'boxpoints': False,
-                                'fillcolor': '#FF4136',
-                                'line': {'color': '#FF4136'},
+                                'fillcolor': '#ff4136',
+                                'line': {'color': '#ff4136'},
                                 'name': 'Decreasing',
                                 'showlegend': False,
                                 'type': 'box',
@@ -683,7 +707,9 @@ class TestFinanceCharts(TestCase):
                                       35.37]}],
                       'layout': {}}
 
-        self.assertEqual(candle, exp_candle)
+        self.assert_fig_equal(candle.to_plotly_json()['data'][0], exp_candle['data'][0])
+        self.assert_fig_equal(candle.to_plotly_json()['data'][1], exp_candle['data'][1])
+        self.assertEqual(candle.to_plotly_json()['layout'], exp_candle['layout'])
 
 
 class TestAnnotatedHeatmap(TestCase):
@@ -1643,20 +1669,3 @@ class Test2D_Density(TestCase):
 
         self.assertEqual(test_2D_density_chart['layout'],
                          exp_2D_density_chart['layout'])
-
-
-# class TestDistplot(TestCase):
-
-#     def test_scipy_import_error(self):
-
-#         hist_data = [[1.1, 1.1, 2.5, 3.0, 3.5,
-#                       3.5, 4.1, 4.4, 4.5, 4.5,
-#                       5.0, 5.0, 5.2, 5.5, 5.5,
-#                       5.5, 5.5, 5.5, 6.1, 7.0]]
-
-#         group_labels = ['distplot example']
-
-#         self.assertRaisesRegexp(ImportError,
-#                                 "FigureFactory.create_distplot requires scipy",
-#                                 tls.FigureFactory.create_distplot,
-#                                 hist_data, group_labels)

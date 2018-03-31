@@ -30,8 +30,7 @@ class PlotMPLTest(TestCase):
         py.sign_in('PlotlyImageTest', '786r5mecv0',
                    plotly_domain='https://plot.ly')
 
-    #if matplotlylib:
-    @raises(exceptions.PlotlyError)
+    @raises(exceptions.PlotlyGraphObjectError)
     def test_update_type_error(self):
         fig, ax = plt.subplots()
         ax.plot([1, 2, 3])
