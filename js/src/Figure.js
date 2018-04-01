@@ -1245,15 +1245,13 @@ var FigureView = widgets.DOMWidgetView.extend({
             if (msgData.source_view_id === this.viewID) {
                 // Operation originated from this view, don't re-apply it
                 console.log("Skipping relayout for view " + this.viewID);
-                return
             } else {
                 console.log("Applying relayout for view " + this.viewID);
+
+                var relayoutData = msgData.relayout_data;
+                relayoutData["_doNotReportToPy"] = true;
+                Plotly.relayout(this.el, msgData.relayout_data);
             }
-
-            var relayoutData = msgData.relayout_data;
-
-            relayoutData["_doNotReportToPy"] = true;
-            Plotly.relayout(this.el, msgData.relayout_data);
 
             // ### Send layout delta ###
             var layout_edit_id = msgData.layout_edit_id;
@@ -1279,13 +1277,12 @@ var FigureView = widgets.DOMWidgetView.extend({
             if (msgData.source_view_id === this.viewID) {
                 // Operation originated from this view, don't re-apply it
                 console.log("Skipping update for view " + this.viewID);
-                return
             } else {
                 console.log("Applying update for view " + this.viewID)
-            }
 
-            style["_doNotReportToPy"] = true;
-            Plotly.update(this.el, style, layout, traceIndexes);
+                style["_doNotReportToPy"] = true;
+                Plotly.update(this.el, style, layout, traceIndexes);
+            }
 
             // ### Send trace deltas ###
             // We create an array of deltas corresponding to the updated
@@ -1327,26 +1324,35 @@ var FigureView = widgets.DOMWidgetView.extend({
             if (msgData.source_view_id === this.viewID) {
                 // Operation originated from this view, don't re-apply it
                 console.log("Skipping animate for view " + this.viewID);
-                return
+
+                // ### Send trace deltas ###
+                // We create an array of deltas corresponding to the
+                // animated traces.
+                this._sendTraceDeltas(traceIndexes, msgData.trace_edit_id);
+
+                // ### Send layout delta ###
+                var layout_edit_id = msgData.layout_edit_id;
+                this._sendLayoutDelta(layout_edit_id);
+
             } else {
                 console.log("Applying animate for view " + this.viewID)
+
+                animationData["_doNotReportToPy"] = true;
+                var that = this;
+
+                Plotly.animate(this.el, animationData, animationOpts).then(
+                    function () {
+
+                        // ### Send trace deltas ###
+                        // We create an array of deltas corresponding to the
+                        // animated traces.
+                        that._sendTraceDeltas(traceIndexes, msgData.trace_edit_id);
+
+                        // ### Send layout delta ###
+                        var layout_edit_id = msgData.layout_edit_id;
+                        that._sendLayoutDelta(layout_edit_id);
+                    });
             }
-
-            animationData["_doNotReportToPy"] = true;
-            var that = this;
-
-            Plotly.animate(this.el, animationData, animationOpts).then(
-                function () {
-
-                    // ### Send trace deltas ###
-                    // We create an array of deltas corresponding to the
-                    // animated traces.
-                    that._sendTraceDeltas(traceIndexes, msgData.trace_edit_id);
-
-                    // ### Send layout delta ###
-                    var layout_edit_id = msgData.layout_edit_id;
-                    that._sendLayoutDelta(layout_edit_id);
-                });
         }
     },
 
