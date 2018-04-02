@@ -269,16 +269,19 @@ class TestFinanceCharts(TestCase, NumpyTestUtilsMixin):
                                    'mode': 'lines', 'type': 'scatter',
                                    'x': []}]}
 
-        #self.assert_fig_equal(ohlc.to_plotly_json()['data'][0],
-        #                      expected_ohlc['data'][0])
-        for k in ohlc.to_plotly_json()['data'][1]:
-            if k != 'uid':
-                self.assertEqual(ohlc.to_plotly_json()['data'][1][k],
-                                 expected_ohlc['data'][1][k])
-        #self.assertEqual(ohlc.to_plotly_json()['data'][1],
-        #                 expected_ohlc['data'][1])
-        self.assertEqual(ohlc.to_plotly_json()['layout'],
-                         expected_ohlc['layout'])
+        for i in range(2):
+            for key in ohlc.to_plotly_json()['data'][i]:
+                print(i)
+                print(key)
+                if key not in ['uid', 'text']:
+                    self.assertEqual(ohlc.to_plotly_json()['data'][i][key],
+                                     expected_ohlc['data'][i][key])
+                elif key == 'text':
+                    self.assertEqual(tuple(ohlc.to_plotly_json()['data'][1][key]),
+                                     tuple(expected_ohlc['data'][1][key]))
+
+        #self.assertEqual(ohlc.to_plotly_json()['layout'],
+        #                 expected_ohlc['layout'])
 
     def test_one_ohlc_increase(self):
 
@@ -712,7 +715,7 @@ class TestFinanceCharts(TestCase, NumpyTestUtilsMixin):
         self.assertEqual(candle.to_plotly_json()['layout'], exp_candle['layout'])
 
 
-class TestAnnotatedHeatmap(TestCase):
+class TestAnnotatedHeatmap(TestCase, NumpyTestUtilsMixin):
 
     def test_unequal_z_text_size(self):
 
@@ -762,51 +765,58 @@ class TestAnnotatedHeatmap(TestCase):
                                         'showarrow': False,
                                         'text': '1',
                                         'x': 0,
-                                        'xref': 'x1',
+                                        'xref': 'x',
                                         'y': 0,
-                                        'yref': 'y1'},
-                                       {'font': {'color': '#FFFFFF'},
+                                        'yref': 'y'},
+                                       {'font': {'color': '#ffffff'},
                                         'showarrow': False,
                                         'text': '0',
                                         'x': 1,
-                                        'xref': 'x1',
+                                        'xref': 'x',
                                         'y': 0,
-                                        'yref': 'y1'},
-                                       {'font': {'color': '#FFFFFF'},
+                                        'yref': 'y'},
+                                       {'font': {'color': '#ffffff'},
                                         'showarrow': False,
                                         'text': '0.5',
                                         'x': 2,
-                                        'xref': 'x1',
+                                        'xref': 'x',
                                         'y': 0,
-                                        'yref': 'y1'},
-                                       {'font': {'color': '#FFFFFF'},
+                                        'yref': 'y'},
+                                       {'font': {'color': '#ffffff'},
                                         'showarrow': False,
                                         'text': '0.25',
                                         'x': 0,
-                                        'xref': 'x1',
+                                        'xref': 'x',
                                         'y': 1,
-                                        'yref': 'y1'},
+                                        'yref': 'y'},
                                        {'font': {'color': '#000000'},
                                         'showarrow': False,
                                         'text': '0.75',
                                         'x': 1,
-                                        'xref': 'x1',
+                                        'xref': 'x',
                                         'y': 1,
-                                        'yref': 'y1'},
-                                       {'font': {'color': '#FFFFFF'},
+                                        'yref': 'y'},
+                                       {'font': {'color': '#ffffff'},
                                         'showarrow': False,
                                         'text': '0.45',
                                         'x': 2,
-                                        'xref': 'x1',
+                                        'xref': 'x',
                                         'y': 1,
-                                        'yref': 'y1'}],
-                       'xaxis': {'gridcolor': 'rgb(0, 0, 0)',
+                                        'yref': 'y'}],
+                       'xaxis': {'gridcolor': 'rgb(0,0,0)',
                                  'showticklabels': False,
                                  'side': 'top',
                                  'ticks': ''},
                        'yaxis': {'showticklabels': False, 'ticks': '',
                                  'ticksuffix': '  '}}}
-        self.assertEqual(a_heat, expected_a_heat)
+
+        self.assert_fig_equal(
+            a_heat.to_plotly_json()['data'][0],
+            expected_a_heat['data'][0],
+        )
+
+        self.assert_fig_equal(a_heat.to_plotly_json()['layout'],
+                              expected_a_heat['layout'])
 
     def test_annotated_heatmap_kwargs(self):
 
@@ -824,64 +834,70 @@ class TestAnnotatedHeatmap(TestCase):
                                                                    [1,
                                                                     '#e6005a']]
                                                        )
-        expected_a = {'data': [{'colorscale': [[0, '#ffffff'], [1, '#e6005a']],
+        expected_a = {'data': [{'colorscale': ((0, '#ffffff'), (1, '#e6005a')),
                                 'showscale': False,
                                 'type': 'heatmap',
                                 'x': ['A', 'B'],
                                 'y': ['One', 'Two', 'Three'],
                                 'z': [[1, 0], [0.25, 0.75], [0.45, 0.5]]}],
-                      'layout': {'annotations': [{'font': {'color': '#FFFFFF'},
+                      'layout': {'annotations': [{'font': {'color': '#ffffff'},
                                                   'showarrow': False,
                                                   'text': 'first',
                                                   'x': 'A',
-                                                  'xref': 'x1',
+                                                  'xref': 'x',
                                                   'y': 'One',
-                                                  'yref': 'y1'},
+                                                  'yref': 'y'},
                                  {'font': {'color': '#000000'},
                                   'showarrow': False,
                                   'text': 'second',
                                   'x': 'B',
-                                  'xref': 'x1',
+                                  'xref': 'x',
                                   'y': 'One',
-                                  'yref': 'y1'},
+                                  'yref': 'y'},
                                  {'font': {'color': '#000000'},
                                   'showarrow': False,
                                   'text': 'third',
                                   'x': 'A',
-                                  'xref': 'x1',
+                                  'xref': 'x',
                                   'y': 'Two',
-                                  'yref': 'y1'},
-                                 {'font': {'color': '#FFFFFF'},
+                                  'yref': 'y'},
+                                 {'font': {'color': '#ffffff'},
                                   'showarrow': False,
                                   'text': 'fourth',
                                   'x': 'B',
-                                  'xref': 'x1',
+                                  'xref': 'x',
                                   'y': 'Two',
-                                  'yref': 'y1'},
+                                  'yref': 'y'},
                                  {'font': {'color': '#000000'},
                                   'showarrow': False,
                                   'text': 'fifth',
                                   'x': 'A',
-                                  'xref': 'x1',
+                                  'xref': 'x',
                                   'y': 'Three',
-                                  'yref': 'y1'},
+                                  'yref': 'y'},
                                  {'font': {'color': '#000000'},
                                   'showarrow': False,
                                   'text': 'sixth',
                                   'x': 'B',
-                                  'xref': 'x1',
+                                  'xref': 'x',
                                   'y': 'Three',
-                                  'yref': 'y1'}],
+                                  'yref': 'y'}],
                                  'xaxis': {'dtick': 1,
-                                           'gridcolor': 'rgb(0, 0, 0)',
+                                           'gridcolor': 'rgb(0,0,0)',
                                            'side': 'top',
                                            'ticks': ''},
                                  'yaxis': {'dtick': 1, 'ticks': '',
                                            'ticksuffix': '  '}}}
-        self.assertEqual(a, expected_a)
+        self.assert_fig_equal(
+            a.to_plotly_json()['data'][0],
+            expected_a['data'][0],
+        )
+
+        self.assert_fig_equal(a.to_plotly_json()['layout'],
+                              expected_a['layout'])
 
 
-class TestTable(TestCase):
+class TestTable(TestCase, NumpyTestUtilsMixin):
 
     def test_fontcolor_input(self):
 
@@ -904,9 +920,9 @@ class TestTable(TestCase):
         text = [['Country', 'Year', 'Population'], ['US', 2000, 282200000],
                 ['Canada', 2000, 27790000], ['US', 1980, 226500000]]
         table = tls.FigureFactory.create_table(text)
-        expected_table = {'data': [{'colorscale': [[0, '#00083e'],
-                                                   [0.5, '#ededee'],
-                                                   [1, '#ffffff']],
+        expected_table = {'data': [{'colorscale': ((0, '#00083e'),
+                                                   (0.5, '#ededee'),
+                                                   (1, '#ffffff')),
                                     'hoverinfo': 'none',
                                     'opacity': 0.75,
                                     'showscale': False,
@@ -919,108 +935,108 @@ class TestTable(TestCase):
                                                       'text': '<b>Country</b>',
                                                       'x': -0.45,
                                                       'xanchor': 'left',
-                                                      'xref': 'x1',
+                                                      'xref': 'x',
                                                       'y': 0,
-                                                      'yref': 'y1'},
+                                                      'yref': 'y'},
                                                      {'align': 'left',
                                                       'font': {'color': '#ffffff'},
                                                       'showarrow': False,
                                                       'text': '<b>Year</b>',
                                                       'x': 0.55,
                                                       'xanchor': 'left',
-                                                      'xref': 'x1',
+                                                      'xref': 'x',
                                                       'y': 0,
-                                                      'yref': 'y1'},
+                                                      'yref': 'y'},
                                                      {'align': 'left',
                                                       'font': {'color': '#ffffff'},
                                                       'showarrow': False,
                                                       'text': '<b>Population</b>',
                                                       'x': 1.55,
                                                       'xanchor': 'left',
-                                                      'xref': 'x1',
+                                                      'xref': 'x',
                                                       'y': 0,
-                                                      'yref': 'y1'},
+                                                      'yref': 'y'},
                                                      {'align': 'left',
                                                       'font': {'color': '#000000'},
                                                       'showarrow': False,
                                                       'text': 'US',
                                                       'x': -0.45,
                                                       'xanchor': 'left',
-                                                      'xref': 'x1',
+                                                      'xref': 'x',
                                                       'y': 1,
-                                                      'yref': 'y1'},
+                                                      'yref': 'y'},
                                                      {'align': 'left',
                                                       'font': {'color': '#000000'},
                                                       'showarrow': False,
                                                       'text': '2000',
                                                       'x': 0.55,
                                                       'xanchor': 'left',
-                                                      'xref': 'x1',
+                                                      'xref': 'x',
                                                       'y': 1,
-                                                      'yref': 'y1'},
+                                                      'yref': 'y'},
                                                      {'align': 'left',
                                                       'font': {'color': '#000000'},
                                                       'showarrow': False,
                                                       'text': '282200000',
                                                       'x': 1.55,
                                                       'xanchor': 'left',
-                                                      'xref': 'x1',
+                                                      'xref': 'x',
                                                       'y': 1,
-                                                      'yref': 'y1'},
+                                                      'yref': 'y'},
                                                      {'align': 'left',
                                                       'font': {'color': '#000000'},
                                                       'showarrow': False,
                                                       'text': 'Canada',
                                                       'x': -0.45,
                                                       'xanchor': 'left',
-                                                      'xref': 'x1',
+                                                      'xref': 'x',
                                                       'y': 2,
-                                                      'yref': 'y1'},
+                                                      'yref': 'y'},
                                                      {'align': 'left',
                                                       'font': {'color': '#000000'},
                                                       'showarrow': False,
                                                       'text': '2000',
                                                       'x': 0.55,
                                                       'xanchor': 'left',
-                                                      'xref': 'x1',
+                                                      'xref': 'x',
                                                       'y': 2,
-                                                      'yref': 'y1'},
+                                                      'yref': 'y'},
                                                      {'align': 'left',
                                                       'font': {'color': '#000000'},
                                                       'showarrow': False,
                                                       'text': '27790000',
                                                       'x': 1.55,
                                                       'xanchor': 'left',
-                                                      'xref': 'x1',
+                                                      'xref': 'x',
                                                       'y': 2,
-                                                      'yref': 'y1'},
+                                                      'yref': 'y'},
                                                      {'align': 'left',
                                                       'font': {'color': '#000000'},
                                                       'showarrow': False,
                                                       'text': 'US',
                                                       'x': -0.45,
                                                       'xanchor': 'left',
-                                                      'xref': 'x1',
+                                                      'xref': 'x',
                                                       'y': 3,
-                                                      'yref': 'y1'},
+                                                      'yref': 'y'},
                                                      {'align': 'left',
                                                       'font': {'color': '#000000'},
                                                       'showarrow': False,
                                                       'text': '1980',
                                                       'x': 0.55,
                                                       'xanchor': 'left',
-                                                      'xref': 'x1',
+                                                      'xref': 'x',
                                                       'y': 3,
-                                                      'yref': 'y1'},
+                                                      'yref': 'y'},
                                                      {'align': 'left',
                                                       'font': {'color': '#000000'},
                                                       'showarrow': False,
                                                       'text': '226500000',
                                                       'x': 1.55,
                                                       'xanchor': 'left',
-                                                      'xref': 'x1',
+                                                      'xref': 'x',
                                                       'y': 3,
-                                                      'yref': 'y1'}],
+                                                      'yref': 'y'}],
                                      'height': 170,
                                      'margin': {'b': 0, 'l': 0, 'r': 0, 't': 0},
                                      'xaxis': {'dtick': 1,
@@ -1036,7 +1052,16 @@ class TestTable(TestCase):
                                                'tick0': 0.5,
                                                'ticks': '',
                                                'zeroline': False}}}
-        self.assertEqual(table, expected_table)
+
+        self.assert_fig_equal(
+            table.to_plotly_json()['data'][0],
+            expected_table['data'][0]
+        )
+
+        self.assert_fig_equal(
+            table.to_plotly_json()['layout'],
+            expected_table['layout']
+        )
 
     def test_table_with_index(self):
 
@@ -1047,7 +1072,7 @@ class TestTable(TestCase):
                 ['Canada', 2000, 27790000]]
         index_table = tls.FigureFactory.create_table(text, index=True,
                                                      index_title='Title')
-        exp_index_table = {'data': [{'colorscale': [[0, '#00083e'], [0.5, '#ededee'], [1, '#ffffff']],
+        exp_index_table = {'data': [{'colorscale': ((0, '#00083e'), (0.5, '#ededee'), (1, '#ffffff')),
                                      'hoverinfo': 'none',
                                      'opacity': 0.75,
                                      'showscale': False,
@@ -1059,81 +1084,81 @@ class TestTable(TestCase):
                                       'text': '<b>Country</b>',
                                       'x': -0.45,
                                       'xanchor': 'left',
-                                      'xref': 'x1',
+                                      'xref': 'x',
                                       'y': 0,
-                                      'yref': 'y1'},
+                                      'yref': 'y'},
                                      {'align': 'left',
                                       'font': {'color': '#ffffff'},
                                       'showarrow': False,
                                       'text': '<b>Year</b>',
                                       'x': 0.55,
                                       'xanchor': 'left',
-                                      'xref': 'x1',
+                                      'xref': 'x',
                                       'y': 0,
-                                      'yref': 'y1'},
+                                      'yref': 'y'},
                                      {'align': 'left',
                                       'font': {'color': '#ffffff'},
                                       'showarrow': False,
                                       'text': '<b>Population</b>',
                                       'x': 1.55,
                                       'xanchor': 'left',
-                                      'xref': 'x1',
+                                      'xref': 'x',
                                       'y': 0,
-                                      'yref': 'y1'},
+                                      'yref': 'y'},
                                      {'align': 'left',
                                       'font': {'color': '#ffffff'},
                                       'showarrow': False,
                                       'text': '<b>US</b>',
                                       'x': -0.45,
                                       'xanchor': 'left',
-                                      'xref': 'x1',
+                                      'xref': 'x',
                                       'y': 1,
-                                      'yref': 'y1'},
+                                      'yref': 'y'},
                                      {'align': 'left',
                                       'font': {'color': '#000000'},
                                       'showarrow': False,
                                       'text': '2000',
                                       'x': 0.55,
                                       'xanchor': 'left',
-                                      'xref': 'x1',
+                                      'xref': 'x',
                                       'y': 1,
-                                      'yref': 'y1'},
+                                      'yref': 'y'},
                                      {'align': 'left',
                                       'font': {'color': '#000000'},
                                       'showarrow': False,
                                       'text': '282200000',
                                       'x': 1.55,
                                       'xanchor': 'left',
-                                      'xref': 'x1',
+                                      'xref': 'x',
                                       'y': 1,
-                                      'yref': 'y1'},
+                                      'yref': 'y'},
                                      {'align': 'left',
                                       'font': {'color': '#ffffff'},
                                       'showarrow': False,
                                       'text': '<b>Canada</b>',
                                       'x': -0.45,
                                       'xanchor': 'left',
-                                      'xref': 'x1',
+                                      'xref': 'x',
                                       'y': 2,
-                                      'yref': 'y1'},
+                                      'yref': 'y'},
                                      {'align': 'left',
                                       'font': {'color': '#000000'},
                                       'showarrow': False,
                                       'text': '2000',
                                       'x': 0.55,
                                       'xanchor': 'left',
-                                      'xref': 'x1',
+                                      'xref': 'x',
                                       'y': 2,
-                                      'yref': 'y1'},
+                                      'yref': 'y'},
                                      {'align': 'left',
                                       'font': {'color': '#000000'},
                                       'showarrow': False,
                                       'text': '27790000',
                                       'x': 1.55,
                                       'xanchor': 'left',
-                                      'xref': 'x1',
+                                      'xref': 'x',
                                       'y': 2,
-                                      'yref': 'y1'}],
+                                      'yref': 'y'}],
                                       'height': 140,
                                       'margin': {'b': 0, 'l': 0, 'r': 0, 't': 0},
                                       'xaxis': {'dtick': 1,
@@ -1149,7 +1174,16 @@ class TestTable(TestCase):
                                                 'tick0': 0.5,
                                                 'ticks': '',
                                                 'zeroline': False}}}
-        self.assertEqual(index_table, exp_index_table)
+
+        self.assert_fig_equal(
+            index_table.to_plotly_json()['data'][0],
+            exp_index_table['data'][0]
+        )
+
+        self.assert_fig_equal(
+            index_table.to_plotly_json()['layout'],
+            exp_index_table['layout']
+        )
 
 
 class TestGantt(TestCase):
@@ -1599,7 +1633,7 @@ class Test2D_Density(TestCase):
                       (1, 1, 0.2), (0.98, 0.98, 0.98)]
 
         test_2D_density_chart = tls.FigureFactory.create_2D_density(
-            x, y, colorscale=colorscale, hist_color='rgb(255, 237, 222)',
+            x, y, colorscale=colorscale, hist_color='rgb(255,237,222)',
             point_size=3, height=800, width=800)
 
         exp_2D_density_chart = {
@@ -1611,11 +1645,11 @@ class Test2D_Density(TestCase):
                       'type': 'scatter',
                       'x': [1, 2],
                       'y': [2, 4]},
-                     {'colorscale': [[0.0, 'rgb(122, 69, 121)'],
-                                     [0.25, 'rgb(213, 96, 115)'],
-                                     [0.5, 'rgb(236, 158, 105)'],
-                                     [0.75, 'rgb(255, 255, 51)'],
-                                     [1.0, 'rgb(250, 250, 250)']],
+                     {'colorscale': [[0.0, 'rgb(122,69,121)'],
+                                     [0.25, 'rgb(213,96,115)'],
+                                     [0.5, 'rgb(236,158,105)'],
+                                     [0.75, 'rgb(255,255,51)'],
+                                     [1.0, 'rgb(250,250,250)']],
                       'name': 'density',
                       'ncontours': 20,
                       'reversescale': True,
@@ -1623,12 +1657,12 @@ class Test2D_Density(TestCase):
                       'type': 'histogram2dcontour',
                       'x': [1, 2],
                       'y': [2, 4]},
-                     {'marker': {'color': 'rgb(255, 237, 222)'},
+                     {'marker': {'color': 'rgb(255,237,222)'},
                       'name': 'x density',
                       'type': 'histogram',
                       'x': [1, 2],
                       'yaxis': 'y2'},
-                     {'marker': {'color': 'rgb(255, 237, 222)'},
+                     {'marker': {'color': 'rgb(255,237,222)'},
                       'name': 'y density',
                       'type': 'histogram',
                       'xaxis': 'x2',
@@ -1655,17 +1689,17 @@ class Test2D_Density(TestCase):
                                   'zeroline': False}}
         }
 
-        self.assertEqual(test_2D_density_chart['data'][0],
+        self.assertEqual(test_2D_density_chart.to_plotly_json()['data'][0],
                          exp_2D_density_chart['data'][0])
 
-        self.assertEqual(test_2D_density_chart['data'][1],
+        self.assertEqual(test_2D_density_chart.to_plotly_json()['data'][1],
                          exp_2D_density_chart['data'][1])
 
-        self.assertEqual(test_2D_density_chart['data'][2],
+        self.assertEqual(test_2D_density_chart.to_plotly_json()['data'][2],
                          exp_2D_density_chart['data'][2])
 
-        self.assertEqual(test_2D_density_chart['data'][3],
+        self.assertEqual(test_2D_density_chart.to_plotly_json()['data'][3],
                          exp_2D_density_chart['data'][3])
 
-        self.assertEqual(test_2D_density_chart['layout'],
+        self.assertEqual(test_2D_density_chart.to_plotly_json()['layout'],
                          exp_2D_density_chart['layout'])
