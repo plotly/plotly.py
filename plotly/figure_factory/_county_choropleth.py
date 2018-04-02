@@ -563,14 +563,13 @@ def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
     if not gp or not shapefile or not shapely:
         raise ImportError(
             "geopandas, pyshp and shapely must be installed for this figure "
-            "factory.\n\nIf you are using OS X run the following commands in "
-            "the terminal to ensure that the correct versions of the modules "
-            "are installed:\n"
+            "factory.\n\nRun the following commands to install the correct "
+            "versions of the following modules:\n\n"
             "`pip install geopandas==0.3.0`\n"
             "`pip install pyshp==1.2.10`\n"
             "`pip install shapely==1.6.3`\n\n"
-            "If you are using Windows, follow this blog post to properly "
-            "install geopandas and its dependencies including shapely:\n"
+            "If you are using Windows, follow this post to properly "
+            "install geopandas and dependencies:"
             "http://geoffboeing.com/2014/09/using-geopandas-windows/"
         )
 
