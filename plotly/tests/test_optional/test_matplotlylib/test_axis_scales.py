@@ -26,8 +26,8 @@ def test_even_linear_scale():
     _ = ax.set_yticks(list(range(0, 200, 13)))
     renderer = run_fig(fig)
     for data_no, data_dict in enumerate(renderer.plotly_fig['data']):
-        equivalent, msg = compare_dict(data_dict,
-                                       EVEN_LINEAR_SCALE['data'][data_no])
+        equivalent, msg = compare_dict(data_dict.to_plotly_json(),
+                                       EVEN_LINEAR_SCALE['data'][data_no].to_plotly_json())
         assert equivalent, msg
     equivalent, msg = compare_dict(renderer.plotly_fig['layout'],
                                    EVEN_LINEAR_SCALE['layout'])

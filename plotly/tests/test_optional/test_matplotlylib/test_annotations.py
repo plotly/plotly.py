@@ -31,9 +31,12 @@ def test_annotations():
     ax.text(0.999, 0.001,
             'bottom-right', transform=ax.transAxes, va='baseline', ha='right')
     renderer = run_fig(fig)
-    for data_no, data_dict in enumerate(renderer.plotly_fig['data']):
-        equivalent, msg = compare_dict(data_dict,
-                                       ANNOTATIONS['data'][data_no])
+    for data_no, data_dict in enumerate(renderer.plotly_fig['data'].to_plotly_json()):
+        data_dict.to_plotly_json()
+        ANNOTATIONS['data'][data_no].to_plotly_json()
+
+        #equivalent, msg = compare_dict(data_dict_asjson, annot_asjson)
+        equivalent, msg = compare_dict(data_dict, ANNOTATIONS['data'][data_no])
         assert equivalent, msg
     for no, note in enumerate(renderer.plotly_fig['layout']['annotations']):
         equivalent, msg = compare_dict(note,
