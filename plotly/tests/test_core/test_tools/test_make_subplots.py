@@ -143,17 +143,9 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis1=XAxis(
-                    domain=[0.0, 1.0],
-                    anchor='y1'
-                ),
                 xaxis2=XAxis(
                     domain=[0.0, 1.0],
                     anchor='y2'
-                ),
-                yaxis1=YAxis(
-                    domain=[0.0, 0.425],
-                    anchor='x1'
                 ),
                 yaxis2=YAxis(
                     domain=[0.575, 1.0],
