@@ -48,12 +48,14 @@ def build_validator_py(node: PlotlyNode):
 
 class {class_name}({superclass_name}):
     def __init__(self, plotly_name={params['plotly_name']},
-                       parent_name={params['parent_name']}):""")
+                       parent_name={params['parent_name']},
+                       **kwargs):""")
 
     # ### Write constructor ###
     buffer.write(f"""
         super().__init__(plotly_name=plotly_name,
-                         parent_name=parent_name""")
+                         parent_name=parent_name,
+                         **kwargs""")
 
     # Write out remaining constructor parameters
     for attr_name, attr_val in params.items():
@@ -172,11 +174,13 @@ import _plotly_utils.basevalidators
 class DataValidator(_plotly_utils.basevalidators.BaseDataValidator):
 
     def __init__(self, plotly_name={params['plotly_name']},
-                       parent_name={params['parent_name']}):
+                       parent_name={params['parent_name']},
+                       **kwargs):
 
         super().__init__(class_strs_map={params['class_strs_map']},
                          plotly_name=plotly_name,
-                         parent_name=parent_name)""")
+                         parent_name=parent_name,
+                         **kwargs)""")
 
     return buffer.getvalue()
 
