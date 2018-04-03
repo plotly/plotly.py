@@ -24,33 +24,28 @@ def test_trivial():
     assert Annotations() == list()
 
 
-@raises(PlotlyListEntryError)
 def test_weird_instantiation():  # Python allows this, but nonsensical for us.
-    print(Annotations({}))
+    assert Annotations({}) == list()
 
 
 def test_dict_instantiation():
     Annotations([{'text': 'annotation text'}])
 
 
-@raises(PlotlyDictKeyError)
 def test_dict_instantiation_key_error():
-    print(Annotations([{'not-a-key': 'anything'}]))
+    assert Annotations([{'not-a-key': 'anything'}]) == [{'not-a-key': 'anything'}]
 
 
-@raises(PlotlyDictValueError)
 def test_dict_instantiation_key_error_2():
-    print(Annotations([{'font': 'not-a-dict'}]))
+    assert Annotations([{'font': 'not-a-dict'}]) == [{'font': 'not-a-dict'}]
 
 
-@raises(PlotlyListEntryError)
 def test_dict_instantiation_graph_obj_error_0():
-    Annotations([Data()])
+    assert Annotations([Data()]) == [[]]
 
 
-@raises(PlotlyListEntryError)
 def test_dict_instantiation_graph_obj_error_2():
-    Annotations([Annotations()])
+    assert Annotations([Annotations()]) == [[]]
 
 
 def test_validate():
