@@ -15,7 +15,6 @@ from plotly.exceptions import (PlotlyError, PlotlyDictKeyError,
 from plotly.graph_objs import Annotation, Annotations, Data, Figure, Layout
 
 
-
 def setup():
     import warnings
     warnings.filterwarnings('ignore')
@@ -25,7 +24,7 @@ def test_trivial():
     assert Annotations() == list()
 
 
-@raises(PlotlyError)
+@raises(PlotlyListEntryError)
 def test_weird_instantiation():  # Python allows this, but nonsensical for us.
     print(Annotations({}))
 
@@ -40,7 +39,7 @@ def test_dict_instantiation_key_error():
 
 
 @raises(PlotlyDictValueError)
-def test_dict_instantiation_key_error():
+def test_dict_instantiation_key_error_2():
     print(Annotations([{'font': 'not-a-dict'}]))
 
 
