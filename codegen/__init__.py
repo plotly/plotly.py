@@ -161,13 +161,6 @@ def perform_codegen():
             (f"._{node.name_undercase}", node.name_datatype_class)
         )
 
-        # submodule import
-        if node.child_compound_datatypes:
-            path_to_datatype_import_info.setdefault(key, []).append(
-                (f"plotly.graph_objs{node.parent_dotpath_str}",
-                 node.name_undercase)
-            )
-
     # ### Write plotly/graph_objs/graph_objs.py ###
     # This if for backward compatibility. It just imports everything from
     # graph_objs/__init__.py
