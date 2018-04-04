@@ -32,3 +32,5 @@ js/node_modules/
 
 # Compiled javascript
 plotlywidget/static/
+
+.pytest_cache
