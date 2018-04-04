@@ -28,6 +28,7 @@ def random_filename():
     return unique_filename
 
 
+
 class GridTest(PlotlyTestCase):
 
     # Test grid args
