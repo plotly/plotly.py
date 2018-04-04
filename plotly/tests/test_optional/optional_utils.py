@@ -6,6 +6,8 @@ from plotly import optional_imports
 from plotly.tests.utils import is_num_list
 from plotly.utils import get_by_path, node_generator
 
+import copy
+
 matplotlylib = optional_imports.get_module('plotly.matplotlylib')
 
 if matplotlylib:
@@ -40,13 +42,16 @@ class NumpyTestUtilsMixin(object):
             strings that are removed from both d1 and d2 if
             they exist
         """
-        for key in ignore:
-            if key in d1.keys():
-                del d1[key]
-            if key in d2.keys():
-                del d2[key]
+        d1_copy = copy.deepcopy(d1)
+        d2_copy = copy.deepcopy(d2)
 
-        self.assert_dict_equal(d1, d2, msg=None)
+        for key in ignore:
+            if key in d1_copy.keys():
+                del d1_copy[key]
+            if key in d2_copy.keys():
+                del d2_copy[key]
+
+        self.assert_dict_equal(d1_copy, d2_copy, msg=None)
 
     def assert_dict_equal(self, d1, d2, msg=None):
         """

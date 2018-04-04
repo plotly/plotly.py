@@ -143,14 +143,22 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
+                xaxis=XAxis(
+                    domain=[0.0, 1.0],
+                    anchor='y'
+                ),
                 xaxis2=XAxis(
                     domain=[0.0, 1.0],
                     anchor='y2'
                 ),
+                yaxis=YAxis(
+                    domain=[0.575, 1.0],
+                    anchor='x'
+                ),
                 yaxis2=YAxis(
                     domain=[0.575, 1.0],
                     anchor='x2'
-                )
+                ),
             )
         )
         fig = tls.make_subplots(rows=2, start_cell='bottom-left')

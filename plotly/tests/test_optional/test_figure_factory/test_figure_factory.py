@@ -434,7 +434,7 @@ class TestStreamline(TestCase):
             'mode': 'lines'
         }
         self.assertListEqual(list(strln['data'][0]['y'][0:100]),
-                                 expected_strln_0_100['y'])
+                             expected_strln_0_100['y'])
         self.assertListEqual(list(strln['data'][0]['x'][0:100]),
                              expected_strln_0_100['x'])
 
