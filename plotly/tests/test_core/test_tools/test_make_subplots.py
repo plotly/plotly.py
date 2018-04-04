@@ -103,33 +103,34 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.0, 1.0],
-                    anchor='y1'
+                    anchor='y'
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.0, 1.0],
-                    anchor='x1'
+                    anchor='x'
                 )
             )
         )
-        self.assertEqual(tls.make_subplots(), expected)
+        self.assertEqual(tls.make_subplots().to_plotly_json(),
+                         expected.to_plotly_json())
 
     def test_two_row(self):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.0, 1.0],
-                    anchor='y1'
+                    anchor='y'
                 ),
                 xaxis2=XAxis(
                     domain=[0.0, 1.0],
                     anchor='y2'
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.575, 1.0],
-                    anchor='x1'
+                    anchor='x'
                 ),
                 yaxis2=YAxis(
                     domain=[0.0, 0.425],
@@ -137,7 +138,7 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        self.assertEqual(tls.make_subplots(rows=2), expected)
+        self.assertEqual(tls.make_subplots(rows=2).to_plotly_json(), expected.to_plotly_json())
 
     def test_two_row_bottom_left(self):
         expected = Figure(
@@ -162,23 +163,23 @@ class TestMakeSubplots(TestCase):
             )
         )
         fig = tls.make_subplots(rows=2, start_cell='bottom-left')
-        self.assertEqual(fig, expected)
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_two_column(self):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.0, 0.45],
-                    anchor='y1'
+                    anchor='y'
                 ),
                 xaxis2=XAxis(
                     domain=[0.55, 1.0],
                     anchor='y2'
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.0, 1.0],
-                    anchor='x1'
+                    anchor='x'
                 ),
                 yaxis2=YAxis(
                     domain=[0.0, 1.0],
@@ -186,15 +187,15 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        self.assertEqual(tls.make_subplots(cols=2), expected)
+        self.assertEqual(tls.make_subplots(cols=2).to_plotly_json(), expected.to_plotly_json())
 
     def test_a_lot(self):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.0, 0.1183673469387755],
-                    anchor='y1'
+                    anchor='y'
                 ),
                 xaxis10=XAxis(
                     domain=[0.29387755102040813, 0.4122448979591836],
@@ -304,9 +305,9 @@ class TestMakeSubplots(TestCase):
                     domain=[0.14693877551020407, 0.26530612244897955],
                     anchor='y9'
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.80625, 1.0],
-                    anchor='x1'
+                    anchor='x'
                 ),
                 yaxis10=YAxis(
                     domain=[0.5375, 0.73125],
@@ -419,15 +420,15 @@ class TestMakeSubplots(TestCase):
             )
         )
         fig = tls.make_subplots(rows=4, cols=7)
-        self.assertEqual(fig, expected)
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_a_lot_bottom_left(self):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.0, 0.1183673469387755],
-                    anchor='y1'
+                    anchor='y'
                 ),
                 xaxis10=XAxis(
                     domain=[0.29387755102040813, 0.4122448979591836],
@@ -537,9 +538,9 @@ class TestMakeSubplots(TestCase):
                     domain=[0.14693877551020407, 0.26530612244897955],
                     anchor='y9'
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.0, 0.19375],
-                    anchor='x1'
+                    anchor='x'
                 ),
                 yaxis10=YAxis(
                     domain=[0.26875, 0.4625],
@@ -652,15 +653,15 @@ class TestMakeSubplots(TestCase):
             )
         )
         fig = tls.make_subplots(rows=4, cols=7, start_cell='bottom-left')
-        self.assertEqual(fig, expected)
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_spacing(self):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.0, 0.3],
-                    anchor='y1'
+                    anchor='y'
                 ),
                 xaxis2=XAxis(
                     domain=[0.35, 0.6499999999999999],
@@ -682,9 +683,9 @@ class TestMakeSubplots(TestCase):
                     domain=[0.7, 1.0],
                     anchor='y6'
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.55, 1.0],
-                    anchor='x1'
+                    anchor='x'
                 ),
                 yaxis2=YAxis(
                     domain=[0.55, 1.0],
@@ -711,15 +712,15 @@ class TestMakeSubplots(TestCase):
         fig = tls.make_subplots(rows=2, cols=3,
                                 horizontal_spacing=.05,
                                 vertical_spacing=.1)
-        self.assertEqual(fig, expected)
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_specs(self):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.0, 0.2888888888888889],
-                    anchor='y1'
+                    anchor='y'
                 ),
                 xaxis2=XAxis(
                     domain=[0.0, 0.2888888888888889],
@@ -733,9 +734,9 @@ class TestMakeSubplots(TestCase):
                     domain=[0.7111111111111111, 1.0],
                     anchor='y4'
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.575, 1.0],
-                    anchor='x1'
+                    anchor='x'
                 ),
                 yaxis2=YAxis(
                     domain=[0.0, 0.425],
@@ -754,15 +755,15 @@ class TestMakeSubplots(TestCase):
         fig = tls.make_subplots(rows=2, cols=3,
                                 specs=[[{}, None, None],
                                        [{}, {}, {}]])
-        self.assertEqual(fig, expected)
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_specs_bottom_left(self):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.0, 0.2888888888888889],
-                    anchor='y1'
+                    anchor='y'
                 ),
                 xaxis2=XAxis(
                     domain=[0.0, 0.2888888888888889],
@@ -776,9 +777,9 @@ class TestMakeSubplots(TestCase):
                     domain=[0.7111111111111111, 1.0],
                     anchor='y4'
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.0, 0.425],
-                    anchor='x1'
+                    anchor='x'
                 ),
                 yaxis2=YAxis(
                     domain=[0.575, 1.0],
@@ -798,15 +799,15 @@ class TestMakeSubplots(TestCase):
                                 specs=[[{}, None, None],
                                        [{}, {}, {}]],
                                 start_cell='bottom-left')
-        self.assertEqual(fig, expected)
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_specs_colspan(self):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.0, 1.0],
-                    anchor='y1'
+                    anchor='y'
                 ),
                 xaxis2=XAxis(
                     domain=[0.0, 0.45],
@@ -824,9 +825,9 @@ class TestMakeSubplots(TestCase):
                     domain=[0.55, 1.0],
                     anchor='y5'
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.7333333333333333, 1.0],
-                    anchor='x1'
+                    anchor='x'
                 ),
                 yaxis2=YAxis(
                     domain=[0.36666666666666664, 0.6333333333333333],
@@ -850,15 +851,15 @@ class TestMakeSubplots(TestCase):
                                 specs=[[{'colspan': 2}, None],
                                        [{}, {}],
                                        [{}, {}]])
-        self.assertEqual(fig, expected)
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_specs_rowspan(self):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.0, 0.2888888888888889],
-                    anchor='y1'
+                    anchor='y'
                 ),
                 xaxis2=XAxis(
                     domain=[0.35555555555555557, 0.6444444444444445],
@@ -880,9 +881,9 @@ class TestMakeSubplots(TestCase):
                     domain=[0.35555555555555557, 1.0],
                     anchor='y6'
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.0, 1.0],
-                    anchor='x1'
+                    anchor='x'
                 ),
                 yaxis2=YAxis(
                     domain=[0.7333333333333333, 1.0],
@@ -909,15 +910,15 @@ class TestMakeSubplots(TestCase):
         fig = tls.make_subplots(rows=3, cols=3,
                                 specs=[[{'rowspan': 3}, {}, {}],
                                 [None, {}, {}], [None, {'colspan': 2}, None]])
-        self.assertEqual(fig, expected)
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_specs_rowspan2(self):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.0, 0.2888888888888889],
-                    anchor='y1'
+                    anchor='y'
                 ),
                 xaxis2=XAxis(
                     domain=[0.35555555555555557, 0.6444444444444445],
@@ -935,9 +936,9 @@ class TestMakeSubplots(TestCase):
                     domain=[0.0, 1.0],
                     anchor='y5'
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.7333333333333333, 1.0],
-                    anchor='x1'
+                    anchor='x'
                 ),
                 yaxis2=YAxis(
                     domain=[0.7333333333333333, 1.0],
@@ -960,15 +961,15 @@ class TestMakeSubplots(TestCase):
         fig = tls.make_subplots(rows=3, cols=3, specs=[[{}, {}, {'rowspan': 2}],
                                 [{'colspan': 2}, None, None],
                                 [{'colspan': 3}, None, None]])
-        self.assertEqual(fig, expected)
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_specs_colspan_rowpan(self):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.0, 0.6444444444444445],
-                    anchor='y1'
+                    anchor='y'
                 ),
                 xaxis2=XAxis(
                     domain=[0.7111111111111111, 1.0],
@@ -990,9 +991,9 @@ class TestMakeSubplots(TestCase):
                     domain=[0.7111111111111111, 1.0],
                     anchor='y6'
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.36666666666666664, 1.0],
-                    anchor='x1'
+                    anchor='x'
                 ),
                 yaxis2=YAxis(
                     domain=[0.7333333333333333, 1.0],
@@ -1019,15 +1020,15 @@ class TestMakeSubplots(TestCase):
         fig = tls.make_subplots(rows=3, cols=3,
                                 specs=[[{'colspan': 2, 'rowspan': 2}, None, {}],
                                        [None, None, {}], [{}, {}, {}]])
-        self.assertEqual(fig, expected)
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_specs_colspan_rowpan_bottom_left(self):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.0, 0.6444444444444445],
-                    anchor='y1'
+                    anchor='y'
                 ),
                 xaxis2=XAxis(
                     domain=[0.7111111111111111, 1.0],
@@ -1049,9 +1050,9 @@ class TestMakeSubplots(TestCase):
                     domain=[0.7111111111111111, 1.0],
                     anchor='y6'
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.0, 0.6333333333333333],
-                    anchor='x1'
+                    anchor='x'
                 ),
                 yaxis2=YAxis(
                     domain=[0.0, 0.26666666666666666],
@@ -1079,29 +1080,29 @@ class TestMakeSubplots(TestCase):
                                 specs=[[{'colspan': 2, 'rowspan': 2}, None, {}],
                                        [None, None, {}], [{}, {}, {}]],
                                 start_cell='bottom-left')
-        self.assertEqual(fig, expected)
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_specs_is_3d(self):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                scene1=Scene(
+                scene=Scene(
                     domain={'y': [0.575, 1.0], 'x': [0.0, 0.45]}
                 ),
                 scene2=Scene(
                     domain={'y': [0.0, 0.425], 'x': [0.0, 0.45]}
                 ),
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.55, 1.0],
-                    anchor='y1'
+                    anchor='y'
                 ),
                 xaxis2=XAxis(
                     domain=[0.55, 1.0],
                     anchor='y2'
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.575, 1.0],
-                    anchor='x1'
+                    anchor='x'
                 ),
                 yaxis2=YAxis(
                     domain=[0.0, 0.425],
@@ -1111,15 +1112,15 @@ class TestMakeSubplots(TestCase):
         )
         fig = tls.make_subplots(rows=2, cols=2, specs=[[{'is_3d': True}, {}],
                                                        [{'is_3d': True}, {}]])
-        self.assertEqual(fig, expected)
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_specs_padding(self):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.1, 0.5],
-                    anchor='y1'
+                    anchor='y'
                 ),
                 xaxis2=XAxis(
                     domain=[0.5, 1.0],
@@ -1133,9 +1134,9 @@ class TestMakeSubplots(TestCase):
                     domain=[0.5, 0.9],
                     anchor='y4'
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.5, 1.0],
-                    anchor='x1'
+                    anchor='x'
                 ),
                 yaxis2=YAxis(
                     domain=[0.7, 1.0],
@@ -1155,15 +1156,15 @@ class TestMakeSubplots(TestCase):
                                 vertical_spacing=0,
                                 specs=[[{'l': 0.1}, {'b': 0.2}],
                                        [{'t': 0.2}, {'r': 0.1}]])
-        self.assertEqual(fig, expected)
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_specs_padding_bottom_left(self):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.1, 0.5],
-                    anchor='y1'
+                    anchor='y'
                 ),
                 xaxis2=XAxis(
                     domain=[0.5, 1.0],
@@ -1177,9 +1178,9 @@ class TestMakeSubplots(TestCase):
                     domain=[0.5, 0.9],
                     anchor='y4'
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.0, 0.5],
-                    anchor='x1'
+                    anchor='x'
                 ),
                 yaxis2=YAxis(
                     domain=[0.2, 0.5],
@@ -1200,13 +1201,13 @@ class TestMakeSubplots(TestCase):
                                 specs=[[{'l': 0.1}, {'b': 0.2}],
                                        [{'t': 0.2}, {'r': 0.1}]],
                                 start_cell='bottom-left')
-        self.assertEqual(fig, expected)
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_shared_xaxes(self):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.0, 0.2888888888888889],
                     anchor='y4'
                 ),
@@ -1218,7 +1219,7 @@ class TestMakeSubplots(TestCase):
                     domain=[0.7111111111111111, 1.0],
                     anchor='y6'
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.575, 1.0],
                     anchor='free',
                     position=0.0
@@ -1235,7 +1236,7 @@ class TestMakeSubplots(TestCase):
                 ),
                 yaxis4=YAxis(
                     domain=[0.0, 0.425],
-                    anchor='x1'
+                    anchor='x'
                 ),
                 yaxis5=YAxis(
                     domain=[0.0, 0.425],
@@ -1248,15 +1249,15 @@ class TestMakeSubplots(TestCase):
             )
         )
         fig = tls.make_subplots(rows=2, cols=3, shared_xaxes=True)
-        self.assertEqual(fig, expected)
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_shared_xaxes_bottom_left(self):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.0, 0.2888888888888889],
-                    anchor='y1'
+                    anchor='y'
                 ),
                 xaxis2=XAxis(
                     domain=[0.35555555555555557, 0.6444444444444445],
@@ -1266,9 +1267,9 @@ class TestMakeSubplots(TestCase):
                     domain=[0.7111111111111111, 1.0],
                     anchor='y3'
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.0, 0.425],
-                    anchor='x1'
+                    anchor='x'
                 ),
                 yaxis2=YAxis(
                     domain=[0.0, 0.425],
@@ -1297,15 +1298,15 @@ class TestMakeSubplots(TestCase):
         )
         fig = tls.make_subplots(rows=2, cols=3,
                                 shared_xaxes=True, start_cell='bottom-left')
-        self.assertEqual(fig, expected)
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_shared_yaxes(self):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.0, 0.45],
-                    anchor='y1'
+                    anchor='y'
                 ),
                 xaxis10=XAxis(
                     domain=[0.55, 1.0],
@@ -1348,9 +1349,9 @@ class TestMakeSubplots(TestCase):
                     domain=[0.0, 0.45],
                     anchor='y5'
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.848, 1.0],
-                    anchor='x1'
+                    anchor='x'
                 ),
                 yaxis2=YAxis(
                     domain=[0.6359999999999999, 0.7879999999999999],
@@ -1371,13 +1372,13 @@ class TestMakeSubplots(TestCase):
             )
         )
         fig = tls.make_subplots(rows=5, cols=2, shared_yaxes=True)
-        self.assertEqual(fig, expected)
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_shared_xaxes_yaxes(self):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.0, 0.2888888888888889],
                     anchor='y3'
                 ),
@@ -1391,7 +1392,7 @@ class TestMakeSubplots(TestCase):
                     anchor='free',
                     position=0.0
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.7333333333333333, 1.0],
                     anchor='free',
                     position=0.0
@@ -1403,21 +1404,21 @@ class TestMakeSubplots(TestCase):
                 ),
                 yaxis3=YAxis(
                     domain=[0.0, 0.26666666666666666],
-                    anchor='x1'
+                    anchor='x'
                 )
             )
         )
         fig = tls.make_subplots(rows=3, cols=3,
                                 shared_xaxes=True, shared_yaxes=True)
-        self.assertEqual(fig, expected)
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_shared_xaxes_yaxes_bottom_left(self):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.0, 0.2888888888888889],
-                    anchor='y1'
+                    anchor='y'
                 ),
                 xaxis2=XAxis(
                     domain=[0.35555555555555557, 0.6444444444444445],
@@ -1429,9 +1430,9 @@ class TestMakeSubplots(TestCase):
                     anchor='free',
                     position=0.0
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.0, 0.26666666666666666],
-                    anchor='x1'
+                    anchor='x'
                 ),
                 yaxis2=YAxis(
                     domain=[0.36666666666666664, 0.6333333333333333],
@@ -1448,15 +1449,15 @@ class TestMakeSubplots(TestCase):
         fig = tls.make_subplots(rows=3, cols=3,
                                 shared_xaxes=True, shared_yaxes=True,
                                 start_cell='bottom-left')
-        self.assertEqual(fig, expected)
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_shared_axes_list(self):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.0, 0.45],
-                    anchor='y1'
+                    anchor='y'
                 ),
                 xaxis2=XAxis(
                     domain=[0.55, 1.0],
@@ -1467,9 +1468,9 @@ class TestMakeSubplots(TestCase):
                     domain=[0.55, 1.0],
                     anchor='y3'
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.575, 1.0],
-                    anchor='x1'
+                    anchor='x'
                 ),
                 yaxis2=YAxis(
                     domain=[0.0, 0.425],
@@ -1484,15 +1485,15 @@ class TestMakeSubplots(TestCase):
         )
         fig = tls.make_subplots(rows=2, cols=2, shared_xaxes=[(1, 1), (2, 1)],
                                 shared_yaxes=[(1, 1), (1, 2)])
-        self.assertEqual(fig, expected)
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_shared_axes_list_bottom_left(self):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.0, 0.45],
-                    anchor='y1'
+                    anchor='y'
                 ),
                 xaxis2=XAxis(
                     domain=[0.55, 1.0],
@@ -1503,9 +1504,9 @@ class TestMakeSubplots(TestCase):
                     domain=[0.55, 1.0],
                     anchor='y3'
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.0, 0.425],
-                    anchor='x1'
+                    anchor='x'
                 ),
                 yaxis2=YAxis(
                     domain=[0.575, 1.0],
@@ -1521,15 +1522,15 @@ class TestMakeSubplots(TestCase):
         fig = tls.make_subplots(rows=2, cols=2, shared_xaxes=[(1, 1), (2, 1)],
                                 shared_yaxes=[(1, 1), (1, 2)],
                                 start_cell='bottom-left')
-        self.assertEqual(fig, expected)
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_shared_axes_list_of_lists(self):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.0, 0.2888888888888889],
-                    anchor='y1'
+                    anchor='y'
                 ),
                 xaxis2=XAxis(
                     domain=[0.35555555555555557, 0.6444444444444445],
@@ -1543,9 +1544,9 @@ class TestMakeSubplots(TestCase):
                     domain=[0.35555555555555557, 0.6444444444444445],
                     anchor='y5'
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.575, 1.0],
-                    anchor='x1'
+                    anchor='x'
                 ),
                 yaxis2=YAxis(
                     domain=[0.575, 1.0],
@@ -1574,15 +1575,15 @@ class TestMakeSubplots(TestCase):
         fig = tls.make_subplots(
             rows=2, cols=3, shared_xaxes=[[(1, 1), (2, 1)], [(1, 3), (2, 3)]]
         )
-        self.assertEqual(fig, expected)
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_shared_axes_list_of_lists_bottom_left(self):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.0, 0.2888888888888889],
-                    anchor='y1'
+                    anchor='y'
                 ),
                 xaxis2=XAxis(
                     domain=[0.35555555555555557, 0.6444444444444445],
@@ -1596,9 +1597,9 @@ class TestMakeSubplots(TestCase):
                     domain=[0.35555555555555557, 0.6444444444444445],
                     anchor='y5'
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.0, 0.425],
-                    anchor='x1'
+                    anchor='x'
                 ),
                 yaxis2=YAxis(
                     domain=[0.0, 0.425],
@@ -1627,15 +1628,15 @@ class TestMakeSubplots(TestCase):
         fig = tls.make_subplots(rows=2, cols=3, shared_xaxes=[[(1, 1), (2, 1)],
                                                               [(1, 3), (2, 3)]],
                                 start_cell='bottom-left')
-        self.assertEqual(fig, expected)
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_insets(self):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.0, 0.45],
-                    anchor='y1'
+                    anchor='y'
                 ),
                 xaxis2=XAxis(
                     domain=[0.55, 1.0],
@@ -1653,9 +1654,9 @@ class TestMakeSubplots(TestCase):
                     domain=[0.865, 0.955],
                     anchor='y5'
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.575, 1.0],
-                    anchor='x1'
+                    anchor='x'
                 ),
                 yaxis2=YAxis(
                     domain=[0.575, 1.0],
@@ -1678,15 +1679,15 @@ class TestMakeSubplots(TestCase):
         fig = tls.make_subplots(rows=2, cols=2,
                                 insets=[{'cell': (2, 2), 'l': 0.7, 'w': 0.2,
                                          'b': 0.2, 'h': 0.5}])
-        self.assertEqual(fig, expected)
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_insets_bottom_left(self):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.0, 0.45],
-                    anchor='y1'
+                    anchor='y'
                 ),
                 xaxis2=XAxis(
                     domain=[0.55, 1.0],
@@ -1704,9 +1705,9 @@ class TestMakeSubplots(TestCase):
                     domain=[0.865, 0.955],
                     anchor='y5'
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.0, 0.425],
-                    anchor='x1'
+                    anchor='x'
                 ),
                 yaxis2=YAxis(
                     domain=[0.0, 0.425],
@@ -1730,15 +1731,15 @@ class TestMakeSubplots(TestCase):
                                 insets=[{'cell': (2, 2), 'l': 0.7, 'w': 0.2,
                                          'b': 0.2, 'h': 0.5}],
                                 start_cell='bottom-left')
-        self.assertEqual(fig, expected)
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_insets_multiple(self):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.0, 1.0],
-                    anchor='y1'
+                    anchor='y'
                 ),
                 xaxis2=XAxis(
                     domain=[0.0, 1.0],
@@ -1752,9 +1753,9 @@ class TestMakeSubplots(TestCase):
                     domain=[0.8, 1.0],
                     anchor='y4'
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.575, 1.0],
-                    anchor='x1'
+                    anchor='x'
                 ),
                 yaxis2=YAxis(
                     domain=[0.0, 0.425],
@@ -1772,15 +1773,15 @@ class TestMakeSubplots(TestCase):
         )
         fig = tls.make_subplots(rows=2, insets=[{'cell': (1, 1), 'l': 0.8},
                                                 {'cell': (2, 1), 'l': 0.8}])
-        self.assertEqual(fig, expected)
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_insets_multiple_bottom_left(self):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.0, 1.0],
-                    anchor='y1'
+                    anchor='y'
                 ),
                 xaxis2=XAxis(
                     domain=[0.0, 1.0],
@@ -1794,9 +1795,9 @@ class TestMakeSubplots(TestCase):
                     domain=[0.8, 1.0],
                     anchor='y4'
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.0, 0.425],
-                    anchor='x1'
+                    anchor='x'
                 ),
                 yaxis2=YAxis(
                     domain=[0.575, 1.0],
@@ -1816,7 +1817,7 @@ class TestMakeSubplots(TestCase):
                                 insets=[{'cell': (1, 1), 'l': 0.8},
                                         {'cell': (2, 1), 'l': 0.8}],
                                 start_cell='bottom-left')
-        self.assertEqual(fig, expected)
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_subplot_titles_2x1(self):
         # make a title for each subplot when the layout is 2 rows and 1 column
@@ -1847,17 +1848,17 @@ class TestMakeSubplots(TestCase):
                         yanchor='bottom'
                     )
                 ]),
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.0, 1.0],
-                    anchor='y1'
+                    anchor='y'
                 ),
                 xaxis2=XAxis(
                     domain=[0.0, 1.0],
                     anchor='y2'
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.625, 1.0],
-                    anchor='x1'
+                    anchor='x'
                 ),
                 yaxis2=YAxis(
                     domain=[0.0, 0.375],
@@ -1866,7 +1867,7 @@ class TestMakeSubplots(TestCase):
             )
         )
         fig = tls.make_subplots(rows=2, subplot_titles=('Title 1', 'Title 2'))
-        self.assertEqual(fig, expected)
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_subplot_titles_1x3(self):
         # make a title for each subplot when the layout is 1 row and 3 columns
@@ -1908,9 +1909,9 @@ class TestMakeSubplots(TestCase):
                         yanchor='bottom'
                     )
                 ]),
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.0, 0.2888888888888889],
-                    anchor='y1'
+                    anchor='y'
                 ),
                 xaxis2=XAxis(
                     domain=[0.35555555555555557, 0.6444444444444445],
@@ -1920,9 +1921,9 @@ class TestMakeSubplots(TestCase):
                     domain=[0.7111111111111111, 1.0],
                     anchor='y3'
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.0, 1.0],
-                    anchor='x1'
+                    anchor='x'
                 ),
                 yaxis2=YAxis(
                     domain=[0.0, 1.0],
@@ -1936,7 +1937,7 @@ class TestMakeSubplots(TestCase):
         )
         fig = tls.make_subplots(cols=3,
                                 subplot_titles=('Title 1', 'Title 2', 'Title 3'))
-        self.assertEqual(fig, expected)
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_subplot_titles_shared_axes(self):
         # make a title for each subplot when the layout is 1 row and 3 columns
@@ -1989,7 +1990,7 @@ class TestMakeSubplots(TestCase):
                         yanchor='bottom'
                     )
                 ]),
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.0, 0.45],
                     anchor='y2'
                 ),
@@ -1998,14 +1999,14 @@ class TestMakeSubplots(TestCase):
                     anchor='free',
                     position=0.0
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.625, 1.0],
                     anchor='free',
                     position=0.0
                 ),
                 yaxis2=YAxis(
                     domain=[0.0, 0.375],
-                    anchor='x1'
+                    anchor='x'
                 )
             )
         )
@@ -2013,7 +2014,7 @@ class TestMakeSubplots(TestCase):
                                 subplot_titles=('Title 1', 'Title 2',
                                                 'Title 3', 'Title 4'),
                                 shared_xaxes=True, shared_yaxes=True)
-        self.assertEqual(fig, expected)
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
 
     def test_subplot_titles_irregular_layout(self):
@@ -2056,9 +2057,9 @@ class TestMakeSubplots(TestCase):
                         yanchor='bottom'
                     )
                 ]),
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.0, 0.45],
-                    anchor='y1'
+                    anchor='y'
                 ),
                 xaxis2=XAxis(
                     domain=[0.55, 1.0],
@@ -2068,9 +2069,9 @@ class TestMakeSubplots(TestCase):
                     domain=[0.0, 1.0],
                     anchor='y3'
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.625, 1.0],
-                    anchor='x1'
+                    anchor='x'
                 ),
                 yaxis2=YAxis(
                     domain=[0.625, 1.0],
@@ -2085,7 +2086,7 @@ class TestMakeSubplots(TestCase):
         fig = tls.make_subplots(rows=2, cols=2,
                                 subplot_titles=('Title 1', 'Title 2', 'Title 3'),
                                 specs=[[{}, {}], [{'colspan': 2}, None]])
-        self.assertEqual(fig, expected)
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_subplot_titles_insets(self):
         # This should make a title for the inset plot
@@ -2106,17 +2107,17 @@ class TestMakeSubplots(TestCase):
                         yanchor='bottom'
                     )
                 ]),
-                xaxis1=XAxis(
+                xaxis=XAxis(
                     domain=[0.0, 1.0],
-                    anchor='y1'
+                    anchor='y'
                 ),
                 xaxis2=XAxis(
                     domain=[0.7, 1.0],
                     anchor='y2'
                 ),
-                yaxis1=YAxis(
+                yaxis=YAxis(
                     domain=[0.0, 1.0],
-                    anchor='x1'
+                    anchor='x'
                 ),
                 yaxis2=YAxis(
                     domain=[0.3, 1.0],
