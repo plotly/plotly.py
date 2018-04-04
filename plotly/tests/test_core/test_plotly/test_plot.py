@@ -11,7 +11,6 @@ import requests
 import six
 from requests.compat import json as _json
 
-from mock import patch
 from nose.plugins.attrib import attr
 
 import plotly.tools as tls
@@ -20,6 +19,14 @@ from plotly.tests.utils import PlotlyTestCase
 from plotly.plotly import plotly as py
 from plotly.exceptions import PlotlyError, PlotlyEmptyDataError
 from plotly.files import CONFIG_FILE
+
+import sys
+
+# import from mock
+if sys.version_info.major == 3 and sys.version_info.minor >= 3:
+    from unittest.mock import patch
+else:
+    from mock import patch
 
 
 class TestPlot(PlotlyTestCase):
@@ -56,7 +63,7 @@ class TestPlot(PlotlyTestCase):
                 }
             ]
         }
-        with self.assertRaises(PlotlyError):
+        with self.assertRaises(ValueError):
             py.plot(fig, auto_open=False, filename='plot_invalid')
 
     def test_plot_invalid_args_1(self):
@@ -65,7 +72,7 @@ class TestPlot(PlotlyTestCase):
                     filename='plot_invalid')
 
     def test_plot_invalid_args_2(self):
-        with self.assertRaises(PlotlyError):
+        with self.assertRaises(ValueError):
             py.plot([1, 2, 3], [2, 1, 2], auto_open=False,
                     filename='plot_invalid')
 
