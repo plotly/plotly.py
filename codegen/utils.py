@@ -462,6 +462,17 @@ class PlotlyNode:
             return 'literal'
 
     @property
+    def is_array_ok(self) -> bool:
+        """
+        Return true if arrays of datatype are acceptable
+
+        Returns
+        -------
+        bool
+        """
+        return self.node_data.get('arrayOk', False)
+
+    @property
     def is_compound(self) -> bool:
         """
         Node has a compound (in contrast to simple) datatype.

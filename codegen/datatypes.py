@@ -21,14 +21,18 @@ def get_typing_type(plotly_type, array_ok=False):
     str
         Python type string
     """
-    if plotly_type in ('data_array', 'info_array', 'colorlist'):
-        pytype = 'List'
+    if plotly_type == 'data_array':
+        pytype = 'numpy.ndarray'
+    elif plotly_type == 'info_array':
+        pytype = 'list'
+    elif plotly_type == 'colorlist':
+        pytype = 'list'
     elif plotly_type in ('string', 'color', 'colorscale', 'subplotid'):
         pytype = 'str'
     elif plotly_type in ('enumerated', 'flaglist', 'any'):
         pytype = 'Any'
     elif plotly_type in ('number', 'angle'):
-        pytype = 'Number'
+        pytype = 'int|float'
     elif plotly_type == 'integer':
         pytype = 'int'
     elif plotly_type == 'boolean':
@@ -37,7 +41,7 @@ def get_typing_type(plotly_type, array_ok=False):
         raise ValueError('Unknown plotly type: %s' % plotly_type)
 
     if array_ok:
-        return f'Union[{pytype}, List[{pytype}]]'
+        return f'{pytype}|numpy.ndarray'
     else:
         return pytype
 
@@ -85,14 +89,6 @@ def build_datatype_py(node):
         f'from plotly.validators{node.parent_dotpath_str} import '
         f'{undercase} as v_{undercase}\n')
 
-    # ### Import type's graph_objs package with rename ###
-    # If type has any compound children, then import that package that
-    # holds them
-    if node.child_compound_datatypes:
-        buffer.write(
-            f'from plotly.graph_objs{node.parent_dotpath_str} import '
-            f'{undercase} as d_{undercase}\n')
-
     # Write class definition
     # ----------------------
     buffer.write(f"""
@@ -104,13 +100,16 @@ class {datatype_class}({node.name_base_datatype}):\n""")
 
     subtype_nodes = child_datatype_nodes
     for subtype_node in subtype_nodes:
-        sub_datatype_class = subtype_node.name_datatype_class
         if subtype_node.is_array_element:
-            prop_type = f'Tuple[d_{undercase}.{sub_datatype_class}]'
+            prop_type = (f"tuple[plotly.graph_objs{node.dotpath_str}." +
+                         f"{subtype_node.name_datatype_class}]")
+
         elif subtype_node.is_compound:
-            prop_type = f'd_{undercase}.{sub_datatype_class}'
+            prop_type = (f"plotly.graph_objs{node.dotpath_str}." +
+                         f"{subtype_node.name_datatype_class}")
         else:
-            prop_type = get_typing_type(subtype_node.datatype)
+            prop_type = get_typing_type(
+                subtype_node.datatype, subtype_node.is_array_ok)
 
         # #### Get property description ####
         raw_description = subtype_node.description
@@ -142,9 +141,13 @@ class {datatype_class}({node.name_base_datatype}):\n""")
     # {subtype_node.name_property}
     # {'-' * len(subtype_node.name_property)}
     @property
-    def {subtype_node.name_property}(self) -> {prop_type}:
+    def {subtype_node.name_property}(self):
         \"\"\"
 {property_docstring}
+
+        Returns
+        -------
+        {prop_type}
         \"\"\"
         return self['{subtype_node.name_property}']""")
 
