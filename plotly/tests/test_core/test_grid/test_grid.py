@@ -123,7 +123,7 @@ class GridTest(PlotlyTestCase):
         c1 = Column([1, 2, 3, 4], 'first column')
         c2 = Column(['a', 'b', 'c', 'd'], 'second column')
         g = Grid([c1, c2])
-        with self.assertRaises(InputError):
+        with self.assertRaises(ValueError):
             Scatter(xsrc=g[0], ysrc=g[1])
 
     def test_column_append_of_non_uploaded_grid(self):
