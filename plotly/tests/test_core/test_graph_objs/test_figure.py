@@ -16,7 +16,7 @@ class FigureTest(TestCase):
             'frames': []
         }
 
-        Figure(**native_figure)
+        Figure(native_figure)
         Figure()
 
     def test_access_top_level(self):
