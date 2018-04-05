@@ -3,31 +3,75 @@ import re
 import typing as typ
 from contextlib import contextmanager
 from copy import deepcopy
-from pprint import pprint
+from typing import Dict, Tuple, Union, Callable, List
 
 import numpy as np
-from plotly.offline import plot as plotlypy_plot
 from traitlets import Undefined
 
+import plotly.offline as pyo
+from _plotly_utils.basevalidators import (
+    CompoundValidator, CompoundArrayValidator, BaseDataValidator,
+    BaseValidator)
 from plotly import animation
-from plotly.callbacks import Points, BoxSelector, LassoSelector, InputDeviceState
-
-from _plotly_utils.basevalidators import (CompoundValidator,
-                                          CompoundArrayValidator,
-                                          BaseDataValidator)
+from plotly.callbacks import (Points, BoxSelector, LassoSelector,
+                              InputDeviceState)
+from plotly.validators import (DataValidator, LayoutValidator, FramesValidator)
 
 
 class BaseFigure:
+    """
+    Base class for all figure types (both widget and non-widget)
+    """
 
     # Constructor
     # -----------
     def __init__(self, data=None, layout_plotly=None, frames=None):
+        """
+        Construct a BaseFigure object
+
+        Parameters
+        ----------
+        data
+            One of:
+            - A list or tuple of trace objects (or dicts that can be coerced
+            into trace objects)
+
+            - If `data` is a dict that contains a 'data',
+            'layout', or 'frames' key then these values are used to
+            construct the figure.
+
+            - If `data` is a `BaseFigure` instance then the `data`, `layout`,
+            and `frames` properties are extracted from the input figure
+        layout_plotly
+            The plotly layout dict.
+
+            Note: this property is named `layout_plotly` rather than `layout`
+            to deconflict it with the `layout` constructor parameter of the
+            `widgets.DOMWidget` ipywidgets class, as the `BaseFigureWidget`
+            class is a subclass of both BaseFigure and widgets.DOMWidget.
+
+            If the `data` property is a BaseFigure instance, or a dict that
+            contains a 'layout' key, then this property is ignored.
+        frames
+            A list or tuple of `plotly.graph_objs.Frame` objects (or dicts
+            that can be coerced into Frame objects)
+
+            If the `data` property is a BaseFigure instance, or a dict that
+            contains a 'frames' key, then this property is ignored.
+        """
         super().__init__()
 
+        # Assign layout_plotly to layout
+        # ------------------------------
+        # See docstring note for explanation
         layout = layout_plotly
 
-        # Subplots
-        # --------
+        # Subplot properties
+        # ------------------
+        # These properties are used by the tools.make_subplots logic.
+        # We initialize them to None here, before checking if the input data
+        # object is a BaseFigure, in which case we bring over the _grid*
+        # properties of the input BaseFigure
         self._grid_str = None
         self._grid_ref = None
 
@@ -41,90 +85,113 @@ class BaseFigure:
             # Extract data, layout, and frames
             data, layout, frames = data.data, data.layout, data.frames
 
-        elif (isinstance(data, dict) and
-              ('data' in data or 'layout' in data or 'frames' in data)):
+        elif (isinstance(data, dict)
+              and ('data' in data or 'layout' in data or 'frames' in data)):
             data, layout, frames = (data.get('data', None),
                                     data.get('layout', None),
                                     data.get('frames', None))
 
-
-        # Traces
-        # ------
-        from plotly.validators import DataValidator
+        # Handle data (traces)
+        # --------------------
+        # ### Construct data validator ###
+        # This is the validator that handles importing sequences of trace
+        # objects
         self._data_validator = DataValidator()
 
-        if data is None:
-            self._data_objs = ()  # type: typ.Tuple[BaseTraceType]
-            self._data_defaults = []
-            self._data = []
-        else:
-            data = self._data_validator.validate_coerce(data)
+        # ### Import traces ###
+        data = self._data_validator.validate_coerce(data)
 
-            self._data_objs = data
-            self._data_defaults = [{} for trace in data]
-            self._data = [deepcopy(trace._props) for trace in data]
-            for trace in data:
-                trace._orphan_props.clear()
-                trace._parent = self
+        # ### Save tuple of trace objects ###
+        self._data_objs = data
+
+        # ### Import clone of trace properties ###
+        # The _data property is a list of dicts containing the properties
+        # explicitly set by the user for each trace.
+        self._data = [deepcopy(trace._props) for trace in data]
+
+        # ### Create data defaults ###
+        # _data_defaults is a tuple of dicts, one for each trace. When
+        # running in a widget context, these defaults are populated with
+        # all property values chosen by the Plotly.js library that
+        # aren't explicitly specified by the user.
+        #
+        # Note: No property should exist in both the _data and
+        # _data_defaults for the same trace.
+        self._data_defaults = [{} for _ in data]
+
+        # ### Reparent trace objects ###
+        for trace in data:
+            # By setting the trace's parent to be this figure, we tell the
+            # trace object to use the figure's _data and _data_defaults
+            # dicts to get/set it's properties, rather than using the trace
+            # object's internal _orphan_props dict.
+            trace._parent = self
+
+            # We clear the orphan props since the trace no longer needs then
+            trace._orphan_props.clear()
 
         # Layout
         # ------
-        from plotly.validators import LayoutValidator
+        # ### Construct layout validator ###
+        # This is the validator that handles importing Layout objects
         self._layout_validator = LayoutValidator()
 
-        from plotly.graph_objs import Layout
+        # ### Import Layout ###
+        self._layout_obj = self._layout_validator.validate_coerce(layout)
 
-        if layout is None:
-            layout = Layout()  # type: Layout
-        else:
-            layout = self._layout_validator.validate_coerce(layout)
-
-        self._layout_obj = layout
+        # ### Import clone of layout properties ###
         self._layout = deepcopy(self._layout_obj._props)
-        self._layout_obj._parent = self
+
+        # ### Initialize layout defaults dict ###
         self._layout_defaults = {}
+
+        # ### Reparent layout object ###
+        self._layout_obj._orphan_props.clear()
+        self._layout_obj._parent = self
 
         # Frames
         # ------
-        from plotly.validators import FramesValidator
+
+        # ### Construct frames validator ###
+        # This is the validator that handles importing sequences of frame
+        # objects
         self._frames_validator = FramesValidator()
 
-        if frames:
-            self._frame_objs = self._frames_validator.validate_coerce(frames)
-        else:
-            self._frame_objs = ()
+        # ### Import frames ###
+        self._frame_objs = self._frames_validator.validate_coerce(frames)
 
-        # Message States
-        # --------------
-        self._layout_edit_in_process = False
-        self._waiting_relayout_callbacks = []
-        self._last_layout_edit_id = 0
-
-        self._trace_edit_in_process = False
-        self._waiting_restyle_callbacks = []
-        self._last_trace_edit_id = 0
-
-        # View count
-        # ----------
-        self._view_count = 0
+        # Note: Because frames are not currently supported in the widget
+        # context, we don't need to follow the pattern above and create
+        # _frames and _frame_defaults properties and then reparent the
+        # frames. The figure doesn't need to be notified of
+        # changes to the properties in the frames object hierarchy.
 
         # Context manager
         # ---------------
+
+        # ### batch mode indicator ###
+        # Flag that indicates whether we're currently inside a batch_*()
+        # context
         self._in_batch_mode = False
-        self._batch_style_commands = {}  # type: typ.Dict[int, typ.Dict[str, typ.Any]]
-        self._batch_layout_commands = {}  # type: typ.Dict[str, typ.Any]
+
+        # ### Batch trace edits ###
+        # Dict from trace indexes to trace edit dicts. These trace edit dicts
+        # are suitable as `data` elements of Plotly.animate, but not
+        # the Plotly.update (See `_build_update_params_from_batch`)
+        #
+        # type: typ.Dict[int, typ.Dict[str, typ.Any]]
+        self._batch_trace_edits = {}
+
+        # ### Batch layout edits ###
+        # Dict from layout properties to new layout values. This dict is
+        # directly suitable for use in Plotly.animate and Plotly.update
+        # type: typ.Dict[str, typ.Any]
+        self._batch_layout_edits = {}
+
+        # Animation property validators
+        # -----------------------------
         self._animation_duration_validator = animation.DurationValidator()
         self._animation_easing_validator = animation.EasingValidator()
-
-        # SVG
-        # ---
-        self._svg_requests = {}
-
-        # Logging
-        # -------
-        self._log_plotly_commands = False
-
-
 
     # Magic Methods
     # -------------
@@ -163,36 +230,609 @@ class BaseFigure:
 
             # Use _vals_equal instead of `==` to handle cases where
             # underlying dicts contain numpy arrays
-            return BasePlotlyType._vals_equal(
-                self.to_plotly_json(),
-                other.to_plotly_json())
+            return BasePlotlyType._vals_equal(self.to_plotly_json(),
+                                              other.to_plotly_json())
 
-    def update(self, dict1=None, **dict2):
+    def update(self, dict1=None, **kwargs):
         """
-        Update properties of object with dict1 and then dict2.
+        Update the properties of the figure with a dict and/or with
+        keyword arguments.
 
-        This recursively updates the structure of the original
-        object with the new entries in the second and third objects. This
-        allows users to update with large, nested structures.
-
-        Note, because the dict2 packs up all the keyword arguments, you can
-        specify the changes as a list of keyword agruments.
+        This recursively updates the structure of the figure
+        object with the values in the input dict / keyword arguments.
 
         Parameters
         ----------
         dict1 : dict
             Dictionary of properties to be updated
-        dict2 :
+        kwargs :
+            Keyword/value pair of properties to be updated
+
+        Examples
+        --------
+        >>> import plotly.graph_objs as go
+        >>> fig = go.Figure(data=[{'y': [1, 2, 3]}])
+        >>> fig.update(data=[{'y': [4, 5, 6]}])
+        >>> fig.to_plotly_json()
+            {'data': [{'type': 'scatter',
+               'uid': 'e86a7c7a-346a-11e8-8aa8-a0999b0c017b',
+               'y': array([4, 5, 6], dtype=int32)}],
+             'layout': {}}
+
+        >>> fig = go.Figure(layout={'xaxis':
+        ...                         {'color': 'green',
+        ...                          'range': [0, 1]}})
+        >>> fig.update({'layout': {'xaxis': {'color': 'pink'}}})
+        >>> fig.to_plotly_json()
+            {'data': [],
+             'layout': {'xaxis':
+                        {'color': 'pink',
+                         'range': [0, 1]}}}
+
+        Returns
+        -------
+        BaseFigure
+            Updated figure
+        """
+        with self.batch_update():
+            for d in [dict1, kwargs]:
+                if d:
+                    for k, v in d.items():
+                        BaseFigure._perform_update(self[k], v)
+
+        return self
+
+    # Data
+    # ----
+    @property
+    def data(self):
+        """
+        The `data` property is a tuple of the figure's trace objects
+
+        Returns
+        -------
+        tuple[BaseTraceType]
+        """
+        return self._data_objs
+
+    @data.setter
+    def data(self, new_data):
+
+        # Validate new_data
+        # -----------------
+        err_header = ('The data property of a figure may only be assigned '
+                      'a list or tuple that contains a permutation of a '
+                      'subset of itself\n')
+
+        # ### Check valid input type ###
+        if not isinstance(new_data, (list, tuple)):
+            err_msg = (err_header + '    Received value with type {typ}'
+                       .format(typ=type(new_data)))
+            raise ValueError(err_msg)
+
+        # ### Check valid element types ###
+        for trace in new_data:
+            if not isinstance(trace, BaseTraceType):
+                err_msg = (
+                    err_header + '    Received element value of type {typ}'
+                    .format(typ=type(trace)))
+                raise ValueError(err_msg)
+
+        # ### Check UIDs ###
+        # Require that no new uids are introduced
+        orig_uids = [_trace['uid'] for _trace in self._data]
+        new_uids = [trace.uid for trace in new_data]
+
+        invalid_uids = set(new_uids).difference(set(orig_uids))
+        if invalid_uids:
+            err_msg = (
+                err_header + '    Invalid trace(s) with uid(s): {invalid_uids}'
+                .format(invalid_uids=invalid_uids))
+
+            raise ValueError(err_msg)
+
+        # ### Check for duplicates in assignment ###
+        uid_counter = collections.Counter(new_uids)
+        duplicate_uids = [
+            uid for uid, count in uid_counter.items() if count > 1
+        ]
+        if duplicate_uids:
+            err_msg = (
+                err_header + '    Received duplicated traces with uid(s): ' +
+                '{duplicate_uids}'.format(duplicate_uids=duplicate_uids))
+
+            raise ValueError(err_msg)
+
+        # Remove traces
+        # -------------
+        remove_uids = set(orig_uids).difference(set(new_uids))
+        delete_inds = []
+
+        # ### Unparent removed traces ###
+        for i, _trace in enumerate(self._data):
+            if _trace['uid'] in remove_uids:
+                delete_inds.append(i)
+
+                # Unparent trace object to be removed
+                old_trace = self.data[i]
+                old_trace._orphan_props.update(deepcopy(old_trace._props))
+                old_trace._parent = None
+
+        # ### Compute trace props / defaults after removal ###
+        traces_props_post_removal = [t for t in self._data]
+        traces_prop_defaults_post_removal = [t for t in self._data_defaults]
+        uids_post_removal = [trace_data['uid'] for trace_data in self._data]
+
+        for i in reversed(delete_inds):
+            del traces_props_post_removal[i]
+            del traces_prop_defaults_post_removal[i]
+            del uids_post_removal[i]
+
+        if delete_inds:
+            # Update widget, if any
+            self._send_deleteTraces_msg(delete_inds)
+
+        # Move traces
+        # -----------
+
+        # ### Compute new index for each remaining trace ###
+        new_inds = []
+        for uid in uids_post_removal:
+            new_inds.append(new_uids.index(uid))
+
+        # ### Compute current index for each remaining trace ###
+        current_inds = list(range(len(traces_props_post_removal)))
+
+        # ### Check whether a move is needed ###
+        if not all([i1 == i2 for i1, i2 in zip(new_inds, current_inds)]):
+
+            # #### Update widget, if any ####
+            self._send_moveTraces_msg(current_inds, new_inds)
+
+            # #### Reorder trace elements ####
+            # We do so in-place so we don't trigger traitlet property
+            # serialization for the FigureWidget case
+            # ##### Remove by curr_inds in reverse order #####
+            moving_traces_data = []
+            for ci in reversed(current_inds):
+                # Push moving traces data to front of list
+                moving_traces_data.insert(0, self._data[ci])
+                del self._data[ci]
+
+            # #### Sort new_inds and moving_traces_data by new_inds ####
+            new_inds, moving_traces_data = zip(
+                *sorted(zip(new_inds, moving_traces_data)))
+
+            # #### Insert by new_inds in forward order ####
+            for ni, trace_data in zip(new_inds, moving_traces_data):
+                self._data.insert(ni, trace_data)
+
+        # ### Update data defaults ###
+        # There is to front-end syncronization to worry about so this
+        # operations doesn't need to be in-place
+        self._data_defaults = [
+            _trace for i, _trace in sorted(
+                zip(new_inds, traces_prop_defaults_post_removal))
+        ]
+
+        # Update trace objects tuple
+        self._data_objs = tuple(new_data)
+
+    # Restyle
+    # -------
+    def plotly_restyle(self, restyle_data, trace_indexes=None, **kwargs):
+        """
+        Perform a Plotly restyle operation on the figure's traces
+
+        Note: This operation both mutates and returns the figure
+
+        Parameters
+        ----------
+        restyle_data : dict
+            Dict of trace style updates.
+
+            Keys are strings that specify the properties to be updated.
+            Nested properties are expressed by joining successive keys on
+            '.' characters (e.g. 'marker.color').
+
+            Values may be scalars or lists. When values are scalars,
+            that scalar value is applied to all traces specified by the
+            `trace_indexes` parameter.  When values are lists,
+            the restyle operation will cycle through the elements
+            of the list as it cycles through the traces specified by the
+            `trace_indexes` parameter.
+
+            Caution: To use plotly_restyle to update a list property (e.g.
+            the `x` property of the scatter trace), the property value
+            should be a scalar list containing the list to update with. For
+            example, the following command would be used to update the 'x'
+            property of the first trace to the list [1, 2, 3]
+
+            >>> fig.plotly_restyle({'x': [[1, 2, 3]]}, 0)
+
+        trace_indexes : int or list of int
+            Trace index, or list of trace indexes, that the restyle operation
+            applies to. Defaults to all trace indexes.
+
+        Returns
+        -------
+        BaseFigure
+            The updated figure
+        """
+
+        # Normalize trace indexes
+        # -----------------------
+        trace_indexes = self._normalize_trace_indexes(trace_indexes)
+
+        # Handle source_view_id
+        # ---------------------
+        # If not None, the source_view_id is the UID of the frontend
+        # Plotly.js view that initially triggered this restyle operation
+        # (e.g. the user clicked on the legend to hide a trace). We pass
+        # this UID along so that the frontend views can determine whether
+        # they need to apply the restyle operation on themselves.
+        source_view_id = kwargs.get('source_view_id', None)
+
+        # Perform restyle on trace dicts
+        # ------------------------------
+        restyle_changes = self._perform_plotly_restyle(restyle_data, trace_indexes)
+        if restyle_changes:
+            # The restyle operation resulted in a change to some trace
+            # properties, so we dispatch change callbacks and send the
+            # restyle message to the frontend (if any)
+            self._dispatch_change_callbacks_restyle(
+                restyle_changes, trace_indexes)
+            self._send_restyle_msg(
+                restyle_changes,
+                trace_indexes=trace_indexes,
+                source_view_id=source_view_id)
+
+        return self
+
+    def _perform_plotly_restyle(self, restyle_data, trace_indexes):
+        """
+        Perform a restyle operation on the figure's traces data and return
+        the changes that were applied
+
+        Parameters
+        ----------
+        restyle_data : dict[str, any]
+            See docstring for plotly_restyle
+        trace_indexes : list[int]
+            List of trace indexes that restyle operation applies to
+        Returns
+        -------
+        restyle_changes: dict[str, any]
+            Subset of restyle_data including only the keys / values that
+            resulted in a change to the figure's traces data
+        """
+        # Initialize restyle changes
+        # --------------------------
+        # This will be a subset of the restyle_data including only the
+        # keys / values that are changed in the figure's trace data
+        restyle_changes = {}
+
+        # Process each key
+        # ----------------
+        for key_path_str, v in restyle_data.items():
+
+            # Track whether any of the new values are cause a change in
+            # self._data
+            any_vals_changed = False
+            for i, trace_ind in enumerate(trace_indexes):
+                if trace_ind >= len(self._data):
+                    raise ValueError(
+                        'Trace index {trace_ind} out of range'.format(
+                            trace_ind=trace_ind))
+
+                # Get new value for this particular trace
+                trace_v = v[i % len(v)] if isinstance(v, list) else v
+
+                # Apply set operation for this trace and thist value
+                val_changed = BaseFigure._set_in(self._data[trace_ind],
+                                                 key_path_str,
+                                                 trace_v)
+
+                # Update any_vals_changed status
+                any_vals_changed = (any_vals_changed or val_changed)
+
+            if any_vals_changed:
+                # At lease one of the values for one of the traces has
+                # changed for the current key_path_str.
+                restyle_changes[key_path_str] = v
+
+        return restyle_changes
+
+    def _restyle_child(self, child, key_path_str, val):
+        """
+        Process restyle operation on a child trace object
+
+        Note: This method name/signature must match the one in
+        BasePlotlyType. BasePlotlyType objects call their parent's
+        _restyle_child method without knowing whether their parent is a
+        BasePlotlyType or a BaseFigure.
+
+        Parameters
+        ----------
+        child : BaseTraceType
+            Child being restyled
+        key_path_str : str
+            A key path string (e.g. 'foo.bar[0]')
+        val
+            Restyle value
 
         Returns
         -------
         None
         """
-        with self.batch_update():
-            for d in [dict1, dict2]:
-                if d:
-                    for k, v in d.items():
-                        BaseFigure._perform_update(self[k], v)
+
+        # Compute trace index
+        # -------------------
+        trace_index = BaseFigure._index_is(self.data, child)
+
+        # Not in batch mode
+        # -----------------
+        # Dispatch change callbacks and send restyle message
+        if not self._in_batch_mode:
+            send_val = [val]
+            restyle = {key_path_str: send_val}
+            self._dispatch_change_callbacks_restyle(restyle, [trace_index])
+            self._send_restyle_msg(restyle, trace_indexes=trace_index)
+
+        # In batch mode
+        # -------------
+        # Add key_path_str/val to saved batch edits
+        else:
+            if trace_index not in self._batch_trace_edits:
+                self._batch_trace_edits[trace_index] = {}
+            self._batch_trace_edits[trace_index][key_path_str] = val
+
+    def _normalize_trace_indexes(self, trace_indexes):
+        """
+        Input trace index specification and return list of the specified trace
+        indexes
+
+        Parameters
+        ----------
+        trace_indexes : None or int or list[int]
+
+        Returns
+        -------
+        list[int]
+        """
+        if trace_indexes is None:
+            trace_indexes = list(range(len(self.data)))
+        if not isinstance(trace_indexes, (list, tuple)):
+            trace_indexes = [trace_indexes]
+        return list(trace_indexes)
+
+    @staticmethod
+    def _str_to_dict_path(key_path_str):
+        """
+        Convert a key path string into a tuple of key path elements
+
+        Parameters
+        ----------
+        key_path_str : str
+            Key path string, where nested keys are joined on '.' characters
+            and array indexes are specified using brackets
+            (e.g. 'foo.bar[1]')
+        Returns
+        -------
+        tuple[str | int]
+        """
+        if isinstance(key_path_str, tuple):
+            # Nothing to do
+            return key_path_str
+        else:
+            # Split string on periods. e.g. 'foo.bar[1]' -> ['foo', 'bar[1]']
+            key_path = key_path_str.split('.')
+
+            # Split out bracket indexes.
+            # e.g. ['foo', 'bar[1]'] -> ['foo', 'bar', '1']
+            bracket_re = re.compile('(.*)\[(\d+)\]')
+            key_path2 = []
+            for key in key_path:
+                match = bracket_re.fullmatch(key)
+                if match:
+                    key_path2.extend(match.groups())
+                else:
+                    key_path2.append(key)
+
+            # Convert elements to ints if possible.
+            # e.g. ['foo', 'bar', '0'] -> ['foo', 'bar', 0]
+            for i in range(len(key_path2)):
+                try:
+                    key_path2[i] = int(key_path2[i])
+                except ValueError as _:
+                    pass
+
+            return tuple(key_path2)
+
+    @staticmethod
+    def _set_in(d, key_path_str, v):
+        """
+        Set a value in a nested dict using a key path string
+        (e.g. 'foo.bar[0]')
+
+        Parameters
+        ----------
+        d : dict
+            Input dict to set property in
+        key_path_str : str
+            Key path string, where nested keys are joined on '.' characters
+            and array indexes are specified using brackets
+            (e.g. 'foo.bar[1]')
+        v
+            New value
+        Returns
+        -------
+        bool
+            True if set resulted in modification of dict (i.e. v was not
+            already present at the specified location), False otherwise.
+        """
+
+        # Validate inputs
+        # ---------------
+        assert isinstance(d, dict)
+
+        # Compute key path
+        # ----------------
+        # Convert the key_path_str into a tuple of key paths
+        # e.g. 'foo.bar[0]' -> ('foo', 'bar', 0)
+        key_path = BaseFigure._str_to_dict_path(key_path_str)
+
+        # Initialize val_parent
+        # ---------------------
+        # This variable will be assigned to the parent of the next key path
+        # element currently being processed
+        val_parent = d
+
+        # Initialize parent dict or list of value to be assigned
+        # -----------------------------------------------------
+        for kp, key_path_el in enumerate(key_path[:-1]):
+
+            # Extend val_parent list if needed
+            if (isinstance(val_parent, list) and
+                    isinstance(key_path_el, int)):
+                while len(val_parent) <= key_path_el:
+                    val_parent.append(None)
+
+            elif (isinstance(val_parent, dict) and
+                  key_path_el not in val_parent):
+                if isinstance(key_path[kp + 1], int):
+                    val_parent[key_path_el] = []
+                else:
+                    val_parent[key_path_el] = {}
+
+            val_parent = val_parent[key_path_el]
+
+        # Assign value to to final parent dict or list
+        # --------------------------------------------
+        # ### Get reference to final key path element ###
+        last_key = key_path[-1]
+
+        # ### Track whether assignment alters parent ###
+        val_changed = False
+
+        # v is Undefined
+        # --------------
+        # Don't alter val_parent
+        if v is Undefined:
+            pass
+
+        # v is None
+        # ---------
+        # Check whether we can remove key from parent
+        elif v is None:
+            if isinstance(val_parent, dict):
+                if last_key in val_parent:
+                    # Parent is a dict and has last_key as a current key so
+                    # we can pop the key, which alters parent
+                    val_parent.pop(last_key)
+                    val_changed = True
+            elif isinstance(val_parent, list):
+                if (isinstance(last_key, int) and
+                        0 <= last_key < len(val_parent)):
+                    # Parent is a list and last_key is a valid index so we
+                    # can set the element value to None
+                    val_parent[last_key] = None
+                    val_changed = True
+            else:
+                # Unsupported parent type (numpy array for example)
+                raise ValueError("""
+    Cannot remove element of type {typ} at location {raw_key}"""
+                                 .format(typ=type(val_parent),
+                                         raw_key=key_path_str))
+        # v is a valid value
+        # ------------------
+        # Check whether parent should be updated
+        else:
+            if isinstance(val_parent, dict):
+                if (last_key not in val_parent
+                        or not BasePlotlyType._vals_equal(
+                            val_parent[last_key], v)):
+                    # Parent is a dict and does not already contain the
+                    # value v at key last_key
+                    val_parent[last_key] = v
+                    val_changed = True
+            elif isinstance(val_parent, list):
+                if isinstance(last_key, int):
+                    # Extend list with Nones if needed so that last_key is
+                    # in bounds
+                    while len(val_parent) <= last_key:
+                        val_parent.append(None)
+
+                    if not BasePlotlyType._vals_equal(
+                            val_parent[last_key], v):
+                        # Parent is a list and does not already contain the
+                        # value v at index last_key
+                        val_parent[last_key] = v
+                        val_changed = True
+            else:
+                # Unsupported parent type (numpy array for example)
+                raise ValueError("""
+    Cannot set element of type {typ} at location {raw_key}"""
+                                 .format(typ=type(val_parent),
+                                         raw_key=key_path_str))
+        return val_changed
+
+    # Add traces
+    # ----------
+    def add_traces(self, data):
+        """
+        Add one or more traces to the figure
+
+        Parameters
+        ----------
+        data : BaseTraceType or dict or list[BaseTraceType or dict]
+            A trace specification or list of trace specifications to be added.
+            Trace specifications may be either:
+
+              - Instances of trace classes from the plotly.graph_objs
+                package (e.g plotly.graph_objs.Scatter, plotly.graph_objs.Bar)
+              - Dicts where:
+
+                  - The 'type' property specifies the trace type (e.g.
+                    'scatter', 'bar', 'area', etc.). If the dict has no 'type'
+                    property then 'scatter' is assumed.
+                  - All remaining properties are passed to the constructor
+                    of the specified trace type.
+        Returns
+        -------
+        tuple[BaseTraceType]
+            Tuple of the newly added trace(s)
+        """
+
+        if self._in_batch_mode:
+            self._batch_layout_edits.clear()
+            self._batch_trace_edits.clear()
+            raise ValueError('Traces may not be added in a batch context')
+
+        if not isinstance(data, (list, tuple)):
+            data = [data]
+
+        # Validate
+        data = self._data_validator.validate_coerce(data)
+
+        # Make deep copy of trace data (Optimize later if needed)
+        new_traces_data = [deepcopy(trace._props) for trace in data]
+
+        # Update trace parent
+        for trace in data:
+            trace._parent = self
+            trace._orphan_props.clear()
+
+        # Update python side
+        #  Use extend instead of assignment so we don't trigger serialization
+        self._data.extend(new_traces_data)
+        self._data_defaults = self._data_defaults + [{} for _ in data]
+        self._data_objs = self._data_objs + data
+
+        # Update messages
+        self._send_addTraces_msg(new_traces_data)
+
+        return data
 
     # Subplots
     # --------
@@ -209,21 +849,38 @@ class BaseFigure:
 
     def append_trace(self, trace, row, col):
         """
-        Add a trace to your figure bound to axes at the row, col index.
-        The row, col index is generated from figures created with
-        plotly.tools.make_subplots and can be viewed with
-        Figure.print_grid.
+        Add a trace to the figure bound to axes at the specified row,
+        col index.
+
+        A row, col index grid is generated for figures created with
+        plotly.tools.make_subplots, and can be viewed with the `print_grid`
+        method
+
+        Parameters
+        ----------
+        trace
+            The data trace to be bound
+        row: int
+            Subplot row index (see Figure.print_grid)
+        col: int
+            Subplot column index (see Figure.print_grid)
+
         :param (dict) trace: The data trace to be bound.
         :param (int) row: Subplot row index (see Figure.print_grid).
         :param (int) col: Subplot column index (see Figure.print_grid).
-        Example:
+
+        Examples
+        --------
+        >>> from plotly import tools
+        >>> import plotly.graph_objs as go
         # stack two subplots vertically
-        fig = tools.make_subplots(rows=2)
+        >>> fig = tools.make_subplots(rows=2)
         This is the format of your plot grid:
         [ (1,1) x1,y1 ]
         [ (2,1) x2,y2 ]
-        fig.append_trace(Scatter(x=[1,2,3], y=[2,1,2]), 1, 1)
-        fig.append_trace(Scatter(x=[1,2,3], y=[2,1,2]), 2, 1)
+
+        >>> fig.append_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=1, col=1)
+        >>> fig.append_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=2, col=1)
         """
         try:
             grid_ref = self._grid_ref
@@ -258,656 +915,581 @@ class BaseFigure:
                     or yaxis_key not in self['layout']):
                 raise Exception("Something went wrong. "
                                 "An axis object for ({r},{c}) subplot "
-                                "cell got deleted."
-                                .format(r=row, c=col))
+                                "cell got deleted.".format(r=row, c=col))
             trace['xaxis'] = ref[0]
             trace['yaxis'] = ref[1]
 
         self.add_traces([trace])
 
-    # Data
-    # ----
-    @property
-    def data(self) -> typ.Tuple['BaseTraceType']:
-        return self._data_objs
-
-    @data.setter
-    def data(self, new_data):
-
-        err_header = ('The data property of a figure may only be assigned '
-                      'a list or tuple that contains a permutation of a '
-                      'subset of itself\n')
-
-        if not isinstance(new_data, (list, tuple)):
-            err_msg = (err_header +
-                       '    Received value with type {typ}'
-                       .format(typ=type(new_data)))
-            raise ValueError(err_msg)
-
-        for trace in new_data:
-            if not isinstance(trace, BaseTraceType):
-                err_msg = (err_header +
-                           '    Received element value of type {typ}'
-                           .format(typ=type(trace)))
-                raise ValueError(err_msg)
-
-        orig_uids = [_trace['uid'] for _trace in self._data]
-        new_uids = [trace.uid for trace in new_data]
-
-        invalid_uids = set(new_uids).difference(set(orig_uids))
-        if invalid_uids:
-            err_msg = (err_header +
-                       '    Invalid trace(s) with uid(s): {invalid_uids}'
-                       .format(invalid_uids=invalid_uids))
-
-            raise ValueError(err_msg)
-
-        # Check for duplicates
-        uid_counter = collections.Counter(new_uids)
-        duplicate_uids = [uid for uid, count in uid_counter.items() if count > 1]
-        if duplicate_uids:
-            err_msg = (
-                    err_header +
-                    '    Received duplicated traces with uid(s): ' +
-                    '{duplicate_uids}'.format(duplicate_uids=duplicate_uids))
-
-            raise ValueError(err_msg)
-
-        # Compute traces to remove
-        remove_uids = set(orig_uids).difference(set(new_uids))
-        delete_inds = []
-        for i, _trace in enumerate(self._data):
-            if _trace['uid'] in remove_uids:
-                delete_inds.append(i)
-
-                # Unparent trace object to be removed
-                old_trace = self.data[i]
-                old_trace._orphan_props.update(deepcopy(self.data[i]._props))
-                old_trace._parent = None
-
-        # Compute trace data list after removal
-        traces_props_post_removal = [t for t in self._data]
-        traces_prop_defaults_post_removal = [t for t in self._data_defaults]
-        orig_uids_post_removal = [trace_data['uid'] for trace_data in self._data]
-
-        for i in reversed(delete_inds):
-            del traces_props_post_removal[i]
-            del traces_prop_defaults_post_removal[i]
-            del orig_uids_post_removal[i]
-
-        if delete_inds:
-            relayout_msg_id = self._last_layout_edit_id + 1
-            self._last_layout_edit_id = relayout_msg_id
-            self._layout_edit_in_process = True
-
-            for di in reversed(delete_inds):
-                del self._data[di]  # Modify in-place so we don't trigger serialization
-
-            if self._log_plotly_commands:
-                print('Plotly.deleteTraces')
-                pprint(delete_inds, indent=4)
-
-            self._py2js_deleteTraces = {'delete_inds': delete_inds,
-                                        '_relayout_msg_id ': relayout_msg_id}
-            self._py2js_deleteTraces = None
-
-        # Compute move traces
-        new_inds = []
-
-        for uid in orig_uids_post_removal:
-            new_inds.append(new_uids.index(uid))
-
-        current_inds = list(range(len(traces_props_post_removal)))
-
-        if not all([i1 == i2 for i1, i2 in zip(new_inds, current_inds)]):
-
-            move_msg = {
-                'current_trace_inds': current_inds,
-                'new_trace_inds': new_inds
-            }
-
-            self._py2js_moveTraces = move_msg
-            self._py2js_moveTraces = None
-
-            # ### Reorder trace elements ###
-            # We do so in-place so we don't trigger serialization
-            # pprint(self._traces_data)
-
-            # #### Remove by curr_inds in reverse order ####
-            moving_traces_data = []
-            for ci in reversed(current_inds):
-                # Push moving traces data to front of list
-                moving_traces_data.insert(0, self._data[ci])
-                del self._data[ci]
-
-            # #### Sort new_inds and moving_traces_data by new_inds ####
-            new_inds, moving_traces_data = zip(*sorted(zip(new_inds, moving_traces_data)))
-
-            # #### Insert by new_inds in forward order ####
-            for ni, trace_data in zip(new_inds, moving_traces_data):
-                self._data.insert(ni, trace_data)
-
-            # pprint(self._traces_data)
-
-        # Update _traces order
-        self._data_defaults = [_trace for i, _trace in sorted(zip(new_inds, traces_prop_defaults_post_removal))]
-        self._data_objs = tuple(new_data)
-
-    def plotly_restyle(self, style, trace_indexes=None, source_view_id=None):
-        if trace_indexes is None:
-            trace_indexes = list(range(len(self.data)))
-
-        if not isinstance(trace_indexes, (list, tuple)):
-            trace_indexes = [trace_indexes]
-
-        restyle_msg = self._perform_restyle_dict(style, trace_indexes)
-        if restyle_msg:
-            self._dispatch_change_callbacks_restyle(restyle_msg, trace_indexes)
-            self._send_restyle_msg(restyle_msg,
-                                   trace_indexes=trace_indexes,
-                                   source_view_id=source_view_id)
-
-    def _perform_restyle_dict(self, style, trace_indexes):
-        # Make sure trace_indexes is an array
-        if not isinstance(trace_indexes, list):
-            trace_indexes = [trace_indexes]
-
-        restyle_data = {}  # Resytyle data to send to JS side as Plotly.restylePlot()
-
-        for raw_key, v in style.items():
-            # kstr may have periods. e.g. foo.bar
-            key_path = self._str_to_dict_path(raw_key)
-
-            # Properties with leading underscores passed through as-is
-            if raw_key.startswith('_'):
-                restyle_data[raw_key] = v
-                continue
-
-            if not isinstance(v, list):
-                v = [v]
-
-            if isinstance(v, dict):
-                raise ValueError('Restyling objects not supported, only individual properties\n'
-                                 '    Received: {{k}: {v}}'.format(k=raw_key, v=v))
-            else:
-                restyle_msg_vs = []
-                any_vals_changed = False
-                for i, trace_ind in enumerate(trace_indexes):
-                    if trace_ind >= len(self._data):
-                        raise ValueError('Trace index {trace_ind} out of range'.format(trace_ind=trace_ind))
-                    val_parent = self._data[trace_ind]
-                    for kp, key_path_el in enumerate(key_path[:-1]):
-
-                        # Extend val_parent list if needed
-                        if isinstance(val_parent, list) and isinstance(key_path_el, int):
-                            while len(val_parent) <= key_path_el:
-                                val_parent.append(None)
-
-                        elif isinstance(val_parent, dict) and key_path_el not in val_parent:
-                            if isinstance(key_path[kp + 1], int):
-                                val_parent[key_path_el] = []
-                            else:
-                                val_parent[key_path_el] = {}
-
-                        val_parent = val_parent[key_path_el]
-
-                    last_key = key_path[-1]
-
-                    trace_v = v[i % len(v)]
-
-                    restyle_msg_vs.append(trace_v)
-
-                    if BasePlotlyType._vals_equal(trace_v, Undefined):
-                        # Do nothing
-                        pass
-                    elif trace_v is None:
-                        if isinstance(val_parent, dict) and last_key in val_parent:
-                            val_parent.pop(last_key)
-                            any_vals_changed = True
-                    elif isinstance(val_parent, dict):
-                        if last_key not in val_parent or not BasePlotlyType._vals_equal(val_parent[last_key], trace_v):
-                            val_parent[last_key] = trace_v
-                            any_vals_changed = True
-
-                if any_vals_changed:
-                    # At lease one of the values for one of the traces has changed. Update them all
-                    restyle_data[raw_key] = restyle_msg_vs
-
-        return restyle_data
-
-    def _dispatch_change_callbacks_restyle(self, style, trace_indexes):
-        if not isinstance(trace_indexes, list):
-            trace_indexes = [trace_indexes]
-
-        dispatch_plan = {t: {} for t in trace_indexes}
-        # e.g. {0: {(): {'obj': layout,
-        #            'changed_paths': [('xaxis', 'range')]}}}
-
-        for raw_key, v in style.items():
-            key_path = self._str_to_dict_path(raw_key)
-
-            # Test whether we should remove trailing integer in path
-            # e.g. ('xaxis', 'range', '1') -> ('xaxis', 'range')
-            # We only do this if the trailing index is an integer that references a primitive value
-            if isinstance(key_path[-1], int) and not isinstance(v, dict):
-                key_path = key_path[:-1]
-
-            for trace_ind in trace_indexes:
-
-                parent_obj = self.data[trace_ind]
-                key_path_so_far = ()
-                keys_left = key_path
-
-                # Iterate down the key path
-                for next_key in key_path:
-                    if next_key not in parent_obj:
-                        # Not a property
-                        break
-
-                    if isinstance(parent_obj, BasePlotlyType):
-                        if key_path_so_far not in dispatch_plan[trace_ind]:
-                            dispatch_plan[trace_ind][key_path_so_far] = {'obj': parent_obj, 'changed_paths': set()}
-
-                        dispatch_plan[trace_ind][key_path_so_far]['changed_paths'].add(keys_left)
-
-                        next_val = parent_obj[next_key]
-                    elif isinstance(parent_obj, (list, tuple)):
-                        next_val = parent_obj[next_key]
-                    else:
-                        # Primitive value
-                        break
-
-                    key_path_so_far = key_path_so_far + (next_key,)
-                    keys_left = keys_left[1:]
-                    parent_obj = next_val
-
-        # pprint(dispatch_plan)
-        for trace_ind in trace_indexes:
-            for p in dispatch_plan[trace_ind].values():
-                obj = p['obj']
-                changed_paths = p['changed_paths']
-                obj._dispatch_change_callbacks(changed_paths)
-
-    def _send_restyle_msg(self, style,
-                          trace_indexes=None,
-                          source_view_id=None):
-        if not isinstance(trace_indexes, (list, tuple)):
-            trace_indexes = [trace_indexes]
-
-        # Add and update message ids
-        layout_edit_id = self._last_layout_edit_id + 1
-        self._last_layout_edit_id = layout_edit_id
-        self._layout_edit_in_process = True
-
-        trace_edit_id = self._last_trace_edit_id + 1
-        self._last_trace_edit_id = trace_edit_id
-        self._trace_edit_in_process = True
-
-        restyle_msg = {
-            'restyle_data': style,
-            'restyle_traces': trace_indexes,
-            'trace_edit_id': trace_edit_id,
-            'layout_edit_id': layout_edit_id,
-            'source_view_id': source_view_id,
-        }
-
-        self._py2js_restyle = restyle_msg
-        self._py2js_restyle = None
-
-    def _restyle_child(self, child, prop, val):
-
-        trace_index = BaseFigure._index_is(self.data, child)
-
-        if not self._in_batch_mode:
-            send_val = [val]
-            restyle = {prop: send_val}
-            self._dispatch_change_callbacks_restyle(restyle, trace_index)
-            self._send_restyle_msg(restyle, trace_indexes=trace_index)
-        else:
-            if trace_index not in self._batch_style_commands:
-                self._batch_style_commands[trace_index] = {}
-            self._batch_style_commands[trace_index][prop] = val
-
-    def add_traces(self, data: typ.List['BaseTraceType']):
-
-        if self._in_batch_mode:
-            self._batch_layout_commands.clear()
-            self._batch_style_commands.clear()
-            raise ValueError('Traces may not be added in a batch context')
-
-        if not isinstance(data, (list, tuple)):
-            data = [data]
-
-        # Validate
-        data = self._data_validator.validate_coerce(data)
-
-        # Make deep copy of trace data (Optimize later if needed)
-        new_traces_data = [deepcopy(trace._props) for trace in data]
-
-        # Update trace parent
-        for trace in data:
-            trace._parent = self
-            trace._orphan_props.clear()
-
-        # Update python side
-        #  Use extend instead of assignment so we don't trigger serialization
-        self._data.extend(new_traces_data)
-        self._data_defaults = self._data_defaults + [{} for trace in data]
-        self._data_objs = self._data_objs + data
-
-        # Update messages
-        layout_edit_id = self._last_layout_edit_id + 1
-        self._last_layout_edit_id = layout_edit_id
-        self._layout_edit_in_process = True
-
-        trace_edit_id = self._last_trace_edit_id + 1
-        self._last_trace_edit_id = trace_edit_id
-        self._trace_edit_in_process = True
-
-        # Send to front end
-        add_traces_msg = {
-            'trace_data': new_traces_data,
-            'trace_edit_id': trace_edit_id,
-            'layout_edit_id': layout_edit_id
-        }
-
-        self._py2js_addTraces = add_traces_msg
-        self._py2js_addTraces = None
-
-        return data
-
+    # Child property operations
+    # -------------------------
     def _get_child_props(self, child):
+        """
+        Return the properties dict for a child trace or child layout
+
+        Note: this method must match the name/signature of one on
+        BasePlotlyType
+
+        Parameters
+        ----------
+        child : BaseTraceType | BaseLayoutType
+
+        Returns
+        -------
+        dict
+        """
+        # Try to find index of child as a trace
+        # -------------------------------------
         try:
             trace_index = BaseFigure._index_is(self.data, child)
-
         except ValueError as _:
             trace_index = None
 
+        # Child is a trace
+        # ----------------
         if trace_index is not None:
             return self._data[trace_index]
+
+        # Child is the layout
+        # -------------------
         elif child is self.layout:
             return self._layout
+
+        # Unknown child
+        # -------------
         else:
             raise ValueError('Unrecognized child: %s' % child)
 
     def _get_child_prop_defaults(self, child):
+        """
+        Return the default properties dict for a child trace or child layout
+
+        Note: this method must match the name/signature of one on
+        BasePlotlyType
+
+        Parameters
+        ----------
+        child : BaseTraceType | BaseLayoutType
+
+        Returns
+        -------
+        dict
+        """
+        # Try to find index of child as a trace
+        # -------------------------------------
         try:
             trace_index = BaseFigure._index_is(self.data, child)
         except ValueError as _:
             trace_index = None
 
+        # Child is a trace
+        # ----------------
         if trace_index is not None:
             return self._data_defaults[trace_index]
+
+        # Child is the layout
+        # -------------------
         elif child is self.layout:
             return self._layout_defaults
+
+        # Unknown child
+        # -------------
         else:
             raise ValueError('Unrecognized child: %s' % child)
 
     def _init_child_props(self, child):
-        # layout and traces dict are never None
-        return
+        """
+        Initialize the properites dict for a child trace or layout
+
+        Note: this method must match the name/signature of one on
+        BasePlotlyType
+
+        Parameters
+        ----------
+        child : BaseTraceType | BaseLayoutType
+
+        Returns
+        -------
+        None
+        """
+        # layout and traces dict are initialize when figure is constructed
+        # and when new traces are added to the figure
+        pass
 
     # Layout
     # ------
     @property
     def layout(self):
+        """
+        The `layout` property of the figure
+
+        Returns
+        -------
+        plotly.graph_objs.Layout
+        """
         return self._layout_obj
 
     @layout.setter
     def layout(self, new_layout):
-        # Validate layout
+
+        # Validate new layout
+        # -------------------
         new_layout = self._layout_validator.validate_coerce(new_layout)
         new_layout_data = deepcopy(new_layout._props)
 
         # Unparent current layout
+        # -----------------------
         if self._layout_obj:
             old_layout_data = deepcopy(self._layout_obj._props)
             self._layout_obj._orphan_props.update(old_layout_data)
             self._layout_obj._parent = None
 
         # Parent new layout
+        # -----------------
         self._layout = new_layout_data
         new_layout._parent = self
+        new_layout._orphan_props.clear()
         self._layout_obj = new_layout
 
         # Notify JS side
         self._send_relayout_msg(new_layout_data)
 
-    def _relayout_child(self, child, prop, val):
-        send_val = val  # Don't wrap in a list for relayout
+    def plotly_relayout(self, relayout_data, **kwargs):
+        """
+        Perform a Plotly relayout operation on the figure's layout
 
+        Note: This operation both mutates and returns the figure
+
+        Parameters
+        ----------
+        relayout_data : dict
+            Dict of layout updates
+
+            dict keys are strings that specify the properties to be updated.
+            Nested properties are expressed by joining successive keys on
+            '.' characters (e.g. 'xaxis.range')
+
+            dict values are the values to use to update the layout.
+
+        Returns
+        -------
+        BaseFigure
+            The update figure
+        """
+
+        # Handle source_view_id
+        # ---------------------
+        # If not None, the source_view_id is the UID of the frontend
+        # Plotly.js view that initially triggered this relayout operation
+        # (e.g. the user clicked on the toolbar to change the drag mode
+        # from zoom to pan). We pass this UID along so that the frontend
+        # views can determine whether they need to apply the relayout
+        # operation on themselves.
+        source_view_id = kwargs.get('source_view_id', None)
+
+        # Perform relayout operation on layout dict
+        # -----------------------------------------
+        relayout_changes = self._perform_plotly_relayout(relayout_data)
+        if relayout_changes:
+            # The relayout operation resulted in a change to some layout
+            # properties, so we dispatch change callbacks and send the
+            # relayout message to the frontend (if any)
+            self._dispatch_change_callbacks_relayout(relayout_changes)
+            self._send_relayout_msg(
+                relayout_changes,
+                source_view_id=source_view_id)
+
+        return self
+
+    def _perform_plotly_relayout(self, relayout_data):
+        """
+        Perform a relayout operation on the figure's layout data and return
+        the changes that were applied
+
+        Parameters
+        ----------
+        relayout_data : dict[str, any]
+            See the docstring for plotly_relayout
+        Returns
+        -------
+        relayout_changes: dict[str, any]
+            Subset of relayout_data including only the keys / values that
+            resulted in a change to the figure's layout data
+        """
+        # Initialize relayout changes
+        # ---------------------------
+        # This will be a subset of the relayout_data including only the
+        # keys / values that are changed in the figure's layout data
+        relayout_changes = {}
+
+        # Process each key
+        # ----------------
+        for key_path_str, v in relayout_data.items():
+
+            # Apply set operation on the layout dict
+            val_changed = BaseFigure._set_in(self._layout, key_path_str, v)
+
+            if val_changed:
+                # Save operation to changed dict
+                relayout_changes[key_path_str] = v
+
+        return relayout_changes
+
+    def _relayout_child(self, child, key_path_str, val):
+        """
+        Process relayout operation on child layout object
+
+        Parameters
+        ----------
+        child : BaseLayoutType
+            The figure's layout
+        key_path_str :
+            A key path string (e.g. 'foo.bar[0]')
+        val
+            Relayout value
+
+        Returns
+        -------
+        None
+        """
+
+        # Validate input
+        # --------------
+        assert child is self.layout
+
+        # Not in batch mode
+        # -------------
+        # Dispatch change callbacks and send relayout message
         if not self._in_batch_mode:
-            relayout_msg = {prop: send_val}
+            relayout_msg = {key_path_str: val}
             self._dispatch_change_callbacks_relayout(relayout_msg)
             self._send_relayout_msg(relayout_msg)
+
+        # In batch mode
+        # -------------
+        # Add key_path_str/val to saved batch edits
         else:
-            self._batch_layout_commands[prop] = send_val
+            self._batch_layout_edits[key_path_str] = val
 
-    def _send_relayout_msg(self, layout, source_view_id=None):
+    # Dispatch change callbacks
+    # -------------------------
+    @staticmethod
+    def _build_dispatch_plan(key_path_strs):
+        """
+        Build a dispatch plan for a list of key path strings
 
-        # Update layout edit message id
-        layout_edit_id = self._last_layout_edit_id + 1
-        self._last_layout_edit_id = layout_edit_id
+        A dispatch plan is a dict:
+           - *from* path tuples that reference an object that has descendants
+             that are referenced in `key_path_strs`.
+           - *to* sets of tuples that correspond to descendants of the object
+             above.
 
-        msg_data = {
-            'relayout_data': layout,
-            'layout_edit_id': layout_edit_id,
-            'source_view_id': source_view_id
-        }
+        Parameters
+        ----------
+        key_path_strs : list[str]
+            List of key path strings. For example:
 
-        self._py2js_relayout = msg_data
-        self._py2js_relayout = None
+            ['xaxis.rangeselector.font.color', 'xaxis.rangeselector.bgcolor']
 
-    def plotly_relayout(self, layout, source_view_id=None):
-        relayout_msg = self._perform_relayout_dict(layout)
-        if relayout_msg:
-            self._dispatch_change_callbacks_relayout(relayout_msg)
-            self._send_relayout_msg(relayout_msg,
-                                    source_view_id=source_view_id)
+        Returns
+        -------
+        dispatch_plan: dict[tuple[str|int], set[tuple[str|int]]]
 
-    def _perform_relayout_dict(self, relayout_data):
-        relayout_msg = {}  # relayout data to send to JS side as Plotly.relayout()
+        Examples
+        --------
+        >>> key_path_strs = ['xaxis.rangeselector.font.color',
+        ...                  'xaxis.rangeselector.bgcolor']
 
-        # Update layout_data
-        # print('_perform_relayout')
-        for raw_key, v in relayout_data.items():
-            # kstr may have periods. e.g. foo.bar
-            key_path = self._str_to_dict_path(raw_key)
+        >>> BaseFigure._build_dispatch_plan(key_path_strs)
+            {(): {('xaxis',),
+                  ('xaxis', 'rangeselector'),
+                  ('xaxis', 'rangeselector', 'bgcolor'),
+                  ('xaxis', 'rangeselector', 'font'),
+                  ('xaxis', 'rangeselector', 'font', 'color')},
+             ('xaxis',): {('rangeselector',),
+                          ('rangeselector', 'bgcolor'),
+                          ('rangeselector', 'font'),
+                          ('rangeselector', 'font', 'color')},
+             ('xaxis', 'rangeselector'): {('bgcolor',),
+                                          ('font',),
+                                          ('font', 'color')},
+             ('xaxis', 'rangeselector', 'font'): {('color',)}}
+        """
+        dispatch_plan = {}
 
-            val_parent = self._layout
-            for kp, key_path_el in enumerate(key_path[:-1]):
-                if key_path_el not in val_parent:
+        for key_path_str in key_path_strs:
 
-                    # Extend val_parent list if needed
-                    if isinstance(val_parent, list) and isinstance(key_path_el, int):
-                        while len(val_parent) <= key_path_el:
-                            val_parent.append(None)
-
-                    elif isinstance(val_parent, dict) and key_path_el not in val_parent:
-                        if isinstance(key_path[kp+1], int):
-                            val_parent[key_path_el] = []
-                        else:
-                            val_parent[key_path_el] = {}
-
-                val_parent = val_parent[key_path_el]
-
-            last_key = key_path[-1]
-            # print(f'{val_parent}, {key_path}, {last_key}, {v}')
-
-            if v is Undefined:
-                # Do nothing
-                pass
-            elif v is None:
-                if isinstance(val_parent, dict) and last_key in val_parent:
-                    val_parent.pop(last_key)
-                    relayout_msg[raw_key] = None
-            else:
-                if isinstance(val_parent, list):
-                    if isinstance(last_key, int):
-                        while(len(val_parent) <= last_key):
-                            val_parent.append(None)
-                        val_parent[last_key] = v
-                        relayout_msg[raw_key] = v
-                elif isinstance(val_parent, dict):
-                    if last_key not in val_parent or not BasePlotlyType._vals_equal(val_parent[last_key], v):
-                        val_parent[last_key] = v
-                        relayout_msg[raw_key] = v
-
-        return relayout_msg
-
-    def _dispatch_change_callbacks_relayout(self, relayout_msg):
-        dispatch_plan = {}  # e.g. {(): {'obj': layout,
-                            #            'changed_paths': [('xaxis', 'range')]}}
-        for raw_key, v in relayout_msg.items():
-            # kstr may have periods. e.g. foo.bar
-            key_path = self._str_to_dict_path(raw_key)
-
-            # Test whether we should remove trailing integer in path
-            # e.g. ('xaxis', 'range', '1') -> ('xaxis', 'range')
-            # We only do this if the trailing index is an integer that references a primitive value
-            if isinstance(key_path[-1], int) and not isinstance(v, dict):
-                key_path = key_path[:-1]
-
-            parent_obj = self.layout
+            key_path = BaseFigure._str_to_dict_path(key_path_str)
             key_path_so_far = ()
             keys_left = key_path
 
             # Iterate down the key path
             for next_key in key_path:
-                if next_key not in parent_obj:
-                    break
+                if key_path_so_far not in dispatch_plan:
+                    dispatch_plan[key_path_so_far] = set()
 
-                if isinstance(parent_obj, BasePlotlyType):
-                    if key_path_so_far not in dispatch_plan:
-                        dispatch_plan[key_path_so_far] = {'obj': parent_obj, 'changed_paths': set()}
-                    dispatch_plan[key_path_so_far]['changed_paths'].add(keys_left)
+                to_add = [keys_left[:i+1] for i in range(len(keys_left))]
+                dispatch_plan[key_path_so_far].update(to_add)
 
-                    next_val = parent_obj[next_key]
-                    # parent_obj._dispatch_change_callbacks(next_key, next_val)
-                elif isinstance(parent_obj, (list, tuple)):
-                    next_val = parent_obj[next_key]
-                else:
-                    # Primitive value
-                    break
-
-                key_path_so_far = key_path_so_far + (next_key,)
+                key_path_so_far = key_path_so_far + (next_key, )
                 keys_left = keys_left[1:]
-                parent_obj = next_val
 
-        # pprint(dispatch_plan)
-        for p in dispatch_plan.values():
-            obj = p['obj']
-            changed_paths = p['changed_paths']
-            obj._dispatch_change_callbacks(changed_paths)
+        return dispatch_plan
 
+    def _dispatch_change_callbacks_relayout(self, relayout_data):
+        """
+        Dispatch property change callbacks given relayout_data
+
+        Parameters
+        ----------
+        relayout_data : dict[str, any]
+            See docstring for plotly_relayout.
+
+        Returns
+        -------
+        None
+        """
+        # Build dispatch plan
+        # -------------------
+        key_path_strs = list(relayout_data.keys())
+        dispatch_plan = BaseFigure._build_dispatch_plan(key_path_strs)
+
+        # Dispatch changes to each layout objects
+        # ---------------------------------------
+        for path_tuple, changed_paths in dispatch_plan.items():
+            dispatch_obj = self.layout[path_tuple]
+            if isinstance(dispatch_obj, BasePlotlyType):
+                dispatch_obj._dispatch_change_callbacks(changed_paths)
+
+    def _dispatch_change_callbacks_restyle(self, restyle_data, trace_indexes):
+        """
+        Dispatch property change callbacks given restyle_data
+
+        Parameters
+        ----------
+        restyle_data : dict[str, any]
+            See docstring for plotly_restyle.
+
+        trace_indexes : list[int]
+            List of trace indexes that restyle operation applied to
+
+        Returns
+        -------
+        None
+        """
+
+        # Build dispatch plan
+        # -------------------
+        key_path_strs = list(restyle_data.keys())
+        dispatch_plan = BaseFigure._build_dispatch_plan(key_path_strs)
+
+        # Dispatch changes to each object in each trace
+        # ---------------------------------------------
+        for path_tuple, changed_paths in dispatch_plan.items():
+            for trace_ind in trace_indexes:
+                trace = self.data[trace_ind]
+                dispatch_obj = trace[path_tuple]
+                if isinstance(dispatch_obj, BasePlotlyType):
+                    dispatch_obj._dispatch_change_callbacks(changed_paths)
 
     # Frames
     # ------
     @property
     def frames(self):
+        """
+        The `frames` property is a tuple of the figure's frame objects
+
+        Returns
+        -------
+        tuple[BaseFrameHierarchyType]
+        """
         return self._frame_objs
 
     @frames.setter
     def frames(self, new_frames):
-        # Note: Frames are not supported by the FigureWidget subclass so we only validate coerce the frames
-        # We don't emit any events of frame change and we don't reparent the frames
+        # Note: Frames are not supported by the FigureWidget subclass so we
+        # only validate coerce the frames. We don't emit any events on frame
+        # changes, and we don't reparent the frames.
 
         # Validate frames
         self._frame_objs = self._frames_validator.validate_coerce(new_frames)
 
     # Update
     # ------
-    def plotly_update(self, style=None, layout=None,
+    def plotly_update(self,
+                      restyle_data=None,
+                      relayout_data=None,
                       trace_indexes=None,
-                      source_view_id=None):
+                      **kwargs):
+        """
+        Perform a Plotly update operation on the figure.
 
-        restyle_msg, relayout_msg, trace_indexes = self._perform_update_dict(style=style,
-                                                                             layout=layout,
-                                                                             trace_indexes=trace_indexes)
-        # Perform restyle portion of update
-        if restyle_msg:
-            self._dispatch_change_callbacks_restyle(restyle_msg, trace_indexes)
+        Note: This operation both mutates and returns the figure
 
-        # Perform relayout portion of update
-        if relayout_msg:
-            self._dispatch_change_callbacks_relayout(relayout_msg)
+        Parameters
+        ----------
+        restyle_data : dict
+            Traces update specification. See the docstring for the
+            `plotly_restyle` method for details
+        relayout_data : dict
+            Layout update specification. See the docstring for the
+            `plotly_relayout` method for details
+        trace_indexes :
+            Trace index, or list of trace indexes, that the update operation
+            applies to. Defaults to all trace indexes.
 
-        if restyle_msg or relayout_msg:
-            self._send_update_msg(restyle_msg, relayout_msg,
-                                  trace_indexes,
-                                  source_view_id=source_view_id)
+        Returns
+        -------
+        BaseFigure
+            The updated figure
+        """
 
-    def _perform_update_dict(self, style=None, layout=None, trace_indexes=None):
-        if not style and not layout:
+        # Handle source_view_id
+        # ---------------------
+        # If not None, the source_view_id is the UID of the frontend
+        # Plotly.js view that initially triggered this update operation
+        # (e.g. the user clicked a button that triggered an update
+        # operation). We pass this UID along so that the frontend views can
+        # determine whether they need to apply the update operation on
+        # themselves.
+        source_view_id = kwargs.get('source_view_id', None)
+
+        # Perform update operation
+        # ------------------------
+        # This updates the _data and _layout dicts, and returns the changes
+        # to the traces (restyle_changes) and layout (relayout_changes)
+        (restyle_changes,
+         relayout_changes,
+         trace_indexes) = self._perform_plotly_update(
+            restyle_data=restyle_data,
+            relayout_data=relayout_data,
+            trace_indexes=trace_indexes)
+
+        # Dispatch changes
+        # ----------------
+        # ### Dispatch restyle changes ###
+        if restyle_changes:
+            self._dispatch_change_callbacks_restyle(
+                restyle_changes, trace_indexes)
+
+        # ### Dispatch relayout changes ###
+        if relayout_changes:
+            self._dispatch_change_callbacks_relayout(relayout_changes)
+
+        # Send update message
+        # -------------------
+        # Send a plotly_update message to the frontend (if any)
+        if restyle_changes or relayout_changes:
+            self._send_update_msg(
+                restyle_changes,
+                relayout_changes,
+                trace_indexes,
+                source_view_id=source_view_id)
+
+        return self
+
+    def _perform_plotly_update(self, restyle_data=None, relayout_data=None,
+                               trace_indexes=None):
+
+        # Check for early exist
+        # ---------------------
+        if not restyle_data and not relayout_data:
             # Nothing to do
             return None, None, None
 
-        if style is None:
-            style = {}
-        if layout is None:
-            layout = {}
+        # Normalize input
+        # ---------------
+        if restyle_data is None:
+            restyle_data = {}
+        if relayout_data is None:
+            relayout_data = {}
 
-        # Process trace indexes
-        if trace_indexes is None:
-            trace_indexes = list(range(len(self.data)))
+        trace_indexes = self._normalize_trace_indexes(trace_indexes)
 
-        if not isinstance(trace_indexes, (list, tuple)):
-            trace_indexes = [trace_indexes]
+        # Perform relayout
+        # ----------------
+        relayout_changes = self._perform_plotly_relayout(relayout_data)
 
-        relayout_msg = self._perform_relayout_dict(layout)
-        restyle_msg = self._perform_restyle_dict(style, trace_indexes)
-        # print(style, trace_indexes, restyle_msg)
-        # pprint(self._traces_data)
-        return restyle_msg, relayout_msg, trace_indexes
+        # Perform restyle
+        # ---------------
+        restyle_changes = self._perform_plotly_restyle(
+            restyle_data, trace_indexes)
 
-    def _send_update_msg(self, style, layout,
+        # Return changes
+        # --------------
+        return restyle_changes, relayout_changes, trace_indexes
+
+    # Plotly message stubs
+    # --------------------
+    # send-message stubs that may be overridden by the widget subclass
+    def _send_addTraces_msg(self, new_traces_data):
+        pass
+
+    def _send_moveTraces_msg(self, current_inds, new_inds):
+        pass
+
+    def _send_deleteTraces_msg(self, delete_inds):
+        pass
+
+    def _send_restyle_msg(self, style, trace_indexes=None,
+                          source_view_id=None):
+        pass
+
+    def _send_relayout_msg(self, layout, source_view_id=None):
+        pass
+
+    def _send_update_msg(self,
+                         style,
+                         layout,
                          trace_indexes=None,
                          source_view_id=None):
+        pass
 
-        if not isinstance(trace_indexes, (list, tuple)):
-            trace_indexes = [trace_indexes]
-
-        # Add restyle message id
-        trace_edit_id = self._last_trace_edit_id + 1
-        self._last_trace_edit_id = trace_edit_id
-        self._trace_edit_in_process = True
-
-        # Add relayout message id
-        layout_edit_id = self._last_layout_edit_id + 1
-        self._last_layout_edit_id = layout_edit_id
-        self._layout_edit_in_process = True
-
-        update_msg = {
-            'style_data': style,
-            'layout_data': layout,
-            'style_traces': trace_indexes,
-            'trace_edit_id': trace_edit_id,
-            'layout_edit_id': layout_edit_id,
-            'source_view_id': source_view_id
-        }
-
-        self._py2js_update = update_msg
-        self._py2js_update = None
-
-    # Callbacks
-    # ---------
-    def on_relayout_completed(self, fn):
-        if self._layout_edit_in_process:
-            self._waiting_relayout_callbacks.append(fn)
-        else:
-            fn()
-
-    def on_restyle_completed(self, fn):
-        if self._trace_edit_in_process:
-            self._waiting_restyle_callbacks.append(fn)
-        else:
-            fn()
+    def _send_animate_msg(self, styles, layout, trace_indexes, animation_opts):
+        pass
 
     # Context managers
     # ----------------
     @contextmanager
     def batch_update(self):
-        """Hold syncing any state until the outermost context manager exits"""
+        """
+        A context manager that batches up trace and layout assignment
+        operations into a singe plotly_update message that is executed when
+        the context exits.
+
+        Examples
+        --------
+        For example, suppose we have a figure widget, `fig`, with a single
+        trace.
+        >>> import plotly.graph_objs as go
+        >>> fig = go.FigureWidget(data=[{'y': [3, 4, 2]}])
+
+        If we want to update the xaxis range, the yaxis range, and the
+        marker color, we could do so using a series of three property
+        assignments as follows:
+
+        >>> fig.layout.xaxis.range = [0, 5]
+        >>> fig.layout.yaxis.range = [0, 10]
+        >>> fig.data[0].marker.color = 'green'
+
+        This will work, however it will result in three messages being
+        sent to the front end (two relayout messages for the axis range
+        updates followed by one restyle message for the marker color
+        update). This can cause the plot to appear to stutter as the
+        three updates are applied incrementally.
+
+        We can avoid this problem by performing these three assignments in a
+        `batch_update` context as follows:
+
+        >>> with fig.batch_update():
+        ...     fig.layout.xaxis.range = [0, 5]
+        ...     fig.layout.yaxis.range = [0, 10]
+        ...     fig.data[0].marker.color = 'green'
+
+        Now, these three property updates will be sent to the frontend in a
+        single update message, and they will be applied by the front end
+        simultaneously.
+        """
         if self._in_batch_mode is True:
             yield
         else:
@@ -915,39 +1497,66 @@ class BaseFigure:
                 self._in_batch_mode = True
                 yield
             finally:
+                # ### Disable batch mode ###
                 self._in_batch_mode = False
-                self._send_batch_update()
+
+                # ### Build plotly_update params ###
+                (restyle_data,
+                 relayout_data,
+                 trace_indexes) = self._build_update_params_from_batch()
+
+                # ### Call plotly_update ###
+                self.plotly_update(
+                    restyle_data=restyle_data,
+                    relayout_data=relayout_data,
+                    trace_indexes=trace_indexes)
+
+                # ### Clear out saved batch edits ###
+                self._batch_layout_edits.clear()
+                self._batch_trace_edits.clear()
 
     def _build_update_params_from_batch(self):
+        """
+        Convert `_batch_trace_edits` and `_batch_layout_edits` into the
+        `restyle_data`, `relayout_data`, and `trace_indexes` params accepted
+        by the `plotly_update` method.
+
+        Returns
+        -------
+        (dict, dict, list[int])
+        """
+
         # Handle Style / Trace Indexes
         # ----------------------------
-        batch_style_commands = self._batch_style_commands
-        trace_indexes = sorted(set([trace_ind for trace_ind in batch_style_commands]))
+        batch_style_commands = self._batch_trace_edits
+        trace_indexes = sorted(
+            set([trace_ind for trace_ind in batch_style_commands]))
 
-        all_props = sorted(set([prop
-                                for trace_style in self._batch_style_commands.values()
-                                for prop in trace_style]))
+        all_props = sorted(
+            set([
+                prop for trace_style in self._batch_trace_edits.values()
+                for prop in trace_style
+            ]))
 
-        # Initialize style dict with all values undefined
-        style = {prop: [Undefined for _ in range(len(trace_indexes))]
-                 for prop in all_props}
+        # Initialize restyle_data dict with all values undefined
+        restyle_data = {
+            prop: [Undefined for _ in range(len(trace_indexes))]
+            for prop in all_props
+        }
 
         # Fill in values
         for trace_ind, trace_style in batch_style_commands.items():
             for trace_prop, trace_val in trace_style.items():
-                style[trace_prop][trace_indexes.index(trace_ind)] = trace_val
+                restyle_trace_index = trace_indexes.index(trace_ind)
+                restyle_data[trace_prop][restyle_trace_index] = trace_val
 
         # Handle Layout
         # -------------
-        layout = self._batch_layout_commands
+        relayout_data = self._batch_layout_edits
 
-        return style, layout, trace_indexes
-
-    def _send_batch_update(self):
-        style, layout, trace_indexes = self._build_update_params_from_batch()
-        self.plotly_update(style=style, layout=layout, trace_indexes=trace_indexes)
-        self._batch_layout_commands.clear()
-        self._batch_style_commands.clear()
+        # Return plotly_update params
+        # ---------------------------
+        return restyle_data, relayout_data, trace_indexes
 
     @contextmanager
     def batch_animate(self, duration=500, easing="cubic-in-out"):
@@ -957,7 +1566,8 @@ class BaseFigure:
         Parameters
         ----------
         duration : number
-            The duration of the transition, in milliseconds. If equal to zero, updates are synchronous.
+            The duration of the transition, in milliseconds.
+            If equal to zero, updates are synchronous.
         easing : string
             The easing function used for the transition.
             One of:
@@ -996,12 +1606,31 @@ class BaseFigure:
                 - circle-in-out
                 - elastic-in-out
                 - back-in-out
-                - bounce-in-ou
+                - bounce-in-out
 
-        Returns
-        -------
-            None
+        Examples
+        --------
+        Suppose we have a figure widget, `fig`, with a single trace.
+
+        >>> import plotly.graph_objs as go
+        >>> fig = go.FigureWidget(data=[{'y': [3, 4, 2]}])
+
+        1) Animate a change in the xaxis and yaxis ranges using default
+        duration and easing parameters.
+
+        >>> with fig.batch_animate():
+        ...     fig.layout.xaxis.range = [0, 5]
+        ...     fig.layout.yaxis.range = [0, 10]
+
+        2) Animate a change in the size and color of the trace's markers
+        over 2 seconds using the elastic-in-out easing method
+        >>> with fig.batch_update(duration=2000, easing='elastic-in-out'):
+        ...     fig.data[0].marker.color = 'green'
+        ...     fig.data[0].marker.size = 20
         """
+
+        # Validate inputs
+        # ---------------
         duration = self._animation_duration_validator.validate_coerce(duration)
         easing = self._animation_easing_validator.validate_coerce(easing)
 
@@ -1012,95 +1641,146 @@ class BaseFigure:
                 self._in_batch_mode = True
                 yield
             finally:
+                # Exit batch mode
+                # ---------------
                 self._in_batch_mode = False
-                self._send_batch_animate(
-                    {'transition': {'duration': duration,'easing': easing},
-                     'frame': {'duration': duration}})
 
-    def _send_batch_animate(self, animation_opts):
+                # Apply batch animate
+                # -------------------
+                self._perform_batch_animate({
+                    'transition': {
+                        'duration': duration,
+                        'easing': easing
+                    },
+                    'frame': {
+                        'duration': duration
+                    }
+                })
 
+    def _perform_batch_animate(self, animation_opts):
+        """
+        Perform the batch animate operation
+
+        This method should be called with the batch_animate() context
+        manager exits.
+
+        Parameters
+        ----------
+        animation_opts : dict
+            Animation options as accepted by frontend Plotly.animation command
+
+        Returns
+        -------
+        None
+        """
         # Apply commands to internal dictionaries as an update
         # ----------------------------------------------------
-        style, layout, trace_indexes = self._build_update_params_from_batch()
-        restyle_msg, relayout_msg, trace_indexes = self._perform_update_dict(style, layout, trace_indexes)
+        (restyle_data,
+         relayout_data,
+         trace_indexes) = self._build_update_params_from_batch()
 
-        # ### Perform restyle portion of animate ###
-        if restyle_msg:
-            self._dispatch_change_callbacks_restyle(restyle_msg, trace_indexes)
+        (restyle_changes,
+         relayout_changes,
+         trace_indexes) = self._perform_plotly_update(restyle_data,
+                                                      relayout_data,
+                                                      trace_indexes)
 
-        # ### Perform relayout portion of update ###
-        if relayout_msg:
-            self._dispatch_change_callbacks_relayout(relayout_msg)
+        # Dispatch callbacks
+        # ------------------
+        # ### Dispatch restyle changes ###
+        if restyle_changes:
+            self._dispatch_change_callbacks_restyle(restyle_changes,
+                                                    trace_indexes)
+
+        # ### Dispatch relayout changes ###
+        if relayout_changes:
+            self._dispatch_change_callbacks_relayout(relayout_changes)
 
         # Convert style / trace_indexes into animate form
         # -----------------------------------------------
-        if self._batch_style_commands:
-            animate_styles, animate_trace_indexes = zip(*[
-                (trace_style, trace_index) for trace_index, trace_style in self._batch_style_commands.items()])
+        if self._batch_trace_edits:
+            animate_styles, animate_trace_indexes = zip(
+                *[(trace_style, trace_index) for trace_index, trace_style in
+                  self._batch_trace_edits.items()])
         else:
             animate_styles, animate_trace_indexes = {}, []
 
-        animate_layout = self._batch_layout_commands
+        animate_layout = self._batch_layout_edits
 
-        # Send animate message to JS
-        # --------------------------
-        self._send_animate_msg(list(animate_styles), animate_layout, list(animate_trace_indexes), animation_opts)
+        # Send animate message
+        # --------------------
+        # Sends animate message to the front end (if any)
+        self._send_animate_msg(
+            list(animate_styles),
+            animate_layout,
+            list(animate_trace_indexes),
+            animation_opts)
 
         # Clear batched commands
         # ----------------------
-        self._batch_layout_commands.clear()
-        self._batch_style_commands.clear()
-
-    def _send_animate_msg(self, styles, layout, trace_indexes, animation_opts):
-        # print(styles, layout, trace_indexes, animation_opts)
-        if not isinstance(trace_indexes, (list, tuple)):
-            trace_indexes = [trace_indexes]
-
-        # Add restyle message id
-        trace_edit_id = self._last_trace_edit_id + 1
-        self._last_trace_edit_id = trace_edit_id
-        self._trace_edit_in_process = True
-
-        # Add relayout message id
-        layout_edit_id = self._last_layout_edit_id + 1
-        self._last_layout_edit_id = layout_edit_id
-        self._layout_edit_in_process = True
-
-        animate_msg = {
-            'style_data': styles,
-            'layout_data': layout,
-            'style_traces': trace_indexes,
-            'animation_opts': animation_opts,
-            'trace_edit_id': trace_edit_id,
-            'layout_edit_id': layout_edit_id,
-            'source_view_id': None
-        }
-
-        self._py2js_animate = animate_msg
-        self._py2js_animate = None
+        self._batch_layout_edits.clear()
+        self._batch_trace_edits.clear()
 
     # Exports
     # -------
     def to_dict(self):
+        """
+        Convert figure to a dictionary
 
+        Note: the dictionary includes the properties explicitly set by the
+        user, it does not include default values of unspecified properties
+
+        Returns
+        -------
+        dict
+        """
         # Handle data
-        data = deepcopy([BaseFigure._remove_underscore_keys(trace) for trace in self._data])
+        # -----------
+        data = deepcopy(self._data)
 
         # Handle layout
-        layout = deepcopy(BaseFigure._remove_underscore_keys(self._layout))
+        # -------------
+        layout = deepcopy(self._layout)
 
         # Handle frames
+        # -------------
+        # Frame key is only added if there are any frames
         res = {'data': data, 'layout': layout}
-        frames = deepcopy([BaseFigure._remove_underscore_keys(frame._props) for frame in self._frame_objs])
+        frames = deepcopy([frame._props for frame in self._frame_objs])
         if frames:
             res['frames'] = frames
 
         return res
 
     def to_plotly_json(self):
+        """
+        Convert figure to a JSON representation as a Python dict
+
+        Returns
+        -------
+        dict
+        """
         return self.to_dict()
 
     def save_html(self, filename, auto_open=False, responsive=False):
+        """
+        Save figure to a standalone html file
+
+        Parameters
+        ----------
+        filename : str
+            Full path and filename of the html file to be created
+        auto_open : bool
+            True if the the newly created HTML file be opened automatically,
+            False otherwise
+        responsive : bool
+            True if the figure in the resulting HTML should automatically
+            resize to fill the browser. If false then the width and height
+            will be fixed to the figure layout's width and heigh respectively
+        Returns
+        -------
+        None
+        """
         data = self.to_dict()
         if responsive:
             if 'height' in data['layout']:
@@ -1112,166 +1792,16 @@ class BaseFigure:
             data['layout']['height'] = self.layout.height
             data['layout']['width'] = self.layout.width
 
-        plotlypy_plot(data, filename=filename, show_link=False, auto_open=auto_open, validate=False)
+        pyo.plot(data, filename=filename, show_link=False, auto_open=auto_open)
 
     # Static helpers
     # --------------
     @staticmethod
-    def _remove_underscore_keys(d):
-        return {k: v for k, v in d.items() if not k.startswith('_')}
-
-    @staticmethod
-    def _str_to_dict_path(raw_key):
-
-        if isinstance(raw_key, tuple):
-            # Nothing to do
-            return raw_key
-        else:
-            # Split string on periods. e.g. 'foo.bar[0]' -> ['foo', 'bar[0]']
-            key_path = raw_key.split('.')
-
-            # Split out bracket indexes. e.g. ['foo', 'bar[0]'] -> ['foo', 'bar', '0']
-            bracket_re = re.compile('(.*)\[(\d+)\]')
-            key_path2 = []
-            for key in key_path:
-                match = bracket_re.fullmatch(key)
-                if match:
-                    key_path2.extend(match.groups())
-                else:
-                    key_path2.append(key)
-
-            # Convert elements to ints if possible. e.g. e.g. ['foo', 'bar', '0'] -> ['foo', 'bar', 0]
-            for i in range(len(key_path2)):
-                try:
-                    key_path2[i] = int(key_path2[i])
-                except ValueError as _:
-                    pass
-
-            return tuple(key_path2)
-
-    @staticmethod
-    def _is_object_list(v):
+    def _is_dict_list(v):
+        """
+        Return true of the input object is a list of dicts
+        """
         return isinstance(v, list) and len(v) > 0 and isinstance(v[0], dict)
-
-    @staticmethod
-    def _remove_overlapping_props(input_data, delta_data, prop_path=()):
-        """
-        Remove properties in data that are also into delta. Do so recursively.
-
-        Except, never remove uid from input_data
-
-        Parameters
-        ----------
-        data :
-        delta :
-
-        Returns
-        -------
-        List of removed property path tuples
-        """
-        removed = []
-        if isinstance(input_data, dict):
-            assert isinstance(delta_data, dict)
-
-            for p, delta_val in delta_data.items():
-                if isinstance(delta_val, dict) or BaseFigure._is_object_list(delta_val):
-                    if p in input_data:
-                        input_val = input_data[p]
-                        removed.extend(
-                            BaseFigure._remove_overlapping_props(
-                                input_val,
-                                delta_val,
-                                prop_path + (p,)))
-                elif p in input_data and p != 'uid':
-                    input_data.pop(p)
-                    removed.append(prop_path + (p,))
-
-        elif isinstance(input_data, list):
-            assert isinstance(delta_data, list)
-
-            for i, delta_val in enumerate(delta_data):
-                if i >= len(input_data):
-                    break
-
-                input_val = input_data[i]
-                if input_val is not None and isinstance(delta_val, dict) or BaseFigure._is_object_list(delta_val):
-                    removed.extend(
-                        BaseFigure._remove_overlapping_props(
-                            input_val,
-                            delta_val,
-                            prop_path + (i,)))
-
-        return removed
-
-    @staticmethod
-    def _transform_data(to_data, from_data, should_remove=True, relayout_path=()):
-        """
-        Transform to_data into from_data and return relayout-style
-        description of transformation
-
-        Parameters
-        ----------
-        to_data :
-        from_data :
-
-        Returns
-        -------
-
-        """
-        relayout_terms = {}
-        if isinstance(to_data, dict):
-            if not isinstance(from_data, dict):
-                raise ValueError('Mismatched data types: to_data: {to_dict} {from_data}'.format(
-                    to_dict=to_data, from_data=from_data))
-
-            # Handle addition / modification of terms
-            for from_prop, from_val in from_data.items():
-                if isinstance(from_val, dict) or BaseFigure._is_object_list(from_val):
-                    if from_prop not in to_data:
-                        to_data[from_prop] = {} if isinstance(from_val, dict) else []
-
-                    input_val = to_data[from_prop]
-                    relayout_terms.update(
-                        BaseFigure._transform_data(
-                            input_val,
-                            from_val,
-                            should_remove=should_remove,
-                            relayout_path=relayout_path + (from_prop,)))
-                else:
-                    if from_prop not in to_data or not BasePlotlyType._vals_equal(to_data[from_prop], from_val):
-                        # if from_prop in to_data:
-                        #     print(f'to_data[from_prop] != from_val -- {to_data}[{from_prop}] != {from_val}:')
-                        to_data[from_prop] = from_val
-                        relayout_terms[relayout_path + (from_prop,)] = from_val
-
-            # Handle removal of terms
-            if should_remove:
-                for remove_prop in set(to_data.keys()).difference(set(from_data.keys())):
-                    to_data.pop(remove_prop)
-
-        elif isinstance(to_data, list):
-            if not isinstance(from_data, list):
-                raise ValueError('Mismatched data types: to_data: {to_data} {from_data}'.format(
-                    to_data=to_data, from_data=from_data))
-
-            for i, from_val in enumerate(from_data):
-                if i >= len(to_data):
-                    to_data.append(None)
-
-                input_val = to_data[i]
-                if input_val is not None and isinstance(from_val, dict) or BaseFigure._is_object_list(from_val):
-                    relayout_terms.update(
-                        BaseFigure._transform_data(
-                            input_val,
-                            from_val,
-                            should_remove=should_remove,
-                            relayout_path=relayout_path + (i,)))
-                else:
-                    if not BasePlotlyType._vals_equal(to_data[i], from_val):
-                        to_data[i] = from_val
-                        relayout_terms[relayout_path + (i,)] = from_val
-
-        return relayout_terms
 
     @staticmethod
     def _perform_update(plotly_obj, update_obj):
@@ -1281,10 +1811,10 @@ class BaseFigure:
 
         Parameters
         ----------
-        plotly_obj : Union[BasePlotlyType, Tuple[BasePlotlyType]]
+        plotly_obj : BasePlotlyType|tuple[BasePlotlyType]
             Object to up updated
-        update_obj : Union[dict, List[dict], Tuple[dict]]
-            When ``plotly_obj`` is an instance of :class:`BasePlotlyType`,
+        update_obj : dict|list[dict]|tuple[dict]
+            When ``plotly_obj`` is an instance of :class:`BaseFigure`,
             ``update_obj`` should be a dict
 
             When ``plotly_obj`` is a tuple of instances of
@@ -1299,8 +1829,9 @@ class BaseFigure:
 
             # Handle invalid properties
             # -------------------------
-            invalid_props = [k for k in update_obj
-                             if k not in plotly_obj._validators]
+            invalid_props = [
+                k for k in update_obj if k not in plotly_obj._validators
+            ]
 
             plotly_obj._raise_on_invalid_property_error(*invalid_props)
 
@@ -1311,8 +1842,10 @@ class BaseFigure:
                 validator = plotly_obj._validators[key]
 
                 if isinstance(validator, CompoundValidator):
+                    # Update compound objects recursively
                     plotly_obj[key].update(val)
                 else:
+                    # Assign non-compound value
                     plotly_obj[key] = val
 
         elif isinstance(plotly_obj, tuple):
@@ -1339,8 +1872,9 @@ class BaseFigure:
         (not object equality as is the case for list.index)
 
         """
-        index_list = [i for i, curr_val in enumerate(iterable)
-                            if curr_val is val]
+        index_list = [
+            i for i, curr_val in enumerate(iterable) if curr_val is val
+        ]
         if not index_list:
             raise ValueError('Invalid value')
 
@@ -1348,68 +1882,130 @@ class BaseFigure:
 
 
 class BasePlotlyType:
-    _validators = None
+    """
+    BasePlotlyType is the base class for all objects in the trace, layout,
+    and frame object hierarchies
+    """
 
-    # Defaults to help mocking
     def __init__(self, plotly_name, **kwargs):
+        """
+        Construct a new BasePlotlyType
 
-        self._plotly_name = plotly_name
+        Parameters
+        ----------
+        plotly_name : str
+            The lowercase name of the plotly object
+        kwargs : dict
+            Invalid props/values to raise on
+        """
+        # Validate inputs
+        # ---------------
         self._raise_on_invalid_property_error(*kwargs.keys())
+
+        # Store params
+        # ------------
+        self._plotly_name = plotly_name
+
+        # Initialize properties
+        # ---------------------
+        # ### _validators ###
+        # A dict from property names to property validators
+        # type: Dict[str, BaseValidator]
         self._validators = {}
+
+        # ### _compound_props ###
+        # A dict from compound property names to compound objects
+        # type: Dict[str, BasePlotlyType]
         self._compound_props = {}
-        self._orphan_props = {}  # properties dict for use while object has no parent
+
+        # ### _compound_array_props ###
+        # A dict from compound array property names to tuples of compound
+        # objects
+        # type: Dict[str, Tuple[BasePlotlyType]]
+        self._compound_array_props = {}
+
+        # ### _orphan_props ###
+        # A dict of properties for use while object has no parent. When
+        # object has a parent, it requests its properties dict from its
+        # parent and doesn't use this.
+        # type: Dict
+        self._orphan_props = {}
+
+        # ### _parent ###
+        # The parent of the object. May be another BasePlotlyType or it may
+        # be a BaseFigure (as is the case for the Layout and Trace objects)
+        # type: Union[BasePlotlyType, BaseFigure]
         self._parent = None
-        self._change_callbacks = {}  # type: typ.Dict[typ.Tuple, typ.Callable]
+
+        # ### _change_callbacks ###
+        # A dict from tuples of child property path tuples to lists
+        # of callbacks that should be executed whenever any of these
+        # properties is modified
+        # type: Dict[Tuple[Tuple[Union[str, int]]], List[Callable]]
+        self._change_callbacks = {}
 
     @property
     def plotly_name(self):
+        """
+        The plotly name of the object
+
+        Returns
+        -------
+        str
+        """
         return self._plotly_name
 
     @property
-    def _parent_path(self) -> str:
+    def _parent_path_str(self) -> str:
+        """
+        dot-separated path string to this object's parent.
+
+        Returns
+        -------
+        str
+
+        Examples
+        --------
+        >>> import plotly.graph_objs as go
+        >>> go.Layout()._parent_path_str
+        ''
+
+        >>> go.layout.XAxis()._parent_path_str
+        'layout'
+
+        >>> go.layout.xaxis.rangeselector.Button()._parent_path_str
+        'layout.xaxis.rangeselector'
+        """
         raise NotImplementedError
 
     @property
     def _prop_descriptions(self) -> str:
+        """
+        Formatted string containing all of this obejcts child properties
+        and their descriptions
+
+        Returns
+        -------
+        str
+        """
         raise NotImplementedError
-
-    def __setattr__(self, prop, value):
-        if prop.startswith('_') or hasattr(self, prop):
-            # Let known properties and private properties through
-            super().__setattr__(prop, value)
-        else:
-            # Raise error on unknown public properties
-            self._raise_on_invalid_property_error(prop)
-
-    def _raise_on_invalid_property_error(self, *args):
-        invalid_props = args
-        if invalid_props:
-            if len(invalid_props) == 1:
-                prop_str = 'property'
-                invalid_str = repr(invalid_props[0])
-            else:
-                prop_str = 'properties'
-                invalid_str = repr(invalid_props)
-
-            module_root = 'plotly.graph_objs.'
-            if self._parent_path:
-                full_obj_name = (module_root +
-                                  self._parent_path + '.' +
-                                  self.__class__.__name__)
-            else:
-                full_obj_name = module_root + self.__class__.__name__
-
-            raise ValueError("Invalid {prop_str} specified for object of type "
-                             "{full_obj_name}: {invalid_str}\n\n"
-                             "    Valid properties:\n"
-                             "{prop_descriptions}"
-                             .format(prop_str=prop_str,
-                                     full_obj_name=full_obj_name,
-                                     invalid_str=invalid_str,
-                                     prop_descriptions=self._prop_descriptions))
 
     @property
     def _props(self):
+        """
+        Dictionary used to store this object properties.  When the object
+        has a parent, this dict is retreived from the parent. When the
+        object does not have a parent, this dict is the object's
+        `_orphan_props` property
+
+        Note: Property will return None if the object has a parent and the
+        object's properties have not been initialized using the
+        `_init_props` method.
+
+        Returns
+        -------
+        dict|None
+        """
         if self.parent is None:
             # Use orphan data
             return self._orphan_props
@@ -1417,10 +2013,54 @@ class BasePlotlyType:
             # Get data from parent's dict
             return self.parent._get_child_props(self)
 
-    def to_plotly_json(self):
-        return deepcopy(BaseFigure._remove_underscore_keys(self._props))
+    def _get_child_props(self, child):
+        """
+        Return properties dict for child
+
+        Parameters
+        ----------
+        child : BasePlotlyType
+
+        Returns
+        -------
+        dict
+        """
+        if self._props is None:
+            # If this node's properties are uninitialized then so are its
+            # child's
+            return None
+        else:
+            # ### Child a compound property ###
+            if child.plotly_name in self._compound_props:
+                return self._props.get(child.plotly_name, None)
+
+            # ### Child an element of a compound array property ###
+            elif child.plotly_name in self._compound_array_props:
+                children = self._compound_array_props[child.plotly_name]
+                child_ind = BaseFigure._index_is(children, child)
+                assert child_ind is not None
+
+                children_props = self._props.get(child.plotly_name, None)
+                return (children_props[child_ind]
+                        if children_props is not None and
+                        len(children_props) > child_ind
+                        else None)
+
+            # ### Invalid child ###
+            else:
+                raise ValueError('Invalid child with name: %s'
+                                 % child.plotly_name)
 
     def _init_props(self):
+        """
+        Ensure that this object's properties dict has been initialized. When
+        the object has a parent, this ensures that the parent has an
+        initialized properties dict with this object's plotly_name as a key.
+
+        Returns
+        -------
+        None
+        """
         # Ensure that _data is initialized.
         if self._props is not None:
             pass
@@ -1428,83 +2068,119 @@ class BasePlotlyType:
             self._parent._init_child_props(self)
 
     def _init_child_props(self, child):
-        if self.parent:
-            self.parent._init_child_props(self)
-            self_props = self.parent._get_child_props(self)
-        else:
-            self_props = self._orphan_props
+        """
+        Ensure that a properties dict has been initialized for a child object
 
-        child_or_children = self._compound_props[child.plotly_name]
-        if child is child_or_children:
-            if child.plotly_name not in self_props:
-                self_props[child.plotly_name] = {}
-        elif isinstance(child_or_children, (list, tuple)):
-            child_ind = BaseFigure._index_is(child_or_children, child)
-            if child.plotly_name not in self_props:
+        Parameters
+        ----------
+        child : BasePlotlyType
+
+        Returns
+        -------
+        None
+        """
+        # Init our own properties
+        # -----------------------
+        self._init_props()
+
+        # Child a compound property
+        # -------------------------
+        if child.plotly_name in self._compound_props:
+            if child.plotly_name not in self._props:
+                self._props[child.plotly_name] = {}
+
+        # Child an element of a compound array property
+        # ---------------------------------------------
+        elif child.plotly_name in self._compound_array_props:
+            children = self._compound_array_props[child.plotly_name]
+            child_ind = BaseFigure._index_is(children, child)
+            assert child_ind is not None
+
+            if child.plotly_name not in self._props:
                 # Initialize list
-                self_props[child.plotly_name] = []
+                self._props[child.plotly_name] = []
 
             # Make sure list is long enough for child
-            child_list = self_props[child.plotly_name]
-            while(len(child_list) <= child_ind):
-                child_list.append({})
+            children_list = self._props[child.plotly_name]
+            while len(children_list) <= child_ind:
+                children_list.append({})
 
-    def _get_child_props(self, child):
-
-        if self.parent:
-            self_props = self.parent._get_child_props(self)
+        # Invalid child
+        # -------------
         else:
-            self_props = self._orphan_props
+            raise ValueError('Invalid child with name: %s'
+                             % child.plotly_name)
 
-        if self_props is None:
+    def _get_child_prop_defaults(self, child):
+        """
+        Return default properties dict for child
+
+        Parameters
+        ----------
+        child : BasePlotlyType
+
+        Returns
+        -------
+        dict
+        """
+        if self._prop_defaults is None:
+            # If this node's default properties are uninitialized then so are
+            # its child's
             return None
         else:
-            child_or_children = self._compound_props[child.plotly_name]
-            if child is child_or_children:
-                return self_props.get(child.plotly_name, None)
-            elif isinstance(child_or_children, (list, tuple)):
-                child_ind = BaseFigure._index_is(child_or_children, child)
-                children_props = self_props.get(child.plotly_name, None)
-                return children_props[child_ind] \
-                    if children_props is not None and len(children_props) > child_ind \
-                    else None
+            # ### Child a compound property ###
+            if child.plotly_name in self._compound_props:
+                return self._prop_defaults.get(child.plotly_name, None)
+
+            # ### Child an element of a compound array property ###
+            elif child.plotly_name in self._compound_array_props:
+                children = self._compound_array_props[child.plotly_name]
+                child_ind = BaseFigure._index_is(children, child)
+
+                assert child_ind is not None
+
+                children_props = self._prop_defaults.get(
+                    child.plotly_name, None)
+
+                return (children_props[child_ind]
+                        if children_props is not None and
+                        len(children_props) > child_ind
+                        else None)
+
+            # ### Invalid child ###
             else:
-                ValueError('Unexpected child: %s' % child_or_children)
+                raise ValueError('Invalid child with name: %s'
+                                 % child.plotly_name)
 
     @property
     def _prop_defaults(self):
+        """
+        Return default properties dict
+
+        Returns
+        -------
+        dict
+        """
         if self.parent is None:
             return None
         else:
             return self.parent._get_child_prop_defaults(self)
 
-    def _get_child_prop_defaults(self, child):
-        if self.parent is None:
-            return None
-
-        self_prop_defaults = self.parent._get_child_prop_defaults(self)
-        if self_prop_defaults is None:
-            return None
-        else:
-            child_or_children = self._compound_props[child.plotly_name]
-            if child is child_or_children:
-                return self_prop_defaults.get(child.plotly_name, None)
-            elif isinstance(child_or_children, (list, tuple)):
-                child_ind = BaseFigure._index_is(child_or_children, child)
-                children_props = self_prop_defaults.get(child.plotly_name, None)
-                return children_props[child_ind] if children_props is not None else None
-            else:
-                ValueError('Unexpected child: %s' % child_or_children)
-
     @property
     def parent(self):
+        """
+        Return the object's parent, or None if the object has no parent
+        Returns
+        -------
+        BasePlotlyType|BaseFigure
+        """
         return self._parent
 
     @property
     def figure(self):
         """
         Reference to the top-level Figure or FigureWidget that this object
-        belongs to. None if the object does not below to a Figure
+        belongs to. None if the object does not belong to a Figure
 
         Returns
         -------
@@ -1519,21 +2195,49 @@ class BasePlotlyType:
 
         return top_parent
 
+    # Magic Methods
+    # -------------
     def __getitem__(self, prop):
-        if isinstance(prop, tuple):
-            res = self
-            for p in prop:
-                res = res[p]
+        """
+        Get item or nested item from object
 
-            return res
-        else:
-            if (prop not in self._validators and
-                    prop not in self._props and
-                    prop not in self._prop_defaults):
+        Parameters
+        ----------
+        prop : str|tuple
+
+            If prop is the name of a property of this object, then the
+            property is returned.
+
+            If prop is a nested property path string (e.g. 'foo[1].bar'),
+            then a nested property is returned (e.g. obj['foo'][1]['bar'])
+
+            If prop is a path tuple (e.g. ('foo', 1, 'bar')), then a nested
+            property is returned (e.g. obj['foo'][1]['bar']).
+
+        Returns
+        -------
+        Any
+        """
+
+        # Normalize prop
+        # --------------
+        # Convert into a property tuple
+        prop = BaseFigure._str_to_dict_path(prop)
+
+        # Handle scalar case
+        # ------------------
+        # e.g. ('foo',)
+        if len(prop) == 1:
+            # Unwrap scalar tuple
+            prop = prop[0]
+            if (prop not in self._validators and prop not in self._props
+                    and prop not in self._prop_defaults):
                 raise KeyError(prop)
 
             if prop in self._compound_props:
                 return self._compound_props[prop]
+            elif prop in self._compound_array_props:
+                return self._compound_array_props[prop]
             elif self._props is not None and prop in self._props:
                 return self._props[prop]
             elif self._prop_defaults is not None:
@@ -1541,27 +2245,139 @@ class BasePlotlyType:
             else:
                 return None
 
-    def __contains__(self, prop):
-        return prop in self._validators
-
-    def __setitem__(self, key, value):
-        if key not in self._validators:
-            self._raise_on_invalid_property_error(key)
-
-        validator = self._validators[key]
-
-        if isinstance(validator, CompoundValidator):
-            self._set_compound_prop(key, value)
-        elif isinstance(validator, (CompoundArrayValidator, BaseDataValidator)):
-            self._set_array_prop(key, value)
+        # Handle non-scalar case
+        # ----------------------
+        # e.g. ('foo', 1), ()
         else:
-            # Simple property
-            self._set_prop(key, value)
+            res = self
+            for p in prop:
+                res = res[p]
+
+            return res
+
+    def __contains__(self, prop):
+        """
+        Determine whether object contains a property or nested property
+
+        Parameters
+        ----------
+        prop : str|tuple
+            If prop is a simple string (e.g. 'foo'), then return true of the
+            object contains an element named 'foo'
+
+            If prop is a property path string (e.g. 'foo[0].bar'),
+            then return true if the obejct contains the nested elements for
+            each entry in the path string (e.g. 'bar' in obj['foo'][0])
+
+            If prop is a property path tuple (e.g. ('foo', 0, 'bar')),
+            then return true if the object contains the nested elements for
+            each entry in the path string (e.g. 'bar' in obj['foo'][0])
+
+        Returns
+        -------
+        bool
+        """
+        prop_tuple = BaseFigure._str_to_dict_path(prop)
+
+        obj = self
+        for p in prop_tuple:
+            if isinstance(p, int):
+                if isinstance(obj, tuple) and 0 <= p < len(obj):
+                    obj = obj[p]
+                else:
+                    return False
+            else:
+                if p in obj._validators:
+                    obj = obj[p]
+                else:
+                    return False
+
+        return True
+
+    def __setitem__(self, prop, value):
+        """
+        Parameters
+        ----------
+        prop : str
+            The name of a direct child of this object
+
+            Note: Setting nested properties using property path string or
+            property path tuples is not supported.
+        value
+            New property value
+
+        Returns
+        -------
+        None
+        """
+        # Validate prop
+        # -------------
+        if prop not in self._validators:
+            self._raise_on_invalid_property_error(prop)
+
+        # Get validator for this property
+        # -------------------------------
+        validator = self._validators[prop]
+
+        # Handle compound property
+        # ------------------------
+        if isinstance(validator, CompoundValidator):
+            self._set_compound_prop(prop, value)
+
+        # Handle compound array property
+        # ------------------------------
+        elif isinstance(validator,
+                        (CompoundArrayValidator, BaseDataValidator)):
+            self._set_array_prop(prop, value)
+
+        # Handle simple property
+        # ----------------------
+        else:
+            self._set_prop(prop, value)
+
+    def __setattr__(self, prop, value):
+        """
+        Parameters
+        ----------
+        prop : str
+            The name of a direct child of this object
+        value
+            New property value
+        Returns
+        -------
+        None
+        """
+        if (prop.startswith('_') or
+                hasattr(self, prop) or
+                prop in self._validators):
+            # Let known properties and private properties through
+            super().__setattr__(prop, value)
+        else:
+            # Raise error on unknown public properties
+            self._raise_on_invalid_property_error(prop)
 
     def __iter__(self):
+        """
+        Return an iterator over the object's properties
+        """
         return iter(self._validators.keys())
 
     def __eq__(self, other):
+        """
+        Test for equality
+
+        To be considered equal, `other` must have the same type as this object
+        and their `to_plotly_json` representaitons must be identical.
+
+        Parameters
+        ----------
+        other
+            The object to compare against
+
+        Returns
+        -------
+        bool
+        """
         if not isinstance(other, self.__class__):
             # Require objects to be of the same plotly type
             return False
@@ -1570,45 +2386,505 @@ class BasePlotlyType:
 
             # Use _vals_equal instead of `==` to handle cases where
             # underlying dicts contain numpy arrays
-            return BasePlotlyType._vals_equal(
-                self.to_plotly_json(),
-                other.to_plotly_json())
+            return BasePlotlyType._vals_equal(self.to_plotly_json(),
+                                              other.to_plotly_json())
 
-    def update(self, dict1=None, **dict2):
+    def _raise_on_invalid_property_error(self, *args):
         """
-        Update properties of object with dict1 and then dict2.
+        Raise informative exception when invalid property names are
+        encountered
+
+        Parameters
+        ----------
+        args : list[str]
+            List of property names that have already been determined to be
+            invalid
+
+        Raises
+        ------
+        ValueError
+            Always
+        """
+        invalid_props = args
+        if invalid_props:
+            if len(invalid_props) == 1:
+                prop_str = 'property'
+                invalid_str = repr(invalid_props[0])
+            else:
+                prop_str = 'properties'
+                invalid_str = repr(invalid_props)
+
+            module_root = 'plotly.graph_objs.'
+            if self._parent_path_str:
+                full_obj_name = (module_root + self._parent_path_str + '.' +
+                                 self.__class__.__name__)
+            else:
+                full_obj_name = module_root + self.__class__.__name__
+
+            raise ValueError("Invalid {prop_str} specified for object of type "
+                             "{full_obj_name}: {invalid_str}\n\n"
+                             "    Valid properties:\n"
+                             "{prop_descriptions}".format(
+                                 prop_str=prop_str,
+                                 full_obj_name=full_obj_name,
+                                 invalid_str=invalid_str,
+                                 prop_descriptions=self._prop_descriptions))
+
+    def update(self, dict1=None, **kwargs):
+        """
+        Update the properties of an object with a dict and/or with
+        keyword arguments.
 
         This recursively updates the structure of the original
-        object with the new entries in the second and third objects. This
-        allows users to update with large, nested structures.
-
-        Note, because the dict2 packs up all the keyword arguments, you can
-        specify the changes as a list of keyword agruments.
+        object with the values in the input dict / keyword arguments.
 
         Parameters
         ----------
         dict1 : dict
             Dictionary of properties to be updated
-        dict2 :
+        kwargs :
+            Keyword/value pair of properties to be updated
+
+        Returns
+        -------
+        BasePlotlyType
+            Updated plotly object
+        """
+        if self.figure:
+            with self.figure.batch_update():
+                BaseFigure._perform_update(self, dict1)
+                BaseFigure._perform_update(self, kwargs)
+        else:
+            BaseFigure._perform_update(self, dict1)
+            BaseFigure._perform_update(self, kwargs)
+
+    @property
+    def _in_batch_mode(self):
+        """
+        True if the object belongs to a figure that is currently in batch mode
+        Returns
+        -------
+        bool
+        """
+        return self.parent and self.parent._in_batch_mode
+
+    def _set_prop(self, prop, val):
+        """
+        Set the value of a simple property
+
+        Parameters
+        ----------
+        prop : str
+            Name of a simple (non-compound, non-array) property
+        val
+            The new property value
+
+        Returns
+        -------
+        Any
+            The coerced assigned value
+        """
+
+        # val is Undefined
+        # ----------------
+        if val is Undefined:
+            # Do nothing
+            return
+
+        # Import value
+        # ------------
+        validator = self._validators.get(prop)
+        val = validator.validate_coerce(val)
+
+        # val is None
+        # -----------
+        if val is None:
+            # Check if we should send null update
+            if self._props and prop in self._props:
+                # Remove property if not in batch mode
+                if not self._in_batch_mode:
+                    self._props.pop(prop)
+
+                # Send property update message
+                self._send_prop_set(prop, val)
+
+        # val is valid value
+        # ------------------
+        else:
+            # Make sure properties dict is initialized
+            self._init_props()
+
+            # Check whether the value is a change
+            if (prop not in self._props or
+                    not BasePlotlyType._vals_equal(self._props[prop], val)):
+                # Set property value if not in batch mode
+                if not self._in_batch_mode:
+                    self._props[prop] = val
+
+                # Send property update message
+                self._send_prop_set(prop, val)
+
+        return val
+
+    def _set_compound_prop(self, prop, val):
+        """
+        Set the value of a compound property
+
+        Parameters
+        ----------
+        prop : str
+            Name of a compound property
+        val
+            The new property value
+
+        Returns
+        -------
+        BasePlotlyType
+            The coerced assigned object
+        """
+
+        # val is Undefined
+        # ----------------
+        if val is Undefined:
+            # Do nothing
+            return
+
+        # Import value
+        # ------------
+        validator = self._validators.get(prop)
+        # type: BasePlotlyType
+        val = validator.validate_coerce(val)
+
+        # Save deep copies of current and new states
+        # ------------------------------------------
+        curr_val = self._compound_props.get(prop, None)
+        if curr_val is not None:
+            curr_dict_val = deepcopy(curr_val._props)
+        else:
+            curr_dict_val = None
+
+        if val is not None:
+            new_dict_val = deepcopy(val._props)
+        else:
+            new_dict_val = None
+
+        # Update _props dict
+        # ------------------
+        if not self._in_batch_mode:
+            if not new_dict_val:
+                if prop in self._props:
+                    self._props.pop(prop)
+            else:
+                self._init_props()
+                self._props[prop] = new_dict_val
+
+        # Send update if there was a change in value
+        # ------------------------------------------
+        if not BasePlotlyType._vals_equal(curr_dict_val, new_dict_val):
+            self._send_prop_set(prop, new_dict_val)
+
+        # Reparent
+        # --------
+        # ### Reparent new value and clear orphan data ###
+        val._parent = self
+        val._orphan_props.clear()
+
+        # ### Unparent old value and update orphan data ###
+        if curr_val is not None:
+            if curr_dict_val is not None:
+                curr_val._orphan_props.update(curr_dict_val)
+            curr_val._parent = None
+
+        # Update _compound_props
+        # ----------------------
+        self._compound_props[prop] = val
+        return val
+
+    def _set_array_prop(self, prop, val):
+        """
+        Set the value of a compound property
+
+        Parameters
+        ----------
+        prop : str
+            Name of a compound property
+        val
+            The new property value
+
+        Returns
+        -------
+        tuple[BasePlotlyType]
+            The coerced assigned object
+        """
+
+        # val is Undefined
+        # ----------------
+        if val is Undefined:
+            # Do nothing
+            return
+
+        # Import value
+        # ------------
+        validator = self._validators.get(prop)
+        # type: Tuple[BasePlotlyType]
+        val = validator.validate_coerce(val)
+
+        # Save deep copies of current and new states
+        # ------------------------------------------
+        curr_val = self._compound_array_props.get(prop, None)
+        if curr_val is not None:
+            curr_dict_vals = [deepcopy(cv._props) for cv in curr_val]
+        else:
+            curr_dict_vals = None
+
+        if val is not None:
+            new_dict_vals = [deepcopy(nv._props) for nv in val]
+        else:
+            new_dict_vals = None
+
+        # Update _props dict
+        # ------------------
+        if not self._in_batch_mode:
+            if not new_dict_vals:
+                if prop in self._props:
+                    self._props.pop(prop)
+            else:
+                self._init_props()
+                self._props[prop] = new_dict_vals
+
+        # Send update if there was a change in value
+        # ------------------------------------------
+        if not BasePlotlyType._vals_equal(curr_dict_vals, new_dict_vals):
+            self._send_prop_set(prop, new_dict_vals)
+
+        # Reparent
+        # --------
+        # ### Reparent new values and clear orphan data ###
+        if val is not None:
+            for v in val:
+                v._orphan_props.clear()
+                v._parent = self
+
+        # ### Unparent old value and update orphan data ###
+        if curr_val is not None:
+            for cv, cv_dict in zip(curr_val, curr_dict_vals):
+                if cv_dict is not None:
+                    cv._orphan_props.update(cv_dict)
+                cv._parent = None
+
+        # Update _compound_array_props
+        # ----------------------------
+        self._compound_array_props[prop] = val
+        return val
+
+    def _send_prop_set(self, prop_path_str, val):
+        """
+        Notify parent that a property has been set to a new value
+
+        Parameters
+        ----------
+        prop_path_str : str
+            Property path string (e.g. 'foo[0].bar') of property that
+            was set, relative to this object
+        val
+            New value for property. Either a simple value, a dict,
+            or a tuple of dicts. This should *not* be a BasePlotlyType object.
 
         Returns
         -------
         None
         """
-        if self.figure:
-            with self.figure.batch_update():
-                BaseFigure._perform_update(self, dict1)
-                BaseFigure._perform_update(self, dict2)
-        else:
-            BaseFigure._perform_update(self, dict1)
-            BaseFigure._perform_update(self, dict2)
+        raise NotImplementedError()
 
-    @property
-    def _in_batch_mode(self):
-        return self.parent and self.parent._in_batch_mode
+    def _prop_set_child(self, child, prop_path_str, val):
+        """
+        Propagate property setting notification from child to parent
+
+        Parameters
+        ----------
+        child : BasePlotlyType
+            Child object
+        prop_path_str : str
+            Property path string (e.g. 'foo[0].bar') of property that
+            was set, relative to `child`
+        val
+            New value for property. Either a simple value, a dict,
+            or a tuple of dicts. This should *not* be a BasePlotlyType object.
+
+        Returns
+        -------
+        None
+        """
+
+        # Child is compound array property
+        # --------------------------------
+        child_prop_val = getattr(self, child.plotly_name)
+        if isinstance(child_prop_val, (list, tuple)):
+            child_ind = BaseFigure._index_is(child_prop_val, child)
+            obj_path = '{child_name}[{child_ind}].{prop}'.format(
+                child_name=child.plotly_name,
+                child_ind=child_ind,
+                prop=prop_path_str)
+
+        # Child is compound property
+        # --------------------------
+        else:
+            obj_path = '{child_name}.{prop}'.format(
+                child_name=child.plotly_name,
+                prop=prop_path_str)
+
+        # Propagate to parent
+        # -------------------
+        self._send_prop_set(obj_path, val)
+
+    def _restyle_child(self, child, prop, val):
+        """
+        Propagate _restyle_child to parent
+
+        Note: This method must match the name and signature of the
+        corresponding method on BaseFigure
+        """
+        self._prop_set_child(child, prop, val)
+
+    def _relayout_child(self, child, prop, val):
+        """
+        Propagate _relayout_child to parent
+
+        Note: This method must match the name and signature of the
+        corresponding method on BaseFigure
+        """
+        self._prop_set_child(child, prop, val)
+
+    # Callbacks
+    # ---------
+    def _dispatch_change_callbacks(self, changed_paths):
+        """
+        Execute the appropriate change callback functions given a set of
+        changed property path tuples
+
+        Parameters
+        ----------
+        changed_paths : set[tuple[int|str]]
+
+        Returns
+        -------
+        None
+        """
+        # Loop over registered callbacks
+        # ------------------------------
+        for prop_path_tuples, callbacks in self._change_callbacks.items():
+            # ### Compute callback paths that changed ###
+            common_paths = changed_paths.intersection(set(prop_path_tuples))
+            if common_paths:
+
+                # #### Invoke callback ####
+                callback_args = [self[cb_path]
+                                 for cb_path in prop_path_tuples]
+
+                for callback in callbacks:
+                    callback(self, *callback_args)
+
+    def on_change(self, callback, *args, append=False):
+        """
+        Register callback function to be called when certain properties or
+        subproperties of this object are modified.
+
+        Callback will be invoked whenever ANY of these properties is
+        modified. Furthermore. The callback will only be invoked once even
+        if multiple properties are modified during the same restyle /
+        relayout / update operation.
+
+        Parameters
+        ----------
+        callback : function
+            Function that accepts 1 + len(`args`) parameters. First parameter
+            is this object. Second through last parameters are the
+            property / subpropery values referenced by args.
+        args : list[str|tuple[int|str]]
+            List of property references where each reference may be one of:
+
+              1) A property name string (e.g. 'foo') for direct properties
+              2) A property path string (e.g. 'foo[0].bar') for
+                 subproperties
+              3) A property path tuple (e.g. ('foo', 0, 'bar')) for
+                 subproperties
+
+        append : bool
+            True if callback should be appended to previously registered
+            callback on the same properties, False if callback should replace
+            previously registered callbacks on the same properties. Defaults
+            to False.
+
+        Examples
+        --------
+
+        Register callback that prints out the range extents of the xaxis and
+        yaxis whenever either either of them changes.
+
+        >>> fig.layout.on_change(
+        ...   lambda obj, xrange, yrange: print("%s-%s" % (xrange, yrange)),
+        ...   ('xaxis', 'range'), ('yaxis', 'range'))
+
+
+        Returns
+        -------
+        None
+        """
+
+        # Validate args not empty
+        # -----------------------
+        if len(args) == 0:
+            raise ValueError(
+                'At least one change property must be specified')
+
+        # Validate args
+        # -------------
+        invalid_args = [arg for arg in args if arg not in self]
+        if invalid_args:
+            raise ValueError(
+                'Invalid property specification(s): %s' % invalid_args)
+
+        # Normalize args to path tuples
+        # -----------------------------
+        arg_tuples = tuple([BaseFigure._str_to_dict_path(a) for a in args])
+
+        # Initialize callbacks list
+        # -------------------------
+        # Initialize an empty callbacks list if there are no previously
+        # defined callbacks for this collection of args, or if append is False
+        if arg_tuples not in self._change_callbacks or not append:
+            self._change_callbacks[arg_tuples] = []
+
+        # Register callback
+        # -----------------
+        self._change_callbacks[arg_tuples].append(callback)
+
+    def to_plotly_json(self):
+        """
+        Return plotly JSON representation of object as a Python dict
+
+        Returns
+        -------
+        dict
+        """
+        return deepcopy(self._props)
 
     @staticmethod
     def _vals_equal(v1, v2):
+        """
+        Recursive equality function that handles nested dicts / tuples / lists
+        that contain numpy arrays.
+
+        v1
+            First value to compare
+        v2
+            Second value to compare
+
+        Returns
+        -------
+        bool
+            True if v1 and v2 are equal, False otherwise
+        """
         if isinstance(v1, np.ndarray) or isinstance(v2, np.ndarray):
             return np.array_equal(v1, v2)
         elif isinstance(v1, (list, tuple)):
@@ -1625,222 +2901,45 @@ class BasePlotlyType:
         else:
             return v1 == v2
 
-    def _set_prop(self, prop, val):
-        if val is Undefined:
-            # Do nothing
-            return
-
-        validator = self._validators.get(prop)
-        val = validator.validate_coerce(val)
-
-        if val is None:
-            # Check if we should send null update
-            if self._props and prop in self._props:
-                if not self._in_batch_mode:
-                    self._props.pop(prop)
-                self._send_update(prop, val)
-        else:
-            self._init_props()
-            if prop not in self._props or not BasePlotlyType._vals_equal(self._props[prop], val):
-                if not self._in_batch_mode:
-                    self._props[prop] = val
-                self._send_update(prop, val)
-
-    def _set_compound_prop(self, prop, val):
-        if val is Undefined:
-            # Do nothing
-            return
-
-        # Validate coerce new value
-        validator = self._validators.get(prop)
-        val = validator.validate_coerce(val)  # type: BasePlotlyType
-
-        # Grab deep copies of current and new states
-        curr_val = self._compound_props.get(prop, None)
-        if curr_val is not None:
-            curr_dict_val = deepcopy(curr_val._props)
-        else:
-            curr_dict_val = None
-
-        if val is not None:
-            new_dict_val = deepcopy(val._props)
-        else:
-            new_dict_val = None
-
-        # Update data dict
-        if not self._in_batch_mode:
-            if not new_dict_val:
-                if prop in self._props:
-                    self._props.pop(prop)
-            else:
-                self._init_props()
-                self._props[prop] = new_dict_val
-
-        # Send update if there was a change in value
-        if not BasePlotlyType._vals_equal(curr_dict_val, new_dict_val):
-            self._send_update(prop, new_dict_val)
-
-        # Reparent new value and clear orphan data
-        val._parent = self
-        val._orphan_props.clear()
-
-        # Reparent old value and update orphan data
-        if curr_val is not None and curr_val is not val:
-            if curr_dict_val is not None:
-                curr_val._orphan_props.update(curr_dict_val)
-            curr_val._parent = None
-
-        self._compound_props[prop] = val
-        return val
-
-    def _set_array_prop(self, prop, val):
-        if val is Undefined:
-            # Do nothing
-            return
-
-        # Validate coerce new value
-        validator = self._validators.get(prop)
-        val = validator.validate_coerce(val)  # type: tuple
-
-        # Update data dict
-        curr_val = self._compound_props.get(prop, None)
-        if curr_val is not None:
-            curr_dict_vals = [deepcopy(cv._props) for cv in curr_val]
-        else:
-            curr_dict_vals = None
-
-        if val is not None:
-            new_dict_vals = [deepcopy(nv._props) for nv in val]
-        else:
-            new_dict_vals = None
-
-        # Update data dict
-        if not self._in_batch_mode:
-            if not new_dict_vals:
-                if prop in self._props:
-                    self._props.pop(prop)
-            else:
-                self._init_props()
-                self._props[prop] = new_dict_vals
-
-        # Send update if there was a change in value
-        if not BasePlotlyType._vals_equal(curr_dict_vals, new_dict_vals):
-            self._send_update(prop, new_dict_vals)
-
-        # Reparent new values and clear orphan data
-        if val is not None:
-            for v in val:
-                v._orphan_props.clear()
-                v._parent = self
-
-        # Reparent
-        if curr_val is not None:
-            for cv, cv_dict in zip(curr_val, curr_dict_vals):
-                if cv_dict is not None:
-                    cv._orphan_props.update(cv_dict)
-                cv._parent = None
-        self._compound_props[prop] = val
-        return val
-
-    def _send_update(self, prop, val):
-        raise NotImplementedError()
-
-    def _update_child(self, child, prop, val):
-        child_prop_val = getattr(self, child.plotly_name)
-        if isinstance(child_prop_val, (list, tuple)):
-            child_ind = BaseFigure._index_is(child_prop_val, child)
-            obj_path = '{child_name}.{child_ind}.{prop}'.format(
-                child_name=child.plotly_name,
-                child_ind=child_ind,
-                prop=prop)
-        else:
-            obj_path = '{child_name}.{prop}'.format(child_name=child.plotly_name, prop=prop)
-
-        self._send_update(obj_path, val)
-
-    def _restyle_child(self, child, prop, val):
-        self._update_child(child, prop, val)
-
-    def _relayout_child(self, child, prop, val):
-        self._update_child(child, prop, val)
-
-    # Callbacks
-    # ---------
-    def _dispatch_change_callbacks(self, changed_paths):
-        # print(f'Change callback: {self.plotly_name} - {changed_paths}')
-        changed_paths = set(changed_paths)
-        # pprint(changed_paths)
-        for callback_paths, callback in self._change_callbacks.items():
-            # pprint(set(callback_paths))
-            common_paths = changed_paths.intersection(set(callback_paths))
-            if common_paths:
-                # Invoke callback
-                callback_args = [self[cb_path] for cb_path in callback_paths]
-                callback(self, *callback_args)
-
-    def on_change(self, callback, *args):
-        """
-        Register callback function to be called with a properties or subproperties of this object are modified
-
-        Parameters
-        ----------
-        callback : function
-            Function that accepts 1 + len(args) parameters. First parameter is this object. Second throug last
-            parameters are the values referenced by args
-        args : str or tuple(str)
-            Property name (for direct properties) or tuple of property names / indices (for sub properties). Callback
-            will be invoked whenever ANY of these properties is modified. Furthermore. The callback will only be
-            invoked once even if multiple properties are modified during the same restyle operation.
-
-        Returns
-        -------
-
-        """
-
-        if len(args) == 0:
-            raise ValueError('At least one property/subproperty must be specified')
-
-        # TODO: Validate that args valid properties / subproperties
-        validated_args = tuple([a if isinstance(a, tuple) else (a,) for a in args])
-
-        # TODO: add append arg and store list of callbacks
-        self._change_callbacks[validated_args] = callback
-
-
 class BaseLayoutHierarchyType(BasePlotlyType):
 
     # _send_relayout analogous to _send_restyle above
     def __init__(self, plotly_name, **kwargs):
         super().__init__(plotly_name, **kwargs)
 
-    def _send_update(self, prop, val):
+    def _send_prop_set(self, prop_path_str, val):
         if self.parent:
-            self.parent._relayout_child(self, prop, val)
+            self.parent._relayout_child(self, prop_path_str, val)
 
 
 class BaseLayoutType(BaseLayoutHierarchyType):
 
-
     _subplotid_prop_names = ['xaxis', 'yaxis', 'geo', 'ternary', 'scene']
 
-    _subplotid_prop_re = re.compile('(' + '|'.join(_subplotid_prop_names) + ')(\d+)')
+    _subplotid_prop_re = re.compile(
+        '(' + '|'.join(_subplotid_prop_names) + ')(\d+)')
 
     @property
     def _subplotid_validators(self):
         from plotly.validators.layout import (XAxisValidator, YAxisValidator,
-                                              GeoValidator,
-                                              TernaryValidator, SceneValidator)
+                                              GeoValidator, TernaryValidator,
+                                              SceneValidator)
 
-        return {'xaxis': XAxisValidator,
-                'yaxis': YAxisValidator,
-                'geo': GeoValidator,
-                'ternary': TernaryValidator,
-                'scene': SceneValidator}
+        return {
+            'xaxis': XAxisValidator,
+            'yaxis': YAxisValidator,
+            'geo': GeoValidator,
+            'ternary': TernaryValidator,
+            'scene': SceneValidator
+        }
 
     def __init__(self, plotly_name, **kwargs):
         # Compute invalid kwargs. Pass to parent for error message
-        invalid_kwargs = {k: v for k, v in kwargs.items()
-                          if not self._subplotid_prop_re.fullmatch(k)}
+        invalid_kwargs = {
+            k: v
+            for k, v in kwargs.items()
+            if not self._subplotid_prop_re.fullmatch(k)
+        }
         super().__init__(plotly_name, **invalid_kwargs)
         self._subplotid_props = {}
         for prop, value in kwargs.items():
@@ -1863,61 +2962,74 @@ class BaseLayoutType(BaseLayoutHierarchyType):
 
             # Add validator
         if prop not in self._validators:
-            validator = self._subplotid_validators[subplot_prop](plotly_name=prop)
+            validator = self._subplotid_validators[subplot_prop](
+                plotly_name=prop)
             self._validators[prop] = validator
 
         # Import value
         self._subplotid_props[prop] = self._set_compound_prop(prop, value)
 
-    def __getattr__(self, item):
+    def __getattr__(self, prop):
 
         # Handle subplot suffix of 1
         # Remove digit of 1 from subplot id (e.g.. xaxis1 -> xaxis)
-        match = self._subplotid_prop_re.fullmatch(item)
+        match = self._subplotid_prop_re.fullmatch(prop)
         if match:
             subplot_prop = match.group(1)
             suffix_digit = int(match.group(2))
             if subplot_prop and suffix_digit == 1:
-                item = subplot_prop
+                prop = subplot_prop
 
         # Check for subplot access (e.g. xaxis2)
         # Validate then call self._get_prop(item)
-        if item in self._subplotid_props:
-            return self._subplotid_props[item]
-        elif item in self._validators:
-            return self[item]
+        if prop in self._subplotid_props:
+            return self._subplotid_props[prop]
+        elif prop in self._validators:
+            return self[prop]
 
-        raise AttributeError("'Layout' object has no attribute '{item}'".format(item=item))
+        raise AttributeError(
+            "'Layout' object has no attribute '{item}'".format(item=prop))
 
-    def __getitem__(self, item):
+    def __getitem__(self, prop):
+
+        # Let parent handle non-scalar cases
+        # e.g. ('xaxis', 'range') or 'xaxis.range'
+        prop_tuple = BaseFigure._str_to_dict_path(prop)
+        if (len(prop_tuple) != 1 or
+                not isinstance(prop_tuple[0], str)):
+            return super().__getitem__(prop)
+        else:
+            # Unwrap to scalar string
+            prop = prop_tuple[0]
 
         # Handle subplot suffix of 1
         # Remove digit of 1 from subplot id (e.g.. xaxis1 -> xaxis)
-        match = self._subplotid_prop_re.fullmatch(item)
+        match = self._subplotid_prop_re.fullmatch(prop)
+
         if match:
             subplot_prop = match.group(1)
             suffix_digit = int(match.group(2))
             if subplot_prop and suffix_digit == 1:
-                item = subplot_prop
+                prop = subplot_prop
 
         # Check for subplot access (e.g. xaxis2)
         # Validate then call self._get_prop(item)
-        if item in self._subplotid_props:
-            return self._subplotid_props[item]
-        elif item in self._validators:
-            return super().__getitem__(item)
+        if prop in self._subplotid_props:
+            return self._subplotid_props[prop]
+        elif prop in self._validators:
+            return super().__getitem__(prop)
 
-        raise AttributeError("'Layout' object has no attribute '{item}'".format(item=item))
+        raise AttributeError(
+            "'Layout' object has no attribute '{item}'".format(item=prop))
 
     def __contains__(self, prop):
-        if prop in self._validators:
+        if super().__contains__(prop):
             return True
         else:
             # Check for subplot with suffix 1
             match = self._subplotid_prop_re.fullmatch(prop)
-            if (match and
-                    match.group(1) in self._validators and
-                    match.group(2) == '1'):
+            if (match and match.group(1) in self._validators
+                    and match.group(2) == '1'):
                 return True
             else:
                 return False
@@ -1948,13 +3060,12 @@ class BaseLayoutType(BaseLayoutHierarchyType):
 
 
 class BaseTraceHierarchyType(BasePlotlyType):
-
     def __init__(self, plotly_name, **kwargs):
         super().__init__(plotly_name, **kwargs)
 
-    def _send_update(self, prop, val):
+    def _send_prop_set(self, prop_path_str, val):
         if self.parent:
-            self.parent._restyle_child(self, prop, val)
+            self.parent._restyle_child(self, prop_path_str, val)
 
 
 class BaseTraceType(BaseTraceHierarchyType):
@@ -1979,7 +3090,8 @@ class BaseTraceType(BaseTraceHierarchyType):
     # Hover
     # -----
     def on_hover(self,
-                 callback: typ.Callable[['BaseTraceType', Points, InputDeviceState], None],
+                 callback: typ.Callable[
+                     ['BaseTraceType', Points, InputDeviceState], None],
                  append=False):
         """
         Register callback to be called when the user hovers over a point from this trace
@@ -2011,7 +3123,10 @@ class BaseTraceType(BaseTraceHierarchyType):
 
     # Unhover
     # -------
-    def on_unhover(self, callback: typ.Callable[['BaseTraceType', Points, InputDeviceState], None], append=False):
+    def on_unhover(self,
+                   callback: typ.Callable[
+                       ['BaseTraceType', Points, InputDeviceState], None],
+                   append=False):
         if not append:
             self._unhover_callbacks.clear()
 
@@ -2024,7 +3139,10 @@ class BaseTraceType(BaseTraceHierarchyType):
 
     # Click
     # -----
-    def on_click(self, callback: typ.Callable[['BaseTraceType', Points, InputDeviceState], None], append=False):
+    def on_click(self,
+                 callback: typ.Callable[
+                     ['BaseTraceType', Points, InputDeviceState], None],
+                 append=False):
         if not append:
             self._click_callbacks.clear()
         if callback:
@@ -2036,26 +3154,32 @@ class BaseTraceType(BaseTraceHierarchyType):
 
     # Select
     # ------
-    def on_selected(self,
-                    callback: typ.Callable[['BaseTraceType', Points, typ.Union[BoxSelector, LassoSelector]], None],
-                    append=False):
+    def on_selected(
+            self,
+            callback: typ.Callable[[
+                'BaseTraceType', Points, typ.Union[BoxSelector, LassoSelector]
+            ], None],
+            append=False):
         if not append:
             self._select_callbacks.clear()
 
         if callback:
             self._select_callbacks.append(callback)
 
-    def _dispatch_on_selected(self, points: Points, selector: typ.Union[BoxSelector, LassoSelector]):
+    def _dispatch_on_selected(self, points: Points,
+                              selector: typ.Union[BoxSelector, LassoSelector]):
         for callback in self._select_callbacks:
             callback(self, points, selector)
 
 
 class BaseFrameHierarchyType(BasePlotlyType):
-
     def __init__(self, plotly_name, **kwargs):
         super().__init__(plotly_name, **kwargs)
 
-    def _send_update(self, prop, val):
+    def _send_prop_set(self, prop_path_str, val):
         # Frames are not supported by FrameWidget and updates are not propagated to parents
         pass
 
+    def on_change(self, callback, *args):
+        raise NotImplementedError(
+            'Change callbacks are not supported on Frames')
