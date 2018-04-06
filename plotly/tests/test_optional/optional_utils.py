@@ -33,7 +33,7 @@ class NumpyTestUtilsMixin(object):
 
     def assert_fig_equal(self, d1, d2, msg=None, ignore=['uid']):
         """
-        Helper function for asser_dict_equal
+        Helper function for assert_dict_equal
 
         By defualt removes uid from d1 and/or d2 if present
         then calls assert_dict_equal.
