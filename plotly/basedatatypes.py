@@ -2901,26 +2901,56 @@ class BasePlotlyType:
         else:
             return v1 == v2
 
-class BaseLayoutHierarchyType(BasePlotlyType):
 
-    # _send_relayout analogous to _send_restyle above
+class BaseLayoutHierarchyType(BasePlotlyType):
+    """
+    Base class for all types in the layout hierarchy
+    """
+
+    @property
+    def _parent_path_str(self) -> str:
+        pass
+
     def __init__(self, plotly_name, **kwargs):
         super().__init__(plotly_name, **kwargs)
 
     def _send_prop_set(self, prop_path_str, val):
         if self.parent:
+            # ### Inform parent of relayout operation ###
             self.parent._relayout_child(self, prop_path_str, val)
 
 
 class BaseLayoutType(BaseLayoutHierarchyType):
+    """
+    Base class for the layout type. The Layout class itself is a
+    code-generated subclass.
+    """
 
+    # Dynamic properties
+    # ------------------
+    # Unlike all other plotly types, BaseLayoutType has dynamic properties.
+    # These are used when a layout has multiple instances of subplot types
+    # (xaxis2, yaxis3, geo4, etc.)
+    #
+    # The base version of each suplot type is defined in the schema and code
+    # generated. So the Layout subclass has statically defined properties
+    # for xaxis, yaxis, geo, ternary, and scene. But, we need to dynamically
+    # generated properties/validators as needed for xaxis2, yaxis3, etc.
+
+    # # ### Create subplot property regular expression ###
     _subplotid_prop_names = ['xaxis', 'yaxis', 'geo', 'ternary', 'scene']
-
     _subplotid_prop_re = re.compile(
         '(' + '|'.join(_subplotid_prop_names) + ')(\d+)')
 
     @property
     def _subplotid_validators(self):
+        """
+        dict of validator classes for each subplot type
+
+        Returns
+        -------
+        dict
+        """
         from plotly.validators.layout import (XAxisValidator, YAxisValidator,
                                               GeoValidator, TernaryValidator,
                                               SceneValidator)
@@ -2934,75 +2964,118 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         }
 
     def __init__(self, plotly_name, **kwargs):
-        # Compute invalid kwargs. Pass to parent for error message
+        """
+        Construct a new BaseLayoutType object
+
+        Parameters
+        ----------
+        plotly_name : str
+            Name of the object (should always be 'layout')
+        kwargs : dict[str, any]
+            Properties that were not recognized by the Layout subclass.
+            These are subplot identifiers (xaxis2, geo4, etc.) or they are
+            invalid properties.
+        """
+        # Validate inputs
+        # ---------------
+        assert plotly_name == 'layout'
+
+        # Compute invalid kwargs
+        # ----------------------
+        # Pass to parent for error handling
         invalid_kwargs = {
             k: v
             for k, v in kwargs.items()
             if not self._subplotid_prop_re.fullmatch(k)
         }
         super().__init__(plotly_name, **invalid_kwargs)
-        self._subplotid_props = {}
+
+        # Initialize _subplotid_props
+        # ---------------------------
+        # This is a set storing the names of the layout's dynamic subplot
+        # properties
+        self._subplotid_props = set()
+
+        # Process subplot properties
+        # --------------------------
+        # The remaining kwargs are valid subplot properties
         for prop, value in kwargs.items():
             self._set_subplotid_prop(prop, value)
 
     def _set_subplotid_prop(self, prop, value):
-        # We already tested for match in constructor
+        """
+        Set a subplot property on the layout
+
+        Parameters
+        ----------
+        prop : str
+            A valid subplot property
+        value
+            Subplot value
+        """
+        # Get regular expression match
+        # ----------------------------
+        # Note: we already tested that match exists in the constructor
         match = self._subplotid_prop_re.fullmatch(prop)
         subplot_prop = match.group(1)
         suffix_digit = int(match.group(2))
+
+        # Validate suffix digit
+        # ---------------------
         if suffix_digit == 0:
             raise TypeError('Subplot properties may only be suffixed by an '
                             'integer >= 1\n'
                             'Received {k}'.format(k=prop))
 
         # Handle suffix_digit == 1
+        # ------------------------
         # In this case we remove suffix digit (e.g. xaxis1 -> xaxis)
         if suffix_digit == 1:
             prop = subplot_prop
 
-            # Add validator
+        # Construct and add validator
+        # ---------------------------
         if prop not in self._validators:
-            validator = self._subplotid_validators[subplot_prop](
-                plotly_name=prop)
+            validator_class = self._subplotid_validators[subplot_prop]
+            validator = validator_class(plotly_name=prop)
             self._validators[prop] = validator
 
         # Import value
-        self._subplotid_props[prop] = self._set_compound_prop(prop, value)
+        # ------------
+        # Use the standard _set_compound_prop method to
+        # validate/coerce/import subplot value. This must be called AFTER
+        # the validator instance is added to self._validators above.
+        self._set_compound_prop(prop, value)
+        self._subplotid_props.add(prop)
 
-    def __getattr__(self, prop):
+    def _strip_subplot_suffix_of_1(self, prop):
+        """
+        Strip the suffix for subplot property names that have a suffix of 1.
+        All other properties are returned unchanged
 
-        # Handle subplot suffix of 1
-        # Remove digit of 1 from subplot id (e.g.. xaxis1 -> xaxis)
-        match = self._subplotid_prop_re.fullmatch(prop)
-        if match:
-            subplot_prop = match.group(1)
-            suffix_digit = int(match.group(2))
-            if subplot_prop and suffix_digit == 1:
-                prop = subplot_prop
+        e.g. 'xaxis1' -> 'xaxis'
 
-        # Check for subplot access (e.g. xaxis2)
-        # Validate then call self._get_prop(item)
-        if prop in self._subplotid_props:
-            return self._subplotid_props[prop]
-        elif prop in self._validators:
-            return self[prop]
+        Parameters
+        ----------
+        prop : str|tuple
 
-        raise AttributeError(
-            "'Layout' object has no attribute '{item}'".format(item=prop))
-
-    def __getitem__(self, prop):
-
+        Returns
+        -------
+        str|tuple
+        """
         # Let parent handle non-scalar cases
+        # ----------------------------------
         # e.g. ('xaxis', 'range') or 'xaxis.range'
         prop_tuple = BaseFigure._str_to_dict_path(prop)
         if (len(prop_tuple) != 1 or
                 not isinstance(prop_tuple[0], str)):
-            return super().__getitem__(prop)
+            return prop
         else:
             # Unwrap to scalar string
             prop = prop_tuple[0]
 
-        # Handle subplot suffix of 1
+        # Handle subplot suffix digit of 1
+        # --------------------------------
         # Remove digit of 1 from subplot id (e.g.. xaxis1 -> xaxis)
         match = self._subplotid_prop_re.fullmatch(prop)
 
@@ -3012,73 +3085,110 @@ class BaseLayoutType(BaseLayoutHierarchyType):
             if subplot_prop and suffix_digit == 1:
                 prop = subplot_prop
 
-        # Check for subplot access (e.g. xaxis2)
-        # Validate then call self._get_prop(item)
-        if prop in self._subplotid_props:
-            return self._subplotid_props[prop]
-        elif prop in self._validators:
-            return super().__getitem__(prop)
+        return prop
 
-        raise AttributeError(
-            "'Layout' object has no attribute '{item}'".format(item=prop))
+    def __getattr__(self, prop):
+        """
+        Custom __getattr__ that handles dynamic subplot properties
+        """
+        prop = self._strip_subplot_suffix_of_1(prop)
+        if prop in self._subplotid_props:
+            return self._compound_props[prop]
+        else:
+            return super().__getattribute__(prop)
+
+    def __getitem__(self, prop):
+        """
+        Custom __getitem__ that handles dynamic subplot properties
+        """
+        prop = self._strip_subplot_suffix_of_1(prop)
+        return super().__getitem__(prop)
 
     def __contains__(self, prop):
-        if super().__contains__(prop):
-            return True
-        else:
-            # Check for subplot with suffix 1
-            match = self._subplotid_prop_re.fullmatch(prop)
-            if (match and match.group(1) in self._validators
-                    and match.group(2) == '1'):
-                return True
-            else:
-                return False
+        """
+        Custom __contains__ that handles dynamic subplot properties
+        """
+        prop = self._strip_subplot_suffix_of_1(prop)
+        return super().__contains__(prop)
 
     def __setitem__(self, prop, value):
-        # Check for subplot assignment (e.g. xaxis2)
-        # Call _set_compound_prop with the xaxis validator
+        """
+        Custom __setitem__ that handles dynamic subplot properties
+        """
+        # Check for subplot assignment
+        # ----------------------------
         match = self._subplotid_prop_re.fullmatch(prop)
         if match is None:
-            # Try setting as ordinary property
+            # Set as ordinary property
             super().__setitem__(prop, value)
         else:
+            # Set as subplotid property
             self._set_subplotid_prop(prop, value)
 
     def __setattr__(self, prop, value):
-        # Check for subplot assignment (e.g. xaxis2)
-        # Call _set_compound_prop with the xaxis validator
+        """
+        Custom __setattr__ that handles dynamic subplot properties
+        """
+        # Check for subplot assignment
+        # ----------------------------
         match = self._subplotid_prop_re.fullmatch(prop)
         if match is None:
-            # Try setting as ordinary property
+            # Set as ordinary property
             super().__setattr__(prop, value)
         else:
+            # Set as subplotid property
             self._set_subplotid_prop(prop, value)
 
     def __dir__(self):
-        # Include any active subplot values (xaxis2 etc.)
-        return super().__dir__() + list(self._subplotid_props.keys())
+        """
+        Custom __dir__ that handles dynamic subplot properties
+        """
+        # Include any active subplot values
+        return list(super().__dir__()) + sorted(self._subplotid_props)
 
 
 class BaseTraceHierarchyType(BasePlotlyType):
+    """
+    Base class for all types in the trace hierarchy
+    """
+
     def __init__(self, plotly_name, **kwargs):
         super().__init__(plotly_name, **kwargs)
 
     def _send_prop_set(self, prop_path_str, val):
         if self.parent:
+            # ### Inform parent of restyle operation ###
             self.parent._restyle_child(self, prop_path_str, val)
 
 
 class BaseTraceType(BaseTraceHierarchyType):
+    """
+    Base class for the all trace types.
+
+    Specific trace type classes (Scatter, Bar, etc.) are code generated as
+    subclasses of this class.
+    """
+
     def __init__(self, plotly_name, **kwargs):
         super().__init__(plotly_name, **kwargs)
 
+        # Initialize callback function lists
+        # ----------------------------------
+        # ### Callbacks to be called on hover ###
         self._hover_callbacks = []
+
+        # ### Callbacks to be called on unhover ###
         self._unhover_callbacks = []
+
+        # ### Callbacks to be called on click ###
         self._click_callbacks = []
+
+        # ### Callbacks to be called on selection ###
         self._select_callbacks = []
 
     # uid
     # ---
+    # All trace types must have a top-level UID
     @property
     def uid(self) -> str:
         raise NotImplementedError
@@ -3094,18 +3204,28 @@ class BaseTraceType(BaseTraceHierarchyType):
                      ['BaseTraceType', Points, InputDeviceState], None],
                  append=False):
         """
-        Register callback to be called when the user hovers over a point from this trace
+        Register function to be called when the user hovers over one or more
+        points in this trace
+
+        Note: Callbacks will only be triggered when the trace belongs to a
+        instance of plotly.graph_objs.FigureWidget and it is displayed in an
+        ipywidget context. Callbacks will not be triggered when on figures
+        that are displayed using plot/iplot.
 
         Parameters
         ----------
         callback
-            Callable that accepts 3 arguments
+            Callable function that accepts 3 arguments
 
-            - This trace
-            - Points object
-            - InputState object
+            - this trace
+            - plotly.callbacks.Points object
+            - plotly.callbacks.InputDeviceState object
 
-        append :
+        append : bool
+            If False (the default), this callback replaces any previously
+            defined on_hover callbacks for this trace. If True,
+            this callback is appended to the list of any previously defined
+            callbacks.
 
         Returns
         -------
@@ -3118,6 +3238,9 @@ class BaseTraceType(BaseTraceHierarchyType):
             self._hover_callbacks.append(callback)
 
     def _dispatch_on_hover(self, points: Points, state: InputDeviceState):
+        """
+        Dispatch points and device state all all hover callbacks
+        """
         for callback in self._hover_callbacks:
             callback(self, points, state)
 
@@ -3127,6 +3250,34 @@ class BaseTraceType(BaseTraceHierarchyType):
                    callback: typ.Callable[
                        ['BaseTraceType', Points, InputDeviceState], None],
                    append=False):
+        """
+        Register function to be called when the user unhovers away from one
+        or more points in this trace.
+
+        Note: Callbacks will only be triggered when the trace belongs to a
+        instance of plotly.graph_objs.FigureWidget and it is displayed in an
+        ipywidget context. Callbacks will not be triggered when on figures
+        that are displayed using plot/iplot.
+
+        Parameters
+        ----------
+        callback
+            Callable function that accepts 3 arguments
+
+            - this trace
+            - plotly.callbacks.Points object
+            - plotly.callbacks.InputDeviceState object
+
+        append : bool
+            If False (the default), this callback replaces any previously
+            defined on_unhover callbacks for this trace. If True,
+            this callback is appended to the list of any previously defined
+            callbacks.
+
+        Returns
+        -------
+        None
+        """
         if not append:
             self._unhover_callbacks.clear()
 
@@ -3134,6 +3285,9 @@ class BaseTraceType(BaseTraceHierarchyType):
             self._unhover_callbacks.append(callback)
 
     def _dispatch_on_unhover(self, points: Points, state: InputDeviceState):
+        """
+        Dispatch points and device state all all hover callbacks
+        """
         for callback in self._unhover_callbacks:
             callback(self, points, state)
 
@@ -3143,41 +3297,109 @@ class BaseTraceType(BaseTraceHierarchyType):
                  callback: typ.Callable[
                      ['BaseTraceType', Points, InputDeviceState], None],
                  append=False):
+        """
+        Register function to be called when the user clicks on one or more
+        points in this trace.
+
+        Note: Callbacks will only be triggered when the trace belongs to a
+        instance of plotly.graph_objs.FigureWidget and it is displayed in an
+        ipywidget context. Callbacks will not be triggered when on figures
+        that are displayed using plot/iplot.
+
+        Parameters
+        ----------
+        callback
+            Callable function that accepts 3 arguments
+
+            - this trace
+            - plotly.callbacks.Points object
+            - plotly.callbacks.InputDeviceState object
+
+        append : bool
+            If False (the default), this callback replaces any previously
+            defined on_click callbacks for this trace. If True,
+            this callback is appended to the list of any previously defined
+            callbacks.
+
+        Returns
+        -------
+        None
+        """
         if not append:
             self._click_callbacks.clear()
         if callback:
             self._click_callbacks.append(callback)
 
     def _dispatch_on_click(self, points: Points, state: InputDeviceState):
+        """
+        Dispatch points and device state all all hover callbacks
+        """
         for callback in self._click_callbacks:
             callback(self, points, state)
 
     # Select
     # ------
-    def on_selected(
+    def on_selection(
             self,
             callback: typ.Callable[[
                 'BaseTraceType', Points, typ.Union[BoxSelector, LassoSelector]
             ], None],
             append=False):
+        """
+        Register function to be called when the user selects one or more
+        points in this trace.
+
+        Note: Callbacks will only be triggered when the trace belongs to a
+        instance of plotly.graph_objs.FigureWidget and it is displayed in an
+        ipywidget context. Callbacks will not be triggered when on figures
+        that are displayed using plot/iplot.
+
+        Parameters
+        ----------
+        callback
+            Callable function that accepts 4 arguments
+
+            - this trace
+            - plotly.callbacks.Points object
+            - plotly.callbacks.BoxSelector or plotly.callbacks.LassoSelector
+
+        append : bool
+            If False (the default), this callback replaces any previously
+            defined on_selection callbacks for this trace. If True,
+            this callback is appended to the list of any previously defined
+            callbacks.
+
+        Returns
+        -------
+        None
+        """
         if not append:
             self._select_callbacks.clear()
 
         if callback:
             self._select_callbacks.append(callback)
 
-    def _dispatch_on_selected(self, points: Points,
-                              selector: typ.Union[BoxSelector, LassoSelector]):
+    def _dispatch_on_selection(self,
+                               points: Points,
+                               selector: typ.Union[BoxSelector, LassoSelector]):
+        """
+        Dispatch points and selector info to selection callbacks
+        """
         for callback in self._select_callbacks:
             callback(self, points, selector)
 
 
 class BaseFrameHierarchyType(BasePlotlyType):
+    """
+    Base class for all types in the trace hierarchy
+    """
+
     def __init__(self, plotly_name, **kwargs):
         super().__init__(plotly_name, **kwargs)
 
     def _send_prop_set(self, prop_path_str, val):
-        # Frames are not supported by FrameWidget and updates are not propagated to parents
+        # Note: Frames are not supported by FigureWidget, and updates are not
+        # propagated to parents
         pass
 
     def on_change(self, callback, *args):

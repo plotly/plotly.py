@@ -563,7 +563,7 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
                 trace._dispatch_on_unhover(points, state)
             elif event_type == 'plotly_selected':
                 # TODO: check if state is valid for selections
-                trace._dispatch_on_selected(points, selector)
+                trace._dispatch_on_selection(points, selector)
 
     @observe('_js2py_svgResponse')
     def handler_svgResponse(self, change):
