@@ -667,7 +667,7 @@ class StringValidator(BaseValidator):
         super().__init__(
             plotly_name=plotly_name, parent_name=parent_name, **kwargs)
         self.no_blank = no_blank
-        self.strict = strict  # Not implemented. We're always strict
+        self.strict = strict
         self.array_ok = array_ok
         self.values = values
 
@@ -694,6 +694,10 @@ class StringValidator(BaseValidator):
             desc = desc + """
       - A string"""
 
+        if not self.strict:
+            desc = desc + """
+      - A number that will be converted to a string"""
+
         if self.array_ok:
             desc = desc + """
       - A tuple, list, or one-dimensional numpy array of the above"""
@@ -706,12 +710,13 @@ class StringValidator(BaseValidator):
             pass
         elif self.array_ok and is_array(v):
 
-            # Make sure all elements are strings. Is there a more efficient
-            # way to do this in numpy?
-            invalid_els = [e for e in v if not isinstance(e, str)]
-            if invalid_els:
-                self.raise_invalid_elements(invalid_els)
+            # If strict, make sure all elements are strings.
+            if self.strict:
+                invalid_els = [e for e in v if not isinstance(e, str)]
+                if invalid_els:
+                    self.raise_invalid_elements(invalid_els)
 
+            # If not strict, let numpy cast elements to strings
             v = copy_to_readonly_numpy_array(v, dtype='unicode')
 
             if self.no_blank:
@@ -725,8 +730,15 @@ class StringValidator(BaseValidator):
                 if invalid_els:
                     self.raise_invalid_elements(invalid_els)
         else:
-            if not isinstance(v, str):
-                self.raise_invalid_val(v)
+            if self.strict:
+                if not isinstance(v, str):
+                    self.raise_invalid_val(v)
+            else:
+                if not isinstance(v, (str, int, float)):
+                    self.raise_invalid_val(v)
+
+                # Convert value to a string
+                v = str(v)
 
             if self.no_blank and len(v) == 0:
                 self.raise_invalid_val(v)
