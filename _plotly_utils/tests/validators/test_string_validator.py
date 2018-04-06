@@ -20,9 +20,14 @@ def validator_no_blanks():
     return StringValidator('prop', 'parent', no_blank=True)
 
 
+@pytest.fixture()
+def validator_strict():
+    return StringValidator('prop', 'parent', strict=True)
+
+
 @pytest.fixture
 def validator_aok():
-    return StringValidator('prop', 'parent', array_ok=True)
+    return StringValidator('prop', 'parent', array_ok=True, strict=True)
 
 
 @pytest.fixture
@@ -37,16 +42,18 @@ def validator_no_blanks_aok():
 
 # Array not ok
 # ------------
+# Not strict
 # ### Acceptance ###
 @pytest.mark.parametrize('val',
-                         ['bar', 'HELLO!!!', 'world!@#$%^&*()', ''])
+                         ['bar', 234, np.nan,
+                          'HELLO!!!', 'world!@#$%^&*()', ''])
 def test_acceptance(val, validator: StringValidator):
-    assert validator.validate_coerce(val) == val
+    assert validator.validate_coerce(val) == str(val)
 
 
 # ### Rejection by value ###
 @pytest.mark.parametrize('val',
-                         [(), [], [1, 2, 3], set(), np.nan, np.pi])
+                         [(), [], [1, 2, 3], set()])
 def test_rejection(val, validator: StringValidator):
     with pytest.raises(ValueError) as validation_failure:
         validator.validate_coerce(val)
@@ -86,6 +93,25 @@ def test_rejection_no_blanks(val, validator_no_blanks: StringValidator):
         validator_no_blanks.validate_coerce(val)
 
     assert 'A non-empty string' in str(validation_failure.value)
+
+
+# Strict
+# ------
+# ### Acceptance ###
+@pytest.mark.parametrize('val',
+                         ['bar', 'HELLO!!!', 'world!@#$%^&*()', ''])
+def test_acceptance_strict(val, validator_strict: StringValidator):
+    assert validator_strict.validate_coerce(val) == val
+
+
+# ### Rejection by value ###
+@pytest.mark.parametrize('val',
+                         [(), [], [1, 2, 3], set(), np.nan, np.pi, 23])
+def test_rejection_strict(val, validator_strict: StringValidator):
+    with pytest.raises(ValueError) as validation_failure:
+        validator_strict.validate_coerce(val)
+
+    assert 'Invalid value' in str(validation_failure.value)
 
 
 # Array ok
