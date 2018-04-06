@@ -42,8 +42,8 @@ class NumpyTestUtilsMixin(object):
             strings that are removed from both d1 and d2 if
             they exist
         """
-        d1_copy = copy.deepcopy(d1)
-        d2_copy = copy.deepcopy(d2)
+        d1_copy = copy.deepcopy(d1.to_plotly_json())
+        d2_copy = copy.deepcopy(d2.to_plotly_json())
 
         for key in ignore:
             if key in d1_copy.keys():
