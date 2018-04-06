@@ -21,9 +21,10 @@ def test_trivial():
 #     print(PlotlyDict(anything='something'))
 
 
-def test_validate():
-    Scatter().validate()
+# TODO: decide if this should raise error
 
+#def test_validate():
+#    Scatter().validate()
 
 # @raises(PlotlyError)
 # def test_validate_error():
