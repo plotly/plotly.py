@@ -898,16 +898,16 @@ class TestTable(TestCase, NumpyTestUtilsMixin):
 
     def test_fontcolor_input(self):
 
-        # check: PlotlyError if fontcolor input is incorrect
+        # check: ValueError if fontcolor input is incorrect
 
         kwargs = {'table_text': [['one', 'two'], [1, 2], [1, 2], [1, 2]],
                   'fontcolor': '#000000'}
-        self.assertRaises(PlotlyError,
+        self.assertRaises(ValueError,
                           tls.FigureFactory.create_table, **kwargs)
 
         kwargs = {'table_text': [['one', 'two'], [1, 2], [1, 2], [1, 2]],
                   'fontcolor': ['red', 'blue']}
-        self.assertRaises(PlotlyError,
+        self.assertRaises(ValueError,
                           tls.FigureFactory.create_table, **kwargs)
 
     def test_simple_table(self):
