@@ -269,19 +269,16 @@ class TestFinanceCharts(TestCase, NumpyTestUtilsMixin):
                                    'mode': 'lines', 'type': 'scatter',
                                    'x': []}]}
 
-        for i in range(2):
-            for key in ohlc.to_plotly_json()['data'][i]:
-                print(i)
-                print(key)
-                if key not in ['uid', 'text']:
-                    self.assertEqual(ohlc.to_plotly_json()['data'][i][key],
-                                     expected_ohlc['data'][i][key])
-                elif key == 'text':
-                    self.assertEqual(tuple(ohlc.to_plotly_json()['data'][1][key]),
-                                     tuple(expected_ohlc['data'][1][key]))
+        self.assert_fig_equal(ohlc.to_plotly_json()['data'][0],
+                              expected_ohlc['data'][0],
+                              ignore=['uid', 'text'])
 
-        #self.assertEqual(ohlc.to_plotly_json()['layout'],
-        #                 expected_ohlc['layout'])
+        self.assert_fig_equal(ohlc.to_plotly_json()['data'][1],
+                              expected_ohlc['data'][1],
+                              ignore=['uid', 'text'])
+
+        self.assertEqual(ohlc.to_plotly_json()['layout'],
+                         expected_ohlc['layout'])
 
     def test_one_ohlc_increase(self):
 
