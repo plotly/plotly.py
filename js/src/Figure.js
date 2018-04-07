@@ -70,6 +70,9 @@ var FigureModel = widgets.DOMWidgetModel.extend({
          * @typedef {null|Object} Py2JsDeleteTracesMsg
          * @property {Array.<Number>} delete_inds
          *  Array of indexes of traces to be deleted, in ascending order
+         * @property {Number} trace_edit_id
+         *  Edit ID to use when returning trace deltas using
+         *  the _js2py_traceDeltas message.
          * @property {Number} layout_edit_id
          *  Edit ID to use when returning layout deltas using
          *  the _js2py_layoutDelta message.
@@ -738,16 +741,10 @@ var FigureView = widgets.DOMWidgetView.extend({
         this.model.on("change:_py2js_svgRequest",
             this.do_svgRequest, this);
 
-        // Increment message ids
+        // Get message ids
         // ---------------------
-        // Creating a view is, itself, a layout and trace edit operation
-        // because the creation of the view will result in trace and layout
-        // delta messages being sent back to the Python side.
-        var layout_edit_id = this.model.get("_last_layout_edit_id") + 1;
-        this.model.set("_last_layout_edit_id", layout_edit_id);
-        var trace_edit_id = this.model.get("_last_trace_edit_id") + 1;
-        this.model.set("_last_trace_edit_id", trace_edit_id);
-        this.touch();
+        var layout_edit_id = this.model.get("_last_layout_edit_id");
+        var trace_edit_id = this.model.get("_last_trace_edit_id");
 
         // Set view UID
         // ------------
@@ -768,10 +765,9 @@ var FigureView = widgets.DOMWidgetView.extend({
         Plotly.newPlot(this.el, initialTraces, initialLayout).then(
             function () {
                 // ### Send trace deltas ###
-                // We create an array of deltas corresponding to the animated
+                // We create an array of deltas corresponding to the new
                 // traces.
-                var traceIndexes = _.range(initialTraces.length);
-                that._sendTraceDeltas(traceIndexes, trace_edit_id);
+                that._sendTraceDeltas(trace_edit_id);
 
                 // ### Send layout delta ###
                 that._sendLayoutDelta(layout_edit_id);
@@ -1135,14 +1131,7 @@ var FigureView = widgets.DOMWidgetView.extend({
             Plotly.addTraces(this.el, msgData.trace_data).then(function () {
 
                 // ### Send trace deltas ###
-                // We create an array of deltas corresponding to the new
-                // traces.
-                var newTraceIndexes = msgData.trace_data.map(function(v, i) {
-                    return i + prevNumTraces
-                });
-
-                that._sendTraceDeltas(newTraceIndexes, msgData.trace_edit_id);
-
+                that._sendTraceDeltas(msgData.trace_edit_id);
 
                 // ### Send layout delta ###
                 var layout_edit_id = msgData.layout_edit_id;
@@ -1159,11 +1148,15 @@ var FigureView = widgets.DOMWidgetView.extend({
         /** @type {Py2JsDeleteTracesMsg} */
         var msgData = this.model.get("_py2js_deleteTraces");
 
-        console.log("do_deleteTraces");
+        console.log(["do_deleteTraces", msgData]);
         if (msgData  !== null){
             var delete_inds = msgData.delete_inds;
             var that = this;
             Plotly.deleteTraces(this.el, delete_inds).then(function () {
+
+                // ### Send trace deltas ###
+                var trace_edit_id = msgData.trace_edit_id;
+                that._sendTraceDeltas(trace_edit_id);
 
                 // ### Send layout delta ###
                 var layout_edit_id = msgData.layout_edit_id;
@@ -1224,7 +1217,7 @@ var FigureView = widgets.DOMWidgetView.extend({
             // ### Send trace deltas ###
             // We create an array of deltas corresponding to the restyled
             // traces.
-            this._sendTraceDeltas(traceIndexes, msgData.trace_edit_id);
+            this._sendTraceDeltas(msgData.trace_edit_id);
 
             // ### Send layout delta ###
             var layout_edit_id = msgData.layout_edit_id;
@@ -1287,7 +1280,7 @@ var FigureView = widgets.DOMWidgetView.extend({
             // ### Send trace deltas ###
             // We create an array of deltas corresponding to the updated
             // traces.
-            this._sendTraceDeltas(traceIndexes, msgData.trace_edit_id);
+            this._sendTraceDeltas(msgData.trace_edit_id);
 
             // ### Send layout delta ###
             var layout_edit_id = msgData.layout_edit_id;
@@ -1328,7 +1321,7 @@ var FigureView = widgets.DOMWidgetView.extend({
                 // ### Send trace deltas ###
                 // We create an array of deltas corresponding to the
                 // animated traces.
-                this._sendTraceDeltas(traceIndexes, msgData.trace_edit_id);
+                this._sendTraceDeltas(msgData.trace_edit_id);
 
                 // ### Send layout delta ###
                 var layout_edit_id = msgData.layout_edit_id;
@@ -1346,7 +1339,7 @@ var FigureView = widgets.DOMWidgetView.extend({
                         // ### Send trace deltas ###
                         // We create an array of deltas corresponding to the
                         // animated traces.
-                        that._sendTraceDeltas(traceIndexes, msgData.trace_edit_id);
+                        that._sendTraceDeltas(msgData.trace_edit_id);
 
                         // ### Send layout delta ###
                         var layout_edit_id = msgData.layout_edit_id;
@@ -1406,16 +1399,17 @@ var FigureView = widgets.DOMWidgetView.extend({
     /**
      * Construct trace deltas array for the requested trace indexes and
      * send traceDeltas message to the Python side
-     * @param {Array.<Number>} traceIndexes
      *  Array of indexes of traces for which to compute deltas
      * @param trace_edit_id
      *  Edit ID of message that triggered the creation of trace deltas
      * @private
      */
-    _sendTraceDeltas: function(traceIndexes, trace_edit_id) {
+    _sendTraceDeltas: function (trace_edit_id) {
 
-        var trace_deltas = new Array(traceIndexes.length);
         var trace_data = this.model.get("_data");
+        var traceIndexes = _.range(trace_data.length);
+        var trace_deltas = new Array(traceIndexes.length);
+
         var fullData = this.getFullData();
         for (var i = 0; i < traceIndexes.length; i++) {
             var traceInd = traceIndexes[i];

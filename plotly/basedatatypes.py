@@ -368,6 +368,9 @@ class BaseFigure:
             del traces_prop_defaults_post_removal[i]
             del uids_post_removal[i]
 
+            # Modify in-place so we don't trigger serialization
+            del self._data[i]
+
         if delete_inds:
             # Update widget, if any
             self._send_deleteTraces_msg(delete_inds)
@@ -480,7 +483,7 @@ class BaseFigure:
             # The restyle operation resulted in a change to some trace
             # properties, so we dispatch change callbacks and send the
             # restyle message to the frontend (if any)
-            self._dispatch_change_callbacks_restyle(
+            self._dispatch_trace_change_callbacks(
                 restyle_changes, trace_indexes)
             self._send_restyle_msg(
                 restyle_changes,
@@ -576,7 +579,7 @@ class BaseFigure:
         if not self._in_batch_mode:
             send_val = [val]
             restyle = {key_path_str: send_val}
-            self._dispatch_change_callbacks_restyle(restyle, [trace_index])
+            self._dispatch_trace_change_callbacks(restyle, [trace_index])
             self._send_restyle_msg(restyle, trace_indexes=trace_index)
 
         # In batch mode
@@ -1094,7 +1097,7 @@ class BaseFigure:
             # The relayout operation resulted in a change to some layout
             # properties, so we dispatch change callbacks and send the
             # relayout message to the frontend (if any)
-            self._dispatch_change_callbacks_relayout(relayout_changes)
+            self._dispatch_layout_change_callbacks(relayout_changes)
             self._send_relayout_msg(
                 relayout_changes,
                 source_view_id=source_view_id)
@@ -1162,7 +1165,7 @@ class BaseFigure:
         # Dispatch change callbacks and send relayout message
         if not self._in_batch_mode:
             relayout_msg = {key_path_str: val}
-            self._dispatch_change_callbacks_relayout(relayout_msg)
+            self._dispatch_layout_change_callbacks(relayout_msg)
             self._send_relayout_msg(relayout_msg)
 
         # In batch mode
@@ -1236,7 +1239,7 @@ class BaseFigure:
 
         return dispatch_plan
 
-    def _dispatch_change_callbacks_relayout(self, relayout_data):
+    def _dispatch_layout_change_callbacks(self, relayout_data):
         """
         Dispatch property change callbacks given relayout_data
 
@@ -1261,7 +1264,7 @@ class BaseFigure:
             if isinstance(dispatch_obj, BasePlotlyType):
                 dispatch_obj._dispatch_change_callbacks(changed_paths)
 
-    def _dispatch_change_callbacks_restyle(self, restyle_data, trace_indexes):
+    def _dispatch_trace_change_callbacks(self, restyle_data, trace_indexes):
         """
         Dispatch property change callbacks given restyle_data
 
@@ -1369,12 +1372,12 @@ class BaseFigure:
         # ----------------
         # ### Dispatch restyle changes ###
         if restyle_changes:
-            self._dispatch_change_callbacks_restyle(
+            self._dispatch_trace_change_callbacks(
                 restyle_changes, trace_indexes)
 
         # ### Dispatch relayout changes ###
         if relayout_changes:
-            self._dispatch_change_callbacks_relayout(relayout_changes)
+            self._dispatch_layout_change_callbacks(relayout_changes)
 
         # Send update message
         # -------------------
@@ -1689,12 +1692,12 @@ class BaseFigure:
         # ------------------
         # ### Dispatch restyle changes ###
         if restyle_changes:
-            self._dispatch_change_callbacks_restyle(restyle_changes,
-                                                    trace_indexes)
+            self._dispatch_trace_change_callbacks(restyle_changes,
+                                                  trace_indexes)
 
         # ### Dispatch relayout changes ###
         if relayout_changes:
-            self._dispatch_change_callbacks_relayout(relayout_changes)
+            self._dispatch_layout_change_callbacks(relayout_changes)
 
         # Convert style / trace_indexes into animate form
         # -----------------------------------------------
