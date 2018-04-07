@@ -6,7 +6,6 @@ from copy import deepcopy
 from typing import Dict, Tuple, Union, Callable, List
 
 import numpy as np
-from traitlets import Undefined
 
 import plotly.offline as pyo
 from _plotly_utils.basevalidators import (
@@ -16,6 +15,12 @@ from plotly import animation
 from plotly.callbacks import (Points, BoxSelector, LassoSelector,
                               InputDeviceState)
 from plotly.validators import (DataValidator, LayoutValidator, FramesValidator)
+
+
+# Create Undefined sentinel value
+#   - Setting a property to None removes any existing value
+#   - Setting a property to Undefined leaves existing value unmodified
+Undefined = object()
 
 
 class BaseFigure:
