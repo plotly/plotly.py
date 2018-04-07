@@ -1,40 +1,101 @@
-
-# Create sentinal Undefined object
-from traitlets import Undefined
 import numpy as np
 
+from plotly.basedatatypes import Undefined
+
+
 def _py_to_js(v, widget_manager):
-    # print('_py_to_js')
-    # print(v)
+    """
+    Python -> Javascript ipywidget serializer
+
+    This function must repalce all objects that the ipywidget library
+    can't serialize natively (e.g. numpy arrays) with serializable
+    representations
+
+    Parameters
+    ----------
+    v
+        Object to be serialized
+    widget_manager
+        ipywidget widget_manager (unused)
+
+    Returns
+    -------
+    any
+        Value that the ipywidget library can serialize natively
+    """
+
+    # Handle dict recursively
+    # -----------------------
     if isinstance(v, dict):
         return {k: _py_to_js(v, widget_manager) for k, v in v.items()}
+
+    # Handle list/tuple recursively
+    # -----------------------------
     elif isinstance(v, (list, tuple)):
         return [_py_to_js(v, widget_manager) for v in v]
+
+    # Handle numpy array
+    # ------------------
     elif isinstance(v, np.ndarray):
-        if v.ndim == 1 and v.dtype.kind in ['u', 'i', 'f']:  # (un)signed integer or float
-            return {'buffer': memoryview(v), 'dtype': str(v.dtype), 'shape': v.shape}
+        # Convert 1D numpy arrays with numeric types to memoryviews with
+        # datatype and shape metadata.
+        if v.ndim == 1 and v.dtype.kind in ['u', 'i', 'f']:
+            return {'buffer': memoryview(v),
+                    'dtype': str(v.dtype),
+                    'shape': v.shape}
         else:
+            # Convert all other numpy to lists
             return v.tolist()
-    else:
-        if v is Undefined:
-            return '_undefined_'
-        else:
-            return v
 
+    # Handle Undefined
+    # ----------------
+    if v is Undefined:
+        return '_undefined_'
 
-def _js_to_py(v, widget_manager):
-    # print('_js_to_py')
-    # print(v)
-    if isinstance(v, dict):
-        return {k: _js_to_py(v, widget_manager) for k, v in v.items()}
-    elif isinstance(v, (list, tuple)):
-        return [_js_to_py(v, widget_manager) for v in v]
-    elif isinstance(v, str) and v == '_undefined_':
-        return Undefined
+    # Handle simple value
+    # -------------------
     else:
         return v
 
 
+def _js_to_py(v, widget_manager):
+    """
+    Javascript -> Python ipywidget deserializer
+
+    Parameters
+    ----------
+    v
+        Object to be deserialized
+    widget_manager
+        ipywidget widget_manager (unused)
+
+    Returns
+    -------
+    any
+        Deserialized object for use by the Python side of the library
+    """
+    # Handle dict
+    # -----------
+    if isinstance(v, dict):
+        return {k: _js_to_py(v, widget_manager) for k, v in v.items()}
+
+    # Handle list/tuple
+    # -----------------
+    elif isinstance(v, (list, tuple)):
+        return [_js_to_py(v, widget_manager) for v in v]
+
+    # Handle Undefined
+    # ----------------
+    elif isinstance(v, str) and v == '_undefined_':
+        return Undefined
+
+    # Handle simple value
+    # -------------------
+    else:
+        return v
+
+
+# Custom serializer dict for use in ipywidget traitlet definitions
 custom_serializers = {
     'from_json': _js_to_py,
     'to_json': _py_to_js
