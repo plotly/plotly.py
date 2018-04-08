@@ -79,15 +79,8 @@ def build_datatype_py(node):
 
     # Imports
     # -------
-    buffer.write('from typing import *\n')
-    buffer.write('from numbers import Number\n')
     buffer.write(
         f'from plotly.basedatatypes import {node.name_base_datatype}\n')
-
-    # ### Import type's validator package with rename ###
-    buffer.write(
-        f'from plotly.validators{node.parent_dotpath_str} import '
-        f'{undercase} as v_{undercase}\n')
 
     # Write class definition
     # ----------------------
@@ -165,7 +158,7 @@ class {datatype_class}({node.name_base_datatype}):\n""")
     # {literal_node.name_property}
     # {'-' * len(literal_node.name_property)}
     @property
-    def {literal_node.name_property}(self) -> {prop_type}:
+    def {literal_node.name_property}(self):
         return self._props['{literal_node.name_property}']\n""")
 
     # ### Private properties descriptions ###
@@ -174,13 +167,13 @@ class {datatype_class}({node.name_base_datatype}):\n""")
     # property parent name
     # --------------------
     @property
-    def _parent_path_str(self) -> str:
+    def _parent_path_str(self):
         return '{node.parent_path_str}'
 
     # Self properties description
     # ---------------------------
     @property
-    def _prop_descriptions(self) -> str:
+    def _prop_descriptions(self):
         return \"\"\"\\""")
 
     buffer.write(node.get_constructor_params_docstring(indent=8))
@@ -198,6 +191,11 @@ class {datatype_class}({node.name_base_datatype}):\n""")
 
     buffer.write(f"""
         super().__init__('{node.name_property}', **kwargs)
+
+        # Import validators
+        # -----------------
+        from plotly.validators{node.parent_dotpath_str} import (
+            {undercase} as v_{undercase}) 
 
         # Initialize validators
         # ---------------------""")
