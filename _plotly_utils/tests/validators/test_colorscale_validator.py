@@ -55,7 +55,7 @@ def test_coercion_named(named_colorscale, validator: ColorscaleValidator):
 ])
 def test_acceptance_array(val, validator: ColorscaleValidator):
     # Compute expected (tuple of tuples where color is lowercase with no spaces)
-    expected = tuple([tuple([e[0], str.replace(e[1].lower(), ' ', '')]) for e in val])
+    expected = tuple([tuple([e[0], e[1]]) for e in val])
     assert validator.validate_coerce(val) == expected
 
 
