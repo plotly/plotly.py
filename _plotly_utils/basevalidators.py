@@ -924,17 +924,16 @@ class ColorValidator(BaseValidator):
             return None
         else:
             # Remove spaces so regexes don't need to bother with them.
-            v = v.replace(' ', '')
-            v = v.lower()
+            v_normalized = v.replace(' ', '').lower()
 
-            if ColorValidator.re_hex.fullmatch(v):
+            if ColorValidator.re_hex.fullmatch(v_normalized):
                 # valid hex color (e.g. #f34ab3)
                 return v
-            elif ColorValidator.re_rgb_etc.fullmatch(v):
+            elif ColorValidator.re_rgb_etc.fullmatch(v_normalized):
                 # Valid rgb(a), hsl(a), hsv(a) color
                 # (e.g. rgba(10, 234, 200, 50%)
                 return v
-            elif v in ColorValidator.named_colors:
+            elif v_normalized in ColorValidator.named_colors:
                 # Valid named color (e.g. 'coral')
                 return v
             else:
