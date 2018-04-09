@@ -1,8 +1,8 @@
 # plotly.py
 
-> 📢 Announcement!
-> Seats are still available for a 2 day, Dash master class in NYC, November 18-19. 
-> [Registration here](https://plotcon.plot.ly/workshops) 🎚 📈 🗽
+> 📢  Announcement!  
+> Registration is open for a 2 day, Dash master class in Boston, April 14-15.  
+> [Register online here](https://plotcon.plot.ly/tickets/) 🎚📈⚾️ 
 
 ***
 

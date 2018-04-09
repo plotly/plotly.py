@@ -2,17 +2,63 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased] - TBA
+## [2.5.2] - UNRELEASED
+### Updated
+- error message for `plotly.figure_factory.create_choropleth` is more helpful for Windows users on installing `geopandas` and dependencies including `shapely`.
+
+## [2.5.1] - 2018-03-26
+### Fixed
+- `plotly.figure_factory.create_choropleth` now works in Windows without raising an OSError. The module now uses cross-platform path tools from `os` to manipulate and manage the shapefiles contained in this package.
+
+## [2.5.0] - 2018-03-12
+### Fixed
+- `import plotly.figure_factory` does not fail if `pandas` is not installed. See  https://github.com/plotly/plotly.py/pull/958
+### Added
+- New parameter `fill_percent` to the `.insert` method for the dashboards API. You can now insert a box into the dashboard layout and specify what proportion of the original container box it will occupy. Run `help(plotly.dashboard_objs.Dashboard.insert)` for more information on `fill_percent`.
+### Updated
+- Updated `plotly.min.js` to version 1.35.2.
+  - New features include adding an `automargin` attribute to cartesian axes and a layout `grids` attribute for easy subplot generation.
+  - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1352----2018-03-09) for additional information regarding the updates.
+- `plotly.figure_factory.create_choropleth` has changed some of the default plotting options:
+  - 'offline_mode' param has been removed from call signature.
+  - Persistent selection api for the centroid points is automatically enabled. See https://plot.ly/python/reference/#scatter-selected and https://plot.ly/python/reference/#scatter-unselected for details
+  - FIPS values that appear on hover are 0-padded to ensure they are 5 digits.
+  - `hover_info='none'` is now default for the county lines data.
+
+## [2.4.1] - 2018-02-21
+### Fixed
+- The required shapefiles to generate the choropleths via `plotly.figure_factory.create_choropleth` are now shipped in the package data.
+
+## [2.4.0] - 2018-02-16
+### Added
+- County Choropleth figure factory. Call `help(plotly.figure_factory.create_choropleth)` for examples and how to get started making choropleths of US counties with the Python API.
+
+Note: Calling `plotly.figure_factory.create_choropleth` will fail with an IOError due to missing shapefiles see: https://github.com/plotly/plotly.py/blob/master/CHANGELOG.md#241---2018-02-21
+
+## [2.3.0] - 2018-01-25
+### Fixed
+- Merged [pull request](https://github.com/plotly/plotly.py/commit/a226e07393c158e01c34c050aaf492da9d77679a) that fixes `GraphWidget` for IPython > v6
+### Updated
+- Updated `plotly.min.js` to version 1.33.1.
+  - New plot types include a `violin` trace type.
+  - New features include completely rewritten `scattergl` using `regl` and a completely rewritten polar chart renderer.
+  - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1331----2018-01-24) for additional information regarding the updates.
+
+## [2.2.3] - 2017-12-04
 ### Added
 -`column_width` and `row_width` parameters for `plotly.tools.make_subplots`. Call `help(plotly.tools.make_subplots)` for documentation.
+### Updated
+- Updated `plotly.min.js` to version 1.31.2.
+  - Fixes include adjustments to `table` trace for offline plotting.
+  - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1312----2017-10-23) for additional information regarding the updates.
 
 ## [2.2.2] - 2017-11-23
 ### Added
-- bullet chart figure factory. Call `help(plotly.figure_factory.create_bullet)` for examples and how to get started making bullet charts with the API.
+- Bullet chart figure factory. Call `help(plotly.figure_factory.create_bullet)` for examples and how to get started making bullet charts with the API.
 
 ## [2.2.1] - 2017-10-26
 ### Fixed
-- presentation objects now added to setup.py
+- Presentation objects now added to setup.py
 
 ## [2.2.0] - 2017-10-26
 ### Added
