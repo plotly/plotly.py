@@ -191,12 +191,13 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
                                   facet_row_labels, facet_col_labels,
                                   trace_type, flipped_rows, flipped_cols,
                                   show_boxes, SUBPLOT_SPACING, marker_color,
-                                  kwargs_trace, kwargs_marker):
+                                  kwargs_trace, kwargs_marker, column_width):
 
     fig = make_subplots(rows=num_of_rows, cols=num_of_cols,
                         shared_xaxes=True, shared_yaxes=True,
                         horizontal_spacing=SUBPLOT_SPACING,
-                        vertical_spacing=SUBPLOT_SPACING, print_grid=False)
+                        vertical_spacing=SUBPLOT_SPACING, print_grid=False,
+                        column_width=column_width)
 
     annotations = []
     if not facet_row and not facet_col:
@@ -344,12 +345,13 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
                                 facet_col_labels, trace_type,
                                 flipped_rows, flipped_cols, show_boxes,
                                 SUBPLOT_SPACING, marker_color, kwargs_trace,
-                                kwargs_marker):
+                                kwargs_marker, column_width):
 
     fig = make_subplots(rows=num_of_rows, cols=num_of_cols,
                         shared_xaxes=True, shared_yaxes=True,
                         horizontal_spacing=SUBPLOT_SPACING,
-                        vertical_spacing=SUBPLOT_SPACING, print_grid=False)
+                        vertical_spacing=SUBPLOT_SPACING, print_grid=False,
+                        column_width=column_width)
 
     annotations = []
     if not facet_row and not facet_col:
@@ -484,12 +486,14 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
 def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
                 num_of_cols, facet_row_labels, facet_col_labels,
                 trace_type, flipped_rows, flipped_cols, show_boxes,
-                SUBPLOT_SPACING, marker_color, kwargs_trace, kwargs_marker):
+                SUBPLOT_SPACING, marker_color, kwargs_trace, kwargs_marker,
+                column_width):
 
     fig = make_subplots(rows=num_of_rows, cols=num_of_cols,
                         shared_xaxes=True, shared_yaxes=True,
                         horizontal_spacing=SUBPLOT_SPACING,
-                        vertical_spacing=SUBPLOT_SPACING, print_grid=False)
+                        vertical_spacing=SUBPLOT_SPACING, print_grid=False,
+                        column_width=column_width)
     annotations = []
     if not facet_row and not facet_col:
         trace = dict(
@@ -616,6 +620,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
                       row_colors=('rgb(247, 247, 242)',
                                   'rgb(255, 253, 250)'),
                       theme='facet',
+                      column_width=None,
                       **kwargs):
     """
     Returns figure for facet grid.
@@ -665,6 +670,9 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
     :param (tuple|list) row_colors:
     :param (str) theme: determines the layout style of the plot. The options
         are 'facet' (default) and 'sparklines'.
+    :param (list) column_width: Specify a list that contains numbers where
+        the amount of numbers in the list is equal to `chart_types`. Call
+        `help(plotly.tools.make_subplots)` for more info on this subplot param
     :param (dict) kwargs: a dictionary of scatterplot arguments.
 
     Examples 1: One Way Faceting
