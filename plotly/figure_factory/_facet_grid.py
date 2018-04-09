@@ -25,7 +25,8 @@ MAX_TICKS_PER_AXIS = 5
 THRES_FOR_FLIPPED_FACET_TITLES = 10
 GRID_WIDTH = 1
 
-VALID_TRACE_TYPES = ['scatter', 'scattergl', 'histogram', 'bar', 'box']
+VALID_TRACE_TYPES = ['scatter', 'scattergl', 'histogram', 'bar', 'box'] + ['line', 'bullet', 'label', 'avg', 'area']
+
 
 CUSTOM_LABEL_ERROR = (
     "If you are using a dictionary for custom labels for the facet row/col, "
@@ -611,7 +612,11 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
                       facet_row_labels=None, facet_col_labels=None,
                       height=None, width=None, trace_type='scatter',
                       scales='fixed', dtick_x=None, dtick_y=None,
-                      show_boxes=True, ggplot2=False, binsize=1, **kwargs):
+                      show_boxes=True, ggplot2=False, binsize=1,
+                      row_colors=('rgb(247, 247, 242)',
+                                  'rgb(255, 253, 250)'),
+                      theme='facet',
+                      **kwargs):
     """
     Returns figure for facet grid.
 
@@ -657,6 +662,9 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
         http://ggplot2.tidyverse.org/reference/facet_grid.html for reference.
         Default = False
     :param (int) binsize: groups all data into bins of a given length.
+    :param (tuple|list) row_colors:
+    :param (str) theme: determines the layout style of the plot. The options
+        are 'facet' (default) and 'sparklines'.
     :param (dict) kwargs: a dictionary of scatterplot arguments.
 
     Examples 1: One Way Faceting
@@ -801,9 +809,10 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
             try:
                 df[key]
             except KeyError:
+                # TODO: change error message in tests
                 raise exceptions.PlotlyError(
                     "x, y, facet_row, facet_col and color_name must be keys "
-                    "in your dataframe."
+                    "in your dataframe if they are not set to None."
                 )
     # autoscale histogram bars
     if trace_type not in ['scatter', 'scattergl']:
@@ -820,10 +829,13 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
             "'trace_type' must be in {}".format(VALID_TRACE_TYPES)
         )
 
-    if trace_type == 'histogram':
-        SUBPLOT_SPACING = 0.06
+    if theme == 'sparklines':
+        SUBPLOT_SPACING = 0.0
     else:
-        SUBPLOT_SPACING = 0.015
+        if trace_type == 'histogram':
+            SUBPLOT_SPACING = 0.06
+        else:
+            SUBPLOT_SPACING = 0.015
 
     # seperate kwargs for marker and else
     if 'marker' in kwargs:
@@ -977,17 +989,23 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
             kwargs_trace, kwargs_marker
         )
 
+    # style the layout depending on theme
     if not height:
         height = max(600, 100 * num_of_rows)
     if not width:
         width = max(600, 100 * num_of_cols)
 
-    fig['layout'].update(height=height, width=width, title='',
-                         paper_bgcolor='rgb(251, 251, 251)')
-    if ggplot2:
-        fig['layout'].update(plot_bgcolor=PLOT_BGCOLOR,
-                             paper_bgcolor='rgb(255, 255, 255)',
-                             hovermode='closest')
+    if theme == 'sparklines':
+        fig['layout'].update(height=height, width=width, title='')
+
+    else:
+        fig['layout'].update(height=height, width=width, title='',
+                             paper_bgcolor='rgb(251, 251, 251)')
+
+        if ggplot2:
+            fig['layout'].update(plot_bgcolor=PLOT_BGCOLOR,
+                                 paper_bgcolor='rgb(255, 255, 255)',
+                                 hovermode='closest')
 
     # axis titles
     x_title_annot = _axis_title_annotation(x, 'x')
@@ -1048,68 +1066,75 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
         fixed_axes = []
 
     # fixed ranges
-    for x_y in fixed_axes:
-        min_ranges = []
-        max_ranges = []
-        for trace in fig['data']:
-            if trace[x_y] is not None and len(trace[x_y]) > 0:
-                min_ranges.append(min(trace[x_y]))
-                max_ranges.append(max(trace[x_y]))
-        while None in min_ranges:
-            min_ranges.remove(None)
-        while None in max_ranges:
-            max_ranges.remove(None)
+    if theme != 'sparklines':
+        for x_y in fixed_axes:
+            min_ranges = []
+            max_ranges = []
+            for trace in fig['data']:
+                if trace[x_y] is not None and len(trace[x_y]) > 0:
+                    min_ranges.append(min(trace[x_y]))
+                    max_ranges.append(max(trace[x_y]))
+            while None in min_ranges:
+                min_ranges.remove(None)
+            while None in max_ranges:
+                max_ranges.remove(None)
 
-        min_range = min(min_ranges)
-        max_range = max(max_ranges)
+            min_range = min(min_ranges)
+            max_range = max(max_ranges)
 
-        range_are_numbers = (isinstance(min_range, Number) and
-                             isinstance(max_range, Number))
+            range_are_numbers = (isinstance(min_range, Number) and
+                                 isinstance(max_range, Number))
 
-        if range_are_numbers:
-            min_range = math.floor(min_range)
-            max_range = math.ceil(max_range)
+            if range_are_numbers:
+                min_range = math.floor(min_range)
+                max_range = math.ceil(max_range)
 
-            # extend widen frame by 5% on each side
-            min_range -= 0.05 * (max_range - min_range)
-            max_range += 0.05 * (max_range - min_range)
+                # extend widen frame by 5% on each side
+                min_range -= 0.05 * (max_range - min_range)
+                max_range += 0.05 * (max_range - min_range)
 
-            if x_y == 'x':
-                if dtick_x:
-                    dtick = dtick_x
-                else:
-                    dtick = math.floor(
-                        (max_range - min_range) / MAX_TICKS_PER_AXIS
-                    )
-            elif x_y == 'y':
-                if dtick_y:
-                    dtick = dtick_y
-                else:
-                    dtick = math.floor(
-                        (max_range - min_range) / MAX_TICKS_PER_AXIS
-                    )
-        else:
-            dtick = 1
+                if x_y == 'x':
+                    if dtick_x:
+                        dtick = dtick_x
+                    else:
+                        dtick = math.floor(
+                            (max_range - min_range) / MAX_TICKS_PER_AXIS
+                        )
+                elif x_y == 'y':
+                    if dtick_y:
+                        dtick = dtick_y
+                    else:
+                        dtick = math.floor(
+                            (max_range - min_range) / MAX_TICKS_PER_AXIS
+                        )
+            else:
+                dtick = 1
 
-        for axis_title in axis_labels[x_y]:
-            fig['layout'][axis_title]['dtick'] = dtick
-            fig['layout'][axis_title]['ticklen'] = 0
-            fig['layout'][axis_title]['zeroline'] = False
-            if ggplot2:
-                fig['layout'][axis_title]['tickwidth'] = 1
-                fig['layout'][axis_title]['ticklen'] = 4
-                fig['layout'][axis_title]['gridwidth'] = GRID_WIDTH
+            for axis_title in axis_labels[x_y]:
+                fig['layout'][axis_title]['dtick'] = dtick
+                fig['layout'][axis_title]['ticklen'] = 0
+                fig['layout'][axis_title]['zeroline'] = False
+                if ggplot2:
+                    fig['layout'][axis_title]['tickwidth'] = 1
+                    fig['layout'][axis_title]['ticklen'] = 4
+                    fig['layout'][axis_title]['gridwidth'] = GRID_WIDTH
 
-                fig['layout'][axis_title]['gridcolor'] = GRID_COLOR
-                fig['layout'][axis_title]['gridwidth'] = 2
-                fig['layout'][axis_title]['tickfont'] = {
-                    'color': TICK_COLOR, 'size': 10
-                }
+                    fig['layout'][axis_title]['gridcolor'] = GRID_COLOR
+                    fig['layout'][axis_title]['gridwidth'] = 2
+                    fig['layout'][axis_title]['tickfont'] = {
+                        'color': TICK_COLOR, 'size': 10
+                    }
 
-        # insert ranges into fig
-        if x_y in fixed_axes:
-            for key in fig['layout']:
-                if '{}axis'.format(x_y) in key and range_are_numbers:
-                    fig['layout'][key]['range'] = [min_range, max_range]
+            # insert ranges into fig
+            if x_y in fixed_axes:
+                for key in fig['layout']:
+                    if '{}axis'.format(x_y) in key and range_are_numbers:
+                        fig['layout'][key]['range'] = [min_range, max_range]
+    else:
+        for x_y in fixed_axes:
+            for axis_title in axis_labels[x_y]:
+                fig['layout'][axis_title]['showgrid'] = False
+                fig['layout'][axis_title]['showticklabels'] = False
+                fig['layout'][axis_title]['zeroline'] = False
 
     return fig
