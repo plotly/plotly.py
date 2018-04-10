@@ -1,5 +1,6 @@
 import pytest
 import numpy as np
+import pandas as pd
 from _plotly_utils.basevalidators import EnumeratedValidator
 
 
@@ -111,14 +112,19 @@ def test_rejection_by_element_aok(val, validator_aok):
 # ### Acceptance ###
 @pytest.mark.parametrize('val',
                          ['foo', 'bar12', 'bar21',
-                          [], ['bar12'], ['foo', 'bar012', 'baz']])
+                          [], ['bar12'], ('foo', 'bar012', 'baz'),
+                          np.array([]),
+                          np.array(['bar12']),
+                          np.array(['foo', 'bar012', 'baz'])])
 def test_acceptance_aok(val, validator_aok_re):
     # Values should be accepted and returned unchanged
     coerce_val = validator_aok_re.validate_coerce(val)
-    if isinstance(val, (list, np.ndarray)):
+    if isinstance(val, (np.ndarray, pd.Series)):
         assert np.array_equal(coerce_val, np.array(val, dtype=coerce_val.dtype))
+    elif isinstance(val, (list, tuple)):
+        assert validator_aok_re.present(coerce_val) == tuple(val)
     else:
-        assert coerce_val == val
+        assert validator_aok_re.present(coerce_val) == val
 
 
 # ### Reject by elements ###

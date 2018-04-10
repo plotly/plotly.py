@@ -1,7 +1,6 @@
-import numpy as np
-
 from plotly.basedatatypes import Undefined
-
+from plotly.optional_imports import get_module
+np = get_module('numpy')
 
 def _py_to_js(v, widget_manager):
     """
@@ -36,7 +35,7 @@ def _py_to_js(v, widget_manager):
 
     # Handle numpy array
     # ------------------
-    elif isinstance(v, np.ndarray):
+    elif np is not None and isinstance(v, np.ndarray):
         # Convert 1D numpy arrays with numeric types to memoryviews with
         # datatype and shape metadata.
         if v.ndim == 1 and v.dtype.kind in ['u', 'i', 'f']:

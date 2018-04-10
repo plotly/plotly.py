@@ -90,13 +90,17 @@ def test_rejection_colorscale(val, validator_colorscale: ColorValidator):
 @pytest.mark.parametrize('val',
                          ['blue',
                           ['red', 'rgb(255, 0, 0)'],
+                          np.array(['red', 'rgb(255, 0, 0)']),
                           ['hsl(0, 100%, 50%)', 'hsla(0, 100%, 50%, 100%)', 'hsv(0, 100%, 100%)'],
+                          np.array(['hsl(0, 100%, 50%)', 'hsla(0, 100%, 50%, 100%)', 'hsv(0, 100%, 100%)']),
                           ['hsva(0, 100%, 100%, 50%)']])
 def test_acceptance_aok(val, validator_aok: ColorValidator):
     coerce_val = validator_aok.validate_coerce(val)
 
-    if isinstance(val, (list, np.ndarray)):
+    if isinstance(val, np.ndarray):
         assert np.array_equal(coerce_val, val)
+    elif isinstance(val, list):
+        assert validator_aok.present(coerce_val) == tuple(val)
     else:
         assert coerce_val == val
 

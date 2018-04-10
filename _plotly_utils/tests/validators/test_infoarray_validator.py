@@ -28,14 +28,14 @@ def validator_number3_free():
 
 # Any2 Tests
 # ----------
-
 # ### Acceptance ###
 @pytest.mark.parametrize('val', [
-    [1, 'A'], ('hello', 'world!'), [{}, []], [-1, 1]
+    [1, 'A'], ('hello', 'world!'), [1, ()], [-1, 1]
 ])
 def test_validator_acceptance_any2(val, validator_any2: InfoArrayValidator):
     coerce_val = validator_any2.validate_coerce(val)
-    assert np.array_equal(coerce_val, tuple(val))
+    assert coerce_val == list(val)
+    assert validator_any2.present(coerce_val) == tuple(val)
 
 
 # ### Rejection by type ###
@@ -68,7 +68,8 @@ def test_validator_rejection_any2_length(val, validator_any2: InfoArrayValidator
 ])
 def test_validator_acceptance_number3(val, validator_number3: InfoArrayValidator):
     coerce_val = validator_number3.validate_coerce(val)
-    assert np.array_equal(coerce_val, tuple(val))
+    assert coerce_val == list(val)
+    assert validator_number3.present(coerce_val) == tuple(val)
 
 
 # ### Rejection by length ###
@@ -114,11 +115,15 @@ def test_validator_rejection_number3_length(val, first_invalid_ind, validator_nu
 # --------------------------------
 # ### Acceptance ###
 @pytest.mark.parametrize('val', [
-    [1, 0, 0.5], (0.1, 0.99), [0], []
+    [1, 0, 0.5],
+    (0.1, 0.99),
+    np.array([0.1, 0.99]),
+    [0], []
 ])
 def test_validator_acceptance_number3_free(val, validator_number3_free: InfoArrayValidator):
     coerce_val = validator_number3_free.validate_coerce(val)
-    assert np.array_equal(coerce_val, tuple(val))
+    assert coerce_val == list(val)
+    assert validator_number3_free.present(coerce_val) == tuple(val)
 
 
 # ### Rejection by type ###
