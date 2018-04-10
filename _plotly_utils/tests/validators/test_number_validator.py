@@ -117,14 +117,17 @@ def test_acceptance_aok_list(val, validator_aok: NumberValidator):
 # ### Coerce ###
 #     Coerced to general consistent numeric type
 @pytest.mark.parametrize('val,expected',
-                         [([1.0, 0], np.array([1.0, 0.0])),
+                         [([1.0, 0], (1.0, 0)),
                           (np.array([1, -1]), np.array([1.0, -1.0])),
-                          ([-0.1234, 0, -1], np.array([-0.1234, 0.0, -1.0]))])
+                          ((-0.1234, 0, -1), (-0.1234, 0.0, -1.0))])
 def test_coercion_aok_list(val, expected, validator_aok: NumberValidator):
     v = validator_aok.validate_coerce(val)
-    assert isinstance(v, np.ndarray)
-    assert v.dtype == 'float'
-    assert np.array_equal(v, expected)
+    if isinstance(val, np.ndarray):
+        assert v.dtype == 'float'
+        assert np.array_equal(v, expected)
+    else:
+        assert isinstance(v, list)
+        assert validator_aok.present(v) == tuple(val)
 
 
 # ### Rejection ###
@@ -135,7 +138,7 @@ def test_rejection_aok(val, validator_aok: NumberValidator):
     with pytest.raises(ValueError) as validation_failure:
         validator_aok.validate_coerce(val)
 
-    assert 'Invalid value' in str(validation_failure.value)
+    assert 'Invalid element(s)' in str(validation_failure.value)
 
 
 # ### Rejection by element ###

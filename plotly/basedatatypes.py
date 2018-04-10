@@ -5,7 +5,7 @@ from contextlib import contextmanager
 from copy import deepcopy
 from typing import Dict, Tuple, Union, Callable, List
 
-import numpy as np
+from plotly.optional_imports import get_module
 
 import plotly.offline as pyo
 from _plotly_utils.basevalidators import (
@@ -16,6 +16,9 @@ from plotly.callbacks import (Points, BoxSelector, LassoSelector,
                               InputDeviceState)
 from plotly.validators import (DataValidator, LayoutValidator, FramesValidator)
 
+# Optional imports
+# ----------------
+np = get_module('numpy')
 
 # Create Undefined sentinel value
 #   - Setting a property to None removes any existing value
@@ -212,11 +215,11 @@ class BaseFigure:
 
     def __getitem__(self, prop):
         if prop == 'data':
-            return self.data
+            return self._data_validator.present(self._data_objs)
         elif prop == 'layout':
-            return self.layout
+            return self._layout_validator.present(self._layout_obj)
         elif prop == 'frames':
-            return self.frames
+            return self._frames_validator.present(self._frame_objs)
         else:
             raise KeyError(prop)
 
@@ -298,7 +301,7 @@ class BaseFigure:
         -------
         tuple[BaseTraceType]
         """
-        return self._data_objs
+        return self['data']
 
     @data.setter
     def data(self, new_data):
@@ -424,7 +427,7 @@ class BaseFigure:
         ]
 
         # Update trace objects tuple
-        self._data_objs = tuple(new_data)
+        self._data_objs = list(new_data)
 
     # Restyle
     # -------
@@ -1035,7 +1038,7 @@ class BaseFigure:
         -------
         plotly.graph_objs.Layout
         """
-        return self._layout_obj
+        return self['layout']
 
     @layout.setter
     def layout(self, new_layout):
@@ -1311,7 +1314,7 @@ class BaseFigure:
         -------
         tuple[BaseFrameHierarchyType]
         """
-        return self._frame_objs
+        return self['frames']
 
     @frames.setter
     def frames(self, new_frames):
@@ -2242,14 +2245,15 @@ class BasePlotlyType:
                     and prop not in self._prop_defaults):
                 raise KeyError(prop)
 
+            validator = self._validators[prop]
             if prop in self._compound_props:
-                return self._compound_props[prop]
+                return validator.present(self._compound_props[prop])
             elif prop in self._compound_array_props:
-                return self._compound_array_props[prop]
+                return validator.present(self._compound_array_props[prop])
             elif self._props is not None and prop in self._props:
-                return self._props[prop]
+                return validator.present(self._props[prop])
             elif self._prop_defaults is not None:
-                return self._prop_defaults.get(prop, None)
+                return validator.present(self._prop_defaults.get(prop, None))
             else:
                 return None
 
@@ -2893,7 +2897,8 @@ class BasePlotlyType:
         bool
             True if v1 and v2 are equal, False otherwise
         """
-        if isinstance(v1, np.ndarray) or isinstance(v2, np.ndarray):
+        if (np is not None and
+                (isinstance(v1, np.ndarray) or isinstance(v2, np.ndarray))):
             return np.array_equal(v1, v2)
         elif isinstance(v1, (list, tuple)):
             # Handle recursive equality on lists and tuples
@@ -3101,7 +3106,8 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         """
         prop = self._strip_subplot_suffix_of_1(prop)
         if prop in self._subplotid_props:
-            return self._compound_props[prop]
+            validator = self._validators[prop]
+            return validator.present(self._compound_props[prop])
         else:
             return super().__getattribute__(prop)
 

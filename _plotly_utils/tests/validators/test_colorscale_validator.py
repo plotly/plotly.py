@@ -20,8 +20,12 @@ def named_colorscale(request):
 # -----
 # ### Acceptance by name ###
 def test_acceptance_named(named_colorscale, validator: ColorscaleValidator):
+    # As-is
     assert validator.validate_coerce(named_colorscale) == named_colorscale
 
+    # Uppercase
+    assert (validator.validate_coerce(named_colorscale.upper()) ==
+           named_colorscale.upper())
 
 # ### Acceptance as array ###
 @pytest.mark.parametrize('val', [
@@ -32,21 +36,6 @@ def test_acceptance_named(named_colorscale, validator: ColorscaleValidator):
 def test_acceptance_array(val, validator: ColorscaleValidator):
     assert validator.validate_coerce(val) == val
 
-
-# ### Coercion of scale names ###
-def test_coercion_named(named_colorscale, validator: ColorscaleValidator):
-    # As is
-    assert validator.validate_coerce(named_colorscale) == named_colorscale
-
-    # Uppercase
-    assert validator.validate_coerce(
-        named_colorscale.upper()) == named_colorscale
-
-    # Lowercase
-    assert validator.validate_coerce(
-        named_colorscale.lower()) == named_colorscale
-
-
 # ### Coercion as array ###
 @pytest.mark.parametrize('val', [
     ([0, 'red'],),
@@ -54,9 +43,14 @@ def test_coercion_named(named_colorscale, validator: ColorscaleValidator):
     (np.array([0, 'Purple'], dtype='object'), (0.2, 'yellow'), (1.0, 'RGBA(255,0,0,100)')),
 ])
 def test_acceptance_array(val, validator: ColorscaleValidator):
-    # Compute expected (tuple of tuples where color is lowercase with no spaces)
-    expected = tuple([tuple([e[0], e[1]]) for e in val])
-    assert validator.validate_coerce(val) == expected
+    # Compute expected (tuple of tuples where color is
+    # lowercase with no spaces)
+    expected = [[e[0], e[1]] for e in val]
+    coerce_val = validator.validate_coerce(val)
+    assert coerce_val == expected
+
+    expected_present = tuple([tuple(e) for e in expected])
+    assert validator.present(coerce_val) == expected_present
 
 
 # ### Rejection by type ###
