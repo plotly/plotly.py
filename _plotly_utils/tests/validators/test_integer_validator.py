@@ -38,14 +38,6 @@ def validator_aok(request):
 def test_acceptance(val, validator: IntegerValidator):
     assert validator.validate_coerce(val) == val
 
-
-# ### Coercion ###
-@pytest.mark.parametrize('val,expected',
-                         [(1.0, 1), (-19.1, -19), (0.001, 0), (1234.9, 1234)])
-def test_coercion(val, expected, validator: IntegerValidator):
-    assert validator.validate_coerce(val) == expected
-
-
 # ### Rejection by value ###
 @pytest.mark.parametrize('val',
                          ['hello', (), [], [1, 2, 3], set(), '34', np.nan, np.inf, -np.inf])
@@ -126,15 +118,19 @@ def test_acceptance_aok_list(val, validator_aok: IntegerValidator):
 # ### Coerce ###
 #     Coerced to general consistent numeric type
 @pytest.mark.parametrize('val,expected',
-                         [([1.0, 0], [1, 0]),
-                          (np.array([1.1, -1]), [1, -1]),
-                          ([-1.9, 0, 5.1], [-1, 0, 5]),
+                         [([1, 0], (1, 0)),
+                          ((1, -1), (1, -1)),
+                          (np.array([-1, 0, 5.0], dtype='int16'), [-1, 0, 5]),
                           (np.array([1, 0], dtype=np.int64), [1, 0])])
 def test_coercion_aok_list(val, expected, validator_aok: IntegerValidator):
     v = validator_aok.validate_coerce(val)
-    assert v.dtype == np.int32
-    assert np.array_equal(v, np.array(expected, dtype=np.int32))
-
+    if isinstance(val, np.ndarray):
+        assert v.dtype == np.int32
+        assert np.array_equal(validator_aok.present(v),
+                              np.array(expected, dtype=np.int32))
+    else:
+        assert isinstance(v, list)
+        assert validator_aok.present(v) == expected
 
 # ### Rejection ###
 #
@@ -144,7 +140,7 @@ def test_integer_validator_rejection_aok(val, validator_aok: IntegerValidator):
     with pytest.raises(ValueError) as validation_failure:
         validator_aok.validate_coerce(val)
 
-    assert 'Invalid value' in str(validation_failure.value)
+    assert 'Invalid element(s)' in str(validation_failure.value)
 
 
 # ### Rejection by element ###
