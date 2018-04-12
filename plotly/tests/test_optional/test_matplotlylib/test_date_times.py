@@ -66,9 +66,9 @@ class TestDateTimes(TestCase):
         fig = plt.gcf()
         pfig = tls.mpl_to_plotly(fig)
 
-        expected_x = ['2001-01-01 00:00:00',
+        expected_x = ('2001-01-01 00:00:00',
                       '2001-01-02 00:00:00',
-                      '2001-01-03 00:00:00']
+                      '2001-01-03 00:00:00')
         expected_x0 = 11323.0  # this is floating point days since epoch
 
         x0 = fig.axes[0].lines[0].get_xydata()[0][0]
