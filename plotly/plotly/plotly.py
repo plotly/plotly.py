@@ -632,7 +632,7 @@ class Stream:
 
         # Convert trace objects to dictionaries
         if isinstance(trace, BaseTraceType):
-            trace = trace.to_plotly_json()
+            trace = tracefill_percent
 
         stream_object = dict()
         stream_object.update(trace)

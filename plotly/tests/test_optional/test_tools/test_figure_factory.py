@@ -66,9 +66,9 @@ class TestQuiver(TestCase, NumpyTestUtilsMixin):
                       'y': [1, 2, None, 1.615486170766527, 2,
                             1.820698256761928, None]}],
             'layout': {'hovermode': 'closest'}}
-        self.assert_fig_equal(quiver.to_plotly_json()['data'][0],
+        self.assert_fig_equal(quiver['data'][0],
                               expected_quiver['data'][0])
-        self.assert_fig_equal(quiver.to_plotly_json()['layout'],
+        self.assert_fig_equal(quiver['layout'],
                               expected_quiver['layout'])
 
     def test_more_kwargs(self):
@@ -118,9 +118,9 @@ class TestQuiver(TestCase, NumpyTestUtilsMixin):
                                            2.051107819102551,
                                            None]}],
                            'layout': {'hovermode': 'closest'}}
-        self.assert_fig_equal(quiver.to_plotly_json()['data'][0],
+        self.assert_fig_equal(quiver['data'][0],
                               expected_quiver['data'][0])
-        self.assert_fig_equal(quiver.to_plotly_json()['layout'],
+        self.assert_fig_equal(quiver['layout'],
                               expected_quiver['layout'])
 
 
@@ -255,30 +255,30 @@ class TestFinanceCharts(TestCase, NumpyTestUtilsMixin):
                          'data': [{'y': [33.0, 33.0, 33.2, 32.7,
                                          33.1, 33.1, None],
                                    'line': {'width': 1,
-                                            'color': '#3d9970'},
+                                            'color': '#3D9970'},
                                    'showlegend': False,
                                    'name': 'Increasing',
-                                   'text': ('Open', 'Open', 'High', 'Low',
-                                            'Close', 'Close', ''),
+                                   'text': ['Open', 'Open', 'High', 'Low',
+                                            'Close', 'Close', ''],
                                    'mode': 'lines', 'type': 'scatter',
                                    'x': [-0.2, 0, 0, 0, 0, 0.2, None]},
                                   {'y': [], 'line': {'width': 1,
-                                                     'color': '#ff4136'},
+                                                     'color': '#FF4136'},
                                    'showlegend': False,
                                    'name': 'Decreasing', 'text': (),
                                    'mode': 'lines', 'type': 'scatter',
                                    'x': []}]}
 
-        self.assert_fig_equal(ohlc.to_plotly_json()['data'][0],
+        self.assert_fig_equal(ohlc['data'][0],
                               expected_ohlc['data'][0],
                               ignore=['uid', 'text'])
 
-        self.assert_fig_equal(ohlc.to_plotly_json()['data'][1],
+        self.assert_fig_equal(ohlc['data'][1],
                               expected_ohlc['data'][1],
                               ignore=['uid', 'text'])
 
-        self.assertEqual(ohlc.to_plotly_json()['layout'],
-                         expected_ohlc['layout'])
+        self.assert_fig_equal(ohlc['layout'],
+                              expected_ohlc['layout'])
 
     def test_one_ohlc_increase(self):
 
@@ -290,21 +290,21 @@ class TestFinanceCharts(TestCase, NumpyTestUtilsMixin):
                                                   close=[33.1],
                                                   direction="increasing")
 
-        expected_ohlc_incr = {'data': [{'line': {'color': '#3d9970',
+        expected_ohlc_incr = {'data': [{'line': {'color': '#3D9970',
                                                  'width': 1},
                                         'mode': 'lines',
                                         'name': 'Increasing',
                                         'showlegend': False,
-                                        'text': ('Open', 'Open', 'High',
-                                                 'Low', 'Close', 'Close', ''),
+                                        'text': ['Open', 'Open', 'High',
+                                                 'Low', 'Close', 'Close', ''],
                                         'type': 'scatter',
                                         'x': [-0.2, 0, 0, 0, 0, 0.2, None],
                                         'y': [33.0, 33.0, 33.2, 32.7, 33.1,
                                               33.1, None]}],
                               'layout': {'hovermode': 'closest',
                                          'xaxis': {'zeroline': False}}}
-        self.assert_fig_equal(ohlc_incr.to_plotly_json()['data'][0], expected_ohlc_incr['data'][0])
-        self.assert_fig_equal(ohlc_incr.to_plotly_json()['layout'], expected_ohlc_incr['layout'])
+        self.assert_fig_equal(ohlc_incr['data'][0], expected_ohlc_incr['data'][0])
+        self.assert_fig_equal(ohlc_incr['layout'], expected_ohlc_incr['layout'])
 
     def test_one_ohlc_decrease(self):
 
@@ -316,13 +316,13 @@ class TestFinanceCharts(TestCase, NumpyTestUtilsMixin):
                                                   close=[31.1],
                                                   direction="decreasing")
 
-        expected_ohlc_decr = {'data': [{'line': {'color': '#ff4136',
+        expected_ohlc_decr = {'data': [{'line': {'color': '#FF4136',
                                                  'width': 1},
                                         'mode': 'lines',
                                         'name': 'Decreasing',
                                         'showlegend': False,
-                                        'text': ('Open', 'Open', 'High', 'Low',
-                                                 'Close', 'Close', ''),
+                                        'text': ['Open', 'Open', 'High', 'Low',
+                                                 'Close', 'Close', ''],
                                         'type': 'scatter',
                                         'x': [-0.2, 0, 0, 0, 0, 0.2, None],
                                         'y': [33.0, 33.0, 33.2, 30.7, 31.1,
@@ -330,8 +330,8 @@ class TestFinanceCharts(TestCase, NumpyTestUtilsMixin):
                               'layout': {'hovermode': 'closest',
                                          'xaxis': {'zeroline': False}}}
 
-        self.assert_fig_equal(ohlc_decr.to_plotly_json()['data'][0], expected_ohlc_decr['data'][0])
-        self.assert_fig_equal(ohlc_decr.to_plotly_json()['layout'], expected_ohlc_decr['layout'])
+        self.assert_fig_equal(ohlc_decr['data'][0], expected_ohlc_decr['data'][0])
+        self.assert_fig_equal(ohlc_decr['layout'], expected_ohlc_decr['layout'])
 
     # TO-DO: put expected fig in a different file and then call to compare
     def test_one_candlestick(self):
@@ -344,8 +344,8 @@ class TestFinanceCharts(TestCase, NumpyTestUtilsMixin):
                                                        close=[33.1])
 
         exp_can_inc = {'data': [{'boxpoints': False,
-                                 'fillcolor': '#3d9970',
-                                 'line': {'color': '#3d9970'},
+                                 'fillcolor': '#3D9970',
+                                 'line': {'color': '#3D9970'},
                                  'name': 'Increasing',
                                  'showlegend': False,
                                  'type': 'box',
@@ -363,9 +363,9 @@ class TestFinanceCharts(TestCase, NumpyTestUtilsMixin):
                                  'y': []}],
                        'layout': {}}
 
-        self.assert_fig_equal(can_inc.to_plotly_json()['data'][0],
+        self.assert_fig_equal(can_inc['data'][0],
                               exp_can_inc['data'][0])
-        self.assert_fig_equal(can_inc.to_plotly_json()['layout'],
+        self.assert_fig_equal(can_inc['layout'],
                               exp_can_inc['layout'])
 
     def test_datetime_ohlc(self):
@@ -390,11 +390,11 @@ class TestFinanceCharts(TestCase, NumpyTestUtilsMixin):
                                                low_data, close_data,
                                                dates=x)
 
-        ex_ohlc_d = {'data': [{'line': {'color': '#3d9970', 'width': 1},
+        ex_ohlc_d = {'data': [{'line': {'color': '#3D9970', 'width': 1},
                                'mode': 'lines',
                                'name': 'Increasing',
                                'showlegend': False,
-                               'text': ('Open',
+                               'text': ['Open',
                                         'Open',
                                         'High',
                                         'Low',
@@ -421,7 +421,7 @@ class TestFinanceCharts(TestCase, NumpyTestUtilsMixin):
                                         'Low',
                                         'Close',
                                         'Close',
-                                        ''),
+                                        ''],
                                'type': 'scatter',
                                'x': [datetime.datetime(2013, 2, 14, 4, 48),
                                      datetime.datetime(2013, 3, 4, 0, 0),
@@ -479,11 +479,11 @@ class TestFinanceCharts(TestCase, NumpyTestUtilsMixin):
                                      33.7,
                                      33.7,
                                      None]},
-                              {'line': {'color': '#ff4136', 'width': 1},
+                              {'line': {'color': '#FF4136', 'width': 1},
                                'mode': 'lines',
                                'name': 'Decreasing',
                                'showlegend': False,
-                               'text': ('Open',
+                               'text': ['Open',
                                         'Open',
                                         'High',
                                         'Low',
@@ -510,7 +510,7 @@ class TestFinanceCharts(TestCase, NumpyTestUtilsMixin):
                                         'Low',
                                         'Close',
                                         'Close',
-                                        ''),
+                                        ''],
                                'type': 'scatter',
                                'x': [datetime.datetime(2013, 5, 18, 4, 48),
                                      datetime.datetime(2013, 6, 5, 0, 0),
@@ -570,9 +570,9 @@ class TestFinanceCharts(TestCase, NumpyTestUtilsMixin):
                                      None]}],
                      'layout': {'hovermode': 'closest',
                                 'xaxis': {'zeroline': False}}}
-        self.assert_fig_equal(ohlc_d.to_plotly_json()['data'][0], ex_ohlc_d['data'][0])
-        self.assert_fig_equal(ohlc_d.to_plotly_json()['data'][1], ex_ohlc_d['data'][1])
-        self.assert_fig_equal(ohlc_d.to_plotly_json()['layout'], ex_ohlc_d['layout'])
+        self.assert_fig_equal(ohlc_d['data'][0], ex_ohlc_d['data'][0])
+        self.assert_fig_equal(ohlc_d['data'][1], ex_ohlc_d['data'][1])
+        self.assert_fig_equal(ohlc_d['layout'], ex_ohlc_d['layout'])
 
     def test_datetime_candlestick(self):
 
@@ -596,8 +596,8 @@ class TestFinanceCharts(TestCase, NumpyTestUtilsMixin):
                                                       low_data, close_data,
                                                       dates=x)
         exp_candle = {'data': [{'boxpoints': False,
-                                'fillcolor': '#3d9970',
-                                'line': {'color': '#3d9970'},
+                                'fillcolor': '#3D9970',
+                                'line': {'color': '#3D9970'},
                                 'name': 'Increasing',
                                 'showlegend': False,
                                 'type': 'box',
@@ -651,8 +651,8 @@ class TestFinanceCharts(TestCase, NumpyTestUtilsMixin):
                                      33.7,
                                      34.62]},
                                {'boxpoints': False,
-                                'fillcolor': '#ff4136',
-                                'line': {'color': '#ff4136'},
+                                'fillcolor': '#FF4136',
+                                'line': {'color': '#FF4136'},
                                 'name': 'Decreasing',
                                 'showlegend': False,
                                 'type': 'box',
@@ -707,9 +707,9 @@ class TestFinanceCharts(TestCase, NumpyTestUtilsMixin):
                                       35.37]}],
                       'layout': {}}
 
-        self.assert_fig_equal(candle.to_plotly_json()['data'][0], exp_candle['data'][0])
-        self.assert_fig_equal(candle.to_plotly_json()['data'][1], exp_candle['data'][1])
-        self.assertEqual(candle.to_plotly_json()['layout'], exp_candle['layout'])
+        self.assert_fig_equal(candle['data'][0], exp_candle['data'][0])
+        self.assert_fig_equal(candle['data'][1], exp_candle['data'][1])
+        self.assert_fig_equal(candle['layout'], exp_candle['layout'])
 
 
 class TestAnnotatedHeatmap(TestCase, NumpyTestUtilsMixin):
@@ -765,21 +765,21 @@ class TestAnnotatedHeatmap(TestCase, NumpyTestUtilsMixin):
                                         'xref': 'x',
                                         'y': 0,
                                         'yref': 'y'},
-                                       {'font': {'color': '#ffffff'},
+                                       {'font': {'color': '#FFFFFF'},
                                         'showarrow': False,
                                         'text': '0',
                                         'x': 1,
                                         'xref': 'x',
                                         'y': 0,
                                         'yref': 'y'},
-                                       {'font': {'color': '#ffffff'},
+                                       {'font': {'color': '#FFFFFF'},
                                         'showarrow': False,
                                         'text': '0.5',
                                         'x': 2,
                                         'xref': 'x',
                                         'y': 0,
                                         'yref': 'y'},
-                                       {'font': {'color': '#ffffff'},
+                                       {'font': {'color': '#FFFFFF'},
                                         'showarrow': False,
                                         'text': '0.25',
                                         'x': 0,
@@ -793,14 +793,14 @@ class TestAnnotatedHeatmap(TestCase, NumpyTestUtilsMixin):
                                         'xref': 'x',
                                         'y': 1,
                                         'yref': 'y'},
-                                       {'font': {'color': '#ffffff'},
+                                       {'font': {'color': '#FFFFFF'},
                                         'showarrow': False,
                                         'text': '0.45',
                                         'x': 2,
                                         'xref': 'x',
                                         'y': 1,
                                         'yref': 'y'}],
-                       'xaxis': {'gridcolor': 'rgb(0,0,0)',
+                       'xaxis': {'gridcolor': 'rgb(0, 0, 0)',
                                  'showticklabels': False,
                                  'side': 'top',
                                  'ticks': ''},
@@ -808,11 +808,11 @@ class TestAnnotatedHeatmap(TestCase, NumpyTestUtilsMixin):
                                  'ticksuffix': '  '}}}
 
         self.assert_fig_equal(
-            a_heat.to_plotly_json()['data'][0],
+            a_heat['data'][0],
             expected_a_heat['data'][0],
         )
 
-        self.assert_fig_equal(a_heat.to_plotly_json()['layout'],
+        self.assert_fig_equal(a_heat['layout'],
                               expected_a_heat['layout'])
 
     def test_annotated_heatmap_kwargs(self):
@@ -831,13 +831,13 @@ class TestAnnotatedHeatmap(TestCase, NumpyTestUtilsMixin):
                                                                    [1,
                                                                     '#e6005a']]
                                                        )
-        expected_a = {'data': [{'colorscale': ((0, '#ffffff'), (1, '#e6005a')),
+        expected_a = {'data': [{'colorscale': [[0, '#ffffff'], [1, '#e6005a']],
                                 'showscale': False,
                                 'type': 'heatmap',
                                 'x': ['A', 'B'],
                                 'y': ['One', 'Two', 'Three'],
                                 'z': [[1, 0], [0.25, 0.75], [0.45, 0.5]]}],
-                      'layout': {'annotations': [{'font': {'color': '#ffffff'},
+                      'layout': {'annotations': [{'font': {'color': '#FFFFFF'},
                                                   'showarrow': False,
                                                   'text': 'first',
                                                   'x': 'A',
@@ -858,7 +858,7 @@ class TestAnnotatedHeatmap(TestCase, NumpyTestUtilsMixin):
                                   'xref': 'x',
                                   'y': 'Two',
                                   'yref': 'y'},
-                                 {'font': {'color': '#ffffff'},
+                                 {'font': {'color': '#FFFFFF'},
                                   'showarrow': False,
                                   'text': 'fourth',
                                   'x': 'B',
@@ -880,17 +880,17 @@ class TestAnnotatedHeatmap(TestCase, NumpyTestUtilsMixin):
                                   'y': 'Three',
                                   'yref': 'y'}],
                                  'xaxis': {'dtick': 1,
-                                           'gridcolor': 'rgb(0,0,0)',
+                                           'gridcolor': 'rgb(0, 0, 0)',
                                            'side': 'top',
                                            'ticks': ''},
                                  'yaxis': {'dtick': 1, 'ticks': '',
                                            'ticksuffix': '  '}}}
         self.assert_fig_equal(
-            a.to_plotly_json()['data'][0],
+            a['data'][0],
             expected_a['data'][0],
         )
 
-        self.assert_fig_equal(a.to_plotly_json()['layout'],
+        self.assert_fig_equal(a['layout'],
                               expected_a['layout'])
 
 
@@ -917,9 +917,9 @@ class TestTable(TestCase, NumpyTestUtilsMixin):
         text = [['Country', 'Year', 'Population'], ['US', 2000, 282200000],
                 ['Canada', 2000, 27790000], ['US', 1980, 226500000]]
         table = tls.FigureFactory.create_table(text)
-        expected_table = {'data': [{'colorscale': ((0, '#00083e'),
-                                                   (0.5, '#ededee'),
-                                                   (1, '#ffffff')),
+        expected_table = {'data': [{'colorscale': [[0, '#00083e'],
+                                                   [0.5, '#ededee'],
+                                                   [1, '#ffffff']],
                                     'hoverinfo': 'none',
                                     'opacity': 0.75,
                                     'showscale': False,
@@ -1051,12 +1051,12 @@ class TestTable(TestCase, NumpyTestUtilsMixin):
                                                'zeroline': False}}}
 
         self.assert_fig_equal(
-            table.to_plotly_json()['data'][0],
+            table['data'][0],
             expected_table['data'][0]
         )
 
         self.assert_fig_equal(
-            table.to_plotly_json()['layout'],
+            table['layout'],
             expected_table['layout']
         )
 
@@ -1069,7 +1069,7 @@ class TestTable(TestCase, NumpyTestUtilsMixin):
                 ['Canada', 2000, 27790000]]
         index_table = tls.FigureFactory.create_table(text, index=True,
                                                      index_title='Title')
-        exp_index_table = {'data': [{'colorscale': ((0, '#00083e'), (0.5, '#ededee'), (1, '#ffffff')),
+        exp_index_table = {'data': [{'colorscale': [[0, '#00083e'], [0.5, '#ededee'], [1, '#ffffff']],
                                      'hoverinfo': 'none',
                                      'opacity': 0.75,
                                      'showscale': False,
@@ -1173,12 +1173,12 @@ class TestTable(TestCase, NumpyTestUtilsMixin):
                                                 'zeroline': False}}}
 
         self.assert_fig_equal(
-            index_table.to_plotly_json()['data'][0],
+            index_table['data'][0],
             exp_index_table['data'][0]
         )
 
         self.assert_fig_equal(
-            index_table.to_plotly_json()['layout'],
+            index_table['layout'],
             exp_index_table['layout']
         )
 
@@ -1642,11 +1642,11 @@ class Test2D_Density(TestCase):
                       'type': 'scatter',
                       'x': [1, 2],
                       'y': [2, 4]},
-                     {'colorscale': [[0.0, 'rgb(122,69,121)'],
-                                     [0.25, 'rgb(213,96,115)'],
-                                     [0.5, 'rgb(236,158,105)'],
-                                     [0.75, 'rgb(255,255,51)'],
-                                     [1.0, 'rgb(250,250,250)']],
+                     {'colorscale': [[0.0, 'rgb(122, 69, 121)'],
+                                     [0.25, 'rgb(213, 96, 115)'],
+                                     [0.5, 'rgb(236, 158, 105)'],
+                                     [0.75, 'rgb(255, 255, 51)'],
+                                     [1.0, 'rgb(250, 250, 250)']],
                       'name': 'density',
                       'ncontours': 20,
                       'reversescale': True,
@@ -1654,12 +1654,12 @@ class Test2D_Density(TestCase):
                       'type': 'histogram2dcontour',
                       'x': [1, 2],
                       'y': [2, 4]},
-                     {'marker': {'color': 'rgb(255,237,222)'},
+                     {'marker': {'color': 'rgb(255, 237, 222)'},
                       'name': 'x density',
                       'type': 'histogram',
                       'x': [1, 2],
                       'yaxis': 'y2'},
-                     {'marker': {'color': 'rgb(255,237,222)'},
+                     {'marker': {'color': 'rgb(255, 237, 222)'},
                       'name': 'y density',
                       'type': 'histogram',
                       'xaxis': 'x2',
@@ -1686,17 +1686,17 @@ class Test2D_Density(TestCase):
                                   'zeroline': False}}
         }
 
-        self.assertEqual(test_2D_density_chart.to_plotly_json()['data'][0],
+        self.assertEqual(test_2D_density_chart['data'][0],
                          exp_2D_density_chart['data'][0])
 
-        self.assertEqual(test_2D_density_chart.to_plotly_json()['data'][1],
+        self.assertEqual(test_2D_density_chart['data'][1],
                          exp_2D_density_chart['data'][1])
 
-        self.assertEqual(test_2D_density_chart.to_plotly_json()['data'][2],
+        self.assertEqual(test_2D_density_chart['data'][2],
                          exp_2D_density_chart['data'][2])
 
-        self.assertEqual(test_2D_density_chart.to_plotly_json()['data'][3],
+        self.assertEqual(test_2D_density_chart['data'][3],
                          exp_2D_density_chart['data'][3])
 
-        self.assertEqual(test_2D_density_chart.to_plotly_json()['layout'],
+        self.assertEqual(test_2D_density_chart['layout'],
                          exp_2D_density_chart['layout'])
