@@ -8,6 +8,7 @@ from plotly.tools import make_subplots
 import math
 import copy
 from numbers import Number
+import numpy as np
 
 pd = optional_imports.get_module('pandas')
 
@@ -33,6 +34,21 @@ CUSTOM_LABEL_ERROR = (
     "make sure each key in that column of the dataframe is in your facet "
     "labels. The keys you need are {}"
 )
+
+
+def rect(xref, yref, x0, x1, y0, y1, color):
+    shape = {
+        'layer': 'below',
+        'xref': xref,
+        'yref': yref,
+        'x0': x0,
+        'x1': x1,
+        'y0': y0,
+        'y1': y1,
+        'fillcolor': color,
+        'line': {'width': 0}
+    }
+    return shape
 
 
 def _is_flipped(num):
@@ -487,10 +503,11 @@ def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
                 num_of_cols, facet_row_labels, facet_col_labels,
                 trace_type, flipped_rows, flipped_cols, show_boxes,
                 SUBPLOT_SPACING, marker_color, kwargs_trace, kwargs_marker,
-                column_width):
+                row_colors, alternate_row_color, theme, column_width):
 
+    shared_xaxes = shared_yaxes = False
     fig = make_subplots(rows=num_of_rows, cols=num_of_cols,
-                        shared_xaxes=True, shared_yaxes=True,
+                        shared_xaxes=shared_xaxes, shared_yaxes=shared_yaxes,
                         horizontal_spacing=SUBPLOT_SPACING,
                         vertical_spacing=SUBPLOT_SPACING, print_grid=False,
                         column_width=column_width)
@@ -548,13 +565,14 @@ def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
             )
 
             annotations.append(
-                _annotation_dict(
+                utils.annotation_dict_for_label(
                     label,
                     num_of_rows - j if facet_row else j + 1,
                     num_of_rows if facet_row else num_of_cols,
                     SUBPLOT_SPACING,
                     'row' if facet_row else 'col',
-                    flipped_rows
+                    flipped_rows,
+                    column_width=column_width
                 )
             )
 
@@ -565,44 +583,64 @@ def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
 
         row_values = df[facet_row].unique()
         col_values = df[facet_col].unique()
+
         for row_count, x_val in enumerate(row_values):
             for col_count, y_val in enumerate(col_values):
                 try:
                     group = tuple_to_facet_group[(x_val, y_val)]
                 except KeyError:
                     group = pd.DataFrame([[None, None]], columns=[x, y])
-                trace = dict(
-                    type=trace_type,
-                    marker=dict(
-                        color=marker_color,
-                        line=kwargs_marker['line'],
-                    ),
-                    **kwargs_trace
-                )
+
+                # make the trace
+                # 'bullet', 'label', 'avg', 'area'
+                mode = None
+                if trace_type == 'bullet':
+                    # do something
+
+                elif trace_type in ['scatter', 'scattergl', 'histogram', 'bar', 'box', 'line']:
+                    trace = dict(
+                        type=trace_type,
+                        marker=dict(
+                            color=marker_color,
+                            line=kwargs_marker['line'],
+                        ),
+                        **kwargs_trace
+                    )
+                    if trace_type == 'line':
+                        trace['mode'] = 'lines+markers'
+                        trace['type'] = 'scatter'
+
+                    elif trace_type in ['scatter', 'scattergl']:
+                        trace['mode'] = 'markers'
+
                 if x:
                     trace['x'] = group[x]
                 if y:
                     trace['y'] = group[y]
-                trace = _make_trace_for_scatter(
-                    trace, trace_type, marker_color, **kwargs_marker
-                )
 
                 fig.append_trace(trace, row_count + 1, col_count + 1)
+
                 if row_count == 0:
                     label = _return_label(col_values[col_count],
                                           facet_col_labels,
                                           facet_col)
                     annotations.append(
-                        _annotation_dict(label, col_count + 1, num_of_cols, SUBPLOT_SPACING,
-                                         row_col='col', flipped=flipped_cols)
+                        utils.annotation_dict_for_label(
+                            label, col_count + 1, num_of_cols, SUBPLOT_SPACING,
+                            row_col='col', flipped=flipped_cols,
+                            column_width=column_width
                         )
+                    )
 
             label = _return_label(row_values[row_count],
                                   facet_row_labels,
                                   facet_row)
+
             annotations.append(
-                _annotation_dict(label, num_of_rows - row_count, num_of_rows, SUBPLOT_SPACING,
-                                 row_col='row', flipped=flipped_rows)
+                utils.annotation_dict_for_label(
+                    label, num_of_rows - row_count, num_of_rows,
+                    SUBPLOT_SPACING, row_col='row', flipped=flipped_rows
+                )
             )
 
     # add annotations
@@ -619,6 +657,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
                       show_boxes=True, ggplot2=False, binsize=1,
                       row_colors=('rgb(247, 247, 242)',
                                   'rgb(255, 253, 250)'),
+                      alternate_row_color=True,
                       theme='facet',
                       column_width=None,
                       **kwargs):
@@ -929,7 +968,8 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
                 df, x, y, facet_row, facet_col, color_name, colormap,
                 num_of_rows, num_of_cols, facet_row_labels, facet_col_labels,
                 trace_type, flipped_rows, flipped_cols, show_boxes,
-                SUBPLOT_SPACING, marker_color, kwargs_trace, kwargs_marker
+                SUBPLOT_SPACING, marker_color, kwargs_trace, kwargs_marker,
+                column_width
             )
 
         elif isinstance(df[color_name].iloc[0], Number):
@@ -949,7 +989,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
                     num_of_rows, num_of_cols, facet_row_labels,
                     facet_col_labels, trace_type, flipped_rows,
                     flipped_cols, show_boxes, SUBPLOT_SPACING, marker_color,
-                    kwargs_trace, kwargs_marker
+                    kwargs_trace, kwargs_marker, column_width
                 )
 
             elif isinstance(colormap, list):
@@ -961,7 +1001,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
                     colorscale_list, num_of_rows, num_of_cols,
                     facet_row_labels, facet_col_labels, trace_type,
                     flipped_rows, flipped_cols, show_boxes, SUBPLOT_SPACING,
-                    marker_color, kwargs_trace, kwargs_marker
+                    marker_color, kwargs_trace, kwargs_marker, column_width
                 )
             elif isinstance(colormap, str):
                 if colormap in colors.PLOTLY_SCALES.keys():
@@ -977,7 +1017,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
                     colorscale_list, num_of_rows, num_of_cols,
                     facet_row_labels, facet_col_labels, trace_type,
                     flipped_rows, flipped_cols, show_boxes, SUBPLOT_SPACING,
-                    marker_color, kwargs_trace, kwargs_marker
+                    marker_color, kwargs_trace, kwargs_marker, column_width
                 )
             else:
                 colorscale_list = colors.PLOTLY_SCALES['Reds']
@@ -986,7 +1026,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
                     colorscale_list, num_of_rows, num_of_cols,
                     facet_row_labels, facet_col_labels, trace_type,
                     flipped_rows, flipped_cols, show_boxes, SUBPLOT_SPACING,
-                    marker_color, kwargs_trace, kwargs_marker
+                    marker_color, kwargs_trace, kwargs_marker, column_width
                 )
 
     else:
@@ -994,7 +1034,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
             df, x, y, facet_row, facet_col, num_of_rows, num_of_cols,
             facet_row_labels, facet_col_labels, trace_type, flipped_rows,
             flipped_cols, show_boxes, SUBPLOT_SPACING, marker_color,
-            kwargs_trace, kwargs_marker
+            kwargs_trace, kwargs_marker, row_colors, alternate_row_color, theme, column_width
         )
 
     # style the layout depending on theme
@@ -1064,17 +1104,22 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
             for axis_name in axis_labels[x_y]:
                 fig['layout'][axis_name]['type'] = 'category'
 
-    if scales == 'fixed':
+    if theme == 'facet':
+        if scales == 'fixed':
+            fixed_axes = ['x', 'y']
+        elif scales == 'free_x':
+            fixed_axes = ['y']
+        elif scales == 'free_y':
+            fixed_axes = ['x']
+        elif scales == 'free':
+            fixed_axes = []
+    else:
         fixed_axes = ['x', 'y']
-    elif scales == 'free_x':
-        fixed_axes = ['y']
-    elif scales == 'free_y':
-        fixed_axes = ['x']
-    elif scales == 'free':
-        fixed_axes = []
 
     # fixed ranges
-    if theme != 'sparklines':
+
+    # all xaxis 
+    if theme == 'facet':
         for x_y in fixed_axes:
             min_ranges = []
             max_ranges = []
@@ -1097,7 +1142,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
                 min_range = math.floor(min_range)
                 max_range = math.ceil(max_range)
 
-                # extend widen frame by 5% on each side
+                # widen frame by 5% on each side
                 min_range -= 0.05 * (max_range - min_range)
                 max_range += 0.05 * (max_range - min_range)
 
@@ -1133,16 +1178,73 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
                         'color': TICK_COLOR, 'size': 10
                     }
 
-            # insert ranges into fig
-            if x_y in fixed_axes:
-                for key in fig['layout']:
-                    if '{}axis'.format(x_y) in key and range_are_numbers:
-                        fig['layout'][key]['range'] = [min_range, max_range]
+            for key in fig['layout']:
+                if '{}axis'.format(x_y) in key and range_are_numbers:
+                    fig['layout'][key]['range'] = [min_range, max_range]
+
+    # adjust range for individual subplot
+    # and add bkgd panel colors
     else:
-        for x_y in fixed_axes:
+        # layout styling
+        for x_y in ['x', 'y']:
             for axis_title in axis_labels[x_y]:
                 fig['layout'][axis_title]['showgrid'] = False
                 fig['layout'][axis_title]['showticklabels'] = False
                 fig['layout'][axis_title]['zeroline'] = False
+        
+        # set ranges
+        c_idx = 0
+        for i, trace in enumerate(fig['data']):
+            min_x = min(trace['x'])
+            max_x = max(trace['x'])
+            
+            min_y = min(trace['y'])
+            max_y = max(trace['y'])
+
+            range_are_numbers = (isinstance(min_y, Number) and
+                                 isinstance(max_y, Number))
+
+            if range_are_numbers:
+                min_y = math.floor(min_y)
+                max_y = math.ceil(max_y)
+
+                # widen frame on each side
+                std_x = np.std(trace['x'])
+                std_y = np.std(trace['y'])
+                if min_x == max_x:
+                    xrange_bottom = min_x - 0.3 * abs(list(trace['x'])[0])
+                    xrange_top = max_x + 0.3 * abs(list(trace['x'])[0])
+                else:
+                    xrange_bottom = min_x - 2 * std_x
+                    xrange_top = max_x + 2 * std_x
+
+                if min_y == max_y:
+                    yrange_bottom = min_y - 0.5
+                    yrange_top = max_y + 0.5
+                else:
+                    yrange_bottom = min_y - 2 * std_y
+                    yrange_top = max_y + 2 * std_y
+
+            fig['layout']['xaxis{}'.format(i + 1)]['range'] = [xrange_bottom, xrange_top]
+            fig['layout']['yaxis{}'.format(i + 1)]['range'] = [yrange_bottom, yrange_top]
+
+            # add shapes to bkgd
+            if alternate_row_color:
+                if c_idx >= len(row_colors):
+                    c_idx = 0
+                r_color = row_colors[c_idx]
+                bkg = rect(
+                    'x{}'.format(i + 1),
+                    'y{}'.format(i + 1),
+                    x0=xrange_bottom, x1=xrange_top,
+                    y0=yrange_bottom, y1=yrange_top,
+                    color=(
+                        r_color
+                    )
+                )
+                fig['layout']['shapes'].append(bkg)
+
+                if (i + 1) % num_of_cols == 0:
+                    c_idx += 1
 
     return fig
