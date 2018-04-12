@@ -136,16 +136,22 @@ def test_acceptance_aok_list_flaglist(val, validator_extra_aok: FlaglistValidato
 
 
 # ### Coercion ###
-@pytest.mark.parametrize('in_val,coerce_val',
+@pytest.mark.parametrize('in_val,expected',
                          [(['  lines ', ' lines + markers ', 'lines ,markers'],
-                           np.array(['lines', 'lines+markers', 'lines+markers'], dtype='unicode')
-                           ),
+                           ['lines', 'lines+markers', 'lines+markers']),
                           (np.array(['text   +lines']),
-                           np.array(['text+lines'], dtype='unicode')
-                           )
+                           np.array(['text+lines'], dtype='unicode'))
                           ])
-def test_coercion_aok(in_val, coerce_val, validator_extra_aok):
-    assert np.array_equal(validator_extra_aok.validate_coerce(in_val), coerce_val)
+def test_coercion_aok(in_val, expected, validator_extra_aok):
+    coerce_val = validator_extra_aok.validate_coerce(in_val)
+    if isinstance(in_val, (list, tuple)):
+        expected == coerce_val
+        validator_extra_aok.present(coerce_val) == tuple(expected)
+    else:
+        assert np.array_equal(coerce_val, coerce_val)
+        assert np.array_equal(
+            validator_extra_aok.present(coerce_val),
+            coerce_val)
 
 
 # ### Rejection by type ###

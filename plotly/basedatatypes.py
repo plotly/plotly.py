@@ -5,8 +5,7 @@ from contextlib import contextmanager
 from copy import deepcopy
 from typing import Dict, Tuple, Union, Callable, List
 
-import numpy as np
-from traitlets import Undefined
+from plotly.optional_imports import get_module
 
 import plotly.offline as pyo
 from _plotly_utils.basevalidators import (
@@ -16,6 +15,15 @@ from plotly import animation
 from plotly.callbacks import (Points, BoxSelector, LassoSelector,
                               InputDeviceState)
 from plotly.validators import (DataValidator, LayoutValidator, FramesValidator)
+
+# Optional imports
+# ----------------
+np = get_module('numpy')
+
+# Create Undefined sentinel value
+#   - Setting a property to None removes any existing value
+#   - Setting a property to Undefined leaves existing value unmodified
+Undefined = object()
 
 
 class BaseFigure:
@@ -207,11 +215,11 @@ class BaseFigure:
 
     def __getitem__(self, prop):
         if prop == 'data':
-            return self.data
+            return self._data_validator.present(self._data_objs)
         elif prop == 'layout':
-            return self.layout
+            return self._layout_validator.present(self._layout_obj)
         elif prop == 'frames':
-            return self.frames
+            return self._frames_validator.present(self._frame_objs)
         else:
             raise KeyError(prop)
 
@@ -293,7 +301,7 @@ class BaseFigure:
         -------
         tuple[BaseTraceType]
         """
-        return self._data_objs
+        return self['data']
 
     @data.setter
     def data(self, new_data):
@@ -368,6 +376,9 @@ class BaseFigure:
             del traces_prop_defaults_post_removal[i]
             del uids_post_removal[i]
 
+            # Modify in-place so we don't trigger serialization
+            del self._data[i]
+
         if delete_inds:
             # Update widget, if any
             self._send_deleteTraces_msg(delete_inds)
@@ -416,7 +427,7 @@ class BaseFigure:
         ]
 
         # Update trace objects tuple
-        self._data_objs = tuple(new_data)
+        self._data_objs = list(new_data)
 
     # Restyle
     # -------
@@ -480,12 +491,13 @@ class BaseFigure:
             # The restyle operation resulted in a change to some trace
             # properties, so we dispatch change callbacks and send the
             # restyle message to the frontend (if any)
-            self._dispatch_change_callbacks_restyle(
-                restyle_changes, trace_indexes)
             self._send_restyle_msg(
                 restyle_changes,
                 trace_indexes=trace_indexes,
                 source_view_id=source_view_id)
+
+            self._dispatch_trace_change_callbacks(
+                restyle_changes, trace_indexes)
 
         return self
 
@@ -576,8 +588,8 @@ class BaseFigure:
         if not self._in_batch_mode:
             send_val = [val]
             restyle = {key_path_str: send_val}
-            self._dispatch_change_callbacks_restyle(restyle, [trace_index])
             self._send_restyle_msg(restyle, trace_indexes=trace_index)
+            self._dispatch_trace_change_callbacks(restyle, [trace_index])
 
         # In batch mode
         # -------------
@@ -1027,7 +1039,7 @@ class BaseFigure:
         -------
         plotly.graph_objs.Layout
         """
-        return self._layout_obj
+        return self['layout']
 
     @layout.setter
     def layout(self, new_layout):
@@ -1094,10 +1106,11 @@ class BaseFigure:
             # The relayout operation resulted in a change to some layout
             # properties, so we dispatch change callbacks and send the
             # relayout message to the frontend (if any)
-            self._dispatch_change_callbacks_relayout(relayout_changes)
             self._send_relayout_msg(
                 relayout_changes,
                 source_view_id=source_view_id)
+
+            self._dispatch_layout_change_callbacks(relayout_changes)
 
         return self
 
@@ -1162,8 +1175,8 @@ class BaseFigure:
         # Dispatch change callbacks and send relayout message
         if not self._in_batch_mode:
             relayout_msg = {key_path_str: val}
-            self._dispatch_change_callbacks_relayout(relayout_msg)
             self._send_relayout_msg(relayout_msg)
+            self._dispatch_layout_change_callbacks(relayout_msg)
 
         # In batch mode
         # -------------
@@ -1236,7 +1249,7 @@ class BaseFigure:
 
         return dispatch_plan
 
-    def _dispatch_change_callbacks_relayout(self, relayout_data):
+    def _dispatch_layout_change_callbacks(self, relayout_data):
         """
         Dispatch property change callbacks given relayout_data
 
@@ -1261,7 +1274,7 @@ class BaseFigure:
             if isinstance(dispatch_obj, BasePlotlyType):
                 dispatch_obj._dispatch_change_callbacks(changed_paths)
 
-    def _dispatch_change_callbacks_restyle(self, restyle_data, trace_indexes):
+    def _dispatch_trace_change_callbacks(self, restyle_data, trace_indexes):
         """
         Dispatch property change callbacks given restyle_data
 
@@ -1303,7 +1316,7 @@ class BaseFigure:
         -------
         tuple[BaseFrameHierarchyType]
         """
-        return self._frame_objs
+        return self['frames']
 
     @frames.setter
     def frames(self, new_frames):
@@ -1365,17 +1378,6 @@ class BaseFigure:
             relayout_data=relayout_data,
             trace_indexes=trace_indexes)
 
-        # Dispatch changes
-        # ----------------
-        # ### Dispatch restyle changes ###
-        if restyle_changes:
-            self._dispatch_change_callbacks_restyle(
-                restyle_changes, trace_indexes)
-
-        # ### Dispatch relayout changes ###
-        if relayout_changes:
-            self._dispatch_change_callbacks_relayout(relayout_changes)
-
         # Send update message
         # -------------------
         # Send a plotly_update message to the frontend (if any)
@@ -1385,6 +1387,17 @@ class BaseFigure:
                 relayout_changes,
                 trace_indexes,
                 source_view_id=source_view_id)
+
+        # Dispatch changes
+        # ----------------
+        # ### Dispatch restyle changes ###
+        if restyle_changes:
+            self._dispatch_trace_change_callbacks(
+                restyle_changes, trace_indexes)
+
+        # ### Dispatch relayout changes ###
+        if relayout_changes:
+            self._dispatch_layout_change_callbacks(relayout_changes)
 
         return self
 
@@ -1685,17 +1698,6 @@ class BaseFigure:
                                                       relayout_data,
                                                       trace_indexes)
 
-        # Dispatch callbacks
-        # ------------------
-        # ### Dispatch restyle changes ###
-        if restyle_changes:
-            self._dispatch_change_callbacks_restyle(restyle_changes,
-                                                    trace_indexes)
-
-        # ### Dispatch relayout changes ###
-        if relayout_changes:
-            self._dispatch_change_callbacks_relayout(relayout_changes)
-
         # Convert style / trace_indexes into animate form
         # -----------------------------------------------
         if self._batch_trace_edits:
@@ -1720,6 +1722,17 @@ class BaseFigure:
         # ----------------------
         self._batch_layout_edits.clear()
         self._batch_trace_edits.clear()
+
+        # Dispatch callbacks
+        # ------------------
+        # ### Dispatch restyle changes ###
+        if restyle_changes:
+            self._dispatch_trace_change_callbacks(restyle_changes,
+                                                  trace_indexes)
+
+        # ### Dispatch relayout changes ###
+        if relayout_changes:
+            self._dispatch_layout_change_callbacks(relayout_changes)
 
     # Exports
     # -------
@@ -2234,14 +2247,15 @@ class BasePlotlyType:
                     and prop not in self._prop_defaults):
                 raise KeyError(prop)
 
+            validator = self._validators[prop]
             if prop in self._compound_props:
-                return self._compound_props[prop]
+                return validator.present(self._compound_props[prop])
             elif prop in self._compound_array_props:
-                return self._compound_array_props[prop]
+                return validator.present(self._compound_array_props[prop])
             elif self._props is not None and prop in self._props:
-                return self._props[prop]
+                return validator.present(self._props[prop])
             elif self._prop_defaults is not None:
-                return self._prop_defaults.get(prop, None)
+                return validator.present(self._prop_defaults.get(prop, None))
             else:
                 return None
 
@@ -2721,7 +2735,7 @@ class BasePlotlyType:
         child_prop_val = getattr(self, child.plotly_name)
         if isinstance(child_prop_val, (list, tuple)):
             child_ind = BaseFigure._index_is(child_prop_val, child)
-            obj_path = '{child_name}[{child_ind}].{prop}'.format(
+            obj_path = '{child_name}.{child_ind}.{prop}'.format(
                 child_name=child.plotly_name,
                 child_ind=child_ind,
                 prop=prop_path_str)
@@ -2885,7 +2899,8 @@ class BasePlotlyType:
         bool
             True if v1 and v2 are equal, False otherwise
         """
-        if isinstance(v1, np.ndarray) or isinstance(v2, np.ndarray):
+        if (np is not None and
+                (isinstance(v1, np.ndarray) or isinstance(v2, np.ndarray))):
             return np.array_equal(v1, v2)
         elif isinstance(v1, (list, tuple)):
             # Handle recursive equality on lists and tuples
@@ -3093,7 +3108,8 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         """
         prop = self._strip_subplot_suffix_of_1(prop)
         if prop in self._subplotid_props:
-            return self._compound_props[prop]
+            validator = self._validators[prop]
+            return validator.present(self._compound_props[prop])
         else:
             return super().__getattribute__(prop)
 

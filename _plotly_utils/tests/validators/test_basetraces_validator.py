@@ -18,46 +18,53 @@ def validator():
 def test_acceptance(validator: BaseDataValidator):
     val = [Scatter(mode='lines'), Box(fillcolor='yellow')]
     res = validator.validate_coerce(val)
+    res_present = validator.present(res)
 
-    assert isinstance(res, tuple)
-    assert isinstance(res[0], Scatter)
-    assert res[0].type == 'scatter'
-    assert res[0].mode == 'lines'
+    assert isinstance(res, list)
+    assert isinstance(res_present, tuple)
 
-    assert isinstance(res[1], Box)
-    assert res[1].type == 'box'
-    assert res[1].fillcolor == 'yellow'
+    assert isinstance(res_present[0], Scatter)
+    assert res_present[0].type == 'scatter'
+    assert res_present[0].mode == 'lines'
+
+    assert isinstance(res_present[1], Box)
+    assert res_present[1].type == 'box'
+    assert res_present[1].fillcolor == 'yellow'
 
     # Make sure UIDs are actually unique
-    assert res[0].uid != res[1].uid
+    assert res_present[0].uid != res_present[1].uid
 
 
 def test_acceptance_dict(validator: BaseDataValidator):
     val = (dict(type='scatter', mode='lines'),
            dict(type='box', fillcolor='yellow'))
     res = validator.validate_coerce(val)
+    res_present = validator.present(res)
 
-    assert isinstance(res, tuple)
-    assert isinstance(res[0], Scatter)
-    assert res[0].type == 'scatter'
-    assert res[0].mode == 'lines'
+    assert isinstance(res, list)
+    assert isinstance(res_present, tuple)
+    assert isinstance(res_present[0], Scatter)
+    assert res_present[0].type == 'scatter'
+    assert res_present[0].mode == 'lines'
 
-    assert isinstance(res[1], Box)
-    assert res[1].type == 'box'
-    assert res[1].fillcolor == 'yellow'
+    assert isinstance(res_present[1], Box)
+    assert res_present[1].type == 'box'
+    assert res_present[1].fillcolor == 'yellow'
 
     # Make sure UIDs are actually unique
-    assert res[0].uid != res[1].uid
+    assert res_present[0].uid != res_present[1].uid
 
 
 def test_default_is_scatter(validator: BaseDataValidator):
     val = [dict(mode='lines')]
     res = validator.validate_coerce(val)
+    res_present = validator.present(res)
 
-    assert isinstance(res, tuple)
-    assert isinstance(res[0], Scatter)
-    assert res[0].type == 'scatter'
-    assert res[0].mode == 'lines'
+    assert isinstance(res, list)
+    assert isinstance(res_present, tuple)
+    assert isinstance(res_present[0], Scatter)
+    assert res_present[0].type == 'scatter'
+    assert res_present[0].mode == 'lines'
 
 
 def test_rejection_type(validator: BaseDataValidator):
