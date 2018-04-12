@@ -497,3 +497,26 @@ def memoize(maxsize=128):
         return result
 
     return decorator(_memoize)
+
+
+def _list_repr_elided(v, n=20):
+    """
+    Return a string representation for of a list where list is elided if
+    it has more than n elements
+
+    Parameters
+    ----------
+    v : list
+        Input list
+    n :
+        Maximum number of elements to display
+
+    Returns
+    -------
+    str
+    """
+    if len(v) <= n:
+        return str(v)
+    else:
+        disp_v = v[:n // 2 - 1] + ['...'] + v[-n // 2 + 1:]
+        return '[' + ', '.join([str(e) for e in disp_v]) + ']'

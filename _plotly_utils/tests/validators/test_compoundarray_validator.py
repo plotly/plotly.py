@@ -16,44 +16,49 @@ def validator():
 def test_acceptance(validator: CompoundArrayValidator):
     val = [Image(opacity=0.5, sizex=120), Image(x=99)]
     res = validator.validate_coerce(val)
+    res_present = validator.present(res)
+    assert isinstance(res, list)
+    assert isinstance(res_present, tuple)
+    assert isinstance(res_present[0], Image)
+    assert res_present[0].opacity == 0.5
+    assert res_present[0].sizex == 120
+    assert res_present[0].x is None
 
-    assert isinstance(res, tuple)
-    assert isinstance(res[0], Image)
-    assert res[0].opacity == 0.5
-    assert res[0].sizex == 120
-    assert res[0].x is None
-
-    assert isinstance(res[1], Image)
-    assert res[1].opacity is None
-    assert res[1].sizex is None
-    assert res[1].x == 99
+    assert isinstance(res_present[1], Image)
+    assert res_present[1].opacity is None
+    assert res_present[1].sizex is None
+    assert res_present[1].x == 99
 
 
 def test_acceptance_empty(validator: CompoundArrayValidator):
     val = [{}]
     res = validator.validate_coerce(val)
+    res_present = validator.present(res)
 
-    assert isinstance(res, tuple)
-    assert isinstance(res[0], Image)
-    assert res[0].opacity is None
-    assert res[0].sizex is None
-    assert res[0].x is None
+    assert isinstance(res, list)
+    assert isinstance(res_present, tuple)
+    assert isinstance(res_present[0], Image)
+    assert res_present[0].opacity is None
+    assert res_present[0].sizex is None
+    assert res_present[0].x is None
 
 
 def test_acceptance_dict(validator: CompoundArrayValidator):
     val = [dict(opacity=0.5, sizex=120), dict(x=99)]
     res = validator.validate_coerce(val)
+    res_present = validator.present(res)
 
-    assert isinstance(res, tuple)
-    assert isinstance(res[0], Image)
-    assert res[0].opacity == 0.5
-    assert res[0].sizex == 120
-    assert res[0].x is None
+    assert isinstance(res, list)
+    assert isinstance(res_present, tuple)
+    assert isinstance(res_present[0], Image)
+    assert res_present[0].opacity == 0.5
+    assert res_present[0].sizex == 120
+    assert res_present[0].x is None
 
     assert isinstance(res[1], Image)
-    assert res[1].opacity is None
-    assert res[1].sizex is None
-    assert res[1].x == 99
+    assert res_present[1].opacity is None
+    assert res_present[1].sizex is None
+    assert res_present[1].x == 99
 
 
 def test_rejection_type(validator: CompoundArrayValidator):

@@ -124,11 +124,18 @@ def test_acceptance_aok_scalars(val, validator_aok: StringValidator):
 
 
 @pytest.mark.parametrize('val',
-                         ['foo', ['foo'], np.array(['BAR', ''], dtype='object'), ['baz', 'baz', 'baz']])
+                         ['foo',
+                          ['foo'],
+                          np.array(['BAR', ''], dtype='object'),
+                          ['baz', 'baz', 'baz']])
 def test_acceptance_aok_list(val, validator_aok: StringValidator):
     coerce_val = validator_aok.validate_coerce(val)
-    if isinstance(val, (list, np.ndarray)):
-        assert np.array_equal(coerce_val, np.array(val, dtype=coerce_val.dtype))
+    if isinstance(val, np.ndarray):
+        assert isinstance(coerce_val, np.ndarray)
+        assert np.array_equal(coerce_val,
+                              np.array(val, dtype=coerce_val.dtype))
+    elif isinstance(val, list):
+        assert validator_aok.present(val) == tuple(val)
     else:
         assert coerce_val == val
 
@@ -155,18 +162,29 @@ def test_rejection_aok_values(val, validator_aok_values: StringValidator):
 
 # ### No blanks ###
 @pytest.mark.parametrize('val',
-                         ['123', ['bar', 'HELLO!!!'], ['world!@#$%^&*()']])
+                         ['123',
+                          ['bar', 'HELLO!!!'],
+                          np.array(['bar', 'HELLO!!!'], dtype='object'),
+                          ['world!@#$%^&*()']])
 def test_acceptance_no_blanks_aok(val, validator_no_blanks_aok: StringValidator):
     coerce_val = validator_no_blanks_aok.validate_coerce(val)
-    if isinstance(val, (list, np.ndarray)):
-        assert np.array_equal(coerce_val, np.array(val, dtype=coerce_val.dtype))
+    if isinstance(val, np.ndarray):
+        assert np.array_equal(coerce_val,
+                              np.array(val, dtype=coerce_val.dtype))
+    elif isinstance(val, list):
+        assert validator_no_blanks_aok.present(coerce_val) == tuple(val)
     else:
         assert coerce_val == val
 
 
 @pytest.mark.parametrize('val',
-                         ['', ['foo', 'bar', ''], ['']])
-def test_rejection_no_blanks_aok(val, validator_no_blanks_aok: StringValidator):
+                         ['',
+                          ['foo', 'bar', ''],
+                          np.array(['foo', 'bar', ''], dtype='object'),
+                          [''],
+                          np.array([''], dtype='object')])
+def test_rejection_no_blanks_aok(val,
+                                 validator_no_blanks_aok: StringValidator):
     with pytest.raises(ValueError) as validation_failure:
         validator_no_blanks_aok.validate_coerce(val)
 

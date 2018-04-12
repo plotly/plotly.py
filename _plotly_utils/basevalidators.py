@@ -7,9 +7,27 @@ from importlib import import_module
 import io
 from copy import deepcopy
 
-import numpy as np
-import pandas as pd
 import re
+
+# Optional imports
+# ----------------
+import sys
+
+np = None
+pd = None
+
+try:
+    np = import_module('numpy')
+
+    try:
+        pd = import_module('pandas')
+    except ImportError:
+        pass
+
+except ImportError:
+    pass
+
+
 
 
 # Utility functions
@@ -33,6 +51,8 @@ def copy_to_readonly_numpy_array(v, dtype=None, force_numeric=False):
     np.ndarray
         Numpy array with the 'WRITEABLE' flag set to False
     """
+
+    assert np is not None
 
     # Copy to numpy array and handle dtype param
     # ------------------------------------------
@@ -79,13 +99,26 @@ def copy_to_readonly_numpy_array(v, dtype=None, force_numeric=False):
     return new_v
 
 
+def is_homogeneous_array(v):
+    """
+    Return whether a value is considered to be a homogeneous array
+    """
+    return ((np and isinstance(v, np.ndarray) and v.ndim == 1) or
+            (pd and isinstance(v, pd.Series)))
+
+
+def is_simple_array(v):
+    """
+    Return whether a value is considered to be an simple array
+    """
+    return isinstance(v, (list, tuple))
+
+
 def is_array(v):
     """
     Return whether a value is considered to be an array
     """
-    return (isinstance(v, (list, tuple)) or
-            (isinstance(v, np.ndarray) and v.ndim == 1) or
-            isinstance(v, pd.Series))
+    return is_simple_array(v) or is_homogeneous_array(v)
 
 
 def type_str(v):
@@ -124,27 +157,6 @@ class BaseValidator:
         self.parent_name = parent_name
         self.plotly_name = plotly_name
         self.role = role
-
-    def validate_coerce(self, v):
-        """
-        Validate whether an input value is compatible with this property,
-        and coerce the value to be compatible of possible.
-
-        Parameters
-        ----------
-        v
-            The input value to be validated
-
-        Raises
-        ------
-        ValueError
-            if `v` cannot be coerced into a compatible form
-
-        Returns
-        -------
-        The input `v` in a form that's compatible with this property
-        """
-        raise NotImplementedError()
 
     def description(self):
         """
@@ -194,6 +206,56 @@ class BaseValidator:
                 invalid=invalid_els[:10],
                 valid_clr_desc=self.description()))
 
+    def validate_coerce(self, v):
+        """
+        Validate whether an input value is compatible with this property,
+        and coerce the value to be compatible of possible.
+
+        Parameters
+        ----------
+        v
+            The input value to be validated
+
+        Raises
+        ------
+        ValueError
+            if `v` cannot be coerced into a compatible form
+
+        Returns
+        -------
+        The input `v` in a form that's compatible with this property
+        """
+        raise NotImplementedError()
+
+    def present(self, v):
+        """
+        Convert output value of a previous call to `validate_coerce` into a
+        form suitable to be returned to the user on upon property
+        access.
+
+        Note: The value returned by present must be either immutable or an
+        instance of BasePlotlyType, otherwise the value could be mutated by
+        the user and we wouldn't get notified about the change.
+
+        Parameters
+        ----------
+        v
+            A value that was the ouput of a previous call the
+            `validate_coerce` method on the same object
+
+        Returns
+        -------
+
+        """
+        if is_homogeneous_array(v):
+            # Note: numpy array was already coerced into read-only form so
+            # we don't need to copy it here.
+            return v
+        elif is_simple_array(v):
+            return tuple(v)
+        else:
+            return v
+
 
 class DataArrayValidator(BaseValidator):
     """
@@ -222,8 +284,10 @@ class DataArrayValidator(BaseValidator):
         if v is None:
             # Pass None through
             pass
-        elif is_array(v):
+        elif is_homogeneous_array(v):
             v = copy_to_readonly_numpy_array(v)
+        elif is_simple_array(v):
+            v = list(v)
         else:
             self.raise_invalid_val(v)
         return v
@@ -386,13 +450,16 @@ class EnumeratedValidator(BaseValidator):
             # Pass None through
             pass
         elif self.array_ok and is_array(v):
-            v = [self.perform_replacemenet(v_el) for v_el in v]
+            v_replaced = [self.perform_replacemenet(v_el) for v_el in v]
 
-            invalid_els = [e for e in v if (not self.in_values(e))]
+            invalid_els = [e for e in v_replaced if (not self.in_values(e))]
             if invalid_els:
-                self.raise_invalid_elements(invalid_els)
+                self.raise_invalid_elements(invalid_els[:10])
 
-            v = copy_to_readonly_numpy_array(v)
+            if is_homogeneous_array(v):
+                v = copy_to_readonly_numpy_array(v)
+            else:
+                v = list(v)
         else:
             v = self.perform_replacemenet(v)
             if not self.in_values(v):
@@ -460,16 +527,21 @@ class NumberValidator(BaseValidator):
         # Handle min
         if min is None and max is not None:
             # Max was specified, so make min -inf
-            self.min_val = -np.inf
+            self.min_val = float('-inf')
         else:
             self.min_val = min
 
         # Handle max
         if max is None and min is not None:
             # Min was specified, so make min inf
-            self.max_val = np.inf
+            self.max_val = float('inf')
         else:
             self.max_val = max
+
+        if min is not None or max is not None:
+            self.has_min_max = True
+        else:
+            self.has_min_max = False
 
         self.array_ok = array_ok
 
@@ -478,7 +550,7 @@ class NumberValidator(BaseValidator):
     The '{plotly_name}' property is a number and may be specified as:"""
                 .format(plotly_name=self.plotly_name))
 
-        if self.min_val is None and self.max_val is None:
+        if not self.has_min_max:
             desc = desc + """
       - An int or float"""
 
@@ -497,39 +569,53 @@ class NumberValidator(BaseValidator):
         if v is None:
             # Pass None through
             pass
-        elif self.array_ok and is_array(v):
+        elif self.array_ok and is_homogeneous_array(v):
 
             try:
                 v_array = copy_to_readonly_numpy_array(v, force_numeric=True)
-            except ValueError:
+            except (ValueError, TypeError, OverflowError):
                 self.raise_invalid_val(v)
 
-            v_valid = np.ones(v_array.shape, dtype='bool')
-            if self.min_val is not None:
-                v_valid = np.logical_and(v_valid, v_array >= self.min_val)
+            # Check min/max
+            if self.has_min_max:
+                v_valid = np.logical_and(self.min_val <= v_array,
+                                         v_array <= self.max_val)
 
-            if self.max_val is not None:
-                v_valid = np.logical_and(v_valid, v_array <= self.max_val)
+                if not np.all(v_valid):
+                    # Grab up to the first 10 invalid values
+                    v_invalid = np.logical_not(v_valid)
+                    some_invalid_els = (np.array(v, dtype='object')
+                                        [v_invalid][:10]
+                                        .tolist())
 
-            if not np.all(v_valid):
-                # Grab up to the first 10 invalid values
-                v_invalid = np.logical_not(v_valid)
-                some_invalid_els = (np.array(v, dtype='object')
-                                    [v_invalid][:10]
-                                    .tolist())
-
-                self.raise_invalid_elements(some_invalid_els)
+                    self.raise_invalid_elements(some_invalid_els)
 
             v = v_array  # Always numeric numpy array
+        elif self.array_ok and is_simple_array(v):
+            # Check numeric
+            invalid_els = [e for e in v if not isinstance(e, numbers.Number)]
+
+            if invalid_els:
+                self.raise_invalid_elements(invalid_els[:10])
+
+            # Check min/max
+            if self.has_min_max:
+                invalid_els = [e for e in v if
+                               not (self.min_val <= e <= self.max_val)]
+
+                if invalid_els:
+                    self.raise_invalid_elements(invalid_els[:10])
+
+            v = list(v)
         else:
+            # Check numeric
             if not isinstance(v, numbers.Number):
                 self.raise_invalid_val(v)
 
-            if (self.min_val is not None and not v >= self.min_val) or \
-                    (self.max_val is not None and not v <= self.max_val):
-
-                self.raise_invalid_val(v)
-
+            # Check min/max
+            if self.has_min_max:
+                if not (self.min_val <= v <= self.max_val):
+                    self.raise_invalid_val(v)
         return v
 
 
@@ -562,16 +648,21 @@ class IntegerValidator(BaseValidator):
         # Handle min
         if min is None and max is not None:
             # Max was specified, so make min -inf
-            self.min_val = np.iinfo(np.int32).min
+            self.min_val = -sys.maxsize - 1
         else:
             self.min_val = min
 
         # Handle max
         if max is None and min is not None:
             # Min was specified, so make min inf
-            self.max_val = np.iinfo(np.int32).max
+            self.max_val = sys.maxsize
         else:
             self.max_val = max
+
+        if min is not None or max is not None:
+            self.has_min_max = True
+        else:
+            self.has_min_max = False
 
         self.array_ok = array_ok
 
@@ -580,7 +671,7 @@ class IntegerValidator(BaseValidator):
     The '{plotly_name}' property is a integer and may be specified as:"""
                 .format(plotly_name=self.plotly_name))
 
-        if self.min_val is None and self.max_val is None:
+        if not self.has_min_max:
             desc = desc + """
       - An int (or float that will be cast to an int)"""
         else:
@@ -599,43 +690,51 @@ class IntegerValidator(BaseValidator):
         if v is None:
             # Pass None through
             pass
-        elif self.array_ok and is_array(v):
-
-            try:
-                v_array = copy_to_readonly_numpy_array(v, dtype='int32')
-
-            except (ValueError, TypeError, OverflowError) as ve:
+        elif self.array_ok and is_homogeneous_array(v):
+            if v.dtype.kind not in ['i', 'u']:
                 self.raise_invalid_val(v)
 
-            v_valid = np.ones(v_array.shape, dtype='bool')
-            if self.min_val is not None:
-                v_valid = np.logical_and(v_valid, v_array >= self.min_val)
+            v_array = copy_to_readonly_numpy_array(v, dtype='int32')
 
-            if self.max_val is not None:
-                v_valid = np.logical_and(v_valid, v_array <= self.max_val)
+            # Check min/max
+            if self.has_min_max:
+                v_valid = np.logical_and(self.min_val <= v_array,
+                                         v_array <= self.max_val)
 
-            if not np.all(v_valid):
-                v_invalid = np.logical_not(v_valid)
-                invalid_els = (np.array(v, dtype='object')
-                               [v_invalid][:10].tolist())
-                self.raise_invalid_elements(invalid_els)
+                if not np.all(v_valid):
+                    # Grab up to the first 10 invalid values
+                    v_invalid = np.logical_not(v_valid)
+                    some_invalid_els = (np.array(v, dtype='object')
+                                   [v_invalid][:10].tolist())
+                    self.raise_invalid_elements(some_invalid_els)
 
             v = v_array
+        elif self.array_ok and is_simple_array(v):
+            # Check integer type
+            invalid_els = [e for e in v if not isinstance(e, int)]
+
+            if invalid_els:
+                self.raise_invalid_elements(invalid_els[:10])
+
+            # Check min/max
+            if self.has_min_max:
+                invalid_els = [e for e in v if
+                               not (self.min_val <= e <= self.max_val)]
+
+                if invalid_els:
+                    self.raise_invalid_elements(invalid_els[:10])
+
+            v = list(v)
         else:
-            try:
-                if not isinstance(v, numbers.Number):
-                    # don't let int() cast strings to ints
+            # Check int
+            if not isinstance(v, int):
+                # don't let int() cast strings to ints
+                self.raise_invalid_val(v)
+
+            # Check min/max
+            if self.has_min_max:
+                if not (self.min_val <= v <= self.max_val):
                     self.raise_invalid_val(v)
-
-                v_int = int(v)
-            except (ValueError, TypeError, OverflowError) as ve:
-                self.raise_invalid_val(v)
-
-            if (self.min_val is not None and not v >= self.min_val) or \
-                    (self.max_val is not None and not v <= self.max_val):
-                self.raise_invalid_val(v)
-
-            v = v_int
 
         return v
 
@@ -716,19 +815,41 @@ class StringValidator(BaseValidator):
                 if invalid_els:
                     self.raise_invalid_elements(invalid_els)
 
-            # If not strict, let numpy cast elements to strings
-            v = copy_to_readonly_numpy_array(v, dtype='unicode')
+            if is_homogeneous_array(v):
+                # If not strict, let numpy cast elements to strings
+                v = copy_to_readonly_numpy_array(v, dtype='unicode')
 
-            if self.no_blank:
-                invalid_els = v[v == ''][:10].tolist()
-                if invalid_els:
-                    self.raise_invalid_elements(invalid_els)
+                # Check no_blank
+                if self.no_blank:
+                    invalid_els = v[v == ''][:10].tolist()
+                    if invalid_els:
+                        self.raise_invalid_elements(invalid_els)
 
-            if self.values:
-                invalid_inds = np.logical_not(np.isin(v, self.values))
-                invalid_els = v[invalid_inds][:10].tolist()
-                if invalid_els:
-                    self.raise_invalid_elements(invalid_els)
+                # Check values
+                if self.values:
+                    invalid_inds = np.logical_not(np.isin(v, self.values))
+                    invalid_els = v[invalid_inds][:10].tolist()
+                    if invalid_els:
+                        self.raise_invalid_elements(invalid_els)
+
+            elif is_simple_array(v):
+                if not self.strict:
+                    v = [str(e) for e in v]
+
+                # Check no_blank
+                if self.no_blank:
+                    invalid_els = [e for e in v if e == '']
+                    if invalid_els:
+                        self.raise_invalid_elements(invalid_els)
+
+                # Check values
+                if self.values:
+                    invalid_els = [e for e in v if v not in self.values]
+                    if invalid_els:
+                        self.raise_invalid_elements(invalid_els)
+
+                v = list(v)
+
         else:
             if self.strict:
                 if not isinstance(v, str):
@@ -857,7 +978,7 @@ class ColorValidator(BaseValidator):
         if v is None:
             # Pass None through
             pass
-        elif self.array_ok and is_array(v):
+        elif self.array_ok and is_homogeneous_array(v):
             v_array = copy_to_readonly_numpy_array(v)
             if (self.numbers_allowed() and
                     v_array.dtype.kind in ['u', 'i', 'f']):
@@ -881,7 +1002,18 @@ class ColorValidator(BaseValidator):
                 else:
                     v = copy_to_readonly_numpy_array(
                         validated_v, dtype='unicode')
+        elif self.array_ok and is_simple_array(v):
+            validated_v = [self.vc_scalar(e) for e in v]
 
+            invalid_els = [
+                el for el, validated_el in zip(v, validated_v)
+                if validated_el is None
+            ]
+
+            if invalid_els:
+                self.raise_invalid_elements(invalid_els)
+
+            v = validated_v
         else:
             # Validate scalar color
             validated_v = self.vc_scalar(v)
@@ -924,17 +1056,16 @@ class ColorValidator(BaseValidator):
             return None
         else:
             # Remove spaces so regexes don't need to bother with them.
-            v = v.replace(' ', '')
-            v = v.lower()
+            v_normalized = v.replace(' ', '').lower()
 
-            if ColorValidator.re_hex.fullmatch(v):
+            if ColorValidator.re_hex.fullmatch(v_normalized):
                 # valid hex color (e.g. #f34ab3)
                 return v
-            elif ColorValidator.re_rgb_etc.fullmatch(v):
+            elif ColorValidator.re_rgb_etc.fullmatch(v_normalized):
                 # Valid rgb(a), hsl(a), hsv(a) color
                 # (e.g. rgba(10, 234, 200, 50%)
                 return v
-            elif v in ColorValidator.named_colors:
+            elif v_normalized in ColorValidator.named_colors:
                 # Valid named color (e.g. 'coral')
                 return v
             else:
@@ -982,7 +1113,7 @@ class ColorlistValidator(BaseValidator):
             if invalid_els:
                 self.raise_invalid_elements(invalid_els)
 
-            v = copy_to_readonly_numpy_array(validated_v, dtype='unicode')
+            v = list(v)
         else:
             self.raise_invalid_val(v)
         return v
@@ -1047,9 +1178,6 @@ class ColorscaleValidator(BaseValidator):
             ]
             if v_match:
                 v_valid = True
-                # Reassign v so we get the capitalization of the named
-                # colorscale value
-                v = v_match[0]
 
         elif is_array(v) and len(v) > 0:
             invalid_els = [
@@ -1064,17 +1192,19 @@ class ColorscaleValidator(BaseValidator):
             if len(invalid_els) == 0:
                 v_valid = True
 
-                # Convert to tuple of tuples so colorscale is immutable
-                v = tuple([
-                    tuple([e[0],
-                           ColorValidator.perform_validate_coerce(e[1])])
-                    for e in v
-                ])
+                # Convert to list of lists
+                v = [[e[0],
+                      ColorValidator.perform_validate_coerce(e[1])]
+                     for e in v]
 
         if not v_valid:
             self.raise_invalid_val(v)
 
         return v
+
+    def present(self, v):
+        # Return tuple of tuples so that colorscale is immutable
+        return tuple([tuple(e) for e in v])
 
 
 class AngleValidator(BaseValidator):
@@ -1269,7 +1399,10 @@ class FlaglistValidator(BaseValidator):
             if invalid_els:
                 self.raise_invalid_elements(invalid_els)
 
-            v = copy_to_readonly_numpy_array(validated_v, dtype='unicode')
+            if is_homogeneous_array(v):
+                v = copy_to_readonly_numpy_array(validated_v, dtype='unicode')
+            else:
+                v = list(v)
         else:
 
             validated_v = self.vc_scalar(v)
@@ -1316,9 +1449,10 @@ class AnyValidator(BaseValidator):
         if v is None:
             # Pass None through
             pass
-        elif self.array_ok and is_array(v):
+        elif self.array_ok and is_homogeneous_array(v):
             v = copy_to_readonly_numpy_array(v, dtype='object')
-
+        elif self.array_ok and is_simple_array(v):
+            v = list(v)
         return v
 
 
@@ -1394,20 +1528,29 @@ class InfoArrayValidator(BaseValidator):
         if v is None:
             # Pass None through
             pass
-        elif not isinstance(v, (list, tuple)):
+        elif not is_array(v):
             self.raise_invalid_val(v)
         elif not self.free_length and len(v) != len(self.item_validators):
             self.raise_invalid_val(v)
         elif self.free_length and len(v) > len(self.item_validators):
             self.raise_invalid_val(v)
         else:
-            # We have a list or tuple of the correct length
+            # We have an array of the correct length
             v = list(v)
             for i, (el, validator) in enumerate(zip(v, self.item_validators)):
                 # Validate coerce elements
                 v[i] = validator.validate_coerce(el)
 
         return v
+
+    def present(self, v):
+        # Call present on each of the item validators
+        for i, (el, validator) in enumerate(zip(v, self.item_validators)):
+            # Validate coerce elements
+            v[i] = validator.present(el)
+
+        # Return tuple form of
+        return tuple(v)
 
 
 class ImageUriValidator(BaseValidator):
@@ -1578,7 +1721,7 @@ class CompoundArrayValidator(BaseValidator):
     def validate_coerce(self, v):
 
         if v is None:
-            v = ()
+            v = []
 
         elif isinstance(v, (list, tuple)):
             res = []
@@ -1595,9 +1738,8 @@ class CompoundArrayValidator(BaseValidator):
             if invalid_els:
                 self.raise_invalid_elements(invalid_els)
 
-            v = tuple(res)
-
-        elif not isinstance(v, str):
+            v = list(res)
+        else:
             self.raise_invalid_val(v)
 
         return v
@@ -1656,7 +1798,7 @@ class BaseDataValidator(BaseValidator):
     def validate_coerce(self, v):
 
         if v is None:
-            v = ()
+            v = []
         elif isinstance(v, (list, tuple)):
             trace_classes = tuple(self.class_map.values())
 
@@ -1689,7 +1831,7 @@ class BaseDataValidator(BaseValidator):
             if invalid_els:
                 self.raise_invalid_elements(invalid_els)
 
-            v = tuple(res)
+            v = list(res)
 
             # Set new UIDs
             for trace in v:

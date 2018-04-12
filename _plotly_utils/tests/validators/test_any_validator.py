@@ -27,10 +27,25 @@ def test_acceptance(val, validator: AnyValidator):
 
 # ### Acceptance of arrays ###
 @pytest.mark.parametrize('val', [
-    [], np.array([]), ['Hello', 'World'], [np.pi, np.e, {}]
+    23,
+    'Hello!',
+    [],
+    (),
+    np.array([]),
+    ('Hello', 'World'),
+    ['Hello', 'World'],
+    [np.pi, np.e, {}]
 ])
 def test_acceptance_array(val, validator_aok: AnyValidator):
     coerce_val = validator_aok.validate_coerce(val)
-    assert isinstance(coerce_val, np.ndarray)
-    assert coerce_val.dtype == 'object'
-    assert np.array_equal(coerce_val, val)
+    if isinstance(val, np.ndarray):
+        assert isinstance(coerce_val, np.ndarray)
+        assert coerce_val.dtype == 'object'
+        assert np.array_equal(coerce_val, val)
+    elif isinstance(val, (list, tuple)):
+        assert coerce_val == list(val)
+        assert validator_aok.present(coerce_val) == tuple(val)
+    else:
+        assert coerce_val == val
+        assert validator_aok.present(coerce_val) == val
+
