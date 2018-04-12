@@ -491,12 +491,13 @@ class BaseFigure:
             # The restyle operation resulted in a change to some trace
             # properties, so we dispatch change callbacks and send the
             # restyle message to the frontend (if any)
-            self._dispatch_trace_change_callbacks(
-                restyle_changes, trace_indexes)
             self._send_restyle_msg(
                 restyle_changes,
                 trace_indexes=trace_indexes,
                 source_view_id=source_view_id)
+
+            self._dispatch_trace_change_callbacks(
+                restyle_changes, trace_indexes)
 
         return self
 
@@ -587,8 +588,8 @@ class BaseFigure:
         if not self._in_batch_mode:
             send_val = [val]
             restyle = {key_path_str: send_val}
-            self._dispatch_trace_change_callbacks(restyle, [trace_index])
             self._send_restyle_msg(restyle, trace_indexes=trace_index)
+            self._dispatch_trace_change_callbacks(restyle, [trace_index])
 
         # In batch mode
         # -------------
@@ -1105,10 +1106,11 @@ class BaseFigure:
             # The relayout operation resulted in a change to some layout
             # properties, so we dispatch change callbacks and send the
             # relayout message to the frontend (if any)
-            self._dispatch_layout_change_callbacks(relayout_changes)
             self._send_relayout_msg(
                 relayout_changes,
                 source_view_id=source_view_id)
+
+            self._dispatch_layout_change_callbacks(relayout_changes)
 
         return self
 
@@ -1173,8 +1175,8 @@ class BaseFigure:
         # Dispatch change callbacks and send relayout message
         if not self._in_batch_mode:
             relayout_msg = {key_path_str: val}
-            self._dispatch_layout_change_callbacks(relayout_msg)
             self._send_relayout_msg(relayout_msg)
+            self._dispatch_layout_change_callbacks(relayout_msg)
 
         # In batch mode
         # -------------
@@ -1376,6 +1378,16 @@ class BaseFigure:
             relayout_data=relayout_data,
             trace_indexes=trace_indexes)
 
+        # Send update message
+        # -------------------
+        # Send a plotly_update message to the frontend (if any)
+        if restyle_changes or relayout_changes:
+            self._send_update_msg(
+                restyle_changes,
+                relayout_changes,
+                trace_indexes,
+                source_view_id=source_view_id)
+
         # Dispatch changes
         # ----------------
         # ### Dispatch restyle changes ###
@@ -1386,16 +1398,6 @@ class BaseFigure:
         # ### Dispatch relayout changes ###
         if relayout_changes:
             self._dispatch_layout_change_callbacks(relayout_changes)
-
-        # Send update message
-        # -------------------
-        # Send a plotly_update message to the frontend (if any)
-        if restyle_changes or relayout_changes:
-            self._send_update_msg(
-                restyle_changes,
-                relayout_changes,
-                trace_indexes,
-                source_view_id=source_view_id)
 
         return self
 
@@ -1696,17 +1698,6 @@ class BaseFigure:
                                                       relayout_data,
                                                       trace_indexes)
 
-        # Dispatch callbacks
-        # ------------------
-        # ### Dispatch restyle changes ###
-        if restyle_changes:
-            self._dispatch_trace_change_callbacks(restyle_changes,
-                                                  trace_indexes)
-
-        # ### Dispatch relayout changes ###
-        if relayout_changes:
-            self._dispatch_layout_change_callbacks(relayout_changes)
-
         # Convert style / trace_indexes into animate form
         # -----------------------------------------------
         if self._batch_trace_edits:
@@ -1731,6 +1722,17 @@ class BaseFigure:
         # ----------------------
         self._batch_layout_edits.clear()
         self._batch_trace_edits.clear()
+
+        # Dispatch callbacks
+        # ------------------
+        # ### Dispatch restyle changes ###
+        if restyle_changes:
+            self._dispatch_trace_change_callbacks(restyle_changes,
+                                                  trace_indexes)
+
+        # ### Dispatch relayout changes ###
+        if relayout_changes:
+            self._dispatch_layout_change_callbacks(relayout_changes)
 
     # Exports
     # -------
