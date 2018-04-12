@@ -174,12 +174,21 @@ def perform_codegen():
     write_graph_objs_graph_objs(outdir)
 
     # ### Add Figure and FigureWidget ###
-    root_datatype_pairs = path_to_datatype_import_info[()]
-    root_datatype_pairs.append(('._figure', 'Figure'))
-    root_datatype_pairs.append(('._figurewidget', 'FigureWidget'))
+    root_datatype_imports = path_to_datatype_import_info[()]
+    root_datatype_imports.append(('._figure', 'Figure'))
+
+    optional_figure_widget_import = """
+try:
+    import ipywidgets
+    from ._figurewidget import FigureWidget
+except ImportError:
+    pass
+
+"""
+    root_datatype_imports.append(optional_figure_widget_import)
 
     # ### Add deprecations ###
-    root_datatype_pairs.append(('._deprecations', DEPRECATED_DATATYPES.keys()))
+    root_datatype_imports.append(('._deprecations', DEPRECATED_DATATYPES.keys()))
 
     # ### Output datatype __init__.py files ###
     graph_objs_pkg = opath.join(outdir, 'graph_objs')

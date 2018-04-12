@@ -65,30 +65,39 @@ def format_and_write_source_py(py_source, filepath):
             f.write(formatted_source)
 
 
-def build_from_imports_py(import_pairs):
+def build_from_imports_py(imports_info):
     """
     Build a string containing a series of `from X import Y` lines
 
     Parameters
     ----------
-    import_pairs : list of (str, str or list of str)
-          List of pairs where first entry is the package to be imported from.
-          The second entry is either a string of the single name to be
-          imported, or a list of names to be imported.
+    imports_info : str or list of (str, str or list of str)
+          List of import info
+            If element is a pair first entry is the package to be imported
+            from and the second entry is either a string of the single name
+            to be
+
+            If element is a string, insert string directly
     Returns
     -------
     str
         String containing a series of imports
     """
     buffer = StringIO()
-    for from_pkg, class_name in import_pairs:
-        if isinstance(class_name, str):
-            class_name_str = class_name
-        else:
-            class_name_str = '(' + ', '.join(class_name) + ')'
+    for import_info in imports_info:
 
-        buffer.write(f"""\
+        if isinstance(import_info, tuple):
+            from_pkg, class_name = import_info
+            if isinstance(class_name, str):
+                class_name_str = class_name
+            else:
+                class_name_str = '(' + ', '.join(class_name) + ')'
+
+            buffer.write(f"""\
 from {from_pkg} import {class_name_str}\n""")
+
+        elif isinstance(import_info, str):
+            buffer.write(import_info)
 
     return buffer.getvalue()
 
