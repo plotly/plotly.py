@@ -64,7 +64,13 @@ from ._layout import Layout
 from plotly.graph_objs import layout
 from ._frame import Frame
 from ._figure import Figure
-from ._figurewidget import FigureWidget
+
+try:
+    import ipywidgets
+    from ._figurewidget import FigureWidget
+except ImportError:
+    pass
+
 from ._deprecations import (
     Data, Annotations, Frames, AngularAxis, Annotation, ColorBar, Contours,
     ErrorX, ErrorY, ErrorZ, Font, Legend, Line, Margin, Marker, RadialAxis,
