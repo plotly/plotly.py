@@ -1203,14 +1203,6 @@ var FigureView = widgets.DOMWidgetView.extend({
             var traceIndexes = this.model._normalize_trace_indexes(
                 msgData.restyle_traces);
 
-            if (msgData.source_view_id === this.viewID) {
-                // Operation originated from this view, don't re-apply it
-                console.log("Skipping restyle for view " + this.viewID);
-                return
-            } else {
-                console.log("Applying restyle for view " + this.viewID)
-            }
-
             restyleData["_doNotReportToPy"] = true;
             Plotly.restyle(this.el, restyleData, traceIndexes);
 
@@ -1235,16 +1227,9 @@ var FigureView = widgets.DOMWidgetView.extend({
         var msgData = this.model.get("_py2js_relayout");
         if (msgData !== null) {
 
-            if (msgData.source_view_id === this.viewID) {
-                // Operation originated from this view, don't re-apply it
-                console.log("Skipping relayout for view " + this.viewID);
-            } else {
-                console.log("Applying relayout for view " + this.viewID);
-
-                var relayoutData = msgData.relayout_data;
+            var relayoutData = msgData.relayout_data;
                 relayoutData["_doNotReportToPy"] = true;
                 Plotly.relayout(this.el, msgData.relayout_data);
-            }
 
             // ### Send layout delta ###
             var layout_edit_id = msgData.layout_edit_id;
@@ -1267,15 +1252,8 @@ var FigureView = widgets.DOMWidgetView.extend({
             var traceIndexes = this.model._normalize_trace_indexes(
                 msgData.style_traces);
 
-            if (msgData.source_view_id === this.viewID) {
-                // Operation originated from this view, don't re-apply it
-                console.log("Skipping update for view " + this.viewID);
-            } else {
-                console.log("Applying update for view " + this.viewID)
-
-                style["_doNotReportToPy"] = true;
+            style["_doNotReportToPy"] = true;
                 Plotly.update(this.el, style, layout, traceIndexes);
-            }
 
             // ### Send trace deltas ###
             // We create an array of deltas corresponding to the updated
@@ -1314,38 +1292,22 @@ var FigureView = widgets.DOMWidgetView.extend({
                 traces: traceIndexes
             };
 
-            if (msgData.source_view_id === this.viewID) {
-                // Operation originated from this view, don't re-apply it
-                console.log("Skipping animate for view " + this.viewID);
+            animationData["_doNotReportToPy"] = true;
+            var that = this;
 
-                // ### Send trace deltas ###
-                // We create an array of deltas corresponding to the
-                // animated traces.
-                this._sendTraceDeltas(msgData.trace_edit_id);
+            Plotly.animate(this.el, animationData, animationOpts).then(
+                function () {
 
-                // ### Send layout delta ###
-                var layout_edit_id = msgData.layout_edit_id;
-                this._sendLayoutDelta(layout_edit_id);
+                    // ### Send trace deltas ###
+                    // We create an array of deltas corresponding to the
+                    // animated traces.
+                    that._sendTraceDeltas(msgData.trace_edit_id);
 
-            } else {
-                console.log("Applying animate for view " + this.viewID)
+                    // ### Send layout delta ###
+                    var layout_edit_id = msgData.layout_edit_id;
+                    that._sendLayoutDelta(layout_edit_id);
+                });
 
-                animationData["_doNotReportToPy"] = true;
-                var that = this;
-
-                Plotly.animate(this.el, animationData, animationOpts).then(
-                    function () {
-
-                        // ### Send trace deltas ###
-                        // We create an array of deltas corresponding to the
-                        // animated traces.
-                        that._sendTraceDeltas(msgData.trace_edit_id);
-
-                        // ### Send layout delta ###
-                        var layout_edit_id = msgData.layout_edit_id;
-                        that._sendLayoutDelta(layout_edit_id);
-                    });
-            }
         }
     },
 
