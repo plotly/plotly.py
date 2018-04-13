@@ -1360,6 +1360,8 @@ def get_valid_graph_obj(obj, obj_type=None):
     # TODO: Deprecate or move. #283
     from plotly.graph_objs import graph_objs
     try:
+        print(graph_objs)
+        print(obj_type)
         cls = getattr(graph_objs, obj_type)
     except (AttributeError, KeyError):
         raise exceptions.PlotlyError(

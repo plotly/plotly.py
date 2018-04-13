@@ -70,6 +70,8 @@ class PlotlyOfflineMPLTestCase(TestCase):
             # Generate matplotlib plot for tests
             fig = plt.figure()
 
+            # TODO: remove "o" in plt.plot or
+            # change test for expected ValueError
             x = [10, 20, 30]
             y = [100, 200, 300]
             plt.plot(x, y, "o")
