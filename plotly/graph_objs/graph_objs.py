@@ -573,7 +573,7 @@ class PlotlyDict(dict, PlotlyBase):
         allows users to update with large, nested structures.
 
         Note, because the dict2 packs up all the keyword arguments, you can
-        specify the changes as a list of keyword agruments.
+        specify the changes as a list of keyword arguments.
 
         Examples:
         # update with dict
