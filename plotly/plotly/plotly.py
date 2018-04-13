@@ -109,7 +109,7 @@ def _plot_option_logic(plot_options_from_call_signature):
 def iplot(figure_or_data, **plot_options):
     """Create a unique url for this plot in Plotly and open in IPython.
 
-    plot_options keyword agruments:
+    plot_options keyword arguments:
     filename (string) -- the name that will be associated with this figure
     fileopt ('new' | 'overwrite' | 'extend' | 'append')
         - 'new': create a new, unique url for this plot
@@ -167,7 +167,7 @@ def iplot(figure_or_data, **plot_options):
 def plot(figure_or_data, validate=True, **plot_options):
     """Create a unique url for this plot in Plotly and optionally open url.
 
-    plot_options keyword agruments:
+    plot_options keyword arguments:
     filename (string) -- the name that will be associated with this figure
     fileopt ('new' | 'overwrite' | 'extend' | 'append') -- 'new' creates a
         'new': create a new, unique url for this plot
@@ -254,7 +254,7 @@ def iplot_mpl(fig, resize=True, strip_style=False, update=None,
     2. makes a request to Plotly to save this figure in your account
     3. displays the image in your IPython output cell
 
-    Positional agruments:
+    Positional arguments:
     fig -- a figure object from matplotlib
 
     Keyword arguments:
@@ -287,7 +287,7 @@ def plot_mpl(fig, resize=True, strip_style=False, update=None, **plot_options):
     2. makes a request to Plotly to save this figure in your account
     3. opens your figure in a browser tab OR returns the unique figure url
 
-    Positional agruments:
+    Positional arguments:
     fig -- a figure object from matplotlib
 
     Keyword arguments:
