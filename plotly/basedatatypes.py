@@ -1,6 +1,7 @@
 import collections
 import re
 import typing as typ
+import warnings
 from contextlib import contextmanager
 from copy import deepcopy
 from typing import Dict, Tuple, Union, Callable, List
@@ -791,14 +792,114 @@ class BaseFigure:
 
     # Add traces
     # ----------
-    def add_traces(self, data):
+    @staticmethod
+    def _raise_invalid_rows_cols(name, n, invalid):
+        rows_err_msg = """
+        If specified, the {name} parameter must be a list or tuple of integers
+        of length {n} (The number of traces being added)
+
+        Received: {invalid}
+        """.format(name=name, n=n, invalid=invalid)
+
+        raise ValueError(rows_err_msg)
+
+    @staticmethod
+    def _validate_rows_cols(name, n, vals):
+        if vals is None:
+            pass
+        elif isinstance(vals, (list, tuple)):
+            if len(vals) != n:
+                BaseFigure._raise_invalid_rows_cols(
+                    name=name, n=n, invalid=vals)
+
+            if [r for r in vals if not isinstance(r, int)]:
+                BaseFigure._raise_invalid_rows_cols(
+                    name=name, n=n, invalid=vals)
+        else:
+            BaseFigure._raise_invalid_rows_cols(name=name, n=n, invalid=vals)
+
+    def add_trace(self, trace, row=None, col=None):
         """
-        Add one or more traces to the figure
+        Add a trace to the figure
 
         Parameters
         ----------
-        data : BaseTraceType or dict or list[BaseTraceType or dict]
-            A trace specification or list of trace specifications to be added.
+        trace : BaseTraceType or dict
+            Either:
+              - An instances of a trace classe from the plotly.graph_objs
+                package (e.g plotly.graph_objs.Scatter, plotly.graph_objs.Bar)
+              - or a dicts where:
+
+                  - The 'type' property specifies the trace type (e.g.
+                    'scatter', 'bar', 'area', etc.). If the dict has no 'type'
+                    property then 'scatter' is assumed.
+                  - All remaining properties are passed to the constructor
+                    of the specified trace type.
+
+        row : int or None (default)
+            Subplot row index (starting from 1) for the trace to be added.
+            Only valid if figure was created using
+            `plotly.tools.make_subplots`
+        col : int or None (default)
+            Subplot col index (starting from 1) for the trace to be added.
+            Only valid if figure was created using
+            `plotly.tools.make_subplots`
+
+        Returns
+        -------
+        BaseTraceType
+            The newly added trace
+
+        Examples
+        --------
+        >>> from plotly import tools
+        >>> import plotly.graph_objs as go
+
+        Add two Scatter traces to a figure
+        >>> fig = go.Figure()
+        >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]))
+        >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]))
+
+
+        Add two Scatter traces to vertically stacked subplots
+        >>> fig = tools.make_subplots(rows=2)
+        This is the format of your plot grid:
+        [ (1,1) x1,y1 ]
+        [ (2,1) x2,y2 ]
+
+        >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=1, col=1)
+        >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=2, col=1)
+        """
+        # Validate row/col
+        if row is not None and not isinstance(row, int):
+            pass
+
+        if col is not None and not isinstance(col, int):
+            pass
+
+        # Make sure we have both row and col or neither
+        if row is not None and col is None:
+            raise ValueError(
+                'Received row parameter but not col.\n'
+                'row and col must be specified together')
+        elif col is not None and row is None:
+            raise ValueError(
+                'Received col parameter but not row.\n'
+                'row and col must be specified together')
+
+        return self.add_traces(data=[trace],
+                               rows=[row] if row is not None else None,
+                               cols=[col] if col is not None else None
+                               )[0]
+
+    def add_traces(self, data, rows=None, cols=None):
+        """
+        Add traces to the figure
+
+        Parameters
+        ----------
+        data : list[BaseTraceType or dict]
+            A list of trace specifications to be added.
             Trace specifications may be either:
 
               - Instances of trace classes from the plotly.graph_objs
@@ -810,10 +911,40 @@ class BaseFigure:
                     property then 'scatter' is assumed.
                   - All remaining properties are passed to the constructor
                     of the specified trace type.
+
+        rows : None or list[int] (default None)
+            List of subplot row indexes (starting from 1) for the traces to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`
+        cols : None or list[int] (default None)
+            List of subplot column indexes (starting from 1) for the traces
+            to be added. Only valid if figure was created using
+            `plotly.tools.make_subplots`
+
         Returns
         -------
         tuple[BaseTraceType]
-            Tuple of the newly added trace(s)
+            Tuple of the newly added traces
+
+        Examples
+        --------
+        >>> from plotly import tools
+        >>> import plotly.graph_objs as go
+
+        Add two Scatter traces to a figure
+        >>> fig = go.Figure()
+        >>> fig.add_traces([go.Scatter(x=[1,2,3], y=[2,1,2]),
+        ...                 go.Scatter(x=[1,2,3], y=[2,1,2])])
+
+        Add two Scatter traces to vertically stacked subplots
+        >>> fig = tools.make_subplots(rows=2)
+        This is the format of your plot grid:
+        [ (1,1) x1,y1 ]
+        [ (2,1) x2,y2 ]
+
+        >>> fig.add_traces([go.Scatter(x=[1,2,3], y=[2,1,2]),
+        ...                 go.Scatter(x=[1,2,3], y=[2,1,2])],
+        ...                 rows=[1, 2], cols=[1, 1])
         """
 
         if self._in_batch_mode:
@@ -821,11 +952,28 @@ class BaseFigure:
             self._batch_trace_edits.clear()
             raise ValueError('Traces may not be added in a batch context')
 
-        if not isinstance(data, (list, tuple)):
-            data = [data]
-
-        # Validate
+        # Validate traces
         data = self._data_validator.validate_coerce(data)
+
+        # Validate rows / cols
+        n = len(data)
+        BaseFigure._validate_rows_cols('rows', n, rows)
+        BaseFigure._validate_rows_cols('cols', n, cols)
+
+        # Make sure we have both rows and cols or neither
+        if rows is not None and cols is None:
+            raise ValueError(
+                'Received rows parameter but not cols.\n'
+                'rows and cols must be specified together')
+        elif cols is not None and rows is None:
+            raise ValueError(
+                'Received cols parameter but not rows.\n'
+                'rows and cols must be specified together')
+
+        # Apply rows / cols
+        if rows is not None:
+            for trace, row, col in zip(data, rows, cols):
+                self._set_trace_grid_position(trace, row, col)
 
         # Make deep copy of trace data (Optimize later if needed)
         new_traces_data = [deepcopy(trace._props) for trace in data]
@@ -877,10 +1025,6 @@ class BaseFigure:
         col: int
             Subplot column index (see Figure.print_grid)
 
-        :param (dict) trace: The data trace to be bound.
-        :param (int) row: Subplot row index (see Figure.print_grid).
-        :param (int) col: Subplot column index (see Figure.print_grid).
-
         Examples
         --------
         >>> from plotly import tools
@@ -894,6 +1038,14 @@ class BaseFigure:
         >>> fig.append_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=1, col=1)
         >>> fig.append_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=2, col=1)
         """
+        warnings.warn("""\
+The append_trace method is deprecated and will be removed in a future version. 
+Please use the add_trace method with the row and col parameters.
+""", DeprecationWarning)
+
+        self.add_trace(trace=trace, row=row, col=col)
+
+    def _set_trace_grid_position(self, trace, row, col):
         try:
             grid_ref = self._grid_ref
         except AttributeError:
@@ -930,8 +1082,6 @@ class BaseFigure:
                                 "cell got deleted.".format(r=row, c=col))
             trace['xaxis'] = ref[0]
             trace['yaxis'] = ref[1]
-
-        self.add_traces([trace])
 
     # Child property operations
     # -------------------------
