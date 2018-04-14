@@ -146,9 +146,12 @@ Points(point_inds={point_inds},
        ys={ys},
        trace_name={trace_name},
        trace_index={trace_index})""".format(
-            point_inds=_list_repr_elided(self.point_inds),
-            xs=_list_repr_elided(self.xs),
-            ys=_list_repr_elided(self.ys),
+            point_inds=_list_repr_elided(self.point_inds,
+                                         indent=len('Points(point_inds=')),
+            xs=_list_repr_elided(self.xs,
+                                 indent=len('       xs=')),
+            ys=_list_repr_elided(self.ys,
+                                 indent=len('       ys=')),
             trace_name=repr(self.trace_name),
             trace_index=repr(self.trace_index))
 
@@ -265,8 +268,10 @@ class LassoSelector:
         return """\
 LassoSelector(xs={xs},
               ys={ys})""".format(
-            xs=_list_repr_elided(self.xs, 8),
-            ys=_list_repr_elided(self.ys, 8))
+            xs=_list_repr_elided(self.xs,
+                                 indent=len('LassoSelector(xs=')),
+            ys=_list_repr_elided(self.ys,
+                                 indent=len('              ys=')))
 
     @property
     def type(self):

@@ -4,6 +4,7 @@ import typing as typ
 import warnings
 from contextlib import contextmanager
 from copy import deepcopy
+from pprint import PrettyPrinter
 from typing import Dict, Tuple, Union, Callable, List
 
 from plotly.optional_imports import get_module
@@ -15,6 +16,7 @@ from _plotly_utils.basevalidators import (
 from plotly import animation
 from plotly.callbacks import (Points, BoxSelector, LassoSelector,
                               InputDeviceState)
+from plotly.utils import ElidedPrettyPrinter
 from plotly.validators import (DataValidator, LayoutValidator, FramesValidator)
 
 # Optional imports
@@ -241,6 +243,17 @@ class BaseFigure:
             # underlying dicts contain numpy arrays
             return BasePlotlyType._vals_equal(self.to_plotly_json(),
                                               other.to_plotly_json())
+
+    def __repr__(self):
+        """
+        Customize Figure representation when displayed in the
+        terminal/notebook
+        """
+        repr_str = BasePlotlyType._build_repr_for_class(
+            props=self.to_plotly_json(),
+            class_name=self.__class__.__name__)
+
+        return repr_str
 
     def update(self, dict1=None, **kwargs):
         """
@@ -2556,8 +2569,53 @@ class BasePlotlyType:
 
             # Use _vals_equal instead of `==` to handle cases where
             # underlying dicts contain numpy arrays
-            return BasePlotlyType._vals_equal(self.to_plotly_json(),
-                                              other.to_plotly_json())
+            return BasePlotlyType._vals_equal(self._props,
+                                              other._props)
+
+    @staticmethod
+    def _build_repr_for_class(props, class_name, parent_path_str=None):
+        """
+        Helper to build representation string for a class
+
+        Parameters
+        ----------
+        class_name : str
+            Name of the class being represented
+        parent_path_str : str of None (default)
+            Name of the class's parent package to display
+        props : dict
+            Properties to unpack into the constructor
+
+        Returns
+        -------
+        str
+            The representation string
+        """
+        if parent_path_str:
+            class_name = parent_path_str + '.' + class_name
+
+        pprinter = ElidedPrettyPrinter(threshold=200, width=120)
+        pprint_res = pprinter.pformat(props)
+
+        # pprint_res is indented by 1 space. Add extra 3 spaces for PEP8
+        # complaint indent
+        body = '   ' + pprint_res[1:-1].replace('\n', '\n   ')
+
+        repr_str = class_name + '(**{\n ' + body + '\n})'
+
+        return repr_str
+
+    def __repr__(self):
+        """
+        Customize object representation when displayed in the
+        terminal/notebook
+        """
+        repr_str = BasePlotlyType._build_repr_for_class(
+            props=self._props,
+            class_name=self.__class__.__name__,
+            parent_path_str=self._parent_path_str)
+
+        return repr_str
 
     def _raise_on_invalid_property_error(self, *args):
         """
