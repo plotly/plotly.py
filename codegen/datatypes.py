@@ -190,7 +190,7 @@ class {datatype_class}({node.name_base_datatype}):\n""")
     add_docstring(buffer, node, header=header)
 
     buffer.write(f"""
-        super().__init__('{node.name_property}', **kwargs)
+        super().__init__('{node.name_property}')
 
         # Import validators
         # -----------------
@@ -226,6 +226,13 @@ class {datatype_class}({node.name_base_datatype}):\n""")
             lit_val = literal_node.node_data
             buffer.write(f"""
         self._props['{lit_name}'] = '{lit_val}'""")
+
+    buffer.write(f"""
+    
+        # Process unknown kwargs
+        # ----------------------
+        self._process_kwargs(**kwargs)    
+    """)
 
     # Return source string
     # --------------------
