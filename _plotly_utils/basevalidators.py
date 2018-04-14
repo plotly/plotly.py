@@ -1797,6 +1797,10 @@ class BaseDataValidator(BaseValidator):
 
     def validate_coerce(self, v):
 
+        # Import Histogram2dcontour, this is the deprecated name of the
+        # Histogram2dContour trace.
+        from plotly.graph_objs import Histogram2dcontour
+
         if v is None:
             v = []
         elif isinstance(v, (list, tuple)):
@@ -1815,6 +1819,8 @@ class BaseDataValidator(BaseValidator):
 
                     if 'type' in v_copy:
                         trace_type = v_copy.pop('type')
+                    elif isinstance(v_el, Histogram2dcontour):
+                        trace_type = 'histogram2dcontour'
                     else:
                         trace_type = 'scatter'
 
