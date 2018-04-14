@@ -2063,7 +2063,7 @@ class BasePlotlyType:
         """
         # Validate inputs
         # ---------------
-        self._raise_on_invalid_property_error(*kwargs.keys())
+        self._process_kwargs(**kwargs)
 
         # Store params
         # ------------
@@ -2106,6 +2106,12 @@ class BasePlotlyType:
         # properties is modified
         # type: Dict[Tuple[Tuple[Union[str, int]]], List[Callable]]
         self._change_callbacks = {}
+
+    def _process_kwargs(self, **kwargs):
+        """
+        Process any extra kwargs that are not predefined as constructor params
+        """
+        self._raise_on_invalid_property_error(*kwargs.keys())
 
     @property
     def plotly_name(self):
@@ -3145,15 +3151,9 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         # ---------------
         assert plotly_name == 'layout'
 
-        # Compute invalid kwargs
-        # ----------------------
-        # Pass to parent for error handling
-        invalid_kwargs = {
-            k: v
-            for k, v in kwargs.items()
-            if not self._subplotid_prop_re.fullmatch(k)
-        }
-        super().__init__(plotly_name, **invalid_kwargs)
+        # Call superclass constructor
+        # ---------------------------
+        super().__init__(plotly_name)
 
         # Initialize _subplotid_props
         # ---------------------------
@@ -3161,10 +3161,28 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         # properties
         self._subplotid_props = set()
 
-        # Process subplot properties
-        # --------------------------
-        # The remaining kwargs are valid subplot properties
-        for prop, value in kwargs.items():
+        # Process kwargs
+        # --------------
+        self._process_kwargs(**kwargs)
+
+    def _process_kwargs(self, **kwargs):
+        """
+        Process any extra kwargs that are not predefined as constructor params
+        """
+        unknown_kwargs = {
+            k: v
+            for k, v in kwargs.items()
+            if not self._subplotid_prop_re.fullmatch(k)
+        }
+        super()._process_kwargs(**unknown_kwargs)
+
+        subplot_kwargs = {
+            k: v
+            for k, v in kwargs.items()
+            if self._subplotid_prop_re.fullmatch(k)
+        }
+
+        for prop, value in subplot_kwargs.items():
             self._set_subplotid_prop(prop, value)
 
     def _set_subplotid_prop(self, prop, value):
