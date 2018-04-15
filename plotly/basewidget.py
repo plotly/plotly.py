@@ -118,13 +118,6 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
                  layout=None,
                  frames=None):
 
-        # Validate Frames
-        # ---------------
-        # Frames are not supported by figure widget
-        if frames:
-            BaseFigureWidget._display_frames_error()
-        self._frame_objs = None
-
         # Call superclass constructors
         # ----------------------------
         # Note: We rename layout to layout_plotly because to deconflict it
@@ -132,6 +125,13 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         # ipywidgets class
         super().__init__(data=data,
                          layout_plotly=layout)
+
+        # Validate Frames
+        # ---------------
+        # Frames are not supported by figure widget
+        if self._frame_objs:
+            BaseFigureWidget._display_frames_error()
+        self._frame_objs = None
 
         # Message States
         # --------------
@@ -930,8 +930,8 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         ValueError
             always
         """
-        msg = """\
-Frames are not supported by the plotly.graph_objs.FigureWidget class.\n"
+        msg = """
+Frames are not supported by the plotly.graph_objs.FigureWidget class.
 Note: Frames are supported by the plotly.graph_objs.Figure class"""
         raise ValueError(msg)
 
