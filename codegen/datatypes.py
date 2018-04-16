@@ -214,18 +214,20 @@ class {datatype_class}({node.name_base_datatype}):\n""")
         self.{subtype_node.name_property} = {subtype_node.name_property}""")
 
     # ### Literals ###
-    literal_nodes = [n for n in node.child_literals if
-                     n.plotly_name in ['type']]
     if literal_nodes:
         buffer.write(f"""
 
         # Read-only literals
-        # ------------------""")
+        # ------------------
+        from _plotly_utils.basevalidators import LiteralValidator""")
         for literal_node in literal_nodes:
             lit_name = literal_node.name_property
+            lit_parent = literal_node.parent_path_str
             lit_val = literal_node.node_data
             buffer.write(f"""
-        self._props['{lit_name}'] = '{lit_val}'""")
+        self._props['{lit_name}'] = '{lit_val}'
+        self._validators['{lit_name}'] =\
+LiteralValidator(plotly_name='{lit_name}', parent_name='{lit_parent}')""")
 
     buffer.write(f"""
     

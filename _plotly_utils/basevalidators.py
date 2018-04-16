@@ -1553,6 +1553,22 @@ class InfoArrayValidator(BaseValidator):
         return tuple(v)
 
 
+class LiteralValidator(BaseValidator):
+    """
+    Validator for readonly literal values
+    """
+    def __init__(self, plotly_name, parent_name, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name,
+                         **kwargs)
+
+    def validate_coerce(self, v):
+        raise ValueError("""\
+The '{plotly_name}' property of {parent_name} is read-only""".format(
+            plotly_name=self.plotly_name, parent_name=self.parent_name
+        ))
+
+
 class ImageUriValidator(BaseValidator):
     _PIL = None
 
