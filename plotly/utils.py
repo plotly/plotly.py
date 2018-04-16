@@ -10,10 +10,12 @@ from __future__ import absolute_import
 import os.path
 import re
 import sys
+import textwrap
 import threading
 import decimal
 import datetime
 from collections import deque
+from pprint import PrettyPrinter
 
 import pytz
 from decorator import decorator
@@ -499,7 +501,7 @@ def memoize(maxsize=128):
     return decorator(_memoize)
 
 
-def _list_repr_elided(v, n=20):
+def _list_repr_elided(v, threshold=200, edgeitems=3, indent=0, width=80):
     """
     Return a string representation for of a list where list is elided if
     it has more than n elements
@@ -508,15 +510,114 @@ def _list_repr_elided(v, n=20):
     ----------
     v : list
         Input list
-    n :
+    threshold :
         Maximum number of elements to display
 
     Returns
     -------
     str
     """
-    if len(v) <= n:
-        return str(v)
+    if isinstance(v, list):
+        open_char, close_char = '[', ']'
+    elif isinstance(v, tuple):
+        open_char, close_char = '(', ')'
     else:
-        disp_v = v[:n // 2 - 1] + ['...'] + v[-n // 2 + 1:]
-        return '[' + ', '.join([str(e) for e in disp_v]) + ']'
+        raise ValueError('Invalid value of type: %s' % type(v))
+
+    if len(v) <= threshold:
+        disp_v = v
+    else:
+        disp_v = (list(v[:edgeitems])
+                  + ['...'] +
+                  list(v[-edgeitems:]))
+
+    v_str = open_char + ', '.join([str(e) for e in disp_v]) + close_char
+
+    v_wrapped = '\n'.join(textwrap.wrap(v_str, width=width,
+                          initial_indent=' ' * (indent + 1),
+                          subsequent_indent =' ' * (indent + 1))).strip()
+    return v_wrapped
+
+
+class ElidedWrapper:
+    """
+    Helper class that wraps values of certain types and produces a custom
+    __repr__() that may be elided and is suitable for use during pretty
+    printing
+    """
+    def __init__(self, v, threshold, indent):
+        self.v = v
+        self.indent = indent
+        self.threshold = threshold
+
+    @staticmethod
+    def is_wrappable(v):
+        if (isinstance(v, (list, tuple)) and
+                len(v) > 0 and
+                not isinstance(v[0], dict)):
+            return True
+        elif numpy and isinstance(v, numpy.ndarray):
+            return True
+        elif isinstance(v, str):
+            return True
+        else:
+            return False
+
+    def __repr__(self):
+        if isinstance(self.v, (list, tuple)):
+            # Handle lists/tuples
+            res = _list_repr_elided(self.v,
+                                    threshold=self.threshold,
+                                    indent=self.indent)
+            return res
+        elif numpy and isinstance(self.v, numpy.ndarray):
+            # Handle numpy arrays
+
+            # Get original print opts
+            orig_opts = numpy.get_printoptions()
+
+            # Set threshold to self.max_list_elements
+            numpy.set_printoptions(
+                **dict(orig_opts,
+                       threshold=self.threshold,
+                       edgeitems=3,
+                       linewidth=80))
+
+            res = self.v.__repr__()
+
+            # Add indent to all but the first line
+            res_lines = res.split('\n')
+            res = ('\n' + ' '*self.indent).join(res_lines)
+
+            # Restore print opts
+            numpy.set_printoptions(**orig_opts)
+            return res
+        elif isinstance(self.v, str):
+            # Handle strings
+            if len(self.v) > 80:
+                return ('(' + repr(self.v[:30]) +
+                        ' ... ' + repr(self.v[-30:]) + ')')
+            else:
+                return self.v.__repr__()
+        else:
+            return self.v.__repr__()
+
+
+class ElidedPrettyPrinter(PrettyPrinter):
+    """
+    PrettyPrinter subclass that elides long lists/arrays/strings
+    """
+    def __init__(self, *args, **kwargs):
+        self.threshold = kwargs.pop('threshold', 200)
+        super().__init__(*args, **kwargs)
+
+    def _format(self, val, stream, indent, allowance, context, level):
+        if ElidedWrapper.is_wrappable(val):
+            elided_val = ElidedWrapper(
+                val, self.threshold, indent)
+
+            return self._format(
+                elided_val, stream, indent, allowance, context, level)
+        else:
+            return super()._format(
+                val, stream, indent, allowance, context, level)

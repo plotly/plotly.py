@@ -190,7 +190,7 @@ class {datatype_class}({node.name_base_datatype}):\n""")
     add_docstring(buffer, node, header=header)
 
     buffer.write(f"""
-        super().__init__('{node.name_property}', **kwargs)
+        super().__init__('{node.name_property}')
 
         # Import validators
         # -----------------
@@ -214,18 +214,27 @@ class {datatype_class}({node.name_base_datatype}):\n""")
         self.{subtype_node.name_property} = {subtype_node.name_property}""")
 
     # ### Literals ###
-    literal_nodes = [n for n in node.child_literals if
-                     n.plotly_name in ['type']]
     if literal_nodes:
         buffer.write(f"""
 
         # Read-only literals
-        # ------------------""")
+        # ------------------
+        from _plotly_utils.basevalidators import LiteralValidator""")
         for literal_node in literal_nodes:
             lit_name = literal_node.name_property
+            lit_parent = literal_node.parent_path_str
             lit_val = literal_node.node_data
             buffer.write(f"""
-        self._props['{lit_name}'] = '{lit_val}'""")
+        self._props['{lit_name}'] = '{lit_val}'
+        self._validators['{lit_name}'] =\
+LiteralValidator(plotly_name='{lit_name}', parent_name='{lit_parent}')""")
+
+    buffer.write(f"""
+    
+        # Process unknown kwargs
+        # ----------------------
+        self._process_kwargs(**kwargs)    
+    """)
 
     # Return source string
     # --------------------
@@ -257,7 +266,7 @@ def reindent_validator_description(validator, extra_indent):
         validator.description().strip().split('\n'))
 
 
-def add_constructor_params(buffer, subtype_nodes):
+def add_constructor_params(buffer, subtype_nodes, extras=()):
     """
     Write datatype constructor params to a buffer
 
@@ -267,6 +276,8 @@ def add_constructor_params(buffer, subtype_nodes):
         Buffer to write to
     subtype_nodes : list of PlotlyNode
         List of datatype nodes to be written as constructor params
+    extras : list[str]
+        List of extra parameters to include at the end of the params
     Returns
     -------
     None
@@ -275,13 +286,17 @@ def add_constructor_params(buffer, subtype_nodes):
         buffer.write(f""",
             {subtype_node.name_property}=None""")
 
+    for extra in extras:
+        buffer.write(f""",
+            {extra}=None""")
+
     buffer.write(""",
             **kwargs""")
     buffer.write(f"""
         ):""")
 
 
-def add_docstring(buffer, node, header):
+def add_docstring(buffer, node, header, extras=()):
     """
     Write docstring for a compound datatype node
 
@@ -327,6 +342,17 @@ def add_docstring(buffer, node, header):
     # ----------------------------
     buffer.write(node.get_constructor_params_docstring(
         indent=8))
+
+    # Write any extras
+    for p, v in extras:
+        v_wrapped = '\n'.join(textwrap.wrap(
+            v,
+            width=79-12,
+            initial_indent=' ' * 12,
+            subsequent_indent=' ' * 12))
+        buffer.write(f"""
+        {p}
+{v_wrapped}""")
 
     # Write return block and close docstring
     # --------------------------------------

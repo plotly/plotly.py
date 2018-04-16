@@ -100,7 +100,7 @@ def _bullet(df, markers, measures, ranges, subtitles, titles, orientation,
                 xaxis='x{}'.format(row + 1),
                 yaxis='y{}'.format(row + 1)
             )
-            fig.add_traces(bar)
+            fig.add_trace(bar)
 
         # measures bars
         for idx in range(len(df.iloc[row]['measures'])):
@@ -126,7 +126,7 @@ def _bullet(df, markers, measures, ranges, subtitles, titles, orientation,
                 xaxis='x{}'.format(row + 1),
                 yaxis='y{}'.format(row + 1)
             )
-            fig.add_traces(bar)
+            fig.add_trace(bar)
 
         # markers
         x = df.iloc[row]['markers'] if orientation == 'h' else [0.5]
@@ -141,7 +141,7 @@ def _bullet(df, markers, measures, ranges, subtitles, titles, orientation,
             **scatter_options
         )
 
-        fig.add_traces(markers)
+        fig.add_trace(markers)
 
         # titles and subtitles
         title = df.iloc[row]['titles']
