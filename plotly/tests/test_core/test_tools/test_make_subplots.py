@@ -909,7 +909,7 @@ class TestMakeSubplots(TestCase):
         )
         fig = tls.make_subplots(rows=3, cols=3,
                                 specs=[[{'rowspan': 3}, {}, {}],
-                                [None, {}, {}], [None, {'colspan': 2}, None]])
+                                       [None, {}, {}], [None, {'colspan': 2}, None]])
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_specs_rowspan2(self):
