@@ -1553,6 +1553,22 @@ class InfoArrayValidator(BaseValidator):
         return tuple(v)
 
 
+class LiteralValidator(BaseValidator):
+    """
+    Validator for readonly literal values
+    """
+    def __init__(self, plotly_name, parent_name, **kwargs):
+        super().__init__(plotly_name=plotly_name,
+                         parent_name=parent_name,
+                         **kwargs)
+
+    def validate_coerce(self, v):
+        raise ValueError("""\
+The '{plotly_name}' property of {parent_name} is read-only""".format(
+            plotly_name=self.plotly_name, parent_name=self.parent_name
+        ))
+
+
 class ImageUriValidator(BaseValidator):
     _PIL = None
 
@@ -1797,6 +1813,10 @@ class BaseDataValidator(BaseValidator):
 
     def validate_coerce(self, v):
 
+        # Import Histogram2dcontour, this is the deprecated name of the
+        # Histogram2dContour trace.
+        from plotly.graph_objs import Histogram2dcontour
+
         if v is None:
             v = []
         elif isinstance(v, (list, tuple)):
@@ -1815,6 +1835,8 @@ class BaseDataValidator(BaseValidator):
 
                     if 'type' in v_copy:
                         trace_type = v_copy.pop('type')
+                    elif isinstance(v_el, Histogram2dcontour):
+                        trace_type = 'histogram2dcontour'
                     else:
                         trace_type = 'scatter'
 
