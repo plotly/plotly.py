@@ -131,7 +131,6 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         # Frames are not supported by figure widget
         if self._frame_objs:
             BaseFigureWidget._display_frames_error()
-        self._frame_objs = None
 
         # Message States
         # --------------
