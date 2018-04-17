@@ -49,7 +49,7 @@ class NumpyTestUtilsMixin(object):
             d1_copy = copy.deepcopy(d1)
 
         if 'to_plotly_json' in dir(d2):
-            d2_copy = copy.deepcopy(d2.to_plotly_json()) 
+            d2_copy = copy.deepcopy(d2.to_plotly_json())
         else:
             d2_copy = copy.deepcopy(d2)
 
