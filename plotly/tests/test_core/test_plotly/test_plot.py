@@ -41,8 +41,8 @@ class TestPlot(PlotlyTestCase):
         fig = {
             'data': [
                 {
-                    'x': [1, 2, 3],
-                    'y': [2, 1, 2]
+                    'x': (1, 2, 3),
+                    'y': (2, 1, 2)
                 }
             ],
             'layout': {'title': 'simple'}
