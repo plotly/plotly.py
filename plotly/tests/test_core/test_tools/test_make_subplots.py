@@ -103,11 +103,11 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.0, 1.0],
                     anchor='y'
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.0, 1.0],
                     anchor='x'
                 )
@@ -120,7 +120,7 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.0, 1.0],
                     anchor='y'
                 ),
@@ -128,7 +128,7 @@ class TestMakeSubplots(TestCase):
                     domain=[0.0, 1.0],
                     anchor='y2'
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.575, 1.0],
                     anchor='x'
                 ),
@@ -144,7 +144,7 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.0, 1.0],
                     anchor='y'
                 ),
@@ -152,7 +152,7 @@ class TestMakeSubplots(TestCase):
                     domain=[0.0, 1.0],
                     anchor='y2'
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.575, 1.0],
                     anchor='x'
                 ),
@@ -169,7 +169,7 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.0, 0.45],
                     anchor='y'
                 ),
@@ -177,7 +177,7 @@ class TestMakeSubplots(TestCase):
                     domain=[0.55, 1.0],
                     anchor='y2'
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.0, 1.0],
                     anchor='x'
                 ),
@@ -193,7 +193,7 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.0, 0.1183673469387755],
                     anchor='y'
                 ),
@@ -305,7 +305,7 @@ class TestMakeSubplots(TestCase):
                     domain=[0.14693877551020407, 0.26530612244897955],
                     anchor='y9'
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.80625, 1.0],
                     anchor='x'
                 ),
@@ -426,7 +426,7 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.0, 0.1183673469387755],
                     anchor='y'
                 ),
@@ -538,7 +538,7 @@ class TestMakeSubplots(TestCase):
                     domain=[0.14693877551020407, 0.26530612244897955],
                     anchor='y9'
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.0, 0.19375],
                     anchor='x'
                 ),
@@ -659,7 +659,7 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.0, 0.3],
                     anchor='y'
                 ),
@@ -683,7 +683,7 @@ class TestMakeSubplots(TestCase):
                     domain=[0.7, 1.0],
                     anchor='y6'
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.55, 1.0],
                     anchor='x'
                 ),
@@ -718,7 +718,7 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.0, 0.2888888888888889],
                     anchor='y'
                 ),
@@ -734,7 +734,7 @@ class TestMakeSubplots(TestCase):
                     domain=[0.7111111111111111, 1.0],
                     anchor='y4'
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.575, 1.0],
                     anchor='x'
                 ),
@@ -761,7 +761,7 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.0, 0.2888888888888889],
                     anchor='y'
                 ),
@@ -777,7 +777,7 @@ class TestMakeSubplots(TestCase):
                     domain=[0.7111111111111111, 1.0],
                     anchor='y4'
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.0, 0.425],
                     anchor='x'
                 ),
@@ -805,7 +805,7 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.0, 1.0],
                     anchor='y'
                 ),
@@ -825,7 +825,7 @@ class TestMakeSubplots(TestCase):
                     domain=[0.55, 1.0],
                     anchor='y5'
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.7333333333333333, 1.0],
                     anchor='x'
                 ),
@@ -857,7 +857,7 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.0, 0.2888888888888889],
                     anchor='y'
                 ),
@@ -881,7 +881,7 @@ class TestMakeSubplots(TestCase):
                     domain=[0.35555555555555557, 1.0],
                     anchor='y6'
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.0, 1.0],
                     anchor='x'
                 ),
@@ -916,7 +916,7 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.0, 0.2888888888888889],
                     anchor='y'
                 ),
@@ -936,7 +936,7 @@ class TestMakeSubplots(TestCase):
                     domain=[0.0, 1.0],
                     anchor='y5'
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.7333333333333333, 1.0],
                     anchor='x'
                 ),
@@ -967,7 +967,7 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.0, 0.6444444444444445],
                     anchor='y'
                 ),
@@ -991,7 +991,7 @@ class TestMakeSubplots(TestCase):
                     domain=[0.7111111111111111, 1.0],
                     anchor='y6'
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.36666666666666664, 1.0],
                     anchor='x'
                 ),
@@ -1026,7 +1026,7 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.0, 0.6444444444444445],
                     anchor='y'
                 ),
@@ -1050,7 +1050,7 @@ class TestMakeSubplots(TestCase):
                     domain=[0.7111111111111111, 1.0],
                     anchor='y6'
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.0, 0.6333333333333333],
                     anchor='x'
                 ),
@@ -1092,7 +1092,7 @@ class TestMakeSubplots(TestCase):
                 scene2=Scene(
                     domain={'y': [0.0, 0.425], 'x': [0.0, 0.45]}
                 ),
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.55, 1.0],
                     anchor='y'
                 ),
@@ -1100,7 +1100,7 @@ class TestMakeSubplots(TestCase):
                     domain=[0.55, 1.0],
                     anchor='y2'
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.575, 1.0],
                     anchor='x'
                 ),
@@ -1118,7 +1118,7 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.1, 0.5],
                     anchor='y'
                 ),
@@ -1134,7 +1134,7 @@ class TestMakeSubplots(TestCase):
                     domain=[0.5, 0.9],
                     anchor='y4'
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.5, 1.0],
                     anchor='x'
                 ),
@@ -1162,7 +1162,7 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.1, 0.5],
                     anchor='y'
                 ),
@@ -1178,7 +1178,7 @@ class TestMakeSubplots(TestCase):
                     domain=[0.5, 0.9],
                     anchor='y4'
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.0, 0.5],
                     anchor='x'
                 ),
@@ -1207,7 +1207,7 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.0, 0.2888888888888889],
                     anchor='y4'
                 ),
@@ -1219,7 +1219,7 @@ class TestMakeSubplots(TestCase):
                     domain=[0.7111111111111111, 1.0],
                     anchor='y6'
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.575, 1.0],
                     anchor='free',
                     position=0.0
@@ -1255,7 +1255,7 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.0, 0.2888888888888889],
                     anchor='y'
                 ),
@@ -1267,7 +1267,7 @@ class TestMakeSubplots(TestCase):
                     domain=[0.7111111111111111, 1.0],
                     anchor='y3'
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.0, 0.425],
                     anchor='x'
                 ),
@@ -1304,7 +1304,7 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.0, 0.45],
                     anchor='y'
                 ),
@@ -1349,7 +1349,7 @@ class TestMakeSubplots(TestCase):
                     domain=[0.0, 0.45],
                     anchor='y5'
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.848, 1.0],
                     anchor='x'
                 ),
@@ -1378,7 +1378,7 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.0, 0.2888888888888889],
                     anchor='y3'
                 ),
@@ -1392,7 +1392,7 @@ class TestMakeSubplots(TestCase):
                     anchor='free',
                     position=0.0
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.7333333333333333, 1.0],
                     anchor='free',
                     position=0.0
@@ -1416,7 +1416,7 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.0, 0.2888888888888889],
                     anchor='y'
                 ),
@@ -1430,7 +1430,7 @@ class TestMakeSubplots(TestCase):
                     anchor='free',
                     position=0.0
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.0, 0.26666666666666666],
                     anchor='x'
                 ),
@@ -1455,7 +1455,7 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.0, 0.45],
                     anchor='y'
                 ),
@@ -1468,7 +1468,7 @@ class TestMakeSubplots(TestCase):
                     domain=[0.55, 1.0],
                     anchor='y3'
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.575, 1.0],
                     anchor='x'
                 ),
@@ -1491,7 +1491,7 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.0, 0.45],
                     anchor='y'
                 ),
@@ -1504,7 +1504,7 @@ class TestMakeSubplots(TestCase):
                     domain=[0.55, 1.0],
                     anchor='y3'
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.0, 0.425],
                     anchor='x'
                 ),
@@ -1528,7 +1528,7 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.0, 0.2888888888888889],
                     anchor='y'
                 ),
@@ -1544,7 +1544,7 @@ class TestMakeSubplots(TestCase):
                     domain=[0.35555555555555557, 0.6444444444444445],
                     anchor='y5'
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.575, 1.0],
                     anchor='x'
                 ),
@@ -1581,7 +1581,7 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.0, 0.2888888888888889],
                     anchor='y'
                 ),
@@ -1597,7 +1597,7 @@ class TestMakeSubplots(TestCase):
                     domain=[0.35555555555555557, 0.6444444444444445],
                     anchor='y5'
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.0, 0.425],
                     anchor='x'
                 ),
@@ -1634,7 +1634,7 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.0, 0.45],
                     anchor='y'
                 ),
@@ -1654,7 +1654,7 @@ class TestMakeSubplots(TestCase):
                     domain=[0.865, 0.955],
                     anchor='y5'
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.575, 1.0],
                     anchor='x'
                 ),
@@ -1685,7 +1685,7 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.0, 0.45],
                     anchor='y'
                 ),
@@ -1705,7 +1705,7 @@ class TestMakeSubplots(TestCase):
                     domain=[0.865, 0.955],
                     anchor='y5'
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.0, 0.425],
                     anchor='x'
                 ),
@@ -1737,7 +1737,7 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.0, 1.0],
                     anchor='y'
                 ),
@@ -1753,7 +1753,7 @@ class TestMakeSubplots(TestCase):
                     domain=[0.8, 1.0],
                     anchor='y4'
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.575, 1.0],
                     anchor='x'
                 ),
@@ -1779,7 +1779,7 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.0, 1.0],
                     anchor='y'
                 ),
@@ -1795,7 +1795,7 @@ class TestMakeSubplots(TestCase):
                     domain=[0.8, 1.0],
                     anchor='y4'
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.0, 0.425],
                     anchor='x'
                 ),
@@ -1848,7 +1848,7 @@ class TestMakeSubplots(TestCase):
                         yanchor='bottom'
                     )
                 ]),
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.0, 1.0],
                     anchor='y'
                 ),
@@ -1856,7 +1856,7 @@ class TestMakeSubplots(TestCase):
                     domain=[0.0, 1.0],
                     anchor='y2'
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.625, 1.0],
                     anchor='x'
                 ),
@@ -1909,7 +1909,7 @@ class TestMakeSubplots(TestCase):
                         yanchor='bottom'
                     )
                 ]),
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.0, 0.2888888888888889],
                     anchor='y'
                 ),
@@ -1921,7 +1921,7 @@ class TestMakeSubplots(TestCase):
                     domain=[0.7111111111111111, 1.0],
                     anchor='y3'
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.0, 1.0],
                     anchor='x'
                 ),
@@ -1990,7 +1990,7 @@ class TestMakeSubplots(TestCase):
                         yanchor='bottom'
                     )
                 ]),
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.0, 0.45],
                     anchor='y2'
                 ),
@@ -1999,7 +1999,7 @@ class TestMakeSubplots(TestCase):
                     anchor='free',
                     position=0.0
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.625, 1.0],
                     anchor='free',
                     position=0.0
@@ -2057,7 +2057,7 @@ class TestMakeSubplots(TestCase):
                         yanchor='bottom'
                     )
                 ]),
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.0, 0.45],
                     anchor='y'
                 ),
@@ -2069,7 +2069,7 @@ class TestMakeSubplots(TestCase):
                     domain=[0.0, 1.0],
                     anchor='y3'
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.625, 1.0],
                     anchor='x'
                 ),
@@ -2107,7 +2107,7 @@ class TestMakeSubplots(TestCase):
                         yanchor='bottom'
                     )
                 ]),
-                xaxis=XAxis(
+                xaxis1=XAxis(
                     domain=[0.0, 1.0],
                     anchor='y'
                 ),
@@ -2115,7 +2115,7 @@ class TestMakeSubplots(TestCase):
                     domain=[0.7, 1.0],
                     anchor='y2'
                 ),
-                yaxis=YAxis(
+                yaxis1=YAxis(
                     domain=[0.0, 1.0],
                     anchor='x'
                 ),
