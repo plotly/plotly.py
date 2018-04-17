@@ -56,10 +56,9 @@ class TestDistplot(NumpyTestUtilsMixin, TestCase):
         expected_dp_layout = {'barmode': 'overlay',
                               'hovermode': 'closest',
                               'legend': {'traceorder': 'reversed'},
-                              'yaxis2': {'anchor': 'x',
-                                         'domain': [0, 0.25],
-                                         'dtick': 1,
-                                         'showticklabels': False}}
+                              'xaxis': {'anchor': 'y2', 'domain': [0.0, 1.0], 'zeroline': False},
+                              'yaxis': {'anchor': 'free', 'domain': [0.35, 1], 'position': 0.0},
+                              'yaxis2': {'anchor': 'x', 'domain': [0, 0.25], 'dtick': 1, 'showticklabels': False}}
         self.assert_fig_equal(dp['layout'], expected_dp_layout)
 
         expected_dp_data_hist = {'autobinx': False,
@@ -99,6 +98,12 @@ class TestDistplot(NumpyTestUtilsMixin, TestCase):
         expected_dp_layout = {'barmode': 'overlay',
                               'hovermode': 'closest',
                               'legend': {'traceorder': 'reversed'},
+                              'xaxis': {'anchor': 'y2',
+                                        'domain': [0.0, 1.0],
+                                        'zeroline': False},
+                              'yaxis': {'anchor': 'free',
+                                        'domain': [0.35, 1],
+                                        'position': 0.0},
                               'yaxis2': {'anchor': 'x',
                                          'domain': [0, 0.25],
                                          'dtick': 1,
@@ -155,6 +160,12 @@ class TestDistplot(NumpyTestUtilsMixin, TestCase):
         expected_dp_layout = {'barmode': 'overlay',
                               'hovermode': 'closest',
                               'legend': {'traceorder': 'reversed'},
+                              'xaxis': {'anchor': 'y2',
+                                        'domain': [0.0, 1.0],
+                                        'zeroline': False},
+                              'yaxis': {'anchor': 'free',
+                                        'domain': [0.0, 1],
+                                        'position': 0.0},
                               'title': 'Dist Plot'}
         self.assert_fig_equal(dp['layout'], expected_dp_layout)
 
@@ -213,9 +224,14 @@ class TestDistplot(NumpyTestUtilsMixin, TestCase):
         expected_dp_layout = {'barmode': 'overlay',
                               'hovermode': 'closest',
                               'legend': {'traceorder': 'reversed'},
-                              'title': 'Dist Plot'}
-        self.assert_fig_equal(dp['layout'],
-                              expected_dp_layout)
+                              'title': 'Dist Plot',
+                              'xaxis': {'anchor': 'y2',
+                                        'domain': [0.0, 1.0],
+                                        'zeroline': False},
+                              'yaxis': {'anchor': 'free',
+                                        'domain': [0.0, 1],
+                                        'position': 0.0}}
+        self.assert_fig_equal(dp['layout'], expected_dp_layout)
 
         expected_dp_data_hist_1 = {'autobinx': False,
                                    'histnorm': 'probability',
@@ -231,8 +247,7 @@ class TestDistplot(NumpyTestUtilsMixin, TestCase):
                                    'xbins': {'end': 1.95, 'size': 0.2,
                                              'start': -0.9},
                                    'yaxis': 'y'}
-        self.assert_fig_equal(dp['data'][0],
-                               expected_dp_data_hist_1)
+        self.assert_fig_equal(dp['data'][0], expected_dp_data_hist_1)
 
         expected_dp_data_hist_2 = {'autobinx': False,
                                    'histnorm': 'probability',
@@ -248,8 +263,7 @@ class TestDistplot(NumpyTestUtilsMixin, TestCase):
                                    'xbins': {'end': 2.2, 'size': 0.2,
                                              'start': -0.3},
                                    'yaxis': 'y'}
-        self.assert_fig_equal(dp['data'][1],
-                               expected_dp_data_hist_2)
+        self.assert_fig_equal(dp['data'][1], expected_dp_data_hist_2)
 
         def test_distplot_binsize_array_prob(self):
             hist1_x = [0.8, 1.2, 0.2, 0.6, 1.6, -0.9, -0.07, 1.95, 0.9, -0.2,
@@ -1230,13 +1244,13 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
         }
 
         self.assert_fig_equal(test_scatter_plot_matrix['data'][0],
-                               exp_scatter_plot_matrix['data'][0])
+                              exp_scatter_plot_matrix['data'][0])
 
         self.assert_fig_equal(test_scatter_plot_matrix['data'][1],
-                               exp_scatter_plot_matrix['data'][1])
+                              exp_scatter_plot_matrix['data'][1])
 
-        self.assert_dict_equal(test_scatter_plot_matrix['layout'],
-                               exp_scatter_plot_matrix['layout'])
+        self.assert_fig_equal(test_scatter_plot_matrix['layout'],
+                              exp_scatter_plot_matrix['layout'])
 
     def test_scatter_plot_matrix_kwargs(self):
 
@@ -1254,13 +1268,13 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
         )
 
         exp_scatter_plot_matrix = {
-            'data': [{'marker': {'color': 'rgb(128,0,38)'},
+            'data': [{'marker': {'color': 'rgb(128, 0, 38)'},
                       'showlegend': False,
                       'type': 'histogram',
                       'x': [2, -15, -2, 0],
                       'xaxis': 'x',
                       'yaxis': 'y'},
-                     {'marker': {'color': 'rgb(255,255,204)'},
+                     {'marker': {'color': 'rgb(255, 255, 204)'},
                       'showlegend': False,
                       'type': 'histogram',
                       'x': [6, 5],
@@ -1280,7 +1294,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
         }
 
         self.assert_fig_equal(test_scatter_plot_matrix['data'][0],
-                               exp_scatter_plot_matrix['data'][0])
+                              exp_scatter_plot_matrix['data'][0])
 
         self.assert_fig_equal(test_scatter_plot_matrix['data'][1],
                                exp_scatter_plot_matrix['data'][1])
