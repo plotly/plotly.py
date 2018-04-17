@@ -619,24 +619,26 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
         self.assertEqual(len(dendro['data']), 4)
 
         # it's random, so we can only check that the values aren't equal
-        y_vals = [dendro['data'][0].pop('y'),
-                  dendro['data'][1].pop('y'),
-                  dendro['data'][2].pop('y'),
-                  dendro['data'][3].pop('y')]
+        y_vals = [dendro['data'][0].to_plotly_json().pop('y'),
+                  dendro['data'][1].to_plotly_json().pop('y'),
+                  dendro['data'][2].to_plotly_json().pop('y'),
+                  dendro['data'][3].to_plotly_json().pop('y')]
         for i in range(len(y_vals)):
             for j in range(len(y_vals)):
                 if i != j:
                     self.assertFalse(np.allclose(y_vals[i], y_vals[j]))
 
-        x_vals = [dendro['data'][0].pop('x'), dendro['data'][1].pop('x'),
-                  dendro['data'][2].pop('x'), dendro['data'][3].pop('x')]
+        x_vals = [dendro['data'][0].to_plotly_json().pop('x'),
+                  dendro['data'][1].to_plotly_json().pop('x'),
+                  dendro['data'][2].to_plotly_json().pop('x'),
+                  dendro['data'][3].to_plotly_json().pop('x')]
         for i in range(len(x_vals)):
             for j in range(len(x_vals)):
                 if i != j:
                     self.assertFalse(np.allclose(x_vals[i], x_vals[j]))
 
         # we also need to check the ticktext manually
-        xaxis_ticktext = dendro['layout']['xaxis'].pop('ticktext')
+        xaxis_ticktext = dendro['layout'].to_plotly_json()['xaxis'].pop('ticktext')
         self.assertEqual(xaxis_ticktext[0], 'John')
 
         # this is actually a bit clearer when debugging tests.
