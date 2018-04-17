@@ -34,6 +34,6 @@ class FigureTest(TestCase):
         figure = Figure()
         figure.frames = [{}]
 
-        with self.assertRaisesRegexp(exceptions.PlotlyDictKeyError, 'frames'):
+        with self.assertRaisesRegexp(ValueError, 'frames'):
             figure.to_plotly_json()['frames'][0]['frames'] = []
-            #figure.frames[0].frames = []
+            figure.frames[0].frames = []
