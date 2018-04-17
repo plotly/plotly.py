@@ -5,8 +5,7 @@ var version = require('./package.json').version;
 // stored in a separate local variable.
 var rules = [
     { test: /\.css$/, use: ['style-loader', 'css-loader']},
-    { test: /\.json$/, use: 'json-loader' },
-    { test: /\.js$/, use: 'ify-loader' }
+    { test: /\.js$/, use: ['ify-loader']}
 ];
 
 

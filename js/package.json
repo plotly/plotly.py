@@ -20,20 +20,18 @@
   ],
   "scripts": {
     "clean": "rimraf dist/ && rimraf ../plotlywidget/static",
-    "build": "webpack",
-    "prepublish": "npm run clean && npm run build",
+    "prepublish": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "json-loader": "^0.5.4",
-    "webpack": "^3.5.5",
+    "webpack": "^3.10.0",
     "rimraf": "^2.6.1",
     "ify-loader": "^1.1.0"
   },
   "dependencies": {
     "plotly.js": "^1.35.2",
-    "@jupyter-widgets/base": "^1.0.4",
-    "lodash": "^4.0"
+    "@jupyter-widgets/base": "^1.0.0",
+    "lodash": "^4.17.4"
   },
   "jupyterlab": {
     "extension": "src/jupyterlab-plugin"
