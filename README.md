@@ -29,7 +29,7 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 
 ***
 
-Code and documentation copyright 2017 Plotly, Inc.
+Code and documentation copyright 2018 Plotly, Inc.
 
 Code released under the [MIT license](LICENSE.txt).
 
