@@ -111,7 +111,7 @@ class TestDashboard(TestCase):
         }
 
         dash = dashboard.Dashboard()
-        dash.insert(my_box, '', 0)
+        dash.insert(my_box)
         dash.insert(my_box, 'above', 1)
 
         expected_dashboard = {
@@ -131,9 +131,9 @@ class TestDashboard(TestCase):
                                  'sizeUnit': '%',
                                  'type': 'split'},
                        'second': {'boxType': 'empty', 'type': 'box'},
-                       'size': 1000,
-                       'sizeUnit': 'px',
-                       'type': 'split'},
+                   'size': 1500,
+                   'sizeUnit': 'px',
+                   'type': 'split'},
             'settings': {},
             'version': 2
         }

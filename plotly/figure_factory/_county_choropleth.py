@@ -4,6 +4,7 @@ from plotly.figure_factory import utils
 
 import io
 import numpy as np
+import os
 import pandas as pd
 import warnings
 
@@ -19,30 +20,36 @@ gp = optional_imports.get_module('geopandas')
 
 def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
     # URLS
-    data_url = 'plotly/package_data/data/'
+    abs_file_path = os.path.realpath(__file__)
+    abs_dir_path = os.path.dirname(abs_file_path)
 
-    shape_pre2010 = 'gz_2010_us_050_00_500k/gz_2010_us_050_00_500k.shp'
-    shape_pre2010 = data_url + shape_pre2010
+    abs_plotly_dir_path = os.path.dirname(abs_dir_path)
+
+    abs_package_data_dir_path = os.path.join(abs_plotly_dir_path,
+                                             'package_data')
+
+    shape_pre2010 = 'gz_2010_us_050_00_500k.shp'
+    shape_pre2010 =  os.path.join(abs_package_data_dir_path, shape_pre2010)
+
     df_shape_pre2010 = gp.read_file(shape_pre2010)
     df_shape_pre2010['FIPS'] = (df_shape_pre2010['STATE'] +
                                 df_shape_pre2010['COUNTY'])
     df_shape_pre2010['FIPS'] = pd.to_numeric(df_shape_pre2010['FIPS'])
 
-    states_path = 'cb_2016_us_state_500k/cb_2016_us_state_500k.shp'
-    states_path = data_url + states_path
+    states_path = 'cb_2016_us_state_500k.shp'
+    states_path =  os.path.join(abs_package_data_dir_path, states_path)
 
     # state df
     df_state = gp.read_file(states_path)
     df_state = df_state[['STATEFP', 'NAME', 'geometry']]
     df_state = df_state.rename(columns={'NAME': 'STATE_NAME'})
 
-    county_url = 'plotly/package_data/data/cb_2016_us_county_500k/'
     filenames = ['cb_2016_us_county_500k.dbf',
                  'cb_2016_us_county_500k.shp',
                  'cb_2016_us_county_500k.shx']
 
     for j in range(len(filenames)):
-        filenames[j] = county_url + filenames[j]
+        filenames[j] = os.path.join(abs_package_data_dir_path, filenames[j])
 
     dbf = io.open(filenames[0], 'rb')
     shp = io.open(filenames[1], 'rb')
@@ -296,6 +303,8 @@ def _intervals_as_labels(array_of_intervals, round_legend_values, exponent_forma
 def _calculations(df, fips, values, index, f, simplify_county, level,
                   x_centroids, y_centroids, centroid_text, x_traces,
                   y_traces, fips_polygon_map):
+    # 0-pad FIPS code to ensure exactly 5 digits
+    padded_f = str(f).zfill(5)
     if fips_polygon_map[f].type == 'Polygon':
         x = fips_polygon_map[f].simplify(
             simplify_county
@@ -307,10 +316,11 @@ def _calculations(df, fips, values, index, f, simplify_county, level,
         x_c, y_c = fips_polygon_map[f].centroid.xy
         county_name_str = str(df[df['FIPS'] == f]['COUNTY_NAME'].iloc[0])
         state_name_str = str(df[df['FIPS'] == f]['STATE_NAME'].iloc[0])
+
         t_c = (
             'County: ' + county_name_str + '<br>' +
             'State: ' + state_name_str + '<br>' +
-            'FIPS: ' + str(f) + '<br>Value: ' + str(values[index])
+            'FIPS: ' + padded_f + '<br>Value: ' + str(values[index])
         )
 
         x_centroids.append(x_c[0])
@@ -333,7 +343,7 @@ def _calculations(df, fips, values, index, f, simplify_county, level,
         text = (
             'County: ' + county_name_str + '<br>' +
             'State: ' + state_name_str + '<br>' +
-            'FIPS: ' + str(f) + '<br>Value: ' + str(values[index])
+            'FIPS: ' + padded_f + '<br>Value: ' + str(values[index])
         )
         t_c = [text for poly in fips_polygon_map[f]]
         x_centroids = x_c + x_centroids
@@ -348,12 +358,11 @@ def _calculations(df, fips, values, index, f, simplify_county, level,
 
 def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
                       colorscale=None, order=None, simplify_county=0.02,
-                      simplify_state=0.02, asp=None, offline_mode=False,
-                      show_hover=True, show_state_data=True,
-                      state_outline=None, county_outline=None,
-                      centroid_marker=None, round_legend_values=False,
-                      exponent_format=False, legend_title='',
-                      **layout_options):
+                      simplify_state=0.02, asp=None, show_hover=True,
+                      show_state_data=True, state_outline=None,
+                      county_outline=None, centroid_marker=None,
+                      round_legend_values=False, exponent_format=False,
+                      legend_title='', **layout_options):
     """
     Returns figure for county choropleth. Uses data from package_data.
 
@@ -395,12 +404,6 @@ def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
         Default = 0.02
     :param (float) asp: the width-to-height aspect ratio for the camera.
         Default = 2.5
-    :param (bool) offline_mode: if set to True, the centroids of each county
-        are invisible until selected over with a dragbox. Warning: this can
-        only be used if you are plotting in offline mode with validate set to
-        False as the params that are being added to the fig dictionary are not
-        yet part of the plotly.py python library. Stay tuned for updates.
-        Default = False
     :param (bool) show_hover: show county hover and centroid info
     :param (bool) show_state_data: reveals state boundary lines
     :param (dict) state_outline: dict of attributes of the state outline
@@ -412,8 +415,9 @@ def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
         https://plot.ly/python/reference/#scatter-marker-line for all valid
         params
     :param (dict) centroid_marker: dict of attributes of the centroid marker.
-        See https://plot.ly/python/reference/#scatter-marker for all valid
-        params
+        The centroid markers are invisible by default and appear visible on
+        selection. See https://plot.ly/python/reference/#scatter-marker for
+        all valid params
     :param (bool) round_legend_values: automatically round the numbers that
         appear in the legend to the nearest integer.
         Default = False
@@ -559,11 +563,14 @@ def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
     if not gp or not shapefile or not shapely:
         raise ImportError(
             "geopandas, pyshp and shapely must be installed for this figure "
-            "factory.\n\nRun the following commands in the terminal to "
-            "ensure that the correct versions of the modules are installed:\n"
+            "factory.\n\nRun the following commands to install the correct "
+            "versions of the following modules:\n\n"
             "`pip install geopandas==0.3.0`\n"
             "`pip install pyshp==1.2.10`\n"
-            "`pip install shapely==1.6.3`\n"
+            "`pip install shapely==1.6.3`\n\n"
+            "If you are using Windows, follow this post to properly "
+            "install geopandas and dependencies:"
+            "http://geoffboeing.com/2014/09/using-geopandas-windows/"
         )
 
     df, df_state = _create_us_counties_df(st_to_state_name_dict,
@@ -583,9 +590,11 @@ def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
         county_outline = {'color': 'rgb(0, 0, 0)',
                           'width': 0}
     if not centroid_marker:
-        centroid_marker = {'size': 2,
-                           'color': 'rgb(255, 255, 255)',
-                           'opacity': 0}
+        centroid_marker = {'size': 3, 'color': 'white', 'opacity': 1}
+
+    # ensure centroid markers appear on selection
+    if 'opacity' not in centroid_marker:
+        centroid_marker.update({'opacity': 1})
 
     if len(fips) != len(values):
         raise exceptions.PlotlyError(
@@ -638,14 +647,14 @@ def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
             list(np.linspace(0, 1, viri_len))
         )[1:-1]
 
-        for l in np.linspace(0, 1, len(LEVELS)):
+        for L in np.linspace(0, 1, len(LEVELS)):
             for idx, inter in enumerate(viri_intervals):
-                if l == 0:
+                if L == 0:
                     break
-                elif inter[0] < l <= inter[1]:
+                elif inter[0] < L <= inter[1]:
                     break
 
-            intermed = ((l - viri_intervals[idx][0]) /
+            intermed = ((L - viri_intervals[idx][0]) /
                         (viri_intervals[idx][1] - viri_intervals[idx][0]))
 
             float_color = colors.find_intermediate_color(
@@ -784,7 +793,7 @@ def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
             fill='toself',
             fillcolor=color_lookup[lev],
             name=lev,
-            hoverinfo='text',
+            hoverinfo='none',
         )
         plot_data.append(county_data)
 
@@ -798,19 +807,14 @@ def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
             text=centroid_text,
             name='US Counties',
             mode='markers',
-            marker=centroid_marker,
+            marker={'color': 'white', 'opacity': 0},
             hoverinfo='text'
         )
-        if offline_mode:
-            centroids_on_select = dict(
-                selected=dict(
-                    marker=dict(size=2, color='white', opacity=1)
-                ),
-                unselected=dict(
-                    marker=dict(opacity=0)
-                )
-            )
-            hover_points.update(centroids_on_select)
+        centroids_on_select = dict(
+            selected=dict(marker=centroid_marker),
+            unselected=dict(marker=dict(opacity=0))
+        )
+        hover_points.update(centroids_on_select)
         plot_data.append(hover_points)
 
     if show_state_data:

@@ -15,10 +15,11 @@ from plotly.utils import node_generator
 
 IPython = optional_imports.get_module('IPython')
 
-# default HTML parameters
-MASTER_WIDTH = 400
-MASTER_HEIGHT = 400
-FONT_SIZE = 10
+# default parameters for HTML preview
+MASTER_WIDTH = 500
+MASTER_HEIGHT = 500
+FONT_SIZE = 9
+
 
 ID_NOT_VALID_MESSAGE = (
     "Your box_id must be a number in your dashboard. To view a "
@@ -44,9 +45,9 @@ def _box(fileId='', shareKey=None, title=''):
     }
     return box
 
-
-def _container(box_1=None, box_2=None, size=MASTER_HEIGHT,
-               sizeUnit='px', direction='vertical'):
+def _container(box_1=None, box_2=None,
+               size=50, sizeUnit='%',
+               direction='vertical'):
     if box_1 is None:
         box_1 = _empty_box()
     if box_2 is None:
@@ -60,6 +61,7 @@ def _container(box_1=None, box_2=None, size=MASTER_HEIGHT,
         'first': box_1,
         'second': box_2
     }
+
     return container
 
 dashboard_html = ("""
@@ -74,7 +76,7 @@ dashboard_html = ("""
     </style>
   </head>
   <body>
-    <canvas id="myCanvas" width="400" height="400"></canvas>
+    <canvas id="myCanvas" width="{width}" height="{height}"></canvas>
     <script>
       var canvas = document.getElementById('myCanvas');
       var context = canvas.getContext('2d');
@@ -91,17 +93,15 @@ dashboard_html = ("""
 
 
 def _draw_line_through_box(dashboard_html, top_left_x, top_left_y, box_w,
-                           box_h, direction='vertical'):
-    is_horizontal = (direction == 'horizontal')
-
+                           box_h, is_horizontal, direction, fill_percent=50):
     if is_horizontal:
-        new_top_left_x = top_left_x + box_w / 2
+        new_top_left_x = top_left_x + box_w * (fill_percent / 100.)
         new_top_left_y = top_left_y
         new_box_w = 1
         new_box_h = box_h
     else:
         new_top_left_x = top_left_x
-        new_top_left_y = top_left_y + box_h / 2
+        new_top_left_y = top_left_y + box_h * (fill_percent / 100.)
         new_box_w = box_w
         new_box_h = 1
 
@@ -120,13 +120,13 @@ def _draw_line_through_box(dashboard_html, top_left_x, top_left_y, box_w,
     return dashboard_html
 
 
-def _add_html_text(dashboard_html, text, top_left_x, top_left_y, box_w, box_h):
+def _add_html_text(dashboard_html, text, top_left_x, top_left_y, box_w,
+                   box_h):
     html_text = """<!-- Insert box numbers -->
-          context.font = '{font_size}pt Times New Roman';
+          context.font = '{}pt Times New Roman';
           context.textAlign = 'center';
-          context.fillText({text}, {top_left_x} + 0.5*{box_w}, {top_left_y} + 0.5*{box_h});
-    """.format(text=text, top_left_x=top_left_x, top_left_y=top_left_y,
-               box_w=box_w, box_h=box_h, font_size=FONT_SIZE)
+          context.fillText({}, {} + 0.5*{}, {} + 0.5*{});
+    """.format(FONT_SIZE, text, top_left_x, box_w, top_left_y, box_h)
 
     index_to_add_text = dashboard_html.find('</script>') - 1
     dashboard_html = (dashboard_html[:index_to_add_text] + html_text +
@@ -161,41 +161,60 @@ class Dashboard(dict):
     `.get_box()` returns the box located in the dashboard by calling
     its box id as displayed via `.get_preview()`.
 
-    Example: Create a simple Dashboard object
+    Example 1: Create a simple Dashboard object
     ```
     import plotly.dashboard_objs as dashboard
 
-    box_1 = {
+    box_a = {
         'type': 'box',
         'boxType': 'plot',
         'fileId': 'username:some#',
-        'title': 'box 1'
+        'title': 'box a'
     }
 
-    box_2 = {
+    box_b = {
         'type': 'box',
         'boxType': 'plot',
         'fileId': 'username:some#',
-        'title': 'box 2'
+        'title': 'box b'
     }
 
-    box_3 = {
+    box_c = {
         'type': 'box',
         'boxType': 'plot',
         'fileId': 'username:some#',
-        'title': 'box 3'
+        'title': 'box c'
     }
 
     my_dboard = dashboard.Dashboard()
-    my_dboard.insert(box_1)
+    my_dboard.insert(box_a)
     # my_dboard.get_preview()
-    my_dboard.insert(box_2, 'above', 1)
+    my_dboard.insert(box_b, 'above', 1)
     # my_dboard.get_preview()
-    my_dboard.insert(box_3, 'left', 2)
+    my_dboard.insert(box_c, 'left', 2)
     # my_dboard.get_preview()
     my_dboard.swap(1, 2)
     # my_dboard.get_preview()
     my_dboard.remove(1)
+    # my_dboard.get_preview()
+    ```
+
+    Example 2: 4 vertical boxes of equal height
+    ```
+    import plotly.dashboard_objs as dashboard
+
+    box_a = {
+        'type': 'box',
+        'boxType': 'plot',
+        'fileId': 'username:some#',
+        'title': 'box a'
+    }
+
+    my_dboard = dashboard.Dashboard()
+    my_dboard.insert(box_a)
+    my_dboard.insert(box_a, 'below', 1)
+    my_dboard.insert(box_a, 'below', 1)
+    my_dboard.insert(box_a, 'below', 3)
     # my_dboard.get_preview()
     ```
     """
@@ -212,12 +231,10 @@ class Dashboard(dict):
             self['version'] = content['version']
             self['settings'] = content['settings']
 
-        self._set_container_sizes()
-
     def _compute_box_ids(self):
         box_ids_to_path = {}
         all_nodes = list(node_generator(self['layout']))
-
+        all_nodes.sort(key=lambda x: x[1])
         for node in all_nodes:
             if (node[1] != () and node[0]['type'] == 'box'
                     and node[0]['boxType'] != 'empty'):
@@ -250,6 +267,7 @@ class Dashboard(dict):
 
     def _make_all_nodes_and_paths(self):
         all_nodes = list(node_generator(self['layout']))
+        all_nodes.sort(key=lambda x: x[1])
 
         # remove path 'second' as it's always an empty box
         all_paths = []
@@ -260,29 +278,26 @@ class Dashboard(dict):
             all_paths.remove(path_second)
         return all_nodes, all_paths
 
-    def _set_container_sizes(self):
-        if self['layout'] is None:
-            return
-
-        all_nodes, all_paths = self._make_all_nodes_and_paths()
-
-        # set dashboard_height proportional to max_path_len
-        max_path_len = max(len(path) for path in all_paths)
-        dashboard_height = 500 + 250 * max_path_len
-        self['layout']['size'] = dashboard_height
-        self['layout']['sizeUnit'] = 'px'
-
-        for path in all_paths:
-            if len(path) != 0:
-                if self._path_to_box(path)['type'] == 'split':
-                    self._path_to_box(path)['size'] = 50
-                    self._path_to_box(path)['sizeUnit'] = '%'
-
     def _path_to_box(self, path):
         loc_in_dashboard = self['layout']
         for first_second in path:
             loc_in_dashboard = loc_in_dashboard[first_second]
         return loc_in_dashboard
+
+    def _set_dashboard_size(self):
+        # set dashboard size to keep consistent with GUI
+        num_of_boxes = len(self._compute_box_ids())
+        if num_of_boxes == 0:
+            pass
+        elif num_of_boxes == 1:
+            self['layout']['size'] = 800
+            self['layout']['sizeUnit'] = 'px'
+        elif num_of_boxes == 2:
+            self['layout']['size'] = 1500
+            self['layout']['sizeUnit'] = 'px'
+        else:
+            self['layout']['size'] = 1500 + 350 * (num_of_boxes - 2)
+            self['layout']['sizeUnit'] = 'px'
 
     def get_box(self, box_id):
         """Returns box from box_id number."""
@@ -325,8 +340,8 @@ class Dashboard(dict):
         elif self['layout'] is None:
             return IPython.display.HTML(dashboard_html)
 
-        x = 0
-        y = 0
+        top_left_x = 0
+        top_left_y = 0
         box_w = MASTER_WIDTH
         box_h = MASTER_HEIGHT
         html_figure = dashboard_html
@@ -334,8 +349,8 @@ class Dashboard(dict):
         # used to store info about box dimensions
         path_to_box_specs = {}
         first_box_specs = {
-            'top_left_x': x,
-            'top_left_y': y,
+            'top_left_x': top_left_x,
+            'top_left_y': top_left_y,
             'box_w': box_w,
             'box_h': box_h
         }
@@ -351,57 +366,64 @@ class Dashboard(dict):
                 current_box_specs = path_to_box_specs[path]
 
                 if self._path_to_box(path)['type'] == 'split':
-                    html_figure = _draw_line_through_box(
-                        html_figure,
-                        current_box_specs['top_left_x'],
-                        current_box_specs['top_left_y'],
-                        current_box_specs['box_w'],
-                        current_box_specs['box_h'],
-                        direction=self._path_to_box(path)['direction']
-                    )
+                    fill_percent = self._path_to_box(path)['size']
+                    direction = self._path_to_box(path)['direction']
+                    is_horizontal = (direction == 'horizontal')
 
-                    # determine the specs for resulting two boxes from split
-                    is_horizontal = (
-                        self._path_to_box(path)['direction'] == 'horizontal'
-                    )
-                    x = current_box_specs['top_left_x']
-                    y = current_box_specs['top_left_y']
+                    top_left_x = current_box_specs['top_left_x']
+                    top_left_y = current_box_specs['top_left_y']
                     box_w = current_box_specs['box_w']
                     box_h = current_box_specs['box_h']
 
+                    html_figure = _draw_line_through_box(
+                        html_figure, top_left_x, top_left_y, box_w, box_h,
+                        is_horizontal=is_horizontal, direction=direction,
+                        fill_percent=fill_percent
+                    )
+
+                    # determine the specs for resulting two box split
                     if is_horizontal:
-                        new_box_w = box_w / 2
+                        new_top_left_x = top_left_x
+                        new_top_left_y = top_left_y
+                        new_box_w = box_w * (fill_percent / 100.)
                         new_box_h = box_h
-                        new_top_left_x = x + box_w / 2
-                        new_top_left_y = y
 
+                        new_top_left_x_2 = top_left_x + new_box_w
+                        new_top_left_y_2 = top_left_y
+                        new_box_w_2 = box_w * ((100 - fill_percent) / 100.)
+                        new_box_h_2 = box_h
                     else:
+                        new_top_left_x = top_left_x
+                        new_top_left_y = top_left_y
                         new_box_w = box_w
-                        new_box_h = box_h / 2
-                        new_top_left_x = x
-                        new_top_left_y = y + box_h / 2
+                        new_box_h = box_h * (fill_percent / 100.)
 
-                    box_1_specs = {
-                        'top_left_x': x,
-                        'top_left_y': y,
+                        new_top_left_x_2 = top_left_x
+                        new_top_left_y_2 = (top_left_y +
+                                            box_h * (fill_percent / 100.))
+                        new_box_w_2 = box_w
+                        new_box_h_2 = box_h * ((100 - fill_percent) / 100.)
+
+                    first_box_specs = {
+                        'top_left_x': top_left_x,
+                        'top_left_y': top_left_y,
                         'box_w': new_box_w,
                         'box_h': new_box_h
                     }
-                    box_2_specs = {
-                        'top_left_x': new_top_left_x,
-                        'top_left_y': new_top_left_y,
-                        'box_w': new_box_w,
-                        'box_h': new_box_h
+                    second_box_specs = {
+                        'top_left_x': new_top_left_x_2,
+                        'top_left_y': new_top_left_y_2,
+                        'box_w': new_box_w_2,
+                        'box_h': new_box_h_2
                     }
 
-                    path_to_box_specs[path + ('first',)] = box_1_specs
-                    path_to_box_specs[path + ('second',)] = box_2_specs
+                    path_to_box_specs[path + ('first',)] = first_box_specs
+                    path_to_box_specs[path + ('second',)] = second_box_specs
 
                 elif self._path_to_box(path)['type'] == 'box':
                     for box_id in box_ids_to_path:
                         if box_ids_to_path[box_id] == path:
                             number = box_id
-
                     html_figure = _add_html_text(
                         html_figure, number,
                         path_to_box_specs[path]['top_left_x'],
@@ -413,7 +435,7 @@ class Dashboard(dict):
         # display HTML representation
         return IPython.display.HTML(html_figure)
 
-    def insert(self, box, side='above', box_id=None):
+    def insert(self, box, side='above', box_id=None, fill_percent=50):
         """
         Insert a box into your dashboard layout.
 
@@ -421,26 +443,35 @@ class Dashboard(dict):
         :param (str) side: specifies where your new box is going to be placed
             relative to the given 'box_id'. Valid values are 'above', 'below',
             'left', and 'right'.
-        :param (int) box_id: the box id which is used as the reference box for
-            the insertion of the box.
-
+        :param (int) box_id: the box id which is used as a reference for the
+            insertion of the new box. Box ids are memoryless numbers that are
+            generated on-the-fly and assigned to boxes in the layout each time
+            .get_preview() is run.
+        :param (float) fill_percent: specifies the percentage of the container
+            box from the given 'side' that the new box occupies. For example
+            if you apply the method\n
+            .insert(box=new_box, box_id=2, side='left', fill_percent=20)\n
+            to a dashboard object, a new box is inserted 20% from the left
+            side of the box with id #2. Run .get_preview() to see the box ids
+            assigned to each box in the dashboard layout.
+            Default = 50
         Example:
         ```
         import plotly.dashboard_objs as dashboard
 
-        box_1 = {
+        box_a = {
             'type': 'box',
             'boxType': 'plot',
             'fileId': 'username:some#',
-            'title': 'box 1'
+            'title': 'box a'
         }
 
         my_dboard = dashboard.Dashboard()
-        my_dboard.insert(box_1)
-        my_dboard.insert(box_1, 'left', 1)
-        my_dboard.insert(box_1, 'below', 2)
-        my_dboard.insert(box_1, 'right', 3)
-        my_dboard.insert(box_1, 'above', 4)
+        my_dboard.insert(box_a)
+        my_dboard.insert(box_a, 'left', 1)
+        my_dboard.insert(box_a, 'below', 2)
+        my_dboard.insert(box_a, 'right', 3)
+        my_dboard.insert(box_a, 'above', 4, fill_percent=20)
 
         my_dboard.get_preview()
         ```
@@ -449,7 +480,9 @@ class Dashboard(dict):
 
         # doesn't need box_id or side specified for first box
         if self['layout'] is None:
-            self['layout'] = _container(box, _empty_box())
+            self['layout'] = _container(
+                box, _empty_box(), size=MASTER_HEIGHT, sizeUnit='px'
+            )
         else:
             if box_id is None:
                 raise exceptions.PlotlyError(
@@ -458,28 +491,38 @@ class Dashboard(dict):
                 )
             if box_id not in box_ids_to_path:
                 raise exceptions.PlotlyError(ID_NOT_VALID_MESSAGE)
+
+            if fill_percent < 0 or fill_percent > 100:
+                raise exceptions.PlotlyError(
+                    'fill_percent must be a number between 0 and 100 '
+                    'inclusive'
+                )
             if side == 'above':
                 old_box = self.get_box(box_id)
                 self._insert(
-                    _container(box, old_box, direction='vertical'),
+                    _container(box, old_box, direction='vertical',
+                               size=fill_percent),
                     box_ids_to_path[box_id]
                 )
             elif side == 'below':
                 old_box = self.get_box(box_id)
                 self._insert(
-                    _container(old_box, box, direction='vertical'),
+                    _container(old_box, box, direction='vertical',
+                               size=100 - fill_percent),
                     box_ids_to_path[box_id]
                 )
             elif side == 'left':
                 old_box = self.get_box(box_id)
                 self._insert(
-                    _container(box, old_box, direction='horizontal'),
+                    _container(box, old_box, direction='horizontal',
+                               size=fill_percent),
                     box_ids_to_path[box_id]
                 )
             elif side == 'right':
                 old_box = self.get_box(box_id)
                 self._insert(
-                    _container(old_box, box, direction='horizontal'),
+                    _container(old_box, box, direction='horizontal',
+                               size =100 - fill_percent),
                     box_ids_to_path[box_id]
                 )
             else:
@@ -489,7 +532,7 @@ class Dashboard(dict):
                     "'above', 'below', 'left', and 'right'."
                 )
 
-        self._set_container_sizes()
+        self._set_dashboard_size()
 
     def remove(self, box_id):
         """
@@ -499,17 +542,16 @@ class Dashboard(dict):
         ```
         import plotly.dashboard_objs as dashboard
 
-        box_1 = {
+        box_a = {
             'type': 'box',
             'boxType': 'plot',
             'fileId': 'username:some#',
-            'title': 'box 1'
+            'title': 'box a'
         }
 
         my_dboard = dashboard.Dashboard()
-        my_dboard.insert(box_1)
+        my_dboard.insert(box_a)
         my_dboard.remove(1)
-
         my_dboard.get_preview()
         ```
         """
@@ -530,7 +572,7 @@ class Dashboard(dict):
         else:
             self['layout'] = None
 
-        self._set_container_sizes()
+        self._set_dashboard_size()
 
     def swap(self, box_id_1, box_id_2):
         """
@@ -540,23 +582,23 @@ class Dashboard(dict):
         ```
         import plotly.dashboard_objs as dashboard
 
-        box_1 = {
+        box_a = {
             'type': 'box',
             'boxType': 'plot',
             'fileId': 'username:first#',
-            'title': 'first box'
+            'title': 'box a'
         }
 
-        box_2 = {
+        box_b = {
             'type': 'box',
             'boxType': 'plot',
             'fileId': 'username:second#',
-            'title': 'second box'
+            'title': 'box b'
         }
 
         my_dboard = dashboard.Dashboard()
-        my_dboard.insert(box_1)
-        my_dboard.insert(box_2, 'above', 1)
+        my_dboard.insert(box_a)
+        my_dboard.insert(box_b, 'above', 1)
 
         # check box at box id 1
         box_at_1 = my_dboard.get_box(1)
@@ -569,16 +611,14 @@ class Dashboard(dict):
         ```
         """
         box_ids_to_path = self._compute_box_ids()
-        box_1 = self.get_box(box_id_1)
-        box_2 = self.get_box(box_id_2)
+        box_a = self.get_box(box_id_1)
+        box_b = self.get_box(box_id_2)
 
-        box_1_path = box_ids_to_path[box_id_1]
-        box_2_path = box_ids_to_path[box_id_2]
+        box_a_path = box_ids_to_path[box_id_1]
+        box_b_path = box_ids_to_path[box_id_2]
 
-        for pairs in [(box_1_path, box_2), (box_2_path, box_1)]:
+        for pairs in [(box_a_path, box_b), (box_b_path, box_a)]:
             loc_in_dashboard = self['layout']
             for first_second in pairs[0][:-1]:
                 loc_in_dashboard = loc_in_dashboard[first_second]
             loc_in_dashboard[pairs[0][-1]] = pairs[1]
-
-        self._set_container_sizes()
