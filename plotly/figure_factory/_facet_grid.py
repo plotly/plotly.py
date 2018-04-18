@@ -2,11 +2,9 @@ from __future__ import absolute_import
 
 from plotly import colors, exceptions, optional_imports
 from plotly.figure_factory import utils
-from plotly.graph_objs import graph_objs
 from plotly.tools import make_subplots
 
 import math
-import copy
 from numbers import Number
 
 pd = optional_imports.get_module('pandas')
@@ -108,7 +106,7 @@ def _annotation_dict(text, lane, num_of_lanes, SUBPLOT_SPACING, row_col='col',
         showarrow=False,
         xref='paper',
         yref='paper',
-        text=text,
+        text=str(text),
         font=dict(
             size=13,
             color=AXIS_TITLE_COLOR
@@ -331,10 +329,7 @@ def _facet_grid_color_categorical(df, x, y, facet_row, facet_col, color_name,
                                  row_col='row', flipped=flipped_rows)
             )
 
-    # add annotations
-    fig['layout']['annotations'] = annotations
-
-    return fig
+    return fig, annotations
 
 
 def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
@@ -474,10 +469,7 @@ def _facet_grid_color_numerical(df, x, y, facet_row, facet_col, color_name,
                                  row_col='row', flipped=flipped_rows)
             )
 
-    # add annotations
-    fig['layout']['annotations'] = annotations
-
-    return fig
+    return fig, annotations
 
 
 def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
@@ -600,10 +592,7 @@ def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
                                  row_col='row', flipped=flipped_rows)
             )
 
-    # add annotations
-    fig['layout']['annotations'] = annotations
-
-    return fig
+    return fig, annotations
 
 
 def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
@@ -905,7 +894,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
                         j = 0
                     colormap[val] = default_colors[j]
                     j += 1
-            fig = _facet_grid_color_categorical(
+            fig, annotations = _facet_grid_color_categorical(
                 df, x, y, facet_row, facet_col, color_name, colormap,
                 num_of_rows, num_of_cols, facet_row_labels, facet_col_labels,
                 trace_type, flipped_rows, flipped_cols, show_boxes,
@@ -924,7 +913,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
                             "all the values of the colormap column are in "
                             "the keys of your dictionary."
                         )
-                fig = _facet_grid_color_categorical(
+                fig, annotations = _facet_grid_color_categorical(
                     df, x, y, facet_row, facet_col, color_name, colormap,
                     num_of_rows, num_of_cols, facet_row_labels,
                     facet_col_labels, trace_type, flipped_rows,
@@ -936,7 +925,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
                 colorscale_list = colormap
                 utils.validate_colorscale(colorscale_list)
 
-                fig = _facet_grid_color_numerical(
+                fig, annotations = _facet_grid_color_numerical(
                     df, x, y, facet_row, facet_col, color_name,
                     colorscale_list, num_of_rows, num_of_cols,
                     facet_row_labels, facet_col_labels, trace_type,
@@ -952,7 +941,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
                         "of a Plotly Colorscale. The available colorscale "
                         "names are {}".format(colors.PLOTLY_SCALES.keys())
                     )
-                fig = _facet_grid_color_numerical(
+                fig, annotations = _facet_grid_color_numerical(
                     df, x, y, facet_row, facet_col, color_name,
                     colorscale_list, num_of_rows, num_of_cols,
                     facet_row_labels, facet_col_labels, trace_type,
@@ -961,7 +950,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
                 )
             else:
                 colorscale_list = colors.PLOTLY_SCALES['Reds']
-                fig = _facet_grid_color_numerical(
+                fig, annotations = _facet_grid_color_numerical(
                     df, x, y, facet_row, facet_col, color_name,
                     colorscale_list, num_of_rows, num_of_cols,
                     facet_row_labels, facet_col_labels, trace_type,
@@ -970,7 +959,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
                 )
 
     else:
-        fig = _facet_grid(
+        fig, annotations = _facet_grid(
             df, x, y, facet_row, facet_col, num_of_rows, num_of_cols,
             facet_row_labels, facet_col_labels, trace_type, flipped_rows,
             flipped_cols, show_boxes, SUBPLOT_SPACING, marker_color,
@@ -992,8 +981,10 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
     # axis titles
     x_title_annot = _axis_title_annotation(x, 'x')
     y_title_annot = _axis_title_annotation(y, 'y')
-    fig['layout']['annotations'].append(x_title_annot)
-    fig['layout']['annotations'].append(y_title_annot)
+
+    # annotations
+    annotations.append(x_title_annot)
+    annotations.append(y_title_annot)
 
     # legend
     fig['layout']['showlegend'] = show_legend
@@ -1008,8 +999,11 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
         if ggplot2:
             if color_name:
                 legend_annot = _legend_annotation(color_name)
-                fig['layout']['annotations'].append(legend_annot)
+                annotations.append(legend_annot)
             fig['layout']['margin']['r'] = 150
+
+    # assign annotations to figure
+    fig['layout']['annotations'] = annotations
 
     # add shaded boxes behind axis titles
     if show_boxes and ggplot2:

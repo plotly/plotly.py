@@ -1351,11 +1351,12 @@ def make_subplots(rows=1, cols=1,
     return fig
 
 
-def get_valid_graph_obj(obj, obj_type=None):
-    """Returns a new graph object that won't raise.
+def get_graph_obj(obj, obj_type=None):
+    """Returns a new graph object.
 
-    CAREFUL: this will *silently* strip out invalid pieces of the object.
-
+    OLD FUNCTION: this will *silently* strip out invalid pieces of the object.
+    NEW FUNCTION: no striping of invalid pieces anymore - only raises error
+        on unrecognized graph_objs
     """
     # TODO: Deprecate or move. #283
     from plotly.graph_objs import graph_objs
@@ -1365,7 +1366,7 @@ def get_valid_graph_obj(obj, obj_type=None):
         raise exceptions.PlotlyError(
             "'{}' is not a recognized graph_obj.".format(obj_type)
         )
-    return cls(obj, _raise=False)
+    return cls(obj)
 
 
 def validate(obj, obj_type):

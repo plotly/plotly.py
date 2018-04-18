@@ -8,28 +8,28 @@ import plotly.tools as tls
 
 def test_validate_valid_fig():
     fig = {
-        'layout':{
-            'title':'something'
+        'layout': {
+            'title': 'something'
         },
-        'data':[
+        'data': [
             {
-                'x':[1,2,3],
-                'y':[2,1,2]
+                'x': [1, 2, 3],
+                'y': [2, 1, 2]
             }
         ]
     }
     tls.validate(fig, 'Figure')
 
 
-@raises(PlotlyError)
+@raises(ValueError)
 def test_validate_invalid_fig():
     fig = {
-        'layout':{
-            'title':'something'
+        'layout': {
+            'title': 'something'
         },
-        'data':{
-            'x':[1,2,3],
-            'y':[2,1,2]
+        'data': {
+            'x': [1, 2, 3],
+            'y': [2, 1, 2]
         }
     }
     tls.validate(fig, 'Figure')

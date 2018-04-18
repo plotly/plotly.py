@@ -2,10 +2,38 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.5.2] - UNRELEASED
+### Updated
+- error message for `plotly.figure_factory.create_choropleth` is more helpful for Windows users on installing `geopandas` and dependencies including `shapely`.
+
+## [2.5.1] - 2018-03-26
+### Fixed
+- `plotly.figure_factory.create_choropleth` now works in Windows without raising an OSError. The module now uses cross-platform path tools from `os` to manipulate and manage the shapefiles contained in this package.
+
+## [2.5.0] - 2018-03-12
+### Fixed
+- `import plotly.figure_factory` does not fail if `pandas` is not installed. See  https://github.com/plotly/plotly.py/pull/958
+### Added
+- New parameter `fill_percent` to the `.insert` method for the dashboards API. You can now insert a box into the dashboard layout and specify what proportion of the original container box it will occupy. Run `help(plotly.dashboard_objs.Dashboard.insert)` for more information on `fill_percent`.
+### Updated
+- Updated `plotly.min.js` to version 1.35.2.
+  - New features include adding an `automargin` attribute to cartesian axes and a layout `grids` attribute for easy subplot generation.
+  - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1352----2018-03-09) for additional information regarding the updates.
+- `plotly.figure_factory.create_choropleth` has changed some of the default plotting options:
+  - 'offline_mode' param has been removed from call signature.
+  - Persistent selection api for the centroid points is automatically enabled. See https://plot.ly/python/reference/#scatter-selected and https://plot.ly/python/reference/#scatter-unselected for details
+  - FIPS values that appear on hover are 0-padded to ensure they are 5 digits.
+  - `hover_info='none'` is now default for the county lines data.
+
+## [2.4.1] - 2018-02-21
+### Fixed
+- The required shapefiles to generate the choropleths via `plotly.figure_factory.create_choropleth` are now shipped in the package data.
+
 ## [2.4.0] - 2018-02-16
 ### Added
 - County Choropleth figure factory. Call `help(plotly.figure_factory.create_choropleth)` for examples and how to get started making choropleths of US counties with the Python API.
 
+Note: Calling `plotly.figure_factory.create_choropleth` will fail with an IOError due to missing shapefiles see: https://github.com/plotly/plotly.py/blob/master/CHANGELOG.md#241---2018-02-21
 
 ## [2.3.0] - 2018-01-25
 ### Fixed

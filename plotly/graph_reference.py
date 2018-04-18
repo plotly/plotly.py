@@ -39,6 +39,8 @@ _BACKWARDS_COMPAT_CLASS_NAMES = {
     'Histogram2d': {'object_name': 'histogram2d', 'base_type': dict},
     'Histogram2dContour': {'object_name': 'histogram2dcontour',
                            'base_type': dict},
+    'Histogram2dcontour': {'object_name': 'histogram2dcontour',
+                           'base_type': dict},
     'Layout': {'object_name': 'layout', 'base_type': dict},
     'Legend': {'object_name': 'legend', 'base_type': dict},
     'Line': {'object_name': 'line', 'base_type': dict},
