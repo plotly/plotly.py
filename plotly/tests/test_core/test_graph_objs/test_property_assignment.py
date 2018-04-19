@@ -65,6 +65,13 @@ class TestAssignmentPrimitive(NumpyTestUtilsMixin, TestCase):
                 == 'courier')
         self.assert_fig_equal(self.scatter, self.expected_nested)
 
+    def test_nested_update(self):
+        self.scatter.update(
+            marker={'colorbar': {'titlefont': {'family': 'courier'}}})
+        assert (self.scatter[('marker', 'colorbar', 'titlefont', 'family')]
+                == 'courier')
+        self.assert_fig_equal(self.scatter, self.expected_nested)
+
 
 class TestAssignmentCompound(NumpyTestUtilsMixin, TestCase):
 
@@ -155,6 +162,32 @@ class TestAssignmentCompound(NumpyTestUtilsMixin, TestCase):
         assert isinstance(self.scatter[('marker', 'colorbar')],
                           go.scatter.marker.ColorBar)
         self.assert_fig_equal(self.scatter[('marker', 'colorbar')],
+                              self.expected_nested['marker']['colorbar'])
+
+        self.assert_fig_equal(self.scatter, self.expected_nested)
+
+    def test_nested_update_obj(self):
+
+        self.scatter.update(
+            marker={'colorbar':
+                    go.scatter.marker.ColorBar(bgcolor='yellow',
+                                               thickness=5)})
+
+        assert isinstance(self.scatter['marker']['colorbar'],
+                          go.scatter.marker.ColorBar)
+        self.assert_fig_equal(self.scatter['marker']['colorbar'],
+                              self.expected_nested['marker']['colorbar'])
+
+        self.assert_fig_equal(self.scatter, self.expected_nested)
+
+    def test_nested_update_dict(self):
+
+        self.scatter.update(
+            marker={'colorbar': dict(bgcolor='yellow', thickness=5)})
+
+        assert isinstance(self.scatter['marker']['colorbar'],
+                          go.scatter.marker.ColorBar)
+        self.assert_fig_equal(self.scatter['marker']['colorbar'],
                               self.expected_nested['marker']['colorbar'])
 
         self.assert_fig_equal(self.scatter, self.expected_nested)
@@ -327,89 +360,40 @@ class TestAssignCompoundArray(NumpyTestUtilsMixin, TestCase):
             'restyle')
         self.assert_fig_equal(self.layout, self.expected_layout2)
 
+    def test_assign_double_nested_update_dict(self):
 
-# Public interfaces of BasePlotlyTypes without a figure
-# ----------------
-# (This file)
-#  - Test validators do something for simple, compound, array
-#  - Test preset does something for lists/tuples
-#  - Test non-existant attr/item
-#  - Test contains \ iter
-#  - Trace.type
-#  - .update version of every assignment
-#  - Layout.xaxis1+
+        # Initialize empty updatemenus
+        self.layout.updatemenus = [{}, {}]
 
+        # Initialize empty buttons in updatemenu[1]
+        self.layout.updatemenus[1].buttons = [{}, {}, {}]
 
-# With a figure
-# --------------
-# Figure properties
-#   - data, layout, frames as attr, item, get/assign, contains
-#   - tuples/dot props
-#   - .update
-#
-#
-#
-# Use mock to catch _send_*_msg calls on Figure and test figure interactions
-#  to generate these messages (Do not assume ipywidgets implementation).
-#
-#   - _send_addTraces_msg: add_* methods
-#   - _send_moveTraces_msg: set data
-#   - _send_deleteTraces_msg: set data
-#   - _send_restyle_msg: assign trace prop
-#   - _send_relayout_msg: assign layout prop
-#   - _send_update_msg: .update() and batch_update()
-#   - _send_animate_msg: batch_animate()
-#
-# ### Test other methods ###
-#   - plotly_restyle
-#   - plotly_relayout
-#   - plotly_update
-#
-# ### on_change ###
-#   - Warning if no parent figure
-#   - Triggered by property assignment
-#   - Triggered by .update()
-#   - Triggered by plotly_relayout/restyle/update
-#
-# ### on_click/hover/unhover/select
-#
+        # Update
+        self.layout.update(
+            updatemenus={1: {'buttons': {2: {'method': 'restyle'}}}})
 
+        # Check
+        self.assertEqual(
+            self.layout.updatemenus[1].buttons[2].method,
+            'restyle')
+        self.assert_fig_equal(self.layout, self.expected_layout2)
 
-# FigureWidget tests
-# ------------------
-# That need front-end like input
-#
-#  - on_click/hover/unhover/select
-#  - on_change (e.g. zoom/pan/visible/dragmode/etc.)
-#  - Defaults
-#  - Remove overlapping properties
-#
-# Drive with (maybe wrap properties in _receive_* methods)
-#     _js2py_traceDeltas
-#     _js2py_layoutDelta
-#     _js2py_restyle
-#     _js2py_relayout
-#     _js2py_update
-#     _js2py_pointsCallback
-#
-# Check for (wrap in _send_remove*)
-#     _py2js_removeLayoutProps
-#     _py2js_removeTraceProps
-#
-# Model interactions after some use-cases
-#
-#  1) Drag/pan/zoom -> relayout
-#  2) Set autoscale = true -> delta -> remove range
-#  3) Pan/zoom on_change callback called only once
-#  4) Select points dispatched properly
-#  5)
-#
-# Note: deltas can be a relevant subset of what front-end returns now.
+    def test_assign_double_nested_update_array(self):
 
-# Selenium tests
-# --------------
-#  - Defaults
-#  - Removal
-#  - Front-end styles update
-#  - Click/drag/hover/select results on callbacks being called.
+        # Initialize empty updatemenus
+        self.layout.updatemenus = [{}, {}]
+
+        # Initialize empty buttons in updatemenu[1]
+        self.layout.updatemenus[1].buttons = [{}, {}, {}]
+
+        # Update
+        self.layout.update(
+            updatemenus=[{}, {'buttons': [{}, {}, {'method': 'restyle'}]}])
+
+        # Check
+        self.assertEqual(
+            self.layout.updatemenus[1].buttons[2].method,
+            'restyle')
+        self.assert_fig_equal(self.layout, self.expected_layout2)
+
 

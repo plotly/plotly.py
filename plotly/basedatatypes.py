@@ -2018,24 +2018,32 @@ Please use the add_trace method with the row and col parameters.
                 validator = plotly_obj._validators[key]
 
                 if isinstance(validator, CompoundValidator):
+
                     # Update compound objects recursively
-                    plotly_obj[key].update(val)
+                    # plotly_obj[key].update(val)
+                    BaseFigure._perform_update(
+                        plotly_obj[key], val)
+                elif isinstance(validator, CompoundArrayValidator):
+                    BaseFigure._perform_update(
+                        plotly_obj[key], val)
                 else:
                     # Assign non-compound value
                     plotly_obj[key] = val
 
         elif isinstance(plotly_obj, tuple):
 
-            # If update_obj is a dict, wrap in a list
-            if not isinstance(update_obj, (tuple, list)):
-                update_obj = [update_obj]
-
             if len(update_obj) == 0:
                 # Nothing to do
                 return
             else:
                 for i, plotly_element in enumerate(plotly_obj):
-                    update_element = update_obj[i % len(update_obj)]
+                    if isinstance(update_obj, dict):
+                        if i in update_obj:
+                            update_element = update_obj[i]
+                        else:
+                            continue
+                    else:
+                        update_element = update_obj[i % len(update_obj)]
                     BaseFigure._perform_update(plotly_element, update_element)
         else:
             raise ValueError('Unexpected plotly object with type {typ}'
