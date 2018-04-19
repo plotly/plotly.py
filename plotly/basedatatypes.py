@@ -2493,30 +2493,55 @@ class BasePlotlyType:
         -------
         None
         """
-        # Validate prop
-        # -------------
-        if prop not in self._validators:
-            self._raise_on_invalid_property_error(prop)
 
-        # Get validator for this property
-        # -------------------------------
-        validator = self._validators[prop]
+        # Normalize prop
+        # --------------
+        # Convert into a property tuple
+        orig_prop = prop
+        prop = BaseFigure._str_to_dict_path(prop)
 
-        # Handle compound property
-        # ------------------------
-        if isinstance(validator, CompoundValidator):
-            self._set_compound_prop(prop, value)
+        # Handle empty case
+        # -----------------
+        if len(prop) == 0:
+            raise KeyError(orig_prop)
 
-        # Handle compound array property
-        # ------------------------------
-        elif isinstance(validator,
-                        (CompoundArrayValidator, BaseDataValidator)):
-            self._set_array_prop(prop, value)
+        # Handle scalar case
+        # ------------------
+        # e.g. ('foo',)
+        if len(prop) == 1:
 
-        # Handle simple property
+            # ### Unwrap scalar tuple ###
+            prop = prop[0]
+
+            # ### Validate prop ###
+            if prop not in self._validators:
+                self._raise_on_invalid_property_error(prop)
+
+            # ### Get validator for this property ###
+            validator = self._validators[prop]
+
+            # ### Handle compound property ###
+            if isinstance(validator, CompoundValidator):
+                self._set_compound_prop(prop, value)
+
+            # ### Handle compound array property ###
+            elif isinstance(validator,
+                            (CompoundArrayValidator, BaseDataValidator)):
+                self._set_array_prop(prop, value)
+
+            # ### Handle simple property ###
+            else:
+                self._set_prop(prop, value)
+
+        # Handle non-scalar case
         # ----------------------
+        # e.g. ('foo', 1), ()
         else:
-            self._set_prop(prop, value)
+            res = self
+            for p in prop[:-1]:
+                res = res[p]
+
+            res[prop[-1]] = value
 
     def __setattr__(self, prop, value):
         """
@@ -3095,7 +3120,7 @@ class BasePlotlyType:
         -------
         dict
         """
-        return deepcopy(self._props)
+        return deepcopy(self._props if self._props is not None else {})
 
     @staticmethod
     def _vals_equal(v1, v2):
@@ -3357,6 +3382,17 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         """
         Custom __setitem__ that handles dynamic subplot properties
         """
+        # Convert prop to prop tuple
+        # --------------------------
+        prop_tuple = BaseFigure._str_to_dict_path(prop)
+        if len(prop_tuple) != 1 or not isinstance(prop_tuple[0], str):
+            # Let parent handle non-scalar non-string cases
+            super().__setitem__(prop, value)
+            return
+        else:
+            # Unwrap prop tuple
+            prop = prop_tuple[0]
+
         # Check for subplot assignment
         # ----------------------------
         match = self._subplotid_prop_re.fullmatch(prop)
