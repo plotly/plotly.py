@@ -15,7 +15,7 @@ class TestBatchUpdate(TestCase):
                                     layout={'yaxis':
                                             {'title': 'f1'}})])
 
-        # Mock out the _plotly_update method
+        # Mock out the _send_update_msg method
         self.figure._send_update_msg = MagicMock()
 
     def test_batch_update(self):
