@@ -1279,7 +1279,10 @@ Please use the add_trace method with the row and col parameters.
         # from zoom to pan). We pass this UID along so that the frontend
         # views can determine whether they need to apply the relayout
         # operation on themselves.
-        source_view_id = kwargs.get('source_view_id', None)
+        if 'source_view_id' in kwargs:
+            msg_kwargs = {'source_view_id': kwargs['source_view_id']}
+        else:
+            msg_kwargs = {}
 
         # Perform relayout operation on layout dict
         # -----------------------------------------
@@ -1289,8 +1292,7 @@ Please use the add_trace method with the row and col parameters.
             # properties, so we dispatch change callbacks and send the
             # relayout message to the frontend (if any)
             self._send_relayout_msg(
-                relayout_changes,
-                source_view_id=source_view_id)
+                relayout_changes, **msg_kwargs)
 
             self._dispatch_layout_change_callbacks(relayout_changes)
 
