@@ -1625,7 +1625,10 @@ Please use the add_trace method with the row and col parameters.
         # operation). We pass this UID along so that the frontend views can
         # determine whether they need to apply the update operation on
         # themselves.
-        source_view_id = kwargs.get('source_view_id', None)
+        if 'source_view_id' in kwargs:
+            msg_kwargs = {'source_view_id': kwargs['source_view_id']}
+        else:
+            msg_kwargs = {}
 
         # Perform update operation
         # ------------------------
@@ -1643,10 +1646,10 @@ Please use the add_trace method with the row and col parameters.
         # Send a plotly_update message to the frontend (if any)
         if restyle_changes or relayout_changes:
             self._send_update_msg(
-                restyle_changes,
-                relayout_changes,
-                trace_indexes,
-                source_view_id=source_view_id)
+                style=restyle_changes,
+                layout=relayout_changes,
+                trace_indexes=trace_indexes,
+                **msg_kwargs)
 
         # Dispatch changes
         # ----------------
