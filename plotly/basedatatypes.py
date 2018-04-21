@@ -3,7 +3,7 @@ import re
 import typing as typ
 import warnings
 from contextlib import contextmanager
-from copy import deepcopy
+from copy import deepcopy, copy
 from pprint import PrettyPrinter
 from typing import Dict, Tuple, Union, Callable, List
 
@@ -1968,16 +1968,16 @@ Please use the add_trace method with the row and col parameters.
         else:
             animate_styles, animate_trace_indexes = {}, []
 
-        animate_layout = self._batch_layout_edits
+        animate_layout = copy(self._batch_layout_edits)
 
         # Send animate message
         # --------------------
         # Sends animate message to the front end (if any)
         self._send_animate_msg(
-            list(animate_styles),
-            animate_layout,
-            list(animate_trace_indexes),
-            animation_opts)
+            styles=list(animate_styles),
+            layout=animate_layout,
+            trace_indexes=list(animate_trace_indexes),
+            animation_opts=animation_opts)
 
         # Clear batched commands
         # ----------------------
