@@ -4,7 +4,7 @@ import plotly.graph_objs as go
 from plotly.basedatatypes import Undefined
 
 
-class TestBatchUpdate(TestCase):
+class TestBatchUpdateMessage(TestCase):
     def setUp(self):
         # Construct initial scatter object
         self.figure = go.Figure(data=[
@@ -15,7 +15,7 @@ class TestBatchUpdate(TestCase):
                                     layout={'yaxis':
                                             {'title': 'f1'}})])
 
-        # Mock out the _send_update_msg method
+        # Mock out the message method
         self.figure._send_update_msg = MagicMock()
 
     def test_batch_update(self):

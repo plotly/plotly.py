@@ -1,10 +1,9 @@
 from unittest import TestCase
 from mock import MagicMock
 import plotly.graph_objs as go
-from plotly.basedatatypes import Undefined
 
 
-class TestAddTraces(TestCase):
+class TestAddTracesMessage(TestCase):
     def setUp(self):
         # Construct initial scatter object
         self.figure = go.Figure(data=[
@@ -15,10 +14,8 @@ class TestAddTraces(TestCase):
                                     layout={'yaxis':
                                             {'title': 'f1'}})])
 
-        # Mock out the _plotly_update method
+        # Mock out the message method
         self.figure._send_addTraces_msg = MagicMock()
-        self.figure._send_deleteTraces_msg = MagicMock()
-        self.figure._send_moveTraces_msg = MagicMock()
 
     def test_add_trace(self):
         # Add a trace

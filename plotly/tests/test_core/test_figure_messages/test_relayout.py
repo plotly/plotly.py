@@ -3,11 +3,13 @@ from mock import MagicMock
 import plotly.graph_objs as go
 
 
-class TestPropertyAssignment(TestCase):
+class TestRelayoutMessage(TestCase):
 
     def setUp(self):
         # Construct with mocked _send_relayout_msg method
         self.figure = go.Figure(layout={'xaxis': {'range': [-1, 4]}})
+
+        # Mock out the message method
         self.figure._send_relayout_msg = MagicMock()
 
     def test_property_assignment_toplevel(self):
