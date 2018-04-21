@@ -2420,8 +2420,7 @@ class BasePlotlyType:
         if len(prop) == 1:
             # Unwrap scalar tuple
             prop = prop[0]
-            if (prop not in self._validators and prop not in self._props
-                    and prop not in self._prop_defaults):
+            if prop not in self._validators:
                 raise KeyError(prop)
 
             validator = self._validators[prop]
@@ -2602,8 +2601,9 @@ class BasePlotlyType:
 
             # Use _vals_equal instead of `==` to handle cases where
             # underlying dicts contain numpy arrays
-            return BasePlotlyType._vals_equal(self._props,
-                                              other._props)
+            return BasePlotlyType._vals_equal(
+                self._props if self._props is not None else {},
+                other._props if other._props is not None else {})
 
     @staticmethod
     def _build_repr_for_class(props, class_name, parent_path_str=None):
@@ -2627,14 +2627,17 @@ class BasePlotlyType:
         if parent_path_str:
             class_name = parent_path_str + '.' + class_name
 
-        pprinter = ElidedPrettyPrinter(threshold=200, width=120)
-        pprint_res = pprinter.pformat(props)
+        if len(props) == 0:
+            repr_str = class_name + '()'
+        else:
+            pprinter = ElidedPrettyPrinter(threshold=200, width=120)
+            pprint_res = pprinter.pformat(props)
 
-        # pprint_res is indented by 1 space. Add extra 3 spaces for PEP8
-        # complaint indent
-        body = '   ' + pprint_res[1:-1].replace('\n', '\n   ')
+            # pprint_res is indented by 1 space. Add extra 3 spaces for PEP8
+            # complaint indent
+            body = '   ' + pprint_res[1:-1].replace('\n', '\n   ')
 
-        repr_str = class_name + '(**{\n ' + body + '\n})'
+            repr_str = class_name + '(**{\n ' + body + '\n})'
 
         return repr_str
 
@@ -2644,7 +2647,7 @@ class BasePlotlyType:
         terminal/notebook
         """
         repr_str = BasePlotlyType._build_repr_for_class(
-            props=self._props,
+            props=self._props if self._props is not None else {},
             class_name=self.__class__.__name__,
             parent_path_str=self._parent_path_str)
 
