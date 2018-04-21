@@ -751,9 +751,9 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
 
         # Perform restyle
         # ---------------
-        self.plotly_restyle(restyle_data=style_data,
-                            trace_indexes=style_traces,
-                            source_view_id=source_view_id)
+        self._plotly_restyle(restyle_data=style_data,
+                             trace_indexes=style_traces,
+                             source_view_id=source_view_id)
 
     @observe('_js2py_update')
     def _handler_js2py_update(self, change):
@@ -775,9 +775,9 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
 
         # Perform update
         # --------------
-        self.plotly_update(restyle_data=style, relayout_data=layout,
-                           trace_indexes=trace_indexes,
-                           source_view_id=source_view_id)
+        self._plotly_update(restyle_data=style, relayout_data=layout,
+                            trace_indexes=trace_indexes,
+                            source_view_id=source_view_id)
 
     @observe('_js2py_relayout')
     def _handler_js2py_relayout(self, change):
@@ -803,8 +803,8 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
 
         # Perform relayout
         # ----------------
-        self.plotly_relayout(relayout_data=relayout_data,
-                             source_view_id=source_view_id)
+        self._plotly_relayout(relayout_data=relayout_data,
+                              source_view_id=source_view_id)
 
     @observe('_js2py_pointsCallback')
     def _handler_js2py_pointsCallback(self, change):

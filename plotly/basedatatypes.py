@@ -464,11 +464,9 @@ class BaseFigure:
 
     # Restyle
     # -------
-    def plotly_restyle(self, restyle_data, trace_indexes=None, **kwargs):
+    def _plotly_restyle(self, restyle_data, trace_indexes=None, **kwargs):
         """
         Perform a Plotly restyle operation on the figure's traces
-
-        Note: This operation both mutates and returns the figure
 
         Parameters
         ----------
@@ -492,7 +490,7 @@ class BaseFigure:
             example, the following command would be used to update the 'x'
             property of the first trace to the list [1, 2, 3]
 
-            >>> fig.plotly_restyle({'x': [[1, 2, 3]]}, 0)
+            >>> fig._plotly_restyle({'x': [[1, 2, 3]]}, 0)
 
         trace_indexes : int or list of int
             Trace index, or list of trace indexes, that the restyle operation
@@ -500,8 +498,19 @@ class BaseFigure:
 
         Returns
         -------
-        BaseFigure
-            The updated figure
+        None
+
+        Notes
+        -----
+        This method is does not create new graph_obj objects in the figure
+        hierarchy. Some things that can go wrong...
+
+          1) ``_plotly_restyle({'dimensions[2].values': [0, 1, 2]})``
+          For a ``parcoords`` trace that has not been intialized with at
+          least 3 dimensions.
+
+        This isn't a problem for style operations originating from the
+        front-end, but should be addressed before making this method public.
         """
 
         # Normalize trace indexes
@@ -531,8 +540,6 @@ class BaseFigure:
 
             self._dispatch_trace_change_callbacks(
                 restyle_changes, trace_indexes)
-
-        return self
 
     def _perform_plotly_restyle(self, restyle_data, trace_indexes):
         """
@@ -1248,11 +1255,9 @@ Please use the add_trace method with the row and col parameters.
         # Notify JS side
         self._send_relayout_msg(new_layout_data)
 
-    def plotly_relayout(self, relayout_data, **kwargs):
+    def _plotly_relayout(self, relayout_data, **kwargs):
         """
         Perform a Plotly relayout operation on the figure's layout
-
-        Note: This operation both mutates and returns the figure
 
         Parameters
         ----------
@@ -1267,8 +1272,22 @@ Please use the add_trace method with the row and col parameters.
 
         Returns
         -------
-        BaseFigure
-            The update figure
+        None
+
+        Notes
+        -----
+        This method is does not create new graph_obj objects in the figure
+        hierarchy. Some things that can go wrong...
+
+          1) ``_plotly_relayout({'xaxis2.range': [0, 1]})``
+          If xaxis2 has not been initialized
+
+          2) ``_plotly_relayout({'images[2].source': 'http://...'})``
+          If the images array has not been initialized with at least 3
+          elements
+
+        This isn't a problem for relayout operations originating from the
+        front-end, but should be addressed before making this method public.
         """
 
         # Handle source_view_id
@@ -1295,8 +1314,6 @@ Please use the add_trace method with the row and col parameters.
                 relayout_changes, **msg_kwargs)
 
             self._dispatch_layout_change_callbacks(relayout_changes)
-
-        return self
 
     def _perform_plotly_relayout(self, relayout_data):
         """
@@ -1513,11 +1530,11 @@ Please use the add_trace method with the row and col parameters.
 
     # Update
     # ------
-    def plotly_update(self,
-                      restyle_data=None,
-                      relayout_data=None,
-                      trace_indexes=None,
-                      **kwargs):
+    def _plotly_update(self,
+                       restyle_data=None,
+                       relayout_data=None,
+                       trace_indexes=None,
+                       **kwargs):
         """
         Perform a Plotly update operation on the figure.
 
@@ -1538,7 +1555,13 @@ Please use the add_trace method with the row and col parameters.
         Returns
         -------
         BaseFigure
-            The updated figure
+            None
+
+        Notes
+        -----
+        This method is does not create new graph_obj objects in the figure
+        hierarchy. See notes for ``_plotly_relayout`` and
+        ``_plotly_restyle`` for examples.
         """
 
         # Handle source_view_id
@@ -1582,8 +1605,6 @@ Please use the add_trace method with the row and col parameters.
         # ### Dispatch relayout changes ###
         if relayout_changes:
             self._dispatch_layout_change_callbacks(relayout_changes)
-
-        return self
 
     def _perform_plotly_update(self, restyle_data=None, relayout_data=None,
                                trace_indexes=None):
@@ -1703,7 +1724,7 @@ Please use the add_trace method with the row and col parameters.
                  trace_indexes) = self._build_update_params_from_batch()
 
                 # ### Call plotly_update ###
-                self.plotly_update(
+                self._plotly_update(
                     restyle_data=restyle_data,
                     relayout_data=relayout_data,
                     trace_indexes=trace_indexes)
