@@ -3,7 +3,7 @@ from mock import MagicMock
 import plotly.graph_objs as go
 
 
-class TestPropertyAssignment(TestCase):
+class TestRestyleMessage(TestCase):
 
     def setUp(self):
         # Construct with mocked _send_restyle_msg method
@@ -12,6 +12,8 @@ class TestPropertyAssignment(TestCase):
             go.Bar(),
             go.Parcoords(dimensions=[{}, {'label': 'dim 2'}, {}])
         ])
+
+        # Mock out the message method
         self.figure._send_restyle_msg = MagicMock()
 
     def test_property_assignment_toplevel(self):

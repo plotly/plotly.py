@@ -1,10 +1,9 @@
 from unittest import TestCase
 from mock import MagicMock
 import plotly.graph_objs as go
-from plotly.basedatatypes import Undefined
 
 
-class TestBatchAnimate(TestCase):
+class TestBatchAnimateMessage(TestCase):
     def setUp(self):
         # Construct initial scatter object
         self.figure = go.Figure(data=[
@@ -15,7 +14,7 @@ class TestBatchAnimate(TestCase):
                                     layout={'yaxis':
                                             {'title': 'f1'}})])
 
-        # Mock out the _send_animate_msg method
+        # Mock out the message method
         self.figure._send_animate_msg = MagicMock()
 
     def test_batch_animate(self):
