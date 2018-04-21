@@ -44,6 +44,38 @@ class TestFigureProperties(TestCase):
         self.assertEqual(self.figure.layout, self.figure['layout'])
         self.assertEqual(self.figure.frames, self.figure['frames'])
 
+    def test_property_assignment_tuple(self):
+
+        # Empty
+        self.assertIs(self.figure[()], self.figure)
+
+        # Layout
+        self.figure[('layout', 'xaxis', 'range')] = (-10, 10)
+        self.assertEqual(self.figure[('layout', 'xaxis', 'range')], (-10, 10))
+
+        # Data
+        self.figure[('data', 0, 'marker', 'color')] = 'red'
+        self.assertEqual(self.figure[('data', 0, 'marker', 'color')], 'red')
+
+        # Frames
+        self.figure[('frames', 0, 'layout', 'yaxis', 'title')] = 'f2'
+        self.assertEqual(
+            self.figure[('frames', 0, 'layout', 'yaxis', 'title')], 'f2')
+
+    def test_property_assignment_dots(self):
+        # Layout
+        self.figure['layout.xaxis.range'] = (-10, 10)
+        self.assertEqual(self.figure['layout.xaxis.range'], (-10, 10))
+
+        # Data
+        self.figure['data.0.marker.color'] = 'red'
+        self.assertEqual(self.figure['data[0].marker.color'], 'red')
+
+        # Frames
+        self.figure['frames[0].layout.yaxis.title'] = 'f2'
+        self.assertEqual(
+            self.figure['frames.0.layout.yaxis.title'], 'f2')
+
     def test_update_layout(self):
         # Check initial x-range
         self.assertEqual(self.figure.layout.xaxis.range, (-1, 4))

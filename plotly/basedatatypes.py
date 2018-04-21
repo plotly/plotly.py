@@ -207,14 +207,43 @@ class BaseFigure:
     # Magic Methods
     # -------------
     def __setitem__(self, prop, value):
-        if prop == 'data':
-            self.data = value
-        elif prop == 'layout':
-            self.layout = value
-        elif prop == 'frames':
-            self.frames = value
+
+        # Normalize prop
+        # --------------
+        # Convert into a property tuple
+        orig_prop = prop
+        prop = BaseFigure._str_to_dict_path(prop)
+
+        # Handle empty case
+        # -----------------
+        if len(prop) == 0:
+            raise KeyError(orig_prop)
+
+        # Handle scalar case
+        # ------------------
+        # e.g. ('foo',)
+        elif len(prop) == 1:
+            # ### Unwrap scalar tuple ###
+            prop = prop[0]
+
+            if prop == 'data':
+                self.data = value
+            elif prop == 'layout':
+                self.layout = value
+            elif prop == 'frames':
+                self.frames = value
+            else:
+                raise KeyError(prop)
+
+        # Handle non-scalar case
+        # ----------------------
+        # e.g. ('foo', 1)
         else:
-            raise KeyError(prop)
+            res = self
+            for p in prop[:-1]:
+                res = res[p]
+
+            res[prop[-1]] = value
 
     def __setattr__(self, prop, value):
         """
@@ -236,14 +265,38 @@ class BaseFigure:
             raise AttributeError(prop)
 
     def __getitem__(self, prop):
-        if prop == 'data':
-            return self._data_validator.present(self._data_objs)
-        elif prop == 'layout':
-            return self._layout_validator.present(self._layout_obj)
-        elif prop == 'frames':
-            return self._frames_validator.present(self._frame_objs)
+
+        # Normalize prop
+        # --------------
+        # Convert into a property tuple
+        orig_prop = prop
+        prop = BaseFigure._str_to_dict_path(prop)
+
+        # Handle scalar case
+        # ------------------
+        # e.g. ('foo',)
+        if len(prop) == 1:
+            # Unwrap scalar tuple
+            prop = prop[0]
+
+            if prop == 'data':
+                return self._data_validator.present(self._data_objs)
+            elif prop == 'layout':
+                return self._layout_validator.present(self._layout_obj)
+            elif prop == 'frames':
+                return self._frames_validator.present(self._frame_objs)
+            else:
+                raise KeyError(orig_prop)
+
+        # Handle non-scalar case
+        # ----------------------
+        # e.g. ('foo', 1)
         else:
-            raise KeyError(prop)
+            res = self
+            for p in prop:
+                res = res[p]
+
+            return res
 
     def __iter__(self):
         return iter(('data', 'layout', 'frames'))
