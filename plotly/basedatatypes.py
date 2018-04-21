@@ -216,6 +216,25 @@ class BaseFigure:
         else:
             raise KeyError(prop)
 
+    def __setattr__(self, prop, value):
+        """
+        Parameters
+        ----------
+        prop : str
+            The name of a direct child of this object
+        value
+            New property value
+        Returns
+        -------
+        None
+        """
+        if prop.startswith('_') or hasattr(self, prop):
+            # Let known properties and private properties through
+            super().__setattr__(prop, value)
+        else:
+            # Raise error on unknown public properties
+            raise AttributeError(prop)
+
     def __getitem__(self, prop):
         if prop == 'data':
             return self._data_validator.present(self._data_objs)
@@ -1477,7 +1496,7 @@ Please use the add_trace method with the row and col parameters.
 
         Returns
         -------
-        tuple[BaseFrameHierarchyType]
+        tuple[plotly.graph_objs.Frame]
         """
         return self['frames']
 
