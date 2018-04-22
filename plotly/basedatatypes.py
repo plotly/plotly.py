@@ -3193,6 +3193,16 @@ class BasePlotlyType:
         None
         """
 
+        # Warn if object not descendent of a figure
+        # -----------------------------------------
+        if not self.figure:
+            class_name = self.__class__.__name__
+            msg = """
+{class_name} object is not a descendant of a Figure.
+on_change callbacks are not supported in this case.
+""".format(class_name=class_name)
+            raise ValueError(msg)
+
         # Validate args not empty
         # -----------------------
         if len(args) == 0:
