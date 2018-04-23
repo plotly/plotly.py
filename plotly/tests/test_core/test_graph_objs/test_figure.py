@@ -2,7 +2,6 @@ from __future__ import absolute_import
 
 from unittest import TestCase
 
-from plotly import exceptions
 from plotly.graph_objs import Figure
 
 
@@ -33,5 +32,7 @@ class FigureTest(TestCase):
 
         figure = Figure()
         figure.frames = [{}]
+
         with self.assertRaisesRegexp(ValueError, 'frames'):
+            figure.to_plotly_json()['frames'][0]['frames'] = []
             figure.frames[0].frames = []

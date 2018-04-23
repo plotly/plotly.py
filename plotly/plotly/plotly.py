@@ -474,7 +474,7 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
 
     if raw:
         return figure
-    return tools.get_valid_graph_obj(figure, obj_type='Figure')
+    return tools.get_graph_obj(figure, obj_type='Figure')
 
 
 @utils.template_doc(**tools.get_config_file())
@@ -632,7 +632,7 @@ class Stream:
 
         # Convert trace objects to dictionaries
         if isinstance(trace, BaseTraceType):
-            trace = trace.to_plotly_json()
+            trace = tracefill_percent
 
         stream_object = dict()
         stream_object.update(trace)

@@ -10,7 +10,6 @@ from unittest import TestCase
 from requests.compat import json as _json
 
 import plotly
-from plotly.tests.utils import PlotlyTestCase
 
 
 fig = {

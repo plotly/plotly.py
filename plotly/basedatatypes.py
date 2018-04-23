@@ -3,7 +3,7 @@ import re
 import typing as typ
 import warnings
 from contextlib import contextmanager
-from copy import deepcopy
+from copy import deepcopy, copy
 from pprint import PrettyPrinter
 from typing import Dict, Tuple, Union, Callable, List
 
@@ -207,24 +207,96 @@ class BaseFigure:
     # Magic Methods
     # -------------
     def __setitem__(self, prop, value):
-        if prop == 'data':
-            self.data = value
-        elif prop == 'layout':
-            self.layout = value
-        elif prop == 'frames':
-            self.frames = value
+
+        # Normalize prop
+        # --------------
+        # Convert into a property tuple
+        orig_prop = prop
+        prop = BaseFigure._str_to_dict_path(prop)
+
+        # Handle empty case
+        # -----------------
+        if len(prop) == 0:
+            raise KeyError(orig_prop)
+
+        # Handle scalar case
+        # ------------------
+        # e.g. ('foo',)
+        elif len(prop) == 1:
+            # ### Unwrap scalar tuple ###
+            prop = prop[0]
+
+            if prop == 'data':
+                self.data = value
+            elif prop == 'layout':
+                self.layout = value
+            elif prop == 'frames':
+                self.frames = value
+            else:
+                raise KeyError(prop)
+
+        # Handle non-scalar case
+        # ----------------------
+        # e.g. ('foo', 1)
         else:
-            raise KeyError(prop)
+            res = self
+            for p in prop[:-1]:
+                res = res[p]
+
+            res[prop[-1]] = value
+
+    def __setattr__(self, prop, value):
+        """
+        Parameters
+        ----------
+        prop : str
+            The name of a direct child of this object
+        value
+            New property value
+        Returns
+        -------
+        None
+        """
+        if prop.startswith('_') or hasattr(self, prop):
+            # Let known properties and private properties through
+            super().__setattr__(prop, value)
+        else:
+            # Raise error on unknown public properties
+            raise AttributeError(prop)
 
     def __getitem__(self, prop):
-        if prop == 'data':
-            return self._data_validator.present(self._data_objs)
-        elif prop == 'layout':
-            return self._layout_validator.present(self._layout_obj)
-        elif prop == 'frames':
-            return self._frames_validator.present(self._frame_objs)
+
+        # Normalize prop
+        # --------------
+        # Convert into a property tuple
+        orig_prop = prop
+        prop = BaseFigure._str_to_dict_path(prop)
+
+        # Handle scalar case
+        # ------------------
+        # e.g. ('foo',)
+        if len(prop) == 1:
+            # Unwrap scalar tuple
+            prop = prop[0]
+
+            if prop == 'data':
+                return self._data_validator.present(self._data_objs)
+            elif prop == 'layout':
+                return self._layout_validator.present(self._layout_obj)
+            elif prop == 'frames':
+                return self._frames_validator.present(self._frame_objs)
+            else:
+                raise KeyError(orig_prop)
+
+        # Handle non-scalar case
+        # ----------------------
+        # e.g. ('foo', 1)
         else:
-            raise KeyError(prop)
+            res = self
+            for p in prop:
+                res = res[p]
+
+            return res
 
     def __iter__(self):
         return iter(('data', 'layout', 'frames'))
@@ -445,11 +517,9 @@ class BaseFigure:
 
     # Restyle
     # -------
-    def plotly_restyle(self, restyle_data, trace_indexes=None, **kwargs):
+    def _plotly_restyle(self, restyle_data, trace_indexes=None, **kwargs):
         """
         Perform a Plotly restyle operation on the figure's traces
-
-        Note: This operation both mutates and returns the figure
 
         Parameters
         ----------
@@ -473,7 +543,7 @@ class BaseFigure:
             example, the following command would be used to update the 'x'
             property of the first trace to the list [1, 2, 3]
 
-            >>> fig.plotly_restyle({'x': [[1, 2, 3]]}, 0)
+            >>> fig._plotly_restyle({'x': [[1, 2, 3]]}, 0)
 
         trace_indexes : int or list of int
             Trace index, or list of trace indexes, that the restyle operation
@@ -481,8 +551,19 @@ class BaseFigure:
 
         Returns
         -------
-        BaseFigure
-            The updated figure
+        None
+
+        Notes
+        -----
+        This method is does not create new graph_obj objects in the figure
+        hierarchy. Some things that can go wrong...
+
+          1) ``_plotly_restyle({'dimensions[2].values': [0, 1, 2]})``
+          For a ``parcoords`` trace that has not been intialized with at
+          least 3 dimensions.
+
+        This isn't a problem for style operations originating from the
+        front-end, but should be addressed before making this method public.
         """
 
         # Normalize trace indexes
@@ -512,8 +593,6 @@ class BaseFigure:
 
             self._dispatch_trace_change_callbacks(
                 restyle_changes, trace_indexes)
-
-        return self
 
     def _perform_plotly_restyle(self, restyle_data, trace_indexes):
         """
@@ -1229,11 +1308,9 @@ Please use the add_trace method with the row and col parameters.
         # Notify JS side
         self._send_relayout_msg(new_layout_data)
 
-    def plotly_relayout(self, relayout_data, **kwargs):
+    def _plotly_relayout(self, relayout_data, **kwargs):
         """
         Perform a Plotly relayout operation on the figure's layout
-
-        Note: This operation both mutates and returns the figure
 
         Parameters
         ----------
@@ -1248,8 +1325,22 @@ Please use the add_trace method with the row and col parameters.
 
         Returns
         -------
-        BaseFigure
-            The update figure
+        None
+
+        Notes
+        -----
+        This method is does not create new graph_obj objects in the figure
+        hierarchy. Some things that can go wrong...
+
+          1) ``_plotly_relayout({'xaxis2.range': [0, 1]})``
+          If xaxis2 has not been initialized
+
+          2) ``_plotly_relayout({'images[2].source': 'http://...'})``
+          If the images array has not been initialized with at least 3
+          elements
+
+        This isn't a problem for relayout operations originating from the
+        front-end, but should be addressed before making this method public.
         """
 
         # Handle source_view_id
@@ -1260,7 +1351,10 @@ Please use the add_trace method with the row and col parameters.
         # from zoom to pan). We pass this UID along so that the frontend
         # views can determine whether they need to apply the relayout
         # operation on themselves.
-        source_view_id = kwargs.get('source_view_id', None)
+        if 'source_view_id' in kwargs:
+            msg_kwargs = {'source_view_id': kwargs['source_view_id']}
+        else:
+            msg_kwargs = {}
 
         # Perform relayout operation on layout dict
         # -----------------------------------------
@@ -1270,12 +1364,9 @@ Please use the add_trace method with the row and col parameters.
             # properties, so we dispatch change callbacks and send the
             # relayout message to the frontend (if any)
             self._send_relayout_msg(
-                relayout_changes,
-                source_view_id=source_view_id)
+                relayout_changes, **msg_kwargs)
 
             self._dispatch_layout_change_callbacks(relayout_changes)
-
-        return self
 
     def _perform_plotly_relayout(self, relayout_data):
         """
@@ -1477,7 +1568,7 @@ Please use the add_trace method with the row and col parameters.
 
         Returns
         -------
-        tuple[BaseFrameHierarchyType]
+        tuple[plotly.graph_objs.Frame]
         """
         return self['frames']
 
@@ -1492,11 +1583,11 @@ Please use the add_trace method with the row and col parameters.
 
     # Update
     # ------
-    def plotly_update(self,
-                      restyle_data=None,
-                      relayout_data=None,
-                      trace_indexes=None,
-                      **kwargs):
+    def _plotly_update(self,
+                       restyle_data=None,
+                       relayout_data=None,
+                       trace_indexes=None,
+                       **kwargs):
         """
         Perform a Plotly update operation on the figure.
 
@@ -1517,7 +1608,13 @@ Please use the add_trace method with the row and col parameters.
         Returns
         -------
         BaseFigure
-            The updated figure
+            None
+
+        Notes
+        -----
+        This method is does not create new graph_obj objects in the figure
+        hierarchy. See notes for ``_plotly_relayout`` and
+        ``_plotly_restyle`` for examples.
         """
 
         # Handle source_view_id
@@ -1528,7 +1625,10 @@ Please use the add_trace method with the row and col parameters.
         # operation). We pass this UID along so that the frontend views can
         # determine whether they need to apply the update operation on
         # themselves.
-        source_view_id = kwargs.get('source_view_id', None)
+        if 'source_view_id' in kwargs:
+            msg_kwargs = {'source_view_id': kwargs['source_view_id']}
+        else:
+            msg_kwargs = {}
 
         # Perform update operation
         # ------------------------
@@ -1546,10 +1646,10 @@ Please use the add_trace method with the row and col parameters.
         # Send a plotly_update message to the frontend (if any)
         if restyle_changes or relayout_changes:
             self._send_update_msg(
-                restyle_changes,
-                relayout_changes,
-                trace_indexes,
-                source_view_id=source_view_id)
+                style=restyle_changes,
+                layout=relayout_changes,
+                trace_indexes=trace_indexes,
+                **msg_kwargs)
 
         # Dispatch changes
         # ----------------
@@ -1561,8 +1661,6 @@ Please use the add_trace method with the row and col parameters.
         # ### Dispatch relayout changes ###
         if relayout_changes:
             self._dispatch_layout_change_callbacks(relayout_changes)
-
-        return self
 
     def _perform_plotly_update(self, restyle_data=None, relayout_data=None,
                                trace_indexes=None):
@@ -1682,7 +1780,7 @@ Please use the add_trace method with the row and col parameters.
                  trace_indexes) = self._build_update_params_from_batch()
 
                 # ### Call plotly_update ###
-                self.plotly_update(
+                self._plotly_update(
                     restyle_data=restyle_data,
                     relayout_data=relayout_data,
                     trace_indexes=trace_indexes)
@@ -1870,16 +1968,16 @@ Please use the add_trace method with the row and col parameters.
         else:
             animate_styles, animate_trace_indexes = {}, []
 
-        animate_layout = self._batch_layout_edits
+        animate_layout = copy(self._batch_layout_edits)
 
         # Send animate message
         # --------------------
         # Sends animate message to the front end (if any)
         self._send_animate_msg(
-            list(animate_styles),
-            animate_layout,
-            list(animate_trace_indexes),
-            animation_opts)
+            styles=list(animate_styles),
+            layout=animate_layout,
+            trace_indexes=list(animate_trace_indexes),
+            animation_opts=animation_opts)
 
         # Clear batched commands
         # ----------------------
@@ -2018,24 +2116,32 @@ Please use the add_trace method with the row and col parameters.
                 validator = plotly_obj._validators[key]
 
                 if isinstance(validator, CompoundValidator):
+
                     # Update compound objects recursively
-                    plotly_obj[key].update(val)
+                    # plotly_obj[key].update(val)
+                    BaseFigure._perform_update(
+                        plotly_obj[key], val)
+                elif isinstance(validator, CompoundArrayValidator):
+                    BaseFigure._perform_update(
+                        plotly_obj[key], val)
                 else:
                     # Assign non-compound value
                     plotly_obj[key] = val
 
         elif isinstance(plotly_obj, tuple):
 
-            # If update_obj is a dict, wrap in a list
-            if not isinstance(update_obj, (tuple, list)):
-                update_obj = [update_obj]
-
             if len(update_obj) == 0:
                 # Nothing to do
                 return
             else:
                 for i, plotly_element in enumerate(plotly_obj):
-                    update_element = update_obj[i % len(update_obj)]
+                    if isinstance(update_obj, dict):
+                        if i in update_obj:
+                            update_element = update_obj[i]
+                        else:
+                            continue
+                    else:
+                        update_element = update_obj[i % len(update_obj)]
                     BaseFigure._perform_update(plotly_element, update_element)
         else:
             raise ValueError('Unexpected plotly object with type {typ}'
@@ -2412,8 +2518,7 @@ class BasePlotlyType:
         if len(prop) == 1:
             # Unwrap scalar tuple
             prop = prop[0]
-            if (prop not in self._validators and prop not in self._props
-                    and prop not in self._prop_defaults):
+            if prop not in self._validators:
                 raise KeyError(prop)
 
             validator = self._validators[prop]
@@ -2493,30 +2598,55 @@ class BasePlotlyType:
         -------
         None
         """
-        # Validate prop
-        # -------------
-        if prop not in self._validators:
-            self._raise_on_invalid_property_error(prop)
 
-        # Get validator for this property
-        # -------------------------------
-        validator = self._validators[prop]
+        # Normalize prop
+        # --------------
+        # Convert into a property tuple
+        orig_prop = prop
+        prop = BaseFigure._str_to_dict_path(prop)
 
-        # Handle compound property
-        # ------------------------
-        if isinstance(validator, CompoundValidator):
-            self._set_compound_prop(prop, value)
+        # Handle empty case
+        # -----------------
+        if len(prop) == 0:
+            raise KeyError(orig_prop)
 
-        # Handle compound array property
-        # ------------------------------
-        elif isinstance(validator,
-                        (CompoundArrayValidator, BaseDataValidator)):
-            self._set_array_prop(prop, value)
+        # Handle scalar case
+        # ------------------
+        # e.g. ('foo',)
+        if len(prop) == 1:
 
-        # Handle simple property
+            # ### Unwrap scalar tuple ###
+            prop = prop[0]
+
+            # ### Validate prop ###
+            if prop not in self._validators:
+                self._raise_on_invalid_property_error(prop)
+
+            # ### Get validator for this property ###
+            validator = self._validators[prop]
+
+            # ### Handle compound property ###
+            if isinstance(validator, CompoundValidator):
+                self._set_compound_prop(prop, value)
+
+            # ### Handle compound array property ###
+            elif isinstance(validator,
+                            (CompoundArrayValidator, BaseDataValidator)):
+                self._set_array_prop(prop, value)
+
+            # ### Handle simple property ###
+            else:
+                self._set_prop(prop, value)
+
+        # Handle non-scalar case
         # ----------------------
+        # e.g. ('foo', 1), ()
         else:
-            self._set_prop(prop, value)
+            res = self
+            for p in prop[:-1]:
+                res = res[p]
+
+            res[prop[-1]] = value
 
     def __setattr__(self, prop, value):
         """
@@ -2569,8 +2699,9 @@ class BasePlotlyType:
 
             # Use _vals_equal instead of `==` to handle cases where
             # underlying dicts contain numpy arrays
-            return BasePlotlyType._vals_equal(self._props,
-                                              other._props)
+            return BasePlotlyType._vals_equal(
+                self._props if self._props is not None else {},
+                other._props if other._props is not None else {})
 
     @staticmethod
     def _build_repr_for_class(props, class_name, parent_path_str=None):
@@ -2594,14 +2725,17 @@ class BasePlotlyType:
         if parent_path_str:
             class_name = parent_path_str + '.' + class_name
 
-        pprinter = ElidedPrettyPrinter(threshold=200, width=120)
-        pprint_res = pprinter.pformat(props)
+        if len(props) == 0:
+            repr_str = class_name + '()'
+        else:
+            pprinter = ElidedPrettyPrinter(threshold=200, width=120)
+            pprint_res = pprinter.pformat(props)
 
-        # pprint_res is indented by 1 space. Add extra 3 spaces for PEP8
-        # complaint indent
-        body = '   ' + pprint_res[1:-1].replace('\n', '\n   ')
+            # pprint_res is indented by 1 space. Add extra 3 spaces for PEP8
+            # complaint indent
+            body = '   ' + pprint_res[1:-1].replace('\n', '\n   ')
 
-        repr_str = class_name + '(**{\n ' + body + '\n})'
+            repr_str = class_name + '(**{\n ' + body + '\n})'
 
         return repr_str
 
@@ -2611,7 +2745,7 @@ class BasePlotlyType:
         terminal/notebook
         """
         repr_str = BasePlotlyType._build_repr_for_class(
-            props=self._props,
+            props=self._props if self._props is not None else {},
             class_name=self.__class__.__name__,
             parent_path_str=self._parent_path_str)
 
@@ -3095,7 +3229,7 @@ class BasePlotlyType:
         -------
         dict
         """
-        return deepcopy(self._props)
+        return deepcopy(self._props if self._props is not None else {})
 
     @staticmethod
     def _vals_equal(v1, v2):
@@ -3357,6 +3491,17 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         """
         Custom __setitem__ that handles dynamic subplot properties
         """
+        # Convert prop to prop tuple
+        # --------------------------
+        prop_tuple = BaseFigure._str_to_dict_path(prop)
+        if len(prop_tuple) != 1 or not isinstance(prop_tuple[0], str):
+            # Let parent handle non-scalar non-string cases
+            super().__setitem__(prop, value)
+            return
+        else:
+            # Unwrap prop tuple
+            prop = prop_tuple[0]
+
         # Check for subplot assignment
         # ----------------------------
         match = self._subplotid_prop_re.fullmatch(prop)

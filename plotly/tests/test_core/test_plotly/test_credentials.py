@@ -1,12 +1,18 @@
 from __future__ import absolute_import
 
-from mock import patch
-
 import plotly.plotly.plotly as py
 import plotly.session as session
 import plotly.tools as tls
 from plotly import exceptions
 from plotly.tests.utils import PlotlyTestCase
+
+import sys
+
+# import from mock
+if sys.version_info.major == 3 and sys.version_info.minor >= 3:
+    from unittest.mock import patch
+else:
+    from mock import patch
 
 
 class TestSignIn(PlotlyTestCase):
