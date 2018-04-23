@@ -517,7 +517,7 @@ class BaseFigure:
 
     # Restyle
     # -------
-    def _plotly_restyle(self, restyle_data, trace_indexes=None, **kwargs):
+    def plotly_restyle(self, restyle_data, trace_indexes=None, **kwargs):
         """
         Perform a Plotly restyle operation on the figure's traces
 
@@ -543,7 +543,7 @@ class BaseFigure:
             example, the following command would be used to update the 'x'
             property of the first trace to the list [1, 2, 3]
 
-            >>> fig._plotly_restyle({'x': [[1, 2, 3]]}, 0)
+            >>> fig.plotly_restyle({'x': [[1, 2, 3]]}, 0)
 
         trace_indexes : int or list of int
             Trace index, or list of trace indexes, that the restyle operation
@@ -552,18 +552,6 @@ class BaseFigure:
         Returns
         -------
         None
-
-        Notes
-        -----
-        This method is does not create new graph_obj objects in the figure
-        hierarchy. Some things that can go wrong...
-
-          1) ``_plotly_restyle({'dimensions[2].values': [0, 1, 2]})``
-          For a ``parcoords`` trace that has not been intialized with at
-          least 3 dimensions.
-
-        This isn't a problem for style operations originating from the
-        front-end, but should be addressed before making this method public.
         """
 
         # Normalize trace indexes
@@ -581,15 +569,20 @@ class BaseFigure:
 
         # Perform restyle on trace dicts
         # ------------------------------
-        restyle_changes = self._perform_plotly_restyle(restyle_data, trace_indexes)
+        restyle_changes = self._perform_plotly_restyle(restyle_data,
+                                                       trace_indexes)
         if restyle_changes:
             # The restyle operation resulted in a change to some trace
             # properties, so we dispatch change callbacks and send the
             # restyle message to the frontend (if any)
+            msg_kwargs = ({'source_view_id': source_view_id}
+                          if source_view_id is not None
+                          else {})
+
             self._send_restyle_msg(
                 restyle_changes,
                 trace_indexes=trace_indexes,
-                source_view_id=source_view_id)
+                **msg_kwargs)
 
             self._dispatch_trace_change_callbacks(
                 restyle_changes, trace_indexes)
@@ -633,17 +626,29 @@ class BaseFigure:
                 # Get new value for this particular trace
                 trace_v = v[i % len(v)] if isinstance(v, list) else v
 
-                # Apply set operation for this trace and thist value
-                val_changed = BaseFigure._set_in(self._data[trace_ind],
-                                                 key_path_str,
-                                                 trace_v)
+                if trace_v is not Undefined:
 
-                # Update any_vals_changed status
-                any_vals_changed = (any_vals_changed or val_changed)
+                    # Get trace being updated
+                    trace_obj = self.data[trace_ind]
+
+                    # Validate key_path_str
+                    if not BaseFigure._is_key_path_compatible(
+                            key_path_str, trace_obj):
+
+                        trace_class = trace_obj.__class__.__name__
+                        raise ValueError("""
+Invalid property path '{key_path_str}' for trace class {trace_class}
+""".format(key_path_str=key_path_str, trace_class=trace_class))
+
+                    # Apply set operation for this trace and thist value
+                    val_changed = BaseFigure._set_in(self._data[trace_ind],
+                                                     key_path_str,
+                                                     trace_v)
+
+                    # Update any_vals_changed status
+                    any_vals_changed = (any_vals_changed or val_changed)
 
             if any_vals_changed:
-                # At lease one of the values for one of the traces has
-                # changed for the current key_path_str.
                 restyle_changes[key_path_str] = v
 
         return restyle_changes
@@ -1308,7 +1313,7 @@ Please use the add_trace method with the row and col parameters.
         # Notify JS side
         self._send_relayout_msg(new_layout_data)
 
-    def _plotly_relayout(self, relayout_data, **kwargs):
+    def plotly_relayout(self, relayout_data, **kwargs):
         """
         Perform a Plotly relayout operation on the figure's layout
 
@@ -1326,21 +1331,6 @@ Please use the add_trace method with the row and col parameters.
         Returns
         -------
         None
-
-        Notes
-        -----
-        This method is does not create new graph_obj objects in the figure
-        hierarchy. Some things that can go wrong...
-
-          1) ``_plotly_relayout({'xaxis2.range': [0, 1]})``
-          If xaxis2 has not been initialized
-
-          2) ``_plotly_relayout({'images[2].source': 'http://...'})``
-          If the images array has not been initialized with at least 3
-          elements
-
-        This isn't a problem for relayout operations originating from the
-        front-end, but should be addressed before making this method public.
         """
 
         # Handle source_view_id
@@ -1393,14 +1383,42 @@ Please use the add_trace method with the row and col parameters.
         # ----------------
         for key_path_str, v in relayout_data.items():
 
+            if not BaseFigure._is_key_path_compatible(
+                    key_path_str, self.layout):
+
+                raise ValueError("""
+Invalid property path '{key_path_str}' for layout
+""".format(key_path_str=key_path_str))
+
             # Apply set operation on the layout dict
             val_changed = BaseFigure._set_in(self._layout, key_path_str, v)
 
             if val_changed:
-                # Save operation to changed dict
                 relayout_changes[key_path_str] = v
 
         return relayout_changes
+
+    @staticmethod
+    def _is_key_path_compatible(key_path_str, plotly_obj):
+        """
+        Return whether the specifieid key path string is compatible with
+        the specified plotly object for the purpose of relayout/restyle
+        operation
+        """
+
+        # Convert string to tuple of path components
+        # e.g. 'foo[0].bar[1]' -> ('foo', 0, 'bar', 1)
+        key_path_tuple = BaseFigure._str_to_dict_path(key_path_str)
+
+        # Remove trailing integer component
+        # e.g. ('foo', 0, 'bar', 1) -> ('foo', 0, 'bar')
+        # We do this because it's fine for relayout/restyle to create new
+        # elements in the final array in the path.
+        if isinstance(key_path_tuple[-1], int):
+            key_path_tuple = key_path_tuple[:-1]
+
+        # Test whether modified key path tuple is in plotly_obj
+        return key_path_tuple in plotly_obj
 
     def _relayout_child(self, child, key_path_str, val):
         """
@@ -1583,11 +1601,11 @@ Please use the add_trace method with the row and col parameters.
 
     # Update
     # ------
-    def _plotly_update(self,
-                       restyle_data=None,
-                       relayout_data=None,
-                       trace_indexes=None,
-                       **kwargs):
+    def plotly_update(self,
+                      restyle_data=None,
+                      relayout_data=None,
+                      trace_indexes=None,
+                      **kwargs):
         """
         Perform a Plotly update operation on the figure.
 
@@ -1609,12 +1627,6 @@ Please use the add_trace method with the row and col parameters.
         -------
         BaseFigure
             None
-
-        Notes
-        -----
-        This method is does not create new graph_obj objects in the figure
-        hierarchy. See notes for ``_plotly_relayout`` and
-        ``_plotly_restyle`` for examples.
         """
 
         # Handle source_view_id
@@ -1780,7 +1792,7 @@ Please use the add_trace method with the row and col parameters.
                  trace_indexes) = self._build_update_params_from_batch()
 
                 # ### Call plotly_update ###
-                self._plotly_update(
+                self.plotly_update(
                     restyle_data=restyle_data,
                     relayout_data=relayout_data,
                     trace_indexes=trace_indexes)
