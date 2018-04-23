@@ -160,7 +160,7 @@ def trisurf(x, y, z, simplices, show_colorbar, edges_color, scale,
                 color=[min_mean_dists, max_mean_dists],
                 colorscale=colorscale,
                 showscale=True),
-            hoverinfo='None',
+            hoverinfo='none',
             showlegend=False
         )
 
