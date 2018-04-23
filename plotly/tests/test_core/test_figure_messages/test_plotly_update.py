@@ -1,5 +1,7 @@
 from unittest import TestCase
 from mock import MagicMock
+from nose.tools import raises
+
 import plotly.graph_objs as go
 from plotly.basedatatypes import Undefined
 
@@ -39,6 +41,26 @@ class TestBatchUpdateMessage(TestCase):
 
             # Expect the frame update to be applied immediately
             self.assertEqual(self.figure.frames[0].layout.yaxis.title, 'f2')
+
+        # Make sure that trace/layout assignments have been applied after
+        # context exits
+        self.assertEqual(self.figure.data[0].marker.color, 'yellow')
+        self.assertEqual(self.figure.data[1].marker.opacity, 0.9)
+        self.assertEqual(self.figure.layout.xaxis.range, (10, 20))
+
+        # Check that update message was sent
+        self.figure._send_update_msg.assert_called_once_with(
+            style={'marker.color': ['yellow', Undefined],
+                   'marker.opacity': [Undefined, 0.9]},
+            layout={'xaxis.range': [10, 20]},
+            trace_indexes=[0, 1])
+
+    def test_plotly_update(self):
+        self.figure.plotly_update(
+            restyle_data={'marker.color': ['yellow', Undefined],
+                          'marker.opacity': [Undefined, 0.9]},
+            relayout_data={'xaxis.range': [10, 20]},
+            trace_indexes=[0, 1])
 
         # Make sure that trace/layout assignments have been applied after
         # context exits

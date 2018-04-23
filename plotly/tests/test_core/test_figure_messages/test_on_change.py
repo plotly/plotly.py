@@ -215,3 +215,51 @@ class TestOnChangeCallbacks(TestCase):
                                          (-10, 10),
                                          (11, 22),
                                          1000)
+
+    def test_callback_on_plotly_relayout(self):
+        fn_range = MagicMock()
+        self.figure.layout.on_change(fn_range,
+                                     'xaxis.range',
+                                     'yaxis.range',
+                                     'width')
+
+        self.figure.plotly_relayout(
+            relayout_data={'xaxis.range': [-10, 10],
+                           'yaxis.range': [11, 22]})
+
+        fn_range.assert_called_once_with(self.figure.layout,
+                                         (-10, 10),
+                                         (11, 22),
+                                         1000)
+
+    def test_callback_on_plotly_restyle(self):
+        # Register callback if either 'x' or 'y' changes on first trace
+        fn = MagicMock()
+        self.figure.data[0].on_change(fn, 'x', 'y')
+
+        # Perform assignment on one of pthe properties
+        self.figure.plotly_restyle({'x': [[11, 22, 33],
+                                          [1, 11, 111]]},
+                                   trace_indexes=[0, 1])
+
+        # Check function called once with new value of x and old value of y
+        fn.assert_called_once_with(self.figure.data[0],
+                                   (11, 22, 33),
+                                   (3, 2, 1))
+
+    def test_callback_on_plotly_update(self):
+        fn_range = MagicMock()
+        self.figure.layout.on_change(fn_range,
+                                     'xaxis.range',
+                                     'yaxis.range',
+                                     'width')
+
+        self.figure.plotly_update(
+            restyle_data={'marker.color': 'blue'},
+            relayout_data={'xaxis.range': [-10, 10],
+                           'yaxis.range': [11, 22]})
+
+        fn_range.assert_called_once_with(self.figure.layout,
+                                         (-10, 10),
+                                         (11, 22),
+                                         1000)
