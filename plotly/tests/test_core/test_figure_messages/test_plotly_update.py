@@ -50,9 +50,9 @@ class TestBatchUpdateMessage(TestCase):
 
         # Check that update message was sent
         self.figure._send_update_msg.assert_called_once_with(
-            style={'marker.color': ['yellow', Undefined],
+            restyle_data={'marker.color': ['yellow', Undefined],
                    'marker.opacity': [Undefined, 0.9]},
-            layout={'xaxis.range': [10, 20]},
+            relayout_data={'xaxis.range': [10, 20]},
             trace_indexes=[0, 1])
 
     def test_plotly_update(self):
@@ -70,7 +70,7 @@ class TestBatchUpdateMessage(TestCase):
 
         # Check that update message was sent
         self.figure._send_update_msg.assert_called_once_with(
-            style={'marker.color': ['yellow', Undefined],
+            restyle_data={'marker.color': ['yellow', Undefined],
                    'marker.opacity': [Undefined, 0.9]},
-            layout={'xaxis.range': [10, 20]},
+            relayout_data={'xaxis.range': [10, 20]},
             trace_indexes=[0, 1])

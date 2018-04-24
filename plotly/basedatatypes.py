@@ -1658,8 +1658,8 @@ Invalid property path '{key_path_str}' for layout
         # Send a plotly_update message to the frontend (if any)
         if restyle_changes or relayout_changes:
             self._send_update_msg(
-                style=restyle_changes,
-                layout=relayout_changes,
+                restyle_data=restyle_changes,
+                relayout_data=relayout_changes,
                 trace_indexes=trace_indexes,
                 **msg_kwargs)
 
@@ -1725,13 +1725,17 @@ Invalid property path '{key_path_str}' for layout
         pass
 
     def _send_update_msg(self,
-                         style,
-                         layout,
+                         restyle_data,
+                         relayout_data,
                          trace_indexes=None,
                          source_view_id=None):
         pass
 
-    def _send_animate_msg(self, styles, layout, trace_indexes, animation_opts):
+    def _send_animate_msg(self,
+                          styles_data,
+                          relayout_data,
+                          trace_indexes,
+                          animation_opts):
         pass
 
     # Context managers
@@ -1986,8 +1990,8 @@ Invalid property path '{key_path_str}' for layout
         # --------------------
         # Sends animate message to the front end (if any)
         self._send_animate_msg(
-            styles=list(animate_styles),
-            layout=animate_layout,
+            styles_data=list(animate_styles),
+            relayout_data=animate_layout,
             trace_indexes=list(animate_trace_indexes),
             animation_opts=animation_opts)
 
