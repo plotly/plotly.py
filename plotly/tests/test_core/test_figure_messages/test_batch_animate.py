@@ -47,8 +47,8 @@ class TestBatchAnimateMessage(TestCase):
 
         # Check that update message was sent
         self.figure._send_animate_msg.assert_called_once_with(
-            styles=[{'marker.color': 'yellow'}, {'marker.opacity': 0.9}],
-            layout={'xaxis.range': [10, 20]},
+            styles_data=[{'marker.color': 'yellow'}, {'marker.opacity': 0.9}],
+            relayout_data={'xaxis.range': [10, 20]},
             trace_indexes=[0, 1],
             animation_opts={'transition': {'easing': 'elastic',
                                            'duration': 1200},

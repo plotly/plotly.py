@@ -76,6 +76,23 @@ class TestFigureProperties(TestCase):
         self.assertEqual(
             self.figure['frames.0.layout.yaxis.title'], 'f2')
 
+    @raises(AttributeError)
+    def test_access_invalid_attr(self):
+        self.figure.bogus
+
+    @raises(KeyError)
+    def test_access_invalid_item(self):
+        self.figure['bogus']
+
+    @raises(AttributeError)
+    def test_assign_invalid_attr(self):
+        self.figure.bogus = 'val'
+
+    @raises(KeyError)
+    def test_access_invalid_item(self):
+        self.figure['bogus'] = 'val'
+
+    # Update
     def test_update_layout(self):
         # Check initial x-range
         self.assertEqual(self.figure.layout.xaxis.range, (-1, 4))
@@ -121,18 +138,78 @@ class TestFigureProperties(TestCase):
                             [{'layout': {'yaxis': {'title': 'f4'}}}]})
         self.assertEqual(self.figure.frames[0].layout.yaxis.title, 'f4')
 
-    @raises(AttributeError)
-    def test_access_invalid_attr(self):
-        self.figure.bogus
+    @raises(ValueError)
+    def test_update_invalid_attr(self):
+        self.figure.layout.update({'xaxis': {'bogus': 32}})
 
-    @raises(KeyError)
-    def test_access_invalid_item(self):
-        self.figure['bogus']
+    # plotly_restyle
+    def test_plotly_restyle(self):
+        # Check initial marker color
+        self.assertEqual(self.figure.data[0].marker.color, 'green')
 
-    @raises(AttributeError)
-    def test_assign_invalid_attr(self):
-        self.figure.bogus = 'val'
+        # Update with dict kwarg
+        self.figure.plotly_restyle(
+            restyle_data={'marker.color': 'blue'},
+            trace_indexes=0)
 
-    @raises(KeyError)
-    def test_access_invalid_item(self):
-        self.figure['bogus'] = 'val'
+        self.assertEqual(self.figure.data[0].marker.color, 'blue')
+
+    @raises(ValueError)
+    def test_restyle_validate_property(self):
+        self.figure.plotly_restyle({'bogus': 3}, trace_indexes=[0])
+
+    @raises(ValueError)
+    def test_restyle_validate_property_nested(self):
+        self.figure.plotly_restyle({'marker.bogus': 3}, trace_indexes=[0])
+
+    # plotly_relayout
+    def test_plotly_relayout(self):
+        # Check initial x-range
+        self.assertEqual(self.figure.layout.xaxis.range, (-1, 4))
+
+        # Update with kwarg
+        self.figure.plotly_relayout(
+            relayout_data={'xaxis.range': [10, 20]})
+        self.assertEqual(self.figure.layout.xaxis.range, (10, 20))
+
+    @raises(ValueError)
+    def test_relayout_validate_property(self):
+        self.figure.plotly_relayout({'bogus': [1, 3]})
+
+    @raises(ValueError)
+    def test_relayout_validate_property_nested(self):
+        self.figure.plotly_relayout({'xaxis.bogus': [1, 3]})
+
+    @raises(ValueError)
+    def test_relayout_validate_unintialized_subplot(self):
+        self.figure.plotly_relayout({'xaxis2.range': [1, 3]})
+
+    # plotly_update
+    def test_plotly_update_layout(self):
+        # Check initial x-range
+        self.assertEqual(self.figure.layout.xaxis.range, (-1, 4))
+
+        # Update with kwarg
+        self.figure.plotly_update(
+            relayout_data={'xaxis.range': [10, 20]})
+        self.assertEqual(self.figure.layout.xaxis.range, (10, 20))
+
+    def test_plotly_update_data(self):
+        # Check initial marker color
+        self.assertEqual(self.figure.data[0].marker.color, 'green')
+
+        # Update with dict kwarg
+        self.figure.plotly_update(
+            restyle_data={'marker.color': 'blue'},
+            trace_indexes=0)
+
+        self.assertEqual(self.figure.data[0].marker.color, 'blue')
+
+    @raises(ValueError)
+    def test_plotly_update_validate_property_trace(self):
+        self.figure.plotly_update(restyle_data={'bogus': 3},
+                                  trace_indexes=[0])
+
+    @raises(ValueError)
+    def test_plotly_update_validate_property_layout(self):
+        self.figure.plotly_update(relayout_data={'xaxis.bogus': [1, 3]})
