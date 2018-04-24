@@ -138,7 +138,7 @@ class TestFigureProperties(TestCase):
                             [{'layout': {'yaxis': {'title': 'f4'}}}]})
         self.assertEqual(self.figure.frames[0].layout.yaxis.title, 'f4')
 
-    @raises(AttributeError)
+    @raises(ValueError)
     def test_update_invalid_attr(self):
         self.figure.layout.update({'xaxis': {'bogus': 32}})
 
