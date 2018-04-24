@@ -1,7 +1,7 @@
 from unittest import TestCase
 from mock import MagicMock
 import plotly.graph_objs as go
-
+from nose.tools import raises
 
 class TestMoveDeleteTracesMessages(TestCase):
     def setUp(self):
@@ -73,3 +73,17 @@ class TestMoveDeleteTracesMessages(TestCase):
         self.figure._send_deleteTraces_msg.assert_called_once_with([1])
         self.figure._send_moveTraces_msg.assert_called_once_with(
             [0, 1], [1, 0])
+
+    @raises(ValueError)
+    def test_validate_assigned_traces_are_subset(self):
+        traces = self.figure.data
+        self.figure.data = [traces[2],
+                            go.Scatter(y=[3, 2, 1]),
+                            traces[1]]
+
+    @raises(ValueError)
+    def test_validate_assigned_traces_are_not_duplicates(self):
+        traces = self.figure.data
+        self.figure.data = [traces[2],
+                            traces[1],
+                            traces[1]]
