@@ -1,9 +1,13 @@
 from unittest import TestCase
-from mock import MagicMock
 from nose.tools import raises
 
 import plotly.graph_objs as go
 from plotly.basedatatypes import Undefined
+
+if sys.version_info.major == 3 and sys.version_info.minor >= 3:
+    from unittest.mock import MagicMock
+else:
+    from mock import MagicMock
 
 
 class TestBatchUpdateMessage(TestCase):
