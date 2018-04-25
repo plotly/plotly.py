@@ -1,7 +1,12 @@
 from unittest import TestCase
-from mock import MagicMock
 import plotly.graph_objs as go
 from nose.tools import raises
+
+if sys.version_info.major == 3 and sys.version_info.minor >= 3:
+    from unittest.mock import MagicMock
+else:
+    from mock import MagicMock
+
 
 class TestMoveDeleteTracesMessages(TestCase):
     def setUp(self):
