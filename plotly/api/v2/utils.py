@@ -107,9 +107,10 @@ def validate_response(response):
     if not message:
         message = content if content else 'No Content'
 
-    if not response.history[0].url.startswith('https:'):
-        raise exceptions.PlotlyRequestError(HTTP_ERROR_MESSAGE,
-                                            status_code, content)
+    if len(response.history) > 0:
+        if not response.history[0].url.startswith('https:'):
+            raise exceptions.PlotlyRequestError(HTTP_ERROR_MESSAGE,
+                                                status_code, content)
 
     raise exceptions.PlotlyRequestError(message, status_code, content)
 
