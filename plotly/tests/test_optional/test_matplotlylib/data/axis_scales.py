@@ -7,6 +7,7 @@ D = dict(
     x=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     y=[10, 3, 100, 6, 45, 4, 80, 45, 3, 59])
 
+
 EVEN_LINEAR_SCALE = Figure(
     data=Data([
         Scatter(
@@ -45,7 +46,7 @@ EVEN_LINEAR_SCALE = Figure(
             dtick=3,
             ticks='inside',
             showgrid=False,
-            tickmode=False,
+            tickmode='auto',
             zeroline=False,
             tickfont=Font(
                 size=12.0
@@ -63,7 +64,7 @@ EVEN_LINEAR_SCALE = Figure(
             dtick=13,
             ticks='inside',
             showgrid=False,
-            tickmode=False,
+            tickmode='auto',
             zeroline=False,
             tickfont=Font(
                 size=12.0
