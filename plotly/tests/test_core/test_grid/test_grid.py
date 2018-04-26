@@ -93,7 +93,7 @@ class GridTest(PlotlyTestCase):
     @attr('slow')
     def test_plot_from_grid(self):
         g = self.upload_and_return_grid()
-        url = py.plot([Scatter(xsrc=g[0], ysrc=g[1])],
+        url = py.plot([Scatter(xsrc=g[0].id, ysrc=g[1].id)],
                       auto_open=False, filename='plot from grid')
         return url, g
 
@@ -103,8 +103,8 @@ class GridTest(PlotlyTestCase):
         fig = py.get_figure(url)
         data = fig['data']
         trace = data[0]
-        assert(g[0].data == trace['x'])
-        assert(g[1].data == trace['y'])
+        assert(tuple(g[0].data) == tuple(trace['x']))
+        assert(tuple(g[1].data) == tuple(trace['y']))
 
     def test_grid_id_args(self):
         self.assertEqual(parse_grid_id_args(self._grid, None),

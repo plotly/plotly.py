@@ -9,6 +9,7 @@ from __future__ import absolute_import
 
 import requests
 import six
+import sys
 from requests.compat import json as _json
 
 from nose.plugins.attrib import attr
@@ -20,7 +21,6 @@ from plotly.plotly import plotly as py
 from plotly.exceptions import PlotlyError, PlotlyEmptyDataError
 from plotly.files import CONFIG_FILE
 
-import sys
 
 # import from mock
 if sys.version_info.major == 3 and sys.version_info.minor >= 3:

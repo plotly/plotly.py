@@ -1,5 +1,6 @@
+import sys
 from unittest import TestCase
-from nose.tools import raises
+
 import plotly.graph_objs as go
 
 if sys.version_info.major == 3 and sys.version_info.minor >= 3:
