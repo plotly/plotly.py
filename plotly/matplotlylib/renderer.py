@@ -722,7 +722,7 @@ class PlotlyRenderer(Renderer):
         for key in ['width', 'height', 'autosize', 'margin']:
             try:
                 del self.plotly_fig['layout'][key]
-            except KeyError:
+            except (KeyError, AttributeError):
                 pass
 
     def strip_style(self):

@@ -48,7 +48,7 @@ class PlotlyOfflineTestCase(TestCase):
 
             x = [10, 20, 30]
             y = [100, 200, 300]
-            plt.plot(x, y, "o")
+            plt.plot(x, y)
 
             plotly.offline.iplot_mpl(fig)
 
@@ -70,11 +70,9 @@ class PlotlyOfflineMPLTestCase(TestCase):
             # Generate matplotlib plot for tests
             fig = plt.figure()
 
-            # TODO: remove "o" in plt.plot or
-            # change test for expected ValueError
             x = [10, 20, 30]
             y = [100, 200, 300]
-            plt.plot(x, y, "o")
+            plt.plot(x, y)
 
             figure = plotly.tools.mpl_to_plotly(fig)
             data = figure['data']
@@ -85,8 +83,7 @@ class PlotlyOfflineMPLTestCase(TestCase):
 
             # just make sure a few of the parts are in here
             # like PlotlyOfflineTestCase(TestCase) in test_core
-            self.assertTrue('Plotly.newPlot' in html)  # plot command is in there
-            self.assertTrue(data_json in html)        # data is in there
+            self.assertTrue(data_json.split('"uid":')[0] in html)  # data is in there
             self.assertTrue(layout_json in html)        # layout is in there too
             self.assertTrue(PLOTLYJS in html)         # and the source code
             # and it's an <html> doc
