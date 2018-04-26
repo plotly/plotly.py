@@ -49,6 +49,36 @@ DEFAULT_HISTNORM = 'probability density'
 ALTERNATIVE_HISTNORM = 'probability'
 
 
+http_msg = (
+    "The plotly_domain and plotly_api_domain of your config file must start "
+    "with 'https', 'http'.\n If you are not using On-Prem then run the "
+    "following code to ensure your plotly_domain and plotly_api_domain start "
+    "with 'https':\n\n\n"
+    "import plotly\n"
+    "plotly.tools.set_config_file(\n"
+    "    plotly_domain='https://plot.ly',\n"
+    "    plotly_api_domain='https://api.plot.ly'\n"
+    ")\n\n\n"
+    "If you are using On-Prem then you will need to use your company's "
+    "domain and api_domain urls:\n\n\n"
+    "import plotly\n"
+    "plotly.tools.set_config_file(\n"
+    "    plotly_domain='https://plotly.your-company.com',\n"
+    "    plotly_api_domain='https://plotly.your-company.com'\n"
+    ")\n\n\n"
+    "Make sure to replace `your-company.com` with the URL of your Plotly "
+    "On-Premise server.\nSee "
+    "https://plot.ly/python/getting-started/#special-instructions-for-plotly-onpremise-users "
+    "for more help with getting started with On-Prem."
+)
+
+
+def validate_config_file(*domains):
+    for d in domains:
+        if not d.lower().startswith('https'):
+            warnings.warn(http_msg)
+
+
 # Warning format
 def warning_on_one_line(message, category, filename, lineno,
                         file=None, line=None):
@@ -194,6 +224,7 @@ def set_config_file(plotly_domain=None,
         'sharing': sharing, 'world_readable': world_readable})
     settings = get_config_file()
     if isinstance(plotly_domain, six.string_types):
+        validate_config_file(plotly_domain)
         settings['plotly_domain'] = plotly_domain
     elif plotly_domain is not None:
         raise TypeError('plotly_domain should be a string')
@@ -202,6 +233,7 @@ def set_config_file(plotly_domain=None,
     elif plotly_streaming_domain is not None:
         raise TypeError('plotly_streaming_domain should be a string')
     if isinstance(plotly_api_domain, six.string_types):
+        validate_config_file(plotly_api_domain)
         settings['plotly_api_domain'] = plotly_api_domain
     elif plotly_api_domain is not None:
         raise TypeError('plotly_api_domain should be a string')
@@ -244,9 +276,10 @@ def get_config_file(*args):
     """
     if check_file_permissions():
         ensure_local_plotly_files()  # make sure what's there is OK
-        return utils.load_json_dict(CONFIG_FILE, *args)
+        returned_obj = utils.load_json_dict(CONFIG_FILE, *args)
     else:
-        return FILE_CONTENT[CONFIG_FILE]
+        returned_obj = FILE_CONTENT[CONFIG_FILE]
+    return returned_obj
 
 
 def reset_config_file():

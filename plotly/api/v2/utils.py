@@ -8,37 +8,6 @@ from plotly import config, exceptions, version, utils
 from plotly.api.utils import basic_auth
 
 
-HTTP_ERROR_MESSAGE = (
-    """Your plotly_domain and plotly_api_domain must be HTTPS and not HTTP.\n
-    If you are not using On-Prem then run the following code to ensure your
-    plotly_domain and plotly_api_domain start with 'https':
-
-    ```
-    import plotly
-    plotly.tools.set_config_file(
-        plotly_domain='https://plot.ly',
-        plotly_api_domain='https://api.plot.ly'
-    )
-    ```
-
-    If you are using On-Prem then you will need to use your company's
-    domain and api_domain urls:
-
-    ```
-    import plotly
-    plotly.tools.set_config_file(
-        plotly_domain='https://plotly.your-company.com',
-        plotly_api_domain='https://plotly.your-company.com'
-    )
-    ```
-
-    Make sure to replace "your-company.com" with the URL of your Plotly On-Premise server.
-
-    See https://plot.ly/python/getting-started/#special-instructions-for-plotly-onpremise-users
-    for more tips for getting started with Plotly."""
-)
-
-
 def make_params(**kwargs):
     """
     Helper to create a params dict, skipping undefined entries.
@@ -106,11 +75,6 @@ def validate_response(response):
         message = '\n'.join([msg for msg in messages if msg])
     if not message:
         message = content if content else 'No Content'
-
-    if len(response.history) > 0:
-        if not response.history[0].url.startswith('https:'):
-            raise exceptions.PlotlyRequestError(HTTP_ERROR_MESSAGE,
-                                                status_code, content)
 
     raise exceptions.PlotlyRequestError(message, status_code, content)
 
