@@ -92,7 +92,7 @@ def convert_symbol(mpl_symbol):
     elif mpl_symbol in SYMBOL_MAP:
         return SYMBOL_MAP[mpl_symbol]
     else:
-        return 'dot'  # default
+        return 'circle'  # default
 
 
 def hex_to_rgb(value):
@@ -548,7 +548,7 @@ def mpl_dates_to_datestrings(dates, mpl_formatter):
 DASH_MAP = {
     '10,0': 'solid',
     '6,6': 'dash',
-    '2,2': 'dot',
+    '2,2': 'circle',
     '4,4,2,4': 'dashdot',
     'none': 'solid'
 }
@@ -567,7 +567,7 @@ PATH_MAP = {
 }
 
 SYMBOL_MAP = {
-    'o': 'dot',
+    'o': 'circle',
     'v': 'triangle-down',
     '^': 'triangle-up',
     '<': 'triangle-left',
@@ -575,7 +575,7 @@ SYMBOL_MAP = {
     's': 'square',
     '+': 'cross',
     'x': 'x',
-    '*': 'x',  # no star yet in plotly!!
+    '*': 'star',
     'D': 'diamond',
     'd': 'diamond',
 }
