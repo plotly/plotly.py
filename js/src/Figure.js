@@ -1,6 +1,6 @@
 var widgets = require("@jupyter-widgets/base");
 var _ = require("lodash");
-var Plotly = require("plotly.js");
+var Plotly = require("plotly.js/dist/plotly");
 var PlotlyIndex = require("plotly.js/src/lib/index");
 
 // Model
