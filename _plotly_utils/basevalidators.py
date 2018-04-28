@@ -1204,7 +1204,10 @@ class ColorscaleValidator(BaseValidator):
 
     def present(self, v):
         # Return tuple of tuples so that colorscale is immutable
-        return tuple([tuple(e) for e in v])
+        if v is None:
+            return None
+        else:
+            return tuple([tuple(e) for e in v])
 
 
 class AngleValidator(BaseValidator):
@@ -1544,13 +1547,16 @@ class InfoArrayValidator(BaseValidator):
         return v
 
     def present(self, v):
-        # Call present on each of the item validators
-        for i, (el, validator) in enumerate(zip(v, self.item_validators)):
-            # Validate coerce elements
-            v[i] = validator.present(el)
+        if v is None:
+            return None
+        else:
+            # Call present on each of the item validators
+            for i, (el, validator) in enumerate(zip(v, self.item_validators)):
+                # Validate coerce elements
+                v[i] = validator.present(el)
 
-        # Return tuple form of
-        return tuple(v)
+            # Return tuple form of
+            return tuple(v)
 
 
 class LiteralValidator(BaseValidator):
