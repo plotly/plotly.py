@@ -17,14 +17,15 @@ D = dict(
 VERTICAL_BAR = Figure(
     data=Data([
         Bar(
-            x=[0.40000000000000002, 1.3999999999999999, 2.3999999999999999, 3.3999999999999999, 4.4000000000000004, 5.4000000000000004],
+            #x=[0.40000000000000002, 1.3999999999999999, 2.3999999999999999, 3.3999999999999999, 4.4000000000000004, 5.4000000000000004],
+            x=[0.0, 1.0, 2.0, 3.0, 4.0, 5.0],
             y=[10.0, 20.0, 50.0, 80.0, 100.0, 200.0],
             orientation='v',
             marker=Marker(
                 line=Line(
                     width=1.0
                 ),
-                color='#0000FF'
+                color='#1F77B4'
             ),
             opacity=1,
             xaxis='x1',
@@ -38,8 +39,8 @@ VERTICAL_BAR = Figure(
         margin=Margin(
             l=80,
             r=63,
-            b=47,
-            t=47,
+            b=52,
+            t=57,
             pad=0
         ),
         hovermode='closest',
@@ -47,15 +48,15 @@ VERTICAL_BAR = Figure(
         bargap=0.2,
         xaxis1=XAxis(
             domain=[0.0, 1.0],
-            range=[0.0, 6.0],
+            range=[-0.68999999999999995, 5.6899999999999995],
             type='linear',
             showline=True,
             ticks='inside',
-            nticks=7,
+            nticks=8,
             showgrid=False,
             zeroline=False,
             tickfont=Font(
-                size=12.0
+                size=10.0
             ),
             anchor='y1',
             side='bottom',
@@ -63,15 +64,15 @@ VERTICAL_BAR = Figure(
         ),
         yaxis1=YAxis(
             domain=[0.0, 1.0],
-            range=[0.0, 200.0],
+            range=[0.0, 210.0],
             type='linear',
             showline=True,
             ticks='inside',
-            nticks=5,
+            nticks=10,
             showgrid=False,
             zeroline=False,
             tickfont=Font(
-                size=12.0
+                size=10.0
             ),
             anchor='x1',
             side='left',
@@ -84,13 +85,13 @@ HORIZONTAL_BAR = Figure(
     data=Data([
         Bar(
             x=[1.0, 4.0, 8.0, 16.0, 32.0, 64.0, 128.0],
-            y=[0.40000000000000002, 1.3999999999999999, 2.3999999999999999, 3.3999999999999999, 4.4000000000000004, 5.4000000000000004, 6.4000000000000004],
+            y=[0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0],
             orientation='h',
             marker=Marker(
                 line=Line(
                     width=1.0
                 ),
-                color='#0000FF'
+                color='#1F77B4'
             ),
             opacity=1,
             xaxis='x1',
@@ -104,16 +105,16 @@ HORIZONTAL_BAR = Figure(
         margin=Margin(
             l=80,
             r=63,
-            b=47,
-            t=47,
+            b=52,
+            t=57,
             pad=0
         ),
         hovermode='closest',
         showlegend=False,
-        bargap=0.2,
+        bargap=0.19999999999999996,
         xaxis1=XAxis(
             domain=[0.0, 1.0],
-            range=[0.0, 140.0],
+            range=[0.0, 134.40000000000001],
             type='linear',
             showline=True,
             ticks='inside',
@@ -121,7 +122,7 @@ HORIZONTAL_BAR = Figure(
             showgrid=False,
             zeroline=False,
             tickfont=Font(
-                size=12.0
+                size=10.0
             ),
             anchor='y1',
             side='bottom',
@@ -129,15 +130,15 @@ HORIZONTAL_BAR = Figure(
         ),
         yaxis1=YAxis(
             domain=[0.0, 1.0],
-            range=[0.0, 7.0],
+            range=[-0.73999999999999999, 6.7399999999999993],
             type='linear',
             showline=True,
             ticks='inside',
-            nticks=8,
+            nticks=9,
             showgrid=False,
             zeroline=False,
             tickfont=Font(
-                size=12.0
+                size=10.0
             ),
             anchor='x1',
             side='left',
@@ -149,7 +150,7 @@ HORIZONTAL_BAR = Figure(
 H_AND_V_BARS = Figure(
     data=Data([
         Bar(
-            x=[5.0, 15.0, 25.0, 35.0, 45.0, 55.0],
+            x=[0.0, 10.0, 20.0, 30.0, 40.0, 50.0],
             y=[1.0, 4.0, 8.0, 16.0, 32.0, 64.0],
             orientation='v',
             marker=Marker(
@@ -164,7 +165,7 @@ H_AND_V_BARS = Figure(
         ),
         Bar(
             x=[30.0, 60.0, 20.0, 50.0, 60.0, 30.0],
-            y=[20.0, 35.0, 50.0, 65.0, 80.0, 95.0],
+            y=[15.0, 30.0, 45.0, 60.0, 75.0, 90.0],
             orientation='h',
             marker=Marker(
                 line=Line(
@@ -184,24 +185,24 @@ H_AND_V_BARS = Figure(
         margin=Margin(
             l=80,
             r=63,
-            b=47,
-            t=47,
+            b=52,
+            t=57,
             pad=0
         ),
         hovermode='closest',
         showlegend=False,
-        bargap=5,
+        bargap=1,
         xaxis1=XAxis(
             domain=[0.0, 1.0],
-            range=[0.0, 60.0],
+            range=[-8.25, 63.25],
             type='linear',
             showline=True,
             ticks='inside',
-            nticks=7,
+            nticks=9,
             showgrid=False,
             zeroline=False,
             tickfont=Font(
-                size=12.0
+                size=10.0
             ),
             anchor='y1',
             side='bottom',
@@ -209,15 +210,15 @@ H_AND_V_BARS = Figure(
         ),
         yaxis1=YAxis(
             domain=[0.0, 1.0],
-            range=[0.0, 100.0],
+            range=[0.0, 101.84999999999999],
             type='linear',
             showline=True,
             ticks='inside',
-            nticks=6,
+            nticks=7,
             showgrid=False,
             zeroline=False,
             tickfont=Font(
-                size=12.0
+                size=10.0
             ),
             anchor='x1',
             side='left',
