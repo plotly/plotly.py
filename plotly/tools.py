@@ -276,9 +276,20 @@ def get_config_file(*args):
     """
     if check_file_permissions():
         ensure_local_plotly_files()  # make sure what's there is OK
-        return utils.load_json_dict(CONFIG_FILE, *args)
+        returned_obj = utils.load_json_dict(CONFIG_FILE, *args)
     else:
-        return FILE_CONTENT[CONFIG_FILE]
+        returned_obj = FILE_CONTENT[CONFIG_FILE]
+
+    list_of_domains = []
+    for domain in ['plotly_domain', 'plotly_api_domain']:
+        if domain in returned_obj:
+            list_of_domains.append(returned_obj[domain])
+
+    validate_domains(*list_of_domains)
+
+    return returned_obj
+
+
 
 
 def reset_config_file():
