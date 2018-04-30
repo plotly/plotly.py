@@ -73,7 +73,7 @@ http_msg = (
 )
 
 
-def validate_config_file(*domains):
+def validate_domains(*domains):
     for d in domains:
         if not d.lower().startswith('https'):
             warnings.warn(http_msg)
@@ -224,7 +224,7 @@ def set_config_file(plotly_domain=None,
         'sharing': sharing, 'world_readable': world_readable})
     settings = get_config_file()
     if isinstance(plotly_domain, six.string_types):
-        validate_config_file(plotly_domain)
+        #validate_domains(plotly_domain)
         settings['plotly_domain'] = plotly_domain
     elif plotly_domain is not None:
         raise TypeError('plotly_domain should be a string')
@@ -233,7 +233,7 @@ def set_config_file(plotly_domain=None,
     elif plotly_streaming_domain is not None:
         raise TypeError('plotly_streaming_domain should be a string')
     if isinstance(plotly_api_domain, six.string_types):
-        validate_config_file(plotly_api_domain)
+        #validate_domains(plotly_api_domain)
         settings['plotly_api_domain'] = plotly_api_domain
     elif plotly_api_domain is not None:
         raise TypeError('plotly_api_domain should be a string')
@@ -276,10 +276,9 @@ def get_config_file(*args):
     """
     if check_file_permissions():
         ensure_local_plotly_files()  # make sure what's there is OK
-        returned_obj = utils.load_json_dict(CONFIG_FILE, *args)
+        return utils.load_json_dict(CONFIG_FILE, *args)
     else:
-        returned_obj = FILE_CONTENT[CONFIG_FILE]
-    return returned_obj
+        return FILE_CONTENT[CONFIG_FILE]
 
 
 def reset_config_file():
