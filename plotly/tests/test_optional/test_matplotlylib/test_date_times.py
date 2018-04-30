@@ -52,7 +52,7 @@ class TestDateTimes(TestCase):
         self.assertEqual(
             fig.axes[0].lines[0].get_xydata()[0][0], 7.33776000e+05
         )
-        self.assertEqual(pfig['data'][0]['x'], date_strings)
+        self.assertEqual(tuple(pfig['data'][0]['x']), tuple(date_strings))
 
     def test_pandas_time_series_date_formatter(self):
         ndays = 3
