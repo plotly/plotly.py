@@ -1,6 +1,9 @@
 from plotly import tools, session
 from plotly.tests.utils import PlotlyTestCase
 
+import ipdb
+import warnings
+
 
 class FileToolsTest(PlotlyTestCase):
 
@@ -43,13 +46,22 @@ class FileToolsTest(PlotlyTestCase):
         self.assertEqual(config['plotly_streaming_domain'], streaming_domain)
         tools.reset_config_file()
 
-
     def test_set_config_file_world_readable(self):
 
         # Return TypeError when world_readable type is not a bool
 
         kwargs = {'world_readable': 'True'}
         self.assertRaises(TypeError, tools.set_config_file, **kwargs)
+
+    def test_set_config_expected_error_msg(self):
+        kwargs = {'plotly_domain': 'http://www.foo-bar.com'}
+        #self.assertRaises(UserWarning, tools.set_config_file, **kwargs)
+        print 'abcd'
+        b = tools.set_config_file(**kwargs)
+        print type(b)
+
+
+
 
     def test_reset_config_file(self):
 

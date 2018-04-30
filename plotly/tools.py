@@ -73,10 +73,10 @@ http_msg = (
 )
 
 
-def validate_domains(*domains):
+def _validate_domains(*domains):
     for d in domains:
         if not d.lower().startswith('https'):
-            warnings.warn(http_msg)
+            warnings.warn(http_msg, category=UserWarning)
 
 
 # Warning format
@@ -255,7 +255,7 @@ def set_config_file(plotly_domain=None,
         list_of_domains.append(plotly_domain)
     if plotly_api_domain is not None:
         list_of_domains.append(plotly_api_domain)
-    validate_domains(*list_of_domains)
+    _validate_domains(*list_of_domains)
 
     if isinstance(world_readable, bool):
         settings['world_readable'] = world_readable
@@ -272,7 +272,7 @@ def set_config_file(plotly_domain=None,
     ensure_local_plotly_files()  # make sure what we just put there is OK
 
 
-def get_config_file(*args, validate=True):
+def get_config_file(validate=True, *args):
     """Return specified args from `~/.plotly/.config`. as tuple.
 
     Returns all if no arguments are specified.
@@ -293,11 +293,9 @@ def get_config_file(*args, validate=True):
             list_of_domains.append(returned_obj[domain])
 
     if validate:
-        validate_domains(*list_of_domains)
+        _validate_domains(*list_of_domains)
 
     return returned_obj
-
-
 
 
 def reset_config_file():
