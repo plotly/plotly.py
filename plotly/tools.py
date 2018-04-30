@@ -222,9 +222,9 @@ def set_config_file(plotly_domain=None,
     ensure_local_plotly_files()  # make sure what's there is OK
     utils.validate_world_readable_and_sharing_settings({
         'sharing': sharing, 'world_readable': world_readable})
-    settings = get_config_file()
+
+    settings = get_config_file(validate=False)
     if isinstance(plotly_domain, six.string_types):
-        #validate_domains(plotly_domain)
         settings['plotly_domain'] = plotly_domain
     elif plotly_domain is not None:
         raise TypeError('plotly_domain should be a string')
@@ -233,7 +233,6 @@ def set_config_file(plotly_domain=None,
     elif plotly_streaming_domain is not None:
         raise TypeError('plotly_streaming_domain should be a string')
     if isinstance(plotly_api_domain, six.string_types):
-        #validate_domains(plotly_api_domain)
         settings['plotly_api_domain'] = plotly_api_domain
     elif plotly_api_domain is not None:
         raise TypeError('plotly_api_domain should be a string')
@@ -250,6 +249,14 @@ def set_config_file(plotly_domain=None,
     elif auto_open is not None:
         raise TypeError('auto_open should be a boolean')
 
+    # validate plotly_domain and plotly_api_domain
+    list_of_domains = []
+    if plotly_domain is not None:
+        list_of_domains.append(plotly_domain)
+    if plotly_api_domain is not None:
+        list_of_domains.append(plotly_api_domain)
+    validate_domains(*list_of_domains)
+
     if isinstance(world_readable, bool):
         settings['world_readable'] = world_readable
         settings.pop('sharing')
@@ -265,7 +272,7 @@ def set_config_file(plotly_domain=None,
     ensure_local_plotly_files()  # make sure what we just put there is OK
 
 
-def get_config_file(*args):
+def get_config_file(*args, validate=True):
     """Return specified args from `~/.plotly/.config`. as tuple.
 
     Returns all if no arguments are specified.
@@ -285,7 +292,8 @@ def get_config_file(*args):
         if domain in returned_obj:
             list_of_domains.append(returned_obj[domain])
 
-    validate_domains(*list_of_domains)
+    if validate:
+        validate_domains(*list_of_domains)
 
     return returned_obj
 
@@ -325,7 +333,7 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
 
     """
     plotly_rest_url = (session.get_session_config().get('plotly_domain') or
-                       get_config_file()['plotly_domain'])
+                       get_config_file(validate=False)['plotly_domain'])
     if file_id is None:  # assume we're using a url
         url = file_owner_or_url
         if url[:len(plotly_rest_url)] != plotly_rest_url:
@@ -422,7 +430,7 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
         if file_id:
             plotly_domain = (
                 session.get_session_config().get('plotly_domain') or
-                get_config_file()['plotly_domain']
+                get_config_file(validate=False)['plotly_domain']
             )
             url = "{plotly_domain}/~{un}/{fid}".format(
                 plotly_domain=plotly_domain,
@@ -448,7 +456,7 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
 
 
 ### mpl-related tools ###
-@utils.template_doc(**get_config_file())
+@utils.template_doc(**get_config_file(validate=False))
 def mpl_to_plotly(fig, resize=False, strip_style=False, verbose=False):
     """Convert a matplotlib figure to plotly dictionary and send.
 
