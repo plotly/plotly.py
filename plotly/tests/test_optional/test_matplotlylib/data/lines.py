@@ -19,8 +19,8 @@ SIMPLE_LINE = Figure(
             mode='lines',
             line=Line(
                 dash='solid',
-                color='rgba (0, 0, 255, 1)',
-                width=1.0
+                color='rgba (31, 119, 180, 1)',
+                width=1.5
             ),
             xaxis='x1',
             yaxis='y1'
@@ -33,23 +33,23 @@ SIMPLE_LINE = Figure(
         margin=Margin(
             l=80,
             r=63,
-            b=47,
-            t=47,
+            b=52,
+            t=57,
             pad=0
         ),
         hovermode='closest',
         showlegend=False,
         xaxis1=XAxis(
             domain=[0.0, 1.0],
-            range=[0.0, 5.0],
+            range=[-0.25, 5.25],
             type='linear',
             showline=True,
             ticks='inside',
-            nticks=6,
+            nticks=8,
             showgrid=False,
             zeroline=False,
             tickfont=Font(
-                size=12.0
+                size=10.0
             ),
             anchor='y1',
             side='bottom',
@@ -57,15 +57,15 @@ SIMPLE_LINE = Figure(
         ),
         yaxis1=YAxis(
             domain=[0.0, 1.0],
-            range=[0.0, 200.0],
+            range=[0.5, 209.5],
             type='linear',
             showline=True,
             ticks='inside',
-            nticks=5,
+            nticks=10,
             showgrid=False,
             zeroline=False,
             tickfont=Font(
-                size=12.0
+                size=10.0
             ),
             anchor='x1',
             side='left',
@@ -100,7 +100,7 @@ COMPLICATED_LINE = Figure(
             name='two',
             mode='lines',
             line=Line(
-                dash='solid',
+                #dash='solid',
                 color='rgba (0, 0, 255, 0.7)',
                 width=2
             ),
@@ -131,7 +131,7 @@ COMPLICATED_LINE = Figure(
             name='four',
             mode='lines',
             line=Line(
-                dash='dash',
+                #dash='dash',
                 color='rgba (255, 0, 0, 0.8)',
                 width=2
             ),
