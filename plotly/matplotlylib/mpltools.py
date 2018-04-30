@@ -555,13 +555,14 @@ def mpl_dates_to_datestrings(dates, mpl_formatter):
                    for date in dates]
     return time_stings
 
-
+# dashed is dash in matplotlib
 DASH_MAP = {
     '10,0': 'solid',
     '6,6': 'dash',
     '2,2': 'circle',
     '4,4,2,4': 'dashdot',
-    'none': 'solid'
+    'none': 'solid',
+    '7.4,3.2': 'dash',
 }
 
 PATH_MAP = {

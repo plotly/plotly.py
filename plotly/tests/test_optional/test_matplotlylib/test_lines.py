@@ -45,10 +45,8 @@ def test_complicated_line():
         d1, d2 = strip_dict_params(data_dict, COMPLICATED_LINE['data'][data_no], ignore=['uid'])
 
         equivalent, msg = compare_dict(d1, d2)
-
-        #equivalent, msg = compare_dict(data_dict,
-        #                               COMPLICATED_LINE['data'][data_no])
         assert equivalent, msg
+
     equivalent, msg = compare_dict(renderer.plotly_fig['layout'],
                                    COMPLICATED_LINE['layout'])
     assert equivalent, msg

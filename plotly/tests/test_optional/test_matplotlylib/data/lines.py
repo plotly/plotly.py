@@ -84,8 +84,8 @@ COMPLICATED_LINE = Figure(
             marker=Marker(
                 symbol='circle',
                 line=Line(
-                    color='#000000',
-                    width=0.5
+                    color='#FF0000',
+                    width=1.0 # TODO: change later?
                 ),
                 size=10,
                 color='#FF0000',
@@ -100,7 +100,7 @@ COMPLICATED_LINE = Figure(
             name='two',
             mode='lines',
             line=Line(
-                #dash='solid',
+                dash='solid',
                 color='rgba (0, 0, 255, 0.7)',
                 width=2
             ),
@@ -131,7 +131,7 @@ COMPLICATED_LINE = Figure(
             name='four',
             mode='lines',
             line=Line(
-                #dash='dash',
+                dash='dash',
                 color='rgba (255, 0, 0, 0.8)',
                 width=2
             ),
@@ -146,23 +146,23 @@ COMPLICATED_LINE = Figure(
         margin=Margin(
             l=80,
             r=63,
-            b=47,
-            t=47,
+            b=52,
+            t=57,
             pad=0
         ),
         hovermode='closest',
         showlegend=False,
         xaxis1=XAxis(
             domain=[0.0, 1.0],
-            range=[0.0, 6.0],
+            range=[-0.30000000000000004, 6.2999999999999998],
             type='linear',
             showline=True,
             ticks='inside',
-            nticks=7,
+            nticks=9,
             showgrid=False,
             zeroline=False,
             tickfont=Font(
-                size=12.0
+                size=10.0
             ),
             anchor='y1',
             side='bottom',
@@ -170,15 +170,15 @@ COMPLICATED_LINE = Figure(
         ),
         yaxis1=YAxis(
             domain=[0.0, 1.0],
-            range=[0.0, 200.0],
+            range=[-8.9500000000000011, 209.94999999999999],
             type='linear',
             showline=True,
             ticks='inside',
-            nticks=5,
+            nticks=11,
             showgrid=False,
             zeroline=False,
             tickfont=Font(
-                size=12.0
+                size=10.0
             ),
             anchor='x1',
             side='left',
