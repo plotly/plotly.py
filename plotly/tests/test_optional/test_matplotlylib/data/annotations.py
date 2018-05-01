@@ -13,7 +13,7 @@ ANNOTATIONS = Figure(
             line=Line(
                 dash='solid',
                 color='rgba (0, 0, 255, 1)',
-                width=1.0
+                width=1.5
             ),
             xaxis='x1',
             yaxis='y1'
@@ -26,7 +26,7 @@ ANNOTATIONS = Figure(
             line=Line(
                 dash='solid',
                 color='rgba (0, 0, 255, 1)',
-                width=1.0
+                width=1.5
             ),
             xaxis='x1',
             yaxis='y1'
@@ -48,14 +48,14 @@ ANNOTATIONS = Figure(
         annotations=Annotations([
             Annotation(
                 x=0.000997987927565,
-                y=0.996414507772,
+                y=0.9973865229110511,
                 text='top-left',
                 xref='paper',
                 yref='paper',
                 showarrow=False,
                 align='left',
                 font=Font(
-                    size=12.0,
+                    size=10.0,
                     color='#000000'
                 ),
                 opacity=1,
@@ -64,14 +64,14 @@ ANNOTATIONS = Figure(
             ),
             Annotation(
                 x=0.000997987927565,
-                y=0.00358549222798,
+                y=0.0031525606469002573,
                 text='bottom-left',
                 xref='paper',
                 yref='paper',
                 align='left',
                 showarrow=False,
                 font=Font(
-                    size=12.0,
+                    size=10.0,
                     color='#000000'
                 ),
                 opacity=1,
@@ -80,14 +80,14 @@ ANNOTATIONS = Figure(
             ),
             Annotation(
                 x=0.996989939638,
-                y=0.996414507772,
+                y=0.9973865229110511,
                 text='top-right',
                 xref='paper',
                 yref='paper',
                 align='right',
                 showarrow=False,
                 font=Font(
-                    size=12.0,
+                    size=10.0,
                     color='#000000'
                 ),
                 opacity=1,
@@ -96,14 +96,14 @@ ANNOTATIONS = Figure(
             ),
             Annotation(
                 x=0.996989939638,
-                y=0.00358549222798,
+                y=0.0031525606469002573,
                 text='bottom-right',
                 xref='paper',
                 yref='paper',
                 align='right',
                 showarrow=False,
                 font=Font(
-                    size=12.0,
+                    size=10.0,
                     color='#000000'
                 ),
                 opacity=1,
