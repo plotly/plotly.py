@@ -18,7 +18,7 @@ ak = 'ubpiol2cve'
 tk = 'vaia8trjjb'
 config = {'plotly_domain': 'https://plot.ly',
           'plotly_streaming_domain': 'stream.plot.ly',
-          'plotly_api_domain': 'https://api.plot.ly', 
+          'plotly_api_domain': 'https://api.plot.ly',
           'plotly_ssl_verification': False}
 
 
