@@ -1,7 +1,6 @@
 from plotly import tools, session
 from plotly.tests.utils import PlotlyTestCase
 
-import ipdb
 import warnings
 
 
@@ -54,14 +53,16 @@ class FileToolsTest(PlotlyTestCase):
         self.assertRaises(TypeError, tools.set_config_file, **kwargs)
 
     def test_set_config_expected_error_msg(self):
-        kwargs = {'plotly_domain': 'http://www.foo-bar.com'}
-        #self.assertRaises(UserWarning, tools.set_config_file, **kwargs)
-        print 'abcd'
-        b = tools.set_config_file(**kwargs)
-        print type(b)
 
+        # Check that UserWarning is being called with http plotly_domain
 
-
+        with warnings.catch_warnings(record=True) as w:
+            warnings.simplefilter("always")
+            kwargs = {'plotly_domain': 'http://www.foo-bar.com'}
+            tools.set_config_file(**kwargs)
+            assert len(w) == 1
+            assert issubclass(w[-1].category, UserWarning)
+            assert "plotly_domain" in str(w[-1].message)
 
     def test_reset_config_file(self):
 
