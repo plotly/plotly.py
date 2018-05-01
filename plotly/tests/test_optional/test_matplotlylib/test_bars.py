@@ -50,7 +50,7 @@ def test_horizontal_bar():
     assert equivalent, msg
 
 
-@attr('matplotlib') 
+@attr('matplotlib')
 def test_h_and_v_bars():
     fig, ax = plt.subplots()
     ax.bar(left=D['multi_left'], height=D['multi_height'],
