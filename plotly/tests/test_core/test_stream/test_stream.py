@@ -10,16 +10,24 @@ from nose.plugins.attrib import attr
 
 import plotly.plotly as py
 from plotly.graph_objs import (Layout, Scatter, Stream)
-from plotly import exceptions
 from plotly.tests.utils import PlotlyTestCase
 
 un = 'PythonAPI'
 ak = 'ubpiol2cve'
 tk = 'vaia8trjjb'
+
+un='admin'
+ak='dMkw502OP6olfcygUK4z'
+tk=''
+
 config = {'plotly_domain': 'https://plot.ly',
           'plotly_streaming_domain': 'stream.plot.ly',
           'plotly_api_domain': 'https://api.plot.ly',
           'plotly_ssl_verification': False}
+# config = {'plotly_domain': 'buildly.plotly.systems',
+#           'plotly_streaming_domain': 'stream-buildly.plotly.systems',
+#           'plotly_api_domain': 'https://api.plot.ly',
+#           'plotly_ssl_verification': False}
 
 
 class TestStreaming(PlotlyTestCase):
