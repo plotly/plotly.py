@@ -91,7 +91,7 @@ class TestStreaming(PlotlyTestCase):
 
     @attr('slow')
     def test_stream_validate_data(self):
-        with self.assertRaises(exceptions.PlotlyError):
+        with self.assertRaises(ValueError):
             py.sign_in(un, ak)
             my_stream = py.Stream(tk)
             my_stream.open()
@@ -100,7 +100,7 @@ class TestStreaming(PlotlyTestCase):
 
     @attr('slow')
     def test_stream_validate_layout(self):
-        with self.assertRaises(exceptions.PlotlyError):
+        with self.assertRaises(ValueError):
             py.sign_in(un, ak)
             my_stream = py.Stream(tk)
             my_stream.open()
@@ -110,13 +110,14 @@ class TestStreaming(PlotlyTestCase):
     @attr('slow')
     def test_stream_unstreamable(self):
 
-        # even though `name` isn't streamable, we don't validate it --> pass
-
-        py.sign_in(un, ak)
-        my_stream = py.Stream(tk)
-        my_stream.open()
-        my_stream.write(Scatter(x=1, y=10, name='nope'))
-        my_stream.close()
+        # old: even though `name` isn't streamable, we don't validate it --> pass
+        # new: changing test as we now validate name
+        with self.assertRaises(NameError):
+            py.sign_in(un, ak)
+            my_stream = py.Stream(tk)
+            my_stream.open()
+            my_stream.write(Scatter(x=[1], y=[10], name='nope'))
+            my_stream.close()
 
     def test_stream_no_scheme(self):
 
@@ -150,7 +151,7 @@ class TestStreaming(PlotlyTestCase):
             'server': 'stream.plot.ly',
             'port': 80,
             'ssl_enabled': False,
-            'ssl_verification_enabled': False, 
+            'ssl_verification_enabled': False,
             'headers': {
                 'Host': 'stream.plot.ly',
                 'plotly-streamtoken': tk
@@ -175,7 +176,7 @@ class TestStreaming(PlotlyTestCase):
             'server': 'stream.plot.ly',
             'port': 443,
             'ssl_enabled': True,
-            'ssl_verification_enabled': True, 
+            'ssl_verification_enabled': True,
             'headers': {
                 'Host': 'stream.plot.ly',
                 'plotly-streamtoken': tk

@@ -6,6 +6,7 @@ from requests.exceptions import RequestException
 from plotly import config, exceptions
 from plotly.api.utils import basic_auth
 
+from retrying import retry
 
 def validate_response(response):
     """
@@ -59,6 +60,11 @@ def get_headers():
     return headers
 
 
+# @retry(wait_random_min=100, wait_random_max=1000, wait_exponential_max=10000,
+#        stop_max_delay=30000)
+#@retry(#wait_random_min=100, wait_random_max=5000,
+#       wait_random_min=100, wait_random_max=10000,
+#       stop_max_delay=200 * 1000)
 def request(method, url, **kwargs):
     """
     Central place to make any v1 api request.
@@ -69,11 +75,13 @@ def request(method, url, **kwargs):
     :return: (requests.Response) The response directly from requests.
 
     """
+    print('try again')
     if kwargs.get('json', None) is not None:
         # See plotly.api.v2.utils.request for examples on how to do this.
         raise exceptions.PlotlyError('V1 API does not handle arbitrary json.')
     kwargs['headers'] = dict(kwargs.get('headers', {}), **get_headers())
     kwargs['verify'] = config.get_config()['plotly_ssl_verification']
+
     try:
         response = requests.request(method, url, **kwargs)
     except RequestException as e:
