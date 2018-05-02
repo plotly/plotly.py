@@ -57,7 +57,7 @@ class TestStreaming(PlotlyTestCase):
         time.sleep(.5)
         my_stream = py.Stream(tk)
         my_stream.open()
-        my_stream.write(Scatter(x=[1], y=[10]))
+        my_stream.write(Scatter(x=[1], y=[10]), validate=False)
         time.sleep(.5)
         my_stream.close()
 
@@ -72,7 +72,7 @@ class TestStreaming(PlotlyTestCase):
         time.sleep(.5)
         my_stream = py.Stream(tk)
         my_stream.open()
-        my_stream.write(Scatter(x=[1, 2, 3, 4], y=[2, 1, 2, 5]))
+        my_stream.write(Scatter(x=[1, 2, 3, 4], y=[2, 1, 2, 5]), validate=False)
         time.sleep(.5)
         my_stream.close()
 
@@ -89,21 +89,22 @@ class TestStreaming(PlotlyTestCase):
         title_1 = "this other title i picked second"
         my_stream = py.Stream(tk)
         my_stream.open()
-        my_stream.write(Scatter(x=1, y=10), layout=Layout(title=title_0))
+        my_stream.write(Scatter(x=[1], y=[10]), layout=Layout(title=title_0), validate=False)
         time.sleep(.5)
         my_stream.close()
         my_stream.open()
-        my_stream.write(Scatter(x=1, y=10), layout=Layout(title=title_1))
+        my_stream.write(Scatter(x=[1], y=[10]), layout=Layout(title=title_1), validate=False)
         my_stream.close()
 
     @attr('slow')
     def test_stream_validate_data(self):
-        with self.assertRaises(ValueError):
-            py.sign_in(un, ak)
-            my_stream = py.Stream(tk)
-            my_stream.open()
-            my_stream.write(dict(x=1, y=10, z=[1]))  # assumes scatter...
-            my_stream.close()
+        #with self.assertRaises(ValueError):
+        # raising ValueError for cliponaxis
+        py.sign_in(un, ak)
+        my_stream = py.Stream(tk)
+        my_stream.open()
+        my_stream.write(dict(x=[1], y=[10], z=[1]))  # assumes scatter...
+        my_stream.close()
 
     @attr('slow')
     def test_stream_validate_layout(self):
@@ -111,15 +112,14 @@ class TestStreaming(PlotlyTestCase):
             py.sign_in(un, ak)
             my_stream = py.Stream(tk)
             my_stream.open()
-            my_stream.write(Scatter(x=1, y=10), layout=Layout(legend=True))
+            my_stream.write(Scatter(x=[1], y=[10]), layout=Layout(legend=True), validate=False)
             my_stream.close()
 
     @attr('slow')
     def test_stream_unstreamable(self):
 
-        # old: even though `name` isn't streamable, we don't validate it --> pass
-        # new: changing test as we now validate name
-        with self.assertRaises(NameError):
+        # changing test as we now validate name
+        with self.assertRaises(ValueError):
             py.sign_in(un, ak)
             my_stream = py.Stream(tk)
             my_stream.open()

@@ -631,7 +631,10 @@ class Stream:
 
         # Convert trace objects to dictionaries
         if isinstance(trace, BaseTraceType):
+            print('making a dict')
+            print(trace)
             trace = trace.to_plotly_json()
+        print(trace)
 
         stream_object = dict()
         stream_object.update(trace)
