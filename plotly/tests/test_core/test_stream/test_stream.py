@@ -15,18 +15,17 @@ from plotly.tests.utils import PlotlyTestCase
 un = 'PythonAPI'
 ak = 'ubpiol2cve'
 tk = 'vaia8trjjb'
-
-un='admin'
-ak='dMkw502OP6olfcygUK4z'
-tk=''
-
 config = {'plotly_domain': 'https://plot.ly',
           'plotly_streaming_domain': 'stream.plot.ly',
           'plotly_api_domain': 'https://api.plot.ly',
-          'plotly_ssl_verification': False}
-# config = {'plotly_domain': 'buildly.plotly.systems',
+          'plotly_ssl_verification': False}  # should be True acc to Jody
+
+# un = 'admin'
+# ak = 'nXM28GQZ4GFCR23zIa06'
+# tk = '2rssgmwmc9'
+# config = {'plotly_domain': 'https://buildly.plotly.systems',
 #           'plotly_streaming_domain': 'stream-buildly.plotly.systems',
-#           'plotly_api_domain': 'https://api.plot.ly',
+#           'plotly_api_domain': 'https://buildly.plotly.systems',
 #           'plotly_ssl_verification': False}
 
 
@@ -36,7 +35,7 @@ class TestStreaming(PlotlyTestCase):
         super(TestStreaming, self).setUp()
         py.sign_in(un, ak, **config)
 
-    @attr('slow')
+    #@attr('slow')
     def test_initialize_stream_plot(self):
         py.sign_in(un, ak)
         stream = Stream(token=tk, maxpoints=50)
@@ -58,7 +57,7 @@ class TestStreaming(PlotlyTestCase):
         time.sleep(.5)
         my_stream = py.Stream(tk)
         my_stream.open()
-        my_stream.write(Scatter(x=1, y=10))
+        my_stream.write(Scatter(x=[1], y=[10]))
         time.sleep(.5)
         my_stream.close()
 

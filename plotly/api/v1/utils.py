@@ -8,6 +8,7 @@ from plotly.api.utils import basic_auth
 
 from retrying import retry
 
+
 def validate_response(response):
     """
     Raise a helpful PlotlyRequestError for failed requests.
@@ -62,9 +63,14 @@ def get_headers():
 
 # @retry(wait_random_min=100, wait_random_max=1000, wait_exponential_max=10000,
 #        stop_max_delay=30000)
-#@retry(#wait_random_min=100, wait_random_max=5000,
-#       wait_random_min=100, wait_random_max=10000,
-#       stop_max_delay=200 * 1000)
+
+# @retry(
+#    wait_random_min=100, wait_random_max=10000,
+#     stop_max_delay=200 * 1000,
+#    stop_max_attempt_number=7
+# )
+#@retry(wait_random_min=100, wait_random_max=1000, wait_exponential_max=10000,
+#       stop_max_attempt_number=50)
 def request(method, url, **kwargs):
     """
     Central place to make any v1 api request.
@@ -75,7 +81,7 @@ def request(method, url, **kwargs):
     :return: (requests.Response) The response directly from requests.
 
     """
-    print('try again')
+    print("Retrying")
     if kwargs.get('json', None) is not None:
         # See plotly.api.v2.utils.request for examples on how to do this.
         raise exceptions.PlotlyError('V1 API does not handle arbitrary json.')
