@@ -80,7 +80,6 @@ def convert_dash(mpl_dash):
             dashpx = 'dashdot'
         elif dashpx == '2.0px,3.3px':
             dashpx = 'dotted'
-
         return dashpx
 
 

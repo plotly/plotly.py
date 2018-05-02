@@ -69,13 +69,11 @@ def request(method, url, **kwargs):
     :return: (requests.Response) The response directly from requests.
 
     """
-    print("Retrying")
     if kwargs.get('json', None) is not None:
         # See plotly.api.v2.utils.request for examples on how to do this.
         raise exceptions.PlotlyError('V1 API does not handle arbitrary json.')
     kwargs['headers'] = dict(kwargs.get('headers', {}), **get_headers())
     kwargs['verify'] = config.get_config()['plotly_ssl_verification']
-
     try:
         response = requests.request(method, url, **kwargs)
     except RequestException as e:
