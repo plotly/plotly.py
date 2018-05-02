@@ -31,6 +31,7 @@ from plotly import exceptions, files, session, tools, utils
 from plotly.api import v1, v2
 from plotly.basedatatypes import BaseTraceType
 from plotly.plotly import chunked_requests
+from plotly.graph_objs import Scatter
 from plotly.grid_objs import Grid, Column
 from plotly.dashboard_objs import dashboard_objs as dashboard
 
@@ -587,7 +588,7 @@ class Stream:
         streaming_specs = self.get_streaming_specs()
         self._stream = chunked_requests.Stream(**streaming_specs)
 
-    def write(self, trace, layout=None, validate=True,
+    def write(self, trace, layout=None,
               reconnect_on=(200, '', 408)):
         """
         Write to an open stream.
@@ -605,9 +606,6 @@ class Stream:
         keyword arguments:
         layout (default=None) - A valid Layout object
                                 Run help(plotly.graph_objs.Layout)
-        validate (default = True) - Validate this stream before sending?
-                                    This will catch local errors if set to
-                                    True.
 
         Some valid keys for trace dictionaries:
             'x', 'y', 'text', 'z', 'marker', 'line'
@@ -628,7 +626,10 @@ class Stream:
         http://nbviewer.ipython.org/github/plotly/python-user-guide/blob/master/s7_streaming/s7_streaming.ipynb
 
         """
-        print('yoyoyo')
+        # always bypass validation in here as
+        # now automatically done
+        validate = False
+
         # Convert trace objects to dictionaries
         if isinstance(trace, BaseTraceType):
             trace = trace.to_plotly_json()
@@ -636,9 +637,13 @@ class Stream:
         stream_object = dict()
         stream_object.update(trace)
         if 'type' not in stream_object:
+            # tests if Scatter contains invalid kwargs
+            dummy_obj = copy.deepcopy(Scatter(**stream_object))
+            stream_object = Scatter(**stream_object)
             stream_object['type'] = 'scatter'
-        print('the stream object')
-        print(stream_object)
+
+        # TODO: remove this validation as now it's
+        # done automatically
         if validate:
             try:
                 tools.validate(stream_object, stream_object['type'])

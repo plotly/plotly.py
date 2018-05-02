@@ -6,8 +6,6 @@ from requests.exceptions import RequestException
 from plotly import config, exceptions
 from plotly.api.utils import basic_auth
 
-from retrying import retry
-
 
 def validate_response(response):
     """
@@ -61,16 +59,6 @@ def get_headers():
     return headers
 
 
-# @retry(wait_random_min=100, wait_random_max=1000, wait_exponential_max=10000,
-#        stop_max_delay=30000)
-
-# @retry(
-#    wait_random_min=100, wait_random_max=10000,
-#     stop_max_delay=200 * 1000,
-#    stop_max_attempt_number=7
-# )
-#@retry(wait_random_min=100, wait_random_max=1000, wait_exponential_max=10000,
-#       stop_max_attempt_number=50)
 def request(method, url, **kwargs):
     """
     Central place to make any v1 api request.

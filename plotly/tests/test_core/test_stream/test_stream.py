@@ -18,15 +18,7 @@ tk = 'vaia8trjjb'
 config = {'plotly_domain': 'https://plot.ly',
           'plotly_streaming_domain': 'stream.plot.ly',
           'plotly_api_domain': 'https://api.plot.ly',
-          'plotly_ssl_verification': False}  # should be True acc to Jody
-
-# un = 'admin'
-# ak = 'nXM28GQZ4GFCR23zIa06'
-# tk = '2rssgmwmc9'
-# config = {'plotly_domain': 'https://buildly.plotly.systems',
-#           'plotly_streaming_domain': 'stream-buildly.plotly.systems',
-#           'plotly_api_domain': 'https://buildly.plotly.systems',
-#           'plotly_ssl_verification': False}
+          'plotly_ssl_verification': False}
 
 
 class TestStreaming(PlotlyTestCase):
@@ -57,7 +49,7 @@ class TestStreaming(PlotlyTestCase):
         time.sleep(.5)
         my_stream = py.Stream(tk)
         my_stream.open()
-        my_stream.write(Scatter(x=[1], y=[10], foo=2,), validate=False)
+        my_stream.write(Scatter(x=[1], y=[10]))
         time.sleep(.5)
         my_stream.close()
 
@@ -72,7 +64,7 @@ class TestStreaming(PlotlyTestCase):
         time.sleep(.5)
         my_stream = py.Stream(tk)
         my_stream.open()
-        my_stream.write(Scatter(x=[1, 2, 3, 4], y=[2, 1, 2, 5]), validate=False)
+        my_stream.write(Scatter(x=[1, 2, 3, 4], y=[2, 1, 2, 5]))
         time.sleep(.5)
         my_stream.close()
 
@@ -89,30 +81,20 @@ class TestStreaming(PlotlyTestCase):
         title_1 = "this other title i picked second"
         my_stream = py.Stream(tk)
         my_stream.open()
-        my_stream.write(Scatter(x=[1], y=[10]), layout=Layout(title=title_0), validate=False)
+        my_stream.write(Scatter(x=[1], y=[10]), layout=Layout(title=title_0))
         time.sleep(.5)
         my_stream.close()
         my_stream.open()
-        my_stream.write(Scatter(x=[1], y=[10]), layout=Layout(title=title_1), validate=False)
+        my_stream.write(Scatter(x=[1], y=[10]), layout=Layout(title=title_1))
         my_stream.close()
 
     @attr('slow')
     def test_stream_validate_data(self):
-        # with self.assertRaises(ValueError):
-        py.sign_in(un, ak)
-        my_stream = py.Stream(tk)
-        my_stream.open()
-        my_stream.write(dict(x=[1], y=[10], z=[1]), validate=False)  # assumes scatter...
-        my_stream.close()
-
-    @attr('slow')
-    def test_stream_validate_data2(self):
-        # raises error even with validate=False
         with self.assertRaises(ValueError):
             py.sign_in(un, ak)
             my_stream = py.Stream(tk)
             my_stream.open()
-            my_stream.write(Scatter(x=[1], y=[10], z=[1], foo='foo'), validate=False)
+            my_stream.write(dict(x=[1], y=[10], z=[1]))  # assumes scatter...
             my_stream.close()
 
     @attr('slow')
@@ -121,19 +103,19 @@ class TestStreaming(PlotlyTestCase):
             py.sign_in(un, ak)
             my_stream = py.Stream(tk)
             my_stream.open()
-            my_stream.write(Scatter(x=[1], y=[10]), layout=Layout(legend=True), validate=False)
+            my_stream.write(Scatter(x=[1], y=[10]), layout=Layout(legend=True))
             my_stream.close()
 
     @attr('slow')
     def test_stream_unstreamable(self):
 
-        # changing test as we now validate name
-        with self.assertRaises(ValueError):
-            py.sign_in(un, ak)
-            my_stream = py.Stream(tk)
-            my_stream.open()
-            my_stream.write(Scatter(x=[1], y=[10], name='nope'))
-            my_stream.close()
+        # even though `name` isn't streamable, we don't validate it --> pass
+
+        py.sign_in(un, ak)
+        my_stream = py.Stream(tk)
+        my_stream.open()
+        my_stream.write(Scatter(x=[1], y=[10], name='nope'))
+        my_stream.close()
 
     def test_stream_no_scheme(self):
 
