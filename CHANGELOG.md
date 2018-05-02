@@ -2,11 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [2.6.0] - 2018-04-18
+## [2.6.0] - 2018-05-02
 ### Updated
-- Updated `plotly.min.js` to version 1.36.0.
+- Updated `plotly.min.js` to version 1.37.0.
   - New features include a `splom` (scatter plot matrix) trace type.
-  - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1360----2018-04-17) for additional information regarding the updates.
+  - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1370----2018-05-01) for additional information regarding the updates.
 - Error message for `plotly.figure_factory.create_choropleth` is more helpful for Windows users on installing `geopandas` and dependencies including `shapely`.
 
 ## [2.5.1] - 2018-03-26
