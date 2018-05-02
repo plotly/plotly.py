@@ -628,18 +628,17 @@ class Stream:
         http://nbviewer.ipython.org/github/plotly/python-user-guide/blob/master/s7_streaming/s7_streaming.ipynb
 
         """
-
+        print('yoyoyo')
         # Convert trace objects to dictionaries
         if isinstance(trace, BaseTraceType):
-            print('making a dict')
-            print(trace)
             trace = trace.to_plotly_json()
-        print(trace)
 
         stream_object = dict()
         stream_object.update(trace)
         if 'type' not in stream_object:
             stream_object['type'] = 'scatter'
+        print('the stream object')
+        print(stream_object)
         if validate:
             try:
                 tools.validate(stream_object, stream_object['type'])

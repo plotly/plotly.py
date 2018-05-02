@@ -57,7 +57,7 @@ class TestStreaming(PlotlyTestCase):
         time.sleep(.5)
         my_stream = py.Stream(tk)
         my_stream.open()
-        my_stream.write(Scatter(x=[1], y=[10]), validate=False)
+        my_stream.write(Scatter(x=[1], y=[10], foo=2,), validate=False)
         time.sleep(.5)
         my_stream.close()
 
@@ -98,13 +98,22 @@ class TestStreaming(PlotlyTestCase):
 
     @attr('slow')
     def test_stream_validate_data(self):
-        #with self.assertRaises(ValueError):
-        # raising ValueError for cliponaxis
+        # with self.assertRaises(ValueError):
         py.sign_in(un, ak)
         my_stream = py.Stream(tk)
         my_stream.open()
-        my_stream.write(dict(x=[1], y=[10], z=[1]))  # assumes scatter...
+        my_stream.write(dict(x=[1], y=[10], z=[1]), validate=False)  # assumes scatter...
         my_stream.close()
+
+    @attr('slow')
+    def test_stream_validate_data2(self):
+        # raises error even with validate=False
+        with self.assertRaises(ValueError):
+            py.sign_in(un, ak)
+            my_stream = py.Stream(tk)
+            my_stream.open()
+            my_stream.write(Scatter(x=[1], y=[10], z=[1], foo='foo'), validate=False)
+            my_stream.close()
 
     @attr('slow')
     def test_stream_validate_layout(self):
