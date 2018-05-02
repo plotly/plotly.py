@@ -186,7 +186,6 @@ def set_config_file(plotly_domain=None,
     :param (bool) world_readable: True = public, False = private
 
     """
-    # import ipdb; ipdb.set_trace()
     if not check_file_permissions():
         raise exceptions.PlotlyError("You don't have proper file permissions "
                                      "to run this function.")
