@@ -31,15 +31,22 @@ THRES_FOR_FLIPPED_FACET_TITLES = 10
 GRID_WIDTH = 1
 
 X_AND_Y_TRACE_TYPES = ['scatter', 'scattergl', 'line', 'area']
-X_OR_Y_TRACE_TYPES = ['histogram', 'bar', 'box', 'bullet', 'label', 'avg']
+X_OR_Y_TRACE_TYPES = ['histogram', 'bar', 'box', 'bullet', 'text']
 VALID_TRACE_TYPES = X_AND_Y_TRACE_TYPES + X_OR_Y_TRACE_TYPES
 
 CUSTOM_LABEL_ERROR = (
-    "If you are using a dictionary for custom labels for the facet row/col, "
-    "make sure each key in that column of the dataframe is in your facet "
-    "labels. The keys you need are {}"
+    'If you are using a dictionary for custom labels for the facet row/col, '
+    'make sure each key in that column of the dataframe is in your facet '
+    'labels. The keys you need are {}'
 )
 
+BULLET_USING_STRING_DATA_MSG = (
+    'Whoops. You are attempting to create a bullet chart out of an array of '
+    'data with at least one string in it.\n\nBullet charts in the facet grid '
+    'present the mean, standard deviation and maximum value of a 1D dataset. '
+    'Since all of these quantities are quantitiative, they can only be '
+    'generated from numerical data.'
+)
 
 def rect(xref, yref, x0, x1, y0, y1, color):
     shape = {
@@ -213,13 +220,34 @@ def _return_traces_list_for_subplot_cell(trace_type, group, x, y, theme,
                                          marker_color, kwargs_marker,
                                          kwargs_trace):
 
-    mean = np.mean(group[x])
-    rounded_mean = round(mean, 2)
     mode = None
     traces_for_cell = []
     if trace_type == 'bullet':
+        if 'x' in trace_dimension:
+            # check if data contains strings
+            if any(isinstance(e, str) for e in group[x]):
+                raise exceptions.PlotlyError(
+                    BULLET_USING_STRING_DATA_MSG
+                )
+            std = np.std(group[x])
+            rounded_mean = round(np.mean(group[x]), 2)
+            max_value = max(group[x])
+        else:
+            # check if data contains strings
+            if any(isinstance(e, str) for e in group[y]):
+                raise exceptions.PlotlyError(
+                    BULLET_USING_STRING_DATA_MSG
+                )
+            std = np.std(group[y])
+            rounded_mean = round(np.mean(group[y]), 2)
+            max_value = max(group[y])
+
+        bullet_range_x = std
+        bullet_measure_x = rounded_mean
+        bullet_pt_x = max_value
+
         bullet_range = go.Bar(
-            x=[rounded_mean],
+            x=[bullet_range_x],
             y=[0.5],
             marker=dict(
                 color='rgb(230,60,140)',
@@ -232,7 +260,7 @@ def _return_traces_list_for_subplot_cell(trace_type, group, x, y, theme,
         )
 
         bullet_measure = go.Bar(
-            x=[list(group[x])[-1]],
+            x=[bullet_measure_x],
             y=[0.5],
             marker=dict(
                 color=marker_color,
@@ -246,7 +274,7 @@ def _return_traces_list_for_subplot_cell(trace_type, group, x, y, theme,
         )
 
         bullet_pt = go.Scatter(
-            x=[max(group[x])],
+            x=[bullet_pt_x],
             y=[0.5],
             hoverinfo='x',
             line=kwargs_marker['line'],
@@ -257,8 +285,7 @@ def _return_traces_list_for_subplot_cell(trace_type, group, x, y, theme,
         traces_for_cell.append(bullet_measure)
         traces_for_cell.append(bullet_pt)
 
-    elif trace_type in ['avg']:
-        # deal with label
+    elif trace_type in ['text']:  # grab from a column
         pass
 
     elif trace_type in ['scatter', 'scattergl', 'line',
@@ -280,48 +307,51 @@ def _return_traces_list_for_subplot_cell(trace_type, group, x, y, theme,
             **kwargs_trace
         )
 
-        if trace_type == 'line':
+        if trace_type in ['scatter', 'scattergl']:
+            trace['mode'] = 'markers'
+            last_pt['mode'] = 'markers'
+
+        elif trace_type == 'line':
             trace['mode'] = 'lines'
             trace['type'] = 'scatter'
             last_pt['mode'] = 'markers'
             last_pt['type'] = 'scatter'
 
-        elif trace_type in ['scatter', 'scattergl']:
-            trace['mode'] = 'markers'
-            last_pt['mode'] = 'markers'
+        if trace_dimension == 'x':
+            # add x
+            trace['x'] = list(group[x]) if len(group[x]) <= 1 else list(group[x])[:-1]
+            last_pt['x'] = list(group[x])[-1:]
 
-        if theme == 'sparklines':
-            if trace_dimension == 'x':
-                trace['y'] = list(group[y]) if len(group[y]) <= 1 else list(group[y])
-                last_pt['y'] = list(group[y])[-1:]
+            #trace['y'] = [None]
+            #last_pt['y'] = [None]
+        elif trace_dimension == 'y':
+            #trace['x'] = [None]
+            #last_pt['x'] = [None]
 
-                trace['x'] = range(len(group[y]))
-                last_pt['x'] = range(len(group[y]))[-1:]
-            elif trace_dimension == 'y':
-                trace['x'] = list(group[x]) if len(group[x]) <= 1 else list(group[x])
+            # add y
+            trace['y'] = list(group[y]) if len(group[y]) <= 1 else list(group[y])[:-1]
+            last_pt['y'] = list(group[y])[-1:]
+        else:  # 'x+y'
+            if trace_type in ['scatter', 'scattergl', 'line', 'histogram']:
+                # add both x and y
+                trace['x'] = list(group[x]) if len(group[x]) <= 1 else list(group[x])[:-1]
                 last_pt['x'] = list(group[x])[-1:]
 
-                trace['y'] = range(len(group[y]))
-                last_pt['y'] = range(len(group[y]))[-1:]
-            elif trace_dimension == 'x+y':
-                if x:
-                    trace['x'] = list(group[x]) if len(group[x]) <= 1 else list(group[x])[:-1]
-                    last_pt['x'] = list(group[x])[-1:]
-                if y:
-                    trace['y'] = list(group[y]) if len(group[y]) <= 1 else list(group[y])[:-1]
-                    last_pt['y'] = list(group[y])[-1:]
-        else:
-            if x:
-                trace['x'] = list(group[x]) if len(group[x]) <= 1 else list(group[x])
+                #trace['y'] = list(group[y]) if len(group[y]) <= 1 else list(group[y])[:-1]
+                #last_pt['y'] = list(group[y])[-1:]
+
+            elif trace_type in ['box', 'bar']:
+                # add only x
+                trace['x'] = list(group[x]) if len(group[x]) <= 1 else list(group[x])[:-1]
                 last_pt['x'] = list(group[x])[-1:]
-            if y:
-                trace['y'] = list(group[y]) if len(group[y]) <= 1 else list(group[y])[:-1]
-                last_pt['y'] = list(group[y])[-1:]
+
+                #trace['y'] = [None]
+                #last_pt['y'] = [None]
 
         traces_for_cell.append(trace)
         traces_for_cell.append(last_pt)
 
-    elif trace_type == 'area':
+    elif trace_type in ['area']:
         trace = dict(
             x=range(len(group[y])),
             type='scatter',
@@ -335,7 +365,6 @@ def _return_traces_list_for_subplot_cell(trace_type, group, x, y, theme,
 
         if y:
             trace['y'] = list(group[y]) if len(group[y]) <= 1 else list(group[y])[:-1]
-
         traces_for_cell.append(trace)
 
     return traces_for_cell
@@ -647,7 +676,6 @@ def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
                 SUBPLOT_SPACING, marker_color, kwargs_trace, kwargs_marker,
                 row_colors, alternate_row_color, theme, column_width,
                 trace_dimension, trace_colors_2d):
-
     shared_xaxes = shared_yaxes = False
     fig = make_subplots(rows=num_of_rows, cols=num_of_cols,
                         shared_xaxes=shared_xaxes, shared_yaxes=shared_yaxes,
@@ -717,7 +745,6 @@ def _facet_grid(df, x, y, facet_row, facet_col, num_of_rows,
                     SUBPLOT_SPACING,
                     'row' if facet_row else 'col',
                     flipped_rows,
-                    column_width=column_width
                 )
             )
 
@@ -793,8 +820,8 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
                                   'rgb(255, 253, 250)'),
                       alternate_row_color=True,
                       theme='facet', column_width=None, trace_dimension=None,
-                      trace_colors=None, x_margin_factor=0.2,
-                      y_margin_factor=0.2,
+                      trace_colors=None, x_margin_factor=0.4,
+                      y_margin_factor=0.4, chart_types=None,
                       **kwargs):
     """
     Returns figure for facet grid.
@@ -881,6 +908,8 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
         border. The y_margin_factor is multiplied by the standard deviation of
         the y-values of the data to yield the actual margin.
         Default = 0.2
+    :param (list|tuple) chart_types: a sequence (list/tuple/etc) of valid
+        chart names that each column will produce in order from left to right.
     :param (dict) kwargs: a dictionary of scatterplot arguments.
 
     Examples 1: One Way Faceting
@@ -1084,22 +1113,15 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
     else:
         marker_color = 'rgb(0, 0, 0)'
 
-    # set trace dimension
+    # set trace dimension if None
     if trace_dimension is None:
-        if x is None and y is None:
-            trace_dimension = 'x'
-        elif x is not None and y is not None:
-            trace_dimension = 'x+y'
-        elif x and not y:
-            trace_dimension = 'x'
-        elif not x and y:
-            trace_dimension = 'y'
+        trace_dimension = 'x'
 
+    # validate trace dimension
     if trace_dimension not in ['x', 'y', 'x+y']:
         raise exceptions.PlotlyError(
             "trace_dimension must be either 'x', 'y' or 'x+y'"
         )
-
 
     # validate list/tuple of trace_colors
     if not trace_colors:
@@ -1155,6 +1177,22 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
     if column_width is None:
         column_width = [1 for _ in range(num_of_cols)]
 
+    # validate chart_types
+    # TODO: integrate this with trace_type eventually
+    # and keep backwards compatibility
+    if chart_types is None:
+        chart_types = ['scatter' for _ in range(num_of_cols)]
+    else:
+        # TODO: use sequence checker, not just list
+        if not isinstance(chart_types, list):
+            raise exceptions.PlotlyError(
+                'chart_types must be a list'
+            )
+        if len(chart_types) != num_of_cols:
+            raise exceptions.PlotlyError(
+                'number of strings in chart_types must be equal to the '
+                'number of columns'
+            )
     show_legend = False
     if color_name:
         if isinstance(df[color_name].iloc[0], str) or color_is_cat:
@@ -1425,25 +1463,34 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
             for trace in fig['data']:
                 if trace['xaxis'][1:] == str(num):
                     traces_with_same_axes.append(trace)
+            if trace['x'] is not None:
+                min_x = min(
+                    [min(trace['x']) for trace in traces_with_same_axes]
+                )
+                max_x = max(
+                    [max(trace['x']) for trace in traces_with_same_axes]
+                )
+            else:
+                min_x = [None]
+                max_x = [None]
+            if trace['y'] is not None:
+                min_y = min(
+                    [min(trace['y']) for trace in traces_with_same_axes]
+                )
+                max_y = max(
+                    [max(trace['y']) for trace in traces_with_same_axes]
+                )
+            else:
+                min_y = [None]
+                max_y = [None]
 
-            min_x = min(
-                [min(trace['x']) for trace in traces_with_same_axes]
+            range_are_numbers = all(
+                isinstance(n, Number) for n in [min_x, max_x, min_y, max_y]
             )
-            max_x = max(
-                [max(trace['x']) for trace in traces_with_same_axes]
-            )
-            min_y = min(
-                [min(trace['y']) for trace in traces_with_same_axes]
-            )
-            max_y = max(
-                [max(trace['y']) for trace in traces_with_same_axes]
-            )
-
-            range_are_numbers = (isinstance(min_y, Number) and
-                                 isinstance(max_y, Number))
 
             # TODO: set x, y ranges when string data
             if range_are_numbers:
+                print('range are numbers')
                 min_y = math.floor(min_y)
                 max_y = math.ceil(max_y)
 
