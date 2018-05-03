@@ -52,7 +52,7 @@ class FileToolsTest(PlotlyTestCase):
         kwargs = {'world_readable': 'True'}
         self.assertRaises(TypeError, tools.set_config_file, **kwargs)
 
-    def test_set_config_expected_error_msg(self):
+    def test_set_config_expected_warning_msg(self):
 
         # Check that UserWarning is being called with http plotly_domain
 
@@ -63,6 +63,18 @@ class FileToolsTest(PlotlyTestCase):
             assert len(w) == 1
             assert issubclass(w[-1].category, UserWarning)
             assert "plotly_domain" in str(w[-1].message)
+
+
+    def test_set_config_no_warning_msg_if_plotly_domain_is_https(self):
+
+        # Check that no UserWarning is being called with https plotly_domain
+
+        with warnings.catch_warnings(record=True) as w:
+            warnings.simplefilter("always")
+            kwargs = {'plotly_domain': 'https://www.foo-bar.com'}
+            tools.set_config_file(**kwargs)
+            assert len(w) == 0
+
 
     def test_reset_config_file(self):
 
