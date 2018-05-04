@@ -35,7 +35,7 @@ lock = threading.Lock()
 
 http_msg = (
     "The plotly_domain and plotly_api_domain of your config file must start "
-    "with 'https', not 'http'.\n If you are not using On-Premise then run the "
+    "with 'https', not 'http'. If you are not using On-Premise then run the "
     "following code to ensure your plotly_domain and plotly_api_domain start "
     "with 'https':\n\n\n"
     "import plotly\n"
