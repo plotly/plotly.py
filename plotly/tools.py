@@ -192,6 +192,7 @@ def set_config_file(plotly_domain=None,
     ensure_local_plotly_files()  # make sure what's there is OK
     utils.validate_world_readable_and_sharing_settings({
         'sharing': sharing, 'world_readable': world_readable})
+
     settings = get_config_file()
     if isinstance(plotly_domain, six.string_types):
         settings['plotly_domain'] = plotly_domain
@@ -217,6 +218,11 @@ def set_config_file(plotly_domain=None,
         settings['auto_open'] = auto_open
     elif auto_open is not None:
         raise TypeError('auto_open should be a boolean')
+
+    # validate plotly_domain and plotly_api_domain
+    utils.validate_plotly_domains(
+        {'plotly_domain': plotly_domain, 'plotly_api_domain': plotly_api_domain}
+    )
 
     if isinstance(world_readable, bool):
         settings['world_readable'] = world_readable
