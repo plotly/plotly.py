@@ -7,11 +7,12 @@ Low-level functionality NOT intended for users to EVER use.
 """
 from __future__ import absolute_import
 
+import decimal
 import os.path
 import re
 import sys
 import threading
-import decimal
+import warnings
 from collections import deque
 
 import pytz
@@ -30,6 +31,30 @@ sage_all = get_module('sage.all')
 
 ### incase people are using threading, we lock file reads
 lock = threading.Lock()
+
+
+http_msg = (
+    "The plotly_domain and plotly_api_domain of your config file must start "
+    "with 'https', not 'http'. If you are not using On-Premise then run the "
+    "following code to ensure your plotly_domain and plotly_api_domain start "
+    "with 'https':\n\n\n"
+    "import plotly\n"
+    "plotly.tools.set_config_file(\n"
+    "    plotly_domain='https://plot.ly',\n"
+    "    plotly_api_domain='https://api.plot.ly'\n"
+    ")\n\n\n"
+    "If you are using On-Premise then you will need to use your company's "
+    "domain and api_domain urls:\n\n\n"
+    "import plotly\n"
+    "plotly.tools.set_config_file(\n"
+    "    plotly_domain='https://plotly.your-company.com',\n"
+    "    plotly_api_domain='https://plotly.your-company.com'\n"
+    ")\n\n\n"
+    "Make sure to replace `your-company.com` with the URL of your Plotly "
+    "On-Premise server.\nSee "
+    "https://plot.ly/python/getting-started/#special-instructions-for-plotly-onpremise-users "
+    "for more help with getting started with On-Premise."
+)
 
 
 ### general file setup tools ###
@@ -297,6 +322,7 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
         else:
             raise NotEncodable
 
+
 ### unicode stuff ###
 def decode_unicode(coll):
     if isinstance(coll, list):
@@ -434,6 +460,16 @@ def validate_world_readable_and_sharing_settings(option_set):
             "'secret' -- for private plots that can be shared with a "
             "secret url"
         )
+
+
+def validate_plotly_domains(option_set):
+    domains_not_none = []
+    for d in ['plotly_domain', 'plotly_api_domain']:
+        if d in option_set and option_set[d]:
+            domains_not_none.append(option_set[d])
+
+    if not all(d.lower().startswith('https') for d in domains_not_none):
+        warnings.warn(http_msg, category=UserWarning)
 
 
 def set_sharing_and_world_readable(option_set):
