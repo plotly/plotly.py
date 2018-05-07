@@ -291,7 +291,7 @@ if matplotlylib:
         }
         df = pd.DataFrame.from_dict(data)
 
-        plotopts = {'x': 'esN', 'marker': 'o'}
+        plotopts = {'x': 'esN'}
         fig, ax = plt.subplots(1, 1)
         df.plot(ax=ax, **plotopts)
 
@@ -301,7 +301,7 @@ if matplotlylib:
         _json.dumps(renderer.plotly_fig, cls=utils.PlotlyJSONEncoder)
 
         jy = _json.dumps(renderer.plotly_fig['data'][1]['y'],
-                        cls=utils.PlotlyJSONEncoder)
+                         cls=utils.PlotlyJSONEncoder)
         print(jy)
         array = _json.loads(jy)
         assert(array == [-398.11793027, -398.11792966, -398.11786308, None])

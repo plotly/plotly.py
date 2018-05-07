@@ -1,5 +1,5 @@
+import sys
 from unittest import TestCase
-from nose.tools import raises
 
 import plotly.graph_objs as go
 from plotly.basedatatypes import Undefined

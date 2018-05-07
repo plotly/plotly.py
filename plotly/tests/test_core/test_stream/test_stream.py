@@ -10,7 +10,6 @@ from nose.plugins.attrib import attr
 
 import plotly.plotly as py
 from plotly.graph_objs import (Layout, Scatter, Stream)
-from plotly import exceptions
 from plotly.tests.utils import PlotlyTestCase
 
 un = 'PythonAPI'
@@ -28,7 +27,7 @@ class TestStreaming(PlotlyTestCase):
         super(TestStreaming, self).setUp()
         py.sign_in(un, ak, **config)
 
-    @attr('slow')
+    #@attr('slow')
     def test_initialize_stream_plot(self):
         py.sign_in(un, ak)
         stream = Stream(token=tk, maxpoints=50)
@@ -50,7 +49,7 @@ class TestStreaming(PlotlyTestCase):
         time.sleep(.5)
         my_stream = py.Stream(tk)
         my_stream.open()
-        my_stream.write(Scatter(x=1, y=10))
+        my_stream.write(Scatter(x=[1], y=[10]))
         time.sleep(.5)
         my_stream.close()
 
@@ -82,29 +81,29 @@ class TestStreaming(PlotlyTestCase):
         title_1 = "this other title i picked second"
         my_stream = py.Stream(tk)
         my_stream.open()
-        my_stream.write(Scatter(x=1, y=10), layout=Layout(title=title_0))
+        my_stream.write(Scatter(x=[1], y=[10]), layout=Layout(title=title_0))
         time.sleep(.5)
         my_stream.close()
         my_stream.open()
-        my_stream.write(Scatter(x=1, y=10), layout=Layout(title=title_1))
+        my_stream.write(Scatter(x=[1], y=[10]), layout=Layout(title=title_1))
         my_stream.close()
 
     @attr('slow')
     def test_stream_validate_data(self):
-        with self.assertRaises(exceptions.PlotlyError):
+        with self.assertRaises(ValueError):
             py.sign_in(un, ak)
             my_stream = py.Stream(tk)
             my_stream.open()
-            my_stream.write(dict(x=1, y=10, z=[1]))  # assumes scatter...
+            my_stream.write(dict(x=[1], y=[10], z=[1]))  # assumes scatter...
             my_stream.close()
 
     @attr('slow')
     def test_stream_validate_layout(self):
-        with self.assertRaises(exceptions.PlotlyError):
+        with self.assertRaises(ValueError):
             py.sign_in(un, ak)
             my_stream = py.Stream(tk)
             my_stream.open()
-            my_stream.write(Scatter(x=1, y=10), layout=Layout(legend=True))
+            my_stream.write(Scatter(x=[1], y=[10]), layout=Layout(legend=True))
             my_stream.close()
 
     @attr('slow')
@@ -115,7 +114,7 @@ class TestStreaming(PlotlyTestCase):
         py.sign_in(un, ak)
         my_stream = py.Stream(tk)
         my_stream.open()
-        my_stream.write(Scatter(x=1, y=10, name='nope'))
+        my_stream.write(Scatter(x=[1], y=[10], name='nope'))
         my_stream.close()
 
     def test_stream_no_scheme(self):
@@ -150,7 +149,7 @@ class TestStreaming(PlotlyTestCase):
             'server': 'stream.plot.ly',
             'port': 80,
             'ssl_enabled': False,
-            'ssl_verification_enabled': False, 
+            'ssl_verification_enabled': False,
             'headers': {
                 'Host': 'stream.plot.ly',
                 'plotly-streamtoken': tk
@@ -175,7 +174,7 @@ class TestStreaming(PlotlyTestCase):
             'server': 'stream.plot.ly',
             'port': 443,
             'ssl_enabled': True,
-            'ssl_verification_enabled': True, 
+            'ssl_verification_enabled': True,
             'headers': {
                 'Host': 'stream.plot.ly',
                 'plotly-streamtoken': tk

@@ -343,6 +343,8 @@ class PlotlyRenderer(Renderer):
             color = \
                 mpltools.merge_color_and_opacity(props['linestyle']['color'],
                                                  props['linestyle']['alpha'])
+
+            #print(mpltools.convert_dash(props['linestyle']['dasharray']))
             line = go.Line(
                 color=color,
                 width=props['linestyle']['linewidth'],
@@ -722,7 +724,7 @@ class PlotlyRenderer(Renderer):
         for key in ['width', 'height', 'autosize', 'margin']:
             try:
                 del self.plotly_fig['layout'][key]
-            except KeyError:
+            except (KeyError, AttributeError):
                 pass
 
     def strip_style(self):

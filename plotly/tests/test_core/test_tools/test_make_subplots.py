@@ -3,7 +3,7 @@ from __future__ import absolute_import
 from unittest import TestCase
 
 from plotly.graph_objs import (Annotation, Annotations, Data, Figure, Font,
-                               Layout, Scene, XAxis, YAxis)
+                               Layout, layout, Scene, XAxis, YAxis)
 import plotly.tools as tls
 
 
@@ -144,19 +144,19 @@ class TestMakeSubplots(TestCase):
         expected = Figure(
             data=Data(),
             layout=Layout(
-                xaxis1=XAxis(
+                xaxis1=layout.XAxis(
                     domain=[0.0, 1.0],
                     anchor='y'
                 ),
-                xaxis2=XAxis(
+                xaxis2=layout.XAxis(
                     domain=[0.0, 1.0],
                     anchor='y2'
                 ),
-                yaxis1=YAxis(
-                    domain=[0.575, 1.0],
+                yaxis1=layout.YAxis(
+                    domain=[0.0, 0.425],
                     anchor='x'
                 ),
-                yaxis2=YAxis(
+                yaxis2=layout.YAxis(
                     domain=[0.575, 1.0],
                     anchor='x2'
                 ),

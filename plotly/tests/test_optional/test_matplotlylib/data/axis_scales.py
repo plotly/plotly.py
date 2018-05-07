@@ -7,6 +7,7 @@ D = dict(
     x=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     y=[10, 3, 100, 6, 45, 4, 80, 45, 3, 59])
 
+
 EVEN_LINEAR_SCALE = Figure(
     data=Data([
         Scatter(
@@ -16,8 +17,8 @@ EVEN_LINEAR_SCALE = Figure(
             mode='lines',
             line=Line(
                 dash='solid',
-                color='rgba (0, 0, 255, 1)',
-                width=1.0
+                color='rgba (31, 119, 180, 1)',
+                width=1.5
             ),
             xaxis='x1',
             yaxis='y1'
@@ -30,8 +31,8 @@ EVEN_LINEAR_SCALE = Figure(
         margin=Margin(
             l=80,
             r=63,
-            b=47,
-            t=47,
+            b=52,
+            t=57,
             pad=0
         ),
         hovermode='closest',
@@ -41,14 +42,12 @@ EVEN_LINEAR_SCALE = Figure(
             range=[0.0, 18.0],
             type='linear',
             showline=True,
-            tick0=0,
-            dtick=3,
+            nticks=10,
             ticks='inside',
             showgrid=False,
-            tickmode=False,
             zeroline=False,
             tickfont=Font(
-                size=12.0
+                size=10.0
             ),
             anchor='y1',
             side='bottom',
@@ -56,17 +55,15 @@ EVEN_LINEAR_SCALE = Figure(
         ),
         yaxis1=YAxis(
             domain=[0.0, 1.0],
-            range=[0.0, 195.0],
+            range=[-1.8500000000000005, 195.0],
             type='linear',
             showline=True,
-            tick0=0,
-            dtick=13,
+            nticks=10,
             ticks='inside',
             showgrid=False,
-            tickmode=False,
             zeroline=False,
             tickfont=Font(
-                size=12.0
+                size=10.0
             ),
             anchor='x1',
             side='left',
