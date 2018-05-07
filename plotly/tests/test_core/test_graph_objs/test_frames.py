@@ -2,9 +2,21 @@ from __future__ import absolute_import
 
 from unittest import TestCase
 
-from plotly.graph_objs import Bar, Frames, Frame
+from plotly.graph_objs import Bar, Frames, Frame, Layout
 
 import re
+
+
+def return_prop_descriptions(prop_descrip_text):
+    raw_matches = re.findall(
+        "\n        [a-z]+|        [a-z]+\n", prop_descrip_text
+    )
+    matches = []
+    for r in raw_matches:
+        r = r.replace(' ', '')
+        r = r.replace('\n', '')
+        matches.append(r)
+    return matches
 
 
 class FramesTest(TestCase):
@@ -21,20 +33,6 @@ class FramesTest(TestCase):
         Frames(native_frames)
         Frames()
 
-    def test_string_frame(self):
-        frames = Frames()
-        frames.append({'group': 'baz', 'data': []})
-        frames.append('foobar')
-        self.assertEqual(frames[1], 'foobar')
-        self.assertEqual(frames.to_string(),
-                         "Frames([\n"
-                         "    dict(\n"
-                         "        data=Data(),\n"
-                         "        group='baz'\n"
-                         "    ),\n"
-                         "    'foobar'\n"
-                         "])")
-
     def test_non_string_frame(self):
         frames = Frames()
         frames.append({})
@@ -47,38 +45,28 @@ class FramesTest(TestCase):
         #     frames.append(0)
 
     def test_deeply_nested_layout_attributes(self):
-        frames = Frames()
-        frames.append({})
-        frames[0].layout.xaxis.showexponent = 'all'
+        frames = Frame
+        frames.layout = [Layout()]
+        frames.layout[0].xaxis.showexponent = 'all'
+        prop_descrip_text = frames.layout[0].font._prop_descriptions
+
+        matches = return_prop_descriptions(prop_descrip_text)
 
         # It's OK if this needs to change, but we should check *something*.
         self.assertEqual(
-            frames[0].layout.font._get_valid_attributes(),
+            set(matches),
             {'color', 'family', 'size'}
         )
 
     def test_deeply_nested_data_attributes(self):
-        #frames = Frames()
-        #frames.append({})
-        #frames[0].data = [Bar()]
-        #frames[0].data[0].marker.color = 'red'
-
         frames = Frame
         frames.data = [Bar()]
         frames.data[0].marker.color = 'red'
 
         # parse out valid attrs from ._prop_descriptions
-        prop_descrip = frames.data[0].marker.line._prop_descriptions
-        prop_descrip
+        prop_descrip_text = frames.data[0].marker.line._prop_descriptions
 
-        raw_matches = re.findall(
-            "\n        [a-z]+|        [a-z]+\n", prop_descrip
-        )
-        matches = []
-        for r in raw_matches:
-            r = r.replace(' ', '')
-            r = r.replace('\n', '')
-            matches.append(r)
+        matches = return_prop_descriptions(prop_descrip_text)
 
         # It's OK if this needs to change, but we should check *something*.
         self.assertEqual(
@@ -89,10 +77,14 @@ class FramesTest(TestCase):
 
     def test_frame_only_attrs(self):
         frames = Frame
-        frames.append({})
+        frames.frame = [Frame()]
 
         # It's OK if this needs to change, but we should check *something*.
+        prop_descrip_text = frames.frame[0]._prop_descriptions
+
+        matches = return_prop_descriptions(prop_descrip_text)
+
         self.assertEqual(
-            frames[0]._get_valid_attributes(),
+            set(matches),
             {'group', 'name', 'data', 'layout', 'baseframe', 'traces'}
         )

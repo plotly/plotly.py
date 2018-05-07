@@ -1386,7 +1386,8 @@ def validate(obj, obj_type):
 
     try:
         cls = getattr(graph_objs, obj_type)
-    except AttributeError:
+    #except AttributeError:
+    except ValueError:
         raise exceptions.PlotlyError(
             "'{0}' is not a recognizable graph_obj.".
             format(obj_type))

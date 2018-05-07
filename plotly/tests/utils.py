@@ -85,6 +85,38 @@ def compare_dict(dict1, dict2, equivalent=True, msg='', tol=10e-8):
     return equivalent, msg
 
 
+def strip_dict_params(d1, d2, ignore=['uid']):
+    """
+    Helper function for assert_dict_equal
+
+    Nearly duplicate of assert_fig_equal in plotly/tests/test_optional/optional_utils.py
+    Removes `ignore` params from d1 and/or d2 if they exist
+    then returns stripped dictionaries
+
+    :param (list|tuple) ignore: sequence of key names as
+        strings that are removed from both d1 and d2 if
+        they exist
+    """
+    # deep copy d1 and d2
+    if 'to_plotly_json' in dir(d1):
+        d1_copy = copy.deepcopy(d1.to_plotly_json())
+    else:
+        d1_copy = copy.deepcopy(d1)
+
+    if 'to_plotly_json' in dir(d2):
+        d2_copy = copy.deepcopy(d2.to_plotly_json())
+    else:
+        d2_copy = copy.deepcopy(d2)
+
+    for key in ignore:
+        if key in d1_copy.keys():
+            del d1_copy[key]
+        if key in d2_copy.keys():
+            del d2_copy[key]
+
+    return d1_copy, d2_copy
+
+
 def comp_nums(num1, num2, tol=10e-8):
     return abs(num1 - num2) < tol
 

@@ -61,19 +61,3 @@ def test_dict_instantiation_graph_obj_error_0():
 # raises(PlotlyListEntryError)
 def test_dict_instantiation_graph_obj_error_2():
     assert Data([Annotations()]) == [[]]
-
-
-def test_validate():
-    data = Data()
-    data.validate()
-    data += [{'type': 'scatter'}]
-    data.validate()
-    data += [{}, {}, {}]
-    data.validate()
-
-
-@raises(PlotlyDictKeyError)
-def test_validate_error():
-    data = Data()
-    data.append({'not-a-key': 'anything'})
-    data.validate()

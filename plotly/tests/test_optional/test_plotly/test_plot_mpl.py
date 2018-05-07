@@ -37,7 +37,7 @@ class PlotMPLTest(TestCase):
         update = []
         py.plot_mpl(fig, update=update, filename="nosetests", auto_open=False)
 
-    @raises(exceptions.PlotlyError)
+    @raises(KeyError)
     def test_update_validation_error(self):
         fig, ax = plt.subplots()
         ax.plot([1, 2, 3])

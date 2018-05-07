@@ -47,18 +47,3 @@ def test_dict_instantiation_graph_obj_error_0():
 def test_dict_instantiation_graph_obj_error_2():
     assert Annotations([Annotations()]) == [[]]
 
-
-def test_validate():
-    annotations = Annotations()
-    annotations.validate()
-    annotations += [{'text': 'some text'}]
-    annotations.validate()
-    annotations += [{}, {}, {}]
-    annotations.validate()
-
-
-@raises(PlotlyDictKeyError)
-def test_validate_error():
-    annotations = Annotations()
-    annotations.append({'not-a-key': 'anything'})
-    annotations.validate()
