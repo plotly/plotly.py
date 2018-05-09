@@ -1049,7 +1049,8 @@ class Data(PlotlyList):
         'Histogram2d', 'Histogram2dcontour', 'Mesh3d', 'Ohlc', 'Parcoords',
         'Pie', 'Pointcloud', 'Sankey', 'Scatter', 'Scatter3d', 'Scattercarpet',
         'Scattergeo', 'Scattergl', 'Scattermapbox', 'Scatterpolar',
-        'Scatterpolargl', 'Scatterternary', 'Surface', 'Table', 'Violin']
+        'Scatterpolargl', 'Scatterternary', 'Splom', 'Surface', 'Table',
+        'Violin']
 
     """
     _name = 'data'
@@ -1461,10 +1462,10 @@ class Layout(PlotlyDict):
         'grid', 'height', 'hiddenlabels', 'hiddenlabelssrc', 'hidesources',
         'hoverdistance', 'hoverlabel', 'hovermode', 'images', 'legend',
         'mapbox', 'margin', 'orientation', 'paper_bgcolor', 'plot_bgcolor',
-        'polar', 'radialaxis', 'scene', 'separators', 'shapes', 'showlegend',
-        'sliders', 'spikedistance', 'ternary', 'title', 'titlefont',
-        'updatemenus', 'violingap', 'violingroupgap', 'violinmode', 'width',
-        'xaxis', 'yaxis']
+        'polar', 'radialaxis', 'scene', 'selectdirection', 'separators',
+        'shapes', 'showlegend', 'sliders', 'spikedistance', 'ternary', 'title',
+        'titlefont', 'updatemenus', 'violingap', 'violingroupgap',
+        'violinmode', 'width', 'xaxis', 'yaxis']
     
     Run `<layout-object>.help('attribute')` on any of the above.
     '<layout-object>' is the object at []
@@ -1853,6 +1854,23 @@ class Scene(PlotlyDict):
 
     """
     _name = 'scene'
+
+
+class Splom(PlotlyDict):
+    """
+    Valid attributes for 'splom' at path [] under parents ():
+    
+        ['customdata', 'customdatasrc', 'diagonal', 'dimensions', 'hoverinfo',
+        'hoverinfosrc', 'hoverlabel', 'ids', 'idssrc', 'legendgroup', 'marker',
+        'name', 'opacity', 'selected', 'selectedpoints', 'showlegend',
+        'showlowerhalf', 'showupperhalf', 'stream', 'text', 'textsrc', 'type',
+        'uid', 'unselected', 'visible', 'xaxes', 'yaxes']
+    
+    Run `<splom-object>.help('attribute')` on any of the above.
+    '<splom-object>' is the object at []
+
+    """
+    _name = 'splom'
 
 
 class Stream(PlotlyDict):
