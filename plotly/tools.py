@@ -1324,9 +1324,15 @@ def make_subplots(rows=1, cols=1,
                                      ((delt_x + horizontal_spacing) * index))
         subtitle_pos_x *= rows
         for index in range(rows):
-            subtitle_pos_y[index] = (1 - ((y_e + vertical_spacing) * index))
+            if ROW_DIR > 0:
+                subtitle_pos_y[index] = (1 - ((y_e/rows + vertical_spacing/rows) * index))
+            else:
+                subtitle_pos_y[index] = (1 - ((y_e + vertical_spacing) * index))
         subtitle_pos_y *= cols
-        subtitle_pos_y = sorted(subtitle_pos_y, reverse=True)
+        if ROW_DIR > 0:
+            subtitle_pos_y = sorted(subtitle_pos_y, reverse=False)
+        else:
+            subtitle_pos_y = sorted(subtitle_pos_y, reverse=True)
 
     plot_titles = []
     for index in range(len(subplot_titles)):
