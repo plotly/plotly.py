@@ -28,7 +28,7 @@ np = get_module('numpy')
 Undefined = object()
 
 
-class BaseFigure:
+class BaseFigure(object):
     """
     Base class for all figure types (both widget and non-widget)
     """
@@ -258,7 +258,7 @@ class BaseFigure:
         """
         if prop.startswith('_') or hasattr(self, prop):
             # Let known properties and private properties through
-            super().__setattr__(prop, value)
+            super(BaseFigure, self).__setattr__(prop, value)
         else:
             # Raise error on unknown public properties
             raise AttributeError(prop)
@@ -2178,7 +2178,7 @@ Invalid property path '{key_path_str}' for layout
         return index_list[0]
 
 
-class BasePlotlyType:
+class BasePlotlyType(object):
     """
     BasePlotlyType is the base class for all objects in the trace, layout,
     and frame object hierarchies
@@ -2679,7 +2679,7 @@ class BasePlotlyType:
                 hasattr(self, prop) or
                 prop in self._validators):
             # Let known properties and private properties through
-            super().__setattr__(prop, value)
+            super(BasePlotlyType, self).__setattr__(prop, value)
         else:
             # Raise error on unknown public properties
             self._raise_on_invalid_property_error(prop)
@@ -3300,7 +3300,7 @@ class BaseLayoutHierarchyType(BasePlotlyType):
         pass
 
     def __init__(self, plotly_name, **kwargs):
-        super().__init__(plotly_name, **kwargs)
+        super(BasePlotlyType, self).__init__(plotly_name, **kwargs)
 
     def _send_prop_set(self, prop_path_str, val):
         if self.parent:
@@ -3370,7 +3370,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
 
         # Call superclass constructor
         # ---------------------------
-        super().__init__(plotly_name)
+        super(BaseLayoutHierarchyType, self).__init__(plotly_name)
 
         # Initialize _subplotid_props
         # ---------------------------
@@ -3391,7 +3391,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
             for k, v in kwargs.items()
             if not self._subplotid_prop_re.fullmatch(k)
         }
-        super()._process_kwargs(**unknown_kwargs)
+        super(BaseLayoutHierarchyType, self)._process_kwargs(**unknown_kwargs)
 
         subplot_kwargs = {
             k: v
@@ -3496,21 +3496,21 @@ class BaseLayoutType(BaseLayoutHierarchyType):
             validator = self._validators[prop]
             return validator.present(self._compound_props[prop])
         else:
-            return super().__getattribute__(prop)
+            return super(BaseLayoutHierarchyType, self).__getattribute__(prop)
 
     def __getitem__(self, prop):
         """
         Custom __getitem__ that handles dynamic subplot properties
         """
         prop = self._strip_subplot_suffix_of_1(prop)
-        return super().__getitem__(prop)
+        return super(BaseLayoutHierarchyType, self).__getitem__(prop)
 
     def __contains__(self, prop):
         """
         Custom __contains__ that handles dynamic subplot properties
         """
         prop = self._strip_subplot_suffix_of_1(prop)
-        return super().__contains__(prop)
+        return super(BaseLayoutHierarchyType, self).__contains__(prop)
 
     def __setitem__(self, prop, value):
         """
@@ -3521,7 +3521,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         prop_tuple = BaseFigure._str_to_dict_path(prop)
         if len(prop_tuple) != 1 or not isinstance(prop_tuple[0], str):
             # Let parent handle non-scalar non-string cases
-            super().__setitem__(prop, value)
+            super(BaseLayoutHierarchyType, self).__setitem__(prop, value)
             return
         else:
             # Unwrap prop tuple
@@ -3532,7 +3532,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         match = self._subplotid_prop_re.fullmatch(prop)
         if match is None:
             # Set as ordinary property
-            super().__setitem__(prop, value)
+            super(BaseLayoutHierarchyType, self).__setitem__(prop, value)
         else:
             # Set as subplotid property
             self._set_subplotid_prop(prop, value)
@@ -3546,7 +3546,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         match = self._subplotid_prop_re.fullmatch(prop)
         if match is None:
             # Set as ordinary property
-            super().__setattr__(prop, value)
+            super(BaseLayoutHierarchyType, self).__setattr__(prop, value)
         else:
             # Set as subplotid property
             self._set_subplotid_prop(prop, value)
@@ -3556,7 +3556,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         Custom __dir__ that handles dynamic subplot properties
         """
         # Include any active subplot values
-        return list(super().__dir__()) + sorted(self._subplotid_props)
+        return list(super(BaseLayoutHierarchyType, self).__dir__()) + sorted(self._subplotid_props)
 
 
 class BaseTraceHierarchyType(BasePlotlyType):
@@ -3565,7 +3565,7 @@ class BaseTraceHierarchyType(BasePlotlyType):
     """
 
     def __init__(self, plotly_name, **kwargs):
-        super().__init__(plotly_name, **kwargs)
+        super(BasePlotlyType, self).__init__(plotly_name, **kwargs)
 
     def _send_prop_set(self, prop_path_str, val):
         if self.parent:
@@ -3582,7 +3582,7 @@ class BaseTraceType(BaseTraceHierarchyType):
     """
 
     def __init__(self, plotly_name, **kwargs):
-        super().__init__(plotly_name, **kwargs)
+        super(BaseTraceHierarchyType, self).__init__(plotly_name, **kwargs)
 
         # Initialize callback function lists
         # ----------------------------------
@@ -3803,7 +3803,7 @@ class BaseFrameHierarchyType(BasePlotlyType):
     """
 
     def __init__(self, plotly_name, **kwargs):
-        super().__init__(plotly_name, **kwargs)
+        super(BasePlotlyType, self).__init__(plotly_name, **kwargs)
 
     def _send_prop_set(self, prop_path_str, val):
         # Note: Frames are not supported by FigureWidget, and updates are not
