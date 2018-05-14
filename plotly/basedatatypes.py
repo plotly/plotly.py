@@ -1,23 +1,22 @@
 import collections
 import re
-import typing as typ
 import warnings
 from contextlib import contextmanager
 from copy import deepcopy, copy
 from pprint import PrettyPrinter
-from typing import Dict, Tuple, Union, Callable, List
 
-from plotly.optional_imports import get_module
+from .optional_imports import get_module
 
-import plotly.offline as pyo
+from . import offline as pyo
 from _plotly_utils.basevalidators import (
     CompoundValidator, CompoundArrayValidator, BaseDataValidator,
     BaseValidator)
-from plotly import animation
-from plotly.callbacks import (Points, BoxSelector, LassoSelector,
+from . import animation
+from .callbacks import (Points, BoxSelector, LassoSelector,
                               InputDeviceState)
-from plotly.utils import ElidedPrettyPrinter
-from plotly.validators import (DataValidator, LayoutValidator, FramesValidator)
+from .utils import ElidedPrettyPrinter
+from .validators import (DataValidator, LayoutValidator, FramesValidator)
+
 
 # Optional imports
 # ----------------
@@ -2260,7 +2259,7 @@ class BasePlotlyType:
         return self._plotly_name
 
     @property
-    def _parent_path_str(self) -> str:
+    def _parent_path_str(self):
         """
         dot-separated path string to this object's parent.
 
@@ -2283,7 +2282,7 @@ class BasePlotlyType:
         raise NotImplementedError
 
     @property
-    def _prop_descriptions(self) -> str:
+    def _prop_descriptions(self):
         """
         Formatted string containing all of this obejcts child properties
         and their descriptions
@@ -3162,7 +3161,7 @@ class BasePlotlyType:
                 for callback in callbacks:
                     callback(self, *callback_args)
 
-    def on_change(self, callback, *args, append=False):
+    def on_change(self, callback, append=False, *args):
         """
         Register callback function to be called when certain properties or
         subproperties of this object are modified.
@@ -3297,7 +3296,7 @@ class BaseLayoutHierarchyType(BasePlotlyType):
     """
 
     @property
-    def _parent_path_str(self) -> str:
+    def _parent_path_str(self):
         pass
 
     def __init__(self, plotly_name, **kwargs):
@@ -3603,7 +3602,7 @@ class BaseTraceType(BaseTraceHierarchyType):
     # ---
     # All trace types must have a top-level UID
     @property
-    def uid(self) -> str:
+    def uid(self):
         raise NotImplementedError
 
     @uid.setter
@@ -3613,9 +3612,9 @@ class BaseTraceType(BaseTraceHierarchyType):
     # Hover
     # -----
     def on_hover(self,
-                 callback: typ.Callable[
-                     ['BaseTraceType', Points, InputDeviceState], None],
+                 callback,
                  append=False):
+        # typ.Callable[['BaseTraceType', Points, InputDeviceState], None]
         """
         Register function to be called when the user hovers over one or more
         points in this trace
@@ -3650,7 +3649,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         if callback:
             self._hover_callbacks.append(callback)
 
-    def _dispatch_on_hover(self, points: Points, state: InputDeviceState):
+    def _dispatch_on_hover(self, points, state):
         """
         Dispatch points and device state all all hover callbacks
         """
@@ -3660,8 +3659,7 @@ class BaseTraceType(BaseTraceHierarchyType):
     # Unhover
     # -------
     def on_unhover(self,
-                   callback: typ.Callable[
-                       ['BaseTraceType', Points, InputDeviceState], None],
+                   callback,
                    append=False):
         """
         Register function to be called when the user unhovers away from one
@@ -3697,7 +3695,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         if callback:
             self._unhover_callbacks.append(callback)
 
-    def _dispatch_on_unhover(self, points: Points, state: InputDeviceState):
+    def _dispatch_on_unhover(self, points, state):
         """
         Dispatch points and device state all all hover callbacks
         """
@@ -3707,8 +3705,7 @@ class BaseTraceType(BaseTraceHierarchyType):
     # Click
     # -----
     def on_click(self,
-                 callback: typ.Callable[
-                     ['BaseTraceType', Points, InputDeviceState], None],
+                 callback,
                  append=False):
         """
         Register function to be called when the user clicks on one or more
@@ -3743,7 +3740,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         if callback:
             self._click_callbacks.append(callback)
 
-    def _dispatch_on_click(self, points: Points, state: InputDeviceState):
+    def _dispatch_on_click(self, points, state):
         """
         Dispatch points and device state all all hover callbacks
         """
@@ -3754,9 +3751,7 @@ class BaseTraceType(BaseTraceHierarchyType):
     # ------
     def on_selection(
             self,
-            callback: typ.Callable[[
-                'BaseTraceType', Points, typ.Union[BoxSelector, LassoSelector]
-            ], None],
+            callback,
             append=False):
         """
         Register function to be called when the user selects one or more
@@ -3793,8 +3788,8 @@ class BaseTraceType(BaseTraceHierarchyType):
             self._select_callbacks.append(callback)
 
     def _dispatch_on_selection(self,
-                               points: Points,
-                               selector: typ.Union[BoxSelector, LassoSelector]):
+                               points,
+                               selector):
         """
         Dispatch points and selector info to selection callbacks
         """

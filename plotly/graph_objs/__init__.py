@@ -65,6 +65,7 @@ from plotly.graph_objs import layout
 from ._frame import Frame
 from ._figure import Figure
 
+
 try:
     import ipywidgets
     from ._figurewidget import FigureWidget

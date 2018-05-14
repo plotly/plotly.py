@@ -31,12 +31,15 @@ from plotly import exceptions, files, session, tools, utils
 from plotly.api import v1, v2
 from plotly.basedatatypes import BaseTraceType
 from plotly.plotly import chunked_requests
+
 from plotly.graph_objs import Scatter
+
 from plotly.grid_objs import Grid, Column
 from plotly.dashboard_objs import dashboard_objs as dashboard
 
 # This is imported like this for backwards compat. Careful if changing.
 from plotly.config import get_config, get_credentials
+
 
 __all__ = None
 
@@ -631,14 +634,16 @@ class Stream:
         validate = False
 
         # Convert trace objects to dictionaries
+        
         if isinstance(trace, BaseTraceType):
-            trace = trace.to_plotly_json()
+           trace = trace.to_plotly_json()
 
         stream_object = dict()
         stream_object.update(trace)
         if 'type' not in stream_object:
             # tests if Scatter contains invalid kwargs
-            dummy_obj = copy.deepcopy(Scatter(**stream_object))
+            # TODO: replace Scatter with something else
+            #dummy_obj = copy.deepcopy(Scatter(**stream_object))
             stream_object = Scatter(**stream_object)
             stream_object['type'] = 'scatter'
 

@@ -1,4 +1,4 @@
-from plotly.utils import _list_repr_elided
+from .utils import _list_repr_elided
 
 
 class InputDeviceState:
