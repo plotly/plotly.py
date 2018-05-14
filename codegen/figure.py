@@ -80,7 +80,7 @@ class {fig_classname}({base_classname}):\n""")
         frames
             {frames_description}
         \"\"\"
-        super().__init__(data, layout, frames)
+        super({base_classname}, self).__init__(data, layout, frames)
     """)
 
     # ### add_trace methods for each trace type ###

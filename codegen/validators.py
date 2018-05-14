@@ -54,8 +54,7 @@ class {class_name}({superclass_name}):
     # ### Write constructor ###
     buffer.write(f"""
         super({superclass_name}, self).__init__(plotly_name=plotly_name,
-                         parent_name=parent_name,
-                         **kwargs""")
+                         parent_name=parent_name""")
 
     # Write out remaining constructor parameters
     for attr_name, attr_val in params.items():
@@ -65,6 +64,10 @@ class {class_name}({superclass_name}):
 
         buffer.write(f""",
                  {attr_name}={attr_val}""")
+
+    # write **kwargs at the end to make Py2 compatible
+    buffer.write(f""",
+             **kwargs""")
 
     buffer.write(')')
 
