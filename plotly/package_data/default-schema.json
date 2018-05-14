@@ -101,7 +101,7 @@
     "defs": {
         "editType": {
             "layout": {
-                "description": "layout attributes should include an `editType` string matching this flaglist. *calc* is the most extensive: a full `Plotly.plot` starting by clearing `gd.calcdata` to force it to be regenerated *calcIfAutorange* does a full `Plotly.plot`, but only clears and redoes `gd.calcdata` if there is at least one autoranged axis. *plot* calls `Plotly.plot` but without first clearing `gd.calcdata`. *legend* only redraws the legend. *ticks* only redraws axis ticks, labels, and gridlines. *margins* recomputes ticklabel automargins. *layoutstyle* reapplies global and SVG cartesian axis styles. *modebar* just updates the modebar. *camera* just updates the camera settings for gl3d scenes. *arraydraw* allows component arrays to invoke the redraw routines just for the component(s) that changed.",
+                "description": "layout attributes should include an `editType` string matching this flaglist. *calc* is the most extensive: a full `Plotly.plot` starting by clearing `gd.calcdata` to force it to be regenerated *calcIfAutorange* does a full `Plotly.plot`, but only clears and redoes `gd.calcdata` if there is at least one autoranged axis. *plot* calls `Plotly.plot` but without first clearing `gd.calcdata`. *legend* only redraws the legend. *ticks* only redraws axis ticks, labels, and gridlines. *margins* recomputes ticklabel automargins. *axrange* minimal sequence when updating axis ranges. *layoutstyle* reapplies global and SVG cartesian axis styles. *modebar* just updates the modebar. *camera* just updates the camera settings for gl3d scenes. *arraydraw* allows component arrays to invoke the redraw routines just for the component(s) that changed.",
                 "extras": [
                     "none"
                 ],
@@ -111,6 +111,7 @@
                     "plot",
                     "legend",
                     "ticks",
+                    "axrange",
                     "margins",
                     "layoutstyle",
                     "modebar",
@@ -267,7 +268,9 @@
             },
             "subplotid": {
                 "description": "An id string of a subplot type (given by dflt), optionally followed by an integer >1. e.g. if dflt='geo', we can have 'geo', 'geo2', 'geo3', ...",
-                "otherOpts": [],
+                "otherOpts": [
+                    "regex"
+                ],
                 "requiredOpts": [
                     "dflt"
                 ]
@@ -1520,7 +1523,7 @@
                 "xside": {
                     "description": "Sets where the x axis labels and titles go. *bottom* means the very bottom of the grid. *bottom plot* is the lowest plot that each x axis is used in. *top* and *top plot* are similar.",
                     "dflt": "bottom plot",
-                    "editType": "ticks",
+                    "editType": "plot",
                     "role": "info",
                     "valType": "enumerated",
                     "values": [
@@ -1556,7 +1559,7 @@
                 "yside": {
                     "description": "Sets where the y axis labels and titles go. *left* means the very left edge of the grid. *left plot* is the leftmost plot that each y axis is used in. *right* and *right plot* are similar.",
                     "dflt": "left plot",
-                    "editType": "ticks",
+                    "editType": "plot",
                     "role": "info",
                     "valType": "enumerated",
                     "values": [
@@ -2923,20 +2926,20 @@
                     },
                     "range": {
                         "description": "Sets the range of this axis. If the axis `type` is *log*, then you must take the log of your desired range (e.g. to set the range from 1 to 100, set the range from 0 to 2). If the axis `type` is *date*, it should be date strings, like date data, though Date objects and unix milliseconds will be accepted and converted to strings. If the axis `type` is *category*, it should be numbers, using the scale where each category is assigned a serial number from zero in the order it appears.",
-                        "editType": "plot+margins",
+                        "editType": "axrange+margins",
                         "impliedEdits": {
                             "autorange": false
                         },
                         "items": [
                             {
-                                "editType": "plot+margins",
+                                "editType": "axrange+margins",
                                 "impliedEdits": {
                                     "^autorange": false
                                 },
                                 "valType": "any"
                             },
                             {
-                                "editType": "plot+margins",
+                                "editType": "axrange+margins",
                                 "impliedEdits": {
                                     "^autorange": false
                                 },
@@ -5582,6 +5585,19 @@
                     }
                 }
             },
+            "selectdirection": {
+                "description": "When \"dragmode\" is set to \"select\", this limits the selection of the drag to horizontal, vertical or diagonal. \"h\" only allows horizontal selection, \"v\" only vertical, \"d\" only diagonal and \"any\" sets no limit.",
+                "dflt": "any",
+                "editType": "none",
+                "role": "info",
+                "valType": "enumerated",
+                "values": [
+                    "h",
+                    "v",
+                    "d",
+                    "any"
+                ]
+            },
             "separators": {
                 "description": "Sets the decimal and thousand separators. For example, *. * puts a '.' before decimals and a space between thousands. In English locales, dflt is *.,* but other locales may alter this default.",
                 "editType": "plot",
@@ -5653,14 +5669,14 @@
                             "valType": "number"
                         },
                         "path": {
-                            "description": "For `type` *path* - a valid SVG path but with the pixel values replaced by data values. There are a few restrictions / quirks only absolute instructions, not relative. So the allowed segments are: M, L, H, V, Q, C, T, S, and Z arcs (A) are not allowed because radius rx and ry are relative. In the future we could consider supporting relative commands, but we would have to decide on how to handle date and log axes. Note that even as is, Q and C Bezier paths that are smooth on linear axes may not be smooth on log, and vice versa. no chained \"polybezier\" commands - specify the segment type for each one. On category axes, values are numbers scaled to the serial numbers of categories because using the categories themselves there would be no way to describe fractional positions On data axes: because space and T are both normal components of path strings, we can't use either to separate date from time parts. Therefore we'll use underscore for this purpose: 2015-02-21_13:45:56.789",
+                            "description": "For `type` *path* - a valid SVG path with the pixel values replaced by data values in `xsizemode`/`ysizemode` being *scaled* and taken unmodified as pixels relative to `xanchor` and `yanchor` in case of *pixel* size mode. There are a few restrictions / quirks only absolute instructions, not relative. So the allowed segments are: M, L, H, V, Q, C, T, S, and Z arcs (A) are not allowed because radius rx and ry are relative. In the future we could consider supporting relative commands, but we would have to decide on how to handle date and log axes. Note that even as is, Q and C Bezier paths that are smooth on linear axes may not be smooth on log, and vice versa. no chained \"polybezier\" commands - specify the segment type for each one. On category axes, values are numbers scaled to the serial numbers of categories because using the categories themselves there would be no way to describe fractional positions On data axes: because space and T are both normal components of path strings, we can't use either to separate date from time parts. Therefore we'll use underscore for this purpose: 2015-02-21_13:45:56.789",
                             "editType": "calcIfAutorange+arraydraw",
                             "role": "info",
                             "valType": "string"
                         },
                         "role": "object",
                         "type": {
-                            "description": "Specifies the shape type to be drawn. If *line*, a line is drawn from (`x0`,`y0`) to (`x1`,`y1`) If *circle*, a circle is drawn from ((`x0`+`x1`)/2, (`y0`+`y1`)/2)) with radius (|(`x0`+`x1`)/2 - `x0`|, |(`y0`+`y1`)/2 -`y0`)|) If *rect*, a rectangle is drawn linking (`x0`,`y0`), (`x1`,`y0`), (`x1`,`y1`), (`x0`,`y1`), (`x0`,`y0`) If *path*, draw a custom SVG path using `path`.",
+                            "description": "Specifies the shape type to be drawn. If *line*, a line is drawn from (`x0`,`y0`) to (`x1`,`y1`) with respect to the axes' sizing mode. If *circle*, a circle is drawn from ((`x0`+`x1`)/2, (`y0`+`y1`)/2)) with radius (|(`x0`+`x1`)/2 - `x0`|, |(`y0`+`y1`)/2 -`y0`)|) with respect to the axes' sizing mode. If *rect*, a rectangle is drawn linking (`x0`,`y0`), (`x1`,`y0`), (`x1`,`y1`), (`x0`,`y1`), (`x0`,`y0`) with respect to the axes' sizing mode. If *path*, draw a custom SVG path using `path`. with respect to the axes' sizing mode.",
                             "editType": "calcIfAutorange+arraydraw",
                             "role": "info",
                             "valType": "enumerated",
@@ -5679,19 +5695,25 @@
                             "valType": "boolean"
                         },
                         "x0": {
-                            "description": "Sets the shape's starting x position. See `type` for more info.",
+                            "description": "Sets the shape's starting x position. See `type` and `xsizemode` for more info.",
                             "editType": "calcIfAutorange+arraydraw",
                             "role": "info",
                             "valType": "any"
                         },
                         "x1": {
-                            "description": "Sets the shape's end x position. See `type` for more info.",
+                            "description": "Sets the shape's end x position. See `type` and `xsizemode` for more info.",
+                            "editType": "calcIfAutorange+arraydraw",
+                            "role": "info",
+                            "valType": "any"
+                        },
+                        "xanchor": {
+                            "description": "Only relevant in conjunction with `xsizemode` set to *pixel*. Specifies the anchor point on the x axis to which `x0`, `x1` and x coordinates within `path` are relative to. E.g. useful to attach a pixel sized shape to a certain data value. No effect when `xsizemode` not set to *pixel*.",
                             "editType": "calcIfAutorange+arraydraw",
                             "role": "info",
                             "valType": "any"
                         },
                         "xref": {
-                            "description": "Sets the shape's x coordinate axis. If set to an x axis id (e.g. *x* or *x2*), the `x` position refers to an x coordinate If set to *paper*, the `x` position refers to the distance from the left side of the plotting area in normalized coordinates where *0* (*1*) corresponds to the left (right) side. If the axis `type` is *log*, then you must take the log of your desired range. If the axis `type` is *date*, then you must convert the date to unix time in milliseconds.",
+                            "description": "Sets the shape's x coordinate axis. If set to an x axis id (e.g. *x* or *x2*), the `x` position refers to an x coordinate. If set to *paper*, the `x` position refers to the distance from the left side of the plotting area in normalized coordinates where *0* (*1*) corresponds to the left (right) side. If the axis `type` is *log*, then you must take the log of your desired range. If the axis `type` is *date*, then you must convert the date to unix time in milliseconds.",
                             "editType": "calc",
                             "role": "info",
                             "valType": "enumerated",
@@ -5700,14 +5722,31 @@
                                 "/^x([2-9]|[1-9][0-9]+)?$/"
                             ]
                         },
+                        "xsizemode": {
+                            "description": "Sets the shapes's sizing mode along the x axis. If set to *scaled*, `x0`, `x1` and x coordinates within `path` refer to data values on the x axis or a fraction of the plot area's width (`xref` set to *paper*). If set to *pixel*, `xanchor` specifies the x position in terms of data or plot fraction but `x0`, `x1` and x coordinates within `path` are pixels relative to `xanchor`. This way, the shape can have a fixed width while maintaining a position relative to data or plot fraction.",
+                            "dflt": "scaled",
+                            "editType": "calcIfAutorange+arraydraw",
+                            "role": "info",
+                            "valType": "enumerated",
+                            "values": [
+                                "scaled",
+                                "pixel"
+                            ]
+                        },
                         "y0": {
-                            "description": "Sets the shape's starting y position. See `type` for more info.",
+                            "description": "Sets the shape's starting y position. See `type` and `ysizemode` for more info.",
                             "editType": "calcIfAutorange+arraydraw",
                             "role": "info",
                             "valType": "any"
                         },
                         "y1": {
-                            "description": "Sets the shape's end y position. See `type` for more info.",
+                            "description": "Sets the shape's end y position. See `type` and `ysizemode` for more info.",
+                            "editType": "calcIfAutorange+arraydraw",
+                            "role": "info",
+                            "valType": "any"
+                        },
+                        "yanchor": {
+                            "description": "Only relevant in conjunction with `ysizemode` set to *pixel*. Specifies the anchor point on the y axis to which `y0`, `y1` and y coordinates within `path` are relative to. E.g. useful to attach a pixel sized shape to a certain data value. No effect when `ysizemode` not set to *pixel*.",
                             "editType": "calcIfAutorange+arraydraw",
                             "role": "info",
                             "valType": "any"
@@ -5720,6 +5759,17 @@
                             "values": [
                                 "paper",
                                 "/^y([2-9]|[1-9][0-9]+)?$/"
+                            ]
+                        },
+                        "ysizemode": {
+                            "description": "Sets the shapes's sizing mode along the y axis. If set to *scaled*, `y0`, `y1` and y coordinates within `path` refer to data values on the y axis or a fraction of the plot area's height (`yref` set to *paper*). If set to *pixel*, `yanchor` specifies the y position in terms of data or plot fraction but `y0`, `y1` and y coordinates within `path` are pixels relative to `yanchor`. This way, the shape can have a fixed height while maintaining a position relative to data or plot fraction.",
+                            "dflt": "scaled",
+                            "editType": "calcIfAutorange+arraydraw",
+                            "role": "info",
+                            "valType": "enumerated",
+                            "values": [
+                                "scaled",
+                                "pixel"
                             ]
                         }
                     }
@@ -7841,20 +7891,20 @@
                 },
                 "range": {
                     "description": "Sets the range of this axis. If the axis `type` is *log*, then you must take the log of your desired range (e.g. to set the range from 1 to 100, set the range from 0 to 2). If the axis `type` is *date*, it should be date strings, like date data, though Date objects and unix milliseconds will be accepted and converted to strings. If the axis `type` is *category*, it should be numbers, using the scale where each category is assigned a serial number from zero in the order it appears.",
-                    "editType": "plot+margins",
+                    "editType": "axrange+margins",
                     "impliedEdits": {
                         "autorange": false
                     },
                     "items": [
                         {
-                            "editType": "plot+margins",
+                            "editType": "axrange+margins",
                             "impliedEdits": {
                                 "^autorange": false
                             },
                             "valType": "any"
                         },
                         {
-                            "editType": "plot+margins",
+                            "editType": "axrange+margins",
                             "impliedEdits": {
                                 "^autorange": false
                             },
@@ -8800,20 +8850,20 @@
                 },
                 "range": {
                     "description": "Sets the range of this axis. If the axis `type` is *log*, then you must take the log of your desired range (e.g. to set the range from 1 to 100, set the range from 0 to 2). If the axis `type` is *date*, it should be date strings, like date data, though Date objects and unix milliseconds will be accepted and converted to strings. If the axis `type` is *category*, it should be numbers, using the scale where each category is assigned a serial number from zero in the order it appears.",
-                    "editType": "plot+margins",
+                    "editType": "axrange+margins",
                     "impliedEdits": {
                         "autorange": false
                     },
                     "items": [
                         {
-                            "editType": "plot+margins",
+                            "editType": "axrange+margins",
                             "impliedEdits": {
                                 "^autorange": false
                             },
                             "valType": "any"
                         },
                         {
-                            "editType": "plot+margins",
+                            "editType": "axrange+margins",
                             "impliedEdits": {
                                 "^autorange": false
                             },
@@ -11300,7 +11350,7 @@
                     "valType": "any"
                 },
                 "yaxis": {
-                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.xaxis2`, and so on.",
+                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.yaxis2`, and so on.",
                     "dflt": "y",
                     "editType": "calc+clearAxisTypes",
                     "role": "info",
@@ -12213,7 +12263,7 @@
                     "valType": "any"
                 },
                 "yaxis": {
-                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.xaxis2`, and so on.",
+                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.yaxis2`, and so on.",
                     "dflt": "y",
                     "editType": "calc+clearAxisTypes",
                     "role": "info",
@@ -12290,7 +12340,6 @@
             "attributes": {
                 "close": {
                     "description": "Sets the close values.",
-                    "dflt": [],
                     "editType": "calc",
                     "role": "data",
                     "valType": "data_array"
@@ -12340,24 +12389,10 @@
                             "valType": "number"
                         }
                     },
-                    "name": {
-                        "description": "Sets the segment name. The segment name appear as the legend item and on hover.",
-                        "editType": "style",
-                        "role": "info",
-                        "valType": "string"
-                    },
-                    "role": "object",
-                    "showlegend": {
-                        "description": "Determines whether or not an item corresponding to this segment is shown in the legend.",
-                        "dflt": true,
-                        "editType": "style",
-                        "role": "info",
-                        "valType": "boolean"
-                    }
+                    "role": "object"
                 },
                 "high": {
                     "description": "Sets the high values.",
-                    "dflt": [],
                     "editType": "calc",
                     "role": "data",
                     "valType": "data_array"
@@ -12522,20 +12557,7 @@
                             "valType": "number"
                         }
                     },
-                    "name": {
-                        "description": "Sets the segment name. The segment name appear as the legend item and on hover.",
-                        "editType": "style",
-                        "role": "info",
-                        "valType": "string"
-                    },
-                    "role": "object",
-                    "showlegend": {
-                        "description": "Determines whether or not an item corresponding to this segment is shown in the legend.",
-                        "dflt": true,
-                        "editType": "style",
-                        "role": "info",
-                        "valType": "boolean"
-                    }
+                    "role": "object"
                 },
                 "legendgroup": {
                     "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
@@ -12558,7 +12580,6 @@
                 },
                 "low": {
                     "description": "Sets the low values.",
-                    "dflt": [],
                     "editType": "calc",
                     "role": "data",
                     "valType": "data_array"
@@ -12586,7 +12607,6 @@
                 },
                 "open": {
                     "description": "Sets the open values.",
-                    "dflt": [],
                     "editType": "calc",
                     "role": "data",
                     "valType": "data_array"
@@ -12718,11 +12738,42 @@
                     "valType": "string"
                 },
                 "yaxis": {
-                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.xaxis2`, and so on.",
+                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.yaxis2`, and so on.",
                     "dflt": "y",
                     "editType": "calc+clearAxisTypes",
                     "role": "info",
                     "valType": "subplotid"
+                }
+            },
+            "layoutAttributes": {
+                "boxgap": {
+                    "description": "Sets the gap (in plot fraction) between boxes of adjacent location coordinates.",
+                    "dflt": 0.3,
+                    "editType": "calc",
+                    "max": 1,
+                    "min": 0,
+                    "role": "style",
+                    "valType": "number"
+                },
+                "boxgroupgap": {
+                    "description": "Sets the gap (in plot fraction) between boxes of the same location coordinate.",
+                    "dflt": 0.3,
+                    "editType": "calc",
+                    "max": 1,
+                    "min": 0,
+                    "role": "style",
+                    "valType": "number"
+                },
+                "boxmode": {
+                    "description": "Determines how boxes at the same location coordinate are displayed on the graph. If *group*, the boxes are plotted next to one another centered around the shared location. If *overlay*, the boxes are plotted over one another, you might need to set *opacity* to see them multiple boxes.",
+                    "dflt": "overlay",
+                    "editType": "calc",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        "group",
+                        "overlay"
+                    ]
                 }
             },
             "meta": {
@@ -14082,7 +14133,7 @@
                     "valType": "data_array"
                 },
                 "yaxis": {
-                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.xaxis2`, and so on.",
+                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.yaxis2`, and so on.",
                     "dflt": "y",
                     "editType": "calc+clearAxisTypes",
                     "role": "info",
@@ -15957,7 +16008,7 @@
                     "valType": "any"
                 },
                 "yaxis": {
-                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.xaxis2`, and so on.",
+                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.yaxis2`, and so on.",
                     "dflt": "y",
                     "editType": "calc+clearAxisTypes",
                     "role": "info",
@@ -17054,7 +17105,7 @@
                     "valType": "subplotid"
                 },
                 "yaxis": {
-                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.xaxis2`, and so on.",
+                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.yaxis2`, and so on.",
                     "dflt": "y",
                     "editType": "calc+clearAxisTypes",
                     "role": "info",
@@ -17922,7 +17973,7 @@
                     "valType": "any"
                 },
                 "yaxis": {
-                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.xaxis2`, and so on.",
+                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.yaxis2`, and so on.",
                     "dflt": "y",
                     "editType": "calc+clearAxisTypes",
                     "role": "info",
@@ -18817,7 +18868,7 @@
                     "valType": "any"
                 },
                 "yaxis": {
-                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.xaxis2`, and so on.",
+                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.yaxis2`, and so on.",
                     "dflt": "y",
                     "editType": "calc+clearAxisTypes",
                     "role": "info",
@@ -20214,7 +20265,7 @@
                     "valType": "data_array"
                 },
                 "yaxis": {
-                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.xaxis2`, and so on.",
+                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.yaxis2`, and so on.",
                     "dflt": "y",
                     "editType": "calc+clearAxisTypes",
                     "role": "info",
@@ -21186,7 +21237,7 @@
                     "valType": "data_array"
                 },
                 "yaxis": {
-                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.xaxis2`, and so on.",
+                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.yaxis2`, and so on.",
                     "dflt": "y",
                     "editType": "calc+clearAxisTypes",
                     "role": "info",
@@ -22369,7 +22420,7 @@
                     "valType": "data_array"
                 },
                 "yaxis": {
-                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.xaxis2`, and so on.",
+                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.yaxis2`, and so on.",
                     "dflt": "y",
                     "editType": "calc+clearAxisTypes",
                     "role": "info",
@@ -23570,7 +23621,6 @@
             "attributes": {
                 "close": {
                     "description": "Sets the close values.",
-                    "dflt": [],
                     "editType": "calc",
                     "role": "data",
                     "valType": "data_array"
@@ -23629,24 +23679,10 @@
                             "valType": "number"
                         }
                     },
-                    "name": {
-                        "description": "Sets the segment name. The segment name appear as the legend item and on hover.",
-                        "editType": "style",
-                        "role": "info",
-                        "valType": "string"
-                    },
-                    "role": "object",
-                    "showlegend": {
-                        "description": "Determines whether or not an item corresponding to this segment is shown in the legend.",
-                        "dflt": true,
-                        "editType": "style",
-                        "role": "info",
-                        "valType": "boolean"
-                    }
+                    "role": "object"
                 },
                 "high": {
                     "description": "Sets the high values.",
-                    "dflt": [],
                     "editType": "calc",
                     "role": "data",
                     "valType": "data_array"
@@ -23820,20 +23856,7 @@
                             "valType": "number"
                         }
                     },
-                    "name": {
-                        "description": "Sets the segment name. The segment name appear as the legend item and on hover.",
-                        "editType": "style",
-                        "role": "info",
-                        "valType": "string"
-                    },
-                    "role": "object",
-                    "showlegend": {
-                        "description": "Determines whether or not an item corresponding to this segment is shown in the legend.",
-                        "dflt": true,
-                        "editType": "style",
-                        "role": "info",
-                        "valType": "boolean"
-                    }
+                    "role": "object"
                 },
                 "legendgroup": {
                     "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
@@ -23871,7 +23894,6 @@
                 },
                 "low": {
                     "description": "Sets the low values.",
-                    "dflt": [],
                     "editType": "calc",
                     "role": "data",
                     "valType": "data_array"
@@ -23899,7 +23921,6 @@
                 },
                 "open": {
                     "description": "Sets the open values.",
-                    "dflt": [],
                     "editType": "calc",
                     "role": "data",
                     "valType": "data_array"
@@ -24031,7 +24052,7 @@
                     "valType": "string"
                 },
                 "yaxis": {
-                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.xaxis2`, and so on.",
+                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.yaxis2`, and so on.",
                     "dflt": "y",
                     "editType": "calc+clearAxisTypes",
                     "role": "info",
@@ -24039,7 +24060,7 @@
                 }
             },
             "meta": {
-                "description": "The ohlc (short for Open-High-Low-Close) is a style of financial chart describing open, high, low and close for a given `x` coordinate (most likely time). The tip of the lines represent the `low` and `high` values and the horizontal segments represent the `open` and `close` values. Sample points where the close value is higher (lower) then the open value are called increasing (decreasing). By default, increasing candles are drawn in green whereas decreasing are drawn in red."
+                "description": "The ohlc (short for Open-High-Low-Close) is a style of financial chart describing open, high, low and close for a given `x` coordinate (most likely time). The tip of the lines represent the `low` and `high` values and the horizontal segments represent the `open` and `close` values. Sample points where the close value is higher (lower) then the open value are called increasing (decreasing). By default, increasing items are drawn in green whereas decreasing are drawn in red."
             }
         },
         "parcoords": {
@@ -24060,8 +24081,10 @@
                     "items": {
                         "dimension": {
                             "constraintrange": {
-                                "description": "The domain range to which the filter on the dimension is constrained. Must be an array of `[fromValue, toValue]` with finite numbers as elements.",
+                                "description": "The domain range to which the filter on the dimension is constrained. Must be an array of `[fromValue, toValue]` with `fromValue <= toValue`, or if `multiselect` is not disabled, you may give an array of arrays, where each inner array is `[fromValue, toValue]`.",
+                                "dimensions": "1-2",
                                 "editType": "calc",
+                                "freeLength": true,
                                 "items": [
                                     {
                                         "editType": "calc",
@@ -24082,6 +24105,13 @@
                                 "editType": "calc",
                                 "role": "info",
                                 "valType": "string"
+                            },
+                            "multiselect": {
+                                "description": "Do we allow multiple selection ranges or just a single range?",
+                                "dflt": true,
+                                "editType": "calc",
+                                "role": "info",
+                                "valType": "boolean"
                             },
                             "range": {
                                 "description": "The domain range that represents the full, shown axis extent. Defaults to the `values` extent. Must be an array of `[fromValue, toValue]` with finite numbers as elements.",
@@ -26013,7 +26043,7 @@
                     "valType": "data_array"
                 },
                 "yaxis": {
-                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.xaxis2`, and so on.",
+                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.yaxis2`, and so on.",
                     "dflt": "y",
                     "editType": "calc+clearAxisTypes",
                     "role": "info",
@@ -28412,7 +28442,7 @@
                     "valType": "any"
                 },
                 "yaxis": {
-                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.xaxis2`, and so on.",
+                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.yaxis2`, and so on.",
                     "dflt": "y",
                     "editType": "calc+clearAxisTypes",
                     "role": "info",
@@ -31628,7 +31658,7 @@
                     "valType": "subplotid"
                 },
                 "yaxis": {
-                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.xaxis2`, and so on.",
+                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.yaxis2`, and so on.",
                     "dflt": "y",
                     "editType": "calc+clearAxisTypes",
                     "role": "info",
@@ -34767,7 +34797,7 @@
                     "valType": "any"
                 },
                 "yaxis": {
-                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.xaxis2`, and so on.",
+                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.yaxis2`, and so on.",
                     "dflt": "y",
                     "editType": "calc+clearAxisTypes",
                     "role": "info",
@@ -40295,6 +40325,1325 @@
                 "hrName": "scatter_ternary"
             }
         },
+        "splom": {
+            "attributes": {
+                "customdata": {
+                    "description": "Assigns extra data each datum. This may be useful when listening to hover, click and selection events. Note that, *scatter* traces also appends customdata items in the markers DOM elements",
+                    "editType": "calc",
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "customdatasrc": {
+                    "description": "Sets the source reference on plot.ly for  customdata .",
+                    "editType": "none",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "diagonal": {
+                    "editType": "calc",
+                    "role": "object",
+                    "visible": {
+                        "description": "Determines whether or not subplots on the diagonal are displayed.",
+                        "dflt": true,
+                        "editType": "calc",
+                        "role": "info",
+                        "valType": "boolean"
+                    }
+                },
+                "dimensions": {
+                    "items": {
+                        "dimension": {
+                            "editType": "calc+clearAxisTypes",
+                            "label": {
+                                "description": "Sets the label corresponding to this splom dimension.",
+                                "editType": "calc",
+                                "role": "info",
+                                "valType": "string"
+                            },
+                            "role": "object",
+                            "values": {
+                                "description": "Sets the dimension values to be plotted.",
+                                "editType": "calc+clearAxisTypes",
+                                "role": "data",
+                                "valType": "data_array"
+                            },
+                            "valuessrc": {
+                                "description": "Sets the source reference on plot.ly for  values .",
+                                "editType": "none",
+                                "role": "info",
+                                "valType": "string"
+                            },
+                            "visible": {
+                                "description": "Determines whether or not this dimension is shown on the graph. Note that even visible false dimension contribute to the default grid generate by this splom trace.",
+                                "dflt": true,
+                                "editType": "calc",
+                                "role": "info",
+                                "valType": "boolean"
+                            }
+                        }
+                    },
+                    "role": "object"
+                },
+                "hoverinfo": {
+                    "arrayOk": true,
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
+                    "dflt": "all",
+                    "editType": "none",
+                    "extras": [
+                        "all",
+                        "none",
+                        "skip"
+                    ],
+                    "flags": [
+                        "x",
+                        "y",
+                        "z",
+                        "text",
+                        "name"
+                    ],
+                    "role": "info",
+                    "valType": "flaglist"
+                },
+                "hoverinfosrc": {
+                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
+                    "editType": "none",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "hoverlabel": {
+                    "bgcolor": {
+                        "arrayOk": true,
+                        "description": "Sets the background color of the hover labels for this trace",
+                        "editType": "none",
+                        "role": "style",
+                        "valType": "color"
+                    },
+                    "bgcolorsrc": {
+                        "description": "Sets the source reference on plot.ly for  bgcolor .",
+                        "editType": "none",
+                        "role": "info",
+                        "valType": "string"
+                    },
+                    "bordercolor": {
+                        "arrayOk": true,
+                        "description": "Sets the border color of the hover labels for this trace.",
+                        "editType": "none",
+                        "role": "style",
+                        "valType": "color"
+                    },
+                    "bordercolorsrc": {
+                        "description": "Sets the source reference on plot.ly for  bordercolor .",
+                        "editType": "none",
+                        "role": "info",
+                        "valType": "string"
+                    },
+                    "editType": "calc",
+                    "font": {
+                        "color": {
+                            "arrayOk": true,
+                            "editType": "none",
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "colorsrc": {
+                            "description": "Sets the source reference on plot.ly for  color .",
+                            "editType": "none",
+                            "role": "info",
+                            "valType": "string"
+                        },
+                        "description": "Sets the font used in hover labels.",
+                        "editType": "none",
+                        "family": {
+                            "arrayOk": true,
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                            "editType": "none",
+                            "noBlank": true,
+                            "role": "style",
+                            "strict": true,
+                            "valType": "string"
+                        },
+                        "familysrc": {
+                            "description": "Sets the source reference on plot.ly for  family .",
+                            "editType": "none",
+                            "role": "info",
+                            "valType": "string"
+                        },
+                        "role": "object",
+                        "size": {
+                            "arrayOk": true,
+                            "editType": "none",
+                            "min": 1,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "sizesrc": {
+                            "description": "Sets the source reference on plot.ly for  size .",
+                            "editType": "none",
+                            "role": "info",
+                            "valType": "string"
+                        }
+                    },
+                    "namelength": {
+                        "arrayOk": true,
+                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis.",
+                        "editType": "none",
+                        "min": -1,
+                        "role": "style",
+                        "valType": "integer"
+                    },
+                    "namelengthsrc": {
+                        "description": "Sets the source reference on plot.ly for  namelength .",
+                        "editType": "none",
+                        "role": "info",
+                        "valType": "string"
+                    },
+                    "role": "object"
+                },
+                "ids": {
+                    "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
+                    "editType": "calc",
+                    "role": "data",
+                    "valType": "data_array"
+                },
+                "idssrc": {
+                    "description": "Sets the source reference on plot.ly for  ids .",
+                    "editType": "none",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "legendgroup": {
+                    "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.",
+                    "dflt": "",
+                    "editType": "style",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "marker": {
+                    "autocolorscale": {
+                        "description": "Has an effect only if `marker.color` is set to a numerical array. Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `marker.colorscale`. In case `colorscale` is unspecified or `autocolorscale` is true, the default  palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
+                        "dflt": true,
+                        "editType": "calc",
+                        "impliedEdits": {},
+                        "role": "style",
+                        "valType": "boolean"
+                    },
+                    "cauto": {
+                        "description": "Has an effect only if `marker.color` is set to a numerical array and `cmin`, `cmax` are set by the user. In this case, it controls whether the range of colors in `colorscale` is mapped to the range of values in the `color` array (`cauto: true`), or the `cmin`/`cmax` values (`cauto: false`). Defaults to `false` when `cmin`, `cmax` are set by the user.",
+                        "dflt": true,
+                        "editType": "calc",
+                        "impliedEdits": {},
+                        "role": "info",
+                        "valType": "boolean"
+                    },
+                    "cmax": {
+                        "description": "Has an effect only if `marker.color` is set to a numerical array. Sets the upper bound of the color domain. Value should be associated to the `marker.color` array index, and if set, `marker.cmin` must be set as well.",
+                        "dflt": null,
+                        "editType": "calc",
+                        "impliedEdits": {
+                            "cauto": false
+                        },
+                        "role": "info",
+                        "valType": "number"
+                    },
+                    "cmin": {
+                        "description": "Has an effect only if `marker.color` is set to a numerical array. Sets the lower bound of the color domain. Value should be associated to the `marker.color` array index, and if set, `marker.cmax` must be set as well.",
+                        "dflt": null,
+                        "editType": "calc",
+                        "impliedEdits": {
+                            "cauto": false
+                        },
+                        "role": "info",
+                        "valType": "number"
+                    },
+                    "color": {
+                        "arrayOk": true,
+                        "description": "Sets the marker color. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
+                        "editType": "calc",
+                        "role": "style",
+                        "valType": "color"
+                    },
+                    "colorbar": {
+                        "bgcolor": {
+                            "description": "Sets the color of padded area.",
+                            "dflt": "rgba(0,0,0,0)",
+                            "editType": "calc",
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "bordercolor": {
+                            "description": "Sets the axis line color.",
+                            "dflt": "#444",
+                            "editType": "calc",
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "borderwidth": {
+                            "description": "Sets the width (in px) or the border enclosing this color bar.",
+                            "dflt": 0,
+                            "editType": "calc",
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "dtick": {
+                            "description": "Sets the step in-between ticks on this axis. Use with `tick0`. Must be a positive number, or special strings available to *log* and *date* axes. If the axis `type` is *log*, then ticks are set every 10^(n*dtick) where n is the tick number. For example, to set a tick mark at 1, 10, 100, 1000, ... set dtick to 1. To set tick marks at 1, 100, 10000, ... set dtick to 2. To set tick marks at 1, 5, 25, 125, 625, 3125, ... set dtick to log_10(5), or 0.69897000433. *log* has several special values; *L<f>*, where `f` is a positive number, gives ticks linearly spaced in value (but not position). For example `tick0` = 0.1, `dtick` = *L0.5* will put ticks at 0.1, 0.6, 1.1, 1.6 etc. To show powers of 10 plus small digits between, use *D1* (all digits) or *D2* (only 2 and 5). `tick0` is ignored for *D1* and *D2*. If the axis `type` is *date*, then you must convert the time to milliseconds. For example, to set the interval between ticks to one day, set `dtick` to 86400000.0. *date* also has special values *M<n>* gives ticks spaced by a number of months. `n` must be a positive integer. To set ticks on the 15th of every third month, set `tick0` to *2000-01-15* and `dtick` to *M3*. To set ticks every 4 years, set `dtick` to *M48*",
+                            "editType": "calc",
+                            "impliedEdits": {
+                                "tickmode": "linear"
+                            },
+                            "role": "style",
+                            "valType": "any"
+                        },
+                        "editType": "calc",
+                        "exponentformat": {
+                            "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B.",
+                            "dflt": "B",
+                            "editType": "calc",
+                            "role": "style",
+                            "valType": "enumerated",
+                            "values": [
+                                "none",
+                                "e",
+                                "E",
+                                "power",
+                                "SI",
+                                "B"
+                            ]
+                        },
+                        "len": {
+                            "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
+                            "dflt": 1,
+                            "editType": "calc",
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "lenmode": {
+                            "description": "Determines whether this color bar's length (i.e. the measure in the color variation direction) is set in units of plot *fraction* or in *pixels. Use `len` to set the value.",
+                            "dflt": "fraction",
+                            "editType": "calc",
+                            "role": "info",
+                            "valType": "enumerated",
+                            "values": [
+                                "fraction",
+                                "pixels"
+                            ]
+                        },
+                        "nticks": {
+                            "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*.",
+                            "dflt": 0,
+                            "editType": "calc",
+                            "min": 0,
+                            "role": "style",
+                            "valType": "integer"
+                        },
+                        "outlinecolor": {
+                            "description": "Sets the axis line color.",
+                            "dflt": "#444",
+                            "editType": "calc",
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "outlinewidth": {
+                            "description": "Sets the width (in px) of the axis line.",
+                            "dflt": 1,
+                            "editType": "calc",
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "role": "object",
+                        "separatethousands": {
+                            "description": "If \"true\", even 4-digit integers are separated",
+                            "dflt": false,
+                            "editType": "calc",
+                            "role": "style",
+                            "valType": "boolean"
+                        },
+                        "showexponent": {
+                            "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear.",
+                            "dflt": "all",
+                            "editType": "calc",
+                            "role": "style",
+                            "valType": "enumerated",
+                            "values": [
+                                "all",
+                                "first",
+                                "last",
+                                "none"
+                            ]
+                        },
+                        "showticklabels": {
+                            "description": "Determines whether or not the tick labels are drawn.",
+                            "dflt": true,
+                            "editType": "calc",
+                            "role": "style",
+                            "valType": "boolean"
+                        },
+                        "showtickprefix": {
+                            "description": "If *all*, all tick labels are displayed with a prefix. If *first*, only the first tick is displayed with a prefix. If *last*, only the last tick is displayed with a suffix. If *none*, tick prefixes are hidden.",
+                            "dflt": "all",
+                            "editType": "calc",
+                            "role": "style",
+                            "valType": "enumerated",
+                            "values": [
+                                "all",
+                                "first",
+                                "last",
+                                "none"
+                            ]
+                        },
+                        "showticksuffix": {
+                            "description": "Same as `showtickprefix` but for tick suffixes.",
+                            "dflt": "all",
+                            "editType": "calc",
+                            "role": "style",
+                            "valType": "enumerated",
+                            "values": [
+                                "all",
+                                "first",
+                                "last",
+                                "none"
+                            ]
+                        },
+                        "thickness": {
+                            "description": "Sets the thickness of the color bar This measure excludes the size of the padding, ticks and labels.",
+                            "dflt": 30,
+                            "editType": "calc",
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "thicknessmode": {
+                            "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels*. Use `thickness` to set the value.",
+                            "dflt": "pixels",
+                            "editType": "calc",
+                            "role": "style",
+                            "valType": "enumerated",
+                            "values": [
+                                "fraction",
+                                "pixels"
+                            ]
+                        },
+                        "tick0": {
+                            "description": "Sets the placement of the first tick on this axis. Use with `dtick`. If the axis `type` is *log*, then you must take the log of your starting tick (e.g. to set the starting tick to 100, set the `tick0` to 2) except when `dtick`=*L<f>* (see `dtick` for more info). If the axis `type` is *date*, it should be a date string, like date data. If the axis `type` is *category*, it should be a number, using the scale where each category is assigned a serial number from zero in the order it appears.",
+                            "editType": "calc",
+                            "impliedEdits": {
+                                "tickmode": "linear"
+                            },
+                            "role": "style",
+                            "valType": "any"
+                        },
+                        "tickangle": {
+                            "description": "Sets the angle of the tick labels with respect to the horizontal. For example, a `tickangle` of -90 draws the tick labels vertically.",
+                            "dflt": "auto",
+                            "editType": "calc",
+                            "role": "style",
+                            "valType": "angle"
+                        },
+                        "tickcolor": {
+                            "description": "Sets the tick color.",
+                            "dflt": "#444",
+                            "editType": "calc",
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "tickfont": {
+                            "color": {
+                                "editType": "calc",
+                                "role": "style",
+                                "valType": "color"
+                            },
+                            "description": "Sets the color bar's tick label font",
+                            "editType": "calc",
+                            "family": {
+                                "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                                "editType": "calc",
+                                "noBlank": true,
+                                "role": "style",
+                                "strict": true,
+                                "valType": "string"
+                            },
+                            "role": "object",
+                            "size": {
+                                "editType": "calc",
+                                "min": 1,
+                                "role": "style",
+                                "valType": "number"
+                            }
+                        },
+                        "tickformat": {
+                            "description": "Sets the tick label formatting rule using d3 formatting mini-languages which are very similar to those in Python. For numbers, see: https://github.com/d3/d3-format/blob/master/README.md#locale_format And for dates see: https://github.com/d3/d3-time-format/blob/master/README.md#locale_format We add one item to d3's date formatter: *%{n}f* for fractional seconds with n digits. For example, *2016-10-13 09:15:23.456* with tickformat *%H~%M~%S.%2f* would display *09~15~23.46*",
+                            "dflt": "",
+                            "editType": "calc",
+                            "role": "style",
+                            "valType": "string"
+                        },
+                        "tickformatstops": {
+                            "items": {
+                                "tickformatstop": {
+                                    "dtickrange": {
+                                        "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*",
+                                        "editType": "calc",
+                                        "items": [
+                                            {
+                                                "editType": "calc",
+                                                "valType": "any"
+                                            },
+                                            {
+                                                "editType": "calc",
+                                                "valType": "any"
+                                            }
+                                        ],
+                                        "role": "info",
+                                        "valType": "info_array"
+                                    },
+                                    "editType": "calc",
+                                    "role": "object",
+                                    "value": {
+                                        "description": "string - dtickformat for described zoom level, the same as *tickformat*",
+                                        "dflt": "",
+                                        "editType": "calc",
+                                        "role": "style",
+                                        "valType": "string"
+                                    }
+                                }
+                            },
+                            "role": "object"
+                        },
+                        "ticklen": {
+                            "description": "Sets the tick length (in px).",
+                            "dflt": 5,
+                            "editType": "calc",
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "tickmode": {
+                            "description": "Sets the tick mode for this axis. If *auto*, the number of ticks is set via `nticks`. If *linear*, the placement of the ticks is determined by a starting position `tick0` and a tick step `dtick` (*linear* is the default value if `tick0` and `dtick` are provided). If *array*, the placement of the ticks is set via `tickvals` and the tick text is `ticktext`. (*array* is the default value if `tickvals` is provided).",
+                            "editType": "calc",
+                            "impliedEdits": {},
+                            "role": "info",
+                            "valType": "enumerated",
+                            "values": [
+                                "auto",
+                                "linear",
+                                "array"
+                            ]
+                        },
+                        "tickprefix": {
+                            "description": "Sets a tick label prefix.",
+                            "dflt": "",
+                            "editType": "calc",
+                            "role": "style",
+                            "valType": "string"
+                        },
+                        "ticks": {
+                            "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
+                            "dflt": "",
+                            "editType": "calc",
+                            "role": "style",
+                            "valType": "enumerated",
+                            "values": [
+                                "outside",
+                                "inside",
+                                ""
+                            ]
+                        },
+                        "ticksuffix": {
+                            "description": "Sets a tick label suffix.",
+                            "dflt": "",
+                            "editType": "calc",
+                            "role": "style",
+                            "valType": "string"
+                        },
+                        "ticktext": {
+                            "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `tickvals`.",
+                            "editType": "calc",
+                            "role": "data",
+                            "valType": "data_array"
+                        },
+                        "ticktextsrc": {
+                            "description": "Sets the source reference on plot.ly for  ticktext .",
+                            "editType": "none",
+                            "role": "info",
+                            "valType": "string"
+                        },
+                        "tickvals": {
+                            "description": "Sets the values at which ticks on this axis appear. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
+                            "editType": "calc",
+                            "role": "data",
+                            "valType": "data_array"
+                        },
+                        "tickvalssrc": {
+                            "description": "Sets the source reference on plot.ly for  tickvals .",
+                            "editType": "none",
+                            "role": "info",
+                            "valType": "string"
+                        },
+                        "tickwidth": {
+                            "description": "Sets the tick width (in px).",
+                            "dflt": 1,
+                            "editType": "calc",
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "title": {
+                            "description": "Sets the title of the color bar.",
+                            "editType": "calc",
+                            "role": "info",
+                            "valType": "string"
+                        },
+                        "titlefont": {
+                            "color": {
+                                "editType": "calc",
+                                "role": "style",
+                                "valType": "color"
+                            },
+                            "description": "Sets this color bar's title font.",
+                            "editType": "calc",
+                            "family": {
+                                "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                                "editType": "calc",
+                                "noBlank": true,
+                                "role": "style",
+                                "strict": true,
+                                "valType": "string"
+                            },
+                            "role": "object",
+                            "size": {
+                                "editType": "calc",
+                                "min": 1,
+                                "role": "style",
+                                "valType": "number"
+                            }
+                        },
+                        "titleside": {
+                            "description": "Determines the location of the colorbar title with respect to the color bar.",
+                            "dflt": "top",
+                            "editType": "calc",
+                            "role": "style",
+                            "valType": "enumerated",
+                            "values": [
+                                "right",
+                                "top",
+                                "bottom"
+                            ]
+                        },
+                        "x": {
+                            "description": "Sets the x position of the color bar (in plot fraction).",
+                            "dflt": 1.02,
+                            "editType": "calc",
+                            "max": 3,
+                            "min": -2,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "xanchor": {
+                            "description": "Sets this color bar's horizontal position anchor. This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
+                            "dflt": "left",
+                            "editType": "calc",
+                            "role": "style",
+                            "valType": "enumerated",
+                            "values": [
+                                "left",
+                                "center",
+                                "right"
+                            ]
+                        },
+                        "xpad": {
+                            "description": "Sets the amount of padding (in px) along the x direction.",
+                            "dflt": 10,
+                            "editType": "calc",
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "y": {
+                            "description": "Sets the y position of the color bar (in plot fraction).",
+                            "dflt": 0.5,
+                            "editType": "calc",
+                            "max": 3,
+                            "min": -2,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "yanchor": {
+                            "description": "Sets this color bar's vertical position anchor This anchor binds the `y` position to the *top*, *middle* or *bottom* of the color bar.",
+                            "dflt": "middle",
+                            "editType": "calc",
+                            "role": "style",
+                            "valType": "enumerated",
+                            "values": [
+                                "top",
+                                "middle",
+                                "bottom"
+                            ]
+                        },
+                        "ypad": {
+                            "description": "Sets the amount of padding (in px) along the y direction.",
+                            "dflt": 10,
+                            "editType": "calc",
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        }
+                    },
+                    "colorscale": {
+                        "description": "Sets the colorscale and only has an effect if `marker.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.cmin` and `marker.cmax`. Alternatively, `colorscale` may be a palette name string of the following list: Greys, YlGnBu, Greens, YlOrRd, Bluered, RdBu, Reds, Blues, Picnic, Rainbow, Portland, Jet, Hot, Blackbody, Earth, Electric, Viridis, Cividis",
+                        "editType": "calc",
+                        "impliedEdits": {
+                            "autocolorscale": false
+                        },
+                        "role": "style",
+                        "valType": "colorscale"
+                    },
+                    "colorsrc": {
+                        "description": "Sets the source reference on plot.ly for  color .",
+                        "editType": "none",
+                        "role": "info",
+                        "valType": "string"
+                    },
+                    "editType": "calc",
+                    "line": {
+                        "autocolorscale": {
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `marker.line.colorscale`. In case `colorscale` is unspecified or `autocolorscale` is true, the default  palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed.",
+                            "dflt": true,
+                            "editType": "calc",
+                            "impliedEdits": {},
+                            "role": "style",
+                            "valType": "boolean"
+                        },
+                        "cauto": {
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array and `cmin`, `cmax` are set by the user. In this case, it controls whether the range of colors in `colorscale` is mapped to the range of values in the `color` array (`cauto: true`), or the `cmin`/`cmax` values (`cauto: false`). Defaults to `false` when `cmin`, `cmax` are set by the user.",
+                            "dflt": true,
+                            "editType": "calc",
+                            "impliedEdits": {},
+                            "role": "info",
+                            "valType": "boolean"
+                        },
+                        "cmax": {
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Sets the upper bound of the color domain. Value should be associated to the `marker.line.color` array index, and if set, `marker.line.cmin` must be set as well.",
+                            "dflt": null,
+                            "editType": "calc",
+                            "impliedEdits": {
+                                "cauto": false
+                            },
+                            "role": "info",
+                            "valType": "number"
+                        },
+                        "cmin": {
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Sets the lower bound of the color domain. Value should be associated to the `marker.line.color` array index, and if set, `marker.line.cmax` must be set as well.",
+                            "dflt": null,
+                            "editType": "calc",
+                            "impliedEdits": {
+                                "cauto": false
+                            },
+                            "role": "info",
+                            "valType": "number"
+                        },
+                        "color": {
+                            "arrayOk": true,
+                            "description": "Sets the marker.line color. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `cmin` and `cmax` if set.",
+                            "editType": "calc",
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "colorscale": {
+                            "description": "Sets the colorscale and only has an effect if `marker.line.color` is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use `marker.line.cmin` and `marker.line.cmax`. Alternatively, `colorscale` may be a palette name string of the following list: Greys, YlGnBu, Greens, YlOrRd, Bluered, RdBu, Reds, Blues, Picnic, Rainbow, Portland, Jet, Hot, Blackbody, Earth, Electric, Viridis, Cividis",
+                            "editType": "calc",
+                            "impliedEdits": {
+                                "autocolorscale": false
+                            },
+                            "role": "style",
+                            "valType": "colorscale"
+                        },
+                        "colorsrc": {
+                            "description": "Sets the source reference on plot.ly for  color .",
+                            "editType": "none",
+                            "role": "info",
+                            "valType": "string"
+                        },
+                        "editType": "calc",
+                        "reversescale": {
+                            "description": "Has an effect only if `marker.line.color` is set to a numerical array. Reverses the color mapping if true (`cmin` will correspond to the last color in the array and `cmax` will correspond to the first color).",
+                            "dflt": false,
+                            "editType": "calc",
+                            "role": "style",
+                            "valType": "boolean"
+                        },
+                        "role": "object",
+                        "width": {
+                            "arrayOk": true,
+                            "description": "Sets the width (in px) of the lines bounding the marker points.",
+                            "editType": "calc",
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "widthsrc": {
+                            "description": "Sets the source reference on plot.ly for  width .",
+                            "editType": "none",
+                            "role": "info",
+                            "valType": "string"
+                        }
+                    },
+                    "opacity": {
+                        "arrayOk": true,
+                        "description": "Sets the marker opacity.",
+                        "editType": "calc",
+                        "max": 1,
+                        "min": 0,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "opacitysrc": {
+                        "description": "Sets the source reference on plot.ly for  opacity .",
+                        "editType": "none",
+                        "role": "info",
+                        "valType": "string"
+                    },
+                    "reversescale": {
+                        "description": "Has an effect only if `marker.color` is set to a numerical array. Reverses the color mapping if true (`cmin` will correspond to the last color in the array and `cmax` will correspond to the first color).",
+                        "dflt": false,
+                        "editType": "calc",
+                        "role": "style",
+                        "valType": "boolean"
+                    },
+                    "role": "object",
+                    "showscale": {
+                        "description": "Has an effect only if `marker.color` is set to a numerical array. Determines whether or not a colorbar is displayed.",
+                        "dflt": false,
+                        "editType": "calc",
+                        "role": "info",
+                        "valType": "boolean"
+                    },
+                    "size": {
+                        "arrayOk": true,
+                        "description": "Sets the marker size (in px).",
+                        "dflt": 6,
+                        "editType": "calc",
+                        "min": 0,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "sizemin": {
+                        "description": "Has an effect only if `marker.size` is set to a numerical array. Sets the minimum size (in px) of the rendered marker points.",
+                        "dflt": 0,
+                        "editType": "calc",
+                        "min": 0,
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "sizemode": {
+                        "description": "Has an effect only if `marker.size` is set to a numerical array. Sets the rule for which the data in `size` is converted to pixels.",
+                        "dflt": "diameter",
+                        "editType": "calc",
+                        "role": "info",
+                        "valType": "enumerated",
+                        "values": [
+                            "diameter",
+                            "area"
+                        ]
+                    },
+                    "sizeref": {
+                        "description": "Has an effect only if `marker.size` is set to a numerical array. Sets the scale factor used to determine the rendered size of marker points. Use with `sizemin` and `sizemode`.",
+                        "dflt": 1,
+                        "editType": "calc",
+                        "role": "style",
+                        "valType": "number"
+                    },
+                    "sizesrc": {
+                        "description": "Sets the source reference on plot.ly for  size .",
+                        "editType": "none",
+                        "role": "info",
+                        "valType": "string"
+                    },
+                    "symbol": {
+                        "arrayOk": true,
+                        "description": "Sets the marker symbol type. Adding 100 is equivalent to appending *-open* to a symbol name. Adding 200 is equivalent to appending *-dot* to a symbol name. Adding 300 is equivalent to appending *-open-dot* or *dot-open* to a symbol name.",
+                        "dflt": "circle",
+                        "editType": "calc",
+                        "role": "style",
+                        "valType": "enumerated",
+                        "values": [
+                            0,
+                            "circle",
+                            100,
+                            "circle-open",
+                            200,
+                            "circle-dot",
+                            300,
+                            "circle-open-dot",
+                            1,
+                            "square",
+                            101,
+                            "square-open",
+                            201,
+                            "square-dot",
+                            301,
+                            "square-open-dot",
+                            2,
+                            "diamond",
+                            102,
+                            "diamond-open",
+                            202,
+                            "diamond-dot",
+                            302,
+                            "diamond-open-dot",
+                            3,
+                            "cross",
+                            103,
+                            "cross-open",
+                            203,
+                            "cross-dot",
+                            303,
+                            "cross-open-dot",
+                            4,
+                            "x",
+                            104,
+                            "x-open",
+                            204,
+                            "x-dot",
+                            304,
+                            "x-open-dot",
+                            5,
+                            "triangle-up",
+                            105,
+                            "triangle-up-open",
+                            205,
+                            "triangle-up-dot",
+                            305,
+                            "triangle-up-open-dot",
+                            6,
+                            "triangle-down",
+                            106,
+                            "triangle-down-open",
+                            206,
+                            "triangle-down-dot",
+                            306,
+                            "triangle-down-open-dot",
+                            7,
+                            "triangle-left",
+                            107,
+                            "triangle-left-open",
+                            207,
+                            "triangle-left-dot",
+                            307,
+                            "triangle-left-open-dot",
+                            8,
+                            "triangle-right",
+                            108,
+                            "triangle-right-open",
+                            208,
+                            "triangle-right-dot",
+                            308,
+                            "triangle-right-open-dot",
+                            9,
+                            "triangle-ne",
+                            109,
+                            "triangle-ne-open",
+                            209,
+                            "triangle-ne-dot",
+                            309,
+                            "triangle-ne-open-dot",
+                            10,
+                            "triangle-se",
+                            110,
+                            "triangle-se-open",
+                            210,
+                            "triangle-se-dot",
+                            310,
+                            "triangle-se-open-dot",
+                            11,
+                            "triangle-sw",
+                            111,
+                            "triangle-sw-open",
+                            211,
+                            "triangle-sw-dot",
+                            311,
+                            "triangle-sw-open-dot",
+                            12,
+                            "triangle-nw",
+                            112,
+                            "triangle-nw-open",
+                            212,
+                            "triangle-nw-dot",
+                            312,
+                            "triangle-nw-open-dot",
+                            13,
+                            "pentagon",
+                            113,
+                            "pentagon-open",
+                            213,
+                            "pentagon-dot",
+                            313,
+                            "pentagon-open-dot",
+                            14,
+                            "hexagon",
+                            114,
+                            "hexagon-open",
+                            214,
+                            "hexagon-dot",
+                            314,
+                            "hexagon-open-dot",
+                            15,
+                            "hexagon2",
+                            115,
+                            "hexagon2-open",
+                            215,
+                            "hexagon2-dot",
+                            315,
+                            "hexagon2-open-dot",
+                            16,
+                            "octagon",
+                            116,
+                            "octagon-open",
+                            216,
+                            "octagon-dot",
+                            316,
+                            "octagon-open-dot",
+                            17,
+                            "star",
+                            117,
+                            "star-open",
+                            217,
+                            "star-dot",
+                            317,
+                            "star-open-dot",
+                            18,
+                            "hexagram",
+                            118,
+                            "hexagram-open",
+                            218,
+                            "hexagram-dot",
+                            318,
+                            "hexagram-open-dot",
+                            19,
+                            "star-triangle-up",
+                            119,
+                            "star-triangle-up-open",
+                            219,
+                            "star-triangle-up-dot",
+                            319,
+                            "star-triangle-up-open-dot",
+                            20,
+                            "star-triangle-down",
+                            120,
+                            "star-triangle-down-open",
+                            220,
+                            "star-triangle-down-dot",
+                            320,
+                            "star-triangle-down-open-dot",
+                            21,
+                            "star-square",
+                            121,
+                            "star-square-open",
+                            221,
+                            "star-square-dot",
+                            321,
+                            "star-square-open-dot",
+                            22,
+                            "star-diamond",
+                            122,
+                            "star-diamond-open",
+                            222,
+                            "star-diamond-dot",
+                            322,
+                            "star-diamond-open-dot",
+                            23,
+                            "diamond-tall",
+                            123,
+                            "diamond-tall-open",
+                            223,
+                            "diamond-tall-dot",
+                            323,
+                            "diamond-tall-open-dot",
+                            24,
+                            "diamond-wide",
+                            124,
+                            "diamond-wide-open",
+                            224,
+                            "diamond-wide-dot",
+                            324,
+                            "diamond-wide-open-dot",
+                            25,
+                            "hourglass",
+                            125,
+                            "hourglass-open",
+                            26,
+                            "bowtie",
+                            126,
+                            "bowtie-open",
+                            27,
+                            "circle-cross",
+                            127,
+                            "circle-cross-open",
+                            28,
+                            "circle-x",
+                            128,
+                            "circle-x-open",
+                            29,
+                            "square-cross",
+                            129,
+                            "square-cross-open",
+                            30,
+                            "square-x",
+                            130,
+                            "square-x-open",
+                            31,
+                            "diamond-cross",
+                            131,
+                            "diamond-cross-open",
+                            32,
+                            "diamond-x",
+                            132,
+                            "diamond-x-open",
+                            33,
+                            "cross-thin",
+                            133,
+                            "cross-thin-open",
+                            34,
+                            "x-thin",
+                            134,
+                            "x-thin-open",
+                            35,
+                            "asterisk",
+                            135,
+                            "asterisk-open",
+                            36,
+                            "hash",
+                            136,
+                            "hash-open",
+                            236,
+                            "hash-dot",
+                            336,
+                            "hash-open-dot",
+                            37,
+                            "y-up",
+                            137,
+                            "y-up-open",
+                            38,
+                            "y-down",
+                            138,
+                            "y-down-open",
+                            39,
+                            "y-left",
+                            139,
+                            "y-left-open",
+                            40,
+                            "y-right",
+                            140,
+                            "y-right-open",
+                            41,
+                            "line-ew",
+                            141,
+                            "line-ew-open",
+                            42,
+                            "line-ns",
+                            142,
+                            "line-ns-open",
+                            43,
+                            "line-ne",
+                            143,
+                            "line-ne-open",
+                            44,
+                            "line-nw",
+                            144,
+                            "line-nw-open"
+                        ]
+                    },
+                    "symbolsrc": {
+                        "description": "Sets the source reference on plot.ly for  symbol .",
+                        "editType": "none",
+                        "role": "info",
+                        "valType": "string"
+                    }
+                },
+                "name": {
+                    "description": "Sets the trace name. The trace name appear as the legend item and on hover.",
+                    "editType": "style",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "opacity": {
+                    "description": "Sets the opacity of the trace.",
+                    "dflt": 1,
+                    "editType": "calc",
+                    "max": 1,
+                    "min": 0,
+                    "role": "style",
+                    "valType": "number"
+                },
+                "selected": {
+                    "editType": "calc",
+                    "marker": {
+                        "color": {
+                            "description": "Sets the marker color of selected points.",
+                            "editType": "calc",
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "editType": "calc",
+                        "opacity": {
+                            "description": "Sets the marker opacity of selected points.",
+                            "editType": "calc",
+                            "max": 1,
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "role": "object",
+                        "size": {
+                            "description": "Sets the marker size of selected points.",
+                            "editType": "calc",
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        }
+                    },
+                    "role": "object"
+                },
+                "selectedpoints": {
+                    "description": "Array containing integer indices of selected points. Has an effect only for traces that support selections. Note that an empty array means an empty selection where the `unselected` are turned on for all points, whereas, any other non-array values means no selection all where the `selected` and `unselected` styles have no effect.",
+                    "editType": "calc",
+                    "role": "info",
+                    "valType": "any"
+                },
+                "showlegend": {
+                    "description": "Determines whether or not an item corresponding to this trace is shown in the legend.",
+                    "dflt": true,
+                    "editType": "style",
+                    "role": "info",
+                    "valType": "boolean"
+                },
+                "showlowerhalf": {
+                    "description": "Determines whether or not subplots on the lower half from the diagonal are displayed.",
+                    "dflt": true,
+                    "editType": "calc",
+                    "role": "info",
+                    "valType": "boolean"
+                },
+                "showupperhalf": {
+                    "description": "Determines whether or not subplots on the upper half from the diagonal are displayed.",
+                    "dflt": true,
+                    "editType": "calc",
+                    "role": "info",
+                    "valType": "boolean"
+                },
+                "stream": {
+                    "editType": "calc",
+                    "maxpoints": {
+                        "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot.",
+                        "dflt": 500,
+                        "editType": "calc",
+                        "max": 10000,
+                        "min": 0,
+                        "role": "info",
+                        "valType": "number"
+                    },
+                    "role": "object",
+                    "token": {
+                        "description": "The stream id number links a data trace on a plot with a stream. See https://plot.ly/settings for more details.",
+                        "editType": "calc",
+                        "noBlank": true,
+                        "role": "info",
+                        "strict": true,
+                        "valType": "string"
+                    }
+                },
+                "text": {
+                    "arrayOk": true,
+                    "description": "Sets text elements associated with each (x,y) pair to appear on hover. If a single string, the same string appears over all the data points. If an array of string, the items are mapped in order to the this trace's (x,y) coordinates.",
+                    "dflt": "",
+                    "editType": "calc",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "textsrc": {
+                    "description": "Sets the source reference on plot.ly for  text .",
+                    "editType": "none",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "type": "splom",
+                "uid": {
+                    "dflt": "",
+                    "editType": "calc",
+                    "role": "info",
+                    "valType": "string"
+                },
+                "unselected": {
+                    "editType": "calc",
+                    "marker": {
+                        "color": {
+                            "description": "Sets the marker color of unselected points, applied only when a selection exists.",
+                            "editType": "calc",
+                            "role": "style",
+                            "valType": "color"
+                        },
+                        "editType": "calc",
+                        "opacity": {
+                            "description": "Sets the marker opacity of unselected points, applied only when a selection exists.",
+                            "editType": "calc",
+                            "max": 1,
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        },
+                        "role": "object",
+                        "size": {
+                            "description": "Sets the marker size of unselected points, applied only when a selection exists.",
+                            "editType": "calc",
+                            "min": 0,
+                            "role": "style",
+                            "valType": "number"
+                        }
+                    },
+                    "role": "object"
+                },
+                "visible": {
+                    "description": "Determines whether or not this trace is visible. If *legendonly*, the trace is not drawn, but can appear as a legend item (provided that the legend itself is visible).",
+                    "dflt": true,
+                    "editType": "calc",
+                    "role": "info",
+                    "valType": "enumerated",
+                    "values": [
+                        true,
+                        false,
+                        "legendonly"
+                    ]
+                },
+                "xaxes": {
+                    "description": "Sets the list of x axes corresponding to this splom trace. By default, a splom will match the first N xaxes where N is the number of input dimensions.",
+                    "editType": "calc",
+                    "freeLength": true,
+                    "items": {
+                        "editType": "plot",
+                        "regex": "/^x([2-9]|[1-9][0-9]+)?$/",
+                        "valType": "subplotid"
+                    },
+                    "role": "info",
+                    "valType": "info_array"
+                },
+                "yaxes": {
+                    "description": "Sets the list of y axes corresponding to this splom trace. By default, a splom will match the first N yaxes where N is the number of input dimensions.",
+                    "editType": "calc",
+                    "freeLength": true,
+                    "items": {
+                        "editType": "plot",
+                        "regex": "/^y([2-9]|[1-9][0-9]+)?$/",
+                        "valType": "subplotid"
+                    },
+                    "role": "info",
+                    "valType": "info_array"
+                }
+            },
+            "meta": {
+                "description": "Splom traces generate scatter plot matrix visualizations. Each splom `dimensions` items correspond to a generated axis. Values for each of those dimensions are set in `dimensions[i].values`. Splom traces support all `scattergl` marker style attributes. Specify `layout.grid` attributes and/or layout x-axis and y-axis attributes for more control over the axis positioning and style. "
+            }
+        },
         "surface": {
             "attributes": {
                 "_deprecated": {
@@ -43086,7 +44435,7 @@
                     "valType": "any"
                 },
                 "yaxis": {
-                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.xaxis2`, and so on.",
+                    "description": "Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.yaxis2`, and so on.",
                     "dflt": "y",
                     "editType": "calc+clearAxisTypes",
                     "role": "info",
@@ -43216,9 +44565,6 @@
                     "valType": "string"
                 }
             }
-        },
-        "candlestick": {
-            "attributes": {}
         },
         "filter": {
             "attributes": {
@@ -43389,9 +44735,6 @@
                     "role": "object"
                 }
             }
-        },
-        "ohlc": {
-            "attributes": {}
         },
         "sort": {
             "attributes": {
