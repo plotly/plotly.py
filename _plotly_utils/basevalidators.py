@@ -133,7 +133,7 @@ def type_str(v):
 
 # Validators
 # ----------
-class BaseValidator:
+class BaseValidator(object):
     """
     Base class for all validator classes
     """
