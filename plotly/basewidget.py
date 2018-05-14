@@ -2,17 +2,20 @@ import uuid
 from importlib import import_module
 import os
 import numbers
-from urllib import parse
+try:
+    from urllib import parse
+except ImportError:
+     from urlparse import urlparse as parse
 
 import ipywidgets as widgets
 from traitlets import List, Unicode, Dict, observe, Integer
-from plotly.basedatatypes import BaseFigure, BasePlotlyType
-from plotly.callbacks import (BoxSelector, LassoSelector,
-                              InputDeviceState, Points)
-from plotly.serializers import custom_serializers
+from .basedatatypes import BaseFigure, BasePlotlyType
+from .callbacks import (BoxSelector, LassoSelector,
+                        InputDeviceState, Points)
+from .serializers import custom_serializers
 
 
-@widgets.register
+@widgets.register()
 class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
     """
     Base class for FigureWidget. The FigureWidget class is code-generated as a

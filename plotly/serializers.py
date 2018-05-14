@@ -1,5 +1,5 @@
-from plotly.basedatatypes import Undefined
-from plotly.optional_imports import get_module
+from .basedatatypes import Undefined
+from .optional_imports import get_module
 np = get_module('numpy')
 
 def _py_to_js(v, widget_manager):
