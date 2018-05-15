@@ -133,7 +133,8 @@ def type_str(v):
 
 # Validators
 # ----------
-class BaseValidator(object):
+# object
+class BaseValidator:
     """
     Base class for all validator classes
     """
@@ -477,7 +478,6 @@ class BooleanValidator(BaseValidator):
             ]
         },
     """
-
     def __init__(self, plotly_name, parent_name, **kwargs):
         super().__init__(
             plotly_name=plotly_name, parent_name=parent_name, **kwargs)
@@ -1630,7 +1630,7 @@ class CompoundValidator(BaseValidator):
 
     def __init__(self, plotly_name, parent_name, data_class_str, data_docs,
                  **kwargs):
-        super().__init__(
+        super(BaseValidator, self).__init__(
             plotly_name=plotly_name, parent_name=parent_name, **kwargs)
 
         # Save element class string

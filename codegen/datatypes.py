@@ -189,8 +189,9 @@ class {datatype_class}({node.name_base_datatype}):\n""")
     header = f"Construct a new {datatype_class} object"
     add_docstring(buffer, node, header=header)
 
+    # {node.name_base_datatype}, self
     buffer.write(f"""
-        super({node.name_base_datatype}, self).__init__('{node.name_property}')
+        super().__init__('{node.name_property}')
 
         # Import validators
         # -----------------
