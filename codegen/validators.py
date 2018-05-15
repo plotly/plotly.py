@@ -52,9 +52,12 @@ class {class_name}({superclass_name}):
                        **kwargs):""")
 
     # ### Write constructor ###
+    # {superclass_name}, self
     buffer.write(f"""
         super({superclass_name}, self).__init__(plotly_name=plotly_name,
-                         parent_name=parent_name""")
+                         parent_name=parent_name,
+                         **kwargs""")
+
 
     # Write out remaining constructor parameters
     for attr_name, attr_val in params.items():
@@ -66,8 +69,8 @@ class {class_name}({superclass_name}):
                  {attr_name}={attr_val}""")
 
     # write **kwargs at the end to make Py2 compatible
-    buffer.write(f""",
-             **kwargs""")
+    #buffer.write(f""",
+    #         **kwargs""")
 
     buffer.write(')')
 
@@ -171,6 +174,7 @@ def build_data_validator_py(base_trace_node: TraceNode):
     # -----------------
     buffer = StringIO()
 
+    # _plotly_utils.basevalidators.BaseDataValidator, self
     buffer.write(f"""
 import _plotly_utils.basevalidators
 
@@ -180,7 +184,7 @@ class DataValidator(_plotly_utils.basevalidators.BaseDataValidator):
                        parent_name={params['parent_name']},
                        **kwargs):
 
-        super(_plotly_utils.basevalidators.BaseDataValidator, self).__init__(class_strs_map={params['class_strs_map']},
+        super().__init__(class_strs_map={params['class_strs_map']},
                          plotly_name=plotly_name,
                          parent_name=parent_name,
                          **kwargs)""")
