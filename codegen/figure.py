@@ -66,7 +66,6 @@ class {fig_classname}({base_classname}):\n""")
     layout_description = reindent_validator_description(layout_validator, 8)
     frames_description = reindent_validator_description(frame_validator, 8)
 
-    # {base_classname}, self
     buffer.write(f"""
     def __init__(self, data=None, layout=None, frames=None):
         \"\"\"
@@ -81,7 +80,7 @@ class {fig_classname}({base_classname}):\n""")
         frames
             {frames_description}
         \"\"\"
-        super().__init__(data, layout, frames)
+        super({base_classname}, self).__init__(data, layout, frames)
     """)
 
     # ### add_trace methods for each trace type ###

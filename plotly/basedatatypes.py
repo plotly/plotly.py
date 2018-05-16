@@ -33,8 +33,8 @@ def fullmatch(regex, string, flags=0):
     """Emulate python-3.4 re.fullmatch()."""
     return re.match("(?:" + regex + r")\Z", string, flags=flags)
 
-# (object)
-class BaseFigure:
+
+class BaseFigure(object):
     """
     Base class for all figure types (both widget and non-widget)
     """
@@ -748,8 +748,8 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
             bracket_re = re.compile('(.*)\[(\d+)\]')
             key_path2 = []
             for key in key_path:
-                #match = fullmatch(bracket_re.pattern, key)
-                match = bracket_re.fullmatch(key)
+                match = fullmatch(bracket_re.pattern, key)
+                #match = bracket_re.fullmatch(key)
                 if match:
                     key_path2.extend(match.groups())
                 else:
@@ -2937,9 +2937,6 @@ class BasePlotlyType(object):
         # ------------
         validator = self._validators.get(prop)
         # type: BasePlotlyType
-        print(val)
-        print(type(val))
-        print('\n')
         val = validator.validate_coerce(val)
 
         # Save deep copies of current and new states
@@ -3399,16 +3396,16 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         unknown_kwargs = {
             k: v
             for k, v in kwargs.items()
-            if not self._subplotid_prop_re.fullmatch(k)
-            #if not fullmatch(self._subplotid_prop_re.pattern, k)
+            # if not self._subplotid_prop_re.fullmatch(k)
+            if not fullmatch(self._subplotid_prop_re.pattern, k)
         }
         super(BaseLayoutHierarchyType, self)._process_kwargs(**unknown_kwargs)
 
         subplot_kwargs = {
             k: v
             for k, v in kwargs.items()
-            if self._subplotid_prop_re.fullmatch(k)
-            # if fullmatch(self._subplotid_prop_re.pattern, k)
+            # if self._subplotid_prop_re.fullmatch(k)
+            if fullmatch(self._subplotid_prop_re.pattern, k)
         }
 
         for prop, value in subplot_kwargs.items():
@@ -3428,8 +3425,8 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         # Get regular expression match
         # ----------------------------
         # Note: we already tested that match exists in the constructor
-        match = self._subplotid_prop_re.fullmatch(prop)
-        # match = fullmatch(self._subplotid_prop_re.pattern, prop)
+        # match = self._subplotid_prop_re.fullmatch(prop)
+        match = fullmatch(self._subplotid_prop_re.pattern, prop)
         
         subplot_prop = match.group(1)
         suffix_digit = int(match.group(2))
@@ -3491,8 +3488,8 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         # Handle subplot suffix digit of 1
         # --------------------------------
         # Remove digit of 1 from subplot id (e.g.. xaxis1 -> xaxis)
-        match = self._subplotid_prop_re.fullmatch(prop)
-        # match = fullmatch(self._subplotid_prop_re.pattern, prop)
+        # match = self._subplotid_prop_re.fullmatch(prop)
+        match = fullmatch(self._subplotid_prop_re.pattern, prop)
 
         if match:
             subplot_prop = match.group(1)
@@ -3544,8 +3541,8 @@ class BaseLayoutType(BaseLayoutHierarchyType):
 
         # Check for subplot assignment
         # ----------------------------
-        match = self._subplotid_prop_re.fullmatch(prop)
-        # match = fullmatch(self._subplotid_prop_re.pattern, prop)
+        # match = self._subplotid_prop_re.fullmatch(prop)
+        match = fullmatch(self._subplotid_prop_re.pattern, prop)
         if match is None:
             # Set as ordinary property
             super(BaseLayoutHierarchyType, self).__setitem__(prop, value)
@@ -3559,8 +3556,8 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         """
         # Check for subplot assignment
         # ----------------------------
-        match = self._subplotid_prop_re.fullmatch(prop)
-        # match = fullmatch(self._subplotid_prop_re.pattern, prop)
+        # match = self._subplotid_prop_re.fullmatch(prop)
+        match = fullmatch(self._subplotid_prop_re.pattern, prop)
         if match is None:
             # Set as ordinary property
             super(BaseLayoutHierarchyType, self).__setattr__(prop, value)
@@ -3582,8 +3579,7 @@ class BaseTraceHierarchyType(BasePlotlyType):
     """
 
     def __init__(self, plotly_name, **kwargs):
-        # BaseTraceHierarchyType
-        super(BasePlotlyType, self).__init__(plotly_name, **kwargs)
+        super(BaseTraceHierarchyType, self).__init__(plotly_name, **kwargs)
 
     def _send_prop_set(self, prop_path_str, val):
         if self.parent:
