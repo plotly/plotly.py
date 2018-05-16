@@ -27,7 +27,11 @@ try:
 except ImportError:
     pass
 
-
+# TODO: replace re.fullmatch with function below
+# back-port of fullmatch from Py3.4+
+def fullmatch(regex, string, flags=0):
+    """Emulate python-3.4 re.fullmatch()."""
+    return re.match("(?:" + regex + r")\Z", string, flags=flags)
 
 
 # Utility functions
@@ -133,8 +137,7 @@ def type_str(v):
 
 # Validators
 # ----------
-# object
-class BaseValidator:
+class BaseValidator(object):
     """
     Base class for all validator classes
     """
@@ -478,6 +481,7 @@ class BooleanValidator(BaseValidator):
             ]
         },
     """
+
     def __init__(self, plotly_name, parent_name, **kwargs):
         super().__init__(
             plotly_name=plotly_name, parent_name=parent_name, **kwargs)
