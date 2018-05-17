@@ -26,7 +26,12 @@ update_default_schema :
                           sort_keys=True, separators=(',', ': '));\
                f.close()"
 	@echo "Auto-generating graph objects based on updated default-schema."
-	python codegen/__init__.py
+	@echo "Warning: Make sure you are running 'make update_default_schema' with Python 3.6.
+		   Code Generation requires 3.6."
+	#python -c "from codegen import perform_codegen;\
+    #    	   perform_codegen()"
+    python setup.py codegen
+	# python codegen/__init__.py
 
 install : sync_subs
 	@echo ""

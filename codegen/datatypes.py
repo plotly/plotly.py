@@ -190,7 +190,7 @@ class {datatype_class}({node.name_base_datatype}):\n""")
     add_docstring(buffer, node, header=header)
 
     buffer.write(f"""
-        super({node.name_base_datatype}, self).__init__('{node.name_property}')
+        super({datatype_class}, self).__init__('{node.name_property}')
 
         # Import validators
         # -----------------
