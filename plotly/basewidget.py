@@ -126,9 +126,9 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         # Note: We rename layout to layout_plotly because to deconflict it
         # with the `layout` constructor parameter of the `widgets.DOMWidget`
         # ipywidgets class
-        super().__init__(data=data,
-                         layout_plotly=layout,
-                         frames=frames)
+        super(BaseFigureWidget, self).__init__(data=data,
+                                               layout_plotly=layout,
+                                               frames=frames)
 
         # Validate Frames
         # ---------------
