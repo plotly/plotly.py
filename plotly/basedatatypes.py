@@ -3569,7 +3569,8 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         Custom __dir__ that handles dynamic subplot properties
         """
         # Include any active subplot values
-        return list(super(BaseLayoutHierarchyType, self).__dir__()) + sorted(self._subplotid_props)
+        # return list(super(BaseLayoutHierarchyType, self).__dir__()) + sorted(self._subplotid_props)
+        return list(dir(super(BaseLayoutHierarchyType, self))) + sorted(self._subplotid_props)
 
 
 class BaseTraceHierarchyType(BasePlotlyType):

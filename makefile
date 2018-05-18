@@ -27,11 +27,10 @@ update_default_schema :
                f.close()"
 	@echo "Auto-generating graph objects based on updated default-schema."
 	@echo "Warning: Make sure you are running 'make update_default_schema' with Python 3.6.
-		   Code Generation requires 3.6."
-	#python -c "from codegen import perform_codegen;\
-    #    	   perform_codegen()"
-    python setup.py codegen
-	# python codegen/__init__.py
+		   The code generating scripts requires 3.6 to run."
+	python codegen/__init__.py
+	# TODO: fix code breaking with update_default_schema
+	# python setup.py codegen
 
 install : sync_subs
 	@echo ""

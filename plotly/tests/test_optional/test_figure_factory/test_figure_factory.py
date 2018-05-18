@@ -1983,8 +1983,10 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
                 exp_violin['data'][i]
             )
 
+        print(test_violin['layout'])
+        print(type(test_violin['layout']))
         self.assert_fig_equal(test_violin['layout'],
-                               exp_violin['layout'])
+                              exp_violin['layout'])
 
 
 class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
