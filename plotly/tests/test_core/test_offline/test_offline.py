@@ -46,8 +46,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
             return f.read()
 
     def test_default_plot_generates_expected_html(self):
-        # add uid to data_json for regex search
-        data_json = '\[\{"x": \[1, 2, 3\], "y": \[10, 20, 30\], "type": "scatter", "uid": .+\}\]'
+        data_json = '[{"y": [10, 20, 30], "x": [1, 2, 3], "type": "scatter"'
         layout_json = _json.dumps(
             fig['layout'],
             cls=plotly.utils.PlotlyJSONEncoder)
@@ -57,7 +56,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
         # I don't really want to test the entire script output, so
         # instead just make sure a few of the parts are in here?
         self.assertIn('Plotly.newPlot', html)  # plot command is in there
-        self.assertTrue(re.search(data_json, html))  # data is in there
+        self.assertIn(data_json, html)  # data is in there
         self.assertIn(layout_json, html)       # so is layout
         self.assertIn(PLOTLYJS, html)          # and the source code
         # and it's an <html> doc
