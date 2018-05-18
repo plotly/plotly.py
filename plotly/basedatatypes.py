@@ -1,5 +1,6 @@
 import collections
 import re
+import six
 import warnings
 from contextlib import contextmanager
 from copy import deepcopy, copy
@@ -3564,13 +3565,53 @@ class BaseLayoutType(BaseLayoutHierarchyType):
             # Set as subplotid property
             self._set_subplotid_prop(prop, value)
 
+    # TODO - remove old __dir__ magic method below?
+    # def __dir__(self):
+    #     """
+    #     Custom __dir__ that handles dynamic subplot properties
+    #     """
+    #     # Include any active subplot values
+    #     return list(super(BaseLayoutHierarchyType, self).__dir__()) + sorted(self._subplotid_props)
+    #     #return list(dir(super(BaseLayoutHierarchyType, self))) + sorted(self._subplotid_props)
+
+
     def __dir__(self):
         """
         Custom __dir__ that handles dynamic subplot properties
         """
         # Include any active subplot values
-        # return list(super(BaseLayoutHierarchyType, self).__dir__()) + sorted(self._subplotid_props)
-        return list(dir(super(BaseLayoutHierarchyType, self))) + sorted(self._subplotid_props)
+        if six.PY3:
+            return list(super(BaseLayoutHierarchyType, self).__dir__()) + sorted(self._subplotid_props)
+        else:
+            def get_attrs(obj):
+                import types
+                if not hasattr(obj, '__dict__'):
+                    return []
+                if not isinstance(obj.__dict__, (dict, types.DictProxyType)):
+                    raise TypeError("%s.__dict__ is not a dictionary"
+                                    "" % obj.__name__)
+                return obj.__dict__.keys()
+
+            def dir2(obj):
+                attrs = set()
+                if not hasattr(obj, '__bases__'):
+                    # obj is an instance
+                    if not hasattr(obj, '__class__'):
+                        # slots
+                        return sorted(get_attrs(obj))
+                    klass = obj.__class__
+                    attrs.update(get_attrs(klass))
+                else:
+                    # obj is a class
+                    klass = obj
+
+                for cls in klass.__bases__:
+                    attrs.update(get_attrs(cls))
+                    attrs.update(dir2(cls))
+                attrs.update(get_attrs(obj))
+                return list(attrs)
+
+            return dir2(self) + sorted(self._subplotid_props)
 
 
 class BaseTraceHierarchyType(BasePlotlyType):
