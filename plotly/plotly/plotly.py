@@ -398,11 +398,17 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
                               if you're using a url, don't fill this in!
     raw (default=False) -- if true, return unicode JSON string verbatim**
 
-    **by default, plotly will return a Figure object (run help(plotly
-    .graph_objs.Figure)). This representation decodes the keys and values from
-    unicode (if possible), removes information irrelevant to the figure
-    representation, and converts the JSON dictionary objects to plotly
+    **by default, plotly will return a Figure object. This representation used
+    to decode the keys and values from unicode (if possible) and remove
+    information irrelevant to the figure representation. Now if in Python 2,
+    unicode is converted to regular strings. Also irrelevant information is
+    now NOT stripped: an error will be raised if a figure contains invalid
+    properties.
+
+    Finally this function converts the JSON dictionary objects to plotly
     `graph objects`.
+
+    Run `help(plotly.graph_objs.Figure)` for a list of valid properties.
 
     """
     plotly_rest_url = get_config()['plotly_domain']
@@ -474,6 +480,19 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
     for index, entry in enumerate(figure['data']):
         if 'stream' in entry:
             del figure['data'][index]['stream']
+
+    # convert all unicde to string
+    if six.PY2:
+        for t, trace in enumerate(figure['data']):
+            for key in trace:
+                if isinstance(trace[key], unicode):
+                    figure['data'][t][key] = trace[key].encode('ascii',
+                                                               'ignore')
+
+        for key in figure['layout']:
+            if isinstance(figure['layout'][key], unicode):
+                figure['layout'][key] = figure['layout'][key].encode('ascii',
+                                                                     'ignore')
 
     if raw:
         return figure
