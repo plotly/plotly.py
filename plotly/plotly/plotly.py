@@ -374,6 +374,19 @@ def _swap_xy_data(data_obj):
             )
 
 
+def byteify(input):
+    """Convert unicode strings in JSON object to byte strings"""
+    if isinstance(input, dict):
+        return {byteify(key): byteify(value)
+                for key, value in input.iteritems()}
+    elif isinstance(input, list):
+        return [byteify(element) for element in input]
+    elif isinstance(input, unicode):
+        return input.encode('utf-8')
+    else:
+        return input
+
+
 def get_figure(file_owner_or_url, file_id=None, raw=False):
     """Returns a JSON figure representation for the specified file
 
@@ -444,7 +457,8 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
     fid = '{}:{}'.format(file_owner, file_id)
     response = v2.plots.content(fid, inline_data=True)
     figure = response.json()
-
+    if six.PY2:
+        figure = byteify(figure)
     # Fix 'histogramx', 'histogramy', and 'bardir' stuff
     for index, entry in enumerate(figure['data']):
         try:
@@ -480,19 +494,6 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
     for index, entry in enumerate(figure['data']):
         if 'stream' in entry:
             del figure['data'][index]['stream']
-
-    # convert all unicde to string
-    if six.PY2:
-        for t, trace in enumerate(figure['data']):
-            for key in trace:
-                if isinstance(trace[key], unicode):
-                    figure['data'][t][key] = trace[key].encode('ascii',
-                                                               'ignore')
-
-        for key in figure['layout']:
-            if isinstance(figure['layout'][key], unicode):
-                figure['layout'][key] = figure['layout'][key].encode('ascii',
-                                                                     'ignore')
 
     if raw:
         return figure
