@@ -29,22 +29,22 @@ class TestOnChangeCallbacks(TestCase):
     def test_raise_if_no_figure(self):
         scatt = go.Scatter()
         fn = MagicMock()
-        scatt.on_change(fn, 'x')
+        scatt.on_change(fn, False, 'x')
 
     @raises(ValueError)
     def test_raise_on_frame_hierarchy(self):
         fn = MagicMock()
-        self.figure.frames[0].layout.xaxis.on_change(fn, 'range')
+        self.figure.frames[0].layout.xaxis.on_change(fn, False, 'range')
 
     @raises(ValueError)
     def test_validate_property_path_nested(self):
         fn = MagicMock()
-        self.figure.layout.xaxis.on_change(fn, 'bogus')
+        self.figure.layout.xaxis.on_change(fn, False, 'bogus')
 
     @raises(ValueError)
     def test_validate_property_path_nested(self):
         fn = MagicMock()
-        self.figure.layout.on_change(fn, 'xaxis.titlefont.bogus')
+        self.figure.layout.on_change(fn, False, 'xaxis.titlefont.bogus')
 
     # Python triggered changes
     # ------------------------
@@ -52,8 +52,8 @@ class TestOnChangeCallbacks(TestCase):
         # Install callbacks on 'x', and 'y' property of first trace
         fn_x = MagicMock()
         fn_y = MagicMock()
-        self.figure.data[0].on_change(fn_x, 'x')
-        self.figure.data[0].on_change(fn_y, 'y')
+        self.figure.data[0].on_change(fn_x, False, 'x')
+        self.figure.data[0].on_change(fn_y, False, 'y')
 
         # Setting x and y on second trace does not trigger callback
         self.figure.data[1].x = [1, 2, 3]
@@ -74,7 +74,7 @@ class TestOnChangeCallbacks(TestCase):
     def test_multi_prop_callback_on_assignment_trace(self):
         # Register callback if either 'x' or 'y' changes on first trace
         fn = MagicMock()
-        self.figure.data[0].on_change(fn, 'x', 'y')
+        self.figure.data[0].on_change(fn, False, 'x', 'y')
 
         # Perform assignment on one of the properties
         self.figure.data[0].x = [11, 22, 33]
@@ -89,7 +89,7 @@ class TestOnChangeCallbacks(TestCase):
 
         # Register callback if either axis range is changed. Both tuple and
         # dot syntax are supported for nested properties
-        self.figure.layout.on_change(fn_range,
+        self.figure.layout.on_change(fn_range, False,
                                      ('xaxis', 'range'),
                                      'yaxis.range')
 
@@ -102,16 +102,18 @@ class TestOnChangeCallbacks(TestCase):
         fn_layout = MagicMock()
 
         # Register callback on change to family property under titlefont
-        self.figure.layout.xaxis.titlefont.on_change(fn_titlefont, 'family')
+        self.figure.layout.xaxis.titlefont.on_change(fn_titlefont, False,
+                                                     'family')
 
         # Register callback on the range and titlefont.family properties
         # under xaxis
         self.figure.layout.xaxis.on_change(fn_xaxis,
+                                           False, 
                                            'range',
                                            'titlefont.family')
 
         # Register callback on xaxis object itself
-        self.figure.layout.on_change(fn_layout, 'xaxis')
+        self.figure.layout.on_change(fn_layout, False, 'xaxis')
 
         # Assign a new xaxis range and titlefont.family
         self.figure.layout.xaxis.titlefont.family = 'courier'
@@ -143,10 +145,10 @@ class TestOnChangeCallbacks(TestCase):
         fn_layout = MagicMock()
 
         self.figure.layout.updatemenus[2].buttons[1].on_change(
-            fn_button, 'method')
+            fn_button, False, 'method')
 
         self.figure.layout.on_change(
-            fn_layout, 'updatemenus[2].buttons[1].method')
+            fn_layout, False, 'updatemenus[2].buttons[1].method')
 
         # Update button method
         self.figure.layout.updatemenus[2].buttons[1].method = 'restyle'
@@ -160,6 +162,7 @@ class TestOnChangeCallbacks(TestCase):
     def test_callback_on_update(self):
         fn_range = MagicMock()
         self.figure.layout.on_change(fn_range,
+                                     False, 
                                      'xaxis.range',
                                      'yaxis.range')
 
@@ -171,6 +174,7 @@ class TestOnChangeCallbacks(TestCase):
     def test_callback_on_update_single_call(self):
         fn_range = MagicMock()
         self.figure.layout.on_change(fn_range,
+                                     False,
                                      'xaxis.range',
                                      'yaxis.range',
                                      'width')
@@ -189,6 +193,7 @@ class TestOnChangeCallbacks(TestCase):
     def test_callback_on_batch_update(self):
         fn_range = MagicMock()
         self.figure.layout.on_change(fn_range,
+                                     False,
                                      'xaxis.range',
                                      'yaxis.range',
                                      'width')
@@ -207,6 +212,7 @@ class TestOnChangeCallbacks(TestCase):
     def test_callback_on_batch_animate(self):
         fn_range = MagicMock()
         self.figure.layout.on_change(fn_range,
+                                     False,
                                      'xaxis.range',
                                      'yaxis.range',
                                      'width')
@@ -225,6 +231,7 @@ class TestOnChangeCallbacks(TestCase):
     def test_callback_on_plotly_relayout(self):
         fn_range = MagicMock()
         self.figure.layout.on_change(fn_range,
+                                     False,
                                      'xaxis.range',
                                      'yaxis.range',
                                      'width')
@@ -241,7 +248,7 @@ class TestOnChangeCallbacks(TestCase):
     def test_callback_on_plotly_restyle(self):
         # Register callback if either 'x' or 'y' changes on first trace
         fn = MagicMock()
-        self.figure.data[0].on_change(fn, 'x', 'y')
+        self.figure.data[0].on_change(fn, False, 'x', 'y')
 
         # Perform assignment on one of pthe properties
         self.figure.plotly_restyle({'x': [[11, 22, 33],
@@ -256,6 +263,7 @@ class TestOnChangeCallbacks(TestCase):
     def test_callback_on_plotly_update(self):
         fn_range = MagicMock()
         self.figure.layout.on_change(fn_range,
+                                     False,
                                      'xaxis.range',
                                      'yaxis.range',
                                      'width')
