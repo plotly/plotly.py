@@ -3175,7 +3175,7 @@ class BasePlotlyType(object):
         subproperties of this object are modified.
 
         Callback will be invoked whenever ANY of these properties is
-        modified. Furthermore. The callback will only be invoked once even
+        modified. Furthermore, the callback will only be invoked once even
         if multiple properties are modified during the same restyle /
         relayout / update operation.
 

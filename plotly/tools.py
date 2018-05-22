@@ -1362,12 +1362,10 @@ def get_graph_obj(obj, obj_type=None):
     from plotly.graph_objs import graph_objs
     try:
         cls = getattr(graph_objs, obj_type)
-        print(cls)
     except (AttributeError, KeyError):
         raise exceptions.PlotlyError(
             "'{}' is not a recognized graph_obj.".format(obj_type)
         )
-    print(obj)
     return cls(obj)
 
 
