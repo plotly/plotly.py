@@ -4,7 +4,7 @@ from nose.plugins.attrib import attr
 
 from plotly import optional_imports
 
-matplotlylib = optional_imports.get_module('plotly.matplotlylib')
+matplotlylib = optional_imports.get_module('plotly.matplotlylib.__init__')
 
 if matplotlylib:
     import matplotlib
