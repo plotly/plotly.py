@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.7.0] - 2018-05-23
+### Updated
+- Updated `plotly.min.js` to version 1.38.0.
+  - New features include a `3D cone` trace to visualize vector fields.
+  - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1380----2018-05-23) for additional information regarding the updates.
+
 ## [2.6.0] - 2018-05-09
 ### Updated
 - Updated `plotly.min.js` to version 1.37.1.
