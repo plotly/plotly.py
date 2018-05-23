@@ -57,7 +57,6 @@ def warning_on_one_line(message, category, filename, lineno,
 warnings.formatwarning = warning_on_one_line
 
 ipython_core_display = optional_imports.get_module('IPython.core.display')
-matplotlylib = optional_imports.get_module('plotly.matplotlylib')
 sage_salvus = optional_imports.get_module('sage_salvus')
 
 
@@ -92,9 +91,9 @@ def ensure_local_plotly_files():
             for key in contents_keys:
                 if key not in FILE_CONTENT[fn]:
                     del contents[key]
-            # save only if contents has changed. 
+            # save only if contents has changed.
             # This is to avoid .credentials or .config file to be overwritten randomly,
-            # which we constantly keep experiencing 
+            # which we constantly keep experiencing
             # (sync issues? the file might be locked for writing by other process in file._permissions)
             if contents_orig.keys() != contents.keys():
                 utils.save_json_dict(fn, contents)
@@ -454,6 +453,7 @@ def mpl_to_plotly(fig, resize=False, strip_style=False, verbose=False):
     {plotly_domain}/python/getting-started
 
     """
+    matplotlylib = optional_imports.get_module('plotly.matplotlylib')
     if matplotlylib:
         renderer = matplotlylib.PlotlyRenderer()
         matplotlylib.Exporter(renderer).run(fig)

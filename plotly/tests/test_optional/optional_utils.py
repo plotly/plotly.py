@@ -20,6 +20,7 @@ if matplotlylib:
 def run_fig(fig):
     renderer = PlotlyRenderer()
     exporter = Exporter(renderer)
+    print(exporter)
     exporter.run(fig)
     return renderer
 

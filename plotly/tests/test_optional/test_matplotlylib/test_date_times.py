@@ -10,7 +10,7 @@ from nose.plugins.attrib import attr
 import plotly.tools as tls
 from plotly import optional_imports
 
-matplotlylib = optional_imports.get_module('plotly.matplotlylib.__init__')
+matplotlylib = optional_imports.get_module('plotly.matplotlylib')
 
 if matplotlylib:
     import matplotlib
