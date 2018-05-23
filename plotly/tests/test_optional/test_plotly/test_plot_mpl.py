@@ -14,8 +14,7 @@ from plotly import exceptions, optional_imports
 from plotly.plotly import plotly as py
 from unittest import TestCase
 
-matplotlylib = optional_imports.get_module('plotly.matplotlylib')
-#matplotlylib = optional_imports.get_module('plotly.matplotlylib.__init__')
+matplotlylib = optional_imports.get_module('plotly.matplotlylib.__init__')
 
 if matplotlylib:
     import matplotlib
