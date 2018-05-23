@@ -7,7 +7,7 @@ from plotly.tests.utils import compare_dict, strip_dict_params
 from plotly.tests.test_optional.optional_utils import run_fig
 from plotly.tests.test_optional.test_matplotlylib.data.bars import *
 
-matplotlylib = optional_imports.get_module('plotly.matplotlylib.__init__')
+matplotlylib = optional_imports.get_module('plotly.matplotlylib')
 
 if matplotlylib:
     import matplotlib
