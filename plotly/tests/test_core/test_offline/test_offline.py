@@ -5,7 +5,6 @@ test__offline
 from __future__ import absolute_import
 
 import os
-import re
 from unittest import TestCase
 
 from requests.compat import json as _json
@@ -46,7 +45,6 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
             return f.read()
 
     def test_default_plot_generates_expected_html(self):
-        data_json = '[{"y": [10, 20, 30], "x": [1, 2, 3], "type": "scatter"'
         layout_json = _json.dumps(
             fig['layout'],
             cls=plotly.utils.PlotlyJSONEncoder)
@@ -56,7 +54,16 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
         # I don't really want to test the entire script output, so
         # instead just make sure a few of the parts are in here?
         self.assertIn('Plotly.newPlot', html)  # plot command is in there
-        self.assertIn(data_json, html)  # data is in there
+
+        x_data = '"x": [1, 2, 3]'
+        y_data = '"y": [10, 20, 30]'
+        data_json = '{}, {}'
+        # data is in there
+        try:
+            self.assertIn(data_json.format(x_data, y_data), html)
+        except AssertionError:
+            self.assertIn(data_json.format(y_data, x_data), html)
+
         self.assertIn(layout_json, html)       # so is layout
         self.assertIn(PLOTLYJS, html)          # and the source code
         # and it's an <html> doc
