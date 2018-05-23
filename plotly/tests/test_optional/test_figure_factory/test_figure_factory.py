@@ -5,7 +5,6 @@ from plotly.exceptions import PlotlyError
 
 import plotly.figure_factory as ff
 from plotly.tests.test_optional.optional_utils import NumpyTestUtilsMixin
-from nose.tools import raises
 
 import numpy as np
 from scipy.spatial import Delaunay
