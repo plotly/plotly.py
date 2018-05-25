@@ -11,10 +11,11 @@ from .optional_imports import get_module
 from . import offline as pyo
 from _plotly_utils.basevalidators import (
     CompoundValidator, CompoundArrayValidator, BaseDataValidator,
-    BaseValidator)
+    BaseValidator
+)
 from . import animation
 from .callbacks import (Points, BoxSelector, LassoSelector,
-                              InputDeviceState)
+                        InputDeviceState)
 from .utils import ElidedPrettyPrinter
 from .validators import (DataValidator, LayoutValidator, FramesValidator)
 
@@ -32,7 +33,11 @@ Undefined = object()
 # back-port of fullmatch from Py3.4+
 def fullmatch(regex, string, flags=0):
     """Emulate python-3.4 re.fullmatch()."""
-    return re.match("(?:" + regex.pattern + r")\Z", string, flags=flags)
+    if 'pattern' in dir(regex):
+        regex_string = regex.pattern
+    else:
+        regex_string = regex
+    return re.match("(?:" + regex_string + r")\Z", string, flags=flags)
 
 
 class BaseFigure(object):
