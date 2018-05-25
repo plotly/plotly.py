@@ -24,6 +24,9 @@ def test_simple_scatter():
     renderer = run_fig(fig)
     for data_no, data_dict in enumerate(renderer.plotly_fig['data']):
         d1, d2 = strip_dict_params(data_dict, SIMPLE_SCATTER['data'][data_no], ignore=['uid'])
+        print(d1)
+        print('\n')
+        print(d2)
         assert d1 == d2
 
     equivalent, msg = compare_dict(renderer.plotly_fig['layout'],
@@ -39,6 +42,9 @@ def test_double_scatter():
     renderer = run_fig(fig)
     for data_no, data_dict in enumerate(renderer.plotly_fig['data']):
         d1, d2 = strip_dict_params(data_dict, DOUBLE_SCATTER['data'][data_no], ignore=['uid'])
+        print(d1)
+        print('\n')
+        print(d2)
         assert d1 == d2
 
     equivalent, msg = compare_dict(renderer.plotly_fig['layout'],

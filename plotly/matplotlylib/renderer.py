@@ -8,6 +8,7 @@ with the matplotlylib package.
 """
 from __future__ import absolute_import
 
+import six
 import warnings
 
 import plotly.graph_objs as go
@@ -364,7 +365,9 @@ class PlotlyRenderer(Renderer):
         if props['coordinates'] == 'data':
             marked_line = go.Scatter(
                 mode=mode,
-                name=props['label'],
+                name=(str(props['label']) if
+                      isinstance(props['label'], six.string_types) else
+                      props['label']),
                 x=[xy_pair[0] for xy_pair in props['data']],
                 y=[xy_pair[1] for xy_pair in props['data']],
                 xaxis='x{0}'.format(self.axis_ct),
@@ -572,7 +575,9 @@ class PlotlyRenderer(Renderer):
                 xanchor = props['style']['halign']  # no difference here!
                 yanchor = mpltools.convert_va(props['style']['valign'])
             annotation = go.Annotation(
-                text=props['text'],
+                text=(str(props['text']) if
+                      isinstance(props['text'], six.string_types) else
+                      props['text']),
                 opacity=props['style']['alpha'],
                 x=x,
                 y=y,
@@ -674,7 +679,7 @@ class PlotlyRenderer(Renderer):
         """
         self.msg += "        Adding xlabel\n"
         axis_key = 'xaxis{0}'.format(self.axis_ct)
-        self.plotly_fig['layout'][axis_key]['title'] = props['text']
+        self.plotly_fig['layout'][axis_key]['title'] = str(props['text'])
         titlefont = go.Font(
             size=props['style']['fontsize'],
             color=props['style']['color'])
