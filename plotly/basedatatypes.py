@@ -3570,16 +3570,6 @@ class BaseLayoutType(BaseLayoutHierarchyType):
             # Set as subplotid property
             self._set_subplotid_prop(prop, value)
 
-    # TODO - remove old __dir__ magic method below?
-    # def __dir__(self):
-    #     """
-    #     Custom __dir__ that handles dynamic subplot properties
-    #     """
-    #     # Include any active subplot values
-    #     return list(super(BaseLayoutHierarchyType, self).__dir__()) + sorted(self._subplotid_props)
-    #     #return list(dir(super(BaseLayoutHierarchyType, self))) + sorted(self._subplotid_props)
-
-
     def __dir__(self):
         """
         Custom __dir__ that handles dynamic subplot properties

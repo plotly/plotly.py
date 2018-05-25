@@ -85,7 +85,7 @@ COMPLICATED_LINE = Figure(
                 symbol='circle',
                 line=Line(
                     color='#FF0000',
-                    width=1.0 # TODO: change later?
+                    width=1.0
                 ),
                 size=10,
                 color='#FF0000',

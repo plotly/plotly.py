@@ -148,7 +148,6 @@ class TestJSONEncoder(TestCase):
         self.assertEqual(res, '2013-10-01')
 
         # should also work with a date time without a utc offset!
-        # TODO: is this OK? We could raise errors after checking isinstance...
         res = utils.PlotlyJSONEncoder.encode_as_date(
             datetime.datetime(2013, 10, 1, microsecond=10)
         )
@@ -159,7 +158,7 @@ class TestJSONEncoder(TestCase):
         # should work with decimal values
         res = utils.PlotlyJSONEncoder.encode_as_decimal(decimal.Decimal(1.023452))
 
-        self.assertAlmostEqual(res, 1.023452) # Checks upto 7 decimal places
+        self.assertAlmostEqual(res, 1.023452)  # Checks upto 7 decimal places
         self.assertIsInstance(res, float)
 
 ## JSON encoding
