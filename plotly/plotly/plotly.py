@@ -654,16 +654,14 @@ class Stream:
         validate = False
 
         # Convert trace objects to dictionaries
-        
         if isinstance(trace, BaseTraceType):
-           trace = trace.to_plotly_json()
+            trace = trace.to_plotly_json()
 
         stream_object = dict()
         stream_object.update(trace)
         if 'type' not in stream_object:
             # tests if Scatter contains invalid kwargs
-            # TODO: replace Scatter with something else
-            #dummy_obj = copy.deepcopy(Scatter(**stream_object))
+            dummy_obj = copy.deepcopy(Scatter(**stream_object))
             stream_object = Scatter(**stream_object)
             stream_object['type'] = 'scatter'
 
