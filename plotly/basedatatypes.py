@@ -1148,7 +1148,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         >>> fig.append_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=2, col=1)
         """
         warnings.warn("""\
-The append_trace method is deprecated and will be removed in a future version. 
+The append_trace method is deprecated and will be removed in a future version.
 Please use the add_trace method with the row and col parameters.
 """, DeprecationWarning)
 
@@ -2094,7 +2094,8 @@ Invalid property path '{key_path_str}' for layout
             data['layout']['height'] = self.layout.height
             data['layout']['width'] = self.layout.width
 
-        pyo.plot(data, filename=filename, show_link=False, auto_open=auto_open)
+        pyo.plot(data, filename=filename, show_link=False,
+                 auto_open=auto_open)
 
     # Static helpers
     # --------------
@@ -3576,7 +3577,8 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         """
         # Include any active subplot values
         if six.PY3:
-            return list(super(BaseLayoutHierarchyType, self).__dir__()) + sorted(self._subplotid_props)
+            return (list(super(BaseLayoutHierarchyType, self).__dir__()) +
+                    sorted(self._subplotid_props))
         else:
             def get_attrs(obj):
                 import types
