@@ -48,9 +48,6 @@ plotly/figure_factory/_table.py
 plotly/figure_factory/_trisurf.py
 plotly/figure_factory/_violin.py
 plotly/figure_factory/utils.py
-# plotly/graph_objs/__init__.py
-# plotly/graph_objs/graph_objs.py
-# plotly/graph_objs/graph_objs_tools.py
 plotly/grid_objs/__init__.py
 plotly/grid_objs/grid_objs.py
 plotly/matplotlylib/__init__.py
