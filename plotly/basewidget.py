@@ -232,8 +232,12 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
 
         # ### Validate scale_factor ###
         if not isinstance(scale_factor, numbers.Number) or scale_factor <= 0:
-            raise ValueError('scale_factor must be a positive number.\n'
-                             '    Received: {scale_factor}'.format(scale_factor=scale_factor))
+            raise ValueError(
+                'scale_factor must be a positive number.\n'
+                '    Received: {scale_factor}'.format(
+                    scale_factor=scale_factor
+                )
+            )
 
         # Build image request
         # -------------------
