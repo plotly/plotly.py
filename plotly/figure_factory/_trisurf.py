@@ -167,9 +167,11 @@ def trisurf(x, y, z, simplices, show_colorbar, edges_color, scale,
     # the triangle sides are not plotted
     if plot_edges is False:
         if mean_dists_are_numbers and show_colorbar is True:
-            return graph_objs.Data([triangles, colorbar])
+            # return graph_objs.Data([triangles, colorbar])
+            return [triangles, colorbar]
         else:
-            return graph_objs.Data([triangles])
+            # return graph_objs.Data([triangles])
+            return [triangles]
 
     # define the lists x_edge, y_edge and z_edge, of x, y, resp z
     # coordinates of edge end points for each triangle
@@ -214,9 +216,11 @@ def trisurf(x, y, z, simplices, show_colorbar, edges_color, scale,
     )
 
     if mean_dists_are_numbers and show_colorbar is True:
-        return graph_objs.Data([triangles, lines, colorbar])
+        # return graph_objs.Data([triangles, lines, colorbar])
+        return [triangles, lines, colorbar]
     else:
-        return graph_objs.Data([triangles, lines])
+        # return graph_objs.Data([triangles, lines])
+        return [triangles, lines]
 
 
 def create_trisurf(x, y, z, simplices, colormap=None, show_colorbar=True,
