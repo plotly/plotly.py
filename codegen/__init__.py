@@ -163,6 +163,7 @@ def perform_codegen():
 
         # submodule import
         if node.child_compound_datatypes:
+            
             path_to_datatype_import_info.setdefault(key, []).append(
                 (f"plotly.graph_objs{node.parent_dotpath_str}",
                  node.name_undercase)
