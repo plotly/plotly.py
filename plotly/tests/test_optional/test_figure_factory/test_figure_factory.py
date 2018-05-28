@@ -459,11 +459,11 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
         dendro = ff.create_dendrogram(X=X)
 
         expected_dendro = go.Figure(
-            data=go.Data([
+            data=[
                 go.Scatter(
                     x=np.array([25., 25., 35., 35.]),
                     y=np.array([0., 1., 1., 0.]),
-                    marker=go.Marker(color='rgb(61,153,112)'),
+                    marker=go.scatter.Marker(color='rgb(61,153,112)'),
                     mode='lines',
                     xaxis='x',
                     yaxis='y',
@@ -473,7 +473,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
                 go.Scatter(
                     x=np.array([15., 15., 30., 30.]),
                     y=np.array([0., 2.23606798, 2.23606798, 1.]),
-                    marker=go.Marker(color='rgb(61,153,112)'),
+                    marker=go.scatter.Marker(color='rgb(61,153,112)'),
                     mode='lines',
                     xaxis='x',
                     yaxis='y',
@@ -483,14 +483,14 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
                 go.Scatter(
                     x=np.array([5., 5., 22.5, 22.5]),
                     y=np.array([0., 3.60555128, 3.60555128, 2.23606798]),
-                    marker=go.Marker(color='rgb(0,116,217)'),
+                    marker=go.scatter.Marker(color='rgb(0,116,217)'),
                     mode='lines',
                     xaxis='x',
                     yaxis='y',
                     hoverinfo='text',
                     text=None
                 )
-            ]),
+            ],
             layout=go.Layout(
                 autosize=False,
                 height=np.inf,
@@ -548,9 +548,9 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
         dendro = ff.create_dendrogram(X, labels=names)
 
         expected_dendro = go.Figure(
-            data=go.Data([
+            data=[
                 go.Scatter(
-                    marker=go.Marker(color='rgb(61,153,112)'),
+                    marker=go.scatter.Marker(color='rgb(61,153,112)'),
                     mode='lines',
                     xaxis='x',
                     yaxis='y',
@@ -558,7 +558,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
                     text=None
                 ),
                 go.Scatter(
-                    marker=go.Marker(
+                    marker=go.scatter.Marker(
                         color='rgb(61,153,112)'
                     ),
                     mode='lines',
@@ -568,7 +568,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
                     text=None
                 ),
                 go.Scatter(
-                    marker=go.Marker(color='rgb(61,153,112)'),
+                    marker=go.scatter.Marker(color='rgb(61,153,112)'),
                     mode='lines',
                     xaxis='x',
                     yaxis='y',
@@ -576,14 +576,14 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
                     text=None
                 ),
                 go.Scatter(
-                    marker=go.Marker(color='rgb(0,116,217)'),
+                    marker=go.scatter.Marker(color='rgb(0,116,217)'),
                     mode='lines',
                     xaxis='x',
                     yaxis='y',
                     hoverinfo='text',
                     text=None
                 )
-            ]),
+            ],
             layout=go.Layout(
                 autosize=False,
                 height=np.inf,
@@ -706,11 +706,11 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
         dendro = ff.create_dendrogram(X, colorscale=greyscale)
 
         expected_dendro = go.Figure(
-            data=go.Data([
+            data=[
                 go.Scatter(
                     x=np.array([25., 25., 35., 35.]),
                     y=np.array([0., 1., 1., 0.]),
-                    marker=go.Marker(color='rgb(128,128,128)'),
+                    marker=go.scatter.Marker(color='rgb(128,128,128)'),
                     mode='lines',
                     xaxis='x',
                     yaxis='y',
@@ -720,7 +720,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
                 go.Scatter(
                     x=np.array([15., 15., 30., 30.]),
                     y=np.array([0., 2.23606798, 2.23606798, 1.]),
-                    marker=go.Marker(color='rgb(128,128,128)'),
+                    marker=go.scatter.Marker(color='rgb(128,128,128)'),
                     mode='lines',
                     xaxis='x',
                     yaxis='y',
@@ -730,14 +730,14 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
                 go.Scatter(
                     x=np.array([5., 5., 22.5, 22.5]),
                     y=np.array([0., 3.60555128, 3.60555128, 2.23606798]),
-                    marker=go.Marker(color='rgb(0,0,0)'),
+                    marker=go.scatter.Marker(color='rgb(0,0,0)'),
                     mode='lines',
                     xaxis='x',
                     yaxis='y',
                     hoverinfo='text',
                     text=None
                 )
-            ]),
+            ],
             layout=go.Layout(
                 autosize=False,
                 height=np.inf,

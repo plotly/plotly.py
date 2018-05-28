@@ -226,7 +226,7 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
             # Check whether we have cairosvg available
             try:
                 import_module('cairosvg')
-            except ModuleNotFoundError:
+            except ImportError:
                 raise ImportError('Exporting to {image_type} requires cairosvg'
                                   .format(image_type=image_type))
 

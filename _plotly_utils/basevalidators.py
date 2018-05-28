@@ -1593,7 +1593,7 @@ class ImageUriValidator(BaseValidator):
 
     try:
         _PIL = import_module('PIL')
-    except ModuleNotFoundError:
+    except ImportError:
         pass
 
     def __init__(self, plotly_name, parent_name, **kwargs):

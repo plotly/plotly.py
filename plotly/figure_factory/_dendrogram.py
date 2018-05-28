@@ -144,7 +144,7 @@ class _Dendrogram(object):
         self.zero_vals.sort()
 
         self.layout = self.set_figure_layout(width, height)
-        self.data = graph_objs.Data(dd_traces)
+        self.data = dd_traces
 
     def get_color_dict(self, colorscale):
         """
