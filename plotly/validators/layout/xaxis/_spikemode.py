@@ -1,0 +1,16 @@
+import _plotly_utils.basevalidators
+
+
+class SpikemodeValidator(_plotly_utils.basevalidators.FlaglistValidator):
+
+    def __init__(
+        self, plotly_name='spikemode', parent_name='layout.xaxis', **kwargs
+    ):
+        super(SpikemodeValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type='none',
+            flags=['toaxis', 'across', 'marker'],
+            role='style',
+            **kwargs
+        )
