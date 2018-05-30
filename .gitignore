@@ -22,8 +22,6 @@ plotly/api/v2/spectacle_presentations.py
 
 plotly/presentation_objs/
 
-plotly/validators
-
 .idea
 
 js/node_modules/

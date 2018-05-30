@@ -36,3 +36,6 @@ ipykernel
 pyshp
 geopandas
 shapely
+
+# ipyplotly integration
+pil
