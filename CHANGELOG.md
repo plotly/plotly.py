@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.7.1] - UNRELEASED
+### Updated
+- `plotly/offline.py` function `iplot` now takes arguments `weight` and `height`, and overwrites `image_height` and `image_width` when provided.
+
 ## [2.7.0] - 2018-05-23
 ### Updated
 - Updated `plotly.min.js` to version 1.38.0.
