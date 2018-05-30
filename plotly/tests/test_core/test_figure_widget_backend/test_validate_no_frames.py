@@ -4,7 +4,7 @@ from nose.tools import raises
 
 
 class TestNoFrames(TestCase):
-    if 'FigureWidget' in dir(go):
+    if 'FigureWidget' in go.__dict__.keys():
         @raises(ValueError)
         def test_no_frames_in_constructor_kwarg(self):
             go.FigureWidget(frames=[{}])
