@@ -19,7 +19,7 @@ from plotly.tests.utils import PlotlyTestCase
 FAKE_API_DOMAIN = 'https://api.am.not.here.ly'
 
 
-class TestGraphReferenceCaching(PlotlyTestCase):
+#class TestGraphReferenceCaching(PlotlyTestCase):
 
     # @attr('slow')
     # def test_default_schema_is_up_to_date(self):
