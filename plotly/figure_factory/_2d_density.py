@@ -115,7 +115,7 @@ def create_2d_density(x, y, colorscale='Earth', ncontours=20,
             opacity=0.4
         )
     )
-    trace2 = graph_objs.Histogram2dcontour(
+    trace2 = graph_objs.Histogram2dContour(
         x=x, y=y, name='density', ncontours=ncontours,
         colorscale=colorscale, reversescale=True, showscale=False
     )

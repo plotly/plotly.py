@@ -2,7 +2,7 @@ import math
 from unittest import TestCase
 
 import datetime
-#import plotly.figure_factory as ff
+import plotly.figure_factory as ff
 import plotly.tools as tls
 from plotly.exceptions import PlotlyError
 from plotly.tests.test_optional.optional_utils import NumpyTestUtilsMixin
@@ -16,7 +16,7 @@ class TestQuiver(TestCase, NumpyTestUtilsMixin):
         # check: PlotlyError if x and y are not the same length
 
         kwargs = {'x': [1, 2], 'y': [1], 'u': [1, 2], 'v': [1, 2]}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_quiver,
+        self.assertRaises(PlotlyError, ff.create_quiver,
                           **kwargs)
 
     def test_wrong_scale(self):
@@ -26,13 +26,13 @@ class TestQuiver(TestCase, NumpyTestUtilsMixin):
         kwargs = {'x': [1, 2], 'y': [1, 2],
                   'u': [1, 2], 'v': [1, 2],
                   'scale': -1}
-        self.assertRaises(ValueError, tls.FigureFactory.create_quiver,
+        self.assertRaises(ValueError, ff.create_quiver,
                           **kwargs)
 
         kwargs = {'x': [1, 2], 'y': [1, 2],
                   'u': [1, 2], 'v': [1, 2],
                   'scale': 0}
-        self.assertRaises(ValueError, tls.FigureFactory.create_quiver,
+        self.assertRaises(ValueError, ff.create_quiver,
                           **kwargs)
 
     def test_wrong_arrow_scale(self):
@@ -42,20 +42,20 @@ class TestQuiver(TestCase, NumpyTestUtilsMixin):
         kwargs = {'x': [1, 2], 'y': [1, 2],
                   'u': [1, 2], 'v': [1, 2],
                   'arrow_scale': -1}
-        self.assertRaises(ValueError, tls.FigureFactory.create_quiver,
+        self.assertRaises(ValueError, ff.create_quiver,
                           **kwargs)
 
         kwargs = {'x': [1, 2], 'y': [1, 2],
                   'u': [1, 2], 'v': [1, 2],
                   'arrow_scale': 0}
-        self.assertRaises(ValueError, tls.FigureFactory.create_quiver,
+        self.assertRaises(ValueError, ff.create_quiver,
                           **kwargs)
 
     def test_one_arrow(self):
 
         # we should be able to create a single arrow using create_quiver
 
-        quiver = tls.FigureFactory.create_quiver(x=[1], y=[1],
+        quiver = ff.create_quiver(x=[1], y=[1],
                                                  u=[1], v=[1],
                                                  scale=1)
         expected_quiver = {
@@ -76,16 +76,16 @@ class TestQuiver(TestCase, NumpyTestUtilsMixin):
         # we should be able to create 2 arrows and change the arrow_scale,
         # angle, and arrow using create_quiver
 
-        quiver = tls.FigureFactory.create_quiver(x=[1, 2],
-                                                 y=[1, 2],
-                                                 u=[math.cos(1),
-                                                    math.cos(2)],
-                                                 v=[math.sin(1),
-                                                    math.sin(2)],
-                                                 arrow_scale=.4,
-                                                 angle=math.pi / 6,
-                                                 line=graph_objs.Line(color='purple',
-                                                                      width=3))
+        quiver = ff.create_quiver(x=[1, 2],
+                                  y=[1, 2],
+                                  u=[math.cos(1),
+                                     math.cos(2)],
+                                  v=[math.sin(1),
+                                     math.sin(2)],
+                                  arrow_scale=.4,
+                                  angle=math.pi / 6,
+                                  line=graph_objs.scatter.Line(color='purple',
+                                                               width=3))
         expected_quiver = {'data': [{'line': {'color': 'purple', 'width': 3},
                                      'mode': 'lines',
                                      'type': u'scatter',
@@ -134,27 +134,27 @@ class TestFinanceCharts(TestCase, NumpyTestUtilsMixin):
         kwargs = {'open': [1], 'high': [1, 3],
                   'low': [1, 2], 'close': [1, 2],
                   'direction': ['increasing']}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_ohlc, **kwargs)
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_candlestick,
+        self.assertRaises(PlotlyError, ff.create_ohlc, **kwargs)
+        self.assertRaises(PlotlyError, ff.create_candlestick,
                           **kwargs)
 
         kwargs = {'open': [1, 2], 'high': [1, 2, 3],
                   'low': [1, 2], 'close': [1, 2],
                   'direction': ['decreasing']}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_ohlc, **kwargs)
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_candlestick,
+        self.assertRaises(PlotlyError, ff.create_ohlc, **kwargs)
+        self.assertRaises(PlotlyError, ff.create_candlestick,
                           **kwargs)
 
         kwargs = {'open': [1, 2], 'high': [2, 3],
                   'low': [0], 'close': [1, 3]}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_ohlc, **kwargs)
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_candlestick,
+        self.assertRaises(PlotlyError, ff.create_ohlc, **kwargs)
+        self.assertRaises(PlotlyError, ff.create_candlestick,
                           **kwargs)
 
         kwargs = {'open': [1, 2], 'high': [2, 3],
                   'low': [1, 2], 'close': [1]}
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_ohlc, **kwargs)
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_candlestick,
+        self.assertRaises(PlotlyError, ff.create_ohlc, **kwargs)
+        self.assertRaises(PlotlyError, ff.create_candlestick,
                           **kwargs)
 
     def test_direction_arg(self):
@@ -169,11 +169,11 @@ class TestFinanceCharts(TestCase, NumpyTestUtilsMixin):
         self.assertRaisesRegexp(PlotlyError,
                                 "direction must be defined as "
                                 "'increasing', 'decreasing', or 'both'",
-                                tls.FigureFactory.create_ohlc, **kwargs)
+                                ff.create_ohlc, **kwargs)
         self.assertRaisesRegexp(PlotlyError,
                                 "direction must be defined as "
                                 "'increasing', 'decreasing', or 'both'",
-                                tls.FigureFactory.create_candlestick, **kwargs)
+                                ff.create_candlestick, **kwargs)
 
         kwargs = {'open': [1, 2], 'high': [1, 3],
                   'low': [1, 2], 'close': [1, 2],
@@ -181,11 +181,11 @@ class TestFinanceCharts(TestCase, NumpyTestUtilsMixin):
         self.assertRaisesRegexp(PlotlyError,
                                 "direction must be defined as "
                                 "'increasing', 'decreasing', or 'both'",
-                                tls.FigureFactory.create_ohlc, **kwargs)
+                                ff.create_ohlc, **kwargs)
         self.assertRaisesRegexp(PlotlyError,
                                 "direction must be defined as "
                                 "'increasing', 'decreasing', or 'both'",
-                                tls.FigureFactory.create_candlestick, **kwargs)
+                                ff.create_candlestick, **kwargs)
 
     def test_high_highest_value(self):
 
@@ -201,7 +201,7 @@ class TestFinanceCharts(TestCase, NumpyTestUtilsMixin):
                                              "low, or close values. "
                                              "Double check that your data "
                                              "is entered in O-H-L-C order",
-                                tls.FigureFactory.create_ohlc,
+                                ff.create_ohlc,
                                 **kwargs)
         self.assertRaisesRegexp(PlotlyError, "Oops! Looks like some of "
                                              "your high values are less "
@@ -209,7 +209,7 @@ class TestFinanceCharts(TestCase, NumpyTestUtilsMixin):
                                              "low, or close values. "
                                              "Double check that your data "
                                              "is entered in O-H-L-C order",
-                                tls.FigureFactory.create_candlestick,
+                                ff.create_candlestick,
                                 **kwargs)
 
     def test_low_lowest_value(self):
@@ -229,7 +229,7 @@ class TestFinanceCharts(TestCase, NumpyTestUtilsMixin):
                                 ", open, or close values. "
                                 "Double check that your data "
                                 "is entered in O-H-L-C order",
-                                tls.FigureFactory.create_ohlc,
+                                ff.create_ohlc,
                                 **kwargs)
         self.assertRaisesRegexp(PlotlyError,
                                 "Oops! Looks like some of "
@@ -238,14 +238,14 @@ class TestFinanceCharts(TestCase, NumpyTestUtilsMixin):
                                 ", open, or close values. "
                                 "Double check that your data "
                                 "is entered in O-H-L-C order",
-                                tls.FigureFactory.create_candlestick,
+                                ff.create_candlestick,
                                 **kwargs)
 
     def test_one_ohlc(self):
 
         # This should create one "increase" (i.e. close > open) ohlc stick
 
-        ohlc = tls.FigureFactory.create_ohlc(open=[33.0],
+        ohlc = ff.create_ohlc(open=[33.0],
                                              high=[33.2],
                                              low=[32.7],
                                              close=[33.1])
@@ -284,7 +284,7 @@ class TestFinanceCharts(TestCase, NumpyTestUtilsMixin):
 
         # This should create one "increase" (i.e. close > open) ohlc stick
 
-        ohlc_incr = tls.FigureFactory.create_ohlc(open=[33.0],
+        ohlc_incr = ff.create_ohlc(open=[33.0],
                                                   high=[33.2],
                                                   low=[32.7],
                                                   close=[33.1],
@@ -310,7 +310,7 @@ class TestFinanceCharts(TestCase, NumpyTestUtilsMixin):
 
         # This should create one "increase" (i.e. close > open) ohlc stick
 
-        ohlc_decr = tls.FigureFactory.create_ohlc(open=[33.0],
+        ohlc_decr = ff.create_ohlc(open=[33.0],
                                                   high=[33.2],
                                                   low=[30.7],
                                                   close=[31.1],
@@ -338,7 +338,7 @@ class TestFinanceCharts(TestCase, NumpyTestUtilsMixin):
 
         # This should create one "increase" (i.e. close > open) candlestick
 
-        can_inc = tls.FigureFactory.create_candlestick(open=[33.0],
+        can_inc = ff.create_candlestick(open=[33.0],
                                                        high=[33.2],
                                                        low=[32.7],
                                                        close=[33.1])
@@ -386,7 +386,7 @@ class TestFinanceCharts(TestCase, NumpyTestUtilsMixin):
              datetime.datetime(year=2014, month=9, day=4),
              datetime.datetime(year=2014, month=12, day=5)]
 
-        ohlc_d = tls.FigureFactory.create_ohlc(open_data, high_data,
+        ohlc_d = ff.create_ohlc(open_data, high_data,
                                                low_data, close_data,
                                                dates=x)
 
@@ -592,7 +592,7 @@ class TestFinanceCharts(TestCase, NumpyTestUtilsMixin):
              datetime.datetime(year=2014, month=9, day=4),
              datetime.datetime(year=2014, month=12, day=5)]
 
-        candle = tls.FigureFactory.create_candlestick(open_data, high_data,
+        candle = ff.create_candlestick(open_data, high_data,
                                                       low_data, close_data,
                                                       dates=x)
         exp_candle = {'data': [{'boxpoints': False,
@@ -720,12 +720,12 @@ class TestAnnotatedHeatmap(TestCase, NumpyTestUtilsMixin):
 
         kwargs = {'z': [[1, 2], [1, 2]], 'annotation_text': [[1, 2, 3], [1]]}
         self.assertRaises(PlotlyError,
-                          tls.FigureFactory.create_annotated_heatmap,
+                          ff.create_annotated_heatmap,
                           **kwargs)
 
         kwargs = {'z': [[1], [1]], 'annotation_text': [[1], [1], [1]]}
         self.assertRaises(PlotlyError,
-                          tls.FigureFactory.create_annotated_heatmap,
+                          ff.create_annotated_heatmap,
                           **kwargs)
 
     def test_incorrect_x_size(self):
@@ -734,7 +734,7 @@ class TestAnnotatedHeatmap(TestCase, NumpyTestUtilsMixin):
 
         kwargs = {'z': [[1, 2], [1, 2]], 'x': ['A']}
         self.assertRaises(PlotlyError,
-                          tls.FigureFactory.create_annotated_heatmap,
+                          ff.create_annotated_heatmap,
                           **kwargs)
 
     def test_incorrect_y_size(self):
@@ -743,7 +743,7 @@ class TestAnnotatedHeatmap(TestCase, NumpyTestUtilsMixin):
 
         kwargs = {'z': [[1, 2], [1, 2]], 'y': [1, 2, 3]}
         self.assertRaises(PlotlyError,
-                          tls.FigureFactory.create_annotated_heatmap,
+                          ff.create_annotated_heatmap,
                           **kwargs)
 
     def test_simple_annotated_heatmap(self):
@@ -752,7 +752,7 @@ class TestAnnotatedHeatmap(TestCase, NumpyTestUtilsMixin):
         # logical text color
 
         z = [[1, 0, .5], [.25, .75, .45]]
-        a_heat = tls.FigureFactory.create_annotated_heatmap(z)
+        a_heat = ff.create_annotated_heatmap(z)
         expected_a_heat = {
             'data': [{'colorscale': 'RdBu',
                       'showscale': False,
@@ -822,7 +822,7 @@ class TestAnnotatedHeatmap(TestCase, NumpyTestUtilsMixin):
 
         z = [[1, 0], [.25, .75], [.45, .5]]
         text = [['first', 'second'], ['third', 'fourth'], ['fifth', 'sixth']]
-        a = tls.FigureFactory.create_annotated_heatmap(z, x=['A', 'B'],
+        a = ff.create_annotated_heatmap(z, x=['A', 'B'],
                                                        y=['One', 'Two',
                                                           'Three'],
                                                        annotation_text=text,
@@ -903,12 +903,12 @@ class TestTable(TestCase, NumpyTestUtilsMixin):
         kwargs = {'table_text': [['one', 'two'], [1, 2], [1, 2], [1, 2]],
                   'fontcolor': '#000000'}
         self.assertRaises(ValueError,
-                          tls.FigureFactory.create_table, **kwargs)
+                          ff.create_table, **kwargs)
 
         kwargs = {'table_text': [['one', 'two'], [1, 2], [1, 2], [1, 2]],
                   'fontcolor': ['red', 'blue']}
         self.assertRaises(ValueError,
-                          tls.FigureFactory.create_table, **kwargs)
+                          ff.create_table, **kwargs)
 
     def test_simple_table(self):
 
@@ -916,7 +916,7 @@ class TestTable(TestCase, NumpyTestUtilsMixin):
 
         text = [['Country', 'Year', 'Population'], ['US', 2000, 282200000],
                 ['Canada', 2000, 27790000], ['US', 1980, 226500000]]
-        table = tls.FigureFactory.create_table(text)
+        table = ff.create_table(text)
         expected_table = {'data': [{'colorscale': [[0, '#00083e'],
                                                    [0.5, '#ededee'],
                                                    [1, '#ffffff']],
@@ -1067,8 +1067,7 @@ class TestTable(TestCase, NumpyTestUtilsMixin):
 
         text = [['Country', 'Year', 'Population'], ['US', 2000, 282200000],
                 ['Canada', 2000, 27790000]]
-        index_table = tls.FigureFactory.create_table(text, index=True,
-                                                     index_title='Title')
+        index_table = ff.create_table(text, index=True, index_title='Title')
         exp_index_table = {'data': [{'colorscale': [[0, '#00083e'], [0.5, '#ededee'], [1, '#ffffff']],
                                      'hoverinfo': 'none',
                                      'opacity': 0.75,
@@ -1200,7 +1199,7 @@ class TestGantt(TestCase):
                     'dictionaries is being used.')
 
         self.assertRaisesRegexp(PlotlyError, pattern2,
-                                tls.FigureFactory.create_gantt,
+                                ff.create_gantt,
                                 df, index_col='foo')
 
         df = 'foo'
@@ -1209,7 +1208,7 @@ class TestGantt(TestCase):
                     'dictionaries.')
 
         self.assertRaisesRegexp(PlotlyError, pattern3,
-                                tls.FigureFactory.create_gantt, df)
+                                ff.create_gantt, df)
 
         df = []
 
@@ -1217,14 +1216,14 @@ class TestGantt(TestCase):
                     'dictionary.')
 
         self.assertRaisesRegexp(PlotlyError, pattern4,
-                                tls.FigureFactory.create_gantt, df)
+                                ff.create_gantt, df)
 
         df = ['foo']
 
         pattern5 = ('Your list must only include dictionaries.')
 
         self.assertRaisesRegexp(PlotlyError, pattern5,
-                                tls.FigureFactory.create_gantt, df)
+                                ff.create_gantt, df)
 
     def test_gantt_index(self):
 
@@ -1241,7 +1240,7 @@ class TestGantt(TestCase):
                    'dictionaries is being used.')
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_gantt,
+                                ff.create_gantt,
                                 df, index_col='foo')
 
         df = [{'Task': 'Job A', 'Start': '2009-02-01',
@@ -1253,7 +1252,7 @@ class TestGantt(TestCase):
                     'column are all numbers or all strings.')
 
         self.assertRaisesRegexp(PlotlyError, pattern2,
-                                tls.FigureFactory.create_gantt,
+                                ff.create_gantt,
                                 df, index_col='Complete')
 
     def test_gantt_validate_colors(self):
@@ -1269,17 +1268,17 @@ class TestGantt(TestCase):
                    'exceed 255.0.')
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_gantt, df,
+                                ff.create_gantt, df,
                                 index_col='Complete', colors='rgb(300,1,1)')
 
-        self.assertRaises(PlotlyError, tls.FigureFactory.create_gantt,
+        self.assertRaises(PlotlyError, ff.create_gantt,
                           df, index_col='Complete', colors='foo')
 
         pattern2 = ('Whoops! The elements in your colors tuples cannot '
                     'exceed 1.0.')
 
         self.assertRaisesRegexp(PlotlyError, pattern2,
-                                tls.FigureFactory.create_gantt, df,
+                                ff.create_gantt, df,
                                 index_col='Complete', colors=(2, 1, 1))
 
         # verify that if colors is a dictionary, its keys span all the
@@ -1290,7 +1289,7 @@ class TestGantt(TestCase):
                     'keys must be all the values in the index column.')
 
         self.assertRaisesRegexp(PlotlyError, pattern3,
-                                tls.FigureFactory.create_gantt, df,
+                                ff.create_gantt, df,
                                 index_col='Complete', colors=colors_dict)
 
         # check: index is set if colors is a dictionary
@@ -1301,7 +1300,7 @@ class TestGantt(TestCase):
                     'assigning colors to particular values in a dictioanry.')
 
         self.assertRaisesRegexp(PlotlyError, pattern4,
-                                tls.FigureFactory.create_gantt, df,
+                                ff.create_gantt, df,
                                 colors=colors_dict_good)
 
         # check: number of colors is equal to or greater than number of
@@ -1311,7 +1310,7 @@ class TestGantt(TestCase):
                     "column.")
 
         self.assertRaisesRegexp(PlotlyError, pattern5,
-                                tls.FigureFactory.create_gantt, df,
+                                ff.create_gantt, df,
                                 index_col='Resource',
                                 colors=['#ffffff'])
 
@@ -1322,7 +1321,7 @@ class TestGantt(TestCase):
                     "bounds on the colormap.")
 
         self.assertRaisesRegexp(PlotlyError, pattern6,
-                                tls.FigureFactory.create_gantt, df,
+                                ff.create_gantt, df,
                                 index_col='Complete',
                                 colors=['#ffffff'])
 
@@ -1343,7 +1342,7 @@ class TestGantt(TestCase):
                  Finish='2009-05-30', IndexCol='TA')
         ]
 
-        test_gantt_chart = tls.FigureFactory.create_gantt(
+        test_gantt_chart = ff.create_gantt(
             df, colors=dict(TA='rgb(220, 0, 0)', TB='rgb(170, 14, 200)',
             TC=(1, 0.9, 0.16)), show_colorbar=True, index_col='IndexCol',
             group_tasks=True
@@ -1511,7 +1510,7 @@ class TestGantt(TestCase):
                'Finish': '2012-06-05',
                'Complete': 25}]
 
-        test_gantt_chart = tls.FigureFactory.create_gantt(
+        test_gantt_chart = ff.create_gantt(
             df, colors='Blues', index_col='Complete', reverse_colors=True,
             title='Title', bar_width=0.5, showgrid_x=True, showgrid_y=True,
             height=500, width=500
@@ -1606,7 +1605,7 @@ class Test2D_Density(TestCase, NumpyTestUtilsMixin):
         pattern = ("All elements of your 'x' and 'y' lists must be numbers.")
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                tls.FigureFactory.create_2D_density, x, y)
+                                ff.create_2d_density, x, y)
 
         # validate that x and y are the same length
         x2 = [1]
@@ -1615,7 +1614,7 @@ class Test2D_Density(TestCase, NumpyTestUtilsMixin):
         pattern2 = ("Both lists 'x' and 'y' must be the same length.")
 
         self.assertRaisesRegexp(PlotlyError, pattern2,
-                                tls.FigureFactory.create_2D_density, x2, y2)
+                                ff.create_2d_density, x2, y2)
 
     def test_2D_density_all_args(self):
 
@@ -1626,7 +1625,7 @@ class Test2D_Density(TestCase, NumpyTestUtilsMixin):
         colorscale = ['#7A4579', '#D56073', 'rgb(236,158,105)',
                       (1, 1, 0.2), (0.98, 0.98, 0.98)]
 
-        test_2D_density_chart = tls.FigureFactory.create_2D_density(
+        test_2D_density_chart = ff.create_2d_density(
             x, y, colorscale=colorscale, hist_color='rgb(255,237,222)',
             point_size=3, height=800, width=800)
 
