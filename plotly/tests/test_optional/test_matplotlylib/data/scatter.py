@@ -1,7 +1,6 @@
 from __future__ import absolute_import
 
-from plotly.graph_objs import (Data, Figure, Font, Layout, Line, Margin,
-                               Marker, Scatter, XAxis, YAxis)
+import plotly.graph_objs as go
 
 D = dict(
     x1=[1, 2, 2, 4, 5, 6, 1, 7, 8, 5, 3],
@@ -11,15 +10,15 @@ D = dict(
 )
 
 
-SIMPLE_SCATTER = Figure(
-    data=Data([
-        Scatter(
+SIMPLE_SCATTER = go.Figure(
+    data=[
+        go.Scatter(
             x=[1.0, 2.0, 2.0, 4.0, 5.0, 6.0, 1.0, 7.0, 8.0, 5.0, 3.0],
             y=[5.0, 3.0, 7.0, 2.0, 9.0, 7.0, 8.0, 4.0, 5.0, 9.0, 2.0],
             mode='markers',
-            marker=Marker(
+            marker=go.scatter.Marker(
                 symbol='circle',
-                line=Line(
+                line=dict(
                     color='rgba(31,119,180,1.0)',
                     width=1.0
                 ),
@@ -29,12 +28,12 @@ SIMPLE_SCATTER = Figure(
             xaxis='x1',
             yaxis='y1'
         )
-    ]),
-    layout=Layout(
+    ],
+    layout=go.Layout(
         width=640,
         height=480,
         autosize=False,
-        margin=Margin(
+        margin=go.layout.Margin(
             l=80,
             r=63,
             b=52,
@@ -43,7 +42,7 @@ SIMPLE_SCATTER = Figure(
         ),
         hovermode='closest',
         showlegend=False,
-        xaxis1=XAxis(
+        xaxis1=go.layout.XAxis(
             domain=[0.0, 1.0],
             range=[0.64334677419354847, 8.3566532258064505],
             type='linear',
@@ -52,14 +51,14 @@ SIMPLE_SCATTER = Figure(
             nticks=10,
             showgrid=False,
             zeroline=False,
-            tickfont=Font(
+            tickfont=dict(
                 size=10.0
             ),
             anchor='y1',
             side='bottom',
             mirror='ticks'
         ),
-        yaxis1=YAxis(
+        yaxis1=go.layout.YAxis(
             domain=[0.0, 1.0],
             range=[1.6410714285714287, 9.3589285714285726],
             type='linear',
@@ -68,7 +67,7 @@ SIMPLE_SCATTER = Figure(
             nticks=10,
             showgrid=False,
             zeroline=False,
-            tickfont=Font(
+            tickfont=dict(
                 size=10.0
             ),
             anchor='x1',
@@ -78,15 +77,15 @@ SIMPLE_SCATTER = Figure(
     )
 )
 
-DOUBLE_SCATTER = Figure(
-    data=Data([
-        Scatter(
+DOUBLE_SCATTER = go.Figure(
+    data=[
+        go.Scatter(
             x=[1.0, 2.0, 2.0, 4.0, 5.0, 6.0, 1.0, 7.0, 8.0, 5.0, 3.0],
             y=[5.0, 3.0, 7.0, 2.0, 9.0, 7.0, 8.0, 4.0, 5.0, 9.0, 2.0],
             mode='markers',
-            marker=Marker(
+            marker=go.scatter.Marker(
                 symbol='triangle-up',
-                line=Line(
+                line=dict(
                     color='rgba(255,0,0,0.5)',
                     width=1.0
                 ),
@@ -96,13 +95,13 @@ DOUBLE_SCATTER = Figure(
             xaxis='x1',
             yaxis='y1'
         ),
-        Scatter(
+        go.Scatter(
             x=[-1.0, 1.0, -0.3, -0.6, 0.4, 0.8, -0.1, 0.7],
             y=[-0.5, 0.4, 0.7, -0.6, 0.3, -1.0, 0.0, 0.3],
             mode='markers',
-            marker=Marker(
+            marker=go.scatter.Marker(
                 symbol='square',
-                line=Line(
+                line=dict(
                     color='rgba(128,0,128,0.5)',
                     width=1.0
                 ),
@@ -112,12 +111,12 @@ DOUBLE_SCATTER = Figure(
             xaxis='x1',
             yaxis='y1'
         )
-    ]),
-    layout=Layout(
+    ],
+    layout=go.Layout(
         width=640,
         height=480,
         autosize=False,
-        margin=Margin(
+        margin=go.layout.Margin(
             l=80,
             r=63,
             b=52,
@@ -126,7 +125,7 @@ DOUBLE_SCATTER = Figure(
         ),
         hovermode='closest',
         showlegend=False,
-        xaxis1=XAxis(
+        xaxis1=go.layout.XAxis(
             domain=[0.0, 1.0],
             range=[-1.5159626203173777, 8.4647578206295506],
             type='linear',
@@ -135,14 +134,14 @@ DOUBLE_SCATTER = Figure(
             nticks=7,
             showgrid=False,
             zeroline=False,
-            tickfont=Font(
+            tickfont=dict(
                 size=10.0
             ),
             anchor='y1',
             side='bottom',
             mirror='ticks'
         ),
-        yaxis1=YAxis(
+        yaxis1=go.layout.YAxis(
             domain=[0.0, 1.0],
             range=[-1.588616071428572, 9.5198093820861693],
             type='linear',
@@ -151,7 +150,7 @@ DOUBLE_SCATTER = Figure(
             nticks=7,
             showgrid=False,
             zeroline=False,
-            tickfont=Font(
+            tickfont=dict(
                 size=10.0
             ),
             anchor='x1',
