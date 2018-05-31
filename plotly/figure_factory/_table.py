@@ -219,7 +219,7 @@ class _Table(object):
                 font_color = (self.font_colors[0] if self.index and m == 0
                               else all_font_colors[n])
                 annotations.append(
-                    graph_objs.Annotation(
+                    graph_objs.layout.Annotation(
                         text=format_text,
                         x=self.x[m] - self.annotation_offset,
                         y=self.y[n],
@@ -228,5 +228,6 @@ class _Table(object):
                         align="left",
                         xanchor="left",
                         font=dict(color=font_color),
-                        showarrow=False))
+                        showarrow=False)
+                )
         return annotations
