@@ -75,5 +75,6 @@ plotly/plotly/__init__.py
 plotly/plotly/plotly.py
 plotly/plotly/chunked_requests/__init__.py
 plotly/plotly/chunked_requests/chunked_request.py
+plotly/validators/__init__.py
 plotly/widgets/__init__.py
 plotly/widgets/graph_widget.py
