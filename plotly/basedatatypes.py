@@ -3577,8 +3577,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         """
         # Include any active subplot values
         if six.PY3:
-            return (list(super(BaseLayoutHierarchyType, self).__dir__()) +
-                    sorted(self._subplotid_props))
+            return list(super(BaseLayoutHierarchyType, self).__dir__()) + sorted(self._subplotid_props)
         else:
             def get_attrs(obj):
                 import types

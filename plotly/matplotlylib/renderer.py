@@ -84,7 +84,7 @@ class PlotlyRenderer(Renderer):
             autosize=False,
             hovermode='closest')
         self.mpl_x_bounds, self.mpl_y_bounds = mpltools.get_axes_bounds(fig)
-        margin = go.Margin(
+        margin = go.layout.Margin(
             l=int(self.mpl_x_bounds[0] * self.plotly_fig['layout']['width']),
             r=int(
                 (1-self.mpl_x_bounds[1]) * self.plotly_fig['layout']['width']),
@@ -148,11 +148,11 @@ class PlotlyRenderer(Renderer):
         self.current_bars = []
         self.axis_ct += 1
         # set defaults in axes
-        xaxis = go.XAxis(
+        xaxis = go.layout.XAxis(
             anchor='y{0}'.format(self.axis_ct),
             zeroline=False,
             ticks='inside')
-        yaxis = go.YAxis(
+        yaxis = go.layout.YAxis(
             anchor='x{0}'.format(self.axis_ct),
             zeroline=False,
             ticks='inside')
