@@ -1,16 +1,15 @@
 from __future__ import absolute_import
 
-from plotly.graph_objs import (Annotation, Annotations, Data, Figure, Font,
-                               Layout, Line, Margin, Scatter, XAxis, YAxis)
+import plotly.graph_objs as go
 
-ANNOTATIONS = Figure(
-    data=Data([
-        Scatter(
+ANNOTATIONS = go.Figure(
+    data=[
+        go.Scatter(
             x=[0.0, 1.0, 2.0],
             y=[1.0, 2.0, 3.0],
             name='_line0',
             mode='lines',
-            line=Line(
+            line=go.scatter.Line(
                 dash='solid',
                 color='rgba (0, 0, 255, 1)',
                 width=1.5
@@ -18,12 +17,12 @@ ANNOTATIONS = Figure(
             xaxis='x1',
             yaxis='y1'
         ),
-        Scatter(
+        go.Scatter(
             x=[0.0, 1.0, 2.0],
             y=[3.0, 2.0, 1.0],
             name='_line1',
             mode='lines',
-            line=Line(
+            line=go.scatter.Line(
                 dash='solid',
                 color='rgba (0, 0, 255, 1)',
                 width=1.5
@@ -31,12 +30,12 @@ ANNOTATIONS = Figure(
             xaxis='x1',
             yaxis='y1'
         )
-    ]),
-    layout=Layout(
+    ],
+    layout=go.Layout(
         width=640,
         height=480,
         autosize=False,
-        margin=Margin(
+        margin=go.layout.Margin(
             l=80,
             r=63,
             b=47,
@@ -45,8 +44,8 @@ ANNOTATIONS = Figure(
         ),
         hovermode='closest',
         showlegend=False,
-        annotations=Annotations([
-            Annotation(
+        annotations=[
+            go.layout.Annotation(
                 x=0.000997987927565,
                 y=0.9973865229110511,
                 text='top-left',
@@ -54,7 +53,7 @@ ANNOTATIONS = Figure(
                 yref='paper',
                 showarrow=False,
                 align='left',
-                font=Font(
+                font=dict(
                     size=10.0,
                     color='#000000'
                 ),
@@ -62,7 +61,7 @@ ANNOTATIONS = Figure(
                 xanchor='left',
                 yanchor='top'
             ),
-            Annotation(
+            go.layout.Annotation(
                 x=0.000997987927565,
                 y=0.0031525606469002573,
                 text='bottom-left',
@@ -70,7 +69,7 @@ ANNOTATIONS = Figure(
                 yref='paper',
                 align='left',
                 showarrow=False,
-                font=Font(
+                font=dict(
                     size=10.0,
                     color='#000000'
                 ),
@@ -78,7 +77,7 @@ ANNOTATIONS = Figure(
                 xanchor='left',
                 yanchor='bottom'
             ),
-            Annotation(
+            go.layout.Annotation(
                 x=0.996989939638,
                 y=0.9973865229110511,
                 text='top-right',
@@ -86,7 +85,7 @@ ANNOTATIONS = Figure(
                 yref='paper',
                 align='right',
                 showarrow=False,
-                font=Font(
+                font=dict(
                     size=10.0,
                     color='#000000'
                 ),
@@ -94,7 +93,7 @@ ANNOTATIONS = Figure(
                 xanchor='right',
                 yanchor='top'
             ),
-            Annotation(
+            go.layout.Annotation(
                 x=0.996989939638,
                 y=0.0031525606469002573,
                 text='bottom-right',
@@ -102,7 +101,7 @@ ANNOTATIONS = Figure(
                 yref='paper',
                 align='right',
                 showarrow=False,
-                font=Font(
+                font=dict(
                     size=10.0,
                     color='#000000'
                 ),
@@ -110,8 +109,8 @@ ANNOTATIONS = Figure(
                 xanchor='right',
                 yanchor='bottom'
             )
-        ]),
-        xaxis1=XAxis(
+        ],
+        xaxis1=go.layout.XAxis(
             domain=[0.0, 1.0],
             range=(0.0, 2.0),
             showline=True,
@@ -121,7 +120,7 @@ ANNOTATIONS = Figure(
             anchor='y1',
             mirror=True
         ),
-        yaxis1=YAxis(
+        yaxis1=go.layout.YAxis(
             domain=[0.0, 1.0],
             range=(1.0, 3.0),
             showline=True,

@@ -1,7 +1,6 @@
 from __future__ import absolute_import
 
-from plotly.graph_objs import (Data, Figure, Font, Layout, Line, Margin,
-                               Marker, Scatter, XAxis, YAxis)
+import plotly.graph_objs as go
 
 D = dict(
     x1=[0, 1, 2, 3, 4, 5],
@@ -10,14 +9,14 @@ D = dict(
     y2=[1, 4, 8, 16, 32, 64, 128]
 )
 
-SIMPLE_LINE = Figure(
-    data=Data([
-        Scatter(
+SIMPLE_LINE = go.Figure(
+    data=[
+        go.Scatter(
             x=[0.0, 1.0, 2.0, 3.0, 4.0, 5.0],
             y=[10.0, 20.0, 50.0, 80.0, 100.0, 200.0],
             name='simple',
             mode='lines',
-            line=Line(
+            line=go.scatter.Line(
                 dash='solid',
                 color='rgba (31, 119, 180, 1)',
                 width=1.5
@@ -25,12 +24,12 @@ SIMPLE_LINE = Figure(
             xaxis='x1',
             yaxis='y1'
         )
-    ]),
-    layout=Layout(
+    ],
+    layout=go.Layout(
         width=640,
         height=480,
         autosize=False,
-        margin=Margin(
+        margin=go.layout.Margin(
             l=80,
             r=63,
             b=52,
@@ -39,7 +38,7 @@ SIMPLE_LINE = Figure(
         ),
         hovermode='closest',
         showlegend=False,
-        xaxis1=XAxis(
+        xaxis1=go.layout.XAxis(
             domain=[0.0, 1.0],
             range=[-0.25, 5.25],
             type='linear',
@@ -48,14 +47,14 @@ SIMPLE_LINE = Figure(
             nticks=8,
             showgrid=False,
             zeroline=False,
-            tickfont=Font(
+            tickfont=dict(
                 size=10.0
             ),
             anchor='y1',
             side='bottom',
             mirror='ticks'
         ),
-        yaxis1=YAxis(
+        yaxis1=go.layout.YAxis(
             domain=[0.0, 1.0],
             range=[0.5, 209.5],
             type='linear',
@@ -64,7 +63,7 @@ SIMPLE_LINE = Figure(
             nticks=10,
             showgrid=False,
             zeroline=False,
-            tickfont=Font(
+            tickfont=dict(
                 size=10.0
             ),
             anchor='x1',
@@ -74,16 +73,16 @@ SIMPLE_LINE = Figure(
     )
 )
 
-COMPLICATED_LINE = Figure(
-    data=Data([
-        Scatter(
+COMPLICATED_LINE = go.Figure(
+    data=[
+        go.Scatter(
             x=[0.0, 1.0, 2.0, 3.0, 4.0, 5.0],
             y=[10.0, 20.0, 50.0, 80.0, 100.0, 200.0],
             name='one',
             mode='markers',
-            marker=Marker(
+            marker=go.scatter.Marker(
                 symbol='circle',
-                line=Line(
+                line=dict(
                     color='#FF0000',
                     width=1.0
                 ),
@@ -94,12 +93,12 @@ COMPLICATED_LINE = Figure(
             xaxis='x1',
             yaxis='y1'
         ),
-        Scatter(
+        go.Scatter(
             x=[0.0, 1.0, 2.0, 3.0, 4.0, 5.0],
             y=[10.0, 20.0, 50.0, 80.0, 100.0, 200.0],
             name='two',
             mode='lines',
-            line=Line(
+            line=dict(
                 dash='solid',
                 color='rgba (0, 0, 255, 0.7)',
                 width=2
@@ -107,14 +106,14 @@ COMPLICATED_LINE = Figure(
             xaxis='x1',
             yaxis='y1'
         ),
-        Scatter(
+        go.Scatter(
             x=[0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0],
             y=[1.0, 4.0, 8.0, 16.0, 32.0, 64.0, 128.0],
             name='three',
             mode='markers',
-            marker=Marker(
+            marker=go.scatter.Marker(
                 symbol='cross',
-                line=Line(
+                line=dict(
                     color='#0000FF',
                     width=2
                 ),
@@ -125,12 +124,12 @@ COMPLICATED_LINE = Figure(
             xaxis='x1',
             yaxis='y1'
         ),
-        Scatter(
+        go.Scatter(
             x=[0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0],
             y=[1.0, 4.0, 8.0, 16.0, 32.0, 64.0, 128.0],
             name='four',
             mode='lines',
-            line=Line(
+            line=go.scatter.Line(
                 dash='dash',
                 color='rgba (255, 0, 0, 0.8)',
                 width=2
@@ -138,12 +137,12 @@ COMPLICATED_LINE = Figure(
             xaxis='x1',
             yaxis='y1'
         )
-    ]),
-    layout=Layout(
+    ],
+    layout=go.Layout(
         width=640,
         height=480,
         autosize=False,
-        margin=Margin(
+        margin=go.layout.Margin(
             l=80,
             r=63,
             b=52,
@@ -152,7 +151,7 @@ COMPLICATED_LINE = Figure(
         ),
         hovermode='closest',
         showlegend=False,
-        xaxis1=XAxis(
+        xaxis1=go.layout.XAxis(
             domain=[0.0, 1.0],
             range=[-0.30000000000000004, 6.2999999999999998],
             type='linear',
@@ -161,14 +160,14 @@ COMPLICATED_LINE = Figure(
             nticks=9,
             showgrid=False,
             zeroline=False,
-            tickfont=Font(
+            tickfont=dict(
                 size=10.0
             ),
             anchor='y1',
             side='bottom',
             mirror='ticks'
         ),
-        yaxis1=YAxis(
+        yaxis1=go.layout.YAxis(
             domain=[0.0, 1.0],
             range=[-8.9500000000000011, 209.94999999999999],
             type='linear',
@@ -177,7 +176,7 @@ COMPLICATED_LINE = Figure(
             nticks=11,
             showgrid=False,
             zeroline=False,
-            tickfont=Font(
+            tickfont=dict(
                 size=10.0
             ),
             anchor='x1',
