@@ -179,11 +179,9 @@ class PlotlyRenderer(Renderer):
 
         # let all subsequent dates be handled properly if required
 
-        try:
-            xaxis['type'] == 'date'
+        if 'type' in dir(xaxis) and xaxis['type'] == 'date':
             self.x_is_mpl_date = True
-        except KeyError:
-            pass
+
 
     def close_axes(self, ax):
         """Close the axes object and clean up.
