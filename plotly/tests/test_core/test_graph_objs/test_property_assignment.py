@@ -1,18 +1,22 @@
 from unittest import TestCase
 import plotly.graph_objs as go
-from plotly.tests.test_optional.optional_utils import NumpyTestUtilsMixin
+
+from plotly.tests.utils import strip_dict_params
 
 
-class TestAssignmentPrimitive(NumpyTestUtilsMixin, TestCase):
+class TestAssignmentPrimitive(TestCase):
 
     def setUp(self):
         # Construct initial scatter object
         self.scatter = go.Scatter(name='scatter A')
 
         # Assert initial state
-        self.assert_fig_equal(self.scatter,
-                              {'type': 'scatter',
-                               'name': 'scatter A'})
+        d1, d2 = strip_dict_params(
+            self.scatter,
+            {'type': 'scatter',
+             'name': 'scatter A'}
+        )
+        assert d1 == d2
 
         # Construct expected results
         self.expected_toplevel = {
@@ -30,19 +34,24 @@ class TestAssignmentPrimitive(NumpyTestUtilsMixin, TestCase):
         assert self.scatter.fillcolor is None
         self.scatter.fillcolor = 'green'
         assert self.scatter.fillcolor == 'green'
-        self.assert_fig_equal(self.scatter, self.expected_toplevel)
+
+        d1, d2 = strip_dict_params(self.scatter, self.expected_toplevel)
+        assert d1 == d2
 
     def test_toplevel_item(self):
         assert self.scatter['fillcolor'] is None
         self.scatter['fillcolor'] = 'green'
         assert self.scatter['fillcolor'] == 'green'
-        self.assert_fig_equal(self.scatter, self.expected_toplevel)
+
+        d1, d2 = strip_dict_params(self.scatter, self.expected_toplevel)
+        assert d1 == d2
 
     def test_nested_attr(self):
         assert self.scatter.marker.colorbar.titlefont.family is None
         self.scatter.marker.colorbar.titlefont.family = 'courier'
         assert self.scatter.marker.colorbar.titlefont.family == 'courier'
-        self.assert_fig_equal(self.scatter, self.expected_nested)
+        d1, d2 = strip_dict_params(self.scatter, self.expected_nested)
+        assert d1 == d2
 
     def test_nested_item(self):
         assert (self.scatter['marker']['colorbar']['titlefont']['family']
@@ -50,39 +59,46 @@ class TestAssignmentPrimitive(NumpyTestUtilsMixin, TestCase):
         self.scatter['marker']['colorbar']['titlefont']['family'] = 'courier'
         assert (self.scatter['marker']['colorbar']['titlefont']['family']
                 == 'courier')
-        self.assert_fig_equal(self.scatter, self.expected_nested)
+        d1, d2 = strip_dict_params(self.scatter, self.expected_nested)
+        assert d1 == d2
 
     def test_nested_item_dots(self):
         assert self.scatter['marker.colorbar.titlefont.family'] is None
         self.scatter['marker.colorbar.titlefont.family'] = 'courier'
         assert self.scatter['marker.colorbar.titlefont.family'] == 'courier'
-        self.assert_fig_equal(self.scatter, self.expected_nested)
+        d1, d2 = strip_dict_params(self.scatter, self.expected_nested)
+        assert d1 == d2
 
     def test_nested_item_tuple(self):
         assert self.scatter['marker.colorbar.titlefont.family'] is None
         self.scatter[('marker', 'colorbar', 'titlefont', 'family')] = 'courier'
         assert (self.scatter[('marker', 'colorbar', 'titlefont', 'family')]
                 == 'courier')
-        self.assert_fig_equal(self.scatter, self.expected_nested)
+        d1, d2 = strip_dict_params(self.scatter, self.expected_nested)
+        assert d1 == d2
 
     def test_nested_update(self):
         self.scatter.update(
             marker={'colorbar': {'titlefont': {'family': 'courier'}}})
         assert (self.scatter[('marker', 'colorbar', 'titlefont', 'family')]
                 == 'courier')
-        self.assert_fig_equal(self.scatter, self.expected_nested)
+        d1, d2 = strip_dict_params(self.scatter, self.expected_nested)
+        assert d1 == d2
 
 
-class TestAssignmentCompound(NumpyTestUtilsMixin, TestCase):
+class TestAssignmentCompound(TestCase):
 
     def setUp(self):
         # Construct initial scatter object
         self.scatter = go.Scatter(name='scatter A')
 
         # Assert initial state
-        self.assert_fig_equal(self.scatter,
-                              {'type': 'scatter',
-                               'name': 'scatter A'})
+        d1, d2 = strip_dict_params(
+            self.scatter,
+            {'type': 'scatter',
+             'name': 'scatter A'}
+        )
+        assert d1 == d2
 
         # Construct expected results
         self.expected_toplevel = {
@@ -99,72 +115,90 @@ class TestAssignmentCompound(NumpyTestUtilsMixin, TestCase):
                 'thickness': 5}}}
 
     def test_toplevel_obj(self):
-        self.assert_fig_equal(self.scatter.marker, {})
+        d1, d2 = strip_dict_params(self.scatter.marker, {})
+        assert d1 == d2
         self.scatter.marker = go.scatter.Marker(color='yellow', size=10)
 
         assert isinstance(self.scatter.marker, go.scatter.Marker)
-        self.assert_fig_equal(self.scatter.marker,
-                              self.expected_toplevel['marker'])
+        d1, d2 = strip_dict_params(self.scatter.marker,
+                                   self.expected_toplevel['marker'])
+        assert d1 == d2
 
-        self.assert_fig_equal(self.scatter, self.expected_toplevel)
+        d1, d2 = strip_dict_params(self.scatter, self.expected_toplevel)
+        assert d1 == d2
 
     def test_toplevel_dict(self):
-        self.assert_fig_equal(self.scatter['marker'], {})
+        d1, d2 = strip_dict_params(self.scatter['marker'], {})
+        assert d1 == d2
         self.scatter['marker'] = dict(color='yellow', size=10)
 
         assert isinstance(self.scatter['marker'], go.scatter.Marker)
-        self.assert_fig_equal(self.scatter.marker,
-                              self.expected_toplevel['marker'])
+        d1, d2 = strip_dict_params(self.scatter.marker,
+                                   self.expected_toplevel['marker'])
+        assert d1 == d2
 
-        self.assert_fig_equal(self.scatter, self.expected_toplevel)
+        d1, d2 = strip_dict_params(self.scatter, self.expected_toplevel)
+        assert d1 == d2
 
     def test_nested_obj(self):
-        self.assert_fig_equal(self.scatter.marker.colorbar, {})
+        d1, d2 = strip_dict_params(self.scatter.marker.colorbar, {})
+        assert d1 == d2
         self.scatter.marker.colorbar = go.scatter.marker.ColorBar(
             bgcolor='yellow', thickness=5)
 
         assert isinstance(self.scatter.marker.colorbar,
                           go.scatter.marker.ColorBar)
-        self.assert_fig_equal(self.scatter.marker.colorbar,
-                              self.expected_nested['marker']['colorbar'])
+        d1, d2 = strip_dict_params(self.scatter.marker.colorbar,
+                                   self.expected_nested['marker']['colorbar'])
+        assert d1 == d2
 
-        self.assert_fig_equal(self.scatter, self.expected_nested)
+        d1, d2 = strip_dict_params(self.scatter, self.expected_nested)
+        assert d1 == d2
 
     def test_nested_dict(self):
-        self.assert_fig_equal(self.scatter['marker']['colorbar'], {})
+        d1, d2 = strip_dict_params(self.scatter['marker']['colorbar'], {})
+        assert d1 == d2
         self.scatter['marker']['colorbar'] = dict(
             bgcolor='yellow', thickness=5)
 
         assert isinstance(self.scatter['marker']['colorbar'],
                           go.scatter.marker.ColorBar)
-        self.assert_fig_equal(self.scatter['marker']['colorbar'],
-                              self.expected_nested['marker']['colorbar'])
+        d1, d2 = strip_dict_params(self.scatter['marker']['colorbar'],
+                                   self.expected_nested['marker']['colorbar'])
+        assert d1 == d2
 
-        self.assert_fig_equal(self.scatter, self.expected_nested)
+        d1, d2 = strip_dict_params(self.scatter, self.expected_nested)
+        assert d1 == d2
 
     def test_nested_dict_dot(self):
-        self.assert_fig_equal(self.scatter.marker.colorbar, {})
+        d1, d2 = strip_dict_params(self.scatter.marker.colorbar, {})
+        assert d1 == d2
         self.scatter['marker.colorbar'] = dict(
             bgcolor='yellow', thickness=5)
 
         assert isinstance(self.scatter['marker.colorbar'],
                           go.scatter.marker.ColorBar)
-        self.assert_fig_equal(self.scatter['marker.colorbar'],
-                              self.expected_nested['marker']['colorbar'])
+        d1, d2 = strip_dict_params(self.scatter['marker.colorbar'],
+                                   self.expected_nested['marker']['colorbar'])
+        assert d1 == d2
 
-        self.assert_fig_equal(self.scatter, self.expected_nested)
+        d1, d2 = strip_dict_params(self.scatter, self.expected_nested)
+        assert d1 == d2
 
     def test_nested_dict_tuple(self):
-        self.assert_fig_equal(self.scatter[('marker', 'colorbar')], {})
+        d1, d2 = strip_dict_params(self.scatter[('marker', 'colorbar')], {})
+        assert d1 == d2
         self.scatter[('marker', 'colorbar')] = dict(
             bgcolor='yellow', thickness=5)
 
         assert isinstance(self.scatter[('marker', 'colorbar')],
                           go.scatter.marker.ColorBar)
-        self.assert_fig_equal(self.scatter[('marker', 'colorbar')],
-                              self.expected_nested['marker']['colorbar'])
+        d1, d2 = strip_dict_params(self.scatter[('marker', 'colorbar')],
+                                   self.expected_nested['marker']['colorbar'])
+        assert d1 == d2
 
-        self.assert_fig_equal(self.scatter, self.expected_nested)
+        d1, d2 = strip_dict_params(self.scatter, self.expected_nested)
+        assert d1 == d2
 
     def test_nested_update_obj(self):
 
@@ -175,10 +209,12 @@ class TestAssignmentCompound(NumpyTestUtilsMixin, TestCase):
 
         assert isinstance(self.scatter['marker']['colorbar'],
                           go.scatter.marker.ColorBar)
-        self.assert_fig_equal(self.scatter['marker']['colorbar'],
-                              self.expected_nested['marker']['colorbar'])
+        d1, d2 = strip_dict_params(self.scatter['marker']['colorbar'],
+                                   self.expected_nested['marker']['colorbar'])
+        assert d1 == d2
 
-        self.assert_fig_equal(self.scatter, self.expected_nested)
+        d1, d2 = strip_dict_params(self.scatter, self.expected_nested)
+        assert d1 == d2
 
     def test_nested_update_dict(self):
 
@@ -187,13 +223,15 @@ class TestAssignmentCompound(NumpyTestUtilsMixin, TestCase):
 
         assert isinstance(self.scatter['marker']['colorbar'],
                           go.scatter.marker.ColorBar)
-        self.assert_fig_equal(self.scatter['marker']['colorbar'],
-                              self.expected_nested['marker']['colorbar'])
+        d1, d2 = strip_dict_params(self.scatter['marker']['colorbar'],
+                                   self.expected_nested['marker']['colorbar'])
+        assert d1 == d2
 
-        self.assert_fig_equal(self.scatter, self.expected_nested)
+        d1, d2 = strip_dict_params(self.scatter, self.expected_nested)
+        assert d1 == d2
 
 
-class TestAssignmnetNone(NumpyTestUtilsMixin, TestCase):
+class TestAssignmnetNone(TestCase):
 
     def test_toplevel(self):
         # Initialize scatter
@@ -209,40 +247,49 @@ class TestAssignmnetNone(NumpyTestUtilsMixin, TestCase):
             'marker': {'colorbar': {'titlefont':
                                     {'family': 'courier'}}}}
 
-        self.assert_fig_equal(scatter, expected)
+        d1, d2 = strip_dict_params(scatter, expected)
+        assert d1 == d2
 
         # Set property not defined to None
         scatter.x = None
-        self.assert_fig_equal(scatter, expected)
+        d1, d2 = strip_dict_params(scatter, expected)
+        assert d1 == d2
 
         scatter['line.width'] = None
-        self.assert_fig_equal(scatter, expected)
+        d1, d2 = strip_dict_params(scatter, expected)
+        assert d1 == d2
 
         # Set defined property to None
         scatter.y = None
         expected.pop('y')
-        self.assert_fig_equal(scatter, expected)
+        d1, d2 = strip_dict_params(scatter, expected)
+        assert d1 == d2
 
         # Set compound properties to None
         scatter[('marker', 'colorbar', 'titlefont')] = None
         expected['marker']['colorbar'].pop('titlefont')
-        self.assert_fig_equal(scatter, expected)
+        d1, d2 = strip_dict_params(scatter, expected)
+        assert d1 == d2
 
         scatter.marker = None
         expected.pop('marker')
-        self.assert_fig_equal(scatter, expected)
+        d1, d2 = strip_dict_params(scatter, expected)
+        assert d1 == d2
 
 
-class TestAssignCompoundArray(NumpyTestUtilsMixin, TestCase):
+class TestAssignCompoundArray(TestCase):
 
     def setUp(self):
         # Construct initial scatter object
         self.parcoords = go.Parcoords(name='parcoords A')
 
         # Assert initial state
-        self.assert_fig_equal(self.parcoords,
-                              {'type': 'parcoords',
-                               'name': 'parcoords A'})
+        d1, d2 = strip_dict_params(
+            self.parcoords,
+            {'type': 'parcoords',
+             'name': 'parcoords A'}
+        )
+        assert d1 == d2
 
         # Construct expected results
         self.expected_toplevel = {
@@ -284,7 +331,8 @@ class TestAssignCompoundArray(NumpyTestUtilsMixin, TestCase):
                          (go.layout.Updatemenu(), go.layout.Updatemenu()))
 
         self.layout.updatemenus[1].font.family = 'courier'
-        self.assert_fig_equal(self.layout, self.expected_layout1)
+        d1, d2 = strip_dict_params(self.layout, self.expected_layout1)
+        assert d1 == d2
 
     def test_assign_double_nested_attr(self):
         self.assertEqual(self.layout.updatemenus, ())
@@ -302,7 +350,8 @@ class TestAssignCompoundArray(NumpyTestUtilsMixin, TestCase):
         self.assertEqual(
             self.layout.updatemenus[1].buttons[2].method,
             'restyle')
-        self.assert_fig_equal(self.layout, self.expected_layout2)
+        d1, d2 = strip_dict_params(self.layout, self.expected_layout2)
+        assert d1 == d2
 
     def test_assign_double_nested_item(self):
         self.assertEqual(self.layout.updatemenus, ())
@@ -319,9 +368,11 @@ class TestAssignCompoundArray(NumpyTestUtilsMixin, TestCase):
         # Check
         self.assertEqual(
             self.layout['updatemenus'][1]['buttons'][2]['method'],
-            'restyle')
+            'restyle'
+        )
 
-        self.assert_fig_equal(self.layout, self.expected_layout2)
+        d1, d2 = strip_dict_params(self.layout, self.expected_layout2)
+        assert d1 == d2
 
     def test_assign_double_nested_tuple(self):
         self.assertEqual(self.layout.updatemenus, ())
@@ -340,7 +391,8 @@ class TestAssignCompoundArray(NumpyTestUtilsMixin, TestCase):
             self.layout[('updatemenus', 1, 'buttons', 2, 'method')],
             'restyle')
 
-        self.assert_fig_equal(self.layout, self.expected_layout2)
+        d1, d2 = strip_dict_params(self.layout, self.expected_layout2)
+        assert d1 == d2
 
     def test_assign_double_nested_dot(self):
         self.assertEqual(self.layout.updatemenus, ())
@@ -358,7 +410,8 @@ class TestAssignCompoundArray(NumpyTestUtilsMixin, TestCase):
         self.assertEqual(
             self.layout['updatemenus[1].buttons[2].method'],
             'restyle')
-        self.assert_fig_equal(self.layout, self.expected_layout2)
+        d1, d2 = strip_dict_params(self.layout, self.expected_layout2)
+        assert d1 == d2
 
     def test_assign_double_nested_update_dict(self):
 
@@ -376,7 +429,8 @@ class TestAssignCompoundArray(NumpyTestUtilsMixin, TestCase):
         self.assertEqual(
             self.layout.updatemenus[1].buttons[2].method,
             'restyle')
-        self.assert_fig_equal(self.layout, self.expected_layout2)
+        d1, d2 = strip_dict_params(self.layout, self.expected_layout2)
+        assert d1 == d2
 
     def test_assign_double_nested_update_array(self):
 
@@ -394,6 +448,7 @@ class TestAssignCompoundArray(NumpyTestUtilsMixin, TestCase):
         self.assertEqual(
             self.layout.updatemenus[1].buttons[2].method,
             'restyle')
-        self.assert_fig_equal(self.layout, self.expected_layout2)
+        d1, d2 = strip_dict_params(self.layout, self.expected_layout2)
+        assert d1 == d2
 
 
