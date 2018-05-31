@@ -160,18 +160,13 @@ def test_append_scatter3d():
     fig.append_trace(trace, 1, 1)
     fig.append_trace(trace, 2, 1)
 
-    # TODO write an equivalent function to
-    # strip_dict_params for test_core?
     d1, d2 = strip_dict_params(fig['data'][0], expected['data'][0])
-
     assert d1 == d2
 
     d1, d2 = strip_dict_params(fig['data'][1], expected['data'][1])
-
     assert d1 == d2
 
     d1, d2 = strip_dict_params(fig['layout'], expected['layout'])
-
     assert d1 == d2
 
 
