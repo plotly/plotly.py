@@ -11,4 +11,5 @@ plotly/matplotlylib/mplexporter/renderers
 plotly/offline
 plotly/plotly
 plotly/plotly/chunked_requests
+plotly/validators
 plotly/widgets
