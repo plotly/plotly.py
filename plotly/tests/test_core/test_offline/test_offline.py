@@ -57,13 +57,8 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
 
         x_data = '"x": [1, 2, 3]'
         y_data = '"y": [10, 20, 30]'
-        data_json = '{}, {}'
-        # data is in there
-        try:
-            self.assertIn(data_json.format(x_data, y_data), html)
-        except AssertionError:
-            self.assertIn(data_json.format(y_data, x_data), html)
 
+        self.assertTrue(x_data in html and y_data in html)  # data in there
         self.assertIn(layout_json, html)       # so is layout
         self.assertIn(PLOTLYJS, html)          # and the source code
         # and it's an <html> doc
