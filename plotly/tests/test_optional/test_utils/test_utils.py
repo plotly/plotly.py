@@ -215,13 +215,22 @@ def test_figure_json_encoding():
     _json.dumps(figure, cls=utils.PlotlyJSONEncoder, sort_keys=True)
 
     # Test data wasn't mutated
+    # assert(
+    #     bool(
+    #         (np.asarray(
+    #             np_list == np.array(
+    #                 [1, 2, 3, np.NaN, np.NAN, np.Inf, dt(2014, 1, 5)]
+    #             )
+    #         ) == [True, True, True, False, False, True, True]).all())
+    # )
+
     assert(
         bool(
             (np.asarray(
-                np_list == np.array(
+                np_list[-1] == np.array(
                     [1, 2, 3, np.NaN, np.NAN, np.Inf, dt(2014, 1, 5)]
-                )
-            ) == [True, True, True, False, False, True, True]).all())
+                )[-1]
+            ) == [True]).all())
     )
 
     assert(set(data[0]['z']) ==
