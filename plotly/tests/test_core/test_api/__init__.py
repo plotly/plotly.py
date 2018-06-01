@@ -44,7 +44,7 @@ class PlotlyApiTestCase(PlotlyTestCase):
             api_key=self.api_key,
             proxy_username=self.proxy_username,
             proxy_password=self.proxy_password,
-            stream_ids = self.stream_ids,
+            stream_ids=self.stream_ids,
             plotly_domain=self.plotly_domain,
             plotly_api_domain=self.plotly_api_domain,
             plotly_streaming_domain=self.plotly_streaming_domain,
