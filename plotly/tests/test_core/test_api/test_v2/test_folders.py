@@ -19,7 +19,8 @@ class FoldersTest(PlotlyApiTestCase):
     def test_create(self):
         path = '/foo/man/bar/'
         folders.create({'path': path})
-        self.request_mock.assert_called_once()
+        # self.request_mock.assert_called_once()
+        assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
         self.assertEqual(method, 'post')
@@ -28,7 +29,8 @@ class FoldersTest(PlotlyApiTestCase):
 
     def test_retrieve(self):
         folders.retrieve('hodor:88')
-        self.request_mock.assert_called_once()
+        # self.request_mock.assert_called_once()
+        assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
         self.assertEqual(method, 'get')
@@ -39,7 +41,8 @@ class FoldersTest(PlotlyApiTestCase):
 
     def test_retrieve_share_key(self):
         folders.retrieve('hodor:88', share_key='foobar')
-        self.request_mock.assert_called_once()
+        # self.request_mock.assert_called_once()
+        assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
         self.assertEqual(method, 'get')
@@ -51,7 +54,8 @@ class FoldersTest(PlotlyApiTestCase):
     def test_update(self):
         new_filename = '..zzZ ..zzZ'
         folders.update('hodor:88', body={'filename': new_filename})
-        self.request_mock.assert_called_once()
+        # self.request_mock.assert_called_once()
+        assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
         self.assertEqual(method, 'put')
@@ -63,7 +67,8 @@ class FoldersTest(PlotlyApiTestCase):
 
     def test_trash(self):
         folders.trash('hodor:88')
-        self.request_mock.assert_called_once()
+        # self.request_mock.assert_called_once()
+        assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
         self.assertEqual(method, 'post')
@@ -73,7 +78,8 @@ class FoldersTest(PlotlyApiTestCase):
 
     def test_restore(self):
         folders.restore('hodor:88')
-        self.request_mock.assert_called_once()
+        # self.request_mock.assert_called_once()
+        assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
         self.assertEqual(method, 'post')
@@ -83,7 +89,8 @@ class FoldersTest(PlotlyApiTestCase):
 
     def test_permanent_delete(self):
         folders.permanent_delete('hodor:88')
-        self.request_mock.assert_called_once()
+        # self.request_mock.assert_called_once()
+        assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
         self.assertEqual(method, 'delete')
@@ -102,7 +109,8 @@ class FoldersTest(PlotlyApiTestCase):
         user = 'someone'
         exists = True
         folders.lookup(path=path, parent=parent, user=user, exists=exists)
-        self.request_mock.assert_called_once()
+        # self.request_mock.assert_called_once()
+        assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
         expected_params = {'path': path, 'parent': parent, 'exists': 'true',
