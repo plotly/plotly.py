@@ -179,5 +179,4 @@ class RequestTest(PlotlyTestCase):
         # Finally, we check details elsewhere, but make sure we do validate.
 
         utils.request(self.method, self.url)
-        # self.validate_response_mock.assert_called_once()
         assert self.validate_response_mock.call_count == 1
