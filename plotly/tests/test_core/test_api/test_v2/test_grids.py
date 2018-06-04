@@ -21,7 +21,6 @@ class GridsTest(PlotlyApiTestCase):
     def test_create(self):
         filename = 'a grid'
         grids.create({'filename': filename})
-        # self.request_mock.assert_called_once()
         assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
@@ -33,7 +32,6 @@ class GridsTest(PlotlyApiTestCase):
 
     def test_retrieve(self):
         grids.retrieve('hodor:88')
-        # self.request_mock.assert_called_once()
         assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
@@ -45,7 +43,6 @@ class GridsTest(PlotlyApiTestCase):
 
     def test_retrieve_share_key(self):
         grids.retrieve('hodor:88', share_key='foobar')
-        # self.request_mock.assert_called_once()
         assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
@@ -58,7 +55,6 @@ class GridsTest(PlotlyApiTestCase):
     def test_update(self):
         new_filename = '..zzZ ..zzZ'
         grids.update('hodor:88', body={'filename': new_filename})
-        # self.request_mock.assert_called_once()
         assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
@@ -71,7 +67,6 @@ class GridsTest(PlotlyApiTestCase):
 
     def test_trash(self):
         grids.trash('hodor:88')
-        # self.request_mock.assert_called_once()
         assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
@@ -82,7 +77,6 @@ class GridsTest(PlotlyApiTestCase):
 
     def test_restore(self):
         grids.restore('hodor:88')
-        # self.request_mock.assert_called_once()
         assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
@@ -93,7 +87,6 @@ class GridsTest(PlotlyApiTestCase):
 
     def test_permanent_delete(self):
         grids.permanent_delete('hodor:88')
-        # self.request_mock.assert_called_once()
         assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
@@ -113,7 +106,6 @@ class GridsTest(PlotlyApiTestCase):
         user = 'someone'
         exists = True
         grids.lookup(path=path, parent=parent, user=user, exists=exists)
-        # self.request_mock.assert_called_once()
         assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
@@ -132,7 +124,6 @@ class GridsTest(PlotlyApiTestCase):
         ]
         body = {'cols': _json.dumps(cols, sort_keys=True)}
         grids.col_create('hodor:88', body)
-        # self.request_mock.assert_called_once()
         assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
@@ -144,7 +135,6 @@ class GridsTest(PlotlyApiTestCase):
 
     def test_col_retrieve(self):
         grids.col_retrieve('hodor:88', 'aaaaaa,bbbbbb')
-        # self.request_mock.assert_called_once()
         assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
@@ -161,7 +151,6 @@ class GridsTest(PlotlyApiTestCase):
         ]
         body = {'cols': _json.dumps(cols, sort_keys=True)}
         grids.col_update('hodor:88', 'aaaaaa,bbbbbb', body)
-        # self.request_mock.assert_called_once()
         assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
@@ -174,7 +163,6 @@ class GridsTest(PlotlyApiTestCase):
 
     def test_col_delete(self):
         grids.col_delete('hodor:88', 'aaaaaa,bbbbbb')
-        # self.request_mock.assert_called_once()
         assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
@@ -187,7 +175,6 @@ class GridsTest(PlotlyApiTestCase):
     def test_row(self):
         body = {'rows': [[1, 'A'], [2, 'B']]}
         grids.row('hodor:88', body)
-        # self.request_mock.assert_called_once()
         assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
