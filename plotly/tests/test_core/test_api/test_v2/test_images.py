@@ -33,7 +33,8 @@ class ImagesTest(PlotlyApiTestCase):
         }
 
         images.create(body)
-        self.request_mock.assert_called_once()
+        # self.request_mock.assert_called_once()
+        assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
         self.assertEqual(method, 'post')
