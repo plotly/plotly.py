@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.7.1] - [UNRELEASED]
+### Updated
+- error message for `plotly.figure_factory.create_choropleth` is now helpful to Anaconda users who do not have the correct modules installed for the County Choropleth figure factory.
+
 ## [2.7.0] - 2018-05-23
 ### Updated
 - Updated `plotly.min.js` to version 1.38.0.
