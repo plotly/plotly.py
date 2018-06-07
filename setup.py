@@ -188,7 +188,7 @@ setup(name='plotly',
               'plotlywidget/static/index.js.map',
           ]),
       ],
-      install_requires=['decorator==4.0.9',  # >=4.0.6
+      install_requires=['decorator>=4.0.6',
                         'nbformat>=4.2',
                         'pytz',
                         'requests',
