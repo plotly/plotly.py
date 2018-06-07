@@ -13,3 +13,4 @@ plotly/plotly
 plotly/plotly/chunked_requests
 plotly/validators
 plotly/widgets
+_plotly_utils
