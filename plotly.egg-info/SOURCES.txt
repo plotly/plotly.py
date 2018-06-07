@@ -1,6 +1,7 @@
 README.rst
 setup.cfg
 setup.py
+_plotly_utils/__init__.py
 plotly/__init__.py
 plotly/colors.py
 plotly/config.py
