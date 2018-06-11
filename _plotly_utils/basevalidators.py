@@ -112,15 +112,8 @@ def is_homogeneous_array(v):
     """
     Return whether a value is considered to be a homogeneous array
     """
-    return ((np and isinstance(v, np.ndarray) and v.ndim == 1) or
+    return ((np and isinstance(v, np.ndarray)) or
             (pd and isinstance(v, pd.Series)))
-
-
-def is_homogeneous_ndarray(v):
-    """
-    Return whether a value is considered to be a homogeneous array
-    """
-    return np and isinstance(v, np.ndarray)
 
 
 def is_simple_array(v):
@@ -292,7 +285,7 @@ class DataArrayValidator(BaseValidator):
     def description(self):
         return ("""\
     The '{plotly_name}' property is an array that may be specified as a tuple,
-    list, one-dimensional numpy array, or pandas Series"""
+    list, numpy array, or pandas Series"""
                 .format(plotly_name=self.plotly_name))
 
     def validate_coerce(self, v):
@@ -995,9 +988,7 @@ class ColorValidator(BaseValidator):
         if v is None:
             # Pass None through
             pass
-        elif self.array_ok and (
-                is_homogeneous_array(v) or
-                is_homogeneous_ndarray(v)):
+        elif self.array_ok and is_homogeneous_array(v):
 
             v_array = copy_to_readonly_numpy_array(v)
             if (self.numbers_allowed() and

@@ -23,7 +23,7 @@ def test_validator_acceptance_simple(val, validator: DataArrayValidator):
 
 
 @pytest.mark.parametrize('val', [
-    np.array([2, 3, 4]), pd.Series(['a', 'b', 'c'])
+    np.array([2, 3, 4]), pd.Series(['a', 'b', 'c']), np.array([[1, 2, 3], [4, 5, 6]])
 ])
 def test_validator_acceptance_homogeneous(val, validator: DataArrayValidator):
     coerce_val = validator.validate_coerce(val)
@@ -33,7 +33,7 @@ def test_validator_acceptance_homogeneous(val, validator: DataArrayValidator):
 
 # ### Rejection ###
 @pytest.mark.parametrize('val', [
-    'Hello', 23, set(), {}, np.array([[1, 2, 3], [4, 5, 6]])
+    'Hello', 23, set(), {}
 ])
 def test_rejection(val, validator: DataArrayValidator):
     with pytest.raises(ValueError) as validation_failure:
