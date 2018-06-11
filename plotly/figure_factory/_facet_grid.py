@@ -143,8 +143,8 @@ def _axis_title_annotation(text, x_or_y_axis):
 
 def _add_shapes_to_fig(fig, annot_rect_color, flipped_rows=False,
                        flipped_cols=False):
-    fig['layout']['shapes'] = []
-    for key in fig['layout'].keys():
+    shapes_list = []
+    for key in fig['layout'].to_plotly_json().keys():
         if 'axis' in key and fig['layout'][key]['domain'] != [0.0, 1.0]:
             shape = {
                'fillcolor': annot_rect_color,
@@ -163,7 +163,7 @@ def _add_shapes_to_fig(fig, annot_rect_color, flipped_rows=False,
 
                 if flipped_cols:
                     shape['y1'] += 0.5
-                fig['layout']['shapes'].append(shape)
+                shapes_list.append(shape)
 
             elif 'yaxis' in key:
                 shape['x0'] = 1.005
@@ -173,7 +173,9 @@ def _add_shapes_to_fig(fig, annot_rect_color, flipped_rows=False,
 
                 if flipped_rows:
                     shape['x1'] += 1
-                fig['layout']['shapes'].append(shape)
+                shapes_list.append(shape)
+
+    fig['layout']['shapes'] = shapes_list
 
 
 def _make_trace_for_scatter(trace, trace_type, color, **kwargs_marker):
