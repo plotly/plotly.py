@@ -167,6 +167,29 @@ class DownloadSchemaCommand(Command):
                 f.write(response.read())
 
 
+class DownloadPlotlyJsCommand(Command):
+    description = 'Download latest version of the plot-schema JSON file'
+    user_options = []
+
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        if sys.version_info.major != 3:
+            raise ImportError('Schema download must be executed with Python 3')
+
+        import urllib.request
+        url = ('https://raw.githubusercontent.com/plotly/plotly.js/'
+               'v%s/dist/plotly.min.js' % plotly_js_version)
+        with urllib.request.urlopen(url) as response:
+
+            with open('plotly/package_data/plotly.min.js', 'wb') as f:
+                f.write(response.read())
+
+
 setup(name='plotly',
       version=__version__,
       use_2to3=False,
@@ -938,6 +961,7 @@ setup(name='plotly',
           'sdist': js_prerelease(sdist, strict=True),
           'jsdeps': NPM,
           'codegen': CodegenCommand,
-          'updateschema': DownloadSchemaCommand
+          'updateschema': DownloadSchemaCommand,
+          'updateplotlyjs': DownloadPlotlyJsCommand
       },
 )
