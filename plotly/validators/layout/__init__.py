@@ -13,6 +13,7 @@ from ._sliders import SlidersValidator
 from ._showlegend import ShowlegendValidator
 from ._shapes import ShapesValidator
 from ._separators import SeparatorsValidator
+from ._selectdirection import SelectdirectionValidator
 from ._scene import SceneValidator
 from ._radialaxis import RadialAxisValidator
 from ._polar import PolarValidator
@@ -31,9 +32,6 @@ from ._hiddenlabelssrc import HiddenlabelssrcValidator
 from ._hiddenlabels import HiddenlabelsValidator
 from ._height import HeightValidator
 from ._grid import GridValidator
-from ._items import ItemsValidator
-from ._items import ItemsValidator
-from ._items import ItemsValidator
 from ._geo import GeoValidator
 from ._font import FontValidator
 from ._dragmode import DragmodeValidator

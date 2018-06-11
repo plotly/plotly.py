@@ -14,14 +14,16 @@ class ConstraintrangeValidator(
         super(ConstraintrangeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
+            dimensions='1-2',
             edit_type='calc',
+            free_length=True,
             items=[
                 {
-                    'editType': 'calc',
-                    'valType': 'number'
+                    'valType': 'number',
+                    'editType': 'calc'
                 }, {
-                    'editType': 'calc',
-                    'valType': 'number'
+                    'valType': 'number',
+                    'editType': 'calc'
                 }
             ],
             role='info',

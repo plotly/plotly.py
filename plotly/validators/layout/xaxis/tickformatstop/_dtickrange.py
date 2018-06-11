@@ -15,11 +15,11 @@ class DtickrangeValidator(_plotly_utils.basevalidators.InfoArrayValidator):
             edit_type='ticks+margins',
             items=[
                 {
-                    'editType': 'ticks+margins',
-                    'valType': 'any'
+                    'valType': 'any',
+                    'editType': 'ticks+margins'
                 }, {
-                    'editType': 'ticks+margins',
-                    'valType': 'any'
+                    'valType': 'any',
+                    'editType': 'ticks+margins'
                 }
             ],
             role='info',

@@ -12,11 +12,11 @@ class RangeValidator(_plotly_utils.basevalidators.InfoArrayValidator):
             edit_type='calc',
             items=[
                 {
-                    'editType': 'calc',
-                    'valType': 'number'
+                    'valType': 'number',
+                    'editType': 'calc'
                 }, {
-                    'editType': 'calc',
-                    'valType': 'number'
+                    'valType': 'number',
+                    'editType': 'calc'
                 }
             ],
             role='info',

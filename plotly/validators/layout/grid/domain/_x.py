@@ -12,15 +12,15 @@ class XValidator(_plotly_utils.basevalidators.InfoArrayValidator):
             edit_type='plot',
             items=[
                 {
-                    'editType': 'plot',
-                    'max': 1,
+                    'valType': 'number',
                     'min': 0,
-                    'valType': 'number'
+                    'max': 1,
+                    'editType': 'plot'
                 }, {
-                    'editType': 'plot',
-                    'max': 1,
+                    'valType': 'number',
                     'min': 0,
-                    'valType': 'number'
+                    'max': 1,
+                    'editType': 'plot'
                 }
             ],
             role='info',

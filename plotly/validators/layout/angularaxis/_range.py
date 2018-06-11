@@ -12,13 +12,13 @@ class RangeValidator(_plotly_utils.basevalidators.InfoArrayValidator):
             edit_type='plot',
             items=[
                 {
+                    'valType': 'number',
                     'dflt': 0,
-                    'editType': 'plot',
-                    'valType': 'number'
+                    'editType': 'plot'
                 }, {
+                    'valType': 'number',
                     'dflt': 360,
-                    'editType': 'plot',
-                    'valType': 'number'
+                    'editType': 'plot'
                 }
             ],
             role='info',

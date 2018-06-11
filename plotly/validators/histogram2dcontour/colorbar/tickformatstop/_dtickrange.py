@@ -15,11 +15,11 @@ class DtickrangeValidator(_plotly_utils.basevalidators.InfoArrayValidator):
             edit_type='colorbars',
             items=[
                 {
-                    'editType': 'colorbars',
-                    'valType': 'any'
+                    'valType': 'any',
+                    'editType': 'colorbars'
                 }, {
-                    'editType': 'colorbars',
-                    'valType': 'any'
+                    'valType': 'any',
+                    'editType': 'colorbars'
                 }
             ],
             role='info',

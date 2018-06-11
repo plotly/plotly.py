@@ -26,7 +26,7 @@ FAKE_API_DOMAIN = 'https://api.am.not.here.ly'
     #     response = v2.plot_schema.retrieve('')
     #     schema = response.json()['schema']
 
-    #     path = os.path.join('package_data', 'default-schema.json')
+    #     path = os.path.join('package_data', 'plot-schema.json')
     #     s = resource_string('plotly', path).decode('utf-8')
     #     default_schema = _json.loads(s)
 

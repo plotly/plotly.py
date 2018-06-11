@@ -11,12 +11,6 @@ class IncreasingValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs="""
             line
                 plotly.graph_objs.ohlc.increasing.Line instance
-                or dict with compatible properties
-            name
-                Sets the segment name. The segment name appear
-                as the legend item and on hover.
-            showlegend
-                Determines whether or not an item corresponding
-                to this segment is shown in the legend.""",
+                or dict with compatible properties""",
             **kwargs
         )

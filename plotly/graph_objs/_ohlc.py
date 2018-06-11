@@ -104,12 +104,6 @@ class Ohlc(BaseTraceType):
                 line
                     plotly.graph_objs.ohlc.decreasing.Line instance
                     or dict with compatible properties
-                name
-                    Sets the segment name. The segment name appear
-                    as the legend item and on hover.
-                showlegend
-                    Determines whether or not an item corresponding
-                    to this segment is shown in the legend.
 
         Returns
         -------
@@ -318,12 +312,6 @@ class Ohlc(BaseTraceType):
                 line
                     plotly.graph_objs.ohlc.increasing.Line instance
                     or dict with compatible properties
-                name
-                    Sets the segment name. The segment name appear
-                    as the legend item and on hover.
-                showlegend
-                    Determines whether or not an item corresponding
-                    to this segment is shown in the legend.
 
         Returns
         -------
@@ -805,7 +793,7 @@ class Ohlc(BaseTraceType):
         Sets a reference between this trace's y coordinates and a 2D
         cartesian y axis. If *y* (the default value), the y coordinates
         refer to `layout.yaxis`. If *y2*, the y coordinates refer to
-        `layout.xaxis2`, and so on.
+        `layout.yaxis2`, and so on.
     
         The 'yaxis' property is an identifier of a particular
         subplot, of type 'y', that may be specified as the string 'y'
@@ -942,7 +930,7 @@ class Ohlc(BaseTraceType):
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If *y* (the default value), the
             y coordinates refer to `layout.yaxis`. If *y2*, the y
-            coordinates refer to `layout.xaxis2`, and so on.
+            coordinates refer to `layout.yaxis2`, and so on.
         """
 
     def __init__(
@@ -992,7 +980,7 @@ class Ohlc(BaseTraceType):
         represent the `low` and `high` values and the horizontal
         segments represent the `open` and `close` values. Sample points
         where the close value is higher (lower) then the open value are
-        called increasing (decreasing). By default, increasing candles
+        called increasing (decreasing). By default, increasing items
         are drawn in green whereas decreasing are drawn in red.
 
         Parameters
@@ -1100,7 +1088,7 @@ class Ohlc(BaseTraceType):
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If *y* (the default value), the
             y coordinates refer to `layout.yaxis`. If *y2*, the y
-            coordinates refer to `layout.xaxis2`, and so on.
+            coordinates refer to `layout.yaxis2`, and so on.
 
         Returns
         -------

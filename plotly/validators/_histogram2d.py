@@ -170,7 +170,7 @@ class Histogram2dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 coordinates and a 2D cartesian y axis. If *y*
                 (the default value), the y coordinates refer to
                 `layout.yaxis`. If *y2*, the y coordinates
-                refer to `layout.xaxis2`, and so on.
+                refer to `layout.yaxis2`, and so on.
             ybins
                 plotly.graph_objs.histogram2d.YBins instance or
                 dict with compatible properties

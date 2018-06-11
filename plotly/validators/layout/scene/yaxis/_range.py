@@ -13,17 +13,17 @@ class RangeValidator(_plotly_utils.basevalidators.InfoArrayValidator):
             implied_edits={'autorange': False},
             items=[
                 {
+                    'valType': 'any',
                     'editType': 'plot',
                     'impliedEdits': {
                         '^autorange': False
-                    },
-                    'valType': 'any'
+                    }
                 }, {
+                    'valType': 'any',
                     'editType': 'plot',
                     'impliedEdits': {
                         '^autorange': False
-                    },
-                    'valType': 'any'
+                    }
                 }
             ],
             role='info',

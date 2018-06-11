@@ -4,6 +4,8 @@ from ._table import Table
 from plotly.graph_objs import table
 from ._surface import Surface
 from plotly.graph_objs import surface
+from ._splom import Splom
+from plotly.graph_objs import splom
 from ._scatterternary import Scatterternary
 from plotly.graph_objs import scatterternary
 from ._scatterpolargl import Scatterpolargl
@@ -48,6 +50,8 @@ from ._contourcarpet import Contourcarpet
 from plotly.graph_objs import contourcarpet
 from ._contour import Contour
 from plotly.graph_objs import contour
+from ._cone import Cone
+from plotly.graph_objs import cone
 from ._choropleth import Choropleth
 from plotly.graph_objs import choropleth
 from ._carpet import Carpet
