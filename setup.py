@@ -135,8 +135,35 @@ class CodegenCommand(Command):
         pass
 
     def run(self):
+        if sys.version_info.major != 3 or sys.version_info.minor < 6:
+            raise ImportError('Code generation must be executed with Python >= 3.6')
+
         from codegen import perform_codegen
         perform_codegen()
+
+
+class DownloadSchemaCommand(Command):
+    description = 'Download latest version of the plot-schema JSON file'
+    user_options = []
+
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        if sys.version_info.major != 3:
+            raise ImportError('Schema download must be executed with Python 3')
+
+        import urllib.request
+        import json
+        with urllib.request.urlopen('https://api.plot.ly/v2/plot-schema?sha1') as response:
+            with open('plotly/package_data/default-schema.json', 'w') as f:
+                f.write(json.dumps(json.load(response)['schema'],
+                                   indent=4,
+                                   sort_keys=True,
+                                   separators=(',', ': ')))
 
 
 setup(name='plotly',
@@ -910,5 +937,6 @@ setup(name='plotly',
           'sdist': js_prerelease(sdist, strict=True),
           'jsdeps': NPM,
           'codegen': CodegenCommand,
+          'updateschema': DownloadSchemaCommand
       },
 )
