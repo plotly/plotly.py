@@ -150,8 +150,14 @@ def iplot(figure_or_data, **plot_options):
         layout = {}
 
     embed_options = dict()
-    embed_options['width'] = layout.get('width', '100%')
-    embed_options['height'] = layout.get('height', 525)
+    try:
+        embed_options['width'] = layout.to_plotly_json().get('width', '100%')
+    except AttributeError:
+        embed_options['width'] = layout.get('width', '100%')
+    try:
+        embed_options['height'] = layout.to_plotly_json().get('height', 525)
+    except AttributeError:
+        embed_options['height'] = layout.get('height', 525)
     try:
         float(embed_options['width'])
     except (ValueError, TypeError):
