@@ -493,7 +493,7 @@ class PlotlyNode:
         """
         return (isinstance(self.node_data, dict_like) and
                 not self.is_simple and
-                self.plotly_name not in ('items', 'impliedEdits'))
+                self.plotly_name not in ('items', 'impliedEdits', 'transforms'))
 
     @property
     def is_literal(self) -> bool:
@@ -530,7 +530,8 @@ class PlotlyNode:
         """
         return (isinstance(self.node_data, dict_like) and
                 self.node_data.get('role', '') == 'object' and
-                'items' in self.node_data)
+                'items' in self.node_data and
+                self.name_property != 'transforms')
 
     @property
     def is_array_element(self):
@@ -555,7 +556,7 @@ class PlotlyNode:
         -------
         bool
         """
-        return self.is_simple or self.is_compound
+        return self.is_simple or self.is_compound or self.is_array
 
     # Node path
     # ---------
