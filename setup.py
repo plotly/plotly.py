@@ -191,13 +191,13 @@ class DownloadPlotlyJsCommand(Command):
 
 
 graph_objs_packages = [
-    d for d, *_ in os.walk('plotly/graph_objs')
-    if not d.endswith('__pycache__')]
+    d[0] for d in os.walk('plotly/graph_objs')
+    if not d[0].endswith('__pycache__')]
 
 
 validator_packages = [
-    d for d, *_ in os.walk('plotly/validators')
-    if not d.endswith('__pycache__')]
+    d[0] for d in os.walk('plotly/validators')
+    if not d[0].endswith('__pycache__')]
 
 
 setup(name='plotly',
