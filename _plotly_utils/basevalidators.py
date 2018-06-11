@@ -1270,15 +1270,38 @@ class SubplotidValidator(BaseValidator):
             "requiredOpts": [
                 "dflt"
             ],
-            "otherOpts": []
-        },
+            "otherOpts": [
+                "regex"
+            ]
+        }
     """
 
-    def __init__(self, plotly_name, parent_name, dflt, **kwargs):
+    def __init__(self, plotly_name,
+                 parent_name,
+                 dflt=None,
+                 regex=None,
+                 **kwargs):
+
+        if dflt is None and regex is None:
+            raise ValueError(
+                'One or both of regex and deflt must be specified'
+            )
+
         super(SubplotidValidator, self).__init__(
             plotly_name=plotly_name, parent_name=parent_name, **kwargs)
-        self.base = dflt
-        self.regex = dflt + "(\d*)"
+
+        if dflt is not None:
+            self.base = dflt
+        else:
+            # e.g. regex == '/^y([2-9]|[1-9][0-9]+)?$/'
+            self.base = re.match('/\^(\w+)',
+                                 regex).group(1)
+
+        if regex is not None:
+            # Remove leading/trailing '/' characters
+            self.regex = regex[1:-1]
+        else:
+            self.regex = dflt + "(\d*)"
 
     def description(self):
 
