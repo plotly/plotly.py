@@ -762,34 +762,59 @@ var FigureView = widgets.DOMWidgetView.extend({
         var initialTraces = _.cloneDeep(this.model.get("_data"));
         var initialLayout = _.cloneDeep(this.model.get("_layout"));
 
-        Plotly.newPlot(this.el, initialTraces, initialLayout).then(
-            function () {
-                // ### Send trace deltas ###
-                // We create an array of deltas corresponding to the new
-                // traces.
-                that._sendTraceDeltas(trace_edit_id);
+        Plotly.newPlot(that.el, [], {
+            'xaxis': {'showgrid': false, 'showticklabels': false, 'zeroline': false},
+            'yaxis': {'showgrid': false, 'showticklabels': false, 'zeroline': false}
+        }).then(function () {
+            Plotly.Plots.resize(that.el).then(function () {
+                Plotly.newPlot(that.el, initialTraces, initialLayout).then(
+                    function () {
+                        // Plotly.Plots.resize(that.el);
 
-                // ### Send layout delta ###
-                that._sendLayoutDelta(layout_edit_id);
+                        // ### Send trace deltas ###
+                        // We create an array of deltas corresponding to the new
+                        // traces.
+                        that._sendTraceDeltas(trace_edit_id);
 
-                // Wire up plotly event callbacks
-                that.el.on("plotly_restyle",
-                    function(update) {that.handle_plotly_restyle(update)});
-                that.el.on("plotly_relayout",
-                    function(update) {that.handle_plotly_relayout(update)});
-                that.el.on("plotly_update",
-                    function(update) {that.handle_plotly_update(update)});
-                that.el.on("plotly_click",
-                    function(update) {that.handle_plotly_click(update)});
-                that.el.on("plotly_hover",
-                    function(update) {that.handle_plotly_hover(update)});
-                that.el.on("plotly_unhover",
-                    function(update) {that.handle_plotly_unhover(update)});
-                that.el.on("plotly_selected",
-                    function(update) {that.handle_plotly_selected(update)});
-                that.el.on("plotly_doubleclick",
-                    function(update) {that.handle_plotly_doubleclick(update)});
+                        // ### Send layout delta ###
+                        that._sendLayoutDelta(layout_edit_id);
+
+                        // Wire up plotly event callbacks
+                        that.el.on("plotly_restyle",
+                            function (update) {
+                                that.handle_plotly_restyle(update)
+                            });
+                        that.el.on("plotly_relayout",
+                            function (update) {
+                                that.handle_plotly_relayout(update)
+                            });
+                        that.el.on("plotly_update",
+                            function (update) {
+                                that.handle_plotly_update(update)
+                            });
+                        that.el.on("plotly_click",
+                            function (update) {
+                                that.handle_plotly_click(update)
+                            });
+                        that.el.on("plotly_hover",
+                            function (update) {
+                                that.handle_plotly_hover(update)
+                            });
+                        that.el.on("plotly_unhover",
+                            function (update) {
+                                that.handle_plotly_unhover(update)
+                            });
+                        that.el.on("plotly_selected",
+                            function (update) {
+                                that.handle_plotly_selected(update)
+                            });
+                        that.el.on("plotly_doubleclick",
+                            function (update) {
+                                that.handle_plotly_doubleclick(update)
+                            });
+                    });
             });
+        });
     },
     /**
      * Purge Plotly.js data structures from the notebook output display
