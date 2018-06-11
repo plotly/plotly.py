@@ -116,6 +116,13 @@ def is_homogeneous_array(v):
             (pd and isinstance(v, pd.Series)))
 
 
+def is_homogeneous_ndarray(v):
+    """
+    Return whether a value is considered to be a homogeneous array
+    """
+    return np and isinstance(v, np.ndarray)
+
+
 def is_simple_array(v):
     """
     Return whether a value is considered to be an simple array
@@ -984,11 +991,14 @@ class ColorValidator(BaseValidator):
 
         return valid_color_description
 
-    def validate_coerce(self, v):
+    def validate_coerce(self, v, should_raise=True):
         if v is None:
             # Pass None through
             pass
-        elif self.array_ok and is_homogeneous_array(v):
+        elif self.array_ok and (
+                is_homogeneous_array(v) or
+                is_homogeneous_ndarray(v)):
+
             v_array = copy_to_readonly_numpy_array(v)
             if (self.numbers_allowed() and
                     v_array.dtype.kind in ['u', 'i', 'f']):
@@ -996,43 +1006,62 @@ class ColorValidator(BaseValidator):
                 # All good
                 v = v_array
             else:
-                validated_v = [self.vc_scalar(e) for e in v]
+                validated_v = [
+                    self.validate_coerce(e, should_raise=False)
+                    for e in v]
 
-                invalid_els = [
-                    el for el, validated_el in zip(v, validated_v)
-                    if validated_el is None
-                ]
-                if invalid_els:
+                invalid_els = self.find_invalid_els(v, validated_v)
+
+                if invalid_els and should_raise:
                     self.raise_invalid_elements(invalid_els)
 
                 # ### Check that elements have valid colors types ###
-                if self.numbers_allowed():
+                elif self.numbers_allowed() or invalid_els:
                     v = copy_to_readonly_numpy_array(
                         validated_v, dtype='object')
                 else:
                     v = copy_to_readonly_numpy_array(
                         validated_v, dtype='unicode')
         elif self.array_ok and is_simple_array(v):
-            validated_v = [self.vc_scalar(e) for e in v]
+            validated_v = [
+                self.validate_coerce(e, should_raise=False)
+                for e in v]
 
-            invalid_els = [
-                el for el, validated_el in zip(v, validated_v)
-                if validated_el is None
-            ]
+            invalid_els = self.find_invalid_els(v, validated_v)
 
-            if invalid_els:
+            if invalid_els and should_raise:
                 self.raise_invalid_elements(invalid_els)
-
-            v = validated_v
+            else:
+                v = validated_v
         else:
             # Validate scalar color
             validated_v = self.vc_scalar(v)
-            if validated_v is None:
+            if validated_v is None and should_raise:
                 self.raise_invalid_val(v)
 
             v = validated_v
 
         return v
+
+    def find_invalid_els(self, orig, validated, invalid_els=None):
+        """
+        Helper method to find invalid elements in orig array.
+        Elements are invalid if their corresponding element in
+        the validated array is None.
+
+        This method handles deeply nested list structures
+        """
+        if invalid_els is None:
+            invalid_els = []
+
+        for orig_el, validated_el in zip(orig, validated):
+            if is_array(orig_el):
+                self.find_invalid_els(orig_el, validated_el, invalid_els)
+            else:
+                if validated_el is None:
+                    invalid_els.append(orig_el)
+
+        return invalid_els
 
     def vc_scalar(self, v):
         """ Helper to validate/coerce a scalar color """

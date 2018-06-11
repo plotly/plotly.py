@@ -105,6 +105,23 @@ def test_acceptance_aok(val, validator_aok: ColorValidator):
         assert coerce_val == val
 
 
+@pytest.mark.parametrize('val', [
+    'green',
+    [['blue']],
+    [['red', 'rgb(255, 0, 0)'], ['hsl(0, 100%, 50%)', 'hsla(0, 100%, 50%, 100%)']],
+    np.array([['red', 'rgb(255, 0, 0)'], ['hsl(0, 100%, 50%)', 'hsla(0, 100%, 50%, 100%)']])
+])
+def test_acceptance_aok_2D(val, validator_aok: ColorValidator):
+    coerce_val = validator_aok.validate_coerce(val)
+
+    if isinstance(val, np.ndarray):
+        assert np.array_equal(coerce_val, val)
+    elif isinstance(val, list):
+        assert validator_aok.present(coerce_val) == tuple(val)
+    else:
+        assert coerce_val == val
+
+
 # ### Rejection ###
 @pytest.mark.parametrize('val',
                          [[23], [0, 1, 2],
@@ -112,6 +129,20 @@ def test_acceptance_aok(val, validator_aok: ColorValidator):
                           ['hsl(0, 100%, 50_00%)', 'hsla(0, 100%, 50%, 100%)', 'hsv(0, 100%, 100%)'],
                           ['hsva(0, 1%00%, 100%, 50%)']])
 def test_rejection_aok(val, validator_aok: ColorValidator):
+    with pytest.raises(ValueError) as validation_failure:
+        validator_aok.validate_coerce(val)
+
+    assert 'Invalid element(s)' in str(validation_failure.value)
+
+
+@pytest.mark.parametrize('val',
+                         [[['redd', 'rgb(255, 0, 0)']],
+                          [['hsl(0, 100%, 50_00%)', 'hsla(0, 100%, 50%, 100%)'],
+                           ['hsv(0, 100%, 100%)', 'purple']],
+                          [np.array(['hsl(0, 100%, 50_00%)', 'hsla(0, 100%, 50%, 100%)']),
+                           np.array(['hsv(0, 100%, 100%)', 'purple'])],
+                          [['blue'], [2]]])
+def test_rejection_aok_2D(val, validator_aok: ColorValidator):
     with pytest.raises(ValueError) as validation_failure:
         validator_aok.validate_coerce(val)
 
