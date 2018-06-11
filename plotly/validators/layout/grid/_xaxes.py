@@ -12,9 +12,9 @@ class XaxesValidator(_plotly_utils.basevalidators.InfoArrayValidator):
             edit_type='plot',
             free_length=True,
             items={
-                'editType': 'plot',
                 'valType': 'enumerated',
-                'values': ['/^x([2-9]|[1-9][0-9]+)?$/', '']
+                'values': ['/^x([2-9]|[1-9][0-9]+)?$/', ''],
+                'editType': 'plot'
             },
             role='info',
             **kwargs

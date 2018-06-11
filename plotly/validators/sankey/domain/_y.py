@@ -10,15 +10,15 @@ class YValidator(_plotly_utils.basevalidators.InfoArrayValidator):
             edit_type='calc',
             items=[
                 {
-                    'editType': 'calc',
-                    'max': 1,
+                    'valType': 'number',
                     'min': 0,
-                    'valType': 'number'
+                    'max': 1,
+                    'editType': 'calc'
                 }, {
-                    'editType': 'calc',
-                    'max': 1,
+                    'valType': 'number',
                     'min': 0,
-                    'valType': 'number'
+                    'max': 1,
+                    'editType': 'calc'
                 }
             ],
             role='info',

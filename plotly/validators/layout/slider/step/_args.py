@@ -13,14 +13,14 @@ class ArgsValidator(_plotly_utils.basevalidators.InfoArrayValidator):
             free_length=True,
             items=[
                 {
-                    'editType': 'arraydraw',
-                    'valType': 'any'
+                    'valType': 'any',
+                    'editType': 'arraydraw'
                 }, {
-                    'editType': 'arraydraw',
-                    'valType': 'any'
+                    'valType': 'any',
+                    'editType': 'arraydraw'
                 }, {
-                    'editType': 'arraydraw',
-                    'valType': 'any'
+                    'valType': 'any',
+                    'editType': 'arraydraw'
                 }
             ],
             role='info',

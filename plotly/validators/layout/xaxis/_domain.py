@@ -12,15 +12,15 @@ class DomainValidator(_plotly_utils.basevalidators.InfoArrayValidator):
             edit_type='plot+margins',
             items=[
                 {
-                    'editType': 'plot+margins',
-                    'max': 1,
+                    'valType': 'number',
                     'min': 0,
-                    'valType': 'number'
+                    'max': 1,
+                    'editType': 'plot+margins'
                 }, {
-                    'editType': 'plot+margins',
-                    'max': 1,
+                    'valType': 'number',
                     'min': 0,
-                    'valType': 'number'
+                    'max': 1,
+                    'editType': 'plot+margins'
                 }
             ],
             role='info',

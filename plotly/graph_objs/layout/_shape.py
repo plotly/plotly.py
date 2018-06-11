@@ -141,22 +141,25 @@ class Shape(BaseLayoutHierarchyType):
     @property
     def path(self):
         """
-        For `type` *path* - a valid SVG path but with the pixel values
-        replaced by data values. There are a few restrictions / quirks
-        only absolute instructions, not relative. So the allowed
-        segments are: M, L, H, V, Q, C, T, S, and Z arcs (A) are not
-        allowed because radius rx and ry are relative. In the future we
-        could consider supporting relative commands, but we would have
-        to decide on how to handle date and log axes. Note that even as
-        is, Q and C Bezier paths that are smooth on linear axes may not
-        be smooth on log, and vice versa. no chained "polybezier"
-        commands - specify the segment type for each one. On category
-        axes, values are numbers scaled to the serial numbers of
-        categories because using the categories themselves there would
-        be no way to describe fractional positions On data axes:
-        because space and T are both normal components of path strings,
-        we can't use either to separate date from time parts. Therefore
-        we'll use underscore for this purpose: 2015-02-21_13:45:56.789
+        For `type` *path* - a valid SVG path with the pixel values
+        replaced by data values in `xsizemode`/`ysizemode` being
+        *scaled* and taken unmodified as pixels relative to `xanchor`
+        and `yanchor` in case of *pixel* size mode. There are a few
+        restrictions / quirks only absolute instructions, not relative.
+        So the allowed segments are: M, L, H, V, Q, C, T, S, and Z arcs
+        (A) are not allowed because radius rx and ry are relative. In
+        the future we could consider supporting relative commands, but
+        we would have to decide on how to handle date and log axes.
+        Note that even as is, Q and C Bezier paths that are smooth on
+        linear axes may not be smooth on log, and vice versa. no
+        chained "polybezier" commands - specify the segment type for
+        each one. On category axes, values are numbers scaled to the
+        serial numbers of categories because using the categories
+        themselves there would be no way to describe fractional
+        positions On data axes: because space and T are both normal
+        components of path strings, we can't use either to separate
+        date from time parts. Therefore we'll use underscore for this
+        purpose: 2015-02-21_13:45:56.789
     
         The 'path' property is a string and must be specified as:
           - A string
@@ -178,12 +181,14 @@ class Shape(BaseLayoutHierarchyType):
     def type(self):
         """
         Specifies the shape type to be drawn. If *line*, a line is
-        drawn from (`x0`,`y0`) to (`x1`,`y1`) If *circle*, a circle is
-        drawn from ((`x0`+`x1`)/2, (`y0`+`y1`)/2)) with radius
-        (|(`x0`+`x1`)/2 - `x0`|, |(`y0`+`y1`)/2 -`y0`)|) If *rect*, a
-        rectangle is drawn linking (`x0`,`y0`), (`x1`,`y0`),
-        (`x1`,`y1`), (`x0`,`y1`), (`x0`,`y0`) If *path*, draw a custom
-        SVG path using `path`.
+        drawn from (`x0`,`y0`) to (`x1`,`y1`) with respect to the axes'
+        sizing mode. If *circle*, a circle is drawn from
+        ((`x0`+`x1`)/2, (`y0`+`y1`)/2)) with radius (|(`x0`+`x1`)/2 -
+        `x0`|, |(`y0`+`y1`)/2 -`y0`)|) with respect to the axes' sizing
+        mode. If *rect*, a rectangle is drawn linking (`x0`,`y0`),
+        (`x1`,`y0`), (`x1`,`y1`), (`x0`,`y1`), (`x0`,`y0`) with respect
+        to the axes' sizing mode. If *path*, draw a custom SVG path
+        using `path`. with respect to the axes' sizing mode.
     
         The 'type' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -224,7 +229,8 @@ class Shape(BaseLayoutHierarchyType):
     @property
     def x0(self):
         """
-        Sets the shape's starting x position. See `type` for more info.
+        Sets the shape's starting x position. See `type` and
+        `xsizemode` for more info.
     
         The 'x0' property accepts values of any type
 
@@ -243,7 +249,8 @@ class Shape(BaseLayoutHierarchyType):
     @property
     def x1(self):
         """
-        Sets the shape's end x position. See `type` for more info.
+        Sets the shape's end x position. See `type` and `xsizemode` for
+        more info.
     
         The 'x1' property accepts values of any type
 
@@ -257,13 +264,36 @@ class Shape(BaseLayoutHierarchyType):
     def x1(self, val):
         self['x1'] = val
 
+    # xanchor
+    # -------
+    @property
+    def xanchor(self):
+        """
+        Only relevant in conjunction with `xsizemode` set to *pixel*.
+        Specifies the anchor point on the x axis to which `x0`, `x1`
+        and x coordinates within `path` are relative to. E.g. useful to
+        attach a pixel sized shape to a certain data value. No effect
+        when `xsizemode` not set to *pixel*.
+    
+        The 'xanchor' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['xanchor']
+
+    @xanchor.setter
+    def xanchor(self, val):
+        self['xanchor'] = val
+
     # xref
     # ----
     @property
     def xref(self):
         """
         Sets the shape's x coordinate axis. If set to an x axis id
-        (e.g. *x* or *x2*), the `x` position refers to an x coordinate
+        (e.g. *x* or *x2*), the `x` position refers to an x coordinate.
         If set to *paper*, the `x` position refers to the distance from
         the left side of the plotting area in normalized coordinates
         where *0* (*1*) corresponds to the left (right) side. If the
@@ -287,12 +317,41 @@ class Shape(BaseLayoutHierarchyType):
     def xref(self, val):
         self['xref'] = val
 
+    # xsizemode
+    # ---------
+    @property
+    def xsizemode(self):
+        """
+        Sets the shapes's sizing mode along the x axis. If set to
+        *scaled*, `x0`, `x1` and x coordinates within `path` refer to
+        data values on the x axis or a fraction of the plot area's
+        width (`xref` set to *paper*). If set to *pixel*, `xanchor`
+        specifies the x position in terms of data or plot fraction but
+        `x0`, `x1` and x coordinates within `path` are pixels relative
+        to `xanchor`. This way, the shape can have a fixed width while
+        maintaining a position relative to data or plot fraction.
+    
+        The 'xsizemode' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['scaled', 'pixel']
+
+        Returns
+        -------
+        Any
+        """
+        return self['xsizemode']
+
+    @xsizemode.setter
+    def xsizemode(self, val):
+        self['xsizemode'] = val
+
     # y0
     # --
     @property
     def y0(self):
         """
-        Sets the shape's starting y position. See `type` for more info.
+        Sets the shape's starting y position. See `type` and
+        `ysizemode` for more info.
     
         The 'y0' property accepts values of any type
 
@@ -311,7 +370,8 @@ class Shape(BaseLayoutHierarchyType):
     @property
     def y1(self):
         """
-        Sets the shape's end y position. See `type` for more info.
+        Sets the shape's end y position. See `type` and `ysizemode` for
+        more info.
     
         The 'y1' property accepts values of any type
 
@@ -324,6 +384,29 @@ class Shape(BaseLayoutHierarchyType):
     @y1.setter
     def y1(self, val):
         self['y1'] = val
+
+    # yanchor
+    # -------
+    @property
+    def yanchor(self):
+        """
+        Only relevant in conjunction with `ysizemode` set to *pixel*.
+        Specifies the anchor point on the y axis to which `y0`, `y1`
+        and y coordinates within `path` are relative to. E.g. useful to
+        attach a pixel sized shape to a certain data value. No effect
+        when `ysizemode` not set to *pixel*.
+    
+        The 'yanchor' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['yanchor']
+
+    @yanchor.setter
+    def yanchor(self, val):
+        self['yanchor'] = val
 
     # yref
     # ----
@@ -352,6 +435,34 @@ class Shape(BaseLayoutHierarchyType):
     def yref(self, val):
         self['yref'] = val
 
+    # ysizemode
+    # ---------
+    @property
+    def ysizemode(self):
+        """
+        Sets the shapes's sizing mode along the y axis. If set to
+        *scaled*, `y0`, `y1` and y coordinates within `path` refer to
+        data values on the y axis or a fraction of the plot area's
+        height (`yref` set to *paper*). If set to *pixel*, `yanchor`
+        specifies the y position in terms of data or plot fraction but
+        `y0`, `y1` and y coordinates within `path` are pixels relative
+        to `yanchor`. This way, the shape can have a fixed height while
+        maintaining a position relative to data or plot fraction.
+    
+        The 'ysizemode' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['scaled', 'pixel']
+
+        Returns
+        -------
+        Any
+        """
+        return self['ysizemode']
+
+    @ysizemode.setter
+    def ysizemode(self, val):
+        self['ysizemode'] = val
+
     # property parent name
     # --------------------
     @property
@@ -374,8 +485,11 @@ class Shape(BaseLayoutHierarchyType):
         opacity
             Sets the opacity of the shape.
         path
-            For `type` *path* - a valid SVG path but with the pixel
-            values replaced by data values. There are a few
+            For `type` *path* - a valid SVG path with the pixel
+            values replaced by data values in
+            `xsizemode`/`ysizemode` being *scaled* and taken
+            unmodified as pixels relative to `xanchor` and
+            `yanchor` in case of *pixel* size mode. There are a few
             restrictions / quirks only absolute instructions, not
             relative. So the allowed segments are: M, L, H, V, Q,
             C, T, S, and Z arcs (A) are not allowed because radius
@@ -395,37 +509,64 @@ class Shape(BaseLayoutHierarchyType):
             2015-02-21_13:45:56.789
         type
             Specifies the shape type to be drawn. If *line*, a line
-            is drawn from (`x0`,`y0`) to (`x1`,`y1`) If *circle*, a
-            circle is drawn from ((`x0`+`x1`)/2, (`y0`+`y1`)/2))
-            with radius (|(`x0`+`x1`)/2 - `x0`|, |(`y0`+`y1`)/2
-            -`y0`)|) If *rect*, a rectangle is drawn linking
-            (`x0`,`y0`), (`x1`,`y0`), (`x1`,`y1`), (`x0`,`y1`),
-            (`x0`,`y0`) If *path*, draw a custom SVG path using
-            `path`.
+            is drawn from (`x0`,`y0`) to (`x1`,`y1`) with respect
+            to the axes' sizing mode. If *circle*, a circle is
+            drawn from ((`x0`+`x1`)/2, (`y0`+`y1`)/2)) with radius
+            (|(`x0`+`x1`)/2 - `x0`|, |(`y0`+`y1`)/2 -`y0`)|) with
+            respect to the axes' sizing mode. If *rect*, a
+            rectangle is drawn linking (`x0`,`y0`), (`x1`,`y0`),
+            (`x1`,`y1`), (`x0`,`y1`), (`x0`,`y0`) with respect to
+            the axes' sizing mode. If *path*, draw a custom SVG
+            path using `path`. with respect to the axes' sizing
+            mode.
         visible
             Determines whether or not this shape is visible.
         x0
-            Sets the shape's starting x position. See `type` for
-            more info.
+            Sets the shape's starting x position. See `type` and
+            `xsizemode` for more info.
         x1
-            Sets the shape's end x position. See `type` for more
-            info.
+            Sets the shape's end x position. See `type` and
+            `xsizemode` for more info.
+        xanchor
+            Only relevant in conjunction with `xsizemode` set to
+            *pixel*. Specifies the anchor point on the x axis to
+            which `x0`, `x1` and x coordinates within `path` are
+            relative to. E.g. useful to attach a pixel sized shape
+            to a certain data value. No effect when `xsizemode` not
+            set to *pixel*.
         xref
             Sets the shape's x coordinate axis. If set to an x axis
             id (e.g. *x* or *x2*), the `x` position refers to an x
-            coordinate If set to *paper*, the `x` position refers
+            coordinate. If set to *paper*, the `x` position refers
             to the distance from the left side of the plotting area
             in normalized coordinates where *0* (*1*) corresponds
             to the left (right) side. If the axis `type` is *log*,
             then you must take the log of your desired range. If
             the axis `type` is *date*, then you must convert the
             date to unix time in milliseconds.
+        xsizemode
+            Sets the shapes's sizing mode along the x axis. If set
+            to *scaled*, `x0`, `x1` and x coordinates within `path`
+            refer to data values on the x axis or a fraction of the
+            plot area's width (`xref` set to *paper*). If set to
+            *pixel*, `xanchor` specifies the x position in terms of
+            data or plot fraction but `x0`, `x1` and x coordinates
+            within `path` are pixels relative to `xanchor`. This
+            way, the shape can have a fixed width while maintaining
+            a position relative to data or plot fraction.
         y0
-            Sets the shape's starting y position. See `type` for
-            more info.
+            Sets the shape's starting y position. See `type` and
+            `ysizemode` for more info.
         y1
-            Sets the shape's end y position. See `type` for more
-            info.
+            Sets the shape's end y position. See `type` and
+            `ysizemode` for more info.
+        yanchor
+            Only relevant in conjunction with `ysizemode` set to
+            *pixel*. Specifies the anchor point on the y axis to
+            which `y0`, `y1` and y coordinates within `path` are
+            relative to. E.g. useful to attach a pixel sized shape
+            to a certain data value. No effect when `ysizemode` not
+            set to *pixel*.
         yref
             Sets the annotation's y coordinate axis. If set to an y
             axis id (e.g. *y* or *y2*), the `y` position refers to
@@ -433,6 +574,17 @@ class Shape(BaseLayoutHierarchyType):
             refers to the distance from the bottom of the plotting
             area in normalized coordinates where *0* (*1*)
             corresponds to the bottom (top).
+        ysizemode
+            Sets the shapes's sizing mode along the y axis. If set
+            to *scaled*, `y0`, `y1` and y coordinates within `path`
+            refer to data values on the y axis or a fraction of the
+            plot area's height (`yref` set to *paper*). If set to
+            *pixel*, `yanchor` specifies the y position in terms of
+            data or plot fraction but `y0`, `y1` and y coordinates
+            within `path` are pixels relative to `yanchor`. This
+            way, the shape can have a fixed height while
+            maintaining a position relative to data or plot
+            fraction.
         """
 
     def __init__(
@@ -446,10 +598,14 @@ class Shape(BaseLayoutHierarchyType):
         visible=None,
         x0=None,
         x1=None,
+        xanchor=None,
         xref=None,
+        xsizemode=None,
         y0=None,
         y1=None,
+        yanchor=None,
         yref=None,
+        ysizemode=None,
         **kwargs
     ):
         """
@@ -468,8 +624,11 @@ class Shape(BaseLayoutHierarchyType):
         opacity
             Sets the opacity of the shape.
         path
-            For `type` *path* - a valid SVG path but with the pixel
-            values replaced by data values. There are a few
+            For `type` *path* - a valid SVG path with the pixel
+            values replaced by data values in
+            `xsizemode`/`ysizemode` being *scaled* and taken
+            unmodified as pixels relative to `xanchor` and
+            `yanchor` in case of *pixel* size mode. There are a few
             restrictions / quirks only absolute instructions, not
             relative. So the allowed segments are: M, L, H, V, Q,
             C, T, S, and Z arcs (A) are not allowed because radius
@@ -489,37 +648,64 @@ class Shape(BaseLayoutHierarchyType):
             2015-02-21_13:45:56.789
         type
             Specifies the shape type to be drawn. If *line*, a line
-            is drawn from (`x0`,`y0`) to (`x1`,`y1`) If *circle*, a
-            circle is drawn from ((`x0`+`x1`)/2, (`y0`+`y1`)/2))
-            with radius (|(`x0`+`x1`)/2 - `x0`|, |(`y0`+`y1`)/2
-            -`y0`)|) If *rect*, a rectangle is drawn linking
-            (`x0`,`y0`), (`x1`,`y0`), (`x1`,`y1`), (`x0`,`y1`),
-            (`x0`,`y0`) If *path*, draw a custom SVG path using
-            `path`.
+            is drawn from (`x0`,`y0`) to (`x1`,`y1`) with respect
+            to the axes' sizing mode. If *circle*, a circle is
+            drawn from ((`x0`+`x1`)/2, (`y0`+`y1`)/2)) with radius
+            (|(`x0`+`x1`)/2 - `x0`|, |(`y0`+`y1`)/2 -`y0`)|) with
+            respect to the axes' sizing mode. If *rect*, a
+            rectangle is drawn linking (`x0`,`y0`), (`x1`,`y0`),
+            (`x1`,`y1`), (`x0`,`y1`), (`x0`,`y0`) with respect to
+            the axes' sizing mode. If *path*, draw a custom SVG
+            path using `path`. with respect to the axes' sizing
+            mode.
         visible
             Determines whether or not this shape is visible.
         x0
-            Sets the shape's starting x position. See `type` for
-            more info.
+            Sets the shape's starting x position. See `type` and
+            `xsizemode` for more info.
         x1
-            Sets the shape's end x position. See `type` for more
-            info.
+            Sets the shape's end x position. See `type` and
+            `xsizemode` for more info.
+        xanchor
+            Only relevant in conjunction with `xsizemode` set to
+            *pixel*. Specifies the anchor point on the x axis to
+            which `x0`, `x1` and x coordinates within `path` are
+            relative to. E.g. useful to attach a pixel sized shape
+            to a certain data value. No effect when `xsizemode` not
+            set to *pixel*.
         xref
             Sets the shape's x coordinate axis. If set to an x axis
             id (e.g. *x* or *x2*), the `x` position refers to an x
-            coordinate If set to *paper*, the `x` position refers
+            coordinate. If set to *paper*, the `x` position refers
             to the distance from the left side of the plotting area
             in normalized coordinates where *0* (*1*) corresponds
             to the left (right) side. If the axis `type` is *log*,
             then you must take the log of your desired range. If
             the axis `type` is *date*, then you must convert the
             date to unix time in milliseconds.
+        xsizemode
+            Sets the shapes's sizing mode along the x axis. If set
+            to *scaled*, `x0`, `x1` and x coordinates within `path`
+            refer to data values on the x axis or a fraction of the
+            plot area's width (`xref` set to *paper*). If set to
+            *pixel*, `xanchor` specifies the x position in terms of
+            data or plot fraction but `x0`, `x1` and x coordinates
+            within `path` are pixels relative to `xanchor`. This
+            way, the shape can have a fixed width while maintaining
+            a position relative to data or plot fraction.
         y0
-            Sets the shape's starting y position. See `type` for
-            more info.
+            Sets the shape's starting y position. See `type` and
+            `ysizemode` for more info.
         y1
-            Sets the shape's end y position. See `type` for more
-            info.
+            Sets the shape's end y position. See `type` and
+            `ysizemode` for more info.
+        yanchor
+            Only relevant in conjunction with `ysizemode` set to
+            *pixel*. Specifies the anchor point on the y axis to
+            which `y0`, `y1` and y coordinates within `path` are
+            relative to. E.g. useful to attach a pixel sized shape
+            to a certain data value. No effect when `ysizemode` not
+            set to *pixel*.
         yref
             Sets the annotation's y coordinate axis. If set to an y
             axis id (e.g. *y* or *y2*), the `y` position refers to
@@ -527,6 +713,17 @@ class Shape(BaseLayoutHierarchyType):
             refers to the distance from the bottom of the plotting
             area in normalized coordinates where *0* (*1*)
             corresponds to the bottom (top).
+        ysizemode
+            Sets the shapes's sizing mode along the y axis. If set
+            to *scaled*, `y0`, `y1` and y coordinates within `path`
+            refer to data values on the y axis or a fraction of the
+            plot area's height (`yref` set to *paper*). If set to
+            *pixel*, `yanchor` specifies the y position in terms of
+            data or plot fraction but `y0`, `y1` and y coordinates
+            within `path` are pixels relative to `yanchor`. This
+            way, the shape can have a fixed height while
+            maintaining a position relative to data or plot
+            fraction.
 
         Returns
         -------
@@ -549,10 +746,14 @@ class Shape(BaseLayoutHierarchyType):
         self._validators['visible'] = v_shape.VisibleValidator()
         self._validators['x0'] = v_shape.X0Validator()
         self._validators['x1'] = v_shape.X1Validator()
+        self._validators['xanchor'] = v_shape.XanchorValidator()
         self._validators['xref'] = v_shape.XrefValidator()
+        self._validators['xsizemode'] = v_shape.XsizemodeValidator()
         self._validators['y0'] = v_shape.Y0Validator()
         self._validators['y1'] = v_shape.Y1Validator()
+        self._validators['yanchor'] = v_shape.YanchorValidator()
         self._validators['yref'] = v_shape.YrefValidator()
+        self._validators['ysizemode'] = v_shape.YsizemodeValidator()
 
         # Populate data dict with properties
         # ----------------------------------
@@ -565,10 +766,14 @@ class Shape(BaseLayoutHierarchyType):
         self.visible = visible
         self.x0 = x0
         self.x1 = x1
+        self.xanchor = xanchor
         self.xref = xref
+        self.xsizemode = xsizemode
         self.y0 = y0
         self.y1 = y1
+        self.yanchor = yanchor
         self.yref = yref
+        self.ysizemode = ysizemode
 
         # Process unknown kwargs
         # ----------------------

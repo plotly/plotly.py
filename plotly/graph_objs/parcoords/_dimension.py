@@ -10,10 +10,12 @@ class Dimension(BaseTraceHierarchyType):
         """
         The domain range to which the filter on the dimension is
         constrained. Must be an array of `[fromValue, toValue]` with
-        finite numbers as elements.
+        `fromValue <= toValue`, or if `multiselect` is not disabled,
+        you may give an array of arrays, where each inner array is
+        `[fromValue, toValue]`.
     
         The 'constraintrange' property is an info array that may be specified as a
-        list or tuple of 2 elements where:
+        list or tuple of up to 2 elements where:
     
     (0) The 'constraintrange[0]' property is a number and may be specified as:
           - An int or float
@@ -50,6 +52,26 @@ class Dimension(BaseTraceHierarchyType):
     @label.setter
     def label(self, val):
         self['label'] = val
+
+    # multiselect
+    # -----------
+    @property
+    def multiselect(self):
+        """
+        Do we allow multiple selection ranges or just a single range?
+    
+        The 'multiselect' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self['multiselect']
+
+    @multiselect.setter
+    def multiselect(self, val):
+        self['multiselect'] = val
 
     # range
     # -----
@@ -265,9 +287,15 @@ class Dimension(BaseTraceHierarchyType):
         constraintrange
             The domain range to which the filter on the dimension
             is constrained. Must be an array of `[fromValue,
-            toValue]` with finite numbers as elements.
+            toValue]` with `fromValue <= toValue`, or if
+            `multiselect` is not disabled, you may give an array of
+            arrays, where each inner array is `[fromValue,
+            toValue]`.
         label
             The shown name of the dimension.
+        multiselect
+            Do we allow multiple selection ranges or just a single
+            range?
         range
             The domain range that represents the full, shown axis
             extent. Defaults to the `values` extent. Must be an
@@ -307,6 +335,7 @@ class Dimension(BaseTraceHierarchyType):
         self,
         constraintrange=None,
         label=None,
+        multiselect=None,
         range=None,
         tickformat=None,
         ticktext=None,
@@ -329,9 +358,15 @@ class Dimension(BaseTraceHierarchyType):
         constraintrange
             The domain range to which the filter on the dimension
             is constrained. Must be an array of `[fromValue,
-            toValue]` with finite numbers as elements.
+            toValue]` with `fromValue <= toValue`, or if
+            `multiselect` is not disabled, you may give an array of
+            arrays, where each inner array is `[fromValue,
+            toValue]`.
         label
             The shown name of the dimension.
+        multiselect
+            Do we allow multiple selection ranges or just a single
+            range?
         range
             The domain range that represents the full, shown axis
             extent. Defaults to the `values` extent. Must be an
@@ -381,6 +416,7 @@ class Dimension(BaseTraceHierarchyType):
         self._validators['constraintrange'
                         ] = v_dimension.ConstraintrangeValidator()
         self._validators['label'] = v_dimension.LabelValidator()
+        self._validators['multiselect'] = v_dimension.MultiselectValidator()
         self._validators['range'] = v_dimension.RangeValidator()
         self._validators['tickformat'] = v_dimension.TickformatValidator()
         self._validators['ticktext'] = v_dimension.TicktextValidator()
@@ -395,6 +431,7 @@ class Dimension(BaseTraceHierarchyType):
         # ----------------------------------
         self.constraintrange = constraintrange
         self.label = label
+        self.multiselect = multiselect
         self.range = range
         self.tickformat = tickformat
         self.ticktext = ticktext

@@ -14,10 +14,15 @@ class DimensionsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
             constraintrange
                 The domain range to which the filter on the
                 dimension is constrained. Must be an array of
-                `[fromValue, toValue]` with finite numbers as
-                elements.
+                `[fromValue, toValue]` with `fromValue <=
+                toValue`, or if `multiselect` is not disabled,
+                you may give an array of arrays, where each
+                inner array is `[fromValue, toValue]`.
             label
                 The shown name of the dimension.
+            multiselect
+                Do we allow multiple selection ranges or just a
+                single range?
             range
                 The domain range that represents the full,
                 shown axis extent. Defaults to the `values`

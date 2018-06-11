@@ -199,7 +199,7 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 coordinates and a 2D cartesian y axis. If *y*
                 (the default value), the y coordinates refer to
                 `layout.yaxis`. If *y2*, the y coordinates
-                refer to `layout.xaxis2`, and so on.
+                refer to `layout.yaxis2`, and so on.
             ysrc
                 Sets the source reference on plot.ly for  y .""",
             **kwargs

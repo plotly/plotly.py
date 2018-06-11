@@ -12,21 +12,21 @@ class RangeValidator(_plotly_utils.basevalidators.InfoArrayValidator):
         super(RangeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type='plot+margins',
+            edit_type='axrange+margins',
             implied_edits={'autorange': False},
             items=[
                 {
-                    'editType': 'plot+margins',
+                    'valType': 'any',
+                    'editType': 'axrange+margins',
                     'impliedEdits': {
                         '^autorange': False
-                    },
-                    'valType': 'any'
+                    }
                 }, {
-                    'editType': 'plot+margins',
+                    'valType': 'any',
+                    'editType': 'axrange+margins',
                     'impliedEdits': {
                         '^autorange': False
-                    },
-                    'valType': 'any'
+                    }
                 }
             ],
             role='info',

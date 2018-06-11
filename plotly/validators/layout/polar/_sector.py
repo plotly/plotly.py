@@ -12,11 +12,11 @@ class SectorValidator(_plotly_utils.basevalidators.InfoArrayValidator):
             edit_type='plot',
             items=[
                 {
-                    'editType': 'plot',
-                    'valType': 'number'
+                    'valType': 'number',
+                    'editType': 'plot'
                 }, {
-                    'editType': 'plot',
-                    'valType': 'number'
+                    'valType': 'number',
+                    'editType': 'plot'
                 }
             ],
             role='info',

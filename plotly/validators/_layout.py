@@ -154,6 +154,12 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             scene
                 plotly.graph_objs.layout.Scene instance or dict
                 with compatible properties
+            selectdirection
+                When "dragmode" is set to "select", this limits
+                the selection of the drag to horizontal,
+                vertical or diagonal. "h" only allows
+                horizontal selection, "v" only vertical, "d"
+                only diagonal and "any" sets no limit.
             separators
                 Sets the decimal and thousand separators. For
                 example, *. * puts a '.' before decimals and a

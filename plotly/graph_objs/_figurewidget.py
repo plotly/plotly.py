@@ -1,10 +1,10 @@
 from plotly.basewidget import BaseFigureWidget
 from plotly.graph_objs import (
-    Area, Bar, Box, Candlestick, Carpet, Choropleth, Contour, Contourcarpet,
-    Heatmap, Heatmapgl, Histogram, Histogram2d, Histogram2dContour, Mesh3d,
-    Ohlc, Parcoords, Pie, Pointcloud, Sankey, Scatter, Scatter3d,
-    Scattercarpet, Scattergeo, Scattergl, Scattermapbox, Scatterpolar,
-    Scatterpolargl, Scatterternary, Surface, Table, Violin
+    Area, Bar, Box, Candlestick, Carpet, Choropleth, Cone, Contour,
+    Contourcarpet, Heatmap, Heatmapgl, Histogram, Histogram2d,
+    Histogram2dContour, Mesh3d, Ohlc, Parcoords, Pie, Pointcloud, Sankey,
+    Scatter, Scatter3d, Scattercarpet, Scattergeo, Scattergl, Scattermapbox,
+    Scatterpolar, Scatterpolargl, Scatterternary, Splom, Surface, Table, Violin
 )
 
 
@@ -24,15 +24,16 @@ class FigureWidget(BaseFigureWidget):
               - A list or tuple of dicts of string/value properties where:
                 - The 'type' property specifies the trace type
                     One of: ['area', 'bar', 'box', 'candlestick', 'carpet',
-                             'choropleth', 'contour', 'contourcarpet',
-                             'heatmap', 'heatmapgl', 'histogram',
-                             'histogram2d', 'histogram2dcontour', 'mesh3d',
-                             'ohlc', 'parcoords', 'pie', 'pointcloud',
-                             'sankey', 'scatter', 'scatter3d',
-                             'scattercarpet', 'scattergeo', 'scattergl',
-                             'scattermapbox', 'scatterpolar',
-                             'scatterpolargl', 'scatterternary', 'surface',
-                             'table', 'violin']
+                             'choropleth', 'cone', 'contour',
+                             'contourcarpet', 'heatmap', 'heatmapgl',
+                             'histogram', 'histogram2d',
+                             'histogram2dcontour', 'mesh3d', 'ohlc',
+                             'parcoords', 'pie', 'pointcloud', 'sankey',
+                             'scatter', 'scatter3d', 'scattercarpet',
+                             'scattergeo', 'scattergl', 'scattermapbox',
+                             'scatterpolar', 'scatterpolargl',
+                             'scatterternary', 'splom', 'surface', 'table',
+                             'violin']
         
                 - All remaining properties are passed to the constructor of
                   the specified trace type
@@ -192,6 +193,12 @@ class FigureWidget(BaseFigureWidget):
                     scene
                         plotly.graph_objs.layout.Scene instance or dict
                         with compatible properties
+                    selectdirection
+                        When "dragmode" is set to "select", this limits
+                        the selection of the drag to horizontal,
+                        vertical or diagonal. "h" only allows
+                        horizontal selection, "v" only vertical, "d"
+                        only diagonal and "any" sets no limit.
                     separators
                         Sets the decimal and thousand separators. For
                         example, *. * puts a '.' before decimals and a
@@ -656,7 +663,7 @@ class FigureWidget(BaseFigureWidget):
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If *y* (the default value), the
             y coordinates refer to `layout.yaxis`. If *y2*, the y
-            coordinates refer to `layout.xaxis2`, and so on.
+            coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
         ysrc
@@ -941,7 +948,7 @@ class FigureWidget(BaseFigureWidget):
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If *y* (the default value), the
             y coordinates refer to `layout.yaxis`. If *y2*, the y
-            coordinates refer to `layout.xaxis2`, and so on.
+            coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
         ysrc
@@ -1163,7 +1170,7 @@ class FigureWidget(BaseFigureWidget):
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If *y* (the default value), the
             y coordinates refer to `layout.yaxis`. If *y2*, the y
-            coordinates refer to `layout.xaxis2`, and so on.
+            coordinates refer to `layout.yaxis2`, and so on.
         row : int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -1382,7 +1389,7 @@ class FigureWidget(BaseFigureWidget):
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If *y* (the default value), the
             y coordinates refer to `layout.yaxis`. If *y2*, the y
-            coordinates refer to `layout.xaxis2`, and so on.
+            coordinates refer to `layout.yaxis2`, and so on.
         ysrc
             Sets the source reference on plot.ly for  y .
         row : int or None (default)
@@ -1648,6 +1655,288 @@ class FigureWidget(BaseFigureWidget):
         )
         return self.add_trace(new_trace, row=row, col=col)
 
+    def add_cone(
+        self,
+        anchor=None,
+        autocolorscale=None,
+        cauto=None,
+        cmax=None,
+        cmin=None,
+        colorbar=None,
+        colorscale=None,
+        customdata=None,
+        customdatasrc=None,
+        hoverinfo=None,
+        hoverinfosrc=None,
+        hoverlabel=None,
+        ids=None,
+        idssrc=None,
+        legendgroup=None,
+        lighting=None,
+        lightposition=None,
+        name=None,
+        opacity=None,
+        reversescale=None,
+        scene=None,
+        selectedpoints=None,
+        showlegend=None,
+        showscale=None,
+        sizemode=None,
+        sizeref=None,
+        stream=None,
+        text=None,
+        textsrc=None,
+        u=None,
+        uid=None,
+        usrc=None,
+        v=None,
+        visible=None,
+        vsrc=None,
+        w=None,
+        wsrc=None,
+        x=None,
+        xsrc=None,
+        y=None,
+        ysrc=None,
+        z=None,
+        zsrc=None,
+        row=None,
+        col=None,
+        **kwargs
+    ):
+        """
+        Add a new Cone trace
+        
+        Use cone traces to visualize vector fields.  Specify a vector
+        field using 6 1D arrays, 3 position arrays `x`, `y` and `z` and
+        3 vector component arrays `u`, `v`, `w`. The cones are drawn
+        exactly at the positions given by `x`, `y` and `z`.
+
+        Parameters
+        ----------
+        anchor
+            Sets the cones' anchor with respect to their x/y/z
+            positions. Note that *cm* denote the cone's center of
+            mass which corresponds to 1/4 from the tail to tip.
+        autocolorscale
+            Has an effect only if `color` is set to a numerical
+            array. Determines whether the colorscale is a default
+            palette (`autocolorscale: true`) or the palette
+            determined by `colorscale`. In case `colorscale` is
+            unspecified or `autocolorscale` is true, the default
+            palette will be chosen according to whether numbers in
+            the `color` array are all positive, all negative or
+            mixed.
+        cauto
+            Has an effect only if `color` is set to a numerical
+            array and `cmin`, `cmax` are set by the user. In this
+            case, it controls whether the range of colors in
+            `colorscale` is mapped to the range of values in the
+            `color` array (`cauto: true`), or the `cmin`/`cmax`
+            values (`cauto: false`). Defaults to `false` when
+            `cmin`, `cmax` are set by the user.
+        cmax
+            Has an effect only if `color` is set to a numerical
+            array. Sets the upper bound of the color domain. Value
+            should be associated to the `color` array index, and if
+            set, `cmin` must be set as well.
+        cmin
+            Has an effect only if `color` is set to a numerical
+            array. Sets the lower bound of the color domain. Value
+            should be associated to the `color` array index, and if
+            set, `cmax` must be set as well.
+        colorbar
+            plotly.graph_objs.cone.ColorBar instance or dict with
+            compatible properties
+        colorscale
+            Sets the colorscale and only has an effect if `color`
+            is set to a numerical array. The colorscale must be an
+            array containing arrays mapping a normalized value to
+            an rgb, rgba, hex, hsl, hsv, or named color string. At
+            minimum, a mapping for the lowest (0) and highest (1)
+            values are required. For example, `[[0, 'rgb(0,0,255)',
+            [1, 'rgb(255,0,0)']]`. To control the bounds of the
+            colorscale in color space, use `cmin` and `cmax`.
+            Alternatively, `colorscale` may be a palette name
+            string of the following list: Greys, YlGnBu, Greens,
+            YlOrRd, Bluered, RdBu, Reds, Blues, Picnic, Rainbow,
+            Portland, Jet, Hot, Blackbody, Earth, Electric,
+            Viridis, Cividis
+        customdata
+            Assigns extra data each datum. This may be useful when
+            listening to hover, click and selection events. Note
+            that, *scatter* traces also appends customdata items in
+            the markers DOM elements
+        customdatasrc
+            Sets the source reference on plot.ly for  customdata .
+        hoverinfo
+            Determines which trace information appear on hover. If
+            `none` or `skip` are set, no information is displayed
+            upon hovering. But, if `none` is set, click and hover
+            events are still fired.
+        hoverinfosrc
+            Sets the source reference on plot.ly for  hoverinfo .
+        hoverlabel
+            plotly.graph_objs.cone.Hoverlabel instance or dict with
+            compatible properties
+        ids
+            Assigns id labels to each datum. These ids for object
+            constancy of data points during animation. Should be an
+            array of strings, not numbers or any other type.
+        idssrc
+            Sets the source reference on plot.ly for  ids .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
+        lighting
+            plotly.graph_objs.cone.Lighting instance or dict with
+            compatible properties
+        lightposition
+            plotly.graph_objs.cone.Lightposition instance or dict
+            with compatible properties
+        name
+            Sets the trace name. The trace name appear as the
+            legend item and on hover.
+        opacity
+            Sets the opacity of the surface.
+        reversescale
+            Has an effect only if `color` is set to a numerical
+            array. Reverses the color mapping if true (`cmin` will
+            correspond to the last color in the array and `cmax`
+            will correspond to the first color).
+        scene
+            Sets a reference between this trace's 3D coordinate
+            system and a 3D scene. If *scene* (the default value),
+            the (x,y,z) coordinates refer to `layout.scene`. If
+            *scene2*, the (x,y,z) coordinates refer to
+            `layout.scene2`, and so on.
+        selectedpoints
+            Array containing integer indices of selected points.
+            Has an effect only for traces that support selections.
+            Note that an empty array means an empty selection where
+            the `unselected` are turned on for all points, whereas,
+            any other non-array values means no selection all where
+            the `selected` and `unselected` styles have no effect.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
+        showscale
+            Determines whether or not a colorbar is displayed for
+            this trace.
+        sizemode
+            Sets the mode by which the cones are sized. If
+            *scaled*, `sizeref` scales such that the reference cone
+            size for the maximum vector magnitude is 1. If
+            *absolute*, `sizeref` scales such that the reference
+            cone size for vector magnitude 1 is one grid unit.
+        sizeref
+            Sets the cone size reference value.
+        stream
+            plotly.graph_objs.cone.Stream instance or dict with
+            compatible properties
+        text
+            Sets the text elements associated with the cones. If
+            trace `hoverinfo` contains a *text* flag and
+            *hovertext* is not set, these elements will be seen in
+            the hover labels.
+        textsrc
+            Sets the source reference on plot.ly for  text .
+        u
+            Sets the x components of the vector field.
+        uid
+
+        usrc
+            Sets the source reference on plot.ly for  u .
+        v
+            Sets the y components of the vector field.
+        visible
+            Determines whether or not this trace is visible. If
+            *legendonly*, the trace is not drawn, but can appear as
+            a legend item (provided that the legend itself is
+            visible).
+        vsrc
+            Sets the source reference on plot.ly for  v .
+        w
+            Sets the z components of the vector field.
+        wsrc
+            Sets the source reference on plot.ly for  w .
+        x
+            Sets the x coordinates of the vector field and of the
+            displayed cones.
+        xsrc
+            Sets the source reference on plot.ly for  x .
+        y
+            Sets the y coordinates of the vector field and of the
+            displayed cones.
+        ysrc
+            Sets the source reference on plot.ly for  y .
+        z
+            Sets the z coordinates of the vector field and of the
+            displayed cones.
+        zsrc
+            Sets the source reference on plot.ly for  z .
+        row : int or None (default)
+            Subplot row index (starting from 1) for the trace to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`
+        col : int or None (default)
+            Subplot col index (starting from 1) for the trace to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`
+
+        Returns
+        -------
+        Cone
+        """
+        new_trace = Cone(
+            anchor=anchor,
+            autocolorscale=autocolorscale,
+            cauto=cauto,
+            cmax=cmax,
+            cmin=cmin,
+            colorbar=colorbar,
+            colorscale=colorscale,
+            customdata=customdata,
+            customdatasrc=customdatasrc,
+            hoverinfo=hoverinfo,
+            hoverinfosrc=hoverinfosrc,
+            hoverlabel=hoverlabel,
+            ids=ids,
+            idssrc=idssrc,
+            legendgroup=legendgroup,
+            lighting=lighting,
+            lightposition=lightposition,
+            name=name,
+            opacity=opacity,
+            reversescale=reversescale,
+            scene=scene,
+            selectedpoints=selectedpoints,
+            showlegend=showlegend,
+            showscale=showscale,
+            sizemode=sizemode,
+            sizeref=sizeref,
+            stream=stream,
+            text=text,
+            textsrc=textsrc,
+            u=u,
+            uid=uid,
+            usrc=usrc,
+            v=v,
+            visible=visible,
+            vsrc=vsrc,
+            w=w,
+            wsrc=wsrc,
+            x=x,
+            xsrc=xsrc,
+            y=y,
+            ysrc=ysrc,
+            z=z,
+            zsrc=zsrc,
+            **kwargs
+        )
+        return self.add_trace(new_trace, row=row, col=col)
+
     def add_contour(
         self,
         autocolorscale=None,
@@ -1853,7 +2142,7 @@ class FigureWidget(BaseFigureWidget):
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If *y* (the default value), the
             y coordinates refer to `layout.yaxis`. If *y2*, the y
-            coordinates refer to `layout.xaxis2`, and so on.
+            coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
         ysrc
@@ -2151,7 +2440,7 @@ class FigureWidget(BaseFigureWidget):
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If *y* (the default value), the
             y coordinates refer to `layout.yaxis`. If *y2*, the y
-            coordinates refer to `layout.xaxis2`, and so on.
+            coordinates refer to `layout.yaxis2`, and so on.
         z
             Sets the z data.
         zauto
@@ -2420,7 +2709,7 @@ class FigureWidget(BaseFigureWidget):
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If *y* (the default value), the
             y coordinates refer to `layout.yaxis`. If *y2*, the y
-            coordinates refer to `layout.xaxis2`, and so on.
+            coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
         ygap
@@ -2679,7 +2968,7 @@ class FigureWidget(BaseFigureWidget):
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If *y* (the default value), the
             y coordinates refer to `layout.yaxis`. If *y2*, the y
-            coordinates refer to `layout.xaxis2`, and so on.
+            coordinates refer to `layout.yaxis2`, and so on.
         ysrc
             Sets the source reference on plot.ly for  y .
         ytype
@@ -2963,7 +3252,7 @@ class FigureWidget(BaseFigureWidget):
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If *y* (the default value), the
             y coordinates refer to `layout.yaxis`. If *y2*, the y
-            coordinates refer to `layout.xaxis2`, and so on.
+            coordinates refer to `layout.yaxis2`, and so on.
         ybins
             plotly.graph_objs.histogram.YBins instance or dict with
             compatible properties
@@ -3234,7 +3523,7 @@ class FigureWidget(BaseFigureWidget):
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If *y* (the default value), the
             y coordinates refer to `layout.yaxis`. If *y2*, the y
-            coordinates refer to `layout.xaxis2`, and so on.
+            coordinates refer to `layout.yaxis2`, and so on.
         ybins
             plotly.graph_objs.histogram2d.YBins instance or dict
             with compatible properties
@@ -3547,7 +3836,7 @@ class FigureWidget(BaseFigureWidget):
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If *y* (the default value), the
             y coordinates refer to `layout.yaxis`. If *y2*, the y
-            coordinates refer to `layout.xaxis2`, and so on.
+            coordinates refer to `layout.yaxis2`, and so on.
         ybins
             plotly.graph_objs.histogram2dcontour.YBins instance or
             dict with compatible properties
@@ -4055,7 +4344,7 @@ class FigureWidget(BaseFigureWidget):
         represent the `low` and `high` values and the horizontal
         segments represent the `open` and `close` values. Sample points
         where the close value is higher (lower) then the open value are
-        called increasing (decreasing). By default, increasing candles
+        called increasing (decreasing). By default, increasing items
         are drawn in green whereas decreasing are drawn in red.
 
         Parameters
@@ -4163,7 +4452,7 @@ class FigureWidget(BaseFigureWidget):
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If *y* (the default value), the
             y coordinates refer to `layout.yaxis`. If *y2*, the y
-            coordinates refer to `layout.xaxis2`, and so on.
+            coordinates refer to `layout.yaxis2`, and so on.
         row : int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -4753,7 +5042,7 @@ class FigureWidget(BaseFigureWidget):
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If *y* (the default value), the
             y coordinates refer to `layout.yaxis`. If *y2*, the y
-            coordinates refer to `layout.xaxis2`, and so on.
+            coordinates refer to `layout.yaxis2`, and so on.
         ybounds
             Specify `ybounds` in the shape of `[yMin, yMax] to
             avoid looping through the `xy` typed array. Use it in
@@ -5219,7 +5508,7 @@ class FigureWidget(BaseFigureWidget):
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If *y* (the default value), the
             y coordinates refer to `layout.yaxis`. If *y2*, the y
-            coordinates refer to `layout.xaxis2`, and so on.
+            coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
         ysrc
@@ -5738,7 +6027,7 @@ class FigureWidget(BaseFigureWidget):
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If *y* (the default value), the
             y coordinates refer to `layout.yaxis`. If *y2*, the y
-            coordinates refer to `layout.xaxis2`, and so on.
+            coordinates refer to `layout.yaxis2`, and so on.
         row : int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
@@ -6231,7 +6520,7 @@ class FigureWidget(BaseFigureWidget):
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If *y* (the default value), the
             y coordinates refer to `layout.yaxis`. If *y2*, the y
-            coordinates refer to `layout.xaxis2`, and so on.
+            coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
         ysrc
@@ -7274,6 +7563,184 @@ class FigureWidget(BaseFigureWidget):
         )
         return self.add_trace(new_trace, row=row, col=col)
 
+    def add_splom(
+        self,
+        customdata=None,
+        customdatasrc=None,
+        diagonal=None,
+        dimensions=None,
+        hoverinfo=None,
+        hoverinfosrc=None,
+        hoverlabel=None,
+        ids=None,
+        idssrc=None,
+        legendgroup=None,
+        marker=None,
+        name=None,
+        opacity=None,
+        selected=None,
+        selectedpoints=None,
+        showlegend=None,
+        showlowerhalf=None,
+        showupperhalf=None,
+        stream=None,
+        text=None,
+        textsrc=None,
+        uid=None,
+        unselected=None,
+        visible=None,
+        xaxes=None,
+        yaxes=None,
+        row=None,
+        col=None,
+        **kwargs
+    ):
+        """
+        Add a new Splom trace
+        
+        Splom traces generate scatter plot matrix visualizations. Each
+        splom `dimensions` items correspond to a generated axis. Values
+        for each of those dimensions are set in `dimensions[i].values`.
+        Splom traces support all `scattergl` marker style attributes.
+        Specify `layout.grid` attributes and/or layout x-axis and
+        y-axis attributes for more control over the axis positioning
+        and style.
+
+        Parameters
+        ----------
+        customdata
+            Assigns extra data each datum. This may be useful when
+            listening to hover, click and selection events. Note
+            that, *scatter* traces also appends customdata items in
+            the markers DOM elements
+        customdatasrc
+            Sets the source reference on plot.ly for  customdata .
+        diagonal
+            plotly.graph_objs.splom.Diagonal instance or dict with
+            compatible properties
+        dimensions
+            plotly.graph_objs.splom.Dimension instance or dict with
+            compatible properties
+        hoverinfo
+            Determines which trace information appear on hover. If
+            `none` or `skip` are set, no information is displayed
+            upon hovering. But, if `none` is set, click and hover
+            events are still fired.
+        hoverinfosrc
+            Sets the source reference on plot.ly for  hoverinfo .
+        hoverlabel
+            plotly.graph_objs.splom.Hoverlabel instance or dict
+            with compatible properties
+        ids
+            Assigns id labels to each datum. These ids for object
+            constancy of data points during animation. Should be an
+            array of strings, not numbers or any other type.
+        idssrc
+            Sets the source reference on plot.ly for  ids .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
+        marker
+            plotly.graph_objs.splom.Marker instance or dict with
+            compatible properties
+        name
+            Sets the trace name. The trace name appear as the
+            legend item and on hover.
+        opacity
+            Sets the opacity of the trace.
+        selected
+            plotly.graph_objs.splom.Selected instance or dict with
+            compatible properties
+        selectedpoints
+            Array containing integer indices of selected points.
+            Has an effect only for traces that support selections.
+            Note that an empty array means an empty selection where
+            the `unselected` are turned on for all points, whereas,
+            any other non-array values means no selection all where
+            the `selected` and `unselected` styles have no effect.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
+        showlowerhalf
+            Determines whether or not subplots on the lower half
+            from the diagonal are displayed.
+        showupperhalf
+            Determines whether or not subplots on the upper half
+            from the diagonal are displayed.
+        stream
+            plotly.graph_objs.splom.Stream instance or dict with
+            compatible properties
+        text
+            Sets text elements associated with each (x,y) pair to
+            appear on hover. If a single string, the same string
+            appears over all the data points. If an array of
+            string, the items are mapped in order to the this
+            trace's (x,y) coordinates.
+        textsrc
+            Sets the source reference on plot.ly for  text .
+        uid
+
+        unselected
+            plotly.graph_objs.splom.Unselected instance or dict
+            with compatible properties
+        visible
+            Determines whether or not this trace is visible. If
+            *legendonly*, the trace is not drawn, but can appear as
+            a legend item (provided that the legend itself is
+            visible).
+        xaxes
+            Sets the list of x axes corresponding to this splom
+            trace. By default, a splom will match the first N xaxes
+            where N is the number of input dimensions.
+        yaxes
+            Sets the list of y axes corresponding to this splom
+            trace. By default, a splom will match the first N yaxes
+            where N is the number of input dimensions.
+        row : int or None (default)
+            Subplot row index (starting from 1) for the trace to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`
+        col : int or None (default)
+            Subplot col index (starting from 1) for the trace to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`
+
+        Returns
+        -------
+        Splom
+        """
+        new_trace = Splom(
+            customdata=customdata,
+            customdatasrc=customdatasrc,
+            diagonal=diagonal,
+            dimensions=dimensions,
+            hoverinfo=hoverinfo,
+            hoverinfosrc=hoverinfosrc,
+            hoverlabel=hoverlabel,
+            ids=ids,
+            idssrc=idssrc,
+            legendgroup=legendgroup,
+            marker=marker,
+            name=name,
+            opacity=opacity,
+            selected=selected,
+            selectedpoints=selectedpoints,
+            showlegend=showlegend,
+            showlowerhalf=showlowerhalf,
+            showupperhalf=showupperhalf,
+            stream=stream,
+            text=text,
+            textsrc=textsrc,
+            uid=uid,
+            unselected=unselected,
+            visible=visible,
+            xaxes=xaxes,
+            yaxes=yaxes,
+            **kwargs
+        )
+        return self.add_trace(new_trace, row=row, col=col)
+
     def add_surface(
         self,
         autocolorscale=None,
@@ -7908,7 +8375,7 @@ class FigureWidget(BaseFigureWidget):
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If *y* (the default value), the
             y coordinates refer to `layout.yaxis`. If *y2*, the y
-            coordinates refer to `layout.xaxis2`, and so on.
+            coordinates refer to `layout.yaxis2`, and so on.
         ysrc
             Sets the source reference on plot.ly for  y .
         row : int or None (default)

@@ -1,6 +1,7 @@
 from ._violin import ViolinValidator
 from ._table import TableValidator
 from ._surface import SurfaceValidator
+from ._splom import SplomValidator
 from ._scatterternary import ScatterternaryValidator
 from ._scatterpolargl import ScatterpolarglValidator
 from ._scatterpolar import ScatterpolarValidator
@@ -23,6 +24,7 @@ from ._heatmapgl import HeatmapglValidator
 from ._heatmap import HeatmapValidator
 from ._contourcarpet import ContourcarpetValidator
 from ._contour import ContourValidator
+from ._cone import ConeValidator
 from ._choropleth import ChoroplethValidator
 from ._carpet import CarpetValidator
 from ._candlestick import CandlestickValidator
