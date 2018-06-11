@@ -30,3 +30,7 @@ js/node_modules/
 plotlywidget/static/
 
 .pytest_cache
+
+# virtual envs
+vv
+venv
