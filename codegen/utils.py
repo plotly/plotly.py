@@ -334,7 +334,7 @@ class PlotlyNode:
         -------
         str
         """
-        return self.name_undercase + ('s' if self.is_array_element else '')
+        return self.plotly_name + ('s' if self.is_array_element else '')
 
     @property
     def name_validator_class(self) -> str:
