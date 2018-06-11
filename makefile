@@ -17,19 +17,10 @@ setup_subs :
 	make sync_subs
 
 update_default_schema :
-	@echo "Making sure the default-schema.json file is up to date"
-	python -c "import requests;\
-               from requests.compat import json as _json;\
-               response = requests.get('https://api.plot.ly/v2/plot-schema?sha1');\
-               f = open('plotly/package_data/default-schema.json', 'w');\
-               _json.dump(response.json()['schema'], f, indent=4,\
-                          sort_keys=True, separators=(',', ': '));\
-               f.close()"
-	@echo "Auto-generating graph objects based on updated default-schema."
-	@echo "Warning: Make sure you are running 'make update_default_schema' with Python 3.6.
-		   The code generating scripts requires 3.6 to run."
+	@echo "Updating plotly-schema"
+	python setup.py updateschema
+	@echo "Auto-generating graph objects based on updated schema."
 	python setup.py codegen
-
 
 install : sync_subs
 	@echo ""
