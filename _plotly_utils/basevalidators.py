@@ -1,6 +1,5 @@
 import base64
 import numbers
-import six
 import textwrap
 import uuid
 from importlib import import_module
@@ -13,6 +12,8 @@ import re
 # Optional imports
 # ----------------
 import sys
+
+from _plotly_utils.compat import str_types
 
 np = None
 pd = None
@@ -349,7 +350,7 @@ class EnumeratedValidator(BaseValidator):
         # ----------------------------
         # Look for regular expressions
         for v in self.values:
-            if v and isinstance(v, str) and v[0] == '/' and v[-1] == '/':
+            if v and isinstance(v, str_types) and v[0] == '/' and v[-1] == '/':
                 # String is a regex with leading and trailing '/' character
                 regex_str = v[1:-1]
                 self.val_regexs.append(re.compile(regex_str))
@@ -387,7 +388,7 @@ class EnumeratedValidator(BaseValidator):
         """
         Return v with any applicable regex replacements applied
         """
-        if isinstance(v, str):
+        if isinstance(v, str_types):
             for repl_args in self.regex_replacements:
                 if repl_args:
                     v = re.sub(repl_args[0], repl_args[1], v)
@@ -442,7 +443,7 @@ class EnumeratedValidator(BaseValidator):
         """
         Return whether a value matches one of the enumeration options
         """
-        is_str = isinstance(e, str)
+        is_str = isinstance(e, str_types)
         for v, regex in zip(self.values, self.val_regexs):
             if is_str and regex:
                 in_values = fullmatch(regex, e) is not None
@@ -821,7 +822,7 @@ class StringValidator(BaseValidator):
 
             # If strict, make sure all elements are strings.
             if self.strict:
-                invalid_els = [e for e in v if not isinstance(e, str)]
+                invalid_els = [e for e in v if not isinstance(e, str_types)]
                 if invalid_els:
                     self.raise_invalid_elements(invalid_els)
 
@@ -862,10 +863,10 @@ class StringValidator(BaseValidator):
 
         else:
             if self.strict:
-                if not isinstance(v, str):
+                if not isinstance(v, str_types):
                     self.raise_invalid_val(v)
             else:
-                if not isinstance(v, (str, int, float)):
+                if not isinstance(v, str_types + (int, float)):
                     self.raise_invalid_val(v)
 
                 # Convert value to a string
@@ -1081,7 +1082,7 @@ class ColorValidator(BaseValidator):
         if isinstance(v, numbers.Number) and allow_number:
             # If allow_numbers then any number is ok
             return v
-        elif not isinstance(v, str):
+        elif not isinstance(v, str_types):
             # If not allow_numbers then value must be a string
             return None
         else:
@@ -1203,7 +1204,7 @@ class ColorscaleValidator(BaseValidator):
             pass
         if v is None:
             v_valid = True
-        elif isinstance(v, str):
+        elif isinstance(v, str_types):
             v_match = [
                 el for el in ColorscaleValidator.named_colorscales
                 if el.lower() == v.lower()
@@ -1218,7 +1219,7 @@ class ColorscaleValidator(BaseValidator):
                     len(e) != 2 or
                     not isinstance(e[0], numbers.Number) or
                     not (0 <= e[0] <= 1) or
-                    not isinstance(e[1], str) or
+                    not isinstance(e[1], str_types) or
                     ColorValidator.perform_validate_coerce(e[1]) is None)]
 
             if len(invalid_els) == 0:
@@ -1337,7 +1338,7 @@ class SubplotidValidator(BaseValidator):
     def validate_coerce(self, v):
         if v is None:
             pass
-        elif not isinstance(v, str):
+        elif not isinstance(v, str_types):
             self.raise_invalid_val(v)
         else:
             # match = re.fullmatch(self.regex, v)
@@ -1419,7 +1420,7 @@ class FlaglistValidator(BaseValidator):
         return desc
 
     def vc_scalar(self, v):
-        if not isinstance(v, str):
+        if not isinstance(v, str_types):
             return None
 
         # To be generous we accept flags separated on plus ('+'),
@@ -1660,7 +1661,7 @@ class ImageUriValidator(BaseValidator):
     def validate_coerce(self, v):
         if v is None:
             pass
-        elif isinstance(v, str):
+        elif isinstance(v, str_types):
             # Future possibilities:
             #   - Detect filesystem system paths and convert to URI
             #   - Validate either url or data uri
