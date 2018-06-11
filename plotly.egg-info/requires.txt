@@ -1,5 +1,0 @@
-decorator
-nbformat>=4.2
-pytz
-requests
-six
