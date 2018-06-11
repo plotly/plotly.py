@@ -79,7 +79,7 @@ def test_rejection_min(val, validator_min: IntegerValidator):
     with pytest.raises(ValueError) as validation_failure:
         validator_min.validate_coerce(val)
 
-    assert 'in the interval [-1, 2147483647]' in str(validation_failure.value)
+    assert 'in the interval [-1, 9223372036854775807]' in str(validation_failure.value)
 
 
 # ### With max only ###
@@ -96,7 +96,7 @@ def test_rejection_max(val, validator_max: IntegerValidator):
     with pytest.raises(ValueError) as validation_failure:
         validator_max.validate_coerce(val)
 
-    assert 'in the interval [-2147483648, 2]' in str(validation_failure.value)
+    assert 'in the interval [-9223372036854775808, 2]' in str(validation_failure.value)
 
 
 # Array ok
