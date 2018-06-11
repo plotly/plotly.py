@@ -493,7 +493,7 @@ class PlotlyNode:
         """
         return (isinstance(self.node_data, dict_like) and
                 not self.is_simple and
-                self.plotly_name != 'impliedEdits')
+                self.plotly_name not in ('items', 'impliedEdits'))
 
     @property
     def is_literal(self) -> bool:
@@ -516,7 +516,8 @@ class PlotlyNode:
         bool
         """
         return (isinstance(self.node_data, dict_like) and
-                'valType' in self.node_data)
+                'valType' in self.node_data and
+                self.plotly_name != 'items')
 
     @property
     def is_array(self) -> bool:
