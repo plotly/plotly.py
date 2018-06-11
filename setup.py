@@ -9,6 +9,8 @@ import os
 import sys
 import platform
 
+plotly_js_version = '1.38.2'
+
 exec(open('plotly/version.py').read())
 
 here = os.path.dirname(os.path.abspath(__file__))
@@ -157,13 +159,12 @@ class DownloadSchemaCommand(Command):
             raise ImportError('Schema download must be executed with Python 3')
 
         import urllib.request
-        import json
-        with urllib.request.urlopen('https://api.plot.ly/v2/plot-schema?sha1') as response:
-            with open('plotly/package_data/default-schema.json', 'w') as f:
-                f.write(json.dumps(json.load(response)['schema'],
-                                   indent=4,
-                                   sort_keys=True,
-                                   separators=(',', ': ')))
+        url = ('https://raw.githubusercontent.com/plotly/plotly.js/'
+               'v%s/dist/plot-schema.json' % plotly_js_version)
+        with urllib.request.urlopen(url) as response:
+
+            with open('plotly/package_data/plot-schema.json', 'wb') as f:
+                f.write(response.read())
 
 
 setup(name='plotly',

@@ -161,7 +161,7 @@ class BaseValidator(object):
             plotly_name == 'range' and parent_name == 'layout.xaxis'
         role : str
             The role string for the property as specified in
-            default-schema.json
+            plot-schema.json
         """
         self.parent_name = parent_name
         self.plotly_name = plotly_name

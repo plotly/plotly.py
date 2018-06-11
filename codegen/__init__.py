@@ -49,7 +49,7 @@ def perform_codegen():
 
     # Load plotly schema
     # ------------------
-    with open('plotly/package_data/default-schema.json', 'r') as f:
+    with open('plotly/package_data/plot-schema.json', 'r') as f:
         plotly_schema = json.load(f)
 
     # Build node lists
