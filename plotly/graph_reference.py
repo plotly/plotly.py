@@ -68,7 +68,7 @@ def get_graph_reference():
     :return: (dict) The graph reference.
 
     """
-    path = os.path.join('package_data', 'default-schema.json')
+    path = os.path.join('package_data', 'plot-schema.json')
     s = resource_string('plotly', path).decode('utf-8')
     graph_reference = utils.decode_unicode(_json.loads(s))
 

@@ -141,7 +141,7 @@ CUSTOM_VALIDATOR_DATATYPES = {
     'frame.layout': 'plotly.validators.LayoutValidator'
 }
 
-# Mapping from property string (as found in default-schema.json) to a custom
+# Mapping from property string (as found in plot-schema.json) to a custom
 # class name. If not included here, names are converted to TitleCase and
 # underscores are removed.
 OBJECT_NAME_TO_CLASS_NAME = {
@@ -170,7 +170,7 @@ dict_like = (dict, ChainMap)
 # ==================
 class PlotlyNode:
     """
-    Base class that represents a node in the default-schema.json file
+    Base class that represents a node in the plot-schema.json file
     """
 
     # Constructor
