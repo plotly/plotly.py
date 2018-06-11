@@ -29,7 +29,7 @@ from requests.compat import json as _json
 
 from plotly import exceptions, files, session, tools, utils
 from plotly.api import v1, v2
-from plotly.basedatatypes import BaseTraceType
+from plotly.basedatatypes import BaseTraceType, BaseFigure
 from plotly.plotly import chunked_requests
 
 from plotly.graph_objs import Scatter
@@ -146,18 +146,14 @@ def iplot(figure_or_data, **plot_options):
 
     if isinstance(figure_or_data, dict):
         layout = figure_or_data.get('layout', {})
+    elif isinstance(figure_or_data, BaseFigure):
+        layout = figure_or_data.layout.to_plotly_json()
     else:
         layout = {}
 
     embed_options = dict()
-    try:
-        embed_options['width'] = layout.to_plotly_json().get('width', '100%')
-    except AttributeError:
-        embed_options['width'] = layout.get('width', '100%')
-    try:
-        embed_options['height'] = layout.to_plotly_json().get('height', 525)
-    except AttributeError:
-        embed_options['height'] = layout.get('height', 525)
+    embed_options['width'] = layout.get('width', '100%')
+    embed_options['height'] = layout.get('height', 525)
     try:
         float(embed_options['width'])
     except (ValueError, TypeError):
@@ -1855,6 +1851,8 @@ def icreate_animations(figure, filename=None, sharing='public', auto_open=False)
 
     if isinstance(figure, dict):
         layout = figure.get('layout', {})
+    elif isinstance(figure, BaseFigure):
+        layout = figure.layout.to_plotly_json()
     else:
         layout = {}
 
