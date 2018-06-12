@@ -645,7 +645,7 @@ class ElidedPrettyPrinter(PrettyPrinter):
     """
     def __init__(self, *args, **kwargs):
         self.threshold = kwargs.pop('threshold', 200)
-        PrettyPrinter().__init__(*args, **kwargs)
+        super(ElidedPrettyPrinter, self).__init__(*args, **kwargs)
 
     def _format(self, val, stream, indent, allowance, context, level):
         if ElidedWrapper.is_wrappable(val):
@@ -655,5 +655,5 @@ class ElidedPrettyPrinter(PrettyPrinter):
             return self._format(
                 elided_val, stream, indent, allowance, context, level)
         else:
-            return PrettyPrinter()._format(
+            return super(ElidedPrettyPrinter, self)._format(
                 val, stream, indent, allowance, context, level)
