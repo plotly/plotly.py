@@ -29,7 +29,7 @@ from requests.compat import json as _json
 
 from plotly import exceptions, files, session, tools, utils
 from plotly.api import v1, v2
-from plotly.basedatatypes import BaseTraceType, BaseFigure
+from plotly.basedatatypes import BaseTraceType, BaseFigure, BaseLayoutType
 from plotly.plotly import chunked_requests
 
 from plotly.graph_objs import Scatter
@@ -146,6 +146,8 @@ def iplot(figure_or_data, **plot_options):
 
     if isinstance(figure_or_data, dict):
         layout = figure_or_data.get('layout', {})
+        if isinstance(layout, BaseLayoutType):
+            layout = layout.to_plotly_json()
     elif isinstance(figure_or_data, BaseFigure):
         layout = figure_or_data.layout.to_plotly_json()
     else:
@@ -1851,6 +1853,8 @@ def icreate_animations(figure, filename=None, sharing='public', auto_open=False)
 
     if isinstance(figure, dict):
         layout = figure.get('layout', {})
+        if isinstance(layout, BaseLayoutType):
+            layout = layout.to_plotly_json()
     elif isinstance(figure, BaseFigure):
         layout = figure.layout.to_plotly_json()
     else:
