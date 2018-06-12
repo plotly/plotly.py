@@ -75,7 +75,6 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
                                                          **custom_serializers)
     _py2js_removeTraceProps = Dict(allow_none=True).tag(sync=True,
                                                         **custom_serializers)
-    _py2js_svgRequest = Dict(allow_none=True).tag(sync=True)
 
     # ### JS -> Python message properties ###
     # These properties are used to receive messages from the frontend.
@@ -99,8 +98,6 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
                                               **custom_serializers)
     _js2py_pointsCallback = Dict(allow_none=True).tag(sync=True,
                                                       **custom_serializers)
-    _js2py_svgResponse = Dict(allow_none=True).tag(sync=True,
-                                                   **custom_serializers)
 
     # ### Message tracking properties ###
     # The _last_layout_edit_id and _last_trace_edit_id properties are used
@@ -167,186 +164,6 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         # ipywidget property that stores the number of active frontend
         # views of this widget
         self._view_count = 0
-
-        # SVG
-        # ---
-        # Dict of pending SVG requests that have been sent to the frontend
-        self._svg_requests = {}
-
-    def save_image(self, filename, image_type=None, scale_factor=2):
-        """
-        Save figure to a static image file
-
-        Parameters
-        ----------
-        filename : str
-            Image output file name
-        image_type : str
-            Image file type. One of: 'svg', 'png', 'pdf', or 'ps'. If not
-            set, file type is inferred from the filename extension
-        scale_factor : number
-            (For png image type) Factor by which to increase the number of
-            pixels in each dimension. A scale factor of 1 will result in a
-            image with pixel dimensions (layout.width, layout.height).  A
-            scale factor of 2 will result in an image with dimensions
-            (2*layout.width, 2*layout.height),
-            doubling image's DPI. (Default 2)
-        """
-
-        # Validate / infer image_type
-        # ---------------------------
-        supported_image_types = ['svg', 'png', 'pdf', 'ps']
-        cairo_image_types = ['png', 'pdf', 'ps']
-        supported_types_csv = ', '.join(supported_image_types)
-
-        # ### Image type found ###
-        if not image_type:
-            # Infer image type from extension
-            _, extension = os.path.splitext(filename)
-
-            if not extension:
-                raise ValueError('No image_type specified and file extension has no extension '
-                                 'from which to infer an image type '
-                                 'Supported image types are: {image_types}'
-                                 .format(image_types=supported_types_csv))
-
-            image_type = extension[1:]
-
-        # ### Image type supported ###
-        image_type = image_type.lower()
-        if image_type not in supported_image_types:
-            raise ValueError("Unsupported image type '{image_type}'\n"
-                             "Supported image types are: {image_types}"
-                             .format(image_type=image_type,
-                                     image_types=supported_types_csv))
-
-        # ### Dependencies available for image type ###
-        # Validate cairo dependency
-        if image_type in cairo_image_types:
-            # Check whether we have cairosvg available
-            try:
-                import_module('cairosvg')
-            except ImportError:
-                raise ImportError('Exporting to {image_type} requires cairosvg'
-                                  .format(image_type=image_type))
-
-        # ### Validate scale_factor ###
-        if not isinstance(scale_factor, numbers.Number) or scale_factor <= 0:
-            raise ValueError(
-                'scale_factor must be a positive number.\n'
-                '    Received: {scale_factor}'.format(
-                    scale_factor=scale_factor
-                )
-            )
-
-        # Build image request
-        # -------------------
-        # ### Create UID for request ###
-        req_id = str(uuid.uuid1())
-
-        # ### Register request ###
-        self._svg_requests[req_id] = {'filename': filename,
-                                      'image_type': image_type,
-                                      'scale_factor': scale_factor}
-
-        # ### Send request to the frontend###
-        self._py2js_svgRequest = {'request_id': req_id}
-        self._py2js_svgRequest = None
-
-    @observe('_js2py_svgResponse')
-    def _handler_js2py_svgResponse(self, change):
-        """
-        Handle _js2py_svgResponse message from the frontend
-
-        Parameters
-        ----------
-        change : dict
-            Message dict containing the following keys:
-            - request_id: str
-              The UID of the image request that triggered this message
-            - svg_uri: str
-              The SVG image encoded as a data uri
-              (e.g. 'data:image/svg+xml,...')
-        """
-
-        # Receive message
-        # ---------------
-        response_data = change['new']
-        self._js2py_svgResponse = None
-
-        if not response_data:
-            return
-
-        # Extract message fields
-        # ----------------------
-        req_id = response_data['request_id']
-        svg_uri = response_data['svg_uri']
-
-        # Save image
-        # ----------
-        self._do_save_image(req_id, svg_uri)
-
-    def _do_save_image(self, req_id, svg_uri):
-        """
-        Save requested image to a file
-
-        Parameters
-        ----------
-        req_id : str
-            The UID of the image request that triggered this message
-        svg_uri :
-            The SVG image encoded as a data uri
-              (e.g. 'data:image/svg+xml,...')
-        """
-
-        # Get request info
-        # ----------------
-        # Lack of request info means that widget has multiple frontend views
-        # and that the request was already processed.
-        req_info = self._svg_requests.pop(req_id, None)
-        if not req_info:
-            return
-        filename = req_info['filename']
-        image_type = req_info['image_type']
-        scale_factor = req_info['scale_factor']
-
-        # Convert URI string to svg bytes
-        # -------------------------------
-
-        # ### Remove URI prefix###
-        if not svg_uri.startswith('data:image/svg+xml,'):
-            raise ValueError('Invalid svg data URI: ' + svg_uri[:20])
-
-        svg = svg_uri.replace('data:image/svg+xml,', '')
-
-        # ### Unquote special characters ###
-        # (e.g. '%3Csvg%20' -> '<svg ')
-        svg_bytes = parse.unquote(svg).encode('utf-8')
-
-        # Save as svg
-        # -----------
-        # This requires no external dependencies
-        if image_type == 'svg':
-            with open(filename, 'wb') as f:
-                f.write(svg_bytes)
-
-        # Save as cairo image type
-        # ------------------------
-        else:
-            # We already made sure cairosvg is available in save_image
-            cairosvg = import_module('cairosvg')
-
-            if image_type == 'png':
-                cairosvg.svg2png(
-                    bytestring=svg_bytes,
-                    write_to=filename,
-                    scale=scale_factor)
-            elif image_type == 'pdf':
-                cairosvg.svg2pdf(
-                    bytestring=svg_bytes, write_to=filename)
-            elif image_type == 'ps':
-                cairosvg.svg2ps(
-                    bytestring=svg_bytes, write_to=filename)
 
     # Python -> JavaScript Messages
     # -----------------------------
