@@ -41,6 +41,17 @@ def fullmatch(regex, string, flags=0):
 
 # Utility functions
 # -----------------
+def to_scalar_or_list(v):
+    if isinstance(v, (list, tuple)):
+        return [to_scalar_or_list(e) for e in v]
+    elif np and isinstance(v, np.ndarray):
+        return [to_scalar_or_list(e) for e in v]
+    elif pd and isinstance(v, (pd.Series, pd.Index)):
+        return [to_scalar_or_list(e) for e in v]
+    else:
+        return v
+
+
 def copy_to_readonly_numpy_array(v, dtype=None, force_numeric=False):
     """
     Convert an array-like value into a read-only numpy array
@@ -73,7 +84,8 @@ def copy_to_readonly_numpy_array(v, dtype=None, force_numeric=False):
     numeric_kinds = ['u', 'i', 'f']
 
     if not isinstance(v, np.ndarray):
-        new_v = np.array(v, order='C', dtype=dtype)
+        v_list = [to_scalar_or_list(e) for e in v]
+        new_v = np.array(v_list, order='C', dtype=dtype)
     elif v.dtype.kind in numeric_kinds:
         new_v = np.ascontiguousarray(v.astype(dtype))
     else:
@@ -113,7 +125,7 @@ def is_homogeneous_array(v):
     Return whether a value is considered to be a homogeneous array
     """
     return ((np and isinstance(v, np.ndarray)) or
-            (pd and isinstance(v, pd.Series)))
+            (pd and isinstance(v, (pd.Series, pd.Index))))
 
 
 def is_simple_array(v):
@@ -296,7 +308,7 @@ class DataArrayValidator(BaseValidator):
         elif is_homogeneous_array(v):
             v = copy_to_readonly_numpy_array(v)
         elif is_simple_array(v):
-            v = list(v)
+            v = to_scalar_or_list(v)
         else:
             self.raise_invalid_val(v)
         return v
@@ -469,7 +481,7 @@ class EnumeratedValidator(BaseValidator):
             if is_homogeneous_array(v):
                 v = copy_to_readonly_numpy_array(v)
             else:
-                v = list(v)
+                v = to_scalar_or_list(v)
         else:
             v = self.perform_replacemenet(v)
             if not self.in_values(v):
@@ -616,7 +628,7 @@ class NumberValidator(BaseValidator):
                 if invalid_els:
                     self.raise_invalid_elements(invalid_els[:10])
 
-            v = list(v)
+            v = to_scalar_or_list(v)
         else:
             # Check numeric
             if not isinstance(v, numbers.Number):
@@ -734,7 +746,7 @@ class IntegerValidator(BaseValidator):
                 if invalid_els:
                     self.raise_invalid_elements(invalid_els[:10])
 
-            v = list(v)
+            v = to_scalar_or_list(v)
         else:
             # Check int
             if not isinstance(v, int):
@@ -858,7 +870,7 @@ class StringValidator(BaseValidator):
                     if invalid_els:
                         self.raise_invalid_elements(invalid_els)
 
-                v = list(v)
+                v = to_scalar_or_list(v)
 
         else:
             if self.strict:
@@ -1145,7 +1157,7 @@ class ColorlistValidator(BaseValidator):
             if invalid_els:
                 self.raise_invalid_elements(invalid_els)
 
-            v = list(v)
+            v = to_scalar_or_list(v)
         else:
             self.raise_invalid_val(v)
         return v
@@ -1461,7 +1473,7 @@ class FlaglistValidator(BaseValidator):
             if is_homogeneous_array(v):
                 v = copy_to_readonly_numpy_array(validated_v, dtype='unicode')
             else:
-                v = list(v)
+                v = to_scalar_or_list(v)
         else:
 
             validated_v = self.vc_scalar(v)
@@ -1511,7 +1523,7 @@ class AnyValidator(BaseValidator):
         elif self.array_ok and is_homogeneous_array(v):
             v = copy_to_readonly_numpy_array(v, dtype='object')
         elif self.array_ok and is_simple_array(v):
-            v = list(v)
+            v = to_scalar_or_list(v)
         return v
 
 
@@ -1595,7 +1607,7 @@ class InfoArrayValidator(BaseValidator):
             self.raise_invalid_val(v)
         else:
             # We have an array of the correct length
-            v = list(v)
+            v = to_scalar_or_list(v)
             for i, (el, validator) in enumerate(zip(v, self.item_validators)):
                 # Validate coerce elements
                 v[i] = validator.validate_coerce(el)
@@ -1816,7 +1828,7 @@ class CompoundArrayValidator(BaseValidator):
             if invalid_els:
                 self.raise_invalid_elements(invalid_els)
 
-            v = list(res)
+            v = to_scalar_or_list(res)
         else:
             self.raise_invalid_val(v)
 
@@ -1915,7 +1927,7 @@ class BaseDataValidator(BaseValidator):
             if invalid_els:
                 self.raise_invalid_elements(invalid_els)
 
-            v = list(res)
+            v = to_scalar_or_list(res)
 
             # Set new UIDs
             for trace in v:
