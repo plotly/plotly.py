@@ -1555,9 +1555,10 @@ Invalid property path '{key_path_str}' for layout
         # Dispatch changes to each layout objects
         # ---------------------------------------
         for path_tuple, changed_paths in dispatch_plan.items():
-            dispatch_obj = self.layout[path_tuple]
-            if isinstance(dispatch_obj, BasePlotlyType):
-                dispatch_obj._dispatch_change_callbacks(changed_paths)
+            if path_tuple in self.layout:
+                dispatch_obj = self.layout[path_tuple]
+                if isinstance(dispatch_obj, BasePlotlyType):
+                    dispatch_obj._dispatch_change_callbacks(changed_paths)
 
     def _dispatch_trace_change_callbacks(self, restyle_data, trace_indexes):
         """
