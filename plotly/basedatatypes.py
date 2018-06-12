@@ -1585,9 +1585,10 @@ Invalid property path '{key_path_str}' for layout
         for path_tuple, changed_paths in dispatch_plan.items():
             for trace_ind in trace_indexes:
                 trace = self.data[trace_ind]
-                dispatch_obj = trace[path_tuple]
-                if isinstance(dispatch_obj, BasePlotlyType):
-                    dispatch_obj._dispatch_change_callbacks(changed_paths)
+                if path_tuple in trace:
+                    dispatch_obj = trace[path_tuple]
+                    if isinstance(dispatch_obj, BasePlotlyType):
+                        dispatch_obj._dispatch_change_callbacks(changed_paths)
 
     # Frames
     # ------
