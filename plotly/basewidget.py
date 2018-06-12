@@ -9,7 +9,7 @@ except ImportError:
 
 import ipywidgets as widgets
 from traitlets import List, Unicode, Dict, observe, Integer
-from .basedatatypes import BaseFigure, BasePlotlyType
+from .basedatatypes import BaseFigure, BasePlotlyType, fullmatch
 from .callbacks import (BoxSelector, LassoSelector,
                         InputDeviceState, Points)
 from .serializers import custom_serializers
@@ -544,6 +544,16 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
 
                 self._py2js_removeLayoutProps = remove_props_msg
                 self._py2js_removeLayoutProps = None
+
+            # ### Create axis objects ###
+            # For example, when a SPLOM trace is created the layout defaults
+            # may include axes that weren't explicitly defined by the user.
+            for proppath in delta_transform:
+                prop = proppath[0]
+                match = fullmatch(self.layout._subplotid_prop_re, prop)
+                if match and prop not in self.layout:
+                    # We need to create a subplotid object
+                    self.layout[prop] = {}
 
             # ### Dispatch change callbacks ###
             self._dispatch_layout_change_callbacks(delta_transform)
