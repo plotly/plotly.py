@@ -8,8 +8,7 @@ from distutils import log
 import os
 import sys
 import platform
-
-plotly_js_version = '1.38.2'
+import json
 
 exec(open('plotly/version.py').read())
 
@@ -21,6 +20,16 @@ npm_path = os.pathsep.join([
     os.path.join(node_root, 'node_modules', '.bin'),
                 os.environ.get('PATH', os.defpath),
 ])
+
+
+# Load plotly.js version from js/package.json
+def plotly_js_version():
+    with open('js/package.json', 'rt') as f:
+        package_json = json.load(f)
+        version = package_json['dependencies']['plotly.js']
+
+    return version
+
 
 def readme():
     with open('README.rst') as f:
@@ -138,13 +147,14 @@ class CodegenCommand(Command):
 
     def run(self):
         if sys.version_info.major != 3 or sys.version_info.minor < 6:
-            raise ImportError('Code generation must be executed with Python >= 3.6')
+            raise ImportError(
+                'Code generation must be executed with Python >= 3.6')
 
         from codegen import perform_codegen
         perform_codegen()
 
 
-class DownloadSchemaCommand(Command):
+class UpdateSchemaCommand(Command):
     description = 'Download latest version of the plot-schema JSON file'
     user_options = []
 
@@ -160,14 +170,14 @@ class DownloadSchemaCommand(Command):
 
         import urllib.request
         url = ('https://raw.githubusercontent.com/plotly/plotly.js/'
-               'v%s/dist/plot-schema.json' % plotly_js_version)
+               'v%s/dist/plot-schema.json' % plotly_js_version())
         with urllib.request.urlopen(url) as response:
 
             with open('plotly/package_data/plot-schema.json', 'wb') as f:
                 f.write(response.read())
 
 
-class DownloadPlotlyJsCommand(Command):
+class UpdateBundleCommand(Command):
     description = 'Download latest version of the plot-schema JSON file'
     user_options = []
 
@@ -183,11 +193,27 @@ class DownloadPlotlyJsCommand(Command):
 
         import urllib.request
         url = ('https://raw.githubusercontent.com/plotly/plotly.js/'
-               'v%s/dist/plotly.min.js' % plotly_js_version)
+               'v%s/dist/plotly.min.js' % plotly_js_version())
         with urllib.request.urlopen(url) as response:
 
             with open('plotly/package_data/plotly.min.js', 'wb') as f:
                 f.write(response.read())
+
+
+class UpdatePlotlyJsCommand(Command):
+    description = 'Update project to a new version of plotly.js'
+    user_options = []
+
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        self.run_command('updatebundle')
+        self.run_command('updateschema')
+        self.run_command('codegen')
 
 
 graph_objs_packages = [
@@ -260,7 +286,8 @@ setup(name='plotly',
           'sdist': js_prerelease(sdist, strict=True),
           'jsdeps': NPM,
           'codegen': CodegenCommand,
-          'updateschema': DownloadSchemaCommand,
-          'updateplotlyjs': DownloadPlotlyJsCommand
+          'updateschema': UpdateSchemaCommand,
+          'updatebundle': UpdateBundleCommand,
+          'updateplotlyjs': js_prerelease(UpdatePlotlyJsCommand)
       },
 )
