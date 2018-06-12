@@ -3663,7 +3663,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         None
         """
         if not append:
-            self._hover_callbacks.clear()
+            del self._hover_callbacks[:]
 
         if callback:
             self._hover_callbacks.append(callback)
@@ -3709,7 +3709,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         None
         """
         if not append:
-            self._unhover_callbacks.clear()
+            del self._unhover_callbacks[:]
 
         if callback:
             self._unhover_callbacks.append(callback)
@@ -3755,7 +3755,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         None
         """
         if not append:
-            self._click_callbacks.clear()
+            del self._click_callbacks[:]
         if callback:
             self._click_callbacks.append(callback)
 
@@ -3801,7 +3801,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         None
         """
         if not append:
-            self._select_callbacks.clear()
+            del self._select_callbacks[:]
 
         if callback:
             self._select_callbacks.append(callback)
