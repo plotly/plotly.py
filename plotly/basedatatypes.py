@@ -1,6 +1,7 @@
 import collections
 import re
 import six
+from six import string_types
 import warnings
 from contextlib import contextmanager
 from copy import deepcopy, copy
@@ -3453,7 +3454,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         # e.g. ('xaxis', 'range') or 'xaxis.range'
         prop_tuple = BaseFigure._str_to_dict_path(prop)
         if (len(prop_tuple) != 1 or
-                not isinstance(prop_tuple[0], str)):
+                not isinstance(prop_tuple[0], string_types)):
             return prop
         else:
             # Unwrap to scalar string
@@ -3462,7 +3463,6 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         # Handle subplot suffix digit of 1
         # --------------------------------
         # Remove digit of 1 from subplot id (e.g.. xaxis1 -> xaxis)
-        #match = self._subplotid_prop_re.fullmatch(prop)
         match = fullmatch(self._subplotid_prop_re, prop)
 
         if match:
@@ -3505,7 +3505,8 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         # Convert prop to prop tuple
         # --------------------------
         prop_tuple = BaseFigure._str_to_dict_path(prop)
-        if len(prop_tuple) != 1 or not isinstance(prop_tuple[0], str):
+        if len(prop_tuple) != 1 or not isinstance(prop_tuple[0],
+                                                  string_types):
             # Let parent handle non-scalar non-string cases
             super(BaseLayoutHierarchyType, self).__setitem__(prop, value)
             return
@@ -3516,7 +3517,6 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         # Check for subplot assignment
         # ----------------------------
         match = fullmatch(self._subplotid_prop_re, prop)
-        # match = self._subplotid_prop_re.fullmatch(prop)
         if match is None:
             # Set as ordinary property
             super(BaseLayoutHierarchyType, self).__setitem__(prop, value)
