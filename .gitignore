@@ -10,10 +10,6 @@
 
 *.tox
 
-build
-
-dist
-
 debug_script.py
 
 test_output.txt
@@ -30,3 +26,12 @@ js/node_modules/
 plotlywidget/static/
 
 .pytest_cache
+
+# virtual envs
+vv
+venv
+
+# dist files
+build
+dist
+plotly.egg-info/
