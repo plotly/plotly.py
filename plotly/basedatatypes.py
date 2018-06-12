@@ -2064,39 +2064,6 @@ Invalid property path '{key_path_str}' for layout
         """
         return self.to_dict()
 
-    def save_html(self, filename, auto_open=False, responsive=False):
-        """
-        Save figure to a standalone html file
-
-        Parameters
-        ----------
-        filename : str
-            Full path and filename of the html file to be created
-        auto_open : bool
-            True if the the newly created HTML file be opened automatically,
-            False otherwise
-        responsive : bool
-            True if the figure in the resulting HTML should automatically
-            resize to fill the browser. If false then the width and height
-            will be fixed to the figure layout's width and heigh respectively
-        Returns
-        -------
-        None
-        """
-        data = self.to_dict()
-        if responsive:
-            if 'height' in data['layout']:
-                data['layout'].pop('height')
-            if 'width' in data['layout']:
-                data['layout'].pop('width')
-        else:
-            # Assign width/height explicitly in case these were defaults
-            data['layout']['height'] = self.layout.height
-            data['layout']['width'] = self.layout.width
-
-        pyo.plot(data, filename=filename, show_link=False,
-                 auto_open=auto_open)
-
     # Static helpers
     # --------------
     @staticmethod

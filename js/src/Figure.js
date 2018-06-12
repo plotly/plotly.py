@@ -190,14 +190,6 @@ var FigureModel = widgets.DOMWidgetModel.extend({
         _py2js_removeTraceProps: null,
 
 
-        /**
-         * @typedef {null|Object} Py2JsSvgRequestMsg
-         * @property {String} request_id
-         *  Unique svg request identifier. This identifier is returned
-         *  along with the SVG image
-         */
-        _py2js_svgRequest: null,
-
         // JS -> Python messages
         // ---------------------
         // Messages are sent by the JavaScript side by assigning the
@@ -373,19 +365,6 @@ var FigureModel = widgets.DOMWidgetModel.extend({
          *  for other event types
          */
         _js2py_pointsCallback: null,
-
-        // SVG image request message
-        // -------------------------
-        /**
-         * @typedef {Object} Js2PySvgResponseMsg
-         * @property {String} request_id
-         *  Unique identifier of the Py2JsSvgRequestMsg message that
-         *  triggered this response
-         * @property {String} svg_uri
-         *  Response svg image encoded as a data uri string
-         *  e.g. 'data:image/svg+xml;base64,...'
-         */
-        _js2py_svgResponse: null,
 
         // Message tracking
         // ----------------
@@ -739,8 +718,6 @@ var FigureView = widgets.DOMWidgetView.extend({
             this.do_update, this);
         this.model.on("change:_py2js_animate",
             this.do_animate, this);
-        this.model.on("change:_py2js_svgRequest",
-            this.do_svgRequest, this);
 
         // Get message ids
         // ---------------------
@@ -1340,30 +1317,6 @@ var FigureView = widgets.DOMWidgetView.extend({
                     that._sendLayoutDelta(layout_edit_id);
                 });
 
-        }
-    },
-
-    /**
-     * Handle svg image request
-     */
-    do_svgRequest: function() {
-        console.log("FigureView: do_svgRequest");
-
-        /** @type {Py2JsSvgRequestMsg} */
-        var msgData = this.model.get("_py2js_svgRequest");
-        var that = this;
-        if (msgData !== null) {
-            var req_id = msgData.request_id;
-            Plotly.toImage(this.el, {format: "svg"}).then(function (svg_uri) {
-
-                /** @type {Js2PySvgResponseMsg} */
-                var responseMsg = {
-                    request_id: req_id,
-                    svg_uri: svg_uri
-                };
-                that.model.set("_js2py_svgResponse", responseMsg);
-                that.touch();
-            });
         }
     },
 
