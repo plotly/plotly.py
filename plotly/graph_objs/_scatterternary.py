@@ -14,7 +14,7 @@ class Scatterternary(BaseTraceType):
         provided they must be normalized to match `ternary<i>.sum`.
     
         The 'a' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -58,7 +58,7 @@ class Scatterternary(BaseTraceType):
         provided they must be normalized to match `ternary<i>.sum`.
     
         The 'b' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -102,7 +102,7 @@ class Scatterternary(BaseTraceType):
         provided they must be normalized to match `ternary<i>.sum`.
     
         The 'c' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -190,7 +190,7 @@ class Scatterternary(BaseTraceType):
         DOM elements
     
         The 'customdata' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -492,7 +492,7 @@ class Scatterternary(BaseTraceType):
         not numbers or any other type.
     
         The 'ids' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------

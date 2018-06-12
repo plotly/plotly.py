@@ -32,7 +32,7 @@ class Dimension(BaseTraceHierarchyType):
         Sets the dimension values to be plotted.
     
         The 'values' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------

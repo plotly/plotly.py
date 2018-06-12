@@ -14,7 +14,7 @@ class Pie(BaseTraceType):
         DOM elements
     
         The 'customdata' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -300,7 +300,7 @@ class Pie(BaseTraceType):
         not numbers or any other type.
     
         The 'ids' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -412,7 +412,7 @@ class Pie(BaseTraceType):
         label.
     
         The 'labels' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -789,7 +789,7 @@ class Pie(BaseTraceType):
         hover labels.
     
         The 'text' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -961,7 +961,7 @@ class Pie(BaseTraceType):
         we count occurrences of each label.
     
         The 'values' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------

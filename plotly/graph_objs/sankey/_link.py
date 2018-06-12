@@ -94,7 +94,7 @@ class Link(BaseTraceHierarchyType):
         The shown name of the link.
     
         The 'label' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -172,7 +172,7 @@ class Link(BaseTraceHierarchyType):
         source node.
     
         The 'source' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -214,7 +214,7 @@ class Link(BaseTraceHierarchyType):
         target node.
     
         The 'target' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -255,7 +255,7 @@ class Link(BaseTraceHierarchyType):
         A numeric value representing the flow volume value.
     
         The 'value' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------

@@ -11,7 +11,7 @@ class Contourcarpet(BaseTraceType):
         Sets the x coordinates.
     
         The 'a' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -141,7 +141,7 @@ class Contourcarpet(BaseTraceType):
         Sets the y coordinates.
     
         The 'b' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -588,7 +588,7 @@ class Contourcarpet(BaseTraceType):
         DOM elements
     
         The 'customdata' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -831,7 +831,7 @@ class Contourcarpet(BaseTraceType):
         not numbers or any other type.
     
         The 'ids' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -1117,7 +1117,7 @@ class Contourcarpet(BaseTraceType):
         Sets the text elements associated with each z value.
     
         The 'text' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -1270,7 +1270,7 @@ class Contourcarpet(BaseTraceType):
         Sets the z data.
     
         The 'z' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------

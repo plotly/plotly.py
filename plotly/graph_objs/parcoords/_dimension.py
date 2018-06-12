@@ -133,7 +133,7 @@ class Dimension(BaseTraceHierarchyType):
         `tickvals`.
     
         The 'ticktext' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -175,7 +175,7 @@ class Dimension(BaseTraceHierarchyType):
         effect if `tickmode` is set to *array*. Used with `ticktext`.
     
         The 'tickvals' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -219,7 +219,7 @@ class Dimension(BaseTraceHierarchyType):
         Each value must be a finite number.
     
         The 'values' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------

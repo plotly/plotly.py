@@ -494,7 +494,7 @@ class Mesh3d(BaseTraceType):
         DOM elements
     
         The 'customdata' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -560,7 +560,7 @@ class Mesh3d(BaseTraceType):
         *vertexcolor*.
     
         The 'facecolor' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -726,7 +726,7 @@ class Mesh3d(BaseTraceType):
         space, which is the first vertex of a triangle.
     
         The 'i' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -748,7 +748,7 @@ class Mesh3d(BaseTraceType):
         not numbers or any other type.
     
         The 'ids' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -790,7 +790,7 @@ class Mesh3d(BaseTraceType):
         meshes
     
         The 'intensity' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -858,7 +858,7 @@ class Mesh3d(BaseTraceType):
         space, which is the second vertex of a triangle.
     
         The 'j' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -905,7 +905,7 @@ class Mesh3d(BaseTraceType):
         space, which is the third vertex of a triangle.
     
         The 'k' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -1303,7 +1303,7 @@ class Mesh3d(BaseTraceType):
         Sets the color of each vertex Overrides *color*.
     
         The 'vertexcolor' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -1369,7 +1369,7 @@ class Mesh3d(BaseTraceType):
         coordinates of the nth vertex.
     
         The 'x' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -1436,7 +1436,7 @@ class Mesh3d(BaseTraceType):
         coordinates of the nth vertex.
     
         The 'y' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -1503,7 +1503,7 @@ class Mesh3d(BaseTraceType):
         coordinates of the nth vertex.
     
         The 'z' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------

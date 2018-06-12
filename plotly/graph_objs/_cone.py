@@ -390,7 +390,7 @@ class Cone(BaseTraceType):
         DOM elements
     
         The 'customdata' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -530,7 +530,7 @@ class Cone(BaseTraceType):
         not numbers or any other type.
     
         The 'ids' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -954,7 +954,7 @@ class Cone(BaseTraceType):
         Sets the x components of the vector field.
     
         The 'u' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -1014,7 +1014,7 @@ class Cone(BaseTraceType):
         Sets the y components of the vector field.
     
         The 'v' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -1078,7 +1078,7 @@ class Cone(BaseTraceType):
         Sets the z components of the vector field.
     
         The 'w' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -1120,7 +1120,7 @@ class Cone(BaseTraceType):
         cones.
     
         The 'x' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -1162,7 +1162,7 @@ class Cone(BaseTraceType):
         cones.
     
         The 'y' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -1204,7 +1204,7 @@ class Cone(BaseTraceType):
         cones.
     
         The 'z' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
