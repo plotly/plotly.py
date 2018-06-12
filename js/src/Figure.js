@@ -712,12 +712,13 @@ var FigureModel = widgets.DOMWidgetModel.extend({
 var FigureView = widgets.DOMWidgetView.extend({
 
     /**
-     * The render method is called when a view is first displayed to a
-     * notebook output cell. This happens after the initialize of the
+     * The perform_render method is called by processPhosphorMessage
+     * after the widget's DOM element has been attached to the notebook
+     * output cell. This happens after the initialize of the
      * FigureModel, and it won't happen at all if the Python FigureWidget
      * is never displayed in a notebook output cell
      */
-    render: function() {
+    perform_render: function() {
 
         var that = this;
 
@@ -809,6 +810,19 @@ var FigureView = widgets.DOMWidgetView.extend({
                     });
             });
     },
+
+    /**
+     * Respond to phosphorjs events
+     */
+    processPhosphorMessage: function(msg) {
+        FigureView.__super__.processPhosphorMessage.apply(this, arguments);
+        switch (msg.type) {
+            case 'after-attach':
+                this.perform_render();
+                break;
+        }
+    },
+
     /**
      * Purge Plotly.js data structures from the notebook output display
      * element when the view is destroyed
