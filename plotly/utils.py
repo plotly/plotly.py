@@ -575,7 +575,7 @@ def _list_repr_elided(v, threshold=200, edgeitems=3, indent=0, width=80):
     return v_wrapped
 
 
-class ElidedWrapper:
+class ElidedWrapper(object):
     """
     Helper class that wraps values of certain types and produces a custom
     __repr__() that may be elided and is suitable for use during pretty
@@ -645,7 +645,7 @@ class ElidedPrettyPrinter(PrettyPrinter):
     """
     def __init__(self, *args, **kwargs):
         self.threshold = kwargs.pop('threshold', 200)
-        super(ElidedPrettyPrinter, self).__init__(*args, **kwargs)
+        PrettyPrinter.__init__(self, *args, **kwargs)
 
     def _format(self, val, stream, indent, allowance, context, level):
         if ElidedWrapper.is_wrappable(val):
@@ -655,5 +655,5 @@ class ElidedPrettyPrinter(PrettyPrinter):
             return self._format(
                 elided_val, stream, indent, allowance, context, level)
         else:
-            return super(ElidedPrettyPrinter, self)._format(
-                val, stream, indent, allowance, context, level)
+            return PrettyPrinter._format(
+                self, val, stream, indent, allowance, context, level)
