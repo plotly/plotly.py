@@ -142,7 +142,7 @@ class Cells(BaseTraceHierarchyType):
         b.com/d3/d3-format/blob/master/README.md#locale_format
     
         The 'format' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -326,7 +326,7 @@ class Cells(BaseTraceHierarchyType):
         truncated). Each value must be a finite number or a string.
     
         The 'values' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------

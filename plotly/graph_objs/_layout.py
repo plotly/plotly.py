@@ -892,7 +892,7 @@ class Layout(BaseLayoutType):
     def hiddenlabels(self):
         """
         The 'hiddenlabels' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------

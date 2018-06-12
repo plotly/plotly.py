@@ -333,7 +333,7 @@ class Histogram2d(BaseTraceType):
         DOM elements
     
         The 'customdata' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -533,7 +533,7 @@ class Histogram2d(BaseTraceType):
         not numbers or any other type.
     
         The 'ids' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -877,7 +877,7 @@ class Histogram2d(BaseTraceType):
         Sets the sample data to be binned on the x axis.
     
         The 'x' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -1017,7 +1017,7 @@ class Histogram2d(BaseTraceType):
         Sets the sample data to be binned on the y axis.
     
         The 'y' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -1157,7 +1157,7 @@ class Histogram2d(BaseTraceType):
         Sets the aggregation data.
     
         The 'z' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------

@@ -11,7 +11,7 @@ class Candlestick(BaseTraceType):
         Sets the close values.
     
         The 'close' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -55,7 +55,7 @@ class Candlestick(BaseTraceType):
         DOM elements
     
         The 'customdata' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -128,7 +128,7 @@ class Candlestick(BaseTraceType):
         Sets the high values.
     
         The 'high' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -268,7 +268,7 @@ class Candlestick(BaseTraceType):
         not numbers or any other type.
     
         The 'ids' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -394,7 +394,7 @@ class Candlestick(BaseTraceType):
         Sets the low values.
     
         The 'low' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -477,7 +477,7 @@ class Candlestick(BaseTraceType):
         Sets the open values.
     
         The 'open' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -706,7 +706,7 @@ class Candlestick(BaseTraceType):
         generated.
     
         The 'x' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------

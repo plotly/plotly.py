@@ -11,7 +11,7 @@ class Carpet(BaseTraceType):
         An array containing values of the first parameter value
     
         The 'a' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -297,7 +297,7 @@ class Carpet(BaseTraceType):
         A two dimensional array of y coordinates at each carpet point.
     
         The 'b' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -692,7 +692,7 @@ class Carpet(BaseTraceType):
         DOM elements
     
         The 'customdata' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -917,7 +917,7 @@ class Carpet(BaseTraceType):
         not numbers or any other type.
     
         The 'ids' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -1145,7 +1145,7 @@ class Carpet(BaseTraceType):
         by default.
     
         The 'x' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -1211,7 +1211,7 @@ class Carpet(BaseTraceType):
         A two dimensional array of y coordinates at each carpet point.
     
         The 'y' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------

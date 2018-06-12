@@ -14,7 +14,7 @@ class Pointcloud(BaseTraceType):
         DOM elements
     
         The 'customdata' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -154,7 +154,7 @@ class Pointcloud(BaseTraceType):
         not numbers or any other type.
     
         The 'ids' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -201,7 +201,7 @@ class Pointcloud(BaseTraceType):
         and reuse it on each `Plotly.restyle()` call.
     
         The 'indices' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -529,7 +529,7 @@ class Pointcloud(BaseTraceType):
         Sets the x coordinates.
     
         The 'x' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -576,7 +576,7 @@ class Pointcloud(BaseTraceType):
         with `xy` and `ybounds` for the performance benefits.
     
         The 'xbounds' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -641,7 +641,7 @@ class Pointcloud(BaseTraceType):
         1] = y[i]`
     
         The 'xy' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -682,7 +682,7 @@ class Pointcloud(BaseTraceType):
         Sets the y coordinates.
     
         The 'y' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -729,7 +729,7 @@ class Pointcloud(BaseTraceType):
         with `xy` and `xbounds` for the performance benefits.
     
         The 'ybounds' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------

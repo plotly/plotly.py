@@ -307,7 +307,7 @@ class Heatmap(BaseTraceType):
         DOM elements
     
         The 'customdata' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -487,7 +487,7 @@ class Heatmap(BaseTraceType):
         not numbers or any other type.
     
         The 'ids' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -712,7 +712,7 @@ class Heatmap(BaseTraceType):
         Sets the text elements associated with each z value.
     
         The 'text' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -815,7 +815,7 @@ class Heatmap(BaseTraceType):
         Sets the x coordinates.
     
         The 'x' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -970,7 +970,7 @@ class Heatmap(BaseTraceType):
         Sets the y coordinates.
     
         The 'y' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -1125,7 +1125,7 @@ class Heatmap(BaseTraceType):
         Sets the z data.
     
         The 'z' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------

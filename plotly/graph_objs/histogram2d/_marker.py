@@ -11,7 +11,7 @@ class Marker(BaseTraceHierarchyType):
         Sets the aggregation data.
     
         The 'color' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------

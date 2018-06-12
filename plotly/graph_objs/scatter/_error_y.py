@@ -12,7 +12,7 @@ class ErrorY(BaseTraceHierarchyType):
         Values are plotted relative to the underlying data.
     
         The 'array' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
@@ -34,7 +34,7 @@ class ErrorY(BaseTraceHierarchyType):
         are plotted relative to the underlying data.
     
         The 'arrayminus' property is an array that may be specified as a tuple,
-        list, one-dimensional numpy array, or pandas Series
+        list, numpy array, or pandas Series
 
         Returns
         -------
