@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class LocationssrcValidator(_plotly_utils.basevalidators.StringValidator):
+class LocationssrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(
         self, plotly_name='locationssrc', parent_name='scattergeo', **kwargs

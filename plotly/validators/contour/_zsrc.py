@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class ZsrcValidator(_plotly_utils.basevalidators.StringValidator):
+class ZsrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(self, plotly_name='zsrc', parent_name='contour', **kwargs):
         super(ZsrcValidator, self).__init__(

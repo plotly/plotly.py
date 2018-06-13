@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class IdssrcValidator(_plotly_utils.basevalidators.StringValidator):
+class IdssrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(
         self, plotly_name='idssrc', parent_name='histogram2dcontour', **kwargs

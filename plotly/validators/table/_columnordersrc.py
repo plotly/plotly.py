@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class ColumnordersrcValidator(_plotly_utils.basevalidators.StringValidator):
+class ColumnordersrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(
         self, plotly_name='columnordersrc', parent_name='table', **kwargs

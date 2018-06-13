@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class VertexcolorsrcValidator(_plotly_utils.basevalidators.StringValidator):
+class VertexcolorsrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(
         self, plotly_name='vertexcolorsrc', parent_name='mesh3d', **kwargs

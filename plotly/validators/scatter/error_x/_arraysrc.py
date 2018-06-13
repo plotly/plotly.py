@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class ArraysrcValidator(_plotly_utils.basevalidators.StringValidator):
+class ArraysrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(
         self, plotly_name='arraysrc', parent_name='scatter.error_x', **kwargs

@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class BsrcValidator(_plotly_utils.basevalidators.StringValidator):
+class BsrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(
         self, plotly_name='bsrc', parent_name='scattercarpet', **kwargs

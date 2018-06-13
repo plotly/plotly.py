@@ -360,6 +360,9 @@ class PlotlyNode:
         """
         if self.path_str in CUSTOM_VALIDATOR_DATATYPES:
             validator_base = f"{CUSTOM_VALIDATOR_DATATYPES[self.path_str]}"
+        elif self.plotly_name.endswith('src') and self.datatype == 'string':
+            validator_base = (f"_plotly_utils.basevalidators."
+                              f"SrcValidator")
         else:
             datatype_title_case = self.datatype.title().replace('_', '')
             validator_base = (f"_plotly_utils.basevalidators."

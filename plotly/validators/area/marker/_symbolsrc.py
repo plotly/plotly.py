@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class SymbolsrcValidator(_plotly_utils.basevalidators.StringValidator):
+class SymbolsrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(
         self, plotly_name='symbolsrc', parent_name='area.marker', **kwargs

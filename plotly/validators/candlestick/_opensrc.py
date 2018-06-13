@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class OpensrcValidator(_plotly_utils.basevalidators.StringValidator):
+class OpensrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(
         self, plotly_name='opensrc', parent_name='candlestick', **kwargs

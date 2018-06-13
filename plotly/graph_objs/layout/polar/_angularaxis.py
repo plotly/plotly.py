@@ -32,9 +32,8 @@ class AngularAxis(BaseLayoutHierarchyType):
         """
         Sets the source reference on plot.ly for  categoryarray .
     
-        The 'categoryarraysrc' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+        The 'categoryarraysrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
 
         Returns
         -------
@@ -1038,9 +1037,8 @@ class AngularAxis(BaseLayoutHierarchyType):
         """
         Sets the source reference on plot.ly for  ticktext .
     
-        The 'ticktextsrc' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+        The 'ticktextsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
 
         Returns
         -------
@@ -1080,9 +1078,8 @@ class AngularAxis(BaseLayoutHierarchyType):
         """
         Sets the source reference on plot.ly for  tickvals .
     
-        The 'tickvalssrc' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+        The 'tickvalssrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
 
         Returns
         -------

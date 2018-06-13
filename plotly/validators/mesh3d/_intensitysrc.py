@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class IntensitysrcValidator(_plotly_utils.basevalidators.StringValidator):
+class IntensitysrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(
         self, plotly_name='intensitysrc', parent_name='mesh3d', **kwargs

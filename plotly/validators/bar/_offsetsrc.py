@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class OffsetsrcValidator(_plotly_utils.basevalidators.StringValidator):
+class OffsetsrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(self, plotly_name='offsetsrc', parent_name='bar', **kwargs):
         super(OffsetsrcValidator, self).__init__(

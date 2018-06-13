@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class TypesrcValidator(_plotly_utils.basevalidators.StringValidator):
+class TypesrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(
         self,

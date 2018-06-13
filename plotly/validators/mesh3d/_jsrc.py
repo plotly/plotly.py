@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class JsrcValidator(_plotly_utils.basevalidators.StringValidator):
+class JsrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(self, plotly_name='jsrc', parent_name='mesh3d', **kwargs):
         super(JsrcValidator, self).__init__(

@@ -32,9 +32,8 @@ class Marker(BaseTraceHierarchyType):
         """
         Sets the source reference on plot.ly for  colors .
     
-        The 'colorssrc' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+        The 'colorssrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
 
         Returns
         -------

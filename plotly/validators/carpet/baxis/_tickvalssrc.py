@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class TickvalssrcValidator(_plotly_utils.basevalidators.StringValidator):
+class TickvalssrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(
         self, plotly_name='tickvalssrc', parent_name='carpet.baxis', **kwargs

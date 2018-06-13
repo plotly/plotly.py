@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class LatsrcValidator(_plotly_utils.basevalidators.StringValidator):
+class LatsrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(
         self, plotly_name='latsrc', parent_name='scattermapbox', **kwargs

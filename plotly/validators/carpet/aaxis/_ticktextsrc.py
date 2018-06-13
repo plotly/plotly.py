@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class TicktextsrcValidator(_plotly_utils.basevalidators.StringValidator):
+class TicktextsrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(
         self, plotly_name='ticktextsrc', parent_name='carpet.aaxis', **kwargs
