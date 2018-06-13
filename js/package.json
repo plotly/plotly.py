@@ -1,7 +1,7 @@
 {
   "name": "plotlywidget",
   "version": "0.1.0",
-  "description": "The plotly.py ipywidget library",
+  "description": "The plotly.py ipywidgets library",
   "author": "The plotly.py team",
   "main": "src/index.js",
   "repository": {
@@ -12,7 +12,8 @@
     "jupyter",
     "widgets",
     "ipython",
-    "ipywidgets"
+    "ipywidgets",
+    "plotly"
   ],
   "files": [
     "src/**/*.js",
