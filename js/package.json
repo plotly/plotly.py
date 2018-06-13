@@ -6,7 +6,7 @@
   "main": "src/index.js",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/plotly/plotly.py"
   },
   "keywords": [
     "jupyter",
