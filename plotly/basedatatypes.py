@@ -3145,7 +3145,7 @@ class BasePlotlyType(object):
                 for callback in callbacks:
                     callback(self, *callback_args)
 
-    def on_change(self, callback, append=False, *args):
+    def on_change(self, callback, *args, append=False):
         """
         Register callback function to be called when certain properties or
         subproperties of this object are modified.
