@@ -35,7 +35,7 @@ Scatter(**{
           74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91,
           92, 93, 94, 95, 96, 97, 98, 99]
 })"""
-        assert scatt.__repr__() == expected
+        self.assertEqual(scatt.__repr__(), expected)
 
     def test_trace_repr_elided(self):
         N = 1000
@@ -51,7 +51,7 @@ Scatter(**{
     'type': 'scatter',
     'y': [0, 1, 2, ..., 997, 998, 999]
 })"""
-        assert scatt.__repr__() == expected
+        self.assertEqual(scatt.__repr__(), expected)
 
     def test_trace_repr_numpy(self):
         try:
@@ -109,5 +109,4 @@ Scatter(**{
     'type': 'scatter',
     'y': array([  0.,   1.,   2., ..., 997., 998., 999.])
 })"""
-
-        assert scatt.__repr__() == expected
+        self.assertEqual(scatt.__repr__(), expected)
