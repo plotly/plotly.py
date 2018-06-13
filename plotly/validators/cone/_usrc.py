@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class UsrcValidator(_plotly_utils.basevalidators.StringValidator):
+class UsrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(self, plotly_name='usrc', parent_name='cone', **kwargs):
         super(UsrcValidator, self).__init__(

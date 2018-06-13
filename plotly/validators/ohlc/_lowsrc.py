@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class LowsrcValidator(_plotly_utils.basevalidators.StringValidator):
+class LowsrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(self, plotly_name='lowsrc', parent_name='ohlc', **kwargs):
         super(LowsrcValidator, self).__init__(

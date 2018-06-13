@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class WidthsrcValidator(_plotly_utils.basevalidators.StringValidator):
+class WidthsrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(self, plotly_name='widthsrc', parent_name='bar', **kwargs):
         super(WidthsrcValidator, self).__init__(

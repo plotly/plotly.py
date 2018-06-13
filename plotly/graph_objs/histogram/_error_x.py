@@ -53,9 +53,8 @@ class ErrorX(BaseTraceHierarchyType):
         """
         Sets the source reference on plot.ly for  arrayminus .
     
-        The 'arrayminussrc' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+        The 'arrayminussrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
 
         Returns
         -------
@@ -74,9 +73,8 @@ class ErrorX(BaseTraceHierarchyType):
         """
         Sets the source reference on plot.ly for  array .
     
-        The 'arraysrc' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+        The 'arraysrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
 
         Returns
         -------

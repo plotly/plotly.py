@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class KsrcValidator(_plotly_utils.basevalidators.StringValidator):
+class KsrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(self, plotly_name='ksrc', parent_name='mesh3d', **kwargs):
         super(KsrcValidator, self).__init__(

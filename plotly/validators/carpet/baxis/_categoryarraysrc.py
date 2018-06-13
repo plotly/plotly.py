@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class CategoryarraysrcValidator(_plotly_utils.basevalidators.StringValidator):
+class CategoryarraysrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(
         self,

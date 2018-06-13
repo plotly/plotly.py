@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class AlignsrcValidator(_plotly_utils.basevalidators.StringValidator):
+class AlignsrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(
         self, plotly_name='alignsrc', parent_name='table.cells', **kwargs

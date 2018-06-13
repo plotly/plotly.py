@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class ColumnwidthsrcValidator(_plotly_utils.basevalidators.StringValidator):
+class ColumnwidthsrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(
         self, plotly_name='columnwidthsrc', parent_name='table', **kwargs

@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class BgcolorsrcValidator(_plotly_utils.basevalidators.StringValidator):
+class BgcolorsrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(
         self, plotly_name='bgcolorsrc', parent_name='bar.hoverlabel', **kwargs

@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class BasesrcValidator(_plotly_utils.basevalidators.StringValidator):
+class BasesrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(self, plotly_name='basesrc', parent_name='bar', **kwargs):
         super(BasesrcValidator, self).__init__(

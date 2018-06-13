@@ -35,9 +35,8 @@ class Header(BaseTraceHierarchyType):
         """
         Sets the source reference on plot.ly for  align .
     
-        The 'alignsrc' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+        The 'alignsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
 
         Returns
         -------
@@ -161,9 +160,8 @@ class Header(BaseTraceHierarchyType):
         """
         Sets the source reference on plot.ly for  format .
     
-        The 'formatsrc' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+        The 'formatsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
 
         Returns
         -------
@@ -258,9 +256,8 @@ class Header(BaseTraceHierarchyType):
         """
         Sets the source reference on plot.ly for  prefix .
     
-        The 'prefixsrc' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+        The 'prefixsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
 
         Returns
         -------
@@ -301,9 +298,8 @@ class Header(BaseTraceHierarchyType):
         """
         Sets the source reference on plot.ly for  suffix .
     
-        The 'suffixsrc' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+        The 'suffixsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
 
         Returns
         -------
@@ -345,9 +341,8 @@ class Header(BaseTraceHierarchyType):
         """
         Sets the source reference on plot.ly for  values .
     
-        The 'valuessrc' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+        The 'valuessrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
 
         Returns
         -------

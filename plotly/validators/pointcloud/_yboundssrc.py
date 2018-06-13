@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class YboundssrcValidator(_plotly_utils.basevalidators.StringValidator):
+class YboundssrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(
         self, plotly_name='yboundssrc', parent_name='pointcloud', **kwargs

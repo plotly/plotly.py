@@ -430,9 +430,8 @@ class Marker(BaseTraceHierarchyType):
         """
         Sets the source reference on plot.ly for  color .
     
-        The 'colorsrc' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+        The 'colorsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
 
         Returns
         -------
@@ -472,9 +471,8 @@ class Marker(BaseTraceHierarchyType):
         """
         Sets the source reference on plot.ly for  opacity .
     
-        The 'opacitysrc' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+        The 'opacitysrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
 
         Returns
         -------
@@ -625,9 +623,8 @@ class Marker(BaseTraceHierarchyType):
         """
         Sets the source reference on plot.ly for  size .
     
-        The 'sizesrc' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+        The 'sizesrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
 
         Returns
         -------
@@ -670,9 +667,8 @@ class Marker(BaseTraceHierarchyType):
         """
         Sets the source reference on plot.ly for  symbol .
     
-        The 'symbolsrc' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+        The 'symbolsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
 
         Returns
         -------

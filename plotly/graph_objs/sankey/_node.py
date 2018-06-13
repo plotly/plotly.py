@@ -75,9 +75,8 @@ class Node(BaseTraceHierarchyType):
         """
         Sets the source reference on plot.ly for  color .
     
-        The 'colorsrc' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+        The 'colorsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
 
         Returns
         -------
@@ -116,9 +115,8 @@ class Node(BaseTraceHierarchyType):
         """
         Sets the source reference on plot.ly for  label .
     
-        The 'labelsrc' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+        The 'labelsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
 
         Returns
         -------

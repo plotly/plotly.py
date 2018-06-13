@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class FormatsrcValidator(_plotly_utils.basevalidators.StringValidator):
+class FormatsrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(
         self, plotly_name='formatsrc', parent_name='table.cells', **kwargs

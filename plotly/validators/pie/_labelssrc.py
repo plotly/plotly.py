@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class LabelssrcValidator(_plotly_utils.basevalidators.StringValidator):
+class LabelssrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(self, plotly_name='labelssrc', parent_name='pie', **kwargs):
         super(LabelssrcValidator, self).__init__(

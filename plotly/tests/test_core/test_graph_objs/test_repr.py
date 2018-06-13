@@ -88,7 +88,7 @@ Scatter(**{
                 98., 99.])
 })"""
 
-        assert scatt.__repr__() == expected
+        self.assertEqual(scatt.__repr__(), expected)
 
     def test_trace_repr_numpy_elided(self):
         try:

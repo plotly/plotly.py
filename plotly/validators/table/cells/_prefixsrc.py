@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class PrefixsrcValidator(_plotly_utils.basevalidators.StringValidator):
+class PrefixsrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(
         self, plotly_name='prefixsrc', parent_name='table.cells', **kwargs

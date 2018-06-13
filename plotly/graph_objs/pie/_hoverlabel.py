@@ -70,9 +70,8 @@ class Hoverlabel(BaseTraceHierarchyType):
         """
         Sets the source reference on plot.ly for  bgcolor .
     
-        The 'bgcolorsrc' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+        The 'bgcolorsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
 
         Returns
         -------
@@ -151,9 +150,8 @@ class Hoverlabel(BaseTraceHierarchyType):
         """
         Sets the source reference on plot.ly for  bordercolor .
     
-        The 'bordercolorsrc' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+        The 'bordercolorsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
 
         Returns
         -------
@@ -254,9 +252,8 @@ class Hoverlabel(BaseTraceHierarchyType):
         """
         Sets the source reference on plot.ly for  namelength .
     
-        The 'namelengthsrc' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+        The 'namelengthsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
 
         Returns
         -------

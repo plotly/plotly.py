@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class TargetsrcValidator(_plotly_utils.basevalidators.StringValidator):
+class TargetsrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(
         self, plotly_name='targetsrc', parent_name='sankey.link', **kwargs

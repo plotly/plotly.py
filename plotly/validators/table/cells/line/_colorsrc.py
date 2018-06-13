@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class ColorsrcValidator(_plotly_utils.basevalidators.StringValidator):
+class ColorsrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(
         self, plotly_name='colorsrc', parent_name='table.cells.line', **kwargs

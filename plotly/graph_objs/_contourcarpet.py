@@ -51,9 +51,8 @@ class Contourcarpet(BaseTraceType):
         """
         Sets the source reference on plot.ly for  a .
     
-        The 'asrc' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+        The 'asrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
 
         Returns
         -------
@@ -181,9 +180,8 @@ class Contourcarpet(BaseTraceType):
         """
         Sets the source reference on plot.ly for  b .
     
-        The 'bsrc' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+        The 'bsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
 
         Returns
         -------
@@ -607,9 +605,8 @@ class Contourcarpet(BaseTraceType):
         """
         Sets the source reference on plot.ly for  customdata .
     
-        The 'customdatasrc' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+        The 'customdatasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
 
         Returns
         -------
@@ -757,9 +754,8 @@ class Contourcarpet(BaseTraceType):
         """
         Sets the source reference on plot.ly for  hoverinfo .
     
-        The 'hoverinfosrc' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+        The 'hoverinfosrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
 
         Returns
         -------
@@ -850,9 +846,8 @@ class Contourcarpet(BaseTraceType):
         """
         Sets the source reference on plot.ly for  ids .
     
-        The 'idssrc' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+        The 'idssrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
 
         Returns
         -------
@@ -1136,9 +1131,8 @@ class Contourcarpet(BaseTraceType):
         """
         Sets the source reference on plot.ly for  text .
     
-        The 'textsrc' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+        The 'textsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
 
         Returns
         -------
@@ -1350,9 +1344,8 @@ class Contourcarpet(BaseTraceType):
         """
         Sets the source reference on plot.ly for  z .
     
-        The 'zsrc' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+        The 'zsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
 
         Returns
         -------
