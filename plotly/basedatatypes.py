@@ -3145,7 +3145,7 @@ class BasePlotlyType(object):
                 for callback in callbacks:
                     callback(self, *callback_args)
 
-    def on_change(self, callback, *args, append=False):
+    def on_change(self, callback, *args, **kwargs):
         """
         Register callback function to be called when certain properties or
         subproperties of this object are modified.
@@ -3214,6 +3214,10 @@ on_change callbacks are not supported in this case.
         if invalid_args:
             raise ValueError(
                 'Invalid property specification(s): %s' % invalid_args)
+
+        # Process append option
+        # ---------------------
+        append = kwargs.get('append', False)
 
         # Normalize args to path tuples
         # -----------------------------
