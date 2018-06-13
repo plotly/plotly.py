@@ -150,7 +150,7 @@ class TestStreaming(PlotlyTestCase):
             'server': 'stream.plot.ly',
             'port': 80,
             'ssl_enabled': False,
-            'ssl_verification_enabled': False, 
+            'ssl_verification_enabled': False,
             'headers': {
                 'Host': 'stream.plot.ly',
                 'plotly-streamtoken': tk
@@ -175,7 +175,7 @@ class TestStreaming(PlotlyTestCase):
             'server': 'stream.plot.ly',
             'port': 443,
             'ssl_enabled': True,
-            'ssl_verification_enabled': True, 
+            'ssl_verification_enabled': True,
             'headers': {
                 'Host': 'stream.plot.ly',
                 'plotly-streamtoken': tk
