@@ -1,0 +1,18 @@
+import _plotly_utils.basevalidators
+
+
+class LatValidator(_plotly_utils.basevalidators.NumberValidator):
+
+    def __init__(
+        self,
+        plotly_name='lat',
+        parent_name='layout.geo.projection.rotation',
+        **kwargs
+    ):
+        super(LatValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type='plot',
+            role='info',
+            **kwargs
+        )

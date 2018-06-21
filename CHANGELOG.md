@@ -2,9 +2,22 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [2.5.2] - UNRELEASED
+## [2.7.1] - [UNRELEASED]
 ### Updated
-- error message for `plotly.figure_factory.create_choropleth` is more helpful for Windows users on installing `geopandas` and dependencies including `shapely`.
+- error message for `plotly.figure_factory.create_choropleth` is now helpful to Anaconda users who do not have the correct modules installed for the County Choropleth figure factory.
+
+## [2.7.0] - 2018-05-23
+### Updated
+- Updated `plotly.min.js` to version 1.38.0.
+  - New features include a `3D cone` trace to visualize vector fields.
+  - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1380----2018-05-23) for additional information regarding the updates.
+
+## [2.6.0] - 2018-05-09
+### Updated
+- Updated `plotly.min.js` to version 1.37.1.
+  - New features include a `splom` (scatter plot matrix) trace type.
+  - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1371----2018-05-02) for additional information regarding the updates.
+- Error message for `plotly.figure_factory.create_choropleth` is more helpful for Windows users on installing `geopandas` and dependencies including `shapely`.
 
 ## [2.5.1] - 2018-03-26
 ### Fixed
