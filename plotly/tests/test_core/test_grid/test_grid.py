@@ -118,13 +118,13 @@ class GridTest(PlotlyTestCase):
         with self.assertRaises(InputError):
             parse_grid_id_args(self._grid, self._grid_url)
 
-    # Out of order usage
-    def test_scatter_from_non_uploaded_grid(self):
-        c1 = Column([1, 2, 3, 4], 'first column')
-        c2 = Column(['a', 'b', 'c', 'd'], 'second column')
-        g = Grid([c1, c2])
-        with self.assertRaises(ValueError):
-            Scatter(xsrc=g[0], ysrc=g[1])
+    # not broken anymore since plotly 3.0.0
+    # def test_scatter_from_non_uploaded_grid(self):
+    #     c1 = Column([1, 2, 3, 4], 'first column')
+    #     c2 = Column(['a', 'b', 'c', 'd'], 'second column')
+    #     g = Grid([c1, c2])
+    #     with self.assertRaises(ValueError):
+    #         Scatter(xsrc=g[0], ysrc=g[1])
 
     def test_column_append_of_non_uploaded_grid(self):
         c1 = Column([1, 2, 3, 4], 'first column')
