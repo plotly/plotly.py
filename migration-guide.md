@@ -1,17 +1,24 @@
 # Migration to Plotly 3.0.0
 
-Plotly 3 introduces enhancements to the plotly.py visualization library and demonstrates some of its features.
+Plotly 3 introduces enhancements to the `plotly.py` visualization library and demonstrates some of its features.
 
 
 # What have we Added?
 - Traces can be added and updated interactively by simply assigning to properties
-- The full Traces and Layout API is generated from the plotly schema to provide a great experience for interactive use in the notebook
-- Data validation covering the full API with clear, informative error messages
-- Jupyter friendly docstrings on constructor params and properties
-- Support for setting array properties as numpy arrays. When numpy arrays are used, ipywidgets binary serialization protocol is used to avoid converting these to JSON strings.
-- Context manager API for animation
-- Programmatic export of figures to static SVG images (and PNG and PDF with cairosvg installed).
 
+- The full Traces and Layout API is generated from the plotly schema to provide a great experience for interactive use in the notebook
+
+- Data validation covering the full API with clear, informative error messages
+
+
+
+- Jupyter friendly docstrings on constructor params and properties
+
+- Support for setting array properties as numpy arrays. When numpy arrays are used, ipywidgets binary serialization protocol is used to avoid converting these to JSON strings.
+
+- Context manager API for animation
+
+- Programmatic export of figures to static SVG images (and PNG and PDF with cairosvg installed).
 
 
 ```
