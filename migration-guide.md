@@ -1,29 +1,124 @@
 # Migration to Plotly 3.0.0
+There are many new and great features in this branch including deeper Jupyter integration, deeper figure validation, improved performance, and more. To get started right away with Plotly, check out the [tutorial](#getting-started) below.
 
-Plotly 3 introduces huge enhancements to the `plotly.py` visualization library from tab completion for properties in the Jupyter to a tighter validation detection to catch unknown figure errors, plotly 3 provides better workflow for Plotly users.
+To install and enable with Jupyter, run:
+```
+pip install plotly==3.0.0rc9
+pip install ipywidgets  # only necessary for Jupyter Notebook environments
+```
 
+In addition, to add JupyterLab support run the following commands:
 
-# Added
-[asd](#foo)
+```
+pip install jupyterlab
+jupyter labextension install @jupyter-widgets/jupyterlab-manager # install the Jupyter widgets extension
+jupyter labextension install plotlywidget
+```
 
-
-# What's Added?
+## 3.0.0rc9 [08-06-2018]
+### Added
+- update traces interactively
 - Traces can be added and updated interactively by simply assigning to properties
-
 - The full Traces and Layout API is generated from the plotly schema to provide a great experience for interactive use in the notebook
-
-- Data validation covering the full API with clear, informative error messages
-
-
-
+- Jupyter friendly docstrings
 - Jupyter friendly docstrings on constructor params and properties
-
 - Support for setting array properties as numpy arrays. When numpy arrays are used, ipywidgets binary serialization protocol is used to avoid converting these to JSON strings.
-
 - Context manager API for animation
-
 - Programmatic export of figures to static SVG images (and PNG and PDF with cairosvg installed).
 
+### Removed
+- We have removed `.to_string`, `.strip_style`, `.get_data`, `.validate` and `.to_dataframe` methods from `plotly.graph_objs` objects. For example run `dir(plotly.graph_objs.Scatter)` to get all the (magic) methods of the Scatter class.
+
+
+### Changed
+- Improved data validation covering the full API with clear, informative error messages. This means that incorrect properties and/or values now always raise a `ValueError` with a description of the error, the invalid property, and the avaialble properties on the level that it was placed in the graph object. Eg. `go.Scatter(foo=123)` raises a validation error. See https://plot.ly/python/reference/ for a reference to all valid properties and values in the Python API.
+
+- graph objects are not `dict`s anymore. Running a cell of a graph object prints out a dict-style representation of the object:
+
+Eg. `plotly.graph_objs.Scatter()` prints
+
+```
+Scatter(**{
+    'type': 'scatter'
+})
+```
+
+- plotly objects now have a `.to_plotly_json` method that converts the object to a dict:
+
+Eg. `go.Scatter().to_plotly_json()` returns `{'type': 'scatter'}`
+
+
+
+### Deprecated
+- all graph objects must now be written using their full path. For example if one wants to customize the marker param in a scatter object, write `plotly.graph_objs.scatter.Marker` instead of `plotly.graph_objs.Marker`. If the marker object lives in a `plotly.graph_objs.Scatter()` object then a deprecated message will appear. Similarly
+
+```
+import plotly.graph_objs as go
+go.Scatter(
+    x=[0],
+    y=[0],
+    marker=go.Marker(
+        color='rgb(255,45,15)'
+    )
+)
+```
+
+produces a deprecation warning but
+
+```
+import plotly.graph_objs as go
+go.Scatter(
+    x=[0],
+    y=[0],
+    marker=go.scatter.Marker(
+        color='rgb(255,45,15)'
+    )
+)
+```
+
+does not.
+
+- `go.Data()` is deprecated. Use a list or array `[]` instead.
+
+
+
+# Getting Started
+#### Installation
+To install and enable with Jupyter, run:
+```
+pip install plotly==3.0.0rc9
+pip install ipywidgets  # only necessary for Jupyter Notebook environments
+```
+
+In addition, to add JupyterLab support run the following commands:
+
+```
+pip install jupyterlab
+jupyter labextension install @jupyter-widgets/jupyterlab-manager # install the Jupyter widgets extension
+jupyter labextension install plotlywidget
+```
+
+## Overview
+```
+# ipyplotly
+from plotly.graph_objs import FigureWidget
+from plotly.callbacks import Points, InputDeviceState
+
+# pandas
+import pandas as pd
+
+# numpy
+import numpy as np
+
+# scikit learn
+from sklearn import datasets
+
+# ipywidgets
+from ipywidgets import HBox, VBox, Button
+
+# functools
+from functools import partial
+```
 
 ```
 # Load iris dataset
@@ -34,45 +129,38 @@ iris_class = iris_data.target + 1
 iris_df.head()
 ```
 
-|  | sepal_length |	sepal_width	| petal_length	| petal_width|
-| --- | --- | --- | --- |
-| 0	| 5.1	|	3.5	|	1.4	|	0.2 |
-| 1	| 4.9	|	3.0	|	1.4	|	0.2 |
-| 2	| 4.7	|	3.2	|	1.3	|	0.2 |
-| 3	| 4.6	| 3.1	|	1.5	|	0.2 |
-| 4	| 5.0	| 3.6	|	1.4	|	0.2 |
-
-
-## Create and display an empty FigureWidget
+#### Create and display an empty FigureWidget
 A FigureWidget behaves almost identically to a Figure but it is also an ipywidget that can be displayed directly in the notebook without calling `iplot`
-
 ```
 f1 = FigureWidget()
 f1
 ```
 
-## Tab completion
+#### Tab completion
 Entering ``f1.add_<tab>`` displays add methods for all of the supported trace types
+```
+# f1.add_
+```
 
 Entering ``f1.add_scatter(<tab>)`` displays the names of all of the top-level properties for the scatter trace type
 
 Entering ``f1.add_scatter(<shift+tab>)`` displays the signature pop-up. Expanding this pop-up reveals the method doc string which contains the descriptions of all of the top level properties
 
 ```
-# f1.add_
-# f1.add_scatter
+# f1.add_scatter(
 ```
 
-## Add scatter trace
+#### Add scatter trace
 ```
 scatt1 = f1.add_scatter(x=iris_df.sepal_length, y=iris_df.petal_width)
 ```
 
-change the params
 ```
-# Set marker
+# That's not what we wanted, change the mode to 'markers'
 scatt1.mode = 'markers'
+# Set size to 8
 scatt1.marker.size = 8
+# Color markers by iris class
 scatt1.marker.color = iris_class
 
 # Change colorscale
@@ -89,7 +177,6 @@ scatt1.marker.colorbar.ticks = 'outside'
 scatt1.marker.colorbar.tickvals = [1, 2, 3]
 scatt1.marker.colorbar.ticktext = iris_data.target_names.tolist()
 
-
 # Set colorscale title
 scatt1.marker.colorbar.title = 'Species'
 scatt1.marker.colorbar.titlefont.size = 16
@@ -103,60 +190,125 @@ f1.layout.yaxis.title = 'petal_width'
 scatt1.text = iris_data.target_names[iris_data.target]
 scatt1.hoverinfo = 'text+x+y'
 f1.layout.hovermode = 'closest'
-
-f1
 ```
 
-
-## What have we Changed?
-- go.Figure() is not a dict
-- widgets in jupyter
-
+#### Animate marker size change
 ```
-import plotly.graph_objs as go
-scatter = go.Scatter()
-```
+# Set marker size based on petal_length
+with f1.batch_animate(duration=1000):
+    scatt1.marker.size = np.sqrt(iris_df.petal_length.values * 50)
 
-
-# What have we Removed?
-We have removed the following methods from the `plotly.graph_objs` plotly objects:
-- `.to_string`
-- `.strip_style`
-- `.get_data`
-- `.validate`
-- `.to_dataframe`
-
-# What is Depreciated?
-
-- Plotly Objects form a tree hierarchy. For instance we have `go.Scatter` and the nested attribute `Marker` lives under scatter at `go.Scatter.Marker`. Now params that live a few nodes down the tree under a plotly class must be referenced in the full path.
-
-Example:
-```
-fig = go.Figure(
-    data=[
-        go.Scatter(
-            go.Scatter.Marker(
-                symbol=0,
-            ),
-            x=[1,2,3],
-            y=[1,2,3],
-        )
-    ]
-)
+# Restore constant marker size
+with f1.batch_animate(duration=1000):
+    scatt1.marker.size = 8
 ```
 
-`go.Data` is depreciated:
-
-Instead of
-
+#### Set drag mode property callback
+Make points more transparent when `dragmode` is `zoom`
 ```
-go.Data([])
-```
-
-drop the go.Data and use a `list` instead:
-
-```
-[]
+def set_opacity(marker, layout, dragmode):
+    if dragmode == 'zoom':
+        marker.opacity = 0.5
+    else:
+        marker.opacity = 1.0
+f1.layout.on_change(partial(set_opacity, scatt1.marker), 'dragmode')
 ```
 
-# foo
+#### Configure colorscale for brushing
+```
+scatt1.marker.colorbar = None
+scatt1.marker.colorscale = [[0, 'lightgray'], [0.5, 'lightgray'], [0.5, 'red'], [1, 'red']]
+scatt1.marker.cmin = -0.5
+scatt1.marker.cmax = 1.5
+scatt1.marker.colorbar.ticks = 'outside'
+scatt1.marker.colorbar.tickvals = [0, 1]
+scatt1.marker.colorbar.ticktext = ['unselected', 'selected']
+
+# Reset colors to zeros (unselected)
+scatt1.marker.color = np.zeros(iris_class.size)
+selected = np.zeros(iris_class.size)
+```
+
+#### Configure brushing callback
+```
+# Assigning these variables here is not required. But doing so tricks Jupyter into
+# providing property tab completion on the parameters to the brush function below
+trace, points, state = scatt1, Points(), InputDeviceState()
+
+def brush(trace, points, state):
+    inds = np.array(points.point_inds)
+    if inds.size:
+        selected[inds] = 1
+        trace.marker.color = selected
+
+scatt1.on_selected(brush)
+```
+
+Now box or lasso select points on the figure and see them turn red
+
+```
+# Reset brush
+selected = np.zeros(iris_class.size)
+scatt1.marker.color = selected
+```
+
+#### Create second plot with different features
+```
+f2 = FigureWidget(data=[{'type': 'scatter',
+                         'x': iris_df.petal_length,
+                         'y': iris_df.sepal_width,
+                         'mode': 'markers'}])
+f2
+```
+
+```
+# Set axis titles
+f2.layout.xaxis.title = 'petal_length'
+f2.layout.yaxis.title = 'sepal_width'
+
+# Grab trace reference
+scatt2 = f2.data[0]
+
+# Set marker styles / colorbars to match between figures
+scatt2.marker = scatt1.marker
+
+# Configure brush on both plots to update both plots
+def brush(trace, points, state):
+    inds = np.array(points.point_inds)
+    if inds.size:
+        selected = scatt1.marker.color.copy()
+        selected[inds] = 1
+        scatt1.marker.color = selected
+        scatt2.marker.color = selected    
+
+scatt1.on_selected(brush)
+scatt2.on_selected(brush)
+
+f2.layout.on_change(partial(set_opacity, scatt2.marker), 'dragmode')
+
+# Reset brush
+def reset_brush(btn):
+    selected = np.zeros(iris_class.size)
+    scatt1.marker.color = selected
+    scatt2.marker.color = selected
+
+# Create reset button
+button = Button(description="clear")
+button.on_click(reset_brush)
+
+# Hide colorbar for figure 1
+scatt1.marker.showscale = False
+
+# Set dragmode to lasso for both plots
+f1.layout.dragmode = 'lasso'
+f2.layout.dragmode = 'lasso'
+
+# Display two figures and the reset button
+f1.layout.width = 500
+f2.layout.width = 500
+
+VBox([HBox([f1, f2]), button])
+```
+
+#### Save figure 2 to a svg image in the exports directory
+f2.save_image('exports/f2.svg')
