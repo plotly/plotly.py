@@ -1,9 +1,13 @@
 # Migration to Plotly 3.0.0
 
-Plotly 3 introduces enhancements to the `plotly.py` visualization library and demonstrates some of its features.
+Plotly 3 introduces huge enhancements to the `plotly.py` visualization library from tab completion for properties in the Jupyter to a tighter validation detection to catch unknown figure errors, plotly 3 provides better workflow for Plotly users.
 
 
-# What have we Added?
+# Added
+[asd](#foo)
+
+
+# What's Added?
 - Traces can be added and updated interactively by simply assigning to properties
 
 - The full Traces and Layout API is generated from the plotly schema to provide a great experience for interactive use in the notebook
@@ -47,7 +51,7 @@ f1 = FigureWidget()
 f1
 ```
 
-# Tab completion
+## Tab completion
 Entering ``f1.add_<tab>`` displays add methods for all of the supported trace types
 
 Entering ``f1.add_scatter(<tab>)`` displays the names of all of the top-level properties for the scatter trace type
@@ -59,7 +63,7 @@ Entering ``f1.add_scatter(<shift+tab>)`` displays the signature pop-up. Expandin
 # f1.add_scatter
 ```
 
-# Add scatter trace
+## Add scatter trace
 ```
 scatt1 = f1.add_scatter(x=iris_df.sepal_length, y=iris_df.petal_width)
 ```
@@ -103,20 +107,15 @@ f1.layout.hovermode = 'closest'
 f1
 ```
 
-<iframe src="https://plot.ly/~jordanpeterson/1001.embed" width='100%', height=300></iframe>
 
-
-
-# What have we Changed?
+## What have we Changed?
 - go.Figure() is not a dict
 - widgets in jupyter
--
 
 ```
 import plotly.graph_objs as go
 scatter = go.Scatter()
 ```
-
 
 
 # What have we Removed?
@@ -129,7 +128,7 @@ We have removed the following methods from the `plotly.graph_objs` plotly object
 
 # What is Depreciated?
 
-Plotly Objects form a tree hierarchy. For instance we have `go.Scatter` and the nested attribute `Marker` lives under scatter at `go.Scatter.Marker`. Now params that live a few nodes down the tree under a plotly class must be referenced in the full path.
+- Plotly Objects form a tree hierarchy. For instance we have `go.Scatter` and the nested attribute `Marker` lives under scatter at `go.Scatter.Marker`. Now params that live a few nodes down the tree under a plotly class must be referenced in the full path.
 
 Example:
 ```
@@ -159,3 +158,5 @@ drop the go.Data and use a `list` instead:
 ```
 []
 ```
+
+# foo
