@@ -12,7 +12,7 @@ from .optional_imports import get_module
 from . import offline as pyo
 from _plotly_utils.basevalidators import (
     CompoundValidator, CompoundArrayValidator, BaseDataValidator,
-    BaseValidator
+    BaseValidator, LiteralValidator
 )
 from . import animation
 from .callbacks import (Points, BoxSelector, LassoSelector,
@@ -2734,7 +2734,7 @@ class BasePlotlyType(object):
             # complaint indent
             body = '   ' + pprint_res[1:-1].replace('\n', '\n   ')
 
-            repr_str = class_name + '(**{\n ' + body + '\n})'
+            repr_str = class_name + '({\n ' + body + '\n})'
 
         return repr_str
 
@@ -2743,8 +2743,18 @@ class BasePlotlyType(object):
         Customize object representation when displayed in the
         terminal/notebook
         """
+
+        # Get all properties
+        props = self._props if self._props is not None else {}
+
+        # Remove literals (These can't be specified in the constructor)
+        props = {p: v for p, v in props.items()
+                 if p in self._validators and
+                 not isinstance(self._validators[p], LiteralValidator)}
+
+        # Build repr string
         repr_str = BasePlotlyType._build_repr_for_class(
-            props=self._props if self._props is not None else {},
+            props=props,
             class_name=self.__class__.__name__,
             parent_path_str=self._parent_path_str)
 
