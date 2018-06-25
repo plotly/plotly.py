@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Marker(BaseTraceHierarchyType):
@@ -372,7 +373,9 @@ class Marker(BaseTraceHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.violin.Marker 
@@ -396,17 +399,17 @@ an instance of plotly.graph_objs.violin.Marker"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('color', None)
-        self.color = color or v
+        self.color = color if color is not None else v
         v = arg.pop('line', None)
-        self.line = line or v
+        self.line = line if line is not None else v
         v = arg.pop('opacity', None)
-        self.opacity = opacity or v
+        self.opacity = opacity if opacity is not None else v
         v = arg.pop('outliercolor', None)
-        self.outliercolor = outliercolor or v
+        self.outliercolor = outliercolor if outliercolor is not None else v
         v = arg.pop('size', None)
-        self.size = size or v
+        self.size = size if size is not None else v
         v = arg.pop('symbol', None)
-        self.symbol = symbol or v
+        self.symbol = symbol if symbol is not None else v
 
         # Process unknown kwargs
         # ----------------------

@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class YAxis(BaseLayoutHierarchyType):
@@ -105,7 +106,9 @@ class YAxis(BaseLayoutHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.layout.xaxis.rangeslider.YAxis 
@@ -127,9 +130,9 @@ an instance of plotly.graph_objs.layout.xaxis.rangeslider.YAxis"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('range', None)
-        self.range = range or v
+        self.range = range if range is not None else v
         v = arg.pop('rangemode', None)
-        self.rangemode = rangemode or v
+        self.rangemode = rangemode if rangemode is not None else v
 
         # Process unknown kwargs
         # ----------------------

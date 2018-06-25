@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseFrameHierarchyType
+import copy
 
 
 class Frame(BaseFrameHierarchyType):
@@ -211,7 +212,9 @@ class Frame(BaseFrameHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.Frame 
@@ -235,17 +238,17 @@ an instance of plotly.graph_objs.Frame"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('baseframe', None)
-        self.baseframe = baseframe or v
+        self.baseframe = baseframe if baseframe is not None else v
         v = arg.pop('data', None)
-        self.data = data or v
+        self.data = data if data is not None else v
         v = arg.pop('group', None)
-        self.group = group or v
+        self.group = group if group is not None else v
         v = arg.pop('layout', None)
-        self.layout = layout or v
+        self.layout = layout if layout is not None else v
         v = arg.pop('name', None)
-        self.name = name or v
+        self.name = name if name is not None else v
         v = arg.pop('traces', None)
-        self.traces = traces or v
+        self.traces = traces if traces is not None else v
 
         # Process unknown kwargs
         # ----------------------

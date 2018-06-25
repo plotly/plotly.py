@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Shape(BaseLayoutHierarchyType):
@@ -741,7 +742,9 @@ class Shape(BaseLayoutHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.layout.Shape 
@@ -776,39 +779,39 @@ an instance of plotly.graph_objs.layout.Shape"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('fillcolor', None)
-        self.fillcolor = fillcolor or v
+        self.fillcolor = fillcolor if fillcolor is not None else v
         v = arg.pop('layer', None)
-        self.layer = layer or v
+        self.layer = layer if layer is not None else v
         v = arg.pop('line', None)
-        self.line = line or v
+        self.line = line if line is not None else v
         v = arg.pop('opacity', None)
-        self.opacity = opacity or v
+        self.opacity = opacity if opacity is not None else v
         v = arg.pop('path', None)
-        self.path = path or v
+        self.path = path if path is not None else v
         v = arg.pop('type', None)
-        self.type = type or v
+        self.type = type if type is not None else v
         v = arg.pop('visible', None)
-        self.visible = visible or v
+        self.visible = visible if visible is not None else v
         v = arg.pop('x0', None)
-        self.x0 = x0 or v
+        self.x0 = x0 if x0 is not None else v
         v = arg.pop('x1', None)
-        self.x1 = x1 or v
+        self.x1 = x1 if x1 is not None else v
         v = arg.pop('xanchor', None)
-        self.xanchor = xanchor or v
+        self.xanchor = xanchor if xanchor is not None else v
         v = arg.pop('xref', None)
-        self.xref = xref or v
+        self.xref = xref if xref is not None else v
         v = arg.pop('xsizemode', None)
-        self.xsizemode = xsizemode or v
+        self.xsizemode = xsizemode if xsizemode is not None else v
         v = arg.pop('y0', None)
-        self.y0 = y0 or v
+        self.y0 = y0 if y0 is not None else v
         v = arg.pop('y1', None)
-        self.y1 = y1 or v
+        self.y1 = y1 if y1 is not None else v
         v = arg.pop('yanchor', None)
-        self.yanchor = yanchor or v
+        self.yanchor = yanchor if yanchor is not None else v
         v = arg.pop('yref', None)
-        self.yref = yref or v
+        self.yref = yref if yref is not None else v
         v = arg.pop('ysizemode', None)
-        self.ysizemode = ysizemode or v
+        self.ysizemode = ysizemode if ysizemode is not None else v
 
         # Process unknown kwargs
         # ----------------------

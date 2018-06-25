@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Symbol(BaseLayoutHierarchyType):
@@ -210,7 +211,9 @@ class Symbol(BaseLayoutHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.layout.mapbox.layer.Symbol 
@@ -233,15 +236,15 @@ an instance of plotly.graph_objs.layout.mapbox.layer.Symbol"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('icon', None)
-        self.icon = icon or v
+        self.icon = icon if icon is not None else v
         v = arg.pop('iconsize', None)
-        self.iconsize = iconsize or v
+        self.iconsize = iconsize if iconsize is not None else v
         v = arg.pop('text', None)
-        self.text = text or v
+        self.text = text if text is not None else v
         v = arg.pop('textfont', None)
-        self.textfont = textfont or v
+        self.textfont = textfont if textfont is not None else v
         v = arg.pop('textposition', None)
-        self.textposition = textposition or v
+        self.textposition = textposition if textposition is not None else v
 
         # Process unknown kwargs
         # ----------------------

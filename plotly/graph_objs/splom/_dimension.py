@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Dimension(BaseTraceHierarchyType):
@@ -151,7 +152,9 @@ class Dimension(BaseTraceHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.splom.Dimension 
@@ -173,13 +176,13 @@ an instance of plotly.graph_objs.splom.Dimension"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('label', None)
-        self.label = label or v
+        self.label = label if label is not None else v
         v = arg.pop('values', None)
-        self.values = values or v
+        self.values = values if values is not None else v
         v = arg.pop('valuessrc', None)
-        self.valuessrc = valuessrc or v
+        self.valuessrc = valuessrc if valuessrc is not None else v
         v = arg.pop('visible', None)
-        self.visible = visible or v
+        self.visible = visible if visible is not None else v
 
         # Process unknown kwargs
         # ----------------------

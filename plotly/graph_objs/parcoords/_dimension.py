@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Dimension(BaseTraceHierarchyType):
@@ -414,7 +415,9 @@ class Dimension(BaseTraceHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.parcoords.Dimension 
@@ -445,29 +448,29 @@ an instance of plotly.graph_objs.parcoords.Dimension"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('constraintrange', None)
-        self.constraintrange = constraintrange or v
+        self.constraintrange = constraintrange if constraintrange is not None else v
         v = arg.pop('label', None)
-        self.label = label or v
+        self.label = label if label is not None else v
         v = arg.pop('multiselect', None)
-        self.multiselect = multiselect or v
+        self.multiselect = multiselect if multiselect is not None else v
         v = arg.pop('range', None)
-        self.range = range or v
+        self.range = range if range is not None else v
         v = arg.pop('tickformat', None)
-        self.tickformat = tickformat or v
+        self.tickformat = tickformat if tickformat is not None else v
         v = arg.pop('ticktext', None)
-        self.ticktext = ticktext or v
+        self.ticktext = ticktext if ticktext is not None else v
         v = arg.pop('ticktextsrc', None)
-        self.ticktextsrc = ticktextsrc or v
+        self.ticktextsrc = ticktextsrc if ticktextsrc is not None else v
         v = arg.pop('tickvals', None)
-        self.tickvals = tickvals or v
+        self.tickvals = tickvals if tickvals is not None else v
         v = arg.pop('tickvalssrc', None)
-        self.tickvalssrc = tickvalssrc or v
+        self.tickvalssrc = tickvalssrc if tickvalssrc is not None else v
         v = arg.pop('values', None)
-        self.values = values or v
+        self.values = values if values is not None else v
         v = arg.pop('valuessrc', None)
-        self.valuessrc = valuessrc or v
+        self.valuessrc = valuessrc if valuessrc is not None else v
         v = arg.pop('visible', None)
-        self.visible = visible or v
+        self.visible = visible if visible is not None else v
 
         # Process unknown kwargs
         # ----------------------

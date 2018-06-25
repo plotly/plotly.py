@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Marker(BaseTraceHierarchyType):
@@ -366,7 +367,9 @@ class Marker(BaseTraceHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.area.Marker 
@@ -392,21 +395,21 @@ an instance of plotly.graph_objs.area.Marker"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('color', None)
-        self.color = color or v
+        self.color = color if color is not None else v
         v = arg.pop('colorsrc', None)
-        self.colorsrc = colorsrc or v
+        self.colorsrc = colorsrc if colorsrc is not None else v
         v = arg.pop('opacity', None)
-        self.opacity = opacity or v
+        self.opacity = opacity if opacity is not None else v
         v = arg.pop('opacitysrc', None)
-        self.opacitysrc = opacitysrc or v
+        self.opacitysrc = opacitysrc if opacitysrc is not None else v
         v = arg.pop('size', None)
-        self.size = size or v
+        self.size = size if size is not None else v
         v = arg.pop('sizesrc', None)
-        self.sizesrc = sizesrc or v
+        self.sizesrc = sizesrc if sizesrc is not None else v
         v = arg.pop('symbol', None)
-        self.symbol = symbol or v
+        self.symbol = symbol if symbol is not None else v
         v = arg.pop('symbolsrc', None)
-        self.symbolsrc = symbolsrc or v
+        self.symbolsrc = symbolsrc if symbolsrc is not None else v
 
         # Process unknown kwargs
         # ----------------------

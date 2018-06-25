@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Unselected(BaseTraceHierarchyType):
@@ -107,7 +108,9 @@ class Unselected(BaseTraceHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.bar.Unselected 
@@ -127,9 +130,9 @@ an instance of plotly.graph_objs.bar.Unselected"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('marker', None)
-        self.marker = marker or v
+        self.marker = marker if marker is not None else v
         v = arg.pop('textfont', None)
-        self.textfont = textfont or v
+        self.textfont = textfont if textfont is not None else v
 
         # Process unknown kwargs
         # ----------------------
