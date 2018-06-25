@@ -283,6 +283,7 @@ class Mapbox(BaseLayoutHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         accesstoken=None,
         bearing=None,
         center=None,
@@ -298,6 +299,9 @@ class Mapbox(BaseLayoutHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.layout.Mapbox
         accesstoken
             Sets the mapbox access token to be used for this mapbox
             map. Alternatively, the mapbox access token can be set
@@ -330,6 +334,20 @@ class Mapbox(BaseLayoutHierarchyType):
         """
         super(Mapbox, self).__init__('mapbox')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.Mapbox 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.Mapbox"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout import (mapbox as v_mapbox)
@@ -347,15 +365,23 @@ class Mapbox(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.accesstoken = accesstoken
-        self.bearing = bearing
-        self.center = center
-        self.domain = domain
-        self.layers = layers
-        self.pitch = pitch
-        self.style = style
-        self.zoom = zoom
+        v = arg.pop('accesstoken', None)
+        self.accesstoken = accesstoken or v
+        v = arg.pop('bearing', None)
+        self.bearing = bearing or v
+        v = arg.pop('center', None)
+        self.center = center or v
+        v = arg.pop('domain', None)
+        self.domain = domain or v
+        v = arg.pop('layers', None)
+        self.layers = layers or v
+        v = arg.pop('pitch', None)
+        self.pitch = pitch or v
+        v = arg.pop('style', None)
+        self.style = style or v
+        v = arg.pop('zoom', None)
+        self.zoom = zoom or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

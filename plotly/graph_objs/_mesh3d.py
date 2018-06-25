@@ -1796,6 +1796,7 @@ class Mesh3d(BaseTraceType):
 
     def __init__(
         self,
+        arg=None,
         alphahull=None,
         autocolorscale=None,
         cauto=None,
@@ -1862,6 +1863,9 @@ class Mesh3d(BaseTraceType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Mesh3d
         alphahull
             Determines how the mesh surface triangles are derived
             from the set of vertices (points) represented by the
@@ -2097,6 +2101,20 @@ class Mesh3d(BaseTraceType):
         """
         super(Mesh3d, self).__init__('mesh3d')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Mesh3d 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Mesh3d"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators import (mesh3d as v_mesh3d)
@@ -2160,60 +2178,114 @@ class Mesh3d(BaseTraceType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.alphahull = alphahull
-        self.autocolorscale = autocolorscale
-        self.cauto = cauto
-        self.cmax = cmax
-        self.cmin = cmin
-        self.color = color
-        self.colorbar = colorbar
-        self.colorscale = colorscale
-        self.contour = contour
-        self.customdata = customdata
-        self.customdatasrc = customdatasrc
-        self.delaunayaxis = delaunayaxis
-        self.facecolor = facecolor
-        self.facecolorsrc = facecolorsrc
-        self.flatshading = flatshading
-        self.hoverinfo = hoverinfo
-        self.hoverinfosrc = hoverinfosrc
-        self.hoverlabel = hoverlabel
-        self.i = i
-        self.ids = ids
-        self.idssrc = idssrc
-        self.intensity = intensity
-        self.intensitysrc = intensitysrc
-        self.isrc = isrc
-        self.j = j
-        self.jsrc = jsrc
-        self.k = k
-        self.ksrc = ksrc
-        self.legendgroup = legendgroup
-        self.lighting = lighting
-        self.lightposition = lightposition
-        self.name = name
-        self.opacity = opacity
-        self.reversescale = reversescale
-        self.scene = scene
-        self.selectedpoints = selectedpoints
-        self.showlegend = showlegend
-        self.showscale = showscale
-        self.stream = stream
-        self.text = text
-        self.textsrc = textsrc
-        self.uid = uid
-        self.vertexcolor = vertexcolor
-        self.vertexcolorsrc = vertexcolorsrc
-        self.visible = visible
-        self.x = x
-        self.xcalendar = xcalendar
-        self.xsrc = xsrc
-        self.y = y
-        self.ycalendar = ycalendar
-        self.ysrc = ysrc
-        self.z = z
-        self.zcalendar = zcalendar
-        self.zsrc = zsrc
+        v = arg.pop('alphahull', None)
+        self.alphahull = alphahull or v
+        v = arg.pop('autocolorscale', None)
+        self.autocolorscale = autocolorscale or v
+        v = arg.pop('cauto', None)
+        self.cauto = cauto or v
+        v = arg.pop('cmax', None)
+        self.cmax = cmax or v
+        v = arg.pop('cmin', None)
+        self.cmin = cmin or v
+        v = arg.pop('color', None)
+        self.color = color or v
+        v = arg.pop('colorbar', None)
+        self.colorbar = colorbar or v
+        v = arg.pop('colorscale', None)
+        self.colorscale = colorscale or v
+        v = arg.pop('contour', None)
+        self.contour = contour or v
+        v = arg.pop('customdata', None)
+        self.customdata = customdata or v
+        v = arg.pop('customdatasrc', None)
+        self.customdatasrc = customdatasrc or v
+        v = arg.pop('delaunayaxis', None)
+        self.delaunayaxis = delaunayaxis or v
+        v = arg.pop('facecolor', None)
+        self.facecolor = facecolor or v
+        v = arg.pop('facecolorsrc', None)
+        self.facecolorsrc = facecolorsrc or v
+        v = arg.pop('flatshading', None)
+        self.flatshading = flatshading or v
+        v = arg.pop('hoverinfo', None)
+        self.hoverinfo = hoverinfo or v
+        v = arg.pop('hoverinfosrc', None)
+        self.hoverinfosrc = hoverinfosrc or v
+        v = arg.pop('hoverlabel', None)
+        self.hoverlabel = hoverlabel or v
+        v = arg.pop('i', None)
+        self.i = i or v
+        v = arg.pop('ids', None)
+        self.ids = ids or v
+        v = arg.pop('idssrc', None)
+        self.idssrc = idssrc or v
+        v = arg.pop('intensity', None)
+        self.intensity = intensity or v
+        v = arg.pop('intensitysrc', None)
+        self.intensitysrc = intensitysrc or v
+        v = arg.pop('isrc', None)
+        self.isrc = isrc or v
+        v = arg.pop('j', None)
+        self.j = j or v
+        v = arg.pop('jsrc', None)
+        self.jsrc = jsrc or v
+        v = arg.pop('k', None)
+        self.k = k or v
+        v = arg.pop('ksrc', None)
+        self.ksrc = ksrc or v
+        v = arg.pop('legendgroup', None)
+        self.legendgroup = legendgroup or v
+        v = arg.pop('lighting', None)
+        self.lighting = lighting or v
+        v = arg.pop('lightposition', None)
+        self.lightposition = lightposition or v
+        v = arg.pop('name', None)
+        self.name = name or v
+        v = arg.pop('opacity', None)
+        self.opacity = opacity or v
+        v = arg.pop('reversescale', None)
+        self.reversescale = reversescale or v
+        v = arg.pop('scene', None)
+        self.scene = scene or v
+        v = arg.pop('selectedpoints', None)
+        self.selectedpoints = selectedpoints or v
+        v = arg.pop('showlegend', None)
+        self.showlegend = showlegend or v
+        v = arg.pop('showscale', None)
+        self.showscale = showscale or v
+        v = arg.pop('stream', None)
+        self.stream = stream or v
+        v = arg.pop('text', None)
+        self.text = text or v
+        v = arg.pop('textsrc', None)
+        self.textsrc = textsrc or v
+        v = arg.pop('uid', None)
+        self.uid = uid or v
+        v = arg.pop('vertexcolor', None)
+        self.vertexcolor = vertexcolor or v
+        v = arg.pop('vertexcolorsrc', None)
+        self.vertexcolorsrc = vertexcolorsrc or v
+        v = arg.pop('visible', None)
+        self.visible = visible or v
+        v = arg.pop('x', None)
+        self.x = x or v
+        v = arg.pop('xcalendar', None)
+        self.xcalendar = xcalendar or v
+        v = arg.pop('xsrc', None)
+        self.xsrc = xsrc or v
+        v = arg.pop('y', None)
+        self.y = y or v
+        v = arg.pop('ycalendar', None)
+        self.ycalendar = ycalendar or v
+        v = arg.pop('ysrc', None)
+        self.ysrc = ysrc or v
+        v = arg.pop('z', None)
+        self.z = z or v
+        v = arg.pop('zcalendar', None)
+        self.zcalendar = zcalendar or v
+        v = arg.pop('zsrc', None)
+        self.zsrc = zsrc or v
 
         # Read-only literals
         # ------------------
@@ -2225,4 +2297,4 @@ class Mesh3d(BaseTraceType):
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

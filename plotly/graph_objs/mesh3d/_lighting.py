@@ -189,6 +189,7 @@ class Lighting(BaseTraceHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         ambient=None,
         diffuse=None,
         facenormalsepsilon=None,
@@ -203,6 +204,9 @@ class Lighting(BaseTraceHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.mesh3d.Lighting
         ambient
             Ambient light increases overall color visibility but
             can wash out the image.
@@ -233,6 +237,20 @@ class Lighting(BaseTraceHierarchyType):
         """
         super(Lighting, self).__init__('lighting')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.mesh3d.Lighting 
+constructor must be a dict or 
+an instance of plotly.graph_objs.mesh3d.Lighting"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.mesh3d import (lighting as v_lighting)
@@ -251,14 +269,21 @@ class Lighting(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.ambient = ambient
-        self.diffuse = diffuse
-        self.facenormalsepsilon = facenormalsepsilon
-        self.fresnel = fresnel
-        self.roughness = roughness
-        self.specular = specular
-        self.vertexnormalsepsilon = vertexnormalsepsilon
+        v = arg.pop('ambient', None)
+        self.ambient = ambient or v
+        v = arg.pop('diffuse', None)
+        self.diffuse = diffuse or v
+        v = arg.pop('facenormalsepsilon', None)
+        self.facenormalsepsilon = facenormalsepsilon or v
+        v = arg.pop('fresnel', None)
+        self.fresnel = fresnel or v
+        v = arg.pop('roughness', None)
+        self.roughness = roughness or v
+        v = arg.pop('specular', None)
+        self.specular = specular or v
+        v = arg.pop('vertexnormalsepsilon', None)
+        self.vertexnormalsepsilon = vertexnormalsepsilon or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

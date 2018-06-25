@@ -1354,6 +1354,7 @@ class Scene(BaseLayoutHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         annotations=None,
         aspectmode=None,
         aspectratio=None,
@@ -1372,6 +1373,9 @@ class Scene(BaseLayoutHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.layout.Scene
         annotations
             plotly.graph_objs.layout.scene.Annotation instance or
             dict with compatible properties
@@ -1418,6 +1422,20 @@ class Scene(BaseLayoutHierarchyType):
         """
         super(Scene, self).__init__('scene')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.Scene 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.Scene"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout import (scene as v_scene)
@@ -1438,18 +1456,29 @@ class Scene(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.annotations = annotations
-        self.aspectmode = aspectmode
-        self.aspectratio = aspectratio
-        self.bgcolor = bgcolor
-        self.camera = camera
-        self.domain = domain
-        self.dragmode = dragmode
-        self.hovermode = hovermode
-        self.xaxis = xaxis
-        self.yaxis = yaxis
-        self.zaxis = zaxis
+        v = arg.pop('annotations', None)
+        self.annotations = annotations or v
+        v = arg.pop('aspectmode', None)
+        self.aspectmode = aspectmode or v
+        v = arg.pop('aspectratio', None)
+        self.aspectratio = aspectratio or v
+        v = arg.pop('bgcolor', None)
+        self.bgcolor = bgcolor or v
+        v = arg.pop('camera', None)
+        self.camera = camera or v
+        v = arg.pop('domain', None)
+        self.domain = domain or v
+        v = arg.pop('dragmode', None)
+        self.dragmode = dragmode or v
+        v = arg.pop('hovermode', None)
+        self.hovermode = hovermode or v
+        v = arg.pop('xaxis', None)
+        self.xaxis = xaxis or v
+        v = arg.pop('yaxis', None)
+        self.yaxis = yaxis or v
+        v = arg.pop('zaxis', None)
+        self.zaxis = zaxis or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

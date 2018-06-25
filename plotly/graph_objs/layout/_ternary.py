@@ -788,6 +788,7 @@ class Ternary(BaseLayoutHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         aaxis=None,
         baxis=None,
         bgcolor=None,
@@ -801,6 +802,9 @@ class Ternary(BaseLayoutHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.layout.Ternary
         aaxis
             plotly.graph_objs.layout.ternary.Aaxis instance or dict
             with compatible properties
@@ -825,6 +829,20 @@ class Ternary(BaseLayoutHierarchyType):
         """
         super(Ternary, self).__init__('ternary')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.Ternary 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.Ternary"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout import (ternary as v_ternary)
@@ -840,13 +858,19 @@ class Ternary(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.aaxis = aaxis
-        self.baxis = baxis
-        self.bgcolor = bgcolor
-        self.caxis = caxis
-        self.domain = domain
-        self.sum = sum
+        v = arg.pop('aaxis', None)
+        self.aaxis = aaxis or v
+        v = arg.pop('baxis', None)
+        self.baxis = baxis or v
+        v = arg.pop('bgcolor', None)
+        self.bgcolor = bgcolor or v
+        v = arg.pop('caxis', None)
+        self.caxis = caxis or v
+        v = arg.pop('domain', None)
+        self.domain = domain or v
+        v = arg.pop('sum', None)
+        self.sum = sum or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

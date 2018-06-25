@@ -111,13 +111,22 @@ class Dimension(BaseTraceHierarchyType):
         """
 
     def __init__(
-        self, label=None, values=None, valuessrc=None, visible=None, **kwargs
+        self,
+        arg=None,
+        label=None,
+        values=None,
+        valuessrc=None,
+        visible=None,
+        **kwargs
     ):
         """
         Construct a new Dimension object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.splom.Dimension
         label
             Sets the label corresponding to this splom dimension.
         values
@@ -136,6 +145,20 @@ class Dimension(BaseTraceHierarchyType):
         """
         super(Dimension, self).__init__('dimensions')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.splom.Dimension 
+constructor must be a dict or 
+an instance of plotly.graph_objs.splom.Dimension"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.splom import (dimension as v_dimension)
@@ -149,11 +172,15 @@ class Dimension(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.label = label
-        self.values = values
-        self.valuessrc = valuessrc
-        self.visible = visible
+        v = arg.pop('label', None)
+        self.label = label or v
+        v = arg.pop('values', None)
+        self.values = values or v
+        v = arg.pop('valuessrc', None)
+        self.valuessrc = valuessrc or v
+        v = arg.pop('visible', None)
+        self.visible = visible or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

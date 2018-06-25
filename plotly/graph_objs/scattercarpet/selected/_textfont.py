@@ -77,12 +77,16 @@ class Textfont(BaseTraceHierarchyType):
             Sets the text font color of selected points.
         """
 
-    def __init__(self, color=None, **kwargs):
+    def __init__(self, arg=None, color=None, **kwargs):
         """
         Construct a new Textfont object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of
+            plotly.graph_objs.scattercarpet.selected.Textfont
         color
             Sets the text font color of selected points.
 
@@ -91,6 +95,20 @@ class Textfont(BaseTraceHierarchyType):
         Textfont
         """
         super(Textfont, self).__init__('textfont')
+
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.scattercarpet.selected.Textfont 
+constructor must be a dict or 
+an instance of plotly.graph_objs.scattercarpet.selected.Textfont"""
+            )
 
         # Import validators
         # -----------------
@@ -104,8 +122,9 @@ class Textfont(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.color = color
+        v = arg.pop('color', None)
+        self.color = color or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

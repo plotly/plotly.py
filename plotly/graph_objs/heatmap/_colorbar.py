@@ -1338,6 +1338,7 @@ class ColorBar(BaseTraceHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         bgcolor=None,
         bordercolor=None,
         borderwidth=None,
@@ -1387,6 +1388,9 @@ class ColorBar(BaseTraceHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.heatmap.ColorBar
         bgcolor
             Sets the color of padded area.
         bordercolor
@@ -1567,6 +1571,20 @@ class ColorBar(BaseTraceHierarchyType):
         """
         super(ColorBar, self).__init__('colorbar')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.heatmap.ColorBar 
+constructor must be a dict or 
+an instance of plotly.graph_objs.heatmap.ColorBar"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.heatmap import (colorbar as v_colorbar)
@@ -1624,49 +1642,91 @@ class ColorBar(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.bgcolor = bgcolor
-        self.bordercolor = bordercolor
-        self.borderwidth = borderwidth
-        self.dtick = dtick
-        self.exponentformat = exponentformat
-        self.len = len
-        self.lenmode = lenmode
-        self.nticks = nticks
-        self.outlinecolor = outlinecolor
-        self.outlinewidth = outlinewidth
-        self.separatethousands = separatethousands
-        self.showexponent = showexponent
-        self.showticklabels = showticklabels
-        self.showtickprefix = showtickprefix
-        self.showticksuffix = showticksuffix
-        self.thickness = thickness
-        self.thicknessmode = thicknessmode
-        self.tick0 = tick0
-        self.tickangle = tickangle
-        self.tickcolor = tickcolor
-        self.tickfont = tickfont
-        self.tickformat = tickformat
-        self.tickformatstops = tickformatstops
-        self.ticklen = ticklen
-        self.tickmode = tickmode
-        self.tickprefix = tickprefix
-        self.ticks = ticks
-        self.ticksuffix = ticksuffix
-        self.ticktext = ticktext
-        self.ticktextsrc = ticktextsrc
-        self.tickvals = tickvals
-        self.tickvalssrc = tickvalssrc
-        self.tickwidth = tickwidth
-        self.title = title
-        self.titlefont = titlefont
-        self.titleside = titleside
-        self.x = x
-        self.xanchor = xanchor
-        self.xpad = xpad
-        self.y = y
-        self.yanchor = yanchor
-        self.ypad = ypad
+        v = arg.pop('bgcolor', None)
+        self.bgcolor = bgcolor or v
+        v = arg.pop('bordercolor', None)
+        self.bordercolor = bordercolor or v
+        v = arg.pop('borderwidth', None)
+        self.borderwidth = borderwidth or v
+        v = arg.pop('dtick', None)
+        self.dtick = dtick or v
+        v = arg.pop('exponentformat', None)
+        self.exponentformat = exponentformat or v
+        v = arg.pop('len', None)
+        self.len = len or v
+        v = arg.pop('lenmode', None)
+        self.lenmode = lenmode or v
+        v = arg.pop('nticks', None)
+        self.nticks = nticks or v
+        v = arg.pop('outlinecolor', None)
+        self.outlinecolor = outlinecolor or v
+        v = arg.pop('outlinewidth', None)
+        self.outlinewidth = outlinewidth or v
+        v = arg.pop('separatethousands', None)
+        self.separatethousands = separatethousands or v
+        v = arg.pop('showexponent', None)
+        self.showexponent = showexponent or v
+        v = arg.pop('showticklabels', None)
+        self.showticklabels = showticklabels or v
+        v = arg.pop('showtickprefix', None)
+        self.showtickprefix = showtickprefix or v
+        v = arg.pop('showticksuffix', None)
+        self.showticksuffix = showticksuffix or v
+        v = arg.pop('thickness', None)
+        self.thickness = thickness or v
+        v = arg.pop('thicknessmode', None)
+        self.thicknessmode = thicknessmode or v
+        v = arg.pop('tick0', None)
+        self.tick0 = tick0 or v
+        v = arg.pop('tickangle', None)
+        self.tickangle = tickangle or v
+        v = arg.pop('tickcolor', None)
+        self.tickcolor = tickcolor or v
+        v = arg.pop('tickfont', None)
+        self.tickfont = tickfont or v
+        v = arg.pop('tickformat', None)
+        self.tickformat = tickformat or v
+        v = arg.pop('tickformatstops', None)
+        self.tickformatstops = tickformatstops or v
+        v = arg.pop('ticklen', None)
+        self.ticklen = ticklen or v
+        v = arg.pop('tickmode', None)
+        self.tickmode = tickmode or v
+        v = arg.pop('tickprefix', None)
+        self.tickprefix = tickprefix or v
+        v = arg.pop('ticks', None)
+        self.ticks = ticks or v
+        v = arg.pop('ticksuffix', None)
+        self.ticksuffix = ticksuffix or v
+        v = arg.pop('ticktext', None)
+        self.ticktext = ticktext or v
+        v = arg.pop('ticktextsrc', None)
+        self.ticktextsrc = ticktextsrc or v
+        v = arg.pop('tickvals', None)
+        self.tickvals = tickvals or v
+        v = arg.pop('tickvalssrc', None)
+        self.tickvalssrc = tickvalssrc or v
+        v = arg.pop('tickwidth', None)
+        self.tickwidth = tickwidth or v
+        v = arg.pop('title', None)
+        self.title = title or v
+        v = arg.pop('titlefont', None)
+        self.titlefont = titlefont or v
+        v = arg.pop('titleside', None)
+        self.titleside = titleside or v
+        v = arg.pop('x', None)
+        self.x = x or v
+        v = arg.pop('xanchor', None)
+        self.xanchor = xanchor or v
+        v = arg.pop('xpad', None)
+        self.xpad = xpad or v
+        v = arg.pop('y', None)
+        self.y = y or v
+        v = arg.pop('yanchor', None)
+        self.yanchor = yanchor or v
+        v = arg.pop('ypad', None)
+        self.ypad = ypad or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

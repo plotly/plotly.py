@@ -106,12 +106,16 @@ class Border(BaseTraceHierarchyType):
             panning.
         """
 
-    def __init__(self, arearatio=None, color=None, **kwargs):
+    def __init__(self, arg=None, arearatio=None, color=None, **kwargs):
         """
         Construct a new Border object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of
+            plotly.graph_objs.pointcloud.marker.Border
         arearatio
             Specifies what fraction of the marker area is covered
             with the border.
@@ -127,6 +131,20 @@ class Border(BaseTraceHierarchyType):
         """
         super(Border, self).__init__('border')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.pointcloud.marker.Border 
+constructor must be a dict or 
+an instance of plotly.graph_objs.pointcloud.marker.Border"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.pointcloud.marker import (border as v_border)
@@ -138,9 +156,11 @@ class Border(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.arearatio = arearatio
-        self.color = color
+        v = arg.pop('arearatio', None)
+        self.arearatio = arearatio or v
+        v = arg.pop('color', None)
+        self.color = color or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

@@ -223,6 +223,7 @@ class Hoverlabel(BaseLayoutHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         bgcolor=None,
         bordercolor=None,
         font=None,
@@ -234,6 +235,9 @@ class Hoverlabel(BaseLayoutHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.layout.Hoverlabel
         bgcolor
             Sets the background color of all hover labels on graph
         bordercolor
@@ -256,6 +260,20 @@ class Hoverlabel(BaseLayoutHierarchyType):
         """
         super(Hoverlabel, self).__init__('hoverlabel')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.Hoverlabel 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.Hoverlabel"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout import (hoverlabel as v_hoverlabel)
@@ -269,11 +287,15 @@ class Hoverlabel(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.bgcolor = bgcolor
-        self.bordercolor = bordercolor
-        self.font = font
-        self.namelength = namelength
+        v = arg.pop('bgcolor', None)
+        self.bgcolor = bgcolor or v
+        v = arg.pop('bordercolor', None)
+        self.bordercolor = bordercolor or v
+        v = arg.pop('font', None)
+        self.font = font or v
+        v = arg.pop('namelength', None)
+        self.namelength = namelength or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

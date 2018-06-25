@@ -360,6 +360,7 @@ class Line(BaseTraceHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         autocolorscale=None,
         cauto=None,
         cmax=None,
@@ -377,6 +378,10 @@ class Line(BaseTraceHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of
+            plotly.graph_objs.scattercarpet.marker.Line
         autocolorscale
             Has an effect only if `color` is set to a numerical
             array. Determines whether the colorscale is a default
@@ -442,6 +447,20 @@ class Line(BaseTraceHierarchyType):
         """
         super(Line, self).__init__('line')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.scattercarpet.marker.Line 
+constructor must be a dict or 
+an instance of plotly.graph_objs.scattercarpet.marker.Line"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.scattercarpet.marker import (line as v_line)
@@ -461,17 +480,27 @@ class Line(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.autocolorscale = autocolorscale
-        self.cauto = cauto
-        self.cmax = cmax
-        self.cmin = cmin
-        self.color = color
-        self.colorscale = colorscale
-        self.colorsrc = colorsrc
-        self.reversescale = reversescale
-        self.width = width
-        self.widthsrc = widthsrc
+        v = arg.pop('autocolorscale', None)
+        self.autocolorscale = autocolorscale or v
+        v = arg.pop('cauto', None)
+        self.cauto = cauto or v
+        v = arg.pop('cmax', None)
+        self.cmax = cmax or v
+        v = arg.pop('cmin', None)
+        self.cmin = cmin or v
+        v = arg.pop('color', None)
+        self.color = color or v
+        v = arg.pop('colorscale', None)
+        self.colorscale = colorscale or v
+        v = arg.pop('colorsrc', None)
+        self.colorsrc = colorsrc or v
+        v = arg.pop('reversescale', None)
+        self.reversescale = reversescale or v
+        v = arg.pop('width', None)
+        self.width = width or v
+        v = arg.pop('widthsrc', None)
+        self.widthsrc = widthsrc or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

@@ -1214,6 +1214,7 @@ class Baxis(BaseLayoutHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         color=None,
         dtick=None,
         exponentformat=None,
@@ -1257,6 +1258,9 @@ class Baxis(BaseLayoutHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.layout.ternary.Baxis
         color
             Sets default for all colors associated with this axis
             all at once: line, font, tick, and grid colors. Grid
@@ -1429,6 +1433,20 @@ class Baxis(BaseLayoutHierarchyType):
         """
         super(Baxis, self).__init__('baxis')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.ternary.Baxis 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.ternary.Baxis"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout.ternary import (baxis as v_baxis)
@@ -1476,43 +1494,79 @@ class Baxis(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.color = color
-        self.dtick = dtick
-        self.exponentformat = exponentformat
-        self.gridcolor = gridcolor
-        self.gridwidth = gridwidth
-        self.hoverformat = hoverformat
-        self.layer = layer
-        self.linecolor = linecolor
-        self.linewidth = linewidth
-        self.min = min
-        self.nticks = nticks
-        self.separatethousands = separatethousands
-        self.showexponent = showexponent
-        self.showgrid = showgrid
-        self.showline = showline
-        self.showticklabels = showticklabels
-        self.showtickprefix = showtickprefix
-        self.showticksuffix = showticksuffix
-        self.tick0 = tick0
-        self.tickangle = tickangle
-        self.tickcolor = tickcolor
-        self.tickfont = tickfont
-        self.tickformat = tickformat
-        self.tickformatstops = tickformatstops
-        self.ticklen = ticklen
-        self.tickmode = tickmode
-        self.tickprefix = tickprefix
-        self.ticks = ticks
-        self.ticksuffix = ticksuffix
-        self.ticktext = ticktext
-        self.ticktextsrc = ticktextsrc
-        self.tickvals = tickvals
-        self.tickvalssrc = tickvalssrc
-        self.tickwidth = tickwidth
-        self.title = title
-        self.titlefont = titlefont
+        v = arg.pop('color', None)
+        self.color = color or v
+        v = arg.pop('dtick', None)
+        self.dtick = dtick or v
+        v = arg.pop('exponentformat', None)
+        self.exponentformat = exponentformat or v
+        v = arg.pop('gridcolor', None)
+        self.gridcolor = gridcolor or v
+        v = arg.pop('gridwidth', None)
+        self.gridwidth = gridwidth or v
+        v = arg.pop('hoverformat', None)
+        self.hoverformat = hoverformat or v
+        v = arg.pop('layer', None)
+        self.layer = layer or v
+        v = arg.pop('linecolor', None)
+        self.linecolor = linecolor or v
+        v = arg.pop('linewidth', None)
+        self.linewidth = linewidth or v
+        v = arg.pop('min', None)
+        self.min = min or v
+        v = arg.pop('nticks', None)
+        self.nticks = nticks or v
+        v = arg.pop('separatethousands', None)
+        self.separatethousands = separatethousands or v
+        v = arg.pop('showexponent', None)
+        self.showexponent = showexponent or v
+        v = arg.pop('showgrid', None)
+        self.showgrid = showgrid or v
+        v = arg.pop('showline', None)
+        self.showline = showline or v
+        v = arg.pop('showticklabels', None)
+        self.showticklabels = showticklabels or v
+        v = arg.pop('showtickprefix', None)
+        self.showtickprefix = showtickprefix or v
+        v = arg.pop('showticksuffix', None)
+        self.showticksuffix = showticksuffix or v
+        v = arg.pop('tick0', None)
+        self.tick0 = tick0 or v
+        v = arg.pop('tickangle', None)
+        self.tickangle = tickangle or v
+        v = arg.pop('tickcolor', None)
+        self.tickcolor = tickcolor or v
+        v = arg.pop('tickfont', None)
+        self.tickfont = tickfont or v
+        v = arg.pop('tickformat', None)
+        self.tickformat = tickformat or v
+        v = arg.pop('tickformatstops', None)
+        self.tickformatstops = tickformatstops or v
+        v = arg.pop('ticklen', None)
+        self.ticklen = ticklen or v
+        v = arg.pop('tickmode', None)
+        self.tickmode = tickmode or v
+        v = arg.pop('tickprefix', None)
+        self.tickprefix = tickprefix or v
+        v = arg.pop('ticks', None)
+        self.ticks = ticks or v
+        v = arg.pop('ticksuffix', None)
+        self.ticksuffix = ticksuffix or v
+        v = arg.pop('ticktext', None)
+        self.ticktext = ticktext or v
+        v = arg.pop('ticktextsrc', None)
+        self.ticktextsrc = ticktextsrc or v
+        v = arg.pop('tickvals', None)
+        self.tickvals = tickvals or v
+        v = arg.pop('tickvalssrc', None)
+        self.tickvalssrc = tickvalssrc or v
+        v = arg.pop('tickwidth', None)
+        self.tickwidth = tickwidth or v
+        v = arg.pop('title', None)
+        self.title = title or v
+        v = arg.pop('titlefont', None)
+        self.titlefont = titlefont or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

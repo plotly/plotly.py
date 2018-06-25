@@ -40,12 +40,16 @@ class Marker(BaseTraceHierarchyType):
             only when a selection exists.
         """
 
-    def __init__(self, opacity=None, **kwargs):
+    def __init__(self, arg=None, opacity=None, **kwargs):
         """
         Construct a new Marker object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of
+            plotly.graph_objs.choropleth.unselected.Marker
         opacity
             Sets the marker opacity of unselected points, applied
             only when a selection exists.
@@ -55,6 +59,20 @@ class Marker(BaseTraceHierarchyType):
         Marker
         """
         super(Marker, self).__init__('marker')
+
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.choropleth.unselected.Marker 
+constructor must be a dict or 
+an instance of plotly.graph_objs.choropleth.unselected.Marker"""
+            )
 
         # Import validators
         # -----------------
@@ -68,8 +86,9 @@ class Marker(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.opacity = opacity
+        v = arg.pop('opacity', None)
+        self.opacity = opacity or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

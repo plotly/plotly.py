@@ -3148,6 +3148,7 @@ class Layout(BaseLayoutType):
 
     def __init__(
         self,
+        arg=None,
         angularaxis=None,
         annotations=None,
         autosize=None,
@@ -3206,6 +3207,9 @@ class Layout(BaseLayoutType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Layout
         angularaxis
             plotly.graph_objs.layout.AngularAxis instance or dict
             with compatible properties
@@ -3404,6 +3408,20 @@ class Layout(BaseLayoutType):
         """
         super(Layout, self).__init__('layout')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Layout 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Layout"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators import (layout as v_layout)
@@ -3466,58 +3484,109 @@ class Layout(BaseLayoutType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.angularaxis = angularaxis
-        self.annotations = annotations
-        self.autosize = autosize
-        self.bargap = bargap
-        self.bargroupgap = bargroupgap
-        self.barmode = barmode
-        self.barnorm = barnorm
-        self.boxgap = boxgap
-        self.boxgroupgap = boxgroupgap
-        self.boxmode = boxmode
-        self.calendar = calendar
-        self.colorway = colorway
-        self.datarevision = datarevision
-        self.direction = direction
-        self.dragmode = dragmode
-        self.font = font
-        self.geo = geo
-        self.grid = grid
-        self.height = height
-        self.hiddenlabels = hiddenlabels
-        self.hiddenlabelssrc = hiddenlabelssrc
-        self.hidesources = hidesources
-        self.hoverdistance = hoverdistance
-        self.hoverlabel = hoverlabel
-        self.hovermode = hovermode
-        self.images = images
-        self.legend = legend
-        self.mapbox = mapbox
-        self.margin = margin
-        self.orientation = orientation
-        self.paper_bgcolor = paper_bgcolor
-        self.plot_bgcolor = plot_bgcolor
-        self.polar = polar
-        self.radialaxis = radialaxis
-        self.scene = scene
-        self.selectdirection = selectdirection
-        self.separators = separators
-        self.shapes = shapes
-        self.showlegend = showlegend
-        self.sliders = sliders
-        self.spikedistance = spikedistance
-        self.ternary = ternary
-        self.title = title
-        self.titlefont = titlefont
-        self.updatemenus = updatemenus
-        self.violingap = violingap
-        self.violingroupgap = violingroupgap
-        self.violinmode = violinmode
-        self.width = width
-        self.xaxis = xaxis
-        self.yaxis = yaxis
+        v = arg.pop('angularaxis', None)
+        self.angularaxis = angularaxis or v
+        v = arg.pop('annotations', None)
+        self.annotations = annotations or v
+        v = arg.pop('autosize', None)
+        self.autosize = autosize or v
+        v = arg.pop('bargap', None)
+        self.bargap = bargap or v
+        v = arg.pop('bargroupgap', None)
+        self.bargroupgap = bargroupgap or v
+        v = arg.pop('barmode', None)
+        self.barmode = barmode or v
+        v = arg.pop('barnorm', None)
+        self.barnorm = barnorm or v
+        v = arg.pop('boxgap', None)
+        self.boxgap = boxgap or v
+        v = arg.pop('boxgroupgap', None)
+        self.boxgroupgap = boxgroupgap or v
+        v = arg.pop('boxmode', None)
+        self.boxmode = boxmode or v
+        v = arg.pop('calendar', None)
+        self.calendar = calendar or v
+        v = arg.pop('colorway', None)
+        self.colorway = colorway or v
+        v = arg.pop('datarevision', None)
+        self.datarevision = datarevision or v
+        v = arg.pop('direction', None)
+        self.direction = direction or v
+        v = arg.pop('dragmode', None)
+        self.dragmode = dragmode or v
+        v = arg.pop('font', None)
+        self.font = font or v
+        v = arg.pop('geo', None)
+        self.geo = geo or v
+        v = arg.pop('grid', None)
+        self.grid = grid or v
+        v = arg.pop('height', None)
+        self.height = height or v
+        v = arg.pop('hiddenlabels', None)
+        self.hiddenlabels = hiddenlabels or v
+        v = arg.pop('hiddenlabelssrc', None)
+        self.hiddenlabelssrc = hiddenlabelssrc or v
+        v = arg.pop('hidesources', None)
+        self.hidesources = hidesources or v
+        v = arg.pop('hoverdistance', None)
+        self.hoverdistance = hoverdistance or v
+        v = arg.pop('hoverlabel', None)
+        self.hoverlabel = hoverlabel or v
+        v = arg.pop('hovermode', None)
+        self.hovermode = hovermode or v
+        v = arg.pop('images', None)
+        self.images = images or v
+        v = arg.pop('legend', None)
+        self.legend = legend or v
+        v = arg.pop('mapbox', None)
+        self.mapbox = mapbox or v
+        v = arg.pop('margin', None)
+        self.margin = margin or v
+        v = arg.pop('orientation', None)
+        self.orientation = orientation or v
+        v = arg.pop('paper_bgcolor', None)
+        self.paper_bgcolor = paper_bgcolor or v
+        v = arg.pop('plot_bgcolor', None)
+        self.plot_bgcolor = plot_bgcolor or v
+        v = arg.pop('polar', None)
+        self.polar = polar or v
+        v = arg.pop('radialaxis', None)
+        self.radialaxis = radialaxis or v
+        v = arg.pop('scene', None)
+        self.scene = scene or v
+        v = arg.pop('selectdirection', None)
+        self.selectdirection = selectdirection or v
+        v = arg.pop('separators', None)
+        self.separators = separators or v
+        v = arg.pop('shapes', None)
+        self.shapes = shapes or v
+        v = arg.pop('showlegend', None)
+        self.showlegend = showlegend or v
+        v = arg.pop('sliders', None)
+        self.sliders = sliders or v
+        v = arg.pop('spikedistance', None)
+        self.spikedistance = spikedistance or v
+        v = arg.pop('ternary', None)
+        self.ternary = ternary or v
+        v = arg.pop('title', None)
+        self.title = title or v
+        v = arg.pop('titlefont', None)
+        self.titlefont = titlefont or v
+        v = arg.pop('updatemenus', None)
+        self.updatemenus = updatemenus or v
+        v = arg.pop('violingap', None)
+        self.violingap = violingap or v
+        v = arg.pop('violingroupgap', None)
+        self.violingroupgap = violingroupgap or v
+        v = arg.pop('violinmode', None)
+        self.violinmode = violinmode or v
+        v = arg.pop('width', None)
+        self.width = width or v
+        v = arg.pop('xaxis', None)
+        self.xaxis = xaxis or v
+        v = arg.pop('yaxis', None)
+        self.yaxis = yaxis or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

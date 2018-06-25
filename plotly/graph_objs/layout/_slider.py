@@ -768,6 +768,7 @@ class Slider(BaseLayoutHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         active=None,
         activebgcolor=None,
         bgcolor=None,
@@ -796,6 +797,9 @@ class Slider(BaseLayoutHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.layout.Slider
         active
             Determines which button (by index starting from 0) is
             considered active.
@@ -862,6 +866,20 @@ class Slider(BaseLayoutHierarchyType):
         """
         super(Slider, self).__init__('sliders')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.Slider 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.Slider"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout import (slider as v_slider)
@@ -892,28 +910,49 @@ class Slider(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.active = active
-        self.activebgcolor = activebgcolor
-        self.bgcolor = bgcolor
-        self.bordercolor = bordercolor
-        self.borderwidth = borderwidth
-        self.currentvalue = currentvalue
-        self.font = font
-        self.len = len
-        self.lenmode = lenmode
-        self.minorticklen = minorticklen
-        self.pad = pad
-        self.steps = steps
-        self.tickcolor = tickcolor
-        self.ticklen = ticklen
-        self.tickwidth = tickwidth
-        self.transition = transition
-        self.visible = visible
-        self.x = x
-        self.xanchor = xanchor
-        self.y = y
-        self.yanchor = yanchor
+        v = arg.pop('active', None)
+        self.active = active or v
+        v = arg.pop('activebgcolor', None)
+        self.activebgcolor = activebgcolor or v
+        v = arg.pop('bgcolor', None)
+        self.bgcolor = bgcolor or v
+        v = arg.pop('bordercolor', None)
+        self.bordercolor = bordercolor or v
+        v = arg.pop('borderwidth', None)
+        self.borderwidth = borderwidth or v
+        v = arg.pop('currentvalue', None)
+        self.currentvalue = currentvalue or v
+        v = arg.pop('font', None)
+        self.font = font or v
+        v = arg.pop('len', None)
+        self.len = len or v
+        v = arg.pop('lenmode', None)
+        self.lenmode = lenmode or v
+        v = arg.pop('minorticklen', None)
+        self.minorticklen = minorticklen or v
+        v = arg.pop('pad', None)
+        self.pad = pad or v
+        v = arg.pop('steps', None)
+        self.steps = steps or v
+        v = arg.pop('tickcolor', None)
+        self.tickcolor = tickcolor or v
+        v = arg.pop('ticklen', None)
+        self.ticklen = ticklen or v
+        v = arg.pop('tickwidth', None)
+        self.tickwidth = tickwidth or v
+        v = arg.pop('transition', None)
+        self.transition = transition or v
+        v = arg.pop('visible', None)
+        self.visible = visible or v
+        v = arg.pop('x', None)
+        self.x = x or v
+        v = arg.pop('xanchor', None)
+        self.xanchor = xanchor or v
+        v = arg.pop('y', None)
+        self.y = y or v
+        v = arg.pop('yanchor', None)
+        self.yanchor = yanchor or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

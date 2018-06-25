@@ -228,6 +228,7 @@ class Marker(BaseTraceHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         blend=None,
         border=None,
         color=None,
@@ -241,6 +242,9 @@ class Marker(BaseTraceHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.pointcloud.Marker
         blend
             Determines if colors are blended together for a
             translucency effect in case `opacity` is specified as a
@@ -276,6 +280,20 @@ class Marker(BaseTraceHierarchyType):
         """
         super(Marker, self).__init__('marker')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.pointcloud.Marker 
+constructor must be a dict or 
+an instance of plotly.graph_objs.pointcloud.Marker"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.pointcloud import (marker as v_marker)
@@ -291,13 +309,19 @@ class Marker(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.blend = blend
-        self.border = border
-        self.color = color
-        self.opacity = opacity
-        self.sizemax = sizemax
-        self.sizemin = sizemin
+        v = arg.pop('blend', None)
+        self.blend = blend or v
+        v = arg.pop('border', None)
+        self.border = border or v
+        v = arg.pop('color', None)
+        self.color = color or v
+        v = arg.pop('opacity', None)
+        self.opacity = opacity or v
+        v = arg.pop('sizemax', None)
+        self.sizemax = sizemax or v
+        v = arg.pop('sizemin', None)
+        self.sizemin = sizemin or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

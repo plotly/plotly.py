@@ -405,6 +405,7 @@ class Grid(BaseLayoutHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         columns=None,
         domain=None,
         pattern=None,
@@ -424,6 +425,9 @@ class Grid(BaseLayoutHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.layout.Grid
         columns
             The number of columns in the grid. If you provide a 2D
             `subplots` array, the length of its longest row is used
@@ -501,6 +505,20 @@ class Grid(BaseLayoutHierarchyType):
         """
         super(Grid, self).__init__('grid')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.Grid 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.Grid"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout import (grid as v_grid)
@@ -522,19 +540,31 @@ class Grid(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.columns = columns
-        self.domain = domain
-        self.pattern = pattern
-        self.roworder = roworder
-        self.rows = rows
-        self.subplots = subplots
-        self.xaxes = xaxes
-        self.xgap = xgap
-        self.xside = xside
-        self.yaxes = yaxes
-        self.ygap = ygap
-        self.yside = yside
+        v = arg.pop('columns', None)
+        self.columns = columns or v
+        v = arg.pop('domain', None)
+        self.domain = domain or v
+        v = arg.pop('pattern', None)
+        self.pattern = pattern or v
+        v = arg.pop('roworder', None)
+        self.roworder = roworder or v
+        v = arg.pop('rows', None)
+        self.rows = rows or v
+        v = arg.pop('subplots', None)
+        self.subplots = subplots or v
+        v = arg.pop('xaxes', None)
+        self.xaxes = xaxes or v
+        v = arg.pop('xgap', None)
+        self.xgap = xgap or v
+        v = arg.pop('xside', None)
+        self.xside = xside or v
+        v = arg.pop('yaxes', None)
+        self.yaxes = yaxes or v
+        v = arg.pop('ygap', None)
+        self.ygap = ygap or v
+        v = arg.pop('yside', None)
+        self.yside = yside or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

@@ -1114,6 +1114,7 @@ class Scattermapbox(BaseTraceType):
 
     def __init__(
         self,
+        arg=None,
         connectgaps=None,
         customdata=None,
         customdatasrc=None,
@@ -1159,6 +1160,9 @@ class Scattermapbox(BaseTraceType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Scattermapbox
         connectgaps
             Determines whether or not gaps (i.e. {nan} or missing
             values) in the provided data arrays are connected.
@@ -1285,6 +1289,20 @@ class Scattermapbox(BaseTraceType):
         """
         super(Scattermapbox, self).__init__('scattermapbox')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Scattermapbox 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Scattermapbox"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators import (scattermapbox as v_scattermapbox)
@@ -1335,40 +1353,74 @@ class Scattermapbox(BaseTraceType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.connectgaps = connectgaps
-        self.customdata = customdata
-        self.customdatasrc = customdatasrc
-        self.fill = fill
-        self.fillcolor = fillcolor
-        self.hoverinfo = hoverinfo
-        self.hoverinfosrc = hoverinfosrc
-        self.hoverlabel = hoverlabel
-        self.hovertext = hovertext
-        self.hovertextsrc = hovertextsrc
-        self.ids = ids
-        self.idssrc = idssrc
-        self.lat = lat
-        self.latsrc = latsrc
-        self.legendgroup = legendgroup
-        self.line = line
-        self.lon = lon
-        self.lonsrc = lonsrc
-        self.marker = marker
-        self.mode = mode
-        self.name = name
-        self.opacity = opacity
-        self.selected = selected
-        self.selectedpoints = selectedpoints
-        self.showlegend = showlegend
-        self.stream = stream
-        self.subplot = subplot
-        self.text = text
-        self.textfont = textfont
-        self.textposition = textposition
-        self.textsrc = textsrc
-        self.uid = uid
-        self.unselected = unselected
-        self.visible = visible
+        v = arg.pop('connectgaps', None)
+        self.connectgaps = connectgaps or v
+        v = arg.pop('customdata', None)
+        self.customdata = customdata or v
+        v = arg.pop('customdatasrc', None)
+        self.customdatasrc = customdatasrc or v
+        v = arg.pop('fill', None)
+        self.fill = fill or v
+        v = arg.pop('fillcolor', None)
+        self.fillcolor = fillcolor or v
+        v = arg.pop('hoverinfo', None)
+        self.hoverinfo = hoverinfo or v
+        v = arg.pop('hoverinfosrc', None)
+        self.hoverinfosrc = hoverinfosrc or v
+        v = arg.pop('hoverlabel', None)
+        self.hoverlabel = hoverlabel or v
+        v = arg.pop('hovertext', None)
+        self.hovertext = hovertext or v
+        v = arg.pop('hovertextsrc', None)
+        self.hovertextsrc = hovertextsrc or v
+        v = arg.pop('ids', None)
+        self.ids = ids or v
+        v = arg.pop('idssrc', None)
+        self.idssrc = idssrc or v
+        v = arg.pop('lat', None)
+        self.lat = lat or v
+        v = arg.pop('latsrc', None)
+        self.latsrc = latsrc or v
+        v = arg.pop('legendgroup', None)
+        self.legendgroup = legendgroup or v
+        v = arg.pop('line', None)
+        self.line = line or v
+        v = arg.pop('lon', None)
+        self.lon = lon or v
+        v = arg.pop('lonsrc', None)
+        self.lonsrc = lonsrc or v
+        v = arg.pop('marker', None)
+        self.marker = marker or v
+        v = arg.pop('mode', None)
+        self.mode = mode or v
+        v = arg.pop('name', None)
+        self.name = name or v
+        v = arg.pop('opacity', None)
+        self.opacity = opacity or v
+        v = arg.pop('selected', None)
+        self.selected = selected or v
+        v = arg.pop('selectedpoints', None)
+        self.selectedpoints = selectedpoints or v
+        v = arg.pop('showlegend', None)
+        self.showlegend = showlegend or v
+        v = arg.pop('stream', None)
+        self.stream = stream or v
+        v = arg.pop('subplot', None)
+        self.subplot = subplot or v
+        v = arg.pop('text', None)
+        self.text = text or v
+        v = arg.pop('textfont', None)
+        self.textfont = textfont or v
+        v = arg.pop('textposition', None)
+        self.textposition = textposition or v
+        v = arg.pop('textsrc', None)
+        self.textsrc = textsrc or v
+        v = arg.pop('uid', None)
+        self.uid = uid or v
+        v = arg.pop('unselected', None)
+        self.unselected = unselected or v
+        v = arg.pop('visible', None)
+        self.visible = visible or v
 
         # Read-only literals
         # ------------------
@@ -1380,4 +1432,4 @@ class Scattermapbox(BaseTraceType):
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))
