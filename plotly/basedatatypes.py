@@ -3846,3 +3846,43 @@ class BaseFrameHierarchyType(BasePlotlyType):
     def on_change(self, callback, *args):
         raise NotImplementedError(
             'Change callbacks are not supported on Frames')
+
+    def _get_child_props(self, child):
+        """
+        Return the properties dict for a child trace or child layout
+
+        Note: this method must match the name/signature of one on
+        BasePlotlyType
+
+        Parameters
+        ----------
+        child : BaseTraceType | BaseLayoutType
+
+        Returns
+        -------
+        dict
+        """
+        # Try to find index of child as a trace
+        # -------------------------------------
+        try:
+            trace_index = BaseFigure._index_is(self.data, child)
+        except ValueError as _:
+            trace_index = None
+
+        # Child is a trace
+        # ----------------
+        if trace_index is not None:
+            if 'data' in self._props:
+                return self._props['data'][trace_index]
+            else:
+                return None
+
+        # Child is the layout
+        # -------------------
+        elif child is self.layout:
+            return self._props.get('layout', None)
+
+        # Unknown child
+        # -------------
+        else:
+            raise ValueError('Unrecognized child: %s' % child)
