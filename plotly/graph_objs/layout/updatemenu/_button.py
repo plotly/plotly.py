@@ -135,13 +135,23 @@ class Button(BaseLayoutHierarchyType):
         """
 
     def __init__(
-        self, args=None, execute=None, label=None, method=None, **kwargs
+        self,
+        arg=None,
+        args=None,
+        execute=None,
+        label=None,
+        method=None,
+        **kwargs
     ):
         """
         Construct a new Button object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of
+            plotly.graph_objs.layout.updatemenu.Button
         args
             Sets the arguments values to be passed to the Plotly
             method set in `method` on click.
@@ -170,6 +180,20 @@ class Button(BaseLayoutHierarchyType):
         """
         super(Button, self).__init__('buttons')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.updatemenu.Button 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.updatemenu.Button"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout.updatemenu import (button as v_button)
@@ -183,11 +207,15 @@ class Button(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.args = args
-        self.execute = execute
-        self.label = label
-        self.method = method
+        v = arg.pop('args', None)
+        self.args = args or v
+        v = arg.pop('execute', None)
+        self.execute = execute or v
+        v = arg.pop('label', None)
+        self.label = label or v
+        v = arg.pop('method', None)
+        self.method = method or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

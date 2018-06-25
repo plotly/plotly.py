@@ -211,6 +211,7 @@ class Font(BaseTraceHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         color=None,
         colorsrc=None,
         family=None,
@@ -226,6 +227,10 @@ class Font(BaseTraceHierarchyType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of
+            plotly.graph_objs.scatter3d.hoverlabel.Font
         color
 
         colorsrc
@@ -257,6 +262,20 @@ class Font(BaseTraceHierarchyType):
         """
         super(Font, self).__init__('font')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.scatter3d.hoverlabel.Font 
+constructor must be a dict or 
+an instance of plotly.graph_objs.scatter3d.hoverlabel.Font"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.scatter3d.hoverlabel import (font as v_font)
@@ -272,13 +291,19 @@ class Font(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.color = color
-        self.colorsrc = colorsrc
-        self.family = family
-        self.familysrc = familysrc
-        self.size = size
-        self.sizesrc = sizesrc
+        v = arg.pop('color', None)
+        self.color = color or v
+        v = arg.pop('colorsrc', None)
+        self.colorsrc = colorsrc or v
+        v = arg.pop('family', None)
+        self.family = family or v
+        v = arg.pop('familysrc', None)
+        self.familysrc = familysrc or v
+        v = arg.pop('size', None)
+        self.size = size or v
+        v = arg.pop('sizesrc', None)
+        self.sizesrc = sizesrc or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

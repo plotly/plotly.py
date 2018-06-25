@@ -76,7 +76,7 @@ class Center(BaseLayoutHierarchyType):
 
         """
 
-    def __init__(self, x=None, y=None, z=None, **kwargs):
+    def __init__(self, arg=None, x=None, y=None, z=None, **kwargs):
         """
         Construct a new Center object
         
@@ -86,6 +86,10 @@ class Center(BaseLayoutHierarchyType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of
+            plotly.graph_objs.layout.scene.camera.Center
         x
 
         y
@@ -99,6 +103,20 @@ class Center(BaseLayoutHierarchyType):
         """
         super(Center, self).__init__('center')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.scene.camera.Center 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.scene.camera.Center"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout.scene.camera import (center as v_center)
@@ -111,10 +129,13 @@ class Center(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.x = x
-        self.y = y
-        self.z = z
+        v = arg.pop('x', None)
+        self.x = x or v
+        v = arg.pop('y', None)
+        self.y = y or v
+        v = arg.pop('z', None)
+        self.z = z or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

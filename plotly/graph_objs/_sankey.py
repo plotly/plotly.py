@@ -754,6 +754,7 @@ class Sankey(BaseTraceType):
 
     def __init__(
         self,
+        arg=None,
         arrangement=None,
         customdata=None,
         customdatasrc=None,
@@ -789,6 +790,9 @@ class Sankey(BaseTraceType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Sankey
         arrangement
             If value is `snap` (the default), the node arrangement
             is assisted by automatic snapping of elements to
@@ -876,6 +880,20 @@ class Sankey(BaseTraceType):
         """
         super(Sankey, self).__init__('sankey')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Sankey 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Sankey"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators import (sankey as v_sankey)
@@ -908,29 +926,52 @@ class Sankey(BaseTraceType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.arrangement = arrangement
-        self.customdata = customdata
-        self.customdatasrc = customdatasrc
-        self.domain = domain
-        self.hoverinfo = hoverinfo
-        self.hoverinfosrc = hoverinfosrc
-        self.hoverlabel = hoverlabel
-        self.ids = ids
-        self.idssrc = idssrc
-        self.legendgroup = legendgroup
-        self.link = link
-        self.name = name
-        self.node = node
-        self.opacity = opacity
-        self.orientation = orientation
-        self.selectedpoints = selectedpoints
-        self.showlegend = showlegend
-        self.stream = stream
-        self.textfont = textfont
-        self.uid = uid
-        self.valueformat = valueformat
-        self.valuesuffix = valuesuffix
-        self.visible = visible
+        v = arg.pop('arrangement', None)
+        self.arrangement = arrangement or v
+        v = arg.pop('customdata', None)
+        self.customdata = customdata or v
+        v = arg.pop('customdatasrc', None)
+        self.customdatasrc = customdatasrc or v
+        v = arg.pop('domain', None)
+        self.domain = domain or v
+        v = arg.pop('hoverinfo', None)
+        self.hoverinfo = hoverinfo or v
+        v = arg.pop('hoverinfosrc', None)
+        self.hoverinfosrc = hoverinfosrc or v
+        v = arg.pop('hoverlabel', None)
+        self.hoverlabel = hoverlabel or v
+        v = arg.pop('ids', None)
+        self.ids = ids or v
+        v = arg.pop('idssrc', None)
+        self.idssrc = idssrc or v
+        v = arg.pop('legendgroup', None)
+        self.legendgroup = legendgroup or v
+        v = arg.pop('link', None)
+        self.link = link or v
+        v = arg.pop('name', None)
+        self.name = name or v
+        v = arg.pop('node', None)
+        self.node = node or v
+        v = arg.pop('opacity', None)
+        self.opacity = opacity or v
+        v = arg.pop('orientation', None)
+        self.orientation = orientation or v
+        v = arg.pop('selectedpoints', None)
+        self.selectedpoints = selectedpoints or v
+        v = arg.pop('showlegend', None)
+        self.showlegend = showlegend or v
+        v = arg.pop('stream', None)
+        self.stream = stream or v
+        v = arg.pop('textfont', None)
+        self.textfont = textfont or v
+        v = arg.pop('uid', None)
+        self.uid = uid or v
+        v = arg.pop('valueformat', None)
+        self.valueformat = valueformat or v
+        v = arg.pop('valuesuffix', None)
+        self.valuesuffix = valuesuffix or v
+        v = arg.pop('visible', None)
+        self.visible = visible or v
 
         # Read-only literals
         # ------------------
@@ -942,4 +983,4 @@ class Sankey(BaseTraceType):
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

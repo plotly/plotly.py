@@ -121,12 +121,15 @@ class Contour(BaseTraceHierarchyType):
             Sets the width of the contour lines.
         """
 
-    def __init__(self, color=None, show=None, width=None, **kwargs):
+    def __init__(self, arg=None, color=None, show=None, width=None, **kwargs):
         """
         Construct a new Contour object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.mesh3d.Contour
         color
             Sets the color of the contour lines.
         show
@@ -140,6 +143,20 @@ class Contour(BaseTraceHierarchyType):
         """
         super(Contour, self).__init__('contour')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.mesh3d.Contour 
+constructor must be a dict or 
+an instance of plotly.graph_objs.mesh3d.Contour"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.mesh3d import (contour as v_contour)
@@ -152,10 +169,13 @@ class Contour(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.color = color
-        self.show = show
-        self.width = width
+        v = arg.pop('color', None)
+        self.color = color or v
+        v = arg.pop('show', None)
+        self.show = show or v
+        v = arg.pop('width', None)
+        self.width = width or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

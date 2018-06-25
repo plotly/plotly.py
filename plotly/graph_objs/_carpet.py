@@ -1399,6 +1399,7 @@ class Carpet(BaseTraceType):
 
     def __init__(
         self,
+        arg=None,
         a=None,
         a0=None,
         aaxis=None,
@@ -1448,6 +1449,9 @@ class Carpet(BaseTraceType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Carpet
         a
             An array containing values of the first parameter value
         a0
@@ -1571,6 +1575,20 @@ class Carpet(BaseTraceType):
         """
         super(Carpet, self).__init__('carpet')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Carpet 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Carpet"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators import (carpet as v_carpet)
@@ -1615,41 +1633,76 @@ class Carpet(BaseTraceType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.a = a
-        self.a0 = a0
-        self.aaxis = aaxis
-        self.asrc = asrc
-        self.b = b
-        self.b0 = b0
-        self.baxis = baxis
-        self.bsrc = bsrc
-        self.carpet = carpet
-        self.cheaterslope = cheaterslope
-        self.color = color
-        self.customdata = customdata
-        self.customdatasrc = customdatasrc
-        self.da = da
-        self.db = db
-        self.font = font
-        self.hoverinfo = hoverinfo
-        self.hoverinfosrc = hoverinfosrc
-        self.hoverlabel = hoverlabel
-        self.ids = ids
-        self.idssrc = idssrc
-        self.legendgroup = legendgroup
-        self.name = name
-        self.opacity = opacity
-        self.selectedpoints = selectedpoints
-        self.showlegend = showlegend
-        self.stream = stream
-        self.uid = uid
-        self.visible = visible
-        self.x = x
-        self.xaxis = xaxis
-        self.xsrc = xsrc
-        self.y = y
-        self.yaxis = yaxis
-        self.ysrc = ysrc
+        v = arg.pop('a', None)
+        self.a = a or v
+        v = arg.pop('a0', None)
+        self.a0 = a0 or v
+        v = arg.pop('aaxis', None)
+        self.aaxis = aaxis or v
+        v = arg.pop('asrc', None)
+        self.asrc = asrc or v
+        v = arg.pop('b', None)
+        self.b = b or v
+        v = arg.pop('b0', None)
+        self.b0 = b0 or v
+        v = arg.pop('baxis', None)
+        self.baxis = baxis or v
+        v = arg.pop('bsrc', None)
+        self.bsrc = bsrc or v
+        v = arg.pop('carpet', None)
+        self.carpet = carpet or v
+        v = arg.pop('cheaterslope', None)
+        self.cheaterslope = cheaterslope or v
+        v = arg.pop('color', None)
+        self.color = color or v
+        v = arg.pop('customdata', None)
+        self.customdata = customdata or v
+        v = arg.pop('customdatasrc', None)
+        self.customdatasrc = customdatasrc or v
+        v = arg.pop('da', None)
+        self.da = da or v
+        v = arg.pop('db', None)
+        self.db = db or v
+        v = arg.pop('font', None)
+        self.font = font or v
+        v = arg.pop('hoverinfo', None)
+        self.hoverinfo = hoverinfo or v
+        v = arg.pop('hoverinfosrc', None)
+        self.hoverinfosrc = hoverinfosrc or v
+        v = arg.pop('hoverlabel', None)
+        self.hoverlabel = hoverlabel or v
+        v = arg.pop('ids', None)
+        self.ids = ids or v
+        v = arg.pop('idssrc', None)
+        self.idssrc = idssrc or v
+        v = arg.pop('legendgroup', None)
+        self.legendgroup = legendgroup or v
+        v = arg.pop('name', None)
+        self.name = name or v
+        v = arg.pop('opacity', None)
+        self.opacity = opacity or v
+        v = arg.pop('selectedpoints', None)
+        self.selectedpoints = selectedpoints or v
+        v = arg.pop('showlegend', None)
+        self.showlegend = showlegend or v
+        v = arg.pop('stream', None)
+        self.stream = stream or v
+        v = arg.pop('uid', None)
+        self.uid = uid or v
+        v = arg.pop('visible', None)
+        self.visible = visible or v
+        v = arg.pop('x', None)
+        self.x = x or v
+        v = arg.pop('xaxis', None)
+        self.xaxis = xaxis or v
+        v = arg.pop('xsrc', None)
+        self.xsrc = xsrc or v
+        v = arg.pop('y', None)
+        self.y = y or v
+        v = arg.pop('yaxis', None)
+        self.yaxis = yaxis or v
+        v = arg.pop('ysrc', None)
+        self.ysrc = ysrc or v
 
         # Read-only literals
         # ------------------
@@ -1661,4 +1714,4 @@ class Carpet(BaseTraceType):
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

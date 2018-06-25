@@ -159,13 +159,22 @@ class Box(BaseTraceHierarchyType):
         """
 
     def __init__(
-        self, fillcolor=None, line=None, visible=None, width=None, **kwargs
+        self,
+        arg=None,
+        fillcolor=None,
+        line=None,
+        visible=None,
+        width=None,
+        **kwargs
     ):
         """
         Construct a new Box object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.violin.Box
         fillcolor
             Sets the inner box plot fill color.
         line
@@ -185,6 +194,20 @@ class Box(BaseTraceHierarchyType):
         """
         super(Box, self).__init__('box')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.violin.Box 
+constructor must be a dict or 
+an instance of plotly.graph_objs.violin.Box"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.violin import (box as v_box)
@@ -198,11 +221,15 @@ class Box(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.fillcolor = fillcolor
-        self.line = line
-        self.visible = visible
-        self.width = width
+        v = arg.pop('fillcolor', None)
+        self.fillcolor = fillcolor or v
+        v = arg.pop('line', None)
+        self.line = line or v
+        v = arg.pop('visible', None)
+        self.visible = visible or v
+        v = arg.pop('width', None)
+        self.width = width or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

@@ -68,12 +68,15 @@ class Stream(BaseTraceHierarchyType):
             details.
         """
 
-    def __init__(self, maxpoints=None, token=None, **kwargs):
+    def __init__(self, arg=None, maxpoints=None, token=None, **kwargs):
         """
         Construct a new Stream object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.mesh3d.Stream
         maxpoints
             Sets the maximum number of points to keep on the plots
             from an incoming stream. If `maxpoints` is set to *50*,
@@ -90,6 +93,20 @@ class Stream(BaseTraceHierarchyType):
         """
         super(Stream, self).__init__('stream')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.mesh3d.Stream 
+constructor must be a dict or 
+an instance of plotly.graph_objs.mesh3d.Stream"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.mesh3d import (stream as v_stream)
@@ -101,9 +118,11 @@ class Stream(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.maxpoints = maxpoints
-        self.token = token
+        v = arg.pop('maxpoints', None)
+        self.maxpoints = maxpoints or v
+        v = arg.pop('token', None)
+        self.token = token or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

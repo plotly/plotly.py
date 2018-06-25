@@ -867,6 +867,7 @@ class Splom(BaseTraceType):
 
     def __init__(
         self,
+        arg=None,
         customdata=None,
         customdatasrc=None,
         diagonal=None,
@@ -908,6 +909,9 @@ class Splom(BaseTraceType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Splom
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -1004,6 +1008,20 @@ class Splom(BaseTraceType):
         """
         super(Splom, self).__init__('splom')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Splom 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Splom"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators import (splom as v_splom)
@@ -1039,32 +1057,58 @@ class Splom(BaseTraceType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.customdata = customdata
-        self.customdatasrc = customdatasrc
-        self.diagonal = diagonal
-        self.dimensions = dimensions
-        self.hoverinfo = hoverinfo
-        self.hoverinfosrc = hoverinfosrc
-        self.hoverlabel = hoverlabel
-        self.ids = ids
-        self.idssrc = idssrc
-        self.legendgroup = legendgroup
-        self.marker = marker
-        self.name = name
-        self.opacity = opacity
-        self.selected = selected
-        self.selectedpoints = selectedpoints
-        self.showlegend = showlegend
-        self.showlowerhalf = showlowerhalf
-        self.showupperhalf = showupperhalf
-        self.stream = stream
-        self.text = text
-        self.textsrc = textsrc
-        self.uid = uid
-        self.unselected = unselected
-        self.visible = visible
-        self.xaxes = xaxes
-        self.yaxes = yaxes
+        v = arg.pop('customdata', None)
+        self.customdata = customdata or v
+        v = arg.pop('customdatasrc', None)
+        self.customdatasrc = customdatasrc or v
+        v = arg.pop('diagonal', None)
+        self.diagonal = diagonal or v
+        v = arg.pop('dimensions', None)
+        self.dimensions = dimensions or v
+        v = arg.pop('hoverinfo', None)
+        self.hoverinfo = hoverinfo or v
+        v = arg.pop('hoverinfosrc', None)
+        self.hoverinfosrc = hoverinfosrc or v
+        v = arg.pop('hoverlabel', None)
+        self.hoverlabel = hoverlabel or v
+        v = arg.pop('ids', None)
+        self.ids = ids or v
+        v = arg.pop('idssrc', None)
+        self.idssrc = idssrc or v
+        v = arg.pop('legendgroup', None)
+        self.legendgroup = legendgroup or v
+        v = arg.pop('marker', None)
+        self.marker = marker or v
+        v = arg.pop('name', None)
+        self.name = name or v
+        v = arg.pop('opacity', None)
+        self.opacity = opacity or v
+        v = arg.pop('selected', None)
+        self.selected = selected or v
+        v = arg.pop('selectedpoints', None)
+        self.selectedpoints = selectedpoints or v
+        v = arg.pop('showlegend', None)
+        self.showlegend = showlegend or v
+        v = arg.pop('showlowerhalf', None)
+        self.showlowerhalf = showlowerhalf or v
+        v = arg.pop('showupperhalf', None)
+        self.showupperhalf = showupperhalf or v
+        v = arg.pop('stream', None)
+        self.stream = stream or v
+        v = arg.pop('text', None)
+        self.text = text or v
+        v = arg.pop('textsrc', None)
+        self.textsrc = textsrc or v
+        v = arg.pop('uid', None)
+        self.uid = uid or v
+        v = arg.pop('unselected', None)
+        self.unselected = unselected or v
+        v = arg.pop('visible', None)
+        self.visible = visible or v
+        v = arg.pop('xaxes', None)
+        self.xaxes = xaxes or v
+        v = arg.pop('yaxes', None)
+        self.yaxes = yaxes or v
 
         # Read-only literals
         # ------------------
@@ -1076,4 +1120,4 @@ class Splom(BaseTraceType):
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

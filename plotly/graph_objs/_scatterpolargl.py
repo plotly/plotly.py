@@ -1078,6 +1078,7 @@ class Scatterpolargl(BaseTraceType):
 
     def __init__(
         self,
+        arg=None,
         connectgaps=None,
         customdata=None,
         customdatasrc=None,
@@ -1124,6 +1125,9 @@ class Scatterpolargl(BaseTraceType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Scatterpolargl
         connectgaps
             Determines whether or not gaps (i.e. {nan} or missing
             values) in the provided data arrays are connected.
@@ -1257,6 +1261,20 @@ class Scatterpolargl(BaseTraceType):
         """
         super(Scatterpolargl, self).__init__('scatterpolargl')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Scatterpolargl 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Scatterpolargl"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators import (scatterpolargl as v_scatterpolargl)
@@ -1303,38 +1321,70 @@ class Scatterpolargl(BaseTraceType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.connectgaps = connectgaps
-        self.customdata = customdata
-        self.customdatasrc = customdatasrc
-        self.fill = fill
-        self.fillcolor = fillcolor
-        self.hoverinfo = hoverinfo
-        self.hoverinfosrc = hoverinfosrc
-        self.hoverlabel = hoverlabel
-        self.hoveron = hoveron
-        self.ids = ids
-        self.idssrc = idssrc
-        self.legendgroup = legendgroup
-        self.line = line
-        self.marker = marker
-        self.mode = mode
-        self.name = name
-        self.opacity = opacity
-        self.r = r
-        self.rsrc = rsrc
-        self.selected = selected
-        self.selectedpoints = selectedpoints
-        self.showlegend = showlegend
-        self.stream = stream
-        self.subplot = subplot
-        self.text = text
-        self.textsrc = textsrc
-        self.theta = theta
-        self.thetasrc = thetasrc
-        self.thetaunit = thetaunit
-        self.uid = uid
-        self.unselected = unselected
-        self.visible = visible
+        v = arg.pop('connectgaps', None)
+        self.connectgaps = connectgaps or v
+        v = arg.pop('customdata', None)
+        self.customdata = customdata or v
+        v = arg.pop('customdatasrc', None)
+        self.customdatasrc = customdatasrc or v
+        v = arg.pop('fill', None)
+        self.fill = fill or v
+        v = arg.pop('fillcolor', None)
+        self.fillcolor = fillcolor or v
+        v = arg.pop('hoverinfo', None)
+        self.hoverinfo = hoverinfo or v
+        v = arg.pop('hoverinfosrc', None)
+        self.hoverinfosrc = hoverinfosrc or v
+        v = arg.pop('hoverlabel', None)
+        self.hoverlabel = hoverlabel or v
+        v = arg.pop('hoveron', None)
+        self.hoveron = hoveron or v
+        v = arg.pop('ids', None)
+        self.ids = ids or v
+        v = arg.pop('idssrc', None)
+        self.idssrc = idssrc or v
+        v = arg.pop('legendgroup', None)
+        self.legendgroup = legendgroup or v
+        v = arg.pop('line', None)
+        self.line = line or v
+        v = arg.pop('marker', None)
+        self.marker = marker or v
+        v = arg.pop('mode', None)
+        self.mode = mode or v
+        v = arg.pop('name', None)
+        self.name = name or v
+        v = arg.pop('opacity', None)
+        self.opacity = opacity or v
+        v = arg.pop('r', None)
+        self.r = r or v
+        v = arg.pop('rsrc', None)
+        self.rsrc = rsrc or v
+        v = arg.pop('selected', None)
+        self.selected = selected or v
+        v = arg.pop('selectedpoints', None)
+        self.selectedpoints = selectedpoints or v
+        v = arg.pop('showlegend', None)
+        self.showlegend = showlegend or v
+        v = arg.pop('stream', None)
+        self.stream = stream or v
+        v = arg.pop('subplot', None)
+        self.subplot = subplot or v
+        v = arg.pop('text', None)
+        self.text = text or v
+        v = arg.pop('textsrc', None)
+        self.textsrc = textsrc or v
+        v = arg.pop('theta', None)
+        self.theta = theta or v
+        v = arg.pop('thetasrc', None)
+        self.thetasrc = thetasrc or v
+        v = arg.pop('thetaunit', None)
+        self.thetaunit = thetaunit or v
+        v = arg.pop('uid', None)
+        self.uid = uid or v
+        v = arg.pop('unselected', None)
+        self.unselected = unselected or v
+        v = arg.pop('visible', None)
+        self.visible = visible or v
 
         # Read-only literals
         # ------------------
@@ -1346,4 +1396,4 @@ class Scatterpolargl(BaseTraceType):
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

@@ -103,12 +103,16 @@ class Project(BaseTraceHierarchyType):
             are shown in permanence.
         """
 
-    def __init__(self, x=None, y=None, z=None, **kwargs):
+    def __init__(self, arg=None, x=None, y=None, z=None, **kwargs):
         """
         Construct a new Project object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of
+            plotly.graph_objs.surface.contours.x.Project
         x
             Determines whether or not these contour lines are
             projected on the x plane. If `highlight` is set to
@@ -134,6 +138,20 @@ class Project(BaseTraceHierarchyType):
         """
         super(Project, self).__init__('project')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.surface.contours.x.Project 
+constructor must be a dict or 
+an instance of plotly.graph_objs.surface.contours.x.Project"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.surface.contours.x import (project as v_project)
@@ -146,10 +164,13 @@ class Project(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.x = x
-        self.y = y
-        self.z = z
+        v = arg.pop('x', None)
+        self.x = x or v
+        v = arg.pop('y', None)
+        self.y = y or v
+        v = arg.pop('z', None)
+        self.z = z or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

@@ -150,6 +150,7 @@ class Margin(BaseLayoutHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         autoexpand=None,
         b=None,
         l=None,
@@ -163,6 +164,9 @@ class Margin(BaseLayoutHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.layout.Margin
         autoexpand
 
         b
@@ -183,6 +187,20 @@ class Margin(BaseLayoutHierarchyType):
         """
         super(Margin, self).__init__('margin')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.Margin 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.Margin"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout import (margin as v_margin)
@@ -198,13 +216,19 @@ class Margin(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.autoexpand = autoexpand
-        self.b = b
-        self.l = l
-        self.pad = pad
-        self.r = r
-        self.t = t
+        v = arg.pop('autoexpand', None)
+        self.autoexpand = autoexpand or v
+        v = arg.pop('b', None)
+        self.b = b or v
+        v = arg.pop('l', None)
+        self.l = l or v
+        v = arg.pop('pad', None)
+        self.pad = pad or v
+        v = arg.pop('r', None)
+        self.r = r or v
+        v = arg.pop('t', None)
+        self.t = t or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

@@ -140,7 +140,7 @@ class Textfont(BaseTraceHierarchyType):
 
         """
 
-    def __init__(self, color=None, family=None, size=None, **kwargs):
+    def __init__(self, arg=None, color=None, family=None, size=None, **kwargs):
         """
         Construct a new Textfont object
         
@@ -148,6 +148,9 @@ class Textfont(BaseTraceHierarchyType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.pie.Textfont
         color
 
         family
@@ -173,6 +176,20 @@ class Textfont(BaseTraceHierarchyType):
         """
         super(Textfont, self).__init__('textfont')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.pie.Textfont 
+constructor must be a dict or 
+an instance of plotly.graph_objs.pie.Textfont"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.pie import (textfont as v_textfont)
@@ -185,10 +202,13 @@ class Textfont(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.color = color
-        self.family = family
-        self.size = size
+        v = arg.pop('color', None)
+        self.color = color or v
+        v = arg.pop('family', None)
+        self.family = family or v
+        v = arg.pop('size', None)
+        self.size = size or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

@@ -1007,6 +1007,7 @@ class Marker(BaseTraceHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         autocolorscale=None,
         cauto=None,
         cmax=None,
@@ -1036,6 +1037,9 @@ class Marker(BaseTraceHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.scatterpolar.Marker
         autocolorscale
             Has an effect only if `marker.color` is set to a
             numerical array. Determines whether the colorscale is a
@@ -1143,6 +1147,20 @@ class Marker(BaseTraceHierarchyType):
         """
         super(Marker, self).__init__('marker')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.scatterpolar.Marker 
+constructor must be a dict or 
+an instance of plotly.graph_objs.scatterpolar.Marker"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.scatterpolar import (marker as v_marker)
@@ -1174,29 +1192,51 @@ class Marker(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.autocolorscale = autocolorscale
-        self.cauto = cauto
-        self.cmax = cmax
-        self.cmin = cmin
-        self.color = color
-        self.colorbar = colorbar
-        self.colorscale = colorscale
-        self.colorsrc = colorsrc
-        self.gradient = gradient
-        self.line = line
-        self.maxdisplayed = maxdisplayed
-        self.opacity = opacity
-        self.opacitysrc = opacitysrc
-        self.reversescale = reversescale
-        self.showscale = showscale
-        self.size = size
-        self.sizemin = sizemin
-        self.sizemode = sizemode
-        self.sizeref = sizeref
-        self.sizesrc = sizesrc
-        self.symbol = symbol
-        self.symbolsrc = symbolsrc
+        v = arg.pop('autocolorscale', None)
+        self.autocolorscale = autocolorscale or v
+        v = arg.pop('cauto', None)
+        self.cauto = cauto or v
+        v = arg.pop('cmax', None)
+        self.cmax = cmax or v
+        v = arg.pop('cmin', None)
+        self.cmin = cmin or v
+        v = arg.pop('color', None)
+        self.color = color or v
+        v = arg.pop('colorbar', None)
+        self.colorbar = colorbar or v
+        v = arg.pop('colorscale', None)
+        self.colorscale = colorscale or v
+        v = arg.pop('colorsrc', None)
+        self.colorsrc = colorsrc or v
+        v = arg.pop('gradient', None)
+        self.gradient = gradient or v
+        v = arg.pop('line', None)
+        self.line = line or v
+        v = arg.pop('maxdisplayed', None)
+        self.maxdisplayed = maxdisplayed or v
+        v = arg.pop('opacity', None)
+        self.opacity = opacity or v
+        v = arg.pop('opacitysrc', None)
+        self.opacitysrc = opacitysrc or v
+        v = arg.pop('reversescale', None)
+        self.reversescale = reversescale or v
+        v = arg.pop('showscale', None)
+        self.showscale = showscale or v
+        v = arg.pop('size', None)
+        self.size = size or v
+        v = arg.pop('sizemin', None)
+        self.sizemin = sizemin or v
+        v = arg.pop('sizemode', None)
+        self.sizemode = sizemode or v
+        v = arg.pop('sizeref', None)
+        self.sizeref = sizeref or v
+        v = arg.pop('sizesrc', None)
+        self.sizesrc = sizesrc or v
+        v = arg.pop('symbol', None)
+        self.symbol = symbol or v
+        v = arg.pop('symbolsrc', None)
+        self.symbolsrc = symbolsrc or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

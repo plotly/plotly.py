@@ -362,6 +362,7 @@ class Image(BaseLayoutHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         layer=None,
         opacity=None,
         sizex=None,
@@ -382,6 +383,9 @@ class Image(BaseLayoutHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.layout.Image
         layer
             Specifies whether images are drawn below or above
             traces. When `xref` and `yref` are both set to `paper`,
@@ -439,6 +443,20 @@ class Image(BaseLayoutHierarchyType):
         """
         super(Image, self).__init__('images')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.Image 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.Image"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout import (image as v_image)
@@ -461,20 +479,33 @@ class Image(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.layer = layer
-        self.opacity = opacity
-        self.sizex = sizex
-        self.sizey = sizey
-        self.sizing = sizing
-        self.source = source
-        self.visible = visible
-        self.x = x
-        self.xanchor = xanchor
-        self.xref = xref
-        self.y = y
-        self.yanchor = yanchor
-        self.yref = yref
+        v = arg.pop('layer', None)
+        self.layer = layer or v
+        v = arg.pop('opacity', None)
+        self.opacity = opacity or v
+        v = arg.pop('sizex', None)
+        self.sizex = sizex or v
+        v = arg.pop('sizey', None)
+        self.sizey = sizey or v
+        v = arg.pop('sizing', None)
+        self.sizing = sizing or v
+        v = arg.pop('source', None)
+        self.source = source or v
+        v = arg.pop('visible', None)
+        self.visible = visible or v
+        v = arg.pop('x', None)
+        self.x = x or v
+        v = arg.pop('xanchor', None)
+        self.xanchor = xanchor or v
+        v = arg.pop('xref', None)
+        self.xref = xref or v
+        v = arg.pop('y', None)
+        self.y = y or v
+        v = arg.pop('yanchor', None)
+        self.yanchor = yanchor or v
+        v = arg.pop('yref', None)
+        self.yref = yref or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

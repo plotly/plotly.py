@@ -115,13 +115,21 @@ class Cumulative(BaseTraceHierarchyType):
         """
 
     def __init__(
-        self, currentbin=None, direction=None, enabled=None, **kwargs
+        self,
+        arg=None,
+        currentbin=None,
+        direction=None,
+        enabled=None,
+        **kwargs
     ):
         """
         Construct a new Cumulative object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.histogram.Cumulative
         currentbin
             Only applies if cumulative is enabled. Sets whether the
             current bin is included, excluded, or has half of its
@@ -151,6 +159,20 @@ class Cumulative(BaseTraceHierarchyType):
         """
         super(Cumulative, self).__init__('cumulative')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.histogram.Cumulative 
+constructor must be a dict or 
+an instance of plotly.graph_objs.histogram.Cumulative"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.histogram import (cumulative as v_cumulative)
@@ -163,10 +185,13 @@ class Cumulative(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.currentbin = currentbin
-        self.direction = direction
-        self.enabled = enabled
+        v = arg.pop('currentbin', None)
+        self.currentbin = currentbin or v
+        v = arg.pop('direction', None)
+        self.direction = direction or v
+        v = arg.pop('enabled', None)
+        self.enabled = enabled or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

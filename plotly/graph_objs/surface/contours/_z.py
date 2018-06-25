@@ -304,6 +304,7 @@ class Z(BaseTraceHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         color=None,
         highlight=None,
         highlightcolor=None,
@@ -319,6 +320,9 @@ class Z(BaseTraceHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.surface.contours.Z
         color
             Sets the color of the contour lines.
         highlight
@@ -346,6 +350,20 @@ class Z(BaseTraceHierarchyType):
         """
         super(Z, self).__init__('z')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.surface.contours.Z 
+constructor must be a dict or 
+an instance of plotly.graph_objs.surface.contours.Z"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.surface.contours import (z as v_z)
@@ -363,15 +381,23 @@ class Z(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.color = color
-        self.highlight = highlight
-        self.highlightcolor = highlightcolor
-        self.highlightwidth = highlightwidth
-        self.project = project
-        self.show = show
-        self.usecolormap = usecolormap
-        self.width = width
+        v = arg.pop('color', None)
+        self.color = color or v
+        v = arg.pop('highlight', None)
+        self.highlight = highlight or v
+        v = arg.pop('highlightcolor', None)
+        self.highlightcolor = highlightcolor or v
+        v = arg.pop('highlightwidth', None)
+        self.highlightwidth = highlightwidth or v
+        v = arg.pop('project', None)
+        self.project = project or v
+        v = arg.pop('show', None)
+        self.show = show or v
+        v = arg.pop('usecolormap', None)
+        self.usecolormap = usecolormap or v
+        v = arg.pop('width', None)
+        self.width = width or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

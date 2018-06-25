@@ -140,7 +140,7 @@ class Tickfont(BaseLayoutHierarchyType):
 
         """
 
-    def __init__(self, color=None, family=None, size=None, **kwargs):
+    def __init__(self, arg=None, color=None, family=None, size=None, **kwargs):
         """
         Construct a new Tickfont object
         
@@ -148,6 +148,10 @@ class Tickfont(BaseLayoutHierarchyType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of
+            plotly.graph_objs.layout.scene.xaxis.Tickfont
         color
 
         family
@@ -173,6 +177,20 @@ class Tickfont(BaseLayoutHierarchyType):
         """
         super(Tickfont, self).__init__('tickfont')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.scene.xaxis.Tickfont 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.scene.xaxis.Tickfont"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout.scene.xaxis import (
@@ -187,10 +205,13 @@ class Tickfont(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.color = color
-        self.family = family
-        self.size = size
+        v = arg.pop('color', None)
+        self.color = color or v
+        v = arg.pop('family', None)
+        self.family = family or v
+        v = arg.pop('size', None)
+        self.size = size or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

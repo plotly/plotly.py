@@ -40,12 +40,16 @@ class Circle(BaseLayoutHierarchyType):
             is set to *circle*.
         """
 
-    def __init__(self, radius=None, **kwargs):
+    def __init__(self, arg=None, radius=None, **kwargs):
         """
         Construct a new Circle object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of
+            plotly.graph_objs.layout.mapbox.layer.Circle
         radius
             Sets the circle radius. Has an effect only when `type`
             is set to *circle*.
@@ -55,6 +59,20 @@ class Circle(BaseLayoutHierarchyType):
         Circle
         """
         super(Circle, self).__init__('circle')
+
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.mapbox.layer.Circle 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.mapbox.layer.Circle"""
+            )
 
         # Import validators
         # -----------------
@@ -66,8 +84,9 @@ class Circle(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.radius = radius
+        v = arg.pop('radius', None)
+        self.radius = radius or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

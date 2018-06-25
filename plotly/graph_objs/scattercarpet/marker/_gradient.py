@@ -150,13 +150,23 @@ class Gradient(BaseTraceHierarchyType):
         """
 
     def __init__(
-        self, color=None, colorsrc=None, type=None, typesrc=None, **kwargs
+        self,
+        arg=None,
+        color=None,
+        colorsrc=None,
+        type=None,
+        typesrc=None,
+        **kwargs
     ):
         """
         Construct a new Gradient object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of
+            plotly.graph_objs.scattercarpet.marker.Gradient
         color
             Sets the final color of the gradient fill: the center
             color for radial, the right for horizontal, or the
@@ -174,6 +184,20 @@ class Gradient(BaseTraceHierarchyType):
         """
         super(Gradient, self).__init__('gradient')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.scattercarpet.marker.Gradient 
+constructor must be a dict or 
+an instance of plotly.graph_objs.scattercarpet.marker.Gradient"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.scattercarpet.marker import (
@@ -189,11 +213,15 @@ class Gradient(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.color = color
-        self.colorsrc = colorsrc
-        self.type = type
-        self.typesrc = typesrc
+        v = arg.pop('color', None)
+        self.color = color or v
+        v = arg.pop('colorsrc', None)
+        self.colorsrc = colorsrc or v
+        v = arg.pop('type', None)
+        self.type = type or v
+        v = arg.pop('typesrc', None)
+        self.typesrc = typesrc or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

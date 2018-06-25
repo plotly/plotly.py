@@ -142,13 +142,22 @@ class Line(BaseTraceHierarchyType):
         """
 
     def __init__(
-        self, color=None, colorsrc=None, width=None, widthsrc=None, **kwargs
+        self,
+        arg=None,
+        color=None,
+        colorsrc=None,
+        width=None,
+        widthsrc=None,
+        **kwargs
     ):
         """
         Construct a new Line object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.table.header.Line
         color
 
         colorsrc
@@ -164,6 +173,20 @@ class Line(BaseTraceHierarchyType):
         """
         super(Line, self).__init__('line')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.table.header.Line 
+constructor must be a dict or 
+an instance of plotly.graph_objs.table.header.Line"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.table.header import (line as v_line)
@@ -177,11 +200,15 @@ class Line(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.color = color
-        self.colorsrc = colorsrc
-        self.width = width
-        self.widthsrc = widthsrc
+        v = arg.pop('color', None)
+        self.color = color or v
+        v = arg.pop('colorsrc', None)
+        self.colorsrc = colorsrc or v
+        v = arg.pop('width', None)
+        self.width = width or v
+        v = arg.pop('widthsrc', None)
+        self.widthsrc = widthsrc or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

@@ -302,6 +302,7 @@ class Hoverlabel(BaseTraceHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         bgcolor=None,
         bgcolorsrc=None,
         bordercolor=None,
@@ -316,6 +317,9 @@ class Hoverlabel(BaseTraceHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.cone.Hoverlabel
         bgcolor
             Sets the background color of the hover labels for this
             trace
@@ -345,6 +349,20 @@ class Hoverlabel(BaseTraceHierarchyType):
         """
         super(Hoverlabel, self).__init__('hoverlabel')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.cone.Hoverlabel 
+constructor must be a dict or 
+an instance of plotly.graph_objs.cone.Hoverlabel"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.cone import (hoverlabel as v_hoverlabel)
@@ -363,14 +381,21 @@ class Hoverlabel(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.bgcolor = bgcolor
-        self.bgcolorsrc = bgcolorsrc
-        self.bordercolor = bordercolor
-        self.bordercolorsrc = bordercolorsrc
-        self.font = font
-        self.namelength = namelength
-        self.namelengthsrc = namelengthsrc
+        v = arg.pop('bgcolor', None)
+        self.bgcolor = bgcolor or v
+        v = arg.pop('bgcolorsrc', None)
+        self.bgcolorsrc = bgcolorsrc or v
+        v = arg.pop('bordercolor', None)
+        self.bordercolor = bordercolor or v
+        v = arg.pop('bordercolorsrc', None)
+        self.bordercolorsrc = bordercolorsrc or v
+        v = arg.pop('font', None)
+        self.font = font or v
+        v = arg.pop('namelength', None)
+        self.namelength = namelength or v
+        v = arg.pop('namelengthsrc', None)
+        self.namelengthsrc = namelengthsrc or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))
