@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Rangeselector(BaseLayoutHierarchyType):
@@ -525,7 +526,9 @@ class Rangeselector(BaseLayoutHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.layout.xaxis.Rangeselector 
@@ -559,27 +562,27 @@ an instance of plotly.graph_objs.layout.xaxis.Rangeselector"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('activecolor', None)
-        self.activecolor = activecolor or v
+        self.activecolor = activecolor if activecolor is not None else v
         v = arg.pop('bgcolor', None)
-        self.bgcolor = bgcolor or v
+        self.bgcolor = bgcolor if bgcolor is not None else v
         v = arg.pop('bordercolor', None)
-        self.bordercolor = bordercolor or v
+        self.bordercolor = bordercolor if bordercolor is not None else v
         v = arg.pop('borderwidth', None)
-        self.borderwidth = borderwidth or v
+        self.borderwidth = borderwidth if borderwidth is not None else v
         v = arg.pop('buttons', None)
-        self.buttons = buttons or v
+        self.buttons = buttons if buttons is not None else v
         v = arg.pop('font', None)
-        self.font = font or v
+        self.font = font if font is not None else v
         v = arg.pop('visible', None)
-        self.visible = visible or v
+        self.visible = visible if visible is not None else v
         v = arg.pop('x', None)
-        self.x = x or v
+        self.x = x if x is not None else v
         v = arg.pop('xanchor', None)
-        self.xanchor = xanchor or v
+        self.xanchor = xanchor if xanchor is not None else v
         v = arg.pop('y', None)
-        self.y = y or v
+        self.y = y if y is not None else v
         v = arg.pop('yanchor', None)
-        self.yanchor = yanchor or v
+        self.yanchor = yanchor if yanchor is not None else v
 
         # Process unknown kwargs
         # ----------------------

@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Node(BaseTraceHierarchyType):
@@ -292,7 +293,9 @@ class Node(BaseTraceHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.sankey.Node 
@@ -317,19 +320,19 @@ an instance of plotly.graph_objs.sankey.Node"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('color', None)
-        self.color = color or v
+        self.color = color if color is not None else v
         v = arg.pop('colorsrc', None)
-        self.colorsrc = colorsrc or v
+        self.colorsrc = colorsrc if colorsrc is not None else v
         v = arg.pop('label', None)
-        self.label = label or v
+        self.label = label if label is not None else v
         v = arg.pop('labelsrc', None)
-        self.labelsrc = labelsrc or v
+        self.labelsrc = labelsrc if labelsrc is not None else v
         v = arg.pop('line', None)
-        self.line = line or v
+        self.line = line if line is not None else v
         v = arg.pop('pad', None)
-        self.pad = pad or v
+        self.pad = pad if pad is not None else v
         v = arg.pop('thickness', None)
-        self.thickness = thickness or v
+        self.thickness = thickness if thickness is not None else v
 
         # Process unknown kwargs
         # ----------------------

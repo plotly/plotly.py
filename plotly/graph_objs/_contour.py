@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceType
+import copy
 
 
 class Contour(BaseTraceType):
@@ -1859,7 +1860,9 @@ class Contour(BaseTraceType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.Contour 
@@ -1928,103 +1931,103 @@ an instance of plotly.graph_objs.Contour"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('autocolorscale', None)
-        self.autocolorscale = autocolorscale or v
+        self.autocolorscale = autocolorscale if autocolorscale is not None else v
         v = arg.pop('autocontour', None)
-        self.autocontour = autocontour or v
+        self.autocontour = autocontour if autocontour is not None else v
         v = arg.pop('colorbar', None)
-        self.colorbar = colorbar or v
+        self.colorbar = colorbar if colorbar is not None else v
         v = arg.pop('colorscale', None)
-        self.colorscale = colorscale or v
+        self.colorscale = colorscale if colorscale is not None else v
         v = arg.pop('connectgaps', None)
-        self.connectgaps = connectgaps or v
+        self.connectgaps = connectgaps if connectgaps is not None else v
         v = arg.pop('contours', None)
-        self.contours = contours or v
+        self.contours = contours if contours is not None else v
         v = arg.pop('customdata', None)
-        self.customdata = customdata or v
+        self.customdata = customdata if customdata is not None else v
         v = arg.pop('customdatasrc', None)
-        self.customdatasrc = customdatasrc or v
+        self.customdatasrc = customdatasrc if customdatasrc is not None else v
         v = arg.pop('dx', None)
-        self.dx = dx or v
+        self.dx = dx if dx is not None else v
         v = arg.pop('dy', None)
-        self.dy = dy or v
+        self.dy = dy if dy is not None else v
         v = arg.pop('fillcolor', None)
-        self.fillcolor = fillcolor or v
+        self.fillcolor = fillcolor if fillcolor is not None else v
         v = arg.pop('hoverinfo', None)
-        self.hoverinfo = hoverinfo or v
+        self.hoverinfo = hoverinfo if hoverinfo is not None else v
         v = arg.pop('hoverinfosrc', None)
-        self.hoverinfosrc = hoverinfosrc or v
+        self.hoverinfosrc = hoverinfosrc if hoverinfosrc is not None else v
         v = arg.pop('hoverlabel', None)
-        self.hoverlabel = hoverlabel or v
+        self.hoverlabel = hoverlabel if hoverlabel is not None else v
         v = arg.pop('ids', None)
-        self.ids = ids or v
+        self.ids = ids if ids is not None else v
         v = arg.pop('idssrc', None)
-        self.idssrc = idssrc or v
+        self.idssrc = idssrc if idssrc is not None else v
         v = arg.pop('legendgroup', None)
-        self.legendgroup = legendgroup or v
+        self.legendgroup = legendgroup if legendgroup is not None else v
         v = arg.pop('line', None)
-        self.line = line or v
+        self.line = line if line is not None else v
         v = arg.pop('name', None)
-        self.name = name or v
+        self.name = name if name is not None else v
         v = arg.pop('ncontours', None)
-        self.ncontours = ncontours or v
+        self.ncontours = ncontours if ncontours is not None else v
         v = arg.pop('opacity', None)
-        self.opacity = opacity or v
+        self.opacity = opacity if opacity is not None else v
         v = arg.pop('reversescale', None)
-        self.reversescale = reversescale or v
+        self.reversescale = reversescale if reversescale is not None else v
         v = arg.pop('selectedpoints', None)
-        self.selectedpoints = selectedpoints or v
+        self.selectedpoints = selectedpoints if selectedpoints is not None else v
         v = arg.pop('showlegend', None)
-        self.showlegend = showlegend or v
+        self.showlegend = showlegend if showlegend is not None else v
         v = arg.pop('showscale', None)
-        self.showscale = showscale or v
+        self.showscale = showscale if showscale is not None else v
         v = arg.pop('stream', None)
-        self.stream = stream or v
+        self.stream = stream if stream is not None else v
         v = arg.pop('text', None)
-        self.text = text or v
+        self.text = text if text is not None else v
         v = arg.pop('textsrc', None)
-        self.textsrc = textsrc or v
+        self.textsrc = textsrc if textsrc is not None else v
         v = arg.pop('transpose', None)
-        self.transpose = transpose or v
+        self.transpose = transpose if transpose is not None else v
         v = arg.pop('uid', None)
-        self.uid = uid or v
+        self.uid = uid if uid is not None else v
         v = arg.pop('visible', None)
-        self.visible = visible or v
+        self.visible = visible if visible is not None else v
         v = arg.pop('x', None)
-        self.x = x or v
+        self.x = x if x is not None else v
         v = arg.pop('x0', None)
-        self.x0 = x0 or v
+        self.x0 = x0 if x0 is not None else v
         v = arg.pop('xaxis', None)
-        self.xaxis = xaxis or v
+        self.xaxis = xaxis if xaxis is not None else v
         v = arg.pop('xcalendar', None)
-        self.xcalendar = xcalendar or v
+        self.xcalendar = xcalendar if xcalendar is not None else v
         v = arg.pop('xsrc', None)
-        self.xsrc = xsrc or v
+        self.xsrc = xsrc if xsrc is not None else v
         v = arg.pop('xtype', None)
-        self.xtype = xtype or v
+        self.xtype = xtype if xtype is not None else v
         v = arg.pop('y', None)
-        self.y = y or v
+        self.y = y if y is not None else v
         v = arg.pop('y0', None)
-        self.y0 = y0 or v
+        self.y0 = y0 if y0 is not None else v
         v = arg.pop('yaxis', None)
-        self.yaxis = yaxis or v
+        self.yaxis = yaxis if yaxis is not None else v
         v = arg.pop('ycalendar', None)
-        self.ycalendar = ycalendar or v
+        self.ycalendar = ycalendar if ycalendar is not None else v
         v = arg.pop('ysrc', None)
-        self.ysrc = ysrc or v
+        self.ysrc = ysrc if ysrc is not None else v
         v = arg.pop('ytype', None)
-        self.ytype = ytype or v
+        self.ytype = ytype if ytype is not None else v
         v = arg.pop('z', None)
-        self.z = z or v
+        self.z = z if z is not None else v
         v = arg.pop('zauto', None)
-        self.zauto = zauto or v
+        self.zauto = zauto if zauto is not None else v
         v = arg.pop('zhoverformat', None)
-        self.zhoverformat = zhoverformat or v
+        self.zhoverformat = zhoverformat if zhoverformat is not None else v
         v = arg.pop('zmax', None)
-        self.zmax = zmax or v
+        self.zmax = zmax if zmax is not None else v
         v = arg.pop('zmin', None)
-        self.zmin = zmin or v
+        self.zmin = zmin if zmin is not None else v
         v = arg.pop('zsrc', None)
-        self.zsrc = zsrc or v
+        self.zsrc = zsrc if zsrc is not None else v
 
         # Read-only literals
         # ------------------

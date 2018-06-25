@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceType
+import copy
 
 
 class Pie(BaseTraceType):
@@ -1359,7 +1360,9 @@ class Pie(BaseTraceType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.Pie 
@@ -1417,85 +1420,85 @@ an instance of plotly.graph_objs.Pie"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('customdata', None)
-        self.customdata = customdata or v
+        self.customdata = customdata if customdata is not None else v
         v = arg.pop('customdatasrc', None)
-        self.customdatasrc = customdatasrc or v
+        self.customdatasrc = customdatasrc if customdatasrc is not None else v
         v = arg.pop('direction', None)
-        self.direction = direction or v
+        self.direction = direction if direction is not None else v
         v = arg.pop('dlabel', None)
-        self.dlabel = dlabel or v
+        self.dlabel = dlabel if dlabel is not None else v
         v = arg.pop('domain', None)
-        self.domain = domain or v
+        self.domain = domain if domain is not None else v
         v = arg.pop('hole', None)
-        self.hole = hole or v
+        self.hole = hole if hole is not None else v
         v = arg.pop('hoverinfo', None)
-        self.hoverinfo = hoverinfo or v
+        self.hoverinfo = hoverinfo if hoverinfo is not None else v
         v = arg.pop('hoverinfosrc', None)
-        self.hoverinfosrc = hoverinfosrc or v
+        self.hoverinfosrc = hoverinfosrc if hoverinfosrc is not None else v
         v = arg.pop('hoverlabel', None)
-        self.hoverlabel = hoverlabel or v
+        self.hoverlabel = hoverlabel if hoverlabel is not None else v
         v = arg.pop('hovertext', None)
-        self.hovertext = hovertext or v
+        self.hovertext = hovertext if hovertext is not None else v
         v = arg.pop('hovertextsrc', None)
-        self.hovertextsrc = hovertextsrc or v
+        self.hovertextsrc = hovertextsrc if hovertextsrc is not None else v
         v = arg.pop('ids', None)
-        self.ids = ids or v
+        self.ids = ids if ids is not None else v
         v = arg.pop('idssrc', None)
-        self.idssrc = idssrc or v
+        self.idssrc = idssrc if idssrc is not None else v
         v = arg.pop('insidetextfont', None)
-        self.insidetextfont = insidetextfont or v
+        self.insidetextfont = insidetextfont if insidetextfont is not None else v
         v = arg.pop('label0', None)
-        self.label0 = label0 or v
+        self.label0 = label0 if label0 is not None else v
         v = arg.pop('labels', None)
-        self.labels = labels or v
+        self.labels = labels if labels is not None else v
         v = arg.pop('labelssrc', None)
-        self.labelssrc = labelssrc or v
+        self.labelssrc = labelssrc if labelssrc is not None else v
         v = arg.pop('legendgroup', None)
-        self.legendgroup = legendgroup or v
+        self.legendgroup = legendgroup if legendgroup is not None else v
         v = arg.pop('marker', None)
-        self.marker = marker or v
+        self.marker = marker if marker is not None else v
         v = arg.pop('name', None)
-        self.name = name or v
+        self.name = name if name is not None else v
         v = arg.pop('opacity', None)
-        self.opacity = opacity or v
+        self.opacity = opacity if opacity is not None else v
         v = arg.pop('outsidetextfont', None)
-        self.outsidetextfont = outsidetextfont or v
+        self.outsidetextfont = outsidetextfont if outsidetextfont is not None else v
         v = arg.pop('pull', None)
-        self.pull = pull or v
+        self.pull = pull if pull is not None else v
         v = arg.pop('pullsrc', None)
-        self.pullsrc = pullsrc or v
+        self.pullsrc = pullsrc if pullsrc is not None else v
         v = arg.pop('rotation', None)
-        self.rotation = rotation or v
+        self.rotation = rotation if rotation is not None else v
         v = arg.pop('scalegroup', None)
-        self.scalegroup = scalegroup or v
+        self.scalegroup = scalegroup if scalegroup is not None else v
         v = arg.pop('selectedpoints', None)
-        self.selectedpoints = selectedpoints or v
+        self.selectedpoints = selectedpoints if selectedpoints is not None else v
         v = arg.pop('showlegend', None)
-        self.showlegend = showlegend or v
+        self.showlegend = showlegend if showlegend is not None else v
         v = arg.pop('sort', None)
-        self.sort = sort or v
+        self.sort = sort if sort is not None else v
         v = arg.pop('stream', None)
-        self.stream = stream or v
+        self.stream = stream if stream is not None else v
         v = arg.pop('text', None)
-        self.text = text or v
+        self.text = text if text is not None else v
         v = arg.pop('textfont', None)
-        self.textfont = textfont or v
+        self.textfont = textfont if textfont is not None else v
         v = arg.pop('textinfo', None)
-        self.textinfo = textinfo or v
+        self.textinfo = textinfo if textinfo is not None else v
         v = arg.pop('textposition', None)
-        self.textposition = textposition or v
+        self.textposition = textposition if textposition is not None else v
         v = arg.pop('textpositionsrc', None)
-        self.textpositionsrc = textpositionsrc or v
+        self.textpositionsrc = textpositionsrc if textpositionsrc is not None else v
         v = arg.pop('textsrc', None)
-        self.textsrc = textsrc or v
+        self.textsrc = textsrc if textsrc is not None else v
         v = arg.pop('uid', None)
-        self.uid = uid or v
+        self.uid = uid if uid is not None else v
         v = arg.pop('values', None)
-        self.values = values or v
+        self.values = values if values is not None else v
         v = arg.pop('valuessrc', None)
-        self.valuessrc = valuessrc or v
+        self.valuessrc = valuessrc if valuessrc is not None else v
         v = arg.pop('visible', None)
-        self.visible = visible or v
+        self.visible = visible if visible is not None else v
 
         # Read-only literals
         # ------------------

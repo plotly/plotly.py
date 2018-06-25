@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Step(BaseLayoutHierarchyType):
@@ -215,7 +216,9 @@ class Step(BaseLayoutHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.layout.slider.Step 
@@ -238,15 +241,15 @@ an instance of plotly.graph_objs.layout.slider.Step"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('args', None)
-        self.args = args or v
+        self.args = args if args is not None else v
         v = arg.pop('execute', None)
-        self.execute = execute or v
+        self.execute = execute if execute is not None else v
         v = arg.pop('label', None)
-        self.label = label or v
+        self.label = label if label is not None else v
         v = arg.pop('method', None)
-        self.method = method or v
+        self.method = method if method is not None else v
         v = arg.pop('value', None)
-        self.value = value or v
+        self.value = value if value is not None else v
 
         # Process unknown kwargs
         # ----------------------

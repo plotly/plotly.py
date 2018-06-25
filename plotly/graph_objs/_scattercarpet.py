@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceType
+import copy
 
 
 class Scattercarpet(BaseTraceType):
@@ -1439,7 +1440,9 @@ class Scattercarpet(BaseTraceType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.Scattercarpet 
@@ -1500,77 +1503,77 @@ an instance of plotly.graph_objs.Scattercarpet"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('a', None)
-        self.a = a or v
+        self.a = a if a is not None else v
         v = arg.pop('asrc', None)
-        self.asrc = asrc or v
+        self.asrc = asrc if asrc is not None else v
         v = arg.pop('b', None)
-        self.b = b or v
+        self.b = b if b is not None else v
         v = arg.pop('bsrc', None)
-        self.bsrc = bsrc or v
+        self.bsrc = bsrc if bsrc is not None else v
         v = arg.pop('carpet', None)
-        self.carpet = carpet or v
+        self.carpet = carpet if carpet is not None else v
         v = arg.pop('connectgaps', None)
-        self.connectgaps = connectgaps or v
+        self.connectgaps = connectgaps if connectgaps is not None else v
         v = arg.pop('customdata', None)
-        self.customdata = customdata or v
+        self.customdata = customdata if customdata is not None else v
         v = arg.pop('customdatasrc', None)
-        self.customdatasrc = customdatasrc or v
+        self.customdatasrc = customdatasrc if customdatasrc is not None else v
         v = arg.pop('fill', None)
-        self.fill = fill or v
+        self.fill = fill if fill is not None else v
         v = arg.pop('fillcolor', None)
-        self.fillcolor = fillcolor or v
+        self.fillcolor = fillcolor if fillcolor is not None else v
         v = arg.pop('hoverinfo', None)
-        self.hoverinfo = hoverinfo or v
+        self.hoverinfo = hoverinfo if hoverinfo is not None else v
         v = arg.pop('hoverinfosrc', None)
-        self.hoverinfosrc = hoverinfosrc or v
+        self.hoverinfosrc = hoverinfosrc if hoverinfosrc is not None else v
         v = arg.pop('hoverlabel', None)
-        self.hoverlabel = hoverlabel or v
+        self.hoverlabel = hoverlabel if hoverlabel is not None else v
         v = arg.pop('hoveron', None)
-        self.hoveron = hoveron or v
+        self.hoveron = hoveron if hoveron is not None else v
         v = arg.pop('ids', None)
-        self.ids = ids or v
+        self.ids = ids if ids is not None else v
         v = arg.pop('idssrc', None)
-        self.idssrc = idssrc or v
+        self.idssrc = idssrc if idssrc is not None else v
         v = arg.pop('legendgroup', None)
-        self.legendgroup = legendgroup or v
+        self.legendgroup = legendgroup if legendgroup is not None else v
         v = arg.pop('line', None)
-        self.line = line or v
+        self.line = line if line is not None else v
         v = arg.pop('marker', None)
-        self.marker = marker or v
+        self.marker = marker if marker is not None else v
         v = arg.pop('mode', None)
-        self.mode = mode or v
+        self.mode = mode if mode is not None else v
         v = arg.pop('name', None)
-        self.name = name or v
+        self.name = name if name is not None else v
         v = arg.pop('opacity', None)
-        self.opacity = opacity or v
+        self.opacity = opacity if opacity is not None else v
         v = arg.pop('selected', None)
-        self.selected = selected or v
+        self.selected = selected if selected is not None else v
         v = arg.pop('selectedpoints', None)
-        self.selectedpoints = selectedpoints or v
+        self.selectedpoints = selectedpoints if selectedpoints is not None else v
         v = arg.pop('showlegend', None)
-        self.showlegend = showlegend or v
+        self.showlegend = showlegend if showlegend is not None else v
         v = arg.pop('stream', None)
-        self.stream = stream or v
+        self.stream = stream if stream is not None else v
         v = arg.pop('text', None)
-        self.text = text or v
+        self.text = text if text is not None else v
         v = arg.pop('textfont', None)
-        self.textfont = textfont or v
+        self.textfont = textfont if textfont is not None else v
         v = arg.pop('textposition', None)
-        self.textposition = textposition or v
+        self.textposition = textposition if textposition is not None else v
         v = arg.pop('textpositionsrc', None)
-        self.textpositionsrc = textpositionsrc or v
+        self.textpositionsrc = textpositionsrc if textpositionsrc is not None else v
         v = arg.pop('textsrc', None)
-        self.textsrc = textsrc or v
+        self.textsrc = textsrc if textsrc is not None else v
         v = arg.pop('uid', None)
-        self.uid = uid or v
+        self.uid = uid if uid is not None else v
         v = arg.pop('unselected', None)
-        self.unselected = unselected or v
+        self.unselected = unselected if unselected is not None else v
         v = arg.pop('visible', None)
-        self.visible = visible or v
+        self.visible = visible if visible is not None else v
         v = arg.pop('xaxis', None)
-        self.xaxis = xaxis or v
+        self.xaxis = xaxis if xaxis is not None else v
         v = arg.pop('yaxis', None)
-        self.yaxis = yaxis or v
+        self.yaxis = yaxis if yaxis is not None else v
 
         # Read-only literals
         # ------------------

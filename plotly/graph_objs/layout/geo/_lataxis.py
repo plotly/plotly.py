@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Lataxis(BaseLayoutHierarchyType):
@@ -239,7 +240,9 @@ class Lataxis(BaseLayoutHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.layout.geo.Lataxis 
@@ -263,17 +266,17 @@ an instance of plotly.graph_objs.layout.geo.Lataxis"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('dtick', None)
-        self.dtick = dtick or v
+        self.dtick = dtick if dtick is not None else v
         v = arg.pop('gridcolor', None)
-        self.gridcolor = gridcolor or v
+        self.gridcolor = gridcolor if gridcolor is not None else v
         v = arg.pop('gridwidth', None)
-        self.gridwidth = gridwidth or v
+        self.gridwidth = gridwidth if gridwidth is not None else v
         v = arg.pop('range', None)
-        self.range = range or v
+        self.range = range if range is not None else v
         v = arg.pop('showgrid', None)
-        self.showgrid = showgrid or v
+        self.showgrid = showgrid if showgrid is not None else v
         v = arg.pop('tick0', None)
-        self.tick0 = tick0 or v
+        self.tick0 = tick0 if tick0 is not None else v
 
         # Process unknown kwargs
         # ----------------------

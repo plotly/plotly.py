@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Currentvalue(BaseLayoutHierarchyType):
@@ -233,7 +234,9 @@ class Currentvalue(BaseLayoutHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.layout.slider.Currentvalue 
@@ -259,17 +262,17 @@ an instance of plotly.graph_objs.layout.slider.Currentvalue"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('font', None)
-        self.font = font or v
+        self.font = font if font is not None else v
         v = arg.pop('offset', None)
-        self.offset = offset or v
+        self.offset = offset if offset is not None else v
         v = arg.pop('prefix', None)
-        self.prefix = prefix or v
+        self.prefix = prefix if prefix is not None else v
         v = arg.pop('suffix', None)
-        self.suffix = suffix or v
+        self.suffix = suffix if suffix is not None else v
         v = arg.pop('visible', None)
-        self.visible = visible or v
+        self.visible = visible if visible is not None else v
         v = arg.pop('xanchor', None)
-        self.xanchor = xanchor or v
+        self.xanchor = xanchor if xanchor is not None else v
 
         # Process unknown kwargs
         # ----------------------

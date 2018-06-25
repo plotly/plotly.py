@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Circle(BaseLayoutHierarchyType):
@@ -66,7 +67,9 @@ class Circle(BaseLayoutHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.layout.mapbox.layer.Circle 
@@ -85,7 +88,7 @@ an instance of plotly.graph_objs.layout.mapbox.layer.Circle"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('radius', None)
-        self.radius = radius or v
+        self.radius = radius if radius is not None else v
 
         # Process unknown kwargs
         # ----------------------

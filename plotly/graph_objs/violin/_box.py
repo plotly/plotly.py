@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Box(BaseTraceHierarchyType):
@@ -200,7 +201,9 @@ class Box(BaseTraceHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.violin.Box 
@@ -222,13 +225,13 @@ an instance of plotly.graph_objs.violin.Box"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('fillcolor', None)
-        self.fillcolor = fillcolor or v
+        self.fillcolor = fillcolor if fillcolor is not None else v
         v = arg.pop('line', None)
-        self.line = line or v
+        self.line = line if line is not None else v
         v = arg.pop('visible', None)
-        self.visible = visible or v
+        self.visible = visible if visible is not None else v
         v = arg.pop('width', None)
-        self.width = width or v
+        self.width = width if width is not None else v
 
         # Process unknown kwargs
         # ----------------------

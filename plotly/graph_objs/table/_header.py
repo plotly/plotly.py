@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Header(BaseTraceHierarchyType):
@@ -491,7 +492,9 @@ class Header(BaseTraceHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.table.Header 
@@ -523,33 +526,33 @@ an instance of plotly.graph_objs.table.Header"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('align', None)
-        self.align = align or v
+        self.align = align if align is not None else v
         v = arg.pop('alignsrc', None)
-        self.alignsrc = alignsrc or v
+        self.alignsrc = alignsrc if alignsrc is not None else v
         v = arg.pop('fill', None)
-        self.fill = fill or v
+        self.fill = fill if fill is not None else v
         v = arg.pop('font', None)
-        self.font = font or v
+        self.font = font if font is not None else v
         v = arg.pop('format', None)
-        self.format = format or v
+        self.format = format if format is not None else v
         v = arg.pop('formatsrc', None)
-        self.formatsrc = formatsrc or v
+        self.formatsrc = formatsrc if formatsrc is not None else v
         v = arg.pop('height', None)
-        self.height = height or v
+        self.height = height if height is not None else v
         v = arg.pop('line', None)
-        self.line = line or v
+        self.line = line if line is not None else v
         v = arg.pop('prefix', None)
-        self.prefix = prefix or v
+        self.prefix = prefix if prefix is not None else v
         v = arg.pop('prefixsrc', None)
-        self.prefixsrc = prefixsrc or v
+        self.prefixsrc = prefixsrc if prefixsrc is not None else v
         v = arg.pop('suffix', None)
-        self.suffix = suffix or v
+        self.suffix = suffix if suffix is not None else v
         v = arg.pop('suffixsrc', None)
-        self.suffixsrc = suffixsrc or v
+        self.suffixsrc = suffixsrc if suffixsrc is not None else v
         v = arg.pop('values', None)
-        self.values = values or v
+        self.values = values if values is not None else v
         v = arg.pop('valuessrc', None)
-        self.valuessrc = valuessrc or v
+        self.valuessrc = valuessrc if valuessrc is not None else v
 
         # Process unknown kwargs
         # ----------------------

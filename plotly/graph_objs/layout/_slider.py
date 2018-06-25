@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Slider(BaseLayoutHierarchyType):
@@ -872,7 +873,9 @@ class Slider(BaseLayoutHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.layout.Slider 
@@ -911,47 +914,47 @@ an instance of plotly.graph_objs.layout.Slider"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('active', None)
-        self.active = active or v
+        self.active = active if active is not None else v
         v = arg.pop('activebgcolor', None)
-        self.activebgcolor = activebgcolor or v
+        self.activebgcolor = activebgcolor if activebgcolor is not None else v
         v = arg.pop('bgcolor', None)
-        self.bgcolor = bgcolor or v
+        self.bgcolor = bgcolor if bgcolor is not None else v
         v = arg.pop('bordercolor', None)
-        self.bordercolor = bordercolor or v
+        self.bordercolor = bordercolor if bordercolor is not None else v
         v = arg.pop('borderwidth', None)
-        self.borderwidth = borderwidth or v
+        self.borderwidth = borderwidth if borderwidth is not None else v
         v = arg.pop('currentvalue', None)
-        self.currentvalue = currentvalue or v
+        self.currentvalue = currentvalue if currentvalue is not None else v
         v = arg.pop('font', None)
-        self.font = font or v
+        self.font = font if font is not None else v
         v = arg.pop('len', None)
-        self.len = len or v
+        self.len = len if len is not None else v
         v = arg.pop('lenmode', None)
-        self.lenmode = lenmode or v
+        self.lenmode = lenmode if lenmode is not None else v
         v = arg.pop('minorticklen', None)
-        self.minorticklen = minorticklen or v
+        self.minorticklen = minorticklen if minorticklen is not None else v
         v = arg.pop('pad', None)
-        self.pad = pad or v
+        self.pad = pad if pad is not None else v
         v = arg.pop('steps', None)
-        self.steps = steps or v
+        self.steps = steps if steps is not None else v
         v = arg.pop('tickcolor', None)
-        self.tickcolor = tickcolor or v
+        self.tickcolor = tickcolor if tickcolor is not None else v
         v = arg.pop('ticklen', None)
-        self.ticklen = ticklen or v
+        self.ticklen = ticklen if ticklen is not None else v
         v = arg.pop('tickwidth', None)
-        self.tickwidth = tickwidth or v
+        self.tickwidth = tickwidth if tickwidth is not None else v
         v = arg.pop('transition', None)
-        self.transition = transition or v
+        self.transition = transition if transition is not None else v
         v = arg.pop('visible', None)
-        self.visible = visible or v
+        self.visible = visible if visible is not None else v
         v = arg.pop('x', None)
-        self.x = x or v
+        self.x = x if x is not None else v
         v = arg.pop('xanchor', None)
-        self.xanchor = xanchor or v
+        self.xanchor = xanchor if xanchor is not None else v
         v = arg.pop('y', None)
-        self.y = y or v
+        self.y = y if y is not None else v
         v = arg.pop('yanchor', None)
-        self.yanchor = yanchor or v
+        self.yanchor = yanchor if yanchor is not None else v
 
         # Process unknown kwargs
         # ----------------------
