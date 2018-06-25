@@ -119,7 +119,7 @@ class BaseFigure(object):
         # ### Construct data validator ###
         # This is the validator that handles importing sequences of trace
         # objects
-        self._data_validator = DataValidator()
+        self._data_validator = DataValidator(set_uid=True)
 
         # ### Import traces ###
         data = self._data_validator.validate_coerce(data)
