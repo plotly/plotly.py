@@ -316,6 +316,7 @@ class Rangeslider(BaseLayoutHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         autorange=None,
         bgcolor=None,
         bordercolor=None,
@@ -331,6 +332,10 @@ class Rangeslider(BaseLayoutHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of
+            plotly.graph_objs.layout.xaxis.Rangeslider
         autorange
             Determines whether or not the range slider range is
             computed in relation to the input data. If `range` is
@@ -368,6 +373,20 @@ class Rangeslider(BaseLayoutHierarchyType):
         """
         super(Rangeslider, self).__init__('rangeslider')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.xaxis.Rangeslider 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.xaxis.Rangeslider"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout.xaxis import (
@@ -387,15 +406,23 @@ class Rangeslider(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.autorange = autorange
-        self.bgcolor = bgcolor
-        self.bordercolor = bordercolor
-        self.borderwidth = borderwidth
-        self.range = range
-        self.thickness = thickness
-        self.visible = visible
-        self.yaxis = yaxis
+        v = arg.pop('autorange', None)
+        self.autorange = autorange or v
+        v = arg.pop('bgcolor', None)
+        self.bgcolor = bgcolor or v
+        v = arg.pop('bordercolor', None)
+        self.bordercolor = bordercolor or v
+        v = arg.pop('borderwidth', None)
+        self.borderwidth = borderwidth or v
+        v = arg.pop('range', None)
+        self.range = range or v
+        v = arg.pop('thickness', None)
+        self.thickness = thickness or v
+        v = arg.pop('visible', None)
+        self.visible = visible or v
+        v = arg.pop('yaxis', None)
+        self.yaxis = yaxis or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

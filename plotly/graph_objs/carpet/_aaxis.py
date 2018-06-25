@@ -1660,6 +1660,7 @@ class Aaxis(BaseTraceHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         arraydtick=None,
         arraytick0=None,
         autorange=None,
@@ -1721,6 +1722,9 @@ class Aaxis(BaseTraceHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.carpet.Aaxis
         arraydtick
             The stride between grid lines along the axis
         arraytick0
@@ -1910,6 +1914,20 @@ class Aaxis(BaseTraceHierarchyType):
         """
         super(Aaxis, self).__init__('aaxis')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.carpet.Aaxis 
+constructor must be a dict or 
+an instance of plotly.graph_objs.carpet.Aaxis"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.carpet import (aaxis as v_aaxis)
@@ -1976,61 +1994,115 @@ class Aaxis(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.arraydtick = arraydtick
-        self.arraytick0 = arraytick0
-        self.autorange = autorange
-        self.categoryarray = categoryarray
-        self.categoryarraysrc = categoryarraysrc
-        self.categoryorder = categoryorder
-        self.cheatertype = cheatertype
-        self.color = color
-        self.dtick = dtick
-        self.endline = endline
-        self.endlinecolor = endlinecolor
-        self.endlinewidth = endlinewidth
-        self.exponentformat = exponentformat
-        self.fixedrange = fixedrange
-        self.gridcolor = gridcolor
-        self.gridwidth = gridwidth
-        self.labelpadding = labelpadding
-        self.labelprefix = labelprefix
-        self.labelsuffix = labelsuffix
-        self.linecolor = linecolor
-        self.linewidth = linewidth
-        self.minorgridcolor = minorgridcolor
-        self.minorgridcount = minorgridcount
-        self.minorgridwidth = minorgridwidth
-        self.nticks = nticks
-        self.range = range
-        self.rangemode = rangemode
-        self.separatethousands = separatethousands
-        self.showexponent = showexponent
-        self.showgrid = showgrid
-        self.showline = showline
-        self.showticklabels = showticklabels
-        self.showtickprefix = showtickprefix
-        self.showticksuffix = showticksuffix
-        self.smoothing = smoothing
-        self.startline = startline
-        self.startlinecolor = startlinecolor
-        self.startlinewidth = startlinewidth
-        self.tick0 = tick0
-        self.tickangle = tickangle
-        self.tickfont = tickfont
-        self.tickformat = tickformat
-        self.tickformatstops = tickformatstops
-        self.tickmode = tickmode
-        self.tickprefix = tickprefix
-        self.ticksuffix = ticksuffix
-        self.ticktext = ticktext
-        self.ticktextsrc = ticktextsrc
-        self.tickvals = tickvals
-        self.tickvalssrc = tickvalssrc
-        self.title = title
-        self.titlefont = titlefont
-        self.titleoffset = titleoffset
-        self.type = type
+        v = arg.pop('arraydtick', None)
+        self.arraydtick = arraydtick or v
+        v = arg.pop('arraytick0', None)
+        self.arraytick0 = arraytick0 or v
+        v = arg.pop('autorange', None)
+        self.autorange = autorange or v
+        v = arg.pop('categoryarray', None)
+        self.categoryarray = categoryarray or v
+        v = arg.pop('categoryarraysrc', None)
+        self.categoryarraysrc = categoryarraysrc or v
+        v = arg.pop('categoryorder', None)
+        self.categoryorder = categoryorder or v
+        v = arg.pop('cheatertype', None)
+        self.cheatertype = cheatertype or v
+        v = arg.pop('color', None)
+        self.color = color or v
+        v = arg.pop('dtick', None)
+        self.dtick = dtick or v
+        v = arg.pop('endline', None)
+        self.endline = endline or v
+        v = arg.pop('endlinecolor', None)
+        self.endlinecolor = endlinecolor or v
+        v = arg.pop('endlinewidth', None)
+        self.endlinewidth = endlinewidth or v
+        v = arg.pop('exponentformat', None)
+        self.exponentformat = exponentformat or v
+        v = arg.pop('fixedrange', None)
+        self.fixedrange = fixedrange or v
+        v = arg.pop('gridcolor', None)
+        self.gridcolor = gridcolor or v
+        v = arg.pop('gridwidth', None)
+        self.gridwidth = gridwidth or v
+        v = arg.pop('labelpadding', None)
+        self.labelpadding = labelpadding or v
+        v = arg.pop('labelprefix', None)
+        self.labelprefix = labelprefix or v
+        v = arg.pop('labelsuffix', None)
+        self.labelsuffix = labelsuffix or v
+        v = arg.pop('linecolor', None)
+        self.linecolor = linecolor or v
+        v = arg.pop('linewidth', None)
+        self.linewidth = linewidth or v
+        v = arg.pop('minorgridcolor', None)
+        self.minorgridcolor = minorgridcolor or v
+        v = arg.pop('minorgridcount', None)
+        self.minorgridcount = minorgridcount or v
+        v = arg.pop('minorgridwidth', None)
+        self.minorgridwidth = minorgridwidth or v
+        v = arg.pop('nticks', None)
+        self.nticks = nticks or v
+        v = arg.pop('range', None)
+        self.range = range or v
+        v = arg.pop('rangemode', None)
+        self.rangemode = rangemode or v
+        v = arg.pop('separatethousands', None)
+        self.separatethousands = separatethousands or v
+        v = arg.pop('showexponent', None)
+        self.showexponent = showexponent or v
+        v = arg.pop('showgrid', None)
+        self.showgrid = showgrid or v
+        v = arg.pop('showline', None)
+        self.showline = showline or v
+        v = arg.pop('showticklabels', None)
+        self.showticklabels = showticklabels or v
+        v = arg.pop('showtickprefix', None)
+        self.showtickprefix = showtickprefix or v
+        v = arg.pop('showticksuffix', None)
+        self.showticksuffix = showticksuffix or v
+        v = arg.pop('smoothing', None)
+        self.smoothing = smoothing or v
+        v = arg.pop('startline', None)
+        self.startline = startline or v
+        v = arg.pop('startlinecolor', None)
+        self.startlinecolor = startlinecolor or v
+        v = arg.pop('startlinewidth', None)
+        self.startlinewidth = startlinewidth or v
+        v = arg.pop('tick0', None)
+        self.tick0 = tick0 or v
+        v = arg.pop('tickangle', None)
+        self.tickangle = tickangle or v
+        v = arg.pop('tickfont', None)
+        self.tickfont = tickfont or v
+        v = arg.pop('tickformat', None)
+        self.tickformat = tickformat or v
+        v = arg.pop('tickformatstops', None)
+        self.tickformatstops = tickformatstops or v
+        v = arg.pop('tickmode', None)
+        self.tickmode = tickmode or v
+        v = arg.pop('tickprefix', None)
+        self.tickprefix = tickprefix or v
+        v = arg.pop('ticksuffix', None)
+        self.ticksuffix = ticksuffix or v
+        v = arg.pop('ticktext', None)
+        self.ticktext = ticktext or v
+        v = arg.pop('ticktextsrc', None)
+        self.ticktextsrc = ticktextsrc or v
+        v = arg.pop('tickvals', None)
+        self.tickvals = tickvals or v
+        v = arg.pop('tickvalssrc', None)
+        self.tickvalssrc = tickvalssrc or v
+        v = arg.pop('title', None)
+        self.title = title or v
+        v = arg.pop('titlefont', None)
+        self.titlefont = titlefont or v
+        v = arg.pop('titleoffset', None)
+        self.titleoffset = titleoffset or v
+        v = arg.pop('type', None)
+        self.type = type or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

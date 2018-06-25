@@ -113,12 +113,15 @@ class Increasing(BaseTraceHierarchyType):
             or dict with compatible properties
         """
 
-    def __init__(self, fillcolor=None, line=None, **kwargs):
+    def __init__(self, arg=None, fillcolor=None, line=None, **kwargs):
         """
         Construct a new Increasing object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.candlestick.Increasing
         fillcolor
             Sets the fill color. Defaults to a half-transparent
             variant of the line color, marker color, or marker line
@@ -133,6 +136,20 @@ class Increasing(BaseTraceHierarchyType):
         """
         super(Increasing, self).__init__('increasing')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.candlestick.Increasing 
+constructor must be a dict or 
+an instance of plotly.graph_objs.candlestick.Increasing"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.candlestick import (increasing as v_increasing)
@@ -144,9 +161,11 @@ class Increasing(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.fillcolor = fillcolor
-        self.line = line
+        v = arg.pop('fillcolor', None)
+        self.fillcolor = fillcolor or v
+        v = arg.pop('line', None)
+        self.line = line or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

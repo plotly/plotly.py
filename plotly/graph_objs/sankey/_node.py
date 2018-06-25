@@ -239,6 +239,7 @@ class Node(BaseTraceHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         color=None,
         colorsrc=None,
         label=None,
@@ -255,6 +256,9 @@ class Node(BaseTraceHierarchyType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.sankey.Node
         color
             Sets the `node` color. It can be a single value, or an
             array for specifying color for each `node`. If
@@ -282,6 +286,20 @@ class Node(BaseTraceHierarchyType):
         """
         super(Node, self).__init__('node')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.sankey.Node 
+constructor must be a dict or 
+an instance of plotly.graph_objs.sankey.Node"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.sankey import (node as v_node)
@@ -298,14 +316,21 @@ class Node(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.color = color
-        self.colorsrc = colorsrc
-        self.label = label
-        self.labelsrc = labelsrc
-        self.line = line
-        self.pad = pad
-        self.thickness = thickness
+        v = arg.pop('color', None)
+        self.color = color or v
+        v = arg.pop('colorsrc', None)
+        self.colorsrc = colorsrc or v
+        v = arg.pop('label', None)
+        self.label = label or v
+        v = arg.pop('labelsrc', None)
+        self.labelsrc = labelsrc or v
+        v = arg.pop('line', None)
+        self.line = line or v
+        v = arg.pop('pad', None)
+        self.pad = pad or v
+        v = arg.pop('thickness', None)
+        self.thickness = thickness or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

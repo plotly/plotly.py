@@ -930,6 +930,7 @@ class Candlestick(BaseTraceType):
 
     def __init__(
         self,
+        arg=None,
         close=None,
         closesrc=None,
         customdata=None,
@@ -980,6 +981,9 @@ class Candlestick(BaseTraceType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Candlestick
         close
             Sets the close values.
         closesrc
@@ -1092,6 +1096,20 @@ class Candlestick(BaseTraceType):
         """
         super(Candlestick, self).__init__('candlestick')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Candlestick 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Candlestick"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators import (candlestick as v_candlestick)
@@ -1139,40 +1157,74 @@ class Candlestick(BaseTraceType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.close = close
-        self.closesrc = closesrc
-        self.customdata = customdata
-        self.customdatasrc = customdatasrc
-        self.decreasing = decreasing
-        self.high = high
-        self.highsrc = highsrc
-        self.hoverinfo = hoverinfo
-        self.hoverinfosrc = hoverinfosrc
-        self.hoverlabel = hoverlabel
-        self.ids = ids
-        self.idssrc = idssrc
-        self.increasing = increasing
-        self.legendgroup = legendgroup
-        self.line = line
-        self.low = low
-        self.lowsrc = lowsrc
-        self.name = name
-        self.opacity = opacity
-        self.open = open
-        self.opensrc = opensrc
-        self.selectedpoints = selectedpoints
-        self.showlegend = showlegend
-        self.stream = stream
-        self.text = text
-        self.textsrc = textsrc
-        self.uid = uid
-        self.visible = visible
-        self.whiskerwidth = whiskerwidth
-        self.x = x
-        self.xaxis = xaxis
-        self.xcalendar = xcalendar
-        self.xsrc = xsrc
-        self.yaxis = yaxis
+        v = arg.pop('close', None)
+        self.close = close or v
+        v = arg.pop('closesrc', None)
+        self.closesrc = closesrc or v
+        v = arg.pop('customdata', None)
+        self.customdata = customdata or v
+        v = arg.pop('customdatasrc', None)
+        self.customdatasrc = customdatasrc or v
+        v = arg.pop('decreasing', None)
+        self.decreasing = decreasing or v
+        v = arg.pop('high', None)
+        self.high = high or v
+        v = arg.pop('highsrc', None)
+        self.highsrc = highsrc or v
+        v = arg.pop('hoverinfo', None)
+        self.hoverinfo = hoverinfo or v
+        v = arg.pop('hoverinfosrc', None)
+        self.hoverinfosrc = hoverinfosrc or v
+        v = arg.pop('hoverlabel', None)
+        self.hoverlabel = hoverlabel or v
+        v = arg.pop('ids', None)
+        self.ids = ids or v
+        v = arg.pop('idssrc', None)
+        self.idssrc = idssrc or v
+        v = arg.pop('increasing', None)
+        self.increasing = increasing or v
+        v = arg.pop('legendgroup', None)
+        self.legendgroup = legendgroup or v
+        v = arg.pop('line', None)
+        self.line = line or v
+        v = arg.pop('low', None)
+        self.low = low or v
+        v = arg.pop('lowsrc', None)
+        self.lowsrc = lowsrc or v
+        v = arg.pop('name', None)
+        self.name = name or v
+        v = arg.pop('opacity', None)
+        self.opacity = opacity or v
+        v = arg.pop('open', None)
+        self.open = open or v
+        v = arg.pop('opensrc', None)
+        self.opensrc = opensrc or v
+        v = arg.pop('selectedpoints', None)
+        self.selectedpoints = selectedpoints or v
+        v = arg.pop('showlegend', None)
+        self.showlegend = showlegend or v
+        v = arg.pop('stream', None)
+        self.stream = stream or v
+        v = arg.pop('text', None)
+        self.text = text or v
+        v = arg.pop('textsrc', None)
+        self.textsrc = textsrc or v
+        v = arg.pop('uid', None)
+        self.uid = uid or v
+        v = arg.pop('visible', None)
+        self.visible = visible or v
+        v = arg.pop('whiskerwidth', None)
+        self.whiskerwidth = whiskerwidth or v
+        v = arg.pop('x', None)
+        self.x = x or v
+        v = arg.pop('xaxis', None)
+        self.xaxis = xaxis or v
+        v = arg.pop('xcalendar', None)
+        self.xcalendar = xcalendar or v
+        v = arg.pop('xsrc', None)
+        self.xsrc = xsrc or v
+        v = arg.pop('yaxis', None)
+        self.yaxis = yaxis or v
 
         # Read-only literals
         # ------------------
@@ -1184,4 +1236,4 @@ class Candlestick(BaseTraceType):
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

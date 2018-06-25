@@ -372,6 +372,7 @@ class Layer(BaseLayoutHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         below=None,
         circle=None,
         color=None,
@@ -390,6 +391,9 @@ class Layer(BaseLayoutHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.layout.mapbox.Layer
         below
             Determines if the layer will be inserted before the
             layer with the specified ID. If omitted or set to '',
@@ -438,6 +442,20 @@ class Layer(BaseLayoutHierarchyType):
         """
         super(Layer, self).__init__('layers')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.mapbox.Layer 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.mapbox.Layer"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout.mapbox import (layer as v_layer)
@@ -458,18 +476,29 @@ class Layer(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.below = below
-        self.circle = circle
-        self.color = color
-        self.fill = fill
-        self.line = line
-        self.opacity = opacity
-        self.source = source
-        self.sourcelayer = sourcelayer
-        self.sourcetype = sourcetype
-        self.symbol = symbol
-        self.type = type
+        v = arg.pop('below', None)
+        self.below = below or v
+        v = arg.pop('circle', None)
+        self.circle = circle or v
+        v = arg.pop('color', None)
+        self.color = color or v
+        v = arg.pop('fill', None)
+        self.fill = fill or v
+        v = arg.pop('line', None)
+        self.line = line or v
+        v = arg.pop('opacity', None)
+        self.opacity = opacity or v
+        v = arg.pop('source', None)
+        self.source = source or v
+        v = arg.pop('sourcelayer', None)
+        self.sourcelayer = sourcelayer or v
+        v = arg.pop('sourcetype', None)
+        self.sourcetype = sourcetype or v
+        v = arg.pop('symbol', None)
+        self.symbol = symbol or v
+        v = arg.pop('type', None)
+        self.type = type or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

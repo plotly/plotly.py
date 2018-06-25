@@ -185,13 +185,37 @@ class {datatype_class}({node.name_base_datatype}):\n""")
     buffer.write(f"""
     def __init__(self""")
 
-    add_constructor_params(buffer, subtype_nodes)
-    header = f"Construct a new {datatype_class} object"
-    add_docstring(buffer, node, header=header)
+    add_constructor_params(buffer,
+                           subtype_nodes,
+                           prepend_extras=['arg'])
+
+    # ### Constructor Docstring ###
+    header = f'Construct a new {datatype_class} object'
+    class_name = (f'plotly.graph_objs'
+                  f'{node.parent_dotpath_str}.'
+                  f'{node.name_datatype_class}')
+
+    extras = [(f'arg',
+               f'dict of properties compatible with this constructor '
+               f'or an instance of {class_name}')]
+
+    add_docstring(buffer, node, header=header, prepend_extras=extras)
 
     buffer.write(f"""
         super({datatype_class}, self).__init__('{node.name_property}')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {{}}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(\"\"\"\\
+The first argument to the {class_name} 
+constructor must be a dict or 
+an instance of {class_name}\"\"\")
+                
         # Import validators
         # -----------------
         from plotly.validators{node.parent_dotpath_str} import (
@@ -210,8 +234,10 @@ class {datatype_class}({node.name_base_datatype}):\n""")
         # Populate data dict with properties
         # ----------------------------------""")
     for subtype_node in subtype_nodes:
+        name_prop = subtype_node.name_property
         buffer.write(f"""
-        self.{subtype_node.name_property} = {subtype_node.name_property}""")
+        v = arg.pop('{name_prop}', None)
+        self.{name_prop} = {name_prop} or v""")
 
     # ### Literals ###
     if literal_nodes:
@@ -233,7 +259,7 @@ LiteralValidator(plotly_name='{lit_name}', parent_name='{lit_parent}')""")
     
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)    
+        self._process_kwargs(**dict(arg, **kwargs))
     """)
 
     # Return source string
@@ -266,7 +292,10 @@ def reindent_validator_description(validator, extra_indent):
         validator.description().strip().split('\n'))
 
 
-def add_constructor_params(buffer, subtype_nodes, extras=()):
+def add_constructor_params(buffer,
+                           subtype_nodes,
+                           prepend_extras=(),
+                           append_extras=()):
     """
     Write datatype constructor params to a buffer
 
@@ -276,17 +305,23 @@ def add_constructor_params(buffer, subtype_nodes, extras=()):
         Buffer to write to
     subtype_nodes : list of PlotlyNode
         List of datatype nodes to be written as constructor params
-    extras : list[str]
+    prepend_extras : list[str]
+        List of extra parameters to include at the beginning of the params
+    append_extras : list[str]
         List of extra parameters to include at the end of the params
     Returns
     -------
     None
     """
+    for extra in prepend_extras:
+        buffer.write(f""",
+            {extra}=None""")
+
     for i, subtype_node in enumerate(subtype_nodes):
         buffer.write(f""",
             {subtype_node.name_property}=None""")
 
-    for extra in extras:
+    for extra in append_extras:
         buffer.write(f""",
             {extra}=None""")
 
@@ -296,7 +331,7 @@ def add_constructor_params(buffer, subtype_nodes, extras=()):
         ):""")
 
 
-def add_docstring(buffer, node, header, extras=()):
+def add_docstring(buffer, node, header, prepend_extras=(), append_extras=()):
     """
     Write docstring for a compound datatype node
 
@@ -309,6 +344,12 @@ def add_docstring(buffer, node, header, extras=()):
     header :
         Top-level header for docstring that will preceded the input node's
         own description. Header should be < 71 characters long
+    prepend_extras :
+        List or tuple of propery name / description pairs that should be
+        included at the beginning of the docstring
+    append_extras :
+        List or tuple of propery name / description pairs that should be
+        included at the end of the docstring
     Returns
     -------
 
@@ -340,11 +381,23 @@ def add_docstring(buffer, node, header, extras=()):
 
     # Write parameter descriptions
     # ----------------------------
+    # Write any prepend extras
+    for p, v in prepend_extras:
+        v_wrapped = '\n'.join(textwrap.wrap(
+            v,
+            width=79 - 12,
+            initial_indent=' ' * 12,
+            subsequent_indent=' ' * 12))
+        buffer.write(f"""
+        {p}
+{v_wrapped}""")
+
+    # Write core docstring
     buffer.write(node.get_constructor_params_docstring(
         indent=8))
 
-    # Write any extras
-    for p, v in extras:
+    # Write any append extras
+    for p, v in append_extras:
         v_wrapped = '\n'.join(textwrap.wrap(
             v,
             width=79-12,

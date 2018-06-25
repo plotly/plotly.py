@@ -103,12 +103,17 @@ class Marker(BaseTraceHierarchyType):
             compatible properties
         """
 
-    def __init__(self, colors=None, colorssrc=None, line=None, **kwargs):
+    def __init__(
+        self, arg=None, colors=None, colorssrc=None, line=None, **kwargs
+    ):
         """
         Construct a new Marker object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.pie.Marker
         colors
             Sets the color of each sector of this pie chart. If not
             specified, the default trace color set is used to pick
@@ -125,6 +130,20 @@ class Marker(BaseTraceHierarchyType):
         """
         super(Marker, self).__init__('marker')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.pie.Marker 
+constructor must be a dict or 
+an instance of plotly.graph_objs.pie.Marker"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.pie import (marker as v_marker)
@@ -137,10 +156,13 @@ class Marker(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.colors = colors
-        self.colorssrc = colorssrc
-        self.line = line
+        v = arg.pop('colors', None)
+        self.colors = colors or v
+        v = arg.pop('colorssrc', None)
+        self.colorssrc = colorssrc or v
+        v = arg.pop('line', None)
+        self.line = line or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

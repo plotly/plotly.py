@@ -1077,6 +1077,7 @@ class Annotation(BaseLayoutHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         align=None,
         arrowcolor=None,
         arrowhead=None,
@@ -1119,6 +1120,10 @@ class Annotation(BaseLayoutHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of
+            plotly.graph_objs.layout.scene.Annotation
         align
             Sets the horizontal alignment of the `text` within the
             box. Has an effect only if `text` spans more two or
@@ -1263,6 +1268,20 @@ class Annotation(BaseLayoutHierarchyType):
         """
         super(Annotation, self).__init__('annotations')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.scene.Annotation 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.scene.Annotation"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout.scene import (annotation as v_annotation)
@@ -1311,42 +1330,77 @@ class Annotation(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.align = align
-        self.arrowcolor = arrowcolor
-        self.arrowhead = arrowhead
-        self.arrowside = arrowside
-        self.arrowsize = arrowsize
-        self.arrowwidth = arrowwidth
-        self.ax = ax
-        self.ay = ay
-        self.bgcolor = bgcolor
-        self.bordercolor = bordercolor
-        self.borderpad = borderpad
-        self.borderwidth = borderwidth
-        self.captureevents = captureevents
-        self.font = font
-        self.height = height
-        self.hoverlabel = hoverlabel
-        self.hovertext = hovertext
-        self.opacity = opacity
-        self.showarrow = showarrow
-        self.standoff = standoff
-        self.startarrowhead = startarrowhead
-        self.startarrowsize = startarrowsize
-        self.startstandoff = startstandoff
-        self.text = text
-        self.textangle = textangle
-        self.valign = valign
-        self.visible = visible
-        self.width = width
-        self.x = x
-        self.xanchor = xanchor
-        self.xshift = xshift
-        self.y = y
-        self.yanchor = yanchor
-        self.yshift = yshift
-        self.z = z
+        v = arg.pop('align', None)
+        self.align = align or v
+        v = arg.pop('arrowcolor', None)
+        self.arrowcolor = arrowcolor or v
+        v = arg.pop('arrowhead', None)
+        self.arrowhead = arrowhead or v
+        v = arg.pop('arrowside', None)
+        self.arrowside = arrowside or v
+        v = arg.pop('arrowsize', None)
+        self.arrowsize = arrowsize or v
+        v = arg.pop('arrowwidth', None)
+        self.arrowwidth = arrowwidth or v
+        v = arg.pop('ax', None)
+        self.ax = ax or v
+        v = arg.pop('ay', None)
+        self.ay = ay or v
+        v = arg.pop('bgcolor', None)
+        self.bgcolor = bgcolor or v
+        v = arg.pop('bordercolor', None)
+        self.bordercolor = bordercolor or v
+        v = arg.pop('borderpad', None)
+        self.borderpad = borderpad or v
+        v = arg.pop('borderwidth', None)
+        self.borderwidth = borderwidth or v
+        v = arg.pop('captureevents', None)
+        self.captureevents = captureevents or v
+        v = arg.pop('font', None)
+        self.font = font or v
+        v = arg.pop('height', None)
+        self.height = height or v
+        v = arg.pop('hoverlabel', None)
+        self.hoverlabel = hoverlabel or v
+        v = arg.pop('hovertext', None)
+        self.hovertext = hovertext or v
+        v = arg.pop('opacity', None)
+        self.opacity = opacity or v
+        v = arg.pop('showarrow', None)
+        self.showarrow = showarrow or v
+        v = arg.pop('standoff', None)
+        self.standoff = standoff or v
+        v = arg.pop('startarrowhead', None)
+        self.startarrowhead = startarrowhead or v
+        v = arg.pop('startarrowsize', None)
+        self.startarrowsize = startarrowsize or v
+        v = arg.pop('startstandoff', None)
+        self.startstandoff = startstandoff or v
+        v = arg.pop('text', None)
+        self.text = text or v
+        v = arg.pop('textangle', None)
+        self.textangle = textangle or v
+        v = arg.pop('valign', None)
+        self.valign = valign or v
+        v = arg.pop('visible', None)
+        self.visible = visible or v
+        v = arg.pop('width', None)
+        self.width = width or v
+        v = arg.pop('x', None)
+        self.x = x or v
+        v = arg.pop('xanchor', None)
+        self.xanchor = xanchor or v
+        v = arg.pop('xshift', None)
+        self.xshift = xshift or v
+        v = arg.pop('y', None)
+        self.y = y or v
+        v = arg.pop('yanchor', None)
+        self.yanchor = yanchor or v
+        v = arg.pop('yshift', None)
+        self.yshift = yshift or v
+        v = arg.pop('z', None)
+        self.z = z or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

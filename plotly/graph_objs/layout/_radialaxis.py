@@ -319,6 +319,7 @@ class RadialAxis(BaseLayoutHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         domain=None,
         endpadding=None,
         orientation=None,
@@ -337,6 +338,9 @@ class RadialAxis(BaseLayoutHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.layout.RadialAxis
         domain
             Polar chart subplots are not supported yet. This key
             has currently no effect.
@@ -371,6 +375,20 @@ class RadialAxis(BaseLayoutHierarchyType):
         """
         super(RadialAxis, self).__init__('radialaxis')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.RadialAxis 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.RadialAxis"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout import (radialaxis as v_radialaxis)
@@ -393,18 +411,29 @@ class RadialAxis(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.domain = domain
-        self.endpadding = endpadding
-        self.orientation = orientation
-        self.range = range
-        self.showline = showline
-        self.showticklabels = showticklabels
-        self.tickcolor = tickcolor
-        self.ticklen = ticklen
-        self.tickorientation = tickorientation
-        self.ticksuffix = ticksuffix
-        self.visible = visible
+        v = arg.pop('domain', None)
+        self.domain = domain or v
+        v = arg.pop('endpadding', None)
+        self.endpadding = endpadding or v
+        v = arg.pop('orientation', None)
+        self.orientation = orientation or v
+        v = arg.pop('range', None)
+        self.range = range or v
+        v = arg.pop('showline', None)
+        self.showline = showline or v
+        v = arg.pop('showticklabels', None)
+        self.showticklabels = showticklabels or v
+        v = arg.pop('tickcolor', None)
+        self.tickcolor = tickcolor or v
+        v = arg.pop('ticklen', None)
+        self.ticklen = ticklen or v
+        v = arg.pop('tickorientation', None)
+        self.tickorientation = tickorientation or v
+        v = arg.pop('ticksuffix', None)
+        self.ticksuffix = ticksuffix or v
+        v = arg.pop('visible', None)
+        self.visible = visible or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

@@ -424,6 +424,7 @@ class ErrorX(BaseTraceHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         array=None,
         arrayminus=None,
         arrayminussrc=None,
@@ -446,6 +447,9 @@ class ErrorX(BaseTraceHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.scattergl.ErrorX
         array
             Sets the data corresponding the length of each error
             bar. Values are plotted relative to the underlying
@@ -506,6 +510,20 @@ class ErrorX(BaseTraceHierarchyType):
         """
         super(ErrorX, self).__init__('error_x')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.scattergl.ErrorX 
+constructor must be a dict or 
+an instance of plotly.graph_objs.scattergl.ErrorX"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.scattergl import (error_x as v_error_x)
@@ -530,22 +548,37 @@ class ErrorX(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.array = array
-        self.arrayminus = arrayminus
-        self.arrayminussrc = arrayminussrc
-        self.arraysrc = arraysrc
-        self.color = color
-        self.copy_ystyle = copy_ystyle
-        self.symmetric = symmetric
-        self.thickness = thickness
-        self.traceref = traceref
-        self.tracerefminus = tracerefminus
-        self.type = type
-        self.value = value
-        self.valueminus = valueminus
-        self.visible = visible
-        self.width = width
+        v = arg.pop('array', None)
+        self.array = array or v
+        v = arg.pop('arrayminus', None)
+        self.arrayminus = arrayminus or v
+        v = arg.pop('arrayminussrc', None)
+        self.arrayminussrc = arrayminussrc or v
+        v = arg.pop('arraysrc', None)
+        self.arraysrc = arraysrc or v
+        v = arg.pop('color', None)
+        self.color = color or v
+        v = arg.pop('copy_ystyle', None)
+        self.copy_ystyle = copy_ystyle or v
+        v = arg.pop('symmetric', None)
+        self.symmetric = symmetric or v
+        v = arg.pop('thickness', None)
+        self.thickness = thickness or v
+        v = arg.pop('traceref', None)
+        self.traceref = traceref or v
+        v = arg.pop('tracerefminus', None)
+        self.tracerefminus = tracerefminus or v
+        v = arg.pop('type', None)
+        self.type = type or v
+        v = arg.pop('value', None)
+        self.value = value or v
+        v = arg.pop('valueminus', None)
+        self.valueminus = valueminus or v
+        v = arg.pop('visible', None)
+        self.visible = visible or v
+        v = arg.pop('width', None)
+        self.width = width or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

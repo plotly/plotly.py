@@ -103,12 +103,17 @@ class Marker(BaseTraceHierarchyType):
             Sets the source reference on plot.ly for  opacity .
         """
 
-    def __init__(self, line=None, opacity=None, opacitysrc=None, **kwargs):
+    def __init__(
+        self, arg=None, line=None, opacity=None, opacitysrc=None, **kwargs
+    ):
         """
         Construct a new Marker object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.choropleth.Marker
         line
             plotly.graph_objs.choropleth.marker.Line instance or
             dict with compatible properties
@@ -123,6 +128,20 @@ class Marker(BaseTraceHierarchyType):
         """
         super(Marker, self).__init__('marker')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.choropleth.Marker 
+constructor must be a dict or 
+an instance of plotly.graph_objs.choropleth.Marker"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.choropleth import (marker as v_marker)
@@ -135,10 +154,13 @@ class Marker(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.line = line
-        self.opacity = opacity
-        self.opacitysrc = opacitysrc
+        v = arg.pop('line', None)
+        self.line = line or v
+        v = arg.pop('opacity', None)
+        self.opacity = opacity or v
+        v = arg.pop('opacitysrc', None)
+        self.opacitysrc = opacitysrc or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

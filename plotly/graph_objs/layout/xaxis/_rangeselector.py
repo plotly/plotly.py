@@ -454,6 +454,7 @@ class Rangeselector(BaseLayoutHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         activecolor=None,
         bgcolor=None,
         bordercolor=None,
@@ -472,6 +473,10 @@ class Rangeselector(BaseLayoutHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of
+            plotly.graph_objs.layout.xaxis.Rangeselector
         activecolor
             Sets the background color of the active range selector
             button.
@@ -514,6 +519,20 @@ class Rangeselector(BaseLayoutHierarchyType):
         """
         super(Rangeselector, self).__init__('rangeselector')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.xaxis.Rangeselector 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.xaxis.Rangeselector"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout.xaxis import (
@@ -539,18 +558,29 @@ class Rangeselector(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.activecolor = activecolor
-        self.bgcolor = bgcolor
-        self.bordercolor = bordercolor
-        self.borderwidth = borderwidth
-        self.buttons = buttons
-        self.font = font
-        self.visible = visible
-        self.x = x
-        self.xanchor = xanchor
-        self.y = y
-        self.yanchor = yanchor
+        v = arg.pop('activecolor', None)
+        self.activecolor = activecolor or v
+        v = arg.pop('bgcolor', None)
+        self.bgcolor = bgcolor or v
+        v = arg.pop('bordercolor', None)
+        self.bordercolor = bordercolor or v
+        v = arg.pop('borderwidth', None)
+        self.borderwidth = borderwidth or v
+        v = arg.pop('buttons', None)
+        self.buttons = buttons or v
+        v = arg.pop('font', None)
+        self.font = font or v
+        v = arg.pop('visible', None)
+        self.visible = visible or v
+        v = arg.pop('x', None)
+        self.x = x or v
+        v = arg.pop('xanchor', None)
+        self.xanchor = xanchor or v
+        v = arg.pop('y', None)
+        self.y = y or v
+        v = arg.pop('yanchor', None)
+        self.yanchor = yanchor or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

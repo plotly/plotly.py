@@ -186,6 +186,7 @@ class Currentvalue(BaseLayoutHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         font=None,
         offset=None,
         prefix=None,
@@ -199,6 +200,10 @@ class Currentvalue(BaseLayoutHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of
+            plotly.graph_objs.layout.slider.Currentvalue
         font
             Sets the font of the current value label text.
         offset
@@ -222,6 +227,20 @@ class Currentvalue(BaseLayoutHierarchyType):
         """
         super(Currentvalue, self).__init__('currentvalue')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.slider.Currentvalue 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.slider.Currentvalue"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout.slider import (
@@ -239,13 +258,19 @@ class Currentvalue(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.font = font
-        self.offset = offset
-        self.prefix = prefix
-        self.suffix = suffix
-        self.visible = visible
-        self.xanchor = xanchor
+        v = arg.pop('font', None)
+        self.font = font or v
+        v = arg.pop('offset', None)
+        self.offset = offset or v
+        v = arg.pop('prefix', None)
+        self.prefix = prefix or v
+        v = arg.pop('suffix', None)
+        self.suffix = suffix or v
+        v = arg.pop('visible', None)
+        self.visible = visible or v
+        v = arg.pop('xanchor', None)
+        self.xanchor = xanchor or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

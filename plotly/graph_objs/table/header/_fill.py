@@ -102,12 +102,15 @@ class Fill(BaseTraceHierarchyType):
             Sets the source reference on plot.ly for  color .
         """
 
-    def __init__(self, color=None, colorsrc=None, **kwargs):
+    def __init__(self, arg=None, color=None, colorsrc=None, **kwargs):
         """
         Construct a new Fill object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.table.header.Fill
         color
             Sets the cell fill color. It accepts either a specific
             color or an array of colors.
@@ -120,6 +123,20 @@ class Fill(BaseTraceHierarchyType):
         """
         super(Fill, self).__init__('fill')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.table.header.Fill 
+constructor must be a dict or 
+an instance of plotly.graph_objs.table.header.Fill"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.table.header import (fill as v_fill)
@@ -131,9 +148,11 @@ class Fill(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.color = color
-        self.colorsrc = colorsrc
+        v = arg.pop('color', None)
+        self.color = color or v
+        v = arg.pop('colorsrc', None)
+        self.colorsrc = colorsrc or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

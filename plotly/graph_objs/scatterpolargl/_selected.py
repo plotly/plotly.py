@@ -78,12 +78,16 @@ class Selected(BaseTraceHierarchyType):
             instance or dict with compatible properties
         """
 
-    def __init__(self, marker=None, textfont=None, **kwargs):
+    def __init__(self, arg=None, marker=None, textfont=None, **kwargs):
         """
         Construct a new Selected object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of
+            plotly.graph_objs.scatterpolargl.Selected
         marker
             plotly.graph_objs.scatterpolargl.selected.Marker
             instance or dict with compatible properties
@@ -97,6 +101,20 @@ class Selected(BaseTraceHierarchyType):
         """
         super(Selected, self).__init__('selected')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.scatterpolargl.Selected 
+constructor must be a dict or 
+an instance of plotly.graph_objs.scatterpolargl.Selected"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.scatterpolargl import (selected as v_selected)
@@ -108,9 +126,11 @@ class Selected(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.marker = marker
-        self.textfont = textfont
+        v = arg.pop('marker', None)
+        self.marker = marker or v
+        v = arg.pop('textfont', None)
+        self.textfont = textfont or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

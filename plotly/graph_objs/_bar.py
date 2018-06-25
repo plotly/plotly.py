@@ -1725,6 +1725,7 @@ class Bar(BaseTraceType):
 
     def __init__(
         self,
+        arg=None,
         base=None,
         basesrc=None,
         cliponaxis=None,
@@ -1791,6 +1792,9 @@ class Bar(BaseTraceType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Bar
         base
             Sets where the bar base is drawn (in position axis
             units). In *stack* or *relative* barmode, traces that
@@ -1974,6 +1978,20 @@ class Bar(BaseTraceType):
         """
         super(Bar, self).__init__('bar')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Bar 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Bar"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators import (bar as v_bar)
@@ -2037,60 +2055,114 @@ class Bar(BaseTraceType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.base = base
-        self.basesrc = basesrc
-        self.cliponaxis = cliponaxis
-        self.constraintext = constraintext
-        self.customdata = customdata
-        self.customdatasrc = customdatasrc
-        self.dx = dx
-        self.dy = dy
-        self.error_x = error_x
-        self.error_y = error_y
-        self.hoverinfo = hoverinfo
-        self.hoverinfosrc = hoverinfosrc
-        self.hoverlabel = hoverlabel
-        self.hovertext = hovertext
-        self.hovertextsrc = hovertextsrc
-        self.ids = ids
-        self.idssrc = idssrc
-        self.insidetextfont = insidetextfont
-        self.legendgroup = legendgroup
-        self.marker = marker
-        self.name = name
-        self.offset = offset
-        self.offsetsrc = offsetsrc
-        self.opacity = opacity
-        self.orientation = orientation
-        self.outsidetextfont = outsidetextfont
-        self.r = r
-        self.rsrc = rsrc
-        self.selected = selected
-        self.selectedpoints = selectedpoints
-        self.showlegend = showlegend
-        self.stream = stream
-        self.t = t
-        self.text = text
-        self.textfont = textfont
-        self.textposition = textposition
-        self.textpositionsrc = textpositionsrc
-        self.textsrc = textsrc
-        self.tsrc = tsrc
-        self.uid = uid
-        self.unselected = unselected
-        self.visible = visible
-        self.width = width
-        self.widthsrc = widthsrc
-        self.x = x
-        self.x0 = x0
-        self.xaxis = xaxis
-        self.xcalendar = xcalendar
-        self.xsrc = xsrc
-        self.y = y
-        self.y0 = y0
-        self.yaxis = yaxis
-        self.ycalendar = ycalendar
-        self.ysrc = ysrc
+        v = arg.pop('base', None)
+        self.base = base or v
+        v = arg.pop('basesrc', None)
+        self.basesrc = basesrc or v
+        v = arg.pop('cliponaxis', None)
+        self.cliponaxis = cliponaxis or v
+        v = arg.pop('constraintext', None)
+        self.constraintext = constraintext or v
+        v = arg.pop('customdata', None)
+        self.customdata = customdata or v
+        v = arg.pop('customdatasrc', None)
+        self.customdatasrc = customdatasrc or v
+        v = arg.pop('dx', None)
+        self.dx = dx or v
+        v = arg.pop('dy', None)
+        self.dy = dy or v
+        v = arg.pop('error_x', None)
+        self.error_x = error_x or v
+        v = arg.pop('error_y', None)
+        self.error_y = error_y or v
+        v = arg.pop('hoverinfo', None)
+        self.hoverinfo = hoverinfo or v
+        v = arg.pop('hoverinfosrc', None)
+        self.hoverinfosrc = hoverinfosrc or v
+        v = arg.pop('hoverlabel', None)
+        self.hoverlabel = hoverlabel or v
+        v = arg.pop('hovertext', None)
+        self.hovertext = hovertext or v
+        v = arg.pop('hovertextsrc', None)
+        self.hovertextsrc = hovertextsrc or v
+        v = arg.pop('ids', None)
+        self.ids = ids or v
+        v = arg.pop('idssrc', None)
+        self.idssrc = idssrc or v
+        v = arg.pop('insidetextfont', None)
+        self.insidetextfont = insidetextfont or v
+        v = arg.pop('legendgroup', None)
+        self.legendgroup = legendgroup or v
+        v = arg.pop('marker', None)
+        self.marker = marker or v
+        v = arg.pop('name', None)
+        self.name = name or v
+        v = arg.pop('offset', None)
+        self.offset = offset or v
+        v = arg.pop('offsetsrc', None)
+        self.offsetsrc = offsetsrc or v
+        v = arg.pop('opacity', None)
+        self.opacity = opacity or v
+        v = arg.pop('orientation', None)
+        self.orientation = orientation or v
+        v = arg.pop('outsidetextfont', None)
+        self.outsidetextfont = outsidetextfont or v
+        v = arg.pop('r', None)
+        self.r = r or v
+        v = arg.pop('rsrc', None)
+        self.rsrc = rsrc or v
+        v = arg.pop('selected', None)
+        self.selected = selected or v
+        v = arg.pop('selectedpoints', None)
+        self.selectedpoints = selectedpoints or v
+        v = arg.pop('showlegend', None)
+        self.showlegend = showlegend or v
+        v = arg.pop('stream', None)
+        self.stream = stream or v
+        v = arg.pop('t', None)
+        self.t = t or v
+        v = arg.pop('text', None)
+        self.text = text or v
+        v = arg.pop('textfont', None)
+        self.textfont = textfont or v
+        v = arg.pop('textposition', None)
+        self.textposition = textposition or v
+        v = arg.pop('textpositionsrc', None)
+        self.textpositionsrc = textpositionsrc or v
+        v = arg.pop('textsrc', None)
+        self.textsrc = textsrc or v
+        v = arg.pop('tsrc', None)
+        self.tsrc = tsrc or v
+        v = arg.pop('uid', None)
+        self.uid = uid or v
+        v = arg.pop('unselected', None)
+        self.unselected = unselected or v
+        v = arg.pop('visible', None)
+        self.visible = visible or v
+        v = arg.pop('width', None)
+        self.width = width or v
+        v = arg.pop('widthsrc', None)
+        self.widthsrc = widthsrc or v
+        v = arg.pop('x', None)
+        self.x = x or v
+        v = arg.pop('x0', None)
+        self.x0 = x0 or v
+        v = arg.pop('xaxis', None)
+        self.xaxis = xaxis or v
+        v = arg.pop('xcalendar', None)
+        self.xcalendar = xcalendar or v
+        v = arg.pop('xsrc', None)
+        self.xsrc = xsrc or v
+        v = arg.pop('y', None)
+        self.y = y or v
+        v = arg.pop('y0', None)
+        self.y0 = y0 or v
+        v = arg.pop('yaxis', None)
+        self.yaxis = yaxis or v
+        v = arg.pop('ycalendar', None)
+        self.ycalendar = ycalendar or v
+        v = arg.pop('ysrc', None)
+        self.ysrc = ysrc or v
 
         # Read-only literals
         # ------------------
@@ -2102,4 +2174,4 @@ class Bar(BaseTraceType):
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))
