@@ -130,7 +130,13 @@ class Button(BaseLayoutHierarchyType):
         """
 
     def __init__(
-        self, count=None, label=None, step=None, stepmode=None, **kwargs
+        self,
+        arg=None,
+        count=None,
+        label=None,
+        step=None,
+        stepmode=None,
+        **kwargs
     ):
         """
         Construct a new Button object
@@ -140,6 +146,10 @@ class Button(BaseLayoutHierarchyType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of
+            plotly.graph_objs.layout.xaxis.rangeselector.Button
         count
             Sets the number of steps to take to update the range.
             Use with `step` to specify the update interval.
@@ -166,6 +176,20 @@ class Button(BaseLayoutHierarchyType):
         """
         super(Button, self).__init__('buttons')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.xaxis.rangeselector.Button 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.xaxis.rangeselector.Button"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout.xaxis.rangeselector import (
@@ -181,11 +205,15 @@ class Button(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.count = count
-        self.label = label
-        self.step = step
-        self.stepmode = stepmode
+        v = arg.pop('count', None)
+        self.count = count or v
+        v = arg.pop('label', None)
+        self.label = label or v
+        v = arg.pop('step', None)
+        self.step = step or v
+        v = arg.pop('stepmode', None)
+        self.stepmode = stepmode or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

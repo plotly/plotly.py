@@ -1812,6 +1812,7 @@ class ZAxis(BaseLayoutHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         autorange=None,
         backgroundcolor=None,
         calendar=None,
@@ -1873,6 +1874,9 @@ class ZAxis(BaseLayoutHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.layout.scene.ZAxis
         autorange
             Determines whether or not the range of this axis is
             computed in relation to the input data. See `rangemode`
@@ -2121,6 +2125,20 @@ class ZAxis(BaseLayoutHierarchyType):
         """
         super(ZAxis, self).__init__('zaxis')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.scene.ZAxis 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.scene.ZAxis"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout.scene import (zaxis as v_zaxis)
@@ -2188,61 +2206,115 @@ class ZAxis(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.autorange = autorange
-        self.backgroundcolor = backgroundcolor
-        self.calendar = calendar
-        self.categoryarray = categoryarray
-        self.categoryarraysrc = categoryarraysrc
-        self.categoryorder = categoryorder
-        self.color = color
-        self.dtick = dtick
-        self.exponentformat = exponentformat
-        self.gridcolor = gridcolor
-        self.gridwidth = gridwidth
-        self.hoverformat = hoverformat
-        self.linecolor = linecolor
-        self.linewidth = linewidth
-        self.mirror = mirror
-        self.nticks = nticks
-        self.range = range
-        self.rangemode = rangemode
-        self.separatethousands = separatethousands
-        self.showaxeslabels = showaxeslabels
-        self.showbackground = showbackground
-        self.showexponent = showexponent
-        self.showgrid = showgrid
-        self.showline = showline
-        self.showspikes = showspikes
-        self.showticklabels = showticklabels
-        self.showtickprefix = showtickprefix
-        self.showticksuffix = showticksuffix
-        self.spikecolor = spikecolor
-        self.spikesides = spikesides
-        self.spikethickness = spikethickness
-        self.tick0 = tick0
-        self.tickangle = tickangle
-        self.tickcolor = tickcolor
-        self.tickfont = tickfont
-        self.tickformat = tickformat
-        self.tickformatstops = tickformatstops
-        self.ticklen = ticklen
-        self.tickmode = tickmode
-        self.tickprefix = tickprefix
-        self.ticks = ticks
-        self.ticksuffix = ticksuffix
-        self.ticktext = ticktext
-        self.ticktextsrc = ticktextsrc
-        self.tickvals = tickvals
-        self.tickvalssrc = tickvalssrc
-        self.tickwidth = tickwidth
-        self.title = title
-        self.titlefont = titlefont
-        self.type = type
-        self.visible = visible
-        self.zeroline = zeroline
-        self.zerolinecolor = zerolinecolor
-        self.zerolinewidth = zerolinewidth
+        v = arg.pop('autorange', None)
+        self.autorange = autorange or v
+        v = arg.pop('backgroundcolor', None)
+        self.backgroundcolor = backgroundcolor or v
+        v = arg.pop('calendar', None)
+        self.calendar = calendar or v
+        v = arg.pop('categoryarray', None)
+        self.categoryarray = categoryarray or v
+        v = arg.pop('categoryarraysrc', None)
+        self.categoryarraysrc = categoryarraysrc or v
+        v = arg.pop('categoryorder', None)
+        self.categoryorder = categoryorder or v
+        v = arg.pop('color', None)
+        self.color = color or v
+        v = arg.pop('dtick', None)
+        self.dtick = dtick or v
+        v = arg.pop('exponentformat', None)
+        self.exponentformat = exponentformat or v
+        v = arg.pop('gridcolor', None)
+        self.gridcolor = gridcolor or v
+        v = arg.pop('gridwidth', None)
+        self.gridwidth = gridwidth or v
+        v = arg.pop('hoverformat', None)
+        self.hoverformat = hoverformat or v
+        v = arg.pop('linecolor', None)
+        self.linecolor = linecolor or v
+        v = arg.pop('linewidth', None)
+        self.linewidth = linewidth or v
+        v = arg.pop('mirror', None)
+        self.mirror = mirror or v
+        v = arg.pop('nticks', None)
+        self.nticks = nticks or v
+        v = arg.pop('range', None)
+        self.range = range or v
+        v = arg.pop('rangemode', None)
+        self.rangemode = rangemode or v
+        v = arg.pop('separatethousands', None)
+        self.separatethousands = separatethousands or v
+        v = arg.pop('showaxeslabels', None)
+        self.showaxeslabels = showaxeslabels or v
+        v = arg.pop('showbackground', None)
+        self.showbackground = showbackground or v
+        v = arg.pop('showexponent', None)
+        self.showexponent = showexponent or v
+        v = arg.pop('showgrid', None)
+        self.showgrid = showgrid or v
+        v = arg.pop('showline', None)
+        self.showline = showline or v
+        v = arg.pop('showspikes', None)
+        self.showspikes = showspikes or v
+        v = arg.pop('showticklabels', None)
+        self.showticklabels = showticklabels or v
+        v = arg.pop('showtickprefix', None)
+        self.showtickprefix = showtickprefix or v
+        v = arg.pop('showticksuffix', None)
+        self.showticksuffix = showticksuffix or v
+        v = arg.pop('spikecolor', None)
+        self.spikecolor = spikecolor or v
+        v = arg.pop('spikesides', None)
+        self.spikesides = spikesides or v
+        v = arg.pop('spikethickness', None)
+        self.spikethickness = spikethickness or v
+        v = arg.pop('tick0', None)
+        self.tick0 = tick0 or v
+        v = arg.pop('tickangle', None)
+        self.tickangle = tickangle or v
+        v = arg.pop('tickcolor', None)
+        self.tickcolor = tickcolor or v
+        v = arg.pop('tickfont', None)
+        self.tickfont = tickfont or v
+        v = arg.pop('tickformat', None)
+        self.tickformat = tickformat or v
+        v = arg.pop('tickformatstops', None)
+        self.tickformatstops = tickformatstops or v
+        v = arg.pop('ticklen', None)
+        self.ticklen = ticklen or v
+        v = arg.pop('tickmode', None)
+        self.tickmode = tickmode or v
+        v = arg.pop('tickprefix', None)
+        self.tickprefix = tickprefix or v
+        v = arg.pop('ticks', None)
+        self.ticks = ticks or v
+        v = arg.pop('ticksuffix', None)
+        self.ticksuffix = ticksuffix or v
+        v = arg.pop('ticktext', None)
+        self.ticktext = ticktext or v
+        v = arg.pop('ticktextsrc', None)
+        self.ticktextsrc = ticktextsrc or v
+        v = arg.pop('tickvals', None)
+        self.tickvals = tickvals or v
+        v = arg.pop('tickvalssrc', None)
+        self.tickvalssrc = tickvalssrc or v
+        v = arg.pop('tickwidth', None)
+        self.tickwidth = tickwidth or v
+        v = arg.pop('title', None)
+        self.title = title or v
+        v = arg.pop('titlefont', None)
+        self.titlefont = titlefont or v
+        v = arg.pop('type', None)
+        self.type = type or v
+        v = arg.pop('visible', None)
+        self.visible = visible or v
+        v = arg.pop('zeroline', None)
+        self.zeroline = zeroline or v
+        v = arg.pop('zerolinecolor', None)
+        self.zerolinecolor = zerolinecolor or v
+        v = arg.pop('zerolinewidth', None)
+        self.zerolinewidth = zerolinewidth or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

@@ -79,12 +79,15 @@ class YBins(BaseTraceHierarchyType):
             Sets the starting value for the y axis bins.
         """
 
-    def __init__(self, end=None, size=None, start=None, **kwargs):
+    def __init__(self, arg=None, end=None, size=None, start=None, **kwargs):
         """
         Construct a new YBins object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.histogram2d.YBins
         end
             Sets the end value for the y axis bins.
         size
@@ -98,6 +101,20 @@ class YBins(BaseTraceHierarchyType):
         """
         super(YBins, self).__init__('ybins')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.histogram2d.YBins 
+constructor must be a dict or 
+an instance of plotly.graph_objs.histogram2d.YBins"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.histogram2d import (ybins as v_ybins)
@@ -110,10 +127,13 @@ class YBins(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.end = end
-        self.size = size
-        self.start = start
+        v = arg.pop('end', None)
+        self.end = end or v
+        v = arg.pop('size', None)
+        self.size = size or v
+        v = arg.pop('start', None)
+        self.start = start or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

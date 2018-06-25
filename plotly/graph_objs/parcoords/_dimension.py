@@ -330,6 +330,7 @@ class Dimension(BaseTraceHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         constraintrange=None,
         label=None,
         multiselect=None,
@@ -352,6 +353,9 @@ class Dimension(BaseTraceHierarchyType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.parcoords.Dimension
         constraintrange
             The domain range to which the filter on the dimension
             is constrained. Must be an array of `[fromValue,
@@ -404,6 +408,20 @@ class Dimension(BaseTraceHierarchyType):
         """
         super(Dimension, self).__init__('dimensions')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.parcoords.Dimension 
+constructor must be a dict or 
+an instance of plotly.graph_objs.parcoords.Dimension"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.parcoords import (dimension as v_dimension)
@@ -426,19 +444,31 @@ class Dimension(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.constraintrange = constraintrange
-        self.label = label
-        self.multiselect = multiselect
-        self.range = range
-        self.tickformat = tickformat
-        self.ticktext = ticktext
-        self.ticktextsrc = ticktextsrc
-        self.tickvals = tickvals
-        self.tickvalssrc = tickvalssrc
-        self.values = values
-        self.valuessrc = valuessrc
-        self.visible = visible
+        v = arg.pop('constraintrange', None)
+        self.constraintrange = constraintrange or v
+        v = arg.pop('label', None)
+        self.label = label or v
+        v = arg.pop('multiselect', None)
+        self.multiselect = multiselect or v
+        v = arg.pop('range', None)
+        self.range = range or v
+        v = arg.pop('tickformat', None)
+        self.tickformat = tickformat or v
+        v = arg.pop('ticktext', None)
+        self.ticktext = ticktext or v
+        v = arg.pop('ticktextsrc', None)
+        self.ticktextsrc = ticktextsrc or v
+        v = arg.pop('tickvals', None)
+        self.tickvals = tickvals or v
+        v = arg.pop('tickvalssrc', None)
+        self.tickvalssrc = tickvalssrc or v
+        v = arg.pop('values', None)
+        self.values = values or v
+        v = arg.pop('valuessrc', None)
+        self.valuessrc = valuessrc or v
+        v = arg.pop('visible', None)
+        self.visible = visible or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

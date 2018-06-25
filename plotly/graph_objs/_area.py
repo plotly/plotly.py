@@ -590,6 +590,7 @@ class Area(BaseTraceType):
 
     def __init__(
         self,
+        arg=None,
         customdata=None,
         customdatasrc=None,
         hoverinfo=None,
@@ -617,6 +618,9 @@ class Area(BaseTraceType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Area
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -689,6 +693,20 @@ class Area(BaseTraceType):
         """
         super(Area, self).__init__('area')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Area 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Area"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators import (area as v_area)
@@ -718,26 +736,46 @@ class Area(BaseTraceType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.customdata = customdata
-        self.customdatasrc = customdatasrc
-        self.hoverinfo = hoverinfo
-        self.hoverinfosrc = hoverinfosrc
-        self.hoverlabel = hoverlabel
-        self.ids = ids
-        self.idssrc = idssrc
-        self.legendgroup = legendgroup
-        self.marker = marker
-        self.name = name
-        self.opacity = opacity
-        self.r = r
-        self.rsrc = rsrc
-        self.selectedpoints = selectedpoints
-        self.showlegend = showlegend
-        self.stream = stream
-        self.t = t
-        self.tsrc = tsrc
-        self.uid = uid
-        self.visible = visible
+        v = arg.pop('customdata', None)
+        self.customdata = customdata or v
+        v = arg.pop('customdatasrc', None)
+        self.customdatasrc = customdatasrc or v
+        v = arg.pop('hoverinfo', None)
+        self.hoverinfo = hoverinfo or v
+        v = arg.pop('hoverinfosrc', None)
+        self.hoverinfosrc = hoverinfosrc or v
+        v = arg.pop('hoverlabel', None)
+        self.hoverlabel = hoverlabel or v
+        v = arg.pop('ids', None)
+        self.ids = ids or v
+        v = arg.pop('idssrc', None)
+        self.idssrc = idssrc or v
+        v = arg.pop('legendgroup', None)
+        self.legendgroup = legendgroup or v
+        v = arg.pop('marker', None)
+        self.marker = marker or v
+        v = arg.pop('name', None)
+        self.name = name or v
+        v = arg.pop('opacity', None)
+        self.opacity = opacity or v
+        v = arg.pop('r', None)
+        self.r = r or v
+        v = arg.pop('rsrc', None)
+        self.rsrc = rsrc or v
+        v = arg.pop('selectedpoints', None)
+        self.selectedpoints = selectedpoints or v
+        v = arg.pop('showlegend', None)
+        self.showlegend = showlegend or v
+        v = arg.pop('stream', None)
+        self.stream = stream or v
+        v = arg.pop('t', None)
+        self.t = t or v
+        v = arg.pop('tsrc', None)
+        self.tsrc = tsrc or v
+        v = arg.pop('uid', None)
+        self.uid = uid or v
+        v = arg.pop('visible', None)
+        self.visible = visible or v
 
         # Read-only literals
         # ------------------
@@ -749,4 +787,4 @@ class Area(BaseTraceType):
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

@@ -1124,6 +1124,7 @@ class Geo(BaseLayoutHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         bgcolor=None,
         center=None,
         coastlinecolor=None,
@@ -1160,6 +1161,9 @@ class Geo(BaseLayoutHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.layout.Geo
         bgcolor
             Set the background color of the map
         center
@@ -1234,6 +1238,20 @@ class Geo(BaseLayoutHierarchyType):
         """
         super(Geo, self).__init__('geo')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.Geo 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.Geo"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout import (geo as v_geo)
@@ -1272,36 +1290,65 @@ class Geo(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.bgcolor = bgcolor
-        self.center = center
-        self.coastlinecolor = coastlinecolor
-        self.coastlinewidth = coastlinewidth
-        self.countrycolor = countrycolor
-        self.countrywidth = countrywidth
-        self.domain = domain
-        self.framecolor = framecolor
-        self.framewidth = framewidth
-        self.lakecolor = lakecolor
-        self.landcolor = landcolor
-        self.lataxis = lataxis
-        self.lonaxis = lonaxis
-        self.oceancolor = oceancolor
-        self.projection = projection
-        self.resolution = resolution
-        self.rivercolor = rivercolor
-        self.riverwidth = riverwidth
-        self.scope = scope
-        self.showcoastlines = showcoastlines
-        self.showcountries = showcountries
-        self.showframe = showframe
-        self.showlakes = showlakes
-        self.showland = showland
-        self.showocean = showocean
-        self.showrivers = showrivers
-        self.showsubunits = showsubunits
-        self.subunitcolor = subunitcolor
-        self.subunitwidth = subunitwidth
+        v = arg.pop('bgcolor', None)
+        self.bgcolor = bgcolor or v
+        v = arg.pop('center', None)
+        self.center = center or v
+        v = arg.pop('coastlinecolor', None)
+        self.coastlinecolor = coastlinecolor or v
+        v = arg.pop('coastlinewidth', None)
+        self.coastlinewidth = coastlinewidth or v
+        v = arg.pop('countrycolor', None)
+        self.countrycolor = countrycolor or v
+        v = arg.pop('countrywidth', None)
+        self.countrywidth = countrywidth or v
+        v = arg.pop('domain', None)
+        self.domain = domain or v
+        v = arg.pop('framecolor', None)
+        self.framecolor = framecolor or v
+        v = arg.pop('framewidth', None)
+        self.framewidth = framewidth or v
+        v = arg.pop('lakecolor', None)
+        self.lakecolor = lakecolor or v
+        v = arg.pop('landcolor', None)
+        self.landcolor = landcolor or v
+        v = arg.pop('lataxis', None)
+        self.lataxis = lataxis or v
+        v = arg.pop('lonaxis', None)
+        self.lonaxis = lonaxis or v
+        v = arg.pop('oceancolor', None)
+        self.oceancolor = oceancolor or v
+        v = arg.pop('projection', None)
+        self.projection = projection or v
+        v = arg.pop('resolution', None)
+        self.resolution = resolution or v
+        v = arg.pop('rivercolor', None)
+        self.rivercolor = rivercolor or v
+        v = arg.pop('riverwidth', None)
+        self.riverwidth = riverwidth or v
+        v = arg.pop('scope', None)
+        self.scope = scope or v
+        v = arg.pop('showcoastlines', None)
+        self.showcoastlines = showcoastlines or v
+        v = arg.pop('showcountries', None)
+        self.showcountries = showcountries or v
+        v = arg.pop('showframe', None)
+        self.showframe = showframe or v
+        v = arg.pop('showlakes', None)
+        self.showlakes = showlakes or v
+        v = arg.pop('showland', None)
+        self.showland = showland or v
+        v = arg.pop('showocean', None)
+        self.showocean = showocean or v
+        v = arg.pop('showrivers', None)
+        self.showrivers = showrivers or v
+        v = arg.pop('showsubunits', None)
+        self.showsubunits = showsubunits or v
+        v = arg.pop('subunitcolor', None)
+        self.subunitcolor = subunitcolor or v
+        v = arg.pop('subunitwidth', None)
+        self.subunitwidth = subunitwidth or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

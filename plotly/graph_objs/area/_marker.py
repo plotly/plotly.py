@@ -311,6 +311,7 @@ class Marker(BaseTraceHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         color=None,
         colorsrc=None,
         opacity=None,
@@ -326,6 +327,9 @@ class Marker(BaseTraceHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.area.Marker
         color
             Sets the marker color. It accepts either a specific
             color or an array of numbers that are mapped to the
@@ -356,6 +360,20 @@ class Marker(BaseTraceHierarchyType):
         """
         super(Marker, self).__init__('marker')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.area.Marker 
+constructor must be a dict or 
+an instance of plotly.graph_objs.area.Marker"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.area import (marker as v_marker)
@@ -373,15 +391,23 @@ class Marker(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.color = color
-        self.colorsrc = colorsrc
-        self.opacity = opacity
-        self.opacitysrc = opacitysrc
-        self.size = size
-        self.sizesrc = sizesrc
-        self.symbol = symbol
-        self.symbolsrc = symbolsrc
+        v = arg.pop('color', None)
+        self.color = color or v
+        v = arg.pop('colorsrc', None)
+        self.colorsrc = colorsrc or v
+        v = arg.pop('opacity', None)
+        self.opacity = opacity or v
+        v = arg.pop('opacitysrc', None)
+        self.opacitysrc = opacitysrc or v
+        v = arg.pop('size', None)
+        self.size = size or v
+        v = arg.pop('sizesrc', None)
+        self.sizesrc = sizesrc or v
+        v = arg.pop('symbol', None)
+        self.symbol = symbol or v
+        v = arg.pop('symbolsrc', None)
+        self.symbolsrc = symbolsrc or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

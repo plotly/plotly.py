@@ -529,6 +529,7 @@ class Updatemenu(BaseLayoutHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         active=None,
         bgcolor=None,
         bordercolor=None,
@@ -551,6 +552,9 @@ class Updatemenu(BaseLayoutHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.layout.Updatemenu
         active
             Determines which button (by index starting from 0) is
             considered active.
@@ -604,6 +608,20 @@ class Updatemenu(BaseLayoutHierarchyType):
         """
         super(Updatemenu, self).__init__('updatemenus')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.Updatemenu 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.Updatemenu"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout import (updatemenu as v_updatemenu)
@@ -628,22 +646,37 @@ class Updatemenu(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.active = active
-        self.bgcolor = bgcolor
-        self.bordercolor = bordercolor
-        self.borderwidth = borderwidth
-        self.buttons = buttons
-        self.direction = direction
-        self.font = font
-        self.pad = pad
-        self.showactive = showactive
-        self.type = type
-        self.visible = visible
-        self.x = x
-        self.xanchor = xanchor
-        self.y = y
-        self.yanchor = yanchor
+        v = arg.pop('active', None)
+        self.active = active or v
+        v = arg.pop('bgcolor', None)
+        self.bgcolor = bgcolor or v
+        v = arg.pop('bordercolor', None)
+        self.bordercolor = bordercolor or v
+        v = arg.pop('borderwidth', None)
+        self.borderwidth = borderwidth or v
+        v = arg.pop('buttons', None)
+        self.buttons = buttons or v
+        v = arg.pop('direction', None)
+        self.direction = direction or v
+        v = arg.pop('font', None)
+        self.font = font or v
+        v = arg.pop('pad', None)
+        self.pad = pad or v
+        v = arg.pop('showactive', None)
+        self.showactive = showactive or v
+        v = arg.pop('type', None)
+        self.type = type or v
+        v = arg.pop('visible', None)
+        self.visible = visible or v
+        v = arg.pop('x', None)
+        self.x = x or v
+        v = arg.pop('xanchor', None)
+        self.xanchor = xanchor or v
+        v = arg.pop('y', None)
+        self.y = y or v
+        v = arg.pop('yanchor', None)
+        self.yanchor = yanchor or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

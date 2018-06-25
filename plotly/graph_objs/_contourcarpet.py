@@ -1533,6 +1533,7 @@ class Contourcarpet(BaseTraceType):
 
     def __init__(
         self,
+        arg=None,
         a=None,
         a0=None,
         asrc=None,
@@ -1590,6 +1591,9 @@ class Contourcarpet(BaseTraceType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Contourcarpet
         a
             Sets the x coordinates.
         a0
@@ -1752,6 +1756,20 @@ class Contourcarpet(BaseTraceType):
         """
         super(Contourcarpet, self).__init__('contourcarpet')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Contourcarpet 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Contourcarpet"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators import (contourcarpet as v_contourcarpet)
@@ -1814,52 +1832,98 @@ class Contourcarpet(BaseTraceType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.a = a
-        self.a0 = a0
-        self.asrc = asrc
-        self.atype = atype
-        self.autocolorscale = autocolorscale
-        self.autocontour = autocontour
-        self.b = b
-        self.b0 = b0
-        self.bsrc = bsrc
-        self.btype = btype
-        self.carpet = carpet
-        self.colorbar = colorbar
-        self.colorscale = colorscale
-        self.contours = contours
-        self.customdata = customdata
-        self.customdatasrc = customdatasrc
-        self.da = da
-        self.db = db
-        self.fillcolor = fillcolor
-        self.hoverinfo = hoverinfo
-        self.hoverinfosrc = hoverinfosrc
-        self.hoverlabel = hoverlabel
-        self.ids = ids
-        self.idssrc = idssrc
-        self.legendgroup = legendgroup
-        self.line = line
-        self.name = name
-        self.ncontours = ncontours
-        self.opacity = opacity
-        self.reversescale = reversescale
-        self.selectedpoints = selectedpoints
-        self.showlegend = showlegend
-        self.showscale = showscale
-        self.stream = stream
-        self.text = text
-        self.textsrc = textsrc
-        self.transpose = transpose
-        self.uid = uid
-        self.visible = visible
-        self.xaxis = xaxis
-        self.yaxis = yaxis
-        self.z = z
-        self.zauto = zauto
-        self.zmax = zmax
-        self.zmin = zmin
-        self.zsrc = zsrc
+        v = arg.pop('a', None)
+        self.a = a or v
+        v = arg.pop('a0', None)
+        self.a0 = a0 or v
+        v = arg.pop('asrc', None)
+        self.asrc = asrc or v
+        v = arg.pop('atype', None)
+        self.atype = atype or v
+        v = arg.pop('autocolorscale', None)
+        self.autocolorscale = autocolorscale or v
+        v = arg.pop('autocontour', None)
+        self.autocontour = autocontour or v
+        v = arg.pop('b', None)
+        self.b = b or v
+        v = arg.pop('b0', None)
+        self.b0 = b0 or v
+        v = arg.pop('bsrc', None)
+        self.bsrc = bsrc or v
+        v = arg.pop('btype', None)
+        self.btype = btype or v
+        v = arg.pop('carpet', None)
+        self.carpet = carpet or v
+        v = arg.pop('colorbar', None)
+        self.colorbar = colorbar or v
+        v = arg.pop('colorscale', None)
+        self.colorscale = colorscale or v
+        v = arg.pop('contours', None)
+        self.contours = contours or v
+        v = arg.pop('customdata', None)
+        self.customdata = customdata or v
+        v = arg.pop('customdatasrc', None)
+        self.customdatasrc = customdatasrc or v
+        v = arg.pop('da', None)
+        self.da = da or v
+        v = arg.pop('db', None)
+        self.db = db or v
+        v = arg.pop('fillcolor', None)
+        self.fillcolor = fillcolor or v
+        v = arg.pop('hoverinfo', None)
+        self.hoverinfo = hoverinfo or v
+        v = arg.pop('hoverinfosrc', None)
+        self.hoverinfosrc = hoverinfosrc or v
+        v = arg.pop('hoverlabel', None)
+        self.hoverlabel = hoverlabel or v
+        v = arg.pop('ids', None)
+        self.ids = ids or v
+        v = arg.pop('idssrc', None)
+        self.idssrc = idssrc or v
+        v = arg.pop('legendgroup', None)
+        self.legendgroup = legendgroup or v
+        v = arg.pop('line', None)
+        self.line = line or v
+        v = arg.pop('name', None)
+        self.name = name or v
+        v = arg.pop('ncontours', None)
+        self.ncontours = ncontours or v
+        v = arg.pop('opacity', None)
+        self.opacity = opacity or v
+        v = arg.pop('reversescale', None)
+        self.reversescale = reversescale or v
+        v = arg.pop('selectedpoints', None)
+        self.selectedpoints = selectedpoints or v
+        v = arg.pop('showlegend', None)
+        self.showlegend = showlegend or v
+        v = arg.pop('showscale', None)
+        self.showscale = showscale or v
+        v = arg.pop('stream', None)
+        self.stream = stream or v
+        v = arg.pop('text', None)
+        self.text = text or v
+        v = arg.pop('textsrc', None)
+        self.textsrc = textsrc or v
+        v = arg.pop('transpose', None)
+        self.transpose = transpose or v
+        v = arg.pop('uid', None)
+        self.uid = uid or v
+        v = arg.pop('visible', None)
+        self.visible = visible or v
+        v = arg.pop('xaxis', None)
+        self.xaxis = xaxis or v
+        v = arg.pop('yaxis', None)
+        self.yaxis = yaxis or v
+        v = arg.pop('z', None)
+        self.z = z or v
+        v = arg.pop('zauto', None)
+        self.zauto = zauto or v
+        v = arg.pop('zmax', None)
+        self.zmax = zmax or v
+        v = arg.pop('zmin', None)
+        self.zmin = zmin or v
+        v = arg.pop('zsrc', None)
+        self.zsrc = zsrc or v
 
         # Read-only literals
         # ------------------
@@ -1871,4 +1935,4 @@ class Contourcarpet(BaseTraceType):
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

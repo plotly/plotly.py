@@ -161,6 +161,7 @@ class Frame(BaseFrameHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         baseframe=None,
         data=None,
         group=None,
@@ -174,6 +175,9 @@ class Frame(BaseFrameHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Frame
         baseframe
             The name of the frame into which this frame's
             properties are merged before applying. This is used to
@@ -201,6 +205,20 @@ class Frame(BaseFrameHierarchyType):
         """
         super(Frame, self).__init__('frames')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Frame 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Frame"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators import (frame as v_frame)
@@ -216,13 +234,19 @@ class Frame(BaseFrameHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.baseframe = baseframe
-        self.data = data
-        self.group = group
-        self.layout = layout
-        self.name = name
-        self.traces = traces
+        v = arg.pop('baseframe', None)
+        self.baseframe = baseframe or v
+        v = arg.pop('data', None)
+        self.data = data or v
+        v = arg.pop('group', None)
+        self.group = group or v
+        v = arg.pop('layout', None)
+        self.layout = layout or v
+        v = arg.pop('name', None)
+        self.name = name or v
+        v = arg.pop('traces', None)
+        self.traces = traces or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

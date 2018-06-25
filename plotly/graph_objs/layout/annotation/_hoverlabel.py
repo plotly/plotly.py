@@ -196,12 +196,18 @@ class Hoverlabel(BaseLayoutHierarchyType):
             `hoverlabel.bordercolor`.
         """
 
-    def __init__(self, bgcolor=None, bordercolor=None, font=None, **kwargs):
+    def __init__(
+        self, arg=None, bgcolor=None, bordercolor=None, font=None, **kwargs
+    ):
         """
         Construct a new Hoverlabel object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of
+            plotly.graph_objs.layout.annotation.Hoverlabel
         bgcolor
             Sets the background color of the hover label. By
             default uses the annotation's `bgcolor` made opaque, or
@@ -221,6 +227,20 @@ class Hoverlabel(BaseLayoutHierarchyType):
         """
         super(Hoverlabel, self).__init__('hoverlabel')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.annotation.Hoverlabel 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.annotation.Hoverlabel"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout.annotation import (
@@ -235,10 +255,13 @@ class Hoverlabel(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.bgcolor = bgcolor
-        self.bordercolor = bordercolor
-        self.font = font
+        v = arg.pop('bgcolor', None)
+        self.bgcolor = bgcolor or v
+        v = arg.pop('bordercolor', None)
+        self.bordercolor = bordercolor or v
+        v = arg.pop('font', None)
+        self.font = font or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

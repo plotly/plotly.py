@@ -86,12 +86,16 @@ class Rotation(BaseLayoutHierarchyType):
             makes the map appear upside down.
         """
 
-    def __init__(self, lat=None, lon=None, roll=None, **kwargs):
+    def __init__(self, arg=None, lat=None, lon=None, roll=None, **kwargs):
         """
         Construct a new Rotation object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of
+            plotly.graph_objs.layout.geo.projection.Rotation
         lat
             Rotates the map along meridians (in degrees North).
         lon
@@ -107,6 +111,20 @@ class Rotation(BaseLayoutHierarchyType):
         """
         super(Rotation, self).__init__('rotation')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.geo.projection.Rotation 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.geo.projection.Rotation"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout.geo.projection import (
@@ -121,10 +139,13 @@ class Rotation(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.lat = lat
-        self.lon = lon
-        self.roll = roll
+        v = arg.pop('lat', None)
+        self.lat = lat or v
+        v = arg.pop('lon', None)
+        self.lon = lon or v
+        v = arg.pop('roll', None)
+        self.roll = roll or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

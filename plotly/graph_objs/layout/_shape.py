@@ -589,6 +589,7 @@ class Shape(BaseLayoutHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         fillcolor=None,
         layer=None,
         line=None,
@@ -613,6 +614,9 @@ class Shape(BaseLayoutHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.layout.Shape
         fillcolor
             Sets the color filling the shape's interior.
         layer
@@ -731,6 +735,20 @@ class Shape(BaseLayoutHierarchyType):
         """
         super(Shape, self).__init__('shapes')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.Shape 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.Shape"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout import (shape as v_shape)
@@ -757,24 +775,41 @@ class Shape(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.fillcolor = fillcolor
-        self.layer = layer
-        self.line = line
-        self.opacity = opacity
-        self.path = path
-        self.type = type
-        self.visible = visible
-        self.x0 = x0
-        self.x1 = x1
-        self.xanchor = xanchor
-        self.xref = xref
-        self.xsizemode = xsizemode
-        self.y0 = y0
-        self.y1 = y1
-        self.yanchor = yanchor
-        self.yref = yref
-        self.ysizemode = ysizemode
+        v = arg.pop('fillcolor', None)
+        self.fillcolor = fillcolor or v
+        v = arg.pop('layer', None)
+        self.layer = layer or v
+        v = arg.pop('line', None)
+        self.line = line or v
+        v = arg.pop('opacity', None)
+        self.opacity = opacity or v
+        v = arg.pop('path', None)
+        self.path = path or v
+        v = arg.pop('type', None)
+        self.type = type or v
+        v = arg.pop('visible', None)
+        self.visible = visible or v
+        v = arg.pop('x0', None)
+        self.x0 = x0 or v
+        v = arg.pop('x1', None)
+        self.x1 = x1 or v
+        v = arg.pop('xanchor', None)
+        self.xanchor = xanchor or v
+        v = arg.pop('xref', None)
+        self.xref = xref or v
+        v = arg.pop('xsizemode', None)
+        self.xsizemode = xsizemode or v
+        v = arg.pop('y0', None)
+        self.y0 = y0 or v
+        v = arg.pop('y1', None)
+        self.y1 = y1 or v
+        v = arg.pop('yanchor', None)
+        self.yanchor = yanchor or v
+        v = arg.pop('yref', None)
+        self.yref = yref or v
+        v = arg.pop('ysizemode', None)
+        self.ysizemode = ysizemode or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

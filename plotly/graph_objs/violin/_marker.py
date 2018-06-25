@@ -322,6 +322,7 @@ class Marker(BaseTraceHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         color=None,
         line=None,
         opacity=None,
@@ -335,6 +336,9 @@ class Marker(BaseTraceHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.violin.Marker
         color
             Sets the marker color. It accepts either a specific
             color or an array of numbers that are mapped to the
@@ -362,6 +366,20 @@ class Marker(BaseTraceHierarchyType):
         """
         super(Marker, self).__init__('marker')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.violin.Marker 
+constructor must be a dict or 
+an instance of plotly.graph_objs.violin.Marker"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.violin import (marker as v_marker)
@@ -377,13 +395,19 @@ class Marker(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.color = color
-        self.line = line
-        self.opacity = opacity
-        self.outliercolor = outliercolor
-        self.size = size
-        self.symbol = symbol
+        v = arg.pop('color', None)
+        self.color = color or v
+        v = arg.pop('line', None)
+        self.line = line or v
+        v = arg.pop('opacity', None)
+        self.opacity = opacity or v
+        v = arg.pop('outliercolor', None)
+        self.outliercolor = outliercolor or v
+        v = arg.pop('size', None)
+        self.size = size or v
+        v = arg.pop('symbol', None)
+        self.symbol = symbol or v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

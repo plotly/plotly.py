@@ -1425,6 +1425,7 @@ class Heatmap(BaseTraceType):
 
     def __init__(
         self,
+        arg=None,
         autocolorscale=None,
         colorbar=None,
         colorscale=None,
@@ -1497,6 +1498,9 @@ class Heatmap(BaseTraceType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Heatmap
         autocolorscale
             Determines whether or not the colorscale is picked
             using the sign of the input z values.
@@ -1652,6 +1656,20 @@ class Heatmap(BaseTraceType):
         """
         super(Heatmap, self).__init__('heatmap')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Heatmap 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Heatmap"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators import (heatmap as v_heatmap)
@@ -1710,53 +1728,100 @@ class Heatmap(BaseTraceType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.autocolorscale = autocolorscale
-        self.colorbar = colorbar
-        self.colorscale = colorscale
-        self.connectgaps = connectgaps
-        self.customdata = customdata
-        self.customdatasrc = customdatasrc
-        self.dx = dx
-        self.dy = dy
-        self.hoverinfo = hoverinfo
-        self.hoverinfosrc = hoverinfosrc
-        self.hoverlabel = hoverlabel
-        self.ids = ids
-        self.idssrc = idssrc
-        self.legendgroup = legendgroup
-        self.name = name
-        self.opacity = opacity
-        self.reversescale = reversescale
-        self.selectedpoints = selectedpoints
-        self.showlegend = showlegend
-        self.showscale = showscale
-        self.stream = stream
-        self.text = text
-        self.textsrc = textsrc
-        self.transpose = transpose
-        self.uid = uid
-        self.visible = visible
-        self.x = x
-        self.x0 = x0
-        self.xaxis = xaxis
-        self.xcalendar = xcalendar
-        self.xgap = xgap
-        self.xsrc = xsrc
-        self.xtype = xtype
-        self.y = y
-        self.y0 = y0
-        self.yaxis = yaxis
-        self.ycalendar = ycalendar
-        self.ygap = ygap
-        self.ysrc = ysrc
-        self.ytype = ytype
-        self.z = z
-        self.zauto = zauto
-        self.zhoverformat = zhoverformat
-        self.zmax = zmax
-        self.zmin = zmin
-        self.zsmooth = zsmooth
-        self.zsrc = zsrc
+        v = arg.pop('autocolorscale', None)
+        self.autocolorscale = autocolorscale or v
+        v = arg.pop('colorbar', None)
+        self.colorbar = colorbar or v
+        v = arg.pop('colorscale', None)
+        self.colorscale = colorscale or v
+        v = arg.pop('connectgaps', None)
+        self.connectgaps = connectgaps or v
+        v = arg.pop('customdata', None)
+        self.customdata = customdata or v
+        v = arg.pop('customdatasrc', None)
+        self.customdatasrc = customdatasrc or v
+        v = arg.pop('dx', None)
+        self.dx = dx or v
+        v = arg.pop('dy', None)
+        self.dy = dy or v
+        v = arg.pop('hoverinfo', None)
+        self.hoverinfo = hoverinfo or v
+        v = arg.pop('hoverinfosrc', None)
+        self.hoverinfosrc = hoverinfosrc or v
+        v = arg.pop('hoverlabel', None)
+        self.hoverlabel = hoverlabel or v
+        v = arg.pop('ids', None)
+        self.ids = ids or v
+        v = arg.pop('idssrc', None)
+        self.idssrc = idssrc or v
+        v = arg.pop('legendgroup', None)
+        self.legendgroup = legendgroup or v
+        v = arg.pop('name', None)
+        self.name = name or v
+        v = arg.pop('opacity', None)
+        self.opacity = opacity or v
+        v = arg.pop('reversescale', None)
+        self.reversescale = reversescale or v
+        v = arg.pop('selectedpoints', None)
+        self.selectedpoints = selectedpoints or v
+        v = arg.pop('showlegend', None)
+        self.showlegend = showlegend or v
+        v = arg.pop('showscale', None)
+        self.showscale = showscale or v
+        v = arg.pop('stream', None)
+        self.stream = stream or v
+        v = arg.pop('text', None)
+        self.text = text or v
+        v = arg.pop('textsrc', None)
+        self.textsrc = textsrc or v
+        v = arg.pop('transpose', None)
+        self.transpose = transpose or v
+        v = arg.pop('uid', None)
+        self.uid = uid or v
+        v = arg.pop('visible', None)
+        self.visible = visible or v
+        v = arg.pop('x', None)
+        self.x = x or v
+        v = arg.pop('x0', None)
+        self.x0 = x0 or v
+        v = arg.pop('xaxis', None)
+        self.xaxis = xaxis or v
+        v = arg.pop('xcalendar', None)
+        self.xcalendar = xcalendar or v
+        v = arg.pop('xgap', None)
+        self.xgap = xgap or v
+        v = arg.pop('xsrc', None)
+        self.xsrc = xsrc or v
+        v = arg.pop('xtype', None)
+        self.xtype = xtype or v
+        v = arg.pop('y', None)
+        self.y = y or v
+        v = arg.pop('y0', None)
+        self.y0 = y0 or v
+        v = arg.pop('yaxis', None)
+        self.yaxis = yaxis or v
+        v = arg.pop('ycalendar', None)
+        self.ycalendar = ycalendar or v
+        v = arg.pop('ygap', None)
+        self.ygap = ygap or v
+        v = arg.pop('ysrc', None)
+        self.ysrc = ysrc or v
+        v = arg.pop('ytype', None)
+        self.ytype = ytype or v
+        v = arg.pop('z', None)
+        self.z = z or v
+        v = arg.pop('zauto', None)
+        self.zauto = zauto or v
+        v = arg.pop('zhoverformat', None)
+        self.zhoverformat = zhoverformat or v
+        v = arg.pop('zmax', None)
+        self.zmax = zmax or v
+        v = arg.pop('zmin', None)
+        self.zmin = zmin or v
+        v = arg.pop('zsmooth', None)
+        self.zsmooth = zsmooth or v
+        v = arg.pop('zsrc', None)
+        self.zsrc = zsrc or v
 
         # Read-only literals
         # ------------------
@@ -1768,4 +1833,4 @@ class Heatmap(BaseTraceType):
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

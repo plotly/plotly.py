@@ -1379,6 +1379,7 @@ class Histogram(BaseTraceType):
 
     def __init__(
         self,
+        arg=None,
         autobinx=None,
         autobiny=None,
         cumulative=None,
@@ -1432,6 +1433,9 @@ class Histogram(BaseTraceType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Histogram
         autobinx
             Determines whether or not the x axis bin attributes are
             picked by an algorithm. Note that this should be set to
@@ -1596,6 +1600,20 @@ class Histogram(BaseTraceType):
         """
         super(Histogram, self).__init__('histogram')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Histogram 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Histogram"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators import (histogram as v_histogram)
@@ -1647,46 +1665,86 @@ class Histogram(BaseTraceType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.autobinx = autobinx
-        self.autobiny = autobiny
-        self.cumulative = cumulative
-        self.customdata = customdata
-        self.customdatasrc = customdatasrc
-        self.error_x = error_x
-        self.error_y = error_y
-        self.histfunc = histfunc
-        self.histnorm = histnorm
-        self.hoverinfo = hoverinfo
-        self.hoverinfosrc = hoverinfosrc
-        self.hoverlabel = hoverlabel
-        self.ids = ids
-        self.idssrc = idssrc
-        self.legendgroup = legendgroup
-        self.marker = marker
-        self.name = name
-        self.nbinsx = nbinsx
-        self.nbinsy = nbinsy
-        self.opacity = opacity
-        self.orientation = orientation
-        self.selected = selected
-        self.selectedpoints = selectedpoints
-        self.showlegend = showlegend
-        self.stream = stream
-        self.text = text
-        self.textsrc = textsrc
-        self.uid = uid
-        self.unselected = unselected
-        self.visible = visible
-        self.x = x
-        self.xaxis = xaxis
-        self.xbins = xbins
-        self.xcalendar = xcalendar
-        self.xsrc = xsrc
-        self.y = y
-        self.yaxis = yaxis
-        self.ybins = ybins
-        self.ycalendar = ycalendar
-        self.ysrc = ysrc
+        v = arg.pop('autobinx', None)
+        self.autobinx = autobinx or v
+        v = arg.pop('autobiny', None)
+        self.autobiny = autobiny or v
+        v = arg.pop('cumulative', None)
+        self.cumulative = cumulative or v
+        v = arg.pop('customdata', None)
+        self.customdata = customdata or v
+        v = arg.pop('customdatasrc', None)
+        self.customdatasrc = customdatasrc or v
+        v = arg.pop('error_x', None)
+        self.error_x = error_x or v
+        v = arg.pop('error_y', None)
+        self.error_y = error_y or v
+        v = arg.pop('histfunc', None)
+        self.histfunc = histfunc or v
+        v = arg.pop('histnorm', None)
+        self.histnorm = histnorm or v
+        v = arg.pop('hoverinfo', None)
+        self.hoverinfo = hoverinfo or v
+        v = arg.pop('hoverinfosrc', None)
+        self.hoverinfosrc = hoverinfosrc or v
+        v = arg.pop('hoverlabel', None)
+        self.hoverlabel = hoverlabel or v
+        v = arg.pop('ids', None)
+        self.ids = ids or v
+        v = arg.pop('idssrc', None)
+        self.idssrc = idssrc or v
+        v = arg.pop('legendgroup', None)
+        self.legendgroup = legendgroup or v
+        v = arg.pop('marker', None)
+        self.marker = marker or v
+        v = arg.pop('name', None)
+        self.name = name or v
+        v = arg.pop('nbinsx', None)
+        self.nbinsx = nbinsx or v
+        v = arg.pop('nbinsy', None)
+        self.nbinsy = nbinsy or v
+        v = arg.pop('opacity', None)
+        self.opacity = opacity or v
+        v = arg.pop('orientation', None)
+        self.orientation = orientation or v
+        v = arg.pop('selected', None)
+        self.selected = selected or v
+        v = arg.pop('selectedpoints', None)
+        self.selectedpoints = selectedpoints or v
+        v = arg.pop('showlegend', None)
+        self.showlegend = showlegend or v
+        v = arg.pop('stream', None)
+        self.stream = stream or v
+        v = arg.pop('text', None)
+        self.text = text or v
+        v = arg.pop('textsrc', None)
+        self.textsrc = textsrc or v
+        v = arg.pop('uid', None)
+        self.uid = uid or v
+        v = arg.pop('unselected', None)
+        self.unselected = unselected or v
+        v = arg.pop('visible', None)
+        self.visible = visible or v
+        v = arg.pop('x', None)
+        self.x = x or v
+        v = arg.pop('xaxis', None)
+        self.xaxis = xaxis or v
+        v = arg.pop('xbins', None)
+        self.xbins = xbins or v
+        v = arg.pop('xcalendar', None)
+        self.xcalendar = xcalendar or v
+        v = arg.pop('xsrc', None)
+        self.xsrc = xsrc or v
+        v = arg.pop('y', None)
+        self.y = y or v
+        v = arg.pop('yaxis', None)
+        self.yaxis = yaxis or v
+        v = arg.pop('ybins', None)
+        self.ybins = ybins or v
+        v = arg.pop('ycalendar', None)
+        self.ycalendar = ycalendar or v
+        v = arg.pop('ysrc', None)
+        self.ysrc = ysrc or v
 
         # Read-only literals
         # ------------------
@@ -1698,4 +1756,4 @@ class Histogram(BaseTraceType):
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

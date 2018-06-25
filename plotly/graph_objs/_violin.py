@@ -1307,6 +1307,7 @@ class Violin(BaseTraceType):
 
     def __init__(
         self,
+        arg=None,
         bandwidth=None,
         box=None,
         customdata=None,
@@ -1364,6 +1365,9 @@ class Violin(BaseTraceType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Violin
         bandwidth
             Sets the bandwidth used to compute the kernel density
             estimate. By default, the bandwidth is determined by
@@ -1544,6 +1548,20 @@ class Violin(BaseTraceType):
         """
         super(Violin, self).__init__('violin')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif not isinstance(arg, dict):
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Violin 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Violin"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators import (violin as v_violin)
@@ -1596,49 +1614,92 @@ class Violin(BaseTraceType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.bandwidth = bandwidth
-        self.box = box
-        self.customdata = customdata
-        self.customdatasrc = customdatasrc
-        self.fillcolor = fillcolor
-        self.hoverinfo = hoverinfo
-        self.hoverinfosrc = hoverinfosrc
-        self.hoverlabel = hoverlabel
-        self.hoveron = hoveron
-        self.ids = ids
-        self.idssrc = idssrc
-        self.jitter = jitter
-        self.legendgroup = legendgroup
-        self.line = line
-        self.marker = marker
-        self.meanline = meanline
-        self.name = name
-        self.opacity = opacity
-        self.orientation = orientation
-        self.pointpos = pointpos
-        self.points = points
-        self.scalegroup = scalegroup
-        self.scalemode = scalemode
-        self.selected = selected
-        self.selectedpoints = selectedpoints
-        self.showlegend = showlegend
-        self.side = side
-        self.span = span
-        self.spanmode = spanmode
-        self.stream = stream
-        self.text = text
-        self.textsrc = textsrc
-        self.uid = uid
-        self.unselected = unselected
-        self.visible = visible
-        self.x = x
-        self.x0 = x0
-        self.xaxis = xaxis
-        self.xsrc = xsrc
-        self.y = y
-        self.y0 = y0
-        self.yaxis = yaxis
-        self.ysrc = ysrc
+        v = arg.pop('bandwidth', None)
+        self.bandwidth = bandwidth or v
+        v = arg.pop('box', None)
+        self.box = box or v
+        v = arg.pop('customdata', None)
+        self.customdata = customdata or v
+        v = arg.pop('customdatasrc', None)
+        self.customdatasrc = customdatasrc or v
+        v = arg.pop('fillcolor', None)
+        self.fillcolor = fillcolor or v
+        v = arg.pop('hoverinfo', None)
+        self.hoverinfo = hoverinfo or v
+        v = arg.pop('hoverinfosrc', None)
+        self.hoverinfosrc = hoverinfosrc or v
+        v = arg.pop('hoverlabel', None)
+        self.hoverlabel = hoverlabel or v
+        v = arg.pop('hoveron', None)
+        self.hoveron = hoveron or v
+        v = arg.pop('ids', None)
+        self.ids = ids or v
+        v = arg.pop('idssrc', None)
+        self.idssrc = idssrc or v
+        v = arg.pop('jitter', None)
+        self.jitter = jitter or v
+        v = arg.pop('legendgroup', None)
+        self.legendgroup = legendgroup or v
+        v = arg.pop('line', None)
+        self.line = line or v
+        v = arg.pop('marker', None)
+        self.marker = marker or v
+        v = arg.pop('meanline', None)
+        self.meanline = meanline or v
+        v = arg.pop('name', None)
+        self.name = name or v
+        v = arg.pop('opacity', None)
+        self.opacity = opacity or v
+        v = arg.pop('orientation', None)
+        self.orientation = orientation or v
+        v = arg.pop('pointpos', None)
+        self.pointpos = pointpos or v
+        v = arg.pop('points', None)
+        self.points = points or v
+        v = arg.pop('scalegroup', None)
+        self.scalegroup = scalegroup or v
+        v = arg.pop('scalemode', None)
+        self.scalemode = scalemode or v
+        v = arg.pop('selected', None)
+        self.selected = selected or v
+        v = arg.pop('selectedpoints', None)
+        self.selectedpoints = selectedpoints or v
+        v = arg.pop('showlegend', None)
+        self.showlegend = showlegend or v
+        v = arg.pop('side', None)
+        self.side = side or v
+        v = arg.pop('span', None)
+        self.span = span or v
+        v = arg.pop('spanmode', None)
+        self.spanmode = spanmode or v
+        v = arg.pop('stream', None)
+        self.stream = stream or v
+        v = arg.pop('text', None)
+        self.text = text or v
+        v = arg.pop('textsrc', None)
+        self.textsrc = textsrc or v
+        v = arg.pop('uid', None)
+        self.uid = uid or v
+        v = arg.pop('unselected', None)
+        self.unselected = unselected or v
+        v = arg.pop('visible', None)
+        self.visible = visible or v
+        v = arg.pop('x', None)
+        self.x = x or v
+        v = arg.pop('x0', None)
+        self.x0 = x0 or v
+        v = arg.pop('xaxis', None)
+        self.xaxis = xaxis or v
+        v = arg.pop('xsrc', None)
+        self.xsrc = xsrc or v
+        v = arg.pop('y', None)
+        self.y = y or v
+        v = arg.pop('y0', None)
+        self.y0 = y0 or v
+        v = arg.pop('yaxis', None)
+        self.yaxis = yaxis or v
+        v = arg.pop('ysrc', None)
+        self.ysrc = ysrc or v
 
         # Read-only literals
         # ------------------
@@ -1650,4 +1711,4 @@ class Violin(BaseTraceType):
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))
