@@ -1,19 +1,5 @@
 # Migration to Plotly 3.0.0
-There are many new and great features in this branch including deeper Jupyter integration, deeper figure validation, improved performance, and more. To get started right away with Plotly, check out the [tutorial](#getting-started) below.
-
-To install and enable with Jupyter, run:
-```
-pip install plotly==3.0.0rc9
-pip install ipywidgets  # only necessary for Jupyter Notebook environments
-```
-
-In addition, to add JupyterLab support run the following commands:
-
-```
-pip install jupyterlab
-jupyter labextension install @jupyter-widgets/jupyterlab-manager # install the Jupyter widgets extension
-jupyter labextension install plotlywidget
-```
+There are many new and great features in Plotly 3.0 including deeper Jupyter integration, deeper figure validation, improved performance, and more. To get started right away with Plotly, check out the [tutorial](#getting-started) below.
 
 ## 3.0.0rc9 [08-06-2018]
 ### Added
@@ -81,9 +67,8 @@ does not.
 - `go.Data()` is deprecated. Use a list or array `[]` instead.
 
 
-
 # Getting Started
-#### Installation
+## Installation
 To install and enable with Jupyter, run:
 ```
 pip install plotly==3.0.0rc9
@@ -97,6 +82,20 @@ pip install jupyterlab
 jupyter labextension install @jupyter-widgets/jupyterlab-manager # install the Jupyter widgets extension
 jupyter labextension install plotlywidget
 ```
+
+## Simple Example
+We now have a seamless integration of Jupyter support and the Plotly objects. We've introduced a new graph object called `go.FigureWidget` that acts like a regualar plotly `go.Figure` that can be displayed in Jupyter.
+
+Simple Example: Make a Scatter Plot
+```
+import plotly
+import plotly.graph_objs as go
+
+f = go.FigureWidget()
+f.add_scatter(x=[1, 2, 3], y=[4, 3, 5])
+f
+```
+
 
 ## Overview
 ```
@@ -118,9 +117,7 @@ from ipywidgets import HBox, VBox, Button
 
 # functools
 from functools import partial
-```
 
-```
 # Load iris dataset
 iris_data = datasets.load_iris()
 feature_names = [name.replace(' (cm)', '').replace(' ', '_') for name in iris_data.feature_names]
@@ -311,4 +308,8 @@ VBox([HBox([f1, f2]), button])
 ```
 
 #### Save figure 2 to a svg image in the exports directory
-f2.save_image('exports/f2.svg')
+`f2.save_image('exports/f2.svg')`
+
+## Context Manager for Animations
+
+## JupyterLab Support
