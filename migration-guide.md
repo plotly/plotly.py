@@ -68,10 +68,10 @@ does not.
 
 # Getting Started
 ## Installation
-To install and enable with Jupyter, run:
+To install and enable with Jupyter or Jupyter lab, run:
 ```
 pip install plotly==3.0.0rc9
-pip install notebook>=5.3 ipywidgets>=7.2  # only necessary for Jupyter Notebook environments
+pip install "notebook>=5.3" "ipywidgets>=7.2"  # only necessary for Jupyter Notebook environments
 ```
 
 If you're using older versions of `notebook` or `ipywidgets` you may need to manually activate the widget extensions (this should not be needed for `notebook>=5.3` and `ipywidgets>=7.2`)
@@ -315,7 +315,3 @@ VBox([HBox([f1, f2]), button])
 
 #### Save figure 2 to a svg image in the exports directory
 `f2.save_image('exports/f2.svg')`
-
-## Context Manager for Animations
-
-## JupyterLab Support
