@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutType
+import copy
 
 
 class Layout(BaseLayoutType):
@@ -3414,7 +3415,9 @@ class Layout(BaseLayoutType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.Layout 
@@ -3485,107 +3488,107 @@ an instance of plotly.graph_objs.Layout"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('angularaxis', None)
-        self.angularaxis = angularaxis or v
+        self.angularaxis = angularaxis if angularaxis is not None else v
         v = arg.pop('annotations', None)
-        self.annotations = annotations or v
+        self.annotations = annotations if annotations is not None else v
         v = arg.pop('autosize', None)
-        self.autosize = autosize or v
+        self.autosize = autosize if autosize is not None else v
         v = arg.pop('bargap', None)
-        self.bargap = bargap or v
+        self.bargap = bargap if bargap is not None else v
         v = arg.pop('bargroupgap', None)
-        self.bargroupgap = bargroupgap or v
+        self.bargroupgap = bargroupgap if bargroupgap is not None else v
         v = arg.pop('barmode', None)
-        self.barmode = barmode or v
+        self.barmode = barmode if barmode is not None else v
         v = arg.pop('barnorm', None)
-        self.barnorm = barnorm or v
+        self.barnorm = barnorm if barnorm is not None else v
         v = arg.pop('boxgap', None)
-        self.boxgap = boxgap or v
+        self.boxgap = boxgap if boxgap is not None else v
         v = arg.pop('boxgroupgap', None)
-        self.boxgroupgap = boxgroupgap or v
+        self.boxgroupgap = boxgroupgap if boxgroupgap is not None else v
         v = arg.pop('boxmode', None)
-        self.boxmode = boxmode or v
+        self.boxmode = boxmode if boxmode is not None else v
         v = arg.pop('calendar', None)
-        self.calendar = calendar or v
+        self.calendar = calendar if calendar is not None else v
         v = arg.pop('colorway', None)
-        self.colorway = colorway or v
+        self.colorway = colorway if colorway is not None else v
         v = arg.pop('datarevision', None)
-        self.datarevision = datarevision or v
+        self.datarevision = datarevision if datarevision is not None else v
         v = arg.pop('direction', None)
-        self.direction = direction or v
+        self.direction = direction if direction is not None else v
         v = arg.pop('dragmode', None)
-        self.dragmode = dragmode or v
+        self.dragmode = dragmode if dragmode is not None else v
         v = arg.pop('font', None)
-        self.font = font or v
+        self.font = font if font is not None else v
         v = arg.pop('geo', None)
-        self.geo = geo or v
+        self.geo = geo if geo is not None else v
         v = arg.pop('grid', None)
-        self.grid = grid or v
+        self.grid = grid if grid is not None else v
         v = arg.pop('height', None)
-        self.height = height or v
+        self.height = height if height is not None else v
         v = arg.pop('hiddenlabels', None)
-        self.hiddenlabels = hiddenlabels or v
+        self.hiddenlabels = hiddenlabels if hiddenlabels is not None else v
         v = arg.pop('hiddenlabelssrc', None)
-        self.hiddenlabelssrc = hiddenlabelssrc or v
+        self.hiddenlabelssrc = hiddenlabelssrc if hiddenlabelssrc is not None else v
         v = arg.pop('hidesources', None)
-        self.hidesources = hidesources or v
+        self.hidesources = hidesources if hidesources is not None else v
         v = arg.pop('hoverdistance', None)
-        self.hoverdistance = hoverdistance or v
+        self.hoverdistance = hoverdistance if hoverdistance is not None else v
         v = arg.pop('hoverlabel', None)
-        self.hoverlabel = hoverlabel or v
+        self.hoverlabel = hoverlabel if hoverlabel is not None else v
         v = arg.pop('hovermode', None)
-        self.hovermode = hovermode or v
+        self.hovermode = hovermode if hovermode is not None else v
         v = arg.pop('images', None)
-        self.images = images or v
+        self.images = images if images is not None else v
         v = arg.pop('legend', None)
-        self.legend = legend or v
+        self.legend = legend if legend is not None else v
         v = arg.pop('mapbox', None)
-        self.mapbox = mapbox or v
+        self.mapbox = mapbox if mapbox is not None else v
         v = arg.pop('margin', None)
-        self.margin = margin or v
+        self.margin = margin if margin is not None else v
         v = arg.pop('orientation', None)
-        self.orientation = orientation or v
+        self.orientation = orientation if orientation is not None else v
         v = arg.pop('paper_bgcolor', None)
-        self.paper_bgcolor = paper_bgcolor or v
+        self.paper_bgcolor = paper_bgcolor if paper_bgcolor is not None else v
         v = arg.pop('plot_bgcolor', None)
-        self.plot_bgcolor = plot_bgcolor or v
+        self.plot_bgcolor = plot_bgcolor if plot_bgcolor is not None else v
         v = arg.pop('polar', None)
-        self.polar = polar or v
+        self.polar = polar if polar is not None else v
         v = arg.pop('radialaxis', None)
-        self.radialaxis = radialaxis or v
+        self.radialaxis = radialaxis if radialaxis is not None else v
         v = arg.pop('scene', None)
-        self.scene = scene or v
+        self.scene = scene if scene is not None else v
         v = arg.pop('selectdirection', None)
-        self.selectdirection = selectdirection or v
+        self.selectdirection = selectdirection if selectdirection is not None else v
         v = arg.pop('separators', None)
-        self.separators = separators or v
+        self.separators = separators if separators is not None else v
         v = arg.pop('shapes', None)
-        self.shapes = shapes or v
+        self.shapes = shapes if shapes is not None else v
         v = arg.pop('showlegend', None)
-        self.showlegend = showlegend or v
+        self.showlegend = showlegend if showlegend is not None else v
         v = arg.pop('sliders', None)
-        self.sliders = sliders or v
+        self.sliders = sliders if sliders is not None else v
         v = arg.pop('spikedistance', None)
-        self.spikedistance = spikedistance or v
+        self.spikedistance = spikedistance if spikedistance is not None else v
         v = arg.pop('ternary', None)
-        self.ternary = ternary or v
+        self.ternary = ternary if ternary is not None else v
         v = arg.pop('title', None)
-        self.title = title or v
+        self.title = title if title is not None else v
         v = arg.pop('titlefont', None)
-        self.titlefont = titlefont or v
+        self.titlefont = titlefont if titlefont is not None else v
         v = arg.pop('updatemenus', None)
-        self.updatemenus = updatemenus or v
+        self.updatemenus = updatemenus if updatemenus is not None else v
         v = arg.pop('violingap', None)
-        self.violingap = violingap or v
+        self.violingap = violingap if violingap is not None else v
         v = arg.pop('violingroupgap', None)
-        self.violingroupgap = violingroupgap or v
+        self.violingroupgap = violingroupgap if violingroupgap is not None else v
         v = arg.pop('violinmode', None)
-        self.violinmode = violinmode or v
+        self.violinmode = violinmode if violinmode is not None else v
         v = arg.pop('width', None)
-        self.width = width or v
+        self.width = width if width is not None else v
         v = arg.pop('xaxis', None)
-        self.xaxis = xaxis or v
+        self.xaxis = xaxis if xaxis is not None else v
         v = arg.pop('yaxis', None)
-        self.yaxis = yaxis or v
+        self.yaxis = yaxis if yaxis is not None else v
 
         # Process unknown kwargs
         # ----------------------

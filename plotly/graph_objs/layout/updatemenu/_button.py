@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Button(BaseLayoutHierarchyType):
@@ -186,7 +187,9 @@ class Button(BaseLayoutHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.layout.updatemenu.Button 
@@ -208,13 +211,13 @@ an instance of plotly.graph_objs.layout.updatemenu.Button"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('args', None)
-        self.args = args or v
+        self.args = args if args is not None else v
         v = arg.pop('execute', None)
-        self.execute = execute or v
+        self.execute = execute if execute is not None else v
         v = arg.pop('label', None)
-        self.label = label or v
+        self.label = label if label is not None else v
         v = arg.pop('method', None)
-        self.method = method or v
+        self.method = method if method is not None else v
 
         # Process unknown kwargs
         # ----------------------

@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceType
+import copy
 
 
 class Violin(BaseTraceType):
@@ -1554,7 +1555,9 @@ class Violin(BaseTraceType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.Violin 
@@ -1615,91 +1618,91 @@ an instance of plotly.graph_objs.Violin"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('bandwidth', None)
-        self.bandwidth = bandwidth or v
+        self.bandwidth = bandwidth if bandwidth is not None else v
         v = arg.pop('box', None)
-        self.box = box or v
+        self.box = box if box is not None else v
         v = arg.pop('customdata', None)
-        self.customdata = customdata or v
+        self.customdata = customdata if customdata is not None else v
         v = arg.pop('customdatasrc', None)
-        self.customdatasrc = customdatasrc or v
+        self.customdatasrc = customdatasrc if customdatasrc is not None else v
         v = arg.pop('fillcolor', None)
-        self.fillcolor = fillcolor or v
+        self.fillcolor = fillcolor if fillcolor is not None else v
         v = arg.pop('hoverinfo', None)
-        self.hoverinfo = hoverinfo or v
+        self.hoverinfo = hoverinfo if hoverinfo is not None else v
         v = arg.pop('hoverinfosrc', None)
-        self.hoverinfosrc = hoverinfosrc or v
+        self.hoverinfosrc = hoverinfosrc if hoverinfosrc is not None else v
         v = arg.pop('hoverlabel', None)
-        self.hoverlabel = hoverlabel or v
+        self.hoverlabel = hoverlabel if hoverlabel is not None else v
         v = arg.pop('hoveron', None)
-        self.hoveron = hoveron or v
+        self.hoveron = hoveron if hoveron is not None else v
         v = arg.pop('ids', None)
-        self.ids = ids or v
+        self.ids = ids if ids is not None else v
         v = arg.pop('idssrc', None)
-        self.idssrc = idssrc or v
+        self.idssrc = idssrc if idssrc is not None else v
         v = arg.pop('jitter', None)
-        self.jitter = jitter or v
+        self.jitter = jitter if jitter is not None else v
         v = arg.pop('legendgroup', None)
-        self.legendgroup = legendgroup or v
+        self.legendgroup = legendgroup if legendgroup is not None else v
         v = arg.pop('line', None)
-        self.line = line or v
+        self.line = line if line is not None else v
         v = arg.pop('marker', None)
-        self.marker = marker or v
+        self.marker = marker if marker is not None else v
         v = arg.pop('meanline', None)
-        self.meanline = meanline or v
+        self.meanline = meanline if meanline is not None else v
         v = arg.pop('name', None)
-        self.name = name or v
+        self.name = name if name is not None else v
         v = arg.pop('opacity', None)
-        self.opacity = opacity or v
+        self.opacity = opacity if opacity is not None else v
         v = arg.pop('orientation', None)
-        self.orientation = orientation or v
+        self.orientation = orientation if orientation is not None else v
         v = arg.pop('pointpos', None)
-        self.pointpos = pointpos or v
+        self.pointpos = pointpos if pointpos is not None else v
         v = arg.pop('points', None)
-        self.points = points or v
+        self.points = points if points is not None else v
         v = arg.pop('scalegroup', None)
-        self.scalegroup = scalegroup or v
+        self.scalegroup = scalegroup if scalegroup is not None else v
         v = arg.pop('scalemode', None)
-        self.scalemode = scalemode or v
+        self.scalemode = scalemode if scalemode is not None else v
         v = arg.pop('selected', None)
-        self.selected = selected or v
+        self.selected = selected if selected is not None else v
         v = arg.pop('selectedpoints', None)
-        self.selectedpoints = selectedpoints or v
+        self.selectedpoints = selectedpoints if selectedpoints is not None else v
         v = arg.pop('showlegend', None)
-        self.showlegend = showlegend or v
+        self.showlegend = showlegend if showlegend is not None else v
         v = arg.pop('side', None)
-        self.side = side or v
+        self.side = side if side is not None else v
         v = arg.pop('span', None)
-        self.span = span or v
+        self.span = span if span is not None else v
         v = arg.pop('spanmode', None)
-        self.spanmode = spanmode or v
+        self.spanmode = spanmode if spanmode is not None else v
         v = arg.pop('stream', None)
-        self.stream = stream or v
+        self.stream = stream if stream is not None else v
         v = arg.pop('text', None)
-        self.text = text or v
+        self.text = text if text is not None else v
         v = arg.pop('textsrc', None)
-        self.textsrc = textsrc or v
+        self.textsrc = textsrc if textsrc is not None else v
         v = arg.pop('uid', None)
-        self.uid = uid or v
+        self.uid = uid if uid is not None else v
         v = arg.pop('unselected', None)
-        self.unselected = unselected or v
+        self.unselected = unselected if unselected is not None else v
         v = arg.pop('visible', None)
-        self.visible = visible or v
+        self.visible = visible if visible is not None else v
         v = arg.pop('x', None)
-        self.x = x or v
+        self.x = x if x is not None else v
         v = arg.pop('x0', None)
-        self.x0 = x0 or v
+        self.x0 = x0 if x0 is not None else v
         v = arg.pop('xaxis', None)
-        self.xaxis = xaxis or v
+        self.xaxis = xaxis if xaxis is not None else v
         v = arg.pop('xsrc', None)
-        self.xsrc = xsrc or v
+        self.xsrc = xsrc if xsrc is not None else v
         v = arg.pop('y', None)
-        self.y = y or v
+        self.y = y if y is not None else v
         v = arg.pop('y0', None)
-        self.y0 = y0 or v
+        self.y0 = y0 if y0 is not None else v
         v = arg.pop('yaxis', None)
-        self.yaxis = yaxis or v
+        self.yaxis = yaxis if yaxis is not None else v
         v = arg.pop('ysrc', None)
-        self.ysrc = ysrc or v
+        self.ysrc = ysrc if ysrc is not None else v
 
         # Read-only literals
         # ------------------

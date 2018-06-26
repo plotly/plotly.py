@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Ternary(BaseLayoutHierarchyType):
@@ -835,7 +836,9 @@ class Ternary(BaseLayoutHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.layout.Ternary 
@@ -859,17 +862,17 @@ an instance of plotly.graph_objs.layout.Ternary"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('aaxis', None)
-        self.aaxis = aaxis or v
+        self.aaxis = aaxis if aaxis is not None else v
         v = arg.pop('baxis', None)
-        self.baxis = baxis or v
+        self.baxis = baxis if baxis is not None else v
         v = arg.pop('bgcolor', None)
-        self.bgcolor = bgcolor or v
+        self.bgcolor = bgcolor if bgcolor is not None else v
         v = arg.pop('caxis', None)
-        self.caxis = caxis or v
+        self.caxis = caxis if caxis is not None else v
         v = arg.pop('domain', None)
-        self.domain = domain or v
+        self.domain = domain if domain is not None else v
         v = arg.pop('sum', None)
-        self.sum = sum or v
+        self.sum = sum if sum is not None else v
 
         # Process unknown kwargs
         # ----------------------

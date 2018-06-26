@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Link(BaseTraceHierarchyType):
@@ -391,7 +392,9 @@ class Link(BaseTraceHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.sankey.Link 
@@ -420,27 +423,27 @@ an instance of plotly.graph_objs.sankey.Link"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('color', None)
-        self.color = color or v
+        self.color = color if color is not None else v
         v = arg.pop('colorsrc', None)
-        self.colorsrc = colorsrc or v
+        self.colorsrc = colorsrc if colorsrc is not None else v
         v = arg.pop('label', None)
-        self.label = label or v
+        self.label = label if label is not None else v
         v = arg.pop('labelsrc', None)
-        self.labelsrc = labelsrc or v
+        self.labelsrc = labelsrc if labelsrc is not None else v
         v = arg.pop('line', None)
-        self.line = line or v
+        self.line = line if line is not None else v
         v = arg.pop('source', None)
-        self.source = source or v
+        self.source = source if source is not None else v
         v = arg.pop('sourcesrc', None)
-        self.sourcesrc = sourcesrc or v
+        self.sourcesrc = sourcesrc if sourcesrc is not None else v
         v = arg.pop('target', None)
-        self.target = target or v
+        self.target = target if target is not None else v
         v = arg.pop('targetsrc', None)
-        self.targetsrc = targetsrc or v
+        self.targetsrc = targetsrc if targetsrc is not None else v
         v = arg.pop('value', None)
-        self.value = value or v
+        self.value = value if value is not None else v
         v = arg.pop('valuesrc', None)
-        self.valuesrc = valuesrc or v
+        self.valuesrc = valuesrc if valuesrc is not None else v
 
         # Process unknown kwargs
         # ----------------------

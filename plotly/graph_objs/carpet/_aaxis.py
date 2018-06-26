@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Aaxis(BaseTraceHierarchyType):
@@ -1920,7 +1921,9 @@ class Aaxis(BaseTraceHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.carpet.Aaxis 
@@ -1995,113 +1998,113 @@ an instance of plotly.graph_objs.carpet.Aaxis"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('arraydtick', None)
-        self.arraydtick = arraydtick or v
+        self.arraydtick = arraydtick if arraydtick is not None else v
         v = arg.pop('arraytick0', None)
-        self.arraytick0 = arraytick0 or v
+        self.arraytick0 = arraytick0 if arraytick0 is not None else v
         v = arg.pop('autorange', None)
-        self.autorange = autorange or v
+        self.autorange = autorange if autorange is not None else v
         v = arg.pop('categoryarray', None)
-        self.categoryarray = categoryarray or v
+        self.categoryarray = categoryarray if categoryarray is not None else v
         v = arg.pop('categoryarraysrc', None)
-        self.categoryarraysrc = categoryarraysrc or v
+        self.categoryarraysrc = categoryarraysrc if categoryarraysrc is not None else v
         v = arg.pop('categoryorder', None)
-        self.categoryorder = categoryorder or v
+        self.categoryorder = categoryorder if categoryorder is not None else v
         v = arg.pop('cheatertype', None)
-        self.cheatertype = cheatertype or v
+        self.cheatertype = cheatertype if cheatertype is not None else v
         v = arg.pop('color', None)
-        self.color = color or v
+        self.color = color if color is not None else v
         v = arg.pop('dtick', None)
-        self.dtick = dtick or v
+        self.dtick = dtick if dtick is not None else v
         v = arg.pop('endline', None)
-        self.endline = endline or v
+        self.endline = endline if endline is not None else v
         v = arg.pop('endlinecolor', None)
-        self.endlinecolor = endlinecolor or v
+        self.endlinecolor = endlinecolor if endlinecolor is not None else v
         v = arg.pop('endlinewidth', None)
-        self.endlinewidth = endlinewidth or v
+        self.endlinewidth = endlinewidth if endlinewidth is not None else v
         v = arg.pop('exponentformat', None)
-        self.exponentformat = exponentformat or v
+        self.exponentformat = exponentformat if exponentformat is not None else v
         v = arg.pop('fixedrange', None)
-        self.fixedrange = fixedrange or v
+        self.fixedrange = fixedrange if fixedrange is not None else v
         v = arg.pop('gridcolor', None)
-        self.gridcolor = gridcolor or v
+        self.gridcolor = gridcolor if gridcolor is not None else v
         v = arg.pop('gridwidth', None)
-        self.gridwidth = gridwidth or v
+        self.gridwidth = gridwidth if gridwidth is not None else v
         v = arg.pop('labelpadding', None)
-        self.labelpadding = labelpadding or v
+        self.labelpadding = labelpadding if labelpadding is not None else v
         v = arg.pop('labelprefix', None)
-        self.labelprefix = labelprefix or v
+        self.labelprefix = labelprefix if labelprefix is not None else v
         v = arg.pop('labelsuffix', None)
-        self.labelsuffix = labelsuffix or v
+        self.labelsuffix = labelsuffix if labelsuffix is not None else v
         v = arg.pop('linecolor', None)
-        self.linecolor = linecolor or v
+        self.linecolor = linecolor if linecolor is not None else v
         v = arg.pop('linewidth', None)
-        self.linewidth = linewidth or v
+        self.linewidth = linewidth if linewidth is not None else v
         v = arg.pop('minorgridcolor', None)
-        self.minorgridcolor = minorgridcolor or v
+        self.minorgridcolor = minorgridcolor if minorgridcolor is not None else v
         v = arg.pop('minorgridcount', None)
-        self.minorgridcount = minorgridcount or v
+        self.minorgridcount = minorgridcount if minorgridcount is not None else v
         v = arg.pop('minorgridwidth', None)
-        self.minorgridwidth = minorgridwidth or v
+        self.minorgridwidth = minorgridwidth if minorgridwidth is not None else v
         v = arg.pop('nticks', None)
-        self.nticks = nticks or v
+        self.nticks = nticks if nticks is not None else v
         v = arg.pop('range', None)
-        self.range = range or v
+        self.range = range if range is not None else v
         v = arg.pop('rangemode', None)
-        self.rangemode = rangemode or v
+        self.rangemode = rangemode if rangemode is not None else v
         v = arg.pop('separatethousands', None)
-        self.separatethousands = separatethousands or v
+        self.separatethousands = separatethousands if separatethousands is not None else v
         v = arg.pop('showexponent', None)
-        self.showexponent = showexponent or v
+        self.showexponent = showexponent if showexponent is not None else v
         v = arg.pop('showgrid', None)
-        self.showgrid = showgrid or v
+        self.showgrid = showgrid if showgrid is not None else v
         v = arg.pop('showline', None)
-        self.showline = showline or v
+        self.showline = showline if showline is not None else v
         v = arg.pop('showticklabels', None)
-        self.showticklabels = showticklabels or v
+        self.showticklabels = showticklabels if showticklabels is not None else v
         v = arg.pop('showtickprefix', None)
-        self.showtickprefix = showtickprefix or v
+        self.showtickprefix = showtickprefix if showtickprefix is not None else v
         v = arg.pop('showticksuffix', None)
-        self.showticksuffix = showticksuffix or v
+        self.showticksuffix = showticksuffix if showticksuffix is not None else v
         v = arg.pop('smoothing', None)
-        self.smoothing = smoothing or v
+        self.smoothing = smoothing if smoothing is not None else v
         v = arg.pop('startline', None)
-        self.startline = startline or v
+        self.startline = startline if startline is not None else v
         v = arg.pop('startlinecolor', None)
-        self.startlinecolor = startlinecolor or v
+        self.startlinecolor = startlinecolor if startlinecolor is not None else v
         v = arg.pop('startlinewidth', None)
-        self.startlinewidth = startlinewidth or v
+        self.startlinewidth = startlinewidth if startlinewidth is not None else v
         v = arg.pop('tick0', None)
-        self.tick0 = tick0 or v
+        self.tick0 = tick0 if tick0 is not None else v
         v = arg.pop('tickangle', None)
-        self.tickangle = tickangle or v
+        self.tickangle = tickangle if tickangle is not None else v
         v = arg.pop('tickfont', None)
-        self.tickfont = tickfont or v
+        self.tickfont = tickfont if tickfont is not None else v
         v = arg.pop('tickformat', None)
-        self.tickformat = tickformat or v
+        self.tickformat = tickformat if tickformat is not None else v
         v = arg.pop('tickformatstops', None)
-        self.tickformatstops = tickformatstops or v
+        self.tickformatstops = tickformatstops if tickformatstops is not None else v
         v = arg.pop('tickmode', None)
-        self.tickmode = tickmode or v
+        self.tickmode = tickmode if tickmode is not None else v
         v = arg.pop('tickprefix', None)
-        self.tickprefix = tickprefix or v
+        self.tickprefix = tickprefix if tickprefix is not None else v
         v = arg.pop('ticksuffix', None)
-        self.ticksuffix = ticksuffix or v
+        self.ticksuffix = ticksuffix if ticksuffix is not None else v
         v = arg.pop('ticktext', None)
-        self.ticktext = ticktext or v
+        self.ticktext = ticktext if ticktext is not None else v
         v = arg.pop('ticktextsrc', None)
-        self.ticktextsrc = ticktextsrc or v
+        self.ticktextsrc = ticktextsrc if ticktextsrc is not None else v
         v = arg.pop('tickvals', None)
-        self.tickvals = tickvals or v
+        self.tickvals = tickvals if tickvals is not None else v
         v = arg.pop('tickvalssrc', None)
-        self.tickvalssrc = tickvalssrc or v
+        self.tickvalssrc = tickvalssrc if tickvalssrc is not None else v
         v = arg.pop('title', None)
-        self.title = title or v
+        self.title = title if title is not None else v
         v = arg.pop('titlefont', None)
-        self.titlefont = titlefont or v
+        self.titlefont = titlefont if titlefont is not None else v
         v = arg.pop('titleoffset', None)
-        self.titleoffset = titleoffset or v
+        self.titleoffset = titleoffset if titleoffset is not None else v
         v = arg.pop('type', None)
-        self.type = type or v
+        self.type = type if type is not None else v
 
         # Process unknown kwargs
         # ----------------------

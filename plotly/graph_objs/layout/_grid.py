@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Grid(BaseLayoutHierarchyType):
@@ -511,7 +512,9 @@ class Grid(BaseLayoutHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.layout.Grid 
@@ -541,29 +544,29 @@ an instance of plotly.graph_objs.layout.Grid"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('columns', None)
-        self.columns = columns or v
+        self.columns = columns if columns is not None else v
         v = arg.pop('domain', None)
-        self.domain = domain or v
+        self.domain = domain if domain is not None else v
         v = arg.pop('pattern', None)
-        self.pattern = pattern or v
+        self.pattern = pattern if pattern is not None else v
         v = arg.pop('roworder', None)
-        self.roworder = roworder or v
+        self.roworder = roworder if roworder is not None else v
         v = arg.pop('rows', None)
-        self.rows = rows or v
+        self.rows = rows if rows is not None else v
         v = arg.pop('subplots', None)
-        self.subplots = subplots or v
+        self.subplots = subplots if subplots is not None else v
         v = arg.pop('xaxes', None)
-        self.xaxes = xaxes or v
+        self.xaxes = xaxes if xaxes is not None else v
         v = arg.pop('xgap', None)
-        self.xgap = xgap or v
+        self.xgap = xgap if xgap is not None else v
         v = arg.pop('xside', None)
-        self.xside = xside or v
+        self.xside = xside if xside is not None else v
         v = arg.pop('yaxes', None)
-        self.yaxes = yaxes or v
+        self.yaxes = yaxes if yaxes is not None else v
         v = arg.pop('ygap', None)
-        self.ygap = ygap or v
+        self.ygap = ygap if ygap is not None else v
         v = arg.pop('yside', None)
-        self.yside = yside or v
+        self.yside = yside if yside is not None else v
 
         # Process unknown kwargs
         # ----------------------

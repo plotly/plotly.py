@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Cumulative(BaseTraceHierarchyType):
@@ -165,7 +166,9 @@ class Cumulative(BaseTraceHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.histogram.Cumulative 
@@ -186,11 +189,11 @@ an instance of plotly.graph_objs.histogram.Cumulative"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('currentbin', None)
-        self.currentbin = currentbin or v
+        self.currentbin = currentbin if currentbin is not None else v
         v = arg.pop('direction', None)
-        self.direction = direction or v
+        self.direction = direction if direction is not None else v
         v = arg.pop('enabled', None)
-        self.enabled = enabled or v
+        self.enabled = enabled if enabled is not None else v
 
         # Process unknown kwargs
         # ----------------------

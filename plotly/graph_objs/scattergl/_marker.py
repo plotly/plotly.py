@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Marker(BaseTraceHierarchyType):
@@ -1081,7 +1082,9 @@ class Marker(BaseTraceHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.scattergl.Marker 
@@ -1119,45 +1122,45 @@ an instance of plotly.graph_objs.scattergl.Marker"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('autocolorscale', None)
-        self.autocolorscale = autocolorscale or v
+        self.autocolorscale = autocolorscale if autocolorscale is not None else v
         v = arg.pop('cauto', None)
-        self.cauto = cauto or v
+        self.cauto = cauto if cauto is not None else v
         v = arg.pop('cmax', None)
-        self.cmax = cmax or v
+        self.cmax = cmax if cmax is not None else v
         v = arg.pop('cmin', None)
-        self.cmin = cmin or v
+        self.cmin = cmin if cmin is not None else v
         v = arg.pop('color', None)
-        self.color = color or v
+        self.color = color if color is not None else v
         v = arg.pop('colorbar', None)
-        self.colorbar = colorbar or v
+        self.colorbar = colorbar if colorbar is not None else v
         v = arg.pop('colorscale', None)
-        self.colorscale = colorscale or v
+        self.colorscale = colorscale if colorscale is not None else v
         v = arg.pop('colorsrc', None)
-        self.colorsrc = colorsrc or v
+        self.colorsrc = colorsrc if colorsrc is not None else v
         v = arg.pop('line', None)
-        self.line = line or v
+        self.line = line if line is not None else v
         v = arg.pop('opacity', None)
-        self.opacity = opacity or v
+        self.opacity = opacity if opacity is not None else v
         v = arg.pop('opacitysrc', None)
-        self.opacitysrc = opacitysrc or v
+        self.opacitysrc = opacitysrc if opacitysrc is not None else v
         v = arg.pop('reversescale', None)
-        self.reversescale = reversescale or v
+        self.reversescale = reversescale if reversescale is not None else v
         v = arg.pop('showscale', None)
-        self.showscale = showscale or v
+        self.showscale = showscale if showscale is not None else v
         v = arg.pop('size', None)
-        self.size = size or v
+        self.size = size if size is not None else v
         v = arg.pop('sizemin', None)
-        self.sizemin = sizemin or v
+        self.sizemin = sizemin if sizemin is not None else v
         v = arg.pop('sizemode', None)
-        self.sizemode = sizemode or v
+        self.sizemode = sizemode if sizemode is not None else v
         v = arg.pop('sizeref', None)
-        self.sizeref = sizeref or v
+        self.sizeref = sizeref if sizeref is not None else v
         v = arg.pop('sizesrc', None)
-        self.sizesrc = sizesrc or v
+        self.sizesrc = sizesrc if sizesrc is not None else v
         v = arg.pop('symbol', None)
-        self.symbol = symbol or v
+        self.symbol = symbol if symbol is not None else v
         v = arg.pop('symbolsrc', None)
-        self.symbolsrc = symbolsrc or v
+        self.symbolsrc = symbolsrc if symbolsrc is not None else v
 
         # Process unknown kwargs
         # ----------------------

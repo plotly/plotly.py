@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Lightposition(BaseTraceHierarchyType):
@@ -116,7 +117,9 @@ class Lightposition(BaseTraceHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.cone.Lightposition 
@@ -137,11 +140,11 @@ an instance of plotly.graph_objs.cone.Lightposition"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('x', None)
-        self.x = x or v
+        self.x = x if x is not None else v
         v = arg.pop('y', None)
-        self.y = y or v
+        self.y = y if y is not None else v
         v = arg.pop('z', None)
-        self.z = z or v
+        self.z = z if z is not None else v
 
         # Process unknown kwargs
         # ----------------------

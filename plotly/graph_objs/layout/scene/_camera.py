@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Camera(BaseLayoutHierarchyType):
@@ -166,7 +167,9 @@ class Camera(BaseLayoutHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.layout.scene.Camera 
@@ -187,11 +190,11 @@ an instance of plotly.graph_objs.layout.scene.Camera"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('center', None)
-        self.center = center or v
+        self.center = center if center is not None else v
         v = arg.pop('eye', None)
-        self.eye = eye or v
+        self.eye = eye if eye is not None else v
         v = arg.pop('up', None)
-        self.up = up or v
+        self.up = up if up is not None else v
 
         # Process unknown kwargs
         # ----------------------

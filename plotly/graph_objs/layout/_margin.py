@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Margin(BaseLayoutHierarchyType):
@@ -193,7 +194,9 @@ class Margin(BaseLayoutHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.layout.Margin 
@@ -217,17 +220,17 @@ an instance of plotly.graph_objs.layout.Margin"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('autoexpand', None)
-        self.autoexpand = autoexpand or v
+        self.autoexpand = autoexpand if autoexpand is not None else v
         v = arg.pop('b', None)
-        self.b = b or v
+        self.b = b if b is not None else v
         v = arg.pop('l', None)
-        self.l = l or v
+        self.l = l if l is not None else v
         v = arg.pop('pad', None)
-        self.pad = pad or v
+        self.pad = pad if pad is not None else v
         v = arg.pop('r', None)
-        self.r = r or v
+        self.r = r if r is not None else v
         v = arg.pop('t', None)
-        self.t = t or v
+        self.t = t if t is not None else v
 
         # Process unknown kwargs
         # ----------------------

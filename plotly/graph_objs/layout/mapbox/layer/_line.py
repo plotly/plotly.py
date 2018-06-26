@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Line(BaseLayoutHierarchyType):
@@ -66,7 +67,9 @@ class Line(BaseLayoutHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.layout.mapbox.layer.Line 
@@ -85,7 +88,7 @@ an instance of plotly.graph_objs.layout.mapbox.layer.Line"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('width', None)
-        self.width = width or v
+        self.width = width if width is not None else v
 
         # Process unknown kwargs
         # ----------------------

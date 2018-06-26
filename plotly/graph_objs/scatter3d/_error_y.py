@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class ErrorY(BaseTraceHierarchyType):
@@ -516,7 +517,9 @@ class ErrorY(BaseTraceHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.scatter3d.ErrorY 
@@ -549,35 +552,35 @@ an instance of plotly.graph_objs.scatter3d.ErrorY"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('array', None)
-        self.array = array or v
+        self.array = array if array is not None else v
         v = arg.pop('arrayminus', None)
-        self.arrayminus = arrayminus or v
+        self.arrayminus = arrayminus if arrayminus is not None else v
         v = arg.pop('arrayminussrc', None)
-        self.arrayminussrc = arrayminussrc or v
+        self.arrayminussrc = arrayminussrc if arrayminussrc is not None else v
         v = arg.pop('arraysrc', None)
-        self.arraysrc = arraysrc or v
+        self.arraysrc = arraysrc if arraysrc is not None else v
         v = arg.pop('color', None)
-        self.color = color or v
+        self.color = color if color is not None else v
         v = arg.pop('copy_zstyle', None)
-        self.copy_zstyle = copy_zstyle or v
+        self.copy_zstyle = copy_zstyle if copy_zstyle is not None else v
         v = arg.pop('symmetric', None)
-        self.symmetric = symmetric or v
+        self.symmetric = symmetric if symmetric is not None else v
         v = arg.pop('thickness', None)
-        self.thickness = thickness or v
+        self.thickness = thickness if thickness is not None else v
         v = arg.pop('traceref', None)
-        self.traceref = traceref or v
+        self.traceref = traceref if traceref is not None else v
         v = arg.pop('tracerefminus', None)
-        self.tracerefminus = tracerefminus or v
+        self.tracerefminus = tracerefminus if tracerefminus is not None else v
         v = arg.pop('type', None)
-        self.type = type or v
+        self.type = type if type is not None else v
         v = arg.pop('value', None)
-        self.value = value or v
+        self.value = value if value is not None else v
         v = arg.pop('valueminus', None)
-        self.valueminus = valueminus or v
+        self.valueminus = valueminus if valueminus is not None else v
         v = arg.pop('visible', None)
-        self.visible = visible or v
+        self.visible = visible if visible is not None else v
         v = arg.pop('width', None)
-        self.width = width or v
+        self.width = width if width is not None else v
 
         # Process unknown kwargs
         # ----------------------

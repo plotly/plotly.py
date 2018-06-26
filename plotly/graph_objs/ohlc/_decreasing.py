@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Decreasing(BaseTraceHierarchyType):
@@ -77,7 +78,9 @@ class Decreasing(BaseTraceHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.ohlc.Decreasing 
@@ -96,7 +99,7 @@ an instance of plotly.graph_objs.ohlc.Decreasing"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('line', None)
-        self.line = line or v
+        self.line = line if line is not None else v
 
         # Process unknown kwargs
         # ----------------------

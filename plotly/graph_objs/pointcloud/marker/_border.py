@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Border(BaseTraceHierarchyType):
@@ -137,7 +138,9 @@ class Border(BaseTraceHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.pointcloud.marker.Border 
@@ -157,9 +160,9 @@ an instance of plotly.graph_objs.pointcloud.marker.Border"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('arearatio', None)
-        self.arearatio = arearatio or v
+        self.arearatio = arearatio if arearatio is not None else v
         v = arg.pop('color', None)
-        self.color = color or v
+        self.color = color if color is not None else v
 
         # Process unknown kwargs
         # ----------------------
