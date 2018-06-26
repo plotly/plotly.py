@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Hoverlabel(BaseTraceHierarchyType):
@@ -355,7 +356,9 @@ class Hoverlabel(BaseTraceHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.contour.Hoverlabel 
@@ -382,19 +385,19 @@ an instance of plotly.graph_objs.contour.Hoverlabel"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('bgcolor', None)
-        self.bgcolor = bgcolor or v
+        self.bgcolor = bgcolor if bgcolor is not None else v
         v = arg.pop('bgcolorsrc', None)
-        self.bgcolorsrc = bgcolorsrc or v
+        self.bgcolorsrc = bgcolorsrc if bgcolorsrc is not None else v
         v = arg.pop('bordercolor', None)
-        self.bordercolor = bordercolor or v
+        self.bordercolor = bordercolor if bordercolor is not None else v
         v = arg.pop('bordercolorsrc', None)
-        self.bordercolorsrc = bordercolorsrc or v
+        self.bordercolorsrc = bordercolorsrc if bordercolorsrc is not None else v
         v = arg.pop('font', None)
-        self.font = font or v
+        self.font = font if font is not None else v
         v = arg.pop('namelength', None)
-        self.namelength = namelength or v
+        self.namelength = namelength if namelength is not None else v
         v = arg.pop('namelengthsrc', None)
-        self.namelengthsrc = namelengthsrc or v
+        self.namelengthsrc = namelengthsrc if namelengthsrc is not None else v
 
         # Process unknown kwargs
         # ----------------------

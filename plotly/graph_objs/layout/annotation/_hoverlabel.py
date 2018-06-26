@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Hoverlabel(BaseLayoutHierarchyType):
@@ -233,7 +234,9 @@ class Hoverlabel(BaseLayoutHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.layout.annotation.Hoverlabel 
@@ -256,11 +259,11 @@ an instance of plotly.graph_objs.layout.annotation.Hoverlabel"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('bgcolor', None)
-        self.bgcolor = bgcolor or v
+        self.bgcolor = bgcolor if bgcolor is not None else v
         v = arg.pop('bordercolor', None)
-        self.bordercolor = bordercolor or v
+        self.bordercolor = bordercolor if bordercolor is not None else v
         v = arg.pop('font', None)
-        self.font = font or v
+        self.font = font if font is not None else v
 
         # Process unknown kwargs
         # ----------------------

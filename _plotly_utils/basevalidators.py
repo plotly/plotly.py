@@ -1864,11 +1864,18 @@ class CompoundArrayValidator(BaseValidator):
 
 class BaseDataValidator(BaseValidator):
 
-    def __init__(self, class_strs_map, plotly_name, parent_name, **kwargs):
+    def __init__(self,
+                 class_strs_map,
+                 plotly_name,
+                 parent_name,
+                 set_uid=False,
+                 **kwargs):
         super(BaseDataValidator, self).__init__(
             plotly_name=plotly_name, parent_name=parent_name, **kwargs)
+
         self.class_strs_map = class_strs_map
         self._class_map = None
+        self.set_uid = set_uid
 
     def description(self):
 
@@ -1957,8 +1964,9 @@ class BaseDataValidator(BaseValidator):
             v = to_scalar_or_list(res)
 
             # Set new UIDs
-            for trace in v:
-                trace.uid = str(uuid.uuid1())
+            if self.set_uid:
+                for trace in v:
+                    trace.uid = str(uuid.uuid1())
 
         else:
             self.raise_invalid_val(v)

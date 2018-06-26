@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Center(BaseLayoutHierarchyType):
@@ -101,7 +102,9 @@ class Center(BaseLayoutHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.layout.geo.Center 
@@ -121,9 +124,9 @@ an instance of plotly.graph_objs.layout.geo.Center"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('lat', None)
-        self.lat = lat or v
+        self.lat = lat if lat is not None else v
         v = arg.pop('lon', None)
-        self.lon = lon or v
+        self.lon = lon if lon is not None else v
 
         # Process unknown kwargs
         # ----------------------

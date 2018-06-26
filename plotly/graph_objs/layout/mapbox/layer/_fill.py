@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Fill(BaseLayoutHierarchyType):
@@ -105,7 +106,9 @@ class Fill(BaseLayoutHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.layout.mapbox.layer.Fill 
@@ -124,7 +127,7 @@ an instance of plotly.graph_objs.layout.mapbox.layer.Fill"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('outlinecolor', None)
-        self.outlinecolor = outlinecolor or v
+        self.outlinecolor = outlinecolor if outlinecolor is not None else v
 
         # Process unknown kwargs
         # ----------------------

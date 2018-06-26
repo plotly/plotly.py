@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Domain(BaseTraceHierarchyType):
@@ -160,7 +161,9 @@ class Domain(BaseTraceHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.table.Domain 
@@ -182,13 +185,13 @@ an instance of plotly.graph_objs.table.Domain"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('column', None)
-        self.column = column or v
+        self.column = column if column is not None else v
         v = arg.pop('row', None)
-        self.row = row or v
+        self.row = row if row is not None else v
         v = arg.pop('x', None)
-        self.x = x or v
+        self.x = x if x is not None else v
         v = arg.pop('y', None)
-        self.y = y or v
+        self.y = y if y is not None else v
 
         # Process unknown kwargs
         # ----------------------

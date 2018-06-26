@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class RadialAxis(BaseLayoutHierarchyType):
@@ -381,7 +382,9 @@ class RadialAxis(BaseLayoutHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.layout.RadialAxis 
@@ -412,27 +415,27 @@ an instance of plotly.graph_objs.layout.RadialAxis"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('domain', None)
-        self.domain = domain or v
+        self.domain = domain if domain is not None else v
         v = arg.pop('endpadding', None)
-        self.endpadding = endpadding or v
+        self.endpadding = endpadding if endpadding is not None else v
         v = arg.pop('orientation', None)
-        self.orientation = orientation or v
+        self.orientation = orientation if orientation is not None else v
         v = arg.pop('range', None)
-        self.range = range or v
+        self.range = range if range is not None else v
         v = arg.pop('showline', None)
-        self.showline = showline or v
+        self.showline = showline if showline is not None else v
         v = arg.pop('showticklabels', None)
-        self.showticklabels = showticklabels or v
+        self.showticklabels = showticklabels if showticklabels is not None else v
         v = arg.pop('tickcolor', None)
-        self.tickcolor = tickcolor or v
+        self.tickcolor = tickcolor if tickcolor is not None else v
         v = arg.pop('ticklen', None)
-        self.ticklen = ticklen or v
+        self.ticklen = ticklen if ticklen is not None else v
         v = arg.pop('tickorientation', None)
-        self.tickorientation = tickorientation or v
+        self.tickorientation = tickorientation if tickorientation is not None else v
         v = arg.pop('ticksuffix', None)
-        self.ticksuffix = ticksuffix or v
+        self.ticksuffix = ticksuffix if ticksuffix is not None else v
         v = arg.pop('visible', None)
-        self.visible = visible or v
+        self.visible = visible if visible is not None else v
 
         # Process unknown kwargs
         # ----------------------

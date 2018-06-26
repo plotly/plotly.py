@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Mapbox(BaseLayoutHierarchyType):
@@ -340,7 +341,9 @@ class Mapbox(BaseLayoutHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.layout.Mapbox 
@@ -366,21 +369,21 @@ an instance of plotly.graph_objs.layout.Mapbox"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('accesstoken', None)
-        self.accesstoken = accesstoken or v
+        self.accesstoken = accesstoken if accesstoken is not None else v
         v = arg.pop('bearing', None)
-        self.bearing = bearing or v
+        self.bearing = bearing if bearing is not None else v
         v = arg.pop('center', None)
-        self.center = center or v
+        self.center = center if center is not None else v
         v = arg.pop('domain', None)
-        self.domain = domain or v
+        self.domain = domain if domain is not None else v
         v = arg.pop('layers', None)
-        self.layers = layers or v
+        self.layers = layers if layers is not None else v
         v = arg.pop('pitch', None)
-        self.pitch = pitch or v
+        self.pitch = pitch if pitch is not None else v
         v = arg.pop('style', None)
-        self.style = style or v
+        self.style = style if style is not None else v
         v = arg.pop('zoom', None)
-        self.zoom = zoom or v
+        self.zoom = zoom if zoom is not None else v
 
         # Process unknown kwargs
         # ----------------------

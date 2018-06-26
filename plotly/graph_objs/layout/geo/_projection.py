@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Projection(BaseLayoutHierarchyType):
@@ -178,7 +179,9 @@ class Projection(BaseLayoutHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.layout.geo.Projection 
@@ -200,13 +203,13 @@ an instance of plotly.graph_objs.layout.geo.Projection"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('parallels', None)
-        self.parallels = parallels or v
+        self.parallels = parallels if parallels is not None else v
         v = arg.pop('rotation', None)
-        self.rotation = rotation or v
+        self.rotation = rotation if rotation is not None else v
         v = arg.pop('scale', None)
-        self.scale = scale or v
+        self.scale = scale if scale is not None else v
         v = arg.pop('type', None)
-        self.type = type or v
+        self.type = type if type is not None else v
 
         # Process unknown kwargs
         # ----------------------

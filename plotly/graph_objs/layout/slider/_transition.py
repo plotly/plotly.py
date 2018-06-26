@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Transition(BaseLayoutHierarchyType):
@@ -96,7 +97,9 @@ class Transition(BaseLayoutHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.layout.slider.Transition 
@@ -118,9 +121,9 @@ an instance of plotly.graph_objs.layout.slider.Transition"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('duration', None)
-        self.duration = duration or v
+        self.duration = duration if duration is not None else v
         v = arg.pop('easing', None)
-        self.easing = easing or v
+        self.easing = easing if easing is not None else v
 
         # Process unknown kwargs
         # ----------------------

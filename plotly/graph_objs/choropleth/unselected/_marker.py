@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Marker(BaseTraceHierarchyType):
@@ -66,7 +67,9 @@ class Marker(BaseTraceHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.choropleth.unselected.Marker 
@@ -87,7 +90,7 @@ an instance of plotly.graph_objs.choropleth.unselected.Marker"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('opacity', None)
-        self.opacity = opacity or v
+        self.opacity = opacity if opacity is not None else v
 
         # Process unknown kwargs
         # ----------------------

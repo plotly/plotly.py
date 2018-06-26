@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Layer(BaseLayoutHierarchyType):
@@ -448,7 +449,9 @@ class Layer(BaseLayoutHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.layout.mapbox.Layer 
@@ -477,27 +480,27 @@ an instance of plotly.graph_objs.layout.mapbox.Layer"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('below', None)
-        self.below = below or v
+        self.below = below if below is not None else v
         v = arg.pop('circle', None)
-        self.circle = circle or v
+        self.circle = circle if circle is not None else v
         v = arg.pop('color', None)
-        self.color = color or v
+        self.color = color if color is not None else v
         v = arg.pop('fill', None)
-        self.fill = fill or v
+        self.fill = fill if fill is not None else v
         v = arg.pop('line', None)
-        self.line = line or v
+        self.line = line if line is not None else v
         v = arg.pop('opacity', None)
-        self.opacity = opacity or v
+        self.opacity = opacity if opacity is not None else v
         v = arg.pop('source', None)
-        self.source = source or v
+        self.source = source if source is not None else v
         v = arg.pop('sourcelayer', None)
-        self.sourcelayer = sourcelayer or v
+        self.sourcelayer = sourcelayer if sourcelayer is not None else v
         v = arg.pop('sourcetype', None)
-        self.sourcetype = sourcetype or v
+        self.sourcetype = sourcetype if sourcetype is not None else v
         v = arg.pop('symbol', None)
-        self.symbol = symbol or v
+        self.symbol = symbol if symbol is not None else v
         v = arg.pop('type', None)
-        self.type = type or v
+        self.type = type if type is not None else v
 
         # Process unknown kwargs
         # ----------------------

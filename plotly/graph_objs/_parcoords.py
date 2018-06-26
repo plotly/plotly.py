@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceType
+import copy
 
 
 class Parcoords(BaseTraceType):
@@ -917,7 +918,9 @@ class Parcoords(BaseTraceType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.Parcoords 
@@ -958,47 +961,47 @@ an instance of plotly.graph_objs.Parcoords"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('customdata', None)
-        self.customdata = customdata or v
+        self.customdata = customdata if customdata is not None else v
         v = arg.pop('customdatasrc', None)
-        self.customdatasrc = customdatasrc or v
+        self.customdatasrc = customdatasrc if customdatasrc is not None else v
         v = arg.pop('dimensions', None)
-        self.dimensions = dimensions or v
+        self.dimensions = dimensions if dimensions is not None else v
         v = arg.pop('domain', None)
-        self.domain = domain or v
+        self.domain = domain if domain is not None else v
         v = arg.pop('hoverinfo', None)
-        self.hoverinfo = hoverinfo or v
+        self.hoverinfo = hoverinfo if hoverinfo is not None else v
         v = arg.pop('hoverinfosrc', None)
-        self.hoverinfosrc = hoverinfosrc or v
+        self.hoverinfosrc = hoverinfosrc if hoverinfosrc is not None else v
         v = arg.pop('hoverlabel', None)
-        self.hoverlabel = hoverlabel or v
+        self.hoverlabel = hoverlabel if hoverlabel is not None else v
         v = arg.pop('ids', None)
-        self.ids = ids or v
+        self.ids = ids if ids is not None else v
         v = arg.pop('idssrc', None)
-        self.idssrc = idssrc or v
+        self.idssrc = idssrc if idssrc is not None else v
         v = arg.pop('labelfont', None)
-        self.labelfont = labelfont or v
+        self.labelfont = labelfont if labelfont is not None else v
         v = arg.pop('legendgroup', None)
-        self.legendgroup = legendgroup or v
+        self.legendgroup = legendgroup if legendgroup is not None else v
         v = arg.pop('line', None)
-        self.line = line or v
+        self.line = line if line is not None else v
         v = arg.pop('name', None)
-        self.name = name or v
+        self.name = name if name is not None else v
         v = arg.pop('opacity', None)
-        self.opacity = opacity or v
+        self.opacity = opacity if opacity is not None else v
         v = arg.pop('rangefont', None)
-        self.rangefont = rangefont or v
+        self.rangefont = rangefont if rangefont is not None else v
         v = arg.pop('selectedpoints', None)
-        self.selectedpoints = selectedpoints or v
+        self.selectedpoints = selectedpoints if selectedpoints is not None else v
         v = arg.pop('showlegend', None)
-        self.showlegend = showlegend or v
+        self.showlegend = showlegend if showlegend is not None else v
         v = arg.pop('stream', None)
-        self.stream = stream or v
+        self.stream = stream if stream is not None else v
         v = arg.pop('tickfont', None)
-        self.tickfont = tickfont or v
+        self.tickfont = tickfont if tickfont is not None else v
         v = arg.pop('uid', None)
-        self.uid = uid or v
+        self.uid = uid if uid is not None else v
         v = arg.pop('visible', None)
-        self.visible = visible or v
+        self.visible = visible if visible is not None else v
 
         # Read-only literals
         # ------------------

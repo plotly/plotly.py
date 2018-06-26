@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceType
+import copy
 
 
 class Mesh3d(BaseTraceType):
@@ -2107,7 +2108,9 @@ class Mesh3d(BaseTraceType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.Mesh3d 
@@ -2179,113 +2182,113 @@ an instance of plotly.graph_objs.Mesh3d"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('alphahull', None)
-        self.alphahull = alphahull or v
+        self.alphahull = alphahull if alphahull is not None else v
         v = arg.pop('autocolorscale', None)
-        self.autocolorscale = autocolorscale or v
+        self.autocolorscale = autocolorscale if autocolorscale is not None else v
         v = arg.pop('cauto', None)
-        self.cauto = cauto or v
+        self.cauto = cauto if cauto is not None else v
         v = arg.pop('cmax', None)
-        self.cmax = cmax or v
+        self.cmax = cmax if cmax is not None else v
         v = arg.pop('cmin', None)
-        self.cmin = cmin or v
+        self.cmin = cmin if cmin is not None else v
         v = arg.pop('color', None)
-        self.color = color or v
+        self.color = color if color is not None else v
         v = arg.pop('colorbar', None)
-        self.colorbar = colorbar or v
+        self.colorbar = colorbar if colorbar is not None else v
         v = arg.pop('colorscale', None)
-        self.colorscale = colorscale or v
+        self.colorscale = colorscale if colorscale is not None else v
         v = arg.pop('contour', None)
-        self.contour = contour or v
+        self.contour = contour if contour is not None else v
         v = arg.pop('customdata', None)
-        self.customdata = customdata or v
+        self.customdata = customdata if customdata is not None else v
         v = arg.pop('customdatasrc', None)
-        self.customdatasrc = customdatasrc or v
+        self.customdatasrc = customdatasrc if customdatasrc is not None else v
         v = arg.pop('delaunayaxis', None)
-        self.delaunayaxis = delaunayaxis or v
+        self.delaunayaxis = delaunayaxis if delaunayaxis is not None else v
         v = arg.pop('facecolor', None)
-        self.facecolor = facecolor or v
+        self.facecolor = facecolor if facecolor is not None else v
         v = arg.pop('facecolorsrc', None)
-        self.facecolorsrc = facecolorsrc or v
+        self.facecolorsrc = facecolorsrc if facecolorsrc is not None else v
         v = arg.pop('flatshading', None)
-        self.flatshading = flatshading or v
+        self.flatshading = flatshading if flatshading is not None else v
         v = arg.pop('hoverinfo', None)
-        self.hoverinfo = hoverinfo or v
+        self.hoverinfo = hoverinfo if hoverinfo is not None else v
         v = arg.pop('hoverinfosrc', None)
-        self.hoverinfosrc = hoverinfosrc or v
+        self.hoverinfosrc = hoverinfosrc if hoverinfosrc is not None else v
         v = arg.pop('hoverlabel', None)
-        self.hoverlabel = hoverlabel or v
+        self.hoverlabel = hoverlabel if hoverlabel is not None else v
         v = arg.pop('i', None)
-        self.i = i or v
+        self.i = i if i is not None else v
         v = arg.pop('ids', None)
-        self.ids = ids or v
+        self.ids = ids if ids is not None else v
         v = arg.pop('idssrc', None)
-        self.idssrc = idssrc or v
+        self.idssrc = idssrc if idssrc is not None else v
         v = arg.pop('intensity', None)
-        self.intensity = intensity or v
+        self.intensity = intensity if intensity is not None else v
         v = arg.pop('intensitysrc', None)
-        self.intensitysrc = intensitysrc or v
+        self.intensitysrc = intensitysrc if intensitysrc is not None else v
         v = arg.pop('isrc', None)
-        self.isrc = isrc or v
+        self.isrc = isrc if isrc is not None else v
         v = arg.pop('j', None)
-        self.j = j or v
+        self.j = j if j is not None else v
         v = arg.pop('jsrc', None)
-        self.jsrc = jsrc or v
+        self.jsrc = jsrc if jsrc is not None else v
         v = arg.pop('k', None)
-        self.k = k or v
+        self.k = k if k is not None else v
         v = arg.pop('ksrc', None)
-        self.ksrc = ksrc or v
+        self.ksrc = ksrc if ksrc is not None else v
         v = arg.pop('legendgroup', None)
-        self.legendgroup = legendgroup or v
+        self.legendgroup = legendgroup if legendgroup is not None else v
         v = arg.pop('lighting', None)
-        self.lighting = lighting or v
+        self.lighting = lighting if lighting is not None else v
         v = arg.pop('lightposition', None)
-        self.lightposition = lightposition or v
+        self.lightposition = lightposition if lightposition is not None else v
         v = arg.pop('name', None)
-        self.name = name or v
+        self.name = name if name is not None else v
         v = arg.pop('opacity', None)
-        self.opacity = opacity or v
+        self.opacity = opacity if opacity is not None else v
         v = arg.pop('reversescale', None)
-        self.reversescale = reversescale or v
+        self.reversescale = reversescale if reversescale is not None else v
         v = arg.pop('scene', None)
-        self.scene = scene or v
+        self.scene = scene if scene is not None else v
         v = arg.pop('selectedpoints', None)
-        self.selectedpoints = selectedpoints or v
+        self.selectedpoints = selectedpoints if selectedpoints is not None else v
         v = arg.pop('showlegend', None)
-        self.showlegend = showlegend or v
+        self.showlegend = showlegend if showlegend is not None else v
         v = arg.pop('showscale', None)
-        self.showscale = showscale or v
+        self.showscale = showscale if showscale is not None else v
         v = arg.pop('stream', None)
-        self.stream = stream or v
+        self.stream = stream if stream is not None else v
         v = arg.pop('text', None)
-        self.text = text or v
+        self.text = text if text is not None else v
         v = arg.pop('textsrc', None)
-        self.textsrc = textsrc or v
+        self.textsrc = textsrc if textsrc is not None else v
         v = arg.pop('uid', None)
-        self.uid = uid or v
+        self.uid = uid if uid is not None else v
         v = arg.pop('vertexcolor', None)
-        self.vertexcolor = vertexcolor or v
+        self.vertexcolor = vertexcolor if vertexcolor is not None else v
         v = arg.pop('vertexcolorsrc', None)
-        self.vertexcolorsrc = vertexcolorsrc or v
+        self.vertexcolorsrc = vertexcolorsrc if vertexcolorsrc is not None else v
         v = arg.pop('visible', None)
-        self.visible = visible or v
+        self.visible = visible if visible is not None else v
         v = arg.pop('x', None)
-        self.x = x or v
+        self.x = x if x is not None else v
         v = arg.pop('xcalendar', None)
-        self.xcalendar = xcalendar or v
+        self.xcalendar = xcalendar if xcalendar is not None else v
         v = arg.pop('xsrc', None)
-        self.xsrc = xsrc or v
+        self.xsrc = xsrc if xsrc is not None else v
         v = arg.pop('y', None)
-        self.y = y or v
+        self.y = y if y is not None else v
         v = arg.pop('ycalendar', None)
-        self.ycalendar = ycalendar or v
+        self.ycalendar = ycalendar if ycalendar is not None else v
         v = arg.pop('ysrc', None)
-        self.ysrc = ysrc or v
+        self.ysrc = ysrc if ysrc is not None else v
         v = arg.pop('z', None)
-        self.z = z or v
+        self.z = z if z is not None else v
         v = arg.pop('zcalendar', None)
-        self.zcalendar = zcalendar or v
+        self.zcalendar = zcalendar if zcalendar is not None else v
         v = arg.pop('zsrc', None)
-        self.zsrc = zsrc or v
+        self.zsrc = zsrc if zsrc is not None else v
 
         # Read-only literals
         # ------------------

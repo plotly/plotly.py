@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class X(BaseTraceHierarchyType):
@@ -356,7 +357,9 @@ class X(BaseTraceHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.surface.contours.X 
@@ -382,21 +385,21 @@ an instance of plotly.graph_objs.surface.contours.X"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('color', None)
-        self.color = color or v
+        self.color = color if color is not None else v
         v = arg.pop('highlight', None)
-        self.highlight = highlight or v
+        self.highlight = highlight if highlight is not None else v
         v = arg.pop('highlightcolor', None)
-        self.highlightcolor = highlightcolor or v
+        self.highlightcolor = highlightcolor if highlightcolor is not None else v
         v = arg.pop('highlightwidth', None)
-        self.highlightwidth = highlightwidth or v
+        self.highlightwidth = highlightwidth if highlightwidth is not None else v
         v = arg.pop('project', None)
-        self.project = project or v
+        self.project = project if project is not None else v
         v = arg.pop('show', None)
-        self.show = show or v
+        self.show = show if show is not None else v
         v = arg.pop('usecolormap', None)
-        self.usecolormap = usecolormap or v
+        self.usecolormap = usecolormap if usecolormap is not None else v
         v = arg.pop('width', None)
-        self.width = width or v
+        self.width = width if width is not None else v
 
         # Process unknown kwargs
         # ----------------------

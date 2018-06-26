@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Scene(BaseLayoutHierarchyType):
@@ -1428,7 +1429,9 @@ class Scene(BaseLayoutHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.layout.Scene 
@@ -1457,27 +1460,27 @@ an instance of plotly.graph_objs.layout.Scene"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('annotations', None)
-        self.annotations = annotations or v
+        self.annotations = annotations if annotations is not None else v
         v = arg.pop('aspectmode', None)
-        self.aspectmode = aspectmode or v
+        self.aspectmode = aspectmode if aspectmode is not None else v
         v = arg.pop('aspectratio', None)
-        self.aspectratio = aspectratio or v
+        self.aspectratio = aspectratio if aspectratio is not None else v
         v = arg.pop('bgcolor', None)
-        self.bgcolor = bgcolor or v
+        self.bgcolor = bgcolor if bgcolor is not None else v
         v = arg.pop('camera', None)
-        self.camera = camera or v
+        self.camera = camera if camera is not None else v
         v = arg.pop('domain', None)
-        self.domain = domain or v
+        self.domain = domain if domain is not None else v
         v = arg.pop('dragmode', None)
-        self.dragmode = dragmode or v
+        self.dragmode = dragmode if dragmode is not None else v
         v = arg.pop('hovermode', None)
-        self.hovermode = hovermode or v
+        self.hovermode = hovermode if hovermode is not None else v
         v = arg.pop('xaxis', None)
-        self.xaxis = xaxis or v
+        self.xaxis = xaxis if xaxis is not None else v
         v = arg.pop('yaxis', None)
-        self.yaxis = yaxis or v
+        self.yaxis = yaxis if yaxis is not None else v
         v = arg.pop('zaxis', None)
-        self.zaxis = zaxis or v
+        self.zaxis = zaxis if zaxis is not None else v
 
         # Process unknown kwargs
         # ----------------------

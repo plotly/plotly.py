@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Line(BaseTraceHierarchyType):
@@ -460,7 +461,9 @@ class Line(BaseTraceHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.scatterternary.marker.Line 
@@ -488,25 +491,25 @@ an instance of plotly.graph_objs.scatterternary.marker.Line"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('autocolorscale', None)
-        self.autocolorscale = autocolorscale or v
+        self.autocolorscale = autocolorscale if autocolorscale is not None else v
         v = arg.pop('cauto', None)
-        self.cauto = cauto or v
+        self.cauto = cauto if cauto is not None else v
         v = arg.pop('cmax', None)
-        self.cmax = cmax or v
+        self.cmax = cmax if cmax is not None else v
         v = arg.pop('cmin', None)
-        self.cmin = cmin or v
+        self.cmin = cmin if cmin is not None else v
         v = arg.pop('color', None)
-        self.color = color or v
+        self.color = color if color is not None else v
         v = arg.pop('colorscale', None)
-        self.colorscale = colorscale or v
+        self.colorscale = colorscale if colorscale is not None else v
         v = arg.pop('colorsrc', None)
-        self.colorsrc = colorsrc or v
+        self.colorsrc = colorsrc if colorsrc is not None else v
         v = arg.pop('reversescale', None)
-        self.reversescale = reversescale or v
+        self.reversescale = reversescale if reversescale is not None else v
         v = arg.pop('width', None)
-        self.width = width or v
+        self.width = width if width is not None else v
         v = arg.pop('widthsrc', None)
-        self.widthsrc = widthsrc or v
+        self.widthsrc = widthsrc if widthsrc is not None else v
 
         # Process unknown kwargs
         # ----------------------

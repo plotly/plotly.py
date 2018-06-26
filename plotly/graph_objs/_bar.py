@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceType
+import copy
 
 
 class Bar(BaseTraceType):
@@ -1984,7 +1985,9 @@ class Bar(BaseTraceType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.Bar 
@@ -2056,113 +2059,113 @@ an instance of plotly.graph_objs.Bar"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('base', None)
-        self.base = base or v
+        self.base = base if base is not None else v
         v = arg.pop('basesrc', None)
-        self.basesrc = basesrc or v
+        self.basesrc = basesrc if basesrc is not None else v
         v = arg.pop('cliponaxis', None)
-        self.cliponaxis = cliponaxis or v
+        self.cliponaxis = cliponaxis if cliponaxis is not None else v
         v = arg.pop('constraintext', None)
-        self.constraintext = constraintext or v
+        self.constraintext = constraintext if constraintext is not None else v
         v = arg.pop('customdata', None)
-        self.customdata = customdata or v
+        self.customdata = customdata if customdata is not None else v
         v = arg.pop('customdatasrc', None)
-        self.customdatasrc = customdatasrc or v
+        self.customdatasrc = customdatasrc if customdatasrc is not None else v
         v = arg.pop('dx', None)
-        self.dx = dx or v
+        self.dx = dx if dx is not None else v
         v = arg.pop('dy', None)
-        self.dy = dy or v
+        self.dy = dy if dy is not None else v
         v = arg.pop('error_x', None)
-        self.error_x = error_x or v
+        self.error_x = error_x if error_x is not None else v
         v = arg.pop('error_y', None)
-        self.error_y = error_y or v
+        self.error_y = error_y if error_y is not None else v
         v = arg.pop('hoverinfo', None)
-        self.hoverinfo = hoverinfo or v
+        self.hoverinfo = hoverinfo if hoverinfo is not None else v
         v = arg.pop('hoverinfosrc', None)
-        self.hoverinfosrc = hoverinfosrc or v
+        self.hoverinfosrc = hoverinfosrc if hoverinfosrc is not None else v
         v = arg.pop('hoverlabel', None)
-        self.hoverlabel = hoverlabel or v
+        self.hoverlabel = hoverlabel if hoverlabel is not None else v
         v = arg.pop('hovertext', None)
-        self.hovertext = hovertext or v
+        self.hovertext = hovertext if hovertext is not None else v
         v = arg.pop('hovertextsrc', None)
-        self.hovertextsrc = hovertextsrc or v
+        self.hovertextsrc = hovertextsrc if hovertextsrc is not None else v
         v = arg.pop('ids', None)
-        self.ids = ids or v
+        self.ids = ids if ids is not None else v
         v = arg.pop('idssrc', None)
-        self.idssrc = idssrc or v
+        self.idssrc = idssrc if idssrc is not None else v
         v = arg.pop('insidetextfont', None)
-        self.insidetextfont = insidetextfont or v
+        self.insidetextfont = insidetextfont if insidetextfont is not None else v
         v = arg.pop('legendgroup', None)
-        self.legendgroup = legendgroup or v
+        self.legendgroup = legendgroup if legendgroup is not None else v
         v = arg.pop('marker', None)
-        self.marker = marker or v
+        self.marker = marker if marker is not None else v
         v = arg.pop('name', None)
-        self.name = name or v
+        self.name = name if name is not None else v
         v = arg.pop('offset', None)
-        self.offset = offset or v
+        self.offset = offset if offset is not None else v
         v = arg.pop('offsetsrc', None)
-        self.offsetsrc = offsetsrc or v
+        self.offsetsrc = offsetsrc if offsetsrc is not None else v
         v = arg.pop('opacity', None)
-        self.opacity = opacity or v
+        self.opacity = opacity if opacity is not None else v
         v = arg.pop('orientation', None)
-        self.orientation = orientation or v
+        self.orientation = orientation if orientation is not None else v
         v = arg.pop('outsidetextfont', None)
-        self.outsidetextfont = outsidetextfont or v
+        self.outsidetextfont = outsidetextfont if outsidetextfont is not None else v
         v = arg.pop('r', None)
-        self.r = r or v
+        self.r = r if r is not None else v
         v = arg.pop('rsrc', None)
-        self.rsrc = rsrc or v
+        self.rsrc = rsrc if rsrc is not None else v
         v = arg.pop('selected', None)
-        self.selected = selected or v
+        self.selected = selected if selected is not None else v
         v = arg.pop('selectedpoints', None)
-        self.selectedpoints = selectedpoints or v
+        self.selectedpoints = selectedpoints if selectedpoints is not None else v
         v = arg.pop('showlegend', None)
-        self.showlegend = showlegend or v
+        self.showlegend = showlegend if showlegend is not None else v
         v = arg.pop('stream', None)
-        self.stream = stream or v
+        self.stream = stream if stream is not None else v
         v = arg.pop('t', None)
-        self.t = t or v
+        self.t = t if t is not None else v
         v = arg.pop('text', None)
-        self.text = text or v
+        self.text = text if text is not None else v
         v = arg.pop('textfont', None)
-        self.textfont = textfont or v
+        self.textfont = textfont if textfont is not None else v
         v = arg.pop('textposition', None)
-        self.textposition = textposition or v
+        self.textposition = textposition if textposition is not None else v
         v = arg.pop('textpositionsrc', None)
-        self.textpositionsrc = textpositionsrc or v
+        self.textpositionsrc = textpositionsrc if textpositionsrc is not None else v
         v = arg.pop('textsrc', None)
-        self.textsrc = textsrc or v
+        self.textsrc = textsrc if textsrc is not None else v
         v = arg.pop('tsrc', None)
-        self.tsrc = tsrc or v
+        self.tsrc = tsrc if tsrc is not None else v
         v = arg.pop('uid', None)
-        self.uid = uid or v
+        self.uid = uid if uid is not None else v
         v = arg.pop('unselected', None)
-        self.unselected = unselected or v
+        self.unselected = unselected if unselected is not None else v
         v = arg.pop('visible', None)
-        self.visible = visible or v
+        self.visible = visible if visible is not None else v
         v = arg.pop('width', None)
-        self.width = width or v
+        self.width = width if width is not None else v
         v = arg.pop('widthsrc', None)
-        self.widthsrc = widthsrc or v
+        self.widthsrc = widthsrc if widthsrc is not None else v
         v = arg.pop('x', None)
-        self.x = x or v
+        self.x = x if x is not None else v
         v = arg.pop('x0', None)
-        self.x0 = x0 or v
+        self.x0 = x0 if x0 is not None else v
         v = arg.pop('xaxis', None)
-        self.xaxis = xaxis or v
+        self.xaxis = xaxis if xaxis is not None else v
         v = arg.pop('xcalendar', None)
-        self.xcalendar = xcalendar or v
+        self.xcalendar = xcalendar if xcalendar is not None else v
         v = arg.pop('xsrc', None)
-        self.xsrc = xsrc or v
+        self.xsrc = xsrc if xsrc is not None else v
         v = arg.pop('y', None)
-        self.y = y or v
+        self.y = y if y is not None else v
         v = arg.pop('y0', None)
-        self.y0 = y0 or v
+        self.y0 = y0 if y0 is not None else v
         v = arg.pop('yaxis', None)
-        self.yaxis = yaxis or v
+        self.yaxis = yaxis if yaxis is not None else v
         v = arg.pop('ycalendar', None)
-        self.ycalendar = ycalendar or v
+        self.ycalendar = ycalendar if ycalendar is not None else v
         v = arg.pop('ysrc', None)
-        self.ysrc = ysrc or v
+        self.ysrc = ysrc if ysrc is not None else v
 
         # Read-only literals
         # ------------------

@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Outsidetextfont(BaseTraceHierarchyType):
@@ -182,7 +183,9 @@ class Outsidetextfont(BaseTraceHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.pie.Outsidetextfont 
@@ -205,11 +208,11 @@ an instance of plotly.graph_objs.pie.Outsidetextfont"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('color', None)
-        self.color = color or v
+        self.color = color if color is not None else v
         v = arg.pop('family', None)
-        self.family = family or v
+        self.family = family if family is not None else v
         v = arg.pop('size', None)
-        self.size = size or v
+        self.size = size if size is not None else v
 
         # Process unknown kwargs
         # ----------------------

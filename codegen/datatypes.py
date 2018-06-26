@@ -81,6 +81,9 @@ def build_datatype_py(node):
     # -------
     buffer.write(
         f'from plotly.basedatatypes import {node.name_base_datatype}\n')
+    buffer.write(
+        f'import copy\n')
+
 
     # Write class definition
     # ----------------------
@@ -210,12 +213,14 @@ class {datatype_class}({node.name_base_datatype}):\n""")
             arg = {{}}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(\"\"\"\\
 The first argument to the {class_name} 
 constructor must be a dict or 
 an instance of {class_name}\"\"\")
-                
+
         # Import validators
         # -----------------
         from plotly.validators{node.parent_dotpath_str} import (
@@ -237,7 +242,7 @@ an instance of {class_name}\"\"\")
         name_prop = subtype_node.name_property
         buffer.write(f"""
         v = arg.pop('{name_prop}', None)
-        self.{name_prop} = {name_prop} or v""")
+        self.{name_prop} = {name_prop} if {name_prop} is not None else v""")
 
     # ### Literals ###
     if literal_nodes:

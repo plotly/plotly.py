@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Polar(BaseLayoutHierarchyType):
@@ -737,7 +738,9 @@ class Polar(BaseLayoutHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.layout.Polar 
@@ -760,15 +763,15 @@ an instance of plotly.graph_objs.layout.Polar"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('angularaxis', None)
-        self.angularaxis = angularaxis or v
+        self.angularaxis = angularaxis if angularaxis is not None else v
         v = arg.pop('bgcolor', None)
-        self.bgcolor = bgcolor or v
+        self.bgcolor = bgcolor if bgcolor is not None else v
         v = arg.pop('domain', None)
-        self.domain = domain or v
+        self.domain = domain if domain is not None else v
         v = arg.pop('radialaxis', None)
-        self.radialaxis = radialaxis or v
+        self.radialaxis = radialaxis if radialaxis is not None else v
         v = arg.pop('sector', None)
-        self.sector = sector or v
+        self.sector = sector if sector is not None else v
 
         # Process unknown kwargs
         # ----------------------

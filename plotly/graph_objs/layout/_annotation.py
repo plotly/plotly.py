@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Annotation(BaseLayoutHierarchyType):
@@ -1602,7 +1603,9 @@ class Annotation(BaseLayoutHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.layout.Annotation 
@@ -1665,87 +1668,87 @@ an instance of plotly.graph_objs.layout.Annotation"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('align', None)
-        self.align = align or v
+        self.align = align if align is not None else v
         v = arg.pop('arrowcolor', None)
-        self.arrowcolor = arrowcolor or v
+        self.arrowcolor = arrowcolor if arrowcolor is not None else v
         v = arg.pop('arrowhead', None)
-        self.arrowhead = arrowhead or v
+        self.arrowhead = arrowhead if arrowhead is not None else v
         v = arg.pop('arrowside', None)
-        self.arrowside = arrowside or v
+        self.arrowside = arrowside if arrowside is not None else v
         v = arg.pop('arrowsize', None)
-        self.arrowsize = arrowsize or v
+        self.arrowsize = arrowsize if arrowsize is not None else v
         v = arg.pop('arrowwidth', None)
-        self.arrowwidth = arrowwidth or v
+        self.arrowwidth = arrowwidth if arrowwidth is not None else v
         v = arg.pop('ax', None)
-        self.ax = ax or v
+        self.ax = ax if ax is not None else v
         v = arg.pop('axref', None)
-        self.axref = axref or v
+        self.axref = axref if axref is not None else v
         v = arg.pop('ay', None)
-        self.ay = ay or v
+        self.ay = ay if ay is not None else v
         v = arg.pop('ayref', None)
-        self.ayref = ayref or v
+        self.ayref = ayref if ayref is not None else v
         v = arg.pop('bgcolor', None)
-        self.bgcolor = bgcolor or v
+        self.bgcolor = bgcolor if bgcolor is not None else v
         v = arg.pop('bordercolor', None)
-        self.bordercolor = bordercolor or v
+        self.bordercolor = bordercolor if bordercolor is not None else v
         v = arg.pop('borderpad', None)
-        self.borderpad = borderpad or v
+        self.borderpad = borderpad if borderpad is not None else v
         v = arg.pop('borderwidth', None)
-        self.borderwidth = borderwidth or v
+        self.borderwidth = borderwidth if borderwidth is not None else v
         v = arg.pop('captureevents', None)
-        self.captureevents = captureevents or v
+        self.captureevents = captureevents if captureevents is not None else v
         v = arg.pop('clicktoshow', None)
-        self.clicktoshow = clicktoshow or v
+        self.clicktoshow = clicktoshow if clicktoshow is not None else v
         v = arg.pop('font', None)
-        self.font = font or v
+        self.font = font if font is not None else v
         v = arg.pop('height', None)
-        self.height = height or v
+        self.height = height if height is not None else v
         v = arg.pop('hoverlabel', None)
-        self.hoverlabel = hoverlabel or v
+        self.hoverlabel = hoverlabel if hoverlabel is not None else v
         v = arg.pop('hovertext', None)
-        self.hovertext = hovertext or v
+        self.hovertext = hovertext if hovertext is not None else v
         v = arg.pop('opacity', None)
-        self.opacity = opacity or v
+        self.opacity = opacity if opacity is not None else v
         v = arg.pop('showarrow', None)
-        self.showarrow = showarrow or v
+        self.showarrow = showarrow if showarrow is not None else v
         v = arg.pop('standoff', None)
-        self.standoff = standoff or v
+        self.standoff = standoff if standoff is not None else v
         v = arg.pop('startarrowhead', None)
-        self.startarrowhead = startarrowhead or v
+        self.startarrowhead = startarrowhead if startarrowhead is not None else v
         v = arg.pop('startarrowsize', None)
-        self.startarrowsize = startarrowsize or v
+        self.startarrowsize = startarrowsize if startarrowsize is not None else v
         v = arg.pop('startstandoff', None)
-        self.startstandoff = startstandoff or v
+        self.startstandoff = startstandoff if startstandoff is not None else v
         v = arg.pop('text', None)
-        self.text = text or v
+        self.text = text if text is not None else v
         v = arg.pop('textangle', None)
-        self.textangle = textangle or v
+        self.textangle = textangle if textangle is not None else v
         v = arg.pop('valign', None)
-        self.valign = valign or v
+        self.valign = valign if valign is not None else v
         v = arg.pop('visible', None)
-        self.visible = visible or v
+        self.visible = visible if visible is not None else v
         v = arg.pop('width', None)
-        self.width = width or v
+        self.width = width if width is not None else v
         v = arg.pop('x', None)
-        self.x = x or v
+        self.x = x if x is not None else v
         v = arg.pop('xanchor', None)
-        self.xanchor = xanchor or v
+        self.xanchor = xanchor if xanchor is not None else v
         v = arg.pop('xclick', None)
-        self.xclick = xclick or v
+        self.xclick = xclick if xclick is not None else v
         v = arg.pop('xref', None)
-        self.xref = xref or v
+        self.xref = xref if xref is not None else v
         v = arg.pop('xshift', None)
-        self.xshift = xshift or v
+        self.xshift = xshift if xshift is not None else v
         v = arg.pop('y', None)
-        self.y = y or v
+        self.y = y if y is not None else v
         v = arg.pop('yanchor', None)
-        self.yanchor = yanchor or v
+        self.yanchor = yanchor if yanchor is not None else v
         v = arg.pop('yclick', None)
-        self.yclick = yclick or v
+        self.yclick = yclick if yclick is not None else v
         v = arg.pop('yref', None)
-        self.yref = yref or v
+        self.yref = yref if yref is not None else v
         v = arg.pop('yshift', None)
-        self.yshift = yshift or v
+        self.yshift = yshift if yshift is not None else v
 
         # Process unknown kwargs
         # ----------------------

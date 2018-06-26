@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Lighting(BaseTraceHierarchyType):
@@ -243,7 +244,9 @@ class Lighting(BaseTraceHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.mesh3d.Lighting 
@@ -270,19 +273,19 @@ an instance of plotly.graph_objs.mesh3d.Lighting"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('ambient', None)
-        self.ambient = ambient or v
+        self.ambient = ambient if ambient is not None else v
         v = arg.pop('diffuse', None)
-        self.diffuse = diffuse or v
+        self.diffuse = diffuse if diffuse is not None else v
         v = arg.pop('facenormalsepsilon', None)
-        self.facenormalsepsilon = facenormalsepsilon or v
+        self.facenormalsepsilon = facenormalsepsilon if facenormalsepsilon is not None else v
         v = arg.pop('fresnel', None)
-        self.fresnel = fresnel or v
+        self.fresnel = fresnel if fresnel is not None else v
         v = arg.pop('roughness', None)
-        self.roughness = roughness or v
+        self.roughness = roughness if roughness is not None else v
         v = arg.pop('specular', None)
-        self.specular = specular or v
+        self.specular = specular if specular is not None else v
         v = arg.pop('vertexnormalsepsilon', None)
-        self.vertexnormalsepsilon = vertexnormalsepsilon or v
+        self.vertexnormalsepsilon = vertexnormalsepsilon if vertexnormalsepsilon is not None else v
 
         # Process unknown kwargs
         # ----------------------

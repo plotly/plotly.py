@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Line(BaseTraceHierarchyType):
@@ -231,7 +232,9 @@ class Line(BaseTraceHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.scatterpolar.Line 
@@ -254,15 +257,15 @@ an instance of plotly.graph_objs.scatterpolar.Line"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('color', None)
-        self.color = color or v
+        self.color = color if color is not None else v
         v = arg.pop('dash', None)
-        self.dash = dash or v
+        self.dash = dash if dash is not None else v
         v = arg.pop('shape', None)
-        self.shape = shape or v
+        self.shape = shape if shape is not None else v
         v = arg.pop('smoothing', None)
-        self.smoothing = smoothing or v
+        self.smoothing = smoothing if smoothing is not None else v
         v = arg.pop('width', None)
-        self.width = width or v
+        self.width = width if width is not None else v
 
         # Process unknown kwargs
         # ----------------------

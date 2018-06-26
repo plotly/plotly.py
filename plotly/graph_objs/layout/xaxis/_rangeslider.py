@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Rangeslider(BaseLayoutHierarchyType):
@@ -379,7 +380,9 @@ class Rangeslider(BaseLayoutHierarchyType):
             arg = {}
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
-        elif not isinstance(arg, dict):
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
             raise ValueError(
                 """\
 The first argument to the plotly.graph_objs.layout.xaxis.Rangeslider 
@@ -407,21 +410,21 @@ an instance of plotly.graph_objs.layout.xaxis.Rangeslider"""
         # Populate data dict with properties
         # ----------------------------------
         v = arg.pop('autorange', None)
-        self.autorange = autorange or v
+        self.autorange = autorange if autorange is not None else v
         v = arg.pop('bgcolor', None)
-        self.bgcolor = bgcolor or v
+        self.bgcolor = bgcolor if bgcolor is not None else v
         v = arg.pop('bordercolor', None)
-        self.bordercolor = bordercolor or v
+        self.bordercolor = bordercolor if bordercolor is not None else v
         v = arg.pop('borderwidth', None)
-        self.borderwidth = borderwidth or v
+        self.borderwidth = borderwidth if borderwidth is not None else v
         v = arg.pop('range', None)
-        self.range = range or v
+        self.range = range if range is not None else v
         v = arg.pop('thickness', None)
-        self.thickness = thickness or v
+        self.thickness = thickness if thickness is not None else v
         v = arg.pop('visible', None)
-        self.visible = visible or v
+        self.visible = visible if visible is not None else v
         v = arg.pop('yaxis', None)
-        self.yaxis = yaxis or v
+        self.yaxis = yaxis if yaxis is not None else v
 
         # Process unknown kwargs
         # ----------------------
