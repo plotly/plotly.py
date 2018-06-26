@@ -8,7 +8,7 @@ There are many new and great features in Plotly 3.0 including deeper Jupyter int
 - Traces can be added and updated interactively by simply assigning to properties
 - The full Traces and Layout API is generated from the plotly schema to provide a great experience for interactive use in the notebook
 - Support for setting array properties as numpy arrays. When numpy arrays are used, ipywidgets binary serialization protocol is used to avoid converting these to JSON strings.
-- Context manager API for animation.
+- Context manager API for animation. Run `help(go.Figure().batch_animate)` for the full doc string.
 - Programmatic export of figures to static SVG images (and PNG and PDF with cairosvg installed).
 
 ### Removed
