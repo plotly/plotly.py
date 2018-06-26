@@ -3,17 +3,16 @@ There are many new and great features in Plotly 3.0 including deeper Jupyter int
 
 ## 3.0.0rc9 [08-06-2018]
 ### Added
+- Jupyter integration - run `help(go.FigureWidget)` for more information
 - update traces interactively
 - Traces can be added and updated interactively by simply assigning to properties
 - The full Traces and Layout API is generated from the plotly schema to provide a great experience for interactive use in the notebook
-- Jupyter friendly docstrings
-- Jupyter friendly docstrings on constructor params and properties
 - Support for setting array properties as numpy arrays. When numpy arrays are used, ipywidgets binary serialization protocol is used to avoid converting these to JSON strings.
-- Context manager API for animation
+- Context manager API for animation.
 - Programmatic export of figures to static SVG images (and PNG and PDF with cairosvg installed).
 
 ### Removed
-- We have removed `.to_string`, `.strip_style`, `.get_data`, `.validate` and `.to_dataframe` methods from `plotly.graph_objs` objects. For example run `dir(plotly.graph_objs.Scatter)` to get all the (magic) methods of the Scatter class.
+- Removed `.to_string`, `.strip_style`, `.get_data`, `.validate` and `.to_dataframe` methods from `plotly.graph_objs` objects. For example run `dir(plotly.graph_objs.Scatter)` to get all the (magic) methods of the Scatter class.
 
 
 ### Changed
@@ -72,10 +71,17 @@ does not.
 To install and enable with Jupyter, run:
 ```
 pip install plotly==3.0.0rc9
-pip install ipywidgets  # only necessary for Jupyter Notebook environments
+pip install notebook>=5.3 ipywidgets>=7.2  # only necessary for Jupyter Notebook environments
 ```
 
-In addition, to add JupyterLab support run the following commands:
+If you're using older versions of `notebook` or `ipywidgets` you may need to manually activate the widget extensions (this should not be needed for `notebook>=5.3` and `ipywidgets>=7.2`)
+
+```
+jupyter nbextension enable --py widgetsnbextension --sys-prefix
+jupyter nbextension enable --py plotlywidget --sys-prefix
+```
+
+In addition, to add JupyterLab support run the following commands
 
 ```
 pip install jupyterlab
