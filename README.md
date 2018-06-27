@@ -1,10 +1,27 @@
 # plotly.py
 
-> 📢  Announcement!  
-> Registration is open for a 2 day, Dash master class in Washington DC, June 9-10.  
-> [Register online here](https://plotcon.plot.ly/tickets/) 🎚📈🏛
+## Instal Plotly 3.0.0rc10
+To install and enable with Jupyter or Jupyter lab, run:
+```
+pip install plotly==3.0.0rc9
+pip install "notebook>=5.3" "ipywidgets>=7.2"  # only necessary for Jupyter Notebook environments
+```
 
-***
+If you're using older versions of `notebook` or `ipywidgets` you may need to manually activate the widget extensions (this should not be needed for `notebook>=5.3` and `ipywidgets>=7.2`)
+
+```
+jupyter nbextension enable --py widgetsnbextension --sys-prefix
+jupyter nbextension enable --py plotlywidget --sys-prefix
+```
+
+In addition, to add JupyterLab support run the following commands
+
+```
+pip install jupyterlab
+export NODE_OPTIONS=--max-old-space-size=4096
+jupyter labextension install @jupyter-widgets/jupyterlab-manager # install the Jupyter widgets extension
+jupyter labextension install plotlywidget
+```
 
 [plotly.py](https://plot.ly/d3-js-for-python-and-pandas-charts/) is an interactive, browser-based graphing library for Python :sparkles:
 
