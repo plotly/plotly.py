@@ -117,6 +117,20 @@ pip install -r optional-requirements.txt
     $ jupyter nbextension install --py --symlink --sys-prefix plotlywidget
     $ jupyter nbextension enable --py --sys-prefix plotlywidget
 
+## Update to a new version of Plotly.js
+First update the version of the `plotly.js` dependency in `js/package.json`.
+
+Then run the `updateplotlyjs` command with:
+
+```bash
+$ python setup.py updateplotlyjs
+```
+
+This will download new versions of `plot-schema.json` and `plotly.min.js` from 
+the `plotly/plotly.js` GitHub repository (and place them in 
+`plotly/package_data`). It will then regenerate all of the `graph_objs`
+classes based on the new schema.
+
 ## Testing
 
 We take advantage of two tools to run tests:
