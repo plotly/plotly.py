@@ -17612,15 +17612,14 @@
                     "role": "info",
                     "editType": "calc",
                     "dflt": "scaled",
-                    "description": "Sets the mode by which the cones are sized. If *scaled*, `sizeref` scales such that the reference cone size for the maximum vector magnitude is 1. If *absolute*, `sizeref` scales such that the reference cone size for vector magnitude 1 is one grid unit."
+                    "description": "Determines whether `sizeref` is set as a *scaled* (i.e unitless) scalar (normalized by the max u/v/w norm in the vector field) or as *absolute* value (in the same units as the vector field)."
                 },
                 "sizeref": {
                     "valType": "number",
                     "role": "info",
                     "editType": "calc",
                     "min": 0,
-                    "dflt": 1,
-                    "description": "Sets the cone size reference value."
+                    "description": "Adjusts the cone size scaling. The size of the cones is determined by their u/v/w norm multiplied a factor and `sizeref`. This factor (computed internally) corresponds to the minimum \"time\" to travel across two successive x/y/z positions at the average velocity of those two successive positions. All cones in a given trace use the same factor. With `sizemode` set to *scaled*, `sizeref` is unitless, its default value is *0.5* With `sizemode` set to *absolute*, `sizeref` has the same units as the u/v/w vector field, its the default value is half the sample's maximum vector norm."
                 },
                 "anchor": {
                     "valType": "enumerated",
