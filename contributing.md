@@ -235,5 +235,12 @@ And ask one of your friends to do it too. Our tests should catch any issues, but
 
 <3 Team Plotly
 
+#### Publish widget library to npm
+
+```bash
+cd ./js
+npm publish --access public
+```
+
 # Contributing to the Figure Factories
 If you are interested in contributing to the ever-growing Plotly figure factory library in Python, check out the [documentation](https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/README.md) to learn how.
