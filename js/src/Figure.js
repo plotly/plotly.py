@@ -2,6 +2,7 @@ var widgets = require("@jupyter-widgets/base");
 var _ = require("lodash");
 var Plotly = require("plotly.js/dist/plotly");
 var PlotlyIndex = require("plotly.js/src/lib/index");
+var semver_range = "^" + require("../package.json").version;
 
 // Model
 // =====
@@ -22,8 +23,8 @@ var FigureModel = widgets.DOMWidgetModel.extend({
         _view_name: "FigureView",
         _model_module: "plotlywidget",
         _view_module: "plotlywidget",
-        _view_module_version: "0.1.0",
-        _model_module_version: "0.1.0",
+        _view_module_version: semver_range,
+        _model_module_version: semver_range,
 
         // Data and Layout
         // ---------------
@@ -793,10 +794,22 @@ var FigureView = widgets.DOMWidgetView.extend({
      */
     processPhosphorMessage: function(msg) {
         FigureView.__super__.processPhosphorMessage.apply(this, arguments);
+        var that = this;
         switch (msg.type) {
             case 'after-attach':
                 this.perform_render();
                 break;
+            case 'resize':
+                var layout = this.model.get('_layout');
+                if (_.isNil(layout) ||
+                    (_.isNil(layout.width) && _.isNil(layout.height))) {
+                    Plotly.Plots.resize(this.el).then(function(){
+                        var layout_edit_id = that.model.get(
+                            "_last_layout_edit_id");
+                        that._sendLayoutDelta(layout_edit_id);
+                    });
+                }
+                break
         }
     },
 
