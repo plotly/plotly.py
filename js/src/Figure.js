@@ -2,6 +2,7 @@ var widgets = require("@jupyter-widgets/base");
 var _ = require("lodash");
 var Plotly = require("plotly.js/dist/plotly");
 var PlotlyIndex = require("plotly.js/src/lib/index");
+var semver_range = "^" + require("../package.json").version;
 
 // Model
 // =====
@@ -22,8 +23,8 @@ var FigureModel = widgets.DOMWidgetModel.extend({
         _view_name: "FigureView",
         _model_module: "plotlywidget",
         _view_module: "plotlywidget",
-        _view_module_version: "0.1.0",
-        _model_module_version: "0.1.0",
+        _view_module_version: semver_range,
+        _model_module_version: semver_range,
 
         // Data and Layout
         // ---------------

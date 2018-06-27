@@ -13,7 +13,7 @@ from .basedatatypes import BaseFigure, BasePlotlyType, fullmatch
 from .callbacks import (BoxSelector, LassoSelector,
                         InputDeviceState, Points)
 from .serializers import custom_serializers
-
+from .version import __frontend_version__
 
 @widgets.register()
 class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
@@ -28,11 +28,11 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
     # JavaScript object
     _view_name = Unicode('FigureView').tag(sync=True)
     _view_module = Unicode('plotlywidget').tag(sync=True)
-    _view_module_version = Unicode('0.1.0').tag(sync=True)
+    _view_module_version = Unicode(__frontend_version__).tag(sync=True)
 
     _model_name = Unicode('FigureModel').tag(sync=True)
     _model_module = Unicode('plotlywidget').tag(sync=True)
-    _model_module_version = Unicode('0.1.0').tag(sync=True)
+    _model_module_version = Unicode(__frontend_version__).tag(sync=True)
 
     # ### _data and _layout ###
     # These properties store the current state of the traces and
