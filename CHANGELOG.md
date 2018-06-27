@@ -2,6 +2,78 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 3.0.0rc10 [27-06-2018]
+### Added
+- Full Jupyter integration - run `help(go.FigureWidget)` for more information
+- update traces interactively
+- Traces can be added and updated interactively by simply assigning to properties
+- The full Traces and Layout API is generated from the plotly schema to provide a great experience for interactive use in the notebook
+- Support for setting array properties as numpy arrays. When numpy arrays are used, ipywidgets binary serialization protocol is used to avoid converting these to JSON strings.
+- Context manager API for animation. Run `help(go.Figure().batch_animate)` for the full doc string.
+- New `__repr__` for `Figure` and `graph_objs` objects
+
+### Removed
+- Removed `.to_string`, `.strip_style`, `.get_data`, `.validate` and `.to_dataframe` methods from `plotly.graph_objs` objects. For example run `dir(plotly.graph_objs.Scatter)` to get all the (magic) methods of the Scatter class.
+
+- graph objects no longer support the `_raise` parameter. They are always validated and always raise an exception on validation failures. It is still possible to pass a dict to `plot/iplot` with `validate=False` to bypass validation.
+
+### Changed
+- Improved data validation covering the full API with clear, informative error messages. This means that incorrect properties and/or values now always raise a `ValueError` with a description of the error, the invalid property, and the available properties on the level that it was placed in the graph object. Eg. `go.Scatter(foo=123)` raises a validation error. See https://plot.ly/python/reference/ for a reference to all valid properties and values in the Python API.
+
+- Graph objs are no longer dicts, though they still provide many dict-like magic methods. Running a cell of a graph object now prints a dict-style representation of the object:
+
+Eg. `plotly.graph_objs.Scatter()` prints
+
+```
+Scatter({
+    'type': 'scatter'
+})
+```
+
+- plotly objects now have a `.to_plotly_json` method that changes the representation of the plotly object to JSON:
+
+Eg. `go.Scatter().to_plotly_json()` returns `{'type': 'scatter'}`
+
+- Object arrays (`Figure.data`, `Layout.images`, `Parcoords.dimensions`, etc.) are now represented as tuples of graph objects, not lists.
+
+- Data array properties may not be specified as scalars. For example `go.Scatter(x=1, y=2)` should be replaced by `go.Scatter(x=[1], y=[2])`
+
+-  Assignment to the `Figure.data` property must contain a permutation of a subset of the existing traces. Assignment can be used to reorder and remove traces, but cannot currently add new traces.
+
+
+### Deprecated
+- all graph objects must now be written using their full path. For example if one wants to customize the marker param in a scatter object, write `plotly.graph_objs.scatter.Marker` instead of `plotly.graph_objs.Marker`. If the marker object lives in a `plotly.graph_objs.Scatter()` object then a deprecated message will appear. Similarly
+
+```
+import plotly.graph_objs as go
+go.Scatter(
+    x=[0],
+    y=[0],
+    marker=go.Marker(
+        color='rgb(255,45,15)'
+    )
+)
+```
+
+produces a deprecation warning but
+
+```
+import plotly.graph_objs as go
+go.Scatter(
+    x=[0],
+    y=[0],
+    marker=go.scatter.Marker(
+        color='rgb(255,45,15)'
+    )
+)
+```
+
+does not.
+
+- `go.Data()` is deprecated. Use a list or array `[]` instead.
+
+- The `.append_trace` method is deprecated. Use `add_trace` or `.add_traces` with the `row` and `col` parameters.
+
 ## [2.7.1] - [UNRELEASED]
 ### Updated
 - error message for `plotly.figure_factory.create_choropleth` is now helpful to Anaconda users who do not have the correct modules installed for the County Choropleth figure factory.
