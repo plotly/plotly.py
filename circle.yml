@@ -12,7 +12,7 @@ machine:
 
   node:
     # use a pre-installed version of node so we don't need to download it.
-    version: 4.2.2
+    version: 6.0.0
 
 dependencies:
 
@@ -52,5 +52,19 @@ test:
     - sudo chmod -R 444 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
 
     # test that giving back write permissions works again
-    # this also has to pass the test suite that follows
     - sudo chmod -R 777 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
+
+    # test that figure_factory cannot be imported with only core requirements.
+    # since optional requirements is part of the test suite, we don't need to
+    # worry about testing that it *can* be imported in this case.
+    - $(! python -c "import plotly.figure_factory")
+
+    # test the distribution and a basic import
+    - rm -rf dist/ &&
+      python setup.py sdist &&
+      mkdir test_install &&
+      cd test_install &&
+      virtualenv venv &&
+      source venv/bin/activate &&
+      pip install ../dist/* &&
+      python -c "import plotly"

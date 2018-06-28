@@ -2,15 +2,15 @@
 Module to allow Plotly graphs to interact with IPython widgets.
 
 """
-import json
 import uuid
 from collections import deque
 from pkg_resources import resource_string
 
+from requests.compat import json as _json
 
 # TODO: protected imports?
-from IPython.html import widgets
-from IPython.utils.traitlets import Unicode
+import ipywidgets as widgets
+from traitlets import Unicode
 from IPython.display import Javascript, display
 
 import plotly.plotly.plotly as py
@@ -33,6 +33,7 @@ class GraphWidget(widgets.DOMWidget):
     Notebooks.
     """
     _view_name = Unicode('GraphView', sync=True)
+    _view_module = Unicode('graphWidget', sync=True)
     _message = Unicode(sync=True)
     _graph_url = Unicode(sync=True)
     _new_url = Unicode(sync=True)
@@ -93,7 +94,7 @@ class GraphWidget(widgets.DOMWidget):
             while self._clientMessages:
                 _message = self._clientMessages.popleft()
                 _message['graphId'] = self._graphId
-                _message = json.dumps(_message)
+                _message = _json.dumps(_message)
                 self._message = _message
 
         if content.get('event', '') in ['click', 'hover', 'zoom']:
@@ -131,7 +132,7 @@ class GraphWidget(widgets.DOMWidget):
         else:
             message['graphId'] = self._graphId
             message['uid'] = str(uuid.uuid4())
-            self._message = json.dumps(message, cls=utils.PlotlyJSONEncoder)
+            self._message = _json.dumps(message, cls=utils.PlotlyJSONEncoder)
 
     def on_click(self, callback, remove=False):
         """ Assign a callback to click events propagated

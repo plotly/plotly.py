@@ -12,8 +12,9 @@ numpy
 # matplotlib==1.3.1
 
 ## testing dependencies ##
-nose
-coverage
+coverage==4.3.1
+mock==2.0.0
+nose==1.3.3
 
 ## ipython ##
 ipython
@@ -27,3 +28,8 @@ scipy
 ## jupyter ##
 jupyter
 ipykernel
+
+## deps for _county_choropleth.py figure factory
+pyshp
+geopandas
+shapely

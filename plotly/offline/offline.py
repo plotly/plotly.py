@@ -5,7 +5,6 @@
 """
 from __future__ import absolute_import
 
-import json
 import os
 import uuid
 import warnings
@@ -13,22 +12,15 @@ from pkg_resources import resource_string
 import time
 import webbrowser
 
+from requests.compat import json as _json
+
 import plotly
-from plotly import tools, utils
+from plotly import optional_imports, tools, utils
 from plotly.exceptions import PlotlyError
 
-try:
-    import IPython
-    from IPython.display import HTML, display
-    _ipython_imported = True
-except ImportError:
-    _ipython_imported = False
-
-try:
-    import matplotlib
-    _matplotlib_imported = True
-except ImportError:
-    _matplotlib_imported = False
+ipython = optional_imports.get_module('IPython')
+ipython_display = optional_imports.get_module('IPython.display')
+matplotlib = optional_imports.get_module('matplotlib')
 
 __PLOTLY_OFFLINE_INITIALIZED = False
 
@@ -111,7 +103,7 @@ def init_notebook_mode(connected=False):
     your notebook, resulting in much larger notebook sizes compared to the case
     where `connected=True`.
     """
-    if not _ipython_imported:
+    if not ipython:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
     global __PLOTLY_OFFLINE_INITIALIZED
@@ -148,7 +140,11 @@ def init_notebook_mode(connected=False):
             '</script>'
             '').format(script=get_plotlyjs())
 
-    display(HTML(script_inject))
+    display_bundle = {
+        'text/html': script_inject,
+        'text/vnd.plotly.v1+html': script_inject
+    }
+    ipython_display.display(display_bundle, raw=True)
     __PLOTLY_OFFLINE_INITIALIZED = True
 
 
@@ -183,10 +179,12 @@ def _plot_html(figure_or_data, config, validate, default_width,
         height = str(height) + 'px'
 
     plotdivid = uuid.uuid4()
-    jdata = json.dumps(figure.get('data', []), cls=utils.PlotlyJSONEncoder)
-    jlayout = json.dumps(figure.get('layout', {}), cls=utils.PlotlyJSONEncoder)
+    jdata = _json.dumps(figure.get('data', []), cls=utils.PlotlyJSONEncoder)
+    jlayout = _json.dumps(figure.get('layout', {}),
+                          cls=utils.PlotlyJSONEncoder)
     if 'frames' in figure_or_data:
-        jframes = json.dumps(figure.get('frames', {}), cls=utils.PlotlyJSONEncoder)
+        jframes = _json.dumps(figure.get('frames', {}),
+                              cls=utils.PlotlyJSONEncoder)
 
     configkeys = (
         'editable',
@@ -211,7 +209,7 @@ def _plot_html(figure_or_data, config, validate, default_width,
     )
 
     config_clean = dict((k, config[k]) for k in configkeys if k in config)
-    jconfig = json.dumps(config_clean)
+    jconfig = _json.dumps(config_clean)
 
     # TODO: The get_config 'source of truth' should
     # really be somewhere other than plotly.plotly
@@ -277,9 +275,9 @@ def _plot_html(figure_or_data, config, validate, default_width,
 
 def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
           validate=True, image=None, filename='plot_image', image_width=800,
-          image_height=600):
+          image_height=600, config=None):
     """
-    Draw plotly graphs inside an IPython notebook without
+    Draw plotly graphs inside an IPython or Jupyter notebook without
     connecting to an external server.
     To save the chart to Plotly Cloud or Plotly Enterprise, use
     `plotly.plotly.iplot`.
@@ -310,6 +308,9 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         will be saved to. The extension should not be included.
     image_height (default=600) -- Specifies the height of the image in `px`.
     image_width (default=800) -- Specifies the width of the image in `px`.
+    config (default=None) -- Plot view options dictionary. Keyword arguments
+        `show_link` and `link_text` set the associated options in this
+        dictionary if it doesn't contain them already.
 
     Example:
     ```
@@ -321,29 +322,50 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     iplot([{'x': [1, 2, 3], 'y': [5, 2, 7]}], image='png')
     ```
     """
-    if not __PLOTLY_OFFLINE_INITIALIZED:
-        raise PlotlyError('\n'.join([
-            'Plotly Offline mode has not been initialized in this notebook. '
-            'Run: ',
-            '',
-            'import plotly',
-            'plotly.offline.init_notebook_mode() '
-            '# run at the start of every ipython notebook',
-        ]))
-    if not tools._ipython_imported:
+    if not ipython:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
-    config = {}
-    config['showLink'] = show_link
-    config['linkText'] = link_text
+    config = dict(config) if config else {}
+    config.setdefault('showLink', show_link)
+    config.setdefault('linkText', link_text)
 
-    plot_html, plotdivid, width, height = _plot_html(
-        figure_or_data, config, validate, '100%', 525, True
-    )
+    figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
 
-    display(HTML(plot_html))
+    # Though it can add quite a bit to the display-bundle size, we include
+    # multiple representations of the plot so that the display environment can
+    # choose which one to act on.
+    data = _json.loads(_json.dumps(figure['data'],
+                                   cls=plotly.utils.PlotlyJSONEncoder))
+    layout = _json.loads(_json.dumps(figure.get('layout', {}),
+                                     cls=plotly.utils.PlotlyJSONEncoder))
+    frames = _json.loads(_json.dumps(figure.get('frames', None),
+                                     cls=plotly.utils.PlotlyJSONEncoder))
+
+    fig = {'data': data, 'layout': layout}
+    if frames:
+        fig['frames'] = frames
+
+    display_bundle = {'application/vnd.plotly.v1+json': fig}
+
+    if __PLOTLY_OFFLINE_INITIALIZED:
+        plot_html, plotdivid, width, height = _plot_html(
+            figure_or_data, config, validate, '100%', 525, True
+        )
+        display_bundle['text/html'] = plot_html
+        display_bundle['text/vnd.plotly.v1+html'] = plot_html
+
+    ipython_display.display(display_bundle, raw=True)
 
     if image:
+        if not __PLOTLY_OFFLINE_INITIALIZED:
+            raise PlotlyError('\n'.join([
+                'Plotly Offline mode has not been initialized in this notebook. '
+                'Run: ',
+                '',
+                'import plotly',
+                'plotly.offline.init_notebook_mode() '
+                '# run at the start of every ipython notebook',
+            ]))
         if image not in __IMAGE_FORMATS:
             raise ValueError('The image parameter must be one of the following'
                              ': {}'.format(__IMAGE_FORMATS)
@@ -357,13 +379,14 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         # allow time for the plot to draw
         time.sleep(1)
         # inject code to download an image of the plot
-        display(HTML(script))
+        ipython_display.display(ipython_display.HTML(script))
 
 
 def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
          validate=True, output_type='file', include_plotlyjs=True,
          filename='temp-plot.html', auto_open=True, image=None,
-         image_filename='plot_image', image_width=800, image_height=600):
+         image_filename='plot_image', image_width=800, image_height=600,
+         config=None):
     """ Create a plotly graph locally as an HTML document or string.
 
     Example:
@@ -423,6 +446,9 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         image will be saved to. The extension should not be included.
     image_height (default=600) -- Specifies the height of the image in `px`.
     image_width (default=800) -- Specifies the width of the image in `px`.
+    config (default=None) -- Plot view options dictionary. Keyword arguments
+        `show_link` and `link_text` set the associated options in this
+        dictionary if it doesn't contain them already.
     """
     if output_type not in ['div', 'file']:
         raise ValueError(
@@ -434,9 +460,9 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
             "Adding .html to the end of your file.")
         filename += '.html'
 
-    config = {}
-    config['showLink'] = show_link
-    config['linkText'] = link_text
+    config = dict(config) if config else {}
+    config.setdefault('showLink', show_link)
+    config.setdefault('linkText', link_text)
 
     plot_html, plotdivid, width, height = _plot_html(
         figure_or_data, config, validate,
@@ -447,7 +473,6 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         resize_script = (
             ''
             '<script type="text/javascript">'
-            'window.removeEventListener("resize");'
             'window.addEventListener("resize", function(){{'
             'Plotly.Plots.resize(document.getElementById("{id}"));}});'
             '</script>'
@@ -505,7 +530,8 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                 get_plotlyjs(),
                 '</script>',
                 plot_html,
-                '</div>'
+                resize_script,
+                '</div>',
             ])
         else:
             return plot_html
@@ -687,7 +713,7 @@ def enable_mpl_offline(resize=False, strip_style=False,
     """
     init_notebook_mode()
 
-    ip = IPython.core.getipython.get_ipython()
+    ip = ipython.core.getipython.get_ipython()
     formatter = ip.display_formatter.formatters['text/html']
     formatter.for_type(matplotlib.figure.Figure,
                        lambda fig: iplot_mpl(fig, resize, strip_style, verbose,

@@ -7,30 +7,27 @@ A module intended for use with Nose.
 """
 from __future__ import absolute_import
 
-import json
 import requests
 import six
+from requests.compat import json as _json
 
-from unittest import TestCase
+from mock import patch
 from nose.plugins.attrib import attr
-from nose.tools import raises
 
 import plotly.tools as tls
+from plotly import session
 from plotly.tests.utils import PlotlyTestCase
 from plotly.plotly import plotly as py
 from plotly.exceptions import PlotlyError, PlotlyEmptyDataError
 from plotly.files import CONFIG_FILE
 
-# username for tests: 'PlotlyImageTest'
-# api_key for account: '786r5mecv0'
 
+class TestPlot(PlotlyTestCase):
 
-class TestPlot(TestCase):
     def setUp(self):
-        py.sign_in('PlotlyImageTest', '786r5mecv0',
-                   plotly_domain='https://plot.ly')
-        self.simple_figure = {'data': [{'x': [1, 2, 3], 'y': [2, 1, 2]}]}
         super(TestPlot, self).setUp()
+        py.sign_in('PlotlyImageTest', '786r5mecv0')
+        self.simple_figure = {'data': [{'x': [1, 2, 3], 'y': [2, 1, 2]}]}
 
     @attr('slow')
     def test_plot_valid(self):
@@ -40,11 +37,15 @@ class TestPlot(TestCase):
                     'x': [1, 2, 3],
                     'y': [2, 1, 2]
                 }
-            ]
+            ],
+            'layout': {'title': 'simple'}
         }
-        py.plot(fig, auto_open=False, filename='plot_valid')
+        url = py.plot(fig, auto_open=False, filename='plot_valid')
+        saved_fig = py.get_figure(url)
+        self.assertEqual(saved_fig['data'][0]['x'], fig['data'][0]['x'])
+        self.assertEqual(saved_fig['data'][0]['y'], fig['data'][0]['y'])
+        self.assertEqual(saved_fig['layout']['title'], fig['layout']['title'])
 
-    @raises(PlotlyError)
     def test_plot_invalid(self):
         fig = {
             'data': [
@@ -55,15 +56,18 @@ class TestPlot(TestCase):
                 }
             ]
         }
-        py.plot(fig, auto_open=False, filename='plot_invalid')
+        with self.assertRaises(PlotlyError):
+            py.plot(fig, auto_open=False, filename='plot_invalid')
 
-    @raises(TypeError)
     def test_plot_invalid_args_1(self):
-        py.plot(x=[1, 2, 3], y=[2, 1, 2], auto_open=False, filename='plot_invalid')
+        with self.assertRaises(TypeError):
+            py.plot(x=[1, 2, 3], y=[2, 1, 2], auto_open=False,
+                    filename='plot_invalid')
 
-    @raises(PlotlyError)
     def test_plot_invalid_args_2(self):
-        py.plot([1, 2, 3], [2, 1, 2], auto_open=False, filename='plot_invalid')
+        with self.assertRaises(PlotlyError):
+            py.plot([1, 2, 3], [2, 1, 2], auto_open=False,
+                    filename='plot_invalid')
 
     def test_plot_empty_data(self):
         self.assertRaises(PlotlyEmptyDataError, py.plot, [],
@@ -223,6 +227,20 @@ class TestPlotOptionLogic(PlotlyTestCase):
         {'world_readable': False, 'sharing': 'public'}
     )
 
+    def setUp(self):
+        super(TestPlotOptionLogic, self).setUp()
+
+        # Make sure we don't hit sign-in validation failures.
+        patcher = patch('plotly.api.v2.users.current')
+        self.users_current_mock = patcher.start()
+        self.addCleanup(patcher.stop)
+
+        # Some tests specifically check how *file-level* plot options alter
+        # plot option logic. In order not to re-write that, we simply clear the
+        # *session* information since it would take precedent. The _session is
+        # set when you `sign_in`.
+        session._session['plot_options'].clear()
+
     def test_default_options(self):
         options = py._plot_option_logic({})
         config_options = tls.get_config_file()
@@ -296,10 +314,10 @@ def generate_conflicting_plot_options_with_json_writes_of_config():
     """
     def gen_test(plot_options):
         def test(self):
-            config = json.load(open(CONFIG_FILE))
+            config = _json.load(open(CONFIG_FILE))
             with open(CONFIG_FILE, 'w') as f:
                 config.update(plot_options)
-                f.write(json.dumps(config))
+                f.write(_json.dumps(config))
             self.assertRaises(PlotlyError, py._plot_option_logic, {})
         return test
 

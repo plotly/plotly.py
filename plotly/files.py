@@ -21,16 +21,19 @@ FILE_CONTENT = {CREDENTIALS_FILE: {'username': '',
                               'sharing': 'public',
                               'auto_open': True}}
 
-try:
-    if not os.path.exists(PLOTLY_DIR):
-        os.mkdir(PLOTLY_DIR)
-    f = open(TEST_FILE, 'w')
-    f.write('testing\n')
-    f.close()
-    os.remove(TEST_FILE)
-    _file_permissions = True
-except:
-    _file_permissions = False
+def _permissions():
+    try:
+        if not os.path.exists(PLOTLY_DIR):
+            os.mkdir(PLOTLY_DIR)
+        with open(TEST_FILE, 'w') as f:
+            f.write('testing\n')
+        os.remove(TEST_FILE)
+        return True
+    except:
+        return False
+
+
+_file_permissions = _permissions()
 
 
 def check_file_permissions():

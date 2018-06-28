@@ -1,5 +1,4 @@
 import copy
-import json
 from numbers import Number as Num
 from unittest import TestCase
 
@@ -28,6 +27,9 @@ class PlotlyTestCase(TestCase):
     def setUp(self):
         self.stash_session()
         self.stash_files()
+        defaults = dict(files.FILE_CONTENT[files.CREDENTIALS_FILE],
+                        **files.FILE_CONTENT[files.CONFIG_FILE])
+        session.sign_in(**defaults)
 
     def tearDown(self):
         self.restore_files()
