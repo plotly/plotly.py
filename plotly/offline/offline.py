@@ -205,7 +205,8 @@ def _plot_html(figure_or_data, config, validate, default_width,
         'displaylogo',
         'plotGlPixelRatio',
         'setBackground',
-        'topojsonURL'
+        'topojsonURL',
+        'toImageButtonOptions'
     )
 
     config_clean = dict((k, config[k]) for k in configkeys if k in config)
