@@ -28,13 +28,14 @@ f
 ```
 
 ## New Plotly Object Representation
-Plotly figures and objects now display a clean representation of the dict-like hierarchy of their structure. They also includes the dict-like `__repr__` method that represents the object as a string
+Plotly figures and graph objects have an updated `__repr__` method that displays objects in a pretty printed form that can be copied, pasted, and evaluated to recreate the object.
 
-Eg. `plotly.graph_objs.Scatter()` prints
+Eg. `print(f)` returns
 
 ```
-Scatter({
-    'type': 'scatter'
+FigureWidget({
+    'data': [{'type': 'scatter', 'uid': '07968b11-7b0a-11e8-ba67-c869cda04ed6', 'x': [1, 2, 3], 'y': [4, 3, 2]}],
+    'layout': {}
 })
 ```
 
@@ -56,7 +57,7 @@ It's not valid because it's introducing a new trace during assignment. This trac
 
 
 ## FigureWidget Subplot Example
-Let's create a subplot then turn it into a FigureWidget to display in the notebook. Note that `append_trace` is no deprecated. Use `add_trace` or `add_traces` instead.
+Let's create a subplot then turn it into a FigureWidget to display in the notebook. Note that `append_trace` is now deprecated. Use `add_trace` or `add_traces` instead.
 
 ```
 import plotly
@@ -77,7 +78,7 @@ f2.layout.title = 'Age against variables relating to diabetes'
 f2
 ```
 
-## What doesn't work anymore
+## Breaking Changes
 Run the following examples to see what is now deprecated or not valid:
 
 - Data array properties may not be specified as scalars:
@@ -86,7 +87,7 @@ import plotly.graph_objs as go
 go.Bar(x=1)
 ```
 
-- Undocumented properties are no longer available. These include: `.to_string`, `.strip_style`, `.get_data`, `.validate` and `.to_dataframe`.
+- Several undocumented `Figure` methods have been removed. These include: `.to_string`, `.strip_style`, `.get_data`, `.validate` and `.to_dataframe`.
 
 - Object arrays such as `Figure.data` and `Layout.images` are now represented as tuples of graph objects, not lists. Run the following as a sanity check:
 
