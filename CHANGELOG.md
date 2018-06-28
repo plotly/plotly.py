@@ -20,7 +20,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - Improved data validation covering the full API with clear, informative error messages. This means that incorrect properties and/or values now always raise a `ValueError` with a description of the error, the invalid property, and the available properties on the level that it was placed in the graph object. Eg. `go.Scatter(foo=123)` raises a validation error. See https://plot.ly/python/reference/ for a reference to all valid properties and values in the Python API.
 
-- Graph objs are no longer dicts, though they still provide many dict-like magic methods. Running a cell of a graph object now prints a dict-style representation of the object:
+- Graph objects are no longer dicts, though they still provide many dict-like magic methods. Running a cell of a graph object now prints a dict-style representation of the object:
 
 Eg. `plotly.graph_objs.Scatter()` prints
 
