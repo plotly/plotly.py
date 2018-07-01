@@ -3647,14 +3647,13 @@ class BaseTraceType(BaseTraceHierarchyType):
     def on_hover(self,
                  callback,
                  append=False):
-        # typ.Callable[['BaseTraceType', Points, InputDeviceState], None]
         """
         Register function to be called when the user hovers over one or more
         points in this trace
 
         Note: Callbacks will only be triggered when the trace belongs to a
         instance of plotly.graph_objs.FigureWidget and it is displayed in an
-        ipywidget context. Callbacks will not be triggered when on figures
+        ipywidget context. Callbacks will not be triggered on figures
         that are displayed using plot/iplot.
 
         Parameters
@@ -3675,6 +3674,21 @@ class BaseTraceType(BaseTraceHierarchyType):
         Returns
         -------
         None
+
+        Examples
+        --------
+        >>> from plotly.callbacks import Points, InputDeviceState
+        >>> points, state = Points(), InputDeviceState()
+
+        >>> def hover_fn(trace, points, state):
+        ...     inds = points.point_inds
+        ...     # Do something
+
+        >>> trace.on_hover(hover_fn)
+
+        Note: The creation of the `points` and `state` objects is optional,
+        it's simply a convenience to help the text editor perform completion
+        on the arguments inside `hover_fn`
         """
         if not append:
             del self._hover_callbacks[:]
@@ -3700,7 +3714,7 @@ class BaseTraceType(BaseTraceHierarchyType):
 
         Note: Callbacks will only be triggered when the trace belongs to a
         instance of plotly.graph_objs.FigureWidget and it is displayed in an
-        ipywidget context. Callbacks will not be triggered when on figures
+        ipywidget context. Callbacks will not be triggered on figures
         that are displayed using plot/iplot.
 
         Parameters
@@ -3721,6 +3735,21 @@ class BaseTraceType(BaseTraceHierarchyType):
         Returns
         -------
         None
+
+        Examples
+        --------
+        >>> from plotly.callbacks import Points, InputDeviceState
+        >>> points, state = Points(), InputDeviceState()
+
+        >>> def unhover_fn(trace, points, state):
+        ...     inds = points.point_inds
+        ...     # Do something
+
+        >>> trace.on_unhover(unhover_fn)
+
+        Note: The creation of the `points` and `state` objects is optional,
+        it's simply a convenience to help the text editor perform completion
+        on the arguments inside `unhover_fn`
         """
         if not append:
             del self._unhover_callbacks[:]
@@ -3746,7 +3775,7 @@ class BaseTraceType(BaseTraceHierarchyType):
 
         Note: Callbacks will only be triggered when the trace belongs to a
         instance of plotly.graph_objs.FigureWidget and it is displayed in an
-        ipywidget context. Callbacks will not be triggered when on figures
+        ipywidget context. Callbacks will not be triggered on figures
         that are displayed using plot/iplot.
 
         Parameters
@@ -3767,6 +3796,21 @@ class BaseTraceType(BaseTraceHierarchyType):
         Returns
         -------
         None
+
+        Examples
+        --------
+        >>> from plotly.callbacks import Points, InputDeviceState
+        >>> points, state = Points(), InputDeviceState()
+
+        >>> def click_fn(trace, points, state):
+        ...     inds = points.point_inds
+        ...     # Do something
+
+        >>> trace.on_click(click_fn)
+
+        Note: The creation of the `points` and `state` objects is optional,
+        it's simply a convenience to help the text editor perform completion
+        on the arguments inside `click_fn`
         """
         if not append:
             del self._click_callbacks[:]
@@ -3792,7 +3836,7 @@ class BaseTraceType(BaseTraceHierarchyType):
 
         Note: Callbacks will only be triggered when the trace belongs to a
         instance of plotly.graph_objs.FigureWidget and it is displayed in an
-        ipywidget context. Callbacks will not be triggered when on figures
+        ipywidget context. Callbacks will not be triggered on figures
         that are displayed using plot/iplot.
 
         Parameters
