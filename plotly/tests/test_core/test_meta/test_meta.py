@@ -26,7 +26,7 @@ class MetaTest(PlotlyTestCase):
 
     def setUp(self):
         super(MetaTest, self).setUp()
-        py.sign_in('PythonTest', '9v9f20pext')
+        py.sign_in('PythonTest', 'xnyU0DEwvAQQCwHVseIL')
 
     def random_filename(self):
         random_chars = [random.choice(string.ascii_uppercase) for _ in range(5)]
