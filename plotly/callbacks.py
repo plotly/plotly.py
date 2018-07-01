@@ -127,9 +127,9 @@ InputDeviceState(
 class Points:
 
     def __init__(self,
-                 point_inds=None,
-                 xs=None,
-                 ys=None,
+                 point_inds=[],
+                 xs=[],
+                 ys=[],
                  trace_name=None,
                  trace_index=None):
 
