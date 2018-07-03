@@ -27,15 +27,37 @@ f.add_scatter(x=[1,2,3], y=[4,3,2])
 f
 ```
 
-## New __repr__ method
-plotly figures and graph objects now include the dict-like `__repr__` method that represents the object as a string
+## New Plotly Object Representation
+Plotly figures and graph objects have an updated `__repr__` method that displays objects in a pretty printed form that can be copied, pasted, and evaluated to recreate the object.
+
+Eg. `print(f)` returns
 
 ```
-f.__repr__()
+FigureWidget({
+    'data': [{'type': 'scatter', 'uid': '07968b11-7b0a-11e8-ba67-c869cda04ed6', 'x': [1, 2, 3], 'y': [4, 3, 2]}],
+    'layout': {}
+})
 ```
+
+## New Figure.data Assignment
+- Assignment to the `Figure.data` property must contain a permutation of a subset of the existing traces. Assignment can be used to reorder and remove traces, but cannot currently add new traces.
+
+Suppose a figure, fig, has 3 traces. The following command is valid and it will move the third trace to be the first, the first trace to be the second, and it will remove the second trace.
+
+```
+fig.data = [fig.data[2], fig.data[0]]
+```
+
+However this is not valid:
+```
+fig.data = [fig.data[0], go.Scatter(y=[2, 3, 1])]
+```
+
+It's not valid because it's introducing a new trace during assignment. This trace would need to be added using `add_trace` instead.
+
 
 ## FigureWidget Subplot Example
-Let's create a subplot then turn it into a FigureWidget to display in the notebook. Note that `append_trace` is no deprecated. Use `add_trace` or `add_traces` instead.
+Let's create a subplot then turn it into a FigureWidget to display in the notebook. Note that `append_trace` is now deprecated. Use `add_trace` or `add_traces` instead.
 
 ```
 import plotly
@@ -56,7 +78,7 @@ f2.layout.title = 'Age against variables relating to diabetes'
 f2
 ```
 
-## What doesn't work anymore
+## Breaking Changes
 Run the following examples to see what is now deprecated or not valid:
 
 - Data array properties may not be specified as scalars:
@@ -65,7 +87,7 @@ import plotly.graph_objs as go
 go.Bar(x=1)
 ```
 
-- Undocumented properties are no longer available. These include: `.to_string`, `.strip_style`, `.get_data`, `.validate` and `.to_dataframe`.
+- Several undocumented `Figure` methods have been removed. These include: `.to_string`, `.strip_style`, `.get_data`, `.validate` and `.to_dataframe`.
 
 - Object arrays such as `Figure.data` and `Layout.images` are now represented as tuples of graph objects, not lists. Run the following as a sanity check:
 

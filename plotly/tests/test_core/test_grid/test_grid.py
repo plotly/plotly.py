@@ -38,7 +38,7 @@ class GridTest(PlotlyTestCase):
 
     def setUp(self):
         super(GridTest, self).setUp()
-        py.sign_in('PythonTest', '9v9f20pext')
+        py.sign_in('PythonTest', 'xnyU0DEwvAQQCwHVseIL')
 
     def get_grid(self):
         c1 = Column([1, 2, 3, 4], 'first column')
