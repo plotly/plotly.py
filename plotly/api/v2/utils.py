@@ -93,7 +93,7 @@ def get_headers():
     creds = config.get_credentials()
 
     headers = {
-        'plotly-client-platform': 'python {}'.format(version.__version__),
+        'plotly-client-platform': 'python {}'.format(version.stable_semver()),
         'content-type': 'application/json'
     }
 
