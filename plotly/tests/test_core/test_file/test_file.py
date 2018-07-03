@@ -20,7 +20,7 @@ class FolderAPITestCase(PlotlyTestCase):
 
     def setUp(self):
         super(FolderAPITestCase, self).setUp()
-        py.sign_in('PythonTest', '9v9f20pext')
+        py.sign_in('PythonTest', 'xnyU0DEwvAQQCwHVseIL')
 
     def _random_filename(self):
         choice_chars = string.ascii_letters + string.digits
