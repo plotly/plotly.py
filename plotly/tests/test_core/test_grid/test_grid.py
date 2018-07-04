@@ -178,4 +178,6 @@ class GridTest(PlotlyTestCase):
         try:
             py.grid_ops.upload(g, unique_filename, auto_open=False)
         except PlotlyRequestError as e:
-            assert(e.status_code == 409)
+            pass
+        else:
+            self.fail('Expected this to fail!')
