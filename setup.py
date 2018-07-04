@@ -278,6 +278,7 @@ setup(name='plotly',
                         'nbformat>=4.2',
                         'pytz',
                         'requests',
+                        'retrying>=1.3.3',
                         'six'],
       zip_safe=False,
       cmdclass={
