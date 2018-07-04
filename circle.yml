@@ -20,7 +20,8 @@ dependencies:
 
     # install everything tox knows about and the plotly package.
     - pip install tox
-    - tox --notest
+    - tox --notest:
+      timeout: 1200
     - pip install -I .
 
     # we need to cd out of the project root to ensure the install worked
