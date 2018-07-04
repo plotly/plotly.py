@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 3.0.0rc11 [04-07-2018]
+### Added
+ - Perform automatic retries when communicating with plot.ly services. This introduces a new required dependency on the [retrying](https://pypi.org/project/retrying/) library.
+
+### Fixed
+ - Unable to sign in to plot.ly ([#1044](https://github.com/plotly/plotly.py/issues/1044))
+
 ## 3.0.0rc10 [27-06-2018]
 ### Added
 - Full Jupyter integration - run `help(go.FigureWidget)` for more information
