@@ -1,0 +1,16 @@
+import _plotly_utils.basevalidators
+
+
+class YrefValidator(_plotly_utils.basevalidators.EnumeratedValidator):
+
+    def __init__(
+        self, plotly_name='yref', parent_name='layout.annotation', **kwargs
+    ):
+        super(YrefValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type='calc',
+            role='info',
+            values=['paper', '/^y([2-9]|[1-9][0-9]+)?$/'],
+            **kwargs
+        )

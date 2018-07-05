@@ -112,6 +112,25 @@ To install the optional dependencies:
 pip install -r optional-requirements.txt
 ```
 
+## ipywidget development install
+    $ jupyter nbextension enable --py widgetsnbextension
+    $ jupyter nbextension install --py --symlink --sys-prefix plotlywidget
+    $ jupyter nbextension enable --py --sys-prefix plotlywidget
+
+## Update to a new version of Plotly.js
+First update the version of the `plotly.js` dependency in `js/package.json`.
+
+Then run the `updateplotlyjs` command with:
+
+```bash
+$ python setup.py updateplotlyjs
+```
+
+This will download new versions of `plot-schema.json` and `plotly.min.js` from 
+the `plotly/plotly.js` GitHub repository (and place them in 
+`plotly/package_data`). It will then regenerate all of the `graph_objs`
+classes based on the new schema.
+
 ## Testing
 
 We take advantage of two tools to run tests:
@@ -215,6 +234,13 @@ $ pip install plotly --upgrade
 And ask one of your friends to do it too. Our tests should catch any issues, but you never know.
 
 <3 Team Plotly
+
+#### Publish widget library to npm
+
+```bash
+cd ./js
+npm publish --access public
+```
 
 # Contributing to the Figure Factories
 If you are interested in contributing to the ever-growing Plotly figure factory library in Python, check out the [documentation](https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/README.md) to learn how.

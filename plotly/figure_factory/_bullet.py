@@ -56,8 +56,8 @@ def _bullet(df, markers, measures, ranges, subtitles, titles, orientation,
         width_axis = 'xaxis'
         length_axis = 'yaxis'
 
-    for key in fig['layout'].keys():
-        if 'axis' in key:
+    for key in fig['layout']:
+        if 'xaxis' in key or 'yaxis' in key:
             fig['layout'][key]['showgrid'] = False
             fig['layout'][key]['zeroline'] = False
         if length_axis in key:
@@ -100,7 +100,7 @@ def _bullet(df, markers, measures, ranges, subtitles, titles, orientation,
                 xaxis='x{}'.format(row + 1),
                 yaxis='y{}'.format(row + 1)
             )
-            fig['data'].append(bar)
+            fig.add_trace(bar)
 
         # measures bars
         for idx in range(len(df.iloc[row]['measures'])):
@@ -126,7 +126,7 @@ def _bullet(df, markers, measures, ranges, subtitles, titles, orientation,
                 xaxis='x{}'.format(row + 1),
                 yaxis='y{}'.format(row + 1)
             )
-            fig['data'].append(bar)
+            fig.add_trace(bar)
 
         # markers
         x = df.iloc[row]['markers'] if orientation == 'h' else [0.5]
@@ -141,7 +141,7 @@ def _bullet(df, markers, measures, ranges, subtitles, titles, orientation,
             **scatter_options
         )
 
-        fig['data'].append(markers)
+        fig.add_trace(markers)
 
         # titles and subtitles
         title = df.iloc[row]['titles']
@@ -159,7 +159,7 @@ def _bullet(df, markers, measures, ranges, subtitles, titles, orientation,
             True if orientation == 'h' else False,
             False
         )
-        fig['layout']['annotations'].append(annot)
+        fig['layout']['annotations'] += (annot,)
 
     return fig
 

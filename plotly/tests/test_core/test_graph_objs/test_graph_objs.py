@@ -6,9 +6,9 @@ import plotly.graph_reference as gr
 OLD_CLASS_NAMES = ['AngularAxis', 'Annotation', 'Annotations', 'Area',
                    'Bar', 'Box', 'ColorBar', 'Contour', 'Contours',
                    'Data', 'ErrorX', 'ErrorY', 'ErrorZ', 'Figure',
-                   'Font', 'Frames', 'Heatmap', 'Histogram', 'Histogram2d',
-                   'Histogram2dContour', 'Layout', 'Legend', 'Line',
-                   'Margin', 'Marker', 'RadialAxis', 'Scatter',
+                   'Font', 'Frame', 'Frames', 'Heatmap', 'Histogram',
+                   'Histogram2d', 'Histogram2dContour', 'Layout', 'Legend',
+                   'Line', 'Margin', 'Marker', 'RadialAxis', 'Scatter',
                    'Scatter3d', 'Scene', 'Stream', 'Surface', 'Trace',
                    'XAxis', 'XBins', 'YAxis', 'YBins', 'ZAxis']
 
@@ -46,4 +46,6 @@ class TestGraphObjs(TestCase):
         # assume that CapitalCased keys are the classes we defined
         current_class_names = {key for key in go.__dict__.keys()
                                if key[0].isupper()}
+        if 'FigureWidget' in go.__dict__.keys():
+            expected_class_names.add('FigureWidget')
         self.assertEqual(current_class_names, expected_class_names)

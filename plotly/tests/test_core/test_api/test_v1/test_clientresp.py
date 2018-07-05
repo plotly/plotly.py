@@ -25,7 +25,8 @@ class ClientrespTest(PlotlyApiTestCase):
     def test_data_only(self):
         data = [{'y': [3, 5], 'name': Duck()}]
         clientresp(data)
-        self.request_mock.assert_called_once()
+        assert self.request_mock.call_count == 1
+
         args, kwargs = self.request_mock.call_args
         method, url = args
         self.assertEqual(method, 'post')
@@ -33,7 +34,7 @@ class ClientrespTest(PlotlyApiTestCase):
         expected_data = ({
             'origin': 'plot',
             'args': '[{"name": "what else floats?", "y": [3, 5]}]',
-            'platform': 'python', 'version': version.__version__, 'key': 'bar',
+            'platform': 'python', 'version': version.stable_semver(), 'key': 'bar',
             'kwargs': '{}', 'un': 'foo'
         })
         self.assertEqual(kwargs['data'], expected_data)
@@ -44,7 +45,7 @@ class ClientrespTest(PlotlyApiTestCase):
         data = [{'y': [3, 5], 'name': Duck()}]
         clientresp_kwargs = {'layout': {'title': 'mah plot'}, 'filename': 'ok'}
         clientresp(data, **clientresp_kwargs)
-        self.request_mock.assert_called_once()
+        assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
         self.assertEqual(method, 'post')
@@ -52,7 +53,7 @@ class ClientrespTest(PlotlyApiTestCase):
         expected_data = ({
             'origin': 'plot',
             'args': '[{"name": "what else floats?", "y": [3, 5]}]',
-            'platform': 'python', 'version': version.__version__, 'key': 'bar',
+            'platform': 'python', 'version': version.stable_semver(), 'key': 'bar',
             'kwargs': '{"filename": "ok", "layout": {"title": "mah plot"}}',
             'un': 'foo'
         })

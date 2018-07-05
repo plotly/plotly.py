@@ -2,7 +2,6 @@ from __future__ import absolute_import
 
 from unittest import TestCase
 
-from plotly import exceptions
 from plotly.graph_objs import Figure
 
 
@@ -23,15 +22,17 @@ class FigureTest(TestCase):
 
         # Figure is special, we define top-level objects that always exist.
 
-        self.assertEqual(Figure().data, [])
-        self.assertEqual(Figure().layout, {})
-        self.assertEqual(Figure().frames, [])
+        self.assertEqual(Figure().data, ())
+        self.assertEqual(Figure().layout.to_plotly_json(), {})
+        self.assertEqual(Figure().frames, ())
 
     def test_nested_frames(self):
-        with self.assertRaisesRegexp(exceptions.PlotlyDictKeyError, 'frames'):
+        with self.assertRaisesRegexp(ValueError, 'frames'):
             Figure({'frames': [{'frames': []}]})
 
         figure = Figure()
         figure.frames = [{}]
-        with self.assertRaisesRegexp(exceptions.PlotlyDictKeyError, 'frames'):
+
+        with self.assertRaisesRegexp(ValueError, 'frames'):
+            figure.to_plotly_json()['frames'][0]['frames'] = []
             figure.frames[0].frames = []
