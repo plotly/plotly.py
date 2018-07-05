@@ -1,5 +1,5 @@
 # Migration to Version 3
-There are many new and great features in Plotly 3.0 including deeper Jupyter integration, deeper figure validation, improved performance, and more. To get started right away with Plotly, check out the tutorial below:
+There are many new and great features in Plotly 3.0 including deeper Jupyter integration, deeper figure validation, improved performance, and more. This guide contains the a summary of the breaking changes that you need to be aware of when migrating code from version 2 to version 3. 
 
 ## Simple FigureWidget Example
 We now have seamless integration with the Jupyter widget ecosystem. We've introduced a new graph object called `go.FigureWidget` that acts like a regular plotly `go.Figure` that can be directly displayed in the notebook.
@@ -43,7 +43,7 @@ FigureWidget({
 })
 ```
 
-## New add_trace method that handles subplots
+## New add trace methods that handle subplots
 The legacy `append_trace` method for adding traces to subplots has been deprecated in favor of the new `add_trace`, `add_traces`, and `add_*` methods.  Each of these new methods accepts optional row/column information that may be used to add traces to subplots for figures initialized by the `plotly.tools.make_subplots` function. 
 
 Let's create a subplot then turn it into a FigureWidget to display in the notebook.
@@ -80,8 +80,42 @@ f2
 
 ## Breaking Changes
 
+## Graph Objects Superclass
+Graph objects are no longer `dict` subclasses, though they still provide many `dict`-like magic methods.
+
+## Graph Objects Hierarchy
+All graph objects are now placed in a package hierarchy that matches their position in the object hierarchy. For example, `go.Marker` is now accessible as `go.scatter.Marker` or `go.bar.Marker` or whatever trace it is nested within. By providing unique objects under the parent-trace namespace, we can provide better validation (the properties for a marker object within a scatter trace may be different than the properties of a marker object within a bar trace). Although deprecated, the previous objects are still supported, they just won’t provide the same level of validation as our new objects.
+
+For example, the following approach to creating a `Marker` object for a `Scatter` trace is now deprecated.
+```
+import plotly.graph_objs as go
+go.Scatter(
+    x=[0],
+    y=[0],
+    marker=go.Marker(
+        color='rgb(255,45,15)'
+    )
+)
+```
+
+Instead, use the `Marker` object in the `go.scatter` package.
+
+```
+import plotly.graph_objs as go
+go.Scatter(
+    x=[0],
+    y=[0],
+    marker=go.scatter.Marker(
+        color='rgb(255,45,15)'
+    )
+)
+```
+
 ### Property Immutability
-In order to support the automatic synchronization a `FigureWidget` object and the front-end view in a notebook, it is necessary for the `FigureWidget` to be aware of all changes to its properties. This is accomplished by presenting the individual properties to the user as immutable objects.  For example, the `layout.xaxis.range` property may be assigned using a list, but it will be returned as a tuple.
+In order to support the automatic synchronization a `FigureWidget` object and the front-end view in a notebook, it is necessary for the `FigureWidget` to be aware of all changes to its properties. This is accomplished by presenting the individual properties to the user as immutable objects.  For example, the `layout.xaxis.range` property may be assigned using a list, but it will be returned as a tuple. Similarly, object arrays (`Figure.data`, `Layout.images`, `Parcoords.dimensions`, etc.) are now represented as tuples of graph objects, not lists.
+
+### Object Array Classes Deprecated
+Since graph object arrays are now represented as tuple of graph objects, the following object array classes are deprecated: `go.Data`, `go.Annotations`, and `go.Frames`
 
 ### New Figure.data Assignment
 There are new restriction on the assignment of traces to the `data` property of a figure.  The assigned value must be a list or a tuple of a subset of the traces already present in the figure. Assignment to `data` may be used to reorder and remove existing traces, but it may not currently be used to add new traces.  New traces must be added using the `add_trace`, `add_traces`, or `add_*` methods. 
@@ -112,5 +146,7 @@ import plotly.graph_objs as go
 go.Bar(x=[1])
 ```
 
-### Removal of undocumented methods
-Several undocumented `Figure` methods have been removed. These include: `.to_string`, `.strip_style`, `.get_data`, `.validate` and `.to_dataframe`.
+### Removal of undocumented methods and properties
+ - Several undocumented `Figure` methods have been removed. These include: `.to_string`, `.strip_style`, `.get_data`, `.validate` and `.to_dataframe`.
+
+ - Graph objects no longer support the undocumented `_raise` parameter. They are always validated and always raise an exception on validation failures. It is still possible to pass a dict to `plot`/`iplot` with `validate=False` to bypass validation.

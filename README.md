@@ -26,10 +26,10 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 
 ***
 
-## Installation Plotly 3.0.0rc11
-To install and enable with Jupyter or Jupyter Lab, run:
+## Installation of plotly.py Version 3
+To install plotly.py and enable Jupyter or Jupyter Lab support, run:
 ```
-pip install plotly==3.0.0rc11
+pip install "plotly>=3.0"
 pip install "notebook>=5.3" "ipywidgets>=7.2"  # only necessary for Jupyter Notebook environments
 ```
 
@@ -52,7 +52,7 @@ jupyter labextension install plotlywidget
 If you're migrating from plotly.py version 2, please check out the [migration guid](migration-guide.md)
 
 ## Copyright and Licenses
-Code and documentation copyright 2017 Plotly, Inc.
+Code and documentation copyright 2018 Plotly, Inc.
 
 Code released under the [MIT license](LICENSE.txt).
 
