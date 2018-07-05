@@ -3857,6 +3857,21 @@ class BaseTraceType(BaseTraceHierarchyType):
         Returns
         -------
         None
+
+        Examples
+        --------
+        >>> from plotly.callbacks import Points
+        >>> points = Points()
+
+        >>> def selection_fn(trace, points, selector):
+        ...     inds = points.point_inds
+        ...     # Do something
+
+        >>> trace.on_selection(selection_fn)
+
+        Note: The creation of the `points` object is optional,
+        it's simply a convenience to help the text editor perform completion
+        on the `points` arguments inside `selection_fn`
         """
         if not append:
             del self._select_callbacks[:]
