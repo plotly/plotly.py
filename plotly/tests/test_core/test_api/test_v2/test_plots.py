@@ -19,7 +19,7 @@ class PlotsTest(PlotlyApiTestCase):
     def test_create(self):
         filename = 'a plot'
         plots.create({'filename': filename})
-        self.request_mock.assert_called_once()
+        assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
         self.assertEqual(method, 'post')
@@ -30,7 +30,7 @@ class PlotsTest(PlotlyApiTestCase):
 
     def test_retrieve(self):
         plots.retrieve('hodor:88')
-        self.request_mock.assert_called_once()
+        assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
         self.assertEqual(method, 'get')
@@ -41,7 +41,7 @@ class PlotsTest(PlotlyApiTestCase):
 
     def test_retrieve_share_key(self):
         plots.retrieve('hodor:88', share_key='foobar')
-        self.request_mock.assert_called_once()
+        assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
         self.assertEqual(method, 'get')
@@ -53,7 +53,7 @@ class PlotsTest(PlotlyApiTestCase):
     def test_update(self):
         new_filename = '..zzZ ..zzZ'
         plots.update('hodor:88', body={'filename': new_filename})
-        self.request_mock.assert_called_once()
+        assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
         self.assertEqual(method, 'put')
@@ -65,7 +65,7 @@ class PlotsTest(PlotlyApiTestCase):
 
     def test_trash(self):
         plots.trash('hodor:88')
-        self.request_mock.assert_called_once()
+        assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
         self.assertEqual(method, 'post')
@@ -75,7 +75,7 @@ class PlotsTest(PlotlyApiTestCase):
 
     def test_restore(self):
         plots.restore('hodor:88')
-        self.request_mock.assert_called_once()
+        assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
         self.assertEqual(method, 'post')
@@ -85,7 +85,7 @@ class PlotsTest(PlotlyApiTestCase):
 
     def test_permanent_delete(self):
         plots.permanent_delete('hodor:88')
-        self.request_mock.assert_called_once()
+        assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
         self.assertEqual(method, 'delete')
@@ -104,7 +104,7 @@ class PlotsTest(PlotlyApiTestCase):
         user = 'someone'
         exists = True
         plots.lookup(path=path, parent=parent, user=user, exists=exists)
-        self.request_mock.assert_called_once()
+        assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
         expected_params = {'path': path, 'parent': parent, 'exists': 'true',

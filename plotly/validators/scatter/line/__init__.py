@@ -1,0 +1,6 @@
+from ._width import WidthValidator
+from ._smoothing import SmoothingValidator
+from ._simplify import SimplifyValidator
+from ._shape import ShapeValidator
+from ._dash import DashValidator
+from ._color import ColorValidator

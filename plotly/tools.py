@@ -57,7 +57,6 @@ def warning_on_one_line(message, category, filename, lineno,
 warnings.formatwarning = warning_on_one_line
 
 ipython_core_display = optional_imports.get_module('IPython.core.display')
-matplotlylib = optional_imports.get_module('plotly.matplotlylib')
 sage_salvus = optional_imports.get_module('sage_salvus')
 
 
@@ -92,9 +91,9 @@ def ensure_local_plotly_files():
             for key in contents_keys:
                 if key not in FILE_CONTENT[fn]:
                     del contents[key]
-            # save only if contents has changed. 
+            # save only if contents has changed.
             # This is to avoid .credentials or .config file to be overwritten randomly,
-            # which we constantly keep experiencing 
+            # which we constantly keep experiencing
             # (sync issues? the file might be locked for writing by other process in file._permissions)
             if contents_orig.keys() != contents.keys():
                 utils.save_json_dict(fn, contents)
@@ -460,6 +459,7 @@ def mpl_to_plotly(fig, resize=False, strip_style=False, verbose=False):
     {plotly_domain}/python/getting-started
 
     """
+    matplotlylib = optional_imports.get_module('plotly.matplotlylib')
     if matplotlylib:
         renderer = matplotlylib.PlotlyRenderer()
         matplotlylib.Exporter(renderer).run(fig)
@@ -1357,11 +1357,12 @@ def make_subplots(rows=1, cols=1,
     return fig
 
 
-def get_valid_graph_obj(obj, obj_type=None):
-    """Returns a new graph object that won't raise.
+def get_graph_obj(obj, obj_type=None):
+    """Returns a new graph object.
 
-    CAREFUL: this will *silently* strip out invalid pieces of the object.
-
+    OLD FUNCTION: this will *silently* strip out invalid pieces of the object.
+    NEW FUNCTION: no striping of invalid pieces anymore - only raises error
+        on unrecognized graph_objs
     """
     # TODO: Deprecate or move. #283
     from plotly.graph_objs import graph_objs
@@ -1371,7 +1372,7 @@ def get_valid_graph_obj(obj, obj_type=None):
         raise exceptions.PlotlyError(
             "'{}' is not a recognized graph_obj.".format(obj_type)
         )
-    return cls(obj, _raise=False)
+    return cls(obj)
 
 
 def validate(obj, obj_type):
@@ -1391,7 +1392,8 @@ def validate(obj, obj_type):
 
     try:
         cls = getattr(graph_objs, obj_type)
-    except AttributeError:
+    #except AttributeError:
+    except ValueError:
         raise exceptions.PlotlyError(
             "'{0}' is not a recognizable graph_obj.".
             format(obj_type))
@@ -1445,19 +1447,26 @@ if ipython_core_display:
 
 
 def return_figure_from_figure_or_data(figure_or_data, validate_figure):
-    from plotly.graph_objs import graph_objs
+    from plotly.graph_objs import Figure
+    from plotly.basedatatypes import BaseFigure
+
+    validated = False
     if isinstance(figure_or_data, dict):
         figure = figure_or_data
     elif isinstance(figure_or_data, list):
         figure = {'data': figure_or_data}
+    elif isinstance(figure_or_data, BaseFigure):
+        figure = figure_or_data.to_dict()
+        validated = True
     else:
         raise exceptions.PlotlyError("The `figure_or_data` positional "
-                                     "argument must be either "
-                                     "`dict`-like or `list`-like.")
-    if validate_figure:
+                                     "argument must be "
+                                     "`dict`-like, `list`-like, or an instance of plotly.graph_objs.Figure")
+
+    if validate_figure and not validated:
 
         try:
-            graph_objs.Figure(figure)
+            figure = Figure(**figure).to_dict()
         except exceptions.PlotlyError as err:
             raise exceptions.PlotlyError("Invalid 'figure_or_data' argument. "
                                          "Plotly will not be able to properly "

@@ -42,7 +42,7 @@ class GetFigureTest(PlotlyTestCase):
     def test_get_figure(self):
         un = 'PlotlyImageTest'
         ak = '786r5mecv0'
-        file_id = 2
+        file_id = 13183
         py.sign_in(un, ak)
         py.get_figure('PlotlyImageTest', str(file_id))
 
@@ -50,7 +50,7 @@ class GetFigureTest(PlotlyTestCase):
     def test_get_figure_with_url(self):
         un = 'PlotlyImageTest'
         ak = '786r5mecv0'
-        url = "https://plot.ly/~PlotlyImageTest/2/"
+        url = "https://plot.ly/~PlotlyImageTest/13183/"
         py.sign_in(un, ak)
         py.get_figure(url)
 
@@ -69,6 +69,15 @@ class GetFigureTest(PlotlyTestCase):
         url = "https://plot.ly/~PlotlyImageTest/-1/"
         py.sign_in(un, ak)
         with self.assertRaises(exceptions.PlotlyError):
+            py.get_figure(url)
+
+    # demonstrates error if fig has invalid parts
+    def test_get_figure_invalid_3(self):
+        un = 'PlotlyImageTest'
+        ak = '786r5mecv0'
+        url = "https://plot.ly/~PlotlyImageTest/2/"
+        py.sign_in(un, ak)
+        with self.assertRaises(ValueError):
             py.get_figure(url)
 
     @attr('slow')
@@ -95,6 +104,6 @@ class TestBytesVStrings(TestCase):
     def test_proper_escaping(self):
         un = 'PlotlyImageTest'
         ak = '786r5mecv0'
-        url = "https://plot.ly/~PlotlyImageTest/91/"
+        url = "https://plot.ly/~PlotlyImageTest/13185/"
         py.sign_in(un, ak)
         py.get_figure(url)

@@ -29,12 +29,17 @@ from requests.compat import json as _json
 
 from plotly import exceptions, files, session, tools, utils
 from plotly.api import v1, v2
+from plotly.basedatatypes import BaseTraceType, BaseFigure, BaseLayoutType
 from plotly.plotly import chunked_requests
+
+from plotly.graph_objs import Scatter
+
 from plotly.grid_objs import Grid, Column
 from plotly.dashboard_objs import dashboard_objs as dashboard
 
 # This is imported like this for backwards compat. Careful if changing.
 from plotly.config import get_config, get_credentials
+
 
 __all__ = None
 
@@ -141,6 +146,10 @@ def iplot(figure_or_data, **plot_options):
 
     if isinstance(figure_or_data, dict):
         layout = figure_or_data.get('layout', {})
+        if isinstance(layout, BaseLayoutType):
+            layout = layout.to_plotly_json()
+    elif isinstance(figure_or_data, BaseFigure):
+        layout = figure_or_data.layout.to_plotly_json()
     else:
         layout = {}
 
@@ -303,7 +312,6 @@ def plot_mpl(fig, resize=True, strip_style=False, update=None, **plot_options):
     fig = tools.mpl_to_plotly(fig, resize=resize, strip_style=strip_style)
     if update and isinstance(update, dict):
         fig.update(update)
-        fig.validate()
     elif update is not None:
         raise exceptions.PlotlyGraphObjectError(
             "'update' must be dictionary-like and a valid plotly Figure "
@@ -370,6 +378,19 @@ def _swap_xy_data(data_obj):
             )
 
 
+def byteify(input):
+    """Convert unicode strings in JSON object to byte strings"""
+    if isinstance(input, dict):
+        return {byteify(key): byteify(value)
+                for key, value in input.iteritems()}
+    elif isinstance(input, list):
+        return [byteify(element) for element in input]
+    elif isinstance(input, unicode):
+        return input.encode('utf-8')
+    else:
+        return input
+
+
 def get_figure(file_owner_or_url, file_id=None, raw=False):
     """Returns a JSON figure representation for the specified file
 
@@ -394,11 +415,17 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
                               if you're using a url, don't fill this in!
     raw (default=False) -- if true, return unicode JSON string verbatim**
 
-    **by default, plotly will return a Figure object (run help(plotly
-    .graph_objs.Figure)). This representation decodes the keys and values from
-    unicode (if possible), removes information irrelevant to the figure
-    representation, and converts the JSON dictionary objects to plotly
+    **by default, plotly will return a Figure object. This representation used
+    to decode the keys and values from unicode (if possible) and remove
+    information irrelevant to the figure representation. Now if in Python 2,
+    unicode is converted to regular strings. Also irrelevant information is
+    now NOT stripped: an error will be raised if a figure contains invalid
+    properties.
+
+    Finally this function converts the JSON dictionary objects to plotly
     `graph objects`.
+
+    Run `help(plotly.graph_objs.Figure)` for a list of valid properties.
 
     """
     plotly_rest_url = get_config()['plotly_domain']
@@ -434,7 +461,8 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
     fid = '{}:{}'.format(file_owner, file_id)
     response = v2.plots.content(fid, inline_data=True)
     figure = response.json()
-
+    if six.PY2:
+        figure = byteify(figure)
     # Fix 'histogramx', 'histogramy', and 'bardir' stuff
     for index, entry in enumerate(figure['data']):
         try:
@@ -473,7 +501,7 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
 
     if raw:
         return figure
-    return tools.get_valid_graph_obj(figure, obj_type='Figure')
+    return tools.get_graph_obj(figure, obj_type='Figure')
 
 
 @utils.template_doc(**tools.get_config_file())
@@ -587,7 +615,7 @@ class Stream:
         streaming_specs = self.get_streaming_specs()
         self._stream = chunked_requests.Stream(**streaming_specs)
 
-    def write(self, trace, layout=None, validate=True,
+    def write(self, trace, layout=None,
               reconnect_on=(200, '', 408)):
         """
         Write to an open stream.
@@ -605,9 +633,6 @@ class Stream:
         keyword arguments:
         layout (default=None) - A valid Layout object
                                 Run help(plotly.graph_objs.Layout)
-        validate (default = True) - Validate this stream before sending?
-                                    This will catch local errors if set to
-                                    True.
 
         Some valid keys for trace dictionaries:
             'x', 'y', 'text', 'z', 'marker', 'line'
@@ -628,10 +653,24 @@ class Stream:
         http://nbviewer.ipython.org/github/plotly/python-user-guide/blob/master/s7_streaming/s7_streaming.ipynb
 
         """
+        # always bypass validation in here as
+        # now automatically done
+        validate = False
+
+        # Convert trace objects to dictionaries
+        if isinstance(trace, BaseTraceType):
+            trace = trace.to_plotly_json()
+
         stream_object = dict()
         stream_object.update(trace)
         if 'type' not in stream_object:
+            # tests if Scatter contains invalid kwargs
+            dummy_obj = copy.deepcopy(Scatter(**stream_object))
+            stream_object = Scatter(**stream_object)
             stream_object['type'] = 'scatter'
+
+        # TODO: remove this validation as now it's
+        # done automatically
         if validate:
             try:
                 tools.validate(stream_object, stream_object['type'])
@@ -714,14 +753,7 @@ class image:
 
         """
         # TODO: format is a built-in name... we shouldn't really use it
-        if isinstance(figure_or_data, dict):
-            figure = figure_or_data
-        elif isinstance(figure_or_data, list):
-            figure = {'data': figure_or_data}
-        else:
-            raise exceptions.PlotlyEmptyDataError(
-                "`figure_or_data` must be a dict or a list."
-            )
+        figure = tools.return_figure_from_figure_or_data(figure_or_data, True)
 
         if format not in ['png', 'svg', 'jpeg', 'pdf']:
             raise exceptions.PlotlyError(
@@ -1821,6 +1853,10 @@ def icreate_animations(figure, filename=None, sharing='public', auto_open=False)
 
     if isinstance(figure, dict):
         layout = figure.get('layout', {})
+        if isinstance(layout, BaseLayoutType):
+            layout = layout.to_plotly_json()
+    elif isinstance(figure, BaseFigure):
+        layout = figure.layout.to_plotly_json()
     else:
         layout = {}
 

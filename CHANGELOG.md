@@ -2,9 +2,22 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [2.7.1] - [UNRELEASED]
-### Updated
-- error message for `plotly.figure_factory.create_choropleth` is now helpful to Anaconda users who do not have the correct modules installed for the County Choropleth figure factory.
+## 3.0.0 - 2018-07-05
+
+This is a major version with many exciting updates. See the [Introducing plotly.py 3.0.0](https://medium.com/@plotlygraphs/introducing-plotly-py-3-0-0-7bb1333f69c6) post for more information.
+
+### Added
+- Full Jupyter ipywidgets integration with the new `graph_objs.FigureWidget` class
+- `FigureWidget` figures can be updated interactively using property assignment syntax
+- The full trace and layout API is generated from the plotly schema to provide a great experience for interactive use in the notebook
+- Support for setting array properties as numpy arrays. When numpy arrays are used, ipywidgets binary serialization protocol is used to avoid converting these to JSON strings.
+- Context manager API for animation. Run `help(go.Figure().batch_animate)` for the full doc string.
+- Perform automatic retries when communicating with plot.ly services. This introduces a new required dependency on the [retrying](https://pypi.org/project/retrying/) library.
+- Improved data validation covering the full API with clear, informative error messages. This means that incorrect properties and/or values now always raise a `ValueError` with a description of the error, the invalid property, and the available properties on the level that it was placed in the graph object. Eg. `go.Scatter(foo=123)` raises a validation error. See https://plot.ly/python/reference/ for a reference to all valid properties and values in the Python API.
+- Error message for `plotly.figure_factory.create_choropleth` is now helpful to Anaconda users who do not have the correct modules installed for the County Choropleth figure factory.
+
+### Changed / Deprecated
+Please see the [migration guid](migration-guide.md) for a full list of the changes and deprecations in version 3.0.0
 
 ## [2.7.0] - 2018-05-23
 ### Updated

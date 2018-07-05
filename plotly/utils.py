@@ -11,9 +11,12 @@ import decimal
 import os.path
 import re
 import sys
+import textwrap
 import threading
+import datetime
 import warnings
 from collections import deque
+from pprint import PrettyPrinter
 
 import pytz
 from decorator import decorator
@@ -31,6 +34,10 @@ sage_all = get_module('sage.all')
 
 ### incase people are using threading, we lock file reads
 lock = threading.Lock()
+
+PY36 = (
+    sys.version_info.major == 3 and sys.version_info.minor == 6
+)
 
 
 http_msg = (
@@ -282,19 +289,21 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
     @staticmethod
     def encode_as_datetime(obj):
         """Attempt to convert to utc-iso time string using datetime methods."""
-
-        # first we need to get this into utc
-        try:
-            obj = obj.astimezone(pytz.utc)
-        except ValueError:
-            # we'll get a value error if trying to convert with naive datetime
-            pass
-        except TypeError:
-            # pandas throws a typeerror here instead of a value error, it's OK
-            pass
-        except AttributeError:
-            # we'll get an attribute error if astimezone DNE
-            raise NotEncodable
+        # In PY36, isoformat() converts UTC
+        # datetime.datetime objs to UTC T04:00:00
+        if not (PY36 and (isinstance(obj, datetime.datetime) and
+                obj.tzinfo is None)):
+            try:
+                obj = obj.astimezone(pytz.utc)
+            except ValueError:
+                # we'll get a value error if trying to convert with naive datetime
+                pass
+            except TypeError:
+                # pandas throws a typeerror here instead of a value error, it's OK
+                pass
+            except AttributeError:
+                # we'll get an attribute error if astimezone DNE
+                raise NotEncodable
 
         # now we need to get a nicely formatted time string
         try:
@@ -526,3 +535,125 @@ def memoize(maxsize=128):
         return result
 
     return decorator(_memoize)
+
+
+def _list_repr_elided(v, threshold=200, edgeitems=3, indent=0, width=80):
+    """
+    Return a string representation for of a list where list is elided if
+    it has more than n elements
+
+    Parameters
+    ----------
+    v : list
+        Input list
+    threshold :
+        Maximum number of elements to display
+
+    Returns
+    -------
+    str
+    """
+    if isinstance(v, list):
+        open_char, close_char = '[', ']'
+    elif isinstance(v, tuple):
+        open_char, close_char = '(', ')'
+    else:
+        raise ValueError('Invalid value of type: %s' % type(v))
+
+    if len(v) <= threshold:
+        disp_v = v
+    else:
+        disp_v = (list(v[:edgeitems])
+                  + ['...'] +
+                  list(v[-edgeitems:]))
+
+    v_str = open_char + ', '.join([str(e) for e in disp_v]) + close_char
+
+    v_wrapped = '\n'.join(textwrap.wrap(v_str, width=width,
+                          initial_indent=' ' * (indent + 1),
+                          subsequent_indent =' ' * (indent + 1))).strip()
+    return v_wrapped
+
+
+class ElidedWrapper(object):
+    """
+    Helper class that wraps values of certain types and produces a custom
+    __repr__() that may be elided and is suitable for use during pretty
+    printing
+    """
+    def __init__(self, v, threshold, indent):
+        self.v = v
+        self.indent = indent
+        self.threshold = threshold
+
+    @staticmethod
+    def is_wrappable(v):
+        if (isinstance(v, (list, tuple)) and
+                len(v) > 0 and
+                not isinstance(v[0], dict)):
+            return True
+        elif numpy and isinstance(v, numpy.ndarray):
+            return True
+        elif isinstance(v, str):
+            return True
+        else:
+            return False
+
+    def __repr__(self):
+        if isinstance(self.v, (list, tuple)):
+            # Handle lists/tuples
+            res = _list_repr_elided(self.v,
+                                    threshold=self.threshold,
+                                    indent=self.indent)
+            return res
+        elif numpy and isinstance(self.v, numpy.ndarray):
+            # Handle numpy arrays
+
+            # Get original print opts
+            orig_opts = numpy.get_printoptions()
+
+            # Set threshold to self.max_list_elements
+            numpy.set_printoptions(
+                **dict(orig_opts,
+                       threshold=self.threshold,
+                       edgeitems=3,
+                       linewidth=80))
+
+            res = self.v.__repr__()
+
+            # Add indent to all but the first line
+            res_lines = res.split('\n')
+            res = ('\n' + ' '*self.indent).join(res_lines)
+
+            # Restore print opts
+            numpy.set_printoptions(**orig_opts)
+            return res
+        elif isinstance(self.v, str):
+            # Handle strings
+            if len(self.v) > 80:
+                return ('(' + repr(self.v[:30]) +
+                        ' ... ' + repr(self.v[-30:]) + ')')
+            else:
+                return self.v.__repr__()
+        else:
+            return self.v.__repr__()
+
+
+class ElidedPrettyPrinter(PrettyPrinter):
+    """
+    PrettyPrinter subclass that elides long lists/arrays/strings
+    """
+    def __init__(self, *args, **kwargs):
+        self.threshold = kwargs.pop('threshold', 200)
+        PrettyPrinter.__init__(self, *args, **kwargs)
+
+    def _format(self, val, stream, indent, allowance, context, level):
+        if ElidedWrapper.is_wrappable(val):
+            elided_val = ElidedWrapper(
+                val, self.threshold, indent)
+
+            return self._format(
+                elided_val, stream, indent, allowance, context, level)
+        else:
+            return PrettyPrinter._format(
+                self, val, stream, indent, allowance, context, level)

@@ -38,7 +38,7 @@ class GridTest(PlotlyTestCase):
 
     def setUp(self):
         super(GridTest, self).setUp()
-        py.sign_in('PythonTest', '9v9f20pext')
+        py.sign_in('PythonTest', 'xnyU0DEwvAQQCwHVseIL')
 
     def get_grid(self):
         c1 = Column([1, 2, 3, 4], 'first column')
@@ -93,7 +93,7 @@ class GridTest(PlotlyTestCase):
     @attr('slow')
     def test_plot_from_grid(self):
         g = self.upload_and_return_grid()
-        url = py.plot([Scatter(xsrc=g[0], ysrc=g[1])],
+        url = py.plot([Scatter(xsrc=g[0].id, ysrc=g[1].id)],
                       auto_open=False, filename='plot from grid')
         return url, g
 
@@ -103,8 +103,8 @@ class GridTest(PlotlyTestCase):
         fig = py.get_figure(url)
         data = fig['data']
         trace = data[0]
-        assert(g[0].data == trace['x'])
-        assert(g[1].data == trace['y'])
+        assert(tuple(g[0].data) == tuple(trace['x']))
+        assert(tuple(g[1].data) == tuple(trace['y']))
 
     def test_grid_id_args(self):
         self.assertEqual(parse_grid_id_args(self._grid, None),
@@ -118,13 +118,13 @@ class GridTest(PlotlyTestCase):
         with self.assertRaises(InputError):
             parse_grid_id_args(self._grid, self._grid_url)
 
-    # Out of order usage
-    def test_scatter_from_non_uploaded_grid(self):
-        c1 = Column([1, 2, 3, 4], 'first column')
-        c2 = Column(['a', 'b', 'c', 'd'], 'second column')
-        g = Grid([c1, c2])
-        with self.assertRaises(InputError):
-            Scatter(xsrc=g[0], ysrc=g[1])
+    # not broken anymore since plotly 3.0.0
+    # def test_scatter_from_non_uploaded_grid(self):
+    #     c1 = Column([1, 2, 3, 4], 'first column')
+    #     c2 = Column(['a', 'b', 'c', 'd'], 'second column')
+    #     g = Grid([c1, c2])
+    #     with self.assertRaises(ValueError):
+    #         Scatter(xsrc=g[0], ysrc=g[1])
 
     def test_column_append_of_non_uploaded_grid(self):
         c1 = Column([1, 2, 3, 4], 'first column')
@@ -178,4 +178,6 @@ class GridTest(PlotlyTestCase):
         try:
             py.grid_ops.upload(g, unique_filename, auto_open=False)
         except PlotlyRequestError as e:
-            assert(e.status_code == 409)
+            pass
+        else:
+            self.fail('Expected this to fail!')

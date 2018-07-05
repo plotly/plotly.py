@@ -18,7 +18,7 @@ class FilesTest(PlotlyApiTestCase):
 
     def test_retrieve(self):
         files.retrieve('hodor:88')
-        self.request_mock.assert_called_once()
+        assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
         self.assertEqual(method, 'get')
@@ -29,7 +29,7 @@ class FilesTest(PlotlyApiTestCase):
 
     def test_retrieve_share_key(self):
         files.retrieve('hodor:88', share_key='foobar')
-        self.request_mock.assert_called_once()
+        assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
         self.assertEqual(method, 'get')
@@ -41,7 +41,7 @@ class FilesTest(PlotlyApiTestCase):
     def test_update(self):
         new_filename = '..zzZ ..zzZ'
         files.update('hodor:88', body={'filename': new_filename})
-        self.request_mock.assert_called_once()
+        assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
         self.assertEqual(method, 'put')
@@ -53,7 +53,7 @@ class FilesTest(PlotlyApiTestCase):
 
     def test_trash(self):
         files.trash('hodor:88')
-        self.request_mock.assert_called_once()
+        assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
         self.assertEqual(method, 'post')
@@ -63,7 +63,7 @@ class FilesTest(PlotlyApiTestCase):
 
     def test_restore(self):
         files.restore('hodor:88')
-        self.request_mock.assert_called_once()
+        assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
         self.assertEqual(method, 'post')
@@ -73,7 +73,7 @@ class FilesTest(PlotlyApiTestCase):
 
     def test_permanent_delete(self):
         files.permanent_delete('hodor:88')
-        self.request_mock.assert_called_once()
+        assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
         self.assertEqual(method, 'delete')
@@ -92,7 +92,7 @@ class FilesTest(PlotlyApiTestCase):
         user = 'someone'
         exists = True
         files.lookup(path=path, parent=parent, user=user, exists=exists)
-        self.request_mock.assert_called_once()
+        assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
         expected_params = {'path': path, 'parent': parent, 'exists': 'true',

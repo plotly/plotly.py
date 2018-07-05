@@ -2,7 +2,6 @@ from __future__ import absolute_import
 
 from unittest import TestCase
 
-from mock import MagicMock, patch
 from requests import Response
 from requests.compat import json as _json
 from requests.exceptions import ConnectionError
@@ -13,6 +12,14 @@ from plotly.exceptions import PlotlyError, PlotlyRequestError
 from plotly.session import sign_in
 from plotly.tests.test_core.test_api import PlotlyApiTestCase
 from plotly.tests.utils import PlotlyTestCase
+
+import sys
+
+# import from mock, MagicMock
+if sys.version_info.major == 3 and sys.version_info.minor >= 3:
+    from unittest.mock import MagicMock, patch
+else:
+    from mock import patch, MagicMock
 
 
 class ValidateResponseTest(PlotlyApiTestCase):
@@ -172,4 +179,4 @@ class RequestTest(PlotlyTestCase):
         # Finally, we check details elsewhere, but make sure we do validate.
 
         utils.request(self.method, self.url)
-        self.validate_response_mock.assert_called_once()
+        assert self.validate_response_mock.call_count == 1

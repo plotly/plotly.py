@@ -1,10 +1,17 @@
 from __future__ import absolute_import
 
-from mock import patch
 from requests import Response
 
 from plotly.session import sign_in
 from plotly.tests.utils import PlotlyTestCase
+
+import sys
+
+# import from mock
+if sys.version_info.major == 3 and sys.version_info.minor >= 3:
+    from unittest.mock import patch
+else:
+    from mock import patch
 
 
 class PlotlyApiTestCase(PlotlyTestCase):
@@ -37,7 +44,7 @@ class PlotlyApiTestCase(PlotlyTestCase):
             api_key=self.api_key,
             proxy_username=self.proxy_username,
             proxy_password=self.proxy_password,
-            stream_ids = self.stream_ids,
+            stream_ids=self.stream_ids,
             plotly_domain=self.plotly_domain,
             plotly_api_domain=self.plotly_api_domain,
             plotly_streaming_domain=self.plotly_streaming_domain,

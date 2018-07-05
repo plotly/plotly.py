@@ -8,13 +8,16 @@
 ## numpy (technically, this is covered by matplotlib's deps) ##
 numpy
 
-## matplotlylib dependencies ##
-# matplotlib==1.3.1
+## matplotlylib dependencies - moving away from 1.3.1 ##
+# matplotlib==2.2.2
 
 ## testing dependencies ##
 coverage==4.3.1
 mock==2.0.0
 nose==1.3.3
+
+## codegen dependencies ##
+yapf
 
 ## ipython ##
 ipython
@@ -33,3 +36,6 @@ ipykernel
 pyshp
 geopandas
 shapely
+
+# ipyplotly integration
+pil

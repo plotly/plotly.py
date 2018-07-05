@@ -1,20 +1,21 @@
 from unittest import TestCase
+from plotly import optional_imports
 from plotly.graph_objs import graph_objs as go
 from plotly.exceptions import PlotlyError
 
-import plotly.tools as tls
 import plotly.figure_factory as ff
-import plotly.figure_factory.utils as utils
 from plotly.tests.test_optional.optional_utils import NumpyTestUtilsMixin
-import math
-from nose.tools import raises
 
 import numpy as np
 from scipy.spatial import Delaunay
 import pandas as pd
 
+shapely = optional_imports.get_module('shapely')
+shapefile = optional_imports.get_module('shapefile')
+gp = optional_imports.get_module('geopandas')
 
-class TestDistplot(TestCase):
+
+class TestDistplot(NumpyTestUtilsMixin, TestCase):
 
     def test_wrong_curve_type(self):
 
@@ -54,13 +55,10 @@ class TestDistplot(TestCase):
         expected_dp_layout = {'barmode': 'overlay',
                               'hovermode': 'closest',
                               'legend': {'traceorder': 'reversed'},
-                              'xaxis1': {'anchor': 'y2', 'domain': [0.0, 1.0], 'zeroline': False},
-                              'yaxis1': {'anchor': 'free', 'domain': [0.35, 1], 'position': 0.0},
-                              'yaxis2': {'anchor': 'x1',
-                                         'domain': [0, 0.25],
-                                         'dtick': 1,
-                                         'showticklabels': False}}
-        self.assertEqual(dp['layout'], expected_dp_layout)
+                              'xaxis': {'anchor': 'y2', 'domain': [0.0, 1.0], 'zeroline': False},
+                              'yaxis': {'anchor': 'free', 'domain': [0.35, 1], 'position': 0.0},
+                              'yaxis2': {'anchor': 'x', 'domain': [0, 0.25], 'dtick': 1, 'showticklabels': False}}
+        self.assert_fig_equal(dp['layout'], expected_dp_layout)
 
         expected_dp_data_hist = {'autobinx': False,
                                  'histnorm': 'probability density',
@@ -70,10 +68,10 @@ class TestDistplot(TestCase):
                                  'opacity': 0.7,
                                  'type': 'histogram',
                                  'x': [1, 2, 2, 3],
-                                 'xaxis': 'x1',
+                                 'xaxis': 'x',
                                  'xbins': {'end': 3.0, 'size': 1.0, 'start': 1.0},
-                                 'yaxis': 'y1'}
-        self.assertEqual(dp['data'][0], expected_dp_data_hist)
+                                 'yaxis': 'y'}
+        self.assert_fig_equal(dp['data'][0], expected_dp_data_hist)
 
         expected_dp_data_rug = {'legendgroup': 'distplot',
                                 'marker': {'color': 'rgb(31, 119, 180)',
@@ -81,14 +79,13 @@ class TestDistplot(TestCase):
                                 'mode': 'markers',
                                 'name': 'distplot',
                                 'showlegend': False,
-                                'text': None,
                                 'type': 'scatter',
                                 'x': [1, 2, 2, 3],
-                                'xaxis': 'x1',
+                                'xaxis': 'x',
                                 'y': ['distplot', 'distplot',
                                       'distplot', 'distplot'],
                                 'yaxis': 'y2'}
-        self.assertEqual(dp['data'][2], expected_dp_data_rug)
+        self.assert_fig_equal(dp['data'][2], expected_dp_data_rug)
 
     def test_simple_distplot_prob(self):
 
@@ -100,13 +97,17 @@ class TestDistplot(TestCase):
         expected_dp_layout = {'barmode': 'overlay',
                               'hovermode': 'closest',
                               'legend': {'traceorder': 'reversed'},
-                              'xaxis1': {'anchor': 'y2', 'domain': [0.0, 1.0], 'zeroline': False},
-                              'yaxis1': {'anchor': 'free', 'domain': [0.35, 1], 'position': 0.0},
-                              'yaxis2': {'anchor': 'x1',
+                              'xaxis': {'anchor': 'y2',
+                                        'domain': [0.0, 1.0],
+                                        'zeroline': False},
+                              'yaxis': {'anchor': 'free',
+                                        'domain': [0.35, 1],
+                                        'position': 0.0},
+                              'yaxis2': {'anchor': 'x',
                                          'domain': [0, 0.25],
                                          'dtick': 1,
                                          'showticklabels': False}}
-        self.assertEqual(dp['layout'], expected_dp_layout)
+        self.assert_fig_equal(dp['layout'], expected_dp_layout)
 
         expected_dp_data_hist = {'autobinx': False,
                                  'histnorm': 'probability',
@@ -116,10 +117,10 @@ class TestDistplot(TestCase):
                                  'opacity': 0.7,
                                  'type': 'histogram',
                                  'x': [1, 2, 2, 3],
-                                 'xaxis': 'x1',
+                                 'xaxis': 'x',
                                  'xbins': {'end': 3.0, 'size': 1.0, 'start': 1.0},
-                                 'yaxis': 'y1'}
-        self.assertEqual(dp['data'][0], expected_dp_data_hist)
+                                 'yaxis': 'y'}
+        self.assert_fig_equal(dp['data'][0], expected_dp_data_hist)
 
         expected_dp_data_rug = {'legendgroup': 'distplot',
                                 'marker': {'color': 'rgb(31, 119, 180)',
@@ -127,14 +128,13 @@ class TestDistplot(TestCase):
                                 'mode': 'markers',
                                 'name': 'distplot',
                                 'showlegend': False,
-                                'text': None,
                                 'type': 'scatter',
                                 'x': [1, 2, 2, 3],
-                                'xaxis': 'x1',
+                                'xaxis': 'x',
                                 'y': ['distplot', 'distplot',
                                       'distplot', 'distplot'],
                                 'yaxis': 'y2'}
-        self.assertEqual(dp['data'][2], expected_dp_data_rug)
+        self.assert_fig_equal(dp['data'][2], expected_dp_data_rug)
 
     def test_distplot_more_args_prob_dens(self):
 
@@ -159,12 +159,14 @@ class TestDistplot(TestCase):
         expected_dp_layout = {'barmode': 'overlay',
                               'hovermode': 'closest',
                               'legend': {'traceorder': 'reversed'},
-                              'title': 'Dist Plot',
-                              'xaxis1': {'anchor': 'y2', 'domain': [0.0, 1.0],
-                                         'zeroline': False},
-                              'yaxis1': {'anchor': 'free', 'domain': [0.0, 1],
-                                         'position': 0.0}}
-        self.assertEqual(dp['layout'], expected_dp_layout)
+                              'xaxis': {'anchor': 'y2',
+                                        'domain': [0.0, 1.0],
+                                        'zeroline': False},
+                              'yaxis': {'anchor': 'free',
+                                        'domain': [0.0, 1],
+                                        'position': 0.0},
+                              'title': 'Dist Plot'}
+        self.assert_fig_equal(dp['layout'], expected_dp_layout)
 
         expected_dp_data_hist_1 = {'autobinx': False,
                                    'histnorm': 'probability density',
@@ -176,11 +178,11 @@ class TestDistplot(TestCase):
                                    'x': [0.8, 1.2, 0.2, 0.6, 1.6, -0.9, -0.07,
                                          1.95, 0.9, -0.2, -0.5, 0.3, 0.4,
                                          -0.37, 0.6],
-                                   'xaxis': 'x1',
+                                   'xaxis': 'x',
                                    'xbins': {'end': 1.95, 'size': 0.2,
                                              'start': -0.9},
-                                   'yaxis': 'y1'}
-        self.assertEqual(dp['data'][0], expected_dp_data_hist_1)
+                                   'yaxis': 'y'}
+        self.assert_fig_equal(dp['data'][0], expected_dp_data_hist_1)
 
         expected_dp_data_hist_2 = {'autobinx': False,
                                    'histnorm': 'probability density',
@@ -192,11 +194,11 @@ class TestDistplot(TestCase):
                                    'x': [0.8, 1.5, 1.5, 0.6, 0.59, 1.0, 0.8,
                                          1.7, 0.5, 0.8, -0.3, 1.2, 0.56, 0.3,
                                          2.2],
-                                   'xaxis': 'x1',
+                                   'xaxis': 'x',
                                    'xbins': {'end': 2.2, 'size': 0.2,
                                              'start': -0.3},
-                                   'yaxis': 'y1'}
-        self.assertEqual(dp['data'][1], expected_dp_data_hist_2)
+                                   'yaxis': 'y'}
+        self.assert_fig_equal(dp['data'][1], expected_dp_data_hist_2)
 
     def test_distplot_more_args_prob(self):
 
@@ -222,11 +224,13 @@ class TestDistplot(TestCase):
                               'hovermode': 'closest',
                               'legend': {'traceorder': 'reversed'},
                               'title': 'Dist Plot',
-                              'xaxis1': {'anchor': 'y2', 'domain': [0.0, 1.0],
-                                         'zeroline': False},
-                              'yaxis1': {'anchor': 'free', 'domain': [0.0, 1],
-                                         'position': 0.0}}
-        self.assertEqual(dp['layout'], expected_dp_layout)
+                              'xaxis': {'anchor': 'y2',
+                                        'domain': [0.0, 1.0],
+                                        'zeroline': False},
+                              'yaxis': {'anchor': 'free',
+                                        'domain': [0.0, 1],
+                                        'position': 0.0}}
+        self.assert_fig_equal(dp['layout'], expected_dp_layout)
 
         expected_dp_data_hist_1 = {'autobinx': False,
                                    'histnorm': 'probability',
@@ -238,11 +242,11 @@ class TestDistplot(TestCase):
                                    'x': [0.8, 1.2, 0.2, 0.6, 1.6, -0.9, -0.07,
                                          1.95, 0.9, -0.2, -0.5, 0.3, 0.4,
                                          -0.37, 0.6],
-                                   'xaxis': 'x1',
+                                   'xaxis': 'x',
                                    'xbins': {'end': 1.95, 'size': 0.2,
                                              'start': -0.9},
-                                   'yaxis': 'y1'}
-        self.assertEqual(dp['data'][0], expected_dp_data_hist_1)
+                                   'yaxis': 'y'}
+        self.assert_fig_equal(dp['data'][0], expected_dp_data_hist_1)
 
         expected_dp_data_hist_2 = {'autobinx': False,
                                    'histnorm': 'probability',
@@ -254,11 +258,11 @@ class TestDistplot(TestCase):
                                    'x': [0.8, 1.5, 1.5, 0.6, 0.59, 1.0, 0.8,
                                          1.7, 0.5, 0.8, -0.3, 1.2, 0.56, 0.3,
                                          2.2],
-                                   'xaxis': 'x1',
+                                   'xaxis': 'x',
                                    'xbins': {'end': 2.2, 'size': 0.2,
                                              'start': -0.3},
-                                   'yaxis': 'y1'}
-        self.assertEqual(dp['data'][1], expected_dp_data_hist_2)
+                                   'yaxis': 'y'}
+        self.assert_fig_equal(dp['data'][1], expected_dp_data_hist_2)
 
         def test_distplot_binsize_array_prob(self):
             hist1_x = [0.8, 1.2, 0.2, 0.6, 1.6, -0.9, -0.07, 1.95, 0.9, -0.2,
@@ -278,35 +282,35 @@ class TestDistplot(TestCase):
                                        'histnorm': 'probability density',
                                        'legendgroup': '2012',
                                        'marker':
-                                       {'color': 'rgb(31, 119, 180)'},
+                                       {'color': 'rgb(31,119,180)'},
                                        'name': '2012',
                                        'opacity': 0.7,
                                        'type': 'histogram',
                                        'x': [0.8, 1.2, 0.2, 0.6, 1.6, -0.9,
                                              -0.07, 1.95, 0.9, -0.2, -0.5, 0.3,
                                              0.4, -0.37, 0.6],
-                                       'xaxis': 'x1',
+                                       'xaxis': 'x',
                                        'xbins': {'end': 1.95, 'size': 0.2,
                                                  'start': -0.9},
-                                       'yaxis': 'y1'}
-            self.assertEqual(dp['data'][0], expected_dp_data_hist_1)
+                                       'yaxis': 'y'}
+            self.assert_fig_equal(dp['data'][0], expected_dp_data_hist_1)
 
             expected_dp_data_hist_2 = {'autobinx': False,
                                        'histnorm': 'probability density',
                                        'legendgroup': '2013',
                                        'marker':
-                                       {'color': 'rgb(255, 127, 14)'},
+                                       {'color': 'rgb(255,127,14)'},
                                        'name': '2013',
                                        'opacity': 0.7,
                                        'type': 'histogram',
                                        'x': [0.8, 1.5, 1.5, 0.6, 0.59, 1.0,
                                              0.8, 1.7, 0.5, 0.8, -0.3, 1.2,
                                              0.56, 0.3, 2.2],
-                                       'xaxis': 'x1',
+                                       'xaxis': 'x',
                                        'xbins': {'end': 2.2, 'size': 0.2,
                                                  'start': -0.3},
-                                       'yaxis': 'y1'}
-            self.assertEqual(dp['data'][1], expected_dp_data_hist_2)
+                                       'yaxis': 'y'}
+            self.assert_fig_equal(dp['data'][1], expected_dp_data_hist_2)
 
         def test_distplot_binsize_array_prob_density(self):
             hist1_x = [0.8, 1.2, 0.2, 0.6, 1.6, -0.9, -0.07, 1.95, 0.9, -0.2,
@@ -326,35 +330,35 @@ class TestDistplot(TestCase):
                                        'histnorm': 'probability density',
                                        'legendgroup': '2012',
                                        'marker':
-                                       {'color': 'rgb(31, 119, 180)'},
+                                       {'color': 'rgb(31,119,180)'},
                                        'name': '2012',
                                        'opacity': 0.7,
                                        'type': 'histogram',
                                        'x': [0.8, 1.2, 0.2, 0.6, 1.6, -0.9,
                                              -0.07, 1.95, 0.9, -0.2, -0.5, 0.3,
                                              0.4, -0.37, 0.6],
-                                       'xaxis': 'x1',
+                                       'xaxis': 'x',
                                        'xbins': {'end': 1.95, 'size': 0.2,
                                                  'start': -0.9},
-                                       'yaxis': 'y1'}
-            self.assertEqual(dp['data'][0], expected_dp_data_hist_1)
+                                       'yaxis': 'y'}
+            self.assert_fig_equal(dp['data'][0], expected_dp_data_hist_1)
 
             expected_dp_data_hist_2 = {'autobinx': False,
                                        'histnorm': 'probability density',
                                        'legendgroup': '2013',
                                        'marker':
-                                       {'color': 'rgb(255, 127, 14)'},
+                                       {'color': 'rgb(255,127,14)'},
                                        'name': '2013',
                                        'opacity': 0.7,
                                        'type': 'histogram',
                                        'x': [0.8, 1.5, 1.5, 0.6, 0.59, 1.0,
                                              0.8, 1.7, 0.5, 0.8, -0.3, 1.2,
                                              0.56, 0.3, 2.2],
-                                       'xaxis': 'x1',
+                                       'xaxis': 'x',
                                        'xbins': {'end': 2.2, 'size': 0.2,
                                                  'start': -0.3},
-                                       'yaxis': 'y1'}
-            self.assertEqual(dp['data'][1], expected_dp_data_hist_2)
+                                       'yaxis': 'y'}
+            self.assert_fig_equal(dp['data'][1], expected_dp_data_hist_2)
 
 
 class TestStreamline(TestCase):
@@ -442,9 +446,9 @@ class TestStreamline(TestCase):
             'type': 'scatter',
             'mode': 'lines'
         }
-        self.assertListEqual(strln['data'][0]['y'][0:100],
+        self.assertListEqual(list(strln['data'][0]['y'][0:100]),
                              expected_strln_0_100['y'])
-        self.assertListEqual(strln['data'][0]['x'][0:100],
+        self.assertListEqual(list(strln['data'][0]['x'][0:100]),
                              expected_strln_0_100['x'])
 
 
@@ -455,11 +459,11 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
         dendro = ff.create_dendrogram(X=X)
 
         expected_dendro = go.Figure(
-            data=go.Data([
+            data=[
                 go.Scatter(
                     x=np.array([25., 25., 35., 35.]),
                     y=np.array([0., 1., 1., 0.]),
-                    marker=go.Marker(color='rgb(61,153,112)'),
+                    marker=go.scatter.Marker(color='rgb(61,153,112)'),
                     mode='lines',
                     xaxis='x',
                     yaxis='y',
@@ -469,7 +473,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
                 go.Scatter(
                     x=np.array([15., 15., 30., 30.]),
                     y=np.array([0., 2.23606798, 2.23606798, 1.]),
-                    marker=go.Marker(color='rgb(61,153,112)'),
+                    marker=go.scatter.Marker(color='rgb(61,153,112)'),
                     mode='lines',
                     xaxis='x',
                     yaxis='y',
@@ -479,21 +483,21 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
                 go.Scatter(
                     x=np.array([5., 5., 22.5, 22.5]),
                     y=np.array([0., 3.60555128, 3.60555128, 2.23606798]),
-                    marker=go.Marker(color='rgb(0,116,217)'),
+                    marker=go.scatter.Marker(color='rgb(0,116,217)'),
                     mode='lines',
                     xaxis='x',
                     yaxis='y',
                     hoverinfo='text',
                     text=None
                 )
-            ]),
+            ],
             layout=go.Layout(
                 autosize=False,
-                height='100%',
+                height=np.inf,
                 hovermode='closest',
                 showlegend=False,
-                width='100%',
-                xaxis=go.XAxis(
+                width=np.inf,
+                xaxis=go.layout.XAxis(
                     mirror='allticks',
                     rangemode='tozero',
                     showgrid=False,
@@ -506,7 +510,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
                     type='linear',
                     zeroline=False
                 ),
-                yaxis=go.YAxis(
+                yaxis=go.layout.YAxis(
                     mirror='allticks',
                     rangemode='tozero',
                     showgrid=False,
@@ -522,11 +526,15 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
         self.assertEqual(len(dendro['data']), 3)
 
         # this is actually a bit clearer when debugging tests.
-        self.assert_dict_equal(dendro['data'][0], expected_dendro['data'][0])
-        self.assert_dict_equal(dendro['data'][1], expected_dendro['data'][1])
-        self.assert_dict_equal(dendro['data'][2], expected_dendro['data'][2])
+        self.assert_fig_equal(dendro['data'][0],
+                              expected_dendro['data'][0])
+        self.assert_fig_equal(dendro['data'][1],
+                              expected_dendro['data'][1])
+        self.assert_fig_equal(dendro['data'][2],
+                              expected_dendro['data'][2])
 
-        self.assert_dict_equal(dendro['layout'], expected_dendro['layout'])
+        self.assert_fig_equal(dendro['layout'],
+                              expected_dendro['layout'])
 
     def test_dendrogram_random_matrix(self):
 
@@ -540,9 +548,9 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
         dendro = ff.create_dendrogram(X, labels=names)
 
         expected_dendro = go.Figure(
-            data=go.Data([
+            data=[
                 go.Scatter(
-                    marker=go.Marker(color='rgb(61,153,112)'),
+                    marker=go.scatter.Marker(color='rgb(61,153,112)'),
                     mode='lines',
                     xaxis='x',
                     yaxis='y',
@@ -550,7 +558,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
                     text=None
                 ),
                 go.Scatter(
-                    marker=go.Marker(
+                    marker=go.scatter.Marker(
                         color='rgb(61,153,112)'
                     ),
                     mode='lines',
@@ -560,7 +568,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
                     text=None
                 ),
                 go.Scatter(
-                    marker=go.Marker(color='rgb(61,153,112)'),
+                    marker=go.scatter.Marker(color='rgb(61,153,112)'),
                     mode='lines',
                     xaxis='x',
                     yaxis='y',
@@ -568,21 +576,21 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
                     text=None
                 ),
                 go.Scatter(
-                    marker=go.Marker(color='rgb(0,116,217)'),
+                    marker=go.scatter.Marker(color='rgb(0,116,217)'),
                     mode='lines',
                     xaxis='x',
                     yaxis='y',
                     hoverinfo='text',
                     text=None
                 )
-            ]),
+            ],
             layout=go.Layout(
                 autosize=False,
-                height='100%',
+                height=np.inf,
                 hovermode='closest',
                 showlegend=False,
-                width='100%',
-                xaxis=go.XAxis(
+                width=np.inf,
+                xaxis=go.layout.XAxis(
                     mirror='allticks',
                     rangemode='tozero',
                     showgrid=False,
@@ -594,7 +602,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
                     type='linear',
                     zeroline=False
                 ),
-                yaxis=go.YAxis(
+                yaxis=go.layout.YAxis(
                     mirror='allticks',
                     rangemode='tozero',
                     showgrid=False,
@@ -610,31 +618,51 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
         self.assertEqual(len(dendro['data']), 4)
 
         # it's random, so we can only check that the values aren't equal
-        y_vals = [dendro['data'][0].pop('y'), dendro['data'][1].pop('y'),
-                  dendro['data'][2].pop('y'), dendro['data'][3].pop('y')]
+        y_vals = [dendro['data'][0].to_plotly_json().pop('y'),
+                  dendro['data'][1].to_plotly_json().pop('y'),
+                  dendro['data'][2].to_plotly_json().pop('y'),
+                  dendro['data'][3].to_plotly_json().pop('y')]
         for i in range(len(y_vals)):
             for j in range(len(y_vals)):
                 if i != j:
                     self.assertFalse(np.allclose(y_vals[i], y_vals[j]))
 
-        x_vals = [dendro['data'][0].pop('x'), dendro['data'][1].pop('x'),
-                  dendro['data'][2].pop('x'), dendro['data'][3].pop('x')]
+        x_vals = [dendro['data'][0].to_plotly_json().pop('x'),
+                  dendro['data'][1].to_plotly_json().pop('x'),
+                  dendro['data'][2].to_plotly_json().pop('x'),
+                  dendro['data'][3].to_plotly_json().pop('x')]
         for i in range(len(x_vals)):
             for j in range(len(x_vals)):
                 if i != j:
                     self.assertFalse(np.allclose(x_vals[i], x_vals[j]))
 
         # we also need to check the ticktext manually
-        xaxis_ticktext = dendro['layout']['xaxis'].pop('ticktext')
+        xaxis_ticktext = dendro['layout'].to_plotly_json()['xaxis'].pop('ticktext')
         self.assertEqual(xaxis_ticktext[0], 'John')
 
         # this is actually a bit clearer when debugging tests.
-        self.assert_dict_equal(dendro['data'][0], expected_dendro['data'][0])
-        self.assert_dict_equal(dendro['data'][1], expected_dendro['data'][1])
-        self.assert_dict_equal(dendro['data'][2], expected_dendro['data'][2])
-        self.assert_dict_equal(dendro['data'][3], expected_dendro['data'][3])
+        self.assert_fig_equal(dendro['data'][0],
+                              expected_dendro['data'][0],
+                              ignore=['uid', 'x', 'y'])
+        self.assert_fig_equal(dendro['data'][1],
+                              expected_dendro['data'][1],
+                              ignore=['uid', 'x', 'y'])
+        self.assert_fig_equal(dendro['data'][2],
+                              expected_dendro['data'][2],
+                              ignore=['uid', 'x', 'y'])
+        self.assert_fig_equal(dendro['data'][3],
+                              expected_dendro['data'][3],
+                              ignore=['uid', 'x', 'y'])
 
-        self.assert_dict_equal(dendro['layout'], expected_dendro['layout'])
+        # layout except xaxis
+        self.assert_fig_equal(dendro['layout'],
+                              expected_dendro['layout'],
+                              ignore=['xaxis'])
+
+        # xaxis
+        self.assert_fig_equal(dendro['layout']['xaxis'],
+                              expected_dendro['layout']['xaxis'],
+                              ignore=['ticktext'])
 
     def test_dendrogram_orientation(self):
         X = np.random.rand(5, 5)
@@ -665,23 +693,24 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
                       [1, 2, 1, 4],
                       [1, 2, 3, 1]])
         greyscale = [
-                'rgb(0,0,0)',  # black
-                'rgb(05,105,105)',  # dim grey
-                'rgb(128,128,128)',  # grey
-                'rgb(169,169,169)',  # dark grey
-                'rgb(192,192,192)',  # silver
-                'rgb(211,211,211)',  # light grey
-                'rgb(220,220,220)',  # gainsboro
-                'rgb(245,245,245)']  # white smoke
+            'rgb(0,0,0)',  # black
+            'rgb(05,105,105)',  # dim grey
+            'rgb(128,128,128)',  # grey
+            'rgb(169,169,169)',  # dark grey
+            'rgb(192,192,192)',  # silver
+            'rgb(211,211,211)',  # light grey
+            'rgb(220,220,220)',  # gainsboro
+            'rgb(245,245,245)'  # white smoke
+        ]
 
         dendro = ff.create_dendrogram(X, colorscale=greyscale)
 
         expected_dendro = go.Figure(
-            data=go.Data([
+            data=[
                 go.Scatter(
                     x=np.array([25., 25., 35., 35.]),
                     y=np.array([0., 1., 1., 0.]),
-                    marker=go.Marker(color='rgb(128,128,128)'),
+                    marker=go.scatter.Marker(color='rgb(128,128,128)'),
                     mode='lines',
                     xaxis='x',
                     yaxis='y',
@@ -691,7 +720,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
                 go.Scatter(
                     x=np.array([15., 15., 30., 30.]),
                     y=np.array([0., 2.23606798, 2.23606798, 1.]),
-                    marker=go.Marker(color='rgb(128,128,128)'),
+                    marker=go.scatter.Marker(color='rgb(128,128,128)'),
                     mode='lines',
                     xaxis='x',
                     yaxis='y',
@@ -701,21 +730,21 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
                 go.Scatter(
                     x=np.array([5., 5., 22.5, 22.5]),
                     y=np.array([0., 3.60555128, 3.60555128, 2.23606798]),
-                    marker=go.Marker(color='rgb(0,0,0)'),
+                    marker=go.scatter.Marker(color='rgb(0,0,0)'),
                     mode='lines',
                     xaxis='x',
                     yaxis='y',
                     hoverinfo='text',
                     text=None
                 )
-            ]),
+            ],
             layout=go.Layout(
                 autosize=False,
-                height='100%',
+                height=np.inf,
                 hovermode='closest',
                 showlegend=False,
-                width='100%',
-                xaxis=go.XAxis(
+                width=np.inf,
+                xaxis=go.layout.XAxis(
                     mirror='allticks',
                     rangemode='tozero',
                     showgrid=False,
@@ -728,7 +757,7 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
                     type='linear',
                     zeroline=False
                 ),
-                yaxis=go.YAxis(
+                yaxis=go.layout.YAxis(
                     mirror='allticks',
                     rangemode='tozero',
                     showgrid=False,
@@ -744,9 +773,9 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
         self.assertEqual(len(dendro['data']), 3)
 
         # this is actually a bit clearer when debugging tests.
-        self.assert_dict_equal(dendro['data'][0], expected_dendro['data'][0])
-        self.assert_dict_equal(dendro['data'][1], expected_dendro['data'][1])
-        self.assert_dict_equal(dendro['data'][2], expected_dendro['data'][2])
+        self.assert_fig_equal(dendro['data'][0], expected_dendro['data'][0])
+        self.assert_fig_equal(dendro['data'][1], expected_dendro['data'][1])
+        self.assert_fig_equal(dendro['data'][2], expected_dendro['data'][2])
 
 
 class TestTrisurf(NumpyTestUtilsMixin, TestCase):
@@ -883,7 +912,7 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
                             -1.0, 0.0, None, 0.0, -0.0, 0.0, 0.0, None, -0.0,
                             0.0, -1.0, -0.0, None, 0.0, 0.0, 0.0, 0.0, None,
                             0.0, 0.0, 1.0, 0.0, None]},
-                     {'hoverinfo': 'None',
+                     {'hoverinfo': 'none',
                       'marker': {'color': [-0.33333333333333331,
                                            0.33333333333333331],
                                  'colorscale': [[0.0, 'rgb(31, 119, 180)'],
@@ -914,17 +943,17 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
                        'width': 800}
         }
 
-        self.assert_dict_equal(test_trisurf_plot['data'][0],
+        self.assert_fig_equal(test_trisurf_plot['data'][0],
                                exp_trisurf_plot['data'][0])
 
-        self.assert_dict_equal(test_trisurf_plot['data'][1],
+        self.assert_fig_equal(test_trisurf_plot['data'][1],
                                exp_trisurf_plot['data'][1])
 
-        self.assert_dict_equal(test_trisurf_plot['data'][2],
-                               exp_trisurf_plot['data'][2])
+        self.assert_fig_equal(test_trisurf_plot['data'][2],
+                              exp_trisurf_plot['data'][2])
 
-        self.assert_dict_equal(test_trisurf_plot['layout'],
-                               exp_trisurf_plot['layout'])
+        self.assert_fig_equal(test_trisurf_plot['layout'],
+                              exp_trisurf_plot['layout'])
 
         # Test passing custom colors
         colors_raw = np.random.randn(simplices.shape[0])
@@ -1157,12 +1186,11 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
         )
 
         exp_scatter_plot_matrix = {
-            'data': [{'name': None,
-                      'showlegend': False,
+            'data': [{'showlegend': False,
                       'type': 'box',
-                      'xaxis': 'x1',
+                      'xaxis': 'x',
                       'y': [2, 6, -15, 5, -2, 0],
-                      'yaxis': 'y1'},
+                      'yaxis': 'y'},
                      {'marker': {'size': 13},
                       'mode': 'markers',
                       'showlegend': False,
@@ -1192,7 +1220,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
                        'showlegend': True,
                        'title': 'Scatterplot Matrix',
                        'width': 1000,
-                       'xaxis1': {'anchor': 'y1',
+                       'xaxis': {'anchor': 'y',
                                   'domain': [0.0, 0.45],
                                   'showticklabels': False},
                        'xaxis2': {'anchor': 'y2',
@@ -1204,7 +1232,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
                                   'domain': [0.55, 1.0],
                                   'showticklabels': False,
                                   'title': 'Fruit'},
-                       'yaxis1': {'anchor': 'x1',
+                       'yaxis': {'anchor': 'x',
                                   'domain': [0.575, 1.0],
                                   'title': 'Numbers'},
                        'yaxis2': {'anchor': 'x2',
@@ -1216,14 +1244,14 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
                                   'domain': [0.0, 0.425]}}
         }
 
-        self.assert_dict_equal(test_scatter_plot_matrix['data'][0],
-                               exp_scatter_plot_matrix['data'][0])
+        self.assert_fig_equal(test_scatter_plot_matrix['data'][0],
+                              exp_scatter_plot_matrix['data'][0])
 
-        self.assert_dict_equal(test_scatter_plot_matrix['data'][1],
-                               exp_scatter_plot_matrix['data'][1])
+        self.assert_fig_equal(test_scatter_plot_matrix['data'][1],
+                              exp_scatter_plot_matrix['data'][1])
 
-        self.assert_dict_equal(test_scatter_plot_matrix['layout'],
-                               exp_scatter_plot_matrix['layout'])
+        self.assert_fig_equal(test_scatter_plot_matrix['layout'],
+                              exp_scatter_plot_matrix['layout'])
 
     def test_scatter_plot_matrix_kwargs(self):
 
@@ -1245,34 +1273,34 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
                       'showlegend': False,
                       'type': 'histogram',
                       'x': [2, -15, -2, 0],
-                      'xaxis': 'x1',
-                      'yaxis': 'y1'},
+                      'xaxis': 'x',
+                      'yaxis': 'y'},
                      {'marker': {'color': 'rgb(255, 255, 204)'},
                       'showlegend': False,
                       'type': 'histogram',
                       'x': [6, 5],
-                      'xaxis': 'x1',
-                      'yaxis': 'y1'}],
+                      'xaxis': 'x',
+                      'yaxis': 'y'}],
             'layout': {'barmode': 'stack',
                        'height': 1000,
                        'showlegend': True,
                        'title': 'Scatterplot Matrix',
                        'width': 1000,
-                       'xaxis1': {'anchor': 'y1',
+                       'xaxis': {'anchor': 'y',
                                   'domain': [0.0, 1.0],
                                   'title': 'Numbers'},
-                       'yaxis1': {'anchor': 'x1',
+                       'yaxis': {'anchor': 'x',
                                   'domain': [0.0, 1.0],
                                   'title': 'Numbers'}}
         }
 
-        self.assert_dict_equal(test_scatter_plot_matrix['data'][0],
-                               exp_scatter_plot_matrix['data'][0])
+        self.assert_fig_equal(test_scatter_plot_matrix['data'][0],
+                              exp_scatter_plot_matrix['data'][0])
 
-        self.assert_dict_equal(test_scatter_plot_matrix['data'][1],
+        self.assert_fig_equal(test_scatter_plot_matrix['data'][1],
                                exp_scatter_plot_matrix['data'][1])
 
-        self.assert_dict_equal(test_scatter_plot_matrix['layout'],
+        self.assert_fig_equal(test_scatter_plot_matrix['layout'],
                                exp_scatter_plot_matrix['layout'])
 
 
@@ -1360,10 +1388,10 @@ class TestGantt(NumpyTestUtilsMixin, TestCase):
                                        'tickvals': [0, 1],
                                        'zeroline': False}}}
 
-        self.assertEqual(test_gantt_chart['data'][0],
-                         exp_gantt_chart['data'][0])
+        self.assert_fig_equal(test_gantt_chart['data'][0],
+                              exp_gantt_chart['data'][0])
 
-        self.assert_dict_equal(test_gantt_chart['layout'],
+        self.assert_fig_equal(test_gantt_chart['layout'],
                                exp_gantt_chart['layout'])
 
 
@@ -1890,14 +1918,14 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
                                      1.93939394,  1.94949495, 1.95959596,
                                      1.96969697,  1.97979798,  1.98989899,
                                      2.])},
-                     {'line': {'color': 'rgb(0,0,0)', 'width': 1.5},
+                     {'line': {'color': 'rgb(0, 0, 0)', 'width': 1.5},
                       'mode': 'lines',
                       'name': '',
                       'type': 'scatter',
                       'x': [0, 0],
                       'y': [1.0, 2.0]},
                      {'hoverinfo': 'text',
-                      'line': {'color': 'rgb(0,0,0)', 'width': 4},
+                      'line': {'color': 'rgb(0, 0, 0)', 'width': 4},
                       'mode': 'lines',
                       'text': ['lower-quartile: 1.00',
                                'upper-quartile: 2.00'],
@@ -1905,7 +1933,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
                       'x': [0, 0],
                       'y': [1.0, 2.0]},
                      {'hoverinfo': 'text',
-                      'marker': {'color': 'rgb(255,255,255)',
+                      'marker': {'color': 'rgb(255, 255, 255)',
                                  'symbol': 'square'},
                       'mode': 'markers',
                       'text': ['median: 1.50'],
@@ -1947,14 +1975,15 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
                                  'title': '',
                                  'zeroline': False}}}
 
-        self.assert_dict_equal(test_violin['data'][0],
-                               exp_violin['data'][0])
+        # test both items in 'data'
+        for i in [0, 1]:
+            self.assert_fig_equal(
+                test_violin['data'][i],
+                exp_violin['data'][i]
+            )
 
-        self.assert_dict_equal(test_violin['data'][1],
-                               exp_violin['data'][1])
-
-        self.assert_dict_equal(test_violin['layout'],
-                               exp_violin['layout'])
+        self.assert_fig_equal(test_violin['layout'],
+                              exp_violin['layout'])
 
 
 class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
@@ -2051,9 +2080,24 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
                           color_name='c', colormap=colormap)
 
     def test_valid_facet_grid_fig(self):
-        mpg = pd.read_table('https://raw.githubusercontent.com/plotly/datasets/master/mpg_2017.txt')
-        df = mpg.head(10)
+        mpg = [
+            ["audi", "a4", 1.8, 1999, 4, "auto(15)", "f", 18, 29, "p", "compact"],
+            ["audi", "a4", 1.8, 1999, 4, "auto(l5)", "f", 18, 29, "p", "compact"],
+            ["audi", "a4", 2, 2008, 4, "manual(m6)", "f", 20, 31, "p", "compact"],
+            ["audi", "a4", 2, 2008, 4, "auto(av)", "f", 21, 30, "p", "compact"],
+            ["audi", "a4", 2.8, 1999, 6, "auto(l5)", "f", 16, 26, "p", "compact"],
+            ["audi", "a4", 2.8, 1999, 6, "manual(m5)", "f", 18, 26, "p", "compact"],
+            ["audi", "a4", 3.1, 2008, 6, "auto(av)", "f", 18, 27, "p", "compact"],
+            ["audi", "a4 quattro", 1.8, 1999, 4, "manual(m5)", "4", 18, 26, "p", "compact"],
+            ["audi", "a4 quattro", 1.8, 1999, 4, "auto(l5)", "4", 16, 25, "p", "compact"],
+            ["audi", "a4 quattro", 2, 2008, 4, "manual(m6)", "4", 20, 28, "p", "compact"],
+        ]
 
+        df = pd.DataFrame(
+            mpg,
+            columns=["manufacturer", "model", "displ", "year", "cyl", "trans",
+                     "drv", "cty", "hwy", "fl", "class"]
+        )
         test_facet_grid = ff.create_facet_grid(
             df,
             x='displ',
@@ -2062,45 +2106,30 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
         )
 
         exp_facet_grid = {
-            'data': [{'marker': {'color': 'rgb(31, 119, 180)',
-                'line': {'color': 'darkgrey', 'width': 1},
-                'size': 8},
+            'data': [
+              {'marker': {'color': 'rgb(31, 119, 180)',
+               'line': {'color': 'darkgrey', 'width': 1},
+               'size': 8},
                'mode': 'markers',
                'opacity': 0.6,
                'type': 'scatter',
-               'x': [1.8,
-                    1.8,
-                    2.0,
-                    2.0,
-                    1.8,
-                    1.8,
-                    2.0],
-               'xaxis': 'x1',
-               'y': [18,
-                    21,
-                    20,
-                    21,
-                    18,
-                    16,
-                    20],
-               'yaxis': 'y1'},
+               'x': [1.8, 1.8, 2.0, 2.0, 1.8, 1.8, 2.0],
+               'xaxis': 'x',
+               'y': [18, 18, 20, 21, 18, 16, 20],
+               'yaxis': 'y'},
               {'marker': {'color': 'rgb(31, 119, 180)',
                 'line': {'color': 'darkgrey', 'width': 1},
                 'size': 8},
                'mode': 'markers',
                'opacity': 0.6,
                'type': 'scatter',
-               'x':     [2.8,
-                   2.8,
-                   3.1],
+               'x': [2.8, 2.8, 3.1],
                'xaxis': 'x2',
-               'y':    [16,
-                   18,
-                   18],
-               'yaxis': 'y1'}],
+               'y': [16, 18, 18],
+               'yaxis': 'y'}],
              'layout': {'annotations': [{'font': {'color': '#0f0f0f', 'size': 13},
                 'showarrow': False,
-                'text': 4,
+                'text': '4',
                 'textangle': 0,
                 'x': 0.24625,
                 'xanchor': 'center',
@@ -2110,7 +2139,7 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
                 'yref': 'paper'},
                {'font': {'color': '#0f0f0f', 'size': 13},
                 'showarrow': False,
-                'text': 6,
+                'text': '6',
                 'textangle': 0,
                 'x': 0.7537499999999999,
                 'xanchor': 'center',
@@ -2131,7 +2160,7 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
                {'font': {'color': '#000000', 'size': 12},
                 'showarrow': False,
                 'text': 'cty',
-                'textangle': 270,
+                'textangle': -90,
                 'x': -0.1,
                 'xanchor': 'center',
                 'xref': 'paper',
@@ -2148,7 +2177,7 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
               'showlegend': False,
               'title': '',
               'width': 600,
-              'xaxis1': {'anchor': 'y1',
+              'xaxis': {'anchor': 'y',
                'domain': [0.0, 0.4925],
                'dtick': 0.0,
                'range': [0.85, 4.1575],
@@ -2161,28 +2190,23 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
                'range': [0.85, 4.1575],
                'ticklen': 0,
                'zeroline': False},
-              'yaxis1': {'anchor': 'x1',
+              'yaxis': {'anchor': 'x',
                'domain': [0.0, 1.0],
                'dtick': 1.0,
                'range': [15.75, 21.2625],
                'ticklen': 0,
                'zeroline': False}}}
 
-        # data
-        data_keys = test_facet_grid['data'][0].keys()
+        for j in [0, 1]:
+            self.assert_fig_equal(
+                test_facet_grid['data'][j],
+                exp_facet_grid['data'][j]
+            )
 
-        for j in range(len(test_facet_grid['data'])):
-            for key in data_keys:
-                if key != 'x' and key != 'y':
-                    self.assertEqual(test_facet_grid['data'][j][key],
-                                     exp_facet_grid['data'][j][key])
-                else:
-                    self.assertEqual(list(test_facet_grid['data'][j][key]),
-                                     list(exp_facet_grid['data'][j][key]))
-
-        # layout
-        self.assert_dict_equal(test_facet_grid['layout'],
-                               exp_facet_grid['layout'])
+        self.assert_fig_equal(
+            test_facet_grid['layout'],
+            exp_facet_grid['layout']
+        )
 
 
 class TestBullet(NumpyTestUtilsMixin, TestCase):
@@ -2287,9 +2311,9 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                       'type': 'bar',
                       'width': 2,
                       'x': [0],
-                      'xaxis': 'x1',
+                      'xaxis': 'x',
                       'y': [300],
-                      'yaxis': 'y1'},
+                      'yaxis': 'y'},
                      {'base': 0,
                       'hoverinfo': 'y',
                       'marker': {'color': 'rgb(149.5, 143.5, 29.0)'},
@@ -2298,9 +2322,9 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                       'type': 'bar',
                       'width': 2,
                       'x': [0],
-                      'xaxis': 'x1',
+                      'xaxis': 'x',
                       'y': [225],
-                      'yaxis': 'y1'},
+                      'yaxis': 'y'},
                      {'base': 0,
                       'hoverinfo': 'y',
                       'marker': {'color': 'rgb(255.0, 127.0, 14.0)'},
@@ -2309,9 +2333,9 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                       'type': 'bar',
                       'width': 2,
                       'x': [0],
-                      'xaxis': 'x1',
+                      'xaxis': 'x',
                       'y': [150],
-                      'yaxis': 'y1'},
+                      'yaxis': 'y'},
                      {'base': 0,
                       'hoverinfo': 'y',
                       'marker': {'color': 'rgb(44.0, 160.0, 44.0)'},
@@ -2320,9 +2344,9 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                       'type': 'bar',
                       'width': 0.4,
                       'x': [0.5],
-                      'xaxis': 'x1',
+                      'xaxis': 'x',
                       'y': [270],
-                      'yaxis': 'y1'},
+                      'yaxis': 'y'},
                      {'base': 0,
                       'hoverinfo': 'y',
                       'marker': {'color': 'rgb(255.0, 127.0, 14.0)'},
@@ -2331,9 +2355,9 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                       'type': 'bar',
                       'width': 0.4,
                       'x': [0.5],
-                      'xaxis': 'x1',
+                      'xaxis': 'x',
                       'y': [220],
-                      'yaxis': 'y1'},
+                      'yaxis': 'y'},
                      {'hoverinfo': 'y',
                       'marker': {'color': 'rgb(0, 0, 0)',
                                  'size': 30,
@@ -2341,9 +2365,9 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                       'name': 'markers',
                       'type': 'scatter',
                       'x': [0.5],
-                      'xaxis': 'x1',
+                      'xaxis': 'x',
                       'y': [250],
-                      'yaxis': 'y1'},
+                      'yaxis': 'y'},
                      {'base': 0,
                       'hoverinfo': 'y',
                       'marker': {'color': 'rgb(44.0, 160.0, 44.0)'},
@@ -2661,7 +2685,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                        'showlegend': False,
                        'title': 'new title',
                        'width': 1000,
-                       'xaxis1': {'anchor': 'y1',
+                       'xaxis1': {'anchor': 'y',
                                   'domain': [0.0, 0.039999999999999994],
                                   'range': [0, 1],
                                   'showgrid': False,
@@ -2691,7 +2715,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                                   'showgrid': False,
                                   'showticklabels': False,
                                   'zeroline': False},
-                       'yaxis1': {'anchor': 'x1',
+                       'yaxis1': {'anchor': 'x',
                                   'domain': [0.0, 1.0],
                                   'showgrid': False,
                                   'tickwidth': 1,
@@ -2717,106 +2741,110 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                                   'tickwidth': 1,
                                   'zeroline': False}}
         }
-        self.assert_dict_equal(fig, exp_fig)
+
+        for i in range(len(fig['data'])):
+            self.assert_fig_equal(fig['data'][i],
+                                  exp_fig['data'][i])
 
 
 class TestChoropleth(NumpyTestUtilsMixin, TestCase):
 
-    def test_fips_values_same_length(self):
-        pattern = 'fips and values must be the same length'
-        self.assertRaisesRegexp(
-            PlotlyError, pattern, ff.create_choropleth,
-            fips=[1001], values=[4004, 40004]
-        )
+    # run tests if required packages are installed
+    if shapely and shapefile and gp:
+        def test_fips_values_same_length(self):
+            pattern = 'fips and values must be the same length'
+            self.assertRaisesRegexp(
+                PlotlyError, pattern, ff.create_choropleth,
+                fips=[1001], values=[4004, 40004]
+            )
 
+        def test_correct_order_param(self):
+            pattern = (
+                'if you are using a custom order of unique values from '
+                'your color column, you must: have all the unique values '
+                'in your order and have no duplicate items'
+            )
 
-    def test_correct_order_param(self):
-        pattern = (
-            'if you are using a custom order of unique values from '
-            'your color column, you must: have all the unique values '
-            'in your order and have no duplicate items'
-        )
+            self.assertRaisesRegexp(
+                PlotlyError, pattern, ff.create_choropleth,
+                fips=[1], values=[1], order=[1, 1, 1]
+            )
 
-        self.assertRaisesRegexp(
-            PlotlyError, pattern, ff.create_choropleth,
-            fips=[1], values=[1], order=[1, 1, 1]
-        )
+        def test_colorscale_and_levels_same_length(self):
+            self.assertRaises(
+                PlotlyError, ff.create_choropleth,
+                fips=[1001, 1003, 1005], values=[5, 2, 1],
+                colorscale=['rgb(0,0,0)']
+            )
 
-    def test_colorscale_and_levels_same_length(self):
-        self.assertRaises(
-            PlotlyError, ff.create_choropleth,
-            fips=[1001, 1003, 1005], values=[5, 2, 1],
-            colorscale=['rgb(0,0,0)']
-        )
+        def test_scope_is_not_list(self):
 
-    def test_scope_is_not_list(self):
+            pattern = "'scope' must be a list/tuple/sequence"
 
-        pattern = "'scope' must be a list/tuple/sequence"
+            self.assertRaisesRegexp(
+                PlotlyError, pattern, ff.create_choropleth,
+                fips=[1001, 1003], values=[5, 2], scope='foo',
+            )
 
-        self.assertRaisesRegexp(
-            PlotlyError, pattern, ff.create_choropleth,
-            fips=[1001, 1003], values=[5, 2], scope='foo',
-        )
+        def test_full_choropleth(self):
+            fips = [1001]
+            values = [1]
+            fig = ff.create_choropleth(
+                fips=fips, values=values,
+                simplify_county=1
+            )
 
-    def test_full_choropleth(self):
-        fips = [1001]
-        values = [1]
-        fig = ff.create_choropleth(
-            fips=fips, values=values,
-            simplify_county=1
-        )
+            exp_fig_head = [
+                -88.053375,
+                -88.02916499999999,
+                -88.02432999999999,
+                -88.04504299999999,
+                -88.053375,
+                np.nan,
+                -88.211209,
+                -88.209999,
+                -88.208733,
+                -88.209559,
+                -88.211209,
+                np.nan,
+                -88.22511999999999,
+                -88.22128099999999,
+                -88.218694,
+                -88.22465299999999,
+                -88.22511999999999,
+                np.nan,
+                -88.264659,
+                -88.25782699999999,
+                -88.25947,
+                -88.255659,
+                -88.264659,
+                np.nan,
+                -88.327302,
+                -88.20146799999999,
+                -88.141143,
+                -88.124658,
+                -88.074854,
+                -88.12493599999999,
+                -88.10665399999999,
+                -88.149812,
+                -88.327302,
+                np.nan,
+                -88.346745,
+                -88.341235,
+                -88.33288999999999,
+                -88.346823,
+                -88.346745,
+                np.nan,
+                -88.473227,
+                -88.097888,
+                -88.154617,
+                -88.20295899999999,
+                -85.605165,
+                -85.18440000000001,
+                -85.12218899999999,
+                -85.142567,
+                -85.113329,
+                -85.10533699999999
+            ]
 
-        exp_fig_head = [
-            -88.053375,
-            -88.02916499999999,
-            -88.02432999999999,
-            -88.04504299999999,
-            -88.053375,
-            np.nan,
-            -88.211209,
-            -88.209999,
-            -88.208733,
-            -88.209559,
-            -88.211209,
-            np.nan,
-            -88.22511999999999,
-            -88.22128099999999,
-            -88.218694,
-            -88.22465299999999,
-            -88.22511999999999,
-            np.nan,
-            -88.264659,
-            -88.25782699999999,
-            -88.25947,
-            -88.255659,
-            -88.264659,
-            np.nan,
-            -88.327302,
-            -88.20146799999999,
-            -88.141143,
-            -88.124658,
-            -88.074854,
-            -88.12493599999999,
-            -88.10665399999999,
-            -88.149812,
-            -88.327302,
-            np.nan,
-            -88.346745,
-            -88.341235,
-            -88.33288999999999,
-            -88.346823,
-            -88.346745,
-            np.nan,
-            -88.473227,
-            -88.097888,
-            -88.154617,
-            -88.20295899999999,
-            -85.605165,
-            -85.18440000000001,
-            -85.12218899999999,
-            -85.142567,
-            -85.113329,
-            -85.10533699999999
-        ] 
-                   
-        self.assertEqual(fig['data'][2]['x'][:50], exp_fig_head)
+            self.assertEqual(fig['data'][2]['x'][:50], exp_fig_head)

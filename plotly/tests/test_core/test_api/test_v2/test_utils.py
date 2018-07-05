@@ -167,7 +167,7 @@ class GetHeadersTest(PlotlyApiTestCase):
     def test_normal_auth(self):
         headers = utils.get_headers()
         expected_headers = {
-            'plotly-client-platform': 'python {}'.format(version.__version__),
+            'plotly-client-platform': 'python {}'.format(version.stable_semver()),
             'authorization': 'Basic Zm9vOmJhcg==',
             'content-type': 'application/json'
         }
@@ -177,7 +177,7 @@ class GetHeadersTest(PlotlyApiTestCase):
         sign_in(self.username, self.api_key, plotly_proxy_authorization=True)
         headers = utils.get_headers()
         expected_headers = {
-            'plotly-client-platform': 'python {}'.format(version.__version__),
+            'plotly-client-platform': 'python {}'.format(version.stable_semver()),
             'authorization': 'Basic Y25ldDpob29wbGE=',
             'plotly-authorization': 'Basic Zm9vOmJhcg==',
             'content-type': 'application/json'
@@ -249,4 +249,4 @@ class RequestTest(PlotlyApiTestCase):
         # Finally, we check details elsewhere, but make sure we do validate.
 
         utils.request(self.method, self.url)
-        self.validate_response_mock.assert_called_once()
+        assert self.request_mock.call_count == 1
