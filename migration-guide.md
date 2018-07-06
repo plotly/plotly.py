@@ -1,5 +1,7 @@
 # Migration to Version 3
-There are many new and great features in Plotly 3.0 including deeper Jupyter integration, deeper figure validation, improved performance, and more. This guide contains the a summary of the breaking changes that you need to be aware of when migrating code from version 2 to version 3. 
+There are many new and great features in Plotly 3.0 including deeper Jupyter integration, deeper figure validation, improved performance, and more. This guide contains the a summary of the breaking changes that you need to be aware of when migrating code from version 2 to version 3.
+
+For a high level overview, read our [announcement post](https://medium.com/@plotlygraphs/introducing-plotly-py-3-0-0-7bb1333f69c6).
 
 ## Simple FigureWidget Example
 We now have seamless integration with the Jupyter widget ecosystem. We've introduced a new graph object called `go.FigureWidget` that acts like a regular plotly `go.Figure` that can be directly displayed in the notebook.
@@ -10,7 +12,10 @@ import plotly
 import plotly.graph_objs as go
 
 f = go.FigureWidget()
+f  # printing the widget will display it
 ```
+
+This means that `plotly.offline.iplot` and `plotly.offline.init_notebook_mode()` are no longer required (although still supported).
 
 ## Tab Completion
 Entering ``f.add_<tab>`` displays add methods for all of the supported trace types. Try it!
@@ -28,8 +33,6 @@ f
 ```
 
 ![Simple Scatter](example_images/simple_scatter.png)
-
-Notice that you don't need to use one of the legacy `iplot` methods to display a `FigureWidget`. Its visual representation is the plot itself!
 
 ## New Plotly Object Representation
 Plotly figures and graph objects have an updated `__repr__` method that displays objects in a pretty printed form that can be copied, pasted, and evaluated to recreate the object.
@@ -111,11 +114,56 @@ go.Scatter(
 )
 ```
 
+You can still use `dict` as well. The previous figure is equivalent to:
+
+```
+import plotly.graph_objs as go
+dict(
+    type='scatter',
+    x=[0],
+    y=[0],
+    marker=go.scatter.Marker(
+        color='rgb(255,45,15)'
+    )
+)
+```
+
+which is also equivalent to
+```
+import plotly.graph_objs as go
+dict(
+    type='scatter',
+    x=[0],
+    y=[0],
+    marker=dict(
+        color='rgb(255,45,15)'
+    )
+)
+```
+
 ### Property Immutability
 In order to support the automatic synchronization a `FigureWidget` object and the front-end view in a notebook, it is necessary for the `FigureWidget` to be aware of all changes to its properties. This is accomplished by presenting the individual properties to the user as immutable objects.  For example, the `layout.xaxis.range` property may be assigned using a list, but it will be returned as a tuple. Similarly, object arrays (`Figure.data`, `Layout.images`, `Parcoords.dimensions`, etc.) are now represented as tuples of graph objects, not lists.
 
 ### Object Array Classes Deprecated
-Since graph object arrays are now represented as tuple of graph objects, the following object array classes are deprecated: `go.Data`, `go.Annotations`, and `go.Frames`
+Since graph object arrays are now represented as tuple of graph objects, the following object array classes are deprecated: `go.Data`, `go.Annotations`, and `go.Frames`. Instead, just use lists.
+
+That is, previously we used:
+```
+layout = go.Layout(
+    annotations=go.Annotations([
+        go.layout.Annotations(text='annotation')
+    ])
+)
+```
+
+Now, we should write:
+```
+layout = go.Layout(
+    annotations=[
+        go.layout.Annotations(text='annotation')
+    ]
+)
+```
 
 ### New Figure.data Assignment
 There are new restriction on the assignment of traces to the `data` property of a figure.  The assigned value must be a list or a tuple of a subset of the traces already present in the figure. Assignment to `data` may be used to reorder and remove existing traces, but it may not currently be used to add new traces.  New traces must be added using the `add_trace`, `add_traces`, or `add_*` methods. 
