@@ -153,3 +153,31 @@ class TestLayoutSubplots(TestCase):
         self.assertEqual(layout.geo4.bgcolor, 'blue')
         self.assertEqual(layout.ternary5.sum, 120)
         self.assertEqual(layout.scene6.dragmode, 'zoom')
+
+    def test_create_subplot_with_update(self):
+
+        self.layout.update(xaxis2=go.layout.XAxis(title='xaxis 2'),
+                           yaxis3=go.layout.YAxis(title='yaxis 3'),
+                           geo4=go.layout.Geo(bgcolor='blue'),
+                           ternary5=go.layout.Ternary(sum=120),
+                           scene6=go.layout.Scene(dragmode='zoom'))
+
+        self.assertEqual(self.layout.xaxis2.title, 'xaxis 2')
+        self.assertEqual(self.layout.yaxis3.title, 'yaxis 3')
+        self.assertEqual(self.layout.geo4.bgcolor, 'blue')
+        self.assertEqual(self.layout.ternary5.sum, 120)
+        self.assertEqual(self.layout.scene6.dragmode, 'zoom')
+
+    def test_create_subplot_with_update_dict(self):
+
+        self.layout.update({'xaxis2': {'title': 'xaxis 2'},
+                            'yaxis3': {'title': 'yaxis 3'},
+                            'geo4': {'bgcolor': 'blue'},
+                            'ternary5': {'sum': 120},
+                            'scene6': {'dragmode': 'zoom'}})
+
+        self.assertEqual(self.layout.xaxis2.title, 'xaxis 2')
+        self.assertEqual(self.layout.yaxis3.title, 'yaxis 3')
+        self.assertEqual(self.layout.geo4.bgcolor, 'blue')
+        self.assertEqual(self.layout.ternary5.sum, 120)
+        self.assertEqual(self.layout.scene6.dragmode, 'zoom')

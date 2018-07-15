@@ -2100,6 +2100,18 @@ Invalid property path '{key_path_str}' for layout
             return
         elif isinstance(plotly_obj, BasePlotlyType):
 
+            # Handle initializing subplot ids
+            # -------------------------------
+            # This should be valid even if xaxis2 hasn't been initialized:
+            # >>> layout.update(xaxis2={'title': 'xaxis 2'})
+            if isinstance(plotly_obj, BaseLayoutType):
+                for key in update_obj:
+                    if key not in plotly_obj:
+                        match = fullmatch(plotly_obj._subplotid_prop_re, key)
+                        if match:
+                            # We need to create a subplotid object
+                            plotly_obj[key] = {}
+
             # Handle invalid properties
             # -------------------------
             invalid_props = [
