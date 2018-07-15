@@ -3336,7 +3336,14 @@ class BaseLayoutType(BaseLayoutHierarchyType):
     # generated properties/validators as needed for xaxis2, yaxis3, etc.
 
     # # ### Create subplot property regular expression ###
-    _subplotid_prop_names = ['xaxis', 'yaxis', 'geo', 'ternary', 'scene']
+    _subplotid_prop_names = ['xaxis',
+                             'yaxis',
+                             'geo',
+                             'ternary',
+                             'scene',
+                             'mapbox',
+                             'polar']
+
     _subplotid_prop_re = re.compile(
         '(' + '|'.join(_subplotid_prop_names) + ')(\d+)')
 
@@ -3350,15 +3357,18 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         dict
         """
         from .validators.layout import (XAxisValidator, YAxisValidator,
-                                              GeoValidator, TernaryValidator,
-                                              SceneValidator)
+                                        GeoValidator, TernaryValidator,
+                                        SceneValidator, MapboxValidator,
+                                        PolarValidator)
 
         return {
             'xaxis': XAxisValidator,
             'yaxis': YAxisValidator,
             'geo': GeoValidator,
             'ternary': TernaryValidator,
-            'scene': SceneValidator
+            'scene': SceneValidator,
+            'mapbox': MapboxValidator,
+            'polar': PolarValidator
         }
 
     def __init__(self, plotly_name, **kwargs):
