@@ -134,7 +134,7 @@ class BaseFigure(object):
         self._data_defaults = [{} for _ in data]
 
         # ### Reparent trace objects ###
-        for trace in data:
+        for trace_ind, trace in enumerate(data):
             # By setting the trace's parent to be this figure, we tell the
             # trace object to use the figure's _data and _data_defaults
             # dicts to get/set it's properties, rather than using the trace
@@ -143,6 +143,9 @@ class BaseFigure(object):
 
             # We clear the orphan props since the trace no longer needs then
             trace._orphan_props.clear()
+
+            # Set trace index
+            trace._trace_ind = trace_ind
 
         # Layout
         # ------
@@ -454,6 +457,7 @@ class BaseFigure(object):
                 old_trace = self.data[i]
                 old_trace._orphan_props.update(deepcopy(old_trace._props))
                 old_trace._parent = None
+                old_trace._trace_ind = None
 
         # ### Compute trace props / defaults after removal ###
         traces_props_post_removal = [t for t in self._data]
@@ -517,6 +521,10 @@ class BaseFigure(object):
 
         # Update trace objects tuple
         self._data_objs = list(new_data)
+
+        # Update trace indexes
+        for trace_ind, trace in enumerate(self._data_objs):
+            trace._trace_ind = trace_ind
 
     # Restyle
     # -------
@@ -1059,6 +1067,10 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         # Validate traces
         data = self._data_validator.validate_coerce(data)
 
+        # Set trace indexes
+        for ind, new_trace in enumerate(data):
+            new_trace._trace_ind = ind + len(self.data)
+
         # Validate rows / cols
         n = len(data)
         BaseFigure._validate_rows_cols('rows', n, rows)
@@ -1206,14 +1218,9 @@ Please use the add_trace method with the row and col parameters.
         """
         # Try to find index of child as a trace
         # -------------------------------------
-        try:
-            trace_index = BaseFigure._index_is(self.data, child)
-        except ValueError as _:
-            trace_index = None
-
-        # Child is a trace
-        # ----------------
-        if trace_index is not None:
+        if isinstance(child, BaseTraceType):
+            # ### Child is a trace ###
+            trace_index = child._trace_ind
             return self._data[trace_index]
 
         # Child is the layout
@@ -3620,6 +3627,9 @@ class BaseTraceType(BaseTraceHierarchyType):
 
         # ### Callbacks to be called on selection ###
         self._select_callbacks = []
+
+        # ### Trace index in figure ###
+        self._trace_ind = None
 
     # uid
     # ---
