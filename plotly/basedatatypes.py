@@ -689,7 +689,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
 
         # Compute trace index
         # -------------------
-        trace_index = BaseFigure._index_is(self.data, child)
+        trace_index = child._trace_ind
 
         # Not in batch mode
         # -----------------
@@ -1248,16 +1248,10 @@ Please use the add_trace method with the row and col parameters.
         -------
         dict
         """
-        # Try to find index of child as a trace
-        # -------------------------------------
-        try:
-            trace_index = BaseFigure._index_is(self.data, child)
-        except ValueError as _:
-            trace_index = None
-
         # Child is a trace
         # ----------------
-        if trace_index is not None:
+        if isinstance(child, BaseTraceType):
+            trace_index = child._trace_ind
             return self._data_defaults[trace_index]
 
         # Child is the layout
@@ -3092,7 +3086,7 @@ class BasePlotlyType(object):
         # --------------------------------
         child_prop_val = getattr(self, child.plotly_name)
         if isinstance(child_prop_val, (list, tuple)):
-            child_ind = BaseFigure._index_is(child_prop_val, child)
+            child_ind = child._trace_ind
             obj_path = '{child_name}.{child_ind}.{prop}'.format(
                 child_name=child.plotly_name,
                 child_ind=child_ind,
@@ -3597,6 +3591,7 @@ class BaseTraceHierarchyType(BasePlotlyType):
 
     def __init__(self, plotly_name, **kwargs):
         super(BaseTraceHierarchyType, self).__init__(plotly_name, **kwargs)
+
     def _send_prop_set(self, prop_path_str, val):
         if self.parent:
             # ### Inform parent of restyle operation ###
