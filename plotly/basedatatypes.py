@@ -2120,6 +2120,11 @@ Invalid property path '{key_path_str}' for layout
 
             plotly_obj._raise_on_invalid_property_error(*invalid_props)
 
+            # Convert update_obj to dict
+            # --------------------------
+            if isinstance(update_obj, BasePlotlyType):
+                update_obj = update_obj.to_plotly_json()
+
             # Process valid properties
             # ------------------------
             for key in update_obj:
