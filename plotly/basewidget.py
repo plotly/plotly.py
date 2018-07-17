@@ -9,7 +9,7 @@ except ImportError:
 
 import ipywidgets as widgets
 from traitlets import List, Unicode, Dict, observe, Integer
-from .basedatatypes import BaseFigure, BasePlotlyType, fullmatch
+from .basedatatypes import BaseFigure, BasePlotlyType
 from .callbacks import (BoxSelector, LassoSelector,
                         InputDeviceState, Points)
 from .serializers import custom_serializers
@@ -550,7 +550,7 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
             # may include axes that weren't explicitly defined by the user.
             for proppath in delta_transform:
                 prop = proppath[0]
-                match = fullmatch(self.layout._subplotid_prop_re, prop)
+                match = self.layout._subplotid_prop_re.match(prop)
                 if match and prop not in self.layout:
                     # We need to create a subplotid object
                     self.layout[prop] = {}

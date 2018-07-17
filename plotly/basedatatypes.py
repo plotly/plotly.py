@@ -31,20 +31,11 @@ np = get_module('numpy')
 Undefined = object()
 
 
-# back-port of fullmatch from Py3.4+
-def fullmatch(regex, string, flags=0):
-    """Emulate python-3.4 re.fullmatch()."""
-    if 'pattern' in dir(regex):
-        regex_string = regex.pattern
-    else:
-        regex_string = regex
-    return re.match("(?:" + regex_string + r")\Z", string, flags=flags)
-
-
 class BaseFigure(object):
     """
     Base class for all figure types (both widget and non-widget)
     """
+    _bracket_re = re.compile('^(.*)\[(\d+)\]$')
 
     # Constructor
     # -----------
@@ -143,7 +134,7 @@ class BaseFigure(object):
         self._data_defaults = [{} for _ in data]
 
         # ### Reparent trace objects ###
-        for trace in data:
+        for trace_ind, trace in enumerate(data):
             # By setting the trace's parent to be this figure, we tell the
             # trace object to use the figure's _data and _data_defaults
             # dicts to get/set it's properties, rather than using the trace
@@ -152,6 +143,9 @@ class BaseFigure(object):
 
             # We clear the orphan props since the trace no longer needs then
             trace._orphan_props.clear()
+
+            # Set trace index
+            trace._trace_ind = trace_ind
 
         # Layout
         # ------
@@ -463,6 +457,7 @@ class BaseFigure(object):
                 old_trace = self.data[i]
                 old_trace._orphan_props.update(deepcopy(old_trace._props))
                 old_trace._parent = None
+                old_trace._trace_ind = None
 
         # ### Compute trace props / defaults after removal ###
         traces_props_post_removal = [t for t in self._data]
@@ -526,6 +521,10 @@ class BaseFigure(object):
 
         # Update trace objects tuple
         self._data_objs = list(new_data)
+
+        # Update trace indexes
+        for trace_ind, trace in enumerate(self._data_objs):
+            trace._trace_ind = trace_ind
 
     # Restyle
     # -------
@@ -690,7 +689,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
 
         # Compute trace index
         # -------------------
-        trace_index = BaseFigure._index_is(self.data, child)
+        trace_index = child._trace_ind
 
         # Not in batch mode
         # -----------------
@@ -743,7 +742,12 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         -------
         tuple[str | int]
         """
-        if isinstance(key_path_str, tuple):
+        if isinstance(key_path_str, string_types) and \
+                '.' not in key_path_str and \
+                '[' not in key_path_str:
+            # Fast path for common case that avoids regular expressions
+            return (key_path_str,)
+        elif isinstance(key_path_str, tuple):
             # Nothing to do
             return key_path_str
         else:
@@ -752,11 +756,9 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
 
             # Split out bracket indexes.
             # e.g. ['foo', 'bar[1]'] -> ['foo', 'bar', '1']
-            bracket_re = re.compile('(.*)\[(\d+)\]')
             key_path2 = []
             for key in key_path:
-                match = fullmatch(bracket_re, key)
-                #match = bracket_re.fullmatch(key)
+                match = BaseFigure._bracket_re.match(key)
                 if match:
                     key_path2.extend(match.groups())
                 else:
@@ -1065,6 +1067,10 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         # Validate traces
         data = self._data_validator.validate_coerce(data)
 
+        # Set trace indexes
+        for ind, new_trace in enumerate(data):
+            new_trace._trace_ind = ind + len(self.data)
+
         # Validate rows / cols
         n = len(data)
         BaseFigure._validate_rows_cols('rows', n, rows)
@@ -1212,14 +1218,9 @@ Please use the add_trace method with the row and col parameters.
         """
         # Try to find index of child as a trace
         # -------------------------------------
-        try:
-            trace_index = BaseFigure._index_is(self.data, child)
-        except ValueError as _:
-            trace_index = None
-
-        # Child is a trace
-        # ----------------
-        if trace_index is not None:
+        if isinstance(child, BaseTraceType):
+            # ### Child is a trace ###
+            trace_index = child._trace_ind
             return self._data[trace_index]
 
         # Child is the layout
@@ -1247,16 +1248,10 @@ Please use the add_trace method with the row and col parameters.
         -------
         dict
         """
-        # Try to find index of child as a trace
-        # -------------------------------------
-        try:
-            trace_index = BaseFigure._index_is(self.data, child)
-        except ValueError as _:
-            trace_index = None
-
         # Child is a trace
         # ----------------
-        if trace_index is not None:
+        if isinstance(child, BaseTraceType):
+            trace_index = child._trace_ind
             return self._data_defaults[trace_index]
 
         # Child is the layout
@@ -3365,7 +3360,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
                              'polar']
 
     _subplotid_prop_re = re.compile(
-        '(' + '|'.join(_subplotid_prop_names) + ')(\d+)')
+        '^(' + '|'.join(_subplotid_prop_names) + ')(\d+)$')
 
     @property
     def _subplotid_validators(self):
@@ -3429,16 +3424,14 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         unknown_kwargs = {
             k: v
             for k, v in kwargs.items()
-            if not fullmatch(self._subplotid_prop_re, k)
-            # if not self._subplotid_prop_re.fullmatch(k)
+            if not self._subplotid_prop_re.match(k)
         }
         super(BaseLayoutHierarchyType, self)._process_kwargs(**unknown_kwargs)
 
         subplot_kwargs = {
             k: v
             for k, v in kwargs.items()
-            if fullmatch(self._subplotid_prop_re, k)
-            #if self._subplotid_prop_re.fullmatch(k)
+            if self._subplotid_prop_re.match(k)
         }
 
         for prop, value in subplot_kwargs.items():
@@ -3458,8 +3451,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         # Get regular expression match
         # ----------------------------
         # Note: we already tested that match exists in the constructor
-        # match = self._subplotid_prop_re.fullmatch(prop)
-        match = fullmatch(self._subplotid_prop_re, prop)
+        match = self._subplotid_prop_re.match(prop)
         subplot_prop = match.group(1)
         suffix_digit = int(match.group(2))
 
@@ -3520,7 +3512,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         # Handle subplot suffix digit of 1
         # --------------------------------
         # Remove digit of 1 from subplot id (e.g.. xaxis1 -> xaxis)
-        match = fullmatch(self._subplotid_prop_re, prop)
+        match = self._subplotid_prop_re.match(prop)
 
         if match:
             subplot_prop = match.group(1)
@@ -3580,7 +3572,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
 
         # Check for subplot assignment
         # ----------------------------
-        match = fullmatch(self._subplotid_prop_re, prop)
+        match = self._subplotid_prop_re.match(prop)
         if match is None:
             # Set as ordinary property
             super(BaseLayoutHierarchyType, self).__setitem__(prop, value)
@@ -3594,8 +3586,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         """
         # Check for subplot assignment
         # ----------------------------
-        # match = self._subplotid_prop_re.fullmatch(prop)
-        match = fullmatch(self._subplotid_prop_re, prop)
+        match = self._subplotid_prop_re.match(prop)
         if match is None:
             # Set as ordinary property
             super(BaseLayoutHierarchyType, self).__setattr__(prop, value)
@@ -3649,6 +3640,7 @@ class BaseTraceHierarchyType(BasePlotlyType):
 
     def __init__(self, plotly_name, **kwargs):
         super(BaseTraceHierarchyType, self).__init__(plotly_name, **kwargs)
+
     def _send_prop_set(self, prop_path_str, val):
         if self.parent:
             # ### Inform parent of restyle operation ###
@@ -3679,6 +3671,9 @@ class BaseTraceType(BaseTraceHierarchyType):
 
         # ### Callbacks to be called on selection ###
         self._select_callbacks = []
+
+        # ### Trace index in figure ###
+        self._trace_ind = None
 
     # uid
     # ---
@@ -3947,6 +3942,11 @@ class BaseFrameHierarchyType(BasePlotlyType):
         super(BaseFrameHierarchyType, self).__init__(plotly_name, **kwargs)
 
     def _send_prop_set(self, prop_path_str, val):
+        # Note: Frames are not supported by FigureWidget, and updates are not
+        # propagated to parents
+        pass
+
+    def _restyle_child(self, child, key_path_str, val):
         # Note: Frames are not supported by FigureWidget, and updates are not
         # propagated to parents
         pass
