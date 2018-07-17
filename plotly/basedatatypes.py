@@ -3902,6 +3902,11 @@ class BaseFrameHierarchyType(BasePlotlyType):
         # propagated to parents
         pass
 
+    def _restyle_child(self, child, key_path_str, val):
+        # Note: Frames are not supported by FigureWidget, and updates are not
+        # propagated to parents
+        pass
+
     def on_change(self, callback, *args):
         raise NotImplementedError(
             'Change callbacks are not supported on Frames')
