@@ -31,20 +31,11 @@ np = get_module('numpy')
 Undefined = object()
 
 
-# back-port of fullmatch from Py3.4+
-def fullmatch(regex, string, flags=0):
-    """Emulate python-3.4 re.fullmatch()."""
-    if 'pattern' in dir(regex):
-        regex_string = regex.pattern
-    else:
-        regex_string = regex
-    return re.match("(?:" + regex_string + r")\Z", string, flags=flags)
-
-
 class BaseFigure(object):
     """
     Base class for all figure types (both widget and non-widget)
     """
+    _bracket_re = re.compile('^(.*)\[(\d+)\]$')
 
     # Constructor
     # -----------
@@ -752,11 +743,9 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
 
             # Split out bracket indexes.
             # e.g. ['foo', 'bar[1]'] -> ['foo', 'bar', '1']
-            bracket_re = re.compile('(.*)\[(\d+)\]')
             key_path2 = []
             for key in key_path:
-                match = fullmatch(bracket_re, key)
-                #match = bracket_re.fullmatch(key)
+                match = BaseFigure._bracket_re.match(key)
                 if match:
                     key_path2.extend(match.groups())
                 else:
@@ -3326,7 +3315,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
     # # ### Create subplot property regular expression ###
     _subplotid_prop_names = ['xaxis', 'yaxis', 'geo', 'ternary', 'scene']
     _subplotid_prop_re = re.compile(
-        '(' + '|'.join(_subplotid_prop_names) + ')(\d+)')
+        '^(' + '|'.join(_subplotid_prop_names) + ')(\d+)$')
 
     @property
     def _subplotid_validators(self):
@@ -3387,16 +3376,14 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         unknown_kwargs = {
             k: v
             for k, v in kwargs.items()
-            if not fullmatch(self._subplotid_prop_re, k)
-            # if not self._subplotid_prop_re.fullmatch(k)
+            if not self._subplotid_prop_re.match(k)
         }
         super(BaseLayoutHierarchyType, self)._process_kwargs(**unknown_kwargs)
 
         subplot_kwargs = {
             k: v
             for k, v in kwargs.items()
-            if fullmatch(self._subplotid_prop_re, k)
-            #if self._subplotid_prop_re.fullmatch(k)
+            if self._subplotid_prop_re.match(k)
         }
 
         for prop, value in subplot_kwargs.items():
@@ -3416,8 +3403,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         # Get regular expression match
         # ----------------------------
         # Note: we already tested that match exists in the constructor
-        # match = self._subplotid_prop_re.fullmatch(prop)
-        match = fullmatch(self._subplotid_prop_re, prop)
+        match = self._subplotid_prop_re.match(prop)
         subplot_prop = match.group(1)
         suffix_digit = int(match.group(2))
 
@@ -3478,7 +3464,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         # Handle subplot suffix digit of 1
         # --------------------------------
         # Remove digit of 1 from subplot id (e.g.. xaxis1 -> xaxis)
-        match = fullmatch(self._subplotid_prop_re, prop)
+        match = self._subplotid_prop_re.match(prop)
 
         if match:
             subplot_prop = match.group(1)
@@ -3531,7 +3517,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
 
         # Check for subplot assignment
         # ----------------------------
-        match = fullmatch(self._subplotid_prop_re, prop)
+        match = self._subplotid_prop_re.match(prop)
         if match is None:
             # Set as ordinary property
             super(BaseLayoutHierarchyType, self).__setitem__(prop, value)
@@ -3545,8 +3531,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         """
         # Check for subplot assignment
         # ----------------------------
-        # match = self._subplotid_prop_re.fullmatch(prop)
-        match = fullmatch(self._subplotid_prop_re, prop)
+        match = self._subplotid_prop_re.match(prop)
         if match is None:
             # Set as ordinary property
             super(BaseLayoutHierarchyType, self).__setattr__(prop, value)
