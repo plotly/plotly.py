@@ -126,8 +126,8 @@ an instance of plotly.graph_objs.layout.mapbox.layer.Fill"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('outlinecolor', None)
-        self.outlinecolor = outlinecolor if outlinecolor is not None else v
+        _v = arg.pop('outlinecolor', None)
+        self.outlinecolor = outlinecolor if outlinecolor is not None else _v
 
         # Process unknown kwargs
         # ----------------------

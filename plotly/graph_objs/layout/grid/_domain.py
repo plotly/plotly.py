@@ -130,10 +130,10 @@ an instance of plotly.graph_objs.layout.grid.Domain"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('x', None)
-        self.x = x if x is not None else v
-        v = arg.pop('y', None)
-        self.y = y if y is not None else v
+        _v = arg.pop('x', None)
+        self.x = x if x is not None else _v
+        _v = arg.pop('y', None)
+        self.y = y if y is not None else _v
 
         # Process unknown kwargs
         # ----------------------

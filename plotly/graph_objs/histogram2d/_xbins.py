@@ -130,12 +130,12 @@ an instance of plotly.graph_objs.histogram2d.XBins"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('end', None)
-        self.end = end if end is not None else v
-        v = arg.pop('size', None)
-        self.size = size if size is not None else v
-        v = arg.pop('start', None)
-        self.start = start if start is not None else v
+        _v = arg.pop('end', None)
+        self.end = end if end is not None else _v
+        _v = arg.pop('size', None)
+        self.size = size if size is not None else _v
+        _v = arg.pop('start', None)
+        self.start = start if start is not None else _v
 
         # Process unknown kwargs
         # ----------------------

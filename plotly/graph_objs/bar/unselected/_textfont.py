@@ -126,8 +126,8 @@ an instance of plotly.graph_objs.bar.unselected.Textfont"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('color', None)
-        self.color = color if color is not None else v
+        _v = arg.pop('color', None)
+        self.color = color if color is not None else _v
 
         # Process unknown kwargs
         # ----------------------

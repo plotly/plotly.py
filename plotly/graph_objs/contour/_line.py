@@ -223,14 +223,14 @@ an instance of plotly.graph_objs.contour.Line"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('color', None)
-        self.color = color if color is not None else v
-        v = arg.pop('dash', None)
-        self.dash = dash if dash is not None else v
-        v = arg.pop('smoothing', None)
-        self.smoothing = smoothing if smoothing is not None else v
-        v = arg.pop('width', None)
-        self.width = width if width is not None else v
+        _v = arg.pop('color', None)
+        self.color = color if color is not None else _v
+        _v = arg.pop('dash', None)
+        self.dash = dash if dash is not None else _v
+        _v = arg.pop('smoothing', None)
+        self.smoothing = smoothing if smoothing is not None else _v
+        _v = arg.pop('width', None)
+        self.width = width if width is not None else _v
 
         # Process unknown kwargs
         # ----------------------

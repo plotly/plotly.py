@@ -171,14 +171,14 @@ an instance of plotly.graph_objs.layout.updatemenu.Pad"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('b', None)
-        self.b = b if b is not None else v
-        v = arg.pop('l', None)
-        self.l = l if l is not None else v
-        v = arg.pop('r', None)
-        self.r = r if r is not None else v
-        v = arg.pop('t', None)
-        self.t = t if t is not None else v
+        _v = arg.pop('b', None)
+        self.b = b if b is not None else _v
+        _v = arg.pop('l', None)
+        self.l = l if l is not None else _v
+        _v = arg.pop('r', None)
+        self.r = r if r is not None else _v
+        _v = arg.pop('t', None)
+        self.t = t if t is not None else _v
 
         # Process unknown kwargs
         # ----------------------

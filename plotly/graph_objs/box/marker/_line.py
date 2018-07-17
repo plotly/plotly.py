@@ -261,14 +261,14 @@ an instance of plotly.graph_objs.box.marker.Line"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('color', None)
-        self.color = color if color is not None else v
-        v = arg.pop('outliercolor', None)
-        self.outliercolor = outliercolor if outliercolor is not None else v
-        v = arg.pop('outlierwidth', None)
-        self.outlierwidth = outlierwidth if outlierwidth is not None else v
-        v = arg.pop('width', None)
-        self.width = width if width is not None else v
+        _v = arg.pop('color', None)
+        self.color = color if color is not None else _v
+        _v = arg.pop('outliercolor', None)
+        self.outliercolor = outliercolor if outliercolor is not None else _v
+        _v = arg.pop('outlierwidth', None)
+        self.outlierwidth = outlierwidth if outlierwidth is not None else _v
+        _v = arg.pop('width', None)
+        self.width = width if width is not None else _v
 
         # Process unknown kwargs
         # ----------------------

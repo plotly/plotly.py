@@ -398,18 +398,18 @@ an instance of plotly.graph_objs.violin.Marker"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('color', None)
-        self.color = color if color is not None else v
-        v = arg.pop('line', None)
-        self.line = line if line is not None else v
-        v = arg.pop('opacity', None)
-        self.opacity = opacity if opacity is not None else v
-        v = arg.pop('outliercolor', None)
-        self.outliercolor = outliercolor if outliercolor is not None else v
-        v = arg.pop('size', None)
-        self.size = size if size is not None else v
-        v = arg.pop('symbol', None)
-        self.symbol = symbol if symbol is not None else v
+        _v = arg.pop('color', None)
+        self.color = color if color is not None else _v
+        _v = arg.pop('line', None)
+        self.line = line if line is not None else _v
+        _v = arg.pop('opacity', None)
+        self.opacity = opacity if opacity is not None else _v
+        _v = arg.pop('outliercolor', None)
+        self.outliercolor = outliercolor if outliercolor is not None else _v
+        _v = arg.pop('size', None)
+        self.size = size if size is not None else _v
+        _v = arg.pop('symbol', None)
+        self.symbol = symbol if symbol is not None else _v
 
         # Process unknown kwargs
         # ----------------------

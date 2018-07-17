@@ -241,8 +241,8 @@ an instance of {class_name}\"\"\")
     for subtype_node in subtype_nodes:
         name_prop = subtype_node.name_property
         buffer.write(f"""
-        v = arg.pop('{name_prop}', None)
-        self.{name_prop} = {name_prop} if {name_prop} is not None else v""")
+        _v = arg.pop('{name_prop}', None)
+        self.{name_prop} = {name_prop} if {name_prop} is not None else _v""")
 
     # ### Literals ###
     if literal_nodes:

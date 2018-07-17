@@ -561,28 +561,28 @@ an instance of plotly.graph_objs.layout.xaxis.Rangeselector"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('activecolor', None)
-        self.activecolor = activecolor if activecolor is not None else v
-        v = arg.pop('bgcolor', None)
-        self.bgcolor = bgcolor if bgcolor is not None else v
-        v = arg.pop('bordercolor', None)
-        self.bordercolor = bordercolor if bordercolor is not None else v
-        v = arg.pop('borderwidth', None)
-        self.borderwidth = borderwidth if borderwidth is not None else v
-        v = arg.pop('buttons', None)
-        self.buttons = buttons if buttons is not None else v
-        v = arg.pop('font', None)
-        self.font = font if font is not None else v
-        v = arg.pop('visible', None)
-        self.visible = visible if visible is not None else v
-        v = arg.pop('x', None)
-        self.x = x if x is not None else v
-        v = arg.pop('xanchor', None)
-        self.xanchor = xanchor if xanchor is not None else v
-        v = arg.pop('y', None)
-        self.y = y if y is not None else v
-        v = arg.pop('yanchor', None)
-        self.yanchor = yanchor if yanchor is not None else v
+        _v = arg.pop('activecolor', None)
+        self.activecolor = activecolor if activecolor is not None else _v
+        _v = arg.pop('bgcolor', None)
+        self.bgcolor = bgcolor if bgcolor is not None else _v
+        _v = arg.pop('bordercolor', None)
+        self.bordercolor = bordercolor if bordercolor is not None else _v
+        _v = arg.pop('borderwidth', None)
+        self.borderwidth = borderwidth if borderwidth is not None else _v
+        _v = arg.pop('buttons', None)
+        self.buttons = buttons if buttons is not None else _v
+        _v = arg.pop('font', None)
+        self.font = font if font is not None else _v
+        _v = arg.pop('visible', None)
+        self.visible = visible if visible is not None else _v
+        _v = arg.pop('x', None)
+        self.x = x if x is not None else _v
+        _v = arg.pop('xanchor', None)
+        self.xanchor = xanchor if xanchor is not None else _v
+        _v = arg.pop('y', None)
+        self.y = y if y is not None else _v
+        _v = arg.pop('yanchor', None)
+        self.yanchor = yanchor if yanchor is not None else _v
 
         # Process unknown kwargs
         # ----------------------

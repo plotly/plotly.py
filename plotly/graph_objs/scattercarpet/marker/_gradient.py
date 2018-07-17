@@ -216,14 +216,14 @@ an instance of plotly.graph_objs.scattercarpet.marker.Gradient"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('color', None)
-        self.color = color if color is not None else v
-        v = arg.pop('colorsrc', None)
-        self.colorsrc = colorsrc if colorsrc is not None else v
-        v = arg.pop('type', None)
-        self.type = type if type is not None else v
-        v = arg.pop('typesrc', None)
-        self.typesrc = typesrc if typesrc is not None else v
+        _v = arg.pop('color', None)
+        self.color = color if color is not None else _v
+        _v = arg.pop('colorsrc', None)
+        self.colorsrc = colorsrc if colorsrc is not None else _v
+        _v = arg.pop('type', None)
+        self.type = type if type is not None else _v
+        _v = arg.pop('typesrc', None)
+        self.typesrc = typesrc if typesrc is not None else _v
 
         # Process unknown kwargs
         # ----------------------

@@ -498,28 +498,28 @@ an instance of plotly.graph_objs.layout.Legend"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('bgcolor', None)
-        self.bgcolor = bgcolor if bgcolor is not None else v
-        v = arg.pop('bordercolor', None)
-        self.bordercolor = bordercolor if bordercolor is not None else v
-        v = arg.pop('borderwidth', None)
-        self.borderwidth = borderwidth if borderwidth is not None else v
-        v = arg.pop('font', None)
-        self.font = font if font is not None else v
-        v = arg.pop('orientation', None)
-        self.orientation = orientation if orientation is not None else v
-        v = arg.pop('tracegroupgap', None)
-        self.tracegroupgap = tracegroupgap if tracegroupgap is not None else v
-        v = arg.pop('traceorder', None)
-        self.traceorder = traceorder if traceorder is not None else v
-        v = arg.pop('x', None)
-        self.x = x if x is not None else v
-        v = arg.pop('xanchor', None)
-        self.xanchor = xanchor if xanchor is not None else v
-        v = arg.pop('y', None)
-        self.y = y if y is not None else v
-        v = arg.pop('yanchor', None)
-        self.yanchor = yanchor if yanchor is not None else v
+        _v = arg.pop('bgcolor', None)
+        self.bgcolor = bgcolor if bgcolor is not None else _v
+        _v = arg.pop('bordercolor', None)
+        self.bordercolor = bordercolor if bordercolor is not None else _v
+        _v = arg.pop('borderwidth', None)
+        self.borderwidth = borderwidth if borderwidth is not None else _v
+        _v = arg.pop('font', None)
+        self.font = font if font is not None else _v
+        _v = arg.pop('orientation', None)
+        self.orientation = orientation if orientation is not None else _v
+        _v = arg.pop('tracegroupgap', None)
+        self.tracegroupgap = tracegroupgap if tracegroupgap is not None else _v
+        _v = arg.pop('traceorder', None)
+        self.traceorder = traceorder if traceorder is not None else _v
+        _v = arg.pop('x', None)
+        self.x = x if x is not None else _v
+        _v = arg.pop('xanchor', None)
+        self.xanchor = xanchor if xanchor is not None else _v
+        _v = arg.pop('y', None)
+        self.y = y if y is not None else _v
+        _v = arg.pop('yanchor', None)
+        self.yanchor = yanchor if yanchor is not None else _v
 
         # Process unknown kwargs
         # ----------------------

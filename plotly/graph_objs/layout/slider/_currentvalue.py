@@ -261,18 +261,18 @@ an instance of plotly.graph_objs.layout.slider.Currentvalue"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('font', None)
-        self.font = font if font is not None else v
-        v = arg.pop('offset', None)
-        self.offset = offset if offset is not None else v
-        v = arg.pop('prefix', None)
-        self.prefix = prefix if prefix is not None else v
-        v = arg.pop('suffix', None)
-        self.suffix = suffix if suffix is not None else v
-        v = arg.pop('visible', None)
-        self.visible = visible if visible is not None else v
-        v = arg.pop('xanchor', None)
-        self.xanchor = xanchor if xanchor is not None else v
+        _v = arg.pop('font', None)
+        self.font = font if font is not None else _v
+        _v = arg.pop('offset', None)
+        self.offset = offset if offset is not None else _v
+        _v = arg.pop('prefix', None)
+        self.prefix = prefix if prefix is not None else _v
+        _v = arg.pop('suffix', None)
+        self.suffix = suffix if suffix is not None else _v
+        _v = arg.pop('visible', None)
+        self.visible = visible if visible is not None else _v
+        _v = arg.pop('xanchor', None)
+        self.xanchor = xanchor if xanchor is not None else _v
 
         # Process unknown kwargs
         # ----------------------
