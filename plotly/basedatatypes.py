@@ -734,7 +734,12 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         -------
         tuple[str | int]
         """
-        if isinstance(key_path_str, tuple):
+        if isinstance(key_path_str, string_types) and \
+                '.' not in key_path_str and \
+                '[' not in key_path_str:
+            # Fast path for common case that avoids regular expressions
+            return (key_path_str,)
+        elif isinstance(key_path_str, tuple):
             # Nothing to do
             return key_path_str
         else:
