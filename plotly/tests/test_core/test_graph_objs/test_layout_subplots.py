@@ -170,14 +170,17 @@ class TestLayoutSubplots(TestCase):
 
     def test_create_subplot_with_update(self):
 
-        self.layout.update(xaxis2=go.layout.XAxis(title='xaxis 2'),
-                           yaxis3=go.layout.YAxis(title='yaxis 3'),
-                           geo4=go.layout.Geo(bgcolor='blue'),
-                           ternary5=go.layout.Ternary(sum=120),
-                           scene6=go.layout.Scene(dragmode='zoom'),
-                           mapbox7=go.layout.Mapbox(zoom=2),
-                           polar8=go.layout.Polar(sector=[0, 90]))
+        self.layout.update(
+            xaxis1=go.layout.XAxis(title='xaxis 1'),
+            xaxis2=go.layout.XAxis(title='xaxis 2'),
+            yaxis3=go.layout.YAxis(title='yaxis 3'),
+            geo4=go.layout.Geo(bgcolor='blue'),
+            ternary5=go.layout.Ternary(sum=120),
+            scene6=go.layout.Scene(dragmode='zoom'),
+            mapbox7=go.layout.Mapbox(zoom=2),
+            polar8=go.layout.Polar(sector=[0, 90]))
 
+        self.assertEqual(self.layout.xaxis1.title, 'xaxis 1')
         self.assertEqual(self.layout.xaxis2.title, 'xaxis 2')
         self.assertEqual(self.layout.yaxis3.title, 'yaxis 3')
         self.assertEqual(self.layout.geo4.bgcolor, 'blue')
@@ -188,7 +191,8 @@ class TestLayoutSubplots(TestCase):
 
     def test_create_subplot_with_update_dict(self):
 
-        self.layout.update({'xaxis2': {'title': 'xaxis 2'},
+        self.layout.update({'xaxis1': {'title': 'xaxis 1'},
+                            'xaxis2': {'title': 'xaxis 2'},
                             'yaxis3': {'title': 'yaxis 3'},
                             'geo4': {'bgcolor': 'blue'},
                             'ternary5': {'sum': 120},
@@ -196,6 +200,7 @@ class TestLayoutSubplots(TestCase):
                             'mapbox7': {'zoom': 2},
                             'polar8': {'sector': [0, 90]}})
 
+        self.assertEqual(self.layout.xaxis1.title, 'xaxis 1')
         self.assertEqual(self.layout.xaxis2.title, 'xaxis 2')
         self.assertEqual(self.layout.yaxis3.title, 'yaxis 3')
         self.assertEqual(self.layout.geo4.bgcolor, 'blue')
