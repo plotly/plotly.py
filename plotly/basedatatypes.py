@@ -2100,19 +2100,36 @@ Invalid property path '{key_path_str}' for layout
             return
         elif isinstance(plotly_obj, BasePlotlyType):
 
+            # Handle initializing subplot ids
+            # -------------------------------
+            # This should be valid even if xaxis2 hasn't been initialized:
+            # >>> layout.update(xaxis2={'title': 'xaxis 2'})
+            if isinstance(plotly_obj, BaseLayoutType):
+                for key in update_obj:
+                    if key not in plotly_obj:
+                        match = fullmatch(plotly_obj._subplotid_prop_re, key)
+                        if match:
+                            # We need to create a subplotid object
+                            plotly_obj[key] = {}
+
             # Handle invalid properties
             # -------------------------
             invalid_props = [
-                k for k in update_obj if k not in plotly_obj._validators
+                k for k in update_obj if k not in plotly_obj
             ]
 
             plotly_obj._raise_on_invalid_property_error(*invalid_props)
+
+            # Convert update_obj to dict
+            # --------------------------
+            if isinstance(update_obj, BasePlotlyType):
+                update_obj = update_obj.to_plotly_json()
 
             # Process valid properties
             # ------------------------
             for key in update_obj:
                 val = update_obj[key]
-                validator = plotly_obj._validators[key]
+                validator = plotly_obj._get_prop_validator(key)
 
                 if isinstance(validator, CompoundValidator):
 
@@ -2452,6 +2469,21 @@ class BasePlotlyType(object):
             return None
         else:
             return self.parent._get_child_prop_defaults(self)
+
+    def _get_prop_validator(self, prop):
+        """
+        Return the validator associated with the specified property
+
+        Parameters
+        ----------
+        prop: str
+            A property that exists in this object
+
+        Returns
+        -------
+        BaseValidator
+        """
+        return self._validators[prop]
 
     @property
     def parent(self):
@@ -3324,7 +3356,14 @@ class BaseLayoutType(BaseLayoutHierarchyType):
     # generated properties/validators as needed for xaxis2, yaxis3, etc.
 
     # # ### Create subplot property regular expression ###
-    _subplotid_prop_names = ['xaxis', 'yaxis', 'geo', 'ternary', 'scene']
+    _subplotid_prop_names = ['xaxis',
+                             'yaxis',
+                             'geo',
+                             'ternary',
+                             'scene',
+                             'mapbox',
+                             'polar']
+
     _subplotid_prop_re = re.compile(
         '(' + '|'.join(_subplotid_prop_names) + ')(\d+)')
 
@@ -3338,15 +3377,18 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         dict
         """
         from .validators.layout import (XAxisValidator, YAxisValidator,
-                                              GeoValidator, TernaryValidator,
-                                              SceneValidator)
+                                        GeoValidator, TernaryValidator,
+                                        SceneValidator, MapboxValidator,
+                                        PolarValidator)
 
         return {
             'xaxis': XAxisValidator,
             'yaxis': YAxisValidator,
             'geo': GeoValidator,
             'ternary': TernaryValidator,
-            'scene': SceneValidator
+            'scene': SceneValidator,
+            'mapbox': MapboxValidator,
+            'polar': PolarValidator
         }
 
     def __init__(self, plotly_name, **kwargs):
@@ -3487,6 +3529,13 @@ class BaseLayoutType(BaseLayoutHierarchyType):
                 prop = subplot_prop
 
         return prop
+
+    def _get_prop_validator(self, prop):
+        """
+        Custom _get_prop_validator that handles subplot properties
+        """
+        prop = self._strip_subplot_suffix_of_1(prop)
+        return super(BaseLayoutHierarchyType, self)._get_prop_validator(prop)
 
     def __getattr__(self, prop):
         """
