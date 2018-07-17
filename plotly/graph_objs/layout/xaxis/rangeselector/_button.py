@@ -208,14 +208,14 @@ an instance of plotly.graph_objs.layout.xaxis.rangeselector.Button"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('count', None)
-        self.count = count if count is not None else v
-        v = arg.pop('label', None)
-        self.label = label if label is not None else v
-        v = arg.pop('step', None)
-        self.step = step if step is not None else v
-        v = arg.pop('stepmode', None)
-        self.stepmode = stepmode if stepmode is not None else v
+        _v = arg.pop('count', None)
+        self.count = count if count is not None else _v
+        _v = arg.pop('label', None)
+        self.label = label if label is not None else _v
+        _v = arg.pop('step', None)
+        self.step = step if step is not None else _v
+        _v = arg.pop('stepmode', None)
+        self.stepmode = stepmode if stepmode is not None else _v
 
         # Process unknown kwargs
         # ----------------------

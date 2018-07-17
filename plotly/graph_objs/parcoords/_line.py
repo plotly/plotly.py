@@ -693,26 +693,26 @@ an instance of plotly.graph_objs.parcoords.Line"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('autocolorscale', None)
-        self.autocolorscale = autocolorscale if autocolorscale is not None else v
-        v = arg.pop('cauto', None)
-        self.cauto = cauto if cauto is not None else v
-        v = arg.pop('cmax', None)
-        self.cmax = cmax if cmax is not None else v
-        v = arg.pop('cmin', None)
-        self.cmin = cmin if cmin is not None else v
-        v = arg.pop('color', None)
-        self.color = color if color is not None else v
-        v = arg.pop('colorbar', None)
-        self.colorbar = colorbar if colorbar is not None else v
-        v = arg.pop('colorscale', None)
-        self.colorscale = colorscale if colorscale is not None else v
-        v = arg.pop('colorsrc', None)
-        self.colorsrc = colorsrc if colorsrc is not None else v
-        v = arg.pop('reversescale', None)
-        self.reversescale = reversescale if reversescale is not None else v
-        v = arg.pop('showscale', None)
-        self.showscale = showscale if showscale is not None else v
+        _v = arg.pop('autocolorscale', None)
+        self.autocolorscale = autocolorscale if autocolorscale is not None else _v
+        _v = arg.pop('cauto', None)
+        self.cauto = cauto if cauto is not None else _v
+        _v = arg.pop('cmax', None)
+        self.cmax = cmax if cmax is not None else _v
+        _v = arg.pop('cmin', None)
+        self.cmin = cmin if cmin is not None else _v
+        _v = arg.pop('color', None)
+        self.color = color if color is not None else _v
+        _v = arg.pop('colorbar', None)
+        self.colorbar = colorbar if colorbar is not None else _v
+        _v = arg.pop('colorscale', None)
+        self.colorscale = colorscale if colorscale is not None else _v
+        _v = arg.pop('colorsrc', None)
+        self.colorsrc = colorsrc if colorsrc is not None else _v
+        _v = arg.pop('reversescale', None)
+        self.reversescale = reversescale if reversescale is not None else _v
+        _v = arg.pop('showscale', None)
+        self.showscale = showscale if showscale is not None else _v
 
         # Process unknown kwargs
         # ----------------------

@@ -84,8 +84,8 @@ an instance of plotly.graph_objs.choropleth.selected.Marker"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('opacity', None)
-        self.opacity = opacity if opacity is not None else v
+        _v = arg.pop('opacity', None)
+        self.opacity = opacity if opacity is not None else _v
 
         # Process unknown kwargs
         # ----------------------

@@ -91,8 +91,8 @@ an instance of plotly.graph_objs.candlestick.Line"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('width', None)
-        self.width = width if width is not None else v
+        _v = arg.pop('width', None)
+        self.width = width if width is not None else _v
 
         # Process unknown kwargs
         # ----------------------

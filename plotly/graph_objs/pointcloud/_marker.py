@@ -312,18 +312,18 @@ an instance of plotly.graph_objs.pointcloud.Marker"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('blend', None)
-        self.blend = blend if blend is not None else v
-        v = arg.pop('border', None)
-        self.border = border if border is not None else v
-        v = arg.pop('color', None)
-        self.color = color if color is not None else v
-        v = arg.pop('opacity', None)
-        self.opacity = opacity if opacity is not None else v
-        v = arg.pop('sizemax', None)
-        self.sizemax = sizemax if sizemax is not None else v
-        v = arg.pop('sizemin', None)
-        self.sizemin = sizemin if sizemin is not None else v
+        _v = arg.pop('blend', None)
+        self.blend = blend if blend is not None else _v
+        _v = arg.pop('border', None)
+        self.border = border if border is not None else _v
+        _v = arg.pop('color', None)
+        self.color = color if color is not None else _v
+        _v = arg.pop('opacity', None)
+        self.opacity = opacity if opacity is not None else _v
+        _v = arg.pop('sizemax', None)
+        self.sizemax = sizemax if sizemax is not None else _v
+        _v = arg.pop('sizemin', None)
+        self.sizemin = sizemin if sizemin is not None else _v
 
         # Process unknown kwargs
         # ----------------------

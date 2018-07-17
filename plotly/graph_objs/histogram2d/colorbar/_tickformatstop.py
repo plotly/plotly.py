@@ -124,10 +124,10 @@ an instance of plotly.graph_objs.histogram2d.colorbar.Tickformatstop"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('dtickrange', None)
-        self.dtickrange = dtickrange if dtickrange is not None else v
-        v = arg.pop('value', None)
-        self.value = value if value is not None else v
+        _v = arg.pop('dtickrange', None)
+        self.dtickrange = dtickrange if dtickrange is not None else _v
+        _v = arg.pop('value', None)
+        self.value = value if value is not None else _v
 
         # Process unknown kwargs
         # ----------------------

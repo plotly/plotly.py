@@ -164,10 +164,10 @@ an instance of plotly.graph_objs.candlestick.Decreasing"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('fillcolor', None)
-        self.fillcolor = fillcolor if fillcolor is not None else v
-        v = arg.pop('line', None)
-        self.line = line if line is not None else v
+        _v = arg.pop('fillcolor', None)
+        self.fillcolor = fillcolor if fillcolor is not None else _v
+        _v = arg.pop('line', None)
+        self.line = line if line is not None else _v
 
         # Process unknown kwargs
         # ----------------------

@@ -142,12 +142,12 @@ an instance of plotly.graph_objs.layout.geo.projection.Rotation"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('lat', None)
-        self.lat = lat if lat is not None else v
-        v = arg.pop('lon', None)
-        self.lon = lon if lon is not None else v
-        v = arg.pop('roll', None)
-        self.roll = roll if roll is not None else v
+        _v = arg.pop('lat', None)
+        self.lat = lat if lat is not None else _v
+        _v = arg.pop('lon', None)
+        self.lon = lon if lon is not None else _v
+        _v = arg.pop('roll', None)
+        self.roll = roll if roll is not None else _v
 
         # Process unknown kwargs
         # ----------------------

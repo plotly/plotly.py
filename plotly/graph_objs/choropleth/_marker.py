@@ -157,12 +157,12 @@ an instance of plotly.graph_objs.choropleth.Marker"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('line', None)
-        self.line = line if line is not None else v
-        v = arg.pop('opacity', None)
-        self.opacity = opacity if opacity is not None else v
-        v = arg.pop('opacitysrc', None)
-        self.opacitysrc = opacitysrc if opacitysrc is not None else v
+        _v = arg.pop('line', None)
+        self.line = line if line is not None else _v
+        _v = arg.pop('opacity', None)
+        self.opacity = opacity if opacity is not None else _v
+        _v = arg.pop('opacitysrc', None)
+        self.opacitysrc = opacitysrc if opacitysrc is not None else _v
 
         # Process unknown kwargs
         # ----------------------

@@ -551,36 +551,36 @@ an instance of plotly.graph_objs.scatter3d.ErrorY"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('array', None)
-        self.array = array if array is not None else v
-        v = arg.pop('arrayminus', None)
-        self.arrayminus = arrayminus if arrayminus is not None else v
-        v = arg.pop('arrayminussrc', None)
-        self.arrayminussrc = arrayminussrc if arrayminussrc is not None else v
-        v = arg.pop('arraysrc', None)
-        self.arraysrc = arraysrc if arraysrc is not None else v
-        v = arg.pop('color', None)
-        self.color = color if color is not None else v
-        v = arg.pop('copy_zstyle', None)
-        self.copy_zstyle = copy_zstyle if copy_zstyle is not None else v
-        v = arg.pop('symmetric', None)
-        self.symmetric = symmetric if symmetric is not None else v
-        v = arg.pop('thickness', None)
-        self.thickness = thickness if thickness is not None else v
-        v = arg.pop('traceref', None)
-        self.traceref = traceref if traceref is not None else v
-        v = arg.pop('tracerefminus', None)
-        self.tracerefminus = tracerefminus if tracerefminus is not None else v
-        v = arg.pop('type', None)
-        self.type = type if type is not None else v
-        v = arg.pop('value', None)
-        self.value = value if value is not None else v
-        v = arg.pop('valueminus', None)
-        self.valueminus = valueminus if valueminus is not None else v
-        v = arg.pop('visible', None)
-        self.visible = visible if visible is not None else v
-        v = arg.pop('width', None)
-        self.width = width if width is not None else v
+        _v = arg.pop('array', None)
+        self.array = array if array is not None else _v
+        _v = arg.pop('arrayminus', None)
+        self.arrayminus = arrayminus if arrayminus is not None else _v
+        _v = arg.pop('arrayminussrc', None)
+        self.arrayminussrc = arrayminussrc if arrayminussrc is not None else _v
+        _v = arg.pop('arraysrc', None)
+        self.arraysrc = arraysrc if arraysrc is not None else _v
+        _v = arg.pop('color', None)
+        self.color = color if color is not None else _v
+        _v = arg.pop('copy_zstyle', None)
+        self.copy_zstyle = copy_zstyle if copy_zstyle is not None else _v
+        _v = arg.pop('symmetric', None)
+        self.symmetric = symmetric if symmetric is not None else _v
+        _v = arg.pop('thickness', None)
+        self.thickness = thickness if thickness is not None else _v
+        _v = arg.pop('traceref', None)
+        self.traceref = traceref if traceref is not None else _v
+        _v = arg.pop('tracerefminus', None)
+        self.tracerefminus = tracerefminus if tracerefminus is not None else _v
+        _v = arg.pop('type', None)
+        self.type = type if type is not None else _v
+        _v = arg.pop('value', None)
+        self.value = value if value is not None else _v
+        _v = arg.pop('valueminus', None)
+        self.valueminus = valueminus if valueminus is not None else _v
+        _v = arg.pop('visible', None)
+        self.visible = visible if visible is not None else _v
+        _v = arg.pop('width', None)
+        self.width = width if width is not None else _v
 
         # Process unknown kwargs
         # ----------------------
