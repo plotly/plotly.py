@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [3.0.1] - 2018-07-17
+## [3.0.2] - 2018-07-17
 This is a minor bug-fix release to 3.0.0
 
 ### Plotly.js version: 1.38.3
@@ -14,6 +14,9 @@ This is a minor bug-fix release to 3.0.0
    [GH1060](https://github.com/plotly/plotly.py/pull/1060)
  - Assorted performance improvements when constructing graph objects
    [GH1061](https://github.com/plotly/plotly.py/pull/1061)
+   
+## [3.0.1] - 2018-07-17 [YANKED]
+Note: This release's installation was broken. It has been removed from PyPI
 
 ## [3.0.0] - 2018-07-05
 
