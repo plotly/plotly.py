@@ -294,18 +294,18 @@ an instance of plotly.graph_objs.candlestick.hoverlabel.Font"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('color', None)
-        self.color = color if color is not None else v
-        v = arg.pop('colorsrc', None)
-        self.colorsrc = colorsrc if colorsrc is not None else v
-        v = arg.pop('family', None)
-        self.family = family if family is not None else v
-        v = arg.pop('familysrc', None)
-        self.familysrc = familysrc if familysrc is not None else v
-        v = arg.pop('size', None)
-        self.size = size if size is not None else v
-        v = arg.pop('sizesrc', None)
-        self.sizesrc = sizesrc if sizesrc is not None else v
+        _v = arg.pop('color', None)
+        self.color = color if color is not None else _v
+        _v = arg.pop('colorsrc', None)
+        self.colorsrc = colorsrc if colorsrc is not None else _v
+        _v = arg.pop('family', None)
+        self.family = family if family is not None else _v
+        _v = arg.pop('familysrc', None)
+        self.familysrc = familysrc if familysrc is not None else _v
+        _v = arg.pop('size', None)
+        self.size = size if size is not None else _v
+        _v = arg.pop('sizesrc', None)
+        self.sizesrc = sizesrc if sizesrc is not None else _v
 
         # Process unknown kwargs
         # ----------------------

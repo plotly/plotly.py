@@ -128,10 +128,10 @@ an instance of plotly.graph_objs.scattercarpet.Selected"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('marker', None)
-        self.marker = marker if marker is not None else v
-        v = arg.pop('textfont', None)
-        self.textfont = textfont if textfont is not None else v
+        _v = arg.pop('marker', None)
+        self.marker = marker if marker is not None else _v
+        _v = arg.pop('textfont', None)
+        self.textfont = textfont if textfont is not None else _v
 
         # Process unknown kwargs
         # ----------------------

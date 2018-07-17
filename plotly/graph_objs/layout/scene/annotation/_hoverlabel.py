@@ -258,12 +258,12 @@ an instance of plotly.graph_objs.layout.scene.annotation.Hoverlabel"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('bgcolor', None)
-        self.bgcolor = bgcolor if bgcolor is not None else v
-        v = arg.pop('bordercolor', None)
-        self.bordercolor = bordercolor if bordercolor is not None else v
-        v = arg.pop('font', None)
-        self.font = font if font is not None else v
+        _v = arg.pop('bgcolor', None)
+        self.bgcolor = bgcolor if bgcolor is not None else _v
+        _v = arg.pop('bordercolor', None)
+        self.bordercolor = bordercolor if bordercolor is not None else _v
+        _v = arg.pop('font', None)
+        self.font = font if font is not None else _v
 
         # Process unknown kwargs
         # ----------------------

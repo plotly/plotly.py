@@ -167,12 +167,12 @@ an instance of plotly.graph_objs.surface.contours.x.Project"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('x', None)
-        self.x = x if x is not None else v
-        v = arg.pop('y', None)
-        self.y = y if y is not None else v
-        v = arg.pop('z', None)
-        self.z = z if z is not None else v
+        _v = arg.pop('x', None)
+        self.x = x if x is not None else _v
+        _v = arg.pop('y', None)
+        self.y = y if y is not None else _v
+        _v = arg.pop('z', None)
+        self.z = z if z is not None else _v
 
         # Process unknown kwargs
         # ----------------------

@@ -543,30 +543,30 @@ an instance of plotly.graph_objs.layout.Grid"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('columns', None)
-        self.columns = columns if columns is not None else v
-        v = arg.pop('domain', None)
-        self.domain = domain if domain is not None else v
-        v = arg.pop('pattern', None)
-        self.pattern = pattern if pattern is not None else v
-        v = arg.pop('roworder', None)
-        self.roworder = roworder if roworder is not None else v
-        v = arg.pop('rows', None)
-        self.rows = rows if rows is not None else v
-        v = arg.pop('subplots', None)
-        self.subplots = subplots if subplots is not None else v
-        v = arg.pop('xaxes', None)
-        self.xaxes = xaxes if xaxes is not None else v
-        v = arg.pop('xgap', None)
-        self.xgap = xgap if xgap is not None else v
-        v = arg.pop('xside', None)
-        self.xside = xside if xside is not None else v
-        v = arg.pop('yaxes', None)
-        self.yaxes = yaxes if yaxes is not None else v
-        v = arg.pop('ygap', None)
-        self.ygap = ygap if ygap is not None else v
-        v = arg.pop('yside', None)
-        self.yside = yside if yside is not None else v
+        _v = arg.pop('columns', None)
+        self.columns = columns if columns is not None else _v
+        _v = arg.pop('domain', None)
+        self.domain = domain if domain is not None else _v
+        _v = arg.pop('pattern', None)
+        self.pattern = pattern if pattern is not None else _v
+        _v = arg.pop('roworder', None)
+        self.roworder = roworder if roworder is not None else _v
+        _v = arg.pop('rows', None)
+        self.rows = rows if rows is not None else _v
+        _v = arg.pop('subplots', None)
+        self.subplots = subplots if subplots is not None else _v
+        _v = arg.pop('xaxes', None)
+        self.xaxes = xaxes if xaxes is not None else _v
+        _v = arg.pop('xgap', None)
+        self.xgap = xgap if xgap is not None else _v
+        _v = arg.pop('xside', None)
+        self.xside = xside if xside is not None else _v
+        _v = arg.pop('yaxes', None)
+        self.yaxes = yaxes if yaxes is not None else _v
+        _v = arg.pop('ygap', None)
+        self.ygap = ygap if ygap is not None else _v
+        _v = arg.pop('yside', None)
+        self.yside = yside if yside is not None else _v
 
         # Process unknown kwargs
         # ----------------------

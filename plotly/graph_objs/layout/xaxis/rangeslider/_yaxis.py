@@ -129,10 +129,10 @@ an instance of plotly.graph_objs.layout.xaxis.rangeslider.YAxis"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('range', None)
-        self.range = range if range is not None else v
-        v = arg.pop('rangemode', None)
-        self.rangemode = rangemode if rangemode is not None else v
+        _v = arg.pop('range', None)
+        self.range = range if range is not None else _v
+        _v = arg.pop('rangemode', None)
+        self.rangemode = rangemode if rangemode is not None else _v
 
         # Process unknown kwargs
         # ----------------------

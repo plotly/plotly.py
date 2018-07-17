@@ -1459,28 +1459,28 @@ an instance of plotly.graph_objs.layout.Scene"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('annotations', None)
-        self.annotations = annotations if annotations is not None else v
-        v = arg.pop('aspectmode', None)
-        self.aspectmode = aspectmode if aspectmode is not None else v
-        v = arg.pop('aspectratio', None)
-        self.aspectratio = aspectratio if aspectratio is not None else v
-        v = arg.pop('bgcolor', None)
-        self.bgcolor = bgcolor if bgcolor is not None else v
-        v = arg.pop('camera', None)
-        self.camera = camera if camera is not None else v
-        v = arg.pop('domain', None)
-        self.domain = domain if domain is not None else v
-        v = arg.pop('dragmode', None)
-        self.dragmode = dragmode if dragmode is not None else v
-        v = arg.pop('hovermode', None)
-        self.hovermode = hovermode if hovermode is not None else v
-        v = arg.pop('xaxis', None)
-        self.xaxis = xaxis if xaxis is not None else v
-        v = arg.pop('yaxis', None)
-        self.yaxis = yaxis if yaxis is not None else v
-        v = arg.pop('zaxis', None)
-        self.zaxis = zaxis if zaxis is not None else v
+        _v = arg.pop('annotations', None)
+        self.annotations = annotations if annotations is not None else _v
+        _v = arg.pop('aspectmode', None)
+        self.aspectmode = aspectmode if aspectmode is not None else _v
+        _v = arg.pop('aspectratio', None)
+        self.aspectratio = aspectratio if aspectratio is not None else _v
+        _v = arg.pop('bgcolor', None)
+        self.bgcolor = bgcolor if bgcolor is not None else _v
+        _v = arg.pop('camera', None)
+        self.camera = camera if camera is not None else _v
+        _v = arg.pop('domain', None)
+        self.domain = domain if domain is not None else _v
+        _v = arg.pop('dragmode', None)
+        self.dragmode = dragmode if dragmode is not None else _v
+        _v = arg.pop('hovermode', None)
+        self.hovermode = hovermode if hovermode is not None else _v
+        _v = arg.pop('xaxis', None)
+        self.xaxis = xaxis if xaxis is not None else _v
+        _v = arg.pop('yaxis', None)
+        self.yaxis = yaxis if yaxis is not None else _v
+        _v = arg.pop('zaxis', None)
+        self.zaxis = zaxis if zaxis is not None else _v
 
         # Process unknown kwargs
         # ----------------------

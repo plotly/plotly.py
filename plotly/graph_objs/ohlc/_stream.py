@@ -121,10 +121,10 @@ an instance of plotly.graph_objs.ohlc.Stream"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('maxpoints', None)
-        self.maxpoints = maxpoints if maxpoints is not None else v
-        v = arg.pop('token', None)
-        self.token = token if token is not None else v
+        _v = arg.pop('maxpoints', None)
+        self.maxpoints = maxpoints if maxpoints is not None else _v
+        _v = arg.pop('token', None)
+        self.token = token if token is not None else _v
 
         # Process unknown kwargs
         # ----------------------

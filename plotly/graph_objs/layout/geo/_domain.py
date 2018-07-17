@@ -218,14 +218,14 @@ an instance of plotly.graph_objs.layout.geo.Domain"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('column', None)
-        self.column = column if column is not None else v
-        v = arg.pop('row', None)
-        self.row = row if row is not None else v
-        v = arg.pop('x', None)
-        self.x = x if x is not None else v
-        v = arg.pop('y', None)
-        self.y = y if y is not None else v
+        _v = arg.pop('column', None)
+        self.column = column if column is not None else _v
+        _v = arg.pop('row', None)
+        self.row = row if row is not None else _v
+        _v = arg.pop('x', None)
+        self.x = x if x is not None else _v
+        _v = arg.pop('y', None)
+        self.y = y if y is not None else _v
 
         # Process unknown kwargs
         # ----------------------

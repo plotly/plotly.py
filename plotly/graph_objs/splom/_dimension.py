@@ -175,14 +175,14 @@ an instance of plotly.graph_objs.splom.Dimension"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('label', None)
-        self.label = label if label is not None else v
-        v = arg.pop('values', None)
-        self.values = values if values is not None else v
-        v = arg.pop('valuessrc', None)
-        self.valuessrc = valuessrc if valuessrc is not None else v
-        v = arg.pop('visible', None)
-        self.visible = visible if visible is not None else v
+        _v = arg.pop('label', None)
+        self.label = label if label is not None else _v
+        _v = arg.pop('values', None)
+        self.values = values if values is not None else _v
+        _v = arg.pop('valuessrc', None)
+        self.valuessrc = valuessrc if valuessrc is not None else _v
+        _v = arg.pop('visible', None)
+        self.visible = visible if visible is not None else _v
 
         # Process unknown kwargs
         # ----------------------

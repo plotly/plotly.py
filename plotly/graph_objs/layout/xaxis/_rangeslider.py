@@ -409,22 +409,22 @@ an instance of plotly.graph_objs.layout.xaxis.Rangeslider"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('autorange', None)
-        self.autorange = autorange if autorange is not None else v
-        v = arg.pop('bgcolor', None)
-        self.bgcolor = bgcolor if bgcolor is not None else v
-        v = arg.pop('bordercolor', None)
-        self.bordercolor = bordercolor if bordercolor is not None else v
-        v = arg.pop('borderwidth', None)
-        self.borderwidth = borderwidth if borderwidth is not None else v
-        v = arg.pop('range', None)
-        self.range = range if range is not None else v
-        v = arg.pop('thickness', None)
-        self.thickness = thickness if thickness is not None else v
-        v = arg.pop('visible', None)
-        self.visible = visible if visible is not None else v
-        v = arg.pop('yaxis', None)
-        self.yaxis = yaxis if yaxis is not None else v
+        _v = arg.pop('autorange', None)
+        self.autorange = autorange if autorange is not None else _v
+        _v = arg.pop('bgcolor', None)
+        self.bgcolor = bgcolor if bgcolor is not None else _v
+        _v = arg.pop('bordercolor', None)
+        self.bordercolor = bordercolor if bordercolor is not None else _v
+        _v = arg.pop('borderwidth', None)
+        self.borderwidth = borderwidth if borderwidth is not None else _v
+        _v = arg.pop('range', None)
+        self.range = range if range is not None else _v
+        _v = arg.pop('thickness', None)
+        self.thickness = thickness if thickness is not None else _v
+        _v = arg.pop('visible', None)
+        self.visible = visible if visible is not None else _v
+        _v = arg.pop('yaxis', None)
+        self.yaxis = yaxis if yaxis is not None else _v
 
         # Process unknown kwargs
         # ----------------------

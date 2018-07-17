@@ -422,28 +422,28 @@ an instance of plotly.graph_objs.sankey.Link"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('color', None)
-        self.color = color if color is not None else v
-        v = arg.pop('colorsrc', None)
-        self.colorsrc = colorsrc if colorsrc is not None else v
-        v = arg.pop('label', None)
-        self.label = label if label is not None else v
-        v = arg.pop('labelsrc', None)
-        self.labelsrc = labelsrc if labelsrc is not None else v
-        v = arg.pop('line', None)
-        self.line = line if line is not None else v
-        v = arg.pop('source', None)
-        self.source = source if source is not None else v
-        v = arg.pop('sourcesrc', None)
-        self.sourcesrc = sourcesrc if sourcesrc is not None else v
-        v = arg.pop('target', None)
-        self.target = target if target is not None else v
-        v = arg.pop('targetsrc', None)
-        self.targetsrc = targetsrc if targetsrc is not None else v
-        v = arg.pop('value', None)
-        self.value = value if value is not None else v
-        v = arg.pop('valuesrc', None)
-        self.valuesrc = valuesrc if valuesrc is not None else v
+        _v = arg.pop('color', None)
+        self.color = color if color is not None else _v
+        _v = arg.pop('colorsrc', None)
+        self.colorsrc = colorsrc if colorsrc is not None else _v
+        _v = arg.pop('label', None)
+        self.label = label if label is not None else _v
+        _v = arg.pop('labelsrc', None)
+        self.labelsrc = labelsrc if labelsrc is not None else _v
+        _v = arg.pop('line', None)
+        self.line = line if line is not None else _v
+        _v = arg.pop('source', None)
+        self.source = source if source is not None else _v
+        _v = arg.pop('sourcesrc', None)
+        self.sourcesrc = sourcesrc if sourcesrc is not None else _v
+        _v = arg.pop('target', None)
+        self.target = target if target is not None else _v
+        _v = arg.pop('targetsrc', None)
+        self.targetsrc = targetsrc if targetsrc is not None else _v
+        _v = arg.pop('value', None)
+        self.value = value if value is not None else _v
+        _v = arg.pop('valuesrc', None)
+        self.valuesrc = valuesrc if valuesrc is not None else _v
 
         # Process unknown kwargs
         # ----------------------

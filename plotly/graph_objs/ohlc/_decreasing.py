@@ -98,8 +98,8 @@ an instance of plotly.graph_objs.ohlc.Decreasing"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('line', None)
-        self.line = line if line is not None else v
+        _v = arg.pop('line', None)
+        self.line = line if line is not None else _v
 
         # Process unknown kwargs
         # ----------------------

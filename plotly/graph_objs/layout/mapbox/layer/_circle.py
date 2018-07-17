@@ -87,8 +87,8 @@ an instance of plotly.graph_objs.layout.mapbox.layer.Circle"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('radius', None)
-        self.radius = radius if radius is not None else v
+        _v = arg.pop('radius', None)
+        self.radius = radius if radius is not None else _v
 
         # Process unknown kwargs
         # ----------------------

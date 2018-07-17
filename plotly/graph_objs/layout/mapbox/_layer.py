@@ -479,28 +479,28 @@ an instance of plotly.graph_objs.layout.mapbox.Layer"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('below', None)
-        self.below = below if below is not None else v
-        v = arg.pop('circle', None)
-        self.circle = circle if circle is not None else v
-        v = arg.pop('color', None)
-        self.color = color if color is not None else v
-        v = arg.pop('fill', None)
-        self.fill = fill if fill is not None else v
-        v = arg.pop('line', None)
-        self.line = line if line is not None else v
-        v = arg.pop('opacity', None)
-        self.opacity = opacity if opacity is not None else v
-        v = arg.pop('source', None)
-        self.source = source if source is not None else v
-        v = arg.pop('sourcelayer', None)
-        self.sourcelayer = sourcelayer if sourcelayer is not None else v
-        v = arg.pop('sourcetype', None)
-        self.sourcetype = sourcetype if sourcetype is not None else v
-        v = arg.pop('symbol', None)
-        self.symbol = symbol if symbol is not None else v
-        v = arg.pop('type', None)
-        self.type = type if type is not None else v
+        _v = arg.pop('below', None)
+        self.below = below if below is not None else _v
+        _v = arg.pop('circle', None)
+        self.circle = circle if circle is not None else _v
+        _v = arg.pop('color', None)
+        self.color = color if color is not None else _v
+        _v = arg.pop('fill', None)
+        self.fill = fill if fill is not None else _v
+        _v = arg.pop('line', None)
+        self.line = line if line is not None else _v
+        _v = arg.pop('opacity', None)
+        self.opacity = opacity if opacity is not None else _v
+        _v = arg.pop('source', None)
+        self.source = source if source is not None else _v
+        _v = arg.pop('sourcelayer', None)
+        self.sourcelayer = sourcelayer if sourcelayer is not None else _v
+        _v = arg.pop('sourcetype', None)
+        self.sourcetype = sourcetype if sourcetype is not None else _v
+        _v = arg.pop('symbol', None)
+        self.symbol = symbol if symbol is not None else _v
+        _v = arg.pop('type', None)
+        self.type = type if type is not None else _v
 
         # Process unknown kwargs
         # ----------------------

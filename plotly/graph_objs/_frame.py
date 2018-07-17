@@ -237,18 +237,18 @@ an instance of plotly.graph_objs.Frame"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('baseframe', None)
-        self.baseframe = baseframe if baseframe is not None else v
-        v = arg.pop('data', None)
-        self.data = data if data is not None else v
-        v = arg.pop('group', None)
-        self.group = group if group is not None else v
-        v = arg.pop('layout', None)
-        self.layout = layout if layout is not None else v
-        v = arg.pop('name', None)
-        self.name = name if name is not None else v
-        v = arg.pop('traces', None)
-        self.traces = traces if traces is not None else v
+        _v = arg.pop('baseframe', None)
+        self.baseframe = baseframe if baseframe is not None else _v
+        _v = arg.pop('data', None)
+        self.data = data if data is not None else _v
+        _v = arg.pop('group', None)
+        self.group = group if group is not None else _v
+        _v = arg.pop('layout', None)
+        self.layout = layout if layout is not None else _v
+        _v = arg.pop('name', None)
+        self.name = name if name is not None else _v
+        _v = arg.pop('traces', None)
+        self.traces = traces if traces is not None else _v
 
         # Process unknown kwargs
         # ----------------------

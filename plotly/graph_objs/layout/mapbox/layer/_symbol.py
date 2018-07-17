@@ -235,16 +235,16 @@ an instance of plotly.graph_objs.layout.mapbox.layer.Symbol"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('icon', None)
-        self.icon = icon if icon is not None else v
-        v = arg.pop('iconsize', None)
-        self.iconsize = iconsize if iconsize is not None else v
-        v = arg.pop('text', None)
-        self.text = text if text is not None else v
-        v = arg.pop('textfont', None)
-        self.textfont = textfont if textfont is not None else v
-        v = arg.pop('textposition', None)
-        self.textposition = textposition if textposition is not None else v
+        _v = arg.pop('icon', None)
+        self.icon = icon if icon is not None else _v
+        _v = arg.pop('iconsize', None)
+        self.iconsize = iconsize if iconsize is not None else _v
+        _v = arg.pop('text', None)
+        self.text = text if text is not None else _v
+        _v = arg.pop('textfont', None)
+        self.textfont = textfont if textfont is not None else _v
+        _v = arg.pop('textposition', None)
+        self.textposition = textposition if textposition is not None else _v
 
         # Process unknown kwargs
         # ----------------------

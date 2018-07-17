@@ -224,14 +224,14 @@ an instance of plotly.graph_objs.violin.Box"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('fillcolor', None)
-        self.fillcolor = fillcolor if fillcolor is not None else v
-        v = arg.pop('line', None)
-        self.line = line if line is not None else v
-        v = arg.pop('visible', None)
-        self.visible = visible if visible is not None else v
-        v = arg.pop('width', None)
-        self.width = width if width is not None else v
+        _v = arg.pop('fillcolor', None)
+        self.fillcolor = fillcolor if fillcolor is not None else _v
+        _v = arg.pop('line', None)
+        self.line = line if line is not None else _v
+        _v = arg.pop('visible', None)
+        self.visible = visible if visible is not None else _v
+        _v = arg.pop('width', None)
+        self.width = width if width is not None else _v
 
         # Process unknown kwargs
         # ----------------------

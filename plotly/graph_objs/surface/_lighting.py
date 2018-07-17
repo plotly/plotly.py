@@ -212,16 +212,16 @@ an instance of plotly.graph_objs.surface.Lighting"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('ambient', None)
-        self.ambient = ambient if ambient is not None else v
-        v = arg.pop('diffuse', None)
-        self.diffuse = diffuse if diffuse is not None else v
-        v = arg.pop('fresnel', None)
-        self.fresnel = fresnel if fresnel is not None else v
-        v = arg.pop('roughness', None)
-        self.roughness = roughness if roughness is not None else v
-        v = arg.pop('specular', None)
-        self.specular = specular if specular is not None else v
+        _v = arg.pop('ambient', None)
+        self.ambient = ambient if ambient is not None else _v
+        _v = arg.pop('diffuse', None)
+        self.diffuse = diffuse if diffuse is not None else _v
+        _v = arg.pop('fresnel', None)
+        self.fresnel = fresnel if fresnel is not None else _v
+        _v = arg.pop('roughness', None)
+        self.roughness = roughness if roughness is not None else _v
+        _v = arg.pop('specular', None)
+        self.specular = specular if specular is not None else _v
 
         # Process unknown kwargs
         # ----------------------

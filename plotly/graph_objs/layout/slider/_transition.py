@@ -120,10 +120,10 @@ an instance of plotly.graph_objs.layout.slider.Transition"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('duration', None)
-        self.duration = duration if duration is not None else v
-        v = arg.pop('easing', None)
-        self.easing = easing if easing is not None else v
+        _v = arg.pop('duration', None)
+        self.duration = duration if duration is not None else _v
+        _v = arg.pop('easing', None)
+        self.easing = easing if easing is not None else _v
 
         # Process unknown kwargs
         # ----------------------

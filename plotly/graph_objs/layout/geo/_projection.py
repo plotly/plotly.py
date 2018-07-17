@@ -202,14 +202,14 @@ an instance of plotly.graph_objs.layout.geo.Projection"""
 
         # Populate data dict with properties
         # ----------------------------------
-        v = arg.pop('parallels', None)
-        self.parallels = parallels if parallels is not None else v
-        v = arg.pop('rotation', None)
-        self.rotation = rotation if rotation is not None else v
-        v = arg.pop('scale', None)
-        self.scale = scale if scale is not None else v
-        v = arg.pop('type', None)
-        self.type = type if type is not None else v
+        _v = arg.pop('parallels', None)
+        self.parallels = parallels if parallels is not None else _v
+        _v = arg.pop('rotation', None)
+        self.rotation = rotation if rotation is not None else _v
+        _v = arg.pop('scale', None)
+        self.scale = scale if scale is not None else _v
+        _v = arg.pop('type', None)
+        self.type = type if type is not None else _v
 
         # Process unknown kwargs
         # ----------------------
