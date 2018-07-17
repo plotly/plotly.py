@@ -2102,7 +2102,7 @@ Invalid property path '{key_path_str}' for layout
             if isinstance(plotly_obj, BaseLayoutType):
                 for key in update_obj:
                     if key not in plotly_obj:
-                        match = fullmatch(plotly_obj._subplotid_prop_re, key)
+                        match = plotly_obj._subplotid_prop_re.match(key)
                         if match:
                             # We need to create a subplotid object
                             plotly_obj[key] = {}
