@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.0.2] - 2018-07-17
+This is a minor bug-fix release to 3.0.1
+
+### Plotly.js version: 1.38.3
+
+### Fixed
+ - Regression in the 3.0.1 fix for numbered subplot labels
+   
 ## [3.0.1] - 2018-07-17
 This is a minor bug-fix release to 3.0.0
 
