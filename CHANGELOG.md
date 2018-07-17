@@ -2,9 +2,24 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## 3.0.0 - 2018-07-05
+## [3.0.1] - 2018-07-17
+This is a minor bug-fix release to 3.0.0
+
+### Plotly.js version: 1.38.3
+
+### Fixed
+ - Several errors related to numbered subplot labels (e.g. xaxis2, polar3, etc.)
+   [GH1057](https://github.com/plotly/plotly.py/pull/1057)
+ - Error where the `v` property was ignored in `cone` traces
+   [GH1060](https://github.com/plotly/plotly.py/pull/1060)
+ - Assorted performance improvements when constructing graph objects
+   [GH1061](https://github.com/plotly/plotly.py/pull/1061)
+
+## [3.0.0] - 2018-07-05
 
 This is a major version with many exciting updates. See the [Introducing plotly.py 3.0.0](https://medium.com/@plotlygraphs/introducing-plotly-py-3-0-0-7bb1333f69c6) post for more information.
+
+### Plotly.js version: 1.38.3
 
 ### Added
 - Full Jupyter ipywidgets integration with the new `graph_objs.FigureWidget` class
@@ -18,6 +33,8 @@ This is a major version with many exciting updates. See the [Introducing plotly.
 
 ### Changed / Deprecated
 Please see the [migration guid](migration-guide.md) for a full list of the changes and deprecations in version 3.0.0
+
+
 
 ## [2.7.0] - 2018-05-23
 ### Updated
