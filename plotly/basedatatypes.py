@@ -3086,7 +3086,7 @@ class BasePlotlyType(object):
         # --------------------------------
         child_prop_val = getattr(self, child.plotly_name)
         if isinstance(child_prop_val, (list, tuple)):
-            child_ind = child._trace_ind
+            child_ind = BaseFigure._index_is(child_prop_val, child)
             obj_path = '{child_name}.{child_ind}.{prop}'.format(
                 child_name=child.plotly_name,
                 child_ind=child_ind,
