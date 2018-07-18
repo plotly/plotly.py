@@ -9,8 +9,12 @@ class Heatmapgl(BaseTraceType):
     @property
     def autocolorscale(self):
         """
-        Determines whether or not the colorscale is picked using the
-        sign of the input z values.
+        Determines whether the colorscale is a default palette
+        (`autocolorscale: true`) or the palette determined by
+        `colorscale`. In case `colorscale` is unspecified or
+        `autocolorscale` is true, the default  palette will be chosen
+        according to whether numbers in the `color` array are all
+        positive, all negative or mixed.
     
         The 'autocolorscale' property must be specified as a bool
         (either True, or False)
@@ -254,7 +258,11 @@ class Heatmapgl(BaseTraceType):
         hsv, or named color string. At minimum, a mapping for the
         lowest (0) and highest (1) values are required. For example,
         `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the
-        bounds of the colorscale in z space, use zmin and zmax
+        bounds of the colorscale in color space, use`zmin` and `zmax`.
+        Alternatively, `colorscale` may be a palette name string of the
+        following list: Greys,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Bl
+        ues,Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth,Electric,Vi
+        ridis,Cividis.
     
         The 'colorscale' property is a colorscale and may be
         specified as:
@@ -568,7 +576,9 @@ class Heatmapgl(BaseTraceType):
     @property
     def reversescale(self):
         """
-        Reverses the colorscale.
+        Reverses the color mapping if true. If true, `zmin` will
+        correspond to the last color in the array and `zmax` will
+        correspond to the first color.
     
         The 'reversescale' property must be specified as a bool
         (either True, or False)
@@ -1029,8 +1039,10 @@ class Heatmapgl(BaseTraceType):
     @property
     def zauto(self):
         """
-        Determines the whether or not the color domain is computed with
-        respect to the input data.
+        Determines whether or not the color domain is computed with
+        respect to the input data (here in `z`) or the bounds set in
+        `zmin` and `zmax`  Defaults to `false` when `zmin` and `zmax`
+        are set by the user.
     
         The 'zauto' property must be specified as a bool
         (either True, or False)
@@ -1050,7 +1062,8 @@ class Heatmapgl(BaseTraceType):
     @property
     def zmax(self):
         """
-        Sets the upper bound of color domain.
+        Sets the upper bound of the color domain. Value should have the
+        same units as in `z` and if set, `zmin` must be set as well.
     
         The 'zmax' property is a number and may be specified as:
           - An int or float
@@ -1070,7 +1083,8 @@ class Heatmapgl(BaseTraceType):
     @property
     def zmin(self):
         """
-        Sets the lower bound of color domain.
+        Sets the lower bound of the color domain. Value should have the
+        same units as in `z` and if set, `zmax` must be set as well.
     
         The 'zmin' property is a number and may be specified as:
           - An int or float
@@ -1123,8 +1137,12 @@ class Heatmapgl(BaseTraceType):
     def _prop_descriptions(self):
         return """\
         autocolorscale
-            Determines whether or not the colorscale is picked
-            using the sign of the input z values.
+            Determines whether the colorscale is a default palette
+            (`autocolorscale: true`) or the palette determined by
+            `colorscale`. In case `colorscale` is unspecified or
+            `autocolorscale` is true, the default  palette will be
+            chosen according to whether numbers in the `color`
+            array are all positive, all negative or mixed.
         colorbar
             plotly.graph_objs.heatmapgl.ColorBar instance or dict
             with compatible properties
@@ -1135,7 +1153,11 @@ class Heatmapgl(BaseTraceType):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)', [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in z space, use zmin and zmax
+            colorscale in color space, use`zmin` and `zmax`.
+            Alternatively, `colorscale` may be a palette name
+            string of the following list: Greys,YlGnBu,Greens,YlOrR
+            d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
+            ot,Blackbody,Earth,Electric,Viridis,Cividis.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -1173,7 +1195,9 @@ class Heatmapgl(BaseTraceType):
         opacity
             Sets the opacity of the trace.
         reversescale
-            Reverses the colorscale.
+            Reverses the color mapping if true. If true, `zmin`
+            will correspond to the last color in the array and
+            `zmax` will correspond to the first color.
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -1244,12 +1268,18 @@ class Heatmapgl(BaseTraceType):
         z
             Sets the z data.
         zauto
-            Determines the whether or not the color domain is
-            computed with respect to the input data.
+            Determines whether or not the color domain is computed
+            with respect to the input data (here in `z`) or the
+            bounds set in `zmin` and `zmax`  Defaults to `false`
+            when `zmin` and `zmax` are set by the user.
         zmax
-            Sets the upper bound of color domain.
+            Sets the upper bound of the color domain. Value should
+            have the same units as in `z` and if set, `zmin` must
+            be set as well.
         zmin
-            Sets the lower bound of color domain.
+            Sets the lower bound of the color domain. Value should
+            have the same units as in `z` and if set, `zmax` must
+            be set as well.
         zsrc
             Sets the source reference on plot.ly for  z .
         """
@@ -1310,8 +1340,12 @@ class Heatmapgl(BaseTraceType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.Heatmapgl
         autocolorscale
-            Determines whether or not the colorscale is picked
-            using the sign of the input z values.
+            Determines whether the colorscale is a default palette
+            (`autocolorscale: true`) or the palette determined by
+            `colorscale`. In case `colorscale` is unspecified or
+            `autocolorscale` is true, the default  palette will be
+            chosen according to whether numbers in the `color`
+            array are all positive, all negative or mixed.
         colorbar
             plotly.graph_objs.heatmapgl.ColorBar instance or dict
             with compatible properties
@@ -1322,7 +1356,11 @@ class Heatmapgl(BaseTraceType):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)', [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in z space, use zmin and zmax
+            colorscale in color space, use`zmin` and `zmax`.
+            Alternatively, `colorscale` may be a palette name
+            string of the following list: Greys,YlGnBu,Greens,YlOrR
+            d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
+            ot,Blackbody,Earth,Electric,Viridis,Cividis.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -1360,7 +1398,9 @@ class Heatmapgl(BaseTraceType):
         opacity
             Sets the opacity of the trace.
         reversescale
-            Reverses the colorscale.
+            Reverses the color mapping if true. If true, `zmin`
+            will correspond to the last color in the array and
+            `zmax` will correspond to the first color.
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -1431,12 +1471,18 @@ class Heatmapgl(BaseTraceType):
         z
             Sets the z data.
         zauto
-            Determines the whether or not the color domain is
-            computed with respect to the input data.
+            Determines whether or not the color domain is computed
+            with respect to the input data (here in `z`) or the
+            bounds set in `zmin` and `zmax`  Defaults to `false`
+            when `zmin` and `zmax` are set by the user.
         zmax
-            Sets the upper bound of color domain.
+            Sets the upper bound of the color domain. Value should
+            have the same units as in `z` and if set, `zmin` must
+            be set as well.
         zmin
-            Sets the lower bound of color domain.
+            Sets the lower bound of the color domain. Value should
+            have the same units as in `z` and if set, `zmax` must
+            be set as well.
         zsrc
             Sets the source reference on plot.ly for  z .
 

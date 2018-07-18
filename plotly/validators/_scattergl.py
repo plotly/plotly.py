@@ -76,6 +76,16 @@ class ScatterglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 *toself* or *tonext* and there are no markers
                 or text, then the default is *fills*, otherwise
                 it is *points*.
+            hovertext
+                Sets hover text elements associated with each
+                (x,y) pair. If a single string, the same string
+                appears over all the data points. If an array
+                of string, the items are mapped in order to the
+                this trace's (x,y) coordinates. To be seen,
+                trace `hoverinfo` must contain a *text* flag.
+            hovertextsrc
+                Sets the source reference on plot.ly for
+                hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -126,6 +136,14 @@ class ScatterglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 points. If an array of string, the items are
                 mapped in order to the this trace's (x,y)
                 coordinates.
+            textfont
+                Sets the text font.
+            textposition
+                Sets the positions of the `text` elements with
+                respects to the (x,y) coordinates.
+            textpositionsrc
+                Sets the source reference on plot.ly for
+                textposition .
             textsrc
                 Sets the source reference on plot.ly for  text
                 .

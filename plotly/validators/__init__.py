@@ -1,6 +1,7 @@
 from ._violin import ViolinValidator
 from ._table import TableValidator
 from ._surface import SurfaceValidator
+from ._streamtube import StreamtubeValidator
 from ._splom import SplomValidator
 from ._scatterternary import ScatterternaryValidator
 from ._scatterpolargl import ScatterpolarglValidator

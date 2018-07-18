@@ -484,6 +484,52 @@ class Scattergl(BaseTraceType):
     def hoveron(self, val):
         self['hoveron'] = val
 
+    # hovertext
+    # ---------
+    @property
+    def hovertext(self):
+        """
+        Sets hover text elements associated with each (x,y) pair. If a
+        single string, the same string appears over all the data
+        points. If an array of string, the items are mapped in order to
+        the this trace's (x,y) coordinates. To be seen, trace
+        `hoverinfo` must contain a *text* flag.
+    
+        The 'hovertext' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self['hovertext']
+
+    @hovertext.setter
+    def hovertext(self, val):
+        self['hovertext'] = val
+
+    # hovertextsrc
+    # ------------
+    @property
+    def hovertextsrc(self):
+        """
+        Sets the source reference on plot.ly for  hovertext .
+    
+        The 'hovertextsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hovertextsrc']
+
+    @hovertextsrc.setter
+    def hovertextsrc(self, val):
+        self['hovertextsrc'] = val
+
     # ids
     # ---
     @property
@@ -593,48 +639,47 @@ class Scattergl(BaseTraceType):
             Supported dict properties:
                 
                 autocolorscale
-                    Has an effect only if `marker.color` is set to
-                    a numerical array. Determines whether the
-                    colorscale is a default palette
-                    (`autocolorscale: true`) or the palette
-                    determined by `marker.colorscale`. In case
-                    `colorscale` is unspecified or `autocolorscale`
-                    is true, the default  palette will be chosen
-                    according to whether numbers in the `color`
-                    array are all positive, all negative or mixed.
+                    Determines whether the colorscale is a default
+                    palette (`autocolorscale: true`) or the palette
+                    determined by `marker.colorscale`. Has an
+                    effect only if in `marker.color`is set to a
+                    numerical array. In case `colorscale` is
+                    unspecified or `autocolorscale` is true, the
+                    default  palette will be chosen according to
+                    whether numbers in the `color` array are all
+                    positive, all negative or mixed.
                 cauto
-                    Has an effect only if `marker.color` is set to
-                    a numerical array and `cmin`, `cmax` are set by
-                    the user. In this case, it controls whether the
-                    range of colors in `colorscale` is mapped to
-                    the range of values in the `color` array
-                    (`cauto: true`), or the `cmin`/`cmax` values
-                    (`cauto: false`). Defaults to `false` when
-                    `cmin`, `cmax` are set by the user.
+                    Determines whether or not the color domain is
+                    computed with respect to the input data (here
+                    in `marker.color`) or the bounds set in
+                    `marker.cmin` and `marker.cmax`  Has an effect
+                    only if in `marker.color`is set to a numerical
+                    array. Defaults to `false` when `marker.cmin`
+                    and `marker.cmax` are set by the user.
                 cmax
-                    Has an effect only if `marker.color` is set to
-                    a numerical array. Sets the upper bound of the
-                    color domain. Value should be associated to the
-                    `marker.color` array index, and if set,
+                    Sets the upper bound of the color domain. Has
+                    an effect only if in `marker.color`is set to a
+                    numerical array. Value should have the same
+                    units as in `marker.color` and if set,
                     `marker.cmin` must be set as well.
                 cmin
-                    Has an effect only if `marker.color` is set to
-                    a numerical array. Sets the lower bound of the
-                    color domain. Value should be associated to the
-                    `marker.color` array index, and if set,
+                    Sets the lower bound of the color domain. Has
+                    an effect only if in `marker.color`is set to a
+                    numerical array. Value should have the same
+                    units as in `marker.color` and if set,
                     `marker.cmax` must be set as well.
                 color
-                    Sets the marker color. It accepts either a
+                    Sets themarkercolor. It accepts either a
                     specific color or an array of numbers that are
                     mapped to the colorscale relative to the max
                     and min values of the array or relative to
-                    `cmin` and `cmax` if set.
+                    `marker.cmin` and `marker.cmax` if set.
                 colorbar
                     plotly.graph_objs.scattergl.marker.ColorBar
                     instance or dict with compatible properties
                 colorscale
-                    Sets the colorscale and only has an effect if
-                    `marker.color` is set to a numerical array. The
+                    Sets the colorscale. Has an effect only if in
+                    `marker.color`is set to a numerical array. The
                     colorscale must be an array containing arrays
                     mapping a normalized value to an rgb, rgba,
                     hex, hsl, hsv, or named color string. At
@@ -642,12 +687,12 @@ class Scattergl(BaseTraceType):
                     highest (1) values are required. For example,
                     `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To
                     control the bounds of the colorscale in color
-                    space, use `marker.cmin` and `marker.cmax`.
+                    space, use`marker.cmin` and `marker.cmax`.
                     Alternatively, `colorscale` may be a palette
-                    name string of the following list: Greys,
-                    YlGnBu, Greens, YlOrRd, Bluered, RdBu, Reds,
-                    Blues, Picnic, Rainbow, Portland, Jet, Hot,
-                    Blackbody, Earth, Electric, Viridis, Cividis
+                    name string of the following list: Greys,YlGnBu
+                    ,Greens,YlOrRd,Bluered,RdBu,Reds,Blues,Picnic,R
+                    ainbow,Portland,Jet,Hot,Blackbody,Earth,Electri
+                    c,Viridis,Cividis.
                 colorsrc
                     Sets the source reference on plot.ly for  color
                     .
@@ -660,15 +705,16 @@ class Scattergl(BaseTraceType):
                     Sets the source reference on plot.ly for
                     opacity .
                 reversescale
-                    Has an effect only if `marker.color` is set to
-                    a numerical array. Reverses the color mapping
-                    if true (`cmin` will correspond to the last
-                    color in the array and `cmax` will correspond
-                    to the first color).
+                    Reverses the color mapping if true. Has an
+                    effect only if in `marker.color`is set to a
+                    numerical array. If true, `marker.cmin` will
+                    correspond to the last color in the array and
+                    `marker.cmax` will correspond to the first
+                    color.
                 showscale
-                    Has an effect only if `marker.color` is set to
-                    a numerical array. Determines whether or not a
-                    colorbar is displayed.
+                    Determines whether or not a colorbar is
+                    displayed for this trace. Has an effect only if
+                    in `marker.color`is set to a numerical array.
                 size
                     Sets the marker size (in px).
                 sizemin
@@ -717,7 +763,7 @@ class Scattergl(BaseTraceType):
     
         The 'mode' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['lines', 'markers'] joined with '+' characters
+          - Any combination of ['lines', 'markers', 'text'] joined with '+' characters
             (e.g. 'lines+markers')
             OR exactly one of ['none'] (e.g. 'none')
 
@@ -788,6 +834,9 @@ class Scattergl(BaseTraceType):
                 
                 marker
                     plotly.graph_objs.scattergl.selected.Marker
+                    instance or dict with compatible properties
+                textfont
+                    plotly.graph_objs.scattergl.selected.Textfont
                     instance or dict with compatible properties
 
         Returns
@@ -903,6 +952,106 @@ class Scattergl(BaseTraceType):
     def text(self, val):
         self['text'] = val
 
+    # textfont
+    # --------
+    @property
+    def textfont(self):
+        """
+        Sets the text font.
+    
+        The 'textfont' property is an instance of Textfont
+        that may be specified as:
+          - An instance of plotly.graph_objs.scattergl.Textfont
+          - A dict of string/value properties that will be passed
+            to the Textfont constructor
+    
+            Supported dict properties:
+                
+                color
+    
+                colorsrc
+                    Sets the source reference on plot.ly for  color
+                    .
+                family
+                    HTML font family - the typeface that will be
+                    applied by the web browser. The web browser
+                    will only be able to apply a font if it is
+                    available on the system which it operates.
+                    Provide multiple font families, separated by
+                    commas, to indicate the preference in which to
+                    apply fonts if they aren't available on the
+                    system. The plotly service (at https://plot.ly
+                    or on-premise) generates images on a server,
+                    where only a select number of fonts are
+                    installed and supported. These include *Arial*,
+                    *Balto*, *Courier New*, *Droid Sans*,, *Droid
+                    Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
+                    Standard TT*, *Open Sans*, *Overpass*, *PT Sans
+                    Narrow*, *Raleway*, *Times New Roman*.
+                familysrc
+                    Sets the source reference on plot.ly for
+                    family .
+                size
+    
+                sizesrc
+                    Sets the source reference on plot.ly for  size
+                    .
+
+        Returns
+        -------
+        plotly.graph_objs.scattergl.Textfont
+        """
+        return self['textfont']
+
+    @textfont.setter
+    def textfont(self, val):
+        self['textfont'] = val
+
+    # textposition
+    # ------------
+    @property
+    def textposition(self):
+        """
+        Sets the positions of the `text` elements with respects to the
+        (x,y) coordinates.
+    
+        The 'textposition' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['top left', 'top center', 'top right', 'middle left',
+                'middle center', 'middle right', 'bottom left', 'bottom
+                center', 'bottom right']
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['textposition']
+
+    @textposition.setter
+    def textposition(self, val):
+        self['textposition'] = val
+
+    # textpositionsrc
+    # ---------------
+    @property
+    def textpositionsrc(self):
+        """
+        Sets the source reference on plot.ly for  textposition .
+    
+        The 'textpositionsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['textpositionsrc']
+
+    @textpositionsrc.setter
+    def textpositionsrc(self, val):
+        self['textpositionsrc'] = val
+
     # textsrc
     # -------
     @property
@@ -957,6 +1106,9 @@ class Scattergl(BaseTraceType):
                 
                 marker
                     plotly.graph_objs.scattergl.unselected.Marker
+                    instance or dict with compatible properties
+                textfont
+                    plotly.graph_objs.scattergl.unselected.Textfont
                     instance or dict with compatible properties
 
         Returns
@@ -1285,6 +1437,15 @@ class Scattergl(BaseTraceType):
             regions? If the fill is *toself* or *tonext* and there
             are no markers or text, then the default is *fills*,
             otherwise it is *points*.
+        hovertext
+            Sets hover text elements associated with each (x,y)
+            pair. If a single string, the same string appears over
+            all the data points. If an array of string, the items
+            are mapped in order to the this trace's (x,y)
+            coordinates. To be seen, trace `hoverinfo` must contain
+            a *text* flag.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -1330,6 +1491,14 @@ class Scattergl(BaseTraceType):
             appears over all the data points. If an array of
             string, the items are mapped in order to the this
             trace's (x,y) coordinates.
+        textfont
+            Sets the text font.
+        textposition
+            Sets the positions of the `text` elements with respects
+            to the (x,y) coordinates.
+        textpositionsrc
+            Sets the source reference on plot.ly for  textposition
+            .
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
@@ -1390,6 +1559,8 @@ class Scattergl(BaseTraceType):
         hoverinfosrc=None,
         hoverlabel=None,
         hoveron=None,
+        hovertext=None,
+        hovertextsrc=None,
         ids=None,
         idssrc=None,
         legendgroup=None,
@@ -1403,6 +1574,9 @@ class Scattergl(BaseTraceType):
         showlegend=None,
         stream=None,
         text=None,
+        textfont=None,
+        textposition=None,
+        textpositionsrc=None,
         textsrc=None,
         uid=None,
         unselected=None,
@@ -1488,6 +1662,15 @@ class Scattergl(BaseTraceType):
             regions? If the fill is *toself* or *tonext* and there
             are no markers or text, then the default is *fills*,
             otherwise it is *points*.
+        hovertext
+            Sets hover text elements associated with each (x,y)
+            pair. If a single string, the same string appears over
+            all the data points. If an array of string, the items
+            are mapped in order to the this trace's (x,y)
+            coordinates. To be seen, trace `hoverinfo` must contain
+            a *text* flag.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -1533,6 +1716,14 @@ class Scattergl(BaseTraceType):
             appears over all the data points. If an array of
             string, the items are mapped in order to the this
             trace's (x,y) coordinates.
+        textfont
+            Sets the text font.
+        textposition
+            Sets the positions of the `text` elements with respects
+            to the (x,y) coordinates.
+        textpositionsrc
+            Sets the source reference on plot.ly for  textposition
+            .
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
@@ -1618,6 +1809,8 @@ an instance of plotly.graph_objs.Scattergl"""
         self._validators['hoverinfosrc'] = v_scattergl.HoverinfosrcValidator()
         self._validators['hoverlabel'] = v_scattergl.HoverlabelValidator()
         self._validators['hoveron'] = v_scattergl.HoveronValidator()
+        self._validators['hovertext'] = v_scattergl.HovertextValidator()
+        self._validators['hovertextsrc'] = v_scattergl.HovertextsrcValidator()
         self._validators['ids'] = v_scattergl.IdsValidator()
         self._validators['idssrc'] = v_scattergl.IdssrcValidator()
         self._validators['legendgroup'] = v_scattergl.LegendgroupValidator()
@@ -1632,6 +1825,10 @@ an instance of plotly.graph_objs.Scattergl"""
         self._validators['showlegend'] = v_scattergl.ShowlegendValidator()
         self._validators['stream'] = v_scattergl.StreamValidator()
         self._validators['text'] = v_scattergl.TextValidator()
+        self._validators['textfont'] = v_scattergl.TextfontValidator()
+        self._validators['textposition'] = v_scattergl.TextpositionValidator()
+        self._validators['textpositionsrc'
+                        ] = v_scattergl.TextpositionsrcValidator()
         self._validators['textsrc'] = v_scattergl.TextsrcValidator()
         self._validators['uid'] = v_scattergl.UidValidator()
         self._validators['unselected'] = v_scattergl.UnselectedValidator()
@@ -1675,6 +1872,10 @@ an instance of plotly.graph_objs.Scattergl"""
         self.hoverlabel = hoverlabel if hoverlabel is not None else _v
         _v = arg.pop('hoveron', None)
         self.hoveron = hoveron if hoveron is not None else _v
+        _v = arg.pop('hovertext', None)
+        self.hovertext = hovertext if hovertext is not None else _v
+        _v = arg.pop('hovertextsrc', None)
+        self.hovertextsrc = hovertextsrc if hovertextsrc is not None else _v
         _v = arg.pop('ids', None)
         self.ids = ids if ids is not None else _v
         _v = arg.pop('idssrc', None)
@@ -1701,6 +1902,12 @@ an instance of plotly.graph_objs.Scattergl"""
         self.stream = stream if stream is not None else _v
         _v = arg.pop('text', None)
         self.text = text if text is not None else _v
+        _v = arg.pop('textfont', None)
+        self.textfont = textfont if textfont is not None else _v
+        _v = arg.pop('textposition', None)
+        self.textposition = textposition if textposition is not None else _v
+        _v = arg.pop('textpositionsrc', None)
+        self.textpositionsrc = textpositionsrc if textpositionsrc is not None else _v
         _v = arg.pop('textsrc', None)
         self.textsrc = textsrc if textsrc is not None else _v
         _v = arg.pop('uid', None)

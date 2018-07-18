@@ -9,7 +9,7 @@ class ModeValidator(_plotly_utils.basevalidators.FlaglistValidator):
             parent_name=parent_name,
             edit_type='calc',
             extras=['none'],
-            flags=['lines', 'markers'],
+            flags=['lines', 'markers', 'text'],
             role='info',
             **kwargs
         )
