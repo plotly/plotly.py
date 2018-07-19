@@ -100,7 +100,7 @@ There's a short list of core dependencies you'll need installed in your Python e
 
 ### Dependencies and Virtualenv
 
-If you decided to follow the suggestion about about the Virtualenv *and* you've run `source bin/activate` within your new virtualenv directory to activate it--you can run the following to install the core dependencies:
+If you decided to follow the suggestion about the Virtualenv *and* you've run `source bin/activate` within your new virtualenv directory to activate it--you can run the following to install the core dependencies:
 
 ```bash
 pip install -r requirements.txt
