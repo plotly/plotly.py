@@ -10,11 +10,11 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_class_str='Marker',
             data_docs="""
             color
-                Sets the marker color. It accepts either a
+                Sets themarkercolor. It accepts either a
                 specific color or an array of numbers that are
                 mapped to the colorscale relative to the max
                 and min values of the array or relative to
-                `cmin` and `cmax` if set.
+                `marker.cmin` and `marker.cmax` if set.
             line
                 plotly.graph_objs.box.marker.Line instance or
                 dict with compatible properties

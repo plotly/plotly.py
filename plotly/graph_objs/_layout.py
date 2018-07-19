@@ -175,6 +175,16 @@ class Layout(BaseLayoutType):
                     Sets text to appear when hovering over this
                     annotation. If omitted or blank, no hover label
                     will appear.
+                name
+                    When used in a template, named items are
+                    created in the output figure in addition to any
+                    items the figure already has in this array. You
+                    can modify these items in the output figure by
+                    making your own item with `templateitemname`
+                    matching this `name` alongside your
+                    modifications (including `visible: false` or
+                    `enabled: false` to hide it). Has no effect
+                    outside of a template.
                 opacity
                     Sets the opacity of the annotation (text +
                     arrow).
@@ -206,6 +216,17 @@ class Layout(BaseLayoutType):
                     shortens the arrow from the `ax` / `ay` vector,
                     in contrast to `xshift` / `yshift` which moves
                     everything by this amount.
+                templateitemname
+                    Used to refer to a named item in this array in
+                    the template. Named items from the template
+                    will be created even without a matching item in
+                    the input figure, but you can modify one by
+                    making an item with `templateitemname` matching
+                    its `name`, alongside your modifications
+                    (including `visible: false` or `enabled: false`
+                    to hide it). If there is no template or no
+                    matching item, this item will be hidden unless
+                    you explicitly show it with `visible: true`.
                 text
                     Sets the text associated with this annotation.
                     Plotly uses a subset of HTML tags to do things
@@ -1058,6 +1079,16 @@ class Layout(BaseLayoutType):
                     above traces. When `xref` and `yref` are both
                     set to `paper`, image is drawn below the entire
                     plot area.
+                name
+                    When used in a template, named items are
+                    created in the output figure in addition to any
+                    items the figure already has in this array. You
+                    can modify these items in the output figure by
+                    making your own item with `templateitemname`
+                    matching this `name` alongside your
+                    modifications (including `visible: false` or
+                    `enabled: false` to hide it). Has no effect
+                    outside of a template.
                 opacity
                     Sets the opacity of the image.
                 sizex
@@ -1078,6 +1109,17 @@ class Layout(BaseLayoutType):
                     URL must be accessible from the domain where
                     the plot code is run, and can be either
                     relative or absolute.
+                templateitemname
+                    Used to refer to a named item in this array in
+                    the template. Named items from the template
+                    will be created even without a matching item in
+                    the input figure, but you can modify one by
+                    making an item with `templateitemname` matching
+                    its `name`, alongside your modifications
+                    (including `visible: false` or `enabled: false`
+                    to hide it). If there is no template or no
+                    matching item, this item will be hidden unless
+                    you explicitly show it with `visible: true`.
                 visible
                     Determines whether or not this image is
                     visible.
@@ -1433,6 +1475,15 @@ class Layout(BaseLayoutType):
                 domain
                     plotly.graph_objs.layout.polar.Domain instance
                     or dict with compatible properties
+                gridshape
+                    Determines if the radial axis grid lines and
+                    angular axis line are drawn as *circular*
+                    sectors or as *linear* (polygon) sectors. Has
+                    an effect only when the angular axis has `type`
+                    *category*. Note that `radialaxis.angle` is
+                    snapped to the angle of the closest vertex when
+                    `gridshape` is *circular* (so that radial axis
+                    scale is the same as the data scale).
                 radialaxis
                     plotly.graph_objs.layout.polar.RadialAxis
                     instance or dict with compatible properties
@@ -1643,6 +1694,16 @@ class Layout(BaseLayoutType):
                 line
                     plotly.graph_objs.layout.shape.Line instance or
                     dict with compatible properties
+                name
+                    When used in a template, named items are
+                    created in the output figure in addition to any
+                    items the figure already has in this array. You
+                    can modify these items in the output figure by
+                    making your own item with `templateitemname`
+                    matching this `name` alongside your
+                    modifications (including `visible: false` or
+                    `enabled: false` to hide it). Has no effect
+                    outside of a template.
                 opacity
                     Sets the opacity of the shape.
                 path
@@ -1671,6 +1732,17 @@ class Layout(BaseLayoutType):
                     strings, we can't use either to separate date
                     from time parts. Therefore we'll use underscore
                     for this purpose: 2015-02-21_13:45:56.789
+                templateitemname
+                    Used to refer to a named item in this array in
+                    the template. Named items from the template
+                    will be created even without a matching item in
+                    the input figure, but you can modify one by
+                    making an item with `templateitemname` matching
+                    its `name`, alongside your modifications
+                    (including `visible: false` or `enabled: false`
+                    to hide it). If there is no template or no
+                    matching item, this item will be hidden unless
+                    you explicitly show it with `visible: true`.
                 type
                     Specifies the shape type to be drawn. If
                     *line*, a line is drawn from (`x0`,`y0`) to
@@ -1835,12 +1907,33 @@ class Layout(BaseLayoutType):
                 minorticklen
                     Sets the length in pixels of minor step tick
                     marks
+                name
+                    When used in a template, named items are
+                    created in the output figure in addition to any
+                    items the figure already has in this array. You
+                    can modify these items in the output figure by
+                    making your own item with `templateitemname`
+                    matching this `name` alongside your
+                    modifications (including `visible: false` or
+                    `enabled: false` to hide it). Has no effect
+                    outside of a template.
                 pad
                     Set the padding of the slider component along
                     each side.
                 steps
                     plotly.graph_objs.layout.slider.Step instance
                     or dict with compatible properties
+                templateitemname
+                    Used to refer to a named item in this array in
+                    the template. Named items from the template
+                    will be created even without a matching item in
+                    the input figure, but you can modify one by
+                    making an item with `templateitemname` matching
+                    its `name`, alongside your modifications
+                    (including `visible: false` or `enabled: false`
+                    to hide it). If there is no template or no
+                    matching item, this item will be hidden unless
+                    you explicitly show it with `visible: true`.
                 tickcolor
                     Sets the color of the border enclosing the
                     slider.
@@ -1904,6 +1997,42 @@ class Layout(BaseLayoutType):
     @spikedistance.setter
     def spikedistance(self, val):
         self['spikedistance'] = val
+
+    # template
+    # --------
+    @property
+    def template(self):
+        """
+        Default attributes to be applied to the plot. Templates can be
+        created from existing plots using `Plotly.makeTemplate`, or
+        created manually. They should be objects with format: `{layout:
+        layoutTemplate, data: {[type]: [traceTemplate, ...]}, ...}`
+        `layoutTemplate` and `traceTemplate` are objects matching the
+        attribute structure of `layout` and a data trace.  Trace
+        templates are applied cyclically to traces of each type.
+        Container arrays (eg `annotations`) have special handling: An
+        object ending in `defaults` (eg `annotationdefaults`) is
+        applied to each array item. But if an item has a
+        `templateitemname` key we look in the template array for an
+        item with matching `name` and apply that instead. If no
+        matching `name` is found we mark the item invisible. Any named
+        template item not referenced is appended to the end of the
+        array, so you can use this for a watermark annotation or a logo
+        image, for example. To omit one of these items on the plot,
+        make an item with matching `templateitemname` and `visible:
+        false`.
+    
+        The 'template' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['template']
+
+    @template.setter
+    def template(self, val):
+        self['template'] = val
 
     # ternary
     # -------
@@ -2048,12 +2177,33 @@ class Layout(BaseLayoutType):
                     top-to-bottom order respectively.
                 font
                     Sets the font of the update menu button text.
+                name
+                    When used in a template, named items are
+                    created in the output figure in addition to any
+                    items the figure already has in this array. You
+                    can modify these items in the output figure by
+                    making your own item with `templateitemname`
+                    matching this `name` alongside your
+                    modifications (including `visible: false` or
+                    `enabled: false` to hide it). Has no effect
+                    outside of a template.
                 pad
                     Sets the padding around the buttons or dropdown
                     menu.
                 showactive
                     Highlights active dropdown item or active
                     button if true.
+                templateitemname
+                    Used to refer to a named item in this array in
+                    the template. Named items from the template
+                    will be created even without a matching item in
+                    the input figure, but you can modify one by
+                    making an item with `templateitemname` matching
+                    its `name`, alongside your modifications
+                    (including `visible: false` or `enabled: false`
+                    to hide it). If there is no template or no
+                    matching item, this item will be hidden unless
+                    you explicitly show it with `visible: true`.
                 type
                     Determines whether the buttons are accessible
                     via a dropdown menu or whether the buttons are
@@ -3114,6 +3264,27 @@ class Layout(BaseLayoutType):
             not apply to area-like objects. In addition, some
             objects can be hovered on but will not generate
             spikelines, such as scatter fills.
+        template
+            Default attributes to be applied to the plot. Templates
+            can be created from existing plots using
+            `Plotly.makeTemplate`, or created manually. They should
+            be objects with format: `{layout: layoutTemplate, data:
+            {[type]: [traceTemplate, ...]}, ...}` `layoutTemplate`
+            and `traceTemplate` are objects matching the attribute
+            structure of `layout` and a data trace.  Trace
+            templates are applied cyclically to traces of each
+            type. Container arrays (eg `annotations`) have special
+            handling: An object ending in `defaults` (eg
+            `annotationdefaults`) is applied to each array item.
+            But if an item has a `templateitemname` key we look in
+            the template array for an item with matching `name` and
+            apply that instead. If no matching `name` is found we
+            mark the item invisible. Any named template item not
+            referenced is appended to the end of the array, so you
+            can use this for a watermark annotation or a logo
+            image, for example. To omit one of these items on the
+            plot, make an item with matching `templateitemname` and
+            `visible: false`.
         ternary
             plotly.graph_objs.layout.Ternary instance or dict with
             compatible properties
@@ -3191,6 +3362,7 @@ class Layout(BaseLayoutType):
         showlegend=None,
         sliders=None,
         spikedistance=None,
+        template=None,
         ternary=None,
         title=None,
         titlefont=None,
@@ -3371,6 +3543,27 @@ class Layout(BaseLayoutType):
             not apply to area-like objects. In addition, some
             objects can be hovered on but will not generate
             spikelines, such as scatter fills.
+        template
+            Default attributes to be applied to the plot. Templates
+            can be created from existing plots using
+            `Plotly.makeTemplate`, or created manually. They should
+            be objects with format: `{layout: layoutTemplate, data:
+            {[type]: [traceTemplate, ...]}, ...}` `layoutTemplate`
+            and `traceTemplate` are objects matching the attribute
+            structure of `layout` and a data trace.  Trace
+            templates are applied cyclically to traces of each
+            type. Container arrays (eg `annotations`) have special
+            handling: An object ending in `defaults` (eg
+            `annotationdefaults`) is applied to each array item.
+            But if an item has a `templateitemname` key we look in
+            the template array for an item with matching `name` and
+            apply that instead. If no matching `name` is found we
+            mark the item invisible. Any named template item not
+            referenced is appended to the end of the array, so you
+            can use this for a watermark annotation or a logo
+            image, for example. To omit one of these items on the
+            plot, make an item with matching `templateitemname` and
+            `visible: false`.
         ternary
             plotly.graph_objs.layout.Ternary instance or dict with
             compatible properties
@@ -3474,6 +3667,7 @@ an instance of plotly.graph_objs.Layout"""
         self._validators['showlegend'] = v_layout.ShowlegendValidator()
         self._validators['sliders'] = v_layout.SlidersValidator()
         self._validators['spikedistance'] = v_layout.SpikedistanceValidator()
+        self._validators['template'] = v_layout.TemplateValidator()
         self._validators['ternary'] = v_layout.TernaryValidator()
         self._validators['title'] = v_layout.TitleValidator()
         self._validators['titlefont'] = v_layout.TitlefontValidator()
@@ -3569,6 +3763,8 @@ an instance of plotly.graph_objs.Layout"""
         self.sliders = sliders if sliders is not None else _v
         _v = arg.pop('spikedistance', None)
         self.spikedistance = spikedistance if spikedistance is not None else _v
+        _v = arg.pop('template', None)
+        self.template = template if template is not None else _v
         _v = arg.pop('ternary', None)
         self.ternary = ternary if ternary is not None else _v
         _v = arg.pop('title', None)

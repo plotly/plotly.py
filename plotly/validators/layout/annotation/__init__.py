@@ -13,12 +13,14 @@ from ._visible import VisibleValidator
 from ._valign import ValignValidator
 from ._textangle import TextangleValidator
 from ._text import TextValidator
+from ._templateitemname import TemplateitemnameValidator
 from ._startstandoff import StartstandoffValidator
 from ._startarrowsize import StartarrowsizeValidator
 from ._startarrowhead import StartarrowheadValidator
 from ._standoff import StandoffValidator
 from ._showarrow import ShowarrowValidator
 from ._opacity import OpacityValidator
+from ._name import NameValidator
 from ._hovertext import HovertextValidator
 from ._hoverlabel import HoverlabelValidator
 from ._height import HeightValidator

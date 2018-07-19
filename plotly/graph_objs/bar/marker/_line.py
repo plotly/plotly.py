@@ -9,13 +9,13 @@ class Line(BaseTraceHierarchyType):
     @property
     def autocolorscale(self):
         """
-        Has an effect only if `marker.line.color` is set to a numerical
-        array. Determines whether the colorscale is a default palette
+        Determines whether the colorscale is a default palette
         (`autocolorscale: true`) or the palette determined by
-        `marker.line.colorscale`. In case `colorscale` is unspecified
-        or `autocolorscale` is true, the default  palette will be
-        chosen according to whether numbers in the `color` array are
-        all positive, all negative or mixed.
+        `marker.line.colorscale`. Has an effect only if in
+        `marker.line.color`is set to a numerical array. In case
+        `colorscale` is unspecified or `autocolorscale` is true, the
+        default  palette will be chosen according to whether numbers in
+        the `color` array are all positive, all negative or mixed.
     
         The 'autocolorscale' property must be specified as a bool
         (either True, or False)
@@ -35,12 +35,12 @@ class Line(BaseTraceHierarchyType):
     @property
     def cauto(self):
         """
-        Has an effect only if `marker.line.color` is set to a numerical
-        array and `cmin`, `cmax` are set by the user. In this case, it
-        controls whether the range of colors in `colorscale` is mapped
-        to the range of values in the `color` array (`cauto: true`), or
-        the `cmin`/`cmax` values (`cauto: false`). Defaults to `false`
-        when `cmin`, `cmax` are set by the user.
+        Determines whether or not the color domain is computed with
+        respect to the input data (here in `marker.line.color`) or the
+        bounds set in `marker.line.cmin` and `marker.line.cmax`  Has an
+        effect only if in `marker.line.color`is set to a numerical
+        array. Defaults to `false` when `marker.line.cmin` and
+        `marker.line.cmax` are set by the user.
     
         The 'cauto' property must be specified as a bool
         (either True, or False)
@@ -60,10 +60,10 @@ class Line(BaseTraceHierarchyType):
     @property
     def cmax(self):
         """
-        Has an effect only if `marker.line.color` is set to a numerical
-        array. Sets the upper bound of the color domain. Value should
-        be associated to the `marker.line.color` array index, and if
-        set, `marker.line.cmin` must be set as well.
+        Sets the upper bound of the color domain. Has an effect only if
+        in `marker.line.color`is set to a numerical array. Value should
+        have the same units as in `marker.line.color` and if set,
+        `marker.line.cmin` must be set as well.
     
         The 'cmax' property is a number and may be specified as:
           - An int or float
@@ -83,10 +83,10 @@ class Line(BaseTraceHierarchyType):
     @property
     def cmin(self):
         """
-        Has an effect only if `marker.line.color` is set to a numerical
-        array. Sets the lower bound of the color domain. Value should
-        be associated to the `marker.line.color` array index, and if
-        set, `marker.line.cmax` must be set as well.
+        Sets the lower bound of the color domain. Has an effect only if
+        in `marker.line.color`is set to a numerical array. Value should
+        have the same units as in `marker.line.color` and if set,
+        `marker.line.cmax` must be set as well.
     
         The 'cmin' property is a number and may be specified as:
           - An int or float
@@ -106,10 +106,10 @@ class Line(BaseTraceHierarchyType):
     @property
     def color(self):
         """
-        Sets the marker.line color. It accepts either a specific color
-        or an array of numbers that are mapped to the colorscale
-        relative to the max and min values of the array or relative to
-        `cmin` and `cmax` if set.
+        Sets themarker.linecolor. It accepts either a specific color or
+        an array of numbers that are mapped to the colorscale relative
+        to the max and min values of the array or relative to
+        `marker.line.cmin` and `marker.line.cmax` if set.
     
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
@@ -171,18 +171,18 @@ class Line(BaseTraceHierarchyType):
     @property
     def colorscale(self):
         """
-        Sets the colorscale and only has an effect if
-        `marker.line.color` is set to a numerical array. The colorscale
+        Sets the colorscale. Has an effect only if in
+        `marker.line.color`is set to a numerical array. The colorscale
         must be an array containing arrays mapping a normalized value
         to an rgb, rgba, hex, hsl, hsv, or named color string. At
         minimum, a mapping for the lowest (0) and highest (1) values
         are required. For example, `[[0, 'rgb(0,0,255)', [1,
         'rgb(255,0,0)']]`. To control the bounds of the colorscale in
-        color space, use `marker.line.cmin` and `marker.line.cmax`.
+        color space, use`marker.line.cmin` and `marker.line.cmax`.
         Alternatively, `colorscale` may be a palette name string of the
-        following list: Greys, YlGnBu, Greens, YlOrRd, Bluered, RdBu,
-        Reds, Blues, Picnic, Rainbow, Portland, Jet, Hot, Blackbody,
-        Earth, Electric, Viridis, Cividis
+        following list: Greys,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Bl
+        ues,Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth,Electric,Vi
+        ridis,Cividis.
     
         The 'colorscale' property is a colorscale and may be
         specified as:
@@ -230,10 +230,11 @@ class Line(BaseTraceHierarchyType):
     @property
     def reversescale(self):
         """
-        Has an effect only if `marker.line.color` is set to a numerical
-        array. Reverses the color mapping if true (`cmin` will
-        correspond to the last color in the array and `cmax` will
-        correspond to the first color).
+        Reverses the color mapping if true. Has an effect only if in
+        `marker.line.color`is set to a numerical array. If true,
+        `marker.line.cmin` will correspond to the last color in the
+        array and `marker.line.cmax` will correspond to the first
+        color.
     
         The 'reversescale' property must be specified as a bool
         (either True, or False)
@@ -301,61 +302,63 @@ class Line(BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         autocolorscale
-            Has an effect only if `marker.line.color` is set to a
-            numerical array. Determines whether the colorscale is a
-            default palette (`autocolorscale: true`) or the palette
-            determined by `marker.line.colorscale`. In case
+            Determines whether the colorscale is a default palette
+            (`autocolorscale: true`) or the palette determined by
+            `marker.line.colorscale`. Has an effect only if in
+            `marker.line.color`is set to a numerical array. In case
             `colorscale` is unspecified or `autocolorscale` is
             true, the default  palette will be chosen according to
             whether numbers in the `color` array are all positive,
             all negative or mixed.
         cauto
-            Has an effect only if `marker.line.color` is set to a
-            numerical array and `cmin`, `cmax` are set by the user.
-            In this case, it controls whether the range of colors
-            in `colorscale` is mapped to the range of values in the
-            `color` array (`cauto: true`), or the `cmin`/`cmax`
-            values (`cauto: false`). Defaults to `false` when
-            `cmin`, `cmax` are set by the user.
+            Determines whether or not the color domain is computed
+            with respect to the input data (here in
+            `marker.line.color`) or the bounds set in
+            `marker.line.cmin` and `marker.line.cmax`  Has an
+            effect only if in `marker.line.color`is set to a
+            numerical array. Defaults to `false` when
+            `marker.line.cmin` and `marker.line.cmax` are set by
+            the user.
         cmax
-            Has an effect only if `marker.line.color` is set to a
-            numerical array. Sets the upper bound of the color
-            domain. Value should be associated to the
-            `marker.line.color` array index, and if set,
-            `marker.line.cmin` must be set as well.
+            Sets the upper bound of the color domain. Has an effect
+            only if in `marker.line.color`is set to a numerical
+            array. Value should have the same units as in
+            `marker.line.color` and if set, `marker.line.cmin` must
+            be set as well.
         cmin
-            Has an effect only if `marker.line.color` is set to a
-            numerical array. Sets the lower bound of the color
-            domain. Value should be associated to the
-            `marker.line.color` array index, and if set,
-            `marker.line.cmax` must be set as well.
+            Sets the lower bound of the color domain. Has an effect
+            only if in `marker.line.color`is set to a numerical
+            array. Value should have the same units as in
+            `marker.line.color` and if set, `marker.line.cmax` must
+            be set as well.
         color
-            Sets the marker.line color. It accepts either a
-            specific color or an array of numbers that are mapped
-            to the colorscale relative to the max and min values of
-            the array or relative to `cmin` and `cmax` if set.
+            Sets themarker.linecolor. It accepts either a specific
+            color or an array of numbers that are mapped to the
+            colorscale relative to the max and min values of the
+            array or relative to `marker.line.cmin` and
+            `marker.line.cmax` if set.
         colorscale
-            Sets the colorscale and only has an effect if
-            `marker.line.color` is set to a numerical array. The
+            Sets the colorscale. Has an effect only if in
+            `marker.line.color`is set to a numerical array. The
             colorscale must be an array containing arrays mapping a
             normalized value to an rgb, rgba, hex, hsl, hsv, or
             named color string. At minimum, a mapping for the
             lowest (0) and highest (1) values are required. For
             example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`.
             To control the bounds of the colorscale in color space,
-            use `marker.line.cmin` and `marker.line.cmax`.
+            use`marker.line.cmin` and `marker.line.cmax`.
             Alternatively, `colorscale` may be a palette name
-            string of the following list: Greys, YlGnBu, Greens,
-            YlOrRd, Bluered, RdBu, Reds, Blues, Picnic, Rainbow,
-            Portland, Jet, Hot, Blackbody, Earth, Electric,
-            Viridis, Cividis
+            string of the following list: Greys,YlGnBu,Greens,YlOrR
+            d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
+            ot,Blackbody,Earth,Electric,Viridis,Cividis.
         colorsrc
             Sets the source reference on plot.ly for  color .
         reversescale
-            Has an effect only if `marker.line.color` is set to a
-            numerical array. Reverses the color mapping if true
-            (`cmin` will correspond to the last color in the array
-            and `cmax` will correspond to the first color).
+            Reverses the color mapping if true. Has an effect only
+            if in `marker.line.color`is set to a numerical array.
+            If true, `marker.line.cmin` will correspond to the last
+            color in the array and `marker.line.cmax` will
+            correspond to the first color.
         width
             Sets the width (in px) of the lines bounding the marker
             points.
@@ -387,61 +390,63 @@ class Line(BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.bar.marker.Line
         autocolorscale
-            Has an effect only if `marker.line.color` is set to a
-            numerical array. Determines whether the colorscale is a
-            default palette (`autocolorscale: true`) or the palette
-            determined by `marker.line.colorscale`. In case
+            Determines whether the colorscale is a default palette
+            (`autocolorscale: true`) or the palette determined by
+            `marker.line.colorscale`. Has an effect only if in
+            `marker.line.color`is set to a numerical array. In case
             `colorscale` is unspecified or `autocolorscale` is
             true, the default  palette will be chosen according to
             whether numbers in the `color` array are all positive,
             all negative or mixed.
         cauto
-            Has an effect only if `marker.line.color` is set to a
-            numerical array and `cmin`, `cmax` are set by the user.
-            In this case, it controls whether the range of colors
-            in `colorscale` is mapped to the range of values in the
-            `color` array (`cauto: true`), or the `cmin`/`cmax`
-            values (`cauto: false`). Defaults to `false` when
-            `cmin`, `cmax` are set by the user.
+            Determines whether or not the color domain is computed
+            with respect to the input data (here in
+            `marker.line.color`) or the bounds set in
+            `marker.line.cmin` and `marker.line.cmax`  Has an
+            effect only if in `marker.line.color`is set to a
+            numerical array. Defaults to `false` when
+            `marker.line.cmin` and `marker.line.cmax` are set by
+            the user.
         cmax
-            Has an effect only if `marker.line.color` is set to a
-            numerical array. Sets the upper bound of the color
-            domain. Value should be associated to the
-            `marker.line.color` array index, and if set,
-            `marker.line.cmin` must be set as well.
+            Sets the upper bound of the color domain. Has an effect
+            only if in `marker.line.color`is set to a numerical
+            array. Value should have the same units as in
+            `marker.line.color` and if set, `marker.line.cmin` must
+            be set as well.
         cmin
-            Has an effect only if `marker.line.color` is set to a
-            numerical array. Sets the lower bound of the color
-            domain. Value should be associated to the
-            `marker.line.color` array index, and if set,
-            `marker.line.cmax` must be set as well.
+            Sets the lower bound of the color domain. Has an effect
+            only if in `marker.line.color`is set to a numerical
+            array. Value should have the same units as in
+            `marker.line.color` and if set, `marker.line.cmax` must
+            be set as well.
         color
-            Sets the marker.line color. It accepts either a
-            specific color or an array of numbers that are mapped
-            to the colorscale relative to the max and min values of
-            the array or relative to `cmin` and `cmax` if set.
+            Sets themarker.linecolor. It accepts either a specific
+            color or an array of numbers that are mapped to the
+            colorscale relative to the max and min values of the
+            array or relative to `marker.line.cmin` and
+            `marker.line.cmax` if set.
         colorscale
-            Sets the colorscale and only has an effect if
-            `marker.line.color` is set to a numerical array. The
+            Sets the colorscale. Has an effect only if in
+            `marker.line.color`is set to a numerical array. The
             colorscale must be an array containing arrays mapping a
             normalized value to an rgb, rgba, hex, hsl, hsv, or
             named color string. At minimum, a mapping for the
             lowest (0) and highest (1) values are required. For
             example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`.
             To control the bounds of the colorscale in color space,
-            use `marker.line.cmin` and `marker.line.cmax`.
+            use`marker.line.cmin` and `marker.line.cmax`.
             Alternatively, `colorscale` may be a palette name
-            string of the following list: Greys, YlGnBu, Greens,
-            YlOrRd, Bluered, RdBu, Reds, Blues, Picnic, Rainbow,
-            Portland, Jet, Hot, Blackbody, Earth, Electric,
-            Viridis, Cividis
+            string of the following list: Greys,YlGnBu,Greens,YlOrR
+            d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
+            ot,Blackbody,Earth,Electric,Viridis,Cividis.
         colorsrc
             Sets the source reference on plot.ly for  color .
         reversescale
-            Has an effect only if `marker.line.color` is set to a
-            numerical array. Reverses the color mapping if true
-            (`cmin` will correspond to the last color in the array
-            and `cmax` will correspond to the first color).
+            Reverses the color mapping if true. Has an effect only
+            if in `marker.line.color`is set to a numerical array.
+            If true, `marker.line.cmin` will correspond to the last
+            color in the array and `marker.line.cmax` will
+            correspond to the first color.
         width
             Sets the width (in px) of the lines bounding the marker
             points.

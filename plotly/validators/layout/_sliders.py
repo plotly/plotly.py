@@ -40,12 +40,33 @@ class SlidersValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
             minorticklen
                 Sets the length in pixels of minor step tick
                 marks
+            name
+                When used in a template, named items are
+                created in the output figure in addition to any
+                items the figure already has in this array. You
+                can modify these items in the output figure by
+                making your own item with `templateitemname`
+                matching this `name` alongside your
+                modifications (including `visible: false` or
+                `enabled: false` to hide it). Has no effect
+                outside of a template.
             pad
                 Set the padding of the slider component along
                 each side.
             steps
                 plotly.graph_objs.layout.slider.Step instance
                 or dict with compatible properties
+            templateitemname
+                Used to refer to a named item in this array in
+                the template. Named items from the template
+                will be created even without a matching item in
+                the input figure, but you can modify one by
+                making an item with `templateitemname` matching
+                its `name`, alongside your modifications
+                (including `visible: false` or `enabled: false`
+                to hide it). If there is no template or no
+                matching item, this item will be hidden unless
+                you explicitly show it with `visible: true`.
             tickcolor
                 Sets the color of the border enclosing the
                 slider.

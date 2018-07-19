@@ -9,10 +9,10 @@ class Marker(BaseTraceHierarchyType):
     @property
     def color(self):
         """
-        Sets the marker color. It accepts either a specific color or an
+        Sets themarkercolor. It accepts either a specific color or an
         array of numbers that are mapped to the colorscale relative to
-        the max and min values of the array or relative to `cmin` and
-        `cmax` if set.
+        the max and min values of the array or relative to
+        `marker.cmin` and `marker.cmax` if set.
     
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
@@ -286,10 +286,11 @@ class Marker(BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         color
-            Sets the marker color. It accepts either a specific
-            color or an array of numbers that are mapped to the
+            Sets themarkercolor. It accepts either a specific color
+            or an array of numbers that are mapped to the
             colorscale relative to the max and min values of the
-            array or relative to `cmin` and `cmax` if set.
+            array or relative to `marker.cmin` and `marker.cmax` if
+            set.
         colorsrc
             Sets the source reference on plot.ly for  color .
         opacity
@@ -332,10 +333,11 @@ class Marker(BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.area.Marker
         color
-            Sets the marker color. It accepts either a specific
-            color or an array of numbers that are mapped to the
+            Sets themarkercolor. It accepts either a specific color
+            or an array of numbers that are mapped to the
             colorscale relative to the max and min values of the
-            array or relative to `cmin` and `cmax` if set.
+            array or relative to `marker.cmin` and `marker.cmax` if
+            set.
         colorsrc
             Sets the source reference on plot.ly for  color .
         opacity

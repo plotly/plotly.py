@@ -182,6 +182,30 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 like objects. In addition, some objects can be
                 hovered on but will not generate spikelines,
                 such as scatter fills.
+            template
+                Default attributes to be applied to the plot.
+                Templates can be created from existing plots
+                using `Plotly.makeTemplate`, or created
+                manually. They should be objects with format:
+                `{layout: layoutTemplate, data: {[type]:
+                [traceTemplate, ...]}, ...}` `layoutTemplate`
+                and `traceTemplate` are objects matching the
+                attribute structure of `layout` and a data
+                trace.  Trace templates are applied cyclically
+                to traces of each type. Container arrays (eg
+                `annotations`) have special handling: An object
+                ending in `defaults` (eg `annotationdefaults`)
+                is applied to each array item. But if an item
+                has a `templateitemname` key we look in the
+                template array for an item with matching `name`
+                and apply that instead. If no matching `name`
+                is found we mark the item invisible. Any named
+                template item not referenced is appended to the
+                end of the array, so you can use this for a
+                watermark annotation or a logo image, for
+                example. To omit one of these items on the
+                plot, make an item with matching
+                `templateitemname` and `visible: false`.
             ternary
                 plotly.graph_objs.layout.Ternary instance or
                 dict with compatible properties

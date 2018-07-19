@@ -17,6 +17,16 @@ class ShapesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
             line
                 plotly.graph_objs.layout.shape.Line instance or
                 dict with compatible properties
+            name
+                When used in a template, named items are
+                created in the output figure in addition to any
+                items the figure already has in this array. You
+                can modify these items in the output figure by
+                making your own item with `templateitemname`
+                matching this `name` alongside your
+                modifications (including `visible: false` or
+                `enabled: false` to hide it). Has no effect
+                outside of a template.
             opacity
                 Sets the opacity of the shape.
             path
@@ -45,6 +55,17 @@ class ShapesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 strings, we can't use either to separate date
                 from time parts. Therefore we'll use underscore
                 for this purpose: 2015-02-21_13:45:56.789
+            templateitemname
+                Used to refer to a named item in this array in
+                the template. Named items from the template
+                will be created even without a matching item in
+                the input figure, but you can modify one by
+                making an item with `templateitemname` matching
+                its `name`, alongside your modifications
+                (including `visible: false` or `enabled: false`
+                to hide it). If there is no template or no
+                matching item, this item will be hidden unless
+                you explicitly show it with `visible: true`.
             type
                 Specifies the shape type to be drawn. If
                 *line*, a line is drawn from (`x0`,`y0`) to

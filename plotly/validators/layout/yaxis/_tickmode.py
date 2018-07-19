@@ -9,7 +9,7 @@ class TickmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         super(TickmodeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type='ticks+margins',
+            edit_type='ticks',
             implied_edits={},
             role='info',
             values=['auto', 'linear', 'array'],

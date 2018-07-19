@@ -9,10 +9,10 @@ class Line(BaseTraceHierarchyType):
     @property
     def color(self):
         """
-        Sets the marker.line color. It accepts either a specific color
-        or an array of numbers that are mapped to the colorscale
-        relative to the max and min values of the array or relative to
-        `cmin` and `cmax` if set.
+        Sets themarker.linecolor. It accepts either a specific color or
+        an array of numbers that are mapped to the colorscale relative
+        to the max and min values of the array or relative to
+        `marker.line.cmin` and `marker.line.cmax` if set.
     
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
@@ -179,10 +179,11 @@ class Line(BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         color
-            Sets the marker.line color. It accepts either a
-            specific color or an array of numbers that are mapped
-            to the colorscale relative to the max and min values of
-            the array or relative to `cmin` and `cmax` if set.
+            Sets themarker.linecolor. It accepts either a specific
+            color or an array of numbers that are mapped to the
+            colorscale relative to the max and min values of the
+            array or relative to `marker.line.cmin` and
+            `marker.line.cmax` if set.
         outliercolor
             Sets the border line color of the outlier sample
             points. Defaults to marker.color
@@ -212,10 +213,11 @@ class Line(BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.box.marker.Line
         color
-            Sets the marker.line color. It accepts either a
-            specific color or an array of numbers that are mapped
-            to the colorscale relative to the max and min values of
-            the array or relative to `cmin` and `cmax` if set.
+            Sets themarker.linecolor. It accepts either a specific
+            color or an array of numbers that are mapped to the
+            colorscale relative to the max and min values of the
+            array or relative to `marker.line.cmin` and
+            `marker.line.cmax` if set.
         outliercolor
             Sets the border line color of the outlier sample
             points. Defaults to marker.color

@@ -12,6 +12,9 @@ from ._visible import VisibleValidator
 from ._unselected import UnselectedValidator
 from ._uid import UidValidator
 from ._textsrc import TextsrcValidator
+from ._textpositionsrc import TextpositionsrcValidator
+from ._textposition import TextpositionValidator
+from ._textfont import TextfontValidator
 from ._text import TextValidator
 from ._stream import StreamValidator
 from ._showlegend import ShowlegendValidator
@@ -25,6 +28,8 @@ from ._line import LineValidator
 from ._legendgroup import LegendgroupValidator
 from ._idssrc import IdssrcValidator
 from ._ids import IdsValidator
+from ._hovertextsrc import HovertextsrcValidator
+from ._hovertext import HovertextValidator
 from ._hoveron import HoveronValidator
 from ._hoverlabel import HoverlabelValidator
 from ._hoverinfosrc import HoverinfosrcValidator

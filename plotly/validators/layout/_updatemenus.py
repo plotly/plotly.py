@@ -36,12 +36,33 @@ class UpdatemenusValidator(
                 top-to-bottom order respectively.
             font
                 Sets the font of the update menu button text.
+            name
+                When used in a template, named items are
+                created in the output figure in addition to any
+                items the figure already has in this array. You
+                can modify these items in the output figure by
+                making your own item with `templateitemname`
+                matching this `name` alongside your
+                modifications (including `visible: false` or
+                `enabled: false` to hide it). Has no effect
+                outside of a template.
             pad
                 Sets the padding around the buttons or dropdown
                 menu.
             showactive
                 Highlights active dropdown item or active
                 button if true.
+            templateitemname
+                Used to refer to a named item in this array in
+                the template. Named items from the template
+                will be created even without a matching item in
+                the input figure, but you can modify one by
+                making an item with `templateitemname` matching
+                its `name`, alongside your modifications
+                (including `visible: false` or `enabled: false`
+                to hide it). If there is no template or no
+                matching item, this item will be hidden unless
+                you explicitly show it with `visible: true`.
             type
                 Determines whether the buttons are accessible
                 via a dropdown menu or whether the buttons are

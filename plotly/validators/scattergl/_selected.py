@@ -13,6 +13,9 @@ class SelectedValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs="""
             marker
                 plotly.graph_objs.scattergl.selected.Marker
+                instance or dict with compatible properties
+            textfont
+                plotly.graph_objs.scattergl.selected.Textfont
                 instance or dict with compatible properties""",
             **kwargs
         )

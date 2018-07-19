@@ -46,6 +46,33 @@ class Button(BaseLayoutHierarchyType):
     def label(self, val):
         self['label'] = val
 
+    # name
+    # ----
+    @property
+    def name(self):
+        """
+        When used in a template, named items are created in the output
+        figure in addition to any items the figure already has in this
+        array. You can modify these items in the output figure by
+        making your own item with `templateitemname` matching this
+        `name` alongside your modifications (including `visible: false`
+        or `enabled: false` to hide it). Has no effect outside of a
+        template.
+    
+        The 'name' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['name']
+
+    @name.setter
+    def name(self, val):
+        self['name'] = val
+
     # step
     # ----
     @property
@@ -98,6 +125,54 @@ class Button(BaseLayoutHierarchyType):
     def stepmode(self, val):
         self['stepmode'] = val
 
+    # templateitemname
+    # ----------------
+    @property
+    def templateitemname(self):
+        """
+        Used to refer to a named item in this array in the template.
+        Named items from the template will be created even without a
+        matching item in the input figure, but you can modify one by
+        making an item with `templateitemname` matching its `name`,
+        alongside your modifications (including `visible: false` or
+        `enabled: false` to hide it). If there is no template or no
+        matching item, this item will be hidden unless you explicitly
+        show it with `visible: true`.
+    
+        The 'templateitemname' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['templateitemname']
+
+    @templateitemname.setter
+    def templateitemname(self, val):
+        self['templateitemname'] = val
+
+    # visible
+    # -------
+    @property
+    def visible(self):
+        """
+        Determines whether or not this button is visible.
+    
+        The 'visible' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self['visible']
+
+    @visible.setter
+    def visible(self, val):
+        self['visible'] = val
+
     # property parent name
     # --------------------
     @property
@@ -114,6 +189,15 @@ class Button(BaseLayoutHierarchyType):
             Use with `step` to specify the update interval.
         label
             Sets the text label to appear on the button.
+        name
+            When used in a template, named items are created in the
+            output figure in addition to any items the figure
+            already has in this array. You can modify these items
+            in the output figure by making your own item with
+            `templateitemname` matching this `name` alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). Has no effect outside of a
+            template.
         step
             The unit of measurement that the `count` value will set
             the range by.
@@ -128,6 +212,18 @@ class Button(BaseLayoutHierarchyType):
             to January 01 of the current year. Month and year
             *todate* are currently available only for the built-in
             (Gregorian) calendar.
+        templateitemname
+            Used to refer to a named item in this array in the
+            template. Named items from the template will be created
+            even without a matching item in the input figure, but
+            you can modify one by making an item with
+            `templateitemname` matching its `name`, alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). If there is no template or no
+            matching item, this item will be hidden unless you
+            explicitly show it with `visible: true`.
+        visible
+            Determines whether or not this button is visible.
         """
 
     def __init__(
@@ -135,8 +231,11 @@ class Button(BaseLayoutHierarchyType):
         arg=None,
         count=None,
         label=None,
+        name=None,
         step=None,
         stepmode=None,
+        templateitemname=None,
+        visible=None,
         **kwargs
     ):
         """
@@ -156,6 +255,15 @@ class Button(BaseLayoutHierarchyType):
             Use with `step` to specify the update interval.
         label
             Sets the text label to appear on the button.
+        name
+            When used in a template, named items are created in the
+            output figure in addition to any items the figure
+            already has in this array. You can modify these items
+            in the output figure by making your own item with
+            `templateitemname` matching this `name` alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). Has no effect outside of a
+            template.
         step
             The unit of measurement that the `count` value will set
             the range by.
@@ -170,6 +278,18 @@ class Button(BaseLayoutHierarchyType):
             to January 01 of the current year. Month and year
             *todate* are currently available only for the built-in
             (Gregorian) calendar.
+        templateitemname
+            Used to refer to a named item in this array in the
+            template. Named items from the template will be created
+            even without a matching item in the input figure, but
+            you can modify one by making an item with
+            `templateitemname` matching its `name`, alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). If there is no template or no
+            matching item, this item will be hidden unless you
+            explicitly show it with `visible: true`.
+        visible
+            Determines whether or not this button is visible.
 
         Returns
         -------
@@ -203,8 +323,12 @@ an instance of plotly.graph_objs.layout.xaxis.rangeselector.Button"""
         # ---------------------
         self._validators['count'] = v_button.CountValidator()
         self._validators['label'] = v_button.LabelValidator()
+        self._validators['name'] = v_button.NameValidator()
         self._validators['step'] = v_button.StepValidator()
         self._validators['stepmode'] = v_button.StepmodeValidator()
+        self._validators['templateitemname'
+                        ] = v_button.TemplateitemnameValidator()
+        self._validators['visible'] = v_button.VisibleValidator()
 
         # Populate data dict with properties
         # ----------------------------------
@@ -212,10 +336,16 @@ an instance of plotly.graph_objs.layout.xaxis.rangeselector.Button"""
         self.count = count if count is not None else _v
         _v = arg.pop('label', None)
         self.label = label if label is not None else _v
+        _v = arg.pop('name', None)
+        self.name = name if name is not None else _v
         _v = arg.pop('step', None)
         self.step = step if step is not None else _v
         _v = arg.pop('stepmode', None)
         self.stepmode = stepmode if stepmode is not None else _v
+        _v = arg.pop('templateitemname', None)
+        self.templateitemname = templateitemname if templateitemname is not None else _v
+        _v = arg.pop('visible', None)
+        self.visible = visible if visible is not None else _v
 
         # Process unknown kwargs
         # ----------------------

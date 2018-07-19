@@ -355,6 +355,32 @@ class Polar(BaseLayoutHierarchyType):
     def domain(self, val):
         self['domain'] = val
 
+    # gridshape
+    # ---------
+    @property
+    def gridshape(self):
+        """
+        Determines if the radial axis grid lines and angular axis line
+        are drawn as *circular* sectors or as *linear* (polygon)
+        sectors. Has an effect only when the angular axis has `type`
+        *category*. Note that `radialaxis.angle` is snapped to the
+        angle of the closest vertex when `gridshape` is *circular* (so
+        that radial axis scale is the same as the data scale).
+    
+        The 'gridshape' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['circular', 'linear']
+
+        Returns
+        -------
+        Any
+        """
+        return self['gridshape']
+
+    @gridshape.setter
+    def gridshape(self, val):
+        self['gridshape'] = val
+
     # radialaxis
     # ----------
     @property
@@ -681,6 +707,14 @@ class Polar(BaseLayoutHierarchyType):
         domain
             plotly.graph_objs.layout.polar.Domain instance or dict
             with compatible properties
+        gridshape
+            Determines if the radial axis grid lines and angular
+            axis line are drawn as *circular* sectors or as
+            *linear* (polygon) sectors. Has an effect only when the
+            angular axis has `type` *category*. Note that
+            `radialaxis.angle` is snapped to the angle of the
+            closest vertex when `gridshape` is *circular* (so that
+            radial axis scale is the same as the data scale).
         radialaxis
             plotly.graph_objs.layout.polar.RadialAxis instance or
             dict with compatible properties
@@ -697,6 +731,7 @@ class Polar(BaseLayoutHierarchyType):
         angularaxis=None,
         bgcolor=None,
         domain=None,
+        gridshape=None,
         radialaxis=None,
         sector=None,
         **kwargs
@@ -717,6 +752,14 @@ class Polar(BaseLayoutHierarchyType):
         domain
             plotly.graph_objs.layout.polar.Domain instance or dict
             with compatible properties
+        gridshape
+            Determines if the radial axis grid lines and angular
+            axis line are drawn as *circular* sectors or as
+            *linear* (polygon) sectors. Has an effect only when the
+            angular axis has `type` *category*. Note that
+            `radialaxis.angle` is snapped to the angle of the
+            closest vertex when `gridshape` is *circular* (so that
+            radial axis scale is the same as the data scale).
         radialaxis
             plotly.graph_objs.layout.polar.RadialAxis instance or
             dict with compatible properties
@@ -757,6 +800,7 @@ an instance of plotly.graph_objs.layout.Polar"""
         self._validators['angularaxis'] = v_polar.AngularAxisValidator()
         self._validators['bgcolor'] = v_polar.BgcolorValidator()
         self._validators['domain'] = v_polar.DomainValidator()
+        self._validators['gridshape'] = v_polar.GridshapeValidator()
         self._validators['radialaxis'] = v_polar.RadialAxisValidator()
         self._validators['sector'] = v_polar.SectorValidator()
 
@@ -768,6 +812,8 @@ an instance of plotly.graph_objs.layout.Polar"""
         self.bgcolor = bgcolor if bgcolor is not None else _v
         _v = arg.pop('domain', None)
         self.domain = domain if domain is not None else _v
+        _v = arg.pop('gridshape', None)
+        self.gridshape = gridshape if gridshape is not None else _v
         _v = arg.pop('radialaxis', None)
         self.radialaxis = radialaxis if radialaxis is not None else _v
         _v = arg.pop('sector', None)

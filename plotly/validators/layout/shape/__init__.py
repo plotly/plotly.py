@@ -10,8 +10,10 @@ from ._x1 import X1Validator
 from ._x0 import X0Validator
 from ._visible import VisibleValidator
 from ._type import TypeValidator
+from ._templateitemname import TemplateitemnameValidator
 from ._path import PathValidator
 from ._opacity import OpacityValidator
+from ._name import NameValidator
 from ._line import LineValidator
 from ._layer import LayerValidator
 from ._fillcolor import FillcolorValidator

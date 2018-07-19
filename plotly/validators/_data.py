@@ -37,6 +37,7 @@ class DataValidator(_plotly_utils.basevalidators.BaseDataValidator):
                 'scatterpolargl': 'Scatterpolargl',
                 'scatterternary': 'Scatterternary',
                 'splom': 'Splom',
+                'streamtube': 'Streamtube',
                 'surface': 'Surface',
                 'table': 'Table',
                 'violin': 'Violin',

@@ -8,6 +8,7 @@ from ._updatemenus import UpdatemenusValidator
 from ._titlefont import TitlefontValidator
 from ._title import TitleValidator
 from ._ternary import TernaryValidator
+from ._template import TemplateValidator
 from ._spikedistance import SpikedistanceValidator
 from ._sliders import SlidersValidator
 from ._showlegend import ShowlegendValidator

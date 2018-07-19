@@ -78,6 +78,16 @@ class Scene(BaseLayoutHierarchyType):
                     Sets text to appear when hovering over this
                     annotation. If omitted or blank, no hover label
                     will appear.
+                name
+                    When used in a template, named items are
+                    created in the output figure in addition to any
+                    items the figure already has in this array. You
+                    can modify these items in the output figure by
+                    making your own item with `templateitemname`
+                    matching this `name` alongside your
+                    modifications (including `visible: false` or
+                    `enabled: false` to hide it). Has no effect
+                    outside of a template.
                 opacity
                     Sets the opacity of the annotation (text +
                     arrow).
@@ -109,6 +119,17 @@ class Scene(BaseLayoutHierarchyType):
                     shortens the arrow from the `ax` / `ay` vector,
                     in contrast to `xshift` / `yshift` which moves
                     everything by this amount.
+                templateitemname
+                    Used to refer to a named item in this array in
+                    the template. Named items from the template
+                    will be created even without a matching item in
+                    the input figure, but you can modify one by
+                    making an item with `templateitemname` matching
+                    its `name`, alongside your modifications
+                    (including `visible: false` or `enabled: false`
+                    to hide it). If there is no template or no
+                    matching item, this item will be hidden unless
+                    you explicitly show it with `visible: true`.
                 text
                     Sets the text associated with this annotation.
                     Plotly uses a subset of HTML tags to do things

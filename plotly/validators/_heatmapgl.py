@@ -10,8 +10,13 @@ class HeatmapglValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_class_str='Heatmapgl',
             data_docs="""
             autocolorscale
-                Determines whether or not the colorscale is
-                picked using the sign of the input z values.
+                Determines whether the colorscale is a default
+                palette (`autocolorscale: true`) or the palette
+                determined by `colorscale`. In case
+                `colorscale` is unspecified or `autocolorscale`
+                is true, the default  palette will be chosen
+                according to whether numbers in the `color`
+                array are all positive, all negative or mixed.
             colorbar
                 plotly.graph_objs.heatmapgl.ColorBar instance
                 or dict with compatible properties
@@ -23,7 +28,12 @@ class HeatmapglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 lowest (0) and highest (1) values are required.
                 For example, `[[0, 'rgb(0,0,255)', [1,
                 'rgb(255,0,0)']]`. To control the bounds of the
-                colorscale in z space, use zmin and zmax
+                colorscale in color space, use`zmin` and
+                `zmax`. Alternatively, `colorscale` may be a
+                palette name string of the following list: Grey
+                s,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Blues,
+                Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth
+                ,Electric,Viridis,Cividis.
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -68,7 +78,10 @@ class HeatmapglValidator(_plotly_utils.basevalidators.CompoundValidator):
             opacity
                 Sets the opacity of the trace.
             reversescale
-                Reverses the colorscale.
+                Reverses the color mapping if true. If true,
+                `zmin` will correspond to the last color in the
+                array and `zmax` will correspond to the first
+                color.
             selectedpoints
                 Array containing integer indices of selected
                 points. Has an effect only for traces that
@@ -145,12 +158,19 @@ class HeatmapglValidator(_plotly_utils.basevalidators.CompoundValidator):
             z
                 Sets the z data.
             zauto
-                Determines the whether or not the color domain
-                is computed with respect to the input data.
+                Determines whether or not the color domain is
+                computed with respect to the input data (here
+                in `z`) or the bounds set in `zmin` and `zmax`
+                Defaults to `false` when `zmin` and `zmax` are
+                set by the user.
             zmax
-                Sets the upper bound of color domain.
+                Sets the upper bound of the color domain. Value
+                should have the same units as in `z` and if
+                set, `zmin` must be set as well.
             zmin
-                Sets the lower bound of color domain.
+                Sets the lower bound of the color domain. Value
+                should have the same units as in `z` and if
+                set, `zmax` must be set as well.
             zsrc
                 Sets the source reference on plot.ly for  z .""",
             **kwargs
