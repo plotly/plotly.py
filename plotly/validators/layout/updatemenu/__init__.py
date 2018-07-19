@@ -4,8 +4,10 @@ from ._xanchor import XanchorValidator
 from ._x import XValidator
 from ._visible import VisibleValidator
 from ._type import TypeValidator
+from ._templateitemname import TemplateitemnameValidator
 from ._showactive import ShowactiveValidator
 from ._pad import PadValidator
+from ._name import NameValidator
 from ._font import FontValidator
 from ._direction import DirectionValidator
 from ._buttons import ButtonsValidator

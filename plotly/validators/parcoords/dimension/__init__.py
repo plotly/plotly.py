@@ -6,7 +6,9 @@ from ._tickvals import TickvalsValidator
 from ._ticktextsrc import TicktextsrcValidator
 from ._ticktext import TicktextValidator
 from ._tickformat import TickformatValidator
+from ._templateitemname import TemplateitemnameValidator
 from ._range import RangeValidator
+from ._name import NameValidator
 from ._multiselect import MultiselectValidator
 from ._label import LabelValidator
 from ._constraintrange import ConstraintrangeValidator

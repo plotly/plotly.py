@@ -4,6 +4,8 @@ from ._table import Table
 from plotly.graph_objs import table
 from ._surface import Surface
 from plotly.graph_objs import surface
+from ._streamtube import Streamtube
+from plotly.graph_objs import streamtube
 from ._splom import Splom
 from plotly.graph_objs import splom
 from ._scatterternary import Scatterternary

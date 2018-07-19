@@ -7,8 +7,10 @@ from ._transition import TransitionValidator
 from ._tickwidth import TickwidthValidator
 from ._ticklen import TicklenValidator
 from ._tickcolor import TickcolorValidator
+from ._templateitemname import TemplateitemnameValidator
 from ._steps import StepsValidator
 from ._pad import PadValidator
+from ._name import NameValidator
 from ._minorticklen import MinorticklenValidator
 from ._lenmode import LenmodeValidator
 from ._len import LenValidator

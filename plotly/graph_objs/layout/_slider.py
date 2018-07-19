@@ -372,6 +372,33 @@ class Slider(BaseLayoutHierarchyType):
     def minorticklen(self, val):
         self['minorticklen'] = val
 
+    # name
+    # ----
+    @property
+    def name(self):
+        """
+        When used in a template, named items are created in the output
+        figure in addition to any items the figure already has in this
+        array. You can modify these items in the output figure by
+        making your own item with `templateitemname` matching this
+        `name` alongside your modifications (including `visible: false`
+        or `enabled: false` to hide it). Has no effect outside of a
+        template.
+    
+        The 'name' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['name']
+
+    @name.setter
+    def name(self, val):
+        self['name'] = val
+
     # pad
     # ---
     @property
@@ -446,10 +473,34 @@ class Slider(BaseLayoutHierarchyType):
                     automatically to state updates. This may be
                     used to create a component interface and attach
                     to slider events manually via JavaScript.
+                name
+                    When used in a template, named items are
+                    created in the output figure in addition to any
+                    items the figure already has in this array. You
+                    can modify these items in the output figure by
+                    making your own item with `templateitemname`
+                    matching this `name` alongside your
+                    modifications (including `visible: false` or
+                    `enabled: false` to hide it). Has no effect
+                    outside of a template.
+                templateitemname
+                    Used to refer to a named item in this array in
+                    the template. Named items from the template
+                    will be created even without a matching item in
+                    the input figure, but you can modify one by
+                    making an item with `templateitemname` matching
+                    its `name`, alongside your modifications
+                    (including `visible: false` or `enabled: false`
+                    to hide it). If there is no template or no
+                    matching item, this item will be hidden unless
+                    you explicitly show it with `visible: true`.
                 value
                     Sets the value of the slider step, used to
                     refer to the step programatically. Defaults to
                     the slider label if not provided.
+                visible
+                    Determines whether or not this step is included
+                    in the slider.
 
         Returns
         -------
@@ -460,6 +511,34 @@ class Slider(BaseLayoutHierarchyType):
     @steps.setter
     def steps(self, val):
         self['steps'] = val
+
+    # templateitemname
+    # ----------------
+    @property
+    def templateitemname(self):
+        """
+        Used to refer to a named item in this array in the template.
+        Named items from the template will be created even without a
+        matching item in the input figure, but you can modify one by
+        making an item with `templateitemname` matching its `name`,
+        alongside your modifications (including `visible: false` or
+        `enabled: false` to hide it). If there is no template or no
+        matching item, this item will be hidden unless you explicitly
+        show it with `visible: true`.
+    
+        The 'templateitemname' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['templateitemname']
+
+    @templateitemname.setter
+    def templateitemname(self, val):
+        self['templateitemname'] = val
 
     # tickcolor
     # ---------
@@ -734,12 +813,31 @@ class Slider(BaseLayoutHierarchyType):
             value.
         minorticklen
             Sets the length in pixels of minor step tick marks
+        name
+            When used in a template, named items are created in the
+            output figure in addition to any items the figure
+            already has in this array. You can modify these items
+            in the output figure by making your own item with
+            `templateitemname` matching this `name` alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). Has no effect outside of a
+            template.
         pad
             Set the padding of the slider component along each
             side.
         steps
             plotly.graph_objs.layout.slider.Step instance or dict
             with compatible properties
+        templateitemname
+            Used to refer to a named item in this array in the
+            template. Named items from the template will be created
+            even without a matching item in the input figure, but
+            you can modify one by making an item with
+            `templateitemname` matching its `name`, alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). If there is no template or no
+            matching item, this item will be hidden unless you
+            explicitly show it with `visible: true`.
         tickcolor
             Sets the color of the border enclosing the slider.
         ticklen
@@ -780,8 +878,10 @@ class Slider(BaseLayoutHierarchyType):
         len=None,
         lenmode=None,
         minorticklen=None,
+        name=None,
         pad=None,
         steps=None,
+        templateitemname=None,
         tickcolor=None,
         ticklen=None,
         tickwidth=None,
@@ -829,12 +929,31 @@ class Slider(BaseLayoutHierarchyType):
             value.
         minorticklen
             Sets the length in pixels of minor step tick marks
+        name
+            When used in a template, named items are created in the
+            output figure in addition to any items the figure
+            already has in this array. You can modify these items
+            in the output figure by making your own item with
+            `templateitemname` matching this `name` alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). Has no effect outside of a
+            template.
         pad
             Set the padding of the slider component along each
             side.
         steps
             plotly.graph_objs.layout.slider.Step instance or dict
             with compatible properties
+        templateitemname
+            Used to refer to a named item in this array in the
+            template. Named items from the template will be created
+            even without a matching item in the input figure, but
+            you can modify one by making an item with
+            `templateitemname` matching its `name`, alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). If there is no template or no
+            matching item, this item will be hidden unless you
+            explicitly show it with `visible: true`.
         tickcolor
             Sets the color of the border enclosing the slider.
         ticklen
@@ -899,8 +1018,11 @@ an instance of plotly.graph_objs.layout.Slider"""
         self._validators['len'] = v_slider.LenValidator()
         self._validators['lenmode'] = v_slider.LenmodeValidator()
         self._validators['minorticklen'] = v_slider.MinorticklenValidator()
+        self._validators['name'] = v_slider.NameValidator()
         self._validators['pad'] = v_slider.PadValidator()
         self._validators['steps'] = v_slider.StepsValidator()
+        self._validators['templateitemname'
+                        ] = v_slider.TemplateitemnameValidator()
         self._validators['tickcolor'] = v_slider.TickcolorValidator()
         self._validators['ticklen'] = v_slider.TicklenValidator()
         self._validators['tickwidth'] = v_slider.TickwidthValidator()
@@ -933,10 +1055,14 @@ an instance of plotly.graph_objs.layout.Slider"""
         self.lenmode = lenmode if lenmode is not None else _v
         _v = arg.pop('minorticklen', None)
         self.minorticklen = minorticklen if minorticklen is not None else _v
+        _v = arg.pop('name', None)
+        self.name = name if name is not None else _v
         _v = arg.pop('pad', None)
         self.pad = pad if pad is not None else _v
         _v = arg.pop('steps', None)
         self.steps = steps if steps is not None else _v
+        _v = arg.pop('templateitemname', None)
+        self.templateitemname = templateitemname if templateitemname is not None else _v
         _v = arg.pop('tickcolor', None)
         self.tickcolor = tickcolor if tickcolor is not None else _v
         _v = arg.pop('ticklen', None)

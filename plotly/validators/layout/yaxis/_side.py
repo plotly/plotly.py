@@ -9,7 +9,7 @@ class SideValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         super(SideValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type='plot+margins',
+            edit_type='plot',
             role='info',
             values=['top', 'bottom', 'left', 'right'],
             **kwargs

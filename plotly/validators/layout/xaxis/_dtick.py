@@ -9,7 +9,7 @@ class DtickValidator(_plotly_utils.basevalidators.AnyValidator):
         super(DtickValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type='ticks+margins',
+            edit_type='ticks',
             implied_edits={'tickmode': 'linear'},
             role='style',
             **kwargs

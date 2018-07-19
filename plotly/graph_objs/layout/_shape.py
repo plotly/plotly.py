@@ -117,6 +117,33 @@ class Shape(BaseLayoutHierarchyType):
     def line(self, val):
         self['line'] = val
 
+    # name
+    # ----
+    @property
+    def name(self):
+        """
+        When used in a template, named items are created in the output
+        figure in addition to any items the figure already has in this
+        array. You can modify these items in the output figure by
+        making your own item with `templateitemname` matching this
+        `name` alongside your modifications (including `visible: false`
+        or `enabled: false` to hide it). Has no effect outside of a
+        template.
+    
+        The 'name' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['name']
+
+    @name.setter
+    def name(self, val):
+        self['name'] = val
+
     # opacity
     # -------
     @property
@@ -175,6 +202,34 @@ class Shape(BaseLayoutHierarchyType):
     @path.setter
     def path(self, val):
         self['path'] = val
+
+    # templateitemname
+    # ----------------
+    @property
+    def templateitemname(self):
+        """
+        Used to refer to a named item in this array in the template.
+        Named items from the template will be created even without a
+        matching item in the input figure, but you can modify one by
+        making an item with `templateitemname` matching its `name`,
+        alongside your modifications (including `visible: false` or
+        `enabled: false` to hide it). If there is no template or no
+        matching item, this item will be hidden unless you explicitly
+        show it with `visible: true`.
+    
+        The 'templateitemname' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['templateitemname']
+
+    @templateitemname.setter
+    def templateitemname(self, val):
+        self['templateitemname'] = val
 
     # type
     # ----
@@ -483,6 +538,15 @@ class Shape(BaseLayoutHierarchyType):
         line
             plotly.graph_objs.layout.shape.Line instance or dict
             with compatible properties
+        name
+            When used in a template, named items are created in the
+            output figure in addition to any items the figure
+            already has in this array. You can modify these items
+            in the output figure by making your own item with
+            `templateitemname` matching this `name` alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). Has no effect outside of a
+            template.
         opacity
             Sets the opacity of the shape.
         path
@@ -508,6 +572,16 @@ class Shape(BaseLayoutHierarchyType):
             we can't use either to separate date from time parts.
             Therefore we'll use underscore for this purpose:
             2015-02-21_13:45:56.789
+        templateitemname
+            Used to refer to a named item in this array in the
+            template. Named items from the template will be created
+            even without a matching item in the input figure, but
+            you can modify one by making an item with
+            `templateitemname` matching its `name`, alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). If there is no template or no
+            matching item, this item will be hidden unless you
+            explicitly show it with `visible: true`.
         type
             Specifies the shape type to be drawn. If *line*, a line
             is drawn from (`x0`,`y0`) to (`x1`,`y1`) with respect
@@ -594,8 +668,10 @@ class Shape(BaseLayoutHierarchyType):
         fillcolor=None,
         layer=None,
         line=None,
+        name=None,
         opacity=None,
         path=None,
+        templateitemname=None,
         type=None,
         visible=None,
         x0=None,
@@ -626,6 +702,15 @@ class Shape(BaseLayoutHierarchyType):
         line
             plotly.graph_objs.layout.shape.Line instance or dict
             with compatible properties
+        name
+            When used in a template, named items are created in the
+            output figure in addition to any items the figure
+            already has in this array. You can modify these items
+            in the output figure by making your own item with
+            `templateitemname` matching this `name` alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). Has no effect outside of a
+            template.
         opacity
             Sets the opacity of the shape.
         path
@@ -651,6 +736,16 @@ class Shape(BaseLayoutHierarchyType):
             we can't use either to separate date from time parts.
             Therefore we'll use underscore for this purpose:
             2015-02-21_13:45:56.789
+        templateitemname
+            Used to refer to a named item in this array in the
+            template. Named items from the template will be created
+            even without a matching item in the input figure, but
+            you can modify one by making an item with
+            `templateitemname` matching its `name`, alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). If there is no template or no
+            matching item, this item will be hidden unless you
+            explicitly show it with `visible: true`.
         type
             Specifies the shape type to be drawn. If *line*, a line
             is drawn from (`x0`,`y0`) to (`x1`,`y1`) with respect
@@ -761,8 +856,11 @@ an instance of plotly.graph_objs.layout.Shape"""
         self._validators['fillcolor'] = v_shape.FillcolorValidator()
         self._validators['layer'] = v_shape.LayerValidator()
         self._validators['line'] = v_shape.LineValidator()
+        self._validators['name'] = v_shape.NameValidator()
         self._validators['opacity'] = v_shape.OpacityValidator()
         self._validators['path'] = v_shape.PathValidator()
+        self._validators['templateitemname'
+                        ] = v_shape.TemplateitemnameValidator()
         self._validators['type'] = v_shape.TypeValidator()
         self._validators['visible'] = v_shape.VisibleValidator()
         self._validators['x0'] = v_shape.X0Validator()
@@ -784,10 +882,14 @@ an instance of plotly.graph_objs.layout.Shape"""
         self.layer = layer if layer is not None else _v
         _v = arg.pop('line', None)
         self.line = line if line is not None else _v
+        _v = arg.pop('name', None)
+        self.name = name if name is not None else _v
         _v = arg.pop('opacity', None)
         self.opacity = opacity if opacity is not None else _v
         _v = arg.pop('path', None)
         self.path = path if path is not None else _v
+        _v = arg.pop('templateitemname', None)
+        self.templateitemname = templateitemname if templateitemname is not None else _v
         _v = arg.pop('type', None)
         self.type = type if type is not None else _v
         _v = arg.pop('visible', None)

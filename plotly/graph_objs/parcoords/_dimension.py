@@ -74,6 +74,33 @@ class Dimension(BaseTraceHierarchyType):
     def multiselect(self, val):
         self['multiselect'] = val
 
+    # name
+    # ----
+    @property
+    def name(self):
+        """
+        When used in a template, named items are created in the output
+        figure in addition to any items the figure already has in this
+        array. You can modify these items in the output figure by
+        making your own item with `templateitemname` matching this
+        `name` alongside your modifications (including `visible: false`
+        or `enabled: false` to hide it). Has no effect outside of a
+        template.
+    
+        The 'name' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['name']
+
+    @name.setter
+    def name(self, val):
+        self['name'] = val
+
     # range
     # -----
     @property
@@ -100,6 +127,34 @@ class Dimension(BaseTraceHierarchyType):
     @range.setter
     def range(self, val):
         self['range'] = val
+
+    # templateitemname
+    # ----------------
+    @property
+    def templateitemname(self):
+        """
+        Used to refer to a named item in this array in the template.
+        Named items from the template will be created even without a
+        matching item in the input figure, but you can modify one by
+        making an item with `templateitemname` matching its `name`,
+        alongside your modifications (including `visible: false` or
+        `enabled: false` to hide it). If there is no template or no
+        matching item, this item will be hidden unless you explicitly
+        show it with `visible: true`.
+    
+        The 'templateitemname' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['templateitemname']
+
+    @templateitemname.setter
+    def templateitemname(self, val):
+        self['templateitemname'] = val
 
     # tickformat
     # ----------
@@ -294,11 +349,30 @@ class Dimension(BaseTraceHierarchyType):
         multiselect
             Do we allow multiple selection ranges or just a single
             range?
+        name
+            When used in a template, named items are created in the
+            output figure in addition to any items the figure
+            already has in this array. You can modify these items
+            in the output figure by making your own item with
+            `templateitemname` matching this `name` alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). Has no effect outside of a
+            template.
         range
             The domain range that represents the full, shown axis
             extent. Defaults to the `values` extent. Must be an
             array of `[fromValue, toValue]` with finite numbers as
             elements.
+        templateitemname
+            Used to refer to a named item in this array in the
+            template. Named items from the template will be created
+            even without a matching item in the input figure, but
+            you can modify one by making an item with
+            `templateitemname` matching its `name`, alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). If there is no template or no
+            matching item, this item will be hidden unless you
+            explicitly show it with `visible: true`.
         tickformat
             Sets the tick label formatting rule using d3 formatting
             mini-language which is similar to those of Python. See 
@@ -335,7 +409,9 @@ class Dimension(BaseTraceHierarchyType):
         constraintrange=None,
         label=None,
         multiselect=None,
+        name=None,
         range=None,
+        templateitemname=None,
         tickformat=None,
         ticktext=None,
         ticktextsrc=None,
@@ -369,11 +445,30 @@ class Dimension(BaseTraceHierarchyType):
         multiselect
             Do we allow multiple selection ranges or just a single
             range?
+        name
+            When used in a template, named items are created in the
+            output figure in addition to any items the figure
+            already has in this array. You can modify these items
+            in the output figure by making your own item with
+            `templateitemname` matching this `name` alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). Has no effect outside of a
+            template.
         range
             The domain range that represents the full, shown axis
             extent. Defaults to the `values` extent. Must be an
             array of `[fromValue, toValue]` with finite numbers as
             elements.
+        templateitemname
+            Used to refer to a named item in this array in the
+            template. Named items from the template will be created
+            even without a matching item in the input figure, but
+            you can modify one by making an item with
+            `templateitemname` matching its `name`, alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). If there is no template or no
+            matching item, this item will be hidden unless you
+            explicitly show it with `visible: true`.
         tickformat
             Sets the tick label formatting rule using d3 formatting
             mini-language which is similar to those of Python. See 
@@ -435,7 +530,10 @@ an instance of plotly.graph_objs.parcoords.Dimension"""
                         ] = v_dimension.ConstraintrangeValidator()
         self._validators['label'] = v_dimension.LabelValidator()
         self._validators['multiselect'] = v_dimension.MultiselectValidator()
+        self._validators['name'] = v_dimension.NameValidator()
         self._validators['range'] = v_dimension.RangeValidator()
+        self._validators['templateitemname'
+                        ] = v_dimension.TemplateitemnameValidator()
         self._validators['tickformat'] = v_dimension.TickformatValidator()
         self._validators['ticktext'] = v_dimension.TicktextValidator()
         self._validators['ticktextsrc'] = v_dimension.TicktextsrcValidator()
@@ -453,8 +551,12 @@ an instance of plotly.graph_objs.parcoords.Dimension"""
         self.label = label if label is not None else _v
         _v = arg.pop('multiselect', None)
         self.multiselect = multiselect if multiselect is not None else _v
+        _v = arg.pop('name', None)
+        self.name = name if name is not None else _v
         _v = arg.pop('range', None)
         self.range = range if range is not None else _v
+        _v = arg.pop('templateitemname', None)
+        self.templateitemname = templateitemname if templateitemname is not None else _v
         _v = arg.pop('tickformat', None)
         self.tickformat = tickformat if tickformat is not None else _v
         _v = arg.pop('ticktext', None)
