@@ -22,6 +22,8 @@ full list of changes. Select highlights are listed below.
 ## [3.0.2] - 2018-07-17
 This is a minor bug-fix release to 3.0.0
 
+### JupyterLab plotlywidget version: 0.1.1
+
 ### Plotly.js version: 1.38.3
 
 ### Fixed
@@ -38,6 +40,8 @@ Note: This release's installation was broken. It has been removed from PyPI
 ## [3.0.0] - 2018-07-05
 
 This is a major version with many exciting updates. See the [Introducing plotly.py 3.0.0](https://medium.com/@plotlygraphs/introducing-plotly-py-3-0-0-7bb1333f69c6) post for more information.
+
+### JupyterLab plotlywidget version: 0.1.1
 
 ### Plotly.js version: 1.38.3
 
