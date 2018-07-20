@@ -17,7 +17,7 @@ full list of changes. Select highlights are listed below.
    [plotly/plotly.js#2658](https://github.com/plotly/plotly.js/pull/2658)
  - Added support for on-graph text in scattergl traces
  - Added gridshape attribute to polar subplots with values 'circular' (the default) and 'linear' (to draw polygon grids)
-   [plotly/plotly.js#2739]([https://github.com/plotly/plotly.js/pull/26582739])
+   [plotly/plotly.js#2739](https://github.com/plotly/plotly.js/pull/26582739)
 
 ## [3.0.2] - 2018-07-17
 This is a minor bug-fix release to 3.0.0
