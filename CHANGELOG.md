@@ -2,12 +2,27 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [3.1.0] - ???
+## [3.1.0] - 2018-07-20
+
+### JupyterLab plotlywidget version: 0.2.0
+Please upgrade the Jupyterlab `plotlywidget` extension to version 0.2.0
+(See README for instructions)
 
 ### Plotly.js version: 1.39.2
+See [Plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md) for
+full list of changes. Select highlights are listed below. 
+
+### Added
+ - Added 3D streamtube traces
+   [plotly/plotly.js#2658](https://github.com/plotly/plotly.js/pull/2658)
+ - Added support for on-graph text in scattergl traces
+ - Added gridshape attribute to polar subplots with values 'circular' (the default) and 'linear' (to draw polygon grids)
+   [plotly/plotly.js#2739](https://github.com/plotly/plotly.js/pull/2739)
 
 ## [3.0.2] - 2018-07-17
 This is a minor bug-fix release to 3.0.0
+
+### JupyterLab plotlywidget version: 0.1.1
 
 ### Plotly.js version: 1.38.3
 
@@ -25,6 +40,8 @@ Note: This release's installation was broken. It has been removed from PyPI
 ## [3.0.0] - 2018-07-05
 
 This is a major version with many exciting updates. See the [Introducing plotly.py 3.0.0](https://medium.com/@plotlygraphs/introducing-plotly-py-3-0-0-7bb1333f69c6) post for more information.
+
+### JupyterLab plotlywidget version: 0.1.1
 
 ### Plotly.js version: 1.38.3
 
