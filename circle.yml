@@ -23,14 +23,14 @@ dependencies:
     - tox --notest:
       timeout: 1200
 
-    - pip install -I .
+    - pip install -I .:
       timeout: 1200
 
     # we need to cd out of the project root to ensure the install worked
     - cd ~ && python -c "import plotly"
 
     # install jupyter test JS requirements
-    - cd ${PLOTLY_JUPYTER_TEST_DIR} && npm i
+    - cd ${PLOTLY_JUPYTER_TEST_DIR} && npm i:
       timeout: 1200
 
   cache_directories:
