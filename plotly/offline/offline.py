@@ -207,7 +207,7 @@ def _plot_html(figure_or_data, config, validate, default_width,
         'topojsonURL'
         'mapboxAccessToken',
         'logging',
-        'globalTransforms'
+        'globalTransforms',
         'locale',
         'locales',
     )
