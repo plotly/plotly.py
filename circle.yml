@@ -21,14 +21,16 @@ dependencies:
     # install everything tox knows about and the plotly package.
     - pip install tox
     - tox --notest:
-      timeout: 1200
+        timeout: 1200
+
     - pip install -I .
 
     # we need to cd out of the project root to ensure the install worked
     - cd ~ && python -c "import plotly"
 
     # install jupyter test JS requirements
-    - cd ${PLOTLY_JUPYTER_TEST_DIR} && npm i
+    - cd ${PLOTLY_JUPYTER_TEST_DIR} && npm i:
+        timeout: 1200
 
   cache_directories:
 

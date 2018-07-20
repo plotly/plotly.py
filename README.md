@@ -43,10 +43,10 @@ jupyter nbextension enable --py plotlywidget --sys-prefix
 In addition, to add JupyterLab support run the following commands
 
 ```
-pip install jupyterlab
+pip install jupyterlab==0.32.1
 export NODE_OPTIONS=--max-old-space-size=4096
-jupyter labextension install @jupyter-widgets/jupyterlab-manager # install the Jupyter widgets extension
-jupyter labextension install plotlywidget
+jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.35 # install the Jupyter widgets extension
+jupyter labextension install plotlywidget@0.2
 ```
 
 If you're migrating from plotly.py version 2, please check out the [migration guid](migration-guide.md)
