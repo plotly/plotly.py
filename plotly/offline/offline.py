@@ -179,12 +179,12 @@ def _plot_html(figure_or_data, config, validate, default_width,
                               cls=utils.PlotlyJSONEncoder)
 
     configkeys = (
-        'staticPlot'
+        'staticPlot',
         'plotlyServerURL',
         'editable',
         'edits',
         'autosizable',
-        'queueLength'
+        'queueLength',
         'fillFrame',
         'frameMargins',
         'scrollZoom',
@@ -204,7 +204,7 @@ def _plot_html(figure_or_data, config, validate, default_width,
         'displaylogo',
         'plotGlPixelRatio',
         'setBackground',
-        'topojsonURL'
+        'topojsonURL',
         'mapboxAccessToken',
         'logging',
         'globalTransforms',
