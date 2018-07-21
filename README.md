@@ -46,7 +46,8 @@ In addition, to add JupyterLab support run the following commands
 pip install jupyterlab==0.32.1
 export NODE_OPTIONS=--max-old-space-size=4096
 jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.35 # install the Jupyter widgets extension
-jupyter labextension install plotlywidget@0.2
+jupyter labextension install plotlywidget@0.2  # FigureWidget support
+jupyter labextension install @jupyterlab/plotly-extension@0.16  # offline iplot support
 ```
 
 If you're migrating from plotly.py version 2, please check out the [migration guid](migration-guide.md)
