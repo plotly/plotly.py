@@ -50,7 +50,7 @@ jupyter labextension install plotlywidget@0.2  # FigureWidget support
 jupyter labextension install @jupyterlab/plotly-extension@0.16  # offline iplot support
 ```
 
-If you're migrating from plotly.py version 2, please check out the [migration guid](migration-guide.md)
+If you're migrating from plotly.py version 2, please check out the [migration guide](migration-guide.md)
 
 ## Copyright and Licenses
 Code and documentation copyright 2018 Plotly, Inc.
