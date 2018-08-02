@@ -1274,9 +1274,11 @@ class ColorscaleValidator(BaseValidator):
         return v
 
     def present(self, v):
-        # Return tuple of tuples so that colorscale is immutable
+        # Return-type must be immutable
         if v is None:
             return None
+        elif isinstance(v, string_types):
+            return v
         else:
             return tuple([tuple(e) for e in v])
 
