@@ -26,6 +26,8 @@ def test_acceptance_named(named_colorscale, validator: ColorscaleValidator):
     # Uppercase
     assert (validator.validate_coerce(named_colorscale.upper()) ==
            named_colorscale.upper())
+    
+    assert validator.present(named_colorscale) == named_colorscale
 
 # ### Acceptance as array ###
 @pytest.mark.parametrize('val', [
