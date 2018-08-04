@@ -568,9 +568,9 @@ def get_subplots(rows=1, columns=1, print_grid=False, **kwargs):
             y_start = (plot_height + vertical_spacing) * rrr
             y_end = y_start + plot_height
 
-            xaxis = graph_objs.XAxis(domain=[x_start, x_end], anchor=x_anchor)
+            xaxis = dict(domain=[x_start, x_end], anchor=x_anchor)
             fig['layout'][xaxis_name] = xaxis
-            yaxis = graph_objs.YAxis(domain=[y_start, y_end], anchor=y_anchor)
+            yaxis = dict(domain=[y_start, y_end], anchor=y_anchor)
             fig['layout'][yaxis_name] = yaxis
             plot_num += 1
 
@@ -1094,7 +1094,7 @@ def make_subplots(rows=1, cols=1,
 
     # Function pasting x/y domains in layout object (3d case)
     def _add_domain_is_3d(layout, s_label, x_domain, y_domain):
-        scene = graph_objs.Scene(
+        scene = dict(
             domain={'x': [max(0.0, x_domain[0]), min(1.0, x_domain[1])],
                     'y': [max(0.0, y_domain[0]), min(1.0, y_domain[1])]})
         layout[s_label] = scene
@@ -1345,7 +1345,7 @@ def make_subplots(rows=1, cols=1,
                                 'yref': 'paper',
                                 'text': subplot_titles[index],
                                 'showarrow': False,
-                                'font': graph_objs.Font(size=16),
+                                'font': dict(size=16),
                                 'xanchor': 'center',
                                 'yanchor': 'bottom'
                                 })
