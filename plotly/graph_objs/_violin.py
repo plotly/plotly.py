@@ -1709,7 +1709,7 @@ an instance of plotly.graph_objs.Violin"""
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'violin'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='violin'
+            plotly_name='type', parent_name='violin', val='violin'
         )
 
         # Process unknown kwargs

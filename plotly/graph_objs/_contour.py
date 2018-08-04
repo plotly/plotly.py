@@ -2080,7 +2080,7 @@ an instance of plotly.graph_objs.Contour"""
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'contour'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='contour'
+            plotly_name='type', parent_name='contour', val='contour'
         )
 
         # Process unknown kwargs

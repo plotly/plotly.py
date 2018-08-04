@@ -1234,7 +1234,7 @@ an instance of plotly.graph_objs.Candlestick"""
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'candlestick'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='candlestick'
+            plotly_name='type', parent_name='candlestick', val='candlestick'
         )
 
         # Process unknown kwargs

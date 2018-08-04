@@ -1798,7 +1798,7 @@ an instance of plotly.graph_objs.Cone"""
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'cone'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='cone'
+            plotly_name='type', parent_name='cone', val='cone'
         )
 
         # Process unknown kwargs

@@ -1478,7 +1478,7 @@ an instance of plotly.graph_objs.Choropleth"""
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'choropleth'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='choropleth'
+            plotly_name='type', parent_name='choropleth', val='choropleth'
         )
 
         # Process unknown kwargs

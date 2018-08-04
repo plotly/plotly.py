@@ -2090,7 +2090,9 @@ an instance of plotly.graph_objs.Histogram2dContour"""
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'histogram2dcontour'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='histogram2dcontour'
+            plotly_name='type',
+            parent_name='histogram2dcontour',
+            val='histogram2dcontour'
         )
 
         # Process unknown kwargs

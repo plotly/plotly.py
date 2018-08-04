@@ -1979,7 +1979,9 @@ an instance of plotly.graph_objs.Contourcarpet"""
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'contourcarpet'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='contourcarpet'
+            plotly_name='type',
+            parent_name='contourcarpet',
+            val='contourcarpet'
         )
 
         # Process unknown kwargs

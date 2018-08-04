@@ -785,7 +785,7 @@ an instance of plotly.graph_objs.Area"""
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'area'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='area'
+            plotly_name='type', parent_name='area', val='area'
         )
 
         # Process unknown kwargs
