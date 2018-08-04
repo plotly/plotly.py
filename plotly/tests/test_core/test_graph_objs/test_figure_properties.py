@@ -2,8 +2,10 @@ from unittest import TestCase
 import plotly.graph_objs as go
 from nose.tools import raises
 
+from plotly.tests.test_optional.optional_utils import NumpyTestUtilsMixin
 
-class TestFigureProperties(TestCase):
+
+class TestFigureProperties(TestCase, NumpyTestUtilsMixin):
 
     def setUp(self):
         # Construct initial scatter object
@@ -120,6 +122,28 @@ class TestFigureProperties(TestCase):
         # Update with dict
         self.figure.update({'data': {0: {'marker': {'color': 'yellow'}}}})
         self.assertEqual(self.figure.data[0].marker.color, 'yellow')
+
+    def test_update_data_empty(self):
+        # Create figure with empty data (no traces)
+        figure = go.Figure(layout={'width': 1000})
+
+        # Update data with new traces
+        figure.update(data=[go.Scatter(y=[2, 1, 3]), go.Bar(y=[1, 2, 3])])
+
+        # Build expected dict
+        expected = {
+            'data': [{'y': [2, 1, 3], 'type': 'scatter'},
+                     {'y': [1, 2, 3], 'type': 'bar'}],
+            'layout': {'width': 1000}
+        }
+
+        # Compute expected figure dict (pop uids for comparison)
+        result = figure.to_dict()
+        del result['data'][0]['uid']
+        del result['data'][1]['uid']
+
+        # Perform comparison
+        self.assertEqual(result, expected)
 
     def test_update_frames(self):
         # Check initial frame axis title
