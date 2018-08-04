@@ -2,10 +2,8 @@ from unittest import TestCase
 import plotly.graph_objs as go
 from nose.tools import raises
 
-from plotly.tests.test_optional.optional_utils import NumpyTestUtilsMixin
 
-
-class TestFigureProperties(TestCase, NumpyTestUtilsMixin):
+class TestFigureProperties(TestCase):
 
     def setUp(self):
         # Construct initial scatter object
