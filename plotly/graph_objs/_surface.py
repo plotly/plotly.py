@@ -1729,7 +1729,7 @@ an instance of plotly.graph_objs.Surface"""
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'surface'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='surface'
+            plotly_name='type', parent_name='surface', val='surface'
         )
 
         # Process unknown kwargs

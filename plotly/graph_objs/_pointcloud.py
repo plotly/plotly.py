@@ -1207,7 +1207,7 @@ an instance of plotly.graph_objs.Pointcloud"""
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'pointcloud'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='pointcloud'
+            plotly_name='type', parent_name='pointcloud', val='pointcloud'
         )
 
         # Process unknown kwargs

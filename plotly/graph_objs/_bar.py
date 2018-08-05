@@ -2172,7 +2172,7 @@ an instance of plotly.graph_objs.Bar"""
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'bar'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='bar'
+            plotly_name='type', parent_name='bar', val='bar'
         )
 
         # Process unknown kwargs

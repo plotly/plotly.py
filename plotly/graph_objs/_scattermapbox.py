@@ -1430,7 +1430,9 @@ an instance of plotly.graph_objs.Scattermapbox"""
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'scattermapbox'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='scattermapbox'
+            plotly_name='type',
+            parent_name='scattermapbox',
+            val='scattermapbox'
         )
 
         # Process unknown kwargs

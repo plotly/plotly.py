@@ -1942,7 +1942,7 @@ an instance of plotly.graph_objs.Scattergl"""
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'scattergl'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='scattergl'
+            plotly_name='type', parent_name='scattergl', val='scattergl'
         )
 
         # Process unknown kwargs

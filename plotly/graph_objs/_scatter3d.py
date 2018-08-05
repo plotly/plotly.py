@@ -1925,7 +1925,7 @@ an instance of plotly.graph_objs.Scatter3d"""
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'scatter3d'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='scatter3d'
+            plotly_name='type', parent_name='scatter3d', val='scatter3d'
         )
 
         # Process unknown kwargs

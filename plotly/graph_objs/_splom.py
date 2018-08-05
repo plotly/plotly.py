@@ -1139,7 +1139,7 @@ an instance of plotly.graph_objs.Splom"""
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'splom'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='splom'
+            plotly_name='type', parent_name='splom', val='splom'
         )
 
         # Process unknown kwargs

@@ -1580,7 +1580,9 @@ an instance of plotly.graph_objs.Scattercarpet"""
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'scattercarpet'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='scattercarpet'
+            plotly_name='type',
+            parent_name='scattercarpet',
+            val='scattercarpet'
         )
 
         # Process unknown kwargs

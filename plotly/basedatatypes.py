@@ -378,7 +378,16 @@ class BaseFigure(object):
             for d in [dict1, kwargs]:
                 if d:
                     for k, v in d.items():
-                        BaseFigure._perform_update(self[k], v)
+                        if self[k] == ():
+                            # existing data or frames property is empty
+                            # In this case we accept the v as is.
+                            if k == 'data':
+                                self.add_traces(v)
+                            else:
+                                # Accept v
+                                self[k] = v
+                        else:
+                            BaseFigure._perform_update(self[k], v)
 
         return self
 
@@ -1058,11 +1067,6 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         ...                 go.Scatter(x=[1,2,3], y=[2,1,2])],
         ...                 rows=[1, 2], cols=[1, 1])
         """
-
-        if self._in_batch_mode:
-            self._batch_layout_edits.clear()
-            self._batch_trace_edits.clear()
-            raise ValueError('Traces may not be added in a batch context')
 
         # Validate traces
         data = self._data_validator.validate_coerce(data)
@@ -2133,8 +2137,15 @@ Invalid property path '{key_path_str}' for layout
                     BaseFigure._perform_update(
                         plotly_obj[key], val)
                 elif isinstance(validator, CompoundArrayValidator):
-                    BaseFigure._perform_update(
-                        plotly_obj[key], val)
+                    if plotly_obj[key]:
+                        # plotly_obj has an existing non-empty array for key
+                        # In this case we merge val into the existing elements
+                        BaseFigure._perform_update(
+                            plotly_obj[key], val)
+                    else:
+                        # plotly_obj is an empty or uninitialized list for key
+                        # In this case we accept val as is
+                        plotly_obj[key] = val
                 else:
                     # Assign non-compound value
                     plotly_obj[key] = val

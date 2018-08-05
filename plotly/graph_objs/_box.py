@@ -1574,7 +1574,7 @@ an instance of plotly.graph_objs.Box"""
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'box'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='box'
+            plotly_name='type', parent_name='box', val='box'
         )
 
         # Process unknown kwargs

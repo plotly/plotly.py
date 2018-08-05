@@ -1646,7 +1646,7 @@ an instance of plotly.graph_objs.Heatmapgl"""
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'heatmapgl'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='heatmapgl'
+            plotly_name='type', parent_name='heatmapgl', val='heatmapgl'
         )
 
         # Process unknown kwargs
