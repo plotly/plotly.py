@@ -568,9 +568,9 @@ def get_subplots(rows=1, columns=1, print_grid=False, **kwargs):
             y_start = (plot_height + vertical_spacing) * rrr
             y_end = y_start + plot_height
 
-            xaxis = graph_objs.XAxis(domain=[x_start, x_end], anchor=x_anchor)
+            xaxis = dict(domain=[x_start, x_end], anchor=x_anchor)
             fig['layout'][xaxis_name] = xaxis
-            yaxis = graph_objs.YAxis(domain=[y_start, y_end], anchor=y_anchor)
+            yaxis = dict(domain=[y_start, y_end], anchor=y_anchor)
             fig['layout'][yaxis_name] = yaxis
             plot_num += 1
 
@@ -1080,7 +1080,11 @@ def make_subplots(rows=1, cols=1,
     # Function pasting x/y domains in layout object (2d case)
     def _add_domain(layout, x_or_y, label, domain, anchor, position):
         name = label[0] + 'axis' + label[1:]
-        axis = {'domain': domain}
+
+        # Clamp domain elements between [0, 1].
+        # This is only needed to combat numerical precision errors
+        # See GH1031
+        axis = {'domain': [max(0.0, domain[0]), min(1.0, domain[1])]}
         if anchor:
             axis['anchor'] = anchor
         if isinstance(position, float):
@@ -1090,7 +1094,9 @@ def make_subplots(rows=1, cols=1,
 
     # Function pasting x/y domains in layout object (3d case)
     def _add_domain_is_3d(layout, s_label, x_domain, y_domain):
-        scene = graph_objs.Scene(domain={'x': x_domain, 'y': y_domain})
+        scene = dict(
+            domain={'x': [max(0.0, x_domain[0]), min(1.0, x_domain[1])],
+                    'y': [max(0.0, y_domain[0]), min(1.0, y_domain[1])]})
         layout[s_label] = scene
 
     x_cnt = y_cnt = s_cnt = 1  # subplot axis/scene counters
@@ -1339,7 +1345,7 @@ def make_subplots(rows=1, cols=1,
                                 'yref': 'paper',
                                 'text': subplot_titles[index],
                                 'showarrow': False,
-                                'font': graph_objs.Font(size=16),
+                                'font': dict(size=16),
                                 'xanchor': 'center',
                                 'yanchor': 'bottom'
                                 })

@@ -2128,3 +2128,30 @@ class TestMakeSubplots(TestCase):
         fig = tls.make_subplots(insets=[{'cell': (1, 1), 'l': 0.7, 'b': 0.3}],
                                 subplot_titles=("", 'Inset'))
         self.assertEqual(fig, expected)
+
+    def test_large_columns_no_errors(self):
+        """
+        Test that creating subplots with a large number of columns, and
+        zero vertical spacing doesn't result in domain values that are out
+        of range.
+
+        Here is the error that was reported in GH1031
+
+        ValueError:
+            Invalid value of type 'builtins.float' received for the
+            'domain[1]' property of layout.yaxis
+                Received value: 1.0000000000000007
+
+            The 'domain[1]' property is a number and may be specified as:
+              - An int or float in the interval [0, 1]
+
+        """
+        v_space = 0.0
+
+        # 2D
+        fig = tls.make_subplots(100, 1, vertical_spacing=v_space)
+
+        # 3D
+        fig = tls.make_subplots(100, 1,
+                                vertical_spacing=v_space,
+                                specs=[[{'is_3d': True}] for _ in range(100)])
