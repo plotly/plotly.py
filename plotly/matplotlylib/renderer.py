@@ -530,7 +530,7 @@ class PlotlyRenderer(Renderer):
         if not align:
             align = props['style']['halign']  # mpl default
         if 'annotations' not in self.plotly_fig['layout']:
-            self.plotly_fig['layout']['annotations'] = go.Annotations()
+            self.plotly_fig['layout']['annotations'] = []
         if props['text_type'] == 'xlabel':
             self.msg += "      Text object is an xlabel\n"
             self.draw_xlabel(**props)
@@ -576,7 +576,7 @@ class PlotlyRenderer(Renderer):
                     yref = 'paper'
                 xanchor = props['style']['halign']  # no difference here!
                 yanchor = mpltools.convert_va(props['style']['valign'])
-            annotation = go.Annotation(
+            annotation = go.layout.Annotation(
                 text=(str(props['text']) if
                       isinstance(props['text'], six.string_types) else
                       props['text']),
@@ -631,7 +631,7 @@ class PlotlyRenderer(Renderer):
                 'position'])
             x, y = mpltools.display_to_paper(x_px, y_px,
                                              self.plotly_fig['layout'])
-            annotation = go.Annotation(
+            annotation = go.layout.Annotation(
                 text=props['text'],
                 font=go.layout.annotation.Font(
                     color=props['style']['color'],
