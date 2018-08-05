@@ -10,7 +10,8 @@ def validator():
                                         'bar': 'Bar',
                                         'box': 'Box'},
                              plotly_name='prop',
-                             parent_name='parent')
+                             parent_name='parent',
+                             set_uid=True)
 
 
 # Tests

@@ -1712,7 +1712,7 @@ an instance of plotly.graph_objs.Carpet"""
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'carpet'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='carpet'
+            plotly_name='type', parent_name='carpet', val='carpet'
         )
 
         # Process unknown kwargs

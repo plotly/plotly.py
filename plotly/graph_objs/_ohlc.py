@@ -1225,7 +1225,7 @@ an instance of plotly.graph_objs.Ohlc"""
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'ohlc'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='ohlc'
+            plotly_name='type', parent_name='ohlc', val='ohlc'
         )
 
         # Process unknown kwargs

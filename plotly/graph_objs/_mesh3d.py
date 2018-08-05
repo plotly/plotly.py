@@ -2268,7 +2268,7 @@ an instance of plotly.graph_objs.Mesh3d"""
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'mesh3d'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='mesh3d'
+            plotly_name='type', parent_name='mesh3d', val='mesh3d'
         )
 
         # Process unknown kwargs

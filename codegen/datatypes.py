@@ -254,11 +254,12 @@ an instance of {class_name}\"\"\")
         for literal_node in literal_nodes:
             lit_name = literal_node.name_property
             lit_parent = literal_node.parent_path_str
-            lit_val = literal_node.node_data
+            lit_val = repr(literal_node.node_data)
             buffer.write(f"""
-        self._props['{lit_name}'] = '{lit_val}'
+        self._props['{lit_name}'] = {lit_val}
         self._validators['{lit_name}'] =\
-LiteralValidator(plotly_name='{lit_name}', parent_name='{lit_parent}')""")
+LiteralValidator(plotly_name='{lit_name}',\
+    parent_name='{lit_parent}', val={lit_val})""")
 
     buffer.write(f"""
     

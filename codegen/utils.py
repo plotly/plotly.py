@@ -423,6 +423,8 @@ class PlotlyNode:
                 if colorscale_node_list:
                     colorscale_path = colorscale_node_list[0].path_str
                     params['colorscale_path'] = repr(colorscale_path)
+            elif self.datatype == 'literal':
+                params['val'] = self.node_data
 
         return params
 

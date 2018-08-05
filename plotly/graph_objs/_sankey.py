@@ -981,7 +981,7 @@ an instance of plotly.graph_objs.Sankey"""
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'sankey'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='sankey'
+            plotly_name='type', parent_name='sankey', val='sankey'
         )
 
         # Process unknown kwargs

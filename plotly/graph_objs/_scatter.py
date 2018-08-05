@@ -2145,7 +2145,7 @@ an instance of plotly.graph_objs.Scatter"""
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'scatter'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='scatter'
+            plotly_name='type', parent_name='scatter', val='scatter'
         )
 
         # Process unknown kwargs

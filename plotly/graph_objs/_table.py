@@ -949,7 +949,7 @@ an instance of plotly.graph_objs.Table"""
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'table'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='table'
+            plotly_name='type', parent_name='table', val='table'
         )
 
         # Process unknown kwargs

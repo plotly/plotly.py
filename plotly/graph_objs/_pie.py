@@ -1505,7 +1505,7 @@ an instance of plotly.graph_objs.Pie"""
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'pie'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='pie'
+            plotly_name='type', parent_name='pie', val='pie'
         )
 
         # Process unknown kwargs

@@ -1753,7 +1753,7 @@ an instance of plotly.graph_objs.Streamtube"""
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'streamtube'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='streamtube'
+            plotly_name='type', parent_name='streamtube', val='streamtube'
         )
 
         # Process unknown kwargs

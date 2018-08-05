@@ -1941,7 +1941,7 @@ an instance of plotly.graph_objs.Histogram2d"""
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'histogram2d'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='histogram2d'
+            plotly_name='type', parent_name='histogram2d', val='histogram2d'
         )
 
         # Process unknown kwargs
