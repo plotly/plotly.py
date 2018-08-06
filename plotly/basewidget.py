@@ -814,6 +814,12 @@ Note: Frames are supported by the plotly.graph_objs.Figure class"""
                                 input_val, delta_val, recur_prop_path))
                         removed.extend(recur_removed)
 
+                        # Check whether the last property in input_val
+                        # has been removed. If so, remove it entirely
+                        if not input_val:
+                            input_data.pop(p)
+                            removed.append(recur_prop_path)
+
                 elif p in input_data and p != 'uid':
                     # ### Remove property ###
                     input_data.pop(p)
