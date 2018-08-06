@@ -1211,7 +1211,7 @@ class ColorscaleValidator(BaseValidator):
     named_colorscales = [
         'Greys', 'YlGnBu', 'Greens', 'YlOrRd', 'Bluered', 'RdBu', 'Reds',
         'Blues', 'Picnic', 'Rainbow', 'Portland', 'Jet', 'Hot', 'Blackbody',
-        'Earth', 'Electric', 'Viridis'
+        'Earth', 'Electric', 'Viridis', 'Cividis'
     ]
 
     def __init__(self, plotly_name, parent_name, **kwargs):
@@ -1229,7 +1229,7 @@ class ColorscaleValidator(BaseValidator):
       - One of the following named colorscales:
             ['Greys', 'YlGnBu', 'Greens', 'YlOrRd', 'Bluered', 'RdBu',
             'Reds', 'Blues', 'Picnic', 'Rainbow', 'Portland', 'Jet',
-            'Hot', 'Blackbody', 'Earth', 'Electric', 'Viridis']
+            'Hot', 'Blackbody', 'Earth', 'Electric', 'Viridis', 'Cividis]
         """.format(plotly_name=self.plotly_name)
 
         return desc

@@ -11,7 +11,8 @@ def validator():
 
 
 @pytest.fixture(params=['Greys', 'YlGnBu', 'Greens', 'YlOrRd', 'Bluered', 'RdBu', 'Reds', 'Blues',
-                        'Picnic', 'Rainbow', 'Portland', 'Jet', 'Hot', 'Blackbody', 'Earth', 'Electric', 'Viridis'])
+                        'Picnic', 'Rainbow', 'Portland', 'Jet', 'Hot', 'Blackbody', 'Earth', 'Electric', 
+                        'Viridis', 'Cividis'])
 def named_colorscale(request):
     return request.param
 
