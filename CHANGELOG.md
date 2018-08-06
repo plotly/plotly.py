@@ -2,16 +2,65 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.1.1] - 2018-08-07
+This release is a minor bug-fix update to version 3.1.0
+
+### JupyterLab Versions
+For use with JupyterLab, the following versions of the following packages
+must be installed:
+
+ - Python Packages
+   - plotly==3.1.1
+   - ipywidgets>=7.2
+   - notebook>=5.3
+   - jupyterlab==0.33
+   
+ - JupyterLab Extensions
+   - plotlywidget@0.2.1
+   - @jupyter-widgets/jupyterlab-manager@0.36
+   - @jupyterlab/plotly-extension@0.16
+
+### Updated
+ - Updated plotly.js to version 1.39.4.
+   - This is a bug-fix release of plotly.js
+   - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1394----2018-08-02) for more information
+
+### Fixed
+ - Fixed error in validation of configkeys
+   [plotly/plotly.js#1065](https://github.com/plotly/plotly.py/pull/1065)
+ - Fixed error in presentation of named colorscales
+   [plotly/plotly.js#1089](https://github.com/plotly/plotly.py/pull/1089)
+ - Fixed numerical precision error when using `plotly.tools.make_subplots`
+   to create figures with a large number of subplots
+   [plotly/plotly.js#1091](https://github.com/plotly/plotly.py/pull/1091)
+ - Fixed problem that prevented the use of the `.update` method to initialize
+   an array property (e.g. `layout.shapes`)
+   [plotly/plotly.js#1091](https://github.com/plotly/plotly.py/pull/1092)
+ - Fixed `FigureWidget` problem causing scroll zoom on 3D plots to stutter
+   [plotly/plotly.js#1094](https://github.com/plotly/plotly.py/pull/1094) 
+
 ## [3.1.0] - 2018-07-20
 
-### JupyterLab plotlywidget version: 0.2.0
-Please upgrade the Jupyterlab `plotlywidget` extension to version 0.2.0
-(See README for instructions)
+### JupyterLab Versions
+For use with JupyterLab, the following versions of the following packages
+must be installed. See [README.md](README.md) for instructions.
 
-### Plotly.js version: 1.39.2
-See [Plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md) for
-full list of changes. Select highlights are listed below. 
+ - Python Packages
+   - plotly==3.1.0
+   - ipywidgets>=7.2
+   - notebook>=5.3
+   - jupyterlab==0.32.1
+   
+ - JupyterLab Extensions
+   - plotlywidget@0.2.0
+   - @jupyter-widgets/jupyterlab-manager@0.35
+   - @jupyterlab/plotly-extension@0.16
 
+### Updated
+ - Updated Plotly.js to version 1.39.2
+ - See highlights below
+ - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1392----2018-07-16) for more information.
+   
 ### Added
  - Added 3D streamtube traces
    [plotly/plotly.js#2658](https://github.com/plotly/plotly.js/pull/2658)

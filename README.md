@@ -29,7 +29,7 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 ## Installation of plotly.py Version 3
 To install plotly.py and enable Jupyter or Jupyter Lab support, run:
 ```
-pip install plotly==3.1.0
+pip install plotly==3.1.1
 pip install "notebook>=5.3" "ipywidgets>=7.2"  # only necessary for Jupyter Notebook environments
 ```
 
@@ -43,10 +43,10 @@ jupyter nbextension enable --py plotlywidget --sys-prefix
 In addition, to add JupyterLab support run the following commands
 
 ```
-pip install jupyterlab==0.32.1
+pip install jupyterlab==0.33
 export NODE_OPTIONS=--max-old-space-size=4096
-jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.35 # install the Jupyter widgets extension
-jupyter labextension install plotlywidget@0.2  # FigureWidget support
+jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.36 # install the Jupyter widgets extension
+jupyter labextension install plotlywidget@0.2.1  # FigureWidget support
 jupyter labextension install @jupyterlab/plotly-extension@0.16  # offline iplot support
 ```
 
