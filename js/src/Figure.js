@@ -1248,10 +1248,11 @@ var FigureView = widgets.DOMWidgetView.extend({
         /** @type {Py2JsRelayoutMsg} */
         var msgData = this.model.get("_py2js_relayout");
         if (msgData !== null) {
-
-            var relayoutData = msgData.relayout_data;
+            if (msgData.source_view_id !== this.viewID) {
+                var relayoutData = msgData.relayout_data;
                 relayoutData["_doNotReportToPy"] = true;
                 Plotly.relayout(this.el, msgData.relayout_data);
+            }
 
             // ### Send layout delta ###
             var layout_edit_id = msgData.layout_edit_id;
