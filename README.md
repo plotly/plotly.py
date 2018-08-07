@@ -44,10 +44,24 @@ In addition, to add JupyterLab support run the following commands
 
 ```
 pip install jupyterlab==0.33
+
+# Avoid "JavaScript heap out of memory" errors during extension installation
+# (OS X/Linux)
 export NODE_OPTIONS=--max-old-space-size=4096
-jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.36 # install the Jupyter widgets extension
-jupyter labextension install plotlywidget@0.2.1-rc.1  # FigureWidget support
-jupyter labextension install @jupyterlab/plotly-extension@0.16  # offline iplot support
+# (Windows)
+set NODE_OPTIONS=--max-old-space-size=4096
+
+# Jupyter widgets extension
+jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.36 --no-build
+
+# FigureWidget support
+jupyter labextension install plotlywidget@0.2.1-rc.1  --no-build
+
+# offline iplot support
+jupyter labextension install @jupyterlab/plotly-extension@0.16  --no-build
+
+# Build extensions (must be done to activate extensions since --no-build is used above)
+jupyter lab build
 ```
 
 If you're migrating from plotly.py version 2, please check out the [migration guide](migration-guide.md)
