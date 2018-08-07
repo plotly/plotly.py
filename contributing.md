@@ -274,7 +274,9 @@ Note: Use the official (not release candidate) versions in the CHANGELOG.
 #### Update README.md installation instructions
 
 Update the installation instructions in the README to the new versions of all
-of the dependencies.
+of the dependencies. Use the release candidate versions, this way we can point
+people to the README of the `release_X.Y.Z` as the instructions for trying out
+the release candidate.
 
 #### Publish release candidate to PyPI
 To upload to PyPI you'll also need to have `twine` installed:
