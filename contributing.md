@@ -290,8 +290,8 @@ And, you'll need the credentials file `~/.pypirc`. Request access from
 ```bash
 (plotly.py) $ git checkout release_X.Y.Z
 (plotly.py) $ git stash
-(plotly.py) $ python setup.py sdist
-(plotly.py) $ twine upload dist/plotly-X.Y.Zrc1.tar.gz
+(plotly.py) $ python setup.py sdist bdist_wheel
+(plotly.py) $ twine upload dist/plotly-X.Y.Zrc1*
 ```
 
 #### Publish release candidate of `plotlywidget` to NPM
@@ -357,8 +357,8 @@ Update your local master, tag this merge commit as `vX.Y.Z`
 Publish the final version to PyPI
 
 ```bash
-(plotly.py) $ python setup.py sdist
-(plotly.py) $ twine upload dist/plotly-X.Y.Z.tar.gz
+(plotly.py) $ python setup.py sdist bdist_wheel
+(plotly.py) $ twine upload dist/plotly-X.Y.Z*
 ```
 
 After it has uploaded, move to another environment and double+triple check that you are able to upgrade ok:
