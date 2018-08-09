@@ -453,13 +453,13 @@ def prep_ticks(ax, index, ax_type, props):
         else:
             axis_dict['tick0'] = tick0
             axis_dict['dtick'] = dtick
-            axis_dict['tickmode'] = False
+            axis_dict['tickmode'] = None
     elif scale == 'log':
         try:
             axis_dict['tick0'] = props['axes'][index]['tickvalues'][0]
             axis_dict['dtick'] = props['axes'][index]['tickvalues'][1] - \
                             props['axes'][index]['tickvalues'][0]
-            axis_dict['tickmode'] = False
+            axis_dict['tickmode'] = None
         except (IndexError, TypeError):
             axis_dict = dict(nticks=props['axes'][index]['nticks'])
         base = axis.get_transform().base
