@@ -29,7 +29,7 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 ## Installation of plotly.py Version 3
 To install plotly.py and enable Jupyter or Jupyter Lab support, run:
 ```
-pip install plotly==3.1.0
+pip install plotly==3.1.1rc1
 pip install "notebook>=5.3" "ipywidgets>=7.2"  # only necessary for Jupyter Notebook environments
 ```
 
@@ -43,11 +43,25 @@ jupyter nbextension enable --py plotlywidget --sys-prefix
 In addition, to add JupyterLab support run the following commands
 
 ```
-pip install jupyterlab==0.32.1
+pip install jupyterlab==0.33
+
+# Avoid "JavaScript heap out of memory" errors during extension installation
+# (OS X/Linux)
 export NODE_OPTIONS=--max-old-space-size=4096
-jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.35 # install the Jupyter widgets extension
-jupyter labextension install plotlywidget@0.2  # FigureWidget support
-jupyter labextension install @jupyterlab/plotly-extension@0.16  # offline iplot support
+# (Windows)
+set NODE_OPTIONS=--max-old-space-size=4096
+
+# Jupyter widgets extension
+jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.36 --no-build
+
+# FigureWidget support
+jupyter labextension install plotlywidget@0.2.1-rc.1  --no-build
+
+# offline iplot support
+jupyter labextension install @jupyterlab/plotly-extension@0.16  --no-build
+
+# Build extensions (must be done to activate extensions since --no-build is used above)
+jupyter lab build
 ```
 
 If you're migrating from plotly.py version 2, please check out the [migration guide](migration-guide.md)
