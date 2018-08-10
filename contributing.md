@@ -315,7 +315,7 @@ In particular
  - `jupyter labextension install plotlywidget@A.B.C` ->
     `jupyter labextension install plotlywidget@A.B.C-rc.1`
 
-Run through the example notebboks at
+Run through the example notebooks at
 https://github.com/jonmmease/plotly_ipywidget_notebooks using the classic
 notebook and JupyterLab. Make sure `FigureWidget` objects are displayed as
 plotly figures, and make sure the in-place updates and callbacks work.
