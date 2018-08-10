@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [3.1.1] - 2018-08-07
+## [3.1.1] - 2018-08-10
 This release is a minor bug-fix update to version 3.1.0
 
 ### JupyterLab Versions
@@ -38,6 +38,8 @@ must be installed:
    [plotly/plotly.js#1091](https://github.com/plotly/plotly.py/pull/1092)
  - Fixed `FigureWidget` problem causing scroll zoom on 3D plots to stutter
    [plotly/plotly.js#1094](https://github.com/plotly/plotly.py/pull/1094) 
+ - Fixed invalid `tickmode` property in `matplotlylib`
+   [plotly/plotly.js#1101](https://github.com/plotly/plotly.py/pull/1101)
 
 ## [3.1.0] - 2018-07-20
 
