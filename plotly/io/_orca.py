@@ -28,7 +28,7 @@ class OrcaConfig(object):
         'hostname': 'localhost',
         'executable': 'orca',
         'autostart': True,
-        'timeout': 10
+        'timeout': 120
     }
 
     @property
