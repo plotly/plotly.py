@@ -1,4 +1,5 @@
 import warnings
+from copy import copy
 from json import JSONDecodeError
 from pprint import pformat
 import requests
@@ -79,6 +80,20 @@ class OrcaConfig(object):
             'default_format': 'png',
             'default_scale': 1
         })
+
+    def update(self, d={}, **kwargs):
+        # Combine d and kwargs
+        updates = copy(d)
+        updates.update(kwargs)
+
+        # Validate keys
+        for k in updates:
+            if k not in self._props:
+                raise ValueError('Invalid property name: {k}'.format(k=k))
+
+        # Apply keys
+        for k, v in updates.items():
+            setattr(self, k, v)
 
     @property
     def port(self):
