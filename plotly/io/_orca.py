@@ -1,3 +1,5 @@
+import warnings
+from json import JSONDecodeError
 from pprint import pformat
 import requests
 import subprocess
@@ -10,6 +12,30 @@ import retrying
 import atexit
 
 import plotly
+from plotly.files import PLOTLY_DIR
+from six import string_types
+
+
+from atexit import register as exit_register
+
+
+valid_formats = ('png', 'jpeg', 'webp', 'svg', 'pdf', 'eps')
+_format_conversions = {fmt: fmt
+                       for fmt in valid_formats}
+_format_conversions.update({'jpg': 'jpeg'})
+
+
+def _validate_coerce_format(fmt):
+    assert isinstance(fmt, string_types)
+    assert fmt
+
+    fmt = fmt.lower()
+    if fmt[0] == '.':
+        fmt = fmt[1:]
+
+    assert fmt in _format_conversions
+    return _format_conversions[fmt]
+
 
 def _find_open_port():
     """
@@ -21,6 +47,7 @@ def _find_open_port():
         _, port = s.getsockname()
 
     return port
+
 
 def which(cmd):
     import shutil
@@ -34,13 +61,24 @@ class OrcaConfig(object):
     These should eventually be loaded from somewhere in the ~/.plotly
     directory.
     """
-    _props = {
-        'port': None,
-        'hostname': 'localhost',
-        'executable': 'orca',
-        'autostart': True,
-        'timeout': 120
-    }
+
+    def __init__(self):
+        self._props = {}
+        self.restore_defaults()
+        self.reload(warn=False)
+
+    def restore_defaults(self):
+        self._props.update({
+            'port': None,
+            'executable': 'orca',
+            'timeout': 120,
+            'autostart': True,
+            'hostname': 'localhost',
+            'default_width': None,
+            'default_height': None,
+            'default_format': 'png',
+            'default_scale': 1
+        })
 
     @property
     def port(self):
@@ -87,6 +125,93 @@ class OrcaConfig(object):
     def timeout(self, val):
         # - Must be number
         self._props['timeout'] = val
+
+    @property
+    def default_width(self):
+        return self._props.get('default_width', None)
+
+    @default_width.setter
+    def default_width(self, val):
+        self._props['default_width'] = val
+
+    @property
+    def default_height(self):
+        return self._props.get('default_height', None)
+
+    @default_height.setter
+    def default_height(self, val):
+        self._props['default_height'] = val
+
+    @property
+    def default_format(self):
+        return self._props.get('default_format', None)
+
+    @default_format.setter
+    def default_format(self, val):
+        val = _validate_coerce_format(val)
+        self._props['default_format'] = val
+
+    @property
+    def default_scale(self):
+        return self._props.get('default_scale', None)
+
+    @default_scale.setter
+    def default_scale(self, val):
+        self._props['default_scale'] = val
+
+    @property
+    def path(self):
+        """
+        Path to orca configuration setting file
+        """
+        return os.path.join(PLOTLY_DIR, ".orca")
+
+    def reload(self, warn=True):
+        """
+        Reload orca settings from .plotly/.orca, if any.
+
+        This replaces all active sett
+        """
+
+        if os.path.exists(self.path):
+
+            # ### Load file into a string ###
+            try:
+                with open(self.path, 'r') as f:
+                    orca_str = f.read()
+            except:
+                if warn:
+                    warnings.warn("""\
+Unable to read orca configuration file at {path}""".format(
+                        path=self.path
+                ))
+                return
+
+            # ### Parse as JSON ###
+            try:
+                orca_props = json.loads(orca_str)
+            except JSONDecodeError:
+                if warn:
+                    warnings.warn("""\
+Orca configuration file at {path} is not valid JSON""".format(
+                        path=self.path
+                    ))
+                return
+
+            # ### Update _props ###
+            for k, v in orca_props.items():
+                # Only keep properties that we understand
+                if k in self._props:
+                    self._props[k] = v
+
+        elif warn:
+            warnings.warn("""\
+Orca configuration file at {path} not found""".format(
+                path=self.path))
+
+    def save(self):
+        with open(self.path, 'w', encoding='utf-8') as f:
+            json.dump(self._props, f, indent=4)
 
     def __repr__(self):
         return """\
@@ -311,10 +436,68 @@ def _request_image_with_retrying(**kwargs):
     return r.content
 
 
-def to_image(fig, format='png', scale=1.0, width=None, height=None):
+def to_image(fig, format=None, scale=None, width=None, height=None):
     """
     Convert a figure to an image bytes string
     """
+    # Make sure orca sever is running
+    # -------------------------------
     ensure_orca_server()
-    return _request_image_with_retrying(
+
+    # Handle defaults
+    # ---------------
+    # Apply configuration defaults to unspecified arguments
+    if format is None:
+        format = config.default_format
+
+    format = _validate_coerce_format(format)
+
+    if scale is None:
+        scale = config.default_scale
+
+    if width is None:
+        width = config.default_width
+
+    if height is None:
+        height = config.default_height
+
+    # Request image from server
+    # -------------------------
+    img_data = _request_image_with_retrying(
         figure=fig, format=format, scale=scale, width=width, height=height)
+
+    return img_data
+
+
+def write_image(fig, file, format=None, scale=None, width=None, height=None):
+    """
+    Write image to a local file or writable object
+    """
+
+    # Check if file is a string
+    # -------------------------
+    file_is_str = isinstance(file, string_types)
+
+    # Infer format if not specified
+    # -----------------------------
+    if file_is_str and format is None:
+        _, ext = os.path.splitext(file)
+        if ext:
+            format = _validate_coerce_format(ext)
+
+    # Request image
+    # -------------
+    # Do this first so we don't create a file if image conversion fails
+    img_data = to_image(fig,
+                        format=format,
+                        scale=scale,
+                        width=width,
+                        height=height)
+
+    # Open file
+    # ---------
+    if file_is_str:
+        with open(file, 'wb') as f:
+            f.write(img_data)
+    else:
+        file.write(img_data)
