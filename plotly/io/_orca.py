@@ -16,10 +16,6 @@ import plotly
 from plotly.files import PLOTLY_DIR
 from six import string_types
 
-
-from atexit import register as exit_register
-
-
 valid_formats = ('png', 'jpeg', 'webp', 'svg', 'pdf', 'eps')
 _format_conversions = {fmt: fmt
                        for fmt in valid_formats}
