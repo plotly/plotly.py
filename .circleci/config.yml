@@ -1,9 +1,11 @@
 version: 2
 
 jobs:
+  "setup-conda":
+
   "python-2.7":
     docker:
-      - image: circleci/python:2.7-stretch-browsers
+      - image: circleci/python:2.7-stretch-node-browsers
         environment:
           PLOTLY_TOX_PYTHON_27: python2.7
 
@@ -18,7 +20,7 @@ jobs:
 
   "python-3.5":
     docker:
-      - image: circleci/python:3.5-stretch-browsers
+      - image: circleci/python:3.5-stretch-node-browsers
         environment:
           PLOTLY_TOX_PYTHON_35: python3.5
 
@@ -36,4 +38,4 @@ workflows:
   build:
     jobs:
       - "python-2.7"
-      - "python-3.6"
+      - "python-3.5"
