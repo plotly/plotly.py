@@ -1,0 +1,39 @@
+version: 2
+
+jobs:
+  "python-2.7":
+    docker:
+      - image: circleci/python:2.7-stretch-browsers
+        environment:
+          PLOTLY_TOX_PYTHON_27: python2.7
+
+    steps:
+      - checkout
+      - run:
+          name: Install tox
+          command: 'sudo pip install tox'
+      - run:
+          name: Test with tox
+          command: 'tox -e py27-core'
+
+  "python-3.5":
+    docker:
+      - image: circleci/python:3.5-stretch-browsers
+        environment:
+          PLOTLY_TOX_PYTHON_35: python3.5
+
+    steps:
+      - checkout
+      - run:
+          name: Install tox
+          command: 'sudo pip install tox'
+      - run:
+          name: Test with tox
+          command: 'tox -e py35-core'
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - "python-2.7"
+      - "python-3.6"
