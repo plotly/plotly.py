@@ -69,8 +69,6 @@ class OrcaConfig(object):
             'port': None,
             'executable': 'orca',
             'timeout': 120,
-            'autostart': True,
-            'hostname': 'localhost',
             'default_width': None,
             'default_height': None,
             'default_format': 'png',
@@ -103,30 +101,12 @@ class OrcaConfig(object):
         self._props['port'] = val
 
     @property
-    def hostname(self):
-        return self._props.get('hostname', None)
-
-    @hostname.setter
-    def hostname(self, val):
-        self._props['hostname'] = val
-
-    @property
     def executable(self):
         return self._props.get('executable', None)
 
     @executable.setter
     def executable(self, val):
         self._props['executable'] = val
-
-    @property
-    def autostart(self):
-        return self._props.get('autostart', None)
-
-    @autostart.setter
-    def autostart(self, val):
-        # - Must be string
-        # - Hostname must be localhost
-        self._props['autostart'] = val
 
     @property
     def timeout(self):
@@ -171,9 +151,9 @@ class OrcaConfig(object):
         self._props['default_scale'] = val
 
     @property
-    def path(self):
+    def config_file(self):
         """
-        Path to orca configuration setting file
+        Path to orca configuration file
         """
         return os.path.join(PLOTLY_DIR, ".orca")
 
@@ -184,17 +164,17 @@ class OrcaConfig(object):
         This replaces all active sett
         """
 
-        if os.path.exists(self.path):
+        if os.path.exists(self.config_file):
 
             # ### Load file into a string ###
             try:
-                with open(self.path, 'r') as f:
+                with open(self.config_file, 'r') as f:
                     orca_str = f.read()
             except:
                 if warn:
                     warnings.warn("""\
 Unable to read orca configuration file at {path}""".format(
-                        path=self.path
+                        path=self.config_file
                 ))
                 return
 
@@ -205,7 +185,7 @@ Unable to read orca configuration file at {path}""".format(
                 if warn:
                     warnings.warn("""\
 Orca configuration file at {path} is not valid JSON""".format(
-                        path=self.path
+                        path=self.config_file
                     ))
                 return
 
@@ -218,10 +198,10 @@ Orca configuration file at {path} is not valid JSON""".format(
         elif warn:
             warnings.warn("""\
 Orca configuration file at {path} not found""".format(
-                path=self.path))
+                path=self.config_file))
 
     def save(self):
-        with open(self.path, 'w', encoding='utf-8') as f:
+        with open(self.config_file, 'w', encoding='utf-8') as f:
             json.dump(self._props, f, indent=4)
 
     def __repr__(self):
@@ -410,7 +390,7 @@ def ensure_orca_server():
         if __orca_state['shutdown_timer'] is not None:
             __orca_state['shutdown_timer'].cancel()
 
-        if config.autostart and __orca_state['proc'] is None:
+        if __orca_state['proc'] is None:
             if config.port is None:
                 __orca_state['port'] = str(_find_open_port())
             else:
@@ -439,7 +419,7 @@ def ensure_orca_server():
 @retrying.retry(wait_random_min=5, wait_random_max=10, stop_max_delay=10000)
 def _request_image_with_retrying(**kwargs):
     server_url = 'http://{hostname}:{port}'.format(
-        hostname=config.hostname, port=__orca_state['port'])
+        hostname='localhost', port=__orca_state['port'])
 
     request_params = {k: v for k, v, in kwargs.items() if v is not None}
     json_str = json.dumps(request_params, cls=plotly.utils.PlotlyJSONEncoder)
