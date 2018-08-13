@@ -1,8 +1,6 @@
 version: 2
 
 jobs:
-  "setup-conda":
-
   "python-2.7":
     docker:
       - image: circleci/python:2.7-stretch-node-browsers
