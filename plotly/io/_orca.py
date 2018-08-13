@@ -16,27 +16,78 @@ import plotly
 from plotly.files import PLOTLY_DIR
 from six import string_types
 
+
+# Valid image format constants
+# ----------------------------
 valid_formats = ('png', 'jpeg', 'webp', 'svg', 'pdf', 'eps')
 _format_conversions = {fmt: fmt
                        for fmt in valid_formats}
 _format_conversions.update({'jpg': 'jpeg'})
 
 
+# Utility functions
+# -----------------
+def _raise_format_value_error(val):
+    raise ValueError("""
+    Invalid value of type {typ} receive as an image format designation.
+        Received value: {v}
+
+    An image format must be specified as one of the following string values:
+        {valid_formats}""".format(
+        typ=type(val),
+        v=val,
+        valid_formats=sorted(_format_conversions.keys())))
+
+
 def _validate_coerce_format(fmt):
-    assert isinstance(fmt, string_types)
-    assert fmt
+    """
+    Validate / coerce a user specified image format, and raise an informative
+    exception if format is invalid.
+
+    Parameters
+    ----------
+    fmt: str
+        A string that may or may not be a valid image format.
+
+    Returns
+    -------
+    str
+        A valid image format string as supported by orca. This may not
+        be identical to the input image designation. For example,
+        the resulting string will always be lower case and  'jpg' is
+        converted to 'jpeg'.
+
+    Raises
+    ------
+    ValueError
+        if the input `fmt` cannot be interpreted as a valid image format.
+    """
+
+    # Let None pass through
+    if fmt is None:
+        return None
+
+    if not isinstance(fmt, string_types) or not fmt:
+        _raise_format_value_error(fmt)
 
     fmt = fmt.lower()
     if fmt[0] == '.':
         fmt = fmt[1:]
 
-    assert fmt in _format_conversions
+    if fmt not in _format_conversions:
+        _raise_format_value_error(fmt)
+
     return _format_conversions[fmt]
 
 
 def _find_open_port():
     """
-    Use socket module to find an open port
+    Use the socket module to find an open port.
+
+    Returns
+    -------
+    int
+        An open port
     """
     with socket.socket() as s:
         s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -47,24 +98,49 @@ def _find_open_port():
 
 
 def which(cmd):
+    """
+    Return the absolute path of the input executable string, based on the
+    user's current PATH variable.
+
+    This is a wrapper for shutil.which that is compatible with Python 2.
+
+    Parameters
+    ----------
+    cmd: str
+        String containing the name of an executable on the user's path.
+
+    Returns
+    -------
+    str or None
+        String containing the absolute path of the executable, or None if
+        the executable was not found.
+
+    """
     import shutil
     # TODO: this doesn't exist on Python 2.7 :-(
     return shutil.which(cmd)
 
+
+# Orca configuration class
+# ------------------------
 class OrcaConfig(object):
     """
-    Contains user defined configuration for orca
+    Singleton object containing the current user defined configuration
+    properties for orca.
 
-    These should eventually be loaded from somewhere in the ~/.plotly
-    directory.
+    These parameters may optionally be saved to the user's ~/.plotly
+    directory using the `save` method, in which case they are automatically
+    restored in future sessions.
     """
-
     def __init__(self):
         self._props = {}
         self.restore_defaults()
         self.reload(warn=False)
 
     def restore_defaults(self):
+        """
+        Reset all orca configuration properties to their default values
+        """
         self._props.update({
             'port': None,
             'executable': 'orca',
@@ -76,7 +152,41 @@ class OrcaConfig(object):
         })
 
     def update(self, d={}, **kwargs):
+        """
+        Update one or more properties from a dict or from input keyword
+        arguments.
+
+        Parameters
+        ----------
+        d: dict
+            Dictionary from property names to new property values.
+
+        kwargs
+            Named argument value pairs where the name is a configuration
+            property name and the value is the new property value.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
+        Update configuration properties using a dictionary
+
+        >>> import plotly.io as pio
+        >>> pio.orca.config.update({'timeout': 30, 'default_format': 'svg'})
+
+        Update configuration properties using keyword arguments
+
+        >>> pio.orca.config.update(timeout=30, default_format=svg})
+        """
         # Combine d and kwargs
+        if not isinstance(d, dict):
+            raise ValueError("""\
+The first argument to update must be a dict, \
+but received value of type {typ}l
+    Received value: {val}""".format(typ=type(d), val=d))
+
         updates = copy(d)
         updates.update(kwargs)
 
@@ -91,50 +201,163 @@ class OrcaConfig(object):
 
     @property
     def port(self):
+        """
+        The specific port to use to communicate with the orca server, or
+        None if the port is to be chosen automatically.
+
+        If an orca server is active, the port in use is stored in the
+        plotly.io.orca.status.port property.
+
+        Returns
+        -------
+        int or None
+        """
         return self._props.get('port', None)
 
     @port.setter
     def port(self, val):
-        if isinstance(val, int):
-            val = str(val)
-        # Must be integer or string that contains an integer
+        if val is not None and not isinstance(val, int):
+            raise ValueError("""\
+The port value must be an integer, but received value of type {typ}.
+    Received value: {val}""".format(typ=type(val), val=val))
+
         self._props['port'] = val
 
     @property
     def executable(self):
+        """
+        The name or full path of the orca executable.
+
+         - If a name (e.g. 'orca'), then it should be the name of an orca
+           executable on the PATH. The directories on the PATH can be
+           displayed by running the following command:
+
+           >>> import os
+           >>> print(os.environ.get('PATH').replace(':', os.linesep))
+
+         - If a full path (e.g. '/path/to/orca'), then
+           is should be the full path to an orca executable. In this case
+           the executable does not need to reside on the PATH.
+
+        If an orca server has been validated, then the full path to the
+        validated orca executable is stored in the
+        plotly.io.orca.status.executable property.
+
+        Returns
+        -------
+        str
+        """
         return self._props.get('executable', None)
 
     @executable.setter
     def executable(self, val):
+
+        # Use default value if val is None or empty
+        # -----------------------------------------
+        if not val:
+            val = 'orca'
+
+        # Validate val
+        # ------------
+        if not isinstance(val, str):
+            raise ValueError("""\
+The executable property must be a string, but received value of type {typ}.
+    Received value: {val}""".format(typ=type(val), val=val))
         self._props['executable'] = val
 
     @property
     def timeout(self):
+        """
+        The number of seconds of inactivity required before the orca server
+        is shut down.
+
+        For example, if timeout is set to 20, then the orca
+        server will shutdown once is has not been used for at least
+        20 seconds. If timeout is set to None, then the server will not be
+        automaticaly shut down due to inactivity.
+
+        Regardless of the value of timeout, a running orca server may be
+        manually shut down like this:
+
+        >>> import plotly.io as pio
+        >>> pio.orca.shutdown_orca_server()
+
+        Returns
+        -------
+        int or float or None
+        """
         return self._props.get('timeout', None)
 
     @timeout.setter
     def timeout(self, val):
-        # - Must be number
+        if val is not None and not isinstance(val, (int, float)):
+            raise ValueError("""
+The timeout property must be a number, but received value of type {typ}.
+    Received value: {val}""".format(typ=type(val), val=val))
         self._props['timeout'] = val
 
     @property
     def default_width(self):
+        """
+        The default width to use on image export. This value is only
+        applied if the no width value is supplied to the plotly.io
+        to_image or write_image functions.
+
+        Returns
+        -------
+        int or None
+        """
         return self._props.get('default_width', None)
 
     @default_width.setter
     def default_width(self, val):
+        if val is not None and not isinstance(val, int):
+            raise ValueError("""
+The default_width property must be an int, but received value of type {typ}.
+    Received value: {val}""".format(typ=type(val), val=val))
         self._props['default_width'] = val
 
     @property
     def default_height(self):
+        """
+        The default height to use on image export. This value is only
+        applied if the no height value is supplied to the plotly.io
+        to_image or write_image functions.
+
+        Returns
+        -------
+        int or None
+        """
         return self._props.get('default_height', None)
 
     @default_height.setter
     def default_height(self, val):
+        if val is not None and not isinstance(val, int):
+            raise ValueError("""
+The default_height property must be an int, but received value of type {typ}.
+    Received value: {val}""".format(typ=type(val), val=val))
         self._props['default_height'] = val
 
     @property
     def default_format(self):
+        """
+        The default image format to use on image export.
+
+        Valid image formats strings are:
+          - 'png'
+          - 'jpg' or 'jpeg'
+          - 'webp'
+          - 'svg'
+          - 'pdf'
+          - 'eps' (Requires the poppler library to be installed)
+
+        This value is only applied if no format value is supplied to the
+        plotly.io to_image or write_image functions.
+
+        Returns
+        -------
+        str or None
+        """
         return self._props.get('default_format', None)
 
     @default_format.setter
@@ -144,16 +367,33 @@ class OrcaConfig(object):
 
     @property
     def default_scale(self):
+        """
+        The default image scaling factor to use on image export.
+        This value is only applied if the no scale value is supplied to the
+        plotly.io to_image or write_image functions.
+
+        Returns
+        -------
+        int or None
+        """
         return self._props.get('default_scale', None)
 
     @default_scale.setter
     def default_scale(self, val):
+        if val is not None and not isinstance(val, (int, float)):
+            raise ValueError("""
+The default_scale property must be a number, but received value of type {typ}.
+    Received value: {val}""".format(typ=type(val), val=val))
         self._props['default_scale'] = val
 
     @property
     def config_file(self):
         """
         Path to orca configuration file
+
+        Using the `plotly.io.config.save()` method will save the current
+        configuration settings to this file. Settings in this file are
+        restored at the beginning of each sessions.
         """
         return os.path.join(PLOTLY_DIR, ".orca")
 
@@ -161,9 +401,10 @@ class OrcaConfig(object):
         """
         Reload orca settings from .plotly/.orca, if any.
 
-        This replaces all active sett
+        Note: Settings are loaded automatically when plotly is imported.
+        This method is only needed if the setting are changed by some outside
+        process (e.g. a text editor) during an interactive session.
         """
-
         if os.path.exists(self.config_file):
 
             # ### Load file into a string ###
@@ -201,26 +442,41 @@ Orca configuration file at {path} not found""".format(
                 path=self.config_file))
 
     def save(self):
+        """
+        Attempt to save current settings to disk, so that they are
+        automatically restored for future sessions.
+
+        This operation requires write access to the path returned by
+        in the `config_file` property.
+
+        Returns
+        -------
+        None
+        """
         with open(self.config_file, 'w', encoding='utf-8') as f:
             json.dump(self._props, f, indent=4)
 
     def __repr__(self):
+        """
+        Display a nice representation of the current orca server status.
+        """
         return """\
 orca configuration
 ------------------
 """ + pformat(self._props, width=40)
 
 
+# Make config a singleton object
+# ------------------------------
 config = OrcaConfig()
 del OrcaConfig
 
 
+# Orca status class
+# ------------------------
 class OrcaStatus(object):
     """
     Class to store information about the current status of the orca server.
-
-    This class is intended to be updated only by the _orca module, and
-    viewed by the user
     """
     _props = {
         'state': 'unvalidated', # or 'validated' or 'running'
@@ -237,29 +493,33 @@ class OrcaStatus(object):
 
         One of:
           - unvalidated: The orca executable has not yet been searched for or
-            tested for validity
-          - verified: The orca executable has been located and tested for
-            validity, but is not running
-          - running: The orca server process is currently running
-
+            tested to make sure its valid.
+          - validated: The orca executable has been located and tested for
+            validity, but it is not running.
+          - running: The orca server process is currently running.
         """
         return self._props['state']
 
     @property
     def executable(self):
         """
-        If the `state` is 'validated' or 'running', this property contains the
-        full path to the orca executable.  This path can be specified
-        explicitly by setting the `executable` property of the
-        `plotly.io.orca.config` object.
+        If the `state` property is 'validated' or 'running', this property
+        contains the full path to the orca executable.
+
+        This path can be specified explicitly by setting the `executable`
+        property of the `plotly.io.orca.config` object.
+
+        This property will be None if the `state` is 'unvalidated'.
         """
         return self._props['executable']
 
     @property
     def version(self):
         """
-        The version of the verified orca executable, if any. This property
-        will be None if the `state` is 'unvalidated'
+        If the `state` property is 'validated' or 'running', this property
+        contains the version of the validated orca executable.
+
+        This property will be None if the `state` is 'unvalidated'.
         """
         return self._props['version']
 
@@ -268,7 +528,7 @@ class OrcaStatus(object):
     def pid(self):
         """
         The process id of the orca server process, if any. This property
-        will be None if the `state` is not 'running'
+        will be None if the `state` is not 'running'.
         """
         return self._props['pid']
 
@@ -277,42 +537,111 @@ class OrcaStatus(object):
     def port(self):
         """
         The port number that the orca server process is listening to, if any.
-        This property will be None if the `state` is not 'running'
+        This property will be None if the `state` is not 'running'.
+
+        This port can be specified explicitly by setting the `port`
+        property of the `plotly.io.orca.config` object.
         """
         return self._props['port']
 
     def __repr__(self):
+        """
+        Display a nice representation of the current orca server status.
+        """
         return """\
     orca status
     -----------
 """ + pformat(self._props, width=40)
 
 
+# Make config a singleton object
+# ------------------------------
 status = OrcaStatus()
 del OrcaStatus
 
 
+# Public orca server interactino functions
+# ----------------------------------------
 def validate_orca_executable():
+    """
+    Attempt to find and validate the orca executable specified by the
+    `plotly.io.orca.config.executable` property.
+
+    If the `plotly.io.orca.status.state` property is 'validated' or 'running'
+    then this function does nothing.
+
+    How it works:
+      - First, it searches the system PATH for an executable that matches the
+      name or path specified in the `plotly.io.orca.config.executable`
+      property.
+      - Then it runs the executable with the `--help` flag to make sure
+      it's the plotly orca executable
+      - Then it runs the executable with the `--version` flag to check the
+      orca version.
+
+    If all of these steps are successful then the `status.state` property
+    is set to 'validated' and the `status.executable` and `status.version`
+    properties are populated
+
+    Returns
+    -------
+    None
+    """
+    # Check state
+    # -----------
     if status.state != 'unvalidated':
         # Nothing more to do
         return
 
-    # Try to find an executable named orca
-    # ------------------------------------
+    # Initialize error messages
+    # -------------------------
+    install_location_instructions = """\
+If you haven't installed orca yet, you can do so using conda as follows:
+
+    $ conda install -c plotly plotly-orca
+
+After installation is complete, no further configuration should be needed. 
+For other approaches to installing orca, see the orca project README at
+https://github.com/plotly/orca.
+
+If you have installed orca, then for some reason plotly.py was unable to
+locate it. In this case, set the `plotly.io.orca.config.executable`
+property to the full path to your orca executable. For example:
+
+    >>> plotly.io.orca.config.executable = '/path/to/orca'
+
+After updating this executable property, try the export operation again.
+If it is successful then you may want to save this configuration so that it
+will be applied automatically in future sessions. You can do this as follows:
+
+    >>> plotly.io.orca.config.save() 
+
+If you're still having trouble, feel free to ask for help on the forums at
+https://community.plot.ly/c/api/python"""
+
+    # Try to find an executable
+    # -------------------------
+    # Search for executable name or path in config.executable
     executable = which(config.executable)
     if executable is None:
-        raise ValueError("""
-The orca executable could not be found on the system path.
+        raise ValueError("""\
+The orca executable is required in order to export figures as static images,
+but it could not be found on the system path.
 
-If you havne't installed orca...
-
-If you have already installed orca, make sure the orca executable is on your
-system path. Or specify the orca path explicitly in the executable property
-of the plotly.io.orca.config configuration object.""")
+{instructions}""".format(
+            instructions=install_location_instructions))
 
     # Run executable with --help and see if it's our orca
     # ---------------------------------------------------
-    invalid_executable_msg = "Invalid orca executable at..."
+    invalid_executable_msg = """\
+The orca executable is required in order to export figures as static images,
+but the executable that was found at '{executable}' does not seem to be a
+valid plotly orca executable. 
+
+{instructions}""".format(
+        executable=executable,
+        instructions=install_location_instructions)
+
     try:
         help_result = subprocess.check_output([executable, '--help'])
     except subprocess.CalledProcessError:
@@ -329,10 +658,21 @@ of the plotly.io.orca.config configuration object.""")
     try:
         orca_version = subprocess.check_output([executable, '--version'])
     except subprocess.CalledProcessError:
-        raise ValueError("version failed")
+        raise ValueError("""\
+An error occurred while trying to get the version of the orca executable.
+Here is the command that plotly.py ran to request the version:
+
+    $ {executable} --version
+""")
 
     if not orca_version:
-        raise ValueError("No version reported")
+        raise ValueError("""\
+No version was reported by the orca executable.      
+
+Here is the command that plotly.py ran to request the version:
+
+    $ {executable} --version  
+""")
     else:
         orca_version = orca_version.decode()
 
@@ -343,81 +683,136 @@ of the plotly.io.orca.config configuration object.""")
 
 
 def reset_orca_status():
+    """
+    Shutdown the running orca server, if any, and reset the orca status
+    to unvalidated.
+
+    This command is only needed if the desired orca executable is changed
+    during an interactive session.
+
+    Returns
+    -------
+    None
+    """
     shutdown_orca_server()
     status._props['executable'] = None
     status._props['version'] = None
     status._props['state'] = 'unvalidated'
 
 
-# Initialze process control
+# Initialze process control variables
+# -----------------------------------
 __orca_lock = threading.Lock()
 __orca_state = {'proc': None,
                 'shutdown_timer': None}
 
+
+# Shutdown
+# --------
+# The @atexit.register annotation ensures that the shutdown function is
+# is run when the Python process is terminated
 @atexit.register
 def shutdown_orca_server():
+    """
+    Shutdown the running orca server process, if any
+
+    Returns
+    -------
+    None
+    """
+
+    # Use double-check locking to make sure the properties of __orca_state
+    # are updated consistently across threads.
     if __orca_state['proc'] is not None:
         with __orca_lock:
             if __orca_state['proc'] is not None:
-                try:
-                    if os.name == 'nt':
-                        __orca_state['proc'].send_signal(
-                            signal.CTRL_BREAK_EVENT)  # Windows
-                    else:
-                        __orca_state['proc'].terminate()  # Unix
+                # Perform OS specific process termination
+                if os.name == 'nt':
+                    __orca_state['proc'].send_signal(
+                        signal.CTRL_BREAK_EVENT)  # Windows
+                else:
+                    __orca_state['proc'].terminate()  # Unix
 
-                    child_status = __orca_state['proc'].wait()
+                # Wait for the process to shutdown
+                child_status = __orca_state['proc'].wait()
 
-                    __orca_state['proc'] = None
-                    __orca_state['shutdown_timer'].cancel()
-                    __orca_state['shutdown_timer'] = None
-                    __orca_state['port'] = None
+                # Update our internal process management state
+                __orca_state['proc'] = None
+                __orca_state['shutdown_timer'].cancel()
+                __orca_state['shutdown_timer'] = None
+                __orca_state['port'] = None
 
-                    # Update status
-                    status._props['state'] = 'validated'
-                    status._props['pid'] = None
-                    status._props['port'] = None
-                except:
-                    pass
+                # Update orca.status so the user has an accurate view
+                # of the state of the orca server
+                status._props['state'] = 'validated'
+                status._props['pid'] = None
+                status._props['port'] = None
 
 
 # Launch or get server
 def ensure_orca_server():
+    """
+    Start an orca server if none is running. If a server is already running,
+    then reset the timeout countdown
+
+    Returns
+    -------
+    None
+    """
+
+    # Validate orca executable
     if status.state == 'unvalidated':
         validate_orca_executable()
 
+    # Acquire lock to make sure that we keep the properties of __orca_state
+    # consistent across threads
     with __orca_lock:
+
+        # Cancel the current shutdown timer, if any
         if __orca_state['shutdown_timer'] is not None:
             __orca_state['shutdown_timer'].cancel()
 
+        # Start a new server process if none is active
         if __orca_state['proc'] is None:
+
+            # Determine server port
             if config.port is None:
-                __orca_state['port'] = str(_find_open_port())
+                __orca_state['port'] = _find_open_port()
             else:
                 __orca_state['port'] = config.port
 
+            # Build os-specific process creation flags
             if os.name == 'nt':
                 creationflags = subprocess.CREATE_NEW_PROCESS_GROUP
             else:
                 creationflags = 0
 
+            # Create subprocess that launches the orca server on the
+            # specified port.
             __orca_state['proc'] = subprocess.Popen(
-                [config.executable, 'serve', '-p', __orca_state['port'],
+                [config.executable, 'serve', '-p', str(__orca_state['port']),
                  '--graph-only'],
                 creationflags=creationflags)
 
-            # Update status
+            # Update orca.status so the user has an accurate view
+            # of the state of the orca server
             status._props['state'] = 'running'
             status._props['pid'] = __orca_state['proc'].pid
             status._props['port'] = __orca_state['port']
 
-        t = threading.Timer(config.timeout, shutdown_orca_server)
-        t.start()
-        __orca_state['shutdown_timer'] = t
+        # Create new shutdown timer if a timeout was specified
+        if config.timeout is not None:
+            t = threading.Timer(config.timeout, shutdown_orca_server)
+            t.start()
+            __orca_state['shutdown_timer'] = t
 
 
 @retrying.retry(wait_random_min=5, wait_random_max=10, stop_max_delay=10000)
 def _request_image_with_retrying(**kwargs):
+    """
+    Helper method to perform an image request to a running orca server process
+    with retrying logic.
+    """
     server_url = 'http://{hostname}:{port}'.format(
         hostname='localhost', port=__orca_state['port'])
 
@@ -427,9 +822,52 @@ def _request_image_with_retrying(**kwargs):
     return r.content
 
 
-def to_image(fig, format=None, scale=None, width=None, height=None):
+def to_image(fig, format=None, width=None, height=None, scale=None, ):
     """
-    Convert a figure to an image bytes string
+    Convert a figure to a static image bytes string
+
+    Parameters
+    ----------
+    fig:
+        Figure object or dict representing a figure
+
+    format: str or None
+        The desired image format. One of
+          - 'png'
+          - 'jpg' or 'jpeg'
+          - 'webp'
+          - 'svg'
+          - 'pdf'
+          - 'eps' (Requires the poppler library to be installed)
+
+        If not specified, will default to `plotly.io.config.default_format`
+
+    width: int or None
+        The width of the exported image in layout pixels. If the `scale`
+        property is 1.0, this will also be the width of the exported image
+        in physical pixels.
+
+        If not specified, will default to `plotly.io.config.default_width`
+
+    height: int or None
+        The height of the exported image in layout pixels. If the `scale`
+        property is 1.0, this will also be the height of the exported image
+        in physical pixels.
+
+        If not specified, will default to `plotly.io.config.default_height`
+
+    scale: int or float or None
+        The scale factor to use when exporting the figure. A scale factor
+        larger than 1.0 will increase the image resolution with respect
+        to the figure's layout pixel dimensions. Whereas as scale factor of
+        less than 1.0 will decrease the image resolution.
+
+        If not specified, will default to `plotly.io.config.default_scale`
+
+    Returns
+    -------
+    bytes
+        The image data
     """
     # Make sure orca sever is running
     # -------------------------------
@@ -462,8 +900,54 @@ def to_image(fig, format=None, scale=None, width=None, height=None):
 
 def write_image(fig, file, format=None, scale=None, width=None, height=None):
     """
-    Write image to a local file or writable object
-    """
+    Convert a figure to a static image and write it to a file or writeable
+    object
+
+    Parameters
+    ----------
+    fig:
+        Figure object or dict representing a figure
+
+    file: str or writeable
+        A string representing a local file path or a writeable object
+        (e.g. an open file descriptor)
+
+    format: str or None
+        The desired image format. One of
+          - 'png'
+          - 'jpg' or 'jpeg'
+          - 'webp'
+          - 'svg'
+          - 'pdf'
+          - 'eps' (Requires the poppler library to be installed)
+
+        If not specified, will default to `plotly.io.config.default_format`
+
+    width: int or None
+        The width of the exported image in layout pixels. If the `scale`
+        property is 1.0, this will also be the width of the exported image
+        in physical pixels.
+
+        If not specified, will default to `plotly.io.config.default_width`
+
+    height: int or None
+        The height of the exported image in layout pixels. If the `scale`
+        property is 1.0, this will also be the height of the exported image
+        in physical pixels.
+
+        If not specified, will default to `plotly.io.config.default_height`
+
+    scale: int or float or None
+        The scale factor to use when exporting the figure. A scale factor
+        larger than 1.0 will increase the image resolution with respect
+        to the figure's layout pixel dimensions. Whereas as scale factor of
+        less than 1.0 will decrease the image resolution.
+
+        If not specified, will default to `plotly.io.config.default_scale`
+
+    Returns
+    -------
+    None"""
 
     # Check if file is a string
     # -------------------------
