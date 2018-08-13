@@ -1,7 +1,7 @@
 version: 2
 
 jobs:
-  "python-2.7":
+  "python-2.7-core":
     docker:
       - image: circleci/python:2.7-stretch-node-browsers
         environment:
@@ -16,7 +16,22 @@ jobs:
           name: Test with tox
           command: 'tox -e py27-core'
 
-  "python-3.5":
+  "python-2.7-plot_ly":
+    docker:
+      - image: circleci/python:2.7-stretch-node-browsers
+        environment:
+          PLOTLY_TOX_PYTHON_27: python2.7
+
+    steps:
+      - checkout
+      - run:
+          name: Install tox
+          command: 'sudo pip install tox'
+      - run:
+          name: Test with tox
+          command: 'tox -e py27-plot_ly'
+
+  "python-3.5-optional":
     docker:
       - image: circleci/python:3.5-stretch-node-browsers
         environment:
@@ -29,11 +44,12 @@ jobs:
           command: 'sudo pip install tox'
       - run:
           name: Test with tox
-          command: 'tox -e py35-core'
+          command: 'tox -e py35-optional'
 
 workflows:
   version: 2
   build:
     jobs:
-      - "python-2.7"
-      - "python-3.5"
+      - "python-2.7-core"
+      - "python-3.5-optional"
+      - "python-2.7-plot_ly"
