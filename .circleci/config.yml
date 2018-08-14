@@ -142,7 +142,7 @@ jobs:
           name: Test with tox
           command: 'tox -e py36-optional'
 
-  python-3.7-optional":
+  "python-3.7-optional":
     docker:
       - image: circleci/python:3.7-stretch-node-browsers
         environment:
