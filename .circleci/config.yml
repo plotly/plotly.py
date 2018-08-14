@@ -42,7 +42,7 @@ jobs:
       - run:
           name: Install tox
           command: 'sudo pip install tox'
-      - run: cd plotly/tests/test_optional/test_jupyter && npm -i
+      - run: cd plotly/tests/test_optional/test_jupyter && npm install
       - run:
           name: Test with tox
           command: 'tox -e py35-optional'
