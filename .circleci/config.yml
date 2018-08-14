@@ -97,7 +97,7 @@ jobs:
   "python-3.4-optional":
     docker:
       - image: circleci/python:3.4-stretch-node-browsers
-        environment4
+        environment:
           PLOTLY_TOX_PYTHON_34: python3.4
 
     steps:
