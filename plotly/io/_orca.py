@@ -8,14 +8,15 @@ import socket
 import json
 import os
 import threading
-import signal
 import retrying
 import atexit
 
 import plotly
 from plotly.files import PLOTLY_DIR
 from six import string_types
+from plotly.optional_imports import get_module
 
+psutil = get_module('psutil')
 
 # Valid image format constants
 # ----------------------------
@@ -726,20 +727,28 @@ def shutdown_orca_server():
     if __orca_state['proc'] is not None:
         with __orca_lock:
             if __orca_state['proc'] is not None:
-                # Perform OS specific process termination
-                if os.name == 'nt':
-                    __orca_state['proc'].send_signal(
-                        signal.CTRL_BREAK_EVENT)  # Windows
-                else:
-                    __orca_state['proc'].terminate()  # Unix
+
+                # We use psutil to kill all child processes of the main orca
+                # process. This prevents any zombie processes from being
+                # left over, and it saves us from needing to write
+                # OS-specific process management code here.
+                parent = psutil.Process(__orca_state['proc'].pid)
+                for child in parent.children(
+                        recursive=True):
+                    child.terminate()
+
+                __orca_state['proc'].terminate()  # Unix
 
                 # Wait for the process to shutdown
                 child_status = __orca_state['proc'].wait()
 
                 # Update our internal process management state
                 __orca_state['proc'] = None
-                __orca_state['shutdown_timer'].cancel()
-                __orca_state['shutdown_timer'] = None
+
+                if __orca_state['shutdown_timer'] is not None:
+                    __orca_state['shutdown_timer'].cancel()
+                    __orca_state['shutdown_timer'] = None
+
                 __orca_state['port'] = None
 
                 # Update orca.status so the user has an accurate view
@@ -759,6 +768,18 @@ def ensure_orca_server():
     -------
     None
     """
+
+    # Validate psutil
+    if psutil is None:
+        raise ValueError("""\
+Image generation requires the psutil package.
+
+Install using pip:
+    $ pip install psutil
+    
+Install using conda:
+    $ pip install psutil
+""")
 
     # Validate orca executable
     if status.state == 'unvalidated':
@@ -781,18 +802,11 @@ def ensure_orca_server():
             else:
                 __orca_state['port'] = config.port
 
-            # Build os-specific process creation flags
-            if os.name == 'nt':
-                creationflags = subprocess.CREATE_NEW_PROCESS_GROUP
-            else:
-                creationflags = 0
-
             # Create subprocess that launches the orca server on the
             # specified port.
             __orca_state['proc'] = subprocess.Popen(
                 [config.executable, 'serve', '-p', str(__orca_state['port']),
-                 '--graph-only'],
-                creationflags=creationflags)
+                 '--graph-only'])
 
             # Update orca.status so the user has an accurate view
             # of the state of the orca server
