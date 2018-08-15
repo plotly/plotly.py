@@ -217,7 +217,8 @@ workflows:
       - "python-3.4-optional"
       - "python-3.5-optional"
       - "python-3.6-optional"
-      - "python-3.7-optional"
+      # 3.7 optional disabled due to current shapely incompatibility
+      # - "python-3.7-optional"
       - "python-2.7-plot_ly"
       - "python-3.4-plot_ly"
       - "python-3.7-plot_ly"
