@@ -739,6 +739,8 @@ def shutdown_orca_server():
 
                 __orca_state['proc'].terminate()  # Unix
 
+                output, err = __orca_state['proc'].communicate()
+
                 # Wait for the process to shutdown
                 child_status = __orca_state['proc'].wait()
 
@@ -806,7 +808,7 @@ Install using conda:
             # specified port.
             __orca_state['proc'] = subprocess.Popen(
                 [config.executable, 'serve', '-p', str(__orca_state['port']),
-                 '--graph-only'])
+                 '--graph-only'], stdout=subprocess.PIPE)
 
             # Update orca.status so the user has an accurate view
             # of the state of the orca server
