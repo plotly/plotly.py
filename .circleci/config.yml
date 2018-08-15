@@ -10,20 +10,12 @@ jobs:
 
     steps:
       - checkout
-      - restore_cache:
-            keys:
-              - tox-v1-{{ checksum "tox.ini" }}
-              - tox-v1-
       - run:
           name: Install tox
           command: 'sudo pip install tox'
       - run:
           name: Test with tox
           command: 'tox -e py27-core'
-      - save_cache:
-          key: tox-v1-{{ checksum "tox.ini" }}
-          paths:
-            - .tox
 
   "python-3.4-core":
     docker:
@@ -217,16 +209,16 @@ workflows:
   build:
     jobs:
       - "python-2.7-core"
-#      - "python-3.4-core"
-#      - "python-3.5-core"
-#      - "python-3.6-core"
-#      - "python-3.7-core"
-#      - "python-2.7-optional"
-#      - "python-3.4-optional"
-#      - "python-3.5-optional"
-#      - "python-3.6-optional"
-#      # 3.7 optional disabled due to current shapely incompatibility
-#      # - "python-3.7-optional"
-#      - "python-2.7-plot_ly"
-#      - "python-3.4-plot_ly"
-#      - "python-3.7-plot_ly"
+      - "python-3.4-core"
+      - "python-3.5-core"
+      - "python-3.6-core"
+      - "python-3.7-core"
+      - "python-2.7-optional"
+      - "python-3.4-optional"
+      - "python-3.5-optional"
+      - "python-3.6-optional"
+      # 3.7 optional disabled due to current shapely incompatibility
+      # - "python-3.7-optional"
+      - "python-2.7-plot_ly"
+      - "python-3.4-plot_ly"
+      - "python-3.7-plot_ly"
