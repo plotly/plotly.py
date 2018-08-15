@@ -12,8 +12,8 @@ jobs:
       - checkout
       - restore_cache:
             keys:
-              - py27-core-v1-{{ checksum "tox.ini" }}
-              - py27-core-v1-
+              - tox-v1-{{ checksum "tox.ini" }}
+              - tox-v1-
       - run:
           name: Install tox
           command: 'sudo pip install tox'
@@ -21,7 +21,7 @@ jobs:
           name: Test with tox
           command: 'tox -e py27-core'
       - save_cache:
-          key: py27-core-v1-{{ checksum "tox.ini" }}
+          key: tox-v1-{{ checksum "tox.ini" }}
           paths:
             - .tox
 
@@ -142,10 +142,6 @@ jobs:
 
     steps:
       - checkout
-      - restore_cache:
-            keys:
-              - py36-optional-v1-{{ checksum "tox.ini" }}
-              - py36-optional-v1-
       - run:
           name: Install tox
           command: 'sudo pip install tox'
@@ -153,10 +149,6 @@ jobs:
       - run:
           name: Test with tox
           command: 'tox -e py36-optional'
-      - save_cache:
-          key: py36-optional-v1-{{ checksum "tox.ini" }}
-          paths:
-            - .tox
 
   "python-3.7-optional":
     docker:
@@ -232,7 +224,7 @@ workflows:
 #      - "python-2.7-optional"
 #      - "python-3.4-optional"
 #      - "python-3.5-optional"
-      - "python-3.6-optional"
+#      - "python-3.6-optional"
 #      # 3.7 optional disabled due to current shapely incompatibility
 #      # - "python-3.7-optional"
 #      - "python-2.7-plot_ly"
