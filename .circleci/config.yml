@@ -16,6 +16,7 @@ jobs:
       - run:
           name: Test with tox
           command: 'tox -e py27-core'
+          no_output_timeout: 20m
 
   "python-3.4-core":
     docker:
@@ -31,6 +32,7 @@ jobs:
       - run:
           name: Test with tox
           command: 'tox -e py34-core'
+          no_output_timeout: 20m
 
   "python-3.5-core":
     docker:
@@ -46,6 +48,7 @@ jobs:
       - run:
           name: Test with tox
           command: 'tox -e py35-core'
+          no_output_timeout: 20m
 
   "python-3.6-core":
     docker:
@@ -61,6 +64,7 @@ jobs:
       - run:
           name: Test with tox
           command: 'tox -e py36-core'
+          no_output_timeout: 20m
 
   "python-3.7-core":
     docker:
@@ -76,6 +80,7 @@ jobs:
       - run:
           name: Test with tox
           command: 'tox -e py37-core'
+          no_output_timeout: 20m
 
   # Optional
   "python-2.7-optional":
@@ -89,10 +94,14 @@ jobs:
       - run:
           name: Install tox
           command: 'sudo pip install tox'
-      - run: cd plotly/tests/test_optional/test_jupyter && npm install
+      - run:
+          name: Install npm dependencies
+          command: cd plotly/tests/test_optional/test_jupyter && npm install
+          no_output_timeout: 20m
       - run:
           name: Test with tox
           command: 'tox -e py27-optional'
+          no_output_timeout: 20m
 
   "python-3.4-optional":
     docker:
@@ -105,10 +114,14 @@ jobs:
       - run:
           name: Install tox
           command: 'sudo pip install tox'
-      - run: cd plotly/tests/test_optional/test_jupyter && npm install
+      - run:
+          name: Install npm dependencies
+          command: cd plotly/tests/test_optional/test_jupyter && npm install
+          no_output_timeout: 20m
       - run:
           name: Test with tox
           command: 'tox -e py34-optional'
+          no_output_timeout: 20m
 
   "python-3.5-optional":
     docker:
@@ -121,10 +134,14 @@ jobs:
       - run:
           name: Install tox
           command: 'sudo pip install tox'
-      - run: cd plotly/tests/test_optional/test_jupyter && npm install
+      - run:
+          name: Install npm dependencies
+          command: cd plotly/tests/test_optional/test_jupyter && npm install
+          no_output_timeout: 20m
       - run:
           name: Test with tox
           command: 'tox -e py35-optional'
+          no_output_timeout: 20m
 
   "python-3.6-optional":
     docker:
@@ -137,10 +154,14 @@ jobs:
       - run:
           name: Install tox
           command: 'sudo pip install tox'
-      - run: cd plotly/tests/test_optional/test_jupyter && npm install
+      - run:
+          name: Install npm dependencies
+          command: cd plotly/tests/test_optional/test_jupyter && npm install
+          no_output_timeout: 20m
       - run:
           name: Test with tox
           command: 'tox -e py36-optional'
+          no_output_timeout: 20m
 
   "python-3.7-optional":
     docker:
@@ -153,10 +174,14 @@ jobs:
       - run:
           name: Install tox
           command: 'sudo pip install tox'
-      - run: cd plotly/tests/test_optional/test_jupyter && npm install
+      - run:
+          name: Install npm dependencies
+          command: cd plotly/tests/test_optional/test_jupyter && npm install
+          no_output_timeout: 20m
       - run:
           name: Test with tox
           command: 'tox -e py37-optional'
+          no_output_timeout: 20m
 
   # Plot.ly
   "python-2.7-plot_ly":
@@ -173,6 +198,7 @@ jobs:
       - run:
           name: Test with tox
           command: 'tox -e py27-plot_ly'
+          no_output_timeout: 20m
 
   "python-3.4-plot_ly":
     docker:
@@ -188,6 +214,7 @@ jobs:
       - run:
           name: Test with tox
           command: 'tox -e py34-plot_ly'
+          no_output_timeout: 20m
 
   "python-3.7-plot_ly":
     docker:
@@ -203,6 +230,7 @@ jobs:
       - run:
           name: Test with tox
           command: 'tox -e py37-plot_ly'
+          no_output_timeout: 20m
 
 workflows:
   version: 2
