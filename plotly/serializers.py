@@ -39,7 +39,7 @@ def _py_to_js(v, widget_manager):
         # Convert 1D numpy arrays with numeric types to memoryviews with
         # datatype and shape metadata.
         if v.ndim == 1 and v.dtype.kind in ['u', 'i', 'f']:
-            return {'buffer': memoryview(v),
+            return {'value': memoryview(v),
                     'dtype': str(v.dtype),
                     'shape': v.shape}
         else:

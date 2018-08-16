@@ -1411,13 +1411,45 @@ var numpy_dtype_to_typedarray_type = {
     float64: Float64Array
 };
 
+function serializeTypedArray(v) {
+    var numpyType;
+    if (v instanceof Int8Array) {
+        numpyType = 'int8';
+    } else if (v instanceof Int16Array) {
+        numpyType = 'int16';
+    } else if (v instanceof Int32Array) {
+        numpyType = 'int32';
+    } else if (v instanceof Uint8Array) {
+        numpyType = 'uint8';
+    } else if (v instanceof Uint16Array) {
+        numpyType = 'uint16';
+    } else if (v instanceof Uint32Array) {
+        numpyType = 'uint32';
+    } else if (v instanceof Float32Array) {
+        numpyType = 'float32';
+    } else if (v instanceof Float64Array) {
+        numpyType = 'float64';
+    } else {
+        // Don't understand it, return as is
+        return v;
+    }
+    var res = {
+        dtype: numpyType,
+        shape: [v.length],
+        value: v.buffer
+    };
+    return res
+}
+
 /**
  * ipywidget JavaScript -> Python serializer
  */
 function js2py_serializer(v, widgetManager) {
     var res;
 
-    if (Array.isArray(v)) {
+    if (_.isTypedArray(v)) {
+        res = serializeTypedArray(v);
+    } else if (Array.isArray(v)) {
         // Serialize array elements recursively
         res = new Array(v.length);
         for (var i = 0; i < v.length; i++) {
@@ -1456,11 +1488,11 @@ function py2js_deserializer(v, widgetManager) {
             res[i] = py2js_deserializer(v[i]);
         }
     } else if (_.isPlainObject(v)) {
-        if (_.has(v, "buffer") && _.has(v, "dtype") && _.has(v, "shape")) {
+        if (_.has(v, "value") && _.has(v, "dtype") && _.has(v, "shape")) {
             // Deserialize special buffer/dtype/shape objects into typed arrays
             // These objects correspond to numpy arrays on the Python side
             var typedarray_type = numpy_dtype_to_typedarray_type[v.dtype];
-            res = new typedarray_type(v.buffer.buffer);
+            res = new typedarray_type(v.value.buffer);
         } else {
             // Deserialize object properties recursively
             res = {};
