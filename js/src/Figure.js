@@ -743,7 +743,6 @@ var FigureView = widgets.DOMWidgetView.extend({
 
         Plotly.newPlot(that.el, initialTraces, initialLayout).then(
             function () {
-                // Plotly.Plots.resize(that.el);
 
                 // ### Send trace deltas ###
                 // We create an array of deltas corresponding to the new
@@ -796,20 +795,44 @@ var FigureView = widgets.DOMWidgetView.extend({
         FigureView.__super__.processPhosphorMessage.apply(this, arguments);
         var that = this;
         switch (msg.type) {
+            case 'before-attach':
+                // Render an initial empty figure. This establishes with
+                // the page that the element will not be empty, avoiding
+                // some occasions where the dynamic sizing behavior leads
+                // to collapsed figure dimensions.
+                var axisHidden = {
+                    showgrid: false, showline: false, tickvals: []};
+
+                Plotly.newPlot(that.el, [], {
+                    xaxis: axisHidden, yaxis: axisHidden
+                });
+
+                window.addEventListener("resize", function(){
+                    that.autosizeFigure();
+                });
+                break;
             case 'after-attach':
+                // Rendering actual figure in the after-attach event allows
+                // Plotly.js to size the figure to fill the available element
                 this.perform_render();
+                console.log([that.el._fullLayout.height, that.el._fullLayout.width]);
                 break;
             case 'resize':
-                var layout = this.model.get('_layout');
-                if (_.isNil(layout) ||
-                    (_.isNil(layout.width) && _.isNil(layout.height))) {
-                    Plotly.Plots.resize(this.el).then(function(){
-                        var layout_edit_id = that.model.get(
-                            "_last_layout_edit_id");
-                        that._sendLayoutDelta(layout_edit_id);
-                    });
-                }
+                this.autosizeFigure();
                 break
+        }
+    },
+
+    autosizeFigure: function() {
+        var that = this;
+        var layout = that.model.get('_layout');
+        if (_.isNil(layout) ||
+            _.isNil(layout.width)) {
+            Plotly.Plots.resize(that.el).then(function(){
+                var layout_edit_id = that.model.get(
+                    "_last_layout_edit_id");
+                that._sendLayoutDelta(layout_edit_id);
+            });
         }
     },
 
@@ -1491,6 +1514,7 @@ function py2js_deserializer(v, widgetManager) {
         if (_.has(v, "value") && _.has(v, "dtype") && _.has(v, "shape")) {
             // Deserialize special buffer/dtype/shape objects into typed arrays
             // These objects correspond to numpy arrays on the Python side
+
             var typedarray_type = numpy_dtype_to_typedarray_type[v.dtype];
             res = new typedarray_type(v.value.buffer);
         } else {
