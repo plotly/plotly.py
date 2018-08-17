@@ -21,7 +21,7 @@ def validator_aok():
 @pytest.mark.parametrize('val', [
     set(), 'Hello', 123, np.inf, np.nan, {}
 ])
-def test_acceptance(val, validator: AnyValidator):
+def test_acceptance(val, validator):
     assert validator.validate_coerce(val) is val
 
 
@@ -36,7 +36,7 @@ def test_acceptance(val, validator: AnyValidator):
     ['Hello', 'World'],
     [np.pi, np.e, {}]
 ])
-def test_acceptance_array(val, validator_aok: AnyValidator):
+def test_acceptance_array(val, validator_aok):
     coerce_val = validator_aok.validate_coerce(val)
     if isinstance(val, np.ndarray):
         assert isinstance(coerce_val, np.ndarray)

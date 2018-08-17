@@ -1,4 +1,5 @@
 import pytest
+#from ..basevalidators import AngleValidator
 from _plotly_utils.basevalidators import AngleValidator
 import numpy as np
 
@@ -33,7 +34,7 @@ def test_coercion(val, expected, validator):
 # ### Test rejection ###
 @pytest.mark.parametrize('val',
                          ['hello', (), [], [1, 2, 3], set(), '34'])
-def test_rejection(val, validator: AngleValidator):
+def test_rejection(val, validator):
     with pytest.raises(ValueError) as validation_failure:
         validator.validate_coerce(val)
 

@@ -3,7 +3,7 @@ from __future__ import absolute_import
 from requests.compat import json as _json
 
 from plotly.api.v2 import grids
-from plotly.tests.test_core.test_api import PlotlyApiTestCase
+from plotly.tests.test_plot_ly.test_api import PlotlyApiTestCase
 
 
 class GridsTest(PlotlyApiTestCase):

@@ -20,12 +20,12 @@ def validator():
     'http://somewhere.com/images/image12.png',
     'data:image/png;base64,iVBORw0KGgoAAAANSU',
 ])
-def test_validator_acceptance(val, validator: ImageUriValidator):
+def test_validator_acceptance(val, validator):
     assert validator.validate_coerce(val) == val
 
 
 # ### Coercion from PIL Image ###
-def test_validator_coercion_PIL(validator: ImageUriValidator):
+def test_validator_coercion_PIL(validator):
     # Single pixel black png (http://png-pixel.com/)
 
     img_path = '_plotly_utils/tests/resources/1x1-black.png'

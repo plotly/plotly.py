@@ -14,7 +14,7 @@ def validator():
 
 # Tests
 # -----
-def test_acceptance(validator: CompoundValidator):
+def test_acceptance(validator):
     val = Marker(color='green', size=10)
     res = validator.validate_coerce(val)
 
@@ -23,7 +23,7 @@ def test_acceptance(validator: CompoundValidator):
     assert res.size == 10
 
 
-def test_acceptance_none(validator: CompoundValidator):
+def test_acceptance_none(validator):
     val = None
     res = validator.validate_coerce(val)
 
@@ -32,7 +32,7 @@ def test_acceptance_none(validator: CompoundValidator):
     assert res.size is None
 
 
-def test_acceptance_dict(validator: CompoundValidator):
+def test_acceptance_dict(validator):
     val = dict(color='green', size=10)
     res = validator.validate_coerce(val)
 
@@ -41,7 +41,7 @@ def test_acceptance_dict(validator: CompoundValidator):
     assert res.size == 10
 
 
-def test_rejection_type(validator: CompoundValidator):
+def test_rejection_type(validator):
     val = 37
 
     with pytest.raises(ValueError) as validation_failure:
@@ -50,7 +50,7 @@ def test_rejection_type(validator: CompoundValidator):
     assert "Invalid value" in str(validation_failure.value)
 
 
-def test_rejection_value(validator: CompoundValidator):
+def test_rejection_value(validator):
     val = dict(color='green', size=10, bogus=99)
 
     with pytest.raises(ValueError) as validation_failure:

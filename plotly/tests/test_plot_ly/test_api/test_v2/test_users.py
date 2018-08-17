@@ -1,13 +1,13 @@
 from __future__ import absolute_import
 
-from plotly.api.v2 import plot_schema
-from plotly.tests.test_core.test_api import PlotlyApiTestCase
+from plotly.api.v2 import users
+from plotly.tests.test_plot_ly.test_api import PlotlyApiTestCase
 
 
-class PlotSchemaTest(PlotlyApiTestCase):
+class UsersTest(PlotlyApiTestCase):
 
     def setUp(self):
-        super(PlotSchemaTest, self).setUp()
+        super(UsersTest, self).setUp()
 
         # Mock the actual api call, we don't want to do network tests here.
         self.request_mock = self.mock('plotly.api.v2.utils.requests.request')
@@ -16,15 +16,13 @@ class PlotSchemaTest(PlotlyApiTestCase):
         # Mock the validation function since we can test that elsewhere.
         self.mock('plotly.api.v2.utils.validate_response')
 
-    def test_retrieve(self):
-
-        plot_schema.retrieve('some-hash', timeout=400)
+    def test_current(self):
+        users.current()
         assert self.request_mock.call_count == 1
         args, kwargs = self.request_mock.call_args
         method, url = args
         self.assertEqual(method, 'get')
         self.assertEqual(
-            url, '{}/v2/plot-schema'.format(self.plotly_api_domain)
+            url, '{}/v2/users/current'.format(self.plotly_api_domain)
         )
-        self.assertTrue(kwargs['timeout'])
-        self.assertEqual(kwargs['params'], {'sha1': 'some-hash'})
+        self.assertNotIn('params', kwargs)
