@@ -788,7 +788,11 @@ var FigureView = widgets.DOMWidgetView.extend({
 
                 // Emit event indicating that the widget has finished
                 // rendering
-                that.el.emit('plotlywidget-after-render');
+                var event = new CustomEvent("plotlywidget-after-render",
+                    { "detail": {"element": that.el, 'viewID': that.viewID}});
+
+                // Dispatch/Trigger/Fire the event
+                document.dispatchEvent(event);
             });
     },
 
