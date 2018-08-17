@@ -37,6 +37,8 @@ def _sparkline_tidy(df, fig, chart_types, num_of_chart_types, trace_colors_2d,
                     column_width, alternate_row_color, row_colors, xanchor,
                     line_width, align_x, scatter_options, new_marker_color,
                     narrow_idxs, show_titles, row, column, x):
+    shapes = []
+    annotations = []
     # create and insert charts
     c_idx = 0
     trace_c_idx = 0
@@ -62,7 +64,7 @@ def _sparkline_tidy(df, fig, chart_types, num_of_chart_types, trace_colors_2d,
                         text = rkey
                     else:
                         text = 'nan'
-                    fig['layout']['annotations'].append(
+                    annotations.append(
                         dict(
                             xref='x{}'.format(j * num_of_chart_types + c + 1),
                             yref='y{}'.format(j * num_of_chart_types + c + 1),
@@ -89,7 +91,8 @@ def _sparkline_tidy(df, fig, chart_types, num_of_chart_types, trace_colors_2d,
                             r_color
                         )
                     )
-                    fig['layout']['shapes'].append(bkg)
+                    # fig['layout']['shapes'].append(bkg)
+                    shapes.append(bkg)
                 fig.append_trace(empty_data, j + 1, c + 1)
             else:
                 mean = np.mean(data)
@@ -99,7 +102,7 @@ def _sparkline_tidy(df, fig, chart_types, num_of_chart_types, trace_colors_2d,
                         text = rkey
                     else:
                         text = '{}'.format(rounded_mean)
-                    fig['layout']['annotations'].append(
+                    annotations.append(
                         dict(
                             xref='x{}'.format(j * num_of_chart_types + c + 1),
                             yref='y{}'.format(j * num_of_chart_types + c + 1),
@@ -126,7 +129,8 @@ def _sparkline_tidy(df, fig, chart_types, num_of_chart_types, trace_colors_2d,
                                 r_color
                             )
                         )
-                        fig['layout']['shapes'].append(bkg)
+                        # fig['layout']['shapes'].append(bkg)
+                        shapes.append(bkg)
                     fig.append_trace(empty_data, j + 1, c + 1)
 
                 elif chart == 'bullet':
@@ -172,7 +176,8 @@ def _sparkline_tidy(df, fig, chart_types, num_of_chart_types, trace_colors_2d,
                                 r_color
                             )
                         )
-                        fig['layout']['shapes'].append(bkg)
+                        # fig['layout']['shapes'].append(bkg)
+                        shapes.append(bkg)
                     fig.append_trace(bullet_range, j + 1, c + 1)
                     fig.append_trace(bullet_measure, j + 1, c + 1)
                     fig.append_trace(bullet_pt, j + 1, c + 1)
@@ -239,7 +244,8 @@ def _sparkline_tidy(df, fig, chart_types, num_of_chart_types, trace_colors_2d,
                                 r_color
                             )
                         )
-                        fig['layout']['shapes'].append(bkg)
+                        # fig['layout']['shapes'].append(bkg)
+                        shapes.append(bkg)
                     fig.append_trace(trace_line, j + 1, c + 1)
                     fig.append_trace(trace_line_pt, j + 1, c + 1)
                     fig.append_trace(pt_hidden, j + 1, c + 1)
@@ -283,7 +289,8 @@ def _sparkline_tidy(df, fig, chart_types, num_of_chart_types, trace_colors_2d,
                                 r_color
                             )
                         )
-                        fig['layout']['shapes'].append(bkg)
+                        # fig['layout']['shapes'].append(bkg)
+                        shapes.append(bkg)
                     fig.append_trace(trace_bar, j + 1, c + 1)
 
                     fig['layout']['yaxis{}'.format(
@@ -300,7 +307,7 @@ def _sparkline_tidy(df, fig, chart_types, num_of_chart_types, trace_colors_2d,
                     ckey, c + 1, num_of_chart_types, subplot_spacing=0,
                     row_col='col', flipped=False, column_width=column_width
                 )
-                fig['layout']['annotations'].append(label)
+                annotations.append(label)
 
             for idx in narrow_idxs:
                 for axis in ['xaxis', 'yaxis']:
@@ -310,11 +317,17 @@ def _sparkline_tidy(df, fig, chart_types, num_of_chart_types, trace_colors_2d,
         c_idx += 1
         trace_c_idx += 1
 
+        # add shapes and annotations as tuples
+        fig['layout']['shapes'] = shapes
+        fig['layout']['annotations'] = annotations
+
 
 def _sparkline(df, fig, chart_types, num_of_chart_types, trace_colors_2d,
                column_width, alternate_row_color, row_colors, xanchor,
                line_width, align_x, scatter_options, new_marker_color,
                narrow_idxs, show_titles):
+    shapes = []
+    annotations = []
     # create and insert charts
     c_idx = 0
     trace_c_idx = 0
@@ -337,7 +350,8 @@ def _sparkline(df, fig, chart_types, num_of_chart_types, trace_colors_2d,
                     text = key
                 else:
                     text = '{}'.format(rounded_mean)
-                fig['layout']['annotations'].append(
+                # fig['layout']['annotations'].append(
+                annotations.append(
                     dict(
                         x=align_x,
                         y=0.5,
@@ -364,7 +378,8 @@ def _sparkline(df, fig, chart_types, num_of_chart_types, trace_colors_2d,
                             r_color
                         )
                     )
-                    fig['layout']['shapes'].append(bkg)
+                    # fig['layout']['shapes'].append(bkg)
+                    shapes.append(bkg)
                 fig.append_trace(empty_data, j + 1, c + 1)
 
             elif chart == 'bullet':
@@ -410,7 +425,8 @@ def _sparkline(df, fig, chart_types, num_of_chart_types, trace_colors_2d,
                             r_color
                         )
                     )
-                    fig['layout']['shapes'].append(bkg)
+                    # fig['layout']['shapes'].append(bkg)
+                    shapes.append(bkg)
                 fig.append_trace(bullet_range, j + 1, c + 1)
                 fig.append_trace(bullet_measure, j + 1, c + 1)
                 fig.append_trace(bullet_pt, j + 1, c + 1)
@@ -467,7 +483,8 @@ def _sparkline(df, fig, chart_types, num_of_chart_types, trace_colors_2d,
                             r_color
                         )
                     )
-                    fig['layout']['shapes'].append(bkg)
+                    # fig['layout']['shapes'].append(bkg)
+                    shapes.append(bkg)
                 fig.append_trace(trace_line, j + 1, c + 1)
                 fig.append_trace(trace_line_pt, j + 1, c + 1)
 
@@ -508,7 +525,8 @@ def _sparkline(df, fig, chart_types, num_of_chart_types, trace_colors_2d,
                             r_color
                         )
                     )
-                    fig['layout']['shapes'].append(bkg)
+                    # fig['layout']['shapes'].append(bkg)
+                    shapes.append(bkg)
                 fig.append_trace(trace_bar, j + 1, c + 1)
 
                 fig['layout']['yaxis{}'.format(
@@ -525,7 +543,8 @@ def _sparkline(df, fig, chart_types, num_of_chart_types, trace_colors_2d,
                     chart, c + 1, num_of_chart_types, subplot_spacing=0,
                     row_col='col', flipped=False, column_width=column_width
                 )
-                fig['layout']['annotations'].append(label)
+                # fig['layout']['annotations'].append(label)
+                annotations.append(label)
 
             for idx in narrow_idxs:
                 for axis in ['xaxis', 'yaxis']:
@@ -535,6 +554,8 @@ def _sparkline(df, fig, chart_types, num_of_chart_types, trace_colors_2d,
         c_idx += 1
         trace_c_idx += 1
 
+        fig['layout']['shapes'] = shapes
+        fig['layout']['annotations'] = annotations
 
 def create_sparkline(df, chart_types=None, row=None, column=None,
                      x=None, trace_colors=None, column_width=None,
@@ -766,15 +787,15 @@ def create_sparkline(df, chart_types=None, row=None, column=None,
     # layout options
     fig['layout'].update(
         title='',
-        annotations=[],
-        shapes=[],
+        # annotations=[],
+        # shapes=[],
         showlegend=False
     )
 
     # update layout
     fig['layout'].update(layout_options)
 
-    for key in fig['layout'].keys():
+    for key in fig['layout'].to_plotly_json().keys():
         if 'axis' in key:
             fig['layout'][key].update(
                 showgrid=False,
