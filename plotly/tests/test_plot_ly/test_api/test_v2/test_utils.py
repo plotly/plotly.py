@@ -8,7 +8,7 @@ from plotly.api.utils import to_native_utf8_string
 from plotly.api.v2 import utils
 from plotly.exceptions import PlotlyRequestError
 from plotly.session import sign_in
-from plotly.tests.test_core.test_api import PlotlyApiTestCase
+from plotly.tests.test_plot_ly.test_api import PlotlyApiTestCase
 
 
 class MakeParamsTest(PlotlyApiTestCase):
